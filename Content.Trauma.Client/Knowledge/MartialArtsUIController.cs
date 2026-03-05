@@ -112,7 +112,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         {
             var player = _player.LocalEntity;
             _popup.PopupClient(Loc.GetString("knowledge-no-martial-art"), player);
-            _button.Pressed = false;
+            _button?.Pressed = false;
             return;
         }
 

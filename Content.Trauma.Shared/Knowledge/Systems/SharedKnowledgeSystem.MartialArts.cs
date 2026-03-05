@@ -55,6 +55,15 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeNetworkEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
     }
 
+    private void OnMartialArtAdded(Entity<MartialArtsKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
+    {
+        // if you learn a martial art without one active, automatically select it
+        if (args.Container.Comp.ActiveMartialArt != null)
+            return;
+
+        ChangeMartialArts(args.Container, args.Holder, ent);
+    }
+
     private void OnMartialArtRemoved(Entity<MartialArtsKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
     {
         if (args.Container.Comp.ActiveMartialArt == ent.Owner)
@@ -205,6 +214,9 @@ public abstract partial class SharedKnowledgeSystem
 
     public void ChangeMartialArts(Entity<KnowledgeContainerComponent> ent, EntityUid user, EntityUid? knowledgeUid)
     {
+        if (ent.Comp.ActiveMartialArt == knowledgeUid)
+            return; // no change
+
         if (ent.Comp.ActiveMartialArt is {} old)
         {
             var ev = new KnowledgeDisabledEvent(ent, user);
@@ -220,6 +232,11 @@ public abstract partial class SharedKnowledgeSystem
                 $"Tried to use {ToPrettyString(knowledgeUid)} as martial art for {ToPrettyString(user)}!");
             var ev = new KnowledgeEnabledEvent(ent, user);
             RaiseLocalEvent(unit, ref ev);
+            _popup.PopupClient(Loc.GetString("knowledge-martial-art-selected", ("name", Name(unit))), user, user);
+        }
+        else
+        {
+            _popup.PopupClient(Loc.GetString("knowledge-martial-art-deselected"), user, user);
         }
     }
 
