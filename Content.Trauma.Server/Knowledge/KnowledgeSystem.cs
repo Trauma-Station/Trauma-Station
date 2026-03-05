@@ -43,16 +43,6 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         ClearKnowledge(ent, false);
     }
 
-    private Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(Entity<KnowledgeHolderComponent> ent)
-    {
-        if (GetContainer(ent) is {} brain)
-            return brain;
-
-        var comp = EnsureComp<KnowledgeContainerComponent>(ent);
-        LinkContainer(ent, (ent, comp));
-        return (ent, comp);
-    }
-
     private void AlterName(Entity<QualityComponent> ent, ref AfterConstructionChangeEntityEvent args)
     {
         _nameModifier.RefreshNameModifiers(ent.Owner);

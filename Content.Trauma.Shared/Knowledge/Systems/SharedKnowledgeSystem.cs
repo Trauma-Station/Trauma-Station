@@ -65,7 +65,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainInsertedEvent>(OnBorgBrainInserted);
         SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainRemovedEvent>(OnBorgBrainRemoved);
 
-        //Experience Methods
+        SubscribeLocalEvent<KnowledgeHolderComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<KnowledgeHolderComponent, AddExperienceEvent>(OnAddExperience);
 
         _query = GetEntityQuery<KnowledgeComponent>();
@@ -166,6 +166,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     private void OnBorgBrainRemoved(Entity<KnowledgeContainerComponent> ent, ref BorgBrainRemovedEvent args)
     {
         UnlinkContainer(args.Chassis, ent);
+    }
+
+    private void OnMindAdded(Entity<KnowledgeHolderComponent> ent, ref MindAddedMessage args)
+    {
+        // all player-controlled mobs can use knowledge
+        // carps learning how to cook..?
+        EnsureKnowledgeContainer(ent);
     }
 
     private void OnAddExperience(Entity<KnowledgeHolderComponent> ent, ref AddExperienceEvent args)
@@ -594,6 +601,17 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         ent.Comp.Container = _container.EnsureContainer<Container>(ent.Owner, KnowledgeContainerComponent.ContainerId);
         return ent.Comp.Container;
+    }
+
+    protected Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(Entity<KnowledgeHolderComponent> ent)
+    {
+        if (GetContainer(ent) is {} brain)
+            return brain;
+
+        // if there's no brain store knowledge on the mob itself
+        var comp = EnsureComp<KnowledgeContainerComponent>(ent);
+        LinkContainer(ent, (ent, comp));
+        return (ent, comp);
     }
 }
 

@@ -79,7 +79,7 @@
         - Brain
 
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, BaseKnowledgeContainer ] # Trauma - posibrain stores borg's knowledge
   id: PositronicBrain
   name: positronic brain
   description: An artificial brain capable of spontaneous neural activity.
@@ -166,7 +166,3 @@
       understands:
       - TauCetiBasic # Added since posi brains should be able to understand TauCetiBasic (they can in a chassis)
       - RobotTalk
-    # <Trauma>
-    - type: KnowledgeContainer
-    - type: ContainerContainer
-    # </Trauma>

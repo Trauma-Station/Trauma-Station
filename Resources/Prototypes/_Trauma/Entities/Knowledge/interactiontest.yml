@@ -1,9 +1,8 @@
 - type: entity
-  id: KnowledgeBaseAbstract
+  id: [ KnowledgeBaseAbstract, BaseKnowledgeContainer ]
   abstract: true
   components:
   - type: KnowledgeHolder
-  - type: KnowledgeContainer
   - type: KnowledgeGrant
     skills:
       HandmadeKnowledge: 100
