@@ -9,7 +9,6 @@ using Content.Shared.Item;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
@@ -30,7 +29,6 @@ public abstract partial class SharedMeleeWeaponSystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
 
     private EntityQuery<InteractionRelayComponent> _relayQuery;
 
