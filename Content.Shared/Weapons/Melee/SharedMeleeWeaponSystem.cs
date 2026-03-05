@@ -879,7 +879,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         {
             // <Trauma>
             var staminaDamage = component.HeavyStaminaCost * entities.Count;
-            AdjustStaminaDamage(melee, ref staminaDamage);
+            AdjustStaminaDamage(user, ref staminaDamage);
             // </Trauma>
             // make it not immediate to prevent annoying stamcrits
             _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);
@@ -1096,7 +1096,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         // <Trauma>
-        DisarmExperience(melee, user, target);
+        DisarmExperience(user, target);
         // </Trauma>
         ShoveOrDisarmPopup(true);
 

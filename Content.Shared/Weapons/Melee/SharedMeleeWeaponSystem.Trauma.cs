@@ -84,6 +84,7 @@ public abstract partial class SharedMeleeWeaponSystem
     {
         if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee && _knowledge.GetMastery(melee.Comp) > 2)
         {
+            // FIXME: this is too fast? also why is it here for fuck sake
             ev.Multipliers *= 1 + 2 * _knowledge.SharpCurve(melee, -50, 50.0f);
         }
     }
@@ -97,11 +98,12 @@ public abstract partial class SharedMeleeWeaponSystem
         RaiseLocalEvent(user, ref evKnowledge);
     }
 
-    private void AdjustStaminaDamage(Entity<KnowledgeComponent>? melee, ref float staminaDamage)
+    private void AdjustStaminaDamage(EntityUid user, ref float staminaDamage)
     {
-        if (melee is { } meleeEnt)
+        // TODO: use event for this bruh
+        if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee)
         {
-            staminaDamage *= 1 - _knowledge.SharpCurve(meleeEnt);
+            staminaDamage *= 1 - _knowledge.SharpCurve(melee);
         }
     }
 
@@ -114,9 +116,10 @@ public abstract partial class SharedMeleeWeaponSystem
         }
     }
 
-    private void DisarmExperience(Entity<KnowledgeComponent>? melee, EntityUid user, EntityUid target)
+    private void DisarmExperience(EntityUid user, EntityUid target)
     {
-        if (melee?.Comp is {} comp && _knowledge.GetMastery(comp) < 2 && MobState.IsAlive(target))
+        // TODO: move all this shit to event handlers bruh
+        if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee && _knowledge.GetMastery(melee.Comp) < 2 && MobState.IsAlive(target))
         {
             var evKnowledge = new AddExperienceEvent(MeleeKnowledge, 1);
             RaiseLocalEvent(user, ref evKnowledge);
