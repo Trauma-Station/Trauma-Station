@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Server.Chat.Systems;
 using Content.Server.RoundEnd;
-using Content.Server.Station.Systems;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._White.Xenomorphs.Queen;
 using Content.Shared.Mobs;
@@ -17,7 +16,6 @@ public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
 {
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
