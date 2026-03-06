@@ -1,58 +1,67 @@
-// # Trauma
-
+// <Trauma>
 using Content.Server.Chat.Systems;
 using Content.Server.RoundEnd;
+using Content.Server.Station.Systems;
+using Content.Server.Shuttles.Systems;
 using Content.Shared._White.Xenomorphs.Queen;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Localization;
-using Robust.Shared.Log;
+using Robust.Shared.Timing;
+// </Trauma>
 
 namespace Content.Server._White.Xenomorphs;
 
+// <Trauma>
 public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
 {
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
-    private const float CheckInterval = 5f;
-    private float _timer;
+    private TimeSpan _nextCheck = TimeSpan.Zero;
+    private static readonly TimeSpan CheckInterval = TimeSpan.FromSeconds(5);
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        _timer += frameTime;
-        if (_timer < CheckInterval)
+        if (_timing.CurTime < _nextCheck)
             return;
-        _timer = 0f;
+
+        _nextCheck = _timing.CurTime + CheckInterval;
 
         var queenAlive = false;
 
-        var queenQuery = EntityQueryEnumerator<XenomorphQueenComponent, MobStateComponent>();
-        while (queenQuery.MoveNext(out _, out _, out var mobState))
+        var queenQuery = EntityQueryEnumerator<XenomorphQueenComponent, MobStateComponent, TransformComponent>();
+        while (queenQuery.MoveNext(out var queenUid, out _, out var mobState, out var xform))
         {
-            if (mobState.CurrentState != MobState.Dead)
-            {
-                queenAlive = true;
-                break;
-            }
+            if (mobState.CurrentState == MobState.Dead)
+                continue;
+
+            // Only count queens that are on a station grid.
+            if (_station.GetOwningStation(queenUid, xform) == null)
+                continue;
+
+            queenAlive = true;
+            break;
         }
 
-        // # Block the shuttle from being called while the queen is alive.
-        // # When the queen dies, allow it again.
+        // Block the shuttle from being called while a queen is alive on-station.
+        // When she dies, allow it again.
         _roundEnd.CantRecall = queenAlive;
 
-        // # If the shuttle was already called and the queen is alive, force recall it — mirroring how the blob does it.
-        if (queenAlive && _roundEnd.ExpectedCountdownEnd != null)
+        // If the shuttle was already called and the queen is alive, force recall it — mirroring how the blob does it.
+        if (queenAlive && _roundEnd.ExpectedCountdownEnd != null && !_emergency.EmergencyShuttleArrived)
         {
             _roundEnd.CancelRoundEndCountdown(forceRecall: true);
             _chat.DispatchGlobalAnnouncement(
                 Loc.GetString("xeno-queen-shuttle-recall-announcement"),
-                Loc.GetString("xeno-queen-shuttle-recall-sender"),
+                Loc.GetString("comms-console-announcement-title-centcom"),
                 colorOverride: Color.Red);
-
-            Log.Info("Xenomorph Queen is alive — emergency shuttle recalled.");
         }
     }
 }
+// </Trauma>
