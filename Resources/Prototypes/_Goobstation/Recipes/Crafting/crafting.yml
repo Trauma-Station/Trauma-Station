@@ -6,7 +6,7 @@
   category: construction-category-misc
   targetNode: stack
   objectType: Item
-  groups:
+  theory:
     TechnologyKnowledge: 1
 
 - type: construction
@@ -15,5 +15,5 @@
   category: construction-category-misc
   targetNode: stack
   objectType: Item
-  groups:
+  theory:
     TechnologyKnowledge: 1

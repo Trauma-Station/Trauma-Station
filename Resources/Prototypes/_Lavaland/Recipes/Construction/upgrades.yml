@@ -4,7 +4,7 @@
   category: construction-category-weapons
   targetNode: crystal
   objectType: Item
-  groups:
+  theory:
     TechnologyKnowledge: 2
     WeaponsKnowledge: 2
 
@@ -14,7 +14,7 @@
   category: construction-category-weapons
   targetNode: crystal
   objectType: Item
-  groups:
+  theory:
     TechnologyKnowledge: 2
     WeaponsKnowledge: 2
 
@@ -24,6 +24,6 @@
   category: construction-category-weapons
   targetNode: crystal
   objectType: Item
-  groups:
+  theory:
     TechnologyKnowledge: 2
     WeaponsKnowledge: 2

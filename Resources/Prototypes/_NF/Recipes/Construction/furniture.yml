@@ -11,7 +11,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -27,7 +27,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -43,7 +43,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -59,7 +59,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -75,7 +75,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -91,7 +91,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -107,7 +107,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -123,7 +123,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -139,7 +139,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -155,7 +155,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -171,7 +171,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -187,7 +187,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -203,7 +203,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -219,7 +219,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -235,7 +235,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -251,7 +251,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -267,7 +267,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -283,7 +283,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -299,7 +299,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -315,7 +315,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -331,7 +331,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -347,7 +347,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -363,7 +363,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -380,8 +380,8 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
-    FurnitureKnowledge: 1
+  theory:
+    FurnitureKnowledge: 2
   # </Trauma>
 
 # Banners
@@ -397,7 +397,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -413,7 +413,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -429,7 +429,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -445,7 +445,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -461,7 +461,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -477,7 +477,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -493,7 +493,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -509,7 +509,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -525,7 +525,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -541,7 +541,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -557,7 +557,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -573,6 +573,6 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>

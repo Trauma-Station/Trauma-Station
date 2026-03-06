@@ -3,10 +3,10 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Common.Knowledge.Components;
+namespace Content.Trauma.Shared.Knowledge.Quality;
 
 /// <summary>
-/// Stores the quality info of an object
+/// Stores the quality info of an object, added when a player crafts/constructs it.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class QualityComponent : Component

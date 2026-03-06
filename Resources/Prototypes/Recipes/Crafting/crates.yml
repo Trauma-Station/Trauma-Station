@@ -6,7 +6,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 1
   # </Trauma>
 
@@ -18,7 +18,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -30,7 +30,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -44,7 +44,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -57,7 +57,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -70,7 +70,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -83,7 +83,7 @@
   category: construction-category-storage
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -96,7 +96,7 @@
   category: construction-category-storage
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -109,7 +109,7 @@
   category: construction-category-storage
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -121,7 +121,7 @@
   category: construction-category-storage
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -134,6 +134,6 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>

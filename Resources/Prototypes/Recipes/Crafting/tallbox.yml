@@ -6,7 +6,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -18,7 +18,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -32,7 +32,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -45,7 +45,7 @@
   category: construction-category-storage
   objectType: Structure
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -63,6 +63,6 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>

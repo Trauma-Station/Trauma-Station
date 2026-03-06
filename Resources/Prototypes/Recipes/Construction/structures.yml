@@ -11,8 +11,10 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
-    WallsKnowledge: 2
+  theory:
+    WallsKnowledge: 0 # if you know walls exist you can build a girder
+  practical:
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -28,8 +30,10 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
-    WallsKnowledge: 3
+  theory:
+    WallsKnowledge: 0 # you can make it via girder anyways
+  practical:
+    WallsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -45,8 +49,11 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
-    WallsKnowledge: 2
+  theory:
+    WallsKnowledge: 0
+  practical:
+    WallsKnowledge: 0
+    # TODO: clockwork knowledge if anyone makes that
   # </Trauma>
 
 - type: construction
@@ -62,8 +69,10 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
-    WallsKnowledge: 2
+  theory:
+    WallsKnowledge: 0 # you can make it via girder anyways
+  practical:
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -79,7 +88,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 3
   # </Trauma>
 
@@ -96,7 +105,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -113,7 +122,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -130,7 +139,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -147,7 +156,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -164,7 +173,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -181,7 +190,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -198,7 +207,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -215,7 +224,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 3
   # </Trauma>
 
@@ -233,7 +242,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 3
   # </Trauma>
 
@@ -250,7 +259,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
     BananiumKnowledge: 2
   # </Trauma>
@@ -268,7 +277,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -285,7 +294,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -302,7 +311,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -319,7 +328,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -335,7 +344,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -351,7 +360,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -369,7 +378,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
   # </Trauma>
 
@@ -387,7 +396,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
   # </Trauma>
 
@@ -405,7 +414,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
   # </Trauma>
 
@@ -423,7 +432,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
   # </Trauma>
 
@@ -441,7 +450,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -460,7 +469,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
   # </Trauma>
 
@@ -478,7 +487,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
   # </Trauma>
 
@@ -496,7 +505,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -514,7 +523,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -532,7 +541,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -550,7 +559,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -568,7 +577,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -585,7 +594,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
   # </Trauma>
 
@@ -602,7 +611,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
   # </Trauma>
 
@@ -619,7 +628,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
   # </Trauma>
 
@@ -636,7 +645,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -653,7 +662,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -671,7 +680,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -689,7 +698,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -707,7 +716,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -725,7 +734,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 3
   # </Trauma>
 
@@ -742,7 +751,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -759,7 +768,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -776,7 +785,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -792,7 +801,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -806,7 +815,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -820,7 +829,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -834,7 +843,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -848,7 +857,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -869,7 +878,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 1
     TechnologyKnowledge: 1
   # </Trauma>
@@ -890,7 +899,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     BananiumKnowledge: 2
   # </Trauma>
 
@@ -906,7 +915,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 0
   # </Trauma>
 
@@ -923,7 +932,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -939,7 +948,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -956,7 +965,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -973,7 +982,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -990,7 +999,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -1007,7 +1016,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -1025,7 +1034,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -1043,7 +1052,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -1060,7 +1069,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -1078,7 +1087,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1095,7 +1104,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1112,7 +1121,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1129,7 +1138,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1145,7 +1154,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1162,7 +1171,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1179,7 +1188,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1196,7 +1205,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1213,7 +1222,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1230,7 +1239,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
   # </Trauma>
 
@@ -1247,7 +1256,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -1263,7 +1272,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -1280,7 +1289,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -1297,7 +1306,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -1314,7 +1323,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -1332,7 +1341,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -1348,7 +1357,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
     AirlocksKnowledge: 2
   # </Trauma>
@@ -1365,7 +1374,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
     AirlocksKnowledge: 2
   # </Trauma>
@@ -1382,7 +1391,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WindowsKnowledge: 2
     AirlocksKnowledge: 2
   # </Trauma>
@@ -1403,7 +1412,7 @@
   # Also see below. Didn't add it b/c construction ECS work going on. Cheers, - 20kdc
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     TechnologyKnowledge: 2
   # </Trauma>
 
@@ -1421,7 +1430,7 @@
   # Same here. - 20kdc
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     TechnologyKnowledge: 2
   # </Trauma>
 
@@ -1438,7 +1447,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -1456,7 +1465,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     TechnologyKnowledge: 2
   # </Trauma>
 
@@ -1473,7 +1482,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     TechnologyKnowledge: 2
   # </Trauma>
 
@@ -1490,7 +1499,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -1506,7 +1515,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     DoorsKnowledge: 2
   # </Trauma>
 
@@ -1522,7 +1531,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     DoorsKnowledge: 2
   # </Trauma>
 
@@ -1538,7 +1547,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     DoorsKnowledge: 2
   # </Trauma>
 
@@ -1554,7 +1563,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     DoorsKnowledge: 2
   # </Trauma>
 
@@ -1570,7 +1579,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     DoorsKnowledge: 2
   # </Trauma>
 
@@ -1584,7 +1593,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     DoorsKnowledge: 2
   # </Trauma>
 
@@ -1598,7 +1607,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     DoorsKnowledge: 2
   # </Trauma>
 
@@ -1615,7 +1624,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
     TechnologyKnowledge: 2
   # </Trauma>
@@ -1633,7 +1642,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
@@ -1650,7 +1659,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 2
   # </Trauma>
 
@@ -1666,7 +1675,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     BananiumKnowledge: 2
   # </Trauma>
 
@@ -1682,7 +1691,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     BananiumKnowledge: 2
     DoorsKnowledge: 2
   # </Trauma>
@@ -1718,7 +1727,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 2
     DoorsKnowledge: 2
     ElectronicsKnowledge: 2
@@ -1737,7 +1746,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     WallsKnowledge: 3
     DoorsKnowledge: 2
     ElectronicsKnowledge: 2
@@ -1755,7 +1764,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -1772,7 +1781,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -1789,7 +1798,7 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 1
   # </Trauma>
 
@@ -1806,6 +1815,6 @@
   conditions:
   - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 1
   # </Trauma>

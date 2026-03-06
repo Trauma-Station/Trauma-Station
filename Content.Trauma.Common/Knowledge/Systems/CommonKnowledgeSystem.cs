@@ -21,6 +21,11 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract void ClearKnowledge(EntityUid target, bool deleteAll);
 
     /// <summary>
+    /// Get every skill and the mastery level of a mob.
+    /// </summary>
+    public abstract Dictionary<EntProtoId, int> GetSkillMasteries(EntityUid target);
+
+    /// <summary>
     /// Gets the mastery level for a knowledge level.
     /// </summary>
     public abstract int GetMastery(int level);
@@ -42,11 +47,6 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     /// Curve scale that determines some functionality. Goes from 0 to 1.
     /// </summary>
     public abstract float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f);
-
-    /// <summary>
-    /// Runs quality instructions for an item outside of the construction loop, such as the bullets for the shotgun ammo.
-    /// </summary>
-    public abstract void ModifyValues(Entity<QualityComponent> ent);
 
     /// <summary>
     /// Sanitize a profile, removing any invalid skills.

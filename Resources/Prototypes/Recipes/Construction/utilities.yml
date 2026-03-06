@@ -8,7 +8,9 @@
   objectType: Structure
   placementMode: SnapgridCenter
   # <Trauma>
-  groups:
+  theory:
+    ElectronicsKnowledge: 1
+  practical:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -22,7 +24,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -39,7 +41,9 @@
   conditions:
   - !type:WallmountCondition {}
   # <Trauma>
-  groups:
+  theory:
+    ElectronicsKnowledge: 1
+  practical:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -54,8 +58,10 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 0
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -68,8 +74,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -82,7 +88,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -96,7 +102,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -110,8 +116,10 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
+  practical:
+    ElectronicsKnowledge: 3 # 6 kW!!
   # </Trauma>
 
 # DISPOSALS
@@ -124,8 +132,11 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 0
+    InfrastructureKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -138,8 +149,11 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 0
+    InfrastructureKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -152,8 +166,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 0 # it's a fucking pipe
   # </Trauma>
 
 - type: construction
@@ -165,9 +179,9 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
-    InfrastructureKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -179,9 +193,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
+    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 1
+  practical:
     ElectronicsKnowledge: 2
-    InfrastructureKnowledge: 2
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -193,8 +210,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 0 # it's a hole in a pipe
   # </Trauma>
 
 - type: construction
@@ -207,8 +224,8 @@
   canBuildInImpassable: false
   mirror: DisposalRouterFlipped
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -222,8 +239,8 @@
   canBuildInImpassable: false
   mirror: DisposalRouter
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -236,9 +253,12 @@
   canBuildInImpassable: false
   mirror: DisposalSignalRouterFlipped
   # <Trauma>
-  groups:
+  theory:
+    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 1
+  practical:
     ElectronicsKnowledge: 2
-    InfrastructureKnowledge: 2
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -252,9 +272,12 @@
   canBuildInImpassable: false
   mirror: DisposalSignalRouter
   # <Trauma>
-  groups:
+  theory:
+    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 1
+  practical:
     ElectronicsKnowledge: 2
-    InfrastructureKnowledge: 2
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -267,8 +290,8 @@
   canBuildInImpassable: false
   mirror: DisposalJunctionFlipped
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -282,8 +305,8 @@
   canBuildInImpassable: false
   mirror: DisposalJunction
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -295,8 +318,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -308,8 +331,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -321,8 +344,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 0 # bendy pipe
   # </Trauma>
 
 # ATMOS
@@ -339,8 +362,9 @@
   conditions:
   - !type:WallmountCondition {}
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -356,8 +380,9 @@
   conditions:
   - !type:WallmountCondition {}
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 0 # fire alarms are pretty obvious
   # </Trauma>
 
 - type: construction
@@ -370,8 +395,9 @@
   objectType: Structure
   canRotate: true
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -388,7 +414,7 @@
   - GasPipeSensorAlt1
   - GasPipeSensorAlt2
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     InfrastructureKnowledge: 2
   # </Trauma>
@@ -408,7 +434,7 @@
   - GasPipeSensorAlt1
   - GasPipeSensorAlt2
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     InfrastructureKnowledge: 2
   # </Trauma>
@@ -428,7 +454,7 @@
   - GasPipeSensorAlt1
   - GasPipeSensorAlt2
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     InfrastructureKnowledge: 2
   # </Trauma>
@@ -448,8 +474,8 @@
   - GasPipeHalfAlt1
   - GasPipeHalfAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -466,8 +492,8 @@
   - GasPipeHalfAlt1
   - GasPipeHalfAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -484,8 +510,8 @@
   - GasPipeHalfAlt1
   - GasPipeHalfAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -501,8 +527,8 @@
   - GasPipeStraightAlt1
   - GasPipeStraightAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 0 # it's a pipe
   # </Trauma>
 
 - type: construction
@@ -519,8 +545,8 @@
   - GasPipeStraightAlt1
   - GasPipeStraightAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 0 # it's a pipe
   # </Trauma>
 
 - type: construction
@@ -537,8 +563,8 @@
   - GasPipeStraightAlt1
   - GasPipeStraightAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 0 # it's a pipe
   # </Trauma>
 
 - type: construction
@@ -555,8 +581,8 @@
   - GasPipeBendAlt1
   - GasPipeBendAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 0 # it's a bent pipe
   # </Trauma>
 
 - type: construction
@@ -573,8 +599,8 @@
   - GasPipeBendAlt1
   - GasPipeBendAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 0 # it's a bent pipe
   # </Trauma>
 
 - type: construction
@@ -591,8 +617,8 @@
   - GasPipeBendAlt1
   - GasPipeBendAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 0 # it's a bent pipe
   # </Trauma>
 
 - type: construction
@@ -609,8 +635,8 @@
   - GasPipeTJunctionAlt1
   - GasPipeTJunctionAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -627,8 +653,8 @@
   - GasPipeTJunctionAlt1
   - GasPipeTJunctionAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -645,8 +671,8 @@
   - GasPipeTJunctionAlt1
   - GasPipeTJunctionAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -663,8 +689,8 @@
   - GasPipeFourwayAlt1
   - GasPipeFourwayAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -681,8 +707,8 @@
   - GasPipeFourwayAlt1
   - GasPipeFourwayAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -699,8 +725,8 @@
   - GasPipeFourwayAlt1
   - GasPipeFourwayAlt2
   # <Trauma>
-  groups:
-    InfrastructureKnowledge: 2
+  theory:
+    InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -712,7 +738,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -728,7 +754,7 @@
   conditions:
   - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -743,7 +769,7 @@
   conditions:
   - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -758,7 +784,7 @@
   conditions:
   - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -774,7 +800,7 @@
   conditions:
   - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -795,7 +821,7 @@
   - GasPressurePumpAlt1
   - GasPressurePumpAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -816,7 +842,7 @@
   - GasPressurePumpAlt1
   - GasPressurePumpAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -837,7 +863,7 @@
   - GasPressurePumpAlt1
   - GasPressurePumpAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -857,7 +883,7 @@
   - GasVolumePumpAlt1
   - GasVolumePumpAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -878,7 +904,7 @@
   - GasVolumePumpAlt1
   - GasVolumePumpAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -899,7 +925,7 @@
   - GasVolumePumpAlt1
   - GasVolumePumpAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -919,7 +945,7 @@
   - GasPassiveGateAlt1
   - GasPassiveGateAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -939,7 +965,7 @@
   - GasPassiveGateAlt1
   - GasPassiveGateAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -959,7 +985,7 @@
   - GasPassiveGateAlt1
   - GasPassiveGateAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -978,7 +1004,7 @@
   - GasPressureRegulatorAlt1
   - GasPressureRegulatorAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -999,7 +1025,7 @@
   - GasPressureRegulatorAlt1
   - GasPressureRegulatorAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1020,7 +1046,7 @@
   - GasPressureRegulatorAlt1
   - GasPressureRegulatorAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1040,7 +1066,7 @@
   - GasValveAlt1
   - GasValveAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -1060,7 +1086,7 @@
   - GasValveAlt1
   - GasValveAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -1080,7 +1106,7 @@
   - GasValveAlt1
   - GasValveAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -1099,7 +1125,7 @@
   - SignalControlledValveAlt1
   - SignalControlledValveAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1119,7 +1145,7 @@
   - SignalControlledValveAlt1
   - SignalControlledValveAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1139,7 +1165,7 @@
   - SignalControlledValveAlt1
   - SignalControlledValveAlt2
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1155,7 +1181,7 @@
   conditions:
     - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -1168,7 +1194,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -1181,7 +1207,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -1195,7 +1221,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
   # </Trauma>
 
@@ -1212,7 +1238,7 @@
   conditions:
     - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1230,7 +1256,7 @@
   conditions:
     - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1247,7 +1273,7 @@
   conditions:
     - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1265,7 +1291,7 @@
   conditions:
     - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1281,7 +1307,7 @@
   conditions:
     - !type:NoUnstackableInTile
   # <Trauma>
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -1300,7 +1326,7 @@
   conditions:
   - !type:WallmountCondition {}
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -1317,8 +1343,8 @@
   conditions:
   - !type:WallmountCondition
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1334,7 +1360,10 @@
   conditions:
   - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
+    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 0
+  practical:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -1351,7 +1380,10 @@
   conditions:
   - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
+    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 0
+  practical:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -1369,6 +1401,7 @@
   conditions:
   - !type:WallmountCondition
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 3
+    InfrastructureKnowledge: 2
   # </Trauma>

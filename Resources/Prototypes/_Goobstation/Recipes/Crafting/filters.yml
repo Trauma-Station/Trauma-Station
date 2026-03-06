@@ -4,7 +4,7 @@
   targetNode: label
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
 
@@ -14,7 +14,7 @@
   targetNode: name
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
 
@@ -24,7 +24,7 @@
   targetNode: stack
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
 
@@ -34,7 +34,7 @@
   targetNode: pressure
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
 
@@ -44,7 +44,7 @@
   targetNode: combined
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
 
@@ -54,7 +54,7 @@
   targetNode: anchor
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
 
@@ -64,7 +64,7 @@
   targetNode: mob
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
 
@@ -74,6 +74,6 @@
   targetNode: cuff
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2

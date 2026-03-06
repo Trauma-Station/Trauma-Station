@@ -5,7 +5,10 @@
   targetNode: liberator
   category: construction-category-antagonist
   objectType: Item
-  groups:
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 0 # revs dont get automatic weapons knowledge :)
+  practical:
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 2
 
@@ -16,7 +19,10 @@
   targetNode: resistance
   category: construction-category-antagonist
   objectType: Item
-  groups:
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 0
+  practical:
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 2
 
@@ -27,9 +33,12 @@
   targetNode: RPG2
   category: construction-category-antagonist
   objectType: Item
-  groups:
+  theory:
     RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 2
+    WeaponsKnowledge: 1
+  practical:
+    RevolutionaryKnowledge: 3
+    WeaponsKnowledge: 4
 
 - type: construction
   id: Flamethrower
@@ -38,9 +47,12 @@
   targetNode: Flamethrower
   category: construction-category-antagonist
   objectType: Item
-  groups:
+  theory:
     RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 2
+    WeaponsKnowledge: 1
+  practical:
+    RevolutionaryKnowledge: 3
+    WeaponsKnowledge: 4
 
 - type: construction
   id: Devastator
@@ -49,9 +61,12 @@
   targetNode: Devastator
   category: construction-category-antagonist
   objectType: Item
-  groups:
+  theory:
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 2
+  practical:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 4
 
 - type: construction
   id: RevIED
@@ -60,6 +75,6 @@
   targetNode: IED
   category: construction-category-antagonist
   objectType: Item
-  groups:
+  theory:
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 2

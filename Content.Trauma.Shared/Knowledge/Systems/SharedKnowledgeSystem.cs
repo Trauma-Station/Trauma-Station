@@ -68,7 +68,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeMartialArts();
         InitializeOnWear();
         InitializeConstruction();
-        InitializeQuality();
         InitializeShooting();
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnContainerStartup);
@@ -546,6 +545,19 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             RaiseLocalEvent(unit, ref args);
         }
+    }
+
+    public override Dictionary<EntProtoId, int> GetSkillMasteries(EntityUid target)
+    {
+        var skills = new Dictionary<EntProtoId, int>();
+        if (GetContainer(target) is not {} brain)
+            return skills;
+
+        foreach (var (id, unit) in brain.Comp.KnowledgeDict)
+        {
+            skills[id] = GetMastery(unit);
+        }
+        return skills;
     }
 
     public string GetMasteryString(Entity<KnowledgeComponent> ent)
