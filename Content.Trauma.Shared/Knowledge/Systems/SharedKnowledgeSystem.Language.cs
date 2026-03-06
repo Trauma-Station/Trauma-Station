@@ -28,7 +28,7 @@ public abstract partial class SharedKnowledgeSystem
     private EntityQuery<LanguageKnowledgeComponent> _langQuery;
 
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
-    private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
+    //private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
     private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
 
     private void InitializeLanguage()
@@ -239,7 +239,7 @@ public abstract partial class SharedKnowledgeSystem
         comp.LastSpoken = now + TimeSpan.FromSeconds(5);
         Dirty(unit, comp);
 
-        var modifier = 0f;
+        /*var modifier = 0f;
         DamageSpecifier damage = default!;
 
         var isCurse = GetMastery(unit.Comp) >= 5 && ContainsCursedWord(args.Message);
@@ -251,7 +251,7 @@ public abstract partial class SharedKnowledgeSystem
             modifier = Math.Max(((float) unit.Comp.Level - 80f) / 20f, 0f);
             damage = new DamageSpecifier();
             damage.DamageDict.Add(Blunt, 20 * modifier);
-        }
+        }*/
 
         // curse of 220
         _hearers.Clear();
@@ -264,6 +264,7 @@ public abstract partial class SharedKnowledgeSystem
 
             RaiseLocalEvent(hearer, ref evheard);
 
+            /* too op, needs a traitor item or something + a cooldown
             if (!isCurse || !_language.CanUnderstand(hearer.Owner, args.Language))
                 continue;
 
@@ -273,10 +274,11 @@ public abstract partial class SharedKnowledgeSystem
             //_status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
 
             _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
+            */
         }
     }
 
-    private bool ContainsCursedWord(string message)
+    /*private bool ContainsCursedWord(string message)
     {
         // Split message into individual words to avoid catching "it" in "shit"
         // TODO: rewrite to be a regex fuck sake
@@ -287,5 +289,5 @@ public abstract partial class SharedKnowledgeSystem
                 return true;
         }
         return false;
-    }
+    }*/
 }
