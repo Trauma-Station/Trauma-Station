@@ -239,10 +239,10 @@ public abstract partial class SharedKnowledgeSystem
         comp.LastSpoken = now + TimeSpan.FromSeconds(5);
         Dirty(unit, comp);
 
-        var modifier = 0f;
+        /*var modifier = 0f;
         DamageSpecifier damage = default!;
 
-        /*var isCurse = GetMastery(unit.Comp) >= 5 && ContainsCursedWord(args.Message);
+        var isCurse = GetMastery(unit.Comp) >= 5 && ContainsCursedWord(args.Message);
 
         // need to master it to curse people
         if (isCurse)
