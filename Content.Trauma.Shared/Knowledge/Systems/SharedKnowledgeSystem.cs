@@ -58,7 +58,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private TimeSpan _nextUpdate;
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
-    private float _learnChance = 0.2f;
+    //private float _learnChance = 0.2f;
 
     /// <inheritdoc/>
     public override void Initialize()
