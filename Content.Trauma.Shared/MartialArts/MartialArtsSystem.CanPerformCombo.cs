@@ -102,10 +102,10 @@ public partial class MartialArtsSystem
             var list = ent.Comp.LastAttacks.GetRange(sum, proto.AttackTypes.Count).AsEnumerable();
             var attackList = proto.AttackTypes.AsEnumerable();
 
-            if (!list.SequenceEqual(attackList))
+            if (!TryComp<KnowledgeComponent>(ent, out var skillComponent) || skillComponent.Level < proto.LevelRequired || (skillComponent.Level > proto.LevelExceeded && proto.LevelExceeded > 0))
                 continue;
 
-            if (!TryComp<KnowledgeComponent>(ent, out var skillComponent) || skillComponent.Level < proto.LevelRequired || (skillComponent.Level > proto.LevelExceeded && proto.LevelExceeded > 0))
+            if (!list.SequenceEqual(attackList))
                 continue;
 
             success = true;
