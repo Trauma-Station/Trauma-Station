@@ -2,12 +2,13 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
-public abstract partial class MeleeKnowledgeSystem : EntitySystem
+public sealed partial class MeleeKnowledgeSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
@@ -19,9 +20,10 @@ public abstract partial class MeleeKnowledgeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeExperience);
+        SubscribeLocalEvent<KnowledgeHolderComponent, AttemptMeleeEvent>(OnMeleeAttack);
     }
 
-    private void OnMeleeExperience(ref MeleeHitEvent args)
+    private void OnMeleeExperience(MeleeHitEvent args)
     {
 
         var xp = 0;
@@ -39,11 +41,10 @@ public abstract partial class MeleeKnowledgeSystem : EntitySystem
         var ev = new AddExperienceEvent(_meleeKnowledge, xp, limit);
         RaiseLocalEvent(args.User, ref ev);
 
-        Log.Error($"{ToPrettyString(args.User)}");
-
         if (_knowledge.GetContainer(args.User) is not { } brain)
             return;
 
+        Log.Error($"{ToPrettyString(args.User)}");
         if (_knowledge.GetKnowledge(brain, _meleeKnowledge) is not { } melee)
         {
             args.Handled = true;
@@ -51,7 +52,7 @@ public abstract partial class MeleeKnowledgeSystem : EntitySystem
         }
         Log.Error($"{ToPrettyString(args.User)} lcasdf");
 
-        if (_knowledge.GetMastery(melee.Comp) < 2 && SharedRandomExtensions.PredictedProb(_timing, _knowledge.SharpCurve(melee, 0, 26), GetNetEntity(args.User)))
+        if (_knowledge.GetMastery(melee.Comp) < 2 && SharedRandomExtensions.PredictedProb(_timing, 1 - _knowledge.SharpCurve(melee, 0, 26), GetNetEntity(ent)))
         {
             Log.Error($"{ToPrettyString(args.User)} aSS");
             args.Handled = true;
