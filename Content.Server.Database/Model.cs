@@ -89,7 +89,7 @@ namespace Content.Server.Database
                     dict => new Dictionary<string, int>(dict)
                 ));
             profile.Property(p => p.KnowledgeRemoved)
-                .HasDefaultValueSql("ARRAY[]::text[]"); // not using HasDefaultValue due to EF shitcode
+                .HasDefaultValue(new List<string>());
             profile.HasIndex(p => new { p.Slot, PrefsId = p.PreferenceId })
                 .IsUnique();
             // </Trauma>
