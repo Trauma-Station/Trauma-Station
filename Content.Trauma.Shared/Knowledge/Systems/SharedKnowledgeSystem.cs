@@ -476,10 +476,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent)
             return null;
 
-        if (_containerQuery.CompOrNull(ent) is not { } brain)
-            return null;
-
-        return (ent, brain);
+        return (ent, _containerQuery.Comp(ent));
     }
 
     /// <summary>

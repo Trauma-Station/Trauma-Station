@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Shared.Actions.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Movement.Systems;
@@ -57,6 +56,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
             comp.LastAttacks.Clear();
             comp.Momentum = 0;
+            // TODO: find a way to refresh speed here.
             Dirty(ent, comp);
         }
 
@@ -110,10 +110,12 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
     private void OnMoveSpeed(Entity<FastSpeedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        args.ModifySpeed(Math.Abs(1.0f + ent.Comp.SpeedModifier));
+        if (!TryComp<KnowledgeComponent>(ent, out var knowledge))
+            return;
+        args.ModifySpeed(Math.Abs(1.0f + ent.Comp.SpeedModifier * ((float) (knowledge.Level + knowledge.TemporaryLevel)) / 100.0f));
         if (!TryComp<CanPerformComboComponent>(ent, out var martial))
             return;
-        args.ModifySpeed(1.0f + ((float) martial.Momentum) / 5.0f);
+        args.ModifySpeed(1.0f + ((float) martial.Momentum) / 10.0f);
     }
 
     private void OnDamageSpeed(Entity<FastSpeedComponent> ent, ref MartialArtDamageModifierEvent args)

@@ -40,7 +40,7 @@ public abstract partial class SharedKnowledgeSystem
     public void ConstructionInteraction(Entity<QualityComponent> ent, ref UpdateItemQualityEvent args)
     {
         var user = args.User;
-        if (GetContainer(user) is not {} brain)
+        if (GetContainer(user) is not { } brain)
         {
             ModifyValues(ent);
             return;
