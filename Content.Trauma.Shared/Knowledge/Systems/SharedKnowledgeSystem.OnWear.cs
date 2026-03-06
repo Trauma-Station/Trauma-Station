@@ -46,14 +46,15 @@ public abstract partial class SharedKnowledgeSystem
         }
 
         // Handle Experience
-        foreach (var (id, xp) in component.Experience)
+        // FIXME: it should be a separate thing since this gives you the skill for free
+        /*foreach (var (id, xp) in component.Experience)
         {
-            if (EnsureKnowledge(ent, id) is {} unit)
+            if (GetKnowledge(ent, id) is {} unit)
             {
                 unit.Comp.BonusExperience += xp;
                 Dirty(unit);
             }
-        }
+        }*/
 
         // Handle Blocks
         foreach (var id in component.Blocked.Keys)
@@ -87,7 +88,7 @@ public abstract partial class SharedKnowledgeSystem
         }
 
         // Remove Experience
-        foreach (var (id, xp) in component.Experience)
+        /*foreach (var (id, xp) in component.Experience)
         {
             if (GetKnowledge(ent, id) is not {} unit)
                 continue;
@@ -98,7 +99,7 @@ public abstract partial class SharedKnowledgeSystem
                 RemoveKnowledge(ent, id);
             else
                 Dirty(unit);
-        }
+        }*/
 
         // Remove Blocks
         foreach (var id in component.Blocked.Keys)
