@@ -18,6 +18,7 @@ using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -141,6 +142,8 @@ public sealed class GunExecutionSystem : EntitySystem
 
         var coords = Transform(args.Shooter).Coordinates;
         var projectile = PredictedSpawnAtPosition(ent.Comp.Prototype, coords);
+        var firedEv = new CartridgeFiredEvent(projectile);
+        RaiseLocalEvent(ent, ref firedEv);
         // now have the actual projectile impact the target
         // for most bullets this just does hit, shotguns will do it for each pellet
         DoImpact(args.Weapon, projectile, args.Shooter, args.Target);

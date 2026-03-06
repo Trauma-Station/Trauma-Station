@@ -6,7 +6,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
     TechnologyKnowledge: 3
   # </Trauma>
@@ -19,7 +19,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
     TechnologyKnowledge: 3
   # </Trauma>
@@ -32,7 +32,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
     TechnologyKnowledge: 3
   # </Trauma>

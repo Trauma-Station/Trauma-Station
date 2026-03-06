@@ -95,7 +95,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 
@@ -111,7 +111,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     AirlocksKnowledge: 2
   # </Trauma>
 

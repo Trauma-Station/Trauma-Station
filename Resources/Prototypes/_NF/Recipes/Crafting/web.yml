@@ -9,7 +9,7 @@
     - SpiderCraft
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 2
   # </Trauma>
 
@@ -24,7 +24,7 @@
     - SpiderCraft
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 2
   # </Trauma>
 
@@ -39,7 +39,7 @@
     - SpiderCraft
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 2
   # </Trauma>
 
@@ -54,6 +54,6 @@
     - SpiderCraft
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 2
   # </Trauma>

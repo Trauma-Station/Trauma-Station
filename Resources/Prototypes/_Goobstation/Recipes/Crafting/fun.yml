@@ -4,6 +4,6 @@
   targetNode: toygrenade
   category: construction-category-misc
   objectType: Item
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    HandmadeKnowledge: 2
     TechnologyKnowledge: 1

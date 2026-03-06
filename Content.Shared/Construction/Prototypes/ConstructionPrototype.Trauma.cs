@@ -6,14 +6,22 @@ namespace Content.Shared.Construction.Prototypes;
 public sealed partial class ConstructionPrototype
 {
     /// <summary>
-    /// Construction Knowledge and levels that are required to be able to use this craft.
+    /// Knowledge masteries that are required to be able to make this craft.
+    /// Mastery is from 0-5.
     /// </summary>
     [DataField(required: true)]
-    public Dictionary<EntProtoId, int> Groups = new();
+    public Dictionary<EntProtoId, int> Theory = new();
 
     /// <summary>
-    /// Coefficient that determines the quality coefficients on the component. Higher is better, and vice versa. Do not go above or below 0.5 and 2.
+    /// If non-null, the skills you need to make a normal quality item.
+    /// This lets you make something easy to understand how to make but hard to do well.
     /// </summary>
     [DataField]
-    public float QualityCoefficient = 1.3f;
+    public Dictionary<EntProtoId, int>? Practical;
+
+    /// <summary>
+    /// Optional quality override.
+    /// </summary>
+    [DataField]
+    public float? QualityCoefficient;
 }

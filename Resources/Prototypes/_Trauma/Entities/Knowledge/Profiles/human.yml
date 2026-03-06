@@ -3,7 +3,7 @@
   id: Human
   mastery:
     # Standard space station skills
-    CookingKnowledge: 1
+    CookingKnowledge: 2
     CraftingKnowledge: 2
     HandmadeKnowledge: 1
     SurvivalKnowledge: 1
@@ -22,5 +22,4 @@
     SmokeablesKnowledge: 1
     LiteracyKnowledge: 4 # Completely literate
     TechnologyKnowledge: 1 # computer...
-    MeleeKnowledge: 1 # swinging a bat isn't hard, most people are assumed to play a sport
-    ShootingKnowledge: 0 # most people know what guns are...
+    ThrowingKnowledge: 1

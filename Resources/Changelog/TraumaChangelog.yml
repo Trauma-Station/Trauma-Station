@@ -3675,3 +3675,13 @@ Entries:
   id: 435
   time: '2026-03-06T17:23:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1051
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Construction knowledge was reworked to have separate theory and practical
+      requirements. You can now build a lot more at low levels, but it will
+      probably be poor quality.
+  id: 436
+  time: '2026-03-06T19:40:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1060

@@ -13,7 +13,7 @@
   components:
   - type: Knowledge
     category: Physical
-    costs: [1, 2, 4, 6, 8, 12]
+    costs: [4, 6, 10, 16, 999, 999]
 
 - type: entity
   id: BaseWarKnowledge
@@ -22,6 +22,18 @@
   components:
   - type: Knowledge
     category: War
+    costs: [4, 6, 10, 16, 999, 999]
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseQualityKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Construction
+    color: "#0ba881"
+    experienceCost: 20
+    costs: [2, 4, 8, 16, 32, 999]
 
 - type: entity
   id: BaseIntellectualKnowledge
@@ -75,7 +87,7 @@
     category: MartialArt
     experienceCost: 10
     color: "#c70000"
-    costs: [12, 16, 20, 26, 32, 48] # you have to give up everything to be a grandmaster
+    costs: [36, 999, 999, 999, 999, 999] # Being able to learn any of these roundstart needs an insane cost
   - type: MartialArtsKnowledge
     blocked: false
     icon: Objects/Misc/skub.rsi

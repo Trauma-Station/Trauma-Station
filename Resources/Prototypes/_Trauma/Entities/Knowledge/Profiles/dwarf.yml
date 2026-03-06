@@ -13,9 +13,8 @@
     ToysKnowledge: 0
     FurnitureKnowledge: 1
     InfrastructureKnowledge: 2
-    ElectronicsKnowledge: 1
-    WallsKnowledge: 2
+    WallsKnowledge: 1
     WindowsKnowledge: 1
-    LiteracyKnowledge: 3 # Mostly literate
+    LiteracyKnowledge: 2 # Kinda dumb
     TechnologyKnowledge: 0
     MeleeKnowledge: 3

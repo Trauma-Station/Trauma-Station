@@ -9,5 +9,6 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  groups:
-    TechnologyKnowledge: 10
+  theory:
+    WeaponsKnowledge: 0
+    FurnitureKnowledge: 0
