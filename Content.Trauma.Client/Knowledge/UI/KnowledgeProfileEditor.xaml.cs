@@ -19,7 +19,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
     public event Action<KnowledgeProfile>? OnSave;
 
     private KnowledgeProfilePrototype _parent = default!;
-    private KnowledgeProfile _profile = default!;
+    private KnowledgeProfile _profile = new();
     private bool _modified;
 
     public KnowledgeProfileEditor(IPrototypeManager proto, KnowledgeSystem knowledge)
