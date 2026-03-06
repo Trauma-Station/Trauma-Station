@@ -17,7 +17,7 @@ public sealed partial class HumanoidProfileEditor
     /// <summary>
     /// For other systems to do stuff
     /// </summary>
-    public event Action<HumanoidCharacterProfile?> OnSetProfile;
+    public event Action<HumanoidCharacterProfile?>? OnSetProfile;
 
     private void InitializeTrauma()
     {
