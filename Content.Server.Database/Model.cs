@@ -74,7 +74,7 @@ namespace Content.Server.Database
                 .HasIndex(p => p.UserId)
                 .IsUnique();
 
-            // <Trauma> - store skills in json because i hate this shit. had to store profile for 2 things to use it
+            // <Trauma> - store skills in json because i hate this shit. had to store profile for 3 things to use it
             var profile = modelBuilder.Entity<Profile>();
             profile.Property(p => p.KnowledgeMastery)
                 .HasConversion(
@@ -88,6 +88,8 @@ namespace Content.Server.Database
                     dict => dict.GetHashCode(),
                     dict => new Dictionary<string, int>(dict)
                 ));
+            profile.Property(p => p.KnowledgeRemoved)
+                .HasDefaultValueSql("ARRAY[]::text[]"); // not using HasDefaultValue due to EF shitcode
             profile.HasIndex(p => new { p.Slot, PrefsId = p.PreferenceId })
                 .IsUnique();
             // </Trauma>
