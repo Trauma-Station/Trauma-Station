@@ -68,6 +68,6 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
         }
         Dirty(item, quality);
 
-        _quality.RollQuality(item, ent);
+        _quality.RollQuality((item, quality), ent);
     }
 }
