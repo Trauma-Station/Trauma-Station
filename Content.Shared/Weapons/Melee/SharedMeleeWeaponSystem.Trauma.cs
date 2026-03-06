@@ -75,42 +75,12 @@ public abstract partial class SharedMeleeWeaponSystem
         _throwing.TryThrow(target, pushVector, force * _shoveSpeed, animated: animated);
     }
 
-    private void AddExperienceLight(EntityUid target, EntityUid user)
-    {
-        if (MobState.IsAlive(target) && target != user)
-        {
-            var evKnowledge = new AddExperienceEvent(MeleeKnowledge, 1);
-            RaiseLocalEvent(user, ref evKnowledge);
-        }
-    }
-
     private void AdjustStaminaDamage(EntityUid user, ref float staminaDamage)
     {
         // TODO: use event for this bruh
         if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee)
         {
             staminaDamage *= 1 - _knowledge.SharpCurve(melee);
-        }
-    }
-
-    private void AddExperienceHeavy(EntityUid user, ref List<EntityUid> entities)
-    {
-        if (entities.Count(entity => MobState.IsAlive(entity)) is var count and > 0)
-        {
-            var evKnowledge = new AddExperienceEvent(MeleeKnowledge, count);
-            RaiseLocalEvent(user, ref evKnowledge);
-            var evWeapons = new AddExperienceEvent(WeaponsKnowledge, 1);
-            RaiseLocalEvent(user, ref evWeapons);
-        }
-    }
-
-    private void DisarmExperience(EntityUid user, EntityUid target)
-    {
-        // TODO: move all this shit to event handlers bruh
-        if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee && _knowledge.GetMastery(melee.Comp) < 2 && MobState.IsAlive(target))
-        {
-            var evKnowledge = new AddExperienceEvent(MeleeKnowledge, 1);
-            RaiseLocalEvent(user, ref evKnowledge);
         }
     }
 }

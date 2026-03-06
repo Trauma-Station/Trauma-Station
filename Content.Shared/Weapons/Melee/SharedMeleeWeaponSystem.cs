@@ -578,11 +578,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return;
         // Goobstation end
 
-        // <Trauma>
-        if (target is { })
-            AddExperienceLight(target.Value, user);
-        // </Trauma>
-
         // For consistency with wide attacks stuff needs damageable.
         if (Deleted(target) ||
             !HasComp<DamageableComponent>(target) ||
@@ -885,9 +880,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);
         }
 
-        // <Trauma>
-        AddExperienceHeavy(user, ref entities);
-        // </Trauma>
         return true;
     }
 
@@ -1095,9 +1087,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return true;
         }
 
-        // <Trauma>
-        DisarmExperience(user, target);
-        // </Trauma>
         ShoveOrDisarmPopup(true);
 
         return true;

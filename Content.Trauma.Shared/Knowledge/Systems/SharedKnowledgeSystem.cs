@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Diagnostics.CodeAnalysis;
-using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
-using Content.Shared.Bed.Sleep;
 using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mind.Components;
@@ -16,8 +13,6 @@ using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Silicons.Borgs;
 using Robust.Shared.Containers;
-using Robust.Shared.Map.Components;
-using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
