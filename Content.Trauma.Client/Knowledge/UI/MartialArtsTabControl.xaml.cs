@@ -10,7 +10,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Client.Knowledge.Tabs;
+namespace Content.Trauma.Client.Knowledge.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class MartialArtsTabControl : BaseTabControl

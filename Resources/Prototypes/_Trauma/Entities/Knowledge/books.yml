@@ -85,7 +85,7 @@
   id: BookSkillbook
   abstract: true
   components:
-  - type: Sprite
+  - type: Sprite # TODO: different fucking sprite
     sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
     layers:
     - state: icon

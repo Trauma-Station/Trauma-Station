@@ -13,6 +13,7 @@
   components:
   - type: Knowledge
     category: Physical
+    costs: [1, 2, 4, 6, 8, 12]
 
 - type: entity
   id: BaseWarKnowledge
@@ -47,6 +48,7 @@
     category: Construction
     color: "#0ba881"
     experienceCost: 20
+    costs: [1, 2, 3, 4, 6, 10]
 
 - type: entity
   parent: BaseKnowledge
@@ -58,6 +60,7 @@
     level: 26
     experienceCost: 4
     color: "#ADD8E6"
+    costs: null # its currently fucked, have to use traits still :(
   - type: LanguageKnowledge
 
 - type: entity
@@ -65,13 +68,19 @@
   id: BaseMartialArtsKnowledge
   abstract: true
   components:
+  - type: Sprite
+    sprite: _Goobstation/Interface/Misc/intents.rsi
+    state: harm
   - type: Knowledge
     category: MartialArt
     experienceCost: 10
     color: "#c70000"
+    costs: [12, 16, 20, 26, 32, 48] # you have to give up everything to be a grandmaster
   - type: MartialArtsKnowledge
     blocked: false
     icon: Objects/Misc/skub.rsi
+
+# Actual categories
 
 - type: knowledgeCategory
   id: MartialArt

@@ -274,7 +274,15 @@ namespace Content.Server.Database
                         .Select(t => new Trait { TraitName = t })
             );
 
-            profile.BarkVoice = humanoid.BarkVoice; // Goob Station - Barks
+            // <Trauma>
+            profile.BarkVoice = humanoid.BarkVoice;
+            profile.KnowledgeMastery.Clear();
+            foreach (var (id, mastery) in humanoid.Knowledge.Mastery)
+            {
+                profile.KnowledgeMastery[id] = mastery;
+            }
+            profile.KnowledgeRemoved = humanoid.Knowledge.RemovedList();
+            // </Trauma>
 
             profile.Loadouts.Clear();
 

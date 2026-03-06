@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Client.Lobby;
+using Content.Client.Lobby.UI;
 using Content.Client.UserInterface.Systems.Character.Windows;
-using Content.Trauma.Client.Knowledge.Tabs;
+using Content.Trauma.Client.Knowledge.UI;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
@@ -29,13 +31,15 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, GetPerformedAttackTypesEvent>(OnGetAttackTypes);
         SubscribeLocalEvent<KnowledgeHolderComponent, UpdateExperienceEvent>(OnUpdateExperienceEvent);
 
-        CharacterWindow.OnOpened += OnCharacterWindowOpened;
+        CharacterWindow.OnOpened += EnsureKnowledgeTab;
+        LobbyUIController.OnProfileEditorCreated += AddProfileEditorTab;
     }
 
     public override void Shutdown()
     {
         base.Shutdown();
-        CharacterWindow.OnOpened -= OnCharacterWindowOpened;
+        CharacterWindow.OnOpened -= EnsureKnowledgeTab;
+        LobbyUIController.OnProfileEditorCreated -= AddProfileEditorTab;
     }
 
     private void OnGetAttackTypes(Entity<KnowledgeHolderComponent> ent, ref GetPerformedAttackTypesEvent args)
@@ -47,11 +51,8 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         args.AttackTypes = combo.LastAttacks;
     }
 
-    private void OnCharacterWindowOpened(CharacterWindow window)
+    private void EnsureKnowledgeTab(CharacterWindow window)
     {
-        if (_player.LocalEntity is not { } player)
-            return;
-
         _activeWindow = new WeakReference<CharacterWindow>(window);
 
         KnowledgeTab? knowledgeTab = null;
@@ -72,7 +73,31 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             window.Tabs.AddChild(knowledgeTab);
         }
 
-        knowledgeTab.UpdateKnowledgeTab(player, knowledgeTab);
+        if (_player.LocalEntity is {} player)
+            knowledgeTab.UpdateKnowledgeTab(player);
+    }
+
+    private void AddProfileEditorTab(HumanoidProfileEditor editor)
+    {
+        // place it before markings tab
+        var above = editor.MarkingsTab;
+        var index = above.GetPositionInParent();
+
+        var tab = new KnowledgeProfileEditor(_proto, this);
+        tab.OnSave += knowledge =>
+        {
+            editor.Profile = editor.Profile?.WithKnowledge(knowledge);
+            editor.IsDirty = true;
+        };
+
+        editor.OnSetProfile += profile =>
+        {
+            if (profile is not null)
+                tab.SetProfile(profile.Species, profile.Knowledge);
+        };
+        editor.TabContainer.AddChild(tab);
+        tab.SetPositionInParent(index);
+        TabContainer.SetTabTitle(tab, Loc.GetString("knowledge-editor-tab"));
     }
 
     /// <summary>
@@ -80,15 +105,15 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    public List<(EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
+    public List<(EntityUid, EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
     {
         if (GetKnowledgeWith<MartialArtsKnowledgeComponent>(target) is not {} arts)
             return [];
 
-        var list = new List<(EntProtoId, string)>();
+        var list = new List<(EntityUid, EntProtoId, string)>();
         foreach (var art in arts)
         {
-            list.Add((Prototype(art)!.ID, Name(art)));
+            list.Add((art, Prototype(art)!.ID, Name(art)));
         }
         list.Sort((a, b) => a.Item1.CompareTo(b.Item1));
         return list;
@@ -117,7 +142,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         if (_activeWindow is not { } || !_activeWindow.TryGetTarget(out var window))
             return;
 
-        OnCharacterWindowOpened(window);
+        EnsureKnowledgeTab(window);
     }
 
     public EntProtoId? GetEntProtoId(Entity<MartialArtsKnowledgeComponent>? martialArt)
