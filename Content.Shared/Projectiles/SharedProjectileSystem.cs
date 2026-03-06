@@ -1,8 +1,6 @@
 // <Trauma>
 using Content.Shared.Damage.Components;
-using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
-using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Numerics;
 using Content.Shared.Damage;
@@ -32,9 +30,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!; // Goob
-
-    private static readonly ProtoId<TagPrototype> GunCanAimShooterTag = "GunCanAimShooter"; // Goob
 
     public override void Initialize()
     {
@@ -124,10 +119,10 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
 
         // <Trauma> - for projectiles use PlayLocal since clients predict their physics
-        if (user != null)
-            _audio.PlayLocal(component.Sound, uid, null);
-        else
+        if (user == null)
             _audio.PlayPvs(component.Sound, uid);
+        else if (_timing.IsFirstTimePredicted)
+            _audio.PlayLocal(component.Sound, uid, null);
         // </Trauma>
         component.EmbeddedIntoUid = target;
         var ev = new EmbedEvent(user, target);
@@ -241,6 +236,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     }
 
     // Goobstation - Crawling fix
+    // TODO: no reason for this to be in core
     private void EmbeddablePreventCollision(EntityUid uid, EmbeddableProjectileComponent component, ref PreventCollideEvent args)
     {
         if (TryComp<RequireProjectileTargetComponent>(args.OtherEntity, out var requireTarget) && requireTarget.IgnoreThrow && requireTarget.Active)
