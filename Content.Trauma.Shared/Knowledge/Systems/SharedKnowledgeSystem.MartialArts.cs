@@ -10,7 +10,6 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Trauma.Common.Bulletholes;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
@@ -51,7 +50,6 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(OnSpeedModifier);
         SubscribeLocalEvent<KnowledgeHolderComponent, GetMeleeAttackRateEvent>(OnMeleeAttackModifier);
         SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(OnProjectileHit);
-        SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
         SubscribeLocalEvent<PerformMartialArtComboEvent>(OnComboActionClicked);
 
         SubscribeAllEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
@@ -282,11 +280,6 @@ public abstract partial class SharedKnowledgeSystem
         if (GetActiveMartialArt(ent) is not { } art)
             return;
         RaiseLocalEvent(art, ref args);
-    }
-
-    private void OnProjectileHitMartialArt(Entity<NoGunComponent> ent, ref ProjectileReflectAttemptEvent args)
-    {
-        args.Cancelled = true;
     }
 
     private void OnComboActionClicked(PerformMartialArtComboEvent args)

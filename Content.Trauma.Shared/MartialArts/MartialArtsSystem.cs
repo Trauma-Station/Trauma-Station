@@ -3,6 +3,7 @@
 using Content.Shared.Actions.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
@@ -36,6 +37,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
         SubscribeLocalEvent<FastSpeedComponent, GetMeleeAttackRateEvent>(AdjustAttackRate);
         SubscribeLocalEvent<SneakAttackComponent, InvokeSneakAttackSurprisedEvent>(SneakAttackSurprise);
         SubscribeLocalEvent<SneakAttackComponent, CanDoSneakAttackEvent>(SneakAttackCanAttack);
+        SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
     }
 
     public override void Update(float frameTime)
@@ -151,5 +153,10 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
         float modifier = 1 + ent.Comp.SpeedModifier * ((float) (knowledge.Level + knowledge.TemporaryLevel) / 50.0f);
         ev.Multipliers *= Math.Abs(modifier);
+    }
+
+    private void OnProjectileHitMartialArt(Entity<NoGunComponent> ent, ref ProjectileReflectAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 }
