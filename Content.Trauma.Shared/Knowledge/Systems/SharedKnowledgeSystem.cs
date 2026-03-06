@@ -228,7 +228,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
         ent.Comp.Experience -= ent.Comp.ExperienceCost * timesToRoll;
         (int, bool) rollInnard;
-        for (int i = 0; i < timesToRoll; i++)
+        for (int i = 0; i < timesToRoll && ent.Comp.Level < 100; i++)
         {
             int diceType = DiceDictionary(ent);
             rollInnard = RollPenetrating(target, diceType);
