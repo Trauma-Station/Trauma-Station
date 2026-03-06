@@ -151,6 +151,9 @@
     pocket2: WeaponAlien
     suitstorage: Wonderprod
     id: AgentIDCard
+  storage:
+    back:
+      - BarberScissors
 
 # Spawners
 
