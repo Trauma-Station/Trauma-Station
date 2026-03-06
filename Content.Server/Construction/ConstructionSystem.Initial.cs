@@ -355,6 +355,7 @@ namespace Content.Server.Construction
 
             // <Trauma>
             var ev = new ConstructAttemptEvent(user, prototype);
+            RaiseLocalEvent(user, ref ev);
             if (ev.Cancelled)
                 return false;
             // </Trauma>
