@@ -1176,8 +1176,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasColumnName("knowledge_removed")
-                        .HasDefaultValueSql("ARRAY[]::text[]");
+                        .HasColumnName("knowledge_removed");
 
                     b.Property<byte[]>("Markings")
                         .HasColumnType("jsonb")
