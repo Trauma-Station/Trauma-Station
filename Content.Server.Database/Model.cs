@@ -81,7 +81,7 @@ namespace Content.Server.Database
                     v => JsonSerializer.Serialize(v),
                     s => string.IsNullOrEmpty(s)
                         ? new()
-                        : JsonSerializer.Deserialize<Dictionary<string, int>>(s.Value)
+                        : JsonSerializer.Deserialize<Dictionary<string, int>>(s)
                 )
                 .Metadata.SetValueComparer(new ValueComparer<Dictionary<string, int>>(
                     (a, b) => a != null && b != null && a.Count == b.Count && !a.Except(b).Any(),

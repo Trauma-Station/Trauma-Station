@@ -86,7 +86,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         var tab = new KnowledgeProfileEditor(_proto, this);
         tab.OnSave += knowledge =>
         {
-            editor.Profile = editor.Profile.WithKnowledge(knowledge);
+            editor.Profile = editor.Profile?.WithKnowledge(knowledge);
             editor.IsDirty = true;
         };
 

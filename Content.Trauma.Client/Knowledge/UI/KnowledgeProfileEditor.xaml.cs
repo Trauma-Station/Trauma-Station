@@ -31,7 +31,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
 
         AvailableSkills.OnItemSelected += args =>
         {
-            var id = (EntProtoId) args.ItemList[args.ItemIndex].Metadata;
+            var id = (EntProtoId) args.ItemList[args.ItemIndex].Metadata!;
             _profile.Mastery[id] = 0; // cheapest start
             _profile.Removed.Remove(id); // can't be removed if it's added, can it
             _modified = true;
