@@ -153,7 +153,7 @@
   opponentEffects:
   - !type:StealItem
   levelRequired: 0
-  levelRequired: 26
+  levelExceeded: 26
 
 - type: combo
   id: CQCPressure
@@ -174,7 +174,7 @@
   id: CQCConsecutiveSimple
   attacks:
   - Disarm
-  - Hug
+  - Disarm
   - Harm
   userEffects:
   - !type:PlaySoundEffect
@@ -196,7 +196,7 @@
   id: CQCConsecutive
   attacks:
   - Disarm
-  - Hug
+  - Disarm
   - Harm
   userEffects:
   - !type:PlaySoundEffect
@@ -218,7 +218,7 @@
   id: CQCConsecutiveAdvanced
   attacks:
   - Disarm
-  - Hug
+  - Disarm
   - Harm
   userEffects:
   - !type:PlaySoundEffect
