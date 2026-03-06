@@ -3,21 +3,24 @@
 using System.Linq;
 using Content.Server.Administration;
 using Content.Shared.Administration;
-using Content.Trauma.Common.Knowledge.Systems;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
+
+namespace Content.Trauma.Server.Knowledge;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
 public sealed class KnowledgeCommand : ToolshedCommand
 {
-    private CommonKnowledgeSystem? _knowledge;
+    private SharedKnowledgeSystem? _knowledge;
 
     [CommandImplementation("add")]
     public EntityUid Add([PipedArgument] EntityUid input, [CommandArgument] EntProtoId proto, [CommandArgument] int level)
     {
-        _knowledge ??= GetSys<CommonKnowledgeSystem>();
+        _knowledge ??= GetSys<SharedKnowledgeSystem>();
 
-        _knowledge.TryAddKnowledgeUnit(input, (proto, level));
+        if (_knowledge.GetContainer(input) is {} brain)
+            _knowledge.EnsureKnowledge(brain, proto, level); // no user since commands arent predicted
         return input;
     }
 
@@ -28,7 +31,7 @@ public sealed class KnowledgeCommand : ToolshedCommand
     [CommandImplementation("list")]
     public IEnumerable<EntityUid> List([PipedArgument] IEnumerable<EntityUid> entities)
     {
-        _knowledge ??= GetSys<CommonKnowledgeSystem>();
+        _knowledge ??= GetSys<SharedKnowledgeSystem>();
 
         return entities.SelectMany(e =>
         {
@@ -44,7 +47,7 @@ public sealed class KnowledgeCommand : ToolshedCommand
     [CommandImplementation("clear")]
     public EntityUid Clear([PipedArgument] EntityUid input)
     {
-        _knowledge ??= GetSys<CommonKnowledgeSystem>();
+        _knowledge ??= GetSys<SharedKnowledgeSystem>();
 
         _knowledge.ClearKnowledge(input, true);
 

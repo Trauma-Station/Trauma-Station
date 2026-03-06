@@ -20,12 +20,10 @@
     holiday: BoxingDay
     prototype: BoxCardboard
   # <Trauma>
-  - !type:AddComponentSpecial
-    components:
-      - type: KnowledgeGrant
-        skills:
-          StrengthKnowledge: 26
-          ToughnessKnowledge: 26
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
   # <Trauma>
 
 - type: startingGear

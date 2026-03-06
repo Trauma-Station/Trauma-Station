@@ -19,17 +19,17 @@
   access:
   - Medical
   - Maintenance
-  special: # Trauma
+  # <Trauma>
+  special:
   - !type:AddComponentSpecial
     components:
     - type: SurgerySpeedModifier
       speedModifier: 1.25
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FirstAidKnowledge: 26
-        SurgeryKnowledge: 10
-    # </Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      FirstAidKnowledge: 26
+      SurgeryKnowledge: 10
+  # </Trauma>
 
 - type: startingGear
   id: MedicalInternGear

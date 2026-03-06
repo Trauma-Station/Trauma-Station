@@ -18,25 +18,25 @@
   - External
   extendedAccess:
   - Atmospherics
-  special: # Goobstation
+  # <Trauma>
+  special:
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        HandmadeKnowledge: 26
-        TechnologyKnowledge: 26
-        MaterialsKnowledge: 26
-        DoorsKnowledge: 26
-        AirlocksKnowledge: 26
-        FurnitureKnowledge: 26
-        InfrastructureKnowledge: 26
-        ElectronicsKnowledge: 26
-        WallsKnowledge: 26
-        WindowsKnowledge: 26
-        SmokeablesKnowledge: 50
-    # </Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      HandmadeKnowledge: 26
+      TechnologyKnowledge: 26
+      MaterialsKnowledge: 26
+      DoorsKnowledge: 26
+      AirlocksKnowledge: 26
+      FurnitureKnowledge: 26
+      InfrastructureKnowledge: 26
+      ElectronicsKnowledge: 26
+      WallsKnowledge: 26
+      WindowsKnowledge: 26
+      SmokeablesKnowledge: 50
+  # </Trauma>
 - type: startingGear
   id: StationEngineerGear
   equipment:

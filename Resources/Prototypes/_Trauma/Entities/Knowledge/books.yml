@@ -274,9 +274,9 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      language-TauCetiBasic: 26
+      LanguageTauCetiBasic: 26
     experience:
-      language-TauCetiBasic: 1
+      LanguageTauCetiBasic: 1
     doAfter: 2
 
 - type: entity

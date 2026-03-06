@@ -3607,3 +3607,41 @@ Entries:
   id: 427
   time: '2026-03-05T08:50:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1027
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to read paper and CQC manuals while blind.
+  id: 428
+  time: '2026-03-05T09:40:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1028
+- author: NoElkaTheGod, deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Thief no longer has objectives, it's a freeform antag now, steal whatever
+      you want.
+  id: 429
+  time: '2026-03-05T14:42:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/995
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Throwing is no longer nerfed by low throwing/strength skills.
+  - type: Fix
+    message: Fixed 500 bugs with knowledge.
+  - type: Tweak
+    message: >-
+      Throwing items in disposal units is now predicted and easier with high
+      throwing or janitor skills.
+  - type: Tweak
+    message: Removed melee/shove missing from low skill.
+  id: 430
+  time: '2026-03-05T16:26:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1023
+- author: MayasMischief
+  changes:
+  - type: Remove
+    message: Removed BSO.
+  id: 431
+  time: '2026-03-06T00:57:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1039

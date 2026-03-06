@@ -6,7 +6,7 @@
   category: construction-category-materials
   objectType: Item
   groups:
-    RevolutionaryKnowledge: 0
+    MaterialsKnowledge: 0 # its folding paper bro
 
 - type: construction
   id: PowerArmorStand

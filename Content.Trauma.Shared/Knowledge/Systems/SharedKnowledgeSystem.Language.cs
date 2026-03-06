@@ -1,62 +1,101 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
+using Content.Medical.Common.Body;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
+using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Popups;
 using Content.Shared.RetractableItemAction;
-using Content.Shared.StatusEffectNew;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
+
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    private EntityQuery<LanguageKnowledgeComponent> _langQuery;
+
+    public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
     private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
     private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
 
     private void InitializeLanguage()
     {
-        SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdded);
-        SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemoved);
-        SubscribeLocalEvent<LanguageSpeakerComponent, UpdateLanguageEvent>(OnLanguageUpdated);
-        SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnLanguageInit);
+        _langQuery = GetEntityQuery<LanguageKnowledgeComponent>();
+
+        SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit);
+        SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);
+        SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeRemovedEvent>(OnLanguageRemoved);
+
+        SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdd);
+        SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemove);
+        SubscribeLocalEvent<LanguageSpeakerComponent, UpdateLanguageEvent>(OnLanguageUpdate);
+        SubscribeLocalEvent<LanguageSpeakerComponent, BodyInitEvent>(OnLanguageBodyInit);
 
         // Experience methods
         SubscribeLocalEvent<LanguageSpeakerComponent, EntitySpokeEvent>(OnLanguageSpoke);
     }
 
+    private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
+    {
+        // to avoid copy pasting the name between each entity
+        _meta.SetEntityName(ent.Owner, _language.GetLanguagePrototype(ent.Comp.LanguageId)!.Name);
+    }
+
+    private void OnLanguageAdded(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
+    {
+        EnsureComp<LanguageSpeakerComponent>(args.Holder);
+    }
+
+    private void OnLanguageRemoved(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
+    {
+        if (args.Container.Comp.ActiveLanguage == ent.Owner)
+            ChangeLanguage(args.Container, null);
+    }
+
+    /// <summary>
+    /// Directly sets the current spoken language.
+    /// </summary>
+    public void ChangeLanguage(Entity<KnowledgeContainerComponent> ent, EntityUid? unit)
+    {
+        ent.Comp.ActiveLanguage = null;
+        DirtyField(ent, ent.Comp, nameof(KnowledgeContainerComponent.ActiveLanguage));
+    }
+
+    /// <summary>
+    /// Get the corresponding knowledge entity prototype for a given language.
+    /// </summary>
+    public EntProtoId LanguageUnit(ProtoId<LanguagePrototype> lang)
+    {
+        var id = $"Language{lang}";
+        DebugTools.Assert(_proto.HasIndex<EntityPrototype>(id), $"Language {lang} has no knowledge prototype!");
+        return id;
+    }
+
     public void UpdateEntityLanguages(Entity<LanguageSpeakerComponent> ent)
     {
-        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
-            return;
-
-        var entHolder = (ent, knowledgeHolder);
-
         var ev = new DetermineEntityLanguagesEvent();
-        // We add the intrinsically known languages first so other systems can manipulate them easily
-        if (TryGetKnowledgeEntity(entHolder) is { } knowledgeEnt)
+        if (GetContainer(ent.Owner) is {} brain &&
+            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is {} known)
         {
-            var knownLanguages = TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(ent);
-
-            if (knownLanguages != null)
+            foreach (var language in known)
             {
-                foreach (var language in knownLanguages)
-                {
-                    if (language.Comp1.Speaks == true)
-                        ev.SpokenLanguages.Add(language.Comp1.LanguageId);
-                    if (language.Comp1.Understands == true)
-                        ev.UnderstoodLanguages.Add(language.Comp1.LanguageId);
-                }
+                if (language.Comp1.Speaks)
+                    ev.SpokenLanguages.Add(language.Comp1.LanguageId);
+                if (language.Comp1.Understands)
+                    ev.UnderstoodLanguages.Add(language.Comp1.LanguageId);
             }
         }
         else
@@ -87,184 +126,160 @@ public abstract partial class SharedKnowledgeSystem
 
     private void SpeakerToKnowledge(Entity<LanguageSpeakerComponent> ent)
     {
-        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+        if (GetContainer(ent.Owner) is not {} brain ||
+            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is not {} known)
             return;
 
-        var entHolder = (ent, knowledgeHolder);
-
-        if (TryGetKnowledgeEntity(entHolder) is not { } knowledgeEnt)
-            return;
-
-        var knowledgeContainerComp = Comp<KnowledgeContainerComponent>(knowledgeEnt);
-
-        if (TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(ent) is not { } knownLanguages)
-            return;
-
-        foreach (var language in knownLanguages)
+        foreach (var language in known)
         {
             if (ent.Comp.CurrentLanguage == language.Comp1.LanguageId)
             {
-                knowledgeContainerComp.LanguageSkillUid = language;
-                Dirty(knowledgeEnt, knowledgeContainerComp);
+                ChangeLanguage(brain, language);
                 return;
             }
         }
 
         // If it gets here, this means that there is no language skill that the user is. (i.e. must use a translator.)
+        ChangeLanguage(brain, null);
     }
 
-    public void OnLanguageAdded(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
+    public void OnLanguageAdd(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
     {
-        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+        if (GetContainer(ent.Owner) is not {} brain)
             return;
 
-        var entHolder = (ent, knowledgeHolder);
         // We add the intrinsically known languages first so other systems can manipulate them easily
-        if (TryGetKnowledgeEntity(entHolder) is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledge) || knowledge.KnowledgeContainer is not { })
-            return;
-
-        if (TryGetKnowledgeUnit(knowledgeEnt, $"language-{args.Language.Id}") is not { })
-            TryAddKnowledgeUnit(knowledgeEnt, ($"language-{args.Language.Id}", 26));
+        var lang = args.Language;
+        EnsureKnowledge(brain, LanguageUnit(args.Language), 26);
 
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageRemoved(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
+    public void OnLanguageRemove(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
     {
-        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+        var id = LanguageUnit(args.Language);
+        if (GetContainer(ent.Owner) is not {} brain ||
+            GetKnowledge(brain, id) is not {} unit)
             return;
 
-        if (TryGetKnowledgeContainer((ent, knowledgeHolder)) is not { } knowledgeEnt)
-            return;
-
-        if (TryGetKnowledgeWithComp<LanguageKnowledgeComponent>(ent) is not { } knownLanguages)
-            return;
-
-        foreach (var language in knownLanguages)
+        var langComp = _langQuery.Comp(unit);
+        if (args.RemoveSpoken && args.RemoveUnderstood)
         {
-            if (language.Comp1.LanguageId == args.Language)
-            {
-                if (args.RemoveSpoken && args.RemoveUnderstood)
-                {
-                    TryRemoveKnowledgeUnit(knowledgeEnt, $"language-{args.Language.Id}");
-                }
-                else
-                {
-                    language.Comp1.Speaks = !args.RemoveSpoken;
-                    language.Comp1.Understands = !args.RemoveSpoken;
-                    Dirty(language.Owner, language.Comp1);
-                }
-                // We don't ensure that the entity has a speaker comp. If it doesn't... Well, woe be the caller of this method.
-                UpdateEntityLanguages(ent);
-                return;
-            }
+            RemoveKnowledge(brain, id);
         }
+        else
+        {
+            langComp.Speaks = !args.RemoveSpoken;
+            langComp.Understands = !args.RemoveSpoken;
+            Dirty(unit, langComp);
+        }
+
+        UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageUpdated(Entity<LanguageSpeakerComponent> ent, ref UpdateLanguageEvent args)
+    public void OnLanguageUpdate(Entity<LanguageSpeakerComponent> ent, ref UpdateLanguageEvent args)
     {
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
+    public void OnLanguageBodyInit(Entity<LanguageSpeakerComponent> ent, ref BodyInitEvent args)
     {
-        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+        if (GetContainer(ent.Owner) is not {} brain)
             return;
 
-        var knowledgeEnt = TryGetKnowledgeContainer((ent, knowledgeHolder));
-
-        var allLanguages = ent.Comp.Speaks
-            .Select(l => (Id: l, Speaks: true))
-            .Concat(ent.Comp.Understands
-                .Where(u => !ent.Comp.Speaks.Contains(u))
-                .Select(u => (Id: u, Speaks: false)));
-
-        foreach (var lang in allLanguages)
+        var allLanguages = new List<(ProtoId<LanguagePrototype>, bool)>();
+        foreach (var id in ent.Comp.Speaks)
         {
-            var protoId = $"language-{lang.Id}";
-            var languageUnit = TryAddKnowledgeUnit(ent, (protoId, 26));
+            allLanguages.Add((id, true));
+        }
+        // don't add duplicates when you both speak and understand a language
+        foreach (var id in ent.Comp.Understands)
+        {
+            if (!ent.Comp.Speaks.Contains(id))
+                allLanguages.Add((id, false));
+        }
 
-            if (languageUnit is not { })
+        foreach (var (lang, speaks) in allLanguages)
+        {
+            if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not {} unit)
             {
-                Log.Info($"FAILED to add language {lang.Id} to {ToPrettyString(ent)}. Check Prototype ID: {protoId}");
+                Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
                 continue;
             }
 
-            if (TryComp<LanguageKnowledgeComponent>(languageUnit, out var langComp))
-            {
-                langComp.Speaks = lang.Speaks;
-                langComp.Understands = true;
-
-                Dirty(languageUnit.Value, langComp);
-            }
+            var comp = _langQuery.Comp(unit);
+            comp.Speaks = speaks;
+            comp.Understands = true;
+            Dirty(unit, comp);
         }
 
-        Dirty(ent);
         UpdateEntityLanguages(ent);
     }
 
     public void OnLanguageSpoke(Entity<LanguageSpeakerComponent> ent, ref EntitySpokeEvent args)
     {
-        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeHolder))
+        if (GetContainer(ent.Owner) is not {} brain)
             return;
 
-        if (TryGetKnowledgeEntity((ent, knowledgeHolder)) is not { } knowledgeEnt)
-            return;
-        if (!TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledge) || knowledge.KnowledgeContainer == null)
-            return;
-
-        EntityUid? knownLanguage = TryGetKnowledgeUnit(knowledgeEnt, $"language-{args.Language.ID}");
-
-        if (knownLanguage is { } knownLanguageTrue && TryComp<LanguageKnowledgeComponent>(knownLanguageTrue, out var languageKnowledgeComponent))
+        var id = LanguageUnit(args.Language);
+        if (GetKnowledge(brain, id) is not {} unit)
         {
-            var modifier = 0.0f;
-            bool isCurse = GetMastery(knownLanguageTrue) >= 5 && ContainsCursedWord(args.Message);
-            var damage = new DamageSpecifier();
-
-            if (TryComp<KnowledgeComponent>(knownLanguageTrue, out var knowledgeComponent))
-            {
-                if (isCurse)
-                {
-                    modifier = Math.Max(((float) knowledgeComponent.Level - 80f) / 20f, 0f);
-                    damage.DamageDict.Add("Brute", 20 * modifier);
-                }
-                if (_timing.CurTime >= languageKnowledgeComponent.LastSpoken)
-                {
-                    var evSelf = new AddExperienceEvent($"language-{args.Language.ID}", Math.Clamp((_timing.CurTime - languageKnowledgeComponent.LastSpoken).Seconds, 0, 4));
-                    if (evSelf.Experience > 0)
-                        RaiseLocalEvent(ent, ref evSelf);
-
-                    languageKnowledgeComponent.LastSpoken = _timing.CurTime + TimeSpan.FromSeconds(5);
-                    Dirty(knownLanguageTrue, languageKnowledgeComponent);
-
-                    _hearers.Clear();
-                    _lookup.GetEntitiesInRange<LanguageSpeakerComponent>(_transform.GetMoverCoordinates(ent), 7f, _hearers, LookupFlags.All);
-                    var evheard = new AddExperienceEvent($"language-{args.Language.ID}", 1);
-                    foreach (var hearer in _hearers)
-                    {
-                        RaiseLocalEvent(hearer, ref evheard);
-
-                        if (!isCurse)
-                            continue;
-
-                        if (hearer.Owner == ent.Owner) continue; // Don't curse yourself
-
-                        if (_language.CanUnderstand(hearer.Owner, args.Language))
-                        {
-                            _damageable.TryChangeDamage(hearer.Owner, damage, ignoreResistances: false, interruptsDoAfters: false, ignoreBlockers: true, targetPart: TargetBodyPart.Head, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-                            _status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
-
-                            _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
-                        }
-                    }
-                }
-            }
+            Log.Warning($"{ToPrettyString(ent)} spoke in language {args.Language} while not having knowledge of it!?");
             return;
         }
+
+        var comp = _langQuery.Comp(unit);
+
+        var now = _timing.CurTime;
+        if (now < comp.LastSpoken)
+            return; // on cooldown for xp and curse effects
+
+        AddExperience(unit, ent, (int) Math.Clamp((now - comp.LastSpoken).TotalSeconds, 0, 4));
+
+        comp.LastSpoken = now + TimeSpan.FromSeconds(5);
+        Dirty(unit, comp);
+
+        var modifier = 0f;
+        DamageSpecifier damage = default!;
+
+        var isCurse = GetMastery(unit.Comp) >= 5 && ContainsCursedWord(args.Message);
+
+        // need to master it to curse people
+        if (isCurse)
+        {
+            // 0-1s, 0-20 damage
+            modifier = Math.Max(((float) unit.Comp.Level - 80f) / 20f, 0f);
+            damage = new DamageSpecifier();
+            damage.DamageDict.Add(Blunt, 20 * modifier);
+        }
+
+        // curse of 220
+        _hearers.Clear();
+        _lookup.GetEntitiesInRange<LanguageSpeakerComponent>(_transform.GetMoverCoordinates(ent), 7f, _hearers, LookupFlags.All);
+        var evheard = new AddExperienceEvent(id, 1);
+        foreach (var hearer in _hearers)
+        {
+            if (hearer.Owner == ent.Owner)
+                continue; // Don't curse yourself or double dip on XP
+
+            RaiseLocalEvent(hearer, ref evheard);
+
+            if (!isCurse || !_language.CanUnderstand(hearer.Owner, args.Language))
+                continue;
+
+            _damageable.TryChangeDamage(hearer.Owner, damage, ignoreResistances: false, interruptsDoAfters: false,
+                ignoreBlockers: true, targetPart: TargetBodyPart.Head, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            // FIXME: this doesnt exist...
+            //_status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
+
+            _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
+        }
     }
+
     private bool ContainsCursedWord(string message)
     {
         // Split message into individual words to avoid catching "it" in "shit"
+        // TODO: rewrite to be a regex fuck sake
         var words = message.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
         foreach (var word in words)
         {

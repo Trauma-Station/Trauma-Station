@@ -136,6 +136,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     private void OnBodyMapInit(Entity<BodyComponent> ent, ref MapInitEvent args)
     {
         EnsureComp<SurgeryTargetComponent>(ent);
+        // raise the event for organ-less bodies...
+        if (!HasComp<InitialBodyComponent>(ent))
+        {
+            var ev = new BodyInitEvent();
+            RaiseLocalEvent(ent, ref ev);
+        }
     }
 
     private void OnMapInit(Entity<SurgeryTargetComponent> ent, ref MapInitEvent args)

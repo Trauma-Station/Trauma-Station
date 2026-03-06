@@ -45,13 +45,13 @@
     components:
       - type: CommandStaff
       - type: SecurityStaff # goobstation
-      # <Trauma>
-      - type: KnowledgeGrant
-        skills:
-          MeleeKnowledge: 26
-          ShootingKnowledge: 50
-          MartialArtCorporateJudo: 50
-      # </Trauma>
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 50
+      MartialArtCorporateJudo: 50
+  # </Trauma>
 
 - type: startingGear
   id: HoSGear

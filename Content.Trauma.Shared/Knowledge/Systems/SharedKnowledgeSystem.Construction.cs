@@ -14,13 +14,15 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnConstructionGetGroupEvent(Entity<KnowledgeHolderComponent> ent, ref ConstructionGetGroupsEvent args)
     {
-        if (TryGetAllKnowledgeUnits(ent) is not { } knowledge)
+        if (TryGetAllKnowledgeUnits(ent) is not {} knowledge)
             return;
 
-        foreach (var entity in knowledge)
+        foreach (var unit in knowledge)
         {
-            if (Prototype(entity)?.ID is { } protoId && TryComp<KnowledgeComponent>(entity, out var comp))
-                args.Groups.Add(protoId, comp.Level);
+            if (Prototype(unit)?.ID is { } protoId)
+                args.Groups.Add(protoId, unit.Comp.Level);
+            else
+                Log.Error($"Non-prototyped knowledge entity {ToPrettyString(unit)} inside {ToPrettyString(ent)}");
         }
     }
 }

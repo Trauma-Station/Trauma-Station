@@ -109,48 +109,31 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Gets recoil scale for gun according to knowledge system.
     /// </summary>
-    /// <param name="user"></param>
-    /// <param name="gun"></param>
-    /// <param name="recoilScale"></param>
-    private void GetRecoilScale(EntityUid? user, EntityUid gun, out float recoilScale)
+    private float GetRecoilScale(EntityUid? userUid, EntityUid gun)
     {
-        recoilScale = 1.0f;
-        if (user is not { } trueUser)
-            return;
+        if (userUid is not {} user || !HasComp<KnowledgeHolderComponent>(user))
+            return 1;
 
-        if (HasComp<KnowledgeHolderComponent>(user))
-        {
-            var shooting = _knowledge.TryGetKnowledgeUnit(trueUser, ShootingKnowledge);
-            if (shooting is { } shootingTrue)
-            {
-                if (shootingTrue.Comp.Level < 26)
-                {
-                    recoilScale = 3.0f - (float) shootingTrue.Comp.Level / 26.0f - _knowledge.SharpCurve(shootingTrue);
-                }
-                else if (shootingTrue.Comp.Level > 50)
-                {
-                    recoilScale = 1.0f - ((float) (shootingTrue.Comp.Level - 50) / 50.0f * (float) (shootingTrue.Comp.Level - 50) / 50.0f);
-                }
-            }
-            else
-            {
-                recoilScale = 3.0f;
-            }
-        }
+        if (_knowledge.GetKnowledge(user, ShootingKnowledge) is not {} shooting)
+            return 3;
+
+        return shooting.Comp.Level < 26
+            ? 3.0f - (float) shooting.Comp.Level / 26.0f - _knowledge.SharpCurve(shooting)
+            : 1.0f - ((float) (shooting.Comp.Level - 50) / 50.0f * (float) (shooting.Comp.Level - 50) / 50.0f);
     }
 
     /// <summary>
     /// Adds shooting experience according to knowledge system.
     /// </summary>
-    /// <param name="user"></param>
-    private void AddShootingExperience(EntityUid? user)
+    private void AddShootingExperience(EntityUid? userUid)
     {
-        if (user is not { } trueUser)
+        if (userUid is not {} user)
             return;
+
         var evShooting = new AddExperienceEvent(ShootingKnowledge, 1);
         var evWeapons = new AddExperienceEvent(WeaponsKnowledge, 1);
-        RaiseLocalEvent(trueUser, ref evShooting);
-        RaiseLocalEvent(trueUser, ref evWeapons);
+        RaiseLocalEvent(user, ref evShooting);
+        RaiseLocalEvent(user, ref evWeapons);
     }
 
     /// <summary>
@@ -163,6 +146,7 @@ public abstract partial class SharedGunSystem
     /// <param name="newUid">The entity identifier of the target to which knowledge construction modifiers will be added.</param>
     private void TryAddKnowledgeModifiers(EntityUid? ammoEnt, EntityUid newUid)
     {
+        // TODO: move this out of here bruh
         if (!TryComp<QualityComponent>(ammoEnt, out var ammoKnowledge))
             return;
 

@@ -1,71 +1,107 @@
+# TODO: bunch of different types of cooking
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: CookingKnowledge
+  name: Cooking
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+# TODO: cdda lol
+- type: entity
+  parent: BaseConstructionKnowledge
+  id: CraftingKnowledge
+  name: Crafting
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
 - type: entity
   parent: BaseConstructionKnowledge
   id: HandmadeKnowledge
+  name: Handmade
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: SurvivalKnowledge
+  name: Survival
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: WeaponsKnowledge
+  name: Weapons
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: MaterialsKnowledge
+  name: Materials
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: DoorsKnowledge
+  name: Doors
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: AirlocksKnowledge
+  name: Airlocks
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: ToysKnowledge
+  name: Toys
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: BananiumKnowledge
+  name: Bananium
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: BotsKnowledge
+  name: Bots
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: FurnitureKnowledge
+  name: Furniture
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: InfrastructureKnowledge
+  name: Infrastructure
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: ElectronicsKnowledge
+  name: Electronics
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: WallsKnowledge
+  name: Walls
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: ScienceKnowledge
+  name: Science
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: WindowsKnowledge
+  name: Windows
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: SpiderCraftKnowledge
+  name: Spider Webs
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: SmokeablesKnowledge
+  name: Smokeables
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: RevolutionaryKnowledge
+  name: Revolutionary

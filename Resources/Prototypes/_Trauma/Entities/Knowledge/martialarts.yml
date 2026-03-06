@@ -1,6 +1,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtCQC
+  name: Close Quarters Combat
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -14,13 +15,16 @@
 - type: entity
   parent: MartialArtCQC
   id: MartialArtCQCChef
+  name: Close Quarters Cooking
+  description: Just like CQC, but only usable in the kitchen, freezer and cafeteria.
   components:
   - type: MartialArtsKnowledge
-    blocked: true
+    blocked: true # TODO: make this its own component
 
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtCorporateJudo
+  name: Corporate Judo
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -36,7 +40,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtKravMaga
-  name: MartialArtKravMaga
+  name: Krav Maga
   components:
   - type: CanPerformCombo
   - type: ComboActions
@@ -48,6 +52,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtCapoeira
+  name: Capoeira
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -62,6 +67,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtHellRip
+  name: Hell Rip
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -73,6 +79,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtNinjutsu
+  name: Ninjutsu
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -85,6 +92,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtDragon
+  name: Dragon Kung Fu
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -95,6 +103,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtSleepingCarp
+  name: Sleeping Carp
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -102,10 +111,12 @@
     - SleepingCarpKneeHaul
     - SleepingCarpCrashingWaves
   - type: NoGun
+  # TODO: split bullet protection into its own component
 
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtPlasmaFist
+  name: Plasma Fist
   components:
   - type: CanPerformCombo
     roundstartCombos:

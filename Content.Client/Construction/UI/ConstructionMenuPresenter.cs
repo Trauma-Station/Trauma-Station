@@ -279,7 +279,8 @@ namespace Content.Client.Construction.UI
             // <Trauma>
             if (_playerManager.LocalEntity is not { } player)
                 return recipes;
-            var availableGroups = _constructionSystem!.AvailableConstructionGroups(player);
+            var useKnowledge = _constructionSystem!.IsKnowledgeHolder(player);
+            var skills = _constructionSystem.AvailableConstructionGroups(player);
             // </Trauma>
 
             foreach (var recipe in _prototypeManager.EnumeratePrototypes<ConstructionPrototype>())
@@ -289,11 +290,13 @@ namespace Content.Client.Construction.UI
 
                 if (_playerManager.LocalSession == null
                     || _playerManager.LocalEntity == null
-                    || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value)
-                    // <Trauma>
-                    || (_constructionSystem.IsKnowledgeHolder(_playerManager.LocalEntity.Value) && !recipe.Groups.Keys.All(group => availableGroups.ContainsKey(group))))
-                    // </Trauma>
+                    || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value))
                     continue;
+
+                // <Trauma> - don't allow a recipe if the user is missing any needed skills
+                if (useKnowledge && !_constructionSystem.CheckConstructionGroups(skills, recipe))
+                    continue;
+                // </Trauma>
 
                 if (!string.IsNullOrEmpty(search) && (recipe.Name is { } name &&
                                                       !name.Contains(search.Trim(),

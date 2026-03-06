@@ -31,12 +31,12 @@
   - !type:AddComponentSpecial
     components: # Intentionally no surgery buff, you're reliable but not powerful as a real doctor
     - type: SecurityStaff
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FirstAidKnowledge: 26
-        SurgeryKnowledge: 26
-    # </Trauma>
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      FirstAidKnowledge: 26
+      SurgeryKnowledge: 26
+  # </Trauma>
 
 - type: chameleonOutfit
   id: BrigmedicChameleonOutfit

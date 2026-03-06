@@ -17,12 +17,10 @@
   - Maintenance
   # <Trauma>
   special:
-  - !type:AddComponentSpecial
-    components:
-      - type: KnowledgeGrant
-        skills:
-          TechnologyKnowledge: 26
-          ScienceKnowledge: 26
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      TechnologyKnowledge: 26
+      ScienceKnowledge: 26
   extendedAccess:
   - Robotics
   - Genetics

@@ -17,8 +17,10 @@ using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
+
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -31,28 +33,69 @@ public abstract partial class SharedKnowledgeSystem
 
     private void InitializeMartialArts()
     {
+        SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeRemovedEvent>(OnMartialArtRemoved);
+
+        SubscribeLocalEvent<ComboActionsComponent, KnowledgeEnabledEvent>(OnComboActionsEnabled);
+        SubscribeLocalEvent<ComboActionsComponent, KnowledgeDisabledEvent>(OnComboActionsDisabled);
+
         SubscribeLocalEvent<KnowledgeHolderComponent, ShotAttemptedEvent>(OnShotAttempt);
         SubscribeLocalEvent<NoGunComponent, ShotAttemptedEvent>(OnShotAttemptKnowledge);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeInteractHandEvent>(OnInteract);
         SubscribeLocalEvent<KnowledgeHolderComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
-        SubscribeLocalEvent<MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<KnowledgeHolderComponent, MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeStaminaDamageEvent>(OnStaminaTakeDamage);
-        SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(OnTakeDamage);
+        SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
+        SubscribeLocalEvent<KnowledgeHolderComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(CheckGrabStageOverridePass);
         SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(OnSpeedModifier);
         SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(OnProjectileHit);
         SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
         SubscribeLocalEvent<PerformMartialArtComboEvent>(OnComboActionClicked);
 
-        SubscribeNetworkEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
+        SubscribeAllEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
+    }
+
+    private void OnMartialArtAdded(Entity<MartialArtsKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
+    {
+        // if you learn a martial art without one active, automatically select it
+        if (args.Container.Comp.ActiveMartialArt != null)
+            return;
+
+        ChangeMartialArts(args.Container, args.Holder, ent);
+    }
+
+    private void OnMartialArtRemoved(Entity<MartialArtsKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
+    {
+        if (args.Container.Comp.ActiveMartialArt == ent.Owner)
+            ChangeMartialArts(args.Container, args.Holder, null); // disables the skill internally
+    }
+
+    private void OnComboActionsEnabled(Entity<ComboActionsComponent> ent, ref KnowledgeEnabledEvent args)
+    {
+        var user = args.Holder;
+        foreach (var (comboId, actionId) in ent.Comp.StoredComboActions)
+        {
+            if (_actions.AddAction(user, actionId) is {} action)
+                ent.Comp.ComboActions[comboId] = action;
+        }
+        Dirty(ent);
+    }
+
+    private void OnComboActionsDisabled(Entity<ComboActionsComponent> ent, ref KnowledgeDisabledEvent args)
+    {
+        var user = args.Holder;
+        foreach (var action in ent.Comp.ComboActions.Values)
+        {
+            _actions.RemoveAction(user, action);
+        }
+        ent.Comp.ComboActions.Clear();
+        Dirty(ent);
     }
 
     private void OnShotAttempt(Entity<KnowledgeHolderComponent> ent, ref ShotAttemptedEvent args)
     {
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledge))
-            return;
-
-        if (knowledge.MartialArtSkillUid is not { } martialArtUid || !HasComp<MartialArtsKnowledgeComponent>(martialArtUid))
+        if (GetContainer(ent) is not {} brain ||
+            brain.Comp.ActiveMartialArt is not { } martialArtUid)
             return;
 
         RaiseLocalEvent(martialArtUid, ref args);
@@ -71,41 +114,30 @@ public abstract partial class SharedKnowledgeSystem
         if (ent.Owner == args.Target || !HasComp<MobStateComponent>(args.Target))
             return;
 
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
+        if (GetActiveMartialArt(ent) is not {} skill)
             return;
 
-        if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid)
-            return;
-
-        RaiseLocalEvent(ent.Owner, new ComboAttackPerformedEvent(ent.Owner, args.Target, ent.Owner, ComboAttackType.Hug));
+        RaiseLocalEvent(skill, new ComboAttackPerformedEvent(ent.Owner, args.Target, ent.Owner, ComboAttackType.Hug));
     }
 
     public void OnComboAttackPerformed(Entity<KnowledgeHolderComponent> ent, ref ComboAttackPerformedEvent args)
     {
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
-            return;
-
-        if (knowledgeContainerComp.MartialArtSkillUid is not { } martialArtSkillUid || !TryComp<MartialArtsKnowledgeComponent>(martialArtSkillUid, out var martialArtComp))
-            return;
-
-        RaiseLocalEvent(martialArtSkillUid, args);
+        if (GetActiveMartialArt(ent) is {} skill)
+            RaiseLocalEvent(skill, args);
     }
 
-    private void OnMeleeHit(MeleeHitEvent args)
+    private void OnMeleeHit(Entity<KnowledgeHolderComponent> ent, ref MeleeHitEvent args)
     {
         if (args.Handled)
             return;
 
-        var ent = args.User;
-
-        if (!TryComp<KnowledgeHolderComponent>(ent, out var knowledgeComp) || knowledgeComp.KnowledgeEntity == null)
+        var user = args.User;
+        if (GetContainer(ent) is not {} brain)
             return;
 
         var bonus = 0f;
-        if (TryGetKnowledgeUnit(ent, StrengthKnowledge) is { } strength)
-        {
+        if (GetKnowledge(brain, StrengthKnowledge) is {} strength)
             bonus += 3 * SharpCurve(strength);
-        }
 
         if (GetActiveMartialArt(ent) is { } martialArt)
         {
@@ -120,31 +152,43 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnStaminaTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeStaminaDamageEvent args)
     {
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
+        if (GetContainer(ent) is not {} brain)
             return;
 
-        if (TryGetKnowledgeUnit(ent, AthleticsKnowledge) is { } athletics)
+        if (GetKnowledge(brain, AthleticsKnowledge) is {} athletics)
         {
             if (args.Value > 0)
                 args.Value *= 1 - 0.99f * SharpCurve(athletics);
         }
         if (args.Value > 0 && _mobState.IsAlive(ent))
         {
-            var ev = new AddExperienceEvent(AthleticsKnowledge, Math.Min((int) args.Value / 5, 10));
-            RaiseLocalEvent(ent, ref ev);
+            AddExperience(brain, AthleticsKnowledge, Math.Min((int) args.Value / 5, 10));
         }
     }
 
-    private void OnTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeDamageChangedEvent args)
+    private void OnBeforeDamageChanged(Entity<KnowledgeHolderComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        if (TryGetKnowledgeUnit(ent, ToughnessKnowledge) is { } toughness && _mobState.IsAlive(ent.Owner))
+        // most environment things like radiation should have no origin?
+        if (args.Damage.GetTotal() <= 0 || args.Origin == null)
+            return;
+
+        if (GetKnowledge(ent, ToughnessKnowledge) is {} toughness && _mobState.IsAlive(ent.Owner))
         {
-            if (args.Damage.GetTotal() > 0)
-                args.Damage *= 1 - 0.99f * SharpCurve(toughness);
+            args.Damage *= 1 - 0.99f * SharpCurve(toughness);
         }
-        if (args.Damage.GetTotal() > 0 && !_mobState.IsDead(ent))
+    }
+
+    private void OnDamageChanged(Entity<KnowledgeHolderComponent> ent, ref DamageChangedEvent args)
+    {
+        // ignore healing or things like radiation
+        if (args.DamageDelta is not {} delta || !args.DamageIncreased || !args.InterruptsDoAfters ||
+            // pvs can remove the brain sometimes so dont get trolled
+            _timing.ApplyingState || !_timing.IsFirstTimePredicted)
+            return;
+
+        if (_mobState.IsAlive(ent))
         {
-            var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) args.Damage.GetTotal() / 5, 10));
+            var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) delta.GetTotal() / 5, 10));
             RaiseLocalEvent(ent, ref ev);
         }
         if (GetActiveMartialArt(ent) is { } martialArt)
@@ -156,60 +200,55 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnUpdateMartialArts(KnowledgeUpdateMartialArtsEvent ev, EntitySessionEventArgs args)
     {
-        if (args.SenderSession.AttachedEntity is not { } player)
+        if (args.SenderSession.AttachedEntity is not { } player ||
+            GetContainer(player) is not {} ent)
             return;
 
-        var knowledgeUid = GetEntity(ev.Knowledge);
-        string? proto = null;
-        if (knowledgeUid is { } notNullKnowledge)
-            proto = Prototype(notNullKnowledge)?.ID;
+        var unit = ev.Knowledge is {} id
+            ? GetKnowledge(ent, id)
+            : null;
 
-        if (knowledgeUid is { } && proto is { } && TryGetKnowledgeUnit(player, proto) is { } trueKnowledge && trueKnowledge != knowledgeUid) // Anti-cheat line, if the client is trying to set a martial art they don't actually have and not null, ignore it.
-            return;
+        if (unit != null && !HasComp<MartialArtsKnowledgeComponent>(unit))
+            return; // no setting construction as your martial art...
 
-        ChangeMartialArts(player, knowledgeUid);
+        ChangeMartialArts(ent, player, unit);
     }
 
-    public void ChangeMartialArts(EntityUid player, EntityUid? knowledgeUid)
+    public void ChangeMartialArts(Entity<KnowledgeContainerComponent> ent, EntityUid user, EntityUid? knowledgeUid)
     {
-        if (!TryComp<KnowledgeHolderComponent>(player, out var knowledgeHolder) || TryGetKnowledgeContainer((player, knowledgeHolder)) is not { } knowledgeEnt)
-            return;
+        if (ent.Comp.ActiveMartialArt == knowledgeUid)
+            return; // no change
 
-        if (TryComp<ComboActionsComponent>(knowledgeEnt.Comp.MartialArtSkillUid, out var actionComp))
+        if (ent.Comp.ActiveMartialArt is {} old)
         {
-            foreach (var (comboId, actionEntity) in actionComp.ComboActions)
-            {
-                _actions.RemoveAction(player, actionEntity);
-            }
-            actionComp.ComboActions.Clear();
+            var ev = new KnowledgeDisabledEvent(ent, user);
+            RaiseLocalEvent(old, ref ev);
         }
 
-        knowledgeEnt.Comp.MartialArtSkillUid = knowledgeUid;
+        ent.Comp.ActiveMartialArt = knowledgeUid;
+        DirtyField(ent, ent.Comp, nameof(ent.Comp.ActiveMartialArt));
 
-        if (TryComp<ComboActionsComponent>(knowledgeEnt.Comp.MartialArtSkillUid, out var actionCompTwo))
+        if (knowledgeUid is {} unit)
         {
-            foreach (var (comboId, actionId) in actionCompTwo.StoredComboActions)
-            {
-                if (_actions.AddAction(player, actionId) is { } action)
-                    actionCompTwo.ComboActions[comboId] = action;
-            }
+            DebugTools.Assert(HasComp<MartialArtsKnowledgeComponent>(unit),
+                $"Tried to use {ToPrettyString(knowledgeUid)} as martial art for {ToPrettyString(user)}!");
+            var ev = new KnowledgeEnabledEvent(ent, user);
+            RaiseLocalEvent(unit, ref ev);
+            _popup.PopupClient(Loc.GetString("knowledge-martial-art-selected", ("name", Name(unit))), user, user);
         }
-
-        Dirty(knowledgeEnt);
+        else
+        {
+            _popup.PopupClient(Loc.GetString("knowledge-martial-art-deselected"), user, user);
+        }
     }
 
-    private EntityUid? GetActiveMartialArt(EntityUid target)
-    {
-        if (TryGetKnowledgeEntity(target) is { } brain && TryComp<KnowledgeContainerComponent>(brain, out var knowledgeContainerComp) && knowledgeContainerComp.MartialArtSkillUid is { } martialArt)
-            return martialArt;
-        return null;
-    }
+    public EntityUid? GetActiveMartialArt(EntityUid target)
+        => GetContainer(target)?.Comp.ActiveMartialArt;
 
     private void CheckGrabStageOverridePass(Entity<KnowledgeHolderComponent> ent, ref CheckGrabOverridesEvent args)
     {
-        var martialArt = GetActiveMartialArt(ent);
-        if (martialArt is { } martialArtSkillUid)
-            RaiseLocalEvent(martialArtSkillUid, ref args);
+        if (GetActiveMartialArt(ent) is {} uid)
+            RaiseLocalEvent(uid, ref args);
     }
 
     private void OnSpeedModifier(Entity<KnowledgeHolderComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
