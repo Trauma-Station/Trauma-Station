@@ -6,36 +6,32 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Content.Server.Database.Migrations.Postgres
 {
     /// <inheritdoc />
-    public partial class TraumaSkillProfiles : Migration
+    public partial class TraumaSkillProfilesNull : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "knowledge_mastery",
-                table: "profile",
-                type: "text",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<List<string>>(
+            migrationBuilder.AlterColumn<List<string>>(
                 name: "knowledge_removed",
                 table: "profile",
                 type: "text[]",
                 nullable: false,
-                defaultValue: new List<string>());
+                defaultValueSql: "ARRAY[]::text[]",
+                oldClrType: typeof(List<string>),
+                oldType: "text[]");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "knowledge_mastery",
-                table: "profile");
-
-            migrationBuilder.DropColumn(
+            migrationBuilder.AlterColumn<List<string>>(
                 name: "knowledge_removed",
-                table: "profile");
+                table: "profile",
+                type: "text[]",
+                nullable: false,
+                oldClrType: typeof(List<string>),
+                oldType: "text[]",
+                oldDefaultValueSql: "ARRAY[]::text[]");
         }
     }
 }
