@@ -86,7 +86,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         _containerQuery = GetEntityQuery<KnowledgeContainerComponent>();
         _holderQuery = GetEntityQuery<KnowledgeHolderComponent>();
 
-        LoadPrototypes();
+        LoadSkillPrototypes();
+        LoadProfilePrototypes();
     }
 
     public override void Update(float frameTime)
@@ -201,10 +202,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<EntityPrototype>())
-            LoadPrototypes();
+            LoadSkillPrototypes();
+        if (args.WasModified<KnowledgeProfilePrototype>())
+            LoadProfilePrototypes();
     }
 
-    private void LoadPrototypes()
+    private void LoadSkillPrototypes()
     {
         AllKnowledges.Clear();
         var name = Factory.GetComponentName<KnowledgeComponent>();
@@ -529,7 +532,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return (uid, comp);
 
         // otherwise try use the cached brain
-        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not {} ent)
+        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not {} ent || !ent.IsValid())
             return null;
 
         return (ent, _containerQuery.Comp(ent));

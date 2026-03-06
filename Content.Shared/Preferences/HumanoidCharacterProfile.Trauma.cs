@@ -3,6 +3,7 @@ using Content.Shared.Dataset;
 using Content.Shared.Humanoid;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -20,7 +21,7 @@ public sealed partial class HumanoidCharacterProfile
     /// Changes to mastery level of every skill for this character, added to the species masteries.
     /// </summary>
     [DataField]
-    public KnowledgeProfile Knowledge = new(new());
+    public KnowledgeProfile Knowledge = new();
 
     public static ProtoId<BarkPrototype> RandomBark(IRobustRandom random, IPrototypeManager proto, string species)
     {
@@ -42,5 +43,16 @@ public sealed partial class HumanoidCharacterProfile
     public HumanoidCharacterProfile WithKnowledge(KnowledgeProfile knowledge)
     {
         return new(this) { Knowledge = knowledge };
+    }
+
+    private void EnsureValidTrauma(IDependencyCollection collection, IPrototypeManager proto)
+    {
+        if (!proto.HasIndex(BarkVoice))
+            BarkVoice = HumanoidProfileSystem.DefaultBarkVoice;
+
+        var entMan = collection.Resolve<IEntityManager>();
+        var knowledge = entMan.System<CommonKnowledgeSystem>();
+        var parent = proto.Index(Species).Knowledge;
+        knowledge.EnsureProfileValid(parent, ref Knowledge);
     }
 }

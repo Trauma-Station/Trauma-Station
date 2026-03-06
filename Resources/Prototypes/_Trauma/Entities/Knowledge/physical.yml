@@ -5,6 +5,7 @@
   components:
   - type: Knowledge
     experienceCost: 20
+    costs: [3, 6, 10, 14, 20, 28] # Goku is rare...
 
 - type: entity
   parent: BasePhysicalKnowledge

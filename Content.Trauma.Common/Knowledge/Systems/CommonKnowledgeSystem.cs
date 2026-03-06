@@ -49,6 +49,12 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract void ModifyValues(Entity<QualityComponent> ent);
 
     /// <summary>
+    /// Sanitize a profile, removing any invalid skills.
+    /// Does not care about point limits.
+    /// </summary>
+    public abstract void EnsureProfileValid([ForbidLiteral] ProtoId<KnowledgeProfilePrototype> parentId, ref KnowledgeProfile profile);
+
+    /// <summary>
     /// Apply a parent and character profile to a mob.
     /// This clears the knowledge container then adds every skill allowed by the parent's points.
     /// </summary>

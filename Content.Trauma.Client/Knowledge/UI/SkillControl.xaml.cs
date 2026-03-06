@@ -12,23 +12,25 @@ public sealed partial class SkillControl : BoxContainer
 {
     public event Action<int>? OnChangeMastery;
 
-    private readonly KnowledgeComponent _comp;
+    private readonly int[] _costs;
+    public int Mastery;
 
-    public SkillControl(string name, KnowledgeComponent comp)
+    public SkillControl(string name, int[] costs)
     {
         RobustXamlLoader.Load(this);
 
-        _comp = comp;
+        _costs = costs;
 
         SkillLabel.Text = name;
 
         DecreaseButton.OnPressed += _ => OnChangeMastery?.Invoke(-1);
-        IncreaseButton.OnPressed += _ => OnChangeMastery?.Invoke(1);
+        IncreaseButton.OnPressed += _ => OnChangeMastery?.Invoke(+1);
     }
 
     public void SetMastery(string name, int mastery)
     {
-        var cost = _comp.Costs[mastery];
+        Mastery = mastery;
+        var cost = _costs[mastery];
         MasteryLabel.Text = Loc.GetString("knowledge-editor-mastery", ("mastery", name), ("cost", cost));
         // decrease button is also used for removing, only increase can be disabled
         IncreaseButton.Disabled = mastery >= 5;

@@ -670,6 +670,8 @@ namespace Content.Shared.Preferences
             {
                 _loadouts.Remove(value);
             }
+
+            EnsureValidTrauma(collection, prototypeManager); // Trauma
         }
 
         /// <summary>

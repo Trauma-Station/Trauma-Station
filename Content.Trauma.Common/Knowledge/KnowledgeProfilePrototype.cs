@@ -7,6 +7,7 @@ namespace Content.Trauma.Common.Knowledge;
 /// <summary>
 /// A knowledge profile for a species.
 /// This is the base of any character's skills, the humanoid profile can then tweak it.
+/// The point cost of this profile is used as the points limit which players can work with.
 /// </summary>
 [Prototype]
 public sealed partial class KnowledgeProfilePrototype : IPrototype
@@ -16,13 +17,4 @@ public sealed partial class KnowledgeProfilePrototype : IPrototype
 
     [IncludeDataField]
     public KnowledgeProfile Profile;
-
-    /// <summary>
-    /// How many points you can spend on skills.
-    /// Must at least be enough for <see cref="Profile"/>.
-    /// Unused points are wasted.
-    /// </summary>
-    // TODO: write a test that this always holds.
-    [DataField(required: true)]
-    public int Points;
 }

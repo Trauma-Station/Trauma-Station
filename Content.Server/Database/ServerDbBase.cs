@@ -279,8 +279,9 @@ namespace Content.Server.Database
             profile.KnowledgeMastery.Clear();
             foreach (var (id, mastery) in humanoid.Knowledge.Mastery)
             {
-                profile.KnowledgeMastery.Add(id, mastery);
+                profile.KnowledgeMastery[id] = mastery;
             }
+            profile.KnowledgeRemoved = humanoid.Knowledge.RemovedList();
             // </Trauma>
 
             profile.Loadouts.Clear();

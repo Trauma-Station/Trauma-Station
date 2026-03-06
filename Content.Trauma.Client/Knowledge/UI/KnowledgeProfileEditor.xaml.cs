@@ -20,6 +20,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
 
     private KnowledgeProfilePrototype _parent = default!;
     private KnowledgeProfile _profile = default!;
+    private bool _modified;
 
     public KnowledgeProfileEditor(IPrototypeManager proto, KnowledgeSystem knowledge)
     {
@@ -31,14 +32,16 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         AvailableSkills.OnItemSelected += args =>
         {
             var id = (EntProtoId) args.ItemList[args.ItemIndex].Metadata;
-            _profile.Mastery[id] = 0;
-            UpdatePoints();
-            // TODO
+            _profile.Mastery[id] = 0; // cheapest start
+            _profile.Removed.Remove(id); // can't be removed if it's added, can it
+            _modified = true;
+            ReloadSkills();
         };
 
         SaveButton.OnPressed += _ =>
         {
             OnSave?.Invoke(_profile);
+            _modified = false;
             SaveButton.Disabled = true;
         };
     }
@@ -47,19 +50,32 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
     {
         _profile = profile;
         _parent = _proto.Index(_proto.Index(species).Knowledge);
-        var combined = profile.AddProfile(_parent.Profile);
+        ReloadSkills();
+    }
+
+    private void ReloadSkills()
+    {
+        var combined = _profile.AddProfile(_parent.Profile);
         UpdatePoints(combined);
 
         EnabledSkills.RemoveAllChildren();
+        NoSkillsLabel.Visible = combined.Mastery.Count == 0;
         foreach (var (id, mastery) in combined.Mastery)
         {
             var name = _proto.Index(id).Name;
             var comp = _knowledge.AllKnowledges[id];
-            var control = new SkillControl(name, comp);
-            control.SetMastery(_knowledge.GetMasteryString(mastery), mastery);
-            control.OnChangeMastery += add =>
+            if (comp.Costs is not {} costs)
             {
-                var sum = mastery + add;
+                Log.Error($"Invalid skill {id} in profile!");
+                continue;
+            }
+
+            // a lot of the logic here is evil because the UI displays combined parent + diff, but internally its only modifying the diff
+            var control = new SkillControl(name, costs);
+            control.SetMastery(_knowledge.GetMasteryString(mastery), mastery);
+            control.OnChangeMastery += diff =>
+            {
+                var sum = control.Mastery + diff;
                 if (sum > 5)
                     return;
 
@@ -67,30 +83,38 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
                 {
                     control.Orphan();
                     _profile.Mastery.Remove(id);
+                    if (_parent.Profile.Mastery.ContainsKey(id))
+                        _profile.Removed.Add(id);
+                    // removed the skill so now it can be added again
+                    AddAvailableSkill(id, costs[0]);
                 }
                 else
                 {
                     control.SetMastery(_knowledge.GetMasteryString(sum), sum);
-                    _profile.Mastery[id] = sum;
+                    _profile.Mastery[id] = _profile.Mastery.GetValueOrDefault(id) + diff;
                 }
+                _modified = true;
                 UpdatePoints();
             };
             EnabledSkills.AddChild(control);
         }
 
         AvailableSkills.Clear();
-        // TODO
         foreach (var (id, comp) in _knowledge.AllKnowledges)
         {
-            // exclude ones that are already added
-            if (combined.Mastery.ContainsKey(id))
+            // don't list ones that are already added
+            if (combined.Mastery.ContainsKey(id) || comp.Costs is not {} costs)
                 continue;
 
-            var name = _proto.Index(id).Name;
-            var cost = comp.Costs[0]; // cost to just enable it
-            var text = Loc.GetString("knowledge-editor-item", ("name", name), ("cost", cost));
-            AvailableSkills.AddItem(text, metadata: id);
+            AddAvailableSkill(id, costs[0]);
         }
+    }
+
+    private void AddAvailableSkill(EntProtoId id, int cost)
+    {
+        var name = _proto.Index(id).Name;
+        var text = Loc.GetString("knowledge-editor-item", ("name", name), ("cost", cost));
+        AvailableSkills.AddItem(text, metadata: id);
     }
 
     private void UpdatePoints()
@@ -101,12 +125,15 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
 
     private void UpdatePoints(KnowledgeProfile combined)
     {
-        var points = _parent.Points;
+        var points = _knowledge.PointLimits[_parent];
         var cost = _knowledge.ProfileCost(combined);
         points -= cost;
         PointsLabel.Text = Loc.GetString("knowledge-editor-points", ("points", points));
         if (points >= 0)
+        {
+            SaveButton.Disabled = !_modified;
             return;
+        }
 
         // can't save with a deficit
         SaveButton.Disabled = true;

@@ -84,7 +84,8 @@ public sealed partial class KnowledgeComponent : Component
     /// <summary>
     /// Array of point costs for each mastery level, including 0.
     /// There are 6 of them total.
+    /// If this is null, you can't opt in to this knowledge.
     /// </summary>
     [DataField(required: true)]
-    public int[] Costs = default!;
+    public int[]? Costs = null;
 }

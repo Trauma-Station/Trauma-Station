@@ -97,6 +97,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         };
         editor.TabContainer.AddChild(tab);
         tab.SetPositionInParent(index);
+        TabContainer.SetTabTitle(tab, Loc.GetString("knowledge-editor-tab"));
     }
 
     /// <summary>

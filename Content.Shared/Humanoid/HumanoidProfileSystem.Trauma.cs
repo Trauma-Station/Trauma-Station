@@ -98,7 +98,7 @@ public sealed partial class HumanoidProfileSystem
             new(),
             new(),
             ent.Comp.BarkVoice,
-            ent.Comp.Knowledge.Copy());
+            new(ent.Comp.Knowledge));
     }
 
     /// <summary>
