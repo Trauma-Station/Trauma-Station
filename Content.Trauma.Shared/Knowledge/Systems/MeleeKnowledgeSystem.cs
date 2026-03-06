@@ -22,7 +22,6 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeExperience);
-        SubscribeLocalEvent<KnowledgeHolderComponent, AttemptMeleeEvent>(OnMeleeAttack);
     }
 
     private void OnMeleeExperience(MeleeHitEvent args)
@@ -54,7 +53,7 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
         }
         Log.Error($"{ToPrettyString(args.User)} lcasdf");
 
-        if (_knowledge.GetMastery(melee.Comp) < 2 && SharedRandomExtensions.PredictedProb(_timing, 1 - _knowledge.SharpCurve(melee, 0, 26), GetNetEntity(ent)))
+        if (_knowledge.GetMastery(melee.Comp) < 2 && SharedRandomExtensions.PredictedProb(_timing, 1 - _knowledge.SharpCurve(melee, 0, 26), GetNetEntity(args.User)))
         {
             Log.Error($"{ToPrettyString(args.User)} aSS");
             args.Handled = true;
