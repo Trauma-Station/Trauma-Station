@@ -15,7 +15,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                 table: "profile",
                 type: "TEXT",
                 nullable: false,
-                defaultValueSql: "ARRAY[]::text[]",
                 oldClrType: typeof(string),
                 oldType: "TEXT");
         }
@@ -29,8 +28,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                 type: "TEXT",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "TEXT",
-                oldDefaultValueSql: "ARRAY[]::text[]");
+                oldType: "TEXT");
         }
     }
 }
