@@ -8,34 +8,6 @@
     experienceCost: 15
     costs: [1, 2, 3, 4, 8, 12] # basic cooking is easy to practice
 
-# TODO: cdda lol
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: CraftingKnowledge
-  name: Crafting
-  components:
-  - type: Knowledge
-    experienceCost: 15
-    costs: [1, 2, 4, 6, 10, 14]
-
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: HandmadeKnowledge
-  name: Handmade
-
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: SurvivalKnowledge
-  name: Survival
-
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: WeaponsKnowledge
-  name: Weapons
-  components:
-  - type: Knowledge
-    costs: [2, 4, 7, 10, 16, 20] # homemade guns are harder to make, and rare to be trained on
-
 - type: entity
   parent: BaseConstructionKnowledge
   id: MaterialsKnowledge

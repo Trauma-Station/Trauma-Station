@@ -48,6 +48,8 @@
   id: MartialArtKravMaga
   name: Krav Maga
   components:
+  - type: Knowledge
+    costs: null # unobtainable for now
   - type: CanPerformCombo
   - type: ComboActions
     storedComboActions:
