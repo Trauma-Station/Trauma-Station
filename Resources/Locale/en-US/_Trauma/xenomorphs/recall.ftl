@@ -1,5 +1,3 @@
-
-
 xeno-queen-shuttle-recall-sender = Central Command
 
 xeno-queen-shuttle-recall-announcement =

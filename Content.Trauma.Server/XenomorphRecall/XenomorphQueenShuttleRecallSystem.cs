@@ -8,7 +8,7 @@ using Content.Shared.Mobs.Components;
 using Robust.Shared.Localization;
 using Robust.Shared.Timing;
 
-namespace Content.Server._White.Xenomorphs;
+namespace Content.Trauma.Server.XenomorphsRecall;
 
 public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
 {
@@ -29,6 +29,9 @@ public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
 
         _nextCheck = _timing.CurTime + CheckInterval;
 
+        if (_roundEnd.ExpectedCountdownEnd == null || _emergency.EmergencyShuttleArrived)
+            return;
+
         var queenAlive = false;
 
         if (_roundEnd.GetStation() is not {} stationMap)
@@ -47,7 +50,7 @@ public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
             break;
         }
 
-        if (queenAlive && _roundEnd.ExpectedCountdownEnd != null && !_emergency.EmergencyShuttleArrived)
+        if (queenAlive)
         {
             _roundEnd.CancelRoundEndCountdown(forceRecall: true);
             _chat.DispatchGlobalAnnouncement(
