@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Medical.Shared.Abductor;
 using Content.Medical.Shared.ItemSwitch;
 using Content.Server.Humanoid.Systems;
@@ -39,49 +37,40 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AbductorVestDisguiseComponent, GotEquippedEvent>(OnEquipped);
-        SubscribeLocalEvent<AbductorVestDisguiseComponent, GotUnequippedEvent>(OnUnequipped);
-        SubscribeLocalEvent<AbductorVestDisguiseComponent, ItemSwitchedEvent>(OnItemSwitch);
+        SubscribeLocalEvent<AbductorVestDisguiseComponent, ComponentInit>(OnDisguiseAdded);
+        SubscribeLocalEvent<AbductorVestDisguiseComponent, ComponentShutdown>(OnDisguiseRemoved);
     }
 
-    private void OnEquipped(Entity<AbductorVestDisguiseComponent> ent, ref GotEquippedEvent args)
-    {
-        if (!TryComp<AbductorVestComponent>(ent, out var vest) || vest.CurrentState != AbductorArmorModeType.Stealth)
-            return;
-
-        ApplyDisguise(ent, args.Equipee);
-    }
-
-    private void OnUnequipped(Entity<AbductorVestDisguiseComponent> ent, ref GotUnequippedEvent args)
-    {
-        RestoreAppearance(ent, args.Equipee);
-    }
-
-    private void OnItemSwitch(Entity<AbductorVestDisguiseComponent> ent, ref ItemSwitchedEvent args)
+    private void OnDisguiseAdded(Entity<AbductorVestDisguiseComponent> ent, ref ComponentInit args)
     {
         var user = Transform(ent).ParentUid;
         if (!HasComp<MobStateComponent>(user))
             return;
 
-        if (Enum.TryParse<AbductorArmorModeType>(args.State, ignoreCase: true, out var state))
-        {
-            if (state == AbductorArmorModeType.Stealth)
-                ApplyDisguise(ent, user);
-            else
-                RestoreAppearance(ent, user);
-        }
+        ApplyDisguise(user);
     }
 
-    private void ApplyDisguise(Entity<AbductorVestDisguiseComponent> ent, EntityUid user)
+    private void OnDisguiseRemoved(Entity<AbductorVestDisguiseComponent> ent, ref ComponentShutdown args)
+    {
+        var user = Transform(ent).ParentUid;
+        if (!HasComp<MobStateComponent>(user))
+            return;
+
+        RestoreAppearance(user);
+    }
+
+    private void ApplyDisguise(EntityUid user)
     {
         if (!TryComp<BodyComponent>(user, out var body) || body.Organs == null)
             return;
 
-        if (ent.Comp.OriginalOrganData != null)
+        var disguise = EnsureComp<AbductorDisguiseStateComponent>(user);
+
+        if (disguise.OriginalOrganData != null)
             return;
 
-        ent.Comp.OriginalName = MetaData(user).EntityName;
-        ent.Comp.OriginalOrganData = new();
+        disguise.OriginalName = MetaData(user).EntityName;
+        disguise.OriginalOrganData = new();
 
         var humanOrganData = new Dictionary<Enum, PrototypeLayerData>();
         foreach (var proto in HumanVisualOrgans)
@@ -100,7 +89,7 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
             if (!humanOrganData.TryGetValue(visualOrgan.Layer, out var humanData))
                 continue;
 
-            ent.Comp.OriginalOrganData[organUid] = visualOrgan.Data;
+            disguise.OriginalOrganData[organUid] = visualOrgan.Data;
             visualOrgan.Data = humanData;
             Dirty(organUid, visualOrgan);
         }
@@ -112,9 +101,12 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
         _identity.QueueIdentityUpdate(user);
     }
 
-    private void RestoreAppearance(Entity<AbductorVestDisguiseComponent> ent, EntityUid user)
+    private void RestoreAppearance(EntityUid user)
     {
-        if (ent.Comp.OriginalOrganData == null || ent.Comp.OriginalName == null)
+        if (!TryComp<AbductorDisguiseStateComponent>(user, out var disguise))
+            return;
+
+        if (disguise.OriginalOrganData == null || disguise.OriginalName == null)
             return;
 
         if (!TryComp<BodyComponent>(user, out var body) || body.Organs == null)
@@ -125,17 +117,16 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
             if (!TryComp<VisualOrganComponent>(organUid, out var visualOrgan))
                 continue;
 
-            if (!ent.Comp.OriginalOrganData.TryGetValue(organUid, out var originalData))
+            if (!disguise.OriginalOrganData.TryGetValue(organUid, out var originalData))
                 continue;
 
             visualOrgan.Data = originalData;
             Dirty(organUid, visualOrgan);
         }
 
-        _metaData.SetEntityName(user, ent.Comp.OriginalName);
+        _metaData.SetEntityName(user, disguise.OriginalName);
         _identity.QueueIdentityUpdate(user);
 
-        ent.Comp.OriginalOrganData = null;
-        ent.Comp.OriginalName = null;
+        RemComp<AbductorDisguiseStateComponent>(user);
     }
 }

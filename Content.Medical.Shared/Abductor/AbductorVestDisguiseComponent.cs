@@ -8,6 +8,11 @@ namespace Content.Medical.Shared.Abductor;
 [RegisterComponent]
 public sealed partial class AbductorVestDisguiseComponent : Component
 {
+}
+
+[RegisterComponent]
+public sealed partial class AbductorDisguiseStateComponent : Component
+{
     [DataField]
     public string? OriginalName;
 
