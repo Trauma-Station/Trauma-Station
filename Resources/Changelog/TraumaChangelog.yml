@@ -3668,3 +3668,10 @@ Entries:
   id: 434
   time: '2026-03-06T15:59:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1040
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed geneticist job having no description.
+  id: 435
+  time: '2026-03-06T17:23:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1051
