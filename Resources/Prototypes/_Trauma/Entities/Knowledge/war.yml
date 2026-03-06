@@ -5,7 +5,6 @@
   components:
   - type: Knowledge
     experienceCost: 15
-    costs: [1, 2, 3, 4, 8, 12]
 
 - type: entity
   parent: BaseWarKnowledge
@@ -14,4 +13,3 @@
   components:
   - type: Knowledge
     experienceCost: 15
-    costs: [2, 4, 6, 8, 12, 16] # it's harder to get a gun to train with
