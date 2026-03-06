@@ -45,17 +45,14 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
         if (_knowledge.GetContainer(args.User) is not { } brain)
             return;
 
-        Log.Error($"{ToPrettyString(args.User)}");
         if (_knowledge.GetKnowledge(brain, _meleeKnowledge) is not { } melee)
         {
             args.Handled = true;
             return;
         }
-        Log.Error($"{ToPrettyString(args.User)} lcasdf");
 
         if (_knowledge.GetMastery(melee.Comp) < 2 && SharedRandomExtensions.PredictedProb(_timing, 1 - _knowledge.SharpCurve(melee, 0, 26), GetNetEntity(args.User)))
         {
-            Log.Error($"{ToPrettyString(args.User)} aSS");
             args.Handled = true;
         }
     }
