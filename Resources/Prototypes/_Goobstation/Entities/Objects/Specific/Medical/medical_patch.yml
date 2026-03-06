@@ -228,7 +228,7 @@
   theory:
     FirstAidKnowledge: 1
     HandmadeKnowledge: 2
-  theory:
+  practical:
     HandmadeKnowledge: 3
 
 - type: constructionGraph
