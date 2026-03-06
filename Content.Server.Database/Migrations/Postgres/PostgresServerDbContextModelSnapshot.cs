@@ -1242,8 +1242,8 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("text[]")
-                        .HasColumnName("knowledge_removed")
-                        .HasDefaultValueSql("ARRAY[]::text[]");
+                        .HasDefaultValue(new List<string>())
+                        .HasColumnName("knowledge_removed");
 
                     b.Property<JsonDocument>("Markings")
                         .HasColumnType("jsonb")
