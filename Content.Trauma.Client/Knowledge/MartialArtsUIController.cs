@@ -75,6 +75,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         // add a new button for the first time it's loaded
         var button = new MenuButton()
         {
+            Name = ButtonName,
             Icon = _cache.GetResource<TextureResource>(new ResPath("/Textures/Interface/emotes.svg.192dpi.png")).Texture,
             ToolTip = Loc.GetString("game-hud-open-martial-arts-menu-button-tooltip"),
             BoundKey = TraumaKeyFunctions.OpenMartialArtsMenu,
