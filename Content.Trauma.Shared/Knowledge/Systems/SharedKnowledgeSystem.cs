@@ -48,7 +48,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private TimeSpan _nextUpdate;
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
-    private float _learnChance = 0.2f;
+    //private float _learnChance = 0.2f;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -213,7 +213,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, int levelCap = 100, bool popup = true)
     {
-        if (GetKnowledge(ent, id) is not { } unit)
+        // FIXME: xp gaining needs to be reworked to be less shit, each source needs to say the mastery level it can raise up to
+        if (GetKnowledge(ent, id) is not {} unit)
         {
             // if you don't have it, you have a small change to learn it when gaining some xp
             if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))

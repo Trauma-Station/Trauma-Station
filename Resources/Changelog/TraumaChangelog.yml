@@ -3692,3 +3692,19 @@ Entries:
   id: 437
   time: '2026-03-06T23:17:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1072
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Clothes that gave you bonus XP no longer teach you the skill.
+  id: 438
+  time: '2026-03-06T23:28:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1079
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Disabled XP gain, you are stuck with your roundstart picked skills until a
+      better system is made.
+  id: 439
+  time: '2026-03-06T23:32:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1081
