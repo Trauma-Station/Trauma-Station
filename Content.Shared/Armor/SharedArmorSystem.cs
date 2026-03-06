@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Medical.Common.Body;
+using Content.Shared.Localizations;
 using System.Linq;
-using System.Text;
 // </Trauma>
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
@@ -108,19 +108,12 @@ public abstract class SharedArmorSystem : EntitySystem
         {
             // <Trauma>
             var coveredParts = coverage.Where(coveragePart => coveragePart != BodyPartType.Other).ToList();
-            var coverageText = new StringBuilder();
-            for (var i = 0; i < coveredParts.Count; i++)
-            {
-                coverageText.Append(Loc.GetString("armor-coverage-type-" + coveredParts[i].ToString().ToLower()));
-
-                if (i >= coveredParts.Count - 1) continue; // Last element, no connector
-                coverageText.Append(", ");
-                if (i == coveredParts.Count - 2) // Second-to-last element, also add "and " so it reads nicer
-                    coverageText.Append(Loc.GetString("armor-coverage-end-connector") + ' ');
-            }
+            List<string> coverageText = [];
+            foreach (var part in coveredParts)
+                coverageText.Add(Loc.GetString("armor-coverage-type-" + part.ToString().ToLower()));
 
             msg.PushNewline();
-            msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", coverageText.ToString())));
+            msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", ContentLocalizationManager.FormatList(coverageText))));
             // </Trauma>
         }
 

@@ -7,4 +7,3 @@ armor-coverage-type-torso = torso
 armor-coverage-type-head = head
 armor-coverage-type-tail = tail
 armor-coverage-type-other = other parts
-armor-coverage-end-connector = and
