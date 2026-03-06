@@ -6,7 +6,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -19,7 +19,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -32,7 +32,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -45,7 +45,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -58,7 +58,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -71,7 +71,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -84,7 +84,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -97,7 +97,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -110,7 +110,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -123,7 +123,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -136,7 +136,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -149,7 +149,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -162,7 +162,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -175,7 +175,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -188,7 +188,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>
@@ -201,7 +201,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 2
   # </Trauma>

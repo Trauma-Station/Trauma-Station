@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseQualityKnowledge
+  id: CraftingKnowledge
+  name: Crafting
+  components:
+  - type: Knowledge
+    experienceCost: 15
+
+- type: entity
+  parent: BaseQualityKnowledge
+  id: HandmadeKnowledge
+  name: Handmade
+
+- type: entity
+  parent: BaseQualityKnowledge
+  id: SurvivalKnowledge
+  name: Survival
+
+- type: entity
+  parent: BaseQualityKnowledge
+  id: WeaponsKnowledge
+  name: Weapons

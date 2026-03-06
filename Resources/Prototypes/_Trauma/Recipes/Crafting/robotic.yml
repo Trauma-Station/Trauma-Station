@@ -4,8 +4,8 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  groups:
-    ScienceKnowledge: 2
+  theory:
+    ToysKnowledge: 1
     BotsKnowledge: 2
 
 #- type: construction
@@ -14,8 +14,8 @@
 #  targetNode: bot
 #  category: construction-category-utilities
 #  objectType: Item
-#  groups:
-#    ScienceKnowledge: 2
+#  theory:
+#    BotsKnowledge: 2
 
 - type: construction
   id: DuckBot
@@ -23,8 +23,8 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  groups:
-    ScienceKnowledge: 2
+  theory:
+    CookingKnowledge: 2
     BotsKnowledge: 2
 
 - type: construction
@@ -33,6 +33,6 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  groups:
+  theory:
     ScienceKnowledge: 2
     BotsKnowledge: 2

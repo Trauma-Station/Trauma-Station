@@ -1,0 +1,25 @@
+# Default for any species that has no knowledge profile of its own
+- type: knowledgeProfile
+  id: Human
+  mastery:
+    # Standard space station skills
+    CookingKnowledge: 2
+    CraftingKnowledge: 2
+    HandmadeKnowledge: 1
+    SurvivalKnowledge: 1
+    WeaponsKnowledge: 1
+    MaterialsKnowledge: 1
+    DoorsKnowledge: 1
+    AirlocksKnowledge: 1
+    ToysKnowledge: 1
+    BotsKnowledge: 1
+    FurnitureKnowledge: 1
+    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 1
+    WallsKnowledge: 1
+    ScienceKnowledge: 0
+    WindowsKnowledge: 1
+    SmokeablesKnowledge: 1
+    LiteracyKnowledge: 4 # Completely literate
+    TechnologyKnowledge: 1 # computer...
+    ThrowingKnowledge: 1

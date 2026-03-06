@@ -6,6 +6,6 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     ScienceKnowledge: 1
   # </Trauma>

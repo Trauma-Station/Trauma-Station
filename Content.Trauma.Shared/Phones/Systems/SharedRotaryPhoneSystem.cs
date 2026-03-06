@@ -204,6 +204,7 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
 
         RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.RingPort);
         ent.Comp.ConnectedPhone = args.Phone.Owner;
+        Dirty(ent);
     }
 
     private void OnPickup(Entity<RotaryPhoneComponent> ent, ref EntGotRemovedFromContainerMessage args)
@@ -236,7 +237,6 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
         holder.PhoneNumber = ent.Comp.PhoneNumber;
         holder.ConnectedPhone = ent.Owner;
         ent.Comp.ConnectedPhoneStand = args.Container.Owner;
-        Dirty(ent.Owner, ent.Comp);
 
         if (ent.Comp.ConnectedPhoneStand != null)
             UpdateAppearance(ent.Comp.ConnectedPhoneStand.Value, RotaryPhoneVisuals.Base);
@@ -247,14 +247,6 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
     }
     private void OnGotHungUp(Entity<RotaryPhoneComponent> ent, ref PhoneHungUpEvent args)
     {
-        if (!ent.Comp.Connected)
-        {
-            if (ent.Comp.ConnectedPhoneStand != null)
-                UpdateAppearance(ent.Comp.ConnectedPhoneStand.Value, RotaryPhoneVisuals.Base);
-
-            return;
-        }
-
         ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.HandUpSoundLocal, ent.Owner, ent.Owner, AudioParams.Default.WithMaxDistance(2.5f))?.Entity;
 
         ent.Comp.ConnectedPhone = null;
