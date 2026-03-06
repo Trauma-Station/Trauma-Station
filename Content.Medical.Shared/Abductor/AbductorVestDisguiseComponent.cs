@@ -14,4 +14,3 @@ public sealed partial class AbductorVestDisguiseComponent : Component
     [DataField]
     public Dictionary<EntityUid, PrototypeLayerData>? OriginalOrganData;
 }
-// </Trauma>
