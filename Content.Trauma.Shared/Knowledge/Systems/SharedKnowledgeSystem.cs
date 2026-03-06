@@ -245,7 +245,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (now < ent.Comp.TimeToNextExperience)
             return;
 
-        ent.Comp.TimeToNextExperience = now + TimeSpan.FromSeconds(1);
+        ent.Comp.TimeToNextExperience = now + TimeSpan.FromSeconds(5);
         ent.Comp.Experience += added + ent.Comp.BonusExperience;
         Dirty(ent);
 
