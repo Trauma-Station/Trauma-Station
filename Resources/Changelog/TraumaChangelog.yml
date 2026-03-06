@@ -3708,3 +3708,10 @@ Entries:
   id: 439
   time: '2026-03-06T23:32:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1081
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed sometimes having multiple martial arts buttons.
+  id: 440
+  time: '2026-03-06T23:40:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1083
