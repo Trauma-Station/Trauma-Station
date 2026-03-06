@@ -173,7 +173,7 @@
     HandmadeKnowledge: 1
   practical:
     WeaponsKnowledge: 2
-    handmadeKnowledge: 1
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
