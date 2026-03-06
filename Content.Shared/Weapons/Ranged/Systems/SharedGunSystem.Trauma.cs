@@ -153,7 +153,7 @@ public abstract partial class SharedGunSystem
         var newKnowledge = EnsureComp<QualityComponent>(newUid);
         newKnowledge.LevelDeltas = new Dictionary<EntProtoId, int>(ammoKnowledge.LevelDeltas);
         newKnowledge.Quality = ammoKnowledge.Quality;
-        newKnowledge.NumberOfMasteries = ammoKnowledge.NumberOfMasteries;
+        newKnowledge.QualityModifiers = ammoKnowledge.QualityModifiers;
 
         _knowledge.ModifyValues((newUid, newKnowledge));
     }
