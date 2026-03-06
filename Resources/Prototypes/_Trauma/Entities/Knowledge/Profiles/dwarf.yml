@@ -1,6 +1,5 @@
 - type: knowledgeProfile
   id: Dwarf
-  points: 30
   mastery:
     # Standard space station skills
     CookingKnowledge: 1
