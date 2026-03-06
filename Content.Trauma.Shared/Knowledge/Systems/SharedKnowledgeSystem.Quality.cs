@@ -8,6 +8,7 @@ using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Projectiles;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Stacks;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
@@ -46,34 +47,53 @@ public abstract partial class SharedKnowledgeSystem
             return;
         }
 
-        int ownMasteries = 0;
-        int itemMasteries = 0;
+        int? lowestDelta = null;
+        EntProtoId? lowestId = null;
         var knowledge = brain.Comp.KnowledgeDict;
         foreach (var (id, delta) in ent.Comp.LevelDeltas)
         {
-            var mastery = GetMastery(knowledge.GetValueOrDefault(id));
-            ownMasteries += mastery;
-            itemMasteries += delta;
-            var ev = new AddExperienceEvent(id, 6 - mastery);
-            RaiseLocalEvent(user, ref ev);
+            if (lowestDelta is not { } || (GetKnowledge(brain, id) is { } skill && GetMastery(skill.Comp) - delta < lowestDelta))
+            {
+                lowestDelta = delta;
+                lowestId = id;
+            }
         }
 
         int added = 0;
         if (GetKnowledge(brain, CraftingKnowledge) is { } crafting)
-            added = GetMastery(crafting.Comp) - 2;
+            added = crafting.Comp.Level + crafting.Comp.TemporaryLevel;
         else
-            added = -3;
-        added = added + (ownMasteries - itemMasteries) / ent.Comp.LevelDeltas.Count();
+            added = -1;
 
-        var evCrafting = new AddExperienceEvent(CraftingKnowledge, itemMasteries);
-        RaiseLocalEvent(user, ref evCrafting);
+        var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
-        var qualityToAdd = ent.Comp.Quality * ent.Comp.NumberOfMasteries + added;
-        ent.Comp.NumberOfMasteries++;
-        ent.Comp.Quality = Math.Clamp(qualityToAdd / ent.Comp.NumberOfMasteries, -6, 6); // Make sure numbers don't go too crazy.
+
+        ent.Comp.Quality = (added + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
+        {
+            >= 88 => 5,
+            >= 44 => 4,
+            >= 20 => 3,
+            >= 10 => 2,
+            >= 5 => 1,
+            >= 0 => 0,
+            >= -5 => -1,
+            >= -10 => -2,
+            >= -20 => -3,
+            >= -44 => -4,
+            _ => -5,
+        };
         Dirty(ent);
         _nameModifier.RefreshNameModifiers(ent.Owner);
         ModifyValues(ent);
+
+        var evCrafting = new AddExperienceEvent(CraftingKnowledge, Math.Abs(ent.Comp.Quality / 2));
+        RaiseLocalEvent(user, ref evCrafting);
+
+        if (lowestId is not { } actualId)
+            return;
+
+        var ev = new AddExperienceEvent(actualId, Math.Abs(ent.Comp.Quality / 2));
+        RaiseLocalEvent(user, ref ev);
     }
 
     /// <summary>
@@ -144,7 +164,8 @@ public abstract partial class SharedKnowledgeSystem
         var comp = EnsureComp<QualityComponent>(args.NewId);
         comp.LevelDeltas = ent.Comp.LevelDeltas;
         comp.Quality = ent.Comp.Quality;
-        comp.NumberOfMasteries = ent.Comp.NumberOfMasteries;
+        comp.QualityModifiers = ent.Comp.QualityModifiers;
+        comp.QualityCoefficent = ent.Comp.QualityCoefficent;
         Dirty(args.NewId, comp);
         ModifyValues((args.NewId, comp));
     }
@@ -158,9 +179,9 @@ public abstract partial class SharedKnowledgeSystem
         }
 
         if (other.Quality != ent.Comp.Quality ||
-            other.NumberOfMasteries != ent.Comp.NumberOfMasteries ||
             !LevelDeltasMatch(other.LevelDeltas, ent.Comp.LevelDeltas))
         {
+            ent.Comp.QualityCoefficent = (ent.Comp.QualityCoefficent + other.QualityCoefficent) / 2;
             args.Cancelled = true;
         }
     }

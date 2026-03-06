@@ -1,21 +1,8 @@
 using System.Linq;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
-using Content.Shared.FixedPoint;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Random.Helpers;
-using Content.Trauma.Common.Knowledge;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Chemistry.EntitySystems;
@@ -27,8 +14,6 @@ public sealed partial class InjectorSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     /// <summary>
     /// Raises an event to allow other systems to modify where the injector's solution comes from.

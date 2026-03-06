@@ -40,18 +40,14 @@ public sealed partial class ConstructionSystem
 
         if (TryComp<QualityComponent>(created, out var newComp))
         {
-            var quality = newComp.Quality * originalComp.NumberOfMasteries;
-            quality += originalComp.Quality;
-            newComp.NumberOfMasteries = originalComp.NumberOfMasteries + 1;
-            newComp.Quality = quality / newComp.NumberOfMasteries;
-            newComp.QualityCoefficent = (newComp.QualityCoefficent + originalComp.QualityCoefficent) / 2;
+            newComp.QualityModifiers = originalComp.QualityModifiers * 2;
             Dirty(created, newComp);
             return;
         }
         newComp = EnsureComp<QualityComponent>(created);
         newComp.LevelDeltas = originalComp.LevelDeltas;
         newComp.Quality = originalComp.Quality;
-        newComp.NumberOfMasteries = originalComp.NumberOfMasteries;
+        newComp.QualityModifiers = originalComp.QualityModifiers;
         newComp.QualityCoefficent = originalComp.QualityCoefficent;
         Dirty(created, newComp);
         return;

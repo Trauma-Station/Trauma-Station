@@ -41,7 +41,11 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
 
         var ev = new AddExperienceEvent(_meleeKnowledge, xp, limit);
         RaiseLocalEvent(args.User, ref ev);
+    }
 
+    // Miss Event Hook
+    private void OnAttackMiss(MeleeHitEvent args)
+    {
         if (_knowledge.GetContainer(args.User) is not { } brain)
             return;
 
