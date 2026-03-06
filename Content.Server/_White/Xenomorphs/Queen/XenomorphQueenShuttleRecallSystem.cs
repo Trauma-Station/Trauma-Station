@@ -35,18 +35,24 @@ public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
 
         var queenAlive = false;
 
-        var queenQuery = EntityQueryEnumerator<XenomorphQueenComponent, MobStateComponent, TransformComponent>();
-        while (queenQuery.MoveNext(out var queenUid, out _, out var mobState, out var xform))
+        // Get the station map so we can check if the queen is physically on it.
+        var stationMap = _roundEnd.GetStation();
+
+        if (stationMap != null)
         {
-            if (mobState.CurrentState == MobState.Dead)
-                continue;
+            var queenQuery = EntityQueryEnumerator<XenomorphQueenComponent, MobStateComponent, TransformComponent>();
+            while (queenQuery.MoveNext(out _, out _, out var mobState, out var xform))
+            {
+                if (mobState.CurrentState == MobState.Dead)
+                    continue;
 
-            // Only count queens that are on a station grid.
-            if (_station.GetOwningStation(queenUid, xform) == null)
-                continue;
+                // Only count queens that are on the same map as the station.
+                if (xform.MapUid != stationMap)
+                    continue;
 
-            queenAlive = true;
-            break;
+                queenAlive = true;
+                break;
+            }
         }
 
         // Block the shuttle from being called while a queen is alive on-station.
