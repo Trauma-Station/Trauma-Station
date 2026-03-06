@@ -81,10 +81,10 @@ namespace Content.Server.Database
                     v => JsonSerializer.Serialize(v),
                     s => string.IsNullOrEmpty(s)
                         ? new()
-                        : JsonSerializer.Deserialize<Dictionary<string, int>>(s)
+                        : JsonSerializer.Deserialize<Dictionary<string, int>>(s.Value)
                 )
                 .Metadata.SetValueComparer(new ValueComparer<Dictionary<string, int>>(
-                    (a, b) => a.Count == b.Count && !a.Except(b).Any(),
+                    (a, b) => a != null && b != null && a.Count == b.Count && !a.Except(b).Any(),
                     dict => dict.GetHashCode(),
                     dict => new Dictionary<string, int>(dict)
                 ));
