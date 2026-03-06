@@ -55,10 +55,6 @@ public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
             }
         }
 
-        // Block the shuttle from being called while a queen is alive on-station.
-        // When she dies, allow it again.
-        _roundEnd.CantRecall = queenAlive;
-
         // If the shuttle was already called and the queen is alive, force recall it — mirroring how the blob does it.
         if (queenAlive && _roundEnd.ExpectedCountdownEnd != null && !_emergency.EmergencyShuttleArrived)
         {
