@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Polls;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Events;

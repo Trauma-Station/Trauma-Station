@@ -2,7 +2,6 @@
 
 using Content.Shared.Body;
 using Content.Shared.Clothing;
-using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Components;
 

@@ -1,17 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Common.Body;
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Chat;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Popups;
-using Content.Shared.RetractableItemAction;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
@@ -87,8 +82,8 @@ public abstract partial class SharedKnowledgeSystem
     public void UpdateEntityLanguages(Entity<LanguageSpeakerComponent> ent)
     {
         var ev = new DetermineEntityLanguagesEvent();
-        if (GetContainer(ent.Owner) is {} brain &&
-            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is {} known)
+        if (GetContainer(ent.Owner) is { } brain &&
+            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is { } known)
         {
             foreach (var language in known)
             {
@@ -126,8 +121,8 @@ public abstract partial class SharedKnowledgeSystem
 
     private void SpeakerToKnowledge(Entity<LanguageSpeakerComponent> ent)
     {
-        if (GetContainer(ent.Owner) is not {} brain ||
-            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is not {} known)
+        if (GetContainer(ent.Owner) is not { } brain ||
+            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is not { } known)
             return;
 
         foreach (var language in known)
@@ -145,7 +140,7 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnLanguageAdd(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
     {
-        if (GetContainer(ent.Owner) is not {} brain)
+        if (GetContainer(ent.Owner) is not { } brain)
             return;
 
         // We add the intrinsically known languages first so other systems can manipulate them easily
@@ -158,8 +153,8 @@ public abstract partial class SharedKnowledgeSystem
     public void OnLanguageRemove(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
     {
         var id = LanguageUnit(args.Language);
-        if (GetContainer(ent.Owner) is not {} brain ||
-            GetKnowledge(brain, id) is not {} unit)
+        if (GetContainer(ent.Owner) is not { } brain ||
+            GetKnowledge(brain, id) is not { } unit)
             return;
 
         var langComp = _langQuery.Comp(unit);
@@ -184,7 +179,7 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnLanguageBodyInit(Entity<LanguageSpeakerComponent> ent, ref BodyInitEvent args)
     {
-        if (GetContainer(ent.Owner) is not {} brain)
+        if (GetContainer(ent.Owner) is not { } brain)
             return;
 
         var allLanguages = new List<(ProtoId<LanguagePrototype>, bool)>();
@@ -201,7 +196,7 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (lang, speaks) in allLanguages)
         {
-            if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not {} unit)
+            if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not { } unit)
             {
                 Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
                 continue;
@@ -218,11 +213,11 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnLanguageSpoke(Entity<LanguageSpeakerComponent> ent, ref EntitySpokeEvent args)
     {
-        if (GetContainer(ent.Owner) is not {} brain)
+        if (GetContainer(ent.Owner) is not { } brain)
             return;
 
         var id = LanguageUnit(args.Language);
-        if (GetKnowledge(brain, id) is not {} unit)
+        if (GetKnowledge(brain, id) is not { } unit)
         {
             Log.Warning($"{ToPrettyString(ent)} spoke in language {args.Language} while not having knowledge of it!?");
             return;

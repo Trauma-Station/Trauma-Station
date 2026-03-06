@@ -2,8 +2,6 @@
 
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Shared.Knowledge.Components;
-using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
@@ -47,7 +45,7 @@ public abstract partial class SharedKnowledgeSystem
 
     public override void ApplyProfile(EntityUid target, [ForbidLiteral] ProtoId<KnowledgeProfilePrototype> parentId, KnowledgeProfile profile)
     {
-        if (GetContainer(target) is not {} ent)
+        if (GetContainer(target) is not { } ent)
             return;
 
         var parent = _proto.Index(parentId);
@@ -61,7 +59,7 @@ public abstract partial class SharedKnowledgeSystem
     {
         foreach (var (id, mastery) in profile.Mastery)
         {
-            if (SkillCost(id, mastery) is not {} cost || points < cost)
+            if (SkillCost(id, mastery) is not { } cost || points < cost)
                 return; // were done here, outdated profile in DB
 
             var level = GetInverseMastery(mastery);
@@ -91,7 +89,7 @@ public abstract partial class SharedKnowledgeSystem
     /// Throws for invalid mastery values.
     /// </summary>
     public int? SkillCost(EntProtoId id, int mastery)
-        => AllKnowledges.TryGetValue(id, out var comp) && comp.Costs is {} costs
+        => AllKnowledges.TryGetValue(id, out var comp) && comp.Costs is { } costs
             ? costs[mastery]
             : null;
 }
