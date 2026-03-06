@@ -115,7 +115,7 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnGunApplyQuality(Entity<GunComponent> ent, ref ApplyQualityEvent args)
     {
-        _gun.RefreshModifiers(ent);
+        _gun.RefreshModifiers(ent.AsNullable());
         // TODO: add gun jamming exploding in your face etc at low gun quality
     }
 
