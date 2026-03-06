@@ -39,21 +39,21 @@
     components:
       - type: CommandStaff
       - type: EngineeringStaff # Goobstation
-      # <Trauma>
-      - type: KnowledgeGrant
-        skills:
-          HandmadeKnowledge: 50
-          TechnologyKnowledge: 50
-          MaterialsKnowledge: 50
-          DoorsKnowledge: 50
-          AirlocksKnowledge: 50
-          FurnitureKnowledge: 50
-          InfrastructureKnowledge: 50
-          ElectronicsKnowledge: 50
-          WallsKnowledge: 50
-          WindowsKnowledge: 50
-          SmokeablesKnowledge: 50
-      # </Trauma>
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      HandmadeKnowledge: 50
+      TechnologyKnowledge: 50
+      MaterialsKnowledge: 50
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      FurnitureKnowledge: 50
+      InfrastructureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+      SmokeablesKnowledge: 50
+  # </Trauma>
 
 - type: startingGear
   id: ChiefEngineerGear

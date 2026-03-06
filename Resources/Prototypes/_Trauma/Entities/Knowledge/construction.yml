@@ -1,71 +1,93 @@
+# TODO: bunch of different types of cooking
 - type: entity
   parent: BaseConstructionKnowledge
-  id: HandmadeKnowledge
-
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: SurvivalKnowledge
-
-- type: entity
-  parent: BaseConstructionKnowledge
-  id: WeaponsKnowledge
+  id: CookingKnowledge
+  name: Cooking
+  components:
+  - type: Knowledge
+    experienceCost: 15
+    costs: [1, 2, 3, 4, 8, 12] # basic cooking is easy to practice
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: MaterialsKnowledge
+  name: Materials
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: DoorsKnowledge
+  name: Doors
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: AirlocksKnowledge
+  name: Airlocks
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: ToysKnowledge
+  name: Toys
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: BananiumKnowledge
+  name: Bananium
+  components:
+  - type: Knowledge
+    costs: [0, 1, 2, 8, 12, 30] # HONK
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: BotsKnowledge
+  name: Bots
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: FurnitureKnowledge
+  name: Furniture
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: InfrastructureKnowledge
+  name: Infrastructure
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: ElectronicsKnowledge
+  name: Electronics
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: WallsKnowledge
+  name: Walls
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: ScienceKnowledge
+  name: Science
+  components:
+  - type: Knowledge
+    costs: [2, 4, 6, 10, 12, 16]
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: WindowsKnowledge
+  name: Windows
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: SpiderCraftKnowledge
+  name: Spider Webs
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: SmokeablesKnowledge
+  name: Smokeables
 
 - type: entity
   parent: BaseConstructionKnowledge
   id: RevolutionaryKnowledge
+  name: Revolutionary
+  components:
+  - type: Knowledge
+    costs: null # lol

@@ -6,7 +6,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SmokeablesKnowledge: 2
   # </Trauma>
 
@@ -19,7 +19,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SmokeablesKnowledge: 2
   # </Trauma>
 
@@ -31,7 +31,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SmokeablesKnowledge: 2
   # </Trauma>
 
@@ -44,7 +44,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SmokeablesKnowledge: 2
   # </Trauma>
 
@@ -56,7 +56,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SmokeablesKnowledge: 2
   # </Trauma>
 
@@ -71,7 +71,7 @@
 #    color: darkgreen
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SmokeablesKnowledge: 2
   # </Trauma>
 
@@ -83,7 +83,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SmokeablesKnowledge: 2
   # </Trauma>
 
@@ -96,6 +96,6 @@
 #    color: brown
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SmokeablesKnowledge: 2
   # </Trauma>

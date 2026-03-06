@@ -384,7 +384,7 @@ namespace Content.Client.Lobby.UI
             UpdateEyePickers();
             UpdateSaveButton();
             UpdateMarkings();
-            UpdateBarkVoice(); // Trauma
+            OnSetProfile?.Invoke(profile); // Trauma
 
             RefreshAntags();
             RefreshJobs();

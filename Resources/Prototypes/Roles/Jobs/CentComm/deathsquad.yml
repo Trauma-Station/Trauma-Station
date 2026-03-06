@@ -14,21 +14,21 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  special: # Goobstation Start - I basically re-did all of deathsquads stuff so. - Sol
+  # <Trauma>
+  special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
   - !type:AddComponentSpecial
     components:
-    - type: DeathSquadMember # Goobstation
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 50
-        ShootingKnowledge: 50
-        StrengthKnowledge: 50
-        ToughnessKnowledge: 50
-        AthleticsKnowledge: 50
-    # </Trauma>
+    - type: DeathSquadMember
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
+      StrengthKnowledge: 50
+      ToughnessKnowledge: 50
+      AthleticsKnowledge: 50
+  # </Trauma>
 
   # Goobstation Start - I basically re-did all of deathsquads stuff so. - Sol
 - type: startingGear

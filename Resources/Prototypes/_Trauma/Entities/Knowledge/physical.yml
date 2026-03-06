@@ -1,0 +1,33 @@
+- type: entity
+  parent: BasePhysicalKnowledge
+  id: ToughnessKnowledge
+  name: Toughness
+  components:
+  - type: Knowledge
+    experienceCost: 20
+    costs: [3, 6, 10, 14, 20, 28] # Goku is rare...
+
+- type: entity
+  parent: BasePhysicalKnowledge
+  id: StrengthKnowledge
+  name: Strength
+  components:
+  - type: Knowledge
+    experienceCost: 12
+
+- type: entity
+  parent: BasePhysicalKnowledge
+  id: AthleticsKnowledge
+  name: Athletics
+  components:
+  - type: Knowledge
+    experienceCost: 12
+
+- type: entity
+  parent: BasePhysicalKnowledge
+  id: ThrowingKnowledge
+  name: Throwing
+  components:
+  - type: Knowledge
+    experienceCost: 5
+  - type: ThrowInsertKnowledge # being better at throwing lets you slam dunk easier

@@ -11,7 +11,9 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
+    FurnitureKnowledge: 0
+  practical:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -27,8 +29,10 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
-    FurnitureKnowledge: 2
+  theory:
+    FurnitureKnowledge: 1
+  practical:
+    FurnitureKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -43,9 +47,10 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
-    FurnitureKnowledge: 1
-    TechnologyKnowledge: 1
+  theory:
+    FurnitureKnowledge: 0
+  practical:
+    FurnitureKnowledge: 2
   # </Trauma>
 
 # ItemCabinets
@@ -61,7 +66,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -78,9 +83,9 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
-    FurnitureKnowledge: 1
-    TechnologyKnowledge: 1
+  theory: {} # it's 2 pieces of wood
+  practical:
+    FurnitureKnowledge: 0 # nailing it to the wall or smth
   # </Trauma>
 
 - type: construction
@@ -94,8 +99,10 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
-    FurnitureKnowledge: 2
+  theory:
+    FurnitureKnowledge: 0
+  practical:
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -109,7 +116,7 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -125,9 +132,8 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 1
-    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -141,7 +147,7 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -156,7 +162,7 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -172,7 +178,7 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -187,7 +193,7 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>
 
@@ -202,6 +208,6 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
     FurnitureKnowledge: 2
   # </Trauma>

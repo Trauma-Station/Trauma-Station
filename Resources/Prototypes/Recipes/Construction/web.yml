@@ -14,7 +14,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 1
   # </Trauma>
 
@@ -34,7 +34,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 1
   # </Trauma>
 
@@ -54,7 +54,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 1
   # </Trauma>
 
@@ -71,7 +71,7 @@
     tags:
     - SpiderCraft
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 1
   # </Trauma>
 
@@ -89,7 +89,7 @@
     tags:
     - SpiderCraft
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 1
   # </Trauma>
 
@@ -108,6 +108,6 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 1
   # </Trauma>

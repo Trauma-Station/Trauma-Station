@@ -3593,3 +3593,95 @@ Entries:
   id: 425
   time: '2026-03-04T21:54:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1017
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed monkeys/kobolds having 3 hands.
+  id: 426
+  time: '2026-03-05T08:46:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1026
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed revs radio jammer.
+  id: 427
+  time: '2026-03-05T08:50:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1027
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to read paper and CQC manuals while blind.
+  id: 428
+  time: '2026-03-05T09:40:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1028
+- author: NoElkaTheGod, deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Thief no longer has objectives, it's a freeform antag now, steal whatever
+      you want.
+  id: 429
+  time: '2026-03-05T14:42:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/995
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Throwing is no longer nerfed by low throwing/strength skills.
+  - type: Fix
+    message: Fixed 500 bugs with knowledge.
+  - type: Tweak
+    message: >-
+      Throwing items in disposal units is now predicted and easier with high
+      throwing or janitor skills.
+  - type: Tweak
+    message: Removed melee/shove missing from low skill.
+  id: 430
+  time: '2026-03-05T16:26:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1023
+- author: MayasMischief
+  changes:
+  - type: Remove
+    message: Removed BSO.
+  id: 431
+  time: '2026-03-06T00:57:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1039
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Station AI can no longer see things through unpowered cameras and holopads
+  id: 432
+  time: '2026-03-06T08:53:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1045
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Improved armor coverage examine
+  id: 433
+  time: '2026-03-06T09:44:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1044
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      You can now select skills in the character editor. Some cost more than
+      others.
+  id: 434
+  time: '2026-03-06T15:59:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1040
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed geneticist job having no description.
+  id: 435
+  time: '2026-03-06T17:23:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1051
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Construction knowledge was reworked to have separate theory and practical
+      requirements. You can now build a lot more at low levels, but it will
+      probably be poor quality.
+  id: 436
+  time: '2026-03-06T19:40:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1060

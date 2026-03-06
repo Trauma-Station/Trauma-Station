@@ -13,7 +13,7 @@
   components:
   - type: Knowledge
     category: Physical
-    onSleep: true
+    costs: [4, 6, 10, 16, 999, 999]
 
 - type: entity
   id: BaseWarKnowledge
@@ -22,6 +22,18 @@
   components:
   - type: Knowledge
     category: War
+    costs: [4, 6, 10, 16, 999, 999]
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseQualityKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Construction
+    color: "#0ba881"
+    experienceCost: 20
+    costs: [2, 4, 8, 16, 32, 999]
 
 - type: entity
   id: BaseIntellectualKnowledge
@@ -48,6 +60,7 @@
     category: Construction
     color: "#0ba881"
     experienceCost: 20
+    costs: [1, 2, 3, 4, 6, 10]
 
 - type: entity
   parent: BaseKnowledge
@@ -59,6 +72,7 @@
     level: 26
     experienceCost: 4
     color: "#ADD8E6"
+    costs: null # its currently fucked, have to use traits still :(
   - type: LanguageKnowledge
 
 - type: entity
@@ -66,42 +80,48 @@
   id: BaseMartialArtsKnowledge
   abstract: true
   components:
+  - type: Sprite
+    sprite: _Goobstation/Interface/Misc/intents.rsi
+    state: harm
   - type: Knowledge
     category: MartialArt
     experienceCost: 10
     color: "#c70000"
+    costs: [36, 999, 999, 999, 999, 999] # Being able to learn any of these roundstart needs an insane cost
   - type: MartialArtsKnowledge
     blocked: false
     icon: Objects/Misc/skub.rsi
 
+# Actual categories
+
 - type: knowledgeCategory
   id: MartialArt
-  name: knowledge-category-prototype-Martial
+  name: knowledge-category-Martial
 
 - type: knowledgeCategory
   id: Construction
-  name: knowledge-category-prototype-Construction
+  name: knowledge-category-Construction
 
 - type: knowledgeCategory
   id: Language
-  name: knowledge-category-prototype-Languages
+  name: knowledge-category-Languages
 
 - type: knowledgeCategory
   id: War
-  name: knowledge-category-prototype-Combat
+  name: knowledge-category-Combat
 
 - type: knowledgeCategory
   id: Medical
-  name: knowledge-category-prototype-Medical
+  name: knowledge-category-Medical
 
 - type: knowledgeCategory
   id: Physical
-  name: knowledge-category-prototype-Physical
+  name: knowledge-category-Physical
 
 - type: knowledgeCategory
   id: Intellectual
-  name: knowledge-category-prototype-Intellectual
+  name: knowledge-category-Intellectual
 
 - type: knowledgeCategory
   id: Scientific
-  name: knowledge-category-prototype-Scientific
+  name: knowledge-category-Scientific

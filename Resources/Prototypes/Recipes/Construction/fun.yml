@@ -6,6 +6,6 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     BananiumKnowledge: 1
   # </Trauma>

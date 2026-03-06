@@ -8,8 +8,9 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  groups:
-    FurnitureKnowledge: 2
+  theory:
+    FurnitureKnowledge: 0
+    SurvivalKnowledge: 0
 
 - type: construction
   id: CdRack
@@ -21,5 +22,6 @@
   canBuildInImpassable: true
   conditions:
     - !type:TileNotBlocked
-  groups:
+  theory:
     FurnitureKnowledge: 2
+    TechnologyKnowledge: 0

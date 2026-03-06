@@ -40,7 +40,6 @@
   # Power
   - type: ApcPowerReceiver
     powerLoad: 1000
-  # <Trauma>
   - type: KnowledgeGrant
     skills:
       HandmadeKnowledge: 100
@@ -59,4 +58,3 @@
       ScienceKnowledge: 100
       WindowsKnowledge: 100
       SmokeablesKnowledge: 100
-  # </Trauma>

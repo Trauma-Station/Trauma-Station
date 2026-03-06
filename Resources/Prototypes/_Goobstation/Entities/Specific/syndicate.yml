@@ -12,6 +12,7 @@
     size: Small
   - type: StaticPrice
     price: 3000
+  - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
     skills:
       MartialArtCQC: 26

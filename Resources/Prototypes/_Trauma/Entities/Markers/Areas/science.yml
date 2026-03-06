@@ -1,0 +1,40 @@
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaScience
+  name: science
+  components:
+  - type: DepartmentArea
+    department: Science
+
+- type: entity
+  parent: BaseAreaScience
+  id: AreaScience
+  name: science
+  components:
+  - type: Sprite
+    state: science
+
+- type: entity
+  parent: BaseAreaScience
+  id: AreaTeleSci
+  name: TeleSci
+  components:
+  - type: Sprite
+    state: telesci
+
+- type: entity
+  parent: BaseAreaScience
+  id: AreaGenetics
+  name: genetics
+  components:
+  - type: Sprite
+    state: genetics
+
+- type: entity
+  parent: BaseAreaScience
+  id: AreaXenobio
+  name: xenobio
+  components:
+  - type: Sprite
+    state: xenobio

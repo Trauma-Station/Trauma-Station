@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Medical.Common.Body;
+// </Trauma>
 using System.Numerics;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -43,5 +46,10 @@ public sealed class InitialBodySystem : EntitySystem
                 Del(spawn);
             }
         }
+
+        // <Trauma> - raising an extra event so you dont need to spam order your events after InitialBodySystem
+        var ev = new BodyInitEvent();
+        RaiseLocalEvent(ent, ref ev);
+        // </Trauma>
     }
 }

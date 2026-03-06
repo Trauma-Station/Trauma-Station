@@ -7,8 +7,8 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
-  groups:
-    WallsKnowledge: 2
+  theory:
+    WallsKnowledge: 1
 
 - type: construction
   id: SolarPanel
@@ -17,7 +17,7 @@
   category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
-  groups:
+  theory:
     ElectronicsKnowledge: 2
 
 # Barricades
@@ -31,7 +31,9 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
-  groups:
+  theory:
+    WallsKnowledge: 3 # good cading is hard
+  practical:
     WallsKnowledge: 4
 
 - type: construction
@@ -43,7 +45,9 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
-  groups:
+  theory:
+    WallsKnowledge: 3
+  practical:
     WallsKnowledge: 4
 
 - type: construction
@@ -55,7 +59,9 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
-  groups:
+  theory:
+    WallsKnowledge: 3
+  practical:
     WallsKnowledge: 4
 
 - type: construction
@@ -67,7 +73,9 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
-  groups:
+  theory:
+    WallsKnowledge: 3
+  practical:
     WallsKnowledge: 4
 
 # Airlocks
@@ -83,8 +91,8 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  groups:
-    AirlocksKnowledge: 1
+  theory:
+    AirlocksKnowledge: 2
 
 - type: construction
   id: AirlockSealedGlass
@@ -97,5 +105,5 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  groups:
+  theory:
     AirlocksKnowledge: 2

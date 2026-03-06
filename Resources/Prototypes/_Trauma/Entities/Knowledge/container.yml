@@ -1,0 +1,9 @@
+# For entities that directly store knowledge e.g. a brain
+- type: entity
+  abstract: true
+  id: BaseKnowledgeContainer
+  components:
+  - type: KnowledgeContainer
+  - type: ContainerContainer
+    containers:
+      knowledge: !type:Container
