@@ -137,7 +137,7 @@ public abstract partial class SharedKnowledgeSystem
 
         var bonus = 0f;
         if (GetKnowledge(brain, StrengthKnowledge) is {} strength)
-            bonus += 3 * SharpCurve(strength);
+            bonus += 1 * SharpCurve(strength);
 
         if (GetActiveMartialArt(ent) is { } martialArt)
         {
@@ -174,7 +174,7 @@ public abstract partial class SharedKnowledgeSystem
 
         if (GetKnowledge(ent, ToughnessKnowledge) is {} toughness && _mobState.IsAlive(ent.Owner))
         {
-            args.Damage *= 1 - 0.99f * SharpCurve(toughness);
+            args.Damage *= 1 - 0.25f * SharpCurve(toughness); // Level 100 Toughness reduces damage taken by 25%, scales to that
         }
     }
 

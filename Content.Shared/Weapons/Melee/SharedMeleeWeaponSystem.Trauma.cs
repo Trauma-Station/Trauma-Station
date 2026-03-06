@@ -83,7 +83,7 @@ public abstract partial class SharedMeleeWeaponSystem
         if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee && _knowledge.GetMastery(melee.Comp) > 2)
         {
             // FIXME: this is too fast? also why is it here for fuck sake
-            ev.Multipliers *= 1 + 2 * _knowledge.SharpCurve(melee, -50, 50.0f);
+            ev.Multipliers *= 1 + 0.75f * _knowledge.SharpCurve(melee, -50, 50.0f);
         }
     }
 

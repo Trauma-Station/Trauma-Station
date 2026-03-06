@@ -112,21 +112,21 @@ public abstract partial class SharedKnowledgeSystem
 
         if (TryComp<DamageOtherOnHitComponent>(ent.Owner, out var thrown))
         {
-            thrown.Damage *= ConstructionModifier(ent, 1.75f);
+            thrown.Damage *= ConstructionModifier(ent, 1.05f); // +- 25% damage at +-5
         }
 
         if (TryComp<GunComponent>(ent.Owner, out var gun))
         {
-            gun.MaxAngle *= ConstructionModifier(ent, 0.9f);
+            gun.MaxAngle *= ConstructionModifier(ent, 0.9f); // - 40% spread at +5, +60% spread at -5
         }
 
         if (TryComp<ProjectileComponent>(ent.Owner, out var projectile))
         {
-            projectile.Damage *= ConstructionModifier(ent, 1.75f);
+            projectile.Damage *= ConstructionModifier(ent, 1.05f); // +- 25% damage at +-5
         }
     }
 
-    public float ConstructionModifier(Entity<QualityComponent> ent, float power = 2)
+    public float ConstructionModifier(Entity<QualityComponent> ent, float power = 1.15f) // This scales -5 to do 50% damage and +5 to do 200%
         => MathF.Pow(power, ent.Comp.Quality);
 
     private void AlterMeleeDamage(Entity<QualityComponent> ent, ref GetMeleeDamageEvent args)
