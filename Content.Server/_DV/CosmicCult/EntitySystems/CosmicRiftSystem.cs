@@ -154,7 +154,6 @@ public sealed class CosmicRiftSystem : EntitySystem
             return;
 
         args.Handled = true;
-        rift.Occupied = false;
         var tgtpos = Transform(target).Coordinates;
         Spawn(uid.Comp.AbsorbVFX, tgtpos);
         if (comp.CosmicFragmentationActionEntity == null)
