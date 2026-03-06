@@ -5,7 +5,7 @@
   - Harm
   userEffects:
   - !type:PopupMessage
-    messages: 
+    messages:
     - cqc-slam
   opponentEffects:
   - !type:TakeStaminaDamage
