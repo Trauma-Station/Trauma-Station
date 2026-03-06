@@ -68,6 +68,9 @@
   id: BaseMartialArtsKnowledge
   abstract: true
   components:
+  - type: Sprite
+    sprite: _Goobstation/Interface/Misc/intents.rsi
+    state: harm
   - type: Knowledge
     category: MartialArt
     experienceCost: 10

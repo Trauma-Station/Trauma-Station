@@ -105,15 +105,15 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    public List<(EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
+    public List<(EntityUid, EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
     {
         if (GetKnowledgeWith<MartialArtsKnowledgeComponent>(target) is not {} arts)
             return [];
 
-        var list = new List<(EntProtoId, string)>();
+        var list = new List<(EntityUid, EntProtoId, string)>();
         foreach (var art in arts)
         {
-            list.Add((Prototype(art)!.ID, Name(art)));
+            list.Add((art, Prototype(art)!.ID, Name(art)));
         }
         list.Sort((a, b) => a.Item1.CompareTo(b.Item1));
         return list;

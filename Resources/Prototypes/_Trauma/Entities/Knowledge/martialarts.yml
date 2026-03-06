@@ -3,6 +3,9 @@
   id: MartialArtCQC
   name: Close Quarters Combat
   components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    state: icon
   - type: CanPerformCombo
     roundstartCombos:
     - CQCConsecutive
@@ -22,6 +25,7 @@
     costs: null # chef only
   - type: MartialArtsKnowledge
     blocked: true # TODO: make this its own component
+  # TODO: make it prevent learning regular CQC and vice versa
 
 - type: entity
   parent: BaseMartialArtsKnowledge
@@ -115,6 +119,9 @@
   id: MartialArtSleepingCarp
   name: Sleeping Carp
   components:
+  - type: Sprite
+    sprite: _Goobstation/Wizard/Objects/scroll.rsi
+    state: scroll2
   - type: Knowledge
     costs: null # antag only
   - type: CanPerformCombo
@@ -139,6 +146,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtSpaceBear
+  name: Space Bear
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -171,6 +179,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtMimejutsu
+  name: Mimejutsu
   components:
   - type: Knowledge
     costs: null # mime antag only (in the future, unused right now)
@@ -183,6 +192,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtAdminfu
+  name: Admin-Fu
   components:
   - type: Knowledge
     costs: null # admin only...

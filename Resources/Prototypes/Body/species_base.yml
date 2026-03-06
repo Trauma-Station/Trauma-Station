@@ -49,12 +49,6 @@
   - type: Destructible
     thresholds: [] # remove gib threshold, you can gib the torso instead
   - type: KnowledgeHolder
-  - type: KnowledgeGrant
-    skills:
-      StrengthKnowledge: 0
-      ToughnessKnowledge: 0
-      AthleticsKnowledge: 0
-      MeleeKnowledge: 0
   # </Trauma>
   # Shitmed - woundable visuals used instead
   #- type: DamageVisuals
