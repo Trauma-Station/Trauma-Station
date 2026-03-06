@@ -1,4 +1,5 @@
-// <Trauma>
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Shared.Abductor;
 using Content.Medical.Shared.ItemSwitch;
 using Content.Server.Humanoid.Systems;
@@ -138,4 +139,3 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
         ent.Comp.OriginalName = null;
     }
 }
-// </Trauma>

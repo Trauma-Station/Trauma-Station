@@ -1,4 +1,5 @@
-// <Trauma>
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Body;
 using Robust.Shared.Prototypes;
 
@@ -13,4 +14,3 @@ public sealed partial class AbductorVestDisguiseComponent : Component
     [DataField]
     public Dictionary<EntityUid, PrototypeLayerData>? OriginalOrganData;
 }
-// </Trauma>
