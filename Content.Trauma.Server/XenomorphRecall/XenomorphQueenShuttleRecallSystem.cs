@@ -1,4 +1,3 @@
-// <Trauma>
 using Content.Server.Chat.Systems;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
@@ -7,11 +6,9 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Localization;
 using Robust.Shared.Timing;
-// </Trauma>
 
 namespace Content.Server._White.Xenomorphs;
 
-// <Trauma>
 public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
 {
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
@@ -33,27 +30,22 @@ public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
 
         var queenAlive = false;
 
-        // Get the station map so we can check if the queen is physically on it.
-        var stationMap = _roundEnd.GetStation();
+        if (_roundEnd.GetStation() is not {} stationMap)
+            return;
 
-        if (stationMap != null)
+        var queenQuery = EntityQueryEnumerator<XenomorphQueenComponent, MobStateComponent, TransformComponent>();
+        while (queenQuery.MoveNext(out _, out _, out var mobState, out var xform))
         {
-            var queenQuery = EntityQueryEnumerator<XenomorphQueenComponent, MobStateComponent, TransformComponent>();
-            while (queenQuery.MoveNext(out _, out _, out var mobState, out var xform))
-            {
-                if (mobState.CurrentState == MobState.Dead)
-                    continue;
+            if (mobState.CurrentState == MobState.Dead)
+                continue;
 
-                // Only count queens that are on the same map as the station.
-                if (xform.MapUid != stationMap)
-                    continue;
+            if (xform.MapUid != stationMap)
+                continue;
 
-                queenAlive = true;
-                break;
-            }
+            queenAlive = true;
+            break;
         }
 
-        // If the shuttle was already called and the queen is alive, force recall it.
         if (queenAlive && _roundEnd.ExpectedCountdownEnd != null && !_emergency.EmergencyShuttleArrived)
         {
             _roundEnd.CancelRoundEndCountdown(forceRecall: true);
@@ -64,4 +56,3 @@ public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
         }
     }
 }
-// </Trauma>
