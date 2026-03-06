@@ -189,7 +189,6 @@ public sealed class QualitySystem : EntitySystem
         newComp.LevelDeltas = original.Comp.LevelDeltas;
         newComp.Quality = original.Comp.Quality;
         newComp.QualityModifiers = original.Comp.QualityModifiers;
-        newComp.QualityCoefficent = original.Comp.QualityCoefficent;
         Dirty(created, newComp);
 
         ApplyQuality((created, newComp));
