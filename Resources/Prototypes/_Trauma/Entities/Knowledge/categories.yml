@@ -87,7 +87,7 @@
     category: MartialArt
     experienceCost: 10
     color: "#c70000"
-    costs: [36] # Being able to learn any of these roundstart needs an insane cost
+    costs: [50] # Being able to learn any of these roundstart needs an insane cost
   - type: MartialArtsKnowledge
     blocked: false
     icon: Objects/Misc/skub.rsi
