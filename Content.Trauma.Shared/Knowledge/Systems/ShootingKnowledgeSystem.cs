@@ -3,12 +3,11 @@
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
-internal class ShootingKnowledgeSystem : EntitySystem
+public sealed class ShootingKnowledgeSystem : EntitySystem
 {
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;

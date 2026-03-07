@@ -67,7 +67,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeLanguage();
         InitializeMartialArts();
         InitializeOnWear();
-        InitializeShooting();
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnContainerStartup);
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnContainerShutdown);
