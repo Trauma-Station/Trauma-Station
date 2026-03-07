@@ -93,7 +93,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             if (_knowledge.EnsureKnowledge(brain, id, popup: true) is not { } skill)
                 continue;
 
-            if (!TryComp<KnowledgeComponent>(skill, out var foundComp) || !(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (foundComp.Level < skillCap || skillCap < 0)))
+            if (!(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0)))
                 continue;
 
             hasLearned |= true;

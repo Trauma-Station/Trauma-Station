@@ -3,9 +3,6 @@
 using Content.Medical.Common.Targeting;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Events;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
-using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Knowledge;
@@ -15,17 +12,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-
     private static readonly EntProtoId FirstAidKnowledge = "FirstAidKnowledge";
-    private static readonly DamageSpecifier NeedleDamage = new DamageSpecifier
-    {
-        DamageDict = new Dictionary<string, FixedPoint2>
-        {
-            { "Brute", 10 }
-        }
-    };
-
     public void InitializeInjector()
     {
         SubscribeLocalEvent<InjectorComponent, InjectorBeforeInjectEvent>(OnInjectorCheck);
@@ -58,7 +45,6 @@ public abstract partial class SharedKnowledgeSystem
             part = targeting.Target;
         }
 
-        _damageable.TryChangeDamage(target, NeedleDamage, targetPart: part, origin: user);
         if (user == target)
         {
             args.OverrideMessage = Loc.GetString("injection-failed-self", ("target", target), ("user", user), ("part", part));
