@@ -213,8 +213,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, int levelCap = 100, bool popup = true)
     {
-        // FIXME: xp gaining needs to be reworked to be less shit, each source needs to say the mastery level it can raise up to
-        if (GetKnowledge(ent, id) is not {} unit)
+        /* FIXME: xp gaining needs to be reworked to be less shit, each source needs to say the mastery level it can raise up to
+        if (GetKnowledge(ent, id) is not { } unit)
         {
             // if you don't have it, you have a small change to learn it when gaining some xp
             if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))
@@ -229,6 +229,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             var updateEv = new UpdateExperienceEvent();
             RaiseLocalEvent(holder, ref updateEv);
         }
+        */
     }
 
     public void AddExperience(Entity<KnowledgeComponent> ent, EntityUid target, int added)
