@@ -1,0 +1,148 @@
+- type: entity
+  parent: BaseItem
+  id: BaseTrainingObject
+  abstract: true
+  components:
+  - type: Sprite # TODO: different fucking sprite
+    sprite: _Trauma/Objects/Knowledge/light_dumbbell.rsi
+    layers:
+    - state: icon
+  - type: StaticPrice
+    price: 20
+  - type: Item
+    size: Small
+    storedRotation: -45
+
+- type: entity
+  parent: BaseTrainingObject
+  id: BaseTrainingObjectLightDumbbell
+  abstract: true
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      StrengthKnowledge: 16
+    experience:
+      StrengthKnowledge: 1
+    doAfter: 1
+  - type: MeleeWeapon
+    animationRotation: -135
+    heavyStaminaCost: 15
+    attackRate: 0.8
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 4
+    soundHit:
+      path: /Audio/Weapons/smash.ogg
+
+- type: entity
+  parent: BaseTrainingObject
+  id: BaseTrainingObjectDumbbell
+  abstract: true
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      StrengthKnowledge: 26
+    experience:
+      StrengthKnowledge: 1
+    doAfter: 3
+  - type: MeleeWeapon
+    animationRotation: -135
+    heavyStaminaCost: 15
+    attackRate: 0.8
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 6
+    soundHit:
+      path: /Audio/Weapons/smash.ogg
+  - type: StaminaDamageOnHit
+    damage: 1
+
+- type: entity
+  parent: BaseTrainingObject
+  id: BaseTrainingObjectHeavyDumbbell
+  abstract: true
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      StrengthKnowledge: 51
+    experience:
+      StrengthKnowledge: 3
+    doAfter: 5
+  - type: MeleeWeapon
+    animationRotation: -135
+    heavyStaminaCost: 15
+    attackRate: 0.8
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 8
+    soundHit:
+      path: /Audio/Weapons/smash.ogg
+  - type: StaminaDamageOnHit
+    damage: 2
+
+- type: entity
+  parent: BaseTrainingObjectLightDumbbell
+  id: TrainingObjectDumbbellPlastic
+  name: plastic dumbbell
+  description: A small, lightweight dumbbell made of plastic. Helps you train your strength.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+
+- type: entity
+  parent: BaseTrainingObjectLightDumbbell
+  id: TrainingObjectDumbbellWood
+  name: wooden dumbbell
+  description: A small, lightweight dumbbell made of wood. Helps you train your strength.
+  components:
+  - type: Sprite
+    color: "#7c573c"
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 200
+
+- type: entity
+  parent: BaseTrainingObjectDumbbell
+  id: TrainingObjectDumbbell
+  name: dumbbell
+  description: A small dumbbell made of steel. Helps you train your strength.
+  components:
+  - type: Sprite
+    color: "#808080"
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+
+- type: entity
+  parent: BaseTrainingObjectHeavyDumbbell
+  id: TrainingObjectDumbbellPlasteel
+  name: plasteel dumbbell
+  description: A small, heavy dumbbell made of plasteel. Helps you train your strength.
+  components:
+  - type: Sprite
+    color: "#7c718c"
+  - type: PhysicalComposition
+    materialComposition:
+      Plasteel: 100
+
+- type: entity
+  parent: BaseTrainingObjectHeavyDumbbell
+  id: TrainingObjectDumbbellGold
+  name: golden dumbbell
+  description: A small, heavy dumbbell made of gold. Helps you train your strength.
+  components:
+  - type: Sprite
+    color: "#d3b56a"
+  - type: PhysicalComposition
+    materialComposition:
+      Gold: 100
+  - type: KnowledgeGrantOnUse
+    skills:
+      StrengthKnowledge: 100 # Uncapped.
+    experience:
+      StrengthKnowledge: 1 # But shit.
+    doAfter: 5

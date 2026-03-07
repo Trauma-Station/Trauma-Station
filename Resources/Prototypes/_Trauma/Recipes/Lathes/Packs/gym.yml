@@ -1,0 +1,7 @@
+- type: latheRecipePack
+  id: GymEquipment
+  recipes:
+  - DumbbellPlastic
+  - DumbbellSteel
+  - DumbbellPlasteel
+  - DumbbellGold

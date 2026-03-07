@@ -1,0 +1,27 @@
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: DumbbellPlastic
+  result: TrainingObjectDumbbellPlastic
+  materials:
+    Plastic: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: DumbbellSteel
+  result: TrainingObjectDumbbell
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: DumbbellPlasteel
+  result: TrainingObjectDumbbellPlasteel
+  materials:
+    Plasteel: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: DumbbellGold
+  result: TrainingObjectDumbbellGold
+  materials:
+    Plasteel: 100
