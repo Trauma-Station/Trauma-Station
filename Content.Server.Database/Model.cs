@@ -89,7 +89,17 @@ namespace Content.Server.Database
                     dict => new Dictionary<string, int>(dict)
                 ));
             profile.Property(p => p.KnowledgeRemoved)
-                .HasDefaultValue(new List<string>());
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v),
+                    s => string.IsNullOrEmpty(s)
+                        ? new()
+                        : JsonSerializer.Deserialize<List<string>>(s) ?? new()
+                )
+                .Metadata.SetValueComparer(new ValueComparer<List<string>>(
+                    (a, b) => a != null && b != null && a.Count == b.Count && !a.Except(b).Any(),
+                    dict => dict.GetHashCode(),
+                    dict => new List<string>(dict)
+                ));
             profile.HasIndex(p => new { p.Slot, PrefsId = p.PreferenceId })
                 .IsUnique();
             // </Trauma>
