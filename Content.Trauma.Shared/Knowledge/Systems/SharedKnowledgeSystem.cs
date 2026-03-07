@@ -591,6 +591,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
+    public void RelayMartialArt<T>(Entity<KnowledgeHolderComponent> ent, ref T args) where T : notnull
+    {
+        if (GetActiveMartialArt(ent) is {} skill)
+            RaiseLocalEvent(skill, ref args);
+    }
+
     public override Dictionary<EntProtoId, int> GetSkillMasteries(EntityUid target)
     {
         var skills = new Dictionary<EntProtoId, int>();

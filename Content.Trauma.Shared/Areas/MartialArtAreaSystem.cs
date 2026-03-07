@@ -8,21 +8,17 @@ public sealed class MartialArtAreaSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
 
-    private EntityQuery<MartialArtAreaComponent> _query;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        _query = GetEntityQuery<MartialArtAreaComponent>();
-
-        SubscribeLocalEvent<TransformComponent, CanDoCQCEvent>(OnCanDoCQC);
+        SubscribeLocalEvent<AreaMartialArtComponent, CanDoCQCEvent>(OnCanDoCQC);
     }
 
-    private void OnCanDoCQC(Entity<TransformComponent> ent, ref CanDoCQCEvent args)
+    private void OnComboAttempt(Entity<AreaMartialArtComponent> ent, ref ComboAttemptEvent args)
     {
-        args.Handled |= _area.GetArea(ent.Comp.Coordinates) is { } area &&
-            _query.TryComp(area, out var comp) &&
-            comp.Form == args.Form;
+        args.Cancelled |= _area.GetArea(ent.Comp.Coordinates) is not { } area ||
+            Prototype(area) is not {} id ||
+            !ent.Comp.Areas.Contains(id);
     }
 }

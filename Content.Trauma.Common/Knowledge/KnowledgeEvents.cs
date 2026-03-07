@@ -34,18 +34,6 @@ public record struct UpdateExperienceEvent();
 public record struct UpdateItemQualityEvent(EntityUid User);
 
 /// <summary>
-/// Called in order to invoke sneak attack failure.
-/// </summary>
-[ByRefEvent]
-public record struct InvokeSneakAttackSurprisedEvent();
-
-/// <summary>
-/// Called in order to invoke sneak attack failure.
-/// </summary>
-[ByRefEvent]
-public record struct CanDoSneakAttackEvent(bool CanSneakAttack);
-
-/// <summary>
 /// Called in order to invoke damage modifiers for martial arts. Call on the art itself.
 /// </summary>
 [ByRefEvent]

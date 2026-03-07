@@ -96,10 +96,10 @@ namespace Content.Client.Hands
             var handEntity = _hands.GetActiveHandEntity();
 
             // Goob edit start
-            if (_player.LocalEntity != null)
+            if (_player.LocalEntity is {} player)
             {
                 var comboEv = new GetPerformedAttackTypesEvent(null);
-                _entMan.EventBus.RaiseLocalEvent(_player.LocalEntity.Value, ref comboEv);
+                _entMan.EventBus.RaiseLocalEvent(player, ref comboEv);
                 if (comboEv.AttackTypes is { Count: > 0 })
                 {
                     var color = Color.White.WithAlpha(0.75f);

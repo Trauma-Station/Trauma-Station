@@ -45,10 +45,10 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<ComboActionsComponent, KnowledgeEnabledEvent>(OnComboActionsEnabled);
         SubscribeLocalEvent<ComboActionsComponent, KnowledgeDisabledEvent>(OnComboActionsDisabled);
 
-        SubscribeLocalEvent<KnowledgeHolderComponent, ShotAttemptedEvent>(OnShotAttempt);
-        SubscribeLocalEvent<NoGunComponent, ShotAttemptedEvent>(OnShotAttemptKnowledge);
+        SubscribeLocalEvent<KnowledgeHolderComponent, ShotAttemptedEvent>(RelayMartialArt);
+        SubscribeLocalEvent<NoGunComponent, ShotAttemptedEvent>(OnNoGunShotAttempted);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeInteractHandEvent>(OnInteract);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
+        SubscribeLocalEvent<KnowledgeHolderComponent, ComboAttackPerformedEvent>(RelayMartialArt);
         SubscribeLocalEvent<KnowledgeHolderComponent, MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeStaminaDamageEvent>(OnStaminaTakeDamage);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
@@ -99,20 +99,9 @@ public abstract partial class SharedKnowledgeSystem
         Dirty(ent);
     }
 
-    private void OnShotAttempt(Entity<KnowledgeHolderComponent> ent, ref ShotAttemptedEvent args)
+    private void OnNoGunShotAttempted(Entity<NoGunComponent> ent, ref ShotAttemptedEvent args)
     {
-        if (GetContainer(ent) is not { } brain ||
-            brain.Comp.ActiveMartialArt is not { } martialArtUid)
-            return;
-
-        RaiseLocalEvent(martialArtUid, ref args);
-
-        if (args.Cancelled)
-            _popup.PopupClient(Loc.GetString("gun-disabled"), ent, ent);
-    }
-
-    private void OnShotAttemptKnowledge(Entity<NoGunComponent> ent, ref ShotAttemptedEvent args)
-    {
+        _popup.PopupClient(Loc.GetString("gun-disabled"), args.User, args.User);
         args.Cancel();
     }
 
@@ -124,13 +113,9 @@ public abstract partial class SharedKnowledgeSystem
         if (GetActiveMartialArt(ent) is not { } skill)
             return;
 
-        RaiseLocalEvent(skill, new ComboAttackPerformedEvent(ent.Owner, args.Target, ent.Owner, ComboAttackType.Hug));
-    }
-
-    public void OnComboAttackPerformed(Entity<KnowledgeHolderComponent> ent, ref ComboAttackPerformedEvent args)
-    {
-        if (GetActiveMartialArt(ent) is { } skill)
-            RaiseLocalEvent(skill, args);
+        // TODO: give this a cooldown
+        var ev = new ComboAttackPerformedEvent(ent.Owner, args.Target, ent.Owner, ComboAttackType.Hug);
+        RaiseLocalEvent(skill, ref ev);
     }
 
     private void OnMeleeHit(Entity<KnowledgeHolderComponent> ent, ref MeleeHitEvent args)

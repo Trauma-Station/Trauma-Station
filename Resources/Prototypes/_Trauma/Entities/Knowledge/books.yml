@@ -16,8 +16,8 @@
   components:
   - type: EntityTableContainerFill
     containers:
-      entity_storage:
-        id: RandomSkillbook
+      entity_storage: !type:NestedSelector
+        tableId: RandomSkillbook
 
 - type: entityTable
   id: RandomSkillbook

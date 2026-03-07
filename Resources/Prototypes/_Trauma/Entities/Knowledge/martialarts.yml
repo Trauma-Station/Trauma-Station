@@ -29,9 +29,12 @@
   components:
   - type: Knowledge
     costs: null # chef only
-  - type: MartialArtsKnowledge
-    blocked: true # TODO: make this its own component
-  # TODO: make it prevent learning regular CQC and vice versa
+  - type: AreaMartialArts
+    areas:
+    - AreaKitchen
+    - AreaColdRoom
+    - AreaCafeteria
+  # TODO: make it mutually exclusive with real CQC
 
 - type: entity
   parent: BaseMartialArtsKnowledge
