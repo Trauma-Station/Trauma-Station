@@ -247,6 +247,9 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
     }
     private void OnGotHungUp(Entity<RotaryPhoneComponent> ent, ref PhoneHungUpEvent args)
     {
+        if (!ent.Comp.Connected)
+            return;
+
         ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.HandUpSoundLocal, ent.Owner, ent.Owner, AudioParams.Default.WithMaxDistance(2.5f))?.Entity;
 
         ent.Comp.ConnectedPhone = null;
@@ -277,6 +280,8 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
 
             if (!thisPhone.Connected && TryComp<RotaryPhoneComponent>(thisPhone.ConnectedPhone, out var otherPhone))
             {
+                if (otherPhone.ConnectedPhoneStand != null)
+                    UpdateAppearance(otherPhone.ConnectedPhoneStand.Value, RotaryPhoneVisuals.Base);
                 if (otherPhone.SoundEntity != null)
                     otherPhone.SoundEntity = _audio.Stop(otherPhone.SoundEntity);
 

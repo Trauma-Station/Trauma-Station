@@ -5,6 +5,6 @@
   description: A flatpack used for constructing a Rotary Phone.
   components:
   - type: Flatpack
-    entity: RotaryPhoneStand
+    entity: RotaryPhoneStandNoRot
   - type: Item
     size: Normal

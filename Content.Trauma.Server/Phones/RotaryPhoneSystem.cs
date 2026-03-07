@@ -182,11 +182,9 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
 
     private void DoCallLogic(RotaryPhoneComponent phoneComp, Entity<RotaryPhoneComponent> ent, EntityUid phone)
     {
-        if (!phoneComp.Engaged)
+        if (!phoneComp.Engaged && phoneComp.ConnectedPhone is null)
         {
-            ent.Comp.Engaged = true;
             ent.Comp.ConnectedPhone = phone;
-            phoneComp.Engaged = true;
             ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.RingingSound, ent.Owner, ent.Owner, AudioParams.Default.WithLoop(true).WithMaxDistance(2.5f))?.Entity;
             RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.OutGoingPort);
 
