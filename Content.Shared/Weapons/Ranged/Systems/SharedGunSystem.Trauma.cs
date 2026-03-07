@@ -131,8 +131,9 @@ public abstract partial class SharedGunSystem
         if (userUid is not {} user)
             return;
 
-        var evShooting = new AddExperienceEvent(ShootingKnowledge, 1);
-        var evWeapons = new AddExperienceEvent(WeaponsKnowledge, 1);
+        // TODO: scale it based on the gun, pistols are easier to shoot than railguns
+        var evShooting = new AddExperienceEvent(ShootingKnowledge, 1, 20);
+        var evWeapons = new AddExperienceEvent(WeaponsKnowledge, 1, 20);
         RaiseLocalEvent(user, ref evShooting);
         RaiseLocalEvent(user, ref evWeapons);
     }

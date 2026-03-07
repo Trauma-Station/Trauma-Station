@@ -51,7 +51,7 @@ public sealed partial class ThrowingSystem
         RaiseLocalEvent(user, ref evThrowing);
 
         // Make it so you can't just throw a wrapper over and over again.
-        var evStrength = new AddExperienceEvent(StrengthKnowledge, (int) (weight / 10));
+        var evStrength = new AddExperienceEvent(StrengthKnowledge, 1, (int) (weight / 10));
         RaiseLocalEvent(user, ref evStrength);
 
         return baseThrowSpeed;

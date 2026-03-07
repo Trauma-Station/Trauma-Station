@@ -14,4 +14,13 @@
   components:
   - type: Knowledge
     experienceCost: 19
-    costs: [1, 2, 3, 6, 12, 16] # basic first aid is easy enough
+    costs: [0, 2, 3, 6, 12, 16] # basic first aid is easy enough
+  - type: InjectTimeKnowledge
+    # y = 1 + 1.4(0.6 - 0.01x)^3
+    # 30% slower, 9% faster at lvl 0/100
+    # no effect around lvl 60
+    curve: !type:CubicSkillCurve
+      skillOffset: 0.6
+      skillScale: -1 # decrease with skill rather than increase
+      curveOffset: 1 # multiplying time so has to be centered at 1
+      curveScale: 1.4

@@ -96,9 +96,8 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             if (!(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0)))
                 continue;
 
-            hasLearned |= true;
-            var ev = new AddExperienceEvent(id, xp);
-            RaiseLocalEvent(args.User, ref ev);
+            hasLearned = true;
+            _knowledge.AddExperience(skill, user, xp, skillCap);
         }
 
         args.Handled = true;

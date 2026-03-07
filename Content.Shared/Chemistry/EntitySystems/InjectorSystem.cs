@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Chemistry;
+using Content.Trauma.Common.Chemistry;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -312,6 +313,12 @@ public sealed partial class InjectorSystem : EntitySystem
         // Technically, both can be true, but that is probably a balance nightmare.
         else if (_standingState.IsDown(target))
             doAfterTime *= activeMode.DownedModifier;
+
+        // <Trauma>
+        var ev = new UserModifyInjectTimeEvent(user, injector, doAfterTime);
+        RaiseLocalEvent(user, ref ev);
+        doAfterTime = ev.Delay;
+        // </Trauma>
 
         return true;
     }

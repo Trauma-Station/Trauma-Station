@@ -134,7 +134,8 @@ public partial class MartialArtsSystem
         {
             if (Prototype(ent)?.ID is not { } prototypeId)
                 return;
-            var ev = new AddExperienceEvent(prototypeId, 1);
+            // TODO: limit it to be based on your opponent's martial art level + 10
+            var ev = new AddExperienceEvent(prototypeId, 1, 10);
             RaiseLocalEvent(performer, ref ev);
         }
 

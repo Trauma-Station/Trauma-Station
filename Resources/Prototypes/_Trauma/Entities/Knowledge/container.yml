@@ -7,3 +7,6 @@
   - type: ContainerContainer
     containers:
       knowledge: !type:Container
+  - type: KnowledgeGrant
+    skills:
+      FirstAidKnowledge: 0 # needed for injector speed to be slower when unskilled

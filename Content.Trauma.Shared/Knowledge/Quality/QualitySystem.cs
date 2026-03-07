@@ -252,13 +252,15 @@ public sealed class QualitySystem : EntitySystem
         Dirty(ent);
         ApplyQuality(ent);
 
-        var evCrafting = new AddExperienceEvent(CraftingKnowledge, Math.Abs(ent.Comp.Quality / 2));
+        // TODO: limit skill gain based on the recipe used
+        var evCrafting = new AddExperienceEvent(CraftingKnowledge, Math.Abs(ent.Comp.Quality / 2), 20);
         RaiseLocalEvent(user, ref evCrafting);
 
         if (lowestId is not { } actualId)
             return;
 
-        var ev = new AddExperienceEvent(actualId, Math.Abs(ent.Comp.Quality / 2));
+        // TODO: above
+        var ev = new AddExperienceEvent(actualId, Math.Abs(ent.Comp.Quality / 2), 20);
         RaiseLocalEvent(user, ref ev);
     }
 

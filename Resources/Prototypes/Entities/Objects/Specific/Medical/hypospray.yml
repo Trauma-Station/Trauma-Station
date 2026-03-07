@@ -15,9 +15,6 @@
     solution: hypospray
     exactVolume: true
   - type: Appearance
-  # <Trauma>
-  - type: EasyToUse
-  # </Trauma>
 
 - type: entity
   parent: [BaseHypospray, BaseGrandTheftContraband]

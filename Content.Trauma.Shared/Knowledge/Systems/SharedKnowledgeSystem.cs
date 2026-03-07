@@ -48,14 +48,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private TimeSpan _nextUpdate;
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
-    //private float _learnChance = 0.2f;
+    private float _learnChance = 0.2f;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
-        InitializeConstruction();
-        InitializeInjector();
         InitializeLanguage();
         InitializeMartialArts();
         InitializeOnWear();
@@ -89,17 +87,29 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         _nextUpdate = _timing.CurTime + _updateDelay;
 
+        // client only predicts rolling for itself
+        if (_player.LocalEntity is {} player)
+        {
+            UpdateHolder(player);
+            return;
+        }
+
         var query = EntityQueryEnumerator<KnowledgeHolderComponent>();
         while (query.MoveNext(out var ent, out _))
         {
-            if (TryGetAllKnowledgeUnits(ent) is not { } knowledgeUnits)
-                continue;
+            UpdateHolder(ent);
+        }
+    }
 
-            foreach (var knowledgeUnit in knowledgeUnits)
-            {
-                if (RollForLevelUp(knowledgeUnit, ent))
-                    break;
-            }
+    private void UpdateHolder(EntityUid ent)
+    {
+        if (TryGetAllKnowledgeUnits(ent) is not { } knowledgeUnits)
+            continue;
+
+        foreach (var knowledgeUnit in knowledgeUnits)
+        {
+            if (RollForLevelUp(knowledgeUnit, ent))
+                break;
         }
     }
 
@@ -213,7 +223,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, int levelCap = 100, bool popup = true)
     {
-        /* FIXME: xp gaining needs to be reworked to be less shit, each source needs to say the mastery level it can raise up to
         if (GetKnowledge(ent, id) is not { } unit)
         {
             // if you don't have it, you have a small change to learn it when gaining some xp
@@ -222,20 +231,19 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return;
         }
 
-        if (unit.Comp.Level < levelCap && ent.Comp.Holder is { } holder)
+        if (ent.Comp.Holder is { } holder)
         {
-            AddExperience(unit, holder, xp);
+            AddExperience(unit, holder, xp, levelCap);
 
             var updateEv = new UpdateExperienceEvent();
             RaiseLocalEvent(holder, ref updateEv);
         }
-        */
     }
 
-    public void AddExperience(Entity<KnowledgeComponent> ent, EntityUid target, int added)
+    public void AddExperience(Entity<KnowledgeComponent> ent, EntityUid target, int added, int limit = 100)
     {
         var now = _timing.CurTime;
-        if (now < ent.Comp.TimeToNextExperience || ent.Comp.Level >= 100)
+        if (now < ent.Comp.TimeToNextExperience || ent.Comp.Level >= Math.Min(limit, 100))
             return;
 
         ent.Comp.TimeToNextExperience = now + TimeSpan.FromSeconds(5);
@@ -475,6 +483,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         return knowledgeEnts;
     }
+
+    /// <summary>
+    /// Returns true if an entity is a knowldge holder, regardless of having a container set.
+    /// </summary>
+    public bool IsHolder(EntityUid target)
+        => _holderQuery.HasComp(target);
 
     /// <summary>
     /// Returns true if that knowledge can be removed, by taking

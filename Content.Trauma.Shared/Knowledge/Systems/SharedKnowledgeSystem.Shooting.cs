@@ -20,7 +20,8 @@ public abstract partial class SharedKnowledgeSystem
         if (args.Shooter is not { } shooter || !_mobState.IsAlive(args.Target))
             return;
 
-        var ev = new AddExperienceEvent(ShootingKnowledge, 1);
+        // TODO: higher caliber has higher limit
+        var ev = new AddExperienceEvent(ShootingKnowledge, 1, 10);
         RaiseLocalEvent(shooter, ref ev);
     }
 }

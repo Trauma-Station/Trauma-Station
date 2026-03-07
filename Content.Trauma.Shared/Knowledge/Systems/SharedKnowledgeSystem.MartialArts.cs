@@ -186,13 +186,16 @@ public abstract partial class SharedKnowledgeSystem
             _timing.ApplyingState || !_timing.IsFirstTimePredicted)
             return;
 
+        // TODO: this has fucking nothing to do with martial arts make a separate system for it
         if (_mobState.IsAlive(ent))
         {
-            var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) delta.GetTotal() / 5, 10));
+            // to get 100 toughness you have to take 100 damage over and over... have fun
+            var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) delta.GetTotal() / 5, 10), delta.GetTotal().Int());
             RaiseLocalEvent(ent, ref ev);
         }
         if (GetActiveMartialArt(ent) is { } martialArt)
         {
+            // TODO: bruh
             var evSneakAttack = new InvokeSneakAttackSurprisedEvent();
             RaiseLocalEvent(martialArt, ref evSneakAttack);
         }

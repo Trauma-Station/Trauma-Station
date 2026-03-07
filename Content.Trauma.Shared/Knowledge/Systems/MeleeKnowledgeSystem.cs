@@ -22,8 +22,8 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
     [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
 
-
     private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -33,12 +33,15 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
 
     private void OnMeleeExperience(MeleeHitEvent args)
     {
+        var user = args.User;
+        if (!_knowledge.IsHolder(user))
+            return;
 
         var xpMelee = 0;
         float weight = 0.0f;
         foreach (var hit in args.HitEntities)
         {
-            if (args.User == hit)
+            if (user == hit)
                 continue;
 
             if (TryComp<PhysicsComponent>(hit, out var comp))
@@ -50,20 +53,26 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
             xpMelee++;
         }
 
-        var limit = 100;
-        if (args.BaseDamage.GetTotal() <= 2)
-            limit = 26;
+        var limit = args.BaseDamage.GetTotal().Int() switch
+        {
+            >= 50 => 100, // gonna have to get creative to master it
+            >= 30 => 50,
+            >= 20 => 26,
+            >= 5 => 10,
+            _ => 0
+        };
 
-        // send experience based on active combatants.
+        // give experience based on valid hit entities
         var evMelee = new AddExperienceEvent(MeleeKnowledge, xpMelee, limit);
-        RaiseLocalEvent(args.User, ref evMelee);
+        RaiseLocalEvent(user, ref evMelee);
 
-        // send experience based on weight.
-        var evStrength = new AddExperienceEvent(MeleeKnowledge, Math.Min((int) (weight / 10), 10));
-        RaiseLocalEvent(args.User, ref evStrength);
+        // give experience based on weight.
+        var evStrength = new AddExperienceEvent(MeleeKnowledge, Math.Min((int) (weight / 10), 10), limit);
+        RaiseLocalEvent(user, ref evStrength);
     }
 
     // Miss Event Hook
+    /* this isnt implemented and melee miss should only be like 10% chance not guaranteed, its awful
     private void OnAttackMiss(MeleeHitEvent args)
     {
         if (_knowledge.GetContainer(args.User) is not { } brain)
@@ -80,4 +89,5 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
             args.Handled = true;
         }
     }
+    */
 }
