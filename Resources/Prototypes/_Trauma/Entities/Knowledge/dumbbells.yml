@@ -9,6 +9,8 @@
     - state: icon
   - type: StaticPrice
     price: 20
+  - type: KnowledgeGrantOnUse
+    singleUse: false
   - type: Item
     size: Small
     storedRotation: -45
@@ -144,5 +146,5 @@
     skills:
       StrengthKnowledge: 100 # Uncapped.
     experience:
-      StrengthKnowledge: 1
+      StrengthKnowledge: 1 # But shit.
     doAfter: 8 # But shit.
