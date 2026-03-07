@@ -626,7 +626,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (user is { } userA)
         {
             var ev = new AmmoShotUserEvent();
-            RaiseLocalEvent(userA, ev);
+            RaiseLocalEvent(userA, ref ev);
         }
         // </Trauma>
 
