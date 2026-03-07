@@ -68,6 +68,15 @@ public partial class MartialArtsSystem
             return;
         }
 
+        ent.Comp.CurrentTarget = args.Target;
+        ent.Comp.ResetTime = _timing.CurTime + TimeSpan.FromSeconds(5);
+        ent.Comp.LastAttacks.Add(args.Type);
+        if (ent.Comp.LastAttacksLimit >= 0)
+        {
+            var difference = ent.Comp.LastAttacks.Count - ent.Comp.LastAttacksLimit;
+            if (difference > 0)
+                ent.Comp.LastAttacks.RemoveRange(0, difference);
+        }
         CheckCombo(ent, ref args);
     }
 
