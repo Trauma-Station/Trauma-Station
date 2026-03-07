@@ -9,6 +9,8 @@
     - state: icon
   - type: StaticPrice
     price: 20
+  - type: KnowledgeGrantOnUse
+    singleUse: false
   - type: Item
     size: Small
     storedRotation: -45
