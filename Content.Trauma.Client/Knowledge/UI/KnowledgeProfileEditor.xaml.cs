@@ -78,7 +78,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
             control.OnChangeMastery += diff =>
             {
                 var sum = control.Mastery + diff;
-                if (sum > 5)
+                if (sum >= costs.Length)
                     return;
 
                 if (sum < 0)

@@ -33,6 +33,6 @@ public sealed partial class SkillControl : BoxContainer
         var cost = _costs[mastery];
         MasteryLabel.Text = Loc.GetString("knowledge-editor-mastery", ("mastery", name), ("cost", cost));
         // decrease button is also used for removing, only increase can be disabled
-        IncreaseButton.Disabled = mastery >= 5;
+        IncreaseButton.Disabled = mastery >= _costs.Length - 1;
     }
 }

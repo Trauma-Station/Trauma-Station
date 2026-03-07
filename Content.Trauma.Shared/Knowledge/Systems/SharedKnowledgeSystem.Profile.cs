@@ -33,7 +33,7 @@ public abstract partial class SharedKnowledgeSystem
         {
             // remove any masteries that go out of bounds when added to the parent, or if their skill is invalid/cant be bought
             var net = mastery + parent.Profile.Mastery.GetValueOrDefault(id);
-            if (net < 0 || net > 5 || SkillCost(id, net) == null)
+            if (net < 0 || SkillCost(id, net) == null)
                 _invalid.Add(id);
         }
 
@@ -84,12 +84,20 @@ public abstract partial class SharedKnowledgeSystem
     }
 
     /// <summary>
-    /// Gets the cost to have a skill at a given mastery level.
+    /// Gets the costs to have a skill at each allowed mastery level.
     /// Returns null if the skill cannot be picked.
-    /// Throws for invalid mastery values.
+    /// </summary>
+    public int[]? SkillCosts(EntProtoId id)
+        => AllKnowledges.TryGetValue(id, out var comp) && comp.Costs is { } costs
+            ? costs
+            : null;
+
+    /// <summary>
+    /// Gets the cost to have a skill at a given mastery level.
+    /// Returns null if the skill cannot be picked or the mastery is invalid.
     /// </summary>
     public int? SkillCost(EntProtoId id, int mastery)
-        => AllKnowledges.TryGetValue(id, out var comp) && comp.Costs is { } costs
+        => SkillCosts(id) is {} costs && mastery < costs.Length
             ? costs[mastery]
             : null;
 }
