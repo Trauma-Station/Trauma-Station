@@ -39,6 +39,7 @@ public abstract partial class SharedKnowledgeSystem
     {
         _artQuery = GetEntityQuery<MartialArtsKnowledgeComponent>();
 
+        SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeAddedEvent>(OnMartialArtAdded);
         SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeRemovedEvent>(OnMartialArtRemoved);
 
         SubscribeLocalEvent<ComboActionsComponent, KnowledgeEnabledEvent>(OnComboActionsEnabled);

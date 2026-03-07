@@ -84,13 +84,29 @@ public sealed class KnowledgeGrantSystem : EntitySystem
     private void DoAfter(Entity<KnowledgeGrantOnUseComponent> ent, ref KnowledgeLearnDoAfterEvent args)
     {
         var user = args.User;
-        if (!_timing.IsFirstTimePredicted || _knowledge.GetContainer(user) is not { } brain)
+        if (!_timing.IsFirstTimePredicted ||
+            args.Cancelled ||
+            _knowledge.GetContainer(user) is not { } brain)
             return;
+
+        args.Handled = true;
+
+        if (ent.Comp.SingleUse)
+        {
+            // no checking if you already had it, don't waste a cqc book if you already know it chud
+            foreach (var (id, level) in ent.Comp.Skills)
+            {
+                _knowledge.EnsureKnowledge(brain, id, level);
+            }
+            PredictedQueueDel(ent);
+            PredictedSpawnNextToOrDrop(ent.Comp.Ash, user);
+            return;
+        }
 
         bool hasLearned = false;
         foreach (var (id, xp) in ent.Comp.Experience)
         {
-            if (_knowledge.EnsureKnowledge(brain, id, popup: true) is not { } skill)
+            if (_knowledge.EnsureKnowledge(brain, id) is not { } skill)
                 continue;
 
             if (!(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0)))
@@ -100,12 +116,9 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             _knowledge.AddExperience(skill, user, xp, skillCap);
         }
 
-        args.Handled = true;
-
-        if (hasLearned)
-            StartLearningDoAfter(args.User, ent);
-        else
-            _popup.PopupClient(Loc.GetString("knowledge-could-not-learn"), args.User, args.User, PopupType.Small);
+        args.Repeat = hasLearned;
+        if (!hasLearned)
+            _popup.PopupClient(Loc.GetString("knowledge-could-not-learn"), args.User, args.User, PopupType.SmallCaution);
     }
 }
 
