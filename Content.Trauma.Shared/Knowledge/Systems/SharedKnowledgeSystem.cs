@@ -12,6 +12,7 @@ using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Silicons.Borgs;
 using Robust.Shared.Containers;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -25,6 +26,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] protected readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -104,12 +106,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     private void UpdateHolder(EntityUid ent)
     {
         if (TryGetAllKnowledgeUnits(ent) is not { } knowledgeUnits)
-            continue;
+            return;
 
         foreach (var knowledgeUnit in knowledgeUnits)
         {
             if (RollForLevelUp(knowledgeUnit, ent))
-                break;
+                return;
         }
     }
 

@@ -16,7 +16,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public sealed partial class MeleeKnowledgeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
