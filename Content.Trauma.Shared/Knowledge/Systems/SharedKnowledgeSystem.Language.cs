@@ -229,7 +229,7 @@ public abstract partial class SharedKnowledgeSystem
         if (now < comp.LastSpoken)
             return; // on cooldown for xp and curse effects
 
-        AddExperience(unit, ent, (int) Math.Clamp((now - comp.LastSpoken).TotalSeconds, 0, 4));
+        AddExperience(unit.AsNullable(), ent, (int) Math.Clamp((now - comp.LastSpoken).TotalSeconds, 0, 4));
 
         comp.LastSpoken = now + TimeSpan.FromSeconds(5);
         Dirty(unit, comp);

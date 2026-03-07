@@ -283,7 +283,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         ent.Comp.Experience += added + ent.Comp.BonusExperience;
         Dirty(ent);
 
-        RollForLevelUp(ent, target);
+        RollForLevelUp((ent, ent.Comp), target);
     }
 
     /// <summary>

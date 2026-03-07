@@ -113,7 +113,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
                 continue;
 
             hasLearned = true;
-            _knowledge.AddExperience(skill, user, xp, skillCap);
+            _knowledge.AddExperience(skill.AsNullable(), user, xp, skillCap);
         }
 
         args.Repeat = hasLearned;
