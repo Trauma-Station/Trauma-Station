@@ -241,8 +241,8 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
             UpdateAppearance(ent.Comp.ConnectedPhoneStand.Value, RotaryPhoneVisuals.Base);
 
         RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.HangUpPort);
-        Dirty(ent);
         DisconnectPhones(ent.Comp);
+        Dirty(ent);
     }
 
     #region Helpers
