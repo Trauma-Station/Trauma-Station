@@ -23,6 +23,7 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
 
     private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
+    //private readonly float _missChance = 0.1f
 
     public override void Initialize()
     {
@@ -99,7 +100,7 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
             return;
         }
 
-        if (_knowledge.GetMastery(melee.Comp) < 2 && SharedRandomExtensions.PredictedProb(_timing, 1 - _knowledge.SharpCurve(melee, 0, 26), GetNetEntity(args.User)))
+        if (_knowledge.GetMastery(melee.Comp) < 2 && SharedRandomExtensions.PredictedProb(_timing, 1 - _missChance * _knowledge.SharpCurve(melee, 0, 26), GetNetEntity(args.User)))
         {
             args.Handled = true;
         }
