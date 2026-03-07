@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Shared.Abductor;
 using Content.Server.Humanoid.Systems;
 using Content.Shared.Body;
