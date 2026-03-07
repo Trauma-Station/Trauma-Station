@@ -68,7 +68,7 @@
     skills:
       StrengthKnowledge: 51
     experience:
-      StrengthKnowledge: 3
+      StrengthKnowledge: 1
     doAfter: 5
   - type: MeleeWeapon
     animationRotation: -135
@@ -144,5 +144,5 @@
     skills:
       StrengthKnowledge: 100 # Uncapped.
     experience:
-      StrengthKnowledge: 1 # But shit.
-    doAfter: 5
+      StrengthKnowledge: 1
+    doAfter: 8 # But shit.
