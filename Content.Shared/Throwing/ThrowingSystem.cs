@@ -208,7 +208,7 @@ public sealed partial class ThrowingSystem : EntitySystem
         if (user != null)
         {
             var ev = new ModifyThrownSpeedEvent(user.Value, baseThrowSpeed, direction.Length());
-            RaiseLocalEvent(uid, ev);
+            RaiseLocalEvent(uid, ref ev);
             baseThrowSpeed = ev.BaseThrowSpeed;
         }
         // </Trauma>
