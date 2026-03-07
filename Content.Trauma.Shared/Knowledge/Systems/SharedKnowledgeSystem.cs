@@ -3,17 +3,20 @@
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Body;
 using Content.Shared.Mind.Components;
-using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Silicons.Borgs;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -24,12 +27,13 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] protected readonly IConfigurationManager _cfg = default!;
+    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] protected readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] protected readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     /// <summary>
     /// Every knowledge prototype and its data.
@@ -48,6 +52,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     private EntityQuery<KnowledgeContainerComponent> _containerQuery;
     private EntityQuery<KnowledgeHolderComponent> _holderQuery;
 
+    private bool _skillGain;
     private TimeSpan _nextUpdate;
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
     private float _learnChance = 0.2f;
@@ -71,6 +76,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<KnowledgeHolderComponent, AddExperienceEvent>(OnAddExperience);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+
+        Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
 
         _query = GetEntityQuery<KnowledgeComponent>();
         _containerQuery = GetEntityQuery<KnowledgeContainerComponent>();
@@ -195,7 +202,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private void OnAddExperience(Entity<KnowledgeHolderComponent> ent, ref AddExperienceEvent args)
     {
-        if (GetContainer(ent) is not { } brain)
+        if (!_skillGain || GetContainer(ent) is not { } brain)
             return;
 
         AddExperience(brain, args.KnowledgeType, args.Experience, args.LevelCap, popup: args.Popup);
@@ -223,8 +230,25 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
+    /// <summary>
+    /// Shows a skill popup to a user, respecting the popup cooldown.
+    /// Can be called from server, client or both.
+    /// Can be hidden by client skill popups setting.
+    /// </summary>
+    public void SkillPopup(string popup, EntityUid user)
+    {
+        var ev = new SkillPopupEvent(popup);
+        if (_net.IsServer)
+            RaiseNetworkEvent(ev, user);
+        else if (_player.LocalEntity == user && _timing.IsFirstTimePredicted)
+            RaiseLocalEvent(ev);
+    }
+
     public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, int levelCap = 100, bool popup = true)
     {
+        if (!_skillGain)
+            return;
+
         if (GetKnowledge(ent, id) is not { } unit)
         {
             // if you don't have it, you have a small change to learn it when gaining some xp
@@ -244,6 +268,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void AddExperience(Entity<KnowledgeComponent> ent, EntityUid target, int added, int limit = 100)
     {
+        if (!_skillGain)
+            return;
+
         var now = _timing.CurTime;
         if (now < ent.Comp.TimeToNextExperience || ent.Comp.Level >= Math.Min(limit, 100))
             return;
@@ -283,14 +310,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         // Controls client popup whatnot when you level up.
         if (rollResult.Item2)
-            _popup.PopupClient(Loc.GetString("knowledge-level-epiphany", ("knowledge", Name(ent))), target, target, PopupType.Medium);
+            SkillPopup(Loc.GetString("knowledge-level-epiphany", ("knowledge", Name(ent))), target);
 
         if (getMastery != GetMastery(ent.Comp.Level) && !rollResult.Item2)
-        {
-            _popup.PopupClient(Loc.GetString("knowledge-level-up-popup", ("knowledge", Name(ent)), ("mastery", GetMasteryString(ent).ToLower())), target, target, PopupType.Medium);
-        }
+            SkillPopup(Loc.GetString("knowledge-level-up-popup", ("knowledge", Name(ent)), ("mastery", GetMasteryString(ent).ToLower())), target);
         else if (!rollResult.Item2)
-            _popup.PopupClient(Loc.GetString("knowledge-level-more", ("knowledge", Name(ent))), target, target, PopupType.Medium);
+            SkillPopup(Loc.GetString("knowledge-level-more", ("knowledge", Name(ent))), target);
 
         return true;
     }
@@ -366,7 +391,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (popup)
         {
             var msg = Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Name(unit)));
-            _popup.PopupPredicted(msg, holder, holder);
+            SkillPopup(msg, holder);
         }
         return (unit, comp);
     }
@@ -408,7 +433,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         PredictedQueueDel(unit);
 
-        _popup.PopupClient(Loc.GetString("knowledge-unit-forgotten-popup", ("knowledge", Name(unit))), holder, holder, PopupType.Medium);
+        SkillPopup(Loc.GetString("knowledge-unit-forgotten-popup", ("knowledge", Name(unit))), holder);
         return target;
     }
 
@@ -690,3 +715,13 @@ public record struct KnowledgeEnabledEvent(Entity<KnowledgeContainerComponent> C
 /// </summary>
 [ByRefEvent]
 public record struct KnowledgeDisabledEvent(Entity<KnowledgeContainerComponent> Container, EntityUid Holder);
+
+/// <summary>
+/// Event to try show a skill popup to the user.
+/// Both networked and raised locally if predicted.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class SkillPopupEvent(string popup) : EntityEventArgs
+{
+    public readonly string Popup = popup;
+}
