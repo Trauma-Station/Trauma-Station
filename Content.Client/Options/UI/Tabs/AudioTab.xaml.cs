@@ -69,11 +69,12 @@ public sealed partial class AudioTab : Control
             SliderVolumeVoiceChat,
             -8, 10);
 
-        // Goobstation - Highlight Chat Ping/Audio!
+        // <Trauma>
         Control.AddOptionPercentSlider(
-            CCVars.ChatHighlightVolume,
+            TraumaCVars.ChatHighlightVolume,
             SliderHighlightVolume,
             scale: 1f);
+        // </Trauma>
 
         Control.AddOptionSlider(
             CCVars.MaxAmbientSources,

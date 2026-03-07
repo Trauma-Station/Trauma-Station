@@ -21,7 +21,6 @@ public sealed class ThrowingKnowledgeSystem : EntitySystem
     private void OnModifyThrowInsertChance(Entity<ThrowInsertKnowledgeComponent> ent, ref ModifyThrowInsertChanceEvent args)
     {
         var level = _knowledge.GetLevel(ent);
-        // once the skill curve reaches 75% you are guaranteed to land it
-        args.Chance += _knowledge.SharpCurve(level, ent.Comp.Offset, ent.Comp.InverseScale);
+        args.Chance += ent.Comp.Curve.GetCurve(level);
     }
 }

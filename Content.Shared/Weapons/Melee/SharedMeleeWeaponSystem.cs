@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
-using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
@@ -296,9 +295,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (user != uid) // Goobstation
             RaiseLocalEvent(user, ref ev);
 
-        // <Trauma>
-        AdjustAttackRate(user, ref ev);
-        // </Trauma>
         return ev.Rate * ev.Multipliers;
     }
 
@@ -626,7 +622,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (hitEvent.Handled)
             return;
 
-        AddExperienceLight(user); // Trauma
         var targets = new List<EntityUid>(1)
         {
             target.Value
@@ -885,9 +880,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);
         }
 
-        // <Trauma>
-        AddExperienceHeavy(user, ref entities);
-        // </Trauma>
         return true;
     }
 
@@ -1095,9 +1087,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return true;
         }
 
-        // <Trauma>
-        DisarmExperience(user, target);
-        // </Trauma>
         ShoveOrDisarmPopup(true);
 
         return true;

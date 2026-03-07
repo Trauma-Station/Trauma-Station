@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared.Body;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction.Events;
@@ -85,36 +84,28 @@ public sealed class KnowledgeGrantSystem : EntitySystem
     private void DoAfter(Entity<KnowledgeGrantOnUseComponent> ent, ref KnowledgeLearnDoAfterEvent args)
     {
         var user = args.User;
-        if (!_timing.IsFirstTimePredicted || _knowledge.GetContainer(user) is not {} brain)
+        if (!_timing.IsFirstTimePredicted || _knowledge.GetContainer(user) is not { } brain)
             return;
 
+        bool hasLearned = false;
         foreach (var (id, xp) in ent.Comp.Experience)
         {
-            if (_knowledge.EnsureKnowledge(brain, id, popup: true) is not {} skill)
+            if (_knowledge.EnsureKnowledge(brain, id, popup: true) is not { } skill)
                 continue;
 
-            if (!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0))
-            {
-                var ev = new AddExperienceEvent(id, xp);
-                RaiseLocalEvent(user, ref ev);
-            }
-            else
-            {
-                var msg = Loc.GetString("knowledge-could-not-learn", ("knowledge", Name(skill)));
-                _popup.PopupClient(msg, user, user, PopupType.Small);
-            }
+            if (!(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0)))
+                continue;
+
+            hasLearned = true;
+            _knowledge.AddExperience(skill, user, xp, skillCap);
         }
+
         args.Handled = true;
 
-        foreach (var id in ent.Comp.Experience.Keys)
-        {
-            if (_knowledge.GetKnowledge(brain, id) is {} skill && (!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0)))
-            {
-                // still able to learn
-                args.Repeat = true;
-                return;
-            }
-        }
+        if (hasLearned)
+            StartLearningDoAfter(args.User, ent);
+        else
+            _popup.PopupClient(Loc.GetString("knowledge-could-not-learn"), args.User, args.User, PopupType.Small);
     }
 }
 

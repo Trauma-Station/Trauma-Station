@@ -15,16 +15,11 @@ public sealed class KnowledgeUpdateMartialArtsEvent(EntProtoId? knowledge) : Ent
 }
 
 /// <summary>
-/// Gets all ConstructionSkills of a character.
-/// </summary>
-[ByRefEvent]
-public record struct ConstructionGetGroupsEvent(Dictionary<EntProtoId, int> Groups);
-
-/// <summary>
 /// Called in order to add experience to a knowledge holder. Simply pass in a EntProtoId of the knowledge and the amount of exp you want to add.
+/// Will only increase levels up to a cap.
 /// </summary>
 [ByRefEvent]
-public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience, bool Popup = true);
+public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience, int LevelCap, bool Popup = true);
 
 /// <summary>
 /// Raised to let the client update XP ui stuff.
@@ -57,7 +52,7 @@ public record struct CanDoSneakAttackEvent(bool CanSneakAttack);
 public record struct MartialArtDamageModifierEvent(EntityUid User, float Coefficient = 1.0f);
 
 /// <summary>
-/// Called in order to invoke speed modifiers for martial arts. Call on the art itself.
+///
 /// </summary>
 [ByRefEvent]
-public record struct MartialArtSpeedModifierEvent(EntityUid User, float Coefficient = 1.0f);
+public record struct MissAttackEvent(int Adjust, bool Miss = false);

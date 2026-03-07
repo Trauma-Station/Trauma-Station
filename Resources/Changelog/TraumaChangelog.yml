@@ -3685,3 +3685,129 @@ Entries:
   id: 436
   time: '2026-03-06T19:40:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1060
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Words that kill
+  id: 437
+  time: '2026-03-06T23:17:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1072
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Clothes that gave you bonus XP no longer teach you the skill.
+  id: 438
+  time: '2026-03-06T23:28:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1079
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Disabled XP gain, you are stuck with your roundstart picked skills until a
+      better system is made.
+  id: 439
+  time: '2026-03-06T23:32:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1081
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed sometimes having multiple martial arts buttons.
+  id: 440
+  time: '2026-03-06T23:40:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1083
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Removed some knowledge shitcode
+  - type: Tweak
+    message: Tweaked some knowledge shitcode
+  - type: Tweak
+    message: Fixed autoinjectors
+  id: 441
+  time: '2026-03-07T10:09:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/988
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed phones ringing endlessly sometimes
+  - type: Fix
+    message: Fixed phones having a ringing sprite endlessly sometimes
+  - type: Fix
+    message: >-
+      Fixed phones being engaged whenever someone calls and hangs up before the
+      call is picked up
+  id: 442
+  time: '2026-03-07T11:40:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1087
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed injection skill so it never fails, but instant injectors have a
+      doafter at very low skill and the doafter time for syringes is scaled with
+      skill.
+  - type: Tweak
+    message: >-
+      Re-enabled skill gain, but it's very limited. You can't get much higher
+      than novice for most skills.
+  id: 443
+  time: '2026-03-07T13:13:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1089
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed baseball bats requring a diploma to make
+  id: 444
+  time: '2026-03-07T13:24:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1091
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed RCD-built objects being at an angle.
+  id: 445
+  time: '2026-03-07T13:40:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1093
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Shivs no longer have durability
+  - type: Tweak
+    message: bats have double durability
+  id: 446
+  time: '2026-03-07T13:49:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1092
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added an accessibility option to turn off skill popups.
+  id: 447
+  time: '2026-03-07T14:17:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1094
+- author: Lumminal
+  changes:
+  - type: Add
+    message: >-
+      Shadow Demons are now in the game! Check the guidebook for more
+      information.
+  - type: Add
+    message: >-
+      You can implant a Shadow Demon's heart to get the ability to Shadow
+      Grapple.
+  - type: Add
+    message: >-
+      The wizard can now purchase a new item, bottle of shadows. It summons a
+      Shadow Demon to the station for 1 wizcoin.
+  id: 448
+  time: '2026-03-07T15:04:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/820
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed melee skill attack speed to be less insane, 25% increase or
+      decrease depending on skill.
+  - type: Tweak
+    message: Railings and fence structures are easier to make.
+  id: 449
+  time: '2026-03-07T15:42:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1096

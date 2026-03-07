@@ -1,3 +1,4 @@
+using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction.Prototypes;
@@ -17,4 +18,10 @@ public sealed partial class ConstructionPrototype
     /// </summary>
     [DataField]
     public Dictionary<EntProtoId, int>? Practical;
+
+    /// <summary>
+    /// Optional quality override.
+    /// </summary>
+    [DataField]
+    public float? QualityCoefficient;
 }

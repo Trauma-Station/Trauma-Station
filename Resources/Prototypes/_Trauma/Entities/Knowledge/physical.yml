@@ -31,3 +31,4 @@
   - type: Knowledge
     experienceCost: 5
   - type: ThrowInsertKnowledge # being better at throwing lets you slam dunk easier
+    curve: !type:QuadraticSkillCurve

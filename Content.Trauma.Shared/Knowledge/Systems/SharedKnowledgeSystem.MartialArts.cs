@@ -7,10 +7,10 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Trauma.Common.Bulletholes;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
@@ -25,6 +25,10 @@ public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] protected readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
+
+    private EntityQuery<MartialArtsKnowledgeComponent> _artQuery;
 
     private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId AthleticsKnowledge = "AthleticsKnowledge";
@@ -33,6 +37,8 @@ public abstract partial class SharedKnowledgeSystem
 
     private void InitializeMartialArts()
     {
+        _artQuery = GetEntityQuery<MartialArtsKnowledgeComponent>();
+
         SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeRemovedEvent>(OnMartialArtRemoved);
 
         SubscribeLocalEvent<ComboActionsComponent, KnowledgeEnabledEvent>(OnComboActionsEnabled);
@@ -48,8 +54,8 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(CheckGrabStageOverridePass);
         SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(OnSpeedModifier);
+        SubscribeLocalEvent<KnowledgeHolderComponent, GetMeleeAttackRateEvent>(RelayActiveEvent);
         SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(OnProjectileHit);
-        SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
         SubscribeLocalEvent<PerformMartialArtComboEvent>(OnComboActionClicked);
 
         SubscribeAllEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
@@ -75,7 +81,7 @@ public abstract partial class SharedKnowledgeSystem
         var user = args.Holder;
         foreach (var (comboId, actionId) in ent.Comp.StoredComboActions)
         {
-            if (_actions.AddAction(user, actionId) is {} action)
+            if (_actions.AddAction(user, actionId) is { } action)
                 ent.Comp.ComboActions[comboId] = action;
         }
         Dirty(ent);
@@ -94,7 +100,7 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnShotAttempt(Entity<KnowledgeHolderComponent> ent, ref ShotAttemptedEvent args)
     {
-        if (GetContainer(ent) is not {} brain ||
+        if (GetContainer(ent) is not { } brain ||
             brain.Comp.ActiveMartialArt is not { } martialArtUid)
             return;
 
@@ -114,7 +120,7 @@ public abstract partial class SharedKnowledgeSystem
         if (ent.Owner == args.Target || !HasComp<MobStateComponent>(args.Target))
             return;
 
-        if (GetActiveMartialArt(ent) is not {} skill)
+        if (GetActiveMartialArt(ent) is not { } skill)
             return;
 
         RaiseLocalEvent(skill, new ComboAttackPerformedEvent(ent.Owner, args.Target, ent.Owner, ComboAttackType.Hug));
@@ -122,7 +128,7 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnComboAttackPerformed(Entity<KnowledgeHolderComponent> ent, ref ComboAttackPerformedEvent args)
     {
-        if (GetActiveMartialArt(ent) is {} skill)
+        if (GetActiveMartialArt(ent) is { } skill)
             RaiseLocalEvent(skill, args);
     }
 
@@ -132,11 +138,11 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         var user = args.User;
-        if (GetContainer(ent) is not {} brain)
+        if (GetContainer(ent) is not { } brain)
             return;
 
         var bonus = 0f;
-        if (GetKnowledge(brain, StrengthKnowledge) is {} strength)
+        if (GetKnowledge(brain, StrengthKnowledge) is { } strength)
             bonus += 3 * SharpCurve(strength);
 
         if (GetActiveMartialArt(ent) is { } martialArt)
@@ -152,10 +158,10 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnStaminaTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeStaminaDamageEvent args)
     {
-        if (GetContainer(ent) is not {} brain)
+        if (GetContainer(ent) is not { } brain)
             return;
 
-        if (GetKnowledge(brain, AthleticsKnowledge) is {} athletics)
+        if (GetKnowledge(brain, AthleticsKnowledge) is { } athletics)
         {
             if (args.Value > 0)
                 args.Value *= 1 - 0.99f * SharpCurve(athletics);
@@ -172,7 +178,7 @@ public abstract partial class SharedKnowledgeSystem
         if (args.Damage.GetTotal() <= 0 || args.Origin == null)
             return;
 
-        if (GetKnowledge(ent, ToughnessKnowledge) is {} toughness && _mobState.IsAlive(ent.Owner))
+        if (GetKnowledge(ent, ToughnessKnowledge) is { } toughness && _mobState.IsAlive(ent.Owner))
         {
             args.Damage *= 1 - 0.99f * SharpCurve(toughness);
         }
@@ -181,18 +187,21 @@ public abstract partial class SharedKnowledgeSystem
     private void OnDamageChanged(Entity<KnowledgeHolderComponent> ent, ref DamageChangedEvent args)
     {
         // ignore healing or things like radiation
-        if (args.DamageDelta is not {} delta || !args.DamageIncreased || !args.InterruptsDoAfters ||
+        if (args.DamageDelta is not { } delta || !args.DamageIncreased || !args.InterruptsDoAfters ||
             // pvs can remove the brain sometimes so dont get trolled
             _timing.ApplyingState || !_timing.IsFirstTimePredicted)
             return;
 
+        // TODO: this has fucking nothing to do with martial arts make a separate system for it
         if (_mobState.IsAlive(ent))
         {
-            var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) delta.GetTotal() / 5, 10));
+            // to get 100 toughness you have to take 100 damage over and over... have fun
+            var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) delta.GetTotal() / 5, 10), delta.GetTotal().Int());
             RaiseLocalEvent(ent, ref ev);
         }
         if (GetActiveMartialArt(ent) is { } martialArt)
         {
+            // TODO: bruh
             var evSneakAttack = new InvokeSneakAttackSurprisedEvent();
             RaiseLocalEvent(martialArt, ref evSneakAttack);
         }
@@ -201,14 +210,14 @@ public abstract partial class SharedKnowledgeSystem
     private void OnUpdateMartialArts(KnowledgeUpdateMartialArtsEvent ev, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } player ||
-            GetContainer(player) is not {} ent)
+            GetContainer(player) is not { } ent)
             return;
 
-        var unit = ev.Knowledge is {} id
+        var unit = ev.Knowledge is { } id
             ? GetKnowledge(ent, id)
             : null;
 
-        if (unit != null && !HasComp<MartialArtsKnowledgeComponent>(unit))
+        if (unit != null && !_artQuery.HasComp(unit))
             return; // no setting construction as your martial art...
 
         ChangeMartialArts(ent, player, unit);
@@ -219,7 +228,7 @@ public abstract partial class SharedKnowledgeSystem
         if (ent.Comp.ActiveMartialArt == knowledgeUid)
             return; // no change
 
-        if (ent.Comp.ActiveMartialArt is {} old)
+        if (ent.Comp.ActiveMartialArt is { } old)
         {
             var ev = new KnowledgeDisabledEvent(ent, user);
             RaiseLocalEvent(old, ref ev);
@@ -228,9 +237,9 @@ public abstract partial class SharedKnowledgeSystem
         ent.Comp.ActiveMartialArt = knowledgeUid;
         DirtyField(ent, ent.Comp, nameof(ent.Comp.ActiveMartialArt));
 
-        if (knowledgeUid is {} unit)
+        if (knowledgeUid is { } unit)
         {
-            DebugTools.Assert(HasComp<MartialArtsKnowledgeComponent>(unit),
+            DebugTools.Assert(_artQuery.HasComp(unit),
                 $"Tried to use {ToPrettyString(knowledgeUid)} as martial art for {ToPrettyString(user)}!");
             var ev = new KnowledgeEnabledEvent(ent, user);
             RaiseLocalEvent(unit, ref ev);
@@ -240,6 +249,7 @@ public abstract partial class SharedKnowledgeSystem
         {
             _popup.PopupClient(Loc.GetString("knowledge-martial-art-deselected"), user, user);
         }
+        _speed.RefreshMovementSpeedModifiers(user);
     }
 
     public EntityUid? GetActiveMartialArt(EntityUid target)
@@ -247,7 +257,7 @@ public abstract partial class SharedKnowledgeSystem
 
     private void CheckGrabStageOverridePass(Entity<KnowledgeHolderComponent> ent, ref CheckGrabOverridesEvent args)
     {
-        if (GetActiveMartialArt(ent) is {} uid)
+        if (GetActiveMartialArt(ent) is { } uid)
             RaiseLocalEvent(uid, ref args);
     }
 
@@ -255,9 +265,9 @@ public abstract partial class SharedKnowledgeSystem
     {
         if (GetActiveMartialArt(ent) is not { } art)
             return;
-        var ev = new MartialArtSpeedModifierEvent(ent.Owner, 1.0f);
-        RaiseLocalEvent(art, ref ev);
-        args.ModifySpeed(ev.Coefficient);
+        var ev = new RefreshMovementSpeedModifiersEvent();
+        RaiseLocalEvent(art, ev);
+        args.ModifySpeed(ev.WalkSpeedModifier, ev.SprintSpeedModifier);
     }
 
     private void OnProjectileHit(Entity<KnowledgeHolderComponent> ent, ref ProjectileReflectAttemptEvent args)
@@ -265,11 +275,6 @@ public abstract partial class SharedKnowledgeSystem
         if (GetActiveMartialArt(ent) is not { } art)
             return;
         RaiseLocalEvent(art, ref args);
-    }
-
-    private void OnProjectileHitMartialArt(Entity<NoGunComponent> ent, ref ProjectileReflectAttemptEvent args)
-    {
-        args.Cancelled = true;
     }
 
     private void OnComboActionClicked(PerformMartialArtComboEvent args)
