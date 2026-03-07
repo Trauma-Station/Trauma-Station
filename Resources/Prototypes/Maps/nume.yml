@@ -40,6 +40,7 @@
             Paramedic: [ 1, 1 ]
             MedicalIntern: [ 3, 3 ] #intern
             Virologist: [ 1, 1 ]
+            Psychologist: [ 1, 1 ]
             #science
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 6, 6 ]
