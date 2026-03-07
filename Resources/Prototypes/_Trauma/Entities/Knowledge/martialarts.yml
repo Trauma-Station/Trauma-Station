@@ -29,7 +29,7 @@
   components:
   - type: Knowledge
     costs: null # chef only
-  - type: AreaMartialArts
+  - type: AreaMartialArt
     areas:
     - AreaKitchen
     - AreaColdRoom
