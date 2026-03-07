@@ -105,14 +105,14 @@
   - type: DamageOnHit # <Trauma>
     damage:
       types:
-        Blunt: 1
+        Blunt: 0.7
   - type: Damageable # Trauma - durability
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 15
+        damage: 30
       behaviors:
       - !type:PlaySoundBehavior
         sound:
