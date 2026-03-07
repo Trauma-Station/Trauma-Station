@@ -18,15 +18,22 @@ using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Weapons;
+using Content.Goobstation.Maths.FixedPoint;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Targeting;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Goobstation.Wizard.SanguineStrike;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Atmos.Rotting;
+using Content.Shared.Body;
+using Content.Shared.Body.Systems;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Heretic;
 using Content.Shared.Heretic.Components;
 using Content.Shared.Interaction;
@@ -64,6 +71,8 @@ public abstract class SharedHereticBladeSystem : EntitySystem
     [Dependency] private readonly SharedVoidCurseSystem _voidCurse = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly CommonBodyPartSystem _part = default!;
 
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -224,6 +233,26 @@ public abstract class SharedHereticBladeSystem : EntitySystem
                 break;
 
             case "Lock":
+                var (woundingMultiplier, woundProb) = hereticComp?.Ascended is true ? (3f, 0.65f) : (2f, 0.35f);
+                foreach (var dmgType in args.BaseDamage.DamageDict.Keys)
+                {
+                    var mult = FixedPoint2.New(1);
+                    if (!args.BaseDamage.WoundSeverityMultipliers.TryGetValue(dmgType, out mult))
+                        args.BaseDamage.WoundSeverityMultipliers[dmgType] = woundingMultiplier;
+                    else
+                        args.BaseDamage.WoundSeverityMultipliers[dmgType] *= woundingMultiplier;
+                }
+
+                if (!TryComp(performer, out TargetingComponent? targeting))
+                    break;
+
+                var (type, symmetry) = _body.ConvertTargetBodyPart(targeting.Target);
+                var targetPart = _part.GetBodyParts(target, type, symmetry: symmetry).FirstOrNull();
+
+                if (targetPart == null)
+                    break;
+
+                ApplyLockBladeEffect(target, targetPart.Value, woundProb);
                 break;
 
             case "Void":
@@ -377,6 +406,8 @@ public abstract class SharedHereticBladeSystem : EntitySystem
             }
         }
     }
+
+    protected virtual void ApplyLockBladeEffect(EntityUid target, EntityUid targetPart, float probability) { }
 
     protected virtual void ApplyAshBladeEffect(EntityUid target) { }
 

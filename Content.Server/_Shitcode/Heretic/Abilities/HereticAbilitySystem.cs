@@ -74,6 +74,8 @@ using Content.Shared.Movement.Systems;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Hands.Components;
+using Content.Shared.Inventory;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tag;
 using Content.Shared.Weather;
 using Robust.Server.Containers;
@@ -115,6 +117,9 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
 
     private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
@@ -134,8 +139,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
         SubscribeLocalEvent<EventHereticMansusLink>(OnMansusLink);
         SubscribeLocalEvent<HereticMansusLinkDoAfter>(OnMansusLinkDoafter);
-
-        SubscribeLock();
     }
 
     public override void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user, TimeSpan? cooldownOverride = null)
@@ -262,10 +265,11 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
     private string GetMansusGraspProto(Entity<HereticComponent> ent)
     {
-        if (ent.Comp is { CurrentPath: "Rust", PathStage: >= 2 })
-            return "TouchSpellMansusRust";
+        if (ent.Comp.PathStage < 2)
+            return ent.Comp.MansusGraspProto;
 
-        return "TouchSpellMansus";
+        var pathSpecific = ent.Comp.MansusGraspProto + ent.Comp.CurrentPath;
+        return _proto.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
     }
 
     private void OnLivingHeart(EventHereticLivingHeart args)

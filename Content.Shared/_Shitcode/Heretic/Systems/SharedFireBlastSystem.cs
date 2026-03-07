@@ -4,6 +4,7 @@ using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Body;
+using Content.Shared._Shitcode.Heretic.Components.StatusEffects;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;

@@ -17,6 +17,8 @@ using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared._White.BackStab;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
+using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -31,9 +33,12 @@ using Content.Shared.Heretic.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
+using Content.Shared.Mech.Components;
+using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
@@ -91,6 +96,9 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private readonly SharedMechSystem _mech = default!;
+    [Dependency] private readonly AccessReaderSystem _access = default!;
 
     public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
     public static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
@@ -412,18 +420,28 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 break;
             }
 
-            case "Lock":
+            case "Lock": // TODO: Predict
             {
-                if (!TryComp<DoorComponent>(target, out var door))
+                if (TryComp<MechComponent>(target, out var mech) && mech.PilotSlot.ContainedEntity is { } pilot)
+                {
+                    _mech.TryEject(target, mech, pilot);
+                    _stun.TryUpdateParalyzeDuration(pilot, TimeSpan.FromSeconds(5));
+                }
+                else if (TryComp<DoorComponent>(target, out var door))
+                {
+                    if (TryComp<DoorBoltComponent>(target, out var doorBolt))
+                        _door.SetBoltsDown((target, doorBolt), false);
+
+                    _door.StartOpening(target, door);
+                }
+                else if (TryComp<AccessReaderComponent>(target, out var access) && !HasComp<MobStateComponent>(target))
+                    _access.TryClearAccesses((target, access));
+                else
                     break;
 
-                if (TryComp<DoorBoltComponent>(target, out var doorBolt))
-                    _door.SetBoltsDown((target, doorBolt), false);
+                _audio.PlayPvs(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/hereticknock.ogg"), target);
+                _popup.PopupEntity(Loc.GetString("heretic-lock-unlocked"), performer, performer);
 
-                _door.StartOpening(target, door);
-                _audio.PlayPredicted(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/hereticknock.ogg"),
-                    target,
-                    performer);
                 break;
             }
 

@@ -6,6 +6,7 @@ using Content.Medical.Common.Targeting;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Stunnable;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Components.StatusEffects;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Heretic;

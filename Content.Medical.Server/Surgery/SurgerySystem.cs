@@ -97,7 +97,8 @@ public sealed class SurgerySystem : SharedSurgerySystem
             true,
             origin: user,
             partMultiplier: partMultiplier,
-            targetPart: affectAll ? TargetBodyPart.All : _part.GetTargetBodyPart(part));
+            targetPart: affectAll ? TargetBodyPart.All : _part.GetTargetBodyPart(part),
+            ignoreBlockers: true);
     }
 
     private void OnSurgeryStepDamage(Entity<SurgeryTargetComponent> ent, ref SurgeryStepDamageEvent args) =>

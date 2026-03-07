@@ -59,6 +59,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] protected readonly SharedVoidCurseSystem Voidcurse = default!;
     [Dependency] protected readonly SharedHereticSystem Heretic = default!;
     [Dependency] protected readonly StatusEffectNew.StatusEffectsSystem StatusNew = default!;
+    [Dependency] protected readonly ExamineSystemShared Examine = default!;
 
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -74,7 +75,6 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedBloodstreamSystem _blood = default!;
@@ -121,6 +121,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         SubscribeVoid();
         SubscribeFlesh();
         SubscribeSide();
+        SubscribeLock();
 
         SubscribeLocalEvent<HereticActionComponent, BeforeCastSpellEvent>(OnBeforeCast);
         SubscribeLocalEvent<HereticActionComponent, ActionAttemptEvent>(OnAttempt);
@@ -163,7 +164,6 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
 
         return list;
     }
-
 
     public bool TryUseAbility(BaseActionEvent args, bool handle = true)
     {

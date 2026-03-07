@@ -13,10 +13,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Heretic;
-using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Heretic;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -32,6 +30,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Medical;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 
 namespace Content.Server.Heretic.EntitySystems;
@@ -54,6 +53,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
     [Dependency] private readonly StarMarkSystem _starMark = default!;
     [Dependency] private readonly HereticAbilitySystem _ability = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     public override void Initialize()
     {
@@ -95,21 +95,11 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                 break;
 
             case "Flesh":
-                {
-                    _ability.CreateFleshMimic(target, user, false, true, 50, null);
-                }
+                _ability.CreateFleshMimic(target, user, false, true, 50, null);
                 break;
 
             case "Lock":
-                // bolts nearby doors
-                var lookup = _lookup.GetEntitiesInRange(target, 5f);
-                foreach (var door in lookup)
-                {
-                    if (!TryComp<DoorBoltComponent>(door, out var doorComp))
-                        continue;
-                    _door.SetBoltsDown((door, doorComp), true);
-                }
-                _audio.PlayPvs(new SoundPathSpecifier("/Audio/Magic/knock.ogg"), target);
+                _status.TryUpdateStatusEffectDuration(target, "LockMarkedStatusEffect", TimeSpan.FromSeconds(20));
                 break;
 
             case "Rust":

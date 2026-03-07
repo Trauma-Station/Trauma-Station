@@ -262,6 +262,7 @@
     - Wooden
     - RawMaterial
     - DroneUsable # Goobstation
+    - WoodPlank # Goobstation
     - ConstructionMaterial
   - type: Extractable
     grindableSolutionName: wood

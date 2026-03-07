@@ -13,3 +13,7 @@ inspect-wound-Brute-severe = heavily bruised
 inspect-wound-Burn-minor = red
 inspect-wound-Burn-moderate = blistering
 inspect-wound-Burn-severe = charred
+
+inspect-wound-weeping-avulsion-minor = torn open
+inspect-wound-weeping-avulsion-moderate = completely torn open
+inspect-wound-weeping-avulsion-severe = completely torn open, along with significant loss of tissue

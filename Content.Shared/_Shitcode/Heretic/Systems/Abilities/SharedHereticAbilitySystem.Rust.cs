@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Medical.Common.Targeting;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Goobstation.Wizard;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
@@ -55,6 +56,8 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<RustbringerComponent, ElectrocutionAttemptEvent>(OnElectrocuteAttempt);
         SubscribeLocalEvent<RustbringerComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction);
         SubscribeLocalEvent<RustbringerComponent, DamageModifyEvent>(OnModifyDamage);
+
+        SubscribeLocalEvent<HereticComponent, EventHereticRustCharge>(OnRustCharge);
     }
 
     private void OnModifyDamage(Entity<RustbringerComponent> ent, ref DamageModifyEvent args)
@@ -322,7 +325,7 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnRustConstruction(EventHereticRustConstruction args)
     {
-        if (!TryUseAbility( args, false))
+        if (!TryUseAbility(args, false))
             return;
 
         var ent = args.Performer;
@@ -371,5 +374,39 @@ public abstract partial class SharedHereticAbilitySystem
             RaiseNetworkEvent(new StopTargetingEvent(), args.Performer);
 
         _audio.PlayPredicted(args.Sound, args.Target, args.Performer);
+    }
+
+    private void OnRustCharge(EventHereticRustCharge args)
+    {
+        if (!args.Target.IsValid(EntityManager) || !TryUseAbility(args))
+            return;
+
+        var ent = args.Performer;
+
+        var xform = Transform(ent);
+
+        if (!IsTileRust(xform.Coordinates, out _))
+        {
+            Popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-underneath-not-rusted"), ent, ent);
+            return;
+        }
+
+        var ourCoords = _transform.ToMapCoordinates(args.Target);
+        var targetCoords = _transform.GetMapCoordinates(ent, xform);
+
+        if (ourCoords.MapId != targetCoords.MapId)
+            return;
+
+        var dir = ourCoords.Position - targetCoords.Position;
+
+        if (dir.LengthSquared() < 0.001f)
+            return;
+
+        RemComp<KnockedDownComponent>(ent);
+        EnsureComp<RustChargeComponent>(ent);
+        EnsureComp<RustObjectsInRadiusComponent>(ent);
+        _throw.TryThrow(ent, dir.Normalized() * args.Distance, args.Speed, playSound: false, doSpin: false);
+
+        args.Handled = true;
     }
 }

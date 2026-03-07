@@ -23,3 +23,9 @@ public record struct ParentPacketReceiveAttemptEvent(bool Cancelled = false);
 
 [ByRefEvent]
 public record struct GetVirtualItemBlockingEntityEvent(EntityUid Uid);
+
+[ByRefEvent]
+public record struct BeforeAccessReaderCheckEvent(bool Cancelled = false);
+
+[ByRefEvent]
+public record struct BeforeHolosignUsedEvent(EntityUid User, EntityCoordinates ClickLocation, bool Handled = false, bool Cancelled = false);

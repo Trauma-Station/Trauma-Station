@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using Content.Goobstation.Common.Heretic;
 using Content.Shared.Access.Components;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Emag.Systems;
@@ -199,6 +200,13 @@ public sealed partial class AccessReaderSystem : EntitySystem // Trauma - made p
     {
         if (!Resolve(target, ref reader, false))
             return true;
+
+        // Goob edit start
+        var ev = new BeforeAccessReaderCheckEvent();
+        RaiseLocalEvent(user, ref ev);
+        if (ev.Cancelled)
+            return false;
+        // Goob edit end
 
         if (!reader.Enabled)
             return true;
