@@ -32,12 +32,25 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    //[Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] protected readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    /// <summary>
+    /// Every knowledge prototype and its data.
+    /// </summary>
+    public Dictionary<EntProtoId, KnowledgeComponent> AllKnowledges = new();
+    public static readonly LocId[] MasteryNames = [
+        "unskilled",
+        "novice",
+        "average",
+        "advanced",
+        "expert",
+        "master"
+    ];
 
     private EntityQuery<KnowledgeComponent> _query;
     private EntityQuery<KnowledgeContainerComponent> _containerQuery;
@@ -45,7 +58,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     private TimeSpan _nextUpdate;
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
-    private float _learnChance = 0.2f;
+    //private float _learnChance = 0.2f;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -55,7 +68,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeMartialArts();
         InitializeOnWear();
         InitializeConstruction();
-        InitializeQuality();
         InitializeShooting();
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnContainerStartup);
@@ -67,10 +79,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         SubscribeLocalEvent<KnowledgeHolderComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<KnowledgeHolderComponent, AddExperienceEvent>(OnAddExperience);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         _query = GetEntityQuery<KnowledgeComponent>();
         _containerQuery = GetEntityQuery<KnowledgeContainerComponent>();
         _holderQuery = GetEntityQuery<KnowledgeHolderComponent>();
+
+        LoadSkillPrototypes();
+        LoadProfilePrototypes();
     }
 
     public override void Update(float frameTime)
@@ -182,8 +198,31 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         AddExperience(brain, args.KnowledgeType, args.Experience, popup: args.Popup);
     }
 
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<EntityPrototype>())
+            LoadSkillPrototypes();
+        if (args.WasModified<KnowledgeProfilePrototype>())
+            LoadProfilePrototypes();
+    }
+
+    private void LoadSkillPrototypes()
+    {
+        AllKnowledges.Clear();
+        var name = Factory.GetComponentName<KnowledgeComponent>();
+        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        {
+            // TODO: replace with TryComp after engine update
+            if (!proto.TryGetComponent<KnowledgeComponent>(name, out var comp))
+                continue;
+
+            AllKnowledges[proto.ID] = comp;
+        }
+    }
+
     public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, bool popup = true)
     {
+        /* FIXME: xp gaining needs to be reworked to be less shit, each source needs to say the mastery level it can raise up to
         if (GetKnowledge(ent, id) is not {} unit)
         {
             // if you don't have it, you have a small change to learn it when gaining some xp
@@ -199,6 +238,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             var updateEv = new UpdateExperienceEvent();
             RaiseLocalEvent(holder, ref updateEv);
         }
+        */
     }
 
     public void AddExperience(Entity<KnowledgeComponent> ent, EntityUid target, int added)
@@ -207,7 +247,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (now < ent.Comp.TimeToNextExperience)
             return;
 
-        ent.Comp.TimeToNextExperience = now + TimeSpan.FromSeconds(1);
+        ent.Comp.TimeToNextExperience = now + TimeSpan.FromSeconds(5);
         ent.Comp.Experience += added + ent.Comp.BonusExperience;
         Dirty(ent);
 
@@ -228,16 +268,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
         ent.Comp.Experience -= ent.Comp.ExperienceCost * timesToRoll;
         (int, bool) rollInnard;
-        for (int i = 0; i < timesToRoll; i++)
+        for (int i = 0; i < timesToRoll && ent.Comp.Level < 100; i++)
         {
             int diceType = DiceDictionary(ent);
             rollInnard = RollPenetrating(target, diceType);
             rollResult = (rollInnard.Item1, rollInnard.Item2 || rollResult.Item2);
             ent.Comp.Level += rollResult.Item1;
-            if (rollInnard.Item2)
-            {
-                timesToRoll++;
-            }
         }
         if (rollResult.Item2)
             _popup.PopupClient(Loc.GetString("knowledge-level-epiphany", ("knowledge", Name(ent))), target, target, PopupType.Medium);
@@ -493,7 +529,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return (uid, comp);
 
         // otherwise try use the cached brain
-        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not {} ent)
+        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not {} ent || !ent.IsValid())
             return null;
 
         return (ent, _containerQuery.Comp(ent));
@@ -513,16 +549,28 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
-    public string GetMasteryString(Entity<KnowledgeComponent> ent)
-        => ent.Comp.Level switch
+    public override Dictionary<EntProtoId, int> GetSkillMasteries(EntityUid target)
+    {
+        var skills = new Dictionary<EntProtoId, int>();
+        if (GetContainer(target) is not {} brain)
+            return skills;
+
+        foreach (var (id, unit) in brain.Comp.KnowledgeDict)
         {
-            >= 88 => Loc.GetString("knowledge-mastery-master"),
-            >= 76 => Loc.GetString("knowledge-mastery-expert"),
-            >= 51 => Loc.GetString("knowledge-mastery-advanced"),
-            >= 26 => Loc.GetString("knowledge-mastery-average"),
-            >= 1 => Loc.GetString("knowledge-mastery-novice"),
-            _ => Loc.GetString("knowledge-mastery-unskilled"),
-        };
+            skills[id] = GetMastery(unit);
+        }
+        return skills;
+    }
+
+    public string GetMasteryString(Entity<KnowledgeComponent> ent)
+        => GetMasteryString(GetMastery(ent.Comp.Level));
+
+    /// <summary>
+    /// Get the name for a given mastery number.
+    /// Throws if it is out of bounds.
+    /// </summary>
+    public string GetMasteryString(int mastery)
+        => Loc.GetString("knowledge-mastery-" + MasteryNames[mastery]);
 
     public override int GetMastery(int level)
         => level switch

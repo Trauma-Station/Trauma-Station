@@ -90,8 +90,7 @@ public sealed class CosmicRiftSystem : EntitySystem
 
     private void OnInteract(Entity<CosmicMalignRiftComponent> uid, ref InteractHandEvent args)
     {
-        if (args.Handled
-            || uid.Comp.Occupied)
+        if (args.Handled)
         {
             _popup.PopupEntity(Loc.GetString("cosmiccult-rift-inuse"), args.User, args.User);
             return;
@@ -110,7 +109,6 @@ public sealed class CosmicRiftSystem : EntitySystem
         }
 
         args.Handled = true;
-        uid.Comp.Occupied = true;
         _popup.PopupEntity(Loc.GetString("cosmiccult-rift-beginabsorb"), args.User, args.User);
         var doargs = new DoAfterArgs(EntityManager,
             args.User,
@@ -126,8 +124,7 @@ public sealed class CosmicRiftSystem : EntitySystem
 
     private void OnInteractUsing(Entity<CosmicMalignRiftComponent> uid, ref InteractUsingEvent args)
     {
-        if (args.Handled
-            || uid.Comp.Occupied)
+        if (args.Handled)
         {
             _popup.PopupEntity(Loc.GetString("cosmiccult-rift-inuse"), args.User, args.User);
             return;
@@ -135,7 +132,6 @@ public sealed class CosmicRiftSystem : EntitySystem
 
         if (HasComp<BibleComponent>(args.Used))
         {
-            uid.Comp.Occupied = true;
             _popup.PopupEntity(Loc.GetString("cosmiccult-rift-beginpurge"), args.User, args.User);
             var doargs = new DoAfterArgs(EntityManager,
                 args.User,
@@ -158,7 +154,6 @@ public sealed class CosmicRiftSystem : EntitySystem
             return;
 
         args.Handled = true;
-        rift.Occupied = false;
         var tgtpos = Transform(target).Coordinates;
         Spawn(uid.Comp.AbsorbVFX, tgtpos);
         if (comp.CosmicFragmentationActionEntity == null)
@@ -191,10 +186,7 @@ public sealed class CosmicRiftSystem : EntitySystem
     private void OnPurgeDoAfter(Entity<CosmicMalignRiftComponent> uid, ref EventPurgeRiftDoAfter args)
     {
         if (args.Args.Target == null || args.Cancelled || args.Handled)
-        {
-            uid.Comp.Occupied = false;
             return;
-        }
 
         args.Handled = true;
         var tgtpos = Transform(uid).Coordinates;

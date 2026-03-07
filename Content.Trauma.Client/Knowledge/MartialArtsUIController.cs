@@ -29,6 +29,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
     [UISystemDependency] private readonly PopupSystem _popup = default!;
 
     public const string ButtonName = "MartialArtsButton";
+    public static readonly ResPath NonePath = new("/Textures/Interface/Radial/close_normal.png");
 
     private SimpleRadialMenu? _menu;
     private MenuButton? _button;
@@ -74,6 +75,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         // add a new button for the first time it's loaded
         var button = new MenuButton()
         {
+            Name = ButtonName,
             Icon = _cache.GetResource<TextureResource>(new ResPath("/Textures/Interface/emotes.svg.192dpi.png")).Texture,
             ToolTip = Loc.GetString("game-hud-open-martial-arts-menu-button-tooltip"),
             BoundKey = TraumaKeyFunctions.OpenMartialArtsMenu,
@@ -152,7 +154,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         {
             new RadialMenuActionOption<EntProtoId?>(_knowledge.ChangeMartialArt, null)
             {
-                //IconSpecifier = RadialMenuIconSpecifier.With(emote.Icon),
+                IconSpecifier = RadialMenuIconSpecifier.With(new SpriteSpecifier.Texture(NonePath)),
                 ToolTip = Loc.GetString("no-martial-art")
             }
         };
@@ -163,11 +165,10 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         var arts = _knowledge.GetMartialArtsForClientDoohickey(player);
         foreach (var martialArt in arts)
         {
-            var actionOption = new RadialMenuActionOption<EntProtoId?>(_knowledge.ChangeMartialArt, martialArt.Item1)
+            var actionOption = new RadialMenuActionOption<EntProtoId?>(_knowledge.ChangeMartialArt, martialArt.Item2)
             {
-                // TODO: give them sprites then use entity view of the knowledge entity?
-                //IconSpecifier = RadialMenuIconSpecifier.With(Icon),
-                ToolTip = Loc.GetString(martialArt.Item2)
+                IconSpecifier = RadialMenuEntityIconSpecifier.With(martialArt.Item1),
+                ToolTip = Loc.GetString(martialArt.Item3)
             };
             martialArts.Add(actionOption);
         }

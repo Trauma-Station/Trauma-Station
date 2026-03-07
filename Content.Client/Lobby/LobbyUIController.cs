@@ -32,6 +32,10 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [Dependency] private readonly MarkingManager _markings = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
 
+    // <Trauma>
+    public static event Action<HumanoidProfileEditor>? OnProfileEditorCreated;
+    // </Trauma>
+
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
     private CharacterSetupGuiSavePanel? _savePanel;
@@ -265,6 +269,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             _markings);
 
         _profileEditor.OnOpenGuidebook += _guide.OpenHelp;
+        OnProfileEditorCreated?.Invoke(_profileEditor);
 
         _characterSetup = new CharacterSetupGui(_profileEditor);
 

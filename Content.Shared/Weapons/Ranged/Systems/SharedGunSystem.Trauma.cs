@@ -122,6 +122,7 @@ public abstract partial class SharedGunSystem
             : 1.0f - ((float) (shooting.Comp.Level - 50) / 50.0f * (float) (shooting.Comp.Level - 50) / 50.0f);
     }
 
+    // TODO: kill this dogshit
     /// <summary>
     /// Adds shooting experience according to knowledge system.
     /// </summary>
@@ -134,27 +135,5 @@ public abstract partial class SharedGunSystem
         var evWeapons = new AddExperienceEvent(WeaponsKnowledge, 1);
         RaiseLocalEvent(user, ref evShooting);
         RaiseLocalEvent(user, ref evWeapons);
-    }
-
-    /// <summary>
-    /// Attempts to copy knowledge construction modifiers from the specified ammo entity to the target entity. If the
-    /// ammo entity contains knowledge modifier data, it is applied to the target entity.
-    /// </summary>
-    /// <remarks>If the ammo entity does not have a QualityComponent, no modifiers are
-    /// added to the target entity.</remarks>
-    /// <param name="ammoEnt">The entity identifier of the ammo from which knowledge construction modifiers are sourced.</param>
-    /// <param name="newUid">The entity identifier of the target to which knowledge construction modifiers will be added.</param>
-    private void TryAddKnowledgeModifiers(EntityUid? ammoEnt, EntityUid newUid)
-    {
-        // TODO: move this out of here bruh
-        if (!TryComp<QualityComponent>(ammoEnt, out var ammoKnowledge))
-            return;
-
-        var newKnowledge = EnsureComp<QualityComponent>(newUid);
-        newKnowledge.LevelDeltas = new Dictionary<EntProtoId, int>(ammoKnowledge.LevelDeltas);
-        newKnowledge.Quality = ammoKnowledge.Quality;
-        newKnowledge.NumberOfMasteries = ammoKnowledge.NumberOfMasteries;
-
-        _knowledge.ModifyValues((newUid, newKnowledge));
     }
 }

@@ -4,9 +4,12 @@
   targetNode: LitMolotov
   category: construction-category-weapons
   objectType: Item
-  groups:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 5
+  theory:
+    HandmadeKnowledge: 1
+    SurvivalKnowledge: 1 # most people know alcohol burns
+  practical:
+    HandmadeKnowledge: 2
+    SurvivalKnowledge: 1
 
 - type: construction
   name: recipes-wooden-wand-name
@@ -15,5 +18,7 @@
   targetNode: woodenWand
   category: construction-category-weapons
   objectType: Item
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    HandmadeKnowledge: 0 # its a fucking stick
+  practical:
+    HandmadeKnowledge: 1

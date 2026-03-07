@@ -5,8 +5,8 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    HandmadeKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -16,9 +16,14 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 1
+  theory:
+    HandmadeKnowledge: 1
+    ElectronicsKnowledge: 2
+    TechnologyKnowledge: 2
+  practical:
+    HandmadeKnowledge: 1
+    ElectronicsKnowledge: 3
+    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -28,8 +33,8 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    ElectronicsKnowledge: 3
     TechnologyKnowledge: 1
   # </Trauma>
 
@@ -40,8 +45,8 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    ElectronicsKnowledge: 3
     TechnologyKnowledge: 1
   # </Trauma>
 
@@ -52,8 +57,8 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    ElectronicsKnowledge: 3
     TechnologyKnowledge: 1
   # </Trauma>
 
@@ -64,8 +69,8 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    ElectronicsKnowledge: 3
     TechnologyKnowledge: 1
   # </Trauma>
 
@@ -76,7 +81,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    ElectronicsKnowledge: 3
     TechnologyKnowledge: 1
   # </Trauma>
