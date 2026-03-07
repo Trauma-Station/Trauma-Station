@@ -1,12 +1,8 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Medical.Shared.Abductor;
-using Content.Medical.Shared.ItemSwitch;
 using Content.Server.Humanoid.Systems;
 using Content.Shared.Body;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Preferences;
 using Robust.Shared.Prototypes;
@@ -19,6 +15,9 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private readonly BodySystem _body = default!;
 
     private static readonly List<EntProtoId> HumanVisualOrgans = new()
     {
@@ -63,9 +62,6 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
 
     private void ApplyDisguise(EntityUid user)
     {
-        if (!TryComp<BodyComponent>(user, out var body) || body.Organs == null)
-            return;
-
         var disguise = EnsureComp<AbductorDisguiseStateComponent>(user);
 
         if (disguise.OriginalOrganData != null)
@@ -75,25 +71,22 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
         disguise.OriginalOrganData = new();
 
         var humanOrganData = new Dictionary<Enum, PrototypeLayerData>();
-        foreach (var proto in HumanVisualOrgans)
+        foreach (var protoId in HumanVisualOrgans)
         {
-            var organEnt = Spawn(proto, Transform(user).Coordinates);
-            if (TryComp<VisualOrganComponent>(organEnt, out var visualOrgan))
-                humanOrganData[visualOrgan.Layer] = visualOrgan.Data;
-            QueueDel(organEnt);
+            var entityProto = _prototype.Index<EntityPrototype>(protoId);
+            if (!entityProto.TryGetComponent<VisualOrganComponent>(out var visualOrgan, _componentFactory))
+                continue;
+            humanOrganData[visualOrgan.Layer] = visualOrgan.Data;
         }
 
-        foreach (var organUid in body.Organs.ContainedEntities)
+        foreach (var organ in _body.GetOrgans<VisualOrganComponent>(user))
         {
-            if (!TryComp<VisualOrganComponent>(organUid, out var visualOrgan))
+            if (!humanOrganData.TryGetValue(organ.Comp.Layer, out var humanData))
                 continue;
 
-            if (!humanOrganData.TryGetValue(visualOrgan.Layer, out var humanData))
-                continue;
-
-            disguise.OriginalOrganData[organUid] = visualOrgan.Data;
-            visualOrgan.Data = humanData;
-            Dirty(organUid, visualOrgan);
+            disguise.OriginalOrganData[organ.Owner] = organ.Comp.Data;
+            organ.Comp.Data = humanData;
+            Dirty(organ);
         }
 
         var disguiseProfile = HumanoidCharacterProfile.RandomWithSpecies("Human");
@@ -111,19 +104,13 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
         if (disguise.OriginalOrganData == null || disguise.OriginalName == null)
             return;
 
-        if (!TryComp<BodyComponent>(user, out var body) || body.Organs == null)
-            return;
-
-        foreach (var organUid in body.Organs.ContainedEntities)
+        foreach (var organ in _body.GetOrgans<VisualOrganComponent>(user))
         {
-            if (!TryComp<VisualOrganComponent>(organUid, out var visualOrgan))
+            if (!disguise.OriginalOrganData.TryGetValue(organ.Owner, out var originalData))
                 continue;
 
-            if (!disguise.OriginalOrganData.TryGetValue(organUid, out var originalData))
-                continue;
-
-            visualOrgan.Data = originalData;
-            Dirty(organUid, visualOrgan);
+            organ.Comp.Data = originalData;
+            Dirty(organ);
         }
 
         _metaData.SetEntityName(user, disguise.OriginalName);

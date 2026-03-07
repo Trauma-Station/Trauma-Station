@@ -151,19 +151,8 @@
     pocket2: WeaponAlien
     suitstorage: Wonderprod
     id: AgentIDCard
-  storage:
-    back:
-      - ChameleonPDA
-      - ClothingUniformJumpsuitChameleon
-      - ClothingOuterChameleon
-      - ClothingNeckChameleon
-      - ClothingMaskGasChameleon
-      - ClothingHeadHatChameleon
-      - ClothingHandsChameleon
-      - ClothingEyesChameleon
-      - ClothingHeadsetChameleon
-      - ClothingShoesChameleon
-      - ChameleonControllerImplanter
+  inhand:
+    - ClothingBackpackChameleonFillAgent
 
 # Spawners
 
