@@ -78,7 +78,18 @@
     - SpinKick
     - KickUp
   - type: FastSpeed
-    speedModifier: 1
+    # 1x to 2x move speed scaling with level
+    moveCurve: !type:LinearSkillCurve
+      curveOffset: 1
+    # 1x to 3x damage*momentum scaling with level
+    damageScaleCurve: !type:LinearSkillCurve
+      skillScale: 2
+      curveOffset: 1
+  - type: MeleeSpeedKnowledge
+    # 1x to 3x melee attack speed scaling with level
+    curve: !type:LinearSkillCurve
+      skillScale: 2
+      curveOffset: 1
 
 - type: entity
   parent: BaseMartialArtsKnowledge

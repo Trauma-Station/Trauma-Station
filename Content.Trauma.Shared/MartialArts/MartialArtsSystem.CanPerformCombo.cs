@@ -19,8 +19,12 @@ public partial class MartialArtsSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
+    private EntityQuery<CanPerformComboComponent> _comboQuery;
+
     private void InitializeCanPerformCombo()
     {
+        _comboQuery = GetEntityQuery<CanPerformComboComponent>();
+
         SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
     }
@@ -39,6 +43,7 @@ public partial class MartialArtsSystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
+        // TODO: bruh make a generic combo attempt event this is dogshit
         var evSneak = new CanDoSneakAttackEvent(true);
         RaiseLocalEvent(ent, ref evSneak);
         if (!evSneak.CanSneakAttack)
@@ -68,19 +73,7 @@ public partial class MartialArtsSystem
             return;
         }
 
-        var afterEv = new AfterComboCheckEvent(ent, args.Target, args.Weapon, args.Type);
-
-        ent.Comp.CurrentTarget = args.Target;
-        ent.Comp.ResetTime = _timing.CurTime + TimeSpan.FromSeconds(5);
-        ent.Comp.LastAttacks.Add(args.Type);
-        if (ent.Comp.LastAttacksLimit >= 0)
-        {
-            var difference = ent.Comp.LastAttacks.Count - ent.Comp.LastAttacksLimit;
-            if (difference > 0)
-                ent.Comp.LastAttacks.RemoveRange(0, difference);
-        }
         CheckCombo(ent, ref args);
-        RaiseLocalEvent(ent, ref afterEv);
     }
 
     private void CheckCombo(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)

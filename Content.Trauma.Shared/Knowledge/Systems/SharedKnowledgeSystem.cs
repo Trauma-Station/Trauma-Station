@@ -547,6 +547,25 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
+    /// <summary>
+    /// Relays an event to all non-martial arts knowledges a mob has.
+    /// It also relays it to the active martial art, but not any inactive oens.
+    /// </summary>
+    public void RelayActiveEvent<T>(Entity<KnowledgeHolderComponent> ent, ref T args) where T : notnull
+    {
+        if (GetContainer(ent) is not {} brain || brain.Comp.Container is not {} container)
+            return;
+
+        foreach (var unit in container.ContainedEntities)
+        {
+            // dont relay to inactive martial arts
+            if (_artQuery.HasComp(unit) && unit != brain.Comp.ActiveMartialArt)
+                continue;
+
+            RaiseLocalEvent(unit, ref args);
+        }
+    }
+
     public override Dictionary<EntProtoId, int> GetSkillMasteries(EntityUid target)
     {
         var skills = new Dictionary<EntProtoId, int>();
@@ -586,9 +605,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     /// <summary>
     /// Get the level of a knowledge entity, defaulting to 0 for bad entities.
+    /// Applies temporary levels from e.g. equipment.
     /// </summary>
     public int GetLevel(EntityUid uid)
-        => _query.CompOrNull(uid)?.Level ?? 0;
+        => _query.TryComp(uid, out var comp)
+            ? Math.Min(comp.Level + comp.TemporaryLevel, 100)
+            : 0;
 
     public override int GetInverseMastery(int mastery)
         => mastery switch

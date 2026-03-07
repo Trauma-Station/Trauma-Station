@@ -61,6 +61,16 @@ public sealed partial class LinearSkillCurve : SkillCurve
 }
 
 /// <summary>
+/// A square root curve which gets less steep over time.
+/// X cannot be negative.
+/// </summary>
+public sealed partial class RootSkillCurve : SkillCurve
+{
+    protected override float GetValue(float x)
+        => MathF.Sqrt(x);
+}
+
+/// <summary>
 /// A curve using the graph x^2
 /// Starts off gradual but gets steeper as x approaches InverseScale.
 /// Increases on either side when x is offset.

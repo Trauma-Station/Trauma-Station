@@ -8,6 +8,7 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Shared.Knowledge.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -27,7 +28,14 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<MeleeSpeedKnowledgeComponent, GetMeleeAttackRateEvent>(OnGetMeleeAttackRate);
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeExperience);
+    }
+
+    private void OnGetMeleeAttackRate(Entity<MeleeSpeedKnowledgeComponent> ent, ref GetMeleeAttackRateEvent args)
+    {
+        var level = _knowledge.GetLevel(ent.Owner);
+        args.Multipliers *= ent.Comp.Curve.GetCurve(level);
     }
 
     private void OnMeleeExperience(MeleeHitEvent args)

@@ -8,6 +8,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
@@ -23,6 +24,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
 
     public override void Initialize()
@@ -34,7 +36,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
         SubscribeLocalEvent<FastSpeedComponent, MartialArtDamageModifierEvent>(OnDamageSpeed);
         SubscribeLocalEvent<FastSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnMoveSpeed);
-        SubscribeLocalEvent<FastSpeedComponent, GetMeleeAttackRateEvent>(AdjustAttackRate);
         SubscribeLocalEvent<SneakAttackComponent, InvokeSneakAttackSurprisedEvent>(SneakAttackSurprise);
         SubscribeLocalEvent<SneakAttackComponent, CanDoSneakAttackEvent>(SneakAttackCanAttack);
         SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
@@ -112,12 +113,12 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
     private void OnMoveSpeed(Entity<FastSpeedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!TryComp<KnowledgeComponent>(ent, out var knowledge))
+        var level = _knowledge.GetLevel(ent.Owner);
+
+        args.ModifySpeed(ent.Comp.MoveCurve.GetCurve(level));
+        if (!_comboQuery.TryComp(ent, out var combo))
             return;
-        args.ModifySpeed(Math.Abs(1.0f + ent.Comp.SpeedModifier * ((float) (knowledge.Level + knowledge.TemporaryLevel)) / 100.0f));
-        if (!TryComp<CanPerformComboComponent>(ent, out var martial))
-            return;
-        args.ModifySpeed(1.0f + ((float) martial.Momentum) / 10.0f);
+        args.ModifySpeed(1.0f + ((float) combo.Momentum) / 10.0f);
     }
 
     private void OnDamageSpeed(Entity<FastSpeedComponent> ent, ref MartialArtDamageModifierEvent args)
@@ -126,11 +127,8 @@ public sealed partial class MartialArtsSystem : EntitySystem
         if (!TryComp<PhysicsComponent>(user, out var physics))
             return;
 
-
-        if (!TryComp<KnowledgeComponent>(ent, out var knowledge))
-            return;
-
-        float modifier = 1 + ent.Comp.SpeedModifier * ((float) (knowledge.Level + knowledge.TemporaryLevel) / 50.0f);
+        var level = _knowledge.GetLevel(ent.Owner);
+        var modifier = ent.Comp.DamageScaleCurve.GetCurve(level);
 
         if (ent.Comp.InvertSpeed)
             args.Coefficient *= Math.Max(10 - (physics.LinearVelocity.Length()) * modifier, 0);
@@ -144,15 +142,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
     {
         if (args.Stage == GrabStage.Soft)
             args.Stage = ent.Comp.StartingStage;
-    }
-
-    private void AdjustAttackRate(Entity<FastSpeedComponent> ent, ref GetMeleeAttackRateEvent ev)
-    {
-        if (!TryComp<KnowledgeComponent>(ent, out var knowledge))
-            return;
-
-        float modifier = 1 + ent.Comp.SpeedModifier * ((float) (knowledge.Level + knowledge.TemporaryLevel) / 50.0f);
-        ev.Multipliers *= Math.Abs(modifier);
     }
 
     private void OnProjectileHitMartialArt(Entity<NoGunComponent> ent, ref ProjectileReflectAttemptEvent args)

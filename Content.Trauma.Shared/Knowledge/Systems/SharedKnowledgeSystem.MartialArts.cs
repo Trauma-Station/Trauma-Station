@@ -26,6 +26,8 @@ public abstract partial class SharedKnowledgeSystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
 
+    private EntityQuery<MartialArtsKnowledgeComponent> _artQuery;
+
     private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId AthleticsKnowledge = "AthleticsKnowledge";
     private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
@@ -33,6 +35,8 @@ public abstract partial class SharedKnowledgeSystem
 
     private void InitializeMartialArts()
     {
+        _artQuery = GetEntityQuery<MartialArtsKnowledgeComponent>();
+
         SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeRemovedEvent>(OnMartialArtRemoved);
 
         SubscribeLocalEvent<ComboActionsComponent, KnowledgeEnabledEvent>(OnComboActionsEnabled);
@@ -48,7 +52,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(CheckGrabStageOverridePass);
         SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(OnSpeedModifier);
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetMeleeAttackRateEvent>(OnMeleeAttackModifier);
+        SubscribeLocalEvent<KnowledgeHolderComponent, GetMeleeAttackRateEvent>(RelayActiveEvent);
         SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(OnProjectileHit);
         SubscribeLocalEvent<PerformMartialArtComboEvent>(OnComboActionClicked);
 
@@ -211,7 +215,7 @@ public abstract partial class SharedKnowledgeSystem
             ? GetKnowledge(ent, id)
             : null;
 
-        if (unit != null && !HasComp<MartialArtsKnowledgeComponent>(unit))
+        if (unit != null && !_artQuery.HasComp(unit))
             return; // no setting construction as your martial art...
 
         ChangeMartialArts(ent, player, unit);
@@ -233,7 +237,7 @@ public abstract partial class SharedKnowledgeSystem
 
         if (knowledgeUid is { } unit)
         {
-            DebugTools.Assert(HasComp<MartialArtsKnowledgeComponent>(unit),
+            DebugTools.Assert(_artQuery.HasComp(unit),
                 $"Tried to use {ToPrettyString(knowledgeUid)} as martial art for {ToPrettyString(user)}!");
             var ev = new KnowledgeEnabledEvent(ent, user);
             RaiseLocalEvent(unit, ref ev);
@@ -262,20 +266,6 @@ public abstract partial class SharedKnowledgeSystem
         var ev = new RefreshMovementSpeedModifiersEvent();
         RaiseLocalEvent(art, ev);
         args.ModifySpeed(ev.WalkSpeedModifier, ev.SprintSpeedModifier);
-    }
-
-    private void OnMeleeAttackModifier(Entity<KnowledgeHolderComponent> ent, ref GetMeleeAttackRateEvent args)
-    {
-        if (GetKnowledge(ent, MeleeKnowledge) is { } melee && GetMastery(melee.Comp.Level) > 2)
-        {
-            // FIXME: this is too fast?
-            args.Multipliers *= 1 + 2 * SharpCurve(melee, -50, 50.0f);
-        }
-        if (GetActiveMartialArt(ent) is not { } art)
-            return;
-        var ev = new GetMeleeAttackRateEvent(args.Weapon, args.Rate, args.Multipliers, args.User);
-        RaiseLocalEvent(art, ref ev);
-        args.Multipliers *= ev.Multipliers;
     }
 
     private void OnProjectileHit(Entity<KnowledgeHolderComponent> ent, ref ProjectileReflectAttemptEvent args)
