@@ -18,7 +18,6 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly BodySystem _body = default!;
 
     private static readonly List<EntProtoId> HumanVisualOrgans = new()
@@ -76,7 +75,7 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
         foreach (var protoId in HumanVisualOrgans)
         {
             var entityProto = _prototype.Index<EntityPrototype>(protoId);
-            if (!entityProto.TryGetComponent<VisualOrganComponent>(out var visualOrgan, _componentFactory))
+            if (!entityProto.TryGetComponent<VisualOrganComponent>(out var visualOrgan, Factory))
                 continue;
             humanOrganData[visualOrgan.Layer] = visualOrgan.Data;
         }
