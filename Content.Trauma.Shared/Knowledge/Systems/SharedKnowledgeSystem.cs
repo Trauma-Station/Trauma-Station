@@ -91,7 +91,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         base.Update(frameTime);
 
-        if (_timing.CurTime < _nextUpdate)
+        if (!_skillGain || _timing.CurTime < _nextUpdate)
             return;
 
         _nextUpdate = _timing.CurTime + _updateDelay;
