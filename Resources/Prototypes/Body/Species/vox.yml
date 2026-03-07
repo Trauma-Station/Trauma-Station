@@ -170,7 +170,7 @@
   components:
   # <Trauma>
   - type: Uncloneable
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - NewKinPidgin

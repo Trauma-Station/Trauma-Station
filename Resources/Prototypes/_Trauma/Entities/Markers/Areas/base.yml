@@ -1,5 +1,5 @@
 # base area prototype
-# this is basically markerbase without clickable and interaction outline to not make mapping very annoying
+# this is like markerbase without marker, clickable and interaction outline to not make mapping very annoying
 - type: entity
   abstract: true
   id: BaseArea
@@ -21,7 +21,6 @@
           bounds: "-0.5,-0.5,0.5,0.5"
   - type: PlacementReplacement
     key: areas
-  - type: Marker # i dont want to copy paste the sprite hiding code
   - type: Area
   - type: Tag
     tags:

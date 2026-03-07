@@ -1,12 +1,14 @@
+using System.Linq;
 using Content.Goobstation.Common.CCVar;
 using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage.Events;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Item;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -22,10 +24,13 @@ public abstract partial class SharedMeleeWeaponSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
 
     private EntityQuery<InteractionRelayComponent> _relayQuery;
 
     public static readonly ProtoId<TagPrototype> WideSwingIgnore = "WideSwingIgnore"; // for mice
+    public static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
+    public static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     private float _shoveRange;
     private float _shoveSpeed;
@@ -68,5 +73,14 @@ public abstract partial class SharedMeleeWeaponSystem
         var animated = HasComp<ItemComponent>(target);
 
         _throwing.TryThrow(target, pushVector, force * _shoveSpeed, animated: animated);
+    }
+
+    private void AdjustStaminaDamage(EntityUid user, ref float staminaDamage)
+    {
+        // TODO: use event for this bruh
+        if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee)
+        {
+            staminaDamage *= 1 - _knowledge.SharpCurve(melee);
+        }
     }
 }

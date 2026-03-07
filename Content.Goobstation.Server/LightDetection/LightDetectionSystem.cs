@@ -88,6 +88,7 @@ public sealed class LightDetectionSystem : SharedLightDetectionSystem
             if (LightSys.HasComp<BeingDisposedComponent>(uid))
             {
                 comp.CurrentLightLevel = 0f;
+                LightSys.Dirty(uid, comp);
                 return;
             }
 
@@ -149,7 +150,11 @@ public sealed class LightDetectionSystem : SharedLightDetectionSystem
                 totalLightLevel += pointLight.Energy * (1f - t * t);
             }
 
+            var ev = new LightLevelUpdated(totalLightLevel, comp.CurrentLightLevel);
+            LightSys.RaiseLocalEvent(uid, ref ev);
+
             comp.CurrentLightLevel = totalLightLevel;
+            LightSys.Dirty(uid, comp);
         }
     }
 }

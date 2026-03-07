@@ -16,6 +16,11 @@
   - !type:GiveItemOnHolidaySpecial
     holiday: GarbageDay
     prototype: WeaponRevolverInspector
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      JanitorKnowledge: 26
+  # </Trauma>
 
 - type: startingGear
   id: JanitorGear

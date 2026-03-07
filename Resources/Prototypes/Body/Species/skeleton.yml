@@ -74,7 +74,7 @@
   name: Urist McBones
   components:
   # <Trauma>
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - TauCetiBasic
     - Calcic

@@ -6,7 +6,7 @@ namespace Content.Shared.Damage.Components;
 /// Makes this entity deal damage when thrown at something.
 /// </summary>
 [RegisterComponent]
-[Access(typeof(SharedDamageOtherOnHitSystem))]
+// Trauma - Deleted Access(typeof(SharedDamageOtherOnHitSystem))
 public sealed partial class DamageOtherOnHitComponent : Component
 {
     /// <summary>

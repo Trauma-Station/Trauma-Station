@@ -19,26 +19,31 @@
   guides: # goobstation
   - Science
   - Command
-
   goobcoins: 40 #Goob content
   access:
+  # <Trauma>
+  - External
+  - Robotics
+  - Genetics
+  # </Trauma>
   - Research
   - Command
   - Maintenance
   - ResearchDirector
   - Brig
   - Cryogenics
-  # <Trauma>
-  - External
-  - Robotics
-  - Genetics
-  # </Trauma>
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      TechnologyKnowledge: 50
+      ScienceKnowledge: 50
+  # </Trauma>
 
 - type: startingGear
   id: ResearchDirectorGear

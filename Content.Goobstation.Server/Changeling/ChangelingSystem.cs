@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// <Trauma>
+using Content.Trauma.Common.MartialArts;
+// </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Actions;
@@ -7,7 +10,6 @@ using Content.Goobstation.Common.Body;
 using Content.Goobstation.Common.Changeling;
 using Content.Goobstation.Common.Conversion;
 using Content.Goobstation.Common.Magic;
-using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Medical;
 using Content.Goobstation.Server.Changeling.GameTicking.Rules;
 using Content.Goobstation.Server.Changeling.Objectives.Components;
@@ -16,7 +18,6 @@ using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
 using Content.Goobstation.Shared.Flashbang;
-using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Goobstation.Shared.Overlays;
 using Content.Server.Actions;
 using Content.Server.Body.Components;
@@ -680,8 +681,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         RemComp<HungerComponent>(ent);
         RemComp<ThirstComponent>(ent);
         RemComp<CanHostGuardianComponent>(ent);
-        RemComp<MartialArtsKnowledgeComponent>(ent);
-        RemComp<CanPerformComboComponent>(ent);
         EnsureComp<ZombieImmuneComponent>(ent);
 
         // add actions

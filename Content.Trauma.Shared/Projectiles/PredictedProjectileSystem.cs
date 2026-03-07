@@ -76,7 +76,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
     {
         if (!_query.TryComp(uid, out var comp) ||
             !_physicsQuery.TryComp(uid, out var physics) ||
-            FindHardFixture(target) is not {} otherFixture)
+            FindHardFixture(target) is not { } otherFixture)
             return;
 
         DoHit((uid, comp, physics), target, otherFixture);

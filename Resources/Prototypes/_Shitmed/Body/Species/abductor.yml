@@ -51,7 +51,7 @@
     defaultChannel: Abductormind
     channels:
     - Abductormind
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Xeeplian
     understands:

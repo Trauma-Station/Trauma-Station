@@ -26,6 +26,12 @@
     - type: Loadout
       prototypes: [ VisitorCaptain, VisitorCaptainAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 50
+        ShootingKnowledge: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorCE
@@ -37,6 +43,21 @@
     - type: Loadout
       prototypes: [ VisitorCE, VisitorCEAlt ]
       roleLoadout: [ RoleSurvivalExtended ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        HandmadeKnowledge: 50
+        TechnologyKnowledge: 50
+        MaterialsKnowledge: 50
+        DoorsKnowledge: 50
+        AirlocksKnowledge: 50
+        FurnitureKnowledge: 50
+        InfrastructureKnowledge: 50
+        ElectronicsKnowledge: 50
+        WallsKnowledge: 50
+        WindowsKnowledge: 50
+        SmokeablesKnowledge: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorCMO
@@ -48,6 +69,17 @@
     - type: Loadout
       prototypes: [ VisitorCMO, VisitorCMOAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
+    # <Trauma>
+    - type: SurgerySpeedModifier
+      speedModifier: 2
+    - type: CPRTraining
+      reviveChance: 0.9 # excellent training and experience
+      inhaleChance: 1 # great kisser too
+    - type: KnowledgeGrant
+      skills:
+        FirstAidKnowledge: 50
+        SurgeryKnowledge: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorHOP
@@ -70,6 +102,13 @@
     - type: Loadout
       prototypes: [ VisitorHOS, VisitorHOSAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 26
+        ShootingKnowledge: 50
+        MartialArtCorporateJudo: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorResearchDirector
@@ -81,6 +120,12 @@
     - type: Loadout
       prototypes: [ VisitorRD, VisitorRDAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        TechnologyKnowledge: 50
+        ScienceKnowledge: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorQM
@@ -92,6 +137,13 @@
     - type: Loadout
       prototypes: [ VisitorQM, VisitorQMAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        StrengthKnowledge: 26
+        ToughnessKnowledge: 26
+        MeleeKnowledge: 26
+    # <Trauma>
 
 # Security
 # Following use EventHumanoidMindShielded since they are security and probably should have mindshields
@@ -116,6 +168,12 @@
     - type: Loadout
       prototypes: [ VisitorSecurityCadet, VisitorSecurityCadetAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 5
+        ShootingKnowledge: 5
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorSecurityOfficer
@@ -126,6 +184,12 @@
     - type: Loadout
       prototypes: [ VisitorSecurityOfficer, VisitorSecurityOfficerAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 26
+        ShootingKnowledge: 10
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorDetective
@@ -136,6 +200,12 @@
     - type: Loadout
       prototypes: [ VisitorDetective, VisitorDetectiveAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 26
+        ShootingKnowledge: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorWarden
@@ -146,6 +216,14 @@
     - type: Loadout
       prototypes: [ VisitorWarden, VisitorWardenAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 26
+        ShootingKnowledge: 26
+        MartialArtKravMaga: 50
+        WeaponsKnowledge: 50
+    # </Trauma>
 
 # Cargo
 
@@ -169,6 +247,12 @@
     - type: Loadout
       prototypes: [ VisitorCargoTech, VisitorCargoTechAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        StrengthKnowledge: 26
+        ToughnessKnowledge: 26
+    # <Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorSalvageSpecialist
@@ -179,6 +263,14 @@
     - type: Loadout
       prototypes: [ VisitorSalvageSpecialist, VisitorSalvageSpecialistAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        StrengthKnowledge: 26
+        ToughnessKnowledge: 26
+        MeleeKnowledge: 26
+        AthleticsKnowledge: 26
+    # </Trauma>
 
 # Engineering
 
@@ -202,6 +294,21 @@
     - type: Loadout
       prototypes: [ VisitorAtmosTech, VisitorAtmosTechAlt ]
       roleLoadout: [ RoleSurvivalExtended ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        HandmadeKnowledge: 26
+        TechnologyKnowledge: 26
+        MaterialsKnowledge: 26
+        DoorsKnowledge: 26
+        AirlocksKnowledge: 26
+        FurnitureKnowledge: 26
+        InfrastructureKnowledge: 26
+        ElectronicsKnowledge: 26
+        WallsKnowledge: 26
+        WindowsKnowledge: 26
+        SmokeablesKnowledge: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorTechnicalAssistant
@@ -212,6 +319,21 @@
     - type: Loadout
       prototypes: [ VisitorTechnicalAssistant, VisitorTechnicalAssistantAlt ]
       roleLoadout: [ RoleSurvivalExtended ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        HandmadeKnowledge: 10
+        TechnologyKnowledge: 10
+        MaterialsKnowledge: 10
+        DoorsKnowledge: 10
+        AirlocksKnowledge: 10
+        FurnitureKnowledge: 10
+        InfrastructureKnowledge: 10
+        ElectronicsKnowledge: 10
+        WallsKnowledge: 10
+        WindowsKnowledge: 10
+        SmokeablesKnowledge: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorEngineer
@@ -222,6 +344,21 @@
     - type: Loadout
       prototypes: [ VisitorEngineer, VisitorEngineerAlt ]
       roleLoadout: [ RoleSurvivalExtended ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        HandmadeKnowledge: 26
+        TechnologyKnowledge: 26
+        MaterialsKnowledge: 26
+        DoorsKnowledge: 26
+        AirlocksKnowledge: 26
+        FurnitureKnowledge: 26
+        InfrastructureKnowledge: 26
+        ElectronicsKnowledge: 26
+        WallsKnowledge: 26
+        WindowsKnowledge: 26
+        SmokeablesKnowledge: 50
+    # </Trauma>
 
 # Medical
 
@@ -245,6 +382,12 @@
     - type: Loadout
       prototypes: [ VisitorMedicalIntern, VisitorMedicalInternAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        FirstAidKnowledge: 26
+        SurgeryKnowledge: 10
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorMedicalDoctor
@@ -255,6 +398,12 @@
     - type: Loadout
       prototypes: [ VisitorMedicalDoctor, VisitorMedicalDoctorAlt , VisitorScrubsPurple, VisitorScrubsGreen, VisitorScrubsBlue]
       roleLoadout: [ RoleSurvivalMedical ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        FirstAidKnowledge: 30
+        SurgeryKnowledge: 26
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorParamedic
@@ -265,6 +414,11 @@
     - type: Loadout
       prototypes: [ VisitorParamedic, VisitorParamedicAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        FirstAidKnowledge: 26
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorVirologist
@@ -275,6 +429,12 @@
     - type: Loadout
       prototypes: [ VisitorVirologist, VisitorVirologistAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        TechnologyKnowledge: 10
+        ScienceKnowledge: 10
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorGeneticist
@@ -285,6 +445,12 @@
     - type: Loadout
       prototypes: [ VisitorGeneticist, VisitorGeneticistAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        TechnologyKnowledge: 10
+        ScienceKnowledge: 10
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorPsychologist
@@ -295,6 +461,11 @@
     - type: Loadout
       prototypes: [ VisitorPsychologist, VisitorPsychologistAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        ChemistryKnowledge: 26
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorChemist
@@ -305,6 +476,11 @@
     - type: Loadout
       prototypes: [ VisitorChemist, VisitorChemistAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        ChemistryKnowledge: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorDentist
@@ -315,6 +491,12 @@
     - type: Loadout
       prototypes: [ VisitorDentist ]
       roleLoadout: [ RoleSurvivalMedical ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        TechnologyKnowledge: 10
+        ScienceKnowledge: 10
+    # </Trauma>
 
 # Science
 
@@ -338,6 +520,12 @@
     - type: Loadout
       prototypes: [ VisitorResearchAssistant, VisitorResearchAssistantAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        TechnologyKnowledge: 10
+        ScienceKnowledge: 10
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorScientist
@@ -348,6 +536,12 @@
     - type: Loadout
       prototypes: [ VisitorScientist, VisitorScientistAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        TechnologyKnowledge: 26
+        ScienceKnowledge: 26
+    # </Trauma>
 
 # Civilian
 
@@ -404,6 +598,12 @@
     - type: Loadout
       prototypes: [ VisitorChaplain, VisitorChaplainAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        LiteracyKnowledge: 26
+        MagicalLiteracyKnowledge: 50
+    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorChef

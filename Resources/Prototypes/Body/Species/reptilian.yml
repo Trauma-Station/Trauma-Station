@@ -138,7 +138,7 @@
   name: Urist McScales
   components:
   # <Trauma>
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - Draconic

@@ -292,10 +292,6 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: DamageOnHit
-    damage:
-      types:
-        Blunt: 1
   - type: Damageable
     damageContainer: Inorganic # </Trauma>
 

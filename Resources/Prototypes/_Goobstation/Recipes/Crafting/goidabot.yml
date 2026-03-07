@@ -4,3 +4,5 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
+  theory:
+    BotsKnowledge: 1

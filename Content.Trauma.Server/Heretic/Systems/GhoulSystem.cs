@@ -21,10 +21,10 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
-using Robust.Server.Audio;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Heretic.Abilities;
@@ -40,8 +40,6 @@ using Content.Shared.Body;
 using Content.Shared.Coordinates;
 using Content.Shared.Roles;
 using Content.Shared.Species.Components;
-using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 using Content.Shared.Hands;
 using Content.Shared.Polymorph;
 using Content.Server.Polymorph.Systems;
@@ -51,9 +49,13 @@ using Content.Shared.Gibbing;
 using Content.Shared.NPC.Components;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Roles.Components;
+using Content.Trauma.Common.Body;
 using Content.Trauma.Server.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
 using Content.Trauma.Shared.Heretic.Systems;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -80,7 +82,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
     [Dependency] private readonly StorageSystem _storage = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
     [Dependency] private readonly HTNSystem _htn = default!;
     [Dependency] private readonly SharedRoleSystem _role = default!;
@@ -94,8 +96,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         base.Initialize();
 
         UpdatesAfter.Add(typeof(HolyFlammableSystem));
-        SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnMapInit,
-            after: [ typeof(InitialBodySystem) ]);
+        SubscribeLocalEvent<GhoulComponent, BodyInitEvent>(OnBodyInit);
         SubscribeLocalEvent<GhoulComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<GhoulComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<GhoulComponent, MobStateChangedEvent>(OnMobStateChange);
@@ -111,15 +112,13 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
 
-        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit,
-            after: [ typeof(InitialBodySystem) ]); // only needed because of RT system ordering shitcode
+        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit);
         SubscribeLocalEvent<VoicelessDeadComponent, ComponentShutdown>(OnVoicelessDeadShutdown);
 
         SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
 
-        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit,
-            after: [ typeof(InitialBodySystem) ]);
+        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit);
         SubscribeLocalEvent<ShatteredRisenComponent, HandCountChangedEvent>(OnHandCountChanged);
     }
 
@@ -493,7 +492,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         _antag.SendBriefing(ent, brief, Color.MediumPurple, sound);
     }
 
-    private void OnMapInit(Entity<GhoulComponent> ent, ref MapInitEvent args)
+    private void OnBodyInit(Entity<GhoulComponent> ent, ref BodyInitEvent args)
     {
         GhoulifyEntity(ent);
     }

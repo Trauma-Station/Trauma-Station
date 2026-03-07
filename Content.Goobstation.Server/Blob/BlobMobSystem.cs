@@ -78,7 +78,8 @@ public sealed class BlobMobSystem : SharedBlobMobSystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        _language.EnsureValidLanguage(ent.Owner);
+        if (TryComp<LanguageSpeakerComponent>(ent, out var speaker))
+            _language.EnsureValidLanguage((ent, speaker));
     }
 
     private void OnPulsed(EntityUid uid, BlobMobComponent component, BlobMobGetPulseEvent args) =>

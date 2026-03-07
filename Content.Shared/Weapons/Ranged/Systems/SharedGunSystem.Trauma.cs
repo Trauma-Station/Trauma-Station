@@ -1,11 +1,15 @@
+using System.Numerics;
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -15,6 +19,10 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 public abstract partial class SharedGunSystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+
+    private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
+    private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     /// <summary>
     /// Get a predicted random instance for an entity, specific to this tick.
@@ -73,11 +81,11 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Trauma - changed component to Entity, added user, made public
     /// </summary>
-    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null)
+    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null, float spreadScale = 1.0f)
     {
         var (uid, comp) = ent;
         var timeSinceLastFire = (curTime - comp.LastFire).TotalSeconds;
-        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta, comp.MaxAngleModified.Theta);
+        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + spreadScale * comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0), comp.MaxAngleModified.Theta);
         comp.CurrentAngle = new Angle(newTheta);
         comp.LastFire = comp.NextFire;
 
@@ -92,9 +100,41 @@ public abstract partial class SharedGunSystem
         random *= angleEv.Modifier;
         // </Goob>
 
-        var spread = comp.CurrentAngle.Theta * random;
-        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random);
-        DebugTools.Assert(spread <= comp.MaxAngleModified.Theta);
+        var spread = comp.CurrentAngle.Theta * random * spreadScale;
+        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random * spreadScale);
+        //DebugTools.Assert(spread <= comp.MaxAngleModified.Theta * spreadScale || spread <= comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0));
         return angle;
+    }
+
+    /// <summary>
+    /// Gets recoil scale for gun according to knowledge system.
+    /// </summary>
+    private float GetRecoilScale(EntityUid? userUid, EntityUid gun)
+    {
+        if (userUid is not {} user || !HasComp<KnowledgeHolderComponent>(user))
+            return 1;
+
+        if (_knowledge.GetKnowledge(user, ShootingKnowledge) is not {} shooting)
+            return 3;
+
+        return shooting.Comp.Level < 26
+            ? 3.0f - (float) shooting.Comp.Level / 26.0f - _knowledge.SharpCurve(shooting)
+            : 1.0f - ((float) (shooting.Comp.Level - 50) / 50.0f * (float) (shooting.Comp.Level - 50) / 50.0f);
+    }
+
+    // TODO: kill this dogshit
+    /// <summary>
+    /// Adds shooting experience according to knowledge system.
+    /// </summary>
+    private void AddShootingExperience(EntityUid? userUid)
+    {
+        if (userUid is not {} user)
+            return;
+
+        // TODO: scale it based on the gun, pistols are easier to shoot than railguns
+        var evShooting = new AddExperienceEvent(ShootingKnowledge, 1, 20);
+        var evWeapons = new AddExperienceEvent(WeaponsKnowledge, 1, 20);
+        RaiseLocalEvent(user, ref evShooting);
+        RaiseLocalEvent(user, ref evWeapons);
     }
 }

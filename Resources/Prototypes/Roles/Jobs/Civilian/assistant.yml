@@ -10,13 +10,18 @@
   goobcoins: 0 # Trauma
   access:
   - Maintenance
-  special: # Goobstation
+  # <Trauma>
+  special:
   - !type:AddComponentSpecial
     components:
     - type: NpcFactionMember
       factions:
       - NanoTrasen
       - Assistant
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      HandmadeKnowledge: 26
+  # </Trauma>
 
 - type: startingGear
   id: PassengerGear

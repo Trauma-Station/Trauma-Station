@@ -140,7 +140,7 @@
         layer:
         - LowImpassable
         hard: false
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker # Trauma
     speaks:
     - Xeno
 #    - XenoHivemind # Trauma

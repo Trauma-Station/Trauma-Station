@@ -1,0 +1,8 @@
+- type: entity
+  id: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Skills
+    level: 0
+    experienceCost: 1 # We're fucked if its 0 or lower. Do not change lmao.
