@@ -105,7 +105,7 @@
   - type: DamageOnHit # <Trauma>
     damage:
       types:
-        Blunt: 0.7
+        Blunt: 1
   - type: Damageable # Trauma - durability
     damageContainer: Inorganic
   - type: Destructible
