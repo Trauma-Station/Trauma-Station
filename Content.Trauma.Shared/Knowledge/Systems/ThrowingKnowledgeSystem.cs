@@ -23,7 +23,7 @@ public sealed class ThrowingKnowledgeSystem : EntitySystem
 
         SubscribeLocalEvent<KnowledgeHolderComponent, ModifyThrowInsertChanceEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<ThrowInsertKnowledgeComponent, ModifyThrowInsertChanceEvent>(OnModifyThrowInsertChance);
-        SubscribeLocalEvent<ThrowInsertKnowledgeComponent, ModifyThrownSpeedEvent>(OnModifyThrowSpeed);
+        SubscribeLocalEvent<PhysicsComponent, ModifyThrownSpeedEvent>(OnModifyThrowSpeed);
     }
 
     private void OnModifyThrowInsertChance(Entity<ThrowInsertKnowledgeComponent> ent, ref ModifyThrowInsertChanceEvent args)
@@ -32,13 +32,13 @@ public sealed class ThrowingKnowledgeSystem : EntitySystem
         args.Chance += ent.Comp.Curve.GetCurve(level);
     }
 
-    public float OnModifyThrowSpeed(EntityUid uid, ref ModifyThrownSpeedEvent args)
+    public void OnModifyThrowSpeed(Entity<PhysicsComponent> ent, ref ModifyThrownSpeedEvent args)
     {
         var user = args.User;
         var baseThrowSpeed = args.BaseThrowSpeed;
 
         if (_knowledge.GetContainer(user) is not { } brain)
-            return baseThrowSpeed;
+            return;
 
         // strength increases speed
         if (_knowledge.GetKnowledge(brain, StrengthKnowledge) is { } strength)
@@ -61,18 +61,14 @@ public sealed class ThrowingKnowledgeSystem : EntitySystem
             baseThrowSpeed *= 1 + 0.2f * _knowledge.SharpCurve(throwing, -50, 50.0f);
         }
 
-        float weight = 0;
-        if (TryComp<PhysicsComponent>(uid, out var comp))
-            weight = comp.Mass;
+        float weight = ent.Comp.Mass;
 
         // Make it so you gotta throw it further then just at a wall in front.
-        var evThrowing = new AddExperienceEvent(ThrowingKnowledge, 1, (int) args.Distance * 5);
-        RaiseLocalEvent(user, ref evThrowing);
+        _knowledge.AddExperience(brain, ThrowingKnowledge, 1, (int) args.Distance * 5);
 
         // Make it so you can't just throw a wrapper over and over again.
-        var evStrength = new AddExperienceEvent(StrengthKnowledge, 1, (int) (weight / 10));
-        RaiseLocalEvent(user, ref evStrength);
+        _knowledge.AddExperience(brain, StrengthKnowledge, 1, (int) (weight / 10));
 
-        return baseThrowSpeed;
+        args.BaseThrowSpeed = baseThrowSpeed;
     }
 }

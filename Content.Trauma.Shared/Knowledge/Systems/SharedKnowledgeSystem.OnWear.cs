@@ -31,13 +31,13 @@ public abstract partial class SharedKnowledgeSystem
 
     private void ApplyKnowledgeModifiers(EntityUid wearer, KnowledgeGrantOnWearComponent component)
     {
-        if (GetContainer(wearer) is not {} ent)
+        if (GetContainer(wearer) is not { } ent)
             return;
 
         // Handle Skills (Temporary Levels)
         foreach (var (id, level) in component.Skills)
         {
-            if (EnsureKnowledge(ent, id) is {} unit)
+            if (EnsureKnowledge(ent, id) is { } unit)
             {
                 unit.Comp.TemporaryLevel += level;
                 Dirty(unit);
@@ -58,7 +58,7 @@ public abstract partial class SharedKnowledgeSystem
         // Handle Blocks
         foreach (var id in component.Blocked.Keys)
         {
-            if (GetKnowledge(ent, id) is {} unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            if (GetKnowledge(ent, id) is { } unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
             {
                 martial.TemporaryBlockedCounter++;
                 martial.Blocked = true;
@@ -69,13 +69,13 @@ public abstract partial class SharedKnowledgeSystem
 
     private void RemoveKnowledgeModifiers(EntityUid wearer, KnowledgeGrantOnWearComponent component)
     {
-        if (TerminatingOrDeleted(wearer) || GetContainer(wearer) is not {} ent)
+        if (TerminatingOrDeleted(wearer) || GetContainer(wearer) is not { } ent)
             return;
 
         // Remove Skills
         foreach (var (id, level) in component.Skills)
         {
-            if (GetKnowledge(ent, id) is not {} unit)
+            if (GetKnowledge(ent, id) is not { } unit)
                 continue;
 
             unit.Comp.TemporaryLevel = Math.Max(0, unit.Comp.TemporaryLevel - level);
@@ -104,7 +104,7 @@ public abstract partial class SharedKnowledgeSystem
         // Remove Blocks
         foreach (var id in component.Blocked.Keys)
         {
-            if (GetKnowledge(ent, id) is {} unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            if (GetKnowledge(ent, id) is { } unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
             {
                 martial.Blocked = --martial.TemporaryBlockedCounter == 0;
                 Dirty(unit, martial);

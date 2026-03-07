@@ -623,7 +623,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
 
         // <Trauma> - TODO: kill this, use AmmoShotUserEvent?
-        AddShootingExperience(user);
+        if (user is { } userA)
+        {
+            var ev = new AmmoShotUserEvent();
+            RaiseLocalEvent(userA, ev);
+        }
         // </Trauma>
 
         RaiseLocalEvent(gunUid, new AmmoShotEvent()
