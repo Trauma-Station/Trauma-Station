@@ -187,19 +187,21 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         // <Goob>
         // raise event to modify outgoing stamina damage by multiplier or something
+        var damage = component.Damage;
+        var overtime = component.Overtime;
         var outgoingModifier = new ModifyOutgoingStaminaDamageEvent(1f);
         RaiseLocalEvent(args.User, ref outgoingModifier);
         if (args.Direction == null)
         {
-            component.Damage *= component.LightAttackDamageMultiplier * outgoingModifier.Value;
-            component.Overtime *= component.LightAttackOvertimeDamageMultiplier * outgoingModifier.Value;
+            damage *= component.LightAttackDamageMultiplier * outgoingModifier.Value;
+            overtime *= component.LightAttackOvertimeDamageMultiplier * outgoingModifier.Value;
         }
         // goobstation
         foreach (var (ent, comp) in toHit)
         {
 
-            TakeStaminaDamage(ent, component.Damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
-            TakeOvertimeStaminaDamage(ent, component.Overtime);
+            TakeStaminaDamage(ent, damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
+            TakeOvertimeStaminaDamage(ent, overtime);
         }
     }
 
