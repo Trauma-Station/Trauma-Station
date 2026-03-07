@@ -47,6 +47,7 @@
   - type: UnholyItem # Goobstation Shitchap
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
+  - type: SkillBasedReflect
 
 - type: entity
   name: vacuous lance
@@ -229,3 +230,4 @@
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true
+  - type: SkillBasedReflect

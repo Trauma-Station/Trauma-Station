@@ -225,8 +225,7 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
-  - type: Reflect # Goob edit
-    reflectProb: .5
+  - type: SkillBasedReflect # Trauma
     reflects:
       - Energy
   - type: IgnitionSource
@@ -339,8 +338,8 @@
     energy: 1.5
     color: white
     netsync: false
-  - type: Reflect # Goob edit
-    reflectProb: .25
+  - type: SkillBasedReflect # Trauma
+    baseProb: 0.5 # It's small
 
 - type: entity
   name: pen
@@ -423,11 +422,8 @@
   - type: Tag
     tags:
     - Write
-  - type: Reflect
-    reflectProb: 0.25 #Goob rebalace
-    reflects: #Goob rebalance
-      - Energy
-    spread: 30
+  - type: SkillBasedReflect # Trauma
+    baseProb: 0.5 # It's small
 
 - type: entity
   parent: [BaseItem, BaseSyndicateContraband]
@@ -544,9 +540,8 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
-  - type: Reflect # Goob edit
-    reflectProb: .8
-    spread: 75
+  - type: SkillBasedReflect # Trauma
+    baseProb: 1.3
   - type: FlipOnHit # WD EDIT
   - type: ThrowableBlocker # Goobstation
     blockSound:

@@ -324,9 +324,7 @@
     slots:
     - Back
     - Belt
-  - type: Reflect
-    slotFlags:
-    - NONE
+  - type: SkillBasedReflect # Trauma
 
 #Greatswords
 - type: entity

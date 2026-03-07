@@ -21,8 +21,7 @@
         Slash: 30 # Fuck you.
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: Reflect
-    reflectProb: .6
+  - type: SkillBasedReflect
     spread: 90
   - type: Item
     sprite: _Goobstation/Objects/Weapons/Melee/ccsabre.rsi
