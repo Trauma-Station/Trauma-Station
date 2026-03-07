@@ -30,11 +30,6 @@ public abstract partial class SharedKnowledgeSystem
 
     private EntityQuery<MartialArtsKnowledgeComponent> _artQuery;
 
-    private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
-    private static readonly EntProtoId AthleticsKnowledge = "AthleticsKnowledge";
-    private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
-    private static readonly EntProtoId ToughnessKnowledge = "ToughnessKnowledge";
-
     private void InitializeMartialArts()
     {
         _artQuery = GetEntityQuery<MartialArtsKnowledgeComponent>();
@@ -49,9 +44,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<NoGunComponent, ShotAttemptedEvent>(OnNoGunShotAttempted);
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeInteractHandEvent>(OnInteract);
         SubscribeLocalEvent<KnowledgeHolderComponent, ComboAttackPerformedEvent>(RelayMartialArt);
-        SubscribeLocalEvent<KnowledgeHolderComponent, MeleeHitEvent>(OnMeleeHit);
-        SubscribeLocalEvent<KnowledgeHolderComponent, BeforeStaminaDamageEvent>(OnStaminaTakeDamage);
-        SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
+        SubscribeLocalEvent<KnowledgeHolderComponent, MeleeHitEvent>(RelayActiveEvent);
         SubscribeLocalEvent<KnowledgeHolderComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(CheckGrabStageOverridePass);
         SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(OnSpeedModifier);
@@ -118,79 +111,18 @@ public abstract partial class SharedKnowledgeSystem
         RaiseLocalEvent(skill, ref ev);
     }
 
-    private void OnMeleeHit(Entity<KnowledgeHolderComponent> ent, ref MeleeHitEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        var user = args.User;
-        if (GetContainer(ent) is not { } brain)
-            return;
-
-        var bonus = 0f;
-        if (GetKnowledge(brain, StrengthKnowledge) is { } strength)
-            bonus += 3 * SharpCurve(strength);
-
-        if (GetActiveMartialArt(ent) is { } martialArt)
-        {
-            var evSneakAttack = new InvokeSneakAttackSurprisedEvent();
-            RaiseLocalEvent(martialArt, ref evSneakAttack);
-            var evMartialDamage = new MartialArtDamageModifierEvent(ent);
-            RaiseLocalEvent(martialArt, ref evMartialDamage);
-        }
-
-        args.BonusDamage += (args.BaseDamage * bonus);
-    }
-
-    private void OnStaminaTakeDamage(Entity<KnowledgeHolderComponent> ent, ref BeforeStaminaDamageEvent args)
-    {
-        if (GetContainer(ent) is not { } brain)
-            return;
-
-        if (GetKnowledge(brain, AthleticsKnowledge) is { } athletics)
-        {
-            if (args.Value > 0)
-                args.Value *= 1 - 0.99f * SharpCurve(athletics);
-        }
-        if (args.Value > 0 && _mobState.IsAlive(ent))
-        {
-            AddExperience(brain, AthleticsKnowledge, Math.Min((int) args.Value / 5, 10));
-        }
-    }
-
-    private void OnBeforeDamageChanged(Entity<KnowledgeHolderComponent> ent, ref BeforeDamageChangedEvent args)
-    {
-        // most environment things like radiation should have no origin?
-        if (args.Damage.GetTotal() <= 0 || args.Origin == null)
-            return;
-
-        if (GetKnowledge(ent, ToughnessKnowledge) is { } toughness && _mobState.IsAlive(ent.Owner))
-        {
-            args.Damage *= 1 - 0.99f * SharpCurve(toughness);
-        }
-    }
-
     private void OnDamageChanged(Entity<KnowledgeHolderComponent> ent, ref DamageChangedEvent args)
     {
-        // ignore healing or things like radiation
-        if (args.DamageDelta is not { } delta || !args.DamageIncreased || !args.InterruptsDoAfters ||
+        // ignore healing
+        if (args.DamageDelta is not { } delta || !args.DamageIncreased ||
+            // ignore things like radiation
+            args.Origin == null || !args.InterruptsDoAfters ||
             // pvs can remove the brain sometimes so dont get trolled
             _timing.ApplyingState || !_timing.IsFirstTimePredicted)
             return;
 
-        // TODO: this has fucking nothing to do with martial arts make a separate system for it
-        if (_mobState.IsAlive(ent))
-        {
-            // to get 100 toughness you have to take 100 damage over and over... have fun
-            var ev = new AddExperienceEvent(ToughnessKnowledge, Math.Min((int) delta.GetTotal() / 5, 10), delta.GetTotal().Int());
-            RaiseLocalEvent(ent, ref ev);
-        }
-        if (GetActiveMartialArt(ent) is { } martialArt)
-        {
-            // TODO: bruh
-            var evSneakAttack = new InvokeSneakAttackSurprisedEvent();
-            RaiseLocalEvent(martialArt, ref evSneakAttack);
-        }
+        var ev = new TookDamageEvent(ent, delta.GetTotal().Int());
+        RelayActiveEvent(ent, ref ev);
     }
 
     private void OnUpdateMartialArts(KnowledgeUpdateMartialArtsEvent ev, EntitySessionEventArgs args)
@@ -289,3 +221,9 @@ public abstract partial class SharedKnowledgeSystem
         args.Handled = true; // This starts the cooldown in the UI
     }
 }
+
+/// <summary>
+/// Relayed to knowledge and the active martial art when being attacked by something.
+/// </summary>
+[ByRefEvent]
+public record struct TookDamageEvent(EntityUid Target, int Damage);

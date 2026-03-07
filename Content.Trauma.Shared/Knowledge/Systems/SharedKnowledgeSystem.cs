@@ -11,6 +11,7 @@ using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Silicons.Borgs;
+using Content.Trauma.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -48,6 +49,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         "master"
     ];
 
+    private EntityQuery<AwakeMobComponent> _awakeQuery;
     private EntityQuery<KnowledgeComponent> _query;
     private EntityQuery<KnowledgeContainerComponent> _containerQuery;
     private EntityQuery<KnowledgeHolderComponent> _holderQuery;
@@ -61,6 +63,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override void Initialize()
     {
         base.Initialize();
+
         InitializeLanguage();
         InitializeMartialArts();
         InitializeOnWear();
@@ -79,6 +82,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
 
+        _awakeQuery = GetEntityQuery<AwakeMobComponent>();
         _query = GetEntityQuery<KnowledgeComponent>();
         _containerQuery = GetEntityQuery<KnowledgeContainerComponent>();
         _holderQuery = GetEntityQuery<KnowledgeHolderComponent>();
@@ -259,16 +263,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         if (ent.Comp.Holder is { } holder)
         {
-            AddExperience(unit, holder, xp, levelCap);
+            AddExperience(unit.AsNullable(), holder, xp, levelCap);
 
             var updateEv = new UpdateExperienceEvent();
             RaiseLocalEvent(holder, ref updateEv);
         }
     }
 
-    public void AddExperience(Entity<KnowledgeComponent> ent, EntityUid target, int added, int limit = 100)
+    public void AddExperience(Entity<KnowledgeComponent?> ent, EntityUid target, int added, int limit = 100)
     {
-        if (!_skillGain)
+        if (!_skillGain || !_query.Resolve(ent, ref ent.Comp))
             return;
 
         var now = _timing.CurTime;
@@ -560,10 +564,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     /// <summary>
     /// Relays an event to all knowledge entities a mob has.
+    /// Does nothing if the mob is asleep or crit/dead.
     /// </summary>
     public void RelayEvent<T>(Entity<KnowledgeHolderComponent> ent, ref T args) where T : notnull
     {
-        if (GetContainer(ent)?.Comp.Container is not { } container)
+        if (!_awakeQuery.HasComp(ent) || GetContainer(ent)?.Comp.Container is not { } container)
             return;
 
         foreach (var unit in container.ContainedEntities)
@@ -578,7 +583,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public void RelayActiveEvent<T>(Entity<KnowledgeHolderComponent> ent, ref T args) where T : notnull
     {
-        if (GetContainer(ent) is not {} brain || brain.Comp.Container is not {} container)
+        if (!_awakeQuery.HasComp(ent) || GetContainer(ent) is not {} brain || brain.Comp.Container is not {} container)
             return;
 
         foreach (var unit in container.ContainedEntities)
@@ -593,7 +598,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void RelayMartialArt<T>(Entity<KnowledgeHolderComponent> ent, ref T args) where T : notnull
     {
-        if (GetActiveMartialArt(ent) is {} skill)
+        if (_awakeQuery.HasComp(ent) && GetActiveMartialArt(ent) is {} skill)
             RaiseLocalEvent(skill, ref args);
     }
 

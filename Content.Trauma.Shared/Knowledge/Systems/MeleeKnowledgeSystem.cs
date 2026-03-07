@@ -29,6 +29,7 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MeleeSpeedKnowledgeComponent, GetMeleeAttackRateEvent>(OnGetMeleeAttackRate);
+        SubscribeLocalEvent<MeleeDamageKnowledgeComponent, GetUserMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeExperience);
     }
 
@@ -38,6 +39,13 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
         args.Multipliers *= ent.Comp.Curve.GetCurve(level);
     }
 
+    private void OnGetMeleeDamage(Entity<MeleeDamageKnowledgeComponent> ent, ref GetUserMeleeDamageEvent args)
+    {
+        var level = _knowledge.GetLevel(ent.Owner);
+        args.Damage *= ent.Comp.Curve.GetCurve(level);
+    }
+
+    // FIXME: wrong event to use bruh
     private void OnMeleeExperience(MeleeHitEvent args)
     {
         var user = args.User;

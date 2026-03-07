@@ -2,6 +2,7 @@
 using Content.Goobstation.Common.Damage.Events;
 using Content.Goobstation.Common.Stunnable;
 using Content.Shared._Shitcode.Weapons.Misc;
+using Content.Trauma.Common.Damage;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -379,6 +380,11 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             else
                 _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(uid):target} took {value} stamina damage");
         }
+
+        // <Trauma>
+        var tookEv = new TookStaminaDamageEvent(uid, value);
+        RaiseLocalEvent(uid, ref tookEv);
+        // </Trauma>
 
         if (visual)
         {

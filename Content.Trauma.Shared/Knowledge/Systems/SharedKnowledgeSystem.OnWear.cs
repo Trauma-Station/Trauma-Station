@@ -106,7 +106,7 @@ public abstract partial class SharedKnowledgeSystem
         {
             if (GetKnowledge(ent, id) is {} unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
             {
-                martial.Blocked = --martial.TemporaryBlockedCounter = 0;
+                martial.Blocked = --martial.TemporaryBlockedCounter == 0;
                 Dirty(unit, martial);
             }
         }

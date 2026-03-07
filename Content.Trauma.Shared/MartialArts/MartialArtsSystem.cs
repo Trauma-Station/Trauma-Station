@@ -36,8 +36,9 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
         SubscribeLocalEvent<FastSpeedComponent, MartialArtDamageModifierEvent>(OnDamageSpeed);
         SubscribeLocalEvent<FastSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnMoveSpeed);
-        SubscribeLocalEvent<SneakAttackComponent, InvokeSneakAttackSurprisedEvent>(SneakAttackSurprise);
-        SubscribeLocalEvent<SneakAttackComponent, CanDoSneakAttackEvent>(SneakAttackCanAttack);
+        SubscribeLocalEvent<SneakAttackComponent, ComboAttackPerformedEvent>(OnSneakAttackPerformed);
+        SubscribeLocalEvent<SneakAttackComponent, TookDamageEvent>(OnSneakTookDamage);
+        SubscribeLocalEvent<SneakAttackComponent, ComboAttemptEvent>(OnSneakComboAttempt);
         SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
     }
 
@@ -99,16 +100,28 @@ public sealed partial class MartialArtsSystem : EntitySystem
         }
     }
 
-    private void SneakAttackSurprise(Entity<SneakAttackComponent> ent, ref InvokeSneakAttackSurprisedEvent args)
+    private void OnSneakAttackPerformed(Entity<SneakAttackComponent> ent, ref ComboAttackPerformedEvent args)
+    {
+        // need to use a weapon to be found
+        if (args.Weapon != args.Performer)
+            SneakAttackSurprise(ent);
+    }
+
+    private void OnSneakTookDamage(Entity<SneakAttackComponent> ent, ref TookDamageEvent args)
+    {
+        SneakAttackSurprise(ent);
+    }
+
+    private void SneakAttackSurprise(Entity<SneakAttackComponent> ent)
     {
         ent.Comp.NextHidden = _timing.CurTime + TimeSpan.FromSeconds(ent.Comp.SecondsTillHidden);
         ent.Comp.IsFound = true;
         Dirty(ent);
     }
 
-    private void SneakAttackCanAttack(Entity<SneakAttackComponent> ent, ref CanDoSneakAttackEvent args)
+    private void OnSneakComboAttempt(Entity<SneakAttackComponent> ent, ref ComboAttemptEvent args)
     {
-        args.CanSneakAttack = !ent.Comp.IsFound;
+        args.Cancelled |= ent.Comp.IsFound;
     }
 
     private void OnMoveSpeed(Entity<FastSpeedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)

@@ -5,7 +5,16 @@
   components:
   - type: Knowledge
     experienceCost: 20
-    costs: [3, 6, 10, 14, 20, 28] # Goku is rare...
+    costs: [3, 6, 10, 14] # no goku
+  - type: ExperienceOnDamage # kenshi parity
+  - type: DamageModifyKnowledge
+    # same as stamina damage im lazy
+    # no debuff for lvl 0
+    curve: !type:QuadraticSkillCurve
+      skillScale: 0.6
+      skillOffset: -2.8
+      curveScale: 0.05
+      curveOffset: 0.6
 
 - type: entity
   parent: BasePhysicalKnowledge
@@ -14,6 +23,12 @@
   components:
   - type: Knowledge
     experienceCost: 12
+  - type: MeleeDamageKnowledge
+    # -12% to +25%, no change around lvl 45
+    curve: !type:CubicSkillCurve
+      skillScale: 1.13
+      skillOffset: -0.5
+      curveOffset: 1
 
 - type: entity
   parent: BasePhysicalKnowledge
@@ -22,6 +37,14 @@
   components:
   - type: Knowledge
     experienceCost: 12
+  - type: StaminaKnowledge
+    # no debuff at lvl 0, 37% damage reduction at lvl 100
+    # you are in good shape not insulated from batong
+    curve: !type:QuadraticSkillCurve
+      skillScale: 0.6
+      skillOffset: -2.8
+      curveScale: 0.05
+      curveOffset: 0.6
 
 - type: entity
   parent: BasePhysicalKnowledge
