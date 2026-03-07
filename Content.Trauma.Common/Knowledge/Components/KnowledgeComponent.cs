@@ -76,14 +76,16 @@ public sealed partial class KnowledgeComponent : Component
     public int BonusExperience;
 
     /// <summary>
-    /// Stores the next time this component shoudl gain exp.
+    /// Stores the next time this component will allow gaining XP.
     /// </summary>
     [DataField]
     public TimeSpan TimeToNextExperience = TimeSpan.Zero;
 
     /// <summary>
-    /// Determines if component uses sleep functionality.
+    /// Array of point costs for each mastery level, including 0.
+    /// There are 6 of them total.
+    /// If this is null, you can't opt in to this knowledge.
     /// </summary>
-    [DataField]
-    public bool OnSleep;
+    [DataField(required: true)]
+    public int[]? Costs = null;
 }

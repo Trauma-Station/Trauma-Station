@@ -123,7 +123,7 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
 
         var opts = ent.Comp.KeypadPressSound.Params;
         opts = AudioHelpers.ShiftSemitone(opts, semitoneShift).AddVolume(-7f);
-        _audio.PlayPvs(ent.Comp.KeypadPressSound, ent.Owner, opts);
+        _audio.PlayPvs(ent.Comp.KeypadPressSound, ent.Owner, opts.WithMaxDistance(1f));
     }
 
     private void OnDial(Entity<RotaryPhoneComponent> ent, ref PhoneDialedMessage args)
@@ -136,7 +136,7 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
         {
             if (ent.Comp.DialedNumber == phoneComp.PhoneNumber && phone != ent.Owner)
             {
-                DoPickupLogic(phoneComp, ent, phone);
+                DoCallLogic(phoneComp, ent, phone);
                 break;
             }
         }
@@ -180,7 +180,7 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
 
     #region Helpers
 
-    private void DoPickupLogic(RotaryPhoneComponent phoneComp, Entity<RotaryPhoneComponent> ent, EntityUid phone)
+    private void DoCallLogic(RotaryPhoneComponent phoneComp, Entity<RotaryPhoneComponent> ent, EntityUid phone)
     {
         if (!phoneComp.Engaged)
         {
@@ -196,7 +196,7 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
         }
         else if (ent.Comp.SoundEntity is null)
         {
-            ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.BusySound, ent.Owner, ent.Comp.ConnectedPlayer)?.Entity;
+            ent.Comp.SoundEntity = _audio.PlayPvs(ent.Comp.BusySound, ent.Owner, AudioParams.Default.WithMaxDistance(2.5f))?.Entity;
         }
     }
 

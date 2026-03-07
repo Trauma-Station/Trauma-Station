@@ -1,0 +1,20 @@
+- type: knowledgeProfile
+  id: Dwarf
+  mastery:
+    # Standard space station skills
+    CookingKnowledge: 1
+    CraftingKnowledge: 3
+    HandmadeKnowledge: 3
+    SurvivalKnowledge: 1
+    WeaponsKnowledge: 3
+    MaterialsKnowledge: 1
+    DoorsKnowledge: 1
+    AirlocksKnowledge: 1
+    ToysKnowledge: 0
+    FurnitureKnowledge: 1
+    InfrastructureKnowledge: 2
+    WallsKnowledge: 1
+    WindowsKnowledge: 1
+    LiteracyKnowledge: 2 # Kinda dumb
+    TechnologyKnowledge: 0
+    MeleeKnowledge: 3

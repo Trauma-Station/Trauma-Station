@@ -6,10 +6,13 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
+    HandmadeKnowledge: 0
+    ToysKnowledge: 0 # billions must honk
+  practical:
     HandmadeKnowledge: 3
-    TechnologyKnowledge: 2
-    ToysKnowledge: 2
+    TechnologyKnowledge: 1
+    ToysKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -20,10 +23,13 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
+    HandmadeKnowledge: 0
+    ToysKnowledge: 0 # billions must ...
+  practical:
     HandmadeKnowledge: 3
-    TechnologyKnowledge: 2
-    ToysKnowledge: 2
+    TechnologyKnowledge: 1
+    ToysKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -34,9 +40,11 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 3
-    WeaponsKnowledge: 2
+  theory:
+    SurvivalKnowledge: 0
+    HandmadeKnowledge: 1
+  practical:
+    SurvivalKnowledge: 1
     HandmadeKnowledge: 2
   # </Trauma>
 
@@ -48,9 +56,11 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 3
-    WeaponsKnowledge: 2
+  theory:
+    SurvivalKnowledge: 0
+    HandmadeKnowledge: 1
+  practical:
+    SurvivalKnowledge: 1
     HandmadeKnowledge: 2
   # </Trauma>
 
@@ -62,10 +72,9 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 3
-    WeaponsKnowledge: 2
-    HandmadeKnowledge: 2
+  theory: {} # it's cardboard
+  practical:
+    HandmadeKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -76,10 +85,9 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 3
-    WeaponsKnowledge: 2
-    HandmadeKnowledge: 2
+  theory: {} # it's cardboard
+  practical:
+    HandmadeKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -90,7 +98,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     BananiumKnowledge: 2
   # </Trauma>
 
@@ -102,7 +110,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     BananiumKnowledge: 2
   # </Trauma>
 
@@ -114,7 +122,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     BananiumKnowledge: 2
   # </Trauma>
 
@@ -126,7 +134,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 1
   # </Trauma>
@@ -139,9 +147,9 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 1
-    ToysKnowledge: 1
+  theory:
+    HandmadeKnowledge: 0
+    ToysKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -152,9 +160,9 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 1
-    ToysKnowledge: 1
+  theory:
+    HandmadeKnowledge: 0
+    ToysKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -165,7 +173,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 1
   # </Trauma>
@@ -178,9 +186,10 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
+    HandmadeKnowledge: 0 # medieval chuds figured it out come on
+  practical:
     HandmadeKnowledge: 3
-    TechnologyKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -191,7 +200,10 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    HandmadeKnowledge: 0
+    TechnologyKnowledge: 2
+  practical:
+    HandmadeKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>

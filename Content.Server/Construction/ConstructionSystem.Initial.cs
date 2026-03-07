@@ -1,7 +1,11 @@
+// <Trauma>
+using Content.Trauma.Common.Construction;
+using Content.Goobstation.Common.Construction;
+using Content.Shared.Mind.Components;
+// </Trauma>
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Content.Goobstation.Common.Construction; // Goobstation
 using Content.Server.Construction.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Construction;
@@ -14,7 +18,6 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
-using Content.Shared.Mind.Components; // Goobstation
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -351,8 +354,9 @@ namespace Content.Server.Construction
             }
 
             // <Trauma>
-            var userConstructionGroup = AvailableConstructionGroups(user);
-            if (!CheckConstructionKnowledge(user, userConstructionGroup, constructionPrototype, prototype))
+            var ev = new ConstructAttemptEvent(user, prototype);
+            RaiseLocalEvent(user, ref ev);
+            if (ev.Cancelled)
                 return false;
             // </Trauma>
 
@@ -414,13 +418,9 @@ namespace Content.Server.Construction
                 return false;
 
             // <Goobstation>
-            var constructedEv = new ConstructedEvent(item);
+            var constructedEv = new ConstructedEvent(item, prototype);
             RaiseLocalEvent(user, ref constructedEv);
             // </Goobstation>
-
-            // <Trauma>
-            EnsureConstructionKnowledge(item, constructionPrototype, user);
-            // </Trauma>
 
             // Just in case this is a stack, attempt to merge it. If it isn't a stack, this will just normally pick up
             // or drop the item as normal.
@@ -463,8 +463,9 @@ namespace Content.Server.Construction
             }
 
             // <Trauma>
-            var userConstructionGroup = AvailableConstructionGroups(user);
-            if (!CheckConstructionKnowledge(user, userConstructionGroup, constructionPrototype, prototypeName))
+            var ev = new ConstructAttemptEvent(user, prototypeName);
+            RaiseLocalEvent(user, ref ev);
+            if (ev.Cancelled)
             {
                 RaiseNetworkEvent(new AckStructureConstructionMessage(ack), user);
                 return false;
@@ -622,13 +623,9 @@ namespace Content.Server.Construction
             }
 
             // <Goobstation>
-            var constructedEv = new ConstructedEvent(structure);
+            var constructedEv = new ConstructedEvent(structure, prototypeName);
             RaiseLocalEvent(user, ref constructedEv);
             // </Goobstation>
-
-            // <Trauma>
-            EnsureConstructionKnowledge(structure, constructionPrototype, user);
-            // </Trauma>
 
             RaiseNetworkEvent(new AckStructureConstructionMessage(ack, GetNetEntity(structure)), user);
             _adminLogger.Add(LogType.Construction, LogImpact.Low, $"{ToPrettyString(user):player} has turned a {prototypeName} construction ghost into {ToPrettyString(structure)} at {Transform(structure).Coordinates}");

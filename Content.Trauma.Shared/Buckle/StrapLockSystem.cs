@@ -296,6 +296,10 @@ public sealed class StrapLockSystem : EntitySystem
         _popup.PopupPredicted(you, others, target, _player.LocalEntity); // all clients will predict it
 
         _nestedEffect.ApplyNestedEffect(target, ent.Comp.DropEffect);
+
+        // incase some shit didnt clean it up
+        RemCompDeferred<StrapLockedComponent>(target);
+        RemCompDeferred<StrapLockHeldComponent>(target);
     }
 
     private void StopHoldingStrapped(EntityUid uid)

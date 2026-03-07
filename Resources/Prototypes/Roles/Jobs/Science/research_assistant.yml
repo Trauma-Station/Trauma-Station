@@ -18,12 +18,10 @@
   - Maintenance
   # <Trauma>
   special:
-  - !type:AddComponentSpecial
-    components:
-      - type: KnowledgeGrant
-        skills:
-          TechnologyKnowledge: 10
-          ScienceKnowledge: 10
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      TechnologyKnowledge: 10
+      ScienceKnowledge: 10
   # </Trauma>
 
 - type: startingGear

@@ -9,7 +9,7 @@ using Content.Shared.Mobs.Components;
 using Robust.Shared.Localization;
 using Robust.Shared.Timing;
 
-namespace Content.Trauma.Server.XenomorphsRecall;
+namespace Content.Trauma.Server.XenomorphRecall;
 
 public sealed class XenomorphQueenShuttleRecallSystem : EntitySystem
 {

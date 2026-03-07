@@ -4,5 +4,7 @@
   targetNode: makeshiftRod
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
+    SurvivalKnowledge: 1
+  practical:
     HandmadeKnowledge: 3

@@ -7,7 +7,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -20,7 +20,9 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
+    ElectronicsKnowledge: 1
+  practical:
     ElectronicsKnowledge: 2
   # </Trauma>
 
@@ -36,8 +38,8 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -54,8 +56,8 @@
     - !type:WallmountCondition
   hide: true #TODO: Fix the lightswitch, issue #34659. Until then, keep hidden so people don't build it and get confused.
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -71,8 +73,8 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -88,8 +90,8 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 0 # most basic signal source
   # </Trauma>
 
 - type: construction
@@ -107,8 +109,8 @@
     - !type:WallmountCondition
   hide: true #TODO: Fix the lightswitch, issue #34659. Until then, keep hidden so people don't build it and get confused.
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -125,8 +127,8 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -143,6 +145,6 @@
   conditions:
     - !type:WallmountCondition
   # <Trauma>
-  groups:
-    ElectronicsKnowledge: 2
+  theory:
+    ElectronicsKnowledge: 0
   # </Trauma>

@@ -1,26 +1,176 @@
 {
-    "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from https://github.com/tgstation/tgstation/blob/415b984d0653e603b6e21a17d9008f414792ced8/icons/area/areas_station.dmi",
-    "size": {
-        "x": 32,
-        "y": 32
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/a47835a04f3c88216ca1516ec4082a009c5f3451/icons/area/areas_station.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "error"
     },
-    "states": [
-        {
-            "name": "error"
-        },
-        {
-            "name": "station"
-        },
-        {
-            "name": "kitchen"
-        },
-        {
-            "name": "kitchen_cold"
-        },
-        {
-            "name": "cafeteria"
-        }
-    ]
+    {
+      "name": "station"
+    },
+    {
+      "name": "bridge"
+    },
+    {
+      "name": "nuke_storage"
+    },
+    {
+      "name": "captain"
+    },
+    {
+      "name": "ce_office"
+    },
+    {
+      "name": "cmo_office"
+    },
+    {
+      "name": "hop_office"
+    },
+    {
+      "name": "hos_office"
+    },
+    {
+      "name": "rd_office"
+    },
+    {
+      "name": "ai"
+    },
+    {
+      "name": "ai_upload"
+    },
+    {
+      "name": "brig"
+    },
+    {
+      "name": "security"
+    },
+    {
+      "name": "detective"
+    },
+    {
+      "name": "armory"
+    },
+    {
+      "name": "interrogation"
+    },
+    {
+      "name": "sec_prison"
+    },
+    {
+      "name": "surgery"
+    },
+    {
+      "name": "cryo"
+    },
+    {
+      "name": "morgue"
+    },
+    {
+      "name": "psychology"
+    },
+    {
+      "name": "chem"
+    },
+    {
+      "name": "pharmacy"
+    },
+    {
+      "name": "virology"
+    },
+    {
+      "name": "medbay"
+    },
+    {
+      "name": "science"
+    },
+    {
+      "name": "xenobio"
+    },
+    {
+      "name": "engie"
+    },
+    {
+      "name": "atmos"
+    },
+    {
+      "name": "telesci"
+    },
+    {
+      "name": "cargo_bay"
+    },
+    {
+      "name": "theatre"
+    },
+    {
+      "name": "bar"
+    },
+    {
+      "name": "kitchen"
+    },
+    {
+      "name": "kitchen_cold"
+    },
+    {
+      "name": "janitor"
+    },
+    {
+      "name": "chapel"
+    },
+    {
+      "name": "cafeteria"
+    },
+    {
+      "name": "library"
+    },
+    {
+      "name": "courtroom"
+    },
+    {
+      "name": "garden"
+    },
+    {
+      "name": "lounge"
+    },
+    {
+      "name": "dorms"
+    },
+    {
+      "name": "fitness"
+    },
+    {
+      "name": "holodeck"
+    },
+    {
+      "name": "diner"
+    },
+    {
+      "name": "maints"
+    },
+    {
+      "name": "radstorm_shelter"
+    },
+    {
+      "name": "cloning"
+    },
+    {
+      "name": "genetics"
+    },
+    {
+      "name": "barber"
+    },
+    {
+      "name": "qm_office"
+    },
+    {
+      "name": "pool"
+    },
+    {
+      "name": "salv"
+    }
+  ]
 }

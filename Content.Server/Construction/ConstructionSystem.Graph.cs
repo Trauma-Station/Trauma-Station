@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Construction;
+// </Trauma>
 using Content.Server.Construction.Components;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
@@ -414,8 +417,9 @@ namespace Content.Server.Construction
 
             EntityManager.InitializeAndStartEntity(newUid);
 
-            // <Trauma>
-            TransferQuality(uid, newUid);
+            // <Trauma> - stupid fucking chuds put the events in server idc to refactor them
+            var goidaEv = new ConstructionChangedEvent(newUid);
+            RaiseLocalEvent(uid, ref goidaEv);
             // </Trauma>
             QueueDel(uid);
 

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Interactions;
+using Content.Goobstation.Common.Interaction;
 using Content.Goobstation.Server.Interaction.Components;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
@@ -25,6 +25,6 @@ public sealed partial class UseOnStationOnlySystem : EntitySystem
             return;
 
         _popup.PopupEntity(Loc.GetString("use-on-station-only-not-on-station"), args.User, args.User);
-        args.Cancel();
+        args.Cancelled = true;
     }
 }

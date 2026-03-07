@@ -19,7 +19,7 @@ public abstract partial class SharedKnowledgeSystem
     }
 
     private void OnGrantKnowledgeOrgan(Entity<KnowledgeGrantOnWearComponent> ent, ref OrganGotInsertedEvent args)
-    => ApplyKnowledgeModifiers(args.Target, ent.Comp);
+        => ApplyKnowledgeModifiers(args.Target, ent.Comp);
 
     private void OnRemoveKnowledgeOrgan(Entity<KnowledgeGrantOnWearComponent> ent, ref OrganGotRemovedEvent args)
         => RemoveKnowledgeModifiers(args.Target, ent.Comp);
@@ -32,68 +32,82 @@ public abstract partial class SharedKnowledgeSystem
 
     private void ApplyKnowledgeModifiers(EntityUid wearer, KnowledgeGrantOnWearComponent component)
     {
-        if (TryGetKnowledgeEntity(wearer) is not { } knowledgeEntity)
+        if (GetContainer(wearer) is not {} ent)
             return;
 
         // Handle Skills (Temporary Levels)
         foreach (var (id, level) in component.Skills)
         {
-            var unit = TryGetKnowledgeUnit(wearer, id) ?? TryAddKnowledgeUnit(wearer, (id, 0));
-            if (unit is { } && TryComp<KnowledgeComponent>(unit, out var knowledge))
-                knowledge.TemporaryLevel += level;
+            if (EnsureKnowledge(ent, id) is {} unit)
+            {
+                unit.Comp.TemporaryLevel += level;
+                Dirty(unit);
+            }
         }
 
         // Handle Experience
         foreach (var (id, xp) in component.Experience)
         {
-            var unit = TryGetKnowledgeUnit(wearer, id) ?? TryAddKnowledgeUnit(wearer, (id, 0));
-            if (unit is { } && TryComp<KnowledgeComponent>(unit, out var knowledge))
-                knowledge.BonusExperience += xp;
+            if (EnsureKnowledge(ent, id) is {} unit)
+            {
+                unit.Comp.BonusExperience += xp;
+                Dirty(unit);
+            }
         }
 
         // Handle Blocks
-        foreach (var (id, _) in component.Blocked)
+        foreach (var id in component.Blocked.Keys)
         {
-            if (TryGetKnowledgeUnit(wearer, id) is { } unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            if (GetKnowledge(ent, id) is {} unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            {
                 martial.TemporaryBlockedCounter += 1;
+                Dirty(unit, martial);
+            }
         }
     }
 
     private void RemoveKnowledgeModifiers(EntityUid wearer, KnowledgeGrantOnWearComponent component)
     {
-        if (TryGetKnowledgeEntity(wearer) is not { } knowledgeEntity)
+        if (TerminatingOrDeleted(wearer) || GetContainer(wearer) is not {} ent)
             return;
 
         // Remove Skills
         foreach (var (id, level) in component.Skills)
         {
-            if (TryGetKnowledgeUnit(wearer, id) is not { } unit || !TryComp<KnowledgeComponent>(unit, out var knowledge))
+            if (GetKnowledge(ent, id) is not {} unit)
                 continue;
 
-            knowledge.TemporaryLevel = Math.Max(0, knowledge.TemporaryLevel - level);
+            unit.Comp.TemporaryLevel = Math.Max(0, unit.Comp.TemporaryLevel - level);
 
             // If they have no real levels and no more temp levels, clean up
-            if (knowledge.Level <= 0 && knowledge.TemporaryLevel <= 0)
-                TryRemoveKnowledgeUnit(wearer, id);
+            if (unit.Comp.Level <= 0 && unit.Comp.TemporaryLevel <= 0)
+                RemoveKnowledge(ent, id);
+            else
+                Dirty(unit);
         }
 
         // Remove Experience
         foreach (var (id, xp) in component.Experience)
         {
-            if (TryGetKnowledgeUnit(wearer, id) is not { } unit || !TryComp<KnowledgeComponent>(unit, out var knowledge))
+            if (GetKnowledge(ent, id) is not {} unit)
                 continue;
 
-            knowledge.BonusExperience -= xp;
+            unit.Comp.BonusExperience -= xp;
 
-            if (knowledge.Level <= 0 && knowledge.BonusExperience <= 0)
-                TryRemoveKnowledgeUnit(wearer, id);
+            if (unit.Comp.Level <= 0 && unit.Comp.BonusExperience <= 0)
+                RemoveKnowledge(ent, id);
+            else
+                Dirty(unit);
         }
 
         // Remove Blocks
-        foreach (var (id, _) in component.Blocked)
+        foreach (var id in component.Blocked.Keys)
         {
-            if (TryGetKnowledgeUnit(wearer, id) is { } unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            if (GetKnowledge(ent, id) is {} unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            {
                 martial.TemporaryBlockedCounter -= 1;
+                Dirty(unit, martial);
+            }
         }
     }
 }

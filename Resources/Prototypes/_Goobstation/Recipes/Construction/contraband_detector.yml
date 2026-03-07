@@ -6,5 +6,6 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   targetNode: detector
-  groups:
+  theory:
     ElectronicsKnowledge: 2
+    InfrastructureKnowledge: 1

@@ -1,3 +1,6 @@
+// <Trauma>
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+// </Trauma>
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -50,7 +53,7 @@ namespace Content.Server.Database
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
 
-        // RMC14
+        // <Trauma>
         public DbSet<RMCDiscordAccount> RMCDiscordAccounts { get; set; } = default!;
         public DbSet<RMCLinkedAccount> RMCLinkedAccounts { get; set; } = default!;
         public DbSet<RMCPatronTier> RMCPatronTiers { get; set; } = default!;
@@ -60,10 +63,10 @@ namespace Content.Server.Database
         public DbSet<RMCPatronLobbyMessage> RMCPatronLobbyMessages { get; set; } = default!;
         public DbSet<RMCPatronRoundEndNTShoutout> RMCPatronRoundEndNTShoutouts { get; set; } = default!;
 
-        // Goobstation Polls
         public DbSet<Poll> Polls { get; set; } = default!;
         public DbSet<PollOption> PollOptions { get; set; } = default!;
         public DbSet<PollVote> PollVotes { get; set; } = default!;
+        // </Trauma>
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -71,9 +74,25 @@ namespace Content.Server.Database
                 .HasIndex(p => p.UserId)
                 .IsUnique();
 
-            modelBuilder.Entity<Profile>()
-                .HasIndex(p => new { p.Slot, PrefsId = p.PreferenceId })
+            // <Trauma> - store skills in json because i hate this shit. had to store profile for 3 things to use it
+            var profile = modelBuilder.Entity<Profile>();
+            profile.Property(p => p.KnowledgeMastery)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v),
+                    s => string.IsNullOrEmpty(s)
+                        ? new()
+                        : JsonSerializer.Deserialize<Dictionary<string, int>>(s) ?? new()
+                )
+                .Metadata.SetValueComparer(new ValueComparer<Dictionary<string, int>>(
+                    (a, b) => a != null && b != null && a.Count == b.Count && !a.Except(b).Any(),
+                    dict => dict.GetHashCode(),
+                    dict => new Dictionary<string, int>(dict)
+                ));
+            profile.Property(p => p.KnowledgeRemoved)
+                .HasDefaultValue(new List<string>());
+            profile.HasIndex(p => new { p.Slot, PrefsId = p.PreferenceId })
                 .IsUnique();
+            // </Trauma>
 
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new { HumanoidProfileId = p.ProfileId, p.AntagName })
@@ -310,7 +329,7 @@ namespace Content.Server.Database
                 .Property(p => p.Type)
                 .HasDefaultValue(HwidType.Legacy);
 
-            // RMC14
+            // <Trauma>
             modelBuilder.Entity<RMCLinkedAccount>()
                 .HasOne(l => l.Player)
                 .WithOne(p => p.LinkedAccount)
@@ -364,7 +383,6 @@ namespace Content.Server.Database
                 .HasPrincipalKey(p => p.Id)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // <Goob>
             modelBuilder.Entity<Poll>()
                 .HasOne(p => p.CreatedBy)
                 .WithMany()
@@ -400,7 +418,7 @@ namespace Content.Server.Database
             modelBuilder.Entity<PollVote>()
                 .HasIndex(v => new { v.PollId, v.PlayerUserId, v.PollOptionId })
                 .IsUnique();
-            // </Goob>
+            // </Trauma>
 
             ModelBan.OnModelCreating(modelBuilder);
         }
@@ -438,7 +456,11 @@ namespace Content.Server.Database
         public string Sex { get; set; } = null!;
         public string Gender { get; set; } = null!;
         public string Species { get; set; } = null!;
-        public string BarkVoice { get; set; } = null!; // Goob Station - Barks
+        // <Trauma>
+        public string BarkVoice { get; set; } = null!;
+        public Dictionary<string, int> KnowledgeMastery { get; set; } = new();
+        public List<string> KnowledgeRemoved { get; set; } = new();
+        // </Trauma>
         [Column(TypeName = "jsonb")] public JsonDocument? OrganMarkings { get; set; } = null!;
         [Column(TypeName = "jsonb")] public JsonDocument? Markings { get; set; } = null!;
         public string HairName { get; set; } = null!;

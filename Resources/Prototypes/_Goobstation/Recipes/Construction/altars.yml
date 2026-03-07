@@ -7,9 +7,7 @@
   placementMode: SnapgridCenter
   canRotate: false
   canBuildInImpassable: false
-  # <>
-  groups:
+  theory:
     FurnitureKnowledge: 1
-  # Trauma edit end
   conditions:
   - !type:TileNotBlocked

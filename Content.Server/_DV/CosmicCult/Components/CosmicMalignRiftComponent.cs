@@ -7,12 +7,6 @@ namespace Content.Server._DV.CosmicCult.Components;
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class CosmicMalignRiftComponent : Component
 {
-    [DataField]
-    public bool Used;
-
-    [DataField]
-    public bool Occupied;
-
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan DangerTimer = default!;
 

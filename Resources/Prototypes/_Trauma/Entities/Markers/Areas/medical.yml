@@ -1,0 +1,72 @@
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaMedical
+  name: medical
+  components:
+  - type: DepartmentArea
+    department: Medical
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaMedical
+  name: medbay
+  components:
+  - type: Sprite
+    state: medbay
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaSurgery
+  name: surgery
+  components:
+  - type: Sprite
+    state: surgery
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaMorgue
+  name: morgue
+  components:
+  - type: Sprite
+    state: morgue
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaPsychology
+  name: psychology
+  components:
+  - type: Sprite
+    state: psychology
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaCloning
+  name: cloning
+  components:
+  - type: Sprite
+    state: cloning
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaPharmacy
+  name: pharmacy
+  components:
+  - type: Sprite
+    state: pharmacy
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaChem
+  name: chem
+  components:
+  - type: Sprite
+    state: chem
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaVirology
+  name: virology
+  components:
+  - type: Sprite
+    state: virology

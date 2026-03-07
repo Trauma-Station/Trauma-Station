@@ -4,6 +4,7 @@
   name: revolutionary radio jammer
   components:
   - type: RadioJammer
+    selectedPowerLevel: 0
     settings:
     - wattage: 1
       range: 2.5

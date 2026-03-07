@@ -5,7 +5,7 @@
   targetNode: Killdozer
   category: construction-category-antagonist
   objectType: Item
-  groups:
+  theory:
     RevolutionaryKnowledge: 3
 
 - type: construction
@@ -15,5 +15,5 @@
   targetNode: Frame
   category: construction-category-antagonist
   objectType: Item
-  groups:
+  theory:
     RevolutionaryKnowledge: 2

@@ -6,6 +6,33 @@
   save: false
   abstract: true
   components:
+  # <Trauma>
+  - type: KnowledgeHolder
+  - type: IntrinsicUI
+    uis:
+      enum.StationMapUiKey.Key:
+        toggleAction: ActionShowStationMap
+  - type: StationMap # Show location on the map
+  - type: Targeting
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+    canUseInCrit: true
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  - type: Penetratable # Better snipers
+    penetrateDamage: 75 # It's harder to kill iron golem
+    damagePenalty: 0.25
+  - type: MiningPoints # for mining borgs mostly
+  - type: SpeechSynthesis
+    voice: Borg
+  # </Trauma>
   - type: Reactive
     groups:
       Acidic: [Touch]
@@ -46,7 +73,7 @@
     thresholds:
       0: Alive
       100: Critical
-      200: Dead
+      200: Dead # Trauma - was 300
     stateAlertDict:
       Alive: BorgHealth
       Critical: BorgCrit
@@ -76,13 +103,6 @@
       # Goobstation - Add the station map interface to the borg
       enum.StationMapUiKey.Key:
         type: StationMapBoundUserInterface
-  # Goobstation - Add the station map interface to the borg
-  - type: IntrinsicUI
-    uis:
-      enum.StationMapUiKey.Key:
-        toggleAction: ActionShowStationMap
-  - type: StationMap # Also Goobstation - Show location on the map
-  - type: Targeting # Shitmed Change
   - type: ActivatableUI
     key: enum.BorgUiKey.Key
   - type: SiliconLawBound
@@ -111,12 +131,6 @@
     # - Binary # Goobstation - replaced with collective mind
     - Common
     - Science
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
-    canUseInCrit: true # Goobstation
   - type: ZombieImmune
   - type: Repairable
     damageValue: -10 # 10 seconds to repair from crit
@@ -151,6 +165,7 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
+  #- type: Body # Trauma - borg is not creature
   - type: StatusEffects
     allowed:
     - Flashed
@@ -264,13 +279,6 @@
     guides:
     - Cyborgs
     - Robotics
-  - type: LanguageSpeaker # Einstein Engines - Languages
-    speaks:
-    - TauCetiBasic
-    - RobotTalk
-    understands:
-    - TauCetiBasic
-    - RobotTalk
   - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection
     damageProtection:
@@ -282,14 +290,6 @@
     requiredMobState:
     - Critical
     - Dead
-  # <Goob>
-  - type: Penetratable # Better snipers
-    penetrateDamage: 75 # It's harder to kill iron golem
-    damagePenalty: 0.25
-  - type: MiningPoints
-  - type: SpeechSynthesis
-    voice: Borg
-  # </Goob>
 
 - type: entity
   abstract: true

@@ -206,10 +206,8 @@ public sealed partial class ThrowingSystem : EntitySystem
             compensateFriction = false; // cannot calculate this if there is no friction
 
         // <Trauma>
-        var throwingRandomness = 0.0f;
         if (user != null)
-            (baseThrowSpeed, throwingRandomness) = RandomSkillThrowingAngle(user.Value, baseThrowSpeed);
-        direction = new Angle(throwingRandomness).RotateVec(direction);
+            baseThrowSpeed = SkillModifySpeed(user.Value, baseThrowSpeed);
         // </Trauma>
 
         // Set the time the item is supposed to be in the air so we can apply OnGround status.
