@@ -37,7 +37,24 @@ public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
         SubscribeLocalEvent<RotaryPhoneComponent, PhoneCategoryChangedMessage>(OnPhoneCategoryChanged);
         SubscribeLocalEvent<RotaryPhoneComponent, PhoneDialedMessage>(OnDial);
         SubscribeLocalEvent<RotaryPhoneComponent, BoundUIOpenedEvent>(OnOpen);
+        SubscribeLocalEvent<RotaryPhoneComponent, PhoneHungUpEvent>(OnGotHungUp);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, EntInsertedIntoContainerMessage>(OnPhoneInsertHolder);
+    }
+
+    private void OnGotHungUp(Entity<RotaryPhoneComponent> ent, ref PhoneHungUpEvent args)
+    {
+        if (!ent.Comp.Connected)
+        {
+            if (ent.Comp.ConnectedPhoneStand != null)
+                UpdateAppearance(ent.Comp.ConnectedPhoneStand.Value, RotaryPhoneVisuals.Base);
+            return;
+        }
+
+        ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.HandUpSoundLocal, ent.Owner, ent.Owner, AudioParams.Default.WithMaxDistance(2.5f))?.Entity;
+
+        ent.Comp.ConnectedPhone = null;
+        ent.Comp.Connected = false;
+        Dirty(ent);
     }
 
     private void OnPhoneInsertHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntInsertedIntoContainerMessage args)
