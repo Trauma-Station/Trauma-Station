@@ -152,6 +152,7 @@
     - cqc-pressure
   opponentEffects:
   - !type:StealItem
+    probability: 0.5
   levelRequired: 0
   levelExceeded: 26
 
