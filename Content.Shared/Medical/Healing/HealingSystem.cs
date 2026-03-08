@@ -223,7 +223,7 @@ public sealed class HealingSystem : EntitySystem
 
         // see if there is any damage that can be healed
         if (healing.Damage.DamageDict.Keys
-            .Any(damageKey => damageable.Damage.DamageDict[damageKey].Value > 0))
+            .Any(damageKey => damageable.Damage.DamageDict.TryGetValue(damageKey, out var damage) && damage.Value > 0))
             return true;
 
         if (healing.BloodlossModifier == 0)
