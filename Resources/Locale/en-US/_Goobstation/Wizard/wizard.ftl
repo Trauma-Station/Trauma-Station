@@ -17,9 +17,6 @@ roles-wizard-objective = Cause havoc and destruction to the station.
 wizard-role-briefing = You are a space wizard. Survive and wreak havoc on the simpletons.
 apprentice-role-briefing = You are a space wizard apprentice. Keep whoever summoned you alive.
 
-wizard-title = Wizard
-wizard-description = A powerful space wizard is visiting the station. Embrace the chaos.
-
 lich-greeting =
     With a hideous feeling of emptiness you watch in horrified fascination as skin sloughs off bone! Blood boils, nerves disintegrate, eyes boil in their sockets! As your organs crumble to dust in your fleshless chest you come to terms with your choice.
     You're a lich.
