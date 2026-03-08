@@ -119,7 +119,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
 
         // <Trauma> - for projectiles use PlayLocal since clients predict their physics
-        if (user == null)
+        if (user == null && _net.IsServer)
             _audio.PlayPvs(component.Sound, uid);
         else if (_timing.IsFirstTimePredicted)
             _audio.PlayLocal(component.Sound, uid, null);
