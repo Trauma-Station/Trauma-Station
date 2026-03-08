@@ -344,6 +344,9 @@
     energy: 1.5
     color: "#4faffb"
     slots:
+  - type: KnowledgeGrantOnWear # Trauma
+    experience:
+      MartialArtSpaceBear: 1
 
 - type: entity
   parent: MaterialBase
