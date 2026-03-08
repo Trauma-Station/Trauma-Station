@@ -54,7 +54,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         var beacon = GetEntity(args.Target);
         if (!HasComp<NavMapBeaconComponent>(beacon))
-            return;
+            return; // malf client trying to teleport to arbitrary entities
 
         var xform = Transform(beacon);
         if (xform.MapID != Transform(ent).MapID)
@@ -65,6 +65,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         var eye = SpawnAtPosition(ent.Comp.RemoteEntityProto, xform.Coordinates);
 
+        // TODO: holy shitcode just disable interaction??????
         if (TryComp<HandsComponent>(user, out var hands))
         {
             foreach (var hand in _hands.EnumerateHands((user, hands)))

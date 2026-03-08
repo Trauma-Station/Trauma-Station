@@ -8,6 +8,7 @@ using Robust.Shared.Audio;
 
 namespace Content.Medical.Shared.Abductor;
 
+// RIP mocho fucking chud died fighting in ukraine
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductorHumanObservationConsoleComponent : Component
 {
