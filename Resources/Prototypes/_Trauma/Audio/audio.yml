@@ -157,7 +157,7 @@
     params:
       volume: -25
     collection: AmbienceDetective
-  rules: InChapelArea
+  rules: InDetectiveArea
   fadeIn: true
   interruptable: true
   priority: 10
