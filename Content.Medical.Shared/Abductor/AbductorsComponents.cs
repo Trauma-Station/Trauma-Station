@@ -4,11 +4,9 @@ using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Audio;
 
 namespace Content.Medical.Shared.Abductor;
 
-// RIP mocho fucking chud died fighting in ukraine
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductorHumanObservationConsoleComponent : Component
 {
@@ -67,9 +65,6 @@ public sealed partial class AbductorVictimComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan? LastActivation;
 }
-
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
-public sealed partial class AbductorAgentComponent : Component;
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductorOrganComponent : Component;

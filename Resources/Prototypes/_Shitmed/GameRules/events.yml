@@ -176,7 +176,6 @@
         color: Green
         sound: /Audio/_Shitmed/Misc/abductor.ogg
       components:
-      - type: AbductorAgent
       - type: Abductor
       - type: ActionGrant
         actions:

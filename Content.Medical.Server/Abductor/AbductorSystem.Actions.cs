@@ -211,11 +211,8 @@ public sealed partial class AbductorSystem
         comp.HiddenActions = _actions.HideActions(user);
         _actions.AddAction(user, ref comp.ExitConsole, ExitAction);
 
-        if (!HasComp<AbductorAgentComponent>(user))
-        {
-            _actions.AddAction(user, ref comp.SendYourself, SendYourself);
-            _actions.AddAction(user, ref comp.SendAgent, SendAgentAction);
-        }
+        _actions.AddAction(user, ref comp.SendYourself, SendYourself);
+        _actions.AddAction(user, ref comp.SendAgent, SendAgentAction);
     }
 
     private void RemoveActions(EntityUid actor)
