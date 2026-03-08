@@ -8,14 +8,13 @@ using Robust.Shared.Audio;
 
 namespace Content.Medical.Shared.Abductor;
 
-// RIP mocho fucking chud died fighting in ukraine
-
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductorHumanObservationConsoleComponent : Component
 {
     [DataField]
     public EntProtoId RemoteEntityProto = "AbductorHumanObservationConsoleEye";
 }
+
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem)), AutoGenerateComponentState]
 public sealed partial class AbductorConsoleComponent : Component
 {
@@ -69,6 +68,9 @@ public sealed partial class AbductorVictimComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
+public sealed partial class AbductorAgentComponent : Component;
+
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductorOrganComponent : Component;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
@@ -97,6 +99,9 @@ public sealed partial class AbductorsAbilitiesComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? SendYourself;
 
+    [DataField, AutoNetworkedField]
+    public EntityUid? SendAgent;
+
     [DataField]
     public EntityUid[] HiddenActions = [];
 }
@@ -107,6 +112,7 @@ public sealed partial class AbductorVestComponent : Component
     [DataField, AutoNetworkedField]
     public AbductorArmorModeType CurrentState = AbductorArmorModeType.Stealth;
 }
+
 [RegisterComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductConditionComponent : Component
 {
@@ -121,3 +127,5 @@ public sealed partial class ExitConsoleEvent : InstantActionEvent;
 public sealed partial class SendYourselfEvent : WorldTargetActionEvent;
 
 public sealed partial class AbductorReturnToShipEvent : InstantActionEvent;
+
+public sealed partial class SendAgentEvent : WorldTargetActionEvent;

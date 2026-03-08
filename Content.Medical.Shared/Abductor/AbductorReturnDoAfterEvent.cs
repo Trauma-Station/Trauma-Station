@@ -48,3 +48,25 @@ public sealed partial class AbductorAttractDoAfterEvent : DoAfterEvent
 
     public override DoAfterEvent Clone() => new AbductorAttractDoAfterEvent(TargetCoordinates, Victim);
 }
+
+[Serializable, NetSerializable]
+public sealed partial class AbductorSendAgentDoAfterEvent : DoAfterEvent
+{
+    [DataField("coordinates", required: true)]
+    public NetCoordinates TargetCoordinates;
+
+    [DataField(required: true)]
+    public NetEntity Agent;
+
+    private AbductorSendAgentDoAfterEvent()
+    {
+    }
+
+    public AbductorSendAgentDoAfterEvent(NetCoordinates coords, NetEntity agent)
+    {
+        TargetCoordinates = coords;
+        Agent = agent;
+    }
+
+    public override DoAfterEvent Clone() => new AbductorSendAgentDoAfterEvent(TargetCoordinates, Agent);
+}

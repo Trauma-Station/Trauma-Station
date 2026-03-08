@@ -54,7 +54,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         var beacon = GetEntity(args.Target);
         if (!HasComp<NavMapBeaconComponent>(beacon))
-            return; // malf client trying to teleport to arbitrary entities
+            return;
 
         var xform = Transform(beacon);
         if (xform.MapID != Transform(ent).MapID)
@@ -65,7 +65,6 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         var eye = SpawnAtPosition(ent.Comp.RemoteEntityProto, xform.Coordinates);
 
-        // TODO: holy shitcode just disable interaction??????
         if (TryComp<HandsComponent>(user, out var hands))
         {
             foreach (var hand in _hands.EnumerateHands((user, hands)))
@@ -86,7 +85,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
                 EnsureComp<UnremoveableComponent>(virtItem2.Value);
         }
 
-        var visibility = EnsureComp<VisibilityComponent>(eye);
+        EnsureComp<VisibilityComponent>(eye);
 
         if (TryComp(user, out EyeComponent? eyeComp))
         {
@@ -112,7 +111,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
     {
         if (!TryComp<RelayInputMoverComponent>(actor, out var comp) ||
             !TryComp<AbductorScientistComponent>(actor, out var abductorComp))
-            return; // lol lmao
+            return;
 
         var relay = comp.RelayEntity;
         RemComp(actor, comp);
@@ -133,7 +132,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnBeforeActivatableUIOpen(Entity<AbductorHumanObservationConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
-        if (!TryComp<AbductorScientistComponent>(args.User, out var abductorComp))
+        if (!TryComp<AbductorScientistComponent>(args.User, out var abductorComp) || HasComp<AbductorAgentComponent>(args.User))
             return;
 
         abductorComp.Console = ent.Owner;
@@ -161,8 +160,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnActivatableUIOpenAttempt(Entity<AbductorHumanObservationConsoleComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
-        if (!HasComp<AbductorScientistComponent>(args.User))
+        if (!HasComp<AbductorScientistComponent>(args.User) || HasComp<AbductorAgentComponent>(args.User))
             args.Cancel();
     }
-
 }
