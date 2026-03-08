@@ -15,7 +15,7 @@ namespace Content.Client.Atmos.Components;
 public sealed partial class FireVisualsComponent : Component
 {
     [DataField("fireStackAlternateState")]
-    public int FireStackAlternateState = 10;
+    public int FireStackAlternateState = 3;
 
     [DataField("normalState")]
     public string? NormalState;
