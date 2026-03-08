@@ -4,7 +4,7 @@
   targetNode: bananiumSword
   category: construction-category-weapons
   objectType: Item
-  groups:
+  theory:
     BananiumKnowledge: 2
     TechnologyKnowledge: 2
 
@@ -14,7 +14,7 @@
   targetNode: boomerangFinish
   category: construction-category-weapons
   objectType: Item
-  groups:
+  theory:
     WeaponsKnowledge: 2
     SurvivalKnowledge: 2
     HandmadeKnowledge: 2

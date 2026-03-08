@@ -1,9 +1,9 @@
 // <Trauma>
-using Content.Goobstation.Common.Interactions;
+using Content.Goobstation.Common.Interaction;
+using Content.Shared._Shitcode.Heretic.Components;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -1280,7 +1280,7 @@ namespace Content.Shared.Interaction
 
             // <Goob>
             var useAttemptEv = new UseInHandAttemptEvent(user);
-            RaiseLocalEvent(used, useAttemptEv);
+            RaiseLocalEvent(used, ref useAttemptEv);
 
             if (useAttemptEv.Cancelled)
                 return false;

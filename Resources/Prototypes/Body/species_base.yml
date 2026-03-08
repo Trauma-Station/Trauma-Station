@@ -25,6 +25,7 @@
     - TauCetiBasic
   - type: BloodSplatterer
   - type: CanEscapeInventory
+  - type: CanBeShadowCocoon
   - type: Consciousness
     cap: 190
     threshold: 95
@@ -50,12 +51,6 @@
     thresholds: [] # remove gib threshold, you can gib the torso instead
   - type: Tackler
   - type: KnowledgeHolder
-  - type: KnowledgeGrant
-    skills:
-      StrengthKnowledge: 0
-      ToughnessKnowledge: 0
-      AthleticsKnowledge: 0
-      MeleeKnowledge: 0
   # </Trauma>
   # Shitmed - woundable visuals used instead
   #- type: DamageVisuals

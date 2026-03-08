@@ -518,7 +518,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         // <Trauma> - prevent shooting with 0,0 direction
         if (mapDirection == Vector2.Zero)
             return;
-        GetRecoilScale(user, gunUid, out var recoilScale);
+        var recoilScale = GetRecoilScale(user, gunUid);
         var mapAngle = mapDirection.ToAngle();
         var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user, recoilScale); // Trauma - pass gunUid and user
         // </Trauma>
@@ -560,7 +560,8 @@ public abstract partial class SharedGunSystem : EntitySystem
                     {
                         var uid = PredictedSpawnAtPosition(cartridge.Prototype, fromEnt);
                         // <Trauma>
-                        TryAddKnowledgeModifiers(ent, uid);
+                        var cartEv = new CartridgeFiredEvent(uid);
+                        RaiseLocalEvent(ent!.Value, ref cartEv);
                         // </Trauma>
                         CreateAndFireProjectiles(uid, cartridge);
 
@@ -621,7 +622,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             // </Trauma>
         }
 
-        // <Trauma>
+        // <Trauma> - TODO: kill this, use AmmoShotUserEvent?
         AddShootingExperience(user);
         // </Trauma>
 
@@ -648,17 +649,18 @@ public abstract partial class SharedGunSystem : EntitySystem
                 var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,
                     mapAngle + spreadEvent.Spread / 2, ammoSpreadComp.Count);
 
-                ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
+                ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation - add target coords
                 shotProjectiles.Add(ammoEnt);
 
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = PredictedSpawnAtPosition(ammoSpreadComp.Proto, fromEnt);
                     // <Trauma>
-                    TryAddKnowledgeModifiers(ammoEnt, newuid);
+                    var pelletEv = new SpreadPelletFiredEvent(newuid);
+                    RaiseLocalEvent(ammoEnt, ref pelletEv);
+                    SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId));
                     // </Trauma>
-                    SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId)); // Goob
-                    ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
+                    ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation - add target coords
                     shotProjectiles.Add(newuid);
                 }
             }

@@ -33,8 +33,7 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
 
         SubscribeLocalEvent<BodyCacheComponent, OrganInsertedIntoEvent>(OnBodyInsertedInto);
         SubscribeLocalEvent<BodyCacheComponent, OrganRemovedFromEvent>(OnBodyRemovedFrom);
-        SubscribeLocalEvent<BodyCacheComponent, MapInitEvent>(OnMapInit,
-            after: [ typeof(ContainerFillSystem), typeof(InitialBodySystem) ]); // only run after all organs have been added so it's complete
+        SubscribeLocalEvent<BodyCacheComponent, BodyInitEvent>(OnBodyInit);
 
         SubscribeLocalEvent<ChildOrganComponent, OrganInsertAttemptEvent>(OnChildInsertAttempt);
         SubscribeLocalEvent<ChildOrganComponent, OrganGotInsertedEvent>(OnChildInserted);
@@ -75,7 +74,7 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
         Dirty(ent);
     }
 
-    private void OnMapInit(Entity<BodyCacheComponent> ent, ref MapInitEvent args)
+    private void OnBodyInit(Entity<BodyCacheComponent> ent, ref BodyInitEvent args)
     {
         foreach (var organ in ent.Comp.Organs.Values)
         {
@@ -110,7 +109,7 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
 
     private void OnChildInserted(Entity<ChildOrganComponent> ent, ref OrganGotInsertedEvent args)
     {
-        // will only reliably work during surgery, OnMapInit ensures they all find their parents on spawn
+        // will only reliably work during surgery, OnBodyInit ensures they all find their parents on spawn
         ent.Comp.Parent = GetOrgan(args.Target.Owner, ent.Comp.ParentCategory);
         Dirty(ent);
 

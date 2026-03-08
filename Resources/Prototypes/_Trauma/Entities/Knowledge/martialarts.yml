@@ -1,26 +1,45 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtCQC
+  name: Close Quarters Combat
   components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    state: icon
   - type: CanPerformCombo
     roundstartCombos:
+    - CQCConsecutiveSimple
+    - CQCPressureSimple
+    - CQCRestrainSimple
+    - CQCKickSimple
+    - CQCSlamSimple
     - CQCConsecutive
     - CQCPressure
     - CQCRestrain
     - CQCKick
     - CQCSlam
     - CQCConsecutiveAdvanced
+    - CQCKickAdvanced
 
 - type: entity
   parent: MartialArtCQC
   id: MartialArtCQCChef
+  name: Close Quarters Cooking
+  description: Just like CQC, but only usable in the kitchen, freezer and cafeteria.
   components:
-  - type: MartialArtsKnowledge
-    blocked: true
+  - type: Knowledge
+    costs: null # chef only
+  - type: AreaMartialArt
+    areas:
+    - AreaKitchen
+    - AreaColdRoom
+    - AreaCafeteria
+  # TODO: make it mutually exclusive with real CQC
 
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtCorporateJudo
+  name: Corporate Judo
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -36,8 +55,10 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtKravMaga
-  name: MartialArtKravMaga
+  name: Krav Maga
   components:
+  - type: Knowledge
+    costs: null # unobtainable for now
   - type: CanPerformCombo
   - type: ComboActions
     storedComboActions:
@@ -48,7 +69,10 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtCapoeira
+  name: Capoeira
   components:
+  - type: Knowledge
+    costs: null # antag only
   - type: CanPerformCombo
     roundstartCombos:
     - PushKick
@@ -57,12 +81,26 @@
     - SpinKick
     - KickUp
   - type: FastSpeed
-    speedModifier: 2
+    # 1x to 2x move speed scaling with level
+    moveCurve: !type:LinearSkillCurve
+      curveOffset: 1
+    # 1x to 3x damage*momentum scaling with level
+    damageScaleCurve: !type:LinearSkillCurve
+      skillScale: 2
+      curveOffset: 1
+  - type: MeleeSpeedKnowledge
+    # 1x to 3x melee attack speed scaling with level
+    curve: !type:LinearSkillCurve
+      skillScale: 2
+      curveOffset: 1
 
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtHellRip
+  name: Hell Rip
   components:
+  - type: Knowledge
+    costs: null # demon only
   - type: CanPerformCombo
     roundstartCombos:
     - DropKick
@@ -73,7 +111,10 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtNinjutsu
+  name: Ninjutsu
   components:
+  - type: Knowledge
+    costs: null # ninja only
   - type: CanPerformCombo
     roundstartCombos:
     - BiteTheDust
@@ -85,7 +126,10 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtDragon
+  name: Dragon Kung Fu
   components:
+  - type: Knowledge
+    costs: null # unobtainable for now
   - type: CanPerformCombo
     roundstartCombos:
     - DragonClaw
@@ -95,17 +139,25 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtSleepingCarp
+  name: Sleeping Carp
   components:
+  - type: Sprite
+    sprite: _Goobstation/Wizard/Objects/scroll.rsi
+    state: scroll2
+  - type: Knowledge
+    costs: null # antag only
   - type: CanPerformCombo
     roundstartCombos:
     - SleepingCarpGnashingTeeth
     - SleepingCarpKneeHaul
     - SleepingCarpCrashingWaves
   - type: NoGun
+  # TODO: split bullet protection into its own component
 
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtPlasmaFist
+  name: Plasma Fist
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -116,6 +168,7 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtSpaceBear
+  name: Space Bear
   components:
   - type: CanPerformCombo
     roundstartCombos:
@@ -126,7 +179,10 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtBoxing
+  name: Boxing
   components:
+  - type: Knowledge
+    costs: [3, 6, 10, 16, 20] # boxing is pretty common
   - type: CanPerformCombo
     roundstartCombos:
     - CQCConsecutive
@@ -134,7 +190,10 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtDrunkfu
+  name: Drunk-Fu
   components:
+  - type: Knowledge
+    costs: [3, 6, 10, 16, 20] # same moves as boxing so same costs
   - type: CanPerformCombo
     roundstartCombos:
     - CQCConsecutive
@@ -142,7 +201,10 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtMimejutsu
+  name: Mimejutsu
   components:
+  - type: Knowledge
+    costs: null # mime antag only (in the future, unused right now)
   - type: CanPerformCombo
     roundstartCombos:
     - MimeChucks
@@ -152,7 +214,10 @@
 - type: entity
   parent: BaseMartialArtsKnowledge
   id: MartialArtAdminfu
+  name: Admin-Fu
   components:
+  - type: Knowledge
+    costs: null # admin only...
   - type: CanPerformCombo
     roundstartCombos:
     - InstantStun

@@ -9,10 +9,8 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
-    RevolutionaryKnowledge: 2
+  theory:
+    RevolutionaryKnowledge: 0
 
 - type: construction
   id: RevPrintingPress
@@ -25,9 +23,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
 
 - type: construction
@@ -41,8 +37,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
 
 - type: construction
@@ -56,8 +51,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
 
 - type: construction
@@ -71,9 +65,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
 
 - type: construction
@@ -87,9 +79,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
 
 - type: construction
@@ -103,9 +93,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
 
 - type: construction
@@ -119,9 +107,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
 
 - type: construction
@@ -135,9 +121,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
 
 - type: construction
@@ -151,10 +135,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 1
+    TechnologyKnowledge: 1
 
 - type: construction
   id: RevTurretSMG
@@ -167,10 +151,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 1
+    TechnologyKnowledge: 1
 
 - type: construction
   id: RevPlasmaFoundry
@@ -183,7 +167,5 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-  groups:
-    TechnologyKnowledge: 2
+  theory:
     RevolutionaryKnowledge: 2

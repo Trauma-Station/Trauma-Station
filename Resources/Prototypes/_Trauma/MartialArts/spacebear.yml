@@ -20,7 +20,6 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
-
   levelRequired: 26
 
 - type: combo

@@ -1,7 +1,4 @@
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
-using Robust.Shared.Prototypes;
-using System.Linq;
 
 namespace Content.Shared.Construction;
 
@@ -14,15 +11,8 @@ public abstract partial class SharedConstructionSystem
         => false;
 
     /// <summary>
-    /// Trauma - Returns all available construction groups for that entity.
+    /// Just exists for construction client shitcode
     /// </summary>
-    public Dictionary<EntProtoId, int> AvailableConstructionGroups(EntityUid user)
-    {
-        var ev = new ConstructionGetGroupsEvent(new());
-        RaiseLocalEvent(user, ref ev);
-        return ev.Groups;
-    }
-
     public bool IsKnowledgeHolder(EntityUid user)
     {
         return HasComp<KnowledgeHolderComponent>(user);

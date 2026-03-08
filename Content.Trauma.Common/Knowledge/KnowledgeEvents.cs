@@ -6,38 +6,23 @@ using Robust.Shared.Serialization;
 namespace Content.Trauma.Common.Knowledge;
 
 /// <summary>
-/// Event that sends the client's wanted martial art entity to the server to update the martial art skill of the knowledge container component.
+/// Event that sends the client's wanted martial art id to the server to update the active martial art skill.
 /// </summary>
-/// <param name="knowledge"></param>
 [Serializable, NetSerializable]
-public sealed class KnowledgeUpdateMartialArtsEvent(NetEntity? knowledge) : EntityEventArgs
+public sealed class KnowledgeUpdateMartialArtsEvent(EntProtoId? knowledge) : EntityEventArgs
 {
-    public NetEntity? Knowledge = knowledge;
+    public readonly EntProtoId? Knowledge = knowledge;
 }
 
 /// <summary>
-/// Event that is raised to get a description of some knowledge to display it in the character menu.
+/// Called in order to add experience to a knowledge holder. Simply pass in a EntProtoId of the knowledge and the amount of exp you want to add.
+/// Will only increase levels up to a cap.
 /// </summary>
 [ByRefEvent]
-public record struct KnowledgeCopyEvent(EntityUid? Target);
+public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience, int LevelCap, bool Popup = true);
 
 /// <summary>
-/// Gets all ConstructionSkills of a character.
-/// </summary>
-/// <param name="Groups"></param>
-[ByRefEvent]
-public record struct ConstructionGetGroupsEvent(Dictionary<EntProtoId, int> Groups);
-
-/// <summary>
-/// Called in order to add experience to the character. Simply pass in a EntProtoId of the knowledge and the amount of exp you want to add.
-/// </summary>
-/// <param name="KnowledgeType"></param>
-/// <param name="Experience"></param>
-[ByRefEvent]
-public record struct AddExperienceEvent(EntProtoId KnowledgeType, int Experience);
-
-/// <summary>
-/// Called in order to update the experience of the character, need be.
+/// Raised to let the client update XP ui stuff.
 /// </summary>
 [ByRefEvent]
 public record struct UpdateExperienceEvent();
@@ -49,25 +34,13 @@ public record struct UpdateExperienceEvent();
 public record struct UpdateItemQualityEvent(EntityUid User);
 
 /// <summary>
-/// Called in order to invoke sneak attack failure.
-/// </summary>
-[ByRefEvent]
-public record struct InvokeSneakAttackSurprisedEvent();
-
-/// <summary>
-/// Called in order to invoke sneak attack failure.
-/// </summary>
-[ByRefEvent]
-public record struct CanDoSneakAttackEvent(bool CanSneakAttack);
-
-/// <summary>
 /// Called in order to invoke damage modifiers for martial arts. Call on the art itself.
 /// </summary>
 [ByRefEvent]
 public record struct MartialArtDamageModifierEvent(EntityUid User, float Coefficient = 1.0f);
 
 /// <summary>
-/// Called in order to invoke speed modifiers for martial arts. Call on the art itself.
+///
 /// </summary>
 [ByRefEvent]
-public record struct MartialArtSpeedModifierEvent(EntityUid User, float Coefficient = 1.0f);
+public record struct MissAttackEvent(int Adjust, bool Miss = false);

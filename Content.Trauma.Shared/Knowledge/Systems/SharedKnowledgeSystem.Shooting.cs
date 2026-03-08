@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Content.Shared.Projectiles;
 using Content.Trauma.Common.Knowledge;
 using Robust.Shared.Prototypes;
@@ -23,7 +20,8 @@ public abstract partial class SharedKnowledgeSystem
         if (args.Shooter is not { } shooter || !_mobState.IsAlive(args.Target))
             return;
 
-        var ev = new AddExperienceEvent(ShootingKnowledge, 1);
+        // TODO: higher caliber has higher limit
+        var ev = new AddExperienceEvent(ShootingKnowledge, 1, 10);
         RaiseLocalEvent(shooter, ref ev);
     }
 }

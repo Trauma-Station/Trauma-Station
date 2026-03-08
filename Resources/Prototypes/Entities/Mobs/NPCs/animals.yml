@@ -1462,11 +1462,11 @@
   - type: Stripping
   - type: Sprite
     drawdepth: Mobs
-  - type: Hands
-    activeHandId: Hand
-    hands:
-      Hand:
-        location: Left
+  #- type: Hands # Trauma - no third hand
+  #  activeHandId: Hand
+  #  hands:
+  #    Hand:
+  #      location: Left
   - type: ComplexInteraction
   - type: GenericVisualizer
     visuals:
@@ -1556,6 +1556,7 @@
       MutationMonkified: 1.0 # always monkey...
     dormant:
     - MutationMonkified
+  - type: KnowledgeHolder
   # </Trauma>
   - type: NameIdentifier
     group: Monkey
@@ -1593,6 +1594,9 @@
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: syndicate base
   components:
+  # <Trauma>
+  - type: KnowledgeHolder
+  # </Trauma>
   - type: NameIdentifier
     group: Monkey
   - type: SentienceTarget

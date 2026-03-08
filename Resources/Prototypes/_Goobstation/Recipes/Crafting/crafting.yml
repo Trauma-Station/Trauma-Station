@@ -6,8 +6,8 @@
   category: construction-category-misc
   targetNode: stack
   objectType: Item
-  groups:
-    TechnologyKnowledge: 1
+  theory:
+    HandmadeKnowledge: 0
 
 - type: construction
   id: ScrewDouble
@@ -15,5 +15,5 @@
   category: construction-category-misc
   targetNode: stack
   objectType: Item
-  groups:
-    TechnologyKnowledge: 1
+  theory:
+    HandmadeKnowledge: 0

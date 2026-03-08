@@ -45,3 +45,10 @@ Entries:
   id: 6
   time: '2026-03-04T11:21:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/993
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added a cvar trauma.skill_gain to disable gaining XP.
+  id: 7
+  time: '2026-03-07T14:17:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1094

@@ -1,10 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Client.Lobby;
+using Content.Client.Lobby.UI;
 using Content.Client.UserInterface.Systems.Character.Windows;
-using Content.Trauma.Client.Knowledge.Tabs;
+using Content.Trauma.Client.Knowledge.UI;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Systems;
@@ -17,9 +21,10 @@ namespace Content.Trauma.Client.Knowledge;
 
 public sealed class KnowledgeSystem : SharedKnowledgeSystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-
     private WeakReference<CharacterWindow>? _activeWindow;
+    private bool _showPopups;
+    private TimeSpan _nextPopup;
+    private TimeSpan _popupCooldown = TimeSpan.FromSeconds(3);
 
     public override void Initialize()
     {
@@ -27,32 +32,31 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
 
         SubscribeLocalEvent<KnowledgeHolderComponent, GetPerformedAttackTypesEvent>(OnGetAttackTypes);
         SubscribeLocalEvent<KnowledgeHolderComponent, UpdateExperienceEvent>(OnUpdateExperienceEvent);
+        Subs.CVar(_cfg, TraumaCVars.SkillPopups, x => _showPopups = x, true);
+        SubscribeAllEvent<SkillPopupEvent>(OnSkillPopup);
 
-        CharacterWindow.OnOpened += OnCharacterWindowOpened;
+        CharacterWindow.OnOpened += EnsureKnowledgeTab;
+        LobbyUIController.OnProfileEditorCreated += AddProfileEditorTab;
     }
 
     public override void Shutdown()
     {
         base.Shutdown();
-        CharacterWindow.OnOpened -= OnCharacterWindowOpened;
+        CharacterWindow.OnOpened -= EnsureKnowledgeTab;
+        LobbyUIController.OnProfileEditorCreated -= AddProfileEditorTab;
     }
 
     private void OnGetAttackTypes(Entity<KnowledgeHolderComponent> ent, ref GetPerformedAttackTypesEvent args)
     {
-        if (ent.Comp.KnowledgeEntity is not { } knowledgeEnt || !TryComp<KnowledgeContainerComponent>(knowledgeEnt, out var knowledgeContainerComp))
+        if (GetActiveMartialArt(ent) is not {} skill ||
+            !TryComp<CanPerformComboComponent>(skill, out var combo))
             return;
 
-        if (knowledgeContainerComp.MartialArtSkillUid is not { } skill || !TryComp<CanPerformComboComponent>(skill, out var comboComp))
-            return;
-
-        args.AttackTypes = comboComp.LastAttacks;
+        args.AttackTypes = combo.LastAttacks;
     }
 
-    private void OnCharacterWindowOpened(CharacterWindow window)
+    private void EnsureKnowledgeTab(CharacterWindow window)
     {
-        if (_player.LocalEntity is not { } player)
-            return;
-
         _activeWindow = new WeakReference<CharacterWindow>(window);
 
         KnowledgeTab? knowledgeTab = null;
@@ -73,7 +77,31 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             window.Tabs.AddChild(knowledgeTab);
         }
 
-        knowledgeTab.UpdateKnowledgeTab(player, knowledgeTab);
+        if (_player.LocalEntity is {} player)
+            knowledgeTab.UpdateKnowledgeTab(player);
+    }
+
+    private void AddProfileEditorTab(HumanoidProfileEditor editor)
+    {
+        // place it before markings tab
+        var above = editor.MarkingsTab;
+        var index = above.GetPositionInParent();
+
+        var tab = new KnowledgeProfileEditor(_proto, this);
+        tab.OnSave += knowledge =>
+        {
+            editor.Profile = editor.Profile?.WithKnowledge(knowledge);
+            editor.IsDirty = true;
+        };
+
+        editor.OnSetProfile += profile =>
+        {
+            if (profile is not null)
+                tab.SetProfile(profile.Species, profile.Knowledge);
+        };
+        editor.TabContainer.AddChild(tab);
+        tab.SetPositionInParent(index);
+        TabContainer.SetTabTitle(tab, Loc.GetString("knowledge-editor-tab"));
     }
 
     /// <summary>
@@ -81,25 +109,21 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    public List<(EntityUid, string)> GetMartialArtsForClientDoohickey(EntityUid target)
+    public List<(EntityUid, EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
     {
-        var martialArtsList = TryGetKnowledgeWithComp<MartialArtsKnowledgeComponent>(target);
+        if (GetKnowledgeWith<MartialArtsKnowledgeComponent>(target) is not {} arts)
+            return [];
 
-        if (martialArtsList is not { })
-            return new List<(EntityUid, string)>();
-
-        return martialArtsList
-            .Select(martialArt =>
-            {
-                var protoId = Prototype(martialArt.Owner)!.ID ?? string.Empty;
-                return (Uid: martialArt.Owner, ProtoId: protoId);
-            })
-            .OrderBy(x => x.ProtoId) // Sort alphabetically by Prototype ID
-            .Select(x => (x.Uid, Loc.GetString($"knowledge-{x.ProtoId}")))
-            .ToList();
+        var list = new List<(EntityUid, EntProtoId, string)>();
+        foreach (var art in arts)
+        {
+            list.Add((art, Prototype(art)!.ID, Name(art)));
+        }
+        list.Sort((a, b) => a.Item1.CompareTo(b.Item1));
+        return list;
     }
 
-    public List<(string Category, KnowledgeInfo Info)>? GrabAllKnowledge(EntityUid target)
+    public List<(ProtoId<KnowledgeCategoryPrototype> Category, KnowledgeInfo Info)>? GrabAllKnowledge(EntityUid target)
     {
         var knowledgeList = TryGetAllKnowledgeUnits(target);
 
@@ -122,7 +146,20 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         if (_activeWindow is not { } || !_activeWindow.TryGetTarget(out var window))
             return;
 
-        OnCharacterWindowOpened(window);
+        EnsureKnowledgeTab(window);
+    }
+
+    private void OnSkillPopup(SkillPopupEvent args)
+    {
+        if (!_showPopups)
+            return;
+
+        var now = _timing.CurTime;
+        if (now < _nextPopup)
+            return;
+
+        _nextPopup = now + _popupCooldown;
+        _popup.PopupClient(args.Popup, _player.LocalEntity);
     }
 
     public EntProtoId? GetEntProtoId(Entity<MartialArtsKnowledgeComponent>? martialArt)
@@ -134,14 +171,10 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     }
 
     /// <summary>
-    /// Changes the martial art of the entity.
+    /// Changes the active martial art of the player.
     /// </summary>
-    public void ChangeMartialArts(EntityUid knowledgeEntity, Entity<MartialArtsKnowledgeComponent>? martialArt)
+    public void ChangeMartialArt(EntProtoId? id)
     {
-        if (!TryComp<KnowledgeContainerComponent>(knowledgeEntity, out var knowledgeContainer))
-            return;
-
-        knowledgeContainer.MartialArtSkillUid = martialArt;
-        Dirty(knowledgeEntity, knowledgeContainer);
+        RaisePredictiveEvent(new KnowledgeUpdateMartialArtsEvent(id));
     }
 }

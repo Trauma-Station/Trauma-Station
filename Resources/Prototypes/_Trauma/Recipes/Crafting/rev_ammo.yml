@@ -5,9 +5,10 @@
   targetNode: HE
   category: construction-category-antagonist
   objectType: Item
-  groups:
-    TechnologyKnowledge: 2
+  theory:
+    TechnologyKnowledge: 1
     RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: RevRPG2AP
@@ -16,9 +17,10 @@
   targetNode: AP
   category: construction-category-antagonist
   objectType: Item
-  groups:
+  theory:
     TechnologyKnowledge: 2
     RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: RevFlamethrowerAmmo
@@ -27,6 +29,8 @@
   targetNode: FlamethrowerAmmo
   category: construction-category-antagonist
   objectType: Item
-  groups:
-    TechnologyKnowledge: 2
+  theory:
+    TechnologyKnowledge: 1
+    SurvivalKnowledge: 1
     RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2

@@ -79,11 +79,18 @@
         - Brain
 
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, BaseKnowledgeContainer ] # Trauma - posibrain stores borg's knowledge
   id: PositronicBrain
   name: positronic brain
   description: An artificial brain capable of spontaneous neural activity.
   components:
+    # <Trauma>
+    - type: InternalOrgan
+    - type: ChildOrgan
+      parentCategory: Torso # ipc stores its brain in the torso not head
+    - type: Organ
+      category: IPCBrain
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Specific/Robotics/mmi.rsi
       layers:
@@ -106,8 +113,6 @@
       stopSearchVerbText: positronic-brain-stop-searching-verb-text
       stopSearchVerbPopup: positronic-brain-stopped-searching
       job: Borg
-    - type: Organ # Shitmed
-      category: IPCBrain
     - type: BlockMovement
     - type: Examiner
     - type: BorgBrain
@@ -166,7 +171,3 @@
       understands:
       - TauCetiBasic # Added since posi brains should be able to understand TauCetiBasic (they can in a chassis)
       - RobotTalk
-    # <Trauma>
-    - type: KnowledgeContainer
-    - type: ContainerContainer
-    # </Trauma>

@@ -1,43 +1,19 @@
 using System.Linq;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
-using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Random.Helpers;
-using Content.Trauma.Common.Knowledge;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
 /// <summary>
-/// Trauma - code relating to DNA freshness and GetSolution overriding.
+/// Trauma - code relating to DNA freshness, GetSolution overriding and skills.
 /// </summary>
 public sealed partial class InjectorSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-
-    private static readonly EntProtoId FirstAidKnowledge = "FirstAidKnowledge";
-    private static readonly DamageSpecifier NeedleDamage = new DamageSpecifier
-    {
-        DamageDict = new Dictionary<string, FixedPoint2>
-        {
-            { "Brute", 10 }
-        }
-    };
 
     /// <summary>
     /// Raises an event to allow other systems to modify where the injector's solution comes from.
@@ -88,46 +64,6 @@ public sealed partial class InjectorSystem
         }
 
         args.Handled |= TryContainerDoAfter(injector, args.User, target);
-    }
-
-    /// <summary>
-    /// Runs the logic for checking and failing to inject someone due to low knowledge.
-    /// </summary>
-    /// <param name="user"></param>
-    /// <param name="target"></param>
-    /// <returns></returns>
-    private bool TryGetKnowledgeFirstAidFail(EntityUid user, EntityUid target)
-    {
-        if (HasComp<KnowledgeHolderComponent>(user) && HasComp<MobStateComponent>(target) && !_mobState.IsDead(target))
-        {
-            var evFirstAid = new AddExperienceEvent(FirstAidKnowledge, 1);
-            RaiseLocalEvent(user, ref evFirstAid);
-
-            if (_knowledge.TryGetKnowledgeUnit(user, FirstAidKnowledge) is { } firstAid)
-            {
-                if (_knowledge.GetMastery(firstAid) > 1)
-                    return false;
-                var seed = new System.Random(SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(user).Id));
-                if (seed.Prob(_knowledge.SharpCurve(firstAid, 0, 26)))
-                    return false;
-            }
-
-            var part = TargetBodyPart.Chest;
-            if (TryComp<TargetingComponent>(user, out var targeting))
-            {
-                part = targeting.Target;
-            }
-            _damageable.TryChangeDamage(target, NeedleDamage, targetPart: part, origin: user);
-            if (user == target)
-            {
-                _popup.PopupClient(Loc.GetString("injection-failed-self", ("target", target), ("user", user), ("part", part)), user, user);
-                return true;
-            }
-            _popup.PopupClient(Loc.GetString("injection-failed-user", ("target", target), ("user", user), ("part", part)), user, user);
-            _popup.PopupClient(Loc.GetString("injection-failed-target", ("target", target), ("user", user), ("part", part)), target, target);
-            return true;
-        }
-        return false;
     }
 }
 

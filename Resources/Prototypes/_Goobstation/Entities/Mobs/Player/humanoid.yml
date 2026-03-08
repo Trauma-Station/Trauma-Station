@@ -17,50 +17,51 @@
   # <Trauma>
   - type: KnowledgeGrant
     skills:
-      language-Cat: 26
-      language-Dog: 26
-      language-Fox: 26
-      language-Xeno: 26
-      language-Monkey: 26
-      language-Mouse: 26
-      language-Chicken: 26
-      language-Duck: 26
-      language-Cow: 26
-      language-Sheep: 26
-      language-Kangaroo: 26
-      language-Pig: 26
-      language-Crab: 26
-      language-Kobold: 26
-      language-Hissing: 26
-      language-Penguin: 26
-      language-Deer: 26
-      language-Universal: 26
-      language-RobotTalk: 26
-      language-DroneTalk: 26
-      language-Psychomantic: 26
-      language-Blob: 26
-      language-Eldritch: 26
-      language-RootSpeak: 26
-      language-Moffic: 26
-      language-Draconic: 26
-      language-Bubblish: 26
-      language-NewKinPidgin: 26
-      language-Xeeplian: 26
-      language-Elyran: 26
-      language-Freespeak: 26
-      language-NovuNederic: 26
-      language-SolCommon: 26
-      language-TauCetiBasic: 26
-      language-Tradeband: 26
-      language-SpaceItalian: 26
-      language-Carptongue: 26
-      language-FloorGoblin: 26
-      language-Cheval: 26
-      language-Bingle: 26
-      language-Revolutionary: 26
-      language-XenoHivemind: 26
-      language-Azaziba: 26
-      language-Calcic: 26
+      # TODO: DIE
+      LanguageCat: 26
+      LanguageDog: 26
+      LanguageFox: 26
+      LanguageXeno: 26
+      LanguageMonkey: 26
+      LanguageMouse: 26
+      LanguageChicken: 26
+      LanguageDuck: 26
+      LanguageCow: 26
+      LanguageSheep: 26
+      LanguageKangaroo: 26
+      LanguagePig: 26
+      LanguageCrab: 26
+      LanguageKobold: 26
+      LanguageHissing: 26
+      LanguagePenguin: 26
+      LanguageDeer: 26
+      LanguageUniversal: 26
+      LanguageRobotTalk: 26
+      LanguageDroneTalk: 26
+      LanguagePsychomantic: 26
+      LanguageBlob: 26
+      LanguageEldritch: 26
+      LanguageRootSpeak: 26
+      LanguageMoffic: 26
+      LanguageDraconic: 26
+      LanguageBubblish: 26
+      LanguageNewKinPidgin: 26
+      LanguageXeeplian: 26
+      LanguageElyran: 26
+      LanguageFreespeak: 26
+      LanguageNovuNederic: 26
+      LanguageSolCommon: 26
+      LanguageTauCetiBasic: 26
+      LanguageTradeband: 26
+      LanguageSpaceItalian: 26
+      LanguageCarptongue: 26
+      LanguageFloorGoblin: 26
+      LanguageCheval: 26
+      LanguageBingle: 26
+      LanguageRevolutionary: 26
+      LanguageXenoHivemind: 26
+      LanguageAzaziba: 26
+      LanguageCalcic: 26
   # </Trauma>
   - type: AutoImplant
     implants:
@@ -77,6 +78,8 @@
   - type: KnowledgeGrant
     skills:
       MartialArtCQCChef: 26
+      MeleeKnowledge: 26
+      CookingKnowledge: 26
   # </Trauma>
 
 # Lost

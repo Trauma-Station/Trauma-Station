@@ -2,6 +2,9 @@
   id: BorgChassisSelectable
   parent: BaseBorgChassisNT
   components:
+  # <Trauma>
+  - type: BorgSwitchableSubtype
+  # </Trauma>
   - type: Sprite
     layers:
     - state: robot
@@ -31,11 +34,6 @@
     inherentRadioChannels:
     - Common
     # - Binary # Goobstation - replaced with collective mind
-  - type: BorgSwitchableSubtype # Goobstation
-    # - Binary # Goobstation - replaced with collective mind
-  # <Trauma>
-  - type: KnowledgeHolder
-  # </Trauma>
 
 
 - type: entity

@@ -74,7 +74,7 @@
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
         />
-    <!-- <EE> -->
+    <!-- <EE> TODO: kill-->
     <ui:MenuButton
         Name="LanguageButton"
         Access="Internal"
@@ -86,28 +86,16 @@
         AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
         />
     <!-- </EE> -->
-    <!-- <Trauma> -->
-    <ui:MenuButton
-        Name="MartialArtsButton"
-        Access="Public"
-        Icon="{xe:Tex '/Textures/Interface/emotes.svg.192dpi.png'}"
-        ToolTip="{Loc 'game-hud-open-martial-arts-menu-button-tooltip'}"
-        BoundKey = "{x:Static it:TraumaKeyFunctions.OpenMartialArtsMenu}"
-        MinSize="42 64"
-        HorizontalExpand="True"
-        AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
-        />
-    <!-- </Trauma> -->
     <ui:MenuButton
         Name="AdminButton"
-        Access="Internal"
+        Access="Public"
         Icon="{xe:Tex '/Textures/Interface/gavel.svg.192dpi.png'}"
         BoundKey = "{x:Static is:ContentKeyFunctions.OpenAdminMenu}"
         ToolTip="{Loc 'game-hud-open-admin-menu-button-tooltip'}"
         MinSize="42 64"
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
-        />
+        /> <!-- Trauma - made Public -->
     <ui:MenuButton
         Name="SandboxButton"
         Access="Internal"

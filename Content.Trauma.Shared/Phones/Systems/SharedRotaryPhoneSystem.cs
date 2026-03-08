@@ -49,7 +49,6 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RotaryPhoneComponent, PhoneRingEvent>(OnRing);
-        SubscribeLocalEvent<RotaryPhoneComponent, PhoneHungUpEvent>(OnGotHungUp);
         SubscribeLocalEvent<RotaryPhoneComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RotaryPhoneComponent, BoundUIClosedEvent>(OnUiClosed);
         SubscribeLocalEvent<RotaryPhoneComponent, EntGotRemovedFromContainerMessage>(OnPickup);
@@ -204,6 +203,7 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
 
         RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.RingPort);
         ent.Comp.ConnectedPhone = args.Phone.Owner;
+        Dirty(ent);
     }
 
     private void OnPickup(Entity<RotaryPhoneComponent> ent, ref EntGotRemovedFromContainerMessage args)
@@ -236,31 +236,12 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
         holder.PhoneNumber = ent.Comp.PhoneNumber;
         holder.ConnectedPhone = ent.Owner;
         ent.Comp.ConnectedPhoneStand = args.Container.Owner;
-        Dirty(ent.Owner, ent.Comp);
 
         if (ent.Comp.ConnectedPhoneStand != null)
             UpdateAppearance(ent.Comp.ConnectedPhoneStand.Value, RotaryPhoneVisuals.Base);
 
         RaiseDeviceNetworkEvent(ent.Comp.ConnectedPhoneStand, ent.Comp.HangUpPort);
         DisconnectPhones(ent.Comp);
-        Dirty(ent);
-    }
-    private void OnGotHungUp(Entity<RotaryPhoneComponent> ent, ref PhoneHungUpEvent args)
-    {
-        if (!ent.Comp.Connected)
-        {
-            if (ent.Comp.ConnectedPhoneStand != null)
-                UpdateAppearance(ent.Comp.ConnectedPhoneStand.Value, RotaryPhoneVisuals.Base);
-
-            return;
-        }
-
-        var audio = _audio.PlayPvs(ent.Comp.HandUpSoundLocal, ent.Owner);
-        if (audio != null)
-            ent.Comp.SoundEntity = audio.Value.Entity;
-
-        ent.Comp.ConnectedPhone = null;
-        ent.Comp.Connected = false;
         Dirty(ent);
     }
 
@@ -291,7 +272,6 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
                     otherPhone.SoundEntity = _audio.Stop(otherPhone.SoundEntity);
 
                 otherPhone.ConnectedPhone = null;
-                otherPhone.Engaged = false;
             }
         }
 
@@ -303,7 +283,7 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
         thisPhone.Connected = false;
     }
 
-    private void UpdateAppearance(Entity<RotaryPhoneComponent?> phone, RotaryPhoneVisuals visual)
+    protected void UpdateAppearance(Entity<RotaryPhoneComponent?> phone, RotaryPhoneVisuals visual)
     {
         _appearance.SetData(phone, RotaryPhoneLayers.Layer, visual);
     }

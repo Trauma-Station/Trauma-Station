@@ -38,12 +38,12 @@
       - type: CommandStaff
       - type: Condemned # Goobstation - Nanotrasen owns your soul pal.
         soulOwnedNotDevil: true
-      # <Trauma>
-      - type: KnowledgeGrant
-        skills:
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
-      # </Trauma>
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
+  # </Trauma>
 
 - type: startingGear
   id: CaptainGear

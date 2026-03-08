@@ -22,14 +22,14 @@
   extendedAccess:
   - Hydroponics
   - Bar
-  special: # Goobstation - Martial Arts
-  - !type:AddComponentSpecial
-    components:
-      # <Trauma>
-      - type: KnowledgeGrant
-        skills:
-          MartialArtCQCChef: 26
-      # </Trauma>
+  special:
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      MartialArtCQCChef: 26
+      MeleeKnowledge: 26
+      CookingKnowledge: 26
+  # </Trauma>
   - !type:AddImplantSpecial # Chefs speak space italian
     implants: [ SpaceItalianTranslatorImplant ]
 

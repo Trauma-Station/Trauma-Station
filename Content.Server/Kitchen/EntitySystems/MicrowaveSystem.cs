@@ -672,10 +672,12 @@ namespace Content.Server.Kitchen.EntitySystems
                     // <Trauma>
                     if (microwave.LastKnownKnowledgeHolder is { } chef)
                     {
+                        /* TODO: make this not give xp for making the same recipe over and over
                         var ev = new AddExperienceEvent(MartialArtCQCChef, active.PortionedRecipe.Item2);
                         RaiseLocalEvent(chef, ref ev);
                         var evCooking = new AddExperienceEvent(CookingKnowledge, active.PortionedRecipe.Item2);
                         RaiseLocalEvent(chef, ref evCooking);
+                        */
                         microwave.LastKnownKnowledgeHolder = null;
                     }
                     // </Trauma>

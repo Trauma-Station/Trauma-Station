@@ -28,12 +28,12 @@
   - !type:AddComponentSpecial # goobstation
     components:
       - type: SecurityStaff
-      # <Trauma>
-      - type: KnowledgeGrant
-        skills:
-          MeleeKnowledge: 26
-          ShootingKnowledge: 50
-      # </Trauma>
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 50
+  # </Trauma>
 
 - type: startingGear
   id: DetectiveGear

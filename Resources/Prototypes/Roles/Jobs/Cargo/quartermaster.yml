@@ -40,13 +40,13 @@
     components:
       - type: CommandStaff
       - type: QuartermasterTraining
-      # <Trauma>
-      - type: KnowledgeGrant
-        skills:
-          StrengthKnowledge: 26
-          ToughnessKnowledge: 26
-          MeleeKnowledge: 26
-      # <Trauma>
+  # <Trauma>
+  - !type:AddKnowledgeSpecial
+    knowledge:
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
+      MeleeKnowledge: 26
+  # <Trauma>
 
 - type: startingGear
   id: QuartermasterGear

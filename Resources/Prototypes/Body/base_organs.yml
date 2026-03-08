@@ -369,7 +369,7 @@
       - RFoot
 
 - type: entity
-  parent: OrganBaseInternal # Shitmed
+  parent: [ OrganBaseInternal, BaseKnowledgeContainer ] # Trauma - internal organ, brain stores knowledge for mobs
   id: OrganBaseBrain
   name: brain
   abstract: true
@@ -389,10 +389,6 @@
     identifier: "nerveSystem"
     causesDeath: true
   # </Shitmed>
-  # <Trauma>
-  - type: KnowledgeContainer
-  - type: ContainerContainer
-  # </Trauma>
   - type: GibbableOrgan
   - type: Organ
     category: Brain

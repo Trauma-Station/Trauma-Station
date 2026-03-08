@@ -12,11 +12,10 @@
     size: Small
   - type: StaticPrice
     price: 3000
+  - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
     skills:
-      MartialArtCQC: 26
-    experience:
-      MartialArtCQC: 10
+      MartialArtCQC: 70
     doAfter: 2
   - type: GuideHelp
     guides:
@@ -37,11 +36,10 @@
     size: Small
   - type: StaticPrice
     price: 3000
+  - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
     skills:
-      MartialArtSleepingCarp: 26
-    experience:
-      MartialArtSleepingCarp: 10
+      MartialArtSleepingCarp: 70
     doAfter: 2
   - type: GuideHelp
     guides:
@@ -61,11 +59,10 @@
     size: Small
   - type: StaticPrice
     price: 3000
+  - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
     skills:
-      MartialArtCapoeira: 26
-    experience:
-      MartialArtCapoeira: 10
+      MartialArtCapoeira: 70
     doAfter: 2
   - type: GuideHelp
     guides:

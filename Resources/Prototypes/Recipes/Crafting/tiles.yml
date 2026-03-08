@@ -8,7 +8,7 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -20,7 +20,7 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -32,7 +32,7 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -44,7 +44,7 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -56,7 +56,7 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -68,7 +68,7 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -80,7 +80,7 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -92,6 +92,6 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>

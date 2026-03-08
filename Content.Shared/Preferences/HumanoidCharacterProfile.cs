@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Barks;
-using Content.Shared.Dataset;
-using Content.Shared.Random.Helpers;
+using Content.Trauma.Common.Knowledge;
 // </Trauma>
 using System.IO;
 using System.Linq;
@@ -85,9 +84,6 @@ namespace Content.Shared.Preferences
         [DataField]
         public ProtoId<SpeciesPrototype> Species { get; set; } = DefaultSpecies;
 
-        [DataField] // Goob Station - Barks
-        public ProtoId<BarkPrototype> BarkVoice { get; set; } = HumanoidProfileSystem.DefaultBarkVoice; // Goob Station - Barks
-
         [DataField]
         public int Age { get; set; } = 18;
 
@@ -144,7 +140,10 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
-            ProtoId<BarkPrototype> barkVoice) // Goob Station - Barks
+            // <Trauma>
+            ProtoId<BarkPrototype> barkVoice,
+            KnowledgeProfile knowledge)
+            // </Trauma>
         {
             Name = name;
             FlavorText = flavortext;
@@ -159,7 +158,10 @@ namespace Content.Shared.Preferences
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
-            BarkVoice = barkVoice; // Goob Station - Barks
+            // <Trauma>
+            BarkVoice = barkVoice;
+            Knowledge = knowledge;
+            // </Trauma>
 
             var hasHighPrority = false;
             foreach (var (key, value) in _jobPriorities)
@@ -191,7 +193,10 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
-                other.BarkVoice) // Goob Station - Barks
+                // <Trauma>
+                other.BarkVoice,
+                other.Knowledge)
+                // </Trauma>
         {
         }
 
@@ -253,14 +258,6 @@ namespace Content.Shared.Preferences
                 age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
             }
 
-            // Goob Station - Barks Start
-            var barkvoiceId = random.Pick(prototypeManager
-                .EnumeratePrototypes<BarkPrototype>()
-                .Where(o => o.RoundStart && (o.SpeciesWhitelist is null || o.SpeciesWhitelist.Contains(species)))
-                .ToArray()
-            );
-            //  Goob Station - Barks End
-
             var gender = Gender.Epicene;
 
             switch (sex)
@@ -284,7 +281,10 @@ namespace Content.Shared.Preferences
                 Gender = gender,
                 Species = species,
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
-                BarkVoice = barkvoiceId, // Goob Station - Barks
+                // <Trauma>
+                BarkVoice = RandomBark(random, prototypeManager, species),
+                Knowledge = new() // not random lol
+                // </Trauma>
             };
         }
 
@@ -327,13 +327,6 @@ namespace Content.Shared.Preferences
         {
             return new(this) { SpawnPriority = spawnPriority };
         }
-
-        // Goob Station - Barks Start
-        public HumanoidCharacterProfile WithBarkVoice(BarkPrototype barkVoice)
-        {
-            return new(this) { BarkVoice = barkVoice };
-        }
-        // Goob Station - Barks End
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
         {
@@ -493,7 +486,10 @@ namespace Content.Shared.Preferences
             if (Sex != other.Sex) return false;
             if (Gender != other.Gender) return false;
             if (Species != other.Species) return false;
-            if (BarkVoice != other.BarkVoice) return false; // Goob Station - Barks
+            // <Trauma>
+            if (BarkVoice != other.BarkVoice) return false;
+            if (!Knowledge.MemberwiseEquals(other.Knowledge)) return false;
+            // </Trauma>
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
@@ -674,6 +670,8 @@ namespace Content.Shared.Preferences
             {
                 _loadouts.Remove(value);
             }
+
+            EnsureValidTrauma(collection, prototypeManager); // Trauma
         }
 
         /// <summary>
@@ -756,7 +754,10 @@ namespace Content.Shared.Preferences
             hashCode.Add((int)Sex);
             hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
-            hashCode.Add(BarkVoice); // Goob Station - Barks
+            // <Trauma>
+            hashCode.Add(BarkVoice);
+            hashCode.Add(Knowledge);
+            // </Trauma>
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)PreferenceUnavailable);
             return hashCode.ToHashCode();

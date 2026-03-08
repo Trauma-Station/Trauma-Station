@@ -11,7 +11,7 @@
   conditions:
   - !type:WallmountCondition
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     TechnologyKnowledge: 2
   # </Trauma>
