@@ -20,10 +20,10 @@ public sealed partial class HolyFlammableComponent : Component
     public float FireStacks;
 
     [DataField]
-    public float FireStacksDropoff = 10f;
+    public float FireStacksDropoff = 15f;
 
     [DataField]
-    public float MaximumFireStacks = 50f;
+    public float MaximumFireStacks = 30f;
 
     [DataField]
     public float MinimumFireStacks = -10f;
