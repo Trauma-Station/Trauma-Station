@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Interaction.Events;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Construction;
 
@@ -10,6 +11,7 @@ namespace Content.Trauma.Shared.Construction;
 /// </summary>
 public sealed class ShortConstructionSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
@@ -27,10 +29,10 @@ public sealed class ShortConstructionSystem : EntitySystem
 
     private void OnUseInHand(Entity<ShortConstructionComponent> ent, ref UseInHandEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !_timing.IsFirstTimePredicted)
             return;
 
         args.Handled = true;
-        _ui.OpenUi(ent.Owner, ShortConstructionUiKey.Key, args.User);
+        _ui.TryToggleUi(ent.Owner, ShortConstructionUiKey.Key, args.User);
     }
 }
