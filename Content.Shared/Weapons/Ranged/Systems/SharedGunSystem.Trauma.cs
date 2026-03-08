@@ -43,7 +43,7 @@ public abstract partial class SharedGunSystem
         if (gun.Target is { } target && !TerminatingOrDeleted(target))
         {
             var targeted = EnsureComp<TargetedProjectileComponent>(uid);
-            targeted.Target = target;
+            targeted.Target = GetNetEntity(target);
             Dirty(uid, targeted);
         }
 

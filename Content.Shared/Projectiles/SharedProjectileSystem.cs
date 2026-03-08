@@ -225,7 +225,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         if ((component.Shooter == args.OtherEntity || component.Weapon == args.OtherEntity) &&
             component.Weapon != null && _tag.HasTag(component.Weapon.Value, GunCanAimShooterTag) &&
-            TryComp(uid, out TargetedProjectileComponent? targeted) && targeted.Target == args.OtherEntity)
+            TryComp(uid, out TargetedProjectileComponent? targeted) && GetEntity(targeted.Target) == args.OtherEntity)
             return;
         // /Goobstation
 

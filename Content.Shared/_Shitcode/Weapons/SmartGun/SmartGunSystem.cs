@@ -30,7 +30,7 @@ public sealed class SmartGunSystem : EntitySystem
 
         if (!TryComp(projectile, out HomingProjectileComponent? homing) ||
             !TryComp(projectile, out TargetedProjectileComponent? targeted) ||
-            targeted.Target is not { } target || target == Transform(uid).ParentUid)
+            GetEntity(targeted.Target) is not { } target || target == Transform(uid).ParentUid)
             return;
 
         if (comp.RequiresWield && !(TryComp(uid, out WieldableComponent? wieldable) && wieldable.Wielded))

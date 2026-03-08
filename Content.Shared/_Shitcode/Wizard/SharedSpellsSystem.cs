@@ -1391,7 +1391,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         _gun.SetTarget(projectile, target, out var targeted, false);
 
         var homing = EnsureComp<HomingProjectileComponent>(projectile);
-        homing.Target = target;
+        homing.Target = GetNetEntity(target);
 
         Entity<HomingProjectileComponent, TargetedProjectileComponent> ent = (projectile, homing, targeted);
 
