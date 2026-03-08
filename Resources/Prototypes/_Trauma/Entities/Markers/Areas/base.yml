@@ -9,6 +9,7 @@
   components:
   - type: Transform
     anchored: true
+    noRot: true
   - type: Sprite
     drawdepth: Overdoors
     sprite: _Trauma/Markers/Areas/station.rsi

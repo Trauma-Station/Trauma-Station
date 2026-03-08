@@ -73,7 +73,7 @@
 #     guid:
 # chef jacket black maroon
 
-#Items
+#Items (ADD TO ExclusiveItems OR IT WONT EXIST)
 - type: loadout
   id: CybersunFlippo
   effects:

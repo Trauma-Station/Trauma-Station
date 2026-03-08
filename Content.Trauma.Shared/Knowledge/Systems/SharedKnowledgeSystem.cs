@@ -67,7 +67,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         InitializeLanguage();
         InitializeMartialArts();
         InitializeOnWear();
-        InitializeShooting();
 
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnContainerStartup);
         SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnContainerShutdown);
@@ -77,7 +76,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainRemovedEvent>(OnBorgBrainRemoved);
 
         SubscribeLocalEvent<KnowledgeHolderComponent, MindAddedMessage>(OnMindAdded);
-        SubscribeLocalEvent<KnowledgeHolderComponent, AddExperienceEvent>(OnAddExperience);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
@@ -202,14 +200,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         // all player-controlled mobs can use knowledge
         // carps learning how to cook..?
         EnsureKnowledgeContainer(ent);
-    }
-
-    private void OnAddExperience(Entity<KnowledgeHolderComponent> ent, ref AddExperienceEvent args)
-    {
-        if (!_skillGain || GetContainer(ent) is not { } brain)
-            return;
-
-        AddExperience(brain, args.KnowledgeType, args.Experience, args.LevelCap, popup: args.Popup);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)

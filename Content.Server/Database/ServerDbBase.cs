@@ -249,8 +249,10 @@ namespace Content.Server.Database
                 JsonSerializer.SerializeToDocument(legacyMarkings.Select(marking => marking.ToString()).ToList());
             profile.HairName = hairMarking?.MarkingId ?? HairStyles.DefaultHairStyle;
             profile.FacialHairName = facialHairMarking?.MarkingId ?? HairStyles.DefaultFacialHairStyle;
-            profile.HairColor = (hairMarking?.MarkingColors[0] ?? Color.Black).ToHex();
-            profile.FacialHairColor = (facialHairMarking?.MarkingColors[0] ?? Color.Black).ToHex();
+            // <Trauma> - don't assume MarkingColors isn't empty, use ElementAtOrDefault
+            profile.HairColor = (hairMarking?.MarkingColors.ElementAtOrDefault(0) ?? Color.Black).ToHex();
+            profile.FacialHairColor = (facialHairMarking?.MarkingColors.ElementAtOrDefault(0) ?? Color.Black).ToHex();
+            // </Trauma>
 
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;

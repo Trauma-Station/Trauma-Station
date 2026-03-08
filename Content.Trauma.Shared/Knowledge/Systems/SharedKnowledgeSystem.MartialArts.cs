@@ -23,7 +23,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;

@@ -251,13 +251,13 @@ public abstract partial class SharedKnowledgeSystem
         // curse of 220
         _hearers.Clear();
         _lookup.GetEntitiesInRange<LanguageSpeakerComponent>(_transform.GetMoverCoordinates(ent), 7f, _hearers, LookupFlags.All);
-        var evheard = new AddExperienceEvent(id, 1, 10);
         foreach (var hearer in _hearers)
         {
             if (hearer.Owner == ent.Owner)
                 continue; // Don't curse yourself or double dip on XP
 
-            RaiseLocalEvent(hearer, ref evheard);
+            if (GetContainer(hearer) is { } hearerBrain)
+                AddExperience(hearerBrain, id, 1, 10);
 
             /* too op, needs a traitor item or something + a cooldown
             if (!isCurse || !_language.CanUnderstand(hearer.Owner, args.Language))

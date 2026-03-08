@@ -91,9 +91,7 @@ namespace Content.Server.Database
             profile.Property(p => p.KnowledgeRemoved)
                 .HasConversion(
                     v => JsonSerializer.Serialize(v),
-                    s => string.IsNullOrEmpty(s)
-                        ? new()
-                        : JsonSerializer.Deserialize<List<string>>(s) ?? new()
+                    s => TraumaModel.DeserializeStrings(s)
                 )
                 .Metadata.SetValueComparer(new ValueComparer<List<string>>(
                     (a, b) => a != null && b != null && a.Count == b.Count && !a.Except(b).Any(),

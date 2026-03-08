@@ -1,5 +1,6 @@
 # It's best to use fadeIn and interruptable parameters when creating a new ambientMusic prototype for areas,
 # with a high priority number (e.g. 10) so it has a higher chance to play the music.
+# IMPORTANT, set general department area (e.g. medical) priority to around 5 then set specific areas (e.g. morgue) to around 10 this will give the department general ambience but will allow for sub areas to have its own ambience
 #
 # Rules
 - type: rules
@@ -70,3 +71,238 @@
   - !type:InAreaRule
     areas:
     - AreaHolodeck
+
+- type: rules
+  id: InMorgueArea
+  rules:
+  - !type:InAreaRule
+    areas:
+    - AreaMorgue
+
+- type: rules
+  id: InChapelArea
+  rules:
+  - !type:InAreaRule
+    areas:
+    - AreaChapel
+
+- type: rules
+  id: InDetectiveArea
+  rules:
+  - !type:InAreaRule
+    areas:
+    - AreaDetective
+
+- type: rules
+  id: InBeachArea
+  rules:
+  - !type:InAreaRule
+    areas:
+    - AreaPool
+
+- type: rules
+  id: InColdArea
+  rules:
+  - !type:InAreaRule
+    areas:
+    - AreaColdRoom
+
+- type: rules
+  id: InDojoArea
+  rules:
+  - !type:InAreaRule
+    areas:
+    - AreaDojo
+
+- type: rules
+  id: InInterrogationArea
+  rules:
+  - !type:InAreaRule
+    areas:
+    - AreaInterrogation
+
+- type: rules
+  id: OnGridRule
+  rules:
+  - !type:GridInRangeRule
+    range: 1
+
+# Specific areas
+
+- type: ambientMusic
+  id: MorgueArea
+  sound:
+    params:
+      volume: -15
+    collection: AmbienceSpooky
+  fadeIn: true
+  interruptable: true
+  rules: InMorgueArea
+  priority: 10
+
+- type: ambientMusic
+  id: HolyArea
+  sound:
+    params:
+      volume: -20
+    collection: AmbienceHoly
+  rules: InChapelArea
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: DetectiveArea
+  sound:
+    params:
+      volume: -25
+    collection: AmbienceDetective
+  rules: InDetectiveArea
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: PoolArea
+  sound:
+    params:
+      volume: -20
+    collection: AmbienceBeach
+  rules: InBeachArea
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: ColdArea
+  sound:
+    params:
+      volume: -20
+    collection: AmbienceCold
+  rules: InColdArea
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: DojoArea
+  sound:
+    params:
+      volume: -20
+    collection: AmbienceDojo
+  rules: InDojoArea
+  fadeIn: true
+  interruptable: true
+  priority: 10
+
+- type: ambientMusic
+  id: InterrogationArea
+  sound:
+    params:
+      volume: -15
+    collection: AmbienceInterrogation
+  rules: InInterrogationArea
+  fadeIn: true
+  interruptable: true
+  priority: 7
+
+# Departments
+- type: ambientMusic
+  id: MedicalArea
+  sound:
+    params:
+      volume: -25
+    collection: AmbienceMedical
+  rules: InMedicalArea
+  fadeIn: true
+  interruptable: true
+  priority: 5
+
+- type: ambientMusic
+  id: EngineeringArea
+  sound:
+    params:
+      volume: -20
+    collection: AmbienceEngineering
+  rules: InEngineeringArea
+  fadeIn: true
+  interruptable: true
+  priority: 5
+
+- type: ambientMusic
+  id: SecurityArea
+  sound:
+    params:
+      volume: -25
+    collection: AmbienceSecurity
+  rules: InSecurityArea
+  fadeIn: true
+  interruptable: true
+  priority: 5
+
+# General areas
+- type: ambientMusic
+  id: MaintenanceArea
+  sound:
+    params:
+      volume: -20
+    collection: AmbienceMaintenance
+  rules: InMaintsArea
+  fadeIn: true
+  interruptable: true
+  priority: 5
+
+- type: ambientMusic # quiet ambience
+  id: StationAmbience
+  sound:
+    params:
+      volume: -20
+    collection: AmbienceStation
+  rules: OnGridRule
+  fadeIn: true
+  interruptable: true
+  priority: 1
+
+# Collections
+
+- type: soundCollection
+  id: AmbienceDetective
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/detective/detectivesroom.ogg
+
+- type: soundCollection
+  id: AmbienceBeach
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/beach/seag1.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/beach/seag2.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/beach/seag3.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/beach/shore.ogg
+
+- type: soundCollection
+  id: AmbienceCold
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicemelody1.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicemelody2.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicemelody3.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting1.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting2.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting3.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting4.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicesting5.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/icemoon/ambiicetheme.ogg
+
+- type: soundCollection
+  id: AmbienceInterrogation
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/security/iknewaguy.ogg
+
+- type: soundCollection
+  id: AmbienceSecurity
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/security/ambidet1.ogg
+  - /Audio/_Trauma/Ambience/AreaAmbience/security/ambidet2.ogg
+
+- type: soundCollection
+  id: AmbienceDojo
+  files:
+  - /Audio/_Trauma/Ambience/AreaAmbience/dojo/dojoambi.ogg

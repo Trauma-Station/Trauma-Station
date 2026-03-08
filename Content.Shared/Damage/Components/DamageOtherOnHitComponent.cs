@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.GameStates;
+// </Trauma>
 using Content.Shared.Damage.Systems;
 
 namespace Content.Shared.Damage.Components;
@@ -7,6 +10,7 @@ namespace Content.Shared.Damage.Components;
 /// </summary>
 [RegisterComponent]
 // Trauma - Deleted Access(typeof(SharedDamageOtherOnHitSystem))
+[NetworkedComponent, AutoGenerateComponentState] // Trauma
 public sealed partial class DamageOtherOnHitComponent : Component
 {
     /// <summary>
@@ -19,6 +23,7 @@ public sealed partial class DamageOtherOnHitComponent : Component
     /// The damage amount to deal on hit.
     /// </summary>
     [DataField(required: true)]
+    [AutoNetworkedField] // Trauma
     public DamageSpecifier Damage = default!;
 
 }
