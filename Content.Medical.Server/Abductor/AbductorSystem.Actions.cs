@@ -17,7 +17,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Medical.Server.Abductor;
 
-public sealed partial class AbductorSystem : SharedAbductorSystem
+public sealed partial class AbductorSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
