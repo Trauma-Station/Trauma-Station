@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Trauma.Common.Throwing;
-using Content.Trauma.Common.Knowledge.Systems;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Network;
 // </Trauma>
@@ -207,7 +206,11 @@ public sealed partial class ThrowingSystem : EntitySystem
 
         // <Trauma>
         if (user != null)
-            baseThrowSpeed = SkillModifySpeed(uid, user.Value, baseThrowSpeed, direction.Length());
+        {
+            var ev = new ModifyThrownSpeedEvent(user.Value, baseThrowSpeed, direction.Length());
+            RaiseLocalEvent(uid, ref ev);
+            baseThrowSpeed = ev.BaseThrowSpeed;
+        }
         // </Trauma>
 
         // Set the time the item is supposed to be in the air so we can apply OnGround status.

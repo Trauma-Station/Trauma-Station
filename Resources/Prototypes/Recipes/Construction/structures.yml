@@ -312,7 +312,9 @@
   canRotate: false
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 0
+  practical:
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -329,7 +331,9 @@
   canRotate: false
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 0
+  practical:
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -345,7 +349,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1 # diagonal is harder to make
   # </Trauma>
 
 - type: construction
@@ -361,7 +365,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1 # diagonal is harder to make
   # </Trauma>
 
 - type: construction
@@ -379,7 +383,7 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 2
+    WindowsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -452,7 +456,7 @@
   # <Trauma>
   theory:
     WindowsKnowledge: 2
-    TechnologyKnowledge: 2
+    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -470,7 +474,7 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 2
+    WindowsKnowledge: 1
   # </Trauma>
 
 - type: construction

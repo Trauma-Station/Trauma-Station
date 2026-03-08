@@ -28,7 +28,7 @@
   - type: AntagSelection
     useCharacterNames: true
     selectionTime: PrePlayerSpawn
-    agentName: wizard-roundend-name
+    agentName: wizard-round-end-name
     definitions:
     - spawnerPrototype: SpawnPointWizard
       prefRoles: [ Wizard ]

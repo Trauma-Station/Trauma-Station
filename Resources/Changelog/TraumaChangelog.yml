@@ -3844,3 +3844,64 @@ Entries:
   id: 452
   time: '2026-03-07T19:56:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1098
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: 'Uplink price of librarian caneblade reduced from 40 to 20 TC. '
+  id: 453
+  time: '2026-03-08T08:58:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1104
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Fixed some knowledge shitcode.
+  id: 454
+  time: '2026-03-08T09:03:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1101
+- author: Aviu
+  changes:
+  - type: Add
+    message: Added tackle mechanic to the game.
+  - type: Add
+    message: Sec gloves can now let you perform tackle.
+  - type: Add
+    message: HoS gets gorilla tackle gloves in loadout.
+  - type: Add
+    message: Syndis get guerrilla gloves in uplink.
+  - type: Add
+    message: 2 types of tackle gloves in maints loot.
+  - type: Add
+    message: 'Sci can research dolphin gloves. '
+  id: 455
+  time: '2026-03-08T12:02:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/961
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Skill profiles were partially reset, you may need to update your skills.
+  id: 456
+  time: '2026-03-08T14:53:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1111
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Grilles and regular windows need less skill to make now.
+  id: 457
+  time: '2026-03-08T16:22:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1118
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed some patreon items not being in the loadouts Exclusive Items menu.
+  id: 458
+  time: '2026-03-08T16:35:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1119
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: >-
+      Added Ambient music and sounds for areas, e.g the Interrogation room will
+      play music!
+  id: 459
+  time: '2026-03-08T16:35:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1110

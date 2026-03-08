@@ -66,6 +66,6 @@
     - Plasmaman
 
 - type: loadout
-  id: CombatGloves
+  id: GorillaGloves
   equipment:
-    gloves: ClothingHandsGlovesCombat
+    gloves: ClothingHandsGlovesGorilla
