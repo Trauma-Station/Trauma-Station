@@ -116,9 +116,9 @@ public partial class MartialArtsSystem
         scale *= evDamage.Coefficient;
 
         if (proto.UserEffects != null)
-            _effects.ApplyEffects(performer, proto.UserEffects, scale, target);
+            _effects.ApplyEffects(performer, proto.UserEffects, scale, user: performer);
         if (proto.OpponentEffects != null)
-            _effects.ApplyEffects(target, proto.OpponentEffects, scale, performer);
+            _effects.ApplyEffects(target, proto.OpponentEffects, scale, user: performer);
 
         ent.Comp.LastAttacks.Clear();
 

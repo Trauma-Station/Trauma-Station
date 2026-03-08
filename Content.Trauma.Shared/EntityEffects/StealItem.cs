@@ -11,6 +11,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.EntityEffects;
+
 public sealed partial class StealItem : EntityEffectBase<StealItem>
 {
     /// <summary>
@@ -30,40 +31,35 @@ public sealed class StealItemSystem : EntityEffectSystem<HandsComponent, StealIt
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<StealItem> args)
     {
-        var target = ent.Owner;
         if (args.User is not { } user)
             return;
 
-        if (Random(user).NextFloat(0.0f, 1.0f) >= Math.Min(0.5f * args.Scale, 1f))
+        var prob = 0.5f * args.Scale;
+        if (SharedRandomExtensions.PredictedProb(_timing, prob, GetNetEntity(user))
             return;
 
-        if (!TryComp<HandsComponent>(ent, out var hands) || (!HasComp<HandsComponent>(user)))
+        if (!HasComp<HandsComponent>(user))
             return;
 
-        EntityUid? item = null;
-        if (_hands.TryGetActiveItem(target, out item))
+        // prioritize active item, but fall back to the first one
+        if (!_hands.TryGetActiveItem(ent.AsNullable(), out var item))
         {
-            foreach (var hand in hands.Hands)
+            foreach (var hand in ent.Comp.Hands)
             {
-                item = _hands.GetHeldItem((ent, hands), hand.Key);
+                if (_hands.TryGetHeldItem(ent.AsNullable(), hand.Key, out item))
+                    break;
             }
         }
 
-        if (item is not { } trueItem)
+        if (item is not { } stolen)
             return;
 
         if (TryComp<WieldableComponent>(ent, out var wield))
-            _wield.TryUnwield(trueItem, wield, ent, true);
+            _wield.TryUnwield(steal, wield, ent, true);
 
-        if (!_hands.TryDrop(target, trueItem))
+        if (!_hands.TryDrop(ent.AsNullable(), stolen))
             return;
 
-        _hands.TryPickupAnyHand(user, trueItem);
-    }
-
-    public System.Random Random(EntityUid uid)
-    {
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
-        return new System.Random(seed);
+        _hands.TryPickupAnyHand(user, stolen);
     }
 }
