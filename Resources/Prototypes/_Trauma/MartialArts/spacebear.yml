@@ -28,7 +28,7 @@
   - !type:PopupMessage
     messages:
     - spacebear-pawslam
-  opponenteffects:
+  opponentEffects:
   - !type:HealthChange
     damage:
       types:
