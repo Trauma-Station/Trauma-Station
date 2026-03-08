@@ -101,7 +101,7 @@ public sealed partial class AbductorsAbilitiesComponent : Component
     public EntityUid? SendYourself;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? SendAgent;
+    public EntityUid? SendPad;
 
     [DataField]
     public EntityUid[] HiddenActions = [];
@@ -128,4 +128,4 @@ public sealed partial class SendYourselfEvent : WorldTargetActionEvent;
 
 public sealed partial class AbductorReturnToShipEvent : InstantActionEvent;
 
-public sealed partial class SendAgentEvent : WorldTargetActionEvent;
+public sealed partial class SendPadEvent : WorldTargetActionEvent;

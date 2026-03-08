@@ -50,7 +50,7 @@ public sealed partial class AbductorAttractDoAfterEvent : DoAfterEvent
 }
 
 [Serializable, NetSerializable]
-public sealed partial class AbductorSendAgentDoAfterEvent : DoAfterEvent
+public sealed partial class AbductorSendPadDoAfterEvent : DoAfterEvent
 {
     [DataField("coordinates", required: true)]
     public NetCoordinates TargetCoordinates;
@@ -58,15 +58,15 @@ public sealed partial class AbductorSendAgentDoAfterEvent : DoAfterEvent
     [DataField(required: true)]
     public NetEntity Agent;
 
-    private AbductorSendAgentDoAfterEvent()
+    private AbductorSendPadDoAfterEvent()
     {
     }
 
-    public AbductorSendAgentDoAfterEvent(NetCoordinates coords, NetEntity agent)
+    public AbductorSendPadDoAfterEvent(NetCoordinates coords, NetEntity agent)
     {
         TargetCoordinates = coords;
         Agent = agent;
     }
 
-    public override DoAfterEvent Clone() => new AbductorSendAgentDoAfterEvent(TargetCoordinates, Agent);
+    public override DoAfterEvent Clone() => new AbductorSendPadDoAfterEvent(TargetCoordinates, Agent);
 }

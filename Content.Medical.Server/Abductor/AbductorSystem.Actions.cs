@@ -26,7 +26,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private static readonly EntProtoId<ActionComponent> SendYourself = "ActionSendYourself";
     private static readonly EntProtoId<ActionComponent> ExitAction = "ActionExitConsole";
-    private static readonly EntProtoId<ActionComponent> SendAgentAction = "ActionSendAgent";
+    private static readonly EntProtoId<ActionComponent> SendPadAction = "ActionSendPad";
     private static readonly EntProtoId TeleportationEffect = "EffectTeleportation";
     private static readonly EntProtoId TeleportationEffectEntity = "EffectTeleportationEntity";
     private static readonly EntProtoId TeleportationEffectShort = "EffectTeleportationShort";
@@ -46,8 +46,8 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         SubscribeLocalEvent<SendYourselfEvent>(OnSendYourself);
         SubscribeLocalEvent<AbductorScientistComponent, AbductorSendYourselfDoAfterEvent>(OnDoAfterSendYourself);
 
-        SubscribeLocalEvent<AbductorScientistComponent, SendAgentEvent>(OnSendAgent);
-        SubscribeLocalEvent<AbductorScientistComponent, AbductorSendAgentDoAfterEvent>(OnDoAfterSendAgent);
+        SubscribeLocalEvent<AbductorScientistComponent, SendPadEvent>(OnSendPad);
+        SubscribeLocalEvent<AbductorScientistComponent, AbductorSendPadDoAfterEvent>(OnDoAfterSendPad);
     }
 
     private void AbductorScientistComponentStartup(Entity<AbductorScientistComponent> ent, ref ComponentStartup args)
@@ -124,7 +124,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         OnCameraExit(ent);
     }
 
-    private void OnSendAgent(Entity<AbductorScientistComponent> ent, ref SendAgentEvent ev)
+    private void OnSendPad(Entity<AbductorScientistComponent> ent, ref SendPadEvent ev)
     {
         var user = ent.Owner;
 
@@ -134,12 +134,12 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
             return;
         }
 
-        var consoleGridId = Transform(consoleUid).Coordinates.EntityId;
+        var consoleGrid = _xform.GetGrid(consoleUid);
         EntityUid padFound = default;
         var padQuery = EntityQueryEnumerator<AbductorAlienPadComponent>();
         while (padQuery.MoveNext(out var padUid, out _))
         {
-            if (Transform(padUid).Coordinates.EntityId != consoleGridId)
+            if (_xform.GetGrid(padUid) != consoleGrid)
                 continue;
             padFound = padUid;
             break;
@@ -147,14 +147,14 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         if (padFound == default)
         {
-            _popup.PopupEntity(Loc.GetString("abductor-send-agent-no-pad"), user, user);
+            _popup.PopupEntity(Loc.GetString("abductor-send-pad-no-pad"), user, user);
             ev.Handled = true;
             return;
         }
 
         if (!TryComp<StrapComponent>(padFound, out var strap) || strap.BuckledEntities.Count == 0)
         {
-            _popup.PopupEntity(Loc.GetString("abductor-send-agent-not-buckled"), user, user);
+            _popup.PopupEntity(Loc.GetString("abductor-send-pad-not-buckled"), user, user);
             ev.Handled = true;
             return;
         }
@@ -166,7 +166,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
             break;
         }
 
-        var @event = new AbductorSendAgentDoAfterEvent(GetNetCoordinates(ev.Target), GetNetEntity(agent));
+        var @event = new AbductorSendPadDoAfterEvent(GetNetCoordinates(ev.Target), GetNetEntity(agent));
         var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(3), @event, user)
         {
             MultiplyDelay = false,
@@ -175,7 +175,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
-            Log.Error($"Couldn't start send agent doafter for {ToPrettyString(user)}!");
+            Log.Error($"Couldn't start send pad doafter for {ToPrettyString(user)}!");
             return;
         }
 
@@ -187,7 +187,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         ev.Handled = true;
     }
 
-    private void OnDoAfterSendAgent(Entity<AbductorScientistComponent> ent, ref AbductorSendAgentDoAfterEvent args)
+    private void OnDoAfterSendPad(Entity<AbductorScientistComponent> ent, ref AbductorSendPadDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
@@ -212,7 +212,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         comp.HiddenActions = _actions.HideActions(user);
         _actions.AddAction(user, ref comp.ExitConsole, ExitAction);
         _actions.AddAction(user, ref comp.SendYourself, SendYourself);
-        _actions.AddAction(user, ref comp.SendAgent, SendAgentAction);
+        _actions.AddAction(user, ref comp.SendPad, SendPadAction);
     }
 
     private void RemoveActions(EntityUid actor)
@@ -222,7 +222,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         _actions.RemoveAction(actor, comp.ExitConsole);
         _actions.RemoveAction(actor, comp.SendYourself);
-        _actions.RemoveAction(actor, comp.SendAgent);
+        _actions.RemoveAction(actor, comp.SendPad);
         _actions.UnHideActions(actor, comp.HiddenActions);
     }
 

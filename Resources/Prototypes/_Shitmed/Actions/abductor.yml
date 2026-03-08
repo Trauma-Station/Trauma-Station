@@ -57,9 +57,9 @@
 
 - type: entity
   parent: BaseMentalAction
-  id: ActionSendAgent
-  name: Send agent
-  description: Teleport whoever is attached on the alien pad to the target location.
+  id: ActionSendPad
+  name: Send from pad
+  description: Teleport whoever is attached to the alien pad to the target location.
   components:
   - type: Action
     itemIconStyle: BigAction
@@ -73,4 +73,4 @@
     checkCanAccess: false
     range: -1
   - type: WorldTargetAction
-    event: !type:SendAgentEvent
+    event: !type:SendPadEvent
