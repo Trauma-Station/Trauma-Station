@@ -37,7 +37,6 @@ public sealed class ShortConstructionBUI : BoundUserInterface
     {
         _menu = CreateMenu();
         _menu.OpenCenteredAt(_input.MouseScreenPosition.Position / _clyde.ScreenSize);
-        _menu.OnClose += Close;
     }
 
     private RadialMenu CreateMenu()
@@ -47,6 +46,7 @@ public sealed class ShortConstructionBUI : BoundUserInterface
         menu.VerticalExpand = true;
         menu.BackButtonStyleClass = "RadialMenuBackButton";
         menu.CloseButtonStyleClass = "RadialMenuCloseButton";
+        menu.OnClose += Close; // FIXME: this doesnt actually close the bui serverside
 
         if (!EntMan.TryGetComponent<ShortConstructionComponent>(Owner, out var comp))
             return menu;
