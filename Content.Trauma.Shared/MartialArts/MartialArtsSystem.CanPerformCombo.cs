@@ -124,11 +124,10 @@ public partial class MartialArtsSystem
 
         if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && !martialArtsComp.Blocked && _mobState.IsAlive(target) && proto.GiveExperience)
         {
-            if (Prototype(ent)?.ID is not { } prototypeId)
+            if (Prototype(ent)?.ID is not { } prototypeId || _knowledge.GetContainer(performer) is not { } brain)
                 return;
             // TODO: limit it to be based on your opponent's martial art level + 10
-            var ev = new AddExperienceEvent(prototypeId, 1, 10);
-            RaiseLocalEvent(performer, ref ev);
+            _knowledge.AddExperience(brain, prototypeId, 1, 10);
         }
 
         Dirty(ent);

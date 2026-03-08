@@ -121,20 +121,4 @@ public abstract partial class SharedGunSystem
             ? 3.0f - (float) shooting.Comp.Level / 26.0f - _knowledge.SharpCurve(shooting)
             : 1.0f - ((float) (shooting.Comp.Level - 50) / 50.0f * (float) (shooting.Comp.Level - 50) / 50.0f);
     }
-
-    // TODO: kill this dogshit
-    /// <summary>
-    /// Adds shooting experience according to knowledge system.
-    /// </summary>
-    private void AddShootingExperience(EntityUid? userUid)
-    {
-        if (userUid is not {} user)
-            return;
-
-        // TODO: scale it based on the gun, pistols are easier to shoot than railguns
-        var evShooting = new AddExperienceEvent(ShootingKnowledge, 1, 20);
-        var evWeapons = new AddExperienceEvent(WeaponsKnowledge, 1, 20);
-        RaiseLocalEvent(user, ref evShooting);
-        RaiseLocalEvent(user, ref evWeapons);
-    }
 }

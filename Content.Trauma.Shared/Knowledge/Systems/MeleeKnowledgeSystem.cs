@@ -23,6 +23,8 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
 
     private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
+    private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
+    //private readonly float _missChance = 0.1f
 
     public override void Initialize()
     {
@@ -49,7 +51,7 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     private void OnMeleeExperience(MeleeHitEvent args)
     {
         var user = args.User;
-        if (!_knowledge.IsHolder(user))
+        if (_knowledge.GetContainer(user) is not { } brain)
             return;
 
         var xpMelee = 0;
@@ -62,7 +64,7 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
             if (TryComp<PhysicsComponent>(hit, out var comp))
                 weight += comp.Mass;
 
-            // Melee check to make sure we aren't just hitting walls or cuffed monkeys.
+            // Melee check to make sure we aren't just giving experience for hitting walls or cuffed monkeys or getting people unaware.
             if (!_mobState.IsAlive(hit) || !_combat.IsInCombatMode(hit) || !(TryComp<CuffableComponent>(hit, out var cuffs) && _cuffs.IsCuffed((hit, cuffs))))
                 continue;
             xpMelee++;
@@ -77,13 +79,11 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
             _ => 0
         };
 
-        // give experience based on valid hit entities
-        var evMelee = new AddExperienceEvent(MeleeKnowledge, xpMelee, limit);
-        RaiseLocalEvent(user, ref evMelee);
+        // give melee experience based on valid hit entities
+        _knowledge.AddExperience(brain, MeleeKnowledge, xpMelee, limit);
 
-        // give experience based on weight.
-        var evStrength = new AddExperienceEvent(MeleeKnowledge, Math.Min((int) (weight / 10), 10), limit);
-        RaiseLocalEvent(user, ref evStrength);
+        // give strength experience based on weight. I'm not too sure how well it works to give melee experience based on the weight of hit things.
+        _knowledge.AddExperience(brain, StrengthKnowledge, Math.Min((int) (weight / 10), 10), limit);
     }
 
     // Miss Event Hook
@@ -99,7 +99,7 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
             return;
         }
 
-        if (_knowledge.GetMastery(melee.Comp) < 2 && SharedRandomExtensions.PredictedProb(_timing, 1 - _knowledge.SharpCurve(melee, 0, 26), GetNetEntity(args.User)))
+        if (_knowledge.GetMastery(melee.Comp) < 2 && SharedRandomExtensions.PredictedProb(_timing, 1 - _missChance * _knowledge.SharpCurve(melee, 0, 26), GetNetEntity(args.User)))
         {
             args.Handled = true;
         }

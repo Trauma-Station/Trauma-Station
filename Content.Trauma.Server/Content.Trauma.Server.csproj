@@ -11,6 +11,10 @@
 	<Import Project="../MSBuild/Content.props" />
 
 	<ItemGroup>
+		<PackageReference Include="Serilog" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="../Content.Trauma.Shared/Content.Trauma.Shared.csproj" />
 		<ProjectReference Include="../Content.Goobstation.Server/Content.Goobstation.Server.csproj" />
 		<ProjectReference Include="../Content.Lavaland.Server/Content.Lavaland.Server.csproj" />

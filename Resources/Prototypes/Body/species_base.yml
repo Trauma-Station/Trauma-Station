@@ -49,6 +49,7 @@
   - type: Mutatable
   - type: Destructible
     thresholds: [] # remove gib threshold, you can gib the torso instead
+  - type: Tackler
   - type: KnowledgeHolder
   # </Trauma>
   # Shitmed - woundable visuals used instead
