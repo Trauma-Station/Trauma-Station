@@ -6,6 +6,8 @@ using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Server.Buckle.Systems;
+using Content.Shared.Buckle.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -20,9 +22,11 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly BuckleSystem _buckle = default!;
 
     private static readonly EntProtoId<ActionComponent> SendYourself = "ActionSendYourself";
     private static readonly EntProtoId<ActionComponent> ExitAction = "ActionExitConsole";
+    private static readonly EntProtoId<ActionComponent> SendAgentAction = "ActionSendAgent";
     private static readonly EntProtoId TeleportationEffect = "EffectTeleportation";
     private static readonly EntProtoId TeleportationEffectEntity = "EffectTeleportationEntity";
     private static readonly EntProtoId TeleportationEffectShort = "EffectTeleportationShort";
@@ -41,6 +45,9 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         SubscribeLocalEvent<SendYourselfEvent>(OnSendYourself);
         SubscribeLocalEvent<AbductorScientistComponent, AbductorSendYourselfDoAfterEvent>(OnDoAfterSendYourself);
+
+        SubscribeLocalEvent<AbductorScientistComponent, SendAgentEvent>(OnSendAgent);
+        SubscribeLocalEvent<AbductorScientistComponent, AbductorSendAgentDoAfterEvent>(OnDoAfterSendAgent);
     }
 
     private void AbductorScientistComponentStartup(Entity<AbductorScientistComponent> ent, ref ComponentStartup args)
@@ -117,6 +124,86 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         OnCameraExit(ent);
     }
 
+    private void OnSendAgent(Entity<AbductorScientistComponent> ent, ref SendAgentEvent ev)
+    {
+        var user = ent.Owner;
+
+        if (ent.Comp.Console is not {} consoleUid)
+        {
+            ev.Handled = true;
+            return;
+        }
+
+        var consoleGridId = Transform(consoleUid).Coordinates.EntityId;
+        EntityUid padFound = default;
+        var padQuery = EntityQueryEnumerator<AbductorAlienPadComponent>();
+        while (padQuery.MoveNext(out var padUid, out _))
+        {
+            if (Transform(padUid).Coordinates.EntityId != consoleGridId)
+                continue;
+            padFound = padUid;
+            break;
+        }
+
+        if (padFound == default)
+        {
+            _popup.PopupEntity(Loc.GetString("abductor-send-agent-no-pad"), user, user);
+            ev.Handled = true;
+            return;
+        }
+
+        if (!TryComp<StrapComponent>(padFound, out var strap) || strap.BuckledEntities.Count == 0)
+        {
+            _popup.PopupEntity(Loc.GetString("abductor-send-agent-not-buckled"), user, user);
+            ev.Handled = true;
+            return;
+        }
+
+        EntityUid agent = default;
+        foreach (var buckled in strap.BuckledEntities)
+        {
+            agent = buckled;
+            break;
+        }
+
+        var @event = new AbductorSendAgentDoAfterEvent(GetNetCoordinates(ev.Target), GetNetEntity(agent));
+        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(3), @event, user)
+        {
+            MultiplyDelay = false,
+            RequireCanInteract = false,
+        };
+
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            Log.Error($"Couldn't start send agent doafter for {ToPrettyString(user)}!");
+            return;
+        }
+
+        AddTeleportationEffect(agent, TeleportationEffectEntityShort);
+        var padEffect = Spawn(TeleportationEffectShort, Transform(padFound).Coordinates);
+        _audio.PlayPvs(TeleportSound, padEffect);
+        SpawnAttachedTo(TeleportationEffect, ev.Target);
+
+        ev.Handled = true;
+    }
+
+    private void OnDoAfterSendAgent(Entity<AbductorScientistComponent> ent, ref AbductorSendAgentDoAfterEvent args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        var agent = GetEntity(args.Agent);
+
+        if (TryComp<BuckleComponent>(agent, out var buckle))
+            _buckle.Unbuckle((agent, buckle), null);
+
+        _color.RaiseEffect(Color.FromHex("#BA0099"), new List<EntityUid>(1) { agent }, Filter.Pvs(agent, entityManager: EntityManager));
+        StopPulls(agent);
+        _xform.SetCoordinates(agent, GetCoordinates(args.TargetCoordinates));
+
+        args.Handled = true;
+    }
+
     private void OnExit(ExitConsoleEvent ev) => OnCameraExit(ev.Performer);
 
     private void AddActions(EntityUid user)
@@ -125,6 +212,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         comp.HiddenActions = _actions.HideActions(user);
         _actions.AddAction(user, ref comp.ExitConsole, ExitAction);
         _actions.AddAction(user, ref comp.SendYourself, SendYourself);
+        _actions.AddAction(user, ref comp.SendAgent, SendAgentAction);
     }
 
     private void RemoveActions(EntityUid actor)
@@ -134,6 +222,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         _actions.RemoveAction(actor, comp.ExitConsole);
         _actions.RemoveAction(actor, comp.SendYourself);
+        _actions.RemoveAction(actor, comp.SendAgent);
         _actions.UnHideActions(actor, comp.HiddenActions);
     }
 
