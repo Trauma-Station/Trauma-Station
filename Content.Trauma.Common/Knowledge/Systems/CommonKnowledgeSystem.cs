@@ -21,6 +21,11 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract void ClearKnowledge(EntityUid target, bool deleteAll);
 
     /// <summary>
+    /// Get every skill and the mastery level of a mob.
+    /// </summary>
+    public abstract Dictionary<EntProtoId, int> GetSkillMasteries(EntityUid target);
+
+    /// <summary>
     /// Gets the mastery level for a knowledge level.
     /// </summary>
     public abstract int GetMastery(int level);
@@ -44,7 +49,19 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f);
 
     /// <summary>
-    /// Runs quality instructions for an item outside of the construction loop, such as the bullets for the shotgun ammo.
+    /// Sanitize a profile, removing any invalid skills.
+    /// Does not care about point limits.
     /// </summary>
-    public abstract void ModifyValues(Entity<QualityComponent> ent);
+    public abstract void EnsureProfileValid([ForbidLiteral] ProtoId<KnowledgeProfilePrototype> parentId, ref KnowledgeProfile profile);
+
+    /// <summary>
+    /// Apply a parent and character profile to a mob.
+    /// This clears the knowledge container then adds every skill allowed by the parent's points.
+    /// </summary>
+    public abstract void ApplyProfile(EntityUid target, [ForbidLiteral] ProtoId<KnowledgeProfilePrototype> parentId, KnowledgeProfile profile);
+
+    /// <summary>
+    /// Gets the total point cost for every skill in a profile.
+    /// </summary>
+    public abstract int ProfileCost(KnowledgeProfile profile);
 }

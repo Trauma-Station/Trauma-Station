@@ -1,0 +1,57 @@
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceShadowDemon
+  name: shadow demon appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganSlaughterDemonTorso
+      ArmLeft: OrganSlaughterDemonArmLeft
+      ArmRight: OrganSlaughterDemonArmRight
+      HandLeft: OrganSlaughterDemonHandLeft
+      HandRight: OrganSlaughterDemonHandRight
+      # Organs
+      Heart: OrganShadowDemonHeart
+      Lungs: OrganCarpLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBase
+  id: OrganShadowDemon
+  suffix: shadow demon
+
+- type: entity
+  abstract: true
+  parent: OrganShadowDemon
+  id: OrganShadowDemonInternal
+
+## Organs
+
+- type: entity
+  parent: [ OrganAnimalHeart, OrganShadowDemonInternal, BaseMagicalContraband ]
+  id: OrganShadowDemonHeart
+  name: heart of darkness
+  description: It still beats furiously, emitting an aura of fear.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/SlaughterDemon/heart.rsi
+    color: "#000000"
+  - type: InternalOrgan
+    intCap: 30
+    integrity: 30
+    integrityThresholds:
+      Normal: 30
+      Damaged: 20
+      Destroyed: 0
+  - type: OrganComponents
+    onAdd:
+    - type: ShadowGrapple # Only grants you the action, check shadow_grapple.yml for damage values instead
+  - type: StaticPrice
+    price: 10000

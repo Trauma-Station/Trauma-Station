@@ -5,6 +5,13 @@
   components:
   - type: Knowledge
     experienceCost: 15
+    costs: [0, 6, 10, 16, 999, 999]
+  - type: MeleeSpeedKnowledge
+    # 75% to 125% speed scaling with level, tapers off
+    # midlevel at lvl 25
+    curve: !type:RootSkillCurve
+      curveScale: 0.5
+      curveOffset: 0.75
 
 - type: entity
   parent: BaseWarKnowledge

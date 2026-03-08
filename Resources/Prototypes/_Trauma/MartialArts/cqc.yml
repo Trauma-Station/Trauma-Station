@@ -1,4 +1,22 @@
 - type: combo
+  id: CQCSlamSimple
+  attacks:
+  - Grab
+  - Harm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - cqc-slam
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 15
+  - !type:ModifyKnockdown
+    time: 2
+    drop: true
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
   id: CQCSlam
   attacks:
   - Grab
@@ -23,6 +41,21 @@
   levelRequired: 26
 
 - type: combo
+  id: CQCKickSimple
+  attacks:
+  - Harm
+  - Harm
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 8
+  - !type:ModifyKnockdown
+    time: 1
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
   id: CQCKick
   attacks:
   - Harm
@@ -43,6 +76,48 @@
   - !type:LegSweep
     time: 2
   levelRequired: 26
+  levelExceeded: 60
+
+- type: combo
+  id: CQCKickAdvanced
+  attacks:
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-kick
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 40
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 20
+  - !type:LegSweep
+    time: 4
+  levelRequired: 60
+
+- type: combo
+  id: CQCRestrainSimple
+  attacks:
+  - Grab
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - cqc-restrain
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 30
+  - !type:GenericStatusEffect
+    key: Stutter
+    time: 2
+    type: Add
+  levelRequired: 0
+  levelExceeded: 26
 
 - type: combo
   id: CQCRestrain
@@ -58,13 +133,27 @@
     amount: 30
   - !type:GenericStatusEffect
     key: Stutter
-    time: 2
+    time: 10
     type: Add
   - !type:ModifyKnockdown
-    time: 1
+    time: 3
     drop: true
     type: Add
   levelRequired: 26
+
+- type: combo
+  id: CQCPressureSimple
+  attacks:
+  - Disarm
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - cqc-pressure
+  opponentEffects:
+  - !type:StealItem
+  levelRequired: 0
+  levelExceeded: 26
 
 - type: combo
   id: CQCPressure
@@ -82,11 +171,32 @@
   levelRequired: 26
 
 - type: combo
+  id: CQCConsecutiveSimple
+  attacks:
+  - Disarm
+  - Disarm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-consecutive
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 20
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
+  levelRequired: 0
+  levelExceeded: 26
+
+- type: combo
   id: CQCConsecutive
   attacks:
   - Disarm
-  - Hug
-  - Hug
+  - Disarm
   - Harm
   userEffects:
   - !type:PlaySoundEffect
@@ -108,8 +218,7 @@
   id: CQCConsecutiveAdvanced
   attacks:
   - Disarm
-  - Hug
-  - Hug
+  - Disarm
   - Harm
   userEffects:
   - !type:PlaySoundEffect
@@ -130,4 +239,4 @@
     time: 20
     drop: true
     type: Add
-  levelRequired: 50
+  levelRequired: 60

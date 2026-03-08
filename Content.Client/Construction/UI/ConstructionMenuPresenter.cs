@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Configuration;
 // </Trauma>
 using System.Linq;
@@ -27,7 +28,10 @@ namespace Content.Client.Construction.UI
     /// </summary>
     internal sealed class ConstructionMenuPresenter : IDisposable
     {
-        [Dependency] private readonly IConfigurationManager _cfg = default!; // Goobstation
+        // <Trauma>
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        private readonly CommonKnowledgeSystem _knowledge;
+        // </Trauma>
         [Dependency] private readonly EntityManager _entManager = default!;
         [Dependency] private readonly IEntitySystemManager _systemManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -98,6 +102,7 @@ namespace Content.Client.Construction.UI
             _constructionView = new ConstructionMenu();
             _whitelistSystem = _entManager.System<EntityWhitelistSystem>();
             _spriteSystem = _entManager.System<SpriteSystem>();
+            _knowledge = _entManager.System<CommonKnowledgeSystem>(); // Trauma
             _sawmill = _logManager.GetSawmill("construction.ui");
 
             // This is required so that if we load after the system is initialized, we can bind to it immediately
@@ -280,7 +285,16 @@ namespace Content.Client.Construction.UI
             if (_playerManager.LocalEntity is not { } player)
                 return recipes;
             var useKnowledge = _constructionSystem!.IsKnowledgeHolder(player);
-            var skills = _constructionSystem.AvailableConstructionGroups(player);
+            var skills = _knowledge.GetSkillMasteries(player);
+            bool CanUnderstand(ConstructionPrototype recipe)
+            {
+                foreach (var (id, needed) in recipe.Theory)
+                {
+                    if (!skills.TryGetValue(id, out var mastery) || mastery < needed)
+                        return false;
+                }
+                return true;
+            }
             // </Trauma>
 
             foreach (var recipe in _prototypeManager.EnumeratePrototypes<ConstructionPrototype>())
@@ -293,9 +307,12 @@ namespace Content.Client.Construction.UI
                     || _whitelistSystem.IsWhitelistFail(recipe.EntityWhitelist, _playerManager.LocalEntity.Value))
                     continue;
 
-                // <Trauma> - don't allow a recipe if the user is missing any needed skills
-                if (useKnowledge && !_constructionSystem.CheckConstructionGroups(skills, recipe))
+                // <Trauma> - don't allow a recipe if the user is missing any skills needed to understand it
+                if (useKnowledge && !CanUnderstand(recipe))
+                {
+                    // TODO: if its off by 1 or something, maybe say it could be made if you were better
                     continue;
+                }
                 // </Trauma>
 
                 if (!string.IsNullOrEmpty(search) && (recipe.Name is { } name &&

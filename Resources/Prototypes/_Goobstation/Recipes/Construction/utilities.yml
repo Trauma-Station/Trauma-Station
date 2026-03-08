@@ -5,7 +5,7 @@
   category: construction-category-utilities
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
 
@@ -18,7 +18,7 @@
   canBuildInImpassable: false
   conditions:
   - !type:NoUnstackableInTile
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
 
@@ -29,7 +29,7 @@
   category: construction-category-utilities
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2
 
@@ -40,6 +40,6 @@
   category: construction-category-utilities
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  groups:
+  theory:
     InfrastructureKnowledge: 2
     ElectronicsKnowledge: 2

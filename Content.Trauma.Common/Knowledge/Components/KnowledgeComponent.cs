@@ -80,4 +80,12 @@ public sealed partial class KnowledgeComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan TimeToNextExperience = TimeSpan.Zero;
+
+    /// <summary>
+    /// Array of point costs for each mastery level, including 0.
+    /// There are 6 of them total by default, removing will decrease the max mastery you can buy.
+    /// If this is null, you can't opt in to this knowledge.
+    /// </summary>
+    [DataField(required: true)]
+    public int[]? Costs = null;
 }

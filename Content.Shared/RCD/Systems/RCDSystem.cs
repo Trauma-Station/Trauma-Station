@@ -680,27 +680,13 @@ public sealed class RCDSystem : EntitySystem
                 break;
 
             case RcdMode.ConstructObject:
+                // <Trauma> - use mirrored prototype for RPD shit
                 var proto = (component.UseMirrorPrototype &&
                     !string.IsNullOrEmpty(prototype.MirrorPrototype))
                     ? prototype.MirrorPrototype
                     : prototype.Prototype;
-
-                // Funky - Calculate rotation and apply it before spawning
-                var rotation = prototype.Rotation switch
-                {
-                    RcdRotation.Fixed => Angle.Zero,
-                    RcdRotation.Camera => Transform(uid).LocalRotation,
-                    RcdRotation.User => direction.ToAngle(),
-                    _ => Angle.Zero // Fallback
-                };
-
-                // Convert EntityCoordinates to MapCoordinates
-                var entityCoords = _mapSystem.GridTileToLocal(gridUid, mapGrid, position);
-                var mapCoords = _transform.ToMapCoordinates(entityCoords);
-                var ent = Spawn(proto, mapCoords, rotation: rotation);
-                // End of funky changes
-
-                /* Funky - handled above
+                 var ent = Spawn(proto, _mapSystem.GridTileToLocal(gridUid, mapGrid, position));
+                // </Trauma>
                 switch (prototype.Rotation)
                 {
                     case RcdRotation.Fixed:
@@ -713,7 +699,6 @@ public sealed class RCDSystem : EntitySystem
                         Transform(ent).LocalRotation = direction.ToAngle();
                         break;
                 }
-                */
 
                 _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used RCD to spawn {ToPrettyString(ent)} at {position} on grid {gridUid}");
                 break;

@@ -6,7 +6,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     BotsKnowledge: 2
   # </Trauma>
 
@@ -18,7 +18,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     BotsKnowledge: 2
   # </Trauma>
 
@@ -30,7 +30,7 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     BotsKnowledge: 2
   # </Trauma>
 
@@ -42,6 +42,6 @@
   category: construction-category-utilities
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     BotsKnowledge: 2
   # </Trauma>

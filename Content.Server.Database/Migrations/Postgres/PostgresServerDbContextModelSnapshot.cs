@@ -1233,6 +1233,16 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("hair_name");
 
+                    b.Property<string>("KnowledgeMastery")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("knowledge_mastery");
+
+                    b.Property<string>("KnowledgeRemoved")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("knowledge_removed");
+
                     b.Property<JsonDocument>("Markings")
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");

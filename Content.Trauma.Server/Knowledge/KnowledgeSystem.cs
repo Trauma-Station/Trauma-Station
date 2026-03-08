@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Cloning;
-using Content.Server.Construction;
-using Content.Shared.NameModifier.EntitySystems;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Containers;
@@ -12,16 +10,15 @@ namespace Content.Trauma.Server.Knowledge;
 public sealed class KnowledgeSystem : SharedKnowledgeSystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<KnowledgeHolderComponent, TransferredToCloneEvent>(TransferKnowledge);
-        SubscribeLocalEvent<QualityComponent, AfterConstructionChangeEntityEvent>(AlterName);
     }
 
+    // TODO: move to shared bruh
     /// <summary>
     /// Attempts to transfer all knowledge from the original entity into the cloned mob.
     /// </summary>
@@ -41,10 +38,5 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             _container.Insert(knowledgeEnt.Owner, container);
         }
         ClearKnowledge(ent, false);
-    }
-
-    private void AlterName(Entity<QualityComponent> ent, ref AfterConstructionChangeEntityEvent args)
-    {
-        _nameModifier.RefreshNameModifiers(ent.Owner);
     }
 }

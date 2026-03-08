@@ -6,8 +6,8 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    ScienceKnowledge: 2
+  theory:
+    ScienceKnowledge: 1
     WeaponsKnowledge: 2
   # </Trauma>
 
@@ -19,7 +19,7 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    ScienceKnowledge: 2
+  theory:
+    ScienceKnowledge: 1
     WeaponsKnowledge: 2
   # </Trauma>
