@@ -1,15 +1,14 @@
+using System.Linq;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
 /// <summary>
-/// Trauma - code relating to DNA freshness and GetSolution overriding.
+/// Trauma - code relating to DNA freshness, GetSolution overriding and skills.
 /// </summary>
 public sealed partial class InjectorSystem
 {

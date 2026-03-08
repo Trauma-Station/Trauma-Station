@@ -203,6 +203,9 @@ binds:
 - function: OpenLanguageMenu # Einstein Engines - Language
   type: State
   key: L
+- function: OpenMartialArtsMenu # Trauma
+  type: State
+  key: O
 - function: TextCursorSelect
   # TextCursorSelect HAS to be above ExamineEntity
   # So that LineEdit receives it correctly.

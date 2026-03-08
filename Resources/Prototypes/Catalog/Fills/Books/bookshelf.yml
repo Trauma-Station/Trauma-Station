@@ -16,7 +16,7 @@
     # Randomly generated books
     - id: BookRandomStory
       amount: !type:RangeNumberSelector
-        range: 0, 8
+        range: 0, 5
     # Guidebooks
     - !type:NestedSelector
       rolls: !type:RangeNumberSelector
@@ -27,6 +27,11 @@
       rolls: !type:RangeNumberSelector
         range: 0, 3
       tableId: RandomHandwrittenBookTable
+    # Trauma - Skillbooks
+    - !type:NestedSelector
+      rolls: !type:RangeNumberSelector
+        range: 0, 3
+      tableId: RandomSkillbook
 
 - type: entityTable
   id: RandomHandwrittenBookTable
@@ -92,3 +97,5 @@
       tableId: RandomGuidebookTable
     - !type:NestedSelector
       tableId: RandomHandwrittenBookTable
+    - !type:NestedSelector
+      tableId: RandomSkillbook # Trauma - Knowledge

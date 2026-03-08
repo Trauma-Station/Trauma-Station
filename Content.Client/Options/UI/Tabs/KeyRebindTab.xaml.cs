@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.Input;
 using Content.Goobstation.Common.CCVar;
 // </Trauma>
 using System.Numerics;
@@ -256,6 +257,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.WindowCloseRecent);
             AddButton(EngineKeyFunctions.EscapeMenu);
             AddButton(ContentKeyFunctions.EscapeContext);
+            AddButton(TraumaKeyFunctions.OpenMartialArtsMenu); // Trauma
 
             // <Trauma>
             // TODO: change to scrolling x/y

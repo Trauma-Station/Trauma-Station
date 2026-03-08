@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Religion;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Server.Administration.Logs;
 using Content.Server.Stunnable;
 using Content.Shared.ActionBlocker;
@@ -55,6 +57,7 @@ public sealed class HolyFlammableSystem : EntitySystem
         SubscribeLocalEvent<HolyIgniteOnCollideComponent, StartCollideEvent>(HolyIgniteOnCollide);
         SubscribeLocalEvent<HolyIgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<IgniteOnHolyDamageComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<WeakToHolyComponent, ComponentStartup>(OnStartup);
     }
 
     private void OnExtinguishEvent(Entity<HolyFlammableComponent> ent, ref ExtinguishEvent args)
@@ -283,6 +286,11 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     }
 
+    public void OnStartup(Entity<WeakToHolyComponent> ent, ref ComponentStartup args)
+    {
+        EnsureComp<HolyFlammableComponent>(ent);
+    }
+
     public void Resist(EntityUid uid,
         HolyFlammableComponent? flammable = null)
     {
@@ -361,7 +369,7 @@ public sealed class HolyFlammableSystem : EntitySystem
             _alerts.ShowAlert(uid, flammable.FireAlert);
             if (flammable.FireStacks > 0)
             {
-                _damageable.TryChangeDamage(uid, flammable.Damage * DamageCurve(flammable), interruptsDoAfters: false, partMultiplier: 2f);
+                _damageable.TryChangeDamage(uid, flammable.Damage * DamageCurve(flammable), interruptsDoAfters: false, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
                 AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 20f : 1f), flammable, flammable.OnFire);
             }
             else

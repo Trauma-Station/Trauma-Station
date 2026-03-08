@@ -130,6 +130,14 @@ public sealed class AreaSystem : EntitySystem
         => _deptQuery.CompOrNull(area)?.Department;
 
     /// <summary>
+    /// Gets the entity prototype of an area, or null if it lacks <see cref="EntityPrototype"/>.
+    /// </summary>
+    public EntProtoId? GetAreaPrototype(EntityUid area)
+    {
+        return Prototype(area)?.ID;
+    }
+
+    /// <summary>
     /// Raises a by-ref event on the area a given mob is in.
     /// </summary>
     public void RaiseAreaEvent<T>(EntityUid target, ref T ev) where T: notnull

@@ -12,7 +12,11 @@
     size: Small
   - type: StaticPrice
     price: 3000
-  - type: GrantNinjutsu
+  - type: UseRequiresSight
+  - type: KnowledgeGrantOnUse
+    skills:
+      MartialArtNinjutsu: 100 # literal ninja come on
+    doAfter: 2
   - type: GuideHelp
     guides:
     - Ninjutsu

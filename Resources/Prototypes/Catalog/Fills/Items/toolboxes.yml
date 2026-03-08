@@ -223,7 +223,7 @@
       - id: ClothingHeadHatCowboyRed
       - id: ClothingHeadHatBowlerHat
       - id: ClothingHeadHatWitch
-      - id: ClothingOuterCoatExpensive
+      #- id: ClothingOuterCoatExpensive # Trauma - heisentest slop
       - id: ClothingOuterGhostSheet
       - id: ClothingOuterHospitalGown
       - id: ClothingShoesBling

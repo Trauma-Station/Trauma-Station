@@ -1,0 +1,25 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<BoxContainer xmlns="https://spacestation14.io"
+        Orientation="Vertical">
+    <BoxContainer Orientation="Horizontal" Align="Center" HorizontalExpand="True">
+        <Label Name="PointsLabel"/>
+        <Button Name="SaveButton" Text="{Loc 'knowledge-editor-save'}" Margin="4" Disabled="True"/>
+    </BoxContainer>
+    <ScrollContainer VerticalExpand="True">
+    	<BoxContainer Orientation="Horizontal">
+	        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+	            <Label Text="{Loc 'knowledge-editor-selected'}" Align="Center"/>
+	            <BoxContainer Name="EnabledSkills" HorizontalExpand="True" VerticalExpand="True" Orientation="Vertical" Align="Begin"/>
+	            <Label Name="NoSkillsLabel" Text="{Loc 'knowledge-editor-no-skills'}"/>
+	        </BoxContainer>
+	        <BoxContainer Orientation="Vertical">
+	            <Label Text="{Loc 'knowledge-editor-available'}" Align="Center"/>
+	            <!-- TODO: make nicer thing that groups them -->
+	            <ItemList Name="AvailableSkills" MinWidth="300" VerticalExpand="True"/>
+	        </BoxContainer>
+        </BoxContainer>
+    </ScrollContainer>
+</BoxContainer>

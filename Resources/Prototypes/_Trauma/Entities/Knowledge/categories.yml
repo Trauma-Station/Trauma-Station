@@ -1,0 +1,127 @@
+- type: entity
+  id: BaseMedicalKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Medical
+
+- type: entity
+  id: BasePhysicalKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Physical
+    costs: [4, 6, 10, 16] # can't be expert or master as some random chud
+
+- type: entity
+  id: BaseWarKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: War
+    costs: [4, 6, 10, 16]
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseQualityKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Construction
+    color: "#0ba881"
+    experienceCost: 20
+    costs: [2, 4, 8, 16, 32] # can't be master as some random chud
+
+- type: entity
+  id: BaseIntellectualKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Intellectual
+
+- type: entity
+  id: BaseScientificKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Scientific
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseConstructionKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Construction
+    color: "#0ba881"
+    experienceCost: 20
+    costs: [1, 2, 3, 4, 6, 10]
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseLanguageKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Language
+    level: 26
+    experienceCost: 4
+    color: "#ADD8E6"
+    costs: null # its currently fucked, have to use traits still :(
+  - type: LanguageKnowledge
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseMartialArtsKnowledge
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Interface/Misc/intents.rsi
+    state: harm
+  - type: Knowledge
+    category: MartialArt
+    experienceCost: 10
+    color: "#c70000"
+    costs: [50] # Being able to learn any of these roundstart needs an insane cost
+  - type: MartialArtsKnowledge
+    blocked: false
+    icon: Objects/Misc/skub.rsi
+
+# Actual categories
+
+- type: knowledgeCategory
+  id: MartialArt
+  name: knowledge-category-Martial
+
+- type: knowledgeCategory
+  id: Construction
+  name: knowledge-category-Construction
+
+- type: knowledgeCategory
+  id: Language
+  name: knowledge-category-Languages
+
+- type: knowledgeCategory
+  id: War
+  name: knowledge-category-Combat
+
+- type: knowledgeCategory
+  id: Medical
+  name: knowledge-category-Medical
+
+- type: knowledgeCategory
+  id: Physical
+  name: knowledge-category-Physical
+
+- type: knowledgeCategory
+  id: Intellectual
+  name: knowledge-category-Intellectual
+
+- type: knowledgeCategory
+  id: Scientific
+  name: knowledge-category-Scientific

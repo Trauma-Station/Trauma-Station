@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
+
+namespace Content.Trauma.Shared.Containers;
+
+/// <summary>
+/// Allows objects to fall inside the Container when thrown
+/// Moved out of Content.Server its 2026
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+[Access(typeof(ThrowInsertContainerSystem))]
+public sealed partial class ThrowInsertContainerComponent : Component
+{
+    [DataField(required: true)]
+    public string ContainerId = string.Empty;
+
+    /// <summary>
+    /// Throw chance of hitting into the container
+    /// </summary>
+    [DataField]
+    public float Probability = 0.25f;
+
+    /// <summary>
+    /// Sound played when an object is throw into the container.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? InsertSound = new SoundPathSpecifier("/Audio/Effects/trashbag1.ogg");
+
+    /// <summary>
+    /// Sound played when an item is thrown and misses the container.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? MissSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg");
+
+    [DataField]
+    public LocId MissLocString = "container-thrown-missed";
+}

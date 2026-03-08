@@ -71,3 +71,50 @@
     wideAnimationRotation: 180
     soundHit:
       path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+
+- type: entity
+  parent: ClothingUniformBase
+  id: PatreonTheLongQuietDress
+  name: mushroom dress
+  description: It is a mushroom dress!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/Icortherainwing/dress.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/Icortherainwing/dress.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: PatreonTheLongQuietHat
+  name: mushroom hat
+  description: It is a mushroom hat!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/Icortherainwing/hat.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/Icortherainwing/hat.rsi
+
+- type: entity
+  parent: [ClothingNeckBase, BaseMajorContraband]
+  id: PatreonOwenCarpenter
+  name: trash bag cloak
+  description: DISGUSTING!!!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/owenCarpenter.rsi
+  - type: Clothing
+    quickEquip: true
+    sprite: _Trauma/Objects/Patreon/owenCarpenter.rsi
+    slots:
+    - NECK
+
+- type: entity
+  parent: ClothingHeadBase
+  id: PatreonGamingFungus420
+  name: tom O shatter hat
+  description: Who is Tom? And how can I shatter him?
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi

@@ -58,7 +58,6 @@
       components:
       - SecretStash
   - type: LanguageSpeaker # Einstein Engines - Language
-  - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
     - TauCetiBasic
     - RobotTalk
@@ -80,11 +79,18 @@
         - Brain
 
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, BaseKnowledgeContainer ] # Trauma - posibrain stores borg's knowledge
   id: PositronicBrain
   name: positronic brain
   description: An artificial brain capable of spontaneous neural activity.
   components:
+    # <Trauma>
+    - type: InternalOrgan
+    - type: ChildOrgan
+      parentCategory: Torso # ipc stores its brain in the torso not head
+    - type: Organ
+      category: IPCBrain
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Specific/Robotics/mmi.rsi
       layers:
@@ -107,8 +113,6 @@
       stopSearchVerbText: positronic-brain-stop-searching-verb-text
       stopSearchVerbPopup: positronic-brain-stopped-searching
       job: Borg
-    - type: Organ # Shitmed
-      category: IPCBrain
     - type: BlockMovement
     - type: Examiner
     - type: BorgBrain
@@ -161,7 +165,6 @@
     - type: ConsciousnessRequired
       identifier: "nerveSystem"
     - type: LanguageSpeaker # Einstein Engines - Language
-    - type: LanguageKnowledge # Einstein Engines - Language
       speaks:
       - TauCetiBasic # Added since posi brains should be able to talk to roboticists/scientists.
       - RobotTalk

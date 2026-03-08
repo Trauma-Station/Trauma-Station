@@ -1,4 +1,5 @@
-#GUIDs
+# GUIDs
+# https://auth.spacestation14.com/api/query/name?Name=
 - type: loadoutEffectGroup
   id: Scribbles
   effects:
@@ -17,12 +18,11 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: 5dcc5fac-1983-43be-a6ff-9d8a5ae38157
 
-# - type: loadoutEffectGroup
-#   id: Es
-#   effects:
-#   - !type:PlayerGUIDLoadoutEffect
-#     guid:
-# tom o shatter hat
+- type: loadoutEffectGroup
+  id: GamingFungus420
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 00-ed589c0d20b416be4e0496e77940d15f-ecb04bd546766561-00
 
 - type: loadoutEffectGroup
   id: Tia_Zoh
@@ -30,19 +30,17 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: 1c4e135f-839f-4494-b740-fdbacce313be
 
-# - type: loadoutEffectGroup
-#   id: OwenCarpenter
-#   effects:
-#   - !type:PlayerGUIDLoadoutEffect
-#     guid:
-# trash bag cloak
+- type: loadoutEffectGroup
+  id: OwenCarpenter
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 30c12041-a762-4df0-b3dd-ec49dc9513d8
 
-# - type: loadoutEffectGroup
-#   id: Icortherainwing
-#   effects:
-#   - !type:PlayerGUIDLoadoutEffect
-#     guid:
-#mushroomer hat
+- type: loadoutEffectGroup
+  id: TheLongQuiet
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 416c163c-c65f-438d-87b1-fcbe7dfc571f
 
 - type: loadoutEffectGroup
   id: Tenshi
@@ -120,3 +118,31 @@
   storage:
     back:
     - PatreonWeax
+
+- type: loadout
+  id: PatreonTheLongQuiet
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TheLongQuiet
+  storage:
+    back:
+    - PatreonTheLongQuietDress
+    - PatreonTheLongQuietHat
+
+- type: loadout
+  id: PatreonOwenCarpenter
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OwenCarpenter
+  storage:
+    back:
+    - PatreonOwenCarpenter
+
+- type: loadout
+  id: PatreonGamingFungus420
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: GamingFungus420
+  storage:
+    back:
+    - PatreonGamingFungus420

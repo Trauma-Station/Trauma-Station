@@ -3,7 +3,7 @@
     xmlns:windows="clr-namespace:Content.Client.UserInterface.Systems.Sandbox.Windows"
     Title="{Loc sandbox-window-title}"
     Resizable="False">
-    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+    <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="Buttons" Access="Public"> <!-- Trauma - Name + Access -->
         <Label Text="{Loc sandbox-window-map-editing-label}"/>
         <Button Name="SpawnTilesButton" Access="Public" Text="{Loc sandbox-window-spawn-tiles-button}"/>
         <Button Name="SpawnEntitiesButton" Access="Public" Text="{Loc sandbox-window-spawn-entities-button}"/>

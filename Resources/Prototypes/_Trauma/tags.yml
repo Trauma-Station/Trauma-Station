@@ -59,6 +59,9 @@
   id: FusionCore
 
 - type: Tag
+  id: Gunpowder
+
+- type: Tag
   id: HandTeleporter
 
 - type: Tag

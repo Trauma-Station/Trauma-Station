@@ -1,0 +1,88 @@
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaCommand
+  name: command
+  components:
+  - type: DepartmentArea
+    department: Command
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaCapQuarters
+  name: cap quarters
+  components:
+  - type: Sprite
+    state: captain
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaOfficeCE
+  name: CE office
+  components:
+  - type: Sprite
+    state: ce_office
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaOfficeCmo
+  name: CMO office
+  components:
+  - type: Sprite
+    state: cmo_office
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaOfficeHop
+  name: HOP
+  components:
+  - type: Sprite
+    state: hop_office
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaOfficeHos
+  name: HOS office
+  components:
+  - type: Sprite
+    state: hos_office
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaOfficeRd
+  name: RD office
+  components:
+  - type: Sprite
+    state: rd_office
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaOfficeQm
+  name: QM office
+  components:
+  - type: Sprite
+    state: qm_office
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaNukeStorage
+  name: nuke storage
+  components:
+  - type: Sprite
+    state: nuke_storage
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaAi
+  name: AI
+  components:
+  - type: Sprite
+    state: ai
+
+- type: entity
+  parent: BaseAreaCommand
+  id: AreaAiUpload
+  name: AI upload
+  components:
+  - type: Sprite
+    state: ai_upload
