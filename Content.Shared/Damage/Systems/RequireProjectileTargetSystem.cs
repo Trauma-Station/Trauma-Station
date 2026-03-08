@@ -43,7 +43,7 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
         // Goob edit start
         if (TryComp(other, out TargetedProjectileComponent? targeted))
         {
-            if (GetEntity(targeted.Target) is not {} target || target == ent)
+            if (GetEntity(targeted.Target) is not {} target || target == ent.Owner)
                 return;
 
             var ev = new ShouldTargetedProjectileCollideEvent(target);
