@@ -184,8 +184,8 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         // <Goob>
         // raise event to modify outgoing stamina damage by multiplier or something
-        var damage = component.Damage;
-        var overtime = component.Overtime;
+        var damage = 1.0f;
+        var overtime = 1.0f;
         var outgoingModifier = new ModifyOutgoingStaminaDamageEvent(1f);
         RaiseLocalEvent(args.User, ref outgoingModifier);
         if (args.Direction == null)
@@ -197,8 +197,8 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         foreach (var (ent, comp) in toHit)
         {
 
-            TakeStaminaDamage(ent, damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
-            TakeOvertimeStaminaDamage(ent, overtime);
+            TakeStaminaDamage(ent, component.Damage * damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
+            TakeOvertimeStaminaDamage(ent, component.Overtime * overtime);
         }
     }
 
