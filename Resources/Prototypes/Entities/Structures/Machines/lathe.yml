@@ -167,8 +167,6 @@
     - GrenadeTriggersStatic
     - TapeRecorderStatic
     - MiscSignallersStatic
-    # Trauma
-    - GymEquipment
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SecurityWeaponsStatic
