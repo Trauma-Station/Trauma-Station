@@ -97,7 +97,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         var @event = new AbductorSendYourselfDoAfterEvent(GetNetCoordinates(ev.Target));
         var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(5), @event, user)
         {
-            RequireCanInteract = false,
+            RequireCanInteract = false, // CANNOT WORK WITHOUT THIS, the abductor eye is usually prevented from interacting.
         };
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
@@ -105,6 +105,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
             return;
         }
 
+        // no sound so you can jump people
         AddTeleportationEffect(user, TeleportationEffectEntity, playAudio: false);
         SpawnAttachedTo(TeleportationEffect, ev.Target);
 
