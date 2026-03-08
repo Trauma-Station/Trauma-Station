@@ -1,188 +1,167 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Shared.Abductor;
-using Content.Medical.Shared.ItemSwitch;
-using Content.Medical.Shared.Surgery;
-using Content.Shared.DoAfter;
+using Content.Shared.Actions;
+using Content.Shared.Eye;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Pinpointer;
+using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Interaction.Components;
-using Content.Shared.Mind.Components;
-using Content.Shared.Mind;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Objectives.Components;
-using Content.Server.Objectives.Systems;
+using Content.Shared.Silicons.StationAi;
+using Content.Shared.Station;
+using Content.Shared.Station.Components;
 using Content.Shared.UserInterface;
-using Robust.Shared.Audio;
-using Robust.Shared.Spawners;
-using Robust.Shared.Utility;
-using System.Linq;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
+using Robust.Shared.Containers;
 
 namespace Content.Medical.Server.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly SharedItemSwitchSystem _itemSwitch = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
 
-    public static readonly SoundSpecifier ExperimentSound = new SoundPathSpecifier(new ResPath("/Audio/Voice/Human/wilhelm_scream.ogg"));
-
-    private void InitializeConsole()
+    public override void Initialize()
     {
-        SubscribeLocalEvent<AbductorConsoleComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
-        SubscribeLocalEvent<AbductConditionComponent, ObjectiveGetProgressEvent>(OnAbductGetProgress);
+        base.Initialize();
 
-        Subs.BuiEvents<AbductorConsoleComponent>(AbductorConsoleUIKey.Key, subs =>
+        SubscribeLocalEvent<AbductorHumanObservationConsoleComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
+        SubscribeLocalEvent<AbductorHumanObservationConsoleComponent, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
+        Subs.BuiEvents<AbductorHumanObservationConsoleComponent>(AbductorCameraConsoleUIKey.Key, subs =>
         {
-            subs.Event<AbductorAttractBuiMsg>(OnAttractBuiMsg);
-            subs.Event<AbductorCompleteExperimentBuiMsg>(OnCompleteExperimentBuiMsg);
-            subs.Event<AbductorVestModeChangeBuiMsg>(OnVestModeChangeBuiMsg);
-            subs.Event<AbductorLockBuiMsg>(OnVestLockBuiMsg);
+            subs.Event<AbductorBeaconChosenBuiMsg>(OnAbductorBeaconChosenBuiMsg);
         });
-        SubscribeLocalEvent<AbductorConsoleComponent, AbductorAttractDoAfterEvent>(OnDoAfterAttract);
+
+        InitializeActions();
+        InitializeConsole();
+        InitializeVictim();
     }
 
-    private void OnAbductGetProgress(Entity<AbductConditionComponent> ent, ref ObjectiveGetProgressEvent args)
-        => args.Progress = AbductProgress(ent.Comp, _number.GetTarget(ent.Owner));
-
-    private float AbductProgress(AbductConditionComponent comp, int target)
-        => target == 0 ? 1f : MathF.Min(comp.TotalAbducted / (float) target, 1f);
-
-    private void OnVestModeChangeBuiMsg(EntityUid uid, AbductorConsoleComponent component, AbductorVestModeChangeBuiMsg args)
-    {
-        if (component.Armor != null)
-            _itemSwitch.Switch(GetEntity(component.Armor.Value), args.Mode.ToString());
-    }
-
-    private void OnVestLockBuiMsg(Entity<AbductorConsoleComponent> ent, ref AbductorLockBuiMsg args)
-    {
-        if (ent.Comp.Armor != null && GetEntity(ent.Comp.Armor.Value) is {} armor)
-            if (!RemComp<UnremoveableComponent>(armor))
-                EnsureComp<UnremoveableComponent>(armor);
-    }
-
-    private void OnCompleteExperimentBuiMsg(EntityUid uid, AbductorConsoleComponent component, AbductorCompleteExperimentBuiMsg args)
-    {
-        if (GetEntity(component.Experimentator) is not {} experimentator ||
-            !TryComp<AbductorExperimentatorComponent>(experimentator, out var comp))
-            return;
-
-        var container = _container.GetContainer(experimentator, comp.ContainerId);
-        var victim = container.ContainedEntities.FirstOrDefault(HasComp<AbductorVictimComponent>);
-        if (victim != default && TryComp(victim, out AbductorVictimComponent? victimComp))
-        {
-            if (victimComp.Implanted
-                && TryComp<MindContainerComponent>(args.Actor, out var mindContainer)
-                && mindContainer.Mind.HasValue
-                && TryComp<MindComponent>(mindContainer.Mind.Value, out var mind)
-                && mind.Objectives.FirstOrDefault(HasComp<AbductConditionComponent>) is {} objId
-                && TryComp<AbductConditionComponent>(objId, out var condition))
-            {
-                condition.Abducted.Add(GetNetEntity(victim));
-            }
-            _audio.PlayPvs(ExperimentSound, experimentator);
-
-            if (victimComp.Position is {} pos)
-                _xform.SetCoordinates(victim, pos);
-        }
-    }
-
-    private void OnAttractBuiMsg(Entity<AbductorConsoleComponent> ent, ref AbductorAttractBuiMsg args)
+    private void OnAbductorBeaconChosenBuiMsg(Entity<AbductorHumanObservationConsoleComponent> ent, ref AbductorBeaconChosenBuiMsg args)
     {
         var user = args.Actor;
-        if (GetEntity(ent.Comp.Target) is not {} target || GetEntity(ent.Comp.AlienPod) is not {} telepad)
-            return;
+        OnCameraExit(user);
 
-        var coords = Transform(telepad).Coordinates;
-        var ev = new AbductorAttractDoAfterEvent(GetNetCoordinates(coords), GetNetEntity(target));
-        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(3), ev, eventTarget: ent)
+        var beacon = GetEntity(args.Target);
+        if (!HasComp<NavMapBeaconComponent>(beacon))
+            return; // malf client trying to teleport to arbitrary entities
+
+        var xform = Transform(beacon);
+        if (xform.MapID != Transform(ent).MapID)
         {
-            // you get the doafter but you basically cant fuck it up
-            BreakOnDamage = false,
-            BreakOnDropItem = false,
-            BreakOnHandChange = false,
-            BreakOnMove = false,
-            BreakOnWeightlessMove = false,
-        };
-        if (!_doAfter.TryStartDoAfter(doAfter))
-        {
-            Log.Error("Failed to start attract doafter for {ToPrettyString(target)} by {ToPrettyString(user)} with {ToPrettyString(ent)}!");
+            _popup.PopupEntity(Loc.GetString("abductor-console-ftl-to-station"), user, user);
             return;
         }
 
-        AddTeleportationEffect(target, TeleportationEffectEntityShort);
-        AddTeleportationEffect(telepad, TeleportationEffectShort);
+        var eye = SpawnAtPosition(ent.Comp.RemoteEntityProto, xform.Coordinates);
 
-        ent.Comp.Target = null;
-        Dirty(ent);
+        // TODO: holy shitcode just disable interaction??????
+        if (TryComp<HandsComponent>(user, out var hands))
+        {
+            foreach (var hand in _hands.EnumerateHands((user, hands)))
+            {
+                if (!_hands.TryGetHeldItem((user, hands), hand, out var held))
+                    continue;
+
+                if (HasComp<UnremoveableComponent>(held))
+                    continue;
+
+                _hands.DoDrop((user, hands), hand);
+            }
+
+            if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, user, out var virtItem1))
+                EnsureComp<UnremoveableComponent>(virtItem1.Value);
+
+            if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, user, out var virtItem2))
+                EnsureComp<UnremoveableComponent>(virtItem2.Value);
+        }
+
+        var visibility = EnsureComp<VisibilityComponent>(eye);
+
+        if (TryComp(user, out EyeComponent? eyeComp))
+        {
+            _eye.SetVisibilityMask(user, eyeComp.VisibilityMask | (int) VisibilityFlags.Abductor, eyeComp);
+            _eye.SetTarget(user, eye, eyeComp);
+            _eye.SetDrawFov(user, false);
+            _eye.SetRotation(user, Angle.Zero, eyeComp);
+            Dirty(user, eyeComp);
+            var overlay = EnsureComp<StationAiOverlayComponent>(user);
+            overlay.AllowCrossGrid = true;
+            Dirty(user, overlay);
+            var remote = EnsureComp<RemoteEyeSourceContainerComponent>(eye);
+            remote.Actor = user;
+            Dirty(eye, remote);
+        }
+
+        AddActions(user);
+
+        _mover.SetRelay(user, eye);
     }
 
-    private void OnDoAfterAttract(Entity<AbductorConsoleComponent> ent, ref AbductorAttractDoAfterEvent args)
+    private void OnCameraExit(EntityUid actor)
     {
-        if (args.Handled || args.Cancelled)
-            return;
+        if (!TryComp<RelayInputMoverComponent>(actor, out var comp) ||
+            !TryComp<AbductorScientistComponent>(actor, out var abductorComp))
+            return; // lol lmao
 
-        var victim = GetEntity(args.Victim);
-        StopPulls(victim);
-        _xform.SetCoordinates(victim, GetCoordinates(args.TargetCoordinates));
+        var relay = comp.RelayEntity;
+        RemComp(actor, comp);
+
+        if (abductorComp.Console is {} console)
+            _virtualItem.DeleteInHandsMatching(actor, console);
+
+        RemComp<StationAiOverlayComponent>(actor);
+        if (TryComp(actor, out EyeComponent? eyeComp))
+        {
+            _eye.SetVisibilityMask(actor, eyeComp.VisibilityMask ^ (int) VisibilityFlags.Abductor, eyeComp);
+            _eye.SetDrawFov(actor, true);
+            _eye.SetTarget(actor, null, eyeComp);
+        }
+        RemoveActions(actor);
+        QueueDel(relay);
     }
 
-    private void OnBeforeActivatableUIOpen(Entity<AbductorConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
-        => UpdateGui(ent.Comp.Target, ent);
-
-    protected override void UpdateGui(NetEntity? target, Entity<AbductorConsoleComponent> computer)
+    private void OnBeforeActivatableUIOpen(Entity<AbductorHumanObservationConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
-        string? targetName = null;
-        string? victimName = null;
-        if (target.HasValue && TryComp(GetEntity(target.Value), out MetaDataComponent? metadata))
-            targetName = metadata?.EntityName;
+        if (!TryComp<AbductorScientistComponent>(args.User, out var abductorComp))
+            return;
 
-        var armorLock = false;
-        var armorMode = AbductorArmorModeType.Stealth;
+        abductorComp.Console = ent.Owner;
+        var stations = _station.GetStations();
+        var result = new Dictionary<int, StationBeacons>();
 
-        if (GetEntity(computer.Comp.Armor) is {} armor)
+        foreach (var station in stations)
         {
-            if (HasComp<UnremoveableComponent>(armor))
-                armorLock = true;
-            if (TryComp<ItemSwitchComponent>(armor, out var switchVest) && Enum.TryParse<AbductorArmorModeType>(switchVest.State, ignoreCase: true, out var State))
-                armorMode = State;
+            if (_station.GetLargestGrid(station) is not { } grid)
+                return;
+
+            if (!TryComp<NavMapComponent>(grid, out var navMap))
+                return;
+
+            result.Add(station.Id, new StationBeacons
+            {
+                Name = Name(station),
+                StationId = station.Id,
+                Beacons = [.. navMap.Beacons.Values],
+            });
         }
 
-        var coords = Transform(computer).Coordinates;
-        if (computer.Comp.AlienPod == null)
-        {
-            // goidabrained device linking...
-            var alienpad = _lookup.GetEntitiesInRange<AbductorAlienPadComponent>(coords, 4, LookupFlags.Approximate | LookupFlags.Dynamic)
-                .FirstOrDefault().Owner;
-            if (alienpad != default)
-                computer.Comp.AlienPod = GetNetEntity(alienpad);
-        }
+        _ui.SetUiState(ent.Owner, AbductorCameraConsoleUIKey.Key, new AbductorCameraConsoleBuiState() { Stations = result });
+    }
 
-        if (computer.Comp.Experimentator == null)
-        {
-            var foundExp = _lookup.GetEntitiesInRange<AbductorExperimentatorComponent>(coords, 4, LookupFlags.Approximate | LookupFlags.Dynamic)
-                .FirstOrDefault().Owner;
-            if (foundExp != default)
-                computer.Comp.Experimentator = GetNetEntity(foundExp);
-        }
-
-        if (GetEntity(computer.Comp.Experimentator) is {} experimentator &&
-            TryComp<AbductorExperimentatorComponent>(experimentator, out var expComp))
-        {
-            var container = _container.GetContainer(experimentator, expComp.ContainerId);
-            var victim = container.ContainedEntities.FirstOrDefault(e => HasComp<AbductorVictimComponent>(e));
-            if (victim != default)
-                victimName = Name(victim);
-        }
-
-        _ui.SetUiState(computer.Owner, AbductorConsoleUIKey.Key, new AbductorConsoleBuiState()
-        {
-            Target = target,
-            TargetName = targetName,
-            VictimName = victimName,
-            AlienPadFound = computer.Comp.AlienPod != default,
-            ExperimentatorFound = computer.Comp.Experimentator != default,
-            ArmorFound = computer.Comp.Armor != default,
-            ArmorLocked = armorLock,
-            CurrentArmorMode = armorMode
-        });
+    private void OnActivatableUIOpenAttempt(Entity<AbductorHumanObservationConsoleComponent> ent, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (!HasComp<AbductorScientistComponent>(args.User))
+            args.Cancel();
     }
 }
