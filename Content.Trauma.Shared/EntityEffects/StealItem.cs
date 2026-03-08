@@ -35,7 +35,7 @@ public sealed class StealItemSystem : EntityEffectSystem<HandsComponent, StealIt
             return;
 
         var prob = 0.5f * args.Scale;
-        if (SharedRandomExtensions.PredictedProb(_timing, prob, GetNetEntity(user))
+        if (SharedRandomExtensions.PredictedProb(_timing, prob, GetNetEntity(user)))
             return;
 
         if (!HasComp<HandsComponent>(user))
