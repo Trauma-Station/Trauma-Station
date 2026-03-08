@@ -1,0 +1,4 @@
+- files: ["ambimaint.ogg, ambimaint6.ogg, ambimaint7.ogg, ambimaint8.ogg, ambimaint9.ogg, ambimaint10.ogg, ambimaint11.ogg, ambimaint12.ogg, source_corridor2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from /tg/station"
+  source: "https://github.com/tgstation/tgstation/tree/731d72a58cd8089d070730ce4daf24357f609c30/sound/ambience/maintenance"

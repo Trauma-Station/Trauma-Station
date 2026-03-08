@@ -149,6 +149,12 @@
     - /Audio/Ambience/ambiholy.ogg
     - /Audio/Ambience/ambiholy2.ogg
     - /Audio/Ambience/ambiholy3.ogg
+    # <Trauma>
+    - /Audio/_Trauma/Ambience/AreaAmbience/chapel/ambiholy1.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/chapel/ambiholy2.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/chapel/ambiholy3.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/chapel/ambiholy4.ogg
+    # </Trauma>
 
 - type: soundCollection
   id: AmbienceMaintenance
@@ -165,11 +171,35 @@
     - /Audio/Voice/Misc/lowHiss4.ogg
     - /Audio/Ambience/maintambience.ogg
     - /Audio/_Goobstation/Ambience/ambihullcreak.ogg # Goobstation
+    # <Trauma>
+    - /Audio/_Trauma/Ambience/AreaAmbience/maintenance/ambimaint.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/maintenance/ambimaint6.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/maintenance/ambimaint7.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/maintenance/ambimaint8.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/maintenance/ambimaint9.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/maintenance/ambimaint10.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/maintenance/ambimaint11.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/maintenance/ambimaint12.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/maintenance/source_corridor2.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/void/Void_Calls.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/void/Void_Hisses.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/void/Void_Screaming.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/void/Void_Song.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/void/Void_Wail.ogg
+    # </Trauma>
 
 - type: soundCollection
   id: AmbienceMedical
   files:
     - /Audio/Ambience/ambinice.ogg
+    # <Trauma>
+    - /Audio/_Trauma/Ambience/AreaAmbience/medical/ambimo1.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/medical/ambimo2.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/medical/ambinice.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/medical/ambiviro.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/medical/ambiviro1.ogg
+    - /Audio/_Trauma/Ambience/AreaAmbience/medical/ambiviro2.ogg
+    # </Trauma>
 
 - type: soundCollection
   id: AmbienceMining
@@ -219,6 +249,9 @@
     - /Audio/Ambience/spookyspace2.ogg
     - /Audio/Ambience/ambispace2.ogg
     - /Audio/Lobby/title2.ogg
+    # <Trauma>
+    - /Audio/_Trauma/Ambience/AreaAmbience/space/aurora_caelus.ogg
+    # </Trauma>
 
 - type: soundCollection
   id: AmbienceSpooky
