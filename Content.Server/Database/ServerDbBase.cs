@@ -251,7 +251,7 @@ namespace Content.Server.Database
             profile.FacialHairName = facialHairMarking?.MarkingId ?? HairStyles.DefaultFacialHairStyle;
             // <Trauma> - don't assume MarkingColors isn't empty, use ElementAtOrDefault
             profile.HairColor = (hairMarking?.MarkingColors.ElementAtOrDefault(0) ?? Color.Black).ToHex();
-            profile.FacialHairColor = (facialHairMarking?.ElementAtOrDefault(0) ?? Color.Black).ToHex();
+            profile.FacialHairColor = (facialHairMarking?.MarkingColors.ElementAtOrDefault(0) ?? Color.Black).ToHex();
             // </Trauma>
 
             profile.Slot = slot;
