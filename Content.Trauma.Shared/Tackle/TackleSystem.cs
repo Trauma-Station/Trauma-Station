@@ -272,8 +272,6 @@ public sealed partial class TackleSystem : EntitySystem
         Entity<TacklerComponent, TacklingComponent> dirty = (ent, ent.Comp1, tackle);
         Dirty(dirty);
 
-        Dirty(ent, ent.Comp1);
-
         _throwing.TryThrow(ent,
             dir,
             ev.Speed,
