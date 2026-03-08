@@ -145,13 +145,6 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
             break;
         }
 
-        if (padFound == default)
-        {
-            _popup.PopupEntity(Loc.GetString("abductor-send-agent-no-pad"), user, user);
-            ev.Handled = true;
-            return;
-        }
-
         if (!TryComp<StrapComponent>(padFound, out var strap) || strap.BuckledEntities.Count == 0)
         {
             _popup.PopupEntity(Loc.GetString("abductor-send-agent-not-buckled"), user, user);
