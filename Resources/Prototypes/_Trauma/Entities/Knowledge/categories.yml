@@ -13,7 +13,7 @@
   components:
   - type: Knowledge
     category: Physical
-    costs: [4, 6, 10, 16, 999, 999]
+    costs: [4, 6, 10, 16] # can't be expert or master as some random chud
 
 - type: entity
   id: BaseWarKnowledge
@@ -22,7 +22,7 @@
   components:
   - type: Knowledge
     category: War
-    costs: [4, 6, 10, 16, 999, 999]
+    costs: [4, 6, 10, 16]
 
 - type: entity
   parent: BaseKnowledge
@@ -33,7 +33,7 @@
     category: Construction
     color: "#0ba881"
     experienceCost: 20
-    costs: [2, 4, 8, 16, 32, 999]
+    costs: [2, 4, 8, 16, 32] # can't be master as some random chud
 
 - type: entity
   id: BaseIntellectualKnowledge
@@ -87,7 +87,7 @@
     category: MartialArt
     experienceCost: 10
     color: "#c70000"
-    costs: [36, 999, 999, 999, 999, 999] # Being able to learn any of these roundstart needs an insane cost
+    costs: [50] # Being able to learn any of these roundstart needs an insane cost
   - type: MartialArtsKnowledge
     blocked: false
     icon: Objects/Misc/skub.rsi

@@ -7,10 +7,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    SurvivalKnowledge: 2
-    WeaponsKnowledge: 2
-    HandmadeKnowledge: 2
-    TechnologyKnowledge: 2
+    WeaponsKnowledge: 0
+  practical:
+    HandmadeKnowledge: 1
+    WeaponsKnowledge: 1
   # </Trauma>
 
 - type: construction

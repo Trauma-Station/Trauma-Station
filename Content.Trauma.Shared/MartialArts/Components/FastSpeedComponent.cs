@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Shared.Knowledge;
 using Robust.Shared.GameStates;
 
-namespace Content.Trauma.Common.MartialArts;
+namespace Content.Trauma.Shared.MartialArts.Components;
 
 /// <summary>
 /// Capeoria specific component for doing speed stuff.
@@ -11,10 +12,17 @@ namespace Content.Trauma.Common.MartialArts;
 public sealed partial class FastSpeedComponent : Component
 {
     /// <summary>
-    /// Speed increase and whatnot. 1.0 is normal speed, 2.0 is double speed, etc. You can do something really funny and make it really slow arts.
+    /// Curve to multiply move speed with respect to level.
+    /// Momentum also increases it afterwards.
     /// </summary>
     [DataField(required: true)]
-    public float SpeedModifier = 1.0f;
+    public SkillCurve MoveCurve = default!;
+
+    /// <summary>
+    /// Curve to multiply when scaling melee damage with momentum.
+    /// </summary>
+    [DataField(required: true)]
+    public SkillCurve DamageScaleCurve = default!;
 
     /// <summary>
     /// Makes it so that when you scale when you have less speed, and hit weaker when you have more.

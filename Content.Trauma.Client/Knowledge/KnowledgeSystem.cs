@@ -5,6 +5,7 @@ using Content.Client.Lobby;
 using Content.Client.Lobby.UI;
 using Content.Client.UserInterface.Systems.Character.Windows;
 using Content.Trauma.Client.Knowledge.UI;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
@@ -20,9 +21,10 @@ namespace Content.Trauma.Client.Knowledge;
 
 public sealed class KnowledgeSystem : SharedKnowledgeSystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-
     private WeakReference<CharacterWindow>? _activeWindow;
+    private bool _showPopups;
+    private TimeSpan _nextPopup;
+    private TimeSpan _popupCooldown = TimeSpan.FromSeconds(3);
 
     public override void Initialize()
     {
@@ -30,6 +32,8 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
 
         SubscribeLocalEvent<KnowledgeHolderComponent, GetPerformedAttackTypesEvent>(OnGetAttackTypes);
         SubscribeLocalEvent<KnowledgeHolderComponent, UpdateExperienceEvent>(OnUpdateExperienceEvent);
+        Subs.CVar(_cfg, TraumaCVars.SkillPopups, x => _showPopups = x, true);
+        SubscribeAllEvent<SkillPopupEvent>(OnSkillPopup);
 
         CharacterWindow.OnOpened += EnsureKnowledgeTab;
         LobbyUIController.OnProfileEditorCreated += AddProfileEditorTab;
@@ -143,6 +147,19 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             return;
 
         EnsureKnowledgeTab(window);
+    }
+
+    private void OnSkillPopup(SkillPopupEvent args)
+    {
+        if (!_showPopups)
+            return;
+
+        var now = _timing.CurTime;
+        if (now < _nextPopup)
+            return;
+
+        _nextPopup = now + _popupCooldown;
+        _popup.PopupClient(args.Popup, _player.LocalEntity);
     }
 
     public EntProtoId? GetEntProtoId(Entity<MartialArtsKnowledgeComponent>? martialArt)

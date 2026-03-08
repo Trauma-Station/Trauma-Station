@@ -16,36 +16,8 @@
   components:
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: BookStrength
-        - id: BookAthletics
-        - id: BookToughness
-        - id: BookMelee
-        - id: BookShooting
-        - id: BookSurgery
-        - id: BookFirstaid
-        - id: BookMagicalLiteracy
-        - id: BookLiteracy
-        - id: BookJanitor
-        - id: BookTechnology
-        - id: BookLanguageTauCeti
-        - id: BookHandmade
-        - id: BookSurvival
-        - id: BookWeapons
-        - id: BookMaterials
-        - id: BookDoors
-        - id: BookAirlocks
-        - id: BookToys
-        - id: BookBananium
-        - id: BookBots
-        - id: BookFurniture
-        - id: BookInfrastructure
-        - id: BookElectronics
-        - id: BookWalls
-        - id: BookScience
-        - id: BookWindows
-        - id: BookSmokeables
+      entity_storage: !type:NestedSelector
+        tableId: RandomSkillbook
 
 - type: entityTable
   id: RandomSkillbook
@@ -91,12 +63,15 @@
     - state: icon
   - type: StaticPrice
     price: 20
+  - type: KnowledgeGrantOnUse
+    singleUse: false # crew books are for sharing
   - type: Tag
     tags:
     - Book
   - type: Item
     size: Small
 
+# TODO: These should just give you an xp gain buff rather than make you stronge bruh
 - type: entity
   parent: BookSkillbook
   id: BookStrength

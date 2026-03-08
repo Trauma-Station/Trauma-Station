@@ -7,6 +7,7 @@ using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Projectiles;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Stacks;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
@@ -18,6 +19,7 @@ using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Common.Stack;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Quality;
 
@@ -26,6 +28,7 @@ namespace Content.Trauma.Shared.Knowledge.Quality;
 /// </summary>
 public sealed class QualitySystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
@@ -149,7 +152,7 @@ public sealed class QualitySystem : EntitySystem
         var comp = EnsureComp<QualityComponent>(args.NewId);
         comp.LevelDeltas = ent.Comp.LevelDeltas;
         comp.Quality = ent.Comp.Quality;
-        comp.NumberOfMasteries = ent.Comp.NumberOfMasteries;
+        comp.QualityModifiers = ent.Comp.QualityModifiers;
         Dirty(args.NewId, comp);
         ApplyQuality((args.NewId, comp));
     }
@@ -163,7 +166,7 @@ public sealed class QualitySystem : EntitySystem
         }
 
         if (other.Quality != ent.Comp.Quality ||
-            other.NumberOfMasteries != ent.Comp.NumberOfMasteries ||
+            other.QualityModifiers != ent.Comp.QualityModifiers ||
             !LevelDeltasMatch(other.LevelDeltas, ent.Comp.LevelDeltas))
         {
             args.Cancelled = true;
@@ -178,17 +181,14 @@ public sealed class QualitySystem : EntitySystem
     {
         if (EnsureComp<QualityComponent>(created, out var newComp))
         {
-            var quality = newComp.Quality * original.Comp.NumberOfMasteries;
-            quality += original.Comp.Quality;
-            newComp.NumberOfMasteries = original.Comp.NumberOfMasteries + 1;
-            newComp.Quality = quality / newComp.NumberOfMasteries;
+            newComp.QualityModifiers += original.Comp.Quality * 5;
             Dirty(created, newComp);
             return;
         }
 
         newComp.LevelDeltas = original.Comp.LevelDeltas;
         newComp.Quality = original.Comp.Quality;
-        newComp.NumberOfMasteries = original.Comp.NumberOfMasteries;
+        newComp.QualityModifiers = original.Comp.QualityModifiers;
         Dirty(created, newComp);
 
         ApplyQuality((created, newComp));
@@ -208,40 +208,60 @@ public sealed class QualitySystem : EntitySystem
     // technically its not actually rolling but whatever
     public void RollQuality(Entity<QualityComponent> ent, EntityUid user)
     {
-        if (_knowledge.GetContainer(user) is not {} brain)
+        if (_knowledge.GetContainer(user) is not { } brain)
         {
             ApplyQuality(ent);
             return;
         }
 
-        int ownMasteries = 0;
-        int itemMasteries = 0;
+        int? lowestDelta = null;
+        EntProtoId? lowestId = null;
         var knowledge = brain.Comp.KnowledgeDict;
         foreach (var (id, delta) in ent.Comp.LevelDeltas)
         {
-            var mastery = _knowledge.GetMastery(knowledge.GetValueOrDefault(id));
-            ownMasteries += mastery;
-            itemMasteries += delta;
-            var ev = new AddExperienceEvent(id, 6 - mastery);
-            RaiseLocalEvent(user, ref ev);
+            if (lowestDelta is not { } || (_knowledge.GetKnowledge(brain, id) is { } skill && _knowledge.GetMastery(skill.Comp) - delta < lowestDelta))
+            {
+                lowestDelta = delta;
+                lowestId = id;
+            }
         }
 
         int added = 0;
         if (_knowledge.GetKnowledge(brain, CraftingKnowledge) is { } crafting)
-            added = _knowledge.GetMastery(crafting.Comp) - 2;
+            added = crafting.Comp.Level + crafting.Comp.TemporaryLevel;
         else
-            added = -3;
-        added += (ownMasteries - itemMasteries) / ent.Comp.LevelDeltas.Count;
+            added = -1;
 
-        var evCrafting = new AddExperienceEvent(CraftingKnowledge, itemMasteries);
+        var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
+
+
+        ent.Comp.Quality = (added + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
+        {
+            >= 88 => 5,
+            >= 44 => 4,
+            >= 20 => 3,
+            >= 10 => 2,
+            >= 5 => 1,
+            >= 0 => 0,
+            >= -5 => -1,
+            >= -10 => -2,
+            >= -20 => -3,
+            >= -44 => -4,
+            _ => -5,
+        };
+        Dirty(ent);
+        ApplyQuality(ent);
+
+        // TODO: limit skill gain based on the recipe used
+        var evCrafting = new AddExperienceEvent(CraftingKnowledge, Math.Abs(ent.Comp.Quality / 2), 20);
         RaiseLocalEvent(user, ref evCrafting);
 
-        var qualityToAdd = ent.Comp.Quality * ent.Comp.NumberOfMasteries + added;
-        ent.Comp.NumberOfMasteries++;
-        ent.Comp.Quality = Math.Clamp(qualityToAdd / ent.Comp.NumberOfMasteries, -5, 5); // Make sure numbers don't go too crazy.
-        Dirty(ent);
+        if (lowestId is not { } actualId)
+            return;
 
-        ApplyQuality(ent);
+        // TODO: above
+        var ev = new AddExperienceEvent(actualId, Math.Abs(ent.Comp.Quality / 2), 20);
+        RaiseLocalEvent(user, ref ev);
     }
 
     private bool LevelDeltasMatch(Dictionary<EntProtoId, int> a, Dictionary<EntProtoId, int> b)

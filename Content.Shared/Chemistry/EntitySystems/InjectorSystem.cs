@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Chemistry;
+using Content.Trauma.Common.Chemistry;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -313,6 +314,12 @@ public sealed partial class InjectorSystem : EntitySystem
         else if (_standingState.IsDown(target))
             doAfterTime *= activeMode.DownedModifier;
 
+        // <Trauma>
+        var ev = new UserModifyInjectTimeEvent(user, injector, doAfterTime);
+        RaiseLocalEvent(user, ref ev);
+        doAfterTime = ev.Delay;
+        // </Trauma>
+
         return true;
     }
     #endregion Mob Interaction
@@ -460,13 +467,6 @@ public sealed partial class InjectorSystem : EntitySystem
     /// <returns>True if the injection was successful, false if not.</returns>
     private bool TryInject(Entity<InjectorComponent> injector, EntityUid user, EntityUid target, Entity<SolutionComponent> targetSolution, bool asRefill)
     {
-        // <Trauma>
-        if (TryGetKnowledgeFirstAidFail(user, target))
-        {
-            return false;
-        }
-        // </Trauma>
-
         if (GetSolutionEnt(injector) is not {} solutionEnt || // Trauma - use GetSolutionEnt
             solutionEnt.Comp.Solution.Volume == 0) // Trauma - use solutionEnt above
         {
@@ -597,13 +597,6 @@ public sealed partial class InjectorSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("injector-component-cannot-toggle-draw-message"), user, user); // Trauma - added Loc.GetString
             return false;
         }
-
-        // <Trauma>
-        if (TryGetKnowledgeFirstAidFail(user, target))
-        {
-            return false;
-        }
-        // </Trauma>
 
         var solution = solutionEnt.Comp.Solution; // Trauma
         var applicableTargetSolution = targetSolution.Comp.Solution;

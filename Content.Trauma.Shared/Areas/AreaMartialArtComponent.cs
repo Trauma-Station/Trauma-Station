@@ -6,15 +6,14 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Shared.Areas;
 
 /// <summary>
-/// For <c>Blocked</c> martial arts, allows it to be used in this area.
-/// Aka chefs can use CQC in the kitchen.
+/// Prevents using this martial art unless you are in a whitelisted area.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(MartialArtAreaSystem))]
-public sealed partial class MartialArtAreaComponent : Component
+public sealed partial class AreaMartialArtComponent : Component
 {
     /// <summary>
-    /// The martial art form allowed by this area.
+    /// Areas which allow this art to be used.
     /// </summary>
     [DataField(required: true)]
-    public EntProtoId Form = default!;
+    public HashSet<EntProtoId> Areas = new();
 }

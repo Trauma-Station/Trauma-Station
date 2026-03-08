@@ -49,7 +49,6 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RotaryPhoneComponent, PhoneRingEvent>(OnRing);
-        SubscribeLocalEvent<RotaryPhoneComponent, PhoneHungUpEvent>(OnGotHungUp);
         SubscribeLocalEvent<RotaryPhoneComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RotaryPhoneComponent, BoundUIClosedEvent>(OnUiClosed);
         SubscribeLocalEvent<RotaryPhoneComponent, EntGotRemovedFromContainerMessage>(OnPickup);
@@ -245,14 +244,6 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
         DisconnectPhones(ent.Comp);
         Dirty(ent);
     }
-    private void OnGotHungUp(Entity<RotaryPhoneComponent> ent, ref PhoneHungUpEvent args)
-    {
-        ent.Comp.SoundEntity = _audio.PlayPredicted(ent.Comp.HandUpSoundLocal, ent.Owner, ent.Owner, AudioParams.Default.WithMaxDistance(2.5f))?.Entity;
-
-        ent.Comp.ConnectedPhone = null;
-        ent.Comp.Connected = false;
-        Dirty(ent);
-    }
 
     #region Helpers
 
@@ -292,7 +283,7 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
         thisPhone.Connected = false;
     }
 
-    private void UpdateAppearance(Entity<RotaryPhoneComponent?> phone, RotaryPhoneVisuals visual)
+    protected void UpdateAppearance(Entity<RotaryPhoneComponent?> phone, RotaryPhoneVisuals visual)
     {
         _appearance.SetData(phone, RotaryPhoneLayers.Layer, visual);
     }

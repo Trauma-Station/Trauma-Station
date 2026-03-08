@@ -25,6 +25,7 @@
     - TauCetiBasic
   - type: BloodSplatterer
   - type: CanEscapeInventory
+  - type: CanBeShadowCocoon
   - type: Consciousness
     cap: 190
     threshold: 95

@@ -2,7 +2,6 @@
 
 using Content.Shared.Body;
 using Content.Shared.Clothing;
-using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Components;
 
@@ -61,7 +60,8 @@ public abstract partial class SharedKnowledgeSystem
         {
             if (GetKnowledge(ent, id) is {} unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
             {
-                martial.TemporaryBlockedCounter += 1;
+                martial.TemporaryBlockedCounter++;
+                martial.Blocked = true;
                 Dirty(unit, martial);
             }
         }
@@ -106,7 +106,7 @@ public abstract partial class SharedKnowledgeSystem
         {
             if (GetKnowledge(ent, id) is {} unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
             {
-                martial.TemporaryBlockedCounter -= 1;
+                martial.Blocked = --martial.TemporaryBlockedCounter == 0;
                 Dirty(unit, martial);
             }
         }

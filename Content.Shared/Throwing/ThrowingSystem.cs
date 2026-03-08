@@ -207,7 +207,7 @@ public sealed partial class ThrowingSystem : EntitySystem
 
         // <Trauma>
         if (user != null)
-            baseThrowSpeed = SkillModifySpeed(user.Value, baseThrowSpeed);
+            baseThrowSpeed = SkillModifySpeed(uid, user.Value, baseThrowSpeed, direction.Length());
         // </Trauma>
 
         // Set the time the item is supposed to be in the air so we can apply OnGround status.

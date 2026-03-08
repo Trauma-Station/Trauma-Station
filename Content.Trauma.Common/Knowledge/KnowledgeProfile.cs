@@ -14,7 +14,7 @@ namespace Content.Trauma.Common.Knowledge;
 public partial record struct KnowledgeProfile
 {
     /// <summary>
-    /// Each skill and the mastery level from [0, 5]
+    /// Each skill and the mastery level from [0, Costs.Length] (usually 5)
     /// </summary>
     public Dictionary<EntProtoId, int> Mastery;
     /// <summary>
