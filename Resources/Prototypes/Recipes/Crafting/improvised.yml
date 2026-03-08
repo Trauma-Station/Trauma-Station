@@ -91,7 +91,7 @@
   theory:
     HandmadeKnowledge: 0 # its not rocket science
     FirstAidKnowledge: 0
-  theory:
+  practical:
     HandmadeKnowledge: 2
     FirstAidKnowledge: 1
   # </Trauma>
