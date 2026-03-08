@@ -77,7 +77,7 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
             return; // only care about errors
 
         var name = LogMessage.LogLevelToName(message.Level.ToRobust());
-        var content = "[{name}] {sawmillName}: {message.RenderMessage()}";
+        var content = $"[{name}] {sawmillName}: {message.RenderMessage()}";
         if (message.Exception is {} e)
             content += $"\n{e}";
 
