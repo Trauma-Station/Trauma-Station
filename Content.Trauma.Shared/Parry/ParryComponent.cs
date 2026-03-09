@@ -23,35 +23,35 @@ public sealed partial class ParryComponent : Component
     /// <summary>
     /// The amount of shots that can be reflected in a quick succession, at 100 skill.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int MaxReflects = 10;
 
     /// <summary>
     /// The amount of shots that can be reflected in a quick succession, at 100 skill.
     /// Should generally be lower than reflects, because most melee weapons are far slower than most guns.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int MaxParries = 5;
 
     /// <summary>
     /// The minimum required level of skill to be able to reflect anything at all.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int ReflectMinSkill = 50;
 
     /// <summary>
     /// The minimum required level of skill to be able to parry anything at all.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int ParryMinSkill = 30;
 
     /// <summary>
     /// The skill required to parry with this weapon.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntProtoId RequiredSkill = "MeleeKnowledge";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Angle ReflectSpread = Angle.FromDegrees(140);
 
     [DataField]

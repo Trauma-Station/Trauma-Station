@@ -41,6 +41,9 @@ public sealed class ParrySystem : EntitySystem
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
+    private EntityQuery<ReflectiveComponent> _reflectiveQuery;
+    private EntityQuery<PhysicsComponent> _physicsQuery;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -50,6 +53,9 @@ public sealed class ParrySystem : EntitySystem
         SubscribeLocalEvent<ParryComponent, HeldRelayedEvent<ParryAttemptEvent>>(OnParry);
 
         SubscribeLocalEvent<ParryComponent, ExaminedEvent>(OnExamine);
+
+        _reflectiveQuery = GetEntityQuery<ReflectiveComponent>();
+        _physicsQuery = GetEntityQuery<PhysicsComponent>();
     }
 
     public override void Update(float frameTime)
@@ -59,7 +65,9 @@ public sealed class ParrySystem : EntitySystem
         var query = EntityQueryEnumerator<ParryExhaustionComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (_timing.CurTime < comp.ExhaustionRegenTimer) continue;
+            if (_timing.CurTime < comp.ExhaustionRegenTimer)
+                continue;
+
             comp.Exhaustion -= comp.ExhaustionRegenRate * frameTime;
             if (comp.Exhaustion <= 0) RemCompDeferred<ParryExhaustionComponent>(uid);
         }
@@ -95,10 +103,10 @@ public sealed class ParrySystem : EntitySystem
 
     public bool TryReflectProjectile(Entity<ParryComponent> reflector, EntityUid user, Entity<ProjectileComponent?> projectile)
     {
-        if (!TryComp<ReflectiveComponent>(projectile, out var reflective)
-        || !TryComp<PhysicsComponent>(projectile, out var physics)
-        || (reflector.Comp.Reflects & reflective.Reflective) == 0x0
-        || !_toggle.IsActivated(reflector.Owner)
+        if (!_reflectiveQuery.TryComp(projectile, out var reflective)
+        || !_physicsQuery.TryComp(projectile, out var physics)
+        || (reflector.Comp.Reflects & reflective.Reflective) == 0x0 // Check if the reflective types match
+        || !_toggle.IsActivated(reflector.Owner) // If the item can be toggled (e.g. esword) check if it's on
         || !CheckKnowledge(user, reflector.Comp.RequiredSkill, reflector.Comp.ReflectMinSkill)
         || !CheckAndUpdateExhaustion(user, reflector))
             return false;
@@ -149,8 +157,8 @@ public sealed class ParrySystem : EntitySystem
         ReflectType hitscanReflectType,
         [NotNullWhen(true)] out Vector2? newDirection)
     {
-        if ((reflector.Comp.Reflects & hitscanReflectType) == 0x0
-        || !_toggle.IsActivated(reflector.Owner)
+        if ((reflector.Comp.Reflects & hitscanReflectType) == 0x0 // Check if the reflective types match
+        || !_toggle.IsActivated(reflector.Owner) // If the item can be toggled (e.g. esword) check if it's on
         || !CheckKnowledge(user, reflector.Comp.RequiredSkill, reflector.Comp.ReflectMinSkill)
         || !CheckAndUpdateExhaustion(user, reflector))
         {
@@ -189,6 +197,9 @@ public sealed class ParrySystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Check if the entity has sufficient knowledge to parry/reflect
+    /// </summary>
     private bool CheckKnowledge(EntityUid user, EntProtoId knowledge, int minLevel)
     {
         return _proto.Resolve(knowledge, out var skillProto)
@@ -197,25 +208,27 @@ public sealed class ParrySystem : EntitySystem
         && skill.Comp.Level >= minLevel;
     }
 
+    /// <summary>
+    /// Check if the entity is too exhausted to parry/reflect and add an appropriate amount of exhaustion
+    /// </summary>
     private bool CheckAndUpdateExhaustion(EntityUid user, Entity<ParryComponent> item, bool useParryValues = false)
     {
         var exhComp = EnsureComp<ParryExhaustionComponent>(user);
-        exhComp.ExhaustionRegenTimer = _timing.CurTime + exhComp.ExhaustionRegenDelay;
 
-        if (exhComp.Exhaustion >= 1f)
-            return false; // Too exhausted go fuck yourself
         if (!_proto.Resolve(item.Comp.RequiredSkill, out var skillProto)
         || _knowledge.GetContainer(user) is not { } brain
         || _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
             return false; // Shouldn't ever happen because we check this right after checking knowledge
 
+        var result = exhComp.Exhaustion >= 1f;
         var level = Math.Max(skill.Comp.Level, 1); // Evil division by 0
         var exhGain = useParryValues ?
             1f / item.Comp.MaxParries * (100f / level) :
             1f / item.Comp.MaxReflects * (100f / level);
         exhComp.Exhaustion = Math.Min(exhComp.Exhaustion + exhGain, 1f);
+        exhComp.ExhaustionRegenTimer = _timing.CurTime + exhComp.ExhaustionRegenDelay;
         Dirty(user, exhComp);
-        return true;
+        return result;
     }
 
     private void OnExamine(Entity<ParryComponent> ent, ref ExaminedEvent args)

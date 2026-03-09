@@ -639,9 +639,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // <Trauma>
         if (component.CanParryLight)
         {
-            var parryEvent = new ParryAttemptEvent(meleeUid, user, target.Value);
-            RaiseLocalEvent(target.Value, ref parryEvent);
-            if (parryEvent.Parried) return;
+            var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, target.Value);
+            RaiseLocalEvent(target.Value, ref parryAttemptEv);
+            if (parryAttemptEv.Parried)
+                return;
         }
         // </Trauma>
 
@@ -826,9 +827,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             // <Trauma>
             if (component.CanParryWide)
             {
-                var parryEvent = new ParryAttemptEvent(meleeUid, user, entity);
-                RaiseLocalEvent(entity, ref parryEvent);
-                if (parryEvent.Parried) continue;
+                var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, entity);
+                RaiseLocalEvent(entity, ref parryAttemptEv);
+                if (parryAttemptEv.Parried)
+                    continue;
             }
             // </Trauma>
 
