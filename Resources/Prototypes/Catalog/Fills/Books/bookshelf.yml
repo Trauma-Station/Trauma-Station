@@ -36,7 +36,7 @@
     - !type:NestedSelector
       rolls: !type:RangeNumberSelector
         range: 0, 1
-      tableId: RandomSkillbook
+      tableId: RandomEmptyScroll
 
 - type: entityTable
   id: RandomHandwrittenBookTable

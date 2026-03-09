@@ -1,4 +1,4 @@
-RandomSkillbook- type: entityTable
+- type: entityTable
   id: RandomEmptyScroll
   table: !type:GroupSelector
     children:
