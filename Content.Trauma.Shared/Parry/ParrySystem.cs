@@ -22,6 +22,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Parry;
@@ -40,6 +41,7 @@ public sealed class ParrySystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     private EntityQuery<ReflectiveComponent> _reflectiveQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -129,8 +131,11 @@ public sealed class ParrySystem : EntitySystem
 
         RemCompDeferred<HomingProjectileComponent>(projectile);
 
-        _popup.PopupPredicted(Loc.GetString("reflect-shot"), user, null);
-        _audio.PlayPredicted(reflector.Comp.SoundOnReflect, user, null);
+        if (_timing.IsFirstTimePredicted)
+        {
+            _popup.PopupClient(Loc.GetString("reflect-shot"), user, _player.LocalEntity);
+            _audio.PlayLocal(reflector.Comp.SoundOnReflect, user, _player.LocalEntity);
+        }
 
         if (Resolve(projectile, ref projectile.Comp, false))
         {
@@ -166,8 +171,11 @@ public sealed class ParrySystem : EntitySystem
             return false;
         }
 
-        _popup.PopupPredicted(Loc.GetString("reflect-shot"), user, null);
-        _audio.PlayPredicted(reflector.Comp.SoundOnReflect, user, null);
+        if (_timing.IsFirstTimePredicted)
+        {
+            _popup.PopupClient(Loc.GetString("reflect-shot"), user, _player.LocalEntity);
+            _audio.PlayLocal(reflector.Comp.SoundOnReflect, user, _player.LocalEntity);
+        }
 
         var angle = reflector.Comp.ReflectSpread;
         var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(reflector));
@@ -189,8 +197,11 @@ public sealed class ParrySystem : EntitySystem
         || !CheckAndUpdateExhaustion(user, reflector, useParryValues: true))
             return false;
 
-        _popup.PopupPredicted(Loc.GetString("reflect-shot"), user, null); // Same popup who cares anyway
-        _audio.PlayPredicted(reflector.Comp.SoundOnParry, user, null);
+        if (_timing.IsFirstTimePredicted)
+        {
+            _popup.PopupClient(Loc.GetString("reflect-shot"), user, _player.LocalEntity); // Same popup who cares anyway
+            _audio.PlayLocal(reflector.Comp.SoundOnParry, user, _player.LocalEntity);
+        }
 
         _adminLogger.Add(LogType.MeleeHit, LogImpact.Medium, $"{ToPrettyString(user)} parried a melee strike from {ToPrettyString(attacker)}");
 
