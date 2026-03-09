@@ -639,14 +639,6 @@
 
 - type: entity
   parent: BaseScrollFull
-  id: ScrollFullPHASESTEP
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Paper
-    content: scroll-text-PHASESTEP
-
-- type: entity
-  parent: BaseScrollFull
   id: ScrollFullBEARTRAP
   categories: [ HideSpawnMenu ]
   components:

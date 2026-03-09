@@ -76,7 +76,6 @@
     - id: ScrollFullDAGD
     - id: ScrollFull
     - id: ScrollFullSILENCE
-    - id: ScrollFullPHASESTEP
     - id: ScrollFullJAUNT
     - id: ScrollFullPHASESTEP
     - id: ScrollFullBEARTRAP
