@@ -3,6 +3,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Overlays;
 using Content.Trauma.Common.Parry;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Trauma.Shared.Hands;
 
