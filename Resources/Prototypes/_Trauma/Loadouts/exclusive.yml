@@ -144,6 +144,6 @@
 #  effects:
 #  - !type:GroupLoadoutEffect
 #    proto: GamingFungus420
-  storage:
-    back:
-    - PatreonGamingFungus420
+#  storage:
+#    back:
+#    - PatreonGamingFungus420
