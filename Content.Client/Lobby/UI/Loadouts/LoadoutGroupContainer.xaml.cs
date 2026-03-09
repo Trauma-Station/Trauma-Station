@@ -104,14 +104,14 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
                  * - Collect all UI elements into a list for further processing.
                  */
                 // <Trauma> - delinq, check that CreateLoadoutUi isnt null
-                var uiElements = new List<Control>(protos.Count);
+                var uiElements = new List<LoadoutContainer>(protos.Count);
                 foreach (var proto in protos)
                 {
                     if (CreateLoadoutUI(proto, profile, loadout, session, collection, loadoutSystem) is not {} elem)
                         continue;
 
                     elem.HorizontalExpand = true;
-                    return elem;
+                    uiElements.Add(elem);
                 }
                 // </Trauma>
 
