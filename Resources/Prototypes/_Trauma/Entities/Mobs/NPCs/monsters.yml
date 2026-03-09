@@ -76,35 +76,35 @@
       reagents:
       - ReagentId: AdvancedMutationToxin
         Quantity: 300
-    - type: VentCrawler
-    - type: Prying
-      speedModifier: 15
-      pryPowered: true
-      useSound: /Audio/Machines/airlock_creaking.ogg
-    - type: LanguageSpeaker
-      speaks:
-      - TauCetiBasic
-      understands:
-      - TauCetiBasic
-    - type: ThermalVision
-    - type: Stamina
-      baseCritThreshold: 120
-    - type: FlashImmunity
-    - type: Puller
-      needsHands: false
-    - type: GhostRole
-      name: ghost-role-ratma-name
-      description: ghost-role-ratma-desc
-      rules: ghost-role-information-antagonist-rules
-      raffle:
-        settings: default
-    - type: JumpAbility
-      action: ActionRatmaJump
-      jumpDistance: 0.5
-      jumpSound:
-        path: /Audio/Effects/demon_attack1.ogg
-        params:
-          variation: 0.15
+  - type: VentCrawler
+  - type: Prying
+    speedModifier: 15
+    pryPowered: true
+    useSound: /Audio/Machines/airlock_creaking.ogg
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: ThermalVision
+  - type: Stamina
+    baseCritThreshold: 120
+  - type: FlashImmunity
+  - type: Puller
+    needsHands: false
+  - type: GhostRole
+    name: ghost-role-ratma-name
+    description: ghost-role-ratma-desc
+    rules: ghost-role-information-antagonist-rules
+    raffle:
+      settings: default
+  - type: JumpAbility
+    action: ActionRatmaJump
+    jumpDistance: 0.5
+    jumpSound:
+      path: /Audio/Effects/demon_attack1.ogg
+      params:
+        variation: 0.15
 
 - type: entity
   name: breadling
