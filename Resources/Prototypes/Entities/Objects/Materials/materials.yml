@@ -344,7 +344,7 @@
     energy: 1.5
     color: "#4faffb"
     slots:
-  - type: KnowledgeGrantOnWear
+  - type: KnowledgeGrantOnWear # Trauma
     skills:
       MartialArtCorporateJudo: 26
     experience:
