@@ -18,7 +18,7 @@ public abstract partial class SharedKnowledgeSystem
 {
     //[Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    //[Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<LanguageKnowledgeComponent> _langQuery;
 
