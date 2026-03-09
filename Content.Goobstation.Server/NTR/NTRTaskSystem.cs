@@ -250,7 +250,7 @@ public sealed class NtrTaskSystem : EntitySystem
                 continue;
 
             if (ValidateReagentRequirements(item, proto))
-                return ProcessTaskSubmission(item, console, proto.ID);
+                return ProcessTaskSubmission(item, (console, component), proto.ID);
         }
 
         return false;
@@ -271,7 +271,7 @@ public sealed class NtrTaskSystem : EntitySystem
 
         for (var i = 0; i < doc.Tasks.Count; i++)
         {
-            if (ProcessTaskSubmission(item, console, doc.Tasks[i]))
+            if (ProcessTaskSubmission(item, (console, component), doc.Tasks[i]))
             {
                 doc.Tasks.RemoveAt(i);
                 UpdateTaskConsoles();
@@ -281,7 +281,7 @@ public sealed class NtrTaskSystem : EntitySystem
         return false;
     }
 
-    private bool ProcessTaskSubmission(EntityUid item, EntityUid console, string taskId)
+    private bool ProcessTaskSubmission(EntityUid item, Entity<NtrTaskConsoleComponent> console, string taskId)
     {
         if (_station.GetOwningStation(console) is not {} station
             || !TryComp<NtrTaskDatabaseComponent>(station, out var db)
@@ -292,9 +292,9 @@ public sealed class NtrTaskSystem : EntitySystem
             return false;
 
         HandleTaskOutcome(console, station, taskData.Value, success: true);
-        _audio.PlayPvs(component.SkipSound, console);
+        _audio.PlayPvs(console.Comp.SkipSound, console);
 
-        if (TryRemoveTask(station.Value, taskData.Value.Id, false))
+        if (TryRemoveTask(station, taskData.Value.Id, false))
         {
             db.History.Add(new NtrTaskHistoryData(
                 taskData.Value,
