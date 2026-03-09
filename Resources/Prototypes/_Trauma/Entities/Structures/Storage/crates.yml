@@ -1,0 +1,7 @@
+- type: entity
+  parent: CrateScienceSecure
+  id: CrateRoboticsSecure
+  name: secure robotics crate
+  components:
+  - type: AccessReader
+    access: [["Robotics"]]

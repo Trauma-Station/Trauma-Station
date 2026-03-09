@@ -136,13 +136,11 @@
     deactivateSound: null
   - type: TileMovement
   - type: VentCrawler
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Xeno
     understands:
     - Xeno
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
   - type: Fauna # Lavaland Change
 
 - type: entity
@@ -192,8 +190,6 @@
         Base: crit
       Dead:
         Base: dead
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient warrior
@@ -233,8 +229,6 @@
         Base: crit
       Dead:
         Base: dead
-  - type: CombatPower # Goobstation
-    factor: 1.8 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient crusher
@@ -274,8 +268,6 @@
         Base: crit
       Dead:
         Base: dead
-  - type: CombatPower # Goobstation
-    factor: 2 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient ravager
@@ -314,8 +306,6 @@
         Base: dead
   - type: DashAction
     actionProto: ActionDashGeneric
-  - type: CombatPower # Goobstation
-    factor: 2.5 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient king
@@ -371,8 +361,6 @@
       collection: XenoFootstepLarge
       params:
         volume: -6
-  - type: CombatPower # Goobstation
-    factor: 5 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient queen
@@ -447,8 +435,6 @@
       - Door
       tags:
       - Wall
-  - type: CombatPower # Goobstation
-    factor: 5 # times more dangerous than a crew-member
 
 - type: entity
   name: ancient rogue king
@@ -510,8 +496,6 @@
     spawned:
     - id: RogueTailWeapon
       amount: 1
-  - type: CombatPower # Goobstation
-    factor: 9 # times more dangerous than a crew-member
 
 - type: entity
   id: CMMobXenoDroneSentient

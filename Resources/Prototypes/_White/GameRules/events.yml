@@ -9,13 +9,6 @@
     earliestStart: 30 # Goobstation
     #reoccurrenceDelay: 50 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
-    chaos:
-      Hostile: 400
-      Medical: 400
-      Death: 400
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 400
   - type: VentSpawnRule
   - type: AntagSpawner
     prototype: MobXenomorphLarva

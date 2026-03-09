@@ -126,7 +126,7 @@
     speechSounds: Slime
   - type: TypingIndicator
     proto: slime
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Bubblish
     understands:

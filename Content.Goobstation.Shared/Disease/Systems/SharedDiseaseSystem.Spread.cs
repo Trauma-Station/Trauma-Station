@@ -73,9 +73,7 @@ public partial class SharedDiseaseSystem
         if (power < 0 || chance < 0)
             return false;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(target).Id);
-        var rand = new System.Random(seed);
-        if (!rand.Prob(Math.Min(power * chance, 1f)))
+        if (!SharedRandomExtensions.PredictedProb(_timing, Math.Min(power * chance, 1f), GetNetEntity(target)))
             return false;
 
         var infectDisease = disease;

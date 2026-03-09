@@ -132,3 +132,14 @@ Entries:
   id: 12
   time: '2026-02-26T11:45:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/880
+- author: Blackern5000
+  changes:
+  - message: Entirely remade the Vegan Meatball magnet wreck to better work as a wreck
+      for salvage.
+    type: Tweak
+  - message: The Vegan Meatball magnet wreck should no longer pollute space with dozens
+      of enemies after despawning
+    type: Fix
+  id: 13
+  time: '2026-02-22T23:20:39.0000000+00:00'
+  url: https://github.com/space-wizards/space-station-14/pull/42994

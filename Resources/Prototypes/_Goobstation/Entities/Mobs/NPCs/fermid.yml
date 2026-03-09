@@ -86,8 +86,6 @@
     activateSound: null
     deactivateSound: null
   - type: Fauna
-  - type: CombatPower
-    factor: 0.5 # times more dangerous than a crew-member
 
 - type: entity
   name: fermid
@@ -124,8 +122,6 @@
       types:
         Piercing: 6
         Poison: 4
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
 
 - type: entity
   name: warrior fermid
@@ -160,8 +156,6 @@
       types:
         Piercing: 10
         Poison: 5
-  - type: CombatPower # Goobstation
-    factor: 1.5 # times more dangerous than a crew-member
 
 - type: entity
   name: fermid queen
@@ -196,8 +190,6 @@
     damage:
       types:
         Poison: 12
-  - type: CombatPower # Goobstation
-    factor: 1.2 # times more dangerous than a crew-member
 
 # Waiting on mob growth component from xenobio. Also needs sprites for moving north and south.
 #- type: entity
@@ -241,8 +233,6 @@
 #      types:
 #        Piercing: 1
 #        Poison: 1
-#  - type: CombatPower
-#    factor: 0.1
 #  - type: Hunger
 #    startingHunger: 300
 #    thresholds:

@@ -30,7 +30,10 @@
     HeadOfPersonnel:
     - !type:DepartmentTimeRequirement
       department: Civilian
-      time: 3h
+      time: 1.5h
+    - !type:DepartmentTimeRequirement
+      department: Service
+      time: 1.5h
     ChiefEngineer:
     - !type:DepartmentTimeRequirement
       department: Engineering
@@ -69,8 +72,9 @@
       time: 3h
       inverted: true
     ServiceWorker:
+      # consider removing this if it gets turned into waiter
     - !type:DepartmentTimeRequirement
-      department: Civilian
+      department: Service
       time: 3h
       inverted: true
     #Cargo - No intern role, so no limits lmao.

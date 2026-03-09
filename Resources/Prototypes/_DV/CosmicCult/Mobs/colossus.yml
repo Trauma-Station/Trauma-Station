@@ -83,7 +83,7 @@
     speechSounds: ColossusSpeech
     speechVerb: Robotic
     allowedEmotes: []
-  - type: LanguageKnowledge # TODO: coscult language
+  - type: LanguageSpeaker # TODO: coscult language
     speaks:
     - TauCetiBasic
     - RobotTalk # It still has a borg inside

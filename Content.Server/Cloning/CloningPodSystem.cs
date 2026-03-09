@@ -93,6 +93,7 @@ public sealed class CloningPodSystem : EntitySystem
         var query = EntityQueryEnumerator<BeingClonedComponent, MindContainerComponent>();
         var found = false;
         EntityUid mob;
+
         while (query.MoveNext(out mob, out var cloned, out var mc))
         {
             if (cloned.Mind == mind && mc.Mind == null)

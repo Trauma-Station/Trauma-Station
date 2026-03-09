@@ -10,7 +10,6 @@
     - prefRoles: [ Traitor ]
       max: 2
       playerRatio: 40
-      chaosScore: 150
       blacklist:
         components:
         - CommandStaff

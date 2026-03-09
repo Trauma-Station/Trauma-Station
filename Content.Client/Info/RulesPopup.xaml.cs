@@ -32,7 +32,7 @@ public sealed partial class RulesPopup : Control
     }
 
     public event Action? OnQuitPressed;
-    public event Action? OnAcceptPressed;
+    public event Action<bool>? OnAcceptPressed;
 
     public RulesPopup()
     {
@@ -49,7 +49,7 @@ public sealed partial class RulesPopup : Control
 
     private void OnAcceptButtonPressed(BaseButton.ButtonEventArgs obj)
     {
-        OnAcceptPressed?.Invoke();
+        OnAcceptPressed?.Invoke(false);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

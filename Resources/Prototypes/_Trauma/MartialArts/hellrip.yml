@@ -1,0 +1,58 @@
+- type: combo
+  id: DropKick
+  attacks:
+  - Disarm
+  - Disarm
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 80
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 6
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 10
+  levelRequired: 10
+
+- type: combo
+  id: HeadRip
+  attacks:
+  - Harm
+  - Harm
+  - Harm
+  - Grab
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 100
+  levelRequired: 10
+
+- type: combo
+  id: TearDown
+  attacks:
+  - Harm
+  - Disarm
+  - Grab
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 50
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 60
+  levelRequired: 10
+
+- type: combo
+  id: Slam
+  attacks:
+  - Disarm
+  - Harm
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 100
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 8
+  levelRequired: 10

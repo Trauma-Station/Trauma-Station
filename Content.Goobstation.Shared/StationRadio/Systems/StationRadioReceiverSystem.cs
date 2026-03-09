@@ -62,7 +62,7 @@ public sealed class StationRadioReceiverSystem : EntitySystem
 
     private void SetAudible(StationRadioReceiverComponent comp, bool audible)
     {
-        if (comp.SoundEntity is {} sound)
+        if (comp.SoundEntity is {} sound && !TerminatingOrDeleted(sound))
             _audio.SetVolume(sound, audible ? comp.DefaultParams.Volume : float.NegativeInfinity);
     }
 }

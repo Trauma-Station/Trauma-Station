@@ -31,6 +31,7 @@
   access:
   # <Trauma>
   - Journalism
+  - Library
   - Robotics
   - Genetics
   # </Trauma>
@@ -60,6 +61,8 @@
   - Cargo
   - Atmospherics
   - Medical
+  - GenpopEnter
+  - GenpopLeave
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

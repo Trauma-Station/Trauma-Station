@@ -277,11 +277,11 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                 if (!TryComp(cultist, out MobStateComponent? state)
                     || state.CurrentState == MobState.Dead
                     || !TryComp(cultist, out MindContainerComponent? mindContainer)
-                    || !mindContainer.HasMind)
+                    || mindContainer.Mind is not {} mind)
                     continue;
 
                 var ascendant = Spawn("MobCosmicAstralAscended", Transform(cultist).Coordinates);
-                _mind.TransferTo(mindContainer.Mind.Value, ascendant);
+                _mind.TransferTo(mind, ascendant);
                 _metaData.SetEntityName(ascendant, Loc.GetString("cosmiccult-astral-ascendant", ("name", cultist))); //Renames cultists' ascendant forms to "[CharacterName], Ascendant"
                 _gibbing.Gib(cultist); // you don't need that body anymore
             }

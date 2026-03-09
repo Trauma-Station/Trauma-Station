@@ -106,7 +106,7 @@
         - SecretStash
         - WrappedParcel
   # Einstein Engines - Language begin
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic # Add individual languages so they can speak in said language for privacy.
     - Bubblish

@@ -42,10 +42,10 @@
     animation: WeaponArcThrust
   # it was ~35 now it's 55 so it's a buff ig
   - type: StaminaDamageOnHit # Trauma - edited values
-    damage: 5
+    damage: 15
     overtime: 5
-    lightAttackOvertimeDamageMultiplier: 5
-    lightAttackDamageMultiplier: 5
+    lightAttackOvertimeDamageMultiplier: 4
+    lightAttackDamageMultiplier: 4
     sound: /Audio/Weapons/egloves.ogg
   # <Goob>
   - type: DelayedKnockdownOnHit
@@ -105,8 +105,9 @@
   - type: GuideHelp
     guides:
     - Security
-  - type: MartialArtBlocked # Goobstation - Martial Arts
-    form: CorporateJudo # Goobstation - Martial Arts
+  - type: KnowledgeGrantOnWear # Trauma - Knowledge
+    blocked:
+      MartialArtCorporateJudo: true
   - type: Tag # Goob
     tags:
     - StunBaton
@@ -144,8 +145,9 @@
   - type: Appearance
   - type: StaticPrice
     price: 80
-  - type: MartialArtBlocked # Trauma
-    form: CorporateJudo
+  - type: KnowledgeGrantOnWear # Trauma - Knowledge
+    blocked:
+      MartialArtCorporateJudo: true
   - type: GuideHelp
     guides:
     - Security

@@ -9,10 +9,24 @@
 - type: cloningSettings
   id: BaseClone
   components:
+  # <Trauma>
+  - Heretic
+  - Changeling
+  - ChangelingIdentity # the actual ling component
+  - WeakToHoly
+  - AlwaysTakeHoly
+  - CanEnchant
+  - Store # needed for heretic and any other antags with an intrinsic store, IDEALLY this would be on the mind
+  - LanguageSpeaker
+  # - LanguageKnowledge # Trauma - knowledge
+  - ForeignerTrait
+  # </Trauma>
   # general
   - DetailExaminable
   - Dna
   - Fingerprint
+  - Grammar # Pronouns
+  - HumanoidProfile # Age, Sex, Gender
   - NpcFactionMember
   - EncryptionKeyHolder # Goobstation
   # traits
@@ -65,24 +79,11 @@
   - SouthernAccent
   - SpanishAccent
   - StutteringAccent
-  # <Goobstation>
-  - Heretic
-  - Changeling
-  - ChangelingIdentity # the actual ling component
-  - WeakToHoly
-  - AlwaysTakeHoly
-  - CanEnchant
-  - Store # needed for heretic and any other antags with an intrinsic store, IDEALLY this would be on the mind
-  # </Goobstation>
-  # Einstein Engines - Language begin
-  - LanguageSpeaker
-  - LanguageKnowledge
-  - ForeignerTrait
-  # Einstein Engines - Language end
+  eventComponents:
+  - Vocal # voice sounds
   blacklist:
     components:
     - AttachedClothing # helmets, which are part of the suit
-    - HumanoidProfile # will cause problems for downstream felinids getting cloned as Urists
     - Implanter # they will spawn full again, but you already get the implant. And we can't do item slot copying yet
     - VirtualItem
 

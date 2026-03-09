@@ -4,7 +4,6 @@ using Content.Shared.Chemistry.Reaction;
 using Content.Shared.EntityConditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.EntityEffects;
@@ -95,14 +94,9 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
         if (scale < effect.MinScale)
             return false;
 
-        // TODO: Replace with proper random prediciton when it exists.
-        if (effect.Probability <= 1f)
-        {
-            var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(target).Id, 0);
-            var rand = new System.Random(seed);
-            if (!rand.Prob(effect.Probability * (effect.ScaleProbability ? scale : 1f))) // Trauma - multiply by scale if ScaleProbability is true
+        var prob = effect.Probability * (effect.ScaleProbability ? scale : 1f); // Trauma - multiply by scale if ScaleProbability is true
+        if (effect.Probability <= 1f && !SharedRandomExtensions.PredictedProb(_timing, prob, GetNetEntity(target), GetNetEntity(user))) // Trauma - use prob
                 return false;
-        }
 
         // See if conditions apply
         if (!_condition.TryConditions(target, effect.Conditions))

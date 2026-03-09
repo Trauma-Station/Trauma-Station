@@ -228,7 +228,7 @@ namespace Content.Server.Database
             var legacyMarkings = appearance.Markings
                 .SelectMany(organ => organ.Value.Values)
                 .SelectMany(i => i)
-                .Select(marking => marking.ToString())
+                .Select(marking => marking.ToLegacyDbString())
                 .ToList();
             // <Trauma> - no linq fuck you, it throws for duplicate keys
             var flattenedMarkings = new Dictionary<HumanoidVisualLayers, List<Marking>>();
@@ -249,8 +249,10 @@ namespace Content.Server.Database
                 JsonSerializer.SerializeToDocument(legacyMarkings.Select(marking => marking.ToString()).ToList());
             profile.HairName = hairMarking?.MarkingId ?? HairStyles.DefaultHairStyle;
             profile.FacialHairName = facialHairMarking?.MarkingId ?? HairStyles.DefaultFacialHairStyle;
-            profile.HairColor = (hairMarking?.MarkingColors[0] ?? Color.Black).ToHex();
-            profile.FacialHairColor = (facialHairMarking?.MarkingColors[0] ?? Color.Black).ToHex();
+            // <Trauma> - don't assume MarkingColors isn't empty, use ElementAtOrDefault
+            profile.HairColor = (hairMarking?.MarkingColors.ElementAtOrDefault(0) ?? Color.Black).ToHex();
+            profile.FacialHairColor = (facialHairMarking?.MarkingColors.ElementAtOrDefault(0) ?? Color.Black).ToHex();
+            // </Trauma>
 
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
@@ -274,7 +276,15 @@ namespace Content.Server.Database
                         .Select(t => new Trait { TraitName = t })
             );
 
-            profile.BarkVoice = humanoid.BarkVoice; // Goob Station - Barks
+            // <Trauma>
+            profile.BarkVoice = humanoid.BarkVoice;
+            profile.KnowledgeMastery.Clear();
+            foreach (var (id, mastery) in humanoid.Knowledge.Mastery)
+            {
+                profile.KnowledgeMastery[id] = mastery;
+            }
+            profile.KnowledgeRemoved = humanoid.Knowledge.RemovedList();
+            // </Trauma>
 
             profile.Loadouts.Clear();
 

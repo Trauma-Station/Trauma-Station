@@ -2,3 +2,13 @@
   id: Mutations
   name: entity-category-name-mutations
   hideSpawnMenu: true
+
+- type: entityCategory
+  id: Knowledge
+  name: entity-category-name-knowledge
+  hideSpawnMenu: true
+
+- type: entityCategory
+  id: Areas
+  name: entity-category-name-areas
+  # could hide spawn menu if someone remakes strongdmm for ss14

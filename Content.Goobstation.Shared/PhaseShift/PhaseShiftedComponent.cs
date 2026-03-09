@@ -36,6 +36,9 @@ public sealed partial class PhaseShiftedComponent : Component
     public SoundSpecifier PhaseOutSound =
         new SoundPathSpecifier(new ResPath("/Audio/_EinsteinEngines/Shadowling/veilout.ogg"));
 
+    [DataField]
+    public bool RevealOnDamage = true;
+
     public int StoredMask;
     public int StoredLayer;
 }

@@ -8,6 +8,7 @@ using Content.Shared._White.RadialSelector;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -71,7 +72,8 @@ public sealed class WraithEvolveSystem : EntitySystem
     {
         var uid = ent.Owner;
         if (evolve == null
-            || !_proto.TryIndex(evolve, out _)
+            || !_proto.TryIndex(evolve, out var evolvePrototype)
+            || !evolvePrototype.HasComponent<WraithComponent>()
             || !_mind.TryGetMind(uid, out var mindUid, out var mind))
             return;
 

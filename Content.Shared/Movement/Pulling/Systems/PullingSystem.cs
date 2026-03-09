@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Weapons.Melee;
 // </Trauma>
@@ -700,8 +700,8 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
             $"{ToPrettyString(pullerUid):user} started pulling {ToPrettyString(pullableUid):target}");
 
         // <Goob>
-        if (_combatMode.IsInCombatMode(pullerUid))
-            TryGrab(pullableUid, pullerUid, grabStageOverride: grabStageOverride, escapeAttemptModifier: escapeAttemptModifier);
+        if (grabStageOverride != null || _combatMode.IsInCombatMode(pullerUid))
+            TryGrab(pullableUid, pullerUid, true, grabStageOverride: grabStageOverride, escapeAttemptModifier: escapeAttemptModifier);
         // </Goob>
         return true;
     }

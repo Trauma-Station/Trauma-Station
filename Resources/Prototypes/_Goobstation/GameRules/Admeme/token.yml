@@ -11,7 +11,6 @@
   id: TokenNinjaSpawn
   components:
   - type: StationEvent
-    isSelectable: false
   - type: AntagSelection
     agentName: ninja-round-end-agent-name
     definitions:
@@ -55,8 +54,6 @@
       pickPlayer: false
       mindRoles:
       - MindRoleDragon
-  - type: StationEvent
-    isSelectable: false
 
 #- type: entity
 #  parent: RevenantSpawn
@@ -65,7 +62,6 @@
 #  - type: RandomSpawnRule
 #    prototype: MobRevenantToken
 #  - type: StationEvent
-#    isSelectable: false
 #    weight: 0 # This will prevent it from being selected - fuck revenants
 
 - type: entity
@@ -93,8 +89,6 @@
         - Syndicate
       mindRoles:
       - MindRoleNukeops
-  - type: StationEvent
-    isSelectable: false
 
 - type: entity
   parent: DerelictCyborgSyndicateSpawn
@@ -108,8 +102,6 @@
       min: 1
       max: 1
       pickPlayer: false
-  - type: StationEvent
-    isSelectable: false
 
 - type: entity
   parent: BingleSpawn
@@ -117,8 +109,6 @@
   components:
   - type: RandomSpawnRule
     prototype: SpawnPointGhostBinglePrimeToken
-  - type: StationEvent
-    isSelectable: false
 
 - type: entity
   parent: BlobMidround
@@ -129,18 +119,11 @@
     - SpawnPointGhostBlobRatToken
     playersPerCarrierBlob: 30
     maxCarrierBlob: 1
-  - type: StationEvent
-    isSelectable: false
-  - type: Tag
-    tags:
-    - MidroundAntag
 
 - type: entity
   parent: LoneAbductorSpawn
   id: TokenLoneAbductorSpawn
   components:
-  - type: StationEvent
-    isSelectable: false
   - type: AntagSelection
     definitions:
     - spawnerPrototype: LoneAbductorSpawnerToken
@@ -213,11 +196,6 @@
       - type: NpcFactionMember
         factions:
         - Wizard
-  - type: Tag
-    tags:
-    - MidroundAntag
-  - type: StationEvent
-    isSelectable: false
 
 - type: entity
   parent: SlaughterDemonMidround
@@ -250,16 +228,6 @@
     minimumPlayers: 40
     duration: null
     maxOccurrences: 1
-    chaos: # todo: adjust all this
-      Hostile: 300
-      Medical: 300
-      Death: 300
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 800
-  - type: Tag
-    tags:
-    - MidroundAntag
   - type: AntagObjectives
     objectives:
     - SlaughterDevourObjective
@@ -374,14 +342,8 @@
         factions:
         - Syndicate
   - type: StationEvent
-    isSelectable: false
     startAnnouncement: null
     weight: 1
     duration: null
     earliestStart: 30
     minimumPlayers: 30
-    chaos:
-      Hostile: 40
-      Combat: 40
-      Death: 40
-    eventType: HostilesSpawn

@@ -1,0 +1,8 @@
+- type: entity
+  id: MobWraithMidround
+  parent: MobWraith
+  name: Wraith
+  description: A KINDA spooky ghostie.
+  components:
+  - type: Wraith
+    abilities: MidroundWraithAbilities

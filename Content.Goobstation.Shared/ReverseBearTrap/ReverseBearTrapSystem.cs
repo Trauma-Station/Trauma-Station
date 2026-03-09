@@ -245,11 +245,8 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         if (args.Cancelled || trap.Wearer is not {} target)
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
-        var rand = new System.Random(seed);
-
         var prefix = "";
-        if (rand.Prob(trap.CurrentEscapeChance))
+        if (SharedRandomExtensions.PredictedProb(_timing, trap.CurrentEscapeChance, GetNetEntity(uid)))
         {
             ResetTrap(uid, trap);
         }

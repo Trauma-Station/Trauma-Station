@@ -5,10 +5,10 @@
   targetNode: HE
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    TechnologyKnowledge: 1
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: RevRPG2AP
@@ -17,10 +17,10 @@
   targetNode: AP
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    TechnologyKnowledge: 2
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: RevFlamethrowerAmmo
@@ -29,7 +29,8 @@
   targetNode: FlamethrowerAmmo
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    TechnologyKnowledge: 1
+    SurvivalKnowledge: 1
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2

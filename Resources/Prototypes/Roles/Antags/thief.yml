@@ -97,7 +97,7 @@
   id: ThiefGear
   storage:
     back:
-    - ThiefBeacon
+    #- ThiefBeacon # DeltaV - no more objectives
     - SatchelThief
     # - ClothingHandsChameleonThief - Goobedit, since thieves have intrinsic pickpocketing now we don't need these
     - PinpointerThief # Goob edit

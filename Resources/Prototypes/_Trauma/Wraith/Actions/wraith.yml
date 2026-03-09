@@ -1,0 +1,21 @@
+- type: entity
+  id: ActionDarkWhisper
+  name: Dark Whisper
+  description: Choose a target and you will be able to speak through them for some seconds.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 60
+    icon:
+      sprite: _Goobstation/Wraith/actions.rsi
+      state: dark_whisper
+  - type: TargetAction
+    range: 10
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - Body
+    event: !type:DarkWhisperEvent
+  - type: ActionWraithPoints
+    wpConsume: 100

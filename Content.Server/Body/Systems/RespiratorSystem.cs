@@ -2,7 +2,7 @@
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Targeting;
 using Content.Goobstation.Common.Body.Components;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Shared.Body;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared.Movement.Pulling.Components;
@@ -88,7 +88,7 @@ public sealed class RespiratorSystem : EntitySystem
             && pullable.GrabStage == GrabStage.Suffocate)
             return false;
 
-        return !HasComp<KravMagaBlockedBreathingComponent>(uid);
+        return !HasComp<BlockedBreathingComponent>(uid);
     }
     // Goobstation end
     private void OnMapInit(Entity<RespiratorComponent> ent, ref MapInitEvent args)

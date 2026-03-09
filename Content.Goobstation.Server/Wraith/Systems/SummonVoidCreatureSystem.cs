@@ -6,6 +6,7 @@ using Content.Goobstation.Shared.Wraith.Events;
 using Content.Server.Actions;
 using Content.Server.Mind;
 using Content.Shared._White.RadialSelector;
+using Content.Shared.Prototypes;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -53,7 +54,9 @@ public sealed class SummonVoidCreatureSystem : EntitySystem
 
     private void OnSummonVoidCreatureSelected(Entity<ChooseVoidCreatureComponent> ent, ref RadialSelectorSelectedMessage args)
     {
-        if (args.SelectedItem is not { } proto || !_proto.TryIndex(proto, out _)
+        if (args.SelectedItem is not { } proto
+            || !_proto.TryIndex(proto, out var summon)
+            || !summon.HasComponent<WraithMinionComponent>()
             || !_mind.TryGetMind(ent.Owner, out var mindUid, out var mind))
             return;
 

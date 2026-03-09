@@ -1,8 +1,7 @@
 // <Trauma>
-using Content.Shared.Item;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Item;
 using Content.Shared.Interaction.Components;
-using Content.Shared.Nutrition;
 using Content.Shared.Storage;
 // </Trauma>
 using System.Numerics;
@@ -20,10 +19,9 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
-public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
+public sealed partial class FoodSequenceSystem : SharedFoodSequenceSystem // Trauma - made partial
 {
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!; // Goobstation - anythingburgers
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -44,15 +42,20 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
 
     private void OnInteractUsing(Entity<FoodSequenceStartPointComponent> ent, ref InteractUsingEvent args)
     {
-        if (HasComp<EntityStorageComponent>(args.Used)
-            || HasComp<StorageComponent>(args.Used)
-            || HasComp<UnremoveableComponent>(args.Used)) // Goobstation - Prevent burgering unremovable items
-            return; // Prevent Backpacks/Pet Carriers
+        // <Trauma>
+        var item = args.Used;
+        if (HasComp<EntityStorageComponent>(item) ||
+            HasComp<StorageComponent>(item) ||
+            HasComp<UnremoveableComponent>(item) ||
+            !HasComp<ItemComponent>(item) ||
+            HasComp<FoodSequenceStartPointComponent>(item))
+            return; // Prevent Backpacks/Pet Carriers/Non items/Other burgers
 
-        if (ent.Comp.AcceptAll) // Goobstation - anythingburgers
-            EnsureComp<FoodSequenceElementComponent>(args.Used);
+        if (ent.Comp.AcceptAll) // make sure the item can be added if it's an anythingburger
+            EnsureComp<FoodSequenceElementComponent>(item);
+        // </Trauma>
 
-        if (TryComp<FoodSequenceElementComponent>(args.Used, out var sequenceElement) && HasComp<ItemComponent>(args.Used) && !HasComp<FoodSequenceStartPointComponent>(args.Used)) // Goobstation - anythingburgers - no non items allowed! otherwise you can grab players and lockers and such and add them to burgers
+        if (TryComp<FoodSequenceElementComponent>(args.Used, out var sequenceElement))
             args.Handled = TryAddFoodElement(ent, (args.Used, sequenceElement), args.User);
     }
 
@@ -136,21 +139,22 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
 
         //looking for a suitable FoodSequence prototype
         // <Trauma>
-        // default to the correct element type if it exists
-        ProtoId<FoodSequenceElementPrototype> elementProto = default!;
-        if (!element.Comp1.Entries.TryGetValue(start.Comp.Key, out elementProto) && start.Comp.AcceptAll)
+        // if it isn't a food sequence item, require that it has a prototype for the client to get a sprite out of
+        EntProtoId? entProto = null;
+        if (!element.Comp1.Entries.TryGetValue(start.Comp.Key, out var elementProto))
         {
-            // fall back to any entry if the desired one isn't present, with AcceptAll burgers
-            foreach (var pair in element.Comp1.Entries)
+            elementProto = FallbackElement;
+            entProto = Prototype(element)?.ID;
+            if (entProto == null)
             {
-                elementProto = pair.Value;
-                break;
+                Log.Warning($"Can't add unprototyped entity {ToPrettyString(element)} to food sequence {ToPrettyString(start)}!");
+                return false;
             }
         }
-
-        if (elementProto == default! || !_proto.Resolve(elementProto, out var elementIndexed))
-            return false;
         // </Trauma>
+
+        if (!_proto.Resolve(elementProto, out var elementIndexed))
+            return false;
 
         //if we run out of space, we can still put in one last, final finishing element.
         if (start.Comp.FoodLayers.Count >= start.Comp.MaxLayers && !elementIndexed.Final || start.Comp.Finished)
@@ -170,12 +174,14 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         //Generate new visual layer
         var flip = start.Comp.AllowHorizontalFlip && _random.Prob(0.5f);
         var layer = new FoodSequenceVisualLayer(elementIndexed,
-            _random.Pick(elementIndexed.Sprites),
+            elementIndexed.Sprites.Count > 0 ? _random.Pick(elementIndexed.Sprites) : null, // Trauma - this can be empty for the fallback
             new Vector2(flip ? -elementIndexed.Scale.X : elementIndexed.Scale.X, elementIndexed.Scale.Y),
             new Vector2(
                 _random.NextFloat(start.Comp.MinLayerOffset.X, start.Comp.MaxLayerOffset.X),
                 _random.NextFloat(start.Comp.MinLayerOffset.Y, start.Comp.MaxLayerOffset.Y))
         );
+        layer.EntProto = entProto; // Trauma
+        // TODO: store stuff like shaders from deep frying paint etc
 
         start.Comp.FoodLayers.Add(layer);
         Dirty(start);
@@ -297,41 +303,5 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         EnsureComp<TagComponent>(start);
 
         _tag.TryAddTags(start, elementTags.Tags);
-    }
-
-    private void UpdateFoodSize(Entity<FoodSequenceStartPointComponent> start) // Goobstation - anythingburgers dynamic item size
-    {
-        var increment = (start.Comp.FoodLayers.Count / 2);
-
-        if (HasComp<ItemComponent>(start))
-        {
-            var sizeMap = new Dictionary<int, string>
-            {
-                { 1, "Small" },
-                { 2, "Normal" },
-                { 3, "Large" },
-                { 4, "Huge" },
-                { 5, "Ginormous" }
-            };
-
-            if (sizeMap.ContainsKey(increment))
-            {
-                _item.SetSize(start, sizeMap[increment]);
-            }
-            else if (increment == 6)
-            {
-                _transform.DropNextTo(start.Owner, start.Owner);
-                RemComp<ItemComponent>(start);
-            }
-
-            _item.SetShape(start, new List<Box2i> { new Box2i(0, 0, 1, increment) });
-        /* TODO: uncomment this if >15 item burgers are ever added again AND gravity well is moved to shared
-        } else if (increment >= 8) {
-            EnsureComp<GravityWellComponent>(start, out var gravityWell);
-            gravityWell.MaxRange = (float)Math.Sqrt(increment/4);
-            gravityWell.BaseRadialAcceleration = (float)Math.Sqrt(increment/4);
-            Dirty(start, gravityWell);
-        */
-        }
     }
 }

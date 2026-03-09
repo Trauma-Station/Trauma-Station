@@ -1,31 +1,23 @@
-# Service
-
-# For the kitchen itself
 - type: entity
   parent: BaseAreaStation
-  id: AreaKitchen
-  name: kitchen
-  description: Allows the Chef to use CQC inside of here.
+  id: AreaMaints
+  name: maints
   components:
   - type: Sprite
-    state: kitchen
-  - type: MartialArtArea
-    form: CloseQuartersCombat
+    state: maints
 
-# For the seating area between kitchen and bar
 - type: entity
-  parent: AreaKitchen
-  id: AreaCafeteria
-  name: cafeteria
+  parent: BaseAreaStation
+  id: AreaRadstorm
+  name: radstorm shelter
   components:
   - type: Sprite
-    state: cafeteria
+    state: radstorm_shelter
 
-# For the kitchen freezer room
 - type: entity
-  parent: AreaKitchen
-  id: AreaColdRoom
-  name: cold room
+  parent: BaseAreaStation
+  id: AreaHolodeck
+  name: holodeck
   components:
   - type: Sprite
-    state: kitchen_cold
+    state: holodeck

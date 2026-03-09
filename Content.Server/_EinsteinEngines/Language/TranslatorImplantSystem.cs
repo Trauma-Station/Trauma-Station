@@ -3,10 +3,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Implants.Components;
+using Content.Trauma.Common.Knowledge.Systems;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
+using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared.Implants.Components;
 using Robust.Shared.Containers;
 
 namespace Content.Server._EinsteinEngines.Language;
@@ -28,17 +30,17 @@ public sealed class TranslatorImplantSystem : EntitySystem
             return;
 
         var implantee = Transform(uid).ParentUid;
-        if (implantee is not { Valid: true } || !TryComp<LanguageKnowledgeComponent>(implantee, out var knowledge))
+        if (implantee is not { Valid: true } || !TryComp<LanguageSpeakerComponent>(implantee, out var speaker)) // Goobstation edit
             return;
 
         component.Enabled = true;
         // To operate an implant, you need to know its required language intrinsically, because like... it connects to your brain or something,
         // so external translators or other implants can't help you operate it.
         component.SpokenRequirementSatisfied = TranslatorSystem.CheckLanguagesMatch(
-            component.RequiredLanguages, knowledge.SpokenLanguages, component.RequiresAllLanguages);
+            component.RequiredLanguages, speaker.Speaks, component.RequiresAllLanguages);
 
         component.UnderstoodRequirementSatisfied = TranslatorSystem.CheckLanguagesMatch(
-            component.RequiredLanguages, knowledge.UnderstoodLanguages, component.RequiresAllLanguages);
+            component.RequiredLanguages, speaker.Understands, component.RequiresAllLanguages);
 
         _language.UpdateEntityLanguages(implantee);
     }

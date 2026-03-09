@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 LankLTE <135308300+LankLTE@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Jacob <jakevilevac@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -136,7 +126,7 @@ public sealed class DiscordWebhook : IPostInjectInit
     {
         if (!response.IsSuccessStatusCode)
         {
-            _sawmill.Error($"Failed to {methodName} message. Status code: {response.StatusCode}.");
+            _sawmill.Warning($"Failed to {methodName} message. Status code: {response.StatusCode}."); // Trauma - warning so this doesnt cause infinite error loop
 
             if (response.Headers.TryGetValues("Retry-After", out var retryAfter))
                 _sawmill.Debug($"Failed webhook response Retry-After: {string.Join(", ", retryAfter)}");

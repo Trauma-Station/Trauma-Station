@@ -194,7 +194,7 @@
     - id: VendingMachineRestockVendomat
 
 - type: entity
-  parent: CrateScienceSecure
+  parent: CrateRoboticsSecure # Trauma - Robotics instead of Science
   id: CrateVendingMachineRestockRoboticsFilled
   name: Robotech Deluxe restock crate
   description: Contains a restock box for a Robotech Deluxe vending machine.

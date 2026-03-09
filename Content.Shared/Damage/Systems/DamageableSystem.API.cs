@@ -175,6 +175,8 @@ public sealed partial class DamageableSystem
         if (before.Cancelled)
             return damageDone;
 
+        damage = before.Damage; // Trauma
+
         // <Goob> - For entities with a body, route damage through body parts and then sum it up
         if (_bodyQuery.HasComp(ent))
         {
