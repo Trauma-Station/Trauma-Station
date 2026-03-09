@@ -212,13 +212,20 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
     /// <param name="collection">The dependency injection container.</param>
     /// <param name="loadoutSystem">The loadout system instance.</param>
     /// <returns>A fully initialized LoadoutContainer for UI display.</returns>
-    private LoadoutContainer CreateLoadoutUI(LoadoutPrototype proto, HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession session, IDependencyCollection collection, LoadoutSystem loadoutSystem)
+    // Trauma - made optional
+    private LoadoutContainer? CreateLoadoutUI(LoadoutPrototype proto, HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession session, IDependencyCollection collection, LoadoutSystem loadoutSystem)
     {
         var selected = loadout.SelectedLoadouts[_groupProto.ID];
 
         var pressed = selected.Any(e => e.Prototype == proto.ID);
 
         var enabled = loadout.IsValid(profile, session, proto.ID, collection, out var reason);
+        // <Trauma> - supports hiding locked loadouts with LoadoutGroupPrototype.HideLocked (on release)
+        #if !DEBUG
+        if (_groupProto.HideLocked && !enabled)
+            return null;
+        #endif
+        // </Trauma>
 
         var cont = new LoadoutContainer(proto, !enabled, reason);
 
