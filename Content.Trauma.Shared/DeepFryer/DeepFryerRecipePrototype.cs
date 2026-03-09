@@ -24,7 +24,7 @@ public sealed partial class DeepFryerRecipePrototype : IPrototype
     /// Tag prototype for an item ingredient and how many of it you need.
     /// </summary>
     [DataField(required: true)]
-    public Dictionary<ProtoId<TagPrototype>, int> Items;
+    public Dictionary<ProtoId<TagPrototype>, int> Items = new();
 
     /// <summary>
     /// Reagents that must be present, ignored if this is empty.
