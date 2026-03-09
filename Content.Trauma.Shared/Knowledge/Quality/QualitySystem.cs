@@ -38,6 +38,14 @@ public sealed class QualitySystem : EntitySystem
 
     private static readonly EntProtoId CraftingKnowledge = "CraftingKnowledge";
 
+    // lowest quality will break in a few hits, highest quality will last much longer
+    private static float[] _damageOnHitModifiers =
+    [
+        15f, 5f, 2f, 1.5f, 1.15f,
+        1f,
+        0.9f, 0.8f, 0.65f, 0.5f, 0.3f
+    ];
+
     public override void Initialize()
     {
         base.Initialize();
@@ -112,14 +120,7 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnShivApplyQuality(Entity<DamageOnHitComponent> ent, ref ApplyQualityEvent args)
     {
-        // lowest quality will break in a few hits, highest quality will last much longer
-        const float[] _modifiers =
-        [
-            15f, 5f, 2f, 1.5f, 1.15f,
-            1f,
-            0.9f, 0.8f, 0.65f, 0.5f, 0.3f
-        ];
-        ent.Comp.Damage *= _modifiers[args.Quality + 5];
+        ent.Comp.Damage *= _damageOnHitModifiers[args.Quality + 5];
     }
 
     // not specific to spears but holy class name
