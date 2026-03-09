@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Timing;
