@@ -1001,13 +1001,12 @@
     - CannotSuicide
     - DoorBumpOpener
     - FootstepSound
-# Trauma - cull ghostroles
-#  - type: GhostRole
-#    prob: 0.25
-#    name: ghost-role-information-willow-name
-#    description: ghost-role-information-willow-description
-#    rules: ghost-role-information-nonantagonist-rules
-#  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    prob: 0.25
+    name: ghost-role-information-willow-name
+    description: ghost-role-information-willow-description
+    rules: ghost-role-information-nonantagonist-rules
+  - type: GhostTakeoverAvailable
   - type: Loadout
     prototypes: [ BoxingKangarooGear ]
   - type: LanguageSpeaker # Einstein Engines - Language
