@@ -10,6 +10,7 @@ using Content.Shared.Item;
 using Content.Shared.Mind.Components;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Storage.Components;
 using Content.Trauma.Shared.DeepFryer.Components;
@@ -41,51 +42,22 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         SubscribeLocalEvent<DeepFryerComponent, StorageCloseAttemptEvent>(OnTryClose);
         SubscribeLocalEvent<DeepFryerComponent, StorageAfterCloseEvent>(OnClose);
         SubscribeLocalEvent<DeepFryerComponent, StorageAfterOpenEvent>(OnOpen);
+        SubscribeLocalEvent<DeepFryerComponent, PowerChangedEvent>(OnPowerChanged);
+
+        SubscribeLocalEvent<ActiveDeepFryerComponent, ComponentStartup>(OnActivated);
+        SubscribeLocalEvent<ActiveDeepFryerComponent, ComponentShutdown>(OnDeactivated);
     }
 
     private void OnOpen(Entity<DeepFryerComponent> ent, ref StorageAfterOpenEvent args)
     {
-        ent.Comp.Closed = false;
-
-        _ambientSound.SetAmbience(ent.Owner, false);
-        _audio.Stop(ent.Comp.Sound);
-        ent.Comp.Sound = _audio.PlayPredicted(ent.Comp.FinishSound, ent.Owner, ent.Owner)?.Entity;
-        ent.Comp.StoredObjects.Clear();
-        ent.Comp.FryFinishTime = TimeSpan.Zero;
         _appearance.SetData(ent.Owner, DeepFryerVisuals.Open, true);
-        _appearance.SetData(ent.Owner, DeepFryerVisuals.Frying, false);
-        _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
-
-        if (TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
-            && _solution.TryGetSolution(ent.Owner,
-                ent.Comp.FryerSolutionContainer,
-                out var solution,
-                out _))
-            _solution.SetTemperature(solution.Value, 293.7f); // Reset the temp when its opened
+        Deactivate(ent);
     }
 
     private void OnClose(Entity<DeepFryerComponent> ent, ref StorageAfterCloseEvent args)
     {
-        ent.Comp.Closed = true;
-
-        if (!TryComp<EntityStorageComponent>(ent.Owner, out var entStorage))
-            return;
-
-        _ambientSound.SetAmbience(ent.Owner, true);
-        _audio.Stop(ent.Comp.Sound);
-        ent.Comp.Sound = _audio.PlayPredicted(ent.Comp.StartSound, ent.Owner, ent.Owner)?.Entity;
-        ent.Comp.FryFinishTime = _timing.CurTime + ent.Comp.TimeToDeepFry;
-        foreach (var entity in entStorage.Contents.ContainedEntities)
-        {
-            ent.Comp.StoredObjects.Add(entity);
-            if (!TryComp<ItemComponent>(entity, out var item) || item.Size == Ginormous)
-            {
-                _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, true); // If it doesn't have an item component or the item is big then it's big yeah
-                return;
-            }
-        }
-
-        _appearance.SetData(ent.Owner, DeepFryerVisuals.Frying, true);
+        _appearance.SetData(ent.Owner, DeepFryerVisuals.Open, false);
+        TryActivate(ent);
     }
 
     private void OnTryClose(Entity<DeepFryerComponent> ent, ref StorageCloseAttemptEvent args)
@@ -108,9 +80,74 @@ public abstract class SharedDeepFryerSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("deep-fryer-no-power"), ent.Owner);
         }
 
+        ent.Comp.LastUser = args.User;
+    }
+
+    private void OnPowerChanged(Entity<DeepFryerComponent> ent, ref PowerChangedEvent args)
+    {
+        if (!args.Powered)
+            Deactivate(ent);
+        // doesn't automatically turn back on when repowered
+    }
+
+    private void OnActivated(Entity<ActiveDeepFryerComponent> ent, ref ComponentStartup args)
+    {
+        _ambientSound.SetAmbience(ent.Owner, true);
+        _appearance.SetData(ent.Owner, DeepFryerVisuals.Frying, true);
+    }
+
+    private void OnDeactivated(Entity<ActiveDeepFryerComponent> ent, ref ComponentShutdown args)
+    {
+        _ambientSound.SetAmbience(ent.Owner, false);
+        _appearance.SetData(ent.Owner, DeepFryerVisuals.Frying, false);
+        _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
     }
 
     #region Helper Methods
+    private void TryActivate(Entity<DeepFryerComponent> ent)
+    {
+        if (!_power.IsPowered(ent.Owner))
+            return;
+
+        EnsureComp<ActiveDeepFryerComponent>(ent);
+        _audio.Stop(ent.Comp.Sound);
+        ent.Comp.Sound = _audio.PlayPredicted(ent.Comp.StartSound, ent.Owner, ent.Owner)?.Entity;
+        ent.Comp.FryFinishTime = _timing.CurTime + ent.Comp.TimeToDeepFry;
+
+        if (!TryComp<EntityStorageComponent>(ent.Owner, out var entStorage))
+            return;
+
+        foreach (var entity in entStorage.Contents.ContainedEntities)
+        {
+            ent.Comp.StoredObjects.Add(entity);
+            if (!TryComp<ItemComponent>(entity, out var item) || item.Size == Ginormous)
+            {
+                _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, true); // If it doesn't have an item component or the item is big then it's big yeah
+                return;
+            }
+        }
+    }
+
+    private void Deactivate(Entity<DeepFryerComponent> ent)
+    {
+        ent.Comp.LastUser = null;
+
+        if (!RemComp<ActiveDeepFryerComponent>(ent))
+            return;
+
+        _audio.Stop(ent.Comp.Sound);
+        ent.Comp.Sound = _audio.PlayPredicted(ent.Comp.FinishSound, ent.Owner, ent.Owner)?.Entity;
+        ent.Comp.StoredObjects.Clear();
+        ent.Comp.FryFinishTime = TimeSpan.Zero;
+
+        if (TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
+            && _solution.TryGetSolution(ent.Owner,
+                ent.Comp.FryerSolutionContainer,
+                out var solution,
+                out _))
+            _solution.SetTemperature(solution.Value, 293.7f); // Reset the temp when its opened
+    }
+
     protected void DeepFryItems(Entity<DeepFryerComponent> ent)
     {
         ent.Comp.FryFinishTime = _timing.CurTime + ent.Comp.TimeToDeepFry;
