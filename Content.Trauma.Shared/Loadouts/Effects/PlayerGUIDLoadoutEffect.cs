@@ -34,7 +34,7 @@ public sealed partial class PlayerGUIDLoadoutEffect : LoadoutEffect
         }
         catch
         {
-            reason = $"Loadout effect {Guid} is malformed, please report this bug!";
+            reason = FormattedMessage.FromUnformatted($"Loadout effect {Guid} is malformed, please report this bug!");
             return false;
         }
 
