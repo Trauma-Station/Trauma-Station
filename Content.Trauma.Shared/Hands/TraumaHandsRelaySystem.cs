@@ -9,13 +9,15 @@ namespace Content.Trauma.Shared.Hands;
 
 public sealed class TraumaHandsRelaySystem : EntitySystem
 {
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+
     public override void Initialize()
     {
-        SubscribeLocalEvent<HandsComponent, CheckMagicItemEvent>(RelayEvent);
+        SubscribeLocalEvent<HandsComponent, CheckMagicItemEvent>(_hands.RelayEvent);
 
         // By-ref events.
-        SubscribeLocalEvent<HandsComponent, ParryAttemptEvent>(RefRelayEvent);
-        SubscribeLocalEvent<HandsComponent, RefreshEquipmentHudEvent<ShowHealthBarsComponent>>(RefRelayEvent);
-        SubscribeLocalEvent<HandsComponent, RefreshEquipmentHudEvent<ShowHealthIconsComponent>>(RefRelayEvent);
+        SubscribeLocalEvent<HandsComponent, ParryAttemptEvent>(_hands.RefRelayEvent);
+        SubscribeLocalEvent<HandsComponent, RefreshEquipmentHudEvent<ShowHealthBarsComponent>>(_hands.RefRelayEvent);
+        SubscribeLocalEvent<HandsComponent, RefreshEquipmentHudEvent<ShowHealthIconsComponent>>(_hands.RefRelayEvent);
     }
 }
