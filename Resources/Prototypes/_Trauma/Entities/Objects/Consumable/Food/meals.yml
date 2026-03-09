@@ -59,7 +59,7 @@
 - type: entity
   parent: FoodBurgerBase
   id: FoodBreadSandwich
-  name: Bread Sandwich
+  name: bread sandwich
   description: A piece of bread, sandwiched between two pieces of bread.
   components:
   - type: FlavorProfile

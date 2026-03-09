@@ -23,5 +23,5 @@ ghost-role-information-facehugger-description = A writhing nightmare. The facehu
 ghost-role-ratma-name = Ratma
 ghost-role-ratma-desc = Hunt and kill.
 
-ghost-role-information-BreadLing-name = Breadling
+ghost-role-information-breadling-namee = Breadling
 ghost-role-information-BreadLing-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.

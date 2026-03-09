@@ -1,82 +1,81 @@
 - type: entity
   name: Ratma
   parent: [ MobSpaceBasic, MobCombat ]
-  id: BaseMobRatma
+  id: MobRatma
   description: It came from the maintenence tunnels.
   components:
-    - type: HTN
-      rootTask:
-        task: SimpleHostileCompound
-      blackboard:
-        NavPry: !type:Bool
-          true
-        NavSmash: !type:Bool
-          true
-    - type: NpcFactionMember
-      factions:
-        - SimpleHostile
-    - type: MovementSpeedModifier
-      baseWalkSpeed: 2
-      baseSprintSpeed: 3
-    - type: Sprite
-      sprite: _Trauma/Mobs/Monsters/ratma.rsi
-      layers:
-        - map: [ "enum.DamageStateVisualLayers.Base" ]
-          state: alive
-    - type: DamageStateVisuals
-      states:
-        Alive:
-          Base: alive
-        Dead:
-          Base: dead
-    - type: FootstepModifier
-      footstepSoundCollection:
-        collection: FootstepThud
-    - type: Physics
-      bodyType: KinematicController
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape:
-            !type:PhysShapeCircle
-            radius: 0.40
-          density: 100
-          mask:
-            - MobMask
-          layer:
-            - MobLayer
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        200: Dead
-    - type: PassiveDamage
-      allowedStates:
-        - Alive
-      damage:
-        types:
-          Heat: -3
-        groups:
-          Brute: -3
-    - type: Butcherable
-      spawned:
-        - id: FoodMeatRat
-          amount: 10
-    - type: MeleeWeapon
-      range: 2.5
-      soundHit:
-        path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
-      damage:
-        types:
-          Piercing: 20
-          Slash: 10
-    - type: StaticPrice
-      price: 3000
-    - type: Bloodstream
-      bloodReferenceSolution:
-        reagents:
-        - ReagentId: AdvancedMutationToxin
-          Quantity: 300
-    - type: Fauna
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/ratma.rsi
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepThud
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 100
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: PassiveDamage
+    allowedStates:
+      - Alive
+    damage:
+      types:
+        Heat: -3
+      groups:
+        Brute: -3
+  - type: Butcherable
+    spawned:
+      - id: FoodMeatRat
+        amount: 10
+  - type: MeleeWeapon
+    range: 2.5
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Piercing: 20
+        Slash: 10
+  - type: StaticPrice
+    price: 3000
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: AdvancedMutationToxin
+        Quantity: 300
     - type: VentCrawler
     - type: Prying
       speedModifier: 15
@@ -160,7 +159,7 @@
     size: Small
   - type: GhostRole
     prob: 1
-    name: ghost-role-information-BreadLing-name
+    name: ghost-role-information-breadling-namee
     allowMovement: true
     description: ghost-role-information-BreadLing-desc
     rules: ghost-role-information-nonantagonist-rules

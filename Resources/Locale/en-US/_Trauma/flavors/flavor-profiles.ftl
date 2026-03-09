@@ -4,4 +4,4 @@ flavor-complex-tiredness = like tiredness
 
 flavor-complex-blood = like blood
 
-flavor-complex-apotheosis = apotheosis
+flavor-complex-apotheosis = like apotheosis

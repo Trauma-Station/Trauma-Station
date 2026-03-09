@@ -528,7 +528,7 @@
   - type: Tag
     tags:
     - Meat
-#<Trauma>
+# <Trauma>
   - type: Construction
     graph: Friedeggs
     node: finish
@@ -564,7 +564,7 @@
 - type: entity
   parent: FoodMealBase
   id: FoodMealFriedegg
-  name: fried eggs #Trauma
+  name: fried egg
   description: A fried egg, with a touch of salt and pepper.
   components:
   - type: Item
@@ -590,7 +590,7 @@
   - type: Tag
     tags:
     - Meat
-#<Trauma>
+# <Trauma>
   - type: Construction
     graph: Friedeggs
     node: twoeggs

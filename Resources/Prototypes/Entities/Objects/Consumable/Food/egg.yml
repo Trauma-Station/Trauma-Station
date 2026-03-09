@@ -150,7 +150,7 @@
           Eggshells:
             min: 1
             max: 1
-#<Trauma>
+# <Trauma>
           FoodEggRaw:
             min: 1
             max: 1

@@ -111,7 +111,7 @@
     - Recyclable
     - Trash
     - BananaPeel
-#<Trauma>
+# <Trauma>
   - type: Perishable
     rotAfter: 99999 # - should not rot but no remove component function
     molsPerSecondPerUnitMass: 0

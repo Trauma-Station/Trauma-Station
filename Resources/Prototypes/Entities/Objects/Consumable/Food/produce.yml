@@ -495,7 +495,7 @@
     slots:
     - HEAD
     quickEquip: false
-#<Trauma>
+# <Trauma>
   - type: Perishable
     rotAfter: 900 # won't someone please think of the clowns
     molsPerSecondPerUnitMass: 0
