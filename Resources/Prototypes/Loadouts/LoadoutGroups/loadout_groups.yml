@@ -375,6 +375,8 @@
   - ChefJumpsuit
   - ChefJumpskirt
   - ServiceMJ # goob
+  - ClothingUniformJumpsuitDisgusting #Trauma
+  - ClothingUniformJumpsuitWaiter #Trauma
 
 - type: loadoutGroup
   id: ChefOuterClothing

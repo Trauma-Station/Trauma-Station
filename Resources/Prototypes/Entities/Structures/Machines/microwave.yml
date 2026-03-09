@@ -8,6 +8,10 @@
     capacity: 10
     canMicrowaveIdsSafely: false # Goobstation
     explosionChance: .25 # Goobstation
+# <Trauma>
+    baseHeatMultiplier: 50 # Heats food enough for some recipes without burning it in 30 seconds
+    objectHeatMultiplier: 50
+# </Trauma>
   - type: Appearance
   - type: GenericVisualizer
     visuals:

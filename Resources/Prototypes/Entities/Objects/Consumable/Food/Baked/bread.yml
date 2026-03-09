@@ -811,7 +811,11 @@
           Quantity: 5
         - ReagentId: Vitamin
           Quantity: 1
-# Tastes like bread, butter.
+# <Trauma>
+  - type: Construction
+    graph: EggToast
+    node: start
+# </Trauma>
 
 - type: entity
   name: french toast

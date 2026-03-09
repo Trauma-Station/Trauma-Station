@@ -49,6 +49,19 @@
   - type: RotInto
     entity: FoodRot
     stage: 1
+  - type: Construction
+    graph: BurningFood
+    node: start
+    defaultTarget: burned food
+  - type: AtmosExposed
+  - type: Temperature
+    currentTemperature: 290
+    specificHeat: 25
+  - type: TemperatureDamage
+  - type: InternalTemperature
+    thickness: 0.02
+    area: 0.02
+    conductivity: 15
 #</Trauma>
 
 # This base type is used to cover all of the "obvious" things that should be doable to open-package food.

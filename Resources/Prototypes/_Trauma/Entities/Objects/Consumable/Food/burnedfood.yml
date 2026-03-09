@@ -1,0 +1,257 @@
+- type: entity
+  name: burned food
+  parent: EdibleBase
+  id: FoodBurned
+  description: An all too common mistake.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - terrible
+  - type: Sprite
+    sprite: Objects/Consumable/Food/ingredients.rsi
+    state: badrecipe
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: GastroToxin
+          Quantity: 3
+  - type: Tag
+    tags:
+    - Trash
+  - type: Construction
+    graph: BurningFood
+    node: burned food
+
+- type: entity
+  abstract: true
+  parent: FoodBurned
+  id: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Construction
+    graph: MeatSteak
+    node: burned food
+
+- type: entity
+  name: burned steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: SteakBurned
+  components:
+  - type: Construction
+    graph: MeatSteak
+    node: burned food
+
+- type: entity
+  name: burned penguin steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: PenguinBurned
+  components:
+  - type: Construction
+    graph: MeatSteak
+    node: burned food
+
+- type: entity
+  name: burned chicken steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: ChickenBurned
+  components:
+  - type: Construction
+    graph: ChickenSteak
+    node: burned food
+
+- type: entity
+  name: burned duck steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: DuckBurned
+  components:
+  - type: Construction
+    graph: DuckSteak
+    node: burned food
+
+- type: entity
+  name: burned lizard steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: LizardBurned
+  components:
+  - type: Construction
+    graph: LizardSteak
+    node: burned food
+
+- type: entity
+  name: burned bear steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BearBurned
+  components:
+  - type: Construction
+    graph: BearSteak
+    node: burned food
+
+- type: entity
+  name: burned crab
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: CrabBurned
+  components:
+  - type: Construction
+    graph: CrabSteak
+    node: burned food
+
+- type: entity
+  name: burned goliath steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: GoliathBurned
+  components:
+  - type: Construction
+    graph: GoliathSteak
+    node: burned food
+
+- type: entity
+  name: burned rouny steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: RounyBurned
+  components:
+  - type: Construction
+    graph: RounySteak
+    node: burned food
+
+- type: entity
+  name: burned bacon
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BaconBurned
+  components:
+  - type: Construction
+    graph: Bacon
+    node: burned food
+
+- type: entity
+  name: burned anomalous meat steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurnedAnom
+  components:
+  - type: Construction
+    graph: AnomalyMeatSteak
+    node: burned food
+
+- type: entity
+  name: burned dragon steak
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurnedDragon
+  components:
+  - type: Construction
+    graph: DragonSteak
+    node: burned food
+
+- type: entity
+  name: burned cutlet
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurnedCutlet
+  components:
+  - type: Construction
+    graph: Cutlet
+    node: burned food
+
+- type: entity
+  name: burned bear cutlet
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurnedBearCutlet
+  components:
+  - type: Construction
+    graph: BearCutlet
+    node: burned food
+
+- type: entity
+  name: burned penguin cutlet
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurnedPenguinCutlet
+  components:
+  - type: Construction
+    graph: PenguinCutlet
+    node: burned food
+
+- type: entity
+  name: burned chicken cutlet
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurnedChickenCutlet
+  components:
+  - type: Construction
+    graph: ChickenCutlet
+    node: burned food
+
+- type: entity
+  name: burned duck cutlet
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurnedDuckCutlet
+  components:
+  - type: Construction
+    graph: DuckCutlet
+    node: burned food
+
+- type: entity
+  name: burned lizard cutlet
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurnedLizardCutlet
+  components:
+  - type: Construction
+    graph: LizardCutlet
+    node: burned food
+
+- type: entity
+  name: burned spider cutlet
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurneSpiderCutlet
+  components:
+  - type: Construction
+    graph: SpiderCutlet
+    node: burned food
+
+- type: entity
+  name: burned xeno cutlet
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurneXenoCutlet
+  components:
+  - type: Construction
+    graph: XenoCutlet
+    node: burned food
+
+- type: entity
+  name: burned dragon cutlet
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurneDragonCutlet
+  components:
+  - type: Construction
+    graph: DragonCutlet
+    node: burned food
+
+- type: entity
+  name: burned egg
+  parent: MeatBurnedBase
+  categories: [ HideSpawnMenu ]
+  id: BurnedEgg
+  components:
+  - type: Construction
+    graph: Friedeggs
+    node: burned food
