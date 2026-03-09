@@ -18,12 +18,11 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: 5dcc5fac-1983-43be-a6ff-9d8a5ae38157
 
-# FIXME: this username doesnt exist
-#- type: loadoutEffectGroup
-#  id: GamingFungus420
-#  effects:
-#  - !type:PlayerGUIDLoadoutEffect
-#    guid:
+- type: loadoutEffectGroup
+  id: TheGamingFungus420
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: ba57b839-0f52-4ba2-ba68-8d3b1d317c8e
 
 - type: loadoutEffectGroup
   id: Tia_Zoh
@@ -139,11 +138,11 @@
     back:
     - PatreonOwenCarpenter
 
-#- type: loadout
-#  id: PatreonGamingFungus420
-#  effects:
-#  - !type:GroupLoadoutEffect
-#    proto: GamingFungus420
-#  storage:
-#    back:
-#    - PatreonGamingFungus420
+- type: loadout
+  id: PatreonGamingFungus420
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TheGamingFungus420
+  storage:
+    back:
+    - PatreonGamingFungus420
