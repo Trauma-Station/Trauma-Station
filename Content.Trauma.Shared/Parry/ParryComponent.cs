@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.Parry;
 /// If an entity holds an item with this component, it can reflect ranged attacks and parry melee attacks, depending on it's melee skill.
 /// Uses <c>ItemToggleComponent</c> to control reflection.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class ParryComponent : Component
 {
     /// <summary>
