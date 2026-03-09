@@ -1,6 +1,6 @@
 - type: entity
-  id: KitchenDeepFryer
   parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: KitchenDeepFryer
   name: deep fryer
   description: You can deep fry anything! I really mean ANYTHING.
   components:

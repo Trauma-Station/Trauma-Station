@@ -15,6 +15,7 @@ using Content.Shared.Storage.Components;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.DeepFryer.Systems;
@@ -31,6 +32,8 @@ public abstract class SharedDeepFryerSystem : EntitySystem
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
 
+    public static readonly ProtoId<ItemSizePrototype> Ginormous = "Ginormous";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -45,7 +48,8 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         ent.Comp.Closed = false;
 
         _ambientSound.SetAmbience(ent.Owner, false);
-        _audio.PlayPredicted(ent.Comp.FinishSound, ent.Owner, ent.Owner);
+        _audio.Stop(ent.Comp.Sound);
+        ent.Comp.Sound = _audio.PlayPredicted(ent.Comp.FinishSound, ent.Owner, ent.Owner)?.Entity;
         ent.Comp.StoredObjects.Clear();
         ent.Comp.FryFinishTime = TimeSpan.Zero;
         _appearance.SetData(ent.Owner, DeepFryerVisuals.Open, true);
@@ -68,12 +72,13 @@ public abstract class SharedDeepFryerSystem : EntitySystem
             return;
 
         _ambientSound.SetAmbience(ent.Owner, true);
-        _audio.PlayPredicted(ent.Comp.StartSound, ent.Owner, ent.Owner);
+        _audio.Stop(ent.Comp.Sound);
+        ent.Comp.Sound = _audio.PlayPredicted(ent.Comp.StartSound, ent.Owner, ent.Owner)?.Entity;
         ent.Comp.FryFinishTime = _timing.CurTime + ent.Comp.TimeToDeepFry;
         foreach (var entity in entStorage.Contents.ContainedEntities)
         {
             ent.Comp.StoredObjects.Add(entity);
-            if (!TryComp<ItemComponent>(entity, out var item) || item.Size == "Ginormous")
+            if (!TryComp<ItemComponent>(entity, out var item) || item.Size == Ginormous)
             {
                 _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, true); // If it doesn't have an item component or the item is big then it's big yeah
                 return;
