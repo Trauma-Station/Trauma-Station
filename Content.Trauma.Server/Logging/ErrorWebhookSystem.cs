@@ -4,29 +4,36 @@ using Content.Server.Discord;
 using Content.Trauma.Common.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.Log;
+using Robust.Shared.Timing;
 using Serilog.Events;
 
 namespace Content.Trauma.Server.Logging;
 
 /// <summary>
 /// Sends errors to a discord webhook from the server config.
+/// Internally uses a queue to avoid hitting ratelimits as <see cref="DiscordWebhook"/> has no such mechanism.
 /// </summary>
 public sealed class ErrorWebhookSystem : EntitySystem
 {
     [Dependency] private readonly DiscordWebhook _discord = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ILogManager _log = default!;
 
     private ErrorWebhookLogHandler _handler = default!;
     private bool _enabled;
+    private WebhookIdentifier? _identifier;
+    private TimeSpan _nextSend;
+    private TimeSpan _sendDelay;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _handler = new ErrorWebhookLogHandler(_discord);
+        _handler = new ErrorWebhookLogHandler();
 
         Subs.CVar(_cfg, TraumaCVars.ErrorWebhookUrl, UpdateWebhookUrl, true);
+        Subs.CVar(_cfg, TraumaCVars.ErrorWebhookDelay, x => _sendDelay = TimeSpan.FromSeconds(x), true);
     }
 
     public override void Shutdown()
@@ -37,13 +44,37 @@ public sealed class ErrorWebhookSystem : EntitySystem
             _log.RootSawmill.RemoveHandler(_handler);
     }
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_identifier is not {} identifier || _handler.Messages.Count == 0)
+            return; // not enabled or nothing to send
+
+        var now = _timing.CurTime;
+        if (now < _nextSend)
+            return; // on cooldown
+
+        // wait before sending the next message to not get ratelimited
+        _nextSend = now + _sendDelay;
+
+        var content = _handler.Messages.Dequeue();
+        var payload = new WebhookPayload()
+        {
+            Content = content
+        };
+
+        // not awaited so it doesn't affect TPS
+        _ = _discord.CreateMessage(identifier, payload);
+    }
+
     public void UpdateWebhookUrl(string url)
     {
         var enabled = !string.IsNullOrEmpty(url);
         if (enabled)
-            _discord.GetWebhook(url, data => _handler.Identifier = data.ToIdentifier());
+            _discord.GetWebhook(url, data => _identifier = data.ToIdentifier());
         else
-            _handler.Identifier = null;
+            _identifier = null;
 
         // doing change detection because you dont need to re-add the handler just to change the url
         if (enabled == _enabled)
@@ -60,43 +91,27 @@ public sealed class ErrorWebhookSystem : EntitySystem
 
 public sealed class ErrorWebhookLogHandler : ILogHandler
 {
-    private readonly DiscordWebhook _discord;
-    public WebhookIdentifier? Identifier;
+    /// <summary>
+    /// Prefix to remove from stack trace paths.
+    /// </summary>
+    public const string StackTracePrefix = "/home/runner/work/Trauma-Station/";
 
-    public ErrorWebhookLogHandler(DiscordWebhook discord)
-    {
-        _discord = discord;
-    }
+    public Queue<string> Messages = new();
 
     void ILogHandler.Log(string sawmillName, LogEvent message)
     {
-        if (Identifier is not {} identifier)
-            return; // should never happen but whatever
-
         if (message.Level is not LogEventLevel.Error or LogEventLevel.Fatal)
             return; // only care about errors
 
         var name = LogMessage.LogLevelToName(message.Level.ToRobust());
-        var content = $"[{name}] {sawmillName}: {message.RenderMessage()}";
+        var content = $"{DateTime.Now:o} [{name}] {sawmillName}: {message.RenderMessage()}";
         if (message.Exception is {} e)
-            content += $"\n{e}";
+            content += $"\n{e.ToString().Replace(StackTracePrefix, string.Empty)}";
 
         // trim the end of the stack trace if its too long, usually not important
         if (content.Length > 2000)
             content = content[0..2000];
 
-        var payload = new WebhookPayload()
-        {
-            Content = content
-        };
-
-        try
-        {
-            _ = _discord.CreateMessage(identifier, payload);
-        }
-        catch
-        {
-            // probably shouldnt happen since its not being awaited, but just incase, really don't want a log handler to throw
-        }
+        Messages.Enqueue(content);
     }
 }

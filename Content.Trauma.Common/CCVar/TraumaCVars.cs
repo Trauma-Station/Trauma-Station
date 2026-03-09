@@ -129,5 +129,12 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<string> ErrorWebhookUrl =
         CVarDef.Create("trauma.error_webhook_url", string.Empty, CVar.SERVER);
 
+    /// <summary>
+    /// Delay between each error message in seconds.
+    /// Used to avoid hitting ratelimits
+    /// </summary>
+    public static readonly CVarDef<double> ErrorWebhookDelay =
+        CVarDef.Create("trauma.error_webhook_delay", 0.3, CVar.SERVER);
+
     #endregion
 }
