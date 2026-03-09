@@ -102,7 +102,7 @@ public abstract partial class SharedAbductorSystem
         var filter = Filter.Local();
         var user = args.User;
 
-        if (_net.IsServer)
+        if (_net.IsServer) //evil
             filter = Filter.Pvs(args.User, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == user);
 
         _color.RaiseEffect(Color.FromHex("#00BA00"), flashed, filter);
