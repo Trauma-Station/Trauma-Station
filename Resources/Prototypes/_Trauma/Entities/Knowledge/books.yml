@@ -100,12 +100,11 @@
 - type: entity
   parent: BookSkillbook
   id: BookSchematic
+  name: blueprint
   abstract: true
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Misc/schematics.rsi
-    layers:
-    - state: base
 
 - type: entity
   parent: BookSkillbook
@@ -382,7 +381,6 @@
 - type: entity
   parent: BookSchematic
   id: BookMaterials
-  name: blueprint
   suffix: materials
   description: A blueprint with designs for materials.
   components:
@@ -399,7 +397,6 @@
 - type: entity
   parent: BookSchematic
   id: BookDoors
-  name: blueprint
   suffix: doors
   description: A blueprint with designs for doors.
   components:
@@ -416,7 +413,6 @@
 - type: entity
   parent: BookSchematic
   id: BookAirlocks
-  name: blueprint
   suffix: airlocks
   description: A blueprint with designs for airlocks.
   components:
@@ -433,7 +429,6 @@
 - type: entity
   parent: BookSchematic
   id: BookToys
-  name: blueprint
   suffix: toys
   description: A blueprint with designs for toys.
   components:
@@ -450,7 +445,6 @@
 - type: entity
   parent: BookSchematic
   id: BookBananium
-  name: blueprint
   suffix: bananium
   description: A blueprint with designs for bananium structures.
   components:
@@ -467,7 +461,6 @@
 - type: entity
   parent: BookSchematic
   id: BookBots
-  name: blueprint
   suffix: bots
   description: A blueprint with designs for robots.
   components:
@@ -484,7 +477,6 @@
 - type: entity
   parent: BookSchematic
   id: BookFurniture
-  name: blueprint
   suffix: furniture
   description: A blueprint with designs for furniture.
   components:
@@ -501,7 +493,6 @@
 - type: entity
   parent: BookSchematic
   id: BookInfrastructure
-  name: blueprint
   suffix: infrastructure
   description: A blueprint with designs for various pieces of infrastructure.
   components:
@@ -518,7 +509,6 @@
 - type: entity
   parent: BookSchematic
   id: BookElectronics
-  name: blueprint
   suffix: electronics
   description: A blueprint with designs for various electronics.
   components:
@@ -535,7 +525,6 @@
 - type: entity
   parent: BookSchematic
   id: BookWalls
-  name: blueprint
   suffix: walls
   description: A blueprint with designs for walls.
   components:
@@ -554,7 +543,7 @@
   id: BookScience
   name: old book
   suffix: science
-  description: Its a book on the basics of science.
+  description: It's a book on the basics of science.
   components:
   - type: Sprite
     layers:
@@ -569,7 +558,6 @@
 - type: entity
   parent: BookSchematic
   id: BookWindows
-  name: blueprint
   suffix: windows
   description: A blueprint with designs for windows.
   components:
@@ -586,7 +574,6 @@
 - type: entity
   parent: BookSchematic
   id: BookSmokeables
-  name: blueprint
   suffix: smokeables
   description: A blueprint with designs for blunts.
   components:
