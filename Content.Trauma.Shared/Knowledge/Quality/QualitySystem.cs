@@ -49,6 +49,7 @@ public sealed class QualitySystem : EntitySystem
         SubscribeLocalEvent<QualityComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
         SubscribeLocalEvent<ArmorComponent, ApplyQualityEvent>(OnArmorApplyQuality);
         SubscribeLocalEvent<DestructibleComponent, ApplyQualityEvent>(OnDestructibleApplyQuality);
+        SubscribeLocalEvent<DamageOnHitComponent, ApplyQualityEvent>(OnShivApplyQuality);
         SubscribeLocalEvent<DamageOtherOnHitComponent, ApplyQualityEvent>(OnSpearApplyQuality);
         SubscribeLocalEvent<GunComponent, ApplyQualityEvent>(OnGunApplyQuality);
         SubscribeLocalEvent<ProjectileComponent, ApplyQualityEvent>(OnProjectileApplyQuality);
@@ -106,6 +107,18 @@ public sealed class QualitySystem : EntitySystem
                 trigger.Damage *= modifier;
         }
         // TODO: this cant be networked which isn't good, make a scale field?
+    }
+
+    private void OnShivApplyQuality(Entity<DamageOnHitComponent> ent, ref ApplyQualityEvent args)
+    {
+        // lowest quality will break in a few hits, highest quality will last much longer
+        const float[] _modifiers =
+        [
+            15f, 5f, 2f, 1.5f, 1.15f,
+            1f,
+            0.9f, 0.8f, 0.65f, 0.5f, 0.3f
+        ];
+        ent.Comp.Damage *= _modifiers[args.Quality + 5];
     }
 
     // not specific to spears but holy class name
@@ -285,8 +298,8 @@ public sealed class QualitySystem : EntitySystem
 /// Raised on an entity to apply quality modifiers for each relevant component.
 /// </summary>
 [ByRefEvent]
-public record struct ApplyQualityEvent(float Quality)
+public record struct ApplyQualityEvent(int Quality)
 {
     public float Modifier(float power = 1.1f)
-        => QualitySystem.QualityModifier(Quality, power);
+        => QualitySystem.QualityModifier((float) Quality, power);
 }
