@@ -146,7 +146,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         _idCard.TryChangeFullName(targetId, newFullName, player: player);
         _idCard.TryChangeJobTitle(targetId, newJobTitle, player: player);
 
-        if (_prototype.Resolve(newJobProto, out var job)
+        if (_prototype.TryIndex(newJobProto, out var job) // Trauma - TryIndex not Resolve, this is untrusted client input
             && _prototype.Resolve(job.Icon, out var jobIcon))
         {
             _idCard.TryChangeJobIcon(targetId, jobIcon, player: player);
