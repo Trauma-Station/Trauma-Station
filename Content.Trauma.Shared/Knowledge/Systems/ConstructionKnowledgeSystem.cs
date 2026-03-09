@@ -59,6 +59,10 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
 
         // TODO: grant xp when building shit
 
+        // ignore quality code if the prototype doesn't want it
+        if (!proto.UseQuality)
+            return;
+
         var item = args.Entity;
         var quality = EnsureComp<QualityComponent>(item);
         // quality is affected by practical skills, something can be easy to understand but hard to pull off
