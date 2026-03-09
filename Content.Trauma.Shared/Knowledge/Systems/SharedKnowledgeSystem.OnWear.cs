@@ -2,8 +2,8 @@
 
 using Content.Shared.Body;
 using Content.Shared.Clothing;
-using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Components;
+using Content.Trauma.Shared.MartialArts.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 

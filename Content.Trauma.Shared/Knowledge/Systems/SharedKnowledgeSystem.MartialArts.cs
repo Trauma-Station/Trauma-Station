@@ -45,10 +45,10 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, ComboAttackPerformedEvent>(RelayMartialArt);
         SubscribeLocalEvent<KnowledgeHolderComponent, MeleeHitEvent>(RelayActiveEvent);
         SubscribeLocalEvent<KnowledgeHolderComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(CheckGrabStageOverridePass);
-        SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(OnSpeedModifier);
+        SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(RelayMartialArt);
+        SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(RelayMartialArt);
         SubscribeLocalEvent<KnowledgeHolderComponent, GetMeleeAttackRateEvent>(RelayActiveEvent);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(OnProjectileHit);
+        SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(RelayMartialArt);
         SubscribeLocalEvent<PerformMartialArtComboEvent>(OnComboActionClicked);
 
         SubscribeAllEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
@@ -171,28 +171,6 @@ public abstract partial class SharedKnowledgeSystem
 
     public EntityUid? GetActiveMartialArt(EntityUid target)
         => GetContainer(target)?.Comp.ActiveMartialArt;
-
-    private void CheckGrabStageOverridePass(Entity<KnowledgeHolderComponent> ent, ref CheckGrabOverridesEvent args)
-    {
-        if (GetActiveMartialArt(ent) is { } uid)
-            RaiseLocalEvent(uid, ref args);
-    }
-
-    private void OnSpeedModifier(Entity<KnowledgeHolderComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
-    {
-        if (GetActiveMartialArt(ent) is not { } art)
-            return;
-        var ev = new RefreshMovementSpeedModifiersEvent();
-        RaiseLocalEvent(art, ev);
-        args.ModifySpeed(ev.WalkSpeedModifier, ev.SprintSpeedModifier);
-    }
-
-    private void OnProjectileHit(Entity<KnowledgeHolderComponent> ent, ref ProjectileReflectAttemptEvent args)
-    {
-        if (GetActiveMartialArt(ent) is not { } art)
-            return;
-        RaiseLocalEvent(art, ref args);
-    }
 
     private void OnComboActionClicked(PerformMartialArtComboEvent args)
     {

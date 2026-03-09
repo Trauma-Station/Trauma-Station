@@ -122,7 +122,7 @@ public partial class MartialArtsSystem
 
         ent.Comp.LastAttacks.Clear();
 
-        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && !martialArtsComp.Blocked && _mobState.IsAlive(target) && proto.GiveExperience)
+        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var comp) && comp.GiveExperience && !comp.Blocked && _mobState.IsAlive(target) && proto.GiveExperience)
         {
             // you can only go up to your opponents level + 10, to encourage actual training between masters
             var opponent = GetMartialArtLevel(target);

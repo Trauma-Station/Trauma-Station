@@ -29,6 +29,10 @@
   components:
   - type: Knowledge
     costs: null # chef only
+  - type: MartialArtsKnowledge
+    giveExperience: false # only gain XP from cooking, do your job
+  - type: ExperienceOnCooking
+    scale: 5 # cook 200 meals to master it
   - type: AreaMartialArt
     areas:
     - AreaKitchen
