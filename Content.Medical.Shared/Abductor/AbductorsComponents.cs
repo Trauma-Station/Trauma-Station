@@ -5,6 +5,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Abductor;
 
@@ -50,6 +51,16 @@ public sealed partial class AbductorGizmoComponent : Component
 {
     [DataField, AutoNetworkedField]
     public NetEntity? Target;
+
+    [DataField, AutoNetworkedField]
+    public AbductorGizmoMode Mode = AbductorGizmoMode.Tracker;
+}
+
+[Serializable, NetSerializable]
+public enum AbductorGizmoMode : byte
+{
+    Tracker,
+    MindControl,
 }
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
