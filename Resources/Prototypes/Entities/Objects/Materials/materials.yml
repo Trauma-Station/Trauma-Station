@@ -346,9 +346,9 @@
     slots:
   - type: KnowledgeGrantOnWear # Trauma
     skills:
-      MartialArtCorporateJudo: 26
+      MartialArtSpaceBear: 26
     experience:
-      MartialArtCorporateJudo: 2
+      MartialArtSpaceBear: 2
 
 - type: entity
   parent: MaterialBase
