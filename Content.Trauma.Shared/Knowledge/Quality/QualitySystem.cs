@@ -17,6 +17,7 @@ using Content.Trauma.Common.Construction;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Common.Stack;
+using Content.Trauma.Shared.Damage;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
