@@ -76,4 +76,4 @@
   - type: VentCrittersRule
     playerRatio: 85
     table:
-      id: BaseMobRatma
+      id: MobRatma
