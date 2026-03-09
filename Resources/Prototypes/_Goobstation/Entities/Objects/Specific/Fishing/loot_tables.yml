@@ -63,7 +63,7 @@
     - id: FishTropical
 
  # <Trauma - Carp attack fishermen
-- type: entityTable 
+- type: entityTable
   id: HostileFishTable
   table: !type:GroupSelector
     children:
