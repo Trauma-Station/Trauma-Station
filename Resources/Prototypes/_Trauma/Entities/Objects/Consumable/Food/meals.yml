@@ -97,7 +97,7 @@
   parent: FoodInjectableBase
   id: FoodCornDog
   name: corn dog
-  description: bettered glizzy
+  description: battered glizzy
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/corndog.rsi
@@ -124,7 +124,7 @@
   parent: FoodInjectableBase
   id: FoodHotDog
   name: hot dog
-  description: unbettered glizzy
+  description: unbattered glizzy
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/hotdog.rsi
