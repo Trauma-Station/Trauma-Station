@@ -49,10 +49,6 @@
   - type: RotInto
     entity: FoodRot
     stage: 1
-  - type: Construction
-    graph: BurningFood
-    node: start
-    defaultTarget: burned food
   - type: Temperature
     currentTemperature: 290
     specificHeat: 25
@@ -61,8 +57,8 @@
     thickness: 0.02
     area: 0.02
     conductivity: 15
+  - type: BurnableFood
 #</Trauma>
-
 # This base type is used to cover all of the "obvious" things that should be doable to open-package food.
 # Practically this means injection.
 # But it might in future also mean drawing with a syringe, so this is a base prototype just in case.

@@ -36,6 +36,8 @@
       state: scroll
   - type: Item
     size: Small
+  - type: PaperRandomStory
+    template: GenericStory
 
 - type: entity
   parent: BaseScrollFull

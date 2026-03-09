@@ -27,18 +27,6 @@
 
   - node: meat steak
     entity: FoodMeatCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: SteakBurned
-# </Trauma>
 
 # penguin steak
 - type: constructionGraph
@@ -57,18 +45,6 @@
 
   - node: cooked penguin
     entity: FoodMeatPenguinCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: PenguinBurned
-# </Trauma>
 
 # chicken steak
 - type: constructionGraph
@@ -87,18 +63,6 @@
 
   - node: cooked chicken
     entity: FoodMeatChickenCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: ChickenBurned
-# </Trauma>
 
 # duck steak
 - type: constructionGraph
@@ -117,18 +81,6 @@
 
   - node: cooked duck
     entity: FoodMeatDuckCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: DuckBurned
-# </Trauma>
 
 # lizard steak
 - type: constructionGraph
@@ -148,19 +100,6 @@
   - node: lizard steak
     entity: FoodMeatLizardCooked
 
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: LizardBurned
-# </Trauma>
-
 # bear steak
 - type: constructionGraph
   id: BearSteak
@@ -178,18 +117,6 @@
 
   - node: filet migrawr
     entity: FoodMeatBearCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BearBurned
-# </Trauma>
 
 # crab steak
 - type: constructionGraph
@@ -208,18 +135,6 @@
 
   - node: cooked crab
     entity: FoodMeatCrabCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: CrabBurned
-# </Trauma>
 
 # goliath steak
 - type: constructionGraph
@@ -238,18 +153,6 @@
 
   - node: goliath steak
     entity: FoodMeatGoliathCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: GoliathBurned
-# </Trauma>
 
 # rouny steak
 - type: constructionGraph
@@ -266,18 +169,6 @@
       - minTemperature: 445 #rouny
   - node: rouny steak
     entity: FoodMeatRounyCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: RounyBurned
-# </Trauma>
 
 # bacon "steak"
 - type: constructionGraph
@@ -294,18 +185,6 @@
       - minTemperature: 345
   - node: bacon
     entity: FoodMeatBaconCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BaconBurned
-# </Trauma>
 
 # anomaly meat steak
 - type: constructionGraph
@@ -322,18 +201,6 @@
       - minTemperature: 335
   - node: anomaly steak
     entity: FoodMeatAnomalyCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BurnedAnom
-# </Trauma>
 
 - type: constructionGraph
   id: DragonSteak
@@ -349,18 +216,6 @@
       - minTemperature: 445
   - node: dragon steak
     entity: FoodMeatDragonCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 500
-
-  - node: burned food
-    entity: BurnedDragon
-# </Trauma>
 
 # cutlets
 
@@ -378,18 +233,6 @@
       - minTemperature: 335
   - node: cutlet
     entity: FoodMeatCutletCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BurnedCutlet
-# </Trauma>
 
 - type: constructionGraph
   id: BearCutlet
@@ -405,18 +248,6 @@
       - minTemperature: 345
   - node: bear cutlet
     entity: FoodMeatBearCutletCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BurnedBearCutlet
-# </Trauma>
 
 - type: constructionGraph
   id: PenguinCutlet
@@ -432,18 +263,6 @@
       - minTemperature: 345
   - node: penguin cutlet
     entity: FoodMeatPenguinCutletCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BurnedPenguinCutlet
-# </Trauma>
 
 - type: constructionGraph
   id: ChickenCutlet
@@ -459,18 +278,6 @@
       - minTemperature: 345
   - node: chicken cutlet
     entity: FoodMeatChickenCutletCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BurnedChickenCutlet
-# </Trauma>
 
 - type: constructionGraph
   id: DuckCutlet
@@ -486,18 +293,6 @@
       - minTemperature: 335
   - node: duck cutlet
     entity: FoodMeatDuckCutletCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BurnedDuckCutlet
-# </Trauma>
 
 - type: constructionGraph
   id: LizardCutlet
@@ -513,18 +308,6 @@
       - minTemperature: 345
   - node: lizard cutlet
     entity: FoodMeatLizardCutletCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BurnedLizardCutlet
-# </Trauma>
 
 - type: constructionGraph
   id: SpiderCutlet
@@ -540,18 +323,6 @@
       - minTemperature: 345
   - node: spider cutlet
     entity: FoodMeatSpiderCutletCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BurnedSpiderCutlet
-# </Trauma>
 
 - type: constructionGraph
   id: XenoCutlet
@@ -567,18 +338,6 @@
       - minTemperature: 345
   - node: xeno cutlet
     entity: FoodMeatXenoCutletCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: BurnedXenoCutlet
-# </Trauma>
 
 - type: constructionGraph
   id: DragonCutlet
@@ -594,15 +353,3 @@
       - minTemperature: 445
   - node: dragon cutlet
     entity: FoodMeatDragonCutletCooked
-# <Trauma>
-    edges:
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 500
-
-  - node: burned food
-    entity: BurnedDragonCutlet
-# </Trauma>
