@@ -5,6 +5,6 @@
     Potato: 1 # TODO: cut it into raw chips first
   reagents:
   - allowed: [Cornoil, Oil, OilOlive]
-    needed: 5 # 5u of any oil gets used
+    quantity: 5 # 5u of any oil gets used
 
 # TODO: battered sausage etc
