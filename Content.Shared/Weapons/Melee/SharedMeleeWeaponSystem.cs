@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Common.Parry;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
 using Content.Shared._Shitcode.Heretic.Components;
@@ -635,6 +636,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // somewhat messy scuffle. See also, heavy attacks.
         Interaction.DoContactInteraction(user, target);
 
+        // <Trauma>
+        if (component.CanParryLight)
+        {
+            var parryEvent = new ParryAttemptEvent(meleeUid, user, target.Value);
+            RaiseLocalEvent(target.Value, ref parryEvent);
+            if (parryEvent.Parried) return;
+        }
+        // </Trauma>
+
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
         RaiseLocalEvent(target.Value, attackedEvent);
@@ -799,9 +809,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         var appliedDamage = new DamageSpecifier();
-        // <Trauma>
-        var random = SharedRandomExtensions.PredictedRandom(Timing, GetNetEntity(meleeUid));
-        // </Trauma>
 
         for (var i = targets.Count - 1; i >= 0; i--)
         {
@@ -815,6 +822,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 targets.RemoveAt(i);
                 continue;
             }
+
+            // <Trauma>
+            if (component.CanParryWide)
+            {
+                var parryEvent = new ParryAttemptEvent(meleeUid, user, entity);
+                RaiseLocalEvent(entity, ref parryEvent);
+                if (parryEvent.Parried) continue;
+            }
+            // </Trauma>
 
             var attackedEvent = new AttackedEvent(meleeUid, user, GetCoordinates(ev.Coordinates));
             RaiseLocalEvent(entity, attackedEvent);

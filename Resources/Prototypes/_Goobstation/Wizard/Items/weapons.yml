@@ -228,7 +228,7 @@
       - state: equipped-BACKPACK
       suitstorage:
       - state: equipped-BACKPACK
-  - type: SkillBasedReflect
+  - type: Parry
   - type: LightAttackDamageMultiplier
     multiplier: 3
     extraSound:

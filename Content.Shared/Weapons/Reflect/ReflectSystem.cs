@@ -62,7 +62,7 @@ public sealed class ReflectSystem : EntitySystem
         SubscribeLocalEvent<ReflectComponent, ExaminedEvent>(OnExamine);
     }
 
-    private void OnReflectUserCollide(Entity<ReflectComponent> ent, ref ProjectileReflectAttemptEvent args)
+    private void OnReflectUserCollide(Entity<ReflectComponent> ent, ref ProjectileReflectAttemptEvent args)  // Trauma - pass the actual target
     {
         if (args.Cancelled)
             return;
@@ -70,11 +70,11 @@ public sealed class ReflectSystem : EntitySystem
         if (!ent.Comp.InRightPlace)
             return; // only reflect when equipped correctly
 
-        if (TryReflectProjectile(ent, ent.Owner, args.ProjUid))
+        if (TryReflectProjectile(ent, args.Target, args.ProjUid))
             args.Cancelled = true;
     }
 
-    private void OnReflectUserHitscan(Entity<ReflectComponent> ent, ref HitScanReflectAttemptEvent args)
+    private void OnReflectUserHitscan(Entity<ReflectComponent> ent, ref HitScanReflectAttemptEvent args)  // Trauma - pass the actual target
     {
         if (args.Reflected)
             return;
@@ -82,7 +82,7 @@ public sealed class ReflectSystem : EntitySystem
         if (!ent.Comp.InRightPlace)
             return; // only reflect when equipped correctly
 
-        if (TryReflectHitscan(ent, ent.Owner, args.Shooter, args.SourceItem, args.Direction, args.Reflective, args.Damage, out var dir)) // Goob edit
+        if (TryReflectHitscan(ent, args.Target, args.Shooter, args.SourceItem, args.Direction, args.Reflective, args.Damage, out var dir)) // Goob edit
         {
             args.Direction = dir.Value;
             args.Reflected = true;
