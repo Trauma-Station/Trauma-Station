@@ -32,6 +32,11 @@
       rolls: !type:RangeNumberSelector
         range: 0, 3
       tableId: RandomSkillbook
+    # Trauma - Empty Scrolls
+    - !type:NestedSelector
+      rolls: !type:RangeNumberSelector
+        range: 0, 1
+      tableId: RandomSkillbook
 
 - type: entityTable
   id: RandomHandwrittenBookTable

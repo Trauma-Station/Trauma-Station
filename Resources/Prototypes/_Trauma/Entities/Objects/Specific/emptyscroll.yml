@@ -19,3 +19,900 @@
   - type: Item
     size: Small
   - type: EmptyScroll
+
+- type: entity
+  parent: Paper
+  id: BaseScrollFull
+  abstract: true
+  name: old scroll
+  description: A scroll that has been partially filled in.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      sprite: _Trauma/Objects/Specific/empty_scroll.rsi
+    - type: Sprite
+      sprite: _Goobstation/Wizard/Objects/scroll.rsi
+      state: scroll
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSword
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-sword
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullEyeglasses
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-EYEGLASSES
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullDOLL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-DOLL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullPig
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-PIG
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSUNGLASSES
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SUNGLASSES
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullCQC
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-CQC
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullDRESS
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-DRESS
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullROBES
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-ROBES
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullFUR
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-FUR
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullFUROUTFIT
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-FUROUTFIT
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullGAUNT
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-GAUNT
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullGUARD
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-GUARD
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullPRIEST
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-PRIEST
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullPRIESTROBE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-PRIESTROBE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullANCIENTBOOK
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-ANCIENTBOOK
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSCROLL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SCROLL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullALE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-ALE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullTOBACCO
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-TOBACCO
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullOPIUM
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-OPIUM
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullWHISKEY
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-WHISKEY
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBLESSING
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BLESSING
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullFENT
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-FENT
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBACON
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BACON
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullCABBAGE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-CABBAGE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullCARROT
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-CARROT
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullCHEESE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-CHEESE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullMEAT
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-MEAT
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullMUSHROOM
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-MUSHROOM
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullEGG
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-EGG
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullMEATPIE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-MEATPIE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullMIXNMATCH
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-MIXNMATCH
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullMOLDYBREAD
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-MOLDYBREAD
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullROTTENMEAT
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-ROTTENMEAT
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSALAMI
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SALAMI
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSALMONSNAKE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SALMONSNAKE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullTOMATO
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-TOMATO
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullVEGETABLEPIE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-VEGETABLEPIE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullWHEATFLOUR
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-WHEATFLOUR
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBLUETOMATO
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BLUETOMATO
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBLUESPACETOMATO
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BLUESPACETOMATO
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBURGER
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BURGER
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullPIZZA
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-PIZZA
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullCLOTH
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-CLOTH
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullDIAMOND
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-DIAMOND
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullFETUS
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-FETUS
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullIRONARROW
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-IRONARROW
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullLANTERN
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-LANTERN
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullNITROGLYCERIN
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-NITROGLYCERIN
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSILVERCOIN
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SILVERCOIN
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSTICK
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-STICK
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSTONE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-STONE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullMETAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-METAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullCORGISKIN
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-CORGISKIN
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullEAGLESHIELD
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-EAGLESHIELD
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSPIDERSHIELD
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SPIDERSHIELD
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullWOODENBUCKLER
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-WOODENBUCKLER
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullENERGYSHIELD
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-ENERGYSHIELD
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBUTTERFLY
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BUTTERFLY
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullFLOORGOBLIN
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-FLOORGOBLIN
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSALMONSNAKESOUL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SALMONSNAKESOUL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullCOUNTER
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-COUNTER
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullCOUNTERMAGIC
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-COUNTER-MAGIC
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullDASH
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-DASH
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullDEVOUR
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-DEVOUR
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullLOCKPICKING
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-LOCKPICKING
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullLEGSWEEP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-LEGSWEEP
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSTEAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-STEAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullAA
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-AA
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullKILLSIGN
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-KILLSIGN
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullANTAG
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-ANTAG
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullDAGD
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-DAGD
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFull
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSILENCE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SILENCE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullPHASESTEP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-PHASESTEP
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullJAUNT
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-JAUNT
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullPHASESTEP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-PHASESTEP
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBEARTRAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BEARTRAP
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullGLASSVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-GLASSVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullPIPE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-PIPE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSKINNINGKNIFE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SKINNINGKNIFE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullTINDERBOX
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-TINDERBOX
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullTORCH
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-TORCH
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBLACKVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BLACKVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBLOODVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BLOODVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBLUEVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BLUEVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBROWNVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BROWNVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullELIXIRBODY
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-ELIXIRBODY
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullELIXIRMIND
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-ELIXIRMIND
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullEXPLOSIVEVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-EXPLOSIVEVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullGREENVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-GREENVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullLIGHTBLUEVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-LIGHTBLUEVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullMURKYVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-MURKYVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullORANGEVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-ORANGEVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullPURPLEVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-PURPLEVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullREDVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-REDVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullWATERVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-WATERVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullWHITEVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-WHITEVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullWORMJUICE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-WORMJUICE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullYELLOWVIAL
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-YELLOWVIAL
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullBONESHEARS
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-BONESHEARS
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullCLAYMORE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-CLAYMORE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullDAGGER
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-DAGGER
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullIRONMACE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-IRONMACE
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullIRONSPEAR
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-IRONSPEAR
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullLONGSWORD
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-LONGSWORD
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullMEATCLEAVER
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-MEATCLEAVER
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullRITUALSPEAR
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-RITUALSPEAR
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSHORTBOW
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SHORTBOW
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullSHARKTEETH
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-SHARKTEETH
+
+- type: entity
+  parent: BaseScrollFull
+  id: ScrollFullWARSCYTHE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    content: scroll-text-WARSCYTHE

@@ -220,7 +220,7 @@
   name: burned spider cutlet
   parent: MeatBurnedBase
   categories: [ HideSpawnMenu ]
-  id: BurneSpiderCutlet
+  id: BurnedSpiderCutlet
   components:
   - type: Construction
     graph: SpiderCutlet
@@ -230,7 +230,7 @@
   name: burned xeno cutlet
   parent: MeatBurnedBase
   categories: [ HideSpawnMenu ]
-  id: BurneXenoCutlet
+  id: BurnedXenoCutlet
   components:
   - type: Construction
     graph: XenoCutlet
@@ -240,7 +240,7 @@
   name: burned dragon cutlet
   parent: MeatBurnedBase
   categories: [ HideSpawnMenu ]
-  id: BurneDragonCutlet
+  id: BurnedDragonCutlet
   components:
   - type: Construction
     graph: DragonCutlet
