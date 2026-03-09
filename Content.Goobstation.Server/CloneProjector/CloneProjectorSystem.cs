@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -69,7 +64,6 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
     [Dependency] private readonly CarryingSystem _carrying = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly MobThresholdSystem _thresholds = default!;
-    [Dependency] private readonly InternalEncryptionKeySpawner _encryptionKeySpawner = default!;
 
     public override void Initialize()
     {

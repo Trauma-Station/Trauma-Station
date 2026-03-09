@@ -35,7 +35,6 @@ namespace Content.Server.Radio.EntitySystems;
 public sealed partial class RadioSystem : EntitySystem // Trauma - made partial
 {
     // <Trauma>
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
     [Dependency] private readonly RadioJobIconSystem _radioIcon = default!;
@@ -78,10 +77,9 @@ public sealed partial class RadioSystem : EntitySystem // Trauma - made partial
         if (TryComp(uid, out ActorComponent? actor))
         {
             // Einstein Engines - Languages begin
-            var listener = component.Owner;
             var msg = args.OriginalChatMsg;
 
-            if (listener != null && !_language.CanUnderstand(listener, args.Language.ID))
+            if (!_language.CanUnderstand(uid, args.Language.ID))
                 msg = args.LanguageObfuscatedChatMsg;
 
             _netMan.ServerSendMessage(new MsgChatMessage { Message = msg }, actor.PlayerSession.Channel);

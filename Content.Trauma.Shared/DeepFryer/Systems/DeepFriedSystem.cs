@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Examine;
 using Content.Shared.Nutrition;
 using Content.Shared.Nutrition.EntitySystems;
@@ -20,7 +22,7 @@ public sealed class DeepFriedSystem : EntitySystem
 
     private void OnExamined(Entity<DeepFriedComponent> ent, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("deep-fried-markup"));
+        args.PushMarkup(Loc.GetString("deep-fried-examine"));
     }
 
     private void OnFlavorMod(Entity<DeepFriedComponent> ent, ref FlavorProfileModificationEvent args)

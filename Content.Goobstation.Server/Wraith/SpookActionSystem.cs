@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Goobstation.Shared.Wraith.Spook;
@@ -8,7 +10,6 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
-using Content.Shared.Popups;
 using Content.Server.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Storage.Components;

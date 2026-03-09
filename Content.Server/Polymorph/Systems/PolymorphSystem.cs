@@ -3,8 +3,6 @@ using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
 using Content.Medical.Common.Targeting;
-using Content.Medical.Shared.Wounds;
-using Content.Shared.Body;
 using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
 using Content.Shared.Polymorph.Systems;
@@ -50,7 +48,6 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
     // </Trauma>
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;

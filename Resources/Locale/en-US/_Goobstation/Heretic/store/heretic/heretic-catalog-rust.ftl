@@ -39,8 +39,15 @@ knowledge-path-rust-s2-desc =
     Standing on Rusted tiles heals, purges chems off your body and grants you resistance to batons.
     Allows you to rust basic iron walls and floors.
 
-knowledge-path-rust-s3-name = Aggressive Spread
+knowledge-path-rust-s3-name = Mark of Rust
 knowledge-path-rust-s3-desc =
+    The Blacksmith looks away. To a place lost long ago. "Rusted Hills help those in dire need... at a cost."
+
+    Your Mansus Grasp now applies the Mark of Rust. The mark is triggered from an attack with your Rusty Blade.
+    When triggered, your victim will suffer heavy disgust.
+
+knowledge-path-rust-s4-name = Aggressive Spread
+knowledge-path-rust-s4-desc =
     All wise men know well not to visit the Rusted Hills... Yet the Blacksmith's tale was inspiring.
 
     Grants you Aggressive Spread, a spell that spreads rust to nearby surfaces.
@@ -50,14 +57,6 @@ knowledge-path-rust-s3-desc =
 #     The speed was unparalleled, the strength unnatural. The Blacksmith was smiling.
 #
 #     Grants you passive healing and resistance to batons while standing over rust.
-
-knowledge-path-rust-s4-name = Mark of Rust
-knowledge-path-rust-s4-desc =
-    The Blacksmith looks away. To a place lost long ago. "Rusted Hills help those in dire need... at a cost."
-
-    Your Mansus Grasp now applies the Mark of Rust. The mark is triggered from an attack with your Rusty Blade.
-    When triggered, your victim will suffer heavy disgust.
-    Allows you to rust special material walls.
 
 knowledge-path-rust-s5-name = Rust Construction
 knowledge-path-rust-s5-desc =

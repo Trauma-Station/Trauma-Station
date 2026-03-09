@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Hands;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CombatMode;
@@ -78,8 +79,7 @@ public sealed class PredictedHandsSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         if (!rand.Prob(args.DisarmProbability))
             return;
 
@@ -198,8 +198,7 @@ public sealed class PredictedHandsSystem : EntitySystem
         var holderVelocity = _physicsQuery.CompOrNull(entity)?.LinearVelocity ?? Vector2.Zero;
         var spreadMaxAngle = Angle.FromDegrees(DropHeldItemsSpread);
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(entity).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(entity));
 
         foreach (var hand in entity.Comp.Hands.Keys)
         {

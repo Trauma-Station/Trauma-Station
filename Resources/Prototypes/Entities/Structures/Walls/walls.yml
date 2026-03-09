@@ -68,7 +68,11 @@
   id: BaseWall
   components:
   - type: Occluder # Breaks on diagonal walls
-  - type: FreezableWall # Trauma - all non diagonal walls can be frozen by artistocrat's way
+    # <Trauma>
+  - type: FreezableWall
+  - type: Appearance
+  - type: BulletHole
+    # </Trauma>
 
 - type: entity
   abstract: true
@@ -132,8 +136,6 @@
   - type: IconSmooth
     key: walls
     base: brick
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: WallCosmicCult
 
@@ -165,8 +167,6 @@
   - type: IconSmooth
     key: walls
     base: clock
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: WallCosmicCult
 
@@ -215,8 +215,6 @@
         layer:
         - WallLayer
         density: 8000 # really good ramming wall, bananium is rare so it's probably fine
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: WallCosmicCult
 
@@ -279,8 +277,6 @@
   - type: IconSmooth
     key: walls
     base: cult
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
 
 - type: entity
   parent: BaseWall
@@ -311,8 +307,6 @@
   - type: IconSmooth
     key: walls
     base: debug
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
 
 - type: entity
   parent: BaseWall
@@ -343,8 +337,6 @@
   - type: IconSmooth
     key: walls
     base: diamond
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 4 # Mark of rust
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: WallCosmicCult
 
@@ -431,8 +423,6 @@
     key: walls
     base: ice
   # <Trauma>
-  - type: RustRequiresPathStage
-    pathStage: 4 # Mark of rust
   - type: CosmicCorruptible
     convertTo: WallCosmicCult
   - type: Occluder # from BaseWall

@@ -1,10 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
 using Content.Server.Singularity.Events;
 using Content.Shared.SurveillanceCamera.Components;
 using Content.Server.Light.Components;
-using Content.Shared.Light.Components;
-using Content.Shared.Light.EntitySystems;
 using Content.Server.Atmos;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos.Components;

@@ -34,7 +34,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Heretic.Components;
+// <Trauma>
+using Content.Goobstation.Common.Heretic;
+// </Trauma>
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.DeviceNetwork.Systems;
@@ -60,11 +62,12 @@ public sealed class DeviceNetworkJammerSystem : SharedDeviceNetworkJammerSystem
         if (ev.Cancelled)
             return;
 
-        if (HasComp<MansusGraspAffectedComponent>(ev.SenderTransform.ParentUid)) // Goobstation
-        {
-            ev.Cancel();
+        // </Trauma>
+        var attemptEv = new ParentPacketReceiveAttemptEvent();
+        RaiseLocalEvent(xform.Comp.ParentUid, ref attemptEv);
+        if (attemptEv.Cancelled)
             return;
-        }
+        // <Trauma>
 
         var query = EntityQueryEnumerator<DeviceNetworkJammerComponent, TransformComponent>();
 

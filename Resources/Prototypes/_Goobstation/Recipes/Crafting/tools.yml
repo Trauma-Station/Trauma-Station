@@ -4,3 +4,6 @@
   category: construction-category-weapons
   targetNode: hammer
   objectType: Item
+  theory:
+    TechnologyKnowledge: 0
+    HandmadeKnowledge: 1

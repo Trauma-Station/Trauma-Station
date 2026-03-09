@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Shared._DV.StepTrigger.Components;
-using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using Content.Shared._vg.TileMovement;
 using Content.Shared.Standing;
@@ -43,7 +42,6 @@ namespace Content.Shared.Movement.Systems;
 public abstract partial class SharedMoverController : VirtualController
 {
     // <Trauma>
-    [Dependency] private   readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private   readonly StandingStateSystem _standing = default!;
     // </Trauma>
     [Dependency] private   readonly IConfigurationManager _configManager = default!;

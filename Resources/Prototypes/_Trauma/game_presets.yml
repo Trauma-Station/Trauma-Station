@@ -14,7 +14,6 @@
   - BasicRoundstartVariation
   - Insurgency
 
-# survival+ but it has roundstart abductors and maybe thieves
 - type: gamePreset
   id: Abductors
   alias:
@@ -26,7 +25,9 @@
   rules:
   - DuoAbductorRoundstart
   - SubGamemodesRule
-  - SecretPlusRampingMid
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
   - BasicRoundstartVariation
 
 - type: gamePreset
@@ -39,9 +40,11 @@
   showInVote: false
   rules:
   - HereticGamemode
-  - BasicStationEventScheduler
-  - BasicRoundstartVariation
   - SubGamemodesRule
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation
 
 - type: gamePreset
   id: Shadowlings
@@ -53,6 +56,25 @@
   showInVote: false
   rules:
   - ShadowlingGamemode
-  - BasicStationEventScheduler
-  - BasicRoundstartVariation
   - SubGamemodesRule
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Wraith
+  alias:
+  - wraith
+  - ayyghost
+  - ghostie
+  name: wraith-title
+  description: wraith-description
+  showInVote: false
+  rules:
+  - WraithRoundstart
+  - SubGamemodesRule
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Created by Armok for TraumaStation",
+  "copyright": "Created by Armok for TraumaStation, idphonemerchant made by John John",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,9 @@
     },
     {
       "name": "revolutionary"
+    },
+    {
+      "name": "idphonemerchant"
     }
   ]
 }

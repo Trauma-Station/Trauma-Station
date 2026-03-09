@@ -72,6 +72,7 @@
 - type: entity
   parent: [ OrganAnimalHeart, OrganGoliathInternal ]
   id: OrganGoliathHeart
+  name: goliath heart
   components:
   - type: OrganComponents
     onAdd:

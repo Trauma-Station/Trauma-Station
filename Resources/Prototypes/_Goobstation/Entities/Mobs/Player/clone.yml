@@ -43,7 +43,7 @@
   - StutteringAccent
   # Einstein Engines - Language begin
   - LanguageSpeaker
-  - LanguageKnowledge
+  # - LanguageKnowledge # Trauma - knowledge
   - ForeignerTrait
   # Einstein Engines - Language end
   blacklist:

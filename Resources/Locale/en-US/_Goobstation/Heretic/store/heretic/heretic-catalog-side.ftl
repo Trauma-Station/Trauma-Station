@@ -27,40 +27,40 @@ knowledge-path-side-knowledge-name = Ritual of Knowledge
 knowledge-path-side-knowledge-desc =
     Everything can be a key to unlocking the secrets behind the Gates. I must be wary and wise.
 
-    You learn a special, one-time-only ritual that requires 4 different items. Performing this ritual instantly grants you 5 knowledge points.
+    You learn a special, one-time-only ritual that requires 4 different items. Performing this ritual instantly grants you 4 knowledge points.
 
-## stage 3
-knowledge-path-side-s3-armor-name = Armorer’s Ritual
-knowledge-path-side-s3-armor-desc =
+## stage 4
+knowledge-path-side-s4-armor-name = Armorer’s Ritual
+knowledge-path-side-s4-armor-desc =
     The Rusted Hills welcomed the Blacksmith in their generosity. And the Blacksmith returned their generosity in kind.
 
     Allows you to transmute a table and a gas mask to create Eldritch Armor.
     Eldritch Armor provides great protection while also acting as a focus when hooded.
 
-knowledge-path-side-s3-flask-name = Priest's Ritual
-knowledge-path-side-s3-flask-desc =
+knowledge-path-side-s4-flask-name = Priest's Ritual
+knowledge-path-side-s4-flask-desc =
     This is an old recipe. The Owl whispered it to me. Created by the Priest - the Liquid that both was and is not.
 
     Allows you to transmute a tank of water and a glass shard into a Flask of Eldritch Essence.
     Eldritch water can be consumed for potent healing.
 
-knowledge-path-side-s3-ashen-eyes-name = Ashen Eyes
-knowledge-path-side-s3-ashen-eyes-desc =
+knowledge-path-side-s4-ashen-eyes-name = Ashen Eyes
+knowledge-path-side-s4-ashen-eyes-desc =
     Piercing eyes guided them through the mundane. Neither darkness nor terror could stop them.
 
     Allows you to transmute a pair of eyes, a flare, and a glass shard into an Eldritch Medallion.
     The Eldritch Medallion grants you thermal vision while worn, and also functions as a focus.
 
-knowledge-path-side-s3-void-cloak-name = Void Cloak
-knowledge-path-side-s3-void-cloak-desc =
+knowledge-path-side-s4-void-cloak-name = Void Cloak
+knowledge-path-side-s4-void-cloak-desc =
     The Owl is the keeper of things that are not quite in practice, but in theory are. Many things are.
 
     Allows you to transmute a glass shard, a bedsheet, and any winter coat to create a Void Cloak.
     While the hood is down, the cloak functions as a focus and provides low pressure and low temperature protection, and while the hood is up, the cloak is completely invisible.
-    It also provide decent armor and has pockets which can hold one of your blades, various ritual components (such as organs), and small heretical trinkets.
+    It also provides decent armor and has pockets which can hold one of your blades, various ritual components (such as organs), and small heretical trinkets.
 
-knowledge-path-side-s3-shark-name = Scorching Shark
-knowledge-path-side-s3-shark-desc =
+knowledge-path-side-s4-shark-name = Scorching Shark
+knowledge-path-side-s4-shark-desc =
     The cradle of the nebula was cold, but not dead. Light and heat flits even through the deepest darkness, and is hunted by its own predators.
 
     Allows you to transmute 3 pools of ash, a liver, and 3 sheets of plasma into 3 Fire Sharks.
@@ -68,21 +68,31 @@ knowledge-path-side-s3-shark-desc =
     Fire Sharks ignite their victims and drop plasma sheet once they die.
     You can only create 15 at a time.
 
-knowledge-path-side-s3-realignment-name = Realignment
-knowledge-path-side-s3-realignment-desc =
-    In the flurry of death, he found peace within himself. Despite insurmountable odds, he forged on.
+knowledge-path-side-s4-ether-name = Ether Of The Newborn
+knowledge-path-side-s4-ether-desc =
+    Vision and thought grow hazy as the fumes of this ichor swirl up to meet me.
+    Through the haze, I find myself staring back in relief, or something grossly resembling my visage.
+    It is this wretched thing that I consign to my fate, and whose own that I snatch through the haze of dreams. Fools that we are.
+
+    Transmutes a pool of vomit and a shard into a single use potion,
+    drinking it will remove any sort of abnormality from your body including diseases and traumas.
+    on top of restoring it to full health, at the cost of losing consciousness for an entire minute.
+
+knowledge-path-side-s4-realignment-name = Realignment
+knowledge-path-side-s4-realignment-desc =
+    Seven times seven techniques were made in Eternal War. These parts of the doctrine contain enough to crush anyone.
 
     Grants you Realignment a spell that will remove stuns, knockdowns and restraints from you and realign your body rapidly for a short period.
     During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack.
     Doesn't require focus to cast.
 
+## stage 6
 knowledge-path-side-s6-ice-spear-name = Mysteries of Creation
 knowledge-path-side-s6-ice-spear-desc =
     Artifacts linked to the Winter Dawn exude unnatural stillness. Time slows around them. Fires choke. Thoughts become brittle. Proximity breeds hallucinations of endless white fields, a sky with no sun, and a voice that speaks only in cracking ice.
 
     Grants you Mysteries of Creation, a spell that allows you to summon the Glacier Spear at will. This magical spear chills victims upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube. If the spear is destroyed, activating this ability will create a new one, otherwise it will summon the existing spear into your hand.
 
-## stage 6
 knowledge-path-side-s6-rustwalker-name = Rusted Ritual
 knowledge-path-side-s6-rustwalker-desc =
     I combined my knowledge of creation with my desire for corruption. The Marshal knew my name, and the Rusted Hills echoed out.
@@ -98,48 +108,105 @@ knowledge-path-side-s6-knife-desc =
     The Carving Knife allows you to etch difficult to see traps that trigger on heathens who walk overhead.
     Also makes for a handy throwing weapon.
 
-## stage 7
-knowledge-path-side-s7-uncuff-name = Wave of Desperation
-knowledge-path-side-s7-uncuff-desc =
-    My shackles undone in dark fury, their feeble bindings crumble before my power.
+knowledge-path-side-s6-morbus-name = Codex Morbus
+knowledge-path-side-s6-morbus-desc =
+    The spine of this leather-bound tome creaks with an eerily pained sigh.
+    To ply page from place takes considerable effort, and I dare not linger on the suggestions the book makes for longer than necessary.
+    It speaks of coming plagues, of waiting supplicants of dead and forgotten gods, and the undoing of mortal kind.
+    It speaks of needles to peel the skin of the world back and leaving it to fester. And it speaks to me by name.
 
-    Grants you Wave Of Desperation, a spell which can only be cast while restrained.
-    It removes your restraints, repels and knocks down adjacent people, and applies the Mansus Grasp to everything nearby.
-    However, you will fall unconscious a short time after casting this spell.
+    Allows you to to combine a codex cicatrix, and a body into a Codex Morbus.
+    It draws runes and siphons essences faster.
+    Alt-Click on a rune with open codex to curse crewmembers, the target's blood or DNA (blood has greater effect) is required to be on the rune for a curse to take effect (Best combined with Phylactery Of Damnation).
 
-knowledge-path-side-s7-siphon-name = Blood Siphon
-knowledge-path-side-s7-siphon-desc =
-    No matter the man, we bleed all the same. That's what the Marshal told me.
+knowledge-path-side-s6-greaves-name = Greaves Of The Prophet
+knowledge-path-side-s6-greaves-desc =
+    Gristle churns into joint, a pop, and the fool twists a blackened foot from the jaws of another.
+    At their game for centuries, this mangled tree of limbs twists,
+    thrashing snares buried into snarling gums, seeking to shred the weight of grafted neighbors.
+    Weighed down by lacerated feet, this canopy of rancid idiots ever seeks the undoing of its own bonds.
+    I dread the thought of walking in their wake, but I must press on all the same.
+    Their rhythms keep the feud fresh with indifference to barrier or border.
+    Pulling more into their turmoil as they waltz.
 
-    Grants Blood Siphon, a ranged spell that steals a bit of life from your target, healing your bruises and restoring blood.
-    Additionally, you have a chance of transferring wounds you are experiencing to the target.
+    Allows you to combine a pair of magboots, a pair of combat boots of any kind and 2 bars of silver into a pair of Armored Greaves,
+    they confer to the user full immunity to slips and act as magboots and jackboots.
 
-knowledge-path-side-s7-crucible-name = Mawed Crucible
-knowledge-path-side-s7-crucible-desc =
+knowledge-path-side-s6-shattered-ritual-name = Shattered Ritual
+knowledge-path-side-s6-shattered-ritual-desc =
+    I witnessed a cold, rending force drag this corpse back to near-life.
+    When it moves, it crunches like broken glass.
+    Its hands are no longer recognizable as human - each clenched fist contains a brutal nest of sharp bone-shards instead.
+
+    Allows you to transmute a corpse, a pair of latex or nitrile gloves, and outer armor clothing to create a Shattered Risen.
+    Shattered Risen are strong ghouls that have 250 health and slight regeneration, but cannot hold items and wear clothes,
+    instead having two brutal weapons for hands.
+    You can only create one at a time.
+
+knowledge-path-side-s6-crucible-name = Mawed Crucible
+knowledge-path-side-s6-crucible-desc =
     This is pure agony. I wasn't able to summon the figure of the Aristocrat,
     but with the Priest's attention I stumbled upon a different recipe...
 
     Allows you to transmute a portable water tank and a table to create a Mawed Crucible.
     The Mawed Crucible can brew powerful potions for combat and utility, but must be fed bodyparts and organs between uses.
 
-# stage 8
+knowledge-path-side-s6-sword-name = Through the Boundary
+knowledge-path-side-s6-sword-desc =
+    “There are no locked doors, no sealed gates; no cages, no captives,”
+    whispered the Steward, standing at the edge of the Well of Secrets.
+    “Only those who stare too long into the abyss.”
+    A moment's glance reveals the truth; a fixed stare unravels the mind.
+    The dark power from below pierces like a sharpened sword.
+    The veil is torn. The seal is broken.
+
+    Transmute 2 heretic blades, 2 bars of gold and 2 ID cards to create Ragged Sword.
+    Ragged Sword deals moderate damage with increased melee attack range.
+    More importantly, attacking with the sword will mark the target with combat mark of any Path of Decay.
+    The sword cannot trigger the mark by itself - best used in combination with heretic blade.
+
+## stage 8
+knowledge-path-side-s8-grasp-name = Mind Grasp
+knowledge-path-side-s8-grasp-desc =
+    You believe that your mind is a fortress.
+    You picture walls of reason, towers of will, and a sanctum to which you hold the key.
+    A comforting lie. The walls are only shadows cast by the light of their own fragile understanding.
+    The gates of mind do not open inward or outward - they do not exist at all.
+    I do not knock. I do not need to. I am the silent key that turns in a lock that was never there.
+
+    Your mansus grasp can now be channeled in hand to affect multiple victims in visible area around you.
+    The longer you channel it - the higher the range will be. Channeling can be stopped early by activating grasp again.
+    Area of effect grasp suffers increased cooldown, scaled by range and the number of victims.
+
 knowledge-path-side-s8-cleave-name = Blood Cleave
 knowledge-path-side-s8-cleave-desc =
     At first I didn't understand these instruments of war, but the Priest told me to use them regardless. Soon, he said, I would know them well.
 
     Grants you Cleave, an area-of-effect targeted spell that causes heavy bleeding and blood loss to anyone afflicted.
 
-## stage 9
-knowledge-path-side-s9-coin-name = Eldritch Coin
-knowledge-path-side-s9-coin-desc =
-    The Mansus is a place of all sorts of sins. But greed held a special role.
+knowledge-path-side-s8-space-phase-name = Space Phase
+knowledge-path-side-s8-space-phase-desc =
+    You feel like your body can move through space as if you where dust.
 
-    Transmute a sheet of plasma, a diamond and eyes into an Eldritch Coin.
-    The coin will open nearby airlocks if it lands on heads and bolt nearby airlocks if it lands on tails.
-    Using it on an airlock consumes the coin and permanently opens the airlock.
-    Attempting to flip or use the coin as a non-heretic will deal brute and/or burn damage, depending on the side it lands on.
+    Grants you Space Phase, a spell that allows you to move freely through space.
+    You can only phase in and out when you are in space or outdoor low pressure area like lavaland.
 
-knowledge-path-side-s9-ashman-name = Ashen Ritual
-knowledge-path-side-s9-ashman-desc =
-    Transmute a pile of ash, a brain and a book to summon an Ashman.
-    Ashmen can jaunt, cause bleeding wounds, and can release large waves of fire.
+knowledge-path-side-s8-maid-name = Maid in the Mirror
+knowledge-path-side-s8-maid-desc =
+    Within each reflection, lies a gateway into an unimaginable world of colors never seen and people never met.
+    The ascent is glass, and the walls are knives. Each step is blood, if you do not have a guide.
+
+    Allows you to transmute five sheets of glass, any suit with sensors, and a pair of lungs to create a Maid in the Mirror.
+    Maid in the Mirrors are decent combatants that can become incorporeal by phasing in and out of the mirror realm, serving as powerful scouts and ambushers.
+    Their attacks also apply a stack of void chill.
+
+knowledge-path-side-s8-admonitions-name = Forest Admonitions
+knowledge-path-side-s8-admonitions-desc =
+    Where the pale fog covers the woods, we go unnoticed, until we are ready.
+
+    Replaces your Cloak of Shadow ability with Forest Admonitions.
+    SImilarly to shadow cloak, it conceals your identity but it lasts longer and gives lower movespeed bonus.
+    You are invisible in this form, but you are temporarily revealed by shooting, throwing or casting spells.
+    You are also visible to people close to you.
+    Forest Admonitions is harder to reveal by damage compared to Cloak Of Shadow, but it has longer cooldown as well.
+    While active, you also spread pale fog around your position, which muffles sounds, debuffs heathens and disables shadow cloak for other heretics.

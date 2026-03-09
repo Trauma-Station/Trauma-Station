@@ -1317,19 +1317,19 @@
   categories:
   - UplinkDeception
 
-# - type: listing
-#   id: UplinkHoloCigar
-#   name: uplink-holo-cigar-name
-#   description: uplink-holo-cigar-desc
-#   productEntity: HoloCigar
-#   cost:
-#     Telecrystal: 35
-#   categories:
-#   - UplinkWearables
-#   conditions:
-#   - !type:BuyerSpeciesCondition
-#     whitelist:
-#     - Human
+- type: listing
+  id: UplinkHoloCigar
+  name: uplink-holo-cigar-name
+  description: uplink-holo-cigar-desc
+  productEntity: HoloCigar
+  cost:
+    Telecrystal: 5 # was 35, if you ever make it a non meme item raise it back and remove from emagged cig vendor
+  categories:
+  - UplinkWearables
+  conditions:
+  - !type:BuyerSpeciesCondition
+    whitelist:
+    - Human
 
 - type: listing
   id: UplinkUndeterminedBundle

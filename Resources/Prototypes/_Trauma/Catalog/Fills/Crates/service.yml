@@ -1,0 +1,11 @@
+- type: entity
+  id: CrateRotaryPhone
+  parent: CrateGenericSteel
+  name: rotary phone crate
+  description: A crate with 5 phones inside, prank calls are a punishable offense
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: RotaryPhoneFlatPack
+        amount: 5

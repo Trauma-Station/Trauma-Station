@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Flash;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Trigger.Systems;
@@ -22,10 +23,7 @@ public sealed class TriggerOnFlashedSystem : EntitySystem
 
     private void OnFlashed(Entity<TriggerOnFlashedComponent> ent, ref AfterFlashedEvent args)
     {
-        var tick = (int) _timing.CurTick.Value;
-        var seed = SharedRandomExtensions.HashCodeCombine(tick, GetNetEntity(ent).Id);
-        var rand = new Random(seed);
-        if (rand.Prob(ent.Comp.Prob))
+        if (SharedRandomExtensions.PredictedProb(_timing, ent.Comp.Prob, GetNetEntity(ent)))
             _trigger.Trigger(ent, args.User, ent.Comp.KeyOut);
     }
 }

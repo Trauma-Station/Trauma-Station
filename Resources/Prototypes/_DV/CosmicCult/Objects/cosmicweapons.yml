@@ -1,16 +1,6 @@
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SaffronFennec <firefoxwolf2020@protonmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   name: entropic blade
-  parent: [BaseSword, BaseMagicalContraband] # Trauma - Contraband marker (no I am not making a new one)
+  parent: [BaseSword, BaseCosmicContraband] # Trauma - Contraband marker (YES WE ARE MAKING A NEW ONE)
   id: SwordCosmicCult
   description: An eerie greatsword wrought of indescribable material, forcibly extruded down into reality. Your instincts tell you that it does not belong here.
   components:
@@ -22,16 +12,14 @@
       - state: icon-overlay
         shader: unshaded
   - type: MeleeWeapon
-    resistanceBypass: true
     angle: 90
     animation: WeaponArcCosmic
     attackRate: 1
     clickDamageModifier: 1.1
     damage:
       types:
-        Slash: 10
-        Cold: 2.5
-        Asphyxiation: 2.5
+        Slash: 20
+        Asphyxiation: 15
         Structural: 15
         Ion: 25
     soundHit:
@@ -49,46 +37,20 @@
       params:
         variation: 0.2
         volume: -11
-  - type: Reflect
-    reflectProb: .21
-    spread: 120
-    soundOnReflect:
-      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
-      params:
-        variation: 0.2
-        volume: -6
-  - type: Wieldable
-    wieldSound:
-      path: /Audio/_DV/CosmicCult/cosmic_wield.ogg
-      params:
-        variation: 0.2
-        volume: -2
-    unwieldSound:
-      path: /Audio/_DV/CosmicCult/cosmic_unwield.ogg
-      params:
-        variation: 0.2
-        volume: 0
-  - type: IncreaseDamageOnWield
-    damage:
-      types:
-        Slash: 5
-        Cold: 2.5
-        Asphyxiation: 2.5
-        Structural: 5
   - type: DisarmMalus
   - type: Item
     size: Large
+    shape:
+    - 0,0,1,3
+    storedRotation: -45
     sprite: _DV/CosmicCult/Objects/cosmicsword-inhands.rsi
-    inhandVisuals:
-      left:
-      - state: inhand-left
-      right:
-      - state: inhand-right
   - type: UnholyItem # Goobstation Shitchap
+  - type: CosmicTransmutable
+    transmuteTo: null # No reforging
 
 - type: entity
   name: vacuous lance
-  parent: [BaseItem, BaseMagicalContraband]
+  parent: [BaseItem, BaseCosmicContraband]
   id: SpearCosmicCult
   description: An unnerving spear, wrought of indescribable material. Being near it feels like a prickle of static spreading through your nerves.
   components:
@@ -100,16 +62,17 @@
       - state: icon-overlay
         shader: unshaded
   - type: MeleeWeapon
-    resistanceBypass: true
+    range: 1.8 # Default is 1.5
     angle: 0
     animation: WeaponArcCosmic
     attackRate: 0.6
     damage:
       types:
-        Piercing: 15
-        Cold: 5
-        Asphyxiation: 5
+        Piercing: 30
+        Asphyxiation: 10
         Ion: 25
+    animationRotation: 225
+    wideAnimationRotation: 225
     soundHit:
       path: /Audio/_DV/CosmicCult/cosmiclance_hit.ogg
       params:
@@ -125,14 +88,15 @@
       params:
         variation: 0.2
         volume: -11
-  - type: Boomerang # Goob edit
   - type: DamageOtherOnHit
     damage:
-      types:
-        Piercing: 5
-        Cold: 5
-        Asphyxiation: 5
-        Ion: 17.5
+      types: # Not a whole lot, you can throw them pretty damn quick if you set your keybinds right
+        Piercing: 20
+        Asphyxiation: 15
+        Ion: 20
+  - type: EmbeddableProjectile
+    removalTime: 2
+    sound: /Audio/_DV/CosmicCult/cosmiclance_impact.ogg
   - type: Wieldable
     wieldSound:
       path: /Audio/_DV/CosmicCult/cosmic_wield.ogg
@@ -148,18 +112,13 @@
     damage:
       types:
         Piercing: 10
-        Cold: 2.5
-        Asphyxiation: 2.5
+        Asphyxiation: 5
   - type: Item
     size: Large
     shape:
-    - 0,0,4,0
+    - 0,0,5,0
+    storedRotation: 45
     sprite: _DV/CosmicCult/Objects/cosmiclance-inhands.rsi
-    inhandVisuals:
-      left:
-      - state: inhand-left
-      right:
-      - state: inhand-right
   - type: EmitSoundOnThrow
     sound: /Audio/_DV/CosmicCult/cosmicweapon_swing.ogg ## THROWING SOUND - REPLACE THIS!
   - type: ThrowingAngle
@@ -182,13 +141,15 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
-  - type: Sharp
   - type: UnholyItem # Goobstation Shitchap
+  - type: Execution
+    doAfterDuration: 4.0
 
 - type: entity
   name: astral razor
-  parent: [BaseItem, BaseMagicalContraband]
+  parent: [BaseItem, BaseCosmicContraband]
   id: ScytheCosmicCult
+  description: An preternatural scythe, wrought of indescribable material. Even just looking at it makes you feel cold.
   components:
   - type: CosmicEquipment
   - type: Sprite
@@ -197,21 +158,23 @@
       - state: icon
       - state: icon-overlay
         shader: unshaded
-  # - type: AmmoCounter
   - type: UseDelayOnShoot
   - type: UseDelay
-    delay: 2
+    delay: 1 # Visual, doesn't do shit
   - type: LeechOnMarker
     leech:
       groups:
-        Brute: -10
+        Brute: -20
+        Burn: -20
   - type: Gun
-    projectileSpeed: 5
+    projectileSpeed: 15
     soundGunshot: /Audio/_DV/CosmicCult/projectile_razor.ogg
-    fireRate: 1.75
-    useKey: false
+    fireRate: 1
+    useKey: true
+  - type: AltFireMelee
+    attackType: Heavy
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 0.3
+    rechargeCooldown: 1
     rechargeSound:
       path: /Audio/_DV/CosmicCult/projectile_razor_reload.ogg
   - type: BasicEntityAmmoProvider
@@ -219,18 +182,13 @@
     capacity: 1
     count: 1
   - type: MeleeWeapon
-    resistanceBypass: true
     wideAnimationRotation: -135
     animation: WeaponArcCosmic
-    attackRate: 1.5
-    clickDamageModifier: 1.1
+    attackRate: 1
+    heavyStaminaCost: 0 # This thing is challenging enough to use already, and you can't lightswing anyway
     damage:
       types:
-        Slash: 6
-        Cold: 2
-        Asphyxiation: 2
-        Ion: 6
-        Structural: 15
+        Slash: 20
     soundHit:
       path: /Audio/_DV/CosmicCult/cosmicsword_hit.ogg
       params:
@@ -246,14 +204,6 @@
       params:
         variation: 0.2
         volume: -11
-  - type: Reflect
-    reflectProb: .35
-    spread: 120
-    soundOnReflect:
-      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
-      params:
-        variation: 0.2
-        volume: -6
   - type: Wieldable
     wieldSound:
       path: /Audio/_DV/CosmicCult/cosmic_wield.ogg
@@ -265,17 +215,17 @@
       params:
         variation: 0.2
         volume: 0
-  - type: IncreaseDamageOnWield
-    damage:
-      types:
-        Structural: 5
   - type: GunRequiresWield
   - type: Item
     size: Ginormous
     sprite: _DV/CosmicCult/Objects/cosmicscythe-inhands.rsi
-    inhandVisuals:
-      left:
-      - state: inhand-left
-      right:
-      - state: inhand-right
+  - type: Clothing
+    sprite: _DV/CosmicCult/Objects/cosmicscythe-inhands.rsi
+    slots:
+    - Back
+    - suitStorage
   - type: UnholyItem # Goobstation Shitchap
+  - type: Sharp
+  - type: Execution
+    doAfterDuration: 4.0
+    decapitation: true

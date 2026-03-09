@@ -44,7 +44,7 @@ public sealed class EyeColorPicker : Control
     private void ColorValueChanged(Color newColor)
     {
         // <Trauma> - dont lag the shit out of the game
-        var now = _lastColorUpdate;
+        var now = _timing.CurFrame;
         if (newColor == _lastColor || _lastColorUpdate == now)
             return;
 

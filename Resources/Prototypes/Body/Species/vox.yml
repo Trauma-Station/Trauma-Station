@@ -59,6 +59,9 @@
       limit: 1
       required: true
       default: [ VoxTail ]
+    enum.HumanoidVisualLayers.TailOverlay:
+      limit: 1
+      required: false
     enum.HumanoidVisualLayers.UndergarmentTop:
       limit: 1
       required: false
@@ -163,11 +166,11 @@
   - AppearanceVox
   - BaseSpeciesMobOrganicUnperishable # Trauma - vox don't rot
   id: MobVox
-  name: Uristititi McVox
+  name: Urist McVox
   components:
   # <Trauma>
   - type: Uncloneable
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - NewKinPidgin
@@ -197,28 +200,6 @@
       amount: 2 # birds have light bones, thus 1 less than other species.
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 400
-      behaviors:
-      - !type:GibBehavior { }
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Heat
-        damage: 1500
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawnInContainer: true
-        spawn:
-          FoodMeatChickenFriedVox:
-            min: 3
-            max: 5
-      - !type:BurnBodyBehavior
-        popupMessage: bodyburn-vox-text-others
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MeatLaserImpact
     - trigger:
         !type:DamageTypeTrigger
         damageType: Radiation
@@ -266,6 +247,7 @@
     damage:
       types:
         Slash: 5 # Reduce?
+  - type: Wagging
 
 - type: entity
   parent: OrganBaseFleshy # Shitmed - Fleshy

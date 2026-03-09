@@ -8,15 +8,12 @@ using Content.Shared.Alert;
 using Content.Shared.Bed.Sleep;
 using Robust.Shared.Serialization;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Containers.ItemSlots;
 
 namespace Content.Shared._EinsteinEngines.Silicon.Systems;
-
 
 public sealed class SharedSiliconChargeSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
 
     public override void Initialize()
     {

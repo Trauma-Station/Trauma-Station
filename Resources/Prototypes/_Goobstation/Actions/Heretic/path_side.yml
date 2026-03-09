@@ -12,7 +12,6 @@
   id: ActionHereticRealignment
   name: Realignment
   description: Recover from all stuns knockdowns, and restraints, gaining short term pacifism.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -34,7 +33,6 @@
   id: ActionHereticIceSpear
   name: Mysteries of Creation
   description: Activate to create the Glacier Spear or summon already existing spear.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: true
@@ -58,7 +56,6 @@
   id: ActionHereticCleave
   name: Cleave
   description: Causes severe bleeding on a target and several targets around them.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 45
@@ -93,3 +90,62 @@
       state: icon
   - type: InstantAction
     event: !type:EventEmp
+
+- type: entity
+  id: ActionHereticSpacePhase
+  name: Space Phase
+  description: Allows you to phase in and out of existence while in space or a low-pressure, outdoor area.
+  components:
+  - type: Action
+    predicted: false
+    checkCanInteract: false
+    useDelay: 3
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: space_phase
+  - type: InstantAction
+    event: !type:EventHereticSpacePhase
+  - type: HereticAction
+    requireMagicItem: true
+
+- type: entity
+  id: ActionMirrorJaunt
+  name: Mirror Walk
+  description: Allows you to traverse invisibly and freely across the station within the realm of the mirror. You can only enter and exit the realm of mirrors when near reflective items and surfaces, such windows or mirrors.
+  components:
+  - type: Action
+    predicted: false
+    checkCanInteract: false
+    useDelay: 6
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+      state: maid
+  - type: InstantAction
+    event: !type:EventMirrorJaunt
+  - type: HereticAction
+    requireMagicItem: true
+
+- type: entity
+  parent: BaseAction
+  id: ActionHereticForestAdmonitions
+  name: Forest Admonitions
+  description: Completely conceals your identity, and makes you invisible. Can be activated early to disable it. While cloaked, you move slightly faster, but undergo actions much slower. Taking damage while cloaked may cause it to lift suddenly. Spreads pale fog around while active.
+  components:
+  - type: Action
+    checkCanInteract: false
+    useDelay: 6
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: palecloak
+  - type: InstantAction
+    event: !type:EventHereticCloak
+      status: ShadowCloakPaleStatusEffect
+      lifetime: 360
+  - type: HereticAction
+    requireMagicItem: true
+  - type: Tag
+    tags:
+    - ShadowCloakAction

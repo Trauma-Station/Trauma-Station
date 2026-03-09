@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Configuration;
 
 namespace Content.Trauma.Common.CCVar;
@@ -83,6 +84,57 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<float> SoftCritInhaleModifier =
         CVarDef.Create("trauma.softcrit_inhale_modifier", 0.3f, CVar.SERVER | CVar.REPLICATED);
+
+    #endregion
+
+    #region Skills
+
+    /// <summary>
+    /// Enables gaining XP and skills during rounds.
+    /// Character starting skills are not affected by this.
+    /// </summary>
+    public static readonly CVarDef<bool> SkillGain =
+        CVarDef.Create("trauma.skill_gain", true, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// Client setting to hide all skill-related popups.
+    /// </summary>
+    public static readonly CVarDef<bool> SkillPopups =
+        CVarDef.Create("trauma.skill_popups", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    #endregion
+
+    #region Chat
+
+    /// <summary>
+    /// Whether to play a sound when a highlighted message is received.
+    /// </summary>
+    public static readonly CVarDef<bool> ChatHighlightSound =
+        CVarDef.Create("chat.highlight_sound", true, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    /// <summary>
+    /// Volume of the highlight sound when a highlighted message is received.
+    /// </summary>
+    public static readonly CVarDef<float> ChatHighlightVolume =
+        CVarDef.Create("chat.highlight_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    #endregion
+
+    #region Webhooks
+
+    /// <summary>
+    /// Discord webhook to send errors to.
+    /// Disabled if this is empty.
+    /// </summary>
+    public static readonly CVarDef<string> ErrorWebhookUrl =
+        CVarDef.Create("trauma.error_webhook_url", string.Empty, CVar.SERVER);
+
+    /// <summary>
+    /// Delay between each error message in seconds.
+    /// Used to avoid hitting ratelimits
+    /// </summary>
+    public static readonly CVarDef<double> ErrorWebhookDelay =
+        CVarDef.Create("trauma.error_webhook_delay", 0.3, CVar.SERVER);
 
     #endregion
 }

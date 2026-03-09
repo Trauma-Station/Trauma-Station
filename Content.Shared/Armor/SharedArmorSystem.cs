@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Medical.Common.Body;
-using Content.Shared.Body;
+using Content.Shared.Localizations;
 using System.Linq;
 // </Trauma>
 using Content.Shared.Clothing.Components;
@@ -19,9 +19,6 @@ namespace Content.Shared.Armor;
 /// </summary>
 public abstract class SharedArmorSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly BodySystem _body = default!;
-    // </Trauma>
     [Dependency] private readonly ExamineSystemShared _examine = default!;
 
     /// <inheritdoc />
@@ -109,13 +106,15 @@ public abstract class SharedArmorSystem : EntitySystem
 
         if (!component.ArmourCoverageHidden)
         {
-            foreach (var coveragePart in coverage.Where(coveragePart => coveragePart != BodyPartType.Other))
-            {
-                msg.PushNewline();
+            // <Trauma>
+            var coveredParts = coverage.Where(coveragePart => coveragePart != BodyPartType.Other).ToList();
+            List<string> coverageText = [];
+            foreach (var part in coveredParts)
+                coverageText.Add(Loc.GetString("armor-coverage-type-" + part.ToString().ToLower()));
 
-                var bodyPartType = Loc.GetString("armor-coverage-type-" + coveragePart.ToString().ToLower());
-                msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", bodyPartType)));
-            }
+            msg.PushNewline();
+            msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", ContentLocalizationManager.FormatList(coverageText))));
+            // </Trauma>
         }
 
         if (!component.ArmourModifiersHidden)

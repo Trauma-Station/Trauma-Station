@@ -7,4 +7,4 @@
   components:
   - type: ComponentsImplant
     added:
-    - type: GrantHellRip
+    # - type: GrantHellRip

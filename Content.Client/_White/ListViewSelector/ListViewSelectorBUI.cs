@@ -20,6 +20,8 @@ public sealed class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : BoundUser
 
     protected override void Open()
     {
+        base.Open();
+
         _window = FormWindow();
         _window.OnClose += Close;
         _window.OpenCentered();

@@ -70,7 +70,6 @@
     # - type: BlobSpeak
     # Einstein Engines - Language begin
     - type: LanguageSpeaker
-    - type: LanguageKnowledge
       speaks:
       - Blob
       understands:
@@ -164,7 +163,6 @@
     # - type: BlobSpeak
     # Einstein Engines - Language begin
     - type: LanguageSpeaker
-    - type: LanguageKnowledge
       speaks:
       - Blob
       understands:
@@ -263,7 +261,6 @@
     # Einstein Engines - Language begin
     - type: LanguageSpeaker
       currentLanguage: Blob
-    - type: LanguageKnowledge
       speaks:
       - Blob
       understands:

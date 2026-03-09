@@ -1,16 +1,19 @@
+using System.Linq;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Interaction;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
 /// <summary>
-/// Trauma - code relating to DNA freshness and GetSolution overriding.
+/// Trauma - code relating to DNA freshness, GetSolution overriding and skills.
 /// </summary>
 public sealed partial class InjectorSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     /// <summary>
     /// Raises an event to allow other systems to modify where the injector's solution comes from.
@@ -37,6 +40,30 @@ public sealed partial class InjectorSystem
         {
             dna.Freshness = now;
         }
+    }
+
+    private void OnBeforeRangedInteract(Entity<InjectorComponent> injector, ref BeforeRangedInteractEvent args)
+    {
+        if (args.Handled || args.Target is not { } target)
+            return;
+
+        if (injector.Comp.InteractionRangeOverride is not { } range ||
+            !_interaction.InRangeAndAccessible(args.User, target, range))
+            return;
+
+        if (HasComp<BloodstreamComponent>(target))
+        {
+            if (injector.Comp.IgnoreMobs)
+            {
+                _popup.PopupClient(Loc.GetString("injector-component-ignore-mobs"), target, args.User);
+                return;
+            }
+
+            args.Handled |= TryMobsDoAfter(injector, args.User, target);
+            return;
+        }
+
+        args.Handled |= TryContainerDoAfter(injector, args.User, target);
     }
 }
 

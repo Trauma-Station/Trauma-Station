@@ -14,6 +14,7 @@ namespace Content.Shared.Humanoid
         // </Trauma>
         Special, // for the cat ears
         Tail,
+        TailOverlay, // markings that go ontop of tails
         Hair,
         FacialHair,
         UndergarmentTop,

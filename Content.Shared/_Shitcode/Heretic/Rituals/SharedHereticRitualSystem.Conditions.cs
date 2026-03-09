@@ -84,7 +84,7 @@ public abstract partial class SharedHereticRitualSystem
                 if (compAmount >= ritIng.Amount)
                     continue;
 
-                if (_whitelist.IsWhitelistFail(ritIng.Whitelist, look))
+                if (!_whitelist.CheckBoth(look, ritIng.Blacklist, ritIng.Whitelist))
                     continue;
 
                 var stack = _stackQuery.CompOrNull(look);

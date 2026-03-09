@@ -136,7 +136,7 @@
       Male: Xenomorph
       Female: Xenomorph
       Unsexed: Xenomorph
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Xeno
 #    - XenoHivemind # Goobstation - collective mind
@@ -193,6 +193,7 @@
     - DoorBumpOpener
     - FootstepSound
   - type: XenomorphShoveTracker
+  - type: CanMoveInAir
 
 - type: entity
   id: BaseMobXenomorphDungeon

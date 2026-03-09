@@ -193,11 +193,11 @@ namespace Content.Server.Medical.BiomassReclaimer
             });
         }
 
-        private void OnDragDropTarget(Entity<BiomassReclaimerComponent> reclaimer, ref DragDropTargetEvent args) // # GoobStation
+        // Goob
+        // TODO: move this shit out of here
+        private void OnDragDropTarget(Entity<BiomassReclaimerComponent> reclaimer, ref DragDropTargetEvent args)
         {   // Safety Checks, If the machine is on safety & if the target is vaild to avoid crashes.
-            if (args.Dragged == null
-            || !CanGib(reclaimer, args.Dragged)
-            || !TryComp<PhysicsComponent>(args.Dragged, out var physics))
+            if (!CanGib(reclaimer, args.Dragged) || !TryComp<PhysicsComponent>(args.Dragged, out var physics))
                 return;
             var delay = reclaimer.Comp.BaseInsertionDelay * physics.FixturesMass;
 

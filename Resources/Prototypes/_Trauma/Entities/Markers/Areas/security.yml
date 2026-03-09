@@ -1,0 +1,56 @@
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaSecurity
+  name: security
+  components:
+  - type: DepartmentArea
+    department: Security
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaSecurity
+  name: security
+  components:
+  - type: Sprite
+    state: security
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaBrig
+  name: brig
+  components:
+  - type: Sprite
+    state: brig
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaDetective
+  name: detective
+  components:
+  - type: Sprite
+    state: detective
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaArmory
+  name: armory
+  components:
+  - type: Sprite
+    state: armory
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaInterrogation
+  name: interrogation
+  components:
+  - type: Sprite
+    state: interrogation
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaPrison
+  name: prison
+  components:
+  - type: Sprite
+    state: sec_prison

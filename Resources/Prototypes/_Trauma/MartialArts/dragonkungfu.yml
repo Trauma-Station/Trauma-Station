@@ -1,0 +1,52 @@
+- type: combo
+  id: DragonClaw
+  attacks:
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 50
+  levelRequired: 10
+
+- type: combo
+  id: DragonTail
+  attacks:
+  - Disarm
+  - Grab
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 15
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 6
+  levelRequired: 10
+
+- type: combo
+  id: DragonStrike
+  attacks:
+  - Disarm
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 40
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 2
+  levelRequired: 10

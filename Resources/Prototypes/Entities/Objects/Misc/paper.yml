@@ -98,6 +98,12 @@
   id: Paper
   description: 'A piece of white paper.'
   components:
+  # <Trauma>
+  - type: ActivatableUIRequiresVision # can't read if you're blind
+  - type: Construction # so you can click with knife and spray painter
+    graph: SpesosCounterfeit
+    node: start
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Misc/bureaucracy.rsi
     layers:
@@ -119,9 +125,7 @@
         type: PaperBoundUserInterface
   - type: FaxableObject
   - type: PaperVisuals
-  - type: Construction # Goob - so you can click with spray painter
-    graph: SpesosCounterfeit
-    node: start
+  - type: StationAiWhitelist
 
 - type: entity
   name: paper scrap
@@ -500,3 +504,4 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: StationAiWhitelist

@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Conchelle <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.ServerCurrency;
@@ -18,7 +15,10 @@ public sealed class ClientCurrencyManager : ICommonCurrencyManager, IEntityEvent
 
     private static int _cachedBalance = -1;
     public event Action? ClientBalanceChange;
+    // supposedly this is needed to implement the interface, so...
+    #pragma warning disable CS0067
     public event Action<PlayerBalanceChangeEvent>? BalanceChange;
+    #pragma warning restore CS0067
 
     public void PostInject()
     {

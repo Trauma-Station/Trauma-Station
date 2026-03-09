@@ -4,3 +4,10 @@
   required:
   - MutationColdAdaptation
   - MutationHeatAdaptation
+
+- type: mutationRecipe
+  id: ThermalWeakness
+  result: MutationThermalWeakness
+  required:
+  - MutationColdWeakness
+  - MutationHeatWeakness

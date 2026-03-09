@@ -84,7 +84,7 @@
               path: /Audio/_DV/CosmicCult/ability_lapse.ogg
   - type: ZombieImmune
   - type: GhostTakeoverAvailable
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - RobotTalk # Placeholder, they are created by the colossus, and colossus speaks binary. TODO: replace with coscult language.
     understands:

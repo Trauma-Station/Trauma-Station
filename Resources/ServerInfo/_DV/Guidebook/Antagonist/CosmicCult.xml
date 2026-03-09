@@ -11,33 +11,31 @@
     <GuideEntityEmbed Entity="CosmicGlyphTruth" Caption=""/>
   </Box>
 
-  Otherworldly knowledge floods your mind! Welcome to the [color=#4cabb3]Cosmic Cult[/color], a group conversion antagonist that has set its sights on the end of all things.
+  Otherworldly knowledge floods your mind! Welcome to the [color=#4cabb3]Cosmic Cult[/color], a team antagonist that has set its sights on the end of all things.
 
   Use [color=#4cabb3]:a[/color] to communicate with fellow cultists through the [color=#4cabb3]Astral Murmur[/color].
 
   ## Objectives
   - [color=#4cabb3][bold]Siphon Entropy[/bold][/color]  - Collectively siphon a certain amount of Entropy from the crew. The more entropy you siphon, the more you can empower the Monument!
-  - [color=#4cabb3][bold]Empower The Monument[/bold][/color] - Ensure that the Monument is brought to full power. The more you empower The Monument, the more power the cult gains access to.
-  - [color=#4cabb3][bold]Usher In The End[/bold][/color] - Once the Monument is at full power, complete the final ritual to beckon the Unknown and destroy the station.
+  - [color=#4cabb3][bold]Attain Power[/bold][/color] - The more you gather entropy, the more power the cult gains access to, and the stronger are it's effects on the station.
+  - [color=#4cabb3][bold]Usher In The End[/bold][/color] - Once the cult is at full power, summon The Monument and complete the final ritual to beckon the Unknown and destroy the station.
 
   Progress towards objectives is shared by the entire cult.
-
-  Crewmembers must be alive for you to [color=#4cabb3]Siphon Entropy[/color] from them, and converting crewmembers will bolster your cult's ranks, making it easier to collect entropy. For this reason, it is often in your best interests to ensure the crew is kept [italic]alive[/italic] - at least for as long as is relevant to your goals.
 
   ## Entropy
   <Box>
     <GuideEntityEmbed Entity="MaterialCosmicCultEntropy1" Caption=""/>
-    <GuideEntityEmbed Entity="MaterialCosmicCultEntropy3" Caption="Motes of Entropy"/>
-    <GuideEntityEmbed Entity="MaterialCosmicCultEntropy5" Caption=""/>
+    <GuideEntityEmbed Entity="MaterialCosmicCultEntropy10" Caption="Motes of Entropy"/>
+    <GuideEntityEmbed Entity="MaterialCosmicCultEntropy" Caption=""/>
   </Box>
 
   All cultists start with two abilities, or [color=#4cabb3][bold]Influences[/bold][/color] - one of which is [italic][color=#4cabb3]Siphon Entropy[/color][/italic]. This is your bread and butter as a cosmic cultist, and you'll want to use it as often as possible.
 
-  Using Siphon Entropy on an unsuspecting crewmember will stealthily award you [color=#4cabb3]Entropy[/color]. This will cause a small a portion of the crewmember's health to decay over time.
+  Using Siphon Entropy on an unsuspecting crewmember will stealthily award you [color=#4cabb3]Entropy[/color].
 
-  You can hold up to 14 Motes of Entropy, and approaching The Monument will automatically deposit all Entropy you posess.
+  You can also siphon from crewmembers in critical condition, which will significantly increase the amount of entropy gathered, especially from high-value targets. However, doing so would also kill the target, so make sure to leave no witnesses.
 
-  [textlink="For more on the Monument, click here." link="CosmicCultMonument"]
+  The second Influence, [italic][color=#4cabb3]Attune Influence[/color][/italic] is just as important. Using it will allow you to see the cult's progress, as well as spend gathered entropy to unlock more [color=#4cabb3][bold]Influences[/bold][/color].
 
   [textlink="For more on Influences, click here." link="CosmicCultInfluences"]
 
@@ -45,34 +43,31 @@
     <GuideEntityEmbed Entity="CosmicVacuousSpire" Caption="A vacuous spire"/>
   </Box>
 
-  If the cult is successful in empowering the Monument, they gain the ability to make [color=#4cabb3]Vacuous Spires[/color]. These can be made by transmuting a Portable Scrubber at a [color=#4cabb3]Glyph[/color].
+  When the cult grows stronger, they gain the ability to make [color=#4cabb3]Vacuous Spires[/color]. These can be made by transmuting a Gas Canister using [color=#4cabb3]Corrupt Matter[/color].
 
   When anchored in place, a vacuous spire rapidly devours the surrounding atmosphere! This process causes [color=#4cabb3]Motes of Entropy[/color] to condense from a spire's surface, acting as a powerful lategame source of entropy.
 
-  ## Conversion
-  <Box>
-    <GuideEntityEmbed Entity="CosmicGlyphKnowledge" Caption="A Glyph of Knowledge"/>
-  </Box>
-
-  Once the Monument has been constructed, you can begin converting crewmembers into cultists. To do this, you will need to use the monument to scribe an appropriate [color=#4cabb3]Glyph[/color], and interact with the glyph while a crewmember is standing over it. Glyphs are visible to non-cultists, so be careful!
-
-  Any chaplains or crewmembers with a mindshield cannot be converted using a Glyph of Knowledge. Once the Monument is fully empowered, the Glyph of Truth can be used to convert these crewmembers.
-
-  You will need a certain amount of crewmembers to be present for conversion to succeed. The number required can be checked by accessing the Monument. [italic]If not enough cultists are present, conversion will fail, and your cult may be exposed.[/italic]
-
-  [textlink="For information on deconversion, click here." link="CosmicCultDeconversion"]
-
   ## Malign Rifts
   <Box>
-    <GuideEntityEmbed Entity="CosmicMalignRift" Caption=""/>
+    <GuideEntityEmbed Entity="CosmicMalignRift" Caption="A Malign Rift"/>
   </Box>
   As your cult progresses, [color=#4cabb3]Malign Rifts[/color] will begin to spawn throughout the surrounding environment. These rifts in realspace bleed unstable astral power, and should be located as soon as possible!
 
   Cultists may stealthily [color=#4cabb3]absorb[/color] a Malign Rift by interacting with it.
 
-  Successful absorbtion of a Malign Rift will [bold]permanently[/bold] empower the cultist doing so, increasing the strength of all the [color=#4cabb3]Influences[/color] they possess, and doubling the [color=#4cabb3]Entropy[/color] they gain from siphoning crewmembers. Empowered cultists also no longer need to breathe, and are immune to the vaccuum of space. Empowered cultists also gain the [color=#4cabb3]Null Fragmentation[/color] influence, which can be used to convert a Cyborg into an [color=#4cabb3]Entropic Colossus[/color], or to corrupt the station AI's laws.
+  Successful absorbtion of a Malign Rift will [bold]permanently[/bold] empower the cultist doing so, increasing the strength of all the [color=#4cabb3]Influences[/color] they possess, and doubling the [color=#4cabb3]Entropy[/color] they gain from siphoning crewmembers. Empowered cultists also no longer need to breathe, eat, or drink, and are immune to the vaccuum of space.
+
+  Empowered cultists also gain the [color=#4cabb3]Null Fragmentation[/color] influence, which can be used to convert a Cyborg into an [color=#4cabb3]Entropic Colossus[/color], or to corrupt the station AI's laws.
 
   Malign Rifts can be purged by interacting with them using a bible.
+
+  <Box>
+    <GuideEntityEmbed Entity="CosmicGreaterMalignRift" Caption="A Malign Fracture"/>
+  </Box>
+
+  [color=#4cabb3]Malign Fracture[/color] is a more powerful version of a Malign Rift. It is harder to purge, easier to absorb, and corrupts it's environment at a much faster rate.
+
+  Standing near a fracture is dangerous! Unless you are protected by divine power, or are a part of the cosmic cult, you should keep your distance from any Fractures, as coming too close might have negative effects.
 
   ## Vacuous Chantries
   <Box>
@@ -80,7 +75,7 @@
     <GuideEntityEmbed Entity="BorgChassisGeneric" Caption=""/>
     <GuideEntityEmbed Entity="MobCosmicColossus" Caption=""/>
   </Box>
-  While empowered, one of the ways cultists can choose to expend their empowerment is by using [color=#4cabb3]Null Fragmentation[/color] on a [bold]Cyborg[/bold]. Doing so will trap them inside a [color=#4cabb3]Vacuous Chantry[/color]! This will trigger a stationwide alert, and begin the process of transfiguring the unfortunate victim into an [color=#4cabb3]Entropic Colossus[/color].
+  While empowered, cultists can choose to use [color=#4cabb3]Null Fragmentation[/color] on a [bold]Cyborg[/bold]. Doing so will trap them inside a [color=#4cabb3]Vacuous Chantry[/color]! This will trigger a stationwide alert, and begin the process of transfiguring the unfortunate victim into an [color=#4cabb3]Entropic Colossus[/color].
 
   Be prepared to defend the chantry - or use it as a distraction to draw the crew's attention! The crew must use weapons to destroy the chantry in order to free the trapped Cyborg within.
 

@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Stack;
+// </Trauma>
 using Content.Shared.Hands.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -32,6 +35,15 @@ public abstract partial class SharedStackSystem
 
         if (recipient.Comp.StackTypeId != donor.Comp.StackTypeId)
             return false;
+
+        // <Trauma>
+        var evRec = new AttemptMergeStackEvent(recipient, false);
+        RaiseLocalEvent(donor, ref evRec);
+        var evDon = new AttemptMergeStackEvent(donor, false);
+        RaiseLocalEvent(recipient, ref evDon);
+        if (evRec.Cancelled || evDon.Cancelled)
+            return false;
+        // <Trauma>
 
         // The most we can transfer
         transferred = Math.Min(donor.Comp.Count, GetAvailableSpace(recipient.Comp));

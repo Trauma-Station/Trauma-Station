@@ -92,11 +92,13 @@
       params:
         volume: -4
   - type: UseDelay
-  - type: Clothing
-    slots: [mask]
-  - type: Tag
-    tags:
-    - PetWearable
+  # <Trauma> No.
+#  - type: Clothing
+#    slots: [mask]
+#  - type: Tag
+#    tags:
+#    - PetWearable
+  #</Trauma>
 
 - type: entity
   parent: [ BaseItem, BaseSportsBall ]

@@ -88,7 +88,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 100 # Not parity, but the health system in Goonstation works completely differently so :shrug:
+          damage: 50
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -155,7 +155,7 @@
           Quantity: 100
   - type: MeleeChemicalInjector
     solution: melee
-    transferAmount: 4
+    transferAmount: 1
   - type: TentacleHook
   - type: SpikerLash
   - type: SpikerShuffle
@@ -182,7 +182,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead # Not parity, but the health system in Goonstation works completely differently so :shrug:
+      60: Dead
   - type: Grammar
     attributes:
       gender: male
@@ -192,7 +192,7 @@
       Male: UnisexArachnid
       Female: UnisexArachnid
       Unsexed: UnisexArachnid
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Dog
     understands:
@@ -242,7 +242,7 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 8
+        Piercing: 5
         Slash: 5
   - type: Rushdown
   - type: Cloak
@@ -262,7 +262,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead # Not parity, but the health system in Goonstation works completely differently so :shrug:
+      50: Dead
   - type: Grammar
     attributes:
       gender: male
@@ -276,7 +276,7 @@
       Male: Cerberus
       Female: Cerberus
       Unsexed: Cerberus
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Dog
     understands:

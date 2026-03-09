@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
@@ -15,3 +17,9 @@ public sealed class ButtonTagPressedEvent(string id, NetEntity user, NetCoordina
 
 [ByRefEvent]
 public record struct HereticCheckEvent(EntityUid Uid, bool Result = false);
+
+[ByRefEvent]
+public record struct ParentPacketReceiveAttemptEvent(bool Cancelled = false);
+
+[ByRefEvent]
+public record struct GetVirtualItemBlockingEntityEvent(EntityUid Uid);

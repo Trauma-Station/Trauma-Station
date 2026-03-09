@@ -1,14 +1,4 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
-
-// CREATED BY Goldminermac
-// https://github.com/space-wizards/space-station-14/pull/31149
-// LICENSED UNDER THE MIT LICENSE
-// SEE README.MD AND LICENSE.TXT IN THE ROOT OF THIS REPOSITORY FOR MORE INFORMATION
 
 using Content.Server.Speech.EntitySystems;
 using Content.Shared.Speech;
@@ -22,8 +12,7 @@ public sealed class VulgarAccentSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -41,9 +30,8 @@ public sealed class VulgarAccentSystem : EntitySystem
             //Every word has a percentage chance to be replaced by a random swear word from the component's array.
             if (_random.Prob(component.SwearProb))
             {
-                if (!_prototypeManager.TryIndex(component.Pack, out var messagePack))
+                if (!_proto.Resolve(component.Pack, out var messagePack))
                     return message;
-
 
                 string swearWord = _loc.GetString(_random.Pick(messagePack.Values));
                 messageWords[i] = swearWord;

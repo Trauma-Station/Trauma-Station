@@ -10,6 +10,7 @@ public abstract partial class SharedMindSystem
 {
     [Dependency] private readonly SharedLanguageSystem _language = default!; // Trauma
 
+    // TODO: make it only delete certain objectives and not all of them in case an antag is ever converted and then deconverted.
     public void ClearObjectives(Entity<MindComponent?> mind)
     {
         if (!Resolve(mind, ref mind.Comp))
@@ -29,7 +30,7 @@ public abstract partial class SharedMindSystem
 
         // If the entity already speaks some language (like monkey or robot), we do nothing else.
         // Otherwise, we give them the fallback language
-        if (speaker.SpokenLanguages.Count == 0)
+        if (speaker.Speaks.Count == 0)
             _language.AddLanguage(uid, SharedLanguageSystem.FallbackLanguagePrototype);
     }
 }

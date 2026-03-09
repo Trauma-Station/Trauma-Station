@@ -176,6 +176,9 @@ public sealed partial class StoreSystem
         // var cost = listing.Cost; // Goobstation
         foreach (var (currency, amount) in listing.Cost)
         {
+            if (amount == FixedPoint2.Zero) // Trauma - skip balance check if listing costs 0
+                continue;
+
             if (!component.Balance.TryGetValue(currency, out var balance) || balance < amount)
             {
                 return;
@@ -199,7 +202,8 @@ public sealed partial class StoreSystem
         //subtract the cash
         foreach (var (currency, amount) in listing.Cost)
         {
-            component.Balance[currency] -= amount;
+            if (amount > FixedPoint2.Zero) // Trauma - skip balance check if listing costs 0
+                component.Balance[currency] -= amount;
 
             component.BalanceSpent.TryAdd(currency, FixedPoint2.Zero);
 

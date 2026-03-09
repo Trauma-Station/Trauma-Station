@@ -20,7 +20,7 @@
     knowledge:
     - NightwatcherSecret
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathAsh
   conditions:
@@ -48,7 +48,7 @@
     knowledge:
     - GraspOfAsh
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathAsh
   conditions:
@@ -59,18 +59,17 @@
     whitelist:
     - Ash
 
-# side
 - type: listing
   id: HereticAshPath3
   name: knowledge-path-ash-s3-name
   description: knowledge-path-ash-s3-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: ashen_shift }
+  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - AshenShift
+    - MarkOfAsh
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathAsh
   conditions:
@@ -81,15 +80,16 @@
     whitelist:
     - Ash
 
+# side
 - type: listing
   id: HereticAshPath4
   name: knowledge-path-ash-s4-name
   description: knowledge-path-ash-s4-desc
-  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: ashen_shift }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - MarkOfAsh
+    - AshenShift
   cost:
     KnowledgePoint: 2
   categories:
@@ -134,7 +134,7 @@
     knowledge:
     - MaskOfMadness
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathAsh
   conditions:
@@ -177,7 +177,7 @@
     knowledge:
     - NightwatcherRebirth
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathAsh
   conditions:
@@ -198,7 +198,7 @@
     knowledge:
     - AscensionAsh
   cost:
-    KnowledgePoint: 3
+    KnowledgePoint: 2
   categories:
   - HereticPathAsh
   conditions:

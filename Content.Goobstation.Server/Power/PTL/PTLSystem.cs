@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
-// SPDX-FileCopyrightText: 2025 McBosserson <mcbosserson@hotmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SoundingExpert <204983230+SoundingExpert@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 john git <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Power.PTL;
@@ -42,7 +34,6 @@ public sealed partial class PTLSystem : EntitySystem
 {
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly IPrototypeManager _protMan = default!;
     [Dependency] private readonly FlashSystem _flash = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly PopupSystem _popup = default!;

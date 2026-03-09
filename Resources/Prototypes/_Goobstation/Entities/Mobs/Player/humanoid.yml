@@ -1,25 +1,3 @@
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 ThunderBear2006 <bearthunder06@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 # Civilian
 
 - type: randomHumanoidSettings
@@ -36,6 +14,55 @@
   id: EventHumanoidLibrarian
   parent: EventHumanoid
   components:
+  # <Trauma>
+  - type: KnowledgeGrant
+    skills:
+      # TODO: DIE
+      LanguageCat: 26
+      LanguageDog: 26
+      LanguageFox: 26
+      LanguageXeno: 26
+      LanguageMonkey: 26
+      LanguageMouse: 26
+      LanguageChicken: 26
+      LanguageDuck: 26
+      LanguageCow: 26
+      LanguageSheep: 26
+      LanguageKangaroo: 26
+      LanguagePig: 26
+      LanguageCrab: 26
+      LanguageKobold: 26
+      LanguageHissing: 26
+      LanguagePenguin: 26
+      LanguageDeer: 26
+      LanguageUniversal: 26
+      LanguageRobotTalk: 26
+      LanguageDroneTalk: 26
+      LanguagePsychomantic: 26
+      LanguageBlob: 26
+      LanguageEldritch: 26
+      LanguageRootSpeak: 26
+      LanguageMoffic: 26
+      LanguageDraconic: 26
+      LanguageBubblish: 26
+      LanguageNewKinPidgin: 26
+      LanguageXeeplian: 26
+      LanguageElyran: 26
+      LanguageFreespeak: 26
+      LanguageNovuNederic: 26
+      LanguageSolCommon: 26
+      LanguageTauCetiBasic: 26
+      LanguageTradeband: 26
+      LanguageSpaceItalian: 26
+      LanguageCarptongue: 26
+      LanguageFloorGoblin: 26
+      LanguageCheval: 26
+      LanguageBingle: 26
+      LanguageRevolutionary: 26
+      LanguageXenoHivemind: 26
+      LanguageAzaziba: 26
+      LanguageCalcic: 26
+  # </Trauma>
   - type: AutoImplant
     implants:
     - LibrarianTranslatorImplant      #Librarians should speak most languages
@@ -47,7 +74,13 @@
   - type: AutoImplant
     implants:
     - SpaceItalianTranslatorImplant   #chefs should speak space italian
-  - type: GrantCqc                    #Chefs should have CqC
+  # <Trauma>
+  - type: KnowledgeGrant
+    skills:
+      MartialArtCQCChef: 26
+      MeleeKnowledge: 26
+      CookingKnowledge: 26
+  # </Trauma>
 
 # Lost
 

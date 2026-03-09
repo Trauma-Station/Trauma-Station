@@ -204,8 +204,6 @@
         - ReagentId: Laughter
           Quantity: 300
     - type: Fauna
-    - type: CombatPower
-      factor: 3 # times more dangerous than a crew-member
 
 
 - type: entity
@@ -291,5 +289,3 @@
         - ReagentId: Haloperidol
           Quantity: 300
     - type: Fauna
-    - type: CombatPower
-      factor: 3 # times more dangerous than a crew-member

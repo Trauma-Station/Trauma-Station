@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
-using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -14,7 +15,6 @@ public abstract class SharedWeakToHolySystem : EntitySystem
 {
     [Dependency] private readonly GoobBibleSystem _goobBible = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
 
     public override void Initialize()
     {

@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared.StationAi;
+using Content.Trauma.Common.Silicons.Borgs;
 // </Trauma>
 using Content.Shared.Access.Systems;
 using Content.Shared.Actions;
@@ -181,6 +182,10 @@ public abstract partial class SharedBorgSystem : EntitySystem
         {
             _mind.TransferTo(mindId, chassis.Owner, mind: mind);
         }
+        // <Trauma>
+        var ev = new BorgBrainInsertedEvent(chassis, args.Entity);
+        RaiseLocalEvent(args.Entity, ref ev);
+        // </Trauma>
     }
 
     protected virtual void OnRemoved(Entity<BorgChassisComponent> chassis, ref EntRemovedFromContainerMessage args)
@@ -195,14 +200,18 @@ public abstract partial class SharedBorgSystem : EntitySystem
         {
             _mind.TransferTo(mindId, args.Entity, mind: mind);
         }
-        // Corvax-Next-AiRemoteControl-Start
+        // <Trauma>
+        // TODO: move this into an event handler
         if (HasComp<AiRemoteBrainComponent>(args.Entity))
         {
             BorgDeactivate(chassis, user: chassis);
             RemComp<AiRemoteControllerComponent>(chassis);
             RemComp<StationAiVisionComponent>(chassis);
         }
-        // Corvax-Next-AiRemoteControl-End
+
+        var ev = new BorgBrainRemovedEvent(chassis, args.Entity);
+        RaiseLocalEvent(args.Entity, ref ev);
+        // </Trauma>
     }
 
     private void OnMindAdded(Entity<BorgChassisComponent> chassis, ref MindAddedMessage args)

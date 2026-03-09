@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
@@ -64,9 +65,7 @@ public sealed class WeightedRandomEffectSystem : EntityEffectSystem<MetaDataComp
     protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<WeightedRandomEffect> args)
     {
         var total = 0f;
-        // TODO: PredictedRandom when it's real
-        var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(ent, ent.Comp).Id);
-        var rand = new Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent, ent.Comp));
         var effect = args.Effect;
         var target = rand.NextFloat() * effect.GetTotalWeights();
         foreach (var child in effect.Children)

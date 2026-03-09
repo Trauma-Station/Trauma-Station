@@ -1,21 +1,12 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
-using Content.Shared.CombatMode;
 using Content.Shared.DoAfter;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Stunnable;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
-using Robust.Shared.Audio.Systems;
-
 
 namespace Content.Goobstation.Shared.Vehicles.Clowncar;
 
@@ -49,13 +40,7 @@ namespace Content.Goobstation.Shared.Vehicles.Clowncar;
 public abstract partial class SharedClowncarSystem : EntitySystem
 {
     [Dependency] protected readonly SharedAppearanceSystem AppearanceSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatSystem = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -80,7 +65,7 @@ public abstract partial class SharedClowncarSystem : EntitySystem
         if (!TryComp<VehicleComponent>(uid, out var _))
             return;
         EnsureComp<StunnedComponent>(args.Entity);
-        _actionsSystem.AddAction(args.Entity, component.ThankRiderAction, uid);
+        _actions.AddAction(args.Entity, component.ThankRiderAction, uid);
     }
 
 
@@ -91,14 +76,14 @@ public abstract partial class SharedClowncarSystem : EntitySystem
     /// </summary>
     private void OnBuckle(EntityUid uid, ClowncarComponent component, ref StrappedEvent args)
     {
-        _actionsSystem.AddAction(args.Buckle.Owner, component.QuietInTheBackAction, uid);
-        _actionsSystem.AddAction(args.Buckle.Owner, component.DrunkDrivingAction, uid);
+        _actions.AddAction(args.Buckle.Owner, component.QuietInTheBackAction, uid);
+        _actions.AddAction(args.Buckle.Owner, component.DrunkDrivingAction, uid);
         component.ThankCounter = 0;
     }
 
     private void OnUnBuckle(EntityUid uid, ClowncarComponent component, ref UnstrappedEvent args)
     {
-        foreach (var (actionId, comp) in _actionsSystem.GetActions(args.Buckle.Owner))
+        foreach (var (actionId, comp) in _actions.GetActions(args.Buckle.Owner))
         {
             if (!TryComp(actionId, out MetaDataComponent? metaData))
                 continue;
@@ -106,7 +91,7 @@ public abstract partial class SharedClowncarSystem : EntitySystem
             && (metaData.EntityPrototype == component.QuietInTheBackAction
             || metaData.EntityPrototype == component.DrunkDrivingAction))
             {
-                _actionsSystem.RemoveAction(actionId);
+                _actions.RemoveAction(actionId);
             }
         }
     }
@@ -125,27 +110,30 @@ public abstract partial class SharedClowncarSystem : EntitySystem
         if (args.Container.ID != component.Container)
             return;
 
-        foreach (var (actionId, comp) in _actionsSystem.GetActions(args.Entity))
+        foreach (var (actionId, comp) in _actions.GetActions(args.Entity))
         {
             if (!TryComp(actionId, out MetaDataComponent? metaData))
                 continue;
             if (metaData.EntityPrototype != null && metaData.EntityPrototype == component.ThankRiderAction)
-                _actionsSystem.RemoveAction(actionId);
+                _actions.RemoveAction(actionId);
         }
         RemComp<StunnedComponent>(args.Entity);
     }
 }
 
 [Serializable, NetSerializable]
-public sealed partial class ClownCarDoAfterEvent : SimpleDoAfterEvent { }
+public sealed partial class ClownCarDoAfterEvent : SimpleDoAfterEvent;
+
 [Serializable, NetSerializable]
-public sealed partial class ClownCarEnterDriverSeatDoAfterEvent : SimpleDoAfterEvent { }
+public sealed partial class ClownCarEnterDriverSeatDoAfterEvent : SimpleDoAfterEvent;
+
 [Serializable, NetSerializable]
-public sealed partial class ClownCarOpenTrunkDoAfterEvent : SimpleDoAfterEvent { }
-public sealed partial class ThankRiderActionEvent : InstantActionEvent { }
-public sealed partial class ClowncarFireModeActionEvent : InstantActionEvent { }
-public sealed partial class QuietBackThereActionEvent : InstantActionEvent { }
-public sealed partial class DrivingWithStyleActionEvent : InstantActionEvent { }
+public sealed partial class ClownCarOpenTrunkDoAfterEvent : SimpleDoAfterEvent;
+
+public sealed partial class ThankRiderActionEvent : InstantActionEvent;
+public sealed partial class ClowncarFireModeActionEvent : InstantActionEvent;
+public sealed partial class QuietBackThereActionEvent : InstantActionEvent;
+public sealed partial class DrivingWithStyleActionEvent : InstantActionEvent;
 
 [Serializable, NetSerializable]
 public enum ClowncarVisuals : byte

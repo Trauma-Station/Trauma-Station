@@ -100,6 +100,8 @@
       - CannotSuicide
       - FootstepSound
   - type: NoSlip
+  - type: Insulated
+    coefficient: 0.5 # rat king touches more wires, see?
   - type: Rummager
   - type: RatKing
     hungerPerArmyUse: 25
@@ -107,7 +109,7 @@
   - type: MobsterAccent
   - type: Speech
     speechVerb: SmallMob
-  - type: LanguageKnowledge # Einstein Engines - Languages
+  - type: LanguageSpeaker # Einstein Engines - Languages
     speaks:
     - TauCetiBasic
     - Mouse
@@ -136,10 +138,6 @@
     color: "#d14343"
     activateSound: null
     deactivateSound: null
-  - type: Insulated # Goobstation
-    coefficient: 0.5
-  - type: CombatPower # Goobstation
-    factor: 2
   - type: PassiveDamage #passive Healing
     allowedStates:
     - Alive
@@ -228,8 +226,7 @@
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
       state: eyes
       shader: unshaded
-  - type: Insulated # Goobstation
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Mouse
     understands:
@@ -332,6 +329,8 @@
       - CannotSuicide
       - FootstepSound
   - type: NoSlip
+  - type: Insulated
+    coefficient: 0.2 # they don't make da roolz, but they sneaky
   - type: MobPrice
     price: 500 # rat wealth
   - type: MobsterAccent

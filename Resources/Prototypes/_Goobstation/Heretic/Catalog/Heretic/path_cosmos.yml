@@ -8,7 +8,7 @@
     knowledge:
     - EternalGate
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathCosmos
   conditions:
@@ -36,7 +36,7 @@
     knowledge:
     - GraspOfCosmos
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathCosmos
   conditions:
@@ -51,13 +51,13 @@
   id: HereticCosmosPath3
   name: knowledge-path-cosmos-s3-name
   description: knowledge-path-cosmos-s3-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: cosmic_rune }
+  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - CosmicRunes
+    - MarkOfCosmos
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathCosmos
   conditions:
@@ -72,11 +72,11 @@
   id: HereticCosmosPath4
   name: knowledge-path-cosmos-s4-name
   description: knowledge-path-cosmos-s4-desc
-  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: cosmic_rune }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - MarkOfCosmos
+    - CosmicRunes
   cost:
     KnowledgePoint: 2
   categories:
@@ -120,7 +120,7 @@
     knowledge:
     - StarBlast
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathCosmos
   conditions:
@@ -162,7 +162,7 @@
     knowledge:
     - CosmicExpansion
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathCosmos
   conditions:
@@ -183,7 +183,7 @@
     knowledge:
     - AscensionCosmos
   cost:
-    KnowledgePoint: 3
+    KnowledgePoint: 2
   categories:
   - HereticPathCosmos
   conditions:

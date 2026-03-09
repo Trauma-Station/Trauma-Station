@@ -38,7 +38,7 @@ public sealed class ReflectSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     // </Trauma>
     [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    //[Dependency] private readonly IRobustRandom _random = default!; // Trauma - replaced by predicted random
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -113,8 +113,7 @@ public sealed class ReflectSystem : EntitySystem
     public bool TryReflectProjectile(Entity<ReflectComponent> reflector, EntityUid user, Entity<ProjectileComponent?> projectile)
     {
         // <Trauma>
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(reflector).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(reflector));
         // </Trauma>
         if (!TryComp<ReflectiveComponent>(projectile, out var reflective) ||
             (reflector.Comp.Reflects & reflective.Reflective) == 0x0 ||
@@ -178,8 +177,7 @@ public sealed class ReflectSystem : EntitySystem
         [NotNullWhen(true)] out Vector2? newDirection)
     {
         // <Trauma>
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(reflector).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(reflector));
         // </Trauma>
         if ((reflector.Comp.Reflects & hitscanReflectType) == 0x0 ||
             !_toggle.IsActivated(reflector.Owner) ||

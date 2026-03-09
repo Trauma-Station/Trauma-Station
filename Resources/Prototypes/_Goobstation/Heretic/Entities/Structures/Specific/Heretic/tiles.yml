@@ -35,7 +35,7 @@
   - type: TileEntityEffect
     effects:
     - !type:Flammable
-      fireProtectionPenetration: 0.5
+      fireProtectionPenetration: 0.35
       multiplier: 3.75
       multiplierOnExisting: 0.75
     - !type:Ignite
@@ -57,11 +57,84 @@
         hard: false
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
   - type: PreventCollide
     whitelist:
       components:
       - Ghoul
+
+- type: entity
+  id: HereticPaleFog
+  name: pale fog
+  description: Something is there...
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: TimedDespawn
+    lifetime: 10
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.1
+    triggerGroups:
+      types:
+      - Lava
+  - type: Sprite
+    sprite: Effects/chemsmoke.rsi
+    drawdepth: Effects
+    layers:
+      - state: chemsmoke_white
+        color: "#ffffff10"
+  - type: TileEntityEffect
+    conditions:
+    - !type:ProtectedByNullRodCondition
+      inverted: true
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: PaleFogAffectedStatusEffect
+      time: 6
+    - !type:ModifyStatusEffect
+      effectProto: ShadowCloakStatusEffect
+      time: 180
+      type: Remove
+    - !type:GenericStatusEffect
+      key: BlurryVision
+      component: BlurryVision
+      time: 6
+    - !type:GenericStatusEffect
+      key: Muted
+      component: Muted
+      time: 6
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+          - WallLayer
+        mask:
+          - Impassable
+          - HighImpassable
+          - MidImpassable
+          - LowImpassable
+        density: 1000
+        hard: false
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: PreventCollide
+    whitelist:
+      components:
+      - Ghoul
+      - ForestAdmonitions
+  - type: SoundBlocker
+    soundBlockPercent: 0.95
 
 - type: entity
   id: TileHereticVoid
@@ -119,7 +192,7 @@
         hard: false
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: TileHereticRustRune
@@ -157,7 +230,7 @@
     lifetime: 0.7
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: HereticRustAscensionSpreader
@@ -170,7 +243,8 @@
   - type: RustSpreader
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
+    - ForceHereticMinion # Not really minion but doesn't matter
 
 - type: tile
   id: PlatingRust

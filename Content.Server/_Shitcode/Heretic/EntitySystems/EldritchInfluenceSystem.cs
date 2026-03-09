@@ -9,14 +9,14 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Text.RegularExpressions;
-using Content.Goobstation.Common.Heretic;
+using System.Linq;
 using Content.Server.Chat.Managers;
 using Content.Server.Heretic.Components;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Goobstation.Wizard;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects;
@@ -24,6 +24,7 @@ using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Heretic;
 using Content.Shared.Interaction;
+using Content.Shared.StatusEffectNew;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
@@ -38,6 +39,7 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
     [Dependency] private readonly IPlayerManager _playerMan = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -53,9 +55,19 @@ public sealed class EldritchInfluenceSystem : EntitySystem
 
     private void OnExamine(Entity<EldritchInfluenceComponent> ent, ref ExaminedEvent args)
     {
+        if (!ent.Comp.Spent && _heretic.TryGetHereticComponent(args.Examiner, out _, out _))
+        {
+            var msg = Loc.GetString(ent.Comp.HereticExamineMessage, ("tier", ent.Comp.Tier));
+            args.PushMarkup(msg);
+            return;
+        }
+
         if (HasComp<SpectralComponent>(args.Examiner) || HasComp<GhostComponent>(args.Examiner) ||
             HasComp<WizardComponent>(args.Examiner) || HasComp<ApprenticeComponent>(args.Examiner) ||
             _heretic.IsHereticOrGhoul(args.Examiner))
+            return;
+
+        if (_status.HasStatusEffect(args.Examiner, ent.Comp.ExaminedRiftStatusEffect))
             return;
 
         if (!_mind.TryGetMind(args.Examiner, out _, out var mind))
@@ -63,6 +75,8 @@ public sealed class EldritchInfluenceSystem : EntitySystem
 
         if (!_playerMan.TryGetSessionById(mind.UserId, out var session))
             return;
+
+        _status.TryAddStatusEffect(args.Examiner, ent.Comp.ExaminedRiftStatusEffect, out _, ent.Comp.ExamineDelay);
 
         _audio.PlayGlobal(ent.Comp.ExamineSound, session);
 
@@ -95,10 +109,18 @@ public sealed class EldritchInfluenceSystem : EntitySystem
             BreakOnMove = true,
             BreakOnWeightlessMove = false,
             MultiplyDelay = false,
-            Hidden = hidden,
+            Hidden = true,
         };
+
         _popup.PopupEntity(Loc.GetString("heretic-influence-start"), influence, user);
-        return _doafter.TryStartDoAfter(dargs);
+
+        if (!_doafter.TryStartDoAfter(dargs))
+            return false;
+
+        if (!hidden)
+            EnsureComp<HereticEyeOverlayComponent>(user);
+
+        return true;
     }
 
     private void OnInteract(Entity<EldritchInfluenceComponent> ent, ref InteractHandEvent args)
@@ -117,14 +139,34 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     }
     private void OnDoAfter(Entity<EldritchInfluenceComponent> ent, ref EldritchInfluenceDoAfterEvent args)
     {
-        if (args.Cancelled || args.Target == null || !_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
+        var type = args.GetType();
+        var da = args.DoAfter;
+        // Remove eye overlay when heretic finishes gathering rift with codex. If they are gathering multiple rifts at
+        // the same time - don't remove eye overlay
+        if (!TryComp(args.User, out DoAfterComponent? doAfter) ||
+            doAfter.DoAfters.Values.All(x =>
+            {
+                if (x == da || x.Completed || x.Cancelled)
+                    return true;
+
+                return _doafter.GetArgs(x).Event.GetType() != type;
+            }))
+            RemCompDeferred<HereticEyeOverlayComponent>(args.User);
+
+        if (args.Cancelled || args.Target == null ||
+            !_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
             return;
 
-        var knowledge = TryComp(args.Used, out EldritchInfluenceDrainerComponent? drainer)
-            ? drainer.KnowledgePerInfluence
-            : 1f;
+        _heretic.UpdateKnowledge(args.User, 1f);
 
-        _heretic.UpdateKnowledge(args.User, knowledge);
+        if (TryComp(args.Used, out EldritchInfluenceDrainerComponent? drainer) &&
+            drainer.TierToCategory.TryGetValue(ent.Comp.Tier, out var cat))
+        {
+            var current = heretic.SideKnowledgeDrafts[cat];
+            heretic.SideKnowledgeDrafts[cat] = current + 1;
+            if (current == 0)
+                _heretic.UpdateHereticCostModifiers((mind, heretic), cat);
+        }
 
         Spawn("EldritchInfluenceIntermediate", Transform(args.Target.Value).Coordinates);
         QueueDel(args.Target);

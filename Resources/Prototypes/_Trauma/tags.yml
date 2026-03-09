@@ -50,10 +50,16 @@
   id: FlamethrowerTank
 
 - type: Tag
+  id: ForceHereticMinion
+
+- type: Tag
   id: ForgeMold
 
 - type: Tag
   id: FusionCore
+
+- type: Tag
+  id: Gunpowder
 
 - type: Tag
   id: HandTeleporter
@@ -96,6 +102,9 @@
 
 - type: Tag
   id: RitualKnowledge
+
+- type: Tag
+  id: SpellIgnoreForestAdmonitions
 
 - type: Tag
   id: TechfabMachineBoard

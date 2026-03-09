@@ -81,7 +81,7 @@
       metabolismRate: 0.05
       effects:
       - !type:CleanBloodstream
-        excluded: Anacea # remove other medicines to make it harder to treat
+        excluded: [Anacea] # remove other medicines to make it harder to treat
         cleanseRate: 0.5
       - !type:HealthChange
         damage:
@@ -100,7 +100,7 @@
     Bloodstream:
       effects:
       - !type:CleanBloodstream
-        excluded: Pendetide # remove other medicines to make it much harder to treat
+        excluded: [Pendetide] # remove other medicines to make it much harder to treat
         cleanseRate: 5
       - !type:HealthChange
         damage:

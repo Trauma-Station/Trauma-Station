@@ -1,14 +1,6 @@
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 themias <89101928+themias@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Goobstation.Common.Heretic;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
@@ -244,6 +236,11 @@ public abstract class SharedVirtualItemSystem : EntitySystem
         var pos = Transform(user).Coordinates;
         virtualItem = PredictedSpawnAttachedTo(VirtualItem, pos);
         var virtualItemComp = EnsureComp<VirtualItemComponent>(virtualItem.Value);
+        // <Trauma>
+        var ev = new GetVirtualItemBlockingEntityEvent(blockingEnt);
+        RaiseLocalEvent(blockingEnt, ref ev);
+        blockingEnt = ev.Uid;
+        // </Trauma>
         virtualItemComp.BlockingEntity = blockingEnt;
         Dirty(virtualItem.Value, virtualItemComp);
         return true;

@@ -129,12 +129,12 @@
         type: TrackedRadialSelectorMenuBUI
       enum.ListViewSelectorUiKey.Key: # WWDP
         type: ListViewSelectorBUI
-  - type: TriggerOnMobstateChange
-    mobState:
-      - Dead
-  - type: SmokeOnTrigger
-    duration: 3
-    spreadAmount: 3
+  #- type: TriggerOnMobstateChange  | disabled because it was only used for 2nd life
+  #  mobState:
+  #    - Dead
+  #- type: SmokeOnTrigger
+  #  duration: 3
+  #  spreadAmount: 3
   - type: Puller
     needsHands: false
   - type: GhostRole

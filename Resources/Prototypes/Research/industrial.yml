@@ -16,6 +16,7 @@
   - OreProcessorIndustrialMachineCircuitboard
   - ClothingMaskWeldingGas
   - ClothingShoesBootsJump
+  - ClothingHandsGlovesDolphin # Trauma
   # Goobstation R&D Console rework start
   position: 0,-1
   technologyPrerequisites:

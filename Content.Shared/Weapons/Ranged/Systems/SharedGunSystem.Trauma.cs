@@ -1,11 +1,15 @@
+using System.Numerics;
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -15,15 +19,16 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 public abstract partial class SharedGunSystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+
+    private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
+    private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     /// <summary>
     /// Get a predicted random instance for an entity, specific to this tick.
     /// </summary>
     public System.Random Random(EntityUid uid)
-    {
-        var seed = SharedRandomExtensions.HashCodeCombine((int) Timing.CurTick.Value, GetNetEntity(uid).Id);
-        return new System.Random(seed);
-    }
+        => SharedRandomExtensions.PredictedRandom(Timing, GetNetEntity(uid));
 
     /// <summary>
     /// Client-overriden function to do recoil for a shot.
@@ -38,7 +43,7 @@ public abstract partial class SharedGunSystem
         if (gun.Target is { } target && !TerminatingOrDeleted(target))
         {
             var targeted = EnsureComp<TargetedProjectileComponent>(uid);
-            targeted.Target = target;
+            targeted.Target = GetNetEntity(target);
             Dirty(uid, targeted);
         }
 
@@ -76,11 +81,11 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Trauma - changed component to Entity, added user, made public
     /// </summary>
-    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null)
+    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null, float spreadScale = 1.0f)
     {
         var (uid, comp) = ent;
         var timeSinceLastFire = (curTime - comp.LastFire).TotalSeconds;
-        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta, comp.MaxAngleModified.Theta);
+        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + spreadScale * comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0), comp.MaxAngleModified.Theta);
         comp.CurrentAngle = new Angle(newTheta);
         comp.LastFire = comp.NextFire;
 
@@ -91,13 +96,29 @@ public abstract partial class SharedGunSystem
         var angleEv = new GetRecoilModifiersEvent(uid, user ?? uid);
         if (user != null)
             RaiseLocalEvent(user.Value, ref angleEv);
-        RaiseLocalEvent(comp.Owner, ref angleEv);
+        RaiseLocalEvent(uid, ref angleEv);
         random *= angleEv.Modifier;
         // </Goob>
 
-        var spread = comp.CurrentAngle.Theta * random;
-        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random);
-        DebugTools.Assert(spread <= comp.MaxAngleModified.Theta);
+        var spread = comp.CurrentAngle.Theta * random * spreadScale;
+        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random * spreadScale);
+        //DebugTools.Assert(spread <= comp.MaxAngleModified.Theta * spreadScale || spread <= comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0));
         return angle;
+    }
+
+    /// <summary>
+    /// Gets recoil scale for gun according to knowledge system.
+    /// </summary>
+    private float GetRecoilScale(EntityUid? userUid, EntityUid gun)
+    {
+        if (userUid is not {} user || !HasComp<KnowledgeHolderComponent>(user))
+            return 1;
+
+        if (_knowledge.GetKnowledge(user, ShootingKnowledge) is not {} shooting)
+            return 3;
+
+        return shooting.Comp.Level < 26
+            ? 3.0f - (float) shooting.Comp.Level / 26.0f - _knowledge.SharpCurve(shooting)
+            : 1.0f - ((float) (shooting.Comp.Level - 50) / 50.0f * (float) (shooting.Comp.Level - 50) / 50.0f);
     }
 }

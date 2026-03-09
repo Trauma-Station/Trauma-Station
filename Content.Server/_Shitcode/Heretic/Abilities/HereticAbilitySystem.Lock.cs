@@ -11,6 +11,7 @@
 
 using Content.Server.Heretic.EntitySystems;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Effects;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Actions.Components;
 using Content.Shared.Chat;

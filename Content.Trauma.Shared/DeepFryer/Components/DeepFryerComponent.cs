@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chemistry.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -78,8 +80,12 @@ public sealed partial class DeepFryerComponent : Component
     [DataField]
     public List<string> ContainersToRemove = new ();
 
+    /// <summary>
+    /// The last played start/finish sound.
+    /// Stopped when toggling it to prevent sound spamming.
+    /// </summary>
     [DataField]
-    public EntityUid? SoundEntity;
+    public EntityUid? Sound;
 }
 
 [Serializable, NetSerializable]

@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
 <ui:GpsWindow xmlns="https://spacestation14.io"
             xmlns:ui="clr-namespace:Content.Goobstation.Client.GPS"
             xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"

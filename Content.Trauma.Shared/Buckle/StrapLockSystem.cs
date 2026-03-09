@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared._DV.Carrying;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
@@ -295,6 +296,10 @@ public sealed class StrapLockSystem : EntitySystem
         _popup.PopupPredicted(you, others, target, _player.LocalEntity); // all clients will predict it
 
         _nestedEffect.ApplyNestedEffect(target, ent.Comp.DropEffect);
+
+        // incase some shit didnt clean it up
+        RemCompDeferred<StrapLockedComponent>(target);
+        RemCompDeferred<StrapLockHeldComponent>(target);
     }
 
     private void StopHoldingStrapped(EntityUid uid)

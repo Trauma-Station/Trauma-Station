@@ -20,7 +20,7 @@
     knowledge:
     - BlacksmithTale
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathRust
   conditions:
@@ -48,7 +48,7 @@
     knowledge:
     - GraspOfRust
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathRust
   conditions:
@@ -63,13 +63,13 @@
   id: HereticRustPath3
   name: knowledge-path-rust-s3-name
   description: knowledge-path-rust-s3-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: aggressive_spread }
+  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - AggressiveSpread
+    - MarkOfRust
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathRust
   conditions:
@@ -84,11 +84,11 @@
   id: HereticRustPath4
   name: knowledge-path-rust-s4-name
   description: knowledge-path-rust-s4-desc
-  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: aggressive_spread }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - MarkOfRust
+    - AggressiveSpread
   cost:
     KnowledgePoint: 2
   categories:
@@ -132,7 +132,7 @@
     knowledge:
     - EntropicPlume
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathRust
   conditions:
@@ -174,7 +174,7 @@
     knowledge:
     - RustCharge
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathRust
   conditions:
@@ -195,7 +195,7 @@
     knowledge:
     - AscensionRust
   cost:
-    KnowledgePoint: 3
+    KnowledgePoint: 2
   categories:
   - HereticPathRust
   conditions:

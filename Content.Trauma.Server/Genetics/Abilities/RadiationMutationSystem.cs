@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Radiation.Systems;
 using Content.Shared.Mobs;
 using Content.Trauma.Shared.Genetics.Abilities;

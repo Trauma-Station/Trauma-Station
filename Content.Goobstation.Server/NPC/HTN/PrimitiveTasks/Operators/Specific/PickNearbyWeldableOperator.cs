@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -25,8 +18,7 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PickNearbyWeldableOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
     private EntityLookupSystem _lookup = default!;
     private WeldbotSystem _weldbot = default!;
     private PathfindingSystem _pathfinding = default!;
@@ -50,6 +42,7 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
+
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _weldbot = sysManager.GetEntitySystem<WeldbotSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
@@ -61,18 +54,18 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entManager) || !_entManager.TryGetComponent<WeldbotComponent>(owner, out var weldbot))
+        if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entMan) || !_entMan.TryGetComponent<WeldbotComponent>(owner, out var weldbot))
             return (false, null);
 
-        var damageQuery = _entManager.GetEntityQuery<DamageableComponent>();
-        var emagged = _entManager.HasComponent<EmaggedComponent>(owner);
+        var damageQuery = _entMan.GetEntityQuery<DamageableComponent>();
+        var emagged = _entMan.HasComponent<EmaggedComponent>(owner);
 
         foreach (var target in _lookup.GetEntitiesInRange(owner, range))
         {
             if (!damageQuery.TryGetComponent(target, out var damage))
                 continue;
 
-            if (!_entManager.TryGetComponent<RepairableComponent>(target, out var repairComp))
+            if (!_entMan.TryGetComponent<RepairableComponent>(target, out var repairComp))
                 continue;
 
             // Check if weldbot can repair this entity
@@ -89,7 +82,7 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
             return (true, new Dictionary<string, object>()
             {
                 {TargetKey, target},
-                {TargetMoveKey, _entManager.GetComponent<TransformComponent>(target).Coordinates},
+                {TargetMoveKey, _entMan.GetComponent<TransformComponent>(target).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });
         }

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Screens;
 using Content.Medical.Client.Targeting;

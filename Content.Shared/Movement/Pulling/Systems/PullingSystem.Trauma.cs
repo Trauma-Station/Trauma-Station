@@ -1,5 +1,5 @@
 using Content.Goobstation.Common.Hands;
-using Content.Goobstation.Common.MartialArts;
+using Content.Trauma.Common.MartialArts;
 using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared._White.Grab;
 using Content.Shared.CombatMode;
@@ -113,9 +113,7 @@ public sealed partial class PullingSystem
             || !TryComp(args.User, out PullableComponent? pullable))
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
-        if (rand.Prob(pullable.GrabEscapeChance))
+        if (SharedRandomExtensions.PredictedProb(_timing, pullable.GrabEscapeChance, GetNetEntity(ent)))
             TryLowerGrabStage((args.User, pullable), (ent.Owner, ent.Comp), true);
     }
 
@@ -217,7 +215,7 @@ public sealed partial class PullingSystem
             _stamina.TakeStaminaDamage(pullable, puller.Comp.SuffocateGrabStaminaDamage);
 
             var comboEv = new ComboAttackPerformedEvent(puller.Owner, pullable.Owner, puller.Owner, ComboAttackType.Grab);
-            RaiseLocalEvent(puller.Owner, comboEv);
+            RaiseLocalEvent(puller.Owner, ref comboEv);
             _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable, puller);
 
             return true;
@@ -232,10 +230,9 @@ public sealed partial class PullingSystem
             _ => throw new ArgumentOutOfRangeException(),
         };
 
-        var newStage = puller.Comp.GrabStage + nextStageAddition;
+        var newStage = (GrabStage) ((int) puller.Comp.GrabStage + nextStageAddition);
 
-        if (HasComp<MartialArtsKnowledgeComponent>(puller) // i really hate this solution holy fuck
-            && TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
+        if (TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
             && layingDown.Active)
         {
             var ev = new CheckGrabOverridesEvent(newStage);
@@ -333,7 +330,7 @@ public sealed partial class PullingSystem
         _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable, puller);
 
         var comboEv = new ComboAttackPerformedEvent(puller.Owner, pullable.Owner, puller.Owner, ComboAttackType.Grab);
-        RaiseLocalEvent(puller.Owner, comboEv);
+        RaiseLocalEvent(puller.Owner, ref comboEv);
         return true;
     }
 
@@ -405,9 +402,7 @@ public sealed partial class PullingSystem
             _timing.CurTime < pullable.Comp.NextEscapeAttempt)
             return GrabResistResult.TooSoon;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(pullable).Id);
-        var rand = new System.Random(seed);
-        if (rand.Prob(pullable.Comp.GrabEscapeChance))
+        if (SharedRandomExtensions.PredictedProb(_timing, pullable.Comp.GrabEscapeChance, GetNetEntity(pullable)))
             return GrabResistResult.Succeeded;
 
         pullable.Comp.NextEscapeAttempt = _timing.CurTime.Add(TimeSpan.FromSeconds(pullable.Comp.EscapeAttemptCooldown));

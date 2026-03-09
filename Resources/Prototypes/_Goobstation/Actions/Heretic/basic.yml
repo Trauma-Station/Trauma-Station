@@ -14,7 +14,6 @@
   id: ActionHereticOpenStore
   name: Open Knowledge Store
   description: Open the Knowledge Store.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -25,13 +24,15 @@
     event: !type:EventHereticOpenStore {}
   - type: HereticAction
     requireMagicItem: false
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   parent: BaseAction
   id: ActionHereticMansusGrasp
   name: Mansus Grasp
   description: Channel the power of the Old Gods through your grip.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -42,13 +43,15 @@
     event: !type:EventHereticMansusGrasp {}
   - type: HereticAction
     requireMagicItem: false
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   parent: BaseAction
   id: ActionHereticLivingHeart
   name: Living Heart
   description: Use your heart to get your sacrifice targets location.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 2
@@ -60,13 +63,15 @@
     event: !type:EventHereticLivingHeart {}
   - type: HereticAction
     requireMagicItem: false
+  - type: Tag
+    tags:
+    - SpellIgnoreForestAdmonitions
 
 - type: entity
   parent: BaseAction
   id: ActionHereticMansusLink
-  name: Manse Link
+  name: Mansus Link
   description: Pierce through reality and connect minds to one another. Default key is +m
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 10
@@ -87,16 +92,18 @@
   id: ActionHereticShadowCloak
   name: Cloak of Shadow
   description: Completely conceals your identity, but does not make you invisible. Can be activated early to disable it. While cloaked, you move faster, but undergo actions much slower. Taking damage while cloaked may cause it to lift suddenly.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
+    checkCanInteract: false
     useDelay: 6
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: shadowcloak
   - type: InstantAction
-    event: !type:EventHereticShadowCloak
+    event: !type:EventHereticCloak
+      status: ShadowCloakStatusEffect
+      lifetime: 180
   - type: HereticAction
     requireMagicItem: true
   - type: Tag
@@ -108,7 +115,6 @@
   id: ActionHereticShapeshift
   name: Shapechange
   description: A spell that allows you to take on the form of another creature, gaining their abilities.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 10

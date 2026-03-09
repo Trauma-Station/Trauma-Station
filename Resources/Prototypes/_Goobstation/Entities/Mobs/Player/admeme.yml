@@ -161,46 +161,6 @@
     - NamesMilitaryLast
     nameFormat: name-format-standard
 
-# Special Operations Officer
-
-- type: entity
-  id: RandomHumanoidSpawnerSpecialOperationsOfficers
-  name: Special Operations Officer
-  suffix: CentComm
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navy_gold.rsi
-    state: icon
-  - type: RandomMetadata
-    nameSegments:
-    - NamesMilitaryFirstHighRank
-    - NamesMilitaryLast
-    nameFormat: name-format-standard
-  - type: RandomHumanoidSpawner
-    settings: SpecialOperationsOfficer
-
-- type: randomHumanoidSettings
-  id: SpecialOperationsOfficer
-  parent: CentcommHumanoid
-  randomizeName: false
-  components:
-  - type: AutoImplant
-    implants: [ FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant]
-  - type: GhostRole
-    name: ghost-role-information-special-operations-officer-name
-    description: ghost-role-information-special-operations-officer-description
-    rules: ghost-role-information-special-operations-officer-rules
-    raffle:
-      settings: short
-  - type: Loadout
-    prototypes: [ SpecialOperationsOfficerGear ]
-    roleLoadout: [ RoleSurvivalEVA ]
-  - type: RandomMetadata
-    nameSegments:
-    - NamesMilitaryFirstHighRank
-    - NamesMilitaryLast
-    nameFormat: name-format-standard
-
 # Diplomat
 
 - type: entity

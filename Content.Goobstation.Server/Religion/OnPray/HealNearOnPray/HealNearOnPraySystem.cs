@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -27,10 +23,12 @@ public sealed partial class HealNearOnPraySystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly ExamineSystemShared _occlusion = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
 
     private EntityQuery<SpectralComponent> _spectralQuery;
     private EntityQuery<CorporealComponent> _corporealQuery;
+
+    private HashSet<Entity<MobStateComponent>> _targets = new();
 
     public override void Initialize()
     {
@@ -44,14 +42,13 @@ public sealed partial class HealNearOnPraySystem : EntitySystem
 
     private void OnPray(EntityUid uid, HealNearOnPrayComponent comp, ref AlternatePrayEvent args)
     {
-        var lookup = _lookup.GetEntitiesInRange(args.User, comp.Range);
-        var canTarget = new HashSet<EntityUid>(lookup
-            .Where(entity => entity != null && _occlusion.InRangeUnOccluded(uid, entity, comp.Range))
-            .Select(entity => entity));
+        _targets.Clear();
+        _lookup.GetEntitiesInRange(Transform(args.User).Coordinates, comp.Range, _targets);
+        _targets.RemoveWhere(entity => !_examine.InRangeUnOccluded(uid, entity, comp.Range));
 
-        foreach (var entity in canTarget.Where(HasComp<MobStateComponent>))
+        foreach (var entity in _targets)
         {
-            if (_mobState.IsDead(entity)
+            if (_mobState.IsDead(entity.AsNullable())
                 || HasComp<SiliconComponent>(entity))
                 continue;
 
@@ -64,16 +61,17 @@ public sealed partial class HealNearOnPraySystem : EntitySystem
 
             if (ev.ShouldTakeHoly)
             {
-                _damageable.TryChangeDamage(entity, comp.Damage, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+                _damageable.ChangeDamage(entity.Owner, comp.Damage, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
                 Spawn(comp.DamageEffect, Transform(entity).Coordinates);
                 _audio.PlayPvs(comp.SizzleSoundPath, entity, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f)); //This should be safe to keep in the loop as this sound will never consistently play on multiple entities.
             }
             else
             {
-                _damageable.TryChangeDamage(entity, comp.Healing, targetPart: TargetBodyPart.All, ignoreBlockers: true, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+                _damageable.ChangeDamage(entity.Owner, comp.Healing, targetPart: TargetBodyPart.All, ignoreBlockers: true, splitDamage: SplitDamageBehavior.SplitEnsureAll);
                 Spawn(comp.HealEffect, Transform(entity).Coordinates);
             }
         }
+
         _audio.PlayPvs(comp.HealSoundPath, uid, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f)); //Played outside the loop once at the source of the damage to prevent repeated sound-stacking.
     }
 }

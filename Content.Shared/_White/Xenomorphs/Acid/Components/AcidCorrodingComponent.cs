@@ -1,19 +1,24 @@
 using Content.Shared.Damage;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._White.Xenomorphs.Acid.Components;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentPause]
 public sealed partial class AcidCorrodingComponent : Component
 {
     [DataField]
     public DamageSpecifier DamagePerSecond;
 
-    [ViewVariables]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan AcidExpiresAt;
 
-    [ViewVariables]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan NextDamageAt;
 
-    [ViewVariables]
+    [DataField]
     public EntityUid Acid;
 }

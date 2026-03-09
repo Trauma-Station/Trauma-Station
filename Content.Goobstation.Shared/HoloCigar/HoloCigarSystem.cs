@@ -1,27 +1,12 @@
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 Bandit <queenjess521@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.TheManWhoSoldTheWorld;
-using Content.Goobstation.Common.Weapons.Multishot;
-using Content.Goobstation.Common.Weapons.NoWieldNeeded;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Smoking;
 using Content.Shared.Verbs;
-using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -37,8 +22,7 @@ public sealed class HoloCigarSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedItemSystem _items = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -47,15 +31,12 @@ public sealed class HoloCigarSystem : EntitySystem
     private const string UnlitPrefix = "unlit";
     private const string MaskSlot = "mask";
 
-    /// <inheritdoc/>o
+    /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<HoloCigarComponent, GetVerbsEvent<AlternativeVerb>>(OnAddInteractVerb);
 
-        SubscribeLocalEvent<HoloCigarAffectedGunComponent, DroppedEvent>(OnDroppedEvent);
-
-        SubscribeLocalEvent<TheManWhoSoldTheWorldComponent, PickupAttemptEvent>(OnPickupAttempt);
-        SubscribeLocalEvent<TheManWhoSoldTheWorldComponent, MapInitEvent>(OnMapInitEvent);
+        SubscribeLocalEvent<TheManWhoSoldTheWorldComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<TheManWhoSoldTheWorldComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<TheManWhoSoldTheWorldComponent, MobStateChangedEvent>(OnMobStateChangedEvent);
     }
@@ -97,67 +78,14 @@ public sealed class HoloCigarSystem : EntitySystem
             return;
 
         _audio.Stop(holoCigarComponent.MusicEntity);
-        ShutDownEnumerateRemoval(ent);
-
-        if (!ent.Comp.AddedNoWieldNeeded)
-            return;
-
-        RemComp<NoWieldNeededComponent>(ent);
-        ent.Comp.HoloCigarEntity = null;
     }
 
-    private void ShutDownEnumerateRemoval(Entity<TheManWhoSoldTheWorldComponent> ent)
+    private void OnMapInit(Entity<TheManWhoSoldTheWorldComponent> ent, ref MapInitEvent args)
     {
-        var query = EntityQueryEnumerator<HoloCigarAffectedGunComponent>();
-        while (query.MoveNext(out var gun, out var comp))
-        {
-            if (comp.GunOwner != ent.Owner)
-                continue;
-
-            RestoreGun(gun);
-        }
-    }
-
-    private void OnMapInitEvent(Entity<TheManWhoSoldTheWorldComponent> ent, ref MapInitEvent args)
-    {
-        if (!HasComp<NoWieldNeededComponent>(ent))
-        {
-            ent.Comp.AddedNoWieldNeeded = true;
-            AddComp<NoWieldNeededComponent>(ent);
-        }
         if (!_inventory.TryGetSlotEntity(ent, MaskSlot, out var cigarEntity) ||
             !HasComp<HoloCigarComponent>(cigarEntity))
             return;
         ent.Comp.HoloCigarEntity = cigarEntity;
-    }
-
-    private void OnDroppedEvent(Entity<HoloCigarAffectedGunComponent> ent, ref DroppedEvent args)
-    {
-        RestoreGun(ent);
-    }
-
-    private void OnPickupAttempt(Entity<TheManWhoSoldTheWorldComponent> ent, ref PickupAttemptEvent args)
-    {
-        if (!HasComp<GunComponent>(args.Item) || HasComp<HoloCigarAffectedGunComponent>(args.Item))
-            return;
-
-        var affected = EnsureComp<HoloCigarAffectedGunComponent>(args.Item);
-        affected.GunOwner = ent.Owner;
-
-        if (TryComp<MultishotComponent>(args.Item, out var multi))
-        {
-            affected.WasOriginallyMultishot = true;
-            affected.OriginalMissChance = multi.MissChance;
-            affected.OriginalSpreadModifier = multi.SpreadMultiplier;
-            affected.OriginalSpreadAddition = multi.SpreadAddition;
-        }
-
-        multi = EnsureComp<MultishotComponent>(args.Item);
-        multi.MissChance = 0f;
-        multi.SpreadMultiplier = 1f; // no extra spread chuds
-        multi.SpreadAddition = 0f;
-
-        _gun.RefreshModifiers(args.Item);
     }
 
     private void Toggle(Entity<HoloCigarComponent> ent)
@@ -170,7 +98,7 @@ public sealed class HoloCigarSystem : EntitySystem
 
         _appearance.SetData(ent, SmokingVisuals.Smoking, state);
         _clothing.SetEquippedPrefix(ent, prefix);
-        _items.SetHeldPrefix(ent, prefix);
+        _item.SetHeldPrefix(ent, prefix);
 
         if (!ent.Comp.Lit)
         {
@@ -184,35 +112,6 @@ public sealed class HoloCigarSystem : EntitySystem
 
         EnsureComp<CopyrightedAudioComponent>(audio); // even a midi can cause copyright claims
         ent.Comp.MusicEntity = audio;
-    }
-
-    #endregion
-
-    #region Helper Methods
-
-    private void RestoreGun(EntityUid gun,
-        HoloCigarAffectedGunComponent? cigarAffectedGunComponent = null,
-        MultishotComponent? multiShotComp = null)
-    {
-        if (!Resolve(gun, ref cigarAffectedGunComponent, ref multiShotComp))
-            return;
-
-        switch (cigarAffectedGunComponent.WasOriginallyMultishot)
-        {
-            case false:
-                RemComp<MultishotComponent>(gun);
-                break;
-            case true:
-            {
-                multiShotComp.MissChance = cigarAffectedGunComponent.OriginalMissChance;
-                multiShotComp.SpreadMultiplier = cigarAffectedGunComponent.OriginalSpreadModifier;
-                multiShotComp.SpreadAddition = cigarAffectedGunComponent.OriginalSpreadAddition;
-                break;
-            }
-        }
-
-        RemComp<HoloCigarAffectedGunComponent>(gun);
-        _gun.RefreshModifiers(gun);
     }
 
     #endregion

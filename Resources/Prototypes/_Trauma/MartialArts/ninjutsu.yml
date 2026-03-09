@@ -1,0 +1,56 @@
+- type: combo
+  id: NinjutsuTakedown
+  attacks:
+  - Hug
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 2
+    type: Add
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 5
+  levelRequired: 50
+  giveExperience: false
+
+- type: combo
+  id: BiteTheDust
+  attacks:
+  - Harm
+  - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 20
+    type: Add
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 20
+  levelRequired: 10
+
+- type: combo
+  id: DirtyKill
+  attacks:
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  opponentEffects:
+  - !type:GenericStatusEffect
+    key: Paralyze
+    time: 7
+    type: Add
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 20
+  levelRequired: 10

@@ -177,20 +177,6 @@
   - type: PresetIdCard
     job: NavyOfficer
 
-# Special Operations Officer
-
-- type: entity
-  parent: CentcomIDCardNavyCaptain
-  id: CentcomIDCardSpecialOperationsOfficer
-  name: Special Operations Officer's ID card
-  components:
-  - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
-    layers:
-    - state: ert_security
-  - type: PresetIdCard
-    job: SpecialOperationsOfficer
-
 # Inspector
 
 - type: entity

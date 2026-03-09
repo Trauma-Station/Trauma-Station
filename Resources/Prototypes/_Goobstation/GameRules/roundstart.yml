@@ -66,7 +66,6 @@
     - prefRoles: [ Changeling ]
       max: 4
       playerRatio: 12
-      chaosScore: 200
       jobBlacklist: [ Chaplain ] # GOOBSTATION
       blacklist:
         components:
@@ -74,9 +73,6 @@
       lateJoinAdditional: true
       mindRoles:
       - MindRoleChangeling
-  - type: Tag
-    tags:
-      - RoundstartAntag
 
 - type: entity
   parent: BaseTraitorRule
@@ -98,7 +94,6 @@
     - prefRoles: [ Traitor ]
       max: 2
       playerRatio: 25
-      chaosScore: 300
       jobBlacklist: [ NanotrasenRepresentative ]
       whitelist:
         components:
@@ -130,9 +125,6 @@
       lateJoinAdditional: true
       mindRoles:
       - MindRoleTraitor
-  - type: Tag
-    tags:
-      - CalmAntag
 
 - type: entity
   parent: Changeling
@@ -153,9 +145,6 @@
       lateJoinAdditional: true
       mindRoles:
       - MindRoleTraitor
-  - type: Tag
-    tags:
-      - CalmAntag
 
 - type: entity
   parent: BaseNukeopsRule
@@ -222,9 +211,6 @@
         - Syndicate
       mindRoles:
       - MindRoleNukeops
-  - type: Tag
-    tags:
-      - CalmAntag
 
 - type: entity
   id: CalmRevs # For Dual Antag Gamemodes
@@ -252,28 +238,20 @@
       - type: HeadRevolutionary
       mindRoles:
       - MindRoleHeadRevolutionary
-  - type: Tag
-    tags:
-      - CalmAntag
+
 # Blob
 - type: entity
   id: BlobRule
   parent: BaseGameRule
-  categories: [ HideSpawnMenu ]
   components:
   - type: BlobRule
-  - type: GameRule
-    chaosScore: 1000
 
 - type: entity
   id: BlobGameMode
-  parent: BaseGameRule
-  categories: [ HideSpawnMenu ]
+  parent: BlobRule
   components:
-  - type: BlobRule
   - type: GameRule
     minPlayers: 20
-    chaosScore: 1000
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     definitions:
@@ -302,13 +280,6 @@
     earliestStart: 50
     minimumPlayers: 20
     maxOccurrences: 2
-    chaos:
-      Hostile: 200
-      Death: 300
-      Medical: 200
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 1000
   - type: BlobSpawnRule
     carrierBlobProtos:
     - SpawnPointGhostBlobRat
@@ -338,6 +309,13 @@
       roleLoadout:
       - RoleSurvivalNukieHonkops
       components:
+      # clown
+      - type: Clumsy
+      - type: SleepEmitSound
+        snore: /Audio/Voice/Misc/silly_snore.ogg
+        interval: 10
+      - type: SpeechFontOverride
+        font: LDFComicSans
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -408,13 +386,9 @@
     - prefRoles: [ Devil ]
       max: 1
       playerRatio: 40 # from 20 --> 40 , makes it less likely to spawn (Fuck devils)
-      chaosScore: 150
       jobBlacklist: [ Chaplain, Mime, ChiefEngineer, ResearchDirector, Quartermaster ] #chaplain is obvious, mime can't write.
       mindRoles:
       - DevilMindRole
       mindComponents: # Trauma - devil is evil
       - type: Evil
       startingGear: DevilStartingGear
-  - type: Tag
-    tags:
-    - RoundstartAntag

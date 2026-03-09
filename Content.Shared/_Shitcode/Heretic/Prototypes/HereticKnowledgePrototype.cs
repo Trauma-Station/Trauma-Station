@@ -16,21 +16,32 @@ namespace Content.Shared.Heretic.Prototypes;
 [Prototype]
 public sealed partial class HereticKnowledgePrototype : IPrototype
 {
-    [IdDataField] public string ID { get; private set; } = default!;
+    [IdDataField]
+    public string ID { get; private set; } = default!;
 
-    [DataField] public string? Path;
+    [DataField]
+    public string? Path;
 
-    [DataField] public int Stage = 1;
+    [DataField]
+    public int Stage = 1;
 
     /// <summary>
     ///     Indicates that this should not be on a main branch.
     /// </summary>
-    [DataField] public bool SideKnowledge;
+    [DataField]
+    public bool SideKnowledge;
 
     /// <summary>
-    ///     What event should be raised
+    ///     What knowledge event should be raised (on body)
     /// </summary>
-    [DataField, NonSerialized] public HereticKnowledgeEvent? Event;
+    [DataField, NonSerialized]
+    public HereticKnowledgeEvent? Event;
+
+    /// <summary>
+    ///     What event should be raised (on mind)
+    /// </summary>
+    [DataField]
+    public object? MindEvent;
 
     /// <summary>
     ///     What rituals should be given

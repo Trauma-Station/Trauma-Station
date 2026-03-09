@@ -27,12 +27,12 @@ namespace Content.Shared._Starlight.VentCrawling;
 /// </summary>
 public sealed class SharedVentCrawableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedVentTubeSystem _VentCrawlerTubeSystem = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physicsSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly SharedVentTubeSystem _tube = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -68,7 +68,7 @@ public sealed class SharedVentCrawableSystem : EntitySystem
     /// <param name="holder">The VentCrawlerHolderComponent instance.</param>
     /// <param name="args">The ComponentStartup arguments.</param>
     private void OnComponentStartup(EntityUid uid, VentCrawlerHolderComponent holder, ComponentStartup args)
-        => holder.Container = _containerSystem.EnsureContainer<Container>(uid, nameof(VentCrawlerHolderComponent));
+        => holder.Container = _container.EnsureContainer<Container>(uid, nameof(VentCrawlerHolderComponent));
 
     /// <summary>
     /// Tries to insert an entity into the VentCrawlerHolderComponent container.
@@ -85,11 +85,11 @@ public sealed class SharedVentCrawableSystem : EntitySystem
         if (!CanInsert(uid, toInsert, holder))
             return false;
 
-        if (!_containerSystem.Insert(toInsert, holder.Container))
+        if (!_container.Insert(toInsert, holder.Container))
             return false;
 
         if (TryComp<PhysicsComponent>(toInsert, out var physBody))
-            _physicsSystem.SetCanCollide(toInsert, false, body: physBody);
+            _physics.SetCanCollide(toInsert, false, body: physBody);
 
         return true;
     }
@@ -106,7 +106,7 @@ public sealed class SharedVentCrawableSystem : EntitySystem
         if (!Resolve(uid, ref holder))
             return false;
 
-        if (!_containerSystem.CanInsert(toInsert, holder.Container))
+        if (!_container.CanInsert(toInsert, holder.Container))
             return false;
 
         return HasComp<ItemComponent>(toInsert) ||
@@ -147,7 +147,7 @@ public sealed class SharedVentCrawableSystem : EntitySystem
             comp.Holder = holderUid;
         }
 
-        if (!_containerSystem.Insert(holderUid, to.Contents))
+        if (!_container.Insert(holderUid, to.Contents))
         {
             var ev = new VentCrawlingExitEvent();
             RaiseLocalEvent(holderUid, ref ev);
@@ -155,7 +155,7 @@ public sealed class SharedVentCrawableSystem : EntitySystem
         }
 
         if (TryComp<PhysicsComponent>(holderUid, out var physBody))
-            _physicsSystem.SetCanCollide(holderUid, false, body: physBody);
+            _physics.SetCanCollide(holderUid, false, body: physBody);
 
         if (holder.CurrentTube != null)
         {
@@ -183,7 +183,7 @@ public sealed class SharedVentCrawableSystem : EntitySystem
 
             if (holder.IsMoving && holder.NextTube == null)
             {
-                var nextTube = _VentCrawlerTubeSystem.NextTubeFor(currentTube, holder.CurrentDirection);
+                var nextTube = _tube.NextTubeFor(currentTube, holder.CurrentDirection);
 
                 if (nextTube != null)
                 {
@@ -222,7 +222,7 @@ public sealed class SharedVentCrawableSystem : EntitySystem
                 var target = Transform(holder.NextTube.Value).Coordinates;
                 var newPosition = (target.Position - origin.Position) * progress;
 
-                _xformSystem.SetCoordinates(uid, origin.Offset(newPosition).WithEntityId(currentTube));
+                _xform.SetCoordinates(uid, _xform.WithEntityId(origin.Offset(newPosition), currentTube));
 
                 holder.TimeLeft -= time;
                 frameTime -= time;
@@ -241,15 +241,15 @@ public sealed class SharedVentCrawableSystem : EntitySystem
                 }
                 else
                 {
-                    _containerSystem.Remove(uid, Comp<VentCrawlerTubeComponent>(currentTube).Contents ,reparent: false, force: true);
+                    _container.Remove(uid, Comp<VentCrawlerTubeComponent>(currentTube).Contents ,reparent: false, force: true);
 
                     if (holder.FirstEntry)
                         holder.FirstEntry = false;
 
-                    if (_gameTiming.CurTime > holder.LastCrawl + VentCrawlerHolderComponent.CrawlDelay)
+                    if (_timing.CurTime > holder.LastCrawl + VentCrawlerHolderComponent.CrawlDelay)
                     {
-                        holder.LastCrawl = _gameTiming.CurTime;
-                        _audioSystem.PlayPvs(holder.CrawlSound, uid);
+                        holder.LastCrawl = _timing.CurTime;
+                        _audio.PlayPvs(holder.CrawlSound, uid);
                     }
 
                     EnterTube(uid, holder.NextTube.Value, holder);

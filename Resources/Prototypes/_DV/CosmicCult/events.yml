@@ -10,7 +10,6 @@
     duration: null
   - type: SpaceSpawnRule
   - type: GameRule
-    chaosScore: 600 # Same as dragon
   - type: AntagSpawner
     prototype: MobCosmicColossusLone
   - type: AntagObjectives

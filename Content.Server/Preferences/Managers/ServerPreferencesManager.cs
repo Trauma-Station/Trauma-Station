@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Knowledge;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Json;
@@ -131,7 +134,7 @@ namespace Content.Server.Preferences.Managers
 
                     if (parsed is null) continue;
 
-                    markingsList.Add(parsed);
+                    markingsList.Add(parsed.Value);
                 }
 
                 if (Marking.ParseFromDbString($"{profile.HairName}@{profile.HairColor}") is { } facialMarking)
@@ -186,7 +189,10 @@ namespace Content.Server.Preferences.Managers
                 antags.ToHashSet(),
                 traits.ToHashSet(),
                 loadouts,
-                profile.BarkVoice ?? HumanoidProfileSystem.DefaultBarkVoice // Trauma
+                // <Trauma>
+                profile.BarkVoice ?? HumanoidProfileSystem.DefaultBarkVoice,
+                KnowledgeProfile.Verify(profile.KnowledgeMastery, profile.KnowledgeRemoved, _prototypeManager)
+                // </Trauma>
             );
         }
 

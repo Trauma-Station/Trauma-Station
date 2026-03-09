@@ -9,6 +9,7 @@ using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Movement.Systems;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -22,6 +23,7 @@ namespace Content.Shared._Shitcode.Heretic.Systems;
 
 public abstract class SharedStarGazerSystem : EntitySystem
 {
+    [Dependency] protected readonly StatusEffectsSystem Status = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedTransformSystem Xform = default!;
 
@@ -41,6 +43,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
 
         SubscribeLocalEvent<StarGazerComponent, StarGazeEvent>(OnStarGaze);
         SubscribeLocalEvent<StarGazerComponent, MeleeHitEvent>(OnStarGazerHit);
+        SubscribeLocalEvent<StarGazerComponent, AttackAttemptEvent>(OnStarGazerAttackAttempt);
 
         SubscribeLocalEvent<StarGazeComponent, StarGazeDoAfterEvent>(OnStarGazeDoAfter);
         SubscribeLocalEvent<StarGazeComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
@@ -51,6 +54,12 @@ public abstract class SharedStarGazerSystem : EntitySystem
         SubscribeLocalEvent<HereticComponent, EventHereticResolveStarGazer>(OnResolveStarGazer);
 
         SubscribeAllEvent<LaserBeamEndpointPositionEvent>(OnGetPosition);
+    }
+
+    private void OnStarGazerAttackAttempt(Entity<StarGazerComponent> ent, ref AttackAttemptEvent args)
+    {
+        if (Status.HasStatusEffect(ent, ent.Comp.InactiveStatus))
+            args.Cancel();
     }
 
     private void OnResolveStarGazer(Entity<HereticComponent> ent, ref EventHereticResolveStarGazer args)

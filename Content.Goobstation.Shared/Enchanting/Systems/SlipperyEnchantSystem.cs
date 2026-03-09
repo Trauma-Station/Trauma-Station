@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Enchanting.Components;
 using Content.Shared.Slippery;
 
@@ -8,8 +10,6 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// </summary>
 public sealed class SlipperyEnchantSystem : EntitySystem
 {
-    [Dependency] private readonly EnchantingSystem _enchanting = default!;
-
     public override void Initialize()
     {
         base.Initialize();

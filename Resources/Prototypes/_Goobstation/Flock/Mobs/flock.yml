@@ -78,9 +78,6 @@
   - type: NpcFactionMember
     factions:
       - SimpleHostile
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
-
 
 - type: entity
   name: flockBit

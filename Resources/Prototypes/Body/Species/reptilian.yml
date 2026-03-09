@@ -135,10 +135,10 @@
   - AppearanceReptilian
   - BaseSpeciesMobOrganic
   id: MobReptilian
-  name: Urissst Mz'Hand
+  name: Urist McScales
   components:
   # <Trauma>
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - Draconic

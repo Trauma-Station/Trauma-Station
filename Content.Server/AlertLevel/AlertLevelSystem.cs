@@ -183,7 +183,7 @@ public sealed class AlertLevelSystem : EntitySystem
             }
 
             // <Trauma>
-            var attemptEv = new ChangeAlertLevelAttemptEvent(level);
+            var attemptEv = new ChangeAlertLevelAttemptEvent(level, component.CurrentLevel);
             RaiseLocalEvent(station, ref attemptEv);
             if (attemptEv.Cancelled)
                 return;

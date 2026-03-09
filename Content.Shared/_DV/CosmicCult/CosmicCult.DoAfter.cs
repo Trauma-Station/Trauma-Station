@@ -29,3 +29,6 @@ public sealed partial class CosmicChantryDoAfter : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class CosmicHibernationDoAfter : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class CosmicConversionDoAfter : SimpleDoAfterEvent;

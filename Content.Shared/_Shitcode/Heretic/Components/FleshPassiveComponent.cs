@@ -35,9 +35,6 @@ public sealed partial class FleshPassiveComponent : Component
     public float OrganMultiplier = 2f;
 
     [DataField]
-    public float MeatMultiplier = 1.1f;
-
-    [DataField]
     public float BodyPartMultiplier = 5f;
 
     [DataField]
@@ -66,9 +63,6 @@ public sealed partial class FleshPassiveComponent : Component
 
     [DataField]
     public float BleedReductionMultiplier = 5f;
-
-    [DataField]
-    public ProtoId<TagPrototype> MeatTag = "Meat";
 
     [DataField]
     public float HealInterval = 1f;

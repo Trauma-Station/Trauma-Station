@@ -25,6 +25,7 @@
       components:
       - Puddle # Ruins rust path tile rusting and is annoying in general.
       - HereticRitualRune # This is handled by HereticRitualSystem, blacklisting rune makes it so grasp doesn't disappear when interacting with it.
+      - MawedCrucible # Requires for anchoring/unanchoring of the crucible with a grasp
   - type: MeleeWeapon
     canHeavyAttack: false
     damage:
@@ -48,6 +49,9 @@
       path: /Audio/_Goobstation/Heretic/crack2.ogg
     endSound:
       path: /Audio/Items/welder.ogg
+  - type: Tag
+    tags:
+    - AnchorHereticStructure
   # Used for extracting organs
   - type: Hemostat
     speed: 1.5
@@ -82,3 +86,4 @@
     blacklist:
       components:
       - Puddle
+      - MawedCrucible
