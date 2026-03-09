@@ -68,18 +68,19 @@
   name: tomato killer
   description: Looks like it's not you eating tomatoes today, it's the tomatoes eating you.
   components:
-  - type: GhostRole
-    prob: 0.05
-    makeSentient: true
-    allowSpeech: true
-    name: ghost-role-information-tomatokiller-name
-    description: ghost-role-information-tomatokiller-description
-    rules: ghost-role-information-familiar-rules
-    mindRoles:
-    - MindRoleGhostRoleFamiliar
-    raffle:
-      settings: short
-  - type: GhostTakeoverAvailable
+# Trauma - Cull ghostroles
+#  - type: GhostRole
+#    prob: 0.05
+#    makeSentient: true
+#    allowSpeech: true
+#    name: ghost-role-information-tomatokiller-name
+#    description: ghost-role-information-tomatokiller-description
+#    rules: ghost-role-information-familiar-rules
+#    mindRoles:
+#    - MindRoleGhostRoleFamiliar
+#    raffle:
+#      settings: short
+#  - type: GhostTakeoverAvailable
   - type: CanEscapeInventory
     baseResistTime: 3
   - type: Reactive

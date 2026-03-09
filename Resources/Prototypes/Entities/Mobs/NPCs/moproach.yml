@@ -4,9 +4,10 @@
   id: MobMoproach
   description: This little mothroach has mopshoes on its feet! How adorable!
   components:
-  - type: GhostRole
-    name: ghost-role-information-moproach-name
-    description: ghost-role-information-moproach-description
+# Trauma - Cull ghostroles
+#  - type: GhostRole
+#    name: ghost-role-information-moproach-name
+#    description: ghost-role-information-moproach-description
   - type: Sprite
     sprite: Mobs/Animals/mothroach/moproach.rsi
   - type: Clothing

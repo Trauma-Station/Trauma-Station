@@ -518,15 +518,16 @@
   id: MobMothroach
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
-  - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
-    name: ghost-role-information-mothroach-name
-    description: ghost-role-information-mothroach-description
-    rules: ghost-role-information-freeagent-rules
-    mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+  # Trauma - Cull ghostroles
+  #- type: GhostRole
+  #  makeSentient: true
+  #  allowSpeech: true
+  #  allowMovement: true
+  #  name: ghost-role-information-mothroach-name
+  #  description: ghost-role-information-mothroach-description
+  #  rules: ghost-role-information-freeagent-rules
+  #  mindRoles:
+  #  - MindRoleGhostRoleFreeAgentHarmless
   - type: Fixtures
     fixtures:
       fix1:
@@ -1356,12 +1357,13 @@
     tags:
     - DoorBumpOpener
     - FootstepSound
-  - type: GhostRole
-    prob: 0.25
-    name: ghost-role-information-kangaroo-name
-    description: ghost-role-information-kangaroo-description
-    rules: ghost-role-information-nonantagonist-rules
-  - type: GhostTakeoverAvailable
+# Trauma - Cull ghostroles
+#  - type: GhostRole
+#    prob: 0.25
+#    name: ghost-role-information-kangaroo-name
+#    description: ghost-role-information-kangaroo-description
+#    rules: ghost-role-information-nonantagonist-rules
+#  - type: GhostTakeoverAvailable
   - type: Vocal
     sounds:
       Unsexed: Kangaroo
@@ -1806,6 +1808,7 @@
   - type: VentCrawler # goobstation - Ventcrawl
     enterDelay: 0.5
   - type: GhostRole
+    prob: 0.3 # Trauma - add % chance to mouse ghostrole
     makeSentient: true
     allowSpeech: true
     allowMovement: true
@@ -2151,6 +2154,7 @@
   id: MobMouseCancer
   components:
   - type: GhostRole
+    prob: 1 # Trauma - Ensure evil mice get their ghostrole
     name: ghost-role-information-cancer-mouse-name
     description: ghost-role-information-cancer-mouse-description
     rules: ghost-role-information-freeagent-rules
@@ -3667,14 +3671,15 @@
   description: A cute, fluffy, robust hamster.
   components:
   - type: VentCrawler # goobstation - Ventcrawl
-  - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
-    name: ghost-role-information-hamster-name
-    description: ghost-role-information-hamster-description
-    rules: ghost-role-information-nonantagonist-rules
-  - type: GhostTakeoverAvailable
+# Trauma - cull ghostroles
+#  - type: GhostRole
+#    makeSentient: true
+#    allowSpeech: true
+#    allowMovement: true
+#    name: ghost-role-information-hamster-name
+#    description: ghost-role-information-hamster-description
+#    rules: ghost-role-information-nonantagonist-rules
+#  - type: GhostTakeoverAvailable
   - type: Speech
     speechVerb: SmallMob
     speechSounds: Squeak
