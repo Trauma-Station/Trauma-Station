@@ -393,7 +393,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// <summary>
     /// Adds a list of knowledge units to a knowledge container.
     /// </summary>
-    public void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList, bool popup = true)
+    public void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList, bool popup = false)
     {
         if (GetContainer(target) is not { } ent)
             return;
