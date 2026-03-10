@@ -116,6 +116,9 @@ public sealed class StorageTest
                     size = GetFillSize(fill, false, protoMan, itemSys);
                 });
 
+                if (storage == null)
+                    continue;
+
                 var maxSize = storage.MaxItemSize;
                 if (storage.MaxItemSize == null)
                 {
