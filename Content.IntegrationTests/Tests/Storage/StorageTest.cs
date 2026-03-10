@@ -154,6 +154,7 @@ public sealed class StorageTest
                     });
 
                     if (entryItem == null)
+                        continue;
 
                     Assert.That(protoMan.Index(entryItem.Size).Weight,
                         Is.LessThanOrEqualTo(protoMan.Index(maxSize.Value).Weight),
