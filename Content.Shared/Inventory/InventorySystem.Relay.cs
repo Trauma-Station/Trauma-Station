@@ -201,7 +201,7 @@ public interface IClothingSlots
 /// <summary>
 ///     Events that should be relayed to inventory slots should implement this interface.
 /// </summary>
-public interface IInventoryRelayEvent
+public interface IInventoryRelayEvent // this needs to get moved to common...
 {
     /// <summary>
     ///     What inventory slots should this event be relayed to, if any?

@@ -14,6 +14,7 @@
     - HelmetEVA
     - WhitelistChameleon
     - CorgiWearable
+  - type: FaceHuggerBlocker # Trauma
 
 #Large EVA Helmet
 - type: entity
@@ -31,6 +32,7 @@
     - HelmetEVA
     - WhitelistChameleon
     - CorgiWearable
+  - type: FaceHuggerBlocker # Trauma
 
 #Syndicate EVA Helmet
 - type: entity
@@ -43,8 +45,18 @@
     sprite: Clothing/Head/Helmets/eva_syndicate.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/eva_syndicate.rsi
+  - type: Armor # Goob
+    coverage:
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
+        Radiation: 0.5
   - type: StaticPrice
     price: 500 # Suit is 1000
+  - type: FaceHuggerBlocker # Trauma
 
 #Cosmonaut Helmet
 - type: entity
@@ -57,6 +69,39 @@
     sprite: Clothing/Head/Helmets/cosmonaut.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/cosmonaut.rsi
+  - type: FaceHuggerBlocker #Trauma
+
+#Paramedic Void Helmet
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase # goobstation - why didnt this have a light
+  id: ClothingHeadHelmetVoidParamed
+  name: paramedic void helmet
+  description: A void helmet made for paramedics.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Clothing/Head/Hardsuits/goobparamed.rsi # goobstation - wizden sprites SUCK ASS!!!
+  - type: Clothing
+    sprite: _Goobstation/Clothing/Head/Hardsuits/goobparamed.rsi # goobstation - wizden sprites SUCK ASS!!!
+  - type: PointLight # goobstation
+    color: "#3385cc"
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: Armor
+    coverage:
+    - Head
+    modifiers:
+      coefficients:
+        Heat: 0.9
+        Radiation: 0.75
+        Caustic: 0.5
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0.14
+      BoneDamage: 0.14
+      VeinsDamage: 0
+      NerveDamage: 0
+  - type: FaceHuggerBlocker # Trauma
 
 #Ancient Void Helmet
 - type: entity
@@ -69,50 +114,51 @@
     sprite: Clothing/Head/Helmets/ancientvoidsuit.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/ancientvoidsuit.rsi
+  - type: FaceHuggerBlocker # Trauma
 
-#Paramedic Void Helmet
-- type: entity
-  parent: [ ClothingHeadSuitWithLightBase, ClothingHeadEVAHelmetBase ] #Despite acting like a hardsuit helmet, since it inherits from EVA Helmet, it goes here.
-  id: ClothingHeadHelmetVoidParamed
-  name: paramedic void helmet
-  description: A void helmet made for paramedics.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/paramedhelm.rsi
-  - type: HandheldLight
-    addPrefix: false
-  - type: ToggleableVisuals
-    spriteLayer: light
-    clothingVisuals:
-      head:
-      - state: equipped-head-light
-      head-vox:
-      - state: equipped-head-light-vox
-      head-dog:
-      - state: equipped-head-light-dog
-  - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-head
-      head-vox:
-      - state: equipped-head-vox
-      head-dog:
-      - state: equipped-head-dog
-  - type: TemperatureProtection
-    heatingCoefficient: 0.1
-    coolingCoefficient: 0.1
-  - type: Armor
-    modifiers:
-      coefficients:
-        Heat: 0.90
-        Radiation: 0.75
-  - type: PointLight
-    radius: 5
-    energy: 2
-    color: "#00ffff"
-  - type: Tag
-    tags:
-    - CorgiWearable
-    - HelmetEVA
-    - WhitelistChameleon
+# #Paramedic Void Helmet TODO: Move goob prototype to wizden prototype
+#- type: entity
+#  parent: [ ClothingHeadSuitWithLightBase, ClothingHeadEVAHelmetBase ] #Despite acting like a hardsuit helmet, since it inherits from EVA Helmet, it goes here.
+#  id: ClothingHeadHelmetVoidParamed
+#  name: paramedic void helmet
+#  description: A void helmet made for paramedics.
+#  categories: [ HideSpawnMenu ]
+#  components:
+#  - type: Sprite
+#    sprite: Clothing/Head/Hardsuits/paramedhelm.rsi
+#  - type: HandheldLight
+#    addPrefix: false
+#  - type: ToggleableVisuals
+#    spriteLayer: light
+#    clothingVisuals:
+#      head:
+#      - state: equipped-head-light
+#      head-vox:
+#      - state: equipped-head-light-vox
+#      head-dog:
+#      - state: equipped-head-light-dog
+#  - type: Clothing
+#    clothingVisuals:
+#      head:
+#      - state: equipped-head
+#      head-vox:
+#      - state: equipped-head-vox
+#      head-dog:
+#      - state: equipped-head-dog
+#  - type: TemperatureProtection
+#    heatingCoefficient: 0.1
+#    coolingCoefficient: 0.1
+#  - type: Armor
+#    modifiers:
+#      coefficients:
+#        Heat: 0.90
+#        Radiation: 0.75
+#  - type: PointLight
+#    radius: 5
+#    energy: 2
+#    color: "#00ffff"
+#  - type: Tag
+#    tags:
+#    - CorgiWearable
+#    - HelmetEVA
+#    - WhitelistChameleon
