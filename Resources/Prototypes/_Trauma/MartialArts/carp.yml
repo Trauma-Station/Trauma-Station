@@ -38,7 +38,7 @@
   - !type:TakeStaminaDamage
     amount: 60
   - !type:ModifyParalysis
-    key: Paralyze
+    time: 6
   - !type:HealthChange
     damage:
       types:
