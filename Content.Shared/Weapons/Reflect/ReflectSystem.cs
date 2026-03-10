@@ -82,7 +82,7 @@ public sealed class ReflectSystem : EntitySystem
         if (!ent.Comp.InRightPlace)
             return; // only reflect when equipped correctly
 
-        if (TryReflectHitscan(ent, args.Target, args.Shooter, args.SourceItem, args.Direction, args.Reflective, args.Damage, out var dir))  // Trauma - pass the actual target, added damage
+        if (TryReflectHitscan(ent, args.Target, args.Shooter, args.SourceItem, args.Direction, args.Reflective, args.Damage, out var dir)) // Trauma - pass the actual target, added damage
         {
             args.Direction = dir.Value;
             args.Reflected = true;
