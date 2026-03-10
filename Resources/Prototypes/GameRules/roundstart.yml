@@ -176,7 +176,7 @@
         # TODO: replace with FabricationKnowledge: 26 when it gets made
         WallsKnowledge: 26
         InfrastructureKnowledge: 26
-        ElectrionicsKnowledge: 26
+        ElectronicsKnowledge: 26
         SurvivalKnowledge: 26
         TechnologyKnowledge: 26
         ScienceKnowledge: 26
