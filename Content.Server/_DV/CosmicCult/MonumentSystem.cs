@@ -231,6 +231,9 @@ public sealed class MonumentSystem : SharedMonumentSystem
         {
             RemComp<CosmicSubtleMarkComponent>(cultist);
             EnsureComp<CosmicStarMarkComponent>(cultist);
+
+            var ev = new UnholyStatusChangedEvent(uid, uid, true);
+            RaiseLocalEvent(uid, ref ev);
         }
         ent.Comp.Stage++;
         UpdateMonumentAppearance(ent);

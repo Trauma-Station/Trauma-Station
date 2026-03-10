@@ -479,9 +479,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         if (!cultComp.WasWeakToHoly)
         {
             EnsureComp<WeakToHolyComponent>(uid);
-
-            var ev = new UnholyStatusChangedEvent(uid, uid, true);
-            RaiseLocalEvent(uid, ref ev);
         }
 
         rule.Comp.TotalCult++;
@@ -556,9 +553,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         if (!cultComp.WasWeakToHoly)
         {
             EnsureComp<WeakToHolyComponent>(uid);
-
-            var ev = new UnholyStatusChangedEvent(uid, uid, true);
-            RaiseLocalEvent(uid, ref ev);
         }
 
         EnsureComp<IntrinsicRadioReceiverComponent>(uid);
