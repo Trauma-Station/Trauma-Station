@@ -101,16 +101,20 @@ public sealed class StorageTest
                 if (proto.Components.ContainsKey(storageName)) // Trauma - use cached name instead of slop
                     continue;
 
-                // <Trauma> - removed WaitAssertion and deferring stuff, there was no reason to
-                if (!proto.TryGetComponent<StorageComponent>("Storage", out var storage))
+                StorageComponent? storage = null;
+                ItemComponent? item = null;
+                var size = 0;
+                await server.WaitAssertion(() =>
                 {
-                    Assert.Fail($"Entity {proto.ID} has storage-fill without a storage component!");
-                    return;
-                }
+                    if (!proto.TryGetComponent("Storage", out storage))
+                    {
+                        Assert.Fail($"Entity {proto.ID} has storage-fill without a storage component!");
+                        return;
+                    }
 
-                proto.TryGetComponent<ItemComponent>("Item", out var item);
-                var size = GetFillSize(fill, false, protoMan, itemSys);
-                // </Trauma>
+                    proto.TryGetComponent("Item", out item);
+                    size = GetFillSize(fill, false, protoMan, itemSys);
+                });
 
                 var maxSize = storage.MaxItemSize;
                 if (storage.MaxItemSize == null)
