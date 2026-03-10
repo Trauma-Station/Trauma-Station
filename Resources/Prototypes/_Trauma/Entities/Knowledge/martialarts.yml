@@ -38,7 +38,9 @@
     - AreaKitchen
     - AreaColdRoom
     - AreaCafeteria
-  # TODO: make it mutually exclusive with real CQC
+  - type: KnowledgeConflict
+    conflicts:
+    - MartialArtCQC # nuh uh chud
 
 - type: entity
   parent: BaseMartialArtsKnowledge
