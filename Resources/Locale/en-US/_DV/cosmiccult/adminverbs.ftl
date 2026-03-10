@@ -1,6 +1,6 @@
-admin-verb-make-cosmiccultist = Make the target into a cosmic cultist.
+admin-verb-make-cosmiccultist = Make the target into a scientologist.
 
-admin-verb-text-make-cosmiccultist = Make Cosmic Cultist
+admin-verb-text-make-cosmiccultist = Make Scientologist.
 
 cmd-cultify-borg-hint = borg to imprison in chantry (NetEntity or username)
 cmd-cultify-failure-no-entity = No valid entity could be found.

@@ -1,17 +1,17 @@
 # THE UNKNOWN
 
 ghost-role-information-theunknown-name = The Unknown
-ghost-role-information-theunknown-description = The Cosmic Cult has won. An fragment of cosmic power extrudes into realspace.
+ghost-role-information-theunknown-description = Scientology has won. An fragment of scientific power extrudes into realspace.
 ghost-role-information-theunknown-rules = ...
 
 # COLOSSUS
 
-ghost-role-information-colossus-name = Entropic Colossus
-ghost-role-information-colossus-description = Call upon an Effigy of Entropy to perpetuate your existence and accelerate the end of all things! You have 15 minutes to do so or your energies will be extinguished.
-ghost-role-information-colossus-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color] with any cosmic cultists that may be present.
+ghost-role-information-colossus-name = Scientific Colossus
+ghost-role-information-colossus-description = Call upon an Effigy of Science to perpetuate your existence and accelerate the end of all things! You have 15 minutes to do so or your energies will be extinguished.
+ghost-role-information-colossus-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color] with any scientologists that may be present.
 
 ghost-role-information-chantry-victim-name = Vacuous Chantry Prisoner
-ghost-role-information-chantry-victim-description = A cyborg trapped inside a Vacuous Chantry. If the ritual completes, you will transform into an Entropic Colossus.
+ghost-role-information-chantry-victim-description = A cyborg trapped inside a Vacuous Chantry. If the ritual completes, you will transform into an Scientific Colossus.
 
 ghost-role-information-custodian-name = Malign Custodian
 ghost-role-information-lodestar-name = Malign Lodestar
@@ -21,9 +21,9 @@ ghost-role-information-colossus-summon-description = Help the Colossus defend it
 terror-colossus = Attention crew, it appears that someone on your station has drawn the attention of an enormous malign anomaly.
 
 ghost-role-colossus-charactermenu = You must usher in the end of all things. Wreak untold havoc upon all before you.
-ghost-role-colossus-objective = Call forth an Effigy of Entropy and persist until the end of all things.
+ghost-role-colossus-objective = Call forth an Effigy of Science and persist until the end of all things.
 ghost-role-colossus-briefing =
-    You are an Entropic Colossus!
+    You are a Scientific Colossus!
     Your objectives are listed in the character menu.
     Read more about your role in the guidebook entry.
 
@@ -53,4 +53,4 @@ ghost-role-mindsink-stop-searching-verb-text = Stop Seeking
 ghost-role-mindsink-stopped-searching = Noöspheric resonance halted.
 ghost-role-mindsink-slot-component-slot-name-brain = Brain
 
-name-identifier-format-mindsink = ASTRAL-{$number}
+name-identifier-format-mindsink = SCI-{$number}

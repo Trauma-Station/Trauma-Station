@@ -3,14 +3,14 @@ cosmicability-generic-fail = Your influence fails to take hold..
 cosmicability-glare-confirm = Press again to activate Null Glare.
 cosmicability-hibernate-confirm = Press again to activate Slumber Shell.
 
-cosmicability-siphon-cultist-success = Your attempts to draw entropy chill {CAPITALIZE(THE($target))}
-cosmicability-siphon-success = You silently draw Entropy from {CAPITALIZE(THE($target))}.
-cosmicability-siphon-fail = You can't seem to siphon Entropy from {CAPITALIZE(THE($target))}.
-cosmicability-siphon-full = You can't hold any more Entropy!
+cosmicability-siphon-cultist-success = Your attempts to draw science chill {CAPITALIZE(THE($target))}
+cosmicability-siphon-success = You silently draw Science from {CAPITALIZE(THE($target))}.
+cosmicability-siphon-fail = You can't seem to siphon Science from {CAPITALIZE(THE($target))}.
+cosmicability-siphon-full = You can't hold any more Science!
 
 cosmicability-blank-begin = {CAPITALIZE(THE($target))} attempts to grab hold of you!
-cosmicability-blank-success = You shunt {CAPITALIZE(THE($target))}'s mind unto the cosmic dark.
-cosmicability-blank-transfer = A cosmic power shunts your mind out of your body!
+cosmicability-blank-success = You shunt {CAPITALIZE(THE($target))}'s mind unto the dark ages.
+cosmicability-blank-transfer = A scientific power shunts your mind out of your body!
 cosmicability-blank-return = Your mind is drawn back to your body.
 
 cosmicability-lapse-success = You lapse {CAPITALIZE(THE($target))}'s corporeal form.
