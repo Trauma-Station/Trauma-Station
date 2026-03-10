@@ -16,15 +16,15 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    //[Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    //[Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<LanguageKnowledgeComponent> _langQuery;
 
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
     //private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
-    private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
+    //private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
 
     private void InitializeLanguage()
     {
@@ -249,6 +249,8 @@ public abstract partial class SharedKnowledgeSystem
         }*/
 
         // curse of 220
+        /* TODO: re-enable this once language learning isnt fucked and just makes you understand everything
+        // this also doesnt make you able to speak it
         _hearers.Clear();
         _lookup.GetEntitiesInRange<LanguageSpeakerComponent>(_transform.GetMoverCoordinates(ent), 7f, _hearers, LookupFlags.All);
         foreach (var hearer in _hearers)
@@ -259,7 +261,7 @@ public abstract partial class SharedKnowledgeSystem
             if (GetContainer(hearer) is { } hearerBrain)
                 AddExperience(hearerBrain, id, 1, 10);
 
-            /* too op, needs a traitor item or something + a cooldown
+            // too op, needs a traitor item or something + a cooldown
             if (!isCurse || !_language.CanUnderstand(hearer.Owner, args.Language))
                 continue;
 
@@ -269,8 +271,8 @@ public abstract partial class SharedKnowledgeSystem
             //_status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
 
             _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
-            */
         }
+        */
     }
 
     /*private bool ContainsCursedWord(string message)

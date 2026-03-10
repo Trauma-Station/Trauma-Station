@@ -98,6 +98,9 @@ CardDeckNanotrasen: null
 CardBoxBlack: null
 CardBoxSyndicate: null
 CardBoxNanotrasen: null
+
+# 2026-03-10 this gives martial arts, no longer harmless maint loot
+MaterialHideBear: MaterialHideCorgi
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

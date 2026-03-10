@@ -6,10 +6,8 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 2
-    type: Add
   - !type:HealthChange
     damage:
       types:
@@ -26,10 +24,8 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 20
-    type: Add
   - !type:HealthChange
     damage:
       types:
@@ -45,10 +41,8 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 7
-    type: Add
   - !type:HealthChange
     damage:
       types:

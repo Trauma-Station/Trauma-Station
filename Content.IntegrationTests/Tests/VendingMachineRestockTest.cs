@@ -1,17 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 #nullable enable
 using System.Collections.Generic;
 using Content.Server.VendingMachines;
@@ -127,8 +113,12 @@ namespace Content.IntegrationTests.Tests
             var server = pair.Server;
             await server.WaitIdleAsync();
 
-            var prototypeManager = server.ResolveDependency<IPrototypeManager>();
-            var compFact = server.ResolveDependency<IComponentFactory>();
+            // <Trauma> - microoptimisation
+            var prototypeManager = server.ProtoMan;
+            var compFact = server.EntMan.ComponentFactory;
+            var restockName = compFact.GetComponentName<VendingMachineRestockComponent>();
+            var fillName = compFact.GetComponentName<StorageFillComponent>();
+            // </Trauma>
 
             await server.WaitAssertion(() =>
             {
@@ -138,9 +128,9 @@ namespace Content.IntegrationTests.Tests
                 // Collect all the prototypes with restock components.
                 foreach (var proto in prototypeManager.EnumeratePrototypes<EntityPrototype>())
                 {
-                    if (proto.Abstract
-                        || pair.IsTestPrototype(proto)
-                        || !proto.HasComponent<VendingMachineRestockComponent>())
+                    // <Trauma> - optimisation: remove abstract check (always false) and use cached name
+                    if (pair.IsTestPrototype(proto) || !proto.Components.ContainsKey(restockName))
+                    // </Trauma>
                     {
                         continue;
                     }
@@ -151,7 +141,7 @@ namespace Content.IntegrationTests.Tests
                 // Collect all the prototypes with StorageFills referencing those entities.
                 foreach (var proto in prototypeManager.EnumeratePrototypes<EntityPrototype>())
                 {
-                    if (!proto.TryGetComponent<StorageFillComponent>(out var storage, compFact))
+                    if (!proto.TryGetComponent<StorageFillComponent>(fillName, out var storage)) // Trauma - use cached name
                         continue;
 
                     List<string> restockStore = new();

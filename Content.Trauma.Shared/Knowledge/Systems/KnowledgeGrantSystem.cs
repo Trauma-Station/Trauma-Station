@@ -37,8 +37,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
 
     private void OnKnowledgeGrantInit(Entity<KnowledgeGrantComponent> ent, ref MapInitEvent args)
     {
-        // don't need popups for default knowledge
-        _knowledge.AddKnowledgeUnits(ent.Owner, ent.Comp.Skills, popup: false);
+        _knowledge.AddKnowledgeUnits(ent.Owner, ent.Comp.Skills);
         RemComp(ent.Owner, ent.Comp);
     }
 

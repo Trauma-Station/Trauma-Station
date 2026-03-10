@@ -35,6 +35,7 @@
   id: ExclusiveItems
   name: loadout-group-exclusive
   minLimit: 0
+  hideLocked: true # don't need to see other peoples items silly
   loadouts:
   - CybersunFlippo
   - PatreonTia

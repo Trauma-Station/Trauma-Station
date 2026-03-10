@@ -9,8 +9,8 @@ using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
-using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Silicons.Borgs;
+using Content.Trauma.Shared.MartialArts.Components;
 using Content.Trauma.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -393,7 +393,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// <summary>
     /// Adds a list of knowledge units to a knowledge container.
     /// </summary>
-    public void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList, bool popup = true)
+    public void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList, bool popup = false)
     {
         if (GetContainer(target) is not { } ent)
             return;

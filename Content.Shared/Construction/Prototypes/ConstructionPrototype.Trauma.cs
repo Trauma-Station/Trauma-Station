@@ -22,6 +22,15 @@ public sealed partial class ConstructionPrototype
     /// <summary>
     /// Optional quality override.
     /// </summary>
+    /// <remarks>
+    /// CURRENTLY UNUSED!!!
+    /// </remarks>
     [DataField]
     public float? QualityCoefficient;
+
+    /// <summary>
+    /// Whether to give the resulting item a quality at all.
+    /// </summary>
+    [DataField]
+    public bool UseQuality = true;
 }

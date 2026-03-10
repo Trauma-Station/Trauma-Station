@@ -155,7 +155,7 @@
   id: DetectiveArea
   sound:
     params:
-      volume: -25
+      volume: -20
     collection: AmbienceDetective
   rules: InDetectiveArea
   fadeIn: true
@@ -211,7 +211,7 @@
   id: MedicalArea
   sound:
     params:
-      volume: -25
+      volume: -20
     collection: AmbienceMedical
   rules: InMedicalArea
   fadeIn: true
@@ -233,7 +233,7 @@
   id: SecurityArea
   sound:
     params:
-      volume: -25
+      volume: -20
     collection: AmbienceSecurity
   rules: InSecurityArea
   fadeIn: true

@@ -232,8 +232,7 @@ public sealed partial class PullingSystem
 
         var newStage = (GrabStage) ((int) puller.Comp.GrabStage + nextStageAddition);
 
-        if (HasComp<MartialArtsKnowledgeComponent>(puller) // i really hate this solution holy fuck
-            && TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
+        if (TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
             && layingDown.Active)
         {
             var ev = new CheckGrabOverridesEvent(newStage);

@@ -78,9 +78,9 @@
       - !type:TakeStaminaDamage
         amount: -10
         immediate: true
-      - !type:GenericStatusEffect
-        key: Drowsiness
-        time: 50.0
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
+        time: 50
         type: Remove
     Bloodstream:
       conditions:
