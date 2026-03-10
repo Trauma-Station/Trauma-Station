@@ -35,6 +35,8 @@ public sealed class ShortConstructionBUI : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
+
         _menu = CreateMenu();
         _menu.OpenCenteredAt(_input.MouseScreenPosition.Position / _clyde.ScreenSize);
     }
@@ -46,7 +48,7 @@ public sealed class ShortConstructionBUI : BoundUserInterface
         menu.VerticalExpand = true;
         menu.BackButtonStyleClass = "RadialMenuBackButton";
         menu.CloseButtonStyleClass = "RadialMenuCloseButton";
-        menu.OnClose += Close; // FIXME: this doesnt actually close the bui serverside
+        menu.OnClose += Close;
 
         if (!EntMan.TryGetComponent<ShortConstructionComponent>(Owner, out var comp))
             return menu;
