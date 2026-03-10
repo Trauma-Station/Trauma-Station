@@ -81,9 +81,12 @@ public sealed class StorageTest
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
 
-        var entMan = server.ResolveDependency<IEntityManager>();
-        var protoMan = server.ResolveDependency<IPrototypeManager>();
-        var compFact = server.ResolveDependency<IComponentFactory>();
+        // <Trauma> - microoptimisation
+        var entMan = server.EntMan;
+        var protoMan = server.ProtoMan;
+        var compFact = entMan.ComponentFactory;
+        var storageName = compFact.GetComponentName<EntityStorageComponent>();
+        // </Trauma>
         var id = compFact.GetComponentName<StorageFillComponent>();
 
         var itemSys = entMan.System<SharedItemSystem>();
@@ -95,26 +98,19 @@ public sealed class StorageTest
         {
             foreach (var (proto, fill) in pair.GetPrototypesWithComponent<StorageFillComponent>())
             {
-                if (proto.HasComponent<EntityStorageComponent>(compFact))
+                if (proto.Components.ContainsKey(storageName)) // Trauma - use cached name instead of slop
                     continue;
 
-                StorageComponent? storage = null;
-                ItemComponent? item = null;
-                var size = 0;
-                await server.WaitAssertion(() =>
+                // <Trauma> - removed WaitAssertion and deferring stuff, there was no reason to
+                if (!proto.TryGetComponent<StorageComponent>("Storage", out var storage))
                 {
-                    if (!proto.TryGetComponent("Storage", out storage))
-                    {
-                        Assert.Fail($"Entity {proto.ID} has storage-fill without a storage component!");
-                        return;
-                    }
+                    Assert.Fail($"Entity {proto.ID} has storage-fill without a storage component!");
+                    return;
+                }
 
-                    proto.TryGetComponent("Item", out item);
-                    size = GetFillSize(fill, false, protoMan, itemSys);
-                });
-
-                if (storage == null)
-                    continue;
+                proto.TryGetComponent<ItemComponent>("Item", out var item);
+                var size = GetFillSize(fill, false, protoMan, itemSys);
+                // </Trauma>
 
                 var maxSize = storage.MaxItemSize;
                 if (storage.MaxItemSize == null)
@@ -144,13 +140,9 @@ public sealed class StorageTest
                     if (!protoMan.TryIndex<EntityPrototype>(entry.PrototypeId, out var fillItem))
                         continue;
 
-                    ItemComponent? entryItem = null;
-                    await server.WaitPost(() =>
-                    {
-                        fillItem.TryGetComponent("Item", out entryItem);
-                    });
-
-                    if (entryItem == null)
+                    // <Trauma> - removed WaitPost and null check, just use TryGetComponent result
+                    if (!fillItem.TryGetComponent<ItemComponent>("Item", out var entryItem))
+                    // </Trauma>
                         continue;
 
                     Assert.That(protoMan.Index(entryItem.Size).Weight,
@@ -169,16 +161,19 @@ public sealed class StorageTest
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
 
-        var entMan = server.ResolveDependency<IEntityManager>();
-        var protoMan = server.ResolveDependency<IPrototypeManager>();
-        var compFact = server.ResolveDependency<IComponentFactory>();
+        // <Trauma> - microoptimisation
+        var entMan = server.EntMan;
+        var protoMan = server.ProtoMan;
+        var compFact = entMan.ComponentFactory;
+        var storageName = compFact.GetComponentName<StorageComponent>();
+        // </Trauma>
         var id = compFact.GetComponentName<StorageFillComponent>();
 
         var itemSys = entMan.System<SharedItemSystem>();
 
         foreach (var (proto, fill) in pair.GetPrototypesWithComponent<StorageFillComponent>())
         {
-            if (proto.HasComponent<StorageComponent>(compFact))
+            if (proto.Components.ContainsKey(storageName)) // Trauma - use cached name instead of slop
                 continue;
 
             await server.WaitAssertion(() =>
@@ -243,19 +238,27 @@ public sealed class StorageTest
     public async Task NoMultipleContainerFillsTest()
     {
         await using var pair = await PoolManager.GetServerClient();
-        var compFact = pair.Server.ResolveDependency<IComponentFactory>();
+        // <Trauma> - microoptimisation
+        var compFact = pair.Server.EntMan.ComponentFactory;
+        var containerName = compFact.GetComponentName<ContainerFillComponent>();
+        var storageName = compFact.GetComponentName<StorageFillComponent>();
+        // </Trauma>
 
         Assert.Multiple(() =>
         {
             foreach (var (proto, fill) in pair.GetPrototypesWithComponent<EntityTableContainerFillComponent>())
             {
-                Assert.That(!proto.HasComponent<StorageFillComponent>(compFact), $"Prototype {proto.ID} has both {nameof(EntityTableContainerFillComponent)} and {nameof(StorageFillComponent)}.");
-                Assert.That(!proto.HasComponent<ContainerFillComponent>(compFact), $"Prototype {proto.ID} has both {nameof(EntityTableContainerFillComponent)} and {nameof(ContainerFillComponent)}.");
+                // <Trauma> - use cached names instead of slop
+                Assert.That(!proto.Components.ContainsKey(storageName), $"Prototype {proto.ID} has both {nameof(EntityTableContainerFillComponent)} and {nameof(StorageFillComponent)}.");
+                Assert.That(!proto.Components.ContainsKey(containerName), $"Prototype {proto.ID} has both {nameof(EntityTableContainerFillComponent)} and {nameof(ContainerFillComponent)}.");
+                // </Trauma>
             }
 
             foreach (var (proto, fill) in pair.GetPrototypesWithComponent<ContainerFillComponent>())
             {
-                Assert.That(!proto.HasComponent<StorageFillComponent>(compFact), $"Prototype {proto.ID} has both {nameof(ContainerFillComponent)} and {nameof(StorageFillComponent)}.");
+                // <Trauma> - use cached names instead of slop
+                Assert.That(!proto.Components.ContainsKey(storageName), $"Prototype {proto.ID} has both {nameof(ContainerFillComponent)} and {nameof(StorageFillComponent)}.");
+                // </Trauma>
             }
         });
         await pair.CleanReturnAsync();
