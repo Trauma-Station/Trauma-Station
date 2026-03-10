@@ -41,7 +41,7 @@ public sealed partial class GenericStatusEffectEntityEffectSystem : EntityEffect
 public sealed partial class GenericStatusEffect : EntityEffectBase<GenericStatusEffect>
 {
     [DataField(required: true)]
-    public string Key = default!;
+    public ProtoId<StatusEffectPrototype> Key; // Trauma - use protoid bruh
 
     [DataField]
     public string Component = String.Empty;

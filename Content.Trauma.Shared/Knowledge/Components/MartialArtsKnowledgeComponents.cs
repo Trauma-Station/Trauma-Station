@@ -3,20 +3,19 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
-namespace Content.Trauma.Common.MartialArts;
-
-[RegisterComponent, NetworkedComponent]
-public sealed partial class GrabStagesOverrideComponent : Component
-{
-    [DataField]
-    public GrabStage StartingStage = GrabStage.Soft;
-}
+namespace Content.Trauma.Shared.MartialArts.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MartialArtsKnowledgeComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Blocked;
+
+    /// <summary>
+    /// Set to false to disable gaining XP by performing combos.
+    /// </summary>
+    [DataField]
+    public bool GiveExperience = true;
 
     [DataField, AutoNetworkedField]
     public int TemporaryBlockedCounter;

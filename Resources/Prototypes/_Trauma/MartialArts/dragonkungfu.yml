@@ -27,8 +27,7 @@
     damage:
       types:
         Blunt: 15
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 6
   levelRequired: 10
 
@@ -46,7 +45,6 @@
     damage:
       types:
         Blunt: 40
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 2
   levelRequired: 10

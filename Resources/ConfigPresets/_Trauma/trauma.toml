@@ -1,6 +1,7 @@
 [game]
 role_timers = true
 role_timer_override = "Trauma"
+round_end_pvs_overrides = true
 
 [chat]
 max_announcement_length = 512

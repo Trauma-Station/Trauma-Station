@@ -103,14 +103,17 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
                  * - Set HorizontalExpand to true so elements properly stretch in layout.
                  * - Collect all UI elements into a list for further processing.
                  */
-                var uiElements = protos
-                    .Select(proto =>
-                    {
-                        var elem = CreateLoadoutUI(proto, profile, loadout, session, collection, loadoutSystem);
-                        elem.HorizontalExpand = true;
-                        return elem;
-                    })
-                    .ToList();
+                // <Trauma> - delinq, check that CreateLoadoutUi isnt null
+                var uiElements = new List<LoadoutContainer>(protos.Count);
+                foreach (var proto in protos)
+                {
+                    if (CreateLoadoutUI(proto, profile, loadout, session, collection, loadoutSystem) is not {} elem)
+                        continue;
+
+                    elem.HorizontalExpand = true;
+                    uiElements.Add(elem);
+                }
+                // </Trauma>
 
                 /*
                 * Determine which element should be displayed first:
@@ -149,9 +152,10 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
             }
             else
             {
-                LoadoutsContainer.AddChild(
-                    CreateLoadoutUI(protos[0], profile, loadout, session, collection, loadoutSystem)
-                );
+                // <Trauma> - check if it's not null first
+                if (CreateLoadoutUI(protos[0], profile, loadout, session, collection, loadoutSystem) is {} child)
+                    LoadoutsContainer.AddChild(child);
+                // </Trauma>
             }
         }
     }
@@ -212,13 +216,20 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
     /// <param name="collection">The dependency injection container.</param>
     /// <param name="loadoutSystem">The loadout system instance.</param>
     /// <returns>A fully initialized LoadoutContainer for UI display.</returns>
-    private LoadoutContainer CreateLoadoutUI(LoadoutPrototype proto, HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession session, IDependencyCollection collection, LoadoutSystem loadoutSystem)
+    // Trauma - made optional
+    private LoadoutContainer? CreateLoadoutUI(LoadoutPrototype proto, HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession session, IDependencyCollection collection, LoadoutSystem loadoutSystem)
     {
         var selected = loadout.SelectedLoadouts[_groupProto.ID];
 
         var pressed = selected.Any(e => e.Prototype == proto.ID);
 
         var enabled = loadout.IsValid(profile, session, proto.ID, collection, out var reason);
+        // <Trauma> - supports hiding locked loadouts with LoadoutGroupPrototype.HideLocked (on release)
+        #if !DEBUG
+        if (_groupProto.HideLocked && !enabled)
+            return null;
+        #endif
+        // </Trauma>
 
         var cont = new LoadoutContainer(proto, !enabled, reason);
 

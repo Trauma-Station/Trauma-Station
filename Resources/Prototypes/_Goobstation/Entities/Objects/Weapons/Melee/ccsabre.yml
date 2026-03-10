@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -21,9 +16,7 @@
         Slash: 30 # Fuck you.
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: Reflect
-    reflectProb: .6
-    spread: 90
+  - type: Parry
   - type: Item
     sprite: _Goobstation/Objects/Weapons/Melee/ccsabre.rsi
   - type: Tag
