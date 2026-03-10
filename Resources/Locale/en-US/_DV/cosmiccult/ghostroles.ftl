@@ -1,6 +1,6 @@
-# THE UNKNOWN
+# XENU
 
-ghost-role-information-theunknown-name = The Unknown
+ghost-role-information-theunknown-name = XENU
 ghost-role-information-theunknown-description = Scientology has won. An fragment of scientific power extrudes into realspace.
 ghost-role-information-theunknown-rules = ...
 

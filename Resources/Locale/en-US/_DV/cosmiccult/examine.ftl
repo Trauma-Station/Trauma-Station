@@ -1,5 +1,5 @@
 ## CREW EXAMINES
-cosmic-examine-text-contraband = [color=#4cabb3]This is highly illegal contraband with unknown properties![/color]
+cosmic-examine-text-contraband = [color=#4cabb3]This is highly illegal contraband with scientological properties![/color]
 cosmic-examine-text-structures = [color=#4cabb3]This object should not be on the station![/color]
 cosmic-examine-text-entities = [color=#4cabb3]This entity should not be on the station![/color]
 cosmic-examine-text-glyphs = [color=#4cabb3]The etched lines are deeply unnerving to gaze upon.[/color]

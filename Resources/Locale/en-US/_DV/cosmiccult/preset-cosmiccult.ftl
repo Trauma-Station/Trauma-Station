@@ -117,7 +117,7 @@ cosmiccult-chantry-powerup = The vacuous chantry flares to life!
 
 cosmiccult-ui-deconverted-title = Deconverted
 cosmiccult-ui-converted-title = Converted
-cosmiccult-ui-roundstart-title = The Unknown
+cosmiccult-ui-roundstart-title = Xenu
 
 cosmiccult-ui-converted-text-1 =
     You have been converted into an Initiate of Scientology.
@@ -141,7 +141,7 @@ cosmiccult-ui-popup-confirm = Confirm
 
 ## OBJECTIVES / CHARACTERMENU
 
-objective-issuer-cosmiccult = [bold][color=#cae8e8]The Unknown[/color][/bold]
+objective-issuer-cosmiccult = [bold][color=#cae8e8]Xenu[/color][/bold]
 
 objective-cosmiccult-charactermenu = You must usher in the end of all things. Complete your tasks to advance Scientology's progress.
 objective-cosmiccult-steward-charactermenu = You must direct Scientology to usher in the end of all things. Oversee and ensure the cult's progress.
@@ -151,7 +151,7 @@ objective-condition-entropy-desc = Collectively siphon at least {$count} science
 objective-condition-culttier-title = EMPOWER THE MONUMENT
 objective-condition-culttier-desc = Ensure that The Monument is brought to full power.
 objective-condition-victory-title = USHER IN THE END
-objective-condition-victory-desc = Beckon The Unknown, and herald the final curtain call.
+objective-condition-victory-desc = Beckon Xenu, and herald the final curtain call.
 
 ## CHAT ANNOUNCEMENTS
 
