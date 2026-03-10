@@ -292,6 +292,10 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: DamageOnHit # Do not fucking delete this shit, armok added improvised weapons breaking for a reason
+    damage:
+      types:
+        Blunt: 1
   - type: Damageable
     damageContainer: Inorganic # </Trauma>
 

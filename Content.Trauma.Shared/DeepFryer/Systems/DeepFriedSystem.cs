@@ -22,7 +22,7 @@ public sealed class DeepFriedSystem : EntitySystem
 
     private void OnExamined(Entity<DeepFriedComponent> ent, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("deep-fried-markup"));
+        args.PushMarkup(Loc.GetString("deep-fried-examine"));
     }
 
     private void OnFlavorMod(Entity<DeepFriedComponent> ent, ref FlavorProfileModificationEvent args)

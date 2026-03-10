@@ -3858,3 +3858,224 @@ Entries:
   id: 454
   time: '2026-03-08T09:03:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1101
+- author: Aviu
+  changes:
+  - type: Add
+    message: Added tackle mechanic to the game.
+  - type: Add
+    message: Sec gloves can now let you perform tackle.
+  - type: Add
+    message: HoS gets gorilla tackle gloves in loadout.
+  - type: Add
+    message: Syndis get guerrilla gloves in uplink.
+  - type: Add
+    message: 2 types of tackle gloves in maints loot.
+  - type: Add
+    message: 'Sci can research dolphin gloves. '
+  id: 455
+  time: '2026-03-08T12:02:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/961
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Skill profiles were partially reset, you may need to update your skills.
+  id: 456
+  time: '2026-03-08T14:53:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1111
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Grilles and regular windows need less skill to make now.
+  id: 457
+  time: '2026-03-08T16:22:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1118
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed some patreon items not being in the loadouts Exclusive Items menu.
+  id: 458
+  time: '2026-03-08T16:35:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1119
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: >-
+      Added Ambient music and sounds for areas, e.g the Interrogation room will
+      play music!
+  id: 459
+  time: '2026-03-08T16:35:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1110
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed consecutive steal item being funny.
+  id: 460
+  time: '2026-03-08T18:13:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1127
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Fixed stamina reduction being applied twice.
+  id: 461
+  time: '2026-03-08T18:15:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/980
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changed knowledge requirements for some improvised items.
+  id: 462
+  time: '2026-03-08T18:20:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1128
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Martial arts level cap is now based on your opponent's skill, train with a
+      master to slowly become one.
+  id: 463
+  time: '2026-03-08T18:32:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1130
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: Fishing now has a chance to spawn a hostile fish.
+  id: 464
+  time: '2026-03-09T05:27:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1143
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Baseball bats now break in 20 hits instead of 30.
+  - type: Remove
+    message: Stamina damage from baseball bat.
+  - type: Fix
+    message: Reenabled shivs breaking after 10 hits.
+  id: 465
+  time: '2026-03-09T07:05:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1142
+- author: deltanedas
+  changes:
+  - type: Add
+    message: The PA now has an access wire like most other machines do.
+  id: 466
+  time: '2026-03-09T08:09:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1148
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed opening loadouts crashing your client...
+  id: 467
+  time: '2026-03-09T08:56:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1149
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Fixed some strength code.
+  id: 468
+  time: '2026-03-09T09:06:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1146
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Materials and tiles no longer have quality, so they can properly stack
+      again.
+  id: 469
+  time: '2026-03-09T09:23:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1152
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Item quality now scales its durability, e.g. bats and shivs last longer or
+      shorter.
+  id: 470
+  time: '2026-03-09T11:24:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1151
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: >-
+      Space Bear martial art is now real, and bear hide helps you learn it! It's
+      kinda half-baked, so you don't benefit from downed opponents yet, but it
+      works!
+  - type: Remove
+    message: Removed BSO
+  id: 471
+  time: '2026-03-09T11:58:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1140
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Chef CQC and Cooking skills now level up when you cook meals in a
+      microwave.
+  - type: Remove
+    message: Chef CQC can no longer be trained by fighting. Do your j*b!
+  id: 472
+  time: '2026-03-09T12:42:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1155
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Loadouts menu is no longer bloated by other peoples exclusive items, now
+      you just see your own ones.
+  id: 473
+  time: '2026-03-09T13:02:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1157
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to spam sounds by closing/opening the deep fryer.
+  id: 474
+  time: '2026-03-09T13:48:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1159
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Maybe fixed chud human-style borgs sometimes being invisible.
+  id: 475
+  time: '2026-03-09T14:02:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1161
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed language learning by hearing someone say it, it was very buggy.
+  id: 476
+  time: '2026-03-09T15:38:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1162
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: >-
+      Mapped areas with ambient music on delta make sure your ambient music is
+      turned on!
+  id: 477
+  time: '2026-03-09T17:45:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1163
+- author: Armok
+  changes:
+  - type: Add
+    message: Skillbook sprites
+  id: 478
+  time: '2026-03-09T22:23:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1164
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added recipe support to the deep fryer, currently you can fry potatos in
+      it to make fries.
+  - type: Fix
+    message: Fixed deep fryer interactions not being predicted...
+  id: 479
+  time: '2026-03-09T23:43:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1168
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed captain not having Library access.
+  id: 480
+  time: '2026-03-10T07:47:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1175

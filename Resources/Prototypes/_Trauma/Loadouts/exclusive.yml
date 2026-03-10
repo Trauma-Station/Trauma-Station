@@ -19,10 +19,10 @@
     guid: 5dcc5fac-1983-43be-a6ff-9d8a5ae38157
 
 - type: loadoutEffectGroup
-  id: GamingFungus420
+  id: TheGamingFungus420
   effects:
   - !type:PlayerGUIDLoadoutEffect
-    guid: 00-ed589c0d20b416be4e0496e77940d15f-ecb04bd546766561-00
+    guid: ba57b839-0f52-4ba2-ba68-8d3b1d317c8e
 
 - type: loadoutEffectGroup
   id: Tia_Zoh
@@ -73,7 +73,7 @@
 #     guid:
 # chef jacket black maroon
 
-#Items
+#Items (ADD TO ExclusiveItems OR IT WONT EXIST)
 - type: loadout
   id: CybersunFlippo
   effects:
@@ -142,7 +142,7 @@
   id: PatreonGamingFungus420
   effects:
   - !type:GroupLoadoutEffect
-    proto: GamingFungus420
+    proto: TheGamingFungus420
   storage:
     back:
     - PatreonGamingFungus420

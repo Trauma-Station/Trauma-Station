@@ -119,4 +119,22 @@ public sealed partial class TraumaCVars
         CVarDef.Create("chat.highlight_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     #endregion
+
+    #region Webhooks
+
+    /// <summary>
+    /// Discord webhook to send errors to.
+    /// Disabled if this is empty.
+    /// </summary>
+    public static readonly CVarDef<string> ErrorWebhookUrl =
+        CVarDef.Create("trauma.error_webhook_url", string.Empty, CVar.SERVER);
+
+    /// <summary>
+    /// Delay between each error message in seconds.
+    /// Used to avoid hitting ratelimits
+    /// </summary>
+    public static readonly CVarDef<double> ErrorWebhookDelay =
+        CVarDef.Create("trauma.error_webhook_delay", 0.3, CVar.SERVER);
+
+    #endregion
 }

@@ -62,6 +62,23 @@
     - id: FishTropicalSun
     - id: FishTropical
 
+ # <Trauma - Carp attack fishermen
+- type: entityTable
+  id: HostileFishTable
+  table: !type:GroupSelector
+    children:
+    - id: MobCarp
+      weight: 50
+    - id: MobCarpMagic
+      weight: 20
+    - id: MobCarpHolo
+      weight: 20
+    - id: MobCarpRainbow
+      weight: 9
+    - id: MobShark
+      weight: 1 # Oh crikey its a whooper!
+# </Trauma>
+
 # Items from Water
 - type: entityTable
   id: WaterFishingLootTable
@@ -72,10 +89,13 @@
         weight: 70
       - !type:NestedSelector
         tableId: WaterFishTable
-        weight: 20
+        weight: 15 # Trauma - was 20
       - !type:NestedSelector
         tableId: RareFishTable
         weight: 10
+      - !type:NestedSelector # Trauma - Add Hostile carp to fishing loot table
+        tableId: HostileFishTable
+        weight: 5
 
 # Items from Lava
 - type: entityTable
@@ -106,4 +126,7 @@
         weight: 80
       - !type:NestedSelector
         tableId: WaterFishTable
-        weight: 20
+        weight: 15 # Trauma - was 20
+      - !type:NestedSelector # Trauma - Add Hostile carp to fishing loot table
+        tableId: HostileFishTable
+        weight: 5

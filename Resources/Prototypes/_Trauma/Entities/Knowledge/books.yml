@@ -57,10 +57,10 @@
   id: BookSkillbook
   abstract: true
   components:
-  - type: Sprite # TODO: different fucking sprite
-    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/skillbooks.rsi
     layers:
-    - state: icon
+    - state: base
   - type: StaticPrice
     price: 20
   - type: KnowledgeGrantOnUse
@@ -74,11 +74,23 @@
 # TODO: These should just give you an xp gain buff rather than make you stronge bruh
 - type: entity
   parent: BookSkillbook
+  id: BookSchematic
+  name: blueprint
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/schematics.rsi
+
+- type: entity
+  parent: BookSkillbook
   id: BookStrength
   name: old book
   suffix: strength
-  description: A small, black manual. There are drawn instructions of curl-ups and sit-ups.
+  description: It contains drawn instructions of curl-ups and sit-ups.
   components:
+  - type: Sprite
+    layers:
+    - state: strength
   - type: KnowledgeGrantOnUse
     skills:
       StrengthKnowledge: 10
@@ -91,8 +103,11 @@
   id: BookAthletics
   name: old book
   suffix: athletics
-  description: A small, black manual. There are drawn instructions of a man running.
+  description: It contains drawn instructions of a man running.
   components:
+  - type: Sprite
+    layers:
+    - state: athletics
   - type: KnowledgeGrantOnUse
     skills:
       AthleticsKnowledge: 10
@@ -105,8 +120,11 @@
   id: BookToughness
   name: old book
   suffix: toughness
-  description: A small, black manual. There are drawn instructions of a man getting lashed.
+  description: It contains drawn instructions of a man getting lashed.
   components:
+  - type: Sprite
+    layers:
+    - state: toughness
   - type: KnowledgeGrantOnUse
     skills:
       ToughnessKnowledge: 10
@@ -119,8 +137,11 @@
   id: BookMelee
   name: old book
   suffix: melee
-  description: A small, black manual. There are drawn instructions of a man in fisticuffs.
+  description: It contains drawn instructions of a man in fisticuffs.
   components:
+  - type: Sprite
+    layers:
+    - state: melee
   - type: KnowledgeGrantOnUse
     skills:
       MeleeKnowledge: 10
@@ -133,8 +154,11 @@
   id: BookShooting
   name: old book
   suffix: shooting
-  description: A small, black manual. There are drawn instructions of a man firing his gun.
+  description: It contains drawn instructions of a man firing his gun.
   components:
+  - type: Sprite
+    layers:
+    - state: shooting
   - type: KnowledgeGrantOnUse
     skills:
       ShootingKnowledge: 10
@@ -147,8 +171,11 @@
   id: BookSurgery
   name: old book
   suffix: surgery
-  description: A small, black manual. There are drawn instructions of a man operating on a body.
+  description: It contains drawn instructions of a man operating on a body.
   components:
+  - type: Sprite
+    layers:
+    - state: surgery
   - type: KnowledgeGrantOnUse
     skills:
       SurgeryKnowledge: 10
@@ -161,8 +188,11 @@
   id: BookFirstaid
   name: old book
   suffix: first aid
-  description: A small, black manual. There are drawn instructions of a man applying bandages to himself.
+  description: It contains drawn instructions of a man applying bandages to himself.
   components:
+  - type: Sprite
+    layers:
+    - state: firstaid
   - type: KnowledgeGrantOnUse
     skills:
       SurgeryKnowledge: 10
@@ -175,8 +205,11 @@
   id: BookMagicalLiteracy
   name: old book
   suffix: magical literacy
-  description: A small, black manual. There are drawn instructions of a man watching sigils pop out of the page.
+  description: It contains drawn instructions of a man watching sigils pop out of the page.
   components:
+  - type: Sprite
+    layers:
+    - state: magicalliteracy
   - type: KnowledgeGrantOnUse
     skills:
       MagicalLiteracyKnowledge: 10
@@ -189,8 +222,11 @@
   id: BookLiteracy
   name: old book
   suffix: literacy
-  description: A small, black manual. Its a picture book.
+  description: Its a picture book.
   components:
+  - type: Sprite
+    layers:
+    - state: literacy
   - type: KnowledgeGrantOnUse
     skills:
       LiteracyKnowledge: 26
@@ -203,8 +239,11 @@
   id: BookJanitor
   name: old book
   suffix: janitor
-  description: A small, black manual. Its a picture book.
+  description: Its a picture book.
   components:
+  - type: Sprite
+    layers:
+    - state: janitor
   - type: KnowledgeGrantOnUse
     skills:
       JanitorKnowledge: 26
@@ -217,8 +256,11 @@
   id: BookTechnology
   name: old book
   suffix: technology
-  description: A small, black manual. Its a book about the basics of technology.
+  description: Its a book about the basics of technology.
   components:
+  - type: Sprite
+    layers:
+    - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
       TechnologyKnowledge: 26
@@ -231,8 +273,11 @@
   id: BookThrowing
   name: old book
   suffix: throwing
-  description: A small, black manual. Its a picture book.
+  description: Its a picture book.
   components:
+  - type: Sprite
+    layers:
+    - state: throwing
   - type: KnowledgeGrantOnUse
     skills:
       ThrowingKnowledge: 26
@@ -245,8 +290,11 @@
   id: BookLanguageTauCeti
   name: old book
   suffix: Tau Ceti
-  description: A small, black manual. Its a book on the basics of the Tau Ceti language.
+  description: Its a book on the basics of the Tau Ceti language.
   components:
+  - type: Sprite
+    layers:
+    - state: TauCeti
   - type: KnowledgeGrantOnUse
     skills:
       LanguageTauCetiBasic: 26
@@ -259,8 +307,11 @@
   id: BookHandmade
   name: old book
   suffix: handmade
-  description: A small, black manual. Its a book on the basics of handmade things.
+  description: Its a book on the basics of handmade things.
   components:
+  - type: Sprite
+    layers:
+    - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
       HandmadeKnowledge: 26
@@ -273,8 +324,11 @@
   id: BookSurvival
   name: old book
   suffix: survival
-  description: A small, black manual. Its a book on the basics of survival.
+  description: Its a book on the basics of survival.
   components:
+  - type: Sprite
+    layers:
+    - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
       SurvivalKnowledge: 26
@@ -287,8 +341,11 @@
   id: BookWeapons
   name: old book
   suffix: weapons
-  description: A small, black manual. Its a book on the basics of weapons.
+  description: Its a book on the basics of weapons.
   components:
+  - type: Sprite
+    layers:
+    - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
       WeaponsKnowledge: 26
@@ -297,11 +354,10 @@
     doAfter: 2
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookMaterials
-  name: old book
   suffix: materials
-  description: A small, black manual. Its a book on the basics of materials.
+  description: A blueprint with designs for materials.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -309,13 +365,15 @@
     experience:
       MaterialsKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: materials
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookDoors
-  name: old book
   suffix: doors
-  description: A small, black manual. Its a book on the basics of doors.
+  description: A blueprint with designs for doors.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -323,13 +381,15 @@
     experience:
       DoorsKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: doors
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookAirlocks
-  name: old book
   suffix: airlocks
-  description: A small, black manual. Its a book on the basics of airlocks.
+  description: A blueprint with designs for airlocks.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -337,13 +397,15 @@
     experience:
       AirlocksKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: airlocks
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookToys
-  name: old book
   suffix: toys
-  description: A small, black manual. Its a book on the basics of toys.
+  description: A blueprint with designs for toys.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -351,13 +413,15 @@
     experience:
       ToysKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: toys
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookBananium
-  name: old book
   suffix: bananium
-  description: A small, black manual. Its a book on the basics of bananium.
+  description: A blueprint with designs for bananium structures.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -365,13 +429,15 @@
     experience:
       BananiumKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: bananium
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookBots
-  name: old book
   suffix: bots
-  description: A small, black manual. Its a book on the basics of bots.
+  description: A blueprint with designs for robots.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -379,13 +445,15 @@
     experience:
       BotsKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: bots
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookFurniture
-  name: old book
   suffix: furniture
-  description: A small, black manual. Its a book on the basics of furniture.
+  description: A blueprint with designs for furniture.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -393,13 +461,15 @@
     experience:
       FurnitureKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: furniture
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookInfrastructure
-  name: old book
   suffix: infrastructure
-  description: A small, black manual. Its a book on the basics of infrastructure.
+  description: A blueprint with designs for various pieces of infrastructure.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -407,13 +477,15 @@
     experience:
       InfrastructureKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: infrastructure
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookElectronics
-  name: old book
   suffix: electronics
-  description: A small, black manual. Its a book on the basics of electronics.
+  description: A blueprint with designs for various electronics.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -421,13 +493,15 @@
     experience:
       ElectronicsKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: electronics
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookWalls
-  name: old book
   suffix: walls
-  description: A small, black manual. Its a book on the basics of walls.
+  description: A blueprint with designs for walls.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -435,14 +509,20 @@
     experience:
       WallsKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: walls
 
 - type: entity
   parent: BookSkillbook
   id: BookScience
   name: old book
   suffix: science
-  description: A small, black manual. Its a book on the basics of science.
+  description: It's a book on the basics of science.
   components:
+  - type: Sprite
+    layers:
+    - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
       ScienceKnowledge: 26
@@ -451,11 +531,10 @@
     doAfter: 2
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookWindows
-  name: old book
   suffix: windows
-  description: A small, black manual. Its a book on the basics of windows.
+  description: A blueprint with designs for windows.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -463,13 +542,15 @@
     experience:
       WindowsKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: windows
 
 - type: entity
-  parent: BookSkillbook
+  parent: BookSchematic
   id: BookSmokeables
-  name: old book
   suffix: smokeables
-  description: A small, black manual. Its got instructions on how to make a blunt inside.
+  description: A blueprint with designs for blunts.
   components:
   - type: KnowledgeGrantOnUse
     skills:
@@ -477,3 +558,6 @@
     experience:
       SmokeablesKnowledge: 1
     doAfter: 2
+  - type: Sprite
+    layers:
+    - state: smokeables

@@ -34,7 +34,10 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
             if (args.ItemList[args.ItemIndex].Metadata is not EntProtoId id)
                 return;
 
-            _profile.Mastery[id] = 0; // cheapest start
+            // to be 0 it needs to remove all the species starting levels, so negate it
+            // will just be 0 if not present in the parent
+            var zero = -_parent.Profile.Mastery.GetValueOrDefault(id);
+            _profile.Mastery[id] = zero; // cheapest start
             _profile.Removed.Remove(id); // can't be removed if it's added, can it
             _modified = true;
             ReloadSkills();
