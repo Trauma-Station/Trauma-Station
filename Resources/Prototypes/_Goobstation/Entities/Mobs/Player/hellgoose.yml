@@ -45,7 +45,6 @@
     factions:
     - Passive
   - type: LanguageSpeaker
-  - type: LanguageKnowledge
     speaks:
     - Honkese
     - TauCetiBasic

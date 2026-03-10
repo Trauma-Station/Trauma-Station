@@ -305,3 +305,10 @@
   components:
   - type: LanguageKnowledge
     languageId: XenoHivemind
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageHonkese
+  components:
+  - type: LanguageKnowledge
+    languageId: Honkese

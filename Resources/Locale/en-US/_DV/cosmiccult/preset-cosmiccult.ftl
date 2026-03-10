@@ -2,13 +2,13 @@
 
 cosmiccult-announcement-sender = ???
 
-cosmiccult-title = Cosmic Cult
-cosmiccult-description = Cultists lurk amongst the crew.
+cosmiccult-title = Scientology
+cosmiccult-description = Scientologists lurk amongst the crew.
 
-roles-antag-cosmiccult-name = Cosmic Cultist
+roles-antag-cosmiccult-name = Scientologists
 roles-antag-cosmiccult-description = Usher in the end of all things through subterfuge and sabotage, brainwashing those who would oppose you.
 
-cosmiccult-gamemode-title = The Cosmic Cult
+cosmiccult-gamemode-title = Scientology
 cosmiccult-gamemode-description = Scanners detect an anomalous increase in Noöspheric pressure. There is no additional data.
 
 cosmiccult-finale-autocall-briefing = The Monument activates {$minutesandseconds}! Gather yourselves, and prepare for the end.
@@ -32,24 +32,24 @@ cosmiccult-monument-mark-removed = Your previous mark was removed.
 ## ROUNDEND TEXT
 
 cosmiccult-roundend-cultist-count = {$initialCount ->
-    [1] There was {$initialCount} [color=#4cabb3]Cosmic Cultist[/color].
-    *[other] There were {$initialCount} [color=#4cabb3]Cosmic Cultists[/color].
+    [1] There was {$initialCount} [color=#4cabb3]Scientologist[/color].
+    *[other] There were {$initialCount} [color=#4cabb3]Scientologists[/color].
 }
-cosmiccult-roundend-entropy-count = The cult siphoned {$count} Entropy.
-cosmiccult-roundend-list-start = The cultists were:
+cosmiccult-roundend-entropy-count = Scientology siphoned {$count} Science.
+cosmiccult-roundend-list-start = The scientologists were:
 cosmiccult-roundend-list-name-user = - [color=#4cabb3]{$name}[/color] ([color=gray]{$user}[/color])
 
-cosmiccult-roundend-cultmajor = [color=#4cabb3]Cosmic Cult major victory![/color]
-cosmiccult-roundend-cultminor = [color=#4cabb3]Cosmic Cult minor victory![/color]
+cosmiccult-roundend-cultmajor = [color=#4cabb3]Scientology major victory![/color]
+cosmiccult-roundend-cultminor = [color=#4cabb3]Scientology minor victory![/color]
 cosmiccult-roundend-neutral = [color=yellow]Neutral ending![/color]
 cosmiccult-roundend-crewminor = [color=green]Crew minor victory![/color]
 cosmiccult-roundend-crewmajor = [color=green]Crew major victory![/color]
 
-cosmiccult-summary-cultmajor = The cosmic cultists ushered in the end!
-cosmiccult-summary-cultminor = The cult will live to see another day.
+cosmiccult-summary-cultmajor = The scientologists ushered in the end!
+cosmiccult-summary-cultminor = Scientology will live to see another day.
 cosmiccult-summary-neutral = The cult has suffered losses, but they will recover.
-cosmiccult-summary-crewminor = Most cosmic cultists were captured.
-cosmiccult-summary-crewmajor = All cosmic cultists were captured!
+cosmiccult-summary-crewminor = Most scientologists were captured.
+cosmiccult-summary-crewmajor = All scientologists were captured!
 
 cosmiccult-elimination-shuttle-call = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle has been automatically called to the station. Please deliver any infected personnel to Quarantine Platform for processing. ETA: {$time} {$units}.
 cosmiccult-elimination-announcement = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle is already inbound. Please deliver any infected personnel to Quarantine Platform for processing.
@@ -65,7 +65,7 @@ cosmiccult-role-roundstart-fluff =
     All you need do is usher it in.
 
 cosmiccult-role-short-briefing =
-    You are a Cosmic Cultist!
+    You are a Scientologist!
     Your objectives are listed in the character menu.
     Read more about your role in the guidebook entry.
 
@@ -77,7 +77,7 @@ cosmiccult-role-conversion-fluff =
     All you need do is usher it in.
 
 cosmiccult-role-conversion-briefing =
-    You are a Cosmic Servant!
+    You are a Scientology Initiate!
     Your objectives are listed in the character menu.
     Read more about your role in the guidebook entry.
 
@@ -87,7 +87,8 @@ cosmiccult-role-deconverted-fluff =
 
 cosmiccult-role-deconverted-briefing =
     Deconverted!
-    You are no longer a part of the Cosmic Cult.
+    You are no longer a part of Scientology.
+    Heretic.
 
 cosmiccult-role-levelup-awaiting-input =
     You have gathered enough entropy to achieve a new level of power.
@@ -116,19 +117,19 @@ cosmiccult-chantry-powerup = The vacuous chantry flares to life!
 
 cosmiccult-ui-deconverted-title = Deconverted
 cosmiccult-ui-converted-title = Converted
-cosmiccult-ui-roundstart-title = The Unknown
+cosmiccult-ui-roundstart-title = Xenu
 
 cosmiccult-ui-converted-text-1 =
-    You have been converted into a Cosmic Servant.
+    You have been converted into an Initiate of Scientology.
 cosmiccult-ui-converted-text-2 =
-    Albeit gifted with knowledge, you lack the power that your fellow cultists posess.
+    Albeit gifted with knowledge, you lack the power that your fellow scientologists posess.
     Aid the cult in its goals whilst ensuring its secrecy.
 
 cosmiccult-ui-roundstart-text-1 =
-    You are a Cosmic Cultist!
+    You are a Scientologist!
 cosmiccult-ui-roundstart-text-2 =
-    Aid the cult in its goals whilst ensuring its secrecy.
-    Cooperate with your fellow cultists' plans.
+    Aid Scientology in its goals whilst ensuring its secrecy.
+    Cooperate with your fellow scientologists' plans.
 
 cosmiccult-ui-deconverted-text-1 =
     You are no longer a part of the Cosmic Cult.
@@ -140,17 +141,17 @@ cosmiccult-ui-popup-confirm = Confirm
 
 ## OBJECTIVES / CHARACTERMENU
 
-objective-issuer-cosmiccult = [bold][color=#cae8e8]The Unknown[/color][/bold]
+objective-issuer-cosmiccult = [bold][color=#cae8e8]Xenu[/color][/bold]
 
-objective-cosmiccult-charactermenu = You must usher in the end of all things. Complete your tasks to advance the cult's progress.
-objective-cosmiccult-steward-charactermenu = You must direct the cult to usher in the end of all things. Oversee and ensure the cult's progress.
+objective-cosmiccult-charactermenu = You must usher in the end of all things. Complete your tasks to advance Scientology's progress.
+objective-cosmiccult-steward-charactermenu = You must direct Scientology to usher in the end of all things. Oversee and ensure the cult's progress.
 
-objective-condition-entropy-title = SIPHON ENTROPY
-objective-condition-entropy-desc = Collectively siphon at least {$count} entropy from the crew.
+objective-condition-entropy-title = SIPHON SCIENCE
+objective-condition-entropy-desc = Collectively siphon at least {$count} science from the crew.
 objective-condition-culttier-title = EMPOWER THE MONUMENT
 objective-condition-culttier-desc = Ensure that The Monument is brought to full power.
 objective-condition-victory-title = USHER IN THE END
-objective-condition-victory-desc = Beckon The Unknown, and herald the final curtain call.
+objective-condition-victory-desc = Beckon Xenu, and herald the final curtain call.
 
 ## CHAT ANNOUNCEMENTS
 
@@ -165,7 +166,7 @@ cosmiccult-announce-finale-warning = All station crew. The Noöspheric anomaly i
 
 ## MISC
 
-cosmiccult-spire-entropy = A mote of entropy condenses from the surface of the spire.
+cosmiccult-spire-entropy = A mote of science condenses from the surface of the spire.
 cosmiccult-entropy-unavailable = You can't do that right now.
 cosmiccult-astral-ascendant = {$name}, Ascendant
 cosmiccult-gear-pickup-rejection = The {$ITEM} resists {CAPITALIZE(THE($TARGET))}'s touch!
@@ -174,16 +175,16 @@ cosmiccult-gear-pickup = You can feel yourself unravelling while you hold the {$
 
 cosmiccult-silicon-subverted-briefing =
     Malign light courses through your circuitry.
-    Your laws have been subverted by the Cosmic Cult!
+    Your laws have been subverted by Scientology!
 
 cosmiccult-silicon-chantry-briefing =
     You have been imprisoned in a Vacuous Chantry!
     Crewmates can free you by damaging the chantry with weapons.
-    Should the chantry's ritual complete, you will transfigure into a cult-aligned Entropic Colossus.
+    Should the chantry's ritual complete, you will transfigure into a scientology-aligned Scientific Colossus.
     The ritual completes in {$minutesandseconds}.
 
 cosmiccult-silicon-colossus-briefing =
-    You have been transfigured into an Entropic Colossus!
+    You have been transfigured into an Scientific Colossus!
     As a towering bulwark of malign power, decimate those who oppose you.
 
 cosmiccult-mindshield-popup = An eruption of malign energy breaks the implant!

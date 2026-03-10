@@ -1,1 +1,1 @@
-stack-cosmic-cult-entropy = entropy
+stack-cosmic-cult-entropy = science
