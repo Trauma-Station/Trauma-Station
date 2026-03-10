@@ -228,10 +228,9 @@
     messages:
     - cqc-consecutive
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: ForcedSleep
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
     time: 70
-    type: Add
   - !type:HealthChange
     damage:
       types:
