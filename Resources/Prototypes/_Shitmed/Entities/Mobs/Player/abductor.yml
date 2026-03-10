@@ -151,6 +151,8 @@
     pocket2: WeaponAlien
     suitstorage: Wonderprod
     id: AgentIDCard
+  inhand:
+    - ClothingBackpackChameleonFillAgent
 
 # Spawners
 

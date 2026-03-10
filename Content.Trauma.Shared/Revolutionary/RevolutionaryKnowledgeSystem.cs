@@ -45,7 +45,7 @@ public sealed class RevolutionaryKnowledgeSystem : EntitySystem
 
     private void EnsureKnowledge(EntityUid uid, int level)
     {
-        if (_knowledge.GetContainer(uid) is not {} brain)
+        if (_knowledge.GetContainer(uid) is not { } brain)
             return;
 
         _knowledge.EnsureKnowledge(brain, RevolutionaryKnowledge, level, popup: false); // no popup, it's obvious and clashes with other stuff probably

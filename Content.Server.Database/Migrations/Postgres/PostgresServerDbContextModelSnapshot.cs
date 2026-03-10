@@ -1238,9 +1238,9 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("knowledge_mastery");
 
-                    b.PrimitiveCollection<List<string>>("KnowledgeRemoved")
+                    b.Property<string>("KnowledgeRemoved")
                         .IsRequired()
-                        .HasColumnType("text[]")
+                        .HasColumnType("text")
                         .HasColumnName("knowledge_removed");
 
                     b.Property<JsonDocument>("Markings")

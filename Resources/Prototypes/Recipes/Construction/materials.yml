@@ -6,8 +6,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 1
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 0
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -18,8 +19,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -30,8 +32,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -42,8 +45,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -54,8 +58,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -66,8 +71,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -78,8 +84,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 # <Trauma> remove durathread handcraft
@@ -91,8 +98,9 @@
 #  category: construction-category-materials
 #  objectType: Item
 #  # <Trauma>
-#  groups: # TODO should reqire tools to make
+#  theory: # TODO should reqire tools to make
 #    MaterialsKnowledge: 2
+#  useQuality: false
 #  # </Trauma>
 # </Trauma>
 
@@ -104,8 +112,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -116,8 +125,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -128,8 +138,9 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -140,6 +151,7 @@
   category: construction-category-materials
   objectType: Item
   # <Trauma>
-  groups: # TODO should reqire tools to make
-    MaterialsKnowledge: 2
+  theory: # TODO should reqire tools to make
+    MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>

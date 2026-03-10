@@ -8,7 +8,7 @@
   category: construction-category-utilities
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
   # </Trauma>
@@ -21,7 +21,7 @@
   category: construction-category-utilities
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
   # </Trauma>
@@ -34,7 +34,7 @@
   category: construction-category-utilities
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
   # </Trauma>
@@ -49,7 +49,7 @@
   category: construction-category-utilities
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
   # </Trauma>
@@ -62,7 +62,7 @@
   category: construction-category-utilities
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
   # </Trauma>
@@ -75,7 +75,7 @@
   category: construction-category-utilities
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
   # </Trauma>
@@ -88,7 +88,7 @@
   category: construction-category-utilities
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
     ScienceKnowledge: 2
   # </Trauma>
@@ -101,7 +101,10 @@
   category: construction-category-utilities
   canBuildInImpassable: false
   # <Trauma>
-  groups:
+  theory:
     ElectronicsKnowledge: 2
-    ScienceKnowledge: 2
+    ScienceKnowledge: 3
+  practical:
+    ElectronicsKnowledge: 3
+    ScienceKnowledge: 4
   # </Trauma>

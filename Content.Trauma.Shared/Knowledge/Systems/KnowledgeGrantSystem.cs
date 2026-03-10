@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared.Body;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction.Events;
@@ -38,8 +37,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
 
     private void OnKnowledgeGrantInit(Entity<KnowledgeGrantComponent> ent, ref MapInitEvent args)
     {
-        // don't need popups for default knowledge
-        _knowledge.AddKnowledgeUnits(ent.Owner, ent.Comp.Skills, popup: false);
+        _knowledge.AddKnowledgeUnits(ent.Owner, ent.Comp.Skills);
         RemComp(ent.Owner, ent.Comp);
     }
 
@@ -85,36 +83,41 @@ public sealed class KnowledgeGrantSystem : EntitySystem
     private void DoAfter(Entity<KnowledgeGrantOnUseComponent> ent, ref KnowledgeLearnDoAfterEvent args)
     {
         var user = args.User;
-        if (!_timing.IsFirstTimePredicted || _knowledge.GetContainer(user) is not {} brain)
+        if (!_timing.IsFirstTimePredicted ||
+            args.Cancelled ||
+            _knowledge.GetContainer(user) is not { } brain)
             return;
 
-        foreach (var (id, xp) in ent.Comp.Experience)
-        {
-            if (_knowledge.EnsureKnowledge(brain, id, popup: true) is not {} skill)
-                continue;
-
-            if (!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0))
-            {
-                var ev = new AddExperienceEvent(id, xp);
-                RaiseLocalEvent(user, ref ev);
-            }
-            else
-            {
-                var msg = Loc.GetString("knowledge-could-not-learn", ("knowledge", Name(skill)));
-                _popup.PopupClient(msg, user, user, PopupType.Small);
-            }
-        }
         args.Handled = true;
 
-        foreach (var id in ent.Comp.Experience.Keys)
+        if (ent.Comp.SingleUse)
         {
-            if (_knowledge.GetKnowledge(brain, id) is {} skill && (!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0)))
+            // no checking if you already had it, don't waste a cqc book if you already know it chud
+            foreach (var (id, level) in ent.Comp.Skills)
             {
-                // still able to learn
-                args.Repeat = true;
-                return;
+                _knowledge.EnsureKnowledge(brain, id, level);
             }
+            PredictedQueueDel(ent);
+            PredictedSpawnNextToOrDrop(ent.Comp.Ash, user);
+            return;
         }
+
+        bool hasLearned = false;
+        foreach (var (id, xp) in ent.Comp.Experience)
+        {
+            if (_knowledge.EnsureKnowledge(brain, id) is not { } skill)
+                continue;
+
+            if (!(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0)))
+                continue;
+
+            hasLearned = true;
+            _knowledge.AddExperience(skill.AsNullable(), user, xp, skillCap);
+        }
+
+        args.Repeat = hasLearned;
+        if (!hasLearned)
+            _popup.PopupClient(Loc.GetString("knowledge-could-not-learn"), args.User, args.User, PopupType.SmallCaution);
     }
 }
 

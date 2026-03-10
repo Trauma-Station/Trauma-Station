@@ -22,7 +22,8 @@ namespace Content.Server.Database.Migrations.Postgres
                 name: "knowledge_removed",
                 table: "profile",
                 type: "text[]",
-                nullable: false);
+                nullable: false,
+                defaultValue: new List<string>());
         }
 
         /// <inheritdoc />

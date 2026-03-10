@@ -6,20 +6,15 @@ using Robust.Shared.GameStates;
 namespace Content.Trauma.Shared.Knowledge.Components;
 
 /// <summary>
-/// Knowledge component that makes it easier to land items in disposal units, according to a quadratic curve.
+/// Knowledge component that makes it easier to land items in disposal units, according to a skill curve.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(ThrowingKnowledgeSystem))]
 public sealed partial class ThrowInsertKnowledgeComponent : Component
 {
     /// <summary>
-    /// Offset to apply to the skill before the curve.
+    /// The skill curve to use, gets added to chance so output should start at 0 for level 0.
+    /// Once it reaches 75% you are guaranteed to land it
     /// </summary>
-    [DataField]
-    public int Offset;
-
-    /// <summary>
-    /// How to scale the curve, roughly which level + offset is needed to add 100% chance.
-    /// </summary>
-    [DataField]
-    public float InverseScale = 100f;
+    [DataField(required: true)]
+    public SkillCurve Curve = default!;
 }

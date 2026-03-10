@@ -5,6 +5,6 @@
   targetNode: end
   category: construction-category-misc
   objectType: Item
-  groups:
+  theory:
     HandmadeKnowledge: 3
     TechnologyKnowledge: 2

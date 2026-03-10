@@ -6,9 +6,8 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
     WeaponsKnowledge: 1
   # </Trauma>
 
@@ -20,9 +19,8 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
     WeaponsKnowledge: 1
   # </Trauma>
 
@@ -34,8 +32,8 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 1
+  theory: {} # wrapping cloth around glass come on. shittiest possible weapon
+  practical:
     WeaponsKnowledge: 1
   # </Trauma>
 
@@ -47,8 +45,8 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 1
+  theory: {} # wrapping cloth around glass come on
+  practical:
     WeaponsKnowledge: 1
   # </Trauma>
 
@@ -60,8 +58,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 1
+  theory:
+    HandmadeKnowledge: 1 # need to be careful with plasma
+    WeaponsKnowledge: 0
+  practical:
+    HandmadeKnowledge: 2
     WeaponsKnowledge: 1
   # </Trauma>
 
@@ -73,9 +74,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
+  theory:
+    HandmadeKnowledge: 1 # need to be careful with uranium
+    WeaponsKnowledge: 0
+  practical:
+    HandmadeKnowledge: 2
     WeaponsKnowledge: 1
   # </Trauma>
 
@@ -87,8 +90,9 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
+  theory:
+    SurvivalKnowledge: 0 # caveman gaming
+  practical:
     WeaponsKnowledge: 1
     HandmadeKnowledge: 1
   # </Trauma>
@@ -101,10 +105,12 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 2
-    WeaponsKnowledge: 2
-    HandmadeKnowledge: 2
+  theory:
+    SurvivalKnowledge: 0
+    WeaponsKnowledge: 0
+  practical:
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -115,9 +121,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 2
-    WeaponsKnowledge: 2
+  theory:
+    SurvivalKnowledge: 0
+    WeaponsKnowledge: 0
+  practical:
+    WeaponsKnowledge: 1
     HandmadeKnowledge: 2
   # </Trauma>
 
@@ -129,9 +137,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 2
-    WeaponsKnowledge: 2
+  theory:
+    SurvivalKnowledge: 0
+    WeaponsKnowledge: 0
+  practical:
+    WeaponsKnowledge: 1
     HandmadeKnowledge: 2
   # </Trauma>
 
@@ -143,7 +153,7 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SurvivalKnowledge: 1
     WeaponsKnowledge: 1
     HandmadeKnowledge: 1
@@ -157,11 +167,13 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
+  theory:
+    SurvivalKnowledge: 0
     WeaponsKnowledge: 1
     HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -172,10 +184,13 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
+  theory:
+    SurvivalKnowledge: 0
     WeaponsKnowledge: 1
     HandmadeKnowledge: 1
+  practical:
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -186,10 +201,8 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
-    WeaponsKnowledge: 1
-    HandmadeKnowledge: 1
+  theory:
+    HandmadeKnowledge: 0 # it's cardboard
   # </Trauma>
 
 - type: construction
@@ -200,8 +213,8 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
+  theory:
+    SurvivalKnowledge: 0 # not rocket science, hold thing infront of you to not die
     WeaponsKnowledge: 1
     HandmadeKnowledge: 1
   # </Trauma>
@@ -214,8 +227,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SurvivalKnowledge: 1
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 1
+  practical:
     WeaponsKnowledge: 1
     HandmadeKnowledge: 1
   # </Trauma>
@@ -228,9 +244,10 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
-    WeaponsKnowledge: 1
+  theory:
+    SurvivalKnowledge: 0 # tooth sharp ooga booga
+    HandmadeKnowledge: 1
+  practical:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -242,9 +259,12 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 2
-    WeaponsKnowledge: 2
+  theory:
+    SurvivalKnowledge: 1
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 1
+  practical:
+    WeaponsKnowledge: 1
     HandmadeKnowledge: 2
   # </Trauma>
 
@@ -256,9 +276,12 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 2
-    WeaponsKnowledge: 2
+  theory:
+    SurvivalKnowledge: 1
+    WeaponsKnowledge: 1
+    HandmadeKnowledge: 1
+  practical:
+    WeaponsKnowledge: 1
     HandmadeKnowledge: 2
   # </Trauma>
 
@@ -270,10 +293,8 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
-    WeaponsKnowledge: 1
-    HandmadeKnowledge: 1
+  theory:
+    HandmadeKnowledge: 0 # it's card board but like origami
   # </Trauma>
 
 - type: construction
@@ -284,10 +305,13 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
+  theory:
+    SurvivalKnowledge: 0
     WeaponsKnowledge: 1
     HandmadeKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+    HandmadeKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -298,8 +322,10 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
+  theory:
+    SurvivalKnowledge: 0
+    WeaponsKnowledge: 0
+  practical:
     WeaponsKnowledge: 1
     HandmadeKnowledge: 1
   # </Trauma>
@@ -320,9 +346,6 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 1
-    WeaponsKnowledge: 1
-    HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
+  theory:
+    HandmadeKnowledge: 0 # it's cardboard
   # </Trauma>

@@ -5,7 +5,13 @@
   components:
   - type: Knowledge
     experienceCost: 15
-    costs: [1, 2, 3, 4, 8, 12]
+    costs: [0, 6, 10, 16]
+  - type: MeleeSpeedKnowledge
+    # 75% to 125% speed scaling with level, tapers off
+    # midlevel at lvl 25
+    curve: !type:RootSkillCurve
+      curveScale: 0.5
+      curveOffset: 0.75
 
 - type: entity
   parent: BaseWarKnowledge
@@ -14,4 +20,3 @@
   components:
   - type: Knowledge
     experienceCost: 15
-    costs: [2, 4, 6, 8, 12, 16] # it's harder to get a gun to train with

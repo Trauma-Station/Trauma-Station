@@ -2,9 +2,8 @@
 
 using Content.Shared.Body;
 using Content.Shared.Clothing;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Components;
+using Content.Trauma.Shared.MartialArts.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -32,13 +31,13 @@ public abstract partial class SharedKnowledgeSystem
 
     private void ApplyKnowledgeModifiers(EntityUid wearer, KnowledgeGrantOnWearComponent component)
     {
-        if (GetContainer(wearer) is not {} ent)
+        if (GetContainer(wearer) is not { } ent)
             return;
 
         // Handle Skills (Temporary Levels)
         foreach (var (id, level) in component.Skills)
         {
-            if (EnsureKnowledge(ent, id) is {} unit)
+            if (EnsureKnowledge(ent, id) is { } unit)
             {
                 unit.Comp.TemporaryLevel += level;
                 Dirty(unit);
@@ -46,21 +45,23 @@ public abstract partial class SharedKnowledgeSystem
         }
 
         // Handle Experience
-        foreach (var (id, xp) in component.Experience)
+        // FIXME: it should be a separate thing since this gives you the skill for free
+        /*foreach (var (id, xp) in component.Experience)
         {
-            if (EnsureKnowledge(ent, id) is {} unit)
+            if (GetKnowledge(ent, id) is {} unit)
             {
                 unit.Comp.BonusExperience += xp;
                 Dirty(unit);
             }
-        }
+        }*/
 
         // Handle Blocks
         foreach (var id in component.Blocked.Keys)
         {
-            if (GetKnowledge(ent, id) is {} unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            if (GetKnowledge(ent, id) is { } unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
             {
-                martial.TemporaryBlockedCounter += 1;
+                martial.TemporaryBlockedCounter++;
+                martial.Blocked = true;
                 Dirty(unit, martial);
             }
         }
@@ -68,13 +69,13 @@ public abstract partial class SharedKnowledgeSystem
 
     private void RemoveKnowledgeModifiers(EntityUid wearer, KnowledgeGrantOnWearComponent component)
     {
-        if (TerminatingOrDeleted(wearer) || GetContainer(wearer) is not {} ent)
+        if (TerminatingOrDeleted(wearer) || GetContainer(wearer) is not { } ent)
             return;
 
         // Remove Skills
         foreach (var (id, level) in component.Skills)
         {
-            if (GetKnowledge(ent, id) is not {} unit)
+            if (GetKnowledge(ent, id) is not { } unit)
                 continue;
 
             unit.Comp.TemporaryLevel = Math.Max(0, unit.Comp.TemporaryLevel - level);
@@ -87,7 +88,7 @@ public abstract partial class SharedKnowledgeSystem
         }
 
         // Remove Experience
-        foreach (var (id, xp) in component.Experience)
+        /*foreach (var (id, xp) in component.Experience)
         {
             if (GetKnowledge(ent, id) is not {} unit)
                 continue;
@@ -98,14 +99,14 @@ public abstract partial class SharedKnowledgeSystem
                 RemoveKnowledge(ent, id);
             else
                 Dirty(unit);
-        }
+        }*/
 
         // Remove Blocks
         foreach (var id in component.Blocked.Keys)
         {
-            if (GetKnowledge(ent, id) is {} unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            if (GetKnowledge(ent, id) is { } unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
             {
-                martial.TemporaryBlockedCounter -= 1;
+                martial.Blocked = --martial.TemporaryBlockedCounter == 0;
                 Dirty(unit, martial);
             }
         }

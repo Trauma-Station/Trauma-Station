@@ -19,8 +19,12 @@ public partial class MartialArtsSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
+    private EntityQuery<CanPerformComboComponent> _comboQuery;
+
     private void InitializeCanPerformCombo()
     {
+        _comboQuery = GetEntityQuery<CanPerformComboComponent>();
+
         SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
     }
@@ -36,23 +40,18 @@ public partial class MartialArtsSystem
 
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
+        var user = args.Performer;
+        // ignore attacks that use weapons...
+        if (!_timing.IsFirstTimePredicted || args.Weapon != user)
             return;
 
-        var evSneak = new CanDoSneakAttackEvent(true);
-        RaiseLocalEvent(ent, ref evSneak);
-        if (!evSneak.CanSneakAttack)
+        var attemptEv = new ComboAttemptEvent();
+        RaiseLocalEvent(ent, ref attemptEv);
+        if (attemptEv.Cancelled)
             return;
 
-        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && (martialArtsComp.Blocked || martialArtsComp.TemporaryBlockedCounter > 0))
-        {
-            if (Prototype(ent)?.ID is not { } entProto)
-                return;
-            var ev = new CanDoCQCEvent(entProto);
-            RaiseLocalEvent(ent, ev);
-            if (!ev.Handled)
-                return;
-        }
+        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && martialArtsComp.Blocked)
+            return;
 
         if (!TryComp<MobStateComponent>(args.Target, out var targetState))
             return;
@@ -60,15 +59,14 @@ public partial class MartialArtsSystem
         if (ent.Comp.CurrentTarget is { } target && args.Target != target)
             ent.Comp.LastAttacks.Clear();
 
-        if (TryComp<ComboActionsComponent>(ent, out var comboActions) && comboActions.QueuedPrototype is { } queued && TryComp<KnowledgeComponent>(ent, out var skillComp))
+        if (TryComp<ComboActionsComponent>(ent, out var comboActions) && comboActions.QueuedPrototype is { } queued)
         {
             var proto = _proto.Index(queued);
-            OverrideCombo(args.Performer, args.Target, proto, ent, skillComp);
+            var level = _knowledge.GetLevel(ent.Owner);
+            OverrideCombo(user, args.Target, proto, ent, level);
             comboActions.QueuedPrototype = null;
             return;
         }
-
-        var afterEv = new AfterComboCheckEvent(ent, args.Target, args.Weapon, args.Type);
 
         ent.Comp.CurrentTarget = args.Target;
         ent.Comp.ResetTime = _timing.CurTime + TimeSpan.FromSeconds(5);
@@ -80,29 +78,16 @@ public partial class MartialArtsSystem
                 ent.Comp.LastAttacks.RemoveRange(0, difference);
         }
         CheckCombo(ent, ref args);
-        if (targetState.CurrentState == MobState.Alive && args.Type != ComboAttackType.Hug)
-        {
-            if (Prototype(ent.Owner)?.ID is { } prototypeId)
-            {
-                var ev = new AddExperienceEvent(prototypeId, 1);
-                RaiseLocalEvent(args.Performer, ref ev);
-            }
-        }
-        RaiseLocalEvent(ent, ref afterEv);
     }
 
     private void CheckCombo(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
-        var success = false;
         var target = args.Target;
         var performer = args.Performer;
+        var level = _knowledge.GetLevel(ent.Owner);
 
         foreach (var proto in ent.Comp.AllowedCombos)
         {
-
-            if (success)
-                break;
-
             var sum = ent.Comp.LastAttacks.Count - proto.AttackTypes.Count;
             if (proto.AttackTypes.Count <= 0 || sum < 0)
                 continue;
@@ -110,44 +95,45 @@ public partial class MartialArtsSystem
             var list = ent.Comp.LastAttacks.GetRange(sum, proto.AttackTypes.Count).AsEnumerable();
             var attackList = proto.AttackTypes.AsEnumerable();
 
+            if (level < proto.LevelRequired || (level > proto.LevelExceeded && proto.LevelExceeded > 0))
+                continue;
+
             if (!list.SequenceEqual(attackList))
                 continue;
 
-            if (!TryComp<KnowledgeComponent>(ent, out var skillComponent) || skillComponent.Level < proto.LevelRequired || (skillComponent.Level > proto.LevelExceeded && proto.LevelExceeded > 0))
-                continue;
-
-            success = true;
-
-            OverrideCombo(performer, target, proto, ent, skillComponent);
+            OverrideCombo(performer, target, proto, ent, level);
+            break; // found the combo
         }
     }
 
-    public void OverrideCombo(EntityUid performer, EntityUid target, ComboPrototype proto, Entity<CanPerformComboComponent> ent, KnowledgeComponent skillComponent)
+    public void OverrideCombo(EntityUid performer, EntityUid target, ComboPrototype proto, Entity<CanPerformComboComponent> ent, int level)
     {
         ent.Comp.Momentum += 1;
 
-        float scale = Math.Clamp(((float) (skillComponent.Level + skillComponent.TemporaryLevel - proto.LevelRequired)) / 10.0f, 0.1f, 2.0f) + Math.Min(((float) ent.Comp.Momentum) / 20f, 2.0f);
+        float scale = Math.Clamp(((float) (level - proto.LevelRequired)) / 10.0f, 0.1f, 2.0f) + Math.Min(((float) ent.Comp.Momentum) / 20f, 2.0f);
         var evDamage = new MartialArtDamageModifierEvent(performer, 1);
         RaiseLocalEvent(ent, ref evDamage);
         scale *= evDamage.Coefficient;
 
         if (proto.UserEffects != null)
-            _effects.ApplyEffects(performer, proto.UserEffects, scale, target);
+            _effects.ApplyEffects(performer, proto.UserEffects, scale, user: performer);
         if (proto.OpponentEffects != null)
-            _effects.ApplyEffects(target, proto.OpponentEffects, scale, performer);
+            _effects.ApplyEffects(target, proto.OpponentEffects, scale, user: performer);
 
         ent.Comp.LastAttacks.Clear();
 
-        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && !martialArtsComp.Blocked && _mobState.IsAlive(target))
+        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var comp) && comp.GiveExperience && !comp.Blocked && _mobState.IsAlive(target) && proto.GiveExperience)
         {
-            var prototypeId = Prototype(ent)?.ID;
-            if (prototypeId is { })
-            {
-                var ev = new AddExperienceEvent(prototypeId, 1);
-                RaiseLocalEvent(performer, ref ev);
-            }
+            // you can only go up to your opponents level + 10, to encourage actual training between masters
+            var opponent = GetMartialArtLevel(target);
+            _knowledge.AddExperience(ent.Owner, performer, 1, opponent + 10);
         }
 
         Dirty(ent);
     }
+
+    private int GetMartialArtLevel(EntityUid uid)
+        => _knowledge.GetActiveMartialArt(uid) is {} unit
+            ? _knowledge.GetLevel(unit)
+            : 0;
 }

@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Shared.Actions.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
@@ -22,6 +24,8 @@ public sealed partial class MartialArtsSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
 
     public override void Initialize()
     {
@@ -31,9 +35,11 @@ public sealed partial class MartialArtsSystem : EntitySystem
         SubscribeLocalEvent<GrabStagesOverrideComponent, CheckGrabOverridesEvent>(CheckGrabStageOverride);
 
         SubscribeLocalEvent<FastSpeedComponent, MartialArtDamageModifierEvent>(OnDamageSpeed);
-        SubscribeLocalEvent<FastSpeedComponent, MartialArtSpeedModifierEvent>(OnMoveSpeed);
-        SubscribeLocalEvent<SneakAttackComponent, InvokeSneakAttackSurprisedEvent>(SneakAttackSurprise);
-        SubscribeLocalEvent<SneakAttackComponent, CanDoSneakAttackEvent>(SneakAttackCanAttack);
+        SubscribeLocalEvent<FastSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnMoveSpeed);
+        SubscribeLocalEvent<SneakAttackComponent, ComboAttackPerformedEvent>(OnSneakAttackPerformed);
+        SubscribeLocalEvent<SneakAttackComponent, TookDamageEvent>(OnSneakTookDamage);
+        SubscribeLocalEvent<SneakAttackComponent, ComboAttemptEvent>(OnSneakComboAttempt);
+        SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
     }
 
     public override void Update(float frameTime)
@@ -54,6 +60,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
             comp.LastAttacks.Clear();
             comp.Momentum = 0;
+            // TODO: find a way to refresh speed here.
             Dirty(ent, comp);
         }
 
@@ -93,21 +100,38 @@ public sealed partial class MartialArtsSystem : EntitySystem
         }
     }
 
-    private void SneakAttackSurprise(Entity<SneakAttackComponent> ent, ref InvokeSneakAttackSurprisedEvent args)
+    private void OnSneakAttackPerformed(Entity<SneakAttackComponent> ent, ref ComboAttackPerformedEvent args)
+    {
+        // need to use a weapon to be found
+        if (args.Weapon != args.Performer)
+            SneakAttackSurprise(ent);
+    }
+
+    private void OnSneakTookDamage(Entity<SneakAttackComponent> ent, ref TookDamageEvent args)
+    {
+        SneakAttackSurprise(ent);
+    }
+
+    private void SneakAttackSurprise(Entity<SneakAttackComponent> ent)
     {
         ent.Comp.NextHidden = _timing.CurTime + TimeSpan.FromSeconds(ent.Comp.SecondsTillHidden);
         ent.Comp.IsFound = true;
         Dirty(ent);
     }
 
-    private void SneakAttackCanAttack(Entity<SneakAttackComponent> ent, ref CanDoSneakAttackEvent args)
+    private void OnSneakComboAttempt(Entity<SneakAttackComponent> ent, ref ComboAttemptEvent args)
     {
-        args.CanSneakAttack = !ent.Comp.IsFound;
+        args.Cancelled |= ent.Comp.IsFound;
     }
 
-    private void OnMoveSpeed(Entity<FastSpeedComponent> ent, ref MartialArtSpeedModifierEvent args)
+    private void OnMoveSpeed(Entity<FastSpeedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        args.Coefficient *= Math.Abs(ent.Comp.SpeedModifier);
+        var level = _knowledge.GetLevel(ent.Owner);
+
+        args.ModifySpeed(ent.Comp.MoveCurve.GetCurve(level));
+        if (!_comboQuery.TryComp(ent, out var combo))
+            return;
+        args.ModifySpeed(1.0f + ((float) combo.Momentum) / 10.0f);
     }
 
     private void OnDamageSpeed(Entity<FastSpeedComponent> ent, ref MartialArtDamageModifierEvent args)
@@ -116,15 +140,25 @@ public sealed partial class MartialArtsSystem : EntitySystem
         if (!TryComp<PhysicsComponent>(user, out var physics))
             return;
 
+        var level = _knowledge.GetLevel(ent.Owner);
+        var modifier = ent.Comp.DamageScaleCurve.GetCurve(level);
+
         if (ent.Comp.InvertSpeed)
-            args.Coefficient *= Math.Max(10 - (physics.LinearVelocity.Length() * ent.Comp.SpeedModifier / 2), 0);
+            args.Coefficient *= Math.Max(10 - (physics.LinearVelocity.Length()) * modifier, 0);
         else
-            args.Coefficient *= physics.LinearVelocity.Length() * ent.Comp.SpeedModifier / 2;
+            args.Coefficient *= physics.LinearVelocity.Length() * modifier;
+
+        _speed.RefreshMovementSpeedModifiers(user);
     }
 
     private void CheckGrabStageOverride(Entity<GrabStagesOverrideComponent> ent, ref CheckGrabOverridesEvent args)
     {
         if (args.Stage == GrabStage.Soft)
             args.Stage = ent.Comp.StartingStage;
+    }
+
+    private void OnProjectileHitMartialArt(Entity<NoGunComponent> ent, ref ProjectileReflectAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 }

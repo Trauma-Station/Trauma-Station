@@ -83,7 +83,7 @@ public sealed partial class KnowledgeComponent : Component
 
     /// <summary>
     /// Array of point costs for each mastery level, including 0.
-    /// There are 6 of them total.
+    /// There are 6 of them total by default, removing will decrease the max mastery you can buy.
     /// If this is null, you can't opt in to this knowledge.
     /// </summary>
     [DataField(required: true)]

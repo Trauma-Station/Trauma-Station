@@ -50,6 +50,10 @@ binds:
 - function: ResistGrab # Goob
   type: State
   key: B
+- function: Tackle # Trauma
+  type: State
+  key: Q
+  mod1: Alt
 # Shuttle
 - function: ShuttleStrafeUp
   type: State

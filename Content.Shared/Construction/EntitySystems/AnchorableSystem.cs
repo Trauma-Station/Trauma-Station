@@ -28,9 +28,10 @@ public sealed partial class AnchorableSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private   readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -275,9 +276,9 @@ public sealed partial class AnchorableSystem : EntitySystem
 
         // Need to cast the event or it will be raised as BaseAnchoredAttemptEvent.
         if (anchoring)
-            RaiseLocalEvent(uid, (AnchorAttemptEvent) attempt);
+            RaiseLocalEvent(uid, (AnchorAttemptEvent)attempt);
         else
-            RaiseLocalEvent(uid, (UnanchorAttemptEvent) attempt);
+            RaiseLocalEvent(uid, (UnanchorAttemptEvent)attempt);
 
         anchorable.Delay += attempt.Delay;
 
@@ -295,17 +296,17 @@ public sealed partial class AnchorableSystem : EntitySystem
         if (!TryComp<MapGridComponent>(gridUid, out var grid))
             return false;
 
-        var tileIndices = grid.TileIndicesFor(coordinates);
-        return TileFree(grid, tileIndices, anchorBody.CollisionLayer, anchorBody.CollisionMask);
+        var tileIndices = _map.TileIndicesFor((gridUid.Value, grid), coordinates);
+        return TileFree((gridUid.Value, grid), tileIndices, anchorBody.CollisionLayer, anchorBody.CollisionMask);
     }
 
     /// <summary>
     /// Returns true if no hard anchored entities match the collision layer or mask specified.
     /// </summary>
     /// <param name="grid"></param>
-    public bool TileFree(MapGridComponent grid, Vector2i gridIndices, int collisionLayer = 0, int collisionMask = 0)
+    public bool TileFree(Entity<MapGridComponent> grid, Vector2i gridIndices, int collisionLayer = 0, int collisionMask = 0)
     {
-        var enumerator = grid.GetAnchoredEntitiesEnumerator(gridIndices);
+        var enumerator = _map.GetAnchoredEntitiesEnumerator(grid, grid.Comp, gridIndices);
 
         while (enumerator.MoveNext(out var ent))
         {
@@ -326,6 +327,12 @@ public sealed partial class AnchorableSystem : EntitySystem
         return true;
     }
 
+    [Obsolete("Use the Entity<MapGridComponent> version")]
+    public bool TileFree(MapGridComponent grid, Vector2i gridIndices, int collisionLayer = 0, int collisionMask = 0)
+    {
+        return TileFree((grid.Owner, grid), gridIndices, collisionLayer, collisionMask);
+    }
+
     /// <summary>
     /// Returns true if any unstackables are also on the corresponding tile.
     /// </summary>
@@ -344,7 +351,7 @@ public sealed partial class AnchorableSystem : EntitySystem
         if (!TryComp<MapGridComponent>(gridUid, out var grid))
             return false;
 
-        var enumerator = grid.GetAnchoredEntitiesEnumerator(grid.LocalToTile(location));
+        var enumerator = _map.GetAnchoredEntitiesEnumerator(gridUid.Value, grid, _map.LocalToTile(gridUid.Value, grid, location));
 
         while (enumerator.MoveNext(out var entity))
         {

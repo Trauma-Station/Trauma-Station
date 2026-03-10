@@ -6,11 +6,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
-    SurvivalKnowledge: 2
-    WeaponsKnowledge: 2
-    HandmadeKnowledge: 2
-    TechnologyKnowledge: 2
+  theory:
+    WeaponsKnowledge: 0
+  practical:
+    HandmadeKnowledge: 1
+    WeaponsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -21,7 +21,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
     TechnologyKnowledge: 1
   # </Trauma>
@@ -34,9 +34,8 @@
   category: construction-category-tools
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
+  theory:
+    HandmadeKnowledge: 1 # tying a knot or something
   # </Trauma>
 
 - type: construction
@@ -47,7 +46,7 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     SurvivalKnowledge: 1
     WeaponsKnowledge: 1
     HandmadeKnowledge: 1
@@ -62,7 +61,7 @@
   category: construction-category-tools
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
     TechnologyKnowledge: 3
   # </Trauma>
@@ -75,9 +74,10 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
     TechnologyKnowledge: 3
+    WeaponsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -88,8 +88,12 @@
   category: construction-category-tools
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 1
+  theory:
+    HandmadeKnowledge: 0 # its not rocket science
+    FirstAidKnowledge: 0
+  practical:
+    HandmadeKnowledge: 2
+    FirstAidKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -100,8 +104,8 @@
   category: construction-category-tools
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    HandmadeKnowledge: 0 # its a tied piece of cloth
   # </Trauma>
 
 - type: construction
@@ -112,8 +116,8 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    HandmadeKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -124,8 +128,7 @@
   category: construction-category-tools
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory: {} # its just a bunch of cloth literally no crafting involved
   # </Trauma>
 
 - type: construction
@@ -136,9 +139,9 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+    WeaponsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -149,9 +152,9 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+    WeaponsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -162,9 +165,9 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
+    WeaponsKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -175,9 +178,12 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
+    HandmadeKnowledge: 0
+    WeaponsKnowledge: 1
+  practical:
     HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+    WeaponsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -188,7 +194,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -200,7 +206,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
   # </Trauma>
 
@@ -212,9 +218,12 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
+    HandmadeKnowledge: 0
+    WeaponsKnowledge: 1
+  practical:
     HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+    WeaponsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -225,8 +234,8 @@
   category: construction-category-tools
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
+  theory:
+    HandmadeKnowledge: 0 # its a piece of wood bro
   # </Trauma>
 
 - type: construction
@@ -237,9 +246,9 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+  theory:
+    HandmadeKnowledge: 2
+    TechnologyKnowledge: 0 # hinges...
   # </Trauma>
 
 - type: construction
@@ -250,7 +259,7 @@
   category: construction-category-misc
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
     ScienceKnowledge: 3
   # </Trauma>
@@ -263,9 +272,9 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
-    ScienceKnowledge: 3
+    ScienceKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -276,7 +285,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
   # </Trauma>
 
@@ -288,7 +297,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
   # </Trauma>
 
@@ -300,6 +309,6 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 3
   # </Trauma>

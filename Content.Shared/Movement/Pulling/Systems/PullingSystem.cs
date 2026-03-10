@@ -700,8 +700,8 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
             $"{ToPrettyString(pullerUid):user} started pulling {ToPrettyString(pullableUid):target}");
 
         // <Goob>
-        if (_combatMode.IsInCombatMode(pullerUid))
-            TryGrab(pullableUid, pullerUid, grabStageOverride: grabStageOverride, escapeAttemptModifier: escapeAttemptModifier);
+        if (grabStageOverride != null || _combatMode.IsInCombatMode(pullerUid))
+            TryGrab(pullableUid, pullerUid, true, grabStageOverride: grabStageOverride, escapeAttemptModifier: escapeAttemptModifier);
         // </Goob>
         return true;
     }

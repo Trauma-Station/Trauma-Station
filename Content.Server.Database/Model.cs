@@ -74,7 +74,7 @@ namespace Content.Server.Database
                 .HasIndex(p => p.UserId)
                 .IsUnique();
 
-            // <Trauma> - store skills in json because i hate this shit. had to store profile for 2 things to use it
+            // <Trauma> - store skills in json because i hate this shit. had to store profile for 3 things to use it
             var profile = modelBuilder.Entity<Profile>();
             profile.Property(p => p.KnowledgeMastery)
                 .HasConversion(
@@ -87,6 +87,16 @@ namespace Content.Server.Database
                     (a, b) => a != null && b != null && a.Count == b.Count && !a.Except(b).Any(),
                     dict => dict.GetHashCode(),
                     dict => new Dictionary<string, int>(dict)
+                ));
+            profile.Property(p => p.KnowledgeRemoved)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v),
+                    s => TraumaModel.DeserializeStrings(s)
+                )
+                .Metadata.SetValueComparer(new ValueComparer<List<string>>(
+                    (a, b) => a != null && b != null && a.Count == b.Count && !a.Except(b).Any(),
+                    dict => dict.GetHashCode(),
+                    dict => new List<string>(dict)
                 ));
             profile.HasIndex(p => new { p.Slot, PrefsId = p.PreferenceId })
                 .IsUnique();

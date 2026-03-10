@@ -225,10 +225,11 @@
   targetNode: medicalPatchMakeshift
   category: construction-category-tools
   objectType: Item
-  # <Trauma>
-  groups:
+  theory:
+    FirstAidKnowledge: 1
+    HandmadeKnowledge: 2
+  practical:
     HandmadeKnowledge: 3
-  # </Trauma>
 
 - type: constructionGraph
   id: SilkPatchMakeshift
@@ -255,6 +256,6 @@
     tags:
     - SpiderCraft
   # <Trauma>
-  groups:
+  theory:
     SpiderCraftKnowledge: 1
   # </Trauma>

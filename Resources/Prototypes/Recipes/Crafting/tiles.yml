@@ -8,8 +8,9 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
+  useQuality: false # annoying for construction, masterwork tiles as weapons is sad but not worth the hassle
   # </Trauma>
 
 - type: construction
@@ -20,8 +21,9 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -32,8 +34,9 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -44,8 +47,9 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -56,8 +60,9 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -68,8 +73,9 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -80,8 +86,9 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -92,6 +99,7 @@
   category: construction-category-tiles
   objectType: Item
   # <Trauma>
-  groups:
+  theory:
     HandmadeKnowledge: 1
+  useQuality: false
   # </Trauma>

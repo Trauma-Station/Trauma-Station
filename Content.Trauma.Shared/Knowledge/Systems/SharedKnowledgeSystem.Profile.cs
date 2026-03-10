@@ -2,8 +2,6 @@
 
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Shared.Knowledge.Components;
-using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
@@ -35,7 +33,7 @@ public abstract partial class SharedKnowledgeSystem
         {
             // remove any masteries that go out of bounds when added to the parent, or if their skill is invalid/cant be bought
             var net = mastery + parent.Profile.Mastery.GetValueOrDefault(id);
-            if (net < 0 || net > 5 || SkillCost(id, net) == null)
+            if (net < 0 || SkillCost(id, net) == null)
                 _invalid.Add(id);
         }
 
@@ -47,7 +45,7 @@ public abstract partial class SharedKnowledgeSystem
 
     public override void ApplyProfile(EntityUid target, [ForbidLiteral] ProtoId<KnowledgeProfilePrototype> parentId, KnowledgeProfile profile)
     {
-        if (GetContainer(target) is not {} ent)
+        if (GetContainer(target) is not { } ent)
             return;
 
         var parent = _proto.Index(parentId);
@@ -61,7 +59,7 @@ public abstract partial class SharedKnowledgeSystem
     {
         foreach (var (id, mastery) in profile.Mastery)
         {
-            if (SkillCost(id, mastery) is not {} cost || points < cost)
+            if (SkillCost(id, mastery) is not { } cost || points < cost)
                 return; // were done here, outdated profile in DB
 
             var level = GetInverseMastery(mastery);
@@ -86,12 +84,20 @@ public abstract partial class SharedKnowledgeSystem
     }
 
     /// <summary>
-    /// Gets the cost to have a skill at a given mastery level.
+    /// Gets the costs to have a skill at each allowed mastery level.
     /// Returns null if the skill cannot be picked.
-    /// Throws for invalid mastery values.
+    /// </summary>
+    public int[]? SkillCosts(EntProtoId id)
+        => AllKnowledges.TryGetValue(id, out var comp) && comp.Costs is { } costs
+            ? costs
+            : null;
+
+    /// <summary>
+    /// Gets the cost to have a skill at a given mastery level.
+    /// Returns null if the skill cannot be picked or the mastery is invalid.
     /// </summary>
     public int? SkillCost(EntProtoId id, int mastery)
-        => AllKnowledges.TryGetValue(id, out var comp) && comp.Costs is {} costs
+        => SkillCosts(id) is {} costs && mastery < costs.Length
             ? costs[mastery]
             : null;
 }

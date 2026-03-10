@@ -10,7 +10,7 @@
   name: roles-antag-wizard-name
   antagonist: true
   setPreference: true
-  objective: roles-antag-wizard-description # Goob
+  objective: roles-antag-wizard-description-goob # Goob
   requirements: # I hate time locked roles but this should be enough time for someone to be acclimated
   - !type:OverallPlaytimeRequirement
     time: 35h # Goob - was 5h

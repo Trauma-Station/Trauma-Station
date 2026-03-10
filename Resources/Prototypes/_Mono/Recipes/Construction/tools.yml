@@ -5,5 +5,5 @@
   targetNode: timer
   category: construction-category-tools
   objectType: Item
-  groups:
+  theory:
     ElectronicsKnowledge: 2

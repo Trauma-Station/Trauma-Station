@@ -31,8 +31,7 @@
   - Grab
   - Disarm
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 4
   - !type:HealthChange
     damage:
@@ -49,8 +48,7 @@
   - Harm
   - Grab
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 5
   - !type:TakeStaminaDamage
     amount: 10
@@ -81,8 +79,7 @@
     randomSayingsDowned:
     - judo-saying-gold
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 5
   - !type:TakeStaminaDamage
     amount: 50
@@ -102,8 +99,7 @@
     randomSayingsDowned:
     - judo-saying-en
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 10
   - !type:TakeStaminaDamage
     amount: 100
@@ -123,8 +119,7 @@
     randomSayingsDowned:
     - judo-saying-blast
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 30
   - !type:TakeStaminaDamage
     amount: 120

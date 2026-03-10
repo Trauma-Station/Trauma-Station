@@ -1,8 +1,20 @@
 - type: entity
-  parent: [ClothingHandsBase, BaseSecurityContraband]
+  parent: ClothingHandsBase
+  id: BaseGlovesTackle
+  abstract: true
+  components:
+  - type: FingerprintMask
+  - type: TackleModifier
+    skillMod: 1
+  - type: GuideHelp
+    guides:
+    - Tackle
+
+- type: entity
+  parent: [BaseGlovesTackle, BaseSecurityContraband]
   id: ClothingHandsGlovesSecurity
-  name: security gloves
-  description: Standard issue security gloves. Designed to be durable and keep your hands clean when the situation gets dirty.
+  name: enhanced retrieval gloves
+  description: Special gloves that manipulate the blood vessels in the wearer's hands, granting them the ability to launch headfirst into walls and tackle fleeing criminals in a single bound.
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/securitygloves.rsi
@@ -10,7 +22,6 @@
     sprite: _Trauma/Clothing/Hands/Gloves/securitygloves.rsi
   - type: Fiber
     fiberMaterial: fibers-red-and-black-woven
-  - type: FingerprintMask
   - type: Armor
     modifiers:
       coefficients:
@@ -30,3 +41,118 @@
     sprite: _Trauma/Clothing/Hands/Gloves/securityglovesblue.rsi
   - type: Fiber
     fiberMaterial: fibers-blue-and-black-woven
+
+- type: entity
+  parent: ClothingHandsGlovesSecurity
+  id: ClothingHandsGlovesGorilla
+  name: gorilla gloves
+  description: Premium quality combative gloves, heavily reinforced to give the user an edge in close combat tackles, though they are more taxing to use than normal gripper gloves.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/gorilla.rsi
+  - type: Insulated
+  - type: Fiber
+    fiberMaterial: fibers-insulative
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Shock: 0.75
+  - type: TackleModifier
+    staminaCostMultiplier: 1.2
+    knockdownTimeMultiplier: 1.25
+    rangeMultiplier: 1.65
+    skillMod: 3
+
+- type: entity
+  parent: [BaseSyndicateContraband, ClothingHandsGlovesGorilla]
+  id: ClothingHandsGlovesGuerrilla
+  name: guerrilla gloves
+  description: Superior quality combative gloves, good for performing tackle takedowns as well as absorbing electrical shocks.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/guerrilla.rsi
+  - type: TackleModifier
+    grabOnSuccess: true
+    staminaCostMultiplier: 1
+
+- type: entity
+  parent: [BaseGlovesTackle, BaseSecurityContraband]
+  id: ClothingHandsGlovesRocket
+  name: rocket gloves
+  description: The ultimate in high risk, high reward, perfect for when you need to stop a criminal from fifty feet away or die trying. Banned in most Spinward gridiron football and rugby leagues.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/rocket.rsi
+  - type: Item
+    sprite: Clothing/Hands/Gloves/Color/color.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#940000"
+      right:
+      - state: inhand-right
+        color: "#940000"
+  - type: Fiber
+    fiberMaterial: fibers-red
+  - type: TackleModifier
+    staminaCostMultiplier: 2
+    knockdownTimeMultiplier: 2
+    speedMultiplier: 1.5
+    rangeMultiplier: 3
+    minDistance: 3
+    skillMod: 7
+
+- type: entity
+  parent: BaseGlovesTackle
+  id: ClothingHandsGlovesDolphin
+  name: dolphin gloves
+  description: Sleek, aerodynamic gripper gloves that are less effective at actually performing takedowns, but more effective at letting the user sail through the hallways and cause accidents.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/dolphin.rsi
+  - type: Item
+    sprite: Clothing/Hands/Gloves/Color/color.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#0089EF"
+      right:
+      - state: inhand-right
+        color: "#0089EF"
+  - type: Fiber
+    fiberMaterial: fibers-blue
+  - type: TackleModifier
+    staminaCostMultiplier: 0.3
+    knockdownTimeMultiplier: 0.5
+    rangeMultiplier: 1.5
+    speedMultiplier: 0.65
+    minDistance: 2
+    skillMod: -2
+
+- type: entity
+  parent: [BaseGlovesTackle, BaseMinorContraband]
+  id: ClothingHandsGlovesGripper
+  name: improvised gripper gloves
+  description: Ratty looking gloves wrapped with sticky tape. Beware anyone wearing these, for they clearly have no shame and nothing to lose.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/gripper.rsi
+  - type: Item
+    sprite: Clothing/Hands/Gloves/Color/color.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#723A02"
+      right:
+      - state: inhand-right
+        color: "#723A02"
+  - type: Fiber
+    fiberMaterial: fibers-brown
+  - type: TackleModifier
+    staminaCostMultiplier: 1.2
+    knockdownTimeMultiplier: 1.75
+    minDistance: 1.5
+    skillMod: -1

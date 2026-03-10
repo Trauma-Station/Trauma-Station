@@ -161,10 +161,25 @@
   - type: AntagObjectives # Goobstation
     objectives:
     - NukeopsDetonateObjective
-  - type: AntagPlayerEffects # Trauma - nukies get nukie-locked hypoports
+  - type: AntagPlayerEffects # Trauma - nukies get nukie-locked hypoports and skills
     effects:
     - !type:NestedEffect
       proto: InstallHypoportNukie
+    - !type:GrantSkills
+      skills:
+        # Nukies are well-trained
+        MeleeKnowledge: 50
+        ShootingKnowledge: 50
+        StrengthKnowledge: 50
+        WeaponsKnowledge: 50
+        ThrowingKnowledge: 26
+        # TODO: replace with FabricationKnowledge: 26 when it gets made
+        WallsKnowledge: 26
+        InfrastructureKnowledge: 26
+        ElectronicsKnowledge: 26
+        SurvivalKnowledge: 26
+        TechnologyKnowledge: 26
+        ScienceKnowledge: 26
 
 - type: entity
   parent: BaseNukeopsRule
