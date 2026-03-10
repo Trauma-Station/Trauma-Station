@@ -1,3 +1,5 @@
+using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.AlertLevel;
 using Content.Server.Audio;
@@ -232,8 +234,8 @@ public sealed class MonumentSystem : SharedMonumentSystem
             RemComp<CosmicSubtleMarkComponent>(cultist);
             EnsureComp<CosmicStarMarkComponent>(cultist);
 
-            var ev = new UnholyStatusChangedEvent(uid, uid, true);
-            RaiseLocalEvent(uid, ref ev);
+            var ev = new UnholyStatusChangedEvent(cultist, cultist, true);
+            RaiseLocalEvent(cultist, ref ev);
         }
         ent.Comp.Stage++;
         UpdateMonumentAppearance(ent);
