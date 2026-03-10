@@ -33,6 +33,6 @@ public sealed class ShortConstructionSystem : EntitySystem
             return;
 
         args.Handled = true;
-        _ui.TryToggleUi(ent.Owner, ShortConstructionUiKey.Key, args.User);
+        _ui.TryToggleUi(ent.Owner, ShortConstructionUiKey.Key, args.User, predicted: true);
     }
 }
