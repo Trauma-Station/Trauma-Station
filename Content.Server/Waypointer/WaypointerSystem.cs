@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Waypointer;
 using Content.Shared.Waypointer.Components;
 using Content.Shared.Whitelist;
