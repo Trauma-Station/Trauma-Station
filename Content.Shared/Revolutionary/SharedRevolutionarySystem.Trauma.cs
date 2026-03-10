@@ -1,3 +1,5 @@
+using Content.Shared.Revolutionary.Components;
+
 namespace Content.Shared.Revolutionary;
 
 /// <Trauma>
