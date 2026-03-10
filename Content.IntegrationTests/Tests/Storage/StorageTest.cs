@@ -140,10 +140,13 @@ public sealed class StorageTest
                     if (!protoMan.TryIndex<EntityPrototype>(entry.PrototypeId, out var fillItem))
                         continue;
 
-                    // <Trauma> - removed WaitPost and null check, just use TryGetComponent result
-                    if (!fillItem.TryGetComponent<ItemComponent>("Item", out var entryItem))
-                    // </Trauma>
-                        continue;
+                    ItemComponent? entryItem = null;
+                    await server.WaitPost(() =>
+                    {
+                        fillItem.TryGetComponent("Item", out entryItem);
+                    });
+
+                    if (entryItem == null)
 
                     Assert.That(protoMan.Index(entryItem.Size).Weight,
                         Is.LessThanOrEqualTo(protoMan.Index(maxSize.Value).Weight),
