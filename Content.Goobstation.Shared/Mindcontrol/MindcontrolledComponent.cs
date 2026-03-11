@@ -3,6 +3,7 @@
 using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Mindcontrol;
@@ -21,5 +22,5 @@ public sealed partial class MindcontrolledComponent : Component
     public ProtoId<FactionIconPrototype> MindcontrolIcon { get; set; } = "MindcontrolledFaction";
 
     [DataField]
-    public TimeSpan? ExpiresAt; //for abductor gizmo brainwash shit
+    public EntProtoId MindRole = "MindRoleBrainwashed";
 }

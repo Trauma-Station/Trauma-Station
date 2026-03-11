@@ -1,35 +1,50 @@
+using System.ComponentModel.DataAnnotations;
 using Content.Goobstation.Server.Mindcontrol;
 using Content.Goobstation.Shared.Mindcontrol;
-using Content.Shared.Mindshield.Components;
 using Content.Medical.Shared.Abductor;
+using Content.Shared.Mindshield.Components;
+using Content.Trauma.Shared.Mindcontrol;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Abductor;
 
 public sealed partial class AbductorBrainwashSystem : EntitySystem
-
 {
     [Dependency] private readonly MindcontrolSystem _mindcontrol = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<AbductorGizmoComponent, BrainwashDoAfterEvent>(OnBrainwashDoAfterEvent);
     }
 
-    private void OnBrainwashDoAfterEvent(Entity<AbductorGizmoComponent> ent, ref BrainwashDoAfterEvent args)
+    public override void Update(float frameTime)
+{
+    base.Update(frameTime);
+    var query = EntityQueryEnumerator<TimedMindControlComponent>();
+    while (query.MoveNext(out var uid, out var comp))
     {
-        if (args.Cancelled || args.Target is not  {} target)
-        return;
-        if (HasComp<MindShieldComponent>(target))
-        return;
-
-        var comp = EnsureComp<MindcontrolledComponent>(target);
-        comp.Master = args.User;
-        _mindcontrol.Start(target, comp);
-        Timer.Spawn(TimeSpan.FromMinutes(15), () =>
-        {
-            if (TryComp<MindcontrolledComponent>(target, out var mindcomp))
-            RemComp<MindcontrolledComponent>(target);
-        });
+        if (_timing.CurTime < comp.ExpiresAt) continue;
+        RemComp<MindcontrolledComponent>(uid);
+        RemComp<TimedMindControlComponent>(uid);
     }
 }
+
+    private void OnBrainwashDoAfterEvent(Entity<AbductorGizmoComponent> ent, ref BrainwashDoAfterEvent args)
+{
+    if (args.Cancelled || args.Target is not {} target)
+        return;
+    if (HasComp<MindShieldComponent>(target))
+        return;
+
+    var comp = EnsureComp<MindcontrolledComponent>(target);
+    comp.Master = args.User;
+    comp.MindRole = "MindRoleAbductorBrainwashed";
+    comp.MindcontrolIcon = "MindcontrolIcon";
+    _mindcontrol.Start(target, comp);
+
+    var timed = EnsureComp<TimedMindControlComponent>(target);
+    timed.ExpiresAt = _timing.CurTime + TimeSpan.FromMinutes(15);
+}
+    }
+

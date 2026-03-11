@@ -38,11 +38,11 @@ public abstract partial class SharedAbductorSystem
     private void OnGizmoHitInteract(Entity<AbductorGizmoComponent> ent, ref MeleeHitEvent args)
     {
         if (args.HitEntities.Count != 1)
-        return;
+            return;
         var target = args.HitEntities[0];
         if (!HasComp<SurgeryTargetComponent>(target))
-        return;
-        if(ent.Comp.Mode == AbductorGizmoMode.Brainwash)
+            return;
+        if(ent.Comp.BrainwashMode)
         {
             GizmoBrainWashUse(ent, target, args.User);
             return;
@@ -58,7 +58,7 @@ public abstract partial class SharedAbductorSystem
         if (HasComp<SurgeryTargetComponent>(target))
         {
             args.Handled = true;
-            if(ent.Comp.Mode == AbductorGizmoMode.Brainwash)
+            if(ent.Comp.BrainwashMode)
             {
                 GizmoBrainWashUse(ent, target, args.User);
                 return;
@@ -132,16 +132,11 @@ public abstract partial class SharedAbductorSystem
     private void OnGizmoToggleMode(Entity<AbductorGizmoComponent> ent, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
-        return;
+            return;
         args.Handled = true;
-        ent.Comp.Mode = ent.Comp.Mode == AbductorGizmoMode.Mark ? AbductorGizmoMode.Brainwash : AbductorGizmoMode.Mark;
+        ent.Comp.BrainwashMode = !ent.Comp.BrainwashMode;
         Dirty(ent);
-        var modeName = Loc.GetString(ent.Comp.Mode == AbductorGizmoMode.Mark ? "abductors-gizmo-mode-mark" : "abductors-gizmo-mode-brainwash");
+        var modeName = Loc.GetString(ent.Comp.BrainwashMode ? "abductors-gizmo-mode-brainwash" : "abductors-gizmo-mode-mark");
         _popup.PopupClient(Loc.GetString("abductors-gizmo-mode-changed", ("mode", modeName)), ent, args.User);
-    }
-
-    private void OnBrainwashDoAfterEvent(Entity<AbductorGizmoComponent> ent, ref BrainwashDoAfterEvent args)
-    {
-
     }
 }
