@@ -18,9 +18,6 @@
       factions:
       - NanoTrasen
       - Assistant
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      HandmadeKnowledge: 26
   # </Trauma>
 
 - type: startingGear

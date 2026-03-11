@@ -38,12 +38,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  # <Trauma>
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      TechnologyKnowledge: 50
-      ScienceKnowledge: 50
-  # </Trauma>
 
 - type: startingGear
   id: ResearchDirectorGear

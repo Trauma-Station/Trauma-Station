@@ -241,11 +241,7 @@ public sealed class QualitySystem : EntitySystem
             }
         }
 
-        int added = 0;
-        if (_knowledge.GetKnowledge(brain, CraftingKnowledge) is { } crafting)
-            added = crafting.Comp.Level + crafting.Comp.TemporaryLevel;
-        else
-            added = -1;
+        var added = _knowledge.GetKnowledge(brain, CraftingKnowledge)?.Comp.NetLevel ?? -1;
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 

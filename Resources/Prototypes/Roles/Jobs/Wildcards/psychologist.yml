@@ -12,12 +12,6 @@
   - Maintenance
   extendedAccess:
   - Chemistry
-  # <Trauma>
-  special:
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      ChemistryKnowledge: 26
-  # </Trauma>
 
 - type: startingGear
   id: PsychologistGear

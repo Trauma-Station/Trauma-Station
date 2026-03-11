@@ -1,0 +1,53 @@
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipResearchDirector
+  name: skill chip (RD)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      TechnologyKnowledge: 50
+      ScienceKnowledge: 50
+      # TODO: mech skill
+  # TODO: suplex immovable rods, parity
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipGeneticist
+  name: skill chip (geneticist)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      TechnologyKnowledge: 26
+      ScienceKnowledge: 26
+      # TODO: more??
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipScientist
+  name: skill chip (scientist)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      TechnologyKnowledge: 26
+      ScienceKnowledge: 26
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipResearchAssistant
+  name: skill chip (research assistant)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      TechnologyKnowledge: 10
+      ScienceKnowledge: 10
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipRoboticist
+  name: skill chip (roboticist)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      TechnologyKnowledge: 26
+      ScienceKnowledge: 26
+      # TODO: goida mech skill

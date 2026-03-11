@@ -266,7 +266,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return;
 
         var now = _timing.CurTime;
-        if (now < ent.Comp.TimeToNextExperience || ent.Comp.Level >= Math.Min(limit, 100))
+        if (now < ent.Comp.TimeToNextExperience || ent.Comp.LearnedLevel >= Math.Min(limit, 100))
             return;
 
         ent.Comp.TimeToNextExperience = now + TimeSpan.FromSeconds(5);
@@ -281,32 +281,32 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public bool RollForLevelUp(Entity<KnowledgeComponent> ent, EntityUid target)
     {
-        var getMastery = GetMastery(ent.Comp);
+        var getMastery = GetMastery(ent.Comp.NetLevel);
         (int, bool) rollResult = (0, false);
 
         // If we don't have enough experience or level is max, return.
-        if (ent.Comp.Experience < ent.Comp.ExperienceCost || ent.Comp.Level >= 100)
+        if (ent.Comp.Experience < ent.Comp.ExperienceCost || ent.Comp.LearnedLevel >= 100)
             return false;
 
         // This should roll as many times as experience cached experience.
         int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
         ent.Comp.Experience -= ent.Comp.ExperienceCost * timesToRoll;
         (int, bool) rollInnard;
-        for (int i = 0; i < timesToRoll && ent.Comp.Level < 100; i++)
+        for (int i = 0; i < timesToRoll && ent.Comp.LearnedLevel < 100; i++)
         {
             rollInnard = RollPenetrating(ent);
             rollResult = (rollInnard.Item1, rollInnard.Item2 || rollResult.Item2);
-            ent.Comp.Level += rollResult.Item1;
+            ent.Comp.LearnedLevel += rollResult.Item1;
         }
 
-        if (ent.Comp.Level > 100) // Ensures Level doesn't go above 100.
-            ent.Comp.Level = 100;
+        if (ent.Comp.LearnedLevel > 100) // Ensures Level doesn't go above 100.
+            ent.Comp.LearnedLevel = 100;
 
         // Controls client popup whatnot when you level up.
         if (rollResult.Item2)
             SkillPopup(Loc.GetString("knowledge-level-epiphany", ("knowledge", Name(ent))), target);
 
-        if (getMastery != GetMastery(ent.Comp.Level) && !rollResult.Item2)
+        if (getMastery != GetMastery(ent.Comp.NetLevel) && !rollResult.Item2)
             SkillPopup(Loc.GetString("knowledge-level-up-popup", ("knowledge", Name(ent)), ("mastery", GetMasteryString(ent).ToLower())), target);
         else if (!rollResult.Item2)
             SkillPopup(Loc.GetString("knowledge-level-more", ("knowledge", Name(ent))), target);
@@ -319,7 +319,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite);
         // TODO: make this an event raised on ent
         var name = Name(ent);
-        knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.Level), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
+        knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.NetLevel), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
         if (_langQuery.TryComp(ent, out var languageKnowledge))
         {
             var locKey = (languageKnowledge.Speaks, languageKnowledge.Understands) switch
@@ -354,9 +354,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         if (GetKnowledge(ent, id) is { } existing)
         {
-            if (existing.Comp.Level < level)
+            if (existing.Comp.LearnedLevel < level)
             {
-                existing.Comp.Level = level;
+                existing.Comp.LearnedLevel = level;
                 Dirty(existing, existing.Comp);
             }
             return existing;
@@ -370,7 +370,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
 
         var comp = _query.Comp(unit);
-        comp.Level = level;
+        comp.LearnedLevel = level;
         Dirty(unit, comp);
 
         ent.Comp.KnowledgeDict[id] = unit;
@@ -511,13 +511,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public bool IsHolder(EntityUid target)
         => _holderQuery.HasComp(target);
 
-    /// <summary>
-    /// Returns true if that knowledge can be removed, by taking
-    /// into account its memory level and knowledge category.
-    /// </summary>
-    public bool CanRemoveKnowledge(KnowledgeComponent comp, ProtoId<KnowledgeCategoryPrototype> category, int level)
-        => !comp.Unremoveable && comp.Category == category && comp.Level <= level;
-
     public override void ClearKnowledge(EntityUid target, bool deleteAll)
     {
         if (GetContainer(target) is not { } ent)
@@ -606,7 +599,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     public string GetMasteryString(Entity<KnowledgeComponent> ent)
-        => GetMasteryString(GetMastery(ent.Comp.Level));
+        => GetMasteryString(GetMastery(ent.Comp.NetLevel));
 
     /// <summary>
     /// Get the name for a given mastery number.
@@ -635,7 +628,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public int GetLevel(EntityUid uid)
         => _query.TryComp(uid, out var comp)
-            ? Math.Min(comp.Level + comp.TemporaryLevel, 100)
+            ? Math.Clamp(comp.NetLevel, 0, 100)
             : 0;
 
     public override int GetInverseMastery(int mastery)
@@ -663,7 +656,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     public override float SharpCurve(Entity<KnowledgeComponent> knowledge, int offset = 0, float inverseScale = 100.0f)
-        => SharpCurve(knowledge.Comp.Level + knowledge.Comp.TemporaryLevel, offset, inverseScale);
+        => SharpCurve(knowledge.Comp.NetLevel, offset, inverseScale);
 
     public float SharpCurve(int level, int offset = 0, float inverseScale = 100f)
     {
