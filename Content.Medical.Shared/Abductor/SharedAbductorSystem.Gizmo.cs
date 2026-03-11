@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Reflection.Metadata;
 using Content.Medical.Shared.Abductor;
 using Content.Medical.Shared.Surgery;
-using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
+using Microsoft.VisualBasic;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Abductor;
 
@@ -32,6 +32,7 @@ public abstract partial class SharedAbductorSystem
         SubscribeLocalEvent<AbductorGizmoComponent, MeleeHitEvent>(OnGizmoHitInteract);
 
         SubscribeLocalEvent<AbductorGizmoComponent, AbductorGizmoMarkDoAfterEvent>(OnGizmoDoAfter);
+        SubscribeLocalEvent<AbductorGizmoComponent, ActivateInWorldEvent>(OnGizmoToggleMode);
     }
 
     private void OnGizmoHitInteract(Entity<AbductorGizmoComponent> ent, ref MeleeHitEvent args)
@@ -39,6 +40,11 @@ public abstract partial class SharedAbductorSystem
         if (args.HitEntities.Count != 1) return;
         var target = args.HitEntities[0];
         if (!HasComp<SurgeryTargetComponent>(target)) return;
+                if(ent.Comp.Mode == AbductorGizmoMode.Brainwash)
+        {
+            GizmoBrainWashUse(ent, target, args.User);
+            return;
+        }
         GizmoUse(ent, target, args.User);
     }
 
@@ -50,6 +56,11 @@ public abstract partial class SharedAbductorSystem
         if (HasComp<SurgeryTargetComponent>(target))
         {
             args.Handled = true;
+            if(ent.Comp.Mode == AbductorGizmoMode.Brainwash)
+            {
+                GizmoBrainWashUse(ent, target, args.User);
+                return;
+            }
             GizmoUse(ent, target, args.User);
             return;
         }
@@ -89,6 +100,20 @@ public abstract partial class SharedAbductorSystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
+    private void GizmoBrainWashUse(Entity<AbductorGizmoComponent> ent, EntityUid target, EntityUid user)
+    {
+        if (HasComp<AbductorComponent>(target))
+            return;
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(10), new BrainwashDoAfterEvent(), ent, target, ent.Owner)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            DistanceThreshold = 1f
+        };
+        _doAfter.TryStartDoAfter(doAfterArgs);
+
+    }
+
     private void OnGizmoDoAfter(Entity<AbductorGizmoComponent> ent, ref AbductorGizmoMarkDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Target is not {} target)
@@ -100,5 +125,20 @@ public abstract partial class SharedAbductorSystem
         victimComponent.Position ??= EnsureComp<TransformComponent>(args.Target.Value).Coordinates;
 
         args.Handled = true;
+    }
+
+    private void OnGizmoToggleMode(Entity<AbductorGizmoComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (args.Handled) return;
+        args.Handled = true;
+        ent.Comp.Mode = ent.Comp.Mode == AbductorGizmoMode.Mark ? AbductorGizmoMode.Brainwash : AbductorGizmoMode.Mark;
+        Dirty(ent);
+        var modeName = Loc.GetString(ent.Comp.Mode == AbductorGizmoMode.Mark ? "abductors-gizmo-mode-mark" : "abductors-gizmo-mode-brainwash");
+        _popup.PopupClient(Loc.GetString("abductors-gizmo-mode-changed", ("mode", modeName)), ent, args.User);
+    }
+
+    private void OnBrainwashDoAfterEvent(Entity<AbductorGizmoComponent> ent, ref BrainwashDoAfterEvent args)
+    {
+
     }
 }

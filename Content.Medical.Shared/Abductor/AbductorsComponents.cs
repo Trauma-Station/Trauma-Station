@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
-
+using Robust.Shared.Serialization;
 namespace Content.Medical.Shared.Abductor;
 
 // RIP mocho fucking chud died fighting in ukraine
@@ -50,6 +50,16 @@ public sealed partial class AbductorGizmoComponent : Component
 {
     [DataField, AutoNetworkedField]
     public NetEntity? Target;
+
+    [DataField, AutoNetworkedField]
+    public AbductorGizmoMode Mode = AbductorGizmoMode.Mark;
+}
+
+[Serializable, NetSerializable]
+public enum AbductorGizmoMode : byte
+{
+    Mark,
+    Brainwash
 }
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
