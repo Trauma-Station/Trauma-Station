@@ -52,3 +52,51 @@
     guides:
     - Security
     - Antagonists
+
+- type: entity # It's effectively a laser version of the Cobra.
+  name: harpocrates
+  parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
+  id: WeaponPistolHarpocrates
+  description: A suppressed energy pistol designed for silicon use.
+  components:
+  - type: Item
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
+  - type: Gun
+    fireRate: 4
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/silenced.ogg
+      params:
+        volume: -14
+    availableModes:
+    - SemiAuto
+  - type: BatteryAmmoProvider
+    proto: BulletBlueLaserMedium
+    fireCost: 25
+  - type: Battery
+    maxCharge: 300
+    startingCharge: 300
+  - type: BatterySelfRecharger
+    autoRechargeRate: 5
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 63
+  - type: Tag
+    tags:
+    - Sidearm
+    - LaserWeapon

@@ -112,6 +112,13 @@
           conditions:
           - !type:HasBudgetCondition
           - !type:MaxRuleOccurenceCondition
+        - id: XenoBorg
+          weight: 10
+          conditions:
+          - !type:HasBudgetCondition
+          - !type:MaxRuleOccurenceCondition
+          - !type:PlayerCountCondition
+            min: 30
         # </Trauma>
       # Midround rules
       - !type:GroupSelector

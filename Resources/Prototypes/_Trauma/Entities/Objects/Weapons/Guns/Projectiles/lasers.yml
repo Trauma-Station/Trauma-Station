@@ -253,6 +253,22 @@
   - type: IgniteOnCollide
     fireStacks: 0.5
 
+- type: entity
+  id: BulletBlueLaserMedium
+  parent: BaseLaserLongarmBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: lightbolt
+      shader: unshaded
+      color: "#5044ff"
+  - type: Projectile
+    impactEffect: BulletImpactEffectDisabler
+    damage:
+      types:
+        Heat: 25
+
 # SMG
 
 - type: entity

@@ -1676,7 +1676,7 @@
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword2-module }
 
-- type: entity # this is broken, don't use this.
+- type: entity # this is broken, don't use this. or else...
   parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleHypo
   name: nocturine hypo xenoborg module

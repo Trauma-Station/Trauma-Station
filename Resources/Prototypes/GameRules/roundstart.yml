@@ -43,8 +43,8 @@
     rules:
     - id: Thief
       prob: 0.5
-    - id: Xenoborgs
-      prob: 0.05
+#    - id: Xenoborgs
+#      prob: 0.05
     # <Goob>
     - id: Heretic
       prob: 0.2
@@ -220,7 +220,7 @@
     - prefRoles: [ Nukeops ]
       fallbackRoles: [ NukeopsCommander, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsOperative
-      max: 10 # Goobstation / 古布空间站 - 没有限制的核特工
+      max: 10 # Goobstation / GUB Space Station - Unrestricted Nuclear Agents
       playerRatio: 16 # Goobstation
       chaosScore: 300 # Goobstation
       startingGear: SyndicateOperativeGearFull

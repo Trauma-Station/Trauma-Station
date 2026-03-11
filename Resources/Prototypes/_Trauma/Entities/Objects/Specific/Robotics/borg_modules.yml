@@ -7,14 +7,6 @@
     state: icon
 
 - type: entity
-  id: BorgModuleC4Placeholder
-  parent: BaseItem
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Bombs/c4.rsi
-    state: icon
-
-- type: entity
   parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleDisruptor
   name: disruptor xenoborg module
@@ -26,12 +18,9 @@
     - state: icon-xenoborg-hypo
   - type: ItemBorgModule
     hands:
-     - item: C4
-       hand:
-          emptyRepresentative: BorgModuleC4Placeholder
-          emptyLabel: Explosives
-          whitelist:
-            components:
-            - Explosive
+    - item: WeaponPistolHarpocrates
+    - item: EnergyDaggerLoudBlue
+    - item: XenoborgRadioJammer
+    - item: AccessBreaker
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-hypo-module }
