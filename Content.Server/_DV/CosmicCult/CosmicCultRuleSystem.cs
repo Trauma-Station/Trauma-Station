@@ -147,6 +147,8 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     /// </summary>
     private void UpdateCultData(Entity<CosmicCultRuleComponent> rule)
     {
+        if (rule.Comp.Cultists.Count == 0) return; // Everyone is dead no need to check anything
+
         var totalCult = 0;
         var cultistsAtNextLevel = 0;
         foreach (var cultist in rule.Comp.Cultists)
@@ -222,8 +224,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                     _tier2Sound,
                     Color.FromHex("#cae8e8"));
 
-                component.FractureChance = 0.75f; // Most rifts from this point will be fractures instead.
-
+                component.FractureChance = 0.5f;
                 for (var i = 0; i <= component.TotalCrew / 4; i++)
                     SpawnRift(component.FractureChance);
 
@@ -249,8 +250,13 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                     Color.FromHex("#cae8e8"));
                 _audio.PlayGlobal(_tier3Sound, Filter.Broadcast(), false, AudioParams.Default);
 
+                component.FractureChance = 0.9f;
+                for (var i = 0; i <= component.TotalCrew / 3; i++) // Like, a lot of fractures
+                    SpawnRift(component.FractureChance);
+
                 while (lights.MoveNext(out var light, out _))
-                    _ghost.DoGhostBooEvent(light);
+                    if (_rand.Prob(0.90f))
+                        _ghost.DoGhostBooEvent(light);
 
                 break;
             default:
@@ -258,6 +264,11 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         }
         UpdateCultData(ent); // Update all the data again
         ent.Comp.IncreasingTier = false;
+
+        var query = EntityQueryEnumerator<CosmicTierConditionComponent>();
+
+        while (query.MoveNext(out _, out var comp))
+            comp.Tier = ent.Comp.CurrentTier;
     }
 
     #endregion
@@ -366,7 +377,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         }
     }
 
-    // TODO: rewrite this fuck
     private void ConfirmWinState(Entity<CosmicCultRuleComponent> ent)
     {
         _sound.StopStationEventMusic(ent, StationEventMusicType.CosmicCult);
@@ -532,7 +542,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         _rejuvenate.PerformRejuvenate(uid);
 
         _role.MindAddRole(mindId, "MindRoleCosmicCult", mind, true);
-        _role.MindHasRole<CosmicCultRoleComponent>(mindId, out var cosmicRole);
 
         if (!_player.TryGetSessionById(mind.UserId, out var session))
             return;
