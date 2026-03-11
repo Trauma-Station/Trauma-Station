@@ -6,13 +6,10 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Goobstation.Shared.Teleportation.Systems;
-using Content.Goobstation.Shared.Teleportation.Components;
+using Content.Medical.Common.Wounds;
+using Content.Medical.Shared.Surgery.Steps.Parts;
+using Content.Medical.Shared.Wounds;
 using Content.Shared._Goobstation.Wizard.Projectiles;
-using Content.Shared._Shitmed.Medical.Surgery.Steps.Parts;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -55,6 +52,7 @@ public sealed class HereticBladeSystem : SharedHereticBladeSystem
             (!EnsureComp<SkinRetractedComponent>(targetPart, out _) | !EnsureComp<IncisionOpenComponent>(targetPart, out _) |
              !EnsureComp<BonesSawedComponent>(targetPart, out _) | !EnsureComp<BonesOpenComponent>(targetPart, out _)))
         {
+            // TODO change sound
             _audio.PlayPvs(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/crack2.ogg"),
                 target,
                 AudioParams.Default.WithVolume(10f));
@@ -91,15 +89,12 @@ public sealed class HereticBladeSystem : SharedHereticBladeSystem
             }
 
             _throw.TryThrow(chunk,
-                dir * _random.NextVector2(0f, 2f),
-                _random.NextFloat(0.5f, 1.5f),
-                null,
-                0f,
-                2f,
-                false,
-                false,
-                true,
-                false);
+                direction: dir * _random.NextVector2(0f, 2f),
+                baseThrowSpeed: _random.NextFloat(1f, 2.5f),
+                pushbackRatio: 0f,
+                friction: 2f,
+                recoil: false,
+                playSound: false);
 
             if (bloodSolution.Volume < 3)
                 break;

@@ -9,25 +9,21 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-<<<<<<< HEAD
 using Content.Server.Heretic.EntitySystems;
-=======
 using System.Linq;
 using Content.Goobstation.Common.Religion;
-using Content.Server.GameTicking.Rules;
-using Content.Shared._Goobstation.Heretic.Components;
->>>>>>> 23f5bae53f (Lock path real.)
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitcode.Heretic.Effects;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Actions.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Components;
 using Content.Shared.Heretic;
+using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Storage;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Heretic.Abilities;
 
@@ -35,16 +31,26 @@ public sealed partial class HereticAbilitySystem
 {
     protected override void SubscribeLock()
     {
-<<<<<<< HEAD
-=======
         base.SubscribeLock();
 
-        SubscribeLocalEvent<HereticComponent, EventHereticBulglarFinesse>(OnBulglarFinesse);
+        SubscribeLocalEvent<EventHereticBulglarFinesse>(OnBulglarFinesse);
 
->>>>>>> 23f5bae53f (Lock path real.)
-        SubscribeLocalEvent<GhoulComponent, EventHereticShapeshift>(OnShapeshift);
+        SubscribeLocalEvent<EventHereticShapeshift>(OnShapeshift);
 
         SubscribeLocalEvent<ShapeshiftActionComponent, HereticShapeshiftMessage>(OnShapeshiftMessage);
+
+        SubscribeLocalEvent<HereticComponent, HereticModifySideKnowledgeDraftsEvent>(OnDraftsModify);
+    }
+
+    private void OnDraftsModify(Entity<HereticComponent> ent, ref HereticModifySideKnowledgeDraftsEvent args)
+    {
+        foreach (var (key, value) in args.SideKnowledgeDrafts)
+        {
+            if (ent.Comp.SideKnowledgeDrafts.TryGetValue(key, out var existing))
+                ent.Comp.SideKnowledgeDrafts[key] = Math.Max(0, existing + value);
+            else
+                ent.Comp.SideKnowledgeDrafts.Add(key, Math.Max(0, value));
+        }
     }
 
     private void OnShapeshiftMessage(Entity<ShapeshiftActionComponent> ent, ref HereticShapeshiftMessage args)
@@ -78,6 +84,7 @@ public sealed partial class HereticAbilitySystem
 
         // This shouldn't break because ghoul comp should be copied on polymorph (it copies max health),
         // change this behavior if this ability is ever given to heretic
+        // TODO: fix me
         if (TryComp(user, out DamageableComponent? userDamage) &&
             TryComp(polymorphed.Value, out DamageableComponent? polymorphedDamage))
             _dmg.SetDamage((polymorphed.Value, polymorphedDamage), userDamage.Damage);
@@ -105,20 +112,20 @@ public sealed partial class HereticAbilitySystem
             });
     }
 
-    private void OnShapeshift(Entity<GhoulComponent> ent, ref EventHereticShapeshift args)
+    private void OnShapeshift(EventHereticShapeshift args)
     {
         if (args.Handled || !HasComp<ShapeshiftActionComponent>(args.Action))
             return;
 
-        _ui.TryOpenUi(args.Action.Owner, HereticShapeshiftUiKey.Key, ent);
+        _ui.TryOpenUi(args.Action.Owner, HereticShapeshiftUiKey.Key, args.Performer);
     }
-<<<<<<< HEAD
-=======
 
-    private void OnBulglarFinesse(Entity<HereticComponent> ent, ref EventHereticBulglarFinesse args)
+    private void OnBulglarFinesse(EventHereticBulglarFinesse args)
     {
-        if (!TryUseAbility(ent, args))
+        if (!TryUseAbility(args, false))
             return;
+
+        var ent = args.Performer;
 
         if (!Examine.InRangeUnOccluded(ent, args.Target))
         {
@@ -142,10 +149,9 @@ public sealed partial class HereticAbilitySystem
         {
             var items = storage.Container.ContainedEntities.ToList();
             if (items.Count > 0)
-                toSteal = _random.Pick(items);
+                toSteal = Random.Pick(items);
         }
 
         _hands.PickupOrDrop(ent, toSteal.Value, false, false, true, true);
     }
->>>>>>> 23f5bae53f (Lock path real.)
 }

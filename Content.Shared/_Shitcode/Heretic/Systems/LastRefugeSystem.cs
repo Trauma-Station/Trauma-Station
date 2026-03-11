@@ -1,9 +1,9 @@
 using Content.Goobstation.Common.Movement;
-using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Actions;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Heretic;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
@@ -125,7 +125,7 @@ public sealed class LastRefugeSystem : EntitySystem
     private void OnActionMagicAttempt(Entity<LastRefugeActionComponent> ent, ref HereticMagicCastAttemptEvent args)
     {
         var coords = Transform(args.User).Coordinates;
-        var look = _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(coords, ent.Comp.OtherMindsCheckRange);
+        var look = _lookup.GetEntitiesInRange<HumanoidProfileComponent>(coords, ent.Comp.OtherMindsCheckRange);
 
         foreach (var (uid, _) in look)
         {

@@ -1,5 +1,4 @@
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.MartialArts;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
@@ -8,6 +7,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Teleportation.Components;
+using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;

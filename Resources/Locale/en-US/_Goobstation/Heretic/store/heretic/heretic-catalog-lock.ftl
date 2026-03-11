@@ -30,6 +30,8 @@ knowledge-path-lock-s1-desc =
     Allows you to transmute a knife and a crowbar into a Key Blade.
     You can only create two at a time and they function as fast crowbars.
 
+    Path of Lock has more side knowledge unlocked for free or at a discount.
+
 knowledge-path-lock-s2-name = Grasp of Lock
 knowledge-path-lock-s2-desc =
     Nothing may remain closed from my touch.
@@ -38,8 +40,16 @@ knowledge-path-lock-s2-desc =
     All locks will break. Any mech pilot will be instantly ejected. Consoles will break.
     Makes a distinctive knocking sound on use.
 
-knowledge-path-lock-s3-name = Key Keeper's Burden
+knowledge-path-lock-s3-name = Mark of Lock
 knowledge-path-lock-s3-desc =
+    The Gatekeeper was a corrupt Steward. She hindered her fellows for her own twisted amusement.
+
+    Your Mansus Grasp now applies the Mark of Lock.
+    Attack a marked person to bar them from all passages for the duration of the mark.
+    This will make it so that they have no access whatsoever, even public access doors will reject them.
+
+knowledge-path-lock-s4-name = Key Keeper's Burden
+knowledge-path-lock-s4-desc =
     The Keeper sneered. "These plastic rectangles are a mockery of keys, and I curse every door that desires them."
 
     Allows you to transmute a door, an iron rod, and an ID card to create an Eldritch Card.
@@ -48,14 +58,6 @@ knowledge-path-lock-s3-desc =
     Each card may only sustain a single pair of portals at the same time.
     It also functions and appears the same as a regular ID Card.
     Using it on a normal ID card consumes it and gains its access, and you can use it in-hand to change its appearance to a card you fused.
-
-knowledge-path-lock-s4-name = Mark of Lock
-knowledge-path-lock-s4-desc =
-    The Gatekeeper was a corrupt Steward. She hindered her fellows for her own twisted amusement.
-
-    Your Mansus Grasp now applies the Mark of Lock.
-    Attack a marked person to bar them from all passages for the duration of the mark.
-    This will make it so that they have no access whatsoever, even public access doors will reject them.
 
 knowledge-path-lock-s5-name = Concierge's Rite
 knowledge-path-lock-s5-desc =

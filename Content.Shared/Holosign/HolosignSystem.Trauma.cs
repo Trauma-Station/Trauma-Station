@@ -1,3 +1,5 @@
+using Content.Shared.Charges.Components;
+using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
@@ -18,14 +20,12 @@ public sealed partial class HolosignSystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedChargesSystem _charges = default!;
 
     public static readonly ProtoId<TagPrototype> HolosignTag = "Holosign";
 
-    // FIXME: one of these is causing puddles to block projectors??
     private const int BlockMask = (int) (
         CollisionGroup.Impassable |
-        CollisionGroup.LowImpassable |
-        CollisionGroup.MidImpassable |
         CollisionGroup.HighImpassable);
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -55,9 +55,10 @@ public sealed partial class HolosignSystem
                 return null;
         }
 
-        // if no battery or no charge, doesn't work
-        return _powerCell.TryUseCharge(ent.Owner, ent.Comp.ChargeUse, user: args.User, predicted: true)
-            ? coords
-            : null;
+        EntityUid? user = TryComp(ent, out LimitedChargesComponent? charges) ? null : args.User; // Don't show popups if it has limited charges (user is null = no popup)
+        if (!_powerCell.TryUseCharge(ent.Owner, ent.Comp.ChargeUse, user: user) && !_charges.TryUseCharge((ent, charges))) // if no battery or no charge, doesn't work
+            return null;
+
+        return coords;
     }
 }

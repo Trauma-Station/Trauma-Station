@@ -43,12 +43,12 @@ public sealed class EldritchIdConfiguration(
     HashSet<ProtoId<AccessLevelPrototype>> tags,
     EntProtoId cardPrototype)
 {
-    public string? FullName = fullName;
-    public string? JobTitle = jobTitle;
-    public ProtoId<JobIconPrototype> JobIcon = jobIcon;
-    public HashSet<ProtoId<AccessLevelPrototype>> AccessTags = tags;
-    public List<ProtoId<DepartmentPrototype>> Departments = departments;
-    public EntProtoId CardPrototype = cardPrototype;
+    public readonly string? FullName = fullName;
+    public readonly string? JobTitle = jobTitle;
+    public readonly ProtoId<JobIconPrototype> JobIcon = jobIcon;
+    public readonly HashSet<ProtoId<AccessLevelPrototype>> AccessTags = tags;
+    public readonly List<ProtoId<DepartmentPrototype>> Departments = departments;
+    public readonly EntProtoId CardPrototype = cardPrototype;
 
     public override bool Equals(object? obj)
     {

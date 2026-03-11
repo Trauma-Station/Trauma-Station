@@ -537,41 +537,43 @@
   actionPrototypes:
   - ActionResetStarGazerConsciousness
 
-<<<<<<< HEAD
-=======
 ## lock path
 - type: hereticKnowledge
   id: StewardsSecret
   path: Lock
   stage: 1
   ritualPrototypes:
-  - BladeLock
+  - RitualBladeLock
 
 - type: hereticKnowledge
   id: GraspOfLock
   path: Lock
   stage: 2
-  # event: !type:EventHereticLockPassive
+  mindEvent: !type:HereticModifySideKnowledgeDraftsEvent
+    sideKnowledgeDrafts:
+      HereticPathSideT1: 1
+      HereticPathSideT2: 1
+      HereticPathSideT3: 1
+
+- type: hereticKnowledge
+  id: MarkOfLock
+  path: Lock
+  stage: 3
 
 - type: hereticKnowledge
   id: KeyKeepersBurden
   path: Lock
   sideKnowledge: true
-  stage: 3
-  ritualPrototypes:
-  - KeyKeepersBurden
-
-- type: hereticKnowledge
-  id: MarkOfLock
-  path: Lock
   stage: 4
+  ritualPrototypes:
+  - RitualEldritchId
 
 - type: hereticKnowledge
   id: ConciergesRite
   path: Lock
   stage: 5
   ritualPrototypes:
-  - ConciergesRite
+  - RitualConcierge
 
 - type: hereticKnowledge
   id: BurglarsFinesse
@@ -598,17 +600,16 @@
   id: AscensionLock
   stage: 9
   path: Lock
-  ritualPrototypes:
-  - AscensionLock
+  # ritualPrototypes:
+  # - AscensionLock
 
 - type: hereticKnowledge
   id: UnlockTheLabyrinth
   stage: 10
   path: Lock
-  event: !type:HereticAscensionLockEvent
+  # event: !type:HereticAscensionLockEvent
 
 ### side paths
->>>>>>> 23f5bae53f (Lock path real.)
 - type: hereticKnowledge
   id: RitualOfKnowledge
   sideKnowledge: true

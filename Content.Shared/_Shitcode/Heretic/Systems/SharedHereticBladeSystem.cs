@@ -18,17 +18,14 @@ using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Weapons;
-using Content.Goobstation.Maths.FixedPoint;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Targeting;
 using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Goobstation.Wizard.SanguineStrike;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body;
-using Content.Shared.Body.Systems;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -236,11 +233,10 @@ public abstract class SharedHereticBladeSystem : EntitySystem
                 var (woundingMultiplier, woundProb) = hereticComp?.Ascended is true ? (3f, 0.65f) : (2f, 0.35f);
                 foreach (var dmgType in args.BaseDamage.DamageDict.Keys)
                 {
-                    var mult = FixedPoint2.New(1);
-                    if (!args.BaseDamage.WoundSeverityMultipliers.TryGetValue(dmgType, out mult))
+                    if (!args.BaseDamage.WoundSeverityMultipliers.TryGetValue(dmgType, out var mult))
                         args.BaseDamage.WoundSeverityMultipliers[dmgType] = woundingMultiplier;
                     else
-                        args.BaseDamage.WoundSeverityMultipliers[dmgType] *= woundingMultiplier;
+                        args.BaseDamage.WoundSeverityMultipliers[dmgType] = mult * woundingMultiplier;
                 }
 
                 if (!TryComp(performer, out TargetingComponent? targeting))

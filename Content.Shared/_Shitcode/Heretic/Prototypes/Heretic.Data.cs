@@ -9,6 +9,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 
+using Content.Shared.Store;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 
@@ -31,6 +32,13 @@ public sealed partial class EventHereticAddKnowledge : EntityEventArgs
 {
     [DataField(required: true)]
     public List<ProtoId<HereticKnowledgePrototype>> Knowledge;
+}
+
+[DataDefinition]
+public sealed partial class HereticModifySideKnowledgeDraftsEvent : EntityEventArgs
+{
+    [DataField(required: true)]
+    public Dictionary<ProtoId<StoreCategoryPrototype>, int> SideKnowledgeDrafts;
 }
 
 [DataDefinition]

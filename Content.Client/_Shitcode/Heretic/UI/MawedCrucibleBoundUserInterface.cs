@@ -2,10 +2,8 @@ using Content.Client.UserInterface.Controls;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Heretic.Messages;
 using JetBrains.Annotations;
-using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Client._Shitcode.Heretic.UI;
 

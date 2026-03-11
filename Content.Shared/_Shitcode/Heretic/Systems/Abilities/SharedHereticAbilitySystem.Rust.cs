@@ -57,7 +57,7 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<RustbringerComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction);
         SubscribeLocalEvent<RustbringerComponent, DamageModifyEvent>(OnModifyDamage);
 
-        SubscribeLocalEvent<HereticComponent, EventHereticRustCharge>(OnRustCharge);
+        SubscribeLocalEvent<EventHereticRustCharge>(OnRustCharge);
     }
 
     private void OnModifyDamage(Entity<RustbringerComponent> ent, ref DamageModifyEvent args)
@@ -220,7 +220,7 @@ public abstract partial class SharedHereticAbilitySystem
             var distanceToCaster = (_transform.ToMapCoordinates(coords).Position - mapPos.Position).Length();
             var chanceOfNotRusting = Math.Clamp((MathF.Max(distanceToCaster, 1f) - 1f) / (aoeRadius - 1f), 0f, 1f);
 
-            if (_random.Prob(chanceOfNotRusting))
+            if (Random.Prob(chanceOfNotRusting))
                 continue;
 
             if (CanRustTile((ContentTileDefinition) _tileDefinitionManager[tileRef.Tile.TypeId]))

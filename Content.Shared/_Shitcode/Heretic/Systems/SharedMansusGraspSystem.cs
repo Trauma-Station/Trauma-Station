@@ -38,7 +38,6 @@ using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
@@ -96,7 +95,6 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly SharedMechSystem _mech = default!;
     [Dependency] private readonly AccessReaderSystem _access = default!;
 
@@ -420,7 +418,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 break;
             }
 
-            case "Lock": // TODO: Predict
+            case "Lock":
             {
                 if (TryComp<MechComponent>(target, out var mech) && mech.PilotSlot.ContainedEntity is { } pilot)
                 {
@@ -439,8 +437,11 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 else
                     break;
 
-                _audio.PlayPvs(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/hereticknock.ogg"), target);
-                _popup.PopupEntity(Loc.GetString("heretic-lock-unlocked"), performer, performer);
+                _audio.PlayPredicted(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/hereticknock.ogg"), target, performer);
+                _popup.PopupClient(Loc.GetString("heretic-lock-unlocked"), target, performer);
+
+                if (heretic.PathStage >= 7)
+                    return false; // Don't use up grasp when unlocking things at high stage
 
                 break;
             }

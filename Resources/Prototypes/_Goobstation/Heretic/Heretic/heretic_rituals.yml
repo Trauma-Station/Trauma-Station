@@ -1129,7 +1129,6 @@
         from: 0
         to: 3
 
-
 - type: entity
   id: RitualAscensionCosmos
   name: Creators's Gift
@@ -1187,6 +1186,164 @@
   - type: Tag
     tags:
     - RitualAscension
+
+### lock path
+- type: entity
+  id: RitualBladeLock
+  name: A Steward's Secret
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/Blades/blade_lock.rsi
+    state: icon
+  - type: HereticRitual
+    limit: 2
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+        - whitelist:
+            tags:
+            - Crowbar
+          name: heretic-ritual-ingredient-crowbar
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        HereticBladeLock: 1
+    limitReachedEffects:
+    - !type:FindLostLimitedOutputEffect
+      applyOn: Platform
+      result: Lost
+      minRange: 3.5
+    - !type:TeleportToRuneEffect
+      applyOn: Result
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Lost
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-lost-blades
+      - !type:TryApplyEffectSequenceCondition
+        from: 0
+        to: 3
+
+- type: entity
+  id: RitualEldritchId
+  name: Key Keeper's Burden
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: Objects/Misc/id_cards.rsi
+    state: gold
+  - type: HereticRitual
+    cancelLoc: heretic-ritual-fail-no-id-card
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Targets
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - IdCard
+        blacklist:
+          components:
+          - EldritchIdCard
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - RodMetal
+          name: heretic-ritual-ingredient-metal-rod
+        - whitelist:
+            components:
+            - Door
+          name: heretic-ritual-ingredient-door
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Targets
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-id-card
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Result
+      effects:
+      - !type:AddComponents
+        components:
+        - type: EldritchIdCard
+
+- type: entity
+  id: RitualConcierge
+  name: Concierge's Rite
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/Entities/heretichandbook.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - Crayon
+          name: heretic-ritual-ingredient-crayon
+        - whitelist:
+            tags:
+            - WoodPlank
+          name: heretic-ritual-ingredient-wood-plank
+        - whitelist:
+            tags:
+            - Multitool
+          name: heretic-ritual-ingredient-multitool
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        LabyrinthHandbook: 1
 
 ### side knowledge
 - type: entity
