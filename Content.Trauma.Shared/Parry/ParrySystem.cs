@@ -231,7 +231,7 @@ public sealed class ParrySystem : EntitySystem
         || _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
             return false; // Shouldn't ever happen because we check this right after checking knowledge
 
-        var result = exhComp.Exhaustion >= 1f;
+        var result = exhComp.Exhaustion < 1f;
         var level = Math.Max(skill.Comp.Level, 1); // Evil division by 0
         var exhGain = useParryValues ?
             1f / item.Comp.MaxParries * (100f / level) :
