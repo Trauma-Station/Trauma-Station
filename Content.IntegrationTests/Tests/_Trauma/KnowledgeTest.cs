@@ -29,7 +29,7 @@ public sealed class KnowledgeTest
         var server = pair.Server;
         var entMan = server.EntMan;
         var knowledge = entMan.System<SharedKnowledgeSystem>();
-        var body = entMan.System<body>();
+        var body = entMan.System<BodySystem>();
 
         await server.WaitPost(() =>
         {
@@ -104,7 +104,7 @@ public sealed class KnowledgeTest
         await using var pair = await PoolManager.GetServerClient();
 
         var server = pair.Server;
-        var proto = server.proto;
+        var proto = server.ProtoMan;
 
         await server.WaitAssertion(() =>
         {
