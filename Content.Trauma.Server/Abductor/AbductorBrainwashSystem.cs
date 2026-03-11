@@ -48,4 +48,3 @@ public sealed partial class AbductorBrainwashSystem : EntitySystem
     timed.ExpiresAt = _timing.CurTime + TimeSpan.FromMinutes(15);
 }
     }
-
