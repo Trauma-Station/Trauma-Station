@@ -5,7 +5,7 @@
   components:
   - type: Knowledge
     experienceCost: 5
-    costs: [1, 2, 3, 4, 8, 12] # it's easy to clean shit
+    costs: [0, 1, 2, 3, 4, 8, 12] # it's easy to clean shit
   - type: ThrowInsertKnowledge
     curve: !type:QuadraticSkillCurve
       skillScale: 2.9 # guaranteed success at lvl 30, dunk that can!
@@ -17,7 +17,7 @@
   components:
   - type: Knowledge
     experienceCost: 15
-    costs: [2, 4, 8, 12, 16, 20]
+    costs: [0, 2, 4, 8, 12, 16, 20]
 
 - type: entity
   parent: BaseScientificKnowledge
@@ -26,4 +26,4 @@
   components:
   - type: Knowledge
     experienceCost: 15
-    costs: [1, 2, 3, 6, 10, 16]
+    costs: [0, 1, 2, 3, 6, 10, 16]

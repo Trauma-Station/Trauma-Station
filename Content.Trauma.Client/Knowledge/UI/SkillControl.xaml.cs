@@ -11,7 +11,6 @@ namespace Content.Trauma.Client.Knowledge.UI;
 public sealed partial class SkillControl : BoxContainer
 {
     public event Action<int>? OnChangeMastery;
-
     private readonly int[] _costs;
     public int Mastery;
 
@@ -32,7 +31,10 @@ public sealed partial class SkillControl : BoxContainer
         Mastery = mastery;
         var cost = _costs[mastery];
         MasteryLabel.Text = Loc.GetString("knowledge-editor-mastery", ("mastery", name), ("cost", cost));
-        // decrease button is also used for removing, only increase can be disabled
         IncreaseButton.Disabled = mastery >= _costs.Length - 1;
+        DecreaseButton.Disabled = mastery <= 0;
+        var color = mastery <= 0 ? Color.Gray : Color.White;
+        MasteryLabel.Modulate = color;
+        SkillLabel.Modulate = color;
     }
 }
