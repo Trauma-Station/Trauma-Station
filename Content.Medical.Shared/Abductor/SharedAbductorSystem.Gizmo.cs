@@ -37,10 +37,12 @@ public abstract partial class SharedAbductorSystem
 
     private void OnGizmoHitInteract(Entity<AbductorGizmoComponent> ent, ref MeleeHitEvent args)
     {
-        if (args.HitEntities.Count != 1) return;
+        if (args.HitEntities.Count != 1)
+        return;
         var target = args.HitEntities[0];
-        if (!HasComp<SurgeryTargetComponent>(target)) return;
-                if(ent.Comp.Mode == AbductorGizmoMode.Brainwash)
+        if (!HasComp<SurgeryTargetComponent>(target))
+        return;
+        if(ent.Comp.Mode == AbductorGizmoMode.Brainwash)
         {
             GizmoBrainWashUse(ent, target, args.User);
             return;
@@ -129,7 +131,8 @@ public abstract partial class SharedAbductorSystem
 
     private void OnGizmoToggleMode(Entity<AbductorGizmoComponent> ent, ref ActivateInWorldEvent args)
     {
-        if (args.Handled) return;
+        if (args.Handled)
+        return;
         args.Handled = true;
         ent.Comp.Mode = ent.Comp.Mode == AbductorGizmoMode.Mark ? AbductorGizmoMode.Brainwash : AbductorGizmoMode.Mark;
         Dirty(ent);

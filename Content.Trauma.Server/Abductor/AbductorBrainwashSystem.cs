@@ -20,7 +20,8 @@ public sealed partial class AbductorBrainwashSystem : EntitySystem
     {
         if (args.Cancelled || args.Target is not  {} target)
         return;
-        if (HasComp<MindShieldComponent>(target)) return;
+        if (HasComp<MindShieldComponent>(target))
+        return;
 
         var comp = EnsureComp<MindcontrolledComponent>(target);
         comp.Master = args.User;
