@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Server.Mindcontrol;
 using Content.Goobstation.Shared.Mindcontrol;
 using Content.Shared.Mindshield.Components;
