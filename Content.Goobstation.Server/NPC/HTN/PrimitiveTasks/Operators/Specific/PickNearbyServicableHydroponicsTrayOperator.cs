@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Threading;
@@ -20,8 +15,7 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
@@ -57,11 +51,11 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entManager) || !_entManager.TryGetComponent<PlantbotComponent>(owner, out _))
+        if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entMan) || !_entMan.TryGetComponent<PlantbotComponent>(owner, out _))
             return (false, null);
 
-        var entityQuery = _entManager.GetEntityQuery<PlantHolderComponent>();
-        var emagged = _entManager.HasComponent<EmaggedComponent>(owner);
+        var entityQuery = _entMan.GetEntityQuery<PlantHolderComponent>();
+        var emagged = _entMan.HasComponent<EmaggedComponent>(owner);
 
         foreach (var target in _lookup.GetEntitiesInRange(owner, range))
         {
@@ -81,7 +75,7 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
             return (true, new Dictionary<string, object>()
             {
                 {TargetKey, target},
-                {TargetMoveKey, _entManager.GetComponent<TransformComponent>(target).Coordinates},
+                {TargetMoveKey, _entMan.GetComponent<TransformComponent>(target).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });
         }

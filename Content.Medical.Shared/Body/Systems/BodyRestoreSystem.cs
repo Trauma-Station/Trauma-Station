@@ -1,4 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Body;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Rejuvenate;
 
@@ -14,7 +17,7 @@ public sealed class BodyRestoreSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<BodyComponent, RejuvenateEvent>(OnRejuvenate,
-            before: [ typeof(DamageableSystem) ]);
+            before: [ typeof(DamageableSystem), typeof(SharedBloodstreamSystem) ]);
     }
 
     private void OnRejuvenate(Entity<BodyComponent> ent, ref RejuvenateEvent args)

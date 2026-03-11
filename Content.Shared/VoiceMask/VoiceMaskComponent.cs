@@ -1,0 +1,87 @@
+// <Trauma>
+using Content.Shared.StatusIcon;
+// </Trauma>
+using Content.Shared.Speech;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared.VoiceMask;
+
+/// <summary>
+///     This component is for voice mask items! Adding this component to clothing will give the the voice mask UI
+///     and allow the wearer to change their voice and verb at will.
+/// </summary>
+/// <remarks>
+///     DO NOT use this if you do not want the interface.
+///     The VoiceOverrideSystem is probably what your looking for (Or you might have to make something similar)!
+/// </remarks>
+[RegisterComponent]
+public sealed partial class VoiceMaskComponent : Component
+{
+    /// <summary>
+    ///     The name that will override an entities default name. If null, it will use the default override.
+    /// </summary>
+    [DataField]
+    public string? VoiceMaskName = null;
+
+    /// <summary>
+    ///     The speech verb that will override an entities default one. If null, it will use the entities default verb.
+    /// </summary>
+    [DataField]
+    public ProtoId<SpeechVerbPrototype>? VoiceMaskSpeechVerb;
+
+    /// <summary>
+    ///     If true will override the users identity with whatever <see cref="VoiceMaskName"/> is.
+    /// </summary>
+    [DataField]
+    public bool OverrideIdentity;
+
+    /// <summary>
+    ///     The action that gets displayed when the voice mask is equipped.
+    /// </summary>
+    [DataField]
+    public EntProtoId Action = "ActionChangeVoiceMask";
+
+    /// <summary>
+    ///     Reference to the action.
+    /// </summary>
+    [DataField]
+    public EntityUid? ActionEntity;
+
+    /// <summary>
+    /// Goob - Whether the action should be granted when equipped.
+    /// </summary>
+    [DataField]
+    public bool EnableAction = true;
+
+    /// <summary>
+    ///     If user's voice is getting changed when they speak.
+    /// </summary>
+    [DataField]
+    public bool Active = true;
+
+    /// <summary>
+    ///     If user's accent is getting hidden when they speak.
+    /// </summary>
+    [DataField]
+    public bool AccentHide = true;
+
+    /// <summary>
+    ///     If user's equipped agent id name is getting changed.
+    /// </summary>
+    [DataField]
+    public bool ChangeIDName = false;
+
+    #region GabyStation
+    /// <summary>
+    ///     The job icon to be displayed next to their name when speaking on radio
+    /// </summary>
+    [DataField]
+    public ProtoId<JobIconPrototype>? JobIconProtoId; // GabyStation -> Radio icons
+
+    /// <summary>
+    ///     The name of the job that should show up when a mouse overs over the job icon on the radio
+    /// </summary>
+    [DataField]
+    public string? JobName; // GabyStation -> Radio icons
+    #endregion
+}

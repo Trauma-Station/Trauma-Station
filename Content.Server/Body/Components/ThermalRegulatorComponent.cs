@@ -14,7 +14,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Server.Body.Components;
 
 [RegisterComponent]
-[Access(typeof(ThermalRegulatorSystem))]
+//[Access(typeof(ThermalRegulatorSystem))] // Trauma
 public sealed partial class ThermalRegulatorComponent : Component
 {
     /// <summary>

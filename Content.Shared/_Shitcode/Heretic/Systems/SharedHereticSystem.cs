@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Conversion;
-using Content.Goobstation.Common.Heretic;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Actions;
 using Content.Shared.Heretic;
@@ -9,6 +9,8 @@ using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Objectives.Systems;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Configuration;
@@ -25,6 +27,7 @@ public abstract class SharedHereticSystem : EntitySystem
     [Dependency] private readonly ISerializationManager _serialization = default!;
 
     [Dependency] protected readonly ISharedPlayerManager PlayerMan = default!;
+    [Dependency] protected readonly StatusEffectsSystem Status = default!;
 
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -166,6 +169,11 @@ public abstract class SharedHereticSystem : EntitySystem
 
         var data = _proto.Index(id);
 
+        if (data.MindEvent is { } hereticEv)
+        {
+            RaiseLocalEvent(ent.Owner, hereticEv);
+        }
+
         if (data.Event != null && body != null)
         {
             var ev = _serialization.CreateCopy(data.Event, notNullableOverride: true);
@@ -193,10 +201,25 @@ public abstract class SharedHereticSystem : EntitySystem
 
         // make sure we only progress when buying current path knowledge
         if (data.Stage > ent.Comp2.PathStage && data.Path == ent.Comp2.CurrentPath)
+        {
             ent.Comp2.PathStage = data.Stage;
+            UpdateHereticCostModifiers((ent, ent.Comp2));
+        }
 
         Dirty(ent, ent.Comp2);
         return true;
+    }
+
+    public void UpdateHereticAura(EntityUid uid)
+    {
+        if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura ||
+            Status.HasEffectComp<HideHereticAuraStatusEffectComponent>(uid))
+        {
+            RemCompDeferred<HereticAuraComponent>(uid);
+            return;
+        }
+
+        EnsureComp<HereticAuraComponent>(uid);
     }
 
     public virtual void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
@@ -212,6 +235,12 @@ public abstract class SharedHereticSystem : EntitySystem
     protected virtual void SpawnRituals(HereticComponent heretic,
         List<EntProtoId<HereticRitualComponent>> rituals,
         ICommonSession session)
+    {
+    }
+
+    public virtual void UpdateHereticCostModifiers(Entity<HereticComponent?> ent,
+        ProtoId<StoreCategoryPrototype>? category = null,
+        ListingDataWithCostModifiers? except = null)
     {
     }
 }

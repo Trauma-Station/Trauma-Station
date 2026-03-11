@@ -19,20 +19,19 @@ public sealed class TowerOfBabelSystem : EntitySystem
 
     private void OnInit(Entity<TowerOfBabelComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp(ent, out LanguageKnowledgeComponent? knowledge) ||
-            !TryComp(ent, out LanguageSpeakerComponent? speaker))
+        if (!TryComp(ent, out LanguageSpeakerComponent? speaker))
             return;
 
-        var spoken = knowledge.SpokenLanguages;
+        var spoken = speaker.Speaks;
         spoken.Clear();
         foreach (var proto in _proto.EnumeratePrototypes<LanguagePrototype>())
         {
             spoken.Add(proto.ID);
         }
-        var understood = knowledge.UnderstoodLanguages;
+        var understood = speaker.Understands;
         understood.Clear();
         understood.AddRange(spoken);
-        Dirty(ent.Owner, knowledge);
+        Dirty(ent.Owner, speaker);
         _language.EnsureValidLanguage((ent.Owner, speaker));
     }
 }

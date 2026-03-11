@@ -1,0 +1,405 @@
+## Mob
+
+- type: entity
+  parent: BaseSpeciesAppearanceOrganless
+  id: AppearanceShattered
+  name: Shattered appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganShatteredTorso
+      Head: OrganShatteredHead
+      ArmLeft: OrganShatteredArmLeft
+      ArmRight: OrganShatteredArmRight
+      HandLeft: OrganShatteredHandLeft
+      HandRight: OrganShatteredHandRight
+      LegLeft: OrganShatteredLegLeft
+      LegRight: OrganShatteredLegRight
+      FootLeft: OrganShatteredFootLeft
+      FootRight: OrganShatteredFootRight
+      # Organs
+      Brain: OrganHumanBrain
+  - type: HumanoidProfile
+    species: Shattered
+
+- type: entity
+  save: false
+  name: Urist McShattered
+  parent:
+  - AppearanceShattered
+  - BaseMob
+  - MobDamageable
+  - MobPolymorphable
+  - MobCombat
+  - MobAtmosStandard
+  - MobFlammable
+  id: MobShattered
+  components:
+  - type: FootprintOwner
+  - type: StunVisuals
+  - type: FireVisuals
+    alternateState: Standing
+  - type: Damageable
+    damageContainer: Biological
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+  - type: MeleeWeapon # In case they lose all their hands I guess
+    soundHit:
+      collection: GlassBreak
+    animation: WeaponArcSmash
+    damage:
+      types:
+        Slash: 8
+        Piercing: 7
+  - type: PassiveDamage
+    splitBehavior: SplitEnsureAll
+    allowedStates:
+    - Alive
+    damageCap: 0
+    damage:
+      types:
+        Blunt: -2
+        Slash: -2
+        Piercing: -2
+        Heat: -2
+        Cold: -2
+        Shock: -2
+        Asphyxiation: -2
+        Bloodloss: -2
+        Caustic: -2
+        Poison: -2
+        Radiation: -2
+        Cellular: -2
+        Holy: -2
+  - type: Targeting
+  - type: PressureImmunity
+  - type: NightVision
+    color: "#177698"
+    activateSound: null
+    deactivateSound: null
+  - type: ZombieImmune
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      150: Critical
+      251: Dead
+  - type: ShatteredRisen
+  - type: StatusIcon
+    bounds: -0.5,-0.5,0.5,0.5
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Fixtures
+    fixtures: # TODO: This needs a second fixture just for mob collisions.
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 220
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: FloorOcclusion
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection:
+          GlassBreak
+    soundTypes:
+      Heat:
+        collection:
+          MeatLaserImpact
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+      Acidic: [Touch, Ingestion, Eyes]
+    reactions:
+    - reagents: [Water, SpaceCleaner]
+      methods: [Touch]
+      effects:
+      - !type:WashCreamPie
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+    - Stutter
+    - Electrocution
+    - Drunk
+    - SlurredSpeech
+    - RatvarianLanguage
+    - PressureImmunity
+    - Muted
+    - TemporaryBlindness
+    - Pacified
+    - StaminaModifier
+    - RadiationProtection
+    - Adrenaline
+  - type: Identity
+  - type: IdExaminable
+  - type: Hands
+  - type: ComplexInteraction
+  - type: FloatingVisuals
+  - type: Climbing
+  - type: Ensnareable
+    sprite: Objects/Misc/ensnare.rsi
+    state: icon
+  - type: AnimationPlayer
+  - type: Buckle
+  - type: CombatMode
+    canDisarm: true
+  - type: SSDIndicator
+  - type: StandingState
+  - type: MindContainer
+  - type: NpcFactionMember
+    factions:
+    - Heretic
+  - type: CreamPied
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  - type: StepTriggerImmune
+    whitelist:
+      types:
+      - Shard
+  - type: Puller
+    needsHands: false
+  - type: Speech
+    speechSounds: null
+  - type: DamageForceSay
+  - type: Vocal
+    sounds:
+      Male: MaleHuman
+      Female: FemaleHuman
+      Unsexed: MaleHuman
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: Emoting
+  - type: BodyEmotes
+    soundsId: GeneralBodyEmotes
+  - type: Grammar
+    attributes:
+      proper: true
+  - type: MobPrice
+    price: 3000
+    deathPenalty: 0.01
+  - type: Crawler
+  - type: CanEscapeInventory
+  - type: Penetratable
+    penetrateDamage: 50
+    damagePenalty: 0.2
+  - type: ExaminableCharacter
+  - type: Stamina
+    baseCritThreshold: 200
+    animationThreshold: 100
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Effects/glass_step.ogg
+      params:
+        variation: 0.09
+        volume: -8
+  - type: Insulated
+  - type: FlashImmunity
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseExternal
+  id: OrganShattered
+  suffix: Shattered
+
+- type: entity
+  abstract: true
+  parent: OrganShattered
+  id: OrganShatteredExternal
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Mobs/Shattered/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _Goobstation/Heretic/Mobs/Shattered/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
+  - type: BodyPart
+    species: Shattered
+  - type: Woundable
+    canBleed: false
+  - type: WoundableVisuals
+    damageGroupColors:
+      Brute: "#000000"
+    bleedingOverlay: null
+
+## Parts
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganShatteredExternal ]
+  id: OrganShatteredTorso
+  components:
+  - type: Woundable
+    integrity: 600
+    integrityCap: 600
+    thresholds:
+      Minor: 270
+      Moderate: 180
+      Severe: 90
+      Critical: 45
+      Mangled: 0
+
+- type: entity
+  parent: [ OrganBaseHead, OrganShatteredExternal ]
+  id: OrganShatteredHead
+  components:
+  - type: Woundable
+    integrity: 250
+    integrityCap: 250
+    thresholds:
+      Minor: 225
+      Moderate: 150
+      Severe: 75
+      Critical: 38
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 0.5
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganShatteredExternal ]
+  id: OrganShatteredArmLeft
+  components:
+  - type: Woundable
+    integrity: 250
+    integrityCap: 250
+    thresholds:
+      Minor: 225
+      Moderate: 150
+      Severe: 75
+      Critical: 38
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 1.0
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganShatteredExternal ]
+  id: OrganShatteredArmRight
+  components:
+  - type: Woundable
+    integrity: 250
+    integrityCap: 250
+    thresholds:
+      Minor: 225
+      Moderate: 150
+      Severe: 75
+      Critical: 38
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 1.0
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganShatteredExternal ]
+  id: OrganShatteredHandLeft
+  components:
+  - type: Woundable
+    integrity: 140
+    integrityCap: 140
+    thresholds:
+      Minor: 125
+      Moderate: 70
+      Severe: 45
+      Critical: 22
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 1.0
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganShatteredExternal ]
+  id: OrganShatteredHandRight
+  components:
+  - type: Woundable
+    integrity: 140
+    integrityCap: 140
+    thresholds:
+      Minor: 125
+      Moderate: 70
+      Severe: 45
+      Critical: 22
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 1.0
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganShatteredExternal ]
+  id: OrganShatteredLegLeft
+  components:
+  - type: Woundable
+    integrity: 250
+    integrityCap: 250
+    thresholds:
+      Minor: 225
+      Moderate: 150
+      Severe: 75
+      Critical: 38
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 0.5
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganShatteredExternal ]
+  id: OrganShatteredLegRight
+  components:
+  - type: Woundable
+    integrity: 250
+    integrityCap: 250
+    thresholds:
+      Minor: 225
+      Moderate: 150
+      Severe: 75
+      Critical: 38
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 0.5
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganShatteredExternal ]
+  id: OrganShatteredFootLeft
+  components:
+  - type: Woundable
+    integrity: 140
+    integrityCap: 140
+    thresholds:
+      Minor: 125
+      Moderate: 70
+      Severe: 45
+      Critical: 22
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 0.5
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganShatteredExternal ]
+  id: OrganShatteredFootRight
+  components:
+  - type: Woundable
+    integrity: 140
+    integrityCap: 140
+    thresholds:
+      Minor: 125
+      Moderate: 70
+      Severe: 45
+      Critical: 22
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 0.5

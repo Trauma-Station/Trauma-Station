@@ -14,3 +14,9 @@ public readonly record struct SetGhoulBoundHereticEvent(EntityUid Heretic, Entit
 
 [ByRefEvent]
 public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId Proto, int Amount = 1);
+
+[ByRefEvent]
+public readonly record struct SpawnHereticInfluenceEvent(EntProtoId Proto, int Amount = 1);
+
+[ByRefEvent]
+public readonly record struct UserInvokeTouchSpellEvent;

@@ -1,27 +1,12 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 the biggest bruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 yglop <95057024+yglop@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared._Shitcode.Heretic.Effects;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Polymorph;
-using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -36,18 +21,22 @@ public sealed partial class HereticActionComponent : Component
     /// <summary>
     ///     Indicates that a user should wear a heretic amulet, a hood or something else.
     /// </summary>
-    [DataField] public bool RequireMagicItem = true;
+    [DataField]
+    public bool RequireMagicItem = true;
 
-    [DataField] public string? MessageLoc = null;
+    [DataField]
+    public string? MessageLoc = null;
 }
 
 #region DoAfters
 
-[Serializable, NetSerializable] public sealed partial class EldritchInfluenceDoAfterEvent : SimpleDoAfterEvent
+[Serializable, NetSerializable]
+public sealed partial class EldritchInfluenceDoAfterEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class DrawRitualRuneDoAfterEvent : DoAfterEvent
 {
-}
-[Serializable, NetSerializable] public sealed partial class DrawRitualRuneDoAfterEvent : SimpleDoAfterEvent
-{
+    // TODO: NetCoordinates / NetEntity
     [NonSerialized] public EntityCoordinates Coords;
     [NonSerialized] public EntityUid RitualRune;
 
@@ -56,16 +45,12 @@ public sealed partial class HereticActionComponent : Component
         RitualRune = ritualRune;
         Coords = coords;
     }
-}
-[Serializable, NetSerializable] public sealed partial class HereticMansusLinkDoAfter : SimpleDoAfterEvent
-{
-    [NonSerialized] public EntityUid Target;
 
-    public HereticMansusLinkDoAfter(EntityUid target)
-    {
-        Target = target;
-    }
+    public override DoAfterEvent Clone() => new DrawRitualRuneDoAfterEvent(RitualRune, Coords);
 }
+
+[Serializable, NetSerializable]
+public sealed partial class HereticMansusLinkDoAfter : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class EventHereticFleshSurgeryDoAfter : SimpleDoAfterEvent;
@@ -73,15 +58,15 @@ public sealed partial class EventHereticFleshSurgeryDoAfter : SimpleDoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class StarGazeDoAfterEvent : DoAfterEvent
 {
+    [DataField]
+    public NetEntity OrbEffect = NetEntity.Invalid;
+
     public StarGazeDoAfterEvent(NetEntity orbEffect)
     {
         OrbEffect = orbEffect;
     }
 
-    [DataField]
-    public NetEntity OrbEffect = NetEntity.Invalid;
-
-    public override DoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone() => new StarGazeDoAfterEvent(OrbEffect);
 }
 
 #endregion
@@ -96,22 +81,28 @@ public sealed partial class CheckMagicItemEvent : HandledEntityEventArgs, IInven
     public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
 
-// basic
-public sealed partial class HereticStartupEvent : HereticKnowledgeEvent;
-public sealed partial class EventHereticOpenStore : InstantActionEvent { }
-public sealed partial class EventHereticMansusGrasp : InstantActionEvent { }
-public sealed partial class EventHereticLivingHeart : InstantActionEvent { } // opens ui
+[ByRefEvent]
+public readonly record struct HereticLostFocusEvent;
 
 [ByRefEvent]
-public readonly record struct HereticMindDetachedEvent(EntityUid Mind);
+public record struct HereticMagicCastAttemptEvent(EntityUid User, EntityUid Action, bool Cancelled = false);
 
-public sealed partial class EventHereticShadowCloak : InstantActionEvent
+// basic
+public sealed partial class HereticStartupEvent : HereticKnowledgeEvent;
+public sealed partial class EventHereticOpenStore : InstantActionEvent;
+public sealed partial class EventHereticMansusGrasp : InstantActionEvent;
+public sealed partial class EventHereticLivingHeart : InstantActionEvent; // opens ui
+
+[ByRefEvent]
+public readonly record struct HereticStateChangedEvent(EntityUid Mind, bool IsDead, bool Temporary);
+
+public sealed partial class EventHereticCloak : InstantActionEvent
 {
-    [DataField]
-    public ProtoId<StatusEffectPrototype> Status = "ShadowCloak";
+    [DataField(required: true)]
+    public EntProtoId<HereticCloakedStatusEffectComponent> Status;
 
     [DataField]
-    public TimeSpan Lifetime = TimeSpan.FromSeconds(180);
+    public TimeSpan? Lifetime;
 }
 
 // living heart
@@ -125,7 +116,7 @@ public sealed partial class EventHereticShadowCloak : InstantActionEvent
 }
 
 // ghoul specific
-public sealed partial class EventHereticMansusLink : EntityTargetActionEvent { }
+public sealed partial class EventHereticMansusLink : EntityTargetActionEvent;
 
 // ash
 public sealed partial class EventHereticAshenShift : InstantActionEvent
@@ -143,7 +134,7 @@ public sealed partial class EventHereticVolcanoBlast : InstantActionEvent
 public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
 {
     [DataField]
-    public float Range = 7f;
+    public float Range = 14f;
 
     [DataField]
     public DamageSpecifier Damage = new()
@@ -155,16 +146,22 @@ public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
     };
 
     [DataField]
-    public float FireStacks = 3f;
-
-    [DataField]
     public float FireProtectionPenetration = 0.5f;
 
     [DataField]
     public float HealAmount = -10f;
+
+    [DataField]
+    public EntProtoId Effect = "NightwatcherEffect";
 }
-public sealed partial class EventHereticFlames : InstantActionEvent { }
-public sealed partial class EventHereticCascade : InstantActionEvent { }
+
+public sealed partial class EventHereticFlames : InstantActionEvent;
+
+public sealed partial class EventHereticCascade : InstantActionEvent
+{
+    [DataField]
+    public EntProtoId CascadeEnt = "HereticCascade";
+}
 
 // flesh
 public sealed partial class EventHereticFleshSurgery : InstantActionEvent, ITouchSpellEvent
@@ -173,12 +170,8 @@ public sealed partial class EventHereticFleshSurgery : InstantActionEvent, ITouc
     public EntProtoId TouchSpell { get; set; } = "TouchSpellFleshSurgery";
 }
 
-public sealed partial class EventHereticFleshPassive : HereticKnowledgeEvent;
-
 // void (+ upgrades)
-public sealed partial class EventHereticVoidPassiveT1 : HereticKnowledgeEvent;
-public sealed partial class EventHereticVoidPassiveT2 : HereticKnowledgeEvent;
-public sealed partial class HereticVoidBlastEvent : InstantActionEvent { }
+public sealed partial class HereticVoidBlastEvent : InstantActionEvent;
 
 public sealed partial class HereticVoidBlinkEvent : WorldTargetActionEvent
 {
@@ -238,7 +231,6 @@ public sealed partial class HereticVoidConduitEvent : InstantActionEvent
 }
 
 // blade (+ upgrades)
-public sealed partial class HereticDanceOfTheBrandEvent : HereticKnowledgeEvent;
 public sealed partial class EventHereticSacraments : InstantActionEvent
 {
     [DataField]
@@ -249,17 +241,15 @@ public sealed partial class EventHereticSacraments : InstantActionEvent
 }
 
 public sealed partial class HereticChampionStanceEvent : HereticKnowledgeEvent;
-public sealed partial class EventHereticFuriousSteel : InstantActionEvent { }
+public sealed partial class EventHereticFuriousSteel : InstantActionEvent;
 
 // lock
-public sealed partial class EventHereticBulglarFinesse : InstantActionEvent { }
-public sealed partial class EventHereticLastRefugee : InstantActionEvent { }
+public sealed partial class EventHereticBulglarFinesse : InstantActionEvent;
+public sealed partial class EventHereticLastRefugee : InstantActionEvent;
 
 public sealed partial class EventHereticShapeshift : InstantActionEvent;
 
 // rust
-public sealed partial class HereticLeechingWalkEvent : HereticKnowledgeEvent;
-
 public sealed partial class EventHereticRustConstruction : WorldTargetActionEvent
 {
     [DataField]
@@ -329,10 +319,19 @@ public sealed partial class EventHereticAggressiveSpread : InstantActionEvent
     public float LookupRange = 0.1f;
 
     [DataField]
-    public int RustStrength = 4; // Mark of rust level
+    public int RustStrength = 2;
 
     [DataField]
     public EntProtoId TileRune = "TileHereticRustRune";
+}
+
+public sealed partial class EventHereticRustCharge : WorldTargetActionEvent
+{
+    [DataField]
+    public float Distance = 10f;
+
+    [DataField]
+    public float Speed = 10f;
 }
 
 // cosmos
@@ -382,8 +381,6 @@ public sealed partial class ResetStarGazerConsciousnessEvent : InstantActionEven
 
 public sealed partial class StarGazerSeekMasterEvent : InstantActionEvent;
 
-public sealed partial class EventHereticCosmosPassive : HereticKnowledgeEvent;
-
 // side
 public sealed partial class EventHereticIceSpear : InstantActionEvent;
 
@@ -412,13 +409,25 @@ public sealed partial class EventHereticCleave : WorldTargetActionEvent
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/blood3.ogg");
 }
 
-public sealed partial class EventHereticRustCharge : WorldTargetActionEvent
+public sealed partial class EventHereticSpacePhase : InstantActionEvent
 {
     [DataField]
-    public float Distance = 10f;
+    public ProtoId<PolymorphPrototype> Polymorph = "SpaceJaunt";
 
     [DataField]
-    public float Speed = 10f;
+    public EntProtoId Effect = "EffectSpaceExplosion";
+}
+
+public sealed partial class EventMirrorJaunt : InstantActionEvent
+{
+    [DataField]
+    public ProtoId<PolymorphPrototype> Polymorph = "MirrorJaunt";
+
+    [DataField]
+    public EntProtoId ActionProto = "ActionMirrorJaunt";
+
+    [DataField]
+    public float LookupRange = 1f;
 }
 
 public sealed partial class EventEmp : InstantActionEvent
@@ -452,18 +461,6 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
 }
 
 // ascensions
-public sealed partial class HereticAscensionAshEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionVoidEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionFleshEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionLockEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionBladeEvent : HereticKnowledgeEvent;
-
-public sealed partial class HereticAscensionRustEvent : HereticKnowledgeEvent;
-
 public sealed partial class HereticAscensionCosmosEvent : HereticKnowledgeEvent;
 #endregion
 
@@ -484,8 +481,8 @@ public sealed class LaserBeamEndpointPositionEvent(NetEntity uid, MapCoordinates
     public MapCoordinates Coordinates = coords;
 }
 
-[ImplicitDataDefinitionForInheritors]
-public abstract partial class HereticKnowledgeEvent : EntityEventArgs
+[Virtual, DataDefinition, ImplicitDataDefinitionForInheritors]
+public partial class HereticKnowledgeEvent : EntityEventArgs
 {
     public EntityUid Heretic;
 

@@ -90,6 +90,17 @@ ChestHuman: OrganHumanTorso
 
 # 2026-02-18 removed vulp plushie
 PlushieVulp: null
+
+# 2026-03-02 removed playing cards
+CardDeckBlack: null
+CardDeckSyndicate: null
+CardDeckNanotrasen: null
+CardBoxBlack: null
+CardBoxSyndicate: null
+CardBoxNanotrasen: null
+
+# 2026-03-10 this gives martial arts, no longer harmless maint loot
+MaterialHideBear: MaterialHideCorgi
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -1126,3 +1137,6 @@ RightArmSkeleton: OrganSkeletonPersonArmRight
 #TowelColorMaroon: null
 #TowelColorSilver: null
 #TowelColorMime: null
+
+# 2026-04-03
+RotaryPhoneStand: RotaryPhoneStandNoRot

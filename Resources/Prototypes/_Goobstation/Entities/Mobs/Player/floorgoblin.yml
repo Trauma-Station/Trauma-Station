@@ -47,7 +47,6 @@
     sounds:
       Unsexed: Duende
   - type: LanguageSpeaker
-  - type: LanguageKnowledge
     speaks:
     - FloorGoblin
     understands:
@@ -86,8 +85,6 @@
     actionProto: ActionStealShoes
   - type: MobPrice
     price: 100
-  - type: DodgeWideswing
-    staminaRatio: 2
   - type: Stamina
     baseCritThreshold: 20
     animationThreshold: 10

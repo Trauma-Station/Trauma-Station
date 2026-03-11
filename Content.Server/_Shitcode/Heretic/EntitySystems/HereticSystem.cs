@@ -19,6 +19,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Religion;
 using Content.Server.Store.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Eye;
@@ -32,23 +33,23 @@ using Content.Server.Heretic.Components;
 using Content.Server.Antag;
 using Robust.Shared.Random;
 using System.Linq;
+using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server._Goobstation.Objectives.Components;
 using Content.Server.Actions;
 using Content.Server.Chat.Managers;
+using Content.Server.GameTicking.Rules;
 using Content.Shared.Humanoid;
 using Content.Server.Revolutionary.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking;
-using Content.Shared.Humanoid.Markings;
 using Content.Server.Polymorph.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -58,8 +59,13 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Server.Hands.Systems;
 using Content.Shared._Shitcode.Heretic.Rituals;
+using Content.Shared.Jaunt;
+using Content.Shared.Mobs;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Store;
 using Content.Shared.Tag;
 using Robust.Server.GameStates;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Heretic.EntitySystems;
 
@@ -77,6 +83,7 @@ public sealed class HereticSystem : SharedHereticSystem
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly PvsOverrideSystem _override = default!;
+    [Dependency] private readonly HereticRuleSystem _rule = default!;
 
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
@@ -103,6 +110,7 @@ public sealed class HereticSystem : SharedHereticSystem
         SubscribeLocalEvent<HereticComponent, EventHereticUpdateTargets>(OnUpdateTargets);
         SubscribeLocalEvent<HereticComponent, EventHereticRerollTargets>(OnRerollTargets);
         SubscribeLocalEvent<HereticComponent, EventHereticAscension>(OnAscension);
+        SubscribeLocalEvent<HereticComponent, ListingPurchasedEvent>(OnPurchase);
 
         SubscribeLocalEvent<HereticComponent, MindGotRemovedEvent>(OnMindRemoved);
         SubscribeLocalEvent<HereticComponent, MindGotAddedEvent>(OnMindAdded);
@@ -111,6 +119,38 @@ public sealed class HereticSystem : SharedHereticSystem
         SubscribeLocalEvent<HereticStartupEvent>(OnHereticStartup);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
         SubscribeLocalEvent<UserShouldTakeHolyEvent>(OnShouldTakeHoly);
+        SubscribeLocalEvent<MobStateChangedEvent>(OnStateChanged);
+
+        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
+        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
+    }
+
+    private void OnStateChanged(MobStateChangedEvent args)
+    {
+        if (!TryGetHereticComponent(args.Target, out var heretic, out var mind))
+            return;
+
+        var newActive = args.NewMobState == MobState.Dead;
+        if (heretic.IsActive == newActive)
+            return;
+
+        heretic.IsActive = newActive;
+
+        var ev = new HereticStateChangedEvent(mind, !newActive, false);
+        foreach (var minion in heretic.Minions)
+        {
+            RaiseLocalEvent(minion, ref ev);
+        }
+    }
+
+    private void OnRemove(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
+    {
+        UpdateHereticAura(args.Target);
+    }
+
+    private void OnApply(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
+    {
+        RemCompDeferred<HereticAuraComponent>(args.Target);
     }
 
     private void OnMindAdded(Entity<HereticComponent> ent, ref MindGotAddedEvent args)
@@ -120,20 +160,34 @@ public sealed class HereticSystem : SharedHereticSystem
         if (TerminatingOrDeleted(args.Container))
             return;
 
-        if (!HasComp<MobStateComponent>(args.Container))
+        if (!TryComp(args.Container, out MobStateComponent? mobState))
         {
-            // Don't kill stargazer if we got temporarily polymorphed
-            if (TryComp(args.Container, out PolymorphedEntityComponent? p) &&
-                (!p.Configuration.Forced || p.Configuration.Duration != null))
+            if (!ent.Comp.IsActive)
                 return;
+            // Don't kill stargazer if we got temporarily polymorphed
+            var temporary = TryComp(args.Container, out PolymorphedEntityComponent? p) &&
+                            (!p.Configuration.Forced || p.Configuration.Duration != null) ||
+                            HasComp<JauntComponent>(args.Container);
 
-            var ev = new HereticMindDetachedEvent(ent);
+            ent.Comp.IsActive = false;
+            var ev = new HereticStateChangedEvent(ent, true, temporary);
             foreach (var minion in ent.Comp.Minions)
             {
                 RaiseLocalEvent(minion, ref ev);
             }
 
             return;
+        }
+
+        var newActive = mobState.CurrentState != MobState.Dead;
+        if (newActive != ent.Comp.IsActive)
+        {
+            var ev = new HereticStateChangedEvent(ent, !newActive, false);
+            foreach (var minion in ent.Comp.Minions)
+            {
+                RaiseLocalEvent(minion, ref ev);
+            }
+            ent.Comp.IsActive = newActive;
         }
 
         SetMinionsMaster(ent, args.Container);
@@ -160,8 +214,11 @@ public sealed class HereticSystem : SharedHereticSystem
     private void SetMinionsMaster(Entity<HereticComponent> ent, EntityUid? newMaster)
     {
         ent.Comp.Minions = ent.Comp.Minions.Where(Exists).ToHashSet();
+        var mobQuery = GetEntityQuery<MobStateComponent>();
         foreach (var uid in ent.Comp.Minions)
         {
+            if (!mobQuery.HasComp(uid))
+                continue;
             var minion = EnsureComp<HereticMinionComponent>(uid);
             minion.BoundHeretic = newMaster;
             Dirty(uid, minion);
@@ -217,6 +274,8 @@ public sealed class HereticSystem : SharedHereticSystem
             _npcFaction.AddFaction(ev.Heretic, HereticFactionId);
         }
 
+        UpdateHereticAura(ev.Heretic);
+
         if (!TryComp<EyeComponent>(ev.Heretic, out var eye))
             return;
 
@@ -271,24 +330,59 @@ public sealed class HereticSystem : SharedHereticSystem
         if (!PlayerMan.TryGetSessionById(mind.UserId, out var session))
             return;
 
+        if (showText)
+        {
+            var baseMessage = heretic.InfluenceGainBaseMessage;
+            var message = Loc.GetString(_rand.Pick(heretic.InfluenceGainMessages));
+            var size = heretic.InfluenceGainTextFontSize;
+            var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
+            SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
+            _chatMan.ChatMessageToOne(ChatChannel.Server,
+                message,
+                loc,
+                default,
+                false,
+                session.Channel,
+                canCoalesce: false);
+        }
+
         if (playSound)
             _audio.PlayGlobal(heretic.InfluenceGainSound, session);
 
-        if (!showText)
-            return;
+        var couldBreak = heretic.CanBreakBlade;
+        var hadAura = heretic.ShouldShowAura;
+        heretic.KnowledgeTracker += amount;
+        var canBreak = heretic.CanBreakBlade;
+        var showAura = heretic.ShouldShowAura;
 
-        var baseMessage = heretic.InfluenceGainBaseMessage;
-        var message = Loc.GetString(_rand.Pick(heretic.InfluenceGainMessages));
-        var size = heretic.InfluenceGainTextFontSize;
-        var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
-        SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
-        _chatMan.ChatMessageToOne(ChatChannel.Server,
-            message,
-            loc,
-            default,
-            false,
-            session.Channel,
-            canCoalesce: false);
+        if (!canBreak && couldBreak)
+        {
+            var msg = Loc.GetString(heretic.BreakBladeAbilityLostMessage);
+            _chatMan.ChatMessageToOne(ChatChannel.Server,
+                msg,
+                msg,
+                default,
+                false,
+                session.Channel,
+                Color.Red);
+        }
+
+        if (!hadAura && showAura)
+        {
+            if (uid != null)
+                Status.TryUpdateStatusEffectDuration(uid.Value, heretic.HideAuraStatusEffect, heretic.AuraDelayTime);
+
+            var msg = Loc.GetString(heretic.AuraVisibleMessage);
+            _chatMan.ChatMessageToOne(ChatChannel.Server,
+                msg,
+                msg,
+                default,
+                false,
+                session.Channel,
+                Color.Red);
+        }
+
+        Dirty(mindId, heretic);
     }
 
     private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)
@@ -299,6 +393,7 @@ public sealed class HereticSystem : SharedHereticSystem
         }
 
         RaiseLocalEvent(ent, new EventHereticRerollTargets());
+        UpdateHereticCostModifiers(ent.AsNullable());
     }
 
     private void OnShutdown(Entity<HereticComponent> ent, ref ComponentShutdown args)
@@ -338,7 +433,7 @@ public sealed class HereticSystem : SharedHereticSystem
         if (!TryGetHereticComponent(ev.Target, out var heretic, out _))
             return;
 
-        ev.ShouldTakeHoly = heretic.Ascended;
+        ev.ShouldTakeHoly |= heretic.Ascended;
         ev.WeakToHoly = true;
     }
 
@@ -461,6 +556,8 @@ public sealed class HereticSystem : SharedHereticSystem
         ent.Comp.ChosenRitual = null;
         Dirty(ent);
 
+        UpdateHereticAura(uid);
+
         // how???
         if (ent.Comp.CurrentPath == null)
             return;
@@ -483,5 +580,69 @@ public sealed class HereticSystem : SharedHereticSystem
             true,
             ascendSound,
             Color.Pink);
+    }
+
+
+    private void OnPurchase(Entity<HereticComponent> ent, ref ListingPurchasedEvent args)
+    {
+        if (args.Data.Categories.FirstOrNull() is not { } cat)
+            return;
+
+        if (!ent.Comp.SideKnowledgeDrafts.TryGetValue(cat, out var amount))
+            return;
+
+        var listings = _store.GetAvailableListings(args.User, ent, Comp<StoreComponent>(ent));
+        foreach (var listing in listings)
+        {
+            if (listing == args.Data ||
+                !listing.Categories.Contains(cat) ||
+                !listing.CostModifiersBySourceId.ContainsKey(cat))
+                continue;
+
+            listing.RemoveCostModifier(cat);
+        }
+
+        var newAmount = Math.Max(amount - 1, 0);
+        ent.Comp.SideKnowledgeDrafts[cat] = newAmount;
+        if (newAmount > 0)
+            UpdateHereticCostModifiers(ent.AsNullable(), cat, args.Data);
+    }
+
+    public override void UpdateHereticCostModifiers(Entity<HereticComponent?> ent,
+        ProtoId<StoreCategoryPrototype>? category = null,
+        ListingDataWithCostModifiers? except = null)
+    {
+        base.UpdateHereticCostModifiers(ent, category, except);
+
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        var store = CompOrNull<StoreComponent>(ent) ?? _rule.InitializeStore(ent);
+
+        var allListings = _store.GetAvailableListings(ent, ent, store).ToList();
+
+        if (except is { } e)
+            allListings.Remove(e);
+
+        // Order listings by category
+        var listings = allListings
+            .Where(x => x.Categories.FirstOrNull() is { } cat && (category == null || cat == category) &&
+                        ent.Comp.SideKnowledgeDrafts.TryGetValue(cat, out var amount) && amount > 0)
+            .DistinctBy(x => x.Categories.First())
+            .ToDictionary(x => x.Categories.First(),
+                x => allListings.Where(y => y.Categories.Intersect(x.Categories).Any()).ToList());
+
+        foreach (var (key, value) in listings)
+        {
+            if (value.Count == 0 || value.Any(x => x.CostModifiersBySourceId.ContainsKey(key)))
+                continue;
+
+            var amount = Math.Min(value.Count, ent.Comp.SideDraftChoiceAmount);
+            for (var i = 0; i < amount; i++)
+            {
+                var listing = _rand.PickAndTake(value);
+                listing.AddCostModifier(key, listing.Cost.ToDictionary(x => x.Key, _ => -FixedPoint2.New(1)));
+            }
+        }
     }
 }

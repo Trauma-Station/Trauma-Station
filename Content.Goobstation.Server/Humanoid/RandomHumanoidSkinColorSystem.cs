@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Decals;
 using Content.Shared.Humanoid;
 using Robust.Shared.Prototypes;

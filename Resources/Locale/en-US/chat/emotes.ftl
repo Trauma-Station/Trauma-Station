@@ -1,16 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Minemoder5000 <minemoder50000@gmail.com>
-# SPDX-FileCopyrightText: 2024 Morb <14136326+Morb0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Verm <32827189+Vermidia@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 lzk <124214523+lzk228@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 # Names
 chat-emote-name-scream = Scream
 chat-emote-name-laugh = Laugh
@@ -49,6 +36,7 @@ chat-emote-name-snarl = Snarl
 chat-emote-name-whine = Whine
 chat-emote-name-howl = Howl
 chat-emote-name-growl = Growl
+chat-emote-name-flap = Flap Wings
 
 # Message
 chat-emote-msg-scream = screams!
@@ -84,3 +72,9 @@ chat-emote-msg-cathisses = hisses!
 chat-emote-msg-monkeyscreeches = screeches!
 chat-emote-msg-yawn = yawns.
 chat-emote-msg-snore = snores.
+chat-emote-msg-bark = barks.
+chat-emote-msg-snarl = snarls.
+chat-emote-msg-whine = whines.
+chat-emote-msg-howl = howls.
+chat-emote-msg-growl = growls.
+chat-emote-msg-flap = flaps {POSS-ADJ($entity)} wings.

@@ -1,14 +1,3 @@
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2022 Lamrr <96937466+Lamrr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Morb <14136326+Morb0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2022 ninruB <38016303+asperger-sind@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 MACMAN2003 <macman2003c@gmail.com>
-# SPDX-FileCopyrightText: 2024 Ps3Moira <113228053+ps3moira@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
 # These should be lathe recipes but lathe code sucks so hard rn so they'll be crafted by hand.
 
 - type: construction
@@ -18,6 +7,11 @@
   targetNode: steeltile
   category: construction-category-tiles
   objectType: Item
+  # <Trauma>
+  theory:
+    HandmadeKnowledge: 1
+  useQuality: false # annoying for construction, masterwork tiles as weapons is sad but not worth the hassle
+  # </Trauma>
 
 - type: construction
   id: TileWood
@@ -26,6 +20,11 @@
   targetNode: woodtile
   category: construction-category-tiles
   objectType: Item
+  # <Trauma>
+  theory:
+    HandmadeKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: TileBrassFilled
@@ -34,6 +33,11 @@
   targetNode: filledPlate
   category: construction-category-tiles
   objectType: Item
+  # <Trauma>
+  theory:
+    HandmadeKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: TileBrassReebe
@@ -42,6 +46,11 @@
   targetNode: reebe
   category: construction-category-tiles
   objectType: Item
+  # <Trauma>
+  theory:
+    HandmadeKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: TileWhite
@@ -50,6 +59,11 @@
   targetNode: whitetile
   category: construction-category-tiles
   objectType: Item
+  # <Trauma>
+  theory:
+    HandmadeKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: TileDark
@@ -58,6 +72,11 @@
   targetNode: darktile
   category: construction-category-tiles
   objectType: Item
+  # <Trauma>
+  theory:
+    HandmadeKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: TileFlesh
@@ -66,6 +85,11 @@
   targetNode: fleshTile
   category: construction-category-tiles
   objectType: Item
+  # <Trauma>
+  theory:
+    HandmadeKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: TileWoodLarge
@@ -74,3 +98,8 @@
   targetNode: woodtilelarge
   category: construction-category-tiles
   objectType: Item
+  # <Trauma>
+  theory:
+    HandmadeKnowledge: 1
+  useQuality: false
+  # </Trauma>

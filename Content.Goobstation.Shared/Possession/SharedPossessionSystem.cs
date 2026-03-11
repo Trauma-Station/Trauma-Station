@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Shared.Actions;
@@ -40,6 +42,7 @@ public abstract class SharedPossessionSystem : EntitySystem
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
             return;
 
+        args.WeakToHoly = true;
         args.ShouldTakeHoly = true;
     }
 

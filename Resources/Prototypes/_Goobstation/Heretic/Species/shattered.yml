@@ -1,0 +1,7 @@
+- type: species
+  id: Shattered
+  name: species-name-shattered
+  roundStart: false
+  prototype: MobShattered
+  dollPrototype: AppearanceShattered
+  skinColoration: NoColor

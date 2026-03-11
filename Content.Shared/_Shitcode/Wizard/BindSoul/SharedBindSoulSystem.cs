@@ -45,7 +45,6 @@ public abstract class SharedBindSoulSystem : EntitySystem
     [Dependency] private   readonly GibbingSystem _gibbing = default!;
     [Dependency] private   readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private   readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private   readonly IPrototypeManager _proto = default!;
     [Dependency] private   readonly INetManager _net = default!;
 
     public static readonly ProtoId<TagPrototype> IgnoreBindSoulTag = "IgnoreBindSoul"; // Goobstation
@@ -110,7 +109,7 @@ public abstract class SharedBindSoulSystem : EntitySystem
 
         if (!ItemExistsAndOnSamePlane(item, xform.MapUid, out var itemXform))
         {
-            if (item == null || itemXform == null)
+            if (itemXform == null)
                 return;
 
             // Item exists but on another plane, respawn it

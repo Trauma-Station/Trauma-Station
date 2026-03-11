@@ -36,28 +36,28 @@ knowledge-path-blade-s2-desc =
 
     Your Mansus Grasp will cause a short stun when used on someone lying down or facing away from you.
 
-knowledge-path-blade-s3-name = Dance of the Brand
+knowledge-path-blade-s3-name = Mark of the Blade
 knowledge-path-blade-s3-desc =
     The footsoldier was known to be a fearsome duelist. Their general quickly appointed them as their personal Champion.
-
-    Being attacked while wielding a Heretic Blade in either hand will deliver a riposte towards your attacker, knocking them down. This effect can only trigger once every 20 seconds.
-
-knowledge-path-blade-s4-name = Mark of the Blade
-knowledge-path-blade-s4-desc =
-    His general wished to end the war, but the Champion knew there could be no life without death. He would slay the coward himself, and anyone who tried to run.
 
     Your Mansus Grasp now applies the Mark of the Blade.
     Triggering the mark will summon a knife that will orbit you for a short time.
     The knife will block any attack directed towards you, but is consumed on use.
     Additionally, you can use throw key with an empty active hand to fire the knife, dealing heavy damage.
 
+knowledge-path-blade-s4-name = Dance of the Brand
+knowledge-path-blade-s4-desc =
+    In the flurry of death, he found peace within himself. Despite insurmountable odds, he forged on.
+
+    Being attacked while wielding a Heretic Blade in either hand will deliver a riposte towards your attacker, knocking them down. This effect can only trigger once every 20 seconds.
+
 knowledge-path-blade-s5-name = Sacraments of Power
 knowledge-path-blade-s5-desc =
-    Seven times seven techniques were made in Eternal War. These parts of the doctrine contain enough to crush anyone.
+    His general wished to end the war, but the Champion knew there could be no life without death. He would slay the coward himself, and anyone who tried to run.
 
     Grants you Sacraments of Power, a spell that makes you immune to all incoming damage and stamina damage for 5 seconds, the portion of absorbed damage will be sent back to attackers.
     Prevents you from shooting or attacking during the effect duration.
-    Takes about 1 second to activate. Disables choak of shadow effect.
+    Takes about 1 second to activate.
 
 knowledge-path-blade-s6-name = Stance of the Torn Champion
 knowledge-path-blade-s6-desc =
@@ -87,5 +87,5 @@ knowledge-path-blade-s9-desc =
     When completed, you will be surrounded in a constant, regenerating orbit of blades.
     These blades will protect you from all attacks, but are consumed on use.
     Your Furious Steel spell will also have a shorter cooldown.
-    Additionally, you become a master of combat, gaining the ability to waltz over slippery surfaces.
+    Additionally, you become a master of combat, gaining immunity to disarms on knockdown, as well as reducing stun and knockdown time by half.
     Your Sundered Blades will deal bonus damage and heal you on attack for a portion of the damage dealt.

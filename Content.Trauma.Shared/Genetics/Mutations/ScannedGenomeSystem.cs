@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Polymorph;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -66,6 +67,13 @@ public sealed class ScannedGenomeSystem : EntitySystem
         foreach (var id in mutatable.Dormant)
         {
             TryAddSequence(ent, id);
+        }
+
+        foreach (var (id, _) in mutatable.Mutations)
+        {
+            // only add non-dormant so they aren't duplicated
+            if (_mutation.IsForeign(mutatable, id))
+                TryAddSequence(ent, id);
         }
     }
 

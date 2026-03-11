@@ -49,6 +49,7 @@
     - state: star_ball
       shader: unshaded
   - type: Physics
+    canCollide: false
     bodyType: Dynamic
     linearDamping: 0
     angularDamping: 0

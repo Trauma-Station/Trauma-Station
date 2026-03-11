@@ -21,3 +21,4 @@
     maxReagents: 10
   # TODO: component based way of ignoring other metabolizers
   - type: Stomach
+  - type: UnremoveableOrgan

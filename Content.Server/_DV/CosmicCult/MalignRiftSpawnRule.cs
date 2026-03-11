@@ -16,9 +16,7 @@ using Content.Server.StationEvents.Events;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
-using Robust.Server.Audio;
 using Robust.Server.Player;
-using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
@@ -28,7 +26,6 @@ namespace Content.Server._DV.CosmicCult;
 public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRuleComponent>
 {
     [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
@@ -37,7 +34,7 @@ public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRule
 
     protected override void Added(EntityUid uid, MalignRiftSpawnRuleComponent comp, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {
-        if (!TryComp<StationEventComponent>(uid, out var stationEvent))
+        if (!TryComp<StationEventComponent>(uid, out _))
             return;
 
         AdminLogManager.Add(LogType.EventAnnounced, $"Event added / announced: {ToPrettyString(uid)}");
@@ -46,17 +43,6 @@ public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRule
     {
         base.Started(uid, comp, gameRule, args);
 
-        if (!TryGetRandomStation(out var chosenStation))
-            return;
-
-        if (!TryComp<StationDataComponent>(chosenStation, out var stationData))
-            return;
-
-        var grid = StationSystem.GetLargestGrid((chosenStation.Value, stationData));
-
-        if (grid is null)
-            return;
-
         if (_ticker.IsGameRuleActive<CosmicCultRuleComponent>())
         {
             _ticker.EndGameRule(uid); // Cosmic cult's active! Don't actually proceed to the contents of the gamerule!
@@ -64,16 +50,13 @@ public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRule
         else
         {
             var totalCrew = _playerMan.Sessions.Count(session => session.Status == SessionStatus.InGame && HasComp<HumanoidProfileComponent>(session.AttachedEntity));
-            var sender = Loc.GetString("cosmiccult-announcement-sender");
 
-            _chatSystem.DispatchStationAnnouncement(chosenStation.Value, Loc.GetString("cosmiccult-announce-tier2-progress"), sender, false, null, Color.FromHex("#4cabb3"));
-            _chatSystem.DispatchStationAnnouncement(chosenStation.Value, Loc.GetString("cosmiccult-announce-tier2-warning"), null, false, null, Color.FromHex("#cae8e8"));
-            _audio.PlayGlobal(comp.Tier2Sound, Filter.Broadcast(), false, AudioParams.Default);
+            _chatSystem.DispatchGlobalAnnouncement(Loc.GetString("cosmiccult-announce-tier2-warning"), null, true, comp.Tier2Sound, Color.FromHex("#cae8e8"));
 
             var lights = EntityQueryEnumerator<PoweredLightComponent>();
             while (lights.MoveNext(out var light, out _))
             {
-                if (!_rand.Prob(0.50f))
+                if (!_rand.Prob(0.60f))
                     continue;
                 _ghost.DoGhostBooEvent(light);
             }

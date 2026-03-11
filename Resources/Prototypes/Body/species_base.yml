@@ -18,13 +18,14 @@
   - type: CPRTraining # IPCs can try CPR i guess?? it won't work
   - type: StunVisuals
   - type: HasJobIcons
-  - type: LanguageKnowledge # all mobs should speak TauCeti unless otherwise specified, to prevent universal.
+  - type: LanguageSpeaker # all mobs should speak TauCeti unless otherwise specified, to prevent universal.
     speaks:
     - TauCetiBasic
     understands:
     - TauCetiBasic
   - type: BloodSplatterer
   - type: CanEscapeInventory
+  - type: CanBeShadowCocoon
   - type: Consciousness
     cap: 190
     threshold: 95
@@ -46,6 +47,10 @@
       150: Critical
       200: Dead
   - type: Mutatable
+  - type: Destructible
+    thresholds: [] # remove gib threshold, you can gib the torso instead
+  - type: Tackler
+  - type: KnowledgeHolder
   # </Trauma>
   # Shitmed - woundable visuals used instead
   #- type: DamageVisuals
@@ -179,8 +184,6 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      enum.StoreUiKey.Key: # Goob - changelings
-        type: StoreBoundUserInterface
   - type: Puller
   - type: Speech
     speechSounds: Alto

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -44,9 +45,7 @@ public sealed class DropRandomItemEffectSystem : EntityEffectSystem<HandsCompone
         if (_items.Count == 0)
             return;
 
-        // TODO: PredictedRandom when it's real
-        var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var item = rand.Pick(_items);
         if (!_hands.TryDrop(ent.AsNullable(), item)) // glued etc
             return;

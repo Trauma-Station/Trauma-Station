@@ -1,37 +1,8 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 TGRCDev <tgrc@tgrc.dev>
-// SPDX-FileCopyrightText: 2024 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Marcus F <marcus2008stoke@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 the biggest bruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 thebiggestbruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 thebiggestbruh <marcus2008stoke@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// <Trauma>
+using Content.Trauma.Common.MartialArts;
+// </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Actions;
@@ -39,7 +10,6 @@ using Content.Goobstation.Common.Body;
 using Content.Goobstation.Common.Changeling;
 using Content.Goobstation.Common.Conversion;
 using Content.Goobstation.Common.Magic;
-using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Medical;
 using Content.Goobstation.Server.Changeling.GameTicking.Rules;
 using Content.Goobstation.Server.Changeling.Objectives.Components;
@@ -48,7 +18,7 @@ using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
 using Content.Goobstation.Shared.Flashbang;
-using Content.Goobstation.Shared.MartialArts.Components;
+using Content.Goobstation.Shared.Overlays;
 using Content.Server.Actions;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -97,15 +67,17 @@ using Content.Shared.Preferences;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Revolutionary.Components;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
+using Content.Trauma.Common.Genetics.Mutations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Changeling;
@@ -113,6 +85,7 @@ namespace Content.Goobstation.Server.Changeling;
 public sealed partial class ChangelingSystem : SharedChangelingSystem
 {
     // this is one hell of a star wars intro text
+    [Dependency] private readonly CommonMutationSystem _mutation = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly StoreSystem _store = default!;
@@ -124,10 +97,10 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedEmpSystem _emp = default!;
@@ -245,7 +218,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         EnsureComp<FlashImmunityComponent>(uid);
         EnsureComp<EyeProtectionComponent>(uid);
 
-        var thermalVision = Factory.GetComponent<Shared.Overlays.ThermalVisionComponent>();
+        var thermalVision = Factory.GetComponent<ThermalVisionComponent>();
         thermalVision.Color = Color.FromHex("#FB9898");
         thermalVision.LightRadius = 15f;
         thermalVision.FlashDurationMultiplier = 2f;
@@ -347,6 +320,24 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     }
 
     #region Helper Methods
+
+    /// <summary>
+    /// Get the store from a mob's changeling mind role.
+    /// Returns null if it has no mind or no role.
+    /// </summary>
+    public Entity<StoreComponent>? GetStore(EntityUid mob)
+        => Mind.GetMind(mob) is {} mind && GetMindStore(mind) is {} store
+            ? store
+            : null;
+
+    /// <summary>
+    /// Get the store from a mind entity's changeling mind role.
+    /// Returns null if it has no role.
+    /// </summary>
+    public Entity<StoreComponent>? GetMindStore(Entity<MindComponent?> mind)
+        => _role.MindHasRole<ChangelingRoleComponent>(mind, out var role)
+            ? (role.Value.Owner, Comp<StoreComponent>(role.Value.Owner)) // will throw if the role is missing store component
+            : null;
 
     public void DoScreech(EntityUid uid, ChangelingIdentityComponent comp)
     {
@@ -538,7 +529,8 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         {
             Name = Name(target),
             DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
-            Profile = profile
+            Profile = profile,
+            Mutations = _mutation.GetMutatableData(target)
         };
 
         if (fingerprint.Fingerprint != null)
@@ -574,7 +566,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         var config = new PolymorphConfiguration
         {
-            Entity = (EntProtoId) pid,
+            Entity = pid.Value,
             TransferDamage = transferDamage,
             Forced = true,
             Inventory = (dropInventory) ? PolymorphInventoryChange.Drop : PolymorphInventoryChange.Transfer,
@@ -582,12 +574,26 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             RevertOnDeath = false
         };
 
-        var newUid = _polymorph.PolymorphEntity(uid, config);
+        if (!HasComp<ThermalVisionComponent>(uid))
+            Log.Error("Ling didnt have thermal vision!");
 
-        if (newUid == null)
+        if (_polymorph.PolymorphEntity(uid, config) is not {} newEnt)
             return null;
 
-        var newEnt = newUid.Value;
+        // exceptional comps check
+        // TODO make PolymorphedEvent handlers for all
+        List<Type> types = new()
+        {
+            typeof(FlashImmunityComponent),
+            typeof(EyeProtectionComponent),
+            typeof(NightVisionComponent),
+            typeof(ThermalVisionComponent),
+        };
+        foreach (var type in types)
+            _polymorph.CopyPolymorphComponent(uid, newEnt, type);
+
+        if (!HasComp<ThermalVisionComponent>(newEnt))
+            Log.Error("Ling didnt have thermal vision after transform!");
 
         if (data != null)
         {
@@ -598,22 +604,11 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             _metaData.SetEntityName(newEnt, data.Name);
             var message = Loc.GetString("changeling-transform-finish", ("target", data.Name));
             Popup.PopupEntity(message, newEnt, newEnt);
+            _mutation.LoadMutatableData(newEnt, data.Mutations);
         }
 
         // otherwise we can only transform once
         RemCompDeferred<PolymorphedEntityComponent>(newEnt);
-
-        // exceptional comps check
-        // TODO make PolymorphedEvent handlers for all
-        List<Type> types = new()
-        {
-            typeof(FlashImmunityComponent),
-            typeof(EyeProtectionComponent),
-            typeof(Shared.Overlays.NightVisionComponent),
-            typeof(Shared.Overlays.ThermalVisionComponent),
-        };
-        foreach (var type in types)
-            _polymorph.CopyPolymorphComponent(uid, newEnt, nameof(type));
 
         // CopyPolymorphComponent fails to copy the HumanoidProfileComponent in TransformData
         // outside of the first list item so this has to be done manually unfortunately
@@ -623,7 +618,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         RaiseNetworkEvent(new LoadActionsEvent(GetNetEntity(uid)), newEnt);
 
-        return newUid;
+        return newEnt;
     }
 
     public bool TryTransform(EntityUid target, ChangelingIdentityComponent comp, bool sting = false, bool persistentDna = false)
@@ -686,8 +681,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         RemComp<HungerComponent>(ent);
         RemComp<ThirstComponent>(ent);
         RemComp<CanHostGuardianComponent>(ent);
-        RemComp<MartialArtsKnowledgeComponent>(ent);
-        RemComp<CanPerformComboComponent>(ent);
         EnsureComp<ZombieImmuneComponent>(ent);
 
         // add actions

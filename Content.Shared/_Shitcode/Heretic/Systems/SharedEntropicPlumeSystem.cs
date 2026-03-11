@@ -52,7 +52,6 @@ public abstract class SharedEntropicPlumeSystem : EntitySystem
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -85,7 +84,7 @@ public abstract class SharedEntropicPlumeSystem : EntitySystem
 
         var affected = EnsureComp<EntropicPlumeAffectedComponent>(args.OtherEntity);
         affected.ExcludedEntity = CompOrNull<ProjectileComponent>(ent)?.Shooter ?? EntityUid.Invalid;
-        affected.Duration = MathF.Max(affected.Duration, ent.Comp.Duration);
+        affected.Duration = affected.Duration is { } duration ? MathF.Max(duration, ent.Comp.Duration) : null;
 
         var solution = new Solution();
         foreach (var reagent in ent.Comp.Reagents)
@@ -110,6 +109,9 @@ public abstract class SharedEntropicPlumeSystem : EntitySystem
             Amok();
 
             if (_net.IsClient)
+                continue;
+
+            if (affected.Duration == null)
                 continue;
 
             affected.Duration -= frameTime;

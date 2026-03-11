@@ -5,10 +5,8 @@ using Content.Shared.Radio.Components;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.Silicons;
-using Content.Shared.DoAfter;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC;
 using Content.Shared.Radio;
 using Content.Shared.Silicons.Borgs.Components;
@@ -23,10 +21,8 @@ public sealed class CosmicFragmentationSystem : EntitySystem
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly CosmicCultSystem _cult = default!;
     [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
 
     private ProtoId<RadioChannelPrototype> _cultRadio = "CosmicRadio";
@@ -57,8 +53,8 @@ public sealed class CosmicFragmentationSystem : EntitySystem
 
         args.Handled = true;
         _cult.MalignEcho(ent);
-        _actions.RemoveAction(ent.Owner, ent.Comp.CosmicFragmentationActionEntity);
-        ent.Comp.CosmicFragmentationActionEntity = default!;
+        ent.Comp.CosmicFragmentationActionEntity = null;
+        _actions.RemoveAction(ent.Owner, args.Action.Owner);
     }
 
     private void OnFragmentBorg(Entity<BorgChassisComponent> ent, ref MalignFragmentationEvent args)

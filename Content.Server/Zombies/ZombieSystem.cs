@@ -201,8 +201,8 @@ namespace Content.Server.Zombies
 
             // <Goob>
             var comp = EnsureComp<LanguageSpeakerComponent>(uid); // Ensure they can speak language before adding language.
-            var spoken = comp.UnderstoodLanguages;
-            var understood = comp.UnderstoodLanguages;
+            var spoken = comp.Understands;
+            var understood = comp.Understands;
             spoken.Clear();
             understood.Clear();
             if (!string.IsNullOrEmpty(component.ForcedLanguage)) // Should never be false, but security either way.

@@ -65,6 +65,9 @@ public sealed partial class RitualIngredient
     [DataField(required: true)]
     public EntityWhitelist Whitelist = new();
 
+    [DataField]
+    public EntityWhitelist? Blacklist;
+
     [DataField(required: true)]
     public LocId Name;
 }

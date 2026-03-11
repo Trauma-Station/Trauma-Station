@@ -4,3 +4,6 @@
   category: construction-category-misc
   targetNode: final
   objectType: Item
+  theory:
+    HandmadeKnowledge: 2
+    TechnologyKnowledge: 3

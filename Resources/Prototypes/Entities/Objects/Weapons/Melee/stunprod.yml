@@ -28,19 +28,21 @@
         Shock: 5
   - type: Stunbaton
     energyPerUse: 120
-  - type: MeleeWeapon # goob edited
-    angle: 0
+  - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
       types:
         Blunt: 9
+    angle: 0 # Trauma - was 60, git gud
     animation: WeaponArcThrust
-  - type: StaminaDamageOnHit # goob edited
-    damage: 15
+  - type: StaminaDamageOnHit
+    lightAttackDamageMultiplier: 4 # Trauma
+    damage: 15 # Trauma - was 35, more overtime damage instead
     overtime: 40
-    lightAttackDamageMultiplier: 4
-    lightAttackOvertimeDamageMultiplier: 0
     sound: /Audio/Weapons/egloves.ogg
+  #- type: StaminaDamageOnCollide # Trauma - throwing batongs being guaranteed stun is dogshit
+  #  damage: 35
+  #  sound: /Audio/Weapons/egloves.ogg
   - type: DelayedKnockdownOnHit # Goobstation
     useDelay: stunbaton
   - type: UseDelayBlockMelee # Goobstation

@@ -1,5 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 namespace Content.Medical.Common.Body;
+
+/// <summary>
+/// Raised after a body has its bodyparts added on mapinit.
+/// Useful to avoid having to order 20 systems after it.
+/// </summary>
+[ByRefEvent]
+public record struct BodyInitEvent();
 
 /// <summary>
 /// Event raised on the body then organ to allow prevention of insertion.

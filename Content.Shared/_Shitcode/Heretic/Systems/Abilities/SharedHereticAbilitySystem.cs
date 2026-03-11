@@ -5,6 +5,7 @@ using Content.Shared._Goobstation.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Events;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -21,6 +22,7 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Heretic;
+using Content.Shared.Jaunt;
 using Content.Shared.Magic.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
@@ -30,6 +32,7 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
@@ -37,6 +40,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
@@ -46,6 +50,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedDoAfterSystem DoAfter = default!;
@@ -76,9 +81,11 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedEmpSystem _emp = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
     [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
+    [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
 
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
 
@@ -98,6 +105,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             {"Poison", 1},
             {"Radiation", 1},
             {"Cellular", 1},
+            {"Ion", 1},
             {"Holy", 1},
         },
     };
@@ -114,9 +122,15 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         SubscribeFlesh();
         SubscribeSide();
 
-        SubscribeLocalEvent<EventHereticShadowCloak>(OnShadowCloak);
-
         SubscribeLocalEvent<HereticActionComponent, BeforeCastSpellEvent>(OnBeforeCast);
+        SubscribeLocalEvent<HereticActionComponent, ActionAttemptEvent>(OnAttempt);
+        SubscribeLocalEvent<JauntComponent, HereticMagicCastAttemptEvent>(OnJauntMagicAttempt);
+    }
+
+    private void OnAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
+    {
+        if (StatusNew.HasEffectComp<BlockHereticActionsStatusEffectComponent>(args.User))
+            args.Cancelled = true;
     }
 
     protected List<Entity<MobStateComponent>> GetNearbyPeople(EntityUid ent,
@@ -128,14 +142,12 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         var list = new List<Entity<MobStateComponent>>();
         var lookup = Lookup.GetEntitiesInRange<MobStateComponent>(coords ?? Transform(ent).Coordinates, range);
 
+        var ghoulQuery = GetEntityQuery<GhoulComponent>();
         foreach (var look in lookup)
         {
             // ignore heretics with the same path*, affect everyone else
             if (Heretic.TryGetHereticComponent(look.Owner, out var th, out _) && th.CurrentPath == path ||
-                HasComp<GhoulComponent>(look))
-                continue;
-
-            if (!HasComp<StatusEffectsComponent>(look))
+                ghoulQuery.HasComp(look))
                 continue;
 
             if (checkNullRod)
@@ -153,32 +165,6 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     }
 
 
-    private void OnShadowCloak(EventHereticShadowCloak args)
-    {
-        var ent = args.Performer;
-
-        if (!TryComp(ent, out StatusEffectsComponent? status))
-            return;
-
-        if (TryComp(ent, out ShadowCloakedComponent? shadowCloaked))
-        {
-            Status.TryRemoveStatusEffect(ent, args.Status, status, false);
-            RemCompDeferred(ent, shadowCloaked);
-            args.Handled = true;
-            return;
-        }
-
-        if (HasComp<SacramentsOfPowerComponent>(ent))
-            return;
-
-        // TryUseAbility only if we are not cloaked so that we can uncloak without focus
-        // Ideally you should uncloak when losing focus but whatever
-        if (!TryUseAbility(args))
-            return;
-
-        Status.TryAddStatusEffect<ShadowCloakedComponent>(ent, args.Status, args.Lifetime, true, status);
-    }
-
     public bool TryUseAbility(BaseActionEvent args, bool handle = true)
     {
         if (args.Handled)
@@ -191,9 +177,16 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         return result;
     }
 
+    private void OnJauntMagicAttempt(Entity<JauntComponent> ent, ref HereticMagicCastAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
     private void OnBeforeCast(Entity<HereticActionComponent> ent, ref BeforeCastSpellEvent args)
     {
-        if (HasComp<RustChargeComponent>(args.Performer))
+        var attemptEv = new HereticMagicCastAttemptEvent(args.Performer, ent);
+        RaiseLocalEvent(args.Performer, ref attemptEv);
+        if (attemptEv.Cancelled)
         {
             args.Cancelled = true;
             return;
@@ -353,8 +346,12 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         }
     }
 
-    public virtual void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user) where T : Component, ITouchSpell
+    public virtual void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user, TimeSpan? cooldownOverride = null)
+        where T : Component, ITouchSpell
     {
         _audio.PlayPredicted(ent.Comp.Sound, user, user);
+
+        var ev = new UserInvokeTouchSpellEvent();
+        RaiseLocalEvent(user, ref ev);
     }
 }

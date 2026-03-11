@@ -12,9 +12,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: EldritchInfluence
+  id: EldritchInfluenceBase
   name: reality shift
   description: Your eyes start to burn just from a single look. Should you delve deeper?
+  abstract: true
   placement:
     mode: SnapgridCenter
   components:
@@ -83,7 +84,43 @@
     prototype: EldritchInfluenceSpent
 
 - type: entity
-  parent: EldritchInfluence
+  parent: EldritchInfluenceBase
+  id: EldritchInfluenceT1
+  suffix: T1
+  components:
+  - type: Aura
+    auraFarm: 1
+    distortion: 0.01
+    auraColor: "#a6a600"
+  - type: EldritchInfluence
+    tier: 1
+
+- type: entity
+  parent: EldritchInfluenceBase
+  id: EldritchInfluenceT2
+  suffix: T2
+  components:
+  - type: Aura
+    auraFarm: 1
+    distortion: 0.02
+    auraColor: "#00a6a6"
+  - type: EldritchInfluence
+    tier: 2
+
+- type: entity
+  parent: EldritchInfluenceBase
+  id: EldritchInfluenceT3
+  suffix: T3
+  components:
+  - type: Aura
+    auraFarm: 1
+    distortion: 0.03
+    auraColor: "#a60000"
+  - type: EldritchInfluence
+    tier: 3
+
+- type: entity
+  parent: EldritchInfluenceBase
   id: EldritchInfluenceSpent
   name: reality fracture
   description: A reality fracture. Something keeps leaking out of it, should you really be near this thing?

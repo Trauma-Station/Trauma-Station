@@ -2,6 +2,7 @@ using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Shared.Heretic;
 using Content.Shared.Heretic.Prototypes;
+using Content.Shared.Polymorph;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 
@@ -128,6 +129,9 @@ public sealed partial class EffectsRitualEffect : BaseRitualEffect<EffectsRitual
 
 public sealed partial class SpawnRitualEffect : BaseRitualEffect<SpawnRitualEffect>
 {
+    [DataField]
+    public ProtoId<TagPrototype> ForceMinionTag = "ForceHereticMinion";
+
     [DataField(required: true)]
     public Dictionary<EntProtoId, int> Output;
 }
@@ -176,6 +180,9 @@ public sealed partial class GhoulifyEffect : BaseRitualEffect<GhoulifyEffect>
     public float Health = 150f;
 
     [DataField]
+    public bool ChangeAppearance = true;
+
+    [DataField]
     public bool CanDeconvert = true;
 
     [DataField]
@@ -185,6 +192,15 @@ public sealed partial class GhoulifyEffect : BaseRitualEffect<GhoulifyEffect>
 public sealed partial class SplitIngredientsRitualEffect : BaseRitualEffect<SplitIngredientsRitualEffect>
 {
     public override bool ForceApplyOnRitual => true;
+}
+
+// Can't use PolymorphEffect because result entity of polymorph should be saved
+public sealed partial class PolymorphRitualEffect : OutputRitualEffect<PolymorphRitualEffect>
+{
+    public override bool ForceApplyOnRitual => true;
+
+    [DataField(required: true)]
+    public ProtoId<PolymorphPrototype> Polymorph;
 }
 
 public sealed partial class IfElseRitualEffect : BaseRitualEffect<IfElseRitualEffect>

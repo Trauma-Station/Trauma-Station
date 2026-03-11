@@ -5,6 +5,7 @@
            xmlns:is="clr-namespace:Content.Shared.Input;assembly=Content.Shared"
            xmlns:xe="clr-namespace:Content.Client.UserInterface.XamlExtensions"
            xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+           xmlns:it="using:Content.Trauma.Common.Input"
            xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.MenuBar.Widgets"
            Name = "MenuButtons"
            VerticalExpand="False"
@@ -73,7 +74,7 @@
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
         />
-    <!-- <EE> -->
+    <!-- <EE> TODO: kill-->
     <ui:MenuButton
         Name="LanguageButton"
         Access="Internal"
@@ -87,14 +88,14 @@
     <!-- </EE> -->
     <ui:MenuButton
         Name="AdminButton"
-        Access="Internal"
+        Access="Public"
         Icon="{xe:Tex '/Textures/Interface/gavel.svg.192dpi.png'}"
         BoundKey = "{x:Static is:ContentKeyFunctions.OpenAdminMenu}"
         ToolTip="{Loc 'game-hud-open-admin-menu-button-tooltip'}"
         MinSize="42 64"
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
-        />
+        /> <!-- Trauma - made Public -->
     <ui:MenuButton
         Name="SandboxButton"
         Access="Internal"

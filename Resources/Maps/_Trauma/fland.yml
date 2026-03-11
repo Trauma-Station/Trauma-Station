@@ -4,8 +4,8 @@ meta:
   engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 02/17/2026 09:21:18
-  entityCount: 38188
+  time: 03/02/2026 23:01:04
+  entityCount: 38245
 maps:
 - 1
 grids:
@@ -30894,7 +30894,7 @@ entities:
   - uid: 2419
     components:
     - type: Transform
-      pos: -23.48766,40.683342
+      pos: -23.549582,41.292862
       parent: 2
   - uid: 2420
     components:
@@ -31415,7 +31415,7 @@ entities:
   - uid: 2519
     components:
     - type: Transform
-      pos: 82.49595,44.532063
+      pos: 81.42475,44.25512
       parent: 2
   - uid: 2520
     components:
@@ -31486,7 +31486,7 @@ entities:
   - uid: 2531
     components:
     - type: Transform
-      pos: 67.52288,53.53064
+      pos: 67.43533,54.54175
       parent: 2
   - uid: 2532
     components:
@@ -31538,7 +31538,7 @@ entities:
   - uid: 2540
     components:
     - type: Transform
-      pos: 0.5106485,-25.535755
+      pos: 0.4989831,-26.340582
       parent: 2
   - uid: 2541
     components:
@@ -114263,6 +114263,11 @@ entities:
       name: Captain's Quarters
 - proto: filingCabinetDrawerRandom
   entities:
+  - uid: 12215
+    components:
+    - type: Transform
+      pos: 60.5,44.5
+      parent: 2
   - uid: 17176
     components:
     - type: Transform
@@ -114397,11 +114402,6 @@ entities:
     components:
     - type: Transform
       pos: 71.5,54.5
-      parent: 2
-  - uid: 17204
-    components:
-    - type: Transform
-      pos: 59.5,45.5
       parent: 2
   - uid: 17205
     components:
@@ -166515,13 +166515,6 @@ entities:
     - type: Transform
       pos: 73.5,52.5
       parent: 2
-- proto: HolopadCommandBSO
-  entities:
-  - uid: 35213
-    components:
-    - type: Transform
-      pos: 76.5,35.5
-      parent: 2
 - proto: HolopadCommandCaptain
   entities:
   - uid: 35549
@@ -170570,7 +170563,7 @@ entities:
   - uid: 24940
     components:
     - type: Transform
-      pos: 3.4859185,-17.348791
+      pos: 3.3516307,-17.860474
       parent: 2
   - uid: 24941
     components:
@@ -171623,35 +171616,15 @@ entities:
       parent: 2
 - proto: PhoneInstrument
   entities:
-  - uid: 25117
-    components:
-    - type: Transform
-      pos: 39.469055,20.673697
-      parent: 2
   - uid: 25118
     components:
     - type: Transform
       pos: 48.971275,-7.253377
       parent: 2
-  - uid: 25119
-    components:
-    - type: Transform
-      pos: 84.37421,-10.431693
-      parent: 2
   - uid: 25120
     components:
     - type: Transform
       pos: 85.37198,30.590775
-      parent: 2
-  - uid: 25121
-    components:
-    - type: Transform
-      pos: 81.43642,44.078407
-      parent: 2
-  - uid: 25122
-    components:
-    - type: Transform
-      pos: 61.381676,57.322746
       parent: 2
 - proto: PianoInstrument
   entities:
@@ -188090,6 +188063,29 @@ entities:
     - type: Transform
       pos: 17.274406,13.366803
       parent: 2
+- proto: RMCRotaryPhoneWallmount
+  entities:
+  - uid: 38196
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -31.5,29.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Evac
+  - uid: 38212
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 47.5,4.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Solitary Confinement
+  - uid: 38237
+    components:
+    - type: Transform
+      pos: 0.5,70.5
+      parent: 2
 - proto: RobocopCircuitBoard
   entities:
   - uid: 27622
@@ -188104,6 +188100,398 @@ entities:
     - type: Transform
       pos: -19.486994,10.281514
       parent: 2
+- proto: RotaryPhoneStand
+  entities:
+  - uid: 38198
+    components:
+    - type: Transform
+      pos: 2.5,27.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Tools
+  - uid: 38208
+    components:
+    - type: Transform
+      pos: 39.5,-61.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: The Smiling Friends
+  - uid: 38209
+    components:
+    - type: Transform
+      pos: 25.5,-32.5
+      parent: 2
+  - uid: 38224
+    components:
+    - type: Transform
+      pos: 84.5,14.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Dorms
+  - uid: 38225
+    components:
+    - type: Transform
+      pos: 85.5,22.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Dorms 4
+  - uid: 38232
+    components:
+    - type: Transform
+      pos: 98.5,7.5
+      parent: 2
+  - uid: 38233
+    components:
+    - type: Transform
+      pos: -1.5,-0.5
+      parent: 2
+  - uid: 38234
+    components:
+    - type: Transform
+      pos: -53.5,50.5
+      parent: 2
+  - uid: 38236
+    components:
+    - type: Transform
+      pos: -20.5,56.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Library
+  - uid: 38240
+    components:
+    - type: Transform
+      pos: 43.5,41.5
+      parent: 2
+  - uid: 38241
+    components:
+    - type: Transform
+      pos: 50.5,38.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: EVA
+  - uid: 38242
+    components:
+    - type: Transform
+      pos: -18.5,-21.5
+      parent: 2
+  - uid: 38243
+    components:
+    - type: Transform
+      pos: 40.5,-11.5
+      parent: 2
+  - uid: 38244
+    components:
+    - type: Transform
+      pos: 71.5,13.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Pool
+- proto: RotaryPhoneStandCargo
+  entities:
+  - uid: 38199
+    components:
+    - type: Transform
+      pos: 3.5,-17.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Cargo
+  - uid: 38200
+    components:
+    - type: Transform
+      pos: 16.5,-19.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Cargo Bay
+  - uid: 38201
+    components:
+    - type: Transform
+      pos: 21.5,-13.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Mail Room
+- proto: RotaryPhoneStandCommand
+  entities:
+  - uid: 17204
+    components:
+    - type: Transform
+      pos: 39.5,20.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: HOS
+  - uid: 25117
+    components:
+    - type: Transform
+      pos: 84.5,-10.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: CE
+  - uid: 25119
+    components:
+    - type: Transform
+      pos: 82.5,44.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Captain's Quarters
+  - uid: 25121
+    components:
+    - type: Transform
+      pos: 61.5,57.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Conference Room
+  - uid: 38202
+    components:
+    - type: Transform
+      pos: 0.5,-25.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: QM
+  - uid: 38205
+    components:
+    - type: Transform
+      pos: 47.5,-41.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: RD
+  - uid: 38221
+    components:
+    - type: Transform
+      pos: 23.5,58.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: CMO
+  - uid: 38227
+    components:
+    - type: Transform
+      pos: 59.5,45.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: HOP
+  - uid: 38228
+    components:
+    - type: Transform
+      pos: 67.5,53.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Bridge
+  - uid: 38229
+    components:
+    - type: Transform
+      pos: 91.5,50.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Vault
+- proto: RotaryPhoneStandEngineering
+  entities:
+  - uid: 38222
+    components:
+    - type: Transform
+      pos: 76.5,-8.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Engineering
+  - uid: 38223
+    components:
+    - type: Transform
+      pos: 70.5,-24.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Atmos
+- proto: RotaryPhoneStandHidden
+  entities:
+  - uid: 38239
+    components:
+    - type: Transform
+      pos: 21.5,19.5
+      parent: 2
+  - uid: 38245
+    components:
+    - type: Transform
+      pos: 55.5,61.5
+      parent: 2
+- proto: RotaryPhoneStandMedical
+  entities:
+  - uid: 38216
+    components:
+    - type: Transform
+      pos: 14.5,39.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Medical
+  - uid: 38217
+    components:
+    - type: Transform
+      pos: 13.5,49.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Medical Theater
+  - uid: 38218
+    components:
+    - type: Transform
+      pos: 9.5,56.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Surgery
+  - uid: 38219
+    components:
+    - type: Transform
+      pos: 21.5,39.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Chem
+  - uid: 38220
+    components:
+    - type: Transform
+      pos: 36.5,43.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Viro
+- proto: RotaryPhoneStandScience
+  entities:
+  - uid: 38203
+    components:
+    - type: Transform
+      pos: 39.5,-21.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Robotics
+  - uid: 38204
+    components:
+    - type: Transform
+      pos: 50.5,-16.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Science
+  - uid: 38206
+    components:
+    - type: Transform
+      pos: 30.5,-35.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Genetics
+  - uid: 38207
+    components:
+    - type: Transform
+      pos: 31.5,-46.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: XenoBio
+  - uid: 38238
+    components:
+    - type: Transform
+      pos: 33.5,-37.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Break Room
+- proto: RotaryPhoneStandSecurity
+  entities:
+  - uid: 38197
+    components:
+    - type: Transform
+      pos: -23.5,40.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Detective
+  - uid: 38210
+    components:
+    - type: Transform
+      pos: 22.5,2.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Security
+  - uid: 38211
+    components:
+    - type: Transform
+      pos: 31.5,9.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Warden
+  - uid: 38213
+    components:
+    - type: Transform
+      pos: 42.5,15.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Brig
+  - uid: 38215
+    components:
+    - type: Transform
+      pos: 20.5,23.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Interrogation
+  - uid: 38230
+    components:
+    - type: Transform
+      pos: 71.5,33.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Lawyers Office
+  - uid: 38231
+    components:
+    - type: Transform
+      pos: 65.5,31.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Court Room
+  - uid: 38235
+    components:
+    - type: Transform
+      pos: -35.5,50.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Sec Evac
+- proto: RotaryPhoneStandSecurity911
+  entities:
+  - uid: 38214
+    components:
+    - type: Transform
+      pos: 32.5,7.5
+      parent: 2
+- proto: RotaryPhoneStandService
+  entities:
+  - uid: 25122
+    components:
+    - type: Transform
+      pos: -8.5,49.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Radio Host
+  - uid: 35213
+    components:
+    - type: Transform
+      pos: -18.5,23.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Bar
+  - uid: 38189
+    components:
+    - type: Transform
+      pos: -3.5,21.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Kitchen
+  - uid: 38190
+    components:
+    - type: Transform
+      pos: -3.5,39.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Botany
+  - uid: 38194
+    components:
+    - type: Transform
+      pos: -13.5,64.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Chapel
+  - uid: 38195
+    components:
+    - type: Transform
+      pos: 2.5,10.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Janitorial
 - proto: RubberStampApproved
   entities:
   - uid: 27624
@@ -204307,13 +204695,28 @@ entities:
     - type: Transform
       pos: 71.5,13.5
       parent: 2
-- proto: TapeDeck
-  entities:
-  - uid: 12215
+  - uid: 38191
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -8.5,49.5
+      parent: 2
+  - uid: 38192
+    components:
+    - type: Transform
+      pos: -7.5,50.5
+      parent: 2
+  - uid: 38226
+    components:
+    - type: Transform
+      pos: 59.5,45.5
+      parent: 2
+- proto: TapeDeck
+  entities:
+  - uid: 38193
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -8.5,48.5
       parent: 2
 - proto: TapeRecorderFilled
   entities:

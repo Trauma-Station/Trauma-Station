@@ -1,0 +1,456 @@
+- type: cargoProduct
+  id: RandomSkillbooks
+  icon:
+    sprite: Objects/Misc/books.rsi
+    state: book_icon
+  product: CrateRandomSkillbooks
+  cost: 2000
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateRandomSkillbooks
+  name: skillbooks crate
+  description: Contains skillbooks.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomSkillbook
+
+- type: entityTable
+  id: RandomSkillbook
+  table: !type:GroupSelector
+    children:
+    - id: BookStrength
+    - id: BookCombat
+    - id: BookSurgery
+    - id: BookMagicalLiteracy
+    - id: BookLiteracy
+    - id: BookJanitor
+    - id: BookLanguageTauCeti
+    - id: BookHandmade
+    - id: BookSurvival
+    - id: BookMaterials
+    - id: BookDoors
+    - id: BookAirlocks
+    - id: BookToys
+    - id: BookBananium
+    - id: BookBots
+    - id: BookFurniture
+    - id: BookInfrastructure
+    - id: BookElectronics
+    - id: BookWalls
+    - id: BookScience
+    - id: BookWindows
+    - id: BookSmokeables
+
+- type: entity
+  parent: BaseItem
+  id: BookSkillbook
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/skillbooks.rsi
+    layers:
+    - state: base
+  - type: StaticPrice
+    price: 20
+  - type: KnowledgeGrantOnUse
+    singleUse: false # crew books are for sharing
+  - type: Tag
+    tags:
+    - Book
+  - type: Item
+    size: Small
+
+# TODO: These should just give you an xp gain buff rather than make you stronge bruh
+- type: entity
+  parent: BookSkillbook
+  id: BookSchematic
+  name: blueprint
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/schematics.rsi
+
+- type: entity
+  parent: BookSkillbook
+  id: BookStrength
+  name: old book
+  suffix: strength
+  description: It contains drawn instructions of curl-ups and sit-ups.
+  components:
+  - type: Sprite
+    layers:
+    - state: strength
+  - type: KnowledgeGrantOnUse
+    skills:
+      StrengthKnowledge: 10
+      AthleticsKnowledge: 10
+      ToughnessKnowledge: 10
+    experience:
+      StrengthKnowledge: 3
+      AthleticsKnowledge: 3
+      ToughnessKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookCombat
+  name: old field book
+  suffix: melee
+  description: It contains drawn instructions about the basics of combat and weapons.
+  components:
+  - type: Sprite
+    layers:
+    - state: melee
+  - type: KnowledgeGrantOnUse
+    skills:
+      MeleeKnowledge: 12
+      ShootingKnowledge: 12
+      WeaponsKnowledge: 12
+    experience:
+      MeleeKnowledge: 3
+      ShootingKnowledge: 3
+      WeaponsKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookSurgery
+  name: old doctor's encyclopedia
+  suffix: surgery
+  description: It's from the early 2000s, but it describes what doctors need to know in a sticky situation.
+  components:
+  - type: Sprite
+    layers:
+    - state: surgery
+  - type: KnowledgeGrantOnUse
+    skills:
+      SurgeryKnowledge: 15
+      FirstAidKnowledge: 10
+    experience:
+      SurgeryKnowledge: 3
+      FirstAidKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookMagicalLiteracy
+  name: old tome
+  suffix: magical literacy
+  description: It contains drawn instructions of a man watching sigils pop out of the page.
+  components:
+  - type: Sprite
+    layers:
+    - state: magicalliteracy
+  - type: KnowledgeGrantOnUse
+    skills:
+      MagicalLiteracyKnowledge: 10
+    experience:
+      MagicalLiteracyKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookLiteracy
+  name: old picture book
+  suffix: literacy
+  description: Its a picture book.
+  components:
+  - type: Sprite
+    layers:
+    - state: literacy
+  - type: KnowledgeGrantOnUse
+    skills:
+      LiteracyKnowledge: 26
+    experience:
+      LiteracyKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookJanitor
+  name: janitor's old book
+  suffix: janitor
+  description: Its a book about the basics of janitoring.
+  components:
+  - type: Sprite
+    layers:
+    - state: janitor
+  - type: KnowledgeGrantOnUse
+    skills:
+      ThrowingKnowledge: 26
+      JanitorKnowledge: 26
+    experience:
+      ThrowingKnowledge: 3
+      JanitorKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookLanguageTauCeti
+  name: old book
+  suffix: Tau Ceti
+  description: Its a book on the basics of the Tau Ceti language.
+  components:
+  - type: Sprite
+    layers:
+    - state: TauCeti
+  - type: KnowledgeGrantOnUse
+    skills:
+      LanguageTauCetiBasic: 26
+    experience:
+      LanguageTauCetiBasic: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookHandmade
+  name: old book
+  suffix: handmade
+  description: Its a book on the basics of construction.
+  components:
+  - type: Sprite
+    layers:
+    - state: fabrication
+  - type: KnowledgeGrantOnUse
+    skills:
+      CraftingKnowledge: 10
+      HandmadeKnowledge: 10
+      TechnologyKnowledge: 10
+    experience:
+      CraftingKnowledge: 3
+      HandmadeKnowledge: 3
+      TechnologyKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSkillbook
+  id: BookSurvival
+  name: old book
+  suffix: survival
+  description: Its a book on the basics of survival.
+  components:
+  - type: Sprite
+    layers:
+    - state: fabrication
+  - type: KnowledgeGrantOnUse
+    skills:
+      HandmadeKnowledge: 10
+      SurvivalKnowledge: 26
+    experience:
+      HandmadeKnowledge: 3
+      SurvivalKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSchematic
+  id: BookMaterials
+  suffix: materials
+  description: A blueprint with designs for materials.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      MaterialsKnowledge: 26
+    experience:
+      MaterialsKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: materials
+
+- type: entity
+  parent: BookSchematic
+  id: BookDoors
+  suffix: doors
+  description: A blueprint with designs for doors.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      DoorsKnowledge: 26
+    experience:
+      DoorsKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: doors
+
+- type: entity
+  parent: BookSchematic
+  id: BookAirlocks
+  suffix: airlocks
+  description: A blueprint with designs for airlocks.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      AirlocksKnowledge: 26
+    experience:
+      AirlocksKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: airlocks
+
+- type: entity
+  parent: BookSchematic
+  id: BookToys
+  suffix: toys
+  description: A blueprint with designs for toys.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      ToysKnowledge: 26
+    experience:
+      ToysKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: toys
+
+- type: entity
+  parent: BookSchematic
+  id: BookBananium
+  suffix: bananium
+  description: A blueprint with designs for bananium structures.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      BananiumKnowledge: 26
+    experience:
+      BananiumKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: bananium
+
+- type: entity
+  parent: BookSchematic
+  id: BookBots
+  suffix: bots
+  description: A blueprint with designs for robots.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      BotsKnowledge: 26
+    experience:
+      BotsKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: bots
+
+- type: entity
+  parent: BookSchematic
+  id: BookFurniture
+  suffix: furniture
+  description: A blueprint with designs for furniture.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      FurnitureKnowledge: 26
+    experience:
+      FurnitureKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: furniture
+
+- type: entity
+  parent: BookSchematic
+  id: BookInfrastructure
+  suffix: infrastructure
+  description: A blueprint with designs for various pieces of infrastructure.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      InfrastructureKnowledge: 26
+    experience:
+      InfrastructureKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: infrastructure
+
+- type: entity
+  parent: BookSchematic
+  id: BookElectronics
+  suffix: electronics
+  description: A blueprint with designs for various electronics.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      ElectronicsKnowledge: 26
+    experience:
+      ElectronicsKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: electronics
+
+- type: entity
+  parent: BookSchematic
+  id: BookWalls
+  suffix: walls
+  description: A blueprint with designs for walls.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      WallsKnowledge: 26
+    experience:
+      WallsKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: walls
+
+- type: entity
+  parent: BookSkillbook
+  id: BookScience
+  name: old book
+  suffix: science
+  description: It's a book on the basics of science.
+  components:
+  - type: Sprite
+    layers:
+    - state: fabrication
+  - type: KnowledgeGrantOnUse
+    skills:
+      ScienceKnowledge: 26
+    experience:
+      ScienceKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: BookSchematic
+  id: BookWindows
+  suffix: windows
+  description: A blueprint with designs for windows.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      WindowsKnowledge: 26
+    experience:
+      WindowsKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: windows
+
+- type: entity
+  parent: BookSchematic
+  id: BookSmokeables
+  suffix: smokeables
+  description: A blueprint with designs for blunts.
+  components:
+  - type: KnowledgeGrantOnUse
+    skills:
+      SmokeablesKnowledge: 26
+    experience:
+      SmokeablesKnowledge: 3
+    doAfter: 2
+  - type: Sprite
+    layers:
+    - state: smokeables

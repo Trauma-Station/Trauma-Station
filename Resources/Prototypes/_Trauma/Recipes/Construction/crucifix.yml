@@ -9,3 +9,6 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  theory:
+    WeaponsKnowledge: 0
+    FurnitureKnowledge: 0

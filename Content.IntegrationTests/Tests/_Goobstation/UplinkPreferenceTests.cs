@@ -23,6 +23,7 @@ public sealed class UplinkPreferenceTests
     private EntityUid _player;
 
     private static readonly ProtoId<UplinkPreferencePrototype> PenPreference = "UplinkPen";
+    private static readonly ProtoId<ListingPrototype> ImplanterListing = "UplinkUplinkImplanter";
 
     [SetUp]
     public async Task Setup()
@@ -223,7 +224,7 @@ public sealed class UplinkPreferenceTests
             var store = entMan.GetComponent<StoreComponent>(implantStore!.Value);
             Assert.That(store.Balance.ContainsKey("Telecrystal"), Is.True);
 
-            var catalog = protoMan.Index<ListingPrototype>("UplinkUplinkImplanter");
+            var catalog = protoMan.Index(ImplanterListing);
             var implantCost = (int) catalog.Cost["Telecrystal"];
             var expectedBalance = startingBalance - implantCost;
             Assert.That((int) store.Balance["Telecrystal"], Is.EqualTo(expectedBalance),

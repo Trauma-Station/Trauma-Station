@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Factory;
@@ -31,7 +28,6 @@ public sealed class RadCollectorSignalSystem : EntitySystem
             if (!_automation.IsAutomated(uid))
                 continue;
 
-            var ent = (uid, comp);
             _appearance.TryGetData<int>(uid, RadiationCollectorVisuals.PressureState, out var rawState);
             var state = rawState switch
             {

@@ -1,0 +1,45 @@
+- type: phoneCategory
+  id: Command
+  text: phone-category-command
+  index: 1
+
+- type: phoneCategory
+  id: Security
+  text: phone-category-security
+  index: 2
+
+- type: phoneCategory
+  id: Engineering
+  text: phone-category-engineering
+  index: 3
+
+- type: phoneCategory
+  id: Cargo
+  text: phone-category-cargo
+  index: 4
+
+- type: phoneCategory
+  id: Medical
+  text: phone-category-medical
+  index: 5
+
+- type: phoneCategory
+  id: Science
+  text: phone-category-science
+  index: 6
+
+- type: phoneCategory
+  id: Service
+  text: phone-category-service
+  index: 7
+
+- type: phoneCategory
+  id: Uncategorized
+  text: phone-category-uncategorized
+  index: 8
+
+- type: phoneCategory
+  id: Hidden
+  text: phone-category-hidden
+  index: 9
+  hideInPhonebook: true

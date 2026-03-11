@@ -169,7 +169,7 @@
   - type: FootstepModifier # Trauma - revert upstream removal
     footstepSoundCollection:
       collection: FootstepBounce
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Kangaroo
     understands:
@@ -180,8 +180,6 @@
     - id: FoodMeat
       amount: 1
   - type: Fauna # Lavaland Change
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -203,8 +201,6 @@
   # <Goob>
   - type: VentCrawler
   - type: Fauna
-  - type: CombatPower
-    factor: 1.5 # times more dangerous than a crew-member
   # </Goob>
   - type: Sprite
     drawdepth: Mobs
@@ -269,7 +265,7 @@
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 4
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Xeno
     understands:
@@ -312,7 +308,7 @@
   components:
     # <Goob>
     - type: Fauna
-    - type: LanguageKnowledge
+    - type: LanguageSpeaker
       speaks:
       - Xeno
       understands:

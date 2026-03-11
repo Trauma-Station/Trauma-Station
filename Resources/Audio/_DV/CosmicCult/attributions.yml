@@ -26,7 +26,7 @@
   - projectile_razor_reload.ogg
   - projectile_razor.ogg
   - insert_entropy.ogg
-  - tier2.ogg
+  - tier1.ogg
   - tier3.ogg
   - tile_detonate.ogg
   - spire_draining.ogg
@@ -86,4 +86,15 @@
   - colossus_scream.ogg
   license: "CC-BY-SA-3.0"
   copyright: "By widgetbeck for Cosmic Cult. Made using a combination of (Creative Commons 0) samples from freesound.org."
+  source: "https://freesound.org/"
+
+- files:
+  - tier2.ogg
+  - conversion_start.ogg
+  - conversion_end.ogg
+  - helmet_on.ogg
+  - helmet_off.ogg
+  - ability_stride.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Made by NoElkaTheGod(GitHub) using a combination of other SS14 assets."
   source: "https://freesound.org/"

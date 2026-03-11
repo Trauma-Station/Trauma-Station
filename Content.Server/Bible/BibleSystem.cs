@@ -110,6 +110,11 @@ namespace Content.Server.Bible
                 return;
             }
 
+            // <Trauma>
+            var bibleUsedEv = new BibleUsedEvent();
+            RaiseLocalEvent(args.Target.Value, ref bibleUsedEv);
+            // </Trauma>
+
             if (!HasComp<BibleUserComponent>(args.User))
             {
                 _popupSystem.PopupEntity(Loc.GetString("bible-sizzle"), args.User, args.User);

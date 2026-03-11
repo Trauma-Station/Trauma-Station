@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Stunnable;
+// </Trauma>
 using Content.Shared.Buckle.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
@@ -17,24 +20,35 @@ public sealed class LegsParalyzedSystem : EntitySystem
         SubscribeLocalEvent<LegsParalyzedComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<LegsParalyzedComponent, BuckledEvent>(OnBuckled);
         SubscribeLocalEvent<LegsParalyzedComponent, UnbuckledEvent>(OnUnbuckled);
+        // <Trauma>
+        /* no
         SubscribeLocalEvent<LegsParalyzedComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
         SubscribeLocalEvent<LegsParalyzedComponent, UpdateCanMoveEvent>(OnUpdateCanMoveEvent);
+        */
+        // </Trauma>
     }
 
     private void OnStartup(EntityUid uid, LegsParalyzedComponent component, ComponentStartup args)
     {
         // TODO: In future probably must be surgery related wound
-        _movementSpeedModifierSystem.ChangeBaseSpeed(uid, 0, 0, 20);
+        // </Trauma>
+        EnsureComp<KnockedDownComponent>(uid);
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(uid);
+        // <Trauma>
     }
 
     private void OnShutdown(EntityUid uid, LegsParalyzedComponent component, ComponentShutdown args)
     {
-        _standingSystem.Stand(uid);
+        // <Trauma>
+        // _standingSystem.Stand(uid);
+        RemCompDeferred<KnockedDownComponent>(uid);
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(uid);
+        // </Trauma>
     }
 
     private void OnBuckled(EntityUid uid, LegsParalyzedComponent component, ref BuckledEvent args)
     {
-        _standingSystem.Stand(uid);
+        _standingSystem.Stand(uid, force: true); // Trauma;
     }
 
     private void OnUnbuckled(EntityUid uid, LegsParalyzedComponent component, ref UnbuckledEvent args)
@@ -42,13 +56,16 @@ public sealed class LegsParalyzedSystem : EntitySystem
         _standingSystem.Down(uid);
     }
 
+    /* Trauma - this prevented using a wheelchair
     private void OnUpdateCanMoveEvent(EntityUid uid, LegsParalyzedComponent component, UpdateCanMoveEvent args)
     {
         args.Cancel();
     }
 
+    // and this makes no sense.. why would you not be able to throw shit away
     private void OnThrowPushbackAttempt(EntityUid uid, LegsParalyzedComponent component, ThrowPushbackAttemptEvent args)
     {
         args.Cancel();
     }
+    */
 }

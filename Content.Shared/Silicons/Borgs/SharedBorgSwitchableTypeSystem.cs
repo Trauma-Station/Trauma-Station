@@ -151,6 +151,10 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
             {
                 State = movementState,
             };
+            // <Trauma> - dirty it
+            DirtyField(entity, spriteMovement, nameof(SpriteMovementComponent.NoMovementLayers));
+            DirtyField(entity, spriteMovement, nameof(SpriteMovementComponent.MovementLayers));
+            // </Trauma>
         }
         else
         {

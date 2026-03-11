@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Healing;
@@ -90,8 +92,9 @@ public sealed partial class ConsciousnessSystem
     private void ClearPain(Entity<ConsciousnessComponent> ent)
     {
         // remove all pain modifiers and multipliers from the brain
-        if (ent.Comp.NerveSystem is {} brain)
+        if (ent.Comp.NerveSystem != default)
         {
+            var brain = ent.Comp.NerveSystem;
             foreach (var painModifier in brain.Comp.Modifiers.Keys)
                 _pain.TryRemovePainModifier(brain.Owner,
                     painModifier.Item1,

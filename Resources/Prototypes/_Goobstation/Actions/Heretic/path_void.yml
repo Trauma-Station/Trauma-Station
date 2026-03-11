@@ -12,7 +12,6 @@
   id: ActionHereticVoidPhase
   name: Void Phase
   description: Lets you blink to your pointed destination, causes 3x3 aoe damage bubble around your pointed destination and your current location.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -41,7 +40,6 @@
   id: ActionHereticVoidPrison
   name: Void Prison
   description: Sends a heathen into the void for 10 seconds. They will be unable to perform any actions for the duration. Afterwards, they will be chilled and returned to the mortal plane.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     predicted: false
@@ -72,7 +70,6 @@
   id: ActionHereticVoidPull
   name: Void Pull
   description: Calls the void, damaging, knocking down, pulling people closer, and stunning people nearby.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 30
@@ -98,7 +95,6 @@
   id: ActionHereticVoidConduit
   name: Void Conduit
   description: Opens a gate to the Void; it releases an intermittent pulse that damages windows and airlocks, while afflicting Heathens with void chill. Affected Heretics instead receive low pressure resistance.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     useDelay: 60

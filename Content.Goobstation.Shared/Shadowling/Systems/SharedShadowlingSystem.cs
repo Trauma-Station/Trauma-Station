@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Conversion;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.LightDetection.Components;

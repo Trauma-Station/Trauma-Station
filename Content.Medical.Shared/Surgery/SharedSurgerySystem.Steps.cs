@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Surgery;
 using Content.Medical.Common.Surgery.Tools;
@@ -311,14 +312,15 @@ public abstract partial class SharedSurgerySystem
 
     private void OnRemovePartStep(Entity<SurgeryRemovePartStepComponent> ent, ref SurgeryStepEvent args)
     {
-        if (!_organQuery.TryComp(args.Part, out var organ) || organ.Body != args.Body)
+        if (!_organQuery.TryComp(args.Part, out var organ) ||
+            organ.Body != args.Body ||
+            _part.GetParentPart(args.Part) is not {} parent)
             return;
 
-        if (_part.GetParentPart(args.Part) is not {} parent)
-            return;
-
-        _wounds.AmputateWoundableSafely(parent, args.Part);
-        _hands.TryPickupAnyHand(args.User, args.Part);
+        if (_wounds.AmputateWoundableSafely(parent, args.Part))
+            _hands.TryPickupAnyHand(args.User, args.Part);
+        else
+            _popup.PopupClient(Loc.GetString("surgery-popup-step-SurgeryStepRemovePart-failed"), args.User, args.User);
     }
 
     private void OnRemovePartCheck(Entity<SurgeryRemovePartStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)

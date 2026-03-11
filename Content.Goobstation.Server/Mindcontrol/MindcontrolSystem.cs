@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Mindcontrol;
@@ -39,7 +29,7 @@ public sealed class MindcontrolSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    [ValidatePrototypeId<EntityPrototype>] static EntProtoId mindRole = "MindRoleBrainwashed";
+    private static EntProtoId MindRole = "MindRoleBrainwashed";
 
     public override void Initialize()
     {
@@ -73,7 +63,7 @@ public sealed class MindcontrolSystem : EntitySystem
         if (!_mindSystem.TryGetMind(uid, out var mindId, out var mind))   //no mind, how can you mindcontrol whit no mind?
             return;
 
-        _roleSystem.MindAddRole(mindId, mindRole.Id, silent: true);
+        _roleSystem.MindAddRole(mindId, MindRole, silent: true);
 
         if (_roleSystem.MindHasRole<MindcontrolledRoleComponent>(mindId, out var mr))
             AddComp(mr.Value, new RoleBriefingComponent { Briefing = MakeBriefing(component.Master.Value) }, true);

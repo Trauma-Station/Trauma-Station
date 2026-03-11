@@ -7,10 +7,11 @@
   targetNode: gear
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 0
+  practical:
+    TechnologyKnowledge: 0
+    HandmadeKnowledge: 1
 
 - type: construction
   id: RevBolt
@@ -19,10 +20,11 @@
   targetNode: bolt
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 0
+  practical:
+    TechnologyKnowledge: 0
+    HandmadeKnowledge: 1
 
 - type: construction
   id: RevNut
@@ -31,7 +33,8 @@
   targetNode: nut
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 0
+  practical:
+    TechnologyKnowledge: 0
+    HandmadeKnowledge: 1

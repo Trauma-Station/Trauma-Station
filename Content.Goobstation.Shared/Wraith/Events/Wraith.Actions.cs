@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Robust.Shared.Prototypes;
@@ -16,7 +18,7 @@ public sealed partial class BloodWritingEvent : InstantActionEvent;
 public sealed partial class AbsorbCorpseEvent : EntityTargetActionEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class AbsorbCorpseDoAfter : SimpleDoAfterEvent;
+public sealed partial class AbsorbCorpseDoAfterEvent : SimpleDoAfterEvent;
 
 public sealed partial class SpookEvent : WorldTargetActionEvent;
 

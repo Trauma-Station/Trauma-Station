@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.CCVar;
 using Content.Server.Popups;
 using Content.Server.Station.Components;

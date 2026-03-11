@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.DeviceLinking;
 using Content.Shared.Research.Prototypes;
 using Robust.Shared.Prototypes;

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Shared.Abductor;
 using Content.Medical.Client.Choice.UI;
 using static Content.Shared.Pinpointer.SharedNavMapSystem;

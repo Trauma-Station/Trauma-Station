@@ -1,0 +1,11 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<BoxContainer xmlns="https://spacestation14.io"
+        Orientation="Horizontal">
+    <Label Name="SkillLabel" HorizontalExpand="True"/>
+    <Button Name="DecreaseButton" Text=" - "/>
+    <Label Name="MasteryLabel" MinWidth="120" HorizontalAlignment="Center"/>
+    <Button Name="IncreaseButton" Text=" + "/>
+</BoxContainer>

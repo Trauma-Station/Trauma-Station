@@ -1,39 +1,5 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Alice "Arimah" Heurlin <30327355+arimah@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 HS <81934438+HolySSSS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Truoizys <153248924+Truoizys@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 osjarw <62134478+osjarw@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
@@ -49,19 +15,15 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Nyanotrasen.Item.PseudoItem;
 
-public abstract partial class SharedPseudoItemSystem : EntitySystem
+public sealed partial class SharedPseudoItemSystem : EntitySystem
 {
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
-    [ValidatePrototypeId<TagPrototype>]
-    private const string PreventTag = "PreventLabel";
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string SleepActionId = "ActionSleep"; // The action used for sleeping inside bags. Currently uses the default sleep action (same as beds)
+    private static readonly ProtoId<TagPrototype> PreventTag = "PreventLabel";
 
     public override void Initialize()
     {
@@ -128,10 +90,6 @@ public abstract partial class SharedPseudoItemSystem : EntitySystem
             return false;
         }
 
-        // If the storage allows sleeping inside, add the respective action
-        if (HasComp<AllowsSleepInsideComponent>(storageUid))
-            _actions.AddAction(toInsert, ref component.SleepAction, SleepActionId, toInsert);
-
         component.Active = true;
         return true;
     }
@@ -143,11 +101,9 @@ public abstract partial class SharedPseudoItemSystem : EntitySystem
 
         RemComp<ItemComponent>(uid);
         component.Active = false;
-
-        _actions.RemoveAction(uid, component.SleepAction); // Remove sleep action if it was added
     }
 
-    protected virtual void OnGettingPickedUpAttempt(EntityUid uid, PseudoItemComponent component,
+    private void OnGettingPickedUpAttempt(EntityUid uid, PseudoItemComponent component,
         GettingPickedUpAttemptEvent args)
     {
         if (args.User == args.Item)
@@ -187,7 +143,7 @@ public abstract partial class SharedPseudoItemSystem : EntitySystem
         args.Handled = TryInsert(args.Args.Used.Value, uid, component);
     }
 
-    protected void StartInsertDoAfter(EntityUid inserter, EntityUid toInsert, EntityUid storageEntity,
+    private void StartInsertDoAfter(EntityUid inserter, EntityUid toInsert, EntityUid storageEntity,
         PseudoItemComponent? pseudoItem = null)
     {
         if (!Resolve(toInsert, ref pseudoItem))

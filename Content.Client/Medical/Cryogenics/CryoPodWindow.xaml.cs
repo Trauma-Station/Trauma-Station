@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Shared._Shitmed.Medical.HealthAnalyzer;
 using Content.Shared.Body;
-using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Linq;
 using System.Numerics;

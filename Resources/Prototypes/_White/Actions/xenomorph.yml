@@ -223,6 +223,7 @@
   components:
   - type: Action
     priority: 0
+    raiseOnUser: true # TODO: make plasma vessel use body properly
     icon: { sprite : _White/Interface/Actions/xenomorph.rsi, state: plasma_transfer_off }
     iconOn: { sprite : _White/Interface/Actions/xenomorph.rsi, state: plasma_transfer_on }
   - type: TargetAction

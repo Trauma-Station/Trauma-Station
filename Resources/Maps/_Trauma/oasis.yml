@@ -4,8 +4,8 @@ meta:
   engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 02/07/2026 14:54:58
-  entityCount: 30330
+  time: 03/03/2026 22:18:30
+  entityCount: 30386
 maps:
 - 1
 grids:
@@ -526,7 +526,6 @@ entities:
           decals:
             3913: -41.080894,52.93671
             3917: -48.956787,19.06519
-            3920: 62.79986,-38.468395
         - node:
             color: '#FFFFFFFF'
             id: Basalt3
@@ -6038,10 +6037,55 @@ entities:
             3804: -17,7
             3805: -17,8
         - node:
+            cleanable: True
+            color: '#FF0000FF'
+            id: a
+          decals:
+            4009: 62.392197,-39.13077
+        - node:
+            cleanable: True
+            color: '#FF0000FF'
+            id: arrow
+          decals:
+            4015: 61.856255,-38.169765
+            4016: 61.85582,-37.591663
+            4017: 61.85582,-37.091663
+        - node:
             color: '#000000FF'
             id: body
           decals:
             3704: -43,50
+        - node:
+            cleanable: True
+            color: '#FF0000FF'
+            id: c
+          decals:
+            4008: 62.09532,-39.115147
+        - node:
+            cleanable: True
+            color: '#FF0000FF'
+            id: e
+          decals:
+            4013: 63.829697,-39.25577
+        - node:
+            cleanable: True
+            color: '#FF0000FF'
+            id: heart
+          decals:
+            4014: 64.28282,-39.50577
+        - node:
+            cleanable: True
+            color: '#FF0000FF'
+            id: l
+          decals:
+            4010: 62.65782,-39.177647
+            4011: 62.90782,-39.19327
+        - node:
+            cleanable: True
+            color: '#FF0000FF'
+            id: m
+          decals:
+            4012: 63.360947,-39.16202
         - node:
             cleanable: True
             color: '#B32828FF'
@@ -8300,6 +8344,8 @@ entities:
       id: Oasis
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
+    - type: TileHistory
+      chunkHistory: {}
   - uid: 22618
     components:
     - type: MetaData
@@ -9382,6 +9428,8 @@ entities:
     - type: NavMap
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
+    - type: TileHistory
+      chunkHistory: {}
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 3
@@ -9394,6 +9442,26 @@ entities:
     - type: Transform
       pos: 19.476593,-4.469906
       parent: 22618
+- proto: ActionToggleLight
+  entities:
+  - uid: 29344
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 15703
+    - type: Action
+      originalIconColor: '#FFFFFFFF'
+      container: 15703
+  - uid: 30346
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 30014
+    - type: Action
+      originalIconColor: '#FFFFFFFF'
+      container: 30014
 - proto: AirAlarm
   entities:
   - uid: 5
@@ -13320,6 +13388,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 18.5,-46.5
       parent: 2
+    - type: Door
+      secondsUntilStateChange: -2341.198
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
   - uid: 29111
     components:
     - type: Transform
@@ -35971,7 +36045,7 @@ entities:
   - uid: 1165
     components:
     - type: Transform
-      pos: 20.5,-30.5
+      pos: 20.510172,-30.455076
       parent: 2
 - proto: BedsheetSpawner
   entities:
@@ -36091,6 +36165,28 @@ entities:
     components:
     - type: Transform
       pos: -49.5,-14.5
+      parent: 2
+- proto: BenchSofaCorner
+  entities:
+  - uid: 30370
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -30.5,-26.5
+      parent: 2
+  - uid: 30371
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -30.5,-28.5
+      parent: 2
+- proto: BenchSofaMiddle
+  entities:
+  - uid: 30341
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -30.5,-27.5
       parent: 2
 - proto: BerrySeeds
   entities:
@@ -36617,7 +36713,7 @@ entities:
   - uid: 1269
     components:
     - type: Transform
-      pos: 11.484307,-41.35475
+      pos: 10.85519,-41.38646
       parent: 2
   - uid: 1271
     components:
@@ -36629,7 +36725,7 @@ entities:
   - uid: 21831
     components:
     - type: Transform
-      pos: 24.529016,-53.731926
+      pos: 24.688463,-54.050465
       parent: 2
   - uid: 30024
     components:
@@ -36757,7 +36853,7 @@ entities:
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -53.241848,9.595246
+      pos: -52.778152,9.369149
       parent: 2
   - uid: 29536
     components:
@@ -36871,8 +36967,7 @@ entities:
   - uid: 1327
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -53.658516,9.595246
+      pos: -52.293777,9.458198
       parent: 2
 - proto: BoxFolderWhite
   entities:
@@ -37070,7 +37165,7 @@ entities:
   - uid: 29538
     components:
     - type: Transform
-      pos: 24.518957,-53.208946
+      pos: 24.500963,-54.144215
       parent: 2
 - proto: BoxZiptie
   entities:
@@ -76257,23 +76352,11 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 19.5,-6.5
       parent: 2
-  - uid: 7762
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -29.5,-27.5
-      parent: 2
   - uid: 7763
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -29.5,-39.5
-      parent: 2
-  - uid: 7764
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -30.5,-28.5
       parent: 2
   - uid: 7765
     components:
@@ -76508,24 +76591,7 @@ entities:
   - uid: 7799
     components:
     - type: Transform
-      pos: 39.479088,15.666133
-      parent: 2
-- proto: ChemDispenser
-  entities:
-  - uid: 7800
-    components:
-    - type: Transform
-      pos: -12.5,-38.5
-      parent: 2
-  - uid: 7801
-    components:
-    - type: Transform
-      pos: -12.5,-42.5
-      parent: 2
-  - uid: 7802
-    components:
-    - type: Transform
-      pos: -16.5,-38.5
+      pos: 39.495884,15.659265
       parent: 2
 - proto: ChemDispenserEmpty
   entities:
@@ -91283,6 +91349,23 @@ entities:
       parent: 10023
     - type: Physics
       canCollide: False
+- proto: EnergyChemDispenser
+  entities:
+  - uid: 7800
+    components:
+    - type: Transform
+      pos: -12.5,-38.5
+      parent: 2
+  - uid: 7801
+    components:
+    - type: Transform
+      pos: -12.5,-42.5
+      parent: 2
+  - uid: 7802
+    components:
+    - type: Transform
+      pos: -16.5,-38.5
+      parent: 2
 - proto: EngineeringTechFab
   entities:
   - uid: 10025
@@ -96905,7 +96988,7 @@ entities:
   - uid: 19228
     components:
     - type: Transform
-      pos: -15.49664,7.620792
+      pos: -15.536669,7.6030946
       parent: 2
 - proto: FoodPieBananaCream
   entities:
@@ -135770,13 +135853,6 @@ entities:
     - type: Transform
       pos: 31.5,7.5
       parent: 2
-- proto: HolopadCommandBSO
-  entities:
-  - uid: 29344
-    components:
-    - type: Transform
-      pos: 35.5,6.5
-      parent: 2
 - proto: HolopadCommandCaptain
   entities:
   - uid: 29353
@@ -137084,8 +137160,24 @@ entities:
   - uid: 15703
     components:
     - type: Transform
-      pos: 15.606347,-30.289124
+      pos: 13.364389,-30.28149
       parent: 2
+    - type: HandheldLight
+      toggleActionEntity: 29344
+    - type: ContainerContainer
+      containers:
+        cell_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        actions: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 29344
+    - type: Physics
+      canCollide: True
+    - type: ActionsContainer
   - uid: 30011
     components:
     - type: Transform
@@ -137175,8 +137267,24 @@ entities:
   - uid: 30014
     components:
     - type: Transform
-      pos: -6.4893827,38.858273
+      pos: -6.652505,38.772568
       parent: 2
+    - type: HandheldLight
+      toggleActionEntity: 30346
+    - type: ContainerContainer
+      containers:
+        cell_slot: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        actions: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 30346
+    - type: Physics
+      canCollide: True
+    - type: ActionsContainer
 - proto: LampInterrogator
   entities:
   - uid: 15620
@@ -138720,7 +138828,7 @@ entities:
   - uid: 15792
     components:
     - type: Transform
-      pos: 26.491709,9.530283
+      pos: 25.75338,9.61715
       parent: 2
   - uid: 15793
     components:
@@ -138776,7 +138884,7 @@ entities:
   - uid: 15804
     components:
     - type: Transform
-      pos: 26.205177,9.57671
+      pos: 25.97213,9.80465
       parent: 2
 - proto: MeleeHammer
   entities:
@@ -138918,7 +139026,7 @@ entities:
   - uid: 15821
     components:
     - type: Transform
-      pos: -8.51768,36.61304
+      pos: -6.487292,38.553864
       parent: 2
 - proto: MopBucketFull
   entities:
@@ -139155,7 +139263,7 @@ entities:
   - uid: 15379
     components:
     - type: Transform
-      pos: 26.705456,9.654789
+      pos: 25.192013,9.851525
       parent: 2
   - uid: 15845
     components:
@@ -139788,8 +139896,7 @@ entities:
   - uid: 15921
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -8.541683,-34.4906
+      pos: -8.736061,-34.556614
       parent: 2
   - uid: 15922
     components:
@@ -140335,7 +140442,7 @@ entities:
   - uid: 15996
     components:
     - type: Transform
-      pos: 24.007292,15.691906
+      pos: 24.013676,15.714004
       parent: 2
 - proto: PianoInstrument
   entities:
@@ -144676,11 +144783,6 @@ entities:
       parent: 2
 - proto: Rack
   entities:
-  - uid: 393
-    components:
-    - type: Transform
-      pos: -40.5,-35.5
-      parent: 2
   - uid: 682
     components:
     - type: Transform
@@ -152115,6 +152217,18 @@ entities:
     - type: Transform
       pos: 36.24835,-37.27649
       parent: 2
+- proto: RMCRotaryPhoneWallmount
+  entities:
+  - uid: 30363
+    components:
+    - type: Transform
+      pos: -14.5,18.5
+      parent: 2
+  - uid: 30385
+    components:
+    - type: Transform
+      pos: 62.5,-35.5
+      parent: 2
 - proto: RobocopCircuitBoard
   entities:
   - uid: 17683
@@ -152142,6 +152256,357 @@ entities:
     - type: Transform
       pos: -13.504687,-31.240498
       parent: 2
+- proto: RotaryPhoneStand
+  entities:
+  - uid: 30331
+    components:
+    - type: Transform
+      pos: 12.5,12.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Shop
+  - uid: 30374
+    components:
+    - type: Transform
+      pos: -16.5,19.5
+      parent: 2
+  - uid: 30375
+    components:
+    - type: Transform
+      pos: -16.5,29.5
+      parent: 2
+  - uid: 30378
+    components:
+    - type: Transform
+      pos: 61.5,14.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: AI Core
+  - uid: 30380
+    components:
+    - type: Transform
+      pos: 33.5,-57.5
+      parent: 2
+  - uid: 30381
+    components:
+    - type: Transform
+      pos: -3.5,-61.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Arrivals
+  - uid: 30382
+    components:
+    - type: Transform
+      pos: -48.5,27.5
+      parent: 2
+  - uid: 30384
+    components:
+    - type: Transform
+      pos: -53.5,-36.5
+      parent: 2
+  - uid: 30386
+    components:
+    - type: Transform
+      pos: 9.5,6.5
+      parent: 22618
+    - type: RotaryPhoneHolder
+      name: Perma Exile
+- proto: RotaryPhoneStandCargo
+  entities:
+  - uid: 30360
+    components:
+    - type: Transform
+      pos: -47.5,1.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Cargo
+  - uid: 30361
+    components:
+    - type: Transform
+      pos: -56.5,0.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Cargo Bay
+  - uid: 30383
+    components:
+    - type: Transform
+      pos: -55.5,-20.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Salv
+- proto: RotaryPhoneStandCommand
+  entities:
+  - uid: 19281
+    components:
+    - type: Transform
+      pos: 38.5,16.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Captain's Quaters
+  - uid: 30332
+    components:
+    - type: Transform
+      pos: -24.5,-35.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: CMO
+  - uid: 30345
+    components:
+    - type: Transform
+      pos: 13.5,-30.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: RD
+  - uid: 30347
+    components:
+    - type: Transform
+      pos: 23.5,16.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Briefing Room
+  - uid: 30348
+    components:
+    - type: Transform
+      pos: 26.5,9.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Bridge
+  - uid: 30350
+    components:
+    - type: Transform
+      pos: 36.5,8.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: NTR Office
+  - uid: 30354
+    components:
+    - type: Transform
+      pos: 42.5,-41.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: HOS
+  - uid: 30356
+    components:
+    - type: Transform
+      pos: 41.5,-4.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: HOP
+  - uid: 30359
+    components:
+    - type: Transform
+      pos: -47.5,-7.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Vault
+  - uid: 30362
+    components:
+    - type: Transform
+      pos: -53.5,9.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: QM
+  - uid: 30364
+    components:
+    - type: Transform
+      pos: 3.5,44.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: CE
+  - uid: 30367
+    components:
+    - type: Transform
+      pos: 29.5,20.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Captain's Office
+  - uid: 30368
+    components:
+    - type: Transform
+      pos: 15.5,-30.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: RD
+- proto: RotaryPhoneStandEngineering
+  entities:
+  - uid: 30365
+    components:
+    - type: Transform
+      pos: 8.5,35.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Engineering
+  - uid: 30366
+    components:
+    - type: Transform
+      pos: 17.5,34.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Engineering Bar
+  - uid: 30377
+    components:
+    - type: Transform
+      pos: -25.5,23.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Atmos
+- proto: RotaryPhoneStandMedical
+  entities:
+  - uid: 30333
+    components:
+    - type: Transform
+      pos: -27.5,-38.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Surgery
+  - uid: 30336
+    components:
+    - type: Transform
+      pos: -21.5,-33.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Medical
+  - uid: 30337
+    components:
+    - type: Transform
+      pos: -14.5,-39.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Chem
+  - uid: 30369
+    components:
+    - type: Transform
+      pos: -32.5,-20.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Viro
+  - uid: 30372
+    components:
+    - type: Transform
+      pos: -8.5,-34.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Medical Front
+  - uid: 30373
+    components:
+    - type: Transform
+      pos: -4.5,-26.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Morgue
+- proto: RotaryPhoneStandScience
+  entities:
+  - uid: 7762
+    components:
+    - type: Transform
+      pos: -3.5,-48.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Robotics
+  - uid: 30342
+    components:
+    - type: Transform
+      pos: 3.5,-35.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Arti
+  - uid: 30343
+    components:
+    - type: Transform
+      pos: 11.5,-41.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Science
+  - uid: 30344
+    components:
+    - type: Transform
+      pos: 24.5,-53.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: XenoBio
+- proto: RotaryPhoneStandSecurity
+  entities:
+  - uid: 30352
+    components:
+    - type: Transform
+      pos: 49.5,-12.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Warden's Office
+  - uid: 30353
+    components:
+    - type: Transform
+      pos: 34.5,-13.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Brig Med
+  - uid: 30355
+    components:
+    - type: Transform
+      pos: 45.5,-13.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Holding Cell
+  - uid: 30379
+    components:
+    - type: Transform
+      pos: 40.5,21.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Detective
+- proto: RotaryPhoneStandSecurity911
+  entities:
+  - uid: 30351
+    components:
+    - type: Transform
+      pos: 56.5,-11.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Security
+- proto: RotaryPhoneStandService
+  entities:
+  - uid: 30016
+    components:
+    - type: Transform
+      pos: -0.5,-4.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Bar
+  - uid: 30338
+    components:
+    - type: Transform
+      pos: -31.5,-44.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Clown's Room
+  - uid: 30339
+    components:
+    - type: Transform
+      pos: -40.5,-35.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Radio Host
+  - uid: 30357
+    components:
+    - type: Transform
+      pos: 24.5,-4.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Janitorial
+  - uid: 30358
+    components:
+    - type: Transform
+      pos: 8.5,-19.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Chaplain's Office
+  - uid: 30376
+    components:
+    - type: Transform
+      pos: -8.5,36.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Library
 - proto: RubberStampApproved
   entities:
   - uid: 17742
@@ -158806,7 +159271,7 @@ entities:
   - uid: 18502
     components:
     - type: Transform
-      pos: -30.5,-28.5
+      pos: -29.5,-28.5
       parent: 2
 - proto: SpawnPointMedicalIntern
   entities:
@@ -159865,6 +160330,11 @@ entities:
       parent: 2
 - proto: StationRadioReceiver
   entities:
+  - uid: 393
+    components:
+    - type: Transform
+      pos: -28.5,-25.5
+      parent: 2
   - uid: 1219
     components:
     - type: Transform
@@ -159979,11 +160449,6 @@ entities:
     components:
     - type: Transform
       pos: -55.5,0.5
-      parent: 2
-  - uid: 30016
-    components:
-    - type: Transform
-      pos: -30.5,-27.5
       parent: 2
   - uid: 30017
     components:
@@ -163073,6 +163538,11 @@ entities:
     - type: Transform
       pos: -64.5,-43.5
       parent: 2
+  - uid: 30340
+    components:
+    - type: Transform
+      pos: -14.5,-39.5
+      parent: 2
 - proto: TableBrass
   entities:
   - uid: 19036
@@ -163639,6 +164109,16 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -27.5,-38.5
+      parent: 2
+  - uid: 30334
+    components:
+    - type: Transform
+      pos: -21.5,-34.5
+      parent: 2
+  - uid: 30335
+    components:
+    - type: Transform
+      pos: -21.5,-33.5
       parent: 2
 - proto: TablePlasmaGlass
   entities:
@@ -164346,6 +164826,11 @@ entities:
     - type: Transform
       pos: 48.5,31.5
       parent: 2
+  - uid: 7764
+    components:
+    - type: Transform
+      pos: -40.5,-35.5
+      parent: 2
   - uid: 8216
     components:
     - type: Transform
@@ -164574,12 +165059,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -40.5,-42.5
-      parent: 2
-  - uid: 19281
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -30.5,-27.5
       parent: 2
   - uid: 19282
     components:
@@ -165126,6 +165605,11 @@ entities:
     - type: Transform
       pos: 16.5,1.5
       parent: 22618
+  - uid: 30349
+    components:
+    - type: Transform
+      pos: 36.5,8.5
+      parent: 2
 - proto: TapeDeck
   entities:
   - uid: 13816
@@ -189845,7 +190329,7 @@ entities:
   - uid: 22611
     components:
     - type: Transform
-      pos: 3.4908397,-35.36204
+      pos: 3.5435383,-33.61478
       parent: 2
   - uid: 22614
     components:

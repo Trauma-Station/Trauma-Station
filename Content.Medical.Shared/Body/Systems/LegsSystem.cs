@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Medical.Shared.Traits;
+
 using Content.Shared.Body;
 using Content.Shared.Containers;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
+using Content.Shared.Stunnable;
+using Content.Shared.Traits.Assorted;
 
 namespace Content.Medical.Shared.Body;
 
@@ -29,9 +31,11 @@ public sealed partial class LegsSystem : EntitySystem
 
         SubscribeLocalEvent<MovementBodyPartComponent, OrganGotInsertedEvent>(OnLegAdded);
         SubscribeLocalEvent<MovementBodyPartComponent, OrganGotRemovedEvent>(OnLegRemoved);
-
-        SubscribeLocalEvent<LegsStartParalyzedComponent, MapInitEvent>(OnParalyzedInit,
-            after: [ typeof(ContainerFillSystem) ]); // run after the organs are added
+        SubscribeLocalEvent<LegsParalyzedComponent, MapInitEvent>(OnParalyzedInit,
+            after: [ typeof(InitialBodySystem) ]); // run after the organs are added
+        SubscribeLocalEvent<LegsParalyzedComponent, RefreshMovementSpeedModifiersEvent>(OnRefresh);
+        SubscribeLocalEvent<LegsParalyzedComponent, StandUpAttemptEvent>(OnParalyzedStandAttempt);
+        SubscribeLocalEvent<LegsParalyzedComponent, MoveEvent>(OnMove);
     }
 
     private void OnStandAttempt(Entity<LegsComponent> ent, ref StandAttemptEvent args)
@@ -76,16 +80,17 @@ public sealed partial class LegsSystem : EntitySystem
         UpdateMovementSpeed((args.Target, comp));
     }
 
-    private void OnParalyzedInit(Entity<LegsStartParalyzedComponent> ent, ref MapInitEvent args)
+    private void OnParalyzedInit(Entity<LegsParalyzedComponent> ent, ref MapInitEvent args)
     {
-        if (!_query.TryComp(ent, out var legs))
+        if (!ent.Comp.Permanent)
             return;
 
+        if (!_query.TryComp(ent, out var legs))
+            return;
         foreach (var leg in legs.Legs)
         {
             RemComp<MovementBodyPartComponent>(leg);
         }
-
         legs.Legs.Clear();
         Dirty(ent, legs);
         UpdateMovementSpeed((ent, legs));
@@ -106,6 +111,12 @@ public sealed partial class LegsSystem : EntitySystem
             acceleration += comp.Acceleration;
         }
 
+        // bare minimum speeds for crawling if you have no legs
+        // could make it need arms too, but torsolo...
+        walkSpeed = Math.Max(walkSpeed, 1f);
+        sprintSpeed = Math.Max(sprintSpeed, 1f);
+        acceleration = Math.Max(acceleration, 0.5f);
+
         // missing a leg makes you move at half speed
         // somehow having 3+ legs makes you fast
         var scale = 1f / ent.Comp.Required;
@@ -113,5 +124,26 @@ public sealed partial class LegsSystem : EntitySystem
         sprintSpeed *= scale;
         acceleration *= scale;
         _movement.ChangeBaseSpeed(ent.Owner, walkSpeed, sprintSpeed, acceleration);
+    }
+
+    private void OnMove(Entity<LegsParalyzedComponent> ent, ref MoveEvent args)
+    {
+        EnsureComp<KnockedDownComponent>(ent);
+    }
+
+    private void OnParalyzedStandAttempt(Entity<LegsParalyzedComponent> ent, ref StandUpAttemptEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+
+        args.Cancelled = true;
+    }
+
+    private void OnRefresh(Entity<LegsParalyzedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (ent.Comp.Permanent)
+            return;
+
+        args.ModifySpeed(ent.Comp.WalkSpeedModifier, ent.Comp.SprintSpeedModifier, true);
     }
 }

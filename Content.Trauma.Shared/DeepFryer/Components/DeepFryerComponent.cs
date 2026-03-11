@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chemistry.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -14,9 +16,6 @@ public sealed partial class DeepFryerComponent : Component
 
     [DataField]
     public TimeSpan FryFinishTime = TimeSpan.Zero;
-
-    [DataField]
-    public bool Closed;
 
     [DataField]
     public float HeatDamage = 8f;
@@ -78,8 +77,18 @@ public sealed partial class DeepFryerComponent : Component
     [DataField]
     public List<string> ContainersToRemove = new ();
 
+    /// <summary>
+    /// The last played start/finish sound.
+    /// Stopped when toggling it to prevent sound spamming.
+    /// </summary>
     [DataField]
-    public EntityUid? SoundEntity;
+    public EntityUid? Sound;
+
+    /// <summary>
+    /// Last person that closed the fryer, reset every time it's closed.
+    /// </summary>
+    [DataField]
+    public EntityUid? LastUser;
 }
 
 [Serializable, NetSerializable]

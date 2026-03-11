@@ -111,6 +111,7 @@
     organs:
       Torso: OrganMothTorso
       Head: OrganMothHead
+      Wings: OrganMothWings # Trauma
       ArmLeft: OrganMothArmLeft
       ArmRight: OrganMothArmRight
       HandRight: OrganMothHandRight
@@ -145,7 +146,7 @@
     accent: zombieMoth
   - type: Speech
     speechVerb: Moth
-    allowedEmotes: ['Chitter', 'Squeak']
+    allowedEmotes: ['Chitter', 'Squeak', 'Flap']
   - type: TypingIndicator
     proto: moth
   - type: Bloodstream
@@ -166,10 +167,12 @@
       Male: UnisexMoth
       Female: UnisexMoth
       Unsexed: UnisexMoth
-  - type: MovementSpeedModifier
-    baseWeightlessAcceleration: 1.5 # Move around more easily in space.
-    baseWeightlessFriction: 1
-    baseWeightlessModifier: 1
+  - type: BodyEmotes
+    soundsId: MothBodyEmotes
+  #- type: MovementSpeedModifier # Trauma - moved to wings
+  #  baseWeightlessAcceleration: 1.5 # Move around more easily in space.
+  #  baseWeightlessFriction: 1
+  #  baseWeightlessModifier: 1
   - type: Flammable
     damage:
       types:
@@ -238,7 +241,7 @@
     sprite: Mobs/Species/Moth/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganMothExternal ]
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoWinged, OrganMothExternal ] # Trauma - Winged torso
   id: OrganMothTorso
 
 - type: entity

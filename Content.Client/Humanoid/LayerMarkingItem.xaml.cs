@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Timing;
+// </Trauma>
 using System.Linq;
 using Content.Client.Guidebook.Controls;
 using Content.Shared.Body;
@@ -17,6 +20,10 @@ namespace Content.Client.Humanoid;
 [GenerateTypedNameReferences]
 public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
 {
+    // <Trauma>
+    [Dependency] private readonly IGameTiming _timing = default!;
+    private uint _lastColorUpdate;
+    // </Trauma>
     [Dependency] private readonly IEntityManager _entity = default!;
 
     private readonly SpriteSystem _sprite;
@@ -103,7 +110,7 @@ public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
             ColorsContainer.Visible = false;
         }
 
-        if (_markingsModel.TryGetMarking(_organ, _layer, _markingPrototype.ID) is { } marking &&
+        if (_markingsModel.GetMarking(_organ, _layer, _markingPrototype.ID) is { } marking &&
             _colorSliders is { } sliders)
         {
             for (var i = 0; i < _markingPrototype.Sprites.Count; i++)
@@ -144,7 +151,7 @@ public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
         if (_colorSliders is not null)
             return;
 
-        if (_markingsModel.TryGetMarking(_organ, _layer, _markingPrototype.ID) is not { } marking)
+        if (_markingsModel.GetMarking(_organ, _layer, _markingPrototype.ID) is not { } marking)
             return;
 
         _colorSliders = new();
@@ -179,6 +186,13 @@ public sealed partial class LayerMarkingItem : BoxContainer, ISearchableControl
             var colorIndex = i;
             selector.OnColorChanged += _ =>
             {
+                // <Trauma> - dont lag the shit out of the ui
+                var now = _timing.CurFrame;
+                if (_lastColorUpdate == now)
+                    return;
+
+                _lastColorUpdate = now;
+                // </Trauma>
                 _markingsModel.TrySetMarkingColor(_organ, _layer, _markingPrototype.ID, colorIndex, selector.Color);
             };
         }

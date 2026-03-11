@@ -63,6 +63,8 @@
       price: 100
     - type: DisarmMalus # Goobstation
       malus: 1
+    - type: CosmicTransmutable # Trauma
+      transmuteTo: ShieldCosmicCult
 
 - type: entity
   name: base repairable shield
@@ -445,6 +447,7 @@
                 SheetGlass:
                   min: 5
                   max: 5
+    - type: ReflectiveSurface # Goob
 
 - type: entity
   name: energy shield

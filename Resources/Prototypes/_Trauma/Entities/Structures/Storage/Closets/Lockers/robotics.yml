@@ -1,0 +1,8 @@
+- type: entity
+  parent: LockerScientist
+  id: LockerRoboticist
+  name: roboticist's locker
+  components:
+  # TODO: unique sprite
+  - type: AccessReader
+    access: [["Robotics"]]

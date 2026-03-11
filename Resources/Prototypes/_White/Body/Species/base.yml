@@ -191,6 +191,7 @@
   - type: OrganComponents
     onAdd:
     - type: ThermalVision
+      thermalShader: null
       toggleAction: ToggleThermalVisionXenomorph
       color: white
       drawOverlay: false
@@ -236,13 +237,11 @@
     category: AcidGland
   - type: ChildOrgan
     parentCategory: Head
-  - type: OrganComponents
-    onAdd:
-    - type: XenomorphAcid
-      damagePerSecond:
-        types:
-          Caustic: 20
-          Heat: 20
+  - type: XenomorphAcid
+    damagePerSecond:
+      types:
+        Caustic: 20
+        Heat: 20
   - type: OrganActions
     actions:
     - ActionAcid
@@ -321,6 +320,9 @@
     category: HiveNode
   - type: ChildOrgan
     parentCategory: Head
+  - type: OrganComponents
+    onAdd:
+    - type: FacehuggerImmune
     # TODO: Organ should give XenoHivemind language and Xeno faction
 
 - type: entity

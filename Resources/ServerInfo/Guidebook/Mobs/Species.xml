@@ -6,7 +6,7 @@
   <!-- Trauma - Completely rewritten -->
   <Box>
     <GuideEntityEmbed Entity="AppearanceHuman" Caption="Human"/>
-    <GuideEntityEmbed Entity="AppearanceIPC" Caption="IPC"/>
+    <GuideEntityEmbed Entity="AppearanceVox" Caption="Vox"/>
     <GuideEntityEmbed Entity="AppearanceMoth" Caption="Moth Person"/>
     <GuideEntityEmbed Entity="AppearanceReptilian" Caption="Reptilian"/>
   </Box>
@@ -17,7 +17,6 @@
     <GuideEntityEmbed Entity="AppearanceSlimePerson" Caption="Slime Person"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="AppearanceHarpy" Caption="Harpy"/>
-    <GuideEntityEmbed Entity="AppearanceVox" Caption="Vox"/>
+    <GuideEntityEmbed Entity="AppearanceIPC" Caption="IPC"/>
   </Box>
 </Document>

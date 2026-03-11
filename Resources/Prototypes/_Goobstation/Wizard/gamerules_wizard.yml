@@ -22,14 +22,13 @@
   - type: WizardRule
   - type: GameRule
     minPlayers: 30
-    chaosScore: 900
   - type: AntagObjectives
     objectives:
     - WizardSurviveObjective
   - type: AntagSelection
     useCharacterNames: true
     selectionTime: PrePlayerSpawn
-    agentName: wizard-roundend-name
+    agentName: wizard-round-end-name
     definitions:
     - spawnerPrototype: SpawnPointWizard
       prefRoles: [ Wizard ]
@@ -45,12 +44,11 @@
       components:
       - type: Wizard
       - type: CanEnchant
-      - type: LanguageKnowledge
+      - type: LanguageSpeaker
         speaks: []
         understands: []
       - type: UniversalLanguageSpeaker
       - type: TowerOfBabel
-      - type: LanguageSpeaker
       - type: RandomMetadata
         nameSegments:
         - WizardFirst
@@ -66,9 +64,6 @@
   - type: RuleGrids
   - type: LoadMapRule
     mapPath: /Maps/_Goobstation/Nonstations/wizden.yml
-  - type: Tag
-    tags:
-      - RoundstartAntag
 
 - type: entity
   parent: BaseWizardRule
@@ -83,11 +78,6 @@
     weight: 5.5
     minimumPlayers: 20
     duration: 1
-    chaos: # Goobstation
-      Hostile: 200
-      Friend: 40
-      Medical: 200
-      Death: 200
   - type: AntagSelection
     useCharacterNames: true
     selectionTime: PostPlayerSpawn
@@ -105,14 +95,13 @@
       - RoleSurvivalEVA
       components:
       - type: Wizard
-      - type: RandomMetadata
       - type: CanEnchant
-      - type: LanguageKnowledge
+      - type: LanguageSpeaker
         speaks: []
         understands: []
       - type: UniversalLanguageSpeaker
       - type: TowerOfBabel
-      - type: LanguageSpeaker
+      - type: RandomMetadata
         nameSegments:
         - WizardFirst
         - WizardLast
@@ -120,9 +109,6 @@
       - type: NpcFactionMember
         factions:
         - Wizard
-  - type: Tag
-    tags:
-      - MidroundAntag
 
 - type: entity
   parent: BaseGameRule
@@ -144,12 +130,11 @@
       components:
       - type: Apprentice
       - type: CanEnchant
-      - type: LanguageKnowledge
+      - type: LanguageSpeaker
         speaks: []
         understands: []
       - type: UniversalLanguageSpeaker
       - type: TowerOfBabel
-      - type: LanguageSpeaker
       - type: NpcFactionMember
         factions:
         - Wizard

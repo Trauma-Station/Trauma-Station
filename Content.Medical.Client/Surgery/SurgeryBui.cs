@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Administration.UI.CustomControls;
 using Content.Medical.Client.Choice.UI;
 using Content.Medical.Common.Body;

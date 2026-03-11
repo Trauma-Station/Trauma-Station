@@ -25,10 +25,9 @@ using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using System.Text;
-using Content.Server.Station.Components;
 using Content.Server._Goobstation.Objectives.Components;
+using Content.Server.Roles;
 using Content.Shared.Mind;
 using Robust.Server.GameObjects;
 
@@ -41,7 +40,6 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
     [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly ObjectivesSystem _objective = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
 
     public static readonly SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg");
@@ -51,7 +49,7 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
 
     public static readonly ProtoId<CurrencyPrototype> Currency = "KnowledgePoint";
 
-    static EntProtoId MindRole = "MindRoleHeretic";
+    private static EntProtoId MindRole = "MindRoleHeretic";
 
     public override void Initialize()
     {
@@ -59,11 +57,39 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
 
         SubscribeLocalEvent<HereticRuleComponent, AfterAntagEntitySelectedEvent>(OnAntagSelect);
         SubscribeLocalEvent<HereticRuleComponent, ObjectivesTextPrependEvent>(OnTextPrepend);
+
+        SubscribeLocalEvent<HereticRoleComponent, GetBriefingEvent>(OnGetBriefing);
+
+        SubscribeLocalEvent<SpawnHereticInfluenceEvent>(OnSpawn);
+    }
+
+    private void OnGetBriefing(Entity<HereticRoleComponent> ent, ref GetBriefingEvent args)
+    {
+        var uid = args.Mind.Comp.OwnedEntity;
+
+        if (uid == null)
+            return;
+
+        var briefingShort = Loc.GetString("heretic-role-greeting-short");
+        args.Append(briefingShort);
+    }
+
+    private void OnSpawn(ref SpawnHereticInfluenceEvent ev)
+    {
+        SpawnInfluence(ev.Proto, ev.Amount);
     }
 
     private void OnAntagSelect(Entity<HereticRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         TryMakeHeretic(args.EntityUid, ent.Comp);
+
+        SpawnInfluence(ent.Comp.RealityShift, ent.Comp.RealityShiftPerHeretic);
+    }
+
+    public void SpawnInfluence(EntProtoId proto, int amount)
+    {
+        if (amount <= 0)
+            return;
 
         if (!TryGetRandomStation(out var station))
             return;
@@ -71,10 +97,10 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
         if (GetStationMainGrid((station.Value, Comp<StationDataComponent>(station.Value))) is not {} grid)
             return;
 
-        for (var i = 0; i < ent.Comp.RealityShiftPerHeretic.Next(_rand); i++)
+        for (var i = 0; i < amount; i++)
         {
             if (TryFindTileOnGrid(grid, out _, out var coords))
-                Spawn(ent.Comp.RealityShift, coords);
+                Spawn(proto, coords);
         }
     }
 
@@ -88,26 +114,15 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
         // briefing
         if (HasComp<MetaDataComponent>(target))
         {
-            var briefingShort = Loc.GetString("heretic-role-greeting-short");
-
             _antag.SendBriefing(target, Loc.GetString("heretic-role-greeting-fluff"), Color.MediumPurple, null);
             _antag.SendBriefing(target, Loc.GetString("heretic-role-greeting"), Color.Red, BriefingSound);
-
-            if (_role.MindHasRole<HereticRoleComponent>(mindId, out var mr))
-                AddComp(mr.Value, new RoleBriefingComponent { Briefing = briefingShort }, overwrite: true);
         }
-
-        EnsureComp<HereticComponent>(mindId);
 
         // add store
-        var store = EnsureComp<StoreComponent>(mindId);
-        foreach (var category in rule.StoreCategories)
-        {
-            store.Categories.Add(category);
-        }
-        store.CurrencyWhitelist.Add(Currency);
-        if (!store.Balance.TryAdd(Currency, 2))
-            store.Balance[Currency] += 2;
+        InitializeStore(mindId);
+
+        // heretic after store because it requires store on startup
+        EnsureComp<HereticComponent>(mindId);
 
         rule.Minds.Add(mindId);
 
@@ -115,6 +130,17 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
         _ui.SetUi(mindId, HereticLivingHeartKey.Key, new InterfaceData("LivingHeartMenuBoundUserInterface", -1));
 
         return true;
+    }
+
+    public StoreComponent InitializeStore(EntityUid mindId)
+    {
+        var store = EnsureComp<StoreComponent>(mindId);
+        foreach (var category in HereticRuleComponent.StoreCategories)
+        {
+            store.Categories.Add(category);
+        }
+        store.CurrencyWhitelist.Add(Currency);
+        return store;
     }
 
     public void OnTextPrepend(Entity<HereticRuleComponent> ent, ref ObjectivesTextPrependEvent args)

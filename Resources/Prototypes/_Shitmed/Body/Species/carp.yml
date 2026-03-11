@@ -72,6 +72,7 @@
 - type: entity
   parent: [ OrganAnimalLungs, OrganCarpInternal ]
   id: OrganCarpLungs
+  name: space animal lungs
   components:
   - type: InternalOrgan
     intCap: 28

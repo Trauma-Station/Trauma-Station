@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.StationRadio.Components;
 using Content.Goobstation.Shared.StationRadio.Events;
 using Content.Trauma.Common.Audio;
@@ -43,7 +45,6 @@ public sealed class StationRadioReceiverSystem : EntitySystem
             return;
 
         comp.SoundEntity = audio.Entity;
-        Dirty(uid, comp);
         EnsureComp<CopyrightedAudioComponent>(audio.Entity);
 
         UpdateAudible((uid, comp));
@@ -51,11 +52,7 @@ public sealed class StationRadioReceiverSystem : EntitySystem
 
     private void OnMediaStopped(EntityUid uid, StationRadioReceiverComponent comp, ref StationRadioMediaStoppedEvent args)
     {
-        if (comp.SoundEntity == null)
-            return;
-
         comp.SoundEntity = _audio.Stop(comp.SoundEntity);
-        Dirty(uid, comp);
     }
 
     private void UpdateAudible(Entity<StationRadioReceiverComponent> ent)
@@ -65,7 +62,7 @@ public sealed class StationRadioReceiverSystem : EntitySystem
 
     private void SetAudible(StationRadioReceiverComponent comp, bool audible)
     {
-        if (comp.SoundEntity is {} sound)
+        if (comp.SoundEntity is {} sound && !TerminatingOrDeleted(sound))
             _audio.SetVolume(sound, audible ? comp.DefaultParams.Volume : float.NegativeInfinity);
     }
 }

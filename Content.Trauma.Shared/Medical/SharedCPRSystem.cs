@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
 using Content.Shared.Atmos.Rotting;
@@ -199,8 +200,7 @@ public abstract class SharedCPRSystem : EntitySystem
             return;
         }
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         if (mob.CurrentState == MobState.Dead && rand.Prob(training.ReviveChance) && CanRevive(ent))
             _mob.ChangeMobState(ent.Owner, MobState.Critical, origin: user);
 

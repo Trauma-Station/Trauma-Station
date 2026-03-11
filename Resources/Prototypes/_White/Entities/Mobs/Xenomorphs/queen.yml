@@ -57,7 +57,7 @@
   - type: Speech
     speechSounds: Xenomorph
     speechVerb: LargeMob
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Xeno
 #    - XenoHivemind # Goobstation - collective mind

@@ -1,3 +1,4 @@
+using Content.Shared._Shitcode.Heretic.SpriteOverlay;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -6,7 +7,7 @@ using Robust.Shared.Utility;
 namespace Content.Shared._Shitcode.Heretic.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class SacramentsOfPowerComponent : Component
+public sealed partial class SacramentsOfPowerComponent : BaseSpriteOverlayComponent
 {
     [DataField, AutoNetworkedField]
     public SacramentsState State = SacramentsState.Opening;
@@ -36,13 +37,16 @@ public sealed partial class SacramentsOfPowerComponent : Component
     public TimeSpan EffectTime = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public ResPath SpritePath = new("_Goobstation/Heretic/Effects/effects.rsi");
-
-    [DataField]
     public Dictionary<SacramentsState, string> SpriteStates = new()
     {
         { SacramentsState.Opening, "eye_open" },
         { SacramentsState.Open, "eye_pulse" },
         { SacramentsState.Closing, "eye_close" },
     };
+
+    public override Enum Key { get; set; } = SacramentsKey.Key;
+
+    [DataField]
+    public override SpriteSpecifier? Sprite { get; set; } =
+        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "eye_open");
 }

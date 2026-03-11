@@ -36,7 +36,7 @@
     knowledge:
     - GlimmerOfWinter
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathVoid
   conditions:
@@ -64,7 +64,7 @@
     knowledge:
     - GraspOfVoid
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathVoid
   conditions:
@@ -79,13 +79,13 @@
   id: HereticVoidPath3
   name: knowledge-path-void-s3-name
   description: knowledge-path-void-s3-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: void_phase }
+  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - VoidPhase
+    - MarkOfVoid
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathVoid
   conditions:
@@ -96,16 +96,15 @@
     whitelist:
     - Void
 
-
 - type: listing
   id: HereticVoidPath4
   name: knowledge-path-void-s4-name
   description: knowledge-path-void-s4-desc
-  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: void_phase }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - MarkOfVoid
+    - VoidPhase
   cost:
     KnowledgePoint: 2
   categories:
@@ -149,7 +148,7 @@
     knowledge:
     - VoidPull
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathVoid
   conditions:
@@ -191,7 +190,7 @@
     knowledge:
     - VoidConduit
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathVoid
   conditions:
@@ -212,7 +211,7 @@
     knowledge:
     - AscensionVoid
   cost:
-    KnowledgePoint: 3
+    KnowledgePoint: 2
   categories:
   - HereticPathVoid
   conditions:

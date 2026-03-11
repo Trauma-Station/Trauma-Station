@@ -18,13 +18,12 @@ using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Atmos.Components;
-using Robust.Shared.Map.Components;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
-using System.Linq;
-using System.Threading.Tasks;
+using Content.Server.Heretic.Components.PathSpecific;
+using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared.Actions.Components;
+using Content.Shared.Actions.Events;
 
 namespace Content.Server.Heretic.Abilities;
 
@@ -41,6 +40,25 @@ public sealed partial class HereticAbilitySystem
         SubscribeLocalEvent<EventHereticNightwatcherRebirth>(OnNWRebirth);
         SubscribeLocalEvent<EventHereticFlames>(OnFlames);
         SubscribeLocalEvent<EventHereticCascade>(OnCascade);
+
+        SubscribeLocalEvent<NightwatcherRebirthActionComponent, ActionPerformedEvent>(OnRebirthPerformed);
+    }
+
+    private void OnRebirthPerformed(Entity<NightwatcherRebirthActionComponent> ent, ref ActionPerformedEvent args)
+    {
+        if (ent.Comp.LastTargets == 0 || !TryComp(ent, out ActionComponent? action) || action.Cooldown is not { } cd)
+            return;
+
+        var total = cd.End - cd.Start;
+        if (total <= ent.Comp.MinCooldown)
+            return;
+
+        var newCd = total - ent.Comp.LastTargets * ent.Comp.CooldownReductionPerVictim;
+        if (newCd < ent.Comp.MinCooldown)
+            newCd = ent.Comp.MinCooldown;
+
+        _actions.SetCooldown((ent, action), newCd);
+        ent.Comp.LastTargets = 0;
     }
 
     private void OnJaunt(EventHereticAshenShift args)
@@ -52,9 +70,13 @@ public sealed partial class HereticAbilitySystem
         _poly.PolymorphEntity(args.Performer, args.Jaunt);
     }
 
-
     private void OnNWRebirth(EventHereticNightwatcherRebirth args)
     {
+        if (!TryComp(args.Action, out NightwatcherRebirthActionComponent? nwAction))
+            return;
+
+        nwAction.LastTargets = 0;
+
         if (!TryUseAbility(args))
             return;
 
@@ -66,29 +88,40 @@ public sealed partial class HereticAbilitySystem
         var lookup = GetNearbyPeople(args.Performer, args.Range, heretic?.CurrentPath ?? "Ash");
         var toHeal = 0f;
 
-        foreach (var look in lookup)
+        var flamQuery = GetEntityQuery<FlammableComponent>();
+        foreach (var (look, mobstate) in lookup)
         {
-            if (!TryComp<FlammableComponent>(look, out var flam) || !flam.OnFire ||
-                !TryComp<MobStateComponent>(look, out var mobstate) || mobstate.CurrentState == MobState.Dead)
+            if (mobstate.CurrentState == MobState.Dead)
+                continue;
+
+            if (!flamQuery.TryComp(look, out var flam) || !flam.OnFire)
                 continue;
 
             if (mobstate.CurrentState == MobState.Critical)
                 _mobstate.ChangeMobState(look, MobState.Dead, mobstate);
 
             toHeal += args.HealAmount;
+            nwAction.LastTargets++;
 
-            _flammable.AdjustFireStacks(look, args.FireStacks, flam, true, args.FireProtectionPenetration);
-            _dmg.ChangeDamage(look.Owner,
-                args.Damage * _body.GetVitalBodyPartRatio(look.Owner),
+            _flammable.Extinguish(look, flam);
+            _dmg.ChangeDamage(look,
+                args.Damage * _body.GetVitalBodyPartRatio(look),
                 true,
                 targetPart: TargetBodyPart.All,
                 splitDamage: SplitDamageBehavior.SplitEnsureAll);
         }
 
+        var coords = _transform.GetMapCoordinates(args.Performer);
+        var effect = Spawn(args.Effect, coords);
+        if (TryComp(effect, out AreaGraspEffectComponent? grasp))
+        {
+            grasp.SpawnTime = Timing.CurTime;
+            Dirty(effect, grasp);
+        }
+
         if (toHeal >= 0)
             return;
 
-        // heals everything by base + power for each burning target
         _stam.TryTakeStamina(args.Performer, toHeal);
         IHateWoundMed(args.Performer, AllDamage * toHeal, 0, 0);
     }
@@ -106,66 +139,6 @@ public sealed partial class HereticAbilitySystem
         if (!Transform(args.Performer).GridUid.HasValue || !TryUseAbility(args))
             return;
 
-        _ = CombustArea(args.Performer, 9, false);
+        Spawn(args.CascadeEnt, _xform.GetMapCoordinates(args.Performer));
     }
-
-    #region Helper methods
-
-    private static readonly EntProtoId FirePrototype = "HereticFireAA";
-
-    // TODO: kill this dogshit with hammers
-    public async Task CombustArea(EntityUid ent, int range = 1, bool hollow = true)
-    {
-        // we need this beacon in order for damage box to not break apart
-        var beacon = Spawn(null, _xform.GetMapCoordinates((EntityUid) ent));
-
-        for (int i = 0; i <= range; i++)
-        {
-            SpawnFireBox(beacon, range: i, hollow);
-            await Task.Delay((int) 500f);
-        }
-
-        Del(beacon); // cleanup
-    }
-
-    public void SpawnFireBox(EntityUid relative, int range = 0, bool hollow = true)
-    {
-        if (range == 0)
-        {
-            Spawn(FirePrototype, Transform(relative).Coordinates);
-            return;
-        }
-
-        var xform = Transform(relative);
-
-        if (!TryComp<MapGridComponent>(xform.GridUid, out var grid))
-            return;
-
-        var gridEnt = ((EntityUid) xform.GridUid, grid);
-
-        // get tile position of our entity
-        if (!_xform.TryGetGridTilePosition(relative, out var tilePos))
-            return;
-
-        // make a box
-        var pos = _map.TileCenterToVector(gridEnt, tilePos);
-        var confines = new Box2(pos, pos).Enlarged(range);
-        var box = _map.GetLocalTilesIntersecting(relative, grid, confines).ToList();
-
-        // hollow it out if necessary
-        if (hollow)
-        {
-            var confinesS = new Box2(pos, pos).Enlarged(Math.Max(range - 1, 0));
-            var boxS = _map.GetLocalTilesIntersecting(relative, grid, confinesS).ToList();
-            box = box.Where(b => !boxS.Contains(b)).ToList();
-        }
-
-        // fill the box
-        foreach (var tile in box)
-        {
-            Spawn(FirePrototype, _map.GridTileToWorld((EntityUid) xform.GridUid, grid, tile.GridIndices));
-        }
-    }
-
-    #endregion
 }

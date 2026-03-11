@@ -81,7 +81,7 @@ public sealed class AristocratSystem : EntitySystem
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
     private static readonly ProtoId<TagPrototype> Window = "Window";
 
-    private const float ConduitDelay = 2f;
+    private const float ConduitDelay = 1f;
 
     private float _accumulator;
 

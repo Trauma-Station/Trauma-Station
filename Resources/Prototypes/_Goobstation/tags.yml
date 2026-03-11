@@ -59,6 +59,9 @@
   id: AthiestsFedora
 
 - type: Tag
+  id: AnchorHereticStructure
+
+- type: Tag
   id: AtmosBackTank # Assmos - Extinguisher Nozzle
 
 - type: Tag
@@ -146,6 +149,9 @@
   id: ClownEmergencyOxygenTank
 
 - type: Tag
+  id: CodexCicatrix
+
+- type: Tag
   id: CombatMech
 
 - type: Tag
@@ -189,6 +195,9 @@
 
 - type: Tag
   id: DurandTargetingControlModule
+
+- type: Tag
+  id: EldritchFlask
 
 - type: Tag
   id: EmergencyMedipen
@@ -251,6 +260,9 @@
   id: GorillaFormAction
 
 - type: Tag
+  id: GoldBar
+
+- type: Tag
   id: GrimoireGhost
 
 - type: Tag
@@ -294,9 +306,6 @@
 
 - type: Tag
   id: HandheldCrewMonitor
-
-- type: Tag
-  id: HarpyEmotes
 
 - type: Tag
   id: HereticBlade
@@ -360,10 +369,6 @@
 
 - type: Tag
   id: Lighter # for whitelisted cig pack strorage
-
-# tag roundstart rules that should be run alone
-- type: Tag
-  id: LoneRunRule
 
 - type: Tag
   id: LoneOpsUplink
@@ -585,6 +590,9 @@
   id: ShellShotgunHeavy
 
 - type: Tag
+  id: SilverBar
+
+- type: Tag
   id: SyringeArmor
 
 - type: Tag
@@ -775,15 +783,6 @@
   id: Jetpack
 
 - type: Tag
-  id: RoundstartAntag
-
-- type: Tag
-  id: CalmAntag
-
-- type: Tag
-  id: MidroundAntag
-
-- type: Tag
   id: DisposableBattery
 
 - type: Tag
@@ -797,6 +796,12 @@
 
 - type: Tag
   id: Crate
+
+- type: Tag
+  id: GlovesLatex
+
+- type: Tag
+  id: GlovesNitrile
 
 - type: Tag
   id: GreenGloves

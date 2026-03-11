@@ -12,7 +12,7 @@ heretic-roundend-name = heretic
 # Trauma
 roundend-prepend-heretic-ascension-success = {$name} [color=green]has Ascended![/color]
 roundend-prepend-heretic-ascension-fail = {$name} [color=red]has failed to Ascend![/color]
-roundend-prepend-heretic-ascension-fail-owls = {$name} [color=red]has forsaken Ascension and thus failed![/color]
+roundend-prepend-heretic-ascension-fail-owls = {$name} [color=yellow]has forsaken Ascension![/color]
 roundend-prepend-heretic-knowledge-named = [color=white]{$name}[/color] researched the most knowledges, having [color=purple]{$number}[/color] total.
 
 heretic-gamemode-title = Heretics
@@ -54,6 +54,7 @@ ghostrole-ghoul-name = Ghoul
 ghostrole-flesh-mimic-name = Flesh Mimic
 ghostrole-prophet-name = Raw Prophet
 ghostrole-stalker-name = Flesh Stalker
+ghostrole-maid-name = Maid in the Mirror
 ghostrole-fire-shark-name = Fire Shark
 ghostrole-rustwalker-name = Rust Walker
 ghostrole-stargazer-name = Star Gazer
@@ -61,6 +62,7 @@ ghostrole-ghoul-desc = Aid your summoner in achieving ascension.
 ghostrole-flesh-mimic-desc = Aid your summoner in achieving ascension. Be aware that you die over time.
 ghostrole-prophet-desc = Aid your summoner in achieving ascension. Connect other believers to the Mansus Link. Passively heal heretics and eldritch creatures.
 ghostrole-stalker-desc = Aid your summoner in achieving ascension. Jaunt and sabotage crew's lighting.
+ghostrole-maid-desc = Aid your summoner in achieving ascension. Jaunt in and out on reflective surfaces to scout or ambush crew.
 ghostrole-fire-shark-desc = Aid your summoner in achieving ascension. Burn your victims.
 ghostrole-rustwalker-desc = Aid your summoner in achieving ascension. Spread rust everywhere.
 ghostrole-stargazer-desc = Aid your summoner in wreaking havoc everywhere.

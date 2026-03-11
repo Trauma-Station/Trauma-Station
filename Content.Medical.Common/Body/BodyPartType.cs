@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Serialization;
 
 namespace Content.Medical.Common.Body;
@@ -17,5 +18,6 @@ public enum BodyPartType : byte
     Leg = 1 << 4,
     Foot = 1 << 5,
     Tail = 1 << 6,
+    Wings = 1 << 7,
     Vital = Torso | Head
 }

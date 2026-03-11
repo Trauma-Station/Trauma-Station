@@ -25,7 +25,6 @@ public sealed partial class HealthAnalyzerSystem
 {
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly CommonBodyPartSystem _part = default!;
     [Dependency] private readonly TraumaSystem _trauma = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
 

@@ -21,7 +21,7 @@ public sealed partial class JauntComponent : Component
     ///     Which Jaunt Action the component should grant.
     /// </summary>
     [DataField]
-    public EntProtoId JauntAction = "ActionPolymorphJaunt";
+    public EntProtoId? JauntAction = "ActionPolymorphJaunt"; // Trauma - made nullable
 
     /// <summary>
     ///     The jaunt action itself.

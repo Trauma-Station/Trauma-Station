@@ -67,6 +67,7 @@ public sealed class FeastOfOwlsSystem : EntitySystem
         heretic.CanAscend = false;
         heretic.ChosenRitual = null;
         _heretic.RemoveRituals((mind, heretic), [_feastOfOwlsTag, _ascensionTag]);
+        _heretic.UpdateHereticAura(user);
         Dirty(mind, heretic);
 
         _ritual.RitualSuccess(ent, user, false);

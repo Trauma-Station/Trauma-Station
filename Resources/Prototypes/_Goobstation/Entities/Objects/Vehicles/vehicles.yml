@@ -103,7 +103,7 @@
 
 - type: entity
   id: VehicleSecway
-  parent: [ BaseVehicle, BaseSecurityContraband ]
+  parent: [ BaseGroundVehicle, BaseSecurityContraband ]
   name: secway
   description: The future of transportation. Popularized by St. James, the patron saint of security officers and internet forum moderators.
   components:
@@ -160,7 +160,7 @@
 
 - type: entity
   id: VehicleATV
-  parent: BaseVehicle
+  parent: BaseGroundVehicle
   name: ATV
   description: All-Tile Vehicle.
   components:
@@ -190,7 +190,7 @@
 
 - type: entity
   id: VehicleJanicart
-  parent: BaseVehicle
+  parent: BaseGroundVehicle
   name: janicart
   description: The janitor's trusty steed.
   components:
@@ -224,7 +224,7 @@
 
 - type: entity
   id: VehicleWheelchair
-  parent: [ BaseVehicle, BaseFoldable, BaseItem ]
+  parent: [ BaseGroundVehicle, BaseFoldable, BaseItem ]
   name: wheelchair
   description: A chair with big wheels. It looks like you can move in these on your own.
   components:
@@ -267,7 +267,7 @@
 
 - type: entity
   id: VehicleHoverchair
-  parent: BaseVehicle
+  parent: BaseVehicle # not ground vehicle because hovering :)
   name: hoverchair
   description: A luxury hoverchair, kick back and relax.
   components:
@@ -349,7 +349,7 @@
 
 - type: entity
   id: VehicleForklift
-  parent: BaseVehicle
+  parent: BaseGroundVehicle
   name: forklift
   description: NanoTrasen approved Forklift Certification required.
   components:

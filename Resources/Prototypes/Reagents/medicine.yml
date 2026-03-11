@@ -1315,26 +1315,9 @@
           blacklist:
             components:
             - GhoulDeconvert
-            - CleanseCult
       # </Trauma>
       - !type:SatiateThirst
         factor: 3
-      - !type:AddComponents # DeltaV - Cosmic Cult
-        guidebookText: reagent-effect-guidebook-cleanse-cultist
-        components:
-        - type: CleanseCult
-        conditions:
-        - !type:ReagentCondition
-          reagent: Holywater
-          min: 10
-        - !type:WhitelistCondition
-          guidebookText: entity-condition-guidebook-cosmic-cultist
-          whitelist:
-            components:
-            - CosmicCult
-          blacklist:
-            components:
-            - CleanseCult
       - !type:HealthChange
         conditions:
         - !type:TotalDamageCondition
@@ -1362,7 +1345,6 @@
           blacklist:
             components:
             - GhoulDeconvert
-            - CleanseCult
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:
@@ -1743,10 +1725,10 @@
         amount: -3.0
 
 - type: reagent
-  id: Warfarin
-  name: reagent-name-warfarin
+  id: Heparin
+  name: reagent-name-heparin
   group: Medicine
-  desc: reagent-desc-warfarin
+  desc: reagent-desc-heparin
   physicalDesc: reagent-physical-desc-thin
   allowedDepartments:
   - Medical
@@ -1762,6 +1744,6 @@
       - !type:ModifyBleed
         conditions:
         - !type:ReagentCondition
-          reagent: Warfarin
+          reagent: Heparin
           min: 15
         amount: 0.25

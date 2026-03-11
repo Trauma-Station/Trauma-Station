@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Body;
 using Content.Shared.Polymorph;
 using Content.Shared.Polymorph.Systems;
@@ -35,6 +36,11 @@ public sealed class ShootOrganActionSystem : EntitySystem
         // polymorph isn't predicted so this returns false on client
         if (_polymorph.PolymorphEntity(organ, ent.Comp.Polymorph) is not {} projectile)
             return;
+
+        // used by chemspike
+        var projComp = EnsureComp<ActionProjectileComponent>(projectile);
+        projComp.Container = args.Action.Comp.Container;
+        Dirty(projectile, projComp);
 
         _throwing.TryThrow(projectile, coordinates: args.Target, user: user,
             predicted: false); // TODO: remove if polymorph gets predicted

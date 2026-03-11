@@ -27,7 +27,7 @@ namespace Content.Server.Medical
         [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
         [Dependency] private readonly ActionBlockerSystem _blocker = default!;
         [Dependency] private readonly ClimbSystem _climbSystem = default!;
-        [Dependency] private readonly CloningConsoleSystem _cloningConsoleSystem = default!;
+        //[Dependency] private readonly CloningConsoleSystem _cloningConsoleSystem = default!; // Trauma - done by events now
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
         [Dependency] private readonly ContainerSystem _containerSystem = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;

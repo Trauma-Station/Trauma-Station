@@ -1,12 +1,6 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Steve <marlumpy@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-// Assmos - Extinguisher Nozzle
-
 using Content.Shared.Chemistry.Components;
-using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -22,12 +16,12 @@ namespace Content.Goobstation.Shared.Atmos.Systems;
 public sealed class FirefighterTankRefillableSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -53,13 +47,13 @@ public sealed class FirefighterTankRefillableSystem : EntitySystem
             bool foundContainer = false;
 
             // Check held items (exclude nozzle itself)
-            foreach (var item in _handsSystem.EnumerateHeld(args.User))
+            foreach (var item in _hands.EnumerateHeld(args.User))
             {
                 if (item == entity.Owner)
                     continue;
 
-                if (!_whitelistSystem.IsWhitelistFailOrNull(entity.Comp.ProviderWhitelist, item) &&
-                    _solutionContainerSystem.TryGetSolution(item, entity.Comp.SolutionName, out _, out _))
+                if (!_whitelist.IsWhitelistFailOrNull(entity.Comp.ProviderWhitelist, item) &&
+                    _solution.TryGetSolution(item, entity.Comp.SolutionName, out _, out _))
                 {
                     sprayOwner = item;
                     solutionName = entity.Comp.SolutionName;
@@ -73,8 +67,8 @@ public sealed class FirefighterTankRefillableSystem : EntitySystem
             {
                 while (enumerator.NextItem(out var item))
                 {
-                    if (!_whitelistSystem.IsWhitelistFailOrNull(entity.Comp.ProviderWhitelist, item) &&
-                        _solutionContainerSystem.TryGetSolution(item, entity.Comp.SolutionName, out _, out _))
+                    if (!_whitelist.IsWhitelistFailOrNull(entity.Comp.ProviderWhitelist, item) &&
+                        _solution.TryGetSolution(item, entity.Comp.SolutionName, out _, out _))
                     {
                         sprayOwner = item;
                         solutionName = entity.Comp.SolutionName;
@@ -85,15 +79,15 @@ public sealed class FirefighterTankRefillableSystem : EntitySystem
             }
         }
 
-        if (_solutionContainerSystem.TryGetDrainableSolution(target, out var targetSoln, out var targetSolution)
-            && _solutionContainerSystem.TryGetSolution(sprayOwner, solutionName, out var solutionComp, out var atmosBackpackTankSolution))
+        if (_solution.TryGetDrainableSolution(target, out var targetSoln, out var targetSolution)
+            && _solution.TryGetSolution(sprayOwner, solutionName, out var solutionComp, out var atmosBackpackTankSolution))
         {
             var trans = FixedPoint2.Min(atmosBackpackTankSolution.AvailableVolume, targetSolution.Volume);
             if (trans > 0)
             {
-                var drained = _solutionContainerSystem.Drain(target, targetSoln.Value, trans);
-                _solutionContainerSystem.TryAddSolution(solutionComp.Value, drained);
-                _audioSystem.PlayPredicted(entity.Comp.FirefightingNozzleRefill, entity, user: args.User);
+                var drained = _solution.Drain(target, targetSoln.Value, trans);
+                _solution.TryAddSolution(solutionComp.Value, drained);
+                _audio.PlayPredicted(entity.Comp.FirefightingNozzleRefill, entity, user: args.User);
                 _popup.PopupClient(Loc.GetString("firefighter-nozzle-component-after-interact-refilled-message"), entity, args.User);
             }
             else if (atmosBackpackTankSolution.AvailableVolume <= 0)

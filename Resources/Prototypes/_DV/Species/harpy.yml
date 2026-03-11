@@ -1,8 +1,0 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-- type: species
-  id: Harpy
-  name: species-name-harpy
-  roundStart: true
-  prototype: MobHarpy
-  dollPrototype: AppearanceHarpy
-  skinColoration: HumanToned

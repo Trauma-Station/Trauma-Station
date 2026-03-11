@@ -23,6 +23,7 @@
       right:
       - state: on-inhand-right
         shader: unshaded
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelm
@@ -44,6 +45,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/atmos.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/atmos.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -55,6 +57,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/cargo.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/cargo.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -66,6 +69,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/captain.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/captain.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -77,6 +81,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/ce.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/ce.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -88,6 +93,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/chaplain.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/chaplain.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmEnviroslacksColorOrange
@@ -105,6 +111,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/chemist.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/chemist.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -118,6 +125,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/clown.rsi
   - type: PointLight
     color: "#a777ff"
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -129,6 +137,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/cmo.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/cmo.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -140,6 +149,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/engineering.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/engineering.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -151,6 +161,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/hop.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/hop.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -177,6 +188,7 @@
         Slash: 0.7
         Piercing: 0.7
         Heat: 0.8
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -188,6 +200,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/hydroponics.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/hydroponics.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -199,6 +212,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/janitor.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/janitor.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -222,6 +236,7 @@
         shader: unshaded
   - type: PointLight
     color: "#ffffff"
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -233,6 +248,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/medical.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/medical.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -244,6 +260,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/genetics.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/genetics.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -257,6 +274,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/mime.rsi
   - type: PointLight
     color: "#ffffff"
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -268,6 +286,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/paramedic.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/paramedic.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -308,6 +327,7 @@
       - state: accent-equipped-HELMET
         color: "#3c3c3c"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -319,6 +339,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/rd.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/rd.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -330,6 +351,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/roboticist.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/roboticist.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -343,6 +365,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/salvage.rsi
   - type: PointLight
     color: "#c77eff"
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -354,6 +377,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/scientist.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/scientist.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -394,6 +418,7 @@
       - state: accent-equipped-HELMET
         color: "#2e2e2e"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -434,6 +459,7 @@
       - state: accent-equipped-HELMET
         color: "#36476b"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -474,6 +500,7 @@
       - state: accent-equipped-HELMET
         color: "#a61d1d"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -485,6 +512,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/virology.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/virology.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -496,6 +524,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/warden.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/warden.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -507,6 +536,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/tacticool.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/tacticool.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -518,6 +548,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/tacticool.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/tacticool.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -529,6 +560,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/centcom_agent.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/centcom_agent.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -540,6 +572,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/centcom_official.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/centcom_official.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -551,6 +584,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/centcom_officer.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/centcom_officer.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -591,6 +625,7 @@
       - state: accent-equipped-HELMET
         color: "#c2911e"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -639,6 +674,7 @@
       - state: midaccent-equipped-HELMET
         color: "#d82927"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -679,6 +715,7 @@
       - state: accent-equipped-HELMET
         color: "#f3f5f4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -719,6 +756,7 @@
       - state: accent-equipped-HELMET
         color: "#79121b"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -759,6 +797,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -807,6 +846,7 @@
       - state: midaccent-equipped-HELMET
         color: "#d4af48"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -847,6 +887,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -887,6 +928,7 @@
       - state: accent-equipped-HELMET
         color: "#3b3b3b"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -935,6 +977,7 @@
       - state: midaccent-equipped-HELMET
         color: "#d08200"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -975,6 +1018,7 @@
       - state: accent-equipped-HELMET
         color: "#a81818"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1015,6 +1059,7 @@
       - state: accent-equipped-HELMET
         color: "#315266"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1055,6 +1100,7 @@
       - state: accent-equipped-HELMET
         color: "#f4a1b7"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1096,6 +1142,7 @@
       - state: accent-equipped-HELMET
         color: "#292929"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1144,6 +1191,7 @@
       - state: sideaccent-equipped-HELMET
         color: "#5dd2ff"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1184,6 +1232,7 @@
       - state: accent-equipped-HELMET
         color: "#363636"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1224,6 +1273,7 @@
       - state: accent-equipped-HELMET
         color: "#2e2e2e"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1272,6 +1322,7 @@
       - state: midaccent-equipped-HELMET
         color: "#266199"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1312,6 +1363,7 @@
       - state: accent-equipped-HELMET
         color: "#ffce5b"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 # Color envirohelms
 - type: entity
@@ -1324,6 +1376,7 @@
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/white.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/white.rsi
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1364,6 +1417,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1404,6 +1458,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1444,6 +1499,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1484,6 +1540,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1524,6 +1581,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1564,6 +1622,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1604,6 +1663,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1644,6 +1704,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1684,6 +1745,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1724,6 +1786,7 @@
       - state: accent-equipped-HELMET
         color: "#8b3e8c"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1764,6 +1827,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1804,6 +1868,7 @@
       - state: accent-equipped-HELMET
         color: "#843b85"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1844,6 +1909,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1884,6 +1950,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1924,6 +1991,7 @@
       - state: accent-equipped-HELMET
         color: "#a349a4"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -1964,6 +2032,7 @@
       - state: accent-equipped-HELMET
         color: "#99211f"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -2004,6 +2073,7 @@
       - state: accent-equipped-HELMET
         color: "#c2680f"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -2044,6 +2114,7 @@
       - state: accent-equipped-HELMET
         color: "#5b991f"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -2084,6 +2155,7 @@
       - state: accent-equipped-HELMET
         color: "#2b5c99"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -2124,6 +2196,7 @@
       - state: accent-equipped-HELMET
         color: "#363636"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadEnvirohelmCustomBase
@@ -2165,3 +2238,4 @@
       - state: accent-equipped-HELMET
         color: "#d6d6d6"
       - state: visor-equipped-HELMET
+  - type: FaceHuggerBlocker

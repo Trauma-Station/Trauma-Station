@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared.Humanoid.Markings;
 // </Trauma>
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -227,18 +228,31 @@ namespace Content.Server.Database
             var legacyMarkings = appearance.Markings
                 .SelectMany(organ => organ.Value.Values)
                 .SelectMany(i => i)
-                .Select(marking => marking.ToString())
+                .Select(marking => marking.ToLegacyDbString())
                 .ToList();
-            var flattenedMarkings = appearance.Markings.SelectMany(it => it.Value)
-                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            // <Trauma> - no linq fuck you, it throws for duplicate keys
+            var flattenedMarkings = new Dictionary<HumanoidVisualLayers, List<Marking>>();
+            foreach (var layers in appearance.Markings.Values)
+            {
+                foreach (var (layer, markings) in layers)
+                {
+                    // this will just add to an existing list incase there are somehow multiple organs with markings of the same layer
+                    if (!flattenedMarkings.TryGetValue(layer, out var list))
+                        flattenedMarkings[layer] = list = new();
+                    list.AddRange(markings);
+                }
+            }
+            // </Trauma>
             var hairMarking = flattenedMarkings.FirstOrNull(kvp => kvp.Key == HumanoidVisualLayers.Hair)?.Value.FirstOrDefault();
             var facialHairMarking = flattenedMarkings.FirstOrNull(kvp => kvp.Key == HumanoidVisualLayers.FacialHair)?.Value.FirstOrDefault();
             profile.Markings =
                 JsonSerializer.SerializeToDocument(legacyMarkings.Select(marking => marking.ToString()).ToList());
             profile.HairName = hairMarking?.MarkingId ?? HairStyles.DefaultHairStyle;
             profile.FacialHairName = facialHairMarking?.MarkingId ?? HairStyles.DefaultFacialHairStyle;
-            profile.HairColor = (hairMarking?.MarkingColors[0] ?? Color.Black).ToHex();
-            profile.FacialHairColor = (facialHairMarking?.MarkingColors[0] ?? Color.Black).ToHex();
+            // <Trauma> - don't assume MarkingColors isn't empty, use ElementAtOrDefault
+            profile.HairColor = (hairMarking?.MarkingColors.ElementAtOrDefault(0) ?? Color.Black).ToHex();
+            profile.FacialHairColor = (facialHairMarking?.MarkingColors.ElementAtOrDefault(0) ?? Color.Black).ToHex();
+            // </Trauma>
 
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
@@ -262,7 +276,15 @@ namespace Content.Server.Database
                         .Select(t => new Trait { TraitName = t })
             );
 
-            profile.BarkVoice = humanoid.BarkVoice; // Goob Station - Barks
+            // <Trauma>
+            profile.BarkVoice = humanoid.BarkVoice;
+            profile.KnowledgeMastery.Clear();
+            foreach (var (id, mastery) in humanoid.Knowledge.Mastery)
+            {
+                profile.KnowledgeMastery[id] = mastery;
+            }
+            profile.KnowledgeRemoved = humanoid.Knowledge.RemovedList();
+            // </Trauma>
 
             profile.Loadouts.Clear();
 

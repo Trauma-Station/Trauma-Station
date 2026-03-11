@@ -1,0 +1,25 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    Title="{Loc 'phone-menu-title'}" MinSize="135 90" Resizable="False">
+    <GridContainer Columns="2">
+        <BoxContainer Orientation="Vertical">
+            <controls:StripeBack>
+                <BoxContainer Orientation="Horizontal" Align="Center">
+                    <GridContainer Columns="3"
+                                   Name="KeypadGrid"/>
+                    <!-- Keypad is filled by code -->
+                </BoxContainer>
+            </controls:StripeBack>
+            <RichTextLabel Name="DialNumber" Text="" Access="Public" HorizontalAlignment="Center"/>
+        </BoxContainer>
+        <!-- phonebook is filled by code -->
+        <ScrollContainer MinSize="250 90">
+            <BoxContainer MinSize="100 90" Orientation="Vertical" Name="PhoneBookContainer" Access="Public"/>
+        </ScrollContainer>
+    </GridContainer>
+</controls:FancyWindow>

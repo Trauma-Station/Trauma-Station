@@ -6,5 +6,5 @@
     sprite: _Trauma/Mobs/Species/Vox/parts.rsi
   - type: VisualOrgan
     data:
-      sprite: _Trauma/Mobs/Species/Reptilian/parts.rsi
+      sprite: _Trauma/empty.rsi
       state: empty # no sprite since the markings actually control it

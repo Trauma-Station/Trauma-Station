@@ -91,7 +91,7 @@
           types:
             Poison: -1
       - !type:CleanBloodstream
-        excluded: Charcoal
+        excluded: [Charcoal] # Trauma - array excluded
         cleanseRate: 3
 
 - type: reagent

@@ -1,15 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Stealth;
+
 public sealed partial class ForcedStealthSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedStealthSystem _stealth = default!;
-
-    public static readonly EntProtoId ForcedStealth = "ForcedStealthStatusEffect";
 
     public override void Initialize()
     {

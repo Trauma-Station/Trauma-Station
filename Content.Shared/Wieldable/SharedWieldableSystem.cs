@@ -1,8 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons.NoWieldNeeded;
 using Content.Shared.Item.ItemToggle;
-using Content.Shared.Standing;
-using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
 // </Trauma>
 using System.Linq;
@@ -36,10 +34,6 @@ namespace Content.Shared.Wieldable;
 
 public abstract class SharedWieldableSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    // </Trauma>
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -107,7 +101,7 @@ public abstract class SharedWieldableSystem : EntitySystem
 
             var time = _timing.CurTime;
             if (time > component.LastPopup + component.PopupCooldown &&
-                !HasComp<MeleeWeaponComponent>(uid) &&
+                //!(HasComp<MeleeWeaponComponent>(uid) && // Trauma - many guns have melee for barrel/stock hits
                 !HasComp<MeleeRequiresWieldComponent>(uid))
             {
                 component.LastPopup = time;

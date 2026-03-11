@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Scruq445 <storchdamien@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
@@ -239,6 +229,9 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
         if (HasComp<TileMovementComponent>(driver))
             EnsureComp<TileMovementComponent>(vehicle);
+
+        var ev = new VehicleMountedEvent(driver);
+        RaiseLocalEvent(vehicle, ref ev);
     }
 
     private void Dismount(EntityUid driver, EntityUid vehicle)
@@ -248,9 +241,9 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
         vehicleComp.Driver = null;
 
-        if (vehicleComp.ActiveOverlay.HasValue)
+        if (vehicleComp.ActiveOverlay is {} overlay)
         {
-            EntityManager.QueueDeleteEntity(vehicleComp.ActiveOverlay.Value);
+            PredictedQueueDel(overlay);
             vehicleComp.ActiveOverlay = null;
         }
         RemComp<RelayInputMoverComponent>(driver);
@@ -262,8 +255,10 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
         _virtualItem.DeleteInHandsMatching(driver, vehicle);
 
-        if (HasComp<TileMovementComponent>(vehicle))
-            RemComp<TileMovementComponent>(vehicle);
+        RemComp<TileMovementComponent>(vehicle);
+
+        var ev = new VehicleDismountedEvent(driver);
+        RaiseLocalEvent(vehicle, ref ev);
     }
 
     private void OnItemSlotEject(EntityUid uid, VehicleComponent comp, ref ItemSlotEjectAttemptEvent args)
@@ -303,3 +298,15 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         args.Entities.Add(driver.Value);
     }
 }
+
+/// <summary>
+/// Event raised on the vehicle after it can be driven (keys in and buckled)
+/// </summary>
+[ByRefEvent]
+public record struct VehicleMountedEvent(EntityUid Driver);
+
+/// <summary>
+/// Event raised on the vehicle after it can no longer be driven (unbuckled, keys removed, etc)
+/// </summary>
+[ByRefEvent]
+public record struct VehicleDismountedEvent(EntityUid Driver);

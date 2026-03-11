@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Access.Systems;
 using Content.Shared.Body;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Events;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Standing;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Medical.Hypoport;
@@ -17,6 +19,7 @@ public sealed class HypoportSystem : EntitySystem
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private EntityQuery<IgnoreHypoportComponent> _ignoreQuery;
     private EntityQuery<InjectorComponent> _injectorQuery;
@@ -54,7 +57,7 @@ public sealed class HypoportSystem : EntitySystem
         // first require that the user is being (at least) softgrabbed, so surprise injections are cooler (grabbed then prick prick prick)
         // it makes sense since youd need to get a hold of someone to properly connect to their neck's port
         // of course ignore this if you are injecting yourself
-        if (user != target && _pullerQuery.TryComp(user, out var puller) && puller.Pulling != target)
+        if (user != target && CanResist(user, target))
         {
             args.OverrideMessage = Loc.GetString("hypoport-fail-grab", ("target", targetIdent));
             args.Cancel();
@@ -101,5 +104,13 @@ public sealed class HypoportSystem : EntitySystem
 
         // instant injection into mobs means hypospray
         return mode.DelayPerVolume == TimeSpan.Zero && mode.MobTime == TimeSpan.Zero;
+    }
+
+    private bool CanResist(EntityUid user, EntityUid target)
+    {
+        if (_standing.IsDown(target))
+            return false;
+
+        return _pullerQuery.TryComp(user, out var puller) && puller.Pulling != target;
     }
 }

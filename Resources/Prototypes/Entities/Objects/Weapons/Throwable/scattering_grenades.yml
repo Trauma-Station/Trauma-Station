@@ -106,6 +106,14 @@
   name: cluster banana peel
   description: Splits into 6 explosive banana peels after throwing, guaranteed fun!
   components:
+  # <Trauma> - fix resolve failure and it doing nothing when destroyed
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:TriggerBehavior
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
     layers:

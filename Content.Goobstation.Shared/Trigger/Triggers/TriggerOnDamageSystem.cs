@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage.Systems;
@@ -33,10 +27,7 @@ public sealed partial class TriggerOnDamageSystem : EntitySystem
             delta.GetTotal() <= ent.Comp.Threshold) // don't trigger on low damage
             return;
 
-        // TODO: PredictedRandom when it's real
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new Random(seed);
-        if (!rand.Prob(ent.Comp.Probability))
+        if (!SharedRandomExtensions.PredictedProb(_timing, ent.Comp.Probability, GetNetEntity(ent)))
             return;
 
         _trigger.Trigger(ent.Owner, args.Origin, ent.Comp.KeyOut);

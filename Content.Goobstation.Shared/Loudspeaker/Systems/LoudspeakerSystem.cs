@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Speech;
 using Content.Goobstation.Shared.Loudspeaker.Components;
 using Content.Goobstation.Shared.Loudspeaker.Events;
@@ -89,6 +91,8 @@ public sealed class LoudSpeakerSystem : EntitySystem
 
     private void OnGetSpeechSound(Entity<LoudspeakerHolderComponent> ent, ref GetSpeechSoundEvent args)
     {
+        if (args.Handled)
+            return;
 
         foreach (var loudspeaker in ent.Comp.Loudspeakers)
         {
@@ -98,6 +102,7 @@ public sealed class LoudSpeakerSystem : EntitySystem
             if (speechEv.SpeechSounds != null)
             {
                 args.SpeechSoundProtoId = speechEv.SpeechSounds;
+                args.Handled = true;
                 return;
             }
 

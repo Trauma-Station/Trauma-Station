@@ -40,7 +40,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
     [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    //[Dependency] private readonly SharedPopupSystem _popup = default!; // Trauma - not used anymore
     [Dependency] private readonly SharedPuddleSystem _puddle = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
@@ -223,16 +223,13 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
         if (!HasComp<BodyComponent>(ent)) // Goob - do not apply base bleed to basic simplemobs
             TryModifyBleedAmount(ent.AsNullable(), totalFloat);
 
-        /// Critical hit. Causes target to lose blood, using the bleed rate modifier of the weapon, currently divided by 5
-        /// The crit chance is currently the bleed rate modifier divided by 25.
-        /// Higher damage weapons have a higher chance to crit!
+        // Critical hit. Causes target to lose blood, using the bleed rate modifier of the weapon, currently divided by 5
+        // The crit chance is currently the bleed rate modifier divided by 25.
+        // Higher damage weapons have a higher chance to crit!
 
-        // TODO: Replace with RandomPredicted once the engine PR is merged
         // Use both the receiver and the damage causing entity for the seed so that we have different results for multiple attacks in the same tick
-        var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(ent).Id, GetNetEntity(args.Origin)?.Id ?? 0 );
-        var rand = new System.Random(seed);
         var prob = Math.Clamp(totalFloat / 25, 0, 1);
-        if (totalFloat > 0 && rand.Prob(prob))
+        if (totalFloat > 0 && SharedRandomExtensions.PredictedProb(_timing, prob, GetNetEntity(ent), GetNetEntity(args.Origin)))
         {
             TryBleedOut(ent.AsNullable(), total / 5);
             _audio.PlayPredicted(ent.Comp.InstantBloodSound, ent, args.Origin);
@@ -305,6 +302,14 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
     private void OnRejuvenate(Entity<BloodstreamComponent> ent, ref RejuvenateEvent args)
     {
         TryModifyBleedAmount(ent.AsNullable(), -ent.Comp.BleedAmount);
+        // <Trauma> - force it to get reset despite any desync in TMBA
+        ent.Comp.BleedAmount = 0;
+        ent.Comp.BleedAmountFromWounds = 0;
+        ent.Comp.BleedAmountNotFromWounds = 0;
+        DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmount));
+        DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmountFromWounds));
+        DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmountNotFromWounds));
+        // </Trauma>
 
         if (SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution))
         {

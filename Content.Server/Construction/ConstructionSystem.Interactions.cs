@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Knowledge;
+// </Trauma>
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Construction.Components;
@@ -213,6 +216,13 @@ namespace Content.Server.Construction
 
             UpdatePathfinding(uid, construction);
 
+            // <Trauma>
+            if (user is { } trueUser)
+            {
+                var evKnowledge = new UpdateItemQualityEvent(trueUser);
+                RaiseLocalEvent(uid, ref evKnowledge);
+            }
+            // </Trauma>
             return HandleResult.True;
         }
 

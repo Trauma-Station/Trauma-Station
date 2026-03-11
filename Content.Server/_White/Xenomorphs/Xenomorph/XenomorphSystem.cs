@@ -1,12 +1,10 @@
 using System.Linq;
-using Content.Shared.FixedPoint;
 using Content.Server._EinsteinEngines.Language;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Medical.Shared.Traumas;
-using Content.Medical.Shared.Wounds;
 using Content.Shared._White.Xenomorphs.Xenomorph;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
@@ -14,6 +12,7 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -26,11 +25,8 @@ public sealed class XenomorphSystem : SharedXenomorphSystem
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly WoundSystem _wounds = default!; // Goobstation
-    [Dependency] private readonly BodySystem _body = default!; // Goobstation
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
 
     public override void Initialize()
@@ -105,7 +101,7 @@ public sealed class XenomorphSystem : SharedXenomorphSystem
             ("message", FormattedMessage.EscapeText(message)));
 
         _chatManager.ChatMessageToMany(
-            ChatChannel.Telepathic,
+            ChatChannel.CollectiveMind,
             message,
             wrappedMessage,
             source,

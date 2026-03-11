@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.EntitySystems;
@@ -71,7 +73,7 @@ public sealed class LollypopSystem : EntitySystem
 
     private void OnBeforeIngested(Entity<EquippedLollypopComponent> ent, ref BeforeIngestedEvent args)
     {
-        if (args.Max > ent.Comp.MaxEaten);
+        if (args.Max > ent.Comp.MaxEaten)
             args.Max = ent.Comp.MaxEaten;
     }
 

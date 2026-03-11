@@ -8,3 +8,10 @@
     damage:
       types:
         Piercing: 10
+
+- type: entity
+  parent: BaseBullet
+  id: BaseBulletKinetic
+  abstract: true
+  components:
+  - type: BulletHoleGenerator

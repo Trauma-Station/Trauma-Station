@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
@@ -31,8 +32,7 @@ public sealed class RandomOrganEffectsSystem : EntitySystem
 
     private void SetNextUpdate(Entity<RandomOrganEffectsComponent> ent)
     {
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
 
         var comp = ent.Comp;
         var randomSeconds = rand.NextDouble() * (comp.MaxActivationTime.TotalSeconds - comp.MinActivationTime.TotalSeconds);

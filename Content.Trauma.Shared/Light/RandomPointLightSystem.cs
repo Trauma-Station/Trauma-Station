@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -22,8 +23,7 @@ public sealed class RandomPointLightSystem : EntitySystem
         if (!_light.TryGetLight(ent, out var light))
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var color = rand.Pick(ent.Comp.Colors);
         var energy = rand.NextFloat(ent.Comp.Energy.X, ent.Comp.Energy.Y);
         _light.SetColor(ent.Owner, color, light);

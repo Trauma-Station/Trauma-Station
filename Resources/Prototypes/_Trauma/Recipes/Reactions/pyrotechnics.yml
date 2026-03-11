@@ -38,7 +38,7 @@
     WeldingFuel:
       amount: 1
   products:
-    AmmoniumNitrateFuelOil: 2
+    AmmoniumNitrateFuelOil: 3
 
 - type: reaction
   id: Octogen

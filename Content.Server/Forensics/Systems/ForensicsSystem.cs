@@ -108,6 +108,7 @@ using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Forensics.Systems;
 using Content.Shared.Gibbing;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
@@ -341,7 +342,7 @@ namespace Content.Server.Forensics
         {
             if (!TryComp<ForensicsComponent>(target, out var forensicsComp))
             {
-                _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning-cannot-clean", ("target", target)), user, user, PopupType.MediumCaution);
+                _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning-cannot-clean", ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.MediumCaution);
                 return false;
             }
 
@@ -365,13 +366,13 @@ namespace Content.Server.Forensics
 
                 _doAfterSystem.TryStartDoAfter(doAfterArgs);
 
-                _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning", ("target", target)), user, user);
+                _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning", ("target", Identity.Entity(target, EntityManager))), user, user);
 
                 return true;
             }
             else
             {
-                _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning-cannot-clean", ("target", target)), user, user, PopupType.MediumCaution);
+                _popupSystem.PopupEntity(Loc.GetString("forensics-cleaning-cannot-clean", ("target", Identity.Entity(target, EntityManager))), user, user, PopupType.MediumCaution);
                 return false;
             }
 
@@ -480,6 +481,8 @@ namespace Content.Server.Forensics
                 return;
 
             var recipientComp = EnsureComp<ForensicsComponent>(args.Recipient);
+            if (!recipientComp.CanStoreDNA) // Goobstation
+                return;
             recipientComp.DNAs.Add((component.DNA, TimeSpan.Zero)); // Goobstation
             recipientComp.CanDnaBeCleaned = args.CanDnaBeCleaned;
         }
@@ -511,6 +514,8 @@ namespace Content.Server.Forensics
             if (TryComp<DnaComponent>(donor, out var donorComp) && donorComp.DNA != null)
             {
                 EnsureComp<ForensicsComponent>(recipient, out var recipientComp);
+                if (!recipientComp.CanStoreDNA) // Goobstation
+                    return;
                 recipientComp.DNAs.Add((donorComp.DNA, TimeSpan.Zero)); // Goobstation
                 recipientComp.CanDnaBeCleaned = canDnaBeCleaned;
             }

@@ -1,0 +1,13 @@
+# For entities that directly store knowledge e.g. a brain
+- type: entity
+  abstract: true
+  id: BaseKnowledgeContainer
+  components:
+  - type: KnowledgeContainer
+  - type: ContainerContainer
+    containers:
+      knowledge: !type:Container
+  - type: KnowledgeGrant
+    skills:
+      FirstAidKnowledge: 0 # needed for injector speed to be slower when unskilled
+      MeleeKnowledge: 0 # needed for lower base melee attack speed when unskilled

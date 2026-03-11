@@ -6,11 +6,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared.Popups;
-using Content.Shared.PowerCell;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared._EinsteinEngines.Language;
@@ -51,16 +50,16 @@ public sealed class TranslatorSystem : SharedTranslatorSystem
     {
         if (!component.Enabled
             || component.LifeStage >= ComponentLifeStage.Removing
-            || !TryComp<LanguageKnowledgeComponent>(uid, out var knowledge)
+            || !TryComp<LanguageSpeakerComponent>(uid, out var speaker)
             || !_powerCell.HasActivatableCharge(uid))
             return;
 
-        CopyLanguages(component, ev, knowledge);
+        CopyLanguages(component, ev, speaker);
     }
 
     private void OnProxyDetermineLanguages(EntityUid uid, HoldsTranslatorComponent component, DetermineEntityLanguagesEvent ev)
     {
-        if (!TryComp<LanguageKnowledgeComponent>(uid, out var knowledge))
+        if (!TryComp<LanguageSpeakerComponent>(uid, out var speaker))
             return;
 
         foreach (var (translator, translatorComp) in component.Translators.ToArray())
@@ -74,7 +73,7 @@ public sealed class TranslatorSystem : SharedTranslatorSystem
                 continue;
             }
 
-            CopyLanguages(translatorComp, ev, knowledge);
+            CopyLanguages(translatorComp, ev, speaker);
         }
     }
 
@@ -121,7 +120,7 @@ public sealed class TranslatorSystem : SharedTranslatorSystem
             && TryComp<LanguageSpeakerComponent>(holder, out var languageComp))
         {
             // The first new spoken language added by this translator, or null
-            var firstNewLanguage = translatorComp.SpokenLanguages.FirstOrDefault(it => !languageComp.SpokenLanguages.Contains(it));
+            var firstNewLanguage = translatorComp.SpokenLanguages.FirstOrDefault(it => !languageComp.Speaks.Contains(it));
             _language.UpdateEntityLanguages(holder);
 
             // Update the current language of the entity if necessary
@@ -173,10 +172,10 @@ public sealed class TranslatorSystem : SharedTranslatorSystem
             _language.UpdateEntityLanguages(holderCont.Owner);
     }
 
-    private void CopyLanguages(BaseTranslatorComponent from, DetermineEntityLanguagesEvent to, LanguageKnowledgeComponent knowledge)
+    private void CopyLanguages(BaseTranslatorComponent from, DetermineEntityLanguagesEvent to, LanguageSpeakerComponent knowledge)
     {
-        var addSpoken = CheckLanguagesMatch(from.RequiredLanguages, knowledge.SpokenLanguages, from.RequiresAllLanguages);
-        var addUnderstood = CheckLanguagesMatch(from.RequiredLanguages, knowledge.UnderstoodLanguages, from.RequiresAllLanguages);
+        var addSpoken = CheckLanguagesMatch(from.RequiredLanguages, knowledge.Speaks, from.RequiresAllLanguages);
+        var addUnderstood = CheckLanguagesMatch(from.RequiredLanguages, knowledge.Understands, from.RequiresAllLanguages);
 
         if (addSpoken)
             foreach (var language in from.SpokenLanguages)

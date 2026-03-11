@@ -1,5 +1,6 @@
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared._Shitcode.Heretic.Effects;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage.Components;
@@ -17,6 +18,7 @@ public abstract partial class SharedHereticAbilitySystem
 {
     protected virtual void SubscribeSide()
     {
+        SubscribeLocalEvent<EventHereticCloak>(OnCloak);
         SubscribeLocalEvent<EventHereticRustCharge>(OnRustCharge);
         SubscribeLocalEvent<EventHereticIceSpear>(OnIceSpear);
         SubscribeLocalEvent<EventHereticRealignment>(OnRealignment);
@@ -24,6 +26,27 @@ public abstract partial class SharedHereticAbilitySystem
 
         SubscribeLocalEvent<RealignmentComponent, StatusEffectEndedEvent>(OnStatusEnded);
         SubscribeLocalEvent<RealignmentComponent, BeforeStaminaDamageEvent>(OnBeforeRealignmentStamina);
+    }
+
+    private void OnCloak(EventHereticCloak args)
+    {
+        var ent = args.Performer;
+
+        if (StatusNew.TryEffectsWithComp<HereticCloakedStatusEffectComponent>(ent, out var effects))
+        {
+            foreach (var effect in effects)
+            {
+                PredictedQueueDel(effect.Owner);
+            }
+            args.Handled = true;
+            return;
+        }
+
+        // TryUseAbility only if we are not cloaked so that we can uncloak without focus
+        if (!TryUseAbility(args))
+            return;
+
+        StatusNew.TryAddStatusEffect(ent, args.Status, out _, args.Lifetime);
     }
 
     private void OnStatusEnded(Entity<RealignmentComponent> ent, ref StatusEffectEndedEvent args)
@@ -100,18 +123,16 @@ public abstract partial class SharedHereticAbilitySystem
         if (!TryComp(ent, out HandsComponent? hands))
             return;
 
-        args.Handled = true;
-
-        if (_net.IsClient)
-            return;
-
         if (Exists(spearAction.CreatedSpear))
         {
             var spear = spearAction.CreatedSpear.Value;
 
-            // TODO: When heretic spells are made the way wizard spell works don't handle this action if we can't pick it up.
-            // It is handled now because it always speaks invocation no matter what.
             if (_hands.IsHolding((ent, hands), spear) || !_hands.TryGetEmptyHand((ent, hands), out var hand))
+                return;
+
+            args.Handled = true;
+
+            if (_net.IsClient)
                 return;
 
             if (TryComp(spear, out EmbeddableProjectileComponent? embeddable) && embeddable.EmbeddedIntoUid != null)
@@ -123,12 +144,15 @@ public abstract partial class SharedHereticAbilitySystem
             return;
         }
 
-        var newSpear = Spawn(spearAction.SpearProto, Transform(ent).Coordinates);
+        var newSpear = PredictedSpawnAtPosition(spearAction.SpearProto, Transform(ent).Coordinates);
         if (!_hands.TryForcePickupAnyHand(ent, newSpear, false, hands))
         {
-            QueueDel(newSpear);
+            PredictedQueueDel(newSpear);
+            _actions.SetIfBiggerCooldown(args.Action.AsNullable(), TimeSpan.FromSeconds(1));
             return;
         }
+
+        args.Handled = true;
 
         spearAction.CreatedSpear = newSpear;
         EnsureComp<IceSpearComponent>(newSpear).ActionId = args.Action;
