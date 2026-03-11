@@ -29,6 +29,7 @@
     department: Security
     time: 10800 #3 hours
   # </Goob>
+  creditImage: /Textures/_Trauma/EndCredits/Antags/changeling.png
 
 - type: antag
   id: AbductorScientistAntag

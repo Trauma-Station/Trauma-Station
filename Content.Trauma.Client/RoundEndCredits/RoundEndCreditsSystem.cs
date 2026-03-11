@@ -7,6 +7,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.RoundEndCredits;
 
@@ -17,20 +18,19 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly IResourceCache _cache = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     private float _timer;
     private const string Logo = "/Textures/Logo/logo.png";
     private const string Pixellari = "/Fonts/_Trauma/Pixellari.ttf";
+    private const string GrandPixel = "/Fonts/_Trauma/Grand9K_Pixel.ttf";
     private ScrollContainer? _creditsContainer;
     private BoxContainer? _exitContainer;
     private const int SmallFontSize = 10;
-    private const int NormalFontSize = 14;
+    private const int NormalFontSize = 16;
     private const int BigFontSize = 24;
-    private const int HeaderFontSize = 36;
-
-    private Dictionary<string, Control> _departmentContainers = new();
-    private Dictionary<string, Control> _antagContainers = new();
-    private Dictionary<string, (RoundEndMessageEvent.RoundEndPlayerInfo Info, string? DepartmentId)> _playerContainers = new();
+    private const int HeaderFontSize = 42;
+    private const bool Debug = true;
 
     public override void Initialize()
     {
@@ -43,6 +43,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     {
         var headerFont = new VectorFont(_cache.GetResource<FontResource>(Pixellari), HeaderFontSize);
         var bigFont = new VectorFont(_cache.GetResource<FontResource>(Pixellari), BigFontSize);
+        var playerNameFont = new VectorFont(_cache.GetResource<FontResource>(GrandPixel), SmallFontSize);
         var normalFont = new VectorFont(_cache.GetResource<FontResource>(Pixellari), NormalFontSize);
         var smallFont = new VectorFont(_cache.GetResource<FontResource>(Pixellari), SmallFontSize);
 
@@ -53,6 +54,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             SetSize = _clyde.MainWindow.Size,
             MouseFilter = Control.MouseFilterMode.Ignore,
             ReserveScrollbarSpace = false,
+            HScrollEnabled = false,
         };
 
         var mainCreditVBox = new BoxContainer
@@ -69,7 +71,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
         var episodeNumber = new Label
         {
-            Text = Loc.GetString("round-end-credits-trauma-episode", ("roundid",  message.RoundId)),
+            Text = Loc.GetString("round-end-credits-trauma-episode", ("roundid",  message.RoundId), ("title", message.GamemodeTitle)),
             Align = Label.AlignMode.Center,
             FontOverride = bigFont,
             Margin =  new Thickness(0, 0, 0, 250),
@@ -88,7 +90,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             Text = Loc.GetString("round-end-credits-trauma-thankyou"),
             Align = Label.AlignMode.Center,
             FontOverride = bigFont,
-            Margin =  new Thickness(0, 0, 0, 150),
+            Margin =  new Thickness(0, 500, 0, 1500),
         };
 
         var serverImageBox = new BoxContainer
@@ -102,12 +104,13 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         mainCreditScroll.AddChild(mainCreditVBox);
         mainCreditVBox.AddChild(serverImageBox);
         mainCreditVBox.AddChild(episodeNumber);
+        mainCreditVBox.AddChild(MakeIntroJargon(bigFont)); // The larp
         mainCreditVBox.AddChild(castLabel);
 
         foreach (var player in message.AllPlayersEndInfo)
         {
             if (player.PlayerICName != null)
-                mainCreditVBox.AddChild(MakePlayerInfoBox(player, normalFont));
+                mainCreditVBox.AddChild(MakePlayerInfoBox(player, playerNameFont, Color.White , true));
         }
 
         var sortedDepartments = _proto.EnumeratePrototypes<DepartmentPrototype>()
@@ -116,10 +119,23 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
         foreach (var department in sortedDepartments)
         {
-            mainCreditVBox.AddChild(MakeDepartmentContainer(department, headerFont, smallFont));
+            mainCreditVBox.AddChild(MakeDepartmentContainer(department, headerFont, playerNameFont, message.AllPlayersEndInfo));
+        }
+
+        var antags = _proto.EnumeratePrototypes<AntagPrototype>()
+            .OrderBy(p => p.Name)
+            .ToList();
+
+        foreach (var antag in antags)
+        {
+            mainCreditVBox.AddChild(MakeAntagBox(message.AllPlayersEndInfo, playerNameFont, headerFont, antag));
         }
 
         mainCreditVBox.AddChild(thanksForPlaying);
+
+        if (_random.Prob(0.9f))
+            mainCreditVBox.AddChild(MakeKojimaBox(normalFont, bigFont));
+
         _creditsContainer = mainCreditScroll;
         AddEndRoundCredits(mainCreditScroll);
     }
@@ -146,7 +162,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
     public float GetScrollingSpeed(TimeSpan time)
     {
-        var normalSpeed = 70f;
+        var normalSpeed = 120f;
         var speedUpDuration = 3f;
         var easing = Easings.InSine;
         return easing(Math.Min((float)time.TotalSeconds / speedUpDuration, 1f)) * normalSpeed;
@@ -161,7 +177,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             _ui.WindowRoot.RemoveChild(_exitContainer);
     }
 
-    private BoxContainer MakePlayerInfoBox(RoundEndMessageEvent.RoundEndPlayerInfo playerInfo, VectorFont font)
+    private BoxContainer MakePlayerInfoBox(RoundEndMessageEvent.RoundEndPlayerInfo playerInfo, VectorFont font, Color color, bool fullInfo = false)
     {
         var box = new BoxContainer
         {
@@ -179,7 +195,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
                 SetSize = new Vector2(64, 64),
                 VerticalExpand = true,
                 Stretch = SpriteView.StretchMode.Fill,
-                Margin = new Thickness(3, 0, 3, 0)
+                Margin = new Thickness(10, 0, 10, 5)
             });
         }
 
@@ -187,50 +203,11 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         var text = new Label
         {
             Name = playerInfo.PlayerICName,
-            Text = playerInfo.PlayerICName + "" + Loc.GetString("round-end-summary-window-player-name-role", ("role", role), ("player", playerInfo.PlayerOOCName)),
+            Text = fullInfo ? Loc.GetString("round-end-credits-trauma-player-name-role", ("name", playerInfo.PlayerICName ?? "Unknown"), ("role", role), ("player", playerInfo.PlayerOOCName)) : playerInfo.PlayerICName,
             Align = Label.AlignMode.Center,
             FontOverride =  font,
-            Margin = new Thickness(0, 0, 0, 20)
-        };
-
-        box.AddChild(text);
-        var playerDepartment = _proto.EnumeratePrototypes<DepartmentPrototype>()
-            .FirstOrDefault(d => d.Roles.Contains(playerInfo.Role));
-
-        _playerContainers[playerInfo.Role] = (playerInfo, playerDepartment?.ID);
-
-        return box;
-    }
-
-    private BoxContainer MakePlayerInfoBoxShort(RoundEndMessageEvent.RoundEndPlayerInfo playerInfo, VectorFont font)
-    {
-        var box = new BoxContainer
-        {
-            Align = BoxContainer.AlignMode.Center,
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-            MaxHeight = 100,
-        };
-
-        if (playerInfo.PlayerNetEntity != null)
-        {
-            box.AddChild(new SpriteView(playerInfo.PlayerNetEntity.Value, EntityManager)
-            {
-                OverrideDirection = Direction.South,
-                VerticalAlignment = Control.VAlignment.Center,
-                SetSize = new Vector2(64, 64),
-                VerticalExpand = true,
-                Stretch = SpriteView.StretchMode.Fill,
-                Margin = new Thickness(3, 0, 3, 0)
-            });
-        }
-
-        var text = new Label
-        {
-            Name = playerInfo.PlayerICName,
-            Text = playerInfo.PlayerICName,
-            Align = Label.AlignMode.Center,
-            FontOverride =  font,
-            Margin = new Thickness(0, 0, 0, 10)
+            FontColorOverride = color,
+            Margin = new Thickness(15, 0, 15, 15),
         };
 
         box.AddChild(text);
@@ -238,7 +215,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         return box;
     }
 
-    private BoxContainer MakeDepartmentContainer(DepartmentPrototype department, VectorFont fontHeader, VectorFont smallFont)
+    private BoxContainer MakeDepartmentContainer(DepartmentPrototype department, VectorFont fontHeader, VectorFont smallFont, RoundEndMessageEvent.RoundEndPlayerInfo[] players)
     {
         var text = new Label
         {
@@ -247,27 +224,105 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             HorizontalAlignment = Control.HAlignment.Center,
             FontColorOverride = department.Color,
         };
-        var boxH = new BoxContainer
+        var boxH = new GridContainer
         {
-            Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            Align =  BoxContainer.AlignMode.Center,
+            Columns = 11,
+            HorizontalAlignment = Control.HAlignment.Center,
         };
         var boxV = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             Align =  BoxContainer.AlignMode.Center,
+            Margin =  new Thickness(0, 150, 0, 50),
         };
 
-        boxV.AddChild(boxH);
         boxV.AddChild(text);
+        boxV.AddChild(boxH);
 
-        foreach (var player in _playerContainers)
+        foreach (var playerInfo in players)
         {
-            boxH.AddChild(MakePlayerInfoBoxShort(player.Value.Info, smallFont));
+            var belongsToDepartment = playerInfo.JobPrototypes.Any(jobId =>
+                department.Roles.Contains(new ProtoId<JobPrototype>(jobId)));
+
+            if (belongsToDepartment)
+                boxH.AddChild(MakePlayerInfoBox(playerInfo, smallFont, Color.White));
+
+            if (Debug)
+            {
+                for (int i = 0; i < 35; i++)
+                {
+                    boxH.AddChild(MakePlayerInfoBox(playerInfo, smallFont, Color.White));
+                }
+            }
         }
 
         return boxV;
     }
+
+    private BoxContainer MakeAntagBox(RoundEndMessageEvent.RoundEndPlayerInfo[] players, VectorFont smallfont, VectorFont headerFont, AntagPrototype antag)
+    {
+        var boxH = new GridContainer
+        {
+            Columns = 11,
+            HorizontalAlignment = Control.HAlignment.Center,
+            HorizontalExpand = true,
+        };
+        var boxV = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            Align =  BoxContainer.AlignMode.Center,
+            Margin = new Thickness(0, 150, 0, 50),
+        };
+        if (!string.IsNullOrWhiteSpace(antag.CreditImage) && _cache.TryGetResource<TextureResource>(antag.CreditImage, out var texture))
+        {
+            var image = new TextureRect
+            {
+                Texture = texture,
+                HorizontalAlignment = Control.HAlignment.Center,
+            };
+            boxV.AddChild(image);
+        }
+        else
+        {
+            var text = new Label
+            {
+                HorizontalAlignment = Control.HAlignment.Center,
+                Text = Loc.GetString(antag.Name),
+                FontOverride = headerFont,
+                FontColorOverride = antag.Color,
+            };
+            boxV.AddChild(text);
+        }
+
+        boxV.AddChild(boxH);
+
+        var playersInSection = 0;
+
+        foreach (var player in players)
+        {
+            if (!player.Antag)
+                continue;
+
+            foreach (var playerAntag in player.AntagPrototypes)
+            {
+                if (playerAntag == antag.ID && !antag.DontShowInCredits)
+                {
+                    boxH.AddChild(MakePlayerInfoBox(player, smallfont, antag.Color));
+                    playersInSection++;
+                }
+            }
+        }
+
+        if (playersInSection == 0)
+        {
+            var boxEmpty = new BoxContainer();
+            return boxEmpty;
+        }
+
+        return boxV;
+    }
+
     private BoxContainer AddExitCreditsButton()
     {
         var buttonBox = new BoxContainer
@@ -278,7 +333,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
         var button = new Button
         {
-            Text = "Close Credits",
+            Text = Loc.GetString("round-end-credits-trauma-close"),
             HorizontalAlignment =  Control.HAlignment.Right,
             VerticalAlignment = Control.VAlignment.Top,
         };
@@ -289,6 +344,52 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         _exitContainer = buttonBox;
 
         return buttonBox;
+    }
+
+    private BoxContainer MakeIntroJargon(VectorFont font)
+    {
+        var box = new BoxContainer
+        {
+            Align =  BoxContainer.AlignMode.Center,
+            Margin =   new Thickness(0, 0, 0, 150),
+        };
+
+        var label = new Label
+        {
+            Text =  Loc.GetString("round-end-credits-trauma-jargon"),
+            Align =  Label.AlignMode.Center,
+            FontOverride = font,
+        };
+
+        box.AddChild(label);
+
+        return box;
+    }
+
+    private BoxContainer MakeKojimaBox(VectorFont directorFont, VectorFont kojimaFont)
+    {
+        var vBox = new BoxContainer
+        {
+            Align = BoxContainer.AlignMode.Center,
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Margin =  new Thickness(0, 0, 0, 300),
+        };
+        var directedby = new Label
+        {
+            Text = Loc.GetString("round-end-credits-trauma-created"),
+            Align = Label.AlignMode.Center,
+            FontOverride = directorFont,
+        };
+        var kojima = new Label
+        {
+            Text = Loc.GetString("round-end-credits-trauma-kojima"),
+            Align = Label.AlignMode.Center,
+            FontOverride = kojimaFont,
+        };
+        vBox.AddChild(directedby);
+        vBox.AddChild(kojima);
+
+        return vBox;
     }
 
     #endregion
