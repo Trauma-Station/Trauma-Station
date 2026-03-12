@@ -1,0 +1,22 @@
+- type: entity
+  id: HolyArrow
+  parent: [BaseBullet, BaseArrow]
+  name: arrow of purity
+  description: The spear of destiny looks a little small, huh.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/arrows.rsi
+    layers:
+    - state: tail
+      color: grey
+    - state: rod
+      color: brown
+    - state: tip
+      color: gold
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+        Holy: 25
+  - type: TimedDespawn
+    lifetime: 60 # Can't farm arrows. However can be stolen by others and fired from a normal bow (funny)
