@@ -168,7 +168,7 @@
       - meat
       - bread
   - type: Construction
-    graph: Friedeggs
+    graph: EggToast
     node: finish
 
 - type: entity
