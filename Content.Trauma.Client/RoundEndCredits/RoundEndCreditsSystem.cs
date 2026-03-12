@@ -25,16 +25,16 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
 
     private float _timer;
-    private static readonly ResPath Logo = new ResPath("/Textures/Logo/logo.png");
-    private static readonly ResPath Pixellari = new ResPath("/Fonts/_Trauma/Pixellari.ttf");
-    private static readonly ResPath GrandPixel = new ResPath("/Fonts/_Trauma/Grand9K_Pixel.ttf");
-    private ScrollContainer? _creditsContainer;
+    private static readonly ResPath Logo = new ("/Textures/Logo/logo.png");
+    private static readonly ResPath Pixellari = new ("/Fonts/_Trauma/Pixellari.ttf");
+    private static readonly ResPath GrandPixel = new ("/Fonts/_Trauma/Grand9K_Pixel.ttf");
+    private EndRoundCreditsControl? _creditsContainer;
     private BoxContainer? _exitContainer;
     private const int SmallFontSize = 10;
     private const int NormalFontSize = 16;
     private const int BigFontSize = 24;
     private const int HeaderFontSize = 42;
-    private bool Debug = false; // Set this to true if you want a bunch of dummy characters to spawn
+    private bool Debug = true; // Set this to true if you want a bunch of dummy characters to spawn
 
     public override void Initialize()
     {
@@ -57,41 +57,16 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
         var texture = _cache.GetResource<TextureResource>(Logo);
 
-        var mainCreditScroll = new ScrollContainer
-        {
-            SetSize = _clyde.MainWindow.Size,
-            MouseFilter = Control.MouseFilterMode.Ignore,
-            ReserveScrollbarSpace = false,
-            HScrollEnabled = false,
-            // Hidden = True, TODO when robust pr is done
-        };
+        var mainCreditScroll = new EndRoundCreditsControl();
 
-        var mainCreditVBox = new BoxContainer
-        {
-            Align = BoxContainer.AlignMode.Center,
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-        };
+        mainCreditScroll.SetSize = _clyde.MainWindow.Size;
+
+        var mainCreditVBox = mainCreditScroll.MainCreditVBox;
 
         var serverImage = new TextureRect
         {
             Margin = new Thickness(0, 1000, 0, 500),
             Texture = texture
-        };
-
-        var episodeNumber = new Label
-        {
-            Text = Loc.GetString("round-end-credits-trauma-episode", ("roundid",  message.RoundId), ("title", message.GamemodeTitle)),
-            Align = Label.AlignMode.Center,
-            FontOverride = bigFont,
-            Margin =  new Thickness(0, 0, 0, 250),
-        };
-
-        var castLabel = new Label
-        {
-            Text = Loc.GetString("round-end-credits-trauma-cast"),
-            Align = Label.AlignMode.Center,
-            FontOverride = bigFont,
-            Margin =  new Thickness(0, 0, 0, 150),
         };
 
         var thanksForPlaying = new Label
@@ -102,20 +77,23 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             Margin =  new Thickness(0, 500, 0, 1500),
         };
 
-        var serverImageBox = new BoxContainer
-        {
-            Align =  BoxContainer.AlignMode.Center,
-            VerticalAlignment = Control.VAlignment.Top
-        };
+        mainCreditScroll.ServerImageBox.AddChild(serverImage);
+        mainCreditScroll.EpisodeNumber.Text = Loc.GetString("round-end-credits-trauma-episode", ("roundid", message.RoundId), ("title", message.GamemodeTitle));
+        mainCreditScroll.IntroJargonLabel.Text = Loc.GetString("round-end-credits-trauma-jargon");
 
-        serverImageBox.AddChild(serverImage);
+        // Fonts
+        mainCreditScroll.EpisodeNumber.FontOverride = bigFont;
+        mainCreditScroll.IntroJargonLabel.FontOverride = bigFont;
+        mainCreditScroll.ShoutOutLabel.FontOverride = bigFont;
+        mainCreditScroll.CastLabel.FontOverride = bigFont;
 
-        mainCreditScroll.AddChild(mainCreditVBox);
-        mainCreditVBox.AddChild(serverImageBox);
-        mainCreditVBox.AddChild(episodeNumber);
-        mainCreditVBox.AddChild(MakeIntroJargon(bigFont)); // The larp
-        mainCreditVBox.AddChild(MakeShoutOutBox(bigFont));
-        mainCreditVBox.AddChild(castLabel);
+        var shoutout = "John Nanotrasen";
+
+        if (_linkAccount.GetPatrons().Count != 0)
+            shoutout = _random.Pick(_linkAccount.GetPatrons()).Name;
+
+        mainCreditScroll.ShoutOutLabel.Text = Loc.GetString("round-end-credits-trauma-director", ("shoutout", shoutout));
+        mainCreditScroll.CastLabel.Text = Loc.GetString("round-end-credits-trauma-cast");
 
         foreach (var player in message.AllPlayersEndInfo)
         {
@@ -138,7 +116,10 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
         foreach (var antag in antags)
         {
-            mainCreditVBox.AddChild(MakeAntagBox(message.AllPlayersEndInfo, playerNameFont, headerFont, antag));
+            var antagBox = MakeAntagBox(message.AllPlayersEndInfo, playerNameFont, headerFont, antag);
+
+            if (antagBox is {})
+                mainCreditVBox.AddChild(antagBox);
         }
 
         var lastwords = false;
@@ -289,7 +270,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         return boxV;
     }
 
-    private BoxContainer MakeAntagBox(RoundEndMessageEvent.RoundEndPlayerInfo[] players, VectorFont smallfont, VectorFont headerFont, AntagPrototype antag)
+    private BoxContainer? MakeAntagBox(RoundEndMessageEvent.RoundEndPlayerInfo[] players, VectorFont smallfont, VectorFont headerFont, AntagPrototype antag)
     {
         var boxH = new GridContainer
         {
@@ -302,7 +283,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             Align =  BoxContainer.AlignMode.Center,
             Margin =  new Thickness(0, 150, 0, 50),
         };
-        if (antag.CreditImage != null && _cache.TryGetResource<TextureResource>(antag.CreditImage.Value, out var texture))
+        if (!string.IsNullOrWhiteSpace(antag.CreditImage.ToString()) && antag.CreditImage != null && _cache.TryGetResource<TextureResource>(antag.CreditImage.Value, out var texture))
         {
             var image = new TextureRect
             {
@@ -344,8 +325,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
         if (playersInSection == false)
         {
-            var boxEmpty = new BoxContainer();
-            return boxEmpty;
+            return null;
         }
 
         return boxV;
@@ -372,26 +352,6 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         _exitContainer = buttonBox;
 
         return buttonBox;
-    }
-
-    private BoxContainer MakeIntroJargon(VectorFont font)
-    {
-        var box = new BoxContainer
-        {
-            Align =  BoxContainer.AlignMode.Center,
-            Margin =   new Thickness(0, 0, 0, 150),
-        };
-
-        var label = new Label
-        {
-            Text =  Loc.GetString("round-end-credits-trauma-jargon"),
-            Align =  Label.AlignMode.Center,
-            FontOverride = font,
-        };
-
-        box.AddChild(label);
-
-        return box;
     }
 
     private BoxContainer MakeKojimaBox(VectorFont directorFont, VectorFont kojimaFont)
@@ -431,30 +391,6 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         var label = new Label
         {
             Text = Loc.GetString("round-end-credits-trauma-lastwords-title"),
-            FontOverride =  font,
-        };
-
-        box.AddChild(label);
-
-        return box;
-    }
-
-    private BoxContainer MakeShoutOutBox(VectorFont font)
-    {
-        var shoutout = "John Nanotrasen";
-
-        if (_linkAccount.GetPatrons().Count != 0)
-            shoutout = _random.Pick(_linkAccount.GetPatrons()).Name;
-
-        var box = new BoxContainer
-        {
-            Align = BoxContainer.AlignMode.Center,
-            Margin =   new Thickness(0, 0, 0, 200),
-        };
-
-        var label = new Label
-        {
-            Text = Loc.GetString("round-end-credits-trauma-director", ("shoutout", shoutout)),
             FontOverride =  font,
         };
 
