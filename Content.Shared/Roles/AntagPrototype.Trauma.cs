@@ -8,7 +8,7 @@ public sealed partial class AntagPrototype
     /// The image to be displayed in the end credits, if empty it will be text instead
     /// </summary>
     [DataField]
-    public ResPath? CreditImage { get; private set; } = new ();
+    public ResPath? CreditImage { get; private set; }
 
     /// <summary>
     /// The color associated with this antag
