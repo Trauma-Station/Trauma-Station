@@ -42,7 +42,7 @@ public abstract partial class SharedAbductorSystem
         var target = args.HitEntities[0];
         if (!HasComp<SurgeryTargetComponent>(target))
             return;
-        if(ent.Comp.BrainwashMode)
+        if (ent.Comp.BrainwashMode)
         {
             GizmoBrainWashUse(ent, target, args.User);
             return;
@@ -58,7 +58,7 @@ public abstract partial class SharedAbductorSystem
         if (HasComp<SurgeryTargetComponent>(target))
         {
             args.Handled = true;
-            if(ent.Comp.BrainwashMode)
+            if (ent.Comp.BrainwashMode)
             {
                 GizmoBrainWashUse(ent, target, args.User);
                 return;

@@ -13,6 +13,7 @@ public sealed partial class AbductorBrainwashSystem : EntitySystem
 {
     [Dependency] private readonly MindcontrolSystem _mindcontrol = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -47,4 +48,4 @@ public sealed partial class AbductorBrainwashSystem : EntitySystem
     var timed = EnsureComp<TimedMindControlComponent>(target);
     timed.ExpiresAt = _timing.CurTime + TimeSpan.FromMinutes(15);
 }
-    }
+}

@@ -5,6 +5,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
+
 namespace Content.Medical.Shared.Abductor;
 
 // RIP mocho fucking chud died fighting in ukraine

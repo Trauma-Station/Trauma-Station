@@ -1,5 +1,5 @@
 - type: factionIcon
-  id: MindcontrolIcon
+  id: AbductorMindControl
   isShaded: true
   priority: 11
   locationPreference: Left
