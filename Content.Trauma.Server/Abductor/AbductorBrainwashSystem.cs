@@ -27,8 +27,8 @@ public sealed partial class AbductorBrainwashSystem : EntitySystem
     while (query.MoveNext(out var uid, out var comp))
     {
         if (_timing.CurTime < comp.ExpiresAt) continue;
-        RemComp<MindcontrolledComponent>(uid);
-        RemComp<TimedMindControlComponent>(uid);
+        RemCompDeferred(uid, comp);
+        RemCompDeferred<MindcontrolledComponent>(uid);
     }
 }
 
@@ -41,7 +41,6 @@ public sealed partial class AbductorBrainwashSystem : EntitySystem
 
     var comp = EnsureComp<MindcontrolledComponent>(target);
     comp.Master = args.User;
-    comp.MindRole = "MindRoleBrainwashed";
     comp.MindcontrolIcon = "AbductorMindControl";
     _mindcontrol.Start(target, comp);
 
