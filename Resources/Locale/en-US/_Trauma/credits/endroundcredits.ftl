@@ -1,7 +1,7 @@
 round-end-credits-trauma-episode = EPISODE: {$roundid} : "{$title}!"
 round-end-credits-trauma-cast = CAST:
 round-end-credits-trauma-director = EPISODE DIRECTED BY: {$shoutout}
-round-end-credits-trauma-thankyou = Thank's for playing!
+round-end-credits-trauma-thankyou = Thanks for playing!
 round-end-credits-trauma-player-name-role = {$name}, {$role}, played by {$player}.
 round-end-credits-trauma-close = Close Credits
 round-end-credits-trauma-lastwords-title = Famous Last Words:
