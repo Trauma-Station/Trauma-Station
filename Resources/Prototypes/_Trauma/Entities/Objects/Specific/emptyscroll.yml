@@ -20,7 +20,7 @@
     size: Small
   - type: EmptyScroll
 
-- type: entity - To do when I understand how to do it better
+- type: entity
   parent: Paper
   id: ScrollFullRandom
   abstract: true
