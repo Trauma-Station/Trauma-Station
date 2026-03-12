@@ -144,7 +144,7 @@ public sealed partial class TraumaCVars
     /// Whether to play the cool end credits.
     /// </summary>
     public static readonly CVarDef<bool> PlayTraumaMovieEndCredits =
-        CVarDef.Create("chat.highlight_sound", true, CVar.ARCHIVE | CVar.CLIENTONLY);
+        CVarDef.Create("credits.play_credits", true, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     #endregion
 }
