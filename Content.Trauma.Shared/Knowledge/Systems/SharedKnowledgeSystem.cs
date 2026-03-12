@@ -86,7 +86,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         _holderQuery = GetEntityQuery<KnowledgeHolderComponent>();
 
         LoadSkillPrototypes();
-        LoadProfilePrototypes();
     }
 
     public override void Update(float frameTime)
@@ -206,8 +205,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         if (args.WasModified<EntityPrototype>())
             LoadSkillPrototypes();
-        if (args.WasModified<KnowledgeProfilePrototype>())
-            LoadProfilePrototypes();
     }
 
     private void LoadSkillPrototypes()
@@ -388,6 +385,22 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             SkillPopup(msg, holder);
         }
         return (unit, comp);
+    }
+
+    /// <summary>
+    /// Raises a skill's mastery level by some number.
+    /// Adds the skill if it's missing.
+    /// </summary>
+    public Entity<KnowledgeComponent>? RaiseMastery(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int mastery, bool popup = true)
+    {
+        if (EnsureKnowledge(ent, id, popup: popup) is not {} unit)
+            return null;
+
+        mastery += GetMastery(unit.Comp.LearnedLevel);
+        var level = GetInverseMastery(mastery);
+        unit.Comp.LearnedLevel = Math.Min(level, 100);
+        Dirty(unit);
+        return unit;
     }
 
     /// <summary>

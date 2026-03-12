@@ -11,18 +11,7 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem
 {
-    public Dictionary<KnowledgeProfilePrototype, int> PointLimits = new();
-
     private List<EntProtoId> _invalid = new();
-
-    private void LoadProfilePrototypes()
-    {
-        PointLimits.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<KnowledgeProfilePrototype>())
-        {
-            PointLimits[proto] = ProfileCost(proto.Profile);
-        }
-    }
 
     public override void EnsureProfileValid([ForbidLiteral] ProtoId<KnowledgeProfilePrototype> parentId, ref KnowledgeProfile profile)
     {
@@ -49,7 +38,23 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         var parent = _proto.Index(parentId);
-        ApplyProfile(ent, profile.AddProfile(parent.Profile), PointLimits[parent]);
+        ApplyProfile(ent, parent.Profile); // species skills first, can't be removed
+        ApplyProfile(ent, profile, parent.PointsLimit); // then your extra skills, limited by species points limit
+    }
+
+    /// <summary>
+    /// Applies a knowledge profile to a given knowledge container, not using points.
+    /// </summary>
+    public void ApplyProfile(Entity<KnowledgeContainerComponent> ent, KnowledgeProfile profile)
+    {
+        foreach (var (id, mastery) in profile.Mastery)
+        {
+            if (RaiseMastery(ent, id, mastery, popup: false) == null)
+            {
+                Log.Error($"Failed to give {ToPrettyString(ent.Comp.Holder)} knowledge {id}!");
+                continue;
+            }
+        }
     }
 
     /// <summary>
@@ -62,8 +67,7 @@ public abstract partial class SharedKnowledgeSystem
             if (SkillCost(id, mastery) is not { } cost || points < cost)
                 return; // were done here, outdated profile in DB
 
-            var level = GetInverseMastery(mastery);
-            if (EnsureKnowledge(ent, id, level) == null)
+            if (RaiseMastery(ent, id, mastery, popup: false) == null)
             {
                 Log.Error($"Failed to give {ToPrettyString(ent.Comp.Holder)} knowledge {id}!");
                 continue;

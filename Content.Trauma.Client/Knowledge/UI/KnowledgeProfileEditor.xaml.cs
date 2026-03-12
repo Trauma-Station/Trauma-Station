@@ -47,9 +47,8 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
 
     private void ReloadSkills()
     {
-        var combined = _profile.AddProfile(_parent.Profile);
         Dictionary<ProtoId<KnowledgeCategoryPrototype>, BoxContainer> categories = [];
-        UpdatePoints(combined);
+        UpdatePoints();
 
         EnabledSkills.RemoveAllChildren();
         foreach (var (id, comp) in _knowledge.AllKnowledges)
@@ -58,10 +57,8 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
             if (comp.Costs is not { } costs)
                 continue;
 
-            // a lot of the logic here is evil because the UI displays combined parent + diff, but internally its only modifying the diff
             var control = new SkillControl(name, costs);
             var mastery = _profile.Mastery.GetValueOrDefault(id);
-            if (combined.Mastery.TryGetValue(id, out var profileMastery)) mastery = profileMastery;
 
             control.SetMastery(_knowledge.GetMasteryString(mastery), mastery);
 
@@ -73,16 +70,9 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
 
                 control.SetMastery(_knowledge.GetMasteryString(sum), sum);
                 if (sum == 0)
-                {
                     _profile.Mastery.Remove(id);
-                    if (_parent.Profile.Mastery.ContainsKey(id))
-                        _profile.Removed.Add(id);
-                }
                 else
-                {
                     _profile.Mastery[id] = _profile.Mastery.GetValueOrDefault(id) + diff;
-                    _profile.Removed.Remove(id); // If we're changing a skill that is removed, then we need to add it back
-                }
 
                 _modified = true;
                 UpdatePoints();
@@ -105,14 +95,8 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
 
     private void UpdatePoints()
     {
-        var combined = _profile.AddProfile(_parent.Profile);
-        UpdatePoints(combined);
-    }
-
-    private void UpdatePoints(KnowledgeProfile combined)
-    {
-        var points = _knowledge.PointLimits[_parent];
-        var cost = _knowledge.ProfileCost(combined);
+        var points = _parent.PointsLimit;
+        var cost = _knowledge.ProfileCost(_profile);
         points -= cost;
         PointsLabel.Text = Loc.GetString("knowledge-editor-points", ("points", points));
         if (points >= 0)
