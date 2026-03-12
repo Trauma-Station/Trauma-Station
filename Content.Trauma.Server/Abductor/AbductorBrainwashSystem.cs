@@ -41,8 +41,8 @@ public sealed partial class AbductorBrainwashSystem : EntitySystem
 
     var comp = EnsureComp<MindcontrolledComponent>(target);
     comp.Master = args.User;
-    comp.MindRole = "MindRoleAbductorBrainwashed";
-    comp.MindcontrolIcon = "MindcontrolIcon";
+    comp.MindRole = "MindRoleBrainwashed";
+    comp.MindcontrolIcon = "AbductorMindControl";
     _mindcontrol.Start(target, comp);
 
     var timed = EnsureComp<TimedMindControlComponent>(target);
