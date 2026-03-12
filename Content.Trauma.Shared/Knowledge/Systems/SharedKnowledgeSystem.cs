@@ -436,7 +436,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         DirtyField(ent, ent.Comp, nameof(KnowledgeContainerComponent.KnowledgeDict));
 
         var ev = new KnowledgeRemovedEvent(ent, holder);
-        RaiseLocalEvent(ref ev);
+        RaiseLocalEvent(unit, ref ev);
 
         PredictedQueueDel(unit);
 
