@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._RMC14.LinkAccount;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 using Robust.Client.Graphics;
@@ -19,6 +20,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     [Dependency] private readonly IResourceCache _cache = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
 
     private float _timer;
     private const string Logo = "/Textures/Logo/logo.png";
@@ -30,12 +32,18 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     private const int NormalFontSize = 16;
     private const int BigFontSize = 24;
     private const int HeaderFontSize = 42;
-    private const bool Debug = true;
+    private const bool Debug = false; // Set this to true if you want a bunch of dummy characters to spawn
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeNetworkEvent<RoundEndMessageEvent>(OnRoundEnd);
+        SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
+    }
+
+    private void OnRoundCleanup(RoundRestartCleanupEvent ev)
+    {
+        CloseCredits();
     }
 
 
@@ -45,7 +53,6 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         var bigFont = new VectorFont(_cache.GetResource<FontResource>(Pixellari), BigFontSize);
         var playerNameFont = new VectorFont(_cache.GetResource<FontResource>(GrandPixel), SmallFontSize);
         var normalFont = new VectorFont(_cache.GetResource<FontResource>(Pixellari), NormalFontSize);
-        var smallFont = new VectorFont(_cache.GetResource<FontResource>(Pixellari), SmallFontSize);
 
         var texture = _cache.GetResource<TextureResource>(Logo);
 
@@ -55,12 +62,13 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             MouseFilter = Control.MouseFilterMode.Ignore,
             ReserveScrollbarSpace = false,
             HScrollEnabled = false,
+            // Hidden = True, TODO when robust pr is done
         };
 
         var mainCreditVBox = new BoxContainer
         {
             Align = BoxContainer.AlignMode.Center,
-            Orientation = BoxContainer.LayoutOrientation.Vertical
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
         };
 
         var serverImage = new TextureRect
@@ -105,12 +113,13 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         mainCreditVBox.AddChild(serverImageBox);
         mainCreditVBox.AddChild(episodeNumber);
         mainCreditVBox.AddChild(MakeIntroJargon(bigFont)); // The larp
+        mainCreditVBox.AddChild(MakeShoutOutBox(bigFont));
         mainCreditVBox.AddChild(castLabel);
 
         foreach (var player in message.AllPlayersEndInfo)
         {
             if (player.PlayerICName != null)
-                mainCreditVBox.AddChild(MakePlayerInfoBox(player, playerNameFont, Color.White , true));
+                mainCreditVBox.AddChild(MakePlayerInfoBox(player, playerNameFont, Color.White , true, false));
         }
 
         var sortedDepartments = _proto.EnumeratePrototypes<DepartmentPrototype>()
@@ -129,6 +138,23 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         foreach (var antag in antags)
         {
             mainCreditVBox.AddChild(MakeAntagBox(message.AllPlayersEndInfo, playerNameFont, headerFont, antag));
+        }
+
+        var lastwords = false;
+
+        foreach (var player in message.AllPlayersEndInfo)
+        {
+            if (player.LastWords != null)
+            {
+                lastwords = true;
+                break;
+            }
+        }
+
+        if (lastwords)
+        {
+            mainCreditVBox.AddChild(MakeFamousLastWordsBox(bigFont));
+            mainCreditVBox.AddChild(MakeLastWordsBox(playerNameFont, message.AllPlayersEndInfo));
         }
 
         mainCreditVBox.AddChild(thanksForPlaying);
@@ -162,8 +188,8 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
     public float GetScrollingSpeed(TimeSpan time)
     {
-        var normalSpeed = 120f;
-        var speedUpDuration = 3f;
+        var normalSpeed = 240f;
+        var speedUpDuration = 5f;
         var easing = Easings.InSine;
         return easing(Math.Min((float)time.TotalSeconds / speedUpDuration, 1f)) * normalSpeed;
     }
@@ -173,11 +199,15 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         if (_creditsContainer != null)
             _ui.WindowRoot.RemoveChild(_creditsContainer);
 
+
         if (_exitContainer != null)
             _ui.WindowRoot.RemoveChild(_exitContainer);
+
+        _creditsContainer = null;
+        _exitContainer = null;
     }
 
-    private BoxContainer MakePlayerInfoBox(RoundEndMessageEvent.RoundEndPlayerInfo playerInfo, VectorFont font, Color color, bool fullInfo = false)
+    private BoxContainer MakePlayerInfoBox(RoundEndMessageEvent.RoundEndPlayerInfo playerInfo, VectorFont font, Color color, bool fullInfo = false, bool addSprite = true)
     {
         var box = new BoxContainer
         {
@@ -186,7 +216,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             MaxHeight = 100,
         };
 
-        if (playerInfo.PlayerNetEntity != null)
+        if (playerInfo.PlayerNetEntity != null && addSprite)
         {
             box.AddChild(new SpriteView(playerInfo.PlayerNetEntity.Value, EntityManager)
             {
@@ -232,7 +262,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         var boxV = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
-            Align =  BoxContainer.AlignMode.Center,
+            HorizontalAlignment = Control.HAlignment.Center,
             Margin =  new Thickness(0, 150, 0, 50),
         };
 
@@ -265,14 +295,12 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         {
             Columns = 11,
             HorizontalAlignment = Control.HAlignment.Center,
-            HorizontalExpand = true,
         };
         var boxV = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
-            HorizontalExpand = true,
             Align =  BoxContainer.AlignMode.Center,
-            Margin = new Thickness(0, 150, 0, 50),
+            Margin =  new Thickness(0, 150, 0, 50),
         };
         if (!string.IsNullOrWhiteSpace(antag.CreditImage) && _cache.TryGetResource<TextureResource>(antag.CreditImage, out var texture))
         {
@@ -297,7 +325,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
         boxV.AddChild(boxH);
 
-        var playersInSection = 0;
+        var playersInSection = false;
 
         foreach (var player in players)
         {
@@ -309,12 +337,12 @@ public sealed class RoundEndCreditsSystem : EntitySystem
                 if (playerAntag == antag.ID && !antag.DontShowInCredits)
                 {
                     boxH.AddChild(MakePlayerInfoBox(player, smallfont, antag.Color));
-                    playersInSection++;
+                    playersInSection = true;
                 }
             }
         }
 
-        if (playersInSection == 0)
+        if (playersInSection == false)
         {
             var boxEmpty = new BoxContainer();
             return boxEmpty;
@@ -390,6 +418,76 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         vBox.AddChild(kojima);
 
         return vBox;
+    }
+
+    private BoxContainer MakeFamousLastWordsBox(VectorFont font)
+    {
+        var box = new BoxContainer
+        {
+            Align = BoxContainer.AlignMode.Center,
+            Margin =   new Thickness(0, 0, 0, 50),
+        };
+
+        var label = new Label
+        {
+            Text = Loc.GetString("round-end-credits-trauma-lastwords-title"),
+            FontOverride =  font,
+        };
+
+        box.AddChild(label);
+
+        return box;
+    }
+
+    private BoxContainer MakeShoutOutBox(VectorFont font)
+    {
+        var shoutout = "John Nanotrasen";
+
+        if (_linkAccount.GetPatrons().Count != 0)
+            shoutout = _random.Pick(_linkAccount.GetPatrons()).Name;
+
+        var box = new BoxContainer
+        {
+            Align = BoxContainer.AlignMode.Center,
+            Margin =   new Thickness(0, 0, 0, 200),
+        };
+
+        var label = new Label
+        {
+            Text = Loc.GetString("round-end-credits-trauma-director", ("shoutout", shoutout)),
+            FontOverride =  font,
+        };
+
+        box.AddChild(label);
+
+        return box;
+    }
+
+    private BoxContainer MakeLastWordsBox(VectorFont font, RoundEndMessageEvent.RoundEndPlayerInfo[] players)
+    {
+        var box = new BoxContainer
+        {
+            Align = BoxContainer.AlignMode.Center,
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+        };
+
+        foreach (var player in players)
+        {
+            if (player.LastWords != null)
+            {
+                var label = new Label
+                {
+                    FontOverride = font,
+                    Text = Loc.GetString("round-end-credits-trauma-lastwords",
+                        ("words", player.LastWords),
+                        ("player", player.PlayerICName ?? "Unknown")),
+                    Align = Label.AlignMode.Center,
+                };
+                box.AddChild(label);
+            }
+        }
+
+        return box;
     }
 
     #endregion
