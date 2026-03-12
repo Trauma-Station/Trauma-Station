@@ -9,9 +9,9 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.RoundEndCredits;
-
 
 public sealed class RoundEndCreditsSystem : EntitySystem
 {
@@ -23,9 +23,9 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
 
     private float _timer;
-    private const string Logo = "/Textures/Logo/logo.png";
-    private const string Pixellari = "/Fonts/_Trauma/Pixellari.ttf";
-    private const string GrandPixel = "/Fonts/_Trauma/Grand9K_Pixel.ttf";
+    private static readonly ResPath Logo = new ResPath("/Textures/Logo/logo.png");
+    private static readonly ResPath Pixellari = new ResPath("/Fonts/_Trauma/Pixellari.ttf");
+    private static readonly ResPath GrandPixel = new ResPath("/Fonts/_Trauma/Grand9K_Pixel.ttf");
     private ScrollContainer? _creditsContainer;
     private BoxContainer? _exitContainer;
     private const int SmallFontSize = 10;
@@ -45,7 +45,6 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     {
         CloseCredits();
     }
-
 
     private void OnRoundEnd(RoundEndMessageEvent message)
     {
@@ -199,7 +198,6 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         if (_creditsContainer != null)
             _ui.WindowRoot.RemoveChild(_creditsContainer);
 
-
         if (_exitContainer != null)
             _ui.WindowRoot.RemoveChild(_exitContainer);
 
@@ -216,7 +214,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             MaxHeight = 100,
         };
 
-        if (playerInfo.PlayerNetEntity != null && addSprite)
+        if (playerInfo.PlayerNetEntity is {} player && addSprite)
         {
             box.AddChild(new SpriteView(playerInfo.PlayerNetEntity.Value, EntityManager)
             {
@@ -302,7 +300,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             Align =  BoxContainer.AlignMode.Center,
             Margin =  new Thickness(0, 150, 0, 50),
         };
-        if (!string.IsNullOrWhiteSpace(antag.CreditImage) && _cache.TryGetResource<TextureResource>(antag.CreditImage, out var texture))
+        if (antag.CreditImage != null && _cache.TryGetResource<TextureResource>(antag.CreditImage.Value, out var texture))
         {
             var image = new TextureRect
             {

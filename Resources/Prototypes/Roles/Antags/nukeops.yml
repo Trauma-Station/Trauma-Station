@@ -133,7 +133,7 @@
     species:
     - Plasmaman
   guides: [ NuclearOperatives ]
-  dontShowInCredits: true
+  dontShowInCredits: true # Trauma
 
 - type: antag
   id: NukeopsCommander
@@ -156,7 +156,7 @@
     species:
     - Plasmaman
   guides: [ NuclearOperatives ]
-  dontShowInCredits: true
+  dontShowInCredits: true # Trauma
 
 - type: startingGear
   id: SyndicateOperativeGearFullNoUplink
