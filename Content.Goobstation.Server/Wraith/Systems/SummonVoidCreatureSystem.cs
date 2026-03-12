@@ -66,7 +66,7 @@ public sealed class SummonVoidCreatureSystem : EntitySystem
         _mind.TransferTo(mindUid, newForm, mind: mind);
         _mind.UnVisit(mindUid, mind);
 
-        EntityManager.CopyComponents(ent.Owner, newForm);
+        CopyComps(ent.Owner, newForm);
         RemComp<ChooseVoidCreatureComponent>(newForm);
 
         _ui.CloseUi(ent.Owner, RadialSelectorUiKey.Key, args.Actor);

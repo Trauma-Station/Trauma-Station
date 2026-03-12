@@ -63,7 +63,7 @@ public sealed class WaypointerSystem : SharedWaypointerSystem
             foreach (var trackedComponent in waypointer.TrackedComponents.Values)
             {
                 // And then check if the trackable has that tracked component
-                if (!EntityManager.HasComponent(trackable, trackedComponent.Component.GetType())
+                if (!HasComp(trackable, trackedComponent.Component.GetType())
                     // And of course, check if it passes the whitelist & blacklist.
                     || !_whitelist.CheckBoth(trackable, blacklist: waypointer.Blacklist, whitelist: waypointer.Whitelist))
                     continue;

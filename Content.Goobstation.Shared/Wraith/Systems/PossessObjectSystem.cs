@@ -7,16 +7,16 @@ using Content.Shared.Popups;
 using Content.Shared.Revenant.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.Manager;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
+
 public sealed partial class PossessObjectSystem : EntitySystem
 {
-    [Dependency] private readonly ISerializationManager _seriMan = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly WraithPossessedSystem _possessed = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -50,30 +50,7 @@ public sealed partial class PossessObjectSystem : EntitySystem
 
         args.Handled = true;
 
-        RemoveComponents(target, args.ToRemove);
-        AddComponents(target, args.ToAdd);
-    }
-
-    private void AddComponents(EntityUid target, ComponentRegistry comps)
-    {
-        foreach (var (name, data) in comps)
-        {
-            if (HasComp(target, data.Component.GetType()))
-                continue;
-
-            var component = (Component) Factory.GetComponent(name);
-            var temp = (object) component;
-            _seriMan.CopyTo(data.Component, ref temp);
-            EntityManager.AddComponent(target, (Component) temp!);
-        }
-    }
-
-    private void RemoveComponents(EntityUid target, HashSet<string> comps)
-    {
-        foreach (var toRemove in comps)
-        {
-            if (Factory.TryGetRegistration(toRemove, out var registration))
-                RemComp(target, registration.Type);
-        }
+        EntityManager.RemoveComponents(target, args.ToRemove);
+        EntityManager.AddComponents(target, args.ToAdd);
     }
 }

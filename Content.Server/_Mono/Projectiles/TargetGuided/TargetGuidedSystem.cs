@@ -192,17 +192,17 @@ public sealed class TargetGuidedSystem : EntitySystem
             return true;
 
         // Check if controlling console still exists
-        if (component.ControllingConsole.HasValue)
-        {
-            if (!EntityManager.EntityExists(component.ControllingConsole.Value))
-                return true;
+        if (component.ControllingConsole is not {} console)
+            return false;
 
-            // Check if console is still powered/functioning
-            if (!TryComp<FireControlConsoleComponent>(component.ControllingConsole.Value, out var console) ||
-                console.ConnectedServer == null)
-                return true;
-        }
+        if (!Exists(console))
+            return true;
 
+        // Check if console is still powered/functioning
+        if (CompOrNull<FireControlConsoleComponent>(console)?.ConnectedServer == null)
+            return true;
+
+        // ded
         return false;
     }
 }
