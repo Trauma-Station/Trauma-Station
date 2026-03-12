@@ -4145,3 +4145,78 @@ Entries:
   id: 488
   time: '2026-03-10T20:26:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1188
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: Advanced CQC users will no longer sleep you for 70s, reduced to 7s.
+  - type: Tweak
+    message: >-
+      CQC moves no longer add to status effects, instead resetting them.
+      Preventing 200s knockdown moments.
+  id: 489
+  time: '2026-03-10T22:33:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1186
+- author: SirWarock, NoElkaTheGod
+  changes:
+  - type: Add
+    message: >-
+      Added Waypointers. Currently used by space dragons to tell where the
+      station is.
+  id: 490
+  time: '2026-03-10T22:39:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1182
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: >-
+      Consolidated skillbooks and buffed experience to account for downtime and
+      increased exp timer.
+  id: 491
+  time: '2026-03-11T06:32:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1190
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plant analyzer breaking with mutated plants?
+  id: 492
+  time: '2026-03-11T08:07:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1191
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Cosmic cultists now have good melee skill by default.
+  - type: Fix
+    message: Minor fixes to cosmic cult
+  id: 493
+  time: '2026-03-11T10:13:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1192
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Improved the skill selection UI
+  id: 494
+  time: '2026-03-11T21:42:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1195
+- author: assripper.
+  changes:
+  - type: Add
+    message: xenomorph queens now recall the emergency shuttle just like blob
+  id: 495
+  time: '2026-03-12T10:05:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1024
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added skill chips basically from ss13, they store your skills and can be
+      swapped via surgery. This is what stores your job skills now.
+  id: 496
+  time: '2026-03-12T10:17:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1199
+- author: assripper.
+  changes:
+  - type: Add
+    message: the abductors gizmo can now brainwash (mindslave) people for 15 minutes
+  id: 497
+  time: '2026-03-12T21:18:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1196

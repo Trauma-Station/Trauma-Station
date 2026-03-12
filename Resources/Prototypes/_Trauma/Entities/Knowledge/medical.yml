@@ -5,7 +5,7 @@
   components:
   - type: Knowledge
     experienceCost: 24
-    costs: [4, 8, 12, 18, 24, 32] # stitches are easy, but being a brain surgeon is actually rare. funny how that works
+    costs: [0, 4, 8, 12, 18, 24, 32] # stitches are easy, but being a brain surgeon is actually rare. funny how that works
 
 - type: entity
   parent: BaseMedicalKnowledge

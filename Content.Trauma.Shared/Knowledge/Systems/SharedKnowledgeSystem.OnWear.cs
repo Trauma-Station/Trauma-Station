@@ -81,7 +81,7 @@ public abstract partial class SharedKnowledgeSystem
             unit.Comp.TemporaryLevel = Math.Max(0, unit.Comp.TemporaryLevel - level);
 
             // If they have no real levels and no more temp levels, clean up
-            if (unit.Comp.Level <= 0 && unit.Comp.TemporaryLevel <= 0)
+            if (unit.Comp.NetLevel <= 0)
                 RemoveKnowledge(ent, id);
             else
                 Dirty(unit);

@@ -39,17 +39,13 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  # <Trauma>
+      # <Trauma>
       - type: SurgerySpeedModifier
         speedModifier: 2
       - type: CPRTraining
         reviveChance: 0.9 # excellent training and experience
         inhaleChance: 1 # great kisser too
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      FirstAidKnowledge: 50
-      SurgeryKnowledge: 50
-  # </Trauma>
+      # </Trauma>
 
 - type: startingGear
   id: CMOGear

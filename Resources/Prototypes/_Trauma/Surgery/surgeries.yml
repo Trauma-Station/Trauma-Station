@@ -40,6 +40,39 @@
   - type: SurgeryOrganCondition
     organ: Hypoport
 
+# Brain Chip
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertBrainChip
+  name: Install Brain Chip
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepClampBleeders
+    - SurgeryStepOpenPanel
+    - SurgeryStepInsertBrainChip
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: BrainChip
+  - type: SurgeryOrganCondition
+    organ: BrainChip
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveBrainChip
+  name: Extract Brain Chip
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepClampBleeders
+    - SurgeryStepOpenPanel
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryOrganCondition
+    organ: BrainChip
+
 # Tail
 
 - type: entity

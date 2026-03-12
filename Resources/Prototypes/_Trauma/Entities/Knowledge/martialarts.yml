@@ -188,7 +188,7 @@
   name: Boxing
   components:
   - type: Knowledge
-    costs: [3, 6, 10, 16, 20] # boxing is pretty common
+    costs: [0, 3, 6, 10, 16, 20] # boxing is pretty common
   - type: CanPerformCombo
     roundstartCombos:
     - CQCConsecutive
@@ -199,7 +199,7 @@
   name: Drunk-Fu
   components:
   - type: Knowledge
-    costs: [3, 6, 10, 16, 20] # same moves as boxing so same costs
+    costs: [0, 3, 6, 10, 16, 20] # same moves as boxing so same costs
   - type: CanPerformCombo
     roundstartCombos:
     - CQCConsecutive

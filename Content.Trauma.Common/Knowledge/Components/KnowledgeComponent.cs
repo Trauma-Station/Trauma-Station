@@ -21,10 +21,10 @@ public sealed partial class KnowledgeComponent : Component
     public ProtoId<KnowledgeCategoryPrototype> Category;
 
     /// <summary>
-    /// Current Mastery of this knowledge.
+    /// Current learned level of this knowledge from 0-100.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
-    public int Level;
+    public int LearnedLevel;
 
     /// <summary>
     /// Current Stored experience.
@@ -64,10 +64,16 @@ public sealed partial class KnowledgeComponent : Component
     public SpriteSpecifier? Sprite;
 
     /// <summary>
-    /// Temporary levels that are granted by certain equipment.
+    /// Temporary levels that are granted by certain equipment and skillchips.
     /// </summary>
     [DataField]
     public int TemporaryLevel;
+
+    /// <summary>
+    /// The combined learned + temporary levels.
+    /// </summary>
+    [ViewVariables]
+    public int NetLevel => Math.Clamp(LearnedLevel + TemporaryLevel, 0, 100);
 
     /// <summary>
     /// Temporary experience boosts that are granted by certain equipment.

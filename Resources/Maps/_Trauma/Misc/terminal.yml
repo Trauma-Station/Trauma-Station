@@ -1,33 +1,16 @@
-# SPDX-FileCopyrightText: 2022 Cheackraze <71046427+Cheackraze@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Checkraze <71046427+Cheackraze@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Filler <130583174+FillerVK@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 avery <51971268+graevy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 meta:
   format: 7
-  category: Map
-  engineVersion: 266.0.0
+  category: Grid
+  engineVersion: 272.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/26/2025 19:28:14
-  entityCount: 928
-maps:
-- 638
+  time: 03/12/2026 12:10:16
+  entityCount: 943
+maps: []
 grids:
 - 818
-orphans: []
+orphans:
+- 818
 nullspace: []
 tilemap:
   0: Space
@@ -45,22 +28,11 @@ tilemap:
 entities:
 - proto: ""
   entities:
-  - uid: 638
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
   - uid: 818
     components:
     - type: MetaData
       name: NT-EM Terminal
     - type: Transform
-      parent: 638
     - type: MapGrid
       chunks:
         -1,-1:
@@ -100,6 +72,11 @@ entities:
       id: Empty
     - type: OccluderTree
     - type: Shuttle
+      dampingModifiers:
+        Cruise: 0.0075
+        Dampen: 0.25
+        Anchor: 2
+        None: 0.25
       dampingModifier: 0.25
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
@@ -955,33 +932,11 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - volume: 2500
           temperature: 293.15
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+          moles: {}
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
@@ -989,6 +944,9 @@ entities:
     - type: GridPathfinding
     - type: Godmode
     - type: ImplicitRoof
+    - type: TileHistory
+      chunkHistory: {}
+    - type: ExplosionAirtightGrid
 - proto: AirlockExternalGlass
   entities:
   - uid: 2
@@ -1428,8 +1386,6 @@ entities:
     - type: Godmode
     - type: BatterySelfRecharger
       autoRechargeRate: 50000
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Construction
     - Destructible
@@ -1444,8 +1400,6 @@ entities:
     - type: Godmode
     - type: BatterySelfRecharger
       autoRechargeRate: 50000
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Construction
     - Destructible
@@ -1460,8 +1414,6 @@ entities:
     - type: Godmode
     - type: BatterySelfRecharger
       autoRechargeRate: 50000
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Construction
     - Destructible
@@ -1476,8 +1428,6 @@ entities:
     - type: Godmode
     - type: BatterySelfRecharger
       autoRechargeRate: 50000
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Construction
     - Destructible
@@ -1493,8 +1443,6 @@ entities:
     - type: Godmode
     - type: BatterySelfRecharger
       autoRechargeRate: 50000
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Construction
     - Destructible
@@ -1509,11 +1457,86 @@ entities:
     - type: Godmode
     - type: BatterySelfRecharger
       autoRechargeRate: 50000
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Construction
     - Destructible
+- proto: AreaBar
+  entities:
+  - uid: 918
+    components:
+    - type: Transform
+      pos: -11.5,4.5
+      parent: 818
+  - uid: 930
+    components:
+    - type: Transform
+      pos: -11.5,3.5
+      parent: 818
+  - uid: 931
+    components:
+    - type: Transform
+      pos: -11.5,2.5
+      parent: 818
+  - uid: 932
+    components:
+    - type: Transform
+      pos: -10.5,4.5
+      parent: 818
+  - uid: 933
+    components:
+    - type: Transform
+      pos: -10.5,3.5
+      parent: 818
+  - uid: 934
+    components:
+    - type: Transform
+      pos: -10.5,2.5
+      parent: 818
+  - uid: 935
+    components:
+    - type: Transform
+      pos: -9.5,4.5
+      parent: 818
+  - uid: 936
+    components:
+    - type: Transform
+      pos: -9.5,2.5
+      parent: 818
+  - uid: 937
+    components:
+    - type: Transform
+      pos: -9.5,3.5
+      parent: 818
+  - uid: 938
+    components:
+    - type: Transform
+      pos: -8.5,4.5
+      parent: 818
+  - uid: 939
+    components:
+    - type: Transform
+      pos: -8.5,3.5
+      parent: 818
+  - uid: 940
+    components:
+    - type: Transform
+      pos: -8.5,2.5
+      parent: 818
+  - uid: 941
+    components:
+    - type: Transform
+      pos: -12.5,4.5
+      parent: 818
+  - uid: 942
+    components:
+    - type: Transform
+      pos: -12.5,3.5
+      parent: 818
+  - uid: 943
+    components:
+    - type: Transform
+      pos: -12.5,2.5
+      parent: 818
 - proto: ArrivalsShuttleTimer
   entities:
   - uid: 597
@@ -1522,88 +1545,92 @@ entities:
       pos: -7.5,-5.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
   - uid: 633
     components:
     - type: Transform
       pos: 6.5,-5.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
   - uid: 928
     components:
     - type: Transform
       pos: -6.5,-14.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
   - uid: 929
     components:
     - type: Transform
       pos: 5.5,-14.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
-- proto: AtmosDeviceFanTiny
+- proto: AtmosDeviceFanDirectional
   entities:
+  - uid: 18
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -15.5,-10.5
+      parent: 818
   - uid: 296
     components:
     - type: Transform
-      pos: -6.5,-10.5
+      rot: -1.5707963267948966 rad
+      pos: -15.5,-10.5
       parent: 818
-    - type: Godmode
   - uid: 297
     components:
     - type: Transform
-      pos: -14.5,-10.5
+      rot: -1.5707963267948966 rad
+      pos: -15.5,-17.5
       parent: 818
-    - type: Godmode
   - uid: 298
     components:
     - type: Transform
-      pos: -14.5,-17.5
+      rot: 1.5707963267948966 rad
+      pos: -5.5,-17.5
       parent: 818
-    - type: Godmode
   - uid: 299
     components:
     - type: Transform
-      pos: -6.5,-17.5
+      rot: 1.5707963267948966 rad
+      pos: -5.5,-10.5
       parent: 818
-    - type: Godmode
   - uid: 300
     components:
     - type: Transform
-      pos: 5.5,-17.5
+      rot: -1.5707963267948966 rad
+      pos: 4.5,-17.5
       parent: 818
-    - type: Godmode
   - uid: 301
     components:
     - type: Transform
-      pos: 5.5,-10.5
+      rot: 1.5707963267948966 rad
+      pos: 14.5,-17.5
       parent: 818
-    - type: Godmode
   - uid: 302
     components:
     - type: Transform
-      pos: 13.5,-10.5
+      rot: 1.5707963267948966 rad
+      pos: 14.5,-10.5
       parent: 818
-    - type: Godmode
   - uid: 303
     components:
     - type: Transform
-      pos: 13.5,-17.5
+      rot: -1.5707963267948966 rad
+      pos: 4.5,-10.5
       parent: 818
-    - type: Godmode
+  - uid: 638
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,8.5
+      parent: 818
   - uid: 809
     components:
     - type: Transform
+      rot: 1.5707963267948966 rad
       pos: 4.5,8.5
       parent: 818
-    - type: Godmode
 - proto: BarSignEngineChange
   entities:
   - uid: 215
@@ -1612,8 +1639,6 @@ entities:
       pos: -10.5,5.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
     - ApcPowerReceiver
@@ -1627,10 +1652,10 @@ entities:
       parent: 818
     - type: Godmode
     missingComponents:
-    - ApcPowerReceiver
-    - PowerState
     - Anchorable
     - Construction
+    - ApcPowerReceiver
+    - PowerState
     - Destructible
   - uid: 728
     components:
@@ -1640,10 +1665,10 @@ entities:
       parent: 818
     - type: Godmode
     missingComponents:
-    - ApcPowerReceiver
-    - PowerState
     - Anchorable
     - Construction
+    - ApcPowerReceiver
+    - PowerState
     - Destructible
 - proto: BookshelfFilled
   entities:
@@ -4342,22 +4367,6 @@ entities:
     - Construction
     - Anchorable
     - Destructible
-- proto: ChairOfficeDark
-  entities:
-  - uid: 18
-    components:
-    - type: Transform
-      anchored: True
-      rot: 3.141592653589793 rad
-      pos: 9.5,3.5
-      parent: 818
-    - type: Physics
-      bodyType: Static
-    - type: Godmode
-    missingComponents:
-    - Construction
-    - Anchorable
-    - Destructible
 - proto: ChairWood
   entities:
   - uid: 577
@@ -4430,8 +4439,6 @@ entities:
       pos: -5.5,2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
     - Construction
@@ -4443,8 +4450,6 @@ entities:
       pos: 4.5,2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
     - Construction
@@ -5196,8 +5201,6 @@ entities:
       pos: -6.5,-2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 816
@@ -5206,8 +5209,6 @@ entities:
       pos: 5.5,-2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: FirelockEdge
@@ -6485,8 +6486,6 @@ entities:
       pos: -6.5,1.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PosterLegitEnlist
@@ -6497,8 +6496,6 @@ entities:
       pos: -14.5,1.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PosterLegitHighClassMartini
@@ -6509,8 +6506,6 @@ entities:
       pos: -6.5,-3.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PosterLegitJustAWeekAway
@@ -6521,8 +6516,6 @@ entities:
       pos: 5.5,1.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PosterLegitNanomichiAd
@@ -6533,8 +6526,6 @@ entities:
       pos: -4.5,3.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PosterLegitNanotrasenLogo
@@ -6545,8 +6536,6 @@ entities:
       pos: -7.5,-11.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 247
@@ -6555,8 +6544,6 @@ entities:
       pos: -13.5,-4.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 248
@@ -6565,8 +6552,6 @@ entities:
       pos: 12.5,-4.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 249
@@ -6575,8 +6560,6 @@ entities:
       pos: 6.5,-16.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 250
@@ -6585,8 +6568,6 @@ entities:
       pos: -13.5,-16.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 251
@@ -6595,8 +6576,6 @@ entities:
       pos: 12.5,-11.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 922
@@ -6605,8 +6584,6 @@ entities:
       pos: -0.5,6.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PosterLegitNTTGC
@@ -6617,8 +6594,6 @@ entities:
       pos: 5.5,-3.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PosterLegitPDAAd
@@ -6629,8 +6604,6 @@ entities:
       pos: 12.5,-16.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PosterLegitVacation
@@ -6641,8 +6614,6 @@ entities:
       pos: -7.5,-16.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PosterLegitWorkForAFuture
@@ -6653,8 +6624,6 @@ entities:
       pos: 12.5,2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: PottedPlantRandom
@@ -7639,8 +7608,6 @@ entities:
       pos: -2.5,-2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: SignNanotrasen2
@@ -7651,8 +7618,6 @@ entities:
       pos: -1.5,-2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: SignNanotrasen3
@@ -7663,8 +7628,6 @@ entities:
       pos: -0.5,-2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: SignNanotrasen4
@@ -7675,8 +7638,6 @@ entities:
       pos: 0.5,-2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: SignNanotrasen5
@@ -7687,8 +7648,6 @@ entities:
       pos: 1.5,-2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: SignNosmoking
@@ -7699,8 +7658,6 @@ entities:
       pos: -7.5,2.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: SignShipDock
@@ -7711,8 +7668,6 @@ entities:
       pos: 6.5,-4.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 245
@@ -7721,8 +7676,6 @@ entities:
       pos: -7.5,-4.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: SignSpace
@@ -7733,8 +7686,6 @@ entities:
       pos: 12.5,-18.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 640
@@ -7743,8 +7694,6 @@ entities:
       pos: -7.5,-18.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 688
@@ -7753,8 +7702,6 @@ entities:
       pos: -13.5,-18.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 689
@@ -7763,8 +7710,6 @@ entities:
       pos: -7.5,-9.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 691
@@ -7773,8 +7718,6 @@ entities:
       pos: -13.5,-9.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 705
@@ -7783,8 +7726,6 @@ entities:
       pos: 12.5,-9.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 709
@@ -7793,8 +7734,6 @@ entities:
       pos: 6.5,-9.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 817
@@ -7803,8 +7742,6 @@ entities:
       pos: 6.5,-18.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
   - uid: 819
@@ -7813,8 +7750,6 @@ entities:
       pos: 4.5,7.5
       parent: 818
     - type: Godmode
-    - type: Fixtures
-      fixtures: {}
     missingComponents:
     - Destructible
 - proto: SinkWide
@@ -7967,10 +7902,10 @@ entities:
       parent: 818
     - type: Godmode
     missingComponents:
-    - ApcPowerReceiver
-    - PowerState
     - Anchorable
     - Construction
+    - ApcPowerReceiver
+    - PowerState
     - Destructible
   - uid: 732
     components:
@@ -7980,10 +7915,10 @@ entities:
       parent: 818
     - type: Godmode
     missingComponents:
-    - ApcPowerReceiver
-    - PowerState
     - Anchorable
     - Construction
+    - ApcPowerReceiver
+    - PowerState
     - Destructible
 - proto: SpawnPointLatejoin
   entities:
