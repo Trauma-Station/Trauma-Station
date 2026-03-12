@@ -5,10 +5,12 @@ using System.Numerics;
 using Content.Client._RMC14.LinkAccount;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
+using Content.Trauma.Common.CCVar;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -23,6 +25,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private float _timer;
     private static readonly ResPath Logo = new ("/Textures/Logo/logo.png");
@@ -34,6 +37,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     private const int NormalFontSize = 16;
     private const int BigFontSize = 24;
     private const int HeaderFontSize = 42;
+    private bool _showCredits = true;
     private bool Debug = false; // Set this to true if you want a bunch of dummy characters to spawn
 
     public override void Initialize()
@@ -41,15 +45,23 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         base.Initialize();
         SubscribeNetworkEvent<RoundEndMessageEvent>(OnRoundEnd);
         SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
+
+        Subs.CVar(_cfg, TraumaCVars.PlayTraumaMovieEndCredits, x => _showCredits = x, true);
     }
 
     private void OnRoundCleanup(RoundRestartCleanupEvent ev)
     {
+        if (!_showCredits)
+            return;
+
         CloseCredits();
     }
 
     private void OnRoundEnd(RoundEndMessageEvent message)
     {
+        if (!_showCredits)
+            return;
+
         var headerFont = new VectorFont(_cache.GetResource<FontResource>(Pixellari), HeaderFontSize);
         var bigFont = new VectorFont(_cache.GetResource<FontResource>(Pixellari), BigFontSize);
         var playerNameFont = new VectorFont(_cache.GetResource<FontResource>(GrandPixel), SmallFontSize);

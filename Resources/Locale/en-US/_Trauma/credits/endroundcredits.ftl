@@ -7,6 +7,8 @@ round-end-credits-trauma-close = Close Credits
 round-end-credits-trauma-lastwords-title = Famous Last Words:
 round-end-credits-trauma-lastwords = {$words} - {$player}
 
+round-end-credits-trauma-show-credits = Show round end movie style credits
+
 round-end-credits-trauma-created = Created and Directed by
 round-end-credits-trauma-kojima = Hideo Kojima
 
