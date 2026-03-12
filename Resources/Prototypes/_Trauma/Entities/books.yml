@@ -1,8 +1,8 @@
-# - type: entityTable
-#   id: RandomEmptyScroll
-#   table: !type:GroupSelector
-#     children:
-#     - id: EmptyScroll
-#       weight: 1
-#     - id: ScrollFullSword # random scroll here
-#       weight: 99
+- type: entityTable
+  id: RandomEmptyScroll
+  table: !type:GroupSelector
+    children:
+    - id: EmptyScroll
+      weight: 1
+    - id: ScrollFullRandom
+      weight: 99
