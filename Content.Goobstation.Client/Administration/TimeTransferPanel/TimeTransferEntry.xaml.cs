@@ -13,19 +13,20 @@ namespace Content.Goobstation.Client.Administration.TimeTransferPanel;
 [GenerateTypedNameReferences]
 public sealed partial class TimeTransferEntry : BoxContainer
 {
+    public static readonly ProtoId<PlaytimeTrackerPrototype> OverallTracker = "Overall";
+
     public string PlaytimeTracker;
     public string JobName;
 
-    public TimeTransferEntry(JobPrototype jobProto, SpriteSystem spriteSystem, IPrototypeManager prototypeManager)
+    public TimeTransferEntry(JobPrototype? jobProto, SpriteSystem spriteSystem, IPrototypeManager prototypeManager)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        PlaytimeTracker = jobProto.PlayTimeTracker;
-        JobLabel.Text = jobProto.LocalizedName;
-        JobName = jobProto.LocalizedName;
+        PlaytimeTracker = jobProto?.PlayTimeTracker ?? OverallTracker;
+        JobLabel.Text = JobName = jobProto?.LocalizedName ?? Loc.GetString("time-transfer-overall-checkbox");
 
-        if (prototypeManager.TryIndex<JobIconPrototype>(jobProto.Icon, out var jobIcon))
+        if (prototypeManager.TryIndex<JobIconPrototype>(jobProto?.Icon, out var jobIcon))
             JobIcon.Texture = spriteSystem.Frame0(jobIcon.Icon);
     }
 
