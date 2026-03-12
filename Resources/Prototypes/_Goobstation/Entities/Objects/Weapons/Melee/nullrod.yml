@@ -799,7 +799,7 @@
   name: iradomini
   parent: BaseItem
   id: WeaponPistolIradomini
-  description: A powerful crossbow
+  description: A powerful crossbow for the crusader with style.
   components:
   - type: Nullrod
     DamageOnUntrainedUse:
@@ -823,7 +823,10 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+      collection: BulletMiss # Bow uses these so its fine.
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunRequiresWield
   - type: Item
     size: Large
   - type: BasicEntityAmmoProvider
@@ -835,8 +838,16 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Tag
-  tags:
-  - Nullrod
+    tags:
+    - Nullrod
+    - Iradomini
+  - type: DivineIntervention
+  - type: Reflect
+    reflectProb: 1
+    reflects:
+    - Magic
+    slotFlags:
+    - NONE
   - type: ReloadOnPray
   - type: AlternatePrayable
     prayDoAfterDuration: 10
