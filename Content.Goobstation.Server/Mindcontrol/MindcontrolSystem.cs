@@ -29,7 +29,7 @@ public sealed class MindcontrolSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
-
+    private static EntProtoId MindRole = "MindRoleBrainwashed";
     public override void Initialize()
     {
         base.Initialize();
@@ -62,7 +62,7 @@ public sealed class MindcontrolSystem : EntitySystem
         if (!_mindSystem.TryGetMind(uid, out var mindId, out var mind))   //no mind, how can you mindcontrol whit no mind?
             return;
 
-        _roleSystem.MindAddRole(mindId, component.MindRole, silent: true);
+        _roleSystem.MindAddRole(mindId, MindRole, silent: true);
 
         if (_roleSystem.MindHasRole<MindcontrolledRoleComponent>(mindId, out var mr))
             AddComp(mr.Value, new RoleBriefingComponent { Briefing = MakeBriefing(component.Master.Value) }, true);

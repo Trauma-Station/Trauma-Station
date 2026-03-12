@@ -19,7 +19,4 @@ public sealed partial class MindcontrolledComponent : Component
 
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public ProtoId<FactionIconPrototype> MindcontrolIcon { get; set; } = "MindcontrolledFaction";
-
-    [DataField]
-    public EntProtoId MindRole = "MindRoleBrainwashed";
 }
