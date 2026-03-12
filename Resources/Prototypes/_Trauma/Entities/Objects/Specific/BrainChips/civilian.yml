@@ -133,6 +133,16 @@
 
 - type: entity
   parent: BaseSkillChip
+  id: SkillChipRadioHost
+  name: skill chip (radio host)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LiteracyKnowledge: 26
+      HandmadeKnowledge: 26
+
+- type: entity
+  parent: BaseSkillChip
   id: SkillChipReporter
   name: skill chip (reporter)
   components:
