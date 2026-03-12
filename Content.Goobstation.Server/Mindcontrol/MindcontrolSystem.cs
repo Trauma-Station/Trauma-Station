@@ -30,6 +30,7 @@ public sealed class MindcontrolSystem : EntitySystem
     [Dependency] private readonly IPlayerManager _player = default!;
 
     private static EntProtoId MindRole = "MindRoleBrainwashed";
+
     public override void Initialize()
     {
         base.Initialize();
