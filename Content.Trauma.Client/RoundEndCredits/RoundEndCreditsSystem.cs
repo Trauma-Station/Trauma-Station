@@ -159,7 +159,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
         mainCreditVBox.AddChild(thanksForPlaying);
 
-        if (_random.Prob(0.9f))
+        if (_random.Prob(0.01f))
             mainCreditVBox.AddChild(MakeKojimaBox(normalFont, bigFont));
 
         _creditsContainer = mainCreditScroll;
