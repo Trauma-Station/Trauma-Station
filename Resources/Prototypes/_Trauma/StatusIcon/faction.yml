@@ -6,7 +6,7 @@
   showTo:
     components:
       - ShowAntagIcons
-      - AbductorScientist
+      - Abductor
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: Mindcontrolled
