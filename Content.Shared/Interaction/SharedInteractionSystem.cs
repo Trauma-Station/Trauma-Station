@@ -81,7 +81,7 @@ namespace Content.Shared.Interaction
         [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
         // <Trauma>
-        [Dependency] private readonly SharedEnsnareableSystem _ensnareableSystem = default!;
+        [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
         private EntityQuery<TargetInteractionRelayComponent> _targetRelayQuery;
         // </Trauma>
         private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery;
@@ -293,7 +293,7 @@ namespace Content.Shared.Interaction
             if (userEntity.Value == uid)
             // <Trauma> - pull bolas and pray
             {
-               var freed = false;
+                var freed = false;
                 if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && ensnareable.IsEnsnared)
                 {
                     foreach (var bola in ensnareable.Container.ContainedEntities.ToList())
@@ -308,8 +308,8 @@ namespace Content.Shared.Interaction
                 }
 
                 if (!freed)
-                _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
-                return false;
+                    _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
+                    return false;
             }
             // </Trauma>
 
