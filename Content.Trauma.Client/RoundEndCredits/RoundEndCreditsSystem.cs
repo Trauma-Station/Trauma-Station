@@ -32,7 +32,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     private const int NormalFontSize = 16;
     private const int BigFontSize = 24;
     private const int HeaderFontSize = 42;
-    private const bool Debug = false; // Set this to true if you want a bunch of dummy characters to spawn
+    private bool Debug = false; // Set this to true if you want a bunch of dummy characters to spawn
 
     public override void Initialize()
     {
