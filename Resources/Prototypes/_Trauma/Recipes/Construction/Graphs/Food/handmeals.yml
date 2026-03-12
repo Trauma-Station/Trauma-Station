@@ -21,15 +21,6 @@
         icon:
           sprite: _Trauma/Objects/Consumable/Food/egg.rsi
           state: cooked
-    - to: burned food
-      completed:
-      - !type:PlaySound
-        sound: /Audio/Effects/sizzle.ogg
-      steps:
-      - minTemperature: 450
-
-  - node: burned food
-    entity: FoodBurned
 
   - node: twoeggs
     entity: FoodMealFriedegg

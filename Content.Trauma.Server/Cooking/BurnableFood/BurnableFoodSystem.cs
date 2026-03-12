@@ -9,10 +9,12 @@ namespace Content.Trauma.Server.BurnableFood;
 
 public sealed partial class BurnableFoodSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<BurnableFoodComponent, OnTemperatureChangeEvent>(OnTempChange);
     }
 
@@ -25,11 +27,11 @@ public sealed partial class BurnableFoodSystem : EntitySystem
             || internalTemperatureComp.Temperature < ent.Comp.BurnTemp)
             return;
 
-        var originalName = MetaData(ent).EntityName;
+        var originalName = Name(ent);
         var newEnt = SpawnAtPosition(ent.Comp.BurnedFoodPrototype, Transform(ent.Owner).Coordinates);
 
-        _metaSystem.SetEntityName(newEnt, Loc.GetString(ent.Comp.BurnedPrefix, ("name", originalName)));
-        _popupSystem.PopupEntity(Loc.GetString(ent.Comp.BurnedPopup, ("name", originalName)), newEnt, PopupType.SmallCaution);
+        _meta.SetEntityName(newEnt, Loc.GetString(ent.Comp.BurnedPrefix, ("name", originalName)));
+        _popup.PopupEntity(Loc.GetString(ent.Comp.BurnedPopup, ("name", originalName)), newEnt, PopupType.SmallCaution);
 
         QueueDel(ent);
     }
