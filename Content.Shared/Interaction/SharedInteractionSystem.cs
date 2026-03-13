@@ -293,7 +293,6 @@ namespace Content.Shared.Interaction
             if (userEntity.Value == uid)
             // <Trauma> - pull bolas and pray
             {
-                var freed = false;
                 if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && ensnareable.IsEnsnared)
                 {
                     foreach (var bola in ensnareable.Container.ContainedEntities.ToList())
@@ -301,14 +300,11 @@ namespace Content.Shared.Interaction
                         if (TryComp<EnsnaringComponent>(bola, out var ensnaring))
                         {
                             _snare.TryFree(uid, uid, bola, ensnaring);
-                            freed = true;
-                            break;
+                            return false;
                         }
                     }
                 }
-
-                if (!freed)
-                    _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
+                _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
                 return false;
             }
             // </Trauma>
