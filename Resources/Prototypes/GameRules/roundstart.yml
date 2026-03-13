@@ -550,10 +550,10 @@
     scheduledGameRules: !type:NestedSelector
       tableId: BasicGameRulesTable
 # <Trauma> - These values should make midrounds less chaotic overall
-    minimumTimeUntilFirstEvent: 300 #5 min
+    minimumTimeUntilFirstEvent: 900 #15 min
     minMaxEventTiming:
-      min: 300 # 5 min
-      max: 600 # 10 min
+      min: 900 # 15 min
+      max: 1800 # 30 min
 #</Trauma>
 
 - type: entity
