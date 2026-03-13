@@ -190,7 +190,7 @@ public sealed class FaceHuggerSystem : EntitySystem
             if (faceHugger.Active && clothing?.InSlot == null)
             {
                 _targets.Clear();
-                _lookup.GetEntitiesInRange<InventoryComponent>(Transform(uid).Coordinates, 1.5f, _targets));
+                _lookup.GetEntitiesInRange<InventoryComponent>(Transform(uid).Coordinates, 1.5f, _targets);
                 foreach (var entity in _targets)
                 {
                     if (TryEquipFaceHugger(uid, entity, faceHugger))
