@@ -28,7 +28,7 @@
   id: DerelictCyborgSyndicateSpawn
   components:
   - type: StationEvent
-    weight: 2 # Uncommon
+    weight: 2 # Trauma - was 4.5
     earliestStart: 30
     reoccurrenceDelay: 30
     minimumPlayers: 4
