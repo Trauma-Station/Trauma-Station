@@ -84,7 +84,7 @@
       generated:
         reagents:
         - ReagentId: Water
-          Quantity: 15 # Trauma - 5 -> 15 
+          Quantity: 15 # Trauma - 5 -> 15
     - type: SolutionPurge
       solution: absorbed
       preserve:
