@@ -28,7 +28,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     private EndRoundCreditsControl? _creditsContainer;
     private BoxContainer? _exitContainer;
     private bool _showCredits = true;
-    private bool Debug = true; // Set this to true if you want a bunch of dummy characters to spawn
+    private bool Debug = false; // Set this to true if you want a bunch of dummy characters to spawn
 
     public override void Initialize()
     {
@@ -36,7 +36,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         SubscribeNetworkEvent<RoundEndMessageEvent>(OnRoundEnd);
         SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
 
-        Subs.CVar(_cfg, TraumaCVars.PlayTraumaMovieEndCredits, x => _showCredits = x, true);
+        Subs.CVar(_cfg, TraumaCVars.PlayMovieEndCredits, x => _showCredits = x, true);
     }
 
     private void OnRoundCleanup(RoundRestartCleanupEvent ev)

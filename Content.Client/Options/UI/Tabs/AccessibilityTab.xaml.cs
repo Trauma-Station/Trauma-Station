@@ -28,7 +28,7 @@ public sealed partial class AccessibilityTab : Control
         // <Trauma>
         Control.AddOptionCheckBox(TraumaCVars.ChatHighlightSound, HighlightSoundCheckBox);
         Control.AddOptionCheckBox(TraumaCVars.SkillPopups, SkillPopupsCheckBox);
-        Control.AddOptionCheckBox(TraumaCVars.PlayTraumaMovieEndCredits, MovieCreditsCheckBox);
+        Control.AddOptionCheckBox(TraumaCVars.PlayMovieEndCredits, MovieCreditsCheckBox);
         // </Trauma>
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);

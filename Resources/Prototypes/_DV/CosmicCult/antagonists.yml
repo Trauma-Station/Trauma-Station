@@ -8,6 +8,7 @@
   - !type:OverallPlaytimeRequirement
     time: 43200 # 12h
   guides: [ CosmicCult ]
+  creditImage: /Textures/_Trauma/EndCredits/Antags/cosmiccult.png
 
 - type: antag
   id: CosmicAntagColossus
