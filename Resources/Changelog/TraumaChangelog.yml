@@ -4314,3 +4314,10 @@ Entries:
   id: 506
   time: '2026-03-13T18:12:49.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1245
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed all simplemobs without a brain speaking tau ceti common
+  id: 507
+  time: '2026-03-13T19:06:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1246

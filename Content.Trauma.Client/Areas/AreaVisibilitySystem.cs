@@ -57,7 +57,8 @@ public sealed class AreaVisibilitySystem : CommonAreaVisibilitySystem
 
     private void UpdateVisibility(EntityUid uid)
     {
-        if (Transform(uid).MapID == MapId.Nullspace)
+        // don't hide them in the spawnmenu
+        if (Transform(uid).MapID == MapId.Nullspace && IsClientSide(uid))
             return;
 
         _sprite.SetVisible(uid, _visible);
