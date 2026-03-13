@@ -24,7 +24,7 @@ public abstract partial class SharedFlatpackSystem : EntitySystem // Trauma - ma
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    //[Dependency] private readonly EntityLookupSystem _entityLookup = default!; // Trauma - no longer used
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] protected readonly MachinePartSystem MachinePart = default!;
     [Dependency] protected readonly SharedMaterialStorageSystem MaterialStorage = default!;
