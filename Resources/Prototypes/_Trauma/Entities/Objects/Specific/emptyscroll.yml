@@ -23,7 +23,6 @@
 - type: entity
   parent: Paper
   id: ScrollFullRandom
-  abstract: true
   name: old scroll
   description: A scroll that has been partially filled in.
   components:
