@@ -43,7 +43,7 @@ public abstract partial class SharedGunSystem
         if (gun.Target is { } target && !TerminatingOrDeleted(target))
         {
             var targeted = EnsureComp<TargetedProjectileComponent>(uid);
-            targeted.Target = target;
+            targeted.Target = GetNetEntity(target);
             Dirty(uid, targeted);
         }
 
@@ -117,23 +117,9 @@ public abstract partial class SharedGunSystem
         if (_knowledge.GetKnowledge(user, ShootingKnowledge) is not {} shooting)
             return 3;
 
-        return shooting.Comp.Level < 26
-            ? 3.0f - (float) shooting.Comp.Level / 26.0f - _knowledge.SharpCurve(shooting)
-            : 1.0f - ((float) (shooting.Comp.Level - 50) / 50.0f * (float) (shooting.Comp.Level - 50) / 50.0f);
-    }
-
-    // TODO: kill this dogshit
-    /// <summary>
-    /// Adds shooting experience according to knowledge system.
-    /// </summary>
-    private void AddShootingExperience(EntityUid? userUid)
-    {
-        if (userUid is not {} user)
-            return;
-
-        var evShooting = new AddExperienceEvent(ShootingKnowledge, 1);
-        var evWeapons = new AddExperienceEvent(WeaponsKnowledge, 1);
-        RaiseLocalEvent(user, ref evShooting);
-        RaiseLocalEvent(user, ref evWeapons);
+        var level = shooting.Comp.NetLevel;
+        return level < 26
+            ? 3.0f - (float) level / 26.0f - _knowledge.SharpCurve(shooting)
+            : 1.0f - ((float) (level - 50) / 50.0f * (float) (level - 50) / 50.0f);
     }
 }

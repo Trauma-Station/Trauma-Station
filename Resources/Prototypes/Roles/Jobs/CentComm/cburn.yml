@@ -28,12 +28,6 @@
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
-  # <Trauma>
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      MeleeKnowledge: 50
-      ShootingKnowledge: 50
-  # </Trauma>
 
 - type: startingGear # Goobstation - Start - Sol
   id: CBURNGear

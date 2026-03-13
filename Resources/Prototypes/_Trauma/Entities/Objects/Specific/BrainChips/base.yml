@@ -1,0 +1,41 @@
+- type: entity
+  abstract: true
+  parent: OrganBaseInternal
+  id: BaseBrainChip
+  name: brain chip
+  description: A sterilized microchip assembly that can directly interface with the brain.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/brain_chips.rsi
+    layers:
+    - state: icon
+  - type: Item
+    size: Tiny
+  - type: Inorganic
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Organ
+    category: BrainChip
+  - type: ChildOrgan
+    parentCategory: Head
+  - type: OrganExamine
+    examine: brainchip-detail-examine
+  - type: RenamingOrgan
+    name: brainchip-rename # they get anonymized once installed so health analyzer etc can't out you
+  # TODO: skills guide examine
+
+- type: entity
+  abstract: true
+  parent: BaseBrainChip
+  id: BaseSkillChip
+  name: skill chip
+  description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
+  components:
+  # TODO: sprite
+  # TODO: examining with diagnostic hud lists the skills
+  - type: KnowledgeGrantOnWear
+
+# Skill chips are automatically added for any job by looking for "SkillChip" + Job ID
+# No boilerplate changes to 60 yml files :)
+
+# TODO: move job bonuses like surgery speed to skillchips if someone writes a generic component field setting thing, basically automatic vvwrite

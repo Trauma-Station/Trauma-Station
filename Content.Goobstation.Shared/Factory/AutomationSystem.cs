@@ -90,10 +90,10 @@ public sealed class AutomationSystem : EntitySystem
     private void CacheEntities()
     {
         _automatable.Clear();
-        var factory = EntityManager.ComponentFactory;
+        var name = Factory.GetComponentName<AutomationSlotsComponent>();
         foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.HasComponent<AutomationSlotsComponent>(factory))
+            if (proto.Components.ContainsKey(name))
                 _automatable.Add(proto.ID);
         }
 

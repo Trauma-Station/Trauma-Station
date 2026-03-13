@@ -25,3 +25,6 @@ construction-graph-tag-nail = a nail
 construction-graph-tag-butt = a butt
 construction-graph-tag-cyber-butt = an ipc groin
 construction-graph-tag-egg = any egg
+
+# food
+construction-graph-tag-CookedEgg = a cooked egg

@@ -12,12 +12,9 @@
   parent: BaseAreaService
   id: AreaKitchen
   name: kitchen
-  description: Allows the Chef to use CQC inside of here.
   components:
   - type: Sprite
     state: kitchen
-  - type: MartialArtArea
-    form: MartialArtCQCChef
 
 # For the seating area between kitchen and bar
 - type: entity

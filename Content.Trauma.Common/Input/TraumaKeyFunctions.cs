@@ -8,4 +8,5 @@ namespace Content.Trauma.Common.Input;
 public static class TraumaKeyFunctions
 {
     public static readonly BoundKeyFunction OpenMartialArtsMenu = "OpenMartialArtsMenu";
+    public static readonly BoundKeyFunction Tackle = "Tackle";
 }

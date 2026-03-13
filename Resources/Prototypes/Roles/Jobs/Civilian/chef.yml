@@ -23,11 +23,6 @@
   - Hydroponics
   - Bar
   special:
-  # <Trauma>
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      MartialArtCQCChef: 26
-  # </Trauma>
   - !type:AddImplantSpecial # Chefs speak space italian
     implants: [ SpaceItalianTranslatorImplant ]
 

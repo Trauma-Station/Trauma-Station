@@ -13,8 +13,8 @@
   - type: AntagSelection
     definitions:
     - prefRoles: [ CosmicAntagCultist ]
-      min: 1 # It just works trust me
-      max: 8
+      min: 2
+      max: 6
       playerRatio: 10
       jobBlacklist: [ Chaplain ] # GOOBSTATION
       blacklist:
@@ -26,3 +26,8 @@
       - type: CosmicCult
       mindRoles:
       - MindRoleCosmicCult
+  - type: AntagPlayerEffects
+    effects:
+    - !type:GrantSkills
+      skills:
+        MeleeKnowledge: 60 # They like, only have melee weapons

@@ -87,13 +87,9 @@
         component: Corporeal
         time: 15
         type: Add
-        probability: 1
-      - !type:GenericStatusEffect
-        key: Stunned
-        component: Stunned
+      - !type:ModifyParalysis
         time: 3
         type: Add
-        probability: 1
   - type: AlwaysTakeHoly
   - type: Access # Only realistically used while corporeal.
     groups:

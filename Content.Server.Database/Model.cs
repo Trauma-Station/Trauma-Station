@@ -88,8 +88,6 @@ namespace Content.Server.Database
                     dict => dict.GetHashCode(),
                     dict => new Dictionary<string, int>(dict)
                 ));
-            profile.Property(p => p.KnowledgeRemoved)
-                .HasDefaultValue(new List<string>());
             profile.HasIndex(p => new { p.Slot, PrefsId = p.PreferenceId })
                 .IsUnique();
             // </Trauma>
@@ -459,7 +457,6 @@ namespace Content.Server.Database
         // <Trauma>
         public string BarkVoice { get; set; } = null!;
         public Dictionary<string, int> KnowledgeMastery { get; set; } = new();
-        public List<string> KnowledgeRemoved { get; set; } = new();
         // </Trauma>
         [Column(TypeName = "jsonb")] public JsonDocument? OrganMarkings { get; set; } = null!;
         [Column(TypeName = "jsonb")] public JsonDocument? Markings { get; set; } = null!;

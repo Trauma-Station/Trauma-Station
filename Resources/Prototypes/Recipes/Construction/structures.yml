@@ -312,7 +312,9 @@
   canRotate: false
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 0
+  practical:
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -329,7 +331,9 @@
   canRotate: false
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 0
+  practical:
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -345,7 +349,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1 # diagonal is harder to make
   # </Trauma>
 
 - type: construction
@@ -361,7 +365,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1 # diagonal is harder to make
   # </Trauma>
 
 - type: construction
@@ -379,7 +383,7 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 2
+    WindowsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -452,7 +456,7 @@
   # <Trauma>
   theory:
     WindowsKnowledge: 2
-    TechnologyKnowledge: 2
+    TechnologyKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -470,7 +474,7 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 2
+    WindowsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -949,7 +953,9 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 0 # it's just rods
+  practical:
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -966,7 +972,9 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 0 # it's just rods
+  practical:
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -983,7 +991,9 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 0 # it's just rods
+  practical:
+    FurnitureKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1000,7 +1010,9 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 0 # it's just rods
+  practical:
+    FurnitureKnowledge: 1
   # </Trauma>
 
 # Chain link fencing
@@ -1017,8 +1029,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
-    TechnologyKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1035,8 +1046,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
-    TechnologyKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1053,8 +1063,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
-    TechnologyKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1070,8 +1079,8 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
-    TechnologyKnowledge: 2
+    WallsKnowledge: 1
+    TechnologyKnowledge: 0
   # </Trauma>
 
 #Wooden fence high
@@ -1088,7 +1097,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1105,7 +1114,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1122,7 +1131,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1139,7 +1148,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1155,7 +1164,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 #Wooden fence small
@@ -1172,7 +1181,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1189,7 +1198,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1206,7 +1215,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1223,7 +1232,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1240,7 +1249,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
+    WallsKnowledge: 1
   # </Trauma>
 
 #Airlocks

@@ -1,0 +1,10 @@
+- type: latheRecipe
+  id: ClothingHandsGlovesDolphin
+  result: ClothingHandsGlovesDolphin
+  completetime: 2
+  materials:
+    Cloth: 500
+    Durathread: 1500
+    Plastic: 300
+    Silver: 100
+    Plasma: 100

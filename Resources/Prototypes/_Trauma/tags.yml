@@ -11,6 +11,9 @@
   id: CartridgeTurret
 
 - type: Tag
+  id: CookedEgg
+
+- type: Tag
   id: CyberButt
 
 - type: Tag

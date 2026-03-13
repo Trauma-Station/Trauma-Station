@@ -40,7 +40,7 @@ public sealed class EnthrallSystem : SharedEnthrallSystem
     private void OnInit(EntityUid uid, ThrallComponent component, ComponentInit init)
     {
         if (_playerManager.LocalEntity != uid
-            || EntityManager.HasComponent<LesserShadowlingComponent>(uid))
+            || HasComp<LesserShadowlingComponent>(uid))
             return;
 
         _overlay.ReceiveEnthrall(5f);

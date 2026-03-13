@@ -21,10 +21,10 @@ public sealed partial class KnowledgeComponent : Component
     public ProtoId<KnowledgeCategoryPrototype> Category;
 
     /// <summary>
-    /// Current Mastery of this knowledge.
+    /// Current learned level of this knowledge from 0-100.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
-    public int Level;
+    public int LearnedLevel;
 
     /// <summary>
     /// Current Stored experience.
@@ -64,10 +64,16 @@ public sealed partial class KnowledgeComponent : Component
     public SpriteSpecifier? Sprite;
 
     /// <summary>
-    /// Temporary levels that are granted by certain equipment.
+    /// Temporary levels that are granted by certain equipment and skillchips.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int TemporaryLevel;
+
+    /// <summary>
+    /// The combined learned + temporary levels.
+    /// </summary>
+    [ViewVariables]
+    public int NetLevel => Math.Clamp(LearnedLevel + TemporaryLevel, 0, 100);
 
     /// <summary>
     /// Temporary experience boosts that are granted by certain equipment.
@@ -83,7 +89,7 @@ public sealed partial class KnowledgeComponent : Component
 
     /// <summary>
     /// Array of point costs for each mastery level, including 0.
-    /// There are 6 of them total.
+    /// There are 6 of them total by default, removing will decrease the max mastery you can buy.
     /// If this is null, you can't opt in to this knowledge.
     /// </summary>
     [DataField(required: true)]

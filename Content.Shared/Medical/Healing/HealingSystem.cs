@@ -223,7 +223,7 @@ public sealed class HealingSystem : EntitySystem
 
         // see if there is any damage that can be healed
         if (healing.Damage.DamageDict.Keys
-            .Any(damageKey => damageable.Damage.DamageDict[damageKey].Value > 0))
+            .Any(damageKey => damageable.Damage.DamageDict.TryGetValue(damageKey, out var damage) && damage.Value > 0))
             return true;
 
         // see if there are any wounds to heal
@@ -388,12 +388,12 @@ public sealed class HealingSystem : EntitySystem
         if (ent != args.User)
         {
             _adminLogger.Add(LogType.Healed,
-                $"{EntityManager.ToPrettyString(args.User):user} healed {EntityManager.ToPrettyString(ent):target} for {healedTotal.GetTotal():damage} damage"); // Goobstation
+                $"{ToPrettyString(args.User):user} healed {ToPrettyString(ent):target} for {healedTotal.GetTotal():damage} damage"); // Goobstation
         }
         else
         {
             _adminLogger.Add(LogType.Healed,
-                $"{EntityManager.ToPrettyString(args.User):user} healed themselves for {healedTotal.GetTotal():damage} damage"); // Goobstation
+                $"{ToPrettyString(args.User):user} healed themselves for {healedTotal.GetTotal():damage} damage"); // Goobstation
         }
         _audio.PlayPredicted(healing.HealingEndSound, ent, ent, AudioParams.Default.WithVariation(0.125f).WithVolume(1f)); // Goob edit
 

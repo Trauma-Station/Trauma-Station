@@ -25,8 +25,21 @@ public sealed partial class KnowledgeGrantOnUseComponent : Component
     public Dictionary<EntProtoId, int> Experience = new();
 
     /// <summary>
-    /// Length of a simple doafter to learn this knowledge.
+    /// Length of a single doafter to learn this knowledge.
     /// </summary>
     [DataField]
-    public TimeSpan DoAfter = TimeSpan.FromSeconds(2);
+    public TimeSpan DoAfter = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// If true, you will instantly gain all the skills then the item is ashed.
+    /// Only <see cref="Skills"/> is used, <see cref="Experience"/> is ignored.
+    /// </summary>
+    [DataField]
+    public bool SingleUse = true;
+
+    /// <summary>
+    /// Ash to spawn.
+    /// </summary>
+    [DataField]
+    public EntProtoId Ash = "Ash";
 }

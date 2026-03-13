@@ -215,7 +215,7 @@ public sealed partial class PullingSystem
             _stamina.TakeStaminaDamage(pullable, puller.Comp.SuffocateGrabStaminaDamage);
 
             var comboEv = new ComboAttackPerformedEvent(puller.Owner, pullable.Owner, puller.Owner, ComboAttackType.Grab);
-            RaiseLocalEvent(puller.Owner, comboEv);
+            RaiseLocalEvent(puller.Owner, ref comboEv);
             _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable, puller);
 
             return true;
@@ -232,8 +232,7 @@ public sealed partial class PullingSystem
 
         var newStage = (GrabStage) ((int) puller.Comp.GrabStage + nextStageAddition);
 
-        if (HasComp<MartialArtsKnowledgeComponent>(puller) // i really hate this solution holy fuck
-            && TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
+        if (TryComp<RequireProjectileTargetComponent>(pullable, out var layingDown)
             && layingDown.Active)
         {
             var ev = new CheckGrabOverridesEvent(newStage);
@@ -331,7 +330,7 @@ public sealed partial class PullingSystem
         _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), pullable, puller);
 
         var comboEv = new ComboAttackPerformedEvent(puller.Owner, pullable.Owner, puller.Owner, ComboAttackType.Grab);
-        RaiseLocalEvent(puller.Owner, comboEv);
+        RaiseLocalEvent(puller.Owner, ref comboEv);
         return true;
     }
 

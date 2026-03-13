@@ -2055,7 +2055,7 @@
   icon: { sprite:  Objects/Weapons/Melee/cane.rsi, state: cane}
   productEntity: CaneSheathFilled
   cost:
-    Telecrystal: 40 # E-sword sidegrade - goob
+    Telecrystal: 20 # Trauma - was 40 in prior goob edit
   categories:
   - UplinkJob
   conditions:

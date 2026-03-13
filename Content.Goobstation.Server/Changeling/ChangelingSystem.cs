@@ -244,10 +244,9 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        foreach (var comp in EntityManager.EntityQuery<ChangelingIdentityComponent>())
+        var query = EntityQueryEnumerator<ChangelingIdentityComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
-            var uid = comp.Owner;
-
             if (_timing.CurTime < comp.UpdateTimer)
                 continue;
 
@@ -256,6 +255,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             Cycle(uid, comp);
         }
     }
+
     public void Cycle(EntityUid uid, ChangelingIdentityComponent comp)
     {
         UpdateChemicals(uid, comp, manualAdjust: false);

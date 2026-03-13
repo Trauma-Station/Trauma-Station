@@ -1,17 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Common.Body;
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Chat;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Popups;
-using Content.Shared.RetractableItemAction;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
@@ -21,15 +16,15 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    //[Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    //[Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<LanguageKnowledgeComponent> _langQuery;
 
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
     //private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
-    private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
+    //private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
 
     private void InitializeLanguage()
     {
@@ -87,8 +82,8 @@ public abstract partial class SharedKnowledgeSystem
     public void UpdateEntityLanguages(Entity<LanguageSpeakerComponent> ent)
     {
         var ev = new DetermineEntityLanguagesEvent();
-        if (GetContainer(ent.Owner) is {} brain &&
-            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is {} known)
+        if (GetContainer(ent.Owner) is { } brain &&
+            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is { } known)
         {
             foreach (var language in known)
             {
@@ -126,8 +121,8 @@ public abstract partial class SharedKnowledgeSystem
 
     private void SpeakerToKnowledge(Entity<LanguageSpeakerComponent> ent)
     {
-        if (GetContainer(ent.Owner) is not {} brain ||
-            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is not {} known)
+        if (GetContainer(ent.Owner) is not { } brain ||
+            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is not { } known)
             return;
 
         foreach (var language in known)
@@ -145,7 +140,7 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnLanguageAdd(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
     {
-        if (GetContainer(ent.Owner) is not {} brain)
+        if (GetContainer(ent.Owner) is not { } brain)
             return;
 
         // We add the intrinsically known languages first so other systems can manipulate them easily
@@ -158,8 +153,8 @@ public abstract partial class SharedKnowledgeSystem
     public void OnLanguageRemove(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
     {
         var id = LanguageUnit(args.Language);
-        if (GetContainer(ent.Owner) is not {} brain ||
-            GetKnowledge(brain, id) is not {} unit)
+        if (GetContainer(ent.Owner) is not { } brain ||
+            GetKnowledge(brain, id) is not { } unit)
             return;
 
         var langComp = _langQuery.Comp(unit);
@@ -184,7 +179,7 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnLanguageBodyInit(Entity<LanguageSpeakerComponent> ent, ref BodyInitEvent args)
     {
-        if (GetContainer(ent.Owner) is not {} brain)
+        if (GetContainer(ent.Owner) is not { } brain)
             return;
 
         var allLanguages = new List<(ProtoId<LanguagePrototype>, bool)>();
@@ -201,7 +196,7 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (lang, speaks) in allLanguages)
         {
-            if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not {} unit)
+            if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not { } unit)
             {
                 Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
                 continue;
@@ -218,11 +213,11 @@ public abstract partial class SharedKnowledgeSystem
 
     public void OnLanguageSpoke(Entity<LanguageSpeakerComponent> ent, ref EntitySpokeEvent args)
     {
-        if (GetContainer(ent.Owner) is not {} brain)
+        if (GetContainer(ent.Owner) is not { } brain)
             return;
 
         var id = LanguageUnit(args.Language);
-        if (GetKnowledge(brain, id) is not {} unit)
+        if (GetKnowledge(brain, id) is not { } unit)
         {
             Log.Warning($"{ToPrettyString(ent)} spoke in language {args.Language} while not having knowledge of it!?");
             return;
@@ -234,7 +229,7 @@ public abstract partial class SharedKnowledgeSystem
         if (now < comp.LastSpoken)
             return; // on cooldown for xp and curse effects
 
-        AddExperience(unit, ent, (int) Math.Clamp((now - comp.LastSpoken).TotalSeconds, 0, 4));
+        AddExperience(unit.AsNullable(), ent, (int) Math.Clamp((now - comp.LastSpoken).TotalSeconds, 0, 4));
 
         comp.LastSpoken = now + TimeSpan.FromSeconds(5);
         Dirty(unit, comp);
@@ -254,17 +249,19 @@ public abstract partial class SharedKnowledgeSystem
         }*/
 
         // curse of 220
+        /* TODO: re-enable this once language learning isnt fucked and just makes you understand everything
+        // this also doesnt make you able to speak it
         _hearers.Clear();
         _lookup.GetEntitiesInRange<LanguageSpeakerComponent>(_transform.GetMoverCoordinates(ent), 7f, _hearers, LookupFlags.All);
-        var evheard = new AddExperienceEvent(id, 1);
         foreach (var hearer in _hearers)
         {
             if (hearer.Owner == ent.Owner)
                 continue; // Don't curse yourself or double dip on XP
 
-            RaiseLocalEvent(hearer, ref evheard);
+            if (GetContainer(hearer) is { } hearerBrain)
+                AddExperience(hearerBrain, id, 1, 10);
 
-            /* too op, needs a traitor item or something + a cooldown
+            // too op, needs a traitor item or something + a cooldown
             if (!isCurse || !_language.CanUnderstand(hearer.Owner, args.Language))
                 continue;
 
@@ -274,8 +271,8 @@ public abstract partial class SharedKnowledgeSystem
             //_status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
 
             _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
-            */
         }
+        */
     }
 
     /*private bool ContainsCursedWord(string message)

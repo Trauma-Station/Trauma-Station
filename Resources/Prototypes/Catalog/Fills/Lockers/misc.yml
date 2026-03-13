@@ -341,6 +341,10 @@
     # Recursive
     - id: ClosetMaintenanceFilledRandom
       prob: 0.01
+    # <Trauma>
+    - id: EmptyScroll
+      prob: 0.001
+    # </Trauma>
 
 - type: entityTable
   id: MaintenancePlushies

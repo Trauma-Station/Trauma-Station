@@ -39,6 +39,9 @@ public sealed class DeviceLinkingTest
         var deviceLinkSys = server.System<DeviceLinkSystem>();
 
         var prototypes = server.ProtoMan.EnumeratePrototypes<EntityPrototype>();
+        // <Trauma>
+        var sinkName = compFact.GetComponentName<DeviceLinkSinkComponent>();
+        // </Trauma>
 
         await server.WaitAssertion(() =>
         {
@@ -46,10 +49,10 @@ public sealed class DeviceLinkingTest
             {
                 foreach (var proto in prototypes)
                 {
-                    if (proto.Abstract || pair.IsTestPrototype(proto))
+                    if (pair.IsTestPrototype(proto)) // Trauma - remove abstract check it's always false
                         continue;
 
-                    if (!proto.TryGetComponent<DeviceLinkSinkComponent>(out var protoSinkComp, compFact))
+                    if (!proto.TryGetComponent<DeviceLinkSinkComponent>(sinkName, out var protoSinkComp)) // Trauma - use cached name
                         continue;
 
                     foreach (var port in protoSinkComp.Ports)

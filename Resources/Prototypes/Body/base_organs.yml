@@ -113,6 +113,7 @@
     - Eyes
     - Tongue
     - Ears
+    - BrainChip # everyone starts with a brain chip so
   - type: ChildOrgan
     parentCategory: Torso
   - type: Woundable

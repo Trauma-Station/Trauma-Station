@@ -362,7 +362,7 @@ public sealed class BlobCoreSystem : EntitySystem
         }
 
         var blobCoreComp = blobCore.Comp;
-        var blobTileUid = EntityManager.SpawnEntity(blobCoreComp.TilePrototypes[newBlobTile], coordinates);
+        var blobTileUid = Spawn(blobCoreComp.TilePrototypes[newBlobTile], coordinates);
 
         if (!_tile.TryGetComponent(blobTileUid, out var blobTileComp))
         {

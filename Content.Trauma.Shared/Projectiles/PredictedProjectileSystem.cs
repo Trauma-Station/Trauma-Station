@@ -106,7 +106,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
             return;
 
         // it's here so this check is only done once before possible hit
-        var attemptEv = new ProjectileReflectAttemptEvent(uid, comp, false);
+        var attemptEv = new ProjectileReflectAttemptEvent(uid, comp, false, target);
         RaiseLocalEvent(target, ref attemptEv);
         if (attemptEv.Cancelled)
         {

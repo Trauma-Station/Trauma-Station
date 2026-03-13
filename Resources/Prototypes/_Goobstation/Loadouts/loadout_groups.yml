@@ -1233,7 +1233,7 @@
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - CombatGloves
+  - GorillaGloves
 # Brigmedic
 
 - type: loadoutGroup

@@ -6,7 +6,8 @@
   components:
   - type: Knowledge
     experienceCost: 15
-    costs: [1, 2, 3, 4, 8, 12] # basic cooking is easy to practice
+  - type: ExperienceOnCooking # it just makes sense
+    scale: 100 # cook 100 meals to master it from unskilled
 
 - type: entity
   parent: BaseConstructionKnowledge
@@ -32,9 +33,6 @@
   parent: BaseConstructionKnowledge
   id: BananiumKnowledge
   name: Bananium
-  components:
-  - type: Knowledge
-    costs: [0, 1, 2, 8, 12, 30] # HONK
 
 - type: entity
   parent: BaseConstructionKnowledge
@@ -65,9 +63,6 @@
   parent: BaseConstructionKnowledge
   id: ScienceKnowledge
   name: Science
-  components:
-  - type: Knowledge
-    costs: [2, 4, 6, 10, 12, 16]
 
 - type: entity
   parent: BaseConstructionKnowledge

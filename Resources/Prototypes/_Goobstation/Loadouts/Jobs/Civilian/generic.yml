@@ -59,33 +59,6 @@
     - Plasmaman
 
 - type: loadout
-  id: PurpleEnvirosuit
-  equipment:
-    jumpsuit: ClothingUniformEnvirosuitColorPurple
-  effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
-    species:
-    - Plasmaman
-
-- type: loadout
-  id: PurpleEnvirohelm
-  equipment:
-    head: ClothingHeadEnvirohelmColorPurple
-  effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
-    species:
-    - Plasmaman
-
-- type: loadout
-  id: PurpleEnvirogloves
-  equipment:
-    gloves: ClothingHandsGlovesEnviroglovesPurple
-  effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
-    species:
-    - Plasmaman
-
-- type: loadout
   id: BlackEnvirogloves
   equipment:
     gloves: ClothingHandsGlovesEnviroglovesBlack

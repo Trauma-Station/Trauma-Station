@@ -21,11 +21,11 @@ public sealed partial class QualityComponent : Component
     /// Stores the quality of the item, which changes some functionality when used.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float Quality = 0;
+    public int Quality = 0;
 
     /// <summary>
-    /// Stores the amount of items with mastery that have been added together.
+    /// Stores any particular modifiers used for the next roll.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int NumberOfMasteries = 0;
+    public int QualityModifiers = 0;
 }
