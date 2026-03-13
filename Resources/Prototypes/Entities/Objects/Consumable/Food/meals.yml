@@ -434,11 +434,6 @@
   - type: Tag
     tags:
     - Meat
-# <Trauma>
-  - type: Construction
-    graph: Friedeggs
-    node: finish
-#</Trauma>
 # Tastes like eggs, bacon, bun.
 
 - type: entity
