@@ -64,10 +64,10 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         credits.SetSize = _clyde.MainWindow.Size / _uiScale;
         credits.Populate(message, _cache, _proto, shoutout, Debug);
 
-        var rand = SharedRandomExtensions.HashCodeCombine(message.RoundId);
-        _random.SetSeed(rand);
+        var rand = new RobustRandom();
+        rand.SetSeed(message.RoundId);
 
-        if (_random.Prob(0.01f)) // Kojima is god...?
+        if (rand.Prob(0.01f)) // Kojima is god...?
             credits.AddKojimaBox(_cache);
 
         _creditsContainer = credits;
