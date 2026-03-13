@@ -161,10 +161,12 @@
   - type: AntagObjectives # Goobstation
     objectives:
     - NukeopsDetonateObjective
-  - type: AntagPlayerEffects # Trauma - nukies get nukie-locked hypoports
+  - type: AntagPlayerEffects # Trauma - nukies get nukie-locked hypoports and skillchip
     effects:
     - !type:NestedEffect
       proto: InstallHypoportNukie
+    - !type:NestedEffect
+      proto: InstallSkillChipNukie
 
 - type: entity
   parent: BaseNukeopsRule
@@ -547,7 +549,7 @@
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: BasicGameRulesTable
-#<Trauma> - These values should make midrounds less chaotic overall
+# <Trauma> - These values should make midrounds less chaotic overall
     minimumTimeUntilFirstEvent: 300 #5 min
     minMaxEventTiming:
       min: 300 # 5 min

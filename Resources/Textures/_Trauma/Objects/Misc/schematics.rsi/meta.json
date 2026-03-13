@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by Armok",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "inhand-left"
+    },
+    {
+      "name": "inhand-right"
+    },
+    {
+      "name": "base"
+    },
+    {
+      "name": "materials"
+    },
+    {
+      "name": "doors"
+    },
+    {
+      "name": "airlocks"
+    },
+    {
+      "name": "toys"
+    },
+    {
+      "name": "bananium"
+    },
+    {
+      "name": "bots"
+    },
+    {
+      "name": "furniture"
+    },
+    {
+      "name": "infrastructure"
+    },
+    {
+      "name": "electronics"
+    },
+    {
+      "name": "walls"
+    },
+    {
+      "name": "windows"
+    },
+    {
+      "name": "smokeables"
+    }
+  ]
+}

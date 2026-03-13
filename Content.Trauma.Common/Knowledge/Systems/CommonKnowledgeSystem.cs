@@ -31,7 +31,7 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract int GetMastery(int level);
 
     public int GetMastery(KnowledgeComponent comp)
-        => GetMastery(comp.Level);
+        => GetMastery(comp.NetLevel);
 
     /// <summary>
     /// Gets the mastery level of a knowledge unit's entity.

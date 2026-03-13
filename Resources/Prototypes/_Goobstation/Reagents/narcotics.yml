@@ -236,17 +236,14 @@
       effects:
       - !type:ModifyStatusEffect
         effectProto: AranespStatusEffect
-      - !type:GenericStatusEffect
-        key: Stun
+      - !type:ModifyParalysis
         time: 3
         type: Remove
-      - !type:GenericStatusEffect
-        key: KnockedDown
+      - !type:ModifyKnockdown
         time: 3
         type: Remove
-      - !type:GenericStatusEffect
-        key: Drowsiness
-        time: 10
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
         type: Remove
       - !type:GenericStatusEffect
         key: Adrenaline
@@ -429,12 +426,12 @@
       - !type:ModifyKnockdown
         time: 3
         type: Remove
-      - !type:GenericStatusEffect
-        key: Drowsiness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: ForcedSleep
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectForcedSleeping
         type: Remove
         time: 10
       - !type:HealthChange

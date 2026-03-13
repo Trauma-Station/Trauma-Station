@@ -62,3 +62,19 @@
   components:
   - type: Sprite
     state: chapel
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaPool
+  name: pool
+  components:
+  - type: Sprite
+    state: pool
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaDojo
+  name: dojo
+  components:
+  - type: Sprite
+    state: dojo

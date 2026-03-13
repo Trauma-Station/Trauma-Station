@@ -284,6 +284,41 @@ public sealed partial class BodyPartSystem
     }
 
     /// <summary>
+    /// Spawns an organ then inserts it into this bodypart.
+    /// Logs errors for programmer mistakes of using a non-organ or if the part is missing the organ's slot.
+    /// </summary>
+    public bool SpawnAndInsert(Entity<BodyPartComponent?> part, [ForbidLiteral] EntProtoId<OrganComponent> id)
+    {
+        if (!Resolve(part, ref part.Comp))
+            return false;
+
+        var organ = PredictedSpawnAtPosition(id, Transform(part).Coordinates);
+        if (_body.GetCategory(organ) is not {} category)
+        {
+            Log.Error($"Tried to insert invalid organ {ToPrettyString(organ)} into {ToPrettyString(part)}!");
+            PredictedDel(organ);
+            return false;
+        }
+
+        if (!part.Comp.Slots.Contains(category))
+        {
+            Log.Error($"Tried to insert organ {ToPrettyString(organ)} into {ToPrettyString(part)} which has no {category} slot!");
+            PredictedDel(organ);
+            return false;
+        }
+
+        if (!InsertOrgan(part, organ))
+        {
+            // not an error as the slot may just be occupied etc
+            Log.Warning($"Failed to insert organ {ToPrettyString(organ)} into {ToPrettyString(part)}'s {category} slot.");
+            PredictedDel(organ);
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
     /// Gets the severed organs container for a bodypart.
     /// Returns null if the bodypart is invalid or not severed.
     /// </summary>

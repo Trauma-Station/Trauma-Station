@@ -25,31 +25,10 @@ public sealed partial class InsertNewOrgan : EntityEffectBase<InsertNewOrgan>
 
 public sealed class InsertNewOrganEffectSystem : EntityEffectSystem<BodyPartComponent, InsertNewOrgan>
 {
-    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly BodyPartSystem _part = default!;
 
     protected override void Effect(Entity<BodyPartComponent> ent, ref EntityEffectEvent<InsertNewOrgan> args)
     {
-        var organ = PredictedSpawnAtPosition(args.Effect.Organ, Transform(ent).Coordinates);
-        if (_body.GetCategory(organ) is not {} category)
-        {
-            Log.Error($"Tried to insert invalid organ {ToPrettyString(organ)} into {ToPrettyString(ent)}!");
-            PredictedDel(organ);
-            return;
-        }
-
-        // this specifically is a programmer error
-        if (!ent.Comp.Slots.Contains(category))
-        {
-            Log.Error($"Tried to insert organ {ToPrettyString(organ)} into {ToPrettyString(ent)} which has no {category} slot!");
-            PredictedDel(organ);
-            return;
-        }
-
-        if (!_part.InsertOrgan(ent.AsNullable(), organ))
-        {
-            Log.Warning($"Failed to insert organ {ToPrettyString(organ)} into {ToPrettyString(ent)}'s {category} slot.");
-            PredictedDel(organ);
-        }
+        _part.SpawnAndInsert(ent.AsNullable(), args.Effect.Organ);
     }
 }

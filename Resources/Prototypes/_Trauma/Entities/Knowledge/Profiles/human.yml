@@ -1,6 +1,7 @@
 # Default for any species that has no knowledge profile of its own
 - type: knowledgeProfile
   id: Human
+  pointsLimit: 8
   mastery:
     # Standard space station skills
     CookingKnowledge: 2

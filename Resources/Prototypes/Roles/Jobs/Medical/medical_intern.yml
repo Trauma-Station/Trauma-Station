@@ -25,10 +25,6 @@
     components:
     - type: SurgerySpeedModifier
       speedModifier: 1.25
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      FirstAidKnowledge: 26
-      SurgeryKnowledge: 10
   # </Trauma>
 
 - type: startingGear

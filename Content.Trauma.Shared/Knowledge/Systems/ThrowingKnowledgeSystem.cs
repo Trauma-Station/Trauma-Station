@@ -61,7 +61,7 @@ public sealed class ThrowingKnowledgeSystem : EntitySystem
             baseThrowSpeed *= 1 + 0.2f * _knowledge.SharpCurve(throwing, -50, 50.0f);
         }
 
-        float weight = ent.Comp.Mass;
+        float weight = ent.Comp.FixturesMass;
 
         // Make it so you gotta throw it further then just at a wall in front.
         _knowledge.AddExperience(brain, ThrowingKnowledge, 1, (int) args.Distance * 5);

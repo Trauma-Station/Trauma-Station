@@ -19,12 +19,6 @@
   - !type:GiveItemOnHolidaySpecial
     holiday: BoxingDay
     prototype: BoxCardboard
-  # <Trauma>
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
-  # <Trauma>
 
 - type: startingGear
   id: CargoTechGear

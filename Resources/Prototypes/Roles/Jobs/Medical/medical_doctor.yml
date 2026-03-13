@@ -32,10 +32,6 @@
     - type: CPRTraining
       reviveChance: 0.45 # a bit better at chest compressions
       inhaleChance: 0.75 # decent at mouth to mouth res.
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      FirstAidKnowledge: 30
-      SurgeryKnowledge: 26
   # </Trauma>
 
 - type: startingGear

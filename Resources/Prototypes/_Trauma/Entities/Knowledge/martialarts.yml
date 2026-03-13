@@ -27,14 +27,18 @@
   name: Close Quarters Cooking
   description: Just like CQC, but only usable in the kitchen, freezer and cafeteria.
   components:
-  - type: Knowledge
-    costs: null # chef only
+  - type: MartialArtsKnowledge
+    giveExperience: false # only gain XP from cooking, do your job
+  - type: ExperienceOnCooking
+    scale: 5 # cook 200 meals to master it
   - type: AreaMartialArt
     areas:
     - AreaKitchen
     - AreaColdRoom
     - AreaCafeteria
-  # TODO: make it mutually exclusive with real CQC
+  - type: KnowledgeConflict
+    conflicts:
+    - MartialArtCQC # nuh uh chud
 
 - type: entity
   parent: BaseMartialArtsKnowledge
@@ -57,8 +61,6 @@
   id: MartialArtKravMaga
   name: Krav Maga
   components:
-  - type: Knowledge
-    costs: null # unobtainable for now
   - type: CanPerformCombo
   - type: ComboActions
     storedComboActions:
@@ -71,8 +73,6 @@
   id: MartialArtCapoeira
   name: Capoeira
   components:
-  - type: Knowledge
-    costs: null # antag only
   - type: CanPerformCombo
     roundstartCombos:
     - PushKick
@@ -99,8 +99,6 @@
   id: MartialArtHellRip
   name: Hell Rip
   components:
-  - type: Knowledge
-    costs: null # demon only
   - type: CanPerformCombo
     roundstartCombos:
     - DropKick
@@ -113,8 +111,6 @@
   id: MartialArtNinjutsu
   name: Ninjutsu
   components:
-  - type: Knowledge
-    costs: null # ninja only
   - type: CanPerformCombo
     roundstartCombos:
     - BiteTheDust
@@ -128,8 +124,6 @@
   id: MartialArtDragon
   name: Dragon Kung Fu
   components:
-  - type: Knowledge
-    costs: null # unobtainable for now
   - type: CanPerformCombo
     roundstartCombos:
     - DragonClaw
@@ -144,8 +138,6 @@
   - type: Sprite
     sprite: _Goobstation/Wizard/Objects/scroll.rsi
     state: scroll2
-  - type: Knowledge
-    costs: null # antag only
   - type: CanPerformCombo
     roundstartCombos:
     - SleepingCarpGnashingTeeth
@@ -181,8 +173,6 @@
   id: MartialArtBoxing
   name: Boxing
   components:
-  - type: Knowledge
-    costs: [3, 6, 10, 16, 20] # boxing is pretty common
   - type: CanPerformCombo
     roundstartCombos:
     - CQCConsecutive
@@ -192,8 +182,6 @@
   id: MartialArtDrunkfu
   name: Drunk-Fu
   components:
-  - type: Knowledge
-    costs: [3, 6, 10, 16, 20] # same moves as boxing so same costs
   - type: CanPerformCombo
     roundstartCombos:
     - CQCConsecutive
@@ -203,8 +191,6 @@
   id: MartialArtMimejutsu
   name: Mimejutsu
   components:
-  - type: Knowledge
-    costs: null # mime antag only (in the future, unused right now)
   - type: CanPerformCombo
     roundstartCombos:
     - MimeChucks
@@ -216,8 +202,6 @@
   id: MartialArtAdminfu
   name: Admin-Fu
   components:
-  - type: Knowledge
-    costs: null # admin only...
   - type: CanPerformCombo
     roundstartCombos:
     - InstantStun

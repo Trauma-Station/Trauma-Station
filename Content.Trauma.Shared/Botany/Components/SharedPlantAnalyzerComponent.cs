@@ -30,7 +30,7 @@ public partial record struct GasData(Gas GasID, float GasValue);
 // 0 - float, 1 - int, 2 - Enum HarvestType, 3 - bool
 public partial struct SeedDataTypes
 {
-    public enum SeedDataType
+    public enum SeedDataType : byte
     {
         Float,
         Int,

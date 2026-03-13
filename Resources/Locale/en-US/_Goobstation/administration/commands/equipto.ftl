@@ -5,7 +5,7 @@ cmd-equipto-help = Usage: equipto <target> <itemUid/ProtoId> <bool-DeletePreviou
 
 cmd-equipto-args-error = Invalid arguments. { cmd-equipto-help }
 cmd-equipto-bad-target = Unable to find entity '{$target}'.
-cmd-equipto-bad-proto = Invalid item UID/prototype: '{$item}'
+cmd-equipto-bad-proto = Invalid item UID/prototype: '{$proto}'
 
 cmd-equipto-success = Equipped {$item} to {$target} in slot {$targetSlot}.
 cmd-equipto-failure = Failed to equip {$item} to {$target} in slot {$targetSlot}.

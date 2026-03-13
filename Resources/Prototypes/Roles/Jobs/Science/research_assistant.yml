@@ -16,13 +16,6 @@
   access:
   - Research
   - Maintenance
-  # <Trauma>
-  special:
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      TechnologyKnowledge: 10
-      ScienceKnowledge: 10
-  # </Trauma>
 
 - type: startingGear
   id: ResearchAssistantGear

@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by Armok",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "inhand-left"
+    },
+    {
+      "name": "inhand-right"
+    },
+    {
+      "name": "base"
+    },
+    {
+      "name": "athletics"
+    },
+    {
+      "name": "toughness"
+    },
+    {
+      "name": "melee"
+    },
+    {
+      "name": "strength"
+    },
+    {
+      "name": "shooting"
+    },
+    {
+      "name": "surgery"
+    },
+    {
+      "name": "firstaid"
+    },
+    {
+      "name": "magicalliteracy"
+    },
+    {
+      "name": "literacy"
+    },
+    {
+      "name": "janitor"
+    },
+    {
+      "name": "throwing"
+    },
+    {
+      "name": "TauCeti"
+    },
+    {
+      "name": "fabrication"
+    }
+  ]
+}
