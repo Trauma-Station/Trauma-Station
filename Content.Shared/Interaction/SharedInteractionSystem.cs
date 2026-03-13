@@ -300,7 +300,7 @@ namespace Content.Shared.Interaction
                     {
                         if (TryComp<EnsnaringComponent>(bola, out var ensnaring))
                         {
-                            _ensnareableSystem.TryFree(uid, uid, bola, ensnaring);
+                            _snare.TryFree(uid, uid, bola, ensnaring);
                             freed = true;
                             break;
                         }
