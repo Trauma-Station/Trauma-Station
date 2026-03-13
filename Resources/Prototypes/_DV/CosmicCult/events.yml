@@ -3,7 +3,7 @@
   id: ColossusSpawn
   components:
   - type: StationEvent
-    weight: 1
+    weight: 1 # Trauma - was 3
     earliestStart: 30
     reoccurrenceDelay: 20
     minimumPlayers: 40

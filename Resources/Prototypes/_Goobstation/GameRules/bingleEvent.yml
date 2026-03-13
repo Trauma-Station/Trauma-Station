@@ -17,7 +17,7 @@
   components:
   - type: StationEvent
     earliestStart: 50
-    weight: 2
+    weight: 2 # Trauma - was 3
     duration: 50
     minimumPlayers: 50
   - type: RandomSpawnRule

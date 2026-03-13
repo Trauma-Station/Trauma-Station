@@ -94,7 +94,7 @@
   - type: AntagSpawner
     prototype: MobLesserSlaughterDemon
   - type: StationEvent
-    weight: 0.5
+    weight: 0.5 # Trauma - was 1
     earliestStart: 30
     minimumPlayers: 50
     duration: null
