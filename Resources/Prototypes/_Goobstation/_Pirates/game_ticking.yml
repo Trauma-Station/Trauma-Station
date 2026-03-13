@@ -16,7 +16,7 @@
   id: SpacePirates
   components:
   - type: StationEvent
-    weight: 3
+    weight: 3 # Trauma - was 5
     duration: null
     earliestStart: 20
     reoccurrenceDelay: 60
