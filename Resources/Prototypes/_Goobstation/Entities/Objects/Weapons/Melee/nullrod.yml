@@ -198,6 +198,8 @@
       path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
   - type: IgniteOnMeleeHit # emphasis on FLAMING GIFT!!
     fireStacks: 0.25
+  - type: HolyIgniteOnMeleeHit #Trauma - Nullrod Balance (holy fire, no hardgrabs)
+    fireStacks: 3.0
   - type: Cautery
     speed: 0.3
   - type: Tool
