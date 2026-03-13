@@ -309,7 +309,7 @@ namespace Content.Shared.Interaction
 
                 if (!freed)
                     _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
-                    return false;
+                return false;
             }
             // </Trauma>
 
