@@ -44,7 +44,7 @@
   storage:
     back:
     - Flash
-    - MagazinePistol
+    #- MagazinePistol # Trauma - no
 
 - type: chameleonOutfit
   id: SecurityCadetChameleonOutfit
