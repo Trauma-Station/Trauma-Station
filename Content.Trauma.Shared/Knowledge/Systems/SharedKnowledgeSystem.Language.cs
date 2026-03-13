@@ -38,7 +38,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdd);
         SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemove);
         SubscribeLocalEvent<LanguageSpeakerComponent, UpdateLanguageEvent>(OnLanguageUpdate);
-        SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnLanguageBodyInit,
+        SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnSpeakerMapInit,
             after: [ typeof(InitialBodySystem) ]);
 
         // Experience methods
@@ -179,10 +179,14 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageBodyInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
+    public void OnSpeakerMapInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
     {
         if (GetContainer(ent.Owner) is not { } brain)
+        {
+            // use mob yml languages
+            UpdateEntityLanguages(ent);
             return;
+        }
 
         var allLanguages = new List<(ProtoId<LanguagePrototype>, bool)>();
         foreach (var id in ent.Comp.Speaks)
