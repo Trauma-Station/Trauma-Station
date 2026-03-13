@@ -3,14 +3,17 @@
 using System.Numerics;
 using Content.Client._RMC14.LinkAccount;
 using Content.Shared.GameTicking;
+using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.CCVar;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.RoundEndCredits;
 
@@ -28,7 +31,8 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     private EndRoundCreditsControl? _creditsContainer;
     private BoxContainer? _exitContainer;
     private bool _showCredits = true;
-    private bool Debug = false; // Set this to true if you want a bunch of dummy characters to spawn
+    private float _uiScale;
+    private bool Debug = true; // Set this to true if you want a bunch of dummy characters to spawn
 
     public override void Initialize()
     {
@@ -37,6 +41,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
         SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
 
         Subs.CVar(_cfg, TraumaCVars.PlayMovieEndCredits, x => _showCredits = x, true);
+        Subs.CVar(_cfg, CVars.DisplayUIScale, x => _uiScale = x, true);
     }
 
     private void OnRoundCleanup(RoundRestartCleanupEvent ev)
@@ -57,8 +62,11 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             shoutout = _random.Pick(_linkAccount.GetPatrons()).Name;
 
         var credits = new EndRoundCreditsControl();
-        credits.SetSize = _clyde.MainWindow.Size;
+        credits.SetSize = _clyde.MainWindow.Size / _uiScale;
         credits.Populate(message, _cache, _proto, shoutout, Debug);
+
+        var rand = SharedRandomExtensions.HashCodeCombine(message.RoundId);
+        _random.SetSeed(rand);
 
         if (_random.Prob(0.01f)) // Kojima is god...?
             credits.AddKojimaBox(_cache);
