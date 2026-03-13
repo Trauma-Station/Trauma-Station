@@ -151,7 +151,7 @@
   description: It's an egg on a toast!
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Food/eggtoast.rsi
+    sprite: _Trauma/Objects/Consumable/Food/eggontoast.rsi
     state: icon
   - type: SolutionContainerManager
     solutions:
