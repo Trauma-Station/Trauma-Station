@@ -86,7 +86,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         _holderQuery = GetEntityQuery<KnowledgeHolderComponent>();
 
         LoadSkillPrototypes();
-        LoadProfilePrototypes();
     }
 
     public override void Update(float frameTime)
@@ -206,8 +205,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         if (args.WasModified<EntityPrototype>())
             LoadSkillPrototypes();
-        if (args.WasModified<KnowledgeProfilePrototype>())
-            LoadProfilePrototypes();
     }
 
     private void LoadSkillPrototypes()
@@ -391,6 +388,22 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     /// <summary>
+    /// Raises a skill's mastery level by some number.
+    /// Adds the skill if it's missing.
+    /// </summary>
+    public Entity<KnowledgeComponent>? RaiseMastery(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int mastery, bool popup = true)
+    {
+        if (EnsureKnowledge(ent, id, popup: popup) is not {} unit)
+            return null;
+
+        mastery += GetMastery(unit.Comp.LearnedLevel);
+        var level = GetInverseMastery(mastery);
+        unit.Comp.LearnedLevel = Math.Min(level, 100);
+        Dirty(unit);
+        return unit;
+    }
+
+    /// <summary>
     /// Adds a list of knowledge units to a knowledge container.
     /// </summary>
     public void AddKnowledgeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList, bool popup = false)
@@ -423,7 +436,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         DirtyField(ent, ent.Comp, nameof(KnowledgeContainerComponent.KnowledgeDict));
 
         var ev = new KnowledgeRemovedEvent(ent, holder);
-        RaiseLocalEvent(ref ev);
+        RaiseLocalEvent(unit, ref ev);
 
         PredictedQueueDel(unit);
 

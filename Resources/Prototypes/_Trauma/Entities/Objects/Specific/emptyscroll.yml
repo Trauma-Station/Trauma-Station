@@ -19,3 +19,20 @@
   - type: Item
     size: Small
   - type: EmptyScroll
+
+- type: entity
+  parent: Paper
+  id: ScrollFullRandom
+  name: old scroll
+  description: A scroll that has been partially filled in.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      sprite: _Trauma/Objects/Specific/empty_scroll.rsi
+    - type: Sprite
+      sprite: _Goobstation/Wizard/Objects/scroll.rsi
+      state: scroll
+  - type: Item
+    size: Small
+# make new component to pull random prayer

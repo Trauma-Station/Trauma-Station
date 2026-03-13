@@ -6,9 +6,9 @@
   description: A sterilized microchip assembly that can directly interface with the brain.
   components:
   - type: Sprite
-    sprite: Objects/Misc/module.rsi # TODO: make unique sprite
+    sprite: _Trauma/Objects/Specific/brain_chips.rsi
     layers:
-    - state: cpu_super
+    - state: icon
   - type: Item
     size: Tiny
   - type: Inorganic

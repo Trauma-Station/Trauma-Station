@@ -1,0 +1,65 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<roundEndCredits:EndRoundCreditsControl
+    xmlns="https://spacestation14.io"
+    xmlns:roundEndCredits="clr-namespace:Content.Trauma.Client.RoundEndCredits"
+    MouseFilter="Ignore"
+    ReserveScrollbarSpace="False"
+    HScrollEnabled="False"
+    Access="Public">
+
+    <BoxContainer
+        Name="MainCreditVBox"
+        Access="Public"
+        Align="Center"
+        Orientation="Vertical">
+
+        <BoxContainer
+            Name="ServerImageBox"
+            Access="Public"
+            Align="Center"
+            VerticalAlignment="Top">
+            <TextureRect
+                Name="ServerImage"
+                Margin="0 1000 0 500" />
+        </BoxContainer>
+
+        <Label
+            Name="EpisodeNumber"
+            Access="Public"
+            Align="Center"
+            Margin="0 0 0 250" />
+
+        <BoxContainer
+            Name="IntroJargonBox"
+            Access="Public"
+            Align="Center"
+            Margin="0 0 0 150">
+            <Label
+                Name="IntroJargonLabel"
+                Access="Public"
+                Align="Center" />
+        </BoxContainer>
+
+        <BoxContainer
+            Name="ShoutOutBox"
+            Access="Public"
+            Align="Center"
+            Margin="0 0 0 200">
+            <Label
+                Name="ShoutOutLabel"
+                Access="Public"
+                Align="Center" />
+        </BoxContainer>
+
+        <Label
+            Name="CastLabel"
+            Access="Public"
+            Align="Center"
+            Margin="0 0 0 150" />
+
+    </BoxContainer>
+
+</roundEndCredits:EndRoundCreditsControl>

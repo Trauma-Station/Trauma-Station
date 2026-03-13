@@ -549,7 +549,7 @@
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: BasicGameRulesTable
-#<Trauma> - These values should make midrounds less chaotic overall
+# <Trauma> - These values should make midrounds less chaotic overall
     minimumTimeUntilFirstEvent: 300 #5 min
     minMaxEventTiming:
       min: 300 # 5 min

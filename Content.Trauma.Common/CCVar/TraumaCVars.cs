@@ -137,4 +137,14 @@ public sealed partial class TraumaCVars
         CVarDef.Create("trauma.error_webhook_delay", 0.3, CVar.SERVER);
 
     #endregion
+
+    #region EndCredits
+
+    /// <summary>
+    /// Whether to play the cool end credits.
+    /// </summary>
+    public static readonly CVarDef<bool> PlayMovieEndCredits =
+        CVarDef.Create("trauma.play_credits", true, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    #endregion
 }

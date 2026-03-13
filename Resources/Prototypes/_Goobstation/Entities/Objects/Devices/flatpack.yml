@@ -80,15 +80,6 @@
 
 - type: entity
   parent: BaseFlatpack
-  id: MedicalBiofabricatorFlatpack
-  name: Medical Biofabricator Flatpack
-  description: A flatpack used for constructing a Medical Biofabricator
-  components:
-  - type: Flatpack
-    entity: MedicalBiofabricator
-
-- type: entity
-  parent: BaseFlatpack
   id: ComputerNTRTasksFlatpack
   name: ntr task computer flatpack
   description: A flatpack used for constructing a NTR task computer.

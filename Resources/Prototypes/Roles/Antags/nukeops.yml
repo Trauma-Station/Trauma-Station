@@ -111,6 +111,7 @@
     species:
     - Plasmaman
   guides: [ NuclearOperatives ]
+  creditImage: /Textures/_Trauma/EndCredits/Antags/nukeops.png # Trauma
 
 - type: antag
   id: NukeopsMedic
@@ -132,6 +133,7 @@
     species:
     - Plasmaman
   guides: [ NuclearOperatives ]
+  dontShowInCredits: true # Trauma
 
 - type: antag
   id: NukeopsCommander
@@ -154,6 +156,7 @@
     species:
     - Plasmaman
   guides: [ NuclearOperatives ]
+  dontShowInCredits: true # Trauma
 
 - type: startingGear
   id: SyndicateOperativeGearFullNoUplink
