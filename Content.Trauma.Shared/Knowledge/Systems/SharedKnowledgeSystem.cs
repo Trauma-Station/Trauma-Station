@@ -619,7 +619,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// Throws if it is out of bounds.
     /// </summary>
     public string GetMasteryString(int mastery)
-        => Loc.GetString("knowledge-mastery-" + MasteryNames[mastery]);
+        => Loc.GetString("knowledge-mastery-" + MasteryNames[Math.Clamp(mastery, 0, 5)]);
 
     public override int GetMastery(int level)
         => level switch
