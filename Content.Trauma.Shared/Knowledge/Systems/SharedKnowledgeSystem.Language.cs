@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Common.Body;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared.Body;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Prototypes;
 using Content.Trauma.Common.Knowledge;
@@ -37,7 +37,8 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdd);
         SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemove);
         SubscribeLocalEvent<LanguageSpeakerComponent, UpdateLanguageEvent>(OnLanguageUpdate);
-        SubscribeLocalEvent<LanguageSpeakerComponent, BodyInitEvent>(OnLanguageBodyInit);
+        SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnLanguageBodyInit,
+            after: [ typeof(InitialBodySystem) ]);
 
         // Experience methods
         SubscribeLocalEvent<LanguageSpeakerComponent, EntitySpokeEvent>(OnLanguageSpoke);
@@ -177,7 +178,7 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageBodyInit(Entity<LanguageSpeakerComponent> ent, ref BodyInitEvent args)
+    public void OnLanguageBodyInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
     {
         if (GetContainer(ent.Owner) is not { } brain)
             return;
