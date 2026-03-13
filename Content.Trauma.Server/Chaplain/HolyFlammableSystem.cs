@@ -85,17 +85,17 @@ public sealed class HolyFlammableSystem : EntitySystem
     }
 
     private void OnMeleeHit(Entity<HolyIgniteOnMeleeHitComponent> ent, ref MeleeHitEvent args)
-         {
-             foreach (var entity in args.HitEntities)
-             {
-                 if (!HasComp<ShouldTakeHolyComponent>(entity))
-                     continue;
+    {
+        foreach (var entity in args.HitEntities)
+        {
+            if (!HasComp<ShouldTakeHolyComponent>(entity))
+                continue;
 
-                 var flammable = EnsureComp<HolyFlammableComponent>(entity);
+            var flammable = EnsureComp<HolyFlammableComponent>(entity);
 
-                 AdjustFireStacks(entity, ent.Comp.FireStacks, flammable, true);
-             }
-         }
+            AdjustFireStacks(entity, ent.Comp.FireStacks, flammable, true);
+        }
+    }
 
     private void HolyIgniteOnCollide(EntityUid uid, HolyIgniteOnCollideComponent component, ref StartCollideEvent args)
     {
