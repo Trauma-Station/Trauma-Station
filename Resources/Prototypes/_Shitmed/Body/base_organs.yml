@@ -170,6 +170,21 @@
 
 - type: entity
   abstract: true
+  parent: OrganBaseHead
+  id: OrganBaseHeadBald # no hair or facial hair..
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Head
+      - Face # Trauma - where the fuck else would it go
+      - Snout
+      - SnoutCover
+      - HeadSide
+      - HeadTop
+
+- type: entity
+  abstract: true
   parent: OrganBaseTorso
   id: OrganBaseTorsoAnimalTailed
   components:

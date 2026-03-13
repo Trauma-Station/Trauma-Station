@@ -224,7 +224,7 @@
   id: OrganDionaTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganDionaExternal ]
+  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # Trauma - bald tree
   id: OrganDionaHead
 
 - type: entity

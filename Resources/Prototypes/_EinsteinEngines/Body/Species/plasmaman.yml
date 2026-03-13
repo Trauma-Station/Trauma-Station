@@ -268,7 +268,7 @@
       amount: 6
 
 - type: entity
-  parent: [ OrganBaseHead, OrganPlasmamanExternal ]
+  parent: [ OrganBaseHeadBald, OrganPlasmamanExternal ]
   id: OrganPlasmamanHead
 
 - type: entity
