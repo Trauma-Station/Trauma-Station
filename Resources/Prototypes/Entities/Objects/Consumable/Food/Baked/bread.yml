@@ -796,11 +796,11 @@
   id: FoodBreadButteredToast
   description: Crunchy.
   components:
-# <Trauma>
+  # <Trauma>
   - type: Construction
     graph: EggToast
     node: start
-# </Trauma>
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - butter

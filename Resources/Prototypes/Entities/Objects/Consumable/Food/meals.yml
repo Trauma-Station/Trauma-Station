@@ -468,6 +468,11 @@
   name: fried egg
   description: A fried egg, with a touch of salt and pepper.
   components:
+  # <Trauma>
+  - type: Construction
+    graph: Friedeggs
+    node: twoeggs
+  # </Trauma>
   - type: Item
     storedOffset: 0,-1
   - type: FlavorProfile
@@ -491,11 +496,6 @@
   - type: Tag
     tags:
     - Meat
-# <Trauma>
-  - type: Construction
-    graph: Friedeggs
-    node: twoeggs
-#</Trauma>
 # Tastes like egg, salt, pepper.
 
 - type: entity

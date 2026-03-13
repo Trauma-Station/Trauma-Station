@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -24,11 +25,17 @@ public sealed partial class BurnableFoodComponent : Component
     /// The prefix that will be added to the burned entity name.
     /// </summary>
     [DataField]
-    public string BurnedPrefix = "burned-name-text";
+    public LocId BurnedPrefix = "burned-name-text";
 
     /// <summary>
     /// The prefix that will be added to the burned entity name.
     /// </summary>
     [DataField]
-    public string BurnedPopup = "burned-popup-text";
+    public LocId BurnedPopup = "burned-popup-text";
+
+    /// <summary>
+    /// The sound played when burning the food.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? BurnSound = new SoundPathSpecifier("/Audio/Effects/sizzle.ogg");
 }
