@@ -56,10 +56,10 @@
 
 - type: entity
   parent: BaseGameRule
-  id: Dud50
+  id: Dud100
   components:
   - type: StationEvent
-    weight: 50
+    weight: 100
     duration: 1
 
 - type: entity
