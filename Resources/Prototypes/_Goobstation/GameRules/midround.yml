@@ -19,7 +19,7 @@
   components:
   - type: StationEvent
     earliestStart: 30
-    weight: 8
+    weight: 5
     minimumPlayers: 15
     maxOccurrences: 1
     startAnnouncement: station-event-communication-interception
@@ -51,7 +51,7 @@
   components:
   - type: StationEvent
     earliestStart: 20
-    weight: 4
+    weight: 3
     minimumPlayers: 15
     maxOccurrences: 1
     startAnnouncement: station-event-communication-interception
@@ -84,7 +84,7 @@
   components:
   - type: StationEvent
     earliestStart: 20
-    weight: 3
+    weight: 1
     minimumPlayers: 30
     maxOccurrences: 1
     startAnnouncement: station-event-communication-interception
@@ -119,7 +119,7 @@
   components:
   - type: StationEvent
     earliestStart: 20
-    weight: 3
+    weight: 2
     minimumPlayers: 30
     maxOccurrences: 1
     duration: null
@@ -151,7 +151,7 @@
   id: SkeletonMidround
   components:
   - type: StationEvent
-    weight: 5
+    weight: 4
     duration: 1
     minimumPlayers: 15
     maxOccurrences: 2
@@ -491,7 +491,7 @@
   id: SlasherSpawn
   components:
   - type: StationEvent
-    weight: 3
+    weight: 0.5
     duration: null
     earliestStart: 30
     minimumPlayers: 30

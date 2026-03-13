@@ -43,7 +43,7 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
     earliestStart: 20
     minimumPlayers: 15
-    weight: 4 # annoying
+    weight: 2 # annoying
     reoccurrenceDelay: 60 # no spamming them
     duration: 30
   - type: VentCrittersRule

@@ -195,7 +195,7 @@
   id: DragonSpawn
   components:
   - type: StationEvent
-    weight: 2 # Goobstation - was 3
+    weight: 1 # Goobstation - was 3
     earliestStart: 30 # Goobstation was 45
     #recorruenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
@@ -227,7 +227,7 @@
   id: NinjaSpawn
   components:
   - type: StationEvent
-    weight: 3 # Goobstation - was 6
+    weight: 2 # Goobstation - was 6
     duration: null
     earliestStart: 30 # Goobstation - was 45
     #reoccurrenceDelay: 20 # Goobstation - no longer needed
@@ -345,7 +345,7 @@
   id: WizardSpawn
   components:
   - type: StationEvent
-    weight: 1 # rare
+    weight: 0.5 # rare
     duration: 1
     earliestStart: 30
     reoccurrenceDelay: 60
@@ -582,7 +582,7 @@
   components:
   - type: StationEvent
     earliestStart: 35
-    weight: 2.5 # Goobstation - was 5.5
+    weight: 2 # Goobstation - was 5.5
     minimumPlayers: 50 # Goobstation - was 20
     duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
   - type: RuleGrids
@@ -624,7 +624,7 @@
   components:
   - type: StationEvent
     earliestStart: 30
-    weight: 8
+    weight: 5
     minimumPlayers: 15
     maxOccurrences: 1 # can only happen once per round
     startAnnouncement: station-event-communication-interception
