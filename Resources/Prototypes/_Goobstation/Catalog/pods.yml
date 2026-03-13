@@ -89,17 +89,3 @@
       children:
       - id: ClothingOuterArmorBishop
       - id: ClothingHeadHatHelmetBishop
-
-# <Trauma - Venerator armor>
-- type: entity
-  id: SpawnArmamentsVenerator
-  categories: [ HideSpawnMenu ]
-  name: venerator's attire
-  parent: SpawnSupplyEmpty
-  components:
-  - type: SpawnTableOnDespawn
-    table: !type:AllSelector
-      children:
-      - id: ClothingOuterArmorVenerator
-      - id: ClothingHeadHatHelmetVenerator
-# </Trauma>
