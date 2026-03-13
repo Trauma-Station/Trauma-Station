@@ -13,7 +13,6 @@ using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.RoundEndCredits;
 
@@ -32,7 +31,7 @@ public sealed class RoundEndCreditsSystem : EntitySystem
     private BoxContainer? _exitContainer;
     private bool _showCredits = true;
     private float _uiScale;
-    private bool Debug = true; // Set this to true if you want a bunch of dummy characters to spawn
+    private bool Debug = false; // Set this to true if you want a bunch of dummy characters to spawn
 
     public override void Initialize()
     {
