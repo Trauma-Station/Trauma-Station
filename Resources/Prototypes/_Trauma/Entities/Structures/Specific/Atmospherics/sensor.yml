@@ -1,0 +1,10 @@
+- type: entity
+  id: AirSensorLow
+  name: low air sensor
+  description: Air sensor. It senses air and screams at 0 pressure.
+  parent: AirSensor
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: AtmosMonitor
+    pressureThresholdId: stationLowPressure
