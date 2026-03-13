@@ -30,7 +30,8 @@ public abstract partial class SharedKnowledgeSystem
     {
         _langQuery = GetEntityQuery<LanguageKnowledgeComponent>();
 
-        SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit);
+        SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
+            after: [ typeof(InitialBodySystem) ]); // great engine
         SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);
         SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeRemovedEvent>(OnLanguageRemoved);
 
