@@ -19,7 +19,6 @@ public abstract partial class SharedHereticAbilitySystem
     protected virtual void SubscribeSide()
     {
         SubscribeLocalEvent<EventHereticCloak>(OnCloak);
-        SubscribeLocalEvent<EventHereticRustCharge>(OnRustCharge);
         SubscribeLocalEvent<EventHereticIceSpear>(OnIceSpear);
         SubscribeLocalEvent<EventHereticRealignment>(OnRealignment);
         SubscribeLocalEvent<EventEmp>(OnEmp);

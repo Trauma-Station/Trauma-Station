@@ -403,8 +403,7 @@ public abstract partial class SharedHereticAbilitySystem
             return;
 
         RemComp<KnockedDownComponent>(ent);
-        EnsureComp<RustChargeComponent>(ent);
-        EnsureComp<RustObjectsInRadiusComponent>(ent);
+        EnsureComp<RustChargeComponent>(ent).HadAoeRust = EnsureComp<RustObjectsInRadiusComponent>(ent, out _);
         _throw.TryThrow(ent, dir.Normalized() * args.Distance, args.Speed, playSound: false, doSpin: false);
 
         args.Handled = true;

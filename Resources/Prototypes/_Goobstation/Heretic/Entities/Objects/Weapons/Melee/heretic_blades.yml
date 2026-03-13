@@ -171,6 +171,11 @@
       path: /Audio/Items/crowbar.ogg
   - type: UseDelay # For insta prying
     delay: 0.5
+  - type: Tag
+    tags:
+    - HereticItem
+    - HereticBlade
+    - HereticBladeLock
 
 - type: entity
   parent: HereticBladeBase

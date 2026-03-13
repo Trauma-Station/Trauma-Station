@@ -7,7 +7,6 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
-using Content.Shared.Heretic;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
@@ -32,6 +31,7 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -47,7 +47,7 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
 
     private void OnBeforeInteract(Entity<EldritchIdCardComponent> ent, ref BeforeRangedInteractEvent args)
     {
-        if (!args.CanReach || args.Target == null || !HereticOrGhoul(args.User))
+        if (!args.CanReach || args.Target == null || !_heretic.IsHereticOrGhoul(args.User))
             return;
 
         var target = args.Target.Value;
@@ -154,7 +154,7 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
 
     private void OnAltVerb(Entity<EldritchIdCardComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!HereticOrGhoul(args.User))
+        if (!_heretic.IsHereticOrGhoul(args.User))
             return;
 
         var user = args.User;
@@ -171,7 +171,7 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
 
     private void OnMessage(Entity<EldritchIdCardComponent> ent, ref EldritchIdMessage args)
     {
-        if (!HereticOrGhoul(args.Actor))
+        if (!_heretic.IsHereticOrGhoul(args.Actor))
             return;
 
         if (!ent.Comp.Configs.Remove(args.Config))
@@ -187,7 +187,7 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
 
     private void OnAttempt(Entity<EldritchIdCardComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
-        if (!HereticOrGhoul(args.User))
+        if (!_heretic.IsHereticOrGhoul(args.User))
             args.Cancel();
     }
 
@@ -198,18 +198,13 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
 
     private void OnExamine(Entity<EldritchIdCardComponent> ent, ref ExaminedEvent args)
     {
-        if (!HereticOrGhoul(args.Examiner))
+        if (!_heretic.IsHereticOrGhoul(args.Examiner))
             return;
 
         if (ent.Comp.Inverted)
             args.PushMarkup(Loc.GetString("eldritch-id-card-component-examine-inverted"));
 
         args.PushMarkup(Loc.GetString("eldritch-id-card-component-examine-message"));
-    }
-
-    private bool HereticOrGhoul(EntityUid uid)
-    {
-        return HasComp<HereticComponent>(uid) || HasComp<GhoulComponent>(uid);
     }
 
     private void Invert(Entity<EldritchIdCardComponent> ent, EntityUid user)

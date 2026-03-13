@@ -244,7 +244,7 @@
   - type: Tag
     tags:
     - HideContextMenu
-    - ForceHereticMinion # Not really minion but doesn't matter
+    - ForceHereticMinion
 
 - type: tile
   id: PlatingRust

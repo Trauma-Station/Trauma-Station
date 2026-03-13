@@ -47,15 +47,15 @@ public sealed partial class HolosignSystem : EntitySystem // Trauma - made parti
     private void OnBeforeInteract(Entity<HolosignProjectorComponent> ent, ref BeforeRangedInteractEvent args)
     {
         if (args.Handled
-            || !args.CanReach // prevent placing out of range
+            // || !args.CanReach // prevent placing out of range
             || HasComp<StorageComponent>(args.Target) // if it's a storage component like a bag, we ignore usage so it can be stored
-            || CheckCoords(ent, ref args) is not {} coords // Goob - replaces power check
+            || CheckCoords(ent, ref args) is not {} coords // Goob - replaces power and CanReach check
             )
             return;
 
         // overlapping of the same holo on one tile remains allowed to allow holofan refreshes
         if (ent.Comp.PredictedSpawn || _net.IsServer)
-            PredictedSpawnAtPosition(ent.Comp.SignProto, coords); // Trauma - use coords from above logic
+            PredictedSpawnAttachedTo(ent.Comp.SignProto, coords); // Trauma - use coords from above logic and fix rotation
 
         args.Handled = true;
     }

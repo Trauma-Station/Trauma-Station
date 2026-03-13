@@ -600,14 +600,25 @@
   id: AscensionLock
   stage: 9
   path: Lock
-  # ritualPrototypes:
-  # - AscensionLock
+  ritualPrototypes:
+  - RitualAscensionLock
 
 - type: hereticKnowledge
   id: UnlockTheLabyrinth
   stage: 10
   path: Lock
-  # event: !type:HereticAscensionLockEvent
+  event: !type:HereticAscensionCosmosEvent # Uses cosmos ascension cause its basically the same (xray vision)
+    addedComponents:
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
+    - type: SpecialPressureImmunity
+    - type: NightVision
+      color: white
+      activateSound: null
+      deactivateSound: null
+      drawOverlay: false
+  actionPrototypes:
+  - ActionHereticShapeshiftLock
 
 ### side paths
 - type: hereticKnowledge

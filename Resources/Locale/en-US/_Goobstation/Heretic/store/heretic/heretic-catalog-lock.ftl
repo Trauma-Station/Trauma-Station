@@ -29,6 +29,7 @@ knowledge-path-lock-s1-desc =
     Opens up the Path of Lock to you.
     Allows you to transmute a knife and a crowbar into a Key Blade.
     You can only create two at a time and they function as fast crowbars.
+    In addition, they can fit into utility belts.
 
     Path of Lock has more side knowledge unlocked for free or at a discount.
 
@@ -90,7 +91,8 @@ knowledge-path-lock-s8-desc =
 knowledge-path-lock-s9-name = Unlock the Labyrinth
 knowledge-path-lock-s9-desc =
     The ascension ritual of the Path of Knock.
-    Bring 3 corpses without organs in their torso to a transmutation rune to complete the ritual.
+    Bring 3 corpses without the heart to a transmutation rune to complete the ritual.
     When completed, you gain the ability to transform into empowered eldritch creatures and your keyblades will become even deadlier.
     In addition, you will create a tear to the Labyrinth's heart; a tear in reality located at the site of this ritual.
     Eldritch creatures will endlessly pour from this rift who are bound to obey your instructions.
+    You also gain x-ray vision as well as immunity to extreme pressure and temperature.

@@ -95,7 +95,8 @@ public abstract partial class SharedHereticRitualSystem
 
     private void OnGhoulify(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<GhoulifyEffect> args)
     {
-        if (!TryGetValue(args.Ritual, Performer, out EntityUid performer))
+        if (!TryGetValue(args.Ritual, Performer, out EntityUid performer) ||
+            !TryGetValue(args.Ritual, Mind, out EntityUid mind))
             return;
 
         var ghoul = Factory.GetComponent<GhoulComponent>();
@@ -106,7 +107,7 @@ public abstract partial class SharedHereticRitualSystem
         ghoul.DeathBehavior = args.Effect.DeathBehavior;
         AddComp(ent, ghoul, true);
 
-        var ev = new SetGhoulBoundHereticEvent(performer, args.Ritual);
+        var ev = new SetGhoulBoundHereticEvent(performer, mind, args.Ritual);
         RaiseLocalEvent(ent, ref ev);
     }
 
@@ -182,7 +183,7 @@ public abstract partial class SharedHereticRitualSystem
                 if (_ghoulQuery.HasComp(spawned) || _tag.HasTag(spawned, args.Effect.ForceMinionTag))
                 {
                     heretic.Minions.Add(spawned);
-                    var ev = new SetGhoulBoundHereticEvent(performer, args.Ritual);
+                    var ev = new SetGhoulBoundHereticEvent(performer, mind, args.Ritual);
                     RaiseLocalEvent(spawned, ref ev);
                 }
 

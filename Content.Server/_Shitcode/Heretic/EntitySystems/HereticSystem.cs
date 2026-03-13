@@ -219,9 +219,16 @@ public sealed class HereticSystem : SharedHereticSystem
         {
             if (!mobQuery.HasComp(uid))
                 continue;
+
             var minion = EnsureComp<HereticMinionComponent>(uid);
             minion.BoundHeretic = newMaster;
             Dirty(uid, minion);
+
+            if (newMaster == null)
+                continue;
+
+            var ev = new SetGhoulBoundHereticEvent(newMaster.Value, ent, null);
+            RaiseLocalEvent(uid, ref ev);
         }
     }
 

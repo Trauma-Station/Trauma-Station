@@ -3,7 +3,10 @@
   name: knowledge-path-lock-s1-name
   description: knowledge-path-lock-s1-desc
   icon: { sprite: _Goobstation/Heretic/Blades/blade_lock.rsi, state: icon }
-  productHereticKnowledge: StewardsSecret
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - StewardsSecret
   cost:
     KnowledgePoint: 0
   categories:
@@ -28,7 +31,10 @@
   name: knowledge-path-lock-s2-name
   description: knowledge-path-lock-s2-desc
   icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
-  productHereticKnowledge: GraspOfLock
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - GraspOfLock
   cost:
     KnowledgePoint: 0
   categories:
@@ -46,7 +52,10 @@
   name: knowledge-path-lock-s3-name
   description: knowledge-path-lock-s3-desc
   icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
-  productHereticKnowledge: MarkOfLock
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MarkOfLock
   cost:
     KnowledgePoint: 0
   categories:
@@ -64,7 +73,10 @@
   name: knowledge-path-lock-s4-name
   description: knowledge-path-lock-s4-desc
   icon: { sprite: Objects/Misc/id_cards.rsi, state: gold }
-  productHereticKnowledge: KeyKeepersBurden
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - KeyKeepersBurden
   cost:
     KnowledgePoint: 2
   categories:
@@ -82,7 +94,10 @@
   name: knowledge-path-lock-s5-name
   description: knowledge-path-lock-s5-desc
   icon: { sprite: _Goobstation/Heretic/Entities/heretichandbook.rsi, state: icon }
-  productHereticKnowledge: ConciergesRite
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ConciergesRite
   cost:
     KnowledgePoint: 2
   categories:
@@ -100,7 +115,10 @@
   name: knowledge-path-lock-s6-name
   description: knowledge-path-lock-s6-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: bulglar_finesse }
-  productHereticKnowledge: BurglarsFinesse
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - BurglarsFinesse
   cost:
     KnowledgePoint: 2
   categories:
@@ -118,7 +136,10 @@
   name: knowledge-path-lock-s7-name
   description: knowledge-path-lock-s7-desc
   icon: { sprite: _Goobstation/Heretic/Blades/blade_lock.rsi, state: icon }
-  productHereticKnowledge: OpeningBlade
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - OpeningBlade
   cost:
     KnowledgePoint: 2
   categories:
@@ -136,7 +157,10 @@
   name: knowledge-path-lock-s8-name
   description: knowledge-path-lock-s8-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: last_refuge }
-  productHereticKnowledge: CaretakersLastRefuge
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - CaretakersLastRefuge
   cost:
     KnowledgePoint: 2
   categories:
@@ -154,7 +178,10 @@
   name: knowledge-path-lock-s9-name
   description: knowledge-path-lock-s9-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: labyrinth }
-  productHereticKnowledge: AscensionLock
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - AscensionLock
   cost:
     KnowledgePoint: 2
   categories:

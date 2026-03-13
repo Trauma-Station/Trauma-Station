@@ -9,6 +9,7 @@ using Content.Shared.Examine;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Body;
+using Content.Shared.Coordinates;
 using Content.Shared.Gibbing;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
@@ -211,7 +212,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         _audio.PlayPredicted(RitualSuccessSound, ent, predicted ? user : null, AudioParams.Default.WithVolume(-3f));
         var popup = Loc.GetString("heretic-ritual-success");
         _popup.PopupPredicted(popup, ent, predicted ? user : null, Filter.Entities(user), false);
-        PredictedSpawnAtPosition("HereticRuneRitualAnimation", Transform(ent).Coordinates);
+        PredictedSpawnAttachedTo("HereticRuneRitualAnimation", ent.ToCoordinates());
     }
 
     #endregion

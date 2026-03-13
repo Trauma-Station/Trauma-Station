@@ -50,7 +50,7 @@ public abstract class SharedRustChargeSystem : EntitySystem
 
     private void OnRustChargeShutdown(Entity<RustChargeComponent> ent, ref ComponentShutdown args)
     {
-        if (TerminatingOrDeleted(ent))
+        if (TerminatingOrDeleted(ent) || ent.Comp.HadAoeRust)
             return;
 
         RemCompDeferred<RustObjectsInRadiusComponent>(ent);

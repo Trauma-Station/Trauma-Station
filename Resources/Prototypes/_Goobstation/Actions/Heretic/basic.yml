@@ -147,3 +147,6 @@
     interfaces:
       enum.HereticShapeshiftUiKey.Key:
         type: HereticShapeshiftBoundUserInterface
+        requireInputValidation: false
+        interactionRange: -1
+  - type: HereticAction

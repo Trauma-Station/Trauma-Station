@@ -38,10 +38,20 @@ public sealed class EldritchIdBoundUserInterface(EntityUid owner, Enum uiKey) : 
         {
             var config = configs[i];
             var proto = _proto.Index(config.CardPrototype);
+
+            var jobSuffix = string.IsNullOrWhiteSpace(config.JobTitle) ? string.Empty : $" ({config.JobTitle})";
+
+            var val = string.IsNullOrWhiteSpace(config.FullName)
+                ? Loc.GetString("access-id-card-component-owner-name-job-title-text",
+                    ("jobSuffix", jobSuffix))
+                : Loc.GetString("access-id-card-component-owner-full-name-job-title-text",
+                    ("fullName", config.FullName),
+                    ("jobSuffix", jobSuffix));
+
             models[i] = new RadialMenuActionOption<EldritchIdConfiguration>(HandleRadialMenuClick, config)
             {
                 IconSpecifier = new RadialMenuEntityPrototypeIconSpecifier(proto),
-                ToolTip = config.FullName,
+                ToolTip = val,
             };
         }
 

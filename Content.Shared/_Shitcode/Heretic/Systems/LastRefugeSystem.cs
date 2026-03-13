@@ -7,6 +7,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Heretic;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Magic.Events;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -31,6 +32,7 @@ public sealed class LastRefugeSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedStealthSystem _stealth = default!;
 
+    private readonly HashSet<Entity<HumanoidProfileComponent>> _lookupHumanoid = new();
 
     public override void Initialize()
     {
@@ -46,7 +48,7 @@ public sealed class LastRefugeSystem : EntitySystem
         SubscribeLocalEvent<LastRefugeComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<LastRefugeComponent, HitScanReflectAttemptEvent>(OnHitscanReflect);
 
-        SubscribeLocalEvent<LastRefugeActionComponent, HereticMagicCastAttemptEvent>(OnActionMagicAttempt);
+        SubscribeLocalEvent<LastRefugeActionComponent, BeforeCastSpellEvent>(OnActionMagicAttempt);
     }
 
     private void OnHitscanReflect(Entity<LastRefugeComponent> ent, ref HitScanReflectAttemptEvent args)
@@ -101,7 +103,7 @@ public sealed class LastRefugeSystem : EntitySystem
     private void OnStartup(Entity<LastRefugeComponent> ent, ref ComponentStartup args)
     {
         ent.Comp.HadStealth = HasComp<StealthComponent>(ent);
-        ent.Comp.HadGodmode = EnsureComp<GodmodeComponent>(ent, out _); // Surely nothing can go wrong
+        ent.Comp.HadGodmode = EnsureComp<GodmodeComponent>(ent, out _);
         ent.Comp.HadSlowdownImmunity = EnsureComp<SpeedModifierImmunityComponent>(ent, out _);
         ent.Comp.HadStrippable = RemCompDeferred<StrippableComponent>(ent);
         Dirty(ent);
@@ -122,17 +124,18 @@ public sealed class LastRefugeSystem : EntitySystem
         _stealth.SetEnabled(ent.Owner, true, stealth);
     }
 
-    private void OnActionMagicAttempt(Entity<LastRefugeActionComponent> ent, ref HereticMagicCastAttemptEvent args)
+    private void OnActionMagicAttempt(Entity<LastRefugeActionComponent> ent, ref BeforeCastSpellEvent args)
     {
-        var coords = Transform(args.User).Coordinates;
-        var look = _lookup.GetEntitiesInRange<HumanoidProfileComponent>(coords, ent.Comp.OtherMindsCheckRange);
+        var coords = Transform(args.Performer).Coordinates;
+        _lookupHumanoid.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp.OtherMindsCheckRange, _lookupHumanoid);
 
-        foreach (var (uid, _) in look)
+        foreach (var (uid, _) in _lookupHumanoid)
         {
-            if (uid == args.User || !_mobState.IsAlive(uid))
+            if (uid == args.Performer || !_mobState.IsAlive(uid))
                 continue;
 
-            _popup.PopupPredicted(Loc.GetString("heretic-ability-fail-other-minds-nearby"), args.User, args.User);
+            _popup.PopupPredicted(Loc.GetString("heretic-ability-fail-other-minds-nearby"), args.Performer, args.Performer);
             args.Cancelled = true;
             break;
         }

@@ -34,6 +34,11 @@
   copyright: "Taken from /tg/station"
   source: "https://github.com/tgstation/tgstation/tree/master/sound/machines/clockcult/ark_deathrattle.ogg"
 
+- files: ["goresplat.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from /tg/station"
+  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/goresplat.ogg"
+
 - files: ["piano_hit.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"

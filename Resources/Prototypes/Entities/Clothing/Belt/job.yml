@@ -33,6 +33,7 @@
       - Hammer # Goobstation
       - Nailgun # Goobstation
       - MagazineNailgun # Goobstation
+      - HereticBladeLock # Goobstation
       components:
       - StationMap
       - SprayPainter

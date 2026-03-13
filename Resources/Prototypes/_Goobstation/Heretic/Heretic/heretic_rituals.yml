@@ -1345,6 +1345,68 @@
       output:
         LabyrinthHandbook: 1
 
+- type: entity
+  id: RitualAscensionLock
+  name: Unlock the Labyrinth
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    state: labyrinth
+  - type: HereticRitual
+    cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+      conditions:
+      - !type:CanAscendCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend
+      - !type:ObjectivesCompleteCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Eligible
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - HumanoidProfile
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      - !type:HasOrgan
+        organCategory: Heart
+        inverted: true
+    - !type:SacrificeEffect
+      applyOn: Targets
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Eligible
+        result: Targets
+        min: 3
+        max: 3
+        cancelLoc: heretic-ritual-fail-sacrifice-lock
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticAscension
+        - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - UnlockTheLabyrinth
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        LabyrinthTear: 1
+  - type: Tag
+    tags:
+    - RitualAscension
+
 ### side knowledge
 - type: entity
   id: RitualKnowledge

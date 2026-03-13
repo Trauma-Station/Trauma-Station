@@ -29,4 +29,7 @@ public sealed partial class RustChargeComponent : Component
 
     [DataField]
     public TimeSpan KnockdownTime = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public bool HadAoeRust;
 }

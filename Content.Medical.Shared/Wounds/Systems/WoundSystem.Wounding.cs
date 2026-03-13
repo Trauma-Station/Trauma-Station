@@ -59,6 +59,7 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundableComponent, BeforeDamageChangedEvent>(DudeItsJustLikeMatrix);
         SubscribeLocalEvent<WoundableComponent, WoundHealAttemptOnWoundableEvent>(HealWoundsOnWoundableAttempt);
         SubscribeLocalEvent<WoundableComponent, CheckPartBleedingEvent>(OnCheckPartBleeding);
+        SubscribeLocalEvent<WoundableComponent, CheckPartWoundedEvent>(OnCheckPartWounded);
         SubscribeLocalEvent<WoundableComponent, HealBleedingWoundsEvent>(OnHealBleedingWounds);
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<WoundableComponent, DamageSetEvent>(OnDamageSet);
@@ -209,6 +210,18 @@ public sealed partial class WoundSystem
     {
         if (woundable.Comp.WoundableSeverity == WoundableSeverity.Severed)
             args.Cancelled = true;
+    }
+
+    private void OnCheckPartWounded(Entity<WoundableComponent> ent, ref CheckPartWoundedEvent args)
+    {
+        foreach (var wound in GetWoundableWounds(ent, ent.Comp))
+        {
+            if (!args.DamageKeys.Contains(wound.Comp.DamageType))
+                continue;
+
+            args.Wounded = true;
+            return;
+        }
     }
 
     private void OnCheckPartBleeding(Entity<WoundableComponent> ent, ref CheckPartBleedingEvent args)

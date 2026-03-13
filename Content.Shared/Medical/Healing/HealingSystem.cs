@@ -226,6 +226,12 @@ public sealed class HealingSystem : EntitySystem
             .Any(damageKey => damageable.Damage.DamageDict[damageKey].Value > 0))
             return true;
 
+        // see if there are any wounds to heal
+        var ev2 = new CheckPartWoundedEvent(healing.Damage.DamageDict.Keys.ToList());
+        RaiseLocalEvent(part, ref ev2);
+        if (ev2.Wounded)
+            return true;
+
         if (healing.BloodlossModifier == 0)
             return false;
 

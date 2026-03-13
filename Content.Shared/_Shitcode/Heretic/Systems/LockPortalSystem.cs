@@ -25,6 +25,7 @@ public sealed class LockPortalSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -62,7 +63,7 @@ public sealed class LockPortalSystem : EntitySystem
             return;
 
         var linkResolved = Exists(ent.Comp.LinkedPortal);
-        var invertedBehavior = !linkResolved || HereticOrGhoul(subject) == ent.Comp.Inverted;
+        var invertedBehavior = !linkResolved || _heretic.IsHereticOrGhoul(subject) == ent.Comp.Inverted;
 
         if (invertedBehavior)
         {
@@ -136,11 +137,6 @@ public sealed class LockPortalSystem : EntitySystem
 
         _transform.SetCoordinates(pulling.Value, to);
         _pulling.TryStartPull(uid, pulling.Value, puller, null, grabStage, force: true);
-    }
-
-    private bool HereticOrGhoul(EntityUid uid)
-    {
-        return HasComp<HereticComponent>(uid) || HasComp<GhoulComponent>(uid);
     }
 
     private bool ShouldCollide(EntityUid uid)

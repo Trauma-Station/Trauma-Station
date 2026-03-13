@@ -254,8 +254,8 @@
     state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: EldritchInfluence
-      - id: EldritchInfluence
+    - id: EldritchInfluenceT1
+    - id: EldritchInfluenceT2
   - type: Tag
     tags:
     - HereticItem

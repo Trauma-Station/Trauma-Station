@@ -10,6 +10,7 @@ namespace Content.Shared._Shitcode.Heretic.Systems;
 public sealed class LabyrinthHandbookSystem : EntitySystem
 {
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -25,7 +26,7 @@ public sealed class LabyrinthHandbookSystem : EntitySystem
         if (!HasComp<LabyrinthWallComponent>(args.Field))
             return;
 
-        if (HereticOrGhoul(args.Entity))
+        if (_heretic.IsHereticOrGhoul(args.Entity))
         {
             args.Cancelled = true;
             return;
@@ -40,12 +41,7 @@ public sealed class LabyrinthHandbookSystem : EntitySystem
     {
         args.Handled = true;
 
-        if (!HereticOrGhoul(args.User) || !_examine.InRangeUnOccluded(args.User, args.ClickLocation))
+        if (!_heretic.IsHereticOrGhoul(args.User) || !_examine.InRangeUnOccluded(args.User, args.ClickLocation))
             args.Cancelled = true;
-    }
-
-    private bool HereticOrGhoul(EntityUid uid)
-    {
-        return HasComp<HereticComponent>(uid) || HasComp<GhoulComponent>(uid);
     }
 }

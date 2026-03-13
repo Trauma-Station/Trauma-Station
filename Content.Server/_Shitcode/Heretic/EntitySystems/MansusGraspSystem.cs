@@ -67,6 +67,10 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
         base.InvokeGrasp(user, ent);
 
         var invocation = ent == null ? DefaultInvocation : ent.Value.Comp.Invocation;
+
+        if (invocation == null)
+            return;
+
         _chat.TrySendInGameICMessage(user, Loc.GetString(invocation), InGameICChatType.Speak, false);
     }
 

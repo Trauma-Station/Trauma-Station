@@ -43,21 +43,21 @@ public sealed class HereticBladeSystem : SharedHereticBladeSystem
         if (!_wound.TryInduceWound(targetPart, "WeepingAvulsion", 25f, out _, damageGroup: "Brute"))
             return;
 
-        _audio.PlayPvs(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/blood3.ogg"), target);
         var effectAmount = _random.Next(3, 6);
 
-        // Open ribcage for easier ascension if chest is fully mangled
-        if (TryComp(targetPart, out WoundableComponent? woundable) && woundable.RootWoundable == target &&
+        // Open ribcage for easier ascension if chest is mangled
+        if (TryComp(targetPart, out WoundableComponent? woundable) && woundable.RootWoundable == targetPart &&
             woundable.WoundableSeverity >= WoundableSeverity.Mangled &&
             (!EnsureComp<SkinRetractedComponent>(targetPart, out _) | !EnsureComp<IncisionOpenComponent>(targetPart, out _) |
              !EnsureComp<BonesSawedComponent>(targetPart, out _) | !EnsureComp<BonesOpenComponent>(targetPart, out _)))
         {
-            // TODO change sound
-            _audio.PlayPvs(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/crack2.ogg"),
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/goresplat.ogg"),
                 target,
                 AudioParams.Default.WithVolume(10f));
             effectAmount *= 2;
         }
+        else
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/blood3.ogg"), target);
 
         if (!TryComp(target, out BloodstreamComponent? bloodStream))
             return;
@@ -89,7 +89,7 @@ public sealed class HereticBladeSystem : SharedHereticBladeSystem
             }
 
             _throw.TryThrow(chunk,
-                direction: dir * _random.NextVector2(0f, 2f),
+                direction: dir * _random.NextVector2(1f, 3f),
                 baseThrowSpeed: _random.NextFloat(1f, 2.5f),
                 pushbackRatio: 0f,
                 friction: 2f,

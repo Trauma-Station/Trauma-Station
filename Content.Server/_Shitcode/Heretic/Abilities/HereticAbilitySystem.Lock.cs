@@ -9,9 +9,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Heretic.EntitySystems;
 using System.Linq;
 using Content.Goobstation.Common.Religion;
+using Content.Server.Heretic.EntitySystems;
+using Content.Server.Polymorph.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Actions.Components;
@@ -58,15 +59,18 @@ public sealed partial class HereticAbilitySystem
         var key = args.UiKey;
         var user = args.Actor;
 
+        if (!ent.Comp.Polymorphs.Contains(args.ProtoId))
+            return;
+
+        if (!CanShapeshift(user))
+            return;
+
         if (!TryComp(user, out ActorComponent? actor))
             return;
 
         var session = actor.PlayerSession;
 
         _ui.CloseUi(ent.Owner, key);
-
-        if (!HasComp<GhoulComponent>(user))
-            return;
 
         if (!TryComp(ent, out ActionComponent? action) || !_actions.ValidAction((ent, action)))
             return;
@@ -83,9 +87,8 @@ public sealed partial class HereticAbilitySystem
             return;
 
         // This shouldn't break because ghoul comp should be copied on polymorph (it copies max health),
-        // change this behavior if this ability is ever given to heretic
-        // TODO: fix me
-        if (TryComp(user, out DamageableComponent? userDamage) &&
+        if (HasComp<GhoulComponent>(user) && HasComp<GhoulComponent>(polymorphed.Value) &&
+            TryComp(user, out DamageableComponent? userDamage) &&
             TryComp(polymorphed.Value, out DamageableComponent? polymorphedDamage))
             _dmg.SetDamage((polymorphed.Value, polymorphedDamage), userDamage.Damage);
 
@@ -114,10 +117,21 @@ public sealed partial class HereticAbilitySystem
 
     private void OnShapeshift(EventHereticShapeshift args)
     {
-        if (args.Handled || !HasComp<ShapeshiftActionComponent>(args.Action))
+        if (!HasComp<ShapeshiftActionComponent>(args.Action))
+            return;
+
+        if (!CanShapeshift(args.Performer))
+            return;
+
+        if (!TryUseAbility(args, false))
             return;
 
         _ui.TryOpenUi(args.Action.Owner, HereticShapeshiftUiKey.Key, args.Performer);
+    }
+
+    private bool CanShapeshift(EntityUid user)
+    {
+        return !TryComp(user, out PolymorphedEntityComponent? polymorphed) || polymorphed.Action == null;
     }
 
     private void OnBulglarFinesse(EventHereticBulglarFinesse args)

@@ -1,3 +1,4 @@
+using Content.Goobstation.Common.Heretic;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
@@ -37,6 +38,11 @@ public sealed partial class HolosignSystem
 
     private EntityCoordinates? CheckCoords(Entity<HolosignProjectorComponent> ent, ref BeforeRangedInteractEvent args)
     {
+        var ev = new BeforeHolosignUsedEvent(args.User, args.ClickLocation);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled || !ev.Handled && !args.CanReach)
+            return null;
+
         // places the holographic sign at the click location, snapped to grid.
         var coords = args.ClickLocation.SnapToGrid(EntityManager);
         var mapCoords = _transform.ToMapCoordinates(coords);
