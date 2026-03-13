@@ -102,6 +102,10 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeJudoT1
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
