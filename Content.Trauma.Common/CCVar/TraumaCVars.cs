@@ -10,13 +10,6 @@ public sealed partial class TraumaCVars
     #region Disabling features
 
     /// <summary>
-    /// Whether to enable the ghost bar.
-    /// This is not implemented in the UI, it is just to make tests not take 500 years to run.
-    /// </summary>
-    public static readonly CVarDef<bool> GhostBarEnabled =
-        CVarDef.Create("trauma.ghost_bar_enabled", true, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
     /// Whether to disable pathfinding, used for tests to not balloon memory usage and runtime.
     /// </summary>
     public static readonly CVarDef<bool> DisablePathfinding =
