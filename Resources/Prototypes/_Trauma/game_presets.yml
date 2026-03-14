@@ -8,10 +8,13 @@
   description: insurgency-description
   showInVote: false
   rules:
+  - BasicRoundstartVariation
   - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
+  - SubGamemodesRule
   - Insurgency
 
 - type: gamePreset
@@ -23,12 +26,14 @@
   showInVote: false
   minPlayers: 20
   rules:
-  - DuoAbductorRoundstart
-  - SubGamemodesRule
+  - BasicRoundstartVariation
   - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
+  - SubGamemodesRule
+  - DuoAbductorRoundstart
 
 - type: gamePreset
   id: Heretics
@@ -39,12 +44,14 @@
   description: heretics-description
   showInVote: false
   rules:
-  - HereticGamemode
-  - SubGamemodesRule
+  - BasicRoundstartVariation
   - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
+  - SubGamemodesRule
+  - HereticGamemode
 
 - type: gamePreset
   id: Shadowlings
@@ -55,12 +62,14 @@
   description: shadowling-description
   showInVote: false
   rules:
-  - ShadowlingGamemode
-  - SubGamemodesRule
+  - BasicRoundstartVariation
   - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
+  - SubGamemodesRule
+  - ShadowlingGamemode
 
 - type: gamePreset
   id: Wraith
@@ -72,9 +81,11 @@
   description: wraith-description
   showInVote: false
   rules:
-  - WraithRoundstart
-  - SubGamemodesRule
+  - BasicRoundstartVariation
   - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
+  - SubGamemodesRule
+  - WraithRoundstart

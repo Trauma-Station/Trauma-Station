@@ -511,10 +511,12 @@
     children:
       - !type:NestedSelector
         tableId: BasicCalmEventsTable
-      - !type:NestedSelector
-        tableId: BasicAntagEventsTable
-      - !type:NestedSelector
-        tableId: ModerateAntagEventsTable
+      # <Trauma> - antags moved to separate scheduler
+      #- !type:NestedSelector
+      #  tableId: BasicAntagEventsTable
+      #- !type:NestedSelector
+      #  tableId: ModerateAntagEventsTable
+      # </Trauma>
       - !type:NestedSelector
         tableId: CargoGiftsTable
       - !type:NestedSelector
