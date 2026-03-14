@@ -200,6 +200,7 @@ public sealed class QualitySystem : EntitySystem
                 active.FlatReduction[key] = number * modifierPlus;
             }
         }
+        Dirty(ent);
     }
 
     #endregion
@@ -305,7 +306,7 @@ public sealed class QualitySystem : EntitySystem
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
 
-        ent.Comp.Quality = (added + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
+        ent.Comp.Quality = (added + lowestDelta * 5 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
             >= 88 => 5,
             >= 44 => 4,
