@@ -17,11 +17,43 @@
 
 - type: entity
   parent: BaseAreaMedical
+  id: AreaMedicalBreak
+  name: medbay breakroom
+  components:
+  - type: Sprite
+    state: medbay_lobby
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaMedicalLobby
+  name: medbay lobby
+  components:
+  - type: Sprite
+    state: medbay_lobby
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaMedicalStorage
+  name: medbay storage
+  components:
+  - type: Sprite
+    state: medbay_storage
+
+- type: entity
+  parent: BaseAreaMedical
   id: AreaSurgery
   name: surgery
   components:
   - type: Sprite
     state: surgery
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaSurgeryTheatre
+  name: surgery theatre
+  components:
+  - type: Sprite
+    state: surgery_theatre
 
 - type: entity
   parent: BaseAreaMedical
@@ -46,6 +78,22 @@
   components:
   - type: Sprite
     state: cloning
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaParamedic
+  name: paramedic
+  components:
+  - type: Sprite
+    state: paramed
+
+- type: entity
+  parent: BaseAreaMedical
+  id: AreaPatientRoom
+  name: patient room
+  components:
+  - type: Sprite
+    state: patient_room
 
 - type: entity
   parent: BaseAreaMedical

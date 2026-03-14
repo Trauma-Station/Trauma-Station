@@ -1,0 +1,35 @@
+# these don't have the relevant department etc, they're for maints rooms
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaAbandoned
+
+- type: entity
+  parent: BaseAreaAbandoned
+  id: AreaAbandonedGarden
+  name: abandoned garden
+
+- type: entity
+  parent: BaseAreaAbandoned
+  id: AreaAbandonedKitchen
+  name: abandoned kitchen
+
+- type: entity
+  parent: BaseAreaAbandoned
+  id: AreaAbandonedLibrary
+  name: abandoned library
+
+- type: entity
+  parent: BaseAreaAbandoned
+  id: AreaAbandonedMed
+  name: abandoned med
+
+- type: entity
+  parent: BaseAreaAbandoned
+  id: AreaAbandonedSci
+  name: abandoned sci
+
+- type: entity
+  parent: BaseAreaAbandoned
+  id: AreaAbandonedTheatre
+  name: abandoned theatre

@@ -17,27 +17,19 @@
 
 - type: entity
   parent: BaseAreaCivilian
-  id: AreaDorms
-  name: dorms
-  components:
-  - type: Sprite
-    state: dorms
-
-- type: entity
-  parent: BaseAreaCivilian
-  id: AreaFitness
-  name: fitness
-  components:
-  - type: Sprite
-    state: fitness
-
-- type: entity
-  parent: BaseAreaCivilian
   id: AreaCourtRoom
   name: court room
   components:
   - type: Sprite
     state: courtroom
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaLawOffice
+  name: law office
+  components:
+  - type: Sprite
+    state: law_office
 
 - type: entity
   parent: BaseAreaCivilian
@@ -64,12 +56,20 @@
     state: chapel
 
 - type: entity
-  parent: BaseAreaCivilian
-  id: AreaPool
-  name: pool
+  parent: AreaChapel
+  id: AreaChapelOffice
+  name: chapel office
   components:
   - type: Sprite
-    state: pool
+    state: chapel_office
+
+- type: entity
+  parent: AreaChapel
+  id: AreaChapelCremate
+  name: crematorium
+  components:
+  - type: Sprite
+    state: cremate
 
 - type: entity
   parent: BaseAreaCivilian
@@ -78,3 +78,12 @@
   components:
   - type: Sprite
     state: dojo
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaToolStorage
+  name: tool storage
+  description: Birthplace of the assistants.
+  components:
+  - type: Sprite
+    state: tool_storage
