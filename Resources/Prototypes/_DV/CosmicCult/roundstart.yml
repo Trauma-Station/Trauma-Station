@@ -4,7 +4,7 @@
   components:
   - type: CosmicCultRule
   - type: LoadMapRule
-    map: /Maps/_DV/Nonstations/cosmicvoid.yml
+    mapPath: /Maps/_DV/Nonstations/cosmicvoid.yml
   - type: GameRule
     minPlayers: 15 # Ultra lowpop cult is now possible. Would it be good? Idk we'd have to test that.
   - type: AntagObjectives
