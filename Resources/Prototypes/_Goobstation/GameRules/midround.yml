@@ -228,7 +228,7 @@
   id: GreyTideAntagMidround
   components:
   - type: StationEvent
-    weight: 3
+    weight: 1
     duration: null
     earliestStart: 20
     minimumPlayers: 40
@@ -257,7 +257,7 @@
   id: TunnelClownMidround
   components:
   - type: StationEvent
-    weight: 3
+    weight: 1
     duration: null
     earliestStart: 15
     minimumPlayers: 20
@@ -286,7 +286,7 @@
   id: SingulothKnightsMidround
   components:
   - type: StationEvent
-    weight: 2
+    weight: 0.5
     duration: null
     earliestStart: 45
     minimumPlayers: 50
@@ -317,7 +317,7 @@
   id: DarkLordMidround
   components:
   - type: StationEvent
-    weight: 3
+    weight: 0.2
     duration: null
     earliestStart: 30
     minimumPlayers: 30
@@ -372,7 +372,7 @@
   id: MimeAssassinMidround
   components:
   - type: StationEvent
-    weight: 3
+    weight: 0.5
     duration: null
     earliestStart: 30
     minimumPlayers: 30
@@ -404,7 +404,7 @@
   id: DarkPriestMidround
   components:
   - type: StationEvent
-    weight: 3
+    weight: 0.5
     duration: null
     earliestStart: 30
     minimumPlayers: 30
@@ -437,7 +437,7 @@
   components:
   - type: StationEvent
     earliestStart: 35
-    weight: 3
+    weight: 0.3
     minimumPlayers: 50
     duration: 1
   - type: AntagSpawner
