@@ -166,3 +166,10 @@ Entries:
   id: 16
   time: '2026-03-14T11:06:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1282
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Re-enabled Saltern, though it is very bare bones right now.
+  id: 17
+  time: '2026-03-14T18:31:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1298
