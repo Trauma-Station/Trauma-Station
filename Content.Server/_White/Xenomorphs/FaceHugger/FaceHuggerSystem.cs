@@ -164,7 +164,6 @@ public sealed class FaceHuggerSystem : EntitySystem
             }
 
             // Handle continuous chemical injection when equipped
-            // Goobstation
             if (TryComp<ClothingComponent>(uid, out var clothing) && clothing.InSlot != null && !_mobState.IsDead(uid))
             {
                 // Initialize NextInjectionTime if it's zero
@@ -185,7 +184,10 @@ public sealed class FaceHuggerSystem : EntitySystem
                     }
                 }
             }
-            // Goobstaion end
+
+            // don't try to jump at anyone in a bag locker etc
+            if (_container.IsEntityInContainer(uid))
+                continue;
 
             if (faceHugger.Active && clothing?.InSlot == null)
             {
