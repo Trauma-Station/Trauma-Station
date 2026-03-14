@@ -35,22 +35,17 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
 
-    private readonly ResPath _mapPath = new("Maps/_DV/Nonstations/cosmicvoid.yml");
     private readonly SoundSpecifier _levelupReadySound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ascendant_noise.ogg");
     private readonly SoundSpecifier _levelupSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier_up.ogg");
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
 
         SubscribeLocalEvent<CosmicCultComponent, ComponentInit>(OnStartCultist);
         SubscribeLocalEvent<CosmicCultComponent, GetVisMaskEvent>(OnGetVisMask);
@@ -111,20 +106,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         _cultRule.UpdateCultData((args.Actor, cultComp));
         _antag.SendBriefing(ent, Loc.GetString("cosmiccult-role-levelup-briefing"), Color.FromHex("#4cabb3"), _levelupSound);
     }
-
-    #region Housekeeping
-
-    // Rogue Ascendants use this too, which are generalized MidRoundAntags, so we keep the map around. If you're porting cosmic cult, and do not want rogue ascendants, feel free to move this into selective usage akin to NukeOps base.
-    /// <summary>
-    /// Creates the Cosmic Void pocket dimension map.
-    /// </summary>
-    private void OnRoundStart(RoundStartingEvent ev)
-    {
-        if (_mapLoader.TryLoadMap(_mapPath, out var map, out _, new DeserializationOptions { InitializeMaps = true }))
-            _map.SetPaused(map.Value.Comp.MapId, false);
-    }
-
-    #endregion
 
     #region Init Cult
     /// <summary>
