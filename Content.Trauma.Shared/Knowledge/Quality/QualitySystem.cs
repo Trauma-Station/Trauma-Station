@@ -59,7 +59,6 @@ public sealed class QualitySystem : EntitySystem
         SubscribeLocalEvent<QualityComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
         SubscribeLocalEvent<ArmorComponent, ApplyQualityEvent>(OnArmorApplyQuality);
         SubscribeLocalEvent<ClothingComponent, ApplyQualityEvent>(OnClothingApplyQuality);
-        SubscribeLocalEvent<ClothingSpeedModifierComponent, ApplyQualityEvent>(OnClothingSpeedApplyQuality);
         SubscribeLocalEvent<ExplosionResistanceComponent, ApplyQualityEvent>(OnExplosionResistApplyQuality);
         SubscribeLocalEvent<StaminaResistanceComponent, ApplyQualityEvent>(OnStaminaResistApplyQuality);
         SubscribeLocalEvent<DestructibleComponent, ApplyQualityEvent>(OnDestructibleApplyQuality);
@@ -115,14 +114,6 @@ public sealed class QualitySystem : EntitySystem
     {
         var modifier = args.Modifier(0.87f);
         ent.Comp.EquipDelay *= modifier;
-        Dirty(ent);
-    }
-
-    private void OnClothingSpeedApplyQuality(Entity<ClothingSpeedModifierComponent> ent, ref ApplyQualityEvent args)
-    {
-        var modifier = ent.Comp.WalkModifier * args.Modifier(ent.Comp.WalkModifier);
-        ent.Comp.SprintModifier *= modifier;
-        ent.Comp.WalkModifier *= modifier;
         Dirty(ent);
     }
 
