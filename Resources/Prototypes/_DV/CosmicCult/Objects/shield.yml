@@ -47,7 +47,7 @@
     maxReflects: 5
     reflectMinSkill: 30
     soundOnReflect:
-      path: Audio/Weapons/Guns/Hits/ric4.ogg
+      path: /Audio/Weapons/Guns/Hits/ric4.ogg
       params:
         variation: 0.2
         volume: -11

@@ -45,7 +45,7 @@
       maxReflects: 0
       parryMinSkill: 30
       soundOnParry:
-        path: Audio/Weapons/pierce.ogg
+        path: /Audio/Weapons/pierce.ogg
         params:
           variation: 0.2
           volume: -11

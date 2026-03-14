@@ -111,7 +111,7 @@
       maxReflects: 0
       parryMinSkill: 30
       soundOnParry:
-        path: Audio/Weapons/block_metal1.ogg
+        path: /Audio/Weapons/block_metal1.ogg
         params:
           variation: 0.2
           volume: -11
@@ -177,7 +177,7 @@
       maxReflects: 5
       reflectMinSkill: 30
       soundOnReflect:
-        path: Audio/Weapons/Guns/Hits/ric4.ogg
+        path: /Audio/Weapons/Guns/Hits/ric4.ogg
         params:
           variation: 0.2
           volume: -11
@@ -375,12 +375,12 @@
       parryMinSkill: 30
       reflectMinSkill: 30
       soundOnParry:
-        path: Audio/Weapons/block_metal1.ogg
+        path: /Audio/Weapons/block_metal1.ogg
         params:
           variation: 0.2
           volume: -11
       soundOnReflect:
-        path: Audio/Weapons/Guns/Hits/ric4.ogg
+        path: /Audio/Weapons/Guns/Hits/ric4.ogg
         params:
           variation: 0.2
           volume: -11
@@ -444,7 +444,7 @@
       maxReflects: 0
       parryMinSkill: 30
       soundOnParry:
-        path: Audio/Weapons/slash.ogg
+        path: /Audio/Weapons/slash.ogg
         params:
           variation: 0.2
           volume: -11
@@ -485,7 +485,7 @@
       maxReflects: 0
       parryMinSkill: 30
       soundOnParry:
-        path: Audio/Weapons/block_metal1.ogg
+        path: /Audio/Weapons/block_metal1.ogg
         params:
           variation: 0.2
           volume: -11
@@ -656,7 +656,7 @@
       maxReflects: 10
       reflectMinSkill: 50
       maxParries: 0
-      spread: 300
+      reflectSpread: 300
       soundOnReflect:
         path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
         params:
@@ -754,7 +754,7 @@
       maxReflects: 0
       parryMinSkill: 30
       soundOnParry:
-        path: Audio/Weapons/block_metal1.ogg
+        path: /Audio/Weapons/block_metal1.ogg
         params:
           variation: 0.2
           volume: -11
