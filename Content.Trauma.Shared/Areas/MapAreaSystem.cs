@@ -163,6 +163,7 @@ public sealed class MapAreaSystem : EntitySystem
         }
         foreach (var chunk in areas.Chunks.Values)
         {
+            chunk.Areas.RemoveWhere(Deleted);
             foreach (var uid in chunk.Areas)
             {
                 // TODO: might want to cache the id somewhere..?
