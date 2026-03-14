@@ -3,7 +3,6 @@
 using Content.Shared.Armor;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;
@@ -17,7 +16,6 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Construction;
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Common.Stack;
 using Content.Trauma.Shared.Damage;
