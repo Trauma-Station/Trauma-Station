@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Armor;
+using Content.Shared.Clothing;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;
+using Content.Shared.Explosion.Components;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
@@ -57,6 +60,10 @@ public sealed class QualitySystem : EntitySystem
         SubscribeLocalEvent<QualityComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<QualityComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
         SubscribeLocalEvent<ArmorComponent, ApplyQualityEvent>(OnArmorApplyQuality);
+        SubscribeLocalEvent<ClothingComponent, ApplyQualityEvent>(OnClothingApplyQuality);
+        SubscribeLocalEvent<ClothingSpeedModifierComponent, ApplyQualityEvent>(OnClothingSpeedApplyQuality);
+        SubscribeLocalEvent<ExplosionResistanceComponent, ApplyQualityEvent>(OnExplosionResistApplyQuality);
+        SubscribeLocalEvent<StaminaResistanceComponent, ApplyQualityEvent>(OnStaminaResistApplyQuality);
         SubscribeLocalEvent<DestructibleComponent, ApplyQualityEvent>(OnDestructibleApplyQuality);
         SubscribeLocalEvent<DamageOnHitComponent, ApplyQualityEvent>(OnShivApplyQuality);
         SubscribeLocalEvent<DamageOtherOnHitComponent, ApplyQualityEvent>(OnSpearApplyQuality);
@@ -103,6 +110,35 @@ public sealed class QualitySystem : EntitySystem
         {
             coefficients[damageType] *= modifier;
         }
+        Dirty(ent);
+    }
+
+    private void OnClothingApplyQuality(Entity<ClothingComponent> ent, ref ApplyQualityEvent args)
+    {
+        var modifier = args.Modifier(0.87f);
+        ent.Comp.EquipDelay *= modifier;
+        Dirty(ent);
+    }
+
+    private void OnClothingSpeedApplyQuality(Entity<ClothingSpeedModifierComponent> ent, ref ApplyQualityEvent args)
+    {
+        var modifier = args.Modifier(1.2f);
+        ent.Comp.SprintModifier *= modifier;
+        ent.Comp.WalkModifier *= modifier;
+        Dirty(ent);
+    }
+
+    private void OnExplosionResistApplyQuality(Entity<ExplosionResistanceComponent> ent, ref ApplyQualityEvent args)
+    {
+        var modifier = args.Modifier(0.87f);
+        ent.Comp.DamageCoefficient = modifier;
+        Dirty(ent);
+    }
+
+    private void OnStaminaResistApplyQuality(Entity<StaminaResistanceComponent> ent, ref ApplyQualityEvent args)
+    {
+        var modifier = args.Modifier(0.87f);
+        ent.Comp.DamageCoefficient = modifier;
         Dirty(ent);
     }
 
