@@ -84,12 +84,12 @@
       generated:
         reagents:
         - ReagentId: Water
-          Quantity: 5
+          Quantity: 15 # Trauma - 5 -> 15
     - type: SolutionPurge
       solution: absorbed
       preserve:
       - Water
-      quantity: 10
+      quantity: 15 # Trauma 10 -> 15
     - type: Tag
       tags:
         - Mop

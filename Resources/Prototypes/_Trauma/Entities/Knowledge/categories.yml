@@ -13,7 +13,7 @@
   components:
   - type: Knowledge
     category: Physical
-    costs: [0, 4, 6, 10, 16] # can't be expert or master as some random chud
+    costs: [0, 2, 4, 6, 8, 10] # combat skills cost 2x, no goku
 
 - type: entity
   id: BaseWarKnowledge
@@ -22,7 +22,7 @@
   components:
   - type: Knowledge
     category: War
-    costs: [0, 4, 6, 10, 16]
+    costs: [0, 2, 4, 6, 8, 10]
 
 - type: entity
   parent: BaseKnowledge
@@ -33,7 +33,6 @@
     category: Construction
     color: "#0ba881"
     experienceCost: 20
-    costs: [0, 2, 4, 8, 16, 32] # can't be master as some random chud
 
 - type: entity
   id: BaseIntellectualKnowledge
@@ -60,7 +59,6 @@
     category: Construction
     color: "#0ba881"
     experienceCost: 20
-    costs: [0, 1, 2, 3, 4, 6, 10]
 
 - type: entity
   parent: BaseKnowledge
@@ -87,7 +85,7 @@
     category: MartialArt
     experienceCost: 10
     color: "#c70000"
-    costs: [0, 50] # Being able to learn any of these roundstart needs an insane cost
+    costs: null # Being able to learn any of these roundstart is too much
   - type: MartialArtsKnowledge
     blocked: false
     icon: Objects/Misc/skub.rsi

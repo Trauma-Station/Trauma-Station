@@ -61,3 +61,19 @@
   - type: StationEvent
     weight: 50
     duration: 1
+
+- type: entity
+  id: RatmaSpawn
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 30
+    weight: 3
+    duration: 30
+  - type: VentCrittersRule
+    playerRatio: 85
+    table:
+      id: MobRatma

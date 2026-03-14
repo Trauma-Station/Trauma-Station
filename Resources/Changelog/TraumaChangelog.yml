@@ -4220,3 +4220,175 @@ Entries:
   id: 497
   time: '2026-03-12T21:18:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1196
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Medical biofabricators are no longer available roundstart, you have to
+      research them instead.
+  id: 498
+  time: '2026-03-12T22:20:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1217
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added a cool end credits sequence based off the one in monkiestation!
+  id: 499
+  time: '2026-03-13T00:36:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1214
+- author: Armok, Joel
+  changes:
+  - type: Add
+    message: 15 new food items the chef can cook.
+  - type: Add
+    message: Frying pan
+  - type: Add
+    message: Breadlings
+  - type: Add
+    message: The fatass and waiter outfits
+  - type: Add
+    message: Food can now be BURNED AND RUINED!!!
+  - type: Add
+    message: IC ways to learn about empty scrolls
+  - type: Add
+    message: Way to get empty scrolls
+  - type: Fix
+    message: random shit.
+  - type: Remove
+    message: Smartguns.
+  - type: Remove
+    message: Hope.
+  - type: Tweak
+    message: Ping Joel in the discord if you dislike ANY of these changes!!!
+  id: 500
+  time: '2026-03-13T05:33:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1153
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: 'Buffed advanced mops chem regeneration and purge rates. '
+  id: 501
+  time: '2026-03-13T06:37:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1226
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed how skill buying works, go update your characters again. You get
+      much fewer points but it's 1 for 1 mastery level. You can be good at a few
+      skills.
+  - type: Tweak
+    message: >-
+      You can no longer remove your species default skills. Character skills are
+      just offsets added to it now.
+  - type: Remove
+    message: Removed free roundstart martial arts...
+  id: 502
+  time: '2026-03-13T07:31:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1221
+- author: aedler
+  changes:
+  - type: Add
+    message: Self pull removes bolas on you
+  id: 503
+  time: '2026-03-13T11:03:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1210
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed some characters skill editors not working.
+  id: 504
+  time: '2026-03-13T17:51:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1242
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Armory Judo lockers can now be unlocked on blue alert.
+  id: 505
+  time: '2026-03-13T17:53:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1238
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: 'Fixed flatpacks getting blocked by ghosts and other stuff. '
+  id: 506
+  time: '2026-03-13T18:12:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1245
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed all simplemobs without a brain speaking tau ceti common
+  id: 507
+  time: '2026-03-13T19:06:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1246
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Fixed Krav not being on gloves.
+  id: 508
+  time: '2026-03-13T20:07:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1249
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xeno acid action not using any plasma.
+  id: 509
+  time: '2026-03-13T22:12:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1262
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added new end round credit pictures for antags
+  - type: Fix
+    message: Fixed the UI scale messing up the end round credits
+  - type: Fix
+    message: Fixed team antag, solo antag ect showing up in the round end credits
+  id: 510
+  time: '2026-03-13T22:40:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1264
+- author: momoyawn
+  changes:
+  - type: Add
+    message: Hand of God applies holy fire damage over time, stacking on hit.
+  id: 511
+  time: '2026-03-13T22:44:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1265
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed bald species like arachnids listing hair in markings even though you
+      can't use it.
+  id: 512
+  time: '2026-03-13T23:48:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1261
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed cadets getting mk58 magazines...
+  id: 513
+  time: '2026-03-13T23:51:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1271
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed ghost bar slop
+  - type: Fix
+    message: Made facehugger shitcode less laggy. It was literally worse than ATMOS.
+  id: 514
+  time: '2026-03-14T00:09:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1266
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed heretic rituals disappearing on disconnect
+  id: 515
+  time: '2026-03-14T01:43:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1268
+- author: Kirikii
+  changes:
+  - type: Add
+    message: Added Nume Station!
+  id: 516
+  time: '2026-03-14T02:33:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1000

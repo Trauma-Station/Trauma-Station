@@ -152,3 +152,10 @@ Entries:
   id: 14
   time: '2026-03-10T08:25:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1177
+- author: deltanedas
+  changes:
+  - type: Add
+    message: 'Fland: Added all areas so ambient music works.'
+  id: 15
+  time: '2026-03-13T18:07:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1237

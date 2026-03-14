@@ -3,7 +3,7 @@
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>../bin/Content.Server/</OutputPath>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-		<NoWarn>1998</NoWarn>
+		<NoWarn>0618</NoWarn>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>

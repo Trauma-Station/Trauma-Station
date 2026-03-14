@@ -184,9 +184,10 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
     private void SetupOverlay(Entity<VehicleComponent> ent)
     {
-        if (ent.Comp.OverlayPrototype == null)
+        if (ent.Comp.OverlayPrototype is not {} proto)
             return;
-        var overlay = EntityManager.SpawnEntity(ent.Comp.OverlayPrototype, Transform(ent).Coordinates);
+
+        var overlay = PredictedSpawnAtPosition(proto, Transform(ent).Coordinates);
         _transform.SetParent(overlay, ent);
         _transform.SetLocalPosition(overlay, Vector2.Zero);
         _transform.SetLocalRotation(overlay, Angle.Zero);

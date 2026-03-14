@@ -1,5 +1,6 @@
 - type: knowledgeProfile
   id: Dwarf
+  pointsLimit: 7 # stronger base but less flexibility
   mastery:
     # Standard space station skills
     CookingKnowledge: 1

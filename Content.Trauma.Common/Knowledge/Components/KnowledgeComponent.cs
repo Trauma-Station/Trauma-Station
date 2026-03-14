@@ -66,7 +66,7 @@ public sealed partial class KnowledgeComponent : Component
     /// <summary>
     /// Temporary levels that are granted by certain equipment and skillchips.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int TemporaryLevel;
 
     /// <summary>

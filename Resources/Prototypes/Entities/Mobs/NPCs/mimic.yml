@@ -88,3 +88,8 @@
     spawned:
     - id: DrinkChangelingStingCan
       amount: 1
+  # <Trauma>
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+  # </Trauma>

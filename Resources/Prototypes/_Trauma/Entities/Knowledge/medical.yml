@@ -5,7 +5,6 @@
   components:
   - type: Knowledge
     experienceCost: 24
-    costs: [0, 4, 8, 12, 18, 24, 32] # stitches are easy, but being a brain surgeon is actually rare. funny how that works
 
 - type: entity
   parent: BaseMedicalKnowledge
@@ -14,7 +13,6 @@
   components:
   - type: Knowledge
     experienceCost: 19
-    costs: [0, 2, 3, 6, 12, 16] # basic first aid is easy enough
   - type: InjectTimeKnowledge
     # y = 1 + 1.4(0.6 - 0.01x)^3
     # 30% slower, 9% faster at lvl 0/100

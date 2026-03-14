@@ -245,7 +245,7 @@
   id: OrganMothTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganMothExternal ]
+  parent: [ OrganBaseHeadBald, OrganMothExternal ] # Trauma - bald
   id: OrganMothHead
   components:
   - type: VisualOrganMarkings
