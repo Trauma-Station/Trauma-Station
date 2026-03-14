@@ -15,6 +15,10 @@ abductors-weapon-restricted-4 = You sniff the alien weapon.
 abductors-gizmo-restricted-1 = You spin gizmo in your hand.
 abductors-gizmo-restricted-2 = You have no idea how this thing works.
 
+abductors-gizmo-mode-changed = Mode switched to: {$mode}
+abductors-gizmo-mode-mark = Mark
+abductors-gizmo-mode-brainwash = Brainwash
+
 abductor-gun-restricted-1 = You try to press the trigger guard, but the finger doesn't fit.
 
 abductor-console-ftl-to-station = FTL to the station first!

@@ -16,7 +16,6 @@
 
 # spawn animation, spawns actual god when it ends
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: MobCosmicGodBase
   id: MobCosmicGodSpawn
   suffix: Spawn

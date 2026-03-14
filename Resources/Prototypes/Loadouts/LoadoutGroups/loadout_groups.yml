@@ -374,7 +374,11 @@
   loadouts:
   - ChefJumpsuit
   - ChefJumpskirt
-  - ServiceMJ # goob
+  # <Trauma>
+  - ServiceMJ
+  - ClothingUniformJumpsuitDisgusting
+  - ClothingUniformJumpsuitWaiter
+  # </Trauma>
 
 - type: loadoutGroup
   id: ChefOuterClothing

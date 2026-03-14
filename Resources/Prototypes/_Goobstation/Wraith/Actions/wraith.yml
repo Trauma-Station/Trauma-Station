@@ -268,10 +268,10 @@
       - type: Speech
         speechVerb: Ghost
       toRemove:
-      - RequireProjectileTarget
-      - BlockMovement
-      - Item
-      - MeleeRequiresWield
+      - type: RequireProjectileTarget
+      - type: BlockMovement
+      - type: Item
+      - type: MeleeRequiresWield
 
 - type: entity
   id: ActionEvolve

@@ -44,7 +44,7 @@
               acts: [ "Destruction" ]
         - trigger:
             !type:DamageTrigger
-            damage: 100 #This is probably enough damage before it breaks
+            damage: 50 # Trauma, was 100
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -105,6 +105,17 @@
         flatReductions:
           Blunt: 1
           Slash: 1
+    # <Trauma>
+    - type: Parry
+      maxParries: 5
+      maxReflects: 0
+      parryMinSkill: 30
+      soundOnParry:
+        path: /Audio/Weapons/block_metal1.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    # </Trauma>
 
 - type: entity
   name: laser shield
@@ -125,6 +136,20 @@
           Heat: 0.5
         flatReductions:
           Heat: 1
+    # <Trauma>
+    - type: Parry
+      maxParries: 0
+      maxReflects: 5
+      reflectMinSkill: 30
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
+        params:
+          variation: 0.2
+          volume: -11
+      reflectSpread: 300
+      reflects:
+      - Energy
+    # </Trauma>
 
 - type: entity
   name: ballistic shield
@@ -146,7 +171,20 @@
           Piercing: 0.5
         flatReductions:
           Piercing: 1
-
+    # <Trauma>
+    - type: Parry
+      maxParries: 0
+      maxReflects: 5
+      reflectMinSkill: 30
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/ric4.ogg
+        params:
+          variation: 0.2
+          volume: -11
+      reflectSpread: 300
+      reflects:
+      - NonEnergy
+    # </Trauma>
 #Craftable shields
 
 - type: entity
@@ -218,6 +256,10 @@
       damageCoefficient: 0.95
       worn: true
     - type: Blocking
+      # <Trauma>
+      passiveBlockFraction: 0.1
+      activeBlockFraction: 0.2
+      # </Trauma>
       passiveBlockModifier:
         coefficients:
           Blunt: 1
@@ -258,6 +300,17 @@
               max: 4
     - type: StaticPrice
       price: 20
+    # <Trauma>
+    - type: Parry
+      maxParries: 1
+      maxReflects: 0
+      parryMinSkill: 0
+      soundOnParry:
+        path: /Audio/Items/Toys/card_tube_bonk.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    # </Trauma>
 
 - type: entity
   name: makeshift shield
@@ -315,6 +368,23 @@
                 SheetSteel:
                   min: 1
                   max: 2
+    # <Trauma>
+    - type: Parry
+      maxParries: 1
+      maxReflects: 1
+      parryMinSkill: 30
+      reflectMinSkill: 30
+      soundOnParry:
+        path: /Audio/Weapons/block_metal1.ogg
+        params:
+          variation: 0.2
+          volume: -11
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/ric4.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    # </Trauma>
 
 - type: entity
   name: web shield
@@ -368,7 +438,17 @@
             - !type:PlaySoundBehavior
               sound:
                 collection: WoodDestroy
-
+    # <Trauma>
+    - type: Parry
+      maxParries: 1
+      maxReflects: 0
+      parryMinSkill: 30
+      soundOnParry:
+        path: /Audio/Weapons/slash.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    # </Trauma>
 #Magic/Cult Shields (give these to wizard for now)
 
 - type: entity
@@ -399,6 +479,17 @@
           Slash: 1
           Piercing: 1
       #Have it break into brass when clock cult is in
+    # <Trauma>
+    - type: Parry
+      maxParries: 5
+      maxReflects: 0
+      parryMinSkill: 30
+      soundOnParry:
+        path: /Audio/Weapons/block_metal1.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    # </Trauma>
 
 - type: entity
   name: mirror shield
@@ -410,10 +501,10 @@
       state: mirror-icon
     - type: Item
       heldPrefix: mirror
-    - type: Reflect
-      reflectProb: 0.95
-      reflects:
-        - Energy
+    # - type: Reflect # Trauma
+    #   reflectProb: 0.95
+    #   reflects:
+    #     - Energy
     - type: Blocking #Mirror shield reflects heat/laser, but is relatively weak to everything else.
       passiveBlockModifier:
         coefficients:
@@ -435,7 +526,7 @@
       thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 40
+            damage: 10 # Trauma, was 40
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -448,6 +539,20 @@
                   min: 5
                   max: 5
     - type: ReflectiveSurface # Goob
+    # <Trauma>
+    - type: Parry
+      maxParries: 0
+      maxReflects: 20
+      reflectMinSkill: 0
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
+        params:
+          variation: 0.2
+          volume: -11
+      reflectSpread: 300
+      reflects:
+      - Energy
+    # </Trauma>
 
 - type: entity
   name: energy shield
@@ -507,11 +612,11 @@
       energy: 0.7 # WD EDIT
       color: "#678AD9" # WD EDIT
     - type: ItemTogglePointLight
-    - type: Reflect
-      reflectProb: 1 # WD EDIT
-      damageOnReflectModifier: 1 # Goob edit
-      reflects:
-        - Energy
+    # - type: Reflect - Trauma
+    #   reflectProb: 1 # WD EDIT
+    #   damageOnReflectModifier: 1 # Goob edit
+    #   reflects:
+    #     - Energy
     - type: Blocking
       passiveBlockModifier:
         coefficients:
@@ -546,6 +651,19 @@
       dischargedRechargeRate: 2
       chargedRechargeRate: 3
       # WD EDIT END
+    # <Trauma>
+    - type: Parry
+      maxReflects: 10
+      reflectMinSkill: 50
+      maxParries: 0
+      reflectSpread: 300
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    # </Trauma>
+
 
 - type: entity
   name: broken energy shield
@@ -613,7 +731,7 @@
               acts: [ "Destruction" ]
         - trigger:
             !type:DamageTrigger
-            damage: 70
+            damage: 50 # Trauma, was 70
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -630,3 +748,14 @@
                   max: 2
     - type: StaticPrice
       price: 150
+    # <Trauma>
+    - type: Parry
+      maxParries: 5
+      maxReflects: 0
+      parryMinSkill: 30
+      soundOnParry:
+        path: /Audio/Weapons/block_metal1.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    # </Trauma>

@@ -16,11 +16,11 @@ namespace Content.Goobstation.Server.MedicalPatch;
 
 public sealed class MedicalPatchSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly StickySystem _stickySystem = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly StickySystem _sticky = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
-    [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly ReactiveSystem _reactive = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
@@ -36,19 +36,18 @@ public sealed class MedicalPatchSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        foreach (var comp in EntityManager.EntityQuery<MedicalPatchComponent>())
+        // TODO: make active component for this bruh
+        var query = EntityQueryEnumerator<MedicalPatchComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
             if (_timing.CurTime < comp.NextUpdate)
                 continue;
-            var uid = comp.Owner; // TODO update thsi to the
 
             if (!TryComp<StickyComponent>(uid, out var stickycomp))
                 continue;
             if (stickycomp.StuckTo == null)
                 continue;
+
             comp.NextUpdate = _timing.CurTime + TimeSpan.FromSeconds(comp.UpdateTime);
 
             Cycle(uid, comp);
@@ -60,7 +59,7 @@ public sealed class MedicalPatchSystem : EntitySystem
         {
             if (!TryComp<StickyComponent>(uid, out var stickycomp))
                 return;
-            _stickySystem.UnstickFromEntity((uid, stickycomp), uid);
+            _sticky.UnstickFromEntity((uid, stickycomp), uid);
         }
     }
     public bool TryInject(EntityUid uid, MedicalPatchComponent component, FixedPoint2 transferAmount)
@@ -72,36 +71,36 @@ public sealed class MedicalPatchSystem : EntitySystem
             return false;
         var target = (EntityUid) stickycomp.StuckTo;
 
-        if (!_solutionContainers.TryGetSolution(uid, component.SolutionName, out var medicalPatchSoln, out var medicalPatchSolution) || medicalPatchSolution.Volume == 0)
+        if (!_solution.TryGetSolution(uid, component.SolutionName, out var medicalPatchSoln, out var medicalPatchSolution) || medicalPatchSolution.Volume == 0)
         {
             //Solution Empty
             return false;
         }
-        if (!_solutionContainers.TryGetInjectableSolution(target, out var targetSoln, out var targetSolution))
+        if (!_solution.TryGetInjectableSolution(target, out var targetSoln, out var targetSolution))
         {
-            //_popupSystem.PopupEntity(Loc.GetString("Medical Patch cant find a bloodsystem"), target);
+            //_popup.PopupEntity(Loc.GetString("Medical Patch cant find a bloodsystem"), target);
             return false;
         }
         var realTransferAmount = FixedPoint2.Min(transferAmount, targetSolution.AvailableVolume);
         if (realTransferAmount <= 0)
         {
-            _popupSystem.PopupEntity(Loc.GetString("No room to inject"), target);
+            _popup.PopupEntity(Loc.GetString("No room to inject"), target);
             return true;
         }
-        var removedSolution = _solutionContainers.SplitSolution(medicalPatchSoln.Value, realTransferAmount);
+        var removedSolution = _solution.SplitSolution(medicalPatchSoln.Value, realTransferAmount);
         if (!targetSolution.CanAddSolution(removedSolution))
             return true;
-        _reactiveSystem.DoEntityReaction(target, removedSolution, ReactionMethod.Injection);
-        _solutionContainers.TryAddSolution(targetSoln.Value, removedSolution);
+        _reactive.DoEntityReaction(target, removedSolution, ReactionMethod.Injection);
+        _solution.TryAddSolution(targetSoln.Value, removedSolution);
         return true;
     }
     public void OnStuck(EntityUid uid, MedicalPatchComponent component, ref EntityStuckEvent args)
     {
-        if (!_solutionContainers.TryGetSolution(uid, component.SolutionName, out var medicalPatchSoln, out var medicalPatchSolution))
+        if (!_solution.TryGetSolution(uid, component.SolutionName, out var medicalPatchSoln, out var medicalPatchSolution))
             return;
 
         //Logg the Patch stick to.
-        _adminLogger.Add(LogType.ForceFeed, $"{EntityManager.ToPrettyString(args.User):user} stuck a patch on  {EntityManager.ToPrettyString(args.Target):target} using {EntityManager.ToPrettyString(uid):using} containing {SharedSolutionContainerSystem.ToPrettyString(medicalPatchSolution):medicalPatchSolution}");
+        _adminLogger.Add(LogType.ForceFeed, $"{ToPrettyString(args.User):user} stuck a patch on  {ToPrettyString(args.Target):target} using {ToPrettyString(uid):using} containing {SharedSolutionContainerSystem.ToPrettyString(medicalPatchSolution):medicalPatchSolution}");
 
         if (component.InjectAmmountOnAttatch > 0)
         {

@@ -148,8 +148,8 @@ objective-cosmiccult-steward-charactermenu = You must direct Scientology to ushe
 
 objective-condition-entropy-title = SIPHON SCIENCE
 objective-condition-entropy-desc = Collectively siphon at least {$count} science from the crew.
-objective-condition-culttier-title = EMPOWER THE MONUMENT
-objective-condition-culttier-desc = Ensure that The Monument is brought to full power.
+objective-condition-culttier-title = ATTAIN POWER
+objective-condition-culttier-desc = Gather enough science to reach for the end.
 objective-condition-victory-title = USHER IN THE END
 objective-condition-victory-desc = Beckon Xenu, and herald the final curtain call.
 

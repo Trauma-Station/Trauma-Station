@@ -27,12 +27,6 @@
   - !type:AddComponentSpecial # goobstation
     components:
       - type: SecurityStaff
-  # <Trauma>
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 10
-  # </Trauma>
 
 - type: startingGear
   id: SecurityOfficerGear

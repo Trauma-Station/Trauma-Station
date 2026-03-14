@@ -118,6 +118,17 @@
     # not putting a BlockMovement component here cause that's funny.
   - type: StealTarget
     stealGroup: CaptainSword
+  # <Trauma>
+  - type: Parry
+    maxParries: 3
+    maxReflects: 0
+    parryMinSkill: 40
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
+  # </Trauma>
 
 - type: entity
   name: katana
@@ -214,6 +225,17 @@
     - Back
     - SuitStorage #Bigger than the other swords, easier to strap to your suit.
   - type: DisarmMalus
+  # <Trauma>
+  - type: Parry
+    maxParries: 3
+    maxReflects: 0
+    parryMinSkill: 40
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
+  # </Trauma>
 
 #Other/Weird
 - type: entity

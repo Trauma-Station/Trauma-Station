@@ -16,11 +16,6 @@
   - Research
   - Maintenance
   # <Trauma>
-  special:
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      TechnologyKnowledge: 26
-      ScienceKnowledge: 26
   extendedAccess:
   - Robotics
   - Genetics

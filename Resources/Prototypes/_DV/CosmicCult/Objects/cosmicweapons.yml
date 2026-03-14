@@ -48,6 +48,8 @@
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
   - type: Parry
+    maxParries: 3
+    maxReflects: 0
     soundOnReflect:
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
       params:
@@ -155,19 +157,6 @@
   - type: UnholyItem # Goobstation Shitchap
   - type: Execution
     doAfterDuration: 4.0
-  - type: Parry
-    maxReflects: 4 # It's a spear man
-    maxParries: 6
-    soundOnReflect:
-      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
-      params:
-        variation: 0.2
-        volume: -11
-    soundOnParry:
-      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
-      params:
-        variation: 0.2
-        volume: -11
 
 - type: entity
   name: astral razor
@@ -253,16 +242,3 @@
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true
-  - type: Parry
-    maxReflects: 8
-    maxParries: 4
-    soundOnReflect:
-      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
-      params:
-        variation: 0.2
-        volume: -11
-    soundOnParry:
-      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
-      params:
-        variation: 0.2
-        volume: -11

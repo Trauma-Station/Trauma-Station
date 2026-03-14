@@ -113,7 +113,7 @@
     - Kidneys
 
 - type: entity
-  parent: [ OrganBaseHead, OrganXenomorphExternal ]
+  parent: [ OrganBaseHeadBald, OrganXenomorphExternal ]
   id: OrganXenomorphHead
   components:
   - type: Item

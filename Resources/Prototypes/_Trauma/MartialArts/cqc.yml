@@ -37,7 +37,7 @@
   - !type:ModifyKnockdown
     time: 5
     drop: true
-    type: Add
+    type: Update
   levelRequired: 26
 
 - type: combo
@@ -115,7 +115,7 @@
   - !type:GenericStatusEffect
     key: Stutter
     time: 2
-    type: Add
+    type: Update
   levelRequired: 0
   levelExceeded: 26
 
@@ -134,11 +134,11 @@
   - !type:GenericStatusEffect
     key: Stutter
     time: 10
-    type: Add
+    type: Update
   - !type:ModifyKnockdown
     time: 3
     drop: true
-    type: Add
+    type: Update
   levelRequired: 26
 
 - type: combo
@@ -230,13 +230,13 @@
   opponentEffects:
   - !type:ModifyStatusEffect
     effectProto: StatusEffectForcedSleeping
-    time: 70
+    time: 7
   - !type:HealthChange
     damage:
       types:
         Blunt: 30
   - !type:ModifyKnockdown
-    time: 20
+    time: 5
     drop: true
-    type: Add
+    type: Update
   levelRequired: 60

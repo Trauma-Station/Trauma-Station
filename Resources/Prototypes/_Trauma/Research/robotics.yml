@@ -113,7 +113,6 @@
   technologyPrerequisites:
   - RipleyAPLU
   - PortableMicrofusionWeaponry
-  - SmartWeaponry
   position: -8,2
 
 - type: technology

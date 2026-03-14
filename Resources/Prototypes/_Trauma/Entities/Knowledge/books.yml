@@ -24,20 +24,14 @@
   table: !type:GroupSelector
     children:
     - id: BookStrength
-    - id: BookAthletics
-    - id: BookToughness
-    - id: BookMelee
-    - id: BookShooting
+    - id: BookCombat
     - id: BookSurgery
-    - id: BookFirstaid
     - id: BookMagicalLiteracy
     - id: BookLiteracy
     - id: BookJanitor
-    - id: BookTechnology
     - id: BookLanguageTauCeti
     - id: BookHandmade
     - id: BookSurvival
-    - id: BookWeapons
     - id: BookMaterials
     - id: BookDoors
     - id: BookAirlocks
@@ -94,116 +88,58 @@
   - type: KnowledgeGrantOnUse
     skills:
       StrengthKnowledge: 10
-    experience:
-      StrengthKnowledge: 1
-    doAfter: 2
-
-- type: entity
-  parent: BookSkillbook
-  id: BookAthletics
-  name: old book
-  suffix: athletics
-  description: It contains drawn instructions of a man running.
-  components:
-  - type: Sprite
-    layers:
-    - state: athletics
-  - type: KnowledgeGrantOnUse
-    skills:
       AthleticsKnowledge: 10
-    experience:
-      AthleticsKnowledge: 1
-    doAfter: 2
-
-- type: entity
-  parent: BookSkillbook
-  id: BookToughness
-  name: old book
-  suffix: toughness
-  description: It contains drawn instructions of a man getting lashed.
-  components:
-  - type: Sprite
-    layers:
-    - state: toughness
-  - type: KnowledgeGrantOnUse
-    skills:
       ToughnessKnowledge: 10
     experience:
-      ToughnessKnowledge: 1
+      StrengthKnowledge: 3
+      AthleticsKnowledge: 3
+      ToughnessKnowledge: 3
     doAfter: 2
 
 - type: entity
   parent: BookSkillbook
-  id: BookMelee
-  name: old book
+  id: BookCombat
+  name: old field book
   suffix: melee
-  description: It contains drawn instructions of a man in fisticuffs.
+  description: It contains drawn instructions about the basics of combat and weapons.
   components:
   - type: Sprite
     layers:
     - state: melee
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 10
+      MeleeKnowledge: 12
+      ShootingKnowledge: 12
+      WeaponsKnowledge: 12
     experience:
-      MeleeKnowledge: 1
-    doAfter: 2
-
-- type: entity
-  parent: BookSkillbook
-  id: BookShooting
-  name: old book
-  suffix: shooting
-  description: It contains drawn instructions of a man firing his gun.
-  components:
-  - type: Sprite
-    layers:
-    - state: shooting
-  - type: KnowledgeGrantOnUse
-    skills:
-      ShootingKnowledge: 10
-    experience:
-      ShootingKnowledge: 1
+      MeleeKnowledge: 3
+      ShootingKnowledge: 3
+      WeaponsKnowledge: 3
     doAfter: 2
 
 - type: entity
   parent: BookSkillbook
   id: BookSurgery
-  name: old book
+  name: old doctor's encyclopedia
   suffix: surgery
-  description: It contains drawn instructions of a man operating on a body.
+  description: It's from the early 2000s, but it describes what doctors need to know in a sticky situation.
   components:
   - type: Sprite
     layers:
     - state: surgery
   - type: KnowledgeGrantOnUse
     skills:
-      SurgeryKnowledge: 10
+      SurgeryKnowledge: 15
+      FirstAidKnowledge: 10
     experience:
-      SurgeryKnowledge: 1
-    doAfter: 2
-
-- type: entity
-  parent: BookSkillbook
-  id: BookFirstaid
-  name: old book
-  suffix: first aid
-  description: It contains drawn instructions of a man applying bandages to himself.
-  components:
-  - type: Sprite
-    layers:
-    - state: firstaid
-  - type: KnowledgeGrantOnUse
-    skills:
-      SurgeryKnowledge: 10
-    experience:
-      SurgeryKnowledge: 1
+      SurgeryKnowledge: 3
+      FirstAidKnowledge: 3
     doAfter: 2
 
 - type: entity
   parent: BookSkillbook
   id: BookMagicalLiteracy
-  name: old book
+  name: old tome
   suffix: magical literacy
   description: It contains drawn instructions of a man watching sigils pop out of the page.
   components:
@@ -214,13 +150,13 @@
     skills:
       MagicalLiteracyKnowledge: 10
     experience:
-      MagicalLiteracyKnowledge: 1
+      MagicalLiteracyKnowledge: 3
     doAfter: 2
 
 - type: entity
   parent: BookSkillbook
   id: BookLiteracy
-  name: old book
+  name: old picture book
   suffix: literacy
   description: Its a picture book.
   components:
@@ -231,58 +167,26 @@
     skills:
       LiteracyKnowledge: 26
     experience:
-      LiteracyKnowledge: 1
+      LiteracyKnowledge: 3
     doAfter: 2
 
 - type: entity
   parent: BookSkillbook
   id: BookJanitor
-  name: old book
+  name: janitor's old book
   suffix: janitor
-  description: Its a picture book.
+  description: Its a book about the basics of janitoring.
   components:
   - type: Sprite
     layers:
     - state: janitor
   - type: KnowledgeGrantOnUse
     skills:
+      ThrowingKnowledge: 26
       JanitorKnowledge: 26
     experience:
-      JanitorKnowledge: 1
-    doAfter: 2
-
-- type: entity
-  parent: BookSkillbook
-  id: BookTechnology
-  name: old book
-  suffix: technology
-  description: Its a book about the basics of technology.
-  components:
-  - type: Sprite
-    layers:
-    - state: fabrication
-  - type: KnowledgeGrantOnUse
-    skills:
-      TechnologyKnowledge: 26
-    experience:
-      TechnologyKnowledge: 1
-    doAfter: 2
-
-- type: entity
-  parent: BookSkillbook
-  id: BookThrowing
-  name: old book
-  suffix: throwing
-  description: Its a picture book.
-  components:
-  - type: Sprite
-    layers:
-    - state: throwing
-  - type: KnowledgeGrantOnUse
-    skills:
-      ThrowingKnowledge: 26
-    experience:
-      ThrowingKnowledge: 1
+      ThrowingKnowledge: 3
+      JanitorKnowledge: 3
     doAfter: 2
 
 - type: entity
@@ -299,7 +203,7 @@
     skills:
       LanguageTauCetiBasic: 26
     experience:
-      LanguageTauCetiBasic: 1
+      LanguageTauCetiBasic: 3
     doAfter: 2
 
 - type: entity
@@ -307,16 +211,20 @@
   id: BookHandmade
   name: old book
   suffix: handmade
-  description: Its a book on the basics of handmade things.
+  description: Its a book on the basics of construction.
   components:
   - type: Sprite
     layers:
     - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
-      HandmadeKnowledge: 26
+      CraftingKnowledge: 10
+      HandmadeKnowledge: 10
+      TechnologyKnowledge: 10
     experience:
-      HandmadeKnowledge: 1
+      CraftingKnowledge: 3
+      HandmadeKnowledge: 3
+      TechnologyKnowledge: 3
     doAfter: 2
 
 - type: entity
@@ -331,26 +239,11 @@
     - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
+      HandmadeKnowledge: 10
       SurvivalKnowledge: 26
     experience:
-      SurvivalKnowledge: 1
-    doAfter: 2
-
-- type: entity
-  parent: BookSkillbook
-  id: BookWeapons
-  name: old book
-  suffix: weapons
-  description: Its a book on the basics of weapons.
-  components:
-  - type: Sprite
-    layers:
-    - state: fabrication
-  - type: KnowledgeGrantOnUse
-    skills:
-      WeaponsKnowledge: 26
-    experience:
-      WeaponsKnowledge: 1
+      HandmadeKnowledge: 3
+      SurvivalKnowledge: 3
     doAfter: 2
 
 - type: entity
@@ -363,7 +256,7 @@
     skills:
       MaterialsKnowledge: 26
     experience:
-      MaterialsKnowledge: 1
+      MaterialsKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -379,7 +272,7 @@
     skills:
       DoorsKnowledge: 26
     experience:
-      DoorsKnowledge: 1
+      DoorsKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -395,7 +288,7 @@
     skills:
       AirlocksKnowledge: 26
     experience:
-      AirlocksKnowledge: 1
+      AirlocksKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -411,7 +304,7 @@
     skills:
       ToysKnowledge: 26
     experience:
-      ToysKnowledge: 1
+      ToysKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -427,7 +320,7 @@
     skills:
       BananiumKnowledge: 26
     experience:
-      BananiumKnowledge: 1
+      BananiumKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -443,7 +336,7 @@
     skills:
       BotsKnowledge: 26
     experience:
-      BotsKnowledge: 1
+      BotsKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -459,7 +352,7 @@
     skills:
       FurnitureKnowledge: 26
     experience:
-      FurnitureKnowledge: 1
+      FurnitureKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -475,7 +368,7 @@
     skills:
       InfrastructureKnowledge: 26
     experience:
-      InfrastructureKnowledge: 1
+      InfrastructureKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -491,7 +384,7 @@
     skills:
       ElectronicsKnowledge: 26
     experience:
-      ElectronicsKnowledge: 1
+      ElectronicsKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -507,7 +400,7 @@
     skills:
       WallsKnowledge: 26
     experience:
-      WallsKnowledge: 1
+      WallsKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -527,7 +420,7 @@
     skills:
       ScienceKnowledge: 26
     experience:
-      ScienceKnowledge: 1
+      ScienceKnowledge: 3
     doAfter: 2
 
 - type: entity
@@ -540,7 +433,7 @@
     skills:
       WindowsKnowledge: 26
     experience:
-      WindowsKnowledge: 1
+      WindowsKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:
@@ -556,7 +449,7 @@
     skills:
       SmokeablesKnowledge: 26
     experience:
-      SmokeablesKnowledge: 1
+      SmokeablesKnowledge: 3
     doAfter: 2
   - type: Sprite
     layers:

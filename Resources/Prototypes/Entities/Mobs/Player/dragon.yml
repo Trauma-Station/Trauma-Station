@@ -187,6 +187,10 @@
     speedModifier: 2.5 # fast because dragon strong
     useSound:
       path: /Audio/Items/crowbar.ogg
+  - type: InnateWaypointer
+    waypointerProtoIds:
+    - NTStationWaypointer
+    - DragonRiftWaypointer
   - type: LanguageSpeaker # Trauma - carp language (keeping basic as an option because the space monster gloating is funny)
     speaks:
     - TauCetiBasic

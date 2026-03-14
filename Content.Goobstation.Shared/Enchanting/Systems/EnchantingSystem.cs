@@ -77,10 +77,9 @@ public sealed class EnchantingSystem : EntitySystem
     private void CacheEnchants()
     {
         _enchants.Clear();
-        var factory = EntityManager.ComponentFactory;
         foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.TryGetComponent<EnchantComponent>(out var comp, factory))
+            if (proto.TryGetComponent<EnchantComponent>(out var comp, Factory))
                 _enchants.Add(proto.ID, comp);
         }
     }

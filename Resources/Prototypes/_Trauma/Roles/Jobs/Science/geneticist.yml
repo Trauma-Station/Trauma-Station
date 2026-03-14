@@ -19,6 +19,7 @@
   - Research
   - Maintenance
   - Genetics
+  # TODO: skill chip
 
 - type: startingGear
   id: GeneticistGear

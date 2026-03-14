@@ -117,8 +117,9 @@ public abstract partial class SharedGunSystem
         if (_knowledge.GetKnowledge(user, ShootingKnowledge) is not {} shooting)
             return 3;
 
-        return shooting.Comp.Level < 26
-            ? 3.0f - (float) shooting.Comp.Level / 26.0f - _knowledge.SharpCurve(shooting)
-            : 1.0f - ((float) (shooting.Comp.Level - 50) / 50.0f * (float) (shooting.Comp.Level - 50) / 50.0f);
+        var level = shooting.Comp.NetLevel;
+        return level < 26
+            ? 3.0f - (float) level / 26.0f - _knowledge.SharpCurve(shooting)
+            : 1.0f - ((float) (level - 50) / 50.0f * (float) (level - 50) / 50.0f);
     }
 }

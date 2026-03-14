@@ -132,8 +132,10 @@
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
   - type: KnowledgeGrantOnWear # Silly
-    experience:
+    skills:
       MartialArtKravMaga: 10
+    experience:
+      MartialArtKravMaga: 2
   - type: Tag
     tags: [] # ignore "WhitelistChameleon" tag
 

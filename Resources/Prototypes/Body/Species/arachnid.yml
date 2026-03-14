@@ -186,7 +186,7 @@
   id: OrganArachnidTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganArachnidExternal ]
+  parent: [ OrganBaseHeadBald, OrganArachnidExternal ] # Trauma - bald
   id: OrganArachnidHead
 
 - type: entity

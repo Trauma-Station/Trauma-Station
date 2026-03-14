@@ -27,20 +27,6 @@
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      # TODO: make this just 1 or 2 types
-      HandmadeKnowledge: 10
-      TechnologyKnowledge: 10
-      MaterialsKnowledge: 10
-      DoorsKnowledge: 10
-      AirlocksKnowledge: 10
-      FurnitureKnowledge: 10
-      InfrastructureKnowledge: 10
-      ElectronicsKnowledge: 10
-      WallsKnowledge: 10
-      WindowsKnowledge: 10
-      SmokeablesKnowledge: 50
   # </Trauma>
 
 - type: startingGear

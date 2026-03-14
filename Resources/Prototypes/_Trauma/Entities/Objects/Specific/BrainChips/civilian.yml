@@ -1,0 +1,152 @@
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipPassenger
+  name: skill chip (assistant)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      HandmadeKnowledge: 26
+      # evil NT mind control dulling the tiders
+      MeleeKnowledge: -5
+      ShootingKnowledge: -10
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipChaplain
+  name: skill chip (chaplain)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LiteracyKnowledge: 26
+      MagicalLiteracyKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipClown
+  name: skill chip (clown)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      BananiumKnowledge: 26
+      ToysKnowledge: 26
+      HandmadeKnowledge: 26
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipJanitor
+  name: skill chip (janitor)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      JanitorKnowledge: 26
+      MeleeKnowledge: 10 # mop hit hard ye
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipLawyer
+  name: skill chip (lawyer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LiteracyKnowledge: 60 # it's their whole thing
+      ShootingKnowledge: 5 # your honour my client pleads 9mm
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipLibrarian
+  name: skill chip (librarian)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LiteracyKnowledge: 50
+      MagicalLiteracyKnowledge: 26
+      # TODO: kys add every language via code
+      LanguageCat: 50
+      LanguageDog: 50
+      LanguageFox: 50
+      LanguageXeno: 50
+      LanguageMonkey: 50
+      LanguageMouse: 50
+      LanguageChicken: 50
+      LanguageDuck: 50
+      LanguageCow: 50
+      LanguageSheep: 50
+      LanguageKangaroo: 50
+      LanguagePig: 50
+      LanguageCrab: 50
+      LanguageKobold: 50
+      LanguageHissing: 50
+      LanguagePenguin: 50
+      LanguageDeer: 50
+      LanguageUniversal: 50
+      LanguageRobotTalk: 50
+      LanguageDroneTalk: 50
+      LanguagePsychomantic: 50
+      LanguageBlob: 50
+      LanguageEldritch: 50
+      LanguageRootSpeak: 50
+      LanguageMoffic: 50
+      LanguageDraconic: 50
+      LanguageBubblish: 50
+      LanguageNewKinPidgin: 50
+      LanguageXeeplian: 50
+      LanguageElyran: 50
+      LanguageFreespeak: 50
+      LanguageNovuNederic: 50
+      LanguageSolCommon: 50
+      LanguageTauCetiBasic: 50
+      LanguageTradeband: 50
+      LanguageSpaceItalian: 50
+      LanguageCarptongue: 50
+      LanguageFloorGoblin: 50
+      LanguageCheval: 50
+      LanguageBingle: 50
+      LanguageXenoHivemind: 50
+      LanguageAzaziba: 50
+      LanguageCalcic: 50
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipMime
+  name: skill chip (mime)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ToysKnowledge: 26
+      HandmadeKnowledge: 26
+  - type: OrganComponents
+    onAdd:
+    - type: MimePowers # merci
+      preventWriting: true
+    - type: FrenchAccent
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipMusician
+  name: skill chip (musician)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ToysKnowledge: 26
+      HandmadeKnowledge: 26
+      # TODO: music knowledge if anyone makes that...
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipRadioHost
+  name: skill chip (radio host)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LiteracyKnowledge: 26
+      HandmadeKnowledge: 26
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipReporter
+  name: skill chip (reporter)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ToysKnowledge: 26
+      HandmadeKnowledge: 26
