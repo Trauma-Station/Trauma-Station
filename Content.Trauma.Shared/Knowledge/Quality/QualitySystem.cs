@@ -120,7 +120,7 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnClothingSpeedApplyQuality(Entity<ClothingSpeedModifierComponent> ent, ref ApplyQualityEvent args)
     {
-        var modifier = args.Modifier(1.2f);
+        var modifier = ent.Comp.WalkModifier * args.Modifier(ent.Comp.WalkModifier);
         ent.Comp.SprintModifier *= modifier;
         ent.Comp.WalkModifier *= modifier;
         Dirty(ent);
@@ -323,6 +323,8 @@ public sealed class QualitySystem : EntitySystem
     public static float QualityModifier(float quality, float power = 1.1f)
         => MathF.Pow(power, quality);
 
+    public static float QualityModifierAlternate(float quality, float power = 1.1f)
+        => MathF.Pow(power, -power / 2 * quality);
     #endregion
 }
 
@@ -333,5 +335,8 @@ public sealed class QualitySystem : EntitySystem
 public record struct ApplyQualityEvent(int Quality)
 {
     public float Modifier(float power = 1.1f)
+        => QualitySystem.QualityModifier((float) Quality, power);
+
+    public float ModifierAlternate(float power = 1.1f)
         => QualitySystem.QualityModifier((float) Quality, power);
 }
