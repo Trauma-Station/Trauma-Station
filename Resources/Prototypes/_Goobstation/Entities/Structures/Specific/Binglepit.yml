@@ -45,8 +45,8 @@
   - type: Sprite
     drawdepth: FloorTiles
     layers:
-    - sprite: _Goobstation/Mobs/Bingle/bingle_pit.rsi
-      state: pit
+    - sprite: _Trauma/Mobs/Bingle/bingle_pit.rsi
+      state: pitalt
   - type: Appearance
   - type: InteractionOutline
   - type: Clickable

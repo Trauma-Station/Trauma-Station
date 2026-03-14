@@ -31,10 +31,13 @@
   - type: EntityTableSpawner
     table: !type:GroupSelector
       children:
-      - id: MobBingle
-        weight: 49    # 49/50
-      - id: MobTurkle
-        weight: 1     # 01/50
+      - id: MobBingleHunk
+        weight: 1
+      - id: MobBingleSlavering
+        weight: 1
+      - id: MobBingleBoney
+        weight: 1
+
 
 # Base bingle
 - type: entity

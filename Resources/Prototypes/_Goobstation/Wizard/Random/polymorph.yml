@@ -188,7 +188,7 @@
 - type: weightedRandomEntity
   id: WabbajackSpecial
   weights:
-    MobBinglePrime: 1
+    MobBinglePrimeTrauma: 1
     LavalandBossMegaLegion: 1
     LavalandBossColossus: 1
     LavalandBossAshDrake: 1
