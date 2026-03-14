@@ -159,3 +159,10 @@ Entries:
   id: 15
   time: '2026-03-13T18:07:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1237
+- author: Kirikii
+  changes:
+  - type: Fix
+    message: Fixed numerous issues with Nume Station.
+  id: 16
+  time: '2026-03-14T11:06:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1282

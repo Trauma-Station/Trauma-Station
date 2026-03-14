@@ -4407,3 +4407,57 @@ Entries:
   id: 517
   time: '2026-03-14T02:46:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1275
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Cosmic cultists are now immune to zombie infection.
+  - type: Fix
+    message: Fixed The Monument exploding when evac docks despite being active.
+  id: 518
+  time: '2026-03-14T08:57:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1281
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Allowed crafting to improve.
+  - type: Fix
+    message: Fixed racial mastery not appearing on the tab.
+  id: 519
+  time: '2026-03-14T09:00:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1279
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lit paper never turning to ash.
+  id: 520
+  time: '2026-03-14T13:51:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1287
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added end credits image for heretic
+  - type: Add
+    message: Added end credits image for image
+  - type: Fix
+    message: Fixed heretic gouls appearing in the end credits (the movie style one)
+  id: 521
+  time: '2026-03-14T14:43:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1289
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Midround antag spawns have been reworked. Only 2 major and 3 minor antags
+      can spawn midround, ninja vs vent slimes.
+  - type: Tweak
+    message: 'Antags spawns are now timed independently of regular events. '
+  id: 522
+  time: '2026-03-14T15:03:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1291
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Old scrolls now have text of random prayers.
+  id: 523
+  time: '2026-03-14T15:46:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1294
