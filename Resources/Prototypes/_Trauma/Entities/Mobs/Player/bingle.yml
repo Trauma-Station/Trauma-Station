@@ -21,7 +21,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 50
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
@@ -122,7 +122,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
@@ -185,7 +185,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 50
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
@@ -289,7 +289,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 250
+        damage: 150
       behaviors:
       - !type:GibBehavior
         deleteGibs: true

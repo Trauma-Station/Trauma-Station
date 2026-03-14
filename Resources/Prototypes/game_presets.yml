@@ -143,7 +143,7 @@
   - Secret
   - BasicRoundstartVariation
   - SpaceTrafficControlEventScheduler
-  - BasicStationEventScheduler
+  # - BasicStationEventScheduler - Double chaos on accident
   - Insurgency # Always some shitters for sec to deal with
   - SubTraitorRandom # Always 50% chance of at least one traitor
   # </Trauma>

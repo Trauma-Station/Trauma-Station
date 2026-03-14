@@ -6,7 +6,6 @@
   startingGear: LibrarianGear
   icon: "JobIconLibrarian"
   supervisors: job-supervisors-hop
-  goobcoins: 10 #Goob content
   access:
   - Library # Trauma - TODO, remove service after mapping is done
   - Service

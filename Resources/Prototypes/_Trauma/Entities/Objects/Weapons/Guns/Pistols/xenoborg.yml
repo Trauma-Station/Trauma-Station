@@ -1,0 +1,76 @@
+- type: entity
+  parent: BaseItem
+  id: DartGunXenoborg
+  name: dart gun
+  description: Fires darts that put organics to sleep.
+  suffix: Unremoveable
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Weapons/Guns/Cannons/dart_gun.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+  - type: Unremoveable
+  - type: DisarmMalus
+    malus: 0
+  - type: Gun
+    fireRate: 1
+    clumsyProof: true
+    resetOnHandSelected: false
+    soundEmpty: null
+    soundGunshot:
+      path: /Audio/_Goobstation/Weapons/Guns/Gunshots/heavy_shot_suppressed.ogg
+      params:
+        volume: -5
+  - type: BatteryAmmoProvider
+    proto: XenoborgDart
+    fireCost: 5
+  - type: BatterySelfRecharger
+    autoRechargeRate: 2
+  - type: Battery
+    maxCharge: 10
+    startingCharge: 10
+
+- type: entity
+  id: XenoborgDart
+  parent: BaseBullet
+  name: dart
+  description: A thin needle with chemicals inside.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Changeling/dart.rsi
+    layers:
+    - state: icon
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: Ammo
+    muzzleFlash: null
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 3
+  - type: SolutionContainerManager
+    solutions:
+      ammo:
+        maxVol: 12
+        reagents:
+        - ReagentId: Nocturine
+          Quantity: 12
+  - type: RefillableSolution
+    solution: ammo
+  - type: DrainableSolution
+    solution: ammo
+  - type: SolutionInjectOnProjectileHit
+    transferAmount: 15
+    solution: ammo
+  - type: InjectableSolution
+    solution: ammo

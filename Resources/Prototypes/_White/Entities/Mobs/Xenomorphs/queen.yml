@@ -52,6 +52,8 @@
     damage:
       groups:
         Brute: 50
+    altDisarm: false
+    canWideSwing: true
   - type: Deathgasp
     prototype: XenomorphQueenDeathgasp
   - type: Speech
