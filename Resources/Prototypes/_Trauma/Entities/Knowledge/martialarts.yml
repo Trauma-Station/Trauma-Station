@@ -34,6 +34,7 @@
   - type: AreaMartialArt
     areas:
     - AreaKitchen
+    - AreaKitchenBackRoom
     - AreaColdRoom
     - AreaCafeteria
   - type: KnowledgeConflict

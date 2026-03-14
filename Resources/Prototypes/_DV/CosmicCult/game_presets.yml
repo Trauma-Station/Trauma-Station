@@ -5,11 +5,12 @@
   name: cosmiccult-title
   description: cosmiccult-description
   showInVote: false
-  #cooldown: 1
   rules:
-    - CosmicCult
-    - SubGamemodesRule
-    #- MeteorSwarmScheduler - Goob Edit
-    - SpaceTrafficControlEventScheduler
-    - BasicRoundstartVariation
-    - BasicStationEventScheduler
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - CosmicCult

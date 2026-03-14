@@ -151,11 +151,12 @@ public sealed partial class BodySystem
     /// <summary>
     /// Gets the fraction of bodyparts that are vital.
     /// For a torso or torso+head this is 1, for invalid bodies this is 0.
+    /// Non-bodies will return 1 for damage scaling etc.
     /// </summary>
     public float GetVitalBodyPartRatio(Entity<BodyComponent?> body)
     {
         if (!_bodyQuery.Resolve(body, ref body.Comp, false) || body.Comp.Organs?.ContainedEntities is not {} organs)
-            return 0f;
+            return 1f;
 
         // TODO SHITMED: change vital to just be a bool on OrganCategoryPrototype
         int total = 0;
