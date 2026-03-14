@@ -264,13 +264,13 @@ public sealed class QualitySystem : EntitySystem
         ApplyQuality(ent);
 
         // TODO: limit skill gain based on the recipe used
-        _knowledge.AddExperience(brain, CraftingKnowledge, Math.Abs(ent.Comp.Quality / 2), 20);
+        _knowledge.AddExperience(brain, CraftingKnowledge, Math.Abs(ent.Comp.Quality / 2));
 
         if (lowestId is not { } actualId)
             return;
 
         // TODO: above
-        _knowledge.AddExperience(brain, actualId, Math.Abs(ent.Comp.Quality / 2), 20);
+        _knowledge.AddExperience(brain, actualId, Math.Abs(ent.Comp.Quality / 2));
     }
 
     private bool LevelDeltasMatch(Dictionary<EntProtoId, int> a, Dictionary<EntProtoId, int> b)

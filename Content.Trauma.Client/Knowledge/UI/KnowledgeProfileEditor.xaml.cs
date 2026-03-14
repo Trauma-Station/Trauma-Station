@@ -58,17 +58,18 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
                 continue;
 
             var control = new SkillControl(name, costs);
-            var mastery = _profile.Mastery.GetValueOrDefault(id);
+            var racialBase = _parent.Profile.Mastery.GetValueOrDefault(id);
+            var mastery = _profile.Mastery.GetValueOrDefault(id) + racialBase;
 
-            control.SetMastery(_knowledge.GetMasteryString(mastery), mastery);
+            control.SetMastery(_knowledge.GetMasteryString(mastery), mastery, racialBase);
 
             control.OnChangeMastery += diff =>
             {
                 var sum = control.Mastery + diff;
-                if (sum >= costs.Length || sum < 0)
+                if (sum >= costs.Length || sum < racialBase)
                     return;
 
-                control.SetMastery(_knowledge.GetMasteryString(sum), sum);
+                control.SetMastery(_knowledge.GetMasteryString(sum), sum, racialBase);
                 if (sum == 0)
                     _profile.Mastery.Remove(id);
                 else
