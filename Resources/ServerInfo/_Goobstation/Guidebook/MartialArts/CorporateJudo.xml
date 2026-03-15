@@ -74,33 +74,4 @@
   Only works on opponents locked in an armbar. Flips the opponent over the shoulder,
   inflicting massive Stamina damage, and forces the user back on their feet.
 
-  ### GOLDEN BLAST (Advanced or higher only)
-
-  Part 1:
-
-  <Box>
-    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
-  </Box>
-
-  Part 2:
-
-  <Box>
-    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
-  </Box>
-
-  Part 3:
-
-  <Box>
-    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
-  </Box>
-
 </Document>
