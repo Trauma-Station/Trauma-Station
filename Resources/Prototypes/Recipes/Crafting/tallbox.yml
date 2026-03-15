@@ -9,7 +9,7 @@
   theory:
     FurnitureKnowledge: 1
   practical:
-     MetalworkingKnowledge: 1
+    MetalworkingKnowledge: 1
     MechanicsKnowledge: 1
   # </Trauma>
 
@@ -25,7 +25,7 @@
     FurnitureKnowledge: 1
     ElectronicsKnowledge: 1
   practical:
-     MetalworkingKnowledge: 1
+    MetalworkingKnowledge: 1
     MechanicsKnowledge: 1
   # </Trauma>
 
@@ -41,7 +41,7 @@
   theory:
     FurnitureKnowledge: 1
   practical:
-     MetalworkingKnowledge: 1
+    MetalworkingKnowledge: 1
     MechanicsKnowledge: 1
   # </Trauma>
 
@@ -56,7 +56,7 @@
   theory:
     FurnitureKnowledge: 1
   practical:
-     MetalworkingKnowledge: 2
+    MetalworkingKnowledge: 2
     MechanicsKnowledge: 2
   # </Trauma>
 
@@ -76,6 +76,6 @@
   theory:
     FurnitureKnowledge: 1
   practical:
-     MetalworkingKnowledge: 1
+    MetalworkingKnowledge: 1
     MechanicsKnowledge: 1
   # </Trauma>
