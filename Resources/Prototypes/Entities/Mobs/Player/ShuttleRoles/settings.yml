@@ -428,8 +428,7 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-    0
-        ElectronicsKnowledge: 10
+        FirstAidKnowledge: 26
     # </Trauma>
 
 - type: randomHumanoidSettings
@@ -490,7 +489,7 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-    0
+        FirstAidKnowledge: 26
     # </Trauma>
 
 # Science
@@ -518,7 +517,6 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-    0
         ScienceKnowledge: 10
         ElectronicsKnowledge: 10
     # </Trauma>
