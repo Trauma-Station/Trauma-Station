@@ -4571,3 +4571,23 @@ Entries:
   id: 537
   time: '2026-03-15T14:58:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1325
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed berserker heart etc autosurgeons not working.
+  - type: Fix
+    message: Fixed decapitations from executions not working.
+  id: 538
+  time: '2026-03-15T17:32:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1328
+- author: MayasMischief
+  changes:
+  - type: Fix
+    message: >-
+      Judo now has feedback and the guidebook is now accurate. It wasn't broken,
+      it just didn't have any feedback.
+  - type: Remove
+    message: Removed Judo's Golden Blast pending rework (refrence)
+  id: 539
+  time: '2026-03-15T17:36:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1332

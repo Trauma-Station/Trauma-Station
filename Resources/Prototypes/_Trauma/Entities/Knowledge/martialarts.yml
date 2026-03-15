@@ -48,9 +48,6 @@
   components:
   - type: CanPerformCombo
     roundstartCombos:
-    - JudoGoldenBlast1
-    - JudoGoldenBlast2
-    - JudoGoldenBlast3
     - JudoThrow
     - JudoArmbar
     - JudoDiscombobulate # Due to supercode this needs to be below Armbar, otherwise it takes priority
