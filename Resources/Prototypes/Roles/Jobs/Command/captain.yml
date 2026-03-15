@@ -18,7 +18,7 @@
       time: 1h # Trauma was 4
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 4h 
+      time: 4h
   guides: # goobstation
   - Command
   weight: 20
