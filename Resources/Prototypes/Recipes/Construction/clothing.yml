@@ -39,9 +39,8 @@
   theory:
     FabricationKnowledge: 1
   practical:
-    FabricationKnowledge: 2
     CarvingKnowledge: 2
-    Armorsmith: 2
+    ArmorKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -55,9 +54,8 @@
   theory:
     FabricationKnowledge: 1
   practical:
-    FabricationKnowledge: 2
     CarvingKnowledge: 2
-    Armorsmith: 2
+    ArmorKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -70,8 +68,8 @@
   # <Trauma>
   theory: {} # it's cardboard
   practical:
-    FabricationKnowledge: 0
-    Armorsmith: 0
+    TailoringKnowledge: 0
+    ArmorKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -84,8 +82,8 @@
   # <Trauma>
   theory: {} # it's cardboard
   practical:
-    FabricationKnowledge: 0
-    Armorsmith: 0
+    TailoringKnowledge: 0
+    ArmorKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -209,5 +207,5 @@
     FabricationKnowledge: 0
   practical:
     FabricationKnowledge: 1
-    Electronics: 1
+    ElectronicsKnowledge: 1
   # </Trauma>

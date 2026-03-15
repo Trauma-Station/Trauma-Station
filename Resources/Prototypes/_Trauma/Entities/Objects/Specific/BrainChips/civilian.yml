@@ -12,15 +12,6 @@
 
 - type: entity
   parent: BaseSkillChip
-  id: SkillChipBotanist
-  name: skill chip (botanist)
-  components:
-  - type: KnowledgeGrantOnWear
-    skills:
-      SmokeablesKnowledge: 50
-
-- type: entity
-  parent: BaseSkillChip
   id: SkillChipChaplain
   name: skill chip (chaplain)
   components:

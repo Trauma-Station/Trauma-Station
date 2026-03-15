@@ -42,7 +42,6 @@
     - id: BookInfrastructure
     - id: BookElectronics
     - id: BookWalls
-    - id: BookScience
     - id: BookWindows
     - id: BookSmokeables
 

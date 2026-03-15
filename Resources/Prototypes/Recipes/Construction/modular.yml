@@ -23,8 +23,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    Fabrication: 1
-    Electronics: 1
+    FabricationKnowledge: 1
+    ElectronicsKnowledge: 1
   practical:
     MetalworkingKnowledge: 3
     MechanicsKnowledge: 3
