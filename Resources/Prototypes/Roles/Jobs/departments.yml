@@ -54,7 +54,6 @@
   - DeathSquad
   - HecuOperative
   # <Trauma>
-  - NanotrasenRepresentative
   - NavyOfficer
   - NavyCaptain
   - NavyOfficerUndercover
@@ -71,6 +70,7 @@
   color: "#334E6D"
   roles:
   # <Trauma>
+  - NanotrasenRepresentative
   - CommandMaid
   - HecuOperative
   # </Trauma>
