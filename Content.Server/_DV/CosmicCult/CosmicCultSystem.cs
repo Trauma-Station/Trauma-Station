@@ -1,11 +1,7 @@
 using Content.Goobstation.Common.Temperature.Components;
-using Content.Server._DV.CosmicCult.EntitySystems;
 using Content.Server.Actions;
 using Content.Server.Antag;
-using Content.Server.Atmos.Components;
-using Content.Server.Audio;
 using Content.Server.GameTicking.Events;
-using Content.Server.Pinpointer;
 using Content.Server.Popups;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
@@ -14,13 +10,9 @@ using Content.Shared.Hands;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Polymorph;
-using Content.Shared.Radio.Components;
 using Content.Shared.Speech.Components;
 using Content.Shared.Speech;
 using Content.Shared.Popups;
-using Content.Shared.Temperature.Components;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.EntitySerialization;
@@ -67,7 +59,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeLocalEvent<CosmicImposingComponent, ComponentRemove>(OnEndImposition);
         SubscribeLocalEvent<CosmicImposingComponent, RefreshMovementSpeedModifiersEvent>(OnImpositionMoveSpeed);
 
-        SubscribeLocalEvent<CosmicCultComponent, PolymorphedEvent>(OnCultistPolymorphed);
         SubscribeLocalEvent<SpeechOverrideComponent, GotEquippedEvent>(OnGotSpeechOverrideEquipped);
         SubscribeLocalEvent<SpeechOverrideComponent, GotUnequippedEvent>(OnGotSpeechOverrideUnequipped);
     }
@@ -152,7 +143,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #region Equipment Pickup
     private void OnGotCosmicItemEquipped(Entity<CosmicEquipmentComponent> ent, ref GotEquippedEvent args)
     {
-        if (EntityIsCultist(args.Equipee, includeLesser: false)) return; // Lesser cultists can't use coscult equipment
+        if (EntityIsCultist(args.Equipee)) return;
 
         EnsureComp<CosmicDegenComponent>(args.Equipee);
     }
@@ -164,7 +155,7 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 
     private void OnGotHeld(Entity<CosmicEquipmentComponent> ent, ref GotEquippedHandEvent args)
     {
-        if (EntityIsCultist(args.User, includeLesser: false)) return;
+        if (EntityIsCultist(args.User)) return;
 
         EnsureComp<CosmicDegenComponent>(args.User);
         _popup.PopupEntity(Loc.GetString("cosmiccult-gear-pickup", ("ITEM", args.Equipped)), args.User, args.User, PopupType.MediumCaution);
@@ -226,39 +217,5 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         args.ModifySpeed(1.4f, 1.4f);
     private void OnImpositionMoveSpeed(EntityUid uid, CosmicImposingComponent comp, RefreshMovementSpeedModifiersEvent args) =>
         args.ModifySpeed(0.80f, 0.80f);
-    #endregion
-
-    #region Edge cases
-    /// <summary>
-    /// When a cultist gets polymorphed, ensure that the resulting entity has all the necessary components. Thank god kitsune aren't real.
-    /// Should probably just move most of this shit to mind instead at some point
-    /// </summary>
-    private void OnCultistPolymorphed(Entity<CosmicCultComponent> ent, ref PolymorphedEvent args)
-    {
-        if (_cultRule.AssociatedGamerule(args.OldEntity) is not { } cult)
-            return;
-        if (TryComp<CosmicCultComponent>(args.OldEntity, out var oldCultComp))
-        {
-            EnsureComp<CosmicCultComponent>(args.NewEntity, out var cultComp);
-            cultComp.CosmicEmpowered = oldCultComp.CosmicEmpowered;
-        }
-        if (HasComp<CosmicStarMarkComponent>(args.OldEntity))
-            EnsureComp<CosmicStarMarkComponent>(args.NewEntity);
-        if (HasComp<CosmicSubtleMarkComponent>(args.OldEntity))
-            EnsureComp<CosmicSubtleMarkComponent>(args.NewEntity);
-        if (HasComp<SpecialLowTempImmunityComponent>(args.OldEntity))
-            EnsureComp<SpecialLowTempImmunityComponent>(args.NewEntity);
-        if (HasComp<PressureImmunityComponent>(args.OldEntity))
-            EnsureComp<PressureImmunityComponent>(args.NewEntity);
-        if (HasComp<CosmicNonRespiratingComponent>(args.OldEntity))
-            EnsureComp<CosmicNonRespiratingComponent>(args.NewEntity);
-        EnsureComp<IntrinsicRadioReceiverComponent>(args.NewEntity); // All cultists should have those, so we don't check for them separately
-        EnsureComp<IntrinsicRadioTransmitterComponent>(args.NewEntity, out var transmitter);
-        EnsureComp<ActiveRadioComponent>(args.NewEntity, out var radio);
-        EnsureComp<CosmicCultAssociatedRuleComponent>(args.NewEntity, out var associatedComp);
-        radio.Channels.Add("CosmicRadio");
-        transmitter.Channels.Add("CosmicRadio");
-        associatedComp.CultGamerule = cult;
-    }
     #endregion
 }
