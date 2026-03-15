@@ -105,6 +105,10 @@
   name: knowledge-category-Recipes
 
 - type: knowledgeCategory
+  id: Crafting
+  name: knowledge-category-Crafting
+
+- type: knowledgeCategory
   id: Language
   name: knowledge-category-Languages
 
