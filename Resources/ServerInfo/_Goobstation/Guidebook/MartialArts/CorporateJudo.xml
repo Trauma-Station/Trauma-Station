@@ -24,6 +24,7 @@
   ### Discombobulate
 
   <Box>
+    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
   </Box>
@@ -35,6 +36,7 @@
   <Box>
     <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
   </Box>
 
   Blinds the opponent and blurs their vision, regardless of eye protection, and deals some Blunt damage.
@@ -42,6 +44,7 @@
   ### Judo Throw
 
   <Box>
+    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
   </Box>
@@ -53,7 +56,7 @@
 
   <Box>
     <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
   </Box>
 
@@ -70,5 +73,34 @@
 
   Only works on opponents locked in an armbar. Flips the opponent over the shoulder,
   inflicting massive Stamina damage, and forces the user back on their feet.
+
+  ### GOLDEN BLAST (Advanced or higher only)
+
+  Part 1:
+
+  <Box>
+    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
+  </Box>
+
+  Part 2:
+
+  <Box>
+    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
+  </Box>
+
+  Part 3:
+
+  <Box>
+    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
+  </Box>
 
 </Document>

@@ -4,6 +4,10 @@
   - Grab
   - Disarm
   - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-discombobulate
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 10
@@ -15,6 +19,10 @@
   - Disarm
   - Harm
   - Harm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-eyepoke # isnt this more of a krav thing? judo is all grappling
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 25
@@ -30,6 +38,10 @@
   - Grab
   - Grab
   - Disarm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-throw
   opponentEffects:
   - !type:ModifyParalysis
     time: 4
@@ -47,6 +59,10 @@
   - Disarm
   - Harm
   - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-armbar
   opponentEffects:
   - !type:ModifyParalysis
     time: 5
@@ -60,6 +76,10 @@
   - Grab
   - Disarm
   - Harm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-wheelthrow
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 120
