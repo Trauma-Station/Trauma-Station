@@ -79,7 +79,7 @@
   theory:
     FabricationKnowledge: 3
     WeaponsKnowledge: 1
-  practical: 
+  practical:
     GunsmithingKnowledge: 1
     MechanicsKnowledge: 2
   # </Trauma>

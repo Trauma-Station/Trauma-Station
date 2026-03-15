@@ -1899,7 +1899,7 @@
     WallsKnowledge: 1
     DoorsKnowledge: 1
     ElectronicsKnowledge: 1
-  useQuality: false 
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -1919,7 +1919,7 @@
     WallsKnowledge: 1
     DoorsKnowledge: 1
     ElectronicsKnowledge: 1
-  useQuality: false 
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -1936,7 +1936,7 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 1
-  useQuality: false 
+  useQuality: false
   # </Trauma>
 
 - type: construction

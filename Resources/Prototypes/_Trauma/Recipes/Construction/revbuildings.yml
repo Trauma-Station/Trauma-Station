@@ -132,7 +132,7 @@
   theory:
     RevolutionaryKnowledge: 2
   useQuality: false
-  
+
 - type: construction
   id: RevTurretPistol
   graph: RevTurret
@@ -166,7 +166,7 @@
     WeaponsKnowledge: 1
   practical:
     MechanicsKnowledge: 2
-    
+
 - type: construction
   id: RevPlasmaFoundry
   graph: RevMachine

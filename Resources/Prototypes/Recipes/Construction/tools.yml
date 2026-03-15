@@ -8,7 +8,7 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 0
-  useQuality: false 
+  useQuality: false
   practical:
     CarvingKnowledge: 1
   # </Trauma>
