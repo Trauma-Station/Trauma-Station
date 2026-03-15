@@ -36,14 +36,15 @@ public sealed class ScannedGenomeSystem : EntitySystem
             return;
 
         var comp = EnsureComp<ScannedGenomeComponent>(target);
-        DebugTools.Assert(comp.Sequences.Count == 0, $"Polymorphed {ToPrettyString(ent)} into a non-empty scanned gnome entity {ToPrettyString(target)}, its sequences would be wiped!");
+        DebugTools.Assert(comp.Sequences.Count == 0, $"Polymorphed {ToPrettyString(ent)} into a non-empty scanned genome entity {ToPrettyString(target)}, its sequences would be wiped!");
         TransferSequences(ent, (target, comp));
     }
 
     private void OnMutationRemoved(Entity<ScannedGenomeComponent> ent, ref MutationRemovedEvent args)
     {
         // check just incase you are VERY evil and have a mutation that is a mob or something crazy
-        if (ent.Owner != args.Target.Owner)
+        // also don't remove for polymorph
+        if (ent.Owner != args.Target.Owner || args.Automatic)
             return;
 
         RemoveSequence(ent, args.Id);

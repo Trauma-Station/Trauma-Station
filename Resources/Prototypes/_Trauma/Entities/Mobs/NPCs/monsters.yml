@@ -69,6 +69,8 @@
       types:
         Piercing: 20
         Slash: 10
+    altDisarm: false
+    canWideSwing: true
   - type: StaticPrice
     price: 3000
   - type: Bloodstream

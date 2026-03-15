@@ -32,6 +32,14 @@
 
 - type: entity
   parent: BaseAreaCommand
+  id: AreaCommandMeetingRoom
+  name: command meeting room
+  components:
+  - type: Sprite
+    state: meeting
+
+- type: entity
+  parent: BaseAreaCommand
   id: AreaCommandGateway
   name: command gateway
   components:

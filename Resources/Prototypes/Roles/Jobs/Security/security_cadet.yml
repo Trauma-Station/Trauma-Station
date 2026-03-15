@@ -5,18 +5,17 @@
   playTimeTracker: JobSecurityCadet
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 10h
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 5h
-      inverted: true # stop playing intern if you're good at security!
+      time: 5h # Trauma, was 10
+    # - !type:DepartmentTimeRequirement # Trauma
+    #   department: Security
+    #   time: 5h
+    #   inverted: true # stop playing intern if you're good at security!
   startingGear: SecurityCadetGear
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
   canBeAntag: false
   guides: # goobstation
   - Security
-  goobcoins: 30 #Goob content
   access:
   - Security
   - Brig

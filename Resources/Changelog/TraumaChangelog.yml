@@ -4425,3 +4425,178 @@ Entries:
   id: 519
   time: '2026-03-14T09:00:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1279
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lit paper never turning to ash.
+  id: 520
+  time: '2026-03-14T13:51:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1287
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: Added end credits image for heretic
+  - type: Add
+    message: Added end credits image for image
+  - type: Fix
+    message: Fixed heretic gouls appearing in the end credits (the movie style one)
+  id: 521
+  time: '2026-03-14T14:43:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1289
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Midround antag spawns have been reworked. Only 2 major and 3 minor antags
+      can spawn midround, ninja vs vent slimes.
+  - type: Tweak
+    message: 'Antags spawns are now timed independently of regular events. '
+  id: 522
+  time: '2026-03-14T15:03:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1291
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Old scrolls now have text of random prayers.
+  id: 523
+  time: '2026-03-14T15:46:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1294
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Scrap helmet covers head now.
+  id: 524
+  time: '2026-03-14T18:10:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1296
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed small ponchos.
+  id: 525
+  time: '2026-03-14T18:37:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1300
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Rounds should start a tiny bit faster.
+  id: 526
+  time: '2026-03-14T18:53:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1299
+- author: GeneRickUsername
+  changes:
+  - type: Add
+    message: Added a few more quality events.
+  id: 527
+  time: '2026-03-14T20:56:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1303
+- author: GeneRickUsername
+  changes:
+  - type: Add
+    message: Added shield logic
+  - type: Fix
+    message: Fixed Quality formula not accounting knowledge (little error)
+  id: 528
+  time: '2026-03-14T23:15:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1310
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: xenos can actually win now
+  id: 529
+  time: '2026-03-14T23:19:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1314
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: Eyepatches are now pickable in loadout. Both the normal and flipped one.
+  - type: Remove
+    message: Removed
+  id: 530
+  time: '2026-03-15T07:27:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1315
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Buffed construction experience gaining.
+  id: 531
+  time: '2026-03-15T09:11:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1319
+- author: MayasMischief
+  changes:
+  - type: Remove
+    message: Removed BSO
+  id: 532
+  time: '2026-03-15T09:27:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1206
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed toughness skill decreasing AP damage like AP ammo and /suicide
+  id: 533
+  time: '2026-03-15T10:12:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1321
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to change job preferences for NTR.
+  id: 534
+  time: '2026-03-15T10:32:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1322
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Fixed coscult armor's integrated flashlight
+  - type: Fix
+    message: You can no longer parry when attacking yourself
+  - type: Fix
+    message: Astral razor is no longer affected by coscult's lack of shooting skill
+  - type: Tweak
+    message: >-
+      People converted by cosmic cult can now use cosmic cult gear. Still no
+      abilities, though.
+  id: 535
+  time: '2026-03-15T12:49:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1324
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed slime, moths and diona not knowing their species languages.
+  id: 536
+  time: '2026-03-15T13:46:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1329
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plasmamen needing to eat.
+  id: 537
+  time: '2026-03-15T14:58:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1325
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed berserker heart etc autosurgeons not working.
+  - type: Fix
+    message: Fixed decapitations from executions not working.
+  id: 538
+  time: '2026-03-15T17:32:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1328
+- author: MayasMischief
+  changes:
+  - type: Fix
+    message: >-
+      Judo now has feedback and the guidebook is now accurate. It wasn't broken,
+      it just didn't have any feedback.
+  - type: Remove
+    message: Removed Judo's Golden Blast pending rework (refrence)
+  id: 539
+  time: '2026-03-15T17:36:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1332
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Made UI better
+  - type: Tweak
+    message: Tweaked language cost so you don't level up every time you speak.
+  id: 540
+  time: '2026-03-15T19:02:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1338

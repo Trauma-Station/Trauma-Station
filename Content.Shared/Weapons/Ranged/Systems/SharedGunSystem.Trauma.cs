@@ -114,6 +114,9 @@ public abstract partial class SharedGunSystem
         if (userUid is not {} user || !HasComp<KnowledgeHolderComponent>(user))
             return 1;
 
+        if (TryComp<GunComponent>(gun, out var gunComp) && gunComp.UnaffectedBySkill)
+            return 1;
+
         if (_knowledge.GetKnowledge(user, ShootingKnowledge) is not {} shooting)
             return 3;
 

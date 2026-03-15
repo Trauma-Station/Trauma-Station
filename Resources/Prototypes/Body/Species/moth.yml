@@ -140,6 +140,15 @@
   id: MobMoth
   name: Urist McFluff
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Moffic
+    understands:
+    - TauCetiBasic
+    - Moffic
+  # </Trauma>
   - type: Damageable
     damageModifierSet: Moth
   - type: ZombieAccentOverride

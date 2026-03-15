@@ -21,7 +21,7 @@
   name: medbay breakroom
   components:
   - type: Sprite
-    state: medbay_lobby
+    state: medbay_break
 
 - type: entity
   parent: BaseAreaMedical

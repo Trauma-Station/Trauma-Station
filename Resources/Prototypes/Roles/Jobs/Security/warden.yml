@@ -7,9 +7,9 @@
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
       time: 5h
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 10h
+    # - !type:DepartmentTimeRequirement # Trauma
+    #   department: Security
+    #   time: 10h
   weight: 5
   startingGear: WardenGear
   icon: "JobIconWarden"
@@ -19,7 +19,6 @@
   - SpaceLaw
   - Security
   - KravMaga
-  goobcoins: 35 #Goob content
   access:
   - Security
   - Brig

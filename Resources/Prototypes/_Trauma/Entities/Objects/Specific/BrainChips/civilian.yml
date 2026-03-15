@@ -5,7 +5,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      HandmadeKnowledge: 26
+      FabricationKnowledge: 26
       # evil NT mind control dulling the tiders
       MeleeKnowledge: -5
       ShootingKnowledge: -10
@@ -27,9 +27,9 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      BananiumKnowledge: 26
+      BananiumKnowledge: 50
       ToysKnowledge: 26
-      HandmadeKnowledge: 26
+      FabricationKnowledge: 26
 
 - type: entity
   parent: BaseSkillChip
@@ -113,7 +113,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       ToysKnowledge: 26
-      HandmadeKnowledge: 26
+      FabricationKnowledge: 26
   - type: OrganComponents
     onAdd:
     - type: MimePowers # merci
@@ -128,7 +128,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       ToysKnowledge: 26
-      HandmadeKnowledge: 26
+      FabricationKnowledge: 26
       # TODO: music knowledge if anyone makes that...
 
 - type: entity
@@ -139,7 +139,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       LiteracyKnowledge: 26
-      HandmadeKnowledge: 26
+      FabricationKnowledge: 26
 
 - type: entity
   parent: BaseSkillChip
@@ -149,4 +149,4 @@
   - type: KnowledgeGrantOnWear
     skills:
       ToysKnowledge: 26
-      HandmadeKnowledge: 26
+      FabricationKnowledge: 26

@@ -42,7 +42,6 @@
     - id: BookInfrastructure
     - id: BookElectronics
     - id: BookWalls
-    - id: BookScience
     - id: BookWindows
     - id: BookSmokeables
 
@@ -218,13 +217,9 @@
     - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
-      CraftingKnowledge: 10
-      HandmadeKnowledge: 10
-      TechnologyKnowledge: 10
+      FabricationKnowledge: 10
     experience:
-      CraftingKnowledge: 3
-      HandmadeKnowledge: 3
-      TechnologyKnowledge: 3
+      FabricationKnowledge: 3
     doAfter: 2
 
 - type: entity
@@ -239,11 +234,9 @@
     - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
-      HandmadeKnowledge: 10
-      SurvivalKnowledge: 26
+      CarvingKnowledge: 10
     experience:
-      HandmadeKnowledge: 3
-      SurvivalKnowledge: 3
+      CarvingKnowledge: 3
     doAfter: 2
 
 - type: entity
@@ -405,23 +398,6 @@
   - type: Sprite
     layers:
     - state: walls
-
-- type: entity
-  parent: BookSkillbook
-  id: BookScience
-  name: old book
-  suffix: science
-  description: It's a book on the basics of science.
-  components:
-  - type: Sprite
-    layers:
-    - state: fabrication
-  - type: KnowledgeGrantOnUse
-    skills:
-      ScienceKnowledge: 26
-    experience:
-      ScienceKnowledge: 3
-    doAfter: 2
 
 - type: entity
   parent: BookSchematic

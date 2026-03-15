@@ -81,3 +81,11 @@
   components:
   - type: Sprite
     state: hydro
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaServiceHall
+  name: service hall
+  components:
+  - type: Sprite
+    state: service_hall

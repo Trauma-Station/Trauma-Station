@@ -53,7 +53,8 @@ public sealed class SaltLineSystem : EntitySystem
 
     private void OnSaltLineAfterInteract(Entity<SaltLinePlacerComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Handled || !args.CanReach)
+        // We can only place on tiles, so target must be null
+        if (args.Handled || !args.CanReach || args.Target != null)
             return;
 
         if (!TryComp<MapGridComponent>(_transform.GetGrid(args.ClickLocation), out var grid))

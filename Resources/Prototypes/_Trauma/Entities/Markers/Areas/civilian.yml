@@ -87,3 +87,11 @@
   components:
   - type: Sprite
     state: tool_storage
+
+- type: entity
+  parent: BaseAreaCivilian
+  id: AreaNewsroom
+  name: news room
+  components:
+  - type: Sprite
+    state: newsroom

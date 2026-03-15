@@ -194,7 +194,8 @@ public sealed class ParrySystem : EntitySystem
     {
         if (!_toggle.IsActivated(reflector.Owner)
         || !CheckKnowledge(user, reflector.Comp.RequiredSkill, reflector.Comp.ReflectMinSkill)
-        || !CheckAndUpdateExhaustion(user, reflector, useParryValues: true))
+        || !CheckAndUpdateExhaustion(user, reflector, useParryValues: true)
+        || user == attacker) // Me when I try to kill myself but I parry the hit
             return false;
 
         if (_timing.IsFirstTimePredicted)

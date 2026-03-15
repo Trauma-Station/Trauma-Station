@@ -4,8 +4,8 @@ meta:
   engineVersion: 273.0.0
   forkId: ""
   forkVersion: ""
-  time: 03/13/2026 20:50:41
-  entityCount: 38022
+  time: 03/14/2026 13:23:07
+  entityCount: 38023
 maps:
 - 1
 grids:
@@ -873,6 +873,24 @@ entities:
           data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACUlJSUlJSUlJQAAAAAAAAAlJSUlJSUlJSUAAAAAAAAAJSUlJSUlJSUlAAAAAAAAACUlJSUlJSUlJQAAAAAAAAAlJSUlJSUlJSUAAAAdHR0AJSUlJSUlJSUlAAAAHR0dACUlJSUlJSUlJQAAAB0dHQAlJSUlJSUlJSUdHR0dHR0AHR0dHR0dHR0dHR0dHR0dAB0dHR0dHR0dHR0dHR0dHQAdHR0dHR0dHR0dHR0dHR0AHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHQ==
         2,-2:
           data: Dg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODgAAAA4ODg4ODg4ODgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+        -5,2:
+          data: ""
+        5,4:
+          data: ""
+        -3,-2:
+          data: ""
+        -3,-3:
+          data: ""
+        -3,-4:
+          data: ""
+        -2,-3:
+          data: ""
+        -2,-4:
+          data: ""
+        -2,-5:
+          data: ""
+        -3,-5:
+          data: ""
       lastMapping: 37
       areaMap:
         1: AreaAi
@@ -27451,6 +27469,21 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 33.5,-30.5
       parent: 2
+  - uid: 2025
+    components:
+    - type: Transform
+      pos: -33.5,-30.5
+      parent: 2
+  - uid: 2026
+    components:
+    - type: Transform
+      pos: -28.5,-30.5
+      parent: 2
+  - uid: 2300
+    components:
+    - type: Transform
+      pos: -16.5,-30.5
+      parent: 2
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 2010
@@ -27507,16 +27540,6 @@ entities:
     components:
     - type: Transform
       pos: -37.5,-20.5
-      parent: 2
-  - uid: 2025
-    components:
-    - type: Transform
-      pos: -28.5,-30.5
-      parent: 2
-  - uid: 2026
-    components:
-    - type: Transform
-      pos: -33.5,-30.5
       parent: 2
   - uid: 2027
     components:

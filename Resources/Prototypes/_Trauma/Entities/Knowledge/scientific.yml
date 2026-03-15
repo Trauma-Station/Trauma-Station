@@ -8,19 +8,3 @@
   - type: ThrowInsertKnowledge
     curve: !type:QuadraticSkillCurve
       skillScale: 2.9 # guaranteed success at lvl 30, dunk that can!
-
-- type: entity
-  parent: BaseScientificKnowledge
-  id: ChemistryKnowledge
-  name: Chemistry
-  components:
-  - type: Knowledge
-    experienceCost: 15
-
-- type: entity
-  parent: BaseScientificKnowledge
-  id: TechnologyKnowledge
-  name: Technology
-  components:
-  - type: Knowledge
-    experienceCost: 15

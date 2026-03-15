@@ -48,9 +48,6 @@
   components:
   - type: CanPerformCombo
     roundstartCombos:
-    - JudoGoldenBlast1
-    - JudoGoldenBlast2
-    - JudoGoldenBlast3
     - JudoThrow
     - JudoArmbar
     - JudoDiscombobulate # Due to supercode this needs to be below Armbar, otherwise it takes priority
@@ -82,9 +79,10 @@
     - SpinKick
     - KickUp
   - type: FastSpeed
-    # 1x to 2x move speed scaling with level
+    # 1x to 1.5x move speed scaling with level
     moveCurve: !type:LinearSkillCurve
       curveOffset: 1
+      skillScale: 0.5
     # 1x to 3x damage*momentum scaling with level
     damageScaleCurve: !type:LinearSkillCurve
       skillScale: 2

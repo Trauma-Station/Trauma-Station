@@ -36,7 +36,7 @@
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
       params:
         variation: 0.2
-        volume: -11
+        volume: -1
   - type: DisarmMalus
   - type: Item
     size: Large
@@ -49,17 +49,17 @@
     transmuteTo: null # No reforging
   - type: Parry
     maxParries: 3
-    maxReflects: 0
+    maxReflects: 6 # No Armok, a melee-focused antag needs some counter to ranged weapons. They don't even get all 6 anyawy because not 100 melee skill.
     soundOnReflect:
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
       params:
         variation: 0.2
-        volume: -11
+        volume: -1
     soundOnParry:
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
       params:
         variation: 0.2
-        volume: -11
+        volume: -1
 
 - type: entity
   name: vacuous lance
@@ -100,7 +100,7 @@
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
       params:
         variation: 0.2
-        volume: -11
+        volume: -1
   - type: DamageOtherOnHit
     damage:
       types: # Not a whole lot, you can throw them pretty damn quick if you set your keybinds right
@@ -184,6 +184,7 @@
     soundGunshot: /Audio/_DV/CosmicCult/projectile_razor.ogg
     fireRate: 1
     useKey: true
+    unaffectedBySkill: true # Cultists don't get shooting skill
   - type: AltFireMelee
     attackType: Heavy
   - type: RechargeBasicEntityAmmo
@@ -242,3 +243,16 @@
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true
+  - type: Parry
+    maxParries: 2
+    maxReflects: 4
+    soundOnReflect:
+      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
+      params:
+        variation: 0.2
+        volume: -1
+    soundOnParry:
+      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
+      params:
+        variation: 0.2
+        volume: -1

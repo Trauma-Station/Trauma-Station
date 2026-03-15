@@ -278,7 +278,7 @@
           type: [ Vox ]
         factor: -4
       - !type:InfectDisease # Trauma - miasma gives you diseases
-        probability: 0.2
+        probability: 0.05
         scaleProbability: true # more moles more disease
         conditions:
         - !type:MetabolizerTypeCondition
