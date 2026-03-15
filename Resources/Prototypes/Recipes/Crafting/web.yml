@@ -4,9 +4,6 @@
   startNode: start
   targetNode: tile
   category: construction-category-tiles
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
@@ -22,9 +19,6 @@
   startNode: start
   targetNode: coat
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
@@ -39,9 +33,6 @@
   startNode: start
   targetNode: jumpsuit
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
@@ -56,9 +47,6 @@
   startNode: start
   targetNode: jumpskirt
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
@@ -74,9 +62,6 @@
   startNode: start
   targetNode: cloth
   category: construction-category-materials
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
@@ -90,9 +75,6 @@
   startNode: start
   targetNode: shield
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
@@ -107,9 +89,6 @@
   startNode: start
   targetNode: boots
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:

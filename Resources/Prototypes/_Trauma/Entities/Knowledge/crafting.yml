@@ -6,7 +6,7 @@
 # Level 5 = 88 - 100
 
 - type: entity
-  parent: BaseQualityKnowledge
+  parent: BaseCraftingKnowledge
   id: FabricationKnowledge
   name: Fabrication
   components:
@@ -14,41 +14,41 @@
     experienceCost: 15
 
 - type: entity
-  parent: BaseQualityKnowledge
+  parent: BaseCraftingKnowledge
   id: WeaponsKnowledge
   name: Weaponsmith
 
 - type: entity
-  parent: BaseQualityKnowledge
+  parent: BaseCraftingKnowledge
   id: ArmorKnowledge
   name: Armorsmith
 
 - type: entity
-  parent: BaseQualityKnowledge
+  parent: BaseCraftingKnowledge
   id: MetalworkingKnowledge
   name: Metalworking
 
 - type: entity
-  parent: BaseQualityKnowledge
+  parent: BaseCraftingKnowledge
   id: CarvingKnowledge
   name: Carving
 
 - type: entity
-  parent: BaseQualityKnowledge
+  parent: BaseCraftingKnowledge
   id: GunsmithingKnowledge
   name: Gunsmithing
 
 - type: entity
-  parent: BaseQualityKnowledge
+  parent: BaseCraftingKnowledge
   id: MechanicsKnowledge
   name: Mechanics
 
 - type: entity
-  parent: BaseQualityKnowledge
+  parent: BaseCraftingKnowledge
   id: TailoringKnowledge
   name: Tailoring
 
 # - type: entity - Also effects quality, but has a few recipes.
-#   parent: BaseConstructionKnowledge
+#   parent: BaseCraftingKnowledge
 #   id: ElectronicsKnowledge
 #   name: Electronics
