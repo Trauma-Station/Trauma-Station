@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Popups;
 using Content.Trauma.Common.Chemistry;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Components;
@@ -13,7 +12,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 public sealed class FirstAidKnowledgeSystem : EntitySystem
 {
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
