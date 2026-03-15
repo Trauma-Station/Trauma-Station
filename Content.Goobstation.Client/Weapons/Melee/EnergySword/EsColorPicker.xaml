@@ -5,7 +5,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <controls:FancyWindow  xmlns="https://spacestation14.io"
                        xmlns:controls="using:Content.Client.UserInterface.Controls"
                        Title="{Loc 'escolorpicker-menu-title'}"
-                       MinSize="600 200"
+                       MinSize="600 250"
                        Resizable="False">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Margin="0 5 10 10" Orientation="Vertical">
