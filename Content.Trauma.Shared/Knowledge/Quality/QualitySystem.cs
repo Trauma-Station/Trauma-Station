@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Armor;
+using Content.Shared.Blocking;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Components;
@@ -66,6 +67,7 @@ public sealed class QualitySystem : EntitySystem
         SubscribeLocalEvent<DamageOtherOnHitComponent, ApplyQualityEvent>(OnSpearApplyQuality);
         SubscribeLocalEvent<GunComponent, ApplyQualityEvent>(OnGunApplyQuality);
         SubscribeLocalEvent<ProjectileComponent, ApplyQualityEvent>(OnProjectileApplyQuality);
+        SubscribeLocalEvent<BlockingComponent, ApplyQualityEvent>(OnShieldApplyQuality);
 
         // interactions
         SubscribeLocalEvent<QualityComponent, ConstructionChangedEvent>(OnConstructionChanged);
@@ -165,6 +167,39 @@ public sealed class QualitySystem : EntitySystem
     private void OnProjectileApplyQuality(Entity<ProjectileComponent> ent, ref ApplyQualityEvent args)
     {
         ent.Comp.Damage *= args.Modifier(1.125f);
+        Dirty(ent);
+    }
+
+    private void OnShieldApplyQuality(Entity<BlockingComponent> ent, ref ApplyQualityEvent args)
+    {
+        var modifierPlus = args.Modifier(1.125f);
+        var modifierMinus = args.Modifier(0.87f);
+        ent.Comp.PassiveBlockFraction *= modifierPlus;
+        ent.Comp.ActiveBlockFraction *= modifierPlus;
+
+        if (ent.Comp.PassiveBlockDamageModifer is { } passive)
+        {
+            foreach (var (key, number) in passive.Coefficients)
+            {
+                passive.Coefficients[key] = number * modifierMinus;
+            }
+            foreach (var (key, number) in passive.FlatReduction)
+            {
+                passive.FlatReduction[key] = number * modifierPlus;
+            }
+        }
+
+        if (ent.Comp.ActiveBlockDamageModifier is { } active)
+        {
+            foreach (var (key, number) in active.Coefficients)
+            {
+                active.Coefficients[key] = number * modifierMinus;
+            }
+            foreach (var (key, number) in active.FlatReduction)
+            {
+                active.FlatReduction[key] = number * modifierPlus;
+            }
+        }
         Dirty(ent);
     }
 
@@ -271,7 +306,7 @@ public sealed class QualitySystem : EntitySystem
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
 
-        ent.Comp.Quality = (added + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
+        ent.Comp.Quality = (added + lowestDelta * 5 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
             >= 88 => 5,
             >= 44 => 4,
