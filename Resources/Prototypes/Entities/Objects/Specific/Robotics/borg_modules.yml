@@ -1705,7 +1705,7 @@
     - state: icon-xenoborg-hypo
   - type: ItemBorgModule
     hands:
-    - item: DartGunXenoborg # Trauma
+    - item: DartGunXenoborg # Trauma replaced hypo
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-hypo-module }
 

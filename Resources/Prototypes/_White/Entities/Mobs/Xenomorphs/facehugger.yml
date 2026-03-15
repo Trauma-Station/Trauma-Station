@@ -153,3 +153,13 @@
     defaultChannel: Xenomorphivemind
     channels:
     - Xenomorphivemind
+  # <Trauma>
+  - type: ThermalVision
+    toggleAction: ToggleThermalVisionXenomorph
+    color: white
+    drawOverlay: false
+    lightRadius: 10
+    strength: 0
+    noise: 0
+    tint: 3, 3, 3
+  # </Trauma>

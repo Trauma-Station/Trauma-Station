@@ -37,7 +37,7 @@ public sealed class QualitySystem : EntitySystem
 
     private EntityQuery<QualityComponent> _query;
 
-    private static readonly EntProtoId CraftingKnowledge = "CraftingKnowledge";
+    private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
 
     // lowest quality will break in a few hits, highest quality will last much longer
     private static float[] _damageOnHitModifiers =
@@ -266,7 +266,7 @@ public sealed class QualitySystem : EntitySystem
             }
         }
 
-        var added = _knowledge.GetKnowledge(brain, CraftingKnowledge)?.Comp.NetLevel ?? -1;
+        var added = _knowledge.GetKnowledge(brain, FabricationKnowledge)?.Comp.NetLevel ?? -1;
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
@@ -289,7 +289,7 @@ public sealed class QualitySystem : EntitySystem
         ApplyQuality(ent);
 
         // TODO: limit skill gain based on the recipe used
-        _knowledge.AddExperience(brain, CraftingKnowledge, Math.Abs(ent.Comp.Quality / 2));
+        _knowledge.AddExperience(brain, FabricationKnowledge, Math.Abs(ent.Comp.Quality / 2));
 
         if (lowestId is not { } actualId)
             return;

@@ -9,7 +9,7 @@
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 0 # revs dont get automatic weapons knowledge :)
   practical:
-    RevolutionaryKnowledge: 2
+    GunsmithingKnowledge: 2
     WeaponsKnowledge: 2
 
 - type: construction
@@ -23,7 +23,7 @@
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 0
   practical:
-    RevolutionaryKnowledge: 2
+    GunsmithingKnowledge: 2
     WeaponsKnowledge: 2
 
 - type: construction
@@ -37,8 +37,8 @@
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 1
   practical:
-    RevolutionaryKnowledge: 3
-    WeaponsKnowledge: 4
+    GunsmithingKnowledge: 4
+    WeaponsKnowledge: 3
 
 - type: construction
   id: Flamethrower
@@ -51,8 +51,8 @@
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 1
   practical:
-    RevolutionaryKnowledge: 3
-    WeaponsKnowledge: 4
+    GunsmithingKnowledge: 4
+    WeaponsKnowledge: 3
 
 - type: construction
   id: Devastator
@@ -65,8 +65,8 @@
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 2
   practical:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 4
+    GunsmithingKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: RevIED
@@ -77,4 +77,7 @@
   objectType: Item
   theory:
     RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2
+  practical:
+    MechanicsKnowledge: 2
     WeaponsKnowledge: 2

@@ -6,3 +6,5 @@
   objectType: Item
   theory:
     BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1

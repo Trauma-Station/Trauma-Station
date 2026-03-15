@@ -5,12 +5,10 @@
   targetNode: axe
   objectType: Item
   theory:
-    SurvivalKnowledge: 0
-    WeaponsKnowledge: 1
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   practical:
     WeaponsKnowledge: 2
-    HandmadeKnowledge: 2
+    CarvingKnowledge: 2
 
 - type: construction
   id: BoneDaggerConstruction
@@ -19,9 +17,7 @@
   targetNode: dagger
   objectType: Item
   theory:
-    SurvivalKnowledge: 0
-    WeaponsKnowledge: 1
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   practical:
     WeaponsKnowledge: 2
-    HandmadeKnowledge: 2
+    CarvingKnowledge: 2

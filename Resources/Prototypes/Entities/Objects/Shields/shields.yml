@@ -185,6 +185,7 @@
       reflects:
       - NonEnergy
     # </Trauma>
+
 #Craftable shields
 
 - type: entity

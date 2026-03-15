@@ -241,10 +241,10 @@
   - type: PowerMonitoringCableNetworks
   - type: RadarConsole
   # <Trauma>
-  - type: LanguageSpeaker # TODO: coscult language
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
-    - RobotTalk # It still has a borg inside
+    - RobotTalk
     understands:
     - TauCetiBasic
     - RobotTalk

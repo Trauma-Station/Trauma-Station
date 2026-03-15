@@ -8,6 +8,8 @@
   # <Trauma>
   theory:
     ToysKnowledge: 2
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -20,6 +22,8 @@
   # <Trauma>
   theory:
     ToysKnowledge: 2
+  practical:
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -31,6 +35,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 2
+    FabricationKnowledge: 2
     ToysKnowledge: 2
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>

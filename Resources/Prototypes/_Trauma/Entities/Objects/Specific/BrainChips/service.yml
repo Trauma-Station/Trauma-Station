@@ -24,7 +24,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      HandmadeKnowledge: 26
+      FabricationKnowledge: 26
       SmokeablesKnowledge: 50
 
 - type: entity
@@ -46,4 +46,4 @@
   - type: KnowledgeGrantOnWear
     skills:
       CookingKnowledge: 10
-      HandmadeKnowledge: 10 # idk
+      FabricationKnowledge: 10 # idk

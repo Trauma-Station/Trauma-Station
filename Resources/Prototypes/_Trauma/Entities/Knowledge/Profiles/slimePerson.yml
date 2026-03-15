@@ -1,27 +1,27 @@
 - type: knowledgeProfile
-  id: Dwarf
-  pointsLimit: 5 # enough to max out a single skill, gimmick with fabrication being maxed
+  id: Slimeperson
+  pointsLimit: 10 
   mastery:
-    # Crafting Recipe Skills - Dwarves dont care for much but making stuff with their hands
+    # Crafting Recipe Skills
     CookingKnowledge: 0
     MaterialsKnowledge: 1
-    DoorsKnowledge: 0
-    AirlocksKnowledge: 0
-    ToysKnowledge: 0
+    DoorsKnowledge: 1
+    AirlocksKnowledge: 1
+    ToysKnowledge: 1
     BananiumKnowledge: 0 
     BotsKnowledge: 0 
-    FurnitureKnowledge: 0
-    InfrastructureKnowledge: 0
-    ElectronicsKnowledge: 0
-    WallsKnowledge: 0
+    FurnitureKnowledge: 1
+    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 1
+    WallsKnowledge: 1
     ScienceKnowledge: 0 
-    WindowsKnowledge: 0
+    WindowsKnowledge: 1
     SmokeablesKnowledge: 0 
     # Intelectual Skills
-    LiteracyKnowledge: 2
+    LiteracyKnowledge: 4
     MagicalLiteracyKnowledge: 0
     # Language Skills
-    LanguageNovuNederic: 3
+    LanguageBubblish: 3
     # Medical Skill
     SurgeryKnowledge: 0
     FirstAidKnowledge: 0
@@ -30,12 +30,12 @@
     ThrowingKnowledge: 0
     AthleticsKnowledge: 0
     StrengthKnowledge: 0
-    ToughnessKnowledge: 2
+    ToughnessKnowledge: 0
     # Combat Skill
-    MeleeKnowledge: 2
+    MeleeKnowledge: 0
     ShootingKnowledge: 0
     # Crafting Quality
-    FabricationKnowledge: 5
+    FabricationKnowledge: 0
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
     MetalworkingKnowledge: 0

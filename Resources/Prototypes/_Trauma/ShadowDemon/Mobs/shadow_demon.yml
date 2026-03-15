@@ -154,7 +154,7 @@
   # damageModiferFromLights: 0.5   # | How much damage immunity they get while in crawl form
   # actionCooldown: 4              # | The cooldown when they exit jaunt
   # actionCooldownAfterGrapple: 10 # | The cooldown they shoot a grapple
-  - type: LanguageSpeaker # TODO: coscult language
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - Eldritch

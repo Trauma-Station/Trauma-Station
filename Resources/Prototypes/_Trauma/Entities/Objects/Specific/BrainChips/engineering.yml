@@ -6,8 +6,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       # TODO: O LORD KILL THIS SLOP
-      HandmadeKnowledge: 50
-      TechnologyKnowledge: 50
+      FabricationKnowledge: 50
       MaterialsKnowledge: 50
       DoorsKnowledge: 50
       AirlocksKnowledge: 50
@@ -25,11 +24,10 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      HandmadeKnowledge: 26
-      TechnologyKnowledge: 26
+      FabricationKnowledge: 26
       MaterialsKnowledge: 26
       DoorsKnowledge: 26
-      AirlocksKnowledge: 26
+      AirlocksKnowledge: 16
       FurnitureKnowledge: 26
       InfrastructureKnowledge: 50
       ElectronicsKnowledge: 26
@@ -44,11 +42,10 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      HandmadeKnowledge: 26
-      TechnologyKnowledge: 26
+      FabricationKnowledge: 26
       MaterialsKnowledge: 26
       DoorsKnowledge: 26
-      AirlocksKnowledge: 26
+      AirlocksKnowledge: 16
       FurnitureKnowledge: 26
       InfrastructureKnowledge: 26
       ElectronicsKnowledge: 26
@@ -64,8 +61,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       # TODO: make this just 1 or 2 types
-      HandmadeKnowledge: 10
-      TechnologyKnowledge: 10
+      FabricationKnowledge: 10
       MaterialsKnowledge: 10
       DoorsKnowledge: 10
       AirlocksKnowledge: 10
