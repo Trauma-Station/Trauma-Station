@@ -1697,7 +1697,7 @@
   parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleHypo
   name: nocturine hypo xenoborg module
-  description: Module with a self-refilling nocturine dartgun. # Trauma
+  description: Module with a self-refilling nocturine hypospray.
   components:
   - type: Sprite
     layers:
