@@ -628,8 +628,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             >= 76 => 4,
             >= 51 => 3,
             >= 26 => 2,
-            >= 6 => 1,
-            >= 1 => 0,
+            >= 1 => 1,
+            _ => 0,
         };
 
     public override int GetMastery(EntityUid uid)
