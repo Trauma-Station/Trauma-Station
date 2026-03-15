@@ -5,6 +5,7 @@
   components:
   - type: Knowledge
     category: Medical
+    color: "#1865d8"
 
 - type: entity
   id: BasePhysicalKnowledge
@@ -14,6 +15,7 @@
   - type: Knowledge
     category: Physical
     costs: [0, 2, 4, 6, 8, 10] # combat skills cost 2x, no goku
+    color: "#16e720"
 
 - type: entity
   id: BaseWarKnowledge
@@ -23,6 +25,7 @@
   - type: Knowledge
     category: War
     costs: [0, 2, 4, 6, 8, 10]
+    color: "#f71818"
 
 - type: entity
   parent: BaseKnowledge
@@ -49,6 +52,7 @@
   components:
   - type: Knowledge
     category: Scientific
+    color: "#c01dcf"
 
 - type: entity
   parent: BaseKnowledge
@@ -57,7 +61,7 @@
   components:
   - type: Knowledge
     category: Construction
-    color: "#0ba881"
+    color: "#f39b29"
     experienceCost: 20
 
 - type: entity

@@ -87,6 +87,10 @@
   - GlassesJamjar
   - GlassesJensen
   - CheapSunglasses # Goobstation
+  # <Trauma>
+  - Eyepatch # Kept you waiting, huh?
+  - EyepatchFlipped # KIRYU-CHAN! also todo: fix this so it actually covers your fucking eye
+  # </Trauma>
 
 - type: loadoutGroup
   id: GroupTankHarness

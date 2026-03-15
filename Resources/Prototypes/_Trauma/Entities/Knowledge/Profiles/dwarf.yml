@@ -1,21 +1,47 @@
 - type: knowledgeProfile
   id: Dwarf
-  pointsLimit: 7 # stronger base but less flexibility
+  pointsLimit: 5 # enough to max out a single skill, gimmick with fabrication being maxed
   mastery:
-    # Standard space station skills
-    CookingKnowledge: 1
-    CraftingKnowledge: 3
-    HandmadeKnowledge: 3
-    SurvivalKnowledge: 1
-    WeaponsKnowledge: 3
+    # Crafting Recipe Skills - Dwarves dont care for much but making stuff with their hands
+    CookingKnowledge: 0
     MaterialsKnowledge: 1
-    DoorsKnowledge: 1
-    AirlocksKnowledge: 1
+    DoorsKnowledge: 0
+    AirlocksKnowledge: 0
     ToysKnowledge: 0
-    FurnitureKnowledge: 1
-    InfrastructureKnowledge: 2
-    WallsKnowledge: 1
-    WindowsKnowledge: 1
-    LiteracyKnowledge: 2 # Kinda dumb
-    TechnologyKnowledge: 0
-    MeleeKnowledge: 3
+    BananiumKnowledge: 0
+    BotsKnowledge: 0
+    FurnitureKnowledge: 0
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+    WallsKnowledge: 0
+    ScienceKnowledge: 0
+    WindowsKnowledge: 0
+    SmokeablesKnowledge: 0
+    # Intelectual Skills
+    LiteracyKnowledge: 2
+    MagicalLiteracyKnowledge: 0
+    # Language Skills
+    LanguageNovuNederic: 3
+    # Medical Skill
+    SurgeryKnowledge: 0
+    FirstAidKnowledge: 0
+    ChemistryKnowledge: 0
+    # Physical Skill
+    ThrowingKnowledge: 0
+    AthleticsKnowledge: 0
+    StrengthKnowledge: 0
+    ToughnessKnowledge: 2
+    # Combat Skill
+    MeleeKnowledge: 2
+    ShootingKnowledge: 0
+    # Crafting Quality
+    FabricationKnowledge: 5
+    WeaponsKnowledge: 0
+    ArmorKnowledge: 0
+    MetalworkingKnowledge: 0
+    CarvingKnowledge: 0
+    GunsmithingKnowledge: 0
+    MechanicsKnowledge: 0
+    TailoringKnowledge: 0
+    # Misc Skill
+    JanitorKnowledge: 0

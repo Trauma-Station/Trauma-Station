@@ -4505,3 +4505,12 @@ Entries:
   id: 529
   time: '2026-03-14T23:19:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1314
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: Eyepatches are now pickable in loadout. Both the normal and flipped one.
+  - type: Remove
+    message: Removed
+  id: 530
+  time: '2026-03-15T07:27:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1315

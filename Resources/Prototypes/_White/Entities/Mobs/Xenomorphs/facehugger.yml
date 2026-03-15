@@ -153,3 +153,22 @@
     defaultChannel: Xenomorphivemind
     channels:
     - Xenomorphivemind
+  # <Trauma>
+  - type: ThermalVision
+    toggleAction: ToggleThermalVisionXenomorph
+    color: white
+    drawOverlay: false
+    lightRadius: 10
+    strength: 0
+    noise: 0
+    tint: 3, 3, 3
+  - type: Destructible # This prevents GIGA lag
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+  # </Trauma>

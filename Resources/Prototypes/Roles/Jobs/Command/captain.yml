@@ -6,22 +6,21 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 4h
+      time: 1h # Trauma was 4
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 4h
+      time: 1h # Trauma was 4
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 4h
+      time: 1h # Trauma was 4
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 4h
+      time: 1h # Trauma was 4
     - !type:DepartmentTimeRequirement
       department: Command
       time: 4h
   guides: # goobstation
   - Command
-  goobcoins: 50 #Goob content
   weight: 20
   startingGear: CaptainGear
   icon: "JobIconCaptain"

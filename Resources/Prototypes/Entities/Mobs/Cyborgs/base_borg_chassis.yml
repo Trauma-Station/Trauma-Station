@@ -618,3 +618,11 @@
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
+  # <Trauma>
+  - type: KnowledgeGrant
+    skills:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 26
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
+  # </Trauma>

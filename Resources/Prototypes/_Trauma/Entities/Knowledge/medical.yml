@@ -22,3 +22,11 @@
       skillScale: -1 # decrease with skill rather than increase
       curveOffset: 1 # multiplying time so has to be centered at 1
       curveScale: 1.4
+
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: ChemistryKnowledge
+  name: Chemistry
+  components:
+  - type: Knowledge
+    experienceCost: 15

@@ -73,6 +73,9 @@
   parent: BaseConstructionKnowledge
   id: SpiderCraftKnowledge
   name: Spider Webs
+  components:
+  - type: Knowledge
+    costs: null # Spider only
 
 - type: entity
   parent: BaseConstructionKnowledge
