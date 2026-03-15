@@ -1584,7 +1584,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 1
-    useQuality: false
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -1602,7 +1602,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 1
-    useQuality: false
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -1620,7 +1620,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 1
-    useQuality: false
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -1638,7 +1638,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 1
-    useQuality: false
+  useQuality: false
   # </Trauma>
 
 #conveyor
