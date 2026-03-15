@@ -27,15 +27,6 @@ public sealed class FirstAidKnowledgeSystem : EntitySystem
     {
         var level = _knowledge.GetLevel(ent.Owner);
         if (args.Delay > TimeSpan.Zero)
-        {
             args.Delay *= ent.Comp.Curve.GetCurve(level);
-            return;
-        }
-
-        if (level >= ent.Comp.MinSkill)
-            return;
-
-        _popup.PopupClient(Loc.GetString("knowledge-inject-low-skill"), args.User, args.User);
-        args.Delay += ent.Comp.MinTime;
     }
 }
