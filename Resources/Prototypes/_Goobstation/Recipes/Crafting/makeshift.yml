@@ -6,6 +6,6 @@
   objectType: Item
   theory:
     FabricationKnowledge: 2
-  practical: 
+  practical:
     MetalworkingKnowledge: 1
     ElectronicsKnowledge: 1

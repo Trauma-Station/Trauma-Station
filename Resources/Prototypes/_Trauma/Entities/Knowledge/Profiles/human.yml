@@ -1,7 +1,7 @@
 # Default for any species that has no knowledge profile of its own
 - type: knowledgeProfile
   id: Human
-  pointsLimit: 10 # Most points to work with for customization. 
+  pointsLimit: 10 # Most points to work with for customization.
   mastery:
     # Crafting Recipe Skills - 1 is standard unless stated otherwise.
     CookingKnowledge: 0

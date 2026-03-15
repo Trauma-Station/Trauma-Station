@@ -1,7 +1,7 @@
 # Default for any species that has no knowledge profile of its own
 - type: knowledgeProfile
   id: Mothperson
-  pointsLimit: 5 
+  pointsLimit: 5
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
@@ -9,15 +9,15 @@
     DoorsKnowledge: 1
     AirlocksKnowledge: 1
     ToysKnowledge: 1
-    BananiumKnowledge: 0 
-    BotsKnowledge: 0 
+    BananiumKnowledge: 0
+    BotsKnowledge: 0
     FurnitureKnowledge: 1
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
     WallsKnowledge: 1
-    ScienceKnowledge: 0 
+    ScienceKnowledge: 0
     WindowsKnowledge: 1
-    SmokeablesKnowledge: 0 
+    SmokeablesKnowledge: 0
     # Intelectual Skills
     LiteracyKnowledge: 4
     MagicalLiteracyKnowledge: 0

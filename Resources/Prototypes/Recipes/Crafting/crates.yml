@@ -22,7 +22,7 @@
   # <Trauma>
   theory:
     FurnitureKnowledge: 1
-  practical: 
+  practical:
     MetalworkingKnowledge: 1
   # </Trauma>
 
@@ -37,7 +37,7 @@
   theory:
     FurnitureKnowledge: 1
     ElectronicsKnowledge: 1
-  practical: 
+  practical:
     MetalworkingKnowledge: 1
   # </Trauma>
 
@@ -52,7 +52,7 @@
   # <Trauma>
   theory:
     FurnitureKnowledge: 1
-  practical: 
+  practical:
     MetalworkingKnowledge: 1
   # </Trauma>
 
@@ -79,7 +79,7 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 1
-  practical: 
+  practical:
     CarvingKnowledge: 1
   # </Trauma>
 
@@ -144,6 +144,6 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 1
-  practical: 
+  practical:
     CarvingKnowledge: 2
   # </Trauma>

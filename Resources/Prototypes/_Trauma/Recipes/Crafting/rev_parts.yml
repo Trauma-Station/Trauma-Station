@@ -13,7 +13,7 @@
     FabricationKnowledge: 1
     MetalworkingKnowledge: 1
   useQuality: false
-  
+
 - type: construction
   id: RevBolt
   graph: RevParts
@@ -27,7 +27,7 @@
     FabricationKnowledge: 1
     MetalworkingKnowledge: 1
   useQuality: false
-  
+
 - type: construction
   id: RevNut
   graph: RevParts
@@ -41,4 +41,4 @@
     FabricationKnowledge: 1
     MetalworkingKnowledge: 1
   useQuality: false
-  
+
