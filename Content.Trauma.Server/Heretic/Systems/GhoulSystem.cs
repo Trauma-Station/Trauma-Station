@@ -24,6 +24,7 @@ using Content.Shared.NPC.Systems;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Heretic.Abilities;
 using Content.Server.Heretic.EntitySystems;
