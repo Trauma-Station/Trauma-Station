@@ -103,6 +103,10 @@
   - type: AutoEmote # To Do, find out why this doesnt work
     emotes:
     - TweakBox
+  - type: Butcherable
+    spawned:
+      - id: SpawnLootToolboxMimic
+      - id: ToolboxMimic
 
 - type: entity
   name: emergency toolbox
@@ -128,10 +132,6 @@
         Blunt: 12
     soundHit:
       path: "/Audio/Weapons/smash.ogg"
-  - type: Butcherable
-    spawned:
-      - id: SpawnLootToolboxMimic
-      - id: ToolboxMimic
 
 # Locker
 
@@ -222,6 +222,10 @@
   - type: Stamina
     baseCritThreshold: 999
   - type: FlashImmunity
+  - type: Butcherable
+    spawned:
+      - id: SpawnLootLockerMimic
+      - id: ShieldMimic
 
 - type: entity
   name: maintenance closet
@@ -239,10 +243,6 @@
   - type: TriggerOnDamage
   - type: PolymorphOnTrigger
     polymorph: MimicLocker
-  - type: Butcherable
-    spawned:
-      - id: SpawnLootLockerMimic
-      - id: ShieldMimic
   - type: Transform
     anchored: true
 
@@ -380,6 +380,10 @@
     solution: ammo
   - type: SolutionTransfer
     maxTransferAmount: 5
+  - type: Butcherable
+    spawned:
+      - id: SpawnLootVendorMimic
+      - id: GunMimic
 
 - type: entity
   name: Dr. Gibb Vendor
@@ -400,9 +404,5 @@
   - type: TriggerOnDamage
   - type: PolymorphOnTrigger
     polymorph: MimicVendor
-  - type: Butcherable
-    spawned:
-      - id: SpawnLootVendorMimic
-      - id: GunMimic
   - type: Transform
     anchored: true
