@@ -4686,3 +4686,10 @@ Entries:
   id: 550
   time: '2026-03-16T16:34:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1358
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed headrevs not seeing the conversion doafter.
+  id: 551
+  time: '2026-03-16T17:41:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1362
