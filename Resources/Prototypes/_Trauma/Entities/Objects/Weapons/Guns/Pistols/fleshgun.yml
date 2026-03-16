@@ -6,13 +6,14 @@
   suffix: Unremoveable
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/mimic.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Pistols/fleshgun.rsi
     state: icon
   - type: Item
     size: Ginormous
   - type: Unremoveable
   - type: Gun
     fireRate: 2
+    projectileSpeed: 20
     clumsyProof: true
     resetOnHandSelected: false
     soundEmpty: null

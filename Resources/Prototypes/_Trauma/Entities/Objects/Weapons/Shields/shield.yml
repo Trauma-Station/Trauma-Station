@@ -3,13 +3,12 @@
   parent: BaseItem
   id: ShieldMimic
   description: A large fleshy closet door, could be used as a shield...
-  abstract: true
   components:
     - type: Sprite
-      sprite: Objects/Weapons/Melee/fleshshield.rsi
+      sprite: _Trauma/Objects/Weapons/Melee/fleshshield.rsi
       state: icon
     - type: Item
-      sprite: Objects/Weapons/Melee/fleshshield.rsi
+      sprite: _Trauma/Objects/Weapons/Melee/fleshshield.rsi
       size: Ginormous
     - type: Blocking
       passiveBlockFraction: .3
@@ -54,3 +53,8 @@
     - type: DisarmMalus # Goobstation
       malus: 1
     - type: Unremoveable
+    - type: EmitSoundOnPickup
+      sound:
+        path: /Audio/Effects/gib2.ogg
+        params:
+          volume: -7
