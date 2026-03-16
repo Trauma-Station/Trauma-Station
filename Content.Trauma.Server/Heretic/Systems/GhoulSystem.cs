@@ -24,7 +24,6 @@ using Content.Shared.NPC.Systems;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Heretic.Abilities;
@@ -49,7 +48,6 @@ using Content.Shared.Gibbing;
 using Content.Shared.NPC.Components;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Roles.Components;
-using Content.Trauma.Common.Body;
 using Content.Trauma.Server.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
 using Content.Trauma.Shared.Heretic.Systems;
@@ -96,7 +94,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         base.Initialize();
 
         UpdatesAfter.Add(typeof(HolyFlammableSystem));
-        SubscribeLocalEvent<GhoulComponent, BodyInitEvent>(OnBodyInit);
+        SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnGhoulInit, after: [typeof(BodyCacheSystem)]);
         SubscribeLocalEvent<GhoulComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<GhoulComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<GhoulComponent, MobStateChangedEvent>(OnMobStateChange);
@@ -112,13 +110,14 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
 
-        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit);
+        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit,
+            after: [typeof(BodyCacheSystem)]);
         SubscribeLocalEvent<VoicelessDeadComponent, ComponentShutdown>(OnVoicelessDeadShutdown);
 
         SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
 
-        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit);
+        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit, after: [typeof(BodyCacheSystem)]);
         SubscribeLocalEvent<ShatteredRisenComponent, HandCountChangedEvent>(OnHandCountChanged);
     }
 
@@ -199,6 +198,9 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
     private void OnHandCountChanged(Entity<ShatteredRisenComponent> ent, ref HandCountChangedEvent args)
     {
+        if (TerminatingOrDeleted(ent))
+            return;
+
         RefreshShatteredHands(ent);
     }
 
@@ -492,7 +494,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         _antag.SendBriefing(ent, brief, Color.MediumPurple, sound);
     }
 
-    private void OnBodyInit(Entity<GhoulComponent> ent, ref BodyInitEvent args)
+    private void OnGhoulInit(Entity<GhoulComponent> ent, ref MapInitEvent args)
     {
         GhoulifyEntity(ent);
     }

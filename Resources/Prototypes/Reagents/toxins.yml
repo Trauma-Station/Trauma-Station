@@ -494,7 +494,8 @@
   flavor: bitter
   color: "#FFFFE5"
   metabolisms:
-    Bloodstream:
+    # <Trauma> - split digestion and bloodstream
+    Digestion:
       effects:
       - !type:PopupMessage
         conditions:
@@ -511,6 +512,9 @@
         - !type:MetabolizerTypeCondition
           type: [ Animal, Vox, Plant ]
           inverted: true
+    Bloodstream:
+      effects:
+    # </Trauma>
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition

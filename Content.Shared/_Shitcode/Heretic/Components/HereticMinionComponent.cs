@@ -10,6 +10,9 @@ public sealed partial class HereticMinionComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? BoundHeretic;
 
+    [DataField, AutoNetworkedField]
+    public NetEntity HereticMind;
+
     [DataField]
     public EntityUid? CreationRitual;
 
