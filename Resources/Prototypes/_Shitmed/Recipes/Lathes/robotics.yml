@@ -370,11 +370,6 @@
 
 - type: latheRecipe
   parent: BaseAugmentRecipe
-  id: AugmentPaperworkPanelElectronics
-  result: AugmentPaperworkPanelElectronics
-
-- type: latheRecipe
-  parent: BaseAugmentRecipe
   id: AugmentStrengthCasing
   result: AugmentStrengthCasing
 

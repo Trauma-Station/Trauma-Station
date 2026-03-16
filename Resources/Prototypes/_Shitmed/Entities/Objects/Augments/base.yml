@@ -1,12 +1,12 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: OrganBaseInternal
   id: BaseAugment
   components:
   - type: Augment
   - type: SurgeryTool
     ignoreToggle: true # ItemToggle is used for augment logic not surgical tool usability
-  - type: Organ
+  - type: InternalOrgan
     intCap: 30
     integrity: 30
     integrityThresholds:

@@ -17,7 +17,7 @@
   - type: Organ
     category: BrainChip
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   - type: OrganExamine
     examine: brainchip-detail-examine
   - type: RenamingOrgan

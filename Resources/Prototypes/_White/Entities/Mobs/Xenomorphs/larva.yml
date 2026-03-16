@@ -57,7 +57,7 @@
     price: 250
   - type: InternalOrgan
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: Organ
     category: XenomorphLarva
   # - type: GuideHelp
