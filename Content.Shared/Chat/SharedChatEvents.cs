@@ -1,4 +1,7 @@
-using Content.EinsteinEngines.Shared.Language; // Trauma
+// <Trauma>
+using Content.Common.Chat;
+using Content.EinsteinEngines.Common.Language;
+// </Trauma>
 using Content.Shared.Inventory;
 using Content.Shared.Radio;
 using Content.Shared.Speech;

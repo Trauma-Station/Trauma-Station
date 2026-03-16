@@ -7,7 +7,6 @@ using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Goobstation.Shared.Mindcontrol;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
-using Content.Starlight.Shared.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
@@ -25,6 +24,7 @@ using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
+using Content.Starlight.Common.CollectiveMind;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems;
 

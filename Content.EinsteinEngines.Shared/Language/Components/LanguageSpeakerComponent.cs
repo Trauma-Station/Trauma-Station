@@ -3,11 +3,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.EinsteinEngines.Common.Language;
 using Content.EinsteinEngines.Shared.Language.Systems;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.EinsteinEngines.Shared.Language.Components;
 

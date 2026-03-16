@@ -11,8 +11,8 @@ using Content.Server.Speech.Components;
 using Content.EinsteinEngines.Shared.Language;
 using Content.EinsteinEngines.Shared.Language.Systems;
 using Content.Shitcode.Shared.Wizard.Chuuni;
-using Content.Starlight.Shared.CollectiveMind;
 using Content.Trauma.Common.Speech;
+using Content.Starlight.Common.CollectiveMind;
 // </Trauma>
 using System.Globalization;
 using System.Linq;

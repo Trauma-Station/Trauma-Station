@@ -42,6 +42,7 @@
   <Project Path="Content.Trauma.Shared/Content.Trauma.Shared.csproj" />
   <Project Path="Content.Trauma.Client/Content.Trauma.Client.csproj" />
   <Project Path="Content.Trauma.Common/Content.Trauma.Common.csproj" />
+  <Project Path="Content.Common/Content.Common.csproj" />
   <Project Path="Content.CorvaxNext.Server/Content.CorvaxNext.Server.csproj" />
   <Project Path="Content.CorvaxNext.Shared/Content.CorvaxNext.Shared.csproj" />
   <Project Path="Content.CorvaxNext.Client/Content.CorvaxNext.Client.csproj" />
@@ -85,6 +86,7 @@
   <Project Path="Content.Starlight.Server/Content.Starlight.Server.csproj" />
   <Project Path="Content.Starlight.Shared/Content.Starlight.Shared.csproj" />
   <Project Path="Content.Starlight.Client/Content.Starlight.Client.csproj" />
+  <Project Path="Content.Starlight.Common/Content.Starlight.Common.csproj" />
   <Project Path="Content.VG.Shared/Content.VG.Shared.csproj" />
   <Project Path="Content.White.Server/Content.White.Server.csproj" />
   <Project Path="Content.White.Shared/Content.White.Shared.csproj" />

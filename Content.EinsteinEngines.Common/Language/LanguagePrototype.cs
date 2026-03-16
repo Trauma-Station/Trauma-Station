@@ -5,10 +5,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Chat;
+using Content.Common.Chat;
 using Robust.Shared.Prototypes;
 
-namespace Content.EinsteinEngines.Shared.Language;
+namespace Content.EinsteinEngines.Common.Language;
 
 [Prototype]
 public sealed partial class LanguagePrototype : IPrototype

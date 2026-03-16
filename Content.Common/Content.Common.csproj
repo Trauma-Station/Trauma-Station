@@ -7,10 +7,9 @@
 	<Import Project="../MSBuild/Content.props" />
 
 	<ItemGroup>
-      <ProjectReference Include="../Content.ModuleManager/Content.ModuleManager.csproj" />
-	  <ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
-      <ProjectReference Include="../Content.Common/Content.Common.csproj" />
-    </ItemGroup>
+		<ProjectReference Include="../Content.ModuleManager/Content.ModuleManager.csproj" />
+		<ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
+	</ItemGroup>
 
 	<Import Project="../RobustToolbox/Imports/Shared.props" />
 	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
