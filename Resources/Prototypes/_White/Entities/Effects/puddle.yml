@@ -55,3 +55,8 @@
   - type: Tag
     tags:
     - DNASolutionScannable
+  # <Trauma>
+  - type: FadingTimedDespawn
+    lifetime: 180
+    fadeOutTime: 60
+  # </Trauma>
