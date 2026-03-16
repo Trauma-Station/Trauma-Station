@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ MobSpaceBasic, MobComat ]
+  parent: [ MobSpaceBasic, MobCombat ]
   id: BaseMobMimic
   description: The last thing you'll ever see.
   components:
