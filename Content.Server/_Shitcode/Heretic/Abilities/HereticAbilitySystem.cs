@@ -68,7 +68,6 @@ using Content.Server.Cloning;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Heretic.Components;
-using Content.Shared.Movement.Systems;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Hands.Components;
@@ -109,7 +108,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly PvsOverrideSystem _pvs = default!;
     [Dependency] private readonly CloningSystem _cloning = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
