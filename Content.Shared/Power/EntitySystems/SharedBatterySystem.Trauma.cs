@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.White.Common.Blocking;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Power.Components;
@@ -28,7 +29,4 @@ public abstract partial class SharedBatterySystem
 
         return GetBattery(cell);
     }
-
-    public bool ShouldDisable(EntityUid uid)
-        => HasComp<RechargeableBlockingComponent>(uid);
 }

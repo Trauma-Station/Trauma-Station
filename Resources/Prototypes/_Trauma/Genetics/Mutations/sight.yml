@@ -40,6 +40,7 @@
   - type: Mutation
     instability: 35
     difficulty: 18
+    rarity: Mythical
     # no conflict with blindness because thats some professor X shit
   - type: ComponentMutation
     added:
@@ -81,4 +82,5 @@
   components:
   - type: Mutation
     difficulty: 16
+    rarity: Mythical
   # TODO: move out of goob hulk

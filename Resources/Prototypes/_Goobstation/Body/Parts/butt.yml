@@ -15,7 +15,7 @@
   - type: Organ
     category: Butt
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: Tag
     tags:
     - Butt

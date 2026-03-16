@@ -70,6 +70,7 @@
   - type: Mutation
     instability: 10
     difficulty: 16
+    rarity: Rare
     conflicts:
     - MutationAcromegaly
     - MutationGigantism

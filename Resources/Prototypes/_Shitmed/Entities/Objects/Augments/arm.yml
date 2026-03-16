@@ -5,6 +5,8 @@
   components:
   - type: Sprite
     sprite: _Shitmed/Objects/Augments/arm.rsi
+  - type: ChildOrgan
+    parents: [ ArmLeft, ArmRight ]
   - type: Item
     size: Huge
   - type: Organ
@@ -103,15 +105,6 @@
   components:
   - type: Tag
     tags: [ AugmentSurgeryToolElectronics ]
-
-- type: entity
-  parent: BaseAugmentElectronics
-  id: AugmentPaperworkPanelElectronics
-  name: paperwork tools panel electronics
-  description: An electronics board that programs a tool panel to hold a specific type of item. This one holds paperwork tools.
-  components:
-  - type: Tag
-    tags: [ AugmentPaperworkToolElectronics ]
 
 - type: entity
   parent: BaseAugmentElectronics
@@ -214,25 +207,6 @@
       - HandLabeler
   - type: Construction
     node: "botany tools panel"
-
-- type: entity
-  parent: BaseAugmentToolPanel
-  id: AugmentPaperworkPanel
-  name: paperwork tools panel augment
-  description: A panel that can be augmented into a patient's arm to provide them access to its contents. This one can hold paperwork tools.
-  components:
-  - type: Sprite
-    state: paperwork
-  - type: Storage
-    whitelist:
-      tags:
-      - Folder
-      components:
-      - HandLabeler
-      - Stamp
-      - TapeRecorder
-  - type: Construction
-    node: "paperwork tools panel"
 
 - type: entity
   parent: BaseAugmentToolPanel

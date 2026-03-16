@@ -19,7 +19,7 @@
   - type: Organ
     category: Hypoport
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   - type: OrganExamine
     examine: hypoport-detail-examine
   - type: GuideHelp
