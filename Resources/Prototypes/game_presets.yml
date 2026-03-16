@@ -141,6 +141,7 @@
   showInVote: true
   description: secret-description
   rules:
+  - Insurgency # Trauma
   - Secret
 
 - type: gamePreset
