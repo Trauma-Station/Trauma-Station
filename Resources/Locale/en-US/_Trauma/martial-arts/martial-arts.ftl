@@ -70,11 +70,6 @@ cqc-consecutive = CONSECUTIVE! C! Q! C!
 spacebear-bearjaws = BITE!
 spacebear-pawslam = PAW SLAM!
 spacebear-smokey = SMOKEY!
-judo-discombobulate = DISCOMBOBULATE!
-judo-eyepoke = EYE POKE!
-judo-throw = THROW!
-judo-armbar = ARMBAR!
-judo-wheelthrow = WHEELTHROW!
 
 no-martial-art = No Martial Art
 
