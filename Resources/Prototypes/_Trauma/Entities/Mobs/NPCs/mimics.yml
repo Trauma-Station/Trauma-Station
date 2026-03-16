@@ -229,22 +229,15 @@
 
 - type: entity
   name: maintenance closet
-  parent: ClosetBase
+  parent: ClosetSteelBase
   id: LockerMimic
   suffix: Mimic
   description: It's a storage unit. Why is it breathing?
   components:
-  - type: Sprite
-    sprite: Structures/Storage/closet.rsi
-    layers:
-    - state: generic
-    - state: generic_door
   - type: TriggerOnActivate
   - type: TriggerOnDamage
   - type: PolymorphOnTrigger
     polymorph: MimicLocker
-  - type: Transform
-    anchored: true
 
 # Vendor
 - type: entity
@@ -349,7 +342,7 @@
   - type: CombatMode
 
 - type: entity
-  parent: BaseArrow
+  parent: BaseItem
   id: BulletMimic
   name: can of whoopass
   description: A sodacan with teeth sticking out of the top.
@@ -384,6 +377,31 @@
     spawned:
       - id: SpawnLootVendorMimic
       - id: GunMimic
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    embedOnThrow: false
+  - type: ThrowingAngle
+    angle: 0
+  - type: Ammo
+    muzzleFlash: null
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.2
+        density: 5
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.3,0.1,-0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
 
 - type: entity
   name: Dr. Gibb Vendor
@@ -404,5 +422,3 @@
   - type: TriggerOnDamage
   - type: PolymorphOnTrigger
     polymorph: MimicVendor
-  - type: Transform
-    anchored: true
