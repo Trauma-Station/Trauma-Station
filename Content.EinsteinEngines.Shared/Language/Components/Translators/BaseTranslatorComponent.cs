@@ -1,5 +1,5 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Content.EinsteinEngines.Common.Language;
 
 namespace Content.EinsteinEngines.Shared.Language.Components.Translators;
 

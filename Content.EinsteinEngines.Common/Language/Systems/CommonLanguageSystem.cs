@@ -1,4 +1,5 @@
 using Robust.Shared.Prototypes;
+using Content.EinsteinEngines.Common.Language.Components;
 
 namespace Content.EinsteinEngines.Common.Language.Systems;
 
@@ -25,4 +26,9 @@ public abstract class CommonLanguageSystem : EntitySystem
     ///     This method is meant to be used in <see cref="ObfuscationMethod"/> to provide stable obfuscation.
     /// </summary>
     public abstract int PseudoRandomNumber(int seed, int min, int max);
+
+    /// <summary>
+    ///     Returns the current language of the given entity, assumes Universal if it's not a language speaker.
+    /// </summary>
+    public abstract LanguagePrototype GetLanguage(Entity<LanguageSpeakerComponent?> ent);
 }

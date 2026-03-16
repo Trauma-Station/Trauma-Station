@@ -2,6 +2,7 @@ using System.Linq;
 using System.Text;
 using Content.EinsteinEngines.Common.Language;
 using Content.EinsteinEngines.Common.Language.Systems;
+using Content.EinsteinEngines.Common.Language.Components;
 using Content.EinsteinEngines.Shared.Language.Components;
 using Content.EinsteinEngines.Shared.Language.Events;
 using Content.Shared.GameTicking;
@@ -31,7 +32,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         base.Initialize();
 
         Universal = _prototype.Index<LanguagePrototype>(UniversalPrototype);
-         // Initialize the Psychomantic prototype
+        // Initialize the Psychomantic prototype
         Psychomantic = _prototype.Index<LanguagePrototype>(PsychomanticPrototype);
 
         SubscribeLocalEvent<UniversalLanguageSpeakerComponent, DetermineEntityLanguagesEvent>(OnDetermineUniversalLanguages);
@@ -113,7 +114,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
     /// <summary>
     ///     Returns the current language of the given entity, assumes Universal if it's not a language speaker.
     /// </summary>
-    public LanguagePrototype GetLanguage(Entity<LanguageSpeakerComponent?> ent)
+    public override LanguagePrototype GetLanguage(Entity<LanguageSpeakerComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp, logMissing: false)
             || string.IsNullOrEmpty(ent.Comp.CurrentLanguage)

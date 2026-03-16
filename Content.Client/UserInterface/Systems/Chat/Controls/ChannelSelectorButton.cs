@@ -3,7 +3,6 @@ using Content.Starlight.Common.CollectiveMind;
 // </Trauma>
 using System.Numerics;
 using Content.Shared.Chat;
-using Content.Starlight.Common.CollectiveMind;
 
 namespace Content.Client.UserInterface.Systems.Chat.Controls;
 

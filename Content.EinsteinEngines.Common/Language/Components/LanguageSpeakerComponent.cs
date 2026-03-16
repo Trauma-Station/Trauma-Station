@@ -3,13 +3,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.EinsteinEngines.Common.Language;
-using Content.EinsteinEngines.Shared.Language.Systems;
+using Content.EinsteinEngines.Common.Language.Systems;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.EinsteinEngines.Shared.Language.Components;
+namespace Content.EinsteinEngines.Common.Language.Components;
 
 /// <summary>
 ///     Stores the current state of the languages the entity can speak and understand.
@@ -18,7 +17,7 @@ namespace Content.EinsteinEngines.Shared.Language.Components;
 ///     All fields of this component are populated during a DetermineEntityLanguagesEvent.
 ///     They are not to be modified externally.
 /// </remarks>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedLanguageSystem), typeof(SharedTranslatorSystem), typeof(CommonKnowledgeSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(CommonLanguageSystem), typeof(CommonTranslatorSystem), typeof(CommonKnowledgeSystem))]
 [AutoGenerateComponentState(true)]
 public sealed partial class LanguageSpeakerComponent : Component
 {
@@ -29,7 +28,7 @@ public sealed partial class LanguageSpeakerComponent : Component
     ///     Other listeners will hear the entity speak in this language.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public ProtoId<LanguagePrototype> CurrentLanguage = SharedLanguageSystem.FallbackLanguagePrototype; // The Language system will override it on mapinit
+    public ProtoId<LanguagePrototype> CurrentLanguage = CommonLanguageSystem.FallbackLanguagePrototype; // The Language system will override it on mapinit
 
     /// <summary>
     ///     List of languages this entity can speak at the current moment.

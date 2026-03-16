@@ -8,10 +8,11 @@ using System.Linq;
 using Content.Shared.Examine;
 using Content.Shared.Toggleable; // Ignore, touching for REUSE Headers.
 using Content.EinsteinEngines.Shared.Language.Components.Translators;
+using Content.EinsteinEngines.Common.Language.Systems;
 
 namespace Content.EinsteinEngines.Shared.Language.Systems;
 
-public abstract class SharedTranslatorSystem : EntitySystem
+public abstract class SharedTranslatorSystem : CommonTranslatorSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
