@@ -6,6 +6,7 @@
   - type: Mutation
     instability: 25
     difficulty: 16
+    rarity: Rare
     conflicts:
     - MutationThermalAdaptation
     - MutationPressureAdaptation
@@ -44,6 +45,7 @@
   - type: Mutation
     instability: 35
     difficulty: 32 # powergamers delight
+    rarity: Mythical
     conflicts:
     - MutationPressureAdaptation
   - type: RemovesMutation
