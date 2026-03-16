@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <!-- <Trauma> -->
+    <ProjectReference Include="../Content.DV.Common/Content.DV.Common.csproj" />
     <ProjectReference Include="../Content.EinsteinEngines.Common/Content.EinsteinEngines.Common.csproj" />
     <ProjectReference Include="../Content.Goobstation.Common/Content.Goobstation.Common.csproj" />
     <ProjectReference Include="../Content.Lavaland.Common/Content.Lavaland.Common.csproj" />

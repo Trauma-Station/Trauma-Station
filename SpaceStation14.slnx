@@ -48,6 +48,7 @@
   <Project Path="Content.DV.Server/Content.DV.Server.csproj" />
   <Project Path="Content.DV.Shared/Content.DV.Shared.csproj" />
   <Project Path="Content.DV.Client/Content.DV.Client.csproj" />
+  <Project Path="Content.DV.Common/Content.DV.Common.csproj" />
   <Project Path="Content.EinsteinEngines.Server/Content.EinsteinEngines.Server.csproj" />
   <Project Path="Content.EinsteinEngines.Shared/Content.EinsteinEngines.Shared.csproj" />
   <Project Path="Content.EinsteinEngines.Client/Content.EinsteinEngines.Client.csproj" />

@@ -9,7 +9,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.CartridgeLoader.Cartridges;
+namespace Content.DV.Common.CartridgeLoader.Cartridges;
 
 [Serializable, NetSerializable]
 public sealed class MailMetricUiState : BoundUserInterfaceState
@@ -52,7 +52,7 @@ public partial record struct MailStats
     {
         var totalMail = TotalMail(unopenedCount);
         return (totalMail > 0)
-            ? Math.Round((double)OpenedCount / totalMail * 100, 2)
+            ? Math.Round((double) OpenedCount / totalMail * 100, 2)
             : 0;
     }
 }

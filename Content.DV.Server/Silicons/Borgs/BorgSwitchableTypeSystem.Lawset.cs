@@ -10,7 +10,7 @@ using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.Silicons.Borgs;
+namespace Content.DV.Server.Silicons.Borgs;
 
 /// <summary>
 /// Handles lawset patching when switching type.

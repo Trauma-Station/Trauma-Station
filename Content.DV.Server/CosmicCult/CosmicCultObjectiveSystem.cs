@@ -7,7 +7,7 @@ using Content.Shared.Warps;
 using Content.Shared.Whitelist;
 using Robust.Shared.Random;
 
-namespace Content.Server.Objectives.Systems;
+namespace Content.DV.Server.Objectives.Systems;
 
 public sealed class CosmicCultObjectiveSystem : EntitySystem
 {

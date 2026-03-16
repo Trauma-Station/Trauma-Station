@@ -14,7 +14,7 @@ using Content.DV.Shared.CartridgeLoader.Cartridges;
 using Content.DV.Shared.NanoChat;
 using Robust.Shared.Audio;
 
-namespace Content.Server.CartridgeLoader.Cartridges;
+namespace Content.DV.Server.CartridgeLoader.Cartridges;
 
 public sealed partial class LogProbeCartridgeSystem
 {
