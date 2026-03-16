@@ -356,9 +356,6 @@
     damage:
       types:
         Piercing: 10
-  - type: Construction
-    graph: ImprovisedArrow
-    node: ImprovisedArrow
   - type: SolutionContainerManager
     solutions:
       ammo:
