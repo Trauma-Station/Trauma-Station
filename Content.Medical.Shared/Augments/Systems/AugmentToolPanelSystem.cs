@@ -8,6 +8,7 @@ using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Containers;
+using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Augments;
 
@@ -15,6 +16,7 @@ public sealed class AugmentToolPanelSystem : EntitySystem
 {
     [Dependency] private readonly AugmentPowerCellSystem _augmentPowerCell = default!;
     [Dependency] private readonly AugmentSystem _augment = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -38,6 +40,9 @@ public sealed class AugmentToolPanelSystem : EntitySystem
 
     private void OnDropAttempt(Entity<AugmentToolPanelActiveItemComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         // you can never drop an active tool panel item, it has to be retracted with the action
         args.Cancel();
     }
