@@ -28,8 +28,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             return;
 
         var mob = args.Cloned;
-        var holder = EnsureComp<KnowledgeHolderComponent>(mob);
-        var mobContainer = EnsureKnowledgeContainer((mob, holder));
+        var mobContainer = EnsureKnowledgeContainer(mob);
         if (mobContainer.Comp.Container is not { } container)
             return;
 

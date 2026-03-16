@@ -709,15 +709,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return ent.Comp.Container;
     }
 
-    protected Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(Entity<KnowledgeHolderComponent> ent)
+    public Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(EntityUid uid)
     {
-        if (GetContainer(ent) is { } brain)
+        EnsureComp<KnowledgeHolderComponent>(uid);
+        if (GetContainer(uid) is { } brain)
             return brain;
 
         // if there's no brain store knowledge on the mob itself
-        var comp = EnsureComp<KnowledgeContainerComponent>(ent);
-        LinkContainer(ent, (ent, comp));
-        return (ent, comp);
+        var comp = EnsureComp<KnowledgeContainerComponent>(uid);
+        LinkContainer(uid, (uid, comp));
+        return (uid, comp);
     }
 }
 
