@@ -1433,7 +1433,7 @@
   hidden: true
   loadouts:
   - LoadoutDecapoidBreathTool
-  
+
 - type: loadoutGroup
   id: GroupBreathToolDecapoidInventory
   name: loadout-group-breath-tool-inventory-decapoid
