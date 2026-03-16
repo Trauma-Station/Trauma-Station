@@ -11,8 +11,7 @@
             "name": "icon"
         },
         {
-            "name": "dead",
-            "directions": 4
+            "name": "dead"
         },
         {
             "name": "inhand-left",
