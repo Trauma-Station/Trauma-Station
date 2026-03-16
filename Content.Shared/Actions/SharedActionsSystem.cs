@@ -1,10 +1,8 @@
 // <Trauma>
-using Content.Shitcode.Shared.Wizard;
+using Content.Shitcode.Common.Actions;
 using Content.Shared.Ghost;
-using Content.Shared.Heretic;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -402,7 +400,11 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         if (args.Input.EntityCoordinatesTarget is not { } netTarget)
         {
-            args.Invalid |= !Fallback(); // Goob - check fallback instead of setting it to false immediately
+            // <Trauma> - check fallback instead of setting it to false immediately
+            var evCheck = new CheckWorldInstantActionEvent(user, provider);
+            RaiseLocalEvent(ent, evCheck);
+            args.Invalid |= !evCheck.Fallback;
+            // </Trauma>
             return;
         }
 
@@ -413,7 +415,10 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         if (!ValidateWorldTarget(user, target, ent))
         {
-            Fallback(); // Goobstation
+            // <Trauma>
+            var evCheck = new CheckWorldInstantActionEvent(user, provider);
+            RaiseLocalEvent(ent, evCheck);
+            // </Trauma>
             return;
         }
 
@@ -423,7 +428,9 @@ public abstract partial class SharedActionsSystem : EntitySystem
             !TryComp<EntityTargetActionComponent>(ent, out var entTarget) ||
             !ValidateEntityTarget(user, targetEntity.Value, (ent, entTarget))))
         {
-            args.Invalid |= !Fallback(); // Goob edit
+            var evCheck = new CheckWorldInstantActionEvent(user, provider);
+            RaiseLocalEvent(ent, evCheck);
+            args.Invalid |= !evCheck.Fallback; // Goob edit
             return;
         }
 
@@ -436,23 +443,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
             ev.Entity = targetEntity;
         }
 
-        // Goobtation start
         return;
-
-        bool Fallback()
-        {
-            if (ent.Comp.Event is not InstantWorldTargetActionEvent instantWorldEv)
-                return false;
-
-            instantWorldEv.Target = EntityCoordinates.Invalid;
-            instantWorldEv.Entity = null;
-
-            _adminLogger.Add(LogType.Action,
-                $"{ToPrettyString(user):user} is performing the {Name(ent):action} action provided by {ToPrettyString(provider):provider}.");
-
-            return true;
-        }
-        // Goobstation end
     }
 
     public bool ValidateEntityTarget(EntityUid user, EntityUid target, Entity<EntityTargetActionComponent> ent)
@@ -1213,56 +1204,4 @@ public abstract partial class SharedActionsSystem : EntitySystem
         ent.Comp.Temporary = temporary;
         Dirty(ent);
     }
-
-    // Shitmed Change Start - Starlight Abductors
-    public EntityUid[] HideActions(EntityUid performer, ActionsComponent? comp = null)
-    {
-        if (!Resolve(performer, ref comp, false))
-            return [];
-
-        var actions = comp.Actions.ToArray();
-        comp.Actions.Clear();
-        Dirty(performer, comp);
-        return actions;
-    }
-
-    public void UnHideActions(EntityUid performer, EntityUid[] actions, ActionsComponent? comp = null)
-    {
-        if (!Resolve(performer, ref comp, false))
-            return;
-
-        foreach (var action in actions)
-            comp.Actions.Add(action);
-        Dirty(performer, comp);
-    }
-    // Shitmed Change End
-
-    // Goobstation edit start
-    public bool TryGetActionById(
-        EntityUid ent,
-        EntProtoId actionId,
-        [NotNullWhen(true)] out Entity<ActionComponent>? action,
-        ActionsContainerComponent? container = null)
-    {
-        action = null;
-        var actions = Resolve(ent, ref container, false)
-            ? container.Container.ContainedEntities
-            : GetActions(ent).Select(x => x.Owner);
-        foreach (var uid in actions)
-        {
-            if (TerminatingOrDeleted(uid))
-                continue;
-
-            var entityPrototypeId = MetaData(uid).EntityPrototype?.ID;
-            if (entityPrototypeId == null
-                || entityPrototypeId != actionId)
-                continue;
-
-            action = (uid, Comp<ActionComponent>(uid));
-            return true;
-        }
-
-        return false;
-    }
-    // Goobstation edit end
 }

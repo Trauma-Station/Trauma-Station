@@ -7,7 +7,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.White.Shared.Blocking;
+namespace Content.White.Common.Blocking;
 
 [RegisterComponent]
 public sealed partial class RechargeableBlockingComponent : Component

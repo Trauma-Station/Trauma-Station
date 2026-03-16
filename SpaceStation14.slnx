@@ -51,6 +51,7 @@
   <Project Path="Content.EinsteinEngines.Server/Content.EinsteinEngines.Server.csproj" />
   <Project Path="Content.EinsteinEngines.Shared/Content.EinsteinEngines.Shared.csproj" />
   <Project Path="Content.EinsteinEngines.Client/Content.EinsteinEngines.Client.csproj" />
+  <Project Path="Content.EinsteinEngines.Common/Content.EinsteinEngines.Common.csproj" />
   <Project Path="Content.Goobstation.Server/Content.Goobstation.Server.csproj" />
   <Project Path="Content.Goobstation.Shared/Content.Goobstation.Shared.csproj" />
   <Project Path="Content.Goobstation.Client/Content.Goobstation.Client.csproj" />
@@ -78,6 +79,7 @@
   <Project Path="Content.Shitcode.Server/Content.Shitcode.Server.csproj" />
   <Project Path="Content.Shitcode.Shared/Content.Shitcode.Shared.csproj" />
   <Project Path="Content.Shitcode.Client/Content.Shitcode.Client.csproj" />
+  <Project Path="Content.Shitcode.Common/Content.Shitcode.Common.csproj" />
   <Project Path="Content.Shitmed.Shared/Content.Shitmed.Shared.csproj" />
   <Project Path="Content.Starlight.Server/Content.Starlight.Server.csproj" />
   <Project Path="Content.Starlight.Shared/Content.Starlight.Shared.csproj" />
@@ -86,6 +88,7 @@
   <Project Path="Content.White.Server/Content.White.Server.csproj" />
   <Project Path="Content.White.Shared/Content.White.Shared.csproj" />
   <Project Path="Content.White.Client/Content.White.Client.csproj" />
+  <Project Path="Content.White.Common/Content.White.Common.csproj" />
   <!-- </Trauma> -->
   <Project Path="Content.Tests/Content.Tests.csproj" />
   <Project Path="Content.Tools/Content.Tools.csproj" />

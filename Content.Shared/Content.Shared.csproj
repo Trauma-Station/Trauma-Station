@@ -14,10 +14,13 @@
 
   <ItemGroup>
     <!-- <Trauma> -->
+    <ProjectReference Include="../Content.EinsteinEngines.Common/Content.EinsteinEngines.Common.csproj" />
     <ProjectReference Include="../Content.Goobstation.Common/Content.Goobstation.Common.csproj" />
     <ProjectReference Include="../Content.Lavaland.Common/Content.Lavaland.Common.csproj" />
     <ProjectReference Include="../Content.Medical.Common/Content.Medical.Common.csproj" />
     <ProjectReference Include="../Content.Trauma.Common/Content.Trauma.Common.csproj" />
+    <ProjectReference Include="../Content.Shitcode.Common/Content.Shitcode.Common.csproj" />
+    <ProjectReference Include="../Content.White.Common/Content.White.Common.csproj" />
     <ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
     <!-- </Trauma> -->
     <ProjectReference Include="..\Content.Shared.Database\Content.Shared.Database.csproj" />

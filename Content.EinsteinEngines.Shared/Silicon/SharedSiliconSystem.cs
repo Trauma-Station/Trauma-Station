@@ -8,10 +8,11 @@ using Content.Shared.Alert;
 using Content.Shared.Bed.Sleep;
 using Robust.Shared.Serialization;
 using Content.Shared.Movement.Systems;
+using Content.EinsteinEngines.Common.Silicon;
 
 namespace Content.EinsteinEngines.Shared.Silicon.Systems;
 
-public sealed class SharedSiliconChargeSystem : EntitySystem
+public abstract class SharedSiliconChargeSystem : CommonSiliconSystem
 {
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
 
@@ -90,6 +91,11 @@ public sealed class SharedSiliconChargeSystem : EntitySystem
     private void OnTryingToSleep(EntityUid uid, SiliconComponent component, ref TryingToSleepEvent args)
     {
         args.Cancelled = !component.DoSiliconsDreamOfElectricSheep;
+    }
+
+    public override bool IsSilicon(EntityUid uid)
+    {
+        return HasComp<SiliconComponent>(uid);
     }
 }
 
