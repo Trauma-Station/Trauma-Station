@@ -22,14 +22,11 @@
     - DecapoidVaporTank
     - DecapoidClawItem
 
-# the full internals setup for decapoids but as StartingGear
+# the vaporizer but as StartingGear
 - type: startingGear
   id: StartingGearDecapoidVaporizer
   equipment:
     mask: DecapoidBreathingApparatus
-  inhand:
-    - DecapoidVaporTank
-    - DecapoidClawItem
 
 # The usual loadouts of the decapoid harness that spawn in your chest slot for jobs that don't have outerwear in their loadout
 - type: loadoutGroup
