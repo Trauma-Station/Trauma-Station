@@ -622,6 +622,8 @@
   - ExclusiveItems # Trauma
   - GroupBreathToolDecapoid # Impstation
 
+# Wildcards
+- type: roleLoadout
   id: JobReporter
   groups:
   - GroupTankHarness
