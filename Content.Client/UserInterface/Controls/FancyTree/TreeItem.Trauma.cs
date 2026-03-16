@@ -29,5 +29,5 @@ public sealed partial class TreeItem
     }
 
     public bool EntryMatchesSearch(string query)
-        => Label.Text.Contains(query, StringComparison.OrdinalIgnoreCase);
+        => Label.Text?.Contains(query, StringComparison.OrdinalIgnoreCase) == true;
 }
