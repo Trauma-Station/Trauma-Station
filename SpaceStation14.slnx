@@ -44,10 +44,13 @@
   <Project Path="Content.Trauma.Common/Content.Trauma.Common.csproj" />
   <Project Path="Content.CorvaxNext.Server/Content.CorvaxNext.Server.csproj" />
   <Project Path="Content.CorvaxNext.Shared/Content.CorvaxNext.Shared.csproj" />
+  <Project Path="Content.CorvaxNext.Client/Content.CorvaxNext.Client.csproj" />
   <Project Path="Content.DV.Server/Content.DV.Server.csproj" />
   <Project Path="Content.DV.Shared/Content.DV.Shared.csproj" />
+  <Project Path="Content.DV.Client/Content.DV.Client.csproj" />
   <Project Path="Content.EinsteinEngines.Server/Content.EinsteinEngines.Server.csproj" />
   <Project Path="Content.EinsteinEngines.Shared/Content.EinsteinEngines.Shared.csproj" />
+  <Project Path="Content.EinsteinEngines.Client/Content.EinsteinEngines.Client.csproj" />
   <Project Path="Content.Goobstation.Server/Content.Goobstation.Server.csproj" />
   <Project Path="Content.Goobstation.Shared/Content.Goobstation.Shared.csproj" />
   <Project Path="Content.Goobstation.Client/Content.Goobstation.Client.csproj" />
@@ -56,6 +59,7 @@
   <Project Path="Content.Goobstation.UIKit/Content.Goobstation.UIKit.csproj" />
   <Project Path="Content.Imp.Server/Content.Imp.Server.csproj" />
   <Project Path="Content.Imp.Shared/Content.Imp.Shared.csproj" />
+  <Project Path="Content.Imp.Client/Content.Imp.Client.csproj" />
   <Project Path="Content.Lavaland.Server/Content.Lavaland.Server.csproj" />
   <Project Path="Content.Lavaland.Shared/Content.Lavaland.Shared.csproj" />
   <Project Path="Content.Lavaland.Client/Content.Lavaland.Client.csproj" />
@@ -67,16 +71,21 @@
   <Project Path="Content.ModuleManager/Content.ModuleManager.csproj" />
   <Project Path="Content.Mono.Server/Content.Mono.Server.csproj" />
   <Project Path="Content.Mono.Shared/Content.Mono.Shared.csproj" />
+  <Project Path="Content.Mono.Client/Content.Mono.Client.csproj" />
   <Project Path="Content.RMC14.Server/Content.RMC14.Server.csproj" />
   <Project Path="Content.RMC14.Shared/Content.RMC14.Shared.csproj" />
+  <Project Path="Content.RMC14.Client/Content.RMC14.Client.csproj" />
   <Project Path="Content.Shitcode.Server/Content.Shitcode.Server.csproj" />
   <Project Path="Content.Shitcode.Shared/Content.Shitcode.Shared.csproj" />
+  <Project Path="Content.Shitcode.Client/Content.Shitcode.Client.csproj" />
   <Project Path="Content.Shitmed.Shared/Content.Shitmed.Shared.csproj" />
   <Project Path="Content.Starlight.Server/Content.Starlight.Server.csproj" />
   <Project Path="Content.Starlight.Shared/Content.Starlight.Shared.csproj" />
+  <Project Path="Content.Starlight.Client/Content.Starlight.Client.csproj" />
   <Project Path="Content.VG.Shared/Content.VG.Shared.csproj" />
   <Project Path="Content.White.Server/Content.White.Server.csproj" />
   <Project Path="Content.White.Shared/Content.White.Shared.csproj" />
+  <Project Path="Content.White.Client/Content.White.Client.csproj" />
   <!-- </Trauma> -->
   <Project Path="Content.Tests/Content.Tests.csproj" />
   <Project Path="Content.Tools/Content.Tools.csproj" />
