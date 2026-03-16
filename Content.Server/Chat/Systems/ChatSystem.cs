@@ -11,7 +11,6 @@ using Content.Server.Speech.Components;
 using Content.EinsteinEngines.Shared.Language;
 using Content.EinsteinEngines.Shared.Language.Systems;
 using Content.Shitcode.Shared.Wizard.Chuuni;
-using Content.Starlight.Shared.CollectiveMind;
 using Content.Trauma.Common.Speech;
 // </Trauma>
 using System.Globalization;
@@ -49,6 +48,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
+using Content.Starlight.Common.CollectiveMind;
 
 namespace Content.Server.Chat.Systems;
 

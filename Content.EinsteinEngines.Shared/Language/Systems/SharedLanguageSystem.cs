@@ -1,29 +1,16 @@
+using System.Linq;
+using System.Text;
+using Content.EinsteinEngines.Common.Language;
+using Content.EinsteinEngines.Common.Language.Systems;
 using Content.EinsteinEngines.Shared.Language.Components;
 using Content.EinsteinEngines.Shared.Language.Events;
 using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
-using System.Linq;
-using System.Text;
 
 namespace Content.EinsteinEngines.Shared.Language.Systems;
 
-public abstract class SharedLanguageSystem : EntitySystem
+public abstract class SharedLanguageSystem : CommonLanguageSystem
 {
-    /// <summary>
-    ///     The language used as a fallback in cases where an entity suddenly becomes a Language Speaker (e.g. the usage of make-sentient).
-    /// </summary>
-    public static readonly ProtoId<LanguagePrototype> FallbackLanguagePrototype = "TauCetiBasic";
-
-    /// <summary>
-    ///     The language whose speakers are assumed to understand and speak every language. Should never be added directly.
-    /// </summary>
-    public static readonly ProtoId<LanguagePrototype> UniversalPrototype = "Universal";
-
-    /// <summary>
-    ///     Language used for Xenoglossy, should have same effects as Universal but with different language prototype.
-    /// </summary>
-    public static readonly ProtoId<LanguagePrototype> PsychomanticPrototype = "Psychomantic";
-
     /// <summary>
     /// A cached instance of <see cref="PsychomanticPrototype"/>.
     /// </summary>
@@ -71,12 +58,7 @@ public abstract class SharedLanguageSystem : EntitySystem
         return _builder.ToString();
     }
 
-    /// <summary>
-    ///     Generates a stable pseudo-random number in the range (min, max) (inclusively) for the given seed.
-    ///     One seed always corresponds to one number, however the resulting number also depends on the current round number.
-    ///     This method is meant to be used in <see cref="ObfuscationMethod"/> to provide stable obfuscation.
-    /// </summary>
-    internal int PseudoRandomNumber(int seed, int min, int max)
+    public override int PseudoRandomNumber(int seed, int min, int max)
     {
         // Using RobustRandom or System.Random here is a bad idea because this method can get called hundreds of times per message.
         // Each call would require us to allocate a new instance of random, which would lead to lots of unnecessary calculations.
@@ -98,7 +80,7 @@ public abstract class SharedLanguageSystem : EntitySystem
 
     private void OnClientSetLanguage(LanguagesSetMessage message, EntitySessionEventArgs args)
     {
-        if (args.SenderSession.AttachedEntity is not {} uid)
+        if (args.SenderSession.AttachedEntity is not { } uid)
             return;
 
         var language = GetLanguagePrototype(message.CurrentLanguage);

@@ -1,3 +1,4 @@
+using Content.EinsteinEngines.Common.Language;
 using Robust.Shared.Prototypes;
 
 namespace Content.EinsteinEngines.Shared.Language.Events;

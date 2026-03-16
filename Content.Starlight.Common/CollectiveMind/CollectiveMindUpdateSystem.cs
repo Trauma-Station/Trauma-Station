@@ -6,11 +6,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Starlight.Shared.CollectiveMind;
 using Robust.Shared.Prototypes;
-using Robust.Shared.GameObjects;
 
-namespace Content.Starlight.Shared.CollectiveMind;
+namespace Content.Starlight.Common.CollectiveMind;
 
 public sealed class CollectiveMindUpdateSystem : EntitySystem
 {

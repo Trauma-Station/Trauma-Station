@@ -71,12 +71,12 @@ using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Heretic.Components;
 using Content.Shared.Movement.Systems;
-using Content.Starlight.Shared.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Hands.Components;
 using Content.Shared.Tag;
 using Content.Shared.Weather;
 using Robust.Server.Containers;
+using Content.Starlight.Common.CollectiveMind;
 
 namespace Content.Server.Heretic.Abilities;
 

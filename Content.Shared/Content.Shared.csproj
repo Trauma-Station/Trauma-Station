@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <!-- <Trauma> -->
+    <ProjectReference Include="../Content.Common/Content.Common.csproj" />
     <ProjectReference Include="../Content.DV.Common/Content.DV.Common.csproj" />
     <ProjectReference Include="../Content.EinsteinEngines.Common/Content.EinsteinEngines.Common.csproj" />
     <ProjectReference Include="../Content.Goobstation.Common/Content.Goobstation.Common.csproj" />
@@ -21,6 +22,7 @@
     <ProjectReference Include="../Content.Medical.Common/Content.Medical.Common.csproj" />
     <ProjectReference Include="../Content.Trauma.Common/Content.Trauma.Common.csproj" />
     <ProjectReference Include="../Content.Shitcode.Common/Content.Shitcode.Common.csproj" />
+    <ProjectReference Include="../Content.Starlight.Common/Content.Starlight.Common.csproj" />
     <ProjectReference Include="../Content.White.Common/Content.White.Common.csproj" />
     <ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
     <!-- </Trauma> -->

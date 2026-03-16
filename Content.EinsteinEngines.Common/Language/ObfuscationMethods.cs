@@ -5,9 +5,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
-using Content.EinsteinEngines.Shared.Language.Systems;
+using Content.EinsteinEngines.Common.Language.Systems;
 
-namespace Content.EinsteinEngines.Shared.Language;
+namespace Content.EinsteinEngines.Common.Language;
 
 [ImplicitDataDefinitionForInheritors]
 public abstract partial class ObfuscationMethod
@@ -24,7 +24,7 @@ public abstract partial class ObfuscationMethod
     ///     Obfuscates the provided message and writes the result into the provided StringBuilder.
     ///     Implementations should use the context's pseudo-random number generator and provide stable obfuscations.
     /// </summary>
-    internal abstract void Obfuscate(StringBuilder builder, string message, SharedLanguageSystem context);
+    public abstract void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context);
 
     /// <summary>
     ///     Obfuscates the provided message. This method should only be used for debugging purposes.
@@ -33,7 +33,7 @@ public abstract partial class ObfuscationMethod
     public string Obfuscate(string message)
     {
         var builder = new StringBuilder();
-        Obfuscate(builder, message, IoCManager.Resolve<EntitySystemManager>().GetEntitySystem<SharedLanguageSystem>());
+        Obfuscate(builder, message, IoCManager.Resolve<EntitySystemManager>().GetEntitySystem<CommonLanguageSystem>());
         return builder.ToString();
     }
 }
@@ -51,7 +51,7 @@ public partial class ReplacementObfuscation : ObfuscationMethod
     [DataField(required: true)]
     public List<string> Replacement = [];
 
-    internal override void Obfuscate(StringBuilder builder, string message, SharedLanguageSystem context)
+    public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context)
     {
         var idx = context.PseudoRandomNumber(message.GetHashCode(), 0, Replacement.Count - 1);
         builder.Append(Replacement[idx]);
@@ -74,7 +74,7 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
     [DataField]
     public int MaxSyllables = 4;
 
-    internal override void Obfuscate(StringBuilder builder, string message, SharedLanguageSystem context)
+    public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context)
     {
         const char eof = (char) 0; // Special character to mark the end of the message in the code below.
 
@@ -150,7 +150,7 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
     [DataField]
     public float Proportion = 1f / 3;
 
-    internal override void Obfuscate(StringBuilder builder, string message, SharedLanguageSystem context)
+    public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context)
     {
         var sentenceBeginIndex = 0;
         var hashCode = 0;
