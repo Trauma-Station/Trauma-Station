@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Content.Client._White.ItemSlotRenderer;
+namespace Content.White.Client.ItemSlotRenderer;
 
 [RegisterComponent]
 public sealed partial class ItemSlotRendererComponent : Component

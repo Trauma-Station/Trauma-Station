@@ -3,8 +3,8 @@ using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Events;
 using Content.Server.Popups;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Eye;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Trauma.Common.Speech;
 
-namespace Content.Server._DV.CosmicCult;
+namespace Content.DV.Server.CosmicCult;
 
 public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 {

@@ -1,7 +1,7 @@
 using System.Text;
 using Robust.Shared.Random;
 
-namespace Content.Shared._EinsteinEngines.Humanoid;
+namespace Content.EinsteinEngines.Shared.Humanoid;
 
 public sealed partial class RomanNamingSystem : EntitySystem
 {

@@ -8,7 +8,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Common.MartialArts;
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CombatMode;
@@ -26,7 +26,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Goobstation.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public sealed class RiposteeSystem : EntitySystem
 {

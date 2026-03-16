@@ -4,16 +4,16 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Silicon.Systems;
+using Content.EinsteinEngines.Shared.Silicon.Systems;
 using Content.Shared.Bed.Sleep;
-using Content.Server._EinsteinEngines.Silicon.Charge;
+using Content.EinsteinEngines.Server.Silicon.Charge;
 using Content.Server.Humanoid;
 using Content.Shared.Humanoid;
 using Content.Shared.Power.Components;
 using Content.Shared.StatusEffectNew;
 // Goobstation Start - Energycrit
 using Content.Server.Radio;
-using Content.Shared._EinsteinEngines.Silicon.Death;
+using Content.EinsteinEngines.Shared.Silicon.Death;
 using Content.Shared.Actions;
 using Content.Shared.CombatMode;
 using Content.Shared.Interaction.Components;
@@ -21,7 +21,7 @@ using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 // Goobstation End - Energycrit
 
-namespace Content.Server._EinsteinEngines.Silicon.Death;
+namespace Content.EinsteinEngines.Server.Silicon.Death;
 
 public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
 {

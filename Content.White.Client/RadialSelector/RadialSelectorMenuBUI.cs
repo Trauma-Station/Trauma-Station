@@ -1,12 +1,12 @@
 using Content.Client.UserInterface.Controls;
-using Content.Shared._White.RadialSelector;
+using Content.White.Shared.RadialSelector;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 
 // ReSharper disable InconsistentNaming
 
-namespace Content.Client._White.RadialSelector;
+namespace Content.White.Client.RadialSelector;
 
 [UsedImplicitly]
 public sealed class AttachedRadialSelectorMenuBUI(EntityUid owner, Enum uiKey)

@@ -1,4 +1,4 @@
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Movement.Pulling.Systems;
@@ -9,7 +9,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._DV.CosmicCult.Abilities;
+namespace Content.DV.Shared.CosmicCult.Abilities;
 
 public sealed class CosmicTransmuteSystem : EntitySystem
 {

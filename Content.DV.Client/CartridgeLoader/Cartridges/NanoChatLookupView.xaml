@@ -7,7 +7,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <cartridges:NanoChatLookupView
     xmlns="https://spacestation14.io"
-    xmlns:cartridges="clr-namespace:Content.Client._DV.CartridgeLoader.Cartridges"
+    xmlns:cartridges="clr-namespace:Content.DV.Client.CartridgeLoader.Cartridges"
     HorizontalExpand="True"
     VerticalExpand="True"
     StyleClasses="AngleRect">

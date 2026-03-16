@@ -19,10 +19,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.Salvage;
+using Content.DV.Shared.Salvage;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._DV.Salvage.UI;
+namespace Content.DV.Client.Salvage.UI;
 
 public sealed class MiningVoucherBoundUserInterface : BoundUserInterface
 {

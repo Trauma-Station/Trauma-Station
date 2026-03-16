@@ -13,7 +13,7 @@ using Content.Shared.UserInterface;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Goobstation.Wizard.MagicMirror;
+namespace Content.Shitcode.Shared.Wizard.MagicMirror;
 
 public abstract class SharedWizardMirrorSystem : EntitySystem
 {

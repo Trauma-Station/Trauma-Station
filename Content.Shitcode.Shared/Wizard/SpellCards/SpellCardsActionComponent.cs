@@ -9,7 +9,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Goobstation.Wizard.SpellCards;
+namespace Content.Shitcode.Shared.Wizard.SpellCards;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SpellCardsActionComponent : Component

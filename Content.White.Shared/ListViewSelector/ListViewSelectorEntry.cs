@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._White.ListViewSelector;
+namespace Content.White.Shared.ListViewSelector;
 
 [Serializable, NetSerializable]
 public record ListViewSelectorEntry(string Id, string Name = "", string Description = "");

@@ -9,8 +9,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Temperature.Systems;
-using Content.Shared._Goobstation.Heretic.Components;
-using Content.Shared._Goobstation.Heretic.Systems;
+using Content.Shitcode.Shared.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Systems;
 using Content.Shared.Atmos;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffect;

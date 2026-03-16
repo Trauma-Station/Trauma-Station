@@ -8,10 +8,10 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Speech;
 using Robust.Shared.Player;
-using Content.Server._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
+using Content.EinsteinEngines.Server.Language;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Events;
 using Content.Medical.Common.Targeting;
 
 namespace Content.Goobstation.Server.Blob;

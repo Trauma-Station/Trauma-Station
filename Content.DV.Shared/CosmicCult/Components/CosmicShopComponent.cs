@@ -1,10 +1,10 @@
-using Content.Shared._DV.CosmicCult.Prototypes;
+using Content.DV.Shared.CosmicCult.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._DV.CosmicCult.Components;
+namespace Content.DV.Shared.CosmicCult.Components;
 
 /// <summary>
 /// Component for the coscult power UI. Applied to the action itself because it's easier that way.

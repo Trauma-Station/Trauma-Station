@@ -19,12 +19,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.VendingMachines;
+using Content.DV.Shared.VendingMachines;
 using Content.Shared.VendingMachines;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._DV.VendingMachines;
+namespace Content.DV.Client.VendingMachines;
 
 public sealed class ShopVendorSystem : SharedShopVendorSystem
 {

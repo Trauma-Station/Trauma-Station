@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared._Goobstation.Wizard.MagicMirror;
+using Content.Shitcode.Shared.Wizard.MagicMirror;
 using Robust.Client.UserInterface;
 
 namespace Content.Client._Shitcode.Wizard.MagicMirror;

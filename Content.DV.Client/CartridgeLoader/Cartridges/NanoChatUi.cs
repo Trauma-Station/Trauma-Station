@@ -10,10 +10,10 @@
 
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.CartridgeLoader;
-using Content.Shared._DV.CartridgeLoader.Cartridges;
+using Content.DV.Shared.CartridgeLoader.Cartridges;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._DV.CartridgeLoader.Cartridges;
+namespace Content.DV.Client.CartridgeLoader.Cartridges;
 
 public sealed partial class NanoChatUi : UIFragment
 {

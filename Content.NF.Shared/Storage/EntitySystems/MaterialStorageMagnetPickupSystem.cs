@@ -4,7 +4,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._NF.Storage.Components;
+using Content.NF.Shared.Storage.Components;
 using Content.Shared.Materials;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
@@ -13,7 +13,7 @@ using Content.Shared.Hands.Components;  // Frontier
 using Content.Shared.Verbs;     // Frontier
 using Robust.Shared.Utility;    // Frontier
 
-namespace Content.Shared._NF.Storage.EntitySystems;
+namespace Content.NF.Shared.Storage.EntitySystems;
 
 /// <summary>
 /// <see cref="MaterialStorageMagnetPickupComponent"/>

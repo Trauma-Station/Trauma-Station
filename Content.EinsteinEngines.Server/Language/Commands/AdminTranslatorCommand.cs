@@ -6,17 +6,17 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration;
 using Content.Shared.Administration;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Components.Translators;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Components.Translators;
+using Content.EinsteinEngines.Shared.Language.Systems;
 using Robust.Server.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
 using Robust.Shared.Toolshed.Syntax;
 using Robust.Shared.Toolshed.TypeParsers;
 
-namespace Content.Server._EinsteinEngines.Language.Commands;
+namespace Content.EinsteinEngines.Server.Language.Commands;
 
 [ToolshedCommand(Name = "translator"), AdminCommand(AdminFlags.Admin)]
 public sealed class AdminTranslatorCommand : ToolshedCommand

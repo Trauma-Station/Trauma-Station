@@ -3,7 +3,7 @@ using Content.Shared.Weather;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Server._DV.Weather;
+namespace Content.DV.Server.Weather;
 
 /// <summary>
 /// Makes weather randomly happen every so often.

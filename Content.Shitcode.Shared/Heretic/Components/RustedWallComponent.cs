@@ -6,7 +6,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._Goobstation.Heretic.Components;
+namespace Content.Shitcode.Shared.Heretic.Components;
 
 [RegisterComponent]
 public sealed partial class RustedWallComponent : Component

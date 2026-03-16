@@ -2,11 +2,11 @@ using Robust.Shared.GameStates;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
-using Content.Shared._DV.CosmicCult.Prototypes;
+using Content.DV.Shared.CosmicCult.Prototypes;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Whitelist;
 
-namespace Content.Shared._DV.CosmicCult.Components;
+namespace Content.DV.Shared.CosmicCult.Components;
 
 /// <summary>
 /// Added to entities to tag that they are a cosmic cultist. Holds nearly all cultist-relevant data! Removal of this component is used to call for a deconversion

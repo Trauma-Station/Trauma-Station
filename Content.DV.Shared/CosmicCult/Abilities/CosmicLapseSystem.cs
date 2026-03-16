@@ -1,14 +1,14 @@
 using Content.Shared.Polymorph.Systems;
 using Content.Shared.Popups;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult.Components.Examine;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Polymorph;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._DV.CosmicCult.Abilities;
+namespace Content.DV.Shared.CosmicCult.Abilities;
 
 public sealed class CosmicLapseSystem : EntitySystem
 {

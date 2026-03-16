@@ -1,8 +1,8 @@
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._EinsteinEngines.Traits.Assorted;
+namespace Content.EinsteinEngines.Server.Traits.Assorted;
 
 /// <summary>
 ///     When applied to a not-yet-spawned player entity, removes <see cref="BaseLanguage"/> from the lists of their languages

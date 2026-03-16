@@ -1,7 +1,7 @@
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Mono.Ships.Components;
+namespace Content.Mono.Shared.Ships.Components;
 
 /// <summary>
 /// Temporarily stores the original IFF flags of a ship.

@@ -9,8 +9,8 @@
 
 using System.Linq;
 using System.Numerics;
-using Content.Shared._Goobstation.Wizard.Projectiles;
-using Content.Shared._Goobstation.Wizard.TimeStop;
+using Content.Shitcode.Shared.Wizard.Projectiles;
+using Content.Shitcode.Shared.Wizard.TimeStop;
 using Content.Shared.Coordinates;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;

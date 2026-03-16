@@ -54,7 +54,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Radio.EntitySystems;
-using Content.Shared._DV.Salvage.Systems; // DeltaV
+using Content.DV.Shared.Salvage.Systems; // DeltaV
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;

@@ -4,7 +4,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._NF.Storage.Components;
+namespace Content.NF.Shared.Storage.Components;
 
 /// <summary>
 /// Applies an ongoing pickup area around the attached entity.

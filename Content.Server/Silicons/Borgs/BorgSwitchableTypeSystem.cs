@@ -1,4 +1,4 @@
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components; // Goob
+using Content.CorvaxNext.Shared.Silicons.Borgs.Components; // Goob
 using Content.Server.Inventory;
 using Content.Shared.Inventory;
 using Content.Shared.Radio.Components;

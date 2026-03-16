@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard;
+using Content.Shitcode.Shared.Wizard;
 using Content.Shared.Ghost;
 using Content.Shared.Heretic;
 using Content.Shared.Popups;

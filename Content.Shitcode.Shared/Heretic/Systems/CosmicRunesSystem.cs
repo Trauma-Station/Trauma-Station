@@ -3,7 +3,7 @@ using Content.Goobstation.Common.BlockTeleport;
 using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
+using Content.Shitcode.Shared.Wizard.FadingTimedDespawn;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.Coordinates;

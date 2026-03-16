@@ -1,9 +1,9 @@
-using Content.Server._DV.CosmicCult.EntitySystems;
+using Content.DV.Server.CosmicCult.EntitySystems;
 using Content.Shared.Maps;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Server._DV.CosmicCult.Components;
+namespace Content.DV.Server.CosmicCult.Components;
 
 [RegisterComponent, Access(typeof(CosmicCorruptingSystem))]
 [AutoGenerateComponentPause]

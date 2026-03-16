@@ -8,13 +8,13 @@
 using System.Linq;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Content.Shared._EinsteinEngines.TelescopicBaton;
+using Content.EinsteinEngines.Shared.TelescopicBaton;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee.Events;
 
-namespace Content.Shared._EinsteinEngines.TelescopicBaton;
+namespace Content.EinsteinEngines.Shared.TelescopicBaton;
 
 public sealed class KnockdownOnHitSystem : EntitySystem
 {

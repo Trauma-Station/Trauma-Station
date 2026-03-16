@@ -1,10 +1,10 @@
 // <Trauma>
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Server._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
+using Content.EinsteinEngines.Server.Language;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Events;
 using Content.Shared.Blocking;
 // </Trauma>
 using Content.Shared.NPC.Prototypes;

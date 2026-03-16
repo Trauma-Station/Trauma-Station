@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shitmed.Shared.Medical.HealthAnalyzer;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Wounds;
 using Content.Shared.FixedPoint;

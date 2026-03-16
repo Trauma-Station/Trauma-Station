@@ -1,8 +1,8 @@
 using Content.Server.AlertLevel;
 using Content.Server.Station.Systems;
-using Content.Shared._White.Lockers;
+using Content.White.Shared.Lockers;
 
-namespace Content.Server._White.Lockers;
+namespace Content.White.Server.Lockers;
 
 public sealed class StationAlertLevelLockSystem : SharedStationAlertLevelLockSystem
 {

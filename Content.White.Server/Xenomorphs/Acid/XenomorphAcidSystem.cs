@@ -1,8 +1,8 @@
-using Content.Shared._White.Xenomorphs.Acid;
-using Content.Shared._White.Xenomorphs.Acid.Components;
+using Content.White.Shared.Xenomorphs.Acid;
+using Content.White.Shared.Xenomorphs.Acid.Components;
 using Content.Shared.Damage.Systems;
 
-namespace Content.Server._White.Xenomorphs.Acid;
+namespace Content.White.Server.Xenomorphs.Acid;
 
 public sealed class XenomorphAcidSystem : SharedXenomorphAcidSystem
 {

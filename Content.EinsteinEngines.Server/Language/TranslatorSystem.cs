@@ -12,16 +12,16 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Components.Translators;
-using Content.Shared._EinsteinEngines.Language.Events;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Components.Translators;
+using Content.EinsteinEngines.Shared.Language.Events;
+using Content.EinsteinEngines.Shared.Language.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Server._EinsteinEngines.Language;
+namespace Content.EinsteinEngines.Server.Language;
 
 // TODO: move this to shared and predict
 public sealed class TranslatorSystem : SharedTranslatorSystem

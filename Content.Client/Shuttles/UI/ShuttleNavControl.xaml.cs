@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Client._Mono.Radar;
-using Content.Shared._Mono.Radar;
+using Content.Mono.Client.Radar;
+using Content.Mono.Shared.Radar;
 using Robust.Shared.Timing;
 // </Trauma>
 using System.Numerics;

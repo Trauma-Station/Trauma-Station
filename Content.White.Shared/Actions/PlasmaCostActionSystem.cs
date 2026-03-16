@@ -1,11 +1,11 @@
 using Content.Shared.FixedPoint;
-using Content.Shared._White.Xenomorphs;
-using Content.Shared._White.Xenomorphs.Plasma;
-using Content.Shared._White.Xenomorphs.Plasma.Components;
+using Content.White.Shared.Xenomorphs;
+using Content.White.Shared.Xenomorphs.Plasma;
+using Content.White.Shared.Xenomorphs.Plasma.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 
-namespace Content.Shared._White.Actions;
+namespace Content.White.Shared.Actions;
 
 public sealed class PlasmaCostActionSystem : EntitySystem
 {

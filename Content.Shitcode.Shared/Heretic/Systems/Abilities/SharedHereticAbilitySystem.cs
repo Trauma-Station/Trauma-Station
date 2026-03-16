@@ -1,7 +1,7 @@
 using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Damage;
 using Content.Shared.FixedPoint;
-using Content.Shared._Goobstation.Heretic.Systems;
+using Content.Shitcode.Shared.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;

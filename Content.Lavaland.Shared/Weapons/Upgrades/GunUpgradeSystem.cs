@@ -5,7 +5,7 @@ using Content.Lavaland.Common.Weapons;
 using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Lavaland.Shared.Pressure;
 using Content.Lavaland.Shared.Weapons.Upgrades.Components;
-using Content.Shared._Goobstation.Weapons.Ranged;
+using Content.Shitcode.Shared.Weapons.Ranged;
 using Content.Shared.Actions;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage.Systems;

@@ -1,16 +1,16 @@
 using System.Linq;
 using Content.Server.Hands.Systems;
-using Content.Server._EinsteinEngines.Language;
+using Content.EinsteinEngines.Server.Language;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Components.Translators;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Components.Translators;
 using Content.Shared.Storage;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._EinsteinEngines.Traits.Assorted;
+namespace Content.EinsteinEngines.Server.Traits.Assorted;
 
 
 public sealed partial class ForeignerTraitSystem : EntitySystem

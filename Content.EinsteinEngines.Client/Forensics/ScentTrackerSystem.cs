@@ -3,14 +3,14 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Forensics.Systems;
-using Content.Shared._EinsteinEngines.Forensics;
+using Content.EinsteinEngines.Shared.Forensics.Systems;
+using Content.EinsteinEngines.Shared.Forensics;
 using Content.Shared.Forensics.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Client.Player;
 
-namespace Content.Client._EinsteinEngines.Forensics;
+namespace Content.EinsteinEngines.Client.Forensics;
 
 public sealed class ScentTrackerSystem : SharedScentTrackerSystem
 {

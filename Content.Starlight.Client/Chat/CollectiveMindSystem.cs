@@ -8,7 +8,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Chat.Managers;
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Starlight.Shared.CollectiveMind;
 using Robust.Client.Player;
 
 namespace Content.Client.Chat

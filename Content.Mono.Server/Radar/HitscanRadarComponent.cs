@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Content.Server._Mono.Radar;
+namespace Content.Mono.Server.Radar;
 
 /// <summary>
 /// Stores the trajectory information for hitscan projectiles to be visualized on radar.

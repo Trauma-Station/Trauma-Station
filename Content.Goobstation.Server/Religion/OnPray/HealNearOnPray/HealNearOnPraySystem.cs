@@ -4,7 +4,7 @@ using System.Linq;
 using Content.Goobstation.Server.OnPray.HealNearOnPray;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Medical.Common.Damage;
-using Content.Shared._EinsteinEngines.Silicon.Components;
+using Content.EinsteinEngines.Shared.Silicon.Components;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;

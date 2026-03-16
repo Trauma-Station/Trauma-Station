@@ -1,18 +1,18 @@
-using Content.Server._White.Xenomorphs.Plasma;
+using Content.White.Server.Xenomorphs.Plasma;
 using Content.Server.Actions;
 using Content.Server.Mind;
 using Content.Server.Popups;
-using Content.Shared._White.Actions;
-using Content.Shared._White.Xenomorphs;
-using Content.Shared._White.Xenomorphs.Caste;
-using Content.Shared._White.Xenomorphs.Queen;
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.Actions;
+using Content.White.Shared.Xenomorphs;
+using Content.White.Shared.Xenomorphs.Caste;
+using Content.White.Shared.Xenomorphs.Queen;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._White.Xenomorphs.Queen;
+namespace Content.White.Server.Xenomorphs.Queen;
 
 public sealed class XenomorphQueenSystem : EntitySystem
 {

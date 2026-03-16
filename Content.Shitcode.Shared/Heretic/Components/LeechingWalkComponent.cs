@@ -11,7 +11,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Heretic.Components;
+namespace Content.Shitcode.Shared.Heretic.Components;
 
 [RegisterComponent]
 public sealed partial class LeechingWalkComponent : Component

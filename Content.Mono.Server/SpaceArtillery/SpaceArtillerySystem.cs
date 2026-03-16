@@ -1,10 +1,10 @@
 using System.Numerics;
-using Content.Server._Mono.FireControl;
-using Content.Server._Mono.SpaceArtillery.Components;
+using Content.Mono.Server.FireControl;
+using Content.Mono.Server.SpaceArtillery.Components;
 using Content.Server.Power.Components;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared._Mono.ShipGuns;
-using Content.Shared._Mono.SpaceArtillery;
+using Content.Mono.Shared.ShipGuns;
+using Content.Mono.Shared.SpaceArtillery;
 using Content.Shared.Camera;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
@@ -17,7 +17,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 
-namespace Content.Server._Mono.SpaceArtillery;
+namespace Content.Mono.Server.SpaceArtillery;
 
 public sealed partial class SpaceArtillerySystem : EntitySystem
 {

@@ -3,7 +3,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Objectives.Components;
 
-namespace Content.Server._Starlight.Objectives;
+namespace Content.Starlight.Server.Objectives;
 
 /// <summary>
 /// Handles Teach a Lesson logic on if a specific entity has died at least once during the round

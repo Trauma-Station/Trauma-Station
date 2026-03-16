@@ -1,5 +1,5 @@
-using Content.Shared._DV.CosmicCult.Abilities;
+using Content.DV.Shared.CosmicCult.Abilities;
 
-namespace Content.Client._DV.CosmicCult;
+namespace Content.DV.Client.CosmicCult;
 
 public sealed partial class CosmicSiphonSystem : SharedCosmicSiphonSystem;

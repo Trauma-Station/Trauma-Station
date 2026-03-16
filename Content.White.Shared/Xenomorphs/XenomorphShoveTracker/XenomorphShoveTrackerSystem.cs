@@ -1,10 +1,10 @@
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.CombatMode;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stunnable;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._White.Xenomorphs.XenomorphShoveTracker;
+namespace Content.White.Shared.Xenomorphs.XenomorphShoveTracker;
 
 public sealed class XenomorphShoveTrackerSystem : EntitySystem
 {

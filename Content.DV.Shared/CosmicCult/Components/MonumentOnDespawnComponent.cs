@@ -1,7 +1,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._DV.CosmicCult.Components;
+namespace Content.DV.Shared.CosmicCult.Components;
 
 /// <summary>
 /// Spawns a specified prototype after a specified amount of time. Too lazy to rename the comp, sorry.

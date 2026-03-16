@@ -3,12 +3,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server._NF.Speech.Components;
+using Content.NF.Server.Speech.Components;
 using Content.Server.Speech.EntitySystems;
 using System.Text.RegularExpressions;
 using Content.Shared.Speech;
 
-namespace Content.Server._NF.Speech.EntitySystems;
+namespace Content.NF.Server.Speech.EntitySystems;
 
 public sealed class StreetpunkAccentSystem : EntitySystem
 {

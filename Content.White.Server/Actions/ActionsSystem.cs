@@ -1,6 +1,6 @@
 using Content.Server.DoAfter;
-using Content.Shared._White.Actions;
-using Content.Shared._White.Actions.Events;
+using Content.White.Shared.Actions;
+using Content.White.Shared.Actions.Events;
 using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
@@ -13,7 +13,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._White.Actions;
+namespace Content.White.Server.Actions;
 
 public sealed class ActionsSystem : EntitySystem
 {

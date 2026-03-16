@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Numerics;
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.EntitySystems;
@@ -15,7 +15,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._White.Xenomorphs.TailLash;
+namespace Content.White.Shared.Xenomorphs.TailLash;
 
 public sealed class SharedTailLashSystem : EntitySystem
 {

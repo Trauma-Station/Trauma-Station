@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
-using Content.Shared._Imp.Drone;
+using Content.CorvaxNext.Shared.Silicons.Borgs.Components;
+using Content.Imp.Shared.Drone;
 using Robust.Shared.Player;
 // </Trauma>
 using Content.Shared.DeviceNetwork;

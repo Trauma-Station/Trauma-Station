@@ -1,7 +1,7 @@
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._White.RadialSelector;
+namespace Content.White.Shared.RadialSelector;
 
 [NetSerializable, Serializable]
 public enum RadialSelectorUiKey : byte

@@ -7,7 +7,7 @@ using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._EinsteinEngines.Radio;
+namespace Content.EinsteinEngines.Server.Radio;
 
 public sealed class IntrinsicRadioKeySystem : EntitySystem
 {

@@ -29,7 +29,7 @@
 using Content.RMC14.Shared.GhostColor;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._RMC14.GhostColor;
+namespace Content.RMC14.Client.GhostColor;
 
 public sealed class GhostColorSystem : EntitySystem
 {

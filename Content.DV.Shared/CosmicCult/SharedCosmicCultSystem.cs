@@ -1,6 +1,6 @@
 using Content.Goobstation.Common.Religion;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult.Prototypes;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Prototypes;
 using Content.Shared.Actions;
 using Content.Shared.Antag;
 using Content.Shared.Examine;
@@ -12,7 +12,7 @@ using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Stacks;
-using Content.Shared._DV.Roles;
+using Content.DV.Shared.Roles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -22,7 +22,7 @@ using Robust.Shared.Timing;
 using System.Linq;
 
 
-namespace Content.Shared._DV.CosmicCult;
+namespace Content.DV.Shared.CosmicCult;
 
 public abstract class SharedCosmicCultSystem : EntitySystem
 {

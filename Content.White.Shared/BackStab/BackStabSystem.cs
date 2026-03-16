@@ -16,7 +16,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using System.Numerics;
 
-namespace Content.Shared._White.BackStab;
+namespace Content.White.Shared.BackStab;
 
 public sealed class BackStabSystem : EntitySystem
 {

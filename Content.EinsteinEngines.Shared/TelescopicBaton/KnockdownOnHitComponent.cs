@@ -9,7 +9,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._EinsteinEngines.TelescopicBaton;
+namespace Content.EinsteinEngines.Shared.TelescopicBaton;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class KnockdownOnHitComponent : Component

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared._White.Grab;
+using Content.White.Shared.Grab;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Wraith.Revenant;

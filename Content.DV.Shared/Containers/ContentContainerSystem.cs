@@ -9,7 +9,7 @@ using Content.Shared.Body;
 using Content.Shared.Mind.Components;
 using Robust.Shared.Containers;
 
-namespace Content.Shared._DV.Containers;
+namespace Content.DV.Shared.Containers;
 
 public sealed class ContentContainerSystem : EntitySystem
 {

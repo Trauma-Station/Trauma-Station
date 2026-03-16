@@ -2,8 +2,8 @@
 using Content.Goobstation.Shared.Communications;
 using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Goobstation.Shared.Radio;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.StatusIcon;

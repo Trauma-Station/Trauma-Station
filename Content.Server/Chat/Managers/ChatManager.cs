@@ -18,7 +18,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
-using Content.Server._RMC14.LinkAccount; // RMC - Patreon
+using Content.RMC14.Server.LinkAccount; // RMC - Patreon
 
 namespace Content.Server.Chat.Managers;
 

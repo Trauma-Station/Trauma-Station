@@ -1,6 +1,6 @@
 using EntityCoordinates = Robust.Shared.Map.EntityCoordinates;
 
-namespace Content.Server._Mono.Projectiles.TargetGuided;
+namespace Content.Mono.Server.Projectiles.TargetGuided;
 
 /// <summary>
 /// Component that allows a projectile to follow the cursor position in a gunnery console.

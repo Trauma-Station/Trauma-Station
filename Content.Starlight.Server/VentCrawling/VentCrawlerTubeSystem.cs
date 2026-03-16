@@ -12,12 +12,12 @@ using System.Linq;
 using Content.Server.Construction.Completions;
 using Content.Server.Popups;
 using Content.Shared.VentCrawler.Tube.Components;
-using Content.Shared._Starlight.VentCrawling.Components;
+using Content.Starlight.Shared.VentCrawling.Components;
 using Content.Shared.Tools.Components;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Movement.Systems;
-using Content.Shared._Starlight.VentCrawling;
+using Content.Starlight.Shared.VentCrawling;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
@@ -26,7 +26,7 @@ using Robust.Shared.Map.Components;
 using Content.Server.Inventory;
 using Content.Shared.Hands.EntitySystems;
 
-namespace Content.Server._Starlight.VentCrawling;
+namespace Content.Starlight.Server.VentCrawling;
 
 public sealed class VentCrawlerTubeSystem : EntitySystem
 {

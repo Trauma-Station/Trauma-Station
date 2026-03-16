@@ -7,7 +7,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._White.Animations;
+namespace Content.White.Shared.Animations;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class FlipOnHitComponent : Component;

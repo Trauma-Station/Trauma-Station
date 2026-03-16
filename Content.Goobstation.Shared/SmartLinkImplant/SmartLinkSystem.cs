@@ -4,7 +4,7 @@ using System.Linq;
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
-using Content.Shared._Goobstation.Wizard.Projectiles;
+using Content.Shitcode.Shared.Wizard.Projectiles;
 using Content.Shared.Body;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Timing;

@@ -1,10 +1,10 @@
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
-namespace Content.Server._DV.CosmicCult.Abilities;
+namespace Content.DV.Server.CosmicCult.Abilities;
 
 public sealed class CosmicStrideSystem : EntitySystem
 {

@@ -19,12 +19,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.Salvage.Systems;
+using Content.DV.Shared.Salvage.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._DV.Salvage.Components;
+namespace Content.DV.Shared.Salvage.Components;
 
 /// <summary>
 ///     Trigger for purchasing a kit from the Mining Vendors.

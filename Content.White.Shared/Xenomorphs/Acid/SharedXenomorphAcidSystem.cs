@@ -1,13 +1,13 @@
-using Content.Shared._White.Actions;
-using Content.Shared._White.Other;
-using Content.Shared._White.Xenomorphs.Acid.Components;
+using Content.White.Shared.Actions;
+using Content.White.Shared.Other;
+using Content.White.Shared.Xenomorphs.Acid.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._White.Xenomorphs.Acid;
+namespace Content.White.Shared.Xenomorphs.Acid;
 
 public abstract class SharedXenomorphAcidSystem : EntitySystem
 {

@@ -8,7 +8,7 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
 using Robust.Shared.Containers;
 
-namespace Content.Shared._EinsteinEngines.Silicon.IPC;
+namespace Content.EinsteinEngines.Shared.Silicon.IPC;
 
 public sealed class InternalEncryptionKeySpawner : EntitySystem
 {

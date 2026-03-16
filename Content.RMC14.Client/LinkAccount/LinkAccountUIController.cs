@@ -42,7 +42,7 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.LineEdit;
 using static Robust.Client.UserInterface.Controls.TabContainer;
 
-namespace Content.Client._RMC14.LinkAccount;
+namespace Content.RMC14.Client.LinkAccount;
 
 public sealed class LinkAccountUIController : UIController, IOnSystemChanged<LinkAccountSystem>
 {

@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Popups;
-using Content.Shared._EinsteinEngines.Silicon.EmitBuzzWhileDamaged;
+using Content.EinsteinEngines.Shared.Silicon.EmitBuzzWhileDamaged;
 using Content.Shared.Audio;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs;
@@ -14,7 +14,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Mobs.Components;
 
-namespace Content.Server._EinsteinEngines.Silicon.EmitBuzzOnCrit;
+namespace Content.EinsteinEngines.Server.Silicon.EmitBuzzOnCrit;
 
 /// <summary>
 /// This handles the buzzing popup and sound of a silicon based race when it is pretty damaged.

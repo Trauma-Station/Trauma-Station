@@ -15,7 +15,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Wizard.Mutate;
+namespace Content.Shitcode.Shared.Wizard.Mutate;
 
 public abstract class SharedHulkSystem : EntitySystem
 {

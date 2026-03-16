@@ -2,7 +2,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 
-namespace Content.Shared._White.Xenomorphs.Stealth;
+namespace Content.White.Shared.Xenomorphs.Stealth;
 
 public sealed class StealthOnWalkSystem : EntitySystem
 {

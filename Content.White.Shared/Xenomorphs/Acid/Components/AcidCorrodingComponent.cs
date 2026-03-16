@@ -2,7 +2,7 @@ using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._White.Xenomorphs.Acid.Components;
+namespace Content.White.Shared.Xenomorphs.Acid.Components;
 
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentPause]

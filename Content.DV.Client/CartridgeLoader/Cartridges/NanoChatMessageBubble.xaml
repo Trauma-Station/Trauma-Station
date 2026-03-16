@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <cartridges:NanoChatMessageBubble
     xmlns="https://spacestation14.io"
-    xmlns:cartridges="clr-namespace:Content.Client._DV.CartridgeLoader.Cartridges"
+    xmlns:cartridges="clr-namespace:Content.DV.Client.CartridgeLoader.Cartridges"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     HorizontalExpand="True">
 

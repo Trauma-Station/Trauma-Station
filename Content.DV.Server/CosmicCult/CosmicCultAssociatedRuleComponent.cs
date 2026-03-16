@@ -1,4 +1,4 @@
-namespace Content.Server._DV.CosmicCult;
+namespace Content.DV.Server.CosmicCult;
 
 /// <summary>
 ///     Associates an entity with a specific cosmic cult gamerule

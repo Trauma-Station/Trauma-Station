@@ -8,7 +8,7 @@
 using System.Linq;
 using Content.Server._Goobstation.Wizard.Components;
 using Content.Server.Temperature.Systems;
-using Content.Shared._Goobstation.Wizard.Traps;
+using Content.Shitcode.Shared.Wizard.Traps;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;

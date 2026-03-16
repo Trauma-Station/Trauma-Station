@@ -5,7 +5,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 
-namespace Content.Shared._EinsteinEngines.Forensics.Systems;
+namespace Content.EinsteinEngines.Shared.Forensics.Systems;
 
 public abstract class SharedScentTrackerSystem : EntitySystem
 {

@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.CosmicCult;
+using Content.DV.Shared.CosmicCult;
 
-namespace Content.Client._DV.CosmicCult;
+namespace Content.DV.Client.CosmicCult;
 
 public sealed class MonumentSystem : SharedMonumentSystem;

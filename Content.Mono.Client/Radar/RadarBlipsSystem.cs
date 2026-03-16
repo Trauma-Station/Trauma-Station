@@ -4,10 +4,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
-using Content.Shared._Mono.Radar;
+using Content.Mono.Shared.Radar;
 using Robust.Shared.Timing;
 
-namespace Content.Client._Mono.Radar;
+namespace Content.Mono.Client.Radar;
 
 public sealed partial class RadarBlipsSystem : EntitySystem
 {

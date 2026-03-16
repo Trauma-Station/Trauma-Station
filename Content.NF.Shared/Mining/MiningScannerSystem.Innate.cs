@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Mining.Components;
-using Content.Shared._NF.Mining.Components;
+using Content.NF.Shared.Mining.Components;
 
 namespace Content.Shared.Mining;
 

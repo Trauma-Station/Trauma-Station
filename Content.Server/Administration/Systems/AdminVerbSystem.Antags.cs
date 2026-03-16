@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Server._Goobstation.Wizard.Components;
-using Content.Server._DV.CosmicCult.Components;
+using Content.DV.Server.CosmicCult.Components;
 // </Trauma>
 using Content.Server.Antag;
 using Content.Server.GameTicking;

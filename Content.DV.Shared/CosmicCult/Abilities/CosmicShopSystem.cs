@@ -1,6 +1,6 @@
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 
-namespace Content.Shared._DV.CosmicCult.Abilities;
+namespace Content.DV.Shared.CosmicCult.Abilities;
 
 public sealed class CosmicShopSystem : EntitySystem
 {

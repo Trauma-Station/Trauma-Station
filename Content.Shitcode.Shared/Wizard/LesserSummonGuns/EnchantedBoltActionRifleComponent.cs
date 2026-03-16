@@ -9,7 +9,7 @@ using System.Numerics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Wizard.LesserSummonGuns;
+namespace Content.Shitcode.Shared.Wizard.LesserSummonGuns;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class EnchantedBoltActionRifleComponent : Component

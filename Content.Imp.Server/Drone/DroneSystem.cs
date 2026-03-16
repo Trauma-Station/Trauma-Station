@@ -9,7 +9,7 @@ using Content.Server.Popups;
 using Content.Server.Tools.Innate;
 using Content.Shared.UserInterface;
 using Content.Shared.Body.Components;
-using Content.Shared._Imp.Drone;
+using Content.Imp.Shared.Drone;
 using Content.Shared.Emoting;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
@@ -28,7 +28,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Timing;
 
-namespace Content.Server._Imp.Drone;
+namespace Content.Imp.Server.Drone;
 
 // TODO: move 90% of this bullshit to shared
 public sealed class DroneSystem : SharedDroneSystem

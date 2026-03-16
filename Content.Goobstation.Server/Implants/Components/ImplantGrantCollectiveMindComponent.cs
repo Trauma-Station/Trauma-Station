@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Starlight.Shared.CollectiveMind;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Implants.Components;

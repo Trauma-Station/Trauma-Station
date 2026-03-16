@@ -3,7 +3,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Server._EinsteinEngines.Silicon.BlindHealing;
+namespace Content.EinsteinEngines.Server.Silicon.BlindHealing;
 
 [RegisterComponent]
 public sealed partial class BlindHealingComponent : Component

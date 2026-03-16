@@ -6,12 +6,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Threading;
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared.Item.ItemToggle.Components;
 using Robust.Shared.Network;
 using Timer = Robust.Shared.Timing.Timer;
 
-namespace Content.Shared._Goobstation.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public sealed class ToggleAnimationSystem : EntitySystem
 {

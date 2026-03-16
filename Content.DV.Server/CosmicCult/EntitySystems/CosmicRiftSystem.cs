@@ -1,13 +1,13 @@
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Common.Temperature.Components;
-using Content.Server._DV.CosmicCult.Abilities;
-using Content.Server._DV.CosmicCult.Components;
+using Content.DV.Server.CosmicCult.Abilities;
+using Content.DV.Server.CosmicCult.Components;
 using Content.Server.Actions;
 using Content.Server.Atmos.Components;
 using Content.Goobstation.Shared.Bible; // Goobstation - Bible
 using Content.Server.Popups;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
@@ -19,7 +19,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Server._DV.CosmicCult.EntitySystems;
+namespace Content.DV.Server.CosmicCult.EntitySystems;
 
 public sealed class CosmicRiftSystem : EntitySystem
 {

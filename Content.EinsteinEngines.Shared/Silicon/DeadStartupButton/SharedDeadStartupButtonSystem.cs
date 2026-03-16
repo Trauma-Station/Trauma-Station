@@ -14,7 +14,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._EinsteinEngines.Silicon.DeadStartupButton;
+namespace Content.EinsteinEngines.Shared.Silicon.DeadStartupButton;
 
 /// <summary>
 /// This creates a Button that can be activated after an entity, usually a silicon or an IPC, died.

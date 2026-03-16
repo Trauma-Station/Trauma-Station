@@ -5,9 +5,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language.Systems;
 
-namespace Content.Shared._EinsteinEngines.Language;
+namespace Content.EinsteinEngines.Shared.Language;
 
 [ImplicitDataDefinitionForInheritors]
 public abstract partial class ObfuscationMethod

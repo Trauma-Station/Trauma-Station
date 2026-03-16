@@ -7,7 +7,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._Starlight.VentCrawling.Components;
+namespace Content.Starlight.Shared.VentCrawling.Components;
 
 [RegisterComponent]
 public sealed partial class VentCrawlerEntryComponent : Component

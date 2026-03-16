@@ -7,7 +7,7 @@
 using Content.Server.Chat.Managers;
 using Content.Goobstation.Common.Examine; // Goobstation Change
 using Content.Goobstation.Common.CCVar; // Goobstation Change
-using Content.Shared._Goobstation.Heretic.Components; // Goobstation Change
+using Content.Shitcode.Shared.Heretic.Components; // Goobstation Change
 using Content.Shared.Chat;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
@@ -17,7 +17,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Globalization;
 
-namespace Content.Server._White.Examine;
+namespace Content.White.Server.Examine;
 public sealed class ExaminableCharacterSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventorySystem = default!;

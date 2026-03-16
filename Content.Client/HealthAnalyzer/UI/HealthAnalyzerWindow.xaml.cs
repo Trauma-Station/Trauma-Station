@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shitmed.Shared.Medical.HealthAnalyzer;
 using Content.Shared.Body;
 using Robust.Shared.Prototypes;
 // </Trauma>

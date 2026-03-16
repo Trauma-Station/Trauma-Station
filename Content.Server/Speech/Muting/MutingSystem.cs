@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server._EinsteinEngines.Language;
+using Content.EinsteinEngines.Server.Language;
 // </Trauma>
 using Content.Server.Popups;
 using Content.Server.Speech.EntitySystems;

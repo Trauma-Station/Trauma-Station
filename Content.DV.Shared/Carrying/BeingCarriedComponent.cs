@@ -8,7 +8,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._DV.Carrying;
+namespace Content.DV.Shared.Carrying;
 
 /// <summary>
 /// Stores the carrier of an entity being carried.

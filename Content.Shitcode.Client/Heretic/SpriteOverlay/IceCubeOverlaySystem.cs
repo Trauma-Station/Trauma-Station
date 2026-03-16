@@ -1,4 +1,4 @@
-using Content.Shared._Goobstation.Wizard.Traps;
+using Content.Shitcode.Shared.Wizard.Traps;
 
 namespace Content.Client._Shitcode.Heretic.SpriteOverlay;
 

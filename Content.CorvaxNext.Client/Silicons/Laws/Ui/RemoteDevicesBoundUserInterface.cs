@@ -4,11 +4,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Content.CorvaxNext.Shared.Silicons.Borgs.Components;
 using Robust.Client.UserInterface;
-using static Content.Shared._CorvaxNext.Silicons.Borgs.Components.AiRemoteControllerComponent;
+using static Content.CorvaxNext.Shared.Silicons.Borgs.Components.AiRemoteControllerComponent;
 
-namespace Content.Client._CorvaxNext.Silicons.Laws.Ui;
+namespace Content.CorvaxNext.Client.Silicons.Laws.Ui;
 
 public sealed class RemoteDevicesBoundUserInterface : BoundUserInterface
 {

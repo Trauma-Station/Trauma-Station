@@ -3,7 +3,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Mono.FireControl;
+namespace Content.Mono.Shared.FireControl;
 
 /// <summary>
 /// Event sent from server to client to visualize firing directions for a weapon

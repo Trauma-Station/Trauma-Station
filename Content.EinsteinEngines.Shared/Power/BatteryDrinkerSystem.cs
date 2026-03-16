@@ -10,8 +10,8 @@ using System.Linq;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.PowerCell.Components;
-using Content.Shared._EinsteinEngines.Silicon;
-using Content.Shared._EinsteinEngines.Silicon.Charge;
+using Content.EinsteinEngines.Shared.Silicon;
+using Content.EinsteinEngines.Shared.Silicon.Charge;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 using Content.Shared.Power.EntitySystems;
@@ -21,11 +21,11 @@ using Content.Shared.Power.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 // Goobstation Start - Energycrit
-using Content.Shared._EinsteinEngines.Power.Components;
+using Content.EinsteinEngines.Shared.Power.Components;
 using Content.Shared.Whitelist;
 // Goobstation End
 
-namespace Content.Shared._EinsteinEngines.Power;
+namespace Content.EinsteinEngines.Shared.Power;
 
 public sealed class BatteryDrinkerSystem : EntitySystem
 {

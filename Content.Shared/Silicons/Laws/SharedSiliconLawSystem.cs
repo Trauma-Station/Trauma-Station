@@ -6,7 +6,7 @@ using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Wires;
 using Robust.Shared.Audio;
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Content.CorvaxNext.Shared.Silicons.Borgs.Components;
 
 namespace Content.Shared.Silicons.Laws;
 

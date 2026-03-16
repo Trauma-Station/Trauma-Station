@@ -21,11 +21,11 @@
 
 using Content.Server.Advertise;
 using Content.Server.Advertise.Components;
-using Content.Shared._DV.VendingMachines;
+using Content.DV.Shared.VendingMachines;
 using Content.Shared.Advertise.Components;
 using Content.Shared.Advertise.Systems;
 
-namespace Content.Server._DV.VendingMachines;
+namespace Content.DV.Server.VendingMachines;
 
 public sealed class ShopVendorSystem : SharedShopVendorSystem
 {

@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Speech;
 using Content.Server.Speech.EntitySystems;
-using Content.Shared._Goobstation.Wizard.Traps;
+using Content.Shitcode.Shared.Wizard.Traps;
 using Content.Shared.Speech.Components;
 using Content.Shared.Temperature.Components;
 // </Trauma>

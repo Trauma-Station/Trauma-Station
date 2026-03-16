@@ -5,7 +5,7 @@
 
 using Robust.Shared.Audio;
 
-namespace Content.Shared._EinsteinEngines.Silicon.DeadStartupButton;
+namespace Content.EinsteinEngines.Shared.Silicon.DeadStartupButton;
 
 /// <summary>
 /// This is used for...

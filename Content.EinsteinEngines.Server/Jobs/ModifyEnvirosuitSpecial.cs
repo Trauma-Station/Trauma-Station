@@ -8,11 +8,11 @@ using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.Roles;
-using Content.Shared._EinsteinEngines.SelfExtinguisher;
+using Content.EinsteinEngines.Shared.SelfExtinguisher;
 using Robust.Shared.Prototypes;
 using JetBrains.Annotations;
 
-namespace Content.Server._EinsteinEngines.Jobs;
+namespace Content.EinsteinEngines.Server.Jobs;
 
 [UsedImplicitly]
 public sealed partial class ModifyEnvirosuitSpecial : JobSpecial

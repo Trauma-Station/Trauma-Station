@@ -1,9 +1,9 @@
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Robust.Shared.Timing;
 using Content.Shared.Damage.Systems;
 using Content.Medical.Common.Targeting;
 
-namespace Content.Server._DV.CosmicCult.EntitySystems;
+namespace Content.DV.Server.CosmicCult.EntitySystems;
 
 /// <summary>
 /// Makes the person with this component take damage over time.

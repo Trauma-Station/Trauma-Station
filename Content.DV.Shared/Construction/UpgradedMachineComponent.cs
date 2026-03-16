@@ -5,7 +5,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._DV.Construction;
+namespace Content.DV.Shared.Construction;
 
 /// <summary>
 /// Component added to machines to prevent stacking upgrades and show what upgrade they have.

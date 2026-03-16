@@ -19,7 +19,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Standing;
 using Robust.Shared.Physics.Components;
 
-namespace Content.Shared._White.Grab;
+namespace Content.White.Shared.Grab;
 
 public sealed class GrabThrownSystem : EntitySystem
 {

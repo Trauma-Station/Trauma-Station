@@ -5,9 +5,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Items;
-using Content.Shared._White.Blink;
+using Content.White.Shared.Blink;
 
-namespace Content.Client._White.Blink;
+namespace Content.White.Client.Blink;
 
 public sealed class BlinkSystem : SharedBlinkSystem
 {

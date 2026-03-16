@@ -12,7 +12,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Content.Goobstation.Common.CCVar;
-using Content.Server._RMC14.LinkAccount;
+using Content.RMC14.Server.LinkAccount;
 using Content.Goobstation.Common.JoinQueue;
 
 namespace Content.Goobstation.Server.JoinQueue;

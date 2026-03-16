@@ -5,7 +5,7 @@
 
 using Content.Shared.Whitelist; // Goobstation - Energycrit
 
-namespace Content.Shared._EinsteinEngines.Power.Components;
+namespace Content.EinsteinEngines.Shared.Power.Components;
 
 // Goobstation - Moved from EE server to EE shared
 [RegisterComponent]

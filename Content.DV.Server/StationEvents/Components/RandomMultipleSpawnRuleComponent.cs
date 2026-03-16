@@ -1,7 +1,7 @@
 using Content.Server.StationEvents.Events;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.StationEvents.Components;
+namespace Content.DV.Server.StationEvents.Components;
 
 /// <summary>
 /// Spawns a random amount of entities at a random tile on a station using TryGetRandomTile.

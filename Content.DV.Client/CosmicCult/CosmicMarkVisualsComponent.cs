@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Content.Client._DV.CosmicCult;
+namespace Content.DV.Client.CosmicCult;
 
 [RegisterComponent]
 public sealed partial class CosmicMarkVisualsComponent : Component

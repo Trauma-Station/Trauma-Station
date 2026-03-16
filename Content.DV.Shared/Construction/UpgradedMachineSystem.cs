@@ -5,7 +5,7 @@
 
 using Content.Shared.Examine;
 
-namespace Content.Shared._DV.Construction;
+namespace Content.DV.Shared.Construction;
 
 public sealed class UpgradedMachineSystem : EntitySystem
 {

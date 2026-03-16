@@ -1,7 +1,7 @@
 using Content.Goobstation.Common.Hands;
 using Content.Trauma.Common.MartialArts;
-using Content.Shared._EinsteinEngines.Contests;
-using Content.Shared._White.Grab;
+using Content.EinsteinEngines.Shared.Contests;
+using Content.White.Shared.Grab;
 using Content.Shared.CombatMode;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Cuffs;

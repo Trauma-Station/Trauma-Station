@@ -1,6 +1,6 @@
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._White.Spawners.Components;
+namespace Content.White.Server.Spawners.Components;
 
 [RegisterComponent]
 public sealed partial class AreaSpawnerComponent : Component

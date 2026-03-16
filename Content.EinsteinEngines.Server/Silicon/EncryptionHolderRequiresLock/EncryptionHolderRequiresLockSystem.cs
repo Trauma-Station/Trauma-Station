@@ -7,7 +7,7 @@ using Content.Shared.Lock;
 using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 
-namespace Content.Server._EinsteinEngines.Silicon.EncryptionHolderRequiresLock;
+namespace Content.EinsteinEngines.Server.Silicon.EncryptionHolderRequiresLock;
 
 public sealed class EncryptionHolderRequiresLockSystem : EntitySystem
 

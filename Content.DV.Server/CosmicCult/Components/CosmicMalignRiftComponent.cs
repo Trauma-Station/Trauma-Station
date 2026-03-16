@@ -2,7 +2,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Server._DV.CosmicCult.Components;
+namespace Content.DV.Server.CosmicCult.Components;
 
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class CosmicMalignRiftComponent : Component

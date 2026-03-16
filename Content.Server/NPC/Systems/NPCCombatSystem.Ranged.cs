@@ -10,7 +10,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.NPC.Components;
-using Content.Shared._Goobstation.Weapons.SmartGun;
+using Content.Shitcode.Shared.Weapons.SmartGun;
 using Content.Shared.CombatMode;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;

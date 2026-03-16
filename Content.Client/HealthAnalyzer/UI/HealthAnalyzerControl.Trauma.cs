@@ -4,7 +4,7 @@ using Content.Goobstation.Shared.Disease.Components;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Wounds;
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shitmed.Shared.Medical.HealthAnalyzer;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body;
 using Content.Shared.Chemistry.Components;

@@ -2,7 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Client.Construction;
 using Content.Client.UserInterface.Controls;
-using Content.Shared._White.RadialSelector;
+using Content.White.Shared.RadialSelector;
 using Content.Shared.Construction.Prototypes;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 
 // ReSharper disable InconsistentNaming
 
-namespace Content.Client._White.RadialSelector;
+namespace Content.White.Client.RadialSelector;
 
 public abstract class BasedRadialSelectorMenuBUI : BoundUserInterface
 {

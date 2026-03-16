@@ -42,7 +42,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
-using Content.Shared._Goobstation.Wizard.Spellblade;
+using Content.Shitcode.Shared.Wizard.Spellblade;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Damage.Components;

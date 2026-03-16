@@ -1,8 +1,8 @@
 using Content.Shared.FixedPoint;
-using Content.Shared._White.Xenomorphs.Plasma.Components;
+using Content.White.Shared.Xenomorphs.Plasma.Components;
 using Content.Shared.Alert;
 
-namespace Content.Shared._White.Xenomorphs.Plasma;
+namespace Content.White.Shared.Xenomorphs.Plasma;
 
 public abstract class SharedPlasmaSystem : EntitySystem
 {

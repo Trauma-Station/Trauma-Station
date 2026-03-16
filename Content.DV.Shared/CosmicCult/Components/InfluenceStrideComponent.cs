@@ -1,4 +1,4 @@
-namespace Content.Shared._DV.CosmicCult.Components;
+namespace Content.DV.Shared.CosmicCult.Components;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 [RegisterComponent]

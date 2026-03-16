@@ -8,10 +8,10 @@
 using Content.Server.Lightning;
 using Content.Server.Popups;
 using Content.Shared.PowerCell;
-using Content.Server._EinsteinEngines.Silicon.Charge;
+using Content.EinsteinEngines.Server.Silicon.Charge;
 using Content.Server.Lightning.Components; // Goobstation - Fix IPC shock loops
 using Content.Shared.Power.EntitySystems; // Goobstation - Energycrit
-using Content.Shared._EinsteinEngines.Silicon.DeadStartupButton;
+using Content.EinsteinEngines.Shared.Silicon.DeadStartupButton;
 using Content.Shared.Audio;
 using Content.Shared.Damage.Components;
 using Content.Shared.Electrocution;
@@ -21,7 +21,7 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 
-namespace Content.Server._EinsteinEngines.Silicon.DeadStartupButton;
+namespace Content.EinsteinEngines.Server.Silicon.DeadStartupButton;
 
 public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
 {

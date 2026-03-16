@@ -1,6 +1,6 @@
 using Robust.Shared.Audio; // Goobstation - Play music on announcement
 
-namespace Content.Server._White.GameTicking.Rules.Components;
+namespace Content.White.Server.GameTicking.Rules.Components;
 
 [RegisterComponent]
 public sealed partial class XenomorphsRuleComponent : Component

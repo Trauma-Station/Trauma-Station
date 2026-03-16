@@ -9,7 +9,7 @@
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._DV.Carrying;
+namespace Content.DV.Shared.Carrying;
 
 [Serializable, NetSerializable]
 public sealed partial class CarryDoAfterEvent : SimpleDoAfterEvent;

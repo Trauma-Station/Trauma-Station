@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.Implants.Components;
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Starlight.Shared.CollectiveMind;
 using Content.Shared.Implants;
 
 namespace Content.Goobstation.Server.Implants.Systems;

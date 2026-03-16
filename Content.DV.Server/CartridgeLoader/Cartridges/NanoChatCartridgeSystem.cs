@@ -21,8 +21,8 @@ using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.Database;
-using Content.Shared._DV.CartridgeLoader.Cartridges;
-using Content.Shared._DV.NanoChat;
+using Content.DV.Shared.CartridgeLoader.Cartridges;
+using Content.DV.Shared.NanoChat;
 using Content.Shared.PDA;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
@@ -32,7 +32,7 @@ using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.Utility; // Goob
 
-namespace Content.Server._DV.CartridgeLoader.Cartridges;
+namespace Content.DV.Server.CartridgeLoader.Cartridges;
 
 public sealed class NanoChatCartridgeSystem : EntitySystem
 {

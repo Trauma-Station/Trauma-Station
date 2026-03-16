@@ -8,7 +8,7 @@
 using Content.Goobstation.Common.Effects;
 using Content.Server._Goobstation.Wizard.Components;
 using Content.Server.Electrocution;
-using Content.Shared._Goobstation.Wizard.Projectiles;
+using Content.Shitcode.Shared.Wizard.Projectiles;
 using Content.Shared.Magic.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Throwing;

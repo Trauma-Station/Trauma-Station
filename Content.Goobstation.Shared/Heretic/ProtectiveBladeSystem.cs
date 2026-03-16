@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Numerics;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared._Goobstation.Heretic.Systems;
+using Content.Shitcode.Shared.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Systems.Abilities;

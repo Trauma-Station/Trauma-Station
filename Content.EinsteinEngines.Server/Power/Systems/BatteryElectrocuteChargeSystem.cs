@@ -11,7 +11,7 @@ using Content.Shared.Power.Components;
 using Content.Shared.Electrocution;
 using Robust.Shared.Random;
 
-namespace Content.Server._EinsteinEngines.Power.Systems;
+namespace Content.EinsteinEngines.Server.Power.Systems;
 
 public sealed class BatteryElectrocuteChargeSystem : EntitySystem
 {

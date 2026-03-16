@@ -6,13 +6,13 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Shuttles.UI;
-using Content.Shared._Mono.FireControl;
+using Content.Mono.Shared.FireControl;
 using Content.Shared.Physics;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
-using Content.Client._Mono.Radar;
-using Content.Shared._Mono.Radar;
+using Content.Mono.Client.Radar;
+using Content.Mono.Shared.Radar;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
@@ -23,7 +23,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
-namespace Content.Client._Mono.FireControl.UI;
+namespace Content.Mono.Client.FireControl.UI;
 
 public sealed class FireControlNavControl : BaseShuttleControl
 {

@@ -10,8 +10,8 @@ using Content.Goobstation.Common.CCVar;
 using Content.Server.Body.Components;
 using Content.Shared.Power.EntitySystems; // Goobstation - Energycrit
 using Content.Shared.PowerCell;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._EinsteinEngines.Silicon.Systems;
+using Content.EinsteinEngines.Shared.Silicon.Components;
+using Content.EinsteinEngines.Shared.Silicon.Systems;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Mind.Components;
@@ -27,7 +27,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Content.Server._EinsteinEngines.Silicon.Charge;
+namespace Content.EinsteinEngines.Server.Silicon.Charge;
 
 public sealed class SiliconChargeSystem : EntitySystem
 {

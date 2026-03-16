@@ -1,10 +1,10 @@
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._White.Xenomorphs.Caste;
+using Content.EinsteinEngines.Shared.Language;
+using Content.White.Shared.Xenomorphs.Caste;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Xenomorphs.Xenomorph;
+namespace Content.White.Shared.Xenomorphs.Xenomorph;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class XenomorphComponent : Component

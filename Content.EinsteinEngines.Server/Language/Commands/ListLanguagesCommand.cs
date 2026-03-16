@@ -4,11 +4,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Administration; // Touching for REUSE HEADERS
-using Content.Shared._EinsteinEngines.Language;
+using Content.EinsteinEngines.Shared.Language;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
 
-namespace Content.Server._EinsteinEngines.Language.Commands;
+namespace Content.EinsteinEngines.Server.Language.Commands;
 
 [AnyCommand]
 public sealed class ListLanguagesCommand : IConsoleCommand

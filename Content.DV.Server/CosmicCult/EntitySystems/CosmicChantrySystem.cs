@@ -4,9 +4,9 @@ using Content.Server.Chat.Systems;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.CorvaxNext.Shared.Silicons.Borgs.Components;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -28,7 +28,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Server._DV.CosmicCult.EntitySystems;
+namespace Content.DV.Server.CosmicCult.EntitySystems;
 
 public sealed class CosmicChantrySystem : EntitySystem
 {

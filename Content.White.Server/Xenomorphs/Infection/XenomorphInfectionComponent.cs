@@ -1,8 +1,8 @@
-using Content.Shared._White.Xenomorphs.Infection;
+using Content.White.Shared.Xenomorphs.Infection;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._White.Xenomorphs.Infection;
+namespace Content.White.Server.Xenomorphs.Infection;
 
 [RegisterComponent]
 public sealed partial class XenomorphInfectionComponent : SharedXenomorphInfectionComponent

@@ -1,5 +1,5 @@
 
-namespace Content.Shared._DV.CosmicCult.Components;
+namespace Content.DV.Shared.CosmicCult.Components;
 
 /// <summary>
 /// Component for targets trapped in a vacuous chantry

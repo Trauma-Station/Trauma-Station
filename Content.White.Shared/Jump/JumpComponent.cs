@@ -2,7 +2,7 @@ using Content.Shared.Actions;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Jump;
+namespace Content.White.Shared.Jump;
 
 [RegisterComponent]
 public sealed partial class JumpComponent : Component

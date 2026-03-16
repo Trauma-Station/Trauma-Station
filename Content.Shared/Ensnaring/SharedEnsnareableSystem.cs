@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.DoAfter;
-using Content.Shared._Goobstation.Wizard.Mutate;
+using Content.Shitcode.Shared.Wizard.Mutate;
 using Content.Shared.Projectiles;
 // </Trauma>
 using Content.Shared.Alert;

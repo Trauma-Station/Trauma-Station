@@ -37,7 +37,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Color = System.Drawing.Color;
 
-namespace Content.Server._RMC14.LinkAccount;
+namespace Content.RMC14.Server.LinkAccount;
 
 public sealed class LinkAccountManager : IPostInjectInit
 {

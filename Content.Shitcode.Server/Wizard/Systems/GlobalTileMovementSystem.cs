@@ -9,8 +9,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Goobstation.Wizard.EventSpells;
+using Content.Shitcode.Shared.Wizard;
+using Content.Shitcode.Shared.Wizard.EventSpells;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;

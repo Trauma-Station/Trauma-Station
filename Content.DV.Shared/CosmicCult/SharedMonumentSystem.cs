@@ -1,10 +1,10 @@
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Examine;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._DV.CosmicCult;
+namespace Content.DV.Shared.CosmicCult;
 
 public abstract class SharedMonumentSystem : EntitySystem
 {

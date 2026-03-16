@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Server._DV.Weather;
+namespace Content.DV.Server.Weather;
 
 public sealed class WeatherSchedulerSystem : EntitySystem
 {

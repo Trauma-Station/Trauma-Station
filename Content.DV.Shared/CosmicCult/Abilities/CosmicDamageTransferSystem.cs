@@ -1,12 +1,12 @@
 using Content.Medical.Common.Healing;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
-namespace Content.Shared._DV.CosmicCult.Abilities;
+namespace Content.DV.Shared.CosmicCult.Abilities;
 
 public sealed class CosmicDamageTransferSystem : EntitySystem
 {

@@ -5,8 +5,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Server._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Server.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Maps;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
@@ -16,7 +16,7 @@ using Robust.Shared.Timing;
 using Content.Shared.Coordinates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.CosmicCult.EntitySystems;
+namespace Content.DV.Server.CosmicCult.EntitySystems;
 
 public sealed class CosmicCorruptingSystem : EntitySystem
 {

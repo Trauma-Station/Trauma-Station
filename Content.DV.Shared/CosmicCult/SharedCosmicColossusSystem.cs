@@ -1,7 +1,7 @@
 using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Audio;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Damage;
@@ -29,7 +29,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._DV.CosmicCult;
+namespace Content.DV.Shared.CosmicCult;
 
 public abstract class SharedCosmicColossusSystem : EntitySystem
 {

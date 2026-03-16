@@ -8,7 +8,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Heretic.Components;
+namespace Content.Shitcode.Shared.Heretic.Components;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class TransmutationRuneScriberComponent : Component

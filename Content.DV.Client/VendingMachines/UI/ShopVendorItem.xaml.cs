@@ -25,7 +25,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._DV.VendingMachines.UI;
+namespace Content.DV.Client.VendingMachines.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class ShopVendorItem : BoxContainer

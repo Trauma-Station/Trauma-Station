@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._White.Lockers;
+namespace Content.White.Shared.Lockers;
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedStationAlertLevelLockSystem))]
 [AutoGenerateComponentState]

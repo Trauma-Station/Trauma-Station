@@ -1,9 +1,9 @@
 using System.Numerics;
-using Content.Server._Mono.FireControl;
+using Content.Mono.Server.FireControl;
 using Content.Shared.Weapons.Ranged;
 using Robust.Shared.Spawners;
 
-namespace Content.Server._Mono.Radar;
+namespace Content.Mono.Server.Radar;
 
 /// <summary>
 /// System that handles radar visualization for hitscan projectiles

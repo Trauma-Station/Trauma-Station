@@ -9,7 +9,7 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 
-namespace Content.Shared._Goobstation.Weapons.Wielding;
+namespace Content.Shitcode.Shared.Weapons.Wielding;
 
 public sealed class UnwieldOnShootSystem : EntitySystem
 {

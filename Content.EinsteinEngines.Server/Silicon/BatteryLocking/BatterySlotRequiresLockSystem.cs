@@ -6,10 +6,10 @@
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Lock;
 using Content.Shared.Popups;
-using Content.Shared._EinsteinEngines.Silicon.Components;
+using Content.EinsteinEngines.Shared.Silicon.Components;
 using Content.Shared.IdentityManagement;
 
-namespace Content.Server._EinsteinEngines.Silicons.BatteryLocking;
+namespace Content.EinsteinEngines.Server.Silicons.BatteryLocking;
 
 public sealed class BatterySlotRequiresLockSystem : EntitySystem
 

@@ -7,7 +7,7 @@ using Content.Shared.Whitelist;
 using Content.Shared.Wires;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Shared._DV.Construction;
+namespace Content.DV.Shared.Construction;
 
 /// <summary>
 /// Handles upgrading machines using upgrade kits.

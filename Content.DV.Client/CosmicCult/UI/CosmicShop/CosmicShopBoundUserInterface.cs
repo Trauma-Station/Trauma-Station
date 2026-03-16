@@ -1,11 +1,11 @@
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult.Prototypes;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Prototypes;
 using Robust.Client.UserInterface;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._DV.CosmicCult.UI.CosmicShop;
+namespace Content.DV.Client.CosmicCult.UI.CosmicShop;
 
 public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {

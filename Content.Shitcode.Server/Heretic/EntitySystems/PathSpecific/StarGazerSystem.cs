@@ -8,7 +8,7 @@ using Content.Server.Ghost;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Popups;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
+using Content.Shitcode.Shared.Wizard.FadingTimedDespawn;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Administration.Logs;

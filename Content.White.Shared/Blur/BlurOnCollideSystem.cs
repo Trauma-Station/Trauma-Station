@@ -8,7 +8,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.StatusEffect;
 using Content.Shared.Throwing;
 
-namespace Content.Shared._White.Collision.Blur;
+namespace Content.White.Shared.Collision.Blur;
 
 public sealed class BlurOnCollideSystem : EntitySystem
 {

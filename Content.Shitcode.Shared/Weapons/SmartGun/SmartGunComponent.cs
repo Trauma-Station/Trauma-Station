@@ -7,7 +7,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Goobstation.Weapons.SmartGun;
+namespace Content.Shitcode.Shared.Weapons.SmartGun;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class SmartGunComponent : Component

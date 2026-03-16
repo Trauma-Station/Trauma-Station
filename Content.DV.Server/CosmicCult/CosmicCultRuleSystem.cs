@@ -2,7 +2,7 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Common.Temperature.Components;
 using Content.Goobstation.Shared.Religion; // Goobstation - Shitchap
 using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Server._DV.CosmicCult.Components;
+using Content.DV.Server.CosmicCult.Components;
 using Content.Server.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Server.Antag;
@@ -21,11 +21,11 @@ using Content.Shared.Radio.Components;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.Eye;
-using Content.Shared._DV.CosmicCult.Components.Examine;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult.Prototypes;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.Roles;
+using Content.DV.Shared.CosmicCult.Components.Examine;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Prototypes;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.Roles;
 using Content.Shared.Audio;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.GameTicking.Components;
@@ -51,7 +51,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
 
-namespace Content.Server._DV.CosmicCult;
+namespace Content.DV.Server.CosmicCult;
 
 /// <summary>
 /// Where all the main stuff for Cosmic Cultists happens.

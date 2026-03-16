@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
@@ -13,7 +13,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._DV.CosmicCult.Abilities;
+namespace Content.DV.Shared.CosmicCult.Abilities;
 
 public sealed class CosmicNovaSystem : EntitySystem
 {

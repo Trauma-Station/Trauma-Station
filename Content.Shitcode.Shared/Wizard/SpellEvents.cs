@@ -28,7 +28,7 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._Goobstation.Wizard;
+namespace Content.Shitcode.Shared.Wizard;
 
 public sealed partial class CluwneCurseEvent : EntityTargetActionEvent
 {

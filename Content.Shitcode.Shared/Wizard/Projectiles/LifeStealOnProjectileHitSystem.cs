@@ -5,12 +5,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Wizard.SanguineStrike;
+using Content.Shitcode.Shared.Wizard.SanguineStrike;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Whitelist;
 
-namespace Content.Shared._Goobstation.Wizard.Projectiles;
+namespace Content.Shitcode.Shared.Wizard.Projectiles;
 
 public sealed class LifeStealOnProjectileHitSystem : EntitySystem
 {

@@ -1,4 +1,4 @@
-using Content.Server._White.StationEvents.Components;
+using Content.White.Server.StationEvents.Components;
 using Content.Server.Antag;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
@@ -6,7 +6,7 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Station.Components;
 using Robust.Shared.Map;
 
-namespace Content.Server._White.StationEvents.Events;
+namespace Content.White.Server.StationEvents.Events;
 
 public sealed class VentSpawnRule : StationEventSystem<VentSpawnRuleComponent>
 {

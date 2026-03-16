@@ -3,7 +3,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._EinsteinEngines.Language.Components;
+namespace Content.EinsteinEngines.Shared.Language.Components;
 
 /// <summary>
 /// Assigned to the knowledge entity that holds information about what languages the parent knows.

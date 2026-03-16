@@ -5,7 +5,7 @@ using Content.Goobstation.Shared.Clothing;
 using Content.Server.Heretic.Components.PathSpecific;
 using Content.Server.Heretic.EntitySystems.PathSpecific;
 using Content.Server.Stunnable;
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared._Shitcode.Weapons.Misc;
 using Content.Shared.Armor;
 using Content.Shared.Damage.Events;

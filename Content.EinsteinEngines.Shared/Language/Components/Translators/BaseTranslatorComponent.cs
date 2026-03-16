@@ -1,7 +1,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
-namespace Content.Shared._EinsteinEngines.Language.Components.Translators;
+namespace Content.EinsteinEngines.Shared.Language.Components.Translators;
 
 public abstract partial class BaseTranslatorComponent : Component
 {

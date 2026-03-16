@@ -1,4 +1,4 @@
-namespace Content.Shared._White.Xenomorphs.Larva;
+namespace Content.White.Shared.Xenomorphs.Larva;
 
 [RegisterComponent]
 public sealed partial class XenomorphLarvaComponent : Component

@@ -4,9 +4,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._White.Blink;
+using Content.White.Shared.Blink;
 
-namespace Content.Server._White.Blink;
+namespace Content.White.Server.Blink;
 
 public sealed class BlinkSystem : SharedBlinkSystem
 {

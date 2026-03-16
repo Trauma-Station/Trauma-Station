@@ -10,7 +10,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._DV.Construction;
+namespace Content.DV.Shared.Construction;
 
 /// <summary>
 /// Component for an upgrade kit that upgrades allowed machines then deletes itself.

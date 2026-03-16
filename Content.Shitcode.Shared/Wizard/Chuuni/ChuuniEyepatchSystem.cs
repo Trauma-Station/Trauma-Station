@@ -17,7 +17,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Goobstation.Wizard.Chuuni;
+namespace Content.Shitcode.Shared.Wizard.Chuuni;
 
 public sealed class ChuuniEyepatchSystem : EntitySystem
 {

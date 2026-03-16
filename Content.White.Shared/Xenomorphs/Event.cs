@@ -1,11 +1,11 @@
 using Content.Shared.FixedPoint;
-using Content.Shared._White.Xenomorphs.Caste;
+using Content.White.Shared.Xenomorphs.Caste;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._White.Xenomorphs;
+namespace Content.White.Shared.Xenomorphs;
 
 [Serializable, NetSerializable]
 public sealed partial class XenomorphEvolutionDoAfterEvent : DoAfterEvent

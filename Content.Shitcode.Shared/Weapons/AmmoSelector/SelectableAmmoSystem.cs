@@ -9,7 +9,7 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Changeling;
-using Content.Shared._Goobstation.Wizard.UserInterface;
+using Content.Shitcode.Shared.Wizard.UserInterface;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
@@ -20,7 +20,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Goobstation.Weapons.AmmoSelector;
+namespace Content.Shitcode.Shared.Weapons.AmmoSelector;
 
 public sealed class SelectableAmmoSystem : EntitySystem
 {

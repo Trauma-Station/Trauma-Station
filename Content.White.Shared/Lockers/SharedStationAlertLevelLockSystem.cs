@@ -4,7 +4,7 @@ using Content.Shared.Lock;
 using Content.Shared.Popups;
 using System.Linq;
 
-namespace Content.Shared._White.Lockers;
+namespace Content.White.Shared.Lockers;
 
 public abstract class SharedStationAlertLevelLockSystem : EntitySystem
 {

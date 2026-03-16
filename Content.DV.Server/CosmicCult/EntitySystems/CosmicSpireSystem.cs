@@ -3,13 +3,13 @@ using Content.Server.Atmos.Piping.Components;
 using Content.Server.Atmos.Piping.Unary.EntitySystems;
 using Content.Server.Audio;
 using Content.Server.Popups;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Piping.Unary.Components;
 using Content.Shared.Stacks;
 using Robust.Server.GameObjects;
 
-namespace Content.Server._DV.CosmicCult.EntitySystems;
+namespace Content.DV.Server.CosmicCult.EntitySystems;
 
 public sealed class CosmicSpireSystem : EntitySystem
 {

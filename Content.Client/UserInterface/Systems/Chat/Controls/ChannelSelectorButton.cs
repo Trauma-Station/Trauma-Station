@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Starlight.Shared.CollectiveMind;
 // </Trauma>
 using System.Numerics;
 using Content.Shared.Chat;

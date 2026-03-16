@@ -8,7 +8,7 @@
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Shared._Goobstation.Wizard.HighFrequencyBlade;
+namespace Content.Shitcode.Shared.Wizard.HighFrequencyBlade;
 
 public sealed class LightAttackDamageMultiplierSystem : EntitySystem
 {

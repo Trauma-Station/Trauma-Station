@@ -8,7 +8,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Communications;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Components;
-using Content.Shared._EinsteinEngines.Revolutionary;
+using Content.EinsteinEngines.Shared.Revolutionary;
 using Content.Shared.Heretic;
 using Content.Shared.Revolutionary;
 using Content.Shared.Speech.Muting;

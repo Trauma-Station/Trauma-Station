@@ -28,7 +28,7 @@
 
 using Content.RMC14.Shared.LinkAccount;
 
-namespace Content.Client._RMC14.LinkAccount;
+namespace Content.RMC14.Client.LinkAccount;
 
 public sealed class LinkAccountSystem : EntitySystem
 {

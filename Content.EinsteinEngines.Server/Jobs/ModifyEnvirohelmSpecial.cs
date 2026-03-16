@@ -13,7 +13,7 @@ using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._EinsteinEngines.Jobs;
+namespace Content.EinsteinEngines.Server.Jobs;
 
 [UsedImplicitly]
 public sealed partial class ModifyEnvirohelmSpecial : JobSpecial

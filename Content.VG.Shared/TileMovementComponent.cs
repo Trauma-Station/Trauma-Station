@@ -8,7 +8,7 @@ using Content.Shared.Movement.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
-namespace Content.Shared._vg.TileMovement;
+namespace Content.VG.Shared.TileMovement;
 
 /// <summary>
 /// When attached to an entity with an InputMoverComponent, all mob movement on that entity will

@@ -21,7 +21,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._DV.VendingMachines;
+namespace Content.DV.Shared.VendingMachines;
 
 [Serializable, NetSerializable]
 public sealed class ShopVendorPurchaseMessage(int index) : BoundUserInterfaceMessage

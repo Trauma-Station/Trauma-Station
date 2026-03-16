@@ -8,7 +8,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Shared._White.Standing;
+using Content.White.Shared.Standing;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -18,7 +18,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 
-namespace Content.Shared._White.Blink;
+namespace Content.White.Shared.Blink;
 
 public abstract class SharedBlinkSystem : EntitySystem
 {

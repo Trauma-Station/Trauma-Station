@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Imp.Drone;
+using Content.Imp.Shared.Drone;
 using Content.Shared.Access.Systems;
 using Content.Shared.PAI;
 using Content.Shared.Silicons.Borgs.Components;

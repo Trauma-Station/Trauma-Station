@@ -1,4 +1,4 @@
-namespace Content.Server._Starlight.Objectives;
+namespace Content.Starlight.Server.Objectives;
 
 /// <summary>
 /// Requires that a target at least dies once.

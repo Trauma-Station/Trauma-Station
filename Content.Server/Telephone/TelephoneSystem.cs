@@ -9,7 +9,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
 using Content.Server.Power.EntitySystems;
-using Content.Server._EinsteinEngines.Language; // EE
+using Content.EinsteinEngines.Server.Language; // EE
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Labels.Components;

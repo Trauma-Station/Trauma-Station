@@ -7,7 +7,7 @@ using Content.Shared.Silicons.Laws;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._DV.Silicons.Laws;
+namespace Content.DV.Shared.Silicons.Laws;
 
 /// <summary>
 /// Adds a law no matter the default lawset.

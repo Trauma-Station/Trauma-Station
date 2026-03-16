@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later OR MIT
 
 using System.Linq;
-using Content.Server._DV.CosmicCult;
-using Content.Server._DV.CosmicCult.Components;
-using Content.Server._DV.CosmicCult.EntitySystems;
+using Content.DV.Server.CosmicCult;
+using Content.DV.Server.CosmicCult.Components;
+using Content.DV.Server.CosmicCult.EntitySystems;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
@@ -21,7 +21,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
-namespace Content.Server._DV.CosmicCult;
+namespace Content.DV.Server.CosmicCult;
 
 public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRuleComponent>
 {

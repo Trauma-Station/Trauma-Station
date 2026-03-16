@@ -7,7 +7,7 @@
 // Copyright (c) 2024 New Frontiers Contributors
 // See AGPLv3.txt for details.
 
-using Content.Shared._NF.Shuttles.Events;
+using Content.NF.Shared.Shuttles.Events;
 using Content.Shared.Shuttles.BUIStates;
 using System.Numerics;
 using Content.Shared.Shuttles.Components;

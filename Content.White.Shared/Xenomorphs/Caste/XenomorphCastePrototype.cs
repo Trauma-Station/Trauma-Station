@@ -1,6 +1,6 @@
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Xenomorphs.Caste;
+namespace Content.White.Shared.Xenomorphs.Caste;
 
 [Prototype]
 public sealed partial class XenomorphCastePrototype : IPrototype

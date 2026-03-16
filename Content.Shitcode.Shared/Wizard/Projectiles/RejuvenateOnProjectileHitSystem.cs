@@ -13,7 +13,7 @@ using Content.Shared.Rejuvenate;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 
-namespace Content.Shared._Goobstation.Wizard.Projectiles;
+namespace Content.Shitcode.Shared.Wizard.Projectiles;
 
 public sealed class RejuvenateOnProjectileHitSystem : EntitySystem
 {

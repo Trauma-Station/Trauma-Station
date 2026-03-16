@@ -7,7 +7,7 @@
 using System.Linq;
 using Content.Shared.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server._EinsteinEngines.Atmos.Components;
+using Content.EinsteinEngines.Server.Atmos.Components;
 using Content.Server.Cloning.Components;
 using Content.Shared.Bed.Components;
 using Content.Shared.Body;
@@ -17,7 +17,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._EinsteinEngines.Atmos.EntitySystems;
+namespace Content.EinsteinEngines.Server.Atmos.EntitySystems;
 
 public sealed class IgniteFromGasSystem : EntitySystem
 {

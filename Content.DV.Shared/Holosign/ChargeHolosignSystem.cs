@@ -18,7 +18,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using System.Linq;
 
-namespace Content.Shared._DV.Holosign;
+namespace Content.DV.Shared.Holosign;
 
 public sealed class ChargeHolosignSystem : EntitySystem
 {

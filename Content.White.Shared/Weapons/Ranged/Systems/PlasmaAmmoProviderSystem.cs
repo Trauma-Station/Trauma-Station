@@ -1,10 +1,10 @@
-using Content.Shared._White.Weapons.Ranged.Components;
-using Content.Shared._White.Xenomorphs.Plasma;
-using Content.Shared._White.Xenomorphs.Plasma.Components;
+using Content.White.Shared.Weapons.Ranged.Components;
+using Content.White.Shared.Xenomorphs.Plasma;
+using Content.White.Shared.Xenomorphs.Plasma.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 
-namespace Content.Shared._White.Weapons.Ranged.Systems;
+namespace Content.White.Shared.Weapons.Ranged.Systems;
 
 public sealed class PlasmaAmmoProviderSystem : EntitySystem
 {

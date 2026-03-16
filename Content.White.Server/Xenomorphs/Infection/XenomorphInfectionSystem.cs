@@ -1,5 +1,5 @@
-using Content.Shared._White.Xenomorphs.Infection;
-using Content.Shared._White.Xenomorphs.Larva;
+using Content.White.Shared.Xenomorphs.Infection;
+using Content.White.Shared.Xenomorphs.Larva;
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Mobs.Systems;
@@ -8,7 +8,7 @@ using Robust.Server.Containers;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Server._White.Xenomorphs.Infection;
+namespace Content.White.Server.Xenomorphs.Infection;
 
 public sealed class XenomorphInfectionSystem : EntitySystem
 {

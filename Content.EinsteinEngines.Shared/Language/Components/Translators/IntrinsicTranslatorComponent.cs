@@ -1,4 +1,4 @@
-namespace Content.Shared._EinsteinEngines.Language.Components.Translators;
+namespace Content.EinsteinEngines.Shared.Language.Components.Translators;
 
 /// <summary>
 ///   A translator attached to an entity that translates its speech.

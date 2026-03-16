@@ -8,7 +8,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared.Tag;
 using Robust.Client.GameObjects;
 using Robust.Shared.Random;

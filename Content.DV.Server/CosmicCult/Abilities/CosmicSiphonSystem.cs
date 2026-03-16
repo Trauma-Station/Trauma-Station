@@ -1,11 +1,11 @@
 using Content.Server.Ghost;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Abilities;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Abilities;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Light.Components;
 using Robust.Shared.Random;
 
-namespace Content.Server._DV.CosmicCult.Abilities;
+namespace Content.DV.Server.CosmicCult.Abilities;
 
 public sealed partial class CosmicSiphonSystem : SharedCosmicSiphonSystem
 {

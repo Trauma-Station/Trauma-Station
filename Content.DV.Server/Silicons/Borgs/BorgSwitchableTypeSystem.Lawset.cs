@@ -3,9 +3,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server._DV.Silicons.Laws;
+using Content.DV.Server.Silicons.Laws;
 using Content.Server.Silicons.Laws;
-using Content.Shared._DV.Silicons.Laws;
+using Content.DV.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Robust.Shared.Prototypes;

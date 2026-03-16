@@ -4,12 +4,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.GameStates;
-using Content.Shared._EinsteinEngines.Silicon.Systems;
+using Content.EinsteinEngines.Shared.Silicon.Systems;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Prototypes;
 using Content.Shared.Alert;
 
-namespace Content.Shared._EinsteinEngines.Silicon.Components;
+namespace Content.EinsteinEngines.Shared.Silicon.Components;
 
 /// <summary>
 ///     Component for defining a mob as a robot.

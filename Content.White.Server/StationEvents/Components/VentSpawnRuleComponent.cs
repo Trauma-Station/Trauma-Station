@@ -1,6 +1,6 @@
 using Robust.Shared.Map;
 
-namespace Content.Server._White.StationEvents.Components;
+namespace Content.White.Server.StationEvents.Components;
 
 [RegisterComponent]
 public sealed partial class VentSpawnRuleComponent : Component

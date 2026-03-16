@@ -26,7 +26,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Goobstation.Wizard.Traps;
+namespace Content.Shitcode.Shared.Wizard.Traps;
 
 public abstract class SharedIceCubeSystem : EntitySystem
 {

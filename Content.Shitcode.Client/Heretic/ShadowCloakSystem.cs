@@ -5,8 +5,8 @@
 
 using Content.Client._Shitcode.Heretic.SpriteOverlay;
 using Content.Goobstation.Common.Shaders;
-using Content.Shared._Goobstation.Heretic.Components;
-using Content.Shared._Goobstation.Wizard.Traps;
+using Content.Shitcode.Shared.Heretic.Components;
+using Content.Shitcode.Shared.Wizard.Traps;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.SpriteOverlay;
 using Content.Shared._Shitcode.Heretic.Systems;

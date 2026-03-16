@@ -19,7 +19,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Wizard.SanguineStrike;
+namespace Content.Shitcode.Shared.Wizard.SanguineStrike;
 
 public abstract class SharedSanguineStrikeSystem : EntitySystem
 {

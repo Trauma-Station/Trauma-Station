@@ -24,7 +24,7 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shitmed.Shared.Medical.HealthAnalyzer;
 
 namespace Content.Server.Medical.Components;
 

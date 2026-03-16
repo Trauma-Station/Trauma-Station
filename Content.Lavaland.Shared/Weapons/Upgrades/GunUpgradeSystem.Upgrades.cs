@@ -5,7 +5,7 @@ using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Lavaland.Shared.Pressure;
 using Content.Lavaland.Shared.Weapons.Upgrades.Components;
 using Content.Goobstation.Common.Weapons;
-using Content.Shared._Goobstation.Weapons.Ranged;
+using Content.Shitcode.Shared.Weapons.Ranged;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;

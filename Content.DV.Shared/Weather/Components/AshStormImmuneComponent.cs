@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._DV.Weather.Components;
+namespace Content.DV.Shared.Weather.Components;
 
 /// <summary>
 /// Makes an entity not take damage from any weather.

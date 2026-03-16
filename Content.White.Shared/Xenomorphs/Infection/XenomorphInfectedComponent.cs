@@ -1,8 +1,8 @@
-using Content.Shared._White.StatusIcon;
+using Content.White.Shared.StatusIcon;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Xenomorphs.Infection;
+namespace Content.White.Shared.Xenomorphs.Infection;
 
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState(true, fieldDeltas: true)]

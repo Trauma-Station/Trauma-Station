@@ -7,7 +7,7 @@ using Content.Shared.Chat;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles.Jobs;
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Starlight.Shared.CollectiveMind;
 using Robust.Shared.Player;
 using Content.Shared.Mind;
 

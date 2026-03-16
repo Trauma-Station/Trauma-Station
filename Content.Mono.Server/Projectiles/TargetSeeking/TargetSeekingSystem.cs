@@ -4,7 +4,7 @@ using Content.Server.Shuttles.Components;
 using Content.Shared.Projectiles;
 using Robust.Server.GameObjects;
 
-namespace Content.Server._Mono.Projectiles.TargetSeeking;
+namespace Content.Mono.Server.Projectiles.TargetSeeking;
 
 /// <summary>
 /// Handles the logic for target-seeking projectiles.

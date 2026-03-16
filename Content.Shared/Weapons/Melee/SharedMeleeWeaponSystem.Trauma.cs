@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Goobstation.Common.CCVar;
-using Content.Shared._EinsteinEngines.Contests;
+using Content.EinsteinEngines.Shared.Contests;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Item;

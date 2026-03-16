@@ -1,5 +1,5 @@
-using Content.Shared._White.Lockers;
+using Content.White.Shared.Lockers;
 
-namespace Content.Client._White.Lockers;
+namespace Content.White.Client.Lockers;
 
 public sealed class StationAlertLevelLockSystem : SharedStationAlertLevelLockSystem;

@@ -40,7 +40,7 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
-using Content.Client._White.ItemSlotRenderer;
+using Content.White.Client.ItemSlotRenderer;
 
 namespace Content.Client.Entry
 {

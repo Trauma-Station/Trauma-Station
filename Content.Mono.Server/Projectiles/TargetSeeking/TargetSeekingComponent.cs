@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Content.Server._Mono.Projectiles.TargetSeeking;
+namespace Content.Mono.Server.Projectiles.TargetSeeking;
 
 /// <summary>
 /// Component that allows a projectile to seek and track targets autonomously.

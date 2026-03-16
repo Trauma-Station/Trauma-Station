@@ -1,12 +1,12 @@
 using Content.Server.Chat.Systems;
-using Content.Shared._White.Xenomorphs.Queen;
+using Content.White.Shared.Xenomorphs.Queen;
 using Content.Shared.Mobs;
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 using Robust.Shared.Player;
 using System.Linq;
 using Robust.Shared.Audio;
 
-namespace Content.Server._White.Xenomorphs.Queen;
+namespace Content.White.Server.Xenomorphs.Queen;
 
 public sealed class XenomorphQueenDeathSystem : EntitySystem
 {

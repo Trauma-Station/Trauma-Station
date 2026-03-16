@@ -1,15 +1,15 @@
 using System.Linq;
-using Content.Server._White.Xenomorphs.Queen;
+using Content.White.Server.Xenomorphs.Queen;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
 using Content.Server.DoAfter;
 using Content.Server.Jittering;
 using Content.Server.Mind;
 using Content.Server.Popups;
-using Content.Shared._White.RadialSelector;
-using Content.Shared._White.Xenomorphs;
-using Content.Shared._White.Xenomorphs.Caste;
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.RadialSelector;
+using Content.White.Shared.Xenomorphs;
+using Content.White.Shared.Xenomorphs.Caste;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
@@ -20,7 +20,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Server._White.Xenomorphs.Evolution;
+namespace Content.White.Server.Xenomorphs.Evolution;
 
 public sealed class XenomorphEvolutionSystem : EntitySystem
 {

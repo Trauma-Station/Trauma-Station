@@ -1,7 +1,7 @@
 using Content.Goobstation.Common.Temperature;
 using Content.Goobstation.Common.Temperature.Components;
 using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._Goobstation.Wizard.Spellblade;
+using Content.Shitcode.Shared.Wizard.Spellblade;
 using Content.Shared.Atmos;
 
 namespace Content.Server.Temperature.Systems;

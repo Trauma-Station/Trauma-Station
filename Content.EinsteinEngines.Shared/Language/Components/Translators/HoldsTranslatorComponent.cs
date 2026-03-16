@@ -1,4 +1,4 @@
-namespace Content.Shared._EinsteinEngines.Language.Components.Translators;
+namespace Content.EinsteinEngines.Shared.Language.Components.Translators;
 
 /// <summary>
 ///     Applied internally to the holder of an Entity with [HandheldTranslatorComponent].

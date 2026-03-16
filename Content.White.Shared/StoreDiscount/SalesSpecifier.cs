@@ -7,7 +7,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._White.StoreDiscount;
+namespace Content.White.Shared.StoreDiscount;
 
 [DataDefinition]
 public sealed partial class SalesSpecifier

@@ -10,14 +10,14 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Common.Temperature;
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Temperature.Components;
 
-namespace Content.Shared._Goobstation.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public abstract class SharedVoidCurseSystem : EntitySystem
 {

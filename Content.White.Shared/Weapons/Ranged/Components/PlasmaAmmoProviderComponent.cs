@@ -2,7 +2,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Weapons.Ranged.Components;
+namespace Content.White.Shared.Weapons.Ranged.Components;
 
 [RegisterComponent]
 public sealed partial class PlasmaAmmoProviderComponent : AmmoProviderComponent

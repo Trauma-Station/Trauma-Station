@@ -3,10 +3,10 @@
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Magic;
 using Content.Goobstation.Common.Religion;
-using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Goobstation.Wizard.BindSoul;
-using Content.Shared._Goobstation.Wizard.Chuuni;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
+using Content.Shitcode.Shared.Wizard;
+using Content.Shitcode.Shared.Wizard.BindSoul;
+using Content.Shitcode.Shared.Wizard.Chuuni;
+using Content.Shitcode.Shared.Wizard.FadingTimedDespawn;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;

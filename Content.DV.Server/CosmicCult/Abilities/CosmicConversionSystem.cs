@@ -2,8 +2,8 @@ using Content.Goobstation.Common.Religion;
 using Content.Server.Actions;
 using Content.Server.Atmos.Rotting;
 using Content.Server.Ghost;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Light.Components;
 using Content.Shared.Mind;
@@ -14,7 +14,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.CosmicCult.Abilities;
+namespace Content.DV.Server.CosmicCult.Abilities;
 
 public sealed class CosmicConversionSystem : EntitySystem
 {

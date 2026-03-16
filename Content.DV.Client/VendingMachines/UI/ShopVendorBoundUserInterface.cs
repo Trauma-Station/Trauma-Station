@@ -19,10 +19,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.VendingMachines;
+using Content.DV.Shared.VendingMachines;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._DV.VendingMachines.UI;
+namespace Content.DV.Client.VendingMachines.UI;
 
 public sealed class ShopVendorBoundUserInterface : BoundUserInterface
 {

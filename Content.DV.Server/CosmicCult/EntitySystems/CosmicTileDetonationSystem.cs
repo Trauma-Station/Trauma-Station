@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Numerics;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 
-namespace Content.Server._DV.CosmicCult.EntitySystems;
+namespace Content.DV.Server.CosmicCult.EntitySystems;
 
 public sealed class CosmicTileDetonationSystem : EntitySystem
 {

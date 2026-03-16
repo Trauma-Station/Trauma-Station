@@ -9,7 +9,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._EinsteinEngines.TelescopicBaton;
+namespace Content.EinsteinEngines.Shared.TelescopicBaton;
 
 [RegisterComponent, NetworkedComponent, Access(typeof(TelescopicBatonSystem))]
 [AutoGenerateComponentState, AutoGenerateComponentPause]

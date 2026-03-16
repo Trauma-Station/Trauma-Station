@@ -15,7 +15,7 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Goobstation.Wizard.Traps;
+namespace Content.Shitcode.Shared.Wizard.Traps;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent

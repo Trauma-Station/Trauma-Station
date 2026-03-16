@@ -22,7 +22,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._DV.VendingMachines;
+namespace Content.DV.Shared.VendingMachines;
 
 /// <summary>
 /// Similar to <c>VendingMachineInventoryPrototype</c> but for <see cref="ShopVendorComponent"/>.

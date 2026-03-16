@@ -1,7 +1,7 @@
-using Content.Server._White.Xenomorphs.FaceHugger;
+using Content.White.Server.Xenomorphs.FaceHugger;
 using Content.Server.Popups;
-using Content.Shared._White.Xenomorphs.Egg;
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.Xenomorphs.Egg;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -13,7 +13,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
-namespace Content.Server._White.Xenomorphs.Egg;
+namespace Content.White.Server.Xenomorphs.Egg;
 
 public sealed class XenomorphEggSystem : EntitySystem
 {

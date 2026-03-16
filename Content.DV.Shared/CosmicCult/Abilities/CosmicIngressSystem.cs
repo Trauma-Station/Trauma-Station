@@ -1,12 +1,12 @@
 using Content.Shared.Doors.Systems;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Doors.Components;
 using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Shared._DV.CosmicCult.Abilities;
+namespace Content.DV.Shared.CosmicCult.Abilities;
 
 public sealed class CosmicIngressSystem : EntitySystem
 {

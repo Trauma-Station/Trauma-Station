@@ -1,12 +1,12 @@
-using Content.Shared._White.Xenomorphs.Plasma;
-using Content.Shared._White.Xenomorphs.Plasma.Components;
-using Content.Shared._White.Xenomorphs.Stealth;
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.Xenomorphs.Plasma;
+using Content.White.Shared.Xenomorphs.Plasma.Components;
+using Content.White.Shared.Xenomorphs.Stealth;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.Placeable;
 using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
 
-namespace Content.Server._White.Xenomorphs.Plasma;
+namespace Content.White.Server.Xenomorphs.Plasma;
 
 public sealed class PlasmaSystem : SharedPlasmaSystem
 {

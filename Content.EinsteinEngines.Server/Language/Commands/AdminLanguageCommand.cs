@@ -5,15 +5,15 @@
 
 using Content.Server.Administration;
 using Content.Shared.Administration;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
 using Robust.Shared.Toolshed.Syntax;
 using Robust.Shared.Toolshed.TypeParsers;
 
-namespace Content.Server._EinsteinEngines.Language.Commands;
+namespace Content.EinsteinEngines.Server.Language.Commands;
 
 [ToolshedCommand(Name = "language"), AdminCommand(AdminFlags.Admin)]
 public sealed class AdminLanguageCommand : ToolshedCommand

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Heretic.Systems;
+using Content.Shitcode.Shared.Heretic.Systems;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 

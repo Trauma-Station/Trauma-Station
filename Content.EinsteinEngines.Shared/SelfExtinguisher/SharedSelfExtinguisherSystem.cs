@@ -10,7 +10,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._EinsteinEngines.SelfExtinguisher;
+namespace Content.EinsteinEngines.Shared.SelfExtinguisher;
 
 public abstract partial class SharedSelfExtinguisherSystem : EntitySystem
 {

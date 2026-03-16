@@ -3,7 +3,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Server._EinsteinEngines.Forensics.Components;
+namespace Content.EinsteinEngines.Server.Forensics.Components;
 
 /// <summary>
 /// This component is for mobs that have a Scent.

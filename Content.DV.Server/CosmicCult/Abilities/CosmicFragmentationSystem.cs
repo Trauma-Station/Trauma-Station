@@ -2,9 +2,9 @@ using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.Popups;
 using Content.Shared.Radio.Components;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.Silicons;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.Silicons;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC;
@@ -14,7 +14,7 @@ using Content.Shared.Silicons.Laws.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.CosmicCult.Abilities;
+namespace Content.DV.Server.CosmicCult.Abilities;
 
 public sealed class CosmicFragmentationSystem : EntitySystem
 {

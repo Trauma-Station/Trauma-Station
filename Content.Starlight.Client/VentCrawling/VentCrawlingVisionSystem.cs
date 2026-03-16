@@ -8,11 +8,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.SubFloor;
-using Content.Shared._Starlight.VentCrawling;
+using Content.Starlight.Shared.VentCrawling;
 using Robust.Client.Player;
 using Robust.Shared.Timing;
 
-namespace Content.Client._Starlight.VentCrawling;
+namespace Content.Starlight.Client.VentCrawling;
 
 public sealed class VentCrawlingSystem : EntitySystem
 {

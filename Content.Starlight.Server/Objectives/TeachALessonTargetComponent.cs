@@ -1,4 +1,4 @@
-namespace Content.Server._Starlight.Objectives;
+namespace Content.Starlight.Server.Objectives;
 
 /// <summary>
 /// Marker component for the target of Teach a lesson Objective

@@ -10,7 +10,7 @@ using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
+using Content.Shitcode.Shared.Wizard.FadingTimedDespawn;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Coordinates;

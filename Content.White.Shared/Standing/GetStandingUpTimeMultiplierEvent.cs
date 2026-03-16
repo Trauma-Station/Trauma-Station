@@ -8,7 +8,7 @@
 
 using Content.Shared.Inventory;
 
-namespace Content.Shared._White.Standing;
+namespace Content.White.Shared.Standing;
 
 public sealed class GetStandingUpTimeMultiplierEvent : EntityEventArgs, IInventoryRelayEvent
 {

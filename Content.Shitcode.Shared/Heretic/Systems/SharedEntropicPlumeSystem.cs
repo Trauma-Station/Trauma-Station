@@ -8,9 +8,9 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Religion;
-using Content.Shared._Goobstation.Heretic.Components;
-using Content.Shared._Goobstation.Wizard.TimeStop;
-using Content.Shared._Goobstation.Wizard.Traps;
+using Content.Shitcode.Shared.Heretic.Components;
+using Content.Shitcode.Shared.Wizard.TimeStop;
+using Content.Shitcode.Shared.Wizard.Traps;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Administration;
 using Content.Shared.Chemistry.Components;
@@ -35,7 +35,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._Goobstation.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public abstract class SharedEntropicPlumeSystem : EntitySystem
 {

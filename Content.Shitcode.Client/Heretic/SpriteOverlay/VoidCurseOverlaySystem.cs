@@ -1,4 +1,4 @@
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._Shitcode.Heretic.SpriteOverlay;

@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._EinsteinEngines.Language.Components.Translators;
+namespace Content.EinsteinEngines.Shared.Language.Components.Translators;
 
 /// <summary>
 ///   A translator that must be held in a hand or a pocket of an entity in order ot have effect.

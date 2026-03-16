@@ -7,7 +7,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._White.Blocking;
+using Content.White.Shared.Blocking;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Item.ItemToggle;
@@ -18,7 +18,7 @@ using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 
-namespace Content.Server._White.Blocking;
+namespace Content.White.Server.Blocking;
 
 // TODO: move this to shared goobmod and predict
 public sealed class RechargeableBlockingSystem : EntitySystem

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 // </Trauma>
 using System.Linq;
 using System.Numerics;

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.BerserkerImplant;
-using Content.Shared._Goobstation.Wizard.Projectiles;
+using Content.Shitcode.Shared.Wizard.Projectiles;
 using Content.Shared.Damage.Systems;
 
 namespace Content.Goobstation.Server.BerserkerImplant;

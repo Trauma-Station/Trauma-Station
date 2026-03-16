@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._DV.CosmicCult;
+namespace Content.DV.Shared.CosmicCult;
 
 public sealed partial class CosmicSiphonIndicatorEvent() : EntityEventArgs
 {

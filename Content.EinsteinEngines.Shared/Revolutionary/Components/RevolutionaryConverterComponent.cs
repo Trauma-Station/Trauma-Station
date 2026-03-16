@@ -2,7 +2,7 @@ using Content.Shared.DoAfter;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._EinsteinEngines.Revolutionary.Components;
+namespace Content.EinsteinEngines.Shared.Revolutionary.Components;
 
 [Serializable, NetSerializable]
 public sealed partial class RevolutionaryConverterDoAfterEvent : SimpleDoAfterEvent

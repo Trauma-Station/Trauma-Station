@@ -10,7 +10,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Starlight.CollectiveMind
+namespace Content.Starlight.Shared.CollectiveMind
 {
     [RegisterComponent, NetworkedComponent]
     public sealed partial class CollectiveMindComponent : Component

@@ -9,7 +9,7 @@ using System.Linq;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 
-namespace Content.Shared._Goobstation.Wizard.ScryingOrb;
+namespace Content.Shitcode.Shared.Wizard.ScryingOrb;
 
 public abstract class SharedScryingOrbSystem : EntitySystem
 {

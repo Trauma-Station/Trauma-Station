@@ -1,6 +1,6 @@
 using Content.Server.EUI;
 
-namespace Content.Server._DV.CosmicCult;
+namespace Content.DV.Server.CosmicCult;
 
 /// <summary>
 /// Does nothing on the server as this popup has no interactions

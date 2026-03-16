@@ -10,8 +10,8 @@
 
 using Content.Shared.Audio;
 using Content.Shared.CartridgeLoader;
-using Content.Shared._DV.CartridgeLoader.Cartridges;
-using Content.Shared._DV.NanoChat;
+using Content.DV.Shared.CartridgeLoader.Cartridges;
+using Content.DV.Shared.NanoChat;
 using Robust.Shared.Audio;
 
 namespace Content.Server.CartridgeLoader.Cartridges;

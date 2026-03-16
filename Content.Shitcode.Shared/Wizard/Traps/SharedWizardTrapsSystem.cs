@@ -7,7 +7,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Effects;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
+using Content.Shitcode.Shared.Wizard.FadingTimedDespawn;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -28,7 +28,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._Goobstation.Wizard.Traps;
+namespace Content.Shitcode.Shared.Wizard.Traps;
 
 public abstract class SharedWizardTrapsSystem : EntitySystem
 {

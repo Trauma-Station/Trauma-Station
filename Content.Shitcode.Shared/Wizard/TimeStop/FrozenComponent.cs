@@ -9,7 +9,7 @@ using System.Numerics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Components;
 
-namespace Content.Shared._Goobstation.Wizard.TimeStop;
+namespace Content.Shitcode.Shared.Wizard.TimeStop;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class FrozenComponent : Component

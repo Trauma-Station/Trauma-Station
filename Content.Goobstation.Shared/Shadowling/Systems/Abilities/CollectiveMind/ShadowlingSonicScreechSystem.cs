@@ -2,7 +2,7 @@
 
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.CollectiveMind;
-using Content.Shared._EinsteinEngines.Silicon.Components;
+using Content.EinsteinEngines.Shared.Silicon.Components;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;

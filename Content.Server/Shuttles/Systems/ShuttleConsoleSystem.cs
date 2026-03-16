@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Lavaland.Common.Shuttles;
-using Content.Shared._NF.Shuttles.Events;
+using Content.NF.Shared.Shuttles.Events;
 // </Trauma>
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;

@@ -2,7 +2,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Map;
 using Content.Shared.Shuttles.BUIStates;
 
-namespace Content.Shared._Mono.FireControl;
+namespace Content.Mono.Shared.FireControl;
 
 [Serializable, NetSerializable]
 public sealed class FireControlConsoleUpdateEvent : EntityEventArgs

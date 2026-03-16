@@ -1,11 +1,11 @@
 using System.Numerics;
 using Content.Shared.Interaction;
 using Content.Shared.Projectiles;
-using Content.Shared._Mono.FireControl;
+using Content.Mono.Shared.FireControl;
 using Robust.Server.GameObjects;
 using EntityCoordinates = Robust.Shared.Map.EntityCoordinates;
 
-namespace Content.Server._Mono.Projectiles.TargetGuided;
+namespace Content.Mono.Server.Projectiles.TargetGuided;
 
 /// <summary>
 /// Handles the logic for cursor-guided projectiles.

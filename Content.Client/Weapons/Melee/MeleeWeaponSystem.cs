@@ -1,8 +1,8 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons;
 using Content.Goobstation.Common.Weapons.MeleeDash;
-using Content.Shared._Goobstation.Heretic.Components;
-using Content.Shared._White.Blink;
+using Content.Shitcode.Shared.Heretic.Components;
+using Content.White.Shared.Blink;
 using Content.Shared.Wieldable.Components;
 // </Trauma>
 using System.Linq;

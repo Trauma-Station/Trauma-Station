@@ -10,7 +10,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._White.Blink;
+namespace Content.White.Shared.Blink;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BlinkComponent : Component

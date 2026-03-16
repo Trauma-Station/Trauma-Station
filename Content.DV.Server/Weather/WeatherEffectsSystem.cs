@@ -7,7 +7,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Server._DV.Weather;
+namespace Content.DV.Server.Weather;
 
 /// <summary>
 /// Handles weather damage for exposed entities.

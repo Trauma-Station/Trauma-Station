@@ -7,7 +7,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Shared._White.Standing;
+using Content.White.Shared.Standing;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Gibbing;
@@ -22,7 +22,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
-namespace Content.Server._White.Teleporter;
+namespace Content.White.Server.Teleporter;
 
 public sealed class ExperimentalTeleporterSystem : EntitySystem
 {

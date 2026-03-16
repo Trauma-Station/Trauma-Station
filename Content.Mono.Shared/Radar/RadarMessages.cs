@@ -2,7 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Mono.Radar;
+namespace Content.Mono.Shared.Radar;
 
 [Serializable, NetSerializable]
 public enum RadarBlipShape

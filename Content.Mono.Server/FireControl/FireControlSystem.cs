@@ -2,7 +2,7 @@
 // All rights reserved. Relicensed under AGPL with permission
 
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared._Mono.FireControl;
+using Content.Mono.Shared.FireControl;
 using Content.Shared.Power;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Map;
@@ -15,10 +15,10 @@ using Content.Server.Power.EntitySystems;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Timing;
 using Content.Shared.Interaction;
-using Content.Shared._Mono.ShipGuns;
+using Content.Mono.Shared.ShipGuns;
 using Content.Shared.Examine;
 
-namespace Content.Server._Mono.FireControl;
+namespace Content.Mono.Server.FireControl;
 
 public sealed partial class FireControlSystem : EntitySystem
 {

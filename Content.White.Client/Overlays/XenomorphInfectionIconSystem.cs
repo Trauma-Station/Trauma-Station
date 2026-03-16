@@ -1,9 +1,9 @@
-using Content.Shared._White.Xenomorphs.Infection;
-using Content.Shared._White.Xenomorphs.Larva;
+using Content.White.Shared.Xenomorphs.Infection;
+using Content.White.Shared.Xenomorphs.Larva;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._White.Overlays;
+namespace Content.White.Client.Overlays;
 
 public sealed class XenomorphInfectionIconSystem : EntitySystem
 {

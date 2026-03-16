@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language.Systems;
 using Content.Shared.Body;
 using Content.Shared.Mind.Components;
 using Content.Shared.Random.Helpers;

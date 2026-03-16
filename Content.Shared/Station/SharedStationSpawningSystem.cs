@@ -98,7 +98,7 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared._EinsteinEngines.Silicon.IPC; // DeltaV
+using Content.EinsteinEngines.Shared.Silicon.IPC; // DeltaV
 using Content.Shared.Whitelist; // Goobstation
 
 namespace Content.Shared.Station;

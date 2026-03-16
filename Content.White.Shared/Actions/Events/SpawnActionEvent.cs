@@ -10,7 +10,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Content.Shared.FixedPoint; // Goobstation
 
 
-namespace Content.Shared._White.Actions.Events;
+namespace Content.White.Shared.Actions.Events;
 
 /// <summary>
 /// Event for placing a tile and/or spawning an entity in under the object that triggers it with a delay.

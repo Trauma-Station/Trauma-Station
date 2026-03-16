@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Mono.ShipGuns;
+namespace Content.Mono.Shared.ShipGuns;
 
 /// <summary>
 /// Component for categorizing ship guns by type

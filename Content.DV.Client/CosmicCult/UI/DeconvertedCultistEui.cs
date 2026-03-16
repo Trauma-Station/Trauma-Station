@@ -6,7 +6,7 @@
 
 using Content.Client.Eui;
 
-namespace Content.Client._DV.CosmicCult.UI;
+namespace Content.DV.Client.CosmicCult.UI;
 
 public sealed class DeconvertedCultistEui : BaseEui
 {

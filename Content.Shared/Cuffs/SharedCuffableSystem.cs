@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard.Mutate;
+using Content.Shitcode.Shared.Wizard.Mutate;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 // </Trauma>

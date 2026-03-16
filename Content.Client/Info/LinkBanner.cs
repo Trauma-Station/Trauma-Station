@@ -38,7 +38,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Changelog;
-﻿using Content.Client._RMC14.LinkAccount;
+﻿using Content.RMC14.Client.LinkAccount;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Client.UserInterface.Systems.Guidebook;

@@ -6,8 +6,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.NanoChat;
+using Content.DV.Shared.NanoChat;
 
-namespace Content.Client._DV.NanoChat;
+namespace Content.DV.Client.NanoChat;
 
 public sealed class NanoChatSystem : SharedNanoChatSystem;

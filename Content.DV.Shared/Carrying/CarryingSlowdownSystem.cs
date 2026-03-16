@@ -8,7 +8,7 @@
 
 using Content.Shared.Movement.Systems;
 
-namespace Content.Shared._DV.Carrying;
+namespace Content.DV.Shared.Carrying;
 
 public sealed class CarryingSlowdownSystem : EntitySystem
 {

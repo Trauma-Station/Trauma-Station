@@ -22,7 +22,7 @@ using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Enums;
-using Content.Shared._EinsteinEngines.Humanoid; // EE Plasmeme Change
+using Content.EinsteinEngines.Shared.Humanoid; // EE Plasmeme Change
 
 namespace Content.Shared.Humanoid
 {

@@ -1,10 +1,10 @@
 using System.Collections.Immutable;
-using Content.Server._DV.CosmicCult.Components;
+using Content.DV.Server.CosmicCult.Components;
 using Content.Goobstation.Shared.Religion; // Goobstation - Bible
 using Content.Server.Popups;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult.Components.Examine;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components.Examine;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.IdentityManagement;
@@ -19,7 +19,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.CosmicCult.Abilities;
+namespace Content.DV.Server.CosmicCult.Abilities;
 
 public sealed class CosmicBlankSystem : EntitySystem
 {

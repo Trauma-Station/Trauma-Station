@@ -3,7 +3,7 @@ using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Xenomorphs.Xenomorph;
+namespace Content.White.Shared.Xenomorphs.Xenomorph;
 
 public abstract class SharedXenomorphSystem : EntitySystem
 {

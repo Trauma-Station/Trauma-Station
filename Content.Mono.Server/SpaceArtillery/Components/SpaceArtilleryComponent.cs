@@ -1,7 +1,7 @@
 using Content.Shared.DeviceLinking;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-namespace Content.Server._Mono.SpaceArtillery.Components;
+namespace Content.Mono.Server.SpaceArtillery.Components;
 
 [RegisterComponent]
 public sealed partial class SpaceArtilleryComponent : Component

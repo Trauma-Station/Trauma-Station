@@ -8,7 +8,7 @@ using Content.Shared.Body;
 using Content.Shared.Atmos;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._EinsteinEngines.Atmos.Components;
+namespace Content.EinsteinEngines.Server.Atmos.Components;
 
 /// <summary>
 ///   Component that can be used to add (or remove) fire stacks when exposed to a type of gas, unless wearing ignition immunity.

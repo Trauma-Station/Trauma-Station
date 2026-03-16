@@ -7,7 +7,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._Starlight.VentCrawling.Components;
+namespace Content.Starlight.Shared.VentCrawling.Components;
 
 /// <summary>
 /// A component indicating that the entity is in the process of moving through the venting process

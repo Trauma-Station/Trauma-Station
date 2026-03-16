@@ -8,7 +8,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Goobstation.Wizard.Spellblade;
+namespace Content.Shitcode.Shared.Wizard.Spellblade;
 
 [Prototype]
 public sealed partial class SpellbladeEnchantmentPrototype : IPrototype

@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.Server._White.Spawners.Components;
+using Content.White.Server.Spawners.Components;
 using Content.Server.Atmos.Components;
 using Content.Shared.Maps;
 using Robust.Server.GameObjects;
@@ -8,7 +8,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
-namespace Content.Server._White.Spawners.Systems;
+namespace Content.White.Server.Spawners.Systems;
 
 public sealed class AreaSpawnerSystem : EntitySystem
 {

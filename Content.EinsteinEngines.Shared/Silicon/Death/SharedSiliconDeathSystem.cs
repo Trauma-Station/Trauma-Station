@@ -4,7 +4,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.PowerCell;
 
-namespace Content.Shared._EinsteinEngines.Silicon.Death;
+namespace Content.EinsteinEngines.Shared.Silicon.Death;
 
 // Goobstation - Energycrit: Split SiliconChargeDeathSystem into shared.
 /// <summary>

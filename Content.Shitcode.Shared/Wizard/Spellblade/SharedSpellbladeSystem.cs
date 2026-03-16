@@ -11,7 +11,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared._White.Blink;
+using Content.White.Shared.Blink;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
@@ -25,7 +25,7 @@ using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Wizard.Spellblade;
+namespace Content.Shitcode.Shared.Wizard.Spellblade;
 
 public abstract class SharedSpellbladeSystem : EntitySystem
 {

@@ -1,8 +1,8 @@
 using Content.Shared.FixedPoint;
-using Content.Shared._White.Xenomorphs.Caste;
+using Content.White.Shared.Xenomorphs.Caste;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._White.Xenomorphs.Queen;
+namespace Content.White.Server.Xenomorphs.Queen;
 
 [RegisterComponent]
 public sealed partial class XenomorphPromotionComponent : Component

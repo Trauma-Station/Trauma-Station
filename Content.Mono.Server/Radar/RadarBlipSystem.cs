@@ -1,9 +1,9 @@
 using System.Numerics;
-using Content.Shared._Mono.Radar;
+using Content.Mono.Shared.Radar;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 
-namespace Content.Server._Mono.Radar;
+namespace Content.Mono.Server.Radar;
 
 public sealed partial class RadarBlipSystem : EntitySystem
 {

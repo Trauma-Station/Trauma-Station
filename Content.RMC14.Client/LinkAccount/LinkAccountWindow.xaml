@@ -7,7 +7,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <linkAccount:LinkAccountWindow
     xmlns="https://spacestation14.io"
-    xmlns:linkAccount="clr-namespace:Content.Client._RMC14.LinkAccount"
+    xmlns:linkAccount="clr-namespace:Content.RMC14.Client.LinkAccount"
     Title="{Loc 'rmc-ui-link-discord-account'}">
     <BoxContainer Orientation="Vertical">
         <RichTextLabel Name="Label" Access="Public" Margin="0 0 0 5" />

@@ -3,7 +3,7 @@
 using Content.Goobstation.Shared.Hastur.Components;
 using Content.Goobstation.Shared.Hastur.Events;
 using Content.Server.Chat.Systems;
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;

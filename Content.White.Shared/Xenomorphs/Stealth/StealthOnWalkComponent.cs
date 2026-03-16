@@ -1,7 +1,7 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._White.Xenomorphs.Stealth;
+namespace Content.White.Shared.Xenomorphs.Stealth;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class StealthOnWalkComponent : Component

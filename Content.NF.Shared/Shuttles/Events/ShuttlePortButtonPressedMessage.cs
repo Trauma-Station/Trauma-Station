@@ -4,7 +4,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._NF.Shuttles.Events
+namespace Content.NF.Shared.Shuttles.Events
 {
     /// <summary>
     /// Sent when a network port button is pressed on the shuttle console.

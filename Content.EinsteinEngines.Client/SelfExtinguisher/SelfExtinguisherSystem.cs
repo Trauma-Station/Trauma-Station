@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.SelfExtinguisher;
+using Content.EinsteinEngines.Shared.SelfExtinguisher;
 
-namespace Content.Client._EinsteinEngines.SelfExtinguisher;
+namespace Content.EinsteinEngines.Client.SelfExtinguisher;
 
 public sealed partial class SelfExtinguisherSystem : SharedSelfExtinguisherSystem { }

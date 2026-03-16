@@ -4,7 +4,7 @@ using Content.Medical.Common.Targeting;
 using Content.Goobstation.Common.Body.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Shared.Body;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Trauma.Common.Body;
 // </Trauma>

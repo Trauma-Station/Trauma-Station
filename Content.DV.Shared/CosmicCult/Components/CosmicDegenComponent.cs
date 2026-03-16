@@ -1,7 +1,7 @@
 using Content.Shared.Damage;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._DV.CosmicCult.Components;
+namespace Content.DV.Shared.CosmicCult.Components;
 
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class CosmicDegenComponent : Component

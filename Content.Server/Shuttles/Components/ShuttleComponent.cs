@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.Shared._NF.Shuttles.Events;
+using Content.NF.Shared.Shuttles.Events;
 
 namespace Content.Server.Shuttles.Components
 {

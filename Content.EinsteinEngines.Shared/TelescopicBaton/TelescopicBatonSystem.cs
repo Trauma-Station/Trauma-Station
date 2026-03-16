@@ -15,7 +15,7 @@ using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._EinsteinEngines.TelescopicBaton;
+namespace Content.EinsteinEngines.Shared.TelescopicBaton;
 
 // This is so heavily edited by Goobstation that I won't even bother commenting. It's not like we upstream from EE anyway.
 public sealed class TelescopicBatonSystem : EntitySystem

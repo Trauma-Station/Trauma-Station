@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server._EinsteinEngines.Language;
+using Content.EinsteinEngines.Server.Language;
 using Content.Shared.EntityEffects;
 // </Trauma>
 using Content.Shared.GameTicking;

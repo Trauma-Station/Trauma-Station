@@ -1,7 +1,7 @@
 using Content.Shared.Damage;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Xenomorphs.Acid.Components;
+namespace Content.White.Shared.Xenomorphs.Acid.Components;
 
 [RegisterComponent]
 public sealed partial class XenomorphAcidComponent : Component

@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Medical.Common.Targeting;
-using Content.Shared._Goobstation.Wizard.SanguineStrike;
+using Content.Shitcode.Shared.Wizard.SanguineStrike;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;

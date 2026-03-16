@@ -1,4 +1,4 @@
-namespace Content.Shared._White.Other;
+namespace Content.White.Shared.Other;
 
 [RegisterComponent]
 public sealed partial class StructureComponent : Component;

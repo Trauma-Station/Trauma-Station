@@ -3,13 +3,13 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Silicon.Components;
+using Content.EinsteinEngines.Shared.Silicon.Components;
 using Content.Shared.Alert;
 using Content.Shared.Bed.Sleep;
 using Robust.Shared.Serialization;
 using Content.Shared.Movement.Systems;
 
-namespace Content.Shared._EinsteinEngines.Silicon.Systems;
+namespace Content.EinsteinEngines.Shared.Silicon.Systems;
 
 public sealed class SharedSiliconChargeSystem : EntitySystem
 {

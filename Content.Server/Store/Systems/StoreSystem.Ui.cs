@@ -3,7 +3,7 @@ using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.NTR;
 using Content.Goobstation.Shared.NTR.Events;
 using Content.Server._Goobstation.Wizard.Store;
-using Content.Shared._Goobstation.Wizard.Refund;
+using Content.Shitcode.Shared.Wizard.Refund;
 using Content.Shared.GameTicking;
 // </Trauma>
 using System.Linq;

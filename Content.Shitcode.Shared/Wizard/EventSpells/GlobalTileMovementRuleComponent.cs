@@ -9,7 +9,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Wizard.EventSpells;
+namespace Content.Shitcode.Shared.Wizard.EventSpells;
 
 [RegisterComponent]
 public sealed partial class GlobalTileMovementRuleComponent : Component

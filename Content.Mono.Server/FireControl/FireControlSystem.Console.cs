@@ -7,12 +7,12 @@
 // All rights reserved. Relicensed under AGPL with permission
 
 using Content.Server.Shuttles.Systems;
-using Content.Shared._Mono.FireControl;
+using Content.Mono.Shared.FireControl;
 using Content.Shared.Power;
 using Content.Shared.Shuttles.BUIStates;
 using Robust.Server.GameObjects;
 
-namespace Content.Server._Mono.FireControl;
+namespace Content.Mono.Server.FireControl;
 
 public sealed partial class FireControlSystem : EntitySystem
 {

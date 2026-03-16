@@ -15,7 +15,7 @@ using Content.Server.Mind;
 using Content.Server.Objectives;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
-using Content.Shared._Goobstation.Wizard;
+using Content.Shitcode.Shared.Wizard;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Mind;

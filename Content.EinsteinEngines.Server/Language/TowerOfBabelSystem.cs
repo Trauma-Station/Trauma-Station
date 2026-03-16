@@ -1,9 +1,9 @@
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._EinsteinEngines.Language;
+namespace Content.EinsteinEngines.Server.Language;
 
 public sealed class TowerOfBabelSystem : EntitySystem
 {

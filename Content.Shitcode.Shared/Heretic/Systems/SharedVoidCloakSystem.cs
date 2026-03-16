@@ -8,7 +8,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Heretic;
@@ -17,7 +17,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Temperature;
 using Robust.Shared.Network;
 
-namespace Content.Shared._Goobstation.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public abstract class SharedVoidCloakSystem : EntitySystem
 {

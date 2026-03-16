@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Weapons.AmmoSelector;
+using Content.Shitcode.Shared.Weapons.AmmoSelector;
 using Content.Trauma.Common.MartialArts;
 // </Trauma>
 using System.Numerics;

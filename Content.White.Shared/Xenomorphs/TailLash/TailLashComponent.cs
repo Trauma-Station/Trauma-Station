@@ -5,7 +5,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Xenomorphs.TailLash;
+namespace Content.White.Shared.Xenomorphs.TailLash;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TailLashComponent : Component

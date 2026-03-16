@@ -1,8 +1,8 @@
-using Content.Shared._White.Xenomorphs;
+using Content.White.Shared.Xenomorphs;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 
-namespace Content.Shared._White.Actions;
+namespace Content.White.Shared.Actions;
 
 public sealed class ActionRelaySystem : EntitySystem
 {

@@ -7,8 +7,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Silicons.Laws;
-using Content.Shared._CorvaxNext.Silicons.Borgs;
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Content.CorvaxNext.Shared.Silicons.Borgs;
+using Content.CorvaxNext.Shared.Silicons.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Mind;
 using Content.Shared.Radio.Components;
@@ -19,7 +19,7 @@ using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
-namespace Content.Server._CorvaxNext.Silicons.Borgs;
+namespace Content.CorvaxNext.Server.Silicons.Borgs;
 
 public sealed class AiRemoteControlSystem : SharedAiRemoteControlSystem
 {

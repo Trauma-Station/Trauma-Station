@@ -35,11 +35,11 @@ using Content.Shared.Verbs;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using System.Numerics;
-using Content.Shared._EinsteinEngines.Contests;
+using Content.EinsteinEngines.Shared.Contests;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind.Components;
 
-namespace Content.Shared._DV.Carrying;
+namespace Content.DV.Shared.Carrying;
 
 public sealed class CarryingSystem : EntitySystem
 {

@@ -7,10 +7,10 @@
 using Content.Client.Items.UI;
 using Content.Client.Message;
 using Content.Client.Stylesheets;
-using Content.Shared._White.Blink;
+using Content.White.Shared.Blink;
 using Robust.Client.UserInterface.Controls;
 
-namespace Content.Client._White.Blink;
+namespace Content.White.Client.Blink;
 
 public sealed class BlinkStatusControl : PollingItemStatusControl<BlinkStatusControl.Data>
 {

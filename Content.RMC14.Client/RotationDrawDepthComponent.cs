@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Client._RMC14;
+namespace Content.RMC14.Client;
 
 [RegisterComponent]
 public sealed partial class RotationDrawDepthComponent : Component

@@ -5,7 +5,7 @@
 
 using Content.Shared.Lathe;
 
-namespace Content.Shared._DV.Lathe;
+namespace Content.DV.Shared.Lathe;
 
 /// <summary>
 /// Applies <see cref="LatheUpgradeComponent"/> modifiers when added to a lathe and removes it.

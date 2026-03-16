@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Silo;
+using Content.Shitcode.Shared.Silo;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Interaction;

@@ -1,11 +1,11 @@
 using System.Linq;
-using Content.Server._EinsteinEngines.Language;
+using Content.EinsteinEngines.Server.Language;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
-using Content.Shared._EinsteinEngines.Language;
+using Content.EinsteinEngines.Shared.Language;
 using Content.Medical.Shared.Traumas;
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -18,7 +18,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Server._White.Xenomorphs.Xenomorph;
+namespace Content.White.Server.Xenomorphs.Xenomorph;
 
 public sealed class XenomorphSystem : SharedXenomorphSystem
 {

@@ -9,7 +9,7 @@ using Content.Shared.Humanoid;
 using Robust.Shared.Enums;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Goobstation.Wizard.BindSoul;
+namespace Content.Shitcode.Shared.Wizard.BindSoul;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SoulBoundComponent : Component

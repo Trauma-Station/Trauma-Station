@@ -7,7 +7,7 @@ using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Goobstation.Shared.Mindcontrol;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Starlight.Shared.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Body;
 using Content.Shared.Damage.Systems;

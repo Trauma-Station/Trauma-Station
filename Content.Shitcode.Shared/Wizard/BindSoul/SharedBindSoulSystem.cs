@@ -7,7 +7,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared._Goobstation.Wizard.Projectiles;
+using Content.Shitcode.Shared.Wizard.Projectiles;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage.Components;
@@ -29,7 +29,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
-namespace Content.Shared._Goobstation.Wizard.BindSoul;
+namespace Content.Shitcode.Shared.Wizard.BindSoul;
 
 public abstract class SharedBindSoulSystem : EntitySystem
 {

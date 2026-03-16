@@ -1,13 +1,13 @@
 using Content.Server.Actions;
 using Content.Server.Station.Systems;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Server.Objectives.Systems;
 using Content.Shared.Station.Components;
 using Content.Shared.Throwing;
 using Robust.Shared.Timing;
 
-namespace Content.Server._DV.CosmicCult.EntitySystems;
+namespace Content.DV.Server.CosmicCult.EntitySystems;
 
 public sealed class CosmicColossusSystem : SharedCosmicColossusSystem
 {

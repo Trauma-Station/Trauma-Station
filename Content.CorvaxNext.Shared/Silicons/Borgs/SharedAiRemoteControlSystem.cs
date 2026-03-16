@@ -6,13 +6,13 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Content.CorvaxNext.Shared.Silicons.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Mind;
 using Content.Shared.Silicons.StationAi;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._CorvaxNext.Silicons.Borgs;
+namespace Content.CorvaxNext.Shared.Silicons.Borgs;
 
 public abstract class SharedAiRemoteControlSystem : EntitySystem
 {

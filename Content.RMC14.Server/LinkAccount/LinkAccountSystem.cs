@@ -44,7 +44,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
-namespace Content.Server._RMC14.LinkAccount;
+namespace Content.RMC14.Server.LinkAccount;
 
 public sealed class LinkAccountSystem : EntitySystem
 {

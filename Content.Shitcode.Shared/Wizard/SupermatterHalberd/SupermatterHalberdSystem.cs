@@ -17,7 +17,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Goobstation.Wizard.SupermatterHalberd;
+namespace Content.Shitcode.Shared.Wizard.SupermatterHalberd;
 
 public sealed class SupermatterHalberdSystem : EntitySystem
 {

@@ -1,11 +1,11 @@
-using Content.Server._DV.StationEvents.Components;
+using Content.DV.Server.StationEvents.Components;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
 using Robust.Shared.Random;
 
-namespace Content.Server._DV.StationEvents.Events;
+namespace Content.DV.Server.StationEvents.Events;
 
 public sealed class RandomMultipleSpawnRule : StationEventSystem<RandomMultipleSpawnRuleComponent>
 {

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language.Systems;
 // </Trauma>
 using Content.Shared.Chat;
 using Content.Shared.Inventory.Events;

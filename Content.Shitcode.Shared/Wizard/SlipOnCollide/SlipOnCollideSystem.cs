@@ -8,7 +8,7 @@
 using Content.Shared.Slippery;
 using Robust.Shared.Physics.Events;
 
-namespace Content.Shared._Goobstation.Wizard.SlipOnCollide;
+namespace Content.Shitcode.Shared.Wizard.SlipOnCollide;
 
 public sealed class SlipOnCollideSystem : EntitySystem
 {

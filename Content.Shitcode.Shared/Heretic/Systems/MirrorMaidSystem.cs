@@ -1,5 +1,5 @@
 using Content.Medical.Common.Targeting;
-using Content.Shared._Goobstation.Heretic.Systems;
+using Content.Shitcode.Shared.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Damage.Systems;

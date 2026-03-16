@@ -7,7 +7,7 @@
 
 using System.Numerics;
 using Content.Server.Lightning;
-using Content.Shared._Goobstation.Wizard.TeslaBlast;
+using Content.Shitcode.Shared.Wizard.TeslaBlast;
 using Content.Shared.Electrocution;
 using Content.Shared.Physics;
 

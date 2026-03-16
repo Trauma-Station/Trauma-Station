@@ -4,7 +4,7 @@ using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Server.Actions;
 using Content.Server.Mind;
-using Content.Shared._White.RadialSelector;
+using Content.White.Shared.RadialSelector;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Popups;

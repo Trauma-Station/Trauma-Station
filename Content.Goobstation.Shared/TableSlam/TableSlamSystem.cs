@@ -2,7 +2,7 @@
 
 using System.Linq;
 using Content.Trauma.Common.MartialArts;
-using Content.Shared._EinsteinEngines.Contests;
+using Content.EinsteinEngines.Shared.Contests;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Actions.Events;
 using Content.Shared.Climbing.Components;

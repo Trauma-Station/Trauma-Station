@@ -1,8 +1,8 @@
 using Content.Client.Alerts;
 using Content.Client.UserInterface.Systems.Alerts.Controls;
-using Content.Shared._DV.CosmicCult.Components.Examine;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components.Examine;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
@@ -17,7 +17,7 @@ using Robust.Shared.Utility;
 using System.Numerics;
 using Timer = Robust.Shared.Timing.Timer;
 
-namespace Content.Client._DV.CosmicCult;
+namespace Content.DV.Client.CosmicCult;
 
 public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 {

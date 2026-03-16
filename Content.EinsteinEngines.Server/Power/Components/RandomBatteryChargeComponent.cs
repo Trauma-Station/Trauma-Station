@@ -5,7 +5,7 @@
 
 using System.Numerics;
 
-namespace Content.Server._EinsteinEngines.Power.Components;
+namespace Content.EinsteinEngines.Server.Power.Components;
 
 [RegisterComponent]
 public sealed partial class RandomBatteryChargeComponent : Component

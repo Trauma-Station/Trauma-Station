@@ -1,9 +1,9 @@
 using Content.Server.RoundEnd;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Server._DV.CosmicCult.EntitySystems;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Server.CosmicCult.EntitySystems;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Server._DV.CosmicCult.Components;
+namespace Content.DV.Server.CosmicCult.Components;
 
 /// <summary>
 /// Component for the CosmicCultRuleSystem that should store gameplay info.

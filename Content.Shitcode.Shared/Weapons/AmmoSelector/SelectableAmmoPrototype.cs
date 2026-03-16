@@ -13,7 +13,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Goobstation.Weapons.AmmoSelector;
+namespace Content.Shitcode.Shared.Weapons.AmmoSelector;
 
 [Prototype]
 public sealed partial class SelectableAmmoPrototype : IPrototype

@@ -10,7 +10,7 @@ using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 
-namespace Content.Server._Mono.FireControl.Commands;
+namespace Content.Mono.Server.FireControl.Commands;
 
 [AdminCommand(AdminFlags.Debug)]
 public sealed class VisualizeFireDirectionsCommand : IConsoleCommand

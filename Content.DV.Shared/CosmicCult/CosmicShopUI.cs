@@ -1,9 +1,9 @@
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult.Prototypes;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._DV.CosmicCult;
+namespace Content.DV.Shared.CosmicCult;
 
 [Serializable, NetSerializable]
 public enum CosmicShopKey : byte

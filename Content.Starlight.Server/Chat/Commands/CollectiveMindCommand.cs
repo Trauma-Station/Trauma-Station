@@ -27,7 +27,7 @@ using Robust.Shared.Console;
 using Robust.Shared.Enums;
 
 // Goobstation - Stop Crit Hivemind
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Starlight.Shared.CollectiveMind;
 using Content.Shared.Mobs.Systems;
 
 

@@ -25,7 +25,7 @@
 
 using System.Linq;
 using Content.Client.Message;
-using Content.Shared._DV.Salvage.Systems; // DeltaV
+using Content.DV.Shared.Salvage.Systems; // DeltaV
 using Content.Shared.Salvage;
 using Content.Shared.Salvage.Magnet;
 using Robust.Client.Player; // DeltaV

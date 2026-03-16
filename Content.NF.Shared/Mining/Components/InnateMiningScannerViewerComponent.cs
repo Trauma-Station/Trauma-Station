@@ -7,7 +7,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Content.Shared.Mining;
 
-namespace Content.Shared._NF.Mining.Components;
+namespace Content.NF.Shared.Mining.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(MiningScannerSystem))]
 public sealed partial class InnateMiningScannerViewerComponent : Component

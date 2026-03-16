@@ -2,8 +2,8 @@ using Content.Server.DoAfter;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Jittering;
 using Content.Server.Popups;
-using Content.Shared._White.Xenomorphs;
-using Content.Shared._White.Xenomorphs.Larva;
+using Content.White.Shared.Xenomorphs;
+using Content.White.Shared.Xenomorphs.Larva;
 using Content.Shared.DoAfter;
 using Content.Shared.Gibbing;
 using Content.Shared.IdentityManagement;
@@ -12,7 +12,7 @@ using Robust.Server.Containers;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
-namespace Content.Server._White.Xenomorphs.Larva;
+namespace Content.White.Server.Xenomorphs.Larva;
 
 public sealed class XenomorphLarvaSystem : EntitySystem
 {

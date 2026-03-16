@@ -1,8 +1,8 @@
 using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.Station;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Trauma.Common.RoundEnd;
@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 using System.Numerics;
 using System.Linq;
 
-namespace Content.Server._DV.CosmicCult.Abilities;
+namespace Content.DV.Server.CosmicCult.Abilities;
 
 // TODO: why the fuck is this not in MonumentSystem
 public sealed class CosmicMonumentSystem : EntitySystem

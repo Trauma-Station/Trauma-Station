@@ -7,11 +7,11 @@
 // All rights reserved. Relicensed under AGPL with permission
 
 using System.Numerics;
-using Content.Shared._Mono.FireControl;
+using Content.Mono.Shared.FireControl;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 
-namespace Content.Client._Mono.FireControl;
+namespace Content.Mono.Client.FireControl;
 
 /// <summary>
 /// Client-side system that visualizes firing directions for debug purposes

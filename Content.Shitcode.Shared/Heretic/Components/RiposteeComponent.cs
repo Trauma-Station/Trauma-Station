@@ -13,7 +13,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Goobstation.Heretic.Components;
+namespace Content.Shitcode.Shared.Heretic.Components;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class RiposteeComponent : Component

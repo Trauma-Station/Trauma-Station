@@ -8,7 +8,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._DV.Holosign;
+namespace Content.DV.Shared.Holosign;
 
 /// <summary>
 /// A holosign projector that uses <c>LimitedCharges</c> instead of a power cell slot.

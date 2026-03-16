@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Cloning;
-using Content.Shared._EinsteinEngines.Silicon.Components;
+using Content.EinsteinEngines.Shared.Silicon.Components;
 // </Trauma>
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Systems;

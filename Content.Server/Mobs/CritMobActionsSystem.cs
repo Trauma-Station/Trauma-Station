@@ -1,7 +1,7 @@
 using Content.Server.Administration;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
-using Content.Shared._White.Xenomorphs.Larva;
+using Content.White.Shared.Xenomorphs.Larva;
 using Content.Shared.Chat;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;

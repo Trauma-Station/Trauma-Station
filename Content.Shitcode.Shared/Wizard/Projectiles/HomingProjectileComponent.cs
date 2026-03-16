@@ -9,7 +9,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._Goobstation.Wizard.Projectiles;
+namespace Content.Shitcode.Shared.Wizard.Projectiles;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class HomingProjectileComponent : Component

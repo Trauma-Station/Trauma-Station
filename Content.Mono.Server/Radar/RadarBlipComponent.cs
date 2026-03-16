@@ -1,6 +1,6 @@
-using Content.Shared._Mono.Radar;
+using Content.Mono.Shared.Radar;
 
-namespace Content.Server._Mono.Radar;
+namespace Content.Mono.Server.Radar;
 
 /// <summary>
 /// These handle objects which should be represented by radar blips.

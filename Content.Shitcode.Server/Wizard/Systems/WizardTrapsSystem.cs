@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Atmos.EntitySystems;
-using Content.Shared._Goobstation.Wizard.Traps;
+using Content.Shitcode.Shared.Wizard.Traps;
 using Content.Shared.Atmos.Components;
 
 namespace Content.Server._Goobstation.Wizard.Systems;

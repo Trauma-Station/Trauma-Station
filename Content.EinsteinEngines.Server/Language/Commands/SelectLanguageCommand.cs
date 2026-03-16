@@ -6,11 +6,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Administration;
-using Content.Shared._EinsteinEngines.Language;
+using Content.EinsteinEngines.Shared.Language;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
 
-namespace Content.Server._EinsteinEngines.Language.Commands;
+namespace Content.EinsteinEngines.Server.Language.Commands;
 
 [AnyCommand]
 public sealed class SelectLanguageCommand : IConsoleCommand

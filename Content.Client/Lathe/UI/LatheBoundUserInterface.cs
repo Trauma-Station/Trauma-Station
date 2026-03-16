@@ -40,7 +40,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.Salvage; // DeltaV
+using Content.DV.Shared.Salvage; // DeltaV
 using Content.Shared.Lathe;
 using Content.Goobstation.Shared.Lathe; // Goobstation
 using Content.Shared.Research.Components;

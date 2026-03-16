@@ -20,7 +20,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Access.Systems;
-using Content.Shared._DV.Salvage.Systems;
+using Content.DV.Shared.Salvage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Popups;
 using Content.Shared.Power;
@@ -31,7 +31,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._DV.VendingMachines;
+namespace Content.DV.Shared.VendingMachines;
 
 public abstract class SharedShopVendorSystem : EntitySystem
 {

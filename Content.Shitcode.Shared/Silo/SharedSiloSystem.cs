@@ -15,7 +15,7 @@ using Content.Shared.Materials;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Silo;
+namespace Content.Shitcode.Shared.Silo;
 
 public abstract class SharedSiloSystem : EntitySystem
 {

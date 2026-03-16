@@ -5,7 +5,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._EinsteinEngines.Forensics
+namespace Content.EinsteinEngines.Shared.Forensics
 {
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
     public sealed partial class ScentTrackerComponent : Component

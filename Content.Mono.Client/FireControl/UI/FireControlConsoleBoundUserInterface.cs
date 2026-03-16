@@ -6,12 +6,12 @@
 // Copyright Rane (elijahrane@gmail.com) 2025
 // All rights reserved. Relicensed under AGPL with permission
 
-using Content.Shared._Mono.FireControl;
+using Content.Mono.Shared.FireControl;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Shared.Map;
 
-namespace Content.Client._Mono.FireControl.UI;
+namespace Content.Mono.Client.FireControl.UI;
 
 [UsedImplicitly]
 public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface

@@ -4,7 +4,7 @@ using System.Linq;
 using Content.Goobstation.Common.Silo;
 using Content.Server.Lathe;
 using Content.Server.Station.Components;
-using Content.Shared._Goobstation.Silo;
+using Content.Shitcode.Shared.Silo;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;

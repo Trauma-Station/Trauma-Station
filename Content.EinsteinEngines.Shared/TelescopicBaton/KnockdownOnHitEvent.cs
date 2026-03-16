@@ -7,7 +7,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._EinsteinEngines.TelescopicBaton;
+namespace Content.EinsteinEngines.Shared.TelescopicBaton;
 
 [ByRefEvent]
 public record struct KnockdownOnHitAttemptEvent(bool Cancelled, bool DropItems); // Goobstation

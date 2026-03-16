@@ -23,7 +23,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Content.Client._White.ItemSlotRenderer;
+namespace Content.White.Client.ItemSlotRenderer;
 
 /// <summary>
 /// I can feel my grip on reality slowly slipping.

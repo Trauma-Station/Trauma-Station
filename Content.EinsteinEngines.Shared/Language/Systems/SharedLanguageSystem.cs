@@ -1,11 +1,11 @@
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Events;
 using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Text;
 
-namespace Content.Shared._EinsteinEngines.Language.Systems;
+namespace Content.EinsteinEngines.Shared.Language.Systems;
 
 public abstract class SharedLanguageSystem : EntitySystem
 {

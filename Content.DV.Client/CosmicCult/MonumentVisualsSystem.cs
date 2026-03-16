@@ -1,7 +1,7 @@
 using Robust.Client.GameObjects;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 
-namespace Content.Client._DV.CosmicCult;
+namespace Content.DV.Client.CosmicCult;
 
 /// <summary>
 /// Visualizer for The Monument of the Cosmic Cult.

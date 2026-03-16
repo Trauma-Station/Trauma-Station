@@ -4,7 +4,7 @@ using Content.Shared.Speech;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._DV.CosmicCult.Components;
+namespace Content.DV.Shared.CosmicCult.Components;
 
 /// <summary>
 /// Component for overriding an entity's vocal and speech sounds through equipment.

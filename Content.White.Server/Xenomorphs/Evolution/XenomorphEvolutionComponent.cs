@@ -1,9 +1,9 @@
 using Content.Shared.FixedPoint;
-using Content.Shared._White.RadialSelector;
+using Content.White.Shared.RadialSelector;
 using Content.Shared.Actions.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._White.Xenomorphs.Evolution;
+namespace Content.White.Server.Xenomorphs.Evolution;
 
 [RegisterComponent]
 public sealed partial class XenomorphEvolutionComponent : Component

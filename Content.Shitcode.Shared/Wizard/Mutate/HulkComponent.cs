@@ -13,7 +13,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._Goobstation.Wizard.Mutate;
+namespace Content.Shitcode.Shared.Wizard.Mutate;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [AutoGenerateComponentPause]

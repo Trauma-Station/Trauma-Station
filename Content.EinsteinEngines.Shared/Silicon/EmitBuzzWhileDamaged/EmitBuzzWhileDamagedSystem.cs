@@ -6,7 +6,7 @@
 
 using Robust.Shared.Audio;
 
-namespace Content.Shared._EinsteinEngines.Silicon.EmitBuzzWhileDamaged;
+namespace Content.EinsteinEngines.Shared.Silicon.EmitBuzzWhileDamaged;
 
 /// <summary>
 /// This is used for controlling the cadence of the buzzing emitted by EmitBuzzOnCritSystem.

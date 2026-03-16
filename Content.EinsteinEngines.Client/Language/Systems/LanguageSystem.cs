@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Events;
+using Content.EinsteinEngines.Shared.Language.Systems;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._EinsteinEngines.Language.Systems;
+namespace Content.EinsteinEngines.Client.Language.Systems;
 
 /// <summary>
 /// Provides API to set current language and action for updating UI when languages change.

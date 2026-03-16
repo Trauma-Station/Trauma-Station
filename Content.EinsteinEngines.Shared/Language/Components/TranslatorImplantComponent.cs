@@ -1,7 +1,7 @@
-using Content.Shared._EinsteinEngines.Language.Components.Translators;
+using Content.EinsteinEngines.Shared.Language.Components.Translators;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
-namespace Content.Shared._EinsteinEngines.Language.Components;
+namespace Content.EinsteinEngines.Shared.Language.Components;
 
 /// <summary>
 ///     An implant that allows the implantee to speak and understand other languages.

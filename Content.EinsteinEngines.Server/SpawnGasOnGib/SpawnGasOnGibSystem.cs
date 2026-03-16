@@ -6,7 +6,7 @@
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Gibbing;
 
-namespace Content.Server._EinsteinEngines.SpawnGasOnGib;
+namespace Content.EinsteinEngines.Server.SpawnGasOnGib;
 
 public sealed partial class SpawnGasOnGibSystem : EntitySystem
 {

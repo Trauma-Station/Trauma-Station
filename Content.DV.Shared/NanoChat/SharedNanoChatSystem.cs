@@ -10,11 +10,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.CartridgeLoader.Cartridges;
+using Content.DV.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Examine;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._DV.NanoChat;
+namespace Content.DV.Shared.NanoChat;
 
 /// <summary>
 ///     Base system for NanoChat functionality shared between client and server.

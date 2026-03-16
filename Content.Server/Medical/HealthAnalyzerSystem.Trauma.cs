@@ -1,5 +1,5 @@
 using Content.Server.Medical.Components;
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shitmed.Shared.Medical.HealthAnalyzer;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Shared.Wounds;

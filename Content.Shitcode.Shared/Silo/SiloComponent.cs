@@ -8,7 +8,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Goobstation.Silo;
+namespace Content.Shitcode.Shared.Silo;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class SiloComponent : Component

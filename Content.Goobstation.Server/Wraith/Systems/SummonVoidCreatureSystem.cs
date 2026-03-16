@@ -5,7 +5,7 @@ using Content.Goobstation.Shared.Wraith.Components.Mobs;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Server.Actions;
 using Content.Server.Mind;
-using Content.Shared._White.RadialSelector;
+using Content.White.Shared.RadialSelector;
 using Content.Shared.Prototypes;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;

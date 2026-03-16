@@ -1,5 +1,5 @@
-using Content.Shared._DV.CosmicCult;
+using Content.DV.Shared.CosmicCult;
 
-namespace Content.Client._DV.CosmicCult.EntitySystems;
+namespace Content.DV.Client.CosmicCult.EntitySystems;
 
 public sealed class CosmicColossusSystem : SharedCosmicColossusSystem;

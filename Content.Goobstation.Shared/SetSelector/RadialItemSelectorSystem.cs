@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared._White.RadialSelector;
+using Content.White.Shared.RadialSelector;
 using Content.Shared.UserInterface;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;

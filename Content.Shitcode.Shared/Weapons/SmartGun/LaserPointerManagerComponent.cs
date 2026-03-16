@@ -9,7 +9,7 @@ using System.Numerics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Goobstation.Weapons.SmartGun;
+namespace Content.Shitcode.Shared.Weapons.SmartGun;
 
 /// <summary>
 /// Component attached to an entity in nullspace,

@@ -5,10 +5,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._White.Animations;
+using Content.White.Shared.Animations;
 using Robust.Shared.Player;
 
-namespace Content.Server._White.Animations;
+namespace Content.White.Server.Animations;
 
 public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
 {

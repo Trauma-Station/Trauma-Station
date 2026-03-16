@@ -1,6 +1,6 @@
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Systems;
-using Content.Shared._EinsteinEngines.Revolutionary.Components;
+using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Shared.Language.Systems;
+using Content.EinsteinEngines.Shared.Revolutionary.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Dataset;
@@ -17,7 +17,7 @@ using Content.Shared.Revolutionary.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
-namespace Content.Shared._EinsteinEngines.Revolutionary;
+namespace Content.EinsteinEngines.Shared.Revolutionary;
 
 public sealed class RevolutionaryConverterSystem : EntitySystem
 {

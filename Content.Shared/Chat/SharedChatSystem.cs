@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._Starlight.CollectiveMind;
+using Content.EinsteinEngines.Shared.Language;
+using Content.Starlight.Shared.CollectiveMind;
 using Robust.Shared.Serialization;
 // </Trauma>
 using System.Collections.Frozen;

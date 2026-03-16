@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Server._White.GameTicking.Rules.Components;
+using Content.White.Server.GameTicking.Rules.Components;
 using Content.Server.Antag;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
@@ -9,9 +9,9 @@ using Content.Server.Popups;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
-using Content.Shared._White.Xenomorphs;
-using Content.Shared._White.Xenomorphs.Caste;
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.Xenomorphs;
+using Content.White.Shared.Xenomorphs.Caste;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Components;
@@ -25,7 +25,7 @@ using Robust.Shared.Utility;
 using Robust.Server.Audio; // Goobstation - Play music on announcement
 using Content.Server.Ghost.Roles.Components;
 
-namespace Content.Server._White.GameTicking.Rules;
+namespace Content.White.Server.GameTicking.Rules;
 
 public sealed class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRuleComponent>
 {

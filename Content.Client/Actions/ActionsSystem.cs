@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard.SpellCards;
+using Content.Shitcode.Shared.Wizard.SpellCards;
 using Content.Client._Shitcode.Wizard.Systems;
 using Content.Goobstation.Common.Actions;
 // </Trauma>

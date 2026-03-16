@@ -1,7 +1,7 @@
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._DV.CosmicCult;
+namespace Content.DV.Shared.CosmicCult;
 
 [Serializable, NetSerializable]
 public sealed partial class EventCosmicSiphonDoAfter : SimpleDoAfterEvent;

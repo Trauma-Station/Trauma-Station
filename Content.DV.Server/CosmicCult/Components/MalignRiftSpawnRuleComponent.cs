@@ -1,7 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.CosmicCult.Components;
+namespace Content.DV.Server.CosmicCult.Components;
 
 [RegisterComponent, Access(typeof(MalignRiftSpawnRule))]
 public sealed partial class MalignRiftSpawnRuleComponent : Component

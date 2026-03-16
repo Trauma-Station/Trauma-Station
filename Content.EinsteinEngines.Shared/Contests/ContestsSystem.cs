@@ -15,7 +15,7 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 
-namespace Content.Shared._EinsteinEngines.Contests // Goob Edit
+namespace Content.EinsteinEngines.Shared.Contests // Goob Edit
 {
     public sealed partial class ContestsSystem : EntitySystem
     {

@@ -23,7 +23,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Silo;
-using Content.Shared._DV.Salvage.Components;
+using Content.DV.Shared.Salvage.Components;
 using Content.Lavaland.Common.Mining;
 using Content.Shared.Access.Systems;
 using Content.Shared.Lathe;
@@ -33,7 +33,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._DV.Salvage.Systems;
+namespace Content.DV.Shared.Salvage.Systems;
 
 public sealed class MiningPointsSystem : EntitySystem
 {

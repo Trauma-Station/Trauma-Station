@@ -2,7 +2,7 @@
 
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.ServerCurrency;
-using Content.Server._RMC14.LinkAccount;
+using Content.RMC14.Server.LinkAccount;
 using Content.Server.GameTicking;
 using Content.Server.Popups;
 using Content.Shared.Humanoid;

@@ -8,7 +8,7 @@
 using Content.Shared.Chat;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._EinsteinEngines.Language;
+namespace Content.EinsteinEngines.Shared.Language;
 
 [Prototype]
 public sealed partial class LanguagePrototype : IPrototype

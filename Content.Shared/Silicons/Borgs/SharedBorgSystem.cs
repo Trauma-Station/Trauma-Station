@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Content.CorvaxNext.Shared.Silicons.Borgs.Components;
 using Content.Shared.StationAi;
 using Content.Trauma.Common.Silicons.Borgs;
 // </Trauma>

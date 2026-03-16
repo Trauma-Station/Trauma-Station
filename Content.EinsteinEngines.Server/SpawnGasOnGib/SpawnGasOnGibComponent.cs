@@ -5,7 +5,7 @@
 
 using Content.Shared.Atmos;
 
-namespace Content.Server._EinsteinEngines.SpawnGasOnGib;
+namespace Content.EinsteinEngines.Server.SpawnGasOnGib;
 
 // <summary>
 //   Spawns a gas mixture upon being gibbed.

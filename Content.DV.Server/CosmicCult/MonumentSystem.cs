@@ -7,9 +7,9 @@ using Content.Server.Pinpointer;
 using Content.Server.RoundEnd;
 using Content.Server.Station.Systems;
 using Content.Server.Chat.Systems;
-using Content.Shared._DV.CosmicCult;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared._DV.CosmicCult.Components.Examine;
+using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components.Examine;
 using Content.Shared.Audio;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
@@ -24,7 +24,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Server._DV.CosmicCult;
+namespace Content.DV.Server.CosmicCult;
 
 public sealed class MonumentSystem : SharedMonumentSystem
 {

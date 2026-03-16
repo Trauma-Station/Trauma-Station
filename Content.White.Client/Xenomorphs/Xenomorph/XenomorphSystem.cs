@@ -1,5 +1,5 @@
-using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.White.Shared.Xenomorphs.Xenomorph;
 
-namespace Content.Client._White.Xenomorphs.Xenomorph;
+namespace Content.White.Client.Xenomorphs.Xenomorph;
 
 public sealed class XenomorphSystem : SharedXenomorphSystem;

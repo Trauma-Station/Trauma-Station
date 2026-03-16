@@ -1,6 +1,6 @@
 using Content.Goobstation.Common.Religion;
 using Content.Server.Damage.Systems;
-using Content.Shared._Goobstation.Wizard.Traps;
+using Content.Shitcode.Shared.Wizard.Traps;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Actions;
 using Content.Shared.Ghost;

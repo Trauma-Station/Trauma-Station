@@ -3,7 +3,7 @@
 using Content.Shared.Inventory.Events;
 using Content.Shared.Speech;
 
-namespace Content.Shared._Goobstation.Speech;
+namespace Content.Shitcode.Shared.Speech;
 
 /// <summary>
 /// System that replace your speech sound when you wearing specific clothing

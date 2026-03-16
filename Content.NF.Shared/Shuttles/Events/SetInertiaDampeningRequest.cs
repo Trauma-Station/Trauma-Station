@@ -3,7 +3,7 @@
 // See AGPLv3.txt for details.
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._NF.Shuttles.Events;
+namespace Content.NF.Shared.Shuttles.Events;
 
 /// <summary>
 /// Raised on the client when it wishes to change the inertial dampening of a ship.

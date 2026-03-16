@@ -10,7 +10,7 @@ using Content.Server._Goobstation.Wizard.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared._Goobstation.Wizard.Mutate;
+using Content.Shitcode.Shared.Wizard.Mutate;
 using Content.Shared.Chat;
 using Content.Shared.Humanoid;
 using Content.Shared.Sprite;

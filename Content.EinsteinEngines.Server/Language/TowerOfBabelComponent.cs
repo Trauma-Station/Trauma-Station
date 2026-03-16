@@ -1,7 +1,7 @@
-using Content.Shared._EinsteinEngines.Language;
+using Content.EinsteinEngines.Shared.Language;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._EinsteinEngines.Language;
+namespace Content.EinsteinEngines.Server.Language;
 
 [RegisterComponent]
 public sealed partial class TowerOfBabelComponent : Component

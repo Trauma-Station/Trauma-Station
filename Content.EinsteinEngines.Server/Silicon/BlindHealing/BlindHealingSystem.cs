@@ -6,7 +6,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Cargo.Components;
 using Content.Server.Stack;
-using Content.Shared._EinsteinEngines.Silicon.BlindHealing;
+using Content.EinsteinEngines.Shared.Silicon.BlindHealing;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -17,7 +17,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 
-namespace Content.Server._EinsteinEngines.Silicon.BlindHealing;
+namespace Content.EinsteinEngines.Server.Silicon.BlindHealing;
 
 public sealed class BlindHealingSystem : SharedBlindHealingSystem
 {

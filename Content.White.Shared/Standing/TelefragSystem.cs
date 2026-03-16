@@ -12,7 +12,7 @@ using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Map;
 
-namespace Content.Shared._White.Standing;
+namespace Content.White.Shared.Standing;
 
 public sealed class TelefragSystem : EntitySystem
 {

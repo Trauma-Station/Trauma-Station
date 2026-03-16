@@ -1,7 +1,7 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
-using Content.Shared._Goobstation.Wizard;
+using Content.Shitcode.Shared.Wizard;
 using Content.Shared._Shitcode.Heretic.Curses;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chemistry.EntitySystems;

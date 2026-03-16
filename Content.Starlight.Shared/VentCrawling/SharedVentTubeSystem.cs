@@ -12,7 +12,7 @@ using Content.Shared.VentCrawler.Tube.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 
-namespace Content.Shared._Starlight.VentCrawling;
+namespace Content.Starlight.Shared.VentCrawling;
 
 public sealed class SharedVentTubeSystem : EntitySystem
 {

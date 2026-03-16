@@ -40,7 +40,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Maps;
-using Content.Shared._DV.CosmicCult.Components; // DeltaV - Cosmic Cult
+using Content.DV.Shared.CosmicCult.Components; // DeltaV - Cosmic Cult
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Database;

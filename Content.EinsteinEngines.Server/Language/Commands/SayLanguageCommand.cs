@@ -9,7 +9,7 @@ using Content.Shared.Chat;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
 
-namespace Content.Server._EinsteinEngines.Language.Commands;
+namespace Content.EinsteinEngines.Server.Language.Commands;
 
 [AnyCommand]
 public sealed class SayLanguageCommand : IConsoleCommand

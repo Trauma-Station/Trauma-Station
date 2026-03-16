@@ -1,7 +1,7 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._White.Actions;
+namespace Content.White.Shared.Actions;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class PlasmaCostActionComponent : Component

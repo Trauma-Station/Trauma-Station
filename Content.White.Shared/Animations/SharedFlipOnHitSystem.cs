@@ -11,7 +11,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._White.Animations;
+namespace Content.White.Shared.Animations;
 
 public abstract class SharedFlipOnHitSystem : EntitySystem
 {

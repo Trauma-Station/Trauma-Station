@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Hands;
-using Content.Shared._Goobstation.Wizard.ArcaneBarrage;
+using Content.Shitcode.Shared.Wizard.ArcaneBarrage;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Examine;

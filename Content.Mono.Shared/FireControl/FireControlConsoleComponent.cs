@@ -1,4 +1,4 @@
-namespace Content.Shared._Mono.FireControl;
+namespace Content.Mono.Shared.FireControl;
 
 /// <summary>
 /// These are for the consoles that provide the user interface for fire control servers.

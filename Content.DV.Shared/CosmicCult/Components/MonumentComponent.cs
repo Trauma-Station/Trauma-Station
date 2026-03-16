@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._DV.CosmicCult.Components;
+namespace Content.DV.Shared.CosmicCult.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(SharedMonumentSystem))]
 [AutoGenerateComponentPause]

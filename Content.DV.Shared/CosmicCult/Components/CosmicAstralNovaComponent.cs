@@ -2,7 +2,7 @@ using Content.Shared.Damage;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._DV.CosmicCult.Components;
+namespace Content.DV.Shared.CosmicCult.Components;
 
 /// <summary>
 /// Component to call back to the cosmic cult ability system regarding a collision

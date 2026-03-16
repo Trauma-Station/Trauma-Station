@@ -9,8 +9,8 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Goobstation.Wizard.EventSpells;
+using Content.Shitcode.Shared.Wizard;
+using Content.Shitcode.Shared.Wizard.EventSpells;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Eye;

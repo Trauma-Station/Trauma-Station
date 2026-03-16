@@ -1,8 +1,8 @@
 // <Trauma>
 using Content.Medical.Common.Targeting;
 using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._White.Xenomorphs.Infection;
+using Content.EinsteinEngines.Shared.Silicon.Components;
+using Content.White.Shared.Xenomorphs.Infection;
 using Content.Shared.Body;
 using Robust.Shared.Utility;
 // </Trauma>

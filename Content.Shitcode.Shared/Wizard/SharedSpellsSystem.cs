@@ -16,19 +16,19 @@ using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Common.Religion;
-using Content.Shared._DV.Carrying;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._Goobstation.Wizard.BindSoul;
-using Content.Shared._Goobstation.Wizard.Chuuni;
-using Content.Shared._Goobstation.Wizard.Components;
-using Content.Shared._Goobstation.Wizard.LesserSummonGuns;
-using Content.Shared._Goobstation.Wizard.Mutate;
-using Content.Shared._Goobstation.Wizard.Projectiles;
-using Content.Shared._Goobstation.Wizard.SanguineStrike;
-using Content.Shared._Goobstation.Wizard.SpellCards;
-using Content.Shared._Goobstation.Wizard.Teleport;
-using Content.Shared._Goobstation.Wizard.TeslaBlast;
-using Content.Shared._Goobstation.Wizard.Traps;
+using Content.DV.Shared.Carrying;
+using Content.EinsteinEngines.Shared.Silicon.Components;
+using Content.Shitcode.Shared.Wizard.BindSoul;
+using Content.Shitcode.Shared.Wizard.Chuuni;
+using Content.Shitcode.Shared.Wizard.Components;
+using Content.Shitcode.Shared.Wizard.LesserSummonGuns;
+using Content.Shitcode.Shared.Wizard.Mutate;
+using Content.Shitcode.Shared.Wizard.Projectiles;
+using Content.Shitcode.Shared.Wizard.SanguineStrike;
+using Content.Shitcode.Shared.Wizard.SpellCards;
+using Content.Shitcode.Shared.Wizard.Teleport;
+using Content.Shitcode.Shared.Wizard.TeslaBlast;
+using Content.Shitcode.Shared.Wizard.Traps;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Abilities.Mime;
 using Content.Shared.Access.Components;
@@ -101,7 +101,7 @@ using Content.Shared.Friction;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Physics.Components;
 
-namespace Content.Shared._Goobstation.Wizard;
+namespace Content.Shitcode.Shared.Wizard;
 
 public abstract class SharedSpellsSystem : EntitySystem
 {

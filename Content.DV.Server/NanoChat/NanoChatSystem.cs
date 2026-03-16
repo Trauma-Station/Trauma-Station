@@ -14,8 +14,8 @@ using Content.Server.Administration.Logs;
 using Content.Shared.Kitchen.Components; // Trauma - moved microwaved event to shared
 using Content.Server.NameIdentifier;
 using Content.Shared.Database;
-using Content.Shared._DV.CartridgeLoader.Cartridges;
-using Content.Shared._DV.NanoChat;
+using Content.DV.Shared.CartridgeLoader.Cartridges;
+using Content.DV.Shared.NanoChat;
 using Content.Shared.Kitchen;
 using Content.Shared.NameIdentifier;
 using Content.Shared.PDA;
@@ -23,7 +23,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
-namespace Content.Server._DV.NanoChat;
+namespace Content.DV.Server.NanoChat;
 
 /// <summary>
 ///     Handles NanoChat features that are specific to the server but not related to the cartridge itself.

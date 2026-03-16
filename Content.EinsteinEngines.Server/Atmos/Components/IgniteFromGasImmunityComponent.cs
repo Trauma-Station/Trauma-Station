@@ -7,7 +7,7 @@
 using Content.Shared.Body;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._EinsteinEngines.Atmos.Components;
+namespace Content.EinsteinEngines.Server.Atmos.Components;
 
 /// <summary>
 ///   Component that is used on clothing to prevent ignition when exposed to a specific gas.

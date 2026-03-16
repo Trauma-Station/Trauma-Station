@@ -2,7 +2,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._White.Xenomorphs.Egg;
+namespace Content.White.Shared.Xenomorphs.Egg;
 
 [RegisterComponent]
 public sealed partial class XenomorphEggComponent : Component

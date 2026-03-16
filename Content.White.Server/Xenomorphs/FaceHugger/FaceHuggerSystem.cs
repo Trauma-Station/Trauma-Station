@@ -18,7 +18,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared._White.Xenomorphs.Infection;
+using Content.White.Shared.Xenomorphs.Infection;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -29,14 +29,14 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Server.Construction.Conditions;
-using Content.Shared._White.Xenomorphs.FaceHugger;
+using Content.White.Shared.Xenomorphs.FaceHugger;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Atmos.Components;
 using Content.Server.Nutrition.EntitySystems;
 using Content.Shared.Nutrition.Components;
 
-namespace Content.Server._White.Xenomorphs.FaceHugger;
+namespace Content.White.Server.Xenomorphs.FaceHugger;
 
 public sealed class FaceHuggerSystem : EntitySystem
 {

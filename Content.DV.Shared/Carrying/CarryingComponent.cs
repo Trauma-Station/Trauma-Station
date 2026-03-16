@@ -8,7 +8,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._DV.Carrying;
+namespace Content.DV.Shared.Carrying;
 
 /// <summary>
 /// Added to an entity when they are carrying somebody.

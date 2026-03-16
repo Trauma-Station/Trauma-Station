@@ -5,7 +5,7 @@
 
 using Robust.Shared.Audio;
 
-namespace Content.Server._White.Teleporter;
+namespace Content.White.Server.Teleporter;
 
 [RegisterComponent]
 public sealed partial class ExperimentalTeleporterComponent : Component

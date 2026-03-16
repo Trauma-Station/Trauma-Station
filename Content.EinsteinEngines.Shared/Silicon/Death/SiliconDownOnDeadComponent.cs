@@ -5,7 +5,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._EinsteinEngines.Silicon.Death;
+namespace Content.EinsteinEngines.Shared.Silicon.Death;
 
 // Goobstation - Moved into shared, made networked.
 /// <summary>

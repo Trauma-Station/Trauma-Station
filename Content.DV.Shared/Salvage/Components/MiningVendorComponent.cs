@@ -19,11 +19,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.Salvage.Systems;
+using Content.DV.Shared.Salvage.Systems;
 using Content.Shared.Thief;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-namespace Content.Shared._DV.Salvage.Components;
+namespace Content.DV.Shared.Salvage.Components;
 
 /// </summary>
 ///     A vendor that sells mining equipment. Also holds a radial menu to redeem vouchers with a preset list of items.

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.Salvage.Components;
+using Content.DV.Shared.Salvage.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -10,7 +10,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._DV.Salvage.Systems;
+namespace Content.DV.Shared.Salvage.Systems;
 
 public sealed class MiningVoucherSystem : EntitySystem
 {

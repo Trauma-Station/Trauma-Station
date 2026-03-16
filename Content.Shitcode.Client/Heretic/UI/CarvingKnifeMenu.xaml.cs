@@ -8,7 +8,7 @@
 
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared.Heretic.Prototypes;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;

@@ -8,10 +8,10 @@ using Content.Server.Effects;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Systems;
-using Content.Shared._Goobstation.Wizard.Chuuni;
-using Content.Shared._Starlight.CollectiveMind;
+using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Shared.Language.Systems;
+using Content.Shitcode.Shared.Wizard.Chuuni;
+using Content.Starlight.Shared.CollectiveMind;
 using Content.Trauma.Common.Speech;
 // </Trauma>
 using System.Globalization;

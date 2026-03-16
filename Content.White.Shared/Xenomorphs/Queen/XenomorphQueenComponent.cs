@@ -1,7 +1,7 @@
-using Content.Shared._White.Xenomorphs.Caste;
+using Content.White.Shared.Xenomorphs.Caste;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Xenomorphs.Queen;
+namespace Content.White.Shared.Xenomorphs.Queen;
 
 [RegisterComponent]
 public sealed partial class XenomorphQueenComponent : Component

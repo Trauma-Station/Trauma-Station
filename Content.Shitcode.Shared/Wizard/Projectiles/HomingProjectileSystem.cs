@@ -5,14 +5,14 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Wizard.TimeStop;
+using Content.Shitcode.Shared.Wizard.TimeStop;
 using Content.Shared.Interaction;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._Goobstation.Wizard.Projectiles;
+namespace Content.Shitcode.Shared.Wizard.Projectiles;
 
 public sealed class HomingProjectileSystem : EntitySystem
 {

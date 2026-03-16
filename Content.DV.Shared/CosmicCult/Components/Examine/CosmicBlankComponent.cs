@@ -2,7 +2,7 @@ using Content.Shared.StatusIcon;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._DV.CosmicCult.Components.Examine;
+namespace Content.DV.Shared.CosmicCult.Components.Examine;
 
 /// <summary>
 /// Marker component for targets under the effect of Shunt Subjectivity or Astral Projection.

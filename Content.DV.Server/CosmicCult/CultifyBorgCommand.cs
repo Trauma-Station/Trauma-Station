@@ -5,10 +5,10 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server._DV.CosmicCult.Abilities;
+using Content.DV.Server.CosmicCult.Abilities;
 using Content.Server.Administration;
 using Content.Server.Antag;
-using Content.Shared._DV.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Administration;
 using Content.Shared.Mind;
 using Content.Shared.Silicons.Borgs.Components;
@@ -16,7 +16,7 @@ using Robust.Shared.Console;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
-namespace Content.Server._DV.CosmicCult;
+namespace Content.DV.Server.CosmicCult;
 
 [AdminCommand(AdminFlags.Fun)]
 public sealed class CultifyBorgCommand : LocalizedEntityCommands

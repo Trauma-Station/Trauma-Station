@@ -4,12 +4,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Silicons.Laws;
-using Content.Shared._DV.Silicons.Laws;
+using Content.DV.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._DV.Silicons.Laws;
+namespace Content.DV.Server.Silicons.Laws;
 
 /// <summary>
 /// Handles adding the slave law for the first time.

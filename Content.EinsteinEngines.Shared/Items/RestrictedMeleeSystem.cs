@@ -13,7 +13,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Shared._EinsteinEngines.Items;
+namespace Content.EinsteinEngines.Shared.Items;
 
 public sealed class RestrictedMeleeSystem : EntitySystem
 {

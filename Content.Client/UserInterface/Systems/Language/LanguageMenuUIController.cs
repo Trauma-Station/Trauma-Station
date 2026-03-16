@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using JetBrains.Annotations;
-using Content.Client._EinsteinEngines.Language;
+using Content.EinsteinEngines.Client.Language;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Input;

@@ -7,7 +7,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._White.Jump;
+namespace Content.White.Shared.Jump;
 
 public sealed class JumpSystem : EntitySystem
 {

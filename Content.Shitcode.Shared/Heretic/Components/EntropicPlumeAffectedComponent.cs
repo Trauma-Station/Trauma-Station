@@ -10,7 +10,7 @@ using Content.Shared._Shitcode.Heretic.SpriteOverlay;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Goobstation.Heretic.Components;
+namespace Content.Shitcode.Shared.Heretic.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class EntropicPlumeAffectedComponent : BaseSpriteOverlayComponent

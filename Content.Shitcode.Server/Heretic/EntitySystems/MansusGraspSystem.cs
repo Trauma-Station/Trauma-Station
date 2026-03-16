@@ -21,7 +21,7 @@
 
 using Content.Goobstation.Common.Heretic;
 using Content.Server.Chat.Systems;
-using Content.Shared._Goobstation.Heretic.Components;
+using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared._Shitcode.Heretic.Systems;

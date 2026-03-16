@@ -9,13 +9,13 @@
 
 using System.Linq;
 using Content.Shared.VentCrawler.Tube.Components;
-using Content.Shared._Starlight.VentCrawling.Components;
-using Content.Shared._Starlight.VentCrawling;
+using Content.Starlight.Shared.VentCrawling.Components;
+using Content.Starlight.Shared.VentCrawling;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Containers;
 
-namespace Content.Server._Starlight.VentCrawling;
+namespace Content.Starlight.Server.VentCrawling;
 
 public sealed class VentCrawableSystem : EntitySystem
 {

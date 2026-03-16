@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Shared._DV.Salvage.Components;
-using Content.Shared._DV.Salvage.Systems;
+using Content.DV.Shared.Salvage.Components;
+using Content.DV.Shared.Salvage.Systems;
 using Content.Client._Shitcode.Silo;
 using Robust.Client.Player;
 using Robust.Shared.Physics;

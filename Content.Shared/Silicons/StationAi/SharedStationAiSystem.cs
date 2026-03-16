@@ -33,7 +33,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared._CorvaxNext.Silicons.Borgs; // Cortex-Next
+using Content.CorvaxNext.Shared.Silicons.Borgs; // Cortex-Next
 
 namespace Content.Shared.Silicons.StationAi;
 

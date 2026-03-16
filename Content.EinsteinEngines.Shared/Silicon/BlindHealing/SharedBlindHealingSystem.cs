@@ -6,7 +6,7 @@
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._EinsteinEngines.Silicon.BlindHealing;
+namespace Content.EinsteinEngines.Shared.Silicon.BlindHealing;
 
 public abstract partial class SharedBlindHealingSystem : EntitySystem
 {

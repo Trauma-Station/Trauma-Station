@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server._RMC14.LinkAccount;
+using Content.RMC14.Server.LinkAccount;
 using Content.Server.MoMMI;
 // </Trauma>
 using Content.Server.Administration;

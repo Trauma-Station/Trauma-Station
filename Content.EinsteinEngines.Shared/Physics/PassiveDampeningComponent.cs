@@ -3,7 +3,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._EinsteinEngines.Physics;
+namespace Content.EinsteinEngines.Shared.Physics;
 
 /// <summary>
 ///     A component that allows an entity to have friction (linear and angular dampening)
