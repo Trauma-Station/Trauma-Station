@@ -19,7 +19,7 @@
   - CaptainGloves
   - ExclusiveItems # Trauma
   - GroupBreathToolDecapoid # Impstation
-  
+
 - type: roleLoadout
   id: JobHeadOfPersonnel
   groups:

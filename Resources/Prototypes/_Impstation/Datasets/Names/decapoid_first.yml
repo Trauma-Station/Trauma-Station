@@ -1,7 +1,7 @@
 - type: dataset
   id: names_decapoid_first
   values:
-#     These use only voiceless consonants, excluding F. The apostrophe represents a glottal stop. 
+#     These use only voiceless consonants, excluding F. The apostrophe represents a glottal stop.
 #     It is important to note that these are rough transliterations and not what would actually be said in native Decapoid.
     - "Otepa't,"
     - "Ku'tukat,"

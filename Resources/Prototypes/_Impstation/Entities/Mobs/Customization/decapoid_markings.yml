@@ -8,7 +8,7 @@
   sprites:
   - sprite: _Impstation/Mobs/Species/Decapoid/parts.rsi
     state: gills
-    
+
 - type: marking
   id: DecapoidFlatHead
   bodyPart: Hair
@@ -16,10 +16,10 @@
   followSkinColor: true
   forcedColoring: true
   speciesRestriction: [ Decapoid ]
-  sprites: 
+  sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
     state: flathead
-    
+
 - type: marking
   id: DecapoidPauldronSpike
   bodyPart: LArm
