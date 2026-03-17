@@ -50,7 +50,7 @@ public sealed partial class HolosignSystem : EntitySystem // Trauma - made parti
 
         // overlapping of the same holo on one tile remains allowed to allow holofan refreshes
         if (ent.Comp.PredictedSpawn || _net.IsServer)
-            PredictedSpawnAtPosition(ent.Comp.SignProto, coords); // Trauma - use coords from above logic
+            Spawn(ent.Comp.SignProto, coords); // Trauma - use coords from above logic && Use Spawn instead of PredictedSpawnAtPosition
 
         args.Handled = true;
     }
