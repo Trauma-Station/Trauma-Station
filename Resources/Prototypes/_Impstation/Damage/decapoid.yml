@@ -2,7 +2,6 @@
   id: Decapoid
   coefficients:
     Blunt: 1.2
-    Slash: .7
-    Piercing: .7
-    Cold: 0 # immune to spacing
-    Heat: 1.5
+    Slash: .8
+    Piercing: .8
+    Heat: 1.2

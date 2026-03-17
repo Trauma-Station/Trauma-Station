@@ -2,8 +2,10 @@ using Content.Shared.Atmos;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Server.Decapoids.Components;
+
+namespace Content.Server._Impstation.Decapoids.Components;
 
 [RegisterComponent]
 [AutoGenerateComponentPause]
@@ -30,7 +32,6 @@ public sealed partial class VaporizerComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan ProcessDelay = TimeSpan.FromMilliseconds(200);
 
-    [DataField(readOnly: true), ViewVariables(VVAccess.ReadOnly)]
-    [AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)),AutoPausedField]
     public TimeSpan NextProcess = new();
 }

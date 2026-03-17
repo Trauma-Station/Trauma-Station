@@ -78,11 +78,3 @@
   hidden: true
   loadouts:
   - LoadoutDecapoidBreathToolInventory
-
-- type: loadoutGroup
-  id: ChemistHead
-  name: loadout-group-chemist-head
-  minLimit: 0
-  loadouts:
-  - MedicalBeret
-  - SeniorPhysicianBeret

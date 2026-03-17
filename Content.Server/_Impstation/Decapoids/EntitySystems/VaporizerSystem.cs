@@ -1,11 +1,11 @@
-using Content.Server.Atmos.Components;
-using Content.Server.Decapoids.Components;
+using Content.Server._Impstation.Decapoids.Components;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Timing;
 
-namespace Content.Server.Decapoids.EntitySystems;
+namespace Content.Server._Impstation.Decapoids.EntitySystems;
 
 public sealed partial class VaporizerSystem : EntitySystem
 {
@@ -36,7 +36,7 @@ public sealed partial class VaporizerSystem : EntitySystem
             return;
 
         var reagentConsumed = solution.RemoveReagent(new ReagentQuantity(consumeReagent.Value.Reagent, vaporizer.ReagentPerSecond * vaporizer.ProcessDelay.TotalSeconds));
-        gasTank.Air.AdjustMoles((int)vaporizer.OutputGas, (float)reagentConsumed * vaporizer.ReagentToMoles);
+        gasTank.Air.AdjustMoles((int) vaporizer.OutputGas, (float) reagentConsumed * vaporizer.ReagentToMoles);
     }
 
     public override void Update(float frameTime)
