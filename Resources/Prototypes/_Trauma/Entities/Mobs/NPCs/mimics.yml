@@ -401,21 +401,122 @@
         - BulletImpassable
 
 - type: entity
-  name: Dr. Gibb Vendor
-  parent: VendingMachine
-  id: VendorMimic
+  abstract: true
+  id: BaseVendorMimic
   suffix: Mimic
-  description: Canned explosion of different flavors in this very vendor! Why is it breathing?
+  description: Why is it breathing?
   components:
-  - type: Sprite
-    sprite: Structures/Machines/VendingMachines/gib.rsi
-    layers:
-    - state: "normal"
-  - type: PointLight
-    radius: 2
-    energy: 1.6
-    color: "#D82929"
   - type: TriggerOnActivate
   - type: TriggerOnDamage
   - type: PolymorphOnTrigger
     polymorph: MimicVendor
+
+- type: entity
+  parent: [VendingMachineCoffee, BaseVendorMimic]
+  id: VendorMimicCoffee
+
+- type: entity
+  parent: [VendingMachineCola, BaseVendorMimic]
+  id: VendorMimicCola
+
+- type: entity
+  parent: [VendingMachineColaBlack, BaseVendorMimic]
+  id: VendorMimicColaBlack
+
+- type: entity
+  parent: [VendingMachineColaRed, BaseVendorMimic]
+  id: VendorMimicColaRed
+
+- type: entity
+  parent: [VendingMachineDrGibb, BaseVendorMimic]
+  id: VendorMimicDrGibb
+
+- type: entity
+  parent: [VendingMachinePwrGame, BaseVendorMimic]
+  id: VendorMimicPwrGame
+
+- type: entity
+  parent: [VendingMachineShamblersJuice, BaseVendorMimic]
+  id: VendorMimicShamblersJuice
+
+- type: entity
+  parent: [VendingMachineSmite, BaseVendorMimic]
+  id: VendorMimicSmite
+
+- type: entity
+  parent: [VendingMachineSoda, BaseVendorMimic]
+  id: VendorMimicSoda
+
+- type: entity
+  parent: [VendingMachineSovietSoda, BaseVendorMimic]
+  id: VendorMimicSovietSoda
+  suffix: Mimic
+
+- type: entity
+  parent: [VendingMachineSpaceUp, BaseVendorMimic]
+  id: VendorMimicSpaceUp
+
+- type: entity
+  parent: [VendingMachineStarkist, BaseVendorMimic]
+  id: VendorMimicStarkist
+
+  # Snacks
+
+- type: entity
+  parent: [VendingMachineSweetToof, BaseVendorMimic]
+  id: VendorMimicSweetToof
+
+- type: entity
+  parent: [VendingMachineSustenance, BaseVendorMimic]
+  id: VendorMimicSustenance
+  suffix: Mimic
+
+- type: entity
+  parent: [VendingMachineHotfood, BaseVendorMimic]
+  id: VendorMimicHotfood
+
+- type: entity
+  parent: [VendingMachineFitness, BaseVendorMimic]
+  id: VendorMimicFitness
+
+- type: entity
+  parent: [VendingMachineWeeb, BaseVendorMimic]
+  id: VendorMimicWeeb
+
+- type: entity
+  parent: [VendingMachineDiscount, BaseVendorMimic]
+  id: VendorMimicDiscount
+  suffix: Mimic
+
+- type: entity
+  parent: [VendingMachineSnack, BaseVendorMimic]
+  id: VendorMimicSnack
+
+- type: entity
+  parent: [VendingMachineSnackBlue, BaseVendorMimic]
+  id: VendorMimicSnackBlue
+
+- type: entity
+  parent: [VendingMachineSnackGreen, BaseVendorMimic]
+  id: VendorMimicSnackGreen
+
+- type: entity
+  parent: [VendingMachineSnackOrange, BaseVendorMimic]
+  id: VendorMimicSnackOrange
+
+- type: entity
+  parent: [VendingMachineSnackTeal, BaseVendorMimic]
+  id: VendorMimicSnackTeal
+
+- type: entity
+  parent: [VendingMachineSnackBlue, BaseVendorMimic]
+  id: VendorMimicSnackBlue
+
+- type: entity
+  parent: [VendingMachineDonut, BaseVendorMimic]
+  id: VendorMimicDonut
+
+- type: entity
+  parent: [VendingMachineChang, BaseVendorMimic]
+  id: VendorMimicChang
+

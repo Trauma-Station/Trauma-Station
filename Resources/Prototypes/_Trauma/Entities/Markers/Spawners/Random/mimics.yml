@@ -78,3 +78,82 @@
       RevKnife: 0.1
       RevMace: 0.1
       RevPitchfork: 0.1
+
+- type: entity
+  id: RandomVendingDrinksMimic
+  name: random vending machine spawner
+  suffix: [Drinks, Mimic]
+  parent: MarkerBase
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - VendorMimicCoffee
+    - VendorMimicCola
+    - VendorMimicColaBlack
+    - VendorMimicColaRed
+    - VendorMimicDrGibb
+    - VendorMimicPwrGame
+    - VendorMimicShamblersJuice
+    - VendorMimicSmite
+    - VendorMimicSoda
+    - VendorMimicSovietSoda
+    - VendorMimicSpaceUp
+    - VendorMimicStarkist
+
+- type: entity
+  id: RandomVendingSnacksMimic
+  name: random vending machine spawner
+  suffix: [Snacks, Mimic]
+  parent: MarkerBase
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - VendorMimicSweetToof
+    - VendorMimicSustenance
+    - VendorMimicHotfood
+    - VendorMimicFitness
+    - VendorMimicWeeb
+    - VendorMimicDiscount
+    - VendorMimicSnack
+    - VendorMimicSnackBlue
+    - VendorMimicSnackGreen
+    - VendorMimicSnackOrange
+    - VendorMimicSnackTeal
+    - VendorMimicSnackBlue
+    - VendorMimicDonut
+    - VendorMimicChang
+
+- type: entity
+  id: RandomVendingAnyMimic
+  name: random vending machine spawner
+  suffix: [Any, Mimic]
+  parent: MarkerBase
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - VendorMimicCoffee
+    - VendorMimicCola
+    - VendorMimicColaBlack
+    - VendorMimicColaRed
+    - VendorMimicDrGibb
+    - VendorMimicPwrGame
+    - VendorMimicShamblersJuice
+    - VendorMimicSmite
+    - VendorMimicSoda
+    - VendorMimicSovietSoda
+    - VendorMimicSpaceUp
+    - VendorMimicStarkist
+    - VendorMimicSweetToof
+    - VendorMimicSustenance
+    - VendorMimicHotfood
+    - VendorMimicFitness
+    - VendorMimicWeeb
+    - VendorMimicDiscount
+    - VendorMimicSnack
+    - VendorMimicSnackBlue
+    - VendorMimicSnackGreen
+    - VendorMimicSnackOrange
+    - VendorMimicSnackTeal
+    - VendorMimicSnackBlue
+    - VendorMimicDonut
+    - VendorMimicChang
