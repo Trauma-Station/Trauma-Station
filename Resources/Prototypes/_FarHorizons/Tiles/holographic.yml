@@ -1,0 +1,13 @@
+- type: tile
+  id: HolographicTile
+  name: Holographic Tile
+  sprite: /Textures/_FarHorizons/Tiles/holographic.png
+  baseTurf: Space
+  isSubfloor: true
+  weather: true
+  footstepSounds:
+    collection: FootstepBorg
+  friction: 0.1
+  isSpace: true
+  heatCapacity: 0
+  mass: 0

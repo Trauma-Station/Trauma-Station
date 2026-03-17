@@ -1,0 +1,17 @@
+- type: entity
+  parent: BaseFlatpack
+  id: HolographicFieldGeneratorFlatpack
+  name: Holographic Field Generator Flatpack
+  description: A flatpack used for constructing a Holographic Field Generator.
+  components:
+  - type: Flatpack
+    entity: HolographicFieldGenerator
+
+- type: entity
+  parent: BaseFlatpack
+  id: HolographicBarrierGeneratorFlatpack
+  name: Holographic Barrier Generator Flatpack
+  description: A flatpack used for constructing a Holographic Barrier Generator.
+  components:
+  - type: Flatpack
+    entity: HolographicBarrierGenerator
