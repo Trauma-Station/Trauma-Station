@@ -50,7 +50,7 @@
   - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - SubGamemodesRule
+  - SubGamemodesRuleNoHeretic
   - HereticGamemode
 
 - type: gamePreset
