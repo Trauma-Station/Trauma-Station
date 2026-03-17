@@ -6,8 +6,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   theory:
-    InfrastructureKnowledge: 2
-    ElectronicsKnowledge: 2
+    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 1
 
 - type: construction
   id: GasFilterInline
@@ -19,8 +19,8 @@
   conditions:
   - !type:NoUnstackableInTile
   theory:
-    InfrastructureKnowledge: 2
-    ElectronicsKnowledge: 2
+    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 1
 
 - type: construction
   id: HeatExchangerInline
@@ -30,8 +30,8 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   theory:
-    InfrastructureKnowledge: 2
-    ElectronicsKnowledge: 2
+    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 1
 
 - type: construction
   id: HeatExchangerInlineBend
@@ -41,5 +41,5 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   theory:
-    InfrastructureKnowledge: 2
-    ElectronicsKnowledge: 2
+    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 1

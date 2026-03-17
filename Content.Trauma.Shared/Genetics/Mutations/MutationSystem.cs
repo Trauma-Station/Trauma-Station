@@ -297,6 +297,12 @@ public sealed partial class MutationSystem : CommonMutationSystem
         => GetRoundData(GetID(uid));
 
     /// <summary>
+    /// Returns the rarity of a mutation, throwing if the id is invalid.
+    /// </summary>
+    public MutationRarity GetRarity([ForbidLiteral] EntProtoId<MutationComponent> id)
+        => AllMutations[id].Rarity;
+
+    /// <summary>
     /// Gets the ID of a mutation, or throws if it isn't valid.
     /// </summary>
     public EntProtoId<MutationComponent> GetID(EntityUid mutation)

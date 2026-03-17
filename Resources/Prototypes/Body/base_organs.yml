@@ -113,8 +113,9 @@
     - Eyes
     - Tongue
     - Ears
+    - BrainChip # everyone starts with a brain chip so
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: Woundable
     boneEntity: BoneNeck
     integrity: 80
@@ -220,7 +221,7 @@
   - type: BodyPart
     symmetry: Left
   - type: ChildOrgan
-    parentCategory: ArmLeft
+    parents: [ ArmLeft ]
   # </Shitmed>
   - type: Organ
     category: HandLeft
@@ -249,7 +250,7 @@
   - type: BodyPart
     symmetry: Right
   - type: ChildOrgan
-    parentCategory: ArmRight
+    parents: [ ArmRight ]
   # </Shitmed>
   - type: Organ
     category: HandRight
@@ -328,7 +329,7 @@
   - type: BodyPart
     symmetry: Left
   - type: ChildOrgan
-    parentCategory: LegLeft
+    parents: [ LegLeft ]
   # </Shitmed>
   - type: Organ
     category: FootLeft
@@ -353,7 +354,7 @@
   - type: BodyPart
     symmetry: Right
   - type: ChildOrgan
-    parentCategory: LegRight
+    parents: [ LegRight ]
   # </Shitmed>
   - type: Organ
     category: FootRight
@@ -383,7 +384,7 @@
       Damaged: 16
       Destroyed: 0
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   - type: NerveSystem
   - type: ConsciousnessRequired
     identifier: "nerveSystem"
@@ -417,7 +418,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   - type: Eyes
   # </Shitmed>
   - type: GibbableOrgan
@@ -445,7 +446,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   # </Shitmed>
   - type: GibbableOrgan
   - type: Organ
@@ -462,7 +463,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   # </Shitmed>
   - type: GibbableOrgan
   - type: Organ
@@ -479,7 +480,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   # TODO SHITMED: removing ears makes you permanently deaf
   # </Shitmed>
   - type: GibbableOrgan
@@ -497,7 +498,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   # </Shitmed>
   - type: GibbableOrgan
   - type: Organ
@@ -533,7 +534,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: Heart
   # </Shitmed>
   - type: GibbableOrgan
@@ -554,7 +555,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   # </Shitmed>
   - type: GibbableOrgan
   - type: Organ
@@ -589,7 +590,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: Liver
   # </Shitmed>
   - type: GibbableOrgan
@@ -612,7 +613,7 @@
   components:
   # <Shitmed>
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   # </Shitmed>
   - type: GibbableOrgan
   - type: Organ

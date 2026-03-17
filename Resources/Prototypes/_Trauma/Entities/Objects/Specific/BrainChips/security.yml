@@ -1,0 +1,64 @@
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipHeadOfSecurity
+  name: skill chip (HOS)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 50
+      MartialArtCorporateJudo: 50
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipBrigmedic
+  name: skill chip (brigmedic)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FirstAidKnowledge: 50
+      SurgeryKnowledge: 26
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipDetective
+  name: skill chip (detective)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 50
+      # TODO: something for detecting
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipSecurityCadet
+  name: skill chip (cadet)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 5
+      ShootingKnowledge: 5
+    # TODO: xp gain boost
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipSecurityOfficer
+  name: skill chip (security)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 10
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipWarden
+  name: skill chip (warden)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 26
+      MartialArtKravMaga: 50 # strongest IDF soldier
+      WeaponsKnowledge: 50

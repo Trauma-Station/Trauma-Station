@@ -1,6 +1,8 @@
 // <Trauma>
 using Content.Goobstation.Common.Interaction;
 using Content.Shared._Shitcode.Heretic.Components;
+using Content.Shared.Ensnaring;
+using Content.Shared.Ensnaring.Components;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -79,6 +81,7 @@ namespace Content.Shared.Interaction
         [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
         // <Trauma>
+        [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
         private EntityQuery<TargetInteractionRelayComponent> _targetRelayQuery;
         // </Trauma>
         private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery;
@@ -288,8 +291,19 @@ namespace Content.Shared.Interaction
 
             //is this user trying to pull themself?
             if (userEntity.Value == uid)
-            // <Trauma> - add popup, CDDA parity
+            // <Trauma> - pull bolas and pray
             {
+                if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && ensnareable.IsEnsnared)
+                {
+                    foreach (var bola in ensnareable.Container.ContainedEntities.ToList())
+                    {
+                        if (TryComp<EnsnaringComponent>(bola, out var ensnaring))
+                        {
+                            _snare.TryFree(uid, uid, bola, ensnaring);
+                            return false;
+                        }
+                    }
+                }
                 _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
                 return false;
             }

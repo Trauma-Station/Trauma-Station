@@ -19,7 +19,7 @@
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     # - id: SlaughterDemonMidround - Wizard/Ninja only antag, maybe devil eventually
-    - id: XenomorphsInfestation
+    # - id: XenomorphsInfestation
     # TOOD: remove these if they fucking suck lmao
     - id: GreyTideAntagMidround
     - id: SingulothKnightsMidround
@@ -29,10 +29,6 @@
     - id: VoxRaidersMidround
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
-    # - id: ChangelingMidround # Trauma - We dont want lings in other game modes people hate it
-    # - id: HereticMidround # Trauma - Heretics scale too slowly here to do this
-    # - id: Devilmidround # Trauma - Devil midround does not make sense and is kinda weird
-    - id: Dud50
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
 
@@ -55,9 +51,17 @@
       id: MobMousePlague
 
 - type: entity
-  parent: BaseGameRule
-  id: Dud50
+  id: RatmaSpawn
+  parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    weight: 50
-    duration: 1
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 30
+    weight: 3
+    duration: 30
+  - type: VentCrittersRule
+    playerRatio: 85
+    table:
+      id: MobRatma

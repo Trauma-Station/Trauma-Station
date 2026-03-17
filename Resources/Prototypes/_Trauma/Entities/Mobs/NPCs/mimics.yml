@@ -1,0 +1,330 @@
+- type: entity
+  abstract: true
+  parent: [ MobSpaceBasic, MobCombat ]
+  id: BaseMobMimic
+  description: The last thing you'll ever see.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 5.5
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepMimic
+      params:
+        volume: 3
+        variation: 0.2
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.20
+        density: 100
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Dead
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -3
+      groups:
+        Brute: -3
+  - type: MeleeWeapon
+    range: 0.75
+    attackRate: 0.1
+    soundHit:
+      path: /Audio/_Shitmed/ReBELL/Organs/OrganDestroyed2.ogg
+    damage:
+      types:
+        Slash: 45
+        Piercing: 45
+      woundSeverityMultipliers:
+        Slash: 999
+        Piercing: 999
+    resistanceBypass: true
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 50
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: Stamina
+    baseCritThreshold: 999
+  - type: FlashImmunity
+
+- type: entity
+  parent: BaseMobMimic
+  id: MobMimicToolBox
+  name: toolbox mimic
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/toolboxmimic.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      state: alive
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: toolboxmimic-moving
+    noMovementLayers:
+      movement:
+        state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: CanEscapeInventory
+    baseResistTime: 0.5
+  - type: AnimatedEmotes
+    tweakState: freakytoolbox
+  - type: Tag
+    tags:
+    - MimicToolbox
+  - type: AutoEmote # TODO: find out why this doesnt work
+    emotes:
+    - TweakBox
+  - type: Butcherable
+    spawned:
+    - id: SpawnLootToolboxMimic
+    - id: ToolboxMimic
+
+- type: entity
+  parent: BaseItem
+  id: ToolboxEmergencyMimic
+  name: emergency toolbox
+  suffix: Mimic
+  description: A bright red toolbox, stocked with emergency tools. Why is it breathing?
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/Toolboxes/toolbox_red.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Tools/Toolboxes/toolbox_red.rsi
+  - type: TriggerOnActivate
+  - type: TriggerOnMeleeSwing
+  - type: TriggerOnLand
+  - type: PolymorphOnTrigger
+    polymorph: MimicToolbox
+  - type: MeleeWeapon
+    heavyStaminaCost: 10
+    damage:
+      types:
+        Blunt: 12
+    soundHit:
+      path: "/Audio/Weapons/smash.ogg"
+
+# Locker
+
+- type: entity
+  parent: BaseMobMimic
+  id: MobMimicLocker
+  name: locker mimic
+  components:
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 5
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/locker.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: MeleeWeapon
+    attackRate: 10
+    damage:
+      types:
+        Slash: 2
+  - type: StaminaDamageOnHit
+    damage: 5
+    overtime: 5
+  - type: Stamina
+    baseCritThreshold: 999
+  - type: Butcherable
+    spawned:
+    - id: SpawnLootLockerMimic
+    - id: ShieldMimic
+
+- type: entity
+  parent: ClosetSteelBase
+  id: LockerMimic
+  name: maintenance closet
+  suffix: Mimic
+  description: It's a storage unit. Why is it breathing?
+  components:
+  - type: TriggerOnActivate
+  - type: TriggerOnDamage
+  - type: PolymorphOnTrigger
+    polymorph: MimicLocker
+
+# Vendor
+- type: entity
+  parent: BaseMobMimic
+  id: MobMimicVendor
+  name: vending machine mimic
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/vendormimic.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.40
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      150: Dead
+  - type: MeleeWeapon
+    attackRate: 1
+  - type: Stamina
+    baseCritThreshold: 999
+  - type: Gun
+    projectileSpeed: 20
+    fireRate: 2
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: BatteryAmmoProvider
+    proto: BulletMimic
+    fireCost: 50
+    examinable: false
+  - type: BatterySelfRecharger
+    autoRechargeRate: 10
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+  - type: Butcherable
+    spawned:
+    - id: SpawnLootVendorMimic
+    - id: GunMimic
+
+- type: entity
+  parent: BaseItem
+  id: BulletMimic
+  name: can of whoopass
+  description: A sodacan with teeth sticking out of the top.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/mimic.rsi
+    layers:
+    - state: can
+    scale: 0.75, 0.75
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+  - type: SolutionContainerManager
+    solutions:
+      ammo:
+        maxVol: 5
+        reagents:
+        - ReagentId: Impedrezene
+          Quantity: 2.5
+        - ReagentId: MuteToxin
+          Quantity: 2.5
+  - type: SolutionInjectOnEmbed
+    transferAmount: 5
+    solution: ammo
+  - type: SolutionTransfer
+    maxTransferAmount: 5
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    embedOnThrow: false
+  - type: ThrowingAngle
+    angle: 0
+  - type: Ammo
+    muzzleFlash: null
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.2
+        density: 5
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      projectile:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.1,-0.3,0.1,-0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+
+- type: entity
+  parent: VendingMachine
+  id: VendorMimic
+  name: Dr. Gibb Vendor
+  suffix: Mimic
+  description: Canned explosion of different flavors in this very vendor! Why is it breathing?
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/gib.rsi
+    layers:
+    - state: "normal"
+  - type: PointLight
+    radius: 2
+    energy: 1.6
+    color: "#D82929"
+  - type: TriggerOnActivate
+  - type: TriggerOnDamage
+  - type: PolymorphOnTrigger
+    polymorph: MimicVendor

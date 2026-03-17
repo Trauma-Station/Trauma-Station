@@ -6,13 +6,13 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobAtmosphericTechnician
-      time: 2.5h
+      time: 1h # Trauma was 2.5
     - !type:RoleTimeRequirement
       role: JobStationEngineer
-      time: 5h
+      time: 2h # Trauma was 5
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 10h
+      time: 5h # Trauma was 10
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
@@ -22,7 +22,6 @@
   guides: # goobstation
   - Engineering
   - Command
-  goobcoins: 40 #Goob content
   access:
   - Maintenance
   - Engineering
@@ -39,21 +38,6 @@
     components:
       - type: CommandStaff
       - type: EngineeringStaff # Goobstation
-  # <Trauma>
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      HandmadeKnowledge: 50
-      TechnologyKnowledge: 50
-      MaterialsKnowledge: 50
-      DoorsKnowledge: 50
-      AirlocksKnowledge: 50
-      FurnitureKnowledge: 50
-      InfrastructureKnowledge: 50
-      ElectronicsKnowledge: 50
-      WallsKnowledge: 50
-      WindowsKnowledge: 50
-      SmokeablesKnowledge: 50
-  # </Trauma>
 
 - type: startingGear
   id: ChiefEngineerGear

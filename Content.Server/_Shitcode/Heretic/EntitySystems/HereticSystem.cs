@@ -65,12 +65,15 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
 using Content.Shared.Tag;
 using Robust.Server.GameStates;
+using Robust.Shared.Enums;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Heretic.EntitySystems;
 
 public sealed class HereticSystem : SharedHereticSystem
 {
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly StoreSystem _store = default!;
@@ -123,6 +126,24 @@ public sealed class HereticSystem : SharedHereticSystem
 
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
+
+        _player.PlayerStatusChanged += OnStatusChanged;
+    }
+
+    private void OnStatusChanged(object? sender, SessionStatusEventArgs e)
+    {
+        if (e.NewStatus == SessionStatus.Disconnected)
+            return;
+
+        var session = e.Session;
+
+        if (!_mind.TryGetMind(session.UserId, out var mind, out _) || !TryComp(mind, out HereticComponent? heretic))
+            return;
+
+        foreach (var rit in heretic.Rituals)
+        {
+            _override.AddSessionOverride(rit, session);
+        }
     }
 
     private void OnStateChanged(MobStateChangedEvent args)

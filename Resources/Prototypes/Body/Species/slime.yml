@@ -88,6 +88,15 @@
   id: MobSlimePerson
   name: Urist McWobble
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Bubblish
+    understands:
+    - TauCetiBasic
+    - Bubblish
+  # </Trauma>
   - type: Storage
     clickInsert: false
     grid:
@@ -278,7 +287,7 @@
   - type: Organ
     category: Stomach # lets it be stored in the torso
   - type: ChildOrgan
-    parentCategory: Torso # allow it to be in torsos instead of head
+    parents: [ Torso ] # allow it to be in torsos instead of head
   # </Shitmed>
   - type: SolutionContainerManager
     solutions:

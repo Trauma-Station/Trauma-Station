@@ -34,6 +34,9 @@ namespace Content.Medical.Shared.Wounds;
 
 public sealed partial class WoundSystem : EntitySystem
 {
+    [Dependency] private readonly EntityQuery<WoundComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
+
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -56,9 +59,7 @@ public sealed partial class WoundSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly TraumaSystem _trauma = default!;
 
-    private EntityQuery<WoundComponent> _query;
-
-    private float _medicalHealingTickrate = 0.5f;
+    private float _medicalHealingTickrate = 5f;
     private TimeSpan _nextUpdate;
     private TimeSpan _minimumTimeBeforeHeal = TimeSpan.FromSeconds(2f);
 
@@ -96,8 +97,6 @@ public sealed partial class WoundSystem : EntitySystem
     {
         base.Initialize();
 
-        _query = GetEntityQuery<WoundComponent>();
-
         SubscribeLocalEvent<WoundComponent, ComponentGetState>(OnWoundComponentGet);
         SubscribeLocalEvent<WoundComponent, ComponentHandleState>(OnWoundComponentHandleState);
         SubscribeLocalEvent<WoundableComponent, ComponentGetState>(OnWoundableComponentGet);
@@ -124,18 +123,22 @@ public sealed partial class WoundSystem : EntitySystem
         _nextUpdate = now + TimeSpan.FromSeconds(1f / _medicalHealingTickrate);
 
         // If this still causes lag, we go with the nuclear option of also checking for ConsciousnessComponent :niceportrait:
-        using var query = EntityQueryEnumerator<BodyComponent, DamageableComponent>();
+        var query = EntityQueryEnumerator<BodyComponent, DamageableComponent>();
         while (query.MoveNext(out var ent, out var body, out var damageable))
         {
-            if (TerminatingOrDeleted(ent)
-                || now - damageable.LastModifiedTime < _minimumTimeBeforeHeal
-                || _mobState.IsIncapacitated(ent))
+            if (body.Organs is not {} organs ||
+                TerminatingOrDeleted(ent) ||
+                now - damageable.LastModifiedTime < _minimumTimeBeforeHeal ||
+                _mobState.IsIncapacitated(ent))
                 continue;
 
-            foreach (var woundable in _body.GetOrgans<WoundableComponent>((ent, body)))
+            foreach (var organ in organs.ContainedEntities)
             {
-                if (woundable.Comp.CanHealDamage || woundable.Comp.CanHealBleeds)
-                    _woundJobQueue.EnqueueJob(new WoundJob(this, woundable, ent, WoundJobTime));
+                if (!_woundableQuery.TryComp(organ, out var woundable))
+                    continue;
+
+                if (woundable.CanHealDamage || woundable.CanHealBleeds)
+                    _woundJobQueue.EnqueueJob(new WoundJob(this, (organ, woundable), ent, WoundJobTime));
             }
         }
     }

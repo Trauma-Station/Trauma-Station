@@ -153,34 +153,6 @@
 
 # RHand
 
-# FacialHair
-
-# Hair
-
-- type: marking
-  id: SpiderHair1
-  bodyPart: Hair
-  groupWhitelist: [ Arachnid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/Arachnid/hair.rsi
-    state: fluffy
-
-- type: marking
-  id: SpiderHair2
-  bodyPart: Hair
-  groupWhitelist: [ Arachnid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/Arachnid/hair.rsi
-    state: longhorned
-
-- type: marking
-  id: SpiderHair3
-  bodyPart: Hair
-  groupWhitelist: [ Arachnid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/Arachnid/hair.rsi
-    state: wisps
-
 # HeadSide
 
 - type: marking

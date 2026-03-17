@@ -20,12 +20,6 @@
   special: # Goobstation
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
-  # <Trauma>
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      MeleeKnowledge: 50
-      ShootingKnowledge: 50
-  # </Trauma>
 
 - type: startingGear
   parent: ERTLeaderGearEVA
@@ -237,10 +231,9 @@
     components:
       - type: KnowledgeGrant
         skills:
-          HandmadeKnowledge: 50
+          FabricationKnowledge: 50
           MeleeKnowledge: 50
           ShootingKnowledge: 50
-          TechnologyKnowledge: 50
           MaterialsKnowledge: 50
           DoorsKnowledge: 50
           AirlocksKnowledge: 50
@@ -250,7 +243,6 @@
           InfrastructureKnowledge: 50
           ElectronicsKnowledge: 50
           WallsKnowledge: 50
-          ScienceKnowledge: 50
           WindowsKnowledge: 50
           SmokeablesKnowledge: 50
   # </Trauma>

@@ -55,6 +55,9 @@
         Quantity: 50
   - type: MobPrice
     price: 250
+  - type: InternalOrgan
+  - type: ChildOrgan
+    parents: [ Torso ]
   - type: Organ
     category: XenomorphLarva
   # - type: GuideHelp

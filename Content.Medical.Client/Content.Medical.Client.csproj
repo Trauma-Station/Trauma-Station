@@ -2,6 +2,7 @@
 	<PropertyGroup>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<OutputPath>../bin/Content.Client/</OutputPath>
+		<NoWarn>0618</NoWarn>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<Configurations>Debug;Release;Tools;DebugOpt</Configurations>
 		<Platforms>AnyCPU</Platforms>

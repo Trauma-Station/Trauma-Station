@@ -101,6 +101,10 @@ CardBoxNanotrasen: null
 
 # 2026-03-10 this gives martial arts, no longer harmless maint loot
 MaterialHideBear: MaterialHideCorgi
+
+# 2026-03-12 this being roundstart is slop
+MedicalBiofabricator: null
+MedicalBiofabMachineBoard: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

@@ -140,19 +140,3 @@
   position: 9,-2
   technologyPrerequisites:
   - WeaponLaserCellSMGTech
-
-- type: technology
-  id: SmartWeaponry
-  name: research-technology-smart-weaponry
-  icon:
-    sprite: _Goobstation/Objects/Weapons/Guns/SMGs/smartgun.rsi
-    state: icon
-  discipline: Arsenal
-  tier: 3
-  cost: 15000
-  recipeUnlocks:
-  - WeaponSubMachineSmart
-  - MagazineSmart
-  technologyPrerequisites:
-  - UraniumMunitions
-  position: 8,2

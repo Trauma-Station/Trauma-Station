@@ -5,5 +5,7 @@
   targetNode: hammer
   objectType: Item
   theory:
-    TechnologyKnowledge: 0
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+    MetalworkingKnowledge: 1

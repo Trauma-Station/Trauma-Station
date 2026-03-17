@@ -40,4 +40,4 @@
   suffix: Prime
   components:
   - type: GhostRoleMobSpawner
-    prototype: MobBinglePrime
+    prototype: MobBinglePrimeTrauma

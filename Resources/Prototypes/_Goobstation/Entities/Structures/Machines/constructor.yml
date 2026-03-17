@@ -42,19 +42,15 @@
     powerLoad: 1000
   - type: KnowledgeGrant
     skills:
-      HandmadeKnowledge: 100
-      SurvivalKnowledge: 100
-      WeaponsKnowledge: 100
-      TechnologyKnowledge: 100
-      MaterialsKnowledge: 100
-      DoorsKnowledge: 100
-      AirlocksKnowledge: 100
-      ToysKnowledge: 100
-      BotsKnowledge: 100
-      FurnitureKnowledge: 100
-      InfrastructureKnowledge: 100
-      ElectronicsKnowledge: 100
-      WallsKnowledge: 100
-      ScienceKnowledge: 100
-      WindowsKnowledge: 100
-      SmokeablesKnowledge: 100
+      FabricationKnowledge: 50
+      MaterialsKnowledge: 50
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      ToysKnowledge: 50
+      BotsKnowledge: 50
+      FurnitureKnowledge: 50
+      InfrastructureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+      SmokeablesKnowledge: 50

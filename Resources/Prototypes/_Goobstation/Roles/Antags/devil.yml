@@ -24,6 +24,7 @@
     inverted: true
     species:
     - Plasmaman
+  creditImage: /Textures/_Trauma/EndCredits/Antags/devil.png
 
 - type: startingGear
   id: DevilStartingGear

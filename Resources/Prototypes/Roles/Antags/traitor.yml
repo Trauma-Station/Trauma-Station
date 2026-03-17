@@ -104,6 +104,7 @@
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 1h
+  creditImage: /Textures/_Trauma/EndCredits/Antags/traitor.png # Trauma
 
 - type: antag
   id: TraitorSleeper

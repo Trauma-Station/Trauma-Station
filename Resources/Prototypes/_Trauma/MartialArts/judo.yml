@@ -4,6 +4,10 @@
   - Grab
   - Disarm
   - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-discombobulate
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 10
@@ -15,6 +19,10 @@
   - Disarm
   - Harm
   - Harm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-eyepoke # isnt this more of a krav thing? judo is all grappling
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 25
@@ -30,6 +38,10 @@
   - Grab
   - Grab
   - Disarm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-throw
   opponentEffects:
   - !type:ModifyParalysis
     time: 4
@@ -47,6 +59,10 @@
   - Disarm
   - Harm
   - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-armbar
   opponentEffects:
   - !type:ModifyParalysis
     time: 5
@@ -60,67 +76,11 @@
   - Grab
   - Disarm
   - Harm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-wheelthrow
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 120
   levelRequired: 0
-
-- type: combo
-  id: JudoGoldenBlast1
-  attacks:
-  - Hug
-  - Disarm
-  - Hug
-  - Grab
-  userEffects:
-  - !type:MartialArtsSaying
-    randomSayings:
-    - judo-saying-gold
-    randomSayingsDowned:
-    - judo-saying-gold
-  opponentEffects:
-  - !type:ModifyParalysis
-    time: 5
-  - !type:TakeStaminaDamage
-    amount: 50
-  levelRequired: 50
-
-- type: combo
-  id: JudoGoldenBlast2
-  attacks:
-  - Disarm
-  - Disarm
-  - Grab
-  - Hug
-  userEffects:
-  - !type:MartialArtsSaying
-    randomSayings:
-    - judo-saying-en
-    randomSayingsDowned:
-    - judo-saying-en
-  opponentEffects:
-  - !type:ModifyParalysis
-    time: 10
-  - !type:TakeStaminaDamage
-    amount: 100
-  levelRequired: 50
-
-- type: combo
-  id: JudoGoldenBlast3
-  attacks:
-  - Disarm
-  - Hug
-  - Grab
-  - Hug
-  userEffects:
-  - !type:MartialArtsSaying
-    randomSayings:
-    - judo-saying-blast
-    randomSayingsDowned:
-    - judo-saying-blast
-  opponentEffects:
-  - !type:ModifyParalysis
-    time: 30
-  - !type:TakeStaminaDamage
-    amount: 120
-  levelRequired: 50

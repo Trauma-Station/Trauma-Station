@@ -194,6 +194,7 @@
     - FootstepSound
   - type: XenomorphShoveTracker
   - type: CanMoveInAir
+  - type: MovementAlwaysTouching # Trauma
 
 - type: entity
   id: BaseMobXenomorphDungeon

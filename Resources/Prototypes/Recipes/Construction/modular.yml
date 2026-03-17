@@ -7,8 +7,11 @@
   objectType: Item
   # <Trauma>
   theory:
-    ScienceKnowledge: 1
-    WeaponsKnowledge: 2
+    FabricationKnowledge: 1
+    ElectronicsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 3
+    MechanicsKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -20,6 +23,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    ScienceKnowledge: 1
-    WeaponsKnowledge: 2
+    FabricationKnowledge: 1
+    ElectronicsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 3
+    MechanicsKnowledge: 3
   # </Trauma>

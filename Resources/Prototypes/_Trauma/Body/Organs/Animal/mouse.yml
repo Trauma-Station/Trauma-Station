@@ -11,7 +11,7 @@
   - type: Organ
     category: EggSack
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: OrganComponents
     onAdd:
     - type: EggLayer

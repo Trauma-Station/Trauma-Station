@@ -42,6 +42,36 @@
   name: Add hypoport assembly
 
 - type: entity
+  parent: SurgeryStepInsertOrgan
+  id: SurgeryStepInsertBrainChip
+  name: Insert brain chip
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepOpenPanel
+  name: Unscrew panel
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Screwdriver
+    add:
+    - type: PanelOpen
+    duration: 2
+  - type: Sprite
+    sprite: Objects/Tools/screwdriver.rsi
+    state: screwdriver-map
+
+- type: entity
+  parent: SurgeryStepOpenPanel
+  id: SurgeryStepClosePanel
+  name: Close panel
+  components:
+  - type: SurgeryStep
+    add: null
+    remove:
+    - type: PanelOpen
+
+- type: entity
   parent: SurgeryStepSealBones
   id: SurgeryStepCreateJoint
   name: Create joint
