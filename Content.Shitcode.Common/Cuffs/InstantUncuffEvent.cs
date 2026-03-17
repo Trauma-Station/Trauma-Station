@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Shitcode.Common.Wizard;
+namespace Content.Shitcode.Common.Cuffs;
 
 /// <summary>
 /// Raised on the user to see if it can uncuff instantly.

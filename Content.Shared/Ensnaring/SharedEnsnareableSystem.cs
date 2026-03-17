@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.DoAfter;
 using Content.Shared.Projectiles;
-using Content.Shitcode.Common.Wizard;
+using Content.Shitcode.Common.Cuffs;
 // </Trauma>
 using Content.Shared.Alert;
 using Content.Shared.CombatMode.Pacification;
@@ -99,8 +99,8 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         else
             _hands.PickupOrDrop(args.User, bola);
 
-        var evSnareBroken = new EnsnareBrokenEvent(args.Target);
-        RaiseLocalEvent(args.User, ref evSnareBroken);
+        var snareBrokenEv = new EnsnareBrokenEvent(args.Target);
+        RaiseLocalEvent(args.User, ref snareBrokenEv);
         // Goobstation end
 
         if (args.User == args.Target)

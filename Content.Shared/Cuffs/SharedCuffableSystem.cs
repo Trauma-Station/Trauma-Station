@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.Wizard;
+using Content.Shitcode.Common.Cuffs;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -650,9 +650,9 @@ namespace Content.Shared.Cuffs
                 }
 
                 // <Trauma>
-                var evAttemptToBreakCuffs = new InstantUncuffEvent(target, cuff);
-                RaiseLocalEvent(user, ref evAttemptToBreakCuffs);
-                if (evAttemptToBreakCuffs.CuffsBroken)
+                var attemptEv = new InstantUncuffEvent(target, cuff);
+                RaiseLocalEvent(user, ref attemptEv);
+                if (attemptEv.CuffsBroken)
                     return;
                 // </Trauma>
             }

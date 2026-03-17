@@ -1,15 +1,13 @@
-using Content.Medical.Common.Body;
+using System.Linq;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Shared.Damage.Systems;
 

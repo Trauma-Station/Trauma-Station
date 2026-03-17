@@ -2,8 +2,8 @@
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.EntityEffects;
 using Content.Medical.Common.Targeting;
-using Content.Shared.Heretic;
 using Content.Shared.Temperature.Components;
+using Content.Shitcode.Common.Damage;
 // </Trauma>
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -39,7 +39,7 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
         }
 
         // flesh heretics ignore poison damage from chems
-        var ev = new ImmuneToPoisonDamageEvent();
+        var ev = new ChangeHealthChangeDamageEvent();
         RaiseLocalEvent(entity, ref ev);
         if (ev.Immune)
         {

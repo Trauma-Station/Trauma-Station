@@ -7,9 +7,6 @@ namespace Content.Shared.Heretic;
 public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Volume);
 
 [ByRefEvent]
-public record struct ImmuneToPoisonDamageEvent(bool Immune = false);
-
-[ByRefEvent]
 public readonly record struct SetGhoulBoundHereticEvent(EntityUid Heretic, EntityUid? Ritual);
 
 [ByRefEvent]
