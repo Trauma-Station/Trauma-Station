@@ -18,6 +18,7 @@ public sealed class ClockworkSlabBUI : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<ClockWorkSlabWindow>();
+        _window.SetOwner(Owner);
         _window.OpenCenteredLeft();
     }
 }

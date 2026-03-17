@@ -6,12 +6,24 @@ using Robust.Client.UserInterface.XAML;
 
 namespace Content.Trauma.Client.ClockworkCult.UI;
 
+/// <summary>
+/// TODO: Finish scriptures
+/// TODO: Make unique page for scriptures
+/// TODO: Add favourite scriptures page that will hold 6 scriptures
+/// TODO: Unhardcode anything
+/// TODO: Clean up remaining shitcode
+/// </summary>
 [GenerateTypedNameReferences]
 public sealed partial class ClockWorkSlabWindow : FancyWindow
 {
+    [Dependency] private readonly IEntityManager _entMan = default!;
+
+    private EntityUid _owner;
+
     public ClockWorkSlabWindow()
     {
         RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
 
         SectionOne.OnPressed += _ => SetupSection(ClockworkSlabSection.Guide);
         SectionTwo.OnPressed += _ => SetupSection(ClockworkSlabSection.Scriptures);
@@ -29,7 +41,18 @@ public sealed partial class ClockWorkSlabWindow : FancyWindow
                 ViewContainer.AddChild(guideSection);
                 break;
             }
+            case ClockworkSlabSection.Scriptures:
+            {
+                var scriptureSection = new CogSlabScriptureSection(_owner, _entMan);
+                ViewContainer.AddChild(scriptureSection);
+                break;
+            }
         }
+    }
+
+    public void SetOwner(EntityUid owner)
+    {
+        _owner = owner;
     }
 }
 

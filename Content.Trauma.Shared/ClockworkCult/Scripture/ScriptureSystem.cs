@@ -24,10 +24,14 @@ public sealed class ScriptureSystem : EntitySystem
     [ViewVariables]
     public List<EntProtoId> AllScriptures = new();
 
+    private EntityQuery<ScriptureComponent> _scriptureQuery;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
+
+        _scriptureQuery = GetEntityQuery<ScriptureComponent>();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -96,6 +100,14 @@ public sealed class ScriptureSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    public EntProtoId? TryGetScripturePrototype(EntityUid scripture)
+    {
+        if (!_scriptureQuery.HasComp(scripture))
+            return null;
+
+        return Prototype(scripture)?.ID;
     }
     #endregion
 

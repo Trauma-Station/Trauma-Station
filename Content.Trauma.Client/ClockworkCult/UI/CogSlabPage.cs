@@ -11,7 +11,7 @@ namespace Content.Trauma.Client.ClockworkCult.UI;
 /// CogSlabPages are used by <see cref="CogSlabSection"/>
 /// </summary>
 [GenerateTypedNameReferences]
-public sealed partial class CogSlabPage : BoxContainer
+public abstract partial class CogSlabPage : BoxContainer
 {
     /// <summary>
     /// The title of the page

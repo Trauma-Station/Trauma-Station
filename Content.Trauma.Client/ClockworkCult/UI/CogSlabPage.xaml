@@ -14,7 +14,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <Label Name="PageTitle"
                HorizontalAlignment="Center"/>
 
-        <BoxContainer HorizontalAlignment="Center" VerticalExpand="True">
+        <BoxContainer Name="FirstPage" HorizontalAlignment="Center" VerticalExpand="True">
             <RichTextLabel Name="FirstPageContent"
                            MaxWidth="250"
                            MaxHeight="500"
@@ -30,7 +30,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                   HorizontalExpand="True"
                   Margin="0 20">
 
-        <BoxContainer HorizontalAlignment="Center" VerticalExpand="True">
+        <BoxContainer Name="SecondPage" HorizontalAlignment="Center" VerticalExpand="True">
             <RichTextLabel Name="SecondPageContent"
                            MaxWidth="250"
                            MaxHeight="500"
