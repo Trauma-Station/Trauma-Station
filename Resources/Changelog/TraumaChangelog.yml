@@ -4591,3 +4591,119 @@ Entries:
   id: 539
   time: '2026-03-15T17:36:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1332
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Made UI better
+  - type: Tweak
+    message: Tweaked language cost so you don't level up every time you speak.
+  id: 540
+  time: '2026-03-15T19:02:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1338
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Hopefully reduced end round lag by alot
+  id: 541
+  time: '2026-03-15T19:27:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1323
+- author: Armok
+  changes:
+  - type: Add
+    message: Added new batch of patreon items.
+  - type: Fix
+    message: Fixed some of the lag sources
+  - type: Add
+    message: Some sodas give you small buffs when drank
+  id: 542
+  time: '2026-03-16T06:05:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1344
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Vending machine mimics are butcherable instead of their can projectiles.
+  - type: Fix
+    message: Fixed energy shields not being usable after recharging.
+  - type: Fix
+    message: >-
+      Fixed random sentience things like hydro trays not understanding languages
+      properly.
+  id: 543
+  time: '2026-03-16T08:41:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1346
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed secret having double the events that it should have.
+  id: 544
+  time: '2026-03-16T09:14:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1350
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changed human sprites to use the good white dream ones.
+  id: 545
+  time: '2026-03-16T10:38:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1348
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Mutations now have a rarity letter shown roughly indicating how difficult
+      it is to sequence. Mutations can be Common, Rare or Mythical.
+  - type: Tweak
+    message: >-
+      Changed genetics console sequence fail damage to be a mix of cellular and
+      radiation.
+  id: 546
+  time: '2026-03-16T11:34:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1352
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed augments not working.
+  id: 547
+  time: '2026-03-16T12:05:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1354
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed slop teach a lesson and permakill fellow traitor objectives.
+  id: 548
+  time: '2026-03-16T12:53:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1355
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Borg subtypes now get their job's knowledge.
+  id: 549
+  time: '2026-03-16T13:39:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1356
+- author: deltanedas
+  changes:
+  - type: Add
+    message: The guidebook now has a search bar to find guidebook entries.
+  id: 550
+  time: '2026-03-16T16:34:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1358
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed headrevs not seeing the conversion doafter.
+  id: 551
+  time: '2026-03-16T17:41:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1362
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed insurgents not spawning...
+  id: 552
+  time: '2026-03-16T20:35:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1369
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed energy shields not working.
+  id: 553
+  time: '2026-03-16T22:46:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1370

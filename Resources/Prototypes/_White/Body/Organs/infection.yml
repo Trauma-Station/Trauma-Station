@@ -10,7 +10,7 @@
   - type: Organ
     category: XenomorphLarva
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: StaticPrice
     price: 2000
   - type: XenomorphInfection

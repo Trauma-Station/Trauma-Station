@@ -1,6 +1,6 @@
 # TODO: bunch of different types of cooking
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: CookingKnowledge
   name: Cooking
   components:
@@ -10,67 +10,67 @@
     scale: 100 # cook 100 meals to master it from unskilled
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: MaterialsKnowledge
   name: Materials
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: DoorsKnowledge
   name: Doors
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: AirlocksKnowledge
   name: Airlocks
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: ToysKnowledge
   name: Toys
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: BananiumKnowledge
   name: Bananium
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: BotsKnowledge
   name: Bots
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: FurnitureKnowledge
   name: Furniture
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: InfrastructureKnowledge
   name: Infrastructure
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: ElectronicsKnowledge
   name: Electronics
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: WallsKnowledge
   name: Walls
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: ScienceKnowledge
   name: Science
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: WindowsKnowledge
   name: Windows
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: SpiderCraftKnowledge
   name: Spider Webs
   components:
@@ -78,12 +78,12 @@
     costs: null # Spider only
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: SmokeablesKnowledge
   name: Smokeables
 
 - type: entity
-  parent: BaseConstructionKnowledge
+  parent: BaseRecipesKnowledge
   id: RevolutionaryKnowledge
   name: Revolutionary
   components:
