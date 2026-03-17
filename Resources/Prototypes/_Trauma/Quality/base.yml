@@ -1,0 +1,14 @@
+- type: quality
+	id: BaseQuality
+  gun: 0.9f
+  armor: 0.87f
+  clothingDelay: 0.87f
+  explosionResist: 0.87f
+  staminaResist: 0.87f
+  health: 0.8f
+  selfDamage: 0.87f
+  damage: 1.125f
+  projectile: 1.125f
+  durability: 1.12f
+  shield: 1.12f
+  shieldFlat: 1.12f

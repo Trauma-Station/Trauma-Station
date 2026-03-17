@@ -31,7 +31,7 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
         if (args.Cancelled || !_proto.Resolve<ConstructionPrototype>(args.Prototype, out var proto))
             return;
 
-        if (_knowledge.GetContainer(ent) is not {} brain)
+        if (_knowledge.GetContainer(ent) is not { } brain)
         {
             if (args.LogError)
                 Log.Error($"{ToPrettyString(ent)} tried to construct {args.Prototype} without having a knowledge container!");
@@ -70,6 +70,7 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
         {
             quality.LevelDeltas[id] = mastery;
         }
+        quality.ProtoId = proto.QualityPrototype?.ID;
         Dirty(item, quality);
 
         _quality.RollQuality((item, quality), ent);
