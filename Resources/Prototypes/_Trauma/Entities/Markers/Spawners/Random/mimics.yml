@@ -82,7 +82,7 @@
 - type: entity
   id: RandomVendingDrinksMimic
   name: random vending machine spawner
-  suffix: [Drinks, Mimic]
+  suffix: Drinks_Mimic
   parent: MarkerBase
   components:
   - type: RandomSpawner
@@ -103,7 +103,7 @@
 - type: entity
   id: RandomVendingSnacksMimic
   name: random vending machine spawner
-  suffix: [Snacks, Mimic]
+  suffix: Snacks_Mimic
   parent: MarkerBase
   components:
   - type: RandomSpawner
@@ -119,14 +119,13 @@
     - VendorMimicSnackGreen
     - VendorMimicSnackOrange
     - VendorMimicSnackTeal
-    - VendorMimicSnackBlue
     - VendorMimicDonut
     - VendorMimicChang
 
 - type: entity
   id: RandomVendingAnyMimic
   name: random vending machine spawner
-  suffix: [Any, Mimic]
+  suffix: Any_Mimic
   parent: MarkerBase
   components:
   - type: RandomSpawner
@@ -154,6 +153,5 @@
     - VendorMimicSnackGreen
     - VendorMimicSnackOrange
     - VendorMimicSnackTeal
-    - VendorMimicSnackBlue
     - VendorMimicDonut
     - VendorMimicChang

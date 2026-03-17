@@ -199,6 +199,8 @@
   components:
   - type: TriggerOnActivate
   - type: TriggerOnDamage
+    threshold: 0
+    probability: 0.5
   - type: PolymorphOnTrigger
     polymorph: MimicLocker
 
@@ -324,114 +326,117 @@
   components:
   - type: TriggerOnActivate
   - type: TriggerOnDamage
+    threshold: 0
+    probability: 0.5
   - type: PolymorphOnTrigger
     polymorph: MimicVendor
+  - type: DatasetVocalizer
+    dataset: MimicMachineAds
+  - type: Advertise
+    pack: MimicMachineAds
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: FlimsyGlass
 
 - type: entity
-  parent: [VendingMachineCoffee, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineCoffee]
   id: VendorMimicCoffee
 
 - type: entity
-  parent: [VendingMachineCola, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineCola]
   id: VendorMimicCola
 
 - type: entity
-  parent: [VendingMachineColaBlack, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineColaBlack]
   id: VendorMimicColaBlack
 
 - type: entity
-  parent: [VendingMachineColaRed, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineColaRed]
   id: VendorMimicColaRed
 
 - type: entity
-  parent: [VendingMachineDrGibb, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineDrGibb]
   id: VendorMimicDrGibb
 
 - type: entity
-  parent: [VendingMachinePwrGame, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachinePwrGame]
   id: VendorMimicPwrGame
 
 - type: entity
-  parent: [VendingMachineShamblersJuice, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineShamblersJuice]
   id: VendorMimicShamblersJuice
 
 - type: entity
-  parent: [VendingMachineSmite, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSmite]
   id: VendorMimicSmite
 
 - type: entity
-  parent: [VendingMachineSoda, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSoda]
   id: VendorMimicSoda
 
 - type: entity
-  parent: [VendingMachineSovietSoda, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSovietSoda]
   id: VendorMimicSovietSoda
-  suffix: Mimic
 
 - type: entity
-  parent: [VendingMachineSpaceUp, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSpaceUp]
   id: VendorMimicSpaceUp
 
 - type: entity
-  parent: [VendingMachineStarkist, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineStarkist]
   id: VendorMimicStarkist
 
   # Snacks
 
 - type: entity
-  parent: [VendingMachineSweetToof, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSweetToof]
   id: VendorMimicSweetToof
 
 - type: entity
-  parent: [VendingMachineSustenance, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSustenance]
   id: VendorMimicSustenance
-  suffix: Mimic
 
 - type: entity
-  parent: [VendingMachineHotfood, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineHotfood]
   id: VendorMimicHotfood
 
 - type: entity
-  parent: [VendingMachineFitness, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineFitness]
   id: VendorMimicFitness
 
 - type: entity
-  parent: [VendingMachineWeeb, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineWeeb]
   id: VendorMimicWeeb
 
 - type: entity
-  parent: [VendingMachineDiscount, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineDiscount]
   id: VendorMimicDiscount
   suffix: Mimic
 
 - type: entity
-  parent: [VendingMachineSnack, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSnack]
   id: VendorMimicSnack
 
 - type: entity
-  parent: [VendingMachineSnackBlue, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSnackBlue]
   id: VendorMimicSnackBlue
 
 - type: entity
-  parent: [VendingMachineSnackGreen, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSnackGreen]
   id: VendorMimicSnackGreen
 
 - type: entity
-  parent: [VendingMachineSnackOrange, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSnackOrange]
   id: VendorMimicSnackOrange
 
 - type: entity
-  parent: [VendingMachineSnackTeal, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineSnackTeal]
   id: VendorMimicSnackTeal
 
 - type: entity
-  parent: [VendingMachineSnackBlue, BaseVendorMimic]
-  id: VendorMimicSnackBlue
-
-- type: entity
-  parent: [VendingMachineDonut, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineDonut]
   id: VendorMimicDonut
 
 - type: entity
-  parent: [VendingMachineChang, BaseVendorMimic]
+  parent: [BaseVendorMimic, VendingMachineChang]
   id: VendorMimicChang

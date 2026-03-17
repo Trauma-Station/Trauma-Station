@@ -1,0 +1,12 @@
+- type: entity
+  id: RandomMaintsCloset
+  name: random maints closet spawner
+  parent: MarkerBase
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - ClosetMaintenanceFilledRandom
+    chance: 0.5
+    rarePrototypes:
+    - MobMimicLocker
+    rareChance: 0.5

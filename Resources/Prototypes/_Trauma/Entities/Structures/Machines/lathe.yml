@@ -114,12 +114,84 @@
     runningState: printingpress
     staticPacks:
     - RevPrintingPress
+    - PrintingPressAdvanced
   - type: MaterialStorage
     whitelist:
       tags:
       - Sheet
   - type: Construction
     node: printing press
+
+- type: entity
+  parent: BaseMachine
+  id: CrewPrintingPress
+  suffix: crew
+  name: printing press
+  description: A printing press for mass producing media, or instructional material.
+  components:
+  - type: Lathe
+    producingSound:
+      path: /Audio/_Trauma/Revs/printingpresslong.ogg
+    runningState: printingpress
+    staticPacks:
+    - PrintingPressSimple
+    - PrintingPressAdvanced
+    - PrintingPressBlueprints
+    idleState: icon
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/revprintingpress.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Appearance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: ActivatableUI
+    key: enum.LatheUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: StaticPrice
+    price: 800
+  - type: TechnologyDatabase
+  - type: AutomationSlots
+    slots:
+    - !type:AutomatedMaterialStorage
+      input: AutomationSlotMaterials
+      output: null
+  - type: Animateable
+  - type: LightningTarget
+    priority: 1
+
 
 - type: entity
   parent: BaseRevIndustry

@@ -24,13 +24,14 @@
   table: !type:GroupSelector
     children:
     - id: BookStrength
-    - id: BookCombat
+    - id: BookMelee
+    - id: BookShooting
     - id: BookSurgery
     - id: BookMagicalLiteracy
     - id: BookLiteracy
     - id: BookJanitor
     - id: BookLanguageTauCeti
-    - id: BookHandmade
+    - id: BookFabrication
     - id: BookSurvival
     - id: BookMaterials
     - id: BookDoors
@@ -77,9 +78,9 @@
 - type: entity
   parent: BookSkillbook
   id: BookStrength
-  name: old book
+  name: HOW TO GET JACKED MONTHY OH HELL YEAH
   suffix: strength
-  description: It contains drawn instructions of curl-ups and sit-ups.
+  description: You feel yourself throwing your back out just looking at this.
   components:
   - type: Sprite
     layers:
@@ -95,12 +96,14 @@
       ToughnessKnowledge: 3
     doAfter: 2
 
+# Melee
+
 - type: entity
-  parent: BookSkillbook
-  id: BookCombat
-  name: old field book
+  parent: [BookSkillbook, BaseMinorContraband]
+  id: BookMelee
+  name: George Gimmes Guide to Killing
   suffix: melee
-  description: It contains drawn instructions about the basics of combat and weapons.
+  description: It contains crude drawings of an elderly man hurting people with his bare fists and carving various shitty weapons.
   components:
   - type: Sprite
     layers:
@@ -108,39 +111,157 @@
   - type: KnowledgeGrantOnUse
     skills:
       MeleeKnowledge: 12
-      ShootingKnowledge: 12
       WeaponsKnowledge: 12
     experience:
       MeleeKnowledge: 3
-      ShootingKnowledge: 3
+      WeaponsKnowledge: 2
+    doAfter: 2
+
+- type: entity
+  parent: [BookSkillbook, BaseMinorContraband]
+  id: BookMeleePrinted
+  name: Close Combat in the Modern Age
+  suffix: melee
+  description: A detailed book about how to properly throw punches, kicks, and make some proper improvised weaponry.
+  components:
+  - type: Sprite
+    layers:
+    - state: melee
+  - type: KnowledgeGrantOnUse
+    skills:
+      MeleeKnowledge: 26
+      WeaponsKnowledge: 26
+    experience:
+      MeleeKnowledge: 4
       WeaponsKnowledge: 3
     doAfter: 2
 
 - type: entity
+  parent: [BookSkillbook, BaseRevMinorContraband]
+  id: BookMeleePrintedRev
+  name: ГОЙДА! Д
+  suffix: melee
+  description: It contains cyrillic instructions about melee combat and some of the weapons used.
+  components:
+  - type: Sprite
+    layers:
+    - state: melee
+  - type: KnowledgeGrantOnUse
+    skills:
+      MeleeKnowledge: 35
+      WeaponsKnowledge: 35
+    experience:
+      MeleeKnowledge: 5
+      WeaponsKnowledge: 4
+    doAfter: 2
+
+# Shooting
+
+- type: entity
+  parent: [BookSkillbook, BaseMinorContraband]
+  id: BookShooting
+  name: Cadet Training Guide
+  suffix: shooting
+  description: Its useless.
+  components:
+  - type: Sprite
+    layers:
+    - state: shooting
+  - type: KnowledgeGrantOnUse
+    skills:
+      ShootingKnowledge: 12
+      GunsmithingKnowledge: 12
+    experience:
+      ShootingKnowledge: 3
+      GunsmithingKnowledge: 2
+    doAfter: 2
+
+- type: entity
+  parent: [BookSkillbook, BaseMinorContraband]
+  id: BookShootingPrinted
+  name: Ancienct Chinese Shooting Techniques and you
+  suffix: melee
+  description: You need to become ancient and Chinese.
+  components:
+  - type: Sprite
+    layers:
+    - state: shooting
+  - type: KnowledgeGrantOnUse
+    skills:
+      MeleeKnowledge: 26
+      WeaponsKnowledge: 26
+    experience:
+      MeleeKnowledge: 4
+      WeaponsKnowledge: 3
+    doAfter: 2
+
+- type: entity
+  parent: [BookSkillbook, BaseRevMinorContraband]
+  id: BookShootingPrintedRev
+  name: ГОЙДА! Б
+  suffix: shooting
+  description: It contains cyrillic instructions about firearms and their manufacturing.
+  components:
+  - type: Sprite
+    layers:
+    - state: shooting
+  - type: KnowledgeGrantOnUse
+    skills:
+      MeleeKnowledge: 35
+      WeaponsKnowledge: 35
+    experience:
+      MeleeKnowledge: 5
+      WeaponsKnowledge: 4
+    doAfter: 2
+
+# Medical
+
+- type: entity
   parent: BookSkillbook
   id: BookSurgery
-  name: old doctor's encyclopedia
+  name: Encyclopedia Medica - 1st edition
   suffix: surgery
-  description: It's from the early 2000s, but it describes what doctors need to know in a sticky situation.
+  description: It's from the early 2000s, it is full of barbaric practices, and does not even mention cloning.
   components:
   - type: Sprite
     layers:
     - state: surgery
   - type: KnowledgeGrantOnUse
     skills:
-      SurgeryKnowledge: 15
+      SurgeryKnowledge: 10
       FirstAidKnowledge: 10
     experience:
-      SurgeryKnowledge: 3
+      SurgeryKnowledge: 2
       FirstAidKnowledge: 3
     doAfter: 2
 
 - type: entity
   parent: BookSkillbook
+  id: BookSurgeryPrinted
+  name: Encyclopedia Medica - 37th Edition
+  suffix: surgery
+  description: A textbook detailing the fundamentals of modern medicine.
+  components:
+  - type: Sprite
+    layers:
+    - state: surgery
+  - type: KnowledgeGrantOnUse
+    skills:
+      SurgeryKnowledge: 26
+      FirstAidKnowledge: 26
+    experience:
+      SurgeryKnowledge: 3
+      FirstAidKnowledge: 4
+    doAfter: 2
+
+# Magic
+
+- type: entity
+  parent: [BookSkillbook, BaseMagicalContraband]
   id: BookMagicalLiteracy
-  name: old tome
+  name: Grim Tales from Old Earth
   suffix: magical literacy
-  description: It contains drawn instructions of a man watching sigils pop out of the page.
+  description: Recently banned, it contains a collection of old earth stories origionating from various places.
   components:
   - type: Sprite
     layers:
@@ -153,11 +274,28 @@
     doAfter: 2
 
 - type: entity
+  parent: [BookSkillbook, BaseMagicalContraband]
+  id: BookMagicalLiteracyPrinted
+  name: logs from space station 13
+  suffix: magical literacy
+  description: The transcript of a blackbox recovered by a station supposedly completely destroyed by creatures unheard of.
+  components:
+  - type: Sprite
+    layers:
+    - state: magicalliteracy
+  - type: KnowledgeGrantOnUse
+    skills:
+      MagicalLiteracyKnowledge: 26
+    experience:
+      MagicalLiteracyKnowledge: 4
+    doAfter: 2
+
+- type: entity
   parent: BookSkillbook
   id: BookLiteracy
-  name: old picture book
+  name: Two Spacemen, One pair of Insuls
   suffix: literacy
-  description: Its a picture book.
+  description: Its a picture book that ends with a gruesome and violent death! Who made this?!
   components:
   - type: Sprite
     layers:
@@ -172,9 +310,9 @@
 - type: entity
   parent: BookSkillbook
   id: BookJanitor
-  name: janitor's old book
+  name: WHY I LOVE SOAP AND WHY YOU SHOULD TOO
   suffix: janitor
-  description: Its a book about the basics of janitoring.
+  description: Voxes supposedly love this one, its mostly useless rambling.
   components:
   - type: Sprite
     layers:
@@ -191,7 +329,7 @@
 - type: entity
   parent: BookSkillbook
   id: BookLanguageTauCeti
-  name: old book
+  name: Tau Ceti Phrases for Beginners
   suffix: Tau Ceti
   description: Its a book on the basics of the Tau Ceti language.
   components:
@@ -205,12 +343,14 @@
       LanguageTauCetiBasic: 3
     doAfter: 2
 
+# Fabrication
+
 - type: entity
   parent: BookSkillbook
-  id: BookHandmade
-  name: old book
-  suffix: handmade
-  description: Its a book on the basics of construction.
+  id: BookFabrication
+  name: Home Crafters Monthly
+  suffix: fabrication
+  description: Mostly advertisements, but there are some nice tips in here.
   components:
   - type: Sprite
     layers:
@@ -224,10 +364,29 @@
 
 - type: entity
   parent: BookSkillbook
+  id: BookFabricationPrinted
+  name: Principles of Engineering in Space - 17th Edition
+  suffix: fabrication
+  description: Used to guarantee you a bright future. Now it guarantees you wage slavery.
+  components:
+  - type: Sprite
+    layers:
+    - state: fabrication
+  - type: KnowledgeGrantOnUse
+    skills:
+      FabricationKnowledge: 26
+    experience:
+      FabricationKnowledge: 4
+    doAfter: 2
+
+# Carving
+
+- type: entity
+  parent: BookSkillbook
   id: BookSurvival
-  name: old book
+  name: BSA handbook
   suffix: survival
-  description: Its a book on the basics of survival.
+  description: Has a plethora of knowledge on plants you will never see and animals that died out long ago. At least it teaches you how to carve.
   components:
   - type: Sprite
     layers:
@@ -240,6 +399,25 @@
     doAfter: 2
 
 - type: entity
+  parent: BookSkillbook
+  id: BookSurvivalPrinted
+  name: Wood and Bone Carving Techniques
+  suffix: survival
+  description: Niche books for niche hobbies.
+  components:
+  - type: Sprite
+    layers:
+    - state: fabrication
+  - type: KnowledgeGrantOnUse
+    skills:
+      CarvingKnowledge: 26
+    experience:
+      CarvingKnowledge: 4
+    doAfter: 2
+
+# Blueprints
+
+- type: entity
   parent: BookSchematic
   id: BookMaterials
   suffix: materials
@@ -249,7 +427,7 @@
     skills:
       MaterialsKnowledge: 26
     experience:
-      MaterialsKnowledge: 3
+      MaterialsKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -265,7 +443,7 @@
     skills:
       DoorsKnowledge: 26
     experience:
-      DoorsKnowledge: 3
+      DoorsKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -281,7 +459,7 @@
     skills:
       AirlocksKnowledge: 26
     experience:
-      AirlocksKnowledge: 3
+      AirlocksKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -297,7 +475,7 @@
     skills:
       ToysKnowledge: 26
     experience:
-      ToysKnowledge: 3
+      ToysKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -313,7 +491,7 @@
     skills:
       BananiumKnowledge: 26
     experience:
-      BananiumKnowledge: 3
+      BananiumKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -329,7 +507,7 @@
     skills:
       BotsKnowledge: 26
     experience:
-      BotsKnowledge: 3
+      BotsKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -345,7 +523,7 @@
     skills:
       FurnitureKnowledge: 26
     experience:
-      FurnitureKnowledge: 3
+      FurnitureKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -361,7 +539,7 @@
     skills:
       InfrastructureKnowledge: 26
     experience:
-      InfrastructureKnowledge: 3
+      InfrastructureKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -377,7 +555,7 @@
     skills:
       ElectronicsKnowledge: 26
     experience:
-      ElectronicsKnowledge: 3
+      ElectronicsKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -393,7 +571,7 @@
     skills:
       WallsKnowledge: 26
     experience:
-      WallsKnowledge: 3
+      WallsKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -409,7 +587,7 @@
     skills:
       WindowsKnowledge: 26
     experience:
-      WindowsKnowledge: 3
+      WindowsKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -425,7 +603,7 @@
     skills:
       SmokeablesKnowledge: 26
     experience:
-      SmokeablesKnowledge: 3
+      SmokeablesKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
