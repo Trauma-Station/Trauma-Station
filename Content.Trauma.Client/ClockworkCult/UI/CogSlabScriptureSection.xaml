@@ -1,4 +1,8 @@
-﻿<controls:CogSlabSection
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:CogSlabSection
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Trauma.Client.ClockworkCult.UI">
 
