@@ -231,7 +231,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
             Xform.AttachToGridOrMap(starGazer.Value);
             comp = EnsureComp<StarGazerComponent>(starGazer.Value);
             minion = EnsureComp<HereticMinionComponent>(starGazer.Value);
-            minion.HereticMind = GetNetEntity(mind);
+            minion.MinionId = GetNetEntity(mind).Id;
             minion.BoundHeretic = summoner;
             summoner.Comp.StarGazer = starGazer.Value;
             heretic.Minions.Add(starGazer.Value);
@@ -251,7 +251,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
             minion.BoundHeretic == summoner.Owner)
             return (starGazer.Value, comp);
 
-        minion.HereticMind = GetNetEntity(mind);
+        minion.MinionId = GetNetEntity(mind).Id;
         minion.BoundHeretic = summoner.Owner;
         Dirty(starGazer.Value, minion);
 

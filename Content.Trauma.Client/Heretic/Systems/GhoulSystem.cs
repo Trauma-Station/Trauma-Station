@@ -30,7 +30,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
            if (minion.BoundHeretic == args.Uid)
                args.StatusIcons.Add(_prototype.Index(minion.MasterIcon));
 
-           if (TryComp(args.Uid, out HereticMinionComponent? minion2) && minion2.HereticMind == minion.HereticMind)
+           if (TryComp(args.Uid, out HereticMinionComponent? minion2) && minion2.MinionId == minion.MinionId)
                args.StatusIcons.Add(_prototype.Index(minion.GhoulIcon));
         }
         else if (TryComp(args.Uid, out HereticMinionComponent? minion2) && minion2.BoundHeretic == player)

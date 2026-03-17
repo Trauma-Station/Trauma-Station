@@ -256,9 +256,9 @@ public sealed class CarvingKnifeSystem : EntitySystem
 
         trap.IgnoredMinds.Add(mind);
 
-        if (TryComp(args.User, out HereticMinionComponent? minion) &&
-            TryGetEntity(minion.HereticMind, out var masterMind))
-            trap.IgnoredMinds.Add(masterMind.Value);
+        if (TryComp(args.User, out HereticMinionComponent? minion) && Exists(minion.BoundHeretic) &&
+            _mind.TryGetMind(minion.BoundHeretic.Value, out var masterMind, out _))
+            trap.IgnoredMinds.Add(masterMind);
 
         Dirty(rune, trap);
     }

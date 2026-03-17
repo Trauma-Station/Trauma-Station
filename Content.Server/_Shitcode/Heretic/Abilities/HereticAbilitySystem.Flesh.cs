@@ -198,7 +198,7 @@ public sealed partial class HereticAbilitySystem
 
         var minion = EnsureComp<HereticMinionComponent>(clone.Value);
         minion.BoundHeretic = user;
-        minion.HereticMind = GetNetEntity(userMind);
+        minion.MinionId = GetNetEntity(userMind).Id;
         Dirty(clone.Value, minion);
 
         var ghoul = Factory.GetComponent<GhoulComponent>();

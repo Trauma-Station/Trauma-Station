@@ -453,7 +453,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
                     var minion = Factory.GetComponent<HereticMinionComponent>();
                     minion.BoundHeretic = performer;
-                    minion.HereticMind = GetNetEntity(heretic.Owner);
+                    minion.MinionId = GetNetEntity(heretic.Owner).Id;
                     AddComp(target, minion, true);
 
                     EnsureComp<HereticMinionComponent>(target).BoundHeretic = performer;
