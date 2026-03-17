@@ -72,9 +72,6 @@ public sealed partial class AbductorVictimComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
-public sealed partial class AbductorAgentComponent : Component;
-
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductorOrganComponent : Component;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
