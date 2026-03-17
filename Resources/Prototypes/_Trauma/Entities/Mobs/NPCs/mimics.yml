@@ -231,6 +231,13 @@
       150: Dead
   - type: MeleeWeapon
     attackRate: 1
+    damage:
+      types:
+        Slash: 15
+        Piercing: 15
+      woundSeverityMultipliers:
+        Slash: 999
+        Piercing: 999
   - type: Stamina
     baseCritThreshold: 999
   - type: Gun
