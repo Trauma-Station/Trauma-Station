@@ -31,8 +31,8 @@ public sealed partial class QualityComponent : Component
     public int QualityModifiers = 0;
 
     /// <summary>
-    /// Stores the ID override of item coefficients.
+    /// Stores the ID of item coefficients.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public ProtoId<QualityPrototype>? ProtoId;
+    public ProtoId<QualityPrototype> QualityFactors;
 }

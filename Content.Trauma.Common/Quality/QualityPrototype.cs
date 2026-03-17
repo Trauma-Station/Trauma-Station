@@ -7,7 +7,6 @@ namespace Content.Trauma.Common.Quality;
 [Prototype]
 public sealed partial class QualityPrototype : IPrototype
 {
-    [ViewVariables]
     [IdDataField]
     public string ID { get; private set; } = default!;
 

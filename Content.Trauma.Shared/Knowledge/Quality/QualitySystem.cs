@@ -39,9 +39,7 @@ public sealed class QualitySystem : EntitySystem
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
 
     private EntityQuery<QualityComponent> _query;
-    private QualityPrototype _baseQuality = default!;
 
-    private static readonly ProtoId<QualityPrototype> BaseQuality = "BaseQuality";
     private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
 
     public override void Initialize()
@@ -49,7 +47,6 @@ public sealed class QualitySystem : EntitySystem
         base.Initialize();
 
         _query = GetEntityQuery<QualityComponent>();
-        _baseQuality = _proto.Index(BaseQuality);
 
         // quality effects
         SubscribeLocalEvent<QualityComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);
@@ -86,13 +83,13 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnGetMeleeDamage(Entity<QualityComponent> ent, ref GetMeleeDamageEvent args)
     {
-        args.Damage *= QualityModifier(ent.Comp.Quality);
+        args.Damage *= QualityModifier(_proto.Resolve(ent.Comp.QualityFactors, out var proto) ? proto.Durability : 1.1f);
     }
 
     private void OnGunRefreshModifiers(Entity<QualityComponent> ent, ref GunRefreshModifiersEvent args)
     {
         // 60% spread at +5, 170% at -5
-        var modifier = QualityModifier(ent.Comp.Quality, _baseQuality.Gun);
+        var modifier = QualityModifier(_proto.Resolve(ent.Comp.QualityFactors, out var proto) ? proto.Gun : 0.9f);
         args.MinAngle *= modifier;
         args.MaxAngle *= modifier;
     }
@@ -101,7 +98,7 @@ public sealed class QualitySystem : EntitySystem
     {
         // TODO: make this dogshit an event
         // -5 is half as good, 5 is twice as good
-        var modifier = args.Modifier(_baseQuality.Armor);
+        var modifier = args.Modifier(args.Proto.Armor);
         var coefficients = ent.Comp.Modifiers.Coefficients;
         foreach (var damageType in coefficients.Keys)
         {
@@ -112,21 +109,21 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnClothingApplyQuality(Entity<ClothingComponent> ent, ref ApplyQualityEvent args)
     {
-        var modifier = args.Modifier((args.Id is { } && _proto.TryIndex<QualityPrototype>(args.Id, out var proto) ? proto : _baseQuality).ClothingDelay);
+        var modifier = args.Modifier(args.Proto.ClothingDelay);
         ent.Comp.EquipDelay *= modifier;
         Dirty(ent);
     }
 
     private void OnExplosionResistApplyQuality(Entity<ExplosionResistanceComponent> ent, ref ApplyQualityEvent args)
     {
-        var modifier = args.Modifier((args.Id is { } && _proto.TryIndex<QualityPrototype>(args.Id, out var proto) ? proto : _baseQuality).ExplosionResist);
+        var modifier = args.Modifier(args.Proto.ExplosionResist);
         ent.Comp.DamageCoefficient = modifier;
         Dirty(ent);
     }
 
     private void OnStaminaResistApplyQuality(Entity<StaminaResistanceComponent> ent, ref ApplyQualityEvent args)
     {
-        var modifier = args.Modifier((args.Id is { } && _proto.TryIndex<QualityPrototype>(args.Id, out var proto) ? proto : _baseQuality).StaminaResist);
+        var modifier = args.Modifier(args.Proto.StaminaResist);
         ent.Comp.DamageCoefficient = modifier;
         Dirty(ent);
     }
@@ -134,7 +131,7 @@ public sealed class QualitySystem : EntitySystem
     private void OnDestructibleApplyQuality(Entity<DestructibleComponent> ent, ref ApplyQualityEvent args)
     {
         // 250% health at +5 quality
-        var modifier = args.Modifier((args.Id is { } && _proto.TryIndex<QualityPrototype>(args.Id, out var proto) ? proto : _baseQuality).Health);
+        var modifier = args.Modifier(args.Proto.Health);
         foreach (var threshold in ent.Comp.Thresholds)
         {
             if (threshold.Trigger is DamageTrigger trigger)
@@ -145,7 +142,7 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnSelfDamageApplyQuality(Entity<DamageOnHitComponent> ent, ref ApplyQualityEvent args)
     {
-        ent.Comp.Damage *= args.Modifier((args.Id is { } && _proto.TryIndex<QualityPrototype>(args.Id, out var proto) ? proto : _baseQuality).SelfDamage);
+        ent.Comp.Damage *= args.Modifier(args.Proto.SelfDamage);
         Dirty(ent);
     }
 
@@ -153,7 +150,7 @@ public sealed class QualitySystem : EntitySystem
     private void OnDamageApplyQuality(Entity<DamageOtherOnHitComponent> ent, ref ApplyQualityEvent args)
     {
         // 180% damage at +5 quality
-        ent.Comp.Damage *= args.Modifier((args.Id is { } && _proto.TryIndex<QualityPrototype>(args.Id, out var proto) ? proto : _baseQuality).Damage);
+        ent.Comp.Damage *= args.Modifier(args.Proto.Damage);
         Dirty(ent);
     }
 
@@ -165,21 +162,20 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnProjectileApplyQuality(Entity<ProjectileComponent> ent, ref ApplyQualityEvent args)
     {
-        ent.Comp.Damage *= args.Modifier((args.Id is { } && _proto.TryIndex<QualityPrototype>(args.Id, out var proto) ? proto : _baseQuality).Projectile);
+        ent.Comp.Damage *= args.Modifier(args.Proto.Projectile);
         Dirty(ent);
     }
 
     private void OnDurabilityApplyQuality(Entity<DurabilityComponent> ent, ref ApplyQualityEvent args)
     {
-        ent.Comp.DamageProbability /= args.Modifier((args.Id is { } && _proto.TryIndex<QualityPrototype>(args.Id, out var proto) ? proto : _baseQuality).Durability);
+        ent.Comp.DamageProbability /= args.Modifier(args.Proto.Durability);
         Dirty(ent);
     }
 
     private void OnShieldApplyQuality(Entity<BlockingComponent> ent, ref ApplyQualityEvent args)
     {
-        var p = args.Id is { } && _proto.TryIndex<QualityPrototype>(args.Id, out var proto) ? proto : _baseQuality;
-        var modifierPlus = args.Modifier(p.Shield);
-        var modifierMinus = args.Modifier(p.ShieldFlat);
+        var modifierPlus = args.Modifier(args.Proto.Shield);
+        var modifierMinus = args.Modifier(args.Proto.ShieldFlat);
         ent.Comp.PassiveBlockFraction *= modifierPlus;
         ent.Comp.ActiveBlockFraction *= modifierPlus;
 
@@ -234,7 +230,7 @@ public sealed class QualitySystem : EntitySystem
         comp.LevelDeltas = ent.Comp.LevelDeltas;
         comp.Quality = ent.Comp.Quality;
         comp.QualityModifiers = ent.Comp.QualityModifiers;
-        comp.ProtoId = ent.Comp.ProtoId;
+        comp.QualityFactors = ent.Comp.QualityFactors;
         Dirty(args.NewId, comp);
         ApplyQuality((args.NewId, comp));
     }
@@ -271,7 +267,7 @@ public sealed class QualitySystem : EntitySystem
         newComp.LevelDeltas = original.Comp.LevelDeltas;
         newComp.Quality = original.Comp.Quality;
         newComp.QualityModifiers = original.Comp.QualityModifiers;
-        newComp.ProtoId = original.Comp.ProtoId;
+        newComp.QualityFactors = original.Comp.QualityFactors;
         Dirty(created, newComp);
 
         ApplyQuality((created, newComp));
@@ -284,7 +280,10 @@ public sealed class QualitySystem : EntitySystem
     {
         _nameModifier.RefreshNameModifiers(ent.Owner);
 
-        var ev = new ApplyQualityEvent(ent.Comp.Quality, ent.Comp.ProtoId);
+        if (!_proto.Resolve(ent.Comp.QualityFactors, out var proto))
+            return;
+
+        var ev = new ApplyQualityEvent(ent.Comp.Quality, proto);
         RaiseLocalEvent(ent, ref ev);
     }
 
@@ -363,7 +362,7 @@ public sealed class QualitySystem : EntitySystem
 /// Raised on an entity to apply quality modifiers for each relevant component.
 /// </summary>
 [ByRefEvent]
-public record struct ApplyQualityEvent(int Quality, string? Id)
+public record struct ApplyQualityEvent(int Quality, QualityPrototype Proto)
 {
     public float Modifier(float power = 1.1f)
         => QualitySystem.QualityModifier((float) Quality, power);

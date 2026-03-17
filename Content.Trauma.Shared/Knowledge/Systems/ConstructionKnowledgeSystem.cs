@@ -4,6 +4,7 @@ using Content.Goobstation.Common.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Trauma.Common.Construction;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Quality;
 using Content.Trauma.Shared.Knowledge.Quality;
 using Robust.Shared.Prototypes;
 
@@ -17,6 +18,8 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly QualitySystem _quality = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+
+    private static readonly ProtoId<QualityPrototype> BaseQuality = "BaseQuality";
 
     public override void Initialize()
     {
@@ -70,7 +73,7 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
         {
             quality.LevelDeltas[id] = mastery;
         }
-        quality.ProtoId = proto.QualityPrototype;
+        quality.QualityFactors = proto.QualityPrototype ?? BaseQuality;
         Dirty(item, quality);
 
         _quality.RollQuality((item, quality), ent);
