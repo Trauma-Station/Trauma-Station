@@ -1,7 +1,6 @@
 - type: entity
   id: ComponentsToRemoveOnGhoulify
-  save: false
-  categories: [ HideSpawnMenu ]
+  abstract: true
   components:
   - type: Respirator
     damage: !type:DamageSpecifier
@@ -28,8 +27,7 @@
 
 - type: entity
   id: ComponentsToRemoveOnUnGhoulify
-  save: false
-  categories: [ HideSpawnMenu ]
+  abstract: true
   components:
   - type: Ghoul
   - type: HereticMinion
