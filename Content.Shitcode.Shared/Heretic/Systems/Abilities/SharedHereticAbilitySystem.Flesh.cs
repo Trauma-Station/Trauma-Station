@@ -19,7 +19,7 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<EventHereticFleshSurgery>(OnFleshSurgery);
         SubscribeLocalEvent<EventHereticFleshSurgeryDoAfter>(OnFleshSurgeryDoAfter);
 
-        SubscribeLocalEvent<FleshPassiveComponent, ImmuneToPoisonDamageEvent>(OnPoisonImmune);
+        SubscribeLocalEvent<FleshPassiveComponent, IgnoreHeathChangeEvent>(OnPoisonImmune);
 
         SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryPainEvent>>(OnPain);
         SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryIgnorePreviousStepsEvent>>(OnIgnore);
@@ -27,7 +27,7 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<FleshSurgeryComponent, UseInHandEvent>(OnFleshSurgeryUse);
     }
 
-    private void OnPoisonImmune(Entity<FleshPassiveComponent> ent, ref ImmuneToPoisonDamageEvent args)
+    private void OnPoisonImmune(Entity<FleshPassiveComponent> ent, ref IgnoreHeathChangeEvent args)
     {
         args.Immune = true;
     }

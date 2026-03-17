@@ -1,6 +1,7 @@
 using Content.Shared.FixedPoint;
 
 namespace Content.Shared.Damage.Prototypes;
+
 public sealed partial class DamageTypePrototype
 {
     /// <summary>

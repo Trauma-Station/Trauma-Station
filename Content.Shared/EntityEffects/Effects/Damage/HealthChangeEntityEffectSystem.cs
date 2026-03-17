@@ -38,8 +38,8 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
                 : FixedPoint2.Zero;
         }
 
-        // flesh heretics ignore poison damage from chems
-        var ev = new ChangeHealthChangeDamageEvent();
+        // TODO: FIX SHITCODE
+        var ev = new IgnoreHeathChangeEvent();
         RaiseLocalEvent(entity, ref ev);
         if (ev.Immune)
         {
