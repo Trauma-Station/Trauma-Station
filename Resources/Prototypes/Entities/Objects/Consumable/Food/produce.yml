@@ -648,6 +648,12 @@
     entries:
       Burger: CabbageBurger
       Taco: Cabbage
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+  # </Trauma>
 
 - type: entity
   name: garlic
@@ -1161,6 +1167,12 @@
     entries:
       Burger: Apple
       Taco: Apple
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # No apple shooter but this would fuckin hurt
+  # </Trauma>
 
 - type: entity
   name: golden apple
@@ -1203,6 +1215,13 @@
     entries:
       Burger: GoldenApple
       Taco: GoldenApple
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+        Holy: 5 # lol
+  # </Trauma>
 
 - type: entity
   name: cocoa pod
@@ -2203,6 +2222,12 @@
   - type: Tag
     tags:
     - Fruit
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 20
+  # </Trauma>
 
 - type: entity
   name: watermelon slice
@@ -2306,6 +2331,13 @@
   - type: Tag
     tags:
     - Fruit
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 20
+        Holy: 5 # 4 holymelons thrown past a devil without armor kills them
+  # </Trauma>
 
 - type: entity
   name: holymelon slice

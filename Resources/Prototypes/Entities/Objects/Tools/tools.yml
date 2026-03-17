@@ -66,6 +66,14 @@
       path: /Audio/Items/wirecutter.ogg
       params:
         variation: 0.125
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 1 # ow
+        Slash: 1 # no idea why it does it but its cool
+        Piercing: 1 # let me have my mixed damage its 3 total
+  # </Trauma>
 
 - type: entity
   name: screwdriver
@@ -112,8 +120,8 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 8
-        Structural: 1 # Go on, throw 500 screwdrivers at a wall.
+        Piercing: 10
+        Structural: 
   # </Trauma>
   - type: EmitSoundOnLand
     sound:
@@ -210,6 +218,12 @@
   - type: GuideHelp
     guides:
     - Construction
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  # </Trauma>
 
 - type: entity
   name: multitool
@@ -273,6 +287,12 @@
     - WirePanels
     - Airlocks
     - InspectingPower
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 1 # incredibly faint ow
+  # </Trauma>
 
 - type: entity
   name: network configurator
@@ -396,6 +416,13 @@
         Piercing: 10
     soundHit:
       path: "/Audio/Items/drill_hit.ogg"
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+        Piercing: 5
+  # </Trauma>
 
 - type: entity
   id: RCD
@@ -453,6 +480,12 @@
     tags:
       - DroneUsable # Goobstation
       - RCD # Trauma
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  # </Trauma>
 
 - type: entity
   id: RPD
@@ -680,3 +713,9 @@
   - type: Construction
     graph: WoodenRollingPin
     node: rollingpin
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  # </Trauma>
