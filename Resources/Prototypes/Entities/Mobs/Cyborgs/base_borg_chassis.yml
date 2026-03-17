@@ -499,7 +499,10 @@
   components:
   - type: RandomMetadata
     nameSegments:
-    - NamesXenoborg
+#    - NamesXenoborg # - Trama: New Xenoborg names
+     - NamesXenoborgFirst
+      - NamesXenoborgLast
+    nameFormat: name-format-xenoborg
   - type: NameIdentifier
     group: Xenoborg
   - type: Sprite

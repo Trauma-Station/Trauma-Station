@@ -1,0 +1,11 @@
+- type: localizedDataset
+  id: NamesXenoborgFirst
+  values:
+    prefix: names-xenoborg-first-dataset-
+    count: 50
+
+- type: localizedDataset
+  id: NamesXenoborgLast
+  values:
+    prefix: names-xenoborg-last-dataset-
+    count: 39
