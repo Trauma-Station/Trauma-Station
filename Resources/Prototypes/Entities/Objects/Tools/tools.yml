@@ -120,8 +120,8 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 10
-        Structural: 5 # Go on, throw 500 screwdrivers at a wall.
+        Piercing: 8
+        Structural: 1 # Go on, throw 500 screwdrivers at a wall.
   # </Trauma>
   - type: EmitSoundOnLand
     sound:
