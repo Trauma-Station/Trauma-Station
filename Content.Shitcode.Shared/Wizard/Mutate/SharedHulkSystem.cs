@@ -5,6 +5,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Cuffs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Prototypes;
@@ -13,12 +14,14 @@ using Content.Shared.Slippery;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shitcode.Common.Wizard;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shitcode.Shared.Wizard.Mutate;
 
 public abstract class SharedHulkSystem : EntitySystem
 {
+    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
@@ -34,6 +37,9 @@ public abstract class SharedHulkSystem : EntitySystem
         SubscribeLocalEvent<HulkComponent, SlipAttemptEvent>(OnSlipAttempt);
         SubscribeLocalEvent<HulkComponent, MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<HulkComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<HulkComponent, InstantUncuffEvent>(OnUncuff);
+        SubscribeLocalEvent<HulkComponent, EnsnareBrokenEvent>(OnEnsnareBreak);
+        SubscribeLocalEvent<HulkComponent, EnsnareModifyFreeDurationEvent>(OnEnsnareModifyDuration);
     }
 
     private void OnStartup(Entity<HulkComponent> ent, ref ComponentStartup args)
@@ -79,6 +85,24 @@ public abstract class SharedHulkSystem : EntitySystem
     private void OnBeforeStaminaDamage(Entity<HulkComponent> ent, ref BeforeStaminaDamageEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnUncuff(Entity<HulkComponent> ent, ref InstantUncuffEvent args)
+    {
+        Roar(ent);
+        _cuffs.Uncuff(args.Target, ent, args.Cuff);
+    }
+
+    private void OnEnsnareBreak(Entity<HulkComponent> ent, ref EnsnareBrokenEvent args)
+    {
+        if (ent.Owner == args.Target)
+            Roar(ent);
+    }
+
+    private void OnEnsnareModifyDuration(Entity<HulkComponent> ent, ref EnsnareModifyFreeDurationEvent args)
+    {
+        if (ent.Owner == args.Target)
+            args.FreeTime = 0;
     }
 
     protected virtual void UpdateColorStartup(Entity<HulkComponent> hulk)

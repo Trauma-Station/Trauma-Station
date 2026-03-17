@@ -3,7 +3,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals;
+namespace Content.Shitcode.Shared.Heretic.Rituals;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HereticRitualComponent : Component

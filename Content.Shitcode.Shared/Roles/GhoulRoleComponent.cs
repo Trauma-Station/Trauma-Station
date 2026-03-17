@@ -18,7 +18,7 @@
 
 using Content.Shared.Roles.Components;
 
-namespace Content.Shared._Shitcode.Roles;
+namespace Content.Shitcode.Shared.Roles;
 
 [RegisterComponent]
 public sealed partial class GhoulRoleComponent : BaseMindRoleComponent;

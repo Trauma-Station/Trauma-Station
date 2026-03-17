@@ -2,7 +2,7 @@ using System.Linq;
 using Content.Shared.EntityConditions;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals;
+namespace Content.Shitcode.Shared.Heretic.Rituals;
 
 public abstract partial class BaseRitualCondition<T> : EntityConditionBase<T>, IHereticRitualEntry
     where T : EntityConditionBase<T>

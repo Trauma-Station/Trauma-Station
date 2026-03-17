@@ -2,7 +2,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
-namespace Content.Shared._Shitcode.Heretic.Components;
+namespace Content.Shitcode.Shared.Heretic.Components;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class CarvingAlertedStatusEffectComponent : Component

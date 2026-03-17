@@ -1,7 +1,7 @@
 using System.Numerics;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Shitcode.Heretic.SpriteOverlay;
+namespace Content.Shitcode.Shared.Heretic.SpriteOverlay;
 
 public abstract partial class BaseSpriteOverlayComponent : Component
 {

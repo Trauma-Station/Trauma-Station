@@ -1,7 +1,7 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Rejuvenate;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals.EntityEffects;
+namespace Content.Shitcode.Shared.Heretic.Rituals.EntityEffects;
 
 public sealed class RejuvenateEffectSystem : EntityEffectSystem<MetaDataComponent, Rejuvenate>
 {

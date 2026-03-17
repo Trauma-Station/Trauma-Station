@@ -5,7 +5,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._Shitcode.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public sealed class HealingAuraSystem : EntitySystem
 {

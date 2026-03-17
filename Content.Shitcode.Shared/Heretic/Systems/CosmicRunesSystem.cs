@@ -16,7 +16,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._Shitcode.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public sealed class CosmicRunesSystem : EntitySystem
 {

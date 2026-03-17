@@ -1,7 +1,7 @@
 using Content.Shared.Heretic;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Shared._Shitcode.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public abstract class SharedHereticCombatMarkSystem : EntitySystem
 {

@@ -7,7 +7,7 @@ using Content.Shared.Heretic;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Systems;
 
-namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
+namespace Content.Shitcode.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {

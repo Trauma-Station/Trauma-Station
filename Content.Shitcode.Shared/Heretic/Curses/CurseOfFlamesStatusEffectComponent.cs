@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Shitcode.Heretic.Curses;
+namespace Content.Shitcode.Shared.Heretic.Curses;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class CurseOfFlamesStatusEffectComponent : Component

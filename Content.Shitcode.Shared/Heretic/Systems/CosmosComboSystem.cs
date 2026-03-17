@@ -8,7 +8,7 @@ using Content.Shared.Mobs.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
-namespace Content.Shared._Shitcode.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public sealed class CosmosComboSystem : EntitySystem
 {

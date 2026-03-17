@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Shitcode.Heretic.Curses;
+namespace Content.Shitcode.Shared.Heretic.Curses;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class HereticCurseProviderComponent : Component

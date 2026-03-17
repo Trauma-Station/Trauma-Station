@@ -55,7 +55,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._Shitcode.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public abstract class SharedMansusGraspSystem : EntitySystem
 {

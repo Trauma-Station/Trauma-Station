@@ -5,7 +5,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals.EntityEffects;
+namespace Content.Shitcode.Shared.Heretic.Rituals.EntityEffects;
 
 public sealed class ReagentsEntityConditionSystem : EntityConditionSystem<PuddleComponent, ReagentsCondition>
 {

@@ -9,7 +9,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals;
+namespace Content.Shitcode.Shared.Heretic.Rituals;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class HereticRitualRuneComponent : Component

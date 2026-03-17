@@ -3,7 +3,7 @@ using Content.Shared.Atmos;
 using Content.Shared.EntityConditions;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals.EntityEffects;
+namespace Content.Shitcode.Shared.Heretic.Rituals.EntityEffects;
 
 public sealed class EnvironmentTemperatureConditionSystem : EntityConditionSystem<TemperatureTrackerComponent, EnvironmentTemperatureCondition>
 {

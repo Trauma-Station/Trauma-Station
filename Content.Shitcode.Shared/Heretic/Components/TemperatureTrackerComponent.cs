@@ -1,7 +1,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._Shitcode.Heretic.Components;
+namespace Content.Shitcode.Shared.Heretic.Components;
 
 /// <summary>
 /// Tracks environment temperature serverside and sends it to client

@@ -6,7 +6,7 @@ using Content.Shared.Polymorph;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals;
+namespace Content.Shitcode.Shared.Heretic.Rituals;
 
 public abstract partial class BaseRitualEffect<T> : EntityEffectBase<T>, IHereticRitualEntry
     where T : EntityEffectBase<T>

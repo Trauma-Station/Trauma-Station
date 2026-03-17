@@ -9,7 +9,7 @@ using Content.Shared.Polymorph;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals;
+namespace Content.Shitcode.Shared.Heretic.Rituals;
 
 [Serializable, NetSerializable]
 public sealed class HereticRitualMessage(NetEntity ritual) : BoundUserInterfaceMessage

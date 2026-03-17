@@ -1,7 +1,7 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals;
+namespace Content.Shitcode.Shared.Heretic.Rituals;
 
 public sealed class HereticRitualEffectSystem : EntitySystem
 {

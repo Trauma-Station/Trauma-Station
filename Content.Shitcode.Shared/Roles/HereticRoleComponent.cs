@@ -18,7 +18,7 @@
 using Content.Shared.Roles.Components;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Shitcode.Roles;
+namespace Content.Shitcode.Shared.Roles;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class HereticRoleComponent : BaseMindRoleComponent;

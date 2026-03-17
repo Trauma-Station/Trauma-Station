@@ -6,7 +6,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Shitcode.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public abstract class SharedSacramentsSystem : EntitySystem
 {

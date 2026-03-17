@@ -4,7 +4,7 @@ using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Shitcode.Heretic.Rituals;
+namespace Content.Shitcode.Shared.Heretic.Rituals;
 
 public abstract partial class SharedHereticRitualSystem
 {

@@ -2,7 +2,7 @@ using Content.Shared._Shitcode.Heretic.SpriteOverlay;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Shitcode.Heretic.Components;
+namespace Content.Shitcode.Shared.Heretic.Components;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class HereticAuraComponent : BaseSpriteOverlayComponent

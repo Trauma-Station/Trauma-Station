@@ -1,6 +1,6 @@
 using Robust.Shared.Audio;
 
-namespace Content.Shared._Shitcode.Heretic.Components;
+namespace Content.Shitcode.Shared.Heretic.Components;
 
 public interface ITouchSpell
 {

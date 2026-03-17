@@ -8,7 +8,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 
-namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
+namespace Content.Shitcode.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {

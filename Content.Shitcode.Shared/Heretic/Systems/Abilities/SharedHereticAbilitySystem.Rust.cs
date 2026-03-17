@@ -24,7 +24,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Random;
 
-namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
+namespace Content.Shitcode.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {

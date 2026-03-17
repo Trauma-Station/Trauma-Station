@@ -12,7 +12,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Heretic;
 using Content.Shared.Standing;
 
-namespace Content.Shared._Shitcode.Heretic.Systems.Abilities;
+namespace Content.Shitcode.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {

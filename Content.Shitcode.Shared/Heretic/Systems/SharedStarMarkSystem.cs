@@ -23,7 +23,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._Shitcode.Heretic.Systems;
+namespace Content.Shitcode.Shared.Heretic.Systems;
 
 public abstract class SharedStarMarkSystem : EntitySystem
 {

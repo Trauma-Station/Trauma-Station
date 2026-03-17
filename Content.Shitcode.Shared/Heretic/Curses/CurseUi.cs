@@ -1,7 +1,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Shitcode.Heretic.Curses;
+namespace Content.Shitcode.Shared.Heretic.Curses;
 
 [Serializable, NetSerializable, DataRecord]
 public partial struct CurseData(NetEntity ent, string name, float multiplier, TimeSpan nextCurseTime)

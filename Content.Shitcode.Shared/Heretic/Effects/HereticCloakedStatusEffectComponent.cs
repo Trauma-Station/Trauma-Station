@@ -1,7 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Shitcode.Heretic.Effects;
+namespace Content.Shitcode.Shared.Heretic.Effects;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class HereticCloakedStatusEffectComponent : Component
