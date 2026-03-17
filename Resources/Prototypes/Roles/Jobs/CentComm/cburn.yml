@@ -43,11 +43,17 @@
     shoes: ClothingShoesBootsMagEmergencyResponseTeam # Goobstation
     id: CBURNPDA # Todo - Replace it.
     pocket1: InfectionScannerCburn # Goob
-    pocket2: WeaponPulsePistol
+    pocket2: WeaponShotgunSawn
     belt: ClothingBeltSecurityFilled # No shotgun, no bandolier.
   storage:
     back:
-    - WeaponPulseCarbine # CBURN desperately needs a good fucking gun, not that dogshit. - Also, this gun is literally never used.
+    - WeaponEnergyRifle # Trauma
+    - EnergyMagRifleLethal # Trauma
+    - EnergyMagRifleLethal # Trauma
+    - EnergyMagRifleLethal # Trauma
+    - EnergyMagRifleOverchargeLethal # Trauma
+    - EnergyMagRifleOverchargeLethal # Trauma
+    - BoxLethalshot
     - AmbuzolPlusMedipen # Injectors are cooler.
     - AmbuzolMedipen # Injectors are cooler.
     - AmbuzolMedipen # Injectors are cooler.

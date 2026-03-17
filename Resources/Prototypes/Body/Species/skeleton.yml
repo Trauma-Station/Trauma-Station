@@ -60,9 +60,10 @@
       HandRight: OrganSkeletonPersonHandRight
       HandLeft: OrganSkeletonPersonHandLeft
       LegLeft: OrganSkeletonPersonLegLeft
-      LegRight: OrganSkeletonPersonLegRight
+      LegRight: OrganSkeletonPersonLegRight1
       FootLeft: OrganSkeletonPersonFootLeft
       FootRight: OrganSkeletonPersonFootRight
+      Tongue: OrganHumanTongue
   - type: HumanoidProfile
     species: Skeleton
 

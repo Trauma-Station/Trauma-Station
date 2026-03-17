@@ -21,8 +21,8 @@
       OrganBloodsuckerHeart: 0.5
 
 - type: entity
-  name: locker mimic loot spawner
-  id: SpawnLootLockerMimic
+  name: vendor mimic loot spawner
+  id: SpawnLootVendorMimic
   parent: MarkerBase
   components:
   - type: RandomChanceSpawner
@@ -51,8 +51,8 @@
       OrganBloodsuckerHeart: 0.5
 
 - type: entity
-  name: vendor mimic loot spawner
-  id: SpawnLootVendorMimic
+  name: locker mimic loot spawner
+  id: SpawnLootLockerMimic
   parent: MarkerBase
   components:
   - type: RandomChanceSpawner
