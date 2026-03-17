@@ -121,7 +121,7 @@
     damage:
       types:
         Piercing: 10
-        Structural: 
+        Structural:
   # </Trauma>
   - type: EmitSoundOnLand
     sound:
