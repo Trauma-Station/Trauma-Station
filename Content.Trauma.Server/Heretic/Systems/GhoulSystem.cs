@@ -63,8 +63,10 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private static readonly ProtoId<HTNCompoundPrototype> Compound = "HereticSummonCompound";
     private static readonly EntProtoId<MindRoleComponent> GhoulRole = "MindRoleGhoul";
 
-    private static readonly EntProtoId ComponentsToRemoveOnGhoulify = "ComponentsToRemoveOnGhoulify";
-    private static readonly EntProtoId ComponentsToRemoveOnUnGhoulify = "ComponentsToRemoveOnUnGhoulify";
+    private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnGhoulify =
+        "ComponentsToRemoveOnGhoulify";
+    private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnUnGhoulify =
+        "ComponentsToRemoveOnUnGhoulify";
 
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly JitteringSystem _jitter = default!;
