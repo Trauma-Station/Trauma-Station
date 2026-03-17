@@ -70,7 +70,7 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
         {
             quality.LevelDeltas[id] = mastery;
         }
-        quality.ProtoId = proto.QualityPrototype?.ID;
+        quality.ProtoId = proto.QualityPrototype;
         Dirty(item, quality);
 
         _quality.RollQuality((item, quality), ent);

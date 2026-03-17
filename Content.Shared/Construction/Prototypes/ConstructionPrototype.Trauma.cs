@@ -23,7 +23,7 @@ public sealed partial class ConstructionPrototype
     /// Optional quality override.
     /// </summary>
     [DataField]
-    public QualityPrototype? QualityPrototype;
+    public ProtoId<QualityPrototype>? QualityPrototype;
 
     /// <summary>
     /// Whether to give the resulting item a quality at all.
