@@ -5,6 +5,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Mind.Components;
+using Content.Shared.Humanoid;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -565,7 +566,7 @@ namespace Content.Server.GameTicking
                 else if (mind.CurrentEntity != null && TryName(mind.CurrentEntity.Value, out var icName))
                     playerIcName = icName;
 
-                if (TryGetEntity(mind.OriginalOwnedEntity, out var entity) && pvsOverride)
+                if (TryGetEntity(mind.OriginalOwnedEntity, out var entity) && pvsOverride && HasComp<HumanoidProfileComponent>(mind.CurrentEntity)) // Trauma - Check for HumanoidProfile to reduce lag
                 {
                     _pvsOverride.AddGlobalOverride(entity.Value);
                 }

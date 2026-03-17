@@ -17,7 +17,7 @@ namespace Content.Shared.Clothing;
 /// Modifies speed when worn and activated.
 /// Supports <see cref="ItemToggleComponent"/>.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(ClothingSpeedModifierSystem))]
+[RegisterComponent, NetworkedComponent] // Trauma - removed singular system access
 public sealed partial class ClothingSpeedModifierComponent : Component
 {
     [DataField]

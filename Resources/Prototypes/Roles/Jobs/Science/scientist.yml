@@ -6,21 +6,15 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 2.5h
+      time: 1h # Trauma was 2.5
   startingGear: ScientistGear
   icon: "JobIconScientist"
   supervisors: job-supervisors-rd
   guides: [ Science ] # goobstation
-  goobcoins: 20 #Goob content
   access:
   - Research
   - Maintenance
   # <Trauma>
-  special:
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      TechnologyKnowledge: 26
-      ScienceKnowledge: 26
   extendedAccess:
   - Robotics
   - Genetics

@@ -116,6 +116,7 @@ namespace Content.IntegrationTests.Tests
               "Marathon",
               "Meta",
               "MeteorArena",    // Deathmatch
+              "Nume",           // Trauma
               "Oasis",
               "OasisHighPop",
               "Omega",

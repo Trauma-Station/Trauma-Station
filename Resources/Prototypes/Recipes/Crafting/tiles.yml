@@ -9,7 +9,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   useQuality: false # annoying for construction, masterwork tiles as weapons is sad but not worth the hassle
   # </Trauma>
 
@@ -22,7 +22,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   useQuality: false
   # </Trauma>
 
@@ -35,7 +35,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   useQuality: false
   # </Trauma>
 
@@ -48,7 +48,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   useQuality: false
   # </Trauma>
 
@@ -61,7 +61,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   useQuality: false
   # </Trauma>
 
@@ -74,7 +74,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   useQuality: false
   # </Trauma>
 
@@ -87,7 +87,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   useQuality: false
   # </Trauma>
 
@@ -100,6 +100,6 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   useQuality: false
   # </Trauma>

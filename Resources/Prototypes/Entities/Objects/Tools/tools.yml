@@ -73,14 +73,48 @@
   id: Screwdriver
   description: Industrial grade torque in a small screwdriving package.
   components:
-  # Goobstation edit start
+  # <Trauma>
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/screwdriver_pickup.ogg
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/Items/screwdriver_drop.ogg
-  # Goobstation edit end
+  - type: Retractor
+    speed: 0.45
+  - type: Tending
+    speed: 0.65
+  - type: Screwdriver
+  - type: SurgeryTool
+    startSound:
+      collection: Screwdriver
+    endSound:
+      path: /Audio/_Shitmed/Medical/Surgery/retractor2.ogg
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        hard: false
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: ThrowingAngle
+    angle: -90
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+    removalTime: 1.5
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 8
+        Structural: 1 # Go on, throw 500 screwdrivers at a wall.
+  # </Trauma>
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/screwdriver_drop.ogg
@@ -120,41 +154,6 @@
       Steel: 100
   - type: StaticPrice
     price: 30
-  - type: Retractor # Shitmed
-    speed: 0.45
-  - type: Tending # Shitmed
-    speed: 0.65
-  - type: SurgeryTool # Shitmed
-    startSound:
-      collection: Screwdriver
-    endSound:
-      path: /Audio/_Shitmed/Medical/Surgery/retractor2.ogg
-  # <Trauma>
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.2
-        hard: false
-        density: 20
-        mask:
-        - ItemMask
-        restitution: 0.3
-        friction: 0.2
-  - type: ThrowingAngle
-    angle: -90
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/star_hit.ogg
-    offset: -0.15,0.0
-    removalTime: 1.5
-  - type: LandAtCursor
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Piercing: 8
-        Structural: 1 # Go on, throw 500 screwdrivers at a wall.
-  # </Trauma>
 
 - type: entity
   name: wrench
@@ -338,6 +337,16 @@
   id: PowerDrill
   description: A simple powered hand drill.
   components:
+  # <Trauma>
+  - type: Tending
+    speed: 0.75
+  - type: Drill
+    speed: 1
+  - type: Screwdriver
+    speed: 0.3 # it's actually worse because you need fine control
+  - type: SurgeryTool
+    startSound: /Audio/Items/drill_use.ogg
+  # </Trauma>
   - type: Tag
     tags:
     - Powerdrill
@@ -387,12 +396,6 @@
         Piercing: 10
     soundHit:
       path: "/Audio/Items/drill_hit.ogg"
-  - type: Tending # Shitmed
-    speed: 0.75
-  - type: Drill # Shitmed
-    speed: 1
-  - type: SurgeryTool # Shitmed
-    startSound: /Audio/Items/drill_use.ogg
 
 - type: entity
   id: RCD

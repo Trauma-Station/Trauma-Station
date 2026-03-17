@@ -1,0 +1,24 @@
+# Installs a nukie skill chip to the target mob's head
+# The head should already have a BrainChip slot
+- type: entityEffect
+  id: InstallSkillChipNukie
+  effects:
+  - !type:RelayOrgan
+    category: Head
+    effects:
+    - !type:InsertNewOrgan
+      organ: SkillChipNukie
+
+# Give all crew their job's skill chip
+- type: playerEffects
+  id: InstallSkillChips
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - Body
+    blacklist:
+      components:
+      - BorgChassis # uhhhhhhh
+  effects:
+  - !type:InstallJobSkillChip

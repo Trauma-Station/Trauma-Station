@@ -1,0 +1,80 @@
+- type: entity
+  name: toolbox mimic loot spawner
+  id: SpawnLootToolboxMimic
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      # materials
+      SheetSteel1: 1
+      # tools
+      Crowbar: 0.5
+      Wrench: 0.5
+      Wirecutter: 0.5
+      Screwdriver: 0.5
+      Multitool: 0.5
+      Welder: 0.5
+      # Gloves
+      ClothingHandsGlovesColorYellow: 1
+      # Bonus
+      AnomalyCoreFleshInert: 0.5
+      OrganBloodsuckerHeart: 0.5
+
+- type: entity
+  name: locker mimic loot spawner
+  id: SpawnLootLockerMimic
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      # materials
+      SheetSteel10: 1
+      # Gloves
+      DrinkCanPack: 0.5
+      DrinkStarkistCan: 0.5
+      DrinkGrapeCan: 0.5
+      DrinkSpaceUpCan: 0.5
+      DrinkSolDryCan: 0.5
+      DrinkSpaceMountainWindCan: 0.5
+      DrinkNukieCan: 0.5
+      DrinkChangelingStingCan: 0.5
+      DrinkDrGibbCan: 0.5
+      DrinkPwrGameCan: 0.5
+      DrinkEnergyDrinkCan: 0.5
+      DrinkLemonLimeCranberryCan: 0.5
+      DrinkShamblersJuiceCan: 0.5
+      DrinkSodaWaterCan: 0.5
+      DrinkLemonLimeCan: 0.5
+      DrinkFourteenLokoCan: 0.5
+      # Bonus
+      AnomalyCoreFleshInert: 0.5
+      OrganBloodsuckerHeart: 0.5
+
+- type: entity
+  name: vendor mimic loot spawner
+  id: SpawnLootVendorMimic
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      # Tools
+      Crowbar: 0.5
+      Wrench: 0.5
+      Wirecutter: 0.5
+      Screwdriver: 0.5
+      Multitool: 0.5
+      Welder: 0.5
+      # Gloves
+      ClothingHandsGlovesColorYellow: 0.5
+      # Bonus
+      AnomalyCoreFleshInert: 0.5
+      OrganBloodsuckerHeart: 0.5
+      # Weapons
+      Machete: 0.1
+      SawImprov: 0.1
+      CombatKnife: 0.1
+      ThrowingKnife: 0.1
+      RevSword: 0.1
+      RevKnife: 0.1
+      RevMace: 0.1
+      RevPitchfork: 0.1

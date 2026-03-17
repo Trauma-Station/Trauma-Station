@@ -17,17 +17,4 @@ public sealed partial class InjectTimeKnowledgeComponent : Component
     /// </summary>
     [DataField(required: true)]
     public SkillCurve Curve = default!;
-
-    /// <summary>
-    /// Minimum skill to have hypospray injections be instant.
-    /// </summary>
-    [DataField]
-    public int MinSkill = 20;
-
-    /// <summary>
-    /// How long instant injections must take if below <see cref="MinSkill"/>.
-    /// Not affected by the curve.
-    /// </summary>
-    [DataField]
-    public TimeSpan MinTime = TimeSpan.FromSeconds(1.5);
 }

@@ -24,6 +24,10 @@ public sealed class EmptyScrollSystem : EntitySystem
     /// Every prayer indexed by the FullPrayer string.
     /// </summary>
     public Dictionary<string, ScrollPrayerPrototype> AllPrayers = new();
+    /// <summary>
+    /// List of every valid prayer text.
+    /// </summary>
+    public List<string> AllPrayerTexts = new();
 
     public override void Initialize()
     {
@@ -64,11 +68,14 @@ public sealed class EmptyScrollSystem : EntitySystem
     private void LoadPrototypes()
     {
         AllPrayers.Clear();
+        AllPrayerTexts.Clear();
         foreach (var prayer in _proto.EnumeratePrototypes<ScrollPrayerPrototype>())
         {
             foreach (var subject in prayer.Subjects)
             {
-                AllPrayers.Add($"O LORD\n{prayer.Verb}\n{subject}", prayer);
+                var text = $"O LORD\n{prayer.Verb}\n{subject}";
+                AllPrayers.Add(text, prayer);
+                AllPrayerTexts.Add(text);
             }
         }
     }

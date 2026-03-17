@@ -51,6 +51,7 @@ genetics-console-sequence-info = Sequence Info
 genetics-console-scan = Scan!
 genetics-console-genome-sequencer = Genome Sequencer™
 genetics-console-sequencer-no-sequence-selected = Select a sequence to work with.
+genetics-console-sequence-text = [{$rarity}] {$number}
 genetics-console-mutation-name = Name:
 genetics-console-mutation-desc = Description:
 genetics-console-mutation-instability = Instability:

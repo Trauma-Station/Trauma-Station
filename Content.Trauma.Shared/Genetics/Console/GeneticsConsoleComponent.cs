@@ -71,7 +71,8 @@ public sealed partial class GeneticsConsoleComponent : Component
     {
         DamageDict = new()
         {
-            { "Cellular", 50 }
+            { "Cellular", 20 },
+            { "Radiation", 15 }
         }
     };
 

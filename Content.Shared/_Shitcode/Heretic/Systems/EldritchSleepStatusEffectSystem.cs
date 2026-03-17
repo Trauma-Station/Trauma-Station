@@ -48,7 +48,7 @@ public sealed class EldritchSleepStatusEffectSystem : EntitySystem
         RaiseLocalEvent(args.Target, ev);
 
         var difference =
-            ent.Comp.ComponentsToAdd.ExceptBy(EntityManager.GetComponents(args.Target), x => x.Value.Component)
+            ent.Comp.ComponentsToAdd.ExceptBy(AllComps(args.Target), x => x.Value.Component)
                 .ToDictionary();
 
         ent.Comp.ComponentDifference = new(difference);

@@ -182,7 +182,14 @@ public sealed partial class BodyPartSystem
             return false;
 
         if (_body.GetBody(part.Owner) is {} body)
-            return _body.InsertOrgan(body, organ);
+        {
+            if (!_body.InsertOrgan(body, organ))
+                return false;
+
+            // incase the automatic one picked the wrong part for multi-parent organs, set it correctly here
+            _cache.SetParent(organ.Owner, part.Owner);
+            return true;
+        }
 
         if (GetSeveredOrgansContainer(part) is {} container)
             return _container.Insert(organ.Owner, container);
@@ -281,6 +288,41 @@ public sealed partial class BodyPartSystem
         }
 
         return restored;
+    }
+
+    /// <summary>
+    /// Spawns an organ then inserts it into this bodypart.
+    /// Logs errors for programmer mistakes of using a non-organ or if the part is missing the organ's slot.
+    /// </summary>
+    public bool SpawnAndInsert(Entity<BodyPartComponent?> part, [ForbidLiteral] EntProtoId<OrganComponent> id)
+    {
+        if (!Resolve(part, ref part.Comp))
+            return false;
+
+        var organ = PredictedSpawnAtPosition(id, Transform(part).Coordinates);
+        if (_body.GetCategory(organ) is not {} category)
+        {
+            Log.Error($"Tried to insert invalid organ {ToPrettyString(organ)} into {ToPrettyString(part)}!");
+            PredictedDel(organ);
+            return false;
+        }
+
+        if (!part.Comp.Slots.Contains(category))
+        {
+            Log.Error($"Tried to insert organ {ToPrettyString(organ)} into {ToPrettyString(part)} which has no {category} slot!");
+            PredictedDel(organ);
+            return false;
+        }
+
+        if (!InsertOrgan(part, organ))
+        {
+            // not an error as the slot may just be occupied etc
+            Log.Warning($"Failed to insert organ {ToPrettyString(organ)} into {ToPrettyString(part)}'s {category} slot.");
+            PredictedDel(organ);
+            return false;
+        }
+
+        return true;
     }
 
     /// <summary>

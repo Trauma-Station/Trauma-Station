@@ -1,4 +1,3 @@
-using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.AlertLevel;
@@ -22,7 +21,6 @@ using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 

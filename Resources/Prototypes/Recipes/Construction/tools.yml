@@ -7,7 +7,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    SurvivalKnowledge: 0 # come on...
+    FabricationKnowledge: 0
+  useQuality: false
+  practical:
+    CarvingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -19,7 +22,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -31,7 +34,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -43,7 +46,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -55,7 +58,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -67,7 +70,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -79,9 +82,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0 # banging 2 rocks together
+    FabricationKnowledge: 0 # banging 2 rocks together
   practical:
-    HandmadeKnowledge: 2 # but carving wood is hard
+    CarvingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -91,7 +94,9 @@
   targetNode: juicer
   # <Trauma>
   theory:
-    HandmadeKnowledge: 2
+    FabricationKnowledge: 2
+  practical:
+    CarvingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -103,7 +108,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 2
+    FabricationKnowledge: 2
     ElectronicsKnowledge: 1
     # TODO: some kind of knowledge that you know about separating liquids by centrifugal forces
   # </Trauma>

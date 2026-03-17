@@ -7,7 +7,11 @@
   targetNode: stack
   objectType: Item
   theory:
-    HandmadeKnowledge: 0
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
+    FabricationKnowledge: 1
+  useQuality: false
 
 - type: construction
   id: ScrewDouble
@@ -16,4 +20,8 @@
   targetNode: stack
   objectType: Item
   theory:
-    HandmadeKnowledge: 0
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
+    FabricationKnowledge: 1
+  useQuality: false

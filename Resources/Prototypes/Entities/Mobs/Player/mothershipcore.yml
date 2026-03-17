@@ -240,6 +240,15 @@
   - type: ShowElectrocutionHUD
   - type: PowerMonitoringCableNetworks
   - type: RadarConsole
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  # </Trauma>
 
 - type: entity
   parent: BaseAGhostAction

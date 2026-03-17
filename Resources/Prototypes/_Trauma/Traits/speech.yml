@@ -1,0 +1,13 @@
+- type: trait
+  id: Swedish
+  name: trait-swedish-name
+  description: trait-swedish-desc
+  category: SpeechTraits
+  cost: 1
+  blacklist:
+    components:
+    - BorgChassis
+  effects:
+  - !type:AddMutation
+    mutation: MutationSwedish
+    automatic: true

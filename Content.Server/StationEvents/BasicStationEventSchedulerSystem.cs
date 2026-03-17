@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.StationEvents;
+// </Trauma>
 using System.Linq;
 using Content.Server.Administration;
 using Content.Server.GameTicking;
@@ -60,6 +63,10 @@ namespace Content.Server.StationEvents
 
                 _event.RunRandomEvent(eventScheduler.ScheduledGameRules);
                 ResetTimer(eventScheduler);
+                // <Trauma>
+                var ev = new RuleScheduledEvent();
+                RaiseLocalEvent(uid, ref ev);
+                // </Trauma>
             }
         }
 

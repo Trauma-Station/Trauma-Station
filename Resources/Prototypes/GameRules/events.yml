@@ -17,15 +17,15 @@
     - id: JobDistributionError
     - id: KudzuGrowth
     - id: MassHallucinations
-    - id: MimicVendorRule
+    # - id: MimicVendorRule - Trauma, moved to basic antag
     - id: MouseMigration
     - id: PowerGridCheck
     - id: RandomSentience
-    - id: SlimesSpawn
+    # - id: SlimesSpawn - Trauma, moved to basic antag
     - id: SolarFlare
-    - id: SnakeSpawn
-    - id: SpiderClownSpawn
-    - id: SpiderSpawn
+    # - id: SnakeSpawn - Trauma, moved to basic antag
+    # - id: SpiderClownSpawn - Trauma, moved to basic antag
+    # - id: SpiderSpawn - Trauma, moved to basic antag
     - id: VentClog
 
 - type: entityTable
@@ -37,6 +37,13 @@
     #- id: RevenantSpawn  # GoobStation - removed till rework
     - !type:NestedSelector
       tableId: DerelictBorgEventTable
+    # <Trauma>
+    - id: MimicVendorRule
+    - id: SlimesSpawn
+    - id: SnakeSpawn
+    - id: SpiderClownSpawn
+    - id: SpiderSpawn
+    # </Trauma>
 
 - type: entityTable
   id: ModerateAntagEventsTable
@@ -195,8 +202,8 @@
   id: DragonSpawn
   components:
   - type: StationEvent
-    weight: 2 # Goobstation - was 3
-    earliestStart: 30 # Goobstation was 45
+    weight: 1 # Trauma - Was 3
+    earliestStart: 60 # Trauma - Was 30
     #recorruenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 50
@@ -227,9 +234,9 @@
   id: NinjaSpawn
   components:
   - type: StationEvent
-    weight: 3 # Goobstation - was 6
+    weight: 1 # Trauma - was 6
     duration: null
-    earliestStart: 30 # Goobstation - was 45
+    earliestStart: 45
     #reoccurrenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 30
@@ -288,7 +295,7 @@
   id: ParadoxCloneSpawn
   components:
   - type: StationEvent
-    weight: 5
+    weight: 4 # Trauma - Was 5
     duration: null
     earliestStart: 20
     reoccurrenceDelay: 20
@@ -581,8 +588,8 @@
   id: LoneOpsSpawn
   components:
   - type: StationEvent
-    earliestStart: 35
-    weight: 2.5 # Goobstation - was 5.5
+    earliestStart: 60 # Trauma - Was 35
+    weight: 1 # Trauma - was 5.5
     minimumPlayers: 50 # Goobstation - was 20
     duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
   - type: RuleGrids
@@ -624,7 +631,7 @@
   components:
   - type: StationEvent
     earliestStart: 30
-    weight: 8
+    weight: 50 # Trauma, was 8
     minimumPlayers: 15
     maxOccurrences: 1 # can only happen once per round
     startAnnouncement: station-event-communication-interception

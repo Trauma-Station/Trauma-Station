@@ -42,3 +42,21 @@
               collection: MetalBreak
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
+  - type: Parry
+    maxParries: 0
+    maxReflects: 5
+    reflectMinSkill: 30
+    soundOnReflect:
+      path: /Audio/Weapons/Guns/Hits/ric4.ogg
+      params:
+        variation: 0.2
+        volume: -11
+    reflectSpread: 300
+    reflects:
+    - NonEnergy
+    - Energy
+    soundOnParry:
+      path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
+      params:
+        variation: 0.2
+        volume: -11
