@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shitcode.Shared.Heretic.Components;
+namespace Content.Shitcode.Common.Heretic;
 
 /// <summary>
 /// Same as InteractionRelayComponent but relays target interactions, not user

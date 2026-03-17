@@ -16,13 +16,15 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// <Trauma>
+using Content.EinsteinEngines.Common.Humanoid; // EE Plasmeme Change
+// </Trauma>
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Dataset;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Enums;
-using Content.EinsteinEngines.Shared.Humanoid; // EE Plasmeme Change
 
 namespace Content.Shared.Humanoid
 {
@@ -33,9 +35,11 @@ namespace Content.Shared.Humanoid
     {
         private static readonly ProtoId<SpeciesPrototype> FallbackSpecies = "Human";
 
+        // <Trauma>
+        [Dependency] private readonly CommonRomanNamingSystem _romanNaming = default!; // EE Plasmeme Change
+        // </Trauma>
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly RomanNamingSystem _romanNamingSystem = default!; // EE Plasmeme Change
 
         public string GetName(string species, Gender? gender = null)
         {
@@ -63,7 +67,7 @@ namespace Content.Shared.Humanoid
                         ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto)));
                 case SpeciesNaming.FirstRoman: // EE Plasmeme Change
                     return Loc.GetString("namepreset-firstlast",
-                        ("first", GetFirstName(speciesProto, gender)), ("last", _romanNamingSystem.GenerateRomanNumeral()));
+                        ("first", GetFirstName(speciesProto, gender)), ("last", _romanNaming.GenerateRomanNumeral()));
                 case SpeciesNaming.FirstLast:
                 default:
                     return Loc.GetString("namepreset-firstlast",

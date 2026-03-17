@@ -1,9 +1,10 @@
 using System.Text;
 using Robust.Shared.Random;
+using Content.EinsteinEngines.Common.Humanoid;
 
 namespace Content.EinsteinEngines.Shared.Humanoid;
 
-public sealed partial class RomanNamingSystem : EntitySystem
+public sealed partial class RomanNamingSystem : CommonRomanNamingSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
 
@@ -24,12 +25,7 @@ public sealed partial class RomanNamingSystem : EntitySystem
         { "I", 1 }
     };
 
-    // <summary>
-    //   Generates a random Roman numeral with a length not exceeding 8 characters.
-    //   All possible Roman numerals from 1 to 3,999 can be generated,
-    //   but numbers from 1 to 100 have a higher chance of being rolled.
-    // </summary>
-    public string GenerateRomanNumeral()
+    public override string GenerateRomanNumeral()
     {
         (int, int) range;
         while (true)
@@ -53,9 +49,9 @@ public sealed partial class RomanNamingSystem : EntitySystem
         }
     }
 
-    // <summary>
-    //   Converts an integer to a Roman numeral.
-    // </summary>
+    /// <summary>
+    ///   Converts an integer to a Roman numeral.
+    /// </summary>
     private static string IntToRomanNumeral(int number)
     {
         var sb = new StringBuilder();
