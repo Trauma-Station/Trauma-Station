@@ -92,7 +92,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 6
+        damage: 10
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -152,7 +152,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 8
+        damage: 12
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -195,7 +195,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 10
+        damage: 15
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -240,7 +240,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 10
+        damage: 15
       behaviors:
       - !type:PlaySoundBehavior
         sound:

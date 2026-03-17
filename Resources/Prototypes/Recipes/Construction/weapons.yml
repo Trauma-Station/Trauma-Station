@@ -95,7 +95,7 @@
   theory:
     FabricationKnowledge: 0 # caveman gaming
   practical:
-    WeaponsKnowledge: 2
+    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
   # </Trauma>
 
 - type: construction
@@ -109,7 +109,7 @@
   theory:
     FabricationKnowledge: 0
   practical:
-    WeaponsKnowledge: 2
+    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
   # </Trauma>
 
 - type: construction
@@ -123,7 +123,7 @@
   theory:
     FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 2
+    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
   # </Trauma>
 
 - type: construction
@@ -137,7 +137,7 @@
   theory:
     FabricationKnowledge : 1
   practical:
-    WeaponsKnowledge: 2
+    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
   # </Trauma>
 
 - type: construction
