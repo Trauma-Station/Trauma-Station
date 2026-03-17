@@ -2186,7 +2186,7 @@
         Blunt: 15 # PVZ parity
   # </Trauma>
   - type: Item
-    size: Small
+    size: Normal # Trauma, was Small
     heldPrefix: produce
   - type: FlavorProfile
     flavors:
@@ -2295,7 +2295,7 @@
         Holy: 10 # really good against devils and... *checks notes* ...devils
   # </Trauma>
   - type: Item
-    size: Small
+    size: Normal # Trauma, was Small
     heldPrefix: produce
   - type: FlavorProfile
     flavors:
