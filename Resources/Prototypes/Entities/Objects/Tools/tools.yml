@@ -304,7 +304,7 @@
     - type: DamageOtherOnHit
       damage:
         types:
-          Blunt: 10 # ow
+          Blunt: 1 # ow
      # </Trauma>
     - type: EmitSoundOnLand
       sound:
