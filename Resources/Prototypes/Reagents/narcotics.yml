@@ -183,10 +183,6 @@
       - !type:ModifyKnockdown
         time: 3
         type: Remove
-      - !type:GenericStatusEffect
-        key: StaminaModifier
-        component: StaminaModifier
-        time: 3
       - !type:ModifyStatusEffect
         effectProto: StatusEffectForcedSleeping
         time: 3

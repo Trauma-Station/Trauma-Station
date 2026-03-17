@@ -331,6 +331,21 @@
   id: FoodBanana
   description: Rich in potassium.
   components:
+  # <Trauma>
+  - type: Healing # Bananas heal clown car
+    damageContainers:
+    - ClowncarDamageContainer
+    damage:
+      groups:
+        Brute: -150
+      types:
+        Heat: -10
+        Shock: -10
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - banana
@@ -369,19 +384,6 @@
     entries:
       Burger: Banana
       Taco: Banana
-  - type: Healing # Goob - Bananas heal clown car
-    damageContainers:
-      - ClowncarDamageContainer
-    damage:
-      groups:
-        Brute: -150
-      types:
-        Heat: -10
-        Shock: -10
-    healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
-    healingEndSound:
-      path: "/Audio/Items/Medical/brutepack_end.ogg"
 
 - type: entity
   name: mimana
@@ -435,6 +437,14 @@
   id: TrashBananaPeel
   name: banana peel
   components:
+  # <Trauma>
+  - type: Perishable
+    rotAfter: 900 # won't someone please think of the clowns
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
     state: peel
@@ -495,14 +505,6 @@
     slots:
     - HEAD
     quickEquip: false
-#<Trauma>
-  - type: Perishable
-    rotAfter: 900 # won't someone please think of the clowns
-    molsPerSecondPerUnitMass: 0
-  - type: RotInto
-    entity: FoodRot
-    stage: 1
-#</Trauma>
 
 - type: entity
   parent: TrashBananaPeel
@@ -554,6 +556,14 @@
   id: TrashBananiumPeel
   name: bananium peel
   components:
+  # <Trauma>
+  - type: Perishable
+    rotAfter: 999999999 # I am a hero
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: peel
@@ -564,16 +574,6 @@
   - type: Clothing
     sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     equippedPrefix: peel
-# <Trauma>
-  - type: Perishable
-    rotAfter: 999999999 # I am a hero
-    molsPerSecondPerUnitMass: 0
-  - type: RotInto
-    entity: FoodRot
-    stage: 1
-# </Trauma>
-
-
 
 - type: entity
   name: carrot

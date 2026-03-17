@@ -3,7 +3,7 @@
   name: department-Service
   description: department-Service-description
   color: "#9FED58"
-  weight: 5
+  weight: 2
   roles:
   - Bartender
   - Botanist

@@ -185,6 +185,8 @@ public abstract partial class SharedBorgSystem : EntitySystem
         // <Trauma>
         var ev = new BorgBrainInsertedEvent(chassis, args.Entity);
         RaiseLocalEvent(args.Entity, ref ev);
+        var borgEv = new BrainInsertedIntoBorgEvent(args.Entity);
+        RaiseLocalEvent(chassis, ref borgEv);
         // </Trauma>
     }
 
@@ -211,6 +213,8 @@ public abstract partial class SharedBorgSystem : EntitySystem
 
         var ev = new BorgBrainRemovedEvent(chassis, args.Entity);
         RaiseLocalEvent(args.Entity, ref ev);
+        var borgEv = new BrainRemovedFromBorgEvent(args.Entity);
+        RaiseLocalEvent(chassis, ref borgEv);
         // </Trauma>
     }
 

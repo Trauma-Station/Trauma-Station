@@ -88,18 +88,6 @@ namespace Content.Server.Database
                     dict => dict.GetHashCode(),
                     dict => new Dictionary<string, int>(dict)
                 ));
-            profile.Property(p => p.KnowledgeRemoved)
-                .HasConversion(
-                    v => JsonSerializer.Serialize(v),
-                    s => string.IsNullOrEmpty(s)
-                        ? new()
-                        : JsonSerializer.Deserialize<List<string>>(s) ?? new()
-                )
-                .Metadata.SetValueComparer(new ValueComparer<List<string>>(
-                    (a, b) => a != null && b != null && a.Count == b.Count && !a.Except(b).Any(),
-                    dict => dict.GetHashCode(),
-                    dict => new List<string>(dict)
-                ));
             profile.HasIndex(p => new { p.Slot, PrefsId = p.PreferenceId })
                 .IsUnique();
             // </Trauma>
@@ -469,7 +457,6 @@ namespace Content.Server.Database
         // <Trauma>
         public string BarkVoice { get; set; } = null!;
         public Dictionary<string, int> KnowledgeMastery { get; set; } = new();
-        public List<string> KnowledgeRemoved { get; set; } = new();
         // </Trauma>
         [Column(TypeName = "jsonb")] public JsonDocument? OrganMarkings { get; set; } = null!;
         [Column(TypeName = "jsonb")] public JsonDocument? Markings { get; set; } = null!;

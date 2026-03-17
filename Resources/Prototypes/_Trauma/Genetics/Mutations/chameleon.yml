@@ -7,6 +7,7 @@
   - type: Mutation
     instability: 35
     difficulty: 16
+    rarity: Rare
   - type: ComponentMutation
     added:
     - type: Stealth

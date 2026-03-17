@@ -34,6 +34,8 @@ public sealed class LatheTest
             // <Trauma> - remove linq jesus christ
             var latheName = compFactory.GetComponentName<LatheComponent>();
             var materialName = compFactory.GetComponentName<PhysicalCompositionComponent>();
+            var storageName = compFactory.GetComponentName<MaterialStorageComponent>();
+            var emagName = compFactory.GetComponentName<EmagLatheRecipesComponent>();
             var latheProtos = new List<EntityPrototype>();
             var materialEntityProtos = new List<EntityPrototype>();
             foreach (var p in protoMan.EnumeratePrototypes<EntityPrototype>())
@@ -61,10 +63,10 @@ public sealed class LatheTest
                 // Check each lathe individually
                 foreach (var latheProto in latheProtos)
                 {
-                    if (!latheProto.TryGetComponent<LatheComponent>(out var latheComp, compFactory))
+                    if (!latheProto.TryGetComponent<LatheComponent>(latheName, out var latheComp)) // Trauma - reuse name from above
                         continue;
 
-                    if (!latheProto.TryGetComponent<MaterialStorageComponent>(out var storageComp, compFactory))
+                    if (!latheProto.TryGetComponent<MaterialStorageComponent>(storageName, out var storageComp)) // Trauma - reuse name from above
                         continue;
 
                     // Test which material-containing entities are accepted by this lathe
@@ -86,7 +88,7 @@ public sealed class LatheTest
                     var recipes = new HashSet<ProtoId<LatheRecipePrototype>>();
                     latheSystem.AddRecipesFromPacks(recipes, latheComp.StaticPacks);
                     latheSystem.AddRecipesFromPacks(recipes, latheComp.DynamicPacks);
-                    if (latheProto.TryGetComponent<EmagLatheRecipesComponent>(out var emagRecipesComp, compFactory))
+                    if (latheProto.TryGetComponent<EmagLatheRecipesComponent>(emagName, out var emagRecipesComp)) // Trauma - reuse name from above
                     {
                         latheSystem.AddRecipesFromPacks(recipes, emagRecipesComp.EmagStaticPacks);
                         latheSystem.AddRecipesFromPacks(recipes, emagRecipesComp.EmagDynamicPacks);

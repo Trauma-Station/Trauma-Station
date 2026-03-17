@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 2.5h
+      time: 1h # Trauma, was 2.5
   startingGear: SecurityOfficerGear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-hos
@@ -14,7 +14,6 @@
   guides: # goobstation
   - Security
   - CorporateJudo
-  goobcoins: 30 #Goob content
   access:
   - Security
   - Brig
@@ -27,12 +26,6 @@
   - !type:AddComponentSpecial # goobstation
     components:
       - type: SecurityStaff
-  # <Trauma>
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 10
-  # </Trauma>
 
 - type: startingGear
   id: SecurityOfficerGear

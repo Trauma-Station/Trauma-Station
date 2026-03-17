@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Common.Body;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared.Body;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Prototypes;
 using Content.Trauma.Common.Knowledge;
@@ -16,28 +16,30 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    //[Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    //[Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<LanguageKnowledgeComponent> _langQuery;
 
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
     //private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
-    private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
+    //private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
 
     private void InitializeLanguage()
     {
         _langQuery = GetEntityQuery<LanguageKnowledgeComponent>();
 
-        SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit);
+        SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
+            after: [ typeof(InitialBodySystem) ]); // great engine
         SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);
         SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeRemovedEvent>(OnLanguageRemoved);
 
         SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdd);
         SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemove);
         SubscribeLocalEvent<LanguageSpeakerComponent, UpdateLanguageEvent>(OnLanguageUpdate);
-        SubscribeLocalEvent<LanguageSpeakerComponent, BodyInitEvent>(OnLanguageBodyInit);
+        SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnSpeakerMapInit,
+            after: [ typeof(InitialBodySystem) ]);
 
         // Experience methods
         SubscribeLocalEvent<LanguageSpeakerComponent, EntitySpokeEvent>(OnLanguageSpoke);
@@ -177,10 +179,14 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageBodyInit(Entity<LanguageSpeakerComponent> ent, ref BodyInitEvent args)
+    public void OnSpeakerMapInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
     {
         if (GetContainer(ent.Owner) is not { } brain)
+        {
+            // use mob yml languages
+            UpdateEntityLanguages(ent);
             return;
+        }
 
         var allLanguages = new List<(ProtoId<LanguagePrototype>, bool)>();
         foreach (var id in ent.Comp.Speaks)
@@ -249,6 +255,8 @@ public abstract partial class SharedKnowledgeSystem
         }*/
 
         // curse of 220
+        /* TODO: re-enable this once language learning isnt fucked and just makes you understand everything
+        // this also doesnt make you able to speak it
         _hearers.Clear();
         _lookup.GetEntitiesInRange<LanguageSpeakerComponent>(_transform.GetMoverCoordinates(ent), 7f, _hearers, LookupFlags.All);
         foreach (var hearer in _hearers)
@@ -259,7 +267,7 @@ public abstract partial class SharedKnowledgeSystem
             if (GetContainer(hearer) is { } hearerBrain)
                 AddExperience(hearerBrain, id, 1, 10);
 
-            /* too op, needs a traitor item or something + a cooldown
+            // too op, needs a traitor item or something + a cooldown
             if (!isCurse || !_language.CanUnderstand(hearer.Owner, args.Language))
                 continue;
 
@@ -269,8 +277,8 @@ public abstract partial class SharedKnowledgeSystem
             //_status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
 
             _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
-            */
         }
+        */
     }
 
     /*private bool ContainsCursedWord(string message)

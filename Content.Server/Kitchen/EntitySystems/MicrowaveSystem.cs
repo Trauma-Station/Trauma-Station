@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Kitchen;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Construction;
@@ -74,11 +74,6 @@ namespace Content.Server.Kitchen.EntitySystems
 
         private static readonly ProtoId<TagPrototype> MetalTag = "Metal";
         private static readonly ProtoId<TagPrototype> PlasticTag = "Plastic";
-
-        // <Trauma>
-        private static readonly EntProtoId MartialArtCQCChef = "MartialArtCQCChef";
-        private static readonly EntProtoId CookingKnowledge = "CookingKnowledge";
-        // <Trauma>
 
         public override void Initialize()
         {
@@ -381,9 +376,7 @@ namespace Content.Server.Kitchen.EntitySystems
             _handsSystem.TryDropIntoContainer(args.User, args.Used, ent.Comp.Storage);
             UpdateUserInterfaceState(ent, ent.Comp);
 
-            // <Trauma>
-            ent.Comp.LastKnownKnowledgeHolder = args.User;
-            // </Trauma>
+            ent.Comp.LastUser = args.User; // Trauma - store user for later
         }
 
         private void OnBreak(Entity<MicrowaveComponent> ent, ref BreakageEventArgs args)
@@ -670,15 +663,13 @@ namespace Content.Server.Kitchen.EntitySystems
                 if (active.PortionedRecipe.Item1 != null)
                 {
                     // <Trauma>
-                    if (microwave.LastKnownKnowledgeHolder is { } chef)
+                    if (microwave.LastUser is { } user)
                     {
-                        /* TODO: make this not give xp for making the same recipe over and over
-                        var ev = new AddExperienceEvent(MartialArtCQCChef, active.PortionedRecipe.Item2);
-                        RaiseLocalEvent(chef, ref ev);
-                        var evCooking = new AddExperienceEvent(CookingKnowledge, active.PortionedRecipe.Item2);
-                        RaiseLocalEvent(chef, ref evCooking);
-                        */
-                        microwave.LastKnownKnowledgeHolder = null;
+                        var result = active.PortionedRecipe.Item1.Result;
+                        var count = active.PortionedRecipe.Item2;
+                        var ev = new CookedFoodEvent(user, result, count);
+                        RaiseLocalEvent(user, ref ev);
+                        microwave.LastUser = null; // no cheesing by setting it 1 time then automating it
                     }
                     // </Trauma>
 

@@ -24,8 +24,6 @@
 
 // the fucking eye of the shitcode storm
 
-using System.Linq;
-using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Heretic;
 using Content.Medical.Shared.Body;
@@ -70,7 +68,6 @@ using Content.Server.Cloning;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Heretic.Components;
-using Content.Shared.Movement.Systems;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Hands.Components;
@@ -111,7 +108,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly PvsOverrideSystem _pvs = default!;
     [Dependency] private readonly CloningSystem _cloning = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
@@ -383,28 +379,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         base.Update(frameTime);
 
         var bloodQuery = GetEntityQuery<BloodstreamComponent>();
-
-        var fleshQuery = EntityQueryEnumerator<FleshPassiveComponent, DamageableComponent>();
-        while (fleshQuery.MoveNext(out var uid, out var flesh, out var dmg))
-        {
-            flesh.Accumulator += frameTime;
-
-            if (flesh.Accumulator < flesh.HealInterval)
-                continue;
-
-            flesh.Accumulator = 0f;
-
-            var realMult = 2;
-
-            if (realMult <= 0f)
-                continue;
-
-            var toHeal = -realMult * AllDamage;
-            var bloodHeal = realMult * flesh.BloodHealMultiplier;
-            var bleedHeal = -realMult * flesh.BleedReductionMultiplier;
-
-            IHateWoundMed((uid, dmg, null), toHeal, bloodHeal, bleedHeal);
-        }
 
         var rustChargeQuery = EntityQueryEnumerator<RustObjectsInRadiusComponent, TransformComponent>();
         while (rustChargeQuery.MoveNext(out var uid, out var rust, out var xform))

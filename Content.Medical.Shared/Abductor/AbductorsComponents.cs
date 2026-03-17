@@ -50,6 +50,9 @@ public sealed partial class AbductorGizmoComponent : Component
 {
     [DataField, AutoNetworkedField]
     public NetEntity? Target;
+
+    [DataField, AutoNetworkedField]
+    public bool BrainwashMode = false;
 }
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]

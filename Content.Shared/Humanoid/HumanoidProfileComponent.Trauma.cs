@@ -13,5 +13,5 @@ public sealed partial class HumanoidProfileComponent
     public ProtoId<BarkPrototype> BarkVoice = HumanoidProfileSystem.DefaultBarkVoice;
 
     [DataField]
-    public KnowledgeProfile Knowledge = new(new());
+    public KnowledgeProfile Knowledge = new();
 }

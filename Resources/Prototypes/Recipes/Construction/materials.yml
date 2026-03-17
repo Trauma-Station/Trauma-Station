@@ -8,6 +8,9 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 0
+  useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -20,6 +23,7 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -32,6 +36,9 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -44,6 +51,7 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -56,6 +64,9 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -68,6 +79,9 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -80,6 +94,9 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 # <Trauma> remove durathread handcraft
@@ -92,7 +109,8 @@
 #  objectType: Item
 #  # <Trauma>
 #  theory: # TODO should reqire tools to make
-#    MaterialsKnowledge: 1
+#    MaterialsKnowledge: 2
+#  useQuality: false
 #  # </Trauma>
 # </Trauma>
 
@@ -106,6 +124,7 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -118,6 +137,9 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -130,6 +152,9 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -142,4 +167,7 @@
   # <Trauma>
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
+  useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>

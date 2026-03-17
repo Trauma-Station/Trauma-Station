@@ -126,7 +126,7 @@ public sealed class DiscordWebhook : IPostInjectInit
     {
         if (!response.IsSuccessStatusCode)
         {
-            _sawmill.Error($"Failed to {methodName} message. Status code: {response.StatusCode}.");
+            _sawmill.Warning($"Failed to {methodName} message. Status code: {response.StatusCode}."); // Trauma - warning so this doesnt cause infinite error loop
 
             if (response.Headers.TryGetValues("Retry-After", out var retryAfter))
                 _sawmill.Debug($"Failed webhook response Retry-After: {string.Join(", ", retryAfter)}");

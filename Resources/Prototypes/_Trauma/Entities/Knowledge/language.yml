@@ -294,13 +294,6 @@
 
 - type: entity
   parent: BaseLanguageKnowledge
-  id: LanguageRevolutionary
-  components:
-  - type: LanguageKnowledge
-    languageId: Revolutionary
-
-- type: entity
-  parent: BaseLanguageKnowledge
   id: LanguageXenoHivemind
   components:
   - type: LanguageKnowledge

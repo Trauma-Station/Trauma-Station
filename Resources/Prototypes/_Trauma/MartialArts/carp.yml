@@ -37,8 +37,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 60
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 6
   - !type:HealthChange
     damage:

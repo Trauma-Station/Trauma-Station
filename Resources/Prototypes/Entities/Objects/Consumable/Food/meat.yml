@@ -33,7 +33,7 @@
           !type:PhysShapeAabb
           bounds: "-0.25,-0.25,0.25,0.25"
         # less mass so it can cook faster, a single strip of bacon isnt 5kg
-        density: 1
+        density: 20 # Trauma - Burning update - was 1
         mask:
         - ItemMask
         restitution: 0.3  # fite me
@@ -42,11 +42,13 @@
   - type: AtmosExposed
   - type: Temperature
     currentTemperature: 290
+    specificHeat: 25 # Trauma
   - type: TemperatureDamage
   # required for cooking to work
   - type: InternalTemperature
     thickness: 0.02
     area: 0.02 # arbitrary number that sounds right for a slab of meat
+    conductivity: 15 # Trauma - was 0.43
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -93,7 +95,7 @@
     count: 3
     slice: FoodMeatCutlet
   - type: InternalTemperature
-    conductivity: 0.43
+    conductivity: 15 # Trauma - was 0.43
   - type: Construction
     graph: MeatSteak
     node: start
@@ -192,7 +194,7 @@
         - ReagentId: Fat
           Quantity: 9
   - type: InternalTemperature
-    conductivity: 0.44
+    conductivity: 15 # Trauma - was 0.44
     thickness: 0.004 # bacon is thin so faster to cook than a steak
     area: 0.0075 # ~5x15cm
   - type: Construction
@@ -291,7 +293,7 @@
     count: 3
     slice: FoodMeatChickenCutlet
   - type: InternalTemperature
-    conductivity: 0.41
+    conductivity: 15 # Trauma - was 0.41
   - type: Construction
     graph: ChickenSteak
     node: start
@@ -849,7 +851,7 @@
   - type: Sprite
     state: raw_patty
   - type: InternalTemperature
-    conductivity: 0.43
+    conductivity: 15 # Trauma - was 0.43
   - type: Construction
     graph: CookedPatty
     node: start
@@ -938,7 +940,7 @@
     sliceTime: 5
     slice: FoodMeat #That's... So much meat
   - type: InternalTemperature
-    conductivity: 0.43
+    conductivity: 15 # Trauma - was 0.43
   - type: Construction
     graph: AnomalyMeatSteak
     node: start

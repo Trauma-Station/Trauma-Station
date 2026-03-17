@@ -185,6 +185,13 @@
         Heat: 0
     heatDamageThreshold: 666
     coldDamageThreshold: 66
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+    understands:
+    - TauCetiBasic
+    - Eldritch
 
 # laughter demon
 - type: entity

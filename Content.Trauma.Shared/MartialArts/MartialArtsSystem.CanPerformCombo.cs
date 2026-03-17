@@ -116,20 +116,24 @@ public partial class MartialArtsSystem
         scale *= evDamage.Coefficient;
 
         if (proto.UserEffects != null)
-            _effects.ApplyEffects(performer, proto.UserEffects, scale, target);
+            _effects.ApplyEffects(performer, proto.UserEffects, scale, user: performer);
         if (proto.OpponentEffects != null)
-            _effects.ApplyEffects(target, proto.OpponentEffects, scale, performer);
+            _effects.ApplyEffects(target, proto.OpponentEffects, scale, user: performer);
 
         ent.Comp.LastAttacks.Clear();
 
-        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && !martialArtsComp.Blocked && _mobState.IsAlive(target) && proto.GiveExperience)
+        if (TryComp<MartialArtsKnowledgeComponent>(ent, out var comp) && comp.GiveExperience && !comp.Blocked && _mobState.IsAlive(target) && proto.GiveExperience)
         {
-            if (Prototype(ent)?.ID is not { } prototypeId || _knowledge.GetContainer(performer) is not { } brain)
-                return;
-            // TODO: limit it to be based on your opponent's martial art level + 10
-            _knowledge.AddExperience(brain, prototypeId, 1, 10);
+            // you can only go up to your opponents level + 10, to encourage actual training between masters
+            var opponent = GetMartialArtLevel(target);
+            _knowledge.AddExperience(ent.Owner, performer, 1, opponent + 10);
         }
 
         Dirty(ent);
     }
+
+    private int GetMartialArtLevel(EntityUid uid)
+        => _knowledge.GetActiveMartialArt(uid) is {} unit
+            ? _knowledge.GetLevel(unit)
+            : 0;
 }

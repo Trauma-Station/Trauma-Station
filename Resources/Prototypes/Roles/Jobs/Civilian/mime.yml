@@ -9,16 +9,15 @@
   startingGear: MimeGear
   icon: "JobIconMime"
   supervisors: job-supervisors-hop
-  goobcoins: 10 #Goob content
   access:
   - Theatre
   - Maintenance
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: MimePowers
-      preventWriting: true
-    - type: FrenchAccent
+  #special: # Trauma - moved to skill chip
+  #- !type:AddComponentSpecial
+  #  components:
+  #  - type: MimePowers
+  #    preventWriting: true
+  #  - type: FrenchAccent
 
 - type: startingGear
   id: MimeGear

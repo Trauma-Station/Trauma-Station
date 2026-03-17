@@ -10,13 +10,6 @@ public sealed partial class TraumaCVars
     #region Disabling features
 
     /// <summary>
-    /// Whether to enable the ghost bar.
-    /// This is not implemented in the UI, it is just to make tests not take 500 years to run.
-    /// </summary>
-    public static readonly CVarDef<bool> GhostBarEnabled =
-        CVarDef.Create("trauma.ghost_bar_enabled", true, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
     /// Whether to disable pathfinding, used for tests to not balloon memory usage and runtime.
     /// </summary>
     public static readonly CVarDef<bool> DisablePathfinding =
@@ -128,6 +121,23 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<string> ErrorWebhookUrl =
         CVarDef.Create("trauma.error_webhook_url", string.Empty, CVar.SERVER);
+
+    /// <summary>
+    /// Delay between each error message in seconds.
+    /// Used to avoid hitting ratelimits
+    /// </summary>
+    public static readonly CVarDef<double> ErrorWebhookDelay =
+        CVarDef.Create("trauma.error_webhook_delay", 0.3, CVar.SERVER);
+
+    #endregion
+
+    #region EndCredits
+
+    /// <summary>
+    /// Whether to play the cool end credits.
+    /// </summary>
+    public static readonly CVarDef<bool> PlayMovieEndCredits =
+        CVarDef.Create("trauma.play_credits", true, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     #endregion
 }

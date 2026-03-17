@@ -113,7 +113,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
 
         if (SpeakPropaganda(converter, user)
             // Note: this check is skipped if the speaker speaks lines and somehow doesn't have a languageSpeaker component.
-            && EntityManager.TryGetComponent<LanguageSpeakerComponent>(user, out var speakerComponent)) // returns true if the chosen conversion method uses a spoken line of text
+            && TryComp<LanguageSpeakerComponent>(user, out var speakerComponent)) // returns true if the chosen conversion method uses a spoken line of text
         {
             //check if spoken language can be understood by target
             if (!_language.CanUnderstand(target, speakerComponent.CurrentLanguage))
@@ -129,7 +129,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
                 converter.Owner,
                 target: target,
                 used: converter.Owner,
-                showTo: converter.Owner)
+                showTo: user)
             {
                 Hidden = !converter.Comp.VisibleDoAfter,
                 BreakOnMove = false,

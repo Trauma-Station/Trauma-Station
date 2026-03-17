@@ -119,7 +119,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
 
         // <Trauma> - for projectiles use PlayLocal since clients predict their physics
-        if (user == null)
+        if (user == null && _net.IsServer)
             _audio.PlayPvs(component.Sound, uid);
         else if (_timing.IsFirstTimePredicted)
             _audio.PlayLocal(component.Sound, uid, null);
@@ -225,7 +225,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         if ((component.Shooter == args.OtherEntity || component.Weapon == args.OtherEntity) &&
             component.Weapon != null && _tag.HasTag(component.Weapon.Value, GunCanAimShooterTag) &&
-            TryComp(uid, out TargetedProjectileComponent? targeted) && targeted.Target == args.OtherEntity)
+            TryComp(uid, out TargetedProjectileComponent? targeted) && GetEntity(targeted.Target) == args.OtherEntity)
             return;
         // /Goobstation
 
@@ -276,7 +276,8 @@ public sealed class ImpactEffectEvent : EntityEventArgs
 /// Raised when an entity is just about to be hit with a projectile but can reflect it
 /// </summary>
 [ByRefEvent]
-public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled) : IInventoryRelayEvent
+// Trauma - add Target
+public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, EntityUid Target) : IInventoryRelayEvent
 {
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
 }

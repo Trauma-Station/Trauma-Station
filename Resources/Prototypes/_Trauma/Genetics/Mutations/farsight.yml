@@ -7,5 +7,6 @@
   - type: Mutation
     instability: 10
     difficulty: 16
+    rarity: Rare
   - type: MaxZoomMutation
     modifier: 1.1 # a bit more than 1 tile increase
