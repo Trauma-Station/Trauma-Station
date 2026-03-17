@@ -273,11 +273,17 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 15
+        damage: 10 # Trauma, was 15
       behaviors:
       - !type:GibBehavior
         deleteGibs: true # Trauma - no lag pls
         recursive: false
+      # <Trauma>
+      - !type:SpawnGasBehavior
+        gasMixture:
+          moles:
+            Ammonia: 25
+      # </Trauma>
   - type: Stamina
     baseCritThreshold: 60
   - type: MeleeWeapon

@@ -60,7 +60,7 @@
       HandRight: OrganSkeletonPersonHandRight
       HandLeft: OrganSkeletonPersonHandLeft
       LegLeft: OrganSkeletonPersonLegLeft
-      LegRight: OrganSkeletonPersonLegRight1
+      LegRight: OrganSkeletonPersonLegRight
       FootLeft: OrganSkeletonPersonFootLeft
       FootRight: OrganSkeletonPersonFootRight
       Tongue: OrganHumanTongue

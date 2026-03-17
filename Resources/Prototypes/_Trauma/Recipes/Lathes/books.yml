@@ -131,9 +131,9 @@
 # Advanced Books
 
 - type: latheRecipe
-  id: BookMeleeBookMeleePrinted
+  id: BookMeleePrinted
   parent: BaseAdvancedBookRecipe
-  result: BookMeleeBookMeleePrinted
+  result: BookMeleePrinted
 
 - type: latheRecipe
   id: BookSurgeryPrinted

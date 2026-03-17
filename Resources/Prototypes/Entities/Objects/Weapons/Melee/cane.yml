@@ -29,6 +29,11 @@
     state: cane
   - type: Item
     size: Normal
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # <Trauma>
     sprite: Objects/Weapons/Melee/cane.rsi
   - type: Appearance
   - type: MobilityAid
@@ -67,6 +72,11 @@
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     sprite: Objects/Weapons/Melee/cane_blade.rsi
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # <Trauma>
   - type: Tag
     tags:
       - CaneBlade

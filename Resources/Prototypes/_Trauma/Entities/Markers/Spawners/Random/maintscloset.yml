@@ -6,7 +6,6 @@
   - type: RandomSpawner
     prototypes:
     - ClosetMaintenanceFilledRandom
-    chance: 0.5
     rarePrototypes:
-    - MobMimicLocker
-    rareChance: 0.5
+    - LockerMimic
+    rareChance: 0.005

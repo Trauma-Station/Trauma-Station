@@ -14,7 +14,7 @@
 - type: latheRecipePack
   id: PrintingPressAdvanced
   recipes:
-  - BookMeleeBookMeleePrinted
+  - BookMeleePrinted
   - BookShootingPrinted
   - BookSurgeryPrinted
   - BookMagicalLiteracyPrinted

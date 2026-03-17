@@ -38,12 +38,12 @@
   - type: MeleeWeapon
     canWideSwing: false # Goob
     range: 2.2 # Goob
-    attackRate: 0.8 # Goob
+    attackRate: 0.6 # Trauma, was 1
     animationRotation: -135 # WWDP
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 12
+        Piercing: 10 # Trauma, was 12
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -51,7 +51,7 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 25 # Trauma edit
+        Piercing: 15 # Trauma edit
   - type: Item
     size: Large # Goob edit
     shape: # Goob
@@ -92,7 +92,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 10
+        damage: 6
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -141,18 +141,18 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 12 # Trauma, was 15
+        Piercing: 10 # Trauma, was 15
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 25 # Trauma edit
+        Piercing: 15 # Trauma edit
   - type: Construction
     graph: SpearReinforced
   - type: Destructible # Trauma - durability
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 15
+        damage: 8
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -184,18 +184,18 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 12
+        Piercing: 10 # Trauma, was 12
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 25 # Trauma edit
+        Piercing: 15 # Trauma edit
   - type: Construction
     graph: SpearPlasma
   - type: Destructible # Trauma - durability
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 20
+        damage: 10
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -227,20 +227,20 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 6 # Trauma Piercing was 10, radiation was 8
-        Radiation: 6
+        Piercing: 5 # Trauma Piercing was 10, radiation was 8
+        Radiation: 5
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 12 # Trauma edit
-        Radiation: 13 # Trauma edit
+        Piercing: 7 # Trauma edit
+        Radiation: 8 # Trauma edit
   - type: Construction
     graph: SpearUranium
   - type: Destructible # Trauma - durability
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 20
+        damage: 10
       behaviors:
       - !type:PlaySoundBehavior
         sound:

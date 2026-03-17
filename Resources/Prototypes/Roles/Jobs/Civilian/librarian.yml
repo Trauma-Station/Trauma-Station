@@ -26,6 +26,11 @@
   storage:
     back:
     - BookRandom
+    # <Trauma>
+    - PrintingPressFlatpack
+    - Multitool
+    - CaneSheathFilled # Temp while I sprite the flaming sword of islam
+    # </Trauma>
 
 - type: chameleonOutfit
   id: LibrarianChameleonOutfit
