@@ -63,7 +63,7 @@
       LegRight: OrganSkeletonPersonLegRight
       FootLeft: OrganSkeletonPersonFootLeft
       FootRight: OrganSkeletonPersonFootRight
-      Tongue: OrganHumanTongue
+      Tongue: OrganHumanTongue # Trauma - FIXME: skeleton should not inherit NeedsTongue!!
   - type: HumanoidProfile
     species: Skeleton
 

@@ -4,6 +4,16 @@
   id: Spear
   description: Definition of a Classic. Keeping murder affordable since 200,000 BCE.
   components:
+  # <Trauma>
+  - type: ThrowableBlocked
+  - type: UndetectableContraband
+  - type: CosmicTransmutable
+    transmuteTo: SpearCosmicCult
+  - type: DamageOnHit
+    damage:
+      types:
+        Blunt: 1
+  # </Trauma>
   - type: EmbeddableProjectile
     offset: -0.15,0.0
   - type: ThrowingAngle
@@ -36,14 +46,16 @@
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
   - type: MeleeWeapon
-    canWideSwing: false # Goob
-    range: 2.2 # Goob
-    attackRate: 0.6 # Trauma, was 1
-    animationRotation: -135 # WWDP
+    # <Trauma>
+    canWideSwing: false
+    range: 2.2
+    attackRate: 0.6
+    animationRotation: -135
+    # </Trauma>
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 10 # Trauma, was 12
+        Piercing: 10 # Trauma - was 12
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -51,7 +63,7 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 15 # Trauma edit
+        Piercing: 15
   - type: Item
     size: Large # Goob edit
     shape: # Goob
@@ -68,7 +80,7 @@
   - type: SolutionContainerManager
     solutions:
       melee:
-        maxVol: 5 # Goobstation
+        maxVol: 5 # Trauma - was 2
   - type: MeleeChemicalInjector
     transferAmount: 1 # Goobstation
     solution: melee
@@ -85,14 +97,16 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 8 # Trauma edit
-  - type: Damageable # Trauma - durability
+        Piercing: 8 # Trauma - was 4
+  - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 10
+        # <Trauma> - removed 30 damage trigger
+        damage: 10 # was 20
+        # </Trauma>
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -109,11 +123,7 @@
   - type: DamageOnLand
     damage:
       types:
-        Blunt: 4
-  - type: DamageOnHit # Trauma - durability
-    damage:
-      types:
-        Blunt: 1
+        Blunt: 4 # Trauma - was 5
   - type: UseDelay
   - type: Appearance
   - type: SolutionContainerVisuals
@@ -123,10 +133,6 @@
     inHandsMaxFillLevels: 1
     equippedFillBaseName: -fill-
     equippedMaxFillLevels: 1
-  - type: ThrowableBlocked # Goobstation
-  - type: UndetectableContraband #Goobstation-Contraband detector
-  - type: CosmicTransmutable # Trauma
-    transmuteTo: SpearCosmicCult
 
 - type: entity
   name: reinforced spear
@@ -134,24 +140,10 @@
   id: SpearReinforced
   description: A spear with a reinforced glass shard as a tip.
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Melee/reinforced_spear.rsi
-  - type: MeleeWeapon
-    animationRotation: -135 # WWDP
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Piercing: 10 # Trauma, was 15
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Piercing: 15 # Trauma edit
-  - type: Construction
-    graph: SpearReinforced
-  - type: Destructible # Trauma - durability
+  # <Trauma>
+  - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 12
       behaviors:
       - !type:PlaySoundBehavior
@@ -170,6 +162,20 @@
     damage:
       types:
         Blunt: 3
+  # </Trauma>
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/reinforced_spear.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Piercing: 10 # Trauma - was 15
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 15 # Trauma - was 18
+  - type: Construction
+    graph: SpearReinforced
 
 - type: entity
   name: plasma spear
@@ -177,24 +183,10 @@
   id: SpearPlasma
   description: A spear with a plasma shard as a tip.
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Melee/plasma_spear.rsi
-  - type: MeleeWeapon
-    animationRotation: -135 # WWDP
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Piercing: 10 # Trauma, was 12
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Piercing: 15 # Trauma edit
-  - type: Construction
-    graph: SpearPlasma
-  - type: Destructible # Trauma - durability
+  # <Trauma>
+  - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 15
       behaviors:
       - !type:PlaySoundBehavior
@@ -213,6 +205,20 @@
     damage:
       types:
         Blunt: 2
+  # </Trauma>
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/plasma_spear.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Piercing: 10 # Trauma - was 18
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 15 # Trauma - was 21
+  - type: Construction
+    graph: SpearPlasma
 
 - type: entity
   name: uranium spear
@@ -220,26 +226,10 @@
   id: SpearUranium
   description: A spear with a uranium shard as a tip.
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Melee/uranium_spear.rsi
-  - type: MeleeWeapon
-    animationRotation: -135 # WWDP
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Piercing: 5 # Trauma Piercing was 10, radiation was 8
-        Radiation: 5
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Piercing: 7 # Trauma edit
-        Radiation: 8 # Trauma edit
-  - type: Construction
-    graph: SpearUranium
-  - type: Destructible # Trauma - durability
+  # <Trauma>
+  - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 15
       behaviors:
       - !type:PlaySoundBehavior
@@ -258,6 +248,23 @@
     damage:
       types:
         Blunt: 2
+  # </Trauma>
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/uranium_spear.rsi
+  - type: MeleeWeapon
+    animationRotation: -135 # WWDP
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Piercing: 5 # Trauma - was 10
+        Radiation: 5 # Trauma - was 8
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 7 # Trauma - was 12
+        Radiation: 8 # Trauma - was 9
+  - type: Construction
+    graph: SpearUranium
 
 - type: entity
   name: bone spear
