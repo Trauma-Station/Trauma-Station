@@ -40,9 +40,9 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         ResetButton.OnPressed += _ =>
         {
             _profile = new();
-            ReloadSkills();
             _modified = true;
             ResetButton.Disabled = true;
+            ReloadSkills();
         };
     }
 
