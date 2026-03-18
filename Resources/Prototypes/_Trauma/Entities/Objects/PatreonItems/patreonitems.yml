@@ -119,7 +119,7 @@
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi
 
-- type: entity 
+- type: entity
   parent: ClothingBackpackSatchel
   id: PatreonGribley
   name: WormPack
