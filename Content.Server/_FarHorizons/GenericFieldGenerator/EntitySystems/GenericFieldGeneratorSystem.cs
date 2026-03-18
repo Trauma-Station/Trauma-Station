@@ -178,8 +178,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     {
         if (TryComp<DeviceLinkSourceComponent>(generator, out _))
         {
-        _signalSystem.SendSignal(generator, generator.Comp.ConnectionStatusPort, false);
-        _signalSystem.InvokePort(generator, generator.Comp.FieldDisconnectedPort);
+            _signalSystem.SendSignal(generator, generator.Comp.ConnectionStatusPort, false);
+            _signalSystem.InvokePort(generator, generator.Comp.FieldDisconnectedPort);
         }
 
         var (uid, component) = generator;
@@ -200,8 +200,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
         if (TryComp<DeviceLinkSourceComponent>(value.Item1, out _))
         {
-            _signalSystem.SendSignal(value.Item1, generator.Comp.ConnectionStatusPort, false);
-            _signalSystem.InvokePort(value.Item1, generator.Comp.FieldDisconnectedPort);
+            _signalSystem.SendSignal(value.Item1, value.Item1.Comp.ConnectionStatusPort, false);
+            _signalSystem.InvokePort(value.Item1, value.Item1.Comp.FieldDisconnectedPort);
         }
 
         value.Item1.Comp.IsConnected = false;
@@ -384,8 +384,12 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         if (TryComp<DeviceLinkSourceComponent>(firstGen, out _))
         {
             _signalSystem.SendSignal(firstGen, firstGen.Comp.ConnectionStatusPort, true);
-            _signalSystem.SendSignal(secondGen, secondGen.Comp.ConnectionStatusPort, true);
             _signalSystem.InvokePort(firstGen, firstGen.Comp.FieldConnectedPort);
+        }
+
+        if (TryComp<DeviceLinkSourceComponent>(secondGen, out _))
+        {
+            _signalSystem.SendSignal(secondGen, secondGen.Comp.ConnectionStatusPort, true);
             _signalSystem.InvokePort(secondGen, secondGen.Comp.FieldConnectedPort);
         }
 

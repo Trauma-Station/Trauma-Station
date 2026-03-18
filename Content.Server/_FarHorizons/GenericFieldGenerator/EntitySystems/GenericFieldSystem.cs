@@ -47,7 +47,7 @@ public sealed class GenericFieldSystem : EntitySystem
 
     public void TempTileCleanup(Entity<GenericFieldComponent> field)
     {
-        if (field.Comp.TempTile)
+        if (field.Comp.TempTile && !TerminatingOrDeleted(field.Comp.GridUid))
         {
             if (!_tiledef.TryGetDefinition("Space", out var tileDef))
                 return;
