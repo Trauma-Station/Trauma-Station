@@ -9,6 +9,15 @@
     - !type:InsertNewOrgan
       organ: SkillChipNukie
 
+# Installs a hecu chip to the target mob's head (copied from above)      
+- type: entityEffect
+  id: InstallSkillChipHecuOperative
+  effects:
+  - !type:RelayOrgan
+    category: Head
+    effects:
+    - !type:InsertNewOrgan
+      organ: SkillChipHecuOperative
 # Give all crew their job's skill chip
 - type: playerEffects
   id: InstallSkillChips
