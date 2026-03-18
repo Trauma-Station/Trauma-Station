@@ -12,7 +12,8 @@
       StrengthKnowledge: 40
       WeaponsKnowledge: 40
       ThrowingKnowledge: 26
-       WallsKnowledge: 26
+      FirstAidKnowledge: 26
+      WallsKnowledge: 26
       InfrastructureKnowledge: 26
       ElectronicsKnowledge: 26
       FabricationKnowledge: 26
