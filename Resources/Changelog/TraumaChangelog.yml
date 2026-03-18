@@ -4838,3 +4838,39 @@ Entries:
   id: 568
   time: '2026-03-18T09:45:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1413
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Buffed laser sniper
+  - type: Tweak
+    message: slightly buffed laser LMG
+  id: 569
+  time: '2026-03-18T09:51:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1406
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added a reset button to the skills editor, use it if your skills are
+      messed up etc.
+  - type: Fix
+    message: Fixed skill editor's cost number including the species skills.
+  id: 570
+  time: '2026-03-18T10:08:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1414
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Command and Security can no longer be blind, mute, narcoleptic or
+      wheelchair bound.
+  id: 571
+  time: '2026-03-18T10:14:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1416
+- author: Gribley-0
+  changes:
+  - type: Add
+    message: Changed old knowledge with new in nukies (fabrication)
+  id: 572
+  time: '2026-03-18T10:20:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1404

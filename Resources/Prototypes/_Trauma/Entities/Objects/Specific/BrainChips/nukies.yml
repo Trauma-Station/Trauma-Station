@@ -12,8 +12,8 @@
       StrengthKnowledge: 40
       WeaponsKnowledge: 40
       ThrowingKnowledge: 26
-      # TODO: replace with FabricationKnowledge: 26 when it gets made
+      FirstAidKnowledge: 26
       WallsKnowledge: 26
       InfrastructureKnowledge: 26
       ElectronicsKnowledge: 26
-      FirstAidKnowledge: 26
+      FabricationKnowledge: 26
