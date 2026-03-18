@@ -9,6 +9,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     ReserveScrollbarSpace="False"
     HScrollEnabled="False"
     HorizontalAlignment="Center"
+    VScrollBarHidden="True"
     Access="Public">
 
     <BoxContainer
