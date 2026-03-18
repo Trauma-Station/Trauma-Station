@@ -34,6 +34,12 @@
   id: FoodProduceBase
   abstract: true
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2.5 # ow minimum
+  # </Trauma>
   - type: SolutionContainerManager
   - type: Sprite
     state: produce
@@ -623,6 +629,12 @@
   id: FoodCabbage
   description: Ewwwwwwwwww. Cabbage.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - cabbage
@@ -862,6 +874,13 @@
   id: FoodPineapple
   description: Mmm, tropical.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2.5 # ow
+        Slash: 2.5 # but bleeding!
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - pineapple
@@ -1131,6 +1150,12 @@
   id: FoodApple
   description: It's a little piece of Eden.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - apple
@@ -1168,6 +1193,13 @@
   id: FoodGoldenApple
   description: It should be shaped like a cube, shouldn't it?
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+        Holy: 5 # lol
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - apple
@@ -2147,8 +2179,14 @@
   id: FoodWatermelon
   description: Round green object that you can slice and eat.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 15 # PVZ parity
+  # </Trauma>
   - type: Item
-    size: Small
+    size: Normal # Trauma, was Small
     heldPrefix: produce
   - type: FlavorProfile
     flavors:
@@ -2249,8 +2287,15 @@
   id: FoodHolymelon
   description: The water within this melon has been blessed by some deity that's particularly fond of watermelon.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 15 # PVZ Parity
+        Holy: 10 # really good against devils and... *checks notes* ...devils
+  # </Trauma>
   - type: Item
-    size: Small
+    size: Normal # Trauma, was Small
     heldPrefix: produce
   - type: FlavorProfile
     flavors:
