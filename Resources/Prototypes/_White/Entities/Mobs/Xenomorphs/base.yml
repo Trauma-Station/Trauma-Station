@@ -10,12 +10,18 @@
   abstract: true
   components:
   - type: Xenomorph
-    weedHeal: # Goobstation - nerfed healing
-      groups:
-        Burn: -3
-        Toxin: -5
-        Airloss: -10
-        Brute: -4
+    weedHeal:
+      types:
+        Blunt: -1.33
+        Slash: -1.33
+        Piercing: -1.33
+        Heat: -1
+        Cold: -1
+        Shock: -1
+        Poison: -2.5
+        Radiation: -2.5
+        Asphyxiation: -5
+        Bloodloss: -5
   - type: Pinpointer
     whitelist:
       components:
@@ -103,8 +109,10 @@
       collection: AlienClaw
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 25
+      types:
+        Blunt: 5
+        Slash: 10
+        Piercing: 10
   - type: TypingIndicator
     proto: alien
   - type: AtmosExposed

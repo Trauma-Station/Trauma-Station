@@ -345,7 +345,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 45
+        Heat: 65
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
@@ -360,7 +360,7 @@
   - type: Projectile
     damage:
       types:
-        Ion: 45
+        Ion: 65
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
@@ -378,7 +378,7 @@
     - BlobImpassable
     damage:
       types:
-        Heat: 45
+        Heat: 65
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
@@ -394,14 +394,14 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 25
+        Heat: 35
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
     - state: heavybolt
       color: "#fc5d52"
   - type: IgniteOnCollide
-    fireStacks: 5
+    fireStacks: 7
 
 # LMG
 
@@ -414,7 +414,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 3
+        Heat: 4
   - type: Sprite
     layers:
     - state: lightbolt

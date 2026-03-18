@@ -26,6 +26,5 @@
     state: icon
   - type: SetSelector
     possibleSets:
-    - ERTBallisticsSet
     - ERTPulseSet
     maxSelectedSets: 1

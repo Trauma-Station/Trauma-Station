@@ -101187,13 +101187,6 @@ entities:
     - type: Transform
       pos: -52.554024,30.707216
       parent: 2
-  - uid: 16323
-    components:
-    - type: Transform
-      parent: 16322
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: ClothingEyesGlasses
   entities:
   - uid: 16325
@@ -101497,13 +101490,6 @@ entities:
     components:
     - type: Transform
       pos: -2.2993112,-37.93481
-      parent: 2
-- proto: ClothingHeadHatCatEars
-  entities:
-  - uid: 24517
-    components:
-    - type: Transform
-      pos: -64.59338,72.61955
       parent: 2
 - proto: ClothingHeadHatCentcomcap
   entities:
@@ -102147,15 +102133,6 @@ entities:
     components:
     - type: Transform
       parent: 4972
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-- proto: ClothingOuterHardsuitLuxury
-  entities:
-  - uid: 16324
-    components:
-    - type: Transform
-      parent: 16322
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -192790,21 +192767,6 @@ entities:
     - type: Transform
       pos: -108.72062,-17.365732
       parent: 2
-- proto: SuitStorageBase
-  entities:
-  - uid: 16322
-    components:
-    - type: Transform
-      pos: 2.5,-46.5
-      parent: 2
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 16324
-          - 16323
 - proto: SuitStorageCaptain
   entities:
   - uid: 29782

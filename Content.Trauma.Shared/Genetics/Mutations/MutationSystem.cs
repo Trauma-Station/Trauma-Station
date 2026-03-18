@@ -4,6 +4,7 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction.Components;
@@ -24,6 +25,7 @@ namespace Content.Trauma.Shared.Genetics.Mutations;
 
 public sealed partial class MutationSystem : CommonMutationSystem
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -31,6 +33,11 @@ public sealed partial class MutationSystem : CommonMutationSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly EntityQuery<ActionComponent> _actionQuery = default!;
+    [Dependency] private readonly EntityQuery<DnaComponent> _dnaQuery = default!;
+    [Dependency] private readonly EntityQuery<MutatableComponent> _mutatableQuery = default!;
+    [Dependency] private readonly EntityQuery<MutationComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<UnremoveableComponent> _unremoveableQuery = default!;
 
     /// <summary>
     /// All mutation prototypes and their respective <see cref="MutationComponent"/>.
@@ -57,27 +64,13 @@ public sealed partial class MutationSystem : CommonMutationSystem
     public Dictionary<EntProtoId<MutationComponent>, MutationData> RoundData = new();
     private HashSet<int> MutationNumbers = new();
 
-    private static readonly ProtoId<DamageGroupPrototype> Genetic = "Genetic";
+    private static readonly ProtoId<DamageTypePrototype> Cellular = "Cellular";
 
     private List<EntProtoId<MutationComponent>> _removing = new();
-
-    private EntityQuery<ActionComponent> _actionQuery;
-    private EntityQuery<DamageableComponent> _damageableQuery;
-    private EntityQuery<DnaComponent> _dnaQuery;
-    private EntityQuery<MutatableComponent> _mutatableQuery;
-    private EntityQuery<MutationComponent> _query;
-    private EntityQuery<UnremoveableComponent> _unremoveableQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _actionQuery = GetEntityQuery<ActionComponent>();
-        _damageableQuery = GetEntityQuery<DamageableComponent>();
-        _dnaQuery = GetEntityQuery<DnaComponent>();
-        _mutatableQuery = GetEntityQuery<MutatableComponent>();
-        _query = GetEntityQuery<MutationComponent>();
-        _unremoveableQuery = GetEntityQuery<UnremoveableComponent>();
 
         SubscribeLocalEvent<MutatableComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(BodySystem) });
         SubscribeLocalEvent<MutatableComponent, PolymorphedEvent>(OnPolymorphed);
@@ -622,13 +615,10 @@ public sealed partial class MutationSystem : CommonMutationSystem
     /// </summary>
     public int? GetGeneticDamage(EntityUid mob)
     {
-        if (!_damageableQuery.TryComp(mob, out var comp))
-            return null;
-
-        if (!comp.DamagePerGroup.TryGetValue(Genetic, out var damage))
-            return 0;
-
-        return (int) damage;
+        var damage = _damageable.GetAllDamage(mob);
+        return damage.DamageDict.TryGetValue(Cellular, out var value)
+            ? value.Int()
+            : 0;
     }
 
     /// <summary>

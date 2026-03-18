@@ -64,6 +64,9 @@ public sealed partial class MutationSystem
     /// </summary>
     public EntProtoId<MutationComponent>? CombineMutations(EntProtoId<MutationComponent> a, EntProtoId<MutationComponent> b)
     {
+        if (a == b)
+            return null;
+
         if (!Recipes.TryGetValue(a, out var results))
             return null;
 

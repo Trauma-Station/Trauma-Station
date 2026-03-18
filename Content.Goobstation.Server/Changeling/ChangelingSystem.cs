@@ -749,7 +749,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         var catastrophicStasisTime = ent.Comp.CatastrophicStasisTime; // 1 min
 
         var damage = args.Damageable;
-        var damageTaken = damage.TotalDamage;
+        var damageTaken = _damage.GetTotalDamage((ent, damage));
 
         var damageScaled = float.Round((float) (damageTaken / critThreshold.Value * highestStasisTime));
 

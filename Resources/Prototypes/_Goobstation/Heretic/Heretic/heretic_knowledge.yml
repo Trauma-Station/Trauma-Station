@@ -291,7 +291,6 @@
     - type: SpecialLowTempImmunity
     - type: SpecialHighTempImmunity
     - type: SpecialPressureImmunity
-    - type: FleshPassive
 
 ### void path
 - type: hereticKnowledge

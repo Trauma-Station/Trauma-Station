@@ -9,7 +9,7 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         conditions:
         - !type:WhitelistCondition
           whitelist:
@@ -18,13 +18,10 @@
             - Thrall
           guidebookText: entity-condition-shadowling-or-thrall
         damage:
-          groups: # goob edit
-            Burn: -12
-            Brute: -12
-          types:
-            Caustic: -12
-            Poison: -12
-            Bloodloss: -12
+          Burn: -12
+          Brute: -12
+          Toxin: -12
+          Airloss: -12
 
       - !type:GenericStatusEffect
         conditions:

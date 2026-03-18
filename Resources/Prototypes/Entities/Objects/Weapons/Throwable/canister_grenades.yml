@@ -102,6 +102,12 @@
   name: air grenade
   description: A special solid state chemical grenade used for quickly releasing standard air into a spaced area. Fills up to 30 tiles!
   components:
+  # <Trauma>
+  - type: Construction
+    graph: AirGrenadeGraph
+    node: start
+    deconstructionTarget: null
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Grenades/airboom.rsi
   - type: EmitSoundOnTrigger
@@ -131,7 +137,10 @@
         enabled:
           True: { state: active }
           False: { state: spent }
-  - type: Construction # Trauma
-    graph: AirGrenadeGraph
-    node: start
-    deconstructionTarget: null
+  - type: RemoveComponentsOnTrigger # should prevent it from being re-triggered
+    keysIn:
+    - timer
+    triggerOnce: true
+    components:
+    - type: TriggerOnUse
+    - type: TimerTrigger

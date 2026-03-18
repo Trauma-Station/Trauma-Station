@@ -283,13 +283,11 @@ public sealed partial class WoundSystem
 
         UpdateWoundableIntegrity(ent, ent.Comp);
 
-        if (!TryComp<DamageableComponent>(ent, out var damage))
-            return;
-
         var value = args.Damage;
-        foreach (var type in damage.Damage.DamageDict.Keys)
+        var damage = _damageable.GetAllDamage(ent.Owner);
+        foreach (var type in damage.DamageDict.Keys)
         {
-            var mul = damage.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
+            var mul = damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
             TryInduceWound(ent, type, value * mul, out _, ent.Comp);
         }
     }
@@ -1304,12 +1302,8 @@ public sealed partial class WoundSystem
             if (_body.GetCategory(part.Owner) is not {} category)
                 continue;
 
-            if (!TryComp<DamageableComponent>(part, out var damageable))
-                continue;
-
             var nearestSeverity = WoundableSeverity.Severed;
-            var damage = damageable.TotalDamage;
-
+            var damage = _damageable.GetTotalDamage(part.Owner);
             foreach (var (severity, threshold) in part.Comp.Thresholds.OrderByDescending(kv => kv.Value))
             {
                 if (damage <= 0)

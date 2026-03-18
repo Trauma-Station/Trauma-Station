@@ -175,17 +175,18 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
                 if (!_soln.ResolveSolution(source, puddle.SolutionName, ref puddle.Solution))
                     continue;
 
-                puddle.Solution.Value.Comp.Solution.Contents.RemoveAll(x =>
+                var sol = puddle.Solution.Value.Comp.Solution;
+                sol.Contents.RemoveAll(x =>
                     x.Reagent.EnsureReagentData().Any(y => y is DnaData dnaData && dnaData.DNA == dna.DNA));
 
-                if (puddle.Solution.Value.Comp.Solution.Contents.Count == 0)
+                if (sol.Contents.Count == 0)
                     QueueDel(source);
                 else
                 {
-                    puddle.Solution.Value.Comp.Solution.Volume =
-                        puddle.Solution.Value.Comp.Solution.Contents.Select(x => x.Quantity).Sum();
-                    puddle.Solution.Value.Comp.Solution.HeatCapacityDirty = true;
+                    sol.Volume = sol.Contents.Select(x => x.Quantity).Sum();
+                    sol.HeatCapacityDirty = true;
                 }
+                Dirty(puddle.Solution.Value, puddle.Solution.Value.Comp);
             }
             else if (TryComp(source, out ForensicsComponent? forensics))
             {

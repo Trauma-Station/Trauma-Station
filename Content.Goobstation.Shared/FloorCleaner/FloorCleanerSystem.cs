@@ -123,19 +123,18 @@ public sealed class FloorCleanerSystem : EntitySystem
     /// <returns> returns false if failed to run</returns>
     private bool StartCleaning(EntityUid uid, EntityUid target)
     {
-        if(!TryComp<AbsorbentComponent>(uid, out var absorb))
-            return false;
-        if (!TryComp<UseDelayComponent>(uid, out var useDelay))
-            return false;
-        if (!_solutionContainer.TryGetSolution(uid, absorb.SolutionName, out var absorberSoln))
+        if (!TryComp<AbsorbentComponent>(uid, out var absorb) ||
+            !TryComp<UseDelayComponent>(uid, out var useDelay) ||
+            !_solutionContainer.TryGetSolution(uid, absorb.SolutionName, out var absorberSoln))
             return false;
 
-        if (FixedPoint2.Zero ==
-            absorberSoln.Value.Comp.Solution.GetTotalPrototypeQuantity(
-                _puddle.GetAbsorbentReagents(absorberSoln.Value.Comp.Solution)))// no cleaning reagent in scrubber
+        var sol = absorberSoln.Value.Comp.Solution;
+        var total = sol.GetTotalPrototypeQuantity(_puddle.GetAbsorbentReagents(sol));
+        // no cleaning reagent in scrubber
+        if (total == FixedPoint2.Zero)
             return true;
 
-        _absorbent.Mop((uid,absorb), uid, target );
+        _absorbent.Mop((uid,absorb), uid, target);
         _useDelay.CancelDelay((uid, useDelay)); // prevents cleaning loop from being aborted
 
         return true;

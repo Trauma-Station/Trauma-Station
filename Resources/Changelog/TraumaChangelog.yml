@@ -4707,3 +4707,197 @@ Entries:
   id: 553
   time: '2026-03-16T22:46:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1370
+- author: Armok
+  changes:
+  - type: Add
+    message: Added fun!
+  - type: Remove
+    message: Removed fun!
+  - type: Tweak
+    message: Changed fun!
+  - type: Fix
+    message: Fixed fun!
+  id: 554
+  time: '2026-03-17T09:36:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1378
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Scifab can now print medical scanner boards for expanding genetics.
+  id: 555
+  time: '2026-03-17T11:50:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1373
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed footprints being rotated wrong
+  - type: Tweak
+    message: >-
+      There should be interesting station ambience playing now instead of a low
+      hum
+  id: 556
+  time: '2026-03-17T14:08:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1375
+- author: Lumminal
+  changes:
+  - type: Fix
+    message: Shadow demons unable to turn off night vision while in jaunt
+  - type: Fix
+    message: Shadow demons now pulls victims in, instead of throwing themselves
+  - type: Tweak
+    message: Shadow demons get a cooldown when entering jaunt
+  id: 557
+  time: '2026-03-17T14:21:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1379
+- author: neomoth
+  changes:
+  - type: Add
+    message: Added a weapon durability system.
+  - type: Tweak
+    message: The baseball bat now uses the durability system.
+  id: 558
+  time: '2026-03-17T15:46:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1225
+- author: assripper.
+  changes:
+  - type: Add
+    message: roundstart abductors are back
+  id: 559
+  time: '2026-03-17T20:52:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1390
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed chud huge snake tail marking from lizards.
+  id: 560
+  time: '2026-03-17T22:53:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1393
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Shadow anomaly fog now despawns after 3 minutes. It is no longer a round
+      ending threat.
+  id: 561
+  time: '2026-03-17T23:46:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1398
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Heretic subgamemode only has 1 heretic.
+  - type: Fix
+    message: >-
+      Fixed heretics gamemode being able to have a heretic subgamemode, which
+      doubled heretic numbers...
+  id: 562
+  time: '2026-03-17T23:54:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1399
+- author: Gribley-0
+  changes:
+  - type: Add
+    message: Gave Nukies Average first aid skill
+  id: 563
+  time: '2026-03-18T06:50:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1403
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Throwing produce now does damage. Melons do a lot.
+  - type: Tweak
+    message: More tools do throwing damage.
+  id: 564
+  time: '2026-03-18T06:52:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1396
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed getting ork for free with just clumsiness...
+  id: 565
+  time: '2026-03-18T08:07:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1407
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: >-
+      Food from vendors no longer makes you vomit. It still deals damage,
+      though.
+  id: 566
+  time: '2026-03-18T08:55:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1408
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added bugs related to damaging mobs, go find them!
+  id: 567
+  time: '2026-03-18T09:21:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1391
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed unanchoring lathes making them instantly finish production.
+  id: 568
+  time: '2026-03-18T09:45:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1413
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Buffed laser sniper
+  - type: Tweak
+    message: slightly buffed laser LMG
+  id: 569
+  time: '2026-03-18T09:51:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1406
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added a reset button to the skills editor, use it if your skills are
+      messed up etc.
+  - type: Fix
+    message: Fixed skill editor's cost number including the species skills.
+  id: 570
+  time: '2026-03-18T10:08:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1414
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Command and Security can no longer be blind, mute, narcoleptic or
+      wheelchair bound.
+  id: 571
+  time: '2026-03-18T10:14:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1416
+- author: Gribley-0
+  changes:
+  - type: Add
+    message: Changed old knowledge with new in nukies (fabrication)
+  id: 572
+  time: '2026-03-18T10:20:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1404
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Failing to write a prayer in an empty scroll now opens the Fear and Hunger
+      wiki for you.
+  id: 573
+  time: '2026-03-18T13:03:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1410
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: End round credits hides the sidebar now
+  - type: Tweak
+    message: End round credits are a bit slower now
+  id: 574
+  time: '2026-03-18T18:02:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1419
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Made salicylic acid always heal the same midlevel amount, but it no longer
+      has a huge damage requirement to work.
+  id: 575
+  time: '2026-03-18T19:03:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1420

@@ -52,7 +52,7 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Burn: 5
+        Heat: 5
   - type: IgnitionSource
     temperature: 400
     ignited: true

@@ -36,7 +36,7 @@
     id: ERTLeaderPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltAssaultFilled # Goobstation
-    pocket1: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives". Is never used anywhere else.
+    pocket1: TelescopicBatonAdvanced # Trauma # Trauma
     pocket2: FlashlightSeclite
   storage:
     back:
@@ -61,7 +61,7 @@
     id: ERTLeaderPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltAssaultFilled # Goobstation
-    pocket1: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives". Is never used anywhere else.
+    pocket1: TelescopicBatonAdvanced # Trauma # Trauma
     pocket2: FlashlightSeclite
   storage:
     back:
@@ -85,8 +85,8 @@
     - PinpointerNuclear
     - MagazineRifle
     - MagazineRifle
-    - MagazineRifleIncendiary
-    - MagazineRifleUranium
+    - MagazineRifle # Trauma
+    - MagazineRifle # Trauma
     - MedkitCombatFilled # End of first line
     - GrenadeShrapnel
     - EmpGrenade
@@ -147,7 +147,7 @@
     id: ERTChaplainPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltStorageWaistbag
-    pocket1: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives".
+    pocket1: TelescopicBatonAdvanced # Trauma
     pocket2: DrinkWaterBottleFull
   storage:
     back:
@@ -261,7 +261,7 @@
     outerClothing: ClothingOuterArmourDurathread # Durathread armor is cooler.
     id: ERTEngineerPDA
     ears: ClothingHeadsetAltCentCom
-    pocket1: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives".
+    pocket1: TelescopicBatonAdvanced # Trauma
     pocket2: GasAnalyzer
   storage:
     back:
@@ -390,7 +390,7 @@
     id: ERTSecurityPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltAssaultFilled # Goobstation
-    pocket1: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives".
+    pocket1: TelescopicBatonAdvanced # Trauma
     pocket2: FlashlightSeclite
   storage:
     back:
@@ -415,7 +415,7 @@
     id: ERTSecurityPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltAssaultFilled # Goobstation
-    pocket1: WeaponPulsePistol # Death to Crew aligned Ballistics
+    pocket1: TelescopicBatonAdvanced # Trauma
     pocket2: FlashlightSeclite
   storage:
     back:
@@ -577,7 +577,7 @@
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltSecurityWebbingFilledMedical # Fancier
     pocket1: Flare
-    pocket2: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives".
+    pocket2: TelescopicBatonAdvanced # Trauma
   storage:
     back:
     - CentCommHypo
@@ -605,7 +605,7 @@
     id: ERTMedicPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltSecurityWebbingFilledMedical # Fancier
-    pocket1: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives".
+    pocket1: TelescopicBatonAdvanced # Trauma
   storage:
     back:
     - CentCommHypo
@@ -686,7 +686,7 @@
     outerClothing: ClothingOuterArmourDurathread # Durathread armor is cooler.
     id: ERTJanitorPDA
     ears: ClothingHeadsetAltCentCom
-    pocket1: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives".
+    pocket1: TelescopicBatonAdvanced # Trauma
   storage:
     back:
     - LightReplacer
@@ -709,7 +709,7 @@
     id: ERTJanitorPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltMilitaryWebbingERT # Trauma - fit belt shit
-    pocket1: WeaponPulsePistol # Literally described as "Favored sidearm of NT ERT operatives".
+    pocket1: TelescopicBatonAdvanced # Trauma
   storage:
     back:
     - TrashBag
