@@ -4,7 +4,32 @@
   parent: [ AppearanceRatKing, BaseMobRat, SimpleMobBase, MobCombat ] # Shitmed
   description: He's da rat. He make da roolz.
   components:
-  - type: VentCrawler # goobstation - Ventcrawl
+  # <Trauma>
+  - type: VentCrawler
+  - type: NightVision
+    color: "#d14343"
+    activateSound: null
+    deactivateSound: null
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Poison: -0.5
+        Blunt: -0.1
+        Slash: -0.1
+        Piercing: -0.1
+        Heat: -0.1
+        Cold: -0.1
+        Shock: -0.1
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Mouse
+    understands:
+    - TauCetiBasic
+    - Mouse
+  # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
     baseWalkSpeed : 4.00
@@ -109,13 +134,6 @@
   - type: MobsterAccent
   - type: Speech
     speechVerb: SmallMob
-  - type: LanguageSpeaker # Einstein Engines - Languages
-    speaks:
-    - TauCetiBasic
-    - Mouse
-    understands:
-    - TauCetiBasic
-    - Mouse
   - type: Butcherable
     spawned:
     - id: ClothingHeadHatFancyCrown #how did that get there?
@@ -134,19 +152,6 @@
     attributes:
       gender: male
   - type: Sharp
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#d14343"
-    activateSound: null
-    deactivateSound: null
-  - type: PassiveDamage #passive Healing
-    allowedStates:
-    - Alive
-    damage:
-      types:
-        Poison: -0.5
-      groups:
-        Brute: -0.3
-        Burn: -0.3
 
 - type: entity
   id: MobRatKingBuff
@@ -193,7 +198,24 @@
   description: He's da mini rat. He don't make da roolz.
   categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
-  - type: VentCrawler # goobstation - Ventcrawl
+  # <Trauma>
+  - type: VentCrawler
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  - type: Bloodstream
+    bloodReferenceSolution: # he is very small
+      reagents:
+      - ReagentId: Blood
+        Quantity: 10
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+  # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
     baseWalkSpeed : 4.0
@@ -226,19 +248,6 @@
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
       state: eyes
       shader: unshaded
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Mouse
-    understands:
-    - Mouse
-    - TauCetiBasic
-  - type: PassiveDamage #passive Healing
-    allowedStates:
-    - Alive
-    damage:
-      groups:
-        Brute: -0.1
-        Burn: -0.1
   - type: SpriteMovement
     movementLayers:
       movement:
@@ -264,11 +273,6 @@
     thresholds:
       0: Alive
       15: Dead #goob
-  - type: Bloodstream
-    bloodReferenceSolution: # Goob - he is very small
-      reagents:
-      - ReagentId: Blood
-        Quantity: 10
   - type: Destructible
     thresholds:
     - trigger:
@@ -349,14 +353,6 @@
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning
-  - type: Edible
-    edible: Food
-  - type: Item
-    size: Tiny # Delta V - Make them edible and pickable.
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
 
 - type: entityTable
   id: RatKingLoot

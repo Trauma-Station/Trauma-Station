@@ -17,8 +17,8 @@
     caste: Praetorian
   - type: TailLash
     tailDamage:
-      groups:
-        Brute: 5
+      types:
+        Slash: 5
     inject:
       ChloralHydrate: 5 # Goobstation - new chemical
   - type: TypingIndicator
@@ -46,8 +46,10 @@
       315: 0.6
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 30
+      types:
+        Blunt: 8
+        Slash: 12
+        Piercing: 10
   # - type: GuideHelp
   #   guides:
   #   - XenomorphPraetorian

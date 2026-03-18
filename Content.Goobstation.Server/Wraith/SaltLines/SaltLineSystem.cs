@@ -94,13 +94,13 @@ public sealed class SaltLineSystem : EntitySystem
         foreach (var container in solMan.Containers)
         {
             if (!_solution.TryGetSolution(ent.Owner, container, out var solution)
-                || solution is not { } sol
-                || !sol.Comp.Solution.ContainsPrototype(ReagentSalt))
+                || solution?.Comp.Solution is not { } sol
+                || !sol.ContainsPrototype(ReagentSalt))
                 continue;
 
             // Try remove salt from the first found solution, if there's no salt return and check next container,
             // else exit the function without cancelling it
-            if (TryRemoveSalt(sol, ent, args.User))
+            if (TryRemoveSalt(solution.Value, ent, args.User))
                 return;
         }
 
@@ -115,14 +115,14 @@ public sealed class SaltLineSystem : EntitySystem
     /// </summary>
     public bool TryRemoveSalt(Entity<SolutionComponent> sol, Entity<ConsumeOnSaltLineComponent> ent, EntityUid user)
     {
-        var saltAmount = sol.Comp.Solution.GetTotalPrototypeQuantity(ReagentSalt);
+        var solution = sol.Comp.Solution;
+        var saltAmount = solution.GetTotalPrototypeQuantity(ReagentSalt);
         if (saltAmount < ent.Comp.Amount)
             return false;
 
         _solution.RemoveReagent(sol, ReagentSalt, ent.Comp.Amount);
         return true;
     }
-
 
     private void UpdateAppearance(Entity<SaltLineComponent> ent)
     {

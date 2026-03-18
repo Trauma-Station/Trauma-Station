@@ -17,8 +17,11 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
+    #fabrication and furniture for alter building
       LiteracyKnowledge: 26
       MagicalLiteracyKnowledge: 50
+      FurnitureKnowledge: 10
+      FabricationKnowledge: 10
 
 - type: entity
   parent: BaseSkillChip

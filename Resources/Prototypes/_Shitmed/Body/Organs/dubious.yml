@@ -29,15 +29,22 @@
     - type: PassiveDamage
       allowedStates:
       - Alive
-      - Critical
-      damageCap: 150
+      - SoftCrit
+      - Critical # for mobs that dont have softcrit
       damage:
-        groups:
-          Brute: -0.14
-          Burn: -0.14
-          Airloss: -0.14
-          Toxin: -0.14
-          Genetic: -0.14
+        types:
+          Blunt: -0.05
+          Slash: -0.05
+          Piercing: -0.05
+          Heat: -0.04
+          Cold: -0.04
+          Shock: -0.04
+          Caustic: -0.04
+          Asphyxiation: -0.07
+          Bloodloss: -0.07
+          Poison: -0.07
+          Radiation: -0.07
+          Cellular: -0.14
 
 - type: entity
   parent: OrganDubiousBase

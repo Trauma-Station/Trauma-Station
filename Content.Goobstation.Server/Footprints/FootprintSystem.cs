@@ -142,7 +142,8 @@ public sealed class FootprintSystem : EntitySystem
         }
         var addBack = puddleSolSol.SplitSolutionWithOnly(puddleSolSol.Volume, nonStickProtos.ToArray());
 
-        _solution.TryTransferSolution(puddleSolution.Value, solution.Value.Comp.Solution, GetFootprintVolume(entity, solution.Value));
+        var dest = solution.Value.Comp.Solution;
+        _solution.TryTransferSolution(puddleSolution.Value, dest, GetFootprintVolume(entity, solution.Value));
 
         // only make footprints if a puddle contains enough of a reagent that can form footprints
         if (puddleSolSol.Volume < _minimumPuddleSize)
@@ -152,7 +153,7 @@ public sealed class FootprintSystem : EntitySystem
             return false;
         }
 
-        _solution.TryTransferSolution(solution.Value, puddleSolSol, FixedPoint2.Max(0, (standing ? entity.Comp.MaxFootVolume : entity.Comp.MaxBodyVolume) - solution.Value.Comp.Solution.Volume));
+        _solution.TryTransferSolution(solution.Value, puddleSolSol, FixedPoint2.Max(0, (standing ? entity.Comp.MaxFootVolume : entity.Comp.MaxBodyVolume) - dest.Volume));
 
         // add back whatever we temporarily took out
         puddleSolSol.AddSolution(addBack, _prototype);
@@ -164,7 +165,7 @@ public sealed class FootprintSystem : EntitySystem
 
     private void FootprintInteraction(Entity<FootprintOwnerComponent> entity, Entity<MapGridComponent> grid, Vector2i tile, EntityCoordinates coordinates, Angle rotation, bool standing)
     {
-        if (!_solution.TryGetSolution(entity.Owner, FootprintOwnerSolution, out var solution, out _))
+        if (!_solution.TryGetSolution(entity.Owner, FootprintOwnerSolution, out var solution, out var sol))
             return;
 
         var volume = standing ? GetFootprintVolume(entity, solution.Value) : GetBodyprintVolume(entity, solution.Value);
@@ -189,13 +190,15 @@ public sealed class FootprintSystem : EntitySystem
         if (!_solution.EnsureSolutionEntity(footprint.Value.Owner, FootprintSolution, out _, out var footprintSolution, MaxFootprintVolumeOnTile))
             return;
 
-        var color = solution.Value.Comp.Solution.GetColor(_prototype).WithAlpha((float)volume / (float)(standing ? entity.Comp.MaxFootprintVolume : entity.Comp.MaxBodyprintVolume) / 2f);
+        var color = sol.GetColor(_prototype).WithAlpha((float)volume / (float)(standing ? entity.Comp.MaxFootprintVolume : entity.Comp.MaxBodyprintVolume) / 2f);
 
-        _solution.TryTransferSolution(footprintSolution.Value, solution.Value.Comp.Solution, volume);
+        _solution.TryTransferSolution(footprintSolution.Value, sol, volume);
 
-        if (footprintSolution.Value.Comp.Solution.Volume >= MaxFootprintVolumeOnTile)
+        // kojima approves
+        var footSol = footprintSolution.Value.Comp.Solution;
+        if (footSol.Volume >= MaxFootprintVolumeOnTile)
         {
-            var footprintSolutionClone = footprintSolution.Value.Comp.Solution.Clone();
+            var footprintSolutionClone = footSol.Clone();
 
             Del(footprint);
 

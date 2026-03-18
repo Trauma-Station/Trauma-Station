@@ -143,7 +143,8 @@ public sealed partial class HealthAnalyzerControl
         PartNameLabel.Visible = isPart;
         DamageLabelHeading.Visible = true;
         DamageLabel.Visible = true;
-        DamageLabel.Text = damageable.TotalDamage.ToString();
+        var damage = _damageable.GetAllDamage((target, damageable));
+        DamageLabel.Text = damage.GetTotal().ToString();
 
         var identity = Identity.Name(target, _entityManager);
         if (isPart)
@@ -153,11 +154,11 @@ public sealed partial class HealthAnalyzerControl
                 : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
         }
 
-        var damageSortedGroups =
-            damageable.DamagePerGroup.OrderByDescending(damage => damage.Value)
-                .ToDictionary(x => x.Key, x => x.Value);
+        var damageSortedGroups = _damageable.GetDamagePerGroup((target, damageable))
+            .OrderByDescending(damage => damage.Value)
+            .ToDictionary(x => x.Key, x => x.Value);
 
-        var damagePerType = damageable.Damage.DamageDict;
+        var damagePerType = damage.DamageDict;
 
         DrawDiagnosticGroups(damageSortedGroups, damagePerType);
 

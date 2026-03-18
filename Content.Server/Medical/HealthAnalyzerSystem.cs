@@ -273,7 +273,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem // Trauma - made
         // <Goob>
         var vitalDamage = FixedPoint2.Zero;
         if (_damageQuery.TryComp(entity, out var damageable))
-            vitalDamage = _threshold.CheckVitalDamage(entity, damageable);
+            vitalDamage = _threshold.CheckVitalDamage((entity, damageable));
         // </Goob>
 
         if (TryComp<UnrevivableComponent>(entity, out var unrevivableComp) && unrevivableComp.Analyzable)

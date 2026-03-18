@@ -55,8 +55,9 @@
     damage:
       types:
         Heat: -3
-      groups:
-        Brute: -3
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
   - type: Butcherable
     spawned:
       - id: FoodMeatRat
@@ -185,8 +186,8 @@
   - type: CombatMode
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 1
+      types:
+        Blunt: 1
   - type: Extractable
     grindableSolutionName: food
   - type: Reactive
