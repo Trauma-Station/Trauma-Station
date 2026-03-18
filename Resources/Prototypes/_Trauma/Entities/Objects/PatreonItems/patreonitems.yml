@@ -130,5 +130,3 @@
   - type: Clothing
     quickEquip: true
     sprite: _Trauma/Objects/Patreon/gribley.rsi
-    slots:
-    - BACK
