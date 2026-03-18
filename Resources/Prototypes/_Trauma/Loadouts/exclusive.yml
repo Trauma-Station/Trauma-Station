@@ -146,3 +146,9 @@
   storage:
     back:
     - PatreonGamingFungus420
+
+- type: loadoutEffectGroup
+  id: Gribley
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 959c5377-d1a9-4c8b-8a64-27e563846352
