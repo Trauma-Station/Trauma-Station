@@ -127,7 +127,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
         var damageRequired = _destructible.DestroyedAt(target);
         if (TryComp<DamageableComponent>(target, out var damageable))
         {
-            damageRequired -= damageable.TotalDamage;
+            damageRequired -= _damageable.GetTotalDamage((target, damageable));
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
 

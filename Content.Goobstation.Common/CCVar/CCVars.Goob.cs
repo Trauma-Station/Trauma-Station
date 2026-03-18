@@ -322,13 +322,6 @@ public sealed partial class GoobCVars
         CVarDef.Create("contests.do_health_contests", true, CVar.REPLICATED | CVar.SERVER);
 
     /// <summary>
-    ///     Toggles all MindContest functions. All mind contests output 1f when false.
-    ///     MindContests are not currently implemented, and are awaiting completion of the Psionic Refactor
-    /// </summary>
-    public static readonly CVarDef<bool> DoMindContests =
-        CVarDef.Create("contests.do_mind_contests", true, CVar.REPLICATED | CVar.SERVER);
-
-    /// <summary>
     ///     The maximum amount that Mass Contests can modify a physics multiplier, given as a +/- percentage
     ///     Default of 0.25f outputs between * 0.75f and 1.25f
     /// </summary>

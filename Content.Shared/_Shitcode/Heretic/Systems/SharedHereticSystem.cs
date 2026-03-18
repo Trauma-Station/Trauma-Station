@@ -14,6 +14,7 @@ using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
@@ -25,6 +26,7 @@ public abstract class SharedHereticSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     [Dependency] protected readonly ISharedPlayerManager PlayerMan = default!;
     [Dependency] protected readonly StatusEffectsSystem Status = default!;
@@ -138,24 +140,9 @@ public abstract class SharedHereticSystem : EntitySystem
         UpdateMindKnowledge((mindId, heretic, store, mind), uid, amount, showText, playSound);
     }
 
-    public bool ObjectivesAllowAscension(Entity<HereticComponent?, MindComponent?> ent)
+    public bool ObjectivesAllowAscension(Entity<HereticComponent> ent)
     {
-        if (!_ascensionRequiresObjectives)
-            return true;
-
-        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2))
-            return false;
-
-        Entity<MindComponent> mindEnt = (ent, ent.Comp2);
-
-        foreach (var objId in ent.Comp1.AllObjectives)
-        {
-            if (_mind.TryFindObjective(mindEnt.AsNullable(), objId, out var obj) &&
-                !_objectives.IsCompleted(obj.Value, mindEnt))
-                return false;
-        }
-
-        return true;
+        return !_ascensionRequiresObjectives || ent.Comp.ObjectivesCompleted;
     }
 
     public bool TryAddKnowledge(Entity<MindComponent?, HereticComponent?> ent,
@@ -242,5 +229,33 @@ public abstract class SharedHereticSystem : EntitySystem
         ProtoId<StoreCategoryPrototype>? category = null,
         ListingDataWithCostModifiers? except = null)
     {
+    }
+
+    public void UpdateObjectiveProgress(Entity<HereticComponent, MindComponent> ent)
+    {
+        // Client throws exceptions when trying to call objective system public api
+        // That's why this thing exists in the first place
+        if (_net.IsClient)
+            return;
+
+        Entity<MindComponent> mindEntity = (ent, ent.Comp2);
+
+        var result = true;
+
+        foreach (var objId in ent.Comp1.AllObjectives)
+        {
+            if (!_mind.TryFindObjective(mindEntity.AsNullable(), objId, out var objective) ||
+                _objectives.IsCompleted(objective.Value, mindEntity))
+                continue;
+
+            result = false;
+            break;
+        }
+
+        if (ent.Comp1.ObjectivesCompleted == result)
+            return;
+
+        ent.Comp1.ObjectivesCompleted = result;
+        Dirty(ent.Owner, ent.Comp1);
     }
 }

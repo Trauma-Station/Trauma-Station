@@ -48,7 +48,7 @@
 ## Parts
 
 - type: entity
-  parent: [ OrganBaseHead, OrganRaptorExternal ]
+  parent: [ OrganBaseHeadBald, OrganRaptorExternal ]
   id: OrganRaptorHead
   components:
   - type: BodyPart

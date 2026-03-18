@@ -1,48 +1,12 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Kara D <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2021 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2022 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Menshin <Menshin@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Kayzel <43700376+KayzelW@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Marcus F <marcus2008stoke@gmail.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Trest <144359854+trest100@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 kurokoTurbo <92106367+kurokoTurbo@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 thebiggestbruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 thebiggestbruh <marcus2008stoke@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using System.Diagnostics.CodeAnalysis;
+// <Trauma>
+using Content.Goobstation.Common.Atmos;
+using Content.Medical.Common.Targeting;
 using Content.Server._Goobstation.Wizard.Systems;
+using Content.Shared._Goobstation.Wizard.Spellblade;
+// </Trauma>
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
-using Content.Shared._Goobstation.Wizard.Spellblade;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Damage.Components;
@@ -52,10 +16,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Shared.Containers;
-
-// Shitmed Change
-using Content.Medical.Common.Targeting;
-using Content.Goobstation.Common.Atmos;
 
 namespace Content.Server.Atmos.EntitySystems
 {
@@ -212,7 +172,7 @@ namespace Content.Server.Atmos.EntitySystems
         /// </summary>
         public float GetFeltLowPressure(EntityUid uid, BarotraumaComponent barotrauma, float environmentPressure)
         {
-            if (barotrauma.HasImmunity || HasComp<SpecialPressureImmunityComponent>(uid))
+            if (barotrauma.HasImmunity || HasComp<SpecialPressureImmunityComponent>(uid)) // Trauma - check pressure immunity
             {
                 return Atmospherics.OneAtmosphere;
             }
@@ -226,7 +186,7 @@ namespace Content.Server.Atmos.EntitySystems
         /// </summary>
         public float GetFeltHighPressure(EntityUid uid, BarotraumaComponent barotrauma, float environmentPressure)
         {
-            if (barotrauma.HasImmunity || HasComp<SpecialPressureImmunityComponent>(uid))
+            if (barotrauma.HasImmunity || HasComp<SpecialPressureImmunityComponent>(uid)) // Trauma - check pressure immunity
             {
                 return Atmospherics.OneAtmosphere;
             }
@@ -281,14 +241,14 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
 
             _timer -= UpdateTimer;
-            // Shitmed Change Start
             var enumerator = EntityQueryEnumerator<BarotraumaComponent, DamageableComponent>();
             while (enumerator.MoveNext(out var uid, out var barotrauma, out var damageable))
             {
                 var totalDamage = FixedPoint2.Zero;
-                foreach (var (damageType, _) in barotrauma.Damage.DamageDict)
+                var damageSpecifier = _damageableSystem.GetAllDamage((uid, damageable));
+                foreach (var (barotraumaDamageType, _) in barotrauma.Damage.DamageDict)
                 {
-                    if (!damageable.Damage.DamageDict.TryGetValue(damageType, out var damage))
+                    if (!damageSpecifier.DamageDict.TryGetValue(barotraumaDamageType, out var damage))
                         continue;
 
                     totalDamage += damage;
@@ -296,7 +256,6 @@ namespace Content.Server.Atmos.EntitySystems
 
                 if (totalDamage >= barotrauma.MaxDamage)
                     continue;
-            // Shitmed Change End
 
                 var pressure = 1f;
 

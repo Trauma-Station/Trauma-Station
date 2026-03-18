@@ -27,7 +27,7 @@
     #  prob: 0.05
     #- id: SubXenoborgs # no
     #  prob: 0.05
-    - id: Heretic
+    - id: SubHeretic
       prob: 0.2
     - id: Devil
       prob: 0.02
@@ -46,7 +46,7 @@
     # <Trauma>
     #- id: SubXenoborgs
     #  prob: 0.05
-    - id: Heretic
+    - id: SubHeretic
       prob: 0.2
     - id: Devil
       prob: 0.02
@@ -65,7 +65,7 @@
     # <Trauma>
     #- id: SubWizard # not real
     #  prob: 0.05
-    - id: Heretic
+    - id: SubHeretic
       prob: 0.2
     - id: Devil
       prob: 0.02
@@ -511,10 +511,12 @@
     children:
       - !type:NestedSelector
         tableId: BasicCalmEventsTable
-      - !type:NestedSelector
-        tableId: BasicAntagEventsTable
-      - !type:NestedSelector
-        tableId: ModerateAntagEventsTable
+      # <Trauma> - antags moved to separate scheduler
+      #- !type:NestedSelector
+      #  tableId: BasicAntagEventsTable
+      #- !type:NestedSelector
+      #  tableId: ModerateAntagEventsTable
+      # </Trauma>
       - !type:NestedSelector
         tableId: CargoGiftsTable
       - !type:NestedSelector

@@ -6,7 +6,7 @@
     metabolizerTypes: [ Animal ]
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseFleshy # Shitmed - Fleshy
   id: OrganAnimal
   abstract: true
   suffix: Animal

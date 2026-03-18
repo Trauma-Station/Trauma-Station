@@ -32,6 +32,13 @@
   - type: MiningPoints # for mining borgs mostly
   - type: SpeechSynthesis
     voice: Borg
+  - type: KnowledgeGrantOnWear # gets added to the brain, modified when picking borg type
+    skills:
+      # robot basic stuff
+      FabricationKnowledge: 20
+      WallsKnowledge: 10
+      InfrastructureKnowledge: 10
+      ElectronicsKnowledge: 10
   # </Trauma>
   - type: Reactive
     groups:
@@ -618,3 +625,11 @@
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
+  # <Trauma>
+  - type: KnowledgeGrantOnWear # gets added to the brain
+    skills:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 26
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
+  # </Trauma>

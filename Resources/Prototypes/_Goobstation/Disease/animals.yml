@@ -17,11 +17,11 @@
     possibleTypes:
     - Bacterial
     - Viral
-  - type: DiseaseOnHit
-    spreadParams:
-      chance: 0.2 # higher chance for plague mice
-      power: 1
-      spreadType: Blood
+  # - type: DiseaseOnHit - 1984
+  #   spreadParams:
+  #     chance: 0.2 # higher chance for plague mice
+  #     power: 1
+  #     spreadType: Blood
 
 - type: entity
   parent: MobMousePlague

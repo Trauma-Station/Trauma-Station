@@ -4,8 +4,8 @@
   components:
   - type: StationEvent
     weight: 3
-    earliestStart: 30
-    reoccurrenceDelay: 20
+    earliestStart: 60
+    reoccurrenceDelay: 30
     minimumPlayers: 40
     duration: null
   - type: SpaceSpawnRule

@@ -101,7 +101,7 @@ public abstract partial class SharedKnowledgeSystem
     /// Returns null if the skill cannot be picked or the mastery is invalid.
     /// </summary>
     public int? SkillCost(EntProtoId id, int mastery)
-        => SkillCosts(id) is {} costs && mastery < costs.Length
+        => SkillCosts(id) is {} costs && mastery >= 0 && mastery < costs.Length
             ? costs[mastery]
             : null;
 }

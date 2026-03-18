@@ -5,5 +5,7 @@
   targetNode: final
   objectType: Item
   theory:
-    HandmadeKnowledge: 2
-    TechnologyKnowledge: 3
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 1
+    ElectronicsKnowledge: 1

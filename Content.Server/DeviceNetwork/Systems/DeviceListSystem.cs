@@ -33,28 +33,32 @@ public sealed class DeviceListSystem : SharedDeviceListSystem
         if (!Resolve(listUid, ref listComp))
             return;
 
-        var config_query = GetEntityQuery<NetworkConfiguratorComponent>();
-        foreach (var conf_enty in listComp.Configurators)
+        var configQuery = GetEntityQuery<NetworkConfiguratorComponent>();
+        foreach (var conf in listComp.Configurators)
         {
-            if (Deleted(conf_enty)) continue;
-            if (!config_query.TryGetComponent(conf_enty, out var conf_comp))
+            if (Deleted(conf)) continue;
+            if (!configQuery.TryGetComponent(conf, out var comp))
             {
-                Log.Error("Failed to find NetworkConfiguratorComponent in DeviceListComponent Configurators");
+                Log.Error($"Failed to find NetworkConfiguratorComponent of {ToPrettyString(conf)} in {ToPrettyString(listUid)} Configurators");
                 continue;
             }
-            DebugTools.Assert(conf_comp.ActiveDeviceList == listUid);
+            DebugTools.Assert(comp.ActiveDeviceList == listUid);
         }
 
-        var device_query = GetEntityQuery<DeviceNetworkComponent>();
-        foreach (var dev_enty in listComp.Devices)
+        var deviceQuery = GetEntityQuery<DeviceNetworkComponent>();
+        foreach (var dev in listComp.Devices)
         {
-            if (Deleted(dev_enty)) continue;
-            if (!device_query.TryGetComponent(dev_enty, out var dev_comp))
+            if (Deleted(dev))
             {
-                Log.Error("Failed to find DeviceNetworkComponent in DeviceListComponent Devices");
+                Log.Error($"Found deleted device {ToPrettyString(dev)} in Devices of {ToPrettyString(listUid)}!");
                 continue;
             }
-            DebugTools.Assert(dev_comp.DeviceLists.Contains(listUid), $"{ToPrettyString(listUid)} is missing from {ToPrettyString(dev_enty)}'s device list");
+            if (!deviceQuery.TryGetComponent(dev, out var comp))
+            {
+                Log.Error($"Failed to find DeviceNetworkComponent of {ToPrettyString(dev)} in {ToPrettyString(listUid)} Devices");
+                continue;
+            }
+            DebugTools.Assert(comp.DeviceLists.Contains(listUid), $"{ToPrettyString(listUid)} is missing from {ToPrettyString(dev)}'s device list");
         }
     }
 

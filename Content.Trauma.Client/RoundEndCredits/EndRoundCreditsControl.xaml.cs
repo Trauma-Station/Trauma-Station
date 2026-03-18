@@ -134,6 +134,7 @@ public sealed partial class EndRoundCreditsControl : ScrollContainer
                 VerticalExpand = true,
                 Stretch = SpriteView.StretchMode.Fill,
                 Margin = new Thickness(10, 0, 10, 5),
+                HorizontalAlignment = HAlignment.Center,
             });
         }
 
@@ -146,6 +147,7 @@ public sealed partial class EndRoundCreditsControl : ScrollContainer
             FontOverride = font,
             FontColorOverride = color,
             Margin = new Thickness(15, 0, 15, 15),
+            HorizontalAlignment = HAlignment.Center,
         };
 
         box.AddChild(text);

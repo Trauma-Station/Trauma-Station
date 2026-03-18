@@ -90,6 +90,27 @@
   abstract: true
   suffix: guidebook
   components:
+  # <Trauma>
+  - type: Edible # book is moth food
+    requiresSpecialDigestion: true
+    delay: 15
+    forceFeedDelay: 15
+  - type: BadFood
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: FlavorProfile
+    flavors:
+    - paper
+    ignoreReagents:
+    - Fiber
+  - type: CosmicTransmutable
+    transmuteTo: BookCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Misc/books.rsi
   - type: Tag
@@ -108,28 +129,7 @@
         Blunt: 1
   - type: DamageOtherOnHit
     damage:
-      types:
-  # Goobstation Edit Start - Moth food
-  - type: Edible
-    requiresSpecialDigestion: true
-    delay: 15
-    forceFeedDelay: 15
-  - type: BadFood
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 10
-  - type: FlavorProfile
-    flavors:
-    - paper
-    ignoreReagents:
-    - Fiber
-  # Goobstation Edit End
-  - type: CosmicTransmutable # Trauma
-    transmuteTo: BookCosmicCult
+      types: {}
 
 - type: entity
   id: BookSpaceEncyclopedia

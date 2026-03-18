@@ -153,18 +153,20 @@ public sealed class CosmicMonumentSystem : EntitySystem
     }
 
     /// <summary>
-    /// Makes it impossible to place or activate a monument if evac docks to the station.
+    /// Makes it impossible to place or activate a monument if evac docks to the station. Unless the monument is already active, in which case the evac shouldn't come anyway.
     /// </summary>
     private void OnEvacDocked(ref EmergencyShuttleDockedEvent args)
     {
-        RemoveAllMonumentMarks();
-
-        var query = EntityQueryEnumerator<MonumentComponent>(); // REmove any existing monuments
+        var query = EntityQueryEnumerator<MonumentComponent>(); // Remove any existing monuments
         while (query.MoveNext(out var uid, out var comp))
         {
+            if (comp.Active) return; // Should only have one of those at a time, so if one is already active, we don't do anything
+
             Spawn(comp.DespawnVfx, Transform(uid).Coordinates);
             QueueDel(uid);
         }
+
+        RemoveAllMonumentMarks();
     }
 
     //todo this can probably be mostly moved to shared but my brain isn't cooperating w/ that rn

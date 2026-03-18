@@ -187,26 +187,24 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Healium
           max: 24
         damage:
-          groups:
-            Burn: -2
-            Toxin: -5
-            Brute: -2
-      - !type:HealthChange
+          Burn: -2
+          Toxin: -5
+          Brute: -2
+      - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Healium
           min: 24
         damage:
-          groups:
-            Burn: -20
-            Toxin: -50
-            Brute: -20
+          Burn: -20
+          Toxin: -50
+          Brute: -20
       - !type:PopupMessage
         conditions:
         - !type:ReagentCondition
@@ -238,26 +236,24 @@
           min: 4
     Respiration:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Healium
           max: 24
         damage:
-          groups:
-            Burn: -2
-            Toxin: -5
-            Brute: -2
-      - !type:HealthChange
+          Burn: -2
+          Toxin: -5
+          Brute: -2
+      - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Healium
           min: 24
         damage:
-          groups:
-            Burn: -20
-            Toxin: -50
-            Brute: -20
+          Burn: -20
+          Toxin: -50
+          Brute: -20
       - !type:PopupMessage
         conditions:
         - !type:ReagentCondition

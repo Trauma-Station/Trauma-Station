@@ -9,7 +9,7 @@
       required: true
       default: [ MobIPCHeadDefault ]
     enum.HumanoidVisualLayers.Hair:
-      limit: 1
+      limit: 0
       required: false
     enum.HumanoidVisualLayers.Face:
       limit: 1
@@ -317,7 +317,7 @@
     - IPCPump
 
 - type: entity
-  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganIPCExternal ]
+  parent: [ OrganBaseHeadSexed, OrganBaseHeadBald, OrganIPCExternal ]
   id: OrganIPCHead
   components:
   - type: BodyPart

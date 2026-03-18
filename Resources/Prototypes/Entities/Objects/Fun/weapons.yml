@@ -319,6 +319,15 @@
       sprite: Objects/Fun/card_sword.rsi
     shape:
     - 0,0,1,3
+  - type: Parry
+    maxParries: 1
+    maxReflects: 0
+    parryMinSkill: 0
+    soundOnParry:
+      path: /Audio/Items/Toys/card_tube_bonk.ogg
+      params:
+        variation: 0.2
+        volume: -11
 
 - type: entity
   parent: [ BaseItem, BaseToySword ]

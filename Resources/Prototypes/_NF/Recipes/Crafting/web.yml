@@ -4,13 +4,12 @@
   startNode: start
   targetNode: end
   category: construction-category-tools
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  practical:
+    SpiderCraftKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -19,13 +18,12 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  practical:
+    SpiderCraftKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -34,13 +32,12 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  practical:
+    SpiderCraftKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -49,11 +46,10 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  practical:
+    SpiderCraftKnowledge: 3
   # </Trauma>

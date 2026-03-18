@@ -26,13 +26,13 @@ public sealed partial class SkillControl : BoxContainer
         IncreaseButton.OnPressed += _ => OnChangeMastery?.Invoke(+1);
     }
 
-    public void SetMastery(string name, int mastery)
+    public void SetMastery(string name, int mastery, int racialBase = 0)
     {
         Mastery = mastery;
         var cost = _costs[mastery];
         MasteryLabel.Text = Loc.GetString("knowledge-editor-mastery", ("mastery", name), ("cost", cost));
         IncreaseButton.Disabled = mastery >= _costs.Length - 1;
-        DecreaseButton.Disabled = mastery <= 0;
+        DecreaseButton.Disabled = mastery <= racialBase;
         var color = mastery <= 0 ? Color.Gray : Color.White;
         MasteryLabel.Modulate = color;
         SkillLabel.Modulate = color;
