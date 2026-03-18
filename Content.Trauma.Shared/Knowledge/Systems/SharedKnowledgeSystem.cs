@@ -552,7 +552,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return (uid, comp);
 
         // otherwise try use the cached brain
-        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent || !ent.IsValid())
+        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent || TerminatingOrDeleted(ent))
             return null;
 
         if (_containerQuery.TryComp(ent, out var container))

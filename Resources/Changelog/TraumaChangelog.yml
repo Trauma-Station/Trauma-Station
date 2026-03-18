@@ -4874,3 +4874,12 @@ Entries:
   id: 572
   time: '2026-03-18T10:20:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1404
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Failing to write a prayer in an empty scroll now opens the Fear and Hunger
+      wiki for you.
+  id: 573
+  time: '2026-03-18T13:03:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1410
