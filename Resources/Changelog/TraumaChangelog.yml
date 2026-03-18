@@ -4847,3 +4847,57 @@ Entries:
   id: 569
   time: '2026-03-18T09:51:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1406
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added a reset button to the skills editor, use it if your skills are
+      messed up etc.
+  - type: Fix
+    message: Fixed skill editor's cost number including the species skills.
+  id: 570
+  time: '2026-03-18T10:08:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1414
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Command and Security can no longer be blind, mute, narcoleptic or
+      wheelchair bound.
+  id: 571
+  time: '2026-03-18T10:14:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1416
+- author: Gribley-0
+  changes:
+  - type: Add
+    message: Changed old knowledge with new in nukies (fabrication)
+  id: 572
+  time: '2026-03-18T10:20:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1404
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Failing to write a prayer in an empty scroll now opens the Fear and Hunger
+      wiki for you.
+  id: 573
+  time: '2026-03-18T13:03:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1410
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: End round credits hides the sidebar now
+  - type: Tweak
+    message: End round credits are a bit slower now
+  id: 574
+  time: '2026-03-18T18:02:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1419
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Made salicylic acid always heal the same midlevel amount, but it no longer
+      has a huge damage requirement to work.
+  id: 575
+  time: '2026-03-18T19:03:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1420

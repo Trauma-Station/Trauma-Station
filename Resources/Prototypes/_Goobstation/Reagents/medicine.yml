@@ -794,28 +794,8 @@
       effects:
       - !type:EvenHealthChange
         damage:
-          Brute: -12
+          Brute: -4
         conditions:
-        - !type:TypedDamageCondition
-          damage:
-            types:
-              Blunt: 25
-              Slash: 25
-              Piercing: 25
-        - !type:ReagentCondition
-          reagent: SalicylicAcid
-          max: 25
-      - !type:EvenHealthChange
-        damage:
-          Brute: -3
-        conditions:
-        - !type:TypedDamageCondition
-          damage:
-            types:
-              Blunt: 25
-              Slash: 25
-              Piercing: 25
-          inverted: true
         - !type:ReagentCondition
           reagent: SalicylicAcid
           max: 25
