@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.EmptyScroll;
 using Robust.Client.UserInterface;
-using Robust.Shared.Player;
 
 namespace Content.Trauma.Client.EmptyScroll;
 
@@ -11,7 +10,6 @@ namespace Content.Trauma.Client.EmptyScroll;
 /// </summary>
 public sealed class FungerWikiSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IUriOpener _uri = default!;
 
     public const string Wiki = "https://fearandhunger.fandom.com/wiki/Empty_Scroll";
