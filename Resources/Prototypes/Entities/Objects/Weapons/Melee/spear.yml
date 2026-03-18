@@ -47,7 +47,7 @@
       visible: false
   - type: MeleeWeapon
     # <Trauma>
-    canWideSwing: false
+    canWideSwing: true
     range: 2.2
     attackRate: 0.6
     animationRotation: -135
