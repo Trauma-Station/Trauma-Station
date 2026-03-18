@@ -20,8 +20,7 @@
     #fabrication and furniture for alter building
       LiteracyKnowledge: 26
       MagicalLiteracyKnowledge: 50
-      FurnitureKnowledge: 26
-      FabricationKnowledge: 26
+      FurnitureKnowledge: 1
 
 - type: entity
   parent: BaseSkillChip
