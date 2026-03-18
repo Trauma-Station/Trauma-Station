@@ -115,6 +115,7 @@
     - On
     - Off
   - type: DeviceLinkSource
+    range: 200
     ports:
     - ConnectionStatus
     - FieldConnected
