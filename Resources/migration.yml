@@ -107,6 +107,9 @@ MaterialHideBear: MaterialHideCorgi
 # 2026-03-12 this being roundstart is slop
 MedicalBiofabricator: null
 MedicalBiofabMachineBoard: null
+
+# 2026-03-13 necrosol was removed
+NecrosolChemistryBottle: ArcryoxChemistryBottle
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

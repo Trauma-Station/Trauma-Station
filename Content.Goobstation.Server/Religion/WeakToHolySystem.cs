@@ -19,7 +19,7 @@ namespace Content.Goobstation.Shared.Religion;
 
 public sealed class WeakToHolySystem : SharedWeakToHolySystem
 {
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly HashSet<Entity<ShouldTakeHolyComponent>> _toUpdate = new();
@@ -151,15 +151,13 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
                 continue;
             weakToHoly.NextPassiveHealTick = _timing.CurTime + weakToHoly.HealTickDelay;
 
-            if (!TryComp<DamageableComponent>(uid, out var damageable))
-                continue;
-
-            if (TerminatingOrDeleted(uid) || !damageable.Damage.DamageDict.TryGetValue("Holy", out _))
+            var damage = _damageable.GetAllDamage(uid);
+            if (TerminatingOrDeleted(uid) || damage.DamageDict.GetValueOrDefault("Holy") <= 0)
                 continue;
 
             // Rune healing vs passive healing
             var healing = weakToHoly.IsColliding ? weakToHoly.HealAmount : weakToHoly.PassiveAmount;
-            _damageableSystem.ChangeDamage(uid, healing, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            _damageable.ChangeDamage(uid, healing, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
         }
 
         if (_toUpdate.Count == 0)

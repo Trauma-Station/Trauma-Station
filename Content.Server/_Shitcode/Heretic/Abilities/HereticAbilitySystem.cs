@@ -451,7 +451,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                                 respirator);
                         }
 
-                        if (damageable != null && damageable.TotalDamage < FixedPoint2.Epsilon)
+                        if (damageable != null && _dmg.GetTotalDamage((uid, damageable)) < FixedPoint2.Epsilon)
                         {
                             if (bodyQuery.TryComp(uid, out var body))
                                 _bodyRestore.RestoreBody((uid, body));

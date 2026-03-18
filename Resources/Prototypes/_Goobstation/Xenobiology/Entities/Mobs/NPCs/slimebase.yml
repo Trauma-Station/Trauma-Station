@@ -112,8 +112,8 @@
         probability: 0.25
   - type: MeleeWeapon
     damage:
-      groups:
-        Burn: 5
+      types:
+        Heat: 5
     animation: WeaponArcPunch
     soundHit: /Audio/Weapons/punch3.ogg
   - type: InteractionPopup

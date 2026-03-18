@@ -22,7 +22,7 @@ guide-entry-rules-r3 = R3
 guide-entry-rules-r4 = R4
 guide-entry-rules-r5 = R5
 
-guide-entry-rules-role-speciifc = Role-Specific Rules
+guide-entry-rules-role-specific = Role-Specific Rules
 guide-entry-rules-s1 = S1
 guide-entry-rules-s2 = S2
 guide-entry-rules-s3 = S3

@@ -11,6 +11,7 @@
   - type: EnterBodyPart
     category: Torso
   - type: TriggerInsideBodyPart
+    popup: entity-effect-popup-mothmaggot-maturing
     keyOut: mature
     delay: 40
   - type: EntityEffectOnTrigger

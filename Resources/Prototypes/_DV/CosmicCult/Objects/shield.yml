@@ -17,9 +17,14 @@
   - type: CosmicEquipment
   - type: PassiveDamage
     damage:
-      groups: # .25 per second per type
-        Brute: -0.75
-        Burn: -1
+      types: # .25 per second per type
+        Blunt: -0.25
+        Slash: -0.25
+        Piercing: -0.25
+        Heat: -0.25
+        Cold: -0.25
+        Shock: -0.25
+        Caustic: -0.25
   - type: HeldSpeedModifier # Heavy indeed
     walkModifier: 0.8
     sprintModifier: 0.8

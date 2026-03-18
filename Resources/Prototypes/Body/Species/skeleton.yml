@@ -161,14 +161,11 @@
       # even if it's a meme - I did research
       methods: [ Touch ]
       effects: # TODO: when magic is around - make a milk transformation to a skeleton monster
-      - !type:HealthChange
-        ignoreBlockers: true # Goob - What do broken bones even mean in the context of a skeleton?
-        splitDamage: SplitEnsureAll # Goob
-        damage:
-          groups:
-            Burn: -4 # Goob - was -1
-            Brute: -3 # Goob - was -0.75
-            Metaphysical: -2 # Gameplay: skeletons need some way to heal holy damage. Lore: milk is an unholy liquid that shuns the light of god. (/j)
+      - !type:EvenHealthChange
+        damage: # these groups are the only 3 possible ways to damage a skeleton. numerical values obviously up to discussion
+          Burn: -1
+          Brute: -0.75
+          Metaphysical: -2 # Gameplay: skeletons need some way to heal holy damage. Lore: milk is an unholy liquid that shuns the light of god. (/j)
       - !type:PopupMessage
         type: Local
         visualType: Large
