@@ -123,12 +123,12 @@
   parent: ClothingBackpackSatchel
   id: PatreonGribley
   name: WormPack
-  description: I think it just moved.. I think it whispered something...
+  description: I think it just moved...
   components:
   - type: Sprite
-    sprite: Resources/Textures/_Trauma/Objects/Patreon/gribley.rsi
+    sprite: _Trauma/Objects/Patreon/gribley.rsi
   - type: Clothing
     quickEquip: true
-    sprite: Resources/Textures/_Trauma/Objects/Patreon/gribley.rsi
+    sprite: _Trauma/Objects/Patreon/gribley.rsi
     slots:
     - BACK
