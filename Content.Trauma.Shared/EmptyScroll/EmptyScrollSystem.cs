@@ -55,7 +55,7 @@ public sealed class EmptyScrollSystem : EntitySystem
         }
         else if (args.User is {} user)
         {
-            RaiseNetworkEvent(user, new PrayerFailedEvent());
+            RaiseNetworkEvent(new PrayerFailedEvent(), user);
         }
 
         LocId msg = "empty-scroll-prayer-" + (answered ? "answered" : "failed");
