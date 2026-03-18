@@ -18,10 +18,10 @@
   - type: XenomorphQueen
   - type: TailLash
     tailDamage:
-      groups:
-        Brute: 5
+      types:
+        Slash: 5
     inject:
-      ChloralHydrate: 10 # Goobstation - new chemical
+      ChloralHydrate: 10
   - type: TypingIndicator
     proto: alien_royal
   - type: Fixtures
@@ -50,8 +50,10 @@
     baseSprintSpeed: 2.5
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 50
+      types:
+        Blunt: 10
+        Slash: 20
+        Piercing: 20
     altDisarm: false
     canWideSwing: true
   - type: Deathgasp
@@ -62,11 +64,9 @@
   - type: LanguageSpeaker
     speaks:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     - TauCetiBasic
     understands:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     - Hissing
     - Draconic
     - TauCetiBasic

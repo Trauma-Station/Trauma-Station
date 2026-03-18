@@ -46,7 +46,7 @@
     soundHit:
       collection: MetalThud
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Heat: 20
     UntrainedUseString: nullrod-untrained-usage-popup
@@ -63,7 +63,7 @@
   - type: Item
     size: Large
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Slash: 20
     UntrainedUseString: nullrod-holyclaymore-untrained-usage-popup
@@ -85,9 +85,12 @@
   - type: Wieldable
   - type: LeechOnMarker
     leech:
-      groups:
-        Brute: -20
-        Airloss: -10
+      types:
+        Blunt: -6.66
+        Slash: -6.66
+        Piercing: -6.66
+        Asphyxiation: -5
+        Bloodloss: -5
   - type: Clothing
     sprite: _ShitChap/Objects/Weapons/Nullrod/holyclaymore.rsi
     slots:
@@ -161,7 +164,7 @@
     slots:
     - NECK # Trauma - Rosary wearable on neck
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Blunt: 20
     UntrainedUseString: nullrod-rosary-untrained-usage-popup
@@ -169,9 +172,10 @@
     repeatPrayer: true
   - type: HealNearOnPray # These numbers look high but WoundMed...
     healing:
-      groups:
-        Brute: -22.5
       types:
+        Blunt: -7.5
+        Slash: -7.5
+        Piercing: -7.5
         Heat: -7.5
         Cold: -7.5
         Shock: -7.5
@@ -217,9 +221,10 @@
       path: /Audio/Items/crowbar.ogg
   - type: Unremoveable
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
-        Burn: 40
+        Heat: 20
+        Shock: 20
     UntrainedUseString: nullrod-godhand-untrained-usage-popup
   - type: Execution # It's not sharp per se, but who's against executing heretics with a giant flaming hand from god?
     doAfterDuration: 4.0
@@ -239,7 +244,7 @@
   description: They say fear is the true mind killer, but stabbing them in the head works too. Slows you down and speeds you up randomly.
   components:
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Slash: 20
     UntrainedUseString: nullrod-arrythmicknife-untrained-usage-popup
@@ -281,7 +286,7 @@
   description: A long, tall staff made of polished wood. Traditionally used in ancient old-Earth martial arts, now used to harass the clown. #this should be able to parry eventually.
   components:
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Blunt: 20
     UntrainedUseString: nullrod-monkstaff-untrained-usage-popup
@@ -317,8 +322,8 @@
   id: AtheistFedora
   description: The brim of the hat is as sharp as your wit. Throwing it at someone would hurt almost as much as disproving the existence of God.
   components:
-  - type: Nullrod # Note - These are damages, not damage types. Specify blunt or something not brute.
-    DamageOnUntrainedUse:
+  - type: Nullrod
+    damageOnUntrainedUse:
       types:
         Slash: 20
     UntrainedUseString: nullrod-atheistfedora-untrained-usage-popup
@@ -367,10 +372,10 @@
   id: Bulwark
   description: An absolutely enormous two handed shield, very difficult to use if not planted in place.
   components:
-  - type: Nullrod # Note - These are damages, not damage types. Specify blunt or something not brute.
-    DamageOnUntrainedUse:
-      types:
-        Stamina: 200
+  - type: Nullrod
+    damageOnUntrainedUse:
+      types: {}
+    staminaOnUntrainedUse: 200
     UntrainedUseString: nullrod-bulwark-untrained-usage-popup
   - type: MeleeWeapon
     attackRate: 0.5
@@ -448,8 +453,8 @@
   - type: Sprite
     sprite: _ShitChap/Objects/Weapons/Nullrod/honkmother.rsi
     state: icon
-  - type: Nullrod # Note - These are damages, not damage types. Specify blunt or something not brute.
-    DamageOnUntrainedUse:
+  - type: Nullrod
+    damageOnUntrainedUse:
       types:
         Radiation: 20
     UntrainedUseString: nullrod-honkmother-untrained-usage-popup
@@ -554,7 +559,7 @@
       path: /Audio/Weapons/smash.ogg
   - type: Unremoveable
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Blunt: 50
     UntrainedUseString: nullrod-uristhand-untrained-usage-popup
@@ -582,7 +587,7 @@
         volume: 1
   - type: MeleeRequiresWield
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Slash: 50
     UntrainedUseString: nullrod-chainsaw-untrained-usage-popup
@@ -630,7 +635,7 @@
   description: The first of two huge pistols, capable of firing regenerating silver bullets. Incapable of firing without its sister gun.
   components:
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Heat: 20
     UntrainedUseString: nullrod-pistol-untrained-usage-popup
@@ -730,7 +735,7 @@
   description: An ancient spear made of brass, I mean gold, I mean bronze. It looks highly mechanical.
   components:
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Piercing: 20
     UntrainedUseString: nullrod-spear-untrained-usage-popup

@@ -59,7 +59,7 @@ public sealed partial class BlobCoreComponent : Component
         {
             BlobChemType.BlazingOil, new DamageSpecifier()
             {
-                DamageDict = new Dictionary<string, FixedPoint2>
+                DamageDict = new()
                 {
                     { "Heat", 15 },
                     { "Structural", 150 },
@@ -69,7 +69,7 @@ public sealed partial class BlobCoreComponent : Component
         {
             BlobChemType.ReactiveSpines, new DamageSpecifier()
             {
-                DamageDict = new Dictionary<string, FixedPoint2>
+                DamageDict = new()
                 {
                     { "Blunt", 8 },
                     { "Slash", 8 },
@@ -81,7 +81,7 @@ public sealed partial class BlobCoreComponent : Component
         {
             BlobChemType.ExplosiveLattice, new DamageSpecifier()
             {
-                DamageDict = new Dictionary<string, FixedPoint2>
+                DamageDict = new()
                 {
                     { "Heat", 5 },
                     { "Structural", 150 },
@@ -91,7 +91,7 @@ public sealed partial class BlobCoreComponent : Component
         {
             BlobChemType.ElectromagneticWeb, new DamageSpecifier()
             {
-                DamageDict = new Dictionary<string, FixedPoint2>
+                DamageDict = new()
                 {
                     { "Structural", 150 },
                     { "Heat", 20 },
@@ -101,7 +101,7 @@ public sealed partial class BlobCoreComponent : Component
         {
             BlobChemType.RegenerativeMateria, new DamageSpecifier()
             {
-                DamageDict = new Dictionary<string, FixedPoint2>
+                DamageDict = new()
                 {
                     { "Structural", 150 },
                     { "Poison", 15 },

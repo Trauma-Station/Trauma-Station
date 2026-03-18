@@ -59,11 +59,11 @@ An important thing to note, winter clothing (and hardsuits) will make cryogenic 
   Cryo pods separate out each reagent from the beaker in the pod, injecting a small, steady amount of each into the patient.  This allows for medicine to be administered twice as efficiently than with injection or oral administration.
 
 <GuideReagentEmbed Reagent="Aloxadone"/>
+<GuideReagentEmbed Reagent="Arcryox"/>
 <GuideReagentEmbed Reagent="Cryoxadone"/>
 <GuideReagentEmbed Reagent="Doxarubixadone"/>
 <GuideReagentEmbed Reagent="Dexalin"/>
 <GuideReagentEmbed Reagent="Leporazine"/>
-<GuideReagentEmbed Reagent="Necrosol"/>
 <GuideReagentEmbed Reagent="Opporozidone"/>
 
 </Document>

@@ -342,9 +342,10 @@
     damageContainers:
     - ClowncarDamageContainer
     damage:
-      groups:
-        Brute: -150
       types:
+        Blunt: -50
+        Slash: -50
+        Piercing: -50
         Heat: -10
         Shock: -10
     healingBeginSound:

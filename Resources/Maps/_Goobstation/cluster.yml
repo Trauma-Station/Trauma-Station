@@ -65908,13 +65908,6 @@ entities:
     - type: Transform
       pos: -4.7042303,19.424007
       parent: 2
-- proto: RubberStampMime
-  entities:
-  - uid: 9945
-    components:
-    - type: Transform
-      pos: -13.33112,-29.043272
-      parent: 2
 - proto: Saw
   entities:
   - uid: 9947

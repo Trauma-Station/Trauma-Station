@@ -453,12 +453,12 @@
     - Alive
     - Critical
     - Dead
-    damageCap: 0
     damage:
       types:
         Heat: -3
-      groups:
-        Brute: -3
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
   - type: StatusEffects
     allowed:
     - PressureImmunity

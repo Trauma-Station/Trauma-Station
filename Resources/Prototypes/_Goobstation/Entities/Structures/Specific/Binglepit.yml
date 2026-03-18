@@ -77,11 +77,12 @@
   - type: PassiveDamage #passive Healing
     damage:
       types:
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
         Heat: -1
         Shock: -1
         Structural: -1
-      groups:
-        Brute: -3
   - type: AntiRottingContainer
   - type: SpawnOnDespawn
     prototype: CrateFunBingleLoot
