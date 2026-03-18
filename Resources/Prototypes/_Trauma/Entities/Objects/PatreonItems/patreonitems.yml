@@ -127,6 +127,3 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Patreon/gribley.rsi
-  - type: Clothing
-    quickEquip: true
-    sprite: _Trauma/Objects/Patreon/gribley.rsi
