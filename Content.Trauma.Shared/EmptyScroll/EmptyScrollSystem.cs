@@ -55,8 +55,8 @@ public sealed class EmptyScrollSystem : EntitySystem
         }
         else
         {
-            var ev = new PrayerFailedEvent(args.User);
-            RaiseNetworkEvent(user, ev);
+            var ev = new PrayerFailedEvent();
+            RaiseNetworkEvent(args.User, ev);
         }
 
         LocId msg = "empty-scroll-prayer-" + (answered ? "answered" : "failed");
@@ -111,7 +111,4 @@ public sealed class EmptyScrollSystem : EntitySystem
 /// Event broadcast when you don't write a valid prayer and get nothing.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class PrayerFailedEvent(EntityUid? user) : EntityEventArgs
-{
-    public readonly EntityUid? User = user;
-}
+public sealed class PrayerFailedEvent : EntityEventArgs;

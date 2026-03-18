@@ -25,7 +25,6 @@ public sealed class FungerWikiSystem : EntitySystem
 
     private void OnPrayerFailed(PrayerFailedEvent args)
     {
-        if (args.User == _player.LocalEntity)
-            _uri.OpenUri(Wiki);
+        _uri.OpenUri(Wiki);
     }
 }
