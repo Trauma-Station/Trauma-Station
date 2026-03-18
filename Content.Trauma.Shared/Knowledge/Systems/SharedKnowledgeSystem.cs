@@ -555,7 +555,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent || !ent.IsValid())
             return null;
 
-        return (ent, _containerQuery.Comp(ent));
+        if (_containerQuery.TryComp(ent, out var container))
+            return (ent, container);
+
+        Log.Error($"Knowledge entity {ToPrettyString(ent)} of holder {ToPrettyString(uid)} did not have KnowledgeContainerComponent!");
+        return null;
     }
 
     /// <summary>

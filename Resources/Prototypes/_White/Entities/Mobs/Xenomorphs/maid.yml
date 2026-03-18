@@ -30,8 +30,9 @@
       190: 0.6
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 10
+      types:
+        Blunt: 5
+        Slash: 5
   - type: OwOAccent
   - type: Pacified
   - type: GhostRole

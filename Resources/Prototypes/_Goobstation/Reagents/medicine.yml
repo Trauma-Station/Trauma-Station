@@ -38,14 +38,13 @@
         conditions:
         - !type:MobStateCondition
           mobstate: Dead
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -20
-            Burn: -20
-            Airloss: -20
-            Toxin: -20
-            Genetic: -20
+          Brute: -20
+          Burn: -20
+          Airloss: -20
+          Toxin: -20
+          Genetic: -20
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -195,10 +194,9 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -1.5 # Lower than Bicardine, offloading healing onto mitotrophin
+          Brute: -1.5 # Lower than Bicardine, offloading healing onto mitotrophin
       - !type:TakeStaminaDamage
         conditions:
         - !type:ReagentCondition
@@ -276,11 +274,11 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups: # powerful due to abundance of food, but very inconvienient to use
-            Brute: -4
-            Burn: -2
+          # powerful due to abundance of food, but very inconvienient to use
+          Brute: -4
+          Burn: -2
       - !type:ModifyBleed
         amount: -0.5
       - !type:ModifyBloodLevel
@@ -343,10 +341,9 @@
       - !type:CleanBloodstream
         excluded: [Musiver] # Trauma - Exclude from chempurge
         cleanseRate: 1
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: 0.1
+          Brute: 0.1
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -420,10 +417,9 @@
     Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -1 # intentionally slow
+          Brute: -1 # intentionally slow
       - !type:HealthChange
         damage:
           types:
@@ -474,10 +470,9 @@
         damage:
           types:
             Poison: -3
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: 0.5
+          Brute: 0.5
 
 - type: reagent
   id: Monover
@@ -504,10 +499,9 @@
         damage:
           types:
             Poison: -3 # slightly better than dylo, but the side effect is easy to fall into
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: 1
+          Brute: 1
         conditions:
         - !type:BloodstreamCountCondition
           min: 1 # potential use for checking bloodstream cleanliness?
@@ -603,9 +597,14 @@
           max: 10
         - !type:TypedDamageCondition
           damage:
-            groups:
-              Brute: 1
-              Burn: 1
+            types:
+              Blunt: 1
+              Slash: 1
+              Piercing: 1
+              Heat: 1
+              Cold: 1
+              Shock: 1
+              Caustic: 1
           inverted: true
 
 # Low-effect meds
@@ -628,9 +627,6 @@
     Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:TotalDamageCondition
-          min: 50
         damage:
           types:
             Poison: -1
@@ -664,10 +660,9 @@
           reagent: Ibuprofen
           min: 15
         amount: 0.04
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -1
+          Brute: -1
       - !type:AdjustTemperature # 1/10 of lepo
         conditions:
         - !type:TemperatureCondition
@@ -771,10 +766,9 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Toxin: -2
+          Toxin: -2
       - !type:HealthChange
         damage:
           types:
@@ -798,35 +792,36 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -12
+          Brute: -12
         conditions:
         - !type:TypedDamageCondition
           damage:
-            groups:
-              Brute: 25
+            types:
+              Blunt: 25
+              Slash: 25
+              Piercing: 25
         - !type:ReagentCondition
           reagent: SalicylicAcid
           max: 25
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -3
+          Brute: -3
         conditions:
         - !type:TypedDamageCondition
           damage:
-            groups:
-              Brute: 25
+            types:
+              Blunt: 25
+              Slash: 25
+              Piercing: 25
           inverted: true
         - !type:ReagentCondition
           reagent: SalicylicAcid
           max: 25
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: 3
+          Brute: 3
         conditions:
         - !type:ReagentCondition
           reagent: SalicylicAcid
@@ -856,28 +851,32 @@
         conditions:
         - !type:TypedDamageCondition
           damage:
-            groups:
-              Burn: 25
+            types:
+              Heat: 25
+              Cold: 25
+              Shock: 25
+              Caustic: 25
         - !type:ReagentCondition
           reagent: Oxandrolone
           max: 25
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: -4
+          Burn: -4
         conditions:
         - !type:TypedDamageCondition
           damage:
-            groups:
-              Burn: 25
+            types:
+              Heat: 25
+              Cold: 25
+              Shock: 25
+              Caustic: 25
           inverted: true
         - !type:ReagentCondition
           reagent: Oxandrolone
           max: 25
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: 4
+          Burn: 4
         conditions:
         - !type:ReagentCondition
           reagent: Oxandrolone
@@ -930,13 +929,12 @@
     Bloodstream:
       metabolismRate: 0.25
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Airloss: -4
-            Brute: -2
-            Burn: -2
-            Toxin: -2
+          Airloss: -4
+          Brute: -2
+          Burn: -2
+          Toxin: -2
         conditions:
         - !type:MobStateCondition
           mobstate: Critical
@@ -996,8 +994,8 @@
       effects:
       - !type:HealthChange
         damage:
-          groups:
-            Genetic: -6
+          types:
+            Cellular: -6
       - !type:HealthChange # this + explosion rounds out to ~90dmg/15u
         damage:
           types:
@@ -1230,7 +1228,7 @@
 
 # For the slasher antag
 - type: reagent
-  id: slasherium
+  id: Slasherium
   name: reagent-name-slasherium
   group: Medicine
   desc: reagent-desc-slasherium
@@ -1241,14 +1239,13 @@
     Bloodstream:
       metabolismRate: 0.25
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: -3
-            Brute: -3
-            Toxin: -3
-            Airloss: -3
-            Genetic: -3
+          Burn: -3
+          Brute: -3
+          Toxin: -3
+          Airloss: -3
+          Genetic: -3
       - !type:ModifyParalysis
         time: 3
         type: Remove

@@ -136005,15 +136005,6 @@ entities:
     - type: Transform
       pos: 40.646282,29.698788
       parent: 2
-- proto: RubberStampClown
-  entities:
-  - uid: 20804
-    components:
-    - type: Transform
-      pos: -8.755251,-48.022705
-      parent: 2
-    - type: Tag
-      tags: []
 - proto: RubberStampDenied
   entities:
   - uid: 20805
@@ -136035,13 +136026,6 @@ entities:
     components:
     - type: Transform
       pos: 60.40058,-8.604193
-      parent: 2
-- proto: RubberStampHop
-  entities:
-  - uid: 20809
-    components:
-    - type: Transform
-      pos: -6.5865464,1.3825479
       parent: 2
 - proto: RubberStampSyndicate
   entities:

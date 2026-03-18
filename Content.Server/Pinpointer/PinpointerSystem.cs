@@ -1,30 +1,13 @@
-// SPDX-FileCopyrightText: 2021 Alexander Evgrashin <evgrashin.adl@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2022 Justin Trotter <trotter.justin@gmail.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared.Alert;
+using Content.Shared.Whitelist;
+// </Trauma>
 using Content.Shared.Interaction;
 using Content.Shared.Pinpointer;
 using System.Linq;
 using System.Numerics;
 using Robust.Shared.Utility;
 using Content.Server.Shuttles.Events;
-using Content.Shared.Alert;
-using Content.Shared.Whitelist;
 
 namespace Content.Server.Pinpointer;
 
@@ -42,7 +25,7 @@ public sealed class PinpointerSystem : SharedPinpointerSystem
         _xformQuery = GetEntityQuery<TransformComponent>();
 
         // WD EDIT START
-        SubscribeLocalEvent<PinpointerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<PinpointerComponent, MapInitEvent>(OnMapInit); // TODO: move to a different system bruh
         SubscribeLocalEvent<PinpointerComponent, ComponentShutdown>(OnShutdown);
         // WD EDIT END
         SubscribeLocalEvent<PinpointerComponent, ActivateInWorldEvent>(OnActivate);
@@ -63,35 +46,36 @@ public sealed class PinpointerSystem : SharedPinpointerSystem
     }
     // WD EDIT END
 
-    public override bool TogglePinpointer(EntityUid uid, PinpointerComponent? pinpointer = null)
+    public override bool TogglePinpointer(Entity<PinpointerComponent?> ent)
     {
-        if (!Resolve(uid, ref pinpointer))
+        if (!Resolve(ent, ref ent.Comp))
             return false;
 
-        var isActive = !pinpointer.IsActive;
-        SetActive(uid, isActive, pinpointer);
-        UpdateAppearance(uid, pinpointer);
+        var isActive = !ent.Comp.IsActive;
+        SetActive(ent, isActive);
+        UpdateAppearance(ent);
         return isActive;
     }
 
-    private void UpdateAppearance(EntityUid uid, PinpointerComponent pinpointer, AppearanceComponent? appearance = null)
+    private void UpdateAppearance(Entity<PinpointerComponent?, AppearanceComponent?> ent)
     {
-        if (!Resolve(uid, ref appearance))
+        if (!Resolve(ent, ref ent.Comp1) || !Resolve(ent, ref ent.Comp2))
             return;
-        _appearance.SetData(uid, PinpointerVisuals.IsActive, pinpointer.IsActive, appearance);
-        _appearance.SetData(uid, PinpointerVisuals.TargetDistance, pinpointer.DistanceToTarget, appearance);
+
+        _appearance.SetData(ent, PinpointerVisuals.IsActive, ent.Comp1.IsActive, ent.Comp2);
+        _appearance.SetData(ent, PinpointerVisuals.TargetDistance, ent.Comp1.DistanceToTarget, ent.Comp2);
     }
 
-    private void OnActivate(EntityUid uid, PinpointerComponent component, ActivateInWorldEvent args)
+    private void OnActivate(Entity<PinpointerComponent> ent, ref ActivateInWorldEvent args)
     {
         if (args.Handled || !args.Complex)
             return;
 
-        if (component.CanToggle) // WD EDIT
-            TogglePinpointer(uid, component);
+        if (ent.Comp.CanToggle) // WD EDIT
+            TogglePinpointer(ent.AsNullable());
 
-        if (!component.CanRetarget)
-            LocateTarget(uid, component);
+        if (!ent.Comp.CanRetarget)
+            LocateTarget(ent);
 
         args.Handled = true;
     }
@@ -103,39 +87,38 @@ public sealed class PinpointerSystem : SharedPinpointerSystem
         // todo: ideally, you would need to raise this event only on jumped entities
         // this code update ALL pinpointers in game
 
-        // Goob edit start: tracking Xform and checking that pinpointer is the jumped one
-        var query = EntityQueryEnumerator<PinpointerComponent, TransformComponent>();
-
-        while (query.MoveNext(out var uid, out var pinpointer, out var transform))
+        var query = EntityQueryEnumerator<PinpointerComponent>();
+        while (query.MoveNext(out var uid, out var pinpointer))
         {
             if (pinpointer.CanRetarget)
                 continue;
 
-            if (transform.GridUid != ev.Entity)
+            // <Trauma>
+            if (Transform(uid).GridUid != ev.Entity)
                 continue;
+            // </Trauma>
 
-            LocateTarget(uid, pinpointer);
+            LocateTarget((uid, pinpointer));
         }
-        // Goob edit end
     }
 
     /// <summary>
     /// Goob edit: this was literally fully changed. But still works as intended
     /// </summary>
-    private void LocateTarget(EntityUid uid, PinpointerComponent component)
+    private void LocateTarget(Entity<PinpointerComponent> ent)
     {
-        if (!component.IsActive || component.Whitelist == null)
+        if (!ent.Comp.IsActive || ent.Comp.Whitelist == null)
             return;
 
-        if (component.CanTargetMultiple)
+        if (ent.Comp.CanTargetMultiple)
         {
-            var targets = FindAllTargetsFromComponent(uid, component.Whitelist, component.Blacklist);
-            SetTargets(uid, targets, component);
+            var targets = FindAllTargetsFromComponent(ent.Owner, ent.Comp.Whitelist, ent.Comp.Blacklist);
+            SetTargets(ent.AsNullable(), targets);
         }
         else
         {
-            var target = FindTargetFromComponent(uid, component.Whitelist, component.Blacklist);
-            SetTarget(uid, target, component);
+            var target = FindTargetFromComponent(ent.Owner, ent.Comp.Whitelist, ent.Comp.Blacklist);
+            SetTarget(ent.AsNullable(), target);
         }
     }
 
@@ -148,7 +131,7 @@ public sealed class PinpointerSystem : SharedPinpointerSystem
         var query = EntityQueryEnumerator<PinpointerComponent>();
         while (query.MoveNext(out var uid, out var pinpointer))
         {
-            UpdateDirectionToTarget(uid, pinpointer);
+            UpdateDirectionToTarget((uid, pinpointer));
         }
     }
 
@@ -157,22 +140,17 @@ public sealed class PinpointerSystem : SharedPinpointerSystem
     ///     Will return null if can't find anything
     ///     Goob edit: requires EntityWhitelist instead of just Type.
     /// </summary>
-    private EntityUid? FindTargetFromComponent(
-        Entity<TransformComponent?> ent,
-        EntityWhitelist whitelist,
-        EntityWhitelist? blacklist)
+    private EntityUid? FindTargetFromComponent(Entity<TransformComponent?> ent, EntityWhitelist whitelist, EntityWhitelist? blacklist)
     {
-        _xformQuery.Resolve(ent, ref ent.Comp, false);
-
-        if (ent.Comp == null)
+        if (!Resolve(ent, ref ent.Comp))
             return null;
 
         var transform = ent.Comp;
 
         // sort all entities in distance increasing order
-        var mapId = transform.MapID;
+        var mapId = ent.Comp.MapID;
         var l = new SortedList<float, EntityUid>();
-        var worldPos = _transform.GetWorldPosition(transform);
+        var worldPos = _transform.GetWorldPosition(ent.Comp);
 
         // Goob edit start
         if (whitelist.Components == null)
@@ -252,37 +230,39 @@ public sealed class PinpointerSystem : SharedPinpointerSystem
     /// <summary>
     ///     Update direction from pinpointer to selected target (if it was set)
     /// </summary>
-    protected override void UpdateDirectionToTarget(EntityUid uid, PinpointerComponent? pinpointer = null)
+    protected override void UpdateDirectionToTarget(Entity<PinpointerComponent?> ent)
     {
-        if (!Resolve(uid, ref pinpointer))
+        if (!Resolve(ent, ref ent.Comp))
             return;
+
+        var pinpointer = ent.Comp;
 
         if (!pinpointer.IsActive)
             return;
 
-        var target = GetNearestTarget((uid, pinpointer)); // Goob edit
+        var target = GetNearestTarget((ent, ent.Comp));
         if (target == null || !Exists(target.Value))
         {
-            SetDistance(uid, Distance.Unknown, pinpointer);
-            LocateTarget(uid, pinpointer); // WD EDIT
+            SetDistance(ent, Distance.Unknown);
+            LocateTarget((ent, ent.Comp)); // Trauma
             return;
         }
 
-        var dirVec = CalculateDirection(uid, target.Value);
+        var dirVec = CalculateDirection(ent, target.Value);
         var oldDist = pinpointer.DistanceToTarget;
         if (dirVec != null)
         {
             var angle = dirVec.Value.ToWorldAngle();
-            TrySetArrowAngle(uid, angle, pinpointer);
+            TrySetArrowAngle(ent, angle);
             var dist = CalculateDistance(dirVec.Value, pinpointer);
-            SetDistance(uid, dist, pinpointer);
+            SetDistance(ent, dist);
         }
         else
         {
-            SetDistance(uid, Distance.Unknown, pinpointer);
+            SetDistance(ent, Distance.Unknown);
         }
         if (oldDist != pinpointer.DistanceToTarget)
-            UpdateAppearance(uid, pinpointer);
+            UpdateAppearance(ent);
     }
 
     /// <summary>

@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Bloodstream;
@@ -29,6 +16,7 @@ namespace Content.Server.Heretic.EntitySystems.PathSpecific;
 
 public sealed class ChampionStanceSystem : EntitySystem
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
 
@@ -76,12 +64,12 @@ public sealed class ChampionStanceSystem : EntitySystem
 
     public bool Condition(Entity<ChampionStanceComponent> ent)
     {
-        if (!TryComp(ent, out DamageableComponent? dmg) || !TryComp(ent, out MobThresholdsComponent? thresholdComp))
+        if (!TryComp(ent, out MobThresholdsComponent? thresholdComp))
             return false;
 
         if (!_threshold.TryGetThresholdForState(ent, MobState.Critical, out var threshold, thresholdComp))
             threshold = _threshold.GetThresholdForState(ent, MobState.Dead, thresholdComp);
-        return dmg.TotalDamage >= threshold.Value.Float() / 2f;
+        return _damageable.GetTotalDamage(ent.Owner) >= threshold.Value / 2;
     }
 
     private void OnDamageModify(Entity<ChampionStanceComponent> ent, ref DamageModifyEvent args)
