@@ -7,4 +7,5 @@ knowledge-editor-item = {$name} - {$cost} points
 knowledge-editor-mastery = {$mastery} ({$cost})
 
 knowledge-editor-save = Save Skills
+knowledge-editor-reset = Reset Changes
 knowledge-editor-save-deficit = Not enough points!
