@@ -138,7 +138,7 @@
       - tag: PowerCellSmall
         name: construction-graph-tag-power-cell-small
         doAfter: 3
-# <Trauma - iradomini crossbow>
+# <Trauma>
     - to: ConvertOrangeNode
       completed:
       - !type:SnapToGrid
@@ -294,7 +294,7 @@
       - tool: Prying
         doAfter: 1
 
-# <Trauma - iradomini crossbow>
+# <Trauma>
   - node: ConvertOrangeNode
     entity: AltarConvertOrange
     edges:
