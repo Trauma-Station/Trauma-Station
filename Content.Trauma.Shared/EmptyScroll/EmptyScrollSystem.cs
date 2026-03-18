@@ -8,6 +8,7 @@ using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Paper;
 using Robust.Shared.Timing;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.EmptyScroll;
 
@@ -55,7 +56,7 @@ public sealed class EmptyScrollSystem : EntitySystem
         else
         {
             var ev = new PrayerFailedEvent(args.User);
-            RaiseLocalEvent(ref ev);
+            RaiseNetworkEvent(ref ev);
         }
 
         LocId msg = "empty-scroll-prayer-" + (answered ? "answered" : "failed");
@@ -109,5 +110,8 @@ public sealed class EmptyScrollSystem : EntitySystem
 /// <summary>
 /// Event broadcast when you don't write a valid prayer and get nothing.
 /// </summary>
-[ByRefEvent]
-public record struct PrayerFailedEvent(EntityUid? User);
+[Serializable, NetSerializable]
+public sealed class PrayerFailedEvent(EntityUid? user) : EntityEventArgs
+{
+    public readonly EntityUid? User = user;
+}

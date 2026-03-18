@@ -20,10 +20,10 @@ public sealed class FungerWikiSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PrayerFailedEvent>(OnPrayerFailed);
+        SubscribeNetworkEvent<PrayerFailedEvent>(OnPrayerFailed);
     }
 
-    private void OnPrayerFailed(ref PrayerFailedEvent args)
+    private void OnPrayerFailed(PrayerFailedEvent args)
     {
         if (args.User == _player.LocalEntity)
             _uri.OpenUri(Wiki);
