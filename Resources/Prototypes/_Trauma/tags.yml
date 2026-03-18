@@ -1,10 +1,10 @@
 - type: Tag
   id: AdvancedMagboots
 
-  - type: Tag
+- type: Tag
   id: BowImprovised
 
-  - type: Tag
+- type: Tag
   id: Butt
 
 - type: Tag
