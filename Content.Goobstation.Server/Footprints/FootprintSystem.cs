@@ -116,7 +116,7 @@ public sealed class FootprintSystem : EntitySystem
             rotation = (newLocalPosition - oldLocalPosition).ToAngle();
         }
         else
-            rotation = transform.LocalRotation;
+            rotation = _transform.GetWorldRotation(transform);
 
         FootprintInteraction(entity, (transform.GridUid.Value, gridComponent), tile, coordinates, rotation, standing);
     }

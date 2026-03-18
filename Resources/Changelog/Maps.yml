@@ -180,3 +180,12 @@ Entries:
   id: 18
   time: '2026-03-15T14:31:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1333
+- author: Kirikii
+  changes:
+  - type: Fix
+    message: 'Nume: Fixed QM''s office not having power'
+  - type: Tweak
+    message: 'Nume: Several small changes'
+  id: 19
+  time: '2026-03-17T11:33:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1380

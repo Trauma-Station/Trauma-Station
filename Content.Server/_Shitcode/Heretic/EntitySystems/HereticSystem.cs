@@ -235,12 +235,12 @@ public sealed class HereticSystem : SharedHereticSystem
     private void SetMinionsMaster(Entity<HereticComponent> ent, EntityUid? newMaster)
     {
         ent.Comp.Minions = ent.Comp.Minions.Where(Exists).ToHashSet();
-        var mobQuery = GetEntityQuery<MobStateComponent>();
+        var minionQuery = GetEntityQuery<HereticMinionComponent>();
         foreach (var uid in ent.Comp.Minions)
         {
-            if (!mobQuery.HasComp(uid))
+            if (!minionQuery.TryComp(uid, out var minion))
                 continue;
-            var minion = EnsureComp<HereticMinionComponent>(uid);
+
             minion.BoundHeretic = newMaster;
             Dirty(uid, minion);
         }
@@ -344,6 +344,8 @@ public sealed class HereticSystem : SharedHereticSystem
 
         if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             objective.Researched += amount;
+
+        UpdateObjectiveProgress((ent, ent.Comp1, ent.Comp3));
 
         if (!showText && !playSound)
             return;

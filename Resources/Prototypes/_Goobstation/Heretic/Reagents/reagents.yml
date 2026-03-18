@@ -30,6 +30,11 @@
   flavorType: Complex
   description: flavor-complex-ether
 
+- type: flavor
+  id: raw
+  flavorType: Complex
+  description: flavor-complex-raw
+
 - type: reagent
   id: EldritchEssence
   parent: BaseDrink
@@ -71,6 +76,7 @@
         - DuskAndDawn
         - WoundedSoldier
         - NewbornEther
+        - RawFlesh
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
         time: 50
@@ -300,3 +306,39 @@
         effectProto: StatusEffectForcedSleeping
         time: 9
         delay: 5
+
+- type: reagent
+  id: RawFlesh
+  group: Unknown
+  name: reagent-name-raw-flesh
+  desc: reagent-desc-raw-flesh
+  physicalDesc: reagent-physical-desc-raw
+  flavor: raw
+  color: red
+  metabolisms:
+    Bloodstream:
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
+          - Ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
+      effects:
+      - !type:ModifyBloodLevel
+        amount: 2
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: -2
+            Toxin: -2
+            Airloss: -2
+            Brute: -2
+            Genetic: -2
+            Metaphysical: -3
+      - !type:ModifyBleed
+        amount: -0.5
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.15
+        sprintSpeedModifier: 1.15

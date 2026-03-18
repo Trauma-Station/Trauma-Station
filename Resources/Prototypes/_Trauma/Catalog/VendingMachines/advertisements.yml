@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: MimicMachineAds
+  values:
+    prefix: advertisement-mimic-
+    count: 14

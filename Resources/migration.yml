@@ -9,6 +9,8 @@
 # Table: null
 
 # <Trauma> - too lazy to port debugoks multi migration thing
+# 2026-3-2026
+ClosetMaintenanceFilledRandom: RandomMaintsCloset
 
 # 2026-01-07
 GunSafeDisabler: GunSafePhaser

@@ -1,9 +1,19 @@
 - type: entity
-  name: toolbox mimic
+  abstract: true
   parent: [ MobSpaceBasic, MobCombat ]
-  id: MobMimicToolBox
-  description: The last thing youll ever see.
+  id: BaseMobMimic
+  description: The last thing you'll ever see.
   components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
@@ -14,28 +24,10 @@
         true
   - type: NpcFactionMember
     factions:
-      - SimpleHostile
+    - SimpleHostile
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 5.5
-  - type: Sprite
-    sprite: _Trauma/Mobs/Monsters/toolboxmimic.rsi
-    layers:
-      - map: ["enum.DamageStateVisualLayers.Base", "movement"]
-        state: alive
-  - type: SpriteMovement
-    movementLayers:
-      movement:
-        state: toolboxmimic-moving
-    noMovementLayers:
-      movement:
-        state: alive
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: alive
-      Dead:
-        Base: dead
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepMimic
@@ -61,7 +53,7 @@
       50: Dead
   - type: PassiveDamage
     allowedStates:
-      - Alive
+    - Alive
     damage:
       types:
         Heat: -3
@@ -93,6 +85,30 @@
   - type: Stamina
     baseCritThreshold: 999
   - type: FlashImmunity
+
+- type: entity
+  parent: BaseMobMimic
+  id: MobMimicToolBox
+  name: toolbox mimic
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/toolboxmimic.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      state: alive
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: toolboxmimic-moving
+    noMovementLayers:
+      movement:
+        state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
   - type: CanEscapeInventory
     baseResistTime: 0.5
   - type: AnimatedEmotes
@@ -100,18 +116,18 @@
   - type: Tag
     tags:
     - MimicToolbox
-  - type: AutoEmote # To Do, find out why this doesnt work
+  - type: AutoEmote # TODO: find out why this doesnt work
     emotes:
     - TweakBox
   - type: Butcherable
     spawned:
-      - id: SpawnLootToolboxMimic
-      - id: ToolboxMimic
+    - id: SpawnLootToolboxMimic
+    - id: ToolboxMimic
 
 - type: entity
-  name: emergency toolbox
   parent: BaseItem
   id: ToolboxEmergencyMimic
+  name: emergency toolbox
   suffix: Mimic
   description: A bright red toolbox, stocked with emergency tools. Why is it breathing?
   components:
@@ -136,44 +152,14 @@
 # Locker
 
 - type: entity
-  name: locker mimic
-  parent: [ MobSpaceBasic, MobCombat ]
+  parent: BaseMobMimic
   id: MobMimicLocker
-  description: The last thing youll ever see.
+  name: locker mimic
   components:
-  - type: HTN
-    rootTask:
-      task: SimpleHostileCompound
-    blackboard:
-      NavPry: !type:Bool
-        true
-      NavSmash: !type:Bool
-        true
-  - type: NpcFactionMember
-    factions:
-      - SimpleHostile
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
     baseSprintSpeed: 5
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/locker.rsi
-    layers:
-      - map: ["enum.DamageStateVisualLayers.Base"]
-        state: alive
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: alive
-      Dead:
-        Base: dead
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: FootstepMimic
-      params:
-        volume: 3
-        variation: 0.2
-  - type: Physics
-    bodyType: KinematicController
   - type: Fixtures
     fixtures:
       fix1:
@@ -182,146 +168,80 @@
           radius: 0.40
         density: 100
         mask:
-          - MobMask
+        - MobMask
         layer:
-          - MobLayer
+        - MobLayer
   - type: MobThresholds
     thresholds:
       0: Alive
       100: Dead
-  - type: PassiveDamage
-    allowedStates:
-      - Alive
-    damage:
-      types:
-        Heat: -3
-      groups:
-        Brute: -3
   - type: MeleeWeapon
-    range: 0.75
     attackRate: 10
-    soundHit:
-      path: /Audio/_Shitmed/ReBELL/Organs/OrganDestroyed2.ogg
     damage:
       types:
         Slash: 2
-    resistanceBypass: true
   - type: StaminaDamageOnHit
     damage: 5
     overtime: 5
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Blood
-        Quantity: 50
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    understands:
-    - TauCetiBasic
   - type: Stamina
     baseCritThreshold: 999
-  - type: FlashImmunity
   - type: Butcherable
     spawned:
-      - id: SpawnLootLockerMimic
-      - id: ShieldMimic
+    - id: SpawnLootLockerMimic
+    - id: ShieldMimic
 
 - type: entity
-  name: maintenance closet
   parent: ClosetSteelBase
   id: LockerMimic
+  name: maintenance closet
   suffix: Mimic
   description: It's a storage unit. Why is it breathing?
   components:
   - type: TriggerOnActivate
   - type: TriggerOnDamage
+    threshold: 0
+    probability: 0.5
   - type: PolymorphOnTrigger
     polymorph: MimicLocker
 
 # Vendor
 - type: entity
-  name: vending machine mimic
-  parent: [ MobSpaceBasic, MobCombat ]
+  parent: BaseMobMimic
   id: MobMimicVendor
-  description: The last thing youll ever see.
+  name: vending machine mimic
   components:
   - type: HTN
     rootTask:
       task: SimpleRangedHostileCompound
-  - type: NpcFactionMember
-    factions:
-      - SimpleHostile
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
     baseSprintSpeed: 3
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/vendormimic.rsi
-    layers:
-      - map: ["enum.DamageStateVisualLayers.Base"]
-        state: alive
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: alive
-      Dead:
-        Base: dead
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: FootstepMimic
-      params:
-        volume: 3
-        variation: 0.2
-  - type: Physics
-    bodyType: KinematicController
   - type: Fixtures
     fixtures:
       fix1:
-        shape:
-          !type:PhysShapeCircle
+        shape: !type:PhysShapeCircle
           radius: 0.40
         density: 100
         mask:
-          - MobMask
+        - MobMask
         layer:
-          - MobLayer
+        - MobLayer
   - type: MobThresholds
     thresholds:
       0: Alive
       150: Dead
-  - type: PassiveDamage
-    allowedStates:
-      - Alive
-    damage:
-      types:
-        Heat: -3
-      groups:
-        Brute: -3
   - type: MeleeWeapon
-    range: 0.75
     attackRate: 1
-    soundHit:
-      path: /Audio/_Shitmed/ReBELL/Organs/OrganDestroyed2.ogg
     damage:
       types:
         Slash: 15
+        Piercing: 15
       woundSeverityMultipliers:
         Slash: 999
         Piercing: 999
-    resistanceBypass: true
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Blood
-        Quantity: 50
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    understands:
-    - TauCetiBasic
   - type: Stamina
     baseCritThreshold: 999
-  - type: FlashImmunity
   - type: Gun
     projectileSpeed: 20
     fireRate: 2
@@ -339,7 +259,10 @@
   - type: Battery
     maxCharge: 100
     startingCharge: 100
-  - type: CombatMode
+  - type: Butcherable
+    spawned:
+    - id: SpawnLootVendorMimic
+    - id: GunMimic
 
 - type: entity
   parent: BaseItem
@@ -370,10 +293,6 @@
     solution: ammo
   - type: SolutionTransfer
     maxTransferAmount: 5
-  - type: Butcherable
-    spawned:
-      - id: SpawnLootVendorMimic
-      - id: GunMimic
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
     embedOnThrow: false
@@ -392,8 +311,7 @@
         restitution: 0.3
         friction: 0.2
       projectile:
-        shape:
-          !type:PhysShapeAabb
+        shape: !type:PhysShapeAabb
           bounds: "-0.1,-0.3,0.1,-0.1"
         hard: false
         mask:
@@ -401,21 +319,124 @@
         - BulletImpassable
 
 - type: entity
-  name: Dr. Gibb Vendor
-  parent: VendingMachine
-  id: VendorMimic
+  abstract: true
+  id: BaseVendorMimic
   suffix: Mimic
-  description: Canned explosion of different flavors in this very vendor! Why is it breathing?
+  description: Why is it breathing?
   components:
-  - type: Sprite
-    sprite: Structures/Machines/VendingMachines/gib.rsi
-    layers:
-    - state: "normal"
-  - type: PointLight
-    radius: 2
-    energy: 1.6
-    color: "#D82929"
   - type: TriggerOnActivate
   - type: TriggerOnDamage
+    threshold: 0
+    probability: 0.5
   - type: PolymorphOnTrigger
     polymorph: MimicVendor
+  - type: DatasetVocalizer
+    dataset: MimicMachineAds
+  - type: Advertise
+    pack: MimicMachineAds
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: FlimsyGlass
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineCoffee]
+  id: VendorMimicCoffee
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineCola]
+  id: VendorMimicCola
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineColaBlack]
+  id: VendorMimicColaBlack
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineColaRed]
+  id: VendorMimicColaRed
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineDrGibb]
+  id: VendorMimicDrGibb
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachinePwrGame]
+  id: VendorMimicPwrGame
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineShamblersJuice]
+  id: VendorMimicShamblersJuice
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSmite]
+  id: VendorMimicSmite
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSoda]
+  id: VendorMimicSoda
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSovietSoda]
+  id: VendorMimicSovietSoda
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSpaceUp]
+  id: VendorMimicSpaceUp
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineStarkist]
+  id: VendorMimicStarkist
+
+  # Snacks
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSweetToof]
+  id: VendorMimicSweetToof
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSustenance]
+  id: VendorMimicSustenance
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineHotfood]
+  id: VendorMimicHotfood
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineFitness]
+  id: VendorMimicFitness
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineWeeb]
+  id: VendorMimicWeeb
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineDiscount]
+  id: VendorMimicDiscount
+  suffix: Mimic
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSnack]
+  id: VendorMimicSnack
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSnackBlue]
+  id: VendorMimicSnackBlue
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSnackGreen]
+  id: VendorMimicSnackGreen
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSnackOrange]
+  id: VendorMimicSnackOrange
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineSnackTeal]
+  id: VendorMimicSnackTeal
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineDonut]
+  id: VendorMimicDonut
+
+- type: entity
+  parent: [BaseVendorMimic, VendingMachineChang]
+  id: VendorMimicChang

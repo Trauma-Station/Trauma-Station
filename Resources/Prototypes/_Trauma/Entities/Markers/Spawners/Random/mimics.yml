@@ -21,8 +21,8 @@
       OrganBloodsuckerHeart: 0.5
 
 - type: entity
-  name: locker mimic loot spawner
-  id: SpawnLootLockerMimic
+  name: vendor mimic loot spawner
+  id: SpawnLootVendorMimic
   parent: MarkerBase
   components:
   - type: RandomChanceSpawner
@@ -51,8 +51,8 @@
       OrganBloodsuckerHeart: 0.5
 
 - type: entity
-  name: vendor mimic loot spawner
-  id: SpawnLootVendorMimic
+  name: locker mimic loot spawner
+  id: SpawnLootLockerMimic
   parent: MarkerBase
   components:
   - type: RandomChanceSpawner
@@ -78,3 +78,80 @@
       RevKnife: 0.1
       RevMace: 0.1
       RevPitchfork: 0.1
+
+- type: entity
+  id: RandomVendingDrinksMimic
+  name: random vending machine spawner
+  suffix: Drinks_Mimic
+  parent: MarkerBase
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - VendorMimicCoffee
+    - VendorMimicCola
+    - VendorMimicColaBlack
+    - VendorMimicColaRed
+    - VendorMimicDrGibb
+    - VendorMimicPwrGame
+    - VendorMimicShamblersJuice
+    - VendorMimicSmite
+    - VendorMimicSoda
+    - VendorMimicSovietSoda
+    - VendorMimicSpaceUp
+    - VendorMimicStarkist
+
+- type: entity
+  id: RandomVendingSnacksMimic
+  name: random vending machine spawner
+  suffix: Snacks_Mimic
+  parent: MarkerBase
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - VendorMimicSweetToof
+    - VendorMimicSustenance
+    - VendorMimicHotfood
+    - VendorMimicFitness
+    - VendorMimicWeeb
+    - VendorMimicDiscount
+    - VendorMimicSnack
+    - VendorMimicSnackBlue
+    - VendorMimicSnackGreen
+    - VendorMimicSnackOrange
+    - VendorMimicSnackTeal
+    - VendorMimicDonut
+    - VendorMimicChang
+
+- type: entity
+  id: RandomVendingAnyMimic
+  name: random vending machine spawner
+  suffix: Any_Mimic
+  parent: MarkerBase
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - VendorMimicCoffee
+    - VendorMimicCola
+    - VendorMimicColaBlack
+    - VendorMimicColaRed
+    - VendorMimicDrGibb
+    - VendorMimicPwrGame
+    - VendorMimicShamblersJuice
+    - VendorMimicSmite
+    - VendorMimicSoda
+    - VendorMimicSovietSoda
+    - VendorMimicSpaceUp
+    - VendorMimicStarkist
+    - VendorMimicSweetToof
+    - VendorMimicSustenance
+    - VendorMimicHotfood
+    - VendorMimicFitness
+    - VendorMimicWeeb
+    - VendorMimicDiscount
+    - VendorMimicSnack
+    - VendorMimicSnackBlue
+    - VendorMimicSnackGreen
+    - VendorMimicSnackOrange
+    - VendorMimicSnackTeal
+    - VendorMimicDonut
+    - VendorMimicChang
