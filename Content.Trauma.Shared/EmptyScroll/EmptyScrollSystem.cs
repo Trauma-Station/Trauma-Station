@@ -52,6 +52,11 @@ public sealed class EmptyScrollSystem : EntitySystem
             Pray(target, prayer);
             answered = true;
         }
+        else
+        {
+            var ev = new PrayerFailedEvent(args.User);
+            RaiseLocalEvent(ref ev);
+        }
 
         LocId msg = "empty-scroll-prayer-" + (answered ? "answered" : "failed");
         _popup.PopupCoordinates(Loc.GetString(msg), coords, answered ? PopupType.Large : PopupType.Medium);
@@ -100,3 +105,9 @@ public sealed class EmptyScrollSystem : EntitySystem
         _effects.ApplyEffects(target, prayer.Effects, user: target);
     }
 }
+
+/// <summary>
+/// Event broadcast when you don't write a valid prayer and get nothing.
+/// </summary>
+[ByRefEvent]
+public record struct PrayerFailedEvent(EntityUid? User);
