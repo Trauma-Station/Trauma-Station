@@ -51,10 +51,10 @@
       icon:
         sprite: _ShitChap/Clothing/OuterClothing/Misc/bishop.rsi
         state: icon
-# <Trauma - Venerator armor>
+# <Trauma>
     - prototype: SpawnArmamentsVenerator
       icon:
-        sprite: _ShitChap/Clothing/OuterClothing/Misc/venerator.rsi
+        sprite: _TraumaClothing/OuterClothing/Misc/venerator.rsi
         state: icon
 # </Trauma>
   - type: StaticPrice

@@ -72,10 +72,10 @@
   description: The light of christ, strangely non-light emitting.
   components:
   - type: Sprite
-    sprite: _ShitChap/Clothing/Head/Misc/venerator.rsi
+    sprite: _Trauma/Clothing/Head/Misc/venerator.rsi
     state: icon
   - type: Clothing
-    sprite: _ShitChap/Clothing/Head/Misc/venerator.rsi
+    sprite: _Trauma/Clothing/Head/Misc/venerator.rsi
   - type: Tag
     tags:
     - WhitelistChameleon

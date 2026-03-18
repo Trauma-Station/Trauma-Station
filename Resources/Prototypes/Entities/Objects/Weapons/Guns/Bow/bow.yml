@@ -72,7 +72,7 @@
   parent: BaseBow
   name: improvised shortbow
   components:
-# <Trauma - Tag for altar construction, iradomini>
+# <Trauma>
   - type: Tag
     tags:
     - BowImprovised

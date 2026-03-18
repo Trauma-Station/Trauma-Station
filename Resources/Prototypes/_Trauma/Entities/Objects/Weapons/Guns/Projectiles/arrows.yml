@@ -1,6 +1,6 @@
 - type: entity
-  id: HolyArrow
   parent: BaseArrow
+  id: HolyArrow
   name: arrow of purity
   description: The spear of destiny looks a little small, huh.
   components:
