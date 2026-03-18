@@ -1,0 +1,11 @@
+- type: entity
+  abstract: true
+  parent: BaseBrainChip
+  id: SkillChipHecu
+  name: skill chip (hecu)
+  description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 30
+      ShootingKnowledge: 30
