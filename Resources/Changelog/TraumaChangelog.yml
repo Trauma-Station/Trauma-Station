@@ -4792,3 +4792,19 @@ Entries:
   id: 562
   time: '2026-03-17T23:54:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1399
+- author: Gribley-0
+  changes:
+  - type: Add
+    message: Gave Nukies Average first aid skill
+  id: 563
+  time: '2026-03-18T06:50:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1403
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Throwing produce now does damage. Melons do a lot.
+  - type: Tweak
+    message: More tools do throwing damage.
+  id: 564
+  time: '2026-03-18T06:52:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1396
