@@ -118,3 +118,17 @@
     sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi
+
+- type: entity 
+  parent: ClothingBackpackSatchel
+  id: PatreonGribley
+  name: WormPack
+  description: I think it just moved.. I think it whispered something...
+  components:
+  - type: Sprite
+    sprite: Resources/Textures/_Trauma/Objects/Patreon/gribley.rsi
+  - type: Clothing
+    quickEquip: true
+    sprite: Resources/Textures/_Trauma/Objects/Patreon/gribley.rsi
+    slots:
+    - BACK
