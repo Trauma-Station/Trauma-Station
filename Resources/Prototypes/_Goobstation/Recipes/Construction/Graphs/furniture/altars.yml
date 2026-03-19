@@ -146,7 +146,7 @@
       - tag: BowImprovised
         name: construction-graph-tag-improvised-bow
         doAfter: 3
-        
+
   #Nullrod Altars
   - node: BananiumAltarNode
     entity: AltarBananium
