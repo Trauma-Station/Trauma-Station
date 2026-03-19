@@ -2,7 +2,6 @@ using Content.Client.Construction;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._White.RadialSelector;
 using Content.Shared.Construction.Prototypes;
-using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
@@ -12,8 +11,7 @@ namespace Content.Client._White.RadialSelector;
 public sealed class RadialSelectorMenuBUI : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [UISystemDependency] private readonly ConstructionSystem _construction;
-    [UISystemDependency] private readonly SpriteSystem _sprite;
+    [UISystemDependency] private readonly ConstructionSystem _construction = default!;
 
     public SimpleRadialMenu Menu;
 
