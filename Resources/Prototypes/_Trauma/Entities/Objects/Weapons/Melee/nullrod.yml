@@ -7,7 +7,7 @@
   - type: Nullrod
     damageOnUntrainedUse:
       types:
-        Brute: 20
+        Blunt: 20
     UntrainedUseString: nullrod-iradomini-untrained-usage-popup
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Nullrod/iradomini.rsi
