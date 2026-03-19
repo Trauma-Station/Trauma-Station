@@ -53,13 +53,13 @@ public sealed partial class GeneticsConsoleSystem
         _sequences.Clear();
         _genome.AddSequenceStates(mob, _sequences);
         _builder.Clear();
-        _builder.Append(Loc.GetString("genetics-printout-title"));
-        _builder.Append(Loc.GetString("genetics-printout-subject", ("name", Name(mob))));
-        _builder.Append(Loc.GetString("genetics-printout-sequences", ("count", _sequences.Count)));
+        _builder.AppendLine(Loc.GetString("genetics-printout-title"));
+        _builder.AppendLine(Loc.GetString("genetics-printout-subject", ("name", Name(mob))));
+        _builder.AppendLine(Loc.GetString("genetics-printout-sequences", ("count", _sequences.Count)));
         foreach (var s in _sequences)
         {
             var rarity = s.Rarity.RarityChar();
-            _builder.Append(Loc.GetString("genetics-printout-sequence", ("rarity", rarity), ("number", s.Number)));
+            _builder.AppendLine(Loc.GetString("genetics-printout-sequence", ("rarity", rarity), ("number", s.Number)));
         }
         return _builder.ToString();
     }
@@ -71,9 +71,9 @@ public sealed partial class GeneticsConsoleSystem
 
         var rarity = _mutation.GetRarity(sequence.Mutation);
         _builder.Clear();
-        _builder.Append(Loc.GetString("genetics-printout-title"));
-        _builder.Append(Loc.GetString("genetics-printout-sequence-title", ("number", data.Number)));
-        _builder.Append(Loc.GetString("genetics-printout-sequence-rarity", ("rarity", rarity)));
+        _builder.AppendLine(Loc.GetString("genetics-printout-title"));
+        _builder.AppendLine(Loc.GetString("genetics-printout-sequence-title", ("number", data.Number)));
+        _builder.AppendLine(Loc.GetString("genetics-printout-sequence-rarity", ("rarity", rarity)));
         // format it similar to the UI, 2 rows split on 4 bases per group
         var n = MutationData.PairCount;
         for (int o = 0; o < n; o += n)
@@ -86,7 +86,7 @@ public sealed partial class GeneticsConsoleSystem
                 _builder.Append(sequence.Bases[first..last]);
                 _builder.Append(' ');
             }
-            _builder.Append("|\n");
+            _builder.AppendLine("|");
         }
         return _builder.ToString();
     }
