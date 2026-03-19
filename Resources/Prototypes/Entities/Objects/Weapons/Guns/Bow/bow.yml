@@ -72,11 +72,11 @@
   parent: BaseBow
   name: improvised shortbow
   components:
-# <Trauma>
+  # <Trauma>
   - type: Tag
     tags:
     - BowImprovised
-# </Trauma>
+  # </Trauma>
   - type: Sprite
     layers:
     - state: unwielded
