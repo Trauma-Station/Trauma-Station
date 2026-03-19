@@ -17,10 +17,7 @@ public sealed class GeneticsScannerBUI(EntityUid owner, Enum key) : BoundUserInt
         _window = this.CreateWindow<GeneticsScannerWindow>();
         _window.SetEntity(Owner);
         _window.OnScan += () => SendPredictedMessage(new GeneticsConsoleScanMessage());
-        _window.OnPrint += i => {
-            Log.Debug($"Print {i}");
-            SendPredictedMessage(new GeneticsPrintScanMessage(i));
-        };
+        _window.OnPrint += i => SendPredictedMessage(new GeneticsPrintScanMessage(i));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -29,7 +26,7 @@ public sealed class GeneticsScannerBUI(EntityUid owner, Enum key) : BoundUserInt
             return;
 
         window.UpdateState(cast);
-        if (window.Closed)
+        if (window.IsClosed)
             window.OpenCentered();
     }
 }
