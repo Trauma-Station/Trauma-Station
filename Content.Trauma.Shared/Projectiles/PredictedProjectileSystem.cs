@@ -102,7 +102,11 @@ public sealed class PredictedProjectileSystem : EntitySystem
     public void DoHit(Entity<ProjectileComponent, PhysicsComponent> ent, EntityUid target, Fixture otherFixture)
     {
         var (uid, comp, ourBody) = ent;
-        if (comp.ProjectileSpent || comp is { Weapon: null, OnlyCollideWhenShot: true })
+        if (comp is { Weapon: null, OnlyCollideWhenShot: true })
+            return;
+
+        // ignore spent in prediction ticks to allow for embedding to be predicted properly
+        if (comp.ProjectileSpent && _timing.IsFirstTimePredicted)
             return;
 
         // it's here so this check is only done once before possible hit
