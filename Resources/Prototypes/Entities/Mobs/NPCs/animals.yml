@@ -518,16 +518,16 @@
   id: MobMothroach
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
-  # Trauma - Cull ghostroles
-  #- type: GhostRole
-  #  makeSentient: true
-  #  allowSpeech: true
-  #  allowMovement: true
-  #  name: ghost-role-information-mothroach-name
-  #  description: ghost-role-information-mothroach-description
-  #  rules: ghost-role-information-freeagent-rules
-  #  mindRoles:
-  #  - MindRoleGhostRoleFreeAgentHarmless
+  - type: GhostRole
+    prob: 0 # Trauma - was 0.25
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-mothroach-name
+    description: ghost-role-information-mothroach-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgentHarmless
   - type: Fixtures
     fixtures:
       fix1:
@@ -1357,13 +1357,12 @@
     tags:
     - DoorBumpOpener
     - FootstepSound
-# Trauma - Cull ghostroles
-#  - type: GhostRole
-#    prob: 0.25
-#    name: ghost-role-information-kangaroo-name
-#    description: ghost-role-information-kangaroo-description
-#    rules: ghost-role-information-nonantagonist-rules
-#  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    prob: 0 # Trauma - was 0.25
+    name: ghost-role-information-kangaroo-name
+    description: ghost-role-information-kangaroo-description
+    rules: ghost-role-information-nonantagonist-rules
+  - type: GhostTakeoverAvailable
   - type: Vocal
     sounds:
       Unsexed: Kangaroo
@@ -3668,15 +3667,15 @@
   description: A cute, fluffy, robust hamster.
   components:
   - type: VentCrawler # goobstation - Ventcrawl
-# Trauma - cull ghostroles
-#  - type: GhostRole
-#    makeSentient: true
-#    allowSpeech: true
-#    allowMovement: true
-#    name: ghost-role-information-hamster-name
-#    description: ghost-role-information-hamster-description
-#    rules: ghost-role-information-nonantagonist-rules
-#  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    prob: 0 # Trauma
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-hamster-name
+    description: ghost-role-information-hamster-description
+    rules: ghost-role-information-nonantagonist-rules
+  - type: GhostTakeoverAvailable
   - type: Speech
     speechVerb: SmallMob
     speechSounds: Squeak

@@ -419,16 +419,16 @@
   name: snail
   description: Revolting unless you're french.
   components:
-# Trauma - cull ghostrole spam
-#  - type: GhostRole
-#    makeSentient: true
-#    allowSpeech: false
-#    allowMovement: true
-#    name: ghost-role-information-snail-name
-#    description: ghost-role-information-snail-description
-#    rules: ghost-role-information-freeagent-rules
-#    mindRoles:
-#    - MindRoleGhostRoleFreeAgentHarmless
+  - type: GhostRole
+    prob: 0 # Trauma
+    makeSentient: true
+    allowSpeech: false
+    allowMovement: true
+    name: ghost-role-information-snail-name
+    description: ghost-role-information-snail-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgentHarmless
   - type: GhostTakeoverAvailable
   - type: Emoting
   - type: Sprite
@@ -566,16 +566,8 @@
   id: MobSnailInstantDeath
   suffix: Smite
   components:
-  # Trauma - Move Snail ghostrole parts down.
   - type: GhostRole
-    makeSentient: true
-    allowSpeech: false
-    allowMovement: true
-    name: ghost-role-information-snail-name
-    description: ghost-role-information-snail-description
-    rules: ghost-role-information-freeagent-rules
-    mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    prob: 1 # Trauma
   - type: MobStateActions
     actions:
       Alive:
@@ -593,13 +585,7 @@
   suffix: Speed
   components:
   - type: GhostRole
-    # Trauma - Move Snail ghostrole parts down
-    makeSentient: true
-    allowSpeech: false
-    allowMovement: true
-    name: ghost-role-information-snailspeed-name
-    description: ghost-role-information-snailspeed-description
-    rules: ghost-role-information-freeagent-rules
+    prob: 1 # Trauma
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -624,13 +610,7 @@
   name: Snoth
   components:
   - type: GhostRole
-    # Trauma - Move Snail ghostrole parts down
-    makeSentient: true
-    allowSpeech: false
-    allowMovement: true
-    name: ghost-role-information-snoth-name
-    description: ghost-role-information-snoth-description
-    rules: ghost-role-information-freeagent-rules
+    prob: 1 # Trauma
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
