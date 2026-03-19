@@ -119,6 +119,8 @@
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi
 
+
+#added by Gribley Need changing to armoks will
 - type: entity
   parent: ClothingBackpackSatchel
   id: PatreonGribley
@@ -131,7 +133,7 @@
     sprite: _Trauma/Objects/Patreon/gribley.rsi
 
 - type: entity
-  parent: ClothingBackpackSatchel
+  parent: ClothingOuterStorageBase
   id: PatreonTheGungeonologist1
   name: bomber jacket patreon
   description: [PLACEHOLDER]
@@ -142,9 +144,9 @@
     sprite: _Trauma/Objects/Patreon/TheGungeonologist/bomberjacket.rsi
 
 - type: entity
-  parent: ClothingBackpackSatchel
-  id: PatreonTheGungeonologist1
-  name: bomber jacket patreon
+  parent: ClothingEyesBase
+  id: PatreonTheGungeonologist2
+  name: cup goggles
   description: [PLACEHOLDER]
   components:
   - type: Sprite
