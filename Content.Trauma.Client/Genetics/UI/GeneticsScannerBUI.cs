@@ -22,6 +22,7 @@ public sealed class GeneticsScannerBUI : BoundUserInterface
         _window.SetEntity(Owner);
         _window.OpenCentered();
         _window.OnScan += () => SendPredictedMessage(new GeneticsConsoleScanMessage());
+        _window.OnPrint += i => SendPredictedMessage(new GeneticsPrintScanMessage(i));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

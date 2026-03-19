@@ -8,7 +8,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         Orientation="Vertical"
         HorizontalExpand="True"
         VerticalExpand="True">
-    <genetics:GeneticScanner Name="Scanner"/>
+    <genetics:GeneticScanner Name="Scanner">
+    	<Button Name="PrintScanButton" Text="{Loc 'genetics-console-print-scan'}" Disabled="True" MaxWidth="160" Visible="False"/>
+    </genetics:GeneticScanner>
     <BoxContainer Name="MobContainer" Orientation="Vertical" Visible="False">
         <!-- List of sequences available -->
         <controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
@@ -17,6 +19,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <!-- Mutation Info -->
             <genetics:SequenceInfo Name="Info">
                 <Button Name="WriteButton" Text="{Loc 'genetics-console-write-mutation'}" Disabled="True" MaxWidth="160"/>
+                <Button Name="PrintSequenceButton" Text="{Loc 'genetics-console-print-sequence'}" Disabled="True" MaxWidth="160" Visible="False"/>
             </genetics:SequenceInfo>
             <BoxContainer Name="NoSequence" Align="Center" HorizontalExpand="True">
                 <Label Text="{Loc 'genetics-console-sequencer-no-sequence-selected'}"/>
