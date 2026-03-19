@@ -54,6 +54,14 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: 959c5377-d1a9-4c8b-8a64-27e563846352
 
+- type: loadoutEffectGroup
+  id: TheGungeonologist
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 03cb0c9e-0de7-44dd-8466-d392620381fa
+
+
+
 # - type: loadoutEffectGroup
 #   id: Parorya
 #   effects:
@@ -161,3 +169,12 @@
   storage:
     back:
     - PatreonGribley
+
+- type: loadout
+  id: PatreonTheGungeonologist
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TheGungeonologist
+  storage:
+    back:
+    - PatreonTheGungeonologist
