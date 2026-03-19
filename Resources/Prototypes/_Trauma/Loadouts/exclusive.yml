@@ -171,10 +171,10 @@
     - PatreonGribley
 
 - type: loadout
-  id: PatreonTheGungeonologist
+  id: PatreonTheGungeonologist1
   effects:
   - !type:GroupLoadoutEffect
     proto: TheGungeonologist
   storage:
     back:
-    - PatreonTheGungeonologist
+    - PatreonTheGungeonologist1
