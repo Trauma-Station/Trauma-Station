@@ -76,7 +76,7 @@ public sealed partial class GeneticsConsoleSystem
         _builder.AppendLine(Loc.GetString("genetics-printout-sequence-rarity", ("rarity", rarity)));
         // format it similar to the UI, 2 rows split on 4 bases per group
         var n = MutationData.PairCount;
-        for (int o = 0; o < n; o += n)
+        for (int o = 0; o <= n; o += n)
         {
             _builder.Append("| ");
             for (int i = 0; i < n; i += 4)
