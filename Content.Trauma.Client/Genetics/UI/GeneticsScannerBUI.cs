@@ -26,7 +26,7 @@ public sealed class GeneticsScannerBUI(EntityUid owner, Enum key) : BoundUserInt
             return;
 
         window.UpdateState(cast);
-        if (window.IsClosed)
+        if (!window.IsOpen)
             window.OpenCentered();
     }
 }
