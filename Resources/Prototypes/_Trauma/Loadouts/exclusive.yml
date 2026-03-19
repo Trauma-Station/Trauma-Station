@@ -178,3 +178,12 @@
   storage:
     back:
     - PatreonTheGungeonologist1
+
+- type: loadout
+  id: PatreonTheGungeonologist2
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TheGungeonologist
+  storage:
+    back:
+    - PatreonTheGungeonologist2
