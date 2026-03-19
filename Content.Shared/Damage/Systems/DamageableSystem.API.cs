@@ -437,9 +437,10 @@ public sealed partial class DamageableSystem
         var damage = new DamageSpecifier();
         damage.DamageDict.EnsureCapacity(groupProto.DamageTypes.Count);
 
+        var allDamage = GetAllDamage(ent.AsNullable()); // Trauma - body damage
         foreach (var damageId in groupProto.DamageTypes)
         {
-            if (!ent.Comp.Damage.DamageDict.TryGetValue(damageId, out var value))
+            if (!allDamage.DamageDict.TryGetValue(damageId, out var value)) // Trauma - use allDamage from above
                 continue;
             if (value > FixedPoint2.Zero)
                 damage.DamageDict.Add(damageId, value);
@@ -456,9 +457,10 @@ public sealed partial class DamageableSystem
     public DamageSpecifier GetPositiveDamage(Entity<DamageableComponent> ent)
     {
         var damage = new DamageSpecifier();
-        damage.DamageDict.EnsureCapacity(ent.Comp.Damage.DamageDict.Count);
+        var allDamage = GetAllDamage(ent.AsNullable()); // Trauma - body damage
+        damage.DamageDict.EnsureCapacity(allDamage.DamageDict.Count); // Trauma - use allDamage
 
-        foreach (var (damageId, value) in ent.Comp.Damage.DamageDict)
+        foreach (var (damageId, value) in allDamage.DamageDict) // Trauma - use allDamage
         {
             if (value > FixedPoint2.Zero)
                 damage.DamageDict.Add(damageId, value);
