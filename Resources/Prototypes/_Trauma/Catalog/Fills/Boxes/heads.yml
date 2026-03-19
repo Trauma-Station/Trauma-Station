@@ -1,0 +1,77 @@
+- type: entity
+  parent: ToteBase
+  id: BoxSkillChipsCargo
+  name: cargo skillchips tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipQuartermaster
+        - id: SkillChipSalvageSpecialist
+          amount: 2
+        - id: SkillChipCargoTechnician
+          amount: 3
+
+- type: entity
+  parent: ToteBase
+  id: BoxSkillChipsEngi
+  name: engi skillchips tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipChiefEngineer
+        - id: SkillChipAtmosphericTechnician
+        - id: SkillChipStationEngineer
+          amount: 3
+        - id: SkillChipTechnicalAssistant
+          amount: 2
+
+- type: entity
+  parent: ToteBase
+  id: BoxSkillChipsMed
+  name: med skillchips tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipChiefMedicalOfficer
+        - id: SkillChipParamedic
+        - id: SkillChipMedicalDoctor
+          amount: 2
+        - id: SkillChipMedicalIntern
+          amount: 2
+
+- type: entity
+  parent: ToteBase
+  id: BoxSkillChipsSci
+  name: sci skillchips tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipResearchDirector
+        - id: SkillChipScientist
+          amount: 3
+        - id: SkillChipResearchAssistant
+          amount: 3
+
+- type: entity
+  parent: ToteBase
+  id: BoxSkillChipsSec
+  name: sec skillchips tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipHeadOfSecurity
+        - id: SkillChipWarden
+        - id: SkillChipSecurityOfficer
+          amount: 2
+        - id: SkillChipSecurityCadet
+          amount: 2
