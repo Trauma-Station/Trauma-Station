@@ -140,3 +140,14 @@
     sprite: _Trauma/Objects/Patreon/TheGungeonologist/bomberjacket.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/TheGungeonologist/bomberjacket.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: PatreonTheGungeonologist1
+  name: bomber jacket patreon
+  description: [PLACEHOLDER]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/TheGungeonologist/cupgoggles.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/TheGungeonologist/cupgoggles.rsi
