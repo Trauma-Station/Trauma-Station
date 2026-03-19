@@ -40,7 +40,7 @@ public sealed partial class GeneticsConsoleSystem
     private bool ResetPrintout(Entity<GeneticsPrintoutComponent> ent)
     {
         var now = _timing.CurTime;
-        if (ent.Comp.NextPrint < now)
+        if (now < ent.Comp.NextPrint)
             return false;
 
         ent.Comp.NextPrint = now + ent.Comp.PrintDelay;
