@@ -168,6 +168,6 @@
   description: Theft is a sin, but Saint Benedict didn't even notice this was missing.
   components:
   - type: Sprite
-    sprite: _Trauma/Clothing/OuterClothing/Misc/venator.rsi
+    sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
   - type: Clothing
-    sprite: _Trauma/Clothing/OuterClothing/Misc/venator.rsi
+    sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
