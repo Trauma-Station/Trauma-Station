@@ -581,7 +581,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: Zookeeper # Trauma
       name: job-name-zookeeper
     - type: Loadout
       prototypes: [ VisitorZookeeper, VisitorZookeeperAlt ]
@@ -616,13 +615,13 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: Captain # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
-      job: Captain # Trauma
     - type: Loadout
       prototypes: [ ChallengeVictimCaptain, ChallengeVictimCaptainAlt ] #!! This is supposed to be for challenge events. Its intentionally missing QOL gear to make interesting scenarios.
       roleLoadout: [ RoleSurvivalVoxSupport ]
@@ -638,13 +637,13 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: ChiefEngineer # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
-      job: ChiefEngineer # Trauma
     - type: Loadout
       prototypes: [ ChallengeVictimCE, ChallengeVictimCEAlt ] #!! This is supposed to be for challenge events. Its intentionally missing QOL gear to make interesting scenarios.
       roleLoadout: [ RoleSurvivalVoxSupport ]
@@ -660,13 +659,13 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: ChiefMedicalOfficer # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
-      job: ChiefMedicalOfficer # Trauma
     - type: Loadout
       prototypes: [ ChallengeVictimCMO, ChallengeVictimCMOAlt ] #!! This is supposed to be for challenge events. Its intentionally missing QOL gear to make interesting scenarios.
       roleLoadout: [ RoleSurvivalVoxSupport ]
@@ -682,13 +681,13 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: HeadOfPersonnel # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
-      job: HeadOfPersonnel # Trauma
     - type: Loadout
       prototypes: [ ChallengeVictimHOP, ChallengeVictimHOPAlt ] #!! This is supposed to be for challenge events. Its intentionally missing QOL gear to make interesting scenarios.
       roleLoadout: [ RoleSurvivalVoxSupport ]
@@ -704,13 +703,13 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: HeadOfSecurity # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
-      job: HeadOfSecurity # Trauma
     - type: Loadout
       prototypes: [ ChallengeVictimHOS, ChallengeVictimHOSAlt ] #!! This is supposed to be for challenge events. Its intentionally missing QOL gear to make interesting scenarios.
       roleLoadout: [ RoleSurvivalVoxSupport ]
@@ -726,13 +725,13 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: ResearchDirector # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
-      job: ResearchDirector # Trauma
     - type: Loadout
       prototypes: [ ChallengeVictimRD, ChallengeVictimRDAlt ] #!! This is supposed to be for challenge events. Its intentionally missing QOL gear to make interesting scenarios.
       roleLoadout: [ RoleSurvivalVoxSupport ]
@@ -748,13 +747,13 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: Quartermaster # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
-      job: Quartermaster # Trauma
     - type: Loadout
       prototypes: [ ChallengeVictimQM, ChallengeVictimQMAlt ] #!! This is supposed to be for challenge events. Its intentionally missing QOL gear to make interesting scenarios.
       roleLoadout: [ RoleSurvivalVoxSupport ]
@@ -774,13 +773,13 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: CargoTechnician # Trauma
       name: ghost-role-information-lost-challenge-cargo-technican-name
       description: ghost-role-information-lost-challenge-cargo-technican-description
       rules: ghost-role-information-lost-disaster-challenge-cargo-technican-rules
       raffle:
         settings: short
     - type: GhostTakeoverAvailable
-      job: CargoTechnician # Trauma
     - type: Loadout
       prototypes: [ ChallengeCargoTechGearSuit, ChallengeCargoTechGearCoat ] #!! This is supposed to be for challenge events. Its intentionally missing QOL gear to make interesting scenarios.
       roleLoadout: [ RoleSurvivalVoxSupport ]
