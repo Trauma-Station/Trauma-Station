@@ -10,7 +10,7 @@
   - type: UserInterface
     interfaces:
       enum.RadialSelectorUiKey.Key:
-        type: AttachedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI
   - type: ActivatableUI
     key: enum.RadialSelectorUiKey.Key
     inHandsOnly: true
