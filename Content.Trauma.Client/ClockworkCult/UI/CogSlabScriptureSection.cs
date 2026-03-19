@@ -56,7 +56,7 @@ public sealed partial class CogSlabScriptureSection : CogSlabSection
         {
             if (i % _scripturesPerPage == 0)
             {
-                var page = new CogSlabScripturePage();
+                var page = new CogSlabScripturePage(this);
                 currentPage = page;
                 AddChild(page);
             }

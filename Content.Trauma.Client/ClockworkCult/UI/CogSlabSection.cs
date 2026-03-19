@@ -46,11 +46,33 @@ public abstract partial class CogSlabSection : Control
     }
 
     /// <summary>
+    /// Displays a specific page from <see cref="_cogSlabPages"/>
+    /// </summary>
+    public void DisplayPage(CogSlabPage page)
+    {
+        if (!_cogSlabPages.Contains(page))
+            return;
+
+        _currentPage = _cogSlabPages.IndexOf(page);
+        UpdateSection();
+    }
+
+    /// <summary>
     /// Adds a page to <see cref="_cogSlabPages"/> and updates the ui.
     /// </summary>
     public void AddPage(CogSlabPage page)
     {
         _cogSlabPages.Add(page);
+        UpdateSection();
+    }
+
+    /// <summary>
+    /// Removes a page from <see cref="_cogSlabPages"/> and updates the ui.
+    /// </summary>
+    public void RemovePage(CogSlabPage page)
+    {
+        _cogSlabPages.Remove(page);
+        _currentPage = 0;
         UpdateSection();
     }
 

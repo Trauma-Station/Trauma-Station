@@ -1,0 +1,20 @@
+﻿<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Orientation="Vertical"
+    HorizontalExpand="True"
+    VerticalExpand="True"
+    VerticalAlignment="Top">
+    <PanelContainer SetSize="200 120">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BorderThickness="1"
+                BorderColor="#bf9b30"
+                BackgroundColor="#a67c00" />
+        </PanelContainer.PanelOverride>
+
+        <Button Name="ScriptureButton" Text="Unknown" VerticalAlignment="Bottom"></Button> <!-- This should be TextureButton. Also add Quick Recite button here -->
+    </PanelContainer>
+    <Label Name="ScriptureTitle" Text="????" Align="Center"></Label>
+
+</BoxContainer>
