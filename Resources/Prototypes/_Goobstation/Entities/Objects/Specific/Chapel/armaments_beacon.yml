@@ -53,7 +53,7 @@
         state: icon
     - prototype: SpawnArmamentsVenerator
       icon:
-        sprite: _TraumaClothing/OuterClothing/Misc/venerator.rsi
+        sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
         state: icon
   - type: StaticPrice
     price: 500
