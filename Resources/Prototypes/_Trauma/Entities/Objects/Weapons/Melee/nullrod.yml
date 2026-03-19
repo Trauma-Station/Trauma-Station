@@ -5,7 +5,7 @@
   description: A powerful crossbow for the crusader with style.
   components:
   - type: Nullrod
-    DamageOnUntrainedUse:
+    damageOnUntrainedUse:
       types:
         Brute: 20
     UntrainedUseString: nullrod-iradomini-untrained-usage-popup
