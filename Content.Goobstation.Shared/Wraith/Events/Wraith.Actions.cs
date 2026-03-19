@@ -34,7 +34,7 @@ public sealed partial class PossessObjectEvent : EntityTargetActionEvent
     public ComponentRegistry ToAdd = new();
 
     [DataField]
-    public HashSet<string> ToRemove = new();
+    public ComponentRegistry ToRemove = new(); // TODO: use ComponentFilter
 }
 
 public sealed partial class WraithEvolveEvent : InstantActionEvent;

@@ -11,16 +11,18 @@ public sealed partial class RandomChanceSpawnerSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<RandomChanceSpawnerComponent, MapInitEvent>(OnMapInit);
     }
 
     public void OnMapInit(Entity<RandomChanceSpawnerComponent> ent, ref MapInitEvent args)
     {
-        foreach(KeyValuePair<EntProtoId, float> kvp in ent.Comp.ToSpawn)
+        foreach (var (id, chance) in ent.Comp.ToSpawn)
         {
-            if (kvp.Value >= _random.NextFloat(0.0f, 1.0f))
-                Spawn(kvp.Key, Transform(ent).Coordinates);
+            if (_random.Prob(chance))
+                Spawn(id, Transform(ent).Coordinates);
         }
-        EntityManager.QueueDeleteEntity(ent);
+        QueueDel(ent);
     }
 }

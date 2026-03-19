@@ -62,7 +62,7 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
                 continue;
 
             if (TryComp<PhysicsComponent>(hit, out var comp))
-                weight += comp.Mass;
+                weight += comp.FixturesMass;
 
             // Melee check to make sure we aren't just giving experience for hitting walls or cuffed monkeys or getting people unaware.
             if (!_mobState.IsAlive(hit) || !_combat.IsInCombatMode(hit) || !(TryComp<CuffableComponent>(hit, out var cuffs) && _cuffs.IsCuffed((hit, cuffs))))

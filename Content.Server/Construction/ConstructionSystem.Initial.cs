@@ -354,7 +354,7 @@ namespace Content.Server.Construction
             }
 
             // <Trauma>
-            var ev = new ConstructAttemptEvent(user, prototype);
+            var ev = new ConstructAttemptEvent(prototype);
             RaiseLocalEvent(user, ref ev);
             if (ev.Cancelled)
                 return false;
@@ -463,7 +463,7 @@ namespace Content.Server.Construction
             }
 
             // <Trauma>
-            var ev = new ConstructAttemptEvent(user, prototypeName);
+            var ev = new ConstructAttemptEvent(prototypeName);
             RaiseLocalEvent(user, ref ev);
             if (ev.Cancelled)
             {

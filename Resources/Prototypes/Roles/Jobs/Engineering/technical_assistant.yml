@@ -6,10 +6,10 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 1h
-    - !type:DepartmentTimeRequirement
-      department: Engineering
-      time: 5h
-      inverted: true # stop playing intern if you're good at engineering!
+    # - !type:DepartmentTimeRequirement # Trauma
+    #   department: Engineering
+    #   time: 5h
+    #   inverted: true # stop playing intern if you're good at engineering!
   startingGear: TechnicalAssistantGear
   icon: "JobIconTechnicalAssistant"
   supervisors: job-supervisors-engineering
@@ -17,7 +17,6 @@
   - Construction
   - Power
   - Networking
-  goobcoins: 20 #Goob content
   access:
   - Maintenance
   - Engineering
@@ -27,20 +26,6 @@
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      # TODO: make this just 1 or 2 types
-      HandmadeKnowledge: 10
-      TechnologyKnowledge: 10
-      MaterialsKnowledge: 10
-      DoorsKnowledge: 10
-      AirlocksKnowledge: 10
-      FurnitureKnowledge: 10
-      InfrastructureKnowledge: 10
-      ElectronicsKnowledge: 10
-      WallsKnowledge: 10
-      WindowsKnowledge: 10
-      SmokeablesKnowledge: 50
   # </Trauma>
 
 - type: startingGear

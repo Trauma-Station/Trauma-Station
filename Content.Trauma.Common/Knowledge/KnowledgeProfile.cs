@@ -17,22 +17,17 @@ public partial record struct KnowledgeProfile
     /// Each skill and the mastery level from [0, Costs.Length] (usually 5)
     /// </summary>
     public Dictionary<EntProtoId, int> Mastery;
-    /// <summary>
-    /// Skills to remove from the parent profile.
-    /// </summary>
-    public HashSet<EntProtoId> Removed;
 
-    public KnowledgeProfile(Dictionary<EntProtoId, int> mastery, HashSet<EntProtoId> removed)
+    public KnowledgeProfile(Dictionary<EntProtoId, int> mastery)
     {
         Mastery = mastery;
-        Removed = removed;
     }
 
     /// <summary>
     /// Create an empty profile which uses the parent as-is.
     /// </summary>
     public KnowledgeProfile()
-        : this(new(), new())
+        : this(new Dictionary<EntProtoId, int>())
     {
     }
 
@@ -40,31 +35,14 @@ public partial record struct KnowledgeProfile
     /// Make a deep copy of another profile
     /// </summary>
     public KnowledgeProfile(KnowledgeProfile other)
-        : this(new(other.Mastery), new(other.Removed))
+        : this(new Dictionary<EntProtoId, int>(other.Mastery))
     {
-    }
-
-    /// <summary>
-    /// Add this profile to a parent profile.
-    /// </summary>
-    public KnowledgeProfile AddProfile(KnowledgeProfile parent)
-    {
-        var sum = new KnowledgeProfile(parent);
-        foreach (var (id, change) in Mastery)
-        {
-            sum.Mastery[id] = sum.Mastery.GetValueOrDefault(id) + change;
-        }
-        foreach (var id in Removed)
-        {
-            sum.Mastery.Remove(id);
-        }
-        return sum;
     }
 
     /// <summary>
     /// Verify potentially outdated/untrusted profile data.
     /// </summary>
-    public static KnowledgeProfile Verify(Dictionary<string, int> mastery, List<string> removed, IPrototypeManager proto)
+    public static KnowledgeProfile Verify(Dictionary<string, int> mastery, IPrototypeManager proto)
     {
         var profile = new KnowledgeProfile();
         foreach (var (id, change) in mastery)
@@ -75,22 +53,7 @@ public partial record struct KnowledgeProfile
 
             profile.Mastery[id] = change;
         }
-        foreach (var id in removed)
-        {
-            if (proto.HasIndex(id))
-                profile.Removed.Add(id);
-        }
         return profile;
-    }
-
-    public List<string> RemovedList()
-    {
-        var list = new List<string>(Removed.Count);
-        foreach (var id in Removed)
-        {
-            list.Add(id);
-        }
-        return list;
     }
 
     public bool MemberwiseEquals(KnowledgeProfile other)

@@ -4,25 +4,19 @@
   description: job-description-research-assistant
   playTimeTracker: JobResearchAssistant
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Science
-      time: 5h
-      inverted: true # stop playing intern if you're good at science!
+    - !type:OverallPlaytimeRequirement # Trauma
+      time: 1h
+    # - !type:DepartmentTimeRequirement # Trauma
+    #   department: Science
+    #   time: 5h
+    #   inverted: true # stop playing intern if you're good at science!
   startingGear: ResearchAssistantGear
   icon: "JobIconResearchAssistant"
   supervisors: job-supervisors-science
   guides: [ Science ] # goobstation
-  goobcoins: 20 #Goob content
   access:
   - Research
   - Maintenance
-  # <Trauma>
-  special:
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      TechnologyKnowledge: 10
-      ScienceKnowledge: 10
-  # </Trauma>
 
 - type: startingGear
   id: ResearchAssistantGear

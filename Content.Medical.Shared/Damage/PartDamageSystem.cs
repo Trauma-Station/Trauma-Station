@@ -19,11 +19,12 @@ public sealed class PartDamageSystem : EntitySystem
 
     private void OnMapInit(Entity<DamageableComponent> ent, ref MapInitEvent args)
     {
-        if (ent.Comp.Damage.GetTotal() == 0)
+        var damage = _damage.GetAllDamage(ent.AsNullable());
+        if (damage.GetTotal() == 0)
             return;
 
         // update e.g. unidentified corpse part damage when they spawn
-        _damage.ApplyDamageToBodyParts(ent, ent.Comp.Damage, origin: null,
+        _damage.ApplyDamageToBodyParts(ent, damage, origin: null,
             ignoreResistances: true, interruptsDoAfters: false, partMultiplier: 1f, targetPart: TargetBodyPart.Chest, canMiss: false);
     }
 }

@@ -6,4 +6,4 @@ using Robust.Shared.Utility;
 namespace Content.Trauma.Common.Knowledge;
 
 [Serializable, NetSerializable]
-public record struct KnowledgeInfo(string Name, string Description, Color Color, SpriteSpecifier? Sprite);
+public record struct KnowledgeInfo(string Name, string Description, Color Color, SpriteSpecifier? Sprite, int LearnedLevel, int NetLevel, int CurrentExp, int ExpCost);

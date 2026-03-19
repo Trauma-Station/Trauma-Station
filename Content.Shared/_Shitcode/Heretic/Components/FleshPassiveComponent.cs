@@ -1,5 +1,5 @@
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
-using Content.Shared.Tag;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -23,13 +23,10 @@ public sealed partial class FleshPassiveComponent : Component
     public EntityUid? Stomach;
 
     [DataField]
-    public float BaseMoveSpeedPerFlesh = 0.0003f;
+    public ProtoId<ReagentPrototype> ReagentId = "RawFlesh";
 
     [DataField]
-    public float BaseAttackRatePerFlesh = 0.002f;
-
-    [DataField]
-    public float BaseHealingPerFlesh = 0.0015f;
+    public float ReagentMultiplier = 0.1f;
 
     [DataField]
     public float OrganMultiplier = 2f;
@@ -48,27 +45,6 @@ public sealed partial class FleshPassiveComponent : Component
 
     [DataField]
     public float AscensionMultiplier = 2f;
-
-    [DataField]
-    public float PainHealMultiplier = 5f;
-
-    [DataField]
-    public float BoneHealMultiplier = 10f;
-
-    [DataField]
-    public float WoundHealMultiplier = 10f;
-
-    [DataField]
-    public float BloodHealMultiplier = 20f;
-
-    [DataField]
-    public float BleedReductionMultiplier = 5f;
-
-    [DataField]
-    public float HealInterval = 1f;
-
-    [ViewVariables]
-    public float Accumulator;
 
     [DataField]
     public FixedPoint2 TrackedDamage;

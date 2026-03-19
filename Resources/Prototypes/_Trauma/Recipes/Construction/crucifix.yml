@@ -12,3 +12,5 @@
   theory:
     WeaponsKnowledge: 0
     FurnitureKnowledge: 0
+  practical:
+    CarvingKnowledge: 2

@@ -14,11 +14,18 @@
     hungerOnDevourMultiplier: 0.2
     tickDelay: 3
     healing:
-      groups:
-        Brute: -16
-        Burn: -16
-        Airloss: -10
-        Toxin: -10
+      types:
+        Blunt: -6
+        Slash: -6
+        Piercing: -6
+        Heat: -4
+        Cold: -4
+        Shock: -4
+        Caustic: -4
+        Asphyxiation: -5
+        Bloodloss: -5
+        Poison: -5
+        Radiation: -5
     damageOnFail:
       types:
         Slash: 300

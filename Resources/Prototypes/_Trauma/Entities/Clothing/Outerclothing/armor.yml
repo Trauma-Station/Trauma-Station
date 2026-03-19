@@ -160,3 +160,14 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:Container {}
+
+- type: entity
+  parent: ClothingOuterArmorTemplar
+  id: ClothingOuterArmorVenerator
+  name: venerator cloak
+  description: Theft is a sin, but Saint Benedict didn't even notice this was missing.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Misc/venator.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Misc/venator.rsi

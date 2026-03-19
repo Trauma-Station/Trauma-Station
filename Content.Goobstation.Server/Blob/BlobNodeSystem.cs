@@ -110,9 +110,10 @@ public sealed class BlobNodeSystem : EntitySystem
 
     private void Pulse(Entity<BlobNodeComponent> ent)
     {
-        if (TerminatingOrDeleted(ent) || !EntityManager.TransformQuery.TryComp(ent, out var xform))
+        if (TerminatingOrDeleted(ent))
             return;
 
+        var xform = Transform(ent);
         var radius = ent.Comp.PulseRadius;
 
         var localPos = xform.Coordinates.Position;

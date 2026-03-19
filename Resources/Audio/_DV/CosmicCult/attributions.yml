@@ -61,7 +61,7 @@
   - ability_glare.ogg
   - ability_blank.ogg
   - ability_siphon.ogg
-  - ability_sunder.ogg
+  - ascendant_shunt.ogg
   - ascendant_noise.ogg
   license: "CC-BY-SA-3.0"
   copyright: "By AftrLite(GitHub) for Cosmic Cult. Made using a combination of (Creative Commons 0) samples from freesound.org and personally-recorded foley."
@@ -95,6 +95,7 @@
   - helmet_on.ogg
   - helmet_off.ogg
   - ability_stride.ogg
+  - ability_sunder.ogg
   license: "CC-BY-SA-3.0"
   copyright: "Made by NoElkaTheGod(GitHub) using a combination of other SS14 assets."
   source: "https://freesound.org/"

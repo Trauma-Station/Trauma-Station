@@ -8,7 +8,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 0
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -21,9 +23,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    MechanicsKnowledge: 0
   practical:
-    ElectronicsKnowledge: 2
+    MechanicsKnowledge: 1
   # </Trauma>
 
 # Switching
@@ -40,6 +42,8 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -58,6 +62,8 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -75,6 +81,8 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -92,6 +100,8 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0 # most basic signal source
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -111,6 +121,8 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -129,6 +141,8 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -147,4 +161,6 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>

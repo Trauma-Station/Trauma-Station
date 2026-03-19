@@ -140,6 +140,15 @@
   id: MobMoth
   name: Urist McFluff
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Moffic
+    understands:
+    - TauCetiBasic
+    - Moffic
+  # </Trauma>
   - type: Damageable
     damageModifierSet: Moth
   - type: ZombieAccentOverride
@@ -245,7 +254,7 @@
   id: OrganMothTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganMothExternal ]
+  parent: [ OrganBaseHeadBald, OrganMothExternal ] # Trauma - bald
   id: OrganMothHead
   components:
   - type: VisualOrganMarkings

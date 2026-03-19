@@ -1,0 +1,154 @@
+- type: microwaveMealRecipe
+  id: RecipeBreadling
+  name: bread ling recipe
+  result: MobBreadLing
+  group: Soup
+  time: 30
+  solids:
+    FoodDough: 1
+    MedicalStitches: 1
+    FoodButterSlice: 1
+    FoodEgg: 2
+
+- type: microwaveMealRecipe
+  id: RecipeBingleSoup
+  name: bingle soup recipe
+  result: FoodSoupBingle
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodMeatBingleCooked: 1
+    FoodCarrot: 2
+
+- type: microwaveMealRecipe
+  id: RecipeBloodSoup
+  name: blood soup recipe
+  result: FoodSoupBlood
+  time: 10
+  group: Soup
+  reagents:
+    Blood: 30
+
+- type: microwaveMealRecipe
+  id: RecipeGoulashShoup
+  name: goulash recipe
+  result: FoodGoulash
+  time: 10
+  group: Soup
+  reagents:
+    Milk: 10
+  solids:
+    FoodMeatCutletCooked: 1
+    FoodNoodlesBoiled: 1
+    FoodTomato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBreadSandwich
+  name: bread sandwich recipe
+  result: FoodBreadSandwich
+  time: 10
+  group: Savory
+  solids:
+    FoodBreadPlainSlice: 1
+    FoodBreadButteredToast: 2
+
+- type: microwaveMealRecipe
+  id: RecipeChickenParm
+  name: chicken parm recipe
+  result: FoodChickenParm
+  time: 15
+  group: Pasta
+  solids:
+    FoodNoodlesBoiled: 1
+    FoodCheeseSlice: 2
+    FoodTomato: 2
+    FoodMeatChickenCutletCooked: 3
+
+- type: microwaveMealRecipe
+  id: RecipeCornDog
+  name: corn dog recipe
+  result: FoodCornDog
+  time: 10
+  group: Savory
+  solids:
+    FoodSausage: 1
+    FoodKebabSkewer: 1
+  reagents:
+    UnstableMutagen: 5
+    Flour: 5
+    Egg: 6
+
+- type: microwaveMealRecipe
+  id: RecipeHotDog
+  name: hot dog recipe
+  result: FoodHotDog
+  time: 10
+  group: Savory
+  solids:
+    FoodSausage: 1
+    FoodBreadPlainSlice: 1
+  reagents:
+    UnstableMutagen: 5
+
+- type: microwaveMealRecipe
+  id: RecipeFairyBread
+  name: fairy bread recipe
+  result: FoodFairyBread
+  time: 10
+  group: Savory
+  solids:
+    FoodBreadPlainSlice: 1
+    FoodButterSlice: 1
+  reagents:
+    Sugar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeOffal
+  name: offal recipe
+  result: FoodOffal
+  time: 10
+  group: Savory
+  solids:
+    FoodTomato: 2
+    FoodOnion: 1
+    FoodGarlic: 1
+    OrganAnimalKidneys: 1  # Replace with tag eventually
+    OrganAnimalLiver: 1 # replace with tag eventually
+
+- type: microwaveMealRecipe
+  id: RecipeRoastedMonkey
+  name: roasted monkey recipe
+  result: FoodRoastedMonkey
+  time: 30
+  group: Savory
+  solids:
+    FoodPlate: 1
+    FoodOnion: 1
+    FoodGarlic: 1
+    FoodApple: 1
+    FoodTomato: 1
+    FoodMushroom: 2
+    MonkeyCube: 1
+  reagents:
+    Water: 5
+
+- type: microwaveMealRecipe
+  id: RecipeSausage
+  name: sausage recipe
+  result: FoodSausage
+  time: 5
+  group: Savory
+  solids:
+    FoodMeat: 1
+    OrganAnimalStomach: 1 # replace with tag
+
+- type: microwaveMealRecipe
+  id: RecipeSpire
+  name: THE SPIRE recipe
+  result: FoodSpire
+  time: 30
+  group: Savory
+  solids:
+    FoodBurgerBig: 10

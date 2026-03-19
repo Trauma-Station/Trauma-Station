@@ -34,6 +34,12 @@
   id: FoodProduceBase
   abstract: true
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2.5 # ow minimum
+  # </Trauma>
   - type: SolutionContainerManager
   - type: Sprite
     state: produce
@@ -331,6 +337,22 @@
   id: FoodBanana
   description: Rich in potassium.
   components:
+  # <Trauma>
+  - type: Healing # Bananas heal clown car
+    damageContainers:
+    - ClowncarDamageContainer
+    damage:
+      types:
+        Blunt: -50
+        Slash: -50
+        Piercing: -50
+        Heat: -10
+        Shock: -10
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - banana
@@ -369,19 +391,6 @@
     entries:
       Burger: Banana
       Taco: Banana
-  - type: Healing # Goob - Bananas heal clown car
-    damageContainers:
-      - ClowncarDamageContainer
-    damage:
-      groups:
-        Brute: -150
-      types:
-        Heat: -10
-        Shock: -10
-    healingBeginSound:
-      path: "/Audio/Items/Medical/brutepack_begin.ogg"
-    healingEndSound:
-      path: "/Audio/Items/Medical/brutepack_end.ogg"
 
 - type: entity
   name: mimana
@@ -435,6 +444,14 @@
   id: TrashBananaPeel
   name: banana peel
   components:
+  # <Trauma>
+  - type: Perishable
+    rotAfter: 900 # won't someone please think of the clowns
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
     state: peel
@@ -495,14 +512,6 @@
     slots:
     - HEAD
     quickEquip: false
-#<Trauma>
-  - type: Perishable
-    rotAfter: 900 # won't someone please think of the clowns
-    molsPerSecondPerUnitMass: 0
-  - type: RotInto
-    entity: FoodRot
-    stage: 1
-#</Trauma>
 
 - type: entity
   parent: TrashBananaPeel
@@ -554,6 +563,14 @@
   id: TrashBananiumPeel
   name: bananium peel
   components:
+  # <Trauma>
+  - type: Perishable
+    rotAfter: 999999999 # I am a hero
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: peel
@@ -564,16 +581,6 @@
   - type: Clothing
     sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     equippedPrefix: peel
-# <Trauma>
-  - type: Perishable
-    rotAfter: 999999999 # I am a hero
-    molsPerSecondPerUnitMass: 0
-  - type: RotInto
-    entity: FoodRot
-    stage: 1
-# </Trauma>
-
-
 
 - type: entity
   name: carrot
@@ -623,6 +630,12 @@
   id: FoodCabbage
   description: Ewwwwwwwwww. Cabbage.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - cabbage
@@ -862,6 +875,13 @@
   id: FoodPineapple
   description: Mmm, tropical.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2.5 # ow
+        Slash: 2.5 # but bleeding!
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - pineapple
@@ -1131,6 +1151,12 @@
   id: FoodApple
   description: It's a little piece of Eden.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - apple
@@ -1168,6 +1194,13 @@
   id: FoodGoldenApple
   description: It should be shaped like a cube, shouldn't it?
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5 # ow
+        Holy: 5 # lol
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - apple
@@ -2147,8 +2180,14 @@
   id: FoodWatermelon
   description: Round green object that you can slice and eat.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 15 # PVZ parity
+  # </Trauma>
   - type: Item
-    size: Small
+    size: Normal # Trauma, was Small
     heldPrefix: produce
   - type: FlavorProfile
     flavors:
@@ -2249,8 +2288,15 @@
   id: FoodHolymelon
   description: The water within this melon has been blessed by some deity that's particularly fond of watermelon.
   components:
+  # <Trauma>
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 15 # PVZ Parity
+        Holy: 10 # really good against devils and... *checks notes* ...devils
+  # </Trauma>
   - type: Item
-    size: Small
+    size: Normal # Trauma, was Small
     heldPrefix: produce
   - type: FlavorProfile
     flavors:

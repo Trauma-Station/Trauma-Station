@@ -17,21 +17,30 @@
     - id: JobDistributionError
     - id: KudzuGrowth
     - id: MassHallucinations
-    - id: MimicVendorRule
+    # - id: MimicVendorRule - Trauma, moved to basic antag
     - id: MouseMigration
     - id: PowerGridCheck
     - id: RandomSentience
-    - id: SlimesSpawn
+    # <Trauma> - moved shit to basic antag
+    #- id: SlimesSpawnHorde
     - id: SolarFlare
-    - id: SnakeSpawn
-    - id: SpiderClownSpawn
-    - id: SpiderSpawn
+    #- id: SnakeSpawnHorde
+    #- id: SpiderClownSpawnHorde
+    #- id: SpiderSpawnHorde
+    # </Trauma>
     - id: VentClog
 
 - type: entityTable
   id: BasicAntagEventsTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
+    # <Trauma>
+    - id: MimicVendorRule
+    - id: SlimesSpawnHorde
+    - id: SnakeSpawnHorde
+    - id: SpiderClownSpawnHorde
+    - id: SpiderSpawnHorde
+    # </Trauma>
     - id: ClosetSkeleton
     - id: KingRatMigration
     #- id: RevenantSpawn  # GoobStation - removed till rework
@@ -195,8 +204,8 @@
   id: DragonSpawn
   components:
   - type: StationEvent
-    weight: 2 # Goobstation - was 3
-    earliestStart: 30 # Goobstation was 45
+    weight: 1 # Trauma - Was 3
+    earliestStart: 60 # Trauma - Was 30
     #recorruenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 50
@@ -227,9 +236,9 @@
   id: NinjaSpawn
   components:
   - type: StationEvent
-    weight: 3 # Goobstation - was 6
+    weight: 1 # Trauma - was 6
     duration: null
-    earliestStart: 30 # Goobstation - was 45
+    earliestStart: 45
     #reoccurrenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 30
@@ -288,7 +297,7 @@
   id: ParadoxCloneSpawn
   components:
   - type: StationEvent
-    weight: 5
+    weight: 4 # Trauma - Was 5
     duration: null
     earliestStart: 20
     reoccurrenceDelay: 20
@@ -470,74 +479,87 @@
     duration: 60
   - type: VentClogRule
 
+# Critters
+
 - type: entity
-  id: SlimesSpawn
+  id: SlimesSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
     startAudio:
       path: /Audio/Announcements/aliens.ogg
     earliestStart: 20
     minimumPlayers: 15
-    weight: 7 # Goobstation - was 5
-    duration: 30 # DeltaV: was 60, used as a delay now
-  - type: VentCrittersRule
-    table: !type:GroupSelector # DeltaV: EntityTable instead of spawn entries
+    weight: 7 # Trauma - was 5
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
       children:
-      - id: XenobioSlimeBabySpawner # goob edit - nuke wizden slimes in favor of xenobio
+      # <Trauma>
+      - id: XenobioSlimeBabySpawner # nuke wizden slimes in favor of xenobio
+      # </Trauma>
 
 - type: entity
-  id: SnakeSpawn
+  id: SnakeSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
     earliestStart: 20
     minimumPlayers: 15
-    weight: 7 # Goobstation - was 5
-    duration: 30 # DeltaV: was 60, used as a delay now
-  - type: VentCrittersRule
-    table: !type:GroupSelector # DeltaV: EntityTable instead of spawn entries
+    weight: 5
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
       children:
       - id: MobPurpleSnake
       - id: MobSmallPurpleSnake
       - id: MobCobraSpace
 
 - type: entity
-  id: SpiderSpawn
+  id: SpiderSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
     startAudio:
       path: /Audio/Announcements/aliens.ogg
     earliestStart: 20
     minimumPlayers: 15
-    weight: 7 # Goobstation - was 5
-    duration: 30 # DeltaV: was 60, used as a delay now
-  - type: VentCrittersRule
-    table: # DeltaV: EntityTable instead of spawn entries
-      id: MobGiantSpiderAngry
+    weight: 7 # Trauma - was 5
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobGiantSpiderAngry
 
 - type: entity
-  id: SpiderClownSpawn
+  id: SpiderClownSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    earliestStart: 45 # DeltaV - was 20
-    minimumPlayers: 30 # DeltaV - was 20
-    weight: 3 # Goobstation - was 1.5
-    duration: 30 # DeltaV: was 60, used as a delay now
-  - type: VentCrittersRule
-    playerRatio: 20 # DeltaV: Clown spiders are very robust
-    table: # DeltaV: EntityTable instead of spawn entries
-      id: MobClownSpider
+    earliestStart: 45 # Trauma - was 20
+    minimumPlayers: 30 # Trauma - was 20
+    weight: 2 # Trauma - was 1.5
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobClownSpider
 
 - type: entity
   id: ZombieOutbreak
@@ -581,8 +603,8 @@
   id: LoneOpsSpawn
   components:
   - type: StationEvent
-    earliestStart: 35
-    weight: 2.5 # Goobstation - was 5.5
+    earliestStart: 60 # Trauma - Was 35
+    weight: 1 # Trauma - was 5.5
     minimumPlayers: 50 # Goobstation - was 20
     duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
   - type: RuleGrids
@@ -624,7 +646,7 @@
   components:
   - type: StationEvent
     earliestStart: 30
-    weight: 8
+    weight: 50 # Trauma, was 8
     minimumPlayers: 15
     maxOccurrences: 1 # can only happen once per round
     startAnnouncement: station-event-communication-interception

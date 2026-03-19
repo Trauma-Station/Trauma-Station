@@ -79,10 +79,11 @@ public sealed class DefileSystem : EntitySystem
             return false;
 
         // Ensure capacity is large enough before injecting
-        var needed = solComp.Solution.Volume + solution.Volume;
-        if (needed > solComp.Solution.MaxVolume)
+        var sol = solComp.Solution;
+        var needed = solution.Volume + sol.Volume;
+        if (needed > sol.MaxVolume)
         {
-            solComp.Solution.MaxVolume = needed;
+            sol.MaxVolume = needed;
             Dirty(targetSolution.Value, solComp);
         }
 

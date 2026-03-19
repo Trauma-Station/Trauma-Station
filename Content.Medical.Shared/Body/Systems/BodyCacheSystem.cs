@@ -16,9 +16,8 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly BodyPartSystem _part = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-
-    private EntityQuery<BodyCacheComponent> _query;
-    private EntityQuery<ChildOrganComponent> _childQuery;
+    private EntityQuery<BodyCacheComponent> _query = default!;
+    private EntityQuery<ChildOrganComponent> _childQuery = default!;
 
     public override void Initialize()
     {
@@ -82,10 +81,10 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
             if (!_childQuery.TryComp(organ, out var child) || child.Parent != null)
                 continue;
 
-            child.Parent = GetOrgan(ent.AsNullable(), child.ParentCategory);
+            child.Parent = GetOrgan(ent.AsNullable(), child.Parents);
             if (child.Parent is not {} parent)
             {
-                Log.Error($"Organ {ToPrettyString(organ)} expected a parent of {child.ParentCategory} but none was found in {ToPrettyString(ent)}!");
+                Log.Error($"Organ {ToPrettyString(organ)} expected a parent of {child.Parents[0]} but none was found in {ToPrettyString(ent)}!");
                 continue;
             }
 
@@ -102,15 +101,17 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
             return;
 
         if (_body.GetCategory(ent.Owner) is not {} category ||
-            GetOrgan(args.Body, ent.Comp.ParentCategory) is not {} part ||
-            !_part.CanInsertOrgan(part, category))
+            GetParentOrgan(args.Body, category, ent.Comp.Parents) == null)
             args.Cancelled = true;
     }
 
     private void OnChildInserted(Entity<ChildOrganComponent> ent, ref OrganGotInsertedEvent args)
     {
+        if (_body.GetCategory(ent.Owner) is not {} category)
+            return;
+
         // will only reliably work during surgery, OnBodyInit ensures they all find their parents on spawn
-        ent.Comp.Parent = GetOrgan(args.Target.Owner, ent.Comp.ParentCategory);
+        ent.Comp.Parent = GetParentOrgan(args.Target.Owner, category, ent.Comp.Parents);
         Dirty(ent);
 
         // only reason this would not exist is:
@@ -160,18 +161,74 @@ public sealed class BodyCacheSystem : CommonBodyCacheSystem
             ? organ
             : null;
 
+    /// <summary>
+    /// Get the first cached organ for this body and a list of allowed categories.
+    /// </summary>
+    public EntityUid? GetOrgan(Entity<BodyCacheComponent?> ent, IReadOnlyList<ProtoId<OrganCategoryPrototype>> categories)
+    {
+        if (!_query.Resolve(ent, ref ent.Comp, false))
+            return null;
+
+        foreach (var category in categories)
+        {
+            if (ent.Comp.Organs.TryGetValue(category, out var organ))
+                return organ;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Try get the first cached organ for this body and a list of allowed categories, which can add a given child organ.
+    /// </summary>
+    public EntityUid? GetParentOrgan(Entity<BodyCacheComponent?> ent,
+        [ForbidLiteral] ProtoId<OrganCategoryPrototype> child,
+        IReadOnlyList<ProtoId<OrganCategoryPrototype>> categories)
+    {
+        if (!_query.Resolve(ent, ref ent.Comp, false))
+            return null;
+
+        foreach (var category in categories)
+        {
+            if (ent.Comp.Organs.TryGetValue(category, out var organ) && _part.CanInsertOrgan(organ, child))
+                return organ;
+        }
+
+        return null;
+    }
+
     public override EntityUid? GetOrgan(EntityUid body, [ForbidLiteral] string category)
         => _query.TryComp(body, out var comp)
             ? GetOrgan((body, comp), category)
             : null;
 
+    /// <summary>
+    /// Sets a child organ's allowed parents to a single category.
+    /// </summary>
     public void SetParentCategory(Entity<ChildOrganComponent?> organ, [ForbidLiteral] ProtoId<OrganCategoryPrototype> category)
     {
-        if (!_childQuery.Resolve(organ, ref organ.Comp) || organ.Comp.ParentCategory == category)
+        if (!_childQuery.Resolve(organ, ref organ.Comp) || organ.Comp.Parents.Count == 1 && organ.Comp.Parents[0] == category)
             return;
 
-        organ.Comp.ParentCategory = category;
+        organ.Comp.Parents.Clear();
+        organ.Comp.Parents.Add(category);
         Dirty(organ, organ.Comp);
+    }
+
+    /// <summary>
+    /// Changes a child organ's parent to a different part.
+    /// It is assumed that they are in the same body, only runs part-specific logic.
+    /// </summary>
+    public void SetParent(Entity<ChildOrganComponent?> organ, EntityUid parent)
+    {
+        if (!_childQuery.Resolve(organ, ref organ.Comp) || organ.Comp.Parent == parent)
+            return;
+
+        if (organ.Comp.Parent is {} old)
+            _part.OrganRemoved(old, organ.Owner);
+        organ.Comp.Parent = parent;
+        Dirty(organ);
+        _part.OrganInserted(parent, organ.Owner);
     }
 
     #endregion
