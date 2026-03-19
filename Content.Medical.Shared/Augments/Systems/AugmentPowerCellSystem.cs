@@ -24,8 +24,8 @@ public sealed class AugmentPowerCellSystem : EntitySystem
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<PowerCellDrawComponent> _cellDrawQuery = default!;
-    [Dependency] private readonly EntityQuery<AugmentPowerDrawComponent> _drawQuery = default!;
+    private EntityQuery<PowerCellDrawComponent> _cellDrawQuery = default!;
+    private EntityQuery<AugmentPowerDrawComponent> _drawQuery = default!;
 
     private TimeSpan _nextUpdate = TimeSpan.Zero;
     private static readonly TimeSpan _updateDelay = TimeSpan.FromSeconds(2);
@@ -35,6 +35,9 @@ public sealed class AugmentPowerCellSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _cellDrawQuery = GetEntityQuery<PowerCellDrawComponent>();
+        _drawQuery = GetEntityQuery<AugmentPowerDrawComponent>();
 
         SubscribeLocalEvent<AugmentPowerCellSlotComponent, OrganEnabledEvent>(OnOrganEnabled);
         SubscribeLocalEvent<AugmentPowerCellSlotComponent, OrganDisabledEvent>(OnOrganDisabled);

@@ -4901,3 +4901,26 @@ Entries:
   id: 575
   time: '2026-03-18T19:03:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1420
+- author: MayasMischief
+  changes:
+  - type: Fix
+    message: >-
+      executed the fandom wiki in cold blood now empty scroll redirects to
+      wiki.gg
+  id: 576
+  time: '2026-03-19T06:21:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1427
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed soyjak meme
+  id: 577
+  time: '2026-03-19T08:47:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1433
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed right click menu being messed up.
+  id: 578
+  time: '2026-03-19T09:42:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1431
