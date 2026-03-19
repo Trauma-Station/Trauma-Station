@@ -8,12 +8,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         Orientation="Vertical"
         HorizontalExpand="True"
         VerticalExpand="True">
-    <genetics:GeneticScanner Name="Scanner">
-    	<Button Name="PrintScanButton" Text="{Loc 'genetics-console-print-scan'}" Disabled="True" MaxWidth="160" Visible="False"/>
-    </genetics:GeneticScanner>
+    <genetics:GeneticScanner Name="Scanner"/>
     <BoxContainer Name="MobContainer" Orientation="Vertical" Visible="False">
+    	<BoxContainer Orientation="Horizontal">
+	        <controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
+    		<Button Name="PrintScanButton" Text="{Loc 'genetics-console-print-scan'}" Disabled="True" MaxWidth="160" Margin="4" Visible="False"/>
+		</BoxContainer>
         <!-- List of sequences available -->
-        <controls:NanoHeading Text="{Loc 'genetics-console-sequences'}"/>
         <BoxContainer Orientation="Horizontal">
             <genetics:SequenceButtons Name="SequenceButtons"/>
             <!-- Mutation Info -->
