@@ -18,9 +18,6 @@ public sealed partial class DeepFryerComponent : Component
     public TimeSpan FryFinishTime = TimeSpan.Zero;
 
     [DataField]
-    public bool Closed;
-
-    [DataField]
     public float HeatDamage = 8f;
 
     [DataField]
@@ -86,6 +83,12 @@ public sealed partial class DeepFryerComponent : Component
     /// </summary>
     [DataField]
     public EntityUid? Sound;
+
+    /// <summary>
+    /// Last person that closed the fryer, reset every time it's closed.
+    /// </summary>
+    [DataField]
+    public EntityUid? LastUser;
 }
 
 [Serializable, NetSerializable]

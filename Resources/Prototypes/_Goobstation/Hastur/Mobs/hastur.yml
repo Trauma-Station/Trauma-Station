@@ -107,13 +107,18 @@
       allowedStates:
         - Alive
         - Critical
-      damageCap: 0
       damage:
-        groups:
-          Brute: -2
-          Burn: -2
-          Toxin: -15
-          Genetic: -15
+        types:
+          Blunt: -0.66
+          Slash: -0.66
+          Piercing: -0.66
+          Heat: -0.5
+          Cold: -0.5
+          Shock: -0.5
+          Caustic: -0.5
+          Poison: -7.5
+          Radiation: -7.5
+          Cellular: -15
     - type: AlwaysTakeHoly
     - type: NoSlip
     - type: Bloodstream

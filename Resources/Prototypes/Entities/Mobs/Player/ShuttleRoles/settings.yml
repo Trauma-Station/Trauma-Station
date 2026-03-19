@@ -46,8 +46,7 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        HandmadeKnowledge: 50
-        TechnologyKnowledge: 50
+        FabricationKnowledge: 50
         MaterialsKnowledge: 50
         DoorsKnowledge: 50
         AirlocksKnowledge: 50
@@ -123,7 +122,7 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        TechnologyKnowledge: 50
+        ElectronicsKnowledge: 50
         ScienceKnowledge: 50
     # </Trauma>
 
@@ -297,11 +296,10 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        HandmadeKnowledge: 26
-        TechnologyKnowledge: 26
+        FabricationKnowledge: 26
         MaterialsKnowledge: 26
         DoorsKnowledge: 26
-        AirlocksKnowledge: 26
+        AirlocksKnowledge: 16
         FurnitureKnowledge: 26
         InfrastructureKnowledge: 26
         ElectronicsKnowledge: 26
@@ -322,8 +320,7 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        HandmadeKnowledge: 10
-        TechnologyKnowledge: 10
+        FabricationKnowledge: 10
         MaterialsKnowledge: 10
         DoorsKnowledge: 10
         AirlocksKnowledge: 10
@@ -347,11 +344,10 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        HandmadeKnowledge: 26
-        TechnologyKnowledge: 26
+        FabricationKnowledge: 26
         MaterialsKnowledge: 26
         DoorsKnowledge: 26
-        AirlocksKnowledge: 26
+        AirlocksKnowledge: 16
         FurnitureKnowledge: 26
         InfrastructureKnowledge: 26
         ElectronicsKnowledge: 26
@@ -432,8 +428,7 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        TechnologyKnowledge: 10
-        ScienceKnowledge: 10
+        FirstAidKnowledge: 26
     # </Trauma>
 
 - type: randomHumanoidSettings
@@ -448,8 +443,8 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        TechnologyKnowledge: 10
-        ScienceKnowledge: 10
+        ScienceKnowledge: 26
+        ElectronicsKnowledge: 26
     # </Trauma>
 
 - type: randomHumanoidSettings
@@ -494,8 +489,7 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        TechnologyKnowledge: 10
-        ScienceKnowledge: 10
+        FirstAidKnowledge: 26
     # </Trauma>
 
 # Science
@@ -523,8 +517,8 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        TechnologyKnowledge: 10
         ScienceKnowledge: 10
+        ElectronicsKnowledge: 10
     # </Trauma>
 
 - type: randomHumanoidSettings
@@ -539,8 +533,8 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        TechnologyKnowledge: 26
         ScienceKnowledge: 26
+        ElectronicsKnowledge: 26
     # </Trauma>
 
 # Civilian

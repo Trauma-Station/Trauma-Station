@@ -36,7 +36,6 @@
   - !type:ModifyKnockdown
     time: 4
     drop: true
-    type: Add
   - !type:GenericStatusEffect
     key: SlowedDown
     time: 6
@@ -53,15 +52,14 @@
   - !type:PopupMessage
     messages:
     - spacebear-smokey
-  - !type:Flammable
-      multiplier: 0 # Put it out.
+  - !type:Extinguish # put it out
   opponentEffects:
   - !type:HealthChange
     damage:
       types:
         Heat: 10
   - !type:Flammable
-      multiplier: 0.5
-      multiplierOnExisting: 0.2 # It's powerful enough with just one.
+    multiplier: 4 # actually set on fire
+    multiplierOnExisting: 0.2 # It's powerful enough with just one.
   - !type:Ignite
   levelRequired: 51 # Skill involved.

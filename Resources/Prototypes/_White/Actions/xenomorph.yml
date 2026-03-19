@@ -194,7 +194,6 @@
   - type: EntityTargetAction
     event: !type:AcidActionEvent
   - type: PlasmaCostAction
-    immediate: false
     plasmaCost: 200
 
 # Jump action

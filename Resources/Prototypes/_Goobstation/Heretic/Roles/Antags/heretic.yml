@@ -19,6 +19,7 @@
   - !type:OverallPlaytimeRequirement
     time: 54000 # 15h
   guides: [ Heretics ]
+  creditImage: /Textures/_Trauma/EndCredits/Antags/heretic.png # Trauma
 
 - type: antag
   id: Ghoul
@@ -27,6 +28,7 @@
   setPreference: false
   objective: roles-antag-ghoul-description
   guides: [ Heretics ]
+  dontShowInCredits: True # Trauma
 
 - type: startingGear
   id: Heretictmidround

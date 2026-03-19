@@ -19,9 +19,8 @@
         emote: Yawn
         showInChat: true
         probability: 0.03
-      - !type:GenericStatusEffect
-        key: Drowsiness
-        component: Drowsiness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
         time: 2.5
         type: Add
       - !type:SuppressPain

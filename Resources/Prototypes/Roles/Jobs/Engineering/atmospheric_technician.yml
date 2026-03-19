@@ -6,13 +6,12 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: Engineering
-    time: 2.5h
+    time: 1h # Trauma was 2.5
   startingGear: AtmosphericTechnicianGear
   icon: "JobIconAtmosphericTechnician"
   supervisors: job-supervisors-ce
   guides: # goobstation
   - Atmospherics
-  goobcoins: 20 #Goob content
   access:
   - Maintenance
   - Engineering
@@ -26,19 +25,6 @@
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      HandmadeKnowledge: 26
-      TechnologyKnowledge: 26
-      MaterialsKnowledge: 26
-      DoorsKnowledge: 26
-      AirlocksKnowledge: 26
-      FurnitureKnowledge: 26
-      InfrastructureKnowledge: 26
-      ElectronicsKnowledge: 26
-      WallsKnowledge: 26
-      WindowsKnowledge: 26
-      SmokeablesKnowledge: 50
   # </Trauma>
 
 

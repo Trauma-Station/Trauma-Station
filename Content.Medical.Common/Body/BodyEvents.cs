@@ -33,4 +33,4 @@ public record struct EyesDamagedEvent(EntityUid Body, int Damage);
 /// Event raised on a mob to decapitate it.
 /// </summary>
 [ByRefEvent]
-public record struct DecapitateEvent(EntityUid? User = null, bool Handled = true);
+public record struct DecapitateEvent(EntityUid? User = null, bool Handled = false);

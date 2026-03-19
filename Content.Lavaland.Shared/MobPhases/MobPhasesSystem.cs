@@ -10,6 +10,8 @@ namespace Content.Lavaland.Shared.MobPhases;
 
 public sealed class MobPhasesSystem : EntitySystem
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -34,10 +36,10 @@ public sealed class MobPhasesSystem : EntitySystem
             return;
 
         var ai = ent.Comp1;
-        var damageable = ent.Comp2;
+        var total = _damageable.GetTotalDamage((ent.Owner, ent.Comp2));
         foreach (var (threshold, phase) in ai.PhaseThresholds.Reverse())
         {
-            if (damageable.TotalDamage < threshold)
+            if (total < threshold)
                 continue;
 
             if (phase < ent.Comp1.CurrentPhase

@@ -8,10 +8,8 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
   opponentEffects:
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 1
-    type: Remove
   - !type:HealthChange
     damage:
       types:
@@ -48,10 +46,8 @@
     damage:
       types:
         Slash: 10
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 1
-    type: Remove
   - !type:TakeStaminaDamage
     amount: 10
   levelRequired: 10
@@ -71,10 +67,8 @@
     damage:
       types:
         Slash: 25
-  - !type:GenericStatusEffect
-    key: Paralyze
+  - !type:ModifyParalysis
     time: 2
-    type: Remove
   - !type:TakeStaminaDamage
     amount: 15
   levelRequired: 10

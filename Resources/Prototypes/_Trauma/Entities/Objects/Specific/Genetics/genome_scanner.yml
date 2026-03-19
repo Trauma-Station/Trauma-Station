@@ -10,6 +10,7 @@
     - state: icon # TODO: custom sprite
   - type: GeneticsScanner
   - type: HandheldGeneticsScanner
+  - type: GeneticsPrintout
   - type: DoAfter
   - type: ActivatableUI
     key: enum.GeneticsConsoleUiKey.Key
@@ -24,3 +25,9 @@
   - type: GuideHelp
     guides:
     - Genetics
+
+- type: entity
+  parent: PaperArtifactAnalyzer
+  id: PaperGeneticsScanner
+  name: genetics printout
+  description: Information printed from a handheld genome scanner.

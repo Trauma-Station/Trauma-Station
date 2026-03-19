@@ -7,7 +7,6 @@
   icon: "JobIconJanitor"
   supervisors: job-supervisors-hop
   guides: [ Janitorial ] # goobstation
-  goobcoins: 20 # Goobstation
   access:
   #- Service # Trauma - janitor should not be cooking??
   - Janitor
@@ -16,11 +15,6 @@
   - !type:GiveItemOnHolidaySpecial
     holiday: GarbageDay
     prototype: WeaponRevolverInspector
-  # <Trauma>
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      JanitorKnowledge: 26
-  # </Trauma>
 
 - type: startingGear
   id: JanitorGear

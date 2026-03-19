@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 // </Trauma>
@@ -190,10 +191,10 @@ namespace Content.Shared.GameTicking
 
             public string Role;
 
-            [DataField, NonSerialized]
+            [DataField] // Trauma - make it not NonSerialized
             public string[] JobPrototypes;
 
-            [DataField, NonSerialized]
+            [DataField] // Trauma - make it not NonSerialized (wtf?)
             public string[] AntagPrototypes;
 
             public NetEntity? PlayerNetEntity;
@@ -206,13 +207,13 @@ namespace Content.Shared.GameTicking
 
             public bool Connected;
 
-            #region Goob Station
+            // <Trauma>
             public string? LastWords;
 
             public MobState EntMobState;
 
-            public Dictionary<string, FixedPoint2> DamagePerGroup;
-            #endregion
+            public Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2> DamagePerGroup;
+            // </Trauma>
         }
 
         public string GamemodeTitle { get; }

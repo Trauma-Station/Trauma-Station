@@ -60,7 +60,7 @@
   id: OrganMonkeyTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganMonkeyExternal ]
+  parent: [ OrganBaseHeadBald, OrganMonkeyExternal ]
   id: OrganMonkeyHead
 
 - type: entity

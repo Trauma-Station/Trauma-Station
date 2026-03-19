@@ -36,6 +36,7 @@
   whitelist:
     tags:
     - Mouse
+    - MimicToolbox
   chatTriggers:
   - tweak
   - tweaks

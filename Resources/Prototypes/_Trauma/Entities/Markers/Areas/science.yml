@@ -17,11 +17,45 @@
 
 - type: entity
   parent: BaseAreaScience
+  id: AreaScienceBreak
+  name: science breakroom
+  components:
+  - type: Sprite
+    state: science_break
+
+- type: entity
+  parent: BaseAreaScience
+  id: AreaScienceLobby
+  name: science lobby
+  components:
+  - type: Sprite
+    state: science_lobby
+
+- type: entity
+  parent: BaseAreaScience
+  id: AreaScienceServer
+  name: server room
+  components:
+  - type: Sprite
+    state: server
+
+- type: entity
+  parent: BaseAreaScience
   id: AreaTeleSci
   name: TeleSci
   components:
   - type: Sprite
     state: telesci
+
+# Subdepartments in sci
+
+- type: entity
+  parent: BaseAreaScience
+  id: AreaCytology
+  name: cytology
+  components:
+  - type: Sprite
+    state: cytology
 
 - type: entity
   parent: BaseAreaScience
@@ -38,3 +72,19 @@
   components:
   - type: Sprite
     state: xenobio
+
+- type: entity
+  parent: BaseAreaScience
+  id: AreaRobotics
+  name: robotics
+  components:
+  - type: Sprite
+    state: robo
+
+- type: entity
+  parent: AreaRobotics
+  id: AreaRoboticsMechBay
+  name: mech bay
+  components:
+  - type: Sprite
+    state: mech_bay

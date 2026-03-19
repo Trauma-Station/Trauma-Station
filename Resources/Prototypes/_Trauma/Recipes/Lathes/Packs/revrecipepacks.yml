@@ -16,6 +16,8 @@
   id: RevPrintingPress
   recipes:
   - RevPropaganda
+  - BookMeleePrintedRev
+  - BookShootingPrintedRev
 
 - type: latheRecipePack
   id: RevTelecommsWorkbenchStatic

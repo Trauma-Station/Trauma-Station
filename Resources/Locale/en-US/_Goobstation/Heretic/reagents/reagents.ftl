@@ -18,6 +18,9 @@ reagent-desc-marshal = A colorless, dark liquid. Increases your physical strengt
 reagent-name-ether = ether of the newborn
 reagent-desc-ether = Nausea-inducing, thick green liquid. Restores your body completely, then places you into an enhanced sleep for a full minute.
 
+reagent-name-raw-flesh = raw flesh
+reagent-desc-raw-flesh = Thick bloody red liquid.
+
 entity-condition-guidebook-heretic-or-ghoul = target is a heretic or ghoul
 entity-condition-guidebook-not-heretic-or-ghoul = target is not a heretic or ghoul
 
@@ -55,12 +58,14 @@ reagent-physical-desc-crucible-soul = otherworldly
 reagent-physical-desc-clarity = clear
 reagent-physical-desc-marshal = agonizing
 reagent-physical-desc-ether = numbing
+reagent-physical-desc-raw = raw
 
 flavor-complex-eldritch = Ag'hsj'saje'sh
 flavor-complex-crucible-soul = like something between the plains
 flavor-complex-clarity = like eyes
 flavor-complex-marshal = painful
 flavor-complex-ether = refreshing
+flavor-complex-raw = raw
 
 crucible-soul-effect-examine-message =
     {"["}color=#fb793a]{ CAPITALIZE(SUBJECT($ent)) } { GENDER($ent) ->

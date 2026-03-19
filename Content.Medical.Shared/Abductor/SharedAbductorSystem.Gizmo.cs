@@ -32,13 +32,21 @@ public abstract partial class SharedAbductorSystem
         SubscribeLocalEvent<AbductorGizmoComponent, MeleeHitEvent>(OnGizmoHitInteract);
 
         SubscribeLocalEvent<AbductorGizmoComponent, AbductorGizmoMarkDoAfterEvent>(OnGizmoDoAfter);
+        SubscribeLocalEvent<AbductorGizmoComponent, ActivateInWorldEvent>(OnGizmoToggleMode);
     }
 
     private void OnGizmoHitInteract(Entity<AbductorGizmoComponent> ent, ref MeleeHitEvent args)
     {
-        if (args.HitEntities.Count != 1) return;
+        if (args.HitEntities.Count != 1)
+            return;
         var target = args.HitEntities[0];
-        if (!HasComp<SurgeryTargetComponent>(target)) return;
+        if (!HasComp<SurgeryTargetComponent>(target))
+            return;
+        if (ent.Comp.BrainwashMode)
+        {
+            GizmoBrainWashUse(ent, target, args.User);
+            return;
+        }
         GizmoUse(ent, target, args.User);
     }
 
@@ -50,6 +58,11 @@ public abstract partial class SharedAbductorSystem
         if (HasComp<SurgeryTargetComponent>(target))
         {
             args.Handled = true;
+            if (ent.Comp.BrainwashMode)
+            {
+                GizmoBrainWashUse(ent, target, args.User);
+                return;
+            }
             GizmoUse(ent, target, args.User);
             return;
         }
@@ -89,6 +102,20 @@ public abstract partial class SharedAbductorSystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
+    private void GizmoBrainWashUse(Entity<AbductorGizmoComponent> ent, EntityUid target, EntityUid user)
+    {
+        if (HasComp<AbductorComponent>(target))
+            return;
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(10), new BrainwashDoAfterEvent(), ent, target, ent.Owner)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            DistanceThreshold = 1f
+        };
+        _doAfter.TryStartDoAfter(doAfterArgs);
+
+    }
+
     private void OnGizmoDoAfter(Entity<AbductorGizmoComponent> ent, ref AbductorGizmoMarkDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Target is not {} target)
@@ -100,5 +127,16 @@ public abstract partial class SharedAbductorSystem
         victimComponent.Position ??= EnsureComp<TransformComponent>(args.Target.Value).Coordinates;
 
         args.Handled = true;
+    }
+
+    private void OnGizmoToggleMode(Entity<AbductorGizmoComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (args.Handled)
+            return;
+        args.Handled = true;
+        ent.Comp.BrainwashMode = !ent.Comp.BrainwashMode;
+        Dirty(ent);
+        var modeName = Loc.GetString(ent.Comp.BrainwashMode ? "abductors-gizmo-mode-brainwash" : "abductors-gizmo-mode-mark");
+        _popup.PopupClient(Loc.GetString("abductors-gizmo-mode-changed", ("mode", modeName)), ent, args.User);
     }
 }

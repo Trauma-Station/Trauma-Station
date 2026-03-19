@@ -7,4 +7,4 @@ namespace Content.Trauma.Common.Construction;
 /// If <c>LogError</c> is true, it should log an error, when clients send malicious input to the server.
 /// </summary>
 [ByRefEvent]
-public record struct ConstructAttemptEvent(EntityUid user, string Prototype, bool LogError = true, bool Cancelled = false);
+public record struct ConstructAttemptEvent(string Prototype, bool LogError = true, bool Cancelled = false);
