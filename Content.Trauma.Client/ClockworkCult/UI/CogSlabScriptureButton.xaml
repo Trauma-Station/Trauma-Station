@@ -1,4 +1,8 @@
-﻿<BoxContainer
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<BoxContainer
     xmlns="https://spacestation14.io"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Orientation="Vertical"
