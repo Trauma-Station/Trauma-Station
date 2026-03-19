@@ -268,7 +268,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
             return;
 
         if (!_inventory.TryGetSlotEntity(target, "head", out var _)
-            && _inventory.TryEquip(target, used, "head", true, true))
+            && _inventory.TryEquip(target, used, "head", silent: true, predicted: true))
             ArmTrap(used, trap, target, args.User);
     }
 
