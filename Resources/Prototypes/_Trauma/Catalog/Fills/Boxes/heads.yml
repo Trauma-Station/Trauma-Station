@@ -1,7 +1,16 @@
 - type: entity
   parent: ToteBase
+  id: BoxSkillChipsBase
+  name: skillchips box
+  description: A large box for storing spare skillchips. Might be sterile? Who knows.
+  components:
+  - type: Storage
+    whitelist: null # just a box
+
+- type: entity
+  parent: BoxSkillChipsBase
   id: BoxSkillChipsCargo
-  name: cargo skillchips tote
+  name: cargo skillchips box
   components:
   - type: EntityTableContainerFill
     containers:
@@ -14,9 +23,9 @@
           amount: 3
 
 - type: entity
-  parent: ToteBase
+  parent: BoxSkillChipsBase
   id: BoxSkillChipsEngi
-  name: engi skillchips tote
+  name: engi skillchips box
   components:
   - type: EntityTableContainerFill
     containers:
@@ -30,9 +39,9 @@
           amount: 2
 
 - type: entity
-  parent: ToteBase
+  parent: BoxSkillChipsBase
   id: BoxSkillChipsMed
-  name: med skillchips tote
+  name: med skillchips box
   components:
   - type: EntityTableContainerFill
     containers:
@@ -46,9 +55,9 @@
           amount: 2
 
 - type: entity
-  parent: ToteBase
+  parent: BoxSkillChipsBase
   id: BoxSkillChipsSci
-  name: sci skillchips tote
+  name: sci skillchips box
   components:
   - type: EntityTableContainerFill
     containers:
@@ -61,9 +70,9 @@
           amount: 3
 
 - type: entity
-  parent: ToteBase
+  parent: BoxSkillChipsBase
   id: BoxSkillChipsSec
-  name: sec skillchips tote
+  name: sec skillchips box
   components:
   - type: EntityTableContainerFill
     containers:
