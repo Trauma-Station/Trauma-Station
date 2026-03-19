@@ -68,6 +68,12 @@
         length: 2.5
   - type: Item
     heldPrefix: off
+  # <Trauma>
+    shape:
+    - 0,0,2,0
+  # <Trauma>
+    storedRotation: 45 # Goob
+
     size: Normal
   - type: Clothing
     sprite: Objects/Weapons/Melee/stunbaton.rsi
@@ -132,6 +138,11 @@
     bluntStaminaDamageFactor: 1.5
   - type: Item
     size: Normal
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # <Trauma>
   - type: Tag
     tags:
     - Truncheon

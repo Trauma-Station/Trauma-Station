@@ -265,27 +265,27 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     }
 
     public bool TryApplyGraspEffectAndMark(EntityUid user,
-        HereticComponent hereticComp,
+        Entity<HereticComponent> heretic,
         EntityUid target,
         EntityUid? grasp,
         out bool triggerGrasp)
     {
         triggerGrasp = true;
 
-        if (hereticComp.CurrentPath == null)
+        if (heretic.Comp.CurrentPath == null)
             return true;
 
-        if (hereticComp.PathStage >= 2)
+        if (heretic.Comp.PathStage >= 2)
         {
-            if (!ApplyGraspEffect(user, hereticComp, target, grasp, out var applyMark, out triggerGrasp))
+            if (!ApplyGraspEffect(user, heretic, target, grasp, out var applyMark, out triggerGrasp))
                 return false;
 
             if (!applyMark)
                 return true;
         }
 
-        if (hereticComp.PathStage >= 3)
-            ApplyMark(target, hereticComp.CurrentPath);
+        if (heretic.Comp.PathStage >= 3)
+            ApplyMark(target, heretic.Comp.CurrentPath);
 
         return true;
     }
@@ -295,7 +295,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         EntityUid target,
         bool deleteGraspOnUse = true)
     {
-        if (!_heretic.TryGetHereticComponent(user, out var hereticComp, out _))
+        if (!_heretic.TryGetHereticComponent(user, out var hereticComp, out var mind))
         {
             if (!deleteGraspOnUse)
                 return false;
@@ -328,7 +328,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         }
 
         // upgraded grasp
-        if (!TryApplyGraspEffectAndMark(user, hereticComp, target, grasp, out var triggerGrasp))
+        if (!TryApplyGraspEffectAndMark(user, (mind, hereticComp), target, grasp, out var triggerGrasp))
             return false;
 
         if (triggerGrasp && TryComp(target, out StatusEffectsComponent? status))
@@ -372,7 +372,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     }
 
     public bool ApplyGraspEffect(EntityUid performer,
-        HereticComponent heretic,
+        Entity<HereticComponent> heretic,
         EntityUid target,
         EntityUid? grasp,
         out bool applyMark,
@@ -381,7 +381,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         applyMark = true;
         triggerGrasp = true;
 
-        switch (heretic.CurrentPath)
+        switch (heretic.Comp.CurrentPath)
         {
             case "Ash":
             {
@@ -396,7 +396,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
             case "Blade":
             {
-                if (grasp != null && heretic.PathStage >= 7 && _tag.HasTag(target, HereticBladeBlade))
+                if (grasp != null && heretic.Comp.PathStage >= 7 && _tag.HasTag(target, HereticBladeBlade))
                 {
                     // empowering blades and shit
                     var infusion = EnsureComp<MansusInfusedComponent>(target);
@@ -470,6 +470,11 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                         break;
                     }
 
+                    var minion = Factory.GetComponent<HereticMinionComponent>();
+                    minion.BoundHeretic = performer;
+                    minion.MinionId = GetNetEntity(heretic.Owner).Id;
+                    AddComp(target, minion, true);
+
                     EnsureComp<HereticMinionComponent>(target).BoundHeretic = performer;
 
                     var ghoul = Factory.GetComponent<GhoulComponent>();
@@ -519,7 +524,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             case "Cosmos":
             {
                 if (_starMark.TryApplyStarMark(target))
-                    _starMark.SpawnCosmicField(Transform(performer).Coordinates, heretic.PathStage, predicted: false);
+                    _starMark.SpawnCosmicField(Transform(performer).Coordinates, heretic.Comp.PathStage, predicted: false);
                 break;
             }
         }

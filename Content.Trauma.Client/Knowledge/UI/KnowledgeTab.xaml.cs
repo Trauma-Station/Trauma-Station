@@ -78,11 +78,54 @@ public sealed partial class KnowledgeTab : Control
                 StyleClasses = { "LabelSubText" }
             };
 
+            var progressBar = new ProgressBar
+            {
+                MinValue = 0,
+                MaxValue = conditions.ExpCost,
+                Value = conditions.CurrentExp,
+                MinSize = new System.Numerics.Vector2(200, 20)
+            };
+
+            var horizontalContainer = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal
+            };
+
             box.AddChild(skillText);
             box.AddChild(masteryText);
+            horizontalContainer.AddChild(box);
+            horizontalContainer.AddChild(progressBar);
             boxContainer.AddChild(textRect);
-            boxContainer.AddChild(box);
-            KnowledgeBox.AddChild(boxContainer);
+            boxContainer.AddChild(horizontalContainer);
+
+            //Find category.
+            Collapsible? groupContainer = null;
+            foreach (Control? child in KnowledgeBox.Children)
+            {
+                if (child is not Collapsible childNotNull || childNotNull.Name != groupId.Id)
+                    continue;
+
+                groupContainer = childNotNull;
+            }
+
+            // Create category if categor not found.
+            if (groupContainer is not { })
+            {
+                var body = new CollapsibleBody();
+                var innerStack = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    Name = "InnerStack",
+                    SeparationOverride = 10
+                };
+                body.AddChild(innerStack);
+                groupContainer = new Collapsible(groupId.Id, body);
+                groupContainer.Name = groupId.Id;
+                KnowledgeBox.AddChild(groupContainer);
+            }
+
+            // Add skill to category.
+            groupContainer.Body?.GetChild(0)?.AddChild(boxContainer);
         }
     }
 }

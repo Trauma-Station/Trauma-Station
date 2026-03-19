@@ -55,7 +55,11 @@ public sealed class FaceHuggerSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+
+    private HashSet<Entity<InventoryComponent>> _targets = new();
+    private TimeSpan _nextUpdate;
+    private static readonly TimeSpan _updateDelay = TimeSpan.FromSeconds(0.25);
 
     public override void Initialize()
     {
@@ -142,6 +146,10 @@ public sealed class FaceHuggerSystem : EntitySystem
         base.Update(frameTime);
 
         var time = _timing.CurTime;
+        if (time < _nextUpdate)
+            return;
+
+        _nextUpdate = time + _updateDelay;
 
         var query = EntityQueryEnumerator<FaceHuggerComponent>();
         while (query.MoveNext(out var uid, out var faceHugger))
@@ -156,7 +164,6 @@ public sealed class FaceHuggerSystem : EntitySystem
             }
 
             // Handle continuous chemical injection when equipped
-            // Goobstation
             if (TryComp<ClothingComponent>(uid, out var clothing) && clothing.InSlot != null && !_mobState.IsDead(uid))
             {
                 // Initialize NextInjectionTime if it's zero
@@ -177,12 +184,16 @@ public sealed class FaceHuggerSystem : EntitySystem
                     }
                 }
             }
-            // Goobstaion end
+
+            // don't try to jump at anyone in a bag locker etc
+            if (_container.IsEntityInContainer(uid))
+                continue;
 
             if (faceHugger.Active && clothing?.InSlot == null)
             {
-                foreach (var entity in _entityLookup.GetEntitiesInRange<InventoryComponent>(Transform(uid).Coordinates,
-                             1.5f))
+                _targets.Clear();
+                _lookup.GetEntitiesInRange<InventoryComponent>(Transform(uid).Coordinates, 1.5f, _targets);
+                foreach (var entity in _targets)
                 {
                     if (TryEquipFaceHugger(uid, entity, faceHugger))
                         break;

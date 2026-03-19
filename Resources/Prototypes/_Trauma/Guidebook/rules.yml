@@ -55,7 +55,7 @@
 
 - type: guideEntry
   id: RuleC0
-  name: guide-entry-rules-c0
+  name: guide-entry-rules-core
   ruleEntry: true
   priority: 1
   text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC0Losing.xml"

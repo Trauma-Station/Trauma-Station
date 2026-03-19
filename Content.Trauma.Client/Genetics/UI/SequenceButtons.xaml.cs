@@ -51,10 +51,12 @@ public sealed partial class SequenceButtons : ScrollContainer
         {
             var sequence = _sequences[i];
             var index = (uint) i;
+            var rarity = RarityChar(sequence.Rarity);
+            var text = Loc.GetString("genetics-console-sequence-text", ("rarity", rarity), ("number", sequence.Number));
             var button = new Button()
             {
                 // TODO: use a wrapping shader or something to do helix animated button
-                Text = sequence.Number.ToString(),
+                Text = text,
                 ToggleMode = true,
                 HorizontalExpand = true
             };
@@ -62,11 +64,20 @@ public sealed partial class SequenceButtons : ScrollContainer
             button.OnPressed += _ => OnSelected?.Invoke(index);
             /*button.AddChild(new Label()
             {
-                Text = sequence.Number.ToString(),
+                Text = text,
                 HorizontalAlignment = HAlignment.Center
             });*/
             _buttons.Add(button);
             Buttons.AddChild(button);
         }
     }
+
+    private char RarityChar(MutationRarity rarity)
+        => rarity switch
+        {
+            MutationRarity.Common => 'C',
+            MutationRarity.Rare => 'R',
+            MutationRarity.Mythical => 'M',
+            _ => '?'
+        };
 }

@@ -69,7 +69,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
         HereticCombatMarkComponent mark,
         string? path,
         EntityUid user,
-        HereticComponent heretic)
+        Entity<HereticComponent> heretic)
     {
         if (!base.ApplyMarkEffect(target, mark, path, user, heretic))
             return false;
@@ -95,7 +95,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                 break;
 
             case "Flesh":
-                _ability.CreateFleshMimic(target, user, false, true, 50, null);
+                _ability.CreateFleshMimic(target, user, heretic, false, true, 50, null);
                 break;
 
             case "Lock":
@@ -116,7 +116,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                     break;
 
                 var targetCoords = Transform(target).Coordinates;
-                _starMark.SpawnCosmicField(targetCoords, heretic.PathStage, predicted: false);
+                _starMark.SpawnCosmicField(targetCoords, heretic.Comp.PathStage, predicted: false);
 
                 if (Exists(cosmicMark.CosmicDiamondUid))
                 {

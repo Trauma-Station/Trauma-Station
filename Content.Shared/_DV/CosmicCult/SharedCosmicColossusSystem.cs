@@ -219,8 +219,12 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
         ent.Comp.Hibernating = false;
         PredictedSpawnAtPosition(ent.Comp.CultBigVfx, Transform(ent).Coordinates);
         _sleeping.TryWaking(ent.Owner, force: true);
-        if (TryComp<DamageableComponent>(ent, out var damageable))
-            _damage.TryChangeDamage(ent.Owner, damageable.Damage / 2 * -1, true);
+        if (!TryComp<DamageableComponent>(ent, out var damageable))
+            return;
+
+        var damage = _damage.GetAllDamage((ent, damageable));
+        damage *= -0.5; // heal half the damage
+        _damage.ChangeDamage((ent, damageable), damage, true);
     }
 
     protected virtual void OnColossusEffigy(Entity<CosmicColossusComponent> ent, ref EventCosmicColossusEffigy args)

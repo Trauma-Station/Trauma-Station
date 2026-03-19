@@ -65,12 +65,15 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
 using Content.Shared.Tag;
 using Robust.Server.GameStates;
+using Robust.Shared.Enums;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Heretic.EntitySystems;
 
 public sealed class HereticSystem : SharedHereticSystem
 {
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly StoreSystem _store = default!;
@@ -123,6 +126,24 @@ public sealed class HereticSystem : SharedHereticSystem
 
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
+
+        _player.PlayerStatusChanged += OnStatusChanged;
+    }
+
+    private void OnStatusChanged(object? sender, SessionStatusEventArgs e)
+    {
+        if (e.NewStatus == SessionStatus.Disconnected)
+            return;
+
+        var session = e.Session;
+
+        if (!_mind.TryGetMind(session.UserId, out var mind, out _) || !TryComp(mind, out HereticComponent? heretic))
+            return;
+
+        foreach (var rit in heretic.Rituals)
+        {
+            _override.AddSessionOverride(rit, session);
+        }
     }
 
     private void OnStateChanged(MobStateChangedEvent args)
@@ -214,13 +235,12 @@ public sealed class HereticSystem : SharedHereticSystem
     private void SetMinionsMaster(Entity<HereticComponent> ent, EntityUid? newMaster)
     {
         ent.Comp.Minions = ent.Comp.Minions.Where(Exists).ToHashSet();
-        var mobQuery = GetEntityQuery<MobStateComponent>();
+        var minionQuery = GetEntityQuery<HereticMinionComponent>();
         foreach (var uid in ent.Comp.Minions)
         {
-            if (!mobQuery.HasComp(uid))
+            if (!minionQuery.TryComp(uid, out var minion))
                 continue;
 
-            var minion = EnsureComp<HereticMinionComponent>(uid);
             minion.BoundHeretic = newMaster;
             Dirty(uid, minion);
 
@@ -330,6 +350,8 @@ public sealed class HereticSystem : SharedHereticSystem
 
         if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             objective.Researched += amount;
+
+        UpdateObjectiveProgress((ent, ent.Comp1, ent.Comp3));
 
         if (!showText && !playSound)
             return;

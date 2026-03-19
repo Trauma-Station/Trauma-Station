@@ -32,4 +32,9 @@
       - VendingMachineSovietSoda #Boda
       - VendingMachineSpaceUp
       - VendingMachineStarkist
-    chance: 1
+    chance: 0.99 # Trauma, was 1
+    # <Trauma>
+    rarePrototypes:
+    - RandomVendingDrinksMimic
+    rareChance: 0.01
+    # </Trauma>

@@ -16,9 +16,10 @@
     - 1,1,1,2
   - type: ItemToggleMeleeWeapon
     activatedDamage:
-      groups:
-        Brute: 18
       types:
+        Blunt: 6
+        Slash: 6
+        Piercing: 6
         Heat: 18
         Structural: 40
   - type: Sprite
@@ -66,7 +67,7 @@
       params:
         volume: -3
     damage:
-      groups:
-        Brute: 3
+      types:
+        Blunt: 3
     heavyStaminaCost: 5
     clickPartDamageMultiplier: 1

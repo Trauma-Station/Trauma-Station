@@ -5,6 +5,7 @@
   components:
   - type: Knowledge
     category: Medical
+    color: "#1865d8"
 
 - type: entity
   id: BasePhysicalKnowledge
@@ -14,6 +15,7 @@
   - type: Knowledge
     category: Physical
     costs: [0, 2, 4, 6, 8, 10] # combat skills cost 2x, no goku
+    color: "#16e720"
 
 - type: entity
   id: BaseWarKnowledge
@@ -23,14 +25,15 @@
   - type: Knowledge
     category: War
     costs: [0, 2, 4, 6, 8, 10]
+    color: "#f71818"
 
 - type: entity
   parent: BaseKnowledge
-  id: BaseQualityKnowledge
+  id: BaseCraftingKnowledge
   abstract: true
   components:
   - type: Knowledge
-    category: Construction
+    category: Crafting
     color: "#0ba881"
     experienceCost: 20
 
@@ -49,15 +52,16 @@
   components:
   - type: Knowledge
     category: Scientific
+    color: "#c01dcf"
 
 - type: entity
   parent: BaseKnowledge
-  id: BaseConstructionKnowledge
+  id: BaseRecipesKnowledge
   abstract: true
   components:
   - type: Knowledge
-    category: Construction
-    color: "#0ba881"
+    category: Recipes
+    color: "#f39b29"
     experienceCost: 20
 
 - type: entity
@@ -68,7 +72,7 @@
   - type: Knowledge
     category: Language
     learnedLevel: 26
-    experienceCost: 4
+    experienceCost: 16
     color: "#ADD8E6"
     costs: null # its currently fucked, have to use traits still :(
   - type: LanguageKnowledge
@@ -97,8 +101,12 @@
   name: knowledge-category-Martial
 
 - type: knowledgeCategory
-  id: Construction
-  name: knowledge-category-Construction
+  id: Recipes
+  name: knowledge-category-Recipes
+
+- type: knowledgeCategory
+  id: Crafting
+  name: knowledge-category-Crafting
 
 - type: knowledgeCategory
   id: Language

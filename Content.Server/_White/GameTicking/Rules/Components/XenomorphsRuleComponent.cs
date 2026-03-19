@@ -68,7 +68,7 @@ public sealed partial class XenomorphsRuleComponent : Component
     #region RoundEnd
 
     [DataField]
-    public float XenomorphsShuttleCallPercentage = 0.7f;
+    public float XenomorphsShuttleCallPercentage = 0.3f;
 
     [DataField]
     public TimeSpan ShuttleCallTime = TimeSpan.FromMinutes(5);

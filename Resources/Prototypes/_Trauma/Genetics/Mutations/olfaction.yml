@@ -7,6 +7,7 @@
   - type: Mutation
     instability: 25
     difficulty: 12
+    rarity: Rare
   - type: ComponentMutation
     added:
     - type: ScentTracker

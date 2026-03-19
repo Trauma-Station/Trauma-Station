@@ -9,8 +9,8 @@
   theory:
     WeaponsKnowledge: 0
   practical:
-    HandmadeKnowledge: 1
     WeaponsKnowledge: 1
+    CarvingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -22,8 +22,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -35,7 +36,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1 # tying a knot or something
+    FabricationKnowledge: 1 # tying a knot or something
   # </Trauma>
 
 - type: construction
@@ -47,10 +48,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    SurvivalKnowledge: 1
     WeaponsKnowledge: 1
-    HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -62,8 +63,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+    FabricationKnowledge: 3
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -75,9 +77,11 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+    FabricationKnowledge: 3
     WeaponsKnowledge: 1
+  practical:
+    GunsmithingKnowledge: 1
+    MechanicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -89,10 +93,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0 # its not rocket science
+    FabricationKnowledge: 0 # its not rocket science
     FirstAidKnowledge: 0
   practical:
-    HandmadeKnowledge: 2
+    TailoringKnowledge: 2
     FirstAidKnowledge: 1
   # </Trauma>
 
@@ -105,7 +109,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0 # its a tied piece of cloth
+    FabricationKnowledge: 0 # its a tied piece of cloth
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -117,7 +123,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -140,8 +146,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
-    WeaponsKnowledge: 3
+    FabricationKnowledge: 3
+  practical:
+    GunsmithingKnowledge: 2
+    WeaponsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -153,8 +161,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
-    WeaponsKnowledge: 3
+    FabricationKnowledge: 3
+  practical:
+    GunsmithingKnowledge: 2
+    WeaponsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -166,8 +176,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
-    WeaponsKnowledge: 0
+    FabricationKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -179,10 +190,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0
-    WeaponsKnowledge: 1
+    FabricationKnowledge: 0
   practical:
-    HandmadeKnowledge: 3
+    MechanicsKnowledge: 2
     WeaponsKnowledge: 2
   # </Trauma>
 
@@ -195,7 +205,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -207,7 +219,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -219,10 +233,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0
-    WeaponsKnowledge: 1
+    FabricationKnowledge: 0
   practical:
-    HandmadeKnowledge: 3
+    MechanicsKnowledge: 3
     WeaponsKnowledge: 3
   # </Trauma>
 
@@ -235,7 +248,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0 # its a piece of wood bro
+    FabricationKnowledge: 0 # its a piece of wood bro
+  practical:
+    CarvingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -247,8 +262,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 2
-    TechnologyKnowledge: 0 # hinges...
+    FabricationKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -260,8 +274,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
-    ScienceKnowledge: 3
+    FabricationKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -273,8 +286,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
-    ScienceKnowledge: 1
+    FabricationKnowledge: 3
+  practical:
+    ArmorKnowledge: 3
+    MetalworkingKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -286,7 +301,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
+    FabricationKnowledge: 3
+  practical:
+    ArmorKnowledge: 3
+    MetalworkingKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -298,7 +316,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
+    FabricationKnowledge: 3
+  practical:
+    ArmorKnowledge: 3
+    MetalworkingKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -310,5 +331,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
+    FabricationKnowledge: 3
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>

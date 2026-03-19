@@ -36,6 +36,14 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
             _modified = false;
             SaveButton.Disabled = true;
         };
+
+        ResetButton.OnPressed += _ =>
+        {
+            _profile = new();
+            _modified = true;
+            ResetButton.Disabled = true;
+            ReloadSkills();
+        };
     }
 
     public void SetProfile(ProtoId<SpeciesPrototype> species, KnowledgeProfile profile)
@@ -43,6 +51,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         _profile = profile;
         _parent = _proto.Index(_proto.Index(species).Knowledge);
         ReloadSkills();
+        UpdateReset();
     }
 
     private void ReloadSkills()
@@ -58,17 +67,18 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
                 continue;
 
             var control = new SkillControl(name, costs);
-            var mastery = _profile.Mastery.GetValueOrDefault(id);
+            var racialBase = _parent.Profile.Mastery.GetValueOrDefault(id);
+            var mastery = _profile.Mastery.GetValueOrDefault(id) + racialBase;
 
-            control.SetMastery(_knowledge.GetMasteryString(mastery), mastery);
+            control.SetMastery(_knowledge.GetMasteryString(mastery), mastery, racialBase);
 
             control.OnChangeMastery += diff =>
             {
                 var sum = control.Mastery + diff;
-                if (sum >= costs.Length || sum < 0)
+                if (sum >= costs.Length || sum < racialBase)
                     return;
 
-                control.SetMastery(_knowledge.GetMasteryString(sum), sum);
+                control.SetMastery(_knowledge.GetMasteryString(sum), sum, racialBase);
                 if (sum == 0)
                     _profile.Mastery.Remove(id);
                 else
@@ -76,6 +86,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
 
                 _modified = true;
                 UpdatePoints();
+                UpdateReset();
             };
 
             // Put the skill in it's respective category (or create it if there isn't one yet)
@@ -109,5 +120,19 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         // can't save with a deficit
         PointsLabel.FontColorOverride = Color.Red;
         SaveButton.Disabled = true;
+    }
+
+    private void UpdateReset()
+    {
+        ResetButton.Disabled = true;
+        // only enable if there are any non-zero skill changes
+        foreach (var level in _profile.Mastery.Values)
+        {
+            if (level != 0)
+            {
+                ResetButton.Disabled = false;
+                break;
+            }
+        }
     }
 }

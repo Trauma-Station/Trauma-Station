@@ -1,3 +1,17 @@
+# i love this dogshit system nobody has improved for 2 years :)
+- type: entity
+  parent: BaseGameRule
+  id: SubGamemodesRuleNoHeretic
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: Thief
+      prob: 0.5
+    - id: Devil
+      prob: 0.02
+    - id: Shadowling
+      prob: 0.02
+
 - type: entity
   parent: BaseGameRule
   id: Insurgency

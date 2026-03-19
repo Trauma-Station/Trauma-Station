@@ -1,0 +1,10 @@
+durability-weapon-bat-0 = A dent is made in the barrel of the bat
+durability-weapon-bat-1 = Some wood chips off of the bat
+durability-weapon-bat-2 = The bat makes an audible crack
+durability-weapon-bat-3 = The wood of the bat splinters
+durability-weapon-bat-4 = A chunk of wood falls to the floor
+durability-weapon-bat-5 = The handle becomes less sturdy
+durability-weapon-bat-6 = The bat is not long for this world
+durability-weapon-bat-7 = The bat's barrel flies off of the handle
+durability-weapon-bat-8 = The bat splinters into pieces
+durability-weapon-bat-9 = The bat snaps in two

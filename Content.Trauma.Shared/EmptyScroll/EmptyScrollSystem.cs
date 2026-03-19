@@ -8,6 +8,7 @@ using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Paper;
 using Robust.Shared.Timing;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.EmptyScroll;
 
@@ -24,6 +25,10 @@ public sealed class EmptyScrollSystem : EntitySystem
     /// Every prayer indexed by the FullPrayer string.
     /// </summary>
     public Dictionary<string, ScrollPrayerPrototype> AllPrayers = new();
+    /// <summary>
+    /// List of every valid prayer text.
+    /// </summary>
+    public List<string> AllPrayerTexts = new();
 
     public override void Initialize()
     {
@@ -48,6 +53,10 @@ public sealed class EmptyScrollSystem : EntitySystem
             Pray(target, prayer);
             answered = true;
         }
+        else if (args.User is {} user)
+        {
+            RaiseNetworkEvent(new PrayerFailedEvent(), user);
+        }
 
         LocId msg = "empty-scroll-prayer-" + (answered ? "answered" : "failed");
         _popup.PopupCoordinates(Loc.GetString(msg), coords, answered ? PopupType.Large : PopupType.Medium);
@@ -64,11 +73,14 @@ public sealed class EmptyScrollSystem : EntitySystem
     private void LoadPrototypes()
     {
         AllPrayers.Clear();
+        AllPrayerTexts.Clear();
         foreach (var prayer in _proto.EnumeratePrototypes<ScrollPrayerPrototype>())
         {
             foreach (var subject in prayer.Subjects)
             {
-                AllPrayers.Add($"O LORD\n{prayer.Verb}\n{subject}", prayer);
+                var text = $"O LORD\n{prayer.Verb}\n{subject}";
+                AllPrayers.Add(text, prayer);
+                AllPrayerTexts.Add(text);
             }
         }
     }
@@ -93,3 +105,9 @@ public sealed class EmptyScrollSystem : EntitySystem
         _effects.ApplyEffects(target, prayer.Effects, user: target);
     }
 }
+
+/// <summary>
+/// Event broadcast when you don't write a valid prayer and get nothing.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class PrayerFailedEvent : EntityEventArgs;

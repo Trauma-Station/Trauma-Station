@@ -87,7 +87,7 @@
     # <Trauma>
     - type: InternalOrgan
     - type: ChildOrgan
-      parentCategory: Torso # ipc stores its brain in the torso not head
+      parents: [ Torso ] # ipc stores its brain in the torso not head
     - type: Organ
       category: IPCBrain
     # </Trauma>

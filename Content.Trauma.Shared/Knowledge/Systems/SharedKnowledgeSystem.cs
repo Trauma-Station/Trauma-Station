@@ -313,7 +313,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public (ProtoId<KnowledgeCategoryPrototype> Category, KnowledgeInfo Info) GetKnowledgeInfo(Entity<KnowledgeComponent> ent)
     {
-        var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite);
+        var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite, ent.Comp.LearnedLevel, ent.Comp.NetLevel, ent.Comp.Experience, ent.Comp.ExperienceCost);
         // TODO: make this an event raised on ent
         var name = Name(ent);
         knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.NetLevel), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
@@ -552,10 +552,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return (uid, comp);
 
         // otherwise try use the cached brain
-        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent || !ent.IsValid())
+        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent || TerminatingOrDeleted(ent))
             return null;
 
-        return (ent, _containerQuery.Comp(ent));
+        if (_containerQuery.TryComp(ent, out var container))
+            return (ent, container);
+
+        Log.Error($"Knowledge entity {ToPrettyString(ent)} of holder {ToPrettyString(uid)} did not have KnowledgeContainerComponent!");
+        return null;
     }
 
     /// <summary>
@@ -619,7 +623,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// Throws if it is out of bounds.
     /// </summary>
     public string GetMasteryString(int mastery)
-        => Loc.GetString("knowledge-mastery-" + MasteryNames[mastery]);
+        => Loc.GetString("knowledge-mastery-" + MasteryNames[Math.Clamp(mastery, 0, 5)]);
 
     public override int GetMastery(int level)
         => level switch
@@ -709,15 +713,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return ent.Comp.Container;
     }
 
-    protected Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(Entity<KnowledgeHolderComponent> ent)
+    public Entity<KnowledgeContainerComponent> EnsureKnowledgeContainer(EntityUid uid)
     {
-        if (GetContainer(ent) is { } brain)
+        EnsureComp<KnowledgeHolderComponent>(uid);
+        if (GetContainer(uid) is { } brain)
             return brain;
 
         // if there's no brain store knowledge on the mob itself
-        var comp = EnsureComp<KnowledgeContainerComponent>(ent);
-        LinkContainer(ent, (ent, comp));
-        return (ent, comp);
+        var comp = EnsureComp<KnowledgeContainerComponent>(uid);
+        LinkContainer(uid, (uid, comp));
+        return (uid, comp);
     }
 }
 

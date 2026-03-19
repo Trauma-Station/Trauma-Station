@@ -3,6 +3,7 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.EntityConditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Localizations;
@@ -83,10 +84,12 @@ public sealed partial class TypedDamageCondition : EntityConditionBase<TypedDama
 
 public sealed class TypedDamageConditionSystem : EntityConditionSystem<DamageableComponent, TypedDamageCondition>
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
     protected override void Condition(Entity<DamageableComponent> ent, ref EntityConditionEvent<TypedDamageCondition> args)
     {
+        var damage = _damageable.GetAllDamage(ent.AsNullable());
         var comparison = new DamageSpecifier(args.Condition.Damage);
         foreach (var group in _proto.EnumeratePrototypes<DamageGroupPrototype>())
         {
@@ -109,7 +112,7 @@ public sealed class TypedDamageConditionSystem : EntityConditionSystem<Damageabl
             var groupDamage = lowestDamage * group.DamageTypes.Count;
             if (MathF.Abs(groupDamage.Float() - MathF.Round(groupDamage.Float())) < 0.02)
                 groupDamage = MathF.Round(groupDamage.Float()); // otherwise brutes split unevenly
-            if (ent.Comp.Damage.TryGetDamageInGroup(group, out var total) && total > groupDamage)
+            if (damage.TryGetDamageInGroup(group, out var total) && total > groupDamage)
             {
                 args.Result = true;
                 return;
@@ -129,7 +132,7 @@ public sealed class TypedDamageConditionSystem : EntityConditionSystem<Damageabl
             comparison.TrimZeros();
         }
 
-        comparison.ExclusiveAdd(-ent.Comp.Damage);
+        comparison.ExclusiveAdd(-damage);
         comparison = -comparison;
         args.Result = comparison.AnyPositive();
     }
