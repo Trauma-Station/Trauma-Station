@@ -27,9 +27,8 @@ public sealed class GameTopMenuBarUIController : UIController
     [Dependency] private readonly SandboxUIController _sandbox = default!;
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
     [Dependency] private readonly EmotesUIController _emotes = default!;
-    // <Trauma>
-    [Dependency] private readonly LanguageMenuUIController _language = default!; // TODO: kill
 
+    // <Trauma>
     public static Action<GameTopMenuBar>? OnLoad;
     public static Action<GameTopMenuBar>? OnUnload;
     // </Trauma>
@@ -56,9 +55,7 @@ public sealed class GameTopMenuBarUIController : UIController
         _sandbox.UnloadButton();
         _emotes.UnloadButton();
         // <Trauma>
-        // TODO: migrate language to use the actions
-        _language.UnloadButton();
-        if (GameTopMenuBar is {} bar)
+        if (GameTopMenuBar is { } bar)
             OnUnload?.Invoke(bar);
         // </Trauma>
     }
@@ -75,8 +72,7 @@ public sealed class GameTopMenuBarUIController : UIController
         _sandbox.LoadButton();
         _emotes.LoadButton();
         // <Trauma>
-        _language.LoadButton();
-        if (GameTopMenuBar is {} bar)
+        if (GameTopMenuBar is { } bar)
             OnLoad?.Invoke(bar);
         // </Trauma>
     }

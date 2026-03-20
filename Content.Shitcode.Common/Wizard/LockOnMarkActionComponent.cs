@@ -7,7 +7,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shitcode.Shared.Wizard.SpellCards;
+namespace Content.Shitcode.Common.Wizard;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class LockOnMarkActionComponent : Component

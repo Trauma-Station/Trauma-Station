@@ -70,7 +70,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);
             human.AddFunction(ContentKeyFunctions.OpenEmotesMenu);
-            human.AddFunction(ContentKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
+            human.AddFunction(EinsteinEnginesKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
             human.AddFunction(ContentKeyFunctions.ActivateItemInWorld);
             human.AddFunction(TraumaKeyFunctions.Tackle); // Trauma
             human.AddFunction(ContentKeyFunctions.ThrowItemInHand);
