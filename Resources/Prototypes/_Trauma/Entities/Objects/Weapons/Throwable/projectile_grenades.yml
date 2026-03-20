@@ -39,13 +39,13 @@
     node: IED
 
 - type: entity
-  name: combustable lemon # YES I KNOW ITS NOT A PROJECTILE GRENADE LET ME KEEP IT HERE
+  name: combustible lemon # YES I KNOW ITS NOT A PROJECTILE GRENADE LET ME KEEP IT HERE
   description: When life gives you lemons, burn life's house down. With the lemons.
   parent: [VolatileGrenadeBase, TimerGrenadeBase, BaseMinorContraband]
   id: LemonGrenade
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Grenades/combustablelemon.rsi
+    sprite: _Trauma/Objects/Weapons/Grenades/combustiblelemon.rsi
     state: icon
   - type: ExplodeOnTrigger
     keysIn:
