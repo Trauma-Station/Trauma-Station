@@ -298,7 +298,7 @@ public sealed class QualitySystem : EntitySystem
             return;
         }
 
-        int? lowestDelta = null;
+        int lowestDelta = 0;
         EntProtoId? lowestId = null;
         EntProtoId knowledgeToUse = FabricationKnowledge;
         bool setKnowledge = false;
@@ -306,12 +306,9 @@ public sealed class QualitySystem : EntitySystem
         {
             if (_knowledge.GetKnowledge(brain, id) is not { } skill)
             {
-                if (lowestDelta is not { })
-                {
-                    lowestDelta = -1 - delta;
-                    lowestId = id;
-                }
-                else if (-1 - delta < delta)
+
+                int potentialDelta = -1 - delta;
+                if (lowestId is not { } || potentialDelta < lowestDelta)
                 {
                     lowestDelta = -1 - delta;
                     lowestId = id;
@@ -319,26 +316,23 @@ public sealed class QualitySystem : EntitySystem
                 continue;
             }
 
-            if (_knowledge.GetMastery(skill.Comp) - delta < lowestDelta)
-            {
-                lowestDelta = _knowledge.GetMastery(skill.Comp) - delta;
-                lowestId = id;
-            }
-
-            if (!setKnowledge)
-                continue;
-
-            if (skill.Comp.Category == CraftingCategory)
+            if (skill.Comp.Category == CraftingCategory && !setKnowledge)
             {
                 knowledgeToUse = id;
                 setKnowledge = true;
+            }
+
+            int smallestDelta = _knowledge.GetMastery(skill.Comp) - delta;
+            if (smallestDelta < lowestDelta && knowledgeToUse != id)
+            {
+                lowestDelta = _knowledge.GetMastery(skill.Comp) - delta;
+                lowestId = id;
             }
         }
 
         var added = _knowledge.GetKnowledge(brain, knowledgeToUse)?.Comp.NetLevel ?? -1;
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
-
 
         ent.Comp.Quality = (added + lowestDelta * 15 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
