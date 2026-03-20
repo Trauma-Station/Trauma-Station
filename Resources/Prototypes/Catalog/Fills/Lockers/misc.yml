@@ -255,7 +255,7 @@
   id: ClosetMaintenanceFilledRandom
   suffix: Filled, Random
   parent: ClosetMaintenance
-  category: [ HideSpawnMenu ] # Trauma - the random spawner replaces it
+  categories: [ HideSpawnMenu ] # Trauma - the random spawner replaces it
   components:
   - type: EntityTableContainerFill
     containers:
