@@ -4,7 +4,7 @@
   noun: seeds-noun-seeds
   displayName: seeds-combustiblelemon-display-name
   plantRsi: _Trauma/Objects/Specific/Hydroponics/combustible_lemon.rsi
-  packetPrototype: LemonSeeds
+  packetPrototype: CombustibleLemonSeeds
   productPrototypes:
   - LemonGrenade
   mutationPrototypes:
