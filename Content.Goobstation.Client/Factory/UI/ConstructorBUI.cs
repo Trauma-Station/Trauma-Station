@@ -53,9 +53,10 @@ public sealed class ConstructorBUI : BoundUserInterface
             _menu.ClearRecipeInfo();
             if (item != null && item.Prototype != null)
             {
+                var requirements = _menu.GetSkills(item.Prototype, _proto);
                 _id = item.Prototype.ID;
                 _menu.SetRecipeInfo(item.Prototype.Name ?? "", item.Prototype.Description ?? "", item?.TargetPrototype,
-                    item!.Prototype.Type != ConstructionType.Item, true); // TODO: favourites
+                    item!.Prototype.Type != ConstructionType.Item, true, requirements); // TODO: favourites
 
                 GenerateStepList(item.Prototype);
             }

@@ -1,23 +1,24 @@
 // <Trauma>
-using Content.Goobstation.Common.CCVar;
-using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Shared.Configuration;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Client.Lobby;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
+using Content.Goobstation.Common.CCVar;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Placement;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
+using static Robust.Client.UserInterface.Controls.MenuBar;
 
 namespace Content.Client.Construction.UI
 {
@@ -418,12 +419,15 @@ namespace Content.Client.Construction.UI
             if (!_prototypeManager.TryIndex(targetProtoId, out EntityPrototype? proto))
                 return;
 
+            var requirements = _constructionView.GetSkills(prototype, _prototypeManager);
+
             _constructionView.SetRecipeInfo(
                 prototype.Name!,
                 prototype.Description!,
                 proto,
                 prototype.Type != ConstructionType.Item,
-                !_favoritedRecipes.Contains(prototype));
+                !_favoritedRecipes.Contains(prototype),
+                requirements);
 
             var stepList = _constructionView.RecipeStepList;
             GenerateStepList(prototype, stepList);

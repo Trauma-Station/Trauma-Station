@@ -74,8 +74,9 @@ namespace Content.Client.Construction.UI
         event EventHandler ClearAllGhosts;
 
         void ClearRecipeInfo();
-        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite);
+        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite, List<string> practical);
         void ResetPlacement();
+        List<string> GetSkills(ConstructionPrototype proto, IPrototypeManager protoMan);
 
         #region Window Control
 
@@ -196,7 +197,8 @@ namespace Content.Client.Construction.UI
             string description,
             EntityPrototype? targetPrototype,
             bool isItem,
-            bool isFavorite)
+            bool isFavorite,
+            List<string> practical)
         {
             BuildButton.Disabled = false;
             BuildButton.Text = Loc.GetString(isItem ? "construction-menu-place-ghost" : "construction-menu-craft");
@@ -206,6 +208,36 @@ namespace Content.Client.Construction.UI
             FavoriteButton.Visible = true;
             FavoriteButton.Text = Loc.GetString(
                             isFavorite ? "construction-add-favorite-button" : "construction-remove-from-favorite-button");
+
+            if (practical is not { })
+                return;
+
+            foreach (var skill in practical)
+            {
+                RecipeConstructionList.AddItem(skill);
+            }
+        }
+
+        public List<string> GetSkills(ConstructionPrototype proto, IPrototypeManager protoMan)
+        {
+            var requirements = new List<string>();
+            if (proto.Practical is { })
+            {
+                foreach (var (id, amount) in proto.Practical)
+                {
+                    // Resolve the string ID to a name
+                    string name = id;
+                    if (protoMan.TryIndex<EntityPrototype>(id, out var prototype))
+                        name = prototype.Name;
+                    requirements.Add(Loc.GetString("construction-menu-requirement-display", ("name", name), ("amount", amount)));
+                }
+            }
+            else
+            {
+                requirements.Add(Loc.GetString("construction-menu-requirement-none"));
+            }
+
+            return requirements;
         }
 
         public void ClearRecipeInfo()
@@ -216,6 +248,7 @@ namespace Content.Client.Construction.UI
             TargetTexture.SetPrototype(null);
             FavoriteButton.Visible = false;
             RecipeStepList.Clear();
+            RecipeConstructionList.Clear();
         }
 
         public sealed record ConstructionMenuListData(ConstructionPrototype Prototype, EntityPrototype TargetPrototype) : ListData;
