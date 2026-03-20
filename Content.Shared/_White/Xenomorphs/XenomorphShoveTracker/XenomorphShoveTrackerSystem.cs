@@ -1,4 +1,5 @@
 using Content.Shared._White.Xenomorphs.Xenomorph;
+using Content.Shared._White.Xenomorphs.Queen;
 using Content.Shared.CombatMode;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stunnable;
@@ -40,7 +41,9 @@ public sealed class XenomorphShoveTrackerSystem : EntitySystem
         xenoComponent.LastShoveTime[target] = currentTime;
 
         // Check if threshold reached
-        if (xenoComponent.ShoveCount[target] >= xenoComponent.ShoveThreshold)
+        var threshold = HasComp<XenomorphQueenComponent>(source) ? 1 : xenoComponent.ShoveThreshold;
+        if (xenoComponent.ShoveCount[target] >= threshold)
+        
         {
             // Apply knockdown and stun
             _stun.TryUpdateParalyzeDuration(target, xenoComponent.KnockdownDuration);
