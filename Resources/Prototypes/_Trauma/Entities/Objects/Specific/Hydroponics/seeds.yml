@@ -3,7 +3,7 @@
   name: packet of combustible lemon seeds
   id: CombustibleLemonSeeds
   components:
-    - type: Seed
-      seedId: combustiblelemon
-    - type: Sprite
-      sprite: _Trauma/Objects/Specific/Hydroponics/combustible_lemon.rsi
+  - type: Seed
+    seedId: CombustibleLemon
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/combustible_lemon.rsi

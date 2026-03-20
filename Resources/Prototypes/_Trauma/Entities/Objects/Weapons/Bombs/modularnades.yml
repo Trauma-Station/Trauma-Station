@@ -403,10 +403,10 @@
     deconstructionTarget: null
 
 - type: entity
-  name: combustable lemon
   description: When life gives you lemons, burn life's house down. With the lemons.
   parent: [SyndieMiniBombModular , BaseMinorContraband]
   id: LemonGrenadeModular
+  name: combustable lemon
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
