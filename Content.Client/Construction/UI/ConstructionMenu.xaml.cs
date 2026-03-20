@@ -79,7 +79,7 @@ namespace Content.Client.Construction.UI
         void ClearRecipeInfo();
         void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite, List<string> practical);
         void ResetPlacement();
-        List<string> GetSkills(ConstructionPrototype proto, IPrototypeManager protoMan);
+        List<string> GetSkills(ConstructionPrototype proto, IPrototypeManager protoMan, CommonKnowledgeSystem knowledge);
 
         #region Window Control
 
