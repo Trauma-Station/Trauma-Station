@@ -18,10 +18,10 @@ public sealed class FungerWikiSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeNetworkEvent<PrayerFailedEvent>(OnPrayerFailed);
+        SubscribeLocalEvent<PrayerFailedEvent>(OnPrayerFailed);
     }
 
-    private void OnPrayerFailed(PrayerFailedEvent args)
+    private void OnPrayerFailed(ref PrayerFailedEvent args)
     {
         _uri.OpenUri(Wiki);
     }
