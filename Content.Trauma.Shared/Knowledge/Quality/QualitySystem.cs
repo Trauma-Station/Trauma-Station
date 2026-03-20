@@ -311,6 +311,11 @@ public sealed class QualitySystem : EntitySystem
                     lowestDelta = -1 - delta;
                     lowestId = id;
                 }
+                else if (-1 - delta < delta)
+                {
+                    lowestDelta = -1 - delta;
+                    lowestId = id;
+                }
                 continue;
             }
 
