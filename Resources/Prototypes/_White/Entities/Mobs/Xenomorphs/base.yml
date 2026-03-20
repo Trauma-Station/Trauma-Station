@@ -107,7 +107,7 @@
     angle: 0
     soundHit:
       collection: AlienClaw
-    animation: WeaponArcBite
+    animation: WeaponArcClaw
     damage:
       types:
         Blunt: 5
