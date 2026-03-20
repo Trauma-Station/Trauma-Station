@@ -1,0 +1,12 @@
+- type: entity
+  name: Xenoborg Blade
+  parent: KukriKnife
+  id: XenoborgKnife
+  description: 4265 6520656666696369656E742E. # "Be Efficent"
+  components:
+  - type: Sprite
+    sprite: _Impstation/Objects/Weapons/Melee/xenoborg_blade.rsi
+    state: icon
+  - type: Item
+    sprite: _Impstation/Objects/Weapons/Melee/xenoborg_blade.rsi
+    storedSprite: null

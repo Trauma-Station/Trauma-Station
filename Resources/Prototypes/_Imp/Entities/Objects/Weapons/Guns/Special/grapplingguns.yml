@@ -1,0 +1,26 @@
+- type: entity
+  name: grappling beam
+  parent: WeaponGrapplingGun
+  id: WeaponGrapplingGunXeno
+  description: A gun that pulls its user towards its target. Useful for getting around while off-grid, or doing some anime shit. # imp; it seriously didn't have a description before
+  components:
+    - type: GrapplingGun
+      cycleSound: /Audio/Weapons/Guns/MagIn/energycrossbow_reload.ogg
+      ropeSprite:
+        sprite: _Impstation/Objects/Weapons/Guns/Launchers/xenoborg_grappling_gun.rsi
+        state: rope
+    - type: Gun
+      soundGunshot: /Audio/_Impstation/Weapons/Guns/Gunshots/blasterrunner.ogg
+      fireRate: 0.5
+      clumsyProof: true
+    - type: BasicEntityAmmoProvider
+      proto: GrapplingHookXenoborg
+      capacity: 1
+    - type: Sprite
+      sprite: _Impstation/Objects/Weapons/Guns/Launchers/xenoborg_grappling_gun.rsi
+      layers:
+        - state: base
+        - state: base-unshaded
+          map: [ "unshaded" ]
+          shader: unshaded
+          visible: true

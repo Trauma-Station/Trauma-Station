@@ -1654,7 +1654,7 @@
     - item: HandHeldMassScannerBorg
     - item: PinpointerMothership
     - item: HandheldStationMapUnpowered
-    - item: WeaponGrapplingGun
+    - item: WeaponGrapplingGunXeno #Imp -- was WeaponGrapplingGun. Functionally identical just reskin.
     - item: JetpackXenoborg
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-space-movement-module }
@@ -1663,7 +1663,7 @@
   parent: [ BaseXenoborgModuleScout, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleSword
   name: knife xenoborg module
-  description: Module with a kukri knife.
+  description: Module with a xenoborg blade.
   components:
   - type: Sprite
     layers:
@@ -1671,7 +1671,7 @@
     - state: icon-xenoborg-sword
   - type: ItemBorgModule
     hands:
-    - item: KukriKnife
+    - item: XenoborgKnife #Imp-- was KukriKnife. Functionally identical, just a different sprite version.
     - item: JetpackXenoborg
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword-module }

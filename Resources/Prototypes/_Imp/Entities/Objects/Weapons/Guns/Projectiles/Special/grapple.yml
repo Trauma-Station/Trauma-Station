@@ -1,0 +1,17 @@
+- type: entity
+  parent: GrapplingHook
+  id: GrapplingHookXenoborg
+  name: grappling beam
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: EmbeddableProjectile
+      deleteOnRemove: true
+      sound:
+        path: /Audio/Weapons/plasma_cutter.ogg
+        params:
+          volume: 4
+    - type: Sprite
+      noRot: false
+      sprite: _Impstation/Objects/Weapons/Guns/Launchers/xenoborg_grappling_gun.rsi
+      layers:
+        - state: hook

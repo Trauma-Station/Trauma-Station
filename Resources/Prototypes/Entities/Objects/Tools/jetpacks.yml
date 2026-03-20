@@ -345,3 +345,8 @@
     weightlessAcceleration: 1.3
     weightlessFriction: 0.3
     weightlessModifier: 1
+  - type: Sprite #Imp - sprite change
+    sprite: _Impstation/Objects/Tanks/Jetpacks/xenoborg_jetpack.rsi
+    layers:
+    - state: icon
+      map: ["enum.JetpackVisuals.Layer"]

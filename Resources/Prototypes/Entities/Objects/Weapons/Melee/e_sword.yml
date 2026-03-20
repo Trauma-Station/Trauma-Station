@@ -518,8 +518,19 @@
 - type: entity
   parent: [ EnergyDaggerLoud, BaseXenoborgContraband ]
   id: EnergyDaggerLoudBlue
-  suffix: blue
+  suffix: xenoborg
+  description: 48617665206120706C616E20746F206B696C6C2065766572796F6E6520796F75206D6565742E # "Have a plan to kill everyone you meet."
   components:
+  - type: Sprite #Imp -- Sprite
+    sprite: _Impstation/Objects/Weapons/Melee/xenoborg_energy_blade.rsi
+    layers:
+      - state: e-sword
+      - state: e-sword-blade
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
   - type: EnergySword
     colorOptions:
-    - "#2288ff" # can only be blue
+    - "#ebb1ff" #Imp -- was #2288ff
+  - type: MeleeWeapon #Imp -- for the rotation
+    wideAnimationRotation: -135

@@ -34,6 +34,6 @@ names-xenoborg-last-dataset-33 = NOVA
 names-xenoborg-last-dataset-34 = ZETA
 names-xenoborg-last-dataset-35 = DESTROYER
 names-xenoborg-last-dataset-36 = APEX
-names-xenoborg-last-dataset-37 = BLACK
+names-xenoborg-last-dataset-37 = MOBILE
 names-xenoborg-last-dataset-38 = FREEZE
 names-xenoborg-last-dataset-39 = XENO

@@ -508,7 +508,7 @@
     nameSegments:
 #    - NamesXenoborg # - Trama: New Xenoborg names
      - NamesXenoborgFirst
-      - NamesXenoborgLast
+     - NamesXenoborgLast
     nameFormat: name-format-xenoborg
   - type: NameIdentifier
     group: Xenoborg
