@@ -8,6 +8,7 @@ using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.Explosion.Components;
 using Content.Shared.NameModifier.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Stacks;
@@ -38,6 +39,7 @@ public sealed class QualitySystem : EntitySystem
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<QualityComponent> _query;
 
@@ -334,6 +336,7 @@ public sealed class QualitySystem : EntitySystem
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
+        _popup.PopupEntity(Loc.GetString("construction-examine-quality-result", ("added", added), ("delta", lowestDelta * 15), ("roll", roll)), user, user, PopupType.Small);
         ent.Comp.Quality = (added + lowestDelta * 15 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
             >= 88 => 5,
