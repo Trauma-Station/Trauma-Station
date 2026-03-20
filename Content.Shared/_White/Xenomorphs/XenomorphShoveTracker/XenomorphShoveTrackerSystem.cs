@@ -43,7 +43,7 @@ public sealed class XenomorphShoveTrackerSystem : EntitySystem
         // Check if threshold reached
         var threshold = HasComp<XenomorphQueenComponent>(source) ? 1 : xenoComponent.ShoveThreshold;
         if (xenoComponent.ShoveCount[target] >= threshold)
-        
+
         {
             // Apply knockdown and stun
             _stun.TryUpdateParalyzeDuration(target, xenoComponent.KnockdownDuration);
