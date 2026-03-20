@@ -570,9 +570,9 @@
           Quantity: 30
 
 - type: entity
-  name: lemon payload
   parent: [ BasePayload, BaseMinorContraband ]
   id: LemonPayload
+  name: lemon payload
   description: I'm the man who's gonna burn your house down! With the lemons!
   components:
   - type: Sprite
