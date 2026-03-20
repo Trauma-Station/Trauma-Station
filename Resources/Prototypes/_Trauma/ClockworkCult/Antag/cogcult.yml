@@ -2,5 +2,14 @@
   id: ClockworkCult
   name: role-clockwork-cultist
   antagonist: true
-  setPreference: true
+  setPreference: false
   objective: roles-antag-clockwork-cultist-description
+
+- type: antagSmite
+  id: ClockworkCultist
+  antag: ClockworkCult
+  rule: ClockworkCult
+  ruleComp: ClockworkCultistRule
+  icon:
+    sprite: Structures/Walls/clock.rsi
+    state: wall_gear
