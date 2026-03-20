@@ -57,8 +57,9 @@
     damage:
       types:
         Heat: -3
-      groups:
-        Brute: -3
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
   - type: MeleeWeapon
     range: 0.75
     attackRate: 0.1

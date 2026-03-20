@@ -18,13 +18,17 @@ public sealed partial class BodyPartSystem : CommonBodyPartSystem
     [Dependency] private readonly BodyCacheSystem _cache = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityQuery<BodyPartComponent> _query = default!;
-    [Dependency] private readonly EntityQuery<ChildOrganComponent> _childQuery = default!;
-    [Dependency] private readonly EntityQuery<OrganComponent> _organQuery = default!;
+    private EntityQuery<BodyPartComponent> _query = default!;
+    private EntityQuery<ChildOrganComponent> _childQuery = default!;
+    private EntityQuery<OrganComponent> _organQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _query = GetEntityQuery<BodyPartComponent>();
+        _childQuery = GetEntityQuery<ChildOrganComponent>();
+        _organQuery = GetEntityQuery<OrganComponent>();
 
         SubscribeLocalEvent<BodyPartComponent, OrganGotInsertedEvent>(OnPartInserted);
         SubscribeLocalEvent<BodyPartComponent, OrganGotRemovedEvent>(OnPartRemoved);

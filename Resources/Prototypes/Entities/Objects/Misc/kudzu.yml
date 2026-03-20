@@ -273,6 +273,10 @@
   id: ShadowKudzu
   parent: [ BaseKudzu, BaseShadow ]
   components:
+    # <Trauma>
+    - type: TimedDespawn
+      lifetime: 180 # enough for antags to make use of it, not enough to be round ending aids
+    # </Trauma>
     - type: Physics
       canCollide: false
     - type: Occluder

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Popups;
 using Content.Shared.Trigger.Systems;
 using Robust.Shared.Timing;
 
@@ -8,6 +9,7 @@ namespace Content.Trauma.Shared.Body.Part;
 public sealed class TriggerInsideBodyPartSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
 
     public override void Initialize()
@@ -46,6 +48,9 @@ public sealed class TriggerInsideBodyPartSystem : EntitySystem
         var active = EnsureComp<ActiveTriggerInsideBodyPartComponent>(ent);
         active.NextTrigger = _timing.CurTime + ent.Comp.Delay;
         Dirty(ent, active);
+
+        if (ent.Comp.Popup is {} loc)
+            _popup.PopupClient(Loc.GetString(loc, ("delay", ent.Comp.Delay.TotalSeconds)), ent, ent);
     }
 
     private void OnRemovedFromCavity(Entity<TriggerInsideBodyPartComponent> ent, ref RemovedFromCavityEvent args)

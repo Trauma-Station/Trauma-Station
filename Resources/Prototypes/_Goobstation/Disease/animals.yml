@@ -4,6 +4,7 @@
   suffix: Plague
   components:
   - type: GhostRole
+    prob: 1 # Ensure antag mice get ghostrolled
     makeSentient: true
     allowSpeech: true
     allowMovement: true

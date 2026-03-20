@@ -230,7 +230,7 @@ public abstract class SharedCPRSystem : EntitySystem
             // has to be below death threshold
             _threshold.TryGetThresholdForState(uid, MobState.Dead, out var threshold) &&
             _damageQuery.TryComp(uid, out var damage) &&
-            _threshold.CheckVitalDamage(uid, damage) < threshold;
+            _threshold.CheckVitalDamage((uid, damage)) < threshold;
 
     private EntityUid? GetLungs(EntityUid mob)
         => _body.GetOrgan(mob, LungsCategory);

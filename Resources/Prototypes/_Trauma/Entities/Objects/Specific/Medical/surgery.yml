@@ -1,0 +1,9 @@
+- type: entity
+  parent: BoneGel
+  id: BoneGelMakeshift
+  name: makeshift bone gel
+  description: A poorly made substitute for bone gel. One hell of a last resort...
+  components:
+  # TODO: unique sprite
+  - type: BoneGel
+    speed: 0.7

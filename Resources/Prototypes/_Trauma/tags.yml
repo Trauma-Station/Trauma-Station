@@ -2,6 +2,9 @@
   id: AdvancedMagboots
 
 - type: Tag
+  id: BowImprovised
+
+- type: Tag
   id: Butt
 
 - type: Tag
@@ -66,6 +69,9 @@
 
 - type: Tag
   id: HandTeleporter
+
+- type: Tag
+  id: Iradomini
 
 - type: Tag
   id: MagazineTurret

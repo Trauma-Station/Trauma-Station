@@ -1,7 +1,8 @@
 - type: entity
-  id: RandomMaintsCloset
-  name: random maints closet spawner
   parent: MarkerBase
+  id: RandomMaintsCloset
+  name: maintenance closet
+  suffix: Random Filled/Mimic
   components:
   - type: RandomSpawner
     prototypes:

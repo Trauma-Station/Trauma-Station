@@ -15,3 +15,12 @@
   name: ghost-role-information-colossus-name
   antagonist: true
   objective: ghost-role-colossus-objective
+
+- type: antagSmite
+  id: CosmicCultist
+  antag: CosmicAntagCultist
+  rule: CosmicCult
+  ruleComp: CosmicCultRule
+  icon:
+    sprite: _DV/CosmicCult/Icons/antag_icons.rsi
+    state: CosmicCult

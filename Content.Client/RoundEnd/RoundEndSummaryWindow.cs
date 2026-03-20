@@ -239,18 +239,7 @@ namespace Content.Client.RoundEnd
                     var highestDamage = playerInfo.DamagePerGroup
                         .OrderByDescending(kvp => kvp.Value)
                         .First();
-                    var typeAdj = highestDamage.Key switch
-                    {
-                        "Burn" => "fiery",
-                        "Brute" => "crushing",
-                        "Toxin" => "poisonous",
-                        "Airloss" => "suffocating",
-                        "Genetic" => "twisted",
-                        "Metaphysical" => "otherworldly",
-                        "Electronic" => "shocking",
-                        _ => "mysterious",
-                    };
-
+                    var typeAdj = Loc.GetString("damage-death-adjective-" + highestDamage.Key);
                     deathLabel.SetMarkup(
                         Loc.GetString("round-end-summary-window-death",
                             ("severity", severityAdj),
@@ -266,7 +255,7 @@ namespace Content.Client.RoundEnd
                         if (damage.Value <= 0)
                             continue;
 
-                        var color = damage.Key switch
+                        var color = damage.Key.ToString() switch
                         {
                             "Burn" => Color.Orange,
                             "Brute" => Color.Red,

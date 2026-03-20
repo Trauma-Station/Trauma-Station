@@ -6,13 +6,9 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Genetics.UI;
 
-public sealed class GeneticsScannerBUI : BoundUserInterface
+public sealed class GeneticsScannerBUI(EntityUid owner, Enum key) : BoundUserInterface(owner, key)
 {
     private GeneticsScannerWindow? _window;
-
-    public GeneticsScannerBUI(EntityUid owner, Enum key) : base(owner, key)
-    {
-    }
 
     protected override void Open()
     {
@@ -20,15 +16,17 @@ public sealed class GeneticsScannerBUI : BoundUserInterface
 
         _window = this.CreateWindow<GeneticsScannerWindow>();
         _window.SetEntity(Owner);
-        _window.OpenCentered();
         _window.OnScan += () => SendPredictedMessage(new GeneticsConsoleScanMessage());
+        _window.OnPrint += i => SendPredictedMessage(new GeneticsPrintScanMessage(i));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        if (state is not GeneticsConsoleState cast)
+        if (_window is not {} window || state is not GeneticsConsoleState cast)
             return;
 
-        _window?.UpdateState(cast);
+        window.UpdateState(cast);
+        if (!window.IsOpen)
+            window.OpenCentered();
     }
 }

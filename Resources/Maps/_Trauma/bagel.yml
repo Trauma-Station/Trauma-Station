@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 273.0.0
+  engineVersion: 272.0.0
   forkId: ""
   forkVersion: ""
-  time: 03/15/2026 14:09:36
+  time: 03/20/2026 14:01:17
   entityCount: 25174
 maps:
 - 1
@@ -624,6 +624,14 @@ entities:
           data: AAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAAAAAADgAAAABHR0dHR0dHR0cAAA4AAAAAR0dHR0dHR0dHAAAOAEdHR0dHR0dHR0dHRwAAAEdHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHRw==
         -2,-1:
           data: W1tbW1tbW1tbW1tbDg5YWFtbW1tbW1tbW1tbWw4OVlZaW1tbW1tbW1tbW1sODlZWWltbW1tbW1tbW1tbDg5WVlpbW1tbW1tbW1tbWw4OVlZaW1tbW1tbW1tbW1sODldXWltbW1tbW1tbW1tbDg5XV1pbW1tbW1tbW1tbWw4OV1deW1tbW1tbW1tbW1sODldXXltbW1tbW1tbW1tbDg4ODl5bW1tbW1tbW1tbWw4ODg5eW1tbW1tbW1tbW1sODg4OXltbW1tbW1tbW1tbDg4ODl5bW1tbW1tbW1tbWw4ODg5eXl5fX19fX2BgYGBgYA4OXl5eX19fX19gYGBgYGAODg==
+        -4,3:
+          data: SEhISEhISEhIAEhISEhIAEhISEhISEhISABISEhISABISEhISEhISEgASEhISEgASEhISEhISEhIAEhISEhIAEhISEhISEhISABISEhISABISEhISEhISEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+        -4,2:
+          data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASEhISEgAAAAAAAAAAAAAAEhISEhIAAAAAAAAAAAAAABISEhISAAAAAAAAAAAAAAASEhISEgAAAAAAAAAAEhISEhISEhISAAAAAAAAABISEhISEhISEgAAAAAAAAASEhISEhISEhIAAAAAAAAAEhISEhISEhISAAAAAAAAABISEhISEhISEgAAAAAAAAASEhISEhISEhIAAAAAAAAAEhISEhISEhISAAAAAAAAABISEhISEhISEgAAEhISEgASEhISEhISEhIAEhISEhIAA==
+        -5,3:
+          data: AAAAAAAAAAAAAAAAAABISAAAAAAAAAAAAAAAAAAASEgAAAAAAAAAAAAAAAAAAEhIAAAAAAAAAAAAAAAAAABISAAAAAAAAAAAAAAAAAAASEgAAAAAAAAAAAAAAAAAAEhIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+        -5,2:
+          data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAAASEgAAAAAAAAAAAAAAAAAAEhIAAAAAAAAAAAAAAAAAABISAAAAAAAAAAAAAAAAAAASEgAAAAAAAAAAAAAAAAAAEhIAAAAAAAAAAAAAAAAAABISA==
       lastMapping: 96
       areaMap:
         1: AreaCafeteria
@@ -39495,11 +39503,6 @@ entities:
     - type: Transform
       pos: 3.5,29.5
       parent: 2
-  - uid: 5450
-    components:
-    - type: Transform
-      pos: 0.5,35.5
-      parent: 2
   - uid: 5451
     components:
     - type: Transform
@@ -43267,6 +43270,11 @@ entities:
       parent: 2
 - proto: CableMV
   entities:
+  - uid: 5450
+    components:
+    - type: Transform
+      pos: 0.5,35.5
+      parent: 2
   - uid: 6167
     components:
     - type: Transform
@@ -59530,114 +59538,6 @@ entities:
         moles:
           Oxygen: 1.6495836
           Nitrogen: 6.2055764
-- proto: ClosetMaintenanceFilledRandom
-  entities:
-  - uid: 1752
-    components:
-    - type: Transform
-      pos: -49.5,-10.5
-      parent: 2
-  - uid: 7718
-    components:
-    - type: Transform
-      pos: -36.5,-27.5
-      parent: 2
-  - uid: 9203
-    components:
-    - type: Transform
-      pos: 52.5,-40.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
-  - uid: 9204
-    components:
-    - type: Transform
-      pos: -15.5,-28.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
-  - uid: 9205
-    components:
-    - type: Transform
-      pos: 33.5,-39.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
-  - uid: 9206
-    components:
-    - type: Transform
-      pos: -33.5,-34.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
-  - uid: 9207
-    components:
-    - type: Transform
-      pos: -39.5,-36.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
-  - uid: 9208
-    components:
-    - type: Transform
-      pos: 36.5,-51.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
-  - uid: 9209
-    components:
-    - type: Transform
-      pos: -59.5,-0.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
-  - uid: 9210
-    components:
-    - type: Transform
-      pos: -14.5,-2.5
-      parent: 2
 - proto: ClosetRadiationSuitFilled
   entities:
   - uid: 9211
@@ -112222,8 +112122,12 @@ entities:
   - uid: 16966
     components:
     - type: Transform
+      rot: -1.5707963267948966 rad
       pos: 1.5,34.5
       parent: 2
+    - type: AccessReader
+      accessListsOriginal:
+      - - Engineering
 - proto: ParticleAcceleratorEmitterForeUnfinished
   entities:
   - uid: 16967
@@ -118783,6 +118687,58 @@ entities:
     components:
     - type: Transform
       pos: 20.5,11.5
+      parent: 2
+- proto: RandomMaintsCloset
+  entities:
+  - uid: 1752
+    components:
+    - type: Transform
+      pos: -49.5,-10.5
+      parent: 2
+  - uid: 7718
+    components:
+    - type: Transform
+      pos: -36.5,-27.5
+      parent: 2
+  - uid: 9203
+    components:
+    - type: Transform
+      pos: 52.5,-40.5
+      parent: 2
+  - uid: 9204
+    components:
+    - type: Transform
+      pos: -15.5,-28.5
+      parent: 2
+  - uid: 9205
+    components:
+    - type: Transform
+      pos: 33.5,-39.5
+      parent: 2
+  - uid: 9206
+    components:
+    - type: Transform
+      pos: -33.5,-34.5
+      parent: 2
+  - uid: 9207
+    components:
+    - type: Transform
+      pos: -39.5,-36.5
+      parent: 2
+  - uid: 9208
+    components:
+    - type: Transform
+      pos: 36.5,-51.5
+      parent: 2
+  - uid: 9209
+    components:
+    - type: Transform
+      pos: -59.5,-0.5
+      parent: 2
+  - uid: 9210
+    components:
+    - type: Transform
+      pos: -14.5,-2.5
       parent: 2
 - proto: RandomPainting
   entities:

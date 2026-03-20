@@ -552,10 +552,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return (uid, comp);
 
         // otherwise try use the cached brain
-        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent || !ent.IsValid())
+        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent || TerminatingOrDeleted(ent))
             return null;
 
-        return (ent, _containerQuery.Comp(ent));
+        if (_containerQuery.TryComp(ent, out var container))
+            return (ent, container);
+
+        Log.Error($"Knowledge entity {ToPrettyString(ent)} of holder {ToPrettyString(uid)} did not have KnowledgeContainerComponent!");
+        return null;
     }
 
     /// <summary>

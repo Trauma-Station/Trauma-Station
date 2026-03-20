@@ -78993,13 +78993,6 @@ entities:
     - type: Transform
       pos: -22.218994,44.34274
       parent: 2
-- proto: ClothingHeadHatCatEars
-  entities:
-  - uid: 32413
-    components:
-    - type: Transform
-      pos: 58.420414,-8.552076
-      parent: 2
 - proto: ClothingHeadHatChickenhead
   entities:
   - uid: 12605
