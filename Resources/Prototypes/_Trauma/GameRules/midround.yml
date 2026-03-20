@@ -1,0 +1,73 @@
+## Antag schedulers: runs a limited number of midround antags
+
+- type: entity
+  parent: BaseGameRule
+  id: BasicAntagEventScheduler
+  components:
+  - type: RuleSchedulerLimit
+    limit: 3
+  - type: BasicStationEventScheduler
+    scheduledGameRules: !type:NestedSelector
+      tableId: BasicAntagEventsTable
+    # start 10-15 mins in
+    minimumTimeUntilFirstEvent: 600
+    maximumSpanUntilFirstEvent: 300
+    # 12-25 mins between each vent critter or whatever
+    minMaxEventTiming:
+      min: 720
+      max: 1500
+
+- type: entity
+  parent: BaseGameRule
+  id: ModerateAntagEventScheduler
+  components:
+  - type: RuleSchedulerLimit
+    limit: 2
+  - type: BasicStationEventScheduler
+    scheduledGameRules: !type:NestedSelector
+      tableId: ModerateAntagEventsTable
+    # starts 20-27 mins in
+    minimumTimeUntilFirstEvent: 1200
+    maximumSpanUntilFirstEvent: 450
+    # 15-25 mins between each antag
+    minMaxEventTiming:
+      min: 900
+      max: 1500
+
+
+## Shadow demon
+
+- type: entity
+  parent: BaseGameRule
+  id: BaseShadowDemonRule
+  abstract: true
+  components:
+  - type: AntagSpawner
+    prototype: BaseMobShadowDemon
+  - type: AntagRandomSpawn
+
+- type: entity
+  parent: BaseShadowDemonRule
+  id: ShadowDemonSummon
+  components:
+  - type: AntagSelection
+    agentName: shadow-demon-round-end-agent-name
+    definitions:
+    - spawnerPrototype: SpawnPointGhostShadowDemon
+      min: 1
+      max: 1
+      pickPlayer: false
+      mindRoles:
+      - MindRoleShadowDemon
+      briefing:
+        text: shadow-demon-role-greeting
+        color: Red
+        sound: /Audio/_Trauma/Mobs/ShadowDemon/briefing/shadowdemonbriefing.ogg
+      components:
+      - type: RandomMetadata  # Left as is since they are demonic names
+        nameSegments:
+        - NamesSlaughterTitle
+        - NamesSlaughter
+        nameFormat: name-format-slaughter
+      - type: LightImmunity # Grants temporary light immunity so it survives AntagRandomSpawn | Remove once we get better spawns
+        duration: 20

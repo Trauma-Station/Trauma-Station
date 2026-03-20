@@ -14,7 +14,6 @@
   - MofficTranslator
   - XenoTranslator
   - AnimalTranslator
-  - ValyrianStandardTranslator
   - NewKinPidginTranslator
 
 - type: latheRecipePack
@@ -27,6 +26,5 @@
   - SolCommonTranslatorImplanter
   - RootSpeakTranslatorImplanter
   - MofficTranslatorImplanter
-  - ValyrianStandardTranslatorImplanter
   - ChevalTranslatorImplanter
   - NewKinPidginTranslatorImplanter

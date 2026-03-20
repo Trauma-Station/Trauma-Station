@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Xenobiology.Components;
@@ -149,7 +143,7 @@ public abstract class SharedXenoVacuumSystem : EntitySystem
 
         _useDelay.TryResetDelay((ent, delay), false, ReleaseDelayId);
 
-        _audio.PlayEntity(ent.Comp.ClearSound, ent, args.User, AudioParams.Default.WithVolume(-2f));
+        _audio.PlayPredicted(ent.Comp.ClearSound, ent, args.User, AudioParams.Default.WithVolume(-2f));
     }
 
     #region Helpers

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Traitor.PenSpin;
 using Content.Goobstation.Shared.Traitor.PenSpin;
 using JetBrains.Annotations;
@@ -24,7 +26,7 @@ public sealed class PenSpinBoundUserInterface : BoundUserInterface
         _menu.ResetButtonPressed += OnResetPressed;
         _menu.SubmitButtonPressed += OnSubmitPressed;
 
-        if (EntMan.TryGetComponent<PenSpinComponent>(Owner, out var comp))
+        if (EntMan.TryGetComponent<PenComponent>(Owner, out var comp))
         {
             _menu.SetDegreeRange(comp.MinDegree, comp.MaxDegree);
         }

@@ -118,6 +118,9 @@
         - id: ClothingNeckCloakPan
       - id: ToyFigurineSkeleton
       - id: MysteryFigureBox
+      # <Trauma>
+      - id: ClothingHandsGlovesGripper
+      # </Trauma>
       - id: FoodSnackLollypopWrappedMysteryNeutral # Goobstation - Lollypops!
       - id: RevolutionaryManifesto # Einstein Engines - Revolutionary Manifesto
       # Cult
@@ -169,6 +172,8 @@
       - id: CluwneHorn
       - id: ClothingShoesWizardSkates
       - id: FoodSnackLollypopWrappedMysteryEvil
+      - id: PlushieCosmicCult
+      - id: ClothingHandsGlovesRocket
       # </Trauma>
       - id: DrinkMugDog
       - id: CigarGold

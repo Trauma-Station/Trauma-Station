@@ -1,0 +1,13 @@
+- type: mutationRecipe
+  id: ThermalAdaptation
+  result: MutationThermalAdaptation
+  required:
+  - MutationColdAdaptation
+  - MutationHeatAdaptation
+
+- type: mutationRecipe
+  id: ThermalWeakness
+  result: MutationThermalWeakness
+  required:
+  - MutationColdWeakness
+  - MutationHeatWeakness

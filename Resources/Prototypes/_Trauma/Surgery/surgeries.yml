@@ -1,3 +1,5 @@
+# Hypoport
+
 - type: entity
   parent: SurgeryOpenCavityBase
   id: SurgeryOpenCavityHypoport
@@ -12,7 +14,7 @@
   - type: SurgeryPartCondition
     parts: [ Head ]
   - type: SurgeryOrganSlotCondition
-    organSlot: hypoport
+    organSlot: Hypoport
 
 - type: entity
   parent: BaseSurgeryInsertOrgan
@@ -26,10 +28,9 @@
     - SurgeryStepInsertHypoport
     - SurgeryStepSealOrganWound
   - type: SurgeryOrganSlotCondition
-    organSlot: hypoport
+    organSlot: Hypoport
   - type: SurgeryOrganCondition
-    organ:
-    - type: Hypoport
+    organ: Hypoport
 
 - type: entity
   parent: BaseSurgeryRemoveOrgan
@@ -37,5 +38,108 @@
   name: Extract Hypoport
   components:
   - type: SurgeryOrganCondition
-    organ:
-    - type: Hypoport
+    organ: Hypoport
+
+# Brain Chip
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertBrainChip
+  name: Install Brain Chip
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepClampBleeders
+    - SurgeryStepOpenPanel
+    - SurgeryStepInsertBrainChip
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: BrainChip
+  - type: SurgeryOrganCondition
+    organ: BrainChip
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveBrainChip
+  name: Extract Brain Chip
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepClampBleeders
+    - SurgeryStepOpenPanel
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryOrganCondition
+    organ: BrainChip
+
+# Tail
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenTailSlot
+  name: Create Tail Joint
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepCreateJoint
+    - SurgeryStepStitchJoint
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Tail
+
+# Tongue
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveTongue
+  name: Remove Tongue
+  components:
+  - type: SurgeryOrganCondition
+    organ: Tongue
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertTongue
+  name: Insert Tongue
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: Tongue
+  - type: SurgeryOrganCondition
+    organ: Tongue
+
+# Wings
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenWingsSlot
+  name: Create Wing Joints
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepCreateJoint
+    - SurgeryStepStitchJoint
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Wings
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachWings
+  name: Attach Wings
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: Wings

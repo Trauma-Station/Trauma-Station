@@ -21,7 +21,6 @@
   - SolCommonTranslator
   - RootSpeakTranslator
   - MofficTranslator
-  - ValyrianStandardTranslator
   - ChevalTranslatorImplanter
   - NewKinPidginTranslator
   position: -3, 4
@@ -45,7 +44,6 @@
   - SolCommonTranslatorImplanter
   - RootSpeakTranslatorImplanter
   - MofficTranslatorImplanter
-  - ValyrianStandardTranslatorImplanter
   - NewKinPidginTranslatorImplanter
   - AnimalTranslator
   - XenoTranslator

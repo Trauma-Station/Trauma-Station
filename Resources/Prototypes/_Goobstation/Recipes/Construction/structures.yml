@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 Thom <119594676+ItsMeThom@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: WallDirectional
   graph: WallDirectional
@@ -15,6 +7,10 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    WallsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
 
 - type: construction
   id: SolarPanel
@@ -23,6 +19,8 @@
   category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
+  theory:
+    ElectronicsKnowledge: 1
 
 # Barricades
 
@@ -35,6 +33,10 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    WallsKnowledge: 1 # good cading is hard
+  practical:
+    MetalworkingKnowledge: 4
 
 - type: construction
   id: BarricadeSteelFolding
@@ -45,6 +47,10 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    WallsKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 4
 
 - type: construction
   id: BarricadePlasteel
@@ -55,6 +61,10 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    WallsKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 4
 
 - type: construction
   id: BarricadePlasteelFolding
@@ -65,6 +75,10 @@
   placementMode: SnapgridCenter
   canRotate: true
   canBuildInImpassable: true
+  theory:
+    WallsKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 4
 
 # Airlocks
 
@@ -79,6 +93,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
 
 - type: construction
   id: AirlockSealedGlass
@@ -91,3 +109,7 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2

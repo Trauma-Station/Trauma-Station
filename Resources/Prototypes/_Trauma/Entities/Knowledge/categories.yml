@@ -1,0 +1,133 @@
+- type: entity
+  id: BaseMedicalKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Medical
+    color: "#1865d8"
+
+- type: entity
+  id: BasePhysicalKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Physical
+    costs: [0, 2, 4, 6, 8, 10] # combat skills cost 2x, no goku
+    color: "#16e720"
+
+- type: entity
+  id: BaseWarKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: War
+    costs: [0, 2, 4, 6, 8, 10]
+    color: "#f71818"
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseCraftingKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Crafting
+    color: "#0ba881"
+    experienceCost: 20
+
+- type: entity
+  id: BaseIntellectualKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Intellectual
+
+- type: entity
+  id: BaseScientificKnowledge
+  parent: BaseKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Scientific
+    color: "#c01dcf"
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseRecipesKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Recipes
+    color: "#f39b29"
+    experienceCost: 20
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseLanguageKnowledge
+  abstract: true
+  components:
+  - type: Knowledge
+    category: Language
+    learnedLevel: 26
+    experienceCost: 16
+    color: "#ADD8E6"
+    costs: null # its currently fucked, have to use traits still :(
+  - type: LanguageKnowledge
+
+- type: entity
+  parent: BaseKnowledge
+  id: BaseMartialArtsKnowledge
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Interface/Misc/intents.rsi
+    state: harm
+  - type: Knowledge
+    category: MartialArt
+    experienceCost: 10
+    color: "#c70000"
+    costs: null # Being able to learn any of these roundstart is too much
+  - type: MartialArtsKnowledge
+    blocked: false
+    icon: Objects/Misc/skub.rsi
+
+# Actual categories
+
+- type: knowledgeCategory
+  id: MartialArt
+  name: knowledge-category-Martial
+
+- type: knowledgeCategory
+  id: Recipes
+  name: knowledge-category-Recipes
+
+- type: knowledgeCategory
+  id: Crafting
+  name: knowledge-category-Crafting
+
+- type: knowledgeCategory
+  id: Language
+  name: knowledge-category-Languages
+
+- type: knowledgeCategory
+  id: War
+  name: knowledge-category-Combat
+
+- type: knowledgeCategory
+  id: Medical
+  name: knowledge-category-Medical
+
+- type: knowledgeCategory
+  id: Physical
+  name: knowledge-category-Physical
+
+- type: knowledgeCategory
+  id: Intellectual
+  name: knowledge-category-Intellectual
+
+- type: knowledgeCategory
+  id: Scientific
+  name: knowledge-category-Scientific

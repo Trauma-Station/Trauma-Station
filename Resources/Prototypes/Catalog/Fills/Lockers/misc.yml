@@ -155,6 +155,13 @@
         - id: ClothingEyesHudSyndicate
 
 - type: entityTable
+  id: FillEmergencyInflatables
+  table: !type:AllSelector
+    children:
+    - id: InflatableWallStack5
+    - id: InflatableDoorStack1
+
+- type: entityTable
   id: FillLockerEmergencyStandard
   table: !type:AllSelector
     children:
@@ -166,12 +173,18 @@
       - id: OxygenTankFilled
     - id: ToolboxEmergencyFilled
       prob: 0.5
+    # <Trauma>
+    - id: ToolboxEmergencyMimic
+      prob: 0.0025
+    # </Trauma>
     - id: MedkitOxygenFilled
       prob: 0.2
     - id: WeaponFlareGun
       prob: 0.1
     - id: BoxMRE
       prob: 0.1
+    - !type:NestedSelector
+      tableId: FillEmergencyInflatables
 
 - type: entity
   id: ClosetEmergencyFilledRandom
@@ -203,11 +216,17 @@
       prob: 0.1
     - id: ToolboxEmergencyFilled
       prob: 0.05
+    # <Trauma>
+    - id: ToolboxEmergencyMimic
+      prob: 0.0025
+    # </Trauma>
     - !type:GroupSelector
       children:
       - id: EmergencyNitrogenTankFilled
         weight: 4
       - id: NitrogenTankFilled
+    - !type:NestedSelector
+      tableId: FillEmergencyInflatables
 
 - type: entity
   id: ClosetEmergencyN2FilledRandom
@@ -315,6 +334,10 @@
       prob: 0.10
       rolls: !type:RangeNumberSelector
         range: 1, 2
+    - !type:NestedSelector
+      tableId: MaintenancePlushies
+      prob: 0.02
+
     # Weapons
     - !type:NestedSelector
       tableId: MaintWeaponTable
@@ -326,6 +349,23 @@
     # Recursive
     - id: ClosetMaintenanceFilledRandom
       prob: 0.01
+    # <Trauma>
+    - id: EmptyScroll
+      prob: 0.001
+    # </Trauma>
+
+- type: entityTable
+  id: MaintenancePlushies
+  table: !type:GroupSelector
+    children:
+    - id: PlushieLizardJobBoxer
+    - id: PlushieLizardJobClown
+    - id: PlushieLizardJobLibrarian
+    - id: PlushieLizardJobMime
+    - id: PlushieLizardJobMusician
+    - id: PlushieLizardJobPassenger
+    - id: PlushieLizardJobReporter
+    - id: PlushieLizardJobZookeeper
 
 - type: entity
   id: ClosetMaintenanceFilledRandom

@@ -3,8 +3,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using System.Numerics;
 using Content.Goobstation.UIKit.UserActions.Controls;
 using Content.Client.UserInterface.Systems.Admin;
 using Content.Client.UserInterface.Systems.Bwoink;
@@ -20,19 +18,12 @@ using Robust.Client.Console;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Client.Utility;
-using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Client._Shitcode.UserActions.Tabs;
 
 [GenerateTypedNameReferences]
 public sealed partial class ConfigTabControl : BaseTabControl
 {
-    [Dependency] private readonly EntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IClientConsoleHost _console = default!;
 
     public ConfigTabControl()
@@ -107,12 +98,7 @@ public sealed partial class ConfigTabControl : BaseTabControl
             ahelpUIController.ToggleWindow();
         MenuList.AddChild(ahelpButton);
 
-        UpdateButtonsLayout();
         return true;
-    }
-
-    private void UpdateButtonsLayout()
-    {
     }
 
     private IconButton CreateMenuButton(string controlName, string buttonName, string? texturePath = null)
@@ -123,10 +109,5 @@ public sealed partial class ConfigTabControl : BaseTabControl
             button.Icon.TexturePath = texturePath;
 
         return button;
-    }
-
-    protected override void Resized()
-    {
-        UpdateButtonsLayout();
     }
 }

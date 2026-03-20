@@ -1,9 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Traitor.PenSpin;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class PenSpinComponent : Component
+public sealed partial class PenComponent : Component
 {
     [DataField]
     public int MinDegree = 0;

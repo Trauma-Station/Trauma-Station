@@ -49,7 +49,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
         if (languageSpeaker == null)
             return;
 
-        UpdateState(languageSpeaker.CurrentLanguage, languageSpeaker.SpokenLanguages);
+        UpdateState(languageSpeaker.CurrentLanguage, languageSpeaker.Speaks);
     }
 
     public void UpdateState(ProtoId<LanguagePrototype> currentLanguage, List<ProtoId<LanguagePrototype>> spokenLanguages)

@@ -28,8 +28,9 @@
   - type: Tag
     tags:
     - SecBeltEquip
-  - type: MartialArtBlocked
-    form: CorporateJudo
+  - type: KnowledgeGrantOnWear
+    blocked:
+      MartialArtCorporateJudo: true
   - type: GuideHelp
     guides:
     - Security

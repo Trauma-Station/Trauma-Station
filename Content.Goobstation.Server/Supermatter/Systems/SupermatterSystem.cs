@@ -1,23 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Steve <marlumpy@gmail.com>
-// SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 marc-pelletier <113944176+marc-pelletier@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 yahay505 <58685802+yahay505@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 yavuz <58685802+yahay505@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System;
@@ -56,7 +36,6 @@ using Robust.Shared.IoC;
 using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Supermatter.Systems;
 
@@ -68,7 +47,6 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly TransformSystem _xform = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly AmbientSoundSystem _ambient = default!;
     [Dependency] private readonly LightningSystem _lightning = default!;
     [Dependency] private readonly AlertLevelSystem _alert = default!;
@@ -115,17 +93,14 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
     {
         base.Update(frameTime);
 
-        if (!_gameTiming.IsFirstTimePredicted)
-            return;
-
-        foreach (var sm in EntityManager.EntityQuery<SupermatterComponent>())
+        var query = EntityQueryEnumerator<SupermatterComponent>();
+        while (query.MoveNext(out var uid, out var sm))
         {
             if (!sm.Activated)
                 continue;
 
-            var uid = sm.Owner;
+            // TODO: timespan bruh
             sm.UpdateAccumulator += frameTime;
-
             if (sm.UpdateAccumulator >= sm.UpdateTimer)
             {
                 sm.UpdateAccumulator -= sm.UpdateTimer;
@@ -624,11 +599,11 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
         if (!HasComp<ProjectileComponent>(target))
         {
             _adminLog.Add(LogType.Supermatter, LogImpact.Medium, $"Supermatter {ToPrettyString(uid)} has consumed {ToPrettyString(target)}");
-            EntityManager.SpawnEntity("Ash", Transform(target).Coordinates);
+            Spawn("Ash", Transform(target).Coordinates);
             _audio.PlayPvs(sm.DustSound, uid);
         }
 
-        EntityManager.QueueDeleteEntity(target);
+        QueueDel(target);
     }
 
     private void OnHandInteract(EntityUid uid, SupermatterComponent sm, ref InteractHandEvent args)
@@ -643,9 +618,10 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
 
         sm.MatterPower += 200;
 
-        EntityManager.SpawnEntity("Ash", Transform(target).Coordinates);
+        _adminLog.Add(LogType.Supermatter, LogImpact.Extreme, $"Supermatter {ToPrettyString(uid)} has consumed {ToPrettyString(target)}");
+        Spawn("Ash", Transform(target).Coordinates);
         _audio.PlayPvs(sm.DustSound, uid);
-        EntityManager.QueueDeleteEntity(target);
+        QueueDel(target);
     }
 
     private void OnItemInteract(EntityUid uid, SupermatterComponent sm, ref InteractUsingEvent args)

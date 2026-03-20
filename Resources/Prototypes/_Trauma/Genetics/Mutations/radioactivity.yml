@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseLightMutation
+  id: MutationRadioactivity
+  name: Radioactivity
+  description: A volatile mutation that causes the host to sent out deadly beta radiation. This affects both the host and their surroundings.
+  components:
+  - type: Mutation
+    instability: -40
+  - type: PointLight
+    color: "#008dc7" # soft blue glue to vaguely emulate cherenkov radiation
+    energy: 0.9
+  - type: RadiationMutation
+  - type: RadiationSource
+    intensity: 0.2 # not too bad but it hurts you as well
+  # TODO: specify its beta particles if that ever gets added

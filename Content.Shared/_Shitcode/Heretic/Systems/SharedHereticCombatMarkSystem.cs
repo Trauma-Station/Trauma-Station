@@ -11,7 +11,7 @@ public abstract class SharedHereticCombatMarkSystem : EntitySystem
         HereticCombatMarkComponent mark,
         string? path,
         EntityUid user,
-        HereticComponent heretic)
+        Entity<HereticComponent> heretic)
     {
         if (string.IsNullOrWhiteSpace(path))
             return false;
@@ -21,3 +21,6 @@ public abstract class SharedHereticCombatMarkSystem : EntitySystem
         return true;
     }
 }
+
+[ByRefEvent]
+public readonly record struct UpdateCombatMarkAppearanceEvent;

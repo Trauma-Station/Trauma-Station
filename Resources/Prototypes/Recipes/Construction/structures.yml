@@ -10,6 +10,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 0 # if you know walls exist you can build a girder
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ReinforcedGirder
@@ -23,6 +30,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 0 # you can make it via girder anyways
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ClockworkGirder
@@ -36,6 +50,14 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+    # TODO: clockwork knowledge if anyone makes that
+  # </Trauma>
 
 - type: construction
   id: Wall
@@ -49,6 +71,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 0
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ReinforcedWall
@@ -62,6 +91,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: WallClock
@@ -75,6 +111,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: WoodWall
@@ -88,6 +131,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    CarvingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: UraniumWall
@@ -101,6 +151,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: SilverWall
@@ -114,6 +171,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: PlasticWall
@@ -127,6 +191,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: PlasmaWall
@@ -140,6 +208,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: GoldWall
@@ -153,6 +228,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 0
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ShuttleWall
@@ -166,6 +248,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 2
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: DiagonalShuttleWall
@@ -180,6 +269,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 2
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ClownWall
@@ -193,6 +289,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    BananiumKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: MeatWall
@@ -206,6 +307,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: Cardwall
@@ -219,6 +324,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: Grille
@@ -232,6 +341,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WallsKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ClockGrille
@@ -245,6 +360,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WallsKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: GrilleDiagonal
@@ -257,6 +378,12 @@
       failIfSpace: false
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1 # diagonal is harder to make
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ClockworkGrilleDiagonal
@@ -269,6 +396,12 @@
       failIfSpace: false
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1 # diagonal is harder to make
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: Window
@@ -283,6 +416,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: WindowDiagonal
@@ -297,6 +436,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 0
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ReinforcedWindow
@@ -311,6 +456,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ReinforcedWindowDiagonal
@@ -325,6 +476,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: TintedWindow
@@ -339,6 +496,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ClockworkWindow
@@ -353,6 +516,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ClockworkWindowDiagonal
@@ -367,6 +536,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: PlasmaWindow
@@ -381,6 +556,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ReinforcedPlasmaWindow
@@ -395,6 +576,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ShuttleWindow
@@ -409,6 +596,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 2
+  practical:
+    FabricationKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: PlasmaWindowDiagonal
@@ -423,6 +616,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ReinforcedPlasmaWindowDiagonal
@@ -437,6 +636,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: WindowDirectional
@@ -450,6 +655,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 0
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: WindowReinforcedDirectional
@@ -463,6 +674,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 0
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: WindowClockworkDirectional
@@ -476,6 +693,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 0
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: PlasmaWindowDirectional
@@ -489,6 +712,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 0
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: PlasmaReinforcedWindowDirectional
@@ -502,6 +731,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 0
+  practical:
+    FabricationKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: UraniumWindow
@@ -516,6 +751,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ReinforcedUraniumWindow
@@ -530,6 +771,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: UraniumWindowDiagonal
@@ -544,6 +791,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ReinforcedUraniumWindowDiagonal
@@ -558,6 +811,12 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+  practical:
+    FabricationKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Firelock
@@ -571,6 +830,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: FirelockGlass
@@ -584,6 +849,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: FirelockEdge
@@ -597,6 +868,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Turnstile
@@ -609,6 +886,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 3
+  # </Trauma>
 
 - type: construction
   id: Shutters
@@ -619,6 +902,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ShuttersWindow
@@ -629,6 +918,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ShuttersRadiation
@@ -639,6 +934,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BlastDoor
@@ -649,6 +950,12 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 3
+  # </Trauma>
 
 - type: construction
   id: Catwalk
@@ -666,6 +973,11 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: FloorBananium
@@ -682,6 +994,11 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
+  # <Trauma>
+  theory:
+    BananiumKnowledge: 2
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: Barricade
@@ -694,6 +1011,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BarricadeDirectional
@@ -707,6 +1030,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Railing
@@ -719,6 +1048,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 0 # it's just rods
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: RailingCorner
@@ -732,6 +1067,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 0 # it's just rods
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: RailingCornerSmall
@@ -745,6 +1086,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 0 # it's just rods
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: RailingRound
@@ -758,6 +1105,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 0 # it's just rods
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 # Chain link fencing
 - type: construction
@@ -771,6 +1124,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceMetalCorner
@@ -784,6 +1143,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceMetalEnd
@@ -797,6 +1162,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceMetalGate
@@ -809,6 +1180,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 #Wooden fence high
 - type: construction
@@ -822,6 +1199,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceWoodEnd
@@ -835,6 +1218,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceWoodCorner
@@ -848,6 +1237,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceWoodTJunction
@@ -861,6 +1256,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceWoodGate
@@ -873,6 +1274,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 #Wooden fence small
 - type: construction
@@ -886,6 +1293,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceWoodEndSmall
@@ -899,6 +1312,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceWoodCornerSmall
@@ -912,6 +1331,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceWoodTJunctionSmall
@@ -925,6 +1350,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: FenceWoodGateSmall
@@ -938,6 +1369,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  # </Trauma>
 
 #Airlocks
 - type: construction
@@ -951,6 +1388,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: AirlockGlass
@@ -963,6 +1406,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: PinionAirlock
@@ -976,6 +1425,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: PinionAirlockGlass
@@ -989,6 +1444,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: AirlockShuttle
@@ -1002,6 +1463,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: AirlockGlassShuttle
@@ -1016,6 +1483,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Windoor
@@ -1028,6 +1501,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: SecureWindoor
@@ -1040,6 +1520,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ClockworkWindoor
@@ -1052,6 +1539,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WindowsKnowledge: 1
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+  # </Trauma>
 
 #lighting
 - type: construction
@@ -1068,6 +1562,11 @@
   # Need an *additional* condition here that forces there to be a wall in the opposite direction to the one used for placement.
   # Also see below. Didn't add it b/c construction ECS work going on. Cheers, - 20kdc
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    ElectronicsKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: LightSmallFixture
@@ -1082,6 +1581,11 @@
   conditions:
   # Same here. - 20kdc
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    ElectronicsKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: EmergencyLightFixture
@@ -1095,6 +1599,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    ElectronicsKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: LightGroundFixture
@@ -1108,6 +1617,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    ElectronicsKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: LightStrobeFixture
@@ -1121,6 +1635,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    ElectronicsKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 #conveyor
 - type: construction
@@ -1134,6 +1653,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    MechanicsKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: MetalDoor
@@ -1146,6 +1670,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    DoorsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: WoodDoor
@@ -1158,6 +1688,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    DoorsKnowledge: 0
+  practical:
+    CarvingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: PlasmaDoor
@@ -1170,6 +1706,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    DoorsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: GoldDoor
@@ -1182,6 +1724,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    DoorsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: SilverDoor
@@ -1194,6 +1742,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    DoorsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: PaperDoor
@@ -1204,6 +1758,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
+  # <Trauma>
+  theory:
+    DoorsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: CardDoor
@@ -1214,6 +1772,10 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
+  # <Trauma>
+  theory:
+    DoorsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: PlasticFlapsClear
@@ -1227,6 +1789,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 3
+  # </Trauma>
 
 - type: construction
   id: PlasticFlapsOpaque
@@ -1240,6 +1806,10 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CarpStatue
@@ -1252,6 +1822,12 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    CarvingKnowledge: 4
+  # </Trauma>
 
 - type: construction
   id: BananiumClownStatue
@@ -1264,6 +1840,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    BananiumKnowledge: 2
+  practical:
+    CarvingKnowledge: 4
+  # </Trauma>
 
 - type: construction
   id: BananiumDoor
@@ -1276,6 +1858,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    BananiumKnowledge: 2
+    DoorsKnowledge: 1
+  # </Trauma>
 
 ##- type: construction
 ##  name: bananium altar
@@ -1307,6 +1894,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    DoorsKnowledge: 1
+    ElectronicsKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   name: recipes-secret-door-reinforced-name
@@ -1320,6 +1914,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    WallsKnowledge: 1
+    DoorsKnowledge: 1
+    ElectronicsKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: FungalSoil
@@ -1332,6 +1933,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  useQuality: false
+  # </Trauma>
 
 - type: construction
   id: StationAiCore
@@ -1345,6 +1951,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    ElectronicsKnowledge: 3
+  practical:
+    ElectronicsKnowledge: 3
+  # </Trauma>
 
 - type: construction
   id: Bonfire
@@ -1358,6 +1970,10 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: BonfireStake
@@ -1371,3 +1987,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  # <Trauma>
+  theory:
+    FurnitureKnowledge: 1
+  practical:
+    CarvingKnowledge: 2
+  # </Trauma>

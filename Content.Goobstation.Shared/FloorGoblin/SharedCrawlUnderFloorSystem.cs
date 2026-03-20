@@ -1,12 +1,14 @@
-// SPDX-FileCopyrightText: 2025 Evaisa <mail@evaisa.dev>
-// SPDX-FileCopyrightText: 2025 RichardBlonski <48651647+RichardBlonski@users.noreply.github.com>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared._Starlight.VentCrawling;
+using Content.Shared.Actions;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Events;
+using Content.Shared.Conveyor;
+using Content.Shared.Doors.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stealth;
@@ -16,14 +18,8 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
-using Content.Shared.Actions;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Doors.Components;
-using Content.Shared.Conveyor;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;

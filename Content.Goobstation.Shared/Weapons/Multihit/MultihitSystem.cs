@@ -1,13 +1,10 @@
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
 using Content.Shared._Shitcode.Heretic.Systems;
+using System.Numerics;
 using Content.Shared.CombatMode;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Heretic;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
@@ -37,6 +34,129 @@ public sealed class MultihitSystem : EntitySystem
 
         SubscribeLocalEvent<MultihitUserHereticEvent>(HereticCheck);
         SubscribeLocalEvent<MultihitUserWhitelistEvent>(WhitelistCheck);
+
+        SubscribeNetworkEvent<ResetMultihitLastAttackEvent>(OnReset);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var curTime = _timing.CurTime;
+
+        var query = EntityQueryEnumerator<ActiveMultihitComponent, MeleeWeaponComponent>();
+        while (query.MoveNext(out var uid, out var active, out var melee))
+        {
+            if (active.LastAttack == null && active.QueuedAttacks.Count == 0)
+            {
+                RemCompDeferred(uid, active);
+                continue;
+            }
+
+            if (curTime < (active.LastAttack ?? active.QueuedAttacks.Peek()).AttackTime)
+                continue;
+
+            if (ResolveUser((uid, active)) is not { } user)
+            {
+                RemCompDeferred(uid, active);
+                continue;
+            }
+
+            QueuedMultihitAttack attack;
+
+            // This is an endless war with prediction
+            if (_net.IsClient)
+            {
+                active.LastAttack ??= active.QueuedAttacks.Dequeue();
+                attack = active.LastAttack;
+            }
+            else
+            {
+                active.LastAttack = null;
+                attack = active.QueuedAttacks.Dequeue();
+                RaiseNetworkEvent(new ResetMultihitLastAttackEvent(GetNetEntity(uid)), user);
+            }
+
+            PerformFollowupAttack((uid, active, melee), attack, user);
+        }
+    }
+
+    private void OnReset(ResetMultihitLastAttackEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession != _player.LocalSession || !TryGetEntity(msg.Weapon, out var weapon) ||
+            !TryComp(weapon.Value, out ActiveMultihitComponent? active))
+            return;
+
+        active.LastAttack = null;
+    }
+
+    private EntityUid? ResolveUser(Entity<ActiveMultihitComponent> ent)
+    {
+        if (ent.Comp.User is not { } user || TerminatingOrDeleted(user) || !_hands.IsHolding(user, ent))
+            return null;
+
+        return user;
+    }
+
+    private void PerformFollowupAttack(Entity<ActiveMultihitComponent, MeleeWeaponComponent> ent,
+        QueuedMultihitAttack attack,
+        EntityUid user)
+    {
+        var (uid, active, melee) = ent;
+
+        active.NextDamageMultiplier = attack.DamageMultiplier;
+
+        if (attack.Direction != null)
+            TryPerformMultihitHeavyAttack((uid, melee), attack.Direction.Value, user);
+        else if (TryGetEntity(attack.Target, out var target))
+            TryPerformMultihitLightAttack((uid, melee), target.Value, user);
+
+        active.NextDamageMultiplier = 1f;
+    }
+
+    private bool TryPerformMultihitLightAttack(Entity<MeleeWeaponComponent> ent, EntityUid target, EntityUid user)
+    {
+        var (uid, weapon) = ent;
+
+        if (TerminatingOrDeleted(target))
+            return false;
+
+        var inCombat = _combatMode.IsInCombatMode(user);
+        if (!inCombat)
+            _combatMode.SetInCombatMode(user, true);
+        var result = _melee.AttemptLightAttack(user, uid, weapon, target);
+        if (!inCombat)
+            _combatMode.SetInCombatMode(user, false);
+        return result;
+    }
+
+    private bool TryPerformMultihitHeavyAttack(Entity<MeleeWeaponComponent> ent, Vector2 direction, EntityUid user)
+    {
+        var (uid, weapon) = ent;
+
+        var xform = Transform(user);
+        var userCoords = _transform.GetMapCoordinates(user, xform);
+        var distance = MathF.Min(weapon.Range, direction.Length());
+        var angle = direction.ToWorldAngle();
+        var entities = _melee.ArcRayCast(userCoords.Position,
+                angle,
+                weapon.Angle,
+                distance,
+                xform.MapID,
+                user)
+            .ToList();
+
+        var inCombat = _combatMode.IsInCombatMode(user);
+        if (!inCombat)
+            _combatMode.SetInCombatMode(user, true);
+        var result = _melee.AttemptHeavyAttack(user,
+            uid,
+            weapon,
+            entities,
+            _transform.ToCoordinates(userCoords.Offset(direction)));
+        if (!inCombat)
+            _combatMode.SetInCombatMode(user, false);
+        return result;
     }
 
     private void WhitelistCheck(MultihitUserWhitelistEvent ev)
@@ -60,7 +180,7 @@ public sealed class MultihitSystem : EntitySystem
         if (_net.IsClient && _player.LocalEntity != args.User)
             return;
 
-        if (!_timing.IsFirstTimePredicted || !args.IsHit || args.Weapon == args.User)
+        if (!args.IsHit || args.Weapon == args.User)
             return;
 
         if (args.Direction == null)
@@ -78,13 +198,23 @@ public sealed class MultihitSystem : EntitySystem
         if (!CheckConditions())
             return;
 
+        var curTime = _timing.CurTime;
         var delay = component.MultihitDelay;
+        var penalty = TimeSpan.Zero;
 
         foreach (var held in _hands.EnumerateHeld(args.User))
         {
-            if (TryMultihitAttack(held))
-                delay += component.MultihitDelay;
+            if (!TryMultihitAttack(held))
+                continue;
+
+            delay += component.MultihitDelay;
+            penalty += component.DelayPenalty;
         }
+
+        if (penalty <= TimeSpan.Zero || !TryComp(uid, out MeleeWeaponComponent? melee))
+            return;
+
+        melee.NextAttack += penalty;
 
         return;
 
@@ -115,87 +245,30 @@ public sealed class MultihitSystem : EntitySystem
             if (weapon == uid)
                 return false;
 
-            if (component.MultihitWhitelist != null && !_whitelist.IsValid(component.MultihitWhitelist, weapon))
+            if (_whitelist.IsWhitelistFail(component.MultihitWhitelist, weapon))
                 return false;
 
-            if (!TryComp(weapon, out MeleeWeaponComponent? melee))
+            if (!HasComp<MeleeWeaponComponent>(weapon))
                 return false;
 
-            EnsureComp<ActiveMultihitComponent>(weapon).DamageMultiplier *= component.DamageMultiplier;
+            var active = EnsureComp<ActiveMultihitComponent>(weapon);
 
-            if (args.Direction == null)
+            if (active.User != null && active.User != args.User)
+                active.QueuedAttacks.Clear();
+
+            active.User = args.User;
+
+            var attack = new QueuedMultihitAttack
             {
-                Timer.Spawn(delay,
-                    () =>
-                    {
-                        if (TerminatingOrDeleted(weapon) ||
-                            !TryComp(weapon, out ActiveMultihitComponent? activeMultihit))
-                            return;
+                AttackTime = curTime + delay,
+                DamageMultiplier = component.DamageMultiplier,
+                Target = args.HitEntities.Count == 0 ? null : GetNetEntity(args.HitEntities[0]),
+                Direction = args.Direction,
+            };
 
-                        var target = args.HitEntities[0];
-
-                        if (TerminatingOrDeleted(args.User) || TerminatingOrDeleted(target) ||
-                            !Resolve(weapon, ref melee, false) || !_hands.IsHolding(args.User, weapon))
-                        {
-                            RemComp(weapon, activeMultihit);
-                            return;
-                        }
-
-                        var inCombat = _combatMode.IsInCombatMode(args.User);
-                        if (!inCombat)
-                            _combatMode.SetInCombatMode(args.User, true);
-                        _melee.AttemptLightAttack(args.User, weapon, melee, target);
-                        if (!inCombat)
-                            _combatMode.SetInCombatMode(args.User, false);
-
-                        if (Resolve(weapon, ref activeMultihit, false))
-                            RemComp(weapon, activeMultihit);
-                    });
-            }
-            else
-            {
-                Timer.Spawn(delay,
-                    () =>
-                    {
-                        if (TerminatingOrDeleted(weapon) ||
-                            !TryComp(weapon, out ActiveMultihitComponent? activeMultihit))
-                            return;
-
-                        if (TerminatingOrDeleted(args.User) || TerminatingOrDeleted(weapon) ||
-                            !TryComp(args.User, out TransformComponent? xform) ||
-                            !Resolve(weapon, ref melee, false) || !_hands.IsHolding(args.User, weapon))
-                        {
-                            RemComp(weapon, activeMultihit);
-                            return;
-                        }
-
-                        var userCoords = _transform.GetMapCoordinates(args.User, xform);
-                        var distance = MathF.Min(melee.Range, args.Direction.Value.Length());
-                        var angle = args.Direction.Value.ToWorldAngle();
-                        var entities = _melee.ArcRayCast(userCoords.Position,
-                                angle,
-                                melee.Angle,
-                                distance,
-                                xform.MapID,
-                                args.User)
-                            .ToList();
-
-                        var inCombat = _combatMode.IsInCombatMode(args.User);
-                        if (!inCombat)
-                            _combatMode.SetInCombatMode(args.User, true);
-                        _melee.AttemptHeavyAttack(args.User,
-                            weapon,
-                            melee,
-                            entities,
-                            _transform.ToCoordinates(userCoords.Offset(args.Direction.Value)));
-                        if (!inCombat)
-                            _combatMode.SetInCombatMode(args.User, false);
-
-                        if (Resolve(weapon, ref activeMultihit, false))
-                            RemComp(weapon, activeMultihit);
-                    });
-            }
-
+            active.QueuedAttacks.Enqueue(attack);
+            active.LastAttack = null;
+            Dirty(weapon, active);
             return true;
         }
     }

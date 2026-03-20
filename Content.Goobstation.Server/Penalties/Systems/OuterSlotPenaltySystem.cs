@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Popups;
@@ -35,7 +28,7 @@ public sealed partial class OuterSlotPenaltySystem : EntitySystem
         if (args.Clothing.Comp.Slots == SlotFlags.OUTERCLOTHING)
         {
             comp.OuterLayerEquipped = true;
-            if (_damageableSystem.TryChangeDamage(uid, comp.Damage, true) != null)
+            if (_damageableSystem.TryChangeDamage(uid, comp.Damage, true))
                 _popupSystem.PopupEntity(Loc.GetString("equipped-outer-slot-with-penalty-message", ("entity", Name(args.Clothing))), uid, uid, PopupType.SmallCaution);
             else
                 Logger.Warning($"Damage application failed for entity {uid}. Ensure outer slot penalty is properly configured.");

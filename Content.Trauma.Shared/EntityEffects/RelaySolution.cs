@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -41,7 +42,7 @@ public sealed class RelaySolutionEffectSystem : EntityEffectSystem<SolutionConta
 
         var uid = solution.Value.Owner;
         _data.CopyData(ent, uid);
-        _effects.ApplyEffects(uid, args.Effect.Effects, args.Scale);
+        _effects.ApplyEffects(uid, args.Effect.Effects, args.Scale, args.User);
         _data.ClearData(uid);
     }
 }

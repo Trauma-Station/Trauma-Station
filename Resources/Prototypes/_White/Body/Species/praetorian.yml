@@ -1,0 +1,31 @@
+- type: entity
+  abstract: true
+  parent: AppearanceXenomorphBase
+  id: AppearanceXenomorphPraetorian
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganXenomorphTorso
+      Head: OrganXenomorphHeadLarge
+      ArmLeft: OrganXenomorphArmLeft
+      ArmRight: OrganXenomorphArmRight
+      HandRight: OrganXenomorphHandRight
+      HandLeft: OrganXenomorphHandLeft
+      LegLeft: OrganXenomorphLegLeft
+      LegRight: OrganXenomorphLegRight
+      FootLeft: OrganXenomorphFootLeft
+      FootRight: OrganXenomorphFootRight
+      # Organs
+      Brain: OrganXenomorphBrain
+      Eyes: OrganXenomorphEyes
+      Tongue: OrganXenomorphTongue
+      Stomach: OrganXenomorphStomach
+      Liver: OrganXenomorphLiver
+      Kidneys: OrganXenomorphKidneys
+      HiveNode: OrganXenomorphHiveNode
+      # Caste-Specific
+      ResinSpinner: OrganXenomorphResinSpinner
+      NeurotoxinGland: OrganXenomorphNeurotoxinGland
+      AcidGland: OrganXenomorphAcidGland
+      PlasmaVessel: OrganXenomorphPlasmaVesselLarge

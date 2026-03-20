@@ -8,7 +8,7 @@
   flavor: bitter
   color: "#9370db"
   metabolisms:
-    Poison:
+    Bloodstream:
       conditions:
       - !type:MetabolizerTypeCondition
         type: [ Slime ]
@@ -92,7 +92,7 @@
         effectProto: StatusEffectForcedSleeping
         time: 10
         type: Add
-    Gas:
+    Respiration:
       conditions:
       - !type:MetabolizerTypeCondition
         type: [ Slime ]
@@ -185,28 +185,26 @@
   flavor: strange
   color: "#90560b"
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Healium
           max: 24
         damage:
-          groups:
-            Burn: -2
-            Toxin: -5
-            Brute: -2
-      - !type:HealthChange
+          Burn: -2
+          Toxin: -5
+          Brute: -2
+      - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Healium
           min: 24
         damage:
-          groups:
-            Burn: -20
-            Toxin: -50
-            Brute: -20
+          Burn: -20
+          Toxin: -50
+          Brute: -20
       - !type:PopupMessage
         conditions:
         - !type:ReagentCondition
@@ -236,28 +234,26 @@
         - !type:ReagentCondition
           reagent: Healium
           min: 4
-    Gas:
+    Respiration:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Healium
           max: 24
         damage:
-          groups:
-            Burn: -2
-            Toxin: -5
-            Brute: -2
-      - !type:HealthChange
+          Burn: -2
+          Toxin: -5
+          Brute: -2
+      - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Healium
           min: 24
         damage:
-          groups:
-            Burn: -20
-            Toxin: -50
-            Brute: -20
+          Burn: -20
+          Toxin: -50
+          Brute: -20
       - !type:PopupMessage
         conditions:
         - !type:ReagentCondition
@@ -296,7 +292,7 @@
   flavor: sour
   color: "#90560B"
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:NitriumMovespeedModifier
         conditions:
@@ -341,7 +337,7 @@
         damage:
           types:
             Asphyxiation: 15
-    Gas:
+    Respiration:
       effects:
       - !type:NitriumMovespeedModifier
         conditions:
@@ -395,7 +391,7 @@
   flavor: bitter
   color: "#7b68ee"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:Oxygenate
         factor: 8
@@ -430,7 +426,7 @@
           type: [ Vox ]
         clear: true
         time: 5
-    Gas:
+    Respiration:
       effects:
       - !type:Oxygenate
         factor: 8

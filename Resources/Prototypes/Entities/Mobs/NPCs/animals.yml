@@ -54,7 +54,7 @@
       reagents:
       - ReagentId: Blood
         Quantity: 50
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Mouse
     understands:
@@ -285,7 +285,7 @@
     eggSpawn:
     - id: FoodEgg
   - type: ExaminableHunger
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Chicken
     understands:
@@ -371,15 +371,12 @@
   description: This station is just crawling with bugs.
   components:
   # <Trauma>
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Hissing
     understands:
     - Hissing
     - TauCetiBasic
-  - type: Body
-    prototype: Rat
-    requiredLegs: 0
   - type: ThermalRegulator
     metabolismHeat: 300
   - type: StaticPrice
@@ -517,7 +514,7 @@
 
 - type: entity
   name: mothroach
-  parent: MobCockroach
+  parent: [ BaseMobMothroach, MobCockroach ]
   id: MobMothroach
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
@@ -545,7 +542,7 @@
   - type: Speech
     speechVerb: Moth
     speechSounds: Squeak
-    allowedEmotes: ['Chitter', 'Squeak', 'Flap'] # Goob - added Flap
+    allowedEmotes: ['Chitter', 'Squeak', 'Flap']
   - type: FaxableObject
     insertingState: inserting_mothroach
   - type: FaxSlip # Goobstation
@@ -615,7 +612,7 @@
       amount: 2
   - type: Extractable
     grindableSolutionName: food
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Moffic
     understands:
@@ -629,6 +626,8 @@
       Female: UnisexMoth
       Unsexed: UnisexMoth
     wilhelmProbability: 0.001
+  - type: BodyEmotes
+    soundsId: MothBodyEmotes
   - type: MobPrice
     price: 150
   - type: Tag
@@ -640,8 +639,6 @@
   - type: NpcFactionMember
     factions:
     - Mouse
-  - type: Body
-    prototype: Mothroach
   - type: TypingIndicator
     proto: moth
   - type: Destructible
@@ -767,7 +764,7 @@
     eggSpawn:
     - id: FoodEgg
   - type: ExaminableHunger
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Duck
     understands:
@@ -913,7 +910,7 @@
 
 - type: entity
   name: cow
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobRuminant ]
   id: MobCow
   description: Moo.
   components:
@@ -986,8 +983,6 @@
   - type: NpcFactionMember
     factions:
     - Passive
-  - type: Body
-    prototype: AnimalRuminant
   - type: HTN
     rootTask:
       task: RuminantCompound
@@ -998,7 +993,7 @@
 
 - type: entity
   name: crab
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobHemocyanin ]
   id: MobCrab
   description: A folk legend goes around that his claw snaps spacemen out of existence over distasteful remarks. Be polite and tolerant for your own safety.
   components:
@@ -1051,7 +1046,7 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Crab
     understands:
@@ -1068,12 +1063,10 @@
   - type: HTN
     rootTask:
       task: RuminantCompound
-  - type: Body
-    prototype: AnimalHemocyanin
 
 - type: entity
   name: goat
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobRuminant ]
   id: MobGoat
   description: Her spine consists of long sharp segments, no wonder she is so grumpy.
   components:
@@ -1165,8 +1158,6 @@
   - type: NpcFactionMember
     factions:
     - Passive
-  - type: Body
-    prototype: AnimalRuminant
   - type: NPCRetaliation
     attackMemoryLength: 5
   - type: FactionException
@@ -1343,7 +1334,7 @@
   - type: Inventory
     speciesId: kangaroo
     templateId: kangaroo
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Kangaroo
     understands:
@@ -1412,17 +1403,18 @@
 - type: entity
   name: genetic ancestor
   id: MobBaseAncestor
-  parent: [SimpleMobBase, StripableInventoryBase]
+  parent: [BaseMobAnimal, SimpleMobBase, StripableInventoryBase]
   description: The genetic bipedal ancestor of... Uh... Something. Yeah, there's definitely something on the station that descended from whatever this is.
   abstract: true
   components:
   # <Trauma>
+  - type: BloodSplatterer
   - type: VentCrawler
     allowInventory: false
   - type: GroupRetaliation
     range: 8
   - type: Targeting
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Monkey
   - type: Vocal
     sounds:
@@ -1441,8 +1433,9 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      enum.StoreUiKey.Key:
-        type: StoreBoundUserInterface
+  # stupid monkey needs clever mutation to be literate
+  - type: BlockReading
+  - type: BlockWriting
   # </Trauma>
   - type: CombatMode
     canDisarm: true
@@ -1469,54 +1462,11 @@
   - type: Stripping
   - type: Sprite
     drawdepth: Mobs
-    layers:
-  # Shitmed Change Start
-    - map: [ "enum.HumanoidVisualLayers.Chest" ]
-    - map: [ "enum.HumanoidVisualLayers.Groin" ]
-    - map: [ "enum.HumanoidVisualLayers.Head" ]
-    - map: [ "enum.HumanoidVisualLayers.Snout" ]
-    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
-    - map: [ "enum.HumanoidVisualLayers.RArm" ]
-    - map: [ "enum.HumanoidVisualLayers.LArm" ]
-    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
-    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - state: monkey_skinned # Goobstation - Fuck pun-pun
-      sprite: /Textures/Mobs/Animals/monkey.rsi
-      visible: false
-      map: [ "enum.ToggleableVisuals.Layer" ]
-    - map: ["jumpsuit"]
-    - map: ["enum.HumanoidVisualLayers.LFoot"]
-    - map: ["enum.HumanoidVisualLayers.RFoot"]
-    - map: ["enum.HumanoidVisualLayers.LHand"]
-    - map: ["enum.HumanoidVisualLayers.RHand"]
-    - map: ["enum.HumanoidVisualLayers.Handcuffs"]
-      color: "#ffffff"
-      sprite: Objects/Misc/handcuffs.rsi
-      state: body-overlay-2
-      visible: false
-    - map: [ "gloves" ]
-    - map: [ "shoes" ]
-    - map: [ "ears" ]
-    - map: [ "id" ]
-    - map: [ "outerClothing" ]
-    - map: [ "eyes" ]
-    - map: [ "belt" ]
-    - map: [ "neck" ]
-    - map: [ "back" ]
-    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
-    - map: [ "enum.HumanoidVisualLayers.FacialHairSpecial" ] # Trauma
-    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
-    - map: [ "maskalt" ]
-    - map: [ "enum.HumanoidVisualLayers.Hair" ]
-    - map: [ "enum.HumanoidVisualLayers.HairSpecial" ] # Trauma
-    - map: [ "mask" ]
-    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
-    - map: [ "enum.HumanoidVisualLayers.Tail" ]
-    - map: [ "head" ]
-    - map: [ "pocket1" ]
-    - map: [ "pocket2" ]
-  # Shitmed Change End
-  - type: Hands
+  #- type: Hands # Trauma - no third hand
+  #  activeHandId: Hand
+  #  hands:
+  #    Hand:
+  #      location: Left
   - type: ComplexInteraction
   - type: GenericVisualizer
     visuals:
@@ -1524,14 +1474,6 @@
         clownedon:
           True: {visible: true}
           False: {visible: false}
-      enum.ToggleableVisuals.Enabled: # Goobstation - Skinnable monkey
-        enum.ToggleableVisuals.Layer:
-          True: { visible: true }
-          False: { visible: false }
-  - type: Body # Shitmed Change
-    bodyType: Complex
-    prototype: Monkey
-    requiredLegs: 2
   - type: CreamPied
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
@@ -1589,27 +1531,38 @@
       - !type:WashCreamPie
   - type: Crawler
   - type: StatusIcon
-
-
+    bounds: -0.5,-0.5,0.5,0.5
+  - type: JobStatus # marks them as crew
 
 - type: entity
   name: monkey
   id: MobMonkey
-  parent: MobBaseAncestor
+  parent: [ AppearanceMonkey, MobBaseAncestor ] # Shitmed
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   components:
-  - type: NameIdentifier
-    group: Monkey
-  - type: Speech
-    speechSounds: Monkey
-    speechVerb: Monkey
-  - type: LanguageKnowledge # Einstein Engines - Language
+  # <Trauma>
+  - type: LanguageSpeaker
     speaks:
     - Monkey
     understands:
     - Monkey
     - Kobold
     - TauCetiBasic
+  - type: Skinnable # Fuck pun-pun
+    skinnedSprite: _Trauma/Mobs/Animals/skinnedmonkey.rsi
+    unskinnedSprite: Mobs/Animals/monkey.rsi
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # always monkey...
+    dormant:
+    - MutationMonkified
+  - type: KnowledgeHolder
+  # </Trauma>
+  - type: NameIdentifier
+    group: Monkey
+  - type: Speech
+    speechSounds: Monkey
+    speechVerb: Monkey
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
@@ -1618,11 +1571,10 @@
     makeSentient: true
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
-    rules: ghost-role-information-freeagent-rules # Goobstation - - remove: 1984
+    rules: ghost-role-information-freeagent-rules # Goobstation - remove: 1984
     mindRoles:
     - MindRoleGhostRoleFreeAgent
   - type: GhostTakeoverAvailable
-  - type: Skinnable # Goobstation - Fuck pun-pun
   - type: Clumsy
     gunShootFailDamage:
       types:
@@ -1638,10 +1590,13 @@
 - type: entity
   name: monkey
   id: MobBaseSyndicateMonkey
-  parent: MobBaseAncestor
+  parent: [ AppearanceMonkey, MobBaseAncestor ] # Shitmed
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: syndicate base
   components:
+  # <Trauma>
+  - type: KnowledgeHolder
+  # </Trauma>
   - type: NameIdentifier
     group: Monkey
   - type: SentienceTarget
@@ -1649,7 +1604,7 @@
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Monkey
     understands:
@@ -1695,27 +1650,27 @@
 - type: entity
   name: kobold
   id: MobBaseKobold
-  parent: MobBaseAncestor
+  parent: [ AppearanceKobold, MobBaseAncestor ] # Shitmed
   description: Cousins to the sentient race of lizard people, kobolds blend in with their natural habitat and are as nasty as monkeys; ready to pull out your hair and stab you to death.
   abstract: true
   components:
-  - type: NameIdentifier
-    group: Kobold
-  - type: LizardAccent
-  - type: LanguageKnowledge # Einstein Engines - Language
+  # <Trauma>
+  - type: LanguageSpeaker
     speaks:
     - Kobold
     understands:
     - Kobold
     - Monkey
     - TauCetiBasic
-  # Shitmed Change Start
-  - type: HumanoidAppearance
-    species: Kobold
-  - type: Body
-    prototype: Kobold
-    requiredLegs: 2
-  # Shitmed Change End
+  - type: Mutatable
+    defaultMutations:
+      MutationMonkified: 1.0 # free lizardmen...
+    dormant:
+    - MutationMonkified
+  # </Trauma>
+  - type: NameIdentifier
+    group: Kobold
+  - type: LizardAccent
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
@@ -1842,14 +1797,14 @@
 
 - type: entity
   name: mouse
-  parent: SimpleMobBase
+  parent:
+  - BaseMobMouse # Shitmed - unique mouse body
+  - SimpleMobBase
   id: MobMouse
   description: Squeak!
   components:
   - type: VentCrawler # goobstation - Ventcrawl
     enterDelay: 0.5
-  - type: Body
-    prototype: Mouse
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
@@ -1969,7 +1924,7 @@
     spawned:
     - id: FoodMeatRat
       amount: 1
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Mouse
     understands:
@@ -2017,6 +1972,7 @@
         Quantity: 50
     smokeImmune: true # Goobstation - prevent server lagging mouse farms
   - type: CanEscapeInventory
+    baseResistTime: 0.5
   - type: MobPrice
     price: 50
   - type: BadFood
@@ -2051,8 +2007,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee
-  - type: DodgeWideswing
-    staminaRatio: 1 # mice are small so can probably evade without much stamina drain
   - type: Stamina
     baseCritThreshold: 20
     animationThreshold: 10
@@ -2067,12 +2021,6 @@
     - Mousemind
   - type: FaxSlip
     slipChance: 0.3
-  # does not infect you unless the mouse has any diseases, which it doesn't by default
-  - type: DiseaseOnHit
-    spreadParams:
-      chance: 0.05 # 1984 lower chance for normal mice so creating the turboplague horde is not as strong
-      power: 1
-      spreadType: Blood
   - type: DiseaseCarrier
     effectImmune: true
   - type: ShowDiseaseIcons # they sense it
@@ -2094,6 +2042,7 @@
       tags:
       - Mouse
   - type: MobCallable
+  - type: XenoCompatible # to let egg sack surgeries work nicely...
   # </Goobstation>
 
 - type: entity
@@ -2464,7 +2413,7 @@
     sounds:
       Unsexed: Parrot
   - type: ParrotAccent
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - TauCetiBasic
     understands:
@@ -2572,7 +2521,7 @@
     heatDamage:
       types:
         Heat : 0.2 #per second, scales with temperature & other constants
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Penguin
     understands:
@@ -2626,8 +2575,8 @@
     angle: 0
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 5
+      types:
+        Piercing: 5
   - type: Item
     size: Normal
     sprite: Mobs/Animals/grenadepenguin.rsi
@@ -2706,7 +2655,7 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Scale
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Hissing
     understands:
@@ -2716,7 +2665,7 @@
 # Code unique spider prototypes or combine them all into one spider and get a
 # random sprite state when you spawn it.
 - type: entity
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ SimpleMobBase, BaseMobHemocyanin, MobCombat ]
   id: MobSpiderBase
   abstract: true
   components:
@@ -2738,8 +2687,6 @@
     - id: FoodMeatSpider
       amount: 2
   - type: CombatMode
-  - type: Body
-    prototype: AnimalHemocyanin
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -2757,7 +2704,7 @@
   - type: MeleeChemicalInjector
     transferAmount: 0.75
     solution: melee
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Xeno
     understands:
@@ -2806,13 +2753,15 @@
   - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute from base.yml.
     allowedStates:
     - Alive
-    damageCap: 89
     damage:
       types:
         Poison: -0.07
-      groups:
-        Brute: -0.07
-        Burn: -0.07
+        Blunt: -0.03
+        Slash: -0.03
+        Piercing: -0.03
+        Heat: -0.03
+        Cold: -0.03
+        Shock: -0.03
   - type: NightVision # Goobstation - Nigthvision
     color: "#808080"
     activateSound: null
@@ -2941,7 +2890,7 @@
   description: This spider looks a little magical
   suffix: Wizard
   components:
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Universal # Should allow them to understand everything and speak it too. Might need to change this.
     understands:
@@ -2998,7 +2947,7 @@
   - type: Tag
     tags:
     - VimPilot
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Hissing
     understands:
@@ -3078,7 +3027,7 @@
   - type: Tag
     tags:
     - VimPilot
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Hissing
     understands:
@@ -3166,7 +3115,7 @@
   - type: Tag
     tags:
     - VimPilot
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Fox
     understands:
@@ -3233,7 +3182,7 @@
     spawned:
     - id: FoodMeat
       amount: 2
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Dog
     understands:
@@ -3380,7 +3329,7 @@
     spawned:
     - id: FoodMeat
       amount: 3
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Cat
     understands:
@@ -3486,7 +3435,7 @@
         Slash: 6
         Piercing: 6
         Structural: 15
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Cat
     understands:
@@ -3641,7 +3590,7 @@
   - type: Tag
     tags:
     - VimPilot
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Hissing
     understands:
@@ -3701,7 +3650,7 @@
   - type: Tag
     tags:
     - VimPilot
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Hissing
     understands:
@@ -3808,7 +3757,7 @@
     spawned:
     - id: FoodMeat
       amount: 1
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Mouse
     understands:
@@ -3931,7 +3880,7 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/pig_oink.ogg
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Pig
     understands:
@@ -3948,7 +3897,7 @@
 
 - type: entity
   name: diona nymph
-  parent: [SimpleMobBase, StripableInventoryBase]
+  parent: [BaseMobAnimal, SimpleMobBase, StripableInventoryBase]
   id: MobDionaNymph
   description: It's like a cat, only.... branch-ier.
   components:
@@ -4028,7 +3977,7 @@
     reformTime: 10
     popupText: diona-reform-attempt
     reformPrototype: MobDionaReformed
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - RootSpeak
     understands:
@@ -4107,7 +4056,7 @@
       task: SimpleHostileCompound
   - type: Puller
     needsHands: false
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Deer
     understands:
@@ -4189,14 +4138,18 @@
             sprite: Mobs/Pets/displacements.rsi
             state: corgi_head_displacement
   - type: Hands # HANDS!
+    activeHandId: Right
+    hands:
+      Right:
+        location: Right
+      Left:
+        location: Left
   - type: Puller
   - type: Cuffable # bad dog!
   - type: BlockWriting # dogs can't write, paws unwieldy; mouth-writing is a myth
   - type: Stripping
   - type: ComplexInteraction
   # Implement custom borgi body type
-  - type: Body
-    prototype: SmartCorgi
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 180
@@ -4209,8 +4162,9 @@
     - VimPilot
     - CanPilot
     - DoorBumpOpener
-  - type: StatusIcon # marks them as crew
+  - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
+  - type: JobStatus # marks them as crew
   - type: NpcFactionMember
     factions:
     - NanoTrasen

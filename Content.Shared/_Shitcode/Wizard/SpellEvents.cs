@@ -445,13 +445,13 @@ public sealed partial class ChargeMagicEvent : InstantActionEvent
     public ProtoId<TagPrototype> WandTag = "WizardWand";
 
     [DataField]
-    public float WandChargeRate = 1000f;
+    public float WandChargeRate = 10000f;
 
     [DataField]
-    public float MinWandDegradeCharge = 1000f;
+    public float MinWandDegradeCharge = 500f;
 
     [DataField]
-    public float WandDegradePercentagePerCharge = 0.5f;
+    public float WandDegradePercentagePerCharge = 0.1f;
 
     [DataField]
     public List<ProtoId<TagPrototype>> RechargeTags = new()

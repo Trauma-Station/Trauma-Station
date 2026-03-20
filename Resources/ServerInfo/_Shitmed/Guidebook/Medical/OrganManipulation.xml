@@ -1,10 +1,3 @@
-<!--
-SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <Document>
 # Organ Manipulation
 These surgeries allow you to remove or replace organs from a patient for healthy ones. Which can help treat conditions on their bodies.
@@ -48,11 +41,6 @@ For this you can use the Medical Biofabricator with some Biomass. Which can manu
 <GuideEntityEmbed Entity="MaterialBiomass" Caption="biomass"/>
 </Box>
 
-By default, every Chief Medical Officer has access to a Medical Biofabricator board in their locker.
-
-## Why didn't the organ transplant
-## do anything?
-
-Your patient's body rejected the organ as it is in a bad shape, try using a fresh organ from a donor, or getting a new one from the Medical Biofabricator.
+If science didn't research it however, you'll have to be resourceful and "find" some organs from unsuspecting crewmembers or monkeys.
 
 </Document>

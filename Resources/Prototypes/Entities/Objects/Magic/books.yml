@@ -15,7 +15,6 @@
       - state: icon_pentagramm
         color: "#f7e19f"
     - type: Spellbook
-    - type: EnchantingTool # Goobstation
     - type: Tag
       tags:
       - Spellbook
@@ -116,6 +115,7 @@
       ownerOnly: false # For ease of debugging.
       balance:
         WizCoin: 99999
+      expectedFaction: #nulls out the expected faction
 
 - type: entity
   parent: BaseSpellbook

@@ -1,0 +1,19 @@
+- type: listing
+  id: UplinkHolster
+  name: uplink-holster-name
+  description: uplink-holster-desc
+  productEntity: ClothingBeltSyndieHolster
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkWearables
+
+- type: listing
+  id: UplinkGuerrillaGloves
+  name: uplink-guerrilla-name
+  description: uplink-guerrilla-desc
+  productEntity: ClothingHandsGlovesGuerrilla
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkWearables

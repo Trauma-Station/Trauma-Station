@@ -1,8 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Curses;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Goobstation.Shared.Wraith.WraithPoints;
 using Content.Server.Fluids.EntitySystems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;

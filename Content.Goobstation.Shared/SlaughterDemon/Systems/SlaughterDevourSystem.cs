@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.SlaughterDemon.Objectives;
 using Content.Goobstation.Shared.SlaughterDemon.Other;
 using Content.Shared._EinsteinEngines.Silicon.Components;
@@ -27,7 +29,7 @@ public sealed class SlaughterDevourSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
     private EntityQuery<PullerComponent> _pullerQuery;
-    private EntityQuery<HumanoidAppearanceComponent> _humanoid;
+    private EntityQuery<HumanoidProfileComponent> _humanoid;
     private EntityQuery<ActorComponent> _actorQuery;
     /// <inheritdoc/>
     public override void Initialize()
@@ -35,7 +37,7 @@ public sealed class SlaughterDevourSystem : EntitySystem
         base.Initialize();
 
         _pullerQuery = GetEntityQuery<PullerComponent>();
-        _humanoid = GetEntityQuery<HumanoidAppearanceComponent>();
+        _humanoid = GetEntityQuery<HumanoidProfileComponent>();
         _actorQuery = GetEntityQuery<ActorComponent>();
 
         SubscribeLocalEvent<SlaughterDevourComponent, MapInitEvent>(OnMapInit);
@@ -121,22 +123,23 @@ public sealed class SlaughterDevourSystem : EntitySystem
 
     public void HealAfterDevouring(EntityUid target, EntityUid devourer, SlaughterDevourComponent component)
     {
+        var popup = "slaughter-devour-other";
+        var amount = component.ToHealAnythingElse;
         // I dont know how to refactor this into events so im leaving it like this
-        if (HasComp<HumanoidAppearanceComponent>(target) && !HasComp<SiliconComponent>(target))
+        if (HasComp<BorgChassisComponent>(target) || HasComp<SiliconComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("slaughter-devour-humanoid"), devourer, devourer); // Trauma - PopupClient
-            _damageable.TryChangeDamage(devourer, component.ToHeal);
+            popup = "slaughter-devour-robot";
+            amount = component.ToHealNonCrew;
         }
-        else if (HasComp<BorgChassisComponent>(target) || HasComp<SiliconComponent>(target))
+        else if (HasComp<HumanoidProfileComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("slaughter-devour-robot"), devourer, devourer); // Trauma - PopupClient
-            _damageable.TryChangeDamage(devourer, component.ToHealNonCrew);
+            popup = "slaughter-devour-humanoid";
+            amount = component.ToHeal;
         }
-        else
-        {
-            _popup.PopupClient(Loc.GetString("slaughter-devour-other"), devourer, devourer); // Trauma - PopupClient
-            _damageable.TryChangeDamage(devourer, component.ToHealAnythingElse);
-        }
+
+        _popup.PopupClient(Loc.GetString(popup), devourer, devourer);
+        var damage = component.HealDamage * amount;
+        _damageable.ChangeDamage(devourer, damage, true);
     }
 
     /// <summary>

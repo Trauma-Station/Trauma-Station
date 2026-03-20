@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Network;
@@ -39,7 +40,7 @@ public sealed class StatusEffectEffectsSystem : EntitySystem
             comp.NextUpdate = now + comp.UpdateDelay;
             Dirty(uid, comp);
 
-            _effects.ApplyEffects(target, comp.Effects);
+            _effects.ApplyEffects(target, comp.Effects, user: target);
         }
     }
 

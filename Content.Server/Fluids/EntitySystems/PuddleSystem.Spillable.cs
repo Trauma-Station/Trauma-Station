@@ -32,7 +32,7 @@ public sealed partial class PuddleSystem
         if (!entity.Comp.SpillWhenThrown || Openable.IsClosed(entity.Owner))
             return;
 
-        if (TrySplashSpillAt(entity.Owner, Transform(entity).Coordinates, out _, out var solution) && args.User != null)
+        if (TrySplashSpillAt(entity.Owner, Transform(entity).Coordinates, out _, out var solution, user: args.User) && args.User != null) // Goob
         {
             AdminLogger.Add(LogType.Landed,
                 $"{ToPrettyString(entity.Owner):entity} spilled a solution {SharedSolutionContainerSystem.ToPrettyString(solution):solution} on landing");

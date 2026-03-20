@@ -11,10 +11,12 @@ using Content.Shared.Weapons.Ranged;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Goobstation.Wizard.Mutate;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[AutoGenerateComponentPause]
 public sealed partial class HulkComponent : Component
 {
     /// <summary>
@@ -35,19 +37,17 @@ public sealed partial class HulkComponent : Component
     [DataField]
     public EntProtoId ShotProto = "RedHeavyLaser";
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<HumanoidVisualLayers, CustomBaseLayerInfo> OldCustomBaseLayers = new();
+    [DataField]
+    public Color? OldSkinColor;
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public Color OldSkinColor;
+    [DataField]
+    public Color? OldEyeColor;
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public Color OldEyeColor;
-
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan NextRoar = TimeSpan.Zero;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField]
     public List<Color> NonHumanoidOldLayerData = new();
 
     /// <summary>

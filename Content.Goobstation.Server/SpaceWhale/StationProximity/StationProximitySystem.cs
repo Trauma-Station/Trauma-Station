@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.CCVar;
 using Content.Server.Popups;
 using Content.Server.Station.Components;
@@ -61,7 +63,7 @@ public sealed class StationProximitySystem : EntitySystem
         if (stations.Count == 0)
             return;
 
-        var humanoidQuery = EntityQueryEnumerator<HumanoidAppearanceComponent, MobStateComponent, TransformComponent>();
+        var humanoidQuery = EntityQueryEnumerator<HumanoidProfileComponent, MobStateComponent, TransformComponent>();
         while (humanoidQuery.MoveNext(out var uid, out _, out var mobState, out var humanoidXform))
         {
             if (mobState.CurrentState != MobState.Alive)

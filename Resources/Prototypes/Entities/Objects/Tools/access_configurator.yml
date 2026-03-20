@@ -20,7 +20,9 @@
     - type: AccessOverrider
       accessLevels:
       # <Trauma>
+      - Genetics
       - Journalism
+      - Library
       - Robotics
       # </Trauma>
       - Armory
@@ -96,9 +98,10 @@
     accessLevels:
     # <Trauma>
     - NanotrasenRepresentative
-    - BlueshieldOfficer
     - Journalism
+    - Library
     - Robotics
+    - Genetics
     - Revolutionary
     # </Trauma>
     - Armory

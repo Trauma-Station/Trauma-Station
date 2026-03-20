@@ -82,11 +82,12 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem // Trauma - made
             var patientCoordinates = Transform(patient).Coordinates;
             if (component.MaxScanRange != null && !_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange.Value))
             {
-                //Range too far, disable updates
-                StopAnalyzingEntity((uid, component), patient);
+                //Range too far, disable updates until they are back in range
+                PauseAnalyzingEntity((uid, component), patient);
                 continue;
             }
 
+            component.IsAnalyzerActive = true;
             UpdateScannedUser(uid, patient, true,
                 component.CurrentMode, component.CurrentBodyPart); // Shitmed Change
         }
@@ -197,6 +198,22 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem // Trauma - made
             healthAnalyzer.Comp.CurrentMode); // Shitmed
     }
 
+
+    /// <summary>
+    /// If the scanner is active, sends one last update and sets it to inactive.
+    /// </summary>
+    /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
+    /// <param name="target">The entity to analyze</param>
+    private void PauseAnalyzingEntity(Entity<HealthAnalyzerComponent> healthAnalyzer, EntityUid target)
+    {
+        if (!healthAnalyzer.Comp.IsAnalyzerActive)
+            return;
+
+        UpdateScannedUser(healthAnalyzer, target, false,
+            healthAnalyzer.Comp.CurrentMode); // Shitmed
+        healthAnalyzer.Comp.IsAnalyzerActive = false;
+    }
+
     /// <summary>
     /// Send an update for the target to the healthAnalyzer
     /// </summary>
@@ -256,7 +273,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem // Trauma - made
         // <Goob>
         var vitalDamage = FixedPoint2.Zero;
         if (_damageQuery.TryComp(entity, out var damageable))
-            vitalDamage = _threshold.CheckVitalDamage(entity, damageable);
+            vitalDamage = _threshold.CheckVitalDamage((entity, damageable));
         // </Goob>
 
         if (TryComp<UnrevivableComponent>(entity, out var unrevivableComp) && unrevivableComp.Analyzable)

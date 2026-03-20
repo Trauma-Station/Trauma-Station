@@ -74,14 +74,10 @@
 - type: entity
   name: space bear
   id: MobBearSpace
-  parent: MobSpaceBasic
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic ] # Shitmed
   description: It looks friendly. Why don't you give it a hug?
   components:
-  # <Goob>
-  - type: Body
-    prototype: SpaceBear
-  - type: Fauna
-  # </Goob>
+  - type: Fauna # Goob
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/bear.rsi
@@ -129,11 +125,9 @@
 - type: entity
   name: space kangaroo
   id: MobKangarooSpace
-  parent: [MobSpaceBasic, StripableInventoryBase]
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, StripableInventoryBase ] # Shitmed
   description: It looks friendly. Why don't you give it a hug?
   components:
-  - type: Body # Shitmed Change
-    prototype: SpaceKangaroo
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/kangaroo.rsi
@@ -175,7 +169,7 @@
   - type: FootstepModifier # Trauma - revert upstream removal
     footstepSoundCollection:
       collection: FootstepBounce
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Kangaroo
     understands:
@@ -186,8 +180,6 @@
     - id: FoodMeat
       amount: 1
   - type: Fauna # Lavaland Change
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -203,16 +195,12 @@
 - type: entity
   name: space spider
   id: MobSpiderSpace
-  parent: MobSpaceBasic
+  parent: [ AppearanceSpaceAnimal, MobSpaceBasic ] # Shitmed
   description: It's so glowing, it looks dangerous.
   components:
   # <Goob>
   - type: VentCrawler
-  - type: Body
-    prototype: SpaceSpider
   - type: Fauna
-  - type: CombatPower
-    factor: 1.5 # times more dangerous than a crew-member
   # </Goob>
   - type: Sprite
     drawdepth: Mobs
@@ -277,7 +265,7 @@
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 4
-  - type: LanguageKnowledge # Einstein Engines - Language
+  - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
     - Xeno
     understands:
@@ -315,14 +303,12 @@
 - type: entity
   name: space cobra
   id: MobCobraSpace
-  parent: MobSpaceBasic
+  parent: [ AppearanceSpaceCobra, MobSpaceBasic ] # Shitmed
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
     # <Goob>
-    - type: Body
-      prototype: SpaceCobra
     - type: Fauna
-    - type: LanguageKnowledge
+    - type: LanguageSpeaker
       speaks:
       - Xeno
       understands:
@@ -426,13 +412,13 @@
     - type: SalvageMobRestrictions
 
 - type: entity
-  parent: SimpleSpaceMobBase
+  parent:
+  - SimpleSpaceMobBase
+  - BaseMobAnimal
   id: MobSnail
   name: snail
   description: Revolting unless you're french.
   components:
-  - type: Body
-    prototype: Mouse
   - type: GhostRole
     makeSentient: true
     allowSpeech: false
@@ -621,12 +607,10 @@
   - type: MovementAlwaysTouching
 
 - type: entity
-  parent: MobSnail
+  parent: [ BaseMobMothroach, MobSnail ]
   id: MobSnailMoth
   name: Snoth
   components:
-  - type: Body
-    prototype: Mothroach
   - type: GhostRole
     name: ghost-role-information-snoth-name
     description: ghost-role-information-snoth-description

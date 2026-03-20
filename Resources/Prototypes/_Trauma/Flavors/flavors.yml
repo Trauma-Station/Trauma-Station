@@ -1,0 +1,19 @@
+- type: flavor
+  id: DeepFried
+  flavorType: Base
+  description: flavor-base-deep-fried
+
+- type: flavor
+  id: tiredness
+  flavorType: Complex
+  description: flavor-complex-tiredness
+
+- type: flavor
+  id: blood
+  flavorType: Complex
+  description: flavor-complex-blood
+
+- type: flavor
+  id: apotheosis
+  flavorType: Complex
+  description: flavor-complex-apotheosis

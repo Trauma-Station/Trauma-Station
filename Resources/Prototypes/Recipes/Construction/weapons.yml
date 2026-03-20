@@ -1,39 +1,3 @@
-# SPDX-FileCopyrightText: 2018 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-# SPDX-FileCopyrightText: 2019 Ephememory <yetanotherscuffed@gmail.com>
-# SPDX-FileCopyrightText: 2019 Swept <49448379+SweptWasTaken@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2020 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Exp <theexp111@gmail.com>
-# SPDX-FileCopyrightText: 2020 Git-Nivrak <59925169+Git-Nivrak@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Hugo Laloge <hugo.laloge@gmail.com>
-# SPDX-FileCopyrightText: 2020 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 py01 <pyronetics01@gmail.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Morb <14136326+Morb0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2022 Ripmorld <60119809+UKNOWH@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <wrexbe@protonmail.com>
-# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 TaralGit <76408146+TaralGit@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Tunguso4ka <71643624+Tunguso4ka@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 and_a <and_a@DESKTOP-RJENGIR>
-# SPDX-FileCopyrightText: 2023 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Boaz1111 <149967078+Boaz1111@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Whisper <121047731+QuietlyWhisper@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 shamp <140359015+shampunj@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: BladedFlatcapGrey
   graph: BladedFlatcapGrey
@@ -41,6 +5,13 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    TailoringKnowledge: 2
+    WeaponsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: BladedFlatcapBrown
@@ -49,6 +20,13 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    TailoringKnowledge: 2
+    WeaponsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: Shiv
@@ -57,6 +35,11 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory: {} # wrapping cloth around glass come on. shittiest possible weapon
+  practical:
+    WeaponsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ReinforcedShiv
@@ -65,6 +48,11 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory: {} # wrapping cloth around glass come on
+  practical:
+    WeaponsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: PlasmaShiv
@@ -73,6 +61,13 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1 # need to be careful with plasma
+    WeaponsKnowledge: 0
+  practical:
+    WeaponsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: UraniumShiv
@@ -81,6 +76,13 @@
   targetNode: icon
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1 # need to be careful with uranium
+    WeaponsKnowledge: 0
+  practical:
+    WeaponsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: Spear
@@ -89,6 +91,12 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0 # caveman gaming
+  practical:
+    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
+  # </Trauma>
 
 - type: construction
   id: SpearReinforced
@@ -97,6 +105,12 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0
+  practical:
+    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
+  # </Trauma>
 
 - type: construction
   id: SpearPlasma
@@ -105,6 +119,12 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
+  # </Trauma>
 
 - type: construction
   id: SpearUranium
@@ -113,6 +133,12 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge : 1
+  practical:
+    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
+  # </Trauma>
 
 - type: construction
   id: SpearSharkMinnow
@@ -121,6 +147,10 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    WeaponsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: Bola
@@ -129,6 +159,12 @@
   targetNode: bola
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: WoodenBuckler
@@ -137,6 +173,13 @@
   targetNode: woodenBuckler
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    CarvingKnowledge: 2
+    ArmorKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: CardShield
@@ -145,6 +188,12 @@
   targetNode: cardShield
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0 # it's cardboard
+  practical:
+    ArmorKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: MakeshiftShield
@@ -153,6 +202,13 @@
   targetNode: makeshiftShield
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    ArmorKnowledge: 1
+    MetalworkingKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ImprovisedArrow
@@ -161,6 +217,14 @@
   targetNode: ImprovisedArrow
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    WeaponsKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 1
+    CarvingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ImprovisedArrowCarp
@@ -169,6 +233,13 @@
   targetNode: ImprovisedArrowCarp
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 1
+    CarvingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ImprovisedArrowPlasma
@@ -177,6 +248,14 @@
   targetNode: ImprovisedArrowPlasma
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    WeaponsKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 1
+    CarvingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ImprovisedArrowUranium
@@ -185,6 +264,14 @@
   targetNode: ImprovisedArrowUranium
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    WeaponsKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 1
+    CarvingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: CardArrow
@@ -193,6 +280,12 @@
   targetNode: CardArrow
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0 # it's card board but like origami
+  practical:
+    WeaponsKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ImprovisedBow
@@ -201,6 +294,14 @@
   targetNode: ImprovisedBow
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    WeaponsKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 1
+    CarvingKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: SpearBone
@@ -209,6 +310,13 @@
   targetNode: spear
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    WeaponsKnowledge: 0
+  practical:
+    WeaponsKnowledge: 2
+    CarvingKnowledge: 2
+  # </Trauma>
 
 # - type: construction # Trauma
 #   id: ClothingHandsKnuckleDustersBrass
@@ -225,3 +333,9 @@
   targetNode: cardSword
   category: construction-category-weapons
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0 # it's cardboard
+  practical:
+    WeaponsKnowledge: 1
+  # </Trauma>

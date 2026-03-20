@@ -1,16 +1,9 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 absurd-shaman <165011607+absurd-shaman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Medical.Common.Targeting;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -37,17 +30,11 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
-// Shitmed Change
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Targeting;
-
 namespace Content.Goobstation.Shared.ReverseBearTrap;
 
 public sealed partial class ReverseBearTrapSystem : EntitySystem
 {
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -57,11 +44,9 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly WoundSystem _wound = default!; // Shitmed Change
-    [Dependency] private readonly SharedBodySystem _body = default!; // Shitmed Change
 
     public static readonly ProtoId<TagPrototype> KeyTag = "ReverseBearTrapKey";
     public static readonly ProtoId<ToolQualityPrototype> Welding = "Welding";
@@ -96,7 +81,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
         // Ensure we're actually hitting a valid target
         if (args.HitEntities.Count == 0 ||
-            !HasComp<HumanoidAppearanceComponent>(args.HitEntities.First()) ||
+            !HasComp<HumanoidProfileComponent>(args.HitEntities.First()) ||
             _inventory.TryGetSlotEntity(args.HitEntities.First(), "head", out _))
             return;
 
@@ -136,12 +121,12 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
 
     private void OnVerbAdd(EntityUid uid, ReverseBearTrapComponent trap, GetVerbsEvent<Verb> args)
     {
-        if (!_actionBlockerSystem.CanComplexInteract(args.User))
+        if (!_blocker.CanComplexInteract(args.User))
             return;
 
         if (trap.Ticking && trap.Wearer is {} target)
         {
-            var activeItem = _handsSystem.GetActiveItem(args.User);
+            var activeItem = _hands.GetActiveItem(args.User);
             if (args.User == target)
             {
                 args.Verbs.Add(new Verb()
@@ -260,11 +245,8 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         if (args.Cancelled || trap.Wearer is not {} target)
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
-        var rand = new System.Random(seed);
-
         var prefix = "";
-        if (rand.Prob(trap.CurrentEscapeChance))
+        if (SharedRandomExtensions.PredictedProb(_timing, trap.CurrentEscapeChance, GetNetEntity(uid)))
         {
             ResetTrap(uid, trap);
         }
@@ -285,9 +267,10 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         if (args.Cancelled || args.Target is not { } target || args.Used is not { } used)
             return;
 
+        var user = args.User;
         if (!_inventory.TryGetSlotEntity(target, "head", out var _)
-            && _inventory.TryEquip(target, used, "head", true, true))
-            ArmTrap(used, trap, target, args.User);
+            && _inventory.TryEquip(user, target, used, "head", predicted: true))
+            ArmTrap(used, trap, target, user);
     }
 
     private void OnWeldFinished(EntityUid uid, ReverseBearTrapComponent trap, WeldFinishedEvent args)
@@ -401,11 +384,7 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         var damage = new DamageSpecifier();
         damage.DamageDict.Add("Blunt", 300);
         _damageable.TryChangeDamage(wearer, damage, true, origin: uid, targetPart: TargetBodyPart.Head);
-        var head = _body.GetBodyChildrenOfType(wearer, BodyPartType.Head).FirstOrDefault();
-        if (head != default
-            && TryComp<WoundableComponent>(head.Id, out var woundable)
-            && woundable.ParentWoundable.HasValue)
-            _wound.AmputateWoundable(woundable.ParentWoundable.Value, head.Id, woundable);
+        _body.TryDecapitate(wearer, wearer);
     }
 
     private void AttemptEscape(EntityUid uid, ReverseBearTrapComponent trap, EntityUid user)

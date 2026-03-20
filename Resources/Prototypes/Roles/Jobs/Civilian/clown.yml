@@ -6,7 +6,6 @@
   startingGear: ClownGear
   icon: "JobIconClown"
   supervisors: job-supervisors-hop
-  goobcoins: 15 #Goob content
   access:
   - Theatre
   - Maintenance
@@ -27,6 +26,7 @@
       interval: 10
     - type: SpeechFontOverride # Trauma - ss13 parity
       font: LDFComicSans
+
   - !type:AddImplantSpecial
     implants: [ SadTromboneImplant ]
 

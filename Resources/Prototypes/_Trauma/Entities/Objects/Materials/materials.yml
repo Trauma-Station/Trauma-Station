@@ -1,8 +1,8 @@
 - type: entity
   parent: MaterialGunpowder
-  id: MaterialGunpowder60
+  id: MaterialGunpowder30
   suffix: full
   components:
   - type: Stack
     stackType: Gunpowder
-    count: 60
+    count: 30

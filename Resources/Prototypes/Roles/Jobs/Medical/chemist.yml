@@ -6,14 +6,13 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 5h
+      time: 1h # Trauma was 5
   startingGear: ChemistGear
   icon: "JobIconChemist"
   supervisors: job-supervisors-cmo
   guides: # goobstation
   - Chemist
   - Chemicals
-  goobcoins: 20 #Goob content
   access:
   - Medical
   - Chemistry
@@ -30,12 +29,7 @@
   equipment:
     id: ChemistryPDA
     ears: ClothingHeadsetMedical
-    belt: ChemBagFilled
-    pocket1: HandLabeler
-    eyes: ClothingEyesGlassesChemical
-  #storage:
-    #back:
-    #- Stuff
+    belt: ChemBagFilled # Goob
 
 - type: chameleonOutfit
   id: ChemistChameleonOutfit

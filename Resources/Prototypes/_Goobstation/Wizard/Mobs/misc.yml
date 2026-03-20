@@ -77,6 +77,7 @@
 - type: entity
   parent:
   - BaseMob
+  - BaseMobAnimal
   - MobCombat
   - MobFlammable
   - MobAtmosExposed
@@ -119,7 +120,7 @@
   - type: FactionException
   - type: NpcFactionMember
     factions:
-      - Wizard
+    - SimpleHostile
   - type: HTN
     rootTask:
       task: SimpleHumanoidHostileCompound # Humanoid for staff of change shenanigans
@@ -179,8 +180,6 @@
   - type: FloatingVisuals
   - type: Buckle
   - type: StandingState
-  - type: Body
-    bodyType: Simple
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
   - type: MeleeWeapon

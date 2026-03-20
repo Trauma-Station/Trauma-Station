@@ -7,13 +7,11 @@ using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;
-using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
-using Content.Shared.Gibbing;
 using Content.Shared.Heretic;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
@@ -21,6 +19,7 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Zombies;
+using Robust.Shared.Timing;
 using System.Linq;
 // </Trauma>
 using System.Numerics;
@@ -57,7 +56,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Spawners;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.Magic;
 
@@ -66,7 +64,10 @@ namespace Content.Shared.Magic;
 /// </summary>
 public abstract class SharedMagicSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!; // Goobstation
+    // <Trauma>
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    // </Trauma>
     [Dependency] private readonly ISerializationManager _seriMan = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -88,11 +89,9 @@ public abstract class SharedMagicSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!; // Goobstation
-    [Dependency] private readonly NpcFactionSystem _faction = default!; // Goobstation
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly ExamineSystemShared _examine= default!;
+    //[Dependency] private readonly ExamineSystemShared _examine= default!; // Trauma - unused now
 
     private static readonly ProtoId<TagPrototype> InvalidForGlobalSpawnSpellTag = "InvalidForGlobalSpawnSpell";
 
@@ -290,7 +289,7 @@ public abstract class SharedMagicSystem : EntitySystem
     ///     Gets spawn positions listed on <see cref="InstantSpawnSpellEvent"/>
     /// </summary>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    private List<EntityCoordinates> GetInstantSpawnPositions(TransformComponent casterXform, MagicInstantSpawnData data)
+    public List<EntityCoordinates> GetInstantSpawnPositions(TransformComponent casterXform, MagicInstantSpawnData data) // Goob edit - made public
     {
         switch (data)
         {
@@ -405,15 +404,12 @@ public abstract class SharedMagicSystem : EntitySystem
     // End World Spawn Spells
     #endregion
     #region Projectile Spells
-    private void OnProjectileSpell(ProjectileSpellEvent ev)
+    public void OnProjectileSpell(ProjectileSpellEvent ev) // Goob edit - made public
     {
         if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer)) // Goob edit
             return;
 
         ev.Handled = true;
-
-        if (_net.IsClient) // Goobstation
-            return;
 
         var xform = Transform(ev.Performer);
         var fromCoords = xform.Coordinates;
@@ -426,7 +422,7 @@ public abstract class SharedMagicSystem : EntitySystem
             : new(_mapSystem.GetMap(fromMap.MapId), fromMap.Position);
         var userVelocity = _physics.GetMapLinearVelocity(spawnCoords); // Goob edit
 
-        var ent = Spawn(ev.Prototype, fromMap);
+        var ent = PredictedSpawnAtPosition(ev.Prototype, _transform.ToCoordinates(fromMap)); // Trauma
         var direction = _transform.ToMapCoordinates(ev.Target).Position -
                         fromMap.Position;
         _gunSystem.ShootProjectile(ent, direction, userVelocity, ev.Performer, ev.Performer, ev.Speed); // Goob - put speed in event instead of hardcoded

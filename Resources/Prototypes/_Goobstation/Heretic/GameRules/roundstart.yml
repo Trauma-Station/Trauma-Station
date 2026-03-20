@@ -36,7 +36,6 @@
     - prefRoles: [ Heretic ]
       max: 3
       playerRatio: 15
-      chaosScore: 250
       lateJoinAdditional: true
       jobBlacklist: [ Chaplain, ] # GOOBSTATION
       blacklist:
@@ -44,12 +43,6 @@
         - CommandStaff
       mindRoles:
       - MindRoleHeretic
-      components:
-      - type: WeakToHoly
-      - type: CanEnchant
-  - type: Tag
-    tags:
-      - RoundstartAntag
 
 - type: entity
   parent: BaseGameRule
@@ -77,9 +70,3 @@
         - CommandStaff
       mindRoles:
       - MindRoleHeretic
-      components:
-      - type: WeakToHoly
-      - type: CanEnchant
-  - type: Tag
-    tags:
-      - CalmAntag

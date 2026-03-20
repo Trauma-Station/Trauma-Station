@@ -12,7 +12,7 @@
     # has to be done first or the other one will guarantee this one will work
     - !type:HealthChange
       conditions:
-      - !type:TotalDamageCondition
+      - !type:VitalDamageCondition
         min: 110
         max: 200
       probability: 0.95 # xcom 95%
@@ -23,7 +23,7 @@
     # fultoning an injured person is likely to hurt them
     - !type:HealthChange
       conditions:
-      - !type:TotalDamageCondition
+      - !type:VitalDamageCondition
         min: 50 # moderately injured -> the shock of being fultoned can hurt you
         max: 200 # leave corpses alone
       probability: 0.7 # low level support team :(

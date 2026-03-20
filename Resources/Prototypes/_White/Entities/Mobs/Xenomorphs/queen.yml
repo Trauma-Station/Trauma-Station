@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseMobXenomorphAdult
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphQueen ]
   id: BaseMobXenomorphQueen
   name: xenomorph queen
   description: The highest individual, the central element and mother of the Hive. The destruction of the Queen in most cases means the collapse of the Hive.
@@ -18,20 +18,10 @@
   - type: XenomorphQueen
   - type: TailLash
     tailDamage:
-      groups:
-        Brute: 5
+      types:
+        Slash: 5
     inject:
-      ChloralHydrate: 10 # Goobstation - new chemical
-  #- type: ActionGrant # Goobstation - moved to organs
-  #  actions:
-  #  - ActionTransferPlasma
-  #  - ActionSpawnWallResin
-  #  - ActionSpawnResinMembrane
-  #  - ActionSpawnResinNest
-  #  - ActionSpawnResinWeedNode
-  #  - ActionSpawnXenomorphEgg
-  - type: Body
-    prototype: XenomorphQueen
+      ChloralHydrate: 10
   - type: TypingIndicator
     proto: alien_royal
   - type: Fixtures
@@ -60,21 +50,23 @@
     baseSprintSpeed: 2.5
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 50
+      types:
+        Blunt: 10
+        Slash: 20
+        Piercing: 20
+    altDisarm: false
+    canWideSwing: true
   - type: Deathgasp
     prototype: XenomorphQueenDeathgasp
   - type: Speech
     speechSounds: Xenomorph
     speechVerb: LargeMob
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     - TauCetiBasic
     understands:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     - Hissing
     - Draconic
     - TauCetiBasic

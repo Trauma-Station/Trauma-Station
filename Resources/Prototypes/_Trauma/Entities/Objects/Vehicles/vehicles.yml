@@ -1,0 +1,6 @@
+- type: entity
+  abstract: true
+  parent: BaseVehicle
+  id: BaseGroundVehicle
+  components:
+  - type: GravityAffected # wheels need gravity for traction

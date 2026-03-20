@@ -9,8 +9,9 @@
   - type: Item
     size: Small
   - type: EnterBodyPart
-    part: Chest
+    category: Torso
   - type: TriggerInsideBodyPart
+    popup: entity-effect-popup-mothmaggot-maturing
     keyOut: mature
     delay: 40
   - type: EntityEffectOnTrigger
@@ -38,5 +39,5 @@
   - type: EntityTargetAction
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
     event: !type:EnterBodyPartActionEvent

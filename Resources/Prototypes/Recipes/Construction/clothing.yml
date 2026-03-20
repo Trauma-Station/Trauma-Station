@@ -1,20 +1,3 @@
-# SPDX-FileCopyrightText: 2023 Tunguso4ka <71643624+Tunguso4ka@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 brainfood1183 <113240905+brainfood1183@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ERROR404 <100093430+ERORR404V1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 FungiFellow <151778459+FungiFellow@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Plykiya <plykiya@protonmail.com>
-# SPDX-FileCopyrightText: 2024 icekot8 <93311212+icekot8@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Momo <Rsnesrud@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: ClownHardsuit
   graph: ClownHardsuit
@@ -22,6 +5,13 @@
   targetNode: clownHardsuit
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0
+    ToysKnowledge: 0 # billions must honk
+  practical:
+    ToysKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: MimeHardsuit
@@ -30,6 +20,13 @@
   targetNode: mimeHardsuit
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0
+    ToysKnowledge: 0 # billions must ...
+  practical:
+    ToysKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: BoneArmor
@@ -38,6 +35,13 @@
   targetNode: armor
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    CarvingKnowledge: 2
+    ArmorKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: BoneHelmet
@@ -46,6 +50,13 @@
   targetNode: helmet
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    CarvingKnowledge: 2
+    ArmorKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: cardHelmet
@@ -54,6 +65,12 @@
   targetNode: cardhelmet
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory: {} # it's cardboard
+  practical:
+    TailoringKnowledge: 0
+    ArmorKnowledge: 0
+  # </Trauma>
 
 - type: construction
   id: cardArmour
@@ -62,6 +79,12 @@
   targetNode: cardarmour
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory: {} # it's cardboard
+  practical:
+    TailoringKnowledge: 0
+    ArmorKnowledge: 0
+  # </Trauma>
 
 - type: construction
   id: BananaClownMask
@@ -70,6 +93,12 @@
   targetNode: mask
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    BananiumKnowledge: 2
+  practical:
+    TailoringKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: BananaClownJumpsuit
@@ -78,6 +107,12 @@
   targetNode: jumpsuit
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    BananiumKnowledge: 2
+  practical:
+    TailoringKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: BananaClownShoes
@@ -86,6 +121,12 @@
   targetNode: shoes
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    BananiumKnowledge: 2
+  practical:
+    TailoringKnowledge: 1
+  # </Trauma>
 
 - type: construction
   id: ClothingEyesHudMedSec
@@ -94,6 +135,11 @@
   targetNode: medsecHud
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+    ElectronicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ClothingShoeSlippersDuck
@@ -102,6 +148,11 @@
   targetNode: shoes
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    TailoringKnowledge: 0
+    ToysKnowledge: 0
+  # </Trauma>
 
 - type: construction
   id: ClothingShoeSlippersLizard
@@ -110,6 +161,11 @@
   targetNode: shoes
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    TailoringKnowledge: 0
+    ToysKnowledge: 0
+  # </Trauma>
 
 - type: construction
   id: ClothingEyesGlassesSecurity
@@ -118,6 +174,11 @@
   targetNode: glassesSec
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1
+    ElectronicsKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ClothingBeltQuiver
@@ -126,6 +187,13 @@
   targetNode: Quiver
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 1 # medieval chuds figured it out come on
+  practical:
+    FabricationKnowledge: 2
+    TailoringKnowledge: 2
+  # </Trauma>
 
 - type: construction
   id: ClothingHeadHelmetJustice
@@ -134,3 +202,10 @@
   targetNode: helmet
   category: construction-category-clothing
   objectType: Item
+  # <Trauma>
+  theory:
+    FabricationKnowledge: 0
+  practical:
+    FabricationKnowledge: 1
+    ElectronicsKnowledge: 1
+  # </Trauma>

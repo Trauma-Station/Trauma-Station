@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 
@@ -19,7 +21,7 @@ public sealed class MapRestrictedGunSystem : EntitySystem
         var xform = Transform(ent);
         if (args.Cancelled
             || xform.MapUid is not {} map
-            || !_whitelist.CheckBoth(map, blacklist: ent.Comp.PlanetBlacklist, whitelist: ent.Comp.PlanetWhitelist))
+            || _whitelist.CheckBoth(map, blacklist: ent.Comp.PlanetBlacklist, whitelist: ent.Comp.PlanetWhitelist))
             return;
 
         args.Cancelled = true;

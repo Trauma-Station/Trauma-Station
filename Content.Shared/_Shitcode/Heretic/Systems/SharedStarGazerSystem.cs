@@ -5,8 +5,11 @@ using Content.Shared._Shitcode.Heretic.Systems.Abilities;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Heretic;
+using Content.Shared.Heretic.Prototypes;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind;
 using Content.Shared.Movement.Systems;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -20,6 +23,7 @@ namespace Content.Shared._Shitcode.Heretic.Systems;
 
 public abstract class SharedStarGazerSystem : EntitySystem
 {
+    [Dependency] protected readonly StatusEffectsSystem Status = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedTransformSystem Xform = default!;
 
@@ -39,6 +43,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
 
         SubscribeLocalEvent<StarGazerComponent, StarGazeEvent>(OnStarGaze);
         SubscribeLocalEvent<StarGazerComponent, MeleeHitEvent>(OnStarGazerHit);
+        SubscribeLocalEvent<StarGazerComponent, AttackAttemptEvent>(OnStarGazerAttackAttempt);
 
         SubscribeLocalEvent<StarGazeComponent, StarGazeDoAfterEvent>(OnStarGazeDoAfter);
         SubscribeLocalEvent<StarGazeComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
@@ -46,7 +51,23 @@ public abstract class SharedStarGazerSystem : EntitySystem
         SubscribeLocalEvent<StarGazeComponent, ComponentShutdown>(OnStarGazeShutdown);
         SubscribeLocalEvent<StarGazeComponent, AttackAttemptEvent>(OnStarGazeAttackAttempt);
 
+        SubscribeLocalEvent<HereticComponent, EventHereticResolveStarGazer>(OnResolveStarGazer);
+
         SubscribeAllEvent<LaserBeamEndpointPositionEvent>(OnGetPosition);
+    }
+
+    private void OnStarGazerAttackAttempt(Entity<StarGazerComponent> ent, ref AttackAttemptEvent args)
+    {
+        if (Status.HasStatusEffect(ent, ent.Comp.InactiveStatus))
+            args.Cancel();
+    }
+
+    private void OnResolveStarGazer(Entity<HereticComponent> ent, ref EventHereticResolveStarGazer args)
+    {
+        if (!TryComp(ent, out MindComponent? mind) || mind.OwnedEntity is not { } uid)
+            return;
+
+        ResolveStarGazer(uid, out _, false);
     }
 
     private void OnStarGazerHit(Entity<StarGazerComponent> ent, ref MeleeHitEvent args)
@@ -210,6 +231,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
             Xform.AttachToGridOrMap(starGazer.Value);
             comp = EnsureComp<StarGazerComponent>(starGazer.Value);
             minion = EnsureComp<HereticMinionComponent>(starGazer.Value);
+            minion.MinionId = GetNetEntity(mind).Id;
             minion.BoundHeretic = summoner;
             summoner.Comp.StarGazer = starGazer.Value;
             heretic.Minions.Add(starGazer.Value);
@@ -229,6 +251,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
             minion.BoundHeretic == summoner.Owner)
             return (starGazer.Value, comp);
 
+        minion.MinionId = GetNetEntity(mind).Id;
         minion.BoundHeretic = summoner.Owner;
         Dirty(starGazer.Value, minion);
 

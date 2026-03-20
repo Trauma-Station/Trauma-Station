@@ -3,7 +3,6 @@
   id: XenomorphsInfestationRoundstart
   components:
   - type: GameRule
-    chaosScore: 2500 # Goobstation - 1.5x blob
     minPlayers: 30
   - type: AntagObjectives
     objectives:

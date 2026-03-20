@@ -1,4 +1,3 @@
-using Content.Goobstation.Shared.Heretic;
 using Content.Shared.IdentityManagement;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
@@ -9,7 +8,6 @@ namespace Content.Server.Heretic.EntitySystems;
 public sealed class ShadowCloakSystem : SharedShadowCloakSystem
 {
     [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly ProtectiveBladeSystem _blade = default!;
 
     private const float SustainedDamageReductionInterval = 1f;
     private float _accumulator;
@@ -32,20 +30,6 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
     {
         base.Update(frameTime);
 
-        var shadowEntityQuery = AllEntityQuery<ShadowCloakEntityComponent>();
-        while (shadowEntityQuery.MoveNext(out var uid, out var comp))
-        {
-            if (comp.DeletionAccumulator == null)
-                continue;
-
-            comp.DeletionAccumulator -= frameTime;
-
-            if (comp.DeletionAccumulator > 0)
-                continue;
-
-            QueueDel(uid);
-        }
-
         _accumulator += frameTime;
 
         if (_accumulator < SustainedDamageReductionInterval)
@@ -53,7 +37,7 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
 
         _accumulator = 0f;
 
-        var shadowCloakedQuery = EntityQueryEnumerator<ShadowCloakedComponent>();
+        var shadowCloakedQuery = EntityQueryEnumerator<ShadowCloakEntityComponent>();
         while (shadowCloakedQuery.MoveNext(out _, out var comp))
         {
             comp.SustainedDamage =

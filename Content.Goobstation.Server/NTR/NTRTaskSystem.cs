@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2025 BeBright <98597725+be1bright@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 LuciferEOS <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
@@ -18,13 +10,9 @@ using Content.Goobstation.Shared.NTR.Events;
 using Content.Server.NameIdentifier;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
-using Content.Shared.Access.Components;
-using Content.Shared.Access.Systems;
-using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.NameIdentifier;
 using Content.Shared.Paper;
@@ -41,10 +29,8 @@ namespace Content.Goobstation.Server.NTR;
 public sealed class NtrTaskSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly NameIdentifierSystem _nameIdentifier = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -63,8 +49,6 @@ public sealed class NtrTaskSystem : EntitySystem
         SubscribeLocalEvent<NtrClientAccountComponent, NtrListingPurchaseEvent>(OnPurchase);
         SubscribeLocalEvent<NtrTaskConsoleComponent, BoundUIOpenedEvent>(OnConsoleOpened);
         SubscribeLocalEvent<NtrTaskDatabaseComponent, MapInitEvent>(OnDatabaseInit);
-        SubscribeLocalEvent<NtrTaskConsoleComponent, TaskFailedEvent>(OnTaskFailed);
-        SubscribeLocalEvent<NtrTaskConsoleComponent, TaskCompletedEvent>(OnTaskCompleted);
         SubscribeLocalEvent<NtrTaskConsoleComponent, ItemSlotInsertAttemptEvent>(OnItemInsertAttempt);
         SubscribeLocalEvent<NtrTaskConsoleComponent, TaskPrintLabelMessage>(OnPrintLabelMessage);
         SubscribeLocalEvent<NtrTaskConsoleComponent, TaskSkipMessage>(OnTaskSkipMessage);
@@ -122,7 +106,7 @@ public sealed class NtrTaskSystem : EntitySystem
             || !TryGetTaskFromId(station, args.TaskId, out var taskData))
             return;
 
-        if (!_prototypes.TryIndex(taskData.Value.Task, out var taskProto))
+        if (!_proto.TryIndex(taskData.Value.Task, out var taskProto))
             return;
         for (int i = 0; i < db.Tasks.Count; i++)
         {
@@ -195,32 +179,11 @@ public sealed class NtrTaskSystem : EntitySystem
         }
     }
 
-    private void OnTaskCompleted(EntityUid uid, NtrTaskConsoleComponent component, TaskCompletedEvent args)
-    {
-        if (_station.GetOwningStation(uid) is not { } station)
-            return;
-
-        HandleTaskOutcome(uid, station, args.Task, success: true);
-        _audio.PlayPvs(component.SkipSound, uid);
-    }
-
-    private void OnTaskFailed(EntityUid uid, NtrTaskConsoleComponent component, TaskFailedEvent args)
-    {
-        if (_station.GetOwningStation(uid) is not { } station)
-            return;
-
-        HandleTaskOutcome(uid, station, args.Task, success: false);
-        _audio.PlayPvs(component.DenySound, uid);
-
-        if (Exists(args.User))
-            _popup.PopupEntity(Loc.GetString("ntr-console-task-fail-insert"), uid, args.User);
-    }
-
     private void HandleTaskOutcome(EntityUid console, EntityUid station, NtrTaskData taskData, bool success)
     {
         if (!TryComp<NtrTaskDatabaseComponent>(station, out var db)
             || !TryComp<NtrBankAccountComponent>(station, out var account)
-            || !_prototypes.TryIndex(taskData.Task, out NtrTaskPrototype? taskProto))
+            || !_proto.TryIndex(taskData.Task, out NtrTaskPrototype? taskProto))
             return;
 
         var amount = success ? taskProto.Reward : -taskProto.Penalty;
@@ -282,12 +245,12 @@ public sealed class NtrTaskSystem : EntitySystem
 
         foreach (var task in db.Tasks.Where(t => t.IsActive))
         {
-            if (!_prototypes.TryIndex(task.Task, out var proto)
+            if (!_proto.TryIndex(task.Task, out var proto)
                 || !proto.IsReagentTask)
                 continue;
 
             if (ValidateReagentRequirements(item, proto))
-                return ProcessTaskSubmission(item, console, proto.ID);
+                return ProcessTaskSubmission(item, (console, component), proto.ID);
         }
 
         return false;
@@ -308,7 +271,7 @@ public sealed class NtrTaskSystem : EntitySystem
 
         for (var i = 0; i < doc.Tasks.Count; i++)
         {
-            if (ProcessTaskSubmission(item, console, doc.Tasks[i]))
+            if (ProcessTaskSubmission(item, (console, component), doc.Tasks[i]))
             {
                 doc.Tasks.RemoveAt(i);
                 UpdateTaskConsoles();
@@ -318,20 +281,20 @@ public sealed class NtrTaskSystem : EntitySystem
         return false;
     }
 
-    private bool ProcessTaskSubmission(EntityUid item, EntityUid console, string taskId)
+    private bool ProcessTaskSubmission(EntityUid item, Entity<NtrTaskConsoleComponent> console, string taskId)
     {
-        var station = _station.GetOwningStation(console);
-        if (station is null
+        if (_station.GetOwningStation(console) is not {} station
             || !TryComp<NtrTaskDatabaseComponent>(station, out var db)
-            || !_prototypes.TryIndex(taskId, out NtrTaskPrototype? task))
+            || !_proto.TryIndex(taskId, out NtrTaskPrototype? task))
             return false;
 
-        if (!TryGetActiveTask(station.Value, task, out var taskData))
+        if (!TryGetActiveTask(station, task, out var taskData))
             return false;
 
-        RaiseLocalEvent(console, new TaskCompletedEvent(taskData.Value));
+        HandleTaskOutcome(console, station, taskData.Value, success: true);
+        _audio.PlayPvs(console.Comp.SkipSound, console);
 
-        if (TryRemoveTask(station.Value, taskData.Value.Id, false))
+        if (TryRemoveTask(station, taskData.Value.Id, false))
         {
             db.History.Add(new NtrTaskHistoryData(
                 taskData.Value,
@@ -360,7 +323,7 @@ public sealed class NtrTaskSystem : EntitySystem
     {
         var stamps = new HashSet<string>();
         foreach (var taskId in doc.Tasks)
-            if (_prototypes.TryIndex(taskId, out var task))
+            if (_proto.TryIndex(taskId, out var task))
                 stamps.UnionWith(task.Entries.SelectMany(e => e.Stamps));
 
         return stamps;
@@ -384,7 +347,7 @@ public sealed class NtrTaskSystem : EntitySystem
 
         foreach (var (reagentProtoId, requiredAmount) in task.Reagents)
         {
-            if (!_prototypes.TryIndex(reagentProtoId, out var requiredReagentProto))
+            if (!_proto.TryIndex(reagentProtoId, out var requiredReagentProto))
             {
                 _popup.PopupEntity(Loc.GetString("ntr-console-invalid-reagent-proto", ("reagentId", reagentProtoId)), container);
                 return false;
@@ -488,7 +451,7 @@ public sealed class NtrTaskSystem : EntitySystem
     }
     private List<NtrTaskPrototype> GetAvailableTasks(NtrTaskDatabaseComponent db)
     {
-        return _prototypes.EnumeratePrototypes<NtrTaskPrototype>()
+        return _proto.EnumeratePrototypes<NtrTaskPrototype>()
             .Where(proto => IsTaskAvailable(proto, db))
             .ToList();
     }
@@ -560,18 +523,4 @@ public sealed class NtrTaskSystem : EntitySystem
         return Identity.Name(actor, EntityManager);
     }
     #endregion
-}
-
-public sealed class TaskFailedEvent : EntityEventArgs
-{
-    public EntityUid User;
-    public NtrTaskData Task;
-    public int Penalty;
-
-    public TaskFailedEvent(EntityUid user, NtrTaskData task, int penalty)
-    {
-        User = user;
-        Task = task;
-        Penalty = penalty;
-    }
 }

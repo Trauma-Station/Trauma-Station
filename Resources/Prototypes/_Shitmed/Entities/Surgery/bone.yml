@@ -33,10 +33,6 @@
   - type: Bone
     integrityCap: 100 # Goob edit
     boneIntegrity: 100 # Goob edit
-  - type: Sprite
-    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
-    state: bones
-  - type: Appearance
 
 - type: entity
   id: BoneWeak

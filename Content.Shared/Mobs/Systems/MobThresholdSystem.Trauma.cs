@@ -1,57 +1,37 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
-using Content.Shared.Mobs.Components;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Mobs.Systems;
 
 /// <summary>
-/// Trauma - random internal and API additions to thresholds system.
+/// Trauma - GetScaledDamage overload for polymorph transferring part damage
 /// </summary>
 public sealed partial class MobThresholdSystem
 {
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
-
-    private EntityQuery<BodyComponent> _bodyQuery;
-    private EntityQuery<BodyPartComponent> _partQuery;
-    private EntityQuery<DamageableComponent> _damageQuery;
+    [Dependency] private readonly BodySystem _body = default!;
+    private EntityQuery<BodyComponent> _bodyQuery = default!;
+    private EntityQuery<DamageableComponent> _damageQuery = default!;
 
     private void InitializeTrauma()
     {
         _bodyQuery = GetEntityQuery<BodyComponent>();
-        _partQuery = GetEntityQuery<BodyPartComponent>();
         _damageQuery = GetEntityQuery<DamageableComponent>();
-
-        SubscribeLocalEvent<MobThresholdsComponent, WoundableIntegrityChangedOnBodyEvent>(OnWoundableDamage);
-    }
-
-    private void OnWoundableDamage(Entity<MobThresholdsComponent> ent, ref WoundableIntegrityChangedOnBodyEvent args)
-    {
-        if (!TryComp<MobStateComponent>(ent, out var mobState))
-            return;
-
-        UpdateAlerts(ent, mobState.CurrentState, ent.Comp);
     }
 
     /// <summary>
-    /// Version of GetScaledDamage that also gets the parts damage, indexed by targeting doll.
+    /// Version of GetScaledDamage that also gets the parts damage, indexed by organ category.
     /// </summary>
     public bool GetScaledDamage(
         EntityUid target1,
         EntityUid target2,
         out DamageSpecifier? damage,
-        out Dictionary<TargetBodyPart, DamageSpecifier>? woundableDamage)
+        out Dictionary<ProtoId<OrganCategoryPrototype>, DamageSpecifier>? woundableDamage)
     {
         woundableDamage = null;
         if (!GetScaledDamage(target1, target2, out damage))
@@ -61,16 +41,14 @@ public sealed partial class MobThresholdSystem
         return true;
     }
 
-    private Dictionary<TargetBodyPart, DamageSpecifier>? GetScaledPartsDamage(EntityUid target1, EntityUid target2)
+    private Dictionary<ProtoId<OrganCategoryPrototype>, DamageSpecifier>? GetScaledPartsDamage(EntityUid target1, EntityUid target2)
     {
         // If the receiver is a simplemob, we don't care about any of this. Just grab the damage and go.
-        if (!_bodyQuery.TryComp(target2, out var body) || body.BodyType != BodyType.Complex)
+        if (!_bodyQuery.HasComp(target2))
             return null;
 
         // However if they are valid for woundmed, we first check if the sender is also valid for it to build a dict.
-        if (!_bodyQuery.TryComp(target1, out var oldBody) ||
-            oldBody.BodyType != BodyType.Complex ||
-            !_body.TryGetRootPart(target1, out var parentRootPart))
+        if (!_bodyQuery.TryComp(target1, out var oldBody))
             return null;
 
         if (!TryGetThresholdForState(target1, MobState.Dead, out var ent1DeadThreshold))
@@ -79,19 +57,44 @@ public sealed partial class MobThresholdSystem
         if (!TryGetThresholdForState(target2, MobState.Dead, out var ent2DeadThreshold))
             ent2DeadThreshold = 0;
 
-        Dictionary<TargetBodyPart, DamageSpecifier> entWoundablesDamage = new();
-        foreach (var woundable in _wound.GetAllWoundableChildren(parentRootPart.Value))
+        Dictionary<ProtoId<OrganCategoryPrototype>, DamageSpecifier> organDamages = new();
+        foreach (var organ in _body.GetOrgans((target1, oldBody)))
         {
-            if (woundable.Comp.WoundableIntegrity >= woundable.Comp.IntegrityCap
-                || !_damageQuery.TryComp(parentRootPart.Value, out var damageable)
-                || damageable.Damage.GetTotal() == 0)
+            if (organ.Comp.Category is not {} category
+                || !_damageQuery.TryComp(organ, out var damageable))
                 continue;
 
-            var bodyPart = _body.GetTargetBodyPart(woundable);
-            var modifiedDamage = damageable.Damage / ent1DeadThreshold.Value * ent2DeadThreshold.Value;
-            if (!entWoundablesDamage.TryAdd(bodyPart, modifiedDamage))
-                entWoundablesDamage[bodyPart] += modifiedDamage;
+            var damage = _damageable.GetAllDamage((organ, damageable));
+            if (damage.GetTotal() <= 0)
+                continue;
+
+            var modifiedDamage = damage / ent1DeadThreshold.Value * ent2DeadThreshold.Value;
+            if (!organDamages.TryAdd(category, modifiedDamage))
+                organDamages[category] += modifiedDamage;
         }
-        return entWoundablesDamage;
+
+        return organDamages;
+    }
+
+    /// <summary>
+    /// Calculates the total damage from vital body parts (Head, Torso), for mobs with Body.
+    /// For non-mobs, returns the total damage from the target entity.
+    /// </summary>
+    /// <returns>Total damage from vital body parts, or total damage if not a Body mob.</returns>
+    public FixedPoint2 CheckVitalDamage(Entity<DamageableComponent?> ent)
+    {
+        if (!_damageQuery.Resolve(ent, ref ent.Comp, false))
+            return FixedPoint2.Zero;
+
+        if (!_bodyQuery.HasComp(ent))
+            return _damageable.GetTotalDamage(ent);
+
+        var result = FixedPoint2.Zero;
+        foreach (var part in _body.GetVitalParts(ent))
+        {
+            result += _damageable.GetTotalDamage(part);
+        }
+
+        return result;
     }
 }

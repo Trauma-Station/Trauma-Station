@@ -23,6 +23,7 @@
           steps:
             - material: Steel
               amount: 3
+              doAfter: 2
 
     - node: apcFrame
       entity: APCFrame

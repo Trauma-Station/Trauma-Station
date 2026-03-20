@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
@@ -31,7 +24,7 @@ public sealed partial class BlobTileComponent : Component
     [DataField]
     public DamageSpecifier HealthOfPulse = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             { "Blunt", -4 },
             { "Slash", -4 },
@@ -45,7 +38,7 @@ public sealed partial class BlobTileComponent : Component
     [DataField]
     public DamageSpecifier FlashDamage = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             { "Heat", 24 },
         }

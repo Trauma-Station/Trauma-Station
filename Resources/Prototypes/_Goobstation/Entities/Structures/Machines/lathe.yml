@@ -72,6 +72,7 @@
     - ShuttleBoards
     - BluespaceTheory
     - ScienceClothing
+    - TraumaScienceClothing
     - UpgradeKits
   - type: EmagLatheRecipes
     emagStaticPacks:
@@ -136,6 +137,7 @@
     - ShuttleBoards
     - BluespaceTheory
     - ScienceClothing
+    - TraumaScienceClothing
     - ConstructionBagOfHolding
   - type: EmagLatheRecipes
     emagStaticPacks:
@@ -190,13 +192,15 @@
     - ElectronicsStatic
     - SurgeryStatic
     - ScienceBoardsStatic
-    - ScienceExplosives # Goobstation - Roundstart Grenade Tech
-    - GrenadeTriggersStatic # Goobstation - Roundstart Grenade Tech
+    - ScienceExplosives
+    - GrenadeTriggersStatic
     - MiscSignallersStatic
+    - GeneticsStatic # Trauma
     dynamicPacks:
     - AdvancedTools
     - ScienceEquipment
     - ScienceClothing
+    - TraumaScienceClothing
     - ScienceWeapons
     - AtmosTools
     - EngineeringWeapons

@@ -6,6 +6,40 @@
   save: false
   abstract: true
   components:
+  # <Trauma>
+  - type: KnowledgeHolder
+  - type: IntrinsicUI
+    uis:
+      enum.StationMapUiKey.Key:
+        toggleAction: ActionShowStationMap
+  - type: StationMap # Show location on the map
+  - type: Targeting
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+    canUseInCrit: true
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  - type: Penetratable # Better snipers
+    penetrateDamage: 75 # It's harder to kill iron golem
+    damagePenalty: 0.25
+  - type: MiningPoints # for mining borgs mostly
+  - type: SpeechSynthesis
+    voice: Borg
+  - type: KnowledgeGrantOnWear # gets added to the brain, modified when picking borg type
+    skills:
+      # robot basic stuff
+      FabricationKnowledge: 20
+      WallsKnowledge: 10
+      InfrastructureKnowledge: 10
+      ElectronicsKnowledge: 10
+  # </Trauma>
   - type: Reactive
     groups:
       Acidic: [Touch]
@@ -46,7 +80,7 @@
     thresholds:
       0: Alive
       100: Critical
-      200: Dead
+      200: Dead # Trauma - was 300
     stateAlertDict:
       Alive: BorgHealth
       Critical: BorgCrit
@@ -76,13 +110,6 @@
       # Goobstation - Add the station map interface to the borg
       enum.StationMapUiKey.Key:
         type: StationMapBoundUserInterface
-  # Goobstation - Add the station map interface to the borg
-  - type: IntrinsicUI
-    uis:
-      enum.StationMapUiKey.Key:
-        toggleAction: ActionShowStationMap
-  - type: StationMap # Also Goobstation - Show location on the map
-  - type: Targeting # Shitmed Change
   - type: ActivatableUI
     key: enum.BorgUiKey.Key
   - type: SiliconLawBound
@@ -111,12 +138,6 @@
     # - Binary # Goobstation - replaced with collective mind
     - Common
     - Science
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
-    canUseInCrit: true # Goobstation
   - type: ZombieImmune
   - type: Repairable
     damageValue: -10 # 10 seconds to repair from crit
@@ -151,8 +172,7 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
-  - type: Body
-    bodyType: Simple # Goob
+  #- type: Body # Trauma - borg is not creature
   - type: StatusEffects
     allowed:
     - Flashed
@@ -266,31 +286,17 @@
     guides:
     - Cyborgs
     - Robotics
-  - type: LanguageKnowledge # Einstein Engines - Languages
-    speaks:
-    - TauCetiBasic
-    - RobotTalk
-    understands:
-    - TauCetiBasic
-    - RobotTalk
   - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection
     damageProtection:
       flatReductions:
         Heat: 10 # capable of touching light bulbs and stoves without feeling pain!
   - type: BypassLock
+    openWiresPanel: true
   - type: BypassLockRequiresMobState
     requiredMobState:
     - Critical
     - Dead
-  # <Goob>
-  - type: Penetratable # Better snipers
-    penetrateDamage: 75 # It's harder to kill iron golem
-    damagePenalty: 0.25
-  - type: MiningPoints
-  - type: SpeechSynthesis
-    voice: Borg
-  # </Goob>
 
 - type: entity
   abstract: true
@@ -374,6 +380,7 @@
   - type: SlavedBorg # DeltaV: NT borgs are enslaved to the AI by default
     law: ObeyAI
   - type: ShowJobIcons
+  - type: ShowCrewIcons
   - type: StationAiVision # Goobstation - AI can see through NT silicon
     range: 3
   - type: InteractionPopup
@@ -452,6 +459,7 @@
   - type: IonStormTarget
     chance: 1
   - type: ShowJobIcons
+  - type: ShowCrewIcons
 
 - type: entity
   id: BaseBorgChassisSyndicateDerelict #For assault borg and maybe others in time
@@ -465,6 +473,7 @@
   - type: IonStormTarget
     chance: 1
   - type: ShowJobIcons
+  - type: ShowCrewIcons
   - type: NpcFactionMember # They're still syndicate even if they can't listen to the radio or see icons
     factions:
     - Syndicate
@@ -609,9 +618,18 @@
   - type: AccessReader
     access: [["Xenoborg"]]
   - type: ShowJobIcons # not sure if it is needed
+  - type: ShowCrewIcons
   - type: InteractionPopup
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
+  # <Trauma>
+  - type: KnowledgeGrantOnWear # gets added to the brain
+    skills:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 26
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
+  # </Trauma>

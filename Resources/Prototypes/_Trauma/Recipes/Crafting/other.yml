@@ -5,6 +5,10 @@
   targetNode: paper sheet
   category: construction-category-materials
   objectType: Item
+  theory: {} # it's folding paper bro
+  practical:
+    MaterialsKnowledge: 0 # its folding paper bro
+  useQuality: false
 
 - type: construction
   id: PowerArmorStand
@@ -13,7 +17,5 @@
   targetNode: PowerArmorStand
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 3

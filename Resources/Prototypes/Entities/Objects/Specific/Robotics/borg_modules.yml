@@ -454,6 +454,23 @@
 
 # generic modules
 - type: entity
+  id: BorgModulePrying
+  parent: [ BaseBorgModule ]
+  name: prying module
+  description: A universal cyborg module which allows the unit to pry open doors.
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+    - state: icon-tools
+  - type: ComponentBorgModule
+    components:
+    - type: Prying
+      speedModifier: 1.5
+      useSound:
+        path: /Audio/Items/jaws_pry.ogg
+
+- type: entity
   id: BorgModuleCable
   parent: [ BaseBorgModule, BaseProviderBorgModule ]
   name: cable cyborg module
@@ -1680,7 +1697,7 @@
   parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleHypo
   name: nocturine hypo xenoborg module
-  description: Module with a self-refilling nocturine hypo.
+  description: Module with a self-refilling nocturine hypospray.
   components:
   - type: Sprite
     layers:
@@ -1688,7 +1705,7 @@
     - state: icon-xenoborg-hypo
   - type: ItemBorgModule
     hands:
-    - item: NocturineHypo
+    - item: DartGunXenoborg # Trauma replaced hypo
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-hypo-module }
 

@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 2.5h
+      time: 1h # Trauma was 2.5
   startingGear: DoctorGear
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo
@@ -14,7 +14,6 @@
   - MedicalDoctor
   - Medical
   - Medicine
-  goobcoins: 20 #Goob content
   access:
   - Medical
   - Maintenance
@@ -24,22 +23,20 @@
   - !type:GiveItemOnHolidaySpecial
     holiday: DoctorDay
     prototype: WehMedipen
-  - !type:AddComponentSpecial # Trauma
+  # <Trauma>
+  - !type:AddComponentSpecial
     components:
     - type: SurgerySpeedModifier
       speedModifier: 1.5
     - type: CPRTraining
       reviveChance: 0.45 # a bit better at chest compressions
       inhaleChance: 0.75 # decent at mouth to mouth res.
+  # </Trauma>
 
 - type: startingGear
   id: DoctorGear
   equipment:
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalFilled
-  #storage:
-    #back:
-    #- Stuff
 
 - type: chameleonOutfit
   id: MedicalDoctorChameleonOutfit

@@ -40,23 +40,26 @@ knowledge-path-flesh-s2-desc =
     You are now able to consume raw flesh. Eating meat, organs and body parts will empower and heal you temporarily, the effect scales with your path stage.
     You also become immune to damage from poisons.
 
-knowledge-path-flesh-s3-name = Imperfect Ritual
+knowledge-path-flesh-s3-name = Mark of Flesh
 knowledge-path-flesh-s3-desc =
-    I found notes of a dark ritual, unfinished... yet still, I pushed forward.
-
-    Allows you to transmute a corpse and a muzzle to create a Voiceless Dead.
-    The corpse does not need to have a soul.
-    Voiceless Dead are mute ghouls, which have 100 health and a Bloody Blade.
-    Voiceless Dead are stronger than regular ones at using Bloody Blades.
-    You can only create two at a time.
-
-knowledge-path-flesh-s4-name = Mark of Flesh
-knowledge-path-flesh-s4-desc =
     That's when I saw them, the marked ones. They were out of reach. They screamed, and screamed.
 
     Your Mansus Grasp now applies the Mark of Flesh. The mark is triggered from an attack with your Bloody Blade.
     When triggered, the victim will split into flesh mimic that will attack them.
     Flesh mimics are identical to ghouls risen by mansus grasp but they receive damage over time that increases slowly.
+
+knowledge-path-flesh-s4-name = Imperfect Ritual
+knowledge-path-flesh-s4-desc =
+    I found notes of a dark ritual, unfinished... yet still, I pushed forward.
+
+    Allows you to transmute a corpse and a muzzle to create a Voiceless Dead.
+    The corpse does not need to have a soul.
+    Voiceless Dead are mute ghouls, which have 150 health and a Bloody Blade.
+    Voiceless Dead are better than regular ones at using Bloody Blades.
+    Voiceless Dead body parts cannot be severed and its organs cannot be removed.
+    You can only create two at a time.
+    Attempting to perform a ritual again after performing it twice will teleport already existing voiceless dead on the rune.
+    Voiceless Dead can be brought back to life by performing this ritual on it and supplying the muzzle.
 
 knowledge-path-flesh-s5-name = Knitting of Flesh
 knowledge-path-flesh-s5-desc =
@@ -97,4 +100,5 @@ knowledge-path-flesh-s9-desc =
     When completed, you will become even stronger from consuming flesh.
     Additionally, upon taking damage, your body will split into flesh mimic. They will be given a Bloody Blade.
     You can only sustain 10 flesh mimics at once, taking even more damage will instead heal existing mimics.
+    Your Knit Flesh spell can now heal your minions in an area around you when using it in hand, at an increased cooldown.
     You will also become immune to extreme temperatures and pressure.

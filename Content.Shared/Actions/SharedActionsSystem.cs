@@ -1,9 +1,10 @@
 // <Trauma>
 using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Shitmed.Antags.Abductor;
 using Content.Shared.Ghost;
+using Content.Shared.Heretic;
 using Content.Shared.Popups;
-using Content.Shared.Silicons.StationAi;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -14,7 +15,6 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
-using Content.Shared.Heretic;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mind;
@@ -23,8 +23,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -33,6 +31,7 @@ namespace Content.Shared.Actions;
 public abstract partial class SharedActionsSystem : EntitySystem
 {
     // <Trauma>
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     // </Trauma>
     [Dependency] protected readonly IGameTiming GameTiming = default!;
@@ -45,7 +44,6 @@ public abstract partial class SharedActionsSystem : EntitySystem
     [Dependency] private   readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private   readonly SharedTransformSystem _transform = default!;
     [Dependency] private   readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly INetManager _net = default!; // Goobstation
 
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<ActionsComponent> _actionsQuery;
@@ -399,12 +397,12 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     private void OnWorldValidate(Entity<WorldTargetActionComponent> ent, ref ActionValidateEvent args)
     {
-        var user = args.User;
-        var provider = args.Provider;
+        var provider = args.Provider; // Goob - used by Fallback below
+        var user = args.User; // Goob - moved from below so Fallback can use it
 
         if (args.Input.EntityCoordinatesTarget is not { } netTarget)
         {
-            args.Invalid |= !Fallback(); // Goob edit
+            args.Invalid |= !Fallback(); // Goob - check fallback instead of setting it to false immediately
             return;
         }
 
@@ -513,8 +511,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         if (comp.Range <= 0)
             return true;
 
-        var hasNoSpecificComponents = !HasComp<StationAiOverlayComponent>(user) && !HasComp<AbductorScientistComponent>(user); // Shitmed Change
-        if (comp.CheckCanAccess && !_actionBlocker.CanInteract(user, null) && hasNoSpecificComponents) // Shitmed Change
+        if (comp.CheckCanAccess && !_actionBlocker.CanInteract(user, null))
             return false;
 
         return _transform.InRange(coords, xform.Coordinates, comp.Range);
@@ -622,6 +619,10 @@ public abstract partial class SharedActionsSystem : EntitySystem
         // TODO: This is where we'd add support for event lists
         if (!action.Comp.RaiseOnUser && action.Comp.Container is {} container && !_mindQuery.HasComp(container))
             target = container;
+        // <Trauma>
+        if (action.Comp.RaiseOnAction)
+            target = action.Owner;
+        // </Trauma>
 
         RaiseLocalEvent(target, (object) ev, broadcast: true);
         handled = ev.Handled;
@@ -1238,13 +1239,16 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     // Goobstation edit start
     public bool TryGetActionById(
-        EntityUid actionContainer,
+        EntityUid ent,
         EntProtoId actionId,
-        [NotNullWhen(true)] out Entity<ActionComponent>? action)
+        [NotNullWhen(true)] out Entity<ActionComponent>? action,
+        ActionsContainerComponent? container = null)
     {
         action = null;
-        var actions = GetActions(actionContainer).ToList();
-        foreach (var (uid, comp) in actions)
+        var actions = Resolve(ent, ref container, false)
+            ? container.Container.ContainedEntities
+            : GetActions(ent).Select(x => x.Owner);
+        foreach (var uid in actions)
         {
             if (TerminatingOrDeleted(uid))
                 continue;
@@ -1254,7 +1258,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
                 || entityPrototypeId != actionId)
                 continue;
 
-            action = (uid, comp);
+            action = (uid, Comp<ActionComponent>(uid));
             return true;
         }
 

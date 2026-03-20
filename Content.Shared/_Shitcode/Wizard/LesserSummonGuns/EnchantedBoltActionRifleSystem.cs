@@ -9,7 +9,6 @@ using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -31,7 +30,6 @@ public sealed class EnchantedBoltActionRifleSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly SharedWieldableSystem _wieldable = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
 
     public override void Initialize()
     {

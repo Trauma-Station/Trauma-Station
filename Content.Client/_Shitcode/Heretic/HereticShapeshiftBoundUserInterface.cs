@@ -1,6 +1,5 @@
 using Content.Client._Shitcode.Heretic.UI;
-using Content.Shared._Goobstation.Heretic.Components;
-using Content.Shared.Heretic.Prototypes;
+using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Polymorph;
 using Robust.Client.Graphics;
 using Robust.Client.Input;

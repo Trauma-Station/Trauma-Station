@@ -1,10 +1,10 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Changeling.Components;
@@ -41,13 +41,12 @@ public sealed partial class FleshmendComponent : Component
     public bool IgnoreFire = false; // for whatever reason
 
     [DataField]
-    public float BruteHeal = -9f;
-
-    [DataField]
-    public float BurnHeal = -5f;
-
-    [DataField]
-    public float AsphyxHeal = -4f;
+    public Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2> Healing = new()
+    {
+        { "Brute", 9 },
+        { "Burn", 5 },
+        { "Airloss", 4 }
+    };
 
     [DataField]
     public float BleedingAdjust = -2.5f;

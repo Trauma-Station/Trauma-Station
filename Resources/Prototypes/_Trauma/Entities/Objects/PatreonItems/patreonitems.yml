@@ -1,0 +1,131 @@
+- type: entity
+  parent: BasePlushie
+  id: PatreonTia
+  name: lenore plushie
+  description: It is made out of human.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/tia.rsi
+    state: icon
+  - type: Clothing
+    quickEquip: false
+    sprite: _Trauma/Objects/Patreon/tia.rsi
+    slots:
+    - HEAD
+
+- type: entity
+  parent: ClothingHeadHelmetBase
+  id: PatreonTenshi
+  name: silver halo
+  description: Holy moly.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/tenshi.rsi
+    state: icon
+  - type: Clothing
+    quickEquip: true
+    sprite: _Trauma/Objects/Patreon/tenshi.rsi
+    slots:
+    - HEAD
+
+- type: entity
+  parent: ClothingNeckBase
+  id: PatreonTurboTracker
+  name: clown vomit cloak
+  description: The red spots are human blood.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/turbo.rsi
+  - type: Clothing
+    quickEquip: true
+    sprite: _Trauma/Objects/Patreon/turbo.rsi
+    slots:
+    - NECK
+
+- type: entity
+  parent: [BasePlushie,BaseMajorContraband]
+  id: PatreonWeax
+  name: armok's decapitated skull
+  description: It is of the lowest quality.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/weax.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: Edible
+    requiresSpecialDigestion: true
+    useSound:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    soundHit:
+      path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+
+- type: entity
+  parent: ClothingUniformBase
+  id: PatreonTheLongQuietDress
+  name: mushroom dress
+  description: It is a mushroom dress!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/Icortherainwing/dress.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/Icortherainwing/dress.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: PatreonTheLongQuietHat
+  name: mushroom hat
+  description: It is a mushroom hat!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/Icortherainwing/hat.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/Icortherainwing/hat.rsi
+
+- type: entity
+  parent: [ClothingNeckBase, BaseMajorContraband]
+  id: PatreonOwenCarpenter
+  name: trash bag cloak
+  description: DISGUSTING!!!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/owenCarpenter.rsi
+  - type: Clothing
+    quickEquip: true
+    sprite: _Trauma/Objects/Patreon/owenCarpenter.rsi
+    slots:
+    - NECK
+
+- type: entity
+  parent: ClothingHeadBase
+  id: PatreonGamingFungus420
+  name: tom O shatter hat
+  description: Who is Tom? And how can I shatter him?
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: PatreonGribley
+  name: worm pack
+  description: I think it just moved...
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/gribley.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/gribley.rsi

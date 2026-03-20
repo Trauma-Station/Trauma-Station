@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 drakewill-CRL <46307022+drakewill-CRL@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.EntityEffects;
 using Robust.Shared.Serialization;
 
@@ -37,6 +32,7 @@ public sealed partial class RandomPlantMutation
     /// The actual EntityEffect to apply to the target
     /// </summary>
     [DataField]
+    [NonSerialized] // Trauma - effects arent serializable
     public EntityEffect Effect = default!;
 
     /// <summary>

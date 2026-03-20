@@ -1,0 +1,32 @@
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: SurgeryKnowledge
+  name: Surgery
+  components:
+  - type: Knowledge
+    experienceCost: 24
+
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: FirstAidKnowledge
+  name: First Aid
+  components:
+  - type: Knowledge
+    experienceCost: 19
+  - type: InjectTimeKnowledge
+    # y = 1 + 1.4(0.6 - 0.01x)^3
+    # 30% slower, 9% faster at lvl 0/100
+    # no effect around lvl 60
+    curve: !type:CubicSkillCurve
+      skillOffset: 0.6
+      skillScale: -1 # decrease with skill rather than increase
+      curveOffset: 1 # multiplying time so has to be centered at 1
+      curveScale: 1.4
+
+- type: entity
+  parent: BaseMedicalKnowledge
+  id: ChemistryKnowledge
+  name: Chemistry
+  components:
+  - type: Knowledge
+    experienceCost: 15

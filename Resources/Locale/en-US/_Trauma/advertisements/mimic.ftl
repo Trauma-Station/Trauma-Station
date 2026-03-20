@@ -1,0 +1,14 @@
+advertisement-mimic-1 = I'm so hungry.
+advertisement-mimic-2 = Come purchase from me.
+advertisement-mimic-3 = Consume of my flesh.
+advertisement-mimic-4 = I can be trusted.
+advertisement-mimic-5 = I love you.
+advertisement-mimic-6 = I LOVE YOU.
+advertisement-mimic-7 = I LOVE YOU!!!
+advertisement-mimic-8 = Its been so long since I last ate.
+advertisement-mimic-9 = Bring me to security.
+advertisement-mimic-10 = Bring me to medical.
+advertisement-mimic-11 = Bring me to the captain.
+advertisement-mimic-12 = I serve man.
+advertisement-mimic-13 = I like the way your skin sits on your body.
+advertisement-mimic-14 = HELP ME!!!

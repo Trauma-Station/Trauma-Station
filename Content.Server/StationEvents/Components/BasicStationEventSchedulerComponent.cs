@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityTable.EntitySelectors;
 
@@ -21,6 +12,12 @@ public sealed partial class BasicStationEventSchedulerComponent : Component
     /// </summary>
     [DataField]
     public float MinimumTimeUntilFirstEvent = 200;
+
+    /// <summary>
+    /// How much additional time it may take for a GameRule to first start.
+    /// </summary>
+    [DataField]
+    public float MaximumSpanUntilFirstEvent = 120;
 
     /// <summary>
     /// The minimum and maximum time between rule starts in seconds.

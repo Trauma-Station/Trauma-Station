@@ -5,7 +5,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Store;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Goobstation.Heretic.Components;
 
@@ -16,8 +18,13 @@ public sealed partial class EldritchInfluenceDrainerComponent : Component
     public float Time = 8f;
 
     [DataField]
-    public float KnowledgePerInfluence = 2f;
+    public bool Hidden;
 
     [DataField]
-    public bool Hidden;
+    public Dictionary<int, ProtoId<StoreCategoryPrototype>> TierToCategory = new()
+    {
+        { 1, "HereticPathSideT1" },
+        { 2, "HereticPathSideT2" },
+        { 3, "HereticPathSideT3" },
+    };
 }

@@ -56,15 +56,6 @@
 
 - type: entity
   parent: MonkeyCube
-  id: HarpyCube
-  name: harpy cube
-  components:
-  - type: Rehydratable
-    possibleSpawns:
-    - MobHarpyRandom
-
-- type: entity
-  parent: MonkeyCube
   id: ReptilianCube
   name: reptilian person cube
   components:

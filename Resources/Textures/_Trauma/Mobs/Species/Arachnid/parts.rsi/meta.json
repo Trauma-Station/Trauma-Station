@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from SS14 at https://github.com/space-wizards/space-station-14/blob/e9f8042e07c137d0106bc1eea9109ce2bd22db8e/Resources/Textures/Mobs/Customization/Arachnid/appendages.rsi/meta.json and modified by @deltanedas (github)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "wings"
+        }
+    ]
+}

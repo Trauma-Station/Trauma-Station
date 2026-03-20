@@ -32,8 +32,10 @@
     allowedStates:
     - Critical
     damage:
-      groups:
-        Brute: -15
+      types:
+        Blunt: -5
+        Slash: -5
+        Piercing: -5
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
@@ -75,8 +77,6 @@
     price: 1000
   - type: NoSlip
   - type: Fauna # Lavaland Change
-  - type: CombatPower # Goobstation
-    factor: 0.5 # times more dangerous than a crew-member
 
 - type: entity
   name: gunbot
@@ -154,8 +154,6 @@
   - type: CombatMode
   - type: NoSlip
   - type: Fauna # Lavaland Change
-  - type: CombatPower # Goobstation
-    factor: 1 # times more dangerous than a crew-member
 
 - type: entity
   id: GunBot
@@ -193,8 +191,6 @@
     soundGunshot: /Audio/Weapons/Guns/Gunshots/mateba.ogg
   - type: StaticPrice
     price: 3000
-  - type: CombatPower # Goobstation
-    factor: 2 # times more dangerous than a crew-member
   - type: Destructible
     thresholds:
       - trigger:

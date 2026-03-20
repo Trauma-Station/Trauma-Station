@@ -1,18 +1,16 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: construction
   id: WebCocoon
   graph: WebCocoon
   startNode: start
   targetNode: end
   category: construction-category-tools
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
+  # <Trauma>
+  theory:
+    SpiderCraftKnowledge: 2
+  practical:
+    SpiderCraftKnowledge: 3
+  # </Trauma>
 
 - type: construction
   id: ClothingNeckClassicPonchoWeb
@@ -20,10 +18,13 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
+  # <Trauma>
+  theory:
+    SpiderCraftKnowledge: 2
+  practical:
+    SpiderCraftKnowledge: 3
+  # </Trauma>
 
 - type: construction
   id: ClothingNeckPonchoWeb
@@ -31,10 +32,13 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
+  # <Trauma>
+  theory:
+    SpiderCraftKnowledge: 2
+  practical:
+    SpiderCraftKnowledge: 3
+  # </Trauma>
 
 - type: construction
   id: ClothingNeckCloakWeb
@@ -42,7 +46,10 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
+  # <Trauma>
+  theory:
+    SpiderCraftKnowledge: 2
+  practical:
+    SpiderCraftKnowledge: 3
+  # </Trauma>

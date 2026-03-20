@@ -4,6 +4,29 @@
   abstract: true
   name: lathe
   components:
+  # <Trauma>
+  - type: Speech
+    speechSounds: Lathe
+  - type: AutomationSlots
+    slots:
+    - !type:AutomatedMaterialStorage
+      input: AutomationSlotMaterials
+      output: null
+    - !type:AutomatedPorts
+      sinks:
+      - LathePrint
+  - type: LatheAutomation
+  - type: SpamEmitSound # random lathe sounds
+    minInterval: 300
+    maxInterval: 900
+    sound:
+      collection: RandomLatheSounds
+      params:
+        volume: -12 # Ambient
+        maxDistance: 10
+        variation: 0.05
+  - type: SpamEmitSoundRequirePower
+  # </Trauma>
   - type: Appearance
   - type: WiresVisuals
   - type: Fixtures
@@ -49,27 +72,11 @@
     price: 800
   - type: ResearchClient
   - type: TechnologyDatabase
-  - type: Speech # Goobstation - Lathe message on recipes update
-    speechSounds: Lathe
-  - type: AutomationSlots # Goobstation
-    slots:
-    - !type:AutomatedMaterialStorage
-      input: AutomationSlotMaterials
-      output: null
-    - !type:AutomatedPorts
-      sinks:
-      - LathePrint
-  - type: LatheAutomation # Goobstation
-  - type: SpamEmitSound # Goobstation - random lathe sounds
-    minInterval: 300
-    maxInterval: 900
-    sound:
-      collection: RandomLatheSounds
-      params:
-        volume: -12 # Ambient
-        maxDistance: 10
-        variation: 0.05
-  - type: SpamEmitSoundRequirePower # Goobstation
+  - type: ApcPowerReceiver
+    powerLoad: 150
+  - type: PowerState
+    idlePowerDraw: 150
+    workingPowerDraw: 1000
 
 # a lathe that can be sped up with space lube / slowed down with glue
 - type: entity
@@ -246,8 +253,10 @@
     - ConstructionBagOfHolding
     # Einstein Engines Packs
     - Translators
-    # Botany Trauma
-    - BotanyTrauma # Trauma
+    # <Trauma>
+    - BotanyTrauma
+    - TraumaScienceClothing
+    # </Trauma>
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo
@@ -463,6 +472,8 @@
   - type: Lathe
     idleState: icon
     runningState: icon
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
     staticPacks:
     - SecurityEquipmentStatic
     - SecurityPracticeStatic
@@ -532,6 +543,8 @@
     - type: Lathe
       idleState: icon
       runningState: icon
+      unlitIdleState: unlit
+      unlitRunningState: unlit-building
       staticPacks:
       - SecurityAmmoStatic
     - type: EmagLatheRecipes
@@ -566,6 +579,8 @@
   - type: Lathe
     idleState: icon
     runningState: icon
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
     staticPacks:
     - TopicalsStatic
     - ChemistryStatic

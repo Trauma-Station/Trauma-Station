@@ -1,0 +1,35 @@
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipQuartermaster
+  name: skill chip (QM)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
+      MeleeKnowledge: 26
+      # TODO: piloting and probably mech
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipCargoTechnician
+  name: skill chip (cargo)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
+      # TODO: piloting
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipSalvageSpecialist
+  name: skill chip (salvage)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
+      MeleeKnowledge: 26
+      AthleticsKnowledge: 26
+      # TODO: (low?) piloting

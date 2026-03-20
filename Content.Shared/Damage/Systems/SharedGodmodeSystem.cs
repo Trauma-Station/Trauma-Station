@@ -1,11 +1,6 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared.Body;
+// </Trauma>
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Destructible;
@@ -14,7 +9,6 @@ using Content.Shared.Prototypes;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Slippery;
 using Content.Shared.StatusEffect;
-using Content.Shared.Body.Systems; // Shitmed Change
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Prototypes;
@@ -23,10 +17,10 @@ namespace Content.Shared.Damage.Systems;
 
 public abstract class SharedGodmodeSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly BodySystem _body = default!;
+    // </Trauma>
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-
-    [Dependency] private readonly SharedBodySystem _bodySystem = default!; // Shitmed Change
 
     public override void Initialize()
     {
@@ -80,13 +74,6 @@ public abstract class SharedGodmodeSystem : EntitySystem
 
     public virtual void EnableGodmode(EntityUid uid, GodmodeComponent? godmode = null)
     {
-        godmode ??= EnsureComp<GodmodeComponent>(uid);
-
-        if (TryComp<DamageableComponent>(uid, out var damageable))
-        {
-            godmode.OldDamage = new DamageSpecifier(damageable.Damage);
-        }
-
         // Rejuv to cover other stuff
         RaiseLocalEvent(uid, new RejuvenateEvent());
     }
@@ -96,15 +83,10 @@ public abstract class SharedGodmodeSystem : EntitySystem
         if (!Resolve(uid, ref godmode, false))
             return;
 
-        if (godmode.OldDamage != null)
-        {
-            _damageable.SetDamage(uid, godmode.OldDamage);
-        }
-
         RemComp<GodmodeComponent>(uid);
 
-        foreach (var (id, _) in _bodySystem.GetBodyChildren(uid)) // Shitmed Change
-            DisableGodmode(id);
+        foreach (var organ in _body.GetOrgans(uid)) // Shitmed Change
+            DisableGodmode(organ);
     }
 
     /// <summary>

@@ -4,10 +4,12 @@
   description: job-description-intern
   playTimeTracker: JobMedicalIntern
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 5h
-      inverted: true # stop playing intern if you're good at med!
+    - !type:OverallPlaytimeRequirement # Trauma
+      time: 1h
+    # - !type:DepartmentTimeRequirement # Trauma
+    #   department: Medical
+    #   time: 5h
+    #   inverted: true # stop playing intern if you're good at med!
   startingGear: MedicalInternGear
   icon: "JobIconMedicalIntern"
   supervisors: job-supervisors-medicine
@@ -15,15 +17,16 @@
   - MedicalDoctor
   - Cloning
   - Medicine
-  goobcoins: 20 #Goob content
   access:
   - Medical
   - Maintenance
-  special: # Trauma
+  # <Trauma>
+  special:
   - !type:AddComponentSpecial
     components:
     - type: SurgerySpeedModifier
       speedModifier: 1.25
+  # </Trauma>
 
 - type: startingGear
   id: MedicalInternGear
@@ -31,11 +34,7 @@
     shoes: ClothingShoesColorWhite
     id: MedicalInternPDA
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalFilled
     pocket2: BookMedicalReferenceBook
-  #storage:
-    #back:
-    #- Stuff
 
 - type: chameleonOutfit
   id: MedicalInternChameleonOutfit

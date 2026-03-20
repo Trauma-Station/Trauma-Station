@@ -1,10 +1,4 @@
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Numerics;
-using Content.Goobstation.Common.Footprints;
 using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -17,6 +11,7 @@ using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Fluids;
 
@@ -35,6 +30,7 @@ public abstract class SharedAbsorbentSystem : EntitySystem
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -65,6 +61,10 @@ public abstract class SharedAbsorbentSystem : EntitySystem
 
     private void OnAbsorbentSolutionChange(Entity<AbsorbentComponent> ent, ref SolutionContainerChangedEvent args)
     {
+        // The changes are already networked as part of the same game state.
+        if (_timing.ApplyingState)
+            return;
+
         if (!SolutionContainer.TryGetSolution(ent.Owner, ent.Comp.SolutionName, out _, out var solution))
             return;
 
@@ -284,7 +284,7 @@ public abstract class SharedAbsorbentSystem : EntitySystem
         var (_, absorber, useDelay) = absorbEnt;
 
         Solution puddleSplit;
-        var isRemoved = false;
+        //var isRemoved = false; // Trauma - no longer used
         if (absorber.UseAbsorberSolution)
         {
             // No reason to mop something that 1) can evaporate, 2) is an absorber, and 3) is being mopped with
@@ -339,7 +339,7 @@ public abstract class SharedAbsorbentSystem : EntitySystem
                 // Spawn a *sparkle*
                 PredictedSpawnAttachedTo(absorber.MoppedEffect, Transform(target).Coordinates);
                 PredictedQueueDel(target);
-                isRemoved = true;
+                //isRemoved = true; // Trauma - no longer used
             }
         }
 
@@ -358,8 +358,6 @@ public abstract class SharedAbsorbentSystem : EntitySystem
         localPos = userXform.LocalRotation.RotateVec(localPos);
 
         _melee.DoLunge(user, absorbEnt, Angle.Zero, localPos, null, Angle.Zero, false);
-
-        RaiseLocalEvent(target, new FootprintCleanEvent()); // Corvax-Next-Footprints
 
         return true;
     }

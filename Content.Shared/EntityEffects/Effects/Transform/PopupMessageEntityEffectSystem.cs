@@ -1,3 +1,4 @@
+using Content.Shared.IdentityManagement; // Trauma
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
@@ -21,7 +22,7 @@ public sealed partial class PopupMessageEntityEffectSystem : EntityEffectSystem<
         if (_net.IsClient)
             return;
 
-        var msg = Loc.GetString(_random.Pick(args.Effect.Messages), ("entity", entity));
+        var msg = Loc.GetString(_random.Pick(args.Effect.Messages), ("entity", Identity.Entity(entity, EntityManager))); // Trauma - don't doxx from popups
 
         switch ((args.Effect.Method, args.Effect.Type))
         {

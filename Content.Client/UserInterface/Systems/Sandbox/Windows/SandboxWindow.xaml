@@ -1,18 +1,9 @@
-<!--
-SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 SpaceManiac <tad@platymuus.com>
-SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <windows:SandboxWindow
     xmlns="https://spacestation14.io"
     xmlns:windows="clr-namespace:Content.Client.UserInterface.Systems.Sandbox.Windows"
     Title="{Loc sandbox-window-title}"
     Resizable="False">
-    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+    <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="Buttons" Access="Public"> <!-- Trauma - Name + Access -->
         <Label Text="{Loc sandbox-window-map-editing-label}"/>
         <Button Name="SpawnTilesButton" Access="Public" Text="{Loc sandbox-window-spawn-tiles-button}"/>
         <Button Name="SpawnEntitiesButton" Access="Public" Text="{Loc sandbox-window-spawn-entities-button}"/>
@@ -21,6 +12,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <Label Text="{Loc sandbox-window-visibility-label}"/>
         <Button Name="ToggleLightButton" Access="Public" Text="{Loc sandbox-window-toggle-lights-button}" ToggleMode="True"/>
         <Button Name="ToggleFovButton" Access="Public" Text="{Loc sandbox-window-toggle-fov-button}" ToggleMode="True"/>
+        <Button Name="ToggleThermalVisionButton" Access="Public" Text="{Loc sandbox-window-toggle-thermal-vision}" ToggleMode="True"/>
         <Button Name="ToggleShadowsButton" Access="Public" Text="{Loc sandbox-window-toggle-shadows-button}" ToggleMode="True"/>
         <Button Name="ToggleSubfloorButton" Access="Public" Text="{Loc sandbox-window-toggle-subfloor-button}" ToggleMode="True"/>
         <Button Name="AiOverlayButton" Access="Public" Text="{Loc sandbox-window-ai-overlay-button}" ToggleMode="True"/>

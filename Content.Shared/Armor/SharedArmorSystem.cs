@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Medical.Common.Body;
+using Content.Shared.Localizations;
 using System.Linq;
 // </Trauma>
 using Content.Shared.Clothing.Components;
@@ -20,7 +20,6 @@ namespace Content.Shared.Armor;
 public abstract class SharedArmorSystem : EntitySystem
 {
     [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -55,10 +54,8 @@ public abstract class SharedArmorSystem : EntitySystem
             return;
 
         // <Goob>
-        if (args.Args.TargetPart == null)
+        if (args.Args.TargetPart is not {} partType)
             return;
-
-        var (partType, _) = _body.ConvertTargetBodyPart(args.Args.TargetPart);
 
         if (component.ArmorCoverage.Contains(partType))
             args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
@@ -109,13 +106,15 @@ public abstract class SharedArmorSystem : EntitySystem
 
         if (!component.ArmourCoverageHidden)
         {
-            foreach (var coveragePart in coverage.Where(coveragePart => coveragePart != BodyPartType.Other))
-            {
-                msg.PushNewline();
+            // <Trauma>
+            var coveredParts = coverage.Where(coveragePart => coveragePart != BodyPartType.Other).ToList();
+            List<string> coverageText = [];
+            foreach (var part in coveredParts)
+                coverageText.Add(Loc.GetString("armor-coverage-type-" + part.ToString().ToLower()));
 
-                var bodyPartType = Loc.GetString("armor-coverage-type-" + coveragePart.ToString().ToLower());
-                msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", bodyPartType)));
-            }
+            msg.PushNewline();
+            msg.AddMarkupOrThrow(Loc.GetString("armor-coverage-value", ("type", ContentLocalizationManager.FormatList(coverageText))));
+            // </Trauma>
         }
 
         if (!component.ArmourModifiersHidden)

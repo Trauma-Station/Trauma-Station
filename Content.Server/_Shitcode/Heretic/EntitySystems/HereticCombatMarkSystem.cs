@@ -13,7 +13,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Heretic;
-using Content.Server.Body.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Heretic;
@@ -28,7 +27,7 @@ using Content.Server._Shitcode.Heretic.EntitySystems.PathSpecific;
 using Content.Server.Heretic.Abilities;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Medical;
@@ -43,7 +42,6 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly ProtectiveBladeSystem _pbs = default!;
@@ -71,7 +69,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
         HereticCombatMarkComponent mark,
         string? path,
         EntityUid user,
-        HereticComponent heretic)
+        Entity<HereticComponent> heretic)
     {
         if (!base.ApplyMarkEffect(target, mark, path, user, heretic))
             return false;
@@ -98,7 +96,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
             case "Flesh":
                 {
-                    _ability.CreateFleshMimic(target, user, false, true, 50, null);
+                    _ability.CreateFleshMimic(target, user, heretic, false, true, 50, null);
                 }
                 break;
 
@@ -128,7 +126,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                     break;
 
                 var targetCoords = Transform(target).Coordinates;
-                _starMark.SpawnCosmicField(targetCoords, heretic.PathStage);
+                _starMark.SpawnCosmicField(targetCoords, heretic.Comp.PathStage, predicted: false);
 
                 if (Exists(cosmicMark.CosmicDiamondUid))
                 {
@@ -153,7 +151,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
         // transfers the mark to the next nearby person
         var look = _lookup.GetEntitiesInRange(target, 5f, flags: LookupFlags.Dynamic)
-            .Where(x => x != target && HasComp<HumanoidAppearanceComponent>(x) && !_heretic.IsHereticOrGhoul(x))
+            .Where(x => x != target && HasComp<HumanoidProfileComponent>(x) && !_heretic.IsHereticOrGhoul(x))
             .ToList();
         if (look.Count == 0)
             return true;

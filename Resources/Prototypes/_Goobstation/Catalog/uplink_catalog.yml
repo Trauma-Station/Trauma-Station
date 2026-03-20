@@ -329,28 +329,6 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
-#- type: listing - Trauma, need to be readable for how strong it is, read: northstars
-#  id: UplinkGlovesKnuckleDusters
-#  name: uplink-gloves-knuckleduster-name
-#  description: uplink-gloves-knuckleduster-desc
-#  icon: { sprite: _Goobstation/Clothing/Hands/Gloves/knuckleduster.rsi, state: syndicateknuckleduster }
-#  productEntity: ClothingHandsKnuckleDustersSyndicate
-#  cost:
-#    Telecrystal: 20
-#  categories:
-#  - UplinkWeaponry
-
-#- type: listing - Trauma, slop item
-#  id: UplinkSyndicateDisabler
-#  name: uplink-syndicate-disabler-name
-#  description: uplink-syndicate-disabler-desc
-#  icon: { sprite: _EinsteinEngines/Objects/Weapons/Guns/Battery/syndicate-disabler.rsi, state: base }
-#  productEntity: WeaponDisablerSyndicate
-#  cost:
-#    Telecrystal: 20
-#  categories:
-#  - UplinkWeaponry
-
 - type: listing
   id: UplinkFireAxeFlaming
   name: uplink-fire-axe-flaming-name
@@ -567,7 +545,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Chaplain
-  saleLimit: 1
 
 
 - type: listing
@@ -713,6 +690,23 @@
   - !type:BuyerJobCondition
     whitelist:
     - Passenger
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: UplinkAdvMimery
+  name: uplink-adv-mimery-name
+  description: uplink-adv-mimery-desc
+  icon: { sprite: _Goobstation/Objects/Misc/bookmime.rsi, state: icon }
+  productEntity: BoxAdvMimery
+  cost:
+    Telecrystal: 50
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Mime
   - !type:ListingLimitedStockCondition
     stock: 1
 
@@ -1046,28 +1040,6 @@
   - UplinkAmmo
 
 - type: listing
-  id: UplinkMagazineShotgun
-  name: uplink-shotgun-magazine-name
-  description: uplink-shotgun-magazine-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
-  productEntity: MagazineShotgun
-  cost:
-    Telecrystal: 5
-  categories:
-  - UplinkAmmo
-
-- type: listing
-  id: UplinkMagazineShotgunSlug
-  name: uplink-shotgun-magazine-slug-name
-  description: uplink-shotgun-magazine-slug-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
-  productEntity: MagazineShotgunSlug
-  cost:
-    Telecrystal: 4 # So little total damage
-  categories:
-  - UplinkAmmo
-
-- type: listing
   id: UplinkMagazineLightRifleBox
   name: uplink-l6-box-name
   description: uplink-l6-box-desc
@@ -1345,19 +1317,19 @@
   categories:
   - UplinkDeception
 
-# - type: listing
-#   id: UplinkHoloCigar
-#   name: uplink-holo-cigar-name
-#   description: uplink-holo-cigar-desc
-#   productEntity: HoloCigar
-#   cost:
-#     Telecrystal: 35
-#   categories:
-#   - UplinkWearables
-#   conditions:
-#   - !type:BuyerSpeciesCondition
-#     whitelist:
-#     - Human
+- type: listing
+  id: UplinkHoloCigar
+  name: uplink-holo-cigar-name
+  description: uplink-holo-cigar-desc
+  productEntity: HoloCigar
+  cost:
+    Telecrystal: 5 # was 35, if you ever make it a non meme item raise it back and remove from emagged cig vendor
+  categories:
+  - UplinkWearables
+  conditions:
+  - !type:BuyerSpeciesCondition
+    whitelist:
+    - Human
 
 - type: listing
   id: UplinkUndeterminedBundle

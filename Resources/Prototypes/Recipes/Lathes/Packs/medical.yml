@@ -87,6 +87,7 @@
   - ChemMasterMachineCircuitboard
   - CondenserMachineCircuitBoard
   - HotplateMachineCircuitboard
+  - EnergyChemDispenserMachineCircuitboard #Goob edit - all things that get base med boards get E-Chem
 
 ## Dynamic
 
@@ -105,9 +106,10 @@
   #- AdvancedJetInjector # Trauma - le quirky syringe
 
 - type: latheRecipePack
+  parent:
+  - TraumaMedicalBoards # Trauma
   id: MedicalBoards
   recipes:
   - StasisBedMachineCircuitboard
   - CryoPodMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
-  - StasisOperatingTableCircuitboard # Corvax-Goob-StasisOperatingTable

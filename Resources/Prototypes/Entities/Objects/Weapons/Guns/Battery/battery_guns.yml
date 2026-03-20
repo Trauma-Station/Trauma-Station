@@ -52,10 +52,6 @@
       collection: MetalThud # Goobstation ^
   - type: BatteryDrinkerSource # Goobstation - Energycrit
     maxAmount: 180 # you probably don't want to drain your entire gun charging in battle
-  - type: Multishot # Goobstation V
-    missChance: 0.4
-    spreadMultiplier: 3
-    spreadAddition: 40
 
 - type: entity
   parent: [BaseWeaponBattery, BaseGunWieldable]
@@ -199,10 +195,6 @@
     wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
     soundHit:
       collection: MetalThud # Goobstation ^
-  - type: Multishot # Goobstation V
-    missChance: 0.4
-    spreadMultiplier: 2
-    spreadAddition: 40
 
 - type: entity
   name: svalinn laser pistol
@@ -727,8 +719,9 @@
     - Security
     - Antagonists
   - type: PacifismAllowedGun
-  - type: MartialArtBlocked # Trauma
-    form: CorporateJudo
+  - type: KnowledgeGrantOnWear # Trauma - Knowledge
+    blocked:
+      MartialArtCorporateJudo: true
   # Goobstation start
   - type: Tag
     tags:
@@ -973,10 +966,9 @@
 
 
 - type: entity
-  name: experimental C.H.I.M.P. handcannon
   parent: [WeaponPistolCHIMP, BaseSyndicateContraband]
   id: WeaponPistolCHIMPUpgraded
-  description: This C.H.I.M.P. seems to have a greater punch than usual...
+  suffix: Syndicate
   components:
   - type: BatteryWeaponFireModes
     fireModes:
@@ -1184,6 +1176,14 @@
   parent: [WeaponAdvancedLaser, BaseXenoborgContraband]
   id: WeaponLaserGunXenoborg
   name: xenoborg laser gun
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/xenoborg_laser_gun.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-unshaded-4
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
 
 - type: entity
   parent: [WeaponLaserCannon, BaseXenoborgContraband]

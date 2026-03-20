@@ -1,8 +1,10 @@
 entity-effect-popup-crucified = {CAPITALIZE($entity)} has been crucified!
 entity-effect-popup-mothmaggot-matured = {CAPITALIZE(THE($entity))} rapidly shifts and changes!
+entity-effect-popup-mothmaggot-maturing = You will mature into a mothroach in {$delay} seconds...
 entity-effect-popup-make-felinid = {CAPITALIZE($entity)} turned into a disgusting felinid!
 entity-effect-popup-revert-felinid = {CAPITALIZE($entity)} turned back to normal...
 entity-effect-popup-heart-stops = Your heart stops beating!
+entity-effect-popup-convoke-void = {$entity} is dragged into the void, leaving a hole in {POSS-ADJ($entity)} place!
 
 entity-condition-popup-not-vox-raider = {$self ->
     [true] You aren't

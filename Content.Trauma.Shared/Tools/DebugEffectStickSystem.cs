@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Administration;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Database;
+using Content.Shared.EntityEffects;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
@@ -15,7 +17,7 @@ public sealed class DebugEffectStickSystem : EntitySystem
     [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ISharedAdminManager _admin = default!;
-    [Dependency] private readonly NestedEffectSystem _nested = default!;
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
@@ -69,10 +71,8 @@ public sealed class DebugEffectStickSystem : EntitySystem
 
         _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{ToPrettyString(user)} used DEBUG EFFECT STICK {ToPrettyString(ent)} on {ToPrettyString(target)} with effect {effect}");
 
-        _data.SetUser(target, user);
         _data.SetTool(target, ent);
-        _nested.ApplyNestedEffect(target, effect);
-        _data.ClearUser(target);
+        _effects.TryApplyEffect(target, effect, user: user);
         _data.ClearTool(target);
     }
 

@@ -1,0 +1,86 @@
+- type: combo
+  id: JudoDiscombobulate
+  attacks:
+  - Grab
+  - Disarm
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-discombobulate
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 10
+  levelRequired: 0
+
+- type: combo
+  id: JudoEyePoke
+  attacks:
+  - Disarm
+  - Harm
+  - Harm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-eyepoke # isnt this more of a krav thing? judo is all grappling
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
+  levelRequired: 0
+
+- type: combo
+  id: JudoThrow
+  attacks:
+  - Grab
+  - Grab
+  - Disarm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-throw
+  opponentEffects:
+  - !type:ModifyParalysis
+    time: 4
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
+  - !type:TakeStaminaDamage
+    amount: 5
+  levelRequired: 0
+
+- type: combo
+  id: JudoArmbar
+  attacks:
+  - Disarm
+  - Harm
+  - Grab
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-armbar
+  opponentEffects:
+  - !type:ModifyParalysis
+    time: 5
+  - !type:TakeStaminaDamage
+    amount: 10
+  levelRequired: 0
+
+- type: combo
+  id: JudoWheelThrow
+  attacks:
+  - Grab
+  - Disarm
+  - Harm
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - judo-wheelthrow
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 120
+  levelRequired: 0

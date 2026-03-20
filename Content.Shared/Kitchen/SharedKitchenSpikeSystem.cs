@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Kitchen;
+// </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -239,7 +242,7 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
                 ent);
 
             // normally medium severity, but for humanoids high severity, so new players get relay'd to admin alerts.
-            var logSeverity = HasComp<HumanoidAppearanceComponent>(args.Target) ? LogImpact.High : LogImpact.Medium;
+            var logSeverity = HasComp<HumanoidProfileComponent>(args.Target) ? LogImpact.High : LogImpact.Medium;
 
             _logger.Add(LogType.Action,
                 logSeverity,
@@ -282,6 +285,16 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
             return;
 
         var victimIdentity = Identity.Entity(args.Target.Value, EntityManager);
+        // <Trauma> - lets the target mob prevent being butchered
+        var target = args.Target.Value; // 3 month old shitcode award
+        var attemptEv = new ButcherAttemptEvent();
+        RaiseLocalEvent(target, ref attemptEv);
+        if (attemptEv.CancelPopup is {} loc)
+        {
+            _popupSystem.PopupClient(Loc.GetString(loc, ("victim", victimIdentity)), target, args.User);
+            return;
+        }
+        // </Trauma>
 
         _popupSystem.PopupPredicted(Loc.GetString("comp-kitchen-spike-butcher-self", ("victim", victimIdentity)),
             Loc.GetString("comp-kitchen-spike-butcher", ("user", Identity.Entity(args.User, EntityManager)), ("victim", victimIdentity)),
@@ -290,10 +303,7 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
             PopupType.MediumCaution);
 
         // Get a random entry to spawn.
-        // TODO: Replace with RandomPredicted once the engine PR is merged
-        var seed = SharedRandomExtensions.HashCodeCombine((int)_gameTiming.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
-
+        var rand = SharedRandomExtensions.PredictedRandom(_gameTiming, GetNetEntity(ent));
         var index = rand.Next(butcherable.SpawnedEntities.Count);
         var entry = butcherable.SpawnedEntities[index];
 
@@ -319,7 +329,7 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
         {
             _gibbing.Gib(args.Target.Value);
 
-            var logSeverity = HasComp<HumanoidAppearanceComponent>(args.Target) ? LogImpact.Extreme : LogImpact.High;
+            var logSeverity = HasComp<HumanoidProfileComponent>(args.Target) ? LogImpact.Extreme : LogImpact.High;
 
             _logger.Add(LogType.Gib,
                 logSeverity,

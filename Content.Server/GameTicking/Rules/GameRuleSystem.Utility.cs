@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Server.Station.Systems;
 using Content.Shared.Maps;
-using System.Linq;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;

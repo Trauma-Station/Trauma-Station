@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
@@ -95,7 +90,7 @@ public sealed class DormNotifier : EntitySystem
 
     private void CheckMarker(EntityUid uid, DormNotifierMarkerComponent comp)
     {
-        var ents = _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(uid).Coordinates, comp.ProximityRadius);
+        var ents = _lookup.GetEntitiesInRange<HumanoidProfileComponent>(Transform(uid).Coordinates, comp.ProximityRadius);
         var found = Validate(uid, ents, out var condemned);
 
         if (found)
@@ -104,9 +99,9 @@ public sealed class DormNotifier : EntitySystem
         }
     }
 
-    private bool Validate(EntityUid marker, HashSet<Entity<HumanoidAppearanceComponent>> entities, [NotNullWhen(true)] out HashSet<EntityUid> condemned)
+    private bool Validate(EntityUid marker, HashSet<Entity<HumanoidProfileComponent>> entities, [NotNullWhen(true)] out HashSet<EntityUid> condemned)
     {
-        // "0. Mobs in proximity must be humanoid" is handled by Entity<HumanoidAppearanceComponent>
+        // "0. Mobs in proximity must be humanoid" is handled by Entity<HumanoidProfileComponent>
         condemned = [];
 
         // 1. X(>1) amount of humanoids are in a Y distance of tiles away from a marker
@@ -174,42 +169,34 @@ public sealed class DormNotifier : EntitySystem
 
     private void Recheck(Condemnation condemned, bool expedited = false)
     {
-        try
+        var sinners = new HashSet<Entity<HumanoidProfileComponent>>();
+        foreach (var con in condemned.Condemned)
         {
-            var sinners = condemned.Condemned
-                .Select(con => new Entity<HumanoidAppearanceComponent>(con, Comp<HumanoidAppearanceComponent>(con)))
-                .ToHashSet();
-
-            bool valid = Validate(condemned.Marker, sinners, out _);
-
-            if (!valid)
-            {
-                RemovePotentialCondemned(condemned);
-                return;
-            }
+            if (TryComp<HumanoidProfileComponent>(con, out var humanoid))
+                sinners.Add((con, humanoid));
         }
-        catch (KeyNotFoundException e)
+
+        bool valid = Validate(condemned.Marker, sinners, out _);
+
+        if (!valid)
         {
-            Log.Warning("Entity didn't have HumanoidAppearanceComponent");
+            RemovePotentialCondemned(condemned);
+            return;
         }
 
         var current = DetermineExpedited(condemned.Condemned);
 
-        // It was expedited
-        if (expedited)
+        // It was expedited, but isn't now
+        if (expedited && !current)
         {
-            // But isn't now.
-            if (!current)
+            if (_timeout > _timeoutExpedited)
             {
-                if (_timeout > _timeoutExpedited)
-                {
-                    QueueRecheck(TimeSpan.FromSeconds(_timeout - _timeoutExpedited), condemned);
-                    return;
-                }
-
-                Log.Warning("DormNotifierPresenceTimeoutNude is larger than DormNotifierPresenceTimeout!");
+                QueueRecheck(TimeSpan.FromSeconds(_timeout - _timeoutExpedited), condemned);
                 return;
             }
+
+            Log.Warning("DormNotifierPresenceTimeoutNude is larger than DormNotifierPresenceTimeout!");
+            return;
         }
 
         // If it wasn't expedited, but is now - oh well.

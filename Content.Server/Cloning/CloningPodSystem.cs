@@ -1,10 +1,7 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Goobstation.Common.Cloning; // Goobstation
+// <Trauma>
+using Content.Goobstation.Common.Cloning;
+using Content.Shared._EinsteinEngines.Silicon.Components;
+// </Trauma>
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Systems;
 using Content.Server.Cloning.Components;
@@ -14,10 +11,8 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Materials;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Atmos;
 using Content.Shared.CCVar;
-using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Cloning;
 using Content.Shared.Chat;
@@ -39,6 +34,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server.Cloning;
 
@@ -49,7 +45,7 @@ public sealed class CloningPodSystem : EntitySystem
     [Dependency] private readonly EuiManager _euiManager = null!;
     [Dependency] private readonly CloningConsoleSystem _cloningConsoleSystem = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
+    //[Dependency] private readonly MobStateSystem _mobStateSystem = default!; // Trauma - now unused
     [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
@@ -64,6 +60,7 @@ public sealed class CloningPodSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly CloningSystem _cloning = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     // Goobstation - killed
     //public readonly Dictionary<MindComponent, EntityUid> ClonesWaitingForMind = new();
@@ -98,6 +95,7 @@ public sealed class CloningPodSystem : EntitySystem
         var query = EntityQueryEnumerator<BeingClonedComponent, MindContainerComponent>();
         var found = false;
         EntityUid mob;
+
         while (query.MoveNext(out mob, out var cloned, out var mc))
         {
             if (cloned.Mind == mind && mc.Mind == null)
@@ -216,7 +214,7 @@ public sealed class CloningPodSystem : EntitySystem
 
         // genetic damage checks
         if (TryComp<DamageableComponent>(bodyToClone, out var damageable) &&
-            damageable.Damage.DamageDict.TryGetValue("Cellular", out var cellularDmg))
+            _damageable.GetAllDamage((bodyToClone, damageable)).DamageDict.TryGetValue("Cellular", out var cellularDmg))
         {
             var chance = Math.Clamp((float)(cellularDmg / 100), 0, 1);
             chance *= failChanceModifier;

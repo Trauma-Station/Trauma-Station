@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server._White.GameTicking.Rules;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Nuke;

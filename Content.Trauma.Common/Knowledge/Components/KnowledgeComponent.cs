@@ -1,0 +1,97 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Trauma.Common.Knowledge.Prototypes;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+
+namespace Content.Trauma.Common.Knowledge.Components;
+
+/// <summary>
+/// Stores information about a set of knowledge units, assigned
+/// to a dummy entity that is parented to some entity with <see cref="KnowledgeContainerComponent"/>, usually a brain.
+/// </summary>
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, EntityCategory("Knowledge")]
+public sealed partial class KnowledgeComponent : Component
+{
+    /// <summary>
+    /// Category of that knowledge.
+    /// </summary>
+    [DataField(required: true)]
+    public ProtoId<KnowledgeCategoryPrototype> Category;
+
+    /// <summary>
+    /// Current learned level of this knowledge from 0-100.
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public int LearnedLevel;
+
+    /// <summary>
+    /// Current Stored experience.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int Experience;
+
+    /// <summary>
+    /// Experience cost for one roll in the knowledge.
+    /// </summary>
+    [DataField]
+    public int ExperienceCost;
+
+    /// <summary>
+    /// If true, this knowledge will become permanent, unless a system removes them forcefully.
+    /// Used only for debug or admin abuse.
+    /// </summary>
+    [DataField]
+    public bool Unremoveable;
+
+    /// <summary>
+    /// If true, the knowledge won't get displayed in the Memory tab of the character menu.
+    /// </summary>
+    [DataField]
+    public bool Hidden;
+
+    /// <summary>
+    /// Color of the sidebar in the character UI.
+    /// </summary>
+    [DataField]
+    public Color Color = Color.White;
+
+    /// <summary>
+    /// Sprite to display in the character UI.
+    /// </summary>
+    [DataField]
+    public SpriteSpecifier? Sprite;
+
+    /// <summary>
+    /// Temporary levels that are granted by certain equipment and skillchips.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int TemporaryLevel;
+
+    /// <summary>
+    /// The combined learned + temporary levels.
+    /// </summary>
+    [ViewVariables]
+    public int NetLevel => Math.Clamp(LearnedLevel + TemporaryLevel, 0, 100);
+
+    /// <summary>
+    /// Temporary experience boosts that are granted by certain equipment.
+    /// </summary>
+    [DataField]
+    public int BonusExperience;
+
+    /// <summary>
+    /// Stores the next time this component will allow gaining XP.
+    /// </summary>
+    [DataField]
+    public TimeSpan TimeToNextExperience = TimeSpan.Zero;
+
+    /// <summary>
+    /// Array of point costs for each mastery level, including 0.
+    /// There are 6 of them total by default, removing will decrease the max mastery you can buy.
+    /// If this is null, you can't opt in to this knowledge.
+    /// </summary>
+    [DataField(required: true)]
+    public int[]? Costs = null;
+}

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -5,11 +7,9 @@ using Content.Shared.Fluids.Components;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.SlaughterDemon.Systems;
-
 
 /// <summary>
 /// This handles the blood crawl system.
@@ -20,10 +20,9 @@ public abstract class SharedBloodCrawlSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
 
     private EntityQuery<ActionsComponent> _actionQuery;
     private EntityQuery<PuddleComponent> _puddleQuery;
@@ -89,7 +88,7 @@ public abstract class SharedBloodCrawlSystem : EntitySystem
             if (!_puddleQuery.TryComp(entity, out var puddle))
                 continue;
 
-            if (!_solutionContainerSystem.ResolveSolution(entity, puddle.SolutionName, ref puddle.Solution, out var solution))
+            if (!_solution.ResolveSolution(entity, puddle.SolutionName, ref puddle.Solution, out var solution))
                 continue;
 
             foreach (var reagent in solution.Contents)

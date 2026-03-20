@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -60,9 +52,9 @@ public sealed class BlobObserverSystem : SharedBlobObserverSystem
 
     private ISawmill _logger = default!;
 
-    [ValidatePrototypeId<EntityPrototype>] private const string BlobCaptureObjective = "BlobCaptureObjective";
-    [ValidatePrototypeId<EntityPrototype>] private const string MobObserverBlobController = "MobObserverBlobController";
-    [ValidatePrototypeId<AlertPrototype>] private const string BlobHealth = "BlobHealth";
+    private static readonly EntProtoId BlobCaptureObjective = "BlobCaptureObjective";
+    private static readonly EntProtoId MobObserverBlobController = "MobObserverBlobController";
+    private static readonly ProtoId<AlertPrototype> BlobHealth = "BlobHealth";
 
     public override void Initialize()
     {

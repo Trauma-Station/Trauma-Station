@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -146,6 +143,6 @@ public sealed class SlaughterDemonObjectiveSystem : EntitySystem
 
     private int GetAllPlayers()
     {
-        return EntityQuery<HumanoidAppearanceComponent, ActorComponent>().Count();
+        return EntityQuery<HumanoidProfileComponent, ActorComponent>().Count();
     }
 }

@@ -1,0 +1,65 @@
+- type: combo
+  id: BearJaws
+  attacks:
+  - Harm
+  - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Effects/bite.ogg
+  - !type:PopupMessage
+    messages:
+    - spacebear-bearjaws
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Piercing: 5
+        Slash: 5 # TODO: DOUBLE DAMAGE WHEN KNOCKED DOWN AND GIVE 20 STAM TO USER ON KNOCKDOWN
+  levelRequired: 10 # No effort in biting a person.
+
+- type: combo
+  id: PawSlam
+  attacks:
+  - Disarm
+  - Harm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - spacebear-pawslam
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 10 # TODO: DOUBLE DAMAGE WHEN KNOCKED DOWN AND GIVE 2S SLOWDOWN
+  - !type:ModifyKnockdown
+    time: 4
+    drop: true
+  - !type:GenericStatusEffect
+    key: SlowedDown
+    time: 6
+  levelRequired: 26
+
+- type: combo
+  id: Smokey
+  attacks:
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+  - !type:PopupMessage
+    messages:
+    - spacebear-smokey
+  - !type:Extinguish # put it out
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Heat: 10
+  - !type:Flammable
+    multiplier: 4 # actually set on fire
+    multiplierOnExisting: 0.2 # It's powerful enough with just one.
+  - !type:Ignite
+  levelRequired: 51 # Skill involved.

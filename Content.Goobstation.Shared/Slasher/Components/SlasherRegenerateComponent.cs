@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -20,8 +22,8 @@ public sealed partial class SlasherRegenerateComponent : Component
     /// <summary>
     /// The reagent to inject
     /// </summary>
-    [DataField("reagent")]
-    public ProtoId<ReagentPrototype> Reagent = "slasherium";
+    [DataField]
+    public ProtoId<ReagentPrototype> Reagent = "Slasherium";
 
     /// <summary>
     /// How much reagent to inject

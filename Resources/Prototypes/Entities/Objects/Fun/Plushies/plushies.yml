@@ -50,6 +50,8 @@
     tags:
     - Payload
     - ClothMade
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: PlushieCosmicCult
 
 - type: entity
   parent: BasePlushie
@@ -1196,6 +1198,7 @@
       CottonBurger: MothPlushie
 
 - type: entity
+  abstract: true # Trauma - no ERP
   parent: BasePlushie
   id: PlushieVulp
   name: vulpkanin plushie

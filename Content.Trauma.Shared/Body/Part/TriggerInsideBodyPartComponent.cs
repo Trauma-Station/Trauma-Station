@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Trigger.Components.Triggers;
 using Robust.Shared.GameStates;
 
@@ -13,4 +14,11 @@ public sealed partial class TriggerInsideBodyPartComponent : BaseTriggerOnXCompo
 {
     [DataField]
     public TimeSpan Delay;
+
+    /// <summary>
+    /// Optional popup shown when you enter the bodypart.
+    /// Gets passed "delay" as <see cref="Delay"/>'s TotalSeconds.
+    /// </summary>
+    [DataField]
+    public LocId? Popup;
 }

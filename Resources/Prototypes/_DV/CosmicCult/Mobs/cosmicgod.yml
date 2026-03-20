@@ -49,6 +49,7 @@
        enabled: true
 
 - type: entity
+  categories: [ HideSpawnMenu ]
   parent: [MobCosmicGodBase, BaseMob]
   id: MobCosmicGod
   components:

@@ -9,10 +9,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 0
+  useQuality: false
 
 - type: construction
   id: RevPrintingPress
@@ -25,10 +24,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false
 
 - type: construction
   id: RevTelecommsWorkbench
@@ -41,10 +39,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false
 
 - type: construction
   id: RevTelesphere
@@ -57,10 +54,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false
 
 - type: construction
   id: Rev3DPrinter
@@ -73,10 +69,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false
 
 - type: construction
   id: RevBulletPress
@@ -89,10 +84,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false
 
 - type: construction
   id: RevMicroelectronicsAssembler
@@ -105,10 +99,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false
 
 - type: construction
   id: RevUniformPrinter
@@ -121,10 +114,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false
 
 - type: construction
   id: RevTechAnalyzer
@@ -137,10 +129,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false
 
 - type: construction
   id: RevTurretPistol
@@ -153,10 +144,11 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
 
 - type: construction
   id: RevTurretSMG
@@ -169,10 +161,11 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
 
 - type: construction
   id: RevPlasmaFoundry
@@ -185,7 +178,6 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false

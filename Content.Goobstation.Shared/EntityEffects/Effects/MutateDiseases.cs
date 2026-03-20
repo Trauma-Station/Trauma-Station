@@ -1,7 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Goobstation.Shared.Disease.Systems;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
@@ -27,7 +30,7 @@ public sealed class MutateDiseasesEffectSystem : EntityEffectSystem<DiseaseCarri
 
     protected override void Effect(Entity<DiseaseCarrierComponent> ent, ref EntityEffectEvent<MutateDiseases> args)
     {
-        foreach (var disease in ent.Comp.Diseases.ContainedEntities)
+        foreach (var disease in ent.Comp.Diseases.ContainedEntities.ToList())
         {
             var amt = args.Effect.MutationRate * args.Scale;
             _disease.MutateDisease(disease, amt);

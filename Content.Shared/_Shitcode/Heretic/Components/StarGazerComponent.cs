@@ -35,4 +35,7 @@ public sealed partial class StarGazerComponent : Component
 
     [DataField]
     public SoundSpecifier TeleportSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/cosmic_energy.ogg");
+
+    [DataField]
+    public EntProtoId InactiveStatus = "StarGazerInactiveStatusEffect";
 }

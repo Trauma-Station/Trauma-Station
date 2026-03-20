@@ -113,21 +113,13 @@
     duration: null
     earliestStart: 30
     minimumPlayers: 30
-    chaos:
-      Hostile: 40
-      Combat: 40
-      Death: 40
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 400
   - type: RuleGrids
   - type: LoadMapRule
-    gridPath: /Maps/_Goobstation/Shuttles/ShuttleEvent/Legionnaire.yml
+    gridPath: /Maps/_Trauma/Shuttles/ShuttleEvent/legionnaire.yml
   - type: AntagLoadProfileRule
     speciesOverrideBlacklist:
     - IPC
     - Diona
-    - Harpy
     - Plasmaman
   - type: AntagObjectives
     objectives:

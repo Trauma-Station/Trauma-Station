@@ -109,7 +109,7 @@
         Piercing: 2
         Radiation: 5
         Structural: 5
-      armorPenetration: 0.8
+      armorPenetration: 1
       woundSeverityMultipliers:
         Slash: 2.5
         Piercing: 2.5
@@ -123,7 +123,7 @@
         Piercing: 8
         Radiation: 15
         Structural: 10
-      armorPenetration: 0.8
+      armorPenetration: 1
   - type: Item
     size: Huge
   - type: Clothing
@@ -228,10 +228,7 @@
       - state: equipped-BACKPACK
       suitstorage:
       - state: equipped-BACKPACK
-  - type: Reflect
-    reflectProb: .3
-    slotFlags:
-      - NONE
+  - type: Parry
   - type: LightAttackDamageMultiplier
     multiplier: 3
     extraSound:

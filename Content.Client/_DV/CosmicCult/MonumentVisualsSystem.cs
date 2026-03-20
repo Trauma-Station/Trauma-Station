@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 AftrLite <61218133+AftrLite@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Client.GameObjects;
 using Content.Shared._DV.CosmicCult.Components;
 
@@ -29,24 +23,21 @@ public sealed class MonumentVisualizerSystem : EntitySystem
             return;
 
         args.Sprite.LayerMapTryGet(MonumentVisualLayers.TransformLayer, out var transformLayer);
+        args.Sprite.LayerMapTryGet(MonumentVisualLayers.FinaleLayer, out var finaleLayer);
         args.Sprite.LayerMapTryGet(MonumentVisualLayers.MonumentLayer, out var baseLayer);
         _appearance.TryGetData<bool>(ent, MonumentVisuals.Transforming, out var transforming, args.Component);
-        _appearance.TryGetData<bool>(ent, MonumentVisuals.Tier3, out var tier3, args.Component);
-
-        if (!tier3)
-            args.Sprite.LayerSetState(transformLayer, "transform-stage2");
-        else
-            args.Sprite.LayerSetState(transformLayer, "transform-stage3");
 
         if (transforming && HasComp<MonumentTransformingComponent>(ent))
         {
             args.Sprite.LayerSetAnimationTime(transformLayer, 0f);
             args.Sprite.LayerSetVisible(transformLayer, true);
+            args.Sprite.LayerSetVisible(finaleLayer, false);
             args.Sprite.LayerSetVisible(baseLayer, false);
         }
         else
         {
             args.Sprite.LayerSetVisible(transformLayer, false);
+            args.Sprite.LayerSetVisible(finaleLayer, true);
             args.Sprite.LayerSetVisible(baseLayer, true);
         }
     }

@@ -25,6 +25,7 @@
   - type: ContentEye
     maxZoom: 1.2, 1.2
   - type: Speech
+    speechSounds: CosmicSpeech
     speechVerb: Ghost
   - type: PointLight
     color: "#42a4ae"
@@ -45,7 +46,6 @@
        isLooped: true
        reverseWhenFinished: true
 
-### ASTRAL PROJECTION
 - type: entity
   parent: [ Incorporeal, BaseMob ]
   id: MobCosmicAstralProjection
@@ -73,7 +73,7 @@
     drawFov: false
     visMask:
     - Normal
-    - Ghost
+    - CosmicCultMonument
   - type: SSDIndicator
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
@@ -107,4 +107,52 @@
     channels:
     - CosmicRadio
   - type: Visibility
-    layer: 2 #ghost vis layer
+    layer: 32 #monument vis layer
+
+- type: entity
+  parent: [ Incorporeal, BaseMob ]
+  id: MobCosmicShatteredForm
+  name: shattered form
+  description: Separated from the body by a malign ritual, stuck between "here" and "there".
+  components:
+  - type: Input
+    context: "ghost"
+  - type: Spectral
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 6
+    baseSprintSpeed: 6
+  - type: Sprite
+    sprite: _DV/CosmicCult/Mobs/astralrogue.rsi
+    layers:
+    - state: base
+      shader: unshaded
+    drawdepth: Ghosts
+  - type: NoSlip
+  - type: Eye
+    drawFov: false
+  - type: SSDIndicator
+  - type: StatusIcon
+    bounds: -0.5,-0.5,0.5,0.5
+  - type: MindContainer
+  - type: MindExaminable
+  - type: Examiner
+  - type: Speech
+    enabled: false
+  - type: PointLight
+    color: "#42a4ae"
+    radius: 2
+    energy: 3.5
+    softness: 1
+    castShadows: false
+  - type: LightBehaviour
+    behaviours:
+     - !type:FadeBehaviour
+       interpolate: Linear
+       minDuration: 5.5
+       maxDuration: 5.5
+       startValue: 2
+       endValue: 3.5
+       property: Energy
+       enabled: true
+       isLooped: true
+       reverseWhenFinished: true

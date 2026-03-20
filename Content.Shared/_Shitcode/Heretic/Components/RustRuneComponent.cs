@@ -9,6 +9,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Shared._Shitcode.Heretic.SpriteOverlay;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -16,61 +17,46 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._Goobstation.Heretic.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class RustRuneComponent : Component
+[RegisterComponent, NetworkedComponent]
+public sealed partial class RustRuneComponent : BaseSpriteOverlayComponent
 {
-    /// <summary>
-    /// If there is no rusted wall sprite - add rust overlay.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool RustOverlay;
-
     [DataField]
     public ProtoId<TagPrototype> DiagonalTag = "Diagonal";
-
-    [DataField, AutoNetworkedField]
-    public Vector2 RuneOffset = Vector2.Zero;
 
     [DataField]
     public Vector2 DiagonalOffset = new(0.25f, -0.25f);
 
     [DataField]
-    public SpriteSpecifier DiagonalSprite =
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "rust_diagonal");
+    public string? SelectedRune;
 
     [DataField]
-    public SpriteSpecifier OverlaySprite =
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "rust_default");
+    public Vector2? SelectedOffset;
 
     [DataField]
-    public List<SpriteSpecifier> RuneSprites = new()
+    public List<string> RuneStates = new()
     {
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_1"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_2"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_3"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_4"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_5"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_6"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_7"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_8"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_9"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_10"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_11"),
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_12"),
+        "small_rune_1",
+        "small_rune_2",
+        "small_rune_3",
+        "small_rune_4",
+        "small_rune_5",
+        "small_rune_6",
+        "small_rune_7",
+        "small_rune_8",
+        "small_rune_9",
+        "small_rune_10",
+        "small_rune_11",
+        "small_rune_12",
     };
 
-    [DataField, AutoNetworkedField]
-    public int RuneIndex;
-
-    [DataField, AutoNetworkedField]
-    public bool AnimationEnded;
+    public override Enum Key { get; set; } = RustRuneKey.Key;
 
     [DataField]
-    public int LastFrame = 5;
+    public override SpriteSpecifier? Sprite { get; set; } =
+        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "small_rune_1");
 }
 
 public enum RustRuneKey : byte
 {
-    Rune,
-    Overlay,
+    Key
 }

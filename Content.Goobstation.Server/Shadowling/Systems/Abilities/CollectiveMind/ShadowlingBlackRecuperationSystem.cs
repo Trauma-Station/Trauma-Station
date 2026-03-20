@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.LightDetection;
@@ -36,7 +32,6 @@ public sealed class ShadowlingBlackRecuperationSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidAppearance = default!;
     [Dependency] private readonly LightDetectionDamageSystem _light = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
@@ -139,8 +134,10 @@ public sealed class ShadowlingBlackRecuperationSystem : EntitySystem
             var comps = _protoMan.Index(component.LesserSlingComponents);
             EntityManager.AddComponents(newUid.Value, comps);
 
-            if (TryComp<HumanoidAppearanceComponent>(newUid.Value, out var human))
+            /* TODO NUBODY: wait for an actual api :)
+            if (TryComp<HumanoidProfileComponent>(newUid.Value, out var human))
                 _humanoidAppearance.AddMarking(newUid.Value, component.MarkingId, Color.Red, true, true, human);
+            */
 
             Spawn(component.BlackRecuperationEffect, Transform(newUid.Value).Coordinates);
 

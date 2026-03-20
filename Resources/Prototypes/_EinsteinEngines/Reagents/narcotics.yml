@@ -12,16 +12,15 @@
   color: "#ffde7448"
   physicalDesc: reagent-physical-desc-translucent
   metabolisms:
-    Narcotic:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
       - !type:Emote
         emote: Yawn
         showInChat: true
         probability: 0.03
-      - !type:GenericStatusEffect
-        key: Drowsiness
-        component: Drowsiness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
         time: 2.5
         type: Add
       - !type:SuppressPain

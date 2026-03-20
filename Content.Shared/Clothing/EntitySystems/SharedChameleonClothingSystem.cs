@@ -14,7 +14,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Shared.Clothing.EntitySystems;
 

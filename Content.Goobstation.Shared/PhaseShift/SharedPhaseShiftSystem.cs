@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Pulling.Components;
@@ -51,6 +53,7 @@ public abstract class SharedPhaseShiftSystem : EntitySystem
 
         var stealth = EnsureComp<StealthComponent>(ent);
         _stealth.SetVisibility(ent, -1, stealth);
+        _stealth.SetRevealOnDamage(ent, ent.Comp.RevealOnDamage, stealth);
 
         if (TryComp(ent, out PullableComponent? pullable))
             _pulling.TryStopPull(ent, pullable);

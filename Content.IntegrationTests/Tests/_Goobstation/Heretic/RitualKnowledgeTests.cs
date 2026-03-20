@@ -6,7 +6,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Content.Server.Heretic.Ritual;
+using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Dataset;
 using Content.Shared.Tag;
 using Robust.Shared.GameObjects;
@@ -14,7 +14,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Goobstation.Heretic;
 
-[TestFixture, TestOf(typeof(RitualKnowledgeBehavior))]
+[TestFixture, TestOf(typeof(HereticKnowledgeRitualComponent))]
 public sealed class RitualKnowledgeTests
 {
     private static readonly ProtoId<DatasetPrototype> KnowledgeDataset = "EligibleTags";

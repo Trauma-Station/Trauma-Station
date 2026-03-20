@@ -1,21 +1,8 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Bloodstream;
 using Content.Server.Heretic.Components.PathSpecific;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
@@ -23,11 +10,13 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components; // Shitmed Change
+using Content.Medical.Shared.Wounds; // Shitmed Change
+
 namespace Content.Server.Heretic.EntitySystems.PathSpecific;
 
 public sealed class ChampionStanceSystem : EntitySystem
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
 
@@ -43,8 +32,8 @@ public sealed class ChampionStanceSystem : EntitySystem
         SubscribeLocalEvent<ChampionStanceComponent, ModifySlowOnDamageSpeedEvent>(OnChampionModifySpeed);
 
         // if anyone is reading through and does not have EE newmed you can remove these handlers
-        SubscribeLocalEvent<ChampionStanceComponent, BodyPartAddedEvent>(OnBodyPartAdded);
-        SubscribeLocalEvent<ChampionStanceComponent, BodyPartRemovedEvent>(OnBodyPartRemoved);
+        SubscribeLocalEvent<ChampionStanceComponent, OrganInsertedIntoEvent>(OnOrganInsertedInto);
+        SubscribeLocalEvent<ChampionStanceComponent, OrganRemovedFromEvent>(OnOrganRemovedFrom);
     }
 
     private void OnChampionModifySpeed(Entity<ChampionStanceComponent> ent, ref ModifySlowOnDamageSpeedEvent args)
@@ -75,12 +64,12 @@ public sealed class ChampionStanceSystem : EntitySystem
 
     public bool Condition(Entity<ChampionStanceComponent> ent)
     {
-        if (!TryComp(ent, out DamageableComponent? dmg) || !TryComp(ent, out MobThresholdsComponent? thresholdComp))
+        if (!TryComp(ent, out MobThresholdsComponent? thresholdComp))
             return false;
 
         if (!_threshold.TryGetThresholdForState(ent, MobState.Critical, out var threshold, thresholdComp))
             threshold = _threshold.GetThresholdForState(ent, MobState.Dead, thresholdComp);
-        return dmg.TotalDamage >= threshold.Value.Float() / 2f;
+        return _damageable.GetTotalDamage(ent.Owner) >= threshold.Value / 2;
     }
 
     private void OnDamageModify(Entity<ChampionStanceComponent> ent, ref DamageModifyEvent args)
@@ -99,22 +88,23 @@ public sealed class ChampionStanceSystem : EntitySystem
         args.Value *= 0.4f;
     }
 
-    private void OnBodyPartAdded(Entity<ChampionStanceComponent> ent, ref BodyPartAddedEvent args)
+    private void OnOrganInsertedInto(Entity<ChampionStanceComponent> ent, ref OrganInsertedIntoEvent args)
     {
         // can't touch this
-        if (!TryComp(args.Part, out WoundableComponent? woundable))
+        if (!TryComp(args.Organ, out WoundableComponent? woundable))
             return;
 
         woundable.CanRemove = false;
-        Dirty(args.Part);
+        Dirty(args.Organ, woundable);
     }
-    private void OnBodyPartRemoved(Entity<ChampionStanceComponent> ent, ref BodyPartRemovedEvent args)
+
+    private void OnOrganRemovedFrom(Entity<ChampionStanceComponent> ent, ref OrganRemovedFromEvent args)
     {
         // can touch this
-        if (!TryComp(args.Part, out WoundableComponent? woundable))
+        if (!TryComp(args.Organ, out WoundableComponent? woundable))
             return;
 
         woundable.CanRemove = true;
-        Dirty(args.Part);
+        Dirty(args.Organ, woundable);
     }
 }

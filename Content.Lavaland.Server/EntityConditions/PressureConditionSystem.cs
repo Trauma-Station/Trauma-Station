@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Lavaland.Shared.EntityConditions;
 using Content.Lavaland.Shared.Procedural.Components;
 using Content.Server.Atmos.EntitySystems;

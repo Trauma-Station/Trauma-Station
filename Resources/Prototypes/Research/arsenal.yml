@@ -335,7 +335,6 @@
   recipeUnlocks:
   - ClothingBackpackHarmpack
   technologyPrerequisites: # Goobstation R&D Console rework
-  - SmartWeaponry
   - SpecialMeans
   position: 9, 3 # Goobstation R&D Console rework
 

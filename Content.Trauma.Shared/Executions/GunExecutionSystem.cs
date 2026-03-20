@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared._Shitmed.Weapons.Ranged.Events;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -18,6 +18,7 @@ using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -141,6 +142,8 @@ public sealed class GunExecutionSystem : EntitySystem
 
         var coords = Transform(args.Shooter).Coordinates;
         var projectile = PredictedSpawnAtPosition(ent.Comp.Prototype, coords);
+        var firedEv = new CartridgeFiredEvent(projectile);
+        RaiseLocalEvent(ent, ref firedEv);
         // now have the actual projectile impact the target
         // for most bullets this just does hit, shotguns will do it for each pellet
         DoImpact(args.Weapon, projectile, args.Shooter, args.Target);
@@ -391,8 +394,6 @@ public sealed class GunExecutionSystem : EntitySystem
     {
         var ev = new GunShotEvent(attacker, ammo);
         RaiseLocalEvent(gun, ref ev);
-        var userEv = new GunShotBodyEvent(gun, gun.Comp);
-        RaiseLocalEvent(attacker, userEv);
 
         _audio.PlayPredicted(gun.Comp.SoundGunshot, gun, attacker);
         var direction = GetDirection(target: victim, shooter: attacker);

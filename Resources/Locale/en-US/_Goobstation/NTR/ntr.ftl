@@ -30,9 +30,6 @@ ntr-executive-pizza-small-desc = Order a small pizza party bundle from NanoTrase
 
 # personal
 
-ntr-executive-bsd-name = Call Blueshield Deputy
-ntr-executive-bsd-desc = Request a Blueshield deputy from Central Command. This personal guard for you or command staff requires valid justification. Only one may be called.
-
 ntr-executive-softsuit-name = Order a softsuit
 ntr-executive-softsuit-desc = A basic softsuit designed for short-term space exposure. Offers minimal protection.
 

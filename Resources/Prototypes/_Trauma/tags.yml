@@ -2,6 +2,9 @@
   id: AdvancedMagboots
 
 - type: Tag
+  id: BowImprovised
+
+- type: Tag
   id: Butt
 
 - type: Tag
@@ -9,6 +12,9 @@
 
 - type: Tag
   id: CartridgeTurret
+
+- type: Tag
+  id: CookedEgg
 
 - type: Tag
   id: CyberButt
@@ -50,16 +56,28 @@
   id: FlamethrowerTank
 
 - type: Tag
+  id: ForceHereticMinion
+
+- type: Tag
   id: ForgeMold
 
 - type: Tag
   id: FusionCore
 
 - type: Tag
+  id: Gunpowder
+
+- type: Tag
   id: HandTeleporter
 
 - type: Tag
+  id: Iradomini
+
+- type: Tag
   id: MagazineTurret
+
+- type: Tag
+  id: MimicToolbox
 
 - type: Tag
   id: QMBoard
@@ -84,6 +102,21 @@
 
 - type: Tag
   id: RevTurretBoard
+
+- type: Tag
+  id: RitualAscension
+
+- type: Tag
+  id: RitualBladeBlade
+
+- type: Tag
+  id: RitualFeastOfOwls
+
+- type: Tag
+  id: RitualKnowledge
+
+- type: Tag
+  id: SpellIgnoreForestAdmonitions
 
 - type: Tag
   id: TechfabMachineBoard

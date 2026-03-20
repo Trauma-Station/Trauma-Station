@@ -314,7 +314,7 @@ public sealed class RadialMenuOuterAreaButton : RadialMenuButtonBase
     /// <inheritdoc />
     protected override bool HasPoint(Vector2 point)
     {
-        return false; // Goobstation edit
+        return false; /* Goobstation edit
 
         if (ParentCenter == null)
         {
@@ -327,6 +327,7 @@ public sealed class RadialMenuOuterAreaButton : RadialMenuButtonBase
 
         // comparing to squared values is faster, then making sqrt
         return distSquared > outerRadiusSquared;
+        */
     }
 }
 

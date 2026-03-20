@@ -46,10 +46,6 @@ ghost-role-information-navy-captain-name = Navy Captain
 ghost-role-information-navy-captain-description = Classified.
 ghost-role-information-navy-captain-rules = You are beholden to no rules.
 
-ghost-role-information-special-operations-officer-name = Special Operations Officer
-ghost-role-information-special-operations-officer-description = Send, brief, and direct emergency response teams or other Nanotrasen forces. Release the nuclear codes, or don't.
-ghost-role-information-special-operations-officer-rules = Bring the Nanotrasen Representative in alive, the rest are just collateral. [color=#yellow][bold]Navy Captain[/bold][/color] orders may change this.
-
 ghost-role-information-navy-officer-name = Navy Officer
 ghost-role-information-navy-officer-description = Answer faxes and radio communications directed at Central Command. Perform investigations on the station and it's crew.
 ghost-role-information-navy-officer-rules = Follow the orders of the [color=#yellow][bold]Navy Captain[/bold][/color]. In the absence of one, make your own judgements.
@@ -76,12 +72,6 @@ ghost-role-information-trevor-description = Securities trusted battle steed.
 ghost-role-information-Gman-name = The G-Man
 ghost-role-information-Gman-description = The right man in the wrong place can make all the difference in the world.
 ghost-role-information-Gman-rules = You are beholden to no rules or boundaries. Death cannot hold you, and neither can Nanotrasen.
-
-# Blueshild Deputy
-
-ghost-role-information-bsd-name = Blueshield Deputy
-ghost-role-information-bsd-description = You were called onto the station by the NTR, obey him, protect Command, follow the law.
-ghost-role-information-bsd-rules = Follow the orders given you by the [color=yellow][bold]NanoTrasen Representative[/bold][/color], protect command.
 
 # interns
 ghost-role-intern-name = CentComm intern

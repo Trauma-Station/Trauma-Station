@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Content.Shared.StatusEffect;
 using Robust.Shared.GameStates;
@@ -47,12 +49,6 @@ public sealed partial class HauntComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<StatusEffectPrototype> FlashedId = "Flashed";
-
-    /// <summary>
-    /// The status effect to make the Wraith corporeal upon using haunt.
-    /// </summary>
-    [DataField]
-    public ProtoId<StatusEffectPrototype> CorporealEffect = "Corporeal";
 
     /// <summary>
     /// Is the action active?

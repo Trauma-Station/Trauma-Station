@@ -303,7 +303,7 @@
       grid:
       - 0,0,10,7 # Goobstation
     - type: ExplosionResistance # Goobstation
-      damageCoefficient: 0.1
+      damageCoefficient: 0.5
     - type: Tag
       tags: [] # ignore "WhitelistChameleon" tag
 

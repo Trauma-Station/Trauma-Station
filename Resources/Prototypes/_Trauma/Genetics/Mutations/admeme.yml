@@ -1,0 +1,29 @@
+- type: entity
+  abstract: true
+  parent: BaseFreeMutation
+  id: BaseMutationAdmeme
+  components:
+  - type: Mutation
+    locked: true # no
+    rarity: Mythical
+
+- type: entity
+  parent: BaseMutationAdmeme
+  id: MutationUnstableDna
+  name: Unstable DNA
+  description: ???
+  components:
+  - type: Mutation
+    instability: -40
+  # TODO
+
+- type: entity
+  parent: BaseMutationAdmeme
+  id: MutationMouse
+  name: Mouse
+  description: Piep!
+  components:
+  - type: PolymorphMutation
+    prototypes:
+      Human: MutationMouse
+      # fuck you

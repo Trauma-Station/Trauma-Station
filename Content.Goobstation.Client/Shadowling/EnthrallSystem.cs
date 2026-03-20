@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Shadowling.Components;
@@ -44,7 +40,7 @@ public sealed class EnthrallSystem : SharedEnthrallSystem
     private void OnInit(EntityUid uid, ThrallComponent component, ComponentInit init)
     {
         if (_playerManager.LocalEntity != uid
-            || EntityManager.HasComponent<LesserShadowlingComponent>(uid))
+            || HasComp<LesserShadowlingComponent>(uid))
             return;
 
         _overlay.ReceiveEnthrall(5f);

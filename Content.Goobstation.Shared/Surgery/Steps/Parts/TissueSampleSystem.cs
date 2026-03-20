@@ -1,4 +1,6 @@
-using Content.Shared._Shitmed.Medical.Surgery.Tools;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Medical.Shared.Surgery.Tools;
 
 namespace Content.Goobstation.Shared.Surgery.Steps.Parts;
 

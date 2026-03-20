@@ -17,6 +17,8 @@
       movement:
         state: facehugger
   - type: GhostTakeoverAvailable
+  - type: ThrowableFacehugger # Goobstation
+    minThrowForce: 5.0 # Goobstation
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
@@ -84,8 +86,8 @@
       types:
         Blunt: 15
     damageOnInfect:
-      groups:
-        Genetic: 100
+      types:
+        Cellular: 100
     sleepChem: Nocturine # ID of the Chemical we want to inject  - Goobstation start
     sleepChemAmount: 10 # Amount in units (Often no need to use more than 10u for most chems)
     minChemicalThreshold: 8 # Minimum amount of the chemical required to prevent additional injections
@@ -138,7 +140,7 @@
         layer:
         - LowImpassable
         hard: false
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker # Trauma
     speaks:
     - Xeno
 #    - XenoHivemind # Trauma
@@ -151,3 +153,22 @@
     defaultChannel: Xenomorphivemind
     channels:
     - Xenomorphivemind
+  # <Trauma>
+  - type: ThermalVision
+    toggleAction: ToggleThermalVisionXenomorph
+    color: white
+    drawOverlay: false
+    lightRadius: 10
+    strength: 0
+    noise: 0
+    tint: 3, 3, 3
+  - type: Destructible # This prevents GIGA lag
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+  # </Trauma>

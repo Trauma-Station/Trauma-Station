@@ -37,7 +37,7 @@
     selfUnBuckleDelay: 10 # only works before you get nailed onto it
     whitelist:
       components:
-      - HumanoidAppearance # monkey/kobold has this too, dont worry
+      - HumanoidProfile # monkey/kobold has this too, dont worry
   - type: StrapLock
   - type: ChangeNodeOnUnstrap
     node: cross # revert to uncrucified if entity is deleted or whatever

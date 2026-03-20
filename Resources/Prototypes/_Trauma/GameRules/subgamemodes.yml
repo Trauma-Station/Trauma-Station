@@ -10,7 +10,6 @@
     - prefRoles: [ Traitor ]
       max: 2
       playerRatio: 40
-      chaosScore: 150
       blacklist:
         components:
         - CommandStaff
@@ -19,3 +18,19 @@
       lateJoinAdditional: false
       mindRoles:
       - MindRoleTraitor
+
+- type: entity
+  parent: Heretic
+  id: SubHeretic
+  components:
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ Heretic ]
+      min: 1
+      max: 1
+      jobBlacklist: [ Chaplain ]
+      blacklist:
+        components:
+        - CommandStaff
+      mindRoles:
+      - MindRoleHeretic

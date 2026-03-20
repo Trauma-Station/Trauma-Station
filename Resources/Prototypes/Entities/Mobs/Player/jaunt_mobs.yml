@@ -27,8 +27,12 @@
   - type: Visibility
     layer: 2
   - type: Spectral
-  - type: IsDeadIC # Goobstation
+  # <Trauma>
+  - type: IsDeadIC
     dead: false
+  - type: Jaunt
+    jauntAction: null
+  # </Trauma>
 
 # Should be slow, for balance
 - type: entity

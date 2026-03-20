@@ -1,0 +1,7 @@
+- type: latheRecipePack
+  id: GeneticsStatic
+  recipes:
+  - GeneticsConsoleCircuitboard
+  - MedicalScannerMachineCircuitboard
+  - GeneticsDisk
+  - HandheldGeneticsScanner

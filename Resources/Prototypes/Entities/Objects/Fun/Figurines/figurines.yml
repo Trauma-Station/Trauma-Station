@@ -33,6 +33,8 @@
   - type: DeviceLinkSink
     ports:
     - Trigger
+  - type: CosmicTransmutable # Trauma
+    transmuteTo: ToyFigurineCosmicCultist
 
 #HUMANOID FIGURINES
 

@@ -10,7 +10,6 @@
     - prefRoles: [ Shadowling ]
       max: 1
       playerRatio: 30
-      chaosScore: 500
       jobBlacklist: [ Chaplain ] # GOOBSTATION
       blacklist:
         components:
@@ -20,6 +19,3 @@
   - type: AntagObjectives
     objectives:
     - ShadowlingAscendObjective
-  - type: Tag
-    tags:
-      - RoundstartAntag

@@ -34,7 +34,6 @@ public sealed class SpraySystem : SharedSpraySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SprayPushableVehicleSystem _sprayPush = default!;
     // </Trauma>
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly GravitySystem _gravity = default!;

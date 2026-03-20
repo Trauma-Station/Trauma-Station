@@ -1,0 +1,3 @@
+# For all the tider chem people come up with
+reagent-name-nitrated-slurry = nitrated slurry
+reagent-desc-nitrated-slurry = Rotting matter turned into a slurry. There's chunks floating around in it...

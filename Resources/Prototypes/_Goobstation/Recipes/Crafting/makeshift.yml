@@ -4,3 +4,8 @@
   category: construction-category-misc
   targetNode: final
   objectType: Item
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 1
+    ElectronicsKnowledge: 1

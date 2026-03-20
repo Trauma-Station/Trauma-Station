@@ -1,13 +1,11 @@
 - type: entity
-  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  parent: [ AppearanceDragon, SimpleSpaceMobBase, FlyingMobBase ] # Shitmed
   id: BaseMobDragon
   suffix: ""
   name: space dragon
   description: A flying leviathan, loosely related to space carps.
   abstract: true
   components:
-  - type: Body # Shitmed
-    prototype: SpaceDragon
   - type: Bloodstream
     bleedReductionAmount: 5 #goob
     bloodReferenceSolution:
@@ -121,9 +119,7 @@
     solutionOnBody: false
     updateInterval: 0.25
     metabolizerTypes: [ Dragon ]
-    groups:
-    - id: Medicine
-    - id: Poison
+    stages: [ Digestion, Bloodstream ]
   - type: Butcherable
     spawned:
     - id: FoodMeatDragon
@@ -146,7 +142,7 @@
   - type: Devourer
     foodPreferenceWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
     stomachStorageWhitelist:
       components:
       - MobState
@@ -184,8 +180,6 @@
     color: "#808080"
     activateSound: null
     deactivateSound: null
-  - type: CombatPower # Goobstation
-    factor: 4 # times more dangerous than a crew-member
   - type: Fauna # Lavaland Change
   - type: Prying
     pryPowered: true
@@ -193,7 +187,11 @@
     speedModifier: 2.5 # fast because dragon strong
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: LanguageKnowledge # goob edit - carp language (keeping basic as an option because the space monster gloating is funny)
+  - type: InnateWaypointer
+    waypointerProtoIds:
+    - NTStationWaypointer
+    - DragonRiftWaypointer
+  - type: LanguageSpeaker # Trauma - carp language (keeping basic as an option because the space monster gloating is funny)
     speaks:
     - TauCetiBasic
     - Carptongue
@@ -206,12 +204,20 @@
   id: MobDragon
   components:
   - type: Dragon
+    # <Trauma>
     spawnRiftAction: ActionSpawnRift
     carpRiftHealing:
-      groups:
-        Brute: -4
-        Burn: -4
-        Airloss: -3
+      types:
+        Blunt: -1.33
+        Slash: -1.33
+        Piercing: -1.33
+        Heat: -1
+        Cold: -1
+        Shock: -1
+        Caustic: -1
+        Asphyxiation: -1.5
+        Bloodloss: -1.5
+    # </Trauma>
   - type: GhostRole
     mindRoles:
     - MindRoleDragon
@@ -266,8 +272,8 @@
       amount: 1
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 12
+      types:
+        Piercing: 12
 
 - type: entity
   parent: BaseAction

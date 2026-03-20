@@ -16,6 +16,7 @@
     <!-- <Trauma> -->
     <ProjectReference Include="../Content.Goobstation.Common/Content.Goobstation.Common.csproj" />
     <ProjectReference Include="../Content.Lavaland.Common/Content.Lavaland.Common.csproj" />
+    <ProjectReference Include="../Content.Medical.Common/Content.Medical.Common.csproj" />
     <ProjectReference Include="../Content.Trauma.Common/Content.Trauma.Common.csproj" />
     <ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
     <!-- </Trauma> -->

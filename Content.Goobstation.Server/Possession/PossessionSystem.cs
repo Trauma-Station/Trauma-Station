@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Magic;
@@ -10,6 +6,7 @@ using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Possession;
 using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
@@ -26,7 +23,6 @@ using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Tag;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -44,7 +40,6 @@ public sealed partial class PossessionSystem : SharedPossessionSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly FollowerSystem _follower = default!;
 
     public override void Initialize()
@@ -75,8 +70,8 @@ public sealed partial class PossessionSystem : SharedPossessionSystem
         if (!possessed.Comp.WasPacified)
             RemComp<PacifiedComponent>(possessed.Comp.OriginalEntity);
 
-        if (!possessed.Comp.WasWeakToHoly)
-            RemComp<WeakToHolyComponent>(possessed.Comp.OriginalEntity);
+        var ev = new UnholyStatusChangedEvent(possessed, possessed, false);
+        RaiseLocalEvent(possessed, ref ev);
 
         // Transfer followers from possessed entity to possessor's original entity
         // TODO: polymorph revert should handle that...

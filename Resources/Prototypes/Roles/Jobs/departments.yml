@@ -3,6 +3,7 @@
   name: department-Cargo
   description: department-Cargo-description
   color: "#A46106"
+  weight: 7 # Trauma
   roles:
   - CargoTechnician
   - Quartermaster
@@ -12,15 +13,20 @@
   id: Civilian
   name: department-Civilian
   description: department-Civilian-description
-  color: "#9FED58"
+  color: "#6C6A78" # Trauma - assistant grey
   weight: -10
   roles:
-  - Bartender
-  - Botanist
+  # <Trauma>
+  - RadioHost
+  - PartyMaker
+  - PhoneMerchant
+  # </Trauma>
+  #- Bartender # Trauma - moved to Service
+  #- Botanist # Trauma - moved to Service
   - Chaplain
-  - Chef
+  #- Chef # Trauma - moved to Service
   - Clown
-  - HeadOfPersonnel
+  #- HeadOfPersonnel # Trauma - moved to Service
   - Janitor
   - Lawyer
   - Librarian
@@ -29,8 +35,7 @@
   - Passenger
   - Reporter
   - Visitor
-  - ServiceWorker
-  - PartyMaker # event-restricted, Goobstation
+  #- ServiceWorker # Trauma - moved to Service
 
 - type: department
   id: CentralCommand
@@ -48,15 +53,13 @@
   - ERTEngineer
   - DeathSquad
   - HecuOperative
-  - BlueshieldOfficer # Goobstation - Start
-  - NanotrasenRepresentative
-  - NanotrasenCareerTrainer
+  # <Trauma>
   - NavyOfficer
   - NavyCaptain
   - NavyOfficerUndercover
-  - SpecialOperationsOfficer
   - Diplomat
-  - GovernmentMan # Goobstation - End
+  - GovernmentMan
+  # </Trauma>
   editorHidden: true
   weight: 120
 
@@ -66,6 +69,11 @@
   description: department-Command-description
   color: "#334E6D"
   roles:
+  # <Trauma>
+  - NanotrasenRepresentative
+  - CommandMaid
+  - HecuOperative
+  # </Trauma>
   - Captain
   - ChiefEngineer
   - ChiefMedicalOfficer
@@ -73,9 +81,6 @@
   - HeadOfSecurity
   - ResearchDirector
   - Quartermaster
-  - BlueshieldOfficer # Goobstation
-  - NanotrasenRepresentative # Goobstation
-  - NanotrasenCareerTrainer # Goobstation
   - CentralCommandOfficial
   - CBURN
   - ERTLeader
@@ -85,8 +90,6 @@
   - ERTSecurity
   - ERTEngineer
   - DeathSquad
-  - HecuOperative
-  - CommandMaid # event-restricted, Goobstation
   primary: false
   weight: 100
 
@@ -95,6 +98,7 @@
   name: department-Engineering
   description: department-Engineering-description
   color: "#EFB341"
+  weight: 12 # Trauma
   roles:
   - AtmosphericTechnician
   - ChiefEngineer
@@ -106,14 +110,17 @@
   name: department-Medical
   description: department-Medical-description
   color: "#52B4E9"
+  weight: 10 # Trauma
   roles:
+  # <Trauma>
+  - Virologist
+  # </Trauma>
   - Chemist
   - ChiefMedicalOfficer
   - MedicalDoctor
   - MedicalIntern
   - Psychologist
   - Paramedic
-  - Virologist # Gooby goob ba gooby goob ba
 
 - type: department
   id: Security
@@ -122,30 +129,37 @@
   color: "#DE3A3A"
   weight: 20
   roles:
+  # <Trauma>
+  - Brigmedic
+  - SecurityClown
+  # </Trauma>
   - HeadOfSecurity
   - SecurityCadet
   - SecurityOfficer
   - Detective
   - Warden
-  - Brigmedic # Goob
-  - SecurityClown # event-restricted, Goob
 
 - type: department
   id: Science
   name: department-Science
   description: department-Science-description
   color: "#D381C9"
+  weight: 15 # Trauma
   roles:
+  # <Trauma>
+  - Roboticist
+  - Geneticist
+  # </Trauma>
   - ResearchDirector
   - Scientist
   - ResearchAssistant
-  - Roboticist #Goob
 
 - type: department
   id: Silicon
   name: department-Silicon
   description: department-Silicon-description
   color: "#D381C9"
+  weight: -15 # Trauma
   roles:
   - Borg
   - StationAi
@@ -155,9 +169,8 @@
   name: department-Specific
   description: department-Specific-description
   color: "#9FED58"
-  weight: 10
+  weight: 0 # Trauma - was 10
   roles:
-  - RadioHost # Goobstation
   - Reporter
   - Psychologist
   primary: false

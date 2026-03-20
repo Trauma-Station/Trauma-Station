@@ -1,0 +1,8 @@
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconPhoneMerchant
+  icon:
+    sprite: _Trauma/Interface/Misc/job_icons.rsi
+    state: Phonemerchant
+  jobName: job-name-phonemerchant
+  allowSelection: false

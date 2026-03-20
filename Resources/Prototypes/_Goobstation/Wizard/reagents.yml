@@ -11,14 +11,14 @@
   color: "#28005B"
   physicalDesc: reagent-physical-desc-thick
   metabolisms:
-    Poison:
+    Bloodstream:
       conditions:
       - !type:WhitelistCondition
         blacklist:
           components:
           - Wizard
           - Apprentice
-        guidebookText: entity-effect-condition-not-wizard-or-apprentice
+        guidebookText: entity-condition-not-wizard-or-apprentice
       effects:
       - !type:Emote
         emote: Cough
@@ -43,29 +43,28 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Medicine:
+    Bloodstream:
       conditions:
       - !type:WhitelistCondition
         whitelist:
           components:
           - Wizard
           - Apprentice
-        guidebookText: entity-effect-condition-wizard-or-apprentice
+        guidebookText: entity-condition-wizard-or-apprentice
       effects:
       - !type:ModifyBloodLevel
         amount: 3
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: -5
-            Toxin: -5
-            Airloss: -5
-            Brute: -5
-            Genetic: -5
+          Burn: -5
+          Toxin: -5
+          Airloss: -5
+          Brute: -5
+          Genetic: -5
       - !type:ModifyBleed
         amount: -1.5
       - !type:CleanBloodstream
-        excluded: Mugwort # Trauma - Exclude from chempurge
+        excluded: [Mugwort] # Trauma - Exclude from chempurge
         cleanseRate: 6
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow

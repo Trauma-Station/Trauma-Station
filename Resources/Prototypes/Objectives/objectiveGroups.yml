@@ -35,10 +35,7 @@
   weights:
     KillRandomPersonObjective: 1
     PermaKillRandomPersonObjective: 0.5 # Goobstation - straight up kill someone with no maroons
-    PermaKillRandomTraitorObjective: 0.3 # Goobstation - target traitor
     KillRandomHeadObjective: 0.2
-    TeachRandomPersonObjective: 1 #Goobstation  Teach them a lesson
-    TeachRandomHeadObjective: 0.25 #Goobstation  Teach them a lesson
 
 - type: weightedRandom
   id: TraitorObjectiveGroupState
@@ -99,7 +96,6 @@
     AmePartFlatpackStealObjective: 1
     #ExpeditionsCircuitboardStealObjective: 1 Goob edit - Removed because lavaland #sup
     CargoShuttleCircuitboardStealObjective: 1
-    ClothingEyesHudBeerStealObjective: 0.5              #srv, beer goggles less common cause its so easy
     BibleStealObjective: 1
     ClothingNeckGoldmedalStealObjective: 1              #other
     ClothingNeckClownmedalStealObjective: 0.5

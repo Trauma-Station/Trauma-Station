@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Implants.Components;
 using Robust.Shared.Prototypes;
@@ -31,7 +32,7 @@ public sealed class RelayImplantedEffectSystem : EntityEffectSystem<SubdermalImp
             return;
 
         _data.CopyData(ent, user);
-        _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale);
+        _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale, args.User);
         _data.ClearData(user);
     }
 }

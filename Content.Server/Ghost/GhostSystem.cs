@@ -1,12 +1,9 @@
 // <Trauma>
+using Content.Medical.Common.Targeting;
 using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._White.Xenomorphs.Infection;
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
+using Content.Shared._White.Xenomorphs.Infection;
+using Content.Shared.Body;
 using Robust.Shared.Utility;
 // </Trauma>
 using System.Linq;
@@ -28,6 +25,7 @@ using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Follower;
 using Content.Shared.Ghost;
+using Content.Shared.GhostTypes;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -55,7 +53,6 @@ namespace Content.Server.Ghost
     public sealed class GhostSystem : SharedGhostSystem
     {
         // <Trauma>
-        [Dependency] private readonly SharedBodySystem _bodySystem = default!;
         [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
         // </Trauma>
         [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -83,6 +80,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
+        [Dependency] private readonly GhostSpriteStateSystem _ghostState = default!;
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -131,6 +129,9 @@ namespace Content.Server.Ghost
             if (ent.Comp.LifeStage <= ComponentLifeStage.Running)
             {
                 args.VisibilityMask |= (int)VisibilityFlags.Ghost;
+                // Begin DeltaV additions
+                args.VisibilityMask |= (int)VisibilityFlags.CosmicCultMonument;
+                // End DeltaV additions
             }
         }
 
@@ -498,6 +499,11 @@ namespace Content.Server.Ghost
             var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
 
+            if (TryComp<GhostSpriteStateComponent>(ghost, out var state))  // If more TryComps are added this should be turned into an event
+            {
+                _ghostState.SetGhostSprite((ghost, state), mind);
+            }
+
             // Try setting the ghost entity name to either the character name or the player name.
             // If all else fails, it'll default to the default entity prototype name, "observer".
             // However, that should rarely happen.
@@ -600,25 +606,20 @@ namespace Content.Server.Ghost
                             && TryComp<MobThresholdsComponent>(playerEntity, out var thresholds))
                         {
                             var playerDeadThreshold = _mobThresholdSystem.GetThresholdForState(playerEntity.Value, MobState.Dead, thresholds);
-                            dealtDamage = playerDeadThreshold - damageable.TotalDamage;
+                            dealtDamage = playerDeadThreshold -
+                                _mobThresholdSystem.CheckVitalDamage((playerEntity.Value, damageable)); // Trauma - use vital damage
                         }
 
-                        // Shitmed Change Start
+                        // <Trauma>
+                        // TODO SHITMED: make this an event jesus christ
                         var damageType = HasComp<SiliconComponent>(playerEntity)
                             ? IonDamageType
                             : AsphyxiationDamageType;
                         DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(damageType), dealtDamage);
 
-                        if (TryComp<BodyComponent>(playerEntity, out var body)
-                            && body.BodyType == BodyType.Complex
-                            && body.RootContainer.ContainedEntities.FirstOrNull() is { } root)
-                            _damageable.ChangeDamage(playerEntity.Value,
-                                damage,
-                                true,
-                                targetPart: TargetBodyPart.All);
-                        else
-                            _damageable.ChangeDamage(playerEntity.Value, damage, true);
-                        // Shitmed Change End
+                        TargetBodyPart? targetPart = HasComp<BodyComponent>(playerEntity) ? TargetBodyPart.Chest : null;
+                        _damageable.ChangeDamage(playerEntity.Value, damage, true, targetPart: targetPart);
+                        // </Trauma>
                     }
                     // </Goob>
                 }

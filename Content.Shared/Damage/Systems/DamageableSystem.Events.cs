@@ -1,8 +1,6 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Targeting;
-using Content.Shared.Body.Components;
+using Content.Medical.Common.Body;
+using Content.Medical.Common.Targeting;
 // </Trauma>
 using Content.Shared.CCVar;
 using Content.Shared.Damage.Components;
@@ -12,6 +10,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Radiation.Events;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Damage.Systems;
 
@@ -19,19 +18,17 @@ public sealed partial class DamageableSystem
 {
     public override void Initialize()
     {
+        CacheVitalPrototypes(); // Trauma
+        InitializeTrauma(); // Trauma
+        RebuildContainerCache();
+
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<DamageableComponent, ComponentInit>(DamageableInit);
-        SubscribeLocalEvent<DamageableComponent, ComponentHandleState>(DamageableHandleState);
-        SubscribeLocalEvent<DamageableComponent, ComponentGetState>(DamageableGetState);
         SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated);
         SubscribeLocalEvent<DamageableComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<DamageableComponent, ComponentHandleState>(DamageableHandleState);
+        SubscribeLocalEvent<DamageableComponent, ComponentGetState>(DamageableGetState);
 
-        InitializeTrauma(); // Trauma
-
-        // <Shitmed>
-        _bodyQuery = GetEntityQuery<BodyComponent>();
-        _consciousnessQuery = GetEntityQuery<ConsciousnessComponent>();
-        _woundableQuery = GetEntityQuery<WoundableComponent>();
-        // </Shitmed>
         _appearanceQuery = GetEntityQuery<AppearanceComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
 
@@ -132,41 +129,48 @@ public sealed partial class DamageableSystem
         );
     }
 
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
+    {
+        // <Trauma>
+        if (ev.WasModified<DamageTypePrototype>())
+            CacheVitalPrototypes();
+        // </Trauma>
+        if (!ev.WasModified<DamageContainerPrototype>() && !ev.WasModified<DamageGroupPrototype>())
+            return;
+
+        RebuildContainerCache();
+    }
+
+    private void RebuildContainerCache()
+    {
+        _supportedTypesByContainer.Clear();
+
+        foreach (var proto in _prototypeManager.EnumeratePrototypes<DamageContainerPrototype>())
+        {
+            var set = new HashSet<ProtoId<DamageTypePrototype>>();
+            _supportedTypesByContainer[proto.ID] = set;
+
+            foreach (var type in proto.SupportedTypes)
+            {
+                set.Add(type);
+            }
+
+            foreach (var groupId in proto.SupportedGroups)
+            {
+                var group = _prototypeManager.Index(groupId);
+                foreach (var type in group.DamageTypes)
+                {
+                    set.Add(type);
+                }
+            }
+        }
+    }
+
     /// <summary>
     ///     Initialize a damageable component
     /// </summary>
     private void DamageableInit(Entity<DamageableComponent> ent, ref ComponentInit _)
     {
-        if (
-            ent.Comp.DamageContainerID is null ||
-            !_prototypeManager.Resolve(ent.Comp.DamageContainerID, out var damageContainerPrototype)
-        )
-        {
-            // No DamageContainerPrototype was given. So we will allow the container to support all damage types
-            foreach (var type in _prototypeManager.EnumeratePrototypes<DamageTypePrototype>())
-            {
-                ent.Comp.Damage.DamageDict.TryAdd(type.ID, FixedPoint2.Zero);
-            }
-        }
-        else
-        {
-            // Initialize damage dictionary, using the types and groups from the damage
-            // container prototype
-            foreach (var type in damageContainerPrototype.SupportedTypes)
-            {
-                ent.Comp.Damage.DamageDict.TryAdd(type, FixedPoint2.Zero);
-            }
-
-            foreach (var groupId in damageContainerPrototype.SupportedGroups)
-            {
-                var group = _prototypeManager.Index(groupId);
-                foreach (var type in group.DamageTypes)
-                {
-                    ent.Comp.Damage.DamageDict.TryAdd(type, FixedPoint2.Zero);
-                }
-            }
-        }
-
         ent.Comp.Damage.GetDamagePerGroup(_prototypeManager, ent.Comp.DamagePerGroup);
         ent.Comp.TotalDamage = ent.Comp.Damage.GetTotal();
     }
@@ -191,7 +195,16 @@ public sealed partial class DamageableSystem
         _mobThreshold.SetAllowRevives(ent, true);
         ClearAllDamage(ent.AsNullable());
         _mobThreshold.SetAllowRevives(ent, false);
-        Log.Debug($"Rejuvenate called for {ToPrettyString(ent)} now {_mobThreshold.CheckVitalDamage(ent, ent)} vital damage");
+    }
+
+    private void DamageableGetState(Entity<DamageableComponent> ent, ref ComponentGetState args)
+    {
+        args.State = new DamageableComponentState(
+            _netMan.IsServer ? ent.Comp.Damage : ent.Comp.Damage.Clone(),
+            ent.Comp.DamageContainerID,
+            ent.Comp.DamageModifierSetId,
+            ent.Comp.HealthBarThreshold
+        );
     }
 
     private void DamageableHandleState(Entity<DamageableComponent> ent, ref ComponentHandleState args)
@@ -204,7 +217,7 @@ public sealed partial class DamageableSystem
         ent.Comp.HealthBarThreshold = state.HealthBarThreshold;
 
         // Has the damage actually changed?
-        DamageSpecifier newDamage = new() { DamageDict = new Dictionary<string, FixedPoint2>(state.DamageDict) };
+        var newDamage = state.Damage.Clone();
         var delta = newDamage - ent.Comp.Damage;
         delta.TrimZeros();
 
@@ -232,7 +245,7 @@ public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid?
 ///     For example, armor.
 /// </summary>
 // Goob - added target, targetPart
-public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, EntityUid? origin = null, TargetBodyPart? targetPart = null)
+public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, EntityUid? origin = null, BodyPartType? targetPart = null)
     : EntityEventArgs, IInventoryRelayEvent
 {
     /// <inheritdoc/>
@@ -243,7 +256,7 @@ public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, 
 
     // <Goob>
     public readonly EntityUid Target = target;
-    public readonly TargetBodyPart? TargetPart = targetPart;
+    public readonly BodyPartType? TargetPart = targetPart;
     // </Goob>
 
     /// <summary>

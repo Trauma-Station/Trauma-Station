@@ -333,6 +333,6 @@
     sprintModifier: 1
   - type: HeldSpeedModifier
   - type: ExplosionResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
   #- type: Tag # Goobstation - Fuck you
   #  tags: [] # ignore "WhitelistChameleon" tag

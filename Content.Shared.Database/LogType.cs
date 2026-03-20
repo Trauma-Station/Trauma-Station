@@ -485,14 +485,14 @@ public enum LogType
     Connection = 104,
 
     /// <summary>
-    /// Goob - SecretPlus related game interactions.
+    /// Goob - Obsolete
     /// </summary>
-    SecretPlus = 10001,
+    SecretPlusObsolete = 10001,
 
     /// <summary>
-    /// Goob - GameDirector related game interactions.
+    /// Goob - Obsolete
     /// </summary>
-    GameDirector = 10002,
+    GameDirectorObsolete = 10002,
 
     /// <summary>
     /// Goob - Supermatter events, mostly activations.
@@ -503,4 +503,9 @@ public enum LogType
     /// Goob - Antag objective info.
     /// </summary>
     AntagObjective = 10004,
+
+    /// <summary>
+    /// Trauma - Genetics related logs.
+    /// </summary>
+    Genetics = 20001,
 }

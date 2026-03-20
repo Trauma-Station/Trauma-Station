@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Stunnable;
@@ -15,12 +9,14 @@ namespace Content.Goobstation.Shared.Stunnable;
 
 public sealed class ParalyzeOnCollideSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<ParalyzeOnCollideComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<ParalyzeOnCollideComponent, LandEvent>(OnLand);
     }
@@ -28,25 +24,21 @@ public sealed class ParalyzeOnCollideSystem : EntitySystem
     private void OnStartCollide(EntityUid uid, ParalyzeOnCollideComponent component, ref StartCollideEvent args)
     {
         if (component.CollidableEntities != null &&
-            _whitelistSystem.IsValid(component.CollidableEntities, args.OtherEntity))
+            _whitelist.IsValid(component.CollidableEntities, args.OtherEntity))
             return;
 
-        if (component.ParalyzeOther && args.OtherEntity != null)
-            _stunSystem.TryUpdateParalyzeDuration(args.OtherEntity, component.ParalyzeTime);
-        if (component.ParalyzeSelf && uid != null)
-            _stunSystem.TryUpdateParalyzeDuration(uid, component.ParalyzeTime);
+        if (component.ParalyzeOther)
+            _stun.TryUpdateParalyzeDuration(args.OtherEntity, component.ParalyzeTime);
+        if (component.ParalyzeSelf)
+            _stun.TryUpdateParalyzeDuration(uid, component.ParalyzeTime);
 
         if (component.RemoveAfterCollide)
-        {
-            RemComp(uid, component);
-        }
+            RemCompDeferred(uid, component);
     }
 
     private void OnLand(EntityUid uid, ParalyzeOnCollideComponent component, ref LandEvent args)
     {
         if (component.RemoveOnLand)
-        {
-            RemComp(uid, component);
-        }
+            RemCompDeferred(uid, component);
     }
 }

@@ -20,14 +20,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: OrganHumanHeart
   id: LavalandCursedHeart
-  parent: BaseHumanOrgan
-  name: heart
   description: "I feel bad for the heartless bastard who lost this."
+  suffix: Cursed
   components:
   - type: Sprite
     sprite: _Lavaland/Objects/Specific/Lavaland/loot.rsi
-    state: cursed_heart
+    layers:
+    - state: cursed_heart
   - type: Item
     size: Small
   - type: CursedHeartGrant

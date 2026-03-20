@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
@@ -44,7 +46,7 @@ public sealed partial class WraithPossessedComponent : Component
     [DataField, AutoNetworkedField]
     public DamageSpecifier RevenantDamageOvertime = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             {"Caustic", 8}
         }

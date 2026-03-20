@@ -59,6 +59,9 @@
   id: AthiestsFedora
 
 - type: Tag
+  id: AnchorHereticStructure
+
+- type: Tag
   id: AtmosBackTank # Assmos - Extinguisher Nozzle
 
 - type: Tag
@@ -146,6 +149,9 @@
   id: ClownEmergencyOxygenTank
 
 - type: Tag
+  id: CodexCicatrix
+
+- type: Tag
   id: CombatMech
 
 - type: Tag
@@ -191,6 +197,9 @@
   id: DurandTargetingControlModule
 
 - type: Tag
+  id: EldritchFlask
+
+- type: Tag
   id: EmergencyMedipen
 
 - type: Tag
@@ -224,9 +233,6 @@
   id: ExtendedEmergencyPlasmaTank
 
 - type: Tag
-  id: Eyes
-
-- type: Tag
   id: EnergyMagAmmo
 
 - type: Tag
@@ -252,6 +258,9 @@
 
 - type: Tag
   id: GorillaFormAction
+
+- type: Tag
+  id: GoldBar
 
 - type: Tag
   id: GrimoireGhost
@@ -297,12 +306,6 @@
 
 - type: Tag
   id: HandheldCrewMonitor
-
-- type: Tag
-  id: HarpyEmotes
-
-- type: Tag
-  id: Heart
 
 - type: Tag
   id: HereticBlade
@@ -359,9 +362,6 @@
   id: Keyring
 
 - type: Tag
-  id: Kidneys
-
-- type: Tag
   id: LaserLMG
 
 - type: Tag
@@ -371,17 +371,7 @@
   id: Lighter # for whitelisted cig pack strorage
 
 - type: Tag
-  id: Liver
-
-# tag roundstart rules that should be run alone
-- type: Tag
-  id: LoneRunRule
-
-- type: Tag
   id: LoneOpsUplink
-
-- type: Tag
-  id: Lungs
 
 - type: Tag
   id: MagazineAntiMateriel
@@ -579,9 +569,6 @@
   id: Steel
 
 - type: Tag
-  id: Stomach
-
-- type: Tag
   id: StunBaton # for heretic ritual
 
 - type: Tag
@@ -601,6 +588,9 @@
 
 - type: Tag
   id: ShellShotgunHeavy
+
+- type: Tag
+  id: SilverBar
 
 - type: Tag
   id: SyringeArmor
@@ -793,15 +783,6 @@
   id: Jetpack
 
 - type: Tag
-  id: RoundstartAntag
-
-- type: Tag
-  id: CalmAntag
-
-- type: Tag
-  id: MidroundAntag
-
-- type: Tag
   id: DisposableBattery
 
 - type: Tag
@@ -815,6 +796,12 @@
 
 - type: Tag
   id: Crate
+
+- type: Tag
+  id: GlovesLatex
+
+- type: Tag
+  id: GlovesNitrile
 
 - type: Tag
   id: GreenGloves

@@ -39,9 +39,15 @@ knowledge-path-void-s2-desc =
     Your Mansus Grasp will temporarily mute and chill the victim.
     You become immune to cold temperatures.
 
-
-knowledge-path-void-s3-name = Void Phase
+knowledge-path-void-s3-name = Mark of Void
 knowledge-path-void-s3-desc =
+    A gust of wind? A shimmer in the air? The presence is overwhelming, my senses began to betray me. My mind is my own enemy.
+
+    Your Mansus Grasp now applies the Mark of Void. The mark is triggered from an attack with your Void Blade.
+    When triggered, gives the victim the Curse of Void, which will mute and slowly freeze them to death.
+
+knowledge-path-void-s4-name = Void Phase
+knowledge-path-void-s4-desc =
     The entity calls themself the Aristocrat. They effortlessly walk through air like nothing - leaving a harsh, cold breeze in their wake.
     They disappear, and I am left in the blizzard.
 
@@ -55,14 +61,6 @@ knowledge-path-void-s3-desc =
 #
 #    Grants you immunity to cold temperatures, and removes your need to breathe.
 #    You can still take damage due to a lack of pressure.
-
-knowledge-path-void-s4-name = Mark of Void
-knowledge-path-void-s4-desc =
-    A gust of wind? A shimmer in the air? The presence is overwhelming, my senses began to betray me. My mind is my own enemy.
-
-    Your Mansus Grasp now applies the Mark of Void. The mark is triggered from an attack with your Void Blade.
-    When triggered, gives the victim the Curse of Void, which will mute and slowly freeze them to death.
-    You no longer need to breathe/
 
 #knowledge-path-void-s5-name = Void Blast
 #knowledge-path-void-s5-desc =
@@ -93,6 +91,7 @@ knowledge-path-void-s7-desc =
     Fleeting memories, fleeting feet. I mark my way with frozen blood upon the snow. Covered and forgotten.
 
     Your blade now freezes enemies. Additionally, you can now attack distant targets with your Void Blade, teleporting directly next to them.
+    You no longer need to breathe
 
 knowledge-path-void-s8-name = Void Conduit
 knowledge-path-void-s8-desc =
@@ -107,8 +106,9 @@ knowledge-path-void-s9-desc =
     The ascension ritual of the Path of Void.
     Bring 3 corpses to a transmutation rune in sub-zero temperatures to complete the ritual.
     When completed, grants you Aristocrat's Blessing.
-    A snowstorm is summoned, everything around you will be turned into snow and the air will constantly be frozen. Those nearby will be silenced and frozen even quicker.
+    A snowstorm is summoned, everything around you will be turned into snow and the air will constantly be frozen.
     Lights will shatter when nearby.
-    Lasers will pass through you and bullets will be slowed down at your presense and will avoid hitting you, the effect is greater if you are either walking or lying down.
-    Water, ice and slippery surfaces no slip you.
-    You will also become immune to flames, space, and similar environmental hazards. You gain total freedom of movement in zero-gravity.
+    Water, ice and slippery surfaces no longer slip you.
+    You will also become immune to flames, space, and similar environmental hazards.
+    You now waltz in the air, ignoring gravitation and moving at increased speed.
+    All your path specific abilities have their cooldowns halved.

@@ -4,6 +4,11 @@
   category: construction-category-weapons
   targetNode: axe
   objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+    CarvingKnowledge: 2
 
 - type: construction
   id: BoneDaggerConstruction
@@ -11,3 +16,8 @@
   category: construction-category-weapons
   targetNode: dagger
   objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+    CarvingKnowledge: 2

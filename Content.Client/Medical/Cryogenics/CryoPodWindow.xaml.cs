@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Shared.Body;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -8,6 +8,7 @@ using Content.Client.UserInterface.Controls;
 using Content.Shared.Atmos;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.EntityConditions.Conditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Medical.Cryogenics;
@@ -28,7 +29,7 @@ public sealed partial class CryoPodWindow : FancyWindow
     public event Action? OnEjectBeakerPressed;
     public event Action<FixedPoint2>? OnInjectPressed;
     // <Shitmed>
-    public event Action<TargetBodyPart?, EntityUid>? OnBodyPartSelected;
+    public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
     // </Shitmed>
 
@@ -98,9 +99,7 @@ public sealed partial class CryoPodWindow : FancyWindow
         // Health analyzer
         var maybePatient = _entityManager.GetEntity(msg.Health.TargetEntity);
         var hasPatient = msg.Health.TargetEntity.HasValue;
-        var hasDamage = (hasPatient
-             && _entityManager.TryGetComponent(maybePatient, out DamageableComponent? damageable)
-             && damageable.TotalDamage > 0);
+        var hasDamage = hasPatient && msg.HasDamage;
 
         NoDamageText.Visible = (hasPatient && !hasDamage);
         HealthSection.Visible = hasPatient;
@@ -228,7 +227,7 @@ public sealed partial class CryoPodWindow : FancyWindow
 
         float? result = null;
 
-        foreach (var (_, metabolism) in reagentProto.Metabolisms)
+        foreach (var (_, metabolism) in reagentProto.Metabolisms.Metabolisms)
         {
             foreach (var effect in metabolism.Effects)
             {

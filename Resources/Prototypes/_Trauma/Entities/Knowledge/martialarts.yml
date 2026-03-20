@@ -1,0 +1,208 @@
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtCQC
+  name: Close Quarters Combat
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    state: icon
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutiveSimple
+    - CQCPressureSimple
+    - CQCRestrainSimple
+    - CQCKickSimple
+    - CQCSlamSimple
+    - CQCConsecutive
+    - CQCPressure
+    - CQCRestrain
+    - CQCKick
+    - CQCSlam
+    - CQCConsecutiveAdvanced
+    - CQCKickAdvanced
+
+- type: entity
+  parent: MartialArtCQC
+  id: MartialArtCQCChef
+  name: Close Quarters Cooking
+  description: Just like CQC, but only usable in the kitchen, freezer and cafeteria.
+  components:
+  - type: MartialArtsKnowledge
+    giveExperience: false # only gain XP from cooking, do your job
+  - type: ExperienceOnCooking
+    scale: 5 # cook 200 meals to master it
+  - type: AreaMartialArt
+    areas:
+    - AreaKitchen
+    - AreaKitchenBackRoom
+    - AreaColdRoom
+    - AreaCafeteria
+  - type: KnowledgeConflict
+    conflicts:
+    - MartialArtCQC # nuh uh chud
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtCorporateJudo
+  name: Corporate Judo
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - JudoThrow
+    - JudoArmbar
+    - JudoDiscombobulate # Due to supercode this needs to be below Armbar, otherwise it takes priority
+    - JudoWheelThrow
+    - JudoEyePoke # Same here, must be below WheelThrow
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtKravMaga
+  name: Krav Maga
+  components:
+  - type: CanPerformCombo
+  - type: ComboActions
+    storedComboActions:
+      KravLegSweep: ActionLegSweep
+      KravNeckChop: ActionNeckChop
+      KravLungPunch: ActionLungPunch
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtCapoeira
+  name: Capoeira
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - PushKick
+    - SweepKick
+    - CircleKick
+    - SpinKick
+    - KickUp
+  - type: FastSpeed
+    # 1x to 1.5x move speed scaling with level
+    moveCurve: !type:LinearSkillCurve
+      curveOffset: 1
+      skillScale: 0.5
+    # 1x to 3x damage*momentum scaling with level
+    damageScaleCurve: !type:LinearSkillCurve
+      skillScale: 2
+      curveOffset: 1
+  - type: MeleeSpeedKnowledge
+    # 1x to 3x melee attack speed scaling with level
+    curve: !type:LinearSkillCurve
+      skillScale: 2
+      curveOffset: 1
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtHellRip
+  name: Hell Rip
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - DropKick
+    - HeadRip
+    - Slam
+    - TearDown
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtNinjutsu
+  name: Ninjutsu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - BiteTheDust
+    - DirtyKill
+    - NinjutsuTakedown
+  - type: SneakAttack
+    secondsTillHidden: 2
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtDragon
+  name: Dragon Kung Fu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - DragonClaw
+    - DragonTail
+    - DragonStrike
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtSleepingCarp
+  name: Sleeping Carp
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Wizard/Objects/scroll.rsi
+    state: scroll2
+  - type: CanPerformCombo
+    roundstartCombos:
+    - SleepingCarpGnashingTeeth
+    - SleepingCarpKneeHaul
+    - SleepingCarpCrashingWaves
+  - type: NoGun
+  # TODO: split bullet protection into its own component
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtPlasmaFist
+  name: Plasma Fist
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - TornadoSweep
+    - Throwback
+    - ThePlasmaFist
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtSpaceBear
+  name: Space Bear
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - BearJaws
+    - PawSlam
+    - Smokey
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtBoxing
+  name: Boxing
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtDrunkfu
+  name: Drunk-Fu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - CQCConsecutive
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtMimejutsu
+  name: Mimejutsu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - MimeChucks
+    - Smokebomb
+    - SilentPalm
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtAdminfu
+  name: Admin-Fu
+  components:
+  - type: CanPerformCombo
+    roundstartCombos:
+    - InstantStun
+    - InstantDeath
+    - InstantRejuvenate

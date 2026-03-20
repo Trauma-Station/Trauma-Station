@@ -21,18 +21,8 @@
     earliestStart: 20
     reoccurrenceDelay: 60
     minimumPlayers: 30
-    chaos:
-      Hostile: 50
-      Medical: 50
-      Death: 25
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 500
   - type: PendingPirateRule
     ransomPrototype: BikeHornRansom
-  - type: Tag
-    tags:
-    - MidroundAntag
 
 - type: entity
   parent: BaseGameRule
@@ -58,9 +48,6 @@
       - type: RandomMetadata
         nameSegments:
         - NamesDeathCommando
-  - type: Tag
-    tags:
-    - MidroundAntag
 
 - type: entity
   parent: BikeHorn

@@ -1,7 +1,8 @@
 # base area prototype
-# this is basically markerbase without clickable and interaction outline to not make mapping very annoying
+# this is like markerbase without marker, clickable and interaction outline to not make mapping very annoying
 - type: entity
   abstract: true
+  save: false # areas use custom serialization in MapAreaSystem
   id: BaseArea
   suffix: Area # to avoid adding area to every entity name
   placement:
@@ -9,6 +10,7 @@
   components:
   - type: Transform
     anchored: true
+    noRot: true
   - type: Sprite
     drawdepth: Overdoors
     sprite: _Trauma/Markers/Areas/station.rsi
@@ -21,7 +23,6 @@
           bounds: "-0.5,-0.5,0.5,0.5"
   - type: PlacementReplacement
     key: areas
-  - type: Marker # i dont want to copy paste the sprite hiding code
   - type: Area
   - type: Tag
     tags:

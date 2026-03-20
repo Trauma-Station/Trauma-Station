@@ -6,8 +6,12 @@
   components:
   - type: EntityTableContainerFill
     containers:
-      entity_storage:
-        id: ClothingOuterHardsuitLuxury
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingOuterHardsuitLuxury
+        - id: ClothingMaskBreath
+        - id: OxygenTankFilled
+        - id: NitrogenTankFilled
 
 - type: entity
   parent: CrateGenericSteel
@@ -198,7 +202,7 @@
     - id: PlushieLamp
     - id: PlushieSharkBlue
     - id: PlushieMoth
-    - id: PlushieVulp
+    #- id: PlushieVulp # Trauma - no ERP
     - id: PlushieArachind
     - id: PlushieLizardJobMultiweh # the exceedingly rare multiweh!
     - id: PlushieThrongler #hehe

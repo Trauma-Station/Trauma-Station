@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Lathe;
 using Content.Server.Lathe.Components;
 using Content.Server.Power.Components;
@@ -13,9 +14,7 @@ namespace Content.Trauma.Server.Lathe;
 public sealed class LatheAnchorSystem : EntitySystem
 {
     [Dependency] private readonly LatheSystem _lathe = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-
-    private EntityQuery<ApcPowerReceiverComponent> _powerQuery;
+    private EntityQuery<ApcPowerReceiverComponent> _powerQuery = default!;
 
     public override void Initialize()
     {
@@ -34,12 +33,10 @@ public sealed class LatheAnchorSystem : EntitySystem
 
         if (!args.Anchored)
         {
-            RemComp<LatheProducingComponent>(ent);
-            _appearance.SetData(ent.Owner, LatheVisuals.IsRunning, false);
+            _lathe.AbortProduction(ent, ent.Comp);
         }
         else if (ent.Comp.CurrentRecipe != null)
         {
-            EnsureComp<LatheProducingComponent>(ent);
             _lathe.TryStartProducing(ent, ent.Comp);
         }
     }

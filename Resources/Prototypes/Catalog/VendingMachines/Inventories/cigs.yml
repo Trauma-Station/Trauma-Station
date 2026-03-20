@@ -43,6 +43,9 @@
     GroundTobacco: 3
     CigarGold: 2
     Igniter: 1
+  # <Trauma>
   emaggedInventory:
-    CigPackSyndicate: 1 #Goob station
-    CybersunFlippo: 1 # Goob
+    CigPackSyndicate: 1
+    CybersunFlippo: 1
+    HoloCigar: 1 # remove if you ever make it a non-meme item
+  # </Trauma>
