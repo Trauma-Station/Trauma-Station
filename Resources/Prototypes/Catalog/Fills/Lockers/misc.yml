@@ -255,13 +255,10 @@
     - id: ClothingOuterSuitFire
     - id: ClothingHeadHelmetFire
     - id: ClothingMaskGas
-    # <Trauma> Commented out because this is somehow causing an error in a PR that doesn't change this file what
-    # - !type:GroupSelector
-    #   children:
-    #   - id: EmergencyOxygenTankFilled
-    #   - id: OxygenTankFilled
-    - id: OxygenTankFilled # Fuck it
-    # </Trauma>
+    - !type:GroupSelector
+      children:
+      - id: EmergencyOxygenTankFilled
+      - id: OxygenTankFilled
     - id: CrowbarRed
     - !type:GroupSelector
       children:
