@@ -1,7 +1,7 @@
 - type: entity
   name: combustible lemon # YES I KNOW ITS NOT A PROJECTILE GRENADE LET ME KEEP IT HERE
   description: When life gives you lemons, burn life's house down. With the lemons.
-  parent: [VolatileGrenadeBase, TimerGrenadeBase, BaseMinorContraband]
+  parent: [VolatileGrenadeBase, TimerGrenadeBase, BaseMajorContraband]
   id: LemonGrenade
   components:
   - type: Sprite
@@ -27,9 +27,9 @@
         volume: 5
     initialBeepDelay: 0
     beepInterval: 2
+  - type: Produce # Technically
+    seedId: CombustibleLemon
   - type: Construction
     graph: LemonGrenadeGraph
     node: start
     deconstructionTarget: null
-  - type: Produce # Technically
-    seedId: CombustibleLemon

@@ -403,18 +403,18 @@
     deconstructionTarget: null
 
 - type: entity
-  parent: [SyndieMiniBombModular , BaseMinorContraband]
+  parent: [BaseMajorContraband , SyndieMiniBombModular]
   id: LemonGrenadeModular
-  name: combustable lemon
+  name: combustible lemon
   description: When life gives you lemons, burn life's house down. With the lemons.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Grenades/combustablelemon.rsi
+    sprite: _Trauma/Objects/Weapons/Grenades/combustiblelemon.rsi
     state: icon
+  - type: Produce # Technically
+    seedId: CombustibleLemon
   - type: Construction
     graph: LemonGrenadeGraph
     node: emptyCase
     deconstructionTarget: null
-  - type: Produce # Technically
-    seedId: CombustibleLemon
