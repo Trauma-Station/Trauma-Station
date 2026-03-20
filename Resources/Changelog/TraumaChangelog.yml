@@ -5078,3 +5078,12 @@ Entries:
   id: 597
   time: '2026-03-20T21:08:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1141
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      you can now teleport people who are attached to the abductors telepad
+      using the human observation console
+  id: 598
+  time: '2026-03-20T22:10:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1112
