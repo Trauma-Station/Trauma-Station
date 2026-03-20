@@ -48,6 +48,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         SubscribeLocalEvent<GenericFieldGeneratorComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ComponentRemove>(OnComponentRemoved);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<GenericFieldGeneratorComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ChargeChangedEvent>(OnChargeChanged);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, SignalReceivedEvent>(OnSignalReceived);
@@ -85,18 +86,21 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
     #region Events
 
+    private void OnInit(EntityUid generator, GenericFieldGeneratorComponent component, ComponentInit _)
+    {
+        _signalSystem.EnsureSinkPorts(generator, component.TogglePort, component.OnPort, component.OffPort);
+        // _signalSystem.EnsureSourcePorts(generator, component.ConnectionStatusPort, component.FieldConnectedPort, component.FieldDisconnectedPort);
+    }
+
     private void OnMapInit(Entity<GenericFieldGeneratorComponent> generator, ref MapInitEvent args)
     {
         if (TryComp<PowerNetworkBatteryComponent>(generator, out var batteryComponent))
-        {
             batteryComponent.MaxChargeRate = generator.Comp.Enabled ? generator.Comp.ChargeRate : 0;
-        }
+        
         ChangePowerVisualizer(generator);
         ChangeOnLightVisualizer(generator);
         UpdateConnectionLights(generator);
         ChangeConnectionLightVisualizer(generator);
-        _signalSystem.EnsureSinkPorts(generator, generator.Comp.TogglePort, generator.Comp.OnPort, generator.Comp.OffPort);
-        _signalSystem.EnsureSourcePorts(generator, generator.Comp.ConnectionStatusPort, generator.Comp.FieldConnectedPort, generator.Comp.FieldDisconnectedPort);
     }
     private void OnExamine(EntityUid uid, GenericFieldGeneratorComponent component, ExaminedEvent args)
     {
@@ -166,6 +170,10 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     private void TurnOff(Entity<GenericFieldGeneratorComponent> generator)
     {
         generator.Comp.Charged = false;
+
+        // This looks terrible, but it will stop the field from vanishing when battery is drained, but other genreator still has charge left
+        if (generator.Comp.Connections is { Item1.Comp.Charged: true }) return;
+
         RemoveConnections(generator);
     }
 
@@ -176,19 +184,14 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// </summary>
     private void RemoveConnections(Entity<GenericFieldGeneratorComponent> generator)
     {
-        if (TryComp<DeviceLinkSourceComponent>(generator, out _))
-        {
-            _signalSystem.SendSignal(generator, generator.Comp.ConnectionStatusPort, false);
-            _signalSystem.InvokePort(generator, generator.Comp.FieldDisconnectedPort);
-        }
-
         var (uid, component) = generator;
 
         if (component.Connections == null)
             return;
 
         var value = component.Connections.Value;
-            
+        var (otheruid, othercomponent) = value.Item1;
+
         foreach (var field in value.Item2)
         {
             if (TryComp<GenericFieldComponent>(field, out var fieldComp))
@@ -196,38 +199,48 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             QueueDel(field);
         }
 
-        value.Item1.Comp.Connections = null;
+        // if (TryComp<DeviceLinkSourceComponent>(uid, out _))
+        // {
+        //     _signalSystem.SendSignal(uid, component.ConnectionStatusPort, false);
+        //     _signalSystem.InvokePort(uid, component.FieldDisconnectedPort);
+        // }
 
-        if (TryComp<DeviceLinkSourceComponent>(value.Item1, out _))
-        {
-            _signalSystem.SendSignal(value.Item1, value.Item1.Comp.ConnectionStatusPort, false);
-            _signalSystem.InvokePort(value.Item1, value.Item1.Comp.FieldDisconnectedPort);
-        }
+        // if (TryComp<DeviceLinkSourceComponent>(otheruid, out _))
+        // {
+        //     _signalSystem.SendSignal(otheruid, othercomponent.ConnectionStatusPort, false);
+        //     _signalSystem.InvokePort(otheruid, othercomponent.FieldDisconnectedPort);
+        // }
 
-        value.Item1.Comp.IsConnected = false;
         ChangeConnectionLightVisualizer(value.Item1);
         UpdateConnectionLights(value.Item1);
 
+        othercomponent.Connections = null;
         component.Connections = null;
 
         if (component.IsConnected)
             _popupSystem.PopupEntity(Loc.GetString("comp-genericfield-disconnected"), uid, PopupType.LargeCaution);
+
+        if (othercomponent.IsConnected)
+            _popupSystem.PopupEntity(Loc.GetString("comp-genericfield-disconnected"), otheruid, PopupType.LargeCaution);
+
         component.IsConnected = false;
+        othercomponent.IsConnected = false;
         ChangeConnectionLightVisualizer(generator);
         UpdateConnectionLights(generator);
-        _adminLogger.Add(LogType.FieldGeneration, LogImpact.Medium, $"{ToPrettyString(uid)} lost field connections"); // Ideally LogImpact would depend on if there is a singulo nearby
+        _adminLogger.Add(LogType.FieldGeneration, LogImpact.Medium, $"{ToPrettyString(uid)} lost field connections");
+        _adminLogger.Add(LogType.FieldGeneration, LogImpact.Medium, $"{ToPrettyString(otheruid)} lost field connections");
     }
 
     private void OnBatteryStateChanged(Entity<GenericFieldGeneratorComponent> ent, ref BatteryStateChangedEvent args)
     {
         if (args.OldState != BatteryState.Empty && args.NewState == BatteryState.Empty && ent.Comp.Charged) //Checks if already charged to stop repeated activation when changing states rapidly
-        {
             TurnOff(ent);
-        }
+        
+        if (args.OldState != BatteryState.Neither && args.NewState == BatteryState.Neither && ent.Comp.IsConnected) //Sets Charged back to true if still connected when recharged
+            ent.Comp.Charged = true;
+        
         if (args.OldState != BatteryState.Full && args.NewState == BatteryState.Full && (!ent.Comp.Charged || !ent.Comp.IsConnected)) // also checks if not connected yet
-        {
             TurnOn(ent);
-        }
     }
 
     private void OnSignalReceived(Entity<GenericFieldGeneratorComponent> generator, ref SignalReceivedEvent args) //basic signal compatability
@@ -279,9 +292,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     public void FieldDestroyed(Entity<GenericFieldGeneratorComponent> generator)
     {
         if (TryComp<BatteryComponent>(generator, out var batteryComponent))
-        {
             _battery.UseCharge(generator.Owner, batteryComponent.MaxCharge);
-        }
+        
         _adminLogger.Add(LogType.FieldGeneration, LogImpact.High, $"{ToPrettyString(generator)} had a field destroyed"); //fields dont break randomly, usually antag activity
         RemoveConnections(generator);
     }
@@ -340,14 +352,12 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         }
 
         if(otherFieldGeneratorComponent.CreatedField != component.CreatedField) // check if other generator generates the same type of field
-        {
             return false;
-        }
+        
 
         if(Transform(ent).LocalRotation.GetCardinalDir() != gen1XForm.LocalRotation.GetCardinalDir().GetOpposite()) // Both Generators facing opposite directions? works, dont touch it
-        {
             return false;
-        }
+        
 
         var otherFieldGenerator = (ent, otherFieldGeneratorComponent);
         var fields = GenerateFieldConnection(generator, otherFieldGenerator);
@@ -370,6 +380,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         }
 
         _popupSystem.PopupEntity(Loc.GetString("comp-genericfield-connected"), generator);
+        _popupSystem.PopupEntity(Loc.GetString("comp-genericfield-connected"), ent);
         return true;
     }
 
@@ -381,17 +392,17 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// <returns></returns>
     private List<EntityUid> GenerateFieldConnection(Entity<GenericFieldGeneratorComponent> firstGen, Entity<GenericFieldGeneratorComponent> secondGen)
     {
-        if (TryComp<DeviceLinkSourceComponent>(firstGen, out _))
-        {
-            _signalSystem.SendSignal(firstGen, firstGen.Comp.ConnectionStatusPort, true);
-            _signalSystem.InvokePort(firstGen, firstGen.Comp.FieldConnectedPort);
-        }
+        // if (TryComp<DeviceLinkSourceComponent>(firstGen, out _))
+        // {
+        //     _signalSystem.SendSignal(firstGen, firstGen.Comp.ConnectionStatusPort, true);
+        //     _signalSystem.InvokePort(firstGen, firstGen.Comp.FieldConnectedPort);
+        // }
 
-        if (TryComp<DeviceLinkSourceComponent>(secondGen, out _))
-        {
-            _signalSystem.SendSignal(secondGen, secondGen.Comp.ConnectionStatusPort, true);
-            _signalSystem.InvokePort(secondGen, secondGen.Comp.FieldConnectedPort);
-        }
+        // if (TryComp<DeviceLinkSourceComponent>(secondGen, out _))
+        // {
+        //     _signalSystem.SendSignal(secondGen, secondGen.Comp.ConnectionStatusPort, true);
+        //     _signalSystem.InvokePort(secondGen, secondGen.Comp.FieldConnectedPort);
+        // }
 
         var fieldList = new List<EntityUid>();
         var gen1Coords = Transform(firstGen).Coordinates;
@@ -453,9 +464,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     public void UpdateConnectionLights(Entity<GenericFieldGeneratorComponent> generator)
     {
         if (_light.TryGetLight(generator, out var pointLightComponent))
-        {
             _light.SetEnabled(generator, generator.Comp.IsConnected, pointLightComponent);
-        }
     }
 
     /// <summary>

@@ -114,14 +114,14 @@
     - Toggle
     - On
     - Off
-  - type: DeviceLinkSource
-    range: 200
-    ports:
-    - ConnectionStatus
-    - FieldConnected
-    - FieldDisconnected
-    lastSignals:
-      ConnectionStatus: false
+  # - type: DeviceLinkSource
+  #   range: 200
+  #   ports:
+  #   - ConnectionStatus
+  #   - FieldConnected
+  #   - FieldDisconnected
+  #   lastSignals:
+  #     ConnectionStatus: false
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
