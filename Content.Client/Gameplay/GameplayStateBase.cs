@@ -1,10 +1,7 @@
 using Content.Shared.Damage.Components; // Goob
-using Content.Shared.Humanoid;
-using Content.Shared.Humanoid.Prototypes;
 using System.Linq;
 using System.Numerics;
 using Content.Client.Clickable;
-using Content.Client.Kudzu;
 using Content.Client.UserInterface;
 using Content.Client.Viewport;
 using Content.Shared.CCVar;
@@ -25,7 +22,6 @@ using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Client.Gameplay
@@ -36,8 +32,6 @@ namespace Content.Client.Gameplay
     [Virtual]
     public class GameplayStateBase : State, IEntityEventSubscriber
     {
-        private static readonly ProtoId<SpeciesPrototype> DionaSpecies = "Diona";
-
         [Dependency] private readonly IEyeManager _eyeManager = default!;
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -192,35 +186,7 @@ namespace Content.Client.Gameplay
             // Do drawdepth & y-sorting. First index is the top-most sprite (opposite of normal render order).
             foundEntities.Sort(_comparer);
 
-            if (!LocalPlayerIsDiona())
-                return foundEntities.Select(a => a.Item1);
-
-            var kudzuQuery = _entityManager.GetEntityQuery<KudzuVisualsComponent>();
-            var prioritizedEntities = new List<EntityUid>(foundEntities.Count);
-
-            foreach (var entity in foundEntities)
-            {
-                if (!kudzuQuery.HasComponent(entity.Item1))
-                    prioritizedEntities.Add(entity.Item1);
-            }
-
-            foreach (var entity in foundEntities)
-            {
-                if (kudzuQuery.HasComponent(entity.Item1))
-                    prioritizedEntities.Add(entity.Item1);
-            }
-
-            return prioritizedEntities;
-        }
-
-        private bool LocalPlayerIsDiona()
-        {
-            var attached = _playerManager.LocalSession?.AttachedEntity;
-            if (attached == null)
-                return false;
-
-            return _entityManager.TryGetComponent(attached.Value, out HumanoidProfileComponent? profile) &&
-                   profile.Species == DionaSpecies;
+            return foundEntities.Select(a => a.Item1);
         }
 
         private sealed class ClickableEntityComparer : IComparer<(EntityUid clicked, int depth, uint renderOrder, float bottom)>
