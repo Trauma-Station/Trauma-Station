@@ -2,6 +2,7 @@
 
 using Content.Shared._White.Xenomorphs;
 using Content.Shared.Actions;
+using Content.Shared.Body;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
 
@@ -31,8 +32,8 @@ public sealed class NeurotoxinGlandSystem : EntitySystem
     private void OnShotAttempted(Entity<NeurotoxinGlandComponent> ent, ref ShotAttemptedEvent args)
     {
         // Prevent shooting if the gland is not active. It still lets them shove.
-        if (!ent.Comp.Active)
-            args.Cancel();
+        if (!ent.Comp.Active && TryComp<OrganComponent>(ent, out var organ) && args.User == organ.Body)
+        args.Cancel();
     }
 
     private void OnToggleAcidSpit(Entity<NeurotoxinGlandComponent> ent, ref ToggleAcidSpitEvent args)

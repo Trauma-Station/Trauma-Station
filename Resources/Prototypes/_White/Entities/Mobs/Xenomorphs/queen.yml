@@ -56,7 +56,6 @@
         Piercing: 20
   - type: XenomorphShoveTracker
     shoveThreshold: 1
-  - type: NeurotoxinGland
   - type: Deathgasp
     prototype: XenomorphQueenDeathgasp
   - type: Speech

@@ -19,7 +19,6 @@
       visible: false
   - type: Xenomorph
     caste: Sentinel
-  - type: NeurotoxinGland
   - type: VentCrawler
   - type: Cuffable
   - type: MobThresholds

@@ -272,6 +272,7 @@
       availableModes:
       - FullAuto
       soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+    - type: NeurotoxinGland
 
 - type: entity
   parent: [ OrganBaseInternal, OrganXenomorphInternal ]
