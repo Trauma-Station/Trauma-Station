@@ -7,8 +7,8 @@ using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Paper;
 using Robust.Shared.Timing;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.EmptyScroll;
 
@@ -17,6 +17,7 @@ public sealed class EmptyScrollSystem : EntitySystem
     [Dependency] private readonly EntityTableSystem _entityTable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -50,18 +51,19 @@ public sealed class EmptyScrollSystem : EntitySystem
         var answered = false;
         if (GetPrayer(args.Content.Trim()) is {} prayer)
         {
-            Pray(target, prayer);
+            Pray(target, prayer, args.User);
             answered = true;
         }
-        else if (args.User is {} user)
+        else if (_player.LocalEntity == target && _timing.IsFirstTimePredicted)
         {
-            RaiseNetworkEvent(new PrayerFailedEvent(), user);
+            var ev = new PrayerFailedEvent();
+            RaiseLocalEvent(ref ev);
         }
 
         LocId msg = "empty-scroll-prayer-" + (answered ? "answered" : "failed");
-        _popup.PopupCoordinates(Loc.GetString(msg), coords, answered ? PopupType.Large : PopupType.Medium);
+        _popup.PopupClient(Loc.GetString(msg), coords, target, answered ? PopupType.Large : PopupType.Medium);
 
-        QueueDel(ent);
+        PredictedQueueDel(ent);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
@@ -88,7 +90,7 @@ public sealed class EmptyScrollSystem : EntitySystem
     public ScrollPrayerPrototype? GetPrayer(string text)
         => AllPrayers.TryGetValue(text, out var prayer) ? prayer : null;
 
-    public void Pray(EntityUid target, ScrollPrayerPrototype prayer)
+    public void Pray(EntityUid target, ScrollPrayerPrototype prayer, EntityUid? user = null)
     {
         // give items before any effects happen
         if (prayer.Items is {} table)
@@ -102,12 +104,12 @@ public sealed class EmptyScrollSystem : EntitySystem
         }
 
         // do the effects
-        _effects.ApplyEffects(target, prayer.Effects, user: target);
+        _effects.ApplyEffects(target, prayer.Effects, user: user);
     }
 }
 
 /// <summary>
 /// Event broadcast when you don't write a valid prayer and get nothing.
 /// </summary>
-[Serializable, NetSerializable]
-public sealed class PrayerFailedEvent : EntityEventArgs;
+[ByRefEvent]
+public record struct PrayerFailedEvent;
