@@ -1,9 +1,9 @@
 - type: seed
-  id: combustablelemon
-  name: seeds-combustablelemon-name
+  id: combustiblelemon
+  name: seeds-combustiblelemon-name
   noun: seeds-noun-seeds
-  displayName: seeds-combustablelemon-display-name
-  plantRsi: _Trauma/Objects/Specific/Hydroponics/combustable_lemon.rsi
+  displayName: seeds-combustiblelemon-display-name
+  plantRsi: _Trauma/Objects/Specific/Hydroponics/combustible_lemon.rsi
   packetPrototype: LemonSeeds
   productPrototypes:
     - LemonGrenade
