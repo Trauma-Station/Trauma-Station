@@ -249,7 +249,7 @@ namespace Content.Client.Construction.UI
 
                 requirements.Add(Loc.GetString("construction-menu-requirement-main-skill", ("name", foundString ?? "Fabrication"), ("amount", knowledge.GetMasteryString(foundInt))));
 
-                if (proto.Practical.Count > 1)
+                if (proto.Practical.Count > ((foundString is { }) ? 1 : 0))
                     requirements.Add(Loc.GetString("construction-menu-requirement-extra-skill"));
                 foreach (var (id, amount) in proto.Practical)
                 {
