@@ -1,38 +1,6 @@
-// SPDX-FileCopyrightText: 2019 Ephememory <yetanotherscuffed@gmail.com>
-// SPDX-FileCopyrightText: 2019 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2019 Silver <Silvertorch5@gmail.com>
-// SPDX-FileCopyrightText: 2019 ZelteHonor <gabrieldionbouchard@gmail.com>
-// SPDX-FileCopyrightText: 2019 moneyl <8206401+Moneyl@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Clyybber <darkmine956@gmail.com>
-// SPDX-FileCopyrightText: 2020 Exp <theexp111@gmail.com>
-// SPDX-FileCopyrightText: 2020 Git-Nivrak <59925169+Git-Nivrak@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 zumorica <zddm@outlook.es>
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Paul <ritter.paul1+git@googlemail.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Artjom <artjombebenin@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 qwerltaz <69696513+qwerltaz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ertanic <36124833+Ertanic@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 // <Trauma>
-using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Systems;
 // </Trauma>
 using System.Numerics;
@@ -78,9 +46,8 @@ namespace Content.Client.Construction.UI
         event EventHandler ClearAllGhosts;
 
         void ClearRecipeInfo();
-        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite, List<string> practical);
+        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite, ConstructionPrototype proto, IPrototypeManager protoMan, CommonKnowledgeSystem knowledge); // Trauma
         void ResetPlacement();
-        List<string> GetSkills(ConstructionPrototype proto, IPrototypeManager protoMan, CommonKnowledgeSystem knowledge);
 
         #region Window Control
 
@@ -202,7 +169,9 @@ namespace Content.Client.Construction.UI
             EntityPrototype? targetPrototype,
             bool isItem,
             bool isFavorite,
-            List<string> practical)
+            ConstructionPrototype proto,
+            IPrototypeManager protoMan,
+            CommonKnowledgeSystem knowledge)
         {
             BuildButton.Disabled = false;
             BuildButton.Text = Loc.GetString(isItem ? "construction-menu-place-ghost" : "construction-menu-craft");
@@ -213,64 +182,7 @@ namespace Content.Client.Construction.UI
             FavoriteButton.Text = Loc.GetString(
                             isFavorite ? "construction-add-favorite-button" : "construction-remove-from-favorite-button");
 
-            if (practical is not { })
-                return;
-
-            foreach (var skill in practical)
-            {
-                RecipeConstructionList.AddItem(skill);
-            }
-        }
-
-        public List<string> GetSkills(ConstructionPrototype proto, IPrototypeManager protoMan, CommonKnowledgeSystem knowledge)
-        {
-            var requirements = new List<string>();
-            if (proto.Practical is { })
-            {
-                string? foundString = null;
-                int foundInt = 0;
-                foreach (var (id, amount) in proto.Practical)
-                {
-                    if (foundString is not { })
-                    {
-                        if (!protoMan.TryIndex<EntityPrototype>(id, out var prototype) || !prototype.Components.ContainsKey("Knowledge"))
-                            continue;
-
-                        var skill = (KnowledgeComponent) prototype.Components["Knowledge"].Component;
-
-                        if (skill.Category != "Crafting")
-                            continue;
-
-                        foundString = prototype.Name;
-                        foundInt = amount;
-                        break;
-                    }
-                }
-
-                requirements.Add(Loc.GetString("construction-menu-requirement-main-skill", ("name", foundString ?? "Fabrication"), ("amount", knowledge.GetMasteryString(foundInt))));
-
-                if (proto.Practical.Count > ((foundString is { }) ? 1 : 0))
-                    requirements.Add(Loc.GetString("construction-menu-requirement-extra-skill"));
-                foreach (var (id, amount) in proto.Practical)
-                {
-                    if (!protoMan.TryIndex<EntityPrototype>(id, out var prototype))
-                        continue;
-
-                    string name = prototype.Name;
-
-                    if ((foundString is { } && name == foundString))
-                        continue;
-
-                    requirements.Add(Loc.GetString("construction-menu-requirement-display", ("name", name), ("amount", knowledge.GetMasteryString(amount))));
-
-                }
-            }
-            else
-            {
-                requirements.Add(Loc.GetString("construction-menu-requirement-none"));
-            }
-
-            return requirements;
+            AddSkillRequirements(proto, protoMan, knowledge);
         }
 
         public void ClearRecipeInfo()

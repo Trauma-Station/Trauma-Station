@@ -418,15 +418,15 @@ namespace Content.Client.Construction.UI
             if (!_prototypeManager.TryIndex(targetProtoId, out EntityPrototype? proto))
                 return;
 
-            var requirements = _constructionView.GetSkills(prototype, _prototypeManager, _knowledge);
-
             _constructionView.SetRecipeInfo(
                 prototype.Name!,
                 prototype.Description!,
                 proto,
                 prototype.Type != ConstructionType.Item,
                 !_favoritedRecipes.Contains(prototype),
-                requirements);
+                prototype, // Trauma
+                _prototypeManager, // Trauma
+                _knowledge); // Trauma
 
             var stepList = _constructionView.RecipeStepList;
             GenerateStepList(prototype, stepList);
