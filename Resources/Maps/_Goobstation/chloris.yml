@@ -108513,39 +108513,6 @@ entities:
     - type: Transform
       pos: 74.5,177.5
       parent: 2
-- proto: ClosetJanitorBomb
-  entities:
-  - uid: 17433
-    components:
-    - type: Transform
-      pos: 81.5,57.5
-      parent: 2
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      removedMasks: 20
-      open: True
-    - type: PlaceableSurface
-      isPlaceable: True
 - proto: ClosetJanitorFilled
   entities:
   - uid: 17434

@@ -10,8 +10,9 @@
   theory:
     RevolutionaryKnowledge: 0
   practical:
-    TechnologyKnowledge: 0
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+    MetalworkingKnowledge: 1
+  useQuality: false
 
 - type: construction
   id: RevBolt
@@ -23,8 +24,9 @@
   theory:
     RevolutionaryKnowledge: 0
   practical:
-    TechnologyKnowledge: 0
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+    MetalworkingKnowledge: 1
+  useQuality: false
 
 - type: construction
   id: RevNut
@@ -36,5 +38,6 @@
   theory:
     RevolutionaryKnowledge: 0
   practical:
-    TechnologyKnowledge: 0
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+    MetalworkingKnowledge: 1
+  useQuality: false

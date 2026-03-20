@@ -55,6 +55,9 @@
         Quantity: 50
   - type: MobPrice
     price: 250
+  - type: InternalOrgan
+  - type: ChildOrgan
+    parents: [ Torso ]
   - type: Organ
     category: XenomorphLarva
   # - type: GuideHelp
@@ -86,7 +89,7 @@
   - type: UserInterface
     interfaces:
       enum.RadialSelectorUiKey.Key:
-        type: TrackedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI
 
 - type: entity
   parent: [BaseMobXenomorphDungeon, BaseMobXenomorphLarva]

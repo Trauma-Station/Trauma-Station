@@ -107,7 +107,7 @@ public sealed class ItemMinerSystem : EntitySystem
                     var entProto = _proto.Index(miner.Proto);
 
                     // from here on `spawned` and `amt` stand for stack counts and not entity counts
-                    if (entProto.TryGetComponent<StackComponent>(out var stackComp, EntityManager.ComponentFactory))
+                    if (entProto.TryGetComponent<StackComponent>(out var stackComp, Factory))
                     {
                         spawned *= stackComp.Count;
                         remaining *= stackComp.Count;

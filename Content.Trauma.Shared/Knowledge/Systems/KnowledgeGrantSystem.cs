@@ -108,7 +108,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             if (_knowledge.EnsureKnowledge(brain, id) is not { } skill)
                 continue;
 
-            if (!(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.Level < skillCap || skillCap < 0)))
+            if (!(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.LearnedLevel < skillCap || skillCap < 0)))
                 continue;
 
             hasLearned = true;

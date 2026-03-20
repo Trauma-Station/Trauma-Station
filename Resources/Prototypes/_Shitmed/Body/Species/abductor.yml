@@ -110,7 +110,7 @@
   id: OrganAbductorTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganAbductorExternal ]
+  parent: [ OrganBaseHeadBald, OrganAbductorExternal ] # baldest mfers there are
   id: OrganAbductorHead
 
 - type: entity

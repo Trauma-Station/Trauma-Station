@@ -2,6 +2,7 @@
 
 using System.Threading;
 using Content.Goobstation.Shared.MisandryBox.Smites;
+using Content.Server.Administration.Managers;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Administration;
 using Content.Shared.Database;
@@ -14,6 +15,9 @@ namespace Content.Goobstation.Server.Administration.Systems;
 
 public sealed partial class GoobAdminVerbSystem
 {
+    [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly ThunderstrikeSystem _thunder = default!;
+
     private void AddSmiteVerbs(GetVerbsEvent<Verb> args)
     {
         if (!SmitesAllowed(args))
@@ -27,8 +31,7 @@ public sealed partial class GoobAdminVerbSystem
             Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/smite.svg.192dpi.png")),
             Act = () =>
             {
-                var ogun = EntityManager.System<ThunderstrikeSystem>();
-                ogun.Smite(args.Target, kill: true);
+                _thunder.Smite(args.Target, kill: true);
             },
             Impact = LogImpact.Extreme,
             Message = Loc.GetString("admin-smite-thunderstrike-desc"),

@@ -267,9 +267,10 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         if (args.Cancelled || args.Target is not { } target || args.Used is not { } used)
             return;
 
+        var user = args.User;
         if (!_inventory.TryGetSlotEntity(target, "head", out var _)
-            && _inventory.TryEquip(target, used, "head", true, true))
-            ArmTrap(used, trap, target, args.User);
+            && _inventory.TryEquip(user, target, used, "head", predicted: true))
+            ArmTrap(used, trap, target, user);
     }
 
     private void OnWeldFinished(EntityUid uid, ReverseBearTrapComponent trap, WeldFinishedEvent args)

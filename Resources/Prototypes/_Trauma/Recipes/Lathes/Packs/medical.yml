@@ -24,3 +24,9 @@
   recipes:
   - MedkitCombat
   - VialBluespace
+
+- type: latheRecipePack
+  id: TraumaMedicalBoards
+  recipes:
+  - StasisOperatingTableCircuitboard
+  - MedicalBiofabMachineBoard

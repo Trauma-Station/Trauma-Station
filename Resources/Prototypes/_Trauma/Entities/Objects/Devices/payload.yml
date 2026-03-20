@@ -568,3 +568,29 @@
           Quantity: 30
         - ReagentId: FoamingAgent
           Quantity: 30
+
+- type: entity
+  parent: [ BasePayload, BaseMinorContraband ]
+  id: LemonPayload
+  name: lemon payload
+  description: I'm the man who's gonna burn your house down! With the lemons!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
+    state: payload-lemon
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 5 # Not very much.
+    intensitySlope: 3
+    totalIntensity: 15 # Not primarily explosive.
+    canCreateVacuum: false
+  - type: ExplodeOnTrigger
+  - type: SpawnOnTrigger
+    proto: MolotovFire
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:TriggerBehavior

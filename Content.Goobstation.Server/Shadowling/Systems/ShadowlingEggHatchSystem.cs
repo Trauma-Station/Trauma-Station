@@ -14,17 +14,19 @@ namespace Content.Goobstation.Server.Shadowling.Systems;
 /// <summary>
 /// This handles the hatching process
 /// </summary>
-///
 public sealed class ShadowlingEggHatchSystem : EntitySystem
 {
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ShadowlingSystem _shadowling = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<HatchingEggComponent, MapInitEvent>(OnMapInit);
     }
 
@@ -52,21 +54,21 @@ public sealed class ShadowlingEggHatchSystem : EntitySystem
 
                 if (_timing.CurTime >= (comp.NextUpdate - TimeSpan.FromSeconds(12)) && !comp.HasFirstMessageAppeared)
                 {
-                    _popupSystem.PopupEntity(Loc.GetString("sling-hatch-first"), uid, sUid, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("sling-hatch-first"), uid, sUid, PopupType.Medium);
                     _audio.PlayPvs(comp.CrackFirst, uid, AudioParams.Default.WithVolume(-2f));
                     comp.HasFirstMessageAppeared = true;
                 }
 
                 if (_timing.CurTime >= (comp.NextUpdate - TimeSpan.FromSeconds(7)) && !comp.HasSecondMessageAppeared)
                 {
-                    _popupSystem.PopupEntity(Loc.GetString("sling-hatch-second"), uid, sUid, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("sling-hatch-second"), uid, sUid, PopupType.Medium);
                     _audio.PlayPvs(comp.CrackSecond, uid, AudioParams.Default.WithVolume(-2f));
                     comp.HasSecondMessageAppeared = true;
                 }
 
                 if (_timing.CurTime >= (comp.NextUpdate - TimeSpan.FromSeconds(3)) && !comp.HasThirdMessageAppeared)
                 {
-                    _popupSystem.PopupEntity(Loc.GetString("sling-hatch-third"), uid, sUid, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("sling-hatch-third"), uid, sUid, PopupType.Medium);
                     _audio.PlayPvs(comp.CrackFirst, uid, AudioParams.Default.WithVolume(-2f).WithPitchScale(2f));
                     comp.HasThirdMessageAppeared = true;
                 }
@@ -93,14 +95,11 @@ public sealed class ShadowlingEggHatchSystem : EntitySystem
             _entityStorage.OpenStorage(egg, storage);
         }
 
-        var newUid = _polymorph.PolymorphEntity(sling, shadowling.ShadowlingPolymorphId);
-        if (newUid == null)
+        if (_polymorph.PolymorphEntity(sling, shadowling.ShadowlingPolymorphId) is not {} newUid)
             return;
 
-        var ascendantShadowlingComp = EntityManager.GetComponent<ShadowlingComponent>(newUid.Value);
-        var shadowlingSystem = EntityManager.System<ShadowlingSystem>();
-
-        shadowlingSystem.OnPhaseChanged(newUid.Value, ascendantShadowlingComp, ShadowlingPhases.PostHatch);
+        var ascendantShadowlingComp = Comp<ShadowlingComponent>(newUid);
+        _shadowling.OnPhaseChanged(newUid, ascendantShadowlingComp, ShadowlingPhases.PostHatch);
 
         comp.HasBeenHatched = true;
     }

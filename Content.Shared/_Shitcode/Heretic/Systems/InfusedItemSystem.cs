@@ -71,7 +71,7 @@ public sealed class InfusedItemSystem : EntitySystem
         if (!args.IsHit || args.HitEntities.Count == 0 || args.Direction != null)
             return;
 
-        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
+        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
             return;
 
         var target = args.HitEntities[0];
@@ -83,7 +83,7 @@ public sealed class InfusedItemSystem : EntitySystem
             mobState.CurrentState == MobState.Dead)
             return;
 
-        if (!_grasp.TryApplyGraspEffectAndMark(args.User, heretic, target, null, out _))
+        if (!_grasp.TryApplyGraspEffectAndMark(args.User, (mind, heretic), target, null, out _))
             return;
 
         SpendInfusionCharges(ent);

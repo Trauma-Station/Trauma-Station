@@ -114,11 +114,15 @@ public abstract partial class SharedGunSystem
         if (userUid is not {} user || !HasComp<KnowledgeHolderComponent>(user))
             return 1;
 
+        if (TryComp<GunComponent>(gun, out var gunComp) && gunComp.UnaffectedBySkill)
+            return 1;
+
         if (_knowledge.GetKnowledge(user, ShootingKnowledge) is not {} shooting)
             return 3;
 
-        return shooting.Comp.Level < 26
-            ? 3.0f - (float) shooting.Comp.Level / 26.0f - _knowledge.SharpCurve(shooting)
-            : 1.0f - ((float) (shooting.Comp.Level - 50) / 50.0f * (float) (shooting.Comp.Level - 50) / 50.0f);
+        var level = shooting.Comp.NetLevel;
+        return level < 26
+            ? 3.0f - level / 26.0f - _knowledge.SharpCurve(shooting)
+            : (float) Math.Max(1.0f - Math.Pow((level - 50) / 50.0f, 2), 0.2f);
     }
 }

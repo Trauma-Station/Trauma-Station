@@ -1,57 +1,103 @@
+using Content.Client.Construction;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._White.RadialSelector;
-using JetBrains.Annotations;
-using Robust.Client.Graphics;
-using Robust.Client.Input;
-
-// ReSharper disable InconsistentNaming
+using Content.Shared.Construction.Prototypes;
+using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._White.RadialSelector;
 
-[UsedImplicitly]
-public sealed class AttachedRadialSelectorMenuBUI(EntityUid owner, Enum uiKey)
-    : BasedRadialSelectorMenuBUI(owner, uiKey)
+public sealed class RadialSelectorMenuBUI : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _displayManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [UISystemDependency] private readonly ConstructionSystem _construction = default!;
 
-    private readonly RadialMenu _menu = new()
+    public SimpleRadialMenu Menu;
+
+    private Action<string> OnPressed;
+
+    public RadialSelectorMenuBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        HorizontalExpand = true,
-        VerticalExpand = true,
-        BackButtonStyleClass = "RadialMenuBackButton",
-        CloseButtonStyleClass = "RadialMenuCloseButton"
-    };
+        Menu = this.CreateWindow<SimpleRadialMenu>();
 
-    private bool _openCentered;
+        OnPressed = proto =>
+        {
+            SendPredictedMessage(new RadialSelectorSelectedMessage(proto));
+        };
+    }
 
     protected override void Open()
     {
         base.Open();
-        _menu.OnClose += Close;
 
-        if (_openCentered)
-            _menu.OpenCentered();
-        else
-            _menu.OpenCenteredAt(_inputManager.MouseScreenPosition.Position / _displayManager.ScreenSize);
+        Menu.OpenOverMouseScreenPosition();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
 
-        if (state is not RadialSelectorState radialSelectorState)
+        if (state is not RadialSelectorState cast)
             return;
 
-        ClearExistingContainers(_menu);
-        CreateMenu(radialSelectorState.Entries, _menu);
-        _openCentered = radialSelectorState.OpenCentered;
+        CreateMenu(cast.Entries);
     }
 
-    protected override void Dispose(bool disposing)
+    private void CreateMenu(List<RadialSelectorEntry> entries)
     {
-        base.Dispose(disposing);
-        if (disposing)
-            _menu.Dispose();
+        Menu.SetButtons(CreateModels(entries));
+    }
+
+    private List<RadialMenuOptionBase> CreateModels(List<RadialSelectorEntry> entries)
+    {
+        var models = new List<RadialMenuOptionBase>();
+        foreach (var entry in entries)
+        {
+            if (entry.Category is {} category)
+            {
+                var children = CreateModels(category.Entries);
+                models.Add(new RadialMenuNestedLayerOption(children)
+                {
+                    ToolTip = category.Name,
+                    IconSpecifier = RadialMenuIconSpecifier.With(category.Icon)
+                });
+            }
+            else if (entry.Prototype is {} proto)
+            {
+                models.Add(new RadialMenuActionOption<string>(OnPressed, proto)
+                {
+                    ToolTip = GetName(proto),
+                    IconSpecifier = RadialMenuIconSpecifier.With(entry.Icon) ?? GetIcon(proto)
+                });
+            }
+        }
+
+        return models;
+    }
+
+    /// <summary>
+    /// Get the name for an entity or construction prototype.
+    /// </summary>
+    private string GetName(string proto)
+    {
+        if (_proto.TryIndex(proto, out var prototype))
+            return prototype.Name;
+
+        if (_proto.Resolve<ConstructionPrototype>(proto, out var construction))
+            return construction.Name ?? proto;
+
+        return proto;
+    }
+
+    /// <summary>
+    /// Get the icon for an entity or construction prototype.
+    /// </summary>
+    private RadialMenuIconSpecifier? GetIcon(string proto)
+    {
+        if (!_construction.TryGetRecipePrototype(proto, out var result))
+            result = proto;
+
+        return RadialMenuIconSpecifier.With(proto);
     }
 }

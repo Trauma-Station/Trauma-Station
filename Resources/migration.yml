@@ -9,6 +9,8 @@
 # Table: null
 
 # <Trauma> - too lazy to port debugoks multi migration thing
+# 2026-3-2026
+ClosetMaintenanceFilledRandom: RandomMaintsCloset
 
 # 2026-01-07
 GunSafeDisabler: GunSafePhaser
@@ -101,6 +103,13 @@ CardBoxNanotrasen: null
 
 # 2026-03-10 this gives martial arts, no longer harmless maint loot
 MaterialHideBear: MaterialHideCorgi
+
+# 2026-03-12 this being roundstart is slop
+MedicalBiofabricator: null
+MedicalBiofabMachineBoard: null
+
+# 2026-03-13 necrosol was removed
+NecrosolChemistryBottle: ArcryoxChemistryBottle
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

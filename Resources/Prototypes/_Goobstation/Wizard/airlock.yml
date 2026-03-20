@@ -96,7 +96,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 2
+    AirlocksKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -112,7 +112,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 2
+    AirlocksKnowledge: 1
   # </Trauma>
 
 # Construction

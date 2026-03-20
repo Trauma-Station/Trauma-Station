@@ -84,8 +84,7 @@ public abstract class SharedCosmicSiphonSystem : EntitySystem
 
             if (!_threshold.TryGetThresholdForState(target, MobState.Dead, out var damage))
                 return;
-            var curDamage = 0f;
-            if (TryComp<DamageableComponent>(target, out var damageComp)) curDamage = (float) _damage.GetDamage((target, damageComp)).GetTotal();
+            var curDamage = _damage.GetTotalDamage(target).Float();
             DamageSpecifier dspec = new();
             dspec.DamageDict.Add(DamageType, damage.Value - curDamage + _random.NextFloat(30f, 60f));
             _damage.TryChangeDamage(target, dspec, true);

@@ -72,6 +72,15 @@
   id: MobDiona
   name: Urist McPlants
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RootSpeak
+    understands:
+    - TauCetiBasic
+    - RootSpeak
+  # </Trauma>
   - type: Respirator
     damage:
       types:
@@ -224,7 +233,7 @@
   id: OrganDionaTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganDionaExternal ]
+  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # Trauma - bald tree
   id: OrganDionaHead
 
 - type: entity

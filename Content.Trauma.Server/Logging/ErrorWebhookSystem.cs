@@ -100,7 +100,7 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
 
     void ILogHandler.Log(string sawmillName, LogEvent message)
     {
-        if (message.Level is not LogEventLevel.Error or LogEventLevel.Fatal)
+        if (message.Level < LogEventLevel.Error)
             return; // only care about errors
 
         var name = LogMessage.LogLevelToName(message.Level.ToRobust());

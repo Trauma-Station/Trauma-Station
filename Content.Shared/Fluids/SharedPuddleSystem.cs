@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TNE <38938720+JustTNE@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 ike709 <ike709@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
@@ -34,6 +21,7 @@ using Content.Shared.StepTrigger.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -54,6 +42,7 @@ public abstract partial class SharedPuddleSystem : EntitySystem
     [Dependency] private readonly SpeedModifierContactsSystem _speedModContacts = default!;
     [Dependency] private readonly StepTriggerSystem _stepTrigger = default!;
     [Dependency] private readonly TileFrictionController _tile = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private ProtoId<ReagentPrototype>[] _standoutReagents = [];
 
@@ -127,6 +116,10 @@ public abstract partial class SharedPuddleSystem : EntitySystem
 
     private void OnSolutionUpdate(Entity<PuddleComponent> entity, ref SolutionContainerChangedEvent args)
     {
+        // The changes are already networked as part of the same game state.
+        if (_timing.ApplyingState)
+            return;
+
         if (args.SolutionId != entity.Comp.SolutionName)
             return;
 
@@ -145,11 +138,6 @@ public abstract partial class SharedPuddleSystem : EntitySystem
 
     private void OnGetFootstepSound(Entity<PuddleComponent> entity, ref GetFootstepSoundEvent args)
     {
-        // Corvax-Next-Footprints
-        if (!entity.Comp.AffectsSound)
-            return;
-        // Corvax-Next-Footprints
-
         if (!_solutionContainerSystem.ResolveSolution(entity.Owner, entity.Comp.SolutionName, ref entity.Comp.Solution,
                 out var solution))
             return;
@@ -336,15 +324,8 @@ public abstract partial class SharedPuddleSystem : EntitySystem
         Dirty(entity, slipComp);
     }
 
-    // Trauma - pass the component as well
-    private void UpdateSlow(Entity<PuddleComponent> ent, Solution solution)
+    private void UpdateSlow(EntityUid uid, Solution solution)
     {
-        // <Trauma>
-        var uid = ent.Owner;
-        if (!ent.Comp.AffectsMovement)
-            return;
-        // </Trauma>
-
         var maxViscosity = 0f;
         foreach (var (reagent, _) in solution.Contents)
         {

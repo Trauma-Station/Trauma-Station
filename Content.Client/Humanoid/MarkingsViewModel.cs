@@ -10,7 +10,7 @@ namespace Content.Client.Humanoid;
 /// <summary>
 /// View model for UIs manipulating a set of markings, responsible for applying markings logic and keeping state synchronized.
 /// </summary>
-public sealed class MarkingsViewModel
+public sealed partial class MarkingsViewModel // Trauma - made partial
 {
     [Dependency] private readonly MarkingManager _marking = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -172,6 +172,7 @@ public sealed class MarkingsViewModel
 
             _organData = value;
             _previousColors.Clear();
+            _previousLayerColors.Clear(); // Trauma
             OrganDataChanged?.Invoke();
         }
     }
@@ -277,6 +278,7 @@ public sealed class MarkingsViewModel
         var layerMarkings = organMarkings[layer];
 
         var colors = _previousColors.GetValueOrDefault(markingId) ??
+                     GetPreviousColors(layer, markingProto) ?? // Trauma
                      MarkingColoring.GetMarkingLayerColors(markingProto, profileData.SkinColor, profileData.EyeColor, layerMarkings);
         var newMarking = new Marking(markingId, colors) { Forced = AnyEnforcementsLifted };
 
@@ -355,6 +357,7 @@ public sealed class MarkingsViewModel
         if (layerMarkings.Find(marking => marking.MarkingId == markingId) is { } removingMarking)
         {
             _previousColors[removingMarking.MarkingId] = removingMarking.MarkingColors.ToList();
+            _previousLayerColors[layer] = removingMarking.MarkingColors.ToList(); // Trauma - also store a copy for the layer
         }
         layerMarkings.RemoveAll(marking => marking.MarkingId == markingId);
         MarkingsChanged?.Invoke(organ, layer);
@@ -385,6 +388,7 @@ public sealed class MarkingsViewModel
             return;
 
         markings[markingIdx] = markings[markingIdx].WithColorAt(colorIndex, color);
+        _previousLayerColors[layer] = markings[markingIdx].MarkingColors.ToList(); // Trauma - copy it for changing it for other markings of the same layer
         MarkingsChanged?.Invoke(organ, layer);
     }
 

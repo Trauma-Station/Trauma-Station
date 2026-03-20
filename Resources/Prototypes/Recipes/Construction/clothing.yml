@@ -7,11 +7,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0
+    FabricationKnowledge: 0
     ToysKnowledge: 0 # billions must honk
   practical:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 1
     ToysKnowledge: 1
   # </Trauma>
 
@@ -24,11 +22,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0
+    FabricationKnowledge: 0
     ToysKnowledge: 0 # billions must ...
   practical:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 1
     ToysKnowledge: 1
   # </Trauma>
 
@@ -41,11 +37,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    SurvivalKnowledge: 0
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   practical:
-    SurvivalKnowledge: 1
-    HandmadeKnowledge: 2
+    CarvingKnowledge: 2
+    ArmorKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -57,11 +52,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    SurvivalKnowledge: 0
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   practical:
-    SurvivalKnowledge: 1
-    HandmadeKnowledge: 2
+    CarvingKnowledge: 2
+    ArmorKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -74,7 +68,8 @@
   # <Trauma>
   theory: {} # it's cardboard
   practical:
-    HandmadeKnowledge: 0
+    TailoringKnowledge: 0
+    ArmorKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -87,7 +82,8 @@
   # <Trauma>
   theory: {} # it's cardboard
   practical:
-    HandmadeKnowledge: 0
+    TailoringKnowledge: 0
+    ArmorKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -100,6 +96,8 @@
   # <Trauma>
   theory:
     BananiumKnowledge: 2
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -112,6 +110,8 @@
   # <Trauma>
   theory:
     BananiumKnowledge: 2
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -124,6 +124,8 @@
   # <Trauma>
   theory:
     BananiumKnowledge: 2
+  practical:
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -135,8 +137,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
+    FabricationKnowledge: 1
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -148,7 +150,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0
+    TailoringKnowledge: 0
     ToysKnowledge: 0
   # </Trauma>
 
@@ -161,7 +163,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0
+    TailoringKnowledge: 0
     ToysKnowledge: 0
   # </Trauma>
 
@@ -174,8 +176,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
-    TechnologyKnowledge: 1
+    FabricationKnowledge: 1
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -187,9 +189,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0 # medieval chuds figured it out come on
+    FabricationKnowledge: 1 # medieval chuds figured it out come on
   practical:
-    HandmadeKnowledge: 3
+    FabricationKnowledge: 2
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -201,9 +204,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 0
-    TechnologyKnowledge: 2
+    FabricationKnowledge: 0
   practical:
-    HandmadeKnowledge: 2
-    TechnologyKnowledge: 2
+    FabricationKnowledge: 1
+    ElectronicsKnowledge: 1
   # </Trauma>

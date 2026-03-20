@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.Quality;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -28,4 +29,10 @@ public sealed partial class QualityComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int QualityModifiers = 0;
+
+    /// <summary>
+    /// Stores the ID of item coefficients.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public ProtoId<QualityPrototype> QualityFactors;
 }

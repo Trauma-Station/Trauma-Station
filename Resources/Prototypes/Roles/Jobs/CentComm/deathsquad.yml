@@ -21,13 +21,6 @@
   - !type:AddComponentSpecial
     components:
     - type: DeathSquadMember
-  - !type:AddKnowledgeSpecial
-    knowledge:
-      MeleeKnowledge: 50
-      ShootingKnowledge: 50
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 50
-      AthleticsKnowledge: 50
   # </Trauma>
 
   # Goobstation Start - I basically re-did all of deathsquads stuff so. - Sol

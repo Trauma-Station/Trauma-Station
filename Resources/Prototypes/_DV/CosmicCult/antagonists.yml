@@ -8,9 +8,19 @@
   - !type:OverallPlaytimeRequirement
     time: 43200 # 12h
   guides: [ CosmicCult ]
+  creditImage: /Textures/_Trauma/EndCredits/Antags/cosmiccult.png
 
 - type: antag
   id: CosmicAntagColossus
   name: ghost-role-information-colossus-name
   antagonist: true
   objective: ghost-role-colossus-objective
+
+- type: antagSmite
+  id: CosmicCultist
+  antag: CosmicAntagCultist
+  rule: CosmicCult
+  ruleComp: CosmicCultRule
+  icon:
+    sprite: _DV/CosmicCult/Icons/antag_icons.rsi
+    state: CosmicCult

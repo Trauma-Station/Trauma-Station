@@ -38,7 +38,7 @@ public sealed class SpookSystem : EntitySystem
 
         _userInterfaceSystem.SetUiState(ent.Owner,
             RadialSelectorUiKey.Key,
-            new TrackedRadialSelectorState(ent.Comp.Actions));
+            new RadialSelectorState(ent.Comp.Actions));
     }
 
     private void OnRadialSelectorSelected(Entity<SpookComponent> ent, ref RadialSelectorSelectedMessage args)

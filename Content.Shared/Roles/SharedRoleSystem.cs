@@ -1,26 +1,6 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM <AJCM@tutanota.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Rainfall <rainfey0+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Rainfey <rainfey0+github@gmail.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Roles;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -195,6 +175,10 @@ public abstract class SharedRoleSystem : EntitySystem
 
         var message = new RoleAddedEvent(mindId, mind, update, silent);
         RaiseLocalEvent(mindId, message, true);
+        // <Trauma> - above event is fucking useless for real logic, raise our own
+        var ev = new RoleGotAddedEvent(mindId, mind.OwnedEntity);
+        RaiseLocalEvent(mindRoleId.Value, ref ev);
+        // </Trauma>
 
         var name = Loc.GetString(protoEnt.Name);
         if (mind.OwnedEntity is not null)
@@ -422,6 +406,10 @@ public abstract class SharedRoleSystem : EntitySystem
 
         foreach (var role in delete)
         {
+            // <Trauma> - RoleRemovedEvent is completely useless, raise this on each role
+            var ev = new RoleGotRemovedEvent(mind, mind.Comp.OwnedEntity);
+            RaiseLocalEvent(role, ref ev);
+            // </Trauma>
             PredictedDel(role);
         }
 

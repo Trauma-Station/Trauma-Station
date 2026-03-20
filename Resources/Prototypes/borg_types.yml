@@ -21,6 +21,18 @@
   radioChannels:
   - Science
 
+  # <Trauma>
+  addComponents:
+  - type: ModifyKnowledgeGrant
+    skills:
+      ScienceKnowledge: 50 # not good at much else
+      MaterialsKnowledge: 10
+      BotsKnowledge: 50
+      InfrastructureKnowledge: 20
+      WallsKnowledge: 20 # containing anoms or whatever
+      WindowsKnowledge: 20
+  # </Trauma>
+
   # Visual
   inventoryTemplateId: borgShort
   spriteBodyState: robot
@@ -60,6 +72,28 @@
   - Engineering
   - Science
 
+  # <Trauma>
+  addComponents:
+  - type: ModifyKnowledgeGrant
+    skills:
+      # crafting
+      FabricationKnowledge: 60
+      MetalworkingKnowledge: 40
+      CarvingKnowledge: 40
+      MechanicsKnowledge: 40
+      # recipes
+      MaterialsKnowledge: 50
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      BotsKnowledge: 30
+      InfrastructureKnowledge: 50
+      FurnitureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      ScienceKnowledge: 10 # sciborg is better
+      WindowsKnowledge: 50
+  # </Trauma>
+
   # Visual
   inventoryTemplateId: borgShort
   spriteBodyState: engineer
@@ -98,10 +132,16 @@
   - Supply
   - Science
 
-  addComponents: # Goobstation
+  # <Trauma>
+  addComponents:
   - type: NoWieldNeeded
-  - type: SlavedBorg # Goobstation: Special AI labeling for salv borgs.
+  - type: SlavedBorg # Special AI labeling for salv borgs.
     law: ObeyAI
+  - type: ModifyKnowledgeGrant
+    skills:
+      MeleeKnowledge: 30 # TODO: mining skill
+      ShootingKnowledge: 20 # for pka module??
+  # </Trauma>
 
   lawset: Salvage # DeltaV: Custom lawset
 
@@ -141,6 +181,16 @@
   radioChannels:
   - Science
   - Service
+
+  # <Trauma>
+  addComponents:
+  - type: ModifyKnowledgeGrant
+    skills:
+      JanitorKnowledge: 100 # mankind is dead. trash is fuel. disposals is full.
+      MaterialsKnowledge: 10
+      InfrastructureKnowledge: 10
+      WallsKnowledge: 10
+  # </Trauma>
 
   lawset: Janitor # DeltaV: Custom lawset
 
@@ -186,6 +236,7 @@
   - Science
   - Medical
 
+
   addComponents:
   - type: SolutionScanner
   - type: ShowHealthBars
@@ -194,10 +245,16 @@
   - type: ShowHealthIcons
     damageContainers:
     - Biological
+  # <Trauma>
+  - type: ModifyKnowledgeGrant
+    skills:
+      FirstAidKnowledge: 50
+      SurgeryKnowledge: 80 # robots are unsurprisingly good at making cuts
   - type: Sanitized # Shitmed
   - type: SurgeryIgnoreClothing
   - type: SurgerySpeedModifier
     speedModifier: 1.5
+  # </Trauma>
 
   # Visual
   inventoryTemplateId: borgDutch
@@ -244,6 +301,14 @@
   radioChannels:
   - Science
   - Service
+
+  # <Trauma>
+  addComponents:
+  - type: ModifyKnowledgeGrant
+    skills:
+      ToysKnowledge: 80 # the clown's bitch
+      BotsKnowledge: 50 # honk
+  # </Trauma>
 
   # Visual
   inventoryTemplateId: borgTall

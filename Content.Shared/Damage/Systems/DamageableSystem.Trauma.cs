@@ -11,31 +11,18 @@ namespace Content.Shared.Damage.Systems;
 public sealed partial class DamageableSystem
 {
     [Dependency] private readonly CommonBodyPartSystem _part = default!;
+    private EntityQuery<BodyComponent> _bodyQuery = default!;
+    private EntityQuery<InorganicComponent> _inorganicQuery = default!;
+    private EntityQuery<InternalOrganComponent> _internalQuery = default!;
 
     private static readonly ProtoId<DamageGroupPrototype>[] _vitalOnlyDamageGroups = { "Airloss", "Toxin", "Genetic", "Metaphysical" };
     private readonly List<ProtoId<DamageTypePrototype>> _vitalOnlyDamageTypes = new();
-
-    private EntityQuery<BodyComponent> _bodyQuery;
-    private EntityQuery<InorganicComponent> _inorganicQuery;
-    private EntityQuery<InternalOrganComponent> _internalQuery;
 
     private void InitializeTrauma()
     {
         _bodyQuery = GetEntityQuery<BodyComponent>();
         _inorganicQuery = GetEntityQuery<InorganicComponent>();
         _internalQuery = GetEntityQuery<InternalOrganComponent>();
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
-        CacheVitalPrototypes();
-    }
-
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (!args.WasModified<DamageGroupPrototype>())
-            return;
-
-        CacheVitalPrototypes();
     }
 
     private void CacheVitalPrototypes()

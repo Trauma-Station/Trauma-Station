@@ -94,6 +94,9 @@
   - type: Parry # Trauma
     reflects:
       - Energy
+    maxParries: 3
+    maxReflects: 10
+    reflectSpread: 60
   - type: IgnitionSource
     temperature: 700
   - type: Tool
@@ -206,7 +209,8 @@
     netsync: false
   - type: Parry # Trauma
     maxReflects: 3
-    maxParries: 1
+    maxParries: 0
+    reflectSpread: 120
 
 - type: entity
   name: pen
@@ -291,7 +295,8 @@
     - Write
   - type: Parry # Trauma
     maxReflects: 3
-    maxParries: 1
+    maxParries: 0
+    reflectSpread: 120
 
 - type: entity
   parent: [BaseItem, BaseSyndicateContraband]
@@ -410,7 +415,8 @@
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
   - type: Parry # Trauma
     maxReflects: 15
-    maxParries: 8
+    maxParries: 3
+    reflectSpread: 30
   - type: FlipOnHit # WD EDIT
   - type: ThrowableBlocker # Goobstation
     blockSound:

@@ -194,7 +194,8 @@ public sealed class ParrySystem : EntitySystem
     {
         if (!_toggle.IsActivated(reflector.Owner)
         || !CheckKnowledge(user, reflector.Comp.RequiredSkill, reflector.Comp.ReflectMinSkill)
-        || !CheckAndUpdateExhaustion(user, reflector, useParryValues: true))
+        || !CheckAndUpdateExhaustion(user, reflector, useParryValues: true)
+        || user == attacker) // Me when I try to kill myself but I parry the hit
             return false;
 
         if (_timing.IsFirstTimePredicted)
@@ -214,9 +215,9 @@ public sealed class ParrySystem : EntitySystem
     private bool CheckKnowledge(EntityUid user, EntProtoId knowledge, int minLevel)
     {
         return _proto.Resolve(knowledge, out var skillProto)
-        && _knowledge.GetContainer(user) is { } brain
-        && _knowledge.GetKnowledge(brain, skillProto) is { } skill
-        && skill.Comp.Level >= minLevel;
+            && _knowledge.GetContainer(user) is { } brain
+            && _knowledge.GetKnowledge(brain, skillProto) is { } skill
+            && skill.Comp.NetLevel >= minLevel;
     }
 
     /// <summary>
@@ -231,8 +232,8 @@ public sealed class ParrySystem : EntitySystem
         || _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
             return false; // Shouldn't ever happen because we check this right after checking knowledge
 
-        var result = exhComp.Exhaustion >= 1f;
-        var level = Math.Max(skill.Comp.Level, 1); // Evil division by 0
+        var result = exhComp.Exhaustion < 1f;
+        var level = Math.Max(skill.Comp.NetLevel, 1); // Evil division by 0
         var exhGain = useParryValues ?
             1f / item.Comp.MaxParries * (100f / level) :
             1f / item.Comp.MaxReflects * (100f / level);
@@ -250,28 +251,29 @@ public sealed class ParrySystem : EntitySystem
 
     private void AppendParryExamine(Entity<ParryComponent> ent, ref ExaminedEvent args)
     {
-        if (ent.Comp.MaxParries <= 0
-        || !_proto.Resolve(ent.Comp.RequiredSkill, out var skillProto)
-        || _knowledge.GetContainer(args.Examiner) is not { } brain
-        || _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
+        if (ent.Comp.MaxParries <= 0 ||
+            !_proto.Resolve(ent.Comp.RequiredSkill, out var skillProto) ||
+            _knowledge.GetContainer(args.Examiner) is not { } brain ||
+            _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
             return;
 
-        if (skill.Comp.Level < ent.Comp.ParryMinSkill)
+        var level = skill.Comp.NetLevel;
+        if (level < ent.Comp.ParryMinSkill)
         {
             args.PushMarkup(Loc.GetString("parry-component-examine-lowskill"));
             return;
         }
-        var value = Math.Ceiling(ent.Comp.MaxParries * (skill.Comp.Level / 100f));
+        var value = Math.Ceiling(ent.Comp.MaxParries * (level / 100f));
         args.PushMarkup(Loc.GetString("parry-component-examine", ("value", value)));
     }
 
     private void AppendReflectExamine(Entity<ParryComponent> ent, ref ExaminedEvent args)
     {
-        if (ent.Comp.Reflects == ReflectType.None
-        || ent.Comp.MaxReflects <= 0
-        || !_proto.Resolve(ent.Comp.RequiredSkill, out var skillProto)
-        || _knowledge.GetContainer(args.Examiner) is not { } brain
-        || _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
+        if (ent.Comp.Reflects == ReflectType.None ||
+            ent.Comp.MaxReflects <= 0 ||
+            !_proto.Resolve(ent.Comp.RequiredSkill, out var skillProto) ||
+            _knowledge.GetContainer(args.Examiner) is not { } brain ||
+            _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
             return;
 
         var compTypes = ent.Comp.Reflects.ToString().Split(", ");
@@ -281,12 +283,13 @@ public sealed class ParrySystem : EntitySystem
 
         var msg = ContentLocalizationManager.FormatListToOr(typeList);
 
-        if (skill.Comp.Level < ent.Comp.ReflectMinSkill)
+        var level = skill.Comp.NetLevel;
+        if (level < ent.Comp.ReflectMinSkill)
         {
             args.PushMarkup(Loc.GetString("parry-component-examine-reflect-lowskill", ("type", msg)));
             return;
         }
-        var value = Math.Ceiling(ent.Comp.MaxReflects * (skill.Comp.Level / 100f));
+        var value = Math.Ceiling(ent.Comp.MaxReflects * (level / 100f));
         args.PushMarkup(Loc.GetString("parry-component-examine-reflect", ("value", value), ("type", msg)));
     }
 }
