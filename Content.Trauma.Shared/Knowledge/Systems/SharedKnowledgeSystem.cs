@@ -618,11 +618,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public string GetMasteryString(Entity<KnowledgeComponent> ent)
         => GetMasteryString(GetMastery(ent.Comp.NetLevel));
 
-    /// <summary>
-    /// Get the name for a given mastery number.
-    /// Throws if it is out of bounds.
-    /// </summary>
-    public string GetMasteryString(int mastery)
+    public override string GetMasteryString(int mastery)
         => Loc.GetString("knowledge-mastery-" + MasteryNames[Math.Clamp(mastery, 0, 5)]);
 
     public override int GetMastery(int level)
