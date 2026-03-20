@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared._White.Xenomorphs;
 using Content.Shared.Actions;
 using Content.Shared.Popups;
