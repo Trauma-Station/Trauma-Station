@@ -6,9 +6,9 @@
   plantRsi: _Trauma/Objects/Specific/Hydroponics/combustible_lemon.rsi
   packetPrototype: LemonSeeds
   productPrototypes:
-    - LemonGrenade
+  - LemonGrenade
   mutationPrototypes:
-    - lime # mutated backwards idiot
+  - lime # mutated backwards idiot
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 6
