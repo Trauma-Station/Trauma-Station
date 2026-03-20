@@ -87,13 +87,6 @@ namespace Content.Client.ContextMenu.UI
         /// </summary>
         public void OpenRootMenu(List<EntityUid> entities)
         {
-            // <Trauma> - temp debug logging for bullshit
-            Log.Debug($"Opening root menu for {entities.Count} entities!");
-            foreach (var uid in entities)
-            {
-                Log.Debug($"- {_entityManager.ToPrettyString(uid)}");
-            }
-            // </Trauma>
             // close any old menus first.
             if (_context.RootMenu.Visible)
                 _context.Close();

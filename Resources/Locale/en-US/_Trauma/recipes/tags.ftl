@@ -26,5 +26,8 @@ construction-graph-tag-butt = a butt
 construction-graph-tag-cyber-butt = an ipc groin
 construction-graph-tag-egg = any egg
 
+# weapons
+construction-graph-tag-improvised-bow = an improvised bow
+
 # food
 construction-graph-tag-CookedEgg = a cooked egg

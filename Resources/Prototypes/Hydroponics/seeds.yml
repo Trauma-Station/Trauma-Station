@@ -238,6 +238,8 @@
   packetPrototype: LemoonSeeds
   productPrototypes:
     - FoodLemoon
+  mutationPrototypes: # Trauma
+  - CombustibleLemon
   harvestRepeat: Repeat
   lifespan: 90
   maturation: 8

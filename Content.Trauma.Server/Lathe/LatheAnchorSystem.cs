@@ -14,11 +14,13 @@ namespace Content.Trauma.Server.Lathe;
 public sealed class LatheAnchorSystem : EntitySystem
 {
     [Dependency] private readonly LatheSystem _lathe = default!;
-    [Dependency] private readonly EntityQuery<ApcPowerReceiverComponent> _powerQuery = default!;
+    private EntityQuery<ApcPowerReceiverComponent> _powerQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _powerQuery = GetEntityQuery<ApcPowerReceiverComponent>();
 
         SubscribeLocalEvent<LatheComponent, AnchorStateChangedEvent>(OnStateChanged);
     }

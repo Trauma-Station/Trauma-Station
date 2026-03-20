@@ -34,8 +34,8 @@ namespace Content.Medical.Shared.Wounds;
 
 public sealed partial class WoundSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<WoundComponent> _query = default!;
-    [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
+    private EntityQuery<WoundComponent> _query = default!;
+    private EntityQuery<WoundableComponent> _woundableQuery = default!;
 
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -96,6 +96,9 @@ public sealed partial class WoundSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _query = GetEntityQuery<WoundComponent>();
+        _woundableQuery = GetEntityQuery<WoundableComponent>();
 
         SubscribeLocalEvent<WoundComponent, ComponentGetState>(OnWoundComponentGet);
         SubscribeLocalEvent<WoundComponent, ComponentHandleState>(OnWoundComponentHandleState);

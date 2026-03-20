@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Goobstation.Common.Footprints;
 using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -359,8 +358,6 @@ public abstract class SharedAbsorbentSystem : EntitySystem
         localPos = userXform.LocalRotation.RotateVec(localPos);
 
         _melee.DoLunge(user, absorbEnt, Angle.Zero, localPos, null, Angle.Zero, false);
-
-        RaiseLocalEvent(target, new FootprintCleanEvent()); // Corvax-Next-Footprints
 
         return true;
     }
