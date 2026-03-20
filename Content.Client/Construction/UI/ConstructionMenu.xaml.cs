@@ -241,7 +241,7 @@ namespace Content.Client.Construction.UI
                         if (skill.Category != "Crafting")
                             continue;
 
-                        foundString = id;
+                        foundString = prototype.Name;
                         foundInt = amount;
                         break;
                     }
@@ -253,11 +253,13 @@ namespace Content.Client.Construction.UI
                     requirements.Add(Loc.GetString("construction-menu-requirement-extra-skill"));
                 foreach (var (id, amount) in proto.Practical)
                 {
-                    string name = id;
-                    if ((foundString is { } && id == foundString) || !protoMan.TryIndex<EntityPrototype>(id, out var prototype))
+                    if (!protoMan.TryIndex<EntityPrototype>(id, out var prototype))
                         continue;
 
-                    name = prototype.Name;
+                    string name = prototype.Name;
+
+                    if ((foundString is { } && name == foundString))
+                        continue;
 
                     requirements.Add(Loc.GetString("construction-menu-requirement-display", ("name", name), ("amount", knowledge.GetMasteryString(amount))));
 
