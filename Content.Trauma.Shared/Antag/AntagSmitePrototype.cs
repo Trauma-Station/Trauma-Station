@@ -34,7 +34,7 @@ public sealed partial class AntagSmitePrototype : IPrototype
     /// Name of the gamerule's component to look for to find an existing rule.
     /// </summary>
     [DataField(required: true, serverOnly: true)]
-    public string RuleComp;
+    public string RuleComp = string.Empty;
 
     [DataField(required: true)]
     public SpriteSpecifier Icon = default!;
