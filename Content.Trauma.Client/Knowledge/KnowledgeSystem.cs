@@ -4,17 +4,16 @@ using System.Linq;
 using Content.Client.Lobby;
 using Content.Client.Lobby.UI;
 using Content.Client.UserInterface.Systems.Character.Windows;
+using Content.Shared.Popups;
 using Content.Trauma.Client.Knowledge.UI;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
-using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Knowledge;
@@ -159,7 +158,8 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             return;
 
         _nextPopup = now + _popupCooldown;
-        _popup.PopupClient(args.Popup, _player.LocalEntity);
+        if (_player.LocalEntity is { } player)
+            _popup.PopupEntity(args.Popup, player, player, PopupType.Small);
     }
 
     public EntProtoId? GetEntProtoId(Entity<MartialArtsKnowledgeComponent>? martialArt)
