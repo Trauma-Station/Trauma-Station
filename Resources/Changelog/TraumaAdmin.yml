@@ -59,3 +59,10 @@ Entries:
   id: 8
   time: '2026-03-12T10:17:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1199
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added antag smite for insurgents.
+  id: 9
+  time: '2026-03-20T17:41:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1477

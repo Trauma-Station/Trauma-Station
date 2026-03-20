@@ -4943,3 +4943,108 @@ Entries:
   id: 580
   time: '2026-03-19T11:41:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1220
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Handheld genome scanners can now print out scanned subject or sequence
+      information.
+  id: 581
+  time: '2026-03-19T15:32:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1439
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Skillchips can now rarely malfunction when hit by an EMP.
+  id: 582
+  time: '2026-03-19T16:37:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1441
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Most head lockers now contain a box of spare skillchips.
+  id: 583
+  time: '2026-03-19T18:17:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1442
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Visitor ghost roles now have skill chips and can buy uplink job-specific
+      items.
+  id: 584
+  time: '2026-03-19T22:44:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1445
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed chef beacon and other radial menus not having backgrounds.
+  id: 585
+  time: '2026-03-20T00:09:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1450
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Different crafting skills matters to different recipes now.
+  id: 586
+  time: '2026-03-20T06:58:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1454
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Reworked footprints so they don't cause any lag, using decals instead of
+      basically puddles.
+  - type: Tweak
+    message: >-
+      Mops removing decals like footprints is now instant, just like mopping up
+      puddles.
+  id: 587
+  time: '2026-03-20T08:19:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1461
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed explosions being completely stopped by walls.
+  id: 588
+  time: '2026-03-20T08:54:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1465
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed CE locker not having goob/trauma specific gear.
+  id: 589
+  time: '2026-03-20T09:08:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1466
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lizard tails etc not matching skin color.
+  id: 590
+  time: '2026-03-20T09:42:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1467
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed skeletons not getting healed by milk
+  id: 591
+  time: '2026-03-20T13:52:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1468
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: >-
+      Added Combustible Lemons you can mutate from Lemoons, so you can burn
+      Life's house down.
+  id: 592
+  time: '2026-03-20T16:15:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1470
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added makeshift bone gel, see its microwave recipe in the medical recipes
+      section.
+  id: 593
+  time: '2026-03-20T18:34:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1479

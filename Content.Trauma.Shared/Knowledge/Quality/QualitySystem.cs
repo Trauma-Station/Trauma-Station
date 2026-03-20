@@ -16,6 +16,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Construction;
+using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Common.Quality;
 using Content.Trauma.Common.Stack;
@@ -41,6 +42,7 @@ public sealed class QualitySystem : EntitySystem
     private EntityQuery<QualityComponent> _query;
 
     private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
+    private static readonly ProtoId<KnowledgeCategoryPrototype> CraftingCategory = "Crafting";
 
     public override void Initialize()
     {
@@ -298,21 +300,47 @@ public sealed class QualitySystem : EntitySystem
 
         int? lowestDelta = null;
         EntProtoId? lowestId = null;
+        EntProtoId knowledgeToUse = FabricationKnowledge;
+        bool setKnowledge = false;
         foreach (var (id, delta) in ent.Comp.LevelDeltas)
         {
-            if (lowestDelta is not { } || (_knowledge.GetKnowledge(brain, id) is { } skill && _knowledge.GetMastery(skill.Comp) - delta < lowestDelta))
+            if (_knowledge.GetKnowledge(brain, id) is not { } skill)
             {
-                lowestDelta = delta;
+                if (lowestDelta is not { })
+                {
+                    lowestDelta = -1 - delta;
+                    lowestId = id;
+                }
+                else if (-1 - delta < delta)
+                {
+                    lowestDelta = -1 - delta;
+                    lowestId = id;
+                }
+                continue;
+            }
+
+            if (_knowledge.GetMastery(skill.Comp) - delta < lowestDelta)
+            {
+                lowestDelta = _knowledge.GetMastery(skill.Comp) - delta;
                 lowestId = id;
+            }
+
+            if (!setKnowledge)
+                continue;
+
+            if (skill.Comp.Category == CraftingCategory)
+            {
+                knowledgeToUse = id;
+                setKnowledge = true;
             }
         }
 
-        var added = _knowledge.GetKnowledge(brain, FabricationKnowledge)?.Comp.NetLevel ?? -1;
+        var added = _knowledge.GetKnowledge(brain, knowledgeToUse)?.Comp.NetLevel ?? -1;
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
 
-        ent.Comp.Quality = (added + lowestDelta * 5 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
+        ent.Comp.Quality = (added + lowestDelta * 15 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
             >= 88 => 5,
             >= 44 => 4,

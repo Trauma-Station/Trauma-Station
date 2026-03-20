@@ -8,17 +8,3 @@
     effects:
     - !type:InsertNewOrgan
       organ: SkillChipNukie
-
-# Give all crew their job's skill chip
-- type: playerEffects
-  id: InstallSkillChips
-  conditions:
-  - !type:WhitelistCondition
-    whitelist:
-      components:
-      - Body
-    blacklist:
-      components:
-      - BorgChassis # uhhhhhhh
-  effects:
-  - !type:InstallJobSkillChip

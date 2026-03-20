@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Server._Goobstation.Wizard.Components;
-using Content.Server._DV.CosmicCult.Components;
 // </Trauma>
 using Content.Server.Antag;
 using Content.Server.GameTicking;
@@ -181,54 +180,20 @@ public sealed partial class AdminVerbSystem
             Message = string.Join(": ", paradoxCloneName, Loc.GetString("admin-verb-make-paradox-clone")),
         };
 
-        // goobstation - heretics
-        var hereticName = Loc.GetString("admin-verb-text-make-heretic");
-        Verb heretic = new()
-        {
-            Text = hereticName,
-            Category = VerbCategory.Antag,
-            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_Goobstation/Heretic/Blades/eldritch_blade.rsi"), "icon"),
-            Act = () =>
-            {
-                _antag.ForceMakeAntag<HereticRuleComponent>(targetPlayer, "Heretic");
-            },
-            Impact = LogImpact.High,
-            Message = string.Join(": ", hereticName, Loc.GetString("admin-verb-make-heretic")),
-        };
-        args.Verbs.Add(heretic);
-
-        // Goobstation - Wizard
         var wizardName = Loc.GetString("admin-verb-text-make-wizard");
         Verb wizard = new()
         {
             Text = wizardName,
             Category = VerbCategory.Antag,
-            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Clothing/Head/Hats/wizardhat.rsi"), "icon"),
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/Clothing/Head/Hats/wizardhat.rsi"), "icon"), // Trauma - wizard hat instead of job icon
             Act = () =>
             {
-                _antag.ForceMakeAntag<WizardRuleComponent>(targetPlayer, DefaultWizardRule);
+                _antag.ForceMakeAntag<WizardRuleComponent>(targetPlayer, DefaultWizardRule); // Trauma - use WizardRuleComponent not role...
             },
             Impact = LogImpact.High,
             Message = string.Join(": ", wizardName, Loc.GetString("admin-verb-make-wizard")),
         };
         args.Verbs.Add(wizard);
-
-        // Begin DeltaV Additions
-        var cosmicCultName = Loc.GetString("admin-verb-text-make-cosmiccultist");
-        Verb cosmiccult = new()
-        {
-            Text = cosmicCultName,
-            Category = VerbCategory.Antag,
-            Icon = new SpriteSpecifier.Rsi(new("/Textures/_DV/CosmicCult/Icons/antag_icons.rsi"), "CosmicCult"),
-            Act = () =>
-            {
-                _antag.ForceMakeAntag<CosmicCultRuleComponent>(targetPlayer, "CosmicCult");
-            },
-            Impact = LogImpact.High,
-            Message = string.Join(": ", cosmicCultName, Loc.GetString("admin-verb-make-cosmiccultist")),
-        };
-        args.Verbs.Add(cosmiccult);
-        // End DeltaV Additions
 
         var ninjaName = Loc.GetString("admin-verb-text-make-space-ninja");
         Verb ninja = new()
@@ -247,5 +212,20 @@ public sealed partial class AdminVerbSystem
 
         if (HasComp<HumanoidProfileComponent>(args.Target)) // only humanoids can be cloned
             args.Verbs.Add(paradox);
+
+        // <Trauma>
+        var ev = new GetAntagVerbsEvent(args.Target, player, args);
+        RaiseLocalEvent(ref ev);
+        // </Trauma>
     }
 }
+
+/// <summary>
+/// Trauma - Event broadcast to get antag verbs for a player.
+/// Better than copy pasting all this system's checks in a new one.
+/// </summary>
+/// <remarks>
+/// Can't be in common because it needs verbs.
+/// </remarks>
+[ByRefEvent]
+public record struct GetAntagVerbsEvent(EntityUid Target, ICommonSession Session, GetVerbsEvent<Verb> Verbs);
