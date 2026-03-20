@@ -5,6 +5,7 @@
   description: This little mothroach has mopshoes on its feet! How adorable!
   components:
   - type: GhostRole
+    prob: 0 # Trauma
     name: ghost-role-information-moproach-name
     description: ghost-role-information-moproach-description
   - type: Sprite
