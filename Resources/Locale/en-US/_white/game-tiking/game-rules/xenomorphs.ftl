@@ -25,6 +25,3 @@ xenomorphs-cond-xenotakeoverstation = The xenomorphs managed to take over the st
 xenomorphs-cond-xenoinfiltratedoncentcom = Xenomorphs infiltrated the Central Command station.
 xenomorphs-cond-allreproducexenodead = The crew eliminated all Xenomorphs capable of reproduction.
 xenomorphs-cond-allcrewdead = All crew members have died.
-
-neurotoxin-gland-activated = You strain your gland.
-neurotoxin-gland-deactivated = You relax your gland.

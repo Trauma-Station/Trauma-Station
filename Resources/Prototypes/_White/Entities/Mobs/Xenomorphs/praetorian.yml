@@ -15,6 +15,7 @@
     - map: [ "pocket2" ]
   - type: Xenomorph
     caste: Praetorian
+  - type: NeurotoxinGland
   - type: TailLash
     tailDamage:
       types:

@@ -254,3 +254,17 @@
     event: !type:PromotionActionEvent
   - type: PlasmaCostAction
     plasmaCost: 500
+
+# Goobstation - Toggleable acid spit action
+- type: entity
+  id: ActionAcidSpit
+  parent: BaseAction
+  name: Acid spit
+  description: Toggle the ability to spit neurotoxin. When enabled, use (M2) to shoot.
+  components:
+  - type: Action
+    useDelay: 1
+    itemIconStyle: BigAction
+    icon: { sprite: _White/Interface/Actions/xenomorph.rsi, state: acid } # TODO: Custom sprite
+  - type: InstantAction
+    event: !type:ToggleAcidSpitEvent

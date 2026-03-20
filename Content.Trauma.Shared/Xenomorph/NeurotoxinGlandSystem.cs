@@ -5,7 +5,7 @@ using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
 
-namespace Content.Goobstation.Shared.Xenomorph;
+namespace Content.Trauma.Shared.Xenomorph;
 
 public sealed class NeurotoxinGlandSystem : EntitySystem
 {
@@ -22,30 +22,25 @@ public sealed class NeurotoxinGlandSystem : EntitySystem
         SubscribeLocalEvent<NeurotoxinGlandComponent, ShotAttemptedEvent>(OnShotAttempted);
     }
 
-    private void OnMapInit(EntityUid uid, NeurotoxinGlandComponent component, MapInitEvent args) =>
-        _actions.AddAction(uid, component.ActionId);
+    private void OnMapInit(Entity<NeurotoxinGlandComponent> ent, ref MapInitEvent args) =>
+        _actions.AddAction(ent.Owner, ent.Comp.ActionId);
 
-    private void OnComponentShutdown(EntityUid uid, NeurotoxinGlandComponent component, ComponentShutdown args) =>
-        _actions.RemoveAction(uid, component.Action);
+    private void OnComponentShutdown(Entity<NeurotoxinGlandComponent> ent, ref ComponentShutdown args) =>
+        _actions.RemoveAction(ent.Owner, ent.Comp.Action);
 
-    private void OnShotAttempted(EntityUid uid, NeurotoxinGlandComponent component, ref ShotAttemptedEvent args)
+    private void OnShotAttempted(Entity<NeurotoxinGlandComponent> ent, ref ShotAttemptedEvent args)
     {
         // Prevent shooting if the gland is not active. It still lets them shove.
-        if (!component.Active)
+        if (!ent.Comp.Active)
             args.Cancel();
     }
 
-    private void OnToggleAcidSpit(EntityUid uid, NeurotoxinGlandComponent component, ToggleAcidSpitEvent args)
+    private void OnToggleAcidSpit(Entity<NeurotoxinGlandComponent> ent, ref ToggleAcidSpitEvent args)
     {
         // Toggle the active state
-        component.Active = !component.Active;
-
-        if (component.Active)
-            _popup.PopupPredicted(Loc.GetString("neurotoxin-gland-activated"), uid, uid);
-        else
-            _popup.PopupPredicted(Loc.GetString("neurotoxin-gland-deactivated"), uid, uid);
-
-        Dirty(uid, component);
+        ent.Comp.Active = !ent.Comp.Active;
+        _popup.PopupPredicted(Loc.GetString(ent.Comp.Active ? "neurotoxin-gland-activated" : "neurotoxin-gland-deactivated"), ent.Owner, ent.Owner);
+        Dirty(ent);
         args.Handled = true;
     }
 }
