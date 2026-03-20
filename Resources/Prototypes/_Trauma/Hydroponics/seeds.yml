@@ -8,7 +8,7 @@
   productPrototypes:
     - LemonGrenade
   mutationPrototypes:
-    - lemon
+    - lime # mutated backwards idiot
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 6
