@@ -236,7 +236,7 @@
   - type: Organ
     category: AcidGland
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   - type: XenomorphAcid
     damagePerSecond:
       types:
@@ -257,7 +257,7 @@
   - type: Organ
     category: NeurotoxinGland
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   - type: OrganComponents
     onAdd:
     - type: RechargeBasicEntityAmmo
@@ -285,7 +285,7 @@
   - type: Organ
     category: EggSack
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: OrganActions
     actions:
     - ActionSpawnXenomorphEgg
@@ -301,7 +301,7 @@
   - type: Organ
     category: ResinSpinner
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   - type: OrganActions
     actions:
     - ActionSpawnWallResin
@@ -319,7 +319,7 @@
   - type: Organ
     category: HiveNode
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   - type: OrganComponents
     onAdd:
     - type: FacehuggerImmune
@@ -336,7 +336,7 @@
   - type: Organ
     category: PlasmaVessel
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: OrganComponents
     onAdd:
     - type: PlasmaVessel

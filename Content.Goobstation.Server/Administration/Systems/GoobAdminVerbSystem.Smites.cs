@@ -4,6 +4,7 @@ using System.Threading;
 using Content.Goobstation.Shared.Maps;
 using Content.Goobstation.Shared.MisandryBox.Smites;
 using Content.Goobstation.Shared.HellGoose.Components;
+using Content.Server.Administration.Managers;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Administration;
 using Content.Shared.Database;
@@ -21,6 +22,7 @@ namespace Content.Goobstation.Server.Administration.Systems;
 
 public sealed partial class GoobAdminVerbSystem
 {
+    [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly ThunderstrikeSystem _thunder = default!;
 
     private void AddSmiteVerbs(GetVerbsEvent<Verb> args)

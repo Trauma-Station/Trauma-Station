@@ -8,4 +8,5 @@
   # <Trauma>
   theory:
     ScienceKnowledge: 1
+  useQuality: false
   # </Trauma>

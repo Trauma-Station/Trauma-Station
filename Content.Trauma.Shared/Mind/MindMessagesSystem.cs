@@ -15,13 +15,20 @@ public sealed class MindMessagesSystem : EntitySystem
 
         _query = GetEntityQuery<MindMessagesComponent>();
 
-        SubscribeLocalEvent<MindContainerComponent, EntitySpokeEvent>(OnSpoke);
+        // relay event to the mind, other systems can use it too
+        SubscribeLocalEvent<MindContainerComponent, EntitySpokeEvent>(OnContainerSpoke);
+        SubscribeLocalEvent<MindMessagesComponent, EntitySpokeEvent>(OnSpoke);
     }
 
-    private void OnSpoke(Entity<MindContainerComponent> ent, ref EntitySpokeEvent args)
+    private void OnContainerSpoke(Entity<MindContainerComponent> ent, ref EntitySpokeEvent args)
     {
-        if (GetMessages(ent.Comp.Mind) is {} comp)
-            AddMessage(comp, args.Message);
+        if (ent.Comp.Mind is {} mind)
+            RaiseLocalEvent(mind, args);
+    }
+
+    private void OnSpoke(Entity<MindMessagesComponent> ent, ref EntitySpokeEvent args)
+    {
+        AddMessage(ent.Comp, args.Message);
     }
 
     public void AddMessage(MindMessagesComponent comp, string message)

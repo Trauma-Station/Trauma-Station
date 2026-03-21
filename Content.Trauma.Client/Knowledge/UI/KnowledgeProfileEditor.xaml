@@ -7,6 +7,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <BoxContainer Orientation="Horizontal" Align="Center" HorizontalExpand="True">
         <Label Name="PointsLabel"/>
         <Button Name="SaveButton" Text="{Loc 'knowledge-editor-save'}" Margin="4" Disabled="True"/>
+        <Button Name="ResetButton" Text="{Loc 'knowledge-editor-reset'}" Margin="4" StyleClasses="negative" Disabled="True"/>
     </BoxContainer>
     <ScrollContainer VerticalExpand="True">
 	    <BoxContainer Name="EnabledSkills" VerticalExpand="True" Orientation="Vertical" Align="Begin" HorizontalAlignment="Left"/>

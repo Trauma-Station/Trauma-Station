@@ -31,7 +31,7 @@ public sealed partial class SkinnableComponent : Component
     public TimeSpan SkinningDoAfterDuation = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public DamageSpecifier DamageOnSkinned = new() { DamageDict = new Dictionary<string, FixedPoint2> { { "Slash", 50 } } };
+    public DamageSpecifier DamageOnSkinned = new() { DamageDict = new() { { "Slash", 50 } } };
 
     [DataField]
     public SoundSpecifier SkinSound = new SoundPathSpecifier("/Audio/_Shitmed/Medical/Surgery/scalpel1.ogg");

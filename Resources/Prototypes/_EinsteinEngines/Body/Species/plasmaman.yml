@@ -189,6 +189,8 @@
       243: 0.8
   - type: Fart
     gasToFart: Plasma
+  - type: Hunger
+    baseDecayRate: 0 # don't get hungry, still able to eat
 
 ## Base
 

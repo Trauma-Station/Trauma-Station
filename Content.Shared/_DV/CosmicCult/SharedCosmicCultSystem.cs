@@ -119,11 +119,11 @@ public abstract class SharedCosmicCultSystem : EntitySystem
     /// Whether the entity is a part of the cosmic cult
     /// </summary>
     /// <param name="includeLesser"> If false, cosmic servants are not considered part of the cult</param>
-    public bool EntityIsCultist(EntityUid ent, bool includeLesser = true)
+    public bool EntityIsCultist(EntityUid ent)
     {
         return HasComp<CosmicCultComponent>(ent)
         || HasComp<CosmicColossusComponent>(ent)
-        || HasComp<CosmicLesserCultistComponent>(ent) && includeLesser
+        || HasComp<CosmicLesserCultistComponent>(ent)
         || _mind.TryGetMind(ent, out var mind, out _) && _role.MindHasRole<CosmicCultRoleComponent>(mind);
     }
 

@@ -9,6 +9,8 @@
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 0
   useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -35,6 +37,8 @@
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
   useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -61,6 +65,8 @@
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
   useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -74,6 +80,8 @@
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
   useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -87,6 +95,8 @@
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
   useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 # <Trauma> remove durathread handcraft
@@ -128,6 +138,8 @@
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
   useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -141,6 +153,8 @@
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
   useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -154,4 +168,6 @@
   theory: # TODO should reqire tools to make
     MaterialsKnowledge: 1
   useQuality: false
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>

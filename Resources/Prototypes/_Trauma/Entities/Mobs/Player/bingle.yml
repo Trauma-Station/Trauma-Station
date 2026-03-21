@@ -21,7 +21,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 50
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
@@ -122,7 +122,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
@@ -159,9 +159,13 @@
     damage:
       types:
         Poison: -3
-      groups:
-        Brute: -3
-        Burn: -3
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Heat: -0.75
+        Cold: -0.75
+        Shock: -0.75
+        Caustic: -0.75
   - type: Insulated
 
 - type: entity
@@ -185,7 +189,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 50
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
@@ -289,7 +293,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 250
+        damage: 150
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
@@ -326,9 +330,13 @@
     damage:
       types:
         Poison: -3
-      groups:
-        Brute: -3
-        Burn: -3
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Heat: -0.75
+        Cold: -0.75
+        Shock: -0.75
+        Caustic: -0.75
   - type: Insulated
 
 - type: entity

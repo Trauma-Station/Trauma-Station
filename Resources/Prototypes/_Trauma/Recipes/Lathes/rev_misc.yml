@@ -23,6 +23,20 @@
     Paper: 500
 
 - type: latheRecipe
+  id: BookShootingPrintedRev
+  result: BookShootingPrintedRev
+  completetime: 180
+  materials:
+    Paper: 1000
+
+- type: latheRecipe
+  id: BookMeleePrintedRev
+  result: BookMeleePrintedRev
+  completetime: 180
+  materials:
+    Paper: 1000
+
+- type: latheRecipe
   id: EncryptionKeyRev
   result: EncryptionKeyRev
   completetime: 6

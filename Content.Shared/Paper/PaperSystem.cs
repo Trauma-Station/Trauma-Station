@@ -209,7 +209,7 @@ public sealed class PaperSystem : EntitySystem
                 LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has written on {ToPrettyString(entity):entity} the following text: {args.Text}");
 
-            _audio.PlayPvs(entity.Comp.Sound, entity);
+            _audio.PlayPredicted(entity.Comp.Sound, Transform(entity).Coordinates, args.Actor); // Trauma - predict this shit, play positionally
         }
 
         entity.Comp.Mode = PaperAction.Read;

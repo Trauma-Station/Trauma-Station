@@ -1,126 +1,117 @@
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Fenn <162015305+TooSillyFennec@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
-# SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 CometVoid <cometsstrile@gmail.com>
-# SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Gareth Quaile <garethquaile@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 McBosserson <148172569+McBosserson@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Milon <plmilonpl@gmail.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Unlumination <144041835+Unlumy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: gamePreset
   id: Changeling
   alias:
-    - ling
-    - lings
-    - changeling
+  - ling
+  - lings
+  - changeling
   name: changeling-gamemode-title
   description: changeling-gamemode-description
   showInVote: false
   rules:
-    - Changeling
-    - SubGamemodesRule
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    - BasicRoundstartVariation
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - Changeling
+
+# no subgamemodes for the mixed presets
 
 - type: gamePreset
   id: Traitorling
   alias:
-    - lingtraitor
-    - traitorling
+  - lingtraitor
+  - traitorling
   name: traitorling-title
   description: traitorling-description
   showInVote: false
   rules:
-    - CalmLing
-    - CalmTraitor
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    - BasicRoundstartVariation
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - CalmLing
+  - CalmTraitor
 
 - type: gamePreset
   id: NukeTraitor
   alias:
-    - nuketot
-    - optraitor
-    - optot
+  - nuketot
+  - optraitor
+  - optot
   name: nukeops-title
   description: nukeops-description
   showInVote: false
   rules:
-    - Calmops
-    - CalmTraitor
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    - BasicRoundstartVariation
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - Calmops
+  - CalmTraitor
 
 - type: gamePreset
   id: NukeLing
   alias:
-    - nukeling
-    - opling
+  - nukeling
+  - opling
   name: nukeops-title
   description: nukeops-description
   showInVote: false
   rules:
-    - Calmops
-    - CalmLing
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    - BasicRoundstartVariation
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - Calmops
+  - CalmLing
 
 - type: gamePreset
   id: RevTraitor
   alias:
-    - revtraitor
-    - revtot
-    - totrevs
+  - revtraitor
+  - revtot
+  - totrevs
   name: revtraitor-title
   description: revtraitor-description
   showInVote: false
   rules:
-    - CalmRevs
-    - CalmTraitor
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - CalmRevs
+  - CalmTraitor
 
 - type: gamePreset
   id: RevLing
   alias:
-    - revling
-    - lingrevs
+  - revling
+  - lingrevs
   name: revling-title
   description: revling-description
   showInVote: false
   rules:
-    - CalmRevs
-    - CalmLing
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    - BasicRoundstartVariation
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - CalmRevs
+  - CalmLing
 
 - type: gamePreset
   id: Blob
@@ -130,26 +121,31 @@
   description: blob-description
   showInVote: false
   rules:
-  - BlobGameMode
-  - BasicStationEventScheduler
-  - MeteorSwarmScheduler
   - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
+  - BlobGameMode
 
 - type: gamePreset
   id: Honkops
   alias:
-    - honkops
+  - honkops
   name: honkops-title
   description: honkops-description
   showInVote: false
   rules:
-    - Honkops
-    # - SubGamemodesRule
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    - SpaceTrafficControlEventScheduler
-    - BasicRoundstartVariation
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - Honkops
 
 - type: gamePreset
   id: Xenomorphs
@@ -160,9 +156,11 @@
   showInVote: false
   minPlayers: 1
   rules:
-  - XenomorphsInfestationRoundstart
-  - SubGamemodesRule
+  - BasicRoundstartVariation
   - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
+  - SubGamemodesRule
+  - XenomorphsInfestationRoundstart

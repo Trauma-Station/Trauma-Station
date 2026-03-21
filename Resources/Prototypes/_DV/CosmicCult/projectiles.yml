@@ -81,7 +81,7 @@
     impactEffect: BulletImpactEffectCosmic
     damage:
       types:
-        Cold: 12
+        Asphyxiation: 12
         Ion: 12
     soundHit:
       path: /Audio/_DV/CosmicCult/projectile_razor_hit.ogg

@@ -47,6 +47,11 @@
     enum.HumanoidVisualLayers.RFoot:
       limit: 1
       required: false
+  # <Trauma>
+  appearances:
+    enum.HumanoidVisualLayers.Wings:
+      matchSkin: true
+  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance
@@ -140,6 +145,15 @@
   id: MobMoth
   name: Urist McFluff
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Moffic
+    understands:
+    - TauCetiBasic
+    - Moffic
+  # </Trauma>
   - type: Damageable
     damageModifierSet: Moth
   - type: ZombieAccentOverride

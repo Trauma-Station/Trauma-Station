@@ -6,12 +6,11 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 2.5h
+      time: 1h # Trauma was 5
   startingGear: StationEngineerGear
   icon: "JobIconStationEngineer"
   supervisors: job-supervisors-ce
   guides: [ Engineering ] # goobstation
-  goobcoins: 20 #Goob content
   access:
   - Maintenance
   - Engineering

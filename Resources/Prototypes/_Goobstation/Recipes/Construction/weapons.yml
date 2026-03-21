@@ -5,11 +5,9 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    HandmadeKnowledge: 1
-    SurvivalKnowledge: 1 # most people know alcohol burns
+    FabricationKnowledge: 1
   practical:
-    HandmadeKnowledge: 2
-    SurvivalKnowledge: 1
+    WeaponsKnowledge: 2
 
 - type: construction
   name: recipes-wooden-wand-name
@@ -19,6 +17,6 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    HandmadeKnowledge: 0 # its a fucking stick
+    FabricationKnowledge: 0 # its a fucking stick
   practical:
-    HandmadeKnowledge: 1
+    CarvingKnowledge: 1

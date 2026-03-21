@@ -51,12 +51,6 @@ public sealed partial class HauntComponent : Component
     public ProtoId<StatusEffectPrototype> FlashedId = "Flashed";
 
     /// <summary>
-    /// The status effect to make the Wraith corporeal upon using haunt.
-    /// </summary>
-    [DataField]
-    public ProtoId<StatusEffectPrototype> CorporealEffect = "Corporeal";
-
-    /// <summary>
     /// Is the action active?
     /// </summary>
     [ViewVariables, AutoNetworkedField]

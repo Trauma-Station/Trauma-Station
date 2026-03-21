@@ -19,7 +19,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Hands;
-using Content.Goobstation.Common.Footprints;
 using Content.Shared.Movement.Components;
 using Content.Shared.Speech.Muting;
 using Content.Shared.Emoting;
@@ -37,6 +36,7 @@ using Content.Shared.Standing;
 using Content.Goobstation.Shared.Supermatter.Components;
 using Content.Shared.Body;
 using Content.Shared.Pointing;
+using Content.Trauma.Common.Footprints;
 using Robust.Shared.Timing;
 using Robust.Shared.Physics.Components;
 
@@ -467,7 +467,7 @@ public sealed class SlasherIncorporealSystem : EntitySystem
     private void OnFootprintLeaveAttempt(EntityUid uid, SlasherIncorporealComponent comp, ref FootprintLeaveAttemptEvent args)
     {
         if (comp.IsIncorporeal)
-            args.Cancel();
+            args.Cancelled = true;
     }
 
     private void OnAnyActionAttempt(Entity<ActionComponent> action, ref ActionAttemptEvent args)

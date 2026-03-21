@@ -5,7 +5,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      TechnologyKnowledge: 50
+      ElectronicsKnowledge: 50
       ScienceKnowledge: 50
       # TODO: mech skill
   # TODO: suplex immovable rods, parity
@@ -17,7 +17,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      TechnologyKnowledge: 26
+      ElectronicsKnowledge: 26
       ScienceKnowledge: 26
       # TODO: more??
 
@@ -28,7 +28,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      TechnologyKnowledge: 26
+      ElectronicsKnowledge: 26
       ScienceKnowledge: 26
 
 - type: entity
@@ -38,7 +38,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      TechnologyKnowledge: 10
+      ElectronicsKnowledge: 10
       ScienceKnowledge: 10
 
 - type: entity
@@ -48,6 +48,6 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      TechnologyKnowledge: 26
+      ElectronicsKnowledge: 26
       ScienceKnowledge: 26
       # TODO: goida mech skill

@@ -6,10 +6,10 @@
   requirements:
   - !type:RoleTimeRequirement
     role: JobScientist
-    time: 5h
+    time: 3h # Trauma was 5
   - !type:DepartmentTimeRequirement
     department: Science
-    time: 10h
+    time: 5h # Trauma was 10
   weight: 10
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
@@ -19,7 +19,6 @@
   guides: # goobstation
   - Science
   - Command
-  goobcoins: 40 #Goob content
   access:
   # <Trauma>
   - External

@@ -36,6 +36,14 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
             _modified = false;
             SaveButton.Disabled = true;
         };
+
+        ResetButton.OnPressed += _ =>
+        {
+            _profile = new();
+            _modified = true;
+            ResetButton.Disabled = true;
+            ReloadSkills();
+        };
     }
 
     public void SetProfile(ProtoId<SpeciesPrototype> species, KnowledgeProfile profile)
@@ -43,6 +51,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         _profile = profile;
         _parent = _proto.Index(_proto.Index(species).Knowledge);
         ReloadSkills();
+        UpdateReset();
     }
 
     private void ReloadSkills()
@@ -77,6 +86,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
 
                 _modified = true;
                 UpdatePoints();
+                UpdateReset();
             };
 
             // Put the skill in it's respective category (or create it if there isn't one yet)
@@ -110,5 +120,19 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         // can't save with a deficit
         PointsLabel.FontColorOverride = Color.Red;
         SaveButton.Disabled = true;
+    }
+
+    private void UpdateReset()
+    {
+        ResetButton.Disabled = true;
+        // only enable if there are any non-zero skill changes
+        foreach (var level in _profile.Mastery.Values)
+        {
+            if (level != 0)
+            {
+                ResetButton.Disabled = false;
+                break;
+            }
+        }
     }
 }

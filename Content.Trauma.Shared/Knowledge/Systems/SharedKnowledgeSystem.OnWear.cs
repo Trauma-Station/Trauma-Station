@@ -3,8 +3,10 @@
 using Content.Shared.Body;
 using Content.Shared.Clothing;
 using Content.Shared.EntityConditions;
+using Content.Trauma.Common.Silicons.Borgs;
 using Content.Trauma.Shared.Knowledge.Components;
 using Content.Trauma.Shared.MartialArts.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -18,6 +20,11 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeGrantOnWearComponent, OrganGotRemovedEvent>(OnRemoveKnowledgeOrgan);
         SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ClothingGotEquippedEvent>(OnGrantKnowledgeWear);
         SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ClothingGotUnequippedEvent>(OnRemoveKnowledgeWear);
+        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, BrainInsertedIntoBorgEvent>(OnBrainInsertedIntoBorg);
+        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, BrainRemovedFromBorgEvent>(OnBrainRemovedFromBorg);
+
+        SubscribeLocalEvent<ModifyKnowledgeGrantComponent, MapInitEvent>(OnModifyGrantMapInit,
+            after: [ typeof(InitialBodySystem) ]); // TODO: move this to a partial of KnowledgeGrantSystem bruh...
     }
 
     private void OnGrantKnowledgeOrgan(Entity<KnowledgeGrantOnWearComponent> ent, ref OrganGotInsertedEvent args)
@@ -32,10 +39,22 @@ public abstract partial class SharedKnowledgeSystem
     private void OnRemoveKnowledgeWear(Entity<KnowledgeGrantOnWearComponent> ent, ref ClothingGotUnequippedEvent args)
         => RemoveKnowledgeModifiers(args.Wearer, ent);
 
+    private void OnBrainInsertedIntoBorg(Entity<KnowledgeGrantOnWearComponent> ent, ref BrainInsertedIntoBorgEvent args)
+        => ApplyKnowledgeModifiers(args.Brain, ent);
+
+    private void OnBrainRemovedFromBorg(Entity<KnowledgeGrantOnWearComponent> ent, ref BrainRemovedFromBorgEvent args)
+        => RemoveKnowledgeModifiers(args.Brain, ent);
+
+    private void OnModifyGrantMapInit(Entity<ModifyKnowledgeGrantComponent> ent, ref MapInitEvent args)
+    {
+        AddGrantedSkills(ent.Owner, user: ent.Owner, ent.Comp.Skills);
+        RemComp(ent, ent.Comp);
+    }
+
     private void ApplyKnowledgeModifiers(EntityUid wearer, Entity<KnowledgeGrantOnWearComponent> ent)
     {
         ent.Comp.Applied = _conditions.TryConditions(wearer, ent.Comp.Conditions);
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(KnowledgeGrantOnWearComponent.Applied));
         if (!ent.Comp.Applied || GetContainer(wearer) is not { } brain)
             return;
 
@@ -78,7 +97,7 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         ent.Comp.Applied = false;
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(KnowledgeGrantOnWearComponent.Applied));
 
         // Remove Skills
         foreach (var (id, level) in ent.Comp.Skills)
@@ -116,6 +135,35 @@ public abstract partial class SharedKnowledgeSystem
             {
                 martial.Blocked = --martial.TemporaryBlockedCounter == 0;
                 Dirty(unit, martial);
+            }
+        }
+    }
+
+    /// <summary>
+    /// One-time adjustment to skills.
+    /// Stores the new skills but also adds them to the current user.
+    /// </summary>
+    public void AddGrantedSkills(Entity<KnowledgeGrantOnWearComponent?> ent, EntityUid user, Dictionary<EntProtoId, int> skills)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        foreach (var (id, level) in skills)
+        {
+            ent.Comp.Skills[id] = ent.Comp.Skills.GetValueOrDefault(id) + level;
+        }
+        DirtyField(ent, ent.Comp, nameof(KnowledgeGrantOnWearComponent.Skills));
+
+        // adjust immediately if it was applied already, if it wasn't applied it will be handled later
+        if (!ent.Comp.Applied || GetContainer(user) is not { } brain)
+            return;
+
+        foreach (var (id, level) in skills)
+        {
+            if (EnsureKnowledge(brain, id) is { } unit)
+            {
+                unit.Comp.TemporaryLevel += level;
+                Dirty(unit);
             }
         }
     }

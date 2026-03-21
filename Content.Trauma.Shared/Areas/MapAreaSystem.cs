@@ -19,7 +19,7 @@ namespace Content.Trauma.Shared.Areas;
 /// </summary>
 public sealed class MapAreaSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<AreaGridComponent> _query = default!;
+    private EntityQuery<AreaGridComponent> _query = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private List<Vector2i> _empty = new();
@@ -29,6 +29,8 @@ public sealed class MapAreaSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _query = GetEntityQuery<AreaGridComponent>();
 
         SubscribeLocalEvent<AreaComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<AreaComponent, ComponentShutdown>(OnShutdown);
@@ -163,6 +165,7 @@ public sealed class MapAreaSystem : EntitySystem
         }
         foreach (var chunk in areas.Chunks.Values)
         {
+            chunk.Areas.RemoveWhere(uid => Deleted(uid));
             foreach (var uid in chunk.Areas)
             {
                 // TODO: might want to cache the id somewhere..?

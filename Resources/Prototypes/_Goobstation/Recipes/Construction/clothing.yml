@@ -6,7 +6,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 2
+    FabricationKnowledge: 2
+  practical:
+    ArmorKnowledge: 1
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -17,13 +20,11 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
     ElectronicsKnowledge: 2
-    TechnologyKnowledge: 2
   practical:
-    HandmadeKnowledge: 1
     ElectronicsKnowledge: 3
-    TechnologyKnowledge: 2
+    TailoringKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -34,8 +35,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 3
-    TechnologyKnowledge: 1
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -46,8 +46,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 3
-    TechnologyKnowledge: 1
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -58,8 +57,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 3
-    TechnologyKnowledge: 1
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -70,8 +68,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 3
-    TechnologyKnowledge: 1
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -82,6 +79,5 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 3
-    TechnologyKnowledge: 1
+    ElectronicsKnowledge: 2
   # </Trauma>

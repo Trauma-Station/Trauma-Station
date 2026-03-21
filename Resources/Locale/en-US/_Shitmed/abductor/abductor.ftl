@@ -22,3 +22,5 @@ abductors-gizmo-mode-brainwash = Brainwash
 abductor-gun-restricted-1 = You try to press the trigger guard, but the finger doesn't fit.
 
 abductor-console-ftl-to-station = FTL to the station first!
+
+abductor-send-agent-not-buckled = Nobody is attached to the alien pad!

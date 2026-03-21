@@ -5,12 +5,11 @@
   playTimeTracker: JobChaplain
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 18000 # 15 hours
+      time: 1h #Trauma was 36000
   startingGear: ChaplainGear
   icon: "JobIconChaplain"
   supervisors: job-supervisors-hop
   guides: [ Chaplain ] # goobstation
-  goobcoins: 25 #Goob content
   access:
   - Chapel
   - Maintenance

@@ -11,7 +11,7 @@ namespace Content.Shared.Damage.Components;
 /// <summary>
 /// Passively damages the entity on a specified interval.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState] // Goobstation - Networked all  fields
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState] // Goobstation - Networked all fields
 public sealed partial class PassiveDamageComponent : Component
 {
     /// <summary>
@@ -32,13 +32,7 @@ public sealed partial class PassiveDamageComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public float Interval = 1f;
 
-    /// <summary>
-    /// The maximum HP the damage will be given to. If 0, disabled.
-    /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public FixedPoint2 DamageCap = 0;
-
-    [DataField("nextDamage", customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public TimeSpan NextDamage = TimeSpan.Zero;
 
     /// <summary>
