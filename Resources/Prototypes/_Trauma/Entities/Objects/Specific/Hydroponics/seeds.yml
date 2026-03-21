@@ -1,0 +1,9 @@
+- type: entity
+  parent: SeedBase
+  id: CombustibleLemonSeeds
+  name: packet of combustible lemon seeds
+  components:
+  - type: Seed
+    seedId: CombustibleLemon
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/combustible_lemon.rsi
