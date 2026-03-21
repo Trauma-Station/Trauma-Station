@@ -29,10 +29,9 @@ public sealed partial class ConstructionMenu
 
         foreach (var (id, amount) in skills)
         {
-            if (!_proto.Resolve(id, out var prototype) || !prototype.Components.ContainsKey("Knowledge"))
+            if (!_proto.Resolve(id, out var prototype) || !prototype.TryGetComponent<KnowledgeComponent>(out var skill))
                 continue;
 
-            var skill = (KnowledgeComponent) prototype.Components["Knowledge"].Component;
             var text = Loc.GetString("construction-menu-requirement-display", ("name", prototype.Name), ("amount", _knowledge.GetMasteryString(amount)));
             var label = new RichTextLabel
             {

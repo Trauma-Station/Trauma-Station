@@ -12,6 +12,7 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Stacks;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -53,7 +54,6 @@ public sealed class QualitySystem : EntitySystem
 
         // quality effects
         SubscribeLocalEvent<QualityComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);
-        SubscribeLocalEvent<QualityComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<QualityComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
         SubscribeLocalEvent<ArmorComponent, ApplyQualityEvent>(OnArmorApplyQuality);
         SubscribeLocalEvent<ClothingComponent, ApplyQualityEvent>(OnClothingApplyQuality);
@@ -62,6 +62,7 @@ public sealed class QualitySystem : EntitySystem
         SubscribeLocalEvent<DestructibleComponent, ApplyQualityEvent>(OnDestructibleApplyQuality);
         SubscribeLocalEvent<DamageOnHitComponent, ApplyQualityEvent>(OnSelfDamageApplyQuality);
         SubscribeLocalEvent<DamageOtherOnHitComponent, ApplyQualityEvent>(OnDamageApplyQuality);
+        SubscribeLocalEvent<MeleeWeaponComponent, ApplyQualityEvent>(OnMeleeDamageApplyQuality);
         SubscribeLocalEvent<GunComponent, ApplyQualityEvent>(OnGunApplyQuality);
         SubscribeLocalEvent<ProjectileComponent, ApplyQualityEvent>(OnProjectileApplyQuality);
         SubscribeLocalEvent<DurabilityComponent, ApplyQualityEvent>(OnDurabilityApplyQuality);
@@ -82,11 +83,6 @@ public sealed class QualitySystem : EntitySystem
         // TODO: quality should be clamped separately...
         var clamped = Math.Clamp(ent.Comp.Quality, -5, 5);
         args.AddModifier($"quality-name-{clamped}");
-    }
-
-    private void OnGetMeleeDamage(Entity<QualityComponent> ent, ref GetMeleeDamageEvent args)
-    {
-        args.Damage *= QualityModifier(_proto.Index(ent.Comp.QualityFactors).MeleeDamage);
     }
 
     private void OnGunRefreshModifiers(Entity<QualityComponent> ent, ref GunRefreshModifiersEvent args)
@@ -154,6 +150,15 @@ public sealed class QualitySystem : EntitySystem
         // 180% damage at +5 quality
         ent.Comp.Damage *= args.Modifier(args.Proto.Damage);
         Dirty(ent);
+    }
+
+    private void OnMeleeDamageApplyQuality(Entity<MeleeWeaponComponent> ent, ref ApplyQualityEvent args)
+    {
+        var modifier = args.Modifier(args.Proto.MeleeDamage);
+        foreach (var (id, value) in ent.Comp.Damage.DamageDict)
+        {
+            ent.Comp.Damage.DamageDict[id] = value * modifier;
+        }
     }
 
     private void OnGunApplyQuality(Entity<GunComponent> ent, ref ApplyQualityEvent args)
@@ -325,7 +330,6 @@ public sealed class QualitySystem : EntitySystem
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
-        Log.Error($"added: {added}, lowestDelta: {lowestDelta}, roll: {roll}");
         ent.Comp.Quality = (added + lowestDelta * 15 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
             >= 88 => 5,
