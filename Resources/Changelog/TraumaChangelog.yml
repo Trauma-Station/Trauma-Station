@@ -5128,3 +5128,10 @@ Entries:
   id: 603
   time: '2026-03-21T14:27:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1501
+- author: All New
+  changes:
+  - type: Remove
+    message: Removed XenoMaids with just one spray of all new Maid-B-Gone!
+  id: 604
+  time: '2026-03-21T17:18:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1504
