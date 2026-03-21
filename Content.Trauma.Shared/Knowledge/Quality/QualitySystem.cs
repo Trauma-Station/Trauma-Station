@@ -344,7 +344,7 @@ public sealed class QualitySystem : EntitySystem
         ApplyQuality(ent);
 
         // TODO: limit skill gain based on the recipe used
-        _knowledge.AddExperience(brain, FabricationKnowledge, Math.Abs(ent.Comp.Quality / 2) + 3);
+        _knowledge.AddExperience(brain, knowledgeToUse, Math.Abs(ent.Comp.Quality / 2) + 3);
 
         if (lowestId is not { } actualId)
             return;
