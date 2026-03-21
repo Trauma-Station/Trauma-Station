@@ -11,4 +11,3 @@
     # gives 90 so as to give master but not give max skills immediately
     skills:
     ShootingKnowledge: 90
-
