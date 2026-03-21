@@ -1,0 +1,216 @@
+- type: reagent
+  id: Cocaine
+  name: reagent-name-cocaine
+  group: Narcotics
+  desc: reagent-desc-cocaine
+  physicalDesc: reagent-physical-desc-powdery
+  allowedJobs:
+  - Chemist
+  - Botanist
+  - Bartender
+  flavor: bitter
+  color: "#FAFAFA"
+  boilingPoint: 187.0
+  meltingPoint: 98.0
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Cocaine
+          min: 11
+        damage:
+          types:
+            Poison: 1
+            Asphyxiation: 1.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: CrackCocaine # if you mix crack and coke you still OD
+          max: 0.01
+        damage:
+          types:
+            Poison: 0.75
+            Asphyxiation: 1.25
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.1
+        sprintSpeedModifier: 1.1
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectCocaineStamina
+        time: 1.5
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
+        time: 1.5
+      # Side effects
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStunned
+        time: 0.5
+        type: Remove
+      - !type:ModifyKnockdown
+        time: 0.5
+        type: Remove
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Haloperidol
+          max: 0.01
+        effectProto: StatusEffectDrowsiness
+        time: 10
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
+        time: 1
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+
+      # Side effects
+      - !type:ResetNarcolepsy
+        conditions:
+        - !type:ReagentCondition
+          reagent: Cocaine
+          min: 20
+
+- type: reagent
+  id: CrackCocaine
+  name: reagent-name-crack
+  group: Narcotics
+  desc: reagent-desc-crack
+  physicalDesc: reagent-physical-desc-crystalline
+  contrabandSeverity: Major
+  flavor: bitter
+  color: "#DCDCDC"
+  boilingPoint: 187.0
+  meltingPoint: 98.0
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.05
+      # Main effects
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: CrackCocaine
+          min: 4
+        damage:
+          types:
+            Poison: 0.75
+            Asphyxiation: 1.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Cocaine
+          max: 0.01
+        damage:
+          types:
+            Poison: 0.75
+            Asphyxiation: 1.25
+      # Main effects
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.25
+        sprintSpeedModifier: 1.25
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectCocaineStamina
+        time: 1.2
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
+        time: 1.2
+      # Side effects
+      - !type:Jitter
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+      - !type:Jitter
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStunned
+        time: 2
+        type: Remove
+      - !type:ModifyKnockdown
+        time: 2
+        type: Remove
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Haloperidol
+          max: 0.01
+        effectProto: StatusEffectDrowsiness
+        time: 10
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
+        time: 5
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+
+      # Side effects
+      - !type:ResetNarcolepsy
+        conditions:
+        - !type:ReagentCondition
+          reagent: CrackCocaine
+          min: 1
+      - !type:Drunk
+        boozePower: 10
+      - !type:Emote
+        emote: Scream
+        probability: 0.05
+      - !type:ModifyParalysis
+        probability: 0.3
+        time: 12
+      - !type:Emote
+        emote: Jump
+        probability: 0.05
+      - !type:Emote
+        emote: Flip
+        probability: 0.05
+
+- type: reagent
+  id: CocaSlurry
+  name: reagent-name-cocaslurry
+  group: Narcotics
+  desc: reagent-desc-cocaslurry
+  physicalDesc: reagent-physical-desc-murky
+  allowedJobs:
+  - Chemist
+  - Botanist
+  - Bartender
+  flavor: bitter
+  color: "#728559"
+  boilingPoint: 187.0
+  meltingPoint: 98.0
+  metabolisms:
+    Bloodstream:
+      # Main effects
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: CocaSlurry
+          min: 10
+        damage:
+          types:
+            Poison: 1
+            Asphyxiation: 1.25
+      # Main effects
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.05
+        sprintSpeedModifier: 1.05

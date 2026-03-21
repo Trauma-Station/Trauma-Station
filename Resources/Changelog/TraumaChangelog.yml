@@ -5087,3 +5087,37 @@ Entries:
   id: 598
   time: '2026-03-20T22:10:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1112
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed roundstart Wraith not spawning
+  id: 599
+  time: '2026-03-21T06:38:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1494
+- author: momoyawn
+  changes:
+  - type: Tweak
+    message: >-
+      Changed nukies melee skillchip from 40 -> 50 round start so they can
+      properly reflect/parry with an energy sword and shield.
+  id: 600
+  time: '2026-03-21T06:48:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1492
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Add
+    message: Added Crack!
+  - type: Add
+    message: Added Cocaine!
+  - type: Add
+    message: Added Coca Plants!
+  id: 601
+  time: '2026-03-21T07:13:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1496
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to mop puddles near station decals.
+  id: 602
+  time: '2026-03-21T10:54:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1499
