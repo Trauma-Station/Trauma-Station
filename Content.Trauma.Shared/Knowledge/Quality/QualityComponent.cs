@@ -29,10 +29,4 @@ public sealed partial class QualityComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int QualityModifiers = 0;
-
-    /// <summary>
-    /// Stores the ID of item coefficients.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public ProtoId<QualityPrototype> QualityFactors;
 }
