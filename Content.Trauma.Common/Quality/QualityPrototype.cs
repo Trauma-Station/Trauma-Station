@@ -45,4 +45,7 @@ public sealed partial class QualityPrototype : IPrototype
 
     [DataField]
     public float ShieldFlat = 1.12f;
+
+    [DataField]
+    public float MeleeDamage = 1.1f;
 }

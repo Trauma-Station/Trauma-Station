@@ -34,5 +34,5 @@ public sealed partial class QualityComponent : Component
     /// Stores the ID of item coefficients.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public ProtoId<QualityPrototype> QualityFactors;
+    public ProtoId<QualityPrototype> QualityFactors = "BaseQuality";
 }
