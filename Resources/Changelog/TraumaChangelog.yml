@@ -5135,3 +5135,18 @@ Entries:
   id: 604
   time: '2026-03-21T17:18:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1504
+- author: GeneRickUsername
+  changes:
+  - type: Add
+    message: >-
+      The construction menu now shows practical skills needed to create things
+      with decent quality.
+  - type: Fix
+    message: Objects can now be made at a better than catastrophic quality.
+  - type: Fix
+    message: Shields now take less damage the better quality they are.
+  - type: Fix
+    message: Explosion and stamina resistance now scales on armor.
+  id: 605
+  time: '2026-03-21T20:17:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1483

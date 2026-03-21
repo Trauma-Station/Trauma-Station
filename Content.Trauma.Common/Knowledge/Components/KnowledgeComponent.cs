@@ -88,6 +88,12 @@ public sealed partial class KnowledgeComponent : Component
     public TimeSpan TimeToNextExperience = TimeSpan.Zero;
 
     /// <summary>
+    /// Stores what should be used to calculate the next xp timestamp.
+    /// </summary>
+    [DataField]
+    public TimeSpan TimeBetweenExperience = TimeSpan.FromSeconds(5);
+
+    /// <summary>
     /// Array of point costs for each mastery level, including 0.
     /// There are 6 of them total by default, removing will decrease the max mastery you can buy.
     /// If this is null, you can't opt in to this knowledge.
