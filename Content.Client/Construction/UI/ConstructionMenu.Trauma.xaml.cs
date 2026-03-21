@@ -29,7 +29,7 @@ public sealed partial class ConstructionMenu
 
         foreach (var (id, amount) in skills)
         {
-            if (!_proto.Resolve(id, out var prototype) || !prototype.TryGetComponent<KnowledgeComponent>(out var skill))
+            if (!_proto.Resolve(id, out var prototype) || !prototype.TryGetComponent<KnowledgeComponent>("Knowledge", out var skill))
                 continue;
 
             var text = Loc.GetString("construction-menu-requirement-display", ("name", prototype.Name), ("amount", _knowledge.GetMasteryString(amount)));
