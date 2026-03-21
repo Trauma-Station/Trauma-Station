@@ -94,7 +94,7 @@
           amount: 2
         - id: BungoSeeds
           amount: 2
-        - id: CocaSeeds
+        - id: CocaSeeds # Trauma
           amount: 2
 
 - type: entity
