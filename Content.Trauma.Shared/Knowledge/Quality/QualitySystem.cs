@@ -39,7 +39,6 @@ public sealed class QualitySystem : EntitySystem
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<QualityComponent> _query;
 
