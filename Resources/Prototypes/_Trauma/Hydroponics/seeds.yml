@@ -25,3 +25,28 @@
       Min: 1
       Max: 4
       PotencyDivisor: 25
+
+- type: seed
+  id: CocaPlant
+  name: seeds-cocaplant-name
+  noun: seeds-noun-seeds
+  displayName: seeds-cocaplant-display-name
+  plantRsi: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
+  packetPrototype: CocaSeeds
+  productPrototypes:
+  - LeavesCoca
+  harvestRepeat: Repeat
+  lifespan: 75
+  maturation: 5
+  production: 5
+  yield: 2
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.40
+  idealLight: 9
+  idealHeat: 300
+  chemicals:
+    CocaSlurry:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
