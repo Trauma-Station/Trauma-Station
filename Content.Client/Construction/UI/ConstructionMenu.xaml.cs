@@ -44,7 +44,7 @@ namespace Content.Client.Construction.UI
         event EventHandler ClearAllGhosts;
 
         void ClearRecipeInfo();
-        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite, ConstructionPrototype proto); // Trauma
+        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite, ConstructionPrototype proto); // Trauma - added proto to method
         void ResetPlacement();
 
         #region Window Control

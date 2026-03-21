@@ -307,16 +307,7 @@ public sealed class QualitySystem : EntitySystem
         foreach (var (id, delta) in ent.Comp.LevelDeltas)
         {
             if (_knowledge.GetKnowledge(brain, id) is not { } skill)
-            {
-
-                int potentialDelta = -1 - delta;
-                if (lowestId is not { } || potentialDelta < lowestDelta)
-                {
-                    lowestDelta = -1 - delta;
-                    lowestId = id;
-                }
-                continue;
-            }
+                return;
 
             if (skill.Comp.Category == CraftingCategory && !setKnowledge)
             {
@@ -336,7 +327,6 @@ public sealed class QualitySystem : EntitySystem
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
-        _popup.PopupEntity(Loc.GetString("construction-examine-quality-result", ("added", added), ("delta", lowestDelta * 15), ("quality", ent.Comp.QualityModifiers), ("roll", roll)), user, user, PopupType.Small);
         ent.Comp.Quality = (added + lowestDelta * 15 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
             >= 88 => 5,

@@ -91,7 +91,7 @@ public sealed partial class KnowledgeComponent : Component
     /// Stores what should be used to calculate the next xp timestamp.
     /// </summary>
     [DataField]
-    public int TimeBetweenExperience = 5;
+    public TimeSpan TimeBetweenExperience = TimeSpan.FromSeconds(5);
 
     /// <summary>
     /// Array of point costs for each mastery level, including 0.

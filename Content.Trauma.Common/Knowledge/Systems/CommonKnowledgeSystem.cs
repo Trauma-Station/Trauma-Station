@@ -35,7 +35,7 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
 
     /// <summary>
     /// Get the name for a given mastery number.
-    /// Throws if it is out of bounds.
+    /// Clamps the number if its out of bounds.
     /// </summary>
     public abstract string GetMasteryString(int level);
 
