@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseBrainChip
   id: SkillChipSniper
-  name: skill chip (sniper)
+  name: skill chip sniper
   description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
   components:
   - type: Cybernetics
@@ -12,12 +12,11 @@
     # gives 90 so as to give master but not give max skills immediately
     skills:
     ShootingKnowledge: 90
-
 - type: entity
   abstract: true
   parent: BaseBrainChip
   id: SkillChipSwordsman
-  name: skill chip (swordsman)
+  name: skill chip swordsman
   description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
   components:
   - type: Cybernetics
@@ -28,12 +27,11 @@
     skills:
     meleeKnowledge: 90
     StrengthKnowledge: 30
-
 - type: entity
   abstract: true
   parent: BaseBrainChip
   id: SkillChipAthlete
-  name: skill chip (athlete)
+  name: skill chip athlete
   description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
   components:
   - type: Cybernetics
@@ -49,7 +47,7 @@
   abstract: true
   parent: BaseBrainChip
   id: SkillChipStoic
-  name: skill chip (stoic)
+  name: skill chip stoic
   description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
   components:
   - type: Cybernetics
