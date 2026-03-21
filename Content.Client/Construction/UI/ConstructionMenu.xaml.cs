@@ -95,7 +95,6 @@ namespace Content.Client.Construction.UI
             // <Trauma>
             _knowledge = _system.GetEntitySystem<CommonKnowledgeSystem>();
             // </Trauma>
-
             Title = Loc.GetString("construction-menu-title");
 
             BuildButton.Text = Loc.GetString("construction-menu-place-ghost");
@@ -171,7 +170,7 @@ namespace Content.Client.Construction.UI
             EntityPrototype? targetPrototype,
             bool isItem,
             bool isFavorite,
-            ConstructionPrototype proto)
+            ConstructionPrototype proto) // Trauma
         {
             BuildButton.Disabled = false;
             BuildButton.Text = Loc.GetString(isItem ? "construction-menu-place-ghost" : "construction-menu-craft");
@@ -181,8 +180,9 @@ namespace Content.Client.Construction.UI
             FavoriteButton.Visible = true;
             FavoriteButton.Text = Loc.GetString(
                             isFavorite ? "construction-add-favorite-button" : "construction-remove-from-favorite-button");
-
+            // <Trauma>
             AddSkillRequirements(proto);
+            // </Trauma>
         }
 
         public void ClearRecipeInfo()
@@ -193,7 +193,9 @@ namespace Content.Client.Construction.UI
             TargetTexture.SetPrototype(null);
             FavoriteButton.Visible = false;
             RecipeStepList.Clear();
+            // <Trauma>
             RecipeConstructionList.Clear();
+            // </Trauma>
         }
 
         public sealed record ConstructionMenuListData(ConstructionPrototype Prototype, EntityPrototype TargetPrototype) : ListData;
