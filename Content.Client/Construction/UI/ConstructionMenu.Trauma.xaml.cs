@@ -15,21 +15,31 @@ public sealed partial class ConstructionMenu
 
     public void AddSkillRequirements(ConstructionPrototype proto)
     {
-        if (proto.Practical is not { })
+        var skills = proto.Practical ?? proto.Theory;
+        if (skills.Count <= 0)
         {
-            RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-none"));
+            var text = Loc.GetString("construction-menu-requirement-none");
+            var label = new RichTextLabel
+            {
+                Text = text,
+            };
+            RecipeConstructionList.AddChild(label);
             return;
         }
 
-        foreach (var (id, amount) in proto.Practical)
+        foreach (var (id, amount) in skills)
         {
             if (!_proto.Resolve(id, out var prototype) || !prototype.Components.ContainsKey("Knowledge"))
                 continue;
 
             var skill = (KnowledgeComponent) prototype.Components["Knowledge"].Component;
             var text = Loc.GetString("construction-menu-requirement-display", ("name", prototype.Name), ("amount", _knowledge.GetMasteryString(amount)));
-            RecipeConstructionList.AddItem($"[color={skill.Color}]{text}[/color]");
-
+            var label = new RichTextLabel
+            {
+                Text = text,
+                Modulate = skill.Color
+            };
+            RecipeConstructionList.AddChild(label);
         }
     }
 }

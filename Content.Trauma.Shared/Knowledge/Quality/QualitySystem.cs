@@ -325,6 +325,7 @@ public sealed class QualitySystem : EntitySystem
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
+        Log.Error($"added: {added}, lowestDelta: {lowestDelta}, roll: {roll}");
         ent.Comp.Quality = (added + lowestDelta * 15 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
             >= 88 => 5,

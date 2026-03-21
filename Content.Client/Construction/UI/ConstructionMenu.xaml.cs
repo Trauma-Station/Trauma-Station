@@ -194,7 +194,7 @@ namespace Content.Client.Construction.UI
             FavoriteButton.Visible = false;
             RecipeStepList.Clear();
             // <Trauma>
-            RecipeConstructionList.Clear();
+            RecipeConstructionList.RemoveAllChildren();
             // </Trauma>
         }
 
