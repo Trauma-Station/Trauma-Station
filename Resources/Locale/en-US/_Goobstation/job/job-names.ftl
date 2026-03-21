@@ -16,7 +16,6 @@ job-name-exec = Executive Access
 
 # event-resctricted jobs
 job-name-security-clown = Security Clown
-job-name-command-maid = Command Maid
 job-name-party-maker = Party Maker
 
 # Navy Stuff
