@@ -43,7 +43,6 @@ public sealed class QualitySystem : EntitySystem
 
     private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
     private static readonly ProtoId<KnowledgeCategoryPrototype> CraftingCategory = "Crafting";
-    private static readonly ProtoId<QualityPrototype> DefaultFactors = "BaseQuality";
 
     public override void Initialize()
     {
@@ -86,7 +85,7 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnGetMeleeDamage(Entity<QualityComponent> ent, ref GetMeleeDamageEvent args)
     {
-        args.Damage *= QualityModifier(args.Proto.MeleeDamage);
+        args.Damage *= QualityModifier(_proto.Index(ent.Comp.QualityFactors).MeleeDamage);
     }
 
     private void OnGunRefreshModifiers(Entity<QualityComponent> ent, ref GunRefreshModifiersEvent args)
@@ -100,7 +99,7 @@ public sealed class QualitySystem : EntitySystem
     private void OnArmorApplyQuality(Entity<ArmorComponent> ent, ref ApplyQualityEvent args)
     {
         // -5 is half as good, 5 is twice as good
-        var modifier = args.Modifier(args.Proto.Armor);
+        var modifier = args.Modifier(_proto.Index(ent.Comp.QualityFactors).Armor);
         var coefficients = ent.Comp.Modifiers.Coefficients;
         foreach (var damageType in coefficients.Keys)
         {
