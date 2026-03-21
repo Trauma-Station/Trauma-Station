@@ -91,7 +91,7 @@ public sealed class QualitySystem : EntitySystem
     private void OnGunRefreshModifiers(Entity<QualityComponent> ent, ref GunRefreshModifiersEvent args)
     {
         // 60% spread at +5, 170% at -5
-        var modifier = QualityModifier(args.Proto.Gun);
+        var modifier = QualityModifier(_proto.Index(ent.Comp.QualityFactors).Gun);
         args.MinAngle *= modifier;
         args.MaxAngle *= modifier;
     }
@@ -99,7 +99,7 @@ public sealed class QualitySystem : EntitySystem
     private void OnArmorApplyQuality(Entity<ArmorComponent> ent, ref ApplyQualityEvent args)
     {
         // -5 is half as good, 5 is twice as good
-        var modifier = args.Modifier(_proto.Index(ent.Comp.QualityFactors).Armor);
+        var modifier = args.Modifier(args.Proto.Armor);
         var coefficients = ent.Comp.Modifiers.Coefficients;
         foreach (var damageType in coefficients.Keys)
         {
