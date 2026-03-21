@@ -38,6 +38,8 @@ public sealed class ScriptureSystem : EntitySystem
         SubscribeLocalEvent<ScriptureContainerComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<ScriptureContainerComponent, ComponentShutdown>(OnShutdown);
 
+        SubscribeLocalEvent<ScriptureContainerComponent, ScriptureReciteEvent>(OnRecite);
+
         LoadPrototypes();
     }
 
@@ -66,6 +68,19 @@ public sealed class ScriptureSystem : EntitySystem
             return;
 
         _container.ShutdownContainer(container);
+    }
+
+    private void OnRecite(Entity<ScriptureContainerComponent> ent, ref ScriptureReciteEvent args)
+    {
+        if (!_proto.TryIndex(args.Scripture, out var scripture)
+            || !scripture.HasComponent<ScriptureComponent>())
+            return;
+
+        // TODO: raise an event for reciting here
+        // There should be multiple scripture types
+        // ActionScriptures will add an action to your character
+        // StructureScriptures will build a structure
+        Log.Debug("The scripture got recited");
     }
 
     private void LoadPrototypes()

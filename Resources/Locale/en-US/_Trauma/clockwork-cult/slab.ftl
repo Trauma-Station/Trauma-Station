@@ -10,7 +10,7 @@ cogslab-book-description =
     Turn the page on any act of your choosing, and you shall be guided.
 
 cogslab-sections = Sections
-cogslab-act-one = I. For the Lost Souls
+cogslab-act-one = I. Teachings
 cogslab-act-two = II. Scriptures
 
 cogslab-page-test =

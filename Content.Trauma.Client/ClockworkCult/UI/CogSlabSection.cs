@@ -58,6 +58,21 @@ public abstract partial class CogSlabSection : Control
     }
 
     /// <summary>
+    /// Toggles the visibility of buttons
+    /// </summary>
+    /// <param name="enabled"></param>
+    public void ToggleButtons(bool enabled)
+    {
+        NextButton.Visible = enabled;
+        PrevButton.Visible = enabled;
+    }
+
+    public void EnablePageCounter(bool enabled)
+    {
+        PageCounter.Visible = enabled;
+    }
+
+    /// <summary>
     /// Adds a page to <see cref="_cogSlabPages"/> and updates the ui.
     /// </summary>
     public void AddPage(CogSlabPage page)

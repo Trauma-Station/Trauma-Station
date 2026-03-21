@@ -11,7 +11,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <BoxContainer VerticalAlignment="Bottom">
             <Button Name="PrevButton" Visible="false" Text="" />
             <Label Name="PageCounter" Text="1 | 1" />
-            <Button Name="NextButton" Visible="false" Text=">" />
+            <Button Name="NextButton" Visible="false" Text="" />
         </BoxContainer>
     </BoxContainer>
 </controls:CogSlabSection>

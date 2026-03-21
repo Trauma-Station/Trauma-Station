@@ -1,0 +1,30 @@
+﻿<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Orientation="Vertical"
+    HorizontalExpand="True"
+    VerticalExpand="True"
+    VerticalAlignment="Top">
+
+    <PanelContainer SetSize="300 450">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BorderThickness="10"
+                BorderColor="#8B0000"
+                BackgroundColor="#a67c00"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+            <!-- TODO: Set to sprite here -->
+            <TextureRect Name="ScriptureTexture" MinSize="0 32" Visible="False" />
+
+            <Label Name="ScriptureName" Text="Unknown" HorizontalAlignment="Center" HorizontalExpand="True" Align="Center"></Label>
+
+            <Button Name="Recite"
+                    Text="Recite"
+                    VerticalExpand="True"
+                    VerticalAlignment="Bottom"
+                    MinSize="100 40"></Button>
+        </BoxContainer>
+    </PanelContainer>
+</BoxContainer>

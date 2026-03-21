@@ -12,6 +12,8 @@ namespace Content.Trauma.Client.ClockworkCult.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CogSlabScripturePage : CogSlabPage
 {
+    public event Action<EntProtoId?>? OnRecite;
+
     /// <summary>
     /// The scriptures that belong to this page.
     /// </summary>
@@ -36,6 +38,7 @@ public sealed partial class CogSlabScripturePage : CogSlabPage
         foreach (var scripture in _scriptures)
         {
             var scriptureButton = new CogSlabScriptureButton(scripture, _parent);
+            scriptureButton.OnRecite += script => OnRecite?.Invoke(script);
             FirstPage.AddChild(scriptureButton);
         }
     }

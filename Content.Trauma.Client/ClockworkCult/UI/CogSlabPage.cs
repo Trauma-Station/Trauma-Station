@@ -44,4 +44,9 @@ public abstract partial class CogSlabPage : BoxContainer
     {
         RobustXamlLoader.Load(this);
     }
+
+    public void EnableBackButton(bool enabled)
+    {
+        Back.Visible = enabled;
+    }
 }

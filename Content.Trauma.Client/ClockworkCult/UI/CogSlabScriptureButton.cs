@@ -16,6 +16,8 @@ namespace Content.Trauma.Client.ClockworkCult.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CogSlabScriptureButton : BoxContainer
 {
+    public event Action<EntProtoId?>? OnRecite;
+
     /// <summary>
     /// The scripture that belongs to this button
     /// </summary>
@@ -34,9 +36,16 @@ public sealed partial class CogSlabScriptureButton : BoxContainer
 
     private void ScriptureButtonOnOnPressed(BaseButton.ButtonEventArgs obj)
     {
-        // TODO: nvm this should be a separate section
-        var recitePage = new CogSlabScriptureRecitePage(_scripture);
+        var recitePage = new CogSlabScriptureRecitePage(_scripture, _parent);
+
+        recitePage.OnRecite += script => OnRecite?.Invoke(script);
+
+        // Add the page and display it
         _parent.AddPage(recitePage);
         _parent.DisplayPage(recitePage);
+
+        _parent.ToggleButtons(false);     // hide buttons
+        _parent.EnablePageCounter(false); // disable page counter
+
     }
 }
