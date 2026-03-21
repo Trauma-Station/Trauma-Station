@@ -92,6 +92,10 @@ namespace Content.Client.Construction.UI
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
 
+            // <Trauma>
+            _knowledge = _system.GetEntitySystem<CommonKnowledgeSystem>();
+            // </Trauma>
+
             Title = Loc.GetString("construction-menu-title");
 
             BuildButton.Text = Loc.GetString("construction-menu-place-ghost");

@@ -8,7 +8,9 @@ namespace Content.Client.Construction.UI;
 public sealed partial class ConstructionMenu
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private readonly IEntitySystemManager _system = default!;
+
+    private readonly CommonKnowledgeSystem _knowledge = default!;
 
     public void AddSkillRequirements(ConstructionPrototype proto)
     {
