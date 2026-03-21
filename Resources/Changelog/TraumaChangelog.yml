@@ -5048,3 +5048,42 @@ Entries:
   id: 593
   time: '2026-03-20T18:34:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1479
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xeno evolution UI etc. not working.
+  id: 594
+  time: '2026-03-20T20:01:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1484
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      midround xenos have returned but now it only spawns ONE larva (so play it
+      stealthy)
+  id: 595
+  time: '2026-03-20T20:43:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1385
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Writing on paper is now predicted.
+  id: 596
+  time: '2026-03-20T20:59:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1488
+- author: Ghost Role UI Saver
+  changes:
+  - type: Remove
+    message: A lot of passive/friendly ghostroles have been removed.
+  id: 597
+  time: '2026-03-20T21:08:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1141
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      you can now teleport people who are attached to the abductors telepad
+      using the human observation console
+  id: 598
+  time: '2026-03-20T22:10:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1112

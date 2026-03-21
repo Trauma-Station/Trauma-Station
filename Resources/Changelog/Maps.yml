@@ -189,3 +189,10 @@ Entries:
   id: 19
   time: '2026-03-17T11:33:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1380
+- author: deltanedas
+  changes:
+  - type: Add
+    message: 'Oasis: Added 2 roboticist slots and 1 salvage slot.'
+  id: 20
+  time: '2026-03-20T23:02:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1490

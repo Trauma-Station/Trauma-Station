@@ -66,3 +66,10 @@ Entries:
   id: 9
   time: '2026-03-20T17:41:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1477
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added entityreport command to show the most common entities on the server.
+  id: 10
+  time: '2026-03-20T20:11:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1485
