@@ -188,13 +188,6 @@
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
-  id: JobCommandMaid
-  groups:
-  - CommonBackpack
-  - Survival
-  - GroupSpeciesBreathTool
-
-- type: roleLoadout
   id: JobPartyMaker
   groups:
   - GroupTankHarness

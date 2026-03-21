@@ -39,14 +39,6 @@
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconCommandMaid
-  icon:
-    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
-    state: CommandMaid
-  allowSelection: false
-
-- type: jobIcon
-  parent: JobIcon
   id: JobIconPartyMaker
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi

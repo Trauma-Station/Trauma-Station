@@ -45,7 +45,6 @@ job-name-phonemerchant = Phone Merchant
 
 # Role timers - Make these alphabetical or I cut you (dont listen to upstream, i copied and pasted this, make it very un-alphabetical :godo:)
 
-JobCommandMaid = Command Maid
 JobNanotrasenRepresentative = Nanotrasen Representative
 JobHecuOperative = HECU Operative
 JobNavyOfficer = Navy Officer

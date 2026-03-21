@@ -259,18 +259,6 @@
 
 - type: entity
   parent: IDCardStandard
-  id: CommandMaidIDCard
-  name: command maid ID card
-  components:
-  - type: Sprite
-    layers:
-    - state: default
-    - state: idcommandmaid
-  - type: PresetIdCard
-    job: CommandMaid
-
-- type: entity
-  parent: IDCardStandard
   id: PartyMakerIDCard
   name: party maker ID card
   components:

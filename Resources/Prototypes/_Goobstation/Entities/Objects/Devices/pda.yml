@@ -273,14 +273,6 @@
     id: SecurityClownIDCard
 
 - type: entity
-  parent: JanitorPDA
-  id: CommandMaidPDA
-  name: command maid PDA
-  components:
-  - type: Pda
-    id: CommandMaidIDCard
-
-- type: entity
   parent: MusicianPDA
   id: PartyMakerPDA
   name: party maker PDA
