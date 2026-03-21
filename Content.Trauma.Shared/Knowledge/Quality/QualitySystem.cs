@@ -178,8 +178,8 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnShieldApplyQuality(Entity<BlockingComponent> ent, ref ApplyQualityEvent args)
     {
-        var modifierPlus = args.Modifier(args.Proto.Shield);
-        var modifierMinus = args.Modifier(args.Proto.ShieldFlat);
+        var modifierMinus = args.Modifier(args.Proto.Shield);
+        var modifierPlus = args.Modifier(args.Proto.ShieldFlat);
         ent.Comp.PassiveBlockFraction *= modifierPlus;
         ent.Comp.ActiveBlockFraction *= modifierPlus;
 
