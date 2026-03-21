@@ -3976,6 +3976,7 @@
   - type: Emoting
   - type: BodyEmotes
     soundsId: Nymph
+  - type: SeeOverObstacles
   - type: Reform
     actionPrototype: DionaReformAction
     reformTime: 10

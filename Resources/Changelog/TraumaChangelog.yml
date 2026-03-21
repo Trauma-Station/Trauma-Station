@@ -5048,6 +5048,7 @@ Entries:
   id: 593
   time: '2026-03-20T18:34:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1479
+<<<<<<< HEAD
 - author: deltanedas
   changes:
   - type: Fix
@@ -5121,3 +5122,10 @@ Entries:
   id: 602
   time: '2026-03-21T10:54:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1499
+- author: Raze500
+  changes:
+  - type: Fix
+    message: Diona and diona nymphs can now see over kudzu and floral kudzu again.
+  id: 603
+  time: '2026-03-21T18:00:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1491

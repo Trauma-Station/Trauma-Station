@@ -33,6 +33,7 @@
       sprite: Objects/Misc/kudzu.rsi
       state: kudzu_11
       drawdepth: Overdoors
+    - type: SeeOverObstacle
     - type: KudzuVisuals
     - type: Clickable
     - type: Fixtures
@@ -124,6 +125,9 @@
       drawdepth: HighFloorObjects
       sprite: Objects/Misc/kudzuflower.rsi
       state: kudzu_11
+    - type: SeeOverObstacle
+      normalDrawDepth: -5
+      seeOverDrawDepth: -5
     - type: Kudzu
       spriteVariants: 5
       spreadChance: 0.01
