@@ -3,7 +3,6 @@
   parent: [BaseItem, BaseCommandContraband]
   id: BaseReinforcementCaller
   name: reinforcement caller
-  suffix: 2.5k
   description: A device that calls in reinforcements for the station.
   components:
   - type: Item
@@ -29,6 +28,7 @@
 - type: entity
   parent: BaseReinforcementCaller
   id: ReinforcementCallerHos
+  suffix: HoS
   components:
   - type: Store
     categories:
@@ -36,8 +36,8 @@
 
 - type: entity
   parent: BaseReinforcementCaller
-  suffix: Empty
   id: ReinforcementCallerHoP
+  suffix: HoP
   components:
   - type: Item
     sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hop.rsi
