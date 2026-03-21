@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Client.Guidebook.Controls;
 
 /// <summary>
-/// Lists all mutations and how to get them.
+/// Gets a list of knowledge masteries and puts them in a table.
 /// </summary>
 public sealed partial class GuideKnowledgeMasteryEmbed : BoxContainer, IDocumentTag
 {
