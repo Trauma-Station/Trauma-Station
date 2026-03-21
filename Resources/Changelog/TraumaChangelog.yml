@@ -5114,3 +5114,17 @@ Entries:
   id: 601
   time: '2026-03-21T07:13:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1496
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to mop puddles near station decals.
+  id: 602
+  time: '2026-03-21T10:54:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1499
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed crew reinforcements not having skillchips.
+  id: 603
+  time: '2026-03-21T14:27:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1501
