@@ -424,9 +424,7 @@ namespace Content.Client.Construction.UI
                 proto,
                 prototype.Type != ConstructionType.Item,
                 !_favoritedRecipes.Contains(prototype),
-                prototype, // Trauma
-                _prototypeManager, // Trauma
-                _knowledge); // Trauma
+                prototype); // Trauma
 
             var stepList = _constructionView.RecipeStepList;
             GenerateStepList(prototype, stepList);

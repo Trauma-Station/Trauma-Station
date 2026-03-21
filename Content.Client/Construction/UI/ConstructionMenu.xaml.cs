@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 // <Trauma>
 using Content.Trauma.Common.Knowledge.Systems;
 // </Trauma>
@@ -46,7 +44,7 @@ namespace Content.Client.Construction.UI
         event EventHandler ClearAllGhosts;
 
         void ClearRecipeInfo();
-        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite, ConstructionPrototype proto, IPrototypeManager protoMan, CommonKnowledgeSystem knowledge); // Trauma
+        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite, ConstructionPrototype proto); // Trauma
         void ResetPlacement();
 
         #region Window Control
@@ -169,9 +167,7 @@ namespace Content.Client.Construction.UI
             EntityPrototype? targetPrototype,
             bool isItem,
             bool isFavorite,
-            ConstructionPrototype proto,
-            IPrototypeManager protoMan,
-            CommonKnowledgeSystem knowledge)
+            ConstructionPrototype proto)
         {
             BuildButton.Disabled = false;
             BuildButton.Text = Loc.GetString(isItem ? "construction-menu-place-ghost" : "construction-menu-craft");
@@ -182,7 +178,7 @@ namespace Content.Client.Construction.UI
             FavoriteButton.Text = Loc.GetString(
                             isFavorite ? "construction-add-favorite-button" : "construction-remove-from-favorite-button");
 
-            AddSkillRequirements(proto, protoMan, knowledge);
+            AddSkillRequirements(proto);
         }
 
         public void ClearRecipeInfo()

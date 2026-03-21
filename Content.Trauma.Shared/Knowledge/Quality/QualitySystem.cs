@@ -121,14 +121,14 @@ public sealed class QualitySystem : EntitySystem
     private void OnExplosionResistApplyQuality(Entity<ExplosionResistanceComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.ExplosionResist);
-        ent.Comp.DamageCoefficient = modifier;
+        ent.Comp.DamageCoefficient *= modifier;
         Dirty(ent);
     }
 
     private void OnStaminaResistApplyQuality(Entity<StaminaResistanceComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.StaminaResist);
-        ent.Comp.DamageCoefficient = modifier;
+        ent.Comp.DamageCoefficient *= modifier;
         Dirty(ent);
     }
 
@@ -325,7 +325,7 @@ public sealed class QualitySystem : EntitySystem
             }
 
             int smallestDelta = _knowledge.GetMastery(skill.Comp) - delta;
-            if (smallestDelta < lowestDelta && knowledgeToUse != id)
+            if ((lowestId is not { } || smallestDelta < lowestDelta) && knowledgeToUse != id)
             {
                 lowestDelta = _knowledge.GetMastery(skill.Comp) - delta;
                 lowestId = id;
@@ -336,7 +336,7 @@ public sealed class QualitySystem : EntitySystem
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
 
-        _popup.PopupEntity(Loc.GetString("construction-examine-quality-result", ("added", added), ("delta", lowestDelta * 15), ("roll", roll)), user, user, PopupType.Small);
+        _popup.PopupEntity(Loc.GetString("construction-examine-quality-result", ("added", added), ("delta", lowestDelta * 15), ("quality", ent.Comp.QualityModifiers), ("roll", roll)), user, user, PopupType.Small);
         ent.Comp.Quality = (added + lowestDelta * 15 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
             >= 88 => 5,

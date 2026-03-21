@@ -7,9 +7,10 @@ namespace Content.Client.Construction.UI;
 
 public sealed partial class ConstructionMenu
 {
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
 
-
-    public void AddSkillRequirements(ConstructionPrototype proto, IPrototypeManager protoMan, CommonKnowledgeSystem knowledge)
+    public void AddSkillRequirements(ConstructionPrototype proto)
     {
         if (proto.Practical is not { })
         {
@@ -23,7 +24,7 @@ public sealed partial class ConstructionMenu
         {
             if (foundString is not { })
             {
-                if (!protoMan.TryIndex<EntityPrototype>(id, out var prototype) || !prototype.Components.ContainsKey("Knowledge"))
+                if (!_proto.Resolve(id, out var prototype) || !prototype.Components.ContainsKey("Knowledge"))
                     continue;
 
                 var skill = (KnowledgeComponent) prototype.Components["Knowledge"].Component;
@@ -37,13 +38,13 @@ public sealed partial class ConstructionMenu
             }
         }
 
-        RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-main-skill", ("name", foundString ?? "Fabrication"), ("amount", knowledge.GetMasteryString(foundInt))));
+        RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-main-skill", ("name", foundString ?? "Fabrication"), ("amount", _knowledge.GetMasteryString(foundInt))));
 
         if (proto.Practical.Count > ((foundString is { }) ? 1 : 0))
             RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-extra-skill"));
         foreach (var (id, amount) in proto.Practical)
         {
-            if (!protoMan.TryIndex<EntityPrototype>(id, out var prototype))
+            if (!_proto.Resolve(id, out var prototype))
                 continue;
 
             string name = prototype.Name;
@@ -51,7 +52,7 @@ public sealed partial class ConstructionMenu
             if ((foundString is { } && name == foundString))
                 continue;
 
-            RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-display", ("name", name), ("amount", knowledge.GetMasteryString(amount))));
+            RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-display", ("name", name), ("amount", _knowledge.GetMasteryString(amount))));
 
         }
     }

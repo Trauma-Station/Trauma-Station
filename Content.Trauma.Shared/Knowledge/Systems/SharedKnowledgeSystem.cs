@@ -266,7 +266,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (now < ent.Comp.TimeToNextExperience || ent.Comp.LearnedLevel >= Math.Min(limit, 100))
             return;
 
-        ent.Comp.TimeToNextExperience = now + TimeSpan.FromSeconds(5);
+        ent.Comp.TimeToNextExperience = now + TimeSpan.FromSeconds(ent.Comp.TimeBetweenExperience);
         ent.Comp.Experience += added + ent.Comp.BonusExperience;
         Dirty(ent);
 
@@ -393,7 +393,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public Entity<KnowledgeComponent>? RaiseMastery(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int mastery, bool popup = true)
     {
-        if (EnsureKnowledge(ent, id, popup: popup) is not {} unit)
+        if (EnsureKnowledge(ent, id, popup: popup) is not { } unit)
             return null;
 
         mastery += GetMastery(unit.Comp.LearnedLevel);
