@@ -20,41 +20,12 @@ public sealed partial class ConstructionMenu
             return;
         }
 
-        string? foundString = null;
-        int foundInt = 0;
-        foreach (var (id, amount) in proto.Practical)
-        {
-            if (foundString is not { })
-            {
-                if (!_proto.Resolve(id, out var prototype) || !prototype.Components.ContainsKey("Knowledge"))
-                    continue;
-
-                var skill = (KnowledgeComponent) prototype.Components["Knowledge"].Component;
-
-                if (skill.Category != "Crafting")
-                    continue;
-
-                foundString = prototype.Name;
-                foundInt = amount;
-                break;
-            }
-        }
-
-        RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-main-skill", ("name", foundString ?? "Fabrication"), ("amount", _knowledge.GetMasteryString(foundInt))));
-
-        if (proto.Practical.Count > ((foundString is { }) ? 1 : 0))
-            RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-extra-skill"));
         foreach (var (id, amount) in proto.Practical)
         {
             if (!_proto.Resolve(id, out var prototype))
                 continue;
 
-            string name = prototype.Name;
-
-            if ((foundString is { } && name == foundString))
-                continue;
-
-            RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-display", ("name", name), ("amount", _knowledge.GetMasteryString(amount))));
+            RecipeConstructionList.AddItem(Loc.GetString("construction-menu-requirement-display", ("name", prototype.Name), ("amount", _knowledge.GetMasteryString(amount))));
 
         }
     }
