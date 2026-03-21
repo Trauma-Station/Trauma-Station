@@ -1,5 +1,4 @@
 - type: entity
-  abstract: true
   parent: BaseBrainChip
   id: SkillChipSniper
   name: skill chip sniper
@@ -14,7 +13,6 @@
     ShootingKnowledge: 90
 
 - type: entity
-  abstract: true
   parent: BaseBrainChip
   id: SkillChipSwordsman
   name: skill chip swordsman
@@ -29,7 +27,6 @@
     meleeKnowledge: 90
     StrengthKnowledge: 30
 - type: entity
-  abstract: true
   parent: BaseBrainChip
   id: SkillChipAthlete
   name: skill chip athlete
@@ -45,7 +42,6 @@
     ThrowingKnowledge: 90
 
 - type: entity
-  abstract: true
   parent: BaseBrainChip
   id: SkillChipStoic
   name: skill chip stoic
