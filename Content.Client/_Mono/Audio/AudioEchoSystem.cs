@@ -30,13 +30,11 @@ public sealed class AreaEchoSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physicsSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly AudioEffectSystem _audioEffectSystem = default!;
     [Dependency] private readonly RoofSystem _roofSystem = default!;
-    [Dependency] private readonly TurfSystem _turfSystem = default!;
 
     /// <summary>
     ///     The directions that are raycasted to determine size for echo.
