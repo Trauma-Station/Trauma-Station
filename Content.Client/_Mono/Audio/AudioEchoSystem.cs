@@ -411,7 +411,7 @@ public sealed class AreaEchoSystem : EntitySystem
                     break;
             } // if we're not checking roofs, end this ray if this tile is empty/space
             else if (!_mapSystem.TryGetTileRef(gridRoofEntity, gridRoofEntity, nextCheckedTilePosition, out var tile) ||
-                     tile.Tile.IsEmpty())
+                     tile.Tile.IsEmpty)
                      break;
 
             nextCheckedPosition += directionFidelityStep;
