@@ -34,7 +34,7 @@
   plantRsi: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
   packetPrototype: CocaSeeds
   productPrototypes:
-    - LeavesCoca
+  - LeavesCoca
   harvestRepeat: Repeat
   lifespan: 75
   maturation: 5
