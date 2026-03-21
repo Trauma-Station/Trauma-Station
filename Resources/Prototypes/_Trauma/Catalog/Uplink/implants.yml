@@ -41,7 +41,7 @@
   blacklist:
   tags:
   - NukeOpsUplink
- 
+
  - type: listing
   id: SkillChipSwordsman
   name: uplink-skill-chip-(swordsman)-name
