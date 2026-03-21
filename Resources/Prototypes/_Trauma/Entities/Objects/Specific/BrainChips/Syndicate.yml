@@ -1,0 +1,14 @@
+- type: entity
+  abstract: true
+  parent: BaseBrainChip
+  id: BaseSkillChip
+  name: SniperSkillChip
+  description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
+  components:
+ 
+  - type: KnowledgeGrantOnWear
+    # will be like 40tcish so you can buy or buy the means to get a weapon, maybe like 60-80tc for nukies
+    # gives 90 so as to give master but not give max skills immediately
+    skills: 
+    ShootingKnowledge: 90
+    
