@@ -5,13 +5,13 @@
   name: skill chip (sniper)
   description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
   components:
- 
+
   - type: KnowledgeGrantOnWear
     # will be like 40tcish so you can buy or buy the means to get a weapon, maybe like 60-80tc for nukies
     # gives 90 so as to give master but not give max skills immediately
-    skills: 
+    skills:
     ShootingKnowledge: 90
-    
+
 - type: entity
   abstract: true
   parent: BaseBrainChip
@@ -19,11 +19,11 @@
   name: skill chip (swordsman)
   description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
   components:
- 
+
   - type: KnowledgeGrantOnWear
     # will be like 40tcish so you can buy or buy the means to get a weapon, maybe like 60-80tc for nukies
     # gives 90 so its worth it and 30 strength so it hit just a little harder too
-    skills: 
+    skills:
     meleeKnowledge: 90
     StrengthKnowledge: 30
 
@@ -34,11 +34,11 @@
   name: skill chip (athlete)
   description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
   components:
- 
+
   - type: KnowledgeGrantOnWear
     # 30tc normally and like 50tc for nukies
     # gives 90 because athletics is not that strong anyway it wont stop stuns, and throwing for the "athlete" theme and who the fuck throws stuff anyway"
-    skills: 
+    skills:
     AthleticsKnowledge: 90
     ThrowingKnowledge: 90
 
@@ -49,9 +49,9 @@
   name: skill chip (stoic)
   description: A sterilized microchip assembly that can directly interface with the brain. This one can rewrite the brain as if you had learned some skills years ago.
   components:
- 
+
   - type: KnowledgeGrantOnWear
     # 35tc normally and 60tc for nukies
     # 90 will let you take about a third more of the hits
-    skills: 
+    skills:
     ToughnessKnowledge: 90
