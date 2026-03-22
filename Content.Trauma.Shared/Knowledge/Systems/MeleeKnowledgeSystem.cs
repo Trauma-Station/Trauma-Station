@@ -31,6 +31,7 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MeleeSpeedKnowledgeComponent, GetMeleeAttackRateEvent>(OnGetMeleeAttackRate);
+        SubscribeLocalEvent<KnowledgeHolderComponent, GetUserMeleeDamageEvent>(_knowledge.RelayActiveEvent);
         SubscribeLocalEvent<MeleeDamageKnowledgeComponent, GetUserMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeExperience);
     }
