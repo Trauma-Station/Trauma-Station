@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using DependencyAttribute = Robust.Shared.IoC.DependencyAttribute;
 
-namespace Content.Goobstation.Client.Audio;
+namespace Content.Client._Mono.Audio;
 
 /// <summary>
 ///     Handles making sounds 'echo' in large, open spaces. Uses simplified raytracing.
