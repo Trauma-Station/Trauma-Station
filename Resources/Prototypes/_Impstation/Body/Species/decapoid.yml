@@ -94,7 +94,7 @@
     species: Decapoid
 
 - type: entity
-  parent: 
+  parent:
   - AppearanceDecapoid
   - BaseSpeciesMobOrganic
   id: BaseMobDecapoid
