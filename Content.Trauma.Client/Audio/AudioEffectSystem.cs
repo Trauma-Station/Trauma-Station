@@ -17,8 +17,8 @@ namespace Content.Trauma.Client.Audio;
 /// </summary>
 public sealed class AudioEffectSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     /// <summary>
     ///     Whether creating new auxiliaries is safe.
@@ -67,7 +67,6 @@ public sealed class AudioEffectSystem : EntitySystem
         foreach (var cache in CachedEffects)
         {
             oldPresets.Add(cache.Key);
-
             TryQueueDel(cache.Value.AuxiliaryUid);
             TryQueueDel(cache.Value.EffectUid);
         }
@@ -97,7 +96,6 @@ public sealed class AudioEffectSystem : EntitySystem
         _cachedBlankAuxiliaryUid = EntityUid.Invalid;
     }
 
-
     /// <summary>
     ///     Figures out whether auxiliaries are safe to use. Returns
     ///         whether a safe auxiliary pair has been outputted
@@ -108,7 +106,7 @@ public sealed class AudioEffectSystem : EntitySystem
         (EntityUid Entity, AudioAuxiliaryComponent Component)? maybeAuxiliaryPair = null;
         try
         {
-            maybeAuxiliaryPair = _audioSystem.CreateAuxiliary();
+            maybeAuxiliaryPair = _audio.CreateAuxiliary();
             _auxiliariesSafe = true;
         }
         catch (Exception ex)
@@ -157,7 +155,7 @@ public sealed class AudioEffectSystem : EntitySystem
             !ResolveCachedEffect(preset, out var auxiliaryUid, out _))
             return false;
 
-        _audioSystem.SetAuxiliary(entity, entity.Comp, auxiliaryUid);
+        _audio.SetAuxiliary(entity, entity.Comp, auxiliaryUid);
         return true;
     }
 
@@ -176,9 +174,9 @@ public sealed class AudioEffectSystem : EntitySystem
 
         // resolve the cached auxiliary
         if (!_cachedBlankAuxiliaryUid.IsValid())
-            _cachedBlankAuxiliaryUid = _audioSystem.CreateAuxiliary().Entity;
+            _cachedBlankAuxiliaryUid = _audio.CreateAuxiliary().Entity;
 
-        _audioSystem.SetAuxiliary(entity, entity.Comp, _cachedBlankAuxiliaryUid);
+        _audio.SetAuxiliary(entity, entity.Comp, _cachedBlankAuxiliaryUid);
         return true;
     }
 
@@ -215,12 +213,11 @@ public sealed class AudioEffectSystem : EntitySystem
     /// <returns>Whether the entity was successfully initialised, and it did not previously exist in the cache.</returns>
     public bool TryCacheEffect(in ProtoId<AudioPresetPrototype> preset, [NotNullWhen(true)] out EntityUid? auxiliaryUid, [NotNullWhen(true)] out EntityUid? effectUid)
     {
-
         effectUid = null;
         auxiliaryUid = null;
 
         if (_auxiliariesSafe == false ||
-            !_prototypeManager.TryIndex(preset, out var presetPrototype))
+            !_proto.TryIndex(preset, out var presetPrototype))
             return false;
 
         // i cant `??=` it
@@ -236,15 +233,15 @@ public sealed class AudioEffectSystem : EntitySystem
 
         // now, auxiliaries are known to be safe.
         // only when initially determining if auxiliaries are safe will we have a pair to use. in future attempts, we won't so just make one if necessary
-        var auxiliaryPair = maybeAuxiliaryPair ?? _audioSystem.CreateAuxiliary();
+        var auxiliaryPair = maybeAuxiliaryPair ?? _audio.CreateAuxiliary();
 
         DebugTools.Assert(Exists(auxiliaryPair.Entity), "Audio auxiliary pair's entity does not exist!");
         if (!Exists(auxiliaryPair.Entity))
             return false;
 
-        var effectPair = _audioSystem.CreateEffect();
-        _audioSystem.SetEffectPreset(effectPair.Entity, effectPair.Component, presetPrototype);
-        _audioSystem.SetEffect(auxiliaryPair.Entity, auxiliaryPair.Component, effectPair.Entity);
+        var effectPair = _audio.CreateEffect();
+        _audio.SetEffectPreset(effectPair.Entity, effectPair.Component, presetPrototype);
+        _audio.SetEffect(auxiliaryPair.Entity, auxiliaryPair.Component, effectPair.Entity);
 
         effectUid = effectPair.Entity;
         auxiliaryUid = auxiliaryPair.Entity;
