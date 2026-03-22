@@ -2,7 +2,6 @@
 
 using Content.Medical.Common.DoAfter;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Common.Weapons;
 using Content.Medical.Shared.Weapons;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;

@@ -10,7 +10,6 @@ using Content.Medical.Common.DoAfter;
 using Content.Medical.Common.Healing;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Common.Weapons;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Pain;
