@@ -38,9 +38,9 @@
   categories:
   - UplinkImplants
     - !type:StoreBlacklistCondition
-      blacklist:
-       tags:
-        - NukeOpsUplink
+  blacklist:
+  tags:
+  - NukeOpsUplink
 
 - type: listing
   id: SkillChipSwordsman
@@ -67,6 +67,6 @@
   categories:
   - UplinkImplants
   - !type:StoreBlacklistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
+  blacklist:
+  tags:
+  - NukeOpsUplink
