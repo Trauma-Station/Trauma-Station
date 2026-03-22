@@ -1,5 +1,4 @@
-// some parts taken and modified from https://github.com/TornadoTechnology/finster/blob/1af5daf6270477a512ee9d515371311443e97878/Content.Shared/_Finster/Audio/SharedAudioEffectsSystem.cs#L13 , credit to docnite
-// they're under WTFPL so its quite allowed
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
