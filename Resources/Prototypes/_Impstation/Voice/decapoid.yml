@@ -32,5 +32,3 @@
       path: /Audio/_Impstation/Voice/Decapoid/decapoid_cough.ogg
     DefaultDeathgasp:
       path: /Audio/_Impstation/Voice/Decapoid/decapoid_deathgasp.ogg
-    Ungh:
-      collection: Ungh

@@ -134,9 +134,6 @@
         type: GasTankBoundUserInterface
       enum.TransferAmountUiKey.Key:
         type: TransferAmountBoundUserInterface
-  - type: Tag
-    tags:
-      - GasTank
   - type: GasTank
     outputPressure: 21.3
     air:

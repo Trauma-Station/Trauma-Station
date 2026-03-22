@@ -7,9 +7,6 @@
     enum.HumanoidVisualLayers.Hair:
       limit: 1
       required: false
-    enum.HumanoidVisualLayers.FacialHair:
-      limit: 1
-      required: false
     enum.HumanoidVisualLayers.Chest:
       limit: 2
       required: false
@@ -121,7 +118,7 @@
       mask:
         tags:
           - Vaporizer
-          - SGD
+
     failMessage: decapoid-cant-speak
   - type: Respirator
     damage:
@@ -130,9 +127,8 @@
     damageRecovery:
       types:
         Asphyxiation: -1.0
-  - type: Body
-    prototype: Decapoid
-    requiredLegs: 2
+
+
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepDecapoid
@@ -177,29 +173,27 @@
     weightlessAcceleration: 1.5 # move more easily in space
     weightlessFrictionNoInput: 2 # more control over movement in space
     weightlessModifier: 1
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamageThreshold: 380 # slightly more vulnerable to heat
     coldDamageThreshold: 0 # immune to space
-    currentTemperature: 310
-    specificHeat: 42
     coldDamage:
       types:
         Cold : 0 # immune to space
     heatDamage:
       types:
         Heat : 1
+  - type: Temperature
+    currentTemperature: 310
+    specificHeat: 42
   - type: TemperatureSpeed
-    thresholds:
+    thresholds: # lol
       293: 1.0
       280: 1.0
       260: 1.0
   - type: Clumsy
-    clumsyDamage:
-      types:
-        Blunt: 5
     clumsySound:
       path: /Audio/_Impstation/Effects/Clumsy/crab_snap.ogg # the game gets really touchy about having that initial forward slash.
-    clumsyHypo: false # these variables were created for this purpose and have been upstreamed
+    clumsyHypo: false
     clumsyVaulting: false
     clumsyDefib: false
     gunFailedMessage: gun-clumsy-decapoid # The gun slips out of your claws!
@@ -245,9 +239,6 @@
     proto: robot # todo: custom
   - type: HumanoidProfile
     species: Decapoid
-    hideLayersOnEquip:
-    - Hair
-    - Snout
 
 - type: entity # have to do this because otherwise decapoids would not display as having their vaporizer in the customization menu.
   save: false
@@ -391,9 +382,5 @@
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
     maxReagents: 3
-    groups:
-    - id: Food
-    - id: Drink
-    - id: Gas
-      rateModifier: 100.0
+    stages: [ Digestion, Bloodstream, Metabolites, Respiration ]
   - type: Lung

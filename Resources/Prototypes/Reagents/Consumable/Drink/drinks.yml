@@ -492,8 +492,7 @@
         damage:
           types:
             Heat: 3
-    Gas: # imp special.
-      effects:
+      # <Imp>
       - !type:Oxygenate
         conditions:
         - !type:MetabolizerTypeCondition
@@ -505,6 +504,7 @@
         ratios:
           Ammonia: 1.0
           WaterVapor: -1.0 # end imp special.
+      # </Imp>
 
 - type: reagent
   id: Ice
