@@ -24,16 +24,24 @@ public sealed class SpawnerSystem : EntitySystem
         base.Update(frameTime);
 
         var curTime = _timing.CurTime;
+        var toFire = new List<(EntityUid uid, TimedSpawnerComponent comp)>(); // Trauma
+
         var query = EntityQueryEnumerator<TimedSpawnerComponent>();
         while (query.MoveNext(out var uid, out var timedSpawner))
         {
             if (timedSpawner.NextFire > curTime)
                 continue;
 
-            OnTimerFired(uid, timedSpawner);
-
             timedSpawner.NextFire += timedSpawner.IntervalSeconds;
+            // <Trauma>
+            toFire.Add((uid, timedSpawner));
         }
+
+        foreach (var (uid, timedSpawner) in toFire)
+        {
+            OnTimerFired(uid, timedSpawner);
+        }
+        // </Trauma>
     }
 
     private void OnMapInit(Entity<TimedSpawnerComponent> ent, ref MapInitEvent args)

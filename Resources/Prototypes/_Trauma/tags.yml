@@ -2,6 +2,9 @@
   id: AdvancedMagboots
 
 - type: Tag
+  id: Apple
+
+- type: Tag
   id: Butt
 
 - type: Tag
