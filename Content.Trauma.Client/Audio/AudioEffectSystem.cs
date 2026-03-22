@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using DependencyAttribute = Robust.Shared.IoC.DependencyAttribute;
 
-namespace Content.Client._Mono.Audio;
+namespace Content.Trauma.Client.Audio;
 
 /// <summary>
 ///     Handler for client-side audio effects.

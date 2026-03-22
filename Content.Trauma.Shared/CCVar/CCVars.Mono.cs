@@ -1,6 +1,6 @@
 using Robust.Shared.Configuration;
 
-namespace Content.Shared._Mono.CCVar;
+namespace Content.Trauma.Shared.CCVar;
 
 /// <summary>
 /// Contains CVars used by Mono.

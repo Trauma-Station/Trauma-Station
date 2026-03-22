@@ -26,6 +26,10 @@
                 <CheckBox Name="AdminSoundsCheckBox" Text="{Loc 'ui-options-admin-sounds'}" />
                 <CheckBox Name="BwoinkSoundCheckBox" Text="{Loc 'ui-options-bwoink-sound'}" />
                 <CheckBox Name="StreamerModeCheckBox" Text="{Loc 'ui-options-streamer-mode'}" /> <!-- Trauma -->
+            <Label Text="{Loc 'ui-options-general-area-echo'}"
+                	StyleClasses="LabelKeyText"/> <!-- Mono -->
+                <CheckBox Name="AreaEchoCheckBox" Text="{Loc 'ui-options-area-echo-enabled'}" /> <!-- Mono -->
+                <CheckBox Name="AreaEchoHighResolutionCheckBox" Text="{Loc 'ui-options-area-echo-highres'}" /> <!-- Mono -->
             </BoxContainer>
         </BoxContainer>
         <ui:OptionsTabControlRow Name="Control" Access="Public" />

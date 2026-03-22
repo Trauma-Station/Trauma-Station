@@ -3,7 +3,7 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using Content.Client.Light.EntitySystems;
-using Content.Shared._Mono.CCVar;
+using Content.Trauma.Shared.CCVar;
 using Content.Shared.Light.Components;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -20,7 +20,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using DependencyAttribute = Robust.Shared.IoC.DependencyAttribute;
 
-namespace Content.Client._Mono.Audio;
+namespace Content.Trauma.Client.Audio;
 
 /// <summary>
 ///     Handles making sounds 'echo' in large, open spaces. Uses simplified raytracing.
