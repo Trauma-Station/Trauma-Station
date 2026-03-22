@@ -15,8 +15,8 @@
       - NukeOpsUplink
 - type: listing
   id: SkillChipSniper
-  name: uplink-skill-chip-sniper-name
-  description: uplink-skill-chip-sniper-desc
+  name: uplink-skill-chip-(A)-name
+  description: uplink-skill-chip-(A)-desc
   productEntity: SkillChipSniper
   cost:
     Telecrystal: 80
@@ -30,13 +30,14 @@
 
 - type: listing
   id: SkillChipSniper
-  name: uplink-skill-chip-sniper-name
-  description: uplink-skill-chip-sniper-desc
+  name: uplink-skill-chip-(A)-name
+  description: uplink-skill-chip-(A)-desc
   productEntity: SkillChipSniper
   cost:
     Telecrystal: 40
   categories:
   - UplinkImplants
+  conditions:
     - !type:StoreBlacklistCondition
   blacklist:
   tags:
@@ -44,8 +45,8 @@
 
 - type: listing
   id: SkillChipSwordsman
-  name: uplink-skill-chip-swordsman-name
-  description: uplink-skill-chip-swordsman-desc
+  name: uplink-skill-chip-(B)-name
+  description: uplink-skill-chip-(B)-desc
   productEntity: SkillChipSwordsman
   cost:
     Telecrystal: 80
@@ -59,13 +60,14 @@
 
 - type: listing
   id: SkillChipSwordsman
-  name: uplink-skill-chip-swordsman-name
-  description: uplink-skill-chip-swordsman-desc
+  name: uplink-skill-chip-(B)-name
+  description: uplink-skill-chip-(B)-desc
   productEntity: SkillChipSniper
   cost:
     Telecrystal: 40
   categories:
   - UplinkImplants
+  conditions:
   - !type:StoreBlacklistCondition
   blacklist:
   tags:
