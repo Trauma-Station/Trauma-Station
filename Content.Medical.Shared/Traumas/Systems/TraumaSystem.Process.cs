@@ -35,6 +35,11 @@ public partial class TraumaSystem
 
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
     public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
+    /// <summary>
+    /// Prevent using bruise packs if a part has more than this many bleed stacks from wounds.
+    /// Should be replaced by arterial bleeding in the future...
+    /// </summary>
+    public const float MinBleedToStopHealing = 5f;
 
     private void InitProcess()
     {
@@ -127,7 +132,7 @@ public partial class TraumaSystem
 
     private void OnPartHealAttempt(Entity<WoundableComponent> ent, ref PartHealAttemptEvent args)
     {
-        args.Bleeding = ent.Comp.Bleeds > 0;
+        args.Bleeding = ent.Comp.Bleeds > MinBleedToStopHealing;
         if (TraumasBlockingHealing.Any(traumaType => HasWoundableTrauma(ent, traumaType, ent.Comp, false)))
             args.Cancelled = true;
     }
