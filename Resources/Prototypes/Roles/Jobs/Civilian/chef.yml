@@ -21,9 +21,6 @@
   extendedAccess:
   - Hydroponics
   - Bar
-  special:
-  - !type:AddImplantSpecial # Chefs speak space italian
-    implants: [ SpaceItalianTranslatorImplant ]
 
 - type: startingGear
   id: ChefGear

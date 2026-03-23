@@ -30,8 +30,6 @@
     - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
-  - type: Jump
-    jumpAction: ActionJumpFacehugger
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
@@ -149,6 +147,16 @@
 #    - XenoHivemind # Trauma
     - Hissing
     - Draconic
+  - type: Speech
+    speechSounds: Xenomorph
+    speechVerb: SmallMob
+  - type: ReplacementAccent
+    accent: xeno
+  - type: Vocal
+    sounds:
+      Male: Xenomorph
+      Female: Xenomorph
+      Unsexed: Xenomorph
   - type: CollectiveMind # Trauma
     defaultChannel: Xenomorphivemind
     channels:
@@ -171,4 +179,21 @@
       - !type:GibBehavior
         deleteGibs: true
         recursive: false
+  - type: LarvaInfestationVision
+  - type: TypingIndicator
+    proto: alien
+  - type: ZombieImmune
+  - type: NoSlip
+  - type: ShowHealthIcons
+  - type: VentCrawler
+  - type: Pinpointer
+    whitelist:
+      components:
+      - XenomorphQueen
+    alert: QueenFinder
+    isActive: true
+    canToggle: false
+    canEmag: false
+    canExamine: false
+  - type: FaceHuggerLeap
   # </Trauma>
