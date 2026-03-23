@@ -1,0 +1,25 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Title="{Loc 'abductor-task-window-title'}"
+        MinSize="600 300">
+    <BoxContainer Name="LinkContainer" Align="Center">
+        <Label Name="LinkLabel" Text="{Loc 'abductor-task-window-link'}" Align="Center" HorizontalExpand="True" VerticalExpand="True"/>
+    </BoxContainer>
+    <BoxContainer Name="ScanContainer" Orientation="Vertical" Visible="False">
+        <controls:StripeBack Margin="4">
+            <Button Name="ScanButton" Text="{Loc 'abductor-task-window-scan'}"/>
+        </controls:StripeBack>
+    </BoxContainer>
+    <BoxContainer Name="ScannedContainer" Orientation="Horizontal" Visible="False">
+        <BoxContainer Name="TasksContainer" Orientation="Vertical"/>
+        <BoxContainer Orientation="Vertical" Margin="6">
+            <Label Name="SubjectName"/>
+            <Label Name="SubjectSpecies"/>
+            <SpriteView Name="SpriteView" MinSize="128 128"/>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

@@ -155,7 +155,14 @@
 - type: abductorTask
   id: RemoveStomach
   valid:
+  - !type:SpeciesCondition
+    inverted: true
+    species: SlimePerson # thats debraining...
   - !type:HasOrgan
+    organCategory: Stomach
+  completed:
+  - !type:HasOrgan
+    inverted: true
     organCategory: Stomach
 
 - type: abductorTask
