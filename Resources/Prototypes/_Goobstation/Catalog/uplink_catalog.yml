@@ -531,21 +531,21 @@
     whitelist:
     - Clown
 
-- type: listing
-  id: UplinkHisGrace
-  name: uplink-his-grace-name
-  description: uplink-his-grace-desc
-  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Melee/hisgrace.rsi, state: icon }
-  productEntity: HisGrace
-  cost:
-    Telecrystal: 100
-  categories:
-  - UplinkJob
-  conditions:
-  - !type:BuyerJobCondition
-    whitelist:
-    - Chaplain
-
+#- type: listing
+#  id: UplinkHisGrace
+#  name: uplink-his-grace-name
+#  description: uplink-his-grace-desc
+#  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Melee/hisgrace.rsi, state: icon }
+#  productEntity: HisGrace
+#  cost:
+#    Telecrystal: 100
+#  categories:
+#  - UplinkJob
+#  conditions:
+#  - !type:BuyerJobCondition
+#    whitelist:
+#    - Chaplain
+# - Trauma; removed until rework because its BORING
 
 - type: listing
   id: UplinkLubeGrenade
