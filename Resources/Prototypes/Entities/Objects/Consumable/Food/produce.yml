@@ -1184,6 +1184,7 @@
     tags:
     - Fruit
     - Apple # Trauma
+    - ChickenFeed # Trauma
   - type: FoodSequenceElement
     entries:
       Burger: Apple
@@ -1234,6 +1235,7 @@
     tags:
     - Fruit
     - Apple # Trauma
+    - ChickenFeed # Trauma
   - type: FoodSequenceElement
     entries:
       Burger: GoldenApple
