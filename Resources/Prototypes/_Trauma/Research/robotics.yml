@@ -239,7 +239,6 @@
   - AugmentUtilityPanelElectronics
   - AugmentBotanyPanelElectronics
   - AugmentSurgeryPanelElectronics
-  - AugmentPaperworkPanelElectronics
 
 - type: technology
   id: CombatAugmentation

@@ -100,28 +100,44 @@
     tags:
     - BaseballBat
   - type: UndetectableContraband #Goobstation-Contraband detector
-  - type: DamageOnHit # <Trauma>
-    damage:
-      types:
-        Blunt: 1
-  - type: Damageable # Trauma - durability
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 20
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: WoodDestroy
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank:
-            min: 1
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ] # </Trauma>
+  # <Trauma>
+  - type: Durability
+    durabilityThresholds:
+      # Reinforced, if not specified here, will default to anything under 0.
+      0: Pristine
+      10: Worn
+      22: Damaged
+      28: Broken
+      35: Destroyed
+    damagePopups:
+      Worn:
+      - durability-weapon-bat-0
+      - durability-weapon-bat-1
+      Damaged:
+      - durability-weapon-bat-1
+      - durability-weapon-bat-2
+      - durability-weapon-bat-3
+      Broken:
+      - durability-weapon-bat-3
+      - durability-weapon-bat-4
+      - durability-weapon-bat-5
+      - durability-weapon-bat-6
+      Destroyed:
+      - durability-weapon-bat-7
+      - durability-weapon-bat-8
+      - durability-weapon-bat-9
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        MaterialWoodPlank1:
+          min: 2
+          max: 3
+    minDamageRoll: 2
+    maxDamageRoll: 5
+    repairDoAfter: 3
+    repairMaterials:
+      Wood: 4, 6
+    maxRepairBonus: 8
+  # </Trauma>
 
 - type: entity
   name: incomplete baseball bat

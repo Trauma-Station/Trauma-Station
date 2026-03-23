@@ -519,6 +519,7 @@
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
   - type: GhostRole
+    prob: 0 # Trauma - was 0.25
     makeSentient: true
     allowSpeech: true
     allowMovement: true
@@ -1357,7 +1358,7 @@
     - DoorBumpOpener
     - FootstepSound
   - type: GhostRole
-    prob: 0.25
+    prob: 0 # Trauma - was 0.25
     name: ghost-role-information-kangaroo-name
     description: ghost-role-information-kangaroo-description
     rules: ghost-role-information-nonantagonist-rules
@@ -1806,6 +1807,7 @@
   - type: VentCrawler # goobstation - Ventcrawl
     enterDelay: 0.5
   - type: GhostRole
+    prob: 0.3 # Trauma - add % chance to mouse ghostrole
     makeSentient: true
     allowSpeech: true
     allowMovement: true
@@ -1972,6 +1974,7 @@
         Quantity: 50
     smokeImmune: true # Goobstation - prevent server lagging mouse farms
   - type: CanEscapeInventory
+    baseResistTime: 0.5
   - type: MobPrice
     price: 50
   - type: BadFood
@@ -2020,12 +2023,6 @@
     - Mousemind
   - type: FaxSlip
     slipChance: 0.3
-  # does not infect you unless the mouse has any diseases, which it doesn't by default
-  - type: DiseaseOnHit
-    spreadParams:
-      chance: 0.05 # 1984 lower chance for normal mice so creating the turboplague horde is not as strong
-      power: 1
-      spreadType: Blood
   - type: DiseaseCarrier
     effectImmune: true
   - type: ShowDiseaseIcons # they sense it
@@ -2151,6 +2148,7 @@
   id: MobMouseCancer
   components:
   - type: GhostRole
+    prob: 1 # Trauma - Ensure evil mice get their ghostrole
     name: ghost-role-information-cancer-mouse-name
     description: ghost-role-information-cancer-mouse-description
     rules: ghost-role-information-freeagent-rules
@@ -2580,8 +2578,8 @@
     angle: 0
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 5
+      types:
+        Piercing: 5
   - type: Item
     size: Normal
     sprite: Mobs/Animals/grenadepenguin.rsi
@@ -2758,13 +2756,15 @@
   - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute from base.yml.
     allowedStates:
     - Alive
-    damageCap: 89
     damage:
       types:
         Poison: -0.07
-      groups:
-        Brute: -0.07
-        Burn: -0.07
+        Blunt: -0.03
+        Slash: -0.03
+        Piercing: -0.03
+        Heat: -0.03
+        Cold: -0.03
+        Shock: -0.03
   - type: NightVision # Goobstation - Nigthvision
     color: "#808080"
     activateSound: null
@@ -3668,6 +3668,7 @@
   components:
   - type: VentCrawler # goobstation - Ventcrawl
   - type: GhostRole
+    prob: 0 # Trauma
     makeSentient: true
     allowSpeech: true
     allowMovement: true

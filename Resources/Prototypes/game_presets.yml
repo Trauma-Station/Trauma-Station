@@ -65,6 +65,17 @@
   description: aller-at-once-description
   showInVote: false #Please god dont do this
   rules:
+    # <Trauma>
+    - BasicAntagEventScheduler
+    - ModerateAntagEventScheduler
+    - Thief
+    - Heretic
+    - BlobGameMode
+    - LoneAbductorSpawn
+    - Changeling
+    - Shadowling
+    - Insurgency
+    # </Trauma>
     - Nukeops
     - Traitor
     - Revolutionary
@@ -78,15 +89,6 @@
     - RampingStationEventScheduler
     - SpaceTrafficControlEventScheduler
     - BasicRoundstartVariation
-    # <Trauma>
-    - Thief
-    - Heretic
-    - BlobGameMode
-    - LoneAbductorSpawn
-    - Changeling
-    - Shadowling
-    - Insurgency
-    # </Trauma>
 
 - type: gamePreset
   id: Extended
@@ -136,17 +138,11 @@
     - secret
     - sekrit
   name: secret-title
-  showInVote: true # Trauma
+  showInVote: true
   description: secret-description
   rules:
-  # <Trauma> - completely changed every rule
+  - Insurgency # Trauma
   - Secret
-  - BasicRoundstartVariation
-  - SpaceTrafficControlEventScheduler
-  - BasicStationEventScheduler
-  - Insurgency # Always some shitters for sec to deal with
-  - SubTraitorRandom # Always 50% chance of at least one traitor
-  # </Trauma>
 
 - type: gamePreset
   id: Sandbox
@@ -168,6 +164,10 @@
   description: traitor-description
   showInVote: false
   rules:
+  # <Trauma>
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  # </Trauma>
   - DummyNonAntagChance
   - Traitor
   - SubGamemodesRule
@@ -197,6 +197,10 @@
   description: nukeops-description
   showInVote: false
   rules:
+  # <Trauma>
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  # </Trauma>
   - Nukeops
   - DummyNonAntagChance
   # - SubGamemodesRule
@@ -215,6 +219,10 @@
   description: rev-description
   showInVote: false
   rules:
+  # <Trauma>
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  # </Trauma>
   - DummyNonAntagChance
   - Revolutionary
   - SubGamemodesRule
@@ -231,6 +239,10 @@
   description: xenoborgs-description
   showInVote: false
   rules:
+  # <Trauma>
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  # </Trauma>
   - Xenoborgs
   - DummyNonAntagChance
   - SubGamemodesRule
@@ -251,6 +263,10 @@
   description: zombie-description
   showInVote: false
   rules:
+  # <Trauma>
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  # </Trauma>
   - Zombie
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
@@ -267,6 +283,10 @@
   description: zombieteors-description
   showInVote: false
   rules:
+  # <Trauma>
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  # </Trauma>
   - Zombie
   - BasicStationEventScheduler
   - KesslerSyndromeScheduler

@@ -21,3 +21,12 @@
   antagonist: true
   setPreference: false
   objective: roles-antag-thrall-description
+
+- type: antagSmite
+  id: Shadowling
+  antag: Shadowling
+  rule: Shadowling
+  ruleComp: ShadowlingRule
+  icon:
+    sprite: _EinsteinEngines/Shadowling/shadowling_abilities.rsi
+    state: engage_hatch

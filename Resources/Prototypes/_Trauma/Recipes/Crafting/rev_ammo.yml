@@ -6,7 +6,6 @@
   category: construction-category-antagonist
   objectType: Item
   theory:
-    TechnologyKnowledge: 1
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 2
 
@@ -18,7 +17,6 @@
   category: construction-category-antagonist
   objectType: Item
   theory:
-    TechnologyKnowledge: 2
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 2
 
@@ -30,7 +28,5 @@
   category: construction-category-antagonist
   objectType: Item
   theory:
-    TechnologyKnowledge: 1
-    SurvivalKnowledge: 1
     RevolutionaryKnowledge: 2
     WeaponsKnowledge: 2

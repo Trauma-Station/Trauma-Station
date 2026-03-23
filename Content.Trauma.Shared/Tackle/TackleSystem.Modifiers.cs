@@ -26,9 +26,10 @@ public sealed partial class TackleSystem
         if (!TryComp(ent, out DamageableComponent? damageable))
             return;
 
+        var total = _dmg.GetTotalDamage((ent.Owner, damageable));
         if (_threshold.TryGetThresholdForState(ent, MobState.SoftCrit, out var threshold) ||
             _threshold.TryGetThresholdForState(ent, MobState.Critical, out threshold) && threshold > 0f)
-            args.Modifier -= damageable.TotalDamage.Value / threshold.Value.Float() * 2f;
+            args.Modifier -= (total * threshold.Value / 2).Float();
     }
 
     private void OnStamina(Entity<StaminaComponent> ent, ref CalculateTackleModifierEvent args)

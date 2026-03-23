@@ -2,3 +2,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station and converted to mono by @deltanedas (github)"
   source: "https://github.com/tgstation/tgstation/blob/f32d8aa19eae9c250990d83b26546d384666597f/sound/items/weapons/sear.ogg"
+
+- files: ["queenroarstart.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by AudioPapkin, Modified by loltart"
+  source: "https://pixabay.com/sound-effects/horror-monster-roar-ps-oo7-306401/"

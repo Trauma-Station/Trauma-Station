@@ -40,7 +40,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Roles;
-using Content.Shared.Roles.Components;
+using Content.Shared.Zombies;
 using Robust.Server.Audio;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -462,6 +462,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         EnsureComp<CosmicCultComponent>(uid, out var cultComp);
         EnsureComp<IntrinsicRadioReceiverComponent>(uid);
         EnsureComp<CosmicCultAssociatedRuleComponent>(uid, out var associatedComp);
+        EnsureComp<ZombieImmuneComponent>(uid);
 
         foreach (var influenceProto in _proto.EnumeratePrototypes<InfluencePrototype>().Where(influenceProto => influenceProto.Tier == cultComp.CurrentLevel))
             cultComp.UnlockedInfluences.Add(influenceProto.ID);

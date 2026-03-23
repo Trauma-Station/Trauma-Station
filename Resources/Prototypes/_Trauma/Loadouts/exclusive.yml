@@ -48,6 +48,12 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: 553a2f9c-4584-4396-963a-017efdf812f5
 
+- type: loadoutEffectGroup
+  id: Gribley
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 959c5377-d1a9-4c8b-8a64-27e563846352
+
 # - type: loadoutEffectGroup
 #   id: Parorya
 #   effects:
@@ -146,3 +152,12 @@
   storage:
     back:
     - PatreonGamingFungus420
+
+- type: loadout
+  id: PatreonGribley
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Gribley
+  storage:
+    back:
+    - PatreonGribley

@@ -24,7 +24,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      HandmadeKnowledge: 26
+      FabricationKnowledge: 26
       SmokeablesKnowledge: 50
 
 - type: entity
@@ -37,6 +37,7 @@
       MartialArtCQCChef: 1 # work your way up chuddy
       MeleeKnowledge: 10
       CookingKnowledge: 26
+      LanguageSpaceItalian: 100 # born and raised
 
 - type: entity
   parent: BaseSkillChip
@@ -46,4 +47,5 @@
   - type: KnowledgeGrantOnWear
     skills:
       CookingKnowledge: 10
-      HandmadeKnowledge: 10 # idk
+      FabricationKnowledge: 10 # idk
+      LanguageSpaceItalian: 10 # so you can understand chefs

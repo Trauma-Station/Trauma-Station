@@ -194,7 +194,7 @@
   description: Possess and control an everyday object. Freakout level high.
   components:
   - type: ActionWraithPoints
-    wpConsume: 300
+    wpConsume: 666
   - type: Action
     itemIconStyle: BigAction
     useDelay: 150
@@ -253,7 +253,7 @@
         thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 300 #Easily killable with holy damage so it has to be somewhat high for it to be worth the wraith risking it
+            damage: 30
           behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]

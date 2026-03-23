@@ -24,14 +24,14 @@ public sealed partial class ParryComponent : Component
     /// The amount of shots that can be reflected in a quick succession, at 100 skill.
     /// </summary>
     [DataField]
-    public int MaxReflects = 10;
+    public int MaxReflects = 3;
 
     /// <summary>
     /// The amount of shots that can be reflected in a quick succession, at 100 skill.
     /// Should generally be lower than reflects, because most melee weapons are far slower than most guns.
     /// </summary>
     [DataField]
-    public int MaxParries = 5;
+    public int MaxParries = 3;
 
     /// <summary>
     /// The minimum required level of skill to be able to reflect anything at all.

@@ -252,17 +252,6 @@
   interruptable: true
   priority: 5
 
-- type: ambientMusic # quiet ambience
-  id: StationAmbience
-  sound:
-    params:
-      volume: -20
-    collection: AmbienceStation
-  rules: OnGridRule
-  fadeIn: true
-  interruptable: true
-  priority: 1
-
 # Collections
 
 - type: soundCollection

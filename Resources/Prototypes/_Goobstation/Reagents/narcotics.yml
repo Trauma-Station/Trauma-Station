@@ -30,10 +30,11 @@
       metabolismRate: 0.05
       effects:
       # Main effects
+      - !type:EvenHealthChange
+        damage:
+          Brute: -1
       - !type:HealthChange
         damage:
-          groups:
-            Brute: -1
           types:
             Heat: -0.5
             Shock: -0.5
@@ -289,8 +290,8 @@
       effects:
       - !type:HealthChange
         damage:
-          groups:
-            Genetic: -0.2
+          types:
+            Cellular: -0.2
       - !type:Polymorph
         prototype: MouseSentient
         conditions:

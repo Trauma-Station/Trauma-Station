@@ -227,9 +227,9 @@
   objectType: Item
   theory:
     FirstAidKnowledge: 1
-    HandmadeKnowledge: 2
+    FabricationKnowledge: 1
   practical:
-    HandmadeKnowledge: 3
+    FabricationKnowledge: 1
 
 - type: constructionGraph
   id: SilkPatchMakeshift
@@ -252,9 +252,6 @@
   targetNode: silkPatchMakeshift
   category: construction-category-tools
   objectType: Item
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 1

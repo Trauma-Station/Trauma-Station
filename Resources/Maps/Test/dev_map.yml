@@ -3425,29 +3425,6 @@ entities:
     - type: Transform
       pos: 70.82964,51.43236
       parent: 1
-    - type: ItemToggleMeleeWeapon
-      deactivatedSoundOnSwing: !type:SoundPathSpecifier
-        params:
-          variation: 0.025
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: -3
-        path: /Audio/Weapons/punchmiss.ogg
-      deactivatedSoundOnHitNoDamage: !type:SoundCollectionSpecifier
-        params:
-          variation: null
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: 0
-        collection: WeakHit
 - proto: BarSign
   entities:
   - uid: 983
@@ -11709,40 +11686,6 @@ entities:
     - type: Transform
       pos: 70.67688,52.099033
       parent: 1
-    - type: ItemToggleMeleeWeapon
-      deactivatedDamage:
-        armorPenetration: 0
-        groups: null
-        types:
-          Blunt: 1
-      deactivatedSoundOnSwing: !type:SoundPathSpecifier
-        params:
-          variation: 0.025
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: -3
-        path: /Audio/Weapons/punchmiss.ogg
-      deactivatedSoundOnHitNoDamage: !type:SoundCollectionSpecifier
-        params:
-          variation: null
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: 0
-        collection: WeakHit
-    - type: ComponentToggler
-      target: 3350
-    - type: Reflect
-      inRightPlace: False
-    - type: ItemToggleSize
-      deactivatedSize: Tiny
 - proto: EnergyKatana
   entities:
   - uid: 3498
@@ -11900,40 +11843,6 @@ entities:
     - type: Transform
       pos: 70.6267,51.540134
       parent: 1
-    - type: ComponentToggler
-      target: 3459
-    - type: ItemToggleSize
-      deactivatedSize: Small
-    - type: ItemToggleMeleeWeapon
-      deactivatedDamage:
-        armorPenetration: 0
-        groups: null
-        types:
-          Blunt: 4.5
-      deactivatedSoundOnSwing: !type:SoundPathSpecifier
-        params:
-          variation: 0.025
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: -3
-        path: /Audio/Weapons/punchmiss.ogg
-      deactivatedSoundOnHitNoDamage: !type:SoundCollectionSpecifier
-        params:
-          variation: null
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: 0
-        collection: WeakHit
-    - type: Reflect
-      inRightPlace: False
 - proto: EnergySwordDouble
   entities:
   - uid: 3503
@@ -11941,8 +11850,6 @@ entities:
     - type: Transform
       pos: 70.444534,52.589603
       parent: 1
-    - type: Reflect
-      inRightPlace: False
 - proto: ExGrenade
   entities:
   - uid: 2198
@@ -15746,47 +15653,6 @@ entities:
     - type: Transform
       pos: 70.45483,51.64951
       parent: 1
-    - type: ItemToggleSize
-      deactivatedShape:
-      - 0,0,0,1
-      deactivatedSize: Small
-    - type: ItemToggleMeleeWeapon
-      deactivatedDamage:
-        armorPenetration: 0
-        groups:
-          Brute: 3
-        types: null
-      deactivatedSoundOnSwing: !type:SoundPathSpecifier
-        params:
-          variation: 0.025
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: -3
-        path: /Audio/Weapons/punchmiss.ogg
-      deactivatedSoundOnHitNoDamage: !type:SoundCollectionSpecifier
-        params:
-          variation: null
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: 0
-        collection: WeakHit
-    - type: Item
-      shape:
-      - 0,0,0,1
-    - type: MeleeWeapon
-      soundHit: null
-    - type: ComponentToggler
-      target: 3355
-    - type: Reflect
-      inRightPlace: False
 - proto: NitrogenCanister
   entities:
   - uid: 1450
@@ -15919,41 +15785,6 @@ entities:
     - type: Transform
       pos: 70.5,43.5
       parent: 1
-    - type: ItemToggleMeleeWeapon
-      deactivatedDamage:
-        armorPenetration: 0
-        groups: null
-        types:
-          Blunt: 4.5
-      deactivatedSoundOnSwing: !type:SoundPathSpecifier
-        params:
-          variation: 0.025
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: -3
-        path: /Audio/Weapons/punchmiss.ogg
-      deactivatedSoundOnHitNoDamage: !type:SoundCollectionSpecifier
-        params:
-          variation: null
-          playOffsetSeconds: 0
-          loop: False
-          referenceDistance: 1
-          rolloffFactor: 1
-          maxDistance: 15
-          pitch: 1
-          volume: 0
-        collection: WeakHit
-    - type: ComponentToggler
-      target: 3464
-    - type: ItemToggleSize
-      deactivatedSize: Small
-    missingComponents:
-    - Sharp
-    - Execution
 - proto: PlaqueAtmos
   entities:
   - uid: 3156

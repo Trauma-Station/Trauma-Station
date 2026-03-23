@@ -30,9 +30,12 @@
     layers:
     - state: icon
       sprite: _Trauma/Objects/Specific/empty_scroll.rsi
-    - type: Sprite
-      sprite: _Goobstation/Wizard/Objects/scroll.rsi
+    - sprite: _Goobstation/Wizard/Objects/scroll.rsi
       state: scroll
+      map: ["enum.PaperVisualLayers.Writing"]
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
   - type: Item
     size: Small
-# make new component to pull random prayer
+  - type: RandomScroll

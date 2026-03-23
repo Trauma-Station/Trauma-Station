@@ -1,9 +1,8 @@
 - type: entity
-  name: reinforcement caller
-  parent: [BaseItem, BaseCommandContraband]
-  suffix: Empty
   abstract: true
-  id: BaseReinforcementCallerEmpty
+  parent: [BaseItem, BaseCommandContraband]
+  id: BaseReinforcementCaller
+  name: reinforcement caller
   description: A device that calls in reinforcements for the station.
   components:
   - type: Item
@@ -19,44 +18,38 @@
   - type: ActivatableUI
     key: enum.StoreUiKey.Key
   - type: Store
+    name: store-preset-name-reinforcements
     balance:
       Spesos: 2500
-
-- type: entity
-  parent: BaseReinforcementCallerEmpty
-  suffix: Empty
-  id: ReinforcementCallerHos
-  components:
-  - type: Store
-    name: store-preset-name-reinforcements
-    categories:
-    - ReinforcementsHoS
     currencyWhitelist:
     - Spesos
     ownerOnly: false
 
 - type: entity
-  parent: BaseReinforcementCallerEmpty
-  suffix: Empty
+  parent: BaseReinforcementCaller
+  id: ReinforcementCallerHos
+  suffix: HoS
+  components:
+  - type: Store
+    categories:
+    - ReinforcementsHoS
+
+- type: entity
+  parent: BaseReinforcementCaller
   id: ReinforcementCallerHoP
+  suffix: HoP
   components:
   - type: Item
-    size: Small
     sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hop.rsi
   - type: Sprite
     sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_caller_hop.rsi
-    state: animated
   - type: Store
-    name: store-preset-name-reinforcements
     categories:
     - ServiceHoP
     - EngineeringHoP
     - ScienceHoP
     - MedicalHoP
     - CargoHoP
-    currencyWhitelist:
-    - Spesos
-    ownerOnly: false
 
 - type: storeCategory
   id: ReinforcementsHoS
@@ -90,11 +83,10 @@
 
 - type: entity
   id: DebugReinforcementCaller
-  parent: BaseReinforcementCallerEmpty
+  parent: BaseReinforcementCaller
   suffix: Debug
   components:
   - type: Store
-    name: store-preset-name-reinforcements
     balance:
       Spesos: 999999
     categories:
@@ -104,5 +96,3 @@
     - ScienceHoP
     - MedicalHoP
     - CargoHoP
-    currencyWhitelist:
-    - Spesos

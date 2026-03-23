@@ -188,7 +188,7 @@
 - type: weightedRandomEntity
   id: WabbajackSpecial
   weights:
-    MobBinglePrime: 1
+    MobBinglePrimeTrauma: 1
     LavalandBossMegaLegion: 1
     LavalandBossColossus: 1
     LavalandBossAshDrake: 1
@@ -202,7 +202,6 @@
     MobXenomorphSentinel: 0.8
     MobXenomorphHunter: 1
     MobXenomorphPraetorian: 0.5
-    MobXenomorphMaid: 0.01
 
 - type: weightedRandom
   id: WabbajackGroups

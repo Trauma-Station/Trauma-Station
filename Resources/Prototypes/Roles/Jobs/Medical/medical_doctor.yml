@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 2.5h
+      time: 1h # Trauma was 2.5
   startingGear: DoctorGear
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo
@@ -14,7 +14,6 @@
   - MedicalDoctor
   - Medical
   - Medicine
-  goobcoins: 20 #Goob content
   access:
   - Medical
   - Maintenance

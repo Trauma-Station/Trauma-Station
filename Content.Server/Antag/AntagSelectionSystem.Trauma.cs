@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 using Content.Server.Antag.Components;
+using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Roles;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server.Antag;
 
@@ -76,5 +78,38 @@ public sealed partial class AntagSelectionSystem
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Type-erased ForceMakeAntag overload
+    /// </summary>
+    public void ForceMakeAntag(ICommonSession? player, [ForbidLiteral] EntProtoId defaultRule, [ForbidLiteral] string comp)
+    {
+        var rule = ForceGetGameRuleEnt(defaultRule, comp);
+
+        if (!TryGetNextAvailableDefinition(rule, out var def))
+            def = rule.Comp.Definitions.Last();
+        MakeAntag(rule, player, def.Value);
+    }
+
+    /// <summary>
+    /// Type-erased ForceGetGameRuleEnt overload
+    /// </summary>
+    public Entity<AntagSelectionComponent> ForceGetGameRuleEnt([ForbidLiteral] EntProtoId id, [ForbidLiteral] string comp)
+    {
+        var type = Factory.GetRegistration(comp).Type;
+        var query = EntityManager.AllEntityQueryEnumerator(type);
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (TryComp<AntagSelectionComponent>(uid, out var ontag))
+                return (uid, ontag);
+        }
+
+        var ruleEnt = GameTicker.AddGameRule(id);
+        RemComp<LoadMapRuleComponent>(ruleEnt);
+        var antag = Comp<AntagSelectionComponent>(ruleEnt);
+        antag.AssignmentComplete = true; // don't do normal selection.
+        GameTicker.StartGameRule(ruleEnt);
+        return (ruleEnt, antag);
     }
 }

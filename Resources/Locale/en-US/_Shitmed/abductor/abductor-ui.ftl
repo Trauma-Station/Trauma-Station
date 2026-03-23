@@ -27,13 +27,13 @@ abductors-title = Abductors
 abductors-description = Abductors have targeted the station. Avoid getting kidnapped by them!
 
 abductor-lone-ghost-role-name = Lone Abductor
-abductor-lone-ghost-role-desc = Kidnap people, and stuff them with experimental organs of dubious origin, all by yourself.
+abductor-lone-ghost-role-desc = Kidnap people, and stuff them with experimental organs of dubious origin, then brainwash them, all by yourself.
 
 abductor-scientist-ghost-role-name = Abductor Scientist
 abductor-scientist-ghost-role-desc = Teleport people your partner kidnapped onto your ship and stuff them with experimental organs of dubious origin.
 
 abductor-agent-ghost-role-name = Abductor Agent
-abductor-agent-ghost-role-desc = Kidnap people for your partner to stuff them with experimental organs of dubious origin.
+abductor-agent-ghost-role-desc = Kidnap and Brainwash people for your partner to stuff them with experimental organs of dubious origin.
 
 abductors-ghost-role-rules = You are an [color=red][bold]Abductor[/bold][/color].
                             Your intentions are to abduct people from the station and replace their organs with various experimental devices,
@@ -51,10 +51,10 @@ objective-issuer-abductors = [color=#FD0098]Mothership[/color]
 objective-condition-abduct-title = Abduct {$count} person.
 objective-condition-abduct-description = (use the Gizmo on a subdued victim, then use the Gizmo on the abductor console and select the attract action), then replace their heart with one of the glands, put them in the experimenter, and press complete experiment.
 
-abductor-role-greeting = You are a professional combat scientist of a high-tech race. Your task is to abduct humans, conduct experiments on them, and return them alive for the purity of the experiment. It is not in your interest to destroy the station, kill, or assist the crew.
+abductor-role-greeting = You are a professional combat scientist of a high-tech race. Your task is to abduct and brainwash humans, conduct experiments on them, and return them alive for the purity of the experiment. It is not in your interest to destroy the station, kill, or assist the crew.
                         Use + or +a in chat to talk in the Glorpmind.
 
-roles-antag-abductor-objective = Kidnap station crew and perform your experiments on them!
+roles-antag-abductor-objective = Kidnap and brainwash station crew and perform your experiments on them!
 
 abductor-victim-role-greeting = You have seen things you shouldn't have. The world must know the truth.
 abductor-victim-role-name = Abductee

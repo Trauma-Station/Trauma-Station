@@ -14,9 +14,10 @@
     minimumPlayers: 15
     weight: 4
     duration: 30
-  - type: VentCrittersRule
+  - type: VentHordeRule
     table:
       id: MobMothmaggot
+      amount: 4, 8
 
 - type: entity
   parent: BaseGameRule

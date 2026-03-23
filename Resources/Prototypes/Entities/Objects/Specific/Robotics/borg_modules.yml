@@ -1697,7 +1697,7 @@
   parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleHypo
   name: nocturine hypo xenoborg module
-  description: Module with a self-refilling nocturine hypo.
+  description: Module with a self-refilling nocturine hypospray.
   components:
   - type: Sprite
     layers:
@@ -1705,7 +1705,7 @@
     - state: icon-xenoborg-hypo
   - type: ItemBorgModule
     hands:
-    - item: NocturineHypo
+    - item: DartGunXenoborg # Trauma replaced hypo
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-hypo-module }
 

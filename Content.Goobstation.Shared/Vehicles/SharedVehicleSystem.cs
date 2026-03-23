@@ -8,6 +8,7 @@ using Content.Shared.Actions;
 using Content.Shared.Audio;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Movement.Components;
@@ -18,7 +19,6 @@ using Robust.Shared.Prototypes;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -27,6 +27,7 @@ namespace Content.Goobstation.Shared.Vehicles;
 
 public abstract partial class SharedVehicleSystem : EntitySystem
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -286,8 +287,11 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
     private void OnRepair(EntityUid uid, VehicleComponent component, DamageChangedEvent args)
     {
-        if (component.IsBroken && args.Damageable.TotalDamage == FixedPoint2.Zero)
-            component.IsBroken = false;
+        if (!component.IsBroken)
+            return;
+
+        var total = _damageable.GetTotalDamage((uid, args.Damageable));
+        component.IsBroken = total > FixedPoint2.Zero;
     }
 
     private void OnGetAdditionalAccess(EntityUid uid, VehicleComponent component, ref GetAdditionalAccessEvent args)

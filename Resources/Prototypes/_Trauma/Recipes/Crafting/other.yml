@@ -8,6 +8,7 @@
   theory: {} # it's folding paper bro
   practical:
     MaterialsKnowledge: 0 # its folding paper bro
+  useQuality: false
 
 - type: construction
   id: PowerArmorStand

@@ -10,7 +10,6 @@ using Content.Medical.Common.DoAfter;
 using Content.Medical.Common.Healing;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Common.Weapons;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Pain;
@@ -63,8 +62,6 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<WoundableComponent, DamageSetEvent>(OnDamageSet);
         SubscribeLocalEvent<HandOrganComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfterDelay);
-        SubscribeLocalEvent<WoundableComponent, AttemptHandsMeleeEvent>(OnAttemptHandsMelee);
-        SubscribeLocalEvent<WoundableComponent, AttemptHandsShootEvent>(OnAttemptHandsShoot);
         SubscribeLocalEvent<TraumaInflicterComponent, TraumaBeingRemovedEvent>(OnTraumaBeingRemoved);
 
         SubscribeLocalEvent<BodyComponent, DecapitateEvent>(OnDecapitate);
@@ -283,13 +280,11 @@ public sealed partial class WoundSystem
 
         UpdateWoundableIntegrity(ent, ent.Comp);
 
-        if (!TryComp<DamageableComponent>(ent, out var damage))
-            return;
-
         var value = args.Damage;
-        foreach (var type in damage.Damage.DamageDict.Keys)
+        var damage = _damageable.GetAllDamage(ent.Owner);
+        foreach (var type in damage.DamageDict.Keys)
         {
-            var mul = damage.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
+            var mul = damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
             TryInduceWound(ent, type, value * mul, out _, ent.Comp);
         }
     }
@@ -300,28 +295,6 @@ public sealed partial class WoundSystem
         // make a thing like LegsComponent that makes doafters longer with missing hands
         if (_trauma.GetBone(ent.Owner) is {} bone)
             RaiseLocalEvent(bone, args.Args);
-    }
-
-    private void OnAttemptHandsMelee(EntityUid uid, WoundableComponent component, ref AttemptHandsMeleeEvent args)
-    {
-        if (component.WoundableIntegrity > 25
-            || args.Cancelled
-            || _body.GetBody(uid) is not {} body)
-            return;
-
-        if (TryFumble("arm-fumble", new SoundPathSpecifier("/Audio/Effects/slip.ogg"), body, 0.20f))
-            args.Cancelled = true;
-    }
-
-    private void OnAttemptHandsShoot(EntityUid uid, WoundableComponent component, ref AttemptHandsShootEvent args)
-    {
-        if (component.WoundableIntegrity > 25
-            || args.Cancelled
-            || _body.GetBody(uid) is not {} body)
-            return;
-
-        if (TryFumble("arm-fumble", new SoundPathSpecifier("/Audio/Effects/slip.ogg"), body, 0.20f))
-            args.Cancelled = true;
     }
 
     #endregion
@@ -1229,20 +1202,6 @@ public sealed partial class WoundSystem
             new WoundVisualizerGroupData(GetWoundableWounds(woundable).Select(ent => GetNetEntity(ent)).ToList()));
     }
 
-    private bool TryFumble(string message, SoundPathSpecifier sound, EntityUid body, float odds)
-    {
-        var rand = new System.Random((int) _timing.CurTick.Value);
-        if (rand.NextFloat() < odds)
-        {
-            _popup.PopupClient(Loc.GetString(message), body, PopupType.Medium);
-            var ev = new DropHandItemsEvent();
-            RaiseLocalEvent(body, ref ev, false);
-            _audio.PlayPredicted(sound, body, body);
-            return true;
-        }
-        return false;
-    }
-
     #endregion
 
     #region Helpers
@@ -1304,12 +1263,8 @@ public sealed partial class WoundSystem
             if (_body.GetCategory(part.Owner) is not {} category)
                 continue;
 
-            if (!TryComp<DamageableComponent>(part, out var damageable))
-                continue;
-
             var nearestSeverity = WoundableSeverity.Severed;
-            var damage = damageable.TotalDamage;
-
+            var damage = _damageable.GetTotalDamage(part.Owner);
             foreach (var (severity, threshold) in part.Comp.Thresholds.OrderByDescending(kv => kv.Value))
             {
                 if (damage <= 0)
