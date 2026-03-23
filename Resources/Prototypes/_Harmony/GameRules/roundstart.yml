@@ -112,7 +112,7 @@
       path: /Audio/_Harmony/Announcements/attention_alt.ogg
     duration: 1500 # 25 mins
   - type: EmptyRule
-  
+
 - type: entity
   parent: BaseGameRule
   id: ThiefChance

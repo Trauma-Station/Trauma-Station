@@ -1,4 +1,4 @@
-﻿using Content.Shared._Harmony.Conspirators.Components;
+using Content.Shared._Harmony.Conspirators.Components;
 using Content.Shared._Harmony.Conspirators.EntitySystems;
 using Content.Shared.Antag;
 using Content.Shared.StatusIcon.Components;
