@@ -1,15 +1,4 @@
 - type: npcFaction
-  id: BloodBrother
-  hostile:
-  - NanoTrasen
-  - Zombie
-  - SimpleHostile
-  - Dragon
-  - AllHostile
-  - Wizard
-  - Xenoborg
-
-- type: npcFaction
   id: Conspirator
   hostile:
   - NanoTrasen
