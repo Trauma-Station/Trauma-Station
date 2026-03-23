@@ -24,7 +24,7 @@
   - type: StaminaDamageOnHit
     damage: 6
   - type: Item
-    shape: 
+    shape:
     - 0,0,2,0
     storedRotation: 45
   - type: Tag
