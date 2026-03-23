@@ -5315,3 +5315,10 @@ Entries:
   id: 623
   time: '2026-03-23T10:50:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1523
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Insurgents now links you the insurgent rules in the antag opt in menu.
+  id: 624
+  time: '2026-03-23T21:55:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1550

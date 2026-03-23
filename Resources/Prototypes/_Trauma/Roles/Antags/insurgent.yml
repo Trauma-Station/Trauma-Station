@@ -8,7 +8,7 @@
   - !type:RoleTimeRequirement
     role: JobPassenger
     time: 5h # become one with maints
-  # TODO: guide? its just being a halal shitter
+  guides: [ RuleS5 ] # you don't really need a guidebook just what not to do
 
 - type: startingGear
   id: Insurgent
