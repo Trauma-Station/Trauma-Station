@@ -53,13 +53,17 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnLanguageAdded(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
     {
-        EnsureComp<LanguageSpeakerComponent>(args.Holder);
+        var speaker = EnsureComp<LanguageSpeakerComponent>(args.Holder);
+        UpdateEntityLanguages((args.Holder, speaker));
     }
 
     private void OnLanguageRemoved(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
     {
         if (args.Container.Comp.ActiveLanguage == ent.Owner)
             ChangeLanguage(args.Container, null);
+
+        if (TryComp<LanguageSpeakerComponent>(args.Holder, out var speaker))
+            UpdateEntityLanguages((args.Holder, speaker));
     }
 
     /// <summary>

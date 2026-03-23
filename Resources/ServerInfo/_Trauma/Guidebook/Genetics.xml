@@ -35,6 +35,11 @@ Every mutation in the game has a random number assigned each round, however they
 
 For example, if you have a monkey in the lab with a genome with an unknown first pair, then scan someone with that mutation and a known first pair, you can use that pair to finish the sequence.
 
+# Biomass
+
+Biomass is needed to print mutators, activators and cleansers. Source it from botany, loose corpses, etc. then put it in your console.
+Think carefully if you need to give every lowly assistant hulk, you won't have any biomass left to print anything else!
+
 # Removing Mutations
 
 To remove mutations instead of using mutadone, you print a cleanser from the storage tab using a disk with the mutation you want to remove. Inject it and the mutation is gone!

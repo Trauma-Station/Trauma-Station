@@ -35,11 +35,11 @@ public sealed partial class GeneticStorage : BoxContainer
         for (var i = 0; i < comp.Prints.Count; i++)
         {
             var index = (uint) i;
-            var delay = comp.Prints[i].Delay.TotalSeconds;
+            var cost = comp.Prints[i].Cost;
             var proto = comp.Prints[i].Proto;
             var button = new Button()
             {
-                Text = Loc.GetString("genetics-console-print-item", ("item", _proto.Index(proto).Name), ("delay", delay)),
+                Text = Loc.GetString("genetics-console-print-item", ("item", _proto.Index(proto).Name), ("cost", cost)),
                 MaxWidth = 160f,
                 Margin = new Thickness(4),
                 HorizontalExpand = true

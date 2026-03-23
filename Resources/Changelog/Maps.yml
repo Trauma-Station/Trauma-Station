@@ -196,3 +196,10 @@ Entries:
   id: 20
   time: '2026-03-20T23:02:49.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1490
+- author: Kirikii
+  changes:
+  - type: Fix
+    message: 'Nume: Fixed some issues.'
+  id: 21
+  time: '2026-03-22T15:15:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1528
