@@ -1,10 +1,10 @@
-using Content.Goobstation.Common.Heretic;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
+using Content.Trauma.Common.Heretic;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;

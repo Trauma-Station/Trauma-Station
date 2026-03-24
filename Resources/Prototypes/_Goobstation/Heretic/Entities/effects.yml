@@ -32,7 +32,7 @@
     solutions:
       print:
         maxVol: 3
-  - type: FootprintSpillOnLand
+  - type: BloodSplatterOnLandComponent
   - type: Physics
     fixedRotation: false
     bodyType: Dynamic

@@ -35,11 +35,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 // <Trauma>
-using Content.Goobstation.Common.Heretic;
+
 // </Trauma>
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.DeviceNetwork.Systems;
+using Content.Trauma.Common.Heretic;
 using Robust.Server.GameObjects;
 
 namespace Content.Server.DeviceNetwork.Systems;

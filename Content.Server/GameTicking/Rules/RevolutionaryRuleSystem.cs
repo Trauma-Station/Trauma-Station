@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Conversion;
-using Content.Goobstation.Common.Heretic;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Revolutionary;
 using Content.Server.Antag.Components;

@@ -14,7 +14,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Goobstation.Heretic;
 
-[TestFixture, TestOf(typeof(HereticKnowledgeRitualComponent))]
+[TestFixture, TestOf(typeof(Trauma.Shared.Heretic.Components.Side.HereticKnowledgeRitualComponent))]
 public sealed class RitualKnowledgeTests
 {
     private static readonly ProtoId<DatasetPrototype> KnowledgeDataset = "EligibleTags";
