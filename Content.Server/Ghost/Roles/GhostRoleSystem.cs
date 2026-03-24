@@ -619,6 +619,12 @@ public sealed class GhostRoleSystem : EntitySystem
         _mindSystem.TransferTo(newMind, mob);
 
         _roleSystem.MindAddRoles(newMind.Owner, role.MindRoles, newMind.Comp);
+        // <Trauma> - always add the job too
+        if (role.JobProto is { } job)
+        {
+            _roleSystem.MindAddJobRole(newMind, newMind.Comp, silent: false, job);
+        }
+        // </Trauma>
     }
 
     /// <summary>

@@ -163,7 +163,6 @@
     - MobSnail
     - MobSnailSpeed
     - MobSnailMoth
-    - MobXenomorphMaid
     offset: 0.0
 
 - type: entity

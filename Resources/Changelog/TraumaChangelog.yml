@@ -4901,3 +4901,424 @@ Entries:
   id: 575
   time: '2026-03-18T19:03:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1420
+- author: MayasMischief
+  changes:
+  - type: Fix
+    message: >-
+      executed the fandom wiki in cold blood now empty scroll redirects to
+      wiki.gg
+  id: 576
+  time: '2026-03-19T06:21:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1427
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed soyjak meme
+  id: 577
+  time: '2026-03-19T08:47:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1433
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed right click menu being messed up.
+  id: 578
+  time: '2026-03-19T09:42:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1431
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Bow and arrow now properly predicts embedding into things you shoot.
+  id: 579
+  time: '2026-03-19T10:44:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1435
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: 'Chaplain Venerator Armor '
+  - type: Add
+    message: >-
+      Chaplain Crossbow Nullrod form, 50 holy per shot, 10s pray recharge. It
+      can be attained by changing altars with an improvised bow then applying
+      your nullrod.
+  id: 580
+  time: '2026-03-19T11:41:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1220
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Handheld genome scanners can now print out scanned subject or sequence
+      information.
+  id: 581
+  time: '2026-03-19T15:32:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1439
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Skillchips can now rarely malfunction when hit by an EMP.
+  id: 582
+  time: '2026-03-19T16:37:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1441
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Most head lockers now contain a box of spare skillchips.
+  id: 583
+  time: '2026-03-19T18:17:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1442
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Visitor ghost roles now have skill chips and can buy uplink job-specific
+      items.
+  id: 584
+  time: '2026-03-19T22:44:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1445
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed chef beacon and other radial menus not having backgrounds.
+  id: 585
+  time: '2026-03-20T00:09:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1450
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Different crafting skills matters to different recipes now.
+  id: 586
+  time: '2026-03-20T06:58:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1454
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Reworked footprints so they don't cause any lag, using decals instead of
+      basically puddles.
+  - type: Tweak
+    message: >-
+      Mops removing decals like footprints is now instant, just like mopping up
+      puddles.
+  id: 587
+  time: '2026-03-20T08:19:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1461
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed explosions being completely stopped by walls.
+  id: 588
+  time: '2026-03-20T08:54:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1465
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed CE locker not having goob/trauma specific gear.
+  id: 589
+  time: '2026-03-20T09:08:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1466
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lizard tails etc not matching skin color.
+  id: 590
+  time: '2026-03-20T09:42:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1467
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed skeletons not getting healed by milk
+  id: 591
+  time: '2026-03-20T13:52:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1468
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: >-
+      Added Combustible Lemons you can mutate from Lemoons, so you can burn
+      Life's house down.
+  id: 592
+  time: '2026-03-20T16:15:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1470
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added makeshift bone gel, see its microwave recipe in the medical recipes
+      section.
+  id: 593
+  time: '2026-03-20T18:34:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1479
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xeno evolution UI etc. not working.
+  id: 594
+  time: '2026-03-20T20:01:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1484
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      midround xenos have returned but now it only spawns ONE larva (so play it
+      stealthy)
+  id: 595
+  time: '2026-03-20T20:43:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1385
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Writing on paper is now predicted.
+  id: 596
+  time: '2026-03-20T20:59:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1488
+- author: Ghost Role UI Saver
+  changes:
+  - type: Remove
+    message: A lot of passive/friendly ghostroles have been removed.
+  id: 597
+  time: '2026-03-20T21:08:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1141
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      you can now teleport people who are attached to the abductors telepad
+      using the human observation console
+  id: 598
+  time: '2026-03-20T22:10:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1112
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed roundstart Wraith not spawning
+  id: 599
+  time: '2026-03-21T06:38:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1494
+- author: momoyawn
+  changes:
+  - type: Tweak
+    message: >-
+      Changed nukies melee skillchip from 40 -> 50 round start so they can
+      properly reflect/parry with an energy sword and shield.
+  id: 600
+  time: '2026-03-21T06:48:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1492
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Add
+    message: Added Crack!
+  - type: Add
+    message: Added Cocaine!
+  - type: Add
+    message: Added Coca Plants!
+  id: 601
+  time: '2026-03-21T07:13:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1496
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to mop puddles near station decals.
+  id: 602
+  time: '2026-03-21T10:54:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1499
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed crew reinforcements not having skillchips.
+  id: 603
+  time: '2026-03-21T14:27:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1501
+- author: All New
+  changes:
+  - type: Remove
+    message: Removed XenoMaids with just one spray of all new Maid-B-Gone!
+  id: 604
+  time: '2026-03-21T17:18:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1504
+- author: GeneRickUsername
+  changes:
+  - type: Add
+    message: >-
+      The construction menu now shows practical skills needed to create things
+      with decent quality.
+  - type: Fix
+    message: Objects can now be made at a better than catastrophic quality.
+  - type: Fix
+    message: Shields now take less damage the better quality they are.
+  - type: Fix
+    message: Explosion and stamina resistance now scales on armor.
+  id: 605
+  time: '2026-03-21T20:17:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1483
+- author: GeneRickUsername
+  changes:
+  - type: Add
+    message: Added guidebook for skills.
+  id: 606
+  time: '2026-03-21T23:40:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1506
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Tweak
+    message: crack is now 10% chance to paralyze instead of 30%
+  id: 607
+  time: '2026-03-22T08:02:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1511
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      You can now use bruise packs with minor bleeding instead of literally any
+      level of bleeding from a scratch making your bruise packs unusable.
+  id: 608
+  time: '2026-03-22T08:51:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1517
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Genetics console now costs biomass to print its injectors.
+  id: 609
+  time: '2026-03-22T09:59:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1519
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Carp tails no longer make you super fast.
+  id: 610
+  time: '2026-03-22T10:09:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1520
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Bone damage no longer has a random chance to make you fumble
+      melee/shooting because it's too buggy.
+  id: 611
+  time: '2026-03-22T10:25:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1518
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to resist pulling while crit/dead.
+  id: 612
+  time: '2026-03-22T10:44:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1522
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed strength knowledge not working.
+  id: 613
+  time: '2026-03-22T11:26:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1525
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed autodocs using linux ��������
+  id: 614
+  time: '2026-03-22T11:40:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1526
+- author: ImWeax
+  changes:
+  - type: Add
+    message: Re-added snake tail customization options.
+  id: 615
+  time: '2026-03-22T14:47:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1527
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed raiders
+  id: 616
+  time: '2026-03-22T21:55:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1531
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Tweak
+    message: made billy club 1x3 in inventory to parity other batongs
+  id: 617
+  time: '2026-03-23T06:07:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1532
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Tweak
+    message: changed nothingburger sprite to be less meme-y
+  id: 618
+  time: '2026-03-23T06:50:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1533
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: >-
+      Lobby time has been increased from 150 seconds (2.5 minutes) to 210
+      seconds (3.5 minutes)
+  id: 619
+  time: '2026-03-23T07:22:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1529
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed translator implants not working.
+  id: 620
+  time: '2026-03-23T08:08:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1538
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed robots having genes...
+  id: 621
+  time: '2026-03-23T08:26:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1541
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed slime flesh heretics losing their slime core when ascending.
+  id: 622
+  time: '2026-03-23T08:37:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1540
+- author: loltart
+  changes:
+  - type: Add
+    message: The xenomorph queen now has a new action, Roar.
+  - type: Tweak
+    message: >-
+      Xenomorphs acid spit ability can now be toggled on / off through an
+      action.
+  - type: Tweak
+    message: Sentient Facehuggers can now see who is infected by a larva.
+  - type: Tweak
+    message: >-
+      Sentient Facehuggers will no longer auto-latch onto people. They will have
+      to use their leap action to latch onto anyone.
+  - type: Tweak
+    message: >-
+      The xenomorph queen is now faster but their health has been dramatically
+      reduced.
+  - type: Tweak
+    message: >-
+      When a sentient facehugger infects someone their mind will be transferred
+      into the embryo, then the larva, as long as it isn't removed from the
+      victims body.
+  - type: Tweak
+    message: Xenomorphs now have less slowdown at low health.
+  - type: Tweak
+    message: The xenomorph queen will now knock down anyone with one shove.
+  - type: Fix
+    message: Facehuggers will no longer latch onto dead people.
+  - type: Fix
+    message: >-
+      You can no longer pull other people off of a resin nest if you're stuck on
+      a resin nest.
+  - type: Fix
+    message: Xenomorph hunters leap action is now working again.
+  - type: Fix
+    message: Xenomorph hunters / facehuggers leap actions are now more consistent
+  id: 623
+  time: '2026-03-23T10:50:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1523
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Insurgents now links you the insurgent rules in the antag opt in menu.
+  id: 624
+  time: '2026-03-23T21:55:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1550

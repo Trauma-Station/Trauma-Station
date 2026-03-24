@@ -2,7 +2,6 @@
 
 using Content.Medical.Common.DoAfter;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Common.Weapons;
 using Content.Medical.Shared.Weapons;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
@@ -27,8 +26,6 @@ public partial class TraumaSystem
         SubscribeLocalEvent<BoneComponent, BoneSeverityChangedEvent>(OnBoneSeverityChanged);
         SubscribeLocalEvent<BoneComponent, BoneIntegrityChangedEvent>(OnBoneIntegrityChanged);
         SubscribeLocalEvent<BoneComponent, ModifyDoAfterDelayEvent>(OnModifyDoAfterDelay);
-        SubscribeLocalEvent<BoneComponent, AttemptHandsMeleeEvent>(OnAttemptHandsMelee);
-        SubscribeLocalEvent<BoneComponent, AttemptHandsShootEvent>(OnAttemptHandsShoot);
     }
 
     #region Event Handling
@@ -90,35 +87,6 @@ public partial class TraumaSystem
             BoneSeverity.Broken => 0.75f,
             _ => 1f,
         };
-    }
-
-    private void OnAttemptHandsMelee(Entity<BoneComponent> bone, ref AttemptHandsMeleeEvent args)
-    {
-        if (!args.Cancelled)
-            args.Cancelled = TryFumbleAttack(bone);
-    }
-
-    private void OnAttemptHandsShoot(Entity<BoneComponent> bone, ref AttemptHandsShootEvent args)
-    {
-        if (!args.Cancelled)
-            args.Cancelled = TryFumbleAttack(bone);
-    }
-
-    private bool TryFumbleAttack(Entity<BoneComponent> bone)
-    {
-        var odds = bone.Comp.BoneSeverity switch
-        {
-            BoneSeverity.Cracked => 0.10f,
-            BoneSeverity.Broken => 0.25f,
-            _ => 0f,
-        };
-
-        if (odds == 0f
-            || bone.Comp.BoneWoundable is not {} part
-            || _body.GetBody(part) is not {} body)
-            return false;
-
-        return TryFumble("arm-fumble", new SoundPathSpecifier("/Audio/Effects/slip.ogg"), body, odds);
     }
 
     #endregion
@@ -245,20 +213,6 @@ public partial class TraumaSystem
 
         if (boneComp.BoneWoundable is {} part && _body.GetBody(part) is {} body)
             UpdateBodyBoneAlert(body);
-    }
-
-    private bool TryFumble(LocId message, SoundPathSpecifier sound, EntityUid body, float odds)
-    {
-        var rand = new System.Random((int) _timing.CurTick.Value);
-        if (rand.NextFloat() < odds)
-        {
-            _popup.PopupClient(Loc.GetString(message), body, body, PopupType.Medium);
-            var ev = new DropHandItemsEvent();
-            RaiseLocalEvent(body, ref ev);
-            _audio.PlayPredicted(sound, body, body);
-            return true;
-        }
-        return false;
     }
 
     #endregion

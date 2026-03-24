@@ -2,9 +2,9 @@
   id: BaseReinforcementBeacon
   name: reinforcement beacon
   abstract: true
+  description: A reinforcement beacon placed by a nanotrasen command member, it can be destroyed to prevent the reinforcement from arriving.
   placement:
     mode: SnapgridCenter
-  description: A reinforcement beacon placed by a nanotrasen command member, it can be destroyed to prevent the reinforcement from arriving.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_beacon.rsi
@@ -40,6 +40,13 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+  - type: GhostRole
+    description: ghost-role-information-reinforcement-description
+    rules: ghost-role-information-nonantagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    raffle:
+      settings: reinforcement
   - type: Transform
     anchored: true
 
@@ -51,65 +58,32 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: SecurityOfficer
     name: ghost-role-information-reinforcement-sec-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: SecurityReinforcement
 
 - type: entity
-  parent: BaseReinforcementBeacon
+  parent: ReinforcementBeaconSecurityOfficer
   id: ReinforcementBeaconSecurityOfficerFast
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
     name: ghost-role-information-reinforcement-fast-sec-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
     raffle:
       settings: short
-  - type: GhostRoleMobSpawner
-    prototype: SecurityReinforcement
 
 - type: entity
-  parent: BaseReinforcementBeacon
+  parent: ReinforcementBeaconSecurityOfficer
   id: ReinforcementBeaconSpecialistOfficerLaser
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
     name: ghost-role-information-reinforcement-specialist-sec-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: SecurityReinforcementSpecialist
 
-# Civ
-
-- type: entity
-  parent: BaseReinforcementBeacon
-  id: ReinforcementBeaconAssistant
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRole
-    name: ghost-role-information-reinforcement-assistant-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
-  - type: GhostRoleMobSpawner
-    prototype: AssistantReinforcement
+# Service
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -117,13 +91,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: Bartender
     name: ghost-role-information-reinforcement-bartender-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: BartenderReinforcement
 
@@ -133,13 +102,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: Chef
     name: ghost-role-information-reinforcement-chef-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: ChefReinforcement
 
@@ -149,15 +113,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: Botanist
     name: ghost-role-information-reinforcement-botanist-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: BotanistReinforcement
+
+# Engi
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -165,13 +126,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: StationEngineer
     name: ghost-role-information-reinforcement-engi-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: EngiReinforcement
 
@@ -181,15 +137,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: AtmosphericTechnician
     name: ghost-role-information-reinforcement-atmos-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: AtmosReinforcement
+
+# Science
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -197,15 +150,23 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: Scientist
     name: ghost-role-information-reinforcement-sci-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: ScienceReinforcement
+
+# Civilian
+
+- type: entity
+  parent: BaseReinforcementBeacon
+  id: ReinforcementBeaconAssistant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    job: Passenger
+    name: ghost-role-information-reinforcement-assistant-name
+  - type: GhostRoleMobSpawner
+    prototype: AssistantReinforcement
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -218,10 +179,10 @@
     rules: ghost-role-information-freeagent-rules
     mindRoles:
     - MindRoleGhostRoleFreeAgent
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: DClassReinforcement
+
+# Medical
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -229,13 +190,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: MedicalDoctor
     name: ghost-role-information-reinforcement-doctor-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: DoctorReinforcement
 
@@ -245,15 +201,14 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: Chemist
     name: ghost-role-information-reinforcement-chemist-name
     description: ghost-role-information-reinforcement-description
     rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: ChemistReinforcement
+
+# Cargo
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -261,13 +216,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: CargoTechnician
     name: ghost-role-information-reinforcement-cargo-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: CargoReinforcement
 
@@ -277,12 +227,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole
+    job: SalvageSpecialist
     name: ghost-role-information-reinforcement-salv-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement
   - type: GhostRoleMobSpawner
     prototype: SalvageReinforcement

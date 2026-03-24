@@ -1,15 +1,3 @@
 # This one is the standard coefficients for quality.
 - type: quality
   id: BaseQuality
-  gun: 0.9
-  armor: 0.87
-  clothingDelay: 0.87
-  explosionResist: 0.87
-  staminaResist: 0.87
-  health: 0.8
-  selfDamage: 0.87
-  damage: 1.125
-  projectile: 1.125
-  durability: 1.12
-  shield: 1.12
-  shieldFlat: 1.12

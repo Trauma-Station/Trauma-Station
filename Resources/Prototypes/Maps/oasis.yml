@@ -17,26 +17,24 @@
           emergencyShuttlePath: /Maps/Shuttles/emergency_accordia.yml
         - type: StationJobs
           availableJobs:
-            #service
-            StationAi: [ 1, 1 ]
+            # Command
             Captain: [ 1, 1 ]
             NanotrasenRepresentative: [ 1, 1 ]
+            # Silicon
+            StationAi: [ 1, 1 ]
+            Borg: [ 2, 2 ]
+            # Service
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 2, 2 ]
             Botanist: [ 2, 3 ]
             Chef: [ 2, 2 ]
-            Janitor: [ 3, 3 ]
-            Chaplain: [ 1, 1 ]
-            Librarian: [ 1, 1 ]
             ServiceWorker: [ 2, 2 ]
-            Reporter: [ 1, 1 ]
-            RadioHost: [ 1, 1 ]
-            #engineering
+            # Engineering
             ChiefEngineer: [ 1, 1 ]
             AtmosphericTechnician: [ 3, 3 ]
             StationEngineer: [ 5, 5 ]
             TechnicalAssistant: [ 4, 4 ]
-            #medical
+            # Medical
             ChiefMedicalOfficer: [ 1, 1 ]
             Chemist: [ 2, 2 ]
             MedicalDoctor: [ 6, 6 ]
@@ -44,12 +42,12 @@
             MedicalIntern: [ 4, 4 ]
             Psychologist: [ 1, 1 ]
             Virologist: [ 1, 1 ]
-            #science
+            # Science
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 5, 5 ]
             ResearchAssistant: [ 6, 6 ]
-            Borg: [ 2, 2 ]
-            #security
+            Roboticist: [ 2, 2 ]
+            # Security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
             SecurityOfficer: [ 8, 8 ]
@@ -57,19 +55,21 @@
             SecurityCadet: [ 4, 4 ]
             Lawyer: [ 3, 3 ]
             Brigmedic: [ 1, 1 ]
-            #supply
+            # Cargo
             Quartermaster: [ 1, 1 ]
-            SalvageSpecialist: [ 3, 3 ]
+            SalvageSpecialist: [ 4, 4 ]
             CargoTechnician: [ 4, 4 ]
-            #civilian
+            # Civilian
+            Janitor: [ 3, 3 ]
+            Chaplain: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            Reporter: [ 1, 1 ]
+            RadioHost: [ 1, 1 ]
             Passenger: [ -1, -1 ]
             Clown: [ 1, 1 ]
             Mime: [ 1, 1 ]
             Musician: [ 1, 1 ]
-
-        # Goobstation blob-config-start HUGE
         - type: StationBlobConfig
           stageBegin: 40
           stageCritical: 450
           stageTheEnd: 900
-        # backmen blob-config-end

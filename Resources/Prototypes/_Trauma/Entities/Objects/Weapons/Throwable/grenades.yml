@@ -1,0 +1,35 @@
+- type: entity
+  name: combustible lemon # YES I KNOW ITS NOT A PROJECTILE GRENADE LET ME KEEP IT HERE
+  description: When life gives you lemons, burn life's house down. With the lemons.
+  parent: [VolatileGrenadeBase, TimerGrenadeBase, BaseMajorContraband]
+  id: LemonGrenade
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Grenades/combustiblelemon.rsi
+    state: icon
+  - type: ExplodeOnTrigger
+    keysIn:
+    - timer
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 5 # Just enough to chain.
+    intensitySlope: 3
+    totalIntensity: 5 # Not primarily explosive.
+    canCreateVacuum: false
+  - type: SpawnOnTrigger
+    keysIn:
+    - timer
+    proto: MolotovFire
+  - type: TimerTrigger
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+    initialBeepDelay: 0
+    beepInterval: 2
+  - type: Produce # Technically
+    seedId: CombustibleLemon
+  - type: Construction
+    graph: LemonGrenadeGraph
+    node: start
+    deconstructionTarget: null

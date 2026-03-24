@@ -50,6 +50,13 @@
     enum.HumanoidVisualLayers.RFoot:
       limit: 1
       required: false
+  # <Trauma>
+  appearances:
+    enum.HumanoidVisualLayers.Tail:
+      matchSkin: true
+    enum.HumanoidVisualLayers.Snout:
+      matchSkin: true
+  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance

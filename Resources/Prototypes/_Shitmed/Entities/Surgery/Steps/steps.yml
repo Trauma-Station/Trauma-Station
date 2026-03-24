@@ -490,9 +490,10 @@
     mainGroup: Burn
     damage:
       types:
-        Blunt: -5
-        Slash: -5
-        Piercing: -5
+        Heat: -5
+        Cold: -5
+        Shock: -5
+        Caustic: -5
   - type: SurgeryRepeatableStep
 
 - type: entity

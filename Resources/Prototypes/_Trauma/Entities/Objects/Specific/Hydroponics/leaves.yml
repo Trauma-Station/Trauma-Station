@@ -1,0 +1,16 @@
+- type: entity
+  name: coca leaves
+  parent: ProduceBaseRuminant
+  id: LeavesCoca
+  description: "Drench it in welding fuel to make some fine powder."
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
+  - type: Produce
+    seedId: CocaPlant
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: CocaSlurry
+          Quantity: 10

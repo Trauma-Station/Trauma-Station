@@ -12,9 +12,9 @@
   description: Provides your illiterate friends the ability to understand the common galactic tongue.
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - TauCetiBasic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageTauCetiBasic: 10
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -23,11 +23,9 @@
   description: A more advanced version of the translator implant, teaches your illiterate friends the ability to both speak and understand the galactic tongue!
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - TauCetiBasic
-    spoken:
-    - TauCetiBasic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageTauCetiBasic: 50
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -36,13 +34,9 @@
   description: An implant that helps you speak and understand the language of slimes! Special vocal chords not included.
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - Bubblish
-    spoken:
-    - Bubblish
-    requires:
-    - TauCetiBasic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageBubblish: 50
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -51,13 +45,9 @@
   description: A translator implant giving the ability to speak to dragons! Subsequently, also allows to communicate with the Unathi.
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - Draconic
-    spoken:
-    - Draconic
-    requires:
-    - TauCetiBasic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageDraconic: 50
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -66,13 +56,9 @@
   description: An implant giving the ability to understand and speak SolCommon. Raaagh!
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - SolCommon
-    spoken:
-    - SolCommon
-    requires:
-    - TauCetiBasic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageSolCommon: 50
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -81,13 +67,9 @@
   description: An implant giving the ability to understand and speak Novu-Nederic. Hoezee!
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - NovuNederic
-    spoken:
-    - NovuNederic
-    requires:
-    - TauCetiBasic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageNovuNederic: 50
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -96,13 +78,9 @@
   description: An implant that lets you speak for the trees. Or to the trees.
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - RootSpeak
-    spoken:
-    - RootSpeak
-    requires:
-    - TauCetiBasic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageRootSpeak: 50
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -111,13 +89,9 @@
   description: An implant designed to help domesticate mothroaches. Subsequently, allows you to communicate with the moth people.
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - Moffic
-    spoken:
-    - Moffic
-    requires:
-    - TauCetiBasic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageMoffic: 50
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -126,13 +100,9 @@
   description: An implant giving the ability to understand and speak Azaziba. # Intended for Admins Only, this item is for lore reasons not obtainable.
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - Azaziba
-    spoken:
-    - Azaziba
-    requires:
-    - Draconic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageAzaziba: 50
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -141,10 +111,6 @@
   description: An implant giving the ability to understand and speak Ka'rakk.
   categories: [ HideSpawnMenu ]
   components:
-  - type: TranslatorImplant
-    understood:
-    - NewKinPidgin
-    spoken:
-    - NewKinPidgin
-    requires:
-    - TauCetiBasic
+  - type: KnowledgeGrantOnWear
+    skills:
+      LanguageNewKinPidgin: 50

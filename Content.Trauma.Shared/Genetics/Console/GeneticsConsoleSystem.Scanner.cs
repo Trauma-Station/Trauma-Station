@@ -139,7 +139,9 @@ public sealed partial class GeneticsConsoleSystem
 
     private void SetScannedMob(Entity<GeneticsScannerComponent?> ent, EntityUid? mob)
     {
-        if (!_scannerQuery.Resolve(ent, ref ent.Comp) || ent.Comp.ScannedMob == mob)
+        if (TerminatingOrDeleted(ent) ||
+            !_scannerQuery.Resolve(ent, ref ent.Comp) ||
+            ent.Comp.ScannedMob == mob)
             return;
 
         ent.Comp.ScannedMob = mob;

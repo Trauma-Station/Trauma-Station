@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Roles;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -172,6 +175,10 @@ public abstract class SharedRoleSystem : EntitySystem
 
         var message = new RoleAddedEvent(mindId, mind, update, silent);
         RaiseLocalEvent(mindId, message, true);
+        // <Trauma> - above event is fucking useless for real logic, raise our own
+        var ev = new RoleGotAddedEvent(mindId, mind.OwnedEntity);
+        RaiseLocalEvent(mindRoleId.Value, ref ev);
+        // </Trauma>
 
         var name = Loc.GetString(protoEnt.Name);
         if (mind.OwnedEntity is not null)
@@ -399,6 +406,10 @@ public abstract class SharedRoleSystem : EntitySystem
 
         foreach (var role in delete)
         {
+            // <Trauma> - RoleRemovedEvent is completely useless, raise this on each role
+            var ev = new RoleGotRemovedEvent(mind, mind.Comp.OwnedEntity);
+            RaiseLocalEvent(role, ref ev);
+            // </Trauma>
             PredictedDel(role);
         }
 

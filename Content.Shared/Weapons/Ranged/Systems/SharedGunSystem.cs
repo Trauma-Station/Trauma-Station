@@ -2,7 +2,6 @@
 using Content.Goobstation.Common.Weapons.Multishot;
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Lavaland.Common.Weapons.Ranged;
-using Content.Medical.Common.Weapons;
 using Content.Shared.Mech.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Content.Trauma.Common.Projectiles;

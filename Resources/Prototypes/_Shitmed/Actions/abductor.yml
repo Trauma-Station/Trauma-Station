@@ -54,3 +54,23 @@
     priority: -12
   - type: InstantAction
     event: !type:AbductorReturnToShipEvent
+
+- type: entity
+  parent: BaseMentalAction
+  id: ActionSendPad
+  name: Send from pad
+  description: Teleport whoever is attached to the alien pad to the target location.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    checkCanInteract: false
+    icon:
+      sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
+      state: send-yourself
+    useDelay: 10
+    priority: -19
+  - type: TargetAction
+    checkCanAccess: false
+    range: -1
+  - type: WorldTargetAction
+    event: !type:SendPadEvent
