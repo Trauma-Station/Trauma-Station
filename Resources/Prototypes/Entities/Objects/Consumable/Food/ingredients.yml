@@ -246,10 +246,10 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 150
+        maxVol: 75 # <Trauma> increase flour
         reagents:
         - ReagentId: Flour
-          Quantity: 150
+          Quantity: 75 # <Trauma> increase flour
 
 - type: entity
   parent: [ReagentPacketBase, ItemHeftyBase]
@@ -262,10 +262,10 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 20
+        maxVol: 30 # <Trauma> increase flour
         reagents:
         - ReagentId: Flour
-          Quantity: 20
+          Quantity: 30 # <Trauma> increase flour
 
 - type: entity
   parent: ReagentPacketBase
