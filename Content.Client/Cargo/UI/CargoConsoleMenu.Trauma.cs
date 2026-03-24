@@ -39,7 +39,13 @@ public sealed partial class CargoConsoleMenu
         }
 
         if (_orderConsoleQuery.CompOrNull(_owner)?.Destination is {} dest)
+        {
+            // you can't select an item thats already selected, so force set it if there's no other options.
+            if (dests.Count == 1 && dests[0].Item2 != dest)
+                OnSetDestination?.Invoke(dests[0].item2);
+
             _options.SelectByValue(dest);
+        }
 
         NoDestinations.Visible = dests.Count == 0;
         Destinations.Visible = dests.Count > 0;
