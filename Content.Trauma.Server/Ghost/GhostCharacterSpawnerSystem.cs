@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Server.Antag;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Events;
@@ -7,10 +8,14 @@ using Content.Server.Preferences.Managers;
 using Content.Server.Station.Systems;
 using Content.Shared.Preferences;
 using Content.Trauma.Shared.Ghost;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 
 namespace Content.Trauma.Server.Ghost;
 
+/// <summary>
+/// Handles ghost character dedicated spawners (reinforcements) and antag rules (e.g. ninja)
+/// </summary>
 public sealed class GhostCharacterSpawnerSystem : EntitySystem
 {
     [Dependency] private readonly GhostCharacterSystem _character = default!;
@@ -25,6 +30,7 @@ public sealed class GhostCharacterSpawnerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<GhostCharacterSpawnerComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
+        SubscribeLocalEvent<AntagGhostCharacterRuleComponent, AntagSelectEntityEvent>(OnSelectAntag);
     }
 
     private void OnTakeGhostRole(Entity<GhostCharacterSpawnerComponent> ent, ref TakeGhostRoleEvent args)
@@ -60,6 +66,28 @@ public sealed class GhostCharacterSpawnerSystem : EntitySystem
 
         if (ent.Comp.DeleteOnSpawn)
             QueueDel(ent);
+    }
+
+    private void OnSelectAntag(Entity<AntagGhostCharacterRuleComponent> ent, ref AntagSelectEntityEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        HumanoidCharacterProfile? profile = null;
+        if (args.Session is {} session)
+        {
+            var user = session.UserId;
+            profile = GetDesiredProfile(user);
+            if (profile?.Name is {} name)
+            {
+                _character.AddSpawnedCharacter(user, name);
+                _character.SendData(session);
+            }
+        }
+
+        profile ??= HumanoidCharacterProfile.RandomWithSpecies(ent.Comp.DefaultSpecies);
+        var coords = Transform(ent).Coordinates; // the gamerule happens to be in nullspace
+        args.Entity = _spawning.SpawnPlayerMob(coords, job: null, profile: profile, station: null);
     }
 
     public HumanoidCharacterProfile? GetDesiredProfile(NetUserId user)
