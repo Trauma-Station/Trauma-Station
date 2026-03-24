@@ -29,9 +29,9 @@
     grindableSolutionName: food
 
 - type: entity
-  name: lemonade
   parent: FoodProduceBase
   id: FoodLemonade
+  name: lemonade
   description: When life gives you lemons, commit arson. With the lemons.
   suffix: Food
   components:
