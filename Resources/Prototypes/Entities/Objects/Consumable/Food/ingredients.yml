@@ -246,10 +246,10 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 50
+        maxVol: 150
         reagents:
         - ReagentId: Flour
-          Quantity: 50
+          Quantity: 150
 
 - type: entity
   parent: [ReagentPacketBase, ItemHeftyBase]
