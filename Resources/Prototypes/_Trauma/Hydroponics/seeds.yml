@@ -3,7 +3,7 @@
   name: seeds-lemonade-name
   noun: seeds-noun-seeds
   displayName: seeds-lemonade-display-name
-  plantRsi: _Trauma/Objects/Specific/Hydroponics/combustible_lemon.rsi
+  plantRsi: _Trauma/Objects/Specific/Hydroponics/lemonade.rsi
   packetPrototype: LemonadeSeeds
   productPrototypes:
   - FoodLemonade
