@@ -30,4 +30,3 @@
     autoRechargeRate: 10 # TODO: Needs adjusting
     autoRechargePauseTime: 20 # TODO: Needs adjusting
   - type: ExaminableBattery
-
