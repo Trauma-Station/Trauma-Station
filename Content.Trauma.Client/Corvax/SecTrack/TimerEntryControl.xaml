@@ -26,8 +26,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                    FontColorOverride="#ff6666" />
 
             <Button Name="RemoveButton"
-                    Text="{Loc 'sec-apartment-ui-timers-remove'}"
-                    ToolTip="{Loc 'sec-apartment-ui-timers-remove-tooltip'}"
+                    Text="{Loc 'sec-track-ui-timers-remove'}"
+                    ToolTip="{Loc 'sec-track-ui-timers-remove-tooltip'}"
                     MinWidth="40"
                     Margin="5 0 0 0" />
 
@@ -37,7 +37,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                       HorizontalExpand="True"
                       VerticalAlignment="Center">
 
-            <Label Text="{Loc 'sec-apartment-ui-timers-total-time'}"
+            <Label Text="{Loc 'sec-track-ui-timers-total-time'}"
                    FontColorOverride="#ff8888"
                    Margin="0 0 5 0" />
 

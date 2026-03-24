@@ -47,7 +47,7 @@
       amount: 2
     - id: NetworkConfigurator
     - id: Binoculars
-    - id: SecApartmentTablet # Corvax-SecApartment
+    - id: SecTrackTablet # Corvax-SecApartment
     - id: PlushieLizardJobWarden
       prob: 0.02
 

@@ -26,31 +26,31 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                        StyleClasses="ConsoleHeadingBig" />
 
                 <OptionButton Name="IconDropdown"
-                              StyleClasses="SecApartmentOptionButton"
+                              StyleClasses="SecTrackOptionButton"
                               MinWidth="40"
                               Margin="0 0 5 0" />
 
                 <LineEdit Name="SquadNameEdit"
-                          PlaceHolder="{Loc 'sec-apartment-ui-squads-nameedit-placeholder'}"
+                          PlaceHolder="{Loc 'sec-track-ui-squads-nameedit-placeholder'}"
                           HorizontalExpand="True"
                           Visible="False" />
             </BoxContainer>
 
             <BoxContainer Orientation="Horizontal">
                 <Button Name="RenameButton"
-                        Text="{Loc 'sec-apartment-ui-squads-rename'}"
-                        ToolTip="{Loc 'sec-apartment-ui-squads-rename-tooltip'}"
+                        Text="{Loc 'sec-track-ui-squads-rename'}"
+                        ToolTip="{Loc 'sec-track-ui-squads-rename-tooltip'}"
                         MinWidth="30" />
 
                 <Button Name="SaveNameButton"
-                        Text="{Loc 'sec-apartment-ui-squads-save'}"
-                        ToolTip="{Loc 'sec-apartment-ui-squads-save-tooltip'}"
+                        Text="{Loc 'sec-track-ui-squads-save'}"
+                        ToolTip="{Loc 'sec-track-ui-squads-save-tooltip'}"
                         Visible="False"
                         MinWidth="30" />
 
                 <Button Name="DeleteButton"
-                        Text="{Loc 'sec-apartment-ui-squads-delete'}"
-                        ToolTip="{Loc 'sec-apartment-ui-squads-delete-tooltip'}"
+                        Text="{Loc 'sec-track-ui-squads-delete'}"
+                        ToolTip="{Loc 'sec-track-ui-squads-delete-tooltip'}"
                         MinWidth="30" />
             </BoxContainer>
         </BoxContainer>
@@ -67,11 +67,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <BoxContainer Orientation="Horizontal"
                               VerticalAlignment="Center"
                               HorizontalExpand="False">
-                    <Label Text="{Loc 'sec-apartment-ui-squads-status'}"
+                    <Label Text="{Loc 'sec-track-ui-squads-status'}"
                            FontColorOverride="#ff8888"
                            Margin="0 0 5 0" />
 
-                    <OptionButton Name="StatusDropdown" StyleClasses="SecApartmentOptionButton"
+                    <OptionButton Name="StatusDropdown" StyleClasses="SecTrackOptionButton"
                                   MinWidth="120"
                                   Margin="5 0 0 0" />
                 </BoxContainer>
@@ -82,7 +82,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                VerticalAlignment="Top" />
 
                 <LineEdit Name="SquadDescriptionEdit"
-                          PlaceHolder="{Loc 'sec-apartment-ui-squads-desc-placeholder'}"
+                          PlaceHolder="{Loc 'sec-track-ui-squads-desc-placeholder'}"
                           HorizontalExpand="True"
                           Visible="False"
                           Margin="2 5 0 0" />
@@ -91,12 +91,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                               Margin="2 5 0 0"
                               HorizontalExpand="False">
                     <Button Name="EditDescriptionButton"
-                            Text="{Loc 'sec-apartment-ui-squads-desc-edit'}"
+                            Text="{Loc 'sec-track-ui-squads-desc-edit'}"
                             MinWidth="180"
                             Visible="False" />
 
                     <Button Name="SaveDescriptionButton"
-                            Text="{Loc 'sec-apartment-ui-squads-desc-save'}"
+                            Text="{Loc 'sec-track-ui-squads-desc-save'}"
                             MinWidth="100"
                             Visible="False" />
                 </BoxContainer>
@@ -116,7 +116,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                       HorizontalExpand="True"
                       VerticalAlignment="Center"
                       Margin="0 5 0 0">
-            <Label Text="{Loc 'sec-apartment-ui-squads-location'}"
+            <Label Text="{Loc 'sec-track-ui-squads-location'}"
                    FontColorOverride="#ff8888"
                    Margin="0 0 5 0" />
 
@@ -133,7 +133,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
         <BoxContainer Orientation="Vertical">
             <Label Name="MembersHeaderLabel" HorizontalAlignment="Center"
-                   Text="{Loc 'sec-apartment-ui-squads-members'}"
+                   Text="{Loc 'sec-track-ui-squads-members'}"
                    Margin="0 0 0 3" />
 
             <BoxContainer Name="MembersContainer"

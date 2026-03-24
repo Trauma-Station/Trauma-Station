@@ -19,7 +19,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
         <BoxContainer Orientation="Horizontal"
                       VerticalAlignment="Center">
-            <OptionButton Name="SquadDropdown" StyleClasses="SecApartmentOptionButton"
+            <OptionButton Name="SquadDropdown" StyleClasses="SecTrackOptionButton"
                           MinWidth="50"
                           Margin="0 0 8 0" />
         </BoxContainer>
