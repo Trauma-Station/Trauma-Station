@@ -1,6 +1,6 @@
 - type: reagent
-  id: LemonadeLemonade
   parent: BaseJuice
+  id: LemonadeLemonade
   name: reagent-name-lemonadelemonade
   desc: reagent-desc-lemonadelemonade
   physicalDesc: reagent-physical-desc-tart
