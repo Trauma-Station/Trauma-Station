@@ -21,3 +21,13 @@
     interfaces:
       enum.ClockworkSlabUiKey.Key:
         type: ClockworkSlabBUI
+
+  # Power Functions
+  - type: Battery
+    maxCharge: 2000
+    startingCharge: 0
+  - type: BatterySelfRecharger
+    autoRechargeRate: 10 # TODO: Needs adjusting
+    autoRechargePauseTime: 20 # TODO: Needs adjusting
+  - type: ExaminableBattery
+

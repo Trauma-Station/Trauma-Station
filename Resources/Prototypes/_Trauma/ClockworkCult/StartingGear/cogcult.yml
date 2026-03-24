@@ -1,0 +1,4 @@
+﻿- type: startingGear
+  id: ClockworkCultistGear
+  equipment:
+    pocket2: ClockworkSlab

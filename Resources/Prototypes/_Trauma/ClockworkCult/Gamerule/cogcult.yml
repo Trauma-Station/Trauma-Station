@@ -13,5 +13,13 @@
     - prefRoles: [ ClockworkCult ]
       max: 6
       playerRatio: 20
+      startingGear: ClockworkCultistGear
+      # unequipOldGear: true
       mindRoles:
       - MindRoleClockworkCultist
+      components:
+      - type: Battery
+        maxCharge: 1000 # TODO: Needs adjusting
+        startingCharge: 0
+      - type: ExaminableBattery
+      - type: ClockworkCultist

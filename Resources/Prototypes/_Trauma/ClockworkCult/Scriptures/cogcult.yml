@@ -3,3 +3,6 @@
   parent: BaseScripture
   name: Dummy Scripture
   description: This is a dummy.
+  components:
+  - type: Scripture
+    powerCost: 1200

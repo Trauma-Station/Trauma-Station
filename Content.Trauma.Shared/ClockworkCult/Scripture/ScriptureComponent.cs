@@ -9,4 +9,11 @@ namespace Content.Trauma.Shared.ClockworkCult.Scripture;
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(ScriptureSystem))]
-public sealed partial class ScriptureComponent : Component;
+public sealed partial class ScriptureComponent : Component
+{
+    /// <summary>
+    /// The power it costs to cast this scripture, measured in Watts
+    /// </summary>
+    [DataField]
+    public int PowerCost = 1000;
+};

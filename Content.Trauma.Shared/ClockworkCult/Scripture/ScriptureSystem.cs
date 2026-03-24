@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Prototypes;
 using Content.Trauma.Shared.ClockworkCult.Slab;
 using Robust.Shared.Containers;
@@ -13,10 +15,11 @@ namespace Content.Trauma.Shared.ClockworkCult.Scripture;
 /// Scriptures can produce a result by getting recited via an entity with <see cref="ClockworkSlabComponent"/>.
 /// A scripture can hold actions, structures, and other entities.
 /// </summary>
-public sealed class ScriptureSystem : EntitySystem
+public sealed partial class ScriptureSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
 
     /// <summary>
     /// All entity prototypes with <see cref="ScriptureComponent"/>.
@@ -30,6 +33,8 @@ public sealed class ScriptureSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        InitializeBattery();
 
         _scriptureQuery = GetEntityQuery<ScriptureComponent>();
 
@@ -73,13 +78,16 @@ public sealed class ScriptureSystem : EntitySystem
     private void OnRecite(Entity<ScriptureContainerComponent> ent, ref ScriptureReciteEvent args)
     {
         if (!_proto.TryIndex(args.Scripture, out var scripture)
-            || !scripture.HasComponent<ScriptureComponent>())
+            || !scripture.TryGetComponent<ScriptureComponent>(out var scriptureComponent))
             return;
 
-        // TODO: raise an event for reciting here
-        // There should be multiple scripture types
-        // ActionScriptures will add an action to your character
-        // StructureScriptures will build a structure
+        // Raised on user to check if we have enough power to cast
+        var user = args.Actor;
+        var attemptEv = new ReciteAttemptEvent(scriptureComponent.PowerCost);
+        RaiseLocalEvent(user, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+
         Log.Debug("The scripture got recited");
     }
 
@@ -117,12 +125,35 @@ public sealed class ScriptureSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Gets the scripture prototype from an entity with <see cref="ScriptureComponent"/>
+    /// </summary>
     public EntProtoId? TryGetScripturePrototype(EntityUid scripture)
     {
         if (!_scriptureQuery.HasComp(scripture))
             return null;
 
         return Prototype(scripture)?.ID;
+    }
+
+    /// <summary>
+    /// Gets a scripture <see cref="EntityUid"/> via its <see cref="EntityPrototype"/>, returns null if not found.
+    /// </summary>
+    public EntityUid? TryGetScripture(EntityUid uid, EntProtoId scripture, ScriptureContainerComponent? component = null)
+    {
+        if (!Resolve(uid, ref component) || component.Scriptures is not {} scriptures)
+            return null;
+
+        foreach (var scriptEnt in scriptures.ContainedEntities)
+        {
+            if (TryGetScripturePrototype(scriptEnt) is not {} scriptProto)
+                continue;
+
+            if (scriptProto == scripture)
+                return scriptEnt;
+        }
+
+        return null;
     }
     #endregion
 
@@ -137,3 +168,9 @@ public sealed class ScriptureSystem : EntitySystem
         return true;
     }
 }
+
+/// <summary>
+/// Raised on the user to check if the recite can succeed (do we have enough power to cast?).
+/// </summary>
+[ByRefEvent]
+public record struct ReciteAttemptEvent(int ScriptureCost, bool Cancelled = false);
