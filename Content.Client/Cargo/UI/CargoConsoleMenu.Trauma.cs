@@ -9,7 +9,7 @@ public sealed partial class CargoConsoleMenu
 {
     public event Action<NetEntity>? OnSetDestination;
 
-    private RadioOptions<NetEntity> _options;
+    private RadioOptions<NetEntity> _options = default!;
 
     private void InitializeTrauma()
     {
