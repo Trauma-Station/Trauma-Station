@@ -440,7 +440,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 _audio.PlayPredicted(new SoundPathSpecifier("/Audio/_Goobstation/Heretic/hereticknock.ogg"), target, performer);
                 _popup.PopupClient(Loc.GetString("heretic-lock-unlocked"), target, performer);
 
-                if (heretic.PathStage >= 7)
+                if (heretic.Comp.PathStage >= 7)
                     return false; // Don't use up grasp when unlocking things at high stage
 
                 break;
