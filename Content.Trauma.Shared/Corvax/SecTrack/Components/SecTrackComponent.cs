@@ -4,7 +4,7 @@ using Content.Shared.Medical.SuitSensor;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SecTrack;
+namespace Content.Trauma.Shared.SecTrack;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SecTrackComponent : Component

@@ -6,7 +6,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
-namespace Content.Client.Corvax.SecTrack.Stylesheets;
+namespace Content.Trauma.Client.Corvax.SecTrack.Stylesheets;
 
 public sealed class SecTrackStyles
 {

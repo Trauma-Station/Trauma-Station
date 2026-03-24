@@ -2,11 +2,12 @@
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-<ui:SecApartmentWindow
+<ui:SecTrackWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:ui="clr-namespace:Content.Client.Corvax.SecApartment"
+    xmlns:ui="clr-namespace:Content.Trauma.Client.Corvax.SecTrack"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
     SetSize="1000 650" MouseFilter="Stop">
 
     <PanelContainer Name="Background" StyleClasses="PdaBackgroundRect" ModulateSelfOverride="#121212"/>
@@ -16,7 +17,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
         <BoxContainer SetHeight="40" Margin="20 10 10 5" Orientation="Horizontal" HorizontalExpand="True">
             <TextureRect TexturePath="/Textures/Interface/Nano/ntlogo.svg.png" SetSize="32 32" Margin="0 0 10 0"/>
-            <Label Text="{Loc 'sec-apartment-ui-sec-apartment'}" StyleClasses="ConsoleHeadingBig"
+            <Label Text="{Loc 'sec-track-ui-sec-track'}" StyleClasses="ConsoleHeadingBig"
                    HorizontalExpand="True"/>
             <TextureButton Name="CloseButton" StyleClasses="windowCloseButton"
                            Modulate="#ff4444" VerticalAlignment="Center"/>
@@ -32,7 +33,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <BoxContainer Orientation="Vertical">
 
                     <BoxContainer Orientation="Horizontal" Margin="10 5 10 0">
-                        <Label Text="{Loc 'sec-apartment-ui-station'}" StyleClasses="ConsoleSubHeading" FontColorOverride="#ff8888"/>
+                        <Label Text="{Loc 'sec-track-ui-station'}" StyleClasses="ConsoleSubHeading" FontColorOverride="#ff8888"/>
                         <Label Name="StationLabel" StyleClasses="ConsoleHeading" FontColorOverride="#ff4444"
                                HorizontalExpand="True" HorizontalAlignment="Right"/>
                     </BoxContainer>
@@ -51,7 +52,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             <BoxContainer Orientation="Vertical" MinWidth="400" Margin="0 0 15 0">
 
                                 <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
-                                    <Label Text="{Loc 'sec-apartment-ui-no-squads-crew'}" StyleClasses="ConsoleSubHeading" FontColorOverride="#ff8888"/>
+                                    <Label Text="{Loc 'sec-track-ui-no-squads-crew'}" StyleClasses="ConsoleSubHeading" FontColorOverride="#ff8888"/>
                                     <Label Name="UnassignedCountLabel" StyleClasses="ConsoleText"
                                         FontColorOverride="#ff4444" HorizontalExpand="True" HorizontalAlignment="Right"/>
                                 </BoxContainer>
@@ -81,17 +82,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
                                     <BoxContainer Orientation="Horizontal" Margin="8">
                                         <LineEdit Name="NewSquadName"
-                                                  PlaceHolder="{Loc 'sec-apartment-ui-squads-placeholder'}"
+                                                  PlaceHolder="{Loc 'sec-track-ui-squads-placeholder'}"
                                                   HorizontalExpand="True"
                                                   StyleClasses="ConsoleLineEdit"
                                                   Margin="0 0 10 0"/>
-                                        <Button Name="CreateSquadButton" Text="{Loc 'sec-apartment-ui-squads-create'}"
+                                        <Button Name="CreateSquadButton" Text="{Loc 'sec-track-ui-squads-create'}"
                                                 MinWidth="50" StyleClasses="ButtonRed"/>
                                     </BoxContainer>
                                 </PanelContainer>
 
                                 <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
-                                    <Label Text="{Loc 'sec-apartment-ui-squads'}" StyleClasses="ConsoleSubHeading" FontColorOverride="#ff8888"/>
+                                    <Label Text="{Loc 'sec-track-ui-squads'}" StyleClasses="ConsoleSubHeading" FontColorOverride="#ff8888"/>
                                     <Label Name="SquadsCountLabel" StyleClasses="ConsoleText"
                                         FontColorOverride="#ff4444" HorizontalExpand="True" HorizontalAlignment="Right"/>
                                 </BoxContainer>
@@ -117,7 +118,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="10">
 
                             <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
-                                <Label Text="{Loc 'sec-apartment-ui-timers'}" StyleClasses="ConsoleSubHeading" FontColorOverride="#ff8888"/>
+                                <Label Text="{Loc 'sec-track-ui-timers'}" StyleClasses="ConsoleSubHeading" FontColorOverride="#ff8888"/>
                                 <Label Name="TimersCountLabel" StyleClasses="ConsoleText"
                                     FontColorOverride="#ff4444" HorizontalExpand="True" HorizontalAlignment="Right"/>
                             </BoxContainer>
@@ -137,7 +138,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             </PanelContainer>
 
                             <BoxContainer Orientation="Horizontal" Margin="10 5 10 0">
-                                <Label Text="{Loc 'sec-apartment-ui-timers-info'}"
+                                <Label Text="{Loc 'sec-track-ui-timers-info'}"
                                     StyleClasses="LabelSubText"
                                     FontColorOverride="#ff8888"
                                     HorizontalExpand="True"
@@ -149,9 +150,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     </TabContainer>
 
                     <BoxContainer Orientation="Vertical" VerticalExpand="False" Margin="0 5 0 0">
-                        <controls:StripeBack HasBottomEdge="False" HasMargins="False" HorizontalExpand="True">
-                            <Label Text="{Loc 'sec-apartment-ui-os'}" HorizontalAlignment="Left" Margin="5 0" StyleClasses="LabelSubText"/>
-                        </controls:StripeBack>
+                        <controls1:StripeBack HasBottomEdge="False" HasMargins="False" HorizontalExpand="True">
+                            <Label Text="{Loc 'sec-track-ui-os'}" HorizontalAlignment="Left" Margin="5 0" StyleClasses="LabelSubText"/>
+                        </controls1:StripeBack>
                     </BoxContainer>
 
                 </BoxContainer>
@@ -159,10 +160,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </Control>
 
         <BoxContainer Orientation="Horizontal" SetHeight="30" Margin="0 5 0 0">
-            <Label Name="Footer" Text="{Loc 'sec-apartment-ui-footer'}"
+            <Label Name="Footer" Text="{Loc 'sec-track-ui-footer'}"
                    StyleClasses="ConsoleSubText" FontColorOverride="#ff8888"
                    HorizontalExpand="True" HorizontalAlignment="Right" Margin="10 0"/>
         </BoxContainer>
 
     </BoxContainer>
-</ui:SecApartmentWindow>
+</ui:SecTrackWindow>

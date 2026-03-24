@@ -1,11 +1,11 @@
 - type: entity
   parent: BaseItem
-  id: SecApartmentTabletUnpowered
-  name: SecApartment handheld tablet
+  id: SecTrackTabletUnpowered
+  name: SecTrack handheld tablet
   description: "A NanoTrasen-approved device for organizing and coordinating the actions of security personnel at corporate facilities."
   components:
   - type: Sprite
-    sprite: _Corvax/Objects/Devices/secapartment.rsi
+    sprite: _Corvax/Objects/Devices/sectrack.rsi
     layers:
     - state: base
     - state: powered
@@ -13,14 +13,14 @@
       visible: true
       map: [ "enum.PowerDeviceVisualLayers.Powered" ]
   - type: ActivatableUI
-    key: enum.SecApartmentUiKey.Key
+    key: enum.SecTrackUiKey.Key
   - type: UserInterface
     interfaces:
-      enum.SecApartmentUiKey.Key:
-        type: SecApartmentBoundUserInterface
+      enum.SecTrackUiKey.Key:
+        type: SecTrackBoundUserInterface
   - type: ItemToggle
     onUse: false
-  - type: SecApartment
+  - type: SecTrack
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -38,8 +38,8 @@
           Empty: { visible: false }
 
 - type: entity
-  id: SecApartmentTablet
-  parent: [ SecApartmentTabletUnpowered, PowerCellSlotHighItem ]
+  id: SecTrackTablet
+  parent: [ SecTrackTabletUnpowered, PowerCellSlotHighItem ]
   suffix: Powered
   components:
   - type: BatteryVisuals
@@ -49,8 +49,8 @@
   - type: ActivatableUIRequiresPowerCell
 
 - type: entity
-  id: SecApartmentTabletEmpty
-  parent: SecApartmentTablet
+  id: SecTrackTabletEmpty
+  parent: SecTrackTablet
   suffix: Empty
   components:
   - type: Sprite

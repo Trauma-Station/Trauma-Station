@@ -19,7 +19,7 @@ public sealed class SecTrackUpdateState : BoundUserInterfaceState
     public List<CrewMemberInfo> UnassignedSecurity { get; }
     public List<Squad> Squads { get; }
 
-    public SecTraumaUpdateState(
+    public SecTrackUpdateState(
         string stationName,
         List<CrewMemberInfo> securityCrew,
         List<CrewMemberInfo> unassignedSecurity,

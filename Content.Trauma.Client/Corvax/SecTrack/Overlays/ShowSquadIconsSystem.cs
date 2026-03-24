@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Overlays;
+using Content.Client.Overlays;
 using Content.Trauma.Shared.SecTrack;
 using Content.Shared.StatusIcon.Components;
+using Content.Trauma.Shared.Overlays;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Overlays;
