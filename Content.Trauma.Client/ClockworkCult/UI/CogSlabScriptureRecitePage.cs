@@ -13,6 +13,8 @@ namespace Content.Trauma.Client.ClockworkCult.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CogSlabScriptureRecitePage : CogSlabPage
 {
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+
     public event Action<EntProtoId?>? OnRecite;
 
     private EntProtoId? _scripture;
@@ -22,6 +24,7 @@ public sealed partial class CogSlabScriptureRecitePage : CogSlabPage
     public CogSlabScriptureRecitePage(EntProtoId scripture, CogSlabScriptureSection parent)
     {
         RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
         _scripture = scripture;
         _parent = parent;
 
@@ -42,15 +45,17 @@ public sealed partial class CogSlabScriptureRecitePage : CogSlabPage
     private void SetupPage()
     {
         // First page contains info
-        FirstPageContent.Text = "This is some info for you";
+        if (_proto.TryIndex(_scripture, out var scripture))
+        {
+            FirstPageContent.Text = scripture.Description; // TODO: This should be loc, so it can include prices and stuff
+        }
 
         // Second page contains
-        // recital button
-        // (p2) tiers
-        // a picture of the scripture
-        // a button to add to favourites
+        // TODO: (p2) tiers
+        // TODO: a picture of the scripture
+        // TODO: a button to add to favourites
 
-        var scriptureName = _scripture?.ToString();
+        var scriptureName = scripture?.Name;
         var contents = new CogSlabRecitePageContents(scriptureName, _scripture);
 
         contents.OnRecite += script => OnRecite?.Invoke(script);

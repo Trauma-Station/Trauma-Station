@@ -9,7 +9,6 @@ namespace Content.Trauma.Client.ClockworkCult.UI;
 
 /// <summary>
 /// TODO: Finish scriptures
-/// TODO: Make unique page for scriptures
 /// TODO: Add favourite scriptures page that will hold 6 scriptures
 /// TODO: Unhardcode anything
 /// TODO: Clean up remaining shitcode

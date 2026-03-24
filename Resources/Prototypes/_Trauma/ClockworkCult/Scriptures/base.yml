@@ -1,3 +1,19 @@
+# This file holds all the base scriptures
+#
+# Each scripture has a different purpose:
+# "Action" scriptures give you an action when you recite them,
+# while "Structure" scriptures give you the hologram to build a structure
+#
+# Some scriptures are unlocked by default, while others require unlock conditions.
+# All scriptures require a power cost to recite.
+#
+# To make a new scripture, inherit from one of the base scriptures, and
+# make your scripture entity so it can appear on the Clockwork Slab UI.
+#
+# After that's done, the result entity (action, structure etc) can be made in a different yaml
+# and the scripture will produce that entity when recited.
+#
+# You can find example scriptures by looking at the Scriptures folder
 - type: entity
   id: BaseScripture
   abstract: true

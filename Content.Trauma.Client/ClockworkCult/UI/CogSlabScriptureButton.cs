@@ -16,6 +16,8 @@ namespace Content.Trauma.Client.ClockworkCult.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CogSlabScriptureButton : BoxContainer
 {
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+
     public event Action<EntProtoId?>? OnRecite;
 
     /// <summary>
@@ -28,8 +30,14 @@ public sealed partial class CogSlabScriptureButton : BoxContainer
     public CogSlabScriptureButton(EntProtoId scripture, CogSlabScriptureSection parent)
     {
         RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
         _scripture = scripture;
         _parent = parent;
+
+        if (_proto.TryIndex(_scripture, out var scriptureData))
+        {
+            ScriptureButton.Text = scriptureData.Name;
+        }
 
         ScriptureButton.OnPressed += ScriptureButtonOnOnPressed;
     }

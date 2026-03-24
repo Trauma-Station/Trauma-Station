@@ -25,7 +25,7 @@ public sealed partial class CogSlabScriptureSection : CogSlabSection
     /// How many scriptures to display per one <see cref="CogSlabPage"/>.
     /// Each "page" of <see cref="CogSlabPage"/> will hold ScripturesPerPage / 2 scriptures.
     /// </summary>
-    private int _scripturesPerPage = 6;
+    public int ScripturesPerPage = 6;
 
     public CogSlabScriptureSection(EntityUid owner, IEntityManager entMan)
     {
@@ -56,7 +56,7 @@ public sealed partial class CogSlabScriptureSection : CogSlabSection
         CogSlabScripturePage? currentPage = null;
         for (var i = 0; i < scripturesAmount; i++)
         {
-            if (i % _scripturesPerPage == 0)
+            if (i % ScripturesPerPage == 0)
             {
                 var page = new CogSlabScripturePage(this);
 

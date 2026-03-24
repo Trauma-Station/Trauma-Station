@@ -19,6 +19,5 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
         <Button Name="ScriptureButton" Text="Unknown" VerticalAlignment="Bottom"></Button> <!-- This should be TextureButton. Also add Quick Recite button here -->
     </PanelContainer>
-    <Label Name="ScriptureTitle" Text="????" Align="Center"></Label>
 
 </BoxContainer>
