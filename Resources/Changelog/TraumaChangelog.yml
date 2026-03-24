@@ -5322,3 +5322,10 @@ Entries:
   id: 624
   time: '2026-03-23T21:55:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1550
+- author: Shell-Knight
+  changes:
+  - type: Tweak
+    message: Nerfed Contractor Baton stamina damage
+  id: 625
+  time: '2026-03-24T08:38:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1546
