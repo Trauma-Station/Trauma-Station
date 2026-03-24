@@ -6,6 +6,8 @@ using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Emp;
+using Content.Shared.Random.Helpers;
+using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Cybernetics;
 
@@ -14,6 +16,7 @@ public sealed class CyberneticsSystem : EntitySystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly BodyPartSystem _part = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -27,7 +30,7 @@ public sealed class CyberneticsSystem : EntitySystem
 
     private void OnEmpPulse(Entity<CyberneticsComponent> ent, ref EmpPulseEvent ev)
     {
-        if (ent.Comp.Disabled)
+        if (ent.Comp.Disabled || !SharedRandomExtensions.PredictedProb(_timing, ent.Comp.DisableChance, GetNetEntity(ent)))
             return;
 
         ev.Affected = true;

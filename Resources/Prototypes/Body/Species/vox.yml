@@ -70,6 +70,11 @@
       limit: 1
       required: false
       nudityDefault: [ UndergarmentBottomBoxersVox ]
+  # <Trauma>
+  appearances:
+    enum.HumanoidVisualLayers.Tail:
+      matchSkin: true
+  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance

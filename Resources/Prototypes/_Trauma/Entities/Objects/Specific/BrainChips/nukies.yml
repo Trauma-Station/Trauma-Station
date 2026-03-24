@@ -4,10 +4,12 @@
   name: skill chip (gorlex)
   components:
   # TODO: evil sprite
+  - type: Cybernetics
+    disableChance: 0.01 # extra hardening
   - type: KnowledgeGrantOnWear
     skills:
       # Nukies are well-trained
-      MeleeKnowledge: 40
+      MeleeKnowledge: 50
       ShootingKnowledge: 40
       StrengthKnowledge: 40
       WeaponsKnowledge: 40
