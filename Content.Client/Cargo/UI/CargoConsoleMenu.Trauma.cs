@@ -42,7 +42,7 @@ public sealed partial class CargoConsoleMenu
         {
             // you can't select an item thats already selected, so force set it if there's no other options.
             if (dests.Count == 1 && dests[0].Item2 != dest)
-                OnSetDestination?.Invoke(dests[0].item2);
+                OnSetDestination?.Invoke(dests[0].Item2);
 
             _options.SelectByValue(dest);
         }
