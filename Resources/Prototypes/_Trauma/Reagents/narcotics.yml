@@ -170,7 +170,7 @@
         emote: Scream
         probability: 0.05
       - !type:ModifyParalysis
-        probability: 0.3
+        probability: 0.1
         time: 12
       - !type:Emote
         emote: Jump

@@ -4,6 +4,7 @@ using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Mind;
 using Robust.Server.Containers;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -18,6 +19,7 @@ public sealed class XenomorphInfectionSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -109,6 +111,10 @@ public sealed class XenomorphInfectionSystem : EntitySystem
 
             _container.Remove(uid, container);
             _container.Insert(larva, container);
+
+            if (infection.SourceMindId is { } mindId
+                && TryComp<MindComponent>(mindId, out _))
+                _mind.TransferTo(mindId, larva);
 
             QueueDel(uid);
         }

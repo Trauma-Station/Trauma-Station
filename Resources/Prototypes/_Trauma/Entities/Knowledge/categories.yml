@@ -36,6 +36,7 @@
     category: Crafting
     color: "#0ba881"
     experienceCost: 20
+    timeBetweenExperience: 1
 
 - type: entity
   id: BaseIntellectualKnowledge
@@ -63,6 +64,7 @@
     category: Recipes
     color: "#f39b29"
     experienceCost: 20
+    timeBetweenExperience: 1
 
 - type: entity
   parent: BaseKnowledge

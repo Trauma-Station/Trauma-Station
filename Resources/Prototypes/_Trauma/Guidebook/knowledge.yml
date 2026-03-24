@@ -1,0 +1,4 @@
+- type: guideEntry
+  id: Skills
+  name: guide-entry-skills
+  text: "/ServerInfo/_Trauma/Guidebook/Skills.xml"
