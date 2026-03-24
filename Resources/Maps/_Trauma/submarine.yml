@@ -108525,13 +108525,6 @@ entities:
     - type: Transform
       pos: 49.43753,44.646046
       parent: 2
-- proto: ClothingHeadHatCatEars
-  entities:
-  - uid: 27895
-    components:
-    - type: Transform
-      pos: 97.03701,17.387503
-      parent: 2
 - proto: ClothingHeadHatChef
   entities:
   - uid: 25773
