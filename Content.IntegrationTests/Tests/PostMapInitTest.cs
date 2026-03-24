@@ -31,7 +31,7 @@ namespace Content.IntegrationTests.Tests
     public sealed class PostMapInitTest
     {
         private const bool SkipTestMaps = true;
-        private const string TestMapsPath = "/Maps/Test/";
+        private const string TestMapsPath = "/Test/"; // Trauma - remove Maps prefix, it no longer uses StartsWith
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMap = "DoNotMap"; // Trauma
 
         private static readonly string[] NoSpawnMaps =
@@ -190,7 +190,7 @@ namespace Content.IntegrationTests.Tests
             var isV7Map = false;
 
             // ReSharper disable once RedundantLogicalConditionalExpressionOperand
-            if (SkipTestMaps && rootedPath.ToString().StartsWith(TestMapsPath, StringComparison.Ordinal))
+            if (SkipTestMaps && rootedPath.ToString().Contains(TestMapsPath, StringComparison.Ordinal)) // Trauma - StartsWith -> Contains
             {
                 await pair.CleanReturnAsync();
                 return; // We just pass immediately.
@@ -525,7 +525,7 @@ namespace Content.IntegrationTests.Tests
 
             var rootedPath = mapPath.ToRootedPath();
 
-            if (SkipTestMaps && rootedPath.ToString().StartsWith(TestMapsPath, StringComparison.Ordinal))
+            if (SkipTestMaps && rootedPath.ToString().Contains(TestMapsPath, StringComparison.Ordinal)) // Trauma - StartsWith -> Contains
             {
                 await pair.CleanReturnAsync();
                 return;
