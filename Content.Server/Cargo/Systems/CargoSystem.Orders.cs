@@ -260,7 +260,7 @@ namespace Content.Server.Cargo.Systems
             if (!CheckAlertPopup((uid, component), player, order, station.Value))
                 return;
 
-            if (GetEntity(component.Destination) is not {} dest || Deleted(dest))
+            if (GetEntity(component.Destination) is not {} dest || Deleted(dest) || Transform(dest).MapID != Transform(uid).MapID)
             {
                 ConsolePopup(player, Loc.GetString("cargo-console-destination-lost"));
                 PlayDenySound(uid, component);
