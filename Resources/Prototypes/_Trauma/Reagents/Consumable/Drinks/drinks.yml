@@ -27,4 +27,3 @@
         intensityPerUnit: 0.1
         intensitySlope: 1
         maxTotalIntensity: 0.1
-        canCreateVacuum: false
