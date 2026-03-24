@@ -1,0 +1,24 @@
+- type: reagent
+  id: JuiceLemonade
+  name: reagent-name-juice-lemonade
+  parent: BaseJuice
+  desc: reagent-desc-juice-lemonade
+  physicalDesc: reagent-physical-desc-citric
+  flavor: sour
+  color: "#fff690" # i cant be bothered yeah it just looks the same
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/lemonjuiceglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: 0.5 # Yeah
+      - !type:Flammable
+        multiplier: 0.1
+      - !type:Ignite

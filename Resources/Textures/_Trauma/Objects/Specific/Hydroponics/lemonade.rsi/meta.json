@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "All growth stages, harvest, dead, and produce created by Chaoticaa (GitHub), harvest modified by MayasMischief",
+    "copyright": "All growth stages, harvest, dead, and produce created by Chaoticaa (GitHub), harvest modified by MayasMischief. inhands by mubururu_ (github), icon created by Chaoticaa (GitHub), inhands modified by Prole0 (GitHub), inhand and icon modified once again by MayasMischief",
     "size": {
         "x": 32,
         "y": 32
@@ -33,6 +33,17 @@
         },
         {
             "name": "stage-6"
+        },
+        {
+            "name": "produce-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "produce-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "produce"
         }
     ]
 }

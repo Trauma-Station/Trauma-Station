@@ -144,3 +144,6 @@
 
 - type: Tag
   id: WelderExperimental
+
+- type: Tag
+  id: TraumaFire
