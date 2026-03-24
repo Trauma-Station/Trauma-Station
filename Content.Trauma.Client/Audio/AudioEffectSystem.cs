@@ -13,7 +13,7 @@ using DependencyAttribute = Robust.Shared.IoC.DependencyAttribute;
 namespace Content.Trauma.Client.Audio;
 
 /// <summary>
-///     Handler for client-side audio effects.
+/// Handler for client-side audio effects.
 /// </summary>
 public sealed class AudioEffectSystem : EntitySystem
 {
@@ -21,33 +21,33 @@ public sealed class AudioEffectSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     /// <summary>
-    ///     Whether creating new auxiliaries is safe.
-    ///         This is done because integration tests
-    ///         apparently can't handle them.
+    /// Whether creating new auxiliaries is safe.
+    /// This is done because integration tests
+    /// apparently can't handle them.
     ///
-    ///     Null means this value wasn't determined yet.
+    /// Null means this value wasn't determined yet.
     ///
-    ///     Any not-null value here is the final result,
-    ///         and no more attempts to determine this
-    ///         will be made afterwards.
+    /// Any not-null value here is the final result,
+    /// and no more attempts to determine this
+    /// will be made afterwards.
     /// </summary>
-    // actually this problem applies for effects too
+    // Actually this problem applies for effects too
     private bool? _auxiliariesSafe = null;
 
     private static readonly Dictionary<ProtoId<AudioPresetPrototype>, (EntityUid AuxiliaryUid, EntityUid EffectUid)> CachedEffects = new();
 
     /// <summary>
-    ///     An auxiliary with no effect; for removing effects.
+    /// An auxiliary with no effect; for removing effects.
     /// </summary>
-    // TODO: remove this when an rt method to actually remove effects gets added
+    // TODO: Remove this when a runtime method to actually remove effects gets added
     private EntityUid _cachedBlankAuxiliaryUid;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        // You can't keep references to this past round-end so it must be cleaned up.
-        SubscribeNetworkEvent<RoundRestartCleanupEvent>(_ => Cleanup()); // its not raised on client
+        // You can't keep references to this past round-end, so it must be cleaned up.
+        SubscribeNetworkEvent<RoundRestartCleanupEvent>(_ => Cleanup()); // It's not raised on client
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
     }
 
@@ -62,7 +62,7 @@ public sealed class AudioEffectSystem : EntitySystem
         if (!args.WasModified<AudioPresetPrototype>())
             return;
 
-        // get rid of all old cached entities, and replace them with new ones
+        // Get rid of all old cached entities, and replace them with new ones
         var oldPresets = new List<ProtoId<AudioPresetPrototype>>();
         foreach (var cache in CachedEffects)
         {
@@ -70,6 +70,7 @@ public sealed class AudioEffectSystem : EntitySystem
             TryQueueDel(cache.Value.AuxiliaryUid);
             TryQueueDel(cache.Value.EffectUid);
         }
+
         CachedEffects.Clear();
 
         foreach (var oldPreset in oldPresets)
@@ -88,6 +89,7 @@ public sealed class AudioEffectSystem : EntitySystem
             TryQueueDel(cache.Value.AuxiliaryUid);
             TryQueueDel(cache.Value.EffectUid);
         }
+
         CachedEffects.Clear();
 
         if (_cachedBlankAuxiliaryUid.IsValid())
@@ -97,13 +99,16 @@ public sealed class AudioEffectSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Figures out whether auxiliaries are safe to use. Returns
-    ///         whether a safe auxiliary pair has been outputted
-    ///         for use.
+    /// Figures out whether auxiliaries are safe to use.
+    /// Returns whether a safe auxiliary pair has been
+    /// outputted for use.
     /// </summary>
-    private bool DetermineAuxiliarySafety([NotNullWhen(true)] out (EntityUid Entity, AudioAuxiliaryComponent Component)? auxiliaryPair, bool destroyPairAfterUse = true)
+    private bool DetermineAuxiliarySafety(
+        [NotNullWhen(true)] out (EntityUid Entity, AudioAuxiliaryComponent Component)? auxiliaryPair,
+        bool destroyPairAfterUse = true)
     {
         (EntityUid Entity, AudioAuxiliaryComponent Component)? maybeAuxiliaryPair = null;
+
         try
         {
             maybeAuxiliaryPair = _audio.CreateAuxiliary();
@@ -133,8 +138,8 @@ public sealed class AudioEffectSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Returns whether auxiliaries are definitely safe to use.
-    ///         Determines auxiliary safety if not already.
+    /// Returns whether auxiliaries are definitely safe to use.
+    /// Determines auxiliary safety if not already.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private bool AuxiliariesAreDefinitelySafe()
@@ -146,10 +151,11 @@ public sealed class AudioEffectSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Tries to resolve a cached audio auxiliary entity corresponding to the prototype to apply
-    ///         to the given entity.
+    /// Tries to resolve a cached audio auxiliary entity
+    /// corresponding to the prototype to apply
+    /// to the given entity.
     /// </summary>
-    public bool TryAddEffect(in Entity<AudioComponent> entity, in ProtoId<AudioPresetPrototype> preset)
+    public bool TryAddEffect(Entity<AudioComponent> entity, ProtoId<AudioPresetPrototype> preset)
     {
         if (!AuxiliariesAreDefinitelySafe() ||
             !ResolveCachedEffect(preset, out var auxiliaryUid, out _))
@@ -160,10 +166,11 @@ public sealed class AudioEffectSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Tries to remove effects from the given audio. Returns whether the attempt was successful,
-    ///         or no auxiliary is applied to the audio.
+    /// Tries to remove effects from the given audio.
+    /// Returns whether the attempt was successful,
+    /// or no auxiliary is applied to the audio.
     /// </summary>
-    public bool TryRemoveEffect(in Entity<AudioComponent> entity)
+    public bool TryRemoveEffect(Entity<AudioComponent> entity)
     {
         if (!AuxiliariesAreDefinitelySafe())
             return false;
@@ -172,7 +179,7 @@ public sealed class AudioEffectSystem : EntitySystem
             !existingAuxiliaryUid.IsValid())
             return true;
 
-        // resolve the cached auxiliary
+        // Resolve the cached auxiliary
         if (!_cachedBlankAuxiliaryUid.IsValid())
             _cachedBlankAuxiliaryUid = _audio.CreateAuxiliary().Entity;
 
@@ -181,11 +188,14 @@ public sealed class AudioEffectSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Tries to resolve an audio auxiliary and effect entity, creating and caching one if one doesn't already exist,
-    ///         for a prototype. Do not modify it in any way.
+    /// Tries to resolve an audio auxiliary and effect entity,
+    /// creating and caching one if one doesn't already exist,
+    /// for a prototype. Do not modify it in any way.
     /// </summary>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool ResolveCachedEffect(in ProtoId<AudioPresetPrototype> preset, [NotNullWhen(true)] out EntityUid? auxiliaryUid, [NotNullWhen(true)] out EntityUid? effectUid)
+    public bool ResolveCachedEffect(
+        ProtoId<AudioPresetPrototype> preset,
+        [NotNullWhen(true)] out EntityUid? auxiliaryUid,
+        [NotNullWhen(true)] out EntityUid? effectUid)
     {
         if (_auxiliariesSafe == false)
         {
@@ -205,13 +215,19 @@ public sealed class AudioEffectSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Tries to initialise and cache effect and auxiliary entities corresponding to a prototype,
-    ///         in the system's internal cache.
+    /// Tries to initialise and cache effect and auxiliary entities
+    /// corresponding to a prototype in the system's internal cache.
     ///
-    ///     Does nothing if the entity already exists in the cache.
+    /// Does nothing if the entity already exists in the cache.
     /// </summary>
-    /// <returns>Whether the entity was successfully initialised, and it did not previously exist in the cache.</returns>
-    public bool TryCacheEffect(in ProtoId<AudioPresetPrototype> preset, [NotNullWhen(true)] out EntityUid? auxiliaryUid, [NotNullWhen(true)] out EntityUid? effectUid)
+    /// <returns>
+    /// Whether the entity was successfully initialised,
+    /// and it did not previously exist in the cache.
+    /// </returns>
+    public bool TryCacheEffect(
+        ProtoId<AudioPresetPrototype> preset,
+        [NotNullWhen(true)] out EntityUid? auxiliaryUid,
+        [NotNullWhen(true)] out EntityUid? effectUid)
     {
         effectUid = null;
         auxiliaryUid = null;
@@ -220,19 +236,20 @@ public sealed class AudioEffectSystem : EntitySystem
             !_proto.TryIndex(preset, out var presetPrototype))
             return false;
 
-        // i cant `??=` it
+        // I can't `??=` it
         (EntityUid Entity, AudioAuxiliaryComponent Component)? maybeAuxiliaryPair = null;
 
-        // if undetermined, determine and keep the pair if confirmed safe
+        // If undetermined, determine and keep the pair if confirmed safe
         if (_auxiliariesSafe == null)
         {
-            // if determined unsafe, cleanup the pair
+            // If determined unsafe, cleanup the pair
             if (!DetermineAuxiliarySafety(out maybeAuxiliaryPair, destroyPairAfterUse: false))
                 return false;
         }
 
-        // now, auxiliaries are known to be safe.
-        // only when initially determining if auxiliaries are safe will we have a pair to use. in future attempts, we won't so just make one if necessary
+        // Now auxiliaries are known to be safe.
+        // Only when initially determining safety will we have a pair to use.
+        // In future attempts, we won't, so just make one if necessary.
         var auxiliaryPair = maybeAuxiliaryPair ?? _audio.CreateAuxiliary();
 
         DebugTools.Assert(Exists(auxiliaryPair.Entity), "Audio auxiliary pair's entity does not exist!");

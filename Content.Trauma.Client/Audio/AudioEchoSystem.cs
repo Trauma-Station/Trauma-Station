@@ -25,42 +25,42 @@ using DependencyAttribute = Robust.Shared.IoC.DependencyAttribute;
 namespace Content.Trauma.Client.Audio;
 
 /// <summary>
-///     Handles making sounds 'echo' in large, open spaces. Uses simplified raytracing.
+/// Handles making sounds 'echo' in large, open spaces. Uses simplified raytracing.
 /// </summary>
 // could use RaycastSystem but the api it has isn't very amazing
 public sealed class AreaEchoSystem : EntitySystem
 {
+    [Dependency] private readonly AudioEffectSystem _audioEffect = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly AudioEffectSystem _audioEffect = default!;
     [Dependency] private readonly RoofSystem _roof = default!;
 
     /// <summary>
-    ///     The directions that are raycasted to determine size for echo.
-    ///         Used relative to the grid.
+    /// The directions that are raycasted to determine size for echo.
+    /// Used relative to the grid.
     /// </summary>
     private Angle[] _calculatedDirections = [Direction.North.ToAngle(), Direction.West.ToAngle(), Direction.South.ToAngle(), Direction.East.ToAngle()];
 
     /// <summary>
-    ///     Values for the minimum arbitrary size at which a certain audio preset
-    ///         is picked for sounds. The higher the highest distance here is,
-    ///         the generally more calculations it has to do.
+    /// Values for the minimum arbitrary size at which a certain audio preset
+    /// is picked for sounds. The higher the highest distance here is,
+    /// the generally more calculations it has to do.
     /// </summary>
     /// <remarks>
-    ///     Keep in ascending order.
+    /// Keep in ascending order.
     /// </remarks>
     private static readonly List<(float, ProtoId<AudioPresetPrototype>)> DistancePresets = new() { (12f, "Hallway"), (20f, "Auditorium"), (30f, "ConcertHall"), (40f, "Hangar") };
 
     /// <summary>
-    ///     When is the next time we should check all audio entities and see if they are eligible to be updated.
+    /// When is the next time we should check all audio entities and see if they are eligible to be updated.
     /// </summary>
     private TimeSpan _nextExistingUpdate = TimeSpan.Zero;
 
     /// <summary>
-    ///     Collision mask for echoes.
+    /// Collision mask for echoes.
     /// </summary>
     private int _echoLayer = (int) (CollisionGroup.Opaque | CollisionGroup.Impassable); // this could be better but whatever
 
@@ -76,11 +76,11 @@ public sealed class AreaEchoSystem : EntitySystem
     {
         base.Initialize();
 
-        _cfg.OnValueChanged(TraumaCVars.AreaEchoReflectionCount, x => _echoMaxReflections = x, invokeImmediately: true);
-        _cfg.OnValueChanged(TraumaCVars.AreaEchoEnabled, x => _echoEnabled = x, invokeImmediately: true);
-        _cfg.OnValueChanged(TraumaCVars.AreaEchoHighResolution, x => _calculatedDirections = GetEffectiveDirections(x), invokeImmediately: true);
-        _cfg.OnValueChanged(TraumaCVars.AreaEchoRecalculationInterval, x => _calculationInterval = x, invokeImmediately: true);
-        _cfg.OnValueChanged(TraumaCVars.AreaEchoStepFidelity, x => _calculationalFidelity = x, invokeImmediately: true);
+        _cfg.OnValueChanged(TraumaCVars.AreaEchoReflectionCount, x => _echoMaxReflections = x, true);
+        _cfg.OnValueChanged(TraumaCVars.AreaEchoEnabled, x => _echoEnabled = x, true);
+        _cfg.OnValueChanged(TraumaCVars.AreaEchoHighResolution, x => _calculatedDirections = GetEffectiveDirections(x), true);
+        _cfg.OnValueChanged(TraumaCVars.AreaEchoRecalculationInterval, x => _calculationInterval = x, true);
+        _cfg.OnValueChanged(TraumaCVars.AreaEchoStepFidelity, x => _calculationalFidelity = x, true);
 
         _gridQuery = GetEntityQuery<MapGridComponent>();
         _roofQuery = GetEntityQuery<RoofComponent>();
@@ -96,7 +96,7 @@ public sealed class AreaEchoSystem : EntitySystem
 
         _nextExistingUpdate = _timing.CurTime + _calculationInterval;
 
-        var minimumMagnitude = DistancePresets.TryFirstOrNull(out var first) ? first.Value.Item1 : 0f;
+        var minimumMagnitude = DistancePresets[0].Item1;
         DebugTools.Assert(minimumMagnitude > 0f, "First distance preset was less than or equal to 0!");
         if (minimumMagnitude <= 0f)
             return;
@@ -114,33 +114,30 @@ public sealed class AreaEchoSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Returns all four cardinal directions when <paramref name="highResolution"/> is false.
-    ///         Otherwise, returns all eight intercardinal and cardinal directions as listed in
-    ///         <see cref="DirectionExtensions.AllDirections"/>.
+    /// Returns all four cardinal directions when <paramref name="highResolution"/> is false.
+    /// Otherwise, returns all eight intercardinal and cardinal directions as listed in
+    /// <see cref="DirectionExtensions.AllDirections"/>.
     /// </summary>
     [Pure]
     public static Angle[] GetEffectiveDirections(bool highResolution)
     {
-        if (highResolution)
-        {
-            var allDirections = DirectionExtensions.AllDirections;
-            var directions = new Angle[allDirections.Length];
+        if (!highResolution)
+            return [Direction.North.ToAngle(), Direction.West.ToAngle(), Direction.South.ToAngle(), Direction.East.ToAngle()];
 
-            for (var i = 0; i < allDirections.Length; i++)
-                directions[i] = allDirections[i].ToAngle();
+        var allDirections = DirectionExtensions.AllDirections;
+        var directions = new Angle[allDirections.Length];
 
-            return directions;
-        }
+        for (var i = 0; i < allDirections.Length; i++)
+            directions[i] = allDirections[i].ToAngle();
 
-        return [Direction.North.ToAngle(), Direction.West.ToAngle(), Direction.South.ToAngle(), Direction.East.ToAngle()];
+        return directions;
     }
 
     /// <summary>
-    ///     Takes an entity's <see cref="TransformComponent"/>. Goes through every parent it
-    ///         has before reaching one that is a map. Returns the hierarchy
-    ///         discovered, which includes the given <paramref name="originEntity"/>.
+    /// Takes an entity's <see cref="TransformComponent"/>. Goes through every parent it
+    /// has before reaching one that is a map. Returns the hierarchy
+    /// discovered, which includes the given <paramref name="originEntity"/>.
     /// </summary>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private List<Entity<TransformComponent>> TryGetHierarchyBeforeMap(Entity<TransformComponent> originEntity)
     {
         var hierarchy = new List<Entity<TransformComponent>>() { originEntity };
@@ -166,18 +163,18 @@ public sealed class AreaEchoSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Basic check for whether an audio can echo. Doesn't account for distance.
+    /// Basic check for whether an audio can echo. Doesn't account for distance.
     /// </summary>
     public bool CanAudioEcho(AudioComponent audioComponent)
         => !audioComponent.Global && _echoEnabled;
 
     /// <summary>
-    ///     Gets the length of the direction that reaches the furthest unobstructed
-    ///         distance, in an attempt to get the size of the area. Aborts early
-    ///         if either grid is missing or the tile isnt rooved.
+    /// Gets the length of the direction that reaches the furthest unobstructed
+    /// distance, in an attempt to get the size of the area. Aborts early
+    /// if either grid is missing or the tile isnt rooved.
     ///
-    ///     Returned magnitude is the longest valid length of the ray in each direction,
-    ///         divided by the number of total processed angles.
+    /// Returned magnitude is the longest valid length of the ray in each direction,
+    /// divided by the number of total processed angles.
     /// </summary>
     /// <returns>Whether anything was actually processed.</returns>
     // i am the total overengineering guy... and this, is my code.
@@ -237,7 +234,8 @@ public sealed class AreaEchoSystem : EntitySystem
             var currentOriginWorldPosition = worldPosition;
             var currentOriginTileIndices = originTileIndices;
 
-            for (var reflectIteration = 0; reflectIteration <= _echoMaxReflections /* if maxreflections is 0 we still cast atleast once */; reflectIteration++)
+            // using <= instead of < so we cast at least once even when maxreflections is 0
+            for (var reflectIteration = 0; reflectIteration <= _echoMaxReflections; reflectIteration++)
             {
                 var (distanceCovered, raycastResults) = CastEchoRay(
                     currentOriginWorldPosition,
@@ -292,17 +290,15 @@ public sealed class AreaEchoSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Gets the normal angle of a Vector2, relative to 0, 0.
+    /// Gets the normal angle of a Vector2, relative to 0, 0.
     /// </summary>
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static Vector2 GetNormalVector(in Vector2 deltaVector)
     {
-        return Vector2.Normalize(
-            MathF.Abs(deltaVector.X) > MathF.Abs(deltaVector.Y) ?
+        return MathF.Abs(deltaVector.X) > MathF.Abs(deltaVector.Y) ?
             new Vector2(MathF.Sign(deltaVector.X), 0f) :
-            new Vector2(0f, MathF.Sign(deltaVector.Y))
-        );
+            new Vector2(0f, MathF.Sign(deltaVector.Y));
     }
 
     private static Vector2 GetTileHitNormal(Vector2 rayHitPos, Vector2 tileOrigin, float tileSize)
@@ -326,7 +322,7 @@ public sealed class AreaEchoSystem : EntitySystem
     }
 
     /// <remarks>
-    ///     <paramref name="normal"/> should be normalised upon calling.
+    /// <paramref name="normal"/> should be normalised upon calling.
     /// </remarks>
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -335,15 +331,15 @@ public sealed class AreaEchoSystem : EntitySystem
 
     // this caused vsc to spike to 28gb memory usage
     /// <summary>
-    ///     Casts a ray and marches it. See <see cref="MarchRayByTiles"/>.
+    /// Casts a ray and marches it. See <see cref="MarchRayByTiles"/>.
     /// </summary>
     private (float, RayCastResults?) CastEchoRay(
-        in Vector2 originWorldPosition,
-        in Vector2i originTileIndices,
-        in Vector2 directionVector,
-        in MapId mapId,
-        in EntityUid ignoredEntity,
-        in Entity<MapGridComponent, RoofComponent?> gridRoofEntity,
+        Vector2 originWorldPosition,
+        Vector2i originTileIndices,
+        Vector2 directionVector,
+        MapId mapId,
+        EntityUid ignoredEntity,
+        Entity<MapGridComponent, RoofComponent?> gridRoofEntity,
         bool checkRoof,
         float maximumDistance)
     {
@@ -371,8 +367,8 @@ public sealed class AreaEchoSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Advances a ray, in intervals of `_calculationalFidelity`, by tiles until
-    ///         reaching an unrooved tile (if checking roofs) or space.
+    /// Advances a ray, in intervals of `_calculationalFidelity`, by tiles until
+    /// reaching an unrooved tile (if checking roofs) or space.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private float MarchRayByTiles(
@@ -444,11 +440,7 @@ public sealed class AreaEchoSystem : EntitySystem
         if (!CanAudioEcho(entity))
             return;
 
-        var minimumMagnitude = DistancePresets.TryFirstOrNull(out var first) ? first.Value.Item1 : 0f;
-        DebugTools.Assert(minimumMagnitude > 0f, "First distance preset was less than or equal to 0!");
-        if (minimumMagnitude <= 0f)
-            return;
-
+        var minimumMagnitude = DistancePresets[0].Item1;
         var maximumMagnitude = DistancePresets.Last().Item1;
 
         ProcessAudioEntity(entity, args.Transform, minimumMagnitude, maximumMagnitude);

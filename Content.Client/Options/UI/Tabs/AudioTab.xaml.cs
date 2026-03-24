@@ -88,9 +88,11 @@ public sealed partial class AudioTab : Control
         Control.AddOptionCheckBox(CCVars.EventMusicEnabled, EventMusicCheckBox);
         Control.AddOptionCheckBox(CCVars.AdminSoundsEnabled, AdminSoundsCheckBox);
         Control.AddOptionCheckBox(CCVars.BwoinkSoundEnabled, BwoinkSoundCheckBox);
-        Control.AddOptionCheckBox(TraumaCVars.StreamerMode, StreamerModeCheckBox); // Trauma
-        Control.AddOptionCheckBox(TraumaCVars.AreaEchoEnabled, AreaEchoCheckBox); // Mono
-        Control.AddOptionCheckBox(TraumaCVars.AreaEchoHighResolution, AreaEchoHighResolutionCheckBox); // Mono
+        // <Trauma>
+        Control.AddOptionCheckBox(TraumaCVars.StreamerMode, StreamerModeCheckBox);
+        Control.AddOptionCheckBox(TraumaCVars.AreaEchoEnabled, AreaEchoCheckBox);
+        Control.AddOptionCheckBox(TraumaCVars.AreaEchoHighResolution, AreaEchoHighResolutionCheckBox);
+        // </Trauma>
 
         Control.Initialize();
     }
