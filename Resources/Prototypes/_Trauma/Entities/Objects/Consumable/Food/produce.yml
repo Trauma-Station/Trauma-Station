@@ -33,6 +33,7 @@
   parent: FoodProduceBase
   id: FoodLemonade
   description: When life gives you lemons, commit arson. With the lemons.
+  suffix: Food
   components:
   - type: FlavorProfile
     flavors:
