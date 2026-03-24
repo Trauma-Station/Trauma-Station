@@ -42,7 +42,7 @@ namespace Content.IntegrationTests.Tests
 
         private static readonly string[] Grids =
         {
-            "/Maps/centcomm.yml",
+            "/Maps/_Trauma/centcomm.yml", // Trauma
             AdminTestArenaSystem.ArenaMapPath
         };
 
@@ -57,7 +57,7 @@ namespace Content.IntegrationTests.Tests
         private static readonly Dictionary<string, HashSet<EntProtoId>> DoNotMapWhitelistSpecific = new()
         {
             // <Trauma>
-            {"/Maps/_Goobstation/gate.yml", ["ShuttleGunPerforator"]},
+            {"/Maps/_Trauma/gate.yml", ["ShuttleGunPerforator"]},
             {"/Maps/_Goobstation/Nonstations/wizden.yml", ["RubberStampWizard"]},
             {"/Maps/_Goobstation/Shuttles/ShuttleEvent/instigator.yml", ["ShuttleGunFriendship"]},
             {"/Maps/_Lavaland/Lavaland/ruin_toyshop.yml", ["GoldenBikeHorn", "ClothingHeadHatCatEars"]},
@@ -81,8 +81,8 @@ namespace Content.IntegrationTests.Tests
         {
             // <Trauma>
             "/Maps/_Goobstation/Shuttles/consul.yml",
+            "/Maps/_Trauma/centcomm.yml",
             // </Trauma>
-            "/Maps/centcomm.yml",
             "/Maps/Shuttles/AdminSpawn/**" // admin gaming
         };
 
