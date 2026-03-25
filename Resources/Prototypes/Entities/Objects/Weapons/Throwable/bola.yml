@@ -41,9 +41,9 @@
   - type: LandAtCursor
   - type: Ensnaring
     freeTime: 2.0
-    breakoutTime: 3.5 #all bola should generally be fast to remove
-    walkSpeed: 0.7 #makeshift bola shouldn't slow too much
-    sprintSpeed: 0.7
+    breakoutTime: 2.5 #tradeoff for less slow
+    walkSpeed: 0.90 #makeshift bola shouldn't slow too much
+    sprintSpeed: 0.90
     staminaDamage: 0
     canThrowTrigger: true
     canMoveBreakout: true
@@ -103,9 +103,9 @@
     sprite: _Goobstation/Objects/Weapons/Throwable/energy_bola.rsi
   - type: Ensnaring
     freeTime: 2.0
-    breakoutTime: 3.5 #all bola should generally be fast to remove
-    walkSpeed: 0.5 #makeshift bola shouldn't slow too much
-    sprintSpeed: 0.5
+    breakoutTime: 1.5 #its made out of energy- tradeoff for making slower
+    walkSpeed: 0.85 #do not make it slow you like crazy movespeed is already broken
+    sprintSpeed: 0.85
     staminaDamage: 0 # anything but this is gamebreaking
     canThrowTrigger: true
     canMoveBreakout: true
