@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Antag;
+using Content.Server.Objectives.Systems;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.Objectives.Components;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.Abductor;
 using Content.Trauma.Shared.Roles;
@@ -14,6 +16,7 @@ namespace Content.Trauma.Server.Abductor;
 /// </summary>
 public sealed class AbductorRuleSystem : EntitySystem
 {
+    [Dependency] private readonly NumberObjectiveSystem _number = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedRoleSystem _role = default!;
 
@@ -23,6 +26,8 @@ public sealed class AbductorRuleSystem : EntitySystem
 
         SubscribeLocalEvent<AbductorRuleComponent, AfterAntagEntitySelectedEvent>(OnAntagSelected);
         SubscribeLocalEvent<MindContainerComponent, AbductorTaskCompleteEvent>(OnTaskComplete);
+
+        SubscribeLocalEvent<AbductorTasksConditionComponent, ObjectiveGetProgressEvent>(OnGetProgress);
     }
 
     // TODO: this should be a generic gamerule tracking mind role component
@@ -46,5 +51,18 @@ public sealed class AbductorRuleSystem : EntitySystem
         comp.TasksCompleted++;
     }
 
-    // TODO: objective
+    private void OnGetProgress(Entity<AbductorTasksConditionComponent> ent, ref ObjectiveGetProgressEvent args)
+    {
+        args.Progress = AbductProgress((args.MindId, args.Mind), _number.GetTarget(ent.Owner));
+    }
+
+    private float AbductProgress(Entity<MindComponent?> mind, int target)
+    {
+        if (!_role.MindHasRole<AbductorRoleComponent>(mind, out var role) ||
+            role.Value.Comp2.Rule is not {} rule ||
+            !TryComp<AbductorRuleComponent>(rule, out var comp))
+            return 0f; // can't track it without a rule :(
+
+        return target == 0 ? 1f : MathF.Min(comp.TasksCompleted / (float) target, 1f);
+    }
 }
