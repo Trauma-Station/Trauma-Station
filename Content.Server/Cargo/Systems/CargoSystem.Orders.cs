@@ -79,7 +79,7 @@ namespace Content.Server.Cargo.Systems
                 return;
 
             var orderId = GenerateOrderId(orderDatabase);
-            // Trauma - added RequiredAlerts
+            // Trauma - added Cooldown, RequiredAlerts
             var data = new CargoOrderData(orderId, product.Product, product.Name, product.Cost, slip.OrderQuantity, slip.Requester, slip.Reason, slip.Account, product.Cooldown, product.RequiredAlerts);
 
             if (!TryAddOrder(stationUid.Value, ent.Comp.Account, data, orderDatabase))
@@ -256,13 +256,20 @@ namespace Content.Server.Cargo.Systems
                 }
             }
 
-            // <Trauma> can't buy guns on green
+            // <Trauma> can't buy guns on green, also handle if the destination was deleted
             if (!CheckAlertPopup((uid, component), player, order, station.Value))
                 return;
+
+            if (GetEntity(component.Destination) is not {} dest || Deleted(dest) || Transform(dest).MapID != Transform(uid).MapID)
+            {
+                ConsolePopup(player, Loc.GetString("cargo-console-destination-lost"));
+                PlayDenySound(uid, component);
+                return;
+            }
             // </Trauma>
 
             var ev = new FulfillCargoOrderEvent((station.Value, stationData), order, (uid, component));
-            RaiseLocalEvent(ref ev);
+            RaiseLocalEvent(dest, ref ev); // Trauma - raise it on the destination
             ev.FulfillmentEntity ??= station.Value;
 
             if (!ev.Handled)
@@ -482,7 +489,8 @@ namespace Content.Server.Cargo.Systems
                     orderDatabase.Capacity,
                     GetNetEntity(station.Value),
                     RelevantOrders((station!.Value, orderDatabase), (consoleUid, console)),
-                    GetAvailableProducts((consoleUid, console))
+                    GetAvailableProducts((consoleUid, console)),
+                    GetDestinations(consoleUid) // Trauma
                 ));
             }
         }

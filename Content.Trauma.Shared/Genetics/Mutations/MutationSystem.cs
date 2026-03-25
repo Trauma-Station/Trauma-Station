@@ -33,11 +33,11 @@ public sealed partial class MutationSystem : CommonMutationSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
-    private EntityQuery<ActionComponent> _actionQuery = default!;
-    private EntityQuery<DnaComponent> _dnaQuery = default!;
-    private EntityQuery<MutatableComponent> _mutatableQuery = default!;
-    private EntityQuery<MutationComponent> _query = default!;
-    private EntityQuery<UnremoveableComponent> _unremoveableQuery = default!;
+    [Dependency] private readonly EntityQuery<ActionComponent> _actionQuery = default!;
+    [Dependency] private readonly EntityQuery<DnaComponent> _dnaQuery = default!;
+    [Dependency] private readonly EntityQuery<MutatableComponent> _mutatableQuery = default!;
+    [Dependency] private readonly EntityQuery<MutationComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<UnremoveableComponent> _unremoveableQuery = default!;
 
     /// <summary>
     /// All mutation prototypes and their respective <see cref="MutationComponent"/>.
@@ -71,12 +71,6 @@ public sealed partial class MutationSystem : CommonMutationSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _actionQuery = GetEntityQuery<ActionComponent>();
-        _dnaQuery = GetEntityQuery<DnaComponent>();
-        _mutatableQuery = GetEntityQuery<MutatableComponent>();
-        _query = GetEntityQuery<MutationComponent>();
-        _unremoveableQuery = GetEntityQuery<UnremoveableComponent>();
 
         SubscribeLocalEvent<MutatableComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(BodySystem) });
         SubscribeLocalEvent<MutatableComponent, PolymorphedEvent>(OnPolymorphed);

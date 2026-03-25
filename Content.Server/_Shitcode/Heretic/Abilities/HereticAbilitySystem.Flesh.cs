@@ -2,18 +2,22 @@
 
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Medical.Common.Body;
+using Content.Medical.Shared.Body;
 using Content.Shared.FixedPoint;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Cloning;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Heretic;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Metabolism;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.Stunnable;
@@ -28,8 +32,10 @@ namespace Content.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    private static readonly EntProtoId FleshStomach = "OrganFleshHereticStomach";
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+
     private static readonly ProtoId<CloningSettingsPrototype> Settings = "FleshMimic";
+    private static readonly ProtoId<OrganCategoryPrototype> StomachCategory = "Stomach";
     private static readonly SoundSpecifier MimicSpawnSound = new SoundCollectionSpecifier("gib");
 
     protected override void SubscribeFlesh()
@@ -39,15 +45,6 @@ public sealed partial class HereticAbilitySystem
         SubscribeLocalEvent<FleshPassiveComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<FleshPassiveComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<FleshPassiveComponent, ConsumingFoodEvent>(OnConsumingFood);
-        SubscribeLocalEvent<FleshPassiveComponent, ComponentShutdown>(OnShutdown);
-    }
-
-    private void OnShutdown(Entity<FleshPassiveComponent> ent, ref ComponentShutdown args)
-    {
-        if (ent.Comp.Stomach is not { } stomach || TerminatingOrDeleted(stomach))
-            return;
-
-        QueueDel(stomach);
     }
 
     private void OnConsumingFood(Entity<FleshPassiveComponent> ent, ref ConsumingFoodEvent args)
@@ -101,13 +98,24 @@ public sealed partial class HereticAbilitySystem
         if (ent.Comp.Stomach is {} stomach)
             return stomach;
 
-        var uid = Spawn(FleshStomach, Transform(ent).Coordinates);
-        if (!_body.ReplaceOrgan(ent.Owner, uid))
-        {
-            // you won't have a stomach left if it failed for some reason, sorry!
-            Del(uid);
+        if (_body.GetOrgan(ent.Owner, StomachCategory) is not {} uid)
             return null;
+
+        if (_solution.TryGetSolution(uid, StomachSystem.DefaultSolutionName, out var sol))
+            _solution.SetCapacity(sol.Value, 1984); // hungry
+        if (TryComp<InternalOrganComponent>(uid, out var organ))
+        {
+            organ.IntegrityCap = 1984;
+            organ.OrganIntegrity = 1984;
+            Dirty(uid, organ);
         }
+        if (TryComp<MetabolizerComponent>(uid, out var metabolizer))
+        {
+            metabolizer.UpdateInterval = TimeSpan.FromSeconds(0.1);
+            metabolizer.MaxReagentsProcessable = 10;
+            Dirty(uid, metabolizer);
+        }
+        EnsureComp<UnremoveableOrganComponent>(uid); // no gamer stomach for chuddies that try to steal it
 
         return ent.Comp.Stomach = uid;
     }

@@ -6,8 +6,6 @@
   id: AppearanceCarp
   name: carp appearance
   components:
-  - type: Legs
-    required: 1 # tail
   - type: InitialBody
     organs:
       # Parts
@@ -59,9 +57,6 @@
   name: carp tail
   description: Unique glands in this tail let space carp fly in a vacuum.
   components:
-  - type: MovementBodyPart
-    walkSpeed: 2.5
-    sprintSpeed: 3.5
   - type: Sprite
     layers:
     - state: tail-icon

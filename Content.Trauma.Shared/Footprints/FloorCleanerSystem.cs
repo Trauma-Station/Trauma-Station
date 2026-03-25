@@ -38,15 +38,19 @@ public sealed class FloorCleanerSystem : EntitySystem
 
         var pos = _transform.WithEntityId(coords, grid).Position;
         var decals = _decal.GetDecalsInRange(grid, pos, ent.Comp.Radius);
-        if (decals.Count == 0)
-            return false; // client stops here because decal shitcode is serverside
+        var cleaned = false;
 
-        // actually clean them
+        // actually clean them. not predicted since decal shitcode is serverside
         foreach (var decal in decals)
         {
-            if (decal.Decal.Cleanable)
-                _decal.RemoveDecal(grid, decal.Index);
+            if (!decal.Decal.Cleanable)
+                continue;
+            _decal.RemoveDecal(grid, decal.Index);
+            cleaned = true;
         }
+
+        if (!cleaned)
+            return false;
 
         // TODO: change to PlayPredicted if decals ever gets moved to shared (lol never happening)
         _audio.PlayPvs(ent.Comp.Sound, ent);

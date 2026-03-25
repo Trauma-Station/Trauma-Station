@@ -18,9 +18,6 @@
   - Kitchen
   extendedAccess:
   - Hydroponics
-  special: # goob
-  - !type:AddImplantSpecial # Service workers can understand a chef's communications.
-    implants: [ BasicSpaceItalianTranslatorImplant ]
 
 - type: startingGear
   id: ServiceWorkerGear

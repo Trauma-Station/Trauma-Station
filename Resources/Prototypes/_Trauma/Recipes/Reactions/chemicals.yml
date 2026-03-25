@@ -93,3 +93,25 @@
       amount: 1
   products:
     FullFatOils: 2
+
+- type: reaction
+  id: CocainePowderReaction
+  reactants:
+    CocaSlurry:
+      amount: 3
+    WeldingFuel:
+      amount: 1
+  products:
+    Cocaine: 1
+    Microplastics: 3
+
+- type: reaction
+  id: CocaineFreebasing
+  minTemp: 474
+  reactants:
+    Cocaine:
+      amount: 4
+  products:
+    CrackCocaine: 1
+    Microplastics: 2
+    VentCrud: 1
