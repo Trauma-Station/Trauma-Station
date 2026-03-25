@@ -12,7 +12,7 @@
     duration: null
   - type: RuleGrids
   - type: LoadMapRule
-    mapPath: /Maps/_Trauma/Shuttles/abductor_shuttle.yml
+    gridPath: /Maps/_Trauma/Shuttles/abductor_shuttle.yml
   - type: AntagObjectives
     objectives:
     - AbductObjective
