@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client.Info;
 using Content.Client.Lobby.UI;
 using Content.Client.Message;
 using Content.Goobstation.Common.CCVar;
 using Content.RMC14.Shared.LinkAccount;
+using Content.Shitcode.Common.LinkAccount;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Configuration;
@@ -35,6 +37,13 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
     {
         _linkAccount.CodeReceived += OnCode;
         _linkAccount.Updated += OnUpdated;
+
+        LinkBanner.OnLinkBanner += HookFunctions;
+    }
+
+    private void HookFunctions(LinkBanner banner)
+    {
+        banner.OnToggleWindow = () => ToggleWindow();
     }
 
     private void OnCode(Guid code)

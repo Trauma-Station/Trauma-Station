@@ -4,15 +4,26 @@ using System.Linq;
 using Content.Client.CartridgeLoader.Cartridges;
 using Content.DV.Client.CartridgeLoader.Cartridges;
 using Content.DV.Common.CartridgeLoader.Cartridges;
+using Content.Shared.CartridgeLoader.Cartridges;
 using Robust.Client.UserInterface.Controllers;
 
 namespace Content.DeltaV.Client.CartridgeLoader.Cartridges;
 
 public sealed partial class LogProbeUiFragmentDeltaV : UIController
 {
-    private void OnWindowOpened(LogProbeUiFragment window)
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        LogProbeUiFragment.OnCreated += HookFragment;
+    }
+
+    private void HookFragment(LogProbeUiFragment window)
     {
         window.OnDisplayNanoChat = (state) => DisplayNanoChatData(window, state);
+        window.OnSetupNanoChatView = (state) => SetupNanoChatView(window, state);
+        window.OnSetupAccessLogView = _ => SetupAccessLogView(window);
+        window.OnDisplayAccessLogs = (state) => DisplayAccessLogs(window, state);
     }
 
     private void DisplayNanoChatData(LogProbeUiFragment window, NanoChatData data)
@@ -72,6 +83,43 @@ public sealed partial class LogProbeUiFragmentDeltaV : UIController
                 window.ProbedDeviceContainer.AddChild(entry);
                 count++;
             }
+        }
+    }
+
+    private void SetupNanoChatView(LogProbeUiFragment window, NanoChatData data)
+    {
+        window.TitleLabel.Text = Loc.GetString("log-probe-header-nanochat");
+        window.ContentLabel.Text = Loc.GetString("log-probe-label-message");
+
+        // Show card info if available
+        var cardInfo = new List<string>();
+        if (data.CardNumber != null)
+            cardInfo.Add(Loc.GetString("log-probe-card-number", ("number", $"#{data.CardNumber:D4}")));
+
+        // Add recipient count
+        cardInfo.Add(Loc.GetString("log-probe-recipients", ("count", data.Recipients.Count)));
+
+        window.CardNumberLabel.Text = string.Join(" | ", cardInfo);
+        window.CardNumberLabel.Visible = true;
+    }
+
+    private void SetupAccessLogView(LogProbeUiFragment window)
+    {
+        window.TitleLabel.Text = Loc.GetString("log-probe-header-access");
+        window.ContentLabel.Text = Loc.GetString("log-probe-label-accessor");
+        window.CardNumberLabel.Visible = false;
+    }
+
+    private void DisplayAccessLogs(LogProbeUiFragment window, List<PulledAccessLog> logs)
+    {
+        //Reverse the list so the oldest entries appear at the bottom
+        logs.Reverse();
+
+        var count = 1;
+        foreach (var log in logs)
+        {
+            window.AddAccessLog(log, count);
+            count++;
         }
     }
 }

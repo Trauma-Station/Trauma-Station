@@ -1,5 +1,7 @@
+// <RMC>
+using Content.Shitcode.Common.LinkAccount;
+// </RMC>
 using Content.Client.Changelog;
-﻿using Content.RMC14.Client.LinkAccount;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Client.UserInterface.Systems.Guidebook;
@@ -13,12 +15,21 @@ namespace Content.Client.Info
 {
     public sealed class LinkBanner : BoxContainer
     {
-        private readonly IConfigurationManager _cfg;
+        // <RMC>
+        public static Action<LinkBanner>? OnLinkBanner;
+        public Action? OnToggleWindow;
+        // </RMC>
+
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
 
         private ValueList<(CVarDef<string> cVar, Button button)> _infoLinks;
 
         public LinkBanner()
         {
+            // <Trauma>
+            IoCManager.InjectDependencies(this);
+            OnLinkBanner?.Invoke(this);
+            // </Trauma>
             var buttons = new BoxContainer
             {
                 Orientation = LayoutOrientation.Horizontal
@@ -26,7 +37,6 @@ namespace Content.Client.Info
             AddChild(buttons);
 
             var uriOpener = IoCManager.Resolve<IUriOpener>();
-            _cfg = IoCManager.Resolve<IConfigurationManager>();
 
             var rulesButton = new Button() {Text = Loc.GetString("server-info-rules-button")};
             rulesButton.OnPressed += args => new RulesAndInfoWindow().Open();
@@ -39,12 +49,11 @@ namespace Content.Client.Info
             AddInfoButton("server-info-telegram-button", CCVars.InfoLinksTelegram);
             AddInfoButton("rmc-ui-patreon", CCVars.InfoLinksPatreon);
 
-            var linkAccount = UserInterfaceManager.GetUIController<LinkAccountUIController>();
             var linkAccountButton = new Button
             {
                 Text = Loc.GetString("rmc-ui-link-discord-account"),
             };
-            linkAccountButton.OnPressed += _ => linkAccount.ToggleWindow();
+            linkAccountButton.OnPressed += _ => OnToggleWindow?.Invoke();
             buttons.AddChild(linkAccountButton);
 
             var guidebookController = UserInterfaceManager.GetUIController<GuidebookUIController>();
