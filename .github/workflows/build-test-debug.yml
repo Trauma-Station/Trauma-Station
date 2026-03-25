@@ -234,10 +234,11 @@ jobs:
     steps:
       - name: CI succeeded
         run: |
-          if [[ "${{ needs.test-unit.result }}" == "failure" ||
-                "${{ needs.test-main.result }}" == "failure" ||
-                "${{ needs.test-maps.result }}" == "failure" ||
-                "${{ needs.test-map-render.result }}" == "failure" ]]; then
+          if [[ "${{ needs.build.result }}" != "success" ||
+                "${{ needs.test-unit.result }}" != "success" ||
+                "${{ needs.test-main.result }}" != "success" ||
+                "${{ needs.test-maps.result }}" != "success" ||
+                "${{ needs.test-map-render.result }}" != "success" ]]; then
             echo "Not all tests succeeded!"
             exit 1
           fi
