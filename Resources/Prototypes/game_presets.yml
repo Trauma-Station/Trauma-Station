@@ -67,6 +67,7 @@
   rules:
     # <Trauma>
     - BasicAntagEventScheduler
+    - MajorAntagEventScheduler
     - ModerateAntagEventScheduler
     - Thief
     - Heretic
@@ -166,6 +167,7 @@
   rules:
   # <Trauma>
   - BasicAntagEventScheduler
+  - MajorAntagEventScheduler
   - ModerateAntagEventScheduler
   # </Trauma>
   - DummyNonAntagChance
@@ -199,6 +201,7 @@
   rules:
   # <Trauma>
   - BasicAntagEventScheduler
+  - MajorAntagEventScheduler
   - ModerateAntagEventScheduler
   # </Trauma>
   - Nukeops
@@ -221,6 +224,7 @@
   rules:
   # <Trauma>
   - BasicAntagEventScheduler
+  - MajorAntagEventScheduler
   - ModerateAntagEventScheduler
   # </Trauma>
   - DummyNonAntagChance
@@ -241,6 +245,7 @@
   rules:
   # <Trauma>
   - BasicAntagEventScheduler
+  - MajorAntagEventScheduler
   - ModerateAntagEventScheduler
   # </Trauma>
   - Xenoborgs
@@ -265,6 +270,7 @@
   rules:
   # <Trauma>
   - BasicAntagEventScheduler
+  - MajorAntagEventScheduler
   - ModerateAntagEventScheduler
   # </Trauma>
   - Zombie
@@ -285,6 +291,7 @@
   rules:
   # <Trauma>
   - BasicAntagEventScheduler
+  - MajorAntagEventScheduler
   - ModerateAntagEventScheduler
   # </Trauma>
   - Zombie
