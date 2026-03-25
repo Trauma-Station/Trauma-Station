@@ -2,7 +2,8 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.RMC14.Shared.LinkAccount;
+namespace Content.Shitcode.Common.LinkAccount;
+
 
 [Serializable, NetSerializable]
 public sealed record SharedRMCPatronTier(

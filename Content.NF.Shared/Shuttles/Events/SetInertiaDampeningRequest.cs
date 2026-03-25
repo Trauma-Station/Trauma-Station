@@ -14,12 +14,3 @@ public sealed class SetInertiaDampeningRequest : BoundUserInterfaceMessage
     public NetEntity? ShuttleEntityUid { get; set; }
     public InertiaDampeningMode Mode { get; set; }
 }
-
-[Serializable, NetSerializable]
-public enum InertiaDampeningMode : byte
-{
-    None = 0, // Reserved for requests - does not set the mode, only returns its state.
-    Cruise,
-    Dampen,
-    Anchor,
-}

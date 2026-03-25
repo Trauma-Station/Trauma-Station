@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shitcode.Shared.Wizard.Mutate;
@@ -10,10 +5,13 @@ using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
-public abstract partial class SharedGunSystem
+public abstract partial class BasicHitscanSharedGunSystem : EntitySystem
 {
-    protected virtual void InitializeBasicHitScan()
+    [Dependency] private readonly SharedGunSystem _gun = default!;
+    public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<BasicHitscanAmmoProviderComponent, TakeAmmoEvent>(OnBasicHitscanTakeAmmo);
         SubscribeLocalEvent<BasicHitscanAmmoProviderComponent, GetAmmoCountEvent>(OnBasicHitscanAmmoCount);
     }
@@ -29,7 +27,7 @@ public abstract partial class SharedGunSystem
         for (var i = 0; i < args.Shots; i++)
         {
             var hitscanEnt = Spawn(ent.Comp.Proto);
-            args.Ammo.Add((hitscanEnt, EnsureShootable(hitscanEnt)));
+            args.Ammo.Add((hitscanEnt, _gun.EnsureShootable(hitscanEnt)));
         }
     }
 }

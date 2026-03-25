@@ -1,41 +1,20 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
-// SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 McBosserson <148172569+McBosserson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Milon <plmilonpl@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Unlumination <144041835+Unlumy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Silo;
+using Content.DV.Common.Salvage;
 using Content.DV.Shared.Salvage.Components;
+using Content.Goobstation.Common.Silo;
 using Content.Lavaland.Common.Mining;
 using Content.Shared.Access.Systems;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;
-using Content.Trauma.Common.Salvage; // Trauma
+using Content.Trauma.Common.Salvage;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.DV.Shared.Salvage.Systems;
 
-public sealed class MiningPointsSystem : EntitySystem
+public sealed class MiningPointsSystem : CommonMiningPointsSystem
 {
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -81,7 +60,7 @@ public sealed class MiningPointsSystem : EntitySystem
         if (points == 0)
             return;
 
-        if (GetPointComp(user) is not {} dest)
+        if (GetPointComp(user) is not { } dest)
             return;
 
         TransferAll((ent.Owner, comp), dest);
@@ -93,10 +72,8 @@ public sealed class MiningPointsSystem : EntitySystem
 
     #endregion
     #region Public API
-    /// <summary>
-    /// if user can claim mining points
-    /// <summary>
-    public bool CanClaimPoints(EntityUid user) // Goobstation - borg Miningpoints
+
+    public override bool CanClaimPoints(EntityUid user) // Goobstation - borg Miningpoints
     {
         if (TryComp<MiningPointsComponent>(user, out var comp))
             return true;
@@ -112,7 +89,7 @@ public sealed class MiningPointsSystem : EntitySystem
     public Entity<MiningPointsComponent?>? GetPointComp(EntityUid user) // Goobstation - borg Miningpoints
     {
         if (TryComp<MiningPointsComponent>(user, out var comp))
-            return  (user,comp);
+            return (user, comp);
         return TryFindIdCard(user);
     }
 
@@ -133,12 +110,9 @@ public sealed class MiningPointsSystem : EntitySystem
         return (idCard, comp);
     }
 
-    /// <summary>
-    /// Returns true if the user has at least some number of points on their ID card.
-    /// </summary>
-    public bool UserHasPoints(EntityUid user, uint points)
+    public override bool UserHasPoints(EntityUid user, uint points)
     {
-        if (GetPointComp(user)?.Comp is not {} comp) // Goobstation - borg Miningpoints
+        if (GetPointComp(user)?.Comp is not { } comp) // Goobstation - borg Miningpoints
             return false;
 
         return comp.Points >= points;

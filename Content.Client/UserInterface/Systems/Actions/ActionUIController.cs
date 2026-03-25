@@ -130,7 +130,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             // Goobstation end
         }
 
-        if (_spells != null) // Goobstation
+        if (_spells is { }) // Goobstation
             _spells.StopTargeting += StopTargeting;
 
         UpdateFilterLabel();
@@ -258,7 +258,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             // Goobstation end
         }
 
-        if (_spells != null) // Goobstation
+        if (_spells is { }) // Goobstation
             _spells.StopTargeting -= StopTargeting;
 
         CommandBinds.Unregister<ActionUIController>();
@@ -311,7 +311,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (!swap.AllowSecondaryTarget)
             return false;
 
-        if (_actionsSystem == null || _spells == null)
+        if (_actionsSystem == null || _spells is not { })
             return false;
 
         var entity = args.EntityUid;

@@ -1,10 +1,6 @@
 // <Trauma>
-using Content.DV.Shared.Salvage.Components;
-using Content.DV.Shared.Salvage.Systems;
-using Content.Client._Shitcode.Silo;
-using Robust.Client.Player;
-using Robust.Shared.Physics;
-using Robust.Shared.Timing;
+using Content.DV.Common.Salvage;
+using Content.Goobstation.Common.Silo;
 // </Trauma>
 using System.Linq;
 using System.Text;
@@ -27,18 +23,13 @@ namespace Content.Client.Lathe.UI;
 public sealed partial class LatheMenu : DefaultWindow
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!; // DeltaV
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private readonly SpriteSystem _spriteSystem;
     private readonly LatheSystem _lathe;
     private readonly MaterialStorageSystem _materialStorage;
-    private readonly MiningPointsSystem _miningPoints; // DeltaV
-    private readonly SiloSystem _silo; // Goobstation
     public event Action<BaseButton.ButtonEventArgs>? OnServerListButtonPressed;
     public event Action<string, int>? RecipeQueueAction;
-    public event Action<BaseButton.ButtonEventArgs>? OnResetQueueListButtonPressed; // Goobstation
-    public event Action? OnClaimMiningPoints; // DeltaV
     public event Action<int>? QueueDeleteAction;
     public event Action<int>? QueueMoveUpAction;
     public event Action<int>? QueueMoveDownAction;
@@ -51,9 +42,6 @@ public sealed partial class LatheMenu : DefaultWindow
     public ProtoId<LatheCategoryPrototype>? CurrentCategory;
 
     public EntityUid Entity;
-    public string? AlertLevel; // Trauma
-
-    private uint? _lastMiningPoints; // DeltaV: used to avoid Loc.GetString every frame
 
     public LatheMenu()
     {
@@ -63,8 +51,8 @@ public sealed partial class LatheMenu : DefaultWindow
         _spriteSystem = _entityManager.System<SpriteSystem>();
         _lathe = _entityManager.System<LatheSystem>();
         _materialStorage = _entityManager.System<MaterialStorageSystem>();
-        _miningPoints = _entityManager.System<MiningPointsSystem>(); // DeltaV
-        _silo = _entityManager.System<SiloSystem>(); // Goobstation
+        _miningPoints = _entityManager.System<CommonMiningPointsSystem>(); // DeltaV
+        _silo = _entityManager.System<CommonSiloSystem>(); // Goobstation
 
         SearchBar.OnTextChanged += _ =>
         {
@@ -123,64 +111,6 @@ public sealed partial class LatheMenu : DefaultWindow
 
         MaterialsList.SetOwner(Entity);
         // End DeltaV Additions
-    }
-
-    /// <summary>
-    /// DeltaV: Updates the UI elements for mining points.
-    /// </summary>
-    private void UpdateMiningPoints(uint points)
-    {
-        MiningPointsClaimButton.Disabled = points == 0 ||
-            _player.LocalSession?.AttachedEntity is not { } player ||
-            !_miningPoints.CanClaimPoints(player); // Goobstation - borg mining Points
-        if (points == _lastMiningPoints)
-            return;
-
-        _lastMiningPoints = points;
-        MiningPointsLabel.Text = Loc.GetString("lathe-menu-mining-points", ("points", points));
-    }
-
-    /// <summary>
-    /// Goobstation: Check if the lathe is connected to a silo.
-    /// </summary>
-    private bool IsSiloConnected(EntityUid uid, out string? warning, bool checkGrid = false)
-    {
-        warning = null;
-        var silo = _silo.GetSilo(uid);
-        if (silo != null
-            && checkGrid)
-        {
-            if (_entityManager.TryGetComponent<TransformComponent>(uid, out var uidTransform)
-                && _entityManager.TryGetComponent<TransformComponent>(silo.Value, out var siloTransform))
-            {
-                if (uidTransform.MapID != siloTransform.MapID)
-                {
-                    warning = Loc.GetString("lathe-menu-mining-points-silo-not-on-same-grid");
-                    return false;
-                }
-
-                return true;
-            }
-
-            warning = Loc.GetString("lathe-menu-mining-points-silo-not-on-same-grid");
-            return false;
-        }
-
-        if (silo == null)
-            warning = Loc.GetString("lathe-menu-mining-points-no-connection-warning");
-
-        return silo != null;
-    }
-
-    /// <summary>
-    /// DeltaV: Update mining points UI whenever it changes.
-    /// </summary>
-    protected override void FrameUpdate(FrameEventArgs args)
-    {
-        base.FrameUpdate(args);
-
-        if (_entityManager.TryGetComponent<MiningPointsComponent>(Entity, out var points))
-            UpdateMiningPoints(points.Points);
     }
 
     /// <summary>

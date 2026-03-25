@@ -1,4 +1,6 @@
-using Content.RMC14.Client.LinkAccount;
+// <Trauma>
+using Content.Shitcode.Common.LinkAccount;
+// </Trauma>
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
 using Content.Client.LateJoin;
@@ -31,7 +33,7 @@ namespace Content.Client.Lobby
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IVoteManager _voteManager = default!;
         [Dependency] private readonly ICommonCurrencyManager _serverCur = default!; // Goobstation - server currency
-        [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
+        [Dependency] private readonly ILinkAccountManager _linkAccount = default!; // RMC - Patreon
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
         [Dependency] private readonly IPrototypeManager _protoMan = default!;
 

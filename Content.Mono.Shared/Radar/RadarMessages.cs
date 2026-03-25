@@ -1,21 +1,9 @@
 using System.Linq;
 using System.Numerics;
+using Content.Shitcode.Common.Radar;
 using Robust.Shared.Serialization;
 
 namespace Content.Mono.Shared.Radar;
-
-[Serializable, NetSerializable]
-public enum RadarBlipShape
-{
-    Circle,
-    Square,
-    Triangle,
-    Star,
-    Diamond,
-    Hexagon,
-    Arrow,
-    Ring
-}
 
 [Serializable, NetSerializable]
 public sealed class GiveBlipsEvent : EntityEventArgs

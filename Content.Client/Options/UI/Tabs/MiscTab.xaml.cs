@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
-using Content.RMC14.Client.LinkAccount;
+using Content.Shitcode.Common.LinkAccount;
 // </Trauma>
 using System.Linq;
 using Content.Client.UserInterface.Screens;
@@ -19,7 +19,7 @@ namespace Content.Client.Options.UI.Tabs;
 public sealed partial class MiscTab : Control
 {
     // <Trauma>
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly ILinkAccountManager _linkAccount = default!;
     //[Dependency] private readonly IPlayerManager _playerManager = default!; // no longer used
     // </Trauma>
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;

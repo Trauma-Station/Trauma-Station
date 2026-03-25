@@ -1,18 +1,19 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 // New Frontiers - This file is licensed under AGPLv3
 // Copyright (c) 2024 New Frontiers Contributors
 // See AGPLv3.txt for details.
-using Content.NF.Shared.Shuttles.Events;
+
+using Content.Shitcode.Common.Shuttles;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Shuttles.UI;
 
 public sealed partial class NavScreen
 {
+    [Dependency] private readonly IPrototypeManager _protoMan = default!; // Frontier
+
     private readonly ButtonGroup _buttonGroup = new();
     public event Action<NetEntity?, InertiaDampeningMode>? OnInertiaDampeningModeChanged;
 

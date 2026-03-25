@@ -12,7 +12,7 @@ public sealed class LinkAccountManager : ILinkAccountManager, IPostInjectInit
 
     private readonly List<SharedRMCPatron> _allPatrons = [];
 
-    public SharedRMCPatronTier? Tier { get; private set; }
+    public SharedRMCPatronTier? Tier { get; set; }
     public bool Linked { get; private set; }
     public Color? GhostColor { get; private set; }
     public SharedRMCLobbyMessage? LobbyMessage { get; private set; }

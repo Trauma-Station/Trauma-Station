@@ -1,15 +1,13 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
 using Content.Mono.Shared.Radar;
+using Content.Shitcode.Common.Radar;
 using Robust.Shared.Timing;
 
 namespace Content.Mono.Client.Radar;
 
-public sealed partial class RadarBlipsSystem : EntitySystem
+public sealed partial class RadarBlipsSystem : CommonRadarBlipsSystem
 {
     private const double BlipStaleSeconds = 3.0;
     private static readonly List<(Vector2, float, Color, RadarBlipShape)> EmptyBlipList = new();
@@ -58,7 +56,7 @@ public sealed partial class RadarBlipsSystem : EntitySystem
         _lastUpdatedTime = _timing.CurTime;
     }
 
-    public void RequestBlips(EntityUid console)
+    public override void RequestBlips(EntityUid console)
     {
         // Only request if we have a valid console
         if (!Exists(console))
@@ -130,10 +128,7 @@ public sealed partial class RadarBlipsSystem : EntitySystem
         return result;
     }
 
-    /// <summary>
-    /// Gets the raw blips data which includes grid information for more accurate rendering.
-    /// </summary>
-    public List<(NetEntity? Grid, Vector2 Position, float Scale, Color Color, RadarBlipShape Shape)> GetRawBlips()
+    public override List<(NetEntity? Grid, Vector2 Position, float Scale, Color Color, RadarBlipShape Shape)> GetRawBlips()
     {
         if (_timing.CurTime.TotalSeconds - _lastUpdatedTime.TotalSeconds > BlipStaleSeconds)
             return EmptyRawBlipList;
@@ -235,10 +230,7 @@ public sealed partial class RadarBlipsSystem : EntitySystem
         return result;
     }
 
-    /// <summary>
-    /// Gets the raw hitscan data which includes grid information for more accurate rendering.
-    /// </summary>
-    public List<(NetEntity? Grid, Vector2 Start, Vector2 End, float Thickness, Color Color)> GetRawHitscanLines()
+    public override List<(NetEntity? Grid, Vector2 Start, Vector2 End, float Thickness, Color Color)> GetRawHitscanLines()
     {
         if (_timing.CurTime.TotalSeconds - _lastUpdatedTime.TotalSeconds > BlipStaleSeconds)
             return EmptyHitscanList;

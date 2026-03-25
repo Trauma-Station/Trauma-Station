@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -15,9 +9,9 @@ using Content.Shared.Materials;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shitcode.Shared.Silo;
+namespace Content.Goobstation.Shared.Silo;
 
-public abstract class SharedSiloSystem : EntitySystem
+public abstract class SharedSiloSystem : CommonSiloSystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] protected readonly SharedDeviceLinkSystem DeviceLink = default!;
@@ -80,10 +74,10 @@ public abstract class SharedSiloSystem : EntitySystem
     {
         amount = 0;
         var silo = GetSilo(machine);
-        if (silo == null)
+        if (silo is not { } || !TryComp<MaterialStorageComponent>(silo, out var siloComp))
             return false;
 
-        amount = silo.Value.Comp.Storage.GetValueOrDefault(material, 0);
+        amount = siloComp.Storage.GetValueOrDefault(material, 0);
         return true;
     }
 
@@ -91,22 +85,22 @@ public abstract class SharedSiloSystem : EntitySystem
     {
         amount = 0;
         var silo = GetSilo(machine);
-        if (silo == null)
+        if (silo is not { } || !TryComp<MaterialStorageComponent>(silo, out var siloComp))
             return false;
 
-        amount = silo.Value.Comp.Storage.Values.Sum();
+        amount = siloComp.Storage.Values.Sum();
         return true;
     }
 
     public void DirtySilo(EntityUid machine)
     {
         var silo = GetSilo(machine);
-        if (silo == null)
+        if (silo is not { } || !TryComp<MaterialStorageComponent>(silo, out var siloComp))
             return;
-        Dirty(silo.Value);
+        Dirty(silo.Value, siloComp);
     }
 
-    public Entity<MaterialStorageComponent>? GetSilo(EntityUid machine)
+    public override EntityUid? GetSilo(EntityUid machine)
     {
         if (!_siloEnabled)
             return null;
@@ -117,6 +111,6 @@ public abstract class SharedSiloSystem : EntitySystem
         if (!TryComp(utilizer.Silo, out MaterialStorageComponent? storage))
             return null;
 
-        return (utilizer.Silo.Value, storage);
+        return utilizer.Silo.Value;
     }
 }
