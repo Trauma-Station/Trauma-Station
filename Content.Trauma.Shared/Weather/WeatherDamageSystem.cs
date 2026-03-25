@@ -25,16 +25,8 @@ public sealed partial class WeatherDamageSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
-    private EntityQuery<MapGridComponent> _gridQuery = default!;
-    private EntityQuery<MobStateComponent> _mobQuery = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _gridQuery = GetEntityQuery<MapGridComponent>();
-        _mobQuery = GetEntityQuery<MobStateComponent>();
-    }
+    [Dependency] private readonly EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
 
     public override void Update(float frameTime)
     {

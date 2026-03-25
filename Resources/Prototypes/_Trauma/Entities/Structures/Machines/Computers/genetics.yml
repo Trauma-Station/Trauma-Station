@@ -1,7 +1,8 @@
 - type: entity
   parent: BaseComputerAiAccess
-  id: ComputerGeneticsConsole
+  id: ComputerGeneticsConsoleEmpty
   name: genetics console
+  suffix: Empty
   description: From here you can research mysteries of DNA!
   components:
   - type: Sprite
@@ -22,6 +23,8 @@
     radius: 1.5
     energy: 1.6
     color: "#1f8c28"
+  - type: MaterialStorage
+    materialWhiteList: [ Biomass ]
   - type: GeneticsConsole
     sequenceFailSound: /Audio/Effects/smoke.ogg
     writeSound: /Audio/Machines/printer.ogg
@@ -69,3 +72,12 @@
   - type: GuideHelp
     guides:
     - Genetics
+
+- type: entity
+  parent: ComputerGeneticsConsoleEmpty
+  id: ComputerGeneticsConsole
+  suffix: Filled
+  components:
+  - type: MaterialStorage
+    storage:
+      Biomass: 100

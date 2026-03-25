@@ -24,7 +24,9 @@
   - type: StaminaDamageOnHit
     damage: 6
   - type: Item
-    size: Normal
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
   - type: Tag
     tags:
     - SecBeltEquip

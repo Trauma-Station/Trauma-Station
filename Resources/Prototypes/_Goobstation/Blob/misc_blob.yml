@@ -57,6 +57,7 @@
     - type: GhostRoleMobSpawner
       prototype: MobMouseBlob
     - type: GhostRole
+      prob: 1 # Trauma - Ensure blob mice gets ghostrolled
       makeSentient: true
       name: blob-carrier-role-name
       description: blob-carrier-role-desc

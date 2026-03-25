@@ -39,7 +39,8 @@ public sealed class FootprintSystem : EntitySystem
 
     public const float MaxAlpha = 0.7f; // base of the exponential alpha curve
     public const int MaxStepsStuck = 5; // max footprints you can leave without walking over another puddle
-    public const int MaxDecals = 2; // don't add footprints if there are this many decals near you
+    public const int MaxDecals = 1; // don't add footprints if there are this many decals near you
+    public const float DecalRange = 1.5f; // ... in this range
 
     private float _minimumPuddleSize;
 
@@ -140,7 +141,7 @@ public sealed class FootprintSystem : EntitySystem
         if (ent.Comp.Steps <= 0)
             return;
 
-        if (_decal.GetDecalsInRange(grid, pos).Count > MaxDecals)
+        if (_decal.GetDecalsInRange(grid, pos, DecalRange).Count > MaxDecals)
             return; // too many nearby
 
         // minimum power of 1 so its never 100% opaque.

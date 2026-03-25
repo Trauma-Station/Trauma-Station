@@ -69,7 +69,7 @@
   description: Looks like it's not you eating tomatoes today, it's the tomatoes eating you.
   components:
   - type: GhostRole
-    prob: 0.05
+    prob: 0 # Trauma - was 0.05
     makeSentient: true
     allowSpeech: true
     name: ghost-role-information-tomatokiller-name

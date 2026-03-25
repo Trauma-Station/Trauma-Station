@@ -26,6 +26,8 @@ public sealed class RoleEffectsSystem : EntitySystem
             return;
 
         _effects.ApplyEffects(mob, ent.Comp.Added);
+        if (ent.Comp.SingleUse)
+            RemCompDeferred(ent, ent.Comp);
     }
 
     private void OnRemoved(Entity<RoleEffectsComponent> ent, ref RoleGotRemovedEvent args)

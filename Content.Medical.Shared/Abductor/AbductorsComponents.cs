@@ -100,6 +100,9 @@ public sealed partial class AbductorsAbilitiesComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? SendYourself;
 
+    [DataField, AutoNetworkedField]
+    public EntityUid? SendPad;
+
     [DataField]
     public EntityUid[] HiddenActions = [];
 }
@@ -110,17 +113,11 @@ public sealed partial class AbductorVestComponent : Component
     [DataField, AutoNetworkedField]
     public AbductorArmorModeType CurrentState = AbductorArmorModeType.Stealth;
 }
-[RegisterComponent, Access(typeof(SharedAbductorSystem))]
-public sealed partial class AbductConditionComponent : Component
-{
-    public int TotalAbducted => Abducted.Count;
-
-    [DataField]
-    public HashSet<NetEntity> Abducted = new();
-}
 
 public sealed partial class ExitConsoleEvent : InstantActionEvent;
 
 public sealed partial class SendYourselfEvent : WorldTargetActionEvent;
 
 public sealed partial class AbductorReturnToShipEvent : InstantActionEvent;
+
+public sealed partial class SendPadEvent : WorldTargetActionEvent;

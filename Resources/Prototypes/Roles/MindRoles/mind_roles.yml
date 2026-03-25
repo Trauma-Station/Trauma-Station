@@ -111,6 +111,7 @@
   # <Trauma>
   components:
   - type: RoleEffects # every job gets its skillchip by default
+    singleUse: true
     added:
     - !type:InstallJobSkillChip
       conditions:

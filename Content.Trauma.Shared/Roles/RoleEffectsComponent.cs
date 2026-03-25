@@ -23,4 +23,11 @@ public sealed partial class RoleEffectsComponent : Component
 
     [DataField, AlwaysPushInheritance]
     public EntityEffect[] MindRemoved = [];
+
+    /// <summary>
+    /// Whether to remove this component after adding components to the mob.
+    /// MindAdded and Removed don't use this.
+    /// </summary>
+    [DataField]
+    public bool SingleUse;
 }

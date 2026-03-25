@@ -19,7 +19,6 @@ public sealed partial class DamageableSystem
     public override void Initialize()
     {
         CacheVitalPrototypes(); // Trauma
-        InitializeTrauma(); // Trauma
         RebuildContainerCache();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);

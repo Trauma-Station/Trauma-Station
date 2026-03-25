@@ -28,8 +28,6 @@ entities:
     - type: MetaData
       name: Cargo Shuttle
     - type: Transform
-      pos: 152.27101,147.58517
-      parent: invalid
     - type: MapGrid
       chunks:
         -1,0:

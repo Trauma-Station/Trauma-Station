@@ -5,6 +5,8 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
+using Content.Shared.Materials;
 using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
 using Content.Trauma.Shared.Genetics.Mutations;
@@ -32,6 +34,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedMaterialStorageSystem _material = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -39,14 +42,18 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
     private StringBuilder _builder = new();
 
     private EntityQuery<GeneticsConsoleComponent> _query;
+    private EntityQuery<MaterialStorageComponent> _materialQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _query = GetEntityQuery<GeneticsConsoleComponent>();
+        _materialQuery = GetEntityQuery<MaterialStorageComponent>();
 
         SubscribeLocalEvent<GeneticsConsoleComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<GeneticsConsoleComponent, GetMaterialWhitelistEvent>(OnGetMaterialWhitelist);
+        SubscribeLocalEvent<GeneticsConsoleComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<GeneticsConsoleComponent, SequenceDoAfterEvent>(OnSequenceDoAfter);
         SubscribeLocalEvent<GeneticsConsoleComponent, DoAfterAttemptEvent<SequenceDoAfterEvent>>(OnSequenceCheck);
         SubscribeLocalEvent<GeneticsConsoleComponent, CombineDoAfterEvent>(OnCombineDoAfter);
@@ -75,14 +82,24 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         ent.Comp.NextScramble = _timing.CurTime + ent.Comp.ScrambleCooldown;
         DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextScramble));
 
-        var longestPrintDelay = TimeSpan.Zero;
-        foreach (var print in ent.Comp.Prints)
-        {
-            if (print.Delay > longestPrintDelay)
-                longestPrintDelay = print.Delay;
-        }
-        ent.Comp.NextPrint = _timing.CurTime + longestPrintDelay;
+        ent.Comp.NextPrint = _timing.CurTime + ent.Comp.PrintDelay;
         DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextPrint));
+
+        _material.UpdateMaterialWhitelist(ent.Owner);
+    }
+
+    private void OnGetMaterialWhitelist(Entity<GeneticsConsoleComponent> ent, ref GetMaterialWhitelistEvent args)
+    {
+        args.Whitelist.Add(ent.Comp.Biomass);
+    }
+
+    private void OnExamined(Entity<GeneticsConsoleComponent> ent, ref ExaminedEvent args)
+    {
+        if (!_materialQuery.TryComp(ent, out var storage))
+            return;
+
+        var biomass = _material.GetMaterialAmount(ent.Owner, ent.Comp.Biomass, storage);
+        args.PushMarkup(Loc.GetString("genetics-console-examined", ("biomass", biomass)));
     }
 
     private void OnScramble(Entity<GeneticsConsoleComponent> ent, ref GeneticsConsoleScrambleMessage args)
@@ -317,17 +334,24 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             disk.Comp.Mutation is not {} mutation)
             return;
 
-        var delay = ent.Comp.Prints[i].Delay;
-        ent.Comp.NextPrint = now + delay;
+        var user = args.Actor;
+        var cost = ent.Comp.Prints[i].Cost;
+        if (!TryUseBiomass(ent, cost))
+        {
+            _popup.PopupClient(Loc.GetString("genetics-console-missing-biomass"), ent, user);
+            return;
+        }
+
+        ent.Comp.NextPrint = now + ent.Comp.PrintDelay;
         DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextPrint));
 
         var proto = ent.Comp.Prints[i].Proto;
         var item = PredictedSpawnAtPosition(proto, Transform(ent).Coordinates);
         _transform.SetLocalRotation(item, 0); // chud engine
         _mutator.AddMutation(item, mutation);
-        _audio.PlayPredicted(ent.Comp.PrintSound, ent, args.Actor);
+        _audio.PlayPredicted(ent.Comp.PrintSound, ent, user);
 
-        _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"Printed {ToPrettyString(item)} with {mutation} by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"Printed {ToPrettyString(item)} with {mutation} by {ToPrettyString(user)} using console {ToPrettyString(ent)}");
     }
 
     private void Speak(EntityUid uid, string suffix)
@@ -355,6 +379,14 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             ('X', GeneticsCycle.Last) => 'T',
             _ => b // how
         };
+
+    public bool TryUseBiomass(Entity<GeneticsConsoleComponent> ent, int cost)
+    {
+        if (!_materialQuery.TryComp(ent, out var storage))
+            return true; // console doesnt use materials, allow it
+
+        return _material.TryChangeMaterialAmount(ent.Owner, ent.Comp.Biomass, -cost, storage);
+    }
 
     /// <summary>
     /// Tries to sequences a mutation, either activating it in the mob or damaging it.

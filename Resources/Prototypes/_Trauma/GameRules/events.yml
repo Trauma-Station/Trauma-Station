@@ -19,7 +19,7 @@
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     # - id: SlaughterDemonMidround - Wizard/Ninja only antag, maybe devil eventually
-    # - id: XenomorphsInfestation
+    - id: XenomorphsInfestation
     # TOOD: remove these if they fucking suck lmao
     - id: GreyTideAntagMidround
     - id: SingulothKnightsMidround
