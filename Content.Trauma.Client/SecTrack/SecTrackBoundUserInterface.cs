@@ -4,7 +4,7 @@ using Content.Trauma.Shared.SecTrack;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
-namespace Content.Trauma.Client.Corvax.SecTrack;
+namespace Content.Trauma.Client.SecTrack;
 
 [UsedImplicitly]
 public sealed class SecTrackBoundUserInterface : BoundUserInterface

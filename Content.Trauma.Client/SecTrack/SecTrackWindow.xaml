@@ -5,7 +5,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <ui:SecTrackWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:ui="clr-namespace:Content.Trauma.Client.Corvax.SecTrack"
+    xmlns:ui="clr-namespace:Content.Trauma.Client.SecTrack"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
     SetSize="1000 650" MouseFilter="Stop">

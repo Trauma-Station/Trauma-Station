@@ -2,7 +2,7 @@
 
 using System.Linq;
 using System.Numerics;
-using Content.Trauma.Client.Corvax.SecTrack.Stylesheets;
+using Content.Trauma.Client.SecTrack.Stylesheets;
 using Content.Shared.Medical.SuitSensor;
 using Content.Trauma.Shared.SecTrack;
 using Content.Shared.StatusIcon;
@@ -14,7 +14,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Trauma.Client.Corvax.SecTrack;
+namespace Content.Trauma.Client.SecTrack;
 
 [GenerateTypedNameReferences]
 public sealed partial class SquadEntry : PanelContainer

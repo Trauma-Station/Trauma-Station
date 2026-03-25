@@ -2,7 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Trauma.Shared.Overlays;
+namespace Content.Trauma.Shared.SecTrack;
 
 /// <summary>
 ///     This component allows you to see security squad of mobs.

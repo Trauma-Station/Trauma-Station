@@ -2,7 +2,7 @@
 
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
-using Content.Trauma.Shared.Overlays;
+using Content.Trauma.Shared.SecTrack;
 using Content.Trauma.Shared.Tackle;
 
 namespace Content.Trauma.Shared.Inventory;
