@@ -87,7 +87,7 @@ jobs:
         path: bin/
 
     - name: Link runtimes
-      run: ln -s bin/Content.IntegrationTests/runtimes bin/Content.Tests/
+      run: ln -s $(pwd)/bin/Content.IntegrationTests/runtimes bin/Content.Tests/
 
     - name: Run Content.Tests
       run: dotnet test bin/Content.Tests/Content.Tests.dll -- NUnit.ConsoleOut=0 NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
@@ -221,7 +221,7 @@ jobs:
         path: bin/
 
     - name: Link runtimes
-      run: ln -s bin/Content.IntegrationTests/runtimes bin/Content.MapRenderer/
+      run: ln -s $(pwd)/bin/Content.IntegrationTests/runtimes bin/Content.MapRenderer/
 
     - name: Run Map Renderer
       run: dotnet exec bin/Content.MapRenderer/Content.MapRenderer.dll Dev
