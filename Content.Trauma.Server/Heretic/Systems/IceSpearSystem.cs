@@ -1,12 +1,12 @@
 using Content.Goobstation.Common.Religion;
 using Content.Server.Damage.Systems;
-using Content.Shared._Goobstation.Wizard.Traps;
 using Content.Shared.Actions;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Throwing;
+using Content.Trauma.Shared.Heretic.Components;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Server.Heretic.Systems;
@@ -34,7 +34,7 @@ public sealed class IceSpearSystem : EntitySystem
 
         if (!HasComp<GhostComponent>(args.Target) &&
             HasComp<TemperatureComponent>(args.Target) && !hitNullRodUser)
-            EnsureComp<IceCubeComponent>(args.Target);
+            EnsureComp<Shared.Wizard.Traps.IceCubeComponent>(args.Target);
 
         if (Exists(ent.Comp.ActionId))
             _action.SetIfBiggerCooldown(ent.Comp.ActionId, ent.Comp.ShatterCooldown);

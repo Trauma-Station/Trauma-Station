@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Gibbing;

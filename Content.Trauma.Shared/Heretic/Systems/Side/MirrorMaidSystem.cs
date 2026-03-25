@@ -1,5 +1,4 @@
 using Content.Medical.Common.Targeting;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
 using Content.Shared.Examine;

@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.Heretic.Components;
 public sealed partial class HereticCombatMarkComponent : BaseSpriteOverlayComponent
 {
     [DataField, AutoNetworkedField]
-    public string Path = "Blade";
+    public HereticPath Path = HereticPath.Blade;
 
     [DataField]
     public float MaxDisappearTime = 15f;

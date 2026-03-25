@@ -9,5 +9,5 @@ public sealed partial class HereticBladeUserBonusDamageComponent : Component
     public float BonusMultiplier = 0.5f;
 
     [DataField]
-    public string? Path = "Flesh";
+    public HereticPath? Path = HereticPath.Flesh;
 }

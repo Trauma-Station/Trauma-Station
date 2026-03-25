@@ -2,9 +2,6 @@ using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Shitcode.Heretic.Curses;
-using Content.Shared._Shitcode.Heretic.Rituals;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
@@ -26,6 +23,7 @@ using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Verbs;
 using Content.Trauma.Server.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Curses;
+using Content.Trauma.Shared.Heretic.Curses.Components;
 using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
@@ -60,24 +58,24 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
 
         SubscribeLocalEvent<Shared.Heretic.Rituals.HereticRitualRuneComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
 
-        SubscribeLocalEvent<Shared.Heretic.Curses.Components.HereticCurseProviderComponent, CurseSelectedMessage>(OnCurseSelected);
-        SubscribeLocalEvent<Shared.Heretic.Curses.Components.HereticCurseProviderComponent, HandDeselectedEvent>(OnHandDeselected);
-        SubscribeLocalEvent<Shared.Heretic.Curses.Components.HereticCurseProviderComponent, GotUnequippedHandEvent>(OnHandUnequipped);
-        SubscribeLocalEvent<Shared.Heretic.Curses.Components.HereticCurseProviderComponent, ItemToggledEvent>(OnToggle);
+        SubscribeLocalEvent<HereticCurseProviderComponent, CurseSelectedMessage>(OnCurseSelected);
+        SubscribeLocalEvent<HereticCurseProviderComponent, HandDeselectedEvent>(OnHandDeselected);
+        SubscribeLocalEvent<HereticCurseProviderComponent, GotUnequippedHandEvent>(OnHandUnequipped);
+        SubscribeLocalEvent<HereticCurseProviderComponent, ItemToggledEvent>(OnToggle);
     }
 
-    private void OnToggle(Entity<Shared.Heretic.Curses.Components.HereticCurseProviderComponent> ent, ref ItemToggledEvent args)
+    private void OnToggle(Entity<HereticCurseProviderComponent> ent, ref ItemToggledEvent args)
     {
         if (!args.Activated)
             CloseUi(ent);
     }
 
-    private void OnHandDeselected(Entity<Shared.Heretic.Curses.Components.HereticCurseProviderComponent> ent, ref HandDeselectedEvent args)
+    private void OnHandDeselected(Entity<HereticCurseProviderComponent> ent, ref HandDeselectedEvent args)
     {
         CloseUi(ent);
     }
 
-    private void OnHandUnequipped(Entity<Shared.Heretic.Curses.Components.HereticCurseProviderComponent> ent, ref GotUnequippedHandEvent args)
+    private void OnHandUnequipped(Entity<HereticCurseProviderComponent> ent, ref GotUnequippedHandEvent args)
     {
         CloseUi(ent);
     }
@@ -87,7 +85,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
         _ui.CloseUi(uid, HereticCurseUiKey.Key);
     }
 
-    private void OnCurseSelected(Entity<Shared.Heretic.Curses.Components.HereticCurseProviderComponent> ent, ref CurseSelectedMessage args)
+    private void OnCurseSelected(Entity<HereticCurseProviderComponent> ent, ref CurseSelectedMessage args)
     {
         if (!_heretic.IsHereticOrGhoul(args.Actor))
         {
@@ -209,7 +207,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
         if (!_heretic.IsHereticOrGhoul(args.User))
             return;
 
-        if (!TryComp(args.Using, out Shared.Heretic.Curses.Components.HereticCurseProviderComponent? provider))
+        if (!TryComp(args.Using, out HereticCurseProviderComponent? provider))
             return;
 
         var item = args.Using.Value;
@@ -229,7 +227,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
         args.Verbs.Add(verb);
     }
 
-    private void CurseCrewmember(Entity<Shared.Heretic.Curses.Components.HereticCurseProviderComponent> provider,
+    private void CurseCrewmember(Entity<HereticCurseProviderComponent> provider,
         EntityUid rune,
         EntityUid user,
         bool popup,
@@ -248,7 +246,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
         _ui.SetUiState(provider.Owner, HereticCurseUiKey.Key, new PickCurseVictimState(targets));
     }
 
-    private HashSet<CurseData> GetTargets(Entity<Shared.Heretic.Curses.Components.HereticCurseProviderComponent> provider,
+    private HashSet<CurseData> GetTargets(Entity<HereticCurseProviderComponent> provider,
         EntityUid rune,
         EntityUid user,
         DnaDict? dnaDict = null)

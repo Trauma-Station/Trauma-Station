@@ -2,6 +2,7 @@ using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Projectiles;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Map;
@@ -37,14 +38,14 @@ public abstract partial class SharedHereticAbilitySystem
         var coords = Transform(ent).Coordinates;
 
         Heretic.TryGetHereticComponent(ent, out var heretic, out _);
-        var strength = heretic is {CurrentPath: "Cosmos"} ? heretic.PathStage : 10;
+        var strength = heretic is {CurrentPath: HereticPath.Cosmos} ? heretic.PathStage : 10;
 
         _starMark.ApplyStarMarkInRange(coords, ent, args.Range);
         _starMark.SpawnCosmicFields(coords, 2, strength);
 
         PredictedSpawnAtPosition(args.Effect, coords);
 
-        if (heretic is {Ascended: true, CurrentPath: "Cosmos"})
+        if (heretic is {Ascended: true, CurrentPath: HereticPath.Cosmos})
         {
             _starMark.SpawnCosmicFieldLine(coords, DirectionFlag.North, -4, 4, 3, strength);
             _starMark.SpawnCosmicFieldLine(coords, DirectionFlag.East, -4, 4, 3, strength);
@@ -62,7 +63,7 @@ public abstract partial class SharedHereticAbilitySystem
         var ent = args.Performer;
 
         Heretic.TryGetHereticComponent(ent, out var heretic, out _);
-        var strength = heretic is {CurrentPath: "Cosmos"} ? heretic.PathStage : 10;
+        var strength = heretic is {CurrentPath: HereticPath.Cosmos} ? heretic.PathStage : 10;
 
         if (Exists(starBlast.Projectile))
         {
@@ -129,7 +130,7 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void PullVictims(EntityUid user, EntityCoordinates coords, int strength)
     {
-        foreach (var mob in GetNearbyPeople(user, 2f, "Cosmos", coords))
+        foreach (var mob in GetNearbyPeople(user, 2f, HereticPath.Cosmos, coords))
         {
             if (_starMark.TryApplyStarMark(mob.AsNullable()))
                 _throw.TryThrow(mob, coords);

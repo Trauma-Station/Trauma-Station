@@ -7,12 +7,6 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Shared.Heretic.Events;
 
 [ByRefEvent]
-public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Volume);
-
-[ByRefEvent]
-public record struct ImmuneToPoisonDamageEvent(bool Immune = false);
-
-[ByRefEvent]
 public readonly record struct SetGhoulBoundHereticEvent(EntityUid Heretic, EntityUid HereticMind, EntityUid? Ritual);
 
 [ByRefEvent]

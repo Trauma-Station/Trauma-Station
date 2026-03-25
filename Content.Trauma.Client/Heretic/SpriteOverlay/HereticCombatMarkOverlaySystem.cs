@@ -18,7 +18,7 @@ public sealed class HereticCombatMarkOverlaySystem : SpriteOverlaySystem<Heretic
 
     protected override int? GetLayerIndex(Entity<SpriteComponent> ent, HereticCombatMarkComponent comp)
     {
-        return comp.Path == "Cosmos" ? 0 : null; // Cosmos mark should be behind the sprite
+        return comp.Path == HereticPath.Cosmos ? 0 : null; // Cosmos mark should be behind the sprite
     }
 
     protected override void UpdateOverlayLayer(Entity<SpriteComponent> ent,
@@ -28,7 +28,7 @@ public sealed class HereticCombatMarkOverlaySystem : SpriteOverlaySystem<Heretic
     {
         base.UpdateOverlayLayer(ent, comp, layer, source);
 
-        var state = comp.Path.ToLower();
+        var state = comp.Path.ToString().ToLower();
 
         Sprite.LayerSetRsiState(ent.AsNullable(), layer, state);
     }

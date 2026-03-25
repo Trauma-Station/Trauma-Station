@@ -2,6 +2,7 @@ using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Shared.Polymorph;
 using Content.Shared.Tag;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Robust.Shared.Prototypes;
 
@@ -141,7 +142,7 @@ public sealed partial class PathBasedSpawnEffect : BaseRitualEffect<PathBasedSpa
     public EntProtoId FallbackOutput;
 
     [DataField(required: true)]
-    public Dictionary<string, EntProtoId> Output;
+    public Dictionary<HereticPath, EntProtoId> Output;
 }
 
 public sealed partial class FindLostLimitedOutputEffect : OutputRitualEffect<FindLostLimitedOutputEffect>

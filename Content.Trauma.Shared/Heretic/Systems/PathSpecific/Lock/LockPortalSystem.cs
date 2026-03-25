@@ -1,5 +1,4 @@
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Mobs.Components;

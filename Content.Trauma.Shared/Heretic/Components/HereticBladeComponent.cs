@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Heretic.Components;
 public sealed partial class HereticBladeComponent : Component
 {
     [DataField]
-    public string? Path;
+    public HereticPath? Path;
 
     [DataField]
     public SoundSpecifier? ShatterSound = new SoundCollectionSpecifier("GlassBreak");

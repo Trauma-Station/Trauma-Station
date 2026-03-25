@@ -1,8 +1,8 @@
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Shared._Shitcode.Heretic.Curses;
 using Content.Shared.Atmos.Components;
 using Content.Shared.StatusEffectNew.Components;
+using Content.Trauma.Shared.Heretic.Curses.Components;
 
 namespace Content.Trauma.Server.Heretic.Curses;
 
@@ -14,7 +14,7 @@ public sealed partial class HereticCurseSystem
 
         var curTime = Timing.CurTime;
 
-        var corrosionQuery = EntityQueryEnumerator<Shared.Heretic.Curses.Components.CurseOfCorrosionStatusEffectComponent, StatusEffectComponent>();
+        var corrosionQuery = EntityQueryEnumerator<CurseOfCorrosionStatusEffectComponent, StatusEffectComponent>();
         while (corrosionQuery.MoveNext(out _, out var corrosion, out var status))
         {
             if (corrosion.NextVomit > curTime || status.AppliedTo == null || status.EndEffectTime < curTime)
@@ -35,7 +35,7 @@ public sealed partial class HereticCurseSystem
 
         var flammableQuery = GetEntityQuery<FlammableComponent>();
 
-        var flamesQuery = EntityQueryEnumerator<Shared.Heretic.Curses.Components.CurseOfFlamesStatusEffectComponent, StatusEffectComponent>();
+        var flamesQuery = EntityQueryEnumerator<CurseOfFlamesStatusEffectComponent, StatusEffectComponent>();
         while (flamesQuery.MoveNext(out _, out var flames, out var status))
         {
             if (flames.NextIgnition > curTime || status.AppliedTo is not { } target || status.EndEffectTime < curTime)

@@ -2,10 +2,10 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Common.Temperature;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Temperature.Components;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 
@@ -64,7 +64,7 @@ public abstract class SharedVoidCurseSystem : EntitySystem
         if (!HasComp<MobStateComponent>(uid))
             return false; // ignore non mobs because holy shit
 
-        if (_heretic.TryGetHereticComponent(uid, out var h, out _) && h.CurrentPath == "Void" ||
+        if (_heretic.TryGetHereticComponent(uid, out var h, out _) && h.CurrentPath == HereticPath.Void ||
             HasComp<GhoulComponent>(uid))
             return false;
 

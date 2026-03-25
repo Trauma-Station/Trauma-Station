@@ -38,6 +38,7 @@ using Content.Shared.Timing;
 using Content.Shared.Trigger;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Content.Trauma.Shared.Heretic.Components.Side;
@@ -117,15 +118,15 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         SubscribeLocalEvent<AreaMansusGraspComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<AreaMansusGraspComponent, AreaGraspChannelDoAfterEvent>(OnDoAfter);
 
-        SubscribeLocalEvent<Components.MansusGraspComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<Components.MansusGraspComponent, MeleeHitEvent>(OnMelee);
+        SubscribeLocalEvent<MansusGraspComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<MansusGraspComponent, MeleeHitEvent>(OnMelee);
         SubscribeLocalEvent<RustGraspComponent, AfterInteractEvent>(OnRustInteract);
 
-        SubscribeLocalEvent<Components.MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
-        SubscribeLocalEvent<Components.MansusGraspBlockTriggerComponent, ActionAttemptEvent>(OnActionAttempt);
+        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
+        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, ActionAttemptEvent>(OnActionAttempt);
     }
 
-    private void OnActionAttempt(Entity<Components.MansusGraspBlockTriggerComponent> ent, ref ActionAttemptEvent args)
+    private void OnActionAttempt(Entity<MansusGraspBlockTriggerComponent> ent, ref ActionAttemptEvent args)
     {
         if (!Status.HasStatusEffect(args.User, GraspAffectedStatus))
             return;
@@ -133,7 +134,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("mansus-grasp-trigger-fail"), args.User, args.User);
     }
 
-    private void OnAttemptTrigger(Entity<Components.MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
+    private void OnAttemptTrigger(Entity<MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
     {
         if (args.User is {} user && Status.HasStatusEffect(user, GraspAffectedStatus))
         {
@@ -164,7 +165,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             return;
 
         if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _) ||
-            !TryComp(ent, out Components.MansusGraspComponent? grasp) || args.Handled)
+            !TryComp(ent, out MansusGraspComponent? grasp) || args.Handled)
         {
             PredictedQueueDel(ent.Owner);
             return;
@@ -255,19 +256,19 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        ent.Comp.NextPath = _random.Pick(ent.Comp.Paths);
+        ent.Comp.NextPath = _random.Pick(Enum.GetValuesAsUnderlyingType<HereticPath>().Cast<HereticPath>().ToList());
         Dirty(ent);
     }
 
     public bool TryApplyGraspEffectAndMark(EntityUid user,
-        Entity<Components.HereticComponent> heretic,
+        Entity<HereticComponent> heretic,
         EntityUid target,
         EntityUid? grasp,
         out bool triggerGrasp)
     {
         triggerGrasp = true;
 
-        if (heretic.Comp.CurrentPath == null)
+        if (heretic.Comp.CurrentPath is not { } path)
             return true;
 
         if (heretic.Comp.PathStage >= 2)
@@ -280,12 +281,12 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         }
 
         if (heretic.Comp.PathStage >= 3)
-            ApplyMark(target, heretic.Comp.CurrentPath);
+            ApplyMark(target, path);
 
         return true;
     }
 
-    public bool GraspTarget(Entity<Components.MansusGraspComponent> grasp,
+    public bool GraspTarget(Entity<MansusGraspComponent> grasp,
         EntityUid user,
         EntityUid target,
         bool deleteGraspOnUse = true)
@@ -344,21 +345,21 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         return true;
     }
 
-    public void ApplyMark(EntityUid target, string path)
+    public void ApplyMark(EntityUid target, HereticPath path)
     {
         if (!HasComp<MobStateComponent>(target))
             return;
 
         RemComp<Trauma.Shared.Heretic.Components.PathSpecific.Cosmos.HereticCosmicMarkComponent>(target);
-        var markComp = EnsureComp<Components.HereticCombatMarkComponent>(target);
+        var markComp = EnsureComp<HereticCombatMarkComponent>(target);
         markComp.DisappearTime = markComp.MaxDisappearTime;
         markComp.Path = path;
-        markComp.Repetitions = path == "Ash" ? 5 : 1;
+        markComp.Repetitions = path == HereticPath.Ash ? 5 : 1;
         Dirty(target, markComp);
         var ev = new UpdateCombatMarkAppearanceEvent();
         RaiseLocalEvent(target, ref ev);
 
-        if (_net.IsClient || path != "Cosmos")
+        if (_net.IsClient || path != HereticPath.Cosmos)
             return;
 
         var cosmosMark = EnsureComp<Trauma.Shared.Heretic.Components.PathSpecific.Cosmos.HereticCosmicMarkComponent>(target);
@@ -367,7 +368,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     }
 
     public bool ApplyGraspEffect(EntityUid performer,
-        Entity<Components.HereticComponent> heretic,
+        Entity<HereticComponent> heretic,
         EntityUid target,
         EntityUid? grasp,
         out bool applyMark,
@@ -378,7 +379,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
         switch (heretic.Comp.CurrentPath)
         {
-            case "Ash":
+            case HereticPath.Ash:
             {
                 var timeSpan = TimeSpan.FromSeconds(5f);
                 _statusEffect.TryAddStatusEffect(target,
@@ -389,7 +390,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 break;
             }
 
-            case "Blade":
+            case HereticPath.Blade:
             {
                 if (grasp != null && heretic.Comp.PathStage >= 7 && _tag.HasTag(target, HereticBladeBlade))
                 {
@@ -413,7 +414,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 break;
             }
 
-            case "Lock":
+            case HereticPath.Lock:
             {
                 if (TryComp<MechComponent>(target, out var mech) && mech.PilotSlot.ContainedEntity is { } pilot)
                 {
@@ -441,7 +442,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 break;
             }
 
-            case "Flesh":
+            case HereticPath.Flesh:
             {
                 if (TryComp<MobStateComponent>(target, out var mobState) && mobState.CurrentState != MobState.Alive &&
                     !HasComp<BorgChassisComponent>(target))
@@ -485,13 +486,13 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 break;
             }
 
-            case "Void":
+            case HereticPath.Void:
             {
                 _voidCurse.DoCurse(target, 2);
                 break;
             }
 
-            case "Rust":
+            case HereticPath.Rust:
             {
                 if (TryComp(target, out StationAiHolderComponent? aiHolder)) // Kill AI
                     PredictedQueueDel(aiHolder.Slot.ContainerSlot?.ContainedEntity);
@@ -516,7 +517,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 break;
             }
 
-            case "Cosmos":
+            case HereticPath.Cosmos:
             {
                 if (_starMark.TryApplyStarMark(target))
                     _starMark.SpawnCosmicField(Transform(performer).Coordinates, heretic.Comp.PathStage, predicted: false);
@@ -534,7 +535,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
         if (!args.CanReach || !_heretic.TryGetHereticComponent(args.User, out var heretic, out _) ||
             !TryComp(uid, out UseDelayComponent? delay) || _delay.IsDelayed((uid, delay), comp.Delay) ||
-            !TryComp(uid, out Components.MansusGraspComponent? grasp))
+            !TryComp(uid, out MansusGraspComponent? grasp))
             return;
 
         if (args.Target is not { } target || _whitelist.IsWhitelistPass(grasp.Blacklist, target))
@@ -592,7 +593,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         }
     }
 
-    private void OnMelee(Entity<Components.MansusGraspComponent> ent, ref MeleeHitEvent args)
+    private void OnMelee(Entity<MansusGraspComponent> ent, ref MeleeHitEvent args)
     {
         if (args.HitEntities.Count == 0)
             return;
@@ -606,7 +607,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         args.Handled = GraspTarget(ent, args.User, target);
     }
 
-    private void OnAfterInteract(Entity<Components.MansusGraspComponent> ent, ref AfterInteractEvent args)
+    private void OnAfterInteract(Entity<MansusGraspComponent> ent, ref AfterInteractEvent args)
     {
         if (!args.CanReach)
             return;
@@ -617,7 +618,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         args.Handled = GraspTarget(ent, args.User, target);
     }
 
-    public virtual void InvokeGrasp(EntityUid user, Entity<Components.MansusGraspComponent>? ent)
+    public virtual void InvokeGrasp(EntityUid user, Entity<MansusGraspComponent>? ent)
     {
         var sound = ent == null ? DefaultSound : ent.Value.Comp.Sound;
         _audio.PlayPredicted(sound, user, user);

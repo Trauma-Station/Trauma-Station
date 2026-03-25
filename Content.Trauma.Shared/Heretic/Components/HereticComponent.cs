@@ -49,13 +49,11 @@ public sealed partial class HereticComponent : Component
     [DataField, AutoNetworkedField]
     public int MaxTargets = 6;
 
-    // hardcoded paths because i hate it
-    // "Ash", "Lock", "Flesh", "Void", "Blade", "Rust"
     /// <summary>
     ///     Indicates a path the heretic is on.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public string? CurrentPath;
+    public HereticPath? CurrentPath;
 
     /// <summary>
     ///     Indicates a stage of a path the heretic is on. 0 is no path, 10 is ascension
@@ -160,7 +158,7 @@ public sealed partial class HereticComponent : Component
     public bool CanBreakBlade => !Ascended && KnowledgeTracker < LockBladeBreakKnowledgeAmount;
 
     [ViewVariables]
-    public bool ShouldShowAura => CurrentPath != "Lock" && (Ascended || CanAscend && !CanBreakBlade);
+    public bool ShouldShowAura => CurrentPath != HereticPath.Lock && (Ascended || CanAscend && !CanBreakBlade);
 
     [DataField]
     public LocId BreakBladeAbilityLostMessage = "heretic-blade-break-ability-lost-message";
@@ -209,7 +207,13 @@ public sealed partial class SacrificeTargetData
 }
 
 [Serializable, NetSerializable]
-public enum InfusedBladeVisuals
+public enum HereticPath : byte
 {
-    Infused,
+    Ash,
+    Void,
+    Flesh,
+    Rust,
+    Blade,
+    Lock,
+    Cosmos,
 }

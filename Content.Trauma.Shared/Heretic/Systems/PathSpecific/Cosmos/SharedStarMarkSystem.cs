@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Goobstation.Common.Religion;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -46,8 +45,6 @@ public abstract class SharedStarMarkSystem : EntitySystem
 
     public static readonly EntProtoId StarMarkStatusEffect = "StatusEffectStarMark";
     public static readonly EntProtoId CosmicField = "WallFieldCosmic";
-
-    private const float CosmosPassiveStaminaHealInterval = 1f;
 
     public override void Initialize()
     {
@@ -164,7 +161,7 @@ public abstract class SharedStarMarkSystem : EntitySystem
                                      pullable.Puller is { } puller &&
                                      (HasComp<StarGazerComponent>(puller) ||
                                       _heretic.TryGetHereticComponent(puller, out var heretic, out _) &&
-                                      heretic.CurrentPath == "Cosmos")))
+                                      heretic.CurrentPath == HereticPath.Cosmos)))
             args.Cancelled = true;
     }
 
@@ -261,7 +258,8 @@ public abstract class SharedStarMarkSystem : EntitySystem
     public bool TryApplyStarMark(Entity<MobStateComponent?> entity)
     {
         if (!Resolve(entity, ref entity.Comp, false) ||
-            _heretic.TryGetHereticComponent(entity.Owner, out var heretic, out _) && heretic.CurrentPath == "Cosmos" ||
+            _heretic.TryGetHereticComponent(entity.Owner, out var heretic, out _) &&
+            heretic.CurrentPath == HereticPath.Cosmos ||
             HasComp<GhoulComponent>(entity))
             return false;
 

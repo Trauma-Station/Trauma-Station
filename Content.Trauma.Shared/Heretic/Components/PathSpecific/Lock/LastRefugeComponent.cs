@@ -1,4 +1,4 @@
-using Content.Shared._Shitcode.Heretic.Effects;
+using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 

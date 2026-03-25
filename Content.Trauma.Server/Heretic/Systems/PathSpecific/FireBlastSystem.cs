@@ -8,6 +8,7 @@ using Content.Server.Stunnable;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 using Content.Trauma.Shared.Heretic.Systems;
@@ -64,7 +65,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
             .Select(x => (x, flammableQuery.CompOrNull(x)))
             .Where(x => x.Item2 != null && x.Item1 != origin.Owner &&
                         (!_heretic.TryGetHereticComponent(x.Item1, out var heretic, out _) ||
-                         heretic.CurrentPath != "Ash") &&
+                         heretic.CurrentPath != HereticPath.Ash) &&
                         !ghoulQuery.HasComp(x.Item1) &&
                         mobStateQuery.HasComp(x.Item1));
 
@@ -117,7 +118,7 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
                 (Xform.GetWorldPosition(x) - pos).LengthSquared()))
             .Where(x => x is { Item2: not null, Item3: not null } && x.Item1 != origin.Owner &&
                         (!_heretic.TryGetHereticComponent(x.Item1, out var heretic, out _) ||
-                         heretic.CurrentPath != "Ash") &&
+                         heretic.CurrentPath != HereticPath.Ash) &&
                         !ghoulQuery.HasComp(x.Item1) &&
                         !Status.HasEffectComp<Shared.Heretic.Components.StatusEffects.FireBlastedStatusEffectComponent>(x.Item1) &&
                         !origin.Comp.HitEntities.Contains(x.Item1))
@@ -203,7 +204,8 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
             if (ghoulQuery.HasComp(ent.HitEntity))
                 continue;
 
-            if (_heretic.TryGetHereticComponent(ent.HitEntity, out var heretic, out _) && heretic.CurrentPath == "Ash")
+            if (_heretic.TryGetHereticComponent(ent.HitEntity, out var heretic, out _) &&
+                heretic.CurrentPath == HereticPath.Ash)
                 continue;
 
             if (flammableQuery.TryComp(ent.HitEntity, out var flam))

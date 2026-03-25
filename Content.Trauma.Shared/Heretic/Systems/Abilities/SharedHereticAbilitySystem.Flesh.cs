@@ -5,6 +5,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Trauma.Common.Heretic;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 using Content.Trauma.Shared.Heretic.Events;
@@ -106,8 +108,8 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnFleshSurgeryUse(Entity<FleshSurgeryComponent> ent, ref UseInHandEvent args)
     {
-        if (!Heretic.TryGetHereticComponent(args.User, out var heretic, out _) || heretic.CurrentPath != "Flesh" ||
-            !heretic.Ascended)
+        if (!Heretic.TryGetHereticComponent(args.User, out var heretic, out _) ||
+            heretic.CurrentPath != HereticPath.Flesh || !heretic.Ascended)
             return;
 
         var xform = Transform(args.User);

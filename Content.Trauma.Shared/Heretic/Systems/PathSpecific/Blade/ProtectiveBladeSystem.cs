@@ -2,7 +2,6 @@
 
 using System.Linq;
 using System.Numerics;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Follower;
 using Content.Shared.Hands.EntitySystems;

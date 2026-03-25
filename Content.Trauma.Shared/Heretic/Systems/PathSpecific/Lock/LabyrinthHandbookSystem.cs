@@ -1,6 +1,5 @@
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Common.Singularity;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Examine;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;

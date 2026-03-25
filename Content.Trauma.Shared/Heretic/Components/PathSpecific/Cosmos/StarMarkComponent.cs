@@ -1,4 +1,3 @@
-using Content.Shared._Shitcode.Heretic.SpriteOverlay;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 

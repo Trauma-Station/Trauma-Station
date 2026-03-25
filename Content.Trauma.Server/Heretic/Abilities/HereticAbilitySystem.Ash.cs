@@ -2,13 +2,12 @@
 
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Server.Heretic.Components.PathSpecific;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Atmos.Components;
-using Content.Shared.Heretic;
 using Content.Shared.Mobs;
+using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Events;
 using Robust.Server.GameObjects;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
@@ -68,10 +67,10 @@ public sealed partial class HereticAbilitySystem
 
         Heretic.TryGetHereticComponent(args.Performer, out var heretic, out _);
 
-        if (heretic is not { Ascended: true, CurrentPath: "Ash" })
+        if (heretic is not { Ascended: true, CurrentPath: HereticPath.Ash })
             _flammable.Extinguish(args.Performer);
 
-        var lookup = GetNearbyPeople(args.Performer, args.Range, heretic?.CurrentPath ?? "Ash");
+        var lookup = GetNearbyPeople(args.Performer, args.Range, heretic?.CurrentPath ?? HereticPath.Ash);
         var toHeal = 0f;
 
         var flamQuery = GetEntityQuery<FlammableComponent>();

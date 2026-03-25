@@ -2,9 +2,9 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Server.Polymorph.Components;
-using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared.Heretic;
 using Content.Shared.Polymorph;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
+using Content.Trauma.Shared.Heretic.Events;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
 
@@ -16,10 +16,10 @@ public sealed partial class HereticAbilitySystem
 
         SubscribeLocalEvent<HereticVoidPrisonEvent>(OnVoidPrison);
 
-        SubscribeLocalEvent<Shared.Heretic.Components.PathSpecific.Void.VoidPrisonComponent, PolymorphedEvent>(OnPrisonRevert);
+        SubscribeLocalEvent<VoidPrisonComponent, PolymorphedEvent>(OnPrisonRevert);
     }
 
-    private void OnPrisonRevert(Entity<Shared.Heretic.Components.PathSpecific.Void.VoidPrisonComponent> ent, ref PolymorphedEvent args)
+    private void OnPrisonRevert(Entity<VoidPrisonComponent> ent, ref PolymorphedEvent args)
     {
         if (!args.IsRevert)
             return;
@@ -32,7 +32,7 @@ public sealed partial class HereticAbilitySystem
     {
         var target = args.Target;
 
-        if (!HasComp<PolymorphableComponent>(target) || HasComp<Shared.Heretic.Components.PathSpecific.Void.VoidPrisonComponent>(target))
+        if (!HasComp<PolymorphableComponent>(target) || HasComp<VoidPrisonComponent>(target))
             return;
 
         if (!TryUseAbility(args))

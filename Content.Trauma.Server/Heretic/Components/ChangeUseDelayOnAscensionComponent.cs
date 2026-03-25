@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Shared.Heretic.Components;
+
 namespace Content.Trauma.Server.Heretic.Components;
 
 [RegisterComponent]
@@ -9,5 +11,5 @@ public sealed partial class ChangeUseDelayOnAscensionComponent : Component
     public TimeSpan NewUseDelay;
 
     [DataField]
-    public string? RequiredPath;
+    public HereticPath? RequiredPath;
 }

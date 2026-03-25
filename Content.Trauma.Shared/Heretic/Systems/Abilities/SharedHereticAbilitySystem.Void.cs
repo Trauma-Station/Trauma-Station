@@ -4,6 +4,7 @@ using Content.Medical.Common.Targeting;
 using Content.Shared.Gravity;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Systems;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 using Content.Trauma.Shared.Heretic.Events;
 
@@ -52,7 +53,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         var ent = args.Performer;
 
-        var path = heretic?.CurrentPath ?? "Void";
+        var path = heretic?.CurrentPath ?? HereticPath.Void;
 
         var ev = new TeleportAttemptEvent();
         RaiseLocalEvent(ent, ref ev);
@@ -74,7 +75,7 @@ public abstract partial class SharedHereticAbilitySystem
         _transform.SetCoordinates(ent, xform, args.Target);
         PredictedSpawnAtPosition(args.OutEffect, args.Target);
 
-        var condition = path == "Void";
+        var condition = path == HereticPath.Void;
 
         people.AddRange(GetNearbyPeople(ent, args.Radius, path));
         foreach (var pookie in people.ToHashSet())
@@ -101,8 +102,8 @@ public abstract partial class SharedHereticAbilitySystem
 
         var ent = args.Performer;
 
-        var path = heretic?.CurrentPath ?? "Void";
-        var condition = path == "Void";
+        var path = heretic?.CurrentPath ?? HereticPath.Void;
+        var condition = path == HereticPath.Void;
         var coords = Transform(ent).Coordinates;
 
         var pookies = GetNearbyPeople(ent, args.Radius, path);

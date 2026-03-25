@@ -180,7 +180,7 @@ public abstract class SharedHereticSystem : EntitySystem
             SpawnRituals(ent.Comp2, data.RitualPrototypes, PlayerMan.GetSessionById(userId));
 
         // set path if out heretic doesn't have it, or if it's different from whatever he has atm
-        if (string.IsNullOrWhiteSpace(ent.Comp2.CurrentPath))
+        if (ent.Comp2.CurrentPath == null)
         {
             if (!data.SideKnowledge && ent.Comp2.CurrentPath != data.Path)
                 ent.Comp2.CurrentPath = data.Path;

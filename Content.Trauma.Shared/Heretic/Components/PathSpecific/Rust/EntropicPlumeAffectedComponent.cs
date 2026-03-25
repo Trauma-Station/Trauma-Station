@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Shitcode.Heretic.SpriteOverlay;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared.Flash;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
 
@@ -11,10 +11,10 @@ public sealed partial class HereticAbilitySystem
     {
         base.SubscribeRust();
 
-        SubscribeLocalEvent<Shared.Heretic.Components.PathSpecific.Rust.RustbringerComponent, FlashAttemptEvent>(OnFlashAttempt);
+        SubscribeLocalEvent<RustbringerComponent, FlashAttemptEvent>(OnFlashAttempt);
     }
 
-    private void OnFlashAttempt(Entity<Shared.Heretic.Components.PathSpecific.Rust.RustbringerComponent> ent, ref FlashAttemptEvent args)
+    private void OnFlashAttempt(Entity<RustbringerComponent> ent, ref FlashAttemptEvent args)
     {
         if (!IsTileRust(Transform(ent).Coordinates, out _))
             return;

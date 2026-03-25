@@ -1,4 +1,4 @@
-using Content.Shared._Shitcode.Heretic.Systems;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
 
@@ -29,7 +29,7 @@ public abstract partial class SharedHereticAbilitySystem
         fireBlasted.Damage = -2f;
 
         if (!Heretic.TryGetHereticComponent(ent, out var heretic, out _) ||
-            heretic is not { Ascended: true, CurrentPath: "Ash" })
+            heretic is not { Ascended: true, CurrentPath: HereticPath.Ash })
             return;
 
         fireBlasted.MaxBounces *= 2;

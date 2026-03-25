@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Bloodstream;
+using Content.Goobstation.Shared.Clothing;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Damage.Events;
@@ -29,9 +30,18 @@ public sealed class ChampionStanceSystem : EntitySystem
         SubscribeLocalEvent<ChampionStanceComponent, ComponentStartup>(OnChampionStartup);
         SubscribeLocalEvent<ChampionStanceComponent, ComponentShutdown>(OnChampionShutdown);
         SubscribeLocalEvent<ChampionStanceComponent, ModifySlowOnDamageSpeedEvent>(OnChampionModifySpeed);
-
         SubscribeLocalEvent<ChampionStanceComponent, OrganInsertedIntoEvent>(OnOrganInsertedInto);
         SubscribeLocalEvent<ChampionStanceComponent, OrganRemovedFromEvent>(OnOrganRemovedFrom);
+        SubscribeLocalEvent<ChampionStanceComponent, DelayedKnockdownAttemptEvent>(OnDelayedKnockdownAttempt);
+    }
+
+    private void OnDelayedKnockdownAttempt(Entity<ChampionStanceComponent> ent,
+        ref DelayedKnockdownAttemptEvent args)
+    {
+        if (!Condition(ent))
+            return;
+
+        args.Cancel();
     }
 
     private void OnChampionModifySpeed(Entity<ChampionStanceComponent> ent, ref ModifySlowOnDamageSpeedEvent args)

@@ -1,4 +1,3 @@
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Body;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;

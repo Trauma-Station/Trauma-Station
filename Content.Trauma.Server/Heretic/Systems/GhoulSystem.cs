@@ -108,7 +108,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         SubscribeLocalEvent<GhoulDeconvertComponent, DamageUnholyEvent>(OnDamageUnholy,
             after: [typeof(WeakToHolySystem)]);
 
-        SubscribeLocalEvent<GhoulRoleComponent, GetBriefingEvent>(OnGetBriefing);
+        SubscribeLocalEvent<Shared.Heretic.Components.Ghoul.GhoulRoleComponent, GetBriefingEvent>(OnGetBriefing);
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
 
@@ -263,7 +263,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         }
     }
 
-    private void OnGetBriefing(Entity<GhoulRoleComponent> ent, ref GetBriefingEvent args)
+    private void OnGetBriefing(Entity<Shared.Heretic.Components.Ghoul.GhoulRoleComponent> ent, ref GetBriefingEvent args)
     {
         var uid = args.Mind.Comp.OwnedEntity;
 
@@ -409,7 +409,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (hasMind)
         {
             _mind.UnVisit(mindId, mind);
-            if (!_role.MindHasRole<GhoulRoleComponent>(mindId))
+            if (!_role.MindHasRole<Shared.Heretic.Components.Ghoul.GhoulRoleComponent>(mindId))
             {
                 SendBriefing(ent.Owner);
                 _role.MindAddRole(mindId, GhoulRole, mind);

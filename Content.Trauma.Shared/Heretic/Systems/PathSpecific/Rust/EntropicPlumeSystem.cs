@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Shared._Goobstation.Wizard.TimeStop;
-using Content.Shared._Goobstation.Wizard.Traps;
 using Content.Shared.Administration;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -16,12 +15,11 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -42,7 +40,6 @@ public abstract class EntropicPlumeSystem : EntitySystem
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
@@ -131,7 +128,7 @@ public abstract class EntropicPlumeSystem : EntitySystem
                     return;
 
                 if (HasComp<StunnedComponent>(uid) || HasComp<FrozenComponent>(uid) ||
-                    HasComp<AdminFrozenComponent>(uid) || HasComp<IceCubeComponent>(uid))
+                    HasComp<AdminFrozenComponent>(uid) || HasComp<Wizard.Traps.IceCubeComponent>(uid))
                     return;
 
                 _gun.TryGetGun(uid, out var gun, out var gunComp);
@@ -179,17 +176,6 @@ public abstract class EntropicPlumeSystem : EntitySystem
                 else if (meleeComp != null)
                     _weapon.AttemptLightAttack(uid, weapon, meleeComp, target);
             }
-        }
-
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        // Prevent it from behaving weirdly on moving shuttles
-        var plumeQuery = EntityQueryEnumerator<EntropicPlumeComponent, PhysicsComponent>();
-        while (plumeQuery.MoveNext(out var uid, out _, out var physics))
-        {
-            if (physics.BodyStatus != BodyStatus.OnGround)
-                _physics.SetBodyStatus(uid, physics, BodyStatus.OnGround);
         }
     }
 

@@ -1,4 +1,3 @@
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -9,7 +8,6 @@ using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;

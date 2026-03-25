@@ -1,6 +1,5 @@
 using System.Numerics;
 using Content.Goobstation.Common.Physics;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction.Events;
@@ -8,6 +7,7 @@ using Content.Shared.Mind;
 using Content.Shared.Movement.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -51,7 +51,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
         SubscribeLocalEvent<StarGazeComponent, ComponentShutdown>(OnStarGazeShutdown);
         SubscribeLocalEvent<StarGazeComponent, AttackAttemptEvent>(OnStarGazeAttackAttempt);
 
-        SubscribeLocalEvent<Components.HereticComponent, EventHereticResolveStarGazer>(OnResolveStarGazer);
+        SubscribeLocalEvent<HereticComponent, EventHereticResolveStarGazer>(OnResolveStarGazer);
 
         SubscribeAllEvent<LaserBeamEndpointPositionEvent>(OnGetPosition);
     }
@@ -62,7 +62,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
             args.Cancel();
     }
 
-    private void OnResolveStarGazer(Entity<Components.HereticComponent> ent, ref EventHereticResolveStarGazer args)
+    private void OnResolveStarGazer(Entity<HereticComponent> ent, ref EventHereticResolveStarGazer args)
     {
         if (!TryComp(ent, out MindComponent? mind) || mind.OwnedEntity is not { } uid)
             return;
@@ -155,7 +155,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
         {
             comp.Endpoint = Spawn(null, Xform.ToCoordinates(comp.CursorPosition.Value));
             var endpoint = comp.Endpoint.Value;
-            EnsureComp<Components.LaserBeamEndpointComponent>(endpoint);
+            EnsureComp<LaserBeamEndpointComponent>(endpoint);
             EnsureComp<TimedDespawnComponent>(endpoint).Lifetime = comp.LaserDuration;
             var beam = EnsureComp<ComplexJointVisualsComponent>(uid);
             var data = new ComplexJointVisualsData(JointId, comp.Beam1, comp.Start1, comp.End1, Timing.CurTime)
@@ -214,7 +214,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
 
         if (!Resolve(summoner, ref summoner.Comp, false) ||
             !_heretic.TryGetHereticComponent(summoner.Owner, out var heretic, out var mind) ||
-            heretic.CurrentPath != "Cosmos" || checkAscend && !heretic.Ascended)
+            heretic.CurrentPath != HereticPath.Cosmos || checkAscend && !heretic.Ascended)
             return null;
 
         StarGazerComponent? comp;

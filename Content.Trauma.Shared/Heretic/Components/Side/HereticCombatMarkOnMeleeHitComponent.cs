@@ -6,16 +6,5 @@ namespace Content.Trauma.Shared.Heretic.Components.Side;
 public sealed partial class HereticCombatMarkOnMeleeHitComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string NextPath = "Ash";
-
-    [DataField]
-    public List<string> Paths = new()
-    {
-        "Ash",
-        "Void",
-        "Flesh",
-        "Blade",
-        "Rust",
-        "Cosmos",
-    };
+    public HereticPath NextPath = HereticPath.Ash;
 }

@@ -3,7 +3,6 @@ using Content.Client._Shitcode.Wizard.Systems;
 using Content.Shared._Goobstation.Wizard.Components;
 using Content.Shared._Goobstation.Wizard.SpellCards;
 using Content.Shared.Damage.Components;
-using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
 // </Trauma>
 using System.Linq;
@@ -23,6 +22,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Input;
+using Content.Trauma.Common.Heretic;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -1014,9 +1014,8 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         StopTargeting();
 
         // Goobstation
-        if (EntityManager.TryGetComponent(ent, out WorldTargetActionComponent? worldTarget) &&
-            worldTarget.Event is InstantWorldTargetActionEvent)
-            _actionsSystem?.TriggerAction(ent, true); // We just perform it and hope for the best :godo:
+        var ev = new TryPerformInstantWorldTargetActionEvent();
+        EntityManager.EventBus.RaiseLocalEvent(ent, ref ev);
 
         SelectingTargetFor = uid;
         // TODO inform the server

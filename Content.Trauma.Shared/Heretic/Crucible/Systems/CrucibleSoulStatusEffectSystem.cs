@@ -1,7 +1,7 @@
-using Content.Shared.Heretic;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
+using Content.Trauma.Shared.Heretic.Events;
 
 namespace Content.Trauma.Shared.Heretic.Crucible.Systems;
 

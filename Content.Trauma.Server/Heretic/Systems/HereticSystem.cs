@@ -328,7 +328,7 @@ public sealed class HereticSystem : SharedHereticSystem
         _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "KnowledgePoint", amount } }, mindId, store);
         _store.UpdateUserInterface(uid, mindId, store);
 
-        if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
+        if (_mind.TryGetObjectiveComp<Objectives.HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             objective.Researched += amount;
 
         UpdateObjectiveProgress((ent, ent.Comp1, ent.Comp3));
@@ -568,7 +568,7 @@ public sealed class HereticSystem : SharedHereticSystem
         UpdateHereticAura(uid);
 
         // how???
-        if (ent.Comp.CurrentPath == null)
+        if (ent.Comp.CurrentPath is not { } path)
             return;
 
         if (TryComp(ent, out ActionsContainerComponent? container))
@@ -576,12 +576,12 @@ public sealed class HereticSystem : SharedHereticSystem
             foreach (var action in container.Container.ContainedEntities)
             {
                 if (TryComp(action, out Components.ChangeUseDelayOnAscensionComponent? changeUseDelay) &&
-                    (changeUseDelay.RequiredPath == null || changeUseDelay.RequiredPath == ent.Comp.CurrentPath))
+                    (changeUseDelay.RequiredPath == null || changeUseDelay.RequiredPath == path))
                     _actions.SetUseDelay(action, changeUseDelay.NewUseDelay);
             }
         }
 
-        var pathLoc = ent.Comp.CurrentPath.ToLower();
+        var pathLoc = path.ToString().ToLower();
         var ascendSound =
             new SoundPathSpecifier($"/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/ascend_{pathLoc}.ogg");
         _chat.DispatchGlobalAnnouncement(Loc.GetString($"heretic-ascension-{pathLoc}"),

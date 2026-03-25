@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Shitcode.Heretic.Rituals;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Prototypes;
 
@@ -13,7 +13,7 @@ public sealed partial class HereticKnowledgePrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     [DataField]
-    public string? Path;
+    public HereticPath? Path;
 
     [DataField]
     public int Stage = 1;

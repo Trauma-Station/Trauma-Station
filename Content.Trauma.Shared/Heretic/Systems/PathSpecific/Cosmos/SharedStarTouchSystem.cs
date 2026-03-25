@@ -1,7 +1,6 @@
 using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Physics;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -10,6 +9,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -204,7 +204,7 @@ public sealed class SharedStarTouchSystem : EntitySystem
         args.Handled = true;
 
         if (!_heretic.TryGetHereticComponent(args.User, out var hereticComp, out _) ||
-            _heretic.TryGetHereticComponent(args.Target.Value, out var th, out _) && th.CurrentPath == "Cosmos")
+            _heretic.TryGetHereticComponent(args.Target.Value, out var th, out _) && th.CurrentPath == HereticPath.Cosmos)
         {
             PredictedQueueDel(uid);
             return;

@@ -14,9 +14,6 @@ using Content.Server.Polymorph.Systems;
 using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
 using Content.Server.Temperature.Systems;
-using Content.Shared._Goobstation.Heretic.Components;
-using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Body;
@@ -27,8 +24,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
-using Content.Shared.Heretic;
-using Content.Shared.Heretic.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Localizations;
 using Content.Shared.Mind.Components;
@@ -37,13 +32,15 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
-using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Weather;
 using Content.Trauma.Server.Heretic.Systems;
+using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
@@ -158,7 +155,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         {
             foreach (var item in _hands.EnumerateHeld((uid, handsComp)))
             {
-                if (HasComp<Shared.Heretic.Components.MansusGraspComponent>(item))
+                if (HasComp<MansusGraspComponent>(item))
                     QueueDel(item);
             }
 
@@ -169,7 +166,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         if (!_hands.TryGetEmptyHand((uid, handsComp), out var emptyHand))
         {
             // Empowered blades - infuse all of our blades that are currently in our inventory
-            if (heretic is not { CurrentPath: "Blade", PathStage: >= 7 })
+            if (heretic is not { CurrentPath: HereticPath.Blade, PathStage: >= 7 })
                 return;
 
             if (!InfuseOurBlades())
@@ -238,7 +235,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         }
     }
 
-    private string GetMansusGraspProto(Entity<Shared.Heretic.Components.HereticComponent> ent)
+    private string GetMansusGraspProto(Entity<HereticComponent> ent)
     {
         if (ent.Comp.PathStage < 2)
             return ent.Comp.MansusGraspProto;
@@ -421,7 +418,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
         var staminaQuery = GetEntityQuery<StaminaComponent>();
         var statusQuery = GetEntityQuery<StatusEffectsComponent>();
         var resiratorQuery = GetEntityQuery<RespiratorComponent>();
-        var hereticQuery = GetEntityQuery<Shared.Heretic.Components.HereticComponent>();
+        var hereticQuery = GetEntityQuery<HereticComponent>();
         var ghoulQuery = GetEntityQuery<GhoulComponent>();
         var bodyQuery = GetEntityQuery<BodyComponent>();
         var bloodQuery = GetEntityQuery<BloodstreamComponent>();
@@ -435,7 +432,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             damageableQuery.TryComp(uid, out var damageable);
 
             var multiplier = 2f;
-            var boneHeal = FixedPoint2.Zero;
             var shouldHeal = true;
             if (hereticQuery.TryComp(mindContainer.Mind, out var heretic))
             {
@@ -460,14 +456,10 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                     }
                     else
                         multiplier = 3f;
-
-                    boneHeal = leech.BoneHeal * multiplier;
                 }
             }
             else if (ghoulQuery.HasComp(uid))
                 multiplier = 3f;
-
-            var otherHeal = boneHeal;
 
             RemCompDeferred<DelayedKnockdownComponent>(uid);
 

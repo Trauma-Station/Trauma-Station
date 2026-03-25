@@ -83,7 +83,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
             return;
 
         // Required for seeking blade, client weapon code should send attack event regardless of distance
-        if (heretic.CurrentPath == "Void")
+        if (heretic.CurrentPath == HereticPath.Void)
         {
             if (_net.IsServer)
                 return;
@@ -93,7 +93,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
             return;
         }
 
-        if (heretic.CurrentPath != "Cosmos")
+        if (heretic.CurrentPath != HereticPath.Cosmos)
             return;
 
         if (HasComp<Trauma.Shared.Heretic.Components.PathSpecific.Cosmos.StarMarkComponent>(args.Target.Value))
@@ -146,10 +146,10 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         if (ev.Cancelled)
             return false;
 
-        if (target == user || ent.Comp.Path != "Void" ||
+        if (target == user || ent.Comp.Path != HereticPath.Void ||
             !_heretic.TryGetHereticComponent(user, out var heretic, out _) ||
             !TryComp(user, out CombatModeComponent? combat) ||
-            heretic is not { CurrentPath: "Void", PathStage: >= 7 } || !HasComp<MobStateComponent>(target) ||
+            heretic is not { CurrentPath: HereticPath.Void, PathStage: >= 7 } || !HasComp<MobStateComponent>(target) ||
             !TryComp(ent, out MeleeWeaponComponent? melee) || melee.NextAttack > _timing.CurTime)
             return false;
 
@@ -192,7 +192,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
 
     public void ApplySpecialEffect(EntityUid performer, EntityUid target, MeleeHitEvent args)
     {
-        var path = HasComp<HereticBladeUserBonusDamageComponent>(performer) ? "Flesh" : null;
+        var path = TryComp(performer, out HereticBladeUserBonusDamageComponent? bonus) ? bonus.Path : null;
         if (_heretic.TryGetHereticComponent(performer, out var hereticComp, out _))
             path = hereticComp.CurrentPath;
 
@@ -201,20 +201,20 @@ public abstract class SharedHereticBladeSystem : EntitySystem
 
         switch (path)
         {
-            case "Ash":
+            case HereticPath.Ash:
                 ApplyAshBladeEffect(target);
                 break;
 
-            case "Blade":
+            case HereticPath.Blade:
                 // check event handler
                 break;
 
-            case "Flesh":
+            case HereticPath.Flesh:
                 // ultra bleed
                 ApplyFleshBladeEffect(target);
                 break;
 
-            case "Lock":
+            case HereticPath.Lock:
                 var (woundingMultiplier, woundProb) = hereticComp?.Ascended is true ? (3f, 0.65f) : (2f, 0.35f);
                 foreach (var dmgType in args.BaseDamage.DamageDict.Keys)
                 {
@@ -236,11 +236,11 @@ public abstract class SharedHereticBladeSystem : EntitySystem
                 ApplyLockBladeEffect(target, targetPart.Value, woundProb);
                 break;
 
-            case "Void":
+            case HereticPath.Void:
                 _voidCurse.DoCurse(target);
                 break;
 
-            case "Rust":
+            case HereticPath.Rust:
                 if (_mobState.IsDead(target))
                     _rotting.ReduceAccumulator(target, -TimeSpan.FromMinutes(1f));
                 break;
@@ -288,7 +288,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
 
     private void OnMeleeHit(Entity<HereticBladeComponent> ent, ref MeleeHitEvent args)
     {
-        if (!args.IsHit || string.IsNullOrWhiteSpace(ent.Comp.Path))
+        if (!args.IsHit || ent.Comp.Path == null)
             return;
 
         _heretic.TryGetHereticComponent(args.User, out var hereticComp, out var mind);
@@ -316,7 +316,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         {
             switch (hereticComp.CurrentPath)
             {
-                case "Rust":
+                case HereticPath.Rust:
                     args.BonusDamage += new DamageSpecifier
                     {
                         DamageDict =
@@ -325,7 +325,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
                         },
                     };
                     break;
-                case "Blade":
+                case HereticPath.Blade:
                     args.BonusDamage += new DamageSpecifier
                     {
                         DamageDict =
@@ -334,7 +334,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
                         },
                     };
                     break;
-                case "Cosmos":
+                case HereticPath.Cosmos:
                     args.BonusDamage += new DamageSpecifier
                     {
                         DamageDict =

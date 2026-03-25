@@ -4,6 +4,7 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Temperature;
+using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Network;
@@ -81,7 +82,7 @@ public abstract class SharedVoidCloakSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        EnsureComp<Components.StripMenuInvisibleComponent>(cloak);
+        EnsureComp<StripMenuInvisibleComponent>(cloak);
         UpdatePressureProtection(cloak, false);
     }
 
@@ -94,7 +95,7 @@ public abstract class SharedVoidCloakSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        RemCompDeferred<Components.StripMenuInvisibleComponent>(cloak);
+        RemCompDeferred<StripMenuInvisibleComponent>(cloak);
         UpdatePressureProtection(cloak, true);
     }
 

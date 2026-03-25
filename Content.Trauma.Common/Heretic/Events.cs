@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.FixedPoint;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
@@ -32,3 +33,15 @@ public record struct BeforeHolosignUsedEvent(EntityUid User, EntityCoordinates C
 
 [ByRefEvent]
 public readonly record struct IconSmoothCornersInitializedEvent;
+
+[ByRefEvent]
+public record struct ValidateInstantWorldTargetActionEvent(EntityUid User, EntityUid Provider, bool Result = false);
+
+[ByRefEvent]
+public readonly record struct TryPerformInstantWorldTargetActionEvent;
+
+[ByRefEvent]
+public record struct ImmuneToPoisonDamageEvent(bool Immune = false);
+
+[ByRefEvent]
+public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Volume);

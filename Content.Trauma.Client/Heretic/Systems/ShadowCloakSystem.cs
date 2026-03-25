@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Client.Shaders;
 using Content.Goobstation.Common.Shaders;
-using Content.Shared._Goobstation.Wizard.Traps;
 using Content.Trauma.Client.Heretic.SpriteOverlay;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
@@ -29,7 +28,7 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<FireBlastedComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<HereticCombatMarkComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<HereticEyeOverlayComponent>>(UpdateOverlay);
-        SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<IceCubeComponent>>(UpdateOverlay);
+        SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<Shared.Wizard.Traps.IceCubeComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<SacramentsOfPowerComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<StarMarkComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<VoidCurseComponent>>(UpdateOverlay);

@@ -50,7 +50,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
     public override bool ApplyMarkEffect(EntityUid target,
         HereticCombatMarkComponent mark,
-        string? path,
+        HereticPath? path,
         EntityUid user,
         Entity<HereticComponent> heretic)
     {
@@ -59,7 +59,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
         switch (path)
         {
-            case "Ash":
+            case HereticPath.Ash:
                 _stamina.TakeStaminaDamage(target, 6f * mark.Repetitions);
 
                 var dmg = new DamageSpecifier
@@ -73,28 +73,28 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                 _damageable.TryChangeDamage(target, dmg, origin: user, targetPart: TargetBodyPart.All);
                 break;
 
-            case "Blade":
+            case HereticPath.Blade:
                 _pbs.AddProtectiveBlade(user);
                 break;
 
-            case "Flesh":
+            case HereticPath.Flesh:
                 _ability.CreateFleshMimic(target, user, heretic, false, true, 50, null);
                 break;
 
-            case "Lock":
+            case HereticPath.Lock:
                 _status.TryUpdateStatusEffectDuration(target, "LockMarkedStatusEffect", TimeSpan.FromSeconds(20));
                 break;
 
-            case "Rust":
+            case HereticPath.Rust:
                 _vomit.Vomit(target);
                 _stun.KnockdownOrStun(target, TimeSpan.FromSeconds(20));
                 break;
 
-            case "Void":
+            case HereticPath.Void:
                 _voidcurse.DoCurse(target, 3);
                 break;
 
-            case "Cosmos":
+            case HereticPath.Cosmos:
                 if (!TryComp(target, out HereticCosmicMarkComponent? cosmicMark))
                     break;
 
@@ -134,7 +134,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
         var markComp = EnsureComp<HereticCombatMarkComponent>(lookent);
         markComp.DisappearTime = markComp.MaxDisappearTime;
-        markComp.Path = path;
+        markComp.Path = path.Value;
         markComp.Repetitions = repetitions;
         Dirty(lookent, markComp);
         return true;

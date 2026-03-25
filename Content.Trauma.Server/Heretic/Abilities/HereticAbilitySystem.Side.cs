@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Polymorph.Components;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Actions;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Ghost;
-using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Polymorph;
+using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Abilities;

@@ -1,4 +1,3 @@
-using Content.Shared._Shitcode.Heretic.Curses;
 using Content.Trauma.Shared.Heretic.Curses;
 using Content.Trauma.Shared.Heretic.Curses.Components;
 using JetBrains.Annotations;

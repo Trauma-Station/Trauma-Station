@@ -16,11 +16,13 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -152,6 +154,9 @@ public abstract partial class SharedHereticAbilitySystem
 
         _gun.ShootProjectile(plume, dir, Vector2.Zero, uid, uid, args.Speed);
         _gun.SetTarget(plume, null, out _);
+
+        if (TryComp(plume, out PhysicsComponent? body))
+            _physics.SetBodyStatus(plume, body, BodyStatus.OnGround);
     }
 
     public void RustObjectsInRadius(MapCoordinates mapPos,
@@ -196,7 +201,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         Heretic.TryGetHereticComponent(uid, out var heretic, out _);
         var effectiveStage = MathF.Max(heretic?.PathStage ?? 9f - 4f, 1f);
-        var multiplier = heretic?.CurrentPath is null or "Rust" ? MathF.Sqrt(effectiveStage) : 1f;
+        var multiplier = heretic?.CurrentPath is null or HereticPath.Rust ? MathF.Sqrt(effectiveStage) : 1f;
 
         var aoeRadius = MathF.Max(args.AoeRadius, args.AoeRadius * multiplier);
         var range = MathF.Max(args.Range, args.Range * multiplier);

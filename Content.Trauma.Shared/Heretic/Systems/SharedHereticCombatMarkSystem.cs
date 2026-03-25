@@ -9,11 +9,11 @@ public abstract class SharedHereticCombatMarkSystem : EntitySystem
 
     public virtual bool ApplyMarkEffect(EntityUid target,
         HereticCombatMarkComponent mark,
-        string? path,
+        HereticPath? path,
         EntityUid user,
         Entity<HereticComponent> heretic)
     {
-        if (string.IsNullOrWhiteSpace(path))
+        if (path == null)
             return false;
 
         _audio.PlayPredicted(mark.TriggerSound, target, user);

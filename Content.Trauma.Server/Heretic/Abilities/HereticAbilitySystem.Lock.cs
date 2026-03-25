@@ -3,14 +3,14 @@
 using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Server.Polymorph.Components;
-using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Actions.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Components;
-using Content.Shared.Heretic;
 using Content.Shared.Storage;
 using Content.Trauma.Server.Heretic.Systems;
+using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
@@ -28,12 +28,12 @@ public sealed partial class HereticAbilitySystem
 
         SubscribeLocalEvent<EventHereticShapeshift>(OnShapeshift);
 
-        SubscribeLocalEvent<Shared.Heretic.Components.ShapeshiftActionComponent, HereticShapeshiftMessage>(OnShapeshiftMessage);
+        SubscribeLocalEvent<ShapeshiftActionComponent, HereticShapeshiftMessage>(OnShapeshiftMessage);
 
-        SubscribeLocalEvent<Shared.Heretic.Components.HereticComponent, HereticModifySideKnowledgeDraftsEvent>(OnDraftsModify);
+        SubscribeLocalEvent<HereticComponent, HereticModifySideKnowledgeDraftsEvent>(OnDraftsModify);
     }
 
-    private void OnDraftsModify(Entity<Shared.Heretic.Components.HereticComponent> ent, ref HereticModifySideKnowledgeDraftsEvent args)
+    private void OnDraftsModify(Entity<HereticComponent> ent, ref HereticModifySideKnowledgeDraftsEvent args)
     {
         foreach (var (key, value) in args.SideKnowledgeDrafts)
         {
@@ -44,7 +44,7 @@ public sealed partial class HereticAbilitySystem
         }
     }
 
-    private void OnShapeshiftMessage(Entity<Shared.Heretic.Components.ShapeshiftActionComponent> ent, ref HereticShapeshiftMessage args)
+    private void OnShapeshiftMessage(Entity<ShapeshiftActionComponent> ent, ref HereticShapeshiftMessage args)
     {
         var key = args.UiKey;
         var user = args.Actor;
@@ -107,7 +107,7 @@ public sealed partial class HereticAbilitySystem
 
     private void OnShapeshift(EventHereticShapeshift args)
     {
-        if (!HasComp<Shared.Heretic.Components.ShapeshiftActionComponent>(args.Action))
+        if (!HasComp<ShapeshiftActionComponent>(args.Action))
             return;
 
         if (!CanShapeshift(args.Performer))

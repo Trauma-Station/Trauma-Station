@@ -273,7 +273,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         cloak.User = ent;
         Dirty(cloakEntity, cloak);
 
-        var relay = EnsureComp<Components.TargetInteractionRelayComponent>(cloakEntity);
+        var relay = EnsureComp<TargetInteractionRelayComponent>(cloakEntity);
         relay.RelayEntity = ent;
         Dirty(cloakEntity, relay);
 
