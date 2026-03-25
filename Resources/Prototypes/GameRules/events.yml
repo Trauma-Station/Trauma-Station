@@ -63,7 +63,7 @@
     #- id: ZombieOutbreak Trauma - we dont want this as a midround
     - id: LoneOpsSpawn
     #- id: WizardSpawn # Trauma - chud wizard removed pending rework
-    #- !type:NestedSelector
+    #- !type:NestedSelector # Trauma
     #  tableId: DerelictBorgEventTable
 
 - type: entityTable
