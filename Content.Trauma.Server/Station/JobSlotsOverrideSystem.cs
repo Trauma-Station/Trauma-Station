@@ -42,7 +42,7 @@ public sealed class JobSlotsOverrideSystem : EntitySystem
         ent.Comp.TotalJobs = 0;
         foreach (var (job, slots) in ent.Comp.SetupAvailableJobs)
         {
-            var n = slots[1] < 0 ? null : slots[1];
+            int? n = slots[1] < 0 ? null : slots[1];
             ent.Comp.JobList[job] = n;
             ent.Comp.TotalJobs += n ?? 0;
         }
