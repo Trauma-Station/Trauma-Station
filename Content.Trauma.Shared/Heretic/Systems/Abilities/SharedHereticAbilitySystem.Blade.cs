@@ -18,8 +18,23 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<SilverMaelstromComponent, GetClothingStunModifierEvent>(OnBladeStunModify);
         SubscribeLocalEvent<SilverMaelstromComponent, DropHandItemsEvent>(OnBladeDropItems,
             before: new[] { typeof(SharedHandsSystem) });
+        SubscribeLocalEvent<SilverMaelstromComponent, ComponentStartup>(OnMaelstromStartup);
+        SubscribeLocalEvent<SilverMaelstromComponent, ComponentShutdown>(OnMaelstromShutdown);
 
         SubscribeLocalEvent<EventHereticSacraments>(OnSacraments);
+    }
+
+    private void OnMaelstromShutdown(Entity<SilverMaelstromComponent> ent, ref ComponentShutdown args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        StatusNew.TryRemoveStatusEffect(ent, ent.Comp.Status);
+    }
+
+    private void OnMaelstromStartup(Entity<SilverMaelstromComponent> ent, ref ComponentStartup args)
+    {
+        StatusNew.TryUpdateStatusEffectDuration(ent, ent.Comp.Status, out _);
     }
 
     private void OnSacraments(EventHereticSacraments args)

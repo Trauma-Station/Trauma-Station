@@ -36,11 +36,10 @@ public sealed partial class EldritchInfluenceDoAfterEvent : SimpleDoAfterEvent;
 [Serializable, NetSerializable]
 public sealed partial class DrawRitualRuneDoAfterEvent : DoAfterEvent
 {
-    // TODO: NetCoordinates / NetEntity
-    [NonSerialized] public EntityCoordinates Coords;
-    [NonSerialized] public EntityUid RitualRune;
+    public NetCoordinates Coords;
+    public NetEntity RitualRune;
 
-    public DrawRitualRuneDoAfterEvent(EntityUid ritualRune, EntityCoordinates coords)
+    public DrawRitualRuneDoAfterEvent(NetEntity ritualRune, NetCoordinates coords)
     {
         RitualRune = ritualRune;
         Coords = coords;
@@ -241,7 +240,15 @@ public sealed partial class EventHereticSacraments : InstantActionEvent
 }
 
 public sealed partial class HereticChampionStanceEvent : HereticKnowledgeEvent;
-public sealed partial class EventHereticFuriousSteel : InstantActionEvent;
+
+public sealed partial class EventHereticFuriousSteel : InstantActionEvent
+{
+    [DataField]
+    public EntProtoId StatusEffect = "FuriousSteelStatusEffect";
+
+    [DataField]
+    public TimeSpan StatusDuration = TimeSpan.FromSeconds(2);
+}
 
 // lock
 public sealed partial class EventHereticBulglarFinesse : EntityTargetActionEvent;
@@ -468,9 +475,7 @@ public interface ITouchSpellEvent
     EntProtoId TouchSpell { get; set; }
 }
 
-public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent
-{
-}
+public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent;
 
 [Serializable, NetSerializable]
 public sealed class LaserBeamEndpointPositionEvent(NetEntity uid, MapCoordinates coords) : EntityEventArgs

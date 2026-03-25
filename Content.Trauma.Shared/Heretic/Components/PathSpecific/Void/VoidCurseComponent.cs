@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class VoidCurseComponent : BaseSpriteOverlayComponent
 {
     [DataField]
@@ -23,7 +24,11 @@ public sealed partial class VoidCurseComponent : BaseSpriteOverlayComponent
     [DataField]
     public float MaxStacks = 5f;
 
-    public float Timer = 1f;
+    [DataField]
+    public TimeSpan Timer = TimeSpan.FromSeconds(1);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextUpdate = TimeSpan.Zero;
 
     [DataField]
     public string OverlayStateNormal = "void_chill_partial";

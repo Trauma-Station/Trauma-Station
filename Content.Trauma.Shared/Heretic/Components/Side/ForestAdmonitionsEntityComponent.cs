@@ -22,8 +22,8 @@ public sealed partial class ForestAdmonitionsEntityComponent : Component
     public float ExamineThreshold = 0.2f;
 
     [DataField]
-    public float UpdateTime = 0.1f;
+    public TimeSpan UpdateTime = TimeSpan.FromMilliseconds(100);
 
-    [ViewVariables]
-    public float UpdateAccumulator;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextUpdate = TimeSpan.Zero;
 }

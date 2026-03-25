@@ -1,37 +1,50 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Trauma.Server.Heretic.Components.PathSpecific;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
 public sealed class HereticFlamesSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<HereticFlamesComponent, ComponentStartup>(OnStartup);
+    }
+
+    private void OnStartup(Entity<HereticFlamesComponent> ent, ref ComponentStartup args)
+    {
+        ent.Comp.LifetimeTimer = _timing.CurTime + ent.Comp.LifetimeDuration;
+    }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var eqe = EntityQueryEnumerator<Components.PathSpecific.HereticFlamesComponent>();
+        var now = _timing.CurTime;
+
+        var eqe = EntityQueryEnumerator<HereticFlamesComponent>();
         while (eqe.MoveNext(out var uid, out var hfc))
         {
-            // TODO TimeSpan
-            hfc.LifetimeTimer += frameTime;
-            if (hfc.LifetimeTimer >= hfc.LifetimeDuration)
+            if (hfc.LifetimeTimer > now)
             {
                 RemCompDeferred(uid, hfc);
                 continue;
             }
 
-            hfc.UpdateTimer -= frameTime;
-            if (hfc.UpdateTimer > 0f)
+            if (hfc.UpdateTimer > now)
                 continue;
 
-            hfc.UpdateTimer = hfc.UpdateDuration;
+            hfc.UpdateTimer = now + hfc.UpdateDuration;
             SpawnFireBox(uid, hfc.FireProto, hfc.Range, false);
             hfc.Range += hfc.RangeIncrease;
         }

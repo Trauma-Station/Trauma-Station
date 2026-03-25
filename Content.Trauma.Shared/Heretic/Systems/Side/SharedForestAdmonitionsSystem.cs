@@ -72,7 +72,7 @@ public abstract class SharedForestAdmonitionsSystem : EntitySystem
             return;
 
         comp.LastRevealTime = Timing.CurTime;
-        comp.UpdateAccumulator = 0f;
+        comp.NextUpdate = comp.LastRevealTime;
         Dirty(cloak, comp);
     }
 

@@ -26,6 +26,7 @@ using Content.Shared.Teleportation;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
 using Robust.Shared.Audio.Systems;
@@ -376,7 +377,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         }
 
         // blade path exclusive.
-        if (HasComp<Trauma.Shared.Heretic.Components.PathSpecific.Blade.SilverMaelstromComponent>(args.User))
+        if (HasComp<SilverMaelstromComponent>(args.User))
         {
             args.BonusDamage += args.BaseDamage * 0.5f;
             if (aliveMobsCount > 0 && TryComp<DamageableComponent>(args.User, out var dmg))

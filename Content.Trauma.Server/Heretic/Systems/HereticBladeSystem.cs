@@ -10,6 +10,7 @@ using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Teleportation;
 using Content.Shared.Throwing;
+using Content.Trauma.Shared.BloodSplatter;
 using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -70,7 +71,9 @@ public sealed class HereticBladeSystem : SharedHereticBladeSystem
         {
             var dir = _random.NextAngle().ToVec();
             var chunk = Spawn("BloodChunkEffect", coords);
-            // TODO: blood splatter color
+            var comp = EnsureComp<BloodSplatterOnLandComponent>(chunk);
+            comp.Color = color;
+            Dirty(chunk, comp);
 
             if (TryComp(chunk, out TrailComponent? trail))
             {

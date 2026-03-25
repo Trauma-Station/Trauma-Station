@@ -12,6 +12,7 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -24,6 +25,8 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
 
     public static readonly LocId DefaultInvocation = "heretic-speech-mansusgrasp";
+
+    public static readonly EntProtoId RitualRune = "HereticRuneRitual";
 
     public static readonly TimeSpan DefaultCooldown = TimeSpan.FromSeconds(10);
 
@@ -98,7 +101,7 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
         var dargs = new DoAfterArgs(EntityManager,
             args.User,
             time,
-            new DrawRitualRuneDoAfterEvent(rune, args.ClickLocation),
+            new DrawRitualRuneDoAfterEvent(GetNetEntity(rune), GetNetCoordinates(args.ClickLocation)),
             args.User)
         {
             BreakOnDamage = true,
@@ -114,9 +117,9 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
     private void OnRitualRuneDoAfter(DrawRitualRuneDoAfterEvent ev)
     {
         // delete the animation rune regardless
-        QueueDel(ev.RitualRune);
+        QueueDel(GetEntity(ev.RitualRune));
 
         if (!ev.Cancelled)
-            _transform.AttachToGridOrMap(Spawn("HereticRuneRitual", ev.Coords));
+            _transform.AttachToGridOrMap(Spawn(RitualRune, GetCoordinates(ev.Coords)));
     }
 }

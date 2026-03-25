@@ -6,6 +6,7 @@ using Content.Trauma.Server.Heretic.Components.PathSpecific;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
@@ -13,13 +14,14 @@ public sealed class RustSpreaderSystem : EntitySystem
 {
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     [Dependency] private readonly HereticAbilitySystem _ability = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
 
-    private const float RustSpreadInterval = 2f;
-    private float _accumulator;
+    private static readonly TimeSpan RustSpreadInterval = TimeSpan.FromSeconds(2);
+    private TimeSpan _nextUpdate = TimeSpan.Zero;
 
     public override void Initialize()
     {
@@ -51,12 +53,12 @@ public sealed class RustSpreaderSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        _accumulator += frameTime; // TODO: kill
+        var now = _timing.CurTime;
 
-        if (_accumulator < RustSpreadInterval)
+        if (_nextUpdate > now)
             return;
 
-        _accumulator = 0f;
+        _nextUpdate = now + RustSpreadInterval;
 
         var gridQuery = GetEntityQuery<MapGridComponent>();
         var dockQuery = GetEntityQuery<DockingComponent>();

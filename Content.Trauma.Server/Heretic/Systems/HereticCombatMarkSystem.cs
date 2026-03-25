@@ -74,7 +74,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                 break;
 
             case HereticPath.Blade:
-                _pbs.AddProtectiveBlade(user);
+                _pbs.AddProtectiveBlade(user, null);
                 break;
 
             case HereticPath.Flesh:

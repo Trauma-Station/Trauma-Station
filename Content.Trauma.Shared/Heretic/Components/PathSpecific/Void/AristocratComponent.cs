@@ -2,23 +2,24 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class AristocratComponent : Component
 {
-    [DataField]
-    public float UpdateDelay = 0.1f;
-
     [DataField]
     public float Range = 10f;
 
     [ViewVariables]
     public int UpdateStep = 1;
 
-    [ViewVariables]
-    public float UpdateTimer = 0f;
+    [DataField]
+    public TimeSpan UpdateDelay = TimeSpan.FromMilliseconds(100);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextUpdate = TimeSpan.Zero;
 
     [DataField]
     public bool HasDied;

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 
@@ -10,14 +11,5 @@ public sealed partial class SilverMaelstromComponent : Component
     public override bool SessionSpecific => true;
 
     [DataField]
-    public float RespawnCooldown = 7.5f;
-
-    [DataField]
-    public float RespawnTimer = 0f;
-
-    [DataField]
-    public List<EntityUid> ActiveBlades = new();
-
-    [DataField]
-    public int MaxBlades = 5;
+    public EntProtoId Status = "SilverMaelstromStatusEffect";
 }

@@ -17,15 +17,15 @@ public sealed class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
         if (_player.LocalEntity is not { } player)
             return;
 
+        var now = Timing.CurTime;
+
         var query = EntityQueryEnumerator<ForestAdmonitionsEntityComponent, ShadowCloakEntityComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out var comp, out var shadow, out var sprite))
         {
-            comp.UpdateAccumulator -= frameTime; // TODO TimeSpan
-
-            if (comp.UpdateAccumulator > 0f)
+            if (comp.NextUpdate > now)
                 continue;
 
-            comp.UpdateAccumulator = comp.UpdateTime;
+            comp.NextUpdate = now + comp.UpdateTime;
 
             if (!Exists(shadow.User))
                 continue;

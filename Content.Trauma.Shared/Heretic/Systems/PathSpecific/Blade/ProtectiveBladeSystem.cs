@@ -8,18 +8,22 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Input;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Reflect;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
+using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 
@@ -28,6 +32,9 @@ public record struct ProtectiveBladeUsedEvent(Entity<ProtectiveBladeComponent> U
 
 public sealed class ProtectiveBladeSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
     [Dependency] private readonly FollowerSystem _follow = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
@@ -57,6 +64,8 @@ public sealed class ProtectiveBladeSystem : EntitySystem
         SubscribeLocalEvent<ProtectiveBladesComponent, ProjectileReflectAttemptEvent>(OnProjectileReflectAttempt);
         SubscribeLocalEvent<ProtectiveBladesComponent, HitScanReflectAttemptEvent>(OnHitscanReflectAttempt);
 
+        SubscribeLocalEvent<StatusEffectContainerComponent, ProtectiveBladeUsedEvent>(OnStatusBladeUsed);
+
         CommandBinds.Builder
             .BindAfter(ContentKeyFunctions.ThrowItemInHand,
                 new PointerInputCmdHandler(HandleThrowBlade),
@@ -64,6 +73,51 @@ public sealed class ProtectiveBladeSystem : EntitySystem
             .Register<ProtectiveBladeSystem>();
     }
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_net.IsClient)
+            return;
+
+        var now = _timing.CurTime;
+
+        var query = EntityQueryEnumerator<AddProtectiveBladesStatusEffectComponent, StatusEffectComponent>();
+        while (query.MoveNext(out var uid, out var addBlades, out var status))
+        {
+            if (status.AppliedTo is not { } ent)
+                continue;
+
+            if (addBlades.ActiveBlades.Count >= addBlades.MaxBlades)
+            {
+                if (!addBlades.RefreshBlades)
+                    QueueDel(uid);
+                continue;
+            }
+
+            if (addBlades.NextUpdate > now)
+                continue;
+
+            addBlades.NextUpdate = now + addBlades.Interval;
+
+            var blade = AddProtectiveBlade(ent, null);
+            addBlades.ActiveBlades.Add(blade);
+        }
+    }
+
+    private void OnStatusBladeUsed(Entity<StatusEffectContainerComponent> ent, ref ProtectiveBladeUsedEvent args)
+    {
+        if (!_status.TryEffectsWithComp<AddProtectiveBladesStatusEffectComponent>(ent, out var effects))
+            return;
+
+        foreach (var effect in effects)
+        {
+            if (!effect.Comp1.RefreshBlades)
+                continue;
+
+            effect.Comp1.ActiveBlades.Remove(args.Used);
+        }
+    }
 
     private void OnStopFollowing(Entity<ProtectiveBladeComponent> ent, ref StoppedFollowingEntityEvent args)
     {
@@ -185,13 +239,12 @@ public sealed class ProtectiveBladeSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    public EntityUid AddProtectiveBlade(EntityUid ent, bool playSound = true)
+    public EntityUid AddProtectiveBlade(EntityUid ent, EntityUid? user, bool playSound = true)
     {
-        // TODO: predict the code calling this in the future
-        var pblade = Spawn(BladePrototype, Transform(ent).Coordinates);
+        var pblade = PredictedSpawnAtPosition(BladePrototype, Transform(ent).Coordinates);
         _follow.StartFollowingEntity(pblade, ent);
         if (playSound)
-            _audio.PlayPvs(BladeAppearSound, ent);
+            _audio.PlayPredicted(BladeAppearSound, ent, user);
 
         var blade = Comp<ProtectiveBladeComponent>(pblade);
         var blades = EnsureComp<ProtectiveBladesComponent>(ent);
@@ -199,16 +252,6 @@ public sealed class ProtectiveBladeSystem : EntitySystem
         blades.Blades.Add(pblade);
         Dirty(pblade, blade);
         Dirty(ent, blades);
-
-        /* Upstream removed this, but they randomise the start point so it's w/e
-        // TODO: readd this in client startup, fucking idiot
-        if (TryComp<OrbitVisualsComponent>(pblade, out var vorbit))
-        {
-            // test scenario: 4 blades are currently following our heretic.
-            // making each one somewhat distinct from each other
-            vorbit.Orbit = GetBlades(ent).Count / 5;
-        }
-        */
 
         return pblade;
     }

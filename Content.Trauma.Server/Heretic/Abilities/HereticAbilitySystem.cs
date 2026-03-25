@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Weapons.DelayedKnockdown;
-using Content.Medical.Shared.Body;
 using Content.Server.Actions;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Cloning;
@@ -13,16 +10,12 @@ using Content.Server.Hands.Systems;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
-using Content.Server.Temperature.Systems;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Body;
-using Content.Shared.Body.Components;
 using Content.Shared.Chat;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
-using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Localizations;
@@ -31,15 +24,12 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
 using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
-using Content.Shared.Temperature.Components;
 using Content.Shared.Weather;
 using Content.Trauma.Server.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Components;
-using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -69,7 +59,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly FlashSystem _flash = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyRestoreSystem _bodyRestore = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly StationSystem _station = default!;
@@ -77,9 +66,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly ProtectiveBladeSystem _pblade = default!;
     [Dependency] private readonly BloodstreamSystem _blood = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly RespiratorSystem _respirator = default!;
     [Dependency] private readonly MansusGraspSystem _mansusGrasp = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
@@ -94,9 +81,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     #endregion
 
     private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
-
-    private const float LeechingWalkUpdateInterval = 1f;
-    private float _accumulator;
 
     public override void Initialize()
     {
@@ -369,137 +353,5 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             false,
             true,
             stunDuration: TimeSpan.FromSeconds(1f));
-    }
-
-    // TODO fix me
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var rustChargeQuery = EntityQueryEnumerator<Shared.Heretic.Components.PathSpecific.Rust.RustObjectsInRadiusComponent, TransformComponent>();
-        while (rustChargeQuery.MoveNext(out var uid, out var rust, out var xform))
-        {
-            if (rust.NextRustTime > Timing.CurTime)
-                continue;
-
-            rust.NextRustTime = Timing.CurTime + rust.RustPeriod;
-            RustObjectsInRadius(_transform.GetMapCoordinates(uid, xform),
-                rust.RustRadius,
-                rust.TileRune,
-                rust.LookupRange,
-                rust.RustStrength);
-        }
-
-        var rustBringerQuery = EntityQueryEnumerator<Shared.Heretic.Components.PathSpecific.Rust.RustbringerComponent, TransformComponent>();
-        while (rustBringerQuery.MoveNext(out var rustBringer, out var xform))
-        {
-            rustBringer.Accumulator += frameTime;
-
-            if (rustBringer.Accumulator < rustBringer.Delay)
-                continue;
-
-            rustBringer.Accumulator = 0f;
-
-            if (!IsTileRust(xform.Coordinates, out _))
-                continue;
-
-            Spawn(rustBringer.Effect, xform.Coordinates);
-        }
-
-        _accumulator += frameTime;
-
-        if (_accumulator < LeechingWalkUpdateInterval)
-            return;
-
-        _accumulator = 0f;
-
-        var damageableQuery = GetEntityQuery<DamageableComponent>();
-        var temperatureQuery = GetEntityQuery<TemperatureComponent>();
-        var staminaQuery = GetEntityQuery<StaminaComponent>();
-        var statusQuery = GetEntityQuery<StatusEffectsComponent>();
-        var resiratorQuery = GetEntityQuery<RespiratorComponent>();
-        var hereticQuery = GetEntityQuery<HereticComponent>();
-        var ghoulQuery = GetEntityQuery<GhoulComponent>();
-        var bodyQuery = GetEntityQuery<BodyComponent>();
-        var bloodQuery = GetEntityQuery<BloodstreamComponent>();
-
-        var leechQuery = EntityQueryEnumerator<Shared.Heretic.Components.PathSpecific.Rust.LeechingWalkComponent, MindContainerComponent, TransformComponent>();
-        while (leechQuery.MoveNext(out var uid, out var leech, out var mindContainer, out var xform))
-        {
-            if (!IsTileRust(xform.Coordinates, out _))
-                continue;
-
-            damageableQuery.TryComp(uid, out var damageable);
-
-            var multiplier = 2f;
-            var shouldHeal = true;
-            if (hereticQuery.TryComp(mindContainer.Mind, out var heretic))
-            {
-                if (heretic.PathStage >= 7)
-                {
-                    if (heretic.Ascended)
-                    {
-                        multiplier = 5f;
-                        if (resiratorQuery.TryComp(uid, out var respirator))
-                        {
-                            _respirator.UpdateSaturation(uid,
-                                respirator.MaxSaturation - respirator.MinSaturation,
-                                respirator);
-                        }
-
-                        if (damageable != null && _dmg.GetTotalDamage((uid, damageable)) < FixedPoint2.Epsilon)
-                        {
-                            if (bodyQuery.TryComp(uid, out var body))
-                                _bodyRestore.RestoreBody((uid, body));
-                            shouldHeal = false;
-                        }
-                    }
-                    else
-                        multiplier = 3f;
-                }
-            }
-            else if (ghoulQuery.HasComp(uid))
-                multiplier = 3f;
-
-            RemCompDeferred<DelayedKnockdownComponent>(uid);
-
-            var toHeal = -AllDamage * multiplier;
-
-            if (shouldHeal && damageable != null)
-            {
-                IHateWoundMed((uid, damageable, null),
-                    toHeal,
-                    leech.BloodHeal * multiplier,
-                    null);
-            }
-
-            if (bloodQuery.TryComp(uid, out var blood))
-                _blood.FlushChemicals((uid, blood), leech.ChemPurgeRate * multiplier, leech.ExcludedReagents);
-
-            if (temperatureQuery.TryComp(uid, out var temperature))
-                _temperature.ForceChangeTemperature(uid, leech.TargetTemperature, temperature);
-
-            if (staminaQuery.TryComp(uid, out var stamina) && stamina.StaminaDamage > 0)
-            {
-                _stam.TakeStaminaDamage(uid,
-                    -float.Min(leech.StaminaHeal * multiplier, stamina.StaminaDamage),
-                    stamina,
-                    visual: false);
-            }
-
-            var reduction = leech.StunReduction * multiplier;
-            _stun.TryAddStunDuration(uid, -reduction);
-            _stun.AddKnockdownTime(uid, -reduction);
-
-            StatusNew.TryRemoveStatusEffect(uid, leech.SleepStatus);
-            StatusNew.TryRemoveStatusEffect(uid, leech.DrowsinessStatus);
-            StatusNew.TryRemoveStatusEffect(uid, leech.RainbowStatus);
-
-            if (statusQuery.TryComp(uid, out var status))
-            {
-                Status.TryRemoveStatusEffect(uid, "BlurryVision", status);
-                Status.TryRemoveStatusEffect(uid, "TemporaryBlindness", status);
-            }
-        }
     }
 }

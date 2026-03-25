@@ -3,10 +3,11 @@
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class RustbringerComponent : Component
 {
     [DataField]
@@ -24,9 +25,9 @@ public sealed partial class RustbringerComponent : Component
     [DataField]
     public EntProtoId Effect = "TileHereticRustRune";
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float Accumulator;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextUpdate = TimeSpan.Zero;
 
     [DataField]
-    public float Delay = 0.2f;
+    public TimeSpan Delay = TimeSpan.FromMilliseconds(200);
 }

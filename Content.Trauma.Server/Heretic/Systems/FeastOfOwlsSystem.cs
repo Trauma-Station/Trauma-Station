@@ -1,6 +1,5 @@
 using Content.Server.Antag;
 using Content.Server.Chat.Systems;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Jittering;
 using Content.Server.Popups;
 using Content.Server.Speech.EntitySystems;
@@ -16,11 +15,13 @@ using Content.Trauma.Shared.Heretic.Messages;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
 public sealed class FeastOfOwlsSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly JitteringSystem _jitter = default!;
@@ -83,6 +84,8 @@ public sealed class FeastOfOwlsSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        var now = _timing.CurTime;
+
         var vocalQuery = GetEntityQuery<VocalComponent>();
         var query = EntityQueryEnumerator<FeastOfOwlsComponent, StatusEffectsComponent, MindContainerComponent>();
         while (query.MoveNext(out var uid, out var comp, out var status, out var mindContainer))
@@ -93,12 +96,10 @@ public sealed class FeastOfOwlsSystem : EntitySystem
                 continue;
             }
 
-            comp.ElapsedTime += frameTime; // TODO TimeSpan
-
-            if (comp.ElapsedTime < comp.Timer)
+            if (comp.NextUpdate > now)
                 continue;
 
-            comp.ElapsedTime = 0f;
+            comp.NextUpdate = now + comp.Timer;
 
             if (comp.CurrentStep + 1 < comp.Reward && !_stun.TryUpdateParalyzeDuration(uid, comp.ParalyzeTime))
             {

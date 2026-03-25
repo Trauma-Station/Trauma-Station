@@ -285,3 +285,20 @@
   - type: GrantComponentsStatusEffect
     components:
     - type: LastRefuge
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: FuriousSteelStatusEffect
+  name: furious steel
+  components:
+  - type: AddProtectiveBladesStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: SilverMaelstromStatusEffect
+  name: silver maelstrom
+  components:
+  - type: AddProtectiveBladesStatusEffect
+    interval: 7.5
+    maxBlades: 5
+    refreshBlades: true

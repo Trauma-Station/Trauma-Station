@@ -1,24 +1,25 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Server.Heretic.Components.PathSpecific;
 
-[RegisterComponent]
+[RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class HereticFlamesComponent : Component
 {
     [DataField]
     public EntProtoId FireProto = "HereticFireAA";
 
-    [ViewVariables]
-    public float UpdateTimer;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan UpdateTimer = TimeSpan.Zero;
 
-    [ViewVariables]
-    public float LifetimeTimer;
-
-    [DataField]
-    public float UpdateDuration = .2f;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan LifetimeTimer = TimeSpan.Zero;
 
     [DataField]
-    public float LifetimeDuration = 60f;
+    public TimeSpan UpdateDuration = TimeSpan.FromMilliseconds(200);
+
+    [DataField]
+    public TimeSpan LifetimeDuration = TimeSpan.FromSeconds(60);
 
     [DataField]
     public int RangeIncrease;

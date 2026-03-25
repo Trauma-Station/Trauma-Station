@@ -30,17 +30,19 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
 // void path heretic exclusive
 public sealed class AristocratSystem : EntitySystem
 {
-    [Dependency] private readonly TileSystem _tile = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly IPrototypeManager _prot = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
+    [Dependency] private readonly TileSystem _tile = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly VoidCurseSystem _voidcurse = default!;
@@ -65,9 +67,8 @@ public sealed class AristocratSystem : EntitySystem
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
     private static readonly ProtoId<TagPrototype> Window = "Window";
 
-    private const float ConduitDelay = 1f;
-
-    private float _accumulator;
+    private static readonly TimeSpan ConduitDelay = TimeSpan.FromSeconds(1);
+    private TimeSpan _nextUpdate = TimeSpan.Zero;
 
     private readonly HashSet<Entity<FreezableWallComponent>> _walls = new();
 
@@ -210,25 +211,23 @@ public sealed class AristocratSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        var now = _timing.CurTime;
+
         var query = EntityQueryEnumerator<AristocratComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var aristocrat, out var xform))
         {
-            // TODO TimeSpan
-            aristocrat.UpdateTimer += frameTime;
-
-            if (aristocrat.UpdateTimer < aristocrat.UpdateDelay)
+            if (aristocrat.NextUpdate > now)
                 continue;
 
+            aristocrat.NextUpdate = now + aristocrat.UpdateDelay;
+
             Cycle((uid, aristocrat, xform));
-            aristocrat.UpdateTimer = 0;
         }
 
-        _accumulator += frameTime;
-
-        if (_accumulator < ConduitDelay)
+        if (_nextUpdate > now)
             return;
 
-        _accumulator = 0f;
+        _nextUpdate = now + ConduitDelay;
 
         var airlockQuery = GetEntityQuery<AirlockComponent>();
         var xformQuery = GetEntityQuery<TransformComponent>();

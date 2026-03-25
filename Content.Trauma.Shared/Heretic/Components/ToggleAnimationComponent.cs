@@ -3,10 +3,11 @@
 using System.Threading;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class ToggleAnimationComponent : Component
 {
     [DataField]
@@ -15,7 +16,14 @@ public sealed partial class ToggleAnimationComponent : Component
     [DataField]
     public TimeSpan ToggleOffTime = TimeSpan.FromSeconds(1.6);
 
-    public CancellationTokenSource? TokenSource;
+    [DataField]
+    public ToggleAnimationState CurState;
+
+    [DataField]
+    public ToggleAnimationState NextState;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan ToggleEndTime = TimeSpan.Zero;
 }
 
 [Serializable, NetSerializable]

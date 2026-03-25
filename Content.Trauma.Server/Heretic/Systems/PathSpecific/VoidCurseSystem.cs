@@ -7,11 +7,13 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Temperature.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
 public sealed class VoidCurseSystem : SharedVoidCurseSystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TemperatureSystem _temp = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
 
@@ -19,16 +21,18 @@ public sealed class VoidCurseSystem : SharedVoidCurseSystem
     {
         base.Update(frameTime);
 
+        var now = _timing.CurTime;
+
         var eqe = EntityQueryEnumerator<VoidCurseComponent>();
         while (eqe.MoveNext(out var uid, out var comp))
         {
-            if (comp.Lifetime <= 0)
+            if (comp.Lifetime <= 0f)
             {
-                if (comp.Stacks <= 1)
+                if (comp.Stacks <= 1f)
                     RemCompDeferred(uid, comp);
                 else
                 {
-                    comp.Stacks -= 1;
+                    comp.Stacks -= 1f;
                     RefreshLifetime(comp);
                     Dirty(uid, comp);
                 }
@@ -36,12 +40,12 @@ public sealed class VoidCurseSystem : SharedVoidCurseSystem
                 continue;
             }
 
-            comp.Timer -= frameTime; // TODO: TimeSpan
-            if (comp.Timer > 0)
+            if (comp.NextUpdate > now)
                 continue;
 
-            comp.Timer = 1f;
-            comp.Lifetime -= 1f;
+            comp.NextUpdate = now + comp.Timer;
+
+            comp.Lifetime -= (float) comp.Timer.TotalSeconds;
 
             Cycle((uid, comp));
         }

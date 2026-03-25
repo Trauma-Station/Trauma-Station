@@ -2,13 +2,6 @@
   id: BloodChunkEffect
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
-    drawdepth: Effects
-    noRot: false
-    sprite: /Textures/_Goobstation/Wizard/Effects/blood.rsi
-    layers:
-    - state: blood
-      map: [ "enum.SolutionContainerLayers.Fill" ]
   - type: Trail
     angleVariation: 90
     maxParticleAmount: 50
@@ -24,14 +17,6 @@
     sprite:
       sprite: /Textures/_Goobstation/Wizard/Effects/blood.rsi
       state: blood
-  - type: Animateable
-  - type: Appearance
-  - type: SolutionContainerVisuals
-    solutionName: print
-  - type: SolutionContainerManager
-    solutions:
-      print:
-        maxVol: 3
   - type: BloodSplatterOnLandComponent
   - type: Physics
     fixedRotation: false

@@ -2,15 +2,17 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems.Side;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
 public sealed class ShadowCloakSystem : SharedShadowCloakSystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
 
-    private const float SustainedDamageReductionInterval = 1f;
-    private float _accumulator;
+    private static readonly TimeSpan SustainedDamageReductionInterval = TimeSpan.FromSeconds(1);
+    private TimeSpan _nextUpdate = TimeSpan.Zero;
 
     protected override void Startup(Entity<ShadowCloakedComponent> ent)
     {
@@ -30,12 +32,12 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
     {
         base.Update(frameTime);
 
-        _accumulator += frameTime; // TODO TimeSpan
+        var now = _timing.CurTime;
 
-        if (_accumulator < SustainedDamageReductionInterval)
+        if (_nextUpdate > now)
             return;
 
-        _accumulator = 0f;
+        _nextUpdate = now + SustainedDamageReductionInterval;
 
         var shadowCloakedQuery = EntityQueryEnumerator<ShadowCloakEntityComponent>();
         while (shadowCloakedQuery.MoveNext(out _, out var comp))

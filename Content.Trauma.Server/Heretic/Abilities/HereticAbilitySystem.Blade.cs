@@ -2,7 +2,6 @@
 
 using Content.Medical.Shared.Wounds;
 using Content.Trauma.Shared.Heretic.Events;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
 
@@ -30,22 +29,6 @@ public sealed partial class HereticAbilitySystem
         if (!TryUseAbility(args))
             return;
 
-        var ent = args.Performer;
-
-        _pblade.AddProtectiveBlade(ent);
-        for (var i = 1; i < 3; i++)
-        {
-            // TODO kill timer
-            Timer.Spawn(TimeSpan.FromSeconds(0.5f * i),
-                () =>
-                {
-                    if (TerminatingOrDeleted(ent))
-                        return;
-
-                    _pblade.AddProtectiveBlade(ent);
-                });
-        }
-
-        args.Handled = true;
+        StatusNew.TryUpdateStatusEffectDuration(args.Performer, args.StatusEffect, out _, args.StatusDuration);
     }
 }

@@ -1,8 +1,9 @@
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components;
 
-[RegisterComponent]
+[RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class FeastOfOwlsComponent : Component
 {
     [DataField]
@@ -12,10 +13,10 @@ public sealed partial class FeastOfOwlsComponent : Component
     public int CurrentStep;
 
     [DataField]
-    public float Timer = 2f;
+    public TimeSpan Timer = TimeSpan.FromSeconds(2);
 
-    [ViewVariables]
-    public float ElapsedTime = 2f;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextUpdate = TimeSpan.Zero;
 
     [DataField]
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(5);
