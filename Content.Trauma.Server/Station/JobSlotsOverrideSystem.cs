@@ -17,6 +17,7 @@ public sealed class JobSlotsOverrideSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
 
     public override void Initialize()
     {
@@ -35,6 +36,18 @@ public sealed class JobSlotsOverrideSystem : EntitySystem
         {
             ent.Comp.SetupAvailableJobs[job] = [ slots, slots ];
         }
+
+        // this is needed for latejoin etc, normally created on ComponentStartup for StationData... so have to do it again now
+        ent.Comp.JobList.Clear();
+        ent.Comp.TotalJobs = 0;
+        foreach (var (job, slots) in ent.Comp.SetupAvailableJobs)
+        {
+            var n = slots[1] < 0 ? null : slots[1];
+            ent.Comp.JobList[job] = n;
+            ent.Comp.TotalJobs += n ?? 0;
+        }
+
+        _stationJobs.UpdateJobsAvailable();
 
         // this is completely unused but just futureproofing incase someone needs it later
         ent.Comp.MidRoundTotalJobs = 0;
