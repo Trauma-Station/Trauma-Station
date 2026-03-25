@@ -1,5 +1,5 @@
 # Make a ton more jobs available and infinite interns on very high pop
-- type: jobSlotOverride
+- type: jobSlotsOverride
   id: HighPop
   min: 85
   jobs:
