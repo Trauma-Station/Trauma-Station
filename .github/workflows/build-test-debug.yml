@@ -125,9 +125,9 @@ jobs:
 
     - name: Run main Content.IntegrationTests
       run: |
-        DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll \
-          --filter "FullyQualifiedName!~PostMapInitTest&FullyQualifiedName!~StationPowerTests" \
-          -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll -- \
+          NUnit.Where="class!~PostMapInitTest&class!~StationPowerTests"
+          NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     - name: Archive NUnit3 test results
       if: always()
