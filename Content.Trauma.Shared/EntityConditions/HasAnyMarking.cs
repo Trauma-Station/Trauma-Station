@@ -31,7 +31,6 @@ public sealed partial class HasAnyMarking : EntityConditionBase<HasAnyMarking>
 
 public sealed class HasAnyMarkingConditionSystem : EntityConditionSystem<BodyComponent, HasAnyMarking>
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly BodySystem _body = default!;
 
     protected override void Condition(Entity<BodyComponent> ent, ref EntityConditionEvent<HasAnyMarking> args)
