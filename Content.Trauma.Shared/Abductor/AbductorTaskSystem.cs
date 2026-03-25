@@ -129,8 +129,10 @@ public sealed class AbductorTaskSystem : EntitySystem
     /// <summary>
     /// Returns true if a target has all of its tasks completed.
     /// </summary>
-    public bool AllTasksCompleted(EntityUid target)
-        => _query.CompOrNull(target)?.AllCompleted ?? false;
+    public bool AllTasksCompleted(Entity<AbductorSubjectComponent?> target)
+        => _query.Resolve(target, ref target.Comp, false)
+            ? target.Comp.AllCompleted
+            : false;
 
     #endregion
 }

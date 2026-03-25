@@ -16,78 +16,94 @@ public sealed class AlienSheetlet : Sheetlet<AlienStylesheet>
 {
     public override StyleRule[] GetRules(AlienStylesheet sheet, object config)
     {
-        // Original image palette - exact colors
-        var bgColor      = new Color(0.07f, 0.07f, 0.07f, 1.00f); // near-black / dark gray
-        var textColor    = new Color(0.00f, 1.00f, 0.00f, 1.00f); // bright lime green #00FF00
-        var borderColor  = new Color(0.00f, 0.90f, 0.00f, 1.00f); // slightly softer green for borders
-        var buttonBg     = new Color(0.07f, 0.07f, 0.07f, 1.00f);
-        var hoverColor   = new Color(0.15f, 0.15f, 0.15f, 1.00f);
-        var pressedColor = new Color(0.25f, 0.25f, 0.25f, 1.00f);
-        var warningColor = new Color(1.00f, 0.65f, 0.00f, 1.00f); // warning orange
+        var bgColor      = new Color(37, 31, 27);
+        var textColor    = new Color(0, 255, 0);
+        var borderColor  = new Color(212, 0, 98);
+        var buttonBg     = new Color(60, 165, 68);
+        var buttonBorder = new Color(55, 142, 64);
+        var hoverColor   = new Color(50, 128, 108);
+        var pressedColor = borderColor;
+        var warningColor = new Color(1f, 0.65f, 0f);
 
         var asciiBorderBox = new StyleBoxFlat
         {
             BackgroundColor = bgColor,
             BorderColor = borderColor,
-            BorderThickness = new Thickness(3f),
-            Padding = new Thickness(6f)
+            BorderThickness = new Thickness(3f)
         };
 
         var buttonBox = new StyleBoxFlat
         {
             BackgroundColor = buttonBg,
-            BorderColor = borderColor,
+            BorderColor = buttonBorder,
             BorderThickness = new Thickness(2f),
             Padding = new Thickness(8f, 4f)
         };
 
         return
         [
-            // Main Window (exact CRT dark frame + lime text)
+            // Window background panel
             E()
-                .Class(DefaultWindow.StyleClassWindowPanel)
+                .Class(StyleClass.BackgroundPanel)
                 .Panel(asciiBorderBox),
 
-            // Window title bar (uppercase green, matches original image)
+            // Window title bar
             E<Label>()
                 .Class("FancyWindowTitle") // hardcoded award
+                .AlignMode(Label.AlignMode.Center)
                 .Prop(Label.StylePropertyFontColor, textColor)
                 .Prop(Label.StylePropertyFont, sheet.BaseFont.GetFont(16)),
 
-            // Panels (Captured Humans / Available Experiments)
+            // Other panels
             E<PanelContainer>()
                 .Panel(asciiBorderBox),
 
-            // All Labels (main text)
+            // All Labels
             E<Label>()
                 .Prop(Label.StylePropertyFontColor, textColor)
                 .Prop(Label.StylePropertyFont, sheet.BaseFont.GetFont(13)),
 
-            // Buttons ([SELECT], [PERFORM SELECTED], etc.)
+            // Buttons
             E<ContainerButton>()
-                .Prop(ContainerButton.StylePropertyStyleBox, buttonBox),
+                .PseudoNormal()
+                .ParentOf(E<PanelContainer>())
+                .Panel(buttonBox),
 
-            // Button hover (classic green flash)
-            E<ContainerButton>()
-                .PseudoHovered()
-                .Prop(ContainerButton.StylePropertyStyleBox, new StyleBoxFlat
+            // Button hover
+            E<ContainerButton>().PseudoHovered()
+                .ParentOf(E<PanelContainer>())
+                .Panel(new StyleBoxFlat
                 {
                     BackgroundColor = hoverColor,
-                    BorderColor = borderColor,
-                    BorderThickness = new Thickness(2f)
+                    BorderColor = buttonBorder,
+                    BorderThickness = new Thickness(2f),
+                    Padding = new Thickness(8f, 4f)
+                }),
+
+            E<ContainerButton>()
+                .Class("highlight")
+                .ParentOf(E<PanelContainer>())
+                .Panel(new StyleBoxFlat
+                {
+                    BackgroundColor = hoverColor,
+                    BorderColor = buttonBorder,
+                    BorderThickness = new Thickness(2f),
+                    Padding = new Thickness(8f, 4f)
                 }),
 
             // Button pressed
             E<ContainerButton>()
                 .PseudoPressed()
-                .Prop(ContainerButton.StylePropertyStyleBox, new StyleBoxFlat
+                .ParentOf(E<PanelContainer>())
+                .Panel(new StyleBoxFlat
                 {
                     BackgroundColor = pressedColor,
                     BorderColor = textColor,
-                    BorderThickness = new Thickness(2f)
+                    BorderThickness = new Thickness(2f),
+                    Padding = new Thickness(8f, 4f)
                 }),
 
-            // Warning text at the bottom (orange)
+            // Caution labels
             E<Label>()
                 .Class("negative")
                 .Prop(Label.StylePropertyFontColor, warningColor)

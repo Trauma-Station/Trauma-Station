@@ -118,9 +118,12 @@
     outerClothing: ClothingOuterCoatAbductor
     back: ClothingBackpackAbductor
     pocket1: AbductorGizmo
-    pocket2: WeaponAlien
+    pocket2: AbductorTaskTablet
     suitstorage: Wonderprod
     id: AgentIDCard
+  storage:
+    back:
+    - WeaponAlien
 
 - type: startingGear
   id: AbductorScientistGear
@@ -133,9 +136,12 @@
     outerClothing: ClothingOuterCoatAbductor
     back: ClothingBackpackDuffelAbductor
     pocket1: Silencer # Trauma - swapped silencer and gizmo
-    pocket2: RadioJammer # Trauma
+    pocket2: AbductorTaskTablet
     suitstorage: WeaponDecloner
     id: AgentIDCard
+  storage:
+    back:
+    - RadioJammer
 
 - type: startingGear
   id: AbductorAgentGear

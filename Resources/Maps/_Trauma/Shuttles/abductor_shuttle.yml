@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
-  engineVersion: 272.0.0
+  category: Grid
+  engineVersion: 274.0.1
   forkId: ""
   forkVersion: ""
-  time: 03/23/2026 12:44:29
-  entityCount: 256
-maps:
-- 228
+  time: 03/25/2026 21:00:13
+  entityCount: 251
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   0: Space
@@ -24,7 +24,7 @@ entities:
       name: grid
     - type: Transform
       pos: -0.5520833,-0.5416667
-      parent: 228
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -125,16 +125,6 @@ entities:
     - type: TileHistory
       chunkHistory: {}
     - type: ExplosionAirtightGrid
-  - uid: 228
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
 - proto: AbductorAlienPad
   entities:
   - uid: 181
@@ -187,17 +177,6 @@ entities:
     - type: Transform
       pos: 0.5,0.5
       parent: 1
-- proto: ActionToggleInternals
-  entities:
-  - uid: 235
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 216
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 216
 - proto: AirAlarm
   entities:
   - uid: 248
@@ -640,16 +619,6 @@ entities:
           priority: 0
           component: ClothingSpeedModifier
         title: null
-- proto: ClothingMaskBreath
-  entities:
-  - uid: 218
-    components:
-    - type: Transform
-      parent: 230
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
 - proto: ComputerIFF
   entities:
   - uid: 183
@@ -665,35 +634,13 @@ entities:
     - type: Transform
       pos: 0.5,5.5
       parent: 1
-- proto: CrateFreezer
+- proto: CrateFreezerAbductor
   entities:
-  - uid: 230
+  - uid: 216
     components:
     - type: Transform
       pos: -1.5,-0.5
       parent: 1
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.14673
-        moles:
-          Oxygen: 1.7459903
-          Nitrogen: 6.568249
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 233
-          - 218
-          - 234
-          - 216
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
 - proto: Defibrillator
   entities:
   - uid: 231
@@ -948,24 +895,6 @@ entities:
     - type: Physics
       angularDamping: 0
       linearDamping: 0
-- proto: NitrousOxideTankFilled
-  entities:
-  - uid: 216
-    components:
-    - type: Transform
-      parent: 230
-    - type: GasTank
-      toggleActionEntity: 235
-    - type: Physics
-      canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 235
-    - type: InsideEntityStorage
-      storage: 230
 - proto: OrganCyberneticEyes
   entities:
   - uid: 225
@@ -1017,26 +946,6 @@ entities:
     - type: Transform
       pos: 2.4815433,-0.49738568
       parent: 1
-- proto: OrganMothWings
-  entities:
-  - uid: 234
-    components:
-    - type: Transform
-      parent: 230
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
-- proto: OrganReptilianTail
-  entities:
-  - uid: 233
-    components:
-    - type: Transform
-      parent: 230
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 230
 - proto: PlushieAbductor
   entities:
   - uid: 253
@@ -1266,6 +1175,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,-5.5
+      parent: 1
+- proto: TurboItemRecharger
+  entities:
+  - uid: 218
+    components:
+    - type: Transform
+      pos: 4.5,3.5
       parent: 1
 - proto: WallAbductor
   entities:
@@ -1703,6 +1619,6 @@ entities:
   - uid: 195
     components:
     - type: Transform
-      pos: 4.5119457,3.4933095
+      pos: 4.528526,3.1147985
       parent: 1
 ...

@@ -147,6 +147,12 @@
   valid:
   - !type:HasOrgan
     organCategory: Tongue
+  completed:
+  - !type:HasOrgan
+    inverted: true
+    organCategory: Tongue
+  - !type:HasOrgan
+    organCategory: Head # don't allow cutting off head to do it...
 
 - type: abductorTask
   id: RemoveKidneys

@@ -16,6 +16,7 @@
   - type: AntagObjectives
     objectives:
     - AbductObjective
+  - type: AbductorRule
   - type: AntagLoadProfileRule
     speciesHardOverride: Abductor
   - type: AntagSelection

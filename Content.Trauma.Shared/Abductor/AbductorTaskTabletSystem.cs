@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Shared.Abductor;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
@@ -13,6 +15,7 @@ namespace Content.Trauma.Shared.Abductor;
 public sealed class AbductorTaskTabletSystem : EntitySystem
 {
     [Dependency] private readonly AbductorTaskSystem _task = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -35,14 +38,20 @@ public sealed class AbductorTaskTabletSystem : EntitySystem
         var user = args.User;
         if (args.Handled ||
             args.Target is not {} target ||
-            target == user || // lol no
-            !HasComp<AbductorVictimComponent>(target)) // have to gizmo + abduct first chud
+            target == user) // lol no
             return;
+
+        // have to gizmo + abduct first chud
+        if (!HasComp<AbductorVictimComponent>(target))
+        {
+            _popup.PopupClient(Loc.GetString("abductor-task-tablet-not-abducted"), target, user);
+            return;
+        }
 
         args.Handled = true;
         if (_task.AllTasksCompleted(target))
         {
-            _popup.PopupClient(Loc.GetString("abductor-task-tablet-already-completed"), user, user);
+            _popup.PopupClient(Loc.GetString("abductor-task-tablet-already-completed"), target, user);
             return;
         }
 
@@ -53,7 +62,7 @@ public sealed class AbductorTaskTabletSystem : EntitySystem
         ent.Comp.Target = netTarget;
         Dirty(ent);
 
-        _popup.PopupClient(Loc.GetString("abductor-task-tablet-linked"), user, user);
+        _popup.PopupClient(Loc.GetString("abductor-task-tablet-linked"), target, user);
         _ui.TryOpenUi(ent.Owner, AbductorTaskTabletUIKey.Key, user);
     }
 
@@ -64,25 +73,34 @@ public sealed class AbductorTaskTabletSystem : EntitySystem
             _task.IsSubject(target)) // no sound spamming
             return;
 
+        var user = args.Actor;
+        _adminLog.Add(LogType.AntagObjective, $"Abductor tasks created for {ToPrettyString(target)} by {ToPrettyString(user)}");
+
         EnsureComp<AbductorSubjectComponent>(target);
-        _audio.PlayPredicted(ent.Comp.ScanSound, ent, args.Actor);
+        _audio.PlayPredicted(ent.Comp.ScanSound, ent, user);
     }
 
     private void OnComplete(Entity<AbductorTaskTabletComponent> ent, ref AbductorTaskCompleteMessage args)
     {
-        if (GetEntity(ent.Comp.Target) is not {} target || !InRange(ent, target))
+        if (GetEntity(ent.Comp.Target) is not {} target ||
+            !InRange(ent, target) ||
+            !TryComp<AbductorSubjectComponent>(target, out var subject))
             return;
 
         var user = args.Actor;
-        if (!_task.TryCompleteTask(target))
+        var task = subject.NextTask;
+        if (!_task.TryCompleteTask((target, subject)))
         {
             _popup.PopupClient(Loc.GetString("abductor-task-tablet-incomplete"), user, user);
             return;
         }
 
-        // TODO: objective for each completed task
+        _adminLog.Add(LogType.AntagObjective, $"Abductor task {task} completed on {ToPrettyString(target)} by {ToPrettyString(user)}");
 
-        if (!_task.AllTasksCompleted(target))
+        var ev = new AbductorTaskCompleteEvent();
+        RaiseLocalEvent(user, ref ev);
+
+        if (!_task.AllTasksCompleted((target, subject)))
             return;
 
         _audio.PlayPredicted(ent.Comp.FinishSound, ent, user);
@@ -100,3 +118,9 @@ public sealed class AbductorTaskTabletSystem : EntitySystem
         return _transform.InRange(xform.Coordinates, targetXform.Coordinates, ent.Comp.Range);
     }
 }
+
+/// <summary>
+/// Raised on the abductor mob whenever a task from an experiment is completed.
+/// </summary>
+[ByRefEvent]
+public record struct AbductorTaskCompleteEvent();
