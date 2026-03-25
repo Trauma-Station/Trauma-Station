@@ -3,7 +3,6 @@
   mapName: 'Fland Installation'
   mapPath: /Maps/_Trauma/fland.yml
   minPlayers: 40
-  maxPlayers: 85
   stations:
     Fland:
       stationProto: StandardNanotrasenStation
