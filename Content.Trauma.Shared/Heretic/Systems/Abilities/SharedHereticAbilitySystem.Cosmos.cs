@@ -16,7 +16,6 @@ public abstract partial class SharedHereticAbilitySystem
     protected virtual void SubscribeCosmos()
     {
         SubscribeLocalEvent<EventHereticCosmicRune>(OnCosmicRune);
-        SubscribeLocalEvent<EventHereticStarTouch>(OnStarTouch);
         SubscribeLocalEvent<EventHereticStarBlast>(OnStarBlast);
         SubscribeLocalEvent<EventHereticCosmicExpansion>(OnExpansion);
         SubscribeLocalEvent<HereticAscensionCosmosEvent>(OnAscension);
@@ -138,15 +137,6 @@ public abstract partial class SharedHereticAbilitySystem
                 _throw.TryThrow(mob, coords);
         }
         _starMark.SpawnCosmicFields(coords, 1, strength);
-    }
-
-    private void OnStarTouch(EventHereticStarTouch args)
-    {
-        var touch = GetTouchSpell<EventHereticStarTouch, StarTouchComponent>(args.Performer, ref args);
-        if (touch == null)
-            return;
-
-        EnsureComp<StarTouchComponent>(touch.Value).Action = args.Action.Owner;
     }
 
     private void OnCosmicRune(EventHereticCosmicRune args)

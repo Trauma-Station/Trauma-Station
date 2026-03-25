@@ -3,7 +3,6 @@
 using Content.Medical.Common.Surgery;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
-using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -21,14 +20,13 @@ public abstract partial class SharedHereticAbilitySystem
 
     protected virtual void SubscribeFlesh()
     {
-        SubscribeLocalEvent<EventHereticFleshSurgery>(OnFleshSurgery);
         SubscribeLocalEvent<EventHereticFleshSurgeryDoAfter>(OnFleshSurgeryDoAfter);
 
         SubscribeLocalEvent<FleshPassiveComponent, ImmuneToPoisonDamageEvent>(OnPoisonImmune);
 
         SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryPainEvent>>(OnPain);
         SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryIgnorePreviousStepsEvent>>(OnIgnore);
-        SubscribeLocalEvent<FleshSurgeryComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<FleshSurgeryComponent, TouchSpellUsedEvent>(OnTouchSpellUsed);
         SubscribeLocalEvent<FleshSurgeryComponent, UseInHandEvent>(OnFleshSurgeryUse);
     }
 
@@ -37,7 +35,7 @@ public abstract partial class SharedHereticAbilitySystem
         args.Immune = true;
     }
 
-    private void OnAfterInteract(Entity<FleshSurgeryComponent> ent, ref AfterInteractEvent args)
+    private void OnTouchSpellUsed(Entity<FleshSurgeryComponent> ent, ref TouchSpellUsedEvent args)
     {
         if (!HasComp<GhoulComponent>(args.Target))
             return;
@@ -59,8 +57,7 @@ public abstract partial class SharedHereticAbilitySystem
             Broadcast = true,
         };
 
-        if (DoAfter.TryStartDoAfter(dargs))
-            args.Handled = true;
+        DoAfter.TryStartDoAfter(dargs);
     }
 
     private void OnIgnore(Entity<FleshSurgeryComponent> ent, ref HeldRelayedEvent<SurgeryIgnorePreviousStepsEvent> args)
@@ -73,27 +70,15 @@ public abstract partial class SharedHereticAbilitySystem
         args.Args.Cancelled = true;
     }
 
-    private void OnFleshSurgery(EventHereticFleshSurgery args)
-    {
-        var touch = GetTouchSpell<EventHereticFleshSurgery, FleshSurgeryComponent>(args.Performer, ref args);
-        if (touch == null)
-            return;
-
-        EnsureComp<FleshSurgeryComponent>(touch.Value).Action = args.Action.Owner;
-    }
-
     private void OnFleshSurgeryDoAfter(EventHereticFleshSurgeryDoAfter args)
     {
         if (args.Cancelled)
             return;
 
-        if (args.Target is not { } target) // shouldn't really happen. just in case
+        if (args.Target is not { } target || args.Used is not { } used)
             return;
 
-        if (!TryComp(args.Used, out FleshSurgeryComponent? surgery))
-            return;
-
-        InvokeTouchSpell<FleshSurgeryComponent>((args.Used.Value, surgery), args.User);
+        _touchSpell.InvokeTouchSpell(used, args.User);
         args.Handled = true;
         HealGhoul(target, args.User);
     }
@@ -137,7 +122,7 @@ public abstract partial class SharedHereticAbilitySystem
             Dirty(effect, comp);
         }
 
-        InvokeTouchSpell(ent, args.User, cd);
+        _touchSpell.InvokeTouchSpell(ent.Owner, args.User, cd);
         args.Handled = true;
     }
 }

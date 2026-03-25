@@ -4,7 +4,9 @@ using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store;
 using Content.Trauma.Shared.Heretic.Prototypes;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Events;
 
@@ -68,3 +70,38 @@ public sealed partial class CrucibleSoulRecallEvent : BaseAlertEvent
     [DataField]
     public EntProtoId EffectProto = "StatusEffectCrucibleSoul";
 }
+
+[ByRefEvent]
+public record struct TouchSpellUsedEvent(
+    EntityUid User,
+    EntityUid Target,
+    bool Invoke = false,
+    TimeSpan? CooldownOverride = null);
+
+[ByRefEvent]
+public record struct BeforeTouchSpellAbilityUsedEvent(
+    TouchSpellEvent Args,
+    EntProtoId? TouchSpell = null,
+    bool Cancelled = false);
+
+/// <summary>
+/// Raised when all hands are occupied.
+/// Used for blade heretic quick blade empowering.
+/// </summary>
+[ImplicitDataDefinitionForInheritors]
+public abstract partial class TouchSpellSpecialEvent : EntityEventArgs
+{
+    [DataField]
+    public LocId? Speech;
+
+    [DataField]
+    public SoundSpecifier? Sound;
+
+    [DataField]
+    public TimeSpan Cooldown;
+
+    public bool Invoke;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class MansusGraspSpecialEvent : TouchSpellSpecialEvent;

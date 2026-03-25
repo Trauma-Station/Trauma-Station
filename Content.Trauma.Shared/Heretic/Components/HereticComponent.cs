@@ -67,12 +67,6 @@ public sealed partial class HereticComponent : Component
     [DataField, AutoNetworkedField]
     public bool CanAscend = true;
 
-    /// <summary>
-    ///     Used to prevent double casting mansus grasp.
-    /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
-    public EntityUid MansusGraspAction = EntityUid.Invalid;
-
     [DataField]
     public SoundSpecifier? InfluenceGainSound = new SoundCollectionSpecifier("bloodCrawl");
 

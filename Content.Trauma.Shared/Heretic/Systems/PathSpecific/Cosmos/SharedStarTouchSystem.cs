@@ -4,9 +4,7 @@ using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Physics;
 using Content.Shared.Bed.Sleep;
-using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Magic;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.StatusEffectNew;
@@ -14,7 +12,7 @@ using Content.Shared.StatusEffectNew.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
-using Content.Trauma.Shared.Heretic.Systems.Abilities;
+using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -25,13 +23,12 @@ public sealed class SharedStarTouchSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMagicSystem _magic = default!;
     [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedStarGazerSystem _starGazer = default!;
-    [Dependency] private readonly SharedHereticAbilitySystem _hereticAbility = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
 
     public static readonly EntProtoId StarTouchStatusEffect = "StatusEffectStarTouched";
     public static readonly EntProtoId DrowsinessStatusEffect = "StatusEffectDrowsiness";
@@ -41,7 +38,7 @@ public sealed class SharedStarTouchSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StarTouchComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<StarTouchComponent, TouchSpellUsedEvent>(OnTouchSpell);
         SubscribeLocalEvent<StarTouchComponent, UseInHandEvent>(OnUseInHand);
 
         SubscribeLocalEvent<StarTouchedStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
@@ -56,7 +53,7 @@ public sealed class SharedStarTouchSystem : EntitySystem
 
         args.Handled = true;
 
-        _hereticAbility.InvokeTouchSpell(ent, args.User);
+        _touchSpell.InvokeTouchSpell(ent.Owner, args.User);
 
         if (spawned)
             return;
@@ -188,35 +185,19 @@ public sealed class SharedStarTouchSystem : EntitySystem
         _status.TryRemoveStatusEffect(ent, StarTouchStatusEffect);
     }
 
-    private void OnAfterInteract(Entity<StarTouchComponent> ent, ref AfterInteractEvent args)
+    private void OnTouchSpell(Entity<StarTouchComponent> ent, ref TouchSpellUsedEvent args)
     {
-        if (!args.CanReach)
-            return;
-
-        if (args.Target == null || args.Target == args.User)
-            return;
-
-        var (uid, comp) = ent;
-
-        var target = args.Target.Value;
+        var target = args.Target;
+        var comp = ent.Comp;
 
         if (!TryComp(target, out MobStateComponent? mobState))
             return;
 
-        args.Handled = true;
+        args.Invoke = true;
 
         if (!_heretic.TryGetHereticComponent(args.User, out var hereticComp, out _) ||
-            _heretic.TryGetHereticComponent(args.Target.Value, out var th, out _) && th.CurrentPath == HereticPath.Cosmos)
-        {
-            PredictedQueueDel(uid);
+            _heretic.TryGetHereticComponent(target, out var th, out _) && th.CurrentPath == HereticPath.Cosmos)
             return;
-        }
-
-        if (_magic.IsTouchSpellDenied(target))
-        {
-            _hereticAbility.InvokeTouchSpell(ent, args.User);
-            return;
-        }
 
         var range = hereticComp.Ascended ? 2 : 1;
         var xform = Transform(args.User);
@@ -230,24 +211,21 @@ public sealed class SharedStarTouchSystem : EntitySystem
         if (!HasComp<StarMarkComponent>(target))
         {
             _starMark.TryApplyStarMark((target, mobState));
-            _hereticAbility.InvokeTouchSpell(ent, args.User);
             return;
         }
 
         _status.TryRemoveStatusEffect(target, SharedStarMarkSystem.StarMarkStatusEffect);
         _status.TryUpdateStatusEffectDuration(target, DrowsinessStatusEffect, comp.DrowsinessTime);
 
-        if (_status.TryUpdateStatusEffectDuration(target, StarTouchStatusEffect, comp.Duration))
-        {
-            EnsureComp<BlockTeleportComponent>(target);
-            var beam = EnsureComp<ComplexJointVisualsComponent>(target);
-            beam.Data[GetNetEntity(args.User)] = new ComplexJointVisualsData(StarTouchBeamDataId, comp.BeamSprite);
-            Dirty(target, beam);
-            var trail = EnsureComp<CosmicTrailComponent>(target);
-            trail.CosmicFieldLifetime = comp.CosmicFieldLifetime;
-            trail.Strength = hereticComp.PathStage;
-        }
+        if (!_status.TryUpdateStatusEffectDuration(target, StarTouchStatusEffect, comp.Duration))
+            return;
 
-        _hereticAbility.InvokeTouchSpell(ent, args.User);
+        EnsureComp<BlockTeleportComponent>(target);
+        var beam = EnsureComp<ComplexJointVisualsComponent>(target);
+        beam.Data[GetNetEntity(args.User)] = new ComplexJointVisualsData(StarTouchBeamDataId, comp.BeamSprite);
+        Dirty(target, beam);
+        var trail = EnsureComp<CosmicTrailComponent>(target);
+        trail.CosmicFieldLifetime = comp.CosmicFieldLifetime;
+        trail.Strength = hereticComp.PathStage;
     }
 }

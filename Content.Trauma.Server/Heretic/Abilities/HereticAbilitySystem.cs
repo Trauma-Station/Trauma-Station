@@ -3,7 +3,6 @@
 using Content.Server.Actions;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
-using Content.Server.Chat.Systems;
 using Content.Server.Cloning;
 using Content.Server.Flash;
 using Content.Server.Hands.Systems;
@@ -13,10 +12,8 @@ using Content.Server.Store.Systems;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Body;
-using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
-using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Localizations;
 using Content.Shared.Mind.Components;
@@ -26,15 +23,9 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
-using Content.Shared.Tag;
 using Content.Shared.Weather;
-using Content.Trauma.Server.Heretic.Systems;
-using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
-using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
-using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
-using Robust.Server.Containers;
 using Robust.Server.GameStates;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -49,7 +40,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly PolymorphSystem _poly = default!;
     [Dependency] private readonly MobStateSystem _mobstate = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;
@@ -63,11 +53,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly ProtectiveBladeSystem _pblade = default!;
     [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly MansusGraspSystem _mansusGrasp = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly PvsOverrideSystem _pvs = default!;
@@ -75,37 +61,23 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
     #endregion
 
-    private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
+    public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<EventHereticOpenStore>(OnStore);
-        SubscribeLocalEvent<EventHereticMansusGrasp>(OnMansusGrasp);
 
         SubscribeLocalEvent<EventHereticLivingHeart>(OnLivingHeart);
         SubscribeLocalEvent<EventHereticLivingHeartActivate>(OnLivingHeartActivate);
 
         SubscribeLocalEvent<EventHereticMansusLink>(OnMansusLink);
         SubscribeLocalEvent<HereticMansusLinkDoAfter>(OnMansusLinkDoafter);
-    }
-
-    public override void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user, TimeSpan? cooldownOverride = null)
-    {
-        base.InvokeTouchSpell(ent, user, cooldownOverride);
-
-        _chat.TrySendInGameICMessage(user, Loc.GetString(ent.Comp.Speech), InGameICChatType.Speak, false);
-
-        if (Exists(ent.Comp.Action))
-            _actions.SetCooldown(ent.Comp.Action.Value, cooldownOverride ?? ent.Comp.Cooldown);
-
-        QueueDel(ent);
     }
 
     private void OnStore(EventHereticOpenStore args)
@@ -120,112 +92,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             return;
 
         _store.ToggleUi(args.Performer, ent, store);
-    }
-
-    private void OnMansusGrasp(EventHereticMansusGrasp args)
-    {
-        if (!TryUseAbility(args, false))
-            return;
-
-        if (!Heretic.TryGetHereticComponent(args.Performer, out var heretic, out var ent))
-            return;
-
-        var uid = args.Performer;
-
-        if (!TryComp<HandsComponent>(uid, out var handsComp))
-            return;
-
-        if (heretic.MansusGraspAction != EntityUid.Invalid)
-        {
-            foreach (var item in _hands.EnumerateHeld((uid, handsComp)))
-            {
-                if (HasComp<MansusGraspComponent>(item))
-                    QueueDel(item);
-            }
-
-            heretic.MansusGraspAction = EntityUid.Invalid;
-            return;
-        }
-
-        if (!_hands.TryGetEmptyHand((uid, handsComp), out var emptyHand))
-        {
-            // Empowered blades - infuse all of our blades that are currently in our inventory
-            if (heretic is not { CurrentPath: HereticPath.Blade, PathStage: >= 7 })
-                return;
-
-            if (!InfuseOurBlades())
-                return;
-
-            _actions.SetCooldown(args.Action.Owner, MansusGraspSystem.DefaultCooldown);
-            _mansusGrasp.InvokeGrasp(uid, null);
-
-            return;
-        }
-
-        var st = Spawn(GetMansusGraspProto((ent, heretic)), Transform(uid).Coordinates);
-
-        if (!_hands.TryPickup(uid, st, emptyHand, animate: false, handsComp: handsComp))
-        {
-            Popup.PopupEntity(Loc.GetString("heretic-ability-fail"), uid, uid);
-            QueueDel(st);
-            return;
-        }
-
-        if (TryComp(args.Action, out Shared.Heretic.Components.Side.MansusGraspUpgradeComponent? upgrade))
-        {
-            EntityManager.AddComponents(st, upgrade.AddedComponents);
-        }
-
-        heretic.MansusGraspAction = args.Action.Owner;
-        args.Handled = true;
-
-        return;
-
-        bool InfuseOurBlades()
-        {
-            if (!Heretic.TryGetRitual((ent, heretic), BladeBladeRitualTag, out var ritual))
-                return false;
-
-            var xformQuery = GetEntityQuery<TransformComponent>();
-            var containerEnt = uid;
-            if (_container.TryGetOuterContainer(uid, xformQuery.Comp(uid), out var container, xformQuery))
-                containerEnt = container.Owner;
-
-            var success = false;
-            foreach (var blade in ritual.Value.Comp.LimitedOutput)
-            {
-                if (!Exists(blade))
-                    continue;
-
-                if (!_tag.HasTag(blade, SharedMansusGraspSystem.HereticBladeBlade))
-                    continue;
-
-                if (TryComp(blade, out Shared.Heretic.Components.PathSpecific.Blade.MansusInfusedComponent? infused) &&
-                    infused.AvailableCharges >= infused.MaxCharges)
-                    continue;
-
-                if (!_container.TryGetOuterContainer(blade, xformQuery.Comp(blade), out var bladeContainer, xformQuery))
-                    continue;
-
-                if (bladeContainer.Owner != containerEnt)
-                    continue;
-
-                var newInfused = EnsureComp<Shared.Heretic.Components.PathSpecific.Blade.MansusInfusedComponent>(blade);
-                newInfused.AvailableCharges = newInfused.MaxCharges;
-                success = true;
-            }
-
-            return success;
-        }
-    }
-
-    private string GetMansusGraspProto(Entity<HereticComponent> ent)
-    {
-        if (ent.Comp.PathStage < 2)
-            return ent.Comp.MansusGraspProto;
-
-        var pathSpecific = ent.Comp.MansusGraspProto + ent.Comp.CurrentPath;
-        return _proto.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
     }
 
     private void OnLivingHeart(EventHereticLivingHeart args)
@@ -299,8 +165,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             uid,
             AudioParams.Default.WithVolume(-3f));
     }
-
-    public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
 
     private void OnMansusLink(EventHereticMansusLink args)
     {

@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Chat.Systems;
-using Content.Shared.Chat;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
@@ -18,17 +16,16 @@ namespace Content.Trauma.Server.Heretic.Systems;
 
 public sealed class MansusGraspSystem : SharedMansusGraspSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
 
-    public static readonly LocId DefaultInvocation = "heretic-speech-mansusgrasp";
+    private static readonly EntProtoId RitualRune = "HereticRuneRitual";
+    private static readonly EntProtoId RitualAnimation = "HereticRuneRitualDrawAnimation";
 
-    public static readonly EntProtoId RitualRune = "HereticRuneRitual";
-
-    public static readonly TimeSpan DefaultCooldown = TimeSpan.FromSeconds(10);
+    private static readonly List<ProtoId<TagPrototype>> PenTags = ["Pen", "Write"];
 
     public override void Initialize()
     {
@@ -45,29 +42,15 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
             args.Cancelled = true;
     }
 
-    public override void InvokeGrasp(EntityUid user, Entity<MansusGraspComponent>? ent)
-    {
-        base.InvokeGrasp(user, ent);
-
-        var invocation = ent == null ? DefaultInvocation : ent.Value.Comp.Invocation;
-
-        if (invocation == null)
-            return;
-
-        _chat.TrySendInGameICMessage(user, Loc.GetString(invocation), InGameICChatType.Speak, false);
-    }
-
     private void OnAfterInteract(Entity<TagComponent> ent, ref AfterInteractEvent args)
     {
-        var tags = ent.Comp.Tags;
-
         if (!args.CanReach
             || !args.ClickLocation.IsValid(EntityManager)
-            || !_heretic.TryGetHereticComponent(args.User, out var heretic, out _) // not a heretic - how???
+            || !_heretic.TryGetHereticComponent(args.User, out _, out _) // not a heretic - how???
             || HasComp<ActiveDoAfterComponent>(args.User)) // prevent rune shittery
             return;
 
-        var runeProto = "HereticRuneRitualDrawAnimation";
+        var runeProto = RitualAnimation;
         float time = 14;
 
         var canScribe = true;
@@ -77,8 +60,8 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
             runeProto = scriber.RuneDrawingEntity ?? runeProto;
             time = scriber.Time ?? time;
         }
-        else if (heretic.MansusGraspAction == EntityUid.Invalid // no grasp - not special
-                 || !tags.Contains("Write") || !tags.Contains("Pen")) // not a pen
+        else if (TouchSpell.FindTouchSpell(args.User, MansusGrasp) == null || // No grasp
+                 !_tag.HasAnyTag(ent.Comp, PenTags)) // not a pen
             return;
 
         // remove our rune if clicked

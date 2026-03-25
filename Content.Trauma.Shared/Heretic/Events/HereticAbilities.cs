@@ -89,7 +89,15 @@ public record struct HereticMagicCastAttemptEvent(EntityUid User, EntityUid Acti
 // basic
 public sealed partial class HereticStartupEvent : HereticKnowledgeEvent;
 public sealed partial class EventHereticOpenStore : InstantActionEvent;
-public sealed partial class EventHereticMansusGrasp : InstantActionEvent;
+
+public sealed partial class TouchSpellEvent : InstantActionEvent
+{
+    [DataField(required: true)]
+    public EntProtoId TouchSpell;
+
+    [DataField]
+    public TouchSpellSpecialEvent? SpecialEvent;
+}
 public sealed partial class EventHereticLivingHeart : InstantActionEvent; // opens ui
 
 [ByRefEvent]
@@ -160,13 +168,6 @@ public sealed partial class EventHereticCascade : InstantActionEvent
 {
     [DataField]
     public EntProtoId CascadeEnt = "HereticCascade";
-}
-
-// flesh
-public sealed partial class EventHereticFleshSurgery : InstantActionEvent, ITouchSpellEvent
-{
-    [DataField]
-    public EntProtoId TouchSpell { get; set; } = "TouchSpellFleshSurgery";
 }
 
 // void (+ upgrades)
@@ -347,12 +348,6 @@ public sealed partial class EventHereticCosmicRune : InstantActionEvent
     public EntProtoId Rune = "HereticRuneCosmos";
 }
 
-public sealed partial class EventHereticStarTouch : InstantActionEvent, ITouchSpellEvent
-{
-    [DataField]
-    public EntProtoId TouchSpell { get; set; } = "TouchSpellStar";
-}
-
 public sealed partial class EventHereticStarBlast : InstantWorldTargetActionEvent
 {
     [DataField]
@@ -469,11 +464,6 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
 // ascensions
 public sealed partial class HereticAscensionCosmosEvent : HereticKnowledgeEvent;
 #endregion
-
-public interface ITouchSpellEvent
-{
-    EntProtoId TouchSpell { get; set; }
-}
 
 public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent;
 

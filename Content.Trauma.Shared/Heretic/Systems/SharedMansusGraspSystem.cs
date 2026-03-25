@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Targeting;
 using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared._White.BackStab;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -24,6 +22,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
@@ -40,6 +39,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
@@ -48,6 +48,7 @@ using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -67,6 +68,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     [Dependency] protected readonly Content.Shared.StatusEffectNew.StatusEffectsSystem Status = default!;
+    [Dependency] protected readonly TouchSpellSystem TouchSpell = default!;
 
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
@@ -83,7 +85,6 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _look = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedRatvarianLanguageSystem _language = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
@@ -93,6 +94,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
     [Dependency] private readonly SharedMechSystem _mech = default!;
     [Dependency] private readonly AccessReaderSystem _access = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
     public static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
@@ -104,9 +106,10 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
     private readonly HashSet<Entity<MobStateComponent>> _lookupMobs = new();
 
-    public static readonly SoundSpecifier DefaultSound = new SoundPathSpecifier("/Audio/Items/welder.ogg");
-
     public static readonly EntProtoId GraspAffectedStatus = "MansusGraspAffectedStatusEffect";
+    public static readonly EntProtoId MansusGrasp = "TouchSpellMansus";
+
+    private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
 
     public override void Initialize()
     {
@@ -118,12 +121,83 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         SubscribeLocalEvent<AreaMansusGraspComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<AreaMansusGraspComponent, AreaGraspChannelDoAfterEvent>(OnDoAfter);
 
-        SubscribeLocalEvent<MansusGraspComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<MansusGraspComponent, MeleeHitEvent>(OnMelee);
         SubscribeLocalEvent<RustGraspComponent, AfterInteractEvent>(OnRustInteract);
 
         SubscribeLocalEvent<MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
         SubscribeLocalEvent<MansusGraspBlockTriggerComponent, ActionAttemptEvent>(OnActionAttempt);
+
+        SubscribeLocalEvent<MansusGraspComponent, TouchSpellUsedEvent>(OnTouchSpellUsed);
+
+        SubscribeLocalEvent<MindContainerComponent, MansusGraspSpecialEvent>(OnSpecial);
+    }
+
+    private void OnSpecial(Entity<MindContainerComponent> ent, ref MansusGraspSpecialEvent args)
+    {
+        if (InfuseOurBlades(ent))
+            args.Invoke = true;
+    }
+
+    private bool InfuseOurBlades(EntityUid uid)
+    {
+        if (!_heretic.TryGetHereticComponent(uid, out var heretic, out _) ||
+            heretic.CurrentPath != HereticPath.Blade || heretic.PathStage < 7)
+            return false;
+
+        if (!_heretic.TryGetRitual((uid, heretic), BladeBladeRitualTag, out var ritual))
+            return false;
+
+        var xformQuery = GetEntityQuery<TransformComponent>();
+        var containerEnt = uid;
+        if (_container.TryGetOuterContainer(uid, xformQuery.Comp(uid), out var container, xformQuery))
+            containerEnt = container.Owner;
+
+        var success = false;
+        foreach (var blade in ritual.Value.Comp.LimitedOutput)
+        {
+            if (!Exists(blade))
+                continue;
+
+            if (!_tag.HasTag(blade, HereticBladeBlade))
+                continue;
+
+            if (TryComp(blade, out MansusInfusedComponent? infused) &&
+                infused.AvailableCharges >= infused.MaxCharges)
+                continue;
+
+            if (!_container.TryGetOuterContainer(blade, xformQuery.Comp(blade), out var bladeContainer, xformQuery))
+                continue;
+
+            if (bladeContainer.Owner != containerEnt)
+                continue;
+
+            var newInfused = EnsureComp<MansusInfusedComponent>(blade);
+            newInfused.AvailableCharges = newInfused.MaxCharges;
+            success = true;
+        }
+
+        return success;
+    }
+
+    private void OnTouchSpellUsed(Entity<MansusGraspComponent> ent, ref TouchSpellUsedEvent args)
+    {
+        var user = args.User;
+        var target = args.Target;
+
+        if (!_heretic.TryGetHereticComponent(user, out var heretic, out var mind))
+            return;
+
+        if (!TryApplyGraspEffectAndMark(user, (mind, heretic), target, ent, out var triggerGrasp))
+            return;
+
+        args.Invoke = true;
+
+        if (!triggerGrasp || !TryComp(target, out StatusEffectsComponent? status))
+            return;
+
+        _stun.KnockdownOrStun(target, ent.Comp.KnockdownTime);
+        _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage);
+        _language.DoRatvarian(target, ent.Comp.SpeechTime, true, status);
+        Status.TryUpdateStatusEffectDuration(target, GraspAffectedStatus, out _, ent.Comp.AffectedTime);
     }
 
     private void OnActionAttempt(Entity<MansusGraspBlockTriggerComponent> ent, ref ActionAttemptEvent args)
@@ -164,8 +238,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _) ||
-            !TryComp(ent, out MansusGraspComponent? grasp) || args.Handled)
+        if (!TryComp(ent, out TouchSpellComponent? touchSpell) || args.Handled)
         {
             PredictedQueueDel(ent.Owner);
             return;
@@ -181,22 +254,20 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         var pos = Transform(args.User).Coordinates;
         _lookupMobs.Clear();
         _look.GetEntitiesInRange(pos, range, _lookupMobs, LookupFlags.Dynamic);
-        var hitCount = 0;
+
+        var targets = new List<EntityUid>();
 
         foreach (var uid in _lookupMobs)
         {
             if (uid.Owner == args.User)
                 continue;
 
-            if (_examine.InRangeUnOccluded(args.User, uid, range) &&
-                GraspTarget((ent, grasp), args.User, uid, false))
-                hitCount++;
+            if (_examine.InRangeUnOccluded(args.User, uid, range))
+                targets.Add(uid.Owner);
         }
 
-        var cooldown = CalculateAreaGraspCooldown((float) grasp.CooldownAfterUse.TotalSeconds, hitCount, range);
-        _actions.SetCooldown(heretic.MansusGraspAction, cooldown);
-        heretic.MansusGraspAction = EntityUid.Invalid;
-        InvokeGrasp(args.User, (ent, grasp));
+        var cooldown = CalculateAreaGraspCooldown((float) touchSpell.Cooldown.TotalSeconds, targets.Count, range);
+        TouchSpell.UseTouchSpellMultiTarget((ent, touchSpell), args.User, targets, cooldown);
         var spawned = PredictedSpawnAtPosition(ent.Comp.VisualEffect, pos);
         var effect = EnsureComp<AreaGraspEffectComponent>(spawned);
         effect.Size = range;
@@ -286,65 +357,6 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         return true;
     }
 
-    public bool GraspTarget(Entity<MansusGraspComponent> grasp,
-        EntityUid user,
-        EntityUid target,
-        bool deleteGraspOnUse = true)
-    {
-        if (!_heretic.TryGetHereticComponent(user, out var hereticComp, out var mind))
-        {
-            if (!deleteGraspOnUse)
-                return false;
-            PredictedQueueDel(grasp.Owner);
-            return true;
-        }
-
-        if (_whitelist.IsWhitelistPass(grasp.Comp.Blacklist, target))
-            return false;
-
-        var beforeEvent = new BeforeHarmfulActionEvent(user, HarmfulActionType.MansusGrasp);
-        RaiseLocalEvent(target, beforeEvent);
-        var cancelled = beforeEvent.Cancelled;
-        if (!cancelled)
-        {
-            var ev = new BeforeCastTouchSpellEvent(target);
-            RaiseLocalEvent(target, ev, true);
-            cancelled = ev.Cancelled;
-        }
-
-        if (cancelled)
-        {
-            if (!deleteGraspOnUse)
-                return false;
-            _actions.SetCooldown(hereticComp.MansusGraspAction, grasp.Comp.CooldownAfterUse);
-            hereticComp.MansusGraspAction = EntityUid.Invalid;
-            InvokeGrasp(user, grasp);
-            PredictedQueueDel(grasp.Owner);
-            return true;
-        }
-
-        // upgraded grasp
-        if (!TryApplyGraspEffectAndMark(user, (mind, hereticComp), target, grasp, out var triggerGrasp))
-            return false;
-
-        if (triggerGrasp && TryComp(target, out StatusEffectsComponent? status))
-        {
-            _stun.KnockdownOrStun(target, grasp.Comp.KnockdownTime);
-            _stamina.TakeStaminaDamage(target, grasp.Comp.StaminaDamage);
-            _language.DoRatvarian(target, grasp.Comp.SpeechTime, true, status);
-            Status.TryUpdateStatusEffectDuration(target, GraspAffectedStatus, out _, grasp.Comp.AffectedTime);
-        }
-
-        if (!deleteGraspOnUse)
-            return true;
-
-        _actions.SetCooldown(hereticComp.MansusGraspAction, grasp.Comp.CooldownAfterUse);
-        hereticComp.MansusGraspAction = EntityUid.Invalid;
-        InvokeGrasp(user, grasp);
-        PredictedQueueDel(grasp.Owner);
-        return true;
-    }
-
     public void ApplyMark(EntityUid target, HereticPath path)
     {
         if (!HasComp<MobStateComponent>(target))
@@ -395,7 +407,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
                 if (grasp != null && heretic.Comp.PathStage >= 7 && _tag.HasTag(target, HereticBladeBlade))
                 {
                     // empowering blades and shit
-                    var infusion = EnsureComp<Trauma.Shared.Heretic.Components.PathSpecific.Blade.MansusInfusedComponent>(target);
+                    var infusion = EnsureComp<MansusInfusedComponent>(target);
                     infusion.AvailableCharges = infusion.MaxCharges;
                     break;
                 }
@@ -591,40 +603,6 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             _delay.SetLength((uid, delay), TimeSpan.FromSeconds(length), comp.Delay);
             _delay.TryResetDelay((uid, delay), false, comp.Delay);
         }
-    }
-
-    private void OnMelee(Entity<MansusGraspComponent> ent, ref MeleeHitEvent args)
-    {
-        if (args.HitEntities.Count == 0)
-            return;
-        // blocked from wide attacks in YAML. should never have more than 1
-        if (args.HitEntities.Count > 1)
-            return;
-        var target = args.HitEntities.First();
-        // no fumbling!
-        if (target == args.User)
-            return;
-        args.Handled = GraspTarget(ent, args.User, target);
-    }
-
-    private void OnAfterInteract(Entity<MansusGraspComponent> ent, ref AfterInteractEvent args)
-    {
-        if (!args.CanReach)
-            return;
-
-        if (args.Target is not { } target || target == args.User)
-            return;
-
-        args.Handled = GraspTarget(ent, args.User, target);
-    }
-
-    public virtual void InvokeGrasp(EntityUid user, Entity<MansusGraspComponent>? ent)
-    {
-        var sound = ent == null ? DefaultSound : ent.Value.Comp.Sound;
-        _audio.PlayPredicted(sound, user, user);
-
-        var ev = new UserInvokeTouchSpellEvent();
-        RaiseLocalEvent(user, ref ev);
     }
 }
 

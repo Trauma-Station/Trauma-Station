@@ -19,11 +19,11 @@ using Content.Shared.Emp;
 using Content.Shared.Ensnaring;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
-using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Jaunt;
 using Content.Shared.Magic.Events;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
@@ -36,6 +36,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
@@ -64,6 +65,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] protected readonly SharedHereticSystem Heretic = default!;
     [Dependency] protected readonly Content.Shared.StatusEffectNew.StatusEffectsSystem StatusNew = default!;
     [Dependency] protected readonly ExamineSystemShared Examine = default!;
+    [Dependency] protected readonly SharedPopupSystem Popup = default!;
 
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -90,8 +92,8 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
     [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
     [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
-
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public static readonly DamageSpecifier AllDamage = new()
     {
@@ -130,13 +132,36 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         SubscribeLocalEvent<HereticActionComponent, BeforeCastSpellEvent>(OnBeforeCast);
         SubscribeLocalEvent<HereticActionComponent, ActionAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<JauntComponent, HereticMagicCastAttemptEvent>(OnJauntMagicAttempt);
+
+        SubscribeLocalEvent<MindContainerComponent, BeforeTouchSpellAbilityUsedEvent>(OnBeforeTouchSpell);
+    }
+
+    private void OnBeforeTouchSpell(Entity<MindContainerComponent> ent, ref BeforeTouchSpellAbilityUsedEvent args)
+    {
+        if (!TryUseAbility(args.Args))
+            return;
+
+        if (args.Args.TouchSpell != SharedMansusGraspSystem.MansusGrasp)
+            return;
+
+        if (!Heretic.TryGetHereticComponent(ent.AsNullable(), out var heretic, out var mind))
+            return;
+
+        args.TouchSpell = GetMansusGraspProto((mind, heretic));
+    }
+
+    private string GetMansusGraspProto(Entity<HereticComponent> ent)
+    {
+        if (ent.Comp.PathStage < 2)
+            return ent.Comp.MansusGraspProto;
+
+        var pathSpecific = ent.Comp.MansusGraspProto + ent.Comp.CurrentPath;
+        return _proto.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
     }
 
     private void OnAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
     {
-        if (StatusNew
-            .HasEffectComp<Trauma.Shared.Heretic.Components.StatusEffects.BlockHereticActionsStatusEffectComponent>(
-                args.User))
+        if (StatusNew .HasEffectComp<BlockHereticActionsStatusEffectComponent>( args.User))
             args.Cancelled = true;
     }
 
@@ -222,41 +247,6 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             Popup.PopupEntity(Loc.GetString("heretic-ability-fail-magicitem"), args.Performer, args.Performer);
 
         args.Cancelled = true;
-    }
-
-    private EntityUid? GetTouchSpell<TEvent, TComp>(EntityUid ent, ref TEvent args)
-        where TEvent : InstantActionEvent, ITouchSpellEvent
-        where TComp : Component
-    {
-        if (!TryUseAbility(args, false))
-            return null;
-
-        if (!TryComp(ent, out HandsComponent? hands) || hands.Hands.Count < 1)
-            return null;
-
-        args.Handled = true;
-
-        var hasComp = false;
-
-        foreach (var held in _hands.EnumerateHeld((ent, hands)))
-        {
-            if (!HasComp<TComp>(held))
-                continue;
-
-            hasComp = true;
-            PredictedQueueDel(held);
-        }
-
-        if (hasComp || !_hands.TryGetEmptyHand((ent, hands), out var emptyHand))
-            return null;
-
-        var touch = PredictedSpawnAtPosition(args.TouchSpell, Transform(ent).Coordinates);
-
-        if (_hands.TryPickup(ent, touch, emptyHand, animate: false, handsComp: hands))
-            return touch;
-
-        PredictedQueueDel(touch);
-        return null;
     }
 
     protected EntityUid ShootProjectileSpell(EntityUid performer,
@@ -351,14 +341,5 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         {
             _blood.TryModifyBloodLevel((uid, blood), FixedPoint2.Min(bloodHeal.Value, missing));
         }
-    }
-
-    public virtual void InvokeTouchSpell<T>(Entity<T> ent, EntityUid user, TimeSpan? cooldownOverride = null)
-        where T : Component, ITouchSpell
-    {
-        _audio.PlayPredicted(ent.Comp.Sound, user, user);
-
-        var ev = new UserInvokeTouchSpellEvent();
-        RaiseLocalEvent(user, ref ev);
     }
 }
