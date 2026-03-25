@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitmed.Shared.Medical.HealthAnalyzer;
+using Content.Shitcode.Common.Medical.HealthAnalyzer;
 using Content.Shared.Body;
 // </Trauma>
 using System.Linq;
@@ -28,8 +28,8 @@ public sealed partial class CryoPodWindow : FancyWindow
     public event Action? OnEjectBeakerPressed;
     public event Action<FixedPoint2>? OnInjectPressed;
     // <Shitmed>
-    public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
-    public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
+    public event Action<ProtoId<OrganCategoryPrototype>?>? OnBodyPartSelected;
+    public event Action<HealthAnalyzerMode>? OnModeChanged;
     // </Shitmed>
 
     public CryoPodWindow()
@@ -43,8 +43,8 @@ public sealed partial class CryoPodWindow : FancyWindow
         Inject10.OnPressed += _ => OnInjectPressed?.Invoke(10);
         Inject20.OnPressed += _ => OnInjectPressed?.Invoke(20);
         // <Trauma>
-        HealthAnalyzer.OnBodyPartSelected += (part, target) => OnBodyPartSelected?.Invoke(part, target);
-        HealthAnalyzer.OnModeChanged += (mode, target) => OnModeChanged?.Invoke(mode, target);
+        HealthAnalyzer.OnBodyPartSelected += part => OnBodyPartSelected?.Invoke(part);
+        HealthAnalyzer.OnModeChanged += mode => OnModeChanged?.Invoke(mode);
         // </Trauma>
     }
 

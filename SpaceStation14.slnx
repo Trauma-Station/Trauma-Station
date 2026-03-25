@@ -82,7 +82,6 @@
   <Project Path="Content.Shitcode.Shared/Content.Shitcode.Shared.csproj" />
   <Project Path="Content.Shitcode.Client/Content.Shitcode.Client.csproj" />
   <Project Path="Content.Shitcode.Common/Content.Shitcode.Common.csproj" />
-  <Project Path="Content.Shitmed.Shared/Content.Shitmed.Shared.csproj" />
   <Project Path="Content.Starlight.Server/Content.Starlight.Server.csproj" />
   <Project Path="Content.Starlight.Shared/Content.Starlight.Shared.csproj" />
   <Project Path="Content.Starlight.Client/Content.Starlight.Client.csproj" />

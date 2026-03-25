@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
@@ -8,7 +9,7 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shitmed.Shared.Medical.HealthAnalyzer;
+namespace Content.Shitcode.Common.Medical.HealthAnalyzer;
 
 // state specific to each scan mode
 [Serializable, NetSerializable]
@@ -59,17 +60,15 @@ public sealed class HealthAnalyzerChemicalsState : HealthAnalyzerScanState
 
 // Mode selection message (from client to server)
 [Serializable, NetSerializable]
-public sealed class HealthAnalyzerModeSelectedMessage(NetEntity? owner, HealthAnalyzerMode mode) : BoundUserInterfaceMessage
+public sealed class HealthAnalyzerModeSelectedMessage(HealthAnalyzerMode mode) : BoundUserInterfaceMessage
 {
-    public readonly NetEntity? Owner = owner;
     public readonly HealthAnalyzerMode Mode = mode;
 }
 
 // Part selection message (from client to server)
 [Serializable, NetSerializable]
-public sealed class HealthAnalyzerPartMessage(NetEntity? owner, ProtoId<OrganCategoryPrototype>? category) : BoundUserInterfaceMessage
+public sealed class HealthAnalyzerPartMessage(ProtoId<OrganCategoryPrototype>? category) : BoundUserInterfaceMessage
 {
-    public readonly NetEntity? Owner = owner;
     public readonly ProtoId<OrganCategoryPrototype>? Category = category;
 }
 

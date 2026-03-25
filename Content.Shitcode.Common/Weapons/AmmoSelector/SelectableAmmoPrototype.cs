@@ -1,19 +1,11 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
-namespace Content.Shitcode.Shared.Weapons.AmmoSelector;
+namespace Content.Shitcode.Common.Weapons.AmmoSelector;
 
 [Prototype]
 public sealed partial class SelectableAmmoPrototype : IPrototype
@@ -42,19 +34,16 @@ public sealed partial class SelectableAmmoPrototype : IPrototype
     [DataField]
     public float FireRate = 8f;
 
-    [DataField(customTypeSerializer: typeof(FlagSerializer<SelectableAmmoWeaponFlags>))]
-    public int Flags = (int) SelectableAmmoFlags.ChangeWeaponFireCost;
+    [DataField]
+    public SelectableAmmoFlags Flags = SelectableAmmoFlags.ChangeWeaponFireCost;
 }
 
-public sealed class SelectableAmmoWeaponFlags;
-
 [Serializable, NetSerializable]
-[Flags, FlagsFor(typeof(SelectableAmmoWeaponFlags))]
-public enum SelectableAmmoFlags
+public enum SelectableAmmoFlags : byte
 {
     None = 0,
     ChangeWeaponFireCost = 1 << 0,
     ChangeWeaponFireSound = 1 << 1,
     ChangeWeaponFireRate = 1 << 2,
-    All = ~None,
+    All = ChangeWeaponFireCost | ChangeWeaponFireSound | ChangeWeaponFireRate,
 }

@@ -8,7 +8,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="../Content.ModuleManager/Content.ModuleManager.csproj" />
-		<ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
+      	<ProjectReference Include="../Content.Common/Content.Common.csproj" />
+      	<ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
 	</ItemGroup>
 
 	<Import Project="../RobustToolbox/Imports/Shared.props" />

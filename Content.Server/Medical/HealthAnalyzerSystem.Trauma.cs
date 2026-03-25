@@ -1,20 +1,19 @@
-using Content.Server.Medical.Components;
-using Content.Shitmed.Shared.Medical.HealthAnalyzer;
+using System.Linq;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Shared.Wounds;
 using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
+using Content.Server.Medical.Components;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Damage.Components;
-using Content.Shared.MedicalScanner;
 using Content.Shared.FixedPoint;
+using Content.Shared.MedicalScanner;
 using Content.Shared.Mobs.Systems;
+using Content.Shitcode.Common.Medical.HealthAnalyzer;
 using Robust.Shared.Prototypes;
-using System.Linq;
 
 namespace Content.Server.Medical;
 
@@ -48,14 +47,14 @@ public sealed partial class HealthAnalyzerSystem
     /// <param name="args">The message containing the selected part</param>
     private void OnHealthAnalyzerPartSelected(Entity<HealthAnalyzerComponent> healthAnalyzer, ref HealthAnalyzerPartMessage args)
     {
-        if (!TryGetEntity(args.Owner, out var owner))
+        if (healthAnalyzer.Comp.ScannedEntity is not { } target || !Exists(target))
             return;
 
         healthAnalyzer.Comp.CurrentMode = HealthAnalyzerMode.Body; // If you press a part ye get redirected bozo.
-        if (args.Category is not {} category)
-            BeginAnalyzingEntity(healthAnalyzer, owner.Value, null);
-        else if (_body.GetOrgan(owner.Value, category) is {} organ)
-            BeginAnalyzingEntity(healthAnalyzer, owner.Value, organ);
+        if (args.Category is not { } category)
+            BeginAnalyzingEntity(healthAnalyzer, target, null);
+        else if (_body.GetOrgan(target, category) is { } organ)
+            BeginAnalyzingEntity(healthAnalyzer, target, organ);
     }
 
     /// <summary>
@@ -65,11 +64,11 @@ public sealed partial class HealthAnalyzerSystem
     /// <param name="args">The message containing the selected mode</param>
     private void OnHealthAnalyzerModeSelected(Entity<HealthAnalyzerComponent> healthAnalyzer, ref HealthAnalyzerModeSelectedMessage args)
     {
-        if (!TryGetEntity(args.Owner, out var owner))
+        if (healthAnalyzer.Comp.ScannedEntity is not { } target || !Exists(target))
             return;
 
         healthAnalyzer.Comp.CurrentMode = args.Mode; // If you press a part ye get redirected bozo.
-        BeginAnalyzingEntity(healthAnalyzer, owner.Value);
+        BeginAnalyzingEntity(healthAnalyzer, target);
     }
 
     // can't keep scanning a deleted or detached part

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitmed.Shared.Medical.HealthAnalyzer;
+using Content.Shitcode.Common.Medical.HealthAnalyzer;
 using Content.Shared.Body;
 using Robust.Shared.Prototypes;
 // </Trauma>
@@ -14,8 +14,8 @@ namespace Content.Client.HealthAnalyzer.UI;
 public sealed partial class HealthAnalyzerWindow : FancyWindow
 {
     // <Shitmed>
-    public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
-    public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
+    public event Action<OrganCategoryPrototype>? OnBodyPartSelected;
+    public event Action<HealthAnalyzerMode>? OnModeChanged;
     // </Shitmed>
 
     public HealthAnalyzerWindow()
