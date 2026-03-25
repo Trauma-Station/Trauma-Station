@@ -37,7 +37,6 @@ public sealed class StationPowerTests
         "Saltern",
         "Packed",
         "Reach",
-        "OasisHighPop",
         "Barratry",
         "Kettle",
         "Submarine",
