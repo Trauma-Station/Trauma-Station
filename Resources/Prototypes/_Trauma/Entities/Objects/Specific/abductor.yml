@@ -15,6 +15,7 @@
   - type: ActivatableUI
     key: enum.AbductorTaskTabletUIKey.Key
     inHandsOnly: true
+    requireActiveHand: false
     singleUser: true
   - type: UserInterface
     interfaces:

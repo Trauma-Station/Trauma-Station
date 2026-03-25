@@ -21,7 +21,7 @@
     species: Moth
   - !type:HasOrgan
     organCategory: Wings
-  conditions: # no moth check here
+  completed: # no moth check here
   - !type:HasOrgan
     inverted: true
     organCategory: Wings
@@ -34,7 +34,7 @@
   - !type:HasOrgan
     inverted: true
     organCategory: Wings
-  conditions:
+  completed:
   - !type:HasOrgan
     organCategory: Wings
 
@@ -83,7 +83,9 @@
       whitelist:
         components:
         - BodyPartCavity # just incase some species has no cavity...
-  conditions:
+    - !type:CavityHasItem
+      inverted: true # no automatic completion
+  completed:
   - !type:HasOrgan
     organCategory: Torso
     conditions:

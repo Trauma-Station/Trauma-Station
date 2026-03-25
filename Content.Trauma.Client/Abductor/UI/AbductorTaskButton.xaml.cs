@@ -17,7 +17,7 @@ public sealed partial class AbductorTaskButton : ContainerButton
         if (completed)
             AddStyleClass("highlight");
         else if (current)
-            Disabled = true;
+            Disabled = false;
 
         TaskName.Text = name;
         Status.Visible = completed || current;

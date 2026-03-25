@@ -10,7 +10,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Abductor.UI;
 
-// TODO: give it nice style
 [GenerateTypedNameReferences]
 public sealed partial class AbductorTaskWindow : FancyWindow
 {
@@ -23,6 +22,7 @@ public sealed partial class AbductorTaskWindow : FancyWindow
     private EntityUid _uid;
     private EntityUid? _subject;
     private int? _completed;
+    private int? _tasks;
 
     public AbductorTaskWindow()
     {
@@ -67,14 +67,16 @@ public sealed partial class AbductorTaskWindow : FancyWindow
             if (_completed != null)
             {
                 _completed = null;
+                _tasks = null;
                 UpdateVisibility();
             }
             return;
         }
 
-        if (comp.CompletedCount != _completed)
+        if (comp.CompletedCount != _completed || comp.Tasks.Count != _tasks)
         {
             _completed = comp.CompletedCount;
+            _tasks = comp.Tasks.Count;
             UpdateTasks(comp.Tasks, comp.CompletedCount);
             UpdateVisibility();
         }
