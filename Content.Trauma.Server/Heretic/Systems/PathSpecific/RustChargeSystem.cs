@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Destructible;
 using Content.Shared.Destructible;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Rust;

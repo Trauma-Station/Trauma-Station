@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Teleportation.Systems;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Surgery.Steps.Parts;

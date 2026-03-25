@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Atmos;
 using Content.Shared.EntityConditions;
 using Content.Trauma.Shared.Heretic.Components;

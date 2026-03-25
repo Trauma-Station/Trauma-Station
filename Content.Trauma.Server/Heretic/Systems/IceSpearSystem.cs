@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Religion;
 using Content.Server.Damage.Systems;
 using Content.Shared.Actions;

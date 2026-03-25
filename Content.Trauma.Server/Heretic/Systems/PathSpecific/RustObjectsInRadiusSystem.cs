@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Server.Heretic.Abilities;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Robust.Shared.Timing;

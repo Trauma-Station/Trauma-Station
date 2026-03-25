@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Cuffs.Components;

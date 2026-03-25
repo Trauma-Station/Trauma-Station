@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Shared.Heretic.Curses;
 using Content.Trauma.Shared.Heretic.Curses.Components;
 using JetBrains.Annotations;
