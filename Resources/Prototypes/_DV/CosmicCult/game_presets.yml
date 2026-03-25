@@ -9,7 +9,6 @@
   - BasicRoundstartVariation
   - BasicStationEventScheduler
   - BasicAntagEventScheduler
-  - MajorAntagEventScheduler
   - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler

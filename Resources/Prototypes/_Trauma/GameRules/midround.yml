@@ -1,3 +1,5 @@
+## Antag schedulers: runs a limited number of midround antags
+
 - type: entity
   parent: BaseGameRule
   id: BasicAntagEventScheduler
