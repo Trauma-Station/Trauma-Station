@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Client._Shitcode.Wizard.Systems;
+using Content.Shitcode.Common.Wizard;
 using Content.Shitcode.Shared.Wizard.Components;
 using Content.Shitcode.Shared.Wizard.SpellCards;
 using Content.Shared.Damage.Components;
@@ -61,7 +61,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     [UISystemDependency] private readonly SpriteSystem _spriteSystem = default!;
     [UISystemDependency] private readonly TransformSystem _transform = default!; // Goobstation
     [UISystemDependency] private readonly SpellsSystem? _spells = default!; // Goobstation
-    [UISystemDependency] private readonly ActionTargetMarkSystem? _mark = default!; // Goobstation
+    [UISystemDependency] private readonly CommonActionTargetMarkSystem? _mark = default!; // Goobstation
     [UISystemDependency] private readonly EntityLookupSystem _lookup = default!; // Goobstation
 
     private ActionButtonContainer? _container;
@@ -909,7 +909,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (_window is {UpdateNeeded: true})
             SearchAndDisplay();
 
-        // Goobstation start
+        // <Goob>
         if (_mark == null)
             return;
 
@@ -917,15 +917,11 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             return;
 
         if (!EntityManager.TryGetComponent(SelectingTargetFor, out LockOnMarkActionComponent? lockOnMark))
-        {
-            _mark.SetMark(null);
             return;
-        }
 
         var coords = _eye.PixelToMap(_input.MouseScreenPosition);
 
-        var targets =
-            _lookup.GetEntitiesInRange<MobStateComponent>(coords, lockOnMark.LockOnRadius, LookupFlags.Dynamic);
+        var targets = _lookup.GetEntitiesInRange<MobStateComponent>(coords, lockOnMark.LockOnRadius, LookupFlags.Dynamic);
         var xformQuery = EntityManager.GetEntityQuery<TransformComponent>();
         var damageableQuery = EntityManager.GetEntityQuery<DamageableComponent>();
         List<(float range, EntityUid target)> selectedTargets = new();
@@ -944,14 +940,18 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             selectedTargets.Add((range, target));
         }
 
+        var targeting = (SelectingTargetFor.Value, lockOnMark);
+
+        // STINKS
         if (selectedTargets.Count == 0)
         {
-            _mark.SetMark(null);
+            _mark.SetMark(targeting, null);
             return;
         }
 
-        _mark.SetMark(selectedTargets.MinBy(x => x.range).target);
-        // Goobstation end
+        var bestTarget = selectedTargets.MinBy(x => x.range).target;
+        _mark.SetMark(targeting, bestTarget);
+        // </Goob>
     }
 
     private void OnComponentLinked(ActionsComponent component)
@@ -1013,10 +1013,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         // If we were targeting something else we should stop
         StopTargeting();
 
-        // Goobstation
-        if (EntityManager.TryGetComponent(ent, out WorldTargetActionComponent? worldTarget) &&
-            worldTarget.Event is InstantWorldTargetActionEvent)
-            _actionsSystem?.TriggerAction(ent, true); // We just perform it and hope for the best :godo:
+        // TODO: FIX SHITCODE - Heretic Star Blast
 
         SelectingTargetFor = uid;
         // TODO inform the server
@@ -1074,7 +1071,10 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     /// </summary>
     private void StopTargeting()
     {
-        _mark?.SetMark(null); // Goobstation
+        // <Goob>
+        if (SelectingTargetFor is { } target && EntityManager.TryGetComponent<LockOnMarkActionComponent>(SelectingTargetFor, out var lockOnMark))
+            _mark?.SetMark((target, lockOnMark), null);
+        // </Goob>
 
         if (SelectingTargetFor == null)
             return;

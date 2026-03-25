@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
@@ -11,8 +6,9 @@ using Content.Shitcode.Shared.Wizard;
 using Content.Shitcode.Shared.Wizard.SupermatterHalberd;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.Player;
+using Content.Shitcode.Common.Wizard;
 
-namespace Content.Client._Shitcode.Wizard.Systems;
+namespace Content.Shitcode.Client.Wizard.Systems;
 
 public sealed class SpellsSystem : SharedSpellsSystem
 {
@@ -63,14 +59,19 @@ public sealed class SpellsSystem : SharedSpellsSystem
 
     public void SetSwapSecondaryTarget(EntityUid user, EntityUid? target, EntityUid action)
     {
+        if (!TryComp<LockOnMarkActionComponent>(action, out var lockOn))
+            return;
+
+        var actionLockOn = (action, lockOn);
+
         if (target == null || user == target)
         {
-            _mark.SetMark(null);
+            _mark.SetMark(actionLockOn, null);
             RaisePredictiveEvent(new SetSwapSecondaryTarget(GetNetEntity(action), null));
             return;
         }
 
-        _mark.SetMark(target);
+        _mark.SetMark(actionLockOn, target);
         RaisePredictiveEvent(new SetSwapSecondaryTarget(GetNetEntity(action), GetNetEntity(target.Value)));
     }
 

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.RMC14.Client.LinkAccount;
+using Content.Shitcode.Common.LinkAccount;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -29,7 +29,7 @@ namespace Content.Client.Credits;
 public sealed partial class CreditsWindow : DefaultWindow
 {
     // <Trauma>
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly ILinkAccountManager _linkAccount = default!;
     // </Trauma>
     [Dependency] private readonly IResourceManager _resourceManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;

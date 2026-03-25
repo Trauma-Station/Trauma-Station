@@ -8,7 +8,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shitcode.Shared.Wizard.Components;
+namespace Content.Shitcode.Common.Wizard;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SwapSpellComponent : Component
