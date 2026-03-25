@@ -81,6 +81,9 @@ public sealed class AbductorTaskSystem : EntitySystem
         _validTasks.Clear();
         foreach (var task in AllTasks)
         {
+            if (!_random.Prob(task.Chance))
+                continue;
+
             if (_conditions.TryConditions(target, task.Valid))
                 _validTasks.Add(task);
         }

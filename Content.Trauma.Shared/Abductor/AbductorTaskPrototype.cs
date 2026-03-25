@@ -22,6 +22,12 @@ public sealed partial class AbductorTaskPrototype : IPrototype
     public string Name => Loc.GetString("abductor-task-" + ID);
 
     /// <summary>
+    /// Chance for this task to be valid before anything else.
+    /// </summary>
+    [DataField]
+    public float Chance = 1f;
+
+    /// <summary>
     /// Conditions the subject has to meet for this task to be considered.
     /// </summary>
     [DataField]

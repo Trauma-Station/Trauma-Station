@@ -128,6 +128,7 @@
 
 - type: abductorTask
   id: RemoveArms
+  chance: 0.05 # rare
   valid:
   - !type:HasOrgan
     organCategory: ArmLeft
@@ -136,6 +137,7 @@
 
 - type: abductorTask
   id: RemoveLegs
+  chance: 0.05 # rare
   valid:
   - !type:HasOrgan
     organCategory: LegLeft
@@ -144,6 +146,7 @@
 
 - type: abductorTask
   id: RemoveTongue
+  chance: 0.5 # kinda rare
   valid:
   - !type:HasOrgan
     organCategory: Tongue
