@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shitcode.Shared.Heretic.Components;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -28,6 +27,7 @@ using Robust.Shared.Input;
 using Robust.Shared.Map;
 using static Content.Client.Inventory.ClientInventorySystem;
 using static Robust.Client.UserInterface.Control;
+using Content.Shitcode.Common.Heretic.Components;
 
 namespace Content.Client.Inventory
 {
