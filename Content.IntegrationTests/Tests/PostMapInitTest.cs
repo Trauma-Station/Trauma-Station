@@ -27,7 +27,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 namespace Content.IntegrationTests.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("MapTests")] // Trauma - only run these in map tests job
     public sealed class PostMapInitTest
     {
         private const bool SkipTestMaps = true;

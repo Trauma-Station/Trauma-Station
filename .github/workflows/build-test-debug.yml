@@ -93,6 +93,7 @@ jobs:
     # never seen it fail once IDC about archiving it
 
   # Run every test except map loading tests, they take a little while
+  # Any test with Category("MapTests") is excluded
   test-main:
     needs: build
     if: github.event.pull_request.draft == false
@@ -126,7 +127,7 @@ jobs:
     - name: Run main Content.IntegrationTests
       run: |
         DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll -- \
-          NUnit.Where="test !~ PostMapInitTest && test !~ StationPowerTests" \
+          NUnit.Where="cat != MapTests" \
           NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     - name: Archive NUnit3 test results
@@ -138,7 +139,8 @@ jobs:
         retention-days: 7
         compression-level: 9
 
-  # Test all the maps seperately
+  # Test all the map tests seperately
+  # Any test with Category("MapTests") is used
   test-maps:
     needs: build
     if: github.event.pull_request.draft == false
@@ -170,11 +172,11 @@ jobs:
         name: build-output
         path: bin/
 
-    - name: Run map-related IntegrationTests
+    - name: Run MapTests
       run: |
-        DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll \
-          --filter "PostMapInitTest|StationPowerTests" \
-          -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll -- \
+          NUnit.Where="cat == MapTests" \
+          NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     - name: Archive NUnit3 test results
       if: always()

@@ -13,6 +13,7 @@ using Robust.Shared.EntitySerialization;
 
 namespace Content.IntegrationTests.Tests.Power;
 
+[TestFixture, Category("MapTests")] // Trauma - only run these in map tests job
 public sealed class StationPowerTests
 {
     /// <summary>
