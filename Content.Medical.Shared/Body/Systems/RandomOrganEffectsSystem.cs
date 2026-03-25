@@ -22,7 +22,7 @@ public sealed class RandomOrganEffectsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RandomOrganEffectsComponent, OrganGOtInsertedEvent>(OnInserted);
+        SubscribeLocalEvent<RandomOrganEffectsComponent, OrganGotInsertedEvent>(OnInserted);
     }
 
     private void OnInserted(Entity<RandomOrganEffectsComponent> ent, ref OrganGotInsertedEvent args)
