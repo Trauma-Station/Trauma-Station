@@ -126,7 +126,7 @@ jobs:
     - name: Run main Content.IntegrationTests
       run: |
         DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll -- \
-          NUnit.Where="class!~PostMapInitTest&class!~StationPowerTests"
+          NUnit.Where="class!~PostMapInitTest&class!~StationPowerTests" \
           NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     - name: Archive NUnit3 test results
@@ -170,7 +170,7 @@ jobs:
         name: build-output
         path: bin/
 
-    - name: Run PostMapInitTest
+    - name: Run map-related IntegrationTests
       run: |
         DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll \
           --filter "PostMapInitTest|StationPowerTests" \
