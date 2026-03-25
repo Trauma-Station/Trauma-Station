@@ -34,6 +34,7 @@
     - id: BingleSpawn
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
+    - id: ColossusSpawn
 
 - type: entity
   parent: BaseStationEventShortDelay
