@@ -14,12 +14,6 @@
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
-    - id: BlobSpawn
-    # - id: LoneAbductorSpawn
-    - id: DuoAbductorSpawn
-    - id: BingleSpawn
-    # - id: SlaughterDemonMidround - Wizard/Ninja only antag, maybe devil eventually
-    - id: XenomorphsInfestation
     # TOOD: remove these if they fucking suck lmao
     - id: GreyTideAntagMidround
     - id: SingulothKnightsMidround
@@ -29,8 +23,20 @@
     - id: VoxRaidersMidround
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
+
+- type: entityTable
+  id: MajorAntagEventsTable
+  table: !type:AllSelector
+    children:
+    - id: BlobSpawn
+    - id: DuoAbductorSpawn
+    - id: BingleSpawn
+    - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
+    - id: DragonSpawn
+    - id: NinjaSpawn
+    - id: LoneOpsSpawn
 
 - type: entity
   parent: BaseStationEventShortDelay
