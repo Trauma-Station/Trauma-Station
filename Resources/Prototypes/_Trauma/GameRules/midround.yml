@@ -30,21 +30,6 @@
       min: 1800
       max: 3000
 
-- type: entity
-  parent: BaseGameRule
-  id: MajorAntagEventScheduler
-  components:
-  - type: BasicStationEventScheduler
-    scheduledGameRules: !type:NestedSelector
-      tableId: MajorAntagEventsTable
-    # starts 40-80 mins in
-    minimumTimeUntilFirstEvent: 2400
-    maximumSpanUntilFirstEvent: 2400
-    # 40-80 mins between each antag
-    minMaxEventTiming:
-      min: 2400
-      max: 4800
-
 ## Shadow demon
 
 - type: entity

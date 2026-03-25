@@ -40,6 +40,8 @@
     - id: SnakeSpawnHorde
     - id: SpiderClownSpawnHorde
     - id: SpiderSpawnHorde
+    - !type:NestedSelector
+      tableId: BasicAntagEventsTrauma
     # </Trauma>
     - id: ClosetSkeleton
     - id: KingRatMigration
@@ -53,18 +55,16 @@
     children:
     - !type:NestedSelector # Trauma
       tableId: ModerateAntagEventsTrauma
-    #- id: DragonSpawn # Trauma - moved to major events
-    #- id: NinjaSpawn # Trauma - moved to major events
-    - id: ParadoxCloneSpawn
+    - id: DragonSpawn
+    - id: NinjaSpawn
+    #- id: ParadoxCloneSpawn # Trauma - moved to minor events
     #- id: RevenantSpawn  # GoobStation - removed till rework
     - id: SleeperAgents
-    # <Trauma>
-    #- id: ZombieOutbreak
-    #- id: LoneOpsSpawn
-    #- id: WizardSpawn
+    #- id: ZombieOutbreak Trauma - we dont want this as a midround
+    - id: LoneOpsSpawn
+    #- id: WizardSpawn # Trauma - chud wizard removed pending rework
     #- !type:NestedSelector
     #  tableId: DerelictBorgEventTable
-    # </Trauma>
 
 - type: entityTable
   id: DerelictBorgEventTable #For Derelict Borg spawns

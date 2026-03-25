@@ -11,7 +11,7 @@
     - id: PlagueMiceSpawn
 
 - type: entityTable
-  id: ModerateAntagEventsTrauma
+  id: BasicAntagEventsTrauma
   table: !type:AllSelector
     children:
     # TOOD: remove these if they fucking suck lmao
@@ -23,9 +23,10 @@
     - id: VoxRaidersMidround
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
+    - id: ParadoxCloneSpawn
 
 - type: entityTable
-  id: MajorAntagEventsTable
+  id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
     - id: BlobSpawn
@@ -33,10 +34,6 @@
     - id: BingleSpawn
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
-    - id: ColossusSpawn
-    - id: DragonSpawn
-    - id: NinjaSpawn
-    - id: LoneOpsSpawn
 
 - type: entity
   parent: BaseStationEventShortDelay
