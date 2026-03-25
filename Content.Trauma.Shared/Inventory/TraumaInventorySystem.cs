@@ -16,6 +16,6 @@ public sealed class TraumaInventorySystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<InventoryComponent, TackleEvent>(_inventory.RelayEvent);
-        SubscribeLocalEvent<InventoryComponent, RefreshEquipmentHudEvent<ShowSquadIconsComponent>>(_inventory.RelayEvent); // Corvax-SecApartment
+        SubscribeLocalEvent<InventoryComponent, RefreshEquipmentHudEvent<ShowSquadIconsComponent>>(_inventory.RelayEvent);
     }
 }

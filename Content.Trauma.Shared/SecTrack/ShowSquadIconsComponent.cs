@@ -8,4 +8,4 @@ namespace Content.Trauma.Shared.SecTrack;
 ///     This component allows you to see security squad of mobs.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class ShowSquadIconsComponent : Component { }
+public sealed partial class ShowSquadIconsComponent : Component;
