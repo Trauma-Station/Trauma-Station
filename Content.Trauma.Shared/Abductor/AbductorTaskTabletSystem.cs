@@ -37,6 +37,7 @@ public sealed class AbductorTaskTabletSystem : EntitySystem
     {
         var user = args.User;
         if (args.Handled ||
+            !args.CanReach ||
             args.Target is not {} target ||
             target == user) // lol no
             return;
