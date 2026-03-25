@@ -228,7 +228,7 @@ jobs:
 
   ci-success:
     name: Build & Test Debug
-    needs: [build, test-unit, test-main, test-maps]
+    needs: [build, test-unit, test-main, test-maps, test-map-render]
     runs-on: ubuntu-latest
     if: always()
     steps:
