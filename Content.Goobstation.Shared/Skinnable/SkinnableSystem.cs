@@ -7,6 +7,7 @@ using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Utility;
 
@@ -16,6 +17,7 @@ public sealed class SkinnableSystem : EntitySystem
 {
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popups = default!;
@@ -35,6 +37,7 @@ public sealed class SkinnableSystem : EntitySystem
             !args.CanComplexInteract ||
             ent.Comp.Skinned ||
             args.Using is not {} used ||
+            _whitelist.IsWhitelistFail(ent, ent.Comp.Whitelist) ||
             !HasComp<SharpComponent>(used))
             return;
 
@@ -75,7 +78,8 @@ public sealed class SkinnableSystem : EntitySystem
 
     private void OnSkinningDoAfter(Entity<SkinnableComponent> target, ref SkinningDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Target != target.Owner)
+        if (args.Cancelled || args.Handled || args.Target != target.Owner ||
+            _whitelist.IsWhitelistFail(target, target.Comp.Whitelist))
             return;
 
         Skin(target);
