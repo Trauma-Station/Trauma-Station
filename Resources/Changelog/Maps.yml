@@ -203,3 +203,16 @@ Entries:
   id: 21
   time: '2026-03-22T15:15:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1528
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: 'All maps: Standardised tool room to always have an autolathe.'
+  - type: Tweak
+    message: >-
+      All maps: Changed EVA rooms to use external access instead of command or
+      HoP.
+  - type: Tweak
+    message: 'Reach: Added all areas, the whole ship is 100% covered'
+  id: 22
+  time: '2026-03-24T20:42:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1561

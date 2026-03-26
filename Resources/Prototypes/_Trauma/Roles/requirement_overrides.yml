@@ -100,11 +100,23 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 1h
+    Virologist:
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 2h
     #Science
     Scientist:
     - !type:DepartmentTimeRequirement
       department: Science
       time: 1h
+    Roboticist:
+    - !type:DepartmentTimeRequirement
+      department: Science
+      time: 1.5h
+    Geneticist:
+    - !type:DepartmentTimeRequirement
+      department: Science
+      time: 1.5h
     #Security
     SecurityOfficer:
     - !type:DepartmentTimeRequirement

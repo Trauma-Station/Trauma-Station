@@ -239,7 +239,7 @@
   productPrototypes:
     - FoodLemoon
   mutationPrototypes: # Trauma
-  - CombustibleLemon
+  - Lemonade
   harvestRepeat: Repeat
   lifespan: 90
   maturation: 8
