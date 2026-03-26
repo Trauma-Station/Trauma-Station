@@ -37,7 +37,7 @@ public sealed class SkinnableSystem : EntitySystem
             !args.CanComplexInteract ||
             ent.Comp.Skinned ||
             args.Using is not {} used ||
-            _whitelist.IsWhitelistFail(ent, ent.Comp.Whitelist) ||
+            _whitelist.IsWhitelistFail(ent.Comp.Whitelist, ent) ||
             !HasComp<SharpComponent>(used))
             return;
 
@@ -79,7 +79,7 @@ public sealed class SkinnableSystem : EntitySystem
     private void OnSkinningDoAfter(Entity<SkinnableComponent> target, ref SkinningDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target != target.Owner ||
-            _whitelist.IsWhitelistFail(target, target.Comp.Whitelist))
+            _whitelist.IsWhitelistFail(target.Comp.Whitelist, target))
             return;
 
         Skin(target);
