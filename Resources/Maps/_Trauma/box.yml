@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 271.2.0
+  engineVersion: 274.0.1
   forkId: ""
   forkVersion: ""
-  time: 02/25/2026 13:48:44
-  entityCount: 27870
+  time: 03/24/2026 14:09:36
+  entityCount: 27636
 maps:
 - 1
 grids:
@@ -487,6 +487,47 @@ entities:
       bodyType: Dynamic
     - type: Fixtures
       fixtures: {}
+    - type: AreaGrid
+      chunks:
+        1,-1:
+          data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAQEBAQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQICAgIAAAEBAQEBAQEBAQECAgICAAABAQEBAQEBAQEBAgICAgAAAQEBAQEBAQEBAQICAgIAAAEBAQEBAQEBAQECAgICAAABAQEBAQEBAQEBAgICAgAAAQEBAQEBAQEBAQMDAwMAAAEBAQEBAQEBAQEDAwMDAAABAQEBAQEBAQEBAwMDAw==
+        1,0:
+          data: AAAAAAEBAQEBAQEBAwMDAwAAAAAAAAAAAAAAAAMDAwMAAAAAAAAAAAAAAAADAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+        2,-1:
+          data: AAAAAAgICAgIBwcHBwcHBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYGBgYGAAAABQUFBQUFBQUGBgYGBgYGAQUFBQUFBQUFBgYGBgYGBgIFBQUFBQUFBQYGBgYGBgYCBQUFBQUFBQUGBgYGBgYGAgUFBQUFBQUFBQYGBgYGBgIFBQUFBQUFBQAGBgYGBgYCBQUFBQUFBQUABgYGBgYGAgUEBAQEBAQEBAYGBgYGBgMDBAQEBAQEBAQGBgYGBgYDAwQEBAQEBAQEBgYGBgYGAwMEBAQEBAQEBAYGBgYGBg==
+        2,0:
+          data: AwMEBAQEBAQEBAYGBgYGBgMDBAQEBAQEBAQGBgYGBgYDAwMAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+        3,-1:
+          data: BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkJCQkJCQkJCQkGBgYAAAAJCQkJCQkJCQkJBgYGAAAACQkJCQkJCQkJCQYGBgAAAAkJCQkJCQkJCQkGBgYACQkJCQkJCQkJCQkJBgYGAAkJCQkJCQkJCQkJCQYGBgAJCQkJCQkJCQkJCQkGBgYACQkJCQkJCQkJCQkJBgYGAAkJCQkJCQkJCQkJCQYGBgAJCQkJCQkJCQkJCQkGBgYACQkJCQkJCQoKCgoLBgYGAAkJCQkJCQkKCgoKCw==
+        3,0:
+          data: BgYGAAkJCQkJCQkKCgoKCwYGBgAJCQkJCQkJCgoKCgsGBgYACQkJCQkJCQoKCgoLAAAAAAkJCQkJCQkKCgoKCwAAAAAAAAAJCQkJCQAACwsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+        4,-1:
+          data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkMDAwMDAwMDAwMAAAAAAAJDAwMDAwMDAwMDAAAAAAACQwMDAwMDAwMDAwAAAAAAAkMDAwMDAwMDAwMAAAAAAAJDAwMDAwMDAwMDAAAAAAACQwMDAwMDAwMDAwAAAAAAAkMDAwMDAwMDAwMAAAAAAAJDAwMDAwMDAwMDAwAAAAACQwMDAwMDAwMDAwMAAAAAAkMDAwMDAwMDAwMDAAAAAALCwsLDAwMDAwMDAwAAAAACwsLCwwMDAwMDAwMAAAAAA==
+        4,0:
+          data: CwsLCwwMDAwMDAwMAAAAAAsLCwsMDAwMDAwMDAAAAAALCwsLDAwMDAwMDAwAAAAACwsLCwwMDAwMDAwMAAAAAAsLCwsMDAwMDAwMDAAAAAAAAAAADAwMDAwMDAwAAAAAAAAAAAwMDAwMDAwMAAAAAAAAAAAMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+        3,-2:
+          data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAAA==
+        2,-2:
+          data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAACAcHBwcHBwcAAAAACAgICAgHBwcHBwcHAAAAAAgICAgIBwcHBwcHBwAAAAAICAgICAcHBwcHBwcAAAAACAgICAgHBwcHBwcHAAAAAAgICAgIBwcHBwcHBw==
+        1,-2:
+          data: AAgICAgICAgAAAAAAAAAAAANDQ0NDQ0NAAAAAAAAAAAADQ0NDQ0NDQAAAAAAAAAAAA0NDQ0NDQ0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+        1,-3:
+          data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICAgICAgIAAAAAAAAAAAACAgICAgICAAAAAAAAAAAAAgICAgICAgAAAAAAAAAAAAICAgICAgIAAAAAAAAAAAACAgICAgICAAAAAAAAAAAAAgICAgICAgAAAAAAAAAAA==
+      lastMapping: 13
+      areaMap:
+        1: AreaCafeteria
+        2: AreaBar
+        3: AreaBarBackRoom
+        4: AreaColdRoom
+        5: AreaKitchen
+        6: AreaBotany
+        7: AreaMorgue
+        8: AreaSurgery
+        9: AreaLibrary
+        10: AreaChapelCremate
+        11: AreaChapelOffice
+        12: AreaChapel
+        13: AreaSurgeryTheatre
     - type: BecomesStation
       id: Boxstation
     - type: Gravity
@@ -743,6 +784,7 @@ entities:
             id: Box
           decals:
             3546: -7,32
+            3844: -40,-30
         - node:
             color: '#FFFFFFFF'
             id: BoxGreyscale
@@ -8501,6 +8543,9 @@ entities:
       bodyType: Dynamic
     - type: Fixtures
       fixtures: {}
+    - type: AreaGrid
+      chunks: {}
+      areaMap: {}
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
@@ -11949,6 +11994,15 @@ entities:
     - type: Transform
       pos: 32.5,-9.5
       parent: 2
+- proto: AirlockLibraryLocked
+  entities:
+  - uid: 561
+    components:
+    - type: MetaData
+      name: Private Study
+    - type: Transform
+      pos: 62.5,-4.5
+      parent: 2
 - proto: AirlockMaint
   entities:
   - uid: 385
@@ -13039,13 +13093,6 @@ entities:
       parent: 2
 - proto: AirlockServiceLocked
   entities:
-  - uid: 561
-    components:
-    - type: MetaData
-      name: Private Study
-    - type: Transform
-      pos: 62.5,-4.5
-      parent: 2
   - uid: 562
     components:
     - type: MetaData
@@ -14555,1187 +14602,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 8.5,-46.5
-      parent: 2
-- proto: AreaCafeteria
-  entities:
-  - uid: 27682
-    components:
-    - type: Transform
-      pos: 18.5,-0.5
-      parent: 2
-  - uid: 27683
-    components:
-    - type: Transform
-      pos: 19.5,-0.5
-      parent: 2
-  - uid: 27684
-    components:
-    - type: Transform
-      pos: 20.5,-0.5
-      parent: 2
-  - uid: 27685
-    components:
-    - type: Transform
-      pos: 21.5,-0.5
-      parent: 2
-  - uid: 27686
-    components:
-    - type: Transform
-      pos: 22.5,-0.5
-      parent: 2
-  - uid: 27687
-    components:
-    - type: Transform
-      pos: 23.5,-0.5
-      parent: 2
-  - uid: 27688
-    components:
-    - type: Transform
-      pos: 25.5,-0.5
-      parent: 2
-  - uid: 27689
-    components:
-    - type: Transform
-      pos: 26.5,-0.5
-      parent: 2
-  - uid: 27690
-    components:
-    - type: Transform
-      pos: 27.5,-0.5
-      parent: 2
-  - uid: 27691
-    components:
-    - type: Transform
-      pos: 24.5,-0.5
-      parent: 2
-  - uid: 27692
-    components:
-    - type: Transform
-      pos: 20.5,0.5
-      parent: 2
-  - uid: 27693
-    components:
-    - type: Transform
-      pos: 21.5,0.5
-      parent: 2
-  - uid: 27694
-    components:
-    - type: Transform
-      pos: 22.5,0.5
-      parent: 2
-  - uid: 27695
-    components:
-    - type: Transform
-      pos: 23.5,0.5
-      parent: 2
-  - uid: 27696
-    components:
-    - type: Transform
-      pos: 24.5,0.5
-      parent: 2
-  - uid: 27697
-    components:
-    - type: Transform
-      pos: 25.5,0.5
-      parent: 2
-  - uid: 27698
-    components:
-    - type: Transform
-      pos: 26.5,0.5
-      parent: 2
-  - uid: 27699
-    components:
-    - type: Transform
-      pos: 27.5,0.5
-      parent: 2
-  - uid: 27700
-    components:
-    - type: Transform
-      pos: 18.5,-1.5
-      parent: 2
-  - uid: 27701
-    components:
-    - type: Transform
-      pos: 19.5,-1.5
-      parent: 2
-  - uid: 27702
-    components:
-    - type: Transform
-      pos: 20.5,-1.5
-      parent: 2
-  - uid: 27703
-    components:
-    - type: Transform
-      pos: 21.5,-1.5
-      parent: 2
-  - uid: 27704
-    components:
-    - type: Transform
-      pos: 22.5,-1.5
-      parent: 2
-  - uid: 27705
-    components:
-    - type: Transform
-      pos: 23.5,-1.5
-      parent: 2
-  - uid: 27706
-    components:
-    - type: Transform
-      pos: 24.5,-1.5
-      parent: 2
-  - uid: 27707
-    components:
-    - type: Transform
-      pos: 25.5,-1.5
-      parent: 2
-  - uid: 27708
-    components:
-    - type: Transform
-      pos: 26.5,-1.5
-      parent: 2
-  - uid: 27709
-    components:
-    - type: Transform
-      pos: 27.5,-1.5
-      parent: 2
-  - uid: 27710
-    components:
-    - type: Transform
-      pos: 18.5,-2.5
-      parent: 2
-  - uid: 27711
-    components:
-    - type: Transform
-      pos: 19.5,-2.5
-      parent: 2
-  - uid: 27712
-    components:
-    - type: Transform
-      pos: 20.5,-2.5
-      parent: 2
-  - uid: 27713
-    components:
-    - type: Transform
-      pos: 21.5,-2.5
-      parent: 2
-  - uid: 27714
-    components:
-    - type: Transform
-      pos: 22.5,-2.5
-      parent: 2
-  - uid: 27715
-    components:
-    - type: Transform
-      pos: 23.5,-2.5
-      parent: 2
-  - uid: 27716
-    components:
-    - type: Transform
-      pos: 24.5,-2.5
-      parent: 2
-  - uid: 27717
-    components:
-    - type: Transform
-      pos: 25.5,-2.5
-      parent: 2
-  - uid: 27718
-    components:
-    - type: Transform
-      pos: 26.5,-2.5
-      parent: 2
-  - uid: 27719
-    components:
-    - type: Transform
-      pos: 27.5,-2.5
-      parent: 2
-  - uid: 27720
-    components:
-    - type: Transform
-      pos: 18.5,-3.5
-      parent: 2
-  - uid: 27721
-    components:
-    - type: Transform
-      pos: 19.5,-3.5
-      parent: 2
-  - uid: 27722
-    components:
-    - type: Transform
-      pos: 20.5,-3.5
-      parent: 2
-  - uid: 27723
-    components:
-    - type: Transform
-      pos: 21.5,-3.5
-      parent: 2
-  - uid: 27724
-    components:
-    - type: Transform
-      pos: 22.5,-3.5
-      parent: 2
-  - uid: 27725
-    components:
-    - type: Transform
-      pos: 23.5,-3.5
-      parent: 2
-  - uid: 27726
-    components:
-    - type: Transform
-      pos: 24.5,-3.5
-      parent: 2
-  - uid: 27727
-    components:
-    - type: Transform
-      pos: 26.5,-3.5
-      parent: 2
-  - uid: 27728
-    components:
-    - type: Transform
-      pos: 27.5,-3.5
-      parent: 2
-  - uid: 27729
-    components:
-    - type: Transform
-      pos: 25.5,-3.5
-      parent: 2
-  - uid: 27730
-    components:
-    - type: Transform
-      pos: 18.5,-4.5
-      parent: 2
-  - uid: 27731
-    components:
-    - type: Transform
-      pos: 19.5,-4.5
-      parent: 2
-  - uid: 27732
-    components:
-    - type: Transform
-      pos: 20.5,-4.5
-      parent: 2
-  - uid: 27733
-    components:
-    - type: Transform
-      pos: 21.5,-4.5
-      parent: 2
-  - uid: 27734
-    components:
-    - type: Transform
-      pos: 22.5,-4.5
-      parent: 2
-  - uid: 27735
-    components:
-    - type: Transform
-      pos: 25.5,-4.5
-      parent: 2
-  - uid: 27736
-    components:
-    - type: Transform
-      pos: 24.5,-4.5
-      parent: 2
-  - uid: 27737
-    components:
-    - type: Transform
-      pos: 26.5,-4.5
-      parent: 2
-  - uid: 27738
-    components:
-    - type: Transform
-      pos: 27.5,-4.5
-      parent: 2
-  - uid: 27739
-    components:
-    - type: Transform
-      pos: 23.5,-4.5
-      parent: 2
-  - uid: 27740
-    components:
-    - type: Transform
-      pos: 24.5,-5.5
-      parent: 2
-  - uid: 27741
-    components:
-    - type: Transform
-      pos: 23.5,-5.5
-      parent: 2
-  - uid: 27742
-    components:
-    - type: Transform
-      pos: 22.5,-5.5
-      parent: 2
-  - uid: 27743
-    components:
-    - type: Transform
-      pos: 21.5,-5.5
-      parent: 2
-  - uid: 27744
-    components:
-    - type: Transform
-      pos: 20.5,-5.5
-      parent: 2
-  - uid: 27745
-    components:
-    - type: Transform
-      pos: 19.5,-5.5
-      parent: 2
-  - uid: 27746
-    components:
-    - type: Transform
-      pos: 18.5,-5.5
-      parent: 2
-  - uid: 27747
-    components:
-    - type: Transform
-      pos: 24.5,-6.5
-      parent: 2
-  - uid: 27748
-    components:
-    - type: Transform
-      pos: 23.5,-6.5
-      parent: 2
-  - uid: 27749
-    components:
-    - type: Transform
-      pos: 22.5,-6.5
-      parent: 2
-  - uid: 27750
-    components:
-    - type: Transform
-      pos: 21.5,-6.5
-      parent: 2
-  - uid: 27751
-    components:
-    - type: Transform
-      pos: 20.5,-6.5
-      parent: 2
-  - uid: 27752
-    components:
-    - type: Transform
-      pos: 19.5,-6.5
-      parent: 2
-  - uid: 27753
-    components:
-    - type: Transform
-      pos: 18.5,-6.5
-      parent: 2
-  - uid: 27754
-    components:
-    - type: Transform
-      pos: 25.5,-7.5
-      parent: 2
-  - uid: 27755
-    components:
-    - type: Transform
-      pos: 24.5,-7.5
-      parent: 2
-  - uid: 27756
-    components:
-    - type: Transform
-      pos: 23.5,-7.5
-      parent: 2
-  - uid: 27757
-    components:
-    - type: Transform
-      pos: 22.5,-7.5
-      parent: 2
-  - uid: 27758
-    components:
-    - type: Transform
-      pos: 21.5,-7.5
-      parent: 2
-  - uid: 27759
-    components:
-    - type: Transform
-      pos: 20.5,-7.5
-      parent: 2
-  - uid: 27760
-    components:
-    - type: Transform
-      pos: 19.5,-7.5
-      parent: 2
-  - uid: 27761
-    components:
-    - type: Transform
-      pos: 18.5,-7.5
-      parent: 2
-  - uid: 27762
-    components:
-    - type: Transform
-      pos: 26.5,-8.5
-      parent: 2
-  - uid: 27763
-    components:
-    - type: Transform
-      pos: 25.5,-8.5
-      parent: 2
-  - uid: 27764
-    components:
-    - type: Transform
-      pos: 24.5,-8.5
-      parent: 2
-  - uid: 27765
-    components:
-    - type: Transform
-      pos: 23.5,-8.5
-      parent: 2
-  - uid: 27766
-    components:
-    - type: Transform
-      pos: 22.5,-8.5
-      parent: 2
-  - uid: 27767
-    components:
-    - type: Transform
-      pos: 21.5,-8.5
-      parent: 2
-  - uid: 27768
-    components:
-    - type: Transform
-      pos: 20.5,-8.5
-      parent: 2
-  - uid: 27769
-    components:
-    - type: Transform
-      pos: 19.5,-8.5
-      parent: 2
-  - uid: 27770
-    components:
-    - type: Transform
-      pos: 18.5,-8.5
-      parent: 2
-  - uid: 27771
-    components:
-    - type: Transform
-      pos: 27.5,-9.5
-      parent: 2
-  - uid: 27772
-    components:
-    - type: Transform
-      pos: 26.5,-9.5
-      parent: 2
-  - uid: 27773
-    components:
-    - type: Transform
-      pos: 25.5,-9.5
-      parent: 2
-  - uid: 27774
-    components:
-    - type: Transform
-      pos: 24.5,-9.5
-      parent: 2
-  - uid: 27775
-    components:
-    - type: Transform
-      pos: 23.5,-9.5
-      parent: 2
-  - uid: 27776
-    components:
-    - type: Transform
-      pos: 22.5,-9.5
-      parent: 2
-  - uid: 27777
-    components:
-    - type: Transform
-      pos: 21.5,-9.5
-      parent: 2
-  - uid: 27778
-    components:
-    - type: Transform
-      pos: 20.5,-9.5
-      parent: 2
-  - uid: 27779
-    components:
-    - type: Transform
-      pos: 19.5,-9.5
-      parent: 2
-  - uid: 27780
-    components:
-    - type: Transform
-      pos: 18.5,-9.5
-      parent: 2
-  - uid: 27781
-    components:
-    - type: Transform
-      pos: 30.5,-10.5
-      parent: 2
-  - uid: 27782
-    components:
-    - type: Transform
-      pos: 29.5,-10.5
-      parent: 2
-  - uid: 27783
-    components:
-    - type: Transform
-      pos: 28.5,-10.5
-      parent: 2
-  - uid: 27784
-    components:
-    - type: Transform
-      pos: 27.5,-10.5
-      parent: 2
-  - uid: 27785
-    components:
-    - type: Transform
-      pos: 26.5,-10.5
-      parent: 2
-  - uid: 27786
-    components:
-    - type: Transform
-      pos: 25.5,-10.5
-      parent: 2
-  - uid: 27787
-    components:
-    - type: Transform
-      pos: 24.5,-10.5
-      parent: 2
-  - uid: 27788
-    components:
-    - type: Transform
-      pos: 23.5,-10.5
-      parent: 2
-  - uid: 27789
-    components:
-    - type: Transform
-      pos: 22.5,-10.5
-      parent: 2
-  - uid: 27790
-    components:
-    - type: Transform
-      pos: 21.5,-10.5
-      parent: 2
-  - uid: 27791
-    components:
-    - type: Transform
-      pos: 20.5,-10.5
-      parent: 2
-  - uid: 27792
-    components:
-    - type: Transform
-      pos: 19.5,-10.5
-      parent: 2
-  - uid: 27793
-    components:
-    - type: Transform
-      pos: 18.5,-10.5
-      parent: 2
-  - uid: 27794
-    components:
-    - type: Transform
-      pos: 25.5,-5.5
-      parent: 2
-  - uid: 27795
-    components:
-    - type: Transform
-      pos: 26.5,-5.5
-      parent: 2
-  - uid: 27796
-    components:
-    - type: Transform
-      pos: 27.5,-5.5
-      parent: 2
-  - uid: 27802
-    components:
-    - type: Transform
-      pos: 25.5,-6.5
-      parent: 2
-  - uid: 27803
-    components:
-    - type: Transform
-      pos: 26.5,-6.5
-      parent: 2
-  - uid: 27804
-    components:
-    - type: Transform
-      pos: 27.5,-6.5
-      parent: 2
-  - uid: 27810
-    components:
-    - type: Transform
-      pos: 26.5,-7.5
-      parent: 2
-  - uid: 27811
-    components:
-    - type: Transform
-      pos: 27.5,-7.5
-      parent: 2
-  - uid: 27817
-    components:
-    - type: Transform
-      pos: 27.5,-8.5
-      parent: 2
-  - uid: 27823
-    components:
-    - type: Transform
-      pos: 28.5,-9.5
-      parent: 2
-  - uid: 27824
-    components:
-    - type: Transform
-      pos: 29.5,-9.5
-      parent: 2
-  - uid: 27825
-    components:
-    - type: Transform
-      pos: 30.5,-9.5
-      parent: 2
-  - uid: 27826
-    components:
-    - type: Transform
-      pos: 31.5,-9.5
-      parent: 2
-  - uid: 27827
-    components:
-    - type: Transform
-      pos: 32.5,-9.5
-      parent: 2
-  - uid: 27828
-    components:
-    - type: Transform
-      pos: 31.5,-10.5
-      parent: 2
-- proto: AreaColdRoom
-  entities:
-  - uid: 27634
-    components:
-    - type: Transform
-      pos: 35.5,0.5
-      parent: 2
-  - uid: 27635
-    components:
-    - type: Transform
-      pos: 35.5,-0.5
-      parent: 2
-  - uid: 27636
-    components:
-    - type: Transform
-      pos: 35.5,-1.5
-      parent: 2
-  - uid: 27637
-    components:
-    - type: Transform
-      pos: 35.5,-2.5
-      parent: 2
-  - uid: 27638
-    components:
-    - type: Transform
-      pos: 36.5,-2.5
-      parent: 2
-  - uid: 27639
-    components:
-    - type: Transform
-      pos: 36.5,-1.5
-      parent: 2
-  - uid: 27640
-    components:
-    - type: Transform
-      pos: 36.5,-0.5
-      parent: 2
-  - uid: 27641
-    components:
-    - type: Transform
-      pos: 36.5,0.5
-      parent: 2
-  - uid: 27642
-    components:
-    - type: Transform
-      pos: 37.5,0.5
-      parent: 2
-  - uid: 27643
-    components:
-    - type: Transform
-      pos: 37.5,-0.5
-      parent: 2
-  - uid: 27644
-    components:
-    - type: Transform
-      pos: 37.5,-1.5
-      parent: 2
-  - uid: 27645
-    components:
-    - type: Transform
-      pos: 37.5,-2.5
-      parent: 2
-  - uid: 27646
-    components:
-    - type: Transform
-      pos: 38.5,-2.5
-      parent: 2
-  - uid: 27647
-    components:
-    - type: Transform
-      pos: 38.5,-1.5
-      parent: 2
-  - uid: 27648
-    components:
-    - type: Transform
-      pos: 38.5,-0.5
-      parent: 2
-  - uid: 27649
-    components:
-    - type: Transform
-      pos: 38.5,0.5
-      parent: 2
-  - uid: 27650
-    components:
-    - type: Transform
-      pos: 39.5,0.5
-      parent: 2
-  - uid: 27651
-    components:
-    - type: Transform
-      pos: 39.5,-0.5
-      parent: 2
-  - uid: 27652
-    components:
-    - type: Transform
-      pos: 39.5,-1.5
-      parent: 2
-  - uid: 27653
-    components:
-    - type: Transform
-      pos: 39.5,-2.5
-      parent: 2
-  - uid: 27654
-    components:
-    - type: Transform
-      pos: 40.5,-2.5
-      parent: 2
-  - uid: 27655
-    components:
-    - type: Transform
-      pos: 40.5,-1.5
-      parent: 2
-  - uid: 27656
-    components:
-    - type: Transform
-      pos: 40.5,-0.5
-      parent: 2
-  - uid: 27657
-    components:
-    - type: Transform
-      pos: 40.5,0.5
-      parent: 2
-  - uid: 27658
-    components:
-    - type: Transform
-      pos: 41.5,-0.5
-      parent: 2
-  - uid: 27659
-    components:
-    - type: Transform
-      pos: 36.5,1.5
-      parent: 2
-  - uid: 27660
-    components:
-    - type: Transform
-      pos: 34.5,1.5
-      parent: 2
-  - uid: 27661
-    components:
-    - type: Transform
-      pos: 35.5,1.5
-      parent: 2
-  - uid: 27662
-    components:
-    - type: Transform
-      pos: 34.5,0.5
-      parent: 2
-  - uid: 27663
-    components:
-    - type: Transform
-      pos: 34.5,-0.5
-      parent: 2
-  - uid: 27664
-    components:
-    - type: Transform
-      pos: 34.5,-1.5
-      parent: 2
-  - uid: 27665
-    components:
-    - type: Transform
-      pos: 34.5,-2.5
-      parent: 2
-  - uid: 27666
-    components:
-    - type: Transform
-      pos: 34.5,-3.5
-      parent: 2
-  - uid: 27667
-    components:
-    - type: Transform
-      pos: 35.5,-3.5
-      parent: 2
-  - uid: 27668
-    components:
-    - type: Transform
-      pos: 36.5,-3.5
-      parent: 2
-  - uid: 27669
-    components:
-    - type: Transform
-      pos: 37.5,-3.5
-      parent: 2
-  - uid: 27670
-    components:
-    - type: Transform
-      pos: 38.5,-3.5
-      parent: 2
-  - uid: 27671
-    components:
-    - type: Transform
-      pos: 39.5,-3.5
-      parent: 2
-  - uid: 27672
-    components:
-    - type: Transform
-      pos: 40.5,-3.5
-      parent: 2
-  - uid: 27673
-    components:
-    - type: Transform
-      pos: 41.5,-3.5
-      parent: 2
-  - uid: 27674
-    components:
-    - type: Transform
-      pos: 41.5,-2.5
-      parent: 2
-  - uid: 27675
-    components:
-    - type: Transform
-      pos: 41.5,-1.5
-      parent: 2
-  - uid: 27676
-    components:
-    - type: Transform
-      pos: 41.5,0.5
-      parent: 2
-  - uid: 27677
-    components:
-    - type: Transform
-      pos: 41.5,1.5
-      parent: 2
-  - uid: 27678
-    components:
-    - type: Transform
-      pos: 40.5,1.5
-      parent: 2
-  - uid: 27679
-    components:
-    - type: Transform
-      pos: 39.5,1.5
-      parent: 2
-  - uid: 27680
-    components:
-    - type: Transform
-      pos: 38.5,1.5
-      parent: 2
-  - uid: 27681
-    components:
-    - type: Transform
-      pos: 37.5,1.5
-      parent: 2
-- proto: AreaKitchen
-  entities:
-  - uid: 27565
-    components:
-    - type: Transform
-      pos: 33.5,-4.5
-      parent: 2
-  - uid: 27575
-    components:
-    - type: Transform
-      pos: 34.5,-4.5
-      parent: 2
-  - uid: 27576
-    components:
-    - type: Transform
-      pos: 35.5,-4.5
-      parent: 2
-  - uid: 27577
-    components:
-    - type: Transform
-      pos: 36.5,-4.5
-      parent: 2
-  - uid: 27578
-    components:
-    - type: Transform
-      pos: 37.5,-4.5
-      parent: 2
-  - uid: 27579
-    components:
-    - type: Transform
-      pos: 38.5,-4.5
-      parent: 2
-  - uid: 27580
-    components:
-    - type: Transform
-      pos: 39.5,-4.5
-      parent: 2
-  - uid: 27581
-    components:
-    - type: Transform
-      pos: 40.5,-4.5
-      parent: 2
-  - uid: 27582
-    components:
-    - type: Transform
-      pos: 40.5,-5.5
-      parent: 2
-  - uid: 27583
-    components:
-    - type: Transform
-      pos: 39.5,-5.5
-      parent: 2
-  - uid: 27584
-    components:
-    - type: Transform
-      pos: 38.5,-5.5
-      parent: 2
-  - uid: 27585
-    components:
-    - type: Transform
-      pos: 37.5,-5.5
-      parent: 2
-  - uid: 27586
-    components:
-    - type: Transform
-      pos: 36.5,-5.5
-      parent: 2
-  - uid: 27587
-    components:
-    - type: Transform
-      pos: 35.5,-5.5
-      parent: 2
-  - uid: 27588
-    components:
-    - type: Transform
-      pos: 34.5,-5.5
-      parent: 2
-  - uid: 27589
-    components:
-    - type: Transform
-      pos: 33.5,-5.5
-      parent: 2
-  - uid: 27590
-    components:
-    - type: Transform
-      pos: 33.5,-6.5
-      parent: 2
-  - uid: 27591
-    components:
-    - type: Transform
-      pos: 34.5,-6.5
-      parent: 2
-  - uid: 27592
-    components:
-    - type: Transform
-      pos: 35.5,-6.5
-      parent: 2
-  - uid: 27593
-    components:
-    - type: Transform
-      pos: 36.5,-6.5
-      parent: 2
-  - uid: 27594
-    components:
-    - type: Transform
-      pos: 37.5,-6.5
-      parent: 2
-  - uid: 27595
-    components:
-    - type: Transform
-      pos: 38.5,-6.5
-      parent: 2
-  - uid: 27596
-    components:
-    - type: Transform
-      pos: 39.5,-6.5
-      parent: 2
-  - uid: 27597
-    components:
-    - type: Transform
-      pos: 40.5,-6.5
-      parent: 2
-  - uid: 27598
-    components:
-    - type: Transform
-      pos: 41.5,-6.5
-      parent: 2
-  - uid: 27599
-    components:
-    - type: Transform
-      pos: 33.5,-7.5
-      parent: 2
-  - uid: 27600
-    components:
-    - type: Transform
-      pos: 34.5,-7.5
-      parent: 2
-  - uid: 27601
-    components:
-    - type: Transform
-      pos: 35.5,-7.5
-      parent: 2
-  - uid: 27602
-    components:
-    - type: Transform
-      pos: 36.5,-7.5
-      parent: 2
-  - uid: 27603
-    components:
-    - type: Transform
-      pos: 37.5,-7.5
-      parent: 2
-  - uid: 27604
-    components:
-    - type: Transform
-      pos: 38.5,-7.5
-      parent: 2
-  - uid: 27605
-    components:
-    - type: Transform
-      pos: 39.5,-7.5
-      parent: 2
-  - uid: 27606
-    components:
-    - type: Transform
-      pos: 40.5,-7.5
-      parent: 2
-  - uid: 27607
-    components:
-    - type: Transform
-      pos: 41.5,-7.5
-      parent: 2
-  - uid: 27608
-    components:
-    - type: Transform
-      pos: 33.5,-8.5
-      parent: 2
-  - uid: 27609
-    components:
-    - type: Transform
-      pos: 34.5,-8.5
-      parent: 2
-  - uid: 27610
-    components:
-    - type: Transform
-      pos: 35.5,-8.5
-      parent: 2
-  - uid: 27611
-    components:
-    - type: Transform
-      pos: 36.5,-8.5
-      parent: 2
-  - uid: 27612
-    components:
-    - type: Transform
-      pos: 37.5,-8.5
-      parent: 2
-  - uid: 27613
-    components:
-    - type: Transform
-      pos: 38.5,-8.5
-      parent: 2
-  - uid: 27614
-    components:
-    - type: Transform
-      pos: 39.5,-8.5
-      parent: 2
-  - uid: 27615
-    components:
-    - type: Transform
-      pos: 40.5,-8.5
-      parent: 2
-  - uid: 27616
-    components:
-    - type: Transform
-      pos: 41.5,-8.5
-      parent: 2
-  - uid: 27617
-    components:
-    - type: Transform
-      pos: 33.5,-9.5
-      parent: 2
-  - uid: 27618
-    components:
-    - type: Transform
-      pos: 34.5,-9.5
-      parent: 2
-  - uid: 27619
-    components:
-    - type: Transform
-      pos: 35.5,-9.5
-      parent: 2
-  - uid: 27620
-    components:
-    - type: Transform
-      pos: 36.5,-9.5
-      parent: 2
-  - uid: 27621
-    components:
-    - type: Transform
-      pos: 37.5,-9.5
-      parent: 2
-  - uid: 27622
-    components:
-    - type: Transform
-      pos: 38.5,-9.5
-      parent: 2
-  - uid: 27623
-    components:
-    - type: Transform
-      pos: 39.5,-9.5
-      parent: 2
-  - uid: 27624
-    components:
-    - type: Transform
-      pos: 40.5,-9.5
-      parent: 2
-  - uid: 27625
-    components:
-    - type: Transform
-      pos: 41.5,-9.5
-      parent: 2
-  - uid: 27626
-    components:
-    - type: Transform
-      pos: 35.5,-10.5
-      parent: 2
-  - uid: 27627
-    components:
-    - type: Transform
-      pos: 36.5,-10.5
-      parent: 2
-  - uid: 27628
-    components:
-    - type: Transform
-      pos: 37.5,-10.5
-      parent: 2
-  - uid: 27629
-    components:
-    - type: Transform
-      pos: 38.5,-10.5
-      parent: 2
-  - uid: 27630
-    components:
-    - type: Transform
-      pos: 39.5,-10.5
-      parent: 2
-  - uid: 27631
-    components:
-    - type: Transform
-      pos: 40.5,-10.5
-      parent: 2
-  - uid: 27632
-    components:
-    - type: Transform
-      pos: 34.5,-10.5
-      parent: 2
-  - uid: 27633
-    components:
-    - type: Transform
-      pos: 33.5,-10.5
       parent: 2
 - proto: ArtistCircuitBoard
   entities:
@@ -57267,6 +56133,13 @@ entities:
       parent: 2
     - type: SiloUtilizer
       silo: 18819
+- proto: CargoTelepad
+  entities:
+  - uid: 27565
+    components:
+    - type: Transform
+      pos: -39.5,-29.5
+      parent: 2
 - proto: Carpet
   entities:
   - uid: 9002
@@ -65959,532 +64832,6 @@ entities:
         moles:
           Oxygen: 5.001885
           Nitrogen: 18.816614
-- proto: ClosetMaintenanceFilledRandom
-  entities:
-  - uid: 10482
-    components:
-    - type: Transform
-      pos: 51.5,8.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10483
-    components:
-    - type: Transform
-      pos: 42.5,9.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-  - uid: 10484
-    components:
-    - type: Transform
-      pos: 20.5,18.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10485
-    components:
-    - type: Transform
-      pos: 72.5,10.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10486
-    components:
-    - type: Transform
-      pos: -33.5,11.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10487
-    components:
-    - type: Transform
-      pos: -48.5,2.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10488
-    components:
-    - type: Transform
-      pos: -46.5,15.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10489
-    components:
-    - type: Transform
-      pos: -56.5,-20.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10490
-    components:
-    - type: Transform
-      pos: -43.5,-15.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10491
-    components:
-    - type: Transform
-      pos: -36.5,-46.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10492
-    components:
-    - type: Transform
-      pos: -32.5,-47.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10493
-    components:
-    - type: Transform
-      pos: -29.5,-43.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10494
-    components:
-    - type: Transform
-      pos: -3.5,-49.5
-      parent: 2
-  - uid: 10495
-    components:
-    - type: Transform
-      pos: 48.5,-21.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10496
-    components:
-    - type: Transform
-      pos: 41.5,-62.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10497
-    components:
-    - type: Transform
-      pos: 32.5,-60.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10498
-    components:
-    - type: Transform
-      pos: 82.5,-61.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10499
-    components:
-    - type: Transform
-      pos: 84.5,-59.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10500
-    components:
-    - type: Transform
-      pos: 68.5,-57.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10501
-    components:
-    - type: Transform
-      pos: 84.5,-22.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1496
-        moles:
-          Oxygen: 5.001885
-          Nitrogen: 18.816614
-    - type: ContainerContainer
-      containers:
-        EntityStorageComponent: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 10502
-    components:
-    - type: Transform
-      pos: 15.5,-36.5
-      parent: 2
-  - uid: 10503
-    components:
-    - type: Transform
-      pos: 62.5,-51.5
-      parent: 2
-  - uid: 10504
-    components:
-    - type: Transform
-      pos: 58.5,-51.5
-      parent: 2
-  - uid: 10505
-    components:
-    - type: Transform
-      pos: 59.5,-51.5
-      parent: 2
 - proto: ClosetRadiationSuitFilled
   entities:
   - uid: 10506
@@ -82805,7 +81152,7 @@ entities:
       pos: -34.5,-14.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -43605.316
+      secondsUntilStateChange: -43767.74
       state: Closing
   - uid: 13064
     components:
@@ -83298,7 +81645,7 @@ entities:
       pos: -4.5,-71.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -35353.055
+      secondsUntilStateChange: -35515.477
       state: Closing
   - uid: 13162
     components:
@@ -131348,6 +129695,467 @@ entities:
     components:
     - type: Transform
       pos: 55.5,15.5
+      parent: 2
+- proto: RandomMaintsCloset
+  entities:
+  - uid: 10482
+    components:
+    - type: Transform
+      pos: 51.5,8.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10483
+    components:
+    - type: Transform
+      pos: 42.5,9.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          ents: []
+  - uid: 10484
+    components:
+    - type: Transform
+      pos: 20.5,18.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10485
+    components:
+    - type: Transform
+      pos: 72.5,10.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10486
+    components:
+    - type: Transform
+      pos: -33.5,11.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10487
+    components:
+    - type: Transform
+      pos: -48.5,2.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10488
+    components:
+    - type: Transform
+      pos: -46.5,15.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10489
+    components:
+    - type: Transform
+      pos: -56.5,-20.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10490
+    components:
+    - type: Transform
+      pos: -43.5,-15.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10491
+    components:
+    - type: Transform
+      pos: -36.5,-46.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10492
+    components:
+    - type: Transform
+      pos: -32.5,-47.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10493
+    components:
+    - type: Transform
+      pos: -29.5,-43.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10494
+    components:
+    - type: Transform
+      pos: -3.5,-49.5
+      parent: 2
+  - uid: 10495
+    components:
+    - type: Transform
+      pos: 48.5,-21.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10496
+    components:
+    - type: Transform
+      pos: 41.5,-62.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10497
+    components:
+    - type: Transform
+      pos: 32.5,-60.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10498
+    components:
+    - type: Transform
+      pos: 82.5,-61.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10499
+    components:
+    - type: Transform
+      pos: 84.5,-59.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10500
+    components:
+    - type: Transform
+      pos: 68.5,-57.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10501
+    components:
+    - type: Transform
+      pos: 84.5,-22.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.1496
+        moles:
+          Oxygen: 5.001885
+          Nitrogen: 18.816614
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        EntityStorageComponent: !type:Container
+          ents: []
+        entity_storage: !type:Container
+          ents: []
+        paper_label: !type:ContainerSlot {}
+  - uid: 10502
+    components:
+    - type: Transform
+      pos: 15.5,-36.5
+      parent: 2
+  - uid: 10503
+    components:
+    - type: Transform
+      pos: 62.5,-51.5
+      parent: 2
+  - uid: 10504
+    components:
+    - type: Transform
+      pos: 58.5,-51.5
+      parent: 2
+  - uid: 10505
+    components:
+    - type: Transform
+      pos: 59.5,-51.5
       parent: 2
 - proto: RandomPosterAny
   entities:

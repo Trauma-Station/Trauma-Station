@@ -1,12 +1,12 @@
 - type: seed
-  id: CombustibleLemon
-  name: seeds-combustiblelemon-name
+  id: Lemonade
+  name: seeds-lemonade-name
   noun: seeds-noun-seeds
-  displayName: seeds-combustiblelemon-display-name
-  plantRsi: _Trauma/Objects/Specific/Hydroponics/combustible_lemon.rsi
-  packetPrototype: CombustibleLemonSeeds
+  displayName: seeds-lemonade-display-name
+  plantRsi: _Trauma/Objects/Specific/Hydroponics/lemonade.rsi
+  packetPrototype: LemonadeSeeds
   productPrototypes:
-  - LemonGrenade
+  - FoodLemonade
   mutationPrototypes:
   - lime # mutated backwards idiot
   harvestRepeat: Repeat
@@ -17,14 +17,18 @@
   potency: 10
   idealLight: 8
   chemicals:
-    Nutriment:
+    WeldingFuel:
       Min: 1
       Max: 5
       PotencyDivisor: 20
-    Vitamin:
+    Napalm:
       Min: 1
       Max: 4
       PotencyDivisor: 25
+    CLF3:
+      Min: 1
+      Max: 1
+      PotencyDivisor: 100
 
 - type: seed
   id: CocaPlant
