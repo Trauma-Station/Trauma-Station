@@ -38,7 +38,6 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
-
 - type: entity
   parent: CMPlatformBase
   id: CMPlatform
@@ -64,7 +63,11 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform
+    drawdepth: HighFloorObjects
   - type: Climbable
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayCMPlatform
 
 - type: entity
   parent: CMPlatformBase
@@ -100,7 +103,11 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_corner
+    drawdepth: HighFloorObjects
   - type: Climbable
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayCMPlatformCorner
 
 - type: entity
   parent: CMPlatformBase
@@ -127,7 +134,11 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_deco
+    drawdepth: HighFloorObjects
   - type: Climbable
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayRMCPlatformCornerSmall
 
 - type: entity
   parent: CMPlatform
@@ -136,6 +147,10 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_stair
+    drawdepth: HighFloorObjects
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayRMCPlatformStairRight
 
 - type: entity
   parent: CMPlatform
@@ -144,6 +159,10 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_stair_alt
+    drawdepth: HighFloorObjects
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayRMCPlatformStairLeft
 
 # New Dark
 
@@ -172,7 +191,11 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_dark
+    drawdepth: HighFloorObjects
   - type: Climbable
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayCMPlatformDark
 
 - type: entity
   parent: CMPlatformBase
@@ -208,7 +231,11 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_corner_dark
+    drawdepth: HighFloorObjects
   - type: Climbable
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayCMPlatformCornerDark
 
 - type: entity
   parent: CMPlatformBase
@@ -235,7 +262,11 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_deco_dark
+    drawdepth: HighFloorObjects
   - type: Climbable
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayRMCPlatformCornerSmallDark
 
 - type: entity
   parent: CMPlatform
@@ -244,6 +275,10 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_stair_dark
+    drawdepth: HighFloorObjects
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayRMCPlatformStairRightDark
 
 - type: entity
   parent: CMPlatform
@@ -252,6 +287,10 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_stair_dark_alt
+    drawdepth: HighFloorObjects
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayRMCPlatformStairLeftDark
 
 # New Wood
 
@@ -280,7 +319,11 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_wood
+    drawdepth: HighFloorObjects
   - type: Climbable
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayCMPlatformWood
 
 - type: entity
   parent: CMPlatformBase
@@ -316,7 +359,11 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_corner_wood
+    drawdepth: HighFloorObjects
   - type: Climbable
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayCMPlatformCornerWood
 
 - type: entity
   parent: CMPlatformBase
@@ -343,7 +390,11 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_deco_wood
+    drawdepth: HighFloorObjects
   - type: Climbable
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayRMCPlatformCornerSmallWood
 
 - type: entity
   parent: CMPlatform
@@ -352,6 +403,10 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_stair_wood
+    drawdepth: HighFloorObjects
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayRMCPlatformStairRightWood
 
 - type: entity
   parent: CMPlatform
@@ -360,3 +415,8 @@
   - type: Sprite
     sprite: _Starlight/Structures/platforms.rsi
     state: platform_stair_wood_alt
+    drawdepth: HighFloorObjects
+  - type: ChildEntities
+    childPrototypes:
+      - prototype: OverlayRMCPlatformStairLeftWood
+
