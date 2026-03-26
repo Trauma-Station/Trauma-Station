@@ -110,8 +110,8 @@ public sealed partial class TraumaCVars
     /// Delay between each error message in seconds.
     /// Used to avoid hitting ratelimits
     /// </summary>
-    public static readonly CVarDef<double> ErrorWebhookDelay =
-        CVarDef.Create("trauma.error_webhook_delay", 0.3, CVar.SERVER);
+    public static readonly CVarDef<float> ErrorWebhookDelay =
+        CVarDef.Create("trauma.error_webhook_delay", 0.3f, CVar.SERVER);
 
     #endregion
 
@@ -122,6 +122,24 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<bool> PlayMovieEndCredits =
         CVarDef.Create("trauma.play_credits", true, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    #endregion
+
+    #region Decals
+
+    /// <summary>
+    /// How long despawning decals like footprints and blood splatters last before despawning.
+    /// </summary>
+    public static readonly CVarDef<float> DecalDespawnTime =
+        CVarDef.Create("trauma.decal_despawn_time", 300f, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// How many decals are allowed to be despawning at the same time.
+    /// If another decal is spawned, it will remove the oldest decal.
+    /// If this value is changed ingame it will only take affected after restarting the round.
+    /// </summary>
+    public static readonly CVarDef<int> DecalDespawnLimit =
+        CVarDef.Create("trauma.decal_despawn_limit", 128, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
 }
