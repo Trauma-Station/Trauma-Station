@@ -17,13 +17,13 @@ public sealed partial class ItemSlotHeaterComponent : Component
     public string Slot;
 
     /// <summary>
-    /// The temperature to heat the entities
+    /// The heat to apply to the entity
     /// </summary>
     [DataField]
     public float Temp = 100f;
 
     /// <summary>
-    /// The max temperature of the item inside
+    /// The max temperature the item can have
     /// </summary>
     [DataField]
     public float MaxTemp = 300f;
