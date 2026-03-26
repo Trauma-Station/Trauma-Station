@@ -6,4 +6,4 @@ namespace Content.Trauma.Common.Damage;
 /// Raised on the mob holding a DamageOnHolding item and its gloves to prevent being damaged.
 /// </summary>
 [ByRefEvent]
-public record struct DamageOnHoldingAttemptEvent(EntityUid Source, bool Cancelled = true);
+public record struct DamageOnHoldingAttemptEvent(EntityUid Source, bool Cancelled = false);
