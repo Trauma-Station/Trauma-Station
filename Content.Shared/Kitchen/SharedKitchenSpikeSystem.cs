@@ -387,7 +387,7 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
             Impact = LogImpact.Medium,
         });
         // <Trauma> - add victim's verbs as well
-        RaiseLocalEvent(victim.Value, ref args);
+        RaiseLocalEvent(victim.Value, args);
         // </Trauma>
     }
 
