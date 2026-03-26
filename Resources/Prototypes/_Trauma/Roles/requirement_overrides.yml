@@ -213,11 +213,11 @@
       time: 5h
     MothershipCore:
     - !type:RoleTimeRequirement
-      role: JobAI
+      role: StationAi
       time: 3h
     Xenoborg:
     - !type:RoleTimeRequirement
-      role: JobBorg
+      role: Borg
       time: 3h
     XenomorphsInfestationRoundstart:
     - !type:OverallPlaytimeRequirement
