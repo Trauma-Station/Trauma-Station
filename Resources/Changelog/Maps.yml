@@ -223,3 +223,10 @@ Entries:
   id: 23
   time: '2026-03-26T16:38:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1598
+- author: deltanedas
+  changes:
+  - type: Add
+    message: 'Loop: Added a Virologist job slot.'
+  id: 24
+  time: '2026-03-26T19:48:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1600
