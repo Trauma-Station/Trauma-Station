@@ -34,7 +34,7 @@ public sealed class SkinnableSystem : EntitySystem
     private void OnSpikeGetVerbs(Entity<KitchenSpikeComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
         // relay event to the victim for skinning
-        if (ent.Comp.Victim is {} victim)
+        if (ent.Comp.BodyContainer.ContainedEntity is {} victim)
             RaiseLocalEvent(victim, args);
     }
 
