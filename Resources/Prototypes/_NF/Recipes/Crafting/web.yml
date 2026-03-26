@@ -4,9 +4,6 @@
   startNode: start
   targetNode: end
   category: construction-category-tools
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
@@ -21,9 +18,6 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
@@ -38,9 +32,6 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
@@ -55,9 +46,6 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:

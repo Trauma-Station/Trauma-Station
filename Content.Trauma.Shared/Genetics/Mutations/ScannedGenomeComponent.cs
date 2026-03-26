@@ -44,4 +44,4 @@ public partial record struct UnknownBase(uint Index, char Value = 'X');
 
 // EntProtoId? doesnt work properly with Serializable for some reason, so using string
 [Serializable, NetSerializable]
-public record struct SequenceState(string Bases, string OriginalBases, int Number, string? Mutation);
+public record struct SequenceState(string Bases, string OriginalBases, int Number, MutationRarity Rarity, string? Mutation);

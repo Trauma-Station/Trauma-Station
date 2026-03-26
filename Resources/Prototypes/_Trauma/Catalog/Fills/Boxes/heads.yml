@@ -1,0 +1,86 @@
+- type: entity
+  parent: ToteBase
+  id: BoxSkillChipsBase
+  name: skillchips box
+  description: A large box for storing spare skillchips. Might be sterile? Who knows.
+  components:
+  - type: Storage
+    whitelist: null # just a box
+
+- type: entity
+  parent: BoxSkillChipsBase
+  id: BoxSkillChipsCargo
+  name: cargo skillchips box
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipQuartermaster
+        - id: SkillChipSalvageSpecialist
+          amount: 2
+        - id: SkillChipCargoTechnician
+          amount: 3
+
+- type: entity
+  parent: BoxSkillChipsBase
+  id: BoxSkillChipsEngi
+  name: engi skillchips box
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipChiefEngineer
+        - id: SkillChipAtmosphericTechnician
+        - id: SkillChipStationEngineer
+          amount: 3
+        - id: SkillChipTechnicalAssistant
+          amount: 2
+
+- type: entity
+  parent: BoxSkillChipsBase
+  id: BoxSkillChipsMed
+  name: med skillchips box
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipChiefMedicalOfficer
+        - id: SkillChipParamedic
+        - id: SkillChipMedicalDoctor
+          amount: 2
+        - id: SkillChipMedicalIntern
+          amount: 2
+
+- type: entity
+  parent: BoxSkillChipsBase
+  id: BoxSkillChipsSci
+  name: sci skillchips box
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipResearchDirector
+        - id: SkillChipScientist
+          amount: 3
+        - id: SkillChipResearchAssistant
+          amount: 3
+
+- type: entity
+  parent: BoxSkillChipsBase
+  id: BoxSkillChipsSec
+  name: sec skillchips box
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipHeadOfSecurity
+        - id: SkillChipWarden
+        - id: SkillChipSecurityOfficer
+          amount: 2
+        - id: SkillChipSecurityCadet
+          amount: 2

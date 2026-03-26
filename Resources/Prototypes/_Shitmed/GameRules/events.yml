@@ -1,19 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Poips <Hanakohashbrown@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 grub <unalterableness@gmail.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 shityaml <unalterableness@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -23,15 +7,16 @@
   - type: StationEvent
     earliestStart: 15
     reoccurrenceDelay: 45
-    weight: 3 # Goobstation - 7.5 -> 3
+    weight: 3
     minimumPlayers: 10
-    duration: null # Goobstation - chud
+    duration: null
   - type: RuleGrids
   - type: LoadMapRule
-    mapPath: /Maps/_Shitmed/Shuttles/ShuttleEvent/abductor_shuttle.yml
+    gridPath: /Maps/_Trauma/Shuttles/abductor_shuttle.yml
   - type: AntagObjectives
     objectives:
     - AbductObjective
+  - type: AbductorRule
   - type: AntagLoadProfileRule
     speciesHardOverride: Abductor
   - type: AntagSelection
@@ -49,7 +34,7 @@
       - type: Abductor
       - type: ActionGrant
         actions:
-          - ActionReturnToShip
+        - ActionReturnToShip
       - type: GhostRole
         name: abductor-lone-ghost-role-name
         description: abductor-lone-ghost-role-desc
@@ -61,19 +46,19 @@
       - type: GhostTakeoverAvailable
       - type: NpcFactionMember
         factions:
-          - SimpleHostile
+        - SimpleHostile
       - type: RandomMetadata
         nameSegments:
-          - AbductorScientistPrefix
-          - AbductorNames
+        - AbductorScientistPrefix
+        - AbductorNames
         nameFormat: name-format-standard
       - type: Tag
         tags:
-          - Abductor
-          - AbductorScientist
-          - CanPilot
-          - FootstepSound
-          - DoorBumpOpener
+        - Abductor
+        - AbductorScientist
+        - CanPilot
+        - FootstepSound
+        - DoorBumpOpener
       - type: AbductorScientist
       - type: SurgeryIgnoreClothing
       - type: Sanitized
@@ -102,23 +87,11 @@
       groups: AbductorVictimObjectiveGroups
 
 - type: entity
-  parent: BaseGameRule
+  parent: LoneAbductorSpawn
   id: DuoAbductorSpawn
   components:
   - type: StationEvent
-    earliestStart: 15
-    reoccurrenceDelay: 45
-    weight: 3 # Goobstation - 7.5 -> 3
     minimumPlayers: 20
-    duration: null # Goobstation - chud
-  - type: RuleGrids
-  - type: LoadMapRule
-    mapPath: /Maps/_Shitmed/Shuttles/ShuttleEvent/duo_abductor_shuttle.yml
-  - type: AntagObjectives
-    objectives:
-    - AbductObjective
-  - type: AntagLoadProfileRule
-    speciesHardOverride: Abductor
   - type: AntagSelection
     definitions:
     - spawnerPrototype: AbductorScientistSpawner
@@ -134,7 +107,7 @@
       - type: Abductor
       - type: ActionGrant
         actions:
-          - ActionReturnToShip
+        - ActionReturnToShip
       - type: GhostRole
         name: abductor-scientist-ghost-role-name
         description: abductor-scientist-ghost-role-desc
@@ -146,19 +119,19 @@
       - type: GhostTakeoverAvailable
       - type: NpcFactionMember
         factions:
-          - SimpleHostile
+        - SimpleHostile
       - type: RandomMetadata
         nameSegments:
-          - AbductorScientistPrefix
-          - AbductorNames
+        - AbductorScientistPrefix
+        - AbductorNames
         nameFormat: name-format-standard
       - type: Tag
         tags:
-          - Abductor
-          - AbductorScientist
-          - CanPilot
-          - FootstepSound
-          - DoorBumpOpener
+        - Abductor
+        - AbductorScientist
+        - CanPilot
+        - FootstepSound
+        - DoorBumpOpener
       - type: AbductorScientist
       - type: SurgeryIgnoreClothing
       - type: Sanitized
@@ -179,7 +152,7 @@
       - type: Abductor
       - type: ActionGrant
         actions:
-          - ActionReturnToShip
+        - ActionReturnToShip
       - type: GhostRole
         name: abductor-agent-ghost-role-name
         description: abductor-agent-ghost-role-desc
@@ -191,19 +164,19 @@
       - type: GhostTakeoverAvailable
       - type: NpcFactionMember
         factions:
-          - SimpleHostile
+        - SimpleHostile
       - type: RandomMetadata
         nameSegments:
-          - AbductorAgentPrefix
-          - AbductorNames
+        - AbductorAgentPrefix
+        - AbductorNames
         nameFormat: name-format-standard
       - type: Tag
         tags:
-          - Abductor
-          - AbductorScientist # Trauma - stop agent being a cuck
-          - CanPilot
-          - FootstepSound
-          - DoorBumpOpener
+        - Abductor
+        - AbductorScientist
+        - CanPilot
+        - FootstepSound
+        - DoorBumpOpener
       - type: AbductorScientist # Should be removed when we have proper teleportation system
       mindRoles:
       - MindRoleAbductorAgent

@@ -90,8 +90,8 @@ public sealed class RoundEndCreditsSystem : EntitySystem
 
     public float GetScrollingSpeed(TimeSpan time)
     {
-        var normalSpeed = 240f;
-        var speedUpDuration = 5f;
+        var normalSpeed = 200f;
+        var speedUpDuration = 10f;
         var easing = Easings.InSine;
         return easing(Math.Min((float)time.TotalSeconds / speedUpDuration, 1f)) * normalSpeed;
     }

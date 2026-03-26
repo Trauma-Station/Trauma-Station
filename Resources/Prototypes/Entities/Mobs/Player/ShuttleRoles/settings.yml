@@ -21,70 +21,50 @@
   parent: VisitorHead
   components:
     - type: GhostRole
+      job: Captain # Trauma
       name: job-name-captain
       description: ghost-role-information-command-description
     - type: Loadout
       prototypes: [ VisitorCaptain, VisitorCaptainAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 50
-        ShootingKnowledge: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorCE
   parent: VisitorHead
   components:
     - type: GhostRole
+      job: ChiefEngineer # Trauma
       name: job-name-ce
       description: ghost-role-information-command-description
     - type: Loadout
       prototypes: [ VisitorCE, VisitorCEAlt ]
       roleLoadout: [ RoleSurvivalExtended ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FabricationKnowledge: 50
-        MaterialsKnowledge: 50
-        DoorsKnowledge: 50
-        AirlocksKnowledge: 50
-        FurnitureKnowledge: 50
-        InfrastructureKnowledge: 50
-        ElectronicsKnowledge: 50
-        WallsKnowledge: 50
-        WindowsKnowledge: 50
-        SmokeablesKnowledge: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorCMO
   parent: VisitorHead
   components:
+    # <Trauma>
+    - type: SurgerySpeedModifier # TODO: move ts to skillchip
+      speedModifier: 2
+    - type: CPRTraining
+      reviveChance: 0.9 # excellent training and experience
+      inhaleChance: 1 # great kisser too
+    # </Trauma>
     - type: GhostRole
+      job: ChiefMedicalOfficer # Trauma
       name: job-name-cmo
       description: ghost-role-information-command-description
     - type: Loadout
       prototypes: [ VisitorCMO, VisitorCMOAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
-    # <Trauma>
-    - type: SurgerySpeedModifier
-      speedModifier: 2
-    - type: CPRTraining
-      reviveChance: 0.9 # excellent training and experience
-      inhaleChance: 1 # great kisser too
-    - type: KnowledgeGrant
-      skills:
-        FirstAidKnowledge: 50
-        SurgeryKnowledge: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorHOP
   parent: VisitorHead
   components:
     - type: GhostRole
+      job: HeadOfPersonnel # Trauma
       name: job-name-hop
       description: ghost-role-information-command-description
     - type: Loadout
@@ -96,53 +76,36 @@
   parent: VisitorHead
   components:
     - type: GhostRole
+      job: HeadOfSecurity # Trauma
       name: job-name-hos
       description: ghost-role-information-command-description
     - type: Loadout
       prototypes: [ VisitorHOS, VisitorHOSAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 26
-        ShootingKnowledge: 50
-        MartialArtCorporateJudo: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorResearchDirector
   parent: VisitorHead
   components:
     - type: GhostRole
+      job: ResearchDirector # Trauma
       name: job-name-rd
       description: ghost-role-information-command-description
     - type: Loadout
       prototypes: [ VisitorRD, VisitorRDAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        ElectronicsKnowledge: 50
-        ScienceKnowledge: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorQM
   parent: VisitorHead
   components:
     - type: GhostRole
+      job: Quartermaster # Trauma
       name: job-name-qm
       description: ghost-role-information-command-description
     - type: Loadout
       prototypes: [ VisitorQM, VisitorQMAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        StrengthKnowledge: 26
-        ToughnessKnowledge: 26
-        MeleeKnowledge: 26
-    # <Trauma>
 
 # Security
 # Following use EventHumanoidMindShielded since they are security and probably should have mindshields
@@ -163,66 +126,44 @@
   parent: VisitorSecurity
   components:
     - type: GhostRole
+      job: SecurityCadet # Trauma
       name: job-name-cadet
     - type: Loadout
       prototypes: [ VisitorSecurityCadet, VisitorSecurityCadetAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 5
-        ShootingKnowledge: 5
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorSecurityOfficer
   parent: VisitorSecurity
   components:
     - type: GhostRole
+      job: SecurityOfficer # Trauma
       name: job-name-security
     - type: Loadout
       prototypes: [ VisitorSecurityOfficer, VisitorSecurityOfficerAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 26
-        ShootingKnowledge: 10
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorDetective
   parent: VisitorSecurity
   components:
     - type: GhostRole
+      job: Detective # Trauma
       name: job-name-detective
     - type: Loadout
       prototypes: [ VisitorDetective, VisitorDetectiveAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 26
-        ShootingKnowledge: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorWarden
   parent: VisitorSecurity
   components:
     - type: GhostRole
+      job: Warden # Trauma
       name: job-name-warden
     - type: Loadout
       prototypes: [ VisitorWarden, VisitorWardenAlt ]
       roleLoadout: [ RoleSurvivalSecurity ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 26
-        ShootingKnowledge: 26
-        MartialArtKravMaga: 50
-        WeaponsKnowledge: 50
-    # </Trauma>
 
 # Cargo
 
@@ -242,34 +183,22 @@
   parent: VisitorCargonian
   components:
     - type: GhostRole
+      job: CargoTechnician # Trauma
       name: job-name-cargotech
     - type: Loadout
       prototypes: [ VisitorCargoTech, VisitorCargoTechAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        StrengthKnowledge: 26
-        ToughnessKnowledge: 26
-    # <Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorSalvageSpecialist
   parent: VisitorCargonian
   components:
     - type: GhostRole
+      job: SalvageSpecialist # Trauma
       name: job-name-salvagespec
     - type: Loadout
       prototypes: [ VisitorSalvageSpecialist, VisitorSalvageSpecialistAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        StrengthKnowledge: 26
-        ToughnessKnowledge: 26
-        MeleeKnowledge: 26
-        AthleticsKnowledge: 26
-    # </Trauma>
 
 # Engineering
 
@@ -289,72 +218,33 @@
   parent: VisitorEngineering
   components:
     - type: GhostRole
+      job: AtmosphericTechnician # Trauma
       name: job-name-atmostech
     - type: Loadout
       prototypes: [ VisitorAtmosTech, VisitorAtmosTechAlt ]
       roleLoadout: [ RoleSurvivalExtended ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FabricationKnowledge: 26
-        MaterialsKnowledge: 26
-        DoorsKnowledge: 26
-        AirlocksKnowledge: 16
-        FurnitureKnowledge: 26
-        InfrastructureKnowledge: 26
-        ElectronicsKnowledge: 26
-        WallsKnowledge: 26
-        WindowsKnowledge: 26
-        SmokeablesKnowledge: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorTechnicalAssistant
   parent: VisitorEngineering
   components:
     - type: GhostRole
+      job: TechnicalAssistant # Trauma
       name: job-name-technical-assistant
     - type: Loadout
       prototypes: [ VisitorTechnicalAssistant, VisitorTechnicalAssistantAlt ]
       roleLoadout: [ RoleSurvivalExtended ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FabricationKnowledge: 10
-        MaterialsKnowledge: 10
-        DoorsKnowledge: 10
-        AirlocksKnowledge: 10
-        FurnitureKnowledge: 10
-        InfrastructureKnowledge: 10
-        ElectronicsKnowledge: 10
-        WallsKnowledge: 10
-        WindowsKnowledge: 10
-        SmokeablesKnowledge: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorEngineer
   parent: VisitorEngineering
   components:
     - type: GhostRole
+      job: StationEngineer # Trauma
       name: job-name-engineer
     - type: Loadout
       prototypes: [ VisitorEngineer, VisitorEngineerAlt ]
       roleLoadout: [ RoleSurvivalExtended ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FabricationKnowledge: 26
-        MaterialsKnowledge: 26
-        DoorsKnowledge: 26
-        AirlocksKnowledge: 16
-        FurnitureKnowledge: 26
-        InfrastructureKnowledge: 26
-        ElectronicsKnowledge: 26
-        WallsKnowledge: 26
-        WindowsKnowledge: 26
-        SmokeablesKnowledge: 50
-    # </Trauma>
 
 # Medical
 
@@ -374,108 +264,77 @@
   parent: VisitorMedical
   components:
     - type: GhostRole
+      job: MedicalIntern # Trauma
       name: job-name-intern
     - type: Loadout
       prototypes: [ VisitorMedicalIntern, VisitorMedicalInternAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FirstAidKnowledge: 26
-        SurgeryKnowledge: 10
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorMedicalDoctor
   parent: VisitorMedical
   components:
     - type: GhostRole
+      job: MedicalDoctor # Trauma
       name: job-name-doctor
     - type: Loadout
       prototypes: [ VisitorMedicalDoctor, VisitorMedicalDoctorAlt , VisitorScrubsPurple, VisitorScrubsGreen, VisitorScrubsBlue]
       roleLoadout: [ RoleSurvivalMedical ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FirstAidKnowledge: 30
-        SurgeryKnowledge: 26
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorParamedic
   parent: VisitorMedical
   components:
     - type: GhostRole
+      job: Paramedic # Trauma
       name: job-name-paramedic
     - type: Loadout
       prototypes: [ VisitorParamedic, VisitorParamedicAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FirstAidKnowledge: 26
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorVirologist
   parent: VisitorMedical
   components:
     - type: GhostRole
+      job: Virologist # Trauma
       name: ghost-role-information-medical-virologist-name
     - type: Loadout
       prototypes: [ VisitorVirologist, VisitorVirologistAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FirstAidKnowledge: 26
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorGeneticist
   parent: VisitorMedical
   components:
     - type: GhostRole
+      job: Geneticist # Trauma
       name: ghost-role-information-medical-geneticist-name
     - type: Loadout
       prototypes: [ VisitorGeneticist, VisitorGeneticistAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        ScienceKnowledge: 26
-        ElectronicsKnowledge: 26
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorPsychologist
   parent: VisitorMedical
   components:
     - type: GhostRole
+      job: Psychologist # Trauma
       name: job-name-psychologist
     - type: Loadout
       prototypes: [ VisitorPsychologist, VisitorPsychologistAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        ChemistryKnowledge: 26
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorChemist
   parent: VisitorMedical
   components:
     - type: GhostRole
+      job: Chemist # Trauma
       name: job-name-chemist
     - type: Loadout
       prototypes: [ VisitorChemist, VisitorChemistAlt ]
       roleLoadout: [ RoleSurvivalMedical ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        ChemistryKnowledge: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorDentist
@@ -486,11 +345,6 @@
     - type: Loadout
       prototypes: [ VisitorDentist ]
       roleLoadout: [ RoleSurvivalMedical ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        FirstAidKnowledge: 26
-    # </Trauma>
 
 # Science
 
@@ -510,32 +364,22 @@
   parent: VisitorScience
   components:
     - type: GhostRole
+      job: ResearchAssistant # Trauma
       name: job-name-research-assistant
     - type: Loadout
       prototypes: [ VisitorResearchAssistant, VisitorResearchAssistantAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        ScienceKnowledge: 10
-        ElectronicsKnowledge: 10
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorScientist
   parent: VisitorScience
   components:
     - type: GhostRole
+      job: Scientist # Trauma
       name: job-name-scientist
     - type: Loadout
       prototypes: [ VisitorScientist, VisitorScientistAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        ScienceKnowledge: 26
-        ElectronicsKnowledge: 26
-    # </Trauma>
 
 # Civilian
 
@@ -555,6 +399,7 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
+      job: Bartender # Trauma
       name: job-name-bartender
     - type: Loadout
       prototypes: [ VisitorBartender, VisitorBartenderAlt ]
@@ -565,6 +410,7 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
+      job: Botanist # Trauma
       name: job-name-botanist
     - type: Loadout
       prototypes: [ VisitorBotanist, VisitorBotanistAlt ]
@@ -584,26 +430,24 @@
   id: VisitorChaplain
   parent: VisitorCivilian
   components:
-    - type: BibleUser
-    - type: CurseImmune # Goobstation - Wraith
+    # <Trauma>
+    - type: CurseImmune
     - type: CanEnchant
+    # </Trauma>
+    - type: BibleUser
     - type: GhostRole
+      job: Chaplain # Trauma
       name: job-name-chaplain
     - type: Loadout
       prototypes: [ VisitorChaplain, VisitorChaplainAlt ]
       roleLoadout: [ RoleSurvivalStandard ]
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        LiteracyKnowledge: 26
-        MagicalLiteracyKnowledge: 50
-    # </Trauma>
 
 - type: randomHumanoidSettings
   id: VisitorChef
-  parent: VisitorCivilianChef #Goobstation
+  parent: VisitorCivilian
   components:
     - type: GhostRole
+      job: Chef # Trauma
       name: job-name-chef
     - type: Loadout
       prototypes: [ VisitorChef, VisitorChefAlt ]
@@ -628,6 +472,7 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
+      job: Janitor # Trauma
       name: job-name-janitor
     - type: Loadout
       prototypes: [ VisitorJanitor, VisitorJanitorAlt ]
@@ -638,6 +483,7 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
+      job: Lawyer # Trauma
       name: job-name-lawyer
     - type: Loadout
       prototypes: [ VisitorLawyerAltA, VisitorLawyerAltB, VisitorLawyerAltC, VisitorLawyerAltD, VisitorLawyerAltE ]
@@ -645,7 +491,7 @@
 
 - type: randomHumanoidSettings
   id: VisitorLawyerCentcom
-  parent: VisitorCivilian
+  parent: VisitorLawyer # Trauma
   components:
     - type: GhostRole
       name: ghost-role-information-civilian-centcom-lawyer-name
@@ -656,9 +502,10 @@
 
 - type: randomHumanoidSettings
   id: VisitorLibrarian
-  parent: VisitorCivilianLibrarian #Goobstation
+  parent: VisitorCivilian
   components:
     - type: GhostRole
+      job: Librarian # Trauma
       name: job-name-librarian
     - type: Loadout
       prototypes: [ VisitorLibrarian, VisitorLibrarianAlt ]
@@ -669,6 +516,7 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
+      job: Musician # Trauma
       name: job-name-musician
     - type: Loadout
       prototypes: [ VisitorMusicianFancyAltA, VisitorMusicianFancyAltB, VisitorMusicianFancyAltC, VisitorMusicianFancyAltD, VisitorMusicianFancyAltE, VisitorMusicianFancyAltF, VisitorMusicianFancyAltG, VisitorMusicianFancyAltH, VisitorMusicianFancyAltI, VisitorMusicianRelaxedAltA, VisitorMusicianRelaxedAltB, VisitorMusicianRelaxedAltC, VisitorMusicianRelaxedAltD, VisitorMusicianRelaxedAltE, VisitorMusicianRelaxedAltF, VisitorMusicianMariachi ]
@@ -676,7 +524,7 @@
 
 - type: randomHumanoidSettings
   id: VisitorMusicianFancy
-  parent: VisitorCivilian
+  parent: VisitorMusician # Trauma
   components:
     - type: GhostRole
       name: job-name-musician
@@ -686,7 +534,7 @@
 
 - type: randomHumanoidSettings
   id: VisitorMusicianRelaxed
-  parent: VisitorCivilian
+  parent: VisitorMusician # Trauma
   components:
     - type: GhostRole
       name: job-name-musician
@@ -698,8 +546,9 @@
   id: VisitorMime
   parent: VisitorCivilian
   components:
-    - type: MimePowers
+    #- type: MimePowers # Trauma - moved to skillchip
     - type: GhostRole
+      job: Mime # Trauma
       name: job-name-mime
     - type: Loadout
       prototypes: [ VisitorMime, VisitorMimeAlt ]
@@ -710,6 +559,7 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
+      job: Reporter # Trauma
       name: job-name-reporter
     - type: Loadout
       prototypes: [ VisitorReporter, VisitorReporterAlt ]
@@ -720,6 +570,7 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
+      job: ServiceWorker # Trauma
       name: job-name-serviceworker
     - type: Loadout
       prototypes: [ VisitorServiceWorker, VisitorServiceWorkerAlt ]
@@ -740,6 +591,10 @@
   parent: VisitorClown
   randomizeName: false
   components:
+    # <Trauma>
+    - type: GhostRole
+      job: Clown
+    # </Trauma>
     - type: Loadout
       prototypes: [ BananaClown ]
       roleLoadout: [ RoleSurvivalClown ]
@@ -760,6 +615,7 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: Captain # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -781,6 +637,7 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: ChiefEngineer # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -802,6 +659,7 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: ChiefMedicalOfficer # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -823,6 +681,7 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: HeadOfPersonnel # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -844,6 +703,7 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: HeadOfSecurity # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -865,6 +725,7 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: ResearchDirector # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -886,6 +747,7 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: Quartermaster # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -911,6 +773,7 @@
   randomizeName: false
   components:
     - type: GhostRole
+      job: CargoTechnician # Trauma
       name: ghost-role-information-lost-challenge-cargo-technican-name
       description: ghost-role-information-lost-challenge-cargo-technican-description
       rules: ghost-role-information-lost-disaster-challenge-cargo-technican-rules

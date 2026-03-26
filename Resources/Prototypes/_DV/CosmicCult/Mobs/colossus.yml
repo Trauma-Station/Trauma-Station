@@ -132,9 +132,14 @@
     allowedStates:
     - Alive
     damage:
-      groups: # This is split across damage types, so it's only about 30 damage per minute per type, which means more than 10 minutes to reach full HP (assuming one damage type)
-        Brute: -1.5
-        Burn: -2
+      types: # about 10 minutes to heal full HP for 1 damage type
+        Blunt: -0.5
+        Slash: -0.5
+        Piercing: -0.5
+        Heat: -0.5
+        Cold: -0.5
+        Shock: -0.5
+        Caustic: -0.5
   - type: Eye
     visMask:
       - Normal

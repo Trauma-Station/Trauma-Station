@@ -63,18 +63,6 @@
   # </Trauma>
 
 - type: construction
-  id: AugmentPaperworkPanel
-  graph: AugmentToolsPanel
-  startNode: start
-  targetNode: "paperwork tools panel"
-  category: construction-category-utilities
-  canBuildInImpassable: false
-  # <Trauma>
-  theory:
-    ElectronicsKnowledge: 2
-  # </Trauma>
-
-- type: construction
   id: AugmentSurgicalPanel
   graph: AugmentToolsPanel
   startNode: start

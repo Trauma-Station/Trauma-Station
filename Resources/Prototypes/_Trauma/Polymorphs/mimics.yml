@@ -1,0 +1,41 @@
+- type: polymorph
+  id: MimicToolbox
+  configuration:
+    entity: MobMimicToolBox
+    forced: true
+    inventory: None
+    transferName: false
+    transferDamage: false
+    revertOnCrit: false
+    revertOnDeath: false
+    polymorphSound: !type:SoundPathSpecifier
+      path: /Audio/Effects/demon_attack1.ogg
+    duration: 25
+
+- type: polymorph
+  id: MimicVendor
+  configuration:
+    entity: MobMimicVendor
+    forced: true
+    inventory: None
+    transferName: false
+    transferDamage: false
+    revertOnCrit: false
+    revertOnDeath: false
+    polymorphSound: !type:SoundPathSpecifier
+      path: /Audio/Effects/demon_attack1.ogg
+    duration: 25
+
+- type: polymorph
+  id: MimicLocker
+  configuration:
+    entity: MobMimicLocker
+    forced: true
+    inventory: None
+    transferName: false
+    transferDamage: false
+    revertOnCrit: false
+    revertOnDeath: false
+    polymorphSound: !type:SoundPathSpecifier
+      path: /Audio/Effects/demon_attack1.ogg
+    duration: 40

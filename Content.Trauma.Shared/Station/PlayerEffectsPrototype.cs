@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.Station;
 /// This probably includes borgs AI etc.
 /// </summary>
 [Prototype]
-public sealed partial class PlayerEffectsPrototype: IPrototype
+public sealed partial class PlayerEffectsPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = string.Empty;

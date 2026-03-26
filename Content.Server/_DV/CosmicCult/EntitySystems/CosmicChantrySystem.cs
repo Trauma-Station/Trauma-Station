@@ -88,12 +88,16 @@ public sealed class CosmicChantrySystem : EntitySystem
                 victimComp.Chantry = (uid, comp);
                 if (_cultRule.AssociatedGamerule(uid) is { } cult) cult.Comp.ActiveChantry = uid;
 
-                if (_threshold.TryGetThresholdForState(victim, MobState.Critical, out var damage) && TryComp<DamageableComponent>(victim, out var damageable) && damage > _damage.GetDamage((victim, damageable)).GetTotal())
+                if (_threshold.TryGetThresholdForState(victim, MobState.Critical, out var damage))
                 {
-                    damage -= _damage.GetDamage((victim, damageable)).GetTotal();
-                    DamageSpecifier dspec = new();
-                    dspec.DamageDict.Add("Slash", damage.Value);
-                    _damage.TryChangeDamage(victim, dspec, true);
+                    var total = _damage.GetTotalDamage(victim);
+                    if (damage > total)
+                    {
+                        damage -= total;
+                        DamageSpecifier dspec = new();
+                        dspec.DamageDict.Add("Slash", damage.Value);
+                        _damage.ChangeDamage(victim, dspec, true);
+                    }
                 }
 
                 if (!TryComp<BorgChassisComponent>(victim, out var borgComp) || borgComp.BrainEntity is not { } borgBrain) return;

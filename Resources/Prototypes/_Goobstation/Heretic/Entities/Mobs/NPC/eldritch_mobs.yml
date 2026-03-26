@@ -284,7 +284,6 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 0
     damage:
       types:
         Blunt: -1

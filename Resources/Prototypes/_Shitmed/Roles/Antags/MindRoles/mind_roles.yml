@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -18,31 +10,26 @@
     antagPrototype: LoneAbductorAntag
     roleType: SoloAntagonist
     subtype: role-subtype-abductor
-  - type: Abductor
+  - type: Abductor # TODO: see if anything actually checks this...
+  - type: AbductorRole
 
 - type: entity
-  parent: BaseMindRoleAntag
+  parent: MindRoleLoneAbductor
   id: MindRoleAbductorAgent
-  name: Lone Abductor Role
+  name: Abductor Agent Role
   components:
   - type: MindRole
-    exclusiveAntag: true
     antagPrototype: AbductorAgentAntag
     roleType: TeamAntagonist
-    subtype: role-subtype-abductor
-  - type: Abductor
 
 - type: entity
-  parent: BaseMindRoleAntag
+  parent: MindRoleLoneAbductor
   id: MindRoleAbductorScientist
-  name: Lone Abductor Role
+  name: Abductor Scientist Role
   components:
   - type: MindRole
-    exclusiveAntag: true
     antagPrototype: AbductorScientistAntag
     roleType: TeamAntagonist
-    subtype: role-subtype-abductor
-  - type: Abductor
 
 - type: entity
   parent: BaseMindRoleAntag

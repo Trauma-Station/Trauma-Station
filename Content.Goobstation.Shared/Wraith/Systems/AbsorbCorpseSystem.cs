@@ -148,7 +148,8 @@ public sealed class AbsorbCorpseSystem : EntitySystem
             || !TryComp<DamageableComponent>(args.Target, out var damageable))
             return;
 
-        var toxinDamage = damageable.DamagePerGroup.GetValueOrDefault("Toxin");
+        var dict = _damageable.GetAllDamage((args.Target, damageable)).DamageDict;
+        var toxinDamage = dict.GetValueOrDefault("Poison") + dict.GetValueOrDefault("Radiation");
 
         if (toxinDamage >= 60 || perish.Stage > 2)
         {

@@ -1,0 +1,13 @@
+- type: entity
+  parent: WeatherSnowfallHeavy
+  id: WeatherSnowfallMagic
+  components:
+  - type: WeatherStatusEffect
+    sprite:
+      sprite: /Textures/_Trauma/Effects/weather.rsi
+      state: snowfall_magic
+    sound:
+      path: /Audio/Effects/Weather/snowstorm.ogg
+      params:
+        loop: true
+        volume: -20 # much quieter

@@ -76,7 +76,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
         }
 
         _ui.TryToggleUi(uid, RadialSelectorUiKey.Key, uid);
-        _ui.SetUiState(uid, RadialSelectorUiKey.Key, new TrackedRadialSelectorState(component.EvolvesTo));
+        _ui.SetUiState(uid, RadialSelectorUiKey.Key, new RadialSelectorState(component.EvolvesTo));
 
         args.Handled = true;
     }

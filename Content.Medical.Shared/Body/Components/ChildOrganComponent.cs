@@ -17,10 +17,12 @@ namespace Content.Medical.Shared.Body;
 public sealed partial class ChildOrganComponent : Component
 {
     /// <summary>
-    /// The category to look for.
+    /// The categories this organ can be a child of.
+    /// Usually this is just one for asymmetrical organs.
+    /// For symmetrical organs this should be multiple.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
-    public ProtoId<OrganCategoryPrototype> ParentCategory;
+    public List<ProtoId<OrganCategoryPrototype>> Parents = new();
 
     /// <summary>
     /// The parent bodypart this organ is a child of / "inside" of.

@@ -1,18 +1,6 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Hannah Giovanna Dawson <karakkaraz@gmail.com>
-// SPDX-FileCopyrightText: 2024 Myzumi <34660019+Myzumi@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Whatstone <166147148+whatston3@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Whatstone <whatston3@gmail.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 sleepyyapril <123355664+sleepyyapril@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared.Administration;
+// </Trauma>
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -21,14 +9,17 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
-using Content.Server.Administration.Systems;
 using Content.Server.Administration.Managers;
+using Content.Server.Administration.Systems;
+using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
+using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Maps;
 using Content.Server.RoundEnd;
-using Content.Shared.Administration;
+using Content.Shared.Administration.Managers;
 using Content.Shared.CCVar;
+using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Prototypes;
 using Robust.Server.ServerStatus;
@@ -73,6 +64,9 @@ public sealed partial class ServerApi : IPostInjectInit
     [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private readonly IPlayerLocator _locator = default!;
+    [Dependency] private readonly IBanManager _bans = default!;
+    [Dependency] private readonly IServerDbManager _db = default!;
 
     private string _token = string.Empty;
     private ISawmill _sawmill = default!;
@@ -91,6 +85,7 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/round/end", ActionRoundEnd);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/round/restartnow", ActionRoundRestartNow);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/kick", ActionKick);
+        RegisterActorHandler(HttpMethod.Post, "/admin/actions/ban", ActionBan);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/add_game_rule", ActionAddGameRule);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/end_game_rule", ActionEndGameRule);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/force_preset", ActionForcePreset);
@@ -321,6 +316,70 @@ public sealed partial class ServerApi : IPostInjectInit
             }
 
             await RespondOk(context);
+        });
+    }
+
+    /// <summary>
+    ///     Bans a player.
+    /// </summary>
+    private async Task ActionBan(IStatusHandlerContext context, Actor actor)
+    {
+        var body = await ReadJson<BanActionBody>(context);
+        if (body == null)
+            return;
+
+        await RunOnMainThread(async () =>
+        {
+            var located = await _locator.LookupIdByNameOrIdAsync(body.Guid.ToString());
+
+            if (located == null)
+            {
+                await RespondError(
+                    context,
+                    ErrorCode.PlayerNotFound,
+                    HttpStatusCode.UnprocessableContent,
+                    "Player not found");
+                return;
+            }
+
+            var bans = await _db.GetBansAsync(userId: located.UserId,
+                address: null,
+                hwId: null,
+                modernHWIds: located.LastModernHWIds,
+                includeUnbanned: false);
+            if (bans.Count > 0)
+            {
+                await RespondError(
+                    context,
+                    ErrorCode.PlayerAlreadyBanned,
+                    HttpStatusCode.Conflict,
+                    "Player is already banned.");
+                return;
+            }
+
+            var reason = body.Reason ?? "No reason supplied";
+            var info = new CreateServerBanInfo(reason);
+
+            info.AddHWId(located.LastHWId);
+            info.AddUser(located.UserId, located.Username);
+            info.WithSeverity(body.Severity);
+            if (body.Minutes != null && body.Minutes != 0)
+            {
+                info.WithMinutes(body.Minutes.Value);
+            }
+
+            info.WithBanningAdmin(new NetUserId(actor.Guid));
+
+            // Add the ip if the user is currently connected.
+            if (_playerManager.TryGetSessionById(new NetUserId(body.Guid), out var player))
+            {
+                info.AddAddress(player.Channel.RemoteEndPoint.Address);
+            }
+
+            _bans.CreateServerBan(info);
+            await RespondOk(context);
+
+            _sawmill.Info($"Banned player {located.Username} ({located.UserId}) for {reason} lasting {body.Minutes ?? 0} minutes by {FormatLogActor(actor)}");
         });
     }
 
@@ -667,6 +726,14 @@ public sealed partial class ServerApi : IPostInjectInit
         public string? Reason { get; init; }
     }
 
+    private sealed class BanActionBody
+    {
+        public required Guid Guid { get; init; }
+        public string? Reason { get; init; }
+        public NoteSeverity Severity { get; init; }
+        public uint? Minutes { get; init; }
+    }
+
     private sealed class GameRuleActionBody
     {
         public required string GameRuleId { get; init; }
@@ -719,6 +786,7 @@ public sealed partial class ServerApi : IPostInjectInit
         PlayerNotFound = 4,
         GameRuleNotFound = 5,
         BadRequest = 6,
+        PlayerAlreadyBanned = 7,
     }
 
     #endregion

@@ -46,7 +46,7 @@ public sealed partial class WraithPossessedComponent : Component
     [DataField, AutoNetworkedField]
     public DamageSpecifier RevenantDamageOvertime = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             {"Caustic", 8}
         }

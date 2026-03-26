@@ -130,8 +130,10 @@
     damageContainers:
       - Biological
     damage:
-      groups:
-        Brute: -30 # was 5 (-15 Brute) for each, Buffed due to limb damage changes (Goobstation)
+      types:
+        Blunt: -10 # Trauma - was -5, should really just change how healing wounds works...
+        Piercing: -10 # Trauma - was -5
+        Slash: -10 # Trauma - was -5
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
       params:
@@ -176,8 +178,10 @@
     damageContainers:
       - Biological
     damage:
-      groups:
-        Brute: -45 # was 10 for each, Buffed due to Limb Damage Changes (Goobstation)
+      types:
+        Blunt: -15 # Trauma - was -10
+        Piercing: -10 # Trauma - was -10
+        Slash: -10 # Trauma - was -10
     bloodlossModifier: -10 # a suture should stop ongoing bleeding
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
@@ -266,7 +270,6 @@
     stackType: Bloodpack
     count: 1
 
-# Shitmed Change - yeah this thing is effectively an entirely different tool now.
 - type: entity
   parent: BaseHealingItem
   id: Tourniquet
@@ -275,6 +278,7 @@
   components:
     - type: Item
       heldPrefix: tourniquet
+    # <Shitmed> - fully reworked
     - type: Tourniquet
       blockedBodyParts:
       - Head
@@ -289,6 +293,7 @@
         - Tourniquet
     - type: Sprite
       state: tourniquet
+    # </Shitmed>
 
 - type: entity
   name: roll of gauze
@@ -373,10 +378,14 @@
     damageContainers:
     - Biological
     damage:
-      groups: # these are all split across multiple types
-        Brute: -150
-        Burn: -150
-        Toxin: -150
+      types: # these are all split across multiple types
+        Blunt: -50
+        Piercing: -50
+        Slash: -50
+        Heat: -50
+        Cold: -50
+        Shock: -50
+        Poison: -150
     bloodlossModifier: -20
     delay: 1
     selfHealPenaltyMultiplier: 0

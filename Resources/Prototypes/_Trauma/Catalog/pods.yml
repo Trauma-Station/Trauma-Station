@@ -84,3 +84,15 @@
         - id: FoodApple
         - id: FoodOrange
         - id: FoodBanana
+
+- type: entity
+  id: SpawnArmamentsVenerator
+  categories: [ HideSpawnMenu ]
+  name: venerator's attire
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - id: ClothingOuterArmorVenerator
+      - id: ClothingHeadHatHelmetVenerator

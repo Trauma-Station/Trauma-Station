@@ -1,8 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Jezithyr <jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
+using System.Text;
 
 namespace Content.Shared.Atmos;
 
@@ -10,7 +6,14 @@ public readonly record struct GasMixtureStringRepresentation(float TotalMoles, f
 {
     public override string ToString()
     {
-        return $"{Temperature}K {Pressure} kPa";
+        var stringBuilder = new StringBuilder();
+        foreach (var (gas, moles) in MolesPerGas)
+        {
+            stringBuilder.Append($"{gas}: {moles}, ");
+        }
+        var result = stringBuilder.ToString();
+
+        return $"{Temperature} K, {Pressure} kPa, {result}Total Moles: {TotalMoles}";
     }
 
     public string ToString(string? format, IFormatProvider? formatProvider)

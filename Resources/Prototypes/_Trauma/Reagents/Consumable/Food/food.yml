@@ -15,16 +15,21 @@
     Digestion:
       metabolismRate: 0.01 # Effectively one unit every 100 seconds.
       metabolites:
-        Microplastics: 0.01 # magic
+        LabGrownNutriment: 1
       effects:
       - !type:SatiateHunger
         factor: 0.015 # same as regular nutriment per u
-      - !type:Vomit
-        probability: 0.005
+    Bloodstream:
+      metabolismRate: 0.01
+      conditions:
+      - !type:MetabolizerTypeCondition
+        type: [ Vox, Slime ] # Vox literally eat trash, and slimes are highly resistant to various poisons
+        inverted: true
+      effects:
       - !type:HealthChange
         damage:
           types:
-            Poison: 0.05
+            Cellular: 0.04 # 4 damage per snack. Not great, not terrible
       - !type:PopupMessage
         type: Local
         messages: [ "reagent-popup-lab-grown-nutriment" ]

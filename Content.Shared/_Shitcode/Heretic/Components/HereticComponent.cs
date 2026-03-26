@@ -122,6 +122,9 @@ public sealed partial class HereticComponent : Component
         "HereticSacrificeHeadObjective",
     };
 
+    [DataField, AutoNetworkedField]
+    public bool ObjectivesCompleted;
+
     /// <summary>
     /// Events raised when on new body when mind gets transferred to it
     /// </summary>

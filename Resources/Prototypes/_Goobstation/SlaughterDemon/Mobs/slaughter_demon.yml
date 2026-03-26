@@ -82,30 +82,21 @@
       params:
         volume: 2
   - type: SlaughterDevour # allows the demon to devour
-    toHeal: # Healing done when eating someone
-      groups:
-        Brute: -100
-        Burn: -100
-        Airloss: -100
-        Toxin: -100
-        Genetic: -100
-        Metaphysical: -100
-    toHealNonCrew: # Healing done when eating a robot
-      groups:
-        Brute: -50
-        Burn: -50
-        Airloss: -50
-        Toxin: -50
-        Genetic: -50
-        Metaphysical: -50
-    toHealAnythingElse:  # Healing when previous conditions weren't met
-      groups:
-        Brute: -25
-        Burn: -25
-        Airloss: -25
-        Toxin: -25
-        Genetic: -25
-        Metaphysical: -25
+    healDamage:
+      types:
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Heat: -1
+        Cold: -1
+        Shock: -1
+        Caustic: -1
+        Poison: -1
+        Radiation: -1
+        Asphyxiation: -1
+        Bloodloss: -1
+        Cellular: -1
+        Holy: -1
     doAfterDelay: 2
   - type: DemonicWhisper # allows the demon to demonic whisper
   - type: DemonicAccent # the accent

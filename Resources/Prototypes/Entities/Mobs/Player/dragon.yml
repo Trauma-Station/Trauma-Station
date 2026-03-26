@@ -204,12 +204,20 @@
   id: MobDragon
   components:
   - type: Dragon
+    # <Trauma>
     spawnRiftAction: ActionSpawnRift
     carpRiftHealing:
-      groups:
-        Brute: -4
-        Burn: -4
-        Airloss: -3
+      types:
+        Blunt: -1.33
+        Slash: -1.33
+        Piercing: -1.33
+        Heat: -1
+        Cold: -1
+        Shock: -1
+        Caustic: -1
+        Asphyxiation: -1.5
+        Bloodloss: -1.5
+    # </Trauma>
   - type: GhostRole
     mindRoles:
     - MindRoleDragon
@@ -264,8 +272,8 @@
       amount: 1
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 12
+      types:
+        Piercing: 12
 
 - type: entity
   parent: BaseAction

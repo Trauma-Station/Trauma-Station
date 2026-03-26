@@ -133,7 +133,7 @@ public partial class MartialArtsSystem
     }
 
     private int GetMartialArtLevel(EntityUid uid)
-        => _knowledge.GetActiveMartialArt(uid) is {} unit
+        => _knowledge.GetActiveMartialArt(uid) is { } unit
             ? _knowledge.GetLevel(unit)
             : 0;
 }

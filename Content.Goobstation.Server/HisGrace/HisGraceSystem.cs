@@ -319,8 +319,7 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
         // revive if dead
         if (_state.IsDead(user)
             && _threshold.TryGetDeadThreshold(user, out var deadThreshold)
-            && TryComp<DamageableComponent>(user, out var damageable)
-            && _threshold.CheckVitalDamage(user, damageable) < deadThreshold
+            && _threshold.CheckVitalDamage(user) < deadThreshold
             && hisGrace.Comp.IsHeld)
         {
             _state.ChangeMobState(user, MobState.Critical);

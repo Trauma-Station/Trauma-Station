@@ -1,0 +1,48 @@
+- type: entity
+  name: flesh shield
+  parent: BaseItem
+  id: ShieldMimic
+  description: A large fleshy closet door, could be used as a shield...
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/fleshshield.rsi
+    state: icon
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Melee/fleshshield.rsi
+    size: Ginormous
+  - type: Blocking
+    passiveBlockFraction: .3
+    activeBlockFraction: .6
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
+        Heat: 0.8
+      flatReductions:
+        Blunt: 1
+        Slash: 1
+        Piercing: 1
+        Heat: 1
+  - type: Damageable
+    damageContainer: Shield
+  - type: ExaminableDamage
+    messages: ShieldMessages
+  - type: Destructible
+    thresholds: [] # indestructible
+  - type: StaticPrice
+    price: 100
+  - type: DisarmMalus
+    malus: 1
+  - type: Unremoveable
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Effects/gib2.ogg
+      params:
+        volume: -7

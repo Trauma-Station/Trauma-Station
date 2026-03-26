@@ -24,8 +24,8 @@ public sealed class AugmentPowerCellSystem : EntitySystem
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-
-    private EntityQuery<PowerCellDrawComponent> _drawQuery;
+    [Dependency] private readonly EntityQuery<PowerCellDrawComponent> _cellDrawQuery = default!;
+    [Dependency] private readonly EntityQuery<AugmentPowerDrawComponent> _drawQuery = default!;
 
     private TimeSpan _nextUpdate = TimeSpan.Zero;
     private static readonly TimeSpan _updateDelay = TimeSpan.FromSeconds(2);
@@ -36,8 +36,7 @@ public sealed class AugmentPowerCellSystem : EntitySystem
     {
         base.Initialize();
 
-        _drawQuery = GetEntityQuery<PowerCellDrawComponent>();
-
+        SubscribeLocalEvent<AugmentPowerCellSlotComponent, OrganEnabledEvent>(OnOrganEnabled);
         SubscribeLocalEvent<AugmentPowerCellSlotComponent, OrganDisabledEvent>(OnOrganDisabled);
         SubscribeLocalEvent<AugmentPowerCellSlotComponent, PowerCellSlotEmptyEvent>(OnCellEmpty);
 
@@ -83,7 +82,7 @@ public sealed class AugmentPowerCellSystem : EntitySystem
 
     private void OnOrganEnabled(Entity<AugmentPowerCellSlotComponent> ent, ref OrganEnabledEvent args)
     {
-        if (!_drawQuery.TryComp(ent, out var draw))
+        if (!_cellDrawQuery.TryComp(ent, out var draw))
             return;
 
         var drawEnt = (ent.Owner, draw);
@@ -101,7 +100,7 @@ public sealed class AugmentPowerCellSystem : EntitySystem
 
     private void OnOrganDisabled(Entity<AugmentPowerCellSlotComponent> ent, ref OrganDisabledEvent args)
     {
-        if (!_drawQuery.TryComp(ent, out var draw))
+        if (!_cellDrawQuery.TryComp(ent, out var draw))
             return;
 
         var drawEnt = (ent.Owner, draw);
@@ -147,7 +146,7 @@ public sealed class AugmentPowerCellSystem : EntitySystem
 
         var batt = battery.Value;
         var percent = _battery.GetMaxUses(batt.AsNullable(), batt.Comp.MaxCharge * 0.01f);
-        var draw = _drawQuery.CompOrNull(augment)?.DrawRate ?? 0f;
+        var draw = _cellDrawQuery.CompOrNull(augment)?.DrawRate ?? 0f;
         _popup.PopupClient(Loc.GetString("augments-power-cell-info", ("percent", percent), ("draw", draw)), user, user);
     }
 
@@ -163,7 +162,7 @@ public sealed class AugmentPowerCellSystem : EntitySystem
     /// </summary>
     public void UpdateDrawRate(Entity<PowerCellDrawComponent?> ent, EntityUid? bodyUid = null)
     {
-        if (!_drawQuery.Resolve(ent, ref ent.Comp))
+        if (!_cellDrawQuery.Resolve(ent, ref ent.Comp))
             return;
 
         bodyUid ??= _body.GetBody(ent.Owner);

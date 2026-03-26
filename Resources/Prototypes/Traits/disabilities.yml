@@ -38,6 +38,12 @@
   whitelist:
     components:
       - Blindable
+  # <Trauma>
+  blacklist:
+    components:
+    - CommandStaff
+    - SecurityStaff
+  # </Trauma>
   components:
     - type: PermanentBlindness
 
@@ -59,6 +65,12 @@
   name: trait-narcolepsy-name
   description: trait-narcolepsy-desc
   category: Disabilities
+  # <Trauma>
+  blacklist:
+    components:
+    - CommandStaff
+    - SecurityStaff
+  # </Trauma>
   components:
     - type: Narcolepsy
       maxTimeBetweenIncidents: 600
@@ -90,6 +102,10 @@
   category: Disabilities
   blacklist:
     components:
+      # <Trauma>
+      - CommandStaff
+      - SecurityStaff
+      # </Trauma>
       - BorgChassis
   components:
     - type: Muted
@@ -133,5 +149,11 @@
   description: trait-impaired-mobility-desc
   traitGear: OffsetCane
   category: Disabilities
+  # <Trauma>
+  blacklist:
+    components:
+    - CommandStaff
+    - SecurityStaff
+  # </Trauma>
   components:
   - type: ImpairedMobility

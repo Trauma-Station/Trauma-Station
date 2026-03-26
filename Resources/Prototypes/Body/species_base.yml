@@ -46,7 +46,6 @@
       100: SoftCrit
       150: Critical
       200: Dead
-  - type: Mutatable
   - type: Destructible
     thresholds: [] # remove gib threshold, you can gib the torso instead
   - type: Tackler
@@ -225,6 +224,7 @@
   - type: WraithAbsorbable
   - type: DiseaseCarrier
   - type: Scent
+  - type: Mutatable
   - type: Immunity
     affectedTypes:
     - Viral
@@ -241,12 +241,12 @@
   #- type: PassiveDamage # Trauma - no
   #  allowedStates:
   #  - Alive
-  #  damageCap: 20
   #  damage:
   #    types:
   #      Heat: -0.07
-  #    groups:
-  #      Brute: -0.07
+  #      Blunt: -0.05
+  #      Piercing: -0.05
+  #      Slash: -0.05
   - type: Fingerprint
   - type: Blindable
   - type: Temperature

@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Goobstation.Common.Footprints;
 using Content.Shared.Chemistry.Reagent;
 // </Trauma>
 using Content.Server.Fluids.Components;
@@ -544,7 +543,6 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, mapGrid, tileRef.GridIndices);
         var puddleQuery = GetEntityQuery<PuddleComponent>();
         var sparklesQuery = GetEntityQuery<EvaporationSparkleComponent>();
-        var footprintQuery = GetEntityQuery<FootprintComponent>(); // Corvax-Next-Footprints
 
         while (anchored.MoveNext(out var ent))
         {
@@ -557,11 +555,6 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
             if (!puddleQuery.TryGetComponent(ent, out var puddle))
                 continue;
-
-            // Corvax-Next-Footprints-Start
-            if (footprintQuery.HasComp(ent))
-                continue;
-            // Corvax-Next-Footprints-End
 
             if (TryAddSolution(ent.Value, solution.SplitSolution(solution.Volume), sound, puddleComponent: puddle)) // goobstation
             {
@@ -597,17 +590,11 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
         var anc = _map.GetAnchoredEntitiesEnumerator(tile.GridUid, grid, tile.GridIndices);
         var puddleQuery = GetEntityQuery<PuddleComponent>();
-        var footprintQuery = GetEntityQuery<FootprintComponent>(); // Corvax-Next-Footprints
 
         while (anc.MoveNext(out var ent))
         {
             if (!puddleQuery.HasComponent(ent.Value))
                 continue;
-
-            // Corvax-Next-Footprints-Start
-            if (footprintQuery.HasComponent(ent.Value))
-                continue;
-            // Corvax-Next-Footprints-End
 
             puddleUid = ent.Value;
             return true;
