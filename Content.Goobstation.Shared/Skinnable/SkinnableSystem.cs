@@ -26,8 +26,16 @@ public sealed class SkinnableSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<KitchenSpikeComponent, GetVerbsEvent<InteractionVerb>>(OnSpikeGetVerbs);
         SubscribeLocalEvent<SkinnableComponent, GetVerbsEvent<InteractionVerb>>(OnGetVerbs);
         SubscribeLocalEvent<SkinnableComponent, SkinningDoAfterEvent>(OnSkinningDoAfter);
+    }
+
+    private void OnSpikeGetVerbs(Entity<KitchenSpikeComponent> ent, ref GetVerbsEvent<InteractionVerb>> args)
+    {
+        // relay event to the victim for skinning
+        if (ent.Comp.Victim is {} victim)
+            RaiseLocalEvent(victim, args);
     }
 
     private void OnGetVerbs(Entity<SkinnableComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
