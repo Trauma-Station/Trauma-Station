@@ -17,7 +17,7 @@ public sealed class DamageOnHoldingImmuneSystem : EntitySystem
 
     private void RelayEvent(Entity<InventoryComponent> ent, ref DamageOnHoldingAttemptEvent args)
     {
-        var slots = new InventorySlotEnumerator(ent, SlotFlags.HANDS);
+        var slots = new InventorySystem.InventorySlotEnumerator(ent, SlotFlags.GLOVES);
         while (slots.NextItem(out var item))
         {
             RaiseLocalEvent(item, ref args);
