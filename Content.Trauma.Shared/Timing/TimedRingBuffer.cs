@@ -66,7 +66,7 @@ public sealed class TimedRingBuffer<T>
     {
         var popTime = _timing.CurTime + _popDelay;
         var popped = false;
-        old = default;
+        old = default!;
         if (Count == Capacity)
             popped = PopImmediate(out old);
 
@@ -80,7 +80,7 @@ public sealed class TimedRingBuffer<T>
     /// </summary>
     public bool PopImmediate(out T item)
     {
-        item = default;
+        item = default!;
         if (Count == 0)
             return false;
 
@@ -113,7 +113,7 @@ public sealed class TimedRingBuffer<T>
     public bool Peek(out TimeSpan popTime, out T item)
     {
         popTime = TimeSpan.Zero;
-        item = default;
+        item = default!;
         if (Count == 0)
             return false;
 
