@@ -167,13 +167,13 @@
   - type: Action
     checkCanInteract: false
     useDelay: 5
-  - type: LimitedCharges
-    maxCharges: 3
     itemIconStyle: BigAction
     priority: -20
     icon:
       sprite: Objects/Weapons/Grenades/empgrenade.rsi
       state: icon
+  - type: LimitedCharges
+    maxCharges: 3
 
 - type: entity
   parent: BaseImplantAction

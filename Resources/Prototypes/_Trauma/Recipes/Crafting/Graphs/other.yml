@@ -36,7 +36,6 @@
 
 - type: constructionGraph
   id: ArmoryOverrideKey
-  entity: ArmoryOverrideKeyComponents
   start: start
   graph:
   - node: start
