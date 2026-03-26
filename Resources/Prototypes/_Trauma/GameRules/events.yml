@@ -15,11 +15,8 @@
   table: !type:AllSelector
     children:
     # TOOD: remove these if they fucking suck lmao
-    - id: GreyTideAntagMidround
     - id: SingulothKnightsMidround
-    - id: DarkLordMidround
     - id: MimeAssassinMidround
-    - id: DarkPriestMidround
     - id: VoxRaidersMidround
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
