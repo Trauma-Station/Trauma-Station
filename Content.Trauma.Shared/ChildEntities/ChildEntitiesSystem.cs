@@ -1,4 +1,4 @@
-namespace Content.Shared._Starlight.ChildEntities;
+namespace Content.Trauma.Shared.ChildEntities;
 
 public sealed class ChildEntitiesSystem : EntitySystem
 {
