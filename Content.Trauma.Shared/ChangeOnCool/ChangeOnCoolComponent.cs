@@ -19,11 +19,11 @@ public sealed partial class ChangeOnCoolComponent : Component
     /// The new entity that replaces the cooled entity.
     /// </summary>
     [DataField]
-    public EntProtoId CooledPrototype = "FoodBurned";
+    public EntProtoId CooledPrototype = "BrassBloomCold";
 
     /// <summary>
     /// The popup when the entity reaches the cooled temperature.
     /// </summary>
     [DataField]
-    public LocId CooledPopup = "burned-popup-text";
+    public LocId CooledPopup = "cooled-popup-text";
 }

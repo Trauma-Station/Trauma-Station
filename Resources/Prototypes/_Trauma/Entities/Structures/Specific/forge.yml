@@ -1,0 +1,49 @@
+- type: entity
+  parent: BaseStructure
+  id: CharcoalForgeUnlit
+  name: unlit charcoal forge
+  description: A charcoal forge, will burn for a long time when lit.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Forging/forge.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: cold
+  - type: PlaceableSurface
+  - type: Fixtures
+    fixtures:
+      itemcollide:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.14,-0.05,0.15,0.25"
+        layer:
+        - HighImpassable
+        hard: false
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.14,-0.05,0.15,0.25"
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+
+- type: entity
+  parent: CharcoalForgeUnlit
+  id: CharcoalForgeLit
+  name: charcoal forge
+  description: A charcoal forge, it will be burning for quite some time.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Forging/forge.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: burning
+  - type: SolutionHeater
+    heatPerSecond: 160
+  - type: ItemPlacer
+    maxEntities: 4
+    whitelist:
+      components:
+      - Temperature
+      # We need a system for entity heating for this and fireplaces

@@ -4,3 +4,10 @@
   name: stack-charcoal
   icon: { sprite: /Textures/Objects/Materials/ore.rsi, state: coal }
   spawn: Charcoal1
+
+- type: stack
+  parent: BaseMediumStack
+  id: Brick
+  name: stack-brick
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: brick }
+  spawn: Brick1

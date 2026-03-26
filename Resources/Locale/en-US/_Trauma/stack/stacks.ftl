@@ -1,3 +1,4 @@
+stack-brick = brick
 stack-charcoal = charcoal
 stack-rev-gear = gear
 stack-rev-bolt = bolt

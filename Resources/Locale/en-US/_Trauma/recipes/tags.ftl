@@ -32,3 +32,8 @@ construction-graph-tag-improvised-bow = an improvised bow
 
 # food
 construction-graph-tag-CookedEgg = a cooked egg
+
+# forging
+construction-graph-tag-brassscraps = brass scraps
+construction-graph-tag-plasteelscraps = plasteel scraps
+construction-graph-tag-steelscraps = steel scraps

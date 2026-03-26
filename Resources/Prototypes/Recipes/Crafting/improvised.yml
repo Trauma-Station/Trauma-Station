@@ -36,7 +36,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1 # tying a knot or something
+    FabricationKnowledge: 0 # tying a knot or something
   # </Trauma>
 
 - type: construction

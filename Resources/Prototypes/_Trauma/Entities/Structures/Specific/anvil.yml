@@ -1,15 +1,12 @@
 - type: entity
-  id: CharcoalOven
+  id: Anvil
   parent: BaseMachine
-  name: charcoal oven
-  description: Turns wood into either charcoal or ash.
+  name: anvil
+  description: Use this to make ingots into the desired creation.
   components:
   - type: Sprite
-    sprite: _Trauma/Structures/Forging/charcoalburner.rsi
-    snapCardinals: true
-    layers:
-    - state: icon
-      map: ["enum.LatheVisualLayers.IsRunning"]
+    sprite: _Trauma/Structures/Forging/anvil.rsi
+    state: icon
   - type: MaterialStorage
     whitelist: &StandardMaterialWhitelist
       tags:
@@ -20,15 +17,11 @@
     runningState: burning
     staticPacks:
     - CharcoalBurnerStatic
-    producingSound:
-      path: /Audio/_Trauma/Revs/foundryaudio.ogg
-      params:
-        volume: -6
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 10000
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -55,6 +48,7 @@
       input: AutomationSlotMaterials
       output: null
   - type: Animateable
-  - type: Construction
-    graph: CharcoalOven
-    node: finished
+  # - type: Construction
+  #   graph: CharcoalOven
+  #   node: finished
+  - type: PlaceableSurface
