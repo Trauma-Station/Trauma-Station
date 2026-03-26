@@ -23,7 +23,7 @@ public sealed partial class BlobbernautComponent : Component
     [ViewVariables(VVAccess.ReadOnly), DataField("damage")]
     public DamageSpecifier Damage = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             { "Piercing", 25 },
         }

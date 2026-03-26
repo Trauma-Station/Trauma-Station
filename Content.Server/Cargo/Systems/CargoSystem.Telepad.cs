@@ -23,38 +23,31 @@ public sealed partial class CargoSystem
         SubscribeLocalEvent<CargoTelepadComponent, PowerChangedEvent>(OnTelepadPowerChange);
         // Shouldn't need re-anchored event
         SubscribeLocalEvent<CargoTelepadComponent, AnchorStateChangedEvent>(OnTelepadAnchorChange);
-        SubscribeLocalEvent<FulfillCargoOrderEvent>(OnTelepadFulfillCargoOrder);
+        SubscribeLocalEvent<CargoTelepadComponent, FulfillCargoOrderEvent>(OnTelepadFulfillCargoOrder); // Trauma - sub for the telepad instead of broadcast
     }
 
-    private void OnTelepadFulfillCargoOrder(ref FulfillCargoOrderEvent args)
+    // <Trauma> - rewritten to be directed on the telepad
+    private void OnTelepadFulfillCargoOrder(EntityUid uid, CargoTelepadComponent tele, ref FulfillCargoOrderEvent args)
     {
-        var query = EntityQueryEnumerator<CargoTelepadComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var tele, out var xform))
-        {
-            if (tele.CurrentState != CargoTelepadState.Idle)
-                continue;
-
-            if (!this.IsPowered(uid, EntityManager))
-                continue;
-
-            if (_station.GetOwningStation(uid, xform) != args.Station)
-                continue;
-
-            // todo cannot be fucking asked to figure out device linking rn but this shouldn't just default to the first port.
-            if (!TryGetLinkedConsole((uid, tele), out var console) ||
-                console.Value.Owner != args.OrderConsole.Owner)
-                continue;
-
-            for (var i = 0; i < args.Order.OrderQuantity; i++)
-            {
-                tele.CurrentOrders.Add(args.Order);
-            }
-            tele.Accumulator = tele.Delay;
-            args.Handled = true;
-            args.FulfillmentEntity = uid;
+        if (tele.CurrentState != CargoTelepadState.Idle)
             return;
+
+        if (!this.IsPowered(uid, EntityManager))
+            return;
+
+        if (_station.GetOwningStation(uid) != args.Station)
+            return;
+
+        for (var i = 0; i < args.Order.OrderQuantity; i++)
+        {
+            tele.CurrentOrders.Add(args.Order);
         }
+        tele.Accumulator = tele.Delay;
+        args.Handled = true;
+        args.FulfillmentEntity = uid;
+        return;
     }
+    // </Trauma>
 
     private bool TryGetLinkedConsole(Entity<CargoTelepadComponent> ent,
         [NotNullWhen(true)] out Entity<CargoOrderConsoleComponent>? console)
@@ -98,7 +91,7 @@ public sealed partial class CargoSystem
                 continue;
             }
 
-            if (comp.CurrentOrders.Count == 0 || !TryGetLinkedConsole((uid, comp), out var console))
+            if (comp.CurrentOrders.Count == 0) // Trauma - don't check for console bruh, it wasnt even used
             {
                 comp.Accumulator += comp.Delay;
                 continue;

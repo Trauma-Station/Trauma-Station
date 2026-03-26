@@ -13,11 +13,14 @@ namespace Content.Trauma.Client.Genetics.UI;
 public sealed partial class GeneticsScannerWindow : FancyWindow
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     private readonly ScannedGenomeSystem _genome;
 
     public event Action? OnScan;
+    public event Action<uint?>? OnPrint;
 
     private EntityQuery<GeneticsScannerComponent> _query;
+    private EntityQuery<GeneticsPrintoutComponent> _printQuery;
 
     public GeneticsScannerWindow()
     {
@@ -27,9 +30,12 @@ public sealed partial class GeneticsScannerWindow : FancyWindow
         _genome = _entMan.System<ScannedGenomeSystem>();
 
         _query = _entMan.GetEntityQuery<GeneticsScannerComponent>();
+        _printQuery = _entMan.GetEntityQuery<GeneticsPrintoutComponent>();
 
         Sequencer.MakeReadonly();
         Sequencer.OnScan += () => OnScan?.Invoke();
+        Sequencer.OnPrintScan += () => OnPrint?.Invoke(null);
+        Sequencer.OnPrintSequence += i => OnPrint?.Invoke(i);
 
         Sequencer.UpdateHasScanner(true); // this is the scanner
     }
@@ -45,6 +51,8 @@ public sealed partial class GeneticsScannerWindow : FancyWindow
 
         if (_query.TryComp(_uid, out var comp))
             Update(comp);
+        if (_printQuery.TryComp(_uid, out var print))
+            UpdatePrint(print);
     }
 
     public void SetEntity(EntityUid uid)
@@ -54,6 +62,7 @@ public sealed partial class GeneticsScannerWindow : FancyWindow
 
         _uid = uid;
         Update(comp);
+        Sequencer.UpdateHasPrintout(_printQuery.HasComp(uid));
     }
 
     public void UpdateState(GeneticsConsoleState state)
@@ -67,6 +76,11 @@ public sealed partial class GeneticsScannerWindow : FancyWindow
             UpdateMob(_mob = comp.ScannedMob);
         if (comp.Busy != _busy)
             Sequencer.SetBusy(_busy = comp.Busy);
+    }
+
+    private void UpdatePrint(GeneticsPrintoutComponent comp)
+    {
+        Sequencer.UpdatePrintCooldown(_timing.CurTime < comp.NextPrint);
     }
 
     private void UpdateMob(EntityUid? mob)

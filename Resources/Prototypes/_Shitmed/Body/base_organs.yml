@@ -100,7 +100,7 @@
   id: OrganBaseLimb
   components:
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: WoundableVisuals
     bleedingOverlay: _Shitmed/Mobs/Effects/bleeding_damage.rsi
   - type: Limb
@@ -210,7 +210,7 @@
   - type: Organ
     category: Tail
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: BodyPart
     partType: Tail
     slots: []

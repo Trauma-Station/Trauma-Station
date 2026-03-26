@@ -100,13 +100,6 @@
         icon:
           sprite: Objects/Misc/module.rsi
           state: mainboard
-    - to: "paperwork tools panel"
-      steps:
-      - tag: AugmentPaperworkToolElectronics
-        name: construction-graph-tag-paperwork-tools-electronics
-        icon:
-          sprite: Objects/Misc/module.rsi
-          state: mainboard
     - to: "utility tools panel"
       steps:
       - tag: AugmentUtilityToolElectronics
@@ -123,8 +116,6 @@
           state: mainboard
   - node: "botany tools panel"
     entity: AugmentBotanyPanel
-  - node: "paperwork tools panel"
-    entity: AugmentPaperworkPanel
   - node: "surgery tools panel"
     entity: AugmentSurgicalPanel
   - node: "utility tools panel"

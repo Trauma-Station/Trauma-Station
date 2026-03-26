@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 273.0.0
+  engineVersion: 274.0.1
   forkId: ""
   forkVersion: ""
-  time: 03/14/2026 18:02:03
-  entityCount: 12229
+  time: 03/24/2026 17:08:22
+  entityCount: 12230
 maps:
 - 1
 grids:
@@ -1704,6 +1704,11 @@ entities:
           decals:
             49: 19,16
             50: 19,17
+        - node:
+            color: '#FFFFFFFF'
+            id: Box
+          decals:
+            983: 20,10
         - node:
             color: '#DE3A3A96'
             id: BrickTileDarkCornerNe
@@ -23516,6 +23521,13 @@ entities:
       parent: 2
     - type: SiloUtilizer
       silo: 1977
+- proto: CargoTelepad
+  entities:
+  - uid: 12230
+    components:
+    - type: Transform
+      pos: 20.5,10.5
+      parent: 2
 - proto: Carpet
   entities:
   - uid: 3634
@@ -27820,132 +27832,6 @@ entities:
     components:
     - type: Transform
       pos: 14.5,-7.5
-      parent: 2
-- proto: ClosetMaintenanceFilledRandom
-  entities:
-  - uid: 4501
-    components:
-    - type: Transform
-      pos: 46.5,-0.5
-      parent: 2
-  - uid: 4502
-    components:
-    - type: Transform
-      pos: -7.5,-8.5
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.14963
-        moles:
-          Oxygen: 1.7459903
-          Nitrogen: 6.568249
-  - uid: 4503
-    components:
-    - type: Transform
-      pos: 29.5,-9.5
-      parent: 2
-  - uid: 4504
-    components:
-    - type: Transform
-      pos: -11.5,-12.5
-      parent: 2
-  - uid: 4505
-    components:
-    - type: Transform
-      pos: -19.5,12.5
-      parent: 2
-  - uid: 4506
-    components:
-    - type: Transform
-      pos: 23.5,1.5
-      parent: 2
-  - uid: 4507
-    components:
-    - type: Transform
-      pos: 24.5,-25.5
-      parent: 2
-  - uid: 4508
-    components:
-    - type: Transform
-      pos: -9.5,-39.5
-      parent: 2
-  - uid: 4509
-    components:
-    - type: Transform
-      pos: -27.5,13.5
-      parent: 2
-  - uid: 4510
-    components:
-    - type: Transform
-      pos: -5.5,20.5
-      parent: 2
-  - uid: 4511
-    components:
-    - type: Transform
-      pos: 27.5,-18.5
-      parent: 2
-  - uid: 4512
-    components:
-    - type: Transform
-      pos: -1.5,-41.5
-      parent: 2
-  - uid: 4513
-    components:
-    - type: Transform
-      pos: 5.5,-37.5
-      parent: 2
-  - uid: 4515
-    components:
-    - type: Transform
-      pos: 11.5,-19.5
-      parent: 2
-  - uid: 4516
-    components:
-    - type: Transform
-      pos: -30.5,-13.5
-      parent: 2
-  - uid: 4517
-    components:
-    - type: Transform
-      pos: 45.5,-13.5
-      parent: 2
-  - uid: 4519
-    components:
-    - type: Transform
-      pos: -27.5,-15.5
-      parent: 2
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.48
-            - 0.25,-0.48
-            - 0.25,0.48
-            - -0.25,0.48
-          mask:
-          - Impassable
-          - MidImpassable
-          - LowImpassable
-          layer:
-          - BulletImpassable
-          - Opaque
-          density: 75
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: EntityStorage
-      removedMasks: 20
-      open: True
-    - type: PlaceableSurface
-      isPlaceable: True
-  - uid: 4520
-    components:
-    - type: Transform
-      pos: -31.5,9.5
       parent: 2
 - proto: ClosetRadiationSuitFilled
   entities:
@@ -35113,7 +34999,7 @@ entities:
       pos: 40.5,-12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -8348.284
+      secondsUntilStateChange: -8394.843
       state: Closing
   - uid: 5654
     components:
@@ -56789,6 +56675,142 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 60.5,-4.5
+      parent: 2
+- proto: RandomMaintsCloset
+  entities:
+  - uid: 4501
+    components:
+    - type: Transform
+      pos: 46.5,-0.5
+      parent: 2
+  - uid: 4502
+    components:
+    - type: Transform
+      pos: -7.5,-8.5
+      parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        temperature: 293.14963
+        moles:
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          ents: []
+  - uid: 4503
+    components:
+    - type: Transform
+      pos: 29.5,-9.5
+      parent: 2
+  - uid: 4504
+    components:
+    - type: Transform
+      pos: -11.5,-12.5
+      parent: 2
+  - uid: 4505
+    components:
+    - type: Transform
+      pos: -19.5,12.5
+      parent: 2
+  - uid: 4506
+    components:
+    - type: Transform
+      pos: 23.5,1.5
+      parent: 2
+  - uid: 4507
+    components:
+    - type: Transform
+      pos: 24.5,-25.5
+      parent: 2
+  - uid: 4508
+    components:
+    - type: Transform
+      pos: -9.5,-39.5
+      parent: 2
+  - uid: 4509
+    components:
+    - type: Transform
+      pos: -27.5,13.5
+      parent: 2
+  - uid: 4510
+    components:
+    - type: Transform
+      pos: -5.5,20.5
+      parent: 2
+  - uid: 4511
+    components:
+    - type: Transform
+      pos: 27.5,-18.5
+      parent: 2
+  - uid: 4512
+    components:
+    - type: Transform
+      pos: -1.5,-41.5
+      parent: 2
+  - uid: 4513
+    components:
+    - type: Transform
+      pos: 5.5,-37.5
+      parent: 2
+  - uid: 4515
+    components:
+    - type: Transform
+      pos: 11.5,-19.5
+      parent: 2
+  - uid: 4516
+    components:
+    - type: Transform
+      pos: -30.5,-13.5
+      parent: 2
+  - uid: 4517
+    components:
+    - type: Transform
+      pos: 45.5,-13.5
+      parent: 2
+  - uid: 4519
+    components:
+    - type: Transform
+      pos: -27.5,-15.5
+      parent: 2
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            vertices:
+            - -0.25,-0.48
+            - 0.25,-0.48
+            - 0.25,0.48
+            - -0.25,0.48
+          mask:
+          - Impassable
+          - MidImpassable
+          - LowImpassable
+          layer:
+          - BulletImpassable
+          - Opaque
+          density: 75
+    - type: EntityStorage
+      removedMasks: 20
+      open: True
+      closeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetclose.ogg
+      openSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/closetopen.ogg
+    - type: PlaceableSurface
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          ents: []
+  - uid: 4520
+    components:
+    - type: Transform
+      pos: -31.5,9.5
       parent: 2
 - proto: RandomPainting
   entities:

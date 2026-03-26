@@ -182,7 +182,14 @@ public sealed partial class BodyPartSystem
             return false;
 
         if (_body.GetBody(part.Owner) is {} body)
-            return _body.InsertOrgan(body, organ);
+        {
+            if (!_body.InsertOrgan(body, organ))
+                return false;
+
+            // incase the automatic one picked the wrong part for multi-parent organs, set it correctly here
+            _cache.SetParent(organ.Owner, part.Owner);
+            return true;
+        }
 
         if (GetSeveredOrgansContainer(part) is {} container)
             return _container.Insert(organ.Owner, container);

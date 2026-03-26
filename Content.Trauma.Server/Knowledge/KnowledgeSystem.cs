@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Cloning;
+using Content.Server.Cargo.Components;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Shared.Knowledge.Quality;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Containers;
 
@@ -16,6 +18,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         base.Initialize();
 
         SubscribeLocalEvent<KnowledgeHolderComponent, TransferredToCloneEvent>(TransferKnowledge);
+        SubscribeLocalEvent<StaticPriceComponent, ApplyQualityEvent>(OnApplyStaticPriceQuality);
     }
 
     // TODO: move to shared bruh
@@ -28,8 +31,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             return;
 
         var mob = args.Cloned;
-        var holder = EnsureComp<KnowledgeHolderComponent>(mob);
-        var mobContainer = EnsureKnowledgeContainer((mob, holder));
+        var mobContainer = EnsureKnowledgeContainer(mob);
         if (mobContainer.Comp.Container is not { } container)
             return;
 
@@ -38,5 +40,10 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             _container.Insert(knowledgeEnt.Owner, container);
         }
         ClearKnowledge(ent, false);
+    }
+
+    private void OnApplyStaticPriceQuality(Entity<StaticPriceComponent> ent, ref ApplyQualityEvent args)
+    {
+        ent.Comp.Price *= args.Modifier(args.Proto.Price);
     }
 }

@@ -36,6 +36,6 @@ public sealed class AugmentToolPanelMenuBoundUserInterface : BoundUserInterface
 
     public void SendSwitchMessage(EntityUid? desiredTool)
     {
-        SendMessage(new AugmentToolPanelSwitchMessage(_ent.GetNetEntity(desiredTool)));
+        SendPredictedMessage(new AugmentToolPanelSwitchMessage(_ent.GetNetEntity(desiredTool)));
     }
 }

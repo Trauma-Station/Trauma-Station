@@ -58,10 +58,6 @@ public abstract partial class SharedBatterySystem : EntitySystem
     private void OnEmpPulse(Entity<BatteryComponent> ent, ref EmpPulseEvent args)
     {
         args.Affected = true;
-        // <Goob> - rechargeable blocking system handles it
-        if (!ShouldDisable(ent))
-            args.Disabled = true;
-        // </Goob>
         UseCharge(ent.AsNullable(), args.EnergyConsumption);
     }
 

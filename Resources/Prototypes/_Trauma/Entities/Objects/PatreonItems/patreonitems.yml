@@ -118,3 +118,14 @@
     sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/gamingFungus420.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: PatreonGribley
+  name: worm pack
+  description: I think it just moved...
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/gribley.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/gribley.rsi

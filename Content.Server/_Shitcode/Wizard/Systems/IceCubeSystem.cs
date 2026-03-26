@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -11,7 +6,9 @@ using Content.Server.Temperature.Systems;
 using Content.Shared._Goobstation.Wizard.Traps;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage.Events;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
@@ -20,6 +17,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server._Goobstation.Wizard.Systems;
@@ -33,6 +31,10 @@ public sealed class IceCubeSystem : SharedIceCubeSystem
     [Dependency] private readonly TemperatureSystem _temperature = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
+    /// <summary>
+    /// Damage types that can break ice cubes.
+    /// </summary>
+    public static readonly HashSet<ProtoId<DamageTypePrototype>> BreakDamages = new() { "Blunt", "Slash", "Piercing", "Heat" };
     private const string IceCubeFixture = "ice-cube-fixture";
 
     public override void Initialize()
@@ -84,13 +86,17 @@ public sealed class IceCubeSystem : SharedIceCubeSystem
                 temperature);
         }
 
-        var realDamage = args.DamageDelta.DamageDict.Where(kvp => kvp.Key is "Blunt" or "Slash" or "Piercing" or "Heat")
-            .Sum(kvp => kvp.Value.Float());
+        var total = FixedPoint2.Zero;
+        foreach (var (type, value) in args.DamageDelta.DamageDict)
+        {
+            if (BreakDamages.Contains(type))
+                total += value;
+        }
 
-        if (realDamage <= 0f)
+        if (total <= FixedPoint2.Zero)
             return;
 
-        ent.Comp.SustainedDamage += realDamage * ent.Comp.SustainedDamageMeltProbabilityMultiplier;
+        ent.Comp.SustainedDamage += total.Float() * ent.Comp.SustainedDamageMeltProbabilityMultiplier;
 
         if (ShouldUnfreeze(ent, temperature.CurrentTemperature))
             RemCompDeferred(ent.Owner, ent.Comp);

@@ -1,0 +1,21 @@
+- type: entity
+  name: flesh toolbox
+  parent: ToolboxBase
+  id: ToolboxMimic
+  description: A bright red toolbox, full of teeth and meat...
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/fleshbox.rsi
+    state: icon
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Melee/fleshbox.rsi
+  - type: Unremoveable
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,4
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Effects/gib2.ogg
+      params:
+        volume: -7

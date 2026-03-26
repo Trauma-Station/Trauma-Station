@@ -72,7 +72,7 @@ public sealed class TendrilSystem : EntitySystem
         if (comp.DefeatedMobs >= comp.MobsToDefeat)
         {
             comp.DestroyedWithMobs = true;
-            _damage.TryChangeDamage(uid, new DamageSpecifier { DamageDict = new Dictionary<string, FixedPoint2> {{ "Blunt", 1000 }} });
+            _damage.TryChangeDamage(uid, new DamageSpecifier { DamageDict = new() {{ "Blunt", 1000 }} });
         }
     }
 

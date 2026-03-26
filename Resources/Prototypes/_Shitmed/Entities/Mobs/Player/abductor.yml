@@ -118,9 +118,12 @@
     outerClothing: ClothingOuterCoatAbductor
     back: ClothingBackpackAbductor
     pocket1: AbductorGizmo
-    pocket2: WeaponAlien
+    pocket2: AbductorTaskTablet
     suitstorage: Wonderprod
     id: AgentIDCard
+  storage:
+    back:
+    - WeaponAlien
 
 - type: startingGear
   id: AbductorScientistGear
@@ -133,9 +136,12 @@
     outerClothing: ClothingOuterCoatAbductor
     back: ClothingBackpackDuffelAbductor
     pocket1: Silencer # Trauma - swapped silencer and gizmo
-    pocket2: RadioJammer # Trauma
+    pocket2: AbductorTaskTablet
     suitstorage: WeaponDecloner
     id: AgentIDCard
+  storage:
+    back:
+    - RadioJammer
 
 - type: startingGear
   id: AbductorAgentGear
@@ -157,17 +163,17 @@
 # Spawners
 
 - type: entity
-  name: lone abductor spawner
-  id: SpawnPointLoneAbductor
   parent: MarkerBase
+  id: SpawnPointAbductor
+  name: abductor spawn point
   components:
   - type: SpawnPoint
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: radiation
+    - state: green
+    - sprite: _Shitmed/Objects/Weapons/Melee/wonderprod.rsi
+      state: icon
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
@@ -190,19 +196,6 @@
         state: radiation
 
 - type: entity
-  name: abductor agent spawner
-  id: SpawnPointAbductorAgent
-  parent: MarkerBase
-  components:
-  - type: SpawnPoint
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: radiation
-
-- type: entity
   categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
   id: AbductorAgentSpawner
@@ -215,19 +208,6 @@
     - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: radiation
-
-- type: entity
-  name: abductor scientist spawner
-  id: SpawnPointAbductorScientist
-  parent: MarkerBase
-  components:
-  - type: SpawnPoint
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

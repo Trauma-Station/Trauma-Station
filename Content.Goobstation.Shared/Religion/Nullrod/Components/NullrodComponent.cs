@@ -19,8 +19,14 @@ namespace Content.Goobstation.Shared.Religion.Nullrod.Components;
         /// <summary>
         /// How much damage is dealt when an untrained user uses it.
         /// </summary>
-        [DataField("DamageOnUntrainedUse", required: true)]
+        [DataField(required: true)]
         public DamageSpecifier DamageOnUntrainedUse = default!;
+
+        /// <summary>
+        /// How much stamina damage is dealt when an untrained user uses it.
+        /// </summary>
+        [DataField]
+        public float StaminaOnUntrainedUse;
 
         /// <summary>
         /// Which pop-up string to use.

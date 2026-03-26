@@ -1,14 +1,11 @@
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Popups;
 using Content.Shared._EinsteinEngines.Silicon.EmitBuzzWhileDamaged;
-using Content.Shared.Audio;
-using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -21,42 +18,40 @@ namespace Content.Server._EinsteinEngines.Silicon.EmitBuzzOnCrit;
 /// </summary>
 public sealed class EmitBuzzWhileDamagedSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<EmitBuzzWhileDamagedComponent, MobStateComponent, MobThresholdsComponent, DamageableComponent>();
-
-        while (query.MoveNext(out var uid, out var emitBuzzOnCritComponent, out var mobStateComponent, out var thresholdsComponent, out var damageableComponent))
+        var query = EntityQueryEnumerator<EmitBuzzWhileDamagedComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
-
-            if (_mobState.IsDead(uid, mobStateComponent)
-                || !_mobThreshold.TryGetThresholdForState(uid, MobState.Critical, out var threshold, thresholdsComponent)
-                || damageableComponent.TotalDamage < threshold / 2)
+            if (_mob.IsDead(uid) ||
+                !_threshold.TryGetThresholdForState(uid, MobState.Critical, out var threshold) ||
+                _damageable.GetTotalDamage(uid) < threshold / 2)
                 continue;
 
-            emitBuzzOnCritComponent.AccumulatedFrametime += frameTime;
+            comp.AccumulatedFrametime += frameTime;
 
-            if (emitBuzzOnCritComponent.AccumulatedFrametime < emitBuzzOnCritComponent.CycleDelay)
+            if (comp.AccumulatedFrametime < comp.CycleDelay)
                 continue;
 
-            emitBuzzOnCritComponent.AccumulatedFrametime -= emitBuzzOnCritComponent.CycleDelay;
+            comp.AccumulatedFrametime -= comp.CycleDelay;
 
-            if (_gameTiming.CurTime <= emitBuzzOnCritComponent.LastBuzzPopupTime + emitBuzzOnCritComponent.BuzzPopupCooldown)
+            if (_timing.CurTime <= comp.LastBuzzPopupTime + comp.BuzzPopupCooldown)
                 continue;
 
             // Start buzzing
-            emitBuzzOnCritComponent.LastBuzzPopupTime = _gameTiming.CurTime;
-            _popupSystem.PopupEntity(Loc.GetString("silicon-behavior-buzz"), uid);
+            comp.LastBuzzPopupTime = _timing.CurTime;
+            _popup.PopupEntity(Loc.GetString("silicon-behavior-buzz"), uid);
             Spawn("EffectSparks", Transform(uid).Coordinates);
-            _audio.PlayPvs(emitBuzzOnCritComponent.Sound, uid, AudioHelpers.WithVariation(0.05f, _robustRandom));
+            _audio.PlayPvs(comp.Sound, uid, AudioParams.Default.WithVariation(0.05f));
         }
     }
 

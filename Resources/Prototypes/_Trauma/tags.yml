@@ -2,6 +2,9 @@
   id: AdvancedMagboots
 
 - type: Tag
+  id: BowImprovised
+
+- type: Tag
   id: Butt
 
 - type: Tag
@@ -71,10 +74,16 @@
   id: HandTeleporter
 
 - type: Tag
+  id: Iradomini
+
+- type: Tag
   id: MagazineTurret
 
 - type: Tag
   id: OverrideKeyComponents
+
+- type: Tag
+  id: MimicToolbox
 
 - type: Tag
   id: QMBoard
@@ -141,6 +150,9 @@
 
 - type: Tag
   id: T45Helmet
+
+- type: Tag
+  id: TraumaFire
 
 - type: Tag
   id: WelderExperimental

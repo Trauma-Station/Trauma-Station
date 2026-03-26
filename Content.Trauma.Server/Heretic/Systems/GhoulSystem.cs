@@ -24,7 +24,6 @@ using Content.Shared.NPC.Systems;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Heretic.Abilities;
@@ -49,9 +48,9 @@ using Content.Shared.Gibbing;
 using Content.Shared.NPC.Components;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Roles.Components;
-using Content.Trauma.Common.Body;
 using Content.Trauma.Server.Chaplain;
 using Content.Trauma.Shared.Chaplain.Components;
+using Content.Trauma.Shared.Heretic.Prototypes;
 using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -64,10 +63,10 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private static readonly ProtoId<HTNCompoundPrototype> Compound = "HereticSummonCompound";
     private static readonly EntProtoId<MindRoleComponent> GhoulRole = "MindRoleGhoul";
 
-    private static readonly EntProtoId ComponentsToRemoveOnGhoulify = "ComponentsToRemoveOnGhoulify";
-    private static readonly EntProtoId ComponentsToRemoveOnUnGhoulify = "ComponentsToRemoveOnUnGhoulify";
-
-    private readonly string[] _ignoredComponentsOnTransfer = ["Transform", "MetaData"];
+    private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnGhoulify =
+        "ComponentsToRemoveOnGhoulify";
+    private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnUnGhoulify =
+        "ComponentsToRemoveOnUnGhoulify";
 
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly JitteringSystem _jitter = default!;
@@ -96,7 +95,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         base.Initialize();
 
         UpdatesAfter.Add(typeof(HolyFlammableSystem));
-        SubscribeLocalEvent<GhoulComponent, BodyInitEvent>(OnBodyInit);
+        SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnGhoulInit, after: [typeof(InitialBodySystem)]);
         SubscribeLocalEvent<GhoulComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<GhoulComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<GhoulComponent, MobStateChangedEvent>(OnMobStateChange);
@@ -112,13 +111,14 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
 
-        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit);
+        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit,
+            after: [typeof(InitialBodySystem)]);
         SubscribeLocalEvent<VoicelessDeadComponent, ComponentShutdown>(OnVoicelessDeadShutdown);
 
         SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
 
-        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit);
+        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit, after: [typeof(InitialBodySystem)]);
         SubscribeLocalEvent<ShatteredRisenComponent, HandCountChangedEvent>(OnHandCountChanged);
     }
 
@@ -199,6 +199,9 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
     private void OnHandCountChanged(Entity<ShatteredRisenComponent> ent, ref HandCountChangedEvent args)
     {
+        if (TerminatingOrDeleted(ent))
+            return;
+
         RefreshShatteredHands(ent);
     }
 
@@ -338,8 +341,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         var prototype = _proto.Index(species.Prototype);
 
         var comps = prototype.Components
-            .IntersectBy(_proto.Index(ComponentsToRemoveOnGhoulify).Components.Keys.Except(_ignoredComponentsOnTransfer),
-                x => x.Key)
+            .IntersectBy(_proto.Index(ComponentsToRemoveOnGhoulify).Components.Keys, x => x.Key)
             .ToDictionary();
 
         EntityManager.AddComponents(ent, new ComponentRegistry(comps));
@@ -379,18 +381,12 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (TryComp(ent, out HolyFlammableComponent? holyFlam))
             _holyFlam.HolyExtinguish(ent, holyFlam);
 
-        var comps2 = _proto.Index(ComponentsToRemoveOnUnGhoulify)
-            .Components.ExceptBy(_ignoredComponentsOnTransfer, x => x.Key)
-            .ToDictionary();
-        EntityManager.RemoveComponents(ent, new ComponentRegistry(comps2));
+        EntityManager.RemoveComponents(ent, _proto.Index(ComponentsToRemoveOnUnGhoulify).Components);
     }
 
     public void GhoulifyEntity(Entity<GhoulComponent> ent)
     {
-        var comps = _proto.Index(ComponentsToRemoveOnGhoulify)
-            .Components.ExceptBy(_ignoredComponentsOnTransfer, x => x.Key)
-            .ToDictionary();
-        EntityManager.RemoveComponents(ent, new ComponentRegistry(comps));
+        EntityManager.RemoveComponents(ent, _proto.Index(ComponentsToRemoveOnGhoulify).Components);
 
         EnsureComp<WeakToHolyComponent>(ent);
         var ev = new UnholyStatusChangedEvent(ent, ent, true);
@@ -492,7 +488,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         _antag.SendBriefing(ent, brief, Color.MediumPurple, sound);
     }
 
-    private void OnBodyInit(Entity<GhoulComponent> ent, ref BodyInitEvent args)
+    private void OnGhoulInit(Entity<GhoulComponent> ent, ref MapInitEvent args)
     {
         GhoulifyEntity(ent);
     }

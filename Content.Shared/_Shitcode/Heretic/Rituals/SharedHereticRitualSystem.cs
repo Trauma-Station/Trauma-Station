@@ -160,10 +160,15 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         if (!_heretic.TryGetHereticComponent(user, out var heretic, out var mind))
             return;
 
-        heretic.ChosenRitual = GetEntity(args.Ritual);
+        var ritual = GetEntity(args.Ritual);
+
+        if (!heretic.Rituals.Contains(ritual))
+            return;
+
+        heretic.ChosenRitual = ritual;
         Dirty(mind, heretic);
 
-        var ritualName = Name(heretic.ChosenRitual.Value);
+        var ritualName = Name(ritual);
         _popup.PopupClient(Loc.GetString("heretic-ritual-switch", ("name", ritualName)), user, user);
     }
 

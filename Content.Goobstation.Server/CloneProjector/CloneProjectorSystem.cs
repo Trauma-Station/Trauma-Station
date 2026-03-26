@@ -95,11 +95,12 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
         var status = Loc.GetString("clone-projector-examined-status", ("cloneStatus", projector.Comp.CloneUid != null));
         args.PushMarkup(status);
 
-        if (!TryComp<DamageableComponent>(projector.Comp.CloneUid, out var damageable)
-            || !_thresholds.TryGetDeadThreshold(projector.Comp.CloneUid.Value, out var deathThreshold))
+        if (projector.Comp.CloneUid is not {} clone ||
+            !_thresholds.TryGetDeadThreshold(clone, out var deathThreshold))
             return;
 
-        var remainingHealth = deathThreshold - damageable.TotalDamage;
+        var damage = _damageable.GetTotalDamage(clone);
+        var remainingHealth = deathThreshold - damage;
         var health = Loc.GetString("clone-projector-examined-health", ("cloneHealth", remainingHealth / deathThreshold * 100 ));
         args.PushMarkup(health);
     }

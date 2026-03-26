@@ -3,6 +3,7 @@
 using Content.Shared._DV.Carrying;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
+using Content.Shared.EntityEffects;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -13,7 +14,6 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Throwing;
-using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Player;
 using Robust.Shared.Network;
 
@@ -24,8 +24,8 @@ public sealed class StrapLockSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly NestedEffectSystem _nestedEffect = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -295,7 +295,7 @@ public sealed class StrapLockSystem : EntitySystem
         var others = Loc.GetString("strap-lock-dropped-others", ("buckled", buckled), ("user", userIdent));
         _popup.PopupPredicted(you, others, target, _player.LocalEntity); // all clients will predict it
 
-        _nestedEffect.ApplyNestedEffect(target, ent.Comp.DropEffect);
+        _effects.TryApplyEffect(target, ent.Comp.DropEffect);
 
         // incase some shit didnt clean it up
         RemCompDeferred<StrapLockedComponent>(target);

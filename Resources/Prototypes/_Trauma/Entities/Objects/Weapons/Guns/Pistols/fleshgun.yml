@@ -1,0 +1,31 @@
+- type: entity
+  parent: BaseItem
+  id: GunMimic
+  name: flesh gun
+  description: Looks like the mimics launcher is still in tact...
+  suffix: Unremoveable
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Pistols/fleshgun.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+  - type: Unremoveable
+  - type: Gun
+    fireRate: 2
+    projectileSpeed: 20
+    clumsyProof: true
+    resetOnHandSelected: false
+    soundEmpty: null
+    soundGunshot:
+      path: /Audio/_Goobstation/Weapons/Guns/Gunshots/heavy_shot_suppressed.ogg
+      params:
+        volume: -5
+  - type: BatteryAmmoProvider
+    proto: BulletMimic
+    fireCost: 20
+  - type: BatterySelfRecharger
+    autoRechargeRate: 1
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100

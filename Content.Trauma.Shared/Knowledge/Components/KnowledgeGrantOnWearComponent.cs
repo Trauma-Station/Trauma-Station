@@ -7,10 +7,13 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Shared.Knowledge.Components;
 
 /// <summary>
-/// Grants some knowledge when used in hand.
+/// Grants some knowledge when either:
+/// 1. clothing is worn (to the wearer)
+/// 2. organ is installed (to the body)
+/// 3. borg chassis has a mmi/pb inserted (to the brain)
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class KnowledgeGrantOnWearComponent : Component
 {
     /// <summary>
@@ -28,7 +31,7 @@ public sealed partial class KnowledgeGrantOnWearComponent : Component
     /// <summary>
     /// Skills that will be added or boosted upon use.
     /// </summary>
-    [DataField, AlwaysPushInheritance]
+    [DataField, AutoNetworkedField, AlwaysPushInheritance]
     public Dictionary<EntProtoId, int> Skills = new();
 
     /// <summary>
@@ -42,5 +45,4 @@ public sealed partial class KnowledgeGrantOnWearComponent : Component
     /// </summary>
     [DataField, AlwaysPushInheritance]
     public Dictionary<EntProtoId, bool> Blocked = new();
-
 }

@@ -4,6 +4,7 @@ using Content.Medical.Common.Vomiting;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;
 using Content.Shared.Spawners.Components;
@@ -21,8 +22,8 @@ public sealed class BloodSplatterSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
 
-    private static readonly EntProtoId SlashProto = "Slash";
-    private static readonly EntProtoId PierceProto = "Piercing";
+    private static readonly ProtoId<DamageTypePrototype> SlashProto = "Slash";
+    private static readonly ProtoId<DamageTypePrototype> PierceProto = "Piercing";
 
     public override void Initialize()
     {

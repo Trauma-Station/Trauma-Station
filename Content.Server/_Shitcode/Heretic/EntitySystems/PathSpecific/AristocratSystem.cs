@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 the biggest bruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Heretic;
@@ -77,7 +65,7 @@ public sealed class AristocratSystem : EntitySystem
 
     private static readonly EntProtoId IceTilePrototype = "IceCrust";
     private static readonly EntProtoId IceWallPrototype = "WallIce";
-    private static readonly ProtoId<WeatherPrototype> SnowfallMagic = "SnowfallMagic";
+    private static readonly EntProtoId SnowfallMagic = "WeatherSnowfallMagic";
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
     private static readonly ProtoId<TagPrototype> Window = "Window";
 
@@ -98,6 +86,9 @@ public sealed class AristocratSystem : EntitySystem
 
     private void OnStartup(Entity<AristocratComponent> ent, ref ComponentStartup args)
     {
+        if (!HasComp<MobStateComponent>(ent))
+            return; // fuck off tests
+
         BeginWaltz(ent);
         DoVoidAnnounce(ent, "begin");
         _movement.RefreshWeightlessModifiers(ent);
@@ -154,7 +145,7 @@ public sealed class AristocratSystem : EntitySystem
 
         // the fog (snow) is coming
         var xform = Transform(ent);
-        _weather.SetWeather(xform.MapID, _prot.Index(SnowfallMagic), null);
+        _weather.TrySetWeather(xform.MapID, SnowfallMagic, out _);
     }
 
     private void EndWaltz(Entity<AristocratComponent> ent)
@@ -164,8 +155,8 @@ public sealed class AristocratSystem : EntitySystem
 
         _globalSound.StopStationEventMusic(ent, StationEventMusicType.VoidAscended);
 
-        var xform = Transform(ent);
-        _weather.SetWeather(xform.MapID, null, null);
+        if (Transform(ent).MapUid is {} map)
+            _weather.TryRemoveWeather(map, SnowfallMagic);
     }
 
     private void OnMobStateChange(Entity<AristocratComponent> ent, ref MobStateChangedEvent args)

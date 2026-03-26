@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Stylesheets;
+// </Trauma>
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -10,6 +13,9 @@ namespace Content.Client.Stylesheets
 {
     public sealed class StylesheetManager : IStylesheetManager
     {
+        // <Trauma>
+        [Dependency] private readonly IDynamicTypeFactory _dtf = default!;
+        // </Trauma>
         [Dependency] private readonly ILogManager _logManager = default!;
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
         [Dependency] private readonly IReflectionManager _reflection = default!;
@@ -47,6 +53,20 @@ namespace Content.Client.Stylesheets
             UnusedSheetlets = [..tys];
 
             Stylesheets = new Dictionary<string, Stylesheet>();
+            // <Trauma> - load other stylesheets as well. holy shitcode hardcoding them all...
+            foreach (var type in _reflection.FindTypesWithAttribute<LoadStylesheetAttribute>())
+            {
+                if (!typeof(BaseStylesheet).IsAssignableFrom(type))
+                {
+                    sawmill.Error($"Bad type {type.FullName ?? type.ToString()} did not inherit from BaseStylesheet but had [LoadStylesheet]!");
+                    continue;
+                }
+
+                var config = new BaseStylesheet.NoConfig();
+                var sheet = (BaseStylesheet) _dtf.CreateInstance(type, new object[] { config, this });
+                Init(sheet);
+            }
+            // </Trauma>
             SheetNanotrasen = Init(new NanotrasenStylesheet(new BaseStylesheet.NoConfig(), this));
             SheetSystem = Init(new SystemStylesheet(new BaseStylesheet.NoConfig(), this));
             SheetNano = new StyleNano(_resCache).Stylesheet; // TODO: REMOVE (obsolete)

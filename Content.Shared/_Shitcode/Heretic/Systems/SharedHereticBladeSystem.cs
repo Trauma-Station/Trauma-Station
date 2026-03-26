@@ -281,7 +281,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         if (!args.IsHit || string.IsNullOrWhiteSpace(ent.Comp.Path))
             return;
 
-        _heretic.TryGetHereticComponent(args.User, out var hereticComp, out _);
+        _heretic.TryGetHereticComponent(args.User, out var hereticComp, out var mind);
 
         if (TryComp(args.User, out HereticBladeUserBonusDamageComponent? bonus) &&
             (bonus.Path == null || bonus.Path == ent.Comp.Path))
@@ -359,7 +359,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
                 aliveMobsCount++;
 
             if (TryComp<HereticCombatMarkComponent>(hit, out var mark))
-                _combatMark.ApplyMarkEffect(hit, mark, mark.Path, args.User, hereticComp);
+                _combatMark.ApplyMarkEffect(hit, mark, mark.Path, args.User, (mind, hereticComp));
 
             if (hereticComp.PathStage >= 7)
                 ApplySpecialEffect(args.User, hit, args);

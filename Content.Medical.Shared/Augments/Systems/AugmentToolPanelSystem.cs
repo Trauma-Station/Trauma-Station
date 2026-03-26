@@ -8,6 +8,7 @@ using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Containers;
+using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Augments;
 
@@ -15,21 +16,19 @@ public sealed class AugmentToolPanelSystem : EntitySystem
 {
     [Dependency] private readonly AugmentPowerCellSystem _augmentPowerCell = default!;
     [Dependency] private readonly AugmentSystem _augment = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
-
-    private EntityQuery<HandsComponent> _handsQuery;
-    private EntityQuery<BodyPartComponent> _partQuery;
+    [Dependency] private readonly EntityQuery<BodyPartComponent> _partQuery = default!;
+    [Dependency] private readonly EntityQuery<ChildOrganComponent> _childQuery = default!;
+    [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _handsQuery = GetEntityQuery<HandsComponent>();
-        _partQuery = GetEntityQuery<BodyPartComponent>();
 
         SubscribeLocalEvent<AugmentToolPanelComponent, OrganDisabledEvent>(OnOrganDisabled);
         SubscribeLocalEvent<AugmentToolPanelActiveItemComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
@@ -41,6 +40,9 @@ public sealed class AugmentToolPanelSystem : EntitySystem
 
     private void OnDropAttempt(Entity<AugmentToolPanelActiveItemComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         // you can never drop an active tool panel item, it has to be retracted with the action
         args.Cancel();
     }
@@ -68,9 +70,10 @@ public sealed class AugmentToolPanelSystem : EntitySystem
         if (!_handsQuery.TryComp(body, out var handsComp))
             return;
 
-        // organs get parented to the body part
+        if (_childQuery.Comp(augment).Parent is not {} partUid)
+            return;
+
         // the arm's symmetry is the same as the hand
-        var partUid = Transform(augment).ParentUid;
         var part = _partQuery.Comp(partUid);
         var location = part.Symmetry switch
         {

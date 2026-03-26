@@ -18,7 +18,6 @@ using Content.Server.Store.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Explosion.Components;
@@ -248,10 +247,8 @@ public sealed class BlobCoreSystem : EntitySystem
         _alerts.ShowAlert(component.Observer.Value, BlobResource, pointsSeverity);
 
         // And this one for health.
-        if (!TryComp<DamageableComponent>(core.Owner, out var damageComp))
-            return;
-
-        var currentHealth = component.CoreBlobTotalHealth - damageComp.TotalDamage;
+        var total = _damageable.GetTotalDamage(core.Owner);
+        var currentHealth = component.CoreBlobTotalHealth - total;
         var healthSeverity = (short) Math.Clamp(Math.Round(currentHealth.Float() / 20f), 0, 20);
 
         _alerts.ShowAlert(component.Observer.Value, BlobHealth, healthSeverity);
