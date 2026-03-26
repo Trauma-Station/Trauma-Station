@@ -5443,3 +5443,17 @@ Entries:
   id: 638
   time: '2026-03-25T22:41:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1583
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: 'Betrayal Knife once again knocks down on blink hit. '
+  id: 639
+  time: '2026-03-26T10:20:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1587
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Tweaked midround antag spawns to be more consistent
+  id: 640
+  time: '2026-03-26T10:29:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1568
