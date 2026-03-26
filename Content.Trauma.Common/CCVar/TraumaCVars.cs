@@ -125,7 +125,7 @@ public sealed partial class TraumaCVars
 
     #endregion
 
-      
+
     #region Decals
 
     /// <summary>
@@ -184,6 +184,6 @@ public sealed partial class TraumaCVars
     /// <seealso cref="AreaEchoSystem"/>
     public static readonly CVarDef<TimeSpan> AreaEchoRecalculationInterval =
         CVarDef.Create("mono.area_echo.recalculation_interval", TimeSpan.FromSeconds(15), CVar.ARCHIVE | CVar.CLIENTONLY);
-  
+
     # endregion
 }
