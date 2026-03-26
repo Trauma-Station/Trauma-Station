@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: OverlayCMPlatform
   categories: [ HideSpawnMenu ]
   components:

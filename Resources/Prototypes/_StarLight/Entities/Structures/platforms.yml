@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: CMPlatformBase
   name: platform
@@ -419,4 +419,3 @@
   - type: ChildEntities
     childPrototypes:
       - prototype: OverlayRMCPlatformStairLeftWood
-
