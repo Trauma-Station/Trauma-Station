@@ -12,4 +12,4 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: lethal # TODO: resprite the box (i dont feel like it right now)
+    - state: breaching
