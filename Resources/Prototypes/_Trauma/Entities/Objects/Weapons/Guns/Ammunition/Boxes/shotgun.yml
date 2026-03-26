@@ -2,7 +2,7 @@
   parent: AmmoProviderShotgunShell
   id: BoxShotgunBreaching
   name: ammunition box (12 Gauge breaching)
-  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold breaching ammunition... they forgot to make the box look different.
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold breaching ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: ShellShotgunBreaching
