@@ -146,8 +146,6 @@
     - !type:OverallPlaytimeRequirement
       time: 2h
   antags:
-<<<<<<< HEAD
-=======
     AbductorAgentAntag:
     - !type:OverallPlaytimeRequirement
       time: 2h
@@ -160,7 +158,6 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 1h
->>>>>>> 386c18f10d (antag roletime overrides)
     Blob:
     - !type:OverallPlaytimeRequirement
       time: 2h
@@ -222,9 +219,6 @@
     - !type:RoleTimeRequirement
       role: JobBorg
       time: 3h
-<<<<<<< HEAD
-=======
     XenomorphsInfestationRoundstart:
     - !type:OverallPlaytimeRequirement
       time: 2h
->>>>>>> 386c18f10d (antag roletime overrides)
