@@ -5,22 +5,40 @@ using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.ChildEntities;
 
+/// <summary>
+/// Spawns entities parented to the entity this component is attached to.
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ChildEntitiesComponent : Component
 {
-    [DataField]
-    public List<ChildEntityInfo> ChildPrototypes = [];
+    /// <summary>
+    /// The entities to spawn attached to the component owner
+    /// </summary>
+    [DataField(required: true)]
+    public List<ChildEntityInfo> ChildPrototypes = new();
 
+    /// <summary>
+    /// How many children we have active, so we can discard them after the component shutdowns
+    /// </summary>
     [DataField, AutoNetworkedField]
-    public List<EntityUid> Children = [];
+    public List<EntityUid> Children = new();
 }
 
+/// <summary>
+/// Holds the <see cref="EntProtoId"/> and the offset of the entity we want to attach
+/// </summary>
 [Serializable, NetSerializable, DataDefinition]
 public sealed partial class ChildEntityInfo
 {
+    /// <summary>
+    /// The prototype of the entity we want to attach to the parent
+    /// </summary>
     [DataField]
     public EntProtoId Prototype;
 
+    /// <summary>
+    /// The position offset that is applied to the entity when spawned
+    /// </summary>
     [DataField]
     public Vector2 Offset;
 }

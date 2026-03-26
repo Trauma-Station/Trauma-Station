@@ -1,5 +1,8 @@
 namespace Content.Trauma.Shared.ChildEntities;
 
+/// <summary>
+/// Handles spawning child entities on an entity
+/// </summary>
 public sealed class ChildEntitiesSystem : EntitySystem
 {
     public override void Initialize()
@@ -12,6 +15,8 @@ public sealed class ChildEntitiesSystem : EntitySystem
 
     private void OnMapInit(Entity<ChildEntitiesComponent> ent, ref MapInitEvent args)
     {
+        // We iterate over all the stored child prototypes and spawn them attached to the owner of this component,
+        // accounting for offset and rotation.
         foreach (var child in ent.Comp.ChildPrototypes)
         {
             var coords = Transform(ent).Coordinates;
