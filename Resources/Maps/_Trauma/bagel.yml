@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 272.0.0
+  engineVersion: 274.0.1
   forkId: ""
   forkVersion: ""
-  time: 03/20/2026 14:01:17
-  entityCount: 25174
+  time: 03/24/2026 14:04:18
+  entityCount: 25175
 maps:
 - 1
 grids:
@@ -1086,6 +1086,7 @@ entities:
             4311: -114,2
             4312: -110,2
             4313: -124,17
+            4797: 52,11
         - node:
             color: '#FFFFFFFF'
             id: BoxGreyscale
@@ -50148,6 +50149,13 @@ entities:
       parent: 2
     - type: SiloUtilizer
       silo: 16728
+- proto: CargoTelepad
+  entities:
+  - uid: 23698
+    components:
+    - type: Transform
+      pos: 52.5,11.5
+      parent: 2
 - proto: Carpet
   entities:
   - uid: 7494

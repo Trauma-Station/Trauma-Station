@@ -10,7 +10,7 @@ namespace Content.Trauma.Server.BurnableFood;
 
 public sealed partial class BurnableFoodSystem : EntitySystem
 {
-    private EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
+    [Dependency] private readonly EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -18,8 +18,6 @@ public sealed partial class BurnableFoodSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _internalQuery = GetEntityQuery<InternalTemperatureComponent>();
 
         SubscribeLocalEvent<BurnableFoodComponent, OnTemperatureChangeEvent>(OnTempChange);
     }

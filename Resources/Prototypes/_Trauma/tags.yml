@@ -143,4 +143,7 @@
   id: T45Helmet
 
 - type: Tag
+  id: TraumaFire
+
+- type: Tag
   id: WelderExperimental

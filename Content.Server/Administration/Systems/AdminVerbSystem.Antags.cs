@@ -214,7 +214,7 @@ public sealed partial class AdminVerbSystem
             args.Verbs.Add(paradox);
 
         // <Trauma>
-        var ev = new GetAntagVerbsEvent(args.Target, player, args);
+        var ev = new GetAntagVerbsEvent(args.Target, targetPlayer, args);
         RaiseLocalEvent(ref ev);
         // </Trauma>
     }

@@ -55,6 +55,7 @@ namespace Content.Client.Cargo.UI
 
             _orderConsoleQuery = _entityManager.GetEntityQuery<CargoOrderConsoleComponent>();
             _bankQuery = _entityManager.GetEntityQuery<StationBankAccountComponent>();
+            InitializeTrauma(); // Trauma
 
             Title = entMan.GetComponent<MetaDataComponent>(owner).EntityName;
 
@@ -312,6 +313,7 @@ namespace Content.Client.Cargo.UI
             {
                 return;
             }
+            UpdateDestination(orderConsole.Destination); // Trauma
 
             var balance = _cargoSystem.GetBalanceFromAccount((_station.Value, bankAccount), orderConsole.Account);
             PointsLabel.Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", balance));

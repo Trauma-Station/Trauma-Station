@@ -283,7 +283,7 @@
   parent: BaseNullrod
   id: MonkStaff
   name: monk's staff
-  description: A long, tall staff made of polished wood. Traditionally used in ancient old-Earth martial arts, now used to harass the clown. #this should be able to parry eventually.
+  description: A long, tall staff made of polished wood. Traditionally used in ancient old-Earth martial arts, now used to harass the clown.
   components:
   - type: Nullrod
     damageOnUntrainedUse:
@@ -307,6 +307,15 @@
   - type: StaminaDamageOnHit
     damage: 10
   - type: Wieldable
+  - type: Parry
+    maxParries: 4
+    maxReflects: 0
+    parryMinSkill: 40
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
   - type: Tag
     tags:
     - MonkStaff

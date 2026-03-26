@@ -5315,3 +5315,200 @@ Entries:
   id: 623
   time: '2026-03-23T10:50:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1523
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Insurgents now links you the insurgent rules in the antag opt in menu.
+  id: 624
+  time: '2026-03-23T21:55:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1550
+- author: Shell-Knight
+  changes:
+  - type: Tweak
+    message: Nerfed Contractor Baton stamina damage
+  id: 625
+  time: '2026-03-24T08:38:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1546
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: BrigMedic has a normal time requirement.
+  id: 626
+  time: '2026-03-24T14:23:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1559
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      You can now pick a character to spawn as for crew reinforcements or
+      ninjas, click the Pick Character button as a ghost!
+  id: 627
+  time: '2026-03-24T18:10:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1556
+- author: GamingFungus420
+  changes:
+  - type: Tweak
+    message: Increased flour bag and pack capacity
+  id: 628
+  time: '2026-03-24T19:41:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1553
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Serpentcrest is back in the map pool!
+  - type: Add
+    message: Cargo now gets a free telepad roundstart.
+  id: 629
+  time: '2026-03-24T20:42:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1561
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: >-
+      Combustible Lemons are now edible and able to be juiced. You can make
+      Combustible Lemonade!
+  - type: Add
+    message: Added a new reagent called Burnite, which sets fire to tiles.
+  - type: Tweak
+    message: Combustible Lemons renamed to Lemonades. Don't confuse them for the drink.
+  id: 630
+  time: '2026-03-24T21:34:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1562
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Cargo ordering consoles can now set the telepad/trade station to send
+      orders to. It will pick cargo's telepad by default.
+  - type: Tweak
+    message: >-
+      The ATS is now mainly just for selling things, you can still select it as
+      a backup.
+  id: 631
+  time: '2026-03-24T22:04:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1563
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed abductor glands like EMP and grav activating as soon as you
+      installed them.
+  id: 632
+  time: '2026-03-25T07:58:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1567
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: Add missing role overrides for Virologist, Roboticist, and Geneticist.
+  id: 633
+  time: '2026-03-25T11:11:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1569
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      The highpop job roles shitcode thing was replaced by a better system that
+      works regardless of map, which now also adds unlimited service workers and
+      janitors.
+  id: 634
+  time: '2026-03-25T15:01:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1570
+- author: momoyawn
+  changes:
+  - type: Fix
+    message: Kinetic Machete can now parry
+  id: 635
+  time: '2026-03-25T17:05:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1571
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Removed shock damage from your skillchip being EMP'd, now it only disables
+      the skills.
+  id: 636
+  time: '2026-03-25T18:39:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1574
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Xeeble gloop nnorp zarp "experiment" zip! 👽👽👽👽👽
+  id: 637
+  time: '2026-03-25T22:38:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1576
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed lag..?
+  id: 638
+  time: '2026-03-25T22:41:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1583
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: 'Betrayal Knife once again knocks down on blink hit. '
+  id: 639
+  time: '2026-03-26T10:20:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1587
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Tweaked midround antag spawns to be more consistent
+  id: 640
+  time: '2026-03-26T10:29:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1568
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Charged SMESs price per joule value decreased.
+  - type: Tweak
+    message: PTL spesos output increased and tweaked.
+  id: 641
+  time: '2026-03-26T11:13:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1590
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed all lag from blood/brain/vomit splatters and footprints.
+  id: 642
+  time: '2026-03-26T11:20:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1586
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added more human resources from Rimworld
+  - type: Tweak
+    message: You can now strip and skin mobs on a meat spike.
+  id: 643
+  time: '2026-03-26T11:56:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1593
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed void heretic rituals that need cold not working in space.
+  id: 644
+  time: '2026-03-26T12:18:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1594
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenos being able to spawn on the ATS
+  id: 645
+  time: '2026-03-26T15:00:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1599
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: >-
+      Sleeper agents are no longer 50 times more likely to happen than other
+      midround antags.
+  id: 646
+  time: '2026-03-26T16:50:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1601
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Goliaths no longer stun you, they only knock you down.
+  id: 647
+  time: '2026-03-26T20:10:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1605

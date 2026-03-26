@@ -5,11 +5,7 @@ using Content.Medical.Shared.ItemSwitch;
 using Content.Medical.Shared.Surgery;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction.Components;
-using Content.Shared.Mind.Components;
-using Content.Shared.Mind;
 using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Objectives.Components;
-using Content.Server.Objectives.Systems;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Spawners;
@@ -20,7 +16,6 @@ namespace Content.Medical.Server.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
     [Dependency] private readonly SharedItemSwitchSystem _itemSwitch = default!;
 
     public static readonly SoundSpecifier ExperimentSound = new SoundPathSpecifier(new ResPath("/Audio/Voice/Human/wilhelm_scream.ogg"));
@@ -28,7 +23,6 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
     private void InitializeConsole()
     {
         SubscribeLocalEvent<AbductorConsoleComponent, BeforeActivatableUIOpenEvent>(OnBeforeActivatableUIOpen);
-        SubscribeLocalEvent<AbductConditionComponent, ObjectiveGetProgressEvent>(OnAbductGetProgress);
 
         Subs.BuiEvents<AbductorConsoleComponent>(AbductorConsoleUIKey.Key, subs =>
         {
@@ -39,12 +33,6 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         });
         SubscribeLocalEvent<AbductorConsoleComponent, AbductorAttractDoAfterEvent>(OnDoAfterAttract);
     }
-
-    private void OnAbductGetProgress(Entity<AbductConditionComponent> ent, ref ObjectiveGetProgressEvent args)
-        => args.Progress = AbductProgress(ent.Comp, _number.GetTarget(ent.Owner));
-
-    private float AbductProgress(AbductConditionComponent comp, int target)
-        => target == 0 ? 1f : MathF.Min(comp.TotalAbducted / (float) target, 1f);
 
     private void OnVestModeChangeBuiMsg(EntityUid uid, AbductorConsoleComponent component, AbductorVestModeChangeBuiMsg args)
     {
@@ -69,15 +57,6 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         var victim = container.ContainedEntities.FirstOrDefault(HasComp<AbductorVictimComponent>);
         if (victim != default && TryComp(victim, out AbductorVictimComponent? victimComp))
         {
-            if (victimComp.Implanted
-                && TryComp<MindContainerComponent>(args.Actor, out var mindContainer)
-                && mindContainer.Mind.HasValue
-                && TryComp<MindComponent>(mindContainer.Mind.Value, out var mind)
-                && mind.Objectives.FirstOrDefault(HasComp<AbductConditionComponent>) is {} objId
-                && TryComp<AbductConditionComponent>(objId, out var condition))
-            {
-                condition.Abducted.Add(GetNetEntity(victim));
-            }
             _audio.PlayPvs(ExperimentSound, experimentator);
 
             if (victimComp.Position is {} pos)

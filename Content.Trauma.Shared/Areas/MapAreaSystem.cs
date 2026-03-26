@@ -19,7 +19,7 @@ namespace Content.Trauma.Shared.Areas;
 /// </summary>
 public sealed class MapAreaSystem : EntitySystem
 {
-    private EntityQuery<AreaGridComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<AreaGridComponent> _query = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private List<Vector2i> _empty = new();
@@ -29,8 +29,6 @@ public sealed class MapAreaSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<AreaGridComponent>();
 
         SubscribeLocalEvent<AreaComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<AreaComponent, ComponentShutdown>(OnShutdown);
