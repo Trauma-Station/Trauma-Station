@@ -6,6 +6,8 @@ using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Decals;
 using Content.Trauma.Shared.Timing;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Decals;
@@ -72,6 +74,7 @@ public sealed class DecalDespawnSystem : EntitySystem
     /// </summary>
     public void QueueDespawn(EntityUid grid, uint decal)
     {
+        DebugTools.Assert(HasComp<MapGridComponent>(grid), $"{ToPrettyString(grid)} is not a grid!");
         if (_buffer.Push((grid, decal), out var old))
             _decal.RemoveDecal(old.Item1, old.Item2);
     }
