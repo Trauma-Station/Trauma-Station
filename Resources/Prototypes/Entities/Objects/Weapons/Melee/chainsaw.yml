@@ -57,6 +57,14 @@
   - type: Item
     size: Normal
     sprite: Objects/Weapons/Melee/chainsaw.rsi
+  # <Trauma>
+    shape:
+    - 0,0,1,1
+    - 1,1,4,1
+    storedRotation: 45
+    storedOffset: -15,6
+  # </Trauma>
+
   - type: DisarmMalus
   - type: RefillableSolution
     solution: Welder

@@ -33,3 +33,37 @@
 
   - node: PowerArmorStand
     entity: RevPowerArmorStand
+
+- type: constructionGraph
+  id: ArmoryOverrideKey
+  entity: ArmoryOverrideKeyComponents
+  start: start
+  graph:
+  - node: start
+    entity: ArmoryOverrideKeyComponents
+    edges:
+    - to: finished
+      steps:
+      - tag: OverrideKeyComponents
+        doAfter: 5
+        name: construction-graph-tag-overridekeycomponents
+        icon:
+          sprite: _Trauma/Objects/tools/overridecomponents.rsi
+          state: icon
+      - tag: OverrideKeyComponents
+        doAfter: 5
+        name: construction-graph-tag-overridekeycomponents
+        icon:
+          sprite: _Trauma/Objects/tools/overridecomponents.rsi
+          state: icon
+      - tag: OverrideKeyComponents
+        doAfter: 5
+        name: construction-graph-tag-overridekeycomponents
+        icon:
+          sprite: _Trauma/Objects/tools/overridecomponents.rsi
+          state: icon
+      - tool: Screwing
+        doAfter: 3
+
+  - node: finished
+    entity: ArmoryOverrideKey

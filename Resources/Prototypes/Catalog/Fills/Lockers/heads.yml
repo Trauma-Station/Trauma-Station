@@ -15,6 +15,7 @@
     - id: AstroNavCartridge
     - id: ClothingHandsKnuckleDustersQM
     - id: PlushieLizardJobQuartermaster
+    - id: ArmoryOverrideKeyComponents # Trauma
       prob: 0.02
 
 - type: entity
@@ -49,6 +50,7 @@
     - id: SpaceCash1000
     # - id: WeaponDisabler # Trauma no disabler when you have telebatong
     - id: ClothingEyesGlassesCommand
+    - id: ArmoryOverrideKeyComponents # Trauma
     - id: OrganSkeletonPersonHead # A skull to accompany your skeleton crew
       conditions:
       - !type:PlayerCountCondition
@@ -139,6 +141,7 @@
     - id: ClothingEyesHudCommand
     - id: PlushieLizardJobHeadofpersonnel
       prob: 0.02
+    - id: ArmoryOverrideKeyComponents # Trauma
 
 - type: entity
   id: LockerHeadOfPersonnelFilled
@@ -169,6 +172,7 @@
     - id: RCDAmmo
     - id: RubberStampCE
     - id: MetalFoamGrenade
+    - id: ArmoryOverrideKeyComponents # Trauma
     - id: PlushieLizardJobChiefengineer
       prob: 0.02
 
@@ -228,6 +232,7 @@
     - id: DoorRemoteMedical
     - id: BoxEncryptionKeyMedical
     - id: BoxCMOCircuitboards
+    - id: ArmoryOverrideKeyComponents # Trauma
     - id: PlushieLizardJobChiefmedicalofficer
       prob: 0.02
 
@@ -284,6 +289,7 @@
     - id: RubberStampRd
     - id: PlushieLizardJobResearchdirector
       prob: 0.02
+    - id: ArmoryOverrideKeyComponents # Trauma
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -348,6 +354,7 @@
     - id: DrinkHosFlask
     - id: PlushieLizardJobHeadofsecurity
       prob: 0.02
+    - id: ArmoryOverrideKeyComponents # Trauma
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

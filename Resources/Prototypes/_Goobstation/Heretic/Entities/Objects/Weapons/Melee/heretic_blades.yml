@@ -39,7 +39,7 @@
     wideAnimationRotation: -125
     damage:
       types:
-        Slash: 20
+        Slash: 15 # moving to 15 to encourage more spell use
       armorPenetration: 0.3
       woundSeverityMultipliers:
         Slash: 1.5

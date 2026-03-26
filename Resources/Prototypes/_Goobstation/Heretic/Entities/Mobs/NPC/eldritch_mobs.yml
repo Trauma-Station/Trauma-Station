@@ -120,6 +120,11 @@
     - RadiationProtection
     - Adrenaline
   - type: FloatingVisuals
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
 
 - type: entity
   parent: [BaseMobGhoul, BaseMobAnimal]
@@ -510,3 +515,8 @@
       NavSmash: !type:Bool
         true
   - type: Targeting
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic

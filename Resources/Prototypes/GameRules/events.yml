@@ -38,11 +38,14 @@
     - !type:NestedSelector
       tableId: DerelictBorgEventTable
     # <Trauma>
+    - id: RatmaSpawn
     - id: MimicVendorRule
     - id: SlimesSpawn
     - id: SnakeSpawn
     - id: SpiderClownSpawn
     - id: SpiderSpawn
+    - id: ParadoxCloneSpawn
+    - id: SleeperAgents
     # </Trauma>
 
 - type: entityTable
@@ -53,14 +56,14 @@
       tableId: ModerateAntagEventsTrauma
     - id: DragonSpawn
     - id: NinjaSpawn
-    - id: ParadoxCloneSpawn
+    #- id: ParadoxCloneSpawn # Trauma, moved to minor
     #- id: RevenantSpawn  # GoobStation - removed till rework
-    - id: SleeperAgents
+    #- id: SleeperAgents # Trauma, moved to minor
     #- id: ZombieOutbreak Trauma - we dont want this as a midround
     - id: LoneOpsSpawn
     #- id: WizardSpawn # Trauma - chud wizard removed pending rework
-    - !type:NestedSelector
-      tableId: DerelictBorgEventTable
+    # - !type:NestedSelector # Trauma, moved to minor
+    #   tableId: DerelictBorgEventTable
 
 - type: entityTable
   id: DerelictBorgEventTable #For Derelict Borg spawns

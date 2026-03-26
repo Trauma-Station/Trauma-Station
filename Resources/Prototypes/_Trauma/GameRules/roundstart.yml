@@ -23,7 +23,7 @@
       spawnerPrototype: SpawnPointInsurgent
       startingGear: Insurgent
       unequipOldGear: true
-      max: 8
+      max: 4
       playerRatio: 10
       roleLoadout:
       - RoleSurvivalStandard
@@ -32,6 +32,9 @@
         randomizeName: true
       mindRoles:
       - MindRoleInsurgent
+      - type: NpcFactionMember
+        factions:
+        - Insurgent
 
 - type: entity
   parent: DuoAbductorSpawn

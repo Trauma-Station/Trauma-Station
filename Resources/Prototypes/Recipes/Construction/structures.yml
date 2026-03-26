@@ -1655,7 +1655,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    MechanicsKnowledge: 1
+    ElectronicsKnowledge: 1
   useQuality: false
   # </Trauma>
 

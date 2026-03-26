@@ -25,3 +25,10 @@ ghost-role-ratma-desc = Hunt and kill.
 
 ghost-role-information-breadling-namee = Breadling
 ghost-role-information-BreadLing-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.
+
+ghost-role-information-animal-name = An animal
+ghost-role-information-animal-rules = You are an [color={role-type-animal-color}][bold]{role-type-animal-name}[/bold][/color]. Act like the animal you are does.
+                                         This means to not go around killing people / causing problems for no reason.
+                                         You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
+                                         You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
+                                         You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.

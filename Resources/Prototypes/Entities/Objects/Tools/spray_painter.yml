@@ -21,8 +21,8 @@
   - type: Sprite
     sprite: Objects/Tools/spray_painter.rsi
     state: spray_painter
-  - type: Item
-    sprite: Objects/Tools/spray_painter.rsi
+  # - type: Item
+  #   sprite: Objects/Tools/spray_painter.rsi
   - type: ActivatableUI
     key: enum.SprayPainterUiKey.Key
   - type: UserInterface
@@ -56,7 +56,15 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
-
+  # <Trauma>
+  - type: Item
+    size: Small
+    sprite: Objects/Tools/spray_painter.rsi
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-4
+  # </Trauma>
 - type: entity
   parent: SprayPainter
   id: SprayPainterRecharging

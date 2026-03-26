@@ -166,7 +166,9 @@
   components:
   - type: Action
     checkCanInteract: false
-    useDelay: 30
+    useDelay: 5
+  - type: LimitedCharges
+    maxCharges: 3
     itemIconStyle: BigAction
     priority: -20
     icon:

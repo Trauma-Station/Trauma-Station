@@ -172,7 +172,7 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
             return;
 
         // 5 blunt per entity consumed
-        hisGrace.Comp.CurrentDamageIncrease.DamageDict["Blunt"] = hisGrace.Comp.EntitiesAbsorbed * 5;
+        hisGrace.Comp.CurrentDamageIncrease.DamageDict["Blunt"] = hisGrace.Comp.EntitiesAbsorbed * 2;
         melee.Damage = hisGrace.Comp.BaseDamage + hisGrace.Comp.CurrentDamageIncrease;
 
         Dirty(hisGrace, melee);

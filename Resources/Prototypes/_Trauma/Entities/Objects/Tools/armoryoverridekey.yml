@@ -1,0 +1,38 @@
+- type: entity
+  parent: [BaseItem, BaseCommandContraband]
+  id: ArmoryOverrideKey
+  name: armory override key
+  description: A device for overridding the armory alert level locks in dire situations.
+  components:
+  - type: Emag
+    emagType: Access
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/ntr_override.rsi
+    state: icon
+  - type: Item
+    sprite: _Goobstation/Objects/Misc/ntr_override.rsi
+    size: Tiny
+  - type: LimitedCharges
+    maxCharges: 6
+  - type: Construction
+    graph: ArmoryOverrideKey
+    node: finished
+
+- type: entity
+  parent: [BaseItem, BaseCommandContraband]
+  id: ArmoryOverrideKeyComponents
+  name: armory override key components
+  description: Part of the armory override device, keep it close and do not give it away unless its an absolute emergency.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/tools/overridecomponents.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+    sprite: _Trauma/Objects/tools/overridecomponents.rsi
+  - type: Tag
+    tags:
+      - OverrideKeyComponents
+  - type: Construction
+    graph: ArmoryOverrideKey
+    node: start

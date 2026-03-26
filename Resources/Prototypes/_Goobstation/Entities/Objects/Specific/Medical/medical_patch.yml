@@ -229,7 +229,7 @@
     FirstAidKnowledge: 1
     FabricationKnowledge: 1
   practical:
-    FabricationKnowledge: 1
+    TailoringKnowledge: 1
 
 - type: constructionGraph
   id: SilkPatchMakeshift

@@ -16,6 +16,7 @@ construction-graph-tag-fusion-core = a fusion core
 
 # tools
 construction-graph-tag-welder-experimental = an experimental welding tool
+construction-graph-tag-overridekeycomponents = override key components
 
 # structures
 construction-graph-tag-nail = a nail

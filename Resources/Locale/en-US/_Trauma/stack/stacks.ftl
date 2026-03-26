@@ -1,3 +1,4 @@
+stack-charcoal = charcoal
 stack-rev-gear = gear
 stack-rev-bolt = bolt
 stack-rev-nut = nut

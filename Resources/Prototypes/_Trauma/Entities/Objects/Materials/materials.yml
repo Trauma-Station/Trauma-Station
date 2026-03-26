@@ -6,3 +6,62 @@
   - type: Stack
     stackType: Gunpowder
     count: 30
+
+- type: entity
+  parent: OreBase
+  id: Charcoal
+  name: charcoal
+  suffix: Full
+  description: Created by burning wood with minimal oxygen, it burns much hotter than wood.
+  components:
+  - type: Stack
+    stackType: Charcoal
+  - type: Sprite
+    state: coal
+  - type: Material
+  - type: Extractable
+    grindableSolutionName: coal
+  - type: SolutionContainerManager
+    solutions:
+      coal:
+        reagents:
+        - ReagentId: Charcoal
+          Quantity: 10
+  - type: PhysicalComposition
+    materialComposition:
+      Coal: 300 # Goobstation - was 100
+  - type: Item
+    heldPrefix: coal
+
+- type: entity
+  parent: Charcoal
+  id: Charcoal1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: Charcoal
+  id: Charcoal5
+  suffix: Five
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: Charcoal
+  id: Charcoal10
+  suffix: Ten
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: Charcoal
+  id: Charcoal15
+  suffix: Fifteen
+  components:
+  - type: Stack
+    count: 15
+

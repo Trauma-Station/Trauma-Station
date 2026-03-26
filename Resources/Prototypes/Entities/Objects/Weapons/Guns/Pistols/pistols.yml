@@ -68,10 +68,7 @@
   - type: Appearance
   - type: StaticPrice
     price: 500
-  - type: Multishot # Goobstation V
-    missChance: 0.4
-    spreadMultiplier: 2
-    spreadAddition: 40
+
   - type: EmitSoundOnPickup
     sound:
       collection: PistolsPickUp
@@ -292,5 +289,4 @@
         whitelist:
           tags:
             - CartridgeMagnum
-  - type: Multishot #Goob
-    spreadMultiplier: 30
+

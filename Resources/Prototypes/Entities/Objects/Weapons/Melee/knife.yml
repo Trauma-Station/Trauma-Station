@@ -421,6 +421,7 @@
     tags:
     - CombatKnife
     - Knife
+    - ThrowingKnife   # Trauma
   - type: Sprite
     sprite: Objects/Weapons/Melee/throwing_knife.rsi
     state: icon

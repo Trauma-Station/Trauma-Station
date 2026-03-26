@@ -5,7 +5,7 @@
   id: BasicAntagEventScheduler
   components:
   - type: RuleSchedulerLimit
-    limit: 3
+    limit: 10
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: BasicAntagEventsTable
@@ -26,9 +26,9 @@
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: ModerateAntagEventsTable
-    # starts 20-27 mins in
-    minimumTimeUntilFirstEvent: 1200
-    maximumSpanUntilFirstEvent: 450
+    # starts 45-115 mins in
+    minimumTimeUntilFirstEvent: 2700
+    maximumSpanUntilFirstEvent: 1800
     # 15-25 mins between each antag
     minMaxEventTiming:
       min: 900

@@ -1,0 +1,6 @@
+- type: stack
+  parent: BaseMediumStack
+  id: Charcoal
+  name: stack-charcoal
+  icon: { sprite: /Textures/Objects/Materials/ore.rsi, state: coal }
+  spawn: Charcoal1

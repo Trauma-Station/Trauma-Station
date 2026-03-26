@@ -65,10 +65,16 @@
   id: Gunpowder
 
 - type: Tag
+  id: GunpowderBottle
+
+- type: Tag
   id: HandTeleporter
 
 - type: Tag
   id: MagazineTurret
+
+- type: Tag
+  id: OverrideKeyComponents
 
 - type: Tag
   id: QMBoard
@@ -111,6 +117,9 @@
 
 - type: Tag
   id: TechfabMachineBoard
+
+- type: Tag
+  id: ThrowingKnife
 
 - type: Tag
   id: T45Frame
