@@ -5457,3 +5457,12 @@ Entries:
   id: 640
   time: '2026-03-26T10:29:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1568
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Charged SMESs price per joule value decreased.
+  - type: Tweak
+    message: PTL spesos output increased and tweaked.
+  id: 641
+  time: '2026-03-26T11:13:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1590
