@@ -32,9 +32,6 @@
         randomizeName: true
       mindRoles:
       - MindRoleInsurgent
-      - type: NpcFactionMember
-        factions:
-        - Insurgent
 
 - type: entity
   parent: DuoAbductorSpawn
