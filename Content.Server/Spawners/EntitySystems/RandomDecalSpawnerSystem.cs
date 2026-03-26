@@ -1,6 +1,9 @@
+// <Trauma>
+using Content.Trauma.Common.Decals;
+// </Trauma>
 using System.Numerics;
 using Content.Server.Decals;
-using Content.Shared.Spawners.Components; // Trauma
+using Content.Shared.Spawners.Components; // Trauma - moved to shared
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -114,12 +117,16 @@ public sealed class RandomDecalSpawnerSystem : EntitySystem
             _decal.TryAddDecal(
                 decalProtoId,
                 position,
-                out _,
+                out var decal, // Trauma - need the decal for below
                 color,
                 rotation,
                 comp.ZIndex,
                 cleanable
             );
+            // <Trauma>
+            var ev = new DecalSpawnedEvent(xform.GridUid.Value, decal);
+            RaiseLocalEvent(ent, ref ev);
+            // </Trauma>
 
             if (comp.MaxDecalsPerTile is > 0)
                 addedDecals[tileRefStr]++;

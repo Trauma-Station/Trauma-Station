@@ -5466,3 +5466,10 @@ Entries:
   id: 641
   time: '2026-03-26T11:13:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1590
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed all lag from blood/brain/vomit splatters and footprints.
+  id: 642
+  time: '2026-03-26T11:20:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1586
