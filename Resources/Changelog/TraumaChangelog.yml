@@ -5473,3 +5473,12 @@ Entries:
   id: 642
   time: '2026-03-26T11:20:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1586
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added more human resources from Rimworld
+  - type: Tweak
+    message: You can now strip and skin mobs on a meat spike.
+  id: 643
+  time: '2026-03-26T11:56:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1593
