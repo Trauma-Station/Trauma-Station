@@ -7,14 +7,15 @@
   - type: BallisticAmmoProvider
     proto: ShellShotgunBreaching
   - type: Sprite
-    layers: _Trauma\Objects\Weapons\Guns\Ammunition\Magazine\Shotgun\m12.rsi
-    - state: breaching
-      map: ["enum.GunVisualLayers.Base"]
-  - type: Sprite
-    sprite: Objects\Weapons\Guns\Ammunition\Magazine\Shotgun\m12.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi
     layers:
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
+      - state: breaching
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi
+    layers:
+      - state: mag-1
+        map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     inhandVisuals:
       left:
