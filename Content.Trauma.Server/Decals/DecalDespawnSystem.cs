@@ -44,7 +44,7 @@ public sealed class DecalDespawnSystem : EntitySystem
         base.Update(frameTime);
 
         // only removes 1 per tick max because of the timed buffer, basically 0 cost
-        if (_buffer.PopNext(out var next))
+        if (_buffer.PopNext(out var next) && Exists(next.Item1))
             _decal.RemoveDecal(next.Item1, next.Item2);
     }
 
