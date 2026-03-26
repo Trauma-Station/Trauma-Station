@@ -1,4 +1,6 @@
-﻿using Content.Shared.Containers.ItemSlots;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Temperature.Systems;
