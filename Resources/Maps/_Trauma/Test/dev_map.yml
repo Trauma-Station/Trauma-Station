@@ -19083,13 +19083,6 @@ entities:
     - type: Transform
       pos: 31.5,18.5
       parent: 1
-- proto: SpawnPointNanotrasenRepresentative
-  entities:
-  - uid: 10024
-    components:
-    - type: Transform
-      pos: 33.5,18.5
-      parent: 1
 - proto: SpawnPointObserver
   entities:
   - uid: 580
