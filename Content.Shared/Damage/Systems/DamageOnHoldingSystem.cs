@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Medical.Common.Targeting;
 using Content.Shared.Hands.EntitySystems;
 using Content.Trauma.Common.Damage;
 // </Trauma>
@@ -56,7 +57,8 @@ public sealed class DamageOnHoldingSystem : EntitySystem
                 if (attemptEv.Cancelled)
                     continue;
                 // </Trauma>
-                _damageableSystem.TryChangeDamage(container.Owner, component.Damage, origin: uid);
+                _damageableSystem.TryChangeDamage(container.Owner, component.Damage, origin: uid,
+                    targetPart: TargetBodyPart.Hands); // Trauma
             }
             component.NextDamage = _timing.CurTime + TimeSpan.FromSeconds(component.Interval);
         }
