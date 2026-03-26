@@ -22,9 +22,9 @@
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: ModerateAntagEventsTable
-    # starts 40-60 mins in
+    # starts 40-80 mins in
     minimumTimeUntilFirstEvent: 2400
-    maximumSpanUntilFirstEvent: 3600
+    maximumSpanUntilFirstEvent: 4800
     # 30-50 mins between each antag
     minMaxEventTiming:
       min: 1800
