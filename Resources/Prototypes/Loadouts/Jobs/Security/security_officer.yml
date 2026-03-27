@@ -13,6 +13,15 @@
       department: Security
       time: 60h
 
+- type: loadoutEffectGroup
+  id: VeteranOfficer # Trauma
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Security
+      time: 360000 # 100 hrs      
+
 # Head
 - type: loadout
   id: SecurityHelmet
