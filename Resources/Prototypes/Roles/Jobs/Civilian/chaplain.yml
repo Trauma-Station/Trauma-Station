@@ -34,8 +34,6 @@
     - RubberStampChaplain
     - Nullrod
     - ArmamentsBeacon # Goobstation
-    - WeaponPistolFaith # Trauma
-    - BaseMagazineKolibri # Trauma
 
 - type: chameleonOutfit
   id: ChaplainChameleonOutfit
