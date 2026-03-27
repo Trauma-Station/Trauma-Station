@@ -17,3 +17,28 @@
   - EDAiCoreElectronics
   - EDIFFElectronics
   - EDWeaponControlsElectronics
+
+- type: latheRecipePack
+  id: SecurityAmmoTrauma
+  recipes:
+  - BoxBeanbag
+  - BoxShotgunIncendiary
+  - BoxShotgunUranium
+  - BoxShellTranquilizer
+  - MagazineBoxMagnumIncendiary
+  - MagazineBoxMagnumUranium
+  - MagazineBoxPistolIncendiary
+  - MagazineBoxPistolUranium
+  - MagazineBoxPistolHoly
+  - MagazineBoxRifleIncendiary
+  - MagazineBoxRifleUranium
+  - MagazinePistolIncendiary
+  - MagazinePistolUranium
+  - MagazinePistolSubMachineGunIncendiary
+  - MagazinePistolSubMachineGunUranium
+  - MagazineRifleIncendiary
+  - MagazineRifleUranium
+  - MagazineShotgunBeanbag
+  - MagazineShotgunIncendiary
+  - SpeedLoaderMagnumIncendiary
+  - SpeedLoaderMagnumUranium

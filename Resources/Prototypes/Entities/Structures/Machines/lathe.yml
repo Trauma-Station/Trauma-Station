@@ -259,7 +259,7 @@
     # </Trauma>
   - type: EmagLatheRecipes
     emagDynamicPacks:
-    - SecurityAmmo
+    - SecurityAmmoTrauma # Trauma
     - SecurityExplosives
     #- SecurityEquipment # Goobstation
     - SecurityWeapons
@@ -494,7 +494,7 @@
     - SecurityEquipment
     - SecurityBoards
     - SecurityExplosives
-    - SecurityAmmo
+    - SecurityAmmoTrauma # Trauma
     - SecurityWeapons
     # - SecurityDisablers # Trauma - disablers replaced with phasers
     # <Goob>
