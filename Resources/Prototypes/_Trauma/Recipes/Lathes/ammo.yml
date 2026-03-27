@@ -20,3 +20,12 @@
   materials:
     Steel: 190
     Plasteel: 100
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxPistolHoly
+  result: MagazineBoxPistolHoly
+  materials:
+    Plastic: 300
+    Silver: 600
+    Gunpowder: 100

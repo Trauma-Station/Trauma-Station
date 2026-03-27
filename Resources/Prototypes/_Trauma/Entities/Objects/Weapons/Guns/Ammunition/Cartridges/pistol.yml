@@ -7,4 +7,4 @@
   - type: Contraband
     allowedJobs: [ Chaplain ]
   - type: CartridgeAmmo
-    proto: BulletTurretHoly
+    proto: BulletPistolHoly
