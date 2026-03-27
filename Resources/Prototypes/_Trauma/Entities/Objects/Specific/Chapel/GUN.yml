@@ -53,7 +53,7 @@
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Pistols/kolibri.rsi # TODO: edit so it has mag visuals
     layers:
-    - state: icon 
+    - state: icon
   - type: BallisticAmmoProvider
     mayTransfer: true
     whitelist:
@@ -65,4 +65,3 @@
     size: Tiny
   - type: Contraband
     allowedJobs: [ Chaplain ]
-
