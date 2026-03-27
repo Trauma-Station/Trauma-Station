@@ -46,3 +46,12 @@
   - PatreonOwenCarpenter
   - PatreonGamingFungus420
   - PatreonGribley
+
+#sec
+
+- type: loadoutGroup
+  id: SecurityNeck
+  name: loadout-group-security-neck
+  minLimit: 0
+  loadouts:
+- ClothingNeckMantleVeteranSecurity  
