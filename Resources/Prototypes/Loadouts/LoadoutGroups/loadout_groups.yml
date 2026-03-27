@@ -1305,6 +1305,7 @@
   - SeniorOfficerJumpsuit
   - SeniorOfficerJumpskirt
   - TrooperUniform
+  - ClothingUniformJumpsuitVeteranSecurity # Trauma
 
 - type: loadoutGroup
   id: SecurityBackpack
@@ -1314,6 +1315,7 @@
   - SecuritySatchel
   - SecurityDuffel
   - SecurityMessenger # Frontier
+  - ClothingOuterArmorVeteranSecurity # Trauma
 
 - type: loadoutGroup
   id: SecurityBelt
