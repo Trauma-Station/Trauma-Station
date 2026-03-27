@@ -1,0 +1,11 @@
+- type: entity
+  parent: Bible
+  id: BibleFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponPistolFaith
+        - id: BaseMagazineKolibri

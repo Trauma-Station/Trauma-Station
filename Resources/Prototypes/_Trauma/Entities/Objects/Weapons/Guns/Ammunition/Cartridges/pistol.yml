@@ -1,0 +1,10 @@
+- type: entity
+  parent: [ CartridgePistol ]
+  id: CartridgePistolHoly
+  name: cartridge (.35 auto holy)
+  description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. This one appears to have been blessed.
+  components:
+  - type: Contraband
+    allowedJobs: [ Chaplain ]
+  - type: CartridgeAmmo
+    proto: BulletTurretHoly

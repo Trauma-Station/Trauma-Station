@@ -1022,7 +1022,7 @@
     head: ClothingHeadHatPlaguedoctor
     mask: ClothingMaskPlague
     id: VisitorPDA
-    belt: Bible
+    belt: BibleFilled # Trauma, they get access to Faith too.
     ears: ClothingHeadsetService
     outerClothing: ClothingOuterPlagueSuit
     pocket1: PlushieSharkGrey
@@ -1038,7 +1038,7 @@
     shoes: ClothingShoesColorBlack
     head: ClothingHeadHatHoodNunHood
     id: VisitorPDA
-    belt: Bible
+    belt: BibleFilled # Trauma, they get access to Faith too.
     ears: ClothingHeadsetService
     outerClothing: ClothingOuterNunRobe
     pocket1: PlushiePenguin

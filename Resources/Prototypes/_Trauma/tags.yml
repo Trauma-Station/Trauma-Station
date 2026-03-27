@@ -74,6 +74,9 @@
   id: Iradomini
 
 - type: Tag
+  id: MagazinePistolSmall
+
+- type: Tag
   id: MagazineTurret
 
 - type: Tag

@@ -1,0 +1,68 @@
+- type: entity
+  name: faith
+  parent: [BaseWeaponPistol]
+  id: WeaponPistolFaith
+  description: "'Cause ya gotta have Faith. A tiny pistol designed to fit in a bible, takes .22 Short ammo."
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Pistols/faith.rsi
+    layers:
+    - state: icon # TODO: edit so it has bolt open and mag sprites, no inhand is fine this thing is literally tiny sized
+  - type: Item
+    size: Tiny
+    shape:
+    - 0,0,0,0
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: BaseMagazineKolibri
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistolSmall
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgePistol
+  - type: Contraband
+    allowedJobs: [ Chaplain ]
+  - type: Gun
+    fireRate: 2
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+
+- type: entity
+  parent: BaseItem
+  id: BaseMagazineKolibri
+  name: "tiny magazine (.35 Auto)"
+  description: 4 round low-caliber magazine, often used by Chaplains.
+  suffix: Holy
+  components:
+  - type: Tag
+    tags:
+    - MagazinePistolSmall
+    - MagazinePistol
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Pistols/kolibri.rsi # TODO: edit so it has mag visuals
+    layers:
+    - state: icon 
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgePistol
+    proto: BulletPistolHoly
+    capacity: 4
+  - type: Item
+    size: Tiny
+  - type: Contraband
+    allowedJobs: [ Chaplain ]
+

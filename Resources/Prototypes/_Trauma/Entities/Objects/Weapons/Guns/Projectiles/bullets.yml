@@ -11,6 +11,20 @@
 
 - type: entity
   parent: BaseBullet
+  id: BulletPistolHoly
+  name: bullet (.35 auto Holy)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 4
+        Holy: 8
+  - type: HolyIgniteOnCollide
+    fireStacks: 0.5
+
+- type: entity
+  parent: BaseBullet
   id: BaseBulletKinetic
   abstract: true
   components:
