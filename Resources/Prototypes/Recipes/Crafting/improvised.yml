@@ -131,7 +131,7 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 1
-  useQuality:
+  useQuality: false
   # </Trauma>
 
 - type: construction

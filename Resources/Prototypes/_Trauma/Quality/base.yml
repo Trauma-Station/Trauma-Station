@@ -17,7 +17,6 @@
   price: 1.5
 
 - type: quality
-  parent: BaseQuality
   id: ShitCraft
   gun: 0.95
   armor: 0.95
@@ -35,7 +34,6 @@
   price: 1.25
 
 - type: quality
-  parent: BaseQuality
   id: Cardboard
   gun: 0.99
   armor: 0.99
@@ -53,6 +51,5 @@
   price: 1.25
 
 - type: quality
-  parent: BaseQuality
   id: ShitBullets
   projectile: 1.15 # Double damage at robust, make shit bullets do 1/2 real bullet damage
