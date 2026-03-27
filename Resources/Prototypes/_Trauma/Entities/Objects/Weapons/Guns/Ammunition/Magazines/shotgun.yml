@@ -9,13 +9,10 @@
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi
     layers:
-      - state: breaching
-        map: ["enum.GunVisualLayers.Base"]
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi
-    layers:
       - state: mag-1
         map: ["enum.GunVisualLayers.Mag"]
+      - state: breaching
+        map: ["enum.GunVisualLayers.Base"]
   - type: Item
     inhandVisuals:
       left:
