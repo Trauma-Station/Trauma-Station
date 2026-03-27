@@ -7,7 +7,7 @@
     neck: ClothingNeckMantleVeteranSecurity
 
 - type: loadout
-  id: VeteranOfficerArmor
+  id: ClothingOuterArmorVeteranSecurity
   effects:
   - !type:GroupLoadoutEffect
     proto: VeteranOfficer
@@ -15,7 +15,7 @@
     outerClothing: ClothingOuterArmorVeteranSecurity
 
 - type: loadout
-  id: VeteranOfficerBlackJumpsuit
+  id: ClothingUniformJumpsuitVeteranSecurity
   effects:
   - !type:GroupLoadoutEffect
     proto: VeteranOfficer

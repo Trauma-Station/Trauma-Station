@@ -111,6 +111,6 @@
   description: An airy version of the standard security jumpsuit, normally given on shifts with a lacking atmos department
   components:
   - type: Sprite
-    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/Security/security_black.rsi
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/security_black.rsi
   - type: Clothing
-    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/Security/security_black.rsi
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/security_black.rsi

@@ -1315,7 +1315,6 @@
   - SecuritySatchel
   - SecurityDuffel
   - SecurityMessenger # Frontier
-  - ClothingOuterArmorVeteranSecurity # Trauma
 
 - type: loadoutGroup
   id: SecurityBelt
@@ -1332,6 +1331,7 @@
   - ArmorVestSlim
   - SecurityOfficerWintercoat
   - WinterCoatSeniorSecArmored # Goobstation
+  - ClothingOuterArmorVeteranSecurity # Trauma
 
 - type: loadoutGroup
   id: SecurityShoes
