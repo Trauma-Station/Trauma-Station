@@ -11,6 +11,22 @@
   - StationAiIconDorf
   - StationAiIconHeartline
   - StationAiIconSmiley
+  - StationAiIconFirewall
+  - StationAiIconDatabase
+  - StationAiIconGlitchman
+  - StationAiIconHades
+  - StationAiIconMatrix
+  - StationAiIconMonochrome
+  - StationAiIconMurica
+  - StationAiIconNanotrasen
+  - StationAiIconPresident
+  - StationAiIconRedDot
+  - StationAiIconRed
+  - StationAiIconTooDeep
+  - StationAiIconTriumvirate
+  - StationAiIconNotMalf
+  - StationAiIconHelios
+  - StationAiIconHouse
 
 - type: stationAiCustomizationGroup
   id: StationAiHolograms
