@@ -12,14 +12,11 @@ public sealed class ItemSlotHeaterSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedTemperatureSystem _temp = default!;
-
-    private EntityQuery<TemperatureComponent> _temperatureQuery;
+    [Dependency] private readonly EntityQuery<TemperatureComponent> _temperatureQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _temperatureQuery = GetEntityQuery<TemperatureComponent>();
 
         SubscribeLocalEvent<ItemSlotHeaterComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<ItemSlotHeaterComponent, EntRemovedFromContainerMessage>(OnRemoved);
@@ -32,9 +29,9 @@ public sealed class ItemSlotHeaterSystem : EntitySystem
         var now = _timing.CurTime;
 
         var eqe = EntityQueryEnumerator<ActiveItemSlotHeaterComponent, ItemSlotHeaterComponent>();
-        while (eqe.MoveNext(out var uid, out _, out var heat))
+        while (eqe.MoveNext(out var uid, out var active, out var heat))
         {
-            if (now < heat.NextUpdate)
+            if (now < active.NextUpdate)
                 continue;
 
             if (_itemSlots.GetItemOrNull(uid, heat.Slot) is not {} item)
@@ -52,8 +49,8 @@ public sealed class ItemSlotHeaterSystem : EntitySystem
 
             _temp.ChangeHeat(item, heat.Temp);
 
-            heat.NextUpdate = now + heat.Update;
-            Dirty(uid, heat);
+            active.NextUpdate = now + heat.Update;
+            Dirty(uid, active);
         }
     }
 
@@ -94,4 +91,5 @@ public sealed class ItemSlotHeaterSystem : EntitySystem
         // Mispredicts
         args.PushMarkup(Loc.GetString("item-slot-heater-temp", ("temp", temp.CurrentTemperature.ToString("F1"))));
     }
+
 }
