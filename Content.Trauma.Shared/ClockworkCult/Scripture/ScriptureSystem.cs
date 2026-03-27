@@ -20,14 +20,13 @@ public sealed partial class ScriptureSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private readonly EntityQuery<ScriptureComponent> _scriptureQuery = default!;
 
     /// <summary>
     /// All entity prototypes with <see cref="ScriptureComponent"/>.
     /// </summary>
     [ViewVariables]
     public List<EntProtoId> AllScriptures = new();
-
-    private EntityQuery<ScriptureComponent> _scriptureQuery;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -36,14 +35,12 @@ public sealed partial class ScriptureSystem : EntitySystem
 
         InitializeBattery();
 
-        _scriptureQuery = GetEntityQuery<ScriptureComponent>();
-
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         SubscribeLocalEvent<ScriptureContainerComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<ScriptureContainerComponent, ComponentShutdown>(OnShutdown);
 
-        SubscribeLocalEvent<ScriptureContainerComponent, ScriptureReciteEvent>(OnRecite);
+        SubscribeLocalEvent<ScriptureContainerComponent, ScriptureReciteMessage>(OnRecite);
 
         LoadPrototypes();
     }
@@ -75,7 +72,7 @@ public sealed partial class ScriptureSystem : EntitySystem
         _container.ShutdownContainer(container);
     }
 
-    private void OnRecite(Entity<ScriptureContainerComponent> ent, ref ScriptureReciteEvent args)
+    private void OnRecite(Entity<ScriptureContainerComponent> ent, ref ScriptureReciteMessage args)
     {
         if (!_proto.TryIndex(args.Scripture, out var scripture)
             || !scripture.TryGetComponent<ScriptureComponent>(out var scriptureComponent))
@@ -168,9 +165,3 @@ public sealed partial class ScriptureSystem : EntitySystem
         return true;
     }
 }
-
-/// <summary>
-/// Raised on the user to check if the recite can succeed (do we have enough power to cast?).
-/// </summary>
-[ByRefEvent]
-public record struct ReciteAttemptEvent(int ScriptureCost, bool Cancelled = false);

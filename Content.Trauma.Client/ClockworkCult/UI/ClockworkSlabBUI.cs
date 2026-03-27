@@ -31,6 +31,6 @@ public sealed class ClockworkSlabBUI : BoundUserInterface
         if (scriptureProto is not { } scripture)
             return;
 
-        SendPredictedMessage(new ScriptureReciteEvent(scripture));
+        SendPredictedMessage(new ScriptureReciteMessage(scripture));
     }
 }

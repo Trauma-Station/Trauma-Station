@@ -9,15 +9,16 @@ namespace Content.Trauma.Shared.ClockworkCult.Scripture;
 /// Raised when the user presses the Recite button in the UI of the Clockwork Slab
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class ScriptureReciteEvent : BoundUserInterfaceMessage
+public sealed class ScriptureReciteMessage(EntProtoId scripture) : BoundUserInterfaceMessage
 {
     /// <summary>
     ///  The scripture we want to recite.
     /// </summary>
-    public EntProtoId Scripture;
-
-    public ScriptureReciteEvent(EntProtoId scripture)
-    {
-        Scripture = scripture;
-    }
+    public EntProtoId Scripture = scripture;
 }
+
+/// <summary>
+/// Raised on the user to check if the recite can succeed (do we have enough power to cast?).
+/// </summary>
+[ByRefEvent]
+public record struct ReciteAttemptEvent(int ScriptureCost, bool Cancelled = false);

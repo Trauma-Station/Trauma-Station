@@ -21,15 +21,12 @@ public sealed class ClockworkSlabSystem : EntitySystem
     [Dependency] private readonly ScriptureSystem _scripture = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-
-    private EntityQuery<ClockworkCultistComponent> _clockworkCultistQuery;
+    [Dependency] private readonly EntityQuery<ClockworkCultistComponent> _clockworkCultistQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
-
-        _clockworkCultistQuery = GetEntityQuery<ClockworkCultistComponent>();
 
         SubscribeLocalEvent<ClockworkSlabComponent, MapInitEvent>(OnMapInit);
 
