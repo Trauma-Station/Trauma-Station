@@ -453,7 +453,7 @@
 
 #Fire Helmet
 - type: entity
-  parent: [ ClothingHeadLightBase, BaseEngineeringContraband ] # Trauma
+  parent: ClothingHeadLightBase
   id: ClothingHeadHelmetFire
   name: fire helmet
   description: An atmos tech's best friend. Provides some heat resistance and looks cool.
