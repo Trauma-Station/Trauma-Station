@@ -55,7 +55,7 @@
   - type: Parry
     maxParries: 3
     maxReflects: 0
-    parryMinSkill: 40
+    parryMinSkill: 30
   - type: GhostRole
     name: justice-role-name
     description: justice-role-description
