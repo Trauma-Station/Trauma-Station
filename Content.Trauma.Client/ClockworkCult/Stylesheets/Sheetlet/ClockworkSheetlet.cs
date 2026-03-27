@@ -1,4 +1,6 @@
-﻿using Content.Client.Stylesheets;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
