@@ -1,30 +1,3 @@
-// SPDX-FileCopyrightText: 2019 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Marat Gadzhiev <15rinkashikachi15@gmail.com>
-// SPDX-FileCopyrightText: 2022 corentt <36075110+corentt@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Eoin Mcloughlin <helloworld@eoinrul.es>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 eoineoineoin <eoin.mcloughlin+gh@gmail.com>
-// SPDX-FileCopyrightText: 2023 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Andrew <blackledgecreates@gmail.com>
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 icekot8 <93311212+icekot8@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Cargo.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -59,18 +32,6 @@ namespace Content.Shared.Cargo
         public string ProductName { get; private set; }
 
         /// <summary>
-        ///     GoobStation - The cooldown in seconds before this product can be bought again.
-        /// </summary>
-        [DataField]
-        public int Cooldown { get; private set; }
-
-        /// <summary>
-        /// Trauma - If non-null, the station must be in one of these alert levels for this product to be bought
-        /// </summary>
-        [DataField]
-        public HashSet<string>? RequiredAlerts;
-
-        /// <summary>
         /// The number of items in the order. Not readonly, as it might change
         /// due to caps on the amount of orders that can be placed.
         /// </summary>
@@ -99,9 +60,8 @@ namespace Content.Shared.Cargo
         [DataField]
         public ProtoId<CargoAccountPrototype> Account;
 
-        // GoobStation - (cooldown parameter) cooldown on Cargo Orders (specifically gamba)
-        // Trauma - added requiredAlerts
-        public CargoOrderData(int orderId, string productId, string productName, int price, int amount, string requester, string reason, ProtoId<CargoAccountPrototype> account, int cooldown, HashSet<string>? requiredAlerts = null)
+        public CargoOrderData(int orderId, string productId, string productName, int price, int amount, string requester, string reason, ProtoId<CargoAccountPrototype> account,
+            int cooldown, HashSet<string>? requiredAlerts = null) // Trauma
         {
             OrderId = orderId;
             ProductId = productId;
@@ -111,10 +71,10 @@ namespace Content.Shared.Cargo
             Requester = requester;
             Reason = reason;
             Account = account;
-            // GoobStation - (cooldown assignment) cooldown on Cargo Orders (specifically gamba)
+            // // <Trauma>
             Cooldown = cooldown;
-            // Trauma
             RequiredAlerts = requiredAlerts;
+            // </Trauma>
         }
 
         public void SetApproverData(string? approver)

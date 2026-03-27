@@ -48,6 +48,6 @@
   - type: MeleeWeapon
     bluntStaminaDamageFactor: 0
   - type: StaminaDamageOnHit
-    damage: 85
+    damage: 60
   - type: StunBorgsOnHit
   - type: TogglePreventStaminaDamage

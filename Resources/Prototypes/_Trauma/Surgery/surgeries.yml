@@ -117,6 +117,26 @@
   - type: SurgeryOrganCondition
     organ: Tongue
 
+# Kidneys
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveKidneys
+  name: Remove Kidneys
+  components:
+  - type: SurgeryOrganCondition
+    organ: Kidneys
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertKidneys
+  name: Insert Kidneys
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Kidneys
+  - type: SurgeryOrganCondition
+    organ: Kidneys
+
 # Wings
 
 - type: entity

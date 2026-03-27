@@ -820,7 +820,7 @@ public sealed class GhostRoleSystem : EntitySystem
         args.TookRole = true;
     }
 
-    private bool CanTakeGhost(EntityUid uid, GhostRoleComponent? component = null)
+    public bool CanTakeGhost(EntityUid uid, GhostRoleComponent? component = null) // Trauma - made public
     {
         return Resolve(uid, ref component, false) &&
                !component.Taken &&

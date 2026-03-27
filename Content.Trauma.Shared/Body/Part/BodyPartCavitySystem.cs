@@ -75,6 +75,13 @@ public sealed class BodyPartCavitySystem : EntitySystem
         var ev = new RemovedFromCavityEvent(ent);
         RaiseLocalEvent(args.Entity, ref ev);
     }
+
+    /// <summary>
+    /// Returns true if a bodypart has a item in its cavity.
+    /// </summary>
+    public bool HasItem(Entity<BodyPartCavityComponent> ent)
+        => _container.TryGetContainer(ent.Owner, ent.Comp.ContainerId, out var container) &&
+            container.Count > 0;
 }
 
 /// <summary>

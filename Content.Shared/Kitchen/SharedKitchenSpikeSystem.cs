@@ -386,6 +386,9 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
             Act = () => TryUnhook(ent, user, victim.Value),
             Impact = LogImpact.Medium,
         });
+        // <Trauma> - add victim's verbs as well
+        RaiseLocalEvent(victim.Value, args);
+        // </Trauma>
     }
 
     private void OnDestruction(Entity<KitchenSpikeComponent> ent, ref DestructionEventArgs args)

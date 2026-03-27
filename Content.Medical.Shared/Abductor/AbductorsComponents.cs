@@ -113,14 +113,6 @@ public sealed partial class AbductorVestComponent : Component
     [DataField, AutoNetworkedField]
     public AbductorArmorModeType CurrentState = AbductorArmorModeType.Stealth;
 }
-[RegisterComponent, Access(typeof(SharedAbductorSystem))]
-public sealed partial class AbductConditionComponent : Component
-{
-    public int TotalAbducted => Abducted.Count;
-
-    [DataField]
-    public HashSet<NetEntity> Abducted = new();
-}
 
 public sealed partial class ExitConsoleEvent : InstantActionEvent;
 
