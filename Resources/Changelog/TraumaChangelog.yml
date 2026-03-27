@@ -5533,3 +5533,24 @@ Entries:
   id: 650
   time: '2026-03-26T20:38:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1608
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Add
+    message: added sprites for breaching because im malding
+  id: 651
+  time: '2026-03-27T09:38:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1612
+- author: CIA
+  changes:
+  - type: Add
+    message: Added a cocaine vial to lobbying bundle briefcase
+  id: 652
+  time: '2026-03-27T10:23:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1616
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: All revs now get 100 revolutionary skill.
+  id: 653
+  time: '2026-03-27T10:30:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1619
