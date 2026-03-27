@@ -171,3 +171,15 @@
     sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
+
+#veteran security
+- type: entity
+  parent: ClothingOuterArmorBase
+  id: ClothingOuterArmorVeteranSecurity
+  name: Veteran security's old armor
+  description: An old version of the standard NanoTrasen bulletproof vest, its design provides better protection against surprise attacks by clowns, it still meets NT's protection standards
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Armour/veteran_security.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Armour/veteran_security.rsi    
