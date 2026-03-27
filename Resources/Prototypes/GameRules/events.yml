@@ -40,6 +40,8 @@
     - id: SnakeSpawnHorde
     - id: SpiderClownSpawnHorde
     - id: SpiderSpawnHorde
+    - !type:NestedSelector
+      tableId: BasicAntagEventsTrauma
     # </Trauma>
     - id: ClosetSkeleton
     - id: KingRatMigration
@@ -638,7 +640,7 @@
   components:
   - type: StationEvent
     earliestStart: 30
-    weight: 50 # Trauma, was 8
+    weight: 8
     minimumPlayers: 15
     maxOccurrences: 1 # can only happen once per round
     startAnnouncement: station-event-communication-interception

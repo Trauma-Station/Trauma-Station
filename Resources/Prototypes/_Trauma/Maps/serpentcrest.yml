@@ -39,6 +39,7 @@
           Chemist: [ 3, 3 ]
           MedicalDoctor: [ 5, 6 ]
           Paramedic: [ 2, 2 ]
+          Psychologist: [ 1, 1 ]
           MedicalIntern: [ 4, 5 ]
           #Virologist: [ 1, 1 ]
           # Science
@@ -65,6 +66,7 @@
           Chaplain: [ 1, 1 ]
           Librarian: [ 1, 1 ]
           Lawyer: [ 2, 2 ]
+          Reporter: [ 1, 1 ]
       - type: StationBlobConfig
         stageBegin: 40
         stageCritical: 450

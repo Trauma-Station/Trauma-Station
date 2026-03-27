@@ -1,30 +1,21 @@
 - type: entity
-  parent: BaseGameRule
+  parent: BaseXenomorphsRule
   id: XenomorphsInfestation
   components:
   - type: StationEvent
-    weight: 1.5 # Goobstation - was 7.5
+    weight: 1.5
     duration: null
-    minimumPlayers: 50 # Goobstation - was 20
-    earliestStart: 30 # Goobstation
-    #reoccurrenceDelay: 50 # Goobstation - no longer needed
-    maxOccurrences: 1 # Goobstation
-  - type: VentSpawnRule
-  - type: AntagSpawner
-    prototype: MobXenomorphLarva
-  - type: XenomorphsRule
-  - type: AntagObjectives
-    objectives:
-    - XenomorphSurviveObjective
+    minimumPlayers: 50
+    earliestStart: 30
+    maxOccurrences: 1
   - type: AntagSelection
-    agentName: xenomorph-round-end-agent-name
     definitions:
     - spawnerPrototype: SpawnPointGhostXenomorph
       min: 1
       max: 1
       pickPlayer: false
+      mindRoles:
+      - MindRoleXenomorph
       briefing:
         text: xenomorph-role-greeting
         color: "#8c3986"
-      mindRoles:
-      - MindRoleXenomorph

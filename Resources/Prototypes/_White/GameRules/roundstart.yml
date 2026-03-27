@@ -1,19 +1,26 @@
 - type: entity
+  abstract: true
   parent: BaseGameRule
+  id: BaseXenomorphsRule
+  components:
+  - type: AntagObjectives
+    objectives:
+    - XenomorphSurviveObjective
+  - type: XenomorphsRule
+  - type: MaintsSpawnRule
+  - type: AntagSpawner
+    prototype: MobXenomorphLarva
+  - type: AntagSelection
+    agentName: xenomorph-round-end-agent-name
+
+- type: entity
+  parent: BaseXenomorphsRule
   id: XenomorphsInfestationRoundstart
   components:
   - type: GameRule
     minPlayers: 30
-  - type: AntagObjectives
-    objectives:
-    - XenomorphSurviveObjective
-  - type: XenomorphsRule # Goobstation - Required for Evolution Logic
-  - type: VentSpawnRule
-  - type: AntagSpawner
-    prototype: MobXenomorphLarva
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
-    agentName: xenomorph-round-end-agent-name
     definitions:
     - prefRoles: [ XenomorphsInfestationRoundstart ]
       spawnerPrototype: SpawnPointGhostXenomorph

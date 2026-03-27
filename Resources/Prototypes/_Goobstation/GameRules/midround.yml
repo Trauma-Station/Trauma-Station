@@ -246,7 +246,7 @@
         text: tunnel-clown-role-greeting
         color: Pink
         sound: /Audio/_Goobstation/Misc/clownalwayswinsshort.ogg
-  - type: AntagRandomSpawn # TODO replace with MaintsSpawnRuleComponent once mapped
+  - type: MaintsSpawnRule
   - type: AntagObjectives
     objectives:
     - TunnelClownProtectMaintenanceObjective

@@ -47,6 +47,7 @@
         - id: PhoneInstrumentSyndicate
         - id: ClothingHandsGlovesCombat
         - id: ClothingMaskNeckGaiter
+        - id: VialCocaine # Trauma
 
 - type: entity
   id: BriefcaseThiefBribingBundleFilled

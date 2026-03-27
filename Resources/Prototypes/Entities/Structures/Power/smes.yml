@@ -77,7 +77,7 @@
       netsync: false
       startingCharge: 0
       maxCharge: 16000000 # Goobstation - SMES buff
-      pricePerJoule: .00095
+      pricePerJoule: 0.00007 # Trauma
     - type: ExaminableBattery
     - type: NodeContainer
       examinable: true
