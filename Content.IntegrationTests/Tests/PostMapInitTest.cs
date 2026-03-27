@@ -430,6 +430,18 @@ namespace Content.IntegrationTests.Tests
                         .Where(x => x.SpawnType == SpawnPointType.Job && x.Job != null)
                         .Select(x => x.Job.Value);
 
+                    // <Trauma> - dont allow unused jobs
+                    var unused = new List<ProtoId<JobPrototype>>();
+                    foreach (var job in spawnPoints)
+                    {
+                        if (!jobs.Contains(job))
+                            unused.Add(job);
+                    }
+                    Assert.That(unused,
+                        Is.Empty,
+                        $"Found unused job spawnpoints for {string.Join(", ", unused)} on {mapProto}. Add them to the map prototype or remove them!");
+                    // </Trauma>
+
                     jobs.ExceptWith(spawnPoints);
 
                     spawnPoints = entManager.EntityQuery<ContainerSpawnPointComponent>()

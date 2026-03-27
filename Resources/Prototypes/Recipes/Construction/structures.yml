@@ -1655,7 +1655,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0 # This lets it train elcetronics
   useQuality: false
   # </Trauma>
 

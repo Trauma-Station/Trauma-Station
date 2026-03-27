@@ -259,3 +259,17 @@
           Quantity: 10
         - ReagentId: Milk
           Quantity: 20
+
+- type: entity
+  parent: BaseChemistryVialFilled
+  id: VialCocaine
+  name: cocaine vial
+  suffix: cocaine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Cocaine
+          Quantity: 30

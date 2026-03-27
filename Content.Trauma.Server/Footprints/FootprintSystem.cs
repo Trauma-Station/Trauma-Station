@@ -10,6 +10,7 @@ using Content.Shared.Fluids;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Standing;
 using Content.Trauma.Common.Footprints;
+using Content.Trauma.Server.Decals;
 using Content.Trauma.Shared.Footprints;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -22,6 +23,7 @@ namespace Content.Trauma.Server.Footprints;
 public sealed class FootprintSystem : EntitySystem
 {
     [Dependency] private readonly DecalSystem _decal = default!;
+    [Dependency] private readonly DecalDespawnSystem _despawn = default!;
     [Dependency] private readonly GravitySystem _gravity = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
@@ -39,8 +41,7 @@ public sealed class FootprintSystem : EntitySystem
 
     public const float MaxAlpha = 0.7f; // base of the exponential alpha curve
     public const int MaxStepsStuck = 5; // max footprints you can leave without walking over another puddle
-    public const int MaxDecals = 1; // don't add footprints if there are this many decals near you
-    public const float DecalRange = 1.5f; // ... in this range
+    public const int MaxDecals = 2; // don't add footprints if there are this many decals near you
 
     private float _minimumPuddleSize;
 
@@ -141,7 +142,7 @@ public sealed class FootprintSystem : EntitySystem
         if (ent.Comp.Steps <= 0)
             return;
 
-        if (_decal.GetDecalsInRange(grid, pos, DecalRange).Count > MaxDecals)
+        if (_decal.GetDecalsInRange(grid, pos).Count > MaxDecals)
             return; // too many nearby
 
         // minimum power of 1 so its never 100% opaque.
@@ -152,8 +153,10 @@ public sealed class FootprintSystem : EntitySystem
         var id = standing ? Footprint : BodySmear;
 
         var coords = new EntityCoordinates(grid, pos - new Vector2(0.5f, 0.5f));
-        if (!_decal.TryAddDecal(id, coords, out _, color, rot, zIndex: 1, cleanable: true))
+        if (!_decal.TryAddDecal(id, coords, out var decal, color, rot, zIndex: 1, cleanable: true))
             return; // failed to add it somehow...
+
+        _despawn.QueueDespawn(grid, decal);
 
         // consume the step, it got placed
         ent.Comp.Steps = step;
