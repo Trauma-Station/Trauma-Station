@@ -177,7 +177,7 @@
   parent: ClothingOuterArmorBase
   id: ClothingOuterArmorVeteranSecurity
   name: Veteran security's old armor
-  description: An old version of the standard NanoTrasen bulletproof vest, its design provides better protection against surprise attacks by clowns, it still meets NT's protection standards
+  description: An old version of the standard NanoTrasen security bodyarmour, it still meets NT's protection standards
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Armour/veteran_security.rsi
