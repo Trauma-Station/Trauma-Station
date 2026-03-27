@@ -147,7 +147,6 @@ public abstract class SharedSpellsSystem : EntitySystem
     [Dependency] private readonly SharedWizardTeleportSystem _teleport = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly TileFrictionController _tileFriction = default!;
