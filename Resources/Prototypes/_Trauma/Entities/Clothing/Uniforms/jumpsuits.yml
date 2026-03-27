@@ -102,3 +102,15 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/waiter.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/waiter.rsi
+
+#veteran sec
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitVeteranSecurity
+  name: Airy Security Jumpsuit
+  description: An airy version of the standard security jumpsuit, normally given on shifts with a lacking atmos department
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/Security/security_black.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/Security/security_black.rsi
