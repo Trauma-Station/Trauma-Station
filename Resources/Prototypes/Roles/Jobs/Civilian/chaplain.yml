@@ -35,7 +35,7 @@
     - Nullrod
     - ArmamentsBeacon # Goobstation
     - WeaponPistolFaith # Trauma
-    - BaseMagazineTurretSmall # Trauma
+    - BaseMagazineKolibri # Trauma
 
 - type: chameleonOutfit
   id: ChaplainChameleonOutfit
