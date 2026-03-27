@@ -211,7 +211,7 @@
       maxRepairBonus: 10
       repairable: true
       repairMaterials:
-        WhetstoneBrick: 15, 25
+        Whetstone: 15, 25
       repairDoAfter: 3
       onBreakBehavior: !type:PlaySoundBehavior
         sound:

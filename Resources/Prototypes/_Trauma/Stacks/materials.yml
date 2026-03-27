@@ -23,5 +23,5 @@
   parent: BaseVerySmallStack
   id: Whetstone
   name: stack-whetstone
-  icon: { sprite: /Textures/_Trauma/Objects/tools/weaponreinforcement.rsi.rsi, state: icon }
+  icon: { sprite: /Textures/_Trauma/Objects/tools/weaponreinforcement.rsi, state: icon }
   spawn: Whetstone1
