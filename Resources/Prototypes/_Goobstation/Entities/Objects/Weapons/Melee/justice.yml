@@ -50,15 +50,6 @@
         Slash: 2
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: Parry
-    maxParries: 3
-    maxReflects: 0
-    parryMinSkill: 50
-    soundOnParry:
-      path: /Audio/_Goobstation/Heretic/parry.ogg
-      params:
-        variation: 0.2
-        volume: -11
     angle: 60
     animation: WeaponArcThrust
   - type: GhostRole
