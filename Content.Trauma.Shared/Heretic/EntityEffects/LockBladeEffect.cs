@@ -6,6 +6,7 @@ using Content.Medical.Shared.Wounds;
 using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.Throwing;
 using Content.Trauma.Shared.BloodSplatter;
@@ -25,6 +26,15 @@ public sealed partial class LockBladeEffect : EntityEffectBase<LockBladeEffect>
 
     [DataField]
     public SoundSpecifier OpeningSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/goresplat.ogg");
+
+    [DataField]
+    public EntProtoId Wound = "WeepingAvulsion";
+
+    [DataField]
+    public EntProtoId BloodChunk = "BloodChunkEffect";
+
+    [DataField]
+    public ProtoId<DamageGroupPrototype> DamageGroup = "Brute";
 }
 
 public sealed class LockBladeEffectSystem : EntityEffectSystem<BodyComponent, LockBladeEffect>
@@ -41,13 +51,16 @@ public sealed class LockBladeEffectSystem : EntityEffectSystem<BodyComponent, Lo
 
     protected override void Effect(Entity<BodyComponent> target, ref EntityEffectEvent<LockBladeEffect> args)
     {
+        if (_net.IsClient)
+            return;
+
         var targeting = CompOrNull<TargetingComponent>(args.User);
 
         var (type, symmetry) = _body.ConvertTargetBodyPart(targeting?.Target ?? TargetBodyPart.Chest);
         if (_part.GetBodyParts(target, type, symmetry: symmetry).FirstOrNull() is not { } targetPart)
             return;
 
-        if (!_wound.TryInduceWound(targetPart, "WeepingAvulsion", 25f, out _, damageGroup: "Brute"))
+        if (!_wound.TryInduceWound(targetPart, args.Effect.Wound, 25f, out _, damageGroup: args.Effect.DamageGroup))
             return;
 
         var effectAmount = 1f;
@@ -59,13 +72,13 @@ public sealed class LockBladeEffectSystem : EntityEffectSystem<BodyComponent, Lo
              !EnsureComp<IncisionOpenComponent>(targetPart, out _) |
              !EnsureComp<BonesSawedComponent>(targetPart, out _) | !EnsureComp<BonesOpenComponent>(targetPart, out _)))
         {
-            _audio.PlayPredicted(args.Effect.OpeningSound, target, args.User, AudioParams.Default.WithVolume(10f));
+            _audio.PlayPvs(args.Effect.OpeningSound, target);
             effectAmount = 2;
         }
         else
-            _audio.PlayPredicted(args.Effect.WoundSound, target, args.User);
+            _audio.PlayPvs(args.Effect.WoundSound, target);
 
-        if (_net.IsClient || !TryComp(target, out BloodstreamComponent? bloodStream))
+        if (!TryComp(target, out BloodstreamComponent? bloodStream))
             return;
 
         effectAmount *= _random.Next(3, 6);
@@ -76,7 +89,7 @@ public sealed class LockBladeEffectSystem : EntityEffectSystem<BodyComponent, Lo
         for (var i = 0; i < effectAmount; i++)
         {
             var dir = _random.NextAngle().ToVec();
-            var chunk = Spawn("BloodChunkEffect", coords);
+            var chunk = Spawn(args.Effect.BloodChunk, coords);
             var comp = EnsureComp<BloodSplatterOnLandComponent>(chunk);
             comp.Color = color;
             Dirty(chunk, comp);

@@ -21,7 +21,7 @@
   - !type:WhitelistCondition
     whitelist:
       tags:
-      - CatWalk
+      - Catwalk
   effects:
   - !type:Delete
   - !type:EffectsRitualEffect
@@ -29,11 +29,11 @@
     effects:
     - !type:ResetRustGraspDelayEffect
       multiplier: 0.15
-  - !type:SetBlackboardValuesRitualEffect
-    values:
-      InvokeGrasp: false
-      ApplyGraspDefaultEffects: false
-      ApplyGraspMark: false
+    - !type:SetBlackboardValuesRitualEffect
+      values:
+        InvokeGrasp: false
+        ApplyGraspDefaultEffects: false
+        ApplyGraspMark: false
 
 - type: entityEffect
   id: HereticRustGraspWallEffect
@@ -44,17 +44,23 @@
       - Wall
   - !type:TryMakeRustWallCondition
   effects:
-  - !type:ResetRustGraspDelayEffect
-  - !type:SetBlackboardValuesRitualEffect
-    values:
-      InvokeGrasp: false
-      ApplyGraspDefaultEffects: false
-      ApplyGraspMark: false
+  - !type:EffectsRitualEffect
+    applyOn: Grasp
+    effects:
+    - !type:ResetRustGraspDelayEffect
+    - !type:SetBlackboardValuesRitualEffect
+      values:
+        InvokeGrasp: false
+        ApplyGraspDefaultEffects: false
+        ApplyGraspMark: false
 
 - type: entityEffect
   id: HereticFleshGraspEffect
   conditions:
   - !type:WhitelistCondition
+    whitelist:
+      components:
+      - MobState
     blacklist:
       components:
       - Ghoul
@@ -73,12 +79,15 @@
 - type: entityEffect
   id: HereticLockGraspUnlockEffect
   effects:
-  - !type:PopupMessage
-    messages:
-    - heretic-lock-unlocked
   - !type:PlaySoundEffect
     sound:
       path: /Audio/_Goobstation/Heretic/hereticknock.ogg
+  - !type:EffectsRitualEffect
+    applyOn: Performer
+    effects:
+    - !type:PopupMessage
+      messages:
+      - heretic-lock-unlocked
   - !type:SetBlackboardValuesRitualEffect
     conditions:
     - !type:HereticMinStageCondition
@@ -90,6 +99,11 @@
 
 - type: entityEffect
   id: HereticLockGraspMechEffect
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - Mech
   effects:
   - !type:EjectMechPilot
     paralyzeDuration: 5
@@ -98,33 +112,35 @@
 
 - type: entityEffect
   id: HereticLockGraspDoorEffect
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - Door
+    blacklist:
+      components:
+      - Mech
   effects:
   - !type:SetBoltsDown
   - !type:OpenDoor
   - !type:NestedRitualEffect
-    conditions:
-    - !type:WhitelistCondition
-      blacklist:
-        components:
-        - Mech
     proto: HereticLockGraspUnlockEffect
 
 - type: entityEffect
   id: HereticLockGraspAccessReaderEffect
   conditions:
   - !type:WhitelistCondition
+    whitelist:
+      components:
+      - AccessReader
     blacklist:
       components:
       - MobState
+      - Door
+      - Mech
   effects:
   - !type:ClearAccesses
   - !type:NestedRitualEffect
-    conditions:
-    - !type:WhitelistCondition
-      blacklist:
-        components:
-        - Mech
-        - Door
     proto: HereticLockGraspUnlockEffect
 
 - type: entityEffect
@@ -172,6 +188,7 @@
 - type: entityEffect
   id: HereticMarkCosmos
   effects:
+  - !type:StarMark
   - !type:TriggerCosmicMark
   - !type:ModifyParalysis
     time: 2

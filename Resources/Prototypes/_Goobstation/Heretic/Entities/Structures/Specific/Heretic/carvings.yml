@@ -55,6 +55,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/carvings.rsi
+    state: tentacle_rune
   - type: Sprite
     state: tentacle_rune
   - type: WizardTrap
@@ -75,6 +78,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/carvings.rsi
+    state: madness_rune
   - type: Sprite
     state: madness_rune
   - type: WizardTrap
@@ -92,6 +98,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/carvings.rsi
+    state: alert_rune
   - type: Sprite
     color: '#FFFFFF0a'
     state: alert_rune

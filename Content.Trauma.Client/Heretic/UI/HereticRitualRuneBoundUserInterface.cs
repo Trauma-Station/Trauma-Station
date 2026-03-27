@@ -31,7 +31,7 @@ public sealed class HereticRitualRuneBoundUserInterface(EntityUid owner, Enum ui
 
         _menu = this.CreateWindow<SimpleRadialMenu>();
         _menu.Track(Owner);
-        var buttonModels = ConvertToButtons(heretic.Rituals);
+        var buttonModels = ConvertToButtons(heretic.RitualContainer.ContainedEntities);
         _menu.SetButtons(buttonModels);
 
         _menu.Open();

@@ -18,6 +18,7 @@ using Content.Shared.Tag;
 using Content.Shared.Timing;
 using Content.Shared.Trigger;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
@@ -70,7 +71,11 @@ public abstract class SharedMansusGraspSystem : EntitySystem
     private readonly HashSet<Entity<MobStateComponent>> _lookupMobs = new();
 
     public static readonly EntProtoId GraspAffectedStatus = "MansusGraspAffectedStatusEffect";
-    public static readonly EntProtoId MansusGrasp = "TouchSpellMansus";
+
+    public static readonly EntityWhitelist GraspWhitelist = new()
+    {
+        Components = ["MansusGrasp"],
+    };
 
     public static readonly ProtoId<TagPrototype> HereticBladeBlade = "HereticBladeBlade";
     private static readonly ProtoId<TagPrototype> BladeBladeRitualTag = "RitualBladeBlade";
@@ -92,6 +97,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
         SubscribeLocalEvent<RustGraspComponent, AfterInteractEvent>(OnRustInteract,
             before: new[] { typeof(TouchSpellSystem) });
+        SubscribeLocalEvent<RustGraspComponent, TouchSpellAttemptEvent>(OnRustAttempt);
 
         SubscribeLocalEvent<MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
         SubscribeLocalEvent<MansusGraspBlockTriggerComponent, ActionAttemptEvent>(OnActionAttempt);
@@ -158,7 +164,9 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
         TryApplyGraspEffectAndMark(user, (mind, heretic), target, ent, out var invokeGrasp, out var triggerGrasp);
 
-        args.Invoke = invokeGrasp;
+        args.Invoke = true;
+        if (!invokeGrasp)
+            args.CooldownOverride = TimeSpan.Zero;
 
         if (!triggerGrasp || !TryComp(target, out StatusEffectsComponent? status))
             return;
@@ -370,7 +378,6 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         _ritual.TryGetValue(ent, InvokeGrasp, out invokeGrasp);
         _ritual.TryGetValue(ent, ApplyGraspMark, out applyMark);
         _ritual.TryGetValue(ent, ApplyGraspDefaultEffects, out triggerGrasp);
-
         raiser.Blackboard.Clear();
     }
 
@@ -383,6 +390,11 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         grasp.Comp.Blackboard[ApplyGraspMark] = true;
         grasp.Comp.Blackboard[SharedHereticRitualSystem.Performer] = performer;
         grasp.Comp.Blackboard[SharedHereticRitualSystem.Mind] = mind;
+    }
+
+    private void OnRustAttempt(Entity<RustGraspComponent> ent, ref TouchSpellAttemptEvent args)
+    {
+        args.Cancelled = _delay.IsDelayed(ent.Owner, ent.Comp.Delay);
     }
 
     private void OnRustInteract(EntityUid uid, RustGraspComponent comp, AfterInteractEvent args)

@@ -7,6 +7,7 @@ using Content.Shared.Store;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Audio;
+using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -31,8 +32,8 @@ public sealed partial class HereticComponent : Component
         "PhylacteryOfDamnation",
     };
 
-    [DataField, AutoNetworkedField]
-    public List<EntityUid> Rituals = new();
+    [ViewVariables]
+    public Container RitualContainer = default!;
 
     [DataField, AutoNetworkedField]
     public EntityUid? ChosenRitual;

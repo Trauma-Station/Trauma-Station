@@ -22,6 +22,9 @@
   - type: InstantAction
     event: !type:TouchSpellEvent
       touchSpell: TouchSpellFleshSurgery
+      touchSpellWhitelist:
+        components:
+        - FleshSurgery
   - type: HereticAction
   - type: Tag
     tags:

@@ -7,6 +7,7 @@ using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Systems;
@@ -31,9 +32,15 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<TagComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<TagComponent, AfterInteractEvent>(OnAfterInteract, before: [typeof(TouchSpellSystem)]);
         SubscribeLocalEvent<DrawRitualRuneDoAfterEvent>(OnRitualRuneDoAfter);
         SubscribeLocalEvent<StatusEffectContainerComponent, ParentPacketReceiveAttemptEvent>(OnPacket);
+        SubscribeLocalEvent<MansusGraspUpgradeComponent, AfterTouchSpellAbilityUsedEvent>(OnAfterTouchSpell);
+    }
+
+    private void OnAfterTouchSpell(Entity<MansusGraspUpgradeComponent> ent, ref AfterTouchSpellAbilityUsedEvent args)
+    {
+        EntityManager.AddComponents(args.TouchSpell, ent.Comp.AddedComponents);
     }
 
     private void OnPacket(Entity<StatusEffectContainerComponent> ent, ref ParentPacketReceiveAttemptEvent args)
@@ -60,7 +67,7 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
             runeProto = scriber.RuneDrawingEntity ?? runeProto;
             time = scriber.Time ?? time;
         }
-        else if (TouchSpell.FindTouchSpell(args.User, MansusGrasp) == null || // No grasp
+        else if (TouchSpell.FindTouchSpell(args.User, GraspWhitelist) == null || // No grasp
                  !_tag.HasAnyTag(ent.Comp, PenTags)) // not a pen
             return;
 

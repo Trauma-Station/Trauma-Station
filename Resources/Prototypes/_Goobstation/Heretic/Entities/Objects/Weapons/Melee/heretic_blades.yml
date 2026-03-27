@@ -158,6 +158,7 @@
       10: 0.65
     effects:
     - !type:LockBladeEffect
+      scaleProbability: true
     path: Lock
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_lock.rsi

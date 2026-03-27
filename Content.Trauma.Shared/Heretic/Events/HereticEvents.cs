@@ -86,6 +86,9 @@ public record struct BeforeTouchSpellAbilityUsedEvent(
     EntProtoId? TouchSpell = null,
     bool Cancelled = false);
 
+[ByRefEvent]
+public readonly record struct AfterTouchSpellAbilityUsedEvent(EntityUid TouchSpell);
+
 /// <summary>
 /// Raised when all hands are occupied.
 /// Used for blade heretic quick blade empowering.
@@ -108,6 +111,9 @@ public abstract partial class TouchSpellSpecialEvent : EntityEventArgs
 [Serializable, NetSerializable]
 public sealed partial class MansusGraspSpecialEvent : TouchSpellSpecialEvent;
 
+[ByRefEvent]
+public record struct TouchSpellAttemptEvent(EntityUid User, EntityUid Target, bool Cancelled = false);
+
 [ImplicitDataDefinitionForInheritors]
 public abstract partial class HereticBladeBonusEvent : EntityEventArgs
 {
@@ -116,14 +122,13 @@ public abstract partial class HereticBladeBonusEvent : EntityEventArgs
     public int PathStage;
 }
 
-[Serializable, NetSerializable, Virtual]
+[Virtual]
 public partial class HereticBladeBonusDamageEvent : HereticBladeBonusEvent
 {
     [DataField(required: true)]
     public DamageSpecifier BonusDamage = default!;
 }
 
-[Serializable, NetSerializable]
 public sealed partial class HereticBladeBonusWoundingEvent : HereticBladeBonusEvent
 {
     /// <summary>
@@ -133,8 +138,6 @@ public sealed partial class HereticBladeBonusWoundingEvent : HereticBladeBonusEv
     public Dictionary<int, float> WoundingBonus = default!;
 }
 
-[Serializable, NetSerializable]
 public sealed partial class CosmosBladeBonusEvent : HereticBladeBonusDamageEvent;
 
-[Serializable, NetSerializable]
 public sealed partial class BladeBladeBonusEvent : HereticBladeBonusDamageEvent;

@@ -152,7 +152,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
             return;
 
-        if (heretic.Rituals.Count == 0)
+        if (heretic.RitualContainer.Count == 0)
         {
             _popup.PopupClient(Loc.GetString("heretic-ritual-norituals"), args.User, args.User);
             return;
@@ -170,7 +170,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
 
         var ritual = GetEntity(args.Ritual);
 
-        if (!heretic.Rituals.Contains(ritual))
+        if (!heretic.RitualContainer.Contains(ritual))
             return;
 
         heretic.ChosenRitual = ritual;

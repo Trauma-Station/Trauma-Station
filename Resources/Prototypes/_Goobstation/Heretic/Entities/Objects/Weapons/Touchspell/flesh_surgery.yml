@@ -52,6 +52,11 @@
     targetWhitelist:
       components:
       - Ghoul
+  - type: MeleeWeapon
+    canHeavyAttack: false
+    damage:
+      types:
+        Heat: 0
   - type: FleshSurgery
     delay: 0.8 # Hand picked to not trigger health analyzer UI
   - type: SurgeryIgnoreClothing

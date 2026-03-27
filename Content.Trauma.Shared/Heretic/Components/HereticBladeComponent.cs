@@ -16,13 +16,13 @@ public sealed partial class HereticBladeComponent : Component
     [DataField]
     public EntityEffect[]? Effects;
 
-    [DataField]
+    [DataField, NonSerialized]
     public HereticBladeBonusEvent? BonusEvent;
 
     /// <summary>
     /// Path stage -> effect probability
     /// </summary>
-    [DataField(required: true)]
+    [DataField]
     public Dictionary<int, float> Probabilities = new()
     {
         { 0, 1f },

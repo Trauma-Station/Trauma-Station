@@ -24,8 +24,7 @@ public sealed class HereticRitualEffectSystem : EntitySystem
 
     public void ApplyEffect(EntityUid target, EntityEffect effect, Entity<HereticRitualRaiserComponent> ritual, EntityUid? user)
     {
-        var ent = effect is IHereticRitualEntry ? ritual.Owner : target;
-        effect.RaiseEvent(ent, ritual.Comp.Raiser, 1f, user);
+        effect.RaiseEvent(target, ritual.Comp.Raiser, 1f, user);
     }
 
     public bool TryApplyEffect(EntityUid target,

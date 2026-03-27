@@ -46,7 +46,9 @@ public sealed class TouchSpellSystem : EntitySystem
         var spell = Comp<TouchSpellComponent>(spawned.Value);
         spell.Action = args.Action;
         Dirty(spawned.Value, spell);
-        args.Handled = true;
+
+        var ev2 = new AfterTouchSpellAbilityUsedEvent(spawned.Value);
+        RaiseLocalEvent(args.Action, ref ev2);
     }
 
     private void OnMelee(Entity<TouchSpellComponent> ent, ref MeleeHitEvent args)
@@ -79,8 +81,15 @@ public sealed class TouchSpellSystem : EntitySystem
 
     public bool CanUseTouchSpell(Entity<TouchSpellComponent> ent, EntityUid user, EntityUid target)
     {
-        return (ent.Comp.CanUseOnSelf || user != target) &&
-               _whitelist.CheckBoth(target, ent.Comp.TargetBlacklist, ent.Comp.TargetWhitelist);
+        if (!ent.Comp.CanUseOnSelf && user == target)
+            return false;
+
+        if (!_whitelist.CheckBoth(target, ent.Comp.TargetBlacklist, ent.Comp.TargetWhitelist))
+            return false;
+
+        var ev = new TouchSpellAttemptEvent(user, target);
+        RaiseLocalEvent(ent, ref ev);
+        return !ev.Cancelled;
     }
 
     public void UseTouchSpellMultiTarget(Entity<TouchSpellComponent> ent,
@@ -158,17 +167,15 @@ public sealed class TouchSpellSystem : EntitySystem
         RaiseLocalEvent(user, ref ev);
     }
 
-    public EntityUid? FindTouchSpell(EntityUid user, EntProtoId proto)
+    public EntityUid? FindTouchSpell(EntityUid user, EntityWhitelist whitelist)
     {
         if (!TryComp(user, out HandsComponent? hands) || hands.Hands.Count < 1)
             return null;
 
         foreach (var held in _hands.EnumerateHeld((user, hands)))
         {
-            if (Prototype(held)?.ID is not { } id || id != proto)
-                continue;
-
-            return held;
+            if (_whitelist.IsWhitelistPass(whitelist, held))
+                return held;
         }
 
         return null;
@@ -176,7 +183,7 @@ public sealed class TouchSpellSystem : EntitySystem
 
     private EntityUid? GetTouchSpell(EntityUid ent, TouchSpellEvent args, EntProtoId? touchSpellOverride)
     {
-        if (FindTouchSpell(ent, touchSpellOverride ?? args.TouchSpell) is { } spell)
+        if (FindTouchSpell(ent, args.TouchSpellWhitelist) is { } spell)
         {
             PredictedQueueDel(spell);
             return null;
@@ -194,7 +201,7 @@ public sealed class TouchSpellSystem : EntitySystem
             return null;
         }
 
-        var touch = PredictedSpawnAtPosition(args.TouchSpell, Transform(ent).Coordinates);
+        var touch = PredictedSpawnAtPosition(touchSpellOverride ?? args.TouchSpell, Transform(ent).Coordinates);
 
         if (_hands.TryPickup(ent, touch, emptyHand, animate: false))
             return touch;

@@ -29,6 +29,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Prototypes;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -138,10 +139,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
 
     private void OnBeforeTouchSpell(Entity<MindContainerComponent> ent, ref BeforeTouchSpellAbilityUsedEvent args)
     {
-        if (!TryUseAbility(args.Args))
+        if (!TryUseAbility(args.Args, false))
             return;
 
-        if (args.Args.TouchSpell != SharedMansusGraspSystem.MansusGrasp)
+        if (!_proto.Index(args.Args.TouchSpell).HasComponent<MansusGraspComponent>())
             return;
 
         if (!Heretic.TryGetHereticComponent(ent.AsNullable(), out var heretic, out var mind))

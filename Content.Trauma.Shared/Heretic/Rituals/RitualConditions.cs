@@ -149,7 +149,7 @@ public sealed partial class HereticMinStageCondition : EntityConditionBase<Heret
 public sealed partial class BackstabCondition : EntityConditionBase<BackstabCondition>, IHereticRitualEntry
 {
     [DataField]
-    public Angle Tolerance = 45d;
+    public Angle Tolerance = Angle.FromDegrees(45d);
 
     [DataField]
     public bool ShowPopup = true;

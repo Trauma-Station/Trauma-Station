@@ -6,6 +6,7 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Mobs;
+using Content.Trauma.Server.Heretic.Components.PathSpecific;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Server.GameObjects;
@@ -116,7 +117,7 @@ public sealed partial class HereticAbilitySystem
         if (!TryUseAbility(args))
             return;
 
-        EnsureComp<Components.PathSpecific.HereticFlamesComponent>(args.Performer);
+        EnsureComp<HereticFlamesComponent>(args.Performer);
     }
 
     private void OnCascade(EventHereticCascade args)

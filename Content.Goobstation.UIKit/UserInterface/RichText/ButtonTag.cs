@@ -55,7 +55,7 @@ public sealed class ButtonTag : IMarkupTagHandler
         button.OnPressed += _ =>
         {
             var ev = new ButtonTagPressedEvent(id, ent, coords);
-            _entMan.EventBus.RaiseEvent(EventSource.Local, ref ev);
+            _entMan.EntityNetManager.SendSystemNetworkMessage(ev);
             button.Disabled = true;
         };
         button.HorizontalAlignment = Control.HAlignment.Left;

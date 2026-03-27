@@ -5,6 +5,7 @@ using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Rituals;
 using JetBrains.Annotations;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
@@ -14,6 +15,7 @@ namespace Content.Trauma.Client.Heretic.UI;
 public sealed class HereticShapeshiftBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     private SimpleRadialMenu? _menu;
 
@@ -21,11 +23,14 @@ public sealed class HereticShapeshiftBoundUserInterface(EntityUid owner, Enum ui
     {
         base.Open();
 
+        if (_player.LocalEntity is not { } player)
+            return;
+
         if (!EntMan.TryGetComponent(Owner, out ShapeshiftActionComponent? shapeshift))
             return;
 
         _menu = this.CreateWindow<SimpleRadialMenu>();
-        _menu.Track(Owner);
+        _menu.Track(player);
         var buttonModels = ConvertToButtons(shapeshift.Polymorphs);
         _menu.SetButtons(buttonModels);
 

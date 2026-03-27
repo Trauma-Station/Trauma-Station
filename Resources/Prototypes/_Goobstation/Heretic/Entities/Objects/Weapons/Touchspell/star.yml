@@ -24,3 +24,8 @@
     targetWhitelist:
       components:
       - MobState
+  - type: MeleeWeapon
+    canHeavyAttack: false
+    damage:
+      types:
+        Heat: 0

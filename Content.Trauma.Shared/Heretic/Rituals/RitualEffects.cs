@@ -240,8 +240,9 @@ public sealed partial class ResetRustGraspDelayEffect : EntityEffectBase<ResetRu
     public float Multiplier = 1f;
 }
 
-public sealed partial class SetBlackboardValuesRitualEffect : EntityEffectBase<SetBlackboardValuesRitualEffect>
+public sealed partial class SetBlackboardValuesRitualEffect : EntityEffectBase<SetBlackboardValuesRitualEffect>,
+    IHereticRitualEntry
 {
     [DataField(required: true)]
-    public Dictionary<string, object> Values;
+    public Dictionary<string, bool> Values;
 }

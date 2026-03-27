@@ -35,7 +35,7 @@ public sealed class HereticFlamesSystem : EntitySystem
         var eqe = EntityQueryEnumerator<HereticFlamesComponent>();
         while (eqe.MoveNext(out var uid, out var hfc))
         {
-            if (hfc.LifetimeTimer > now)
+            if (hfc.LifetimeTimer < now)
             {
                 RemCompDeferred(uid, hfc);
                 continue;

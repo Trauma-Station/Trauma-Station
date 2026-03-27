@@ -36,11 +36,10 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Systems;
-using Robust.Server.GameStates;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -50,8 +49,6 @@ namespace Content.Trauma.Server.Heretic.Systems;
 
 public sealed class HereticSystem : SharedHereticSystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly StoreSystem _store = default!;
@@ -63,7 +60,6 @@ public sealed class HereticSystem : SharedHereticSystem
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly PvsOverrideSystem _override = default!;
     [Dependency] private readonly HereticRuleSystem _rule = default!;
 
     [Dependency] private readonly IRobustRandom _rand = default!;
@@ -104,24 +100,6 @@ public sealed class HereticSystem : SharedHereticSystem
 
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
-
-        _player.PlayerStatusChanged += OnStatusChanged;
-    }
-
-    private void OnStatusChanged(object? sender, SessionStatusEventArgs e)
-    {
-        if (e.NewStatus == SessionStatus.Disconnected)
-            return;
-
-        var session = e.Session;
-
-        if (!_mind.TryGetMind(session.UserId, out var mind, out _) || !TryComp(mind, out HereticComponent? heretic))
-            return;
-
-        foreach (var rit in heretic.Rituals)
-        {
-            _override.AddSessionOverride(rit, session);
-        }
     }
 
     private void OnStateChanged(MobStateChangedEvent args)
@@ -246,7 +224,7 @@ public sealed class HereticSystem : SharedHereticSystem
     }
 
     protected override void SpawnRituals(HereticComponent heretic,
-        List<EntProtoId<Shared.Heretic.Rituals.HereticRitualComponent>> rituals,
+        List<EntProtoId<HereticRitualComponent>> rituals,
         ICommonSession session)
     {
         base.SpawnRituals(heretic, rituals, session);
@@ -254,8 +232,7 @@ public sealed class HereticSystem : SharedHereticSystem
         foreach (var ritual in rituals)
         {
             var ritUid = Spawn(ritual);
-            _override.AddSessionOverride(ritUid, session);
-            heretic.Rituals.Add(ritUid);
+            Container.Insert(ritUid, heretic.RitualContainer);
         }
     }
 
@@ -416,7 +393,7 @@ public sealed class HereticSystem : SharedHereticSystem
                 _actionContainer.RemoveAction(action);
         }
 
-        foreach (var ritual in ent.Comp.Rituals)
+        foreach (var ritual in ent.Comp.RitualContainer.ContainedEntities)
         {
             if (!TerminatingOrDeleted(ritual))
                 QueueDel(ritual);

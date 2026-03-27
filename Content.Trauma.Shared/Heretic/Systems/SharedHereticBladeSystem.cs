@@ -103,7 +103,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
     {
         var stage = args.PathStage;
         var defaultPair = new KeyValuePair<int, float>(0, 1f);
-        var woundingMultiplier = args.WoundingBonus.LastOrDefault(x => x.Key < stage, defaultPair).Value;
+        var woundingMultiplier = args.WoundingBonus.LastOrDefault(x => x.Key <= stage, defaultPair).Value;
         if (woundingMultiplier <= 1f)
             return;
         foreach (var dmgType in args.Args.BaseDamage.DamageDict.Keys)
@@ -251,7 +251,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
             return;
 
         var defaultPair = new KeyValuePair<int, float>(0, 1f);
-        var prob = blade.Comp.Probabilities.LastOrDefault(x => x.Key < stage, defaultPair).Value;
+        var prob = blade.Comp.Probabilities.LastOrDefault(x => x.Key <= stage, defaultPair).Value;
         if (prob <= 0f)
             return;
 
@@ -260,8 +260,7 @@ public abstract class SharedHereticBladeSystem : EntitySystem
 
         foreach (var effect in effects)
         {
-            effect.Probability = prob;
-            _effects.TryApplyEffect(target, effect, 1f, performer);
+            _effects.TryApplyEffect(target, effect, effect.ScaleProbability ? prob : 1f, performer);
         }
     }
 

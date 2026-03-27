@@ -40,10 +40,6 @@
     sprite: _Goobstation/Heretic/mansus_grasp.rsi
     state: icon
   - type: Appearance
-  - type: UseDelay
-    delays: # For rust path
-      rust:
-        length: 3
   - type: PointLight
     enabled: true
     radius: 2
@@ -142,6 +138,10 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RustGrasp # Used for tile rusting
+  - type: UseDelay
+    delays:
+      rust:
+        length: 3
   - type: MansusGrasp
     effects:
     - !type:KillAi
@@ -159,8 +159,11 @@
           tags:
           - Bot
       damage:
-        groups:
-          Brute: 500
+        types:
+          Blunt: 167
+          Slash: 167
+          Piercing: 167
+      splitDamage: SplitEnsureAll
       targetPart: Chest
     - !type:HealthChange
       conditions:
@@ -175,8 +178,11 @@
           - Edible
           - ShadowCloakEntity
       damage:
-        groups:
-          Brute: 500
+        types:
+          Blunt: 167
+          Slash: 167
+          Piercing: 167
+      splitDamage: SplitEnsureAll
       targetPart: Chest
 
 - type: entity

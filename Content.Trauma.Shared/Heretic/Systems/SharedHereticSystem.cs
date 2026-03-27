@@ -16,6 +16,7 @@ using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -32,6 +33,7 @@ public abstract class SharedHereticSystem : EntitySystem
 
     [Dependency] protected readonly ISharedPlayerManager PlayerMan = default!;
     [Dependency] protected readonly StatusEffectsSystem Status = default!;
+    [Dependency] protected readonly SharedContainerSystem Container = default!;
 
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -49,11 +51,17 @@ public abstract class SharedHereticSystem : EntitySystem
 
         SubscribeLocalEvent<MindContainerComponent, BeforeConversionEvent>(OnConversionAttempt);
         SubscribeLocalEvent<HereticComponent, EventHereticAddKnowledge>(OnAddKnowledge);
+        SubscribeLocalEvent<HereticComponent, ComponentInit>(OnInit);
 
         Subs.CVar(_cfg, GoobCVars.AscensionRequiresObjectives, value => _ascensionRequiresObjectives = value, true);
 
         _hereticQuery = GetEntityQuery<HereticComponent>();
         _ghoulQuery = GetEntityQuery<GhoulComponent>();
+    }
+
+    private void OnInit(Entity<HereticComponent> ent, ref ComponentInit args)
+    {
+        ent.Comp.RitualContainer = Container.EnsureContainer<Container>(ent, "rituals");
     }
 
     private void OnAddKnowledge(Entity<HereticComponent> ent, ref EventHereticAddKnowledge args)
@@ -93,7 +101,7 @@ public abstract class SharedHereticSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
 
-        foreach (var rit in ent.Comp.Rituals)
+        foreach (var rit in ent.Comp.RitualContainer.ContainedEntities)
         {
             if (!_tag.HasTag(rit, tag) || !TryComp(rit, out Rituals.HereticRitualComponent? comp))
                 continue;
@@ -111,7 +119,7 @@ public abstract class SharedHereticSystem : EntitySystem
             return;
 
         var toDelete = new List<EntityUid>();
-        foreach (var ritual in ent.Comp.Rituals)
+        foreach (var ritual in ent.Comp.RitualContainer.ContainedEntities)
         {
             if (_tag.HasAnyTag(ritual, tags))
                 toDelete.Add(ritual);
@@ -122,7 +130,7 @@ public abstract class SharedHereticSystem : EntitySystem
             if (ent.Comp.ChosenRitual == ritual)
                 ent.Comp.ChosenRitual = null;
 
-            ent.Comp.Rituals.Remove(ritual);
+            Container.Remove(ritual, ent.Comp.RitualContainer);
             PredictedQueueDel(ritual);
         }
 

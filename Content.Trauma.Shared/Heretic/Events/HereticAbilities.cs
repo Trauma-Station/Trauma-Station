@@ -6,6 +6,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Polymorph;
+using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Robust.Shared.Audio;
@@ -95,6 +96,9 @@ public sealed partial class TouchSpellEvent : InstantActionEvent
 
     [DataField]
     public TouchSpellSpecialEvent? SpecialEvent;
+
+    [DataField(required: true)]
+    public EntityWhitelist TouchSpellWhitelist;
 }
 public sealed partial class EventHereticLivingHeart : InstantActionEvent; // opens ui
 

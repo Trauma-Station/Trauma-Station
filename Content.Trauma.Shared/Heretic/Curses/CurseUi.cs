@@ -6,16 +6,7 @@ using Robust.Shared.Serialization;
 namespace Content.Trauma.Shared.Heretic.Curses;
 
 [Serializable, NetSerializable, DataRecord]
-public partial record struct CurseData(NetEntity ent, string name, float multiplier, TimeSpan nextCurseTime)
-{
-    public NetEntity Entity = ent;
-
-    public string Name = name;
-
-    public float Multiplier = multiplier;
-
-    public TimeSpan NextCurseTime = nextCurseTime;
-}
+public partial record struct CurseData(NetEntity Ent, string Name, float Multiplier, TimeSpan NextCurseTime);
 
 [Serializable, NetSerializable]
 public sealed class PickCurseVictimState(HashSet<CurseData> data) : BoundUserInterfaceState

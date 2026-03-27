@@ -5,7 +5,7 @@
   name: Sacrifice
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
     state: heart-on
   - type: HereticRitual
@@ -53,7 +53,7 @@
   name: Amber Focus
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/amber_focus.rsi
     state: icon
   - type: HereticRitual
@@ -91,7 +91,7 @@
   name: Relentless Heartbeat
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: living_heart
   - type: HereticRitual
@@ -135,7 +135,7 @@
   name: Codex Cicatrix
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/book.rsi
     state: icon-on
   - type: HereticRitual
@@ -179,7 +179,7 @@
   name: Feast of Owls
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: god_transmit
   - type: HereticRitual
@@ -202,7 +202,7 @@
   name: Nightwatcher's Secret
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_ash.rsi
     state: icon
   - type: HereticRitual
@@ -258,7 +258,7 @@
   name: Mask of Madness
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/mad_mask.rsi
     state: icon
   - type: HereticRitual
@@ -308,7 +308,7 @@
   name: Ashlord's Rite
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: ashlord_rite2
   - type: HereticRitual
@@ -365,7 +365,7 @@
   name: Cutting Edge
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_blade.rsi
     state: icon
   - type: HereticRitual
@@ -421,7 +421,7 @@
   name: Maelstrom of Silver
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: protective_blade
   - type: HereticRitual
@@ -480,7 +480,7 @@
   name: Principle of Hunger
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_flesh.rsi
     state: icon
   - type: HereticRitual
@@ -550,7 +550,7 @@
   name: Imperfect Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: Mobs/Species/Skeleton/parts.rsi
     state: full
   - type: HereticRitual
@@ -661,7 +661,7 @@
   name: Raw Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: raw_prophet
   - type: HereticRitual
@@ -718,7 +718,7 @@
   name: Lonely Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: stalker
   - type: HereticRitual
@@ -782,7 +782,7 @@
   name: Priest’s Final Hymn
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: final_hymn
   - type: HereticRitual
@@ -838,7 +838,7 @@
   name: Glimmer of Winter
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_void.rsi
     state: icon
   - type: HereticRitual
@@ -895,7 +895,7 @@
   name: Waltz at the End of Time
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: Interface/Alerts/temperature.rsi
     state: cold3
   - type: HereticRitual
@@ -956,7 +956,7 @@
   name: Blacksmith's Tale
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_rust.rsi
     state: icon
   - type: HereticRitual
@@ -1012,7 +1012,7 @@
   name: Rustbringer's Oath
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: ascension_rust
   - type: HereticRitual
@@ -1077,7 +1077,7 @@
   name: Eternal Gate
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_cosmos.rsi
     state: icon
   - type: HereticRitual
@@ -1133,7 +1133,7 @@
   name: Creators's Gift
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: stargazer
   - type: HereticRitual
@@ -1192,7 +1192,7 @@
   name: A Steward's Secret
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_lock.rsi
     state: icon
   - type: HereticRitual
@@ -1248,7 +1248,7 @@
   name: Key Keeper's Burden
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: Objects/Misc/id_cards.rsi
     state: gold
   - type: HereticRitual
@@ -1307,7 +1307,7 @@
   name: Concierge's Rite
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Entities/heretichandbook.rsi
     state: icon
   - type: HereticRitual
@@ -1349,7 +1349,7 @@
   name: Unlock the Labyrinth
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: labyrinth
   - type: HereticRitual
@@ -1412,7 +1412,7 @@
   name: Ritual of Knowledge
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/book.rsi
     state: icon
   - type: HereticRitual
@@ -1446,7 +1446,7 @@
   name: Armorer's Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/eldritch_armor.rsi
     state: icon
   - type: HereticRitual
@@ -1490,7 +1490,7 @@
   name: Priest's Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: eldritch_flask
   - type: HereticRitual
@@ -1528,7 +1528,7 @@
   name: Ashen Eyes
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_medalion.rsi
     state: icon
   - type: HereticRitual
@@ -1570,7 +1570,7 @@
   name: Void Cloak
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi
     state: icon
   - type: HereticRitual
@@ -1612,7 +1612,7 @@
   name: Scorching Shark
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: fire_shark_icon
   - type: HereticRitual
@@ -1657,7 +1657,7 @@
   name: Phylactery of Damnation
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Entities/phylactery.rsi
     state: icon
   - type: HereticRitual
@@ -1709,7 +1709,7 @@
   name: Ether of the Newborn
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Entities/Potions/ether.rsi
     state: icon
   - type: HereticRitual
@@ -1764,7 +1764,7 @@
   name: Rusted Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: rust_walker
   - type: HereticRitual
@@ -1824,7 +1824,7 @@
   name: Carving Knife
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: rune_carver
   - type: HereticRitual
@@ -1866,7 +1866,7 @@
   name: Codex Morbus
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/book_morbus.rsi
     state: icon-on
   - type: HereticRitual
@@ -1920,7 +1920,7 @@
   name: Greaves of the Prophet
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/Shoes/greaves.rsi
     state: icon
   - type: HereticRitual
@@ -1972,7 +1972,7 @@
   name: Shattered Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: ghoul_shattered
   - type: HereticRitual
@@ -2050,7 +2050,7 @@
   name: Mawed Crucible
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: crucible
   - type: HereticRitual
@@ -2088,7 +2088,7 @@
   name: Through the Boundary
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Entities/sword.rsi
     state: icon
   - type: HereticRitual
@@ -2134,7 +2134,7 @@
   name: Maid in the Mirror
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: maid
   - type: HereticRitual

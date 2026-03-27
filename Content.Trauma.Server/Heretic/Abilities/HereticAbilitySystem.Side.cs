@@ -7,6 +7,8 @@ using Content.Shared.Body.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Polymorph;
+using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Prototypes;
 
@@ -22,11 +24,11 @@ public sealed partial class HereticAbilitySystem
         SubscribeLocalEvent<EventHereticSpacePhase>(OnSpacePhase);
         SubscribeLocalEvent<EventMirrorJaunt>(OnMirrorJaunt);
 
-        SubscribeLocalEvent<Shared.Heretic.Components.HereticComponent, HereticGraspUpgradeEvent>(OnGraspUpgrade);
-        SubscribeLocalEvent<Shared.Heretic.Components.HereticComponent, HereticRemoveActionEvent>(OnRemoveAction);
+        SubscribeLocalEvent<HereticComponent, HereticGraspUpgradeEvent>(OnGraspUpgrade);
+        SubscribeLocalEvent<HereticComponent, HereticRemoveActionEvent>(OnRemoveAction);
     }
 
-    private void OnRemoveAction(Entity<Shared.Heretic.Components.HereticComponent> ent, ref HereticRemoveActionEvent args)
+    private void OnRemoveAction(Entity<HereticComponent> ent, ref HereticRemoveActionEvent args)
     {
         if (!_actions.TryGetActionById(ent.Owner, args.Action, out var act))
             return;
@@ -34,12 +36,12 @@ public sealed partial class HereticAbilitySystem
         _actionContainer.RemoveAction(act.Value.AsNullable());
     }
 
-    private void OnGraspUpgrade(Entity<Shared.Heretic.Components.HereticComponent> ent, ref HereticGraspUpgradeEvent args)
+    private void OnGraspUpgrade(Entity<HereticComponent> ent, ref HereticGraspUpgradeEvent args)
     {
         if (!_actions.TryGetActionById(ent.Owner, args.GraspAction, out var grasp))
             return;
 
-        var upgrade = EnsureComp<Shared.Heretic.Components.Side.MansusGraspUpgradeComponent>(grasp.Value);
+        var upgrade = EnsureComp<MansusGraspUpgradeComponent>(grasp.Value);
         foreach (var (key, value) in args.AddedComponents)
         {
             upgrade.AddedComponents[key] = value;
@@ -50,7 +52,7 @@ public sealed partial class HereticAbilitySystem
     {
         var uid = args.Performer;
 
-        if (Lookup.GetEntitiesInRange<Shared.Heretic.Components.ReflectiveSurfaceComponent>(Transform(uid).Coordinates, args.LookupRange).Count ==
+        if (Lookup.GetEntitiesInRange<ReflectiveSurfaceComponent>(Transform(uid).Coordinates, args.LookupRange).Count ==
             0)
         {
             Popup.PopupEntity(Loc.GetString("heretic-ability-fail-mirror-jaunt-no-mirrors"), uid, uid);

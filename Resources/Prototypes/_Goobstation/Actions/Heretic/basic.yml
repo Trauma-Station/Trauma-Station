@@ -43,6 +43,13 @@
     event: !type:TouchSpellEvent
       touchSpell: TouchSpellMansus
       specialEvent: !type:MansusGraspSpecialEvent
+        cooldown: 10
+        speech: heretic-speech-mansusgrasp
+        sound:
+          path: /Audio/Items/welder.ogg
+      touchSpellWhitelist:
+        components:
+        - MansusGrasp
   - type: HereticAction
     requireMagicItem: false
   - type: Tag

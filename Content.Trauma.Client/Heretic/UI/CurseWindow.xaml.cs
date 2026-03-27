@@ -90,7 +90,7 @@ public sealed partial class CurseWindow : FancyWindow
             if (!string.IsNullOrEmpty(itemDesc))
                 button.TooltipSupplier = _ => new RecipeTooltip(itemDesc);
 
-            button.OnButtonUp += _ => ButtonClicked?.Invoke(item.Entity, _ids[CursesButton.SelectedId]);
+            button.OnButtonUp += _ => ButtonClicked?.Invoke(item.Ent, _ids[CursesButton.SelectedId]);
             button.Visible = ButtonIsVisible(button);
 
             ButtonContainer.AddChild(button);
