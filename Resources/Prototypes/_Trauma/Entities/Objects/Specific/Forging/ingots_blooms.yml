@@ -215,19 +215,6 @@
     cooledPrototype: BrassIngotIntermediarytoCold
   - type: Sprite
     state: ingot_brass_hot
-  - type: PhysicalComposition
-    materialComposition:
-      ingot_brass: 100
-  - type: Stack
-    stackType: Ingot
-    count: 1
-    baseLayer: base
-    layerStates:
-    - ingot_brass_hot
-  - type: Tag
-    tags:
-    - IngotBrass
-
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp

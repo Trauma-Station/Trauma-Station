@@ -38,13 +38,13 @@ durability-blade-2 = The tip bends.
 durability-blade-3 = The edge slightly rolls over.
 durability-blade-4 = The blade is becoming rather dull.
 
-durability-metal-5 = There is a large crack in the blade.
-durability-metal-6 = The blade feels like its about to break.
-durability-metal-7 = The edge is completely dull.
+durability-blade-5 = There is a large crack in the blade.
+durability-blade-6 = The blade feels like its about to break.
+durability-blade-7 = The edge is completely dull.
 
-durability-metal-8 = The blade snaps off the handle!
-durability-metal-9 = The blade is too dull to cut anything!
-durability-metal-10 = The blade has snapped in two!
+durability-blade-8 = The blade snaps off the handle!
+durability-blade-9 = The blade is too dull to cut anything!
+durability-blade-10 = The blade has snapped in two!
 
 # Handle Weapons
 durability-handle-2 = The handle becomes less sturdy.
