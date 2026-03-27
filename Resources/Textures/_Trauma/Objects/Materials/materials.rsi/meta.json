@@ -45,6 +45,9 @@
       "name": "brick"
     },
     {
+      "name": "brick_wet"
+    },
+    {
       "name": "brick-inhand-left",
       "directions": 4
     },
@@ -77,6 +80,9 @@
     },
     {
       "name": "cathide"
+    },
+    {
+      "name": "cement"
     },
     {
       "name": "cloth"

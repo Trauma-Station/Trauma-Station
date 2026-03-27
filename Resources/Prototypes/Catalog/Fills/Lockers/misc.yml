@@ -204,6 +204,12 @@
       prob: 0.075
     - id: GunpowderBottlePartFull
       prob: 0.01
+    - id: ReagentContainerCement
+      prob: 0.05
+    - id: SheetPlasteel10
+      prob: 0.05
+    - id: SheetBrass10
+      prob: 0.05
     # </Trauma>
     # Tools
     - !type:NestedSelector

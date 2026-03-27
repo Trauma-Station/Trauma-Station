@@ -11,3 +11,17 @@
   name: stack-brick
   icon: { sprite: /Textures/_Trauma/Objects/Materials/materials.rsi, state: brick }
   spawn: Brick1
+
+- type: stack
+  parent: BaseVerySmallStack
+  id: Bracing
+  name: stack-bracing
+  icon: { sprite: /Textures/_Trauma/Objects/tools/whetstone.rsi, state: icon }
+  spawn: WeaponBracing1
+
+- type: stack
+  parent: BaseVerySmallStack
+  id: Whetstone
+  name: stack-whetstone
+  icon: { sprite: /Textures/_Trauma/Objects/tools/weaponreinforcement.rsi.rsi, state: icon }
+  spawn: Whetstone1

@@ -66,3 +66,39 @@
 
   - node: finished
     entity: ArmoryOverrideKey
+
+- type: constructionGraph
+  id: Bracing
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      completed:
+        - !type:SetStackCount
+          amount: 1
+      steps:
+        - material: MetalRod
+          amount: 3
+        - material: Cable
+          amount: 3
+  - node: finish
+    entity: WeaponBracing
+
+- type: constructionGraph
+  id: Whetstone
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      completed:
+        - !type:SetStackCount
+          amount: 1
+      steps:
+        - material: Steel
+          amount: 1
+        - material: Brick
+          amount: 1
+  - node: finish
+    entity: Whetstone

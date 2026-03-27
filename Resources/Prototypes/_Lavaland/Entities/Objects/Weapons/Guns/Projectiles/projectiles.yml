@@ -84,7 +84,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 8
+        Blunt: 6 # Trauma, was 8
   - type: TimedDespawn
     lifetime: 0.22 # roughly 5.5 tiles
 

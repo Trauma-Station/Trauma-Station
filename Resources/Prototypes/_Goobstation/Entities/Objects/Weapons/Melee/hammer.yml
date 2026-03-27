@@ -23,10 +23,10 @@
     attackRate: 1
     damage:
       types:
-        Blunt: 12
+        Blunt: 10
     heavyStaminaCost: 6
     soundHit:
-      collection: MetalThud
+      path: /Audio/_Trauma/Weapons/Melee/forging/tink.ogg
   - type: Item
     size: Small
     sprite: _Goobstation/Objects/Weapons/Melee/hammer.rsi

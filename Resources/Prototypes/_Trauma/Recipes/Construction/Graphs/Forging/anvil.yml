@@ -1,0 +1,25 @@
+- type: constructionGraph
+  id: Anvil
+  start: start
+  graph:
+  - node: start
+    entity: AnvilBottom
+    edges:
+    - to: unwelded
+      steps:
+      - tag: AnvilTop
+        name: construction-graph-tag-anviltop
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: anvil_top
+
+  - node: unwelded
+    entity: AnvilUnwelded
+    edges:
+    - to: finish
+      steps:
+      - tool: Welding
+        doAfter: 10
+
+  - node: finish
+    entity: AnvilComplete

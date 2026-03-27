@@ -72,6 +72,9 @@
     - BrassScraps
   - type: Sprite
     state: brass
+  - type: Construction
+    graph: BrassScraps
+    node: start
 
 - type: entity
   parent: BaseForgeItemNoTemp
@@ -110,6 +113,22 @@
     cooledPrototype: BrassBloomIntermediarytoCold
   - type: Sprite
     state: bloombrasshot
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          BrassIngot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -184,7 +203,7 @@
     state: bloombrass
 
 - type: entity
-  parent: [BaseForgeItemHot, BrassOverheatable]
+  parent: [BaseForgeItemHot, BrassOverheatable, MaterialBase]
   id: BrassIngot
   name: brass ingot
   description: A softer piece of metal, ready to be forged.
@@ -195,7 +214,19 @@
     coolTemp: 1460
     cooledPrototype: BrassIngotIntermediarytoCold
   - type: Sprite
-    state: ingotbrasshot
+    state: ingot_brass_hot
+  - type: PhysicalComposition
+    materialComposition:
+      ingot_brass: 100
+  - type: Stack
+    stackType: Ingot
+    count: 1
+    baseLayer: base
+    layerStates:
+    - ingot_brass_hot
+  - type: Tag
+    tags:
+    - IngotBrass
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -224,7 +255,7 @@
     interval: 0.1
     ignoreResistances: true
   - type: Sprite
-    state: ingotbrasshot
+    state: ingot_brass_hot
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -253,7 +284,7 @@
     interval: 0.1
     ignoreResistances: true
   - type: Sprite
-    state: ingotbrass
+    state: ingot_brass
 
 - type: entity
   parent: BaseForgeItemCold
@@ -267,7 +298,7 @@
     burnTemp: 1560
     burnedFoodPrototype: BrassIngotIntermediarytoHot
   - type: Sprite
-    state: ingotbrass
+    state: ingot_brass
 
 # Steel - 75 range of error for overheating, 75 range of error for cooling
 
@@ -292,6 +323,9 @@
     - SteelScraps
   - type: Sprite
     state: steel
+  - type: Construction
+    graph: SteelScraps
+    node: start
 
 - type: entity
   parent: BaseForgeItemNoTemp
@@ -330,6 +364,22 @@
     cooledPrototype: SteelBloomIntermediarytoCold
   - type: Sprite
     state: bloomsteelhot
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 150
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SteelIngot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -415,7 +465,10 @@
     coolTemp: 2275
     cooledPrototype: SteelIngotIntermediarytoCold
   - type: Sprite
-    state: ingotsteelhot
+    state: ingot_steel_hot
+  - type: Tag
+    tags:
+    - IngotSteel
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -444,7 +497,7 @@
     interval: 0.1
     ignoreResistances: true
   - type: Sprite
-    state: ingotsteelhot
+    state: ingot_steel_hot
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -473,7 +526,7 @@
     interval: 0.1
     ignoreResistances: true
   - type: Sprite
-    state: ingotsteel
+    state: ingot_steel
 
 - type: entity
   parent: BaseForgeItemCold
@@ -487,7 +540,7 @@
     burnTemp: 2300
     burnedFoodPrototype: SteelIngotIntermediarytoHot
   - type: Sprite
-    state: ingotsteel
+    state: ingot_steel
 
 # Plasteel - 50 range of error for overheating, 50 range of error for cooling
 
@@ -512,6 +565,9 @@
     - PlasteelScraps
   - type: Sprite
     state: plasteel
+  - type: Construction
+    graph: PlasteelScraps
+    node: start
 
 - type: entity
   parent: BaseForgeItemNoTemp
@@ -550,7 +606,22 @@
     cooledPrototype: PlasteelBloomIntermediarytoCold
   - type: Sprite
     state: bloomplasteelhot
-
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          PlasteelIngot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -636,7 +707,10 @@
     coolTemp: 2650
     cooledPrototype: PlasteelIngotIntermediarytoCold
   - type: Sprite
-    state: ingotplasteelhot
+    state: ingot_plasteel_hot
+  - type: Tag
+    tags:
+    - IngotPlasteel
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -665,7 +739,7 @@
     interval: 0.1
     ignoreResistances: true
   - type: Sprite
-    state: ingotplasteelhot
+    state: ingot_plasteel_hot
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -694,7 +768,7 @@
     interval: 0.1
     ignoreResistances: true
   - type: Sprite
-    state: ingotplasteel
+    state: ingot_plasteel
 
 - type: entity
   parent: BaseForgeItemCold
@@ -708,4 +782,4 @@
     burnTemp: 2700
     burnedFoodPrototype: PlasteelIngotIntermediarytoHot
   - type: Sprite
-    state: ingotplasteel
+    state: ingot_plasteel

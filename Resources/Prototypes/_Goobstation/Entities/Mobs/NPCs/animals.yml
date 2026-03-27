@@ -921,3 +921,8 @@
       Male: ClownGoblin
       Female: ClownGoblin
       Unsexed: ClownGoblin
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic

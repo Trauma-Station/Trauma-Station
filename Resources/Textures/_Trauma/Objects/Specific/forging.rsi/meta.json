@@ -8,6 +8,39 @@
     },
     "states": [
         {
+            "name": "anvil_top"
+        },
+        {
+            "name": "anvil_top_hot"
+        },
+        {
+            "name": "anvil_top_unfinished"
+        },
+        {
+            "name": "anvil_top_unfinished_hot"
+        },
+        {
+            "name": "anvil_bottom"
+        },
+        {
+            "name": "anvil_bottom_hot"
+        },
+        {
+            "name": "anvil_bottom_unfinished"
+        },
+        {
+            "name": "anvil_bottom_unfinished_hot"
+        },
+        {
+            "name": "anvil_unwelded"
+        },
+        {
+            "name": "bag_open"
+        },
+        {
+            "name": "bag_closed"
+        },
+        {
             "name": "brass"
         },
         {
@@ -44,22 +77,34 @@
             "name": "bloomplasteelhot"
         },
         {
-            "name": "ingotbrass"
+            "name": "handlesmall"
         },
         {
-            "name": "ingotbrasshot"
+            "name": "handlemedium"
         },
         {
-            "name": "ingotsteel"
+            "name": "handlelarge"
         },
         {
-            "name": "ingotsteelhot"
+            "name": "ingot_brass"
         },
         {
-            "name": "ingotplasteel"
+            "name": "ingot_brass_hot"
         },
         {
-            "name": "ingotplasteelhot"
+            "name": "ingot_steel"
+        },
+        {
+            "name": "ingot_steel_hot"
+        },
+        {
+            "name": "ingot_plasteel"
+        },
+        {
+            "name": "ingot_plasteel_hot"
+        },
+        {
+            "name": "unfinishedhandle"
         }
     ]
 }

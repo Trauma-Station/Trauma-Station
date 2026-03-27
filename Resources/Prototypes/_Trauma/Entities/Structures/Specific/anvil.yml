@@ -1,5 +1,5 @@
 - type: entity
-  id: Anvil
+  id: AnvilComplete
   parent: BaseMachine
   name: anvil
   description: Use this to make ingots into the desired creation.
@@ -48,7 +48,7 @@
       input: AutomationSlotMaterials
       output: null
   - type: Animateable
-  # - type: Construction
-  #   graph: CharcoalOven
-  #   node: finished
+  - type: Construction
+    graph: Anvil
+    node: AnvilComplete
   - type: PlaceableSurface

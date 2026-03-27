@@ -27,6 +27,28 @@
         - TabletopMachineMask
         layer:
         - TabletopMachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetSteel1:
+              min: 2
+              max: 3
+            Charcoal1:
+              min: 5
+              max: 7
+  - type: Construction
+    graph: CharcoalForge
+    node: unlit
 
 - type: entity
   parent: CharcoalForgeUnlit
@@ -47,3 +69,6 @@
       components:
       - Temperature
       # We need a system for entity heating for this and fireplaces
+  - type: Construction
+    graph: CharcoalForge
+    node: lit

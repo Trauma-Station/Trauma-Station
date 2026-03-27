@@ -1015,7 +1015,7 @@
   theory:
     FurnitureKnowledge: 0
   practical:
-    MetalworkingKnowledge: 2
+    CarvingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1034,7 +1034,7 @@
   theory:
     FurnitureKnowledge: 1
   practical:
-    MetalworkingKnowledge: 2
+    CarvingKnowledge: 2
   # </Trauma>
 
 - type: construction

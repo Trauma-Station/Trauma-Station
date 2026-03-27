@@ -1,4 +1,25 @@
 - type: reaction
+  id: Cement
+  reactants:
+    Carbon:
+      amount: 1
+    SpaceGlue:
+      amount: 2
+  products:
+    Cement: 3
+
+- type: reaction
+  id: CementWetReaction
+  reactants:
+    Cement:
+      amount: 5
+    Water:
+      amount: 5
+  effects:
+    - !type:SpawnEntity
+      entity: WetCement
+
+- type: reaction
   id: SodiumBicarbonate
   reactants:
     SodiumCarbonate:
