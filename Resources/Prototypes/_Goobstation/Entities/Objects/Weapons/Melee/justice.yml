@@ -52,6 +52,15 @@
       path: /Audio/Weapons/bladeslice.ogg
     angle: 60
     animation: WeaponArcThrust
+  - type: Parry
+    maxParries: 3
+    maxReflects: 0
+    parryMinSkill: 40
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
   - type: GhostRole
     name: justice-role-name
     description: justice-role-description
@@ -95,14 +104,7 @@
           angle: 60
           animation: WeaponArcThrust
         - type: Parry
-          maxParries: 3
           maxReflects: 0
-          parryMinSkill: 50
-          soundOnParry:
-            path: /Audio/_Goobstation/Heretic/parry.ogg
-            params:
-              variation: 0.2
-              volume: -11
 
       stun: !type:ItemSwitchState
         verb: stun
@@ -122,14 +124,7 @@
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
         - type: Parry
-          maxParries: 3
           maxReflects: 2
-          parryMinSkill: 50
-          soundOnParry:
-            path: /Audio/_Goobstation/Heretic/parry.ogg
-            params:
-              variation: 0.2
-              volume: -11
         - type: StaminaDamageOnHit
           damage: 20
           overtime: 15
@@ -157,14 +152,7 @@
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
         - type: Parry
-          maxParries: 3
           maxReflects: 2
-          parryMinSkill: 50
-          soundOnParry:
-            path: /Audio/_Goobstation/Heretic/parry.ogg
-            params:
-              variation: 0.2
-              volume: -11
         soundStateActivate:
           collection: sparks
           params:
@@ -191,14 +179,7 @@
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
         - type: Parry
-          maxParries: 3
           maxReflects: 2
-          parryMinSkill: 50
-          soundOnParry:
-            path: /Audio/_Goobstation/Heretic/parry.ogg
-            params:
-              variation: 0.2
-              volume: -11
         soundStateActivate:
           collection: sparks
           params:
@@ -232,14 +213,7 @@
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
         - type: Parry
-          maxParries: 3
           maxReflects: 2
-          parryMinSkill: 50
-          soundOnParry:
-            path: /Audio/_Goobstation/Heretic/parry.ogg
-            params:
-              variation: 0.2
-              volume: -11
         soundStateActivate:
           collection: sparks
           params:
