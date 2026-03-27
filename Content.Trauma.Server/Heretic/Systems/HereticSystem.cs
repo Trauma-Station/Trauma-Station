@@ -4,12 +4,10 @@ using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Server._Goobstation.Objectives.Components;
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Hands.Systems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Revolutionary.Components;
@@ -156,8 +154,6 @@ public sealed class HereticSystem : SharedHereticSystem
 
     private void OnMindAdded(Entity<HereticComponent> ent, ref MindGotAddedEvent args)
     {
-        ent.Comp.MansusGraspAction = EntityUid.Invalid;
-
         if (TerminatingOrDeleted(args.Container))
             return;
 
@@ -203,8 +199,6 @@ public sealed class HereticSystem : SharedHereticSystem
 
     private void OnMindRemoved(Entity<HereticComponent> ent, ref MindGotRemovedEvent args)
     {
-        ent.Comp.MansusGraspAction = EntityUid.Invalid;
-
         if (TerminatingOrDeleted(args.Container) || !HasComp<MobStateComponent>(args.Container))
             return;
 

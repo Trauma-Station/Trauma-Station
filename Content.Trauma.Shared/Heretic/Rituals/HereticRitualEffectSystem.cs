@@ -2,24 +2,27 @@
 
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public sealed class HereticRitualEffectSystem : EntitySystem
 {
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HereticRitualComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<HereticRitualRaiserComponent, ComponentStartup>(OnStartup);
     }
 
-    private void OnStartup(Entity<HereticRitualComponent> ent, ref ComponentStartup args)
+    private void OnStartup(Entity<HereticRitualRaiserComponent> ent, ref ComponentStartup args)
     {
         ent.Comp.Raiser = new HereticRitualRaiser(EntityManager, this, ent);
     }
 
-    public void ApplyEffect(EntityUid target, EntityEffect effect, Entity<HereticRitualComponent> ritual, EntityUid? user)
+    public void ApplyEffect(EntityUid target, EntityEffect effect, Entity<HereticRitualRaiserComponent> ritual, EntityUid? user)
     {
         var ent = effect is IHereticRitualEntry ? ritual.Owner : target;
         effect.RaiseEvent(ent, ritual.Comp.Raiser, 1f, user);
@@ -27,7 +30,7 @@ public sealed class HereticRitualEffectSystem : EntitySystem
 
     public bool TryApplyEffect(EntityUid target,
         EntityEffect effect,
-        Entity<HereticRitualComponent> ritual,
+        Entity<HereticRitualRaiserComponent> ritual,
         EntityUid? user)
     {
         if (!TryConditions(target, effect.Conditions, ritual))
@@ -39,7 +42,7 @@ public sealed class HereticRitualEffectSystem : EntitySystem
 
     public void ApplyEffects(EntityUid target,
         EntityEffect[] effects,
-        Entity<HereticRitualComponent> ritual,
+        Entity<HereticRitualRaiserComponent> ritual,
         EntityUid? user)
     {
         foreach (var effect in effects)
@@ -48,12 +51,12 @@ public sealed class HereticRitualEffectSystem : EntitySystem
         }
     }
 
-    public bool TryCondition(EntityUid uid, EntityCondition condition, Entity<HereticRitualComponent> ritual)
+    public bool TryCondition(EntityUid uid, EntityCondition condition, Entity<HereticRitualRaiserComponent> ritual)
     {
         return condition.Inverted != condition.RaiseEvent(uid, ritual.Comp.Raiser);
     }
 
-    public bool AnyCondition(EntityUid target, EntityCondition[]? conditions, Entity<HereticRitualComponent> ritual)
+    public bool AnyCondition(EntityUid target, EntityCondition[]? conditions, Entity<HereticRitualRaiserComponent> ritual)
     {
         if (conditions == null)
             return true;
@@ -67,7 +70,7 @@ public sealed class HereticRitualEffectSystem : EntitySystem
         return false;
     }
 
-    public bool TryConditions(EntityUid target, EntityCondition[]? conditions, Entity<HereticRitualComponent> ritual)
+    public bool TryConditions(EntityUid target, EntityCondition[]? conditions, Entity<HereticRitualRaiserComponent> ritual)
     {
         if (conditions == null)
             return true;
@@ -83,7 +86,7 @@ public sealed class HereticRitualEffectSystem : EntitySystem
 
     public bool TryEffects(EntityUid target,
         IEnumerable<EntityEffect> effects,
-        Entity<HereticRitualComponent> ritual,
+        Entity<HereticRitualRaiserComponent> ritual,
         EntityUid? user)
     {
         foreach (var effect in effects)
@@ -94,15 +97,26 @@ public sealed class HereticRitualEffectSystem : EntitySystem
 
         return true;
     }
+
+    public void TryApplyEffect(EntityUid target,
+        [ForbidLiteral] ProtoId<EntityEffectPrototype> id,
+        Entity<HereticRitualRaiserComponent> ritual,
+        EntityUid? user)
+    {
+        var proto = _proto.Index(id);
+        if (TryConditions(target, proto.Conditions, ritual))
+            ApplyEffects(target, proto.Effects, ritual, user);
+    }
 }
 
 public sealed class HereticRitualRaiser(
     IEntityManager entMan,
     HereticRitualEffectSystem sys,
-    Entity<HereticRitualComponent> ritual)
+    Entity<HereticRitualRaiserComponent> ritual)
     : IEntityEffectRaiser, IEntityConditionRaiser
 {
-    public Entity<HereticRitualComponent> Ritual => ritual;
+    public Entity<HereticRitualRaiserComponent> Ritual => ritual;
+    public IEntityManager EntMan => entMan;
 
     public void RaiseEffectEvent<T>(EntityUid target, T effect, float scale, EntityUid? user)
         where T : EntityEffectBase<T>

@@ -20,17 +20,22 @@
   - type: Unremoveable
   - type: Item
   - type: UnholyItem
-  - type: MansusGrasp
-    blacklist:
+  - type: TouchSpell
+    cooldown: 10
+    speech: heretic-speech-mansusgrasp
+    sound:
+      path: /Audio/Items/welder.ogg
+    targetBlacklist:
       components:
       - Puddle # Ruins rust path tile rusting and is annoying in general.
       - HereticRitualRune # This is handled by HereticRitualSystem, blacklisting rune makes it so grasp doesn't disappear when interacting with it.
       - MawedCrucible # Requires for anchoring/unanchoring of the crucible with a grasp
+  - type: MansusGrasp
   - type: MeleeWeapon
     canHeavyAttack: false
     damage:
       types:
-        Piercing: 1
+        Heat: 0
   - type: Sprite
     sprite: _Goobstation/Heretic/mansus_grasp.rsi
     state: icon
@@ -75,25 +80,129 @@
   # Saw and scalpel surgery qualities are on heretic blades
 
 - type: entity
+  id: TouchSpellMansusAsh
+  parent: TouchSpellMansus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MansusGrasp
+    effects:
+    - !type:GenericStatusEffect
+      key: TemporaryBlindness
+      component: TemporaryBlindness
+      type: Add
+      time: 5
+      refresh: true
+
+- type: entity
+  id: TouchSpellMansusVoid
+  parent: TouchSpellMansus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MansusGrasp
+    effects:
+    - !type:VoidCurse
+      stacks: 2
+
+- type: entity
+  id: TouchSpellMansusBlade
+  parent: TouchSpellMansus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MansusGrasp
+    effects:
+    - !type:NestedRitualEffect
+      proto: HereticBladeGraspEffect
+    - !type:AddComponents
+      conditions:
+      - !type:HereticMinStageCondition
+        minStage: 7
+      - !type:WhitelistCondition
+        whitelist:
+          tags:
+          - HereticBladeBlade
+      components:
+      - type: MansusInfused
+
+- type: entity
+  id: TouchSpellMansusCosmos
+  parent: TouchSpellMansus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MansusGrasp
+    effects:
+    - !type:StarMark
+    - !type:EffectsRitualEffect
+      applyOn: Performer
+      effects:
+      - !type:SpawnCosmicField
+
+- type: entity
   id: TouchSpellMansusRust
   parent: TouchSpellMansus
   categories: [ HideSpawnMenu ]
   components:
-  - type: RustGrasp
+  - type: RustGrasp # Used for tile rusting
   - type: MansusGrasp
-    # No HereticRitualRune in blaacklist because otherwise it would rust tiles when attempting to interact with it.
-    # Rune is ignored anyway when applying rust grasp special effect in c#.
-    blacklist:
-      components:
-      - Puddle
-      - MawedCrucible
+    effects:
+    - !type:KillAi
+    - !type:NestedRitualEffect
+      proto: HereticRustGraspCatwalkEffect
+    - !type:NestedRitualEffect
+      proto: HereticRustGraspWallEffect
+    - !type:HealthChange
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Silicon
+          - BorgChassis
+          tags:
+          - Bot
+      damage:
+        groups:
+          Brute: 500
+      targetPart: Chest
+    - !type:HealthChange
+      conditions:
+      - !type:WhitelistCondition
+        inverted: true
+        whitelist:
+          components:
+          - MobState
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - Edible
+          - ShadowCloakEntity
+      damage:
+        groups:
+          Brute: 500
+      targetPart: Chest
+
+- type: entity
+  id: TouchSpellMansusFlesh
+  parent: TouchSpellMansus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MansusGrasp
+    effects:
+    - !type:NestedRitualEffect
+      proto: HereticFleshGraspEffect
 
 - type: entity
   id: TouchSpellMansusLock
   parent: TouchSpellMansus
   categories: [ HideSpawnMenu ]
   components:
-  - type: MansusGrasp
+  - type: TouchSpell
     # Silent grasp
     sound: null
-    invocation: null
+    speech: null
+  - type: MansusGrasp
+    effects:
+    - !type:NestedRitualEffect
+      proto: HereticLockGraspMechEffect
+    - !type:NestedRitualEffect
+      proto: HereticLockGraspDoorEffect
+    - !type:NestedRitualEffect
+      proto: HereticLockGraspAccessReaderEffect

@@ -42,19 +42,11 @@ public sealed partial class HereticRitualComponent : Component
     public bool PlaySuccessAnimation = true;
 
     /// <summary>
-    /// Used for events to heretic ritual events to store their results for other methods to use
-    /// </summary>
-    [DataField, NonSerialized]
-    public Dictionary<string, object> Blackboard = new();
-
-    /// <summary>
     /// Loc entry on ritual failure.
     /// May be overriden by ritual events
     /// </summary>
     [DataField]
     public LocId? CancelLoc;
-
-    public HereticRitualRaiser Raiser = default!;
 }
 
 [DataDefinition]

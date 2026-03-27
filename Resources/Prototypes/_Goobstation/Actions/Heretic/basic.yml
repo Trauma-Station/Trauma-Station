@@ -21,7 +21,7 @@
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: open_store
   - type: InstantAction
-    event: !type:EventHereticOpenStore {}
+    event: !type:EventHereticOpenStore
   - type: HereticAction
     requireMagicItem: false
   - type: Tag
@@ -40,7 +40,9 @@
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: mansus_grasp
   - type: InstantAction
-    event: !type:EventHereticMansusGrasp {}
+    event: !type:TouchSpellEvent
+      touchSpell: TouchSpellMansus
+      specialEvent: !type:MansusGraspSpecialEvent
   - type: HereticAction
     requireMagicItem: false
   - type: Tag
@@ -60,7 +62,7 @@
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: living_heart
   - type: InstantAction
-    event: !type:EventHereticLivingHeart {}
+    event: !type:EventHereticLivingHeart
   - type: HereticAction
     requireMagicItem: false
   - type: Tag
@@ -81,7 +83,7 @@
       state: mansus_link
   - type: TargetAction
   - type: EntityTargetAction
-    event: !type:EventHereticMansusLink {}
+    event: !type:EventHereticMansusLink
   - type: HereticAction
     requireMagicItem: false
   - type: SpeakOnAction

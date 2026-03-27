@@ -3,6 +3,7 @@
 using Content.Server.Actions;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
+using Content.Server.Chat.Systems;
 using Content.Server.Cloning;
 using Content.Server.Flash;
 using Content.Server.Hands.Systems;
@@ -62,6 +63,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
 
     #endregion
 

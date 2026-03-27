@@ -133,3 +133,47 @@ public sealed partial class ConditionsRitualCondition : BaseRitualCondition<Cond
 }
 
 public sealed partial class IsLimitedOutputCondition : BaseRitualCondition<IsLimitedOutputCondition>;
+
+public sealed partial class HereticMinStageCondition : EntityConditionBase<HereticMinStageCondition>,
+    IHereticRitualEntry
+{
+    [DataField(required: true)]
+    public int MinStage;
+
+    public override string EntityConditionGuidebookText(IPrototypeManager prototype)
+    {
+        return string.Empty;
+    }
+}
+
+public sealed partial class BackstabCondition : EntityConditionBase<BackstabCondition>, IHereticRitualEntry
+{
+    [DataField]
+    public Angle Tolerance = 45d;
+
+    [DataField]
+    public bool ShowPopup = true;
+
+    [DataField]
+    public bool PlaySound = true;
+
+    [DataField]
+    public bool AlwaysBackstabLaying = true;
+
+    public override string EntityConditionGuidebookText(IPrototypeManager prototype)
+    {
+        return string.Empty;
+    }
+}
+
+public sealed partial class TryMakeRustWallCondition : EntityConditionBase<TryMakeRustWallCondition>,
+    IHereticRitualEntry
+{
+    [DataField]
+    public int? RustStrengthOverride;
+
+    public override string EntityConditionGuidebookText(IPrototypeManager prototype)
+    {
+        return string.Empty;
+    }
+}

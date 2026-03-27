@@ -6,6 +6,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Polymorph;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -52,9 +53,6 @@ public sealed partial class DrawRitualRuneDoAfterEvent : DoAfterEvent
 public sealed partial class HereticMansusLinkDoAfter : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class EventHereticFleshSurgeryDoAfter : SimpleDoAfterEvent;
-
-[Serializable, NetSerializable]
 public sealed partial class StarGazeDoAfterEvent : DoAfterEvent
 {
     [DataField]
@@ -93,7 +91,7 @@ public sealed partial class EventHereticOpenStore : InstantActionEvent;
 public sealed partial class TouchSpellEvent : InstantActionEvent
 {
     [DataField(required: true)]
-    public EntProtoId TouchSpell;
+    public EntProtoId<TouchSpellComponent> TouchSpell;
 
     [DataField]
     public TouchSpellSpecialEvent? SpecialEvent;

@@ -44,7 +44,7 @@ public sealed class HereticRitualSystem : SharedHereticRitualSystem
         }
 
         if (result.Count > 0)
-            ent.Comp.Blackboard[args.Effect.Result] = result;
+            args.Ritual.Comp.Blackboard[args.Effect.Result] = result;
     }
 
     protected override (bool isCommand, bool isSec) IsCommandOrSec(EntityUid uid)

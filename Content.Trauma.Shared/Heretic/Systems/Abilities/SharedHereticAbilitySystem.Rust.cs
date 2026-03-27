@@ -239,7 +239,7 @@ public abstract partial class SharedHereticAbilitySystem
         }
     }
 
-    public bool CanSurfaceBeRusted(EntityUid target, EntityUid? user, Components.HereticComponent? heretic, out int surfaceStrength)
+    public bool CanSurfaceBeRusted(EntityUid target, EntityUid? user, HereticComponent? heretic, out int surfaceStrength)
     {
         surfaceStrength = 0;
 
@@ -274,7 +274,7 @@ public abstract partial class SharedHereticAbilitySystem
             Spawn(tileRune, new EntityCoordinates(gridUid, tileRef.GridIndices));
     }
 
-    public bool TryMakeRustWall(EntityUid target, EntityUid? user = null, Components.HereticComponent? heretic = null, int? rustStrengthOverride = null)
+    public bool TryMakeRustWall(EntityUid target, EntityUid? user = null, HereticComponent? heretic = null, int? rustStrengthOverride = null)
     {
         var canRust = CanSurfaceBeRusted(target, user, heretic, out var surfaceStrength);
 

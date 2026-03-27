@@ -5,18 +5,18 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HereticCosmicMarkComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? CosmicDiamondUid;
+
+    [DataField, AutoNetworkedField]
+    public int PathStage;
 
     [DataField]
     public EntProtoId CosmicDiamond = "EffectCosmicDiamond";
 
     [DataField]
     public EntProtoId CosmicCloud = "EffectCosmicCloud";
-
-    [DataField]
-    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(2);
 }

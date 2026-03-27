@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Robust.Shared.GameStates;
 
@@ -22,8 +21,5 @@ public sealed partial class MansusGraspComponent : Component
     public TimeSpan AffectedTime = TimeSpan.FromMinutes(5);
 
     [DataField]
-    public EntityCondition[]? TargetConditions;
-
-    [DataField]
-    public EntityEffect[] Effects;
+    public EntityEffect[]? Effects;
 }

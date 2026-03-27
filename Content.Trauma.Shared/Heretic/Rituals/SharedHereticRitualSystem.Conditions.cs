@@ -3,6 +3,8 @@
 using System.Linq;
 using System.Text;
 using Content.Shared.Stacks;
+using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.Side;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
@@ -17,19 +19,53 @@ public abstract partial class SharedHereticRitualSystem
             OnLimitedCondition);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualConditionEvent<ProcessIngredientsCondition>>(
             OnProcessIngredients);
-        SubscribeLocalEvent<Components.HereticComponent, HereticRitualConditionEvent<CanAscendCondition>>(OnCanAscend);
-        SubscribeLocalEvent<Components.HereticComponent, HereticRitualConditionEvent<ObjectivesCompleteCondition>>(
+        SubscribeLocalEvent<HereticComponent, HereticRitualConditionEvent<CanAscendCondition>>(OnCanAscend);
+        SubscribeLocalEvent<HereticComponent, HereticRitualConditionEvent<ObjectivesCompleteCondition>>(
             OnObjectivesComplete);
-        SubscribeLocalEvent<Components.Side.HereticKnowledgeRitualComponent, HereticRitualConditionEvent<FilterKnowledgeTagsCondition>>(
+        SubscribeLocalEvent<HereticKnowledgeRitualComponent, HereticRitualConditionEvent<FilterKnowledgeTagsCondition>>(
             OnKnowledge);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualConditionEvent<TryApplyEffectSequenceCondition>>(
             OnApplySequence);
+
+        SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<HereticMinStageCondition>>(OnMinStage);
+        SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<BackstabCondition>>(OnBackstab);
+        SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<TryMakeRustWallCondition>>(OnRustWall);
+    }
+
+    private void OnRustWall(Entity<TransformComponent> ent, ref HereticRitualConditionEvent<TryMakeRustWallCondition> args)
+    {
+        if (!TryGetValue(args.Ritual, Performer, out EntityUid user) ||
+            !TryGetValue(args.Ritual, Mind, out EntityUid mind) || !TryComp(mind, out HereticComponent? heretic))
+            return;
+
+        args.Result = _ability.TryMakeRustWall(ent, user, heretic, args.Condition.RustStrengthOverride);
+    }
+
+    private void OnBackstab(Entity<TransformComponent> ent, ref HereticRitualConditionEvent<BackstabCondition> args)
+    {
+        if (!TryGetValue(args.Ritual, Performer, out EntityUid user))
+            return;
+
+        args.Result = _backStab.TryBackstab(ent,
+            user,
+            args.Condition.Tolerance,
+            args.Condition.ShowPopup,
+            args.Condition.PlaySound,
+            args.Condition.AlwaysBackstabLaying);
+    }
+
+    private void OnMinStage(Entity<TransformComponent> ent, ref HereticRitualConditionEvent<HereticMinStageCondition> args)
+    {
+        if (!TryGetValue(args.Ritual, Mind, out EntityUid mind) || !TryComp(mind, out HereticComponent? heretic))
+            return;
+
+        args.Result = heretic.PathStage >= args.Condition.MinStage;
     }
 
     private void OnLimitedCondition(Entity<TransformComponent> ent,
         ref HereticRitualConditionEvent<IsLimitedOutputCondition> args)
     {
-        args.Result = args.Ritual.Comp.LimitedOutput.Contains(ent.Owner);
+        args.Result = Comp<HereticRitualComponent>(args.Ritual).LimitedOutput.Contains(ent.Owner);
     }
 
     private void OnApplyConditions(Entity<TransformComponent> ent,
@@ -43,21 +79,21 @@ public abstract partial class SharedHereticRitualSystem
     private void OnApplySequence(Entity<HereticRitualComponent> ent,
         ref HereticRitualConditionEvent<TryApplyEffectSequenceCondition> args)
     {
-        TryGetValue(ent, Performer, out EntityUid? user);
+        TryGetValue(args.Ritual, Performer, out EntityUid? user);
 
         args.Result = _effects.TryEffects(ent,
             ent.Comp.Effects.Skip(args.Condition.From).Take(args.Condition.To - args.Condition.From),
-            ent,
+            args.Ritual,
             user);
     }
 
-    private void OnObjectivesComplete(Entity<Components.HereticComponent> ent,
+    private void OnObjectivesComplete(Entity<HereticComponent> ent,
         ref HereticRitualConditionEvent<ObjectivesCompleteCondition> args)
     {
         args.Result = _heretic.ObjectivesAllowAscension(ent);
     }
 
-    private void OnCanAscend(Entity<Components.HereticComponent> ent, ref HereticRitualConditionEvent<CanAscendCondition> args)
+    private void OnCanAscend(Entity<HereticComponent> ent, ref HereticRitualConditionEvent<CanAscendCondition> args)
     {
         args.Result = ent.Comp.CanAscend;
     }
@@ -74,7 +110,7 @@ public abstract partial class SharedHereticRitualSystem
 
         var ingredientAmounts = Enumerable.Repeat(0, args.Condition.Ingredients.Length).ToList();
 
-        foreach (var look in ent.Comp.Raiser.GetTargets<EntityUid>(args.Condition.ApplyOn))
+        foreach (var look in args.Ritual.Comp.Raiser.GetTargets<EntityUid>(args.Condition.ApplyOn))
         {
             for (var i = 0; i < args.Condition.Ingredients.Length; i++)
             {
@@ -110,8 +146,8 @@ public abstract partial class SharedHereticRitualSystem
         if (missingList.Count == 0)
         {
             args.Result = true;
-            ent.Comp.Blackboard[args.Condition.DeleteEntitiesKey] = toDelete;
-            ent.Comp.Blackboard[args.Condition.SplitEntitiesKey] = toSplit;
+            args.Ritual.Comp.Blackboard[args.Condition.DeleteEntitiesKey] = toDelete;
+            args.Ritual.Comp.Blackboard[args.Condition.SplitEntitiesKey] = toSplit;
             return;
         }
 
@@ -124,12 +160,12 @@ public abstract partial class SharedHereticRitualSystem
         sb.Remove(sb.Length - 1, 1);
 
         var str = Loc.GetString("heretic-ritual-fail-items", ("itemlist", sb.ToString()));
-        CancelCondition(ent, ref args, str);
+        CancelCondition(args.Ritual, ref args, str);
     }
 
     private void OnTargetCheck(Entity<TransformComponent> ent, ref HereticRitualConditionEvent<IsTargetCondition> args)
     {
-        if (!TryGetValue(args.Ritual, Mind, out EntityUid mind) || !TryComp(mind, out Components.HereticComponent? heretic))
+        if (!TryGetValue(args.Ritual, Mind, out EntityUid mind) || !TryComp(mind, out HereticComponent? heretic))
         {
             CancelCondition(args.Ritual, ref args);
             return;
@@ -138,7 +174,7 @@ public abstract partial class SharedHereticRitualSystem
         args.Result = IsSacrificeTarget((mind, heretic), ent);
     }
 
-    private void OnKnowledge(Entity<Components.Side.HereticKnowledgeRitualComponent> ent,
+    private void OnKnowledge(Entity<HereticKnowledgeRitualComponent> ent,
         ref HereticRitualConditionEvent<FilterKnowledgeTagsCondition> args)
     {
         if (args.Condition.ApplyOn == string.Empty)

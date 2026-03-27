@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityEffects;
+using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
@@ -10,6 +12,21 @@ public sealed partial class HereticBladeComponent : Component
 {
     [DataField]
     public HereticPath? Path;
+
+    [DataField]
+    public EntityEffect[]? Effects;
+
+    [DataField]
+    public HereticBladeBonusEvent? BonusEvent;
+
+    /// <summary>
+    /// Path stage -> effect probability
+    /// </summary>
+    [DataField(required: true)]
+    public Dictionary<int, float> Probabilities = new()
+    {
+        { 0, 1f },
+    };
 
     [DataField]
     public SoundSpecifier? ShatterSound = new SoundCollectionSpecifier("GlassBreak");

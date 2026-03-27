@@ -7,22 +7,10 @@ using Robust.Shared.Utility;
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class StarTouchComponent : Component, ITouchSpell
+public sealed partial class StarTouchComponent : Component
 {
     [DataField]
-    public EntityUid? Action { get; set; }
-
-    [DataField]
-    public TimeSpan Cooldown { get; set; } = TimeSpan.FromSeconds(15);
-
-    [DataField]
     public TimeSpan DrowsinessTime = TimeSpan.FromSeconds(8);
-
-    [DataField]
-    public LocId Speech { get; set; } = "heretic-speech-star-touch";
-
-    [DataField]
-    public SoundSpecifier? Sound { get; set; } = new SoundPathSpecifier("/Audio/Items/welder.ogg");
 
     [DataField]
     public SpriteSpecifier BeamSprite = new SpriteSpecifier.Rsi(new("/Textures/_Goobstation/Heretic/Effects/effects.rsi"), "cosmic_beam");

@@ -596,11 +596,10 @@
       applyOn: Delete
       effects:
       - !type:Delete
-    - !type:GhoulifyEffect
-      applyOn: Result
     - !type:EffectsRitualEffect
       applyOn: Result
       effects:
+      - !type:GhoulifyEffect
       - !type:AddComponents
         components:
         - type: Muted
@@ -2036,13 +2035,15 @@
     - !type:AddToLimitRitualEffect
       applyOn: Polymorphed
       result: Ghoul
-    - !type:GhoulifyEffect
+    - !type:EffectsRitualEffect
       applyOn: Ghoul
-      giveBlade: false
-      health: 250
-      changeAppearance: false
-      deathBehavior: GibOrgans
-      canDeconvert: false
+      effects:
+      - !type:GhoulifyEffect
+        giveBlade: false
+        health: 250
+        changeAppearance: false
+        deathBehavior: GibOrgans
+        canDeconvert: false
 
 - type: entity
   id: RitualMawedCrucible

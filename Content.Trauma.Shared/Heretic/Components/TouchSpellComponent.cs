@@ -1,12 +1,19 @@
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Heretic.Components;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TouchSpellComponent : Component
 {
     [DataField]
+    public EntityWhitelist? TargetWhitelist;
+
+    [DataField]
+    public EntityWhitelist? TargetBlacklist;
+
+    [DataField, AutoNetworkedField]
     public EntityUid? Action;
 
     [DataField]

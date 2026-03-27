@@ -2,6 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._White.BackStab;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Gibbing;
@@ -12,6 +13,8 @@ using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Systems;
+using Content.Trauma.Shared.Heretic.Systems.Abilities;
+using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
@@ -31,6 +34,10 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
+    [Dependency] private readonly BackStabSystem _backStab = default!;
+    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
+    [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
+    [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
 
     public SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
 
@@ -73,7 +80,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         return heretic.Comp.SacrificeTargets.Any(x => x.Entity == GetNetEntity(target));
     }
 
-    private void CancelCondition<T>(Entity<HereticRitualComponent> ent,
+    private void CancelCondition<T>(Entity<HereticRitualRaiserComponent> ent,
         ref HereticRitualConditionEvent<T> ev,
         string? cancelString = null)
         where T : BaseRitualCondition<T>
@@ -84,7 +91,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
             ent.Comp.Blackboard[CancelString] = cancelString;
     }
 
-    protected bool TryGetValue<T>(Entity<HereticRitualComponent> ent, string key, [NotNullWhen(true)] out T? value)
+    public bool TryGetValue<T>(Entity<HereticRitualRaiserComponent> ent, string key, [NotNullWhen(true)] out T? value)
     {
         if (ent.Comp.Blackboard.TryGetValue(key, out var val))
         {
@@ -96,44 +103,44 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         return false;
     }
 
-    private bool TryDoRitual(Entity<HereticRitualComponent> ent, EntityUid user)
+    private bool TryDoRitual(Entity<HereticRitualRaiserComponent, HereticRitualComponent> ent, EntityUid user)
     {
         bool result;
-        if (ent.Comp.Limit > 0)
+        if (ent.Comp2.Limit > 0)
         {
-            ent.Comp.LimitedOutput = ent.Comp.LimitedOutput.Where(Exists).ToList();
-            if (ent.Comp.LimitedOutput.Count >= ent.Comp.Limit)
+            ent.Comp2.LimitedOutput = ent.Comp2.LimitedOutput.Where(Exists).ToList();
+            if (ent.Comp2.LimitedOutput.Count >= ent.Comp2.Limit)
             {
-                if (ent.Comp.LimitReachedEffects is { } limitReachedEffects)
+                if (ent.Comp2.LimitReachedEffects is { } limitReachedEffects)
                     result = _effects.TryEffects(ent, limitReachedEffects, ent, user);
                 else
                 {
-                    ent.Comp.Blackboard[CancelString] = Loc.GetString("heretic-ritual-fail-limit");
+                    ent.Comp1.Blackboard[CancelString] = Loc.GetString("heretic-ritual-fail-limit");
                     return false;
                 }
             }
             else
-                result = _effects.TryEffects(ent, ent.Comp.Effects, ent, user);
+                result = _effects.TryEffects(ent, ent.Comp2.Effects, ent, user);
         }
         else
-            result = _effects.TryEffects(ent, ent.Comp.Effects, ent, user);
+            result = _effects.TryEffects(ent, ent.Comp2.Effects, ent, user);
 
         if (TryGetValue(ent, SuccessOverride, out bool overrideSuccess))
             result = overrideSuccess;
         return result;
     }
 
-    private void SetupBlackboard(Entity<HereticRitualComponent> ent,
+    private void SetupBlackboard(Entity<HereticRitualRaiserComponent, HereticRitualComponent> ent,
         EntityUid performer,
         EntityUid mind,
         EntityUid platform)
     {
-        ent.Comp.Blackboard.Clear();
-        ent.Comp.Blackboard[Performer] = performer;
-        ent.Comp.Blackboard[Mind] = mind;
-        ent.Comp.Blackboard[Platform] = platform;
-        if (ent.Comp.CancelLoc is { } loc)
-            ent.Comp.Blackboard[CancelString] = Loc.GetString(loc);
+        ent.Comp1.Blackboard.Clear();
+        ent.Comp1.Blackboard[Performer] = performer;
+        ent.Comp1.Blackboard[Mind] = mind;
+        ent.Comp1.Blackboard[Platform] = platform;
+        if (ent.Comp2.CancelLoc is { } loc)
+            ent.Comp1.Blackboard[CancelString] = Loc.GetString(loc);
     }
 
     #endregion
@@ -187,7 +194,10 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
             return;
         }
 
-        Entity<HereticRitualComponent> ritEnt = (heretic.ChosenRitual.Value, ritual);
+        var raiser = EnsureComp<HereticRitualRaiserComponent>(heretic.ChosenRitual.Value);
+
+        Entity<HereticRitualRaiserComponent, HereticRitualComponent> ritEnt = (heretic.ChosenRitual.Value, raiser,
+            ritual);
 
         SetupBlackboard(ritEnt, args.User, mind, ent);
 
@@ -199,7 +209,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         else if (TryGetValue(ritEnt, CancelString, out string? cancelStr))
             _popup.PopupClient(cancelStr, ent, args.User);
 
-        ritual.Blackboard.Clear();
+        raiser.Blackboard.Clear();
         Dirty(ritEnt);
     }
 

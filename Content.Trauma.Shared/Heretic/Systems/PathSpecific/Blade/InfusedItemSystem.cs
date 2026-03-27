@@ -11,6 +11,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
+using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -29,7 +30,7 @@ public sealed class InfusedItemSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
-
+    [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
 
     public override void Initialize()
     {
@@ -71,7 +72,8 @@ public sealed class InfusedItemSystem : EntitySystem
         if (!args.IsHit || args.HitEntities.Count == 0 || args.Direction != null)
             return;
 
-        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
+        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind) ||
+            heretic.CurrentPath is not { } path)
             return;
 
         var target = args.HitEntities[0];
@@ -83,9 +85,15 @@ public sealed class InfusedItemSystem : EntitySystem
             mobState.CurrentState == MobState.Dead)
             return;
 
-        if (!_grasp.TryApplyGraspEffectAndMark(args.User, (mind, heretic), target, null, out _))
-            return;
+        var raiser = EnsureComp<HereticRitualRaiserComponent>(ent);
+        raiser.Blackboard.Clear();
+        raiser.Blackboard[SharedHereticRitualSystem.Performer] = args.User;
+        raiser.Blackboard[SharedHereticRitualSystem.Mind] = mind;
 
+        _effects.TryApplyEffect(target, ent.Comp.InfusedHitEffect, (ent, raiser), args.User);
+        _grasp.ApplyMark(target, path, heretic.PathStage);
+
+        raiser.Blackboard.Clear();
         SpendInfusionCharges(ent);
     }
 

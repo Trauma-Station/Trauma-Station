@@ -59,21 +59,21 @@ public sealed partial class AddToLimitRitualEffect : OutputRitualEffect<AddToLim
         if (raiser is not HereticRitualRaiser ritualRaiser)
             return;
 
-        var ritual = ritualRaiser.Ritual;
+        var ritual = ritualRaiser.EntMan.GetComponent<HereticRitualComponent>(ritualRaiser.Ritual);
 
-        if (ritual.Comp.Limit <= 0)
+        if (ritual.Limit <= 0)
             return;
 
         var result = new HashSet<EntityUid>();
         foreach (var t in ritualRaiser.GetTargets<EntityUid>(ApplyOn))
         {
-            if (ritual.Comp.LimitedOutput.Count >= ritual.Comp.Limit)
+            if (ritual.LimitedOutput.Count >= ritual.Limit)
                 break;
 
             if (!ritualRaiser.TryConditions(t, IndividualConditions))
                 continue;
 
-            ritual.Comp.LimitedOutput.Add(t);
+            ritual.LimitedOutput.Add(t);
             result.Add(t);
         }
 
@@ -173,7 +173,7 @@ public sealed partial class OpenRuneBuiEffect : BaseRitualEffect<OpenRuneBuiEffe
 
 public sealed partial class TeleportToRuneEffect : BaseRitualEffect<TeleportToRuneEffect>;
 
-public sealed partial class GhoulifyEffect : BaseRitualEffect<GhoulifyEffect>
+public sealed partial class GhoulifyEffect : EntityEffectBase<GhoulifyEffect>, IHereticRitualEntry
 {
     [DataField]
     public bool GiveBlade = true;
@@ -220,4 +220,28 @@ public sealed partial class IfElseRitualEffect : BaseRitualEffect<IfElseRitualEf
 
     [DataField]
     public string? SaveResultKey;
+}
+
+public sealed partial class NestedRitualEffect : EntityEffectBase<NestedRitualEffect>, IHereticRitualEntry
+{
+    [DataField(required: true)]
+    public ProtoId<EntityEffectPrototype> Proto;
+}
+
+public sealed partial class SpawnCosmicField : EntityEffectBase<SpawnCosmicField>, IHereticRitualEntry
+{
+    [DataField]
+    public float Lifetime = 30f;
+}
+
+public sealed partial class ResetRustGraspDelayEffect : EntityEffectBase<ResetRustGraspDelayEffect>, IHereticRitualEntry
+{
+    [DataField]
+    public float Multiplier = 1f;
+}
+
+public sealed partial class SetBlackboardValuesRitualEffect : EntityEffectBase<SetBlackboardValuesRitualEffect>
+{
+    [DataField(required: true)]
+    public Dictionary<string, object> Values;
 }

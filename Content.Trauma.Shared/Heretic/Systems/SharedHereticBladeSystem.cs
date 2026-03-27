@@ -6,18 +6,13 @@ using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Weapons;
-using Content.Medical.Common.Body;
-using Content.Medical.Common.Targeting;
 using Content.Shared._Goobstation.Wizard.SanguineStrike;
-using Content.Shared.Atmos.Rotting;
-using Content.Shared.Body;
 using Content.Shared.CombatMode;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
@@ -27,8 +22,8 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
+using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
-using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -43,19 +38,15 @@ public abstract class SharedHereticBladeSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedHereticCombatMarkSystem _combatMark = default!;
-    [Dependency] private readonly SharedRottingSystem _rotting = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedSanguineStrikeSystem _sanguine = default!;
     [Dependency] private readonly CosmosComboSystem _combo = default!;
-    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedVoidCurseSystem _voidCurse = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly CommonBodyPartSystem _part = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -70,6 +61,63 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         SubscribeLocalEvent<HereticBladeComponent, GetLightAttackRangeEvent>(OnGetRange);
         SubscribeLocalEvent<HereticBladeComponent, LightAttackSpecialInteractionEvent>(OnSpecial);
         SubscribeLocalEvent<HereticBladeComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<HereticBladeComponent, HereticBladeBonusDamageEvent>(OnDamageBonus);
+        SubscribeLocalEvent<HereticBladeComponent, HereticBladeBonusWoundingEvent>(OnWoundingBonus);
+        SubscribeLocalEvent<HereticBladeComponent, CosmosBladeBonusEvent>(OnCosmosBlade);
+        SubscribeLocalEvent<HereticBladeComponent, BladeBladeBonusEvent>(OnBladeBlade);
+    }
+
+    private void OnBladeBlade(Entity<HereticBladeComponent> ent, ref BladeBladeBonusEvent args)
+    {
+        args.Args.BonusDamage += args.BonusDamage;
+
+        var user = args.Args.User;
+
+        if (!TryComp(user, out SilverMaelstromComponent? maelstrom))
+            return;
+
+        var aliveMobsCount = args.Args.HitEntities.Count(x => x != user && _mobState.IsAlive(x));
+
+        args.BonusDamage += args.Args.BaseDamage * maelstrom.ExtraDamageMultiplier;
+        if (aliveMobsCount <= 0 || !TryComp<DamageableComponent>(user, out var dmg))
+            return;
+
+        var heal = args.Args.BaseDamage.GetTotal() * aliveMobsCount * maelstrom.LifestealHealMultiplier;
+
+        _sanguine.LifeSteal((user, dmg), heal);
+    }
+
+    private void OnCosmosBlade(Entity<HereticBladeComponent> ent, ref CosmosBladeBonusEvent args)
+    {
+        args.Args.BonusDamage += args.BonusDamage;
+
+        var hitEnts = args.Args.HitEntities;
+
+        if (hitEnts.Count == 0)
+            return;
+
+        _combo.ComboProgress(args.Args.User, args.PathStage, hitEnts);
+    }
+
+    private void OnWoundingBonus(Entity<HereticBladeComponent> ent, ref HereticBladeBonusWoundingEvent args)
+    {
+        var stage = args.PathStage;
+        var defaultPair = new KeyValuePair<int, float>(0, 1f);
+        var woundingMultiplier = args.WoundingBonus.LastOrDefault(x => x.Key < stage, defaultPair).Value;
+        if (woundingMultiplier <= 1f)
+            return;
+        foreach (var dmgType in args.Args.BaseDamage.DamageDict.Keys)
+        {
+            if (!args.Args.BaseDamage.WoundSeverityMultipliers.TryGetValue(dmgType, out var mult))
+                args.Args.BaseDamage.WoundSeverityMultipliers[dmgType] = woundingMultiplier;
+            else
+                args.Args.BaseDamage.WoundSeverityMultipliers[dmgType] = mult * woundingMultiplier;
+        }
+    }
+
+    private void OnDamageBonus(Entity<HereticBladeComponent> ent, ref HereticBladeBonusDamageEvent args)
+    {
+        args.Args.BonusDamage += args.BonusDamage;
     }
 
     private void OnGetRange(Entity<HereticBladeComponent> ent, ref GetLightAttackRangeEvent args)
@@ -191,63 +239,29 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         return true;
     }
 
-    public void ApplySpecialEffect(EntityUid performer, EntityUid target, MeleeHitEvent args)
+    public void ApplySpecialEffect(EntityUid performer, EntityUid target, Entity<HereticBladeComponent> blade)
     {
-        var path = TryComp(performer, out HereticBladeUserBonusDamageComponent? bonus) ? bonus.Path : null;
+        int? stage = TryComp(performer, out HereticBladeUserBonusDamageComponent? bonus) && bonus.ApplyBladeEffects
+            ? 7
+            : null;
         if (_heretic.TryGetHereticComponent(performer, out var hereticComp, out _))
-            path = hereticComp.CurrentPath;
+            stage = hereticComp.PathStage;
 
-        if (path == null)
+        if (stage == null)
             return;
 
-        switch (path)
+        var defaultPair = new KeyValuePair<int, float>(0, 1f);
+        var prob = blade.Comp.Probabilities.LastOrDefault(x => x.Key < stage, defaultPair).Value;
+        if (prob <= 0f)
+            return;
+
+        if (blade.Comp.Effects is not { } effects)
+            return;
+
+        foreach (var effect in effects)
         {
-            case HereticPath.Ash:
-                ApplyAshBladeEffect(target);
-                break;
-
-            case HereticPath.Blade:
-                // check event handler
-                break;
-
-            case HereticPath.Flesh:
-                // ultra bleed
-                ApplyFleshBladeEffect(target);
-                break;
-
-            case HereticPath.Lock:
-                var (woundingMultiplier, woundProb) = hereticComp?.Ascended is true ? (3f, 0.65f) : (2f, 0.35f);
-                foreach (var dmgType in args.BaseDamage.DamageDict.Keys)
-                {
-                    if (!args.BaseDamage.WoundSeverityMultipliers.TryGetValue(dmgType, out var mult))
-                        args.BaseDamage.WoundSeverityMultipliers[dmgType] = woundingMultiplier;
-                    else
-                        args.BaseDamage.WoundSeverityMultipliers[dmgType] = mult * woundingMultiplier;
-                }
-
-                if (!TryComp(performer, out TargetingComponent? targeting))
-                    break;
-
-                var (type, symmetry) = _body.ConvertTargetBodyPart(targeting.Target);
-                var targetPart = _part.GetBodyParts(target, type, symmetry: symmetry).FirstOrNull();
-
-                if (targetPart == null)
-                    break;
-
-                ApplyLockBladeEffect(target, targetPart.Value, woundProb);
-                break;
-
-            case HereticPath.Void:
-                _voidCurse.DoCurse(target);
-                break;
-
-            case HereticPath.Rust:
-                if (_mobState.IsDead(target))
-                    _rotting.ReduceAccumulator(target, -TimeSpan.FromMinutes(1f));
-                break;
-
-            default:
-                return;
+            effect.Probability = prob;
+            _effects.TryApplyEffect(target, effect, 1f, performer);
         }
     }
 
@@ -292,108 +306,43 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         if (!args.IsHit || ent.Comp.Path == null)
             return;
 
-        _heretic.TryGetHereticComponent(args.User, out var hereticComp, out var mind);
+        _heretic.TryGetHereticComponent(args.User, out var hereticComp, out _);
 
         if (TryComp(args.User, out HereticBladeUserBonusDamageComponent? bonus) &&
             (bonus.Path == null || bonus.Path == ent.Comp.Path))
         {
-            args.BonusDamage += args.BaseDamage * bonus.BonusMultiplier; // "ghouls can use bloody blades effectively... so real..."
+            args.BonusDamage += args.BaseDamage * bonus.BonusMultiplier;
             if (hereticComp == null)
             {
                 foreach (var hit in args.HitEntities)
                 {
-                    ApplySpecialEffect(args.User, hit, args);
+                    ApplySpecialEffect(args.User, hit, ent);
                 }
             }
         }
 
-        if (hereticComp == null)
+        if (hereticComp == null || ent.Comp.Path != hereticComp.CurrentPath)
             return;
 
-        if (ent.Comp.Path != hereticComp.CurrentPath)
-            return;
-
-        if (hereticComp.PathStage >= 7)
+        if (hereticComp.PathStage >= 7 && ent.Comp.BonusEvent is { } ev)
         {
-            switch (hereticComp.CurrentPath)
-            {
-                case HereticPath.Rust:
-                    args.BonusDamage += new DamageSpecifier
-                    {
-                        DamageDict =
-                        {
-                            { "Poison", 8f },
-                        },
-                    };
-                    break;
-                case HereticPath.Blade:
-                    args.BonusDamage += new DamageSpecifier
-                    {
-                        DamageDict =
-                        {
-                            { "Structural", 10f },
-                        },
-                    };
-                    break;
-                case HereticPath.Cosmos:
-                    args.BonusDamage += new DamageSpecifier
-                    {
-                        DamageDict =
-                        {
-                            { "Heat", 5f },
-                        },
-                    };
-
-                    var hitEnts = args.HitEntities;
-
-                    if (hitEnts.Count == 0)
-                        break;
-
-                    _combo.ComboProgress(args.User, hereticComp, hitEnts);
-
-                    foreach (var uid in hitEnts)
-                    {
-                        _starMark.TryApplyStarMark(uid);
-                    }
-                    break;
-            }
+            ev.Args = args;
+            ev.PathStage = hereticComp.PathStage;
+            RaiseLocalEvent(ent, (object) ev);
         }
-
-        var aliveMobsCount = 0;
 
         foreach (var hit in args.HitEntities)
         {
             if (hit == args.User)
                 continue;
 
-            if (TryComp(hit, out MobStateComponent? mobState) && mobState.CurrentState != MobState.Dead)
-                aliveMobsCount++;
-
             if (TryComp<HereticCombatMarkComponent>(hit, out var mark))
-                _combatMark.ApplyMarkEffect(hit, mark, mark.Path, args.User, (mind, hereticComp));
+                _combatMark.ApplyMarkEffect(hit, mark, args.User);
 
             if (hereticComp.PathStage >= 7)
-                ApplySpecialEffect(args.User, hit, args);
-        }
-
-        // blade path exclusive.
-        if (HasComp<SilverMaelstromComponent>(args.User))
-        {
-            args.BonusDamage += args.BaseDamage * 0.5f;
-            if (aliveMobsCount > 0 && TryComp<DamageableComponent>(args.User, out var dmg))
-            {
-                var heal = args.BaseDamage.GetTotal() * aliveMobsCount * 0.25f;
-
-                _sanguine.LifeSteal((args.User, dmg), heal);
-            }
+                ApplySpecialEffect(args.User, hit, ent);
         }
     }
-
-    protected virtual void ApplyLockBladeEffect(EntityUid target, EntityUid targetPart, float probability) { }
-
-    protected virtual void ApplyAshBladeEffect(EntityUid target) { }
-
-    protected virtual void ApplyFleshBladeEffect(EntityUid target) { }
 
     protected virtual void RandomTeleport(EntityUid user, EntityUid blade, RandomTeleportComponent comp) { }
 }

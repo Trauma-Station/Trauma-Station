@@ -5,6 +5,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Audio;
@@ -19,6 +20,7 @@ public sealed class TouchSpellSystem : EntitySystem
     [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -37,7 +39,13 @@ public sealed class TouchSpellSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        GetTouchSpell(args.Performer, args, ev.TouchSpell);
+        var spawned = GetTouchSpell(args.Performer, args, ev.TouchSpell);
+        if (spawned == null)
+            return;
+
+        var spell = Comp<TouchSpellComponent>(spawned.Value);
+        spell.Action = args.Action;
+        Dirty(spawned.Value, spell);
         args.Handled = true;
     }
 
@@ -51,7 +59,7 @@ public sealed class TouchSpellSystem : EntitySystem
 
     private void OnAfterInteract(Entity<TouchSpellComponent> ent, ref AfterInteractEvent args)
     {
-        if (args is not { CanReach: true, Target: { } target })
+        if (args is not { Handled: false, CanReach: true, Target: { } target })
             return;
 
         TryUseTouchSpell(ent, args.User, target);
@@ -71,7 +79,8 @@ public sealed class TouchSpellSystem : EntitySystem
 
     public bool CanUseTouchSpell(Entity<TouchSpellComponent> ent, EntityUid user, EntityUid target)
     {
-        return ent.Comp.CanUseOnSelf || user != target;
+        return (ent.Comp.CanUseOnSelf || user != target) &&
+               _whitelist.CheckBoth(target, ent.Comp.TargetBlacklist, ent.Comp.TargetWhitelist);
     }
 
     public void UseTouchSpellMultiTarget(Entity<TouchSpellComponent> ent,
@@ -127,7 +136,8 @@ public sealed class TouchSpellSystem : EntitySystem
             return;
 
         InvokeTouchSpell(user, ent.Comp.Action, ent.Comp.Sound, ent.Comp.Speech, cooldownOverride ?? ent.Comp.Cooldown);
-        PredictedQueueDel(ent);
+        if (cooldownOverride != TimeSpan.Zero)
+            PredictedQueueDel(ent);
     }
 
     public void InvokeTouchSpell(EntityUid user,
@@ -141,7 +151,7 @@ public sealed class TouchSpellSystem : EntitySystem
         if (speech != null)
             _chat.TrySendInGameICMessage(user, Loc.GetString(speech), InGameICChatType.Speak, false);
 
-        if (Exists(action))
+        if (cooldown > TimeSpan.Zero && Exists(action))
             _actions.SetCooldown(action.Value, cooldown);
 
         var ev = new UserInvokeTouchSpellEvent();
@@ -164,31 +174,32 @@ public sealed class TouchSpellSystem : EntitySystem
         return null;
     }
 
-    private void GetTouchSpell(EntityUid ent, TouchSpellEvent args, EntProtoId? touchSpellOverride)
+    private EntityUid? GetTouchSpell(EntityUid ent, TouchSpellEvent args, EntProtoId? touchSpellOverride)
     {
         if (FindTouchSpell(ent, touchSpellOverride ?? args.TouchSpell) is { } spell)
         {
             PredictedQueueDel(spell);
-            return;
+            return null;
         }
 
         if (!_hands.TryGetEmptyHand(ent, out var emptyHand))
         {
             if (args.SpecialEvent is not { } specialEv)
-                return;
+                return null;
 
             specialEv.Invoke = false;
             RaiseLocalEvent(args.Performer, (object) specialEv);
             if (specialEv.Invoke)
                 InvokeTouchSpell(args.Performer, args.Action, specialEv.Sound, specialEv.Speech, specialEv.Cooldown);
-            return;
+            return null;
         }
 
         var touch = PredictedSpawnAtPosition(args.TouchSpell, Transform(ent).Coordinates);
 
         if (_hands.TryPickup(ent, touch, emptyHand, animate: false))
-            return;
+            return touch;
 
         PredictedQueueDel(touch);
+        return null;
     }
 }

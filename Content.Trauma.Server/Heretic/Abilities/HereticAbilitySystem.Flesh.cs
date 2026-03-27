@@ -24,6 +24,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -42,12 +43,12 @@ public sealed partial class HereticAbilitySystem
     {
         base.SubscribeFlesh();
 
-        SubscribeLocalEvent<Shared.Heretic.Components.PathSpecific.Flesh.FleshPassiveComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<Shared.Heretic.Components.PathSpecific.Flesh.FleshPassiveComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<Shared.Heretic.Components.PathSpecific.Flesh.FleshPassiveComponent, ConsumingFoodEvent>(OnConsumingFood);
+        SubscribeLocalEvent<FleshPassiveComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<FleshPassiveComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<FleshPassiveComponent, ConsumingFoodEvent>(OnConsumingFood);
     }
 
-    private void OnConsumingFood(Entity<Shared.Heretic.Components.PathSpecific.Flesh.FleshPassiveComponent> ent, ref ConsumingFoodEvent args)
+    private void OnConsumingFood(Entity<FleshPassiveComponent> ent, ref ConsumingFoodEvent args)
     {
         if (args.Volume <= FixedPoint2.Zero)
             return;
@@ -62,7 +63,7 @@ public sealed partial class HereticAbilitySystem
         _blood.TryAddToBloodstream(ent.Owner, new Solution(ent.Comp.ReagentId, multiplier));
     }
 
-    private float GetMultiplier(Entity<Shared.Heretic.Components.PathSpecific.Flesh.FleshPassiveComponent> ent,
+    private float GetMultiplier(Entity<FleshPassiveComponent> ent,
         Shared.Heretic.Components.HereticComponent heretic,
         ref ConsumingFoodEvent args,
         out bool multipliersApplied)
@@ -88,12 +89,12 @@ public sealed partial class HereticAbilitySystem
         return multiplier * ent.Comp.ReagentMultiplier;
     }
 
-    private void OnMapInit(Entity<Shared.Heretic.Components.PathSpecific.Flesh.FleshPassiveComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<FleshPassiveComponent> ent, ref MapInitEvent args)
     {
         ResolveStomach(ent);
     }
 
-    private EntityUid? ResolveStomach(Entity<Shared.Heretic.Components.PathSpecific.Flesh.FleshPassiveComponent> ent)
+    private EntityUid? ResolveStomach(Entity<FleshPassiveComponent> ent)
     {
         if (ent.Comp.Stomach is { } stomach)
             return stomach;
@@ -122,7 +123,7 @@ public sealed partial class HereticAbilitySystem
         return ent.Comp.Stomach = uid;
     }
 
-    private void OnDamageChanged(Entity<Shared.Heretic.Components.PathSpecific.Flesh.FleshPassiveComponent> ent, ref DamageChangedEvent args)
+    private void OnDamageChanged(Entity<FleshPassiveComponent> ent, ref DamageChangedEvent args)
     {
         if (!args.DamageIncreased || args.DamageDelta == null)
             return;
@@ -166,14 +167,14 @@ public sealed partial class HereticAbilitySystem
 
         for (var i = 0; i < toSpawn; i++)
         {
-            if (CreateFleshMimic(ent, mind, ent, true, true, 50, args.Origin) is { } clone)
+            if (CreateFleshMimic(ent, ent, mind, true, true, 50, args.Origin) is { } clone)
                 ent.Comp.FleshMimics.Add(clone);
         }
 
         ent.Comp.TrackedDamage -= toSpawn * ent.Comp.MimicDamage;
     }
 
-    public EntityUid? CreateFleshMimic(EntityUid uid,
+    public override EntityUid? CreateFleshMimic(EntityUid uid,
         EntityUid user,
         EntityUid userMind,
         bool giveBlade,
@@ -206,7 +207,7 @@ public sealed partial class HereticAbilitySystem
             }
         }
 
-        var minion = EnsureComp<Shared.Heretic.Components.Ghoul.HereticMinionComponent>(clone.Value);
+        var minion = EnsureComp<HereticMinionComponent>(clone.Value);
         minion.BoundHeretic = user;
         minion.MinionId = GetNetEntity(userMind).Id;
         Dirty(clone.Value, minion);
@@ -223,7 +224,7 @@ public sealed partial class HereticAbilitySystem
                 QueueDel(weaponClone);
             else
             {
-                EnsureComp<Shared.Heretic.Components.Ghoul.GhoulWeaponComponent>(weaponClone);
+                EnsureComp<GhoulWeaponComponent>(weaponClone);
                 ghoul.BoundWeapon = weaponClone;
                 var cartridgeQuery = GetEntityQuery<CartridgeAmmoComponent>();
                 if (TryComp(weaponClone, out ContainerManagerComponent? containerManager))
@@ -273,13 +274,13 @@ public sealed partial class HereticAbilitySystem
         if (user != uid)
         {
             _npcFaction.AggroEntity((clone.Value, exception), uid);
-            EnsureComp<Shared.Heretic.Components.PathSpecific.Flesh.FleshMimickedComponent>(uid).FleshMimics.Add(clone.Value);
+            EnsureComp<FleshMimickedComponent>(uid).FleshMimics.Add(clone.Value);
         }
 
         if (hostile != null && hostile.Value != user)
         {
             _npcFaction.AggroEntity((clone.Value, exception), hostile.Value);
-            EnsureComp<Shared.Heretic.Components.PathSpecific.Flesh.FleshMimickedComponent>(hostile.Value).FleshMimics.Add(clone.Value);
+            EnsureComp<FleshMimickedComponent>(hostile.Value).FleshMimics.Add(clone.Value);
         }
 
         return clone.Value;

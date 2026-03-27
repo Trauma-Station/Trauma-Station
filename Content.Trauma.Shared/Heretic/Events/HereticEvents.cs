@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Alert;
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -105,3 +107,34 @@ public abstract partial class TouchSpellSpecialEvent : EntityEventArgs
 
 [Serializable, NetSerializable]
 public sealed partial class MansusGraspSpecialEvent : TouchSpellSpecialEvent;
+
+[ImplicitDataDefinitionForInheritors]
+public abstract partial class HereticBladeBonusEvent : EntityEventArgs
+{
+    public MeleeHitEvent Args;
+
+    public int PathStage;
+}
+
+[Serializable, NetSerializable, Virtual]
+public partial class HereticBladeBonusDamageEvent : HereticBladeBonusEvent
+{
+    [DataField(required: true)]
+    public DamageSpecifier BonusDamage = default!;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class HereticBladeBonusWoundingEvent : HereticBladeBonusEvent
+{
+    /// <summary>
+    /// Path stage -? bonus
+    /// </summary>
+    [DataField(required: true)]
+    public Dictionary<int, float> WoundingBonus = default!;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class CosmosBladeBonusEvent : HereticBladeBonusDamageEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class BladeBladeBonusEvent : HereticBladeBonusDamageEvent;

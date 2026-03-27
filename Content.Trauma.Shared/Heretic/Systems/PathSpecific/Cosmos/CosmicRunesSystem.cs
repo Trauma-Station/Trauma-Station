@@ -13,7 +13,6 @@ using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
-using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -32,7 +31,7 @@ public sealed class CosmicRunesSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
-    [Dependency] private readonly SharedHereticAbilitySystem _heretic = default!;
+    [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
 
     public override void Initialize()
     {
@@ -48,9 +47,9 @@ public sealed class CosmicRunesSystem : EntitySystem
         if (HasComp<FadingTimedDespawnComponent>(ent))
             return;
 
-        if (TryComp(args.Used, out StarTouchComponent? starTouch))
+        if (HasComp<StarTouchComponent>(args.Used))
         {
-            _heretic.InvokeTouchSpell<StarTouchComponent>((args.Used, starTouch), args.User);
+            _touchSpell.InvokeTouchSpell(args.Used, args.User);
             EnsureComp<FadingTimedDespawnComponent>(ent).Lifetime = 0f;
             if (Exists(ent.Comp.LinkedRune))
                 EnsureComp<FadingTimedDespawnComponent>(ent.Comp.LinkedRune.Value).Lifetime = 0f;

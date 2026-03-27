@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Common.Surgery;
-using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
@@ -20,8 +20,6 @@ public abstract partial class SharedHereticAbilitySystem
 
     protected virtual void SubscribeFlesh()
     {
-        SubscribeLocalEvent<EventHereticFleshSurgeryDoAfter>(OnFleshSurgeryDoAfter);
-
         SubscribeLocalEvent<FleshPassiveComponent, ImmuneToPoisonDamageEvent>(OnPoisonImmune);
 
         SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryPainEvent>>(OnPain);
@@ -39,25 +37,8 @@ public abstract partial class SharedHereticAbilitySystem
     {
         if (!HasComp<GhoulComponent>(args.Target))
             return;
-
-        var dargs = new DoAfterArgs(EntityManager,
-            args.User,
-            ent.Comp.Delay,
-            new EventHereticFleshSurgeryDoAfter(),
-            args.User,
-            args.Target,
-            ent,
-            showTo: EntityUid.Invalid)
-        {
-            Hidden = true, // Hidden because it also has health analyzer do-after
-            BreakOnDamage = true,
-            BreakOnMove = true,
-            BreakOnHandChange = false,
-            BreakOnDropItem = false,
-            Broadcast = true,
-        };
-
-        DoAfter.TryStartDoAfter(dargs);
+        args.Invoke = true;
+        HealGhoul(args.Target, args.User);
     }
 
     private void OnIgnore(Entity<FleshSurgeryComponent> ent, ref HeldRelayedEvent<SurgeryIgnorePreviousStepsEvent> args)
@@ -68,19 +49,6 @@ public abstract partial class SharedHereticAbilitySystem
     private void OnPain(Entity<FleshSurgeryComponent> ent, ref HeldRelayedEvent<SurgeryPainEvent> args)
     {
         args.Args.Cancelled = true;
-    }
-
-    private void OnFleshSurgeryDoAfter(EventHereticFleshSurgeryDoAfter args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (args.Target is not { } target || args.Used is not { } used)
-            return;
-
-        _touchSpell.InvokeTouchSpell(used, args.User);
-        args.Handled = true;
-        HealGhoul(target, args.User);
     }
 
     private void HealGhoul(EntityUid target, EntityUid user)
@@ -95,6 +63,9 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnFleshSurgeryUse(Entity<FleshSurgeryComponent> ent, ref UseInHandEvent args)
     {
+        if (!TryComp(ent, out TouchSpellComponent? touchSpell))
+            return;
+
         if (!Heretic.TryGetHereticComponent(args.User, out var heretic, out _) ||
             heretic.CurrentPath != HereticPath.Flesh || !heretic.Ascended)
             return;
@@ -108,7 +79,7 @@ public abstract partial class SharedHereticAbilitySystem
             HealGhoul(ghoul, args.User);
         }
 
-        var cd = _grasp.CalculateAreaGraspCooldown((float) ent.Comp.Cooldown.TotalSeconds,
+        var cd = _grasp.CalculateAreaGraspCooldown((float) touchSpell.Cooldown.TotalSeconds,
             _lookupGhouls.Count,
             ent.Comp.AreaHealRange,
             1f);
@@ -122,7 +93,18 @@ public abstract partial class SharedHereticAbilitySystem
             Dirty(effect, comp);
         }
 
-        _touchSpell.InvokeTouchSpell(ent.Owner, args.User, cd);
+        _touchSpell.InvokeTouchSpell((ent.Owner, touchSpell), args.User, cd);
         args.Handled = true;
+    }
+
+    public virtual EntityUid? CreateFleshMimic(EntityUid uid,
+        EntityUid user,
+        EntityUid userMind,
+        bool giveBlade,
+        bool makeGhostRole,
+        FixedPoint2 hp,
+        EntityUid? hostile)
+    {
+        return null;
     }
 }
