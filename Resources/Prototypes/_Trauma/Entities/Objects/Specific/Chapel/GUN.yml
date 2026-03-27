@@ -1,7 +1,7 @@
 - type: entity
-  name: faith
-  parent: [BaseWeaponPistol]
+  parent: [ BaseWeaponPistol, BaseChaplainContraband ]
   id: WeaponPistolFaith
+  name: faith
   description: "'Cause ya gotta have Faith. A tiny pistol designed to fit in a bible, takes .22 Short ammo."
   components:
   - type: Sprite
@@ -30,8 +30,6 @@
         whitelist:
           tags:
             - CartridgePistol
-  - type: Contraband
-    allowedJobs: [ Chaplain ]
   - type: Gun
     fireRate: 2
     availableModes:
@@ -40,7 +38,7 @@
       path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
 
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, BaseChaplainContraband ]
   id: BaseMagazineKolibri
   name: "tiny magazine (.35 Auto)"
   description: 4 round low-caliber magazine, often used by Chaplains.
@@ -63,5 +61,3 @@
     capacity: 4
   - type: Item
     size: Tiny
-  - type: Contraband
-    allowedJobs: [ Chaplain ]

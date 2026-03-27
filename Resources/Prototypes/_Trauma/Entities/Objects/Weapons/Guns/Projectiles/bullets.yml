@@ -10,7 +10,7 @@
         Piercing: 10
 
 - type: entity
-  parent: BaseBullet
+  parent: [ BaseBullet, BaseChaplainContraband ]
   id: BulletPistolHoly
   name: bullet (.35 auto Holy)
   categories: [ HideSpawnMenu ]
