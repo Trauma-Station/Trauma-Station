@@ -86,6 +86,12 @@
             "name": "handlelarge"
         },
         {
+            "name": "ingot_adamantine"
+        },
+        {
+            "name": "ingot_adamantine_hot"
+        },
+        {
             "name": "ingot_brass"
         },
         {

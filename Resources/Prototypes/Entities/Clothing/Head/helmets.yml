@@ -829,6 +829,8 @@
     sprite: Clothing/Head/Helmets/card_helmet.rsi
   - type: IngestionBlocker
   - type: Armor
+    coverage:
+    - Head
     modifiers:
       coefficients:
         Blunt: 0.95

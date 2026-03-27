@@ -228,6 +228,7 @@
     tags:
     - IngotBrass
 
+
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
   id: BrassIngotIntermediarytoHot
