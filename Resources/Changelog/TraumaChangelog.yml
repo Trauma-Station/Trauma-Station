@@ -5533,3 +5533,10 @@ Entries:
   id: 650
   time: '2026-03-26T20:38:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1608
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Add
+    message: added sprites for breaching because im malding
+  id: 651
+  time: '2026-03-27T09:38:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1612
