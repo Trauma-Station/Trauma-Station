@@ -9,3 +9,39 @@
         children:
         - id: WeaponPistolFaith
         - id: BaseMagazineKolibri
+
+- type: entity
+  parent: BibleQuaran
+  id: BibleQuaranFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponPistolFaith
+        - id: BaseMagazineKolibri
+
+- type: entity
+  parent: BibleTanakh
+  id: BibleTanakhFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponPistolFaith
+        - id: BaseMagazineKolibri
+
+- type: entity
+  parent: BibleSlabClockwork
+  id: BibleSlabClockworkFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponPistolFaith
+        - id: BaseMagazineKolibri
