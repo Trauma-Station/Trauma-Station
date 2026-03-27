@@ -56,4 +56,3 @@
   parent: BaseQuality
   id: ShitBullets
   projectile: 1.15 # Double damage at robust, make shit bullets do 1/2 real bullet damage
-
