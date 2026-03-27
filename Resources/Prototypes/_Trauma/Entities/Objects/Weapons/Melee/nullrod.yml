@@ -1,0 +1,56 @@
+- type: entity
+  name: iradomini
+  parent: BaseItem
+  id: WeaponPistolIradomini
+  description: A powerful crossbow for the crusader with style.
+  components:
+  - type: Nullrod
+    damageOnUntrainedUse:
+      types:
+        Blunt: 20
+    UntrainedUseString: nullrod-iradomini-untrained-usage-popup
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Nullrod/iradomini.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Nullrod/iradomini.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+  - type: Gun
+    minAngle: 0
+    maxAngle: 5
+    angleIncrease: 1
+    angleDecay: 4
+    fireRate: 1
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: BulletMiss # Bow uses these so its fine.
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunRequiresWield
+  - type: Item
+    size: Large
+  - type: BasicEntityAmmoProvider
+    proto: HolyArrow
+    capacity: 1
+    count: 1
+  - type: AmmoCounter
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Tag
+    tags:
+    - Nullrod
+    - Iradomini
+  - type: DivineIntervention
+  - type: Reflect
+    reflectProb: 1
+    reflects:
+    - Magic
+    slotFlags:
+    - NONE
+  - type: ReloadOnPray
+  - type: AlternatePrayable
+    prayDoAfterDuration: 10

@@ -70,7 +70,6 @@
   - type: BadFood
   - type: CleansForensics
   - type: FloorCleaner # Goobstation
-    cleanDelay: 12
   - type: Residue
     residueAdjective: residue-slippery
 

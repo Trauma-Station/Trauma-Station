@@ -51,7 +51,7 @@ public sealed partial class SequenceButtons : ScrollContainer
         {
             var sequence = _sequences[i];
             var index = (uint) i;
-            var rarity = RarityChar(sequence.Rarity);
+            var rarity = sequence.Rarity.RarityChar();
             var text = Loc.GetString("genetics-console-sequence-text", ("rarity", rarity), ("number", sequence.Number));
             var button = new Button()
             {
@@ -71,13 +71,4 @@ public sealed partial class SequenceButtons : ScrollContainer
             Buttons.AddChild(button);
         }
     }
-
-    private char RarityChar(MutationRarity rarity)
-        => rarity switch
-        {
-            MutationRarity.Common => 'C',
-            MutationRarity.Rare => 'R',
-            MutationRarity.Mythical => 'M',
-            _ => '?'
-        };
 }

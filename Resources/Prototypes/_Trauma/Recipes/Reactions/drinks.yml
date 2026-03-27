@@ -1,0 +1,13 @@
+- type: reaction
+  id: LemonadeLemonade
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    JuiceLemonade:
+      amount: 1
+    Sugar:
+      amount: 1
+    Water:
+      amount: 1
+  products:
+    LemonadeLemonade: 3

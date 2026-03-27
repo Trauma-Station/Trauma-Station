@@ -66,4 +66,4 @@
   - type: UserInterface # allows them to use radial selector
     interfaces:
       enum.RadialSelectorUiKey.Key:
-        type: TrackedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI

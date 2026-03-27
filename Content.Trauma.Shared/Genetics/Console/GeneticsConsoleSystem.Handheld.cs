@@ -33,6 +33,9 @@ public sealed partial class GeneticsConsoleSystem
             var pos = _transform.GetWorldPosition(xform);
             comp.Scanners.RemoveAll(scanner =>
             {
+                if (TerminatingOrDeleted(scanner))
+                    return true;
+
                 var scannerXform = Transform(scanner);
                 if (scannerXform.MapUid != map)
                 {

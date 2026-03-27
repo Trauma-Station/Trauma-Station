@@ -88,3 +88,18 @@ public enum MutationRarity : byte
     Rare,
     Mythical
 }
+
+public static class MutationRarityHelpers
+{
+    /// <summary>
+    /// Get the character representing a rarity value.
+    /// </summary>
+    public static char RarityChar(this MutationRarity rarity)
+        => rarity switch
+        {
+            MutationRarity.Common => 'C',
+            MutationRarity.Rare => 'R',
+            MutationRarity.Mythical => 'M',
+            _ => '?'
+        };
+}

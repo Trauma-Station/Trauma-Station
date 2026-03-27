@@ -12,16 +12,16 @@ public sealed class FungerWikiSystem : EntitySystem
 {
     [Dependency] private readonly IUriOpener _uri = default!;
 
-    public const string Wiki = "https://fearandhunger.fandom.com/wiki/Empty_Scroll";
+    public const string Wiki = "https://fearandhunger.wiki.gg/wiki/Empty_Scroll";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeNetworkEvent<PrayerFailedEvent>(OnPrayerFailed);
+        SubscribeLocalEvent<PrayerFailedEvent>(OnPrayerFailed);
     }
 
-    private void OnPrayerFailed(PrayerFailedEvent args)
+    private void OnPrayerFailed(ref PrayerFailedEvent args)
     {
         _uri.OpenUri(Wiki);
     }

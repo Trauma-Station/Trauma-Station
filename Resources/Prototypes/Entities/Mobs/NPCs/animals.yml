@@ -519,6 +519,7 @@
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
   - type: GhostRole
+    prob: 0 # Trauma - was 0.25
     makeSentient: true
     allowSpeech: true
     allowMovement: true
@@ -1357,7 +1358,7 @@
     - DoorBumpOpener
     - FootstepSound
   - type: GhostRole
-    prob: 0.25
+    prob: 0 # Trauma - was 0.25
     name: ghost-role-information-kangaroo-name
     description: ghost-role-information-kangaroo-description
     rules: ghost-role-information-nonantagonist-rules
@@ -1806,6 +1807,7 @@
   - type: VentCrawler # goobstation - Ventcrawl
     enterDelay: 0.5
   - type: GhostRole
+    prob: 0.3 # Trauma - add % chance to mouse ghostrole
     makeSentient: true
     allowSpeech: true
     allowMovement: true
@@ -2146,6 +2148,7 @@
   id: MobMouseCancer
   components:
   - type: GhostRole
+    prob: 1 # Trauma - Ensure evil mice get their ghostrole
     name: ghost-role-information-cancer-mouse-name
     description: ghost-role-information-cancer-mouse-description
     rules: ghost-role-information-freeagent-rules
@@ -3665,6 +3668,7 @@
   components:
   - type: VentCrawler # goobstation - Ventcrawl
   - type: GhostRole
+    prob: 0 # Trauma
     makeSentient: true
     allowSpeech: true
     allowMovement: true
