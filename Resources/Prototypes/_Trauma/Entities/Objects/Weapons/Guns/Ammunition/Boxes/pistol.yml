@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseMagazineBoxPistol
+  parent: [ BaseMagazineBoxPistol, BaseChaplainContraband ]
   id: MagazineBoxPistolHoly
   name: ammunition box (.35 auto holy)
   description: A cardboard box of .35 auto rounds. Intended to hold specialty holy ammunition. They did not make this look different, for some reason.
@@ -12,5 +12,3 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-  - type: Contraband
-    allowedJobs: [ Chaplain ]
