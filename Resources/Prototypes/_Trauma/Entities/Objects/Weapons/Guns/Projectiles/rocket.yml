@@ -1,0 +1,14 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BulletRocketLAW
+  id: BulletRocketAntiStructural
+  name: 84mm BUSTER rocket
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 15 # It's meant to be used for structural damage, not organics.
+        Structural: 3000
+      armorPenetration: 0.5
+  - type: StaminaDamageOnCollide
+    damage: 150 # 1 shot stun for unarmored targets, needs more for armored targets.

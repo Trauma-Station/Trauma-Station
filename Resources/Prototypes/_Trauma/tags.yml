@@ -138,3 +138,6 @@
 
 - type: Tag
   id: WelderExperimental
+
+- type: Tag
+  id: XenoborgModuleRocketeer # module category for the evil rocket launcher xenoborgs

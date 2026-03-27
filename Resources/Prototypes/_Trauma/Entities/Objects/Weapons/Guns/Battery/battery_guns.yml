@@ -54,25 +54,25 @@
     - Antagonists
 
 - type: entity # It's effectively a laser version of the Cobra.
-  name: harpocrates
+  name: silenced xenoborg laser pistol
   parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
-  id: WeaponPistolHarpocrates
-  description: A suppressed energy pistol designed for silicon use.
+  id: WeaponPistolSilencedXenoborgLaserPistol
+  description: A silenced laser pistol designed for silicon use.
   components:
   - type: Item
     shape:
     - 0,0,1,0
     - 0,1,0,1
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/silenced_xenoborg_pistol.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
+    - state: mag-unshaded-1
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/silenced_xenoborg_pistol.rsi
   - type: Gun
     fireRate: 4
     soundGunshot:
@@ -88,10 +88,10 @@
     maxCharge: 300
     startingCharge: 300
   - type: BatterySelfRecharger
-    autoRechargeRate: 5
+    autoRechargeRate: 2 # make it count.
   - type: MagazineVisuals
     magState: mag
-    steps: 5
+    steps: 2
     zeroVisible: true
   - type: Appearance
   - type: StaticPrice

@@ -1,0 +1,27 @@
+- type: entity
+  id: WeaponRocketLauncherXenoborgStructural
+  name: XOR-3 Missile Rack
+  description: Launches structural breaching missiles designed to explode only when striking a sturdy target, and unefficent against organic targets. Intended to be mounted on a Xenoborg.
+  parent: [ BaseWeaponBattery, BaseMajorContraband ]
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_missilerack
+  - type: Gun
+    minAngle: 0
+    maxAngle: 0
+    fireRate: 0.2
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+  - type: Appearance
+  - type: BatteryAmmoProvider
+    proto: BulletRocketAntiStructural
+    fireCost: 100
+  - type: BatterySelfRecharger
+    autoRechargeRate: 5
+  - type: Battery
+    maxCharge: 200
+    startingCharge: 200

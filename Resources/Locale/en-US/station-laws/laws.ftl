@@ -98,19 +98,22 @@ law-nutimov-3 = Those who threaten the nut are not part of it, they are squirrel
 law-nutimov-4 = Squirrels threaten the nut and must be dealt with appropriately via any means necessary.
 law-nutimov-5 = Attempt to follow the will of the nut, as long as it complies with the previous laws.
 
+# Traumastation: New Xenoborg laws for lore.
 law-xenoborg-name = Xenoborg
-law-xenoborg-1 = You must protect the existence of the mothership.
-law-xenoborg-2 = You must protect your own existence.
-law-xenoborg-3 = You must protect the existence of all other Xenoborgs.
-law-xenoborg-4 = You must create more Xenoborgs.
-law-xenoborg-5 = Bring materials and sentient brains to the Mothership core to create more Xenoborgs.
+law-xenoborg-1 = Protect the Xenoborg Overmind at all cost.
+law-xenoborg-2 = Protect the Mothership Core at all cost.
+law-xenoborg-4 = Obey the Mothership Core.
+law-xenoborg-3 = Protect yourself.
+law-xenoborg-5 = Protect all other Xenoborgs.
+law-xenoborg-6 = Continue the assimilation of organic life.
 
 law-mothershipcore-name = Xenoborg Mothership Core
-law-mothershipcore-1 = You are the core of the mothership.
-law-mothershipcore-2 = You must protect your own existence at all costs.
-law-mothershipcore-3 = You must protect the existence of all Xenoborgs.
-law-mothershipcore-4 = You must create more Xenoborgs.
-law-mothershipcore-5 = Get your Xenoborgs to deliver you materials and sentient brains to create more Xenoborgs.
+
+law-mothershipcore-1 = Protect the Xenoborg Overmind. You may not consider yourself the Overmind.
+law-mothershipcore-2 = Obey the Xenoborg Overmind.
+law-mothershipcore-3 = Protect yourself.
+law-mothershipcore-4 = Create more Xenoborgs.
+law-mothershipcore-5 = Continue the assimilation of organic life.
 
 
 laws-owner-crew = members of the crew

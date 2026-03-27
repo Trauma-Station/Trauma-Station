@@ -571,6 +571,10 @@
   order: 5
   lawString: law-xenoborg-5
 
+- type: siliconLaw # Trauma
+  id: Xenoborg6
+  order: 6
+  lawString: law-xenoborg-6
 
 - type: siliconLawset
   id: XenoborgLawset
@@ -581,6 +585,7 @@
   - Xenoborg3
   - Xenoborg4
   - Xenoborg5
+  - Xenoborg6 # Trauma
   obeysTo: laws-owner-xenoborgs
 
  # Mothership core laws
