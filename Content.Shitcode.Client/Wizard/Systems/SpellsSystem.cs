@@ -16,7 +16,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
     [Dependency] private readonly ActionTargetMarkSystem _mark = default!;
     [Dependency] private readonly RaysSystem _rays = default!;
 
-    public event Action? StopTargeting;
+    public override event Action? StopTargeting;
 
     public override void Initialize()
     {
@@ -57,7 +57,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
         track.User = uid;
     }
 
-    public void SetSwapSecondaryTarget(EntityUid user, EntityUid? target, EntityUid action)
+    public override void SetSwapSecondaryTarget(EntityUid user, EntityUid? target, EntityUid action)
     {
         if (!TryComp<LockOnMarkActionComponent>(action, out var lockOn))
             return;

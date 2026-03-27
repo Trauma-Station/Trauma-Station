@@ -49,29 +49,32 @@ namespace Content.Client.UserInterface.Systems.Actions;
 
 public sealed class ActionUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<ActionsSystem>
 {
+    // <Trauma>
+    [Dependency] private readonly IEyeManager _eye = default!;
+
+    [UISystemDependency] private readonly TransformSystem _transform = default!;
+    [UISystemDependency] private readonly CommonSpellsSystem? _spells = default!;
+    [UISystemDependency] private readonly CommonActionTargetMarkSystem? _mark = default!;
+    [UISystemDependency] private readonly EntityLookupSystem _lookup = default!;
+
+    private List<EntityUid?> _actions = new();
+    private readonly Dictionary<EntityUid, List<EntityUid?>> _savedActions = new();
+    private ISawmill _sawmill = default!;
+    // </Trauma>
     [Dependency] private readonly IOverlayManager _overlays = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IEyeManager _eye = default!; // Goobstation
 
     [UISystemDependency] private readonly ActionsSystem? _actionsSystem = default;
     [UISystemDependency] private readonly InteractionOutlineSystem? _interactionOutline = default;
     [UISystemDependency] private readonly TargetOutlineSystem? _targetOutline = default;
     [UISystemDependency] private readonly SpriteSystem _spriteSystem = default!;
-    [UISystemDependency] private readonly TransformSystem _transform = default!; // Goobstation
-    [UISystemDependency] private readonly SpellsSystem? _spells = default!; // Goobstation
-    [UISystemDependency] private readonly CommonActionTargetMarkSystem? _mark = default!; // Goobstation
-    [UISystemDependency] private readonly EntityLookupSystem _lookup = default!; // Goobstation
 
     private ActionButtonContainer? _container;
-    private List<EntityUid?> _actions = new(); // Goob edit
     private readonly DragDropHelper<ActionButton> _menuDragHelper;
     private readonly TextureRect _dragShadow;
     private ActionsWindow? _window;
-
-    private readonly Dictionary<EntityUid, List<EntityUid?>> _savedActions = new(); // Goobstation
-    private ISawmill _sawmill = default!; // Goobstation
 
     private ActionsBar? ActionsBar => UIManager.GetActiveUIWidgetOrNull<ActionsBar>();
     private MenuButton? ActionButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.ActionButton;

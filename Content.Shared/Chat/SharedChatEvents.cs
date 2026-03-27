@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Common.Chat;
 using Content.EinsteinEngines.Common.Language;
 // </Trauma>
 using Content.Shared.Inventory;

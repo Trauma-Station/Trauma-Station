@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Common.Chat;
+namespace Content.Shared.Chat;
 
 /// <summary>
 /// Controls transmission of chat.

@@ -3,26 +3,18 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.DV.Common.Carrying;
+using Content.EinsteinEngines.Common.Silicon;
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Common.Religion;
-using Content.DV.Shared.Carrying;
-using Content.EinsteinEngines.Shared.Silicon.Components;
-using Content.Shitcode.Shared.Wizard.BindSoul;
-using Content.Shitcode.Shared.Wizard.Chuuni;
-using Content.Shitcode.Shared.Wizard.Components;
-using Content.Shitcode.Shared.Wizard.LesserSummonGuns;
-using Content.Shitcode.Shared.Wizard.Mutate;
-using Content.Shitcode.Shared.Wizard.Projectiles;
-using Content.Shitcode.Shared.Wizard.SanguineStrike;
-using Content.Shitcode.Shared.Wizard.SpellCards;
-using Content.Shitcode.Shared.Wizard.Teleport;
-using Content.Shitcode.Shared.Wizard.TeslaBlast;
-using Content.Shitcode.Shared.Wizard.Traps;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Abilities.Mime;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Body;
+using Content.Shared.Charges.Components;
+using Content.Shared.Charges.Systems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clumsy;
 using Content.Shared.Cluwne;
@@ -33,6 +25,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Friction;
 using Content.Shared.Ghost;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands.Components;
@@ -58,6 +51,7 @@ using Content.Shared.PDA;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Speech.Components;
@@ -70,6 +64,17 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
+using Content.Shitcode.Common.Wizard;
+using Content.Shitcode.Shared.Wizard.BindSoul;
+using Content.Shitcode.Shared.Wizard.Chuuni;
+using Content.Shitcode.Shared.Wizard.Components;
+using Content.Shitcode.Shared.Wizard.LesserSummonGuns;
+using Content.Shitcode.Shared.Wizard.Mutate;
+using Content.Shitcode.Shared.Wizard.Projectiles;
+using Content.Shitcode.Shared.Wizard.SanguineStrike;
+using Content.Shitcode.Shared.Wizard.Teleport;
+using Content.Shitcode.Shared.Wizard.TeslaBlast;
+using Content.Shitcode.Shared.Wizard.Traps;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -77,22 +82,18 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using Content.Shared.Actions.Components;
-using Content.Shared.Charges.Components;
-using Content.Shared.Charges.Systems;
-using Content.Shared.Friction;
-using Content.Shared.Random.Helpers;
-using Robust.Shared.Physics.Components;
+
 
 namespace Content.Shitcode.Shared.Wizard;
 
-public abstract class SharedSpellsSystem : EntitySystem
+public abstract class SharedSpellsSystem : CommonSpellsSystem
 {
     #region Dependencies
 
@@ -142,6 +143,7 @@ public abstract class SharedSpellsSystem : EntitySystem
     [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly TileFrictionController _tileFriction = default!;
 
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
     #endregion
 
     public override void Initialize()
@@ -403,7 +405,7 @@ public abstract class SharedSpellsSystem : EntitySystem
                 origin: ev.Performer,
                 targetPart: TargetBodyPart.All);
 
-            if (HasComp<SiliconComponent>(target) || HasComp<BorgChassisComponent>(target))
+            if (_silicon.IsSilicon(target) || HasComp<BorgChassisComponent>(target))
                 Stun.TryUpdateParalyzeDuration(target, ev.SiliconStunTime / range);
             else
                 Stun.KnockdownOrStun(target, ev.KnockdownTime / range);
@@ -455,47 +457,49 @@ public abstract class SharedSpellsSystem : EntitySystem
 
     private void OnBindSoul(BindSoulEvent ev)
     {
-        if (ev.Handled)
-            return;
-
-        if (_mobState.IsCritical(ev.Performer))
+        if (ev.Handled || _mobState.IsCritical(ev.Performer))
             return;
 
         if (!Mind.TryGetMind(ev.Performer, out var mind, out var mindComponent))
             return;
 
-        TryComp<SoulBoundComponent>(mind, out var soulBound);
-
         if (Mind.IsCharacterDeadIc(mindComponent))
+            HandleSoulResurrection((mind, mindComponent), ref ev);
+        else
+            HandleSoulBinding((mind, mindComponent), ref ev);
+    }
+
+    private void HandleSoulResurrection(Entity<MindComponent> ent, ref BindSoulEvent ev)
+    {
+        if (!TryComp<SoulBoundComponent>(ent, out var soulBound))
         {
-            if (soulBound == null)
-            {
-                Popup(ev.Performer, "spell-fail-soul-not-bound");
-                return;
-            }
-
-            if (!HasComp<PhylacteryComponent>(soulBound.Item))
-            {
-                Popup(ev.Performer, "spell-fail-item-destroyed");
-                return;
-            }
-
-            if (!TryComp(soulBound.Item, out TransformComponent? xform) || xform.MapUid == null ||
-                xform.MapUid != soulBound.MapId)
-            {
-                Popup(ev.Performer, "spell-fail-item-on-another-plane");
-                return;
-            }
-
-            _bindSoul.Resurrect(mind, soulBound.Item.Value, mindComponent, soulBound);
-            ev.Handled = true;
+            Popup(ev.Performer, "spell-fail-soul-not-bound");
             return;
         }
 
+        if (!HasComp<PhylacteryComponent>(soulBound.Item))
+        {
+            Popup(ev.Performer, "spell-fail-item-destroyed");
+            return;
+        }
+
+        if (!TryComp(soulBound.Item, out TransformComponent? xform) || xform.MapUid == null ||
+            xform.MapUid != soulBound.MapId)
+        {
+            Popup(ev.Performer, "spell-fail-item-on-another-plane");
+            return;
+        }
+
+        _bindSoul.Resurrect(ent.Owner, soulBound.Item.Value, ent.Comp, soulBound);
+        ev.Handled = true;
+    }
+
+    private void HandleSoulBinding(Entity<MindComponent> ent, ref BindSoulEvent ev)
+    {
         if (HasComp<GhostComponent>(ev.Performer))
             return;
 
-        if (soulBound != null)
+        if (TryComp<SoulBoundComponent>(ent, out var soulBound))
         {
             Popup(ev.Performer, "spell-fail-no-soul");
             return;
@@ -504,7 +508,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
 
-        if (HasComp<SiliconComponent>(ev.Performer) || HasComp<BorgChassisComponent>(ev.Performer))
+        if (_silicon.IsSilicon(ev.Performer) || HasComp<BorgChassisComponent>(ev.Performer))
         {
             Popup(ev.Performer, "spell-fail-bind-soul-silicon");
             return;
@@ -528,7 +532,7 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        BindSoul(ev, item.Value, mind, mindComponent);
+        BindSoul(ev, item.Value, ent.Owner, ent.Comp);
         ev.Handled = true;
     }
 
@@ -545,7 +549,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
 
-        if (HasComp<SiliconComponent>(ev.Performer) || HasComp<BorgChassisComponent>(ev.Performer))
+        if (_silicon.IsSilicon(ev.Performer) || HasComp<BorgChassisComponent>(ev.Performer))
         {
             Popup(ev.Performer, "spell-fail-mutate-silicon");
             return;
@@ -725,7 +729,7 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        if (HasComp<BorgChassisComponent>(ev.Target) || HasComp<SiliconComponent>(ev.Target))
+        if (HasComp<BorgChassisComponent>(ev.Target) || _silicon.IsSilicon(ev.Target))
         {
             Popup(ev.Performer, "spell-fail-target-silicon");
             return;

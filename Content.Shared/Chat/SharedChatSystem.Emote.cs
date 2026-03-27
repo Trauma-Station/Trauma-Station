@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Common.Chat;
 using Content.Goobstation.Common.MisandryBox;
 using Content.EinsteinEngines.Common.Language.Systems;
 // </Trauma>

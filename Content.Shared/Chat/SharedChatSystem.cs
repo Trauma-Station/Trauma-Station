@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Common.Chat;
 using Content.EinsteinEngines.Common.Language;
 using Content.Starlight.Common.CollectiveMind;
 // </Trauma>
@@ -560,4 +559,4 @@ public abstract partial class SharedChatSystem : EntitySystem
     { }
 }
 
-// Trauma - moved to Content.Common
+// Trauma - moved to Content.Goobstation.Maths

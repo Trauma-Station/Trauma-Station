@@ -1,21 +1,14 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Actions;
 using Content.Goobstation.Common.Bloodstream;
+using Content.Goobstation.Shared.Teleportation.Systems;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Server._Goobstation.Wizard.Components;
+using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Antag;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Managers;
@@ -29,21 +22,18 @@ using Content.Server.Spreader;
 using Content.Server.Store.Components;
 using Content.Server.Store.Systems;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shitcode.Shared.Wizard;
-using Content.Shitcode.Shared.Wizard.BindSoul;
-using Content.Shitcode.Shared.Wizard.Chuuni;
-using Content.Shitcode.Shared.Wizard.FadingTimedDespawn;
-using Content.Shitcode.Shared.Wizard.SpellCards;
-using Content.Shared._Shitcode.Roles;
-using Content.Shared.Abilities.Mime;
+using Content.Shared.Actions.Components;
+using Content.Shared.Body.Components;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates.Helpers;
-using Content.Shared.FixedPoint;
 using Content.Shared.Emp;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Item;
 using Content.Shared.Magic.Components;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
@@ -55,6 +45,12 @@ using Content.Shared.Power.EntitySystems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles.Components;
 using Content.Shared.Speech.Components;
+using Content.Shared.Tag;
+using Content.Shitcode.Common.Wizard;
+using Content.Shitcode.Shared.Wizard;
+using Content.Shitcode.Shared.Wizard.BindSoul;
+using Content.Shitcode.Shared.Wizard.Chuuni;
+using Content.Shitcode.Shared.Wizard.FadingTimedDespawn;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -66,14 +62,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.Actions.Components;
-using Content.Shared.Body.Components;
-using Content.Shared.Construction.Components;
-using Content.Shared.Item;
-using Content.Shared.Tag;
-using Content.Goobstation.Shared.Teleportation.Systems;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Shitcode.Server.Wizard.Systems;
 
 public sealed class SpellsSystem : SharedSpellsSystem
 {
@@ -96,6 +86,13 @@ public sealed class SpellsSystem : SharedSpellsSystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+
+    public override event Action? StopTargeting;
+
+    public override void SetSwapSecondaryTarget(EntityUid user, EntityUid? target, EntityUid action)
+    {
+        return;
+    }
 
     public override void Initialize()
     {
