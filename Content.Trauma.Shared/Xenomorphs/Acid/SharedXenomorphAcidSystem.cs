@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Shared.Actions;
 using Content.Trauma.Shared.Other;
 using Content.Trauma.Shared.Xenomorphs.Acid.Components;

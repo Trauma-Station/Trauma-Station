@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Shared.Weapons.Ranged.Components;
 using Content.Trauma.Shared.Xenomorphs.Plasma;
 using Content.Trauma.Shared.Xenomorphs.Plasma.Components;

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.RoundEnd;
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Server.CosmicCult.EntitySystems;

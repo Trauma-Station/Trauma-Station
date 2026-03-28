@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Client.UI.Controls;
 using Content.Trauma.Shared.RadialSelector;
 using JetBrains.Annotations;

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Audio; // Goobstation - Play music on announcement
 
 namespace Content.Trauma.Server.GameTicking.Rules.Components;
