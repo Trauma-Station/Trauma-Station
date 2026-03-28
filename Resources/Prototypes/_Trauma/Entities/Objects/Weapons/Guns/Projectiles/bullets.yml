@@ -15,3 +15,22 @@
   abstract: true
   components:
   - type: BulletHoleGenerator
+
+- type: entity
+  id: BulletPistolSilverBig
+  name: bullet (.50 silver)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: -2.5
+        Slash: -2.5
+        Blunt: -2.5
+        Heat: -2.5
+        Cold: -2.5
+        Shock: -2.5
+        Holy: 12.5
+  - type: HolyIgniteOnCollide
+    fireStacks: 2

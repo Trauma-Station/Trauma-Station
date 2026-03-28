@@ -363,6 +363,14 @@
     radius: 1.5
     energy: 1
     color: "#fbceb1"
+  # <Trauma>
+  - type: Construction
+    graph: AltarsGraph
+    node: ConvertWhiteNode
+  - type: AltarSource
+    rodProto: WeaponPistolFaith
+    effectProto: EffectSpark
+  # </Trauma>
 
 - type: entity
   id: AltarConvertYellow
