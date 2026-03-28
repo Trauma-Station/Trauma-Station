@@ -1,5 +1,4 @@
-// Copyright Rane (elijahrane@gmail.com) 2025
-// All rights reserved. Relicensed under AGPL with permission
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.FireControl;
