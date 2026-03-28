@@ -6,14 +6,14 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-magivend-1 = Sling spells the proper way with MagiVend!
-advertisement-magivend-2 = Be your own Houdini! Use MagiVend!
+advertisement-magivend-1 = Enjoy this day!
+advertisement-magivend-2 = Be yourself! Use the pod!
 advertisement-magivend-3 = FJKLFJSD
 advertisement-magivend-4 = AJKFLBJAKL
 advertisement-magivend-5 = >MFW
-advertisement-magivend-6 = HONK!
-advertisement-magivend-7 = EI NATH
-advertisement-magivend-8 = Destroy the station!
-advertisement-magivend-9 = Space-time bending hardware!
-advertisement-magivend-10 = 1234 LOONIES LOL!
-advertisement-magivend-11 = NAR'SIE, RISE!!!
+advertisement-magivend-6 = Problem!
+advertisement-magivend-7 = ignore
+advertisement-magivend-8 = Filming location!
+advertisement-magivend-9 =  anchor
+advertisement-magivend-10 = Error 1234 Haha!
+advertisement-magivend-11 = No!!!

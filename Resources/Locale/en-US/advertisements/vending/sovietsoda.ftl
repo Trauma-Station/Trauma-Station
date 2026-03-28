@@ -6,12 +6,12 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-sovietsoda-1 = For comrade and country.
-advertisement-sovietsoda-2 = Have you fulfilled your nutrition quota today?
-advertisement-sovietsoda-3 = Very nice!
-advertisement-sovietsoda-4 = We are simple people, for this is all we eat.
-advertisement-sovietsoda-5 = If there is a person, there is a problem. If there is no person, then there is no problem.
-advertisement-sovietsoda-6 = If its good enough for daily life, it's good enough for us!
-thankyou-sovietsoda-1 = Enjoy, comrade!
-thankyou-sovietsoda-2 = Now get back to work.
-thankyou-sovietsoda-3 = This is all you're getting.
+advertisement-sovietsoda-1 = Your friends and your country
+advertisement-sovietsoda-2 = Did you meet your nutrition goals today?
+advertisement-sovietsoda-3 = Relief!
+advertisement-sovietsoda-4 = We are only human because that is what we eat.
+advertisement-sovietsoda-5 = When people do this, it means something is wrong and something is wrong.
+advertisement-sovietsoda-6 = If it's good enough for everyday use, it's good enough for us!
+thankyou-sovietsoda-1 = Please my friend
+thankyou-sovietsoda-2 = Now we get back to work.
+thankyou-sovietsoda-3 = That's all.

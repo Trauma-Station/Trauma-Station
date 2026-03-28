@@ -9,17 +9,17 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-lawdrobe-1 = OBJECTION! Get the rule of law for yourself!
-advertisement-lawdrobe-2 = Go pester security until they abide by your own rules!
-advertisement-lawdrobe-3 = A new case just came in? Go get them out of jail!
-advertisement-lawdrobe-4 = A dougnut a day keeps security away!
-advertisement-lawdrobe-5 = No one is above the law!
-advertisement-lawdrobe-6 = No officer, I do not consent to a search!
-advertisement-lawdrobe-7 = Injecting space drugs leaves no evidence!
-advertisement-lawdrobe-8 = You or a loved one hurt by Nanotrasen? Too bad!
-advertisement-lawdrobe-9 = Case closed! Defendant has too much drip!
-thankyou-lawdrobe-1 = You can win any case in that outfit!
-thankyou-lawdrobe-2 = Get one for your client as well!
-thankyou-lawdrobe-3 = Win or lose, you get paid either way!
-thankyou-lawdrobe-4 = Remember: It's only illegal if you get caught!
-thankyou-lawdrobe-5 = OBJECTION! That outfit is too cool for court!
+advertisement-lawdrobe-1 = five! Find your rules!
+advertisement-lawdrobe-2 = Follow the rules and don't worry about safety!
+advertisement-lawdrobe-3 = What's New? Prison Break!
+advertisement-lawdrobe-4 = A candy a day saves money!
+advertisement-lawdrobe-5 = Don't open the bed!
+advertisement-lawdrobe-6 = No ads on site!
+advertisement-lawdrobe-7 =  Could nanosensor technology harm you or your loved ones?
+advertisement-lawdrobe-8 = That's it!
+advertisement-lawdrobe-9 = Shaving Razor! War!
+thankyou-lawdrobe-1 = you can win every game with it!
+thankyou-lawdrobe-2 = Returning User!
+thankyou-lawdrobe-3 = Win or Lose, Pay Both!
+thankyou-lawdrobe-4 =  Please note that recording is illegal!
+thankyou-lawdrobe-5 = Buy! This dress is perfect for court!

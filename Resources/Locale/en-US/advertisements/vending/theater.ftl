@@ -6,9 +6,9 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-theater-1 = Dress for success!
-advertisement-theater-2 = Suited and booted!
+advertisement-theater-1 = Dress up to win!
+advertisement-theater-2 = Save and start!
 advertisement-theater-3 = It's show time!
-advertisement-theater-4 = Why leave style up to fate? Use AutoDrobe!
-advertisement-theater-5 = All wacky outfits and clothes, from gladiator robes to who knows what!
-advertisement-theater-6 = The clown will appreciate your outfit!
+advertisement-theater-4 = Why leave fashion to fate? Use automatic detection
+advertisement-theater-5 = Do you know unique dresses and suits with gladiator belts?
+advertisement-theater-6 = Artists love your stuff!

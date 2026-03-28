@@ -6,9 +6,9 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-condiment-1 = Tired of dry meat? Squirt some flavor-packed condiments on it!
-advertisement-condiment-2 = Child-safe utensils. Forks, spoons, and knives that won't cut a thing.
+advertisement-condiment-1 = Tired of dry food? Add some spices and it's delicious!
+advertisement-condiment-2 = Safety equipment for children. No chopsticks, spoons or knives.
 advertisement-condiment-3 = Corn oil!
-advertisement-condiment-4 = Sweeten up your day with Astrotame! Eight out of ten doctors agree, it probably won't cause cancer.
-advertisement-condiment-5 = Hot Sauce! Barbecue Sauce! Cold Sauce! Ketchup! Soy Sauce! Horseradish Sauce! We got all the sauce!
-advertisement-condiment-6 = Make sure to put ketchup and mustard on your burgers! The chefs often forget.
+advertisement-condiment-4 = Brighten up your day with Astrotum. Eight out of ten doctors say it's not cancer.
+advertisement-condiment-5 = Light the lamp! Boiled soup! This is a new scent! Tomato ketchup! Soy sauce! Hell, all the ingredients are here!
+advertisement-condiment-6 = Don't forget to add ketchup and mustard to the bag. Cookies are always enabled.

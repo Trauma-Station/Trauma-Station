@@ -5,15 +5,15 @@
 #
 # SPDX-License-Identifier: MIT
 
-advertisement-cola-1 = Refreshing!
-advertisement-cola-2 = Hope you're thirsty!
-advertisement-cola-3 = Over 1 million drinks sold!
-advertisement-cola-4 = Thirsty? Why not cola?
-advertisement-cola-5 = Please, have a drink!
-advertisement-cola-6 = Drink up!
-advertisement-cola-7 = The best drinks in the galaxy!
-advertisement-cola-8 = Way better than Dr. Gibb!
-thankyou-cola-1 = Pop open that can and enjoy!
-thankyou-cola-2 = Pow! Take that, thirst!
-thankyou-cola-3 = I hope you like flavor!
-thankyou-cola-4 = Enjoy your sugar-filled drink!
+advertisement-cola-1 = fresh!
+advertisement-cola-2 = I think you are tired.
+advertisement-cola-3 = More than 100,000 drinks were sold
+advertisement-cola-4 = Why are you thirsty?
+advertisement-cola-5 = drink up!
+advertisement-cola-6 = Child!
+advertisement-cola-7 = It is recommended to serve this drink in a glass.
+advertisement-cola-8 = The best way
+thankyou-cola-1 = Open up as much as you can and enjoy!
+thankyou-cola-2 = Now! Well, sushi!
+thankyou-cola-3 = I hope you like it!
+thankyou-cola-4 = Enjoy a great drink!

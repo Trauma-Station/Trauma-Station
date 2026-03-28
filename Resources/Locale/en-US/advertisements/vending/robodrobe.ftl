@@ -6,7 +6,7 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-robodrobe-1 = You turn me TRUE, use defines!
+advertisement-robodrobe-1 = You really answered me, respond!
 advertisement-robodrobe-2 = 0110001101101100011011110111010001101000011001010111001101101000011001010111001001100101
-advertisement-robodrobe-3 = Steal someone from maintenance and turn them into a robot!
-advertisement-robodrobe-4 = Robotics is fun!
+advertisement-robodrobe-3 =  Kill people and turn them into robots!
+advertisement-robodrobe-4 = Amazing robots!

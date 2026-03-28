@@ -8,13 +8,13 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-donut-1 = Each of us is a little cop!
-advertisement-donut-2 = Hope you're hungry!
-advertisement-donut-3 = Over 1 million donuts sold!
-advertisement-donut-4 = We pride ourselves in the consistency of our products!
-advertisement-donut-5 = Sweet, sugary and delicious!
-advertisement-donut-6 = Donut worry, be happy!
-thankyou-donut-1 = Enjoy your donut!
-thankyou-donut-2 = Another donut sold!
-thankyou-donut-3 = Have a nice day, officer!
-thankyou-donut-4 = I hope you get addicted!
+advertisement-donut-1 = We're all little cops!
+advertisement-donut-2 = I hope you're hungry! Try it yourself.
+advertisement-donut-3 = Selling 1 million donuts.
+advertisement-donut-4 = We are proud of the quality of our products.
+advertisement-donut-5 = Sweet, sweet, sweet!
+advertisement-donut-6 = Don't worry, have fun!
+thankyou-donut-1 = Enjoy football!
+thankyou-donut-2 = There are also games!
+thankyou-donut-3 = Hey police!
+thankyou-donut-4 = I hope you are well!
