@@ -44,7 +44,8 @@ namespace Content.Client.Construction.UI
         event EventHandler ClearAllGhosts;
 
         void ClearRecipeInfo();
-        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite, ConstructionPrototype proto); // Trauma - added proto to method
+        void SetRecipeInfo(string name, string description, EntityPrototype? targetPrototype, bool isItem, bool isFavorite,
+            bool understands, ConstructionPrototype proto); // Trauma
         void ResetPlacement();
 
         #region Window Control
@@ -170,9 +171,15 @@ namespace Content.Client.Construction.UI
             EntityPrototype? targetPrototype,
             bool isItem,
             bool isFavorite,
-            ConstructionPrototype proto) // Trauma
+            // <Trauma>
+            bool understands,
+            ConstructionPrototype proto)
+            // </Trauma>
         {
-            BuildButton.Disabled = false;
+            // <Trauma> - disable button if you lack the theory, show the requirements
+            BuildButton.Disabled = !understands;
+            AddSkillRequirements(proto);
+            // </Trauma>
             BuildButton.Text = Loc.GetString(isItem ? "construction-menu-place-ghost" : "construction-menu-craft");
             TargetName.SetMessage(name);
             TargetDesc.SetMessage(description);
@@ -180,9 +187,6 @@ namespace Content.Client.Construction.UI
             FavoriteButton.Visible = true;
             FavoriteButton.Text = Loc.GetString(
                             isFavorite ? "construction-add-favorite-button" : "construction-remove-from-favorite-button");
-            // <Trauma>
-            AddSkillRequirements(proto);
-            // </Trauma>
         }
 
         public void ClearRecipeInfo()
