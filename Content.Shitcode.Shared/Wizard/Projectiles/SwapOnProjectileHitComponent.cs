@@ -1,7 +1,8 @@
-﻿<<<<<<<< HEAD:Content.Shitcode.Shared/Wizard/Projectiles/SwapOnProjectileHitComponent.cs
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+<<<<<<<< HEAD:Content.Shitcode.Shared/Wizard/Projectiles/SwapOnProjectileHitComponent.cs
 ========
 >>>>>>>> upstream:Content.Trauma.Shared/Heretic/Components/Side/Carvings/AlertCarvingComponent.cs
-// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;

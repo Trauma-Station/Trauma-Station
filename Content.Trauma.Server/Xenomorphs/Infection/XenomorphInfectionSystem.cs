@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Shared.Xenomorphs.Infection;
 using Content.Trauma.Shared.Xenomorphs.Larva;
 using Content.Shared.Body;
