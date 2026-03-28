@@ -1,0 +1,190 @@
+########### COSMIC MONUMENT, BASE ABSTRACT #############
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseStructure
+  id: MonumentCosmicCult
+  name: The Monument
+  description: A great slab of unknowledge, built of a thousand little nothings, its surface reflects a starless emptiness...
+  suffix: DO NOT MAP
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: StationAnchor # Goobstation - no monument shittles
+  - type: Fixtures
+    fixtures:
+      MonumentCollider:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.1,-0.2,1.1,0.7"
+        mask:
+        - LargeMobMask
+        layer:
+        - WallLayer
+        density: 1000
+  - type: Sprite
+    sprite: _Trauma/CosmicCult/Tileset/monument.rsi
+    layers:
+      - state: stage2
+        visible: true
+        map: ["enum.MonumentVisualLayers.MonumentLayer"]
+      - state: transform-stage3
+        visible: false
+        map: ["enum.MonumentVisualLayers.TransformLayer"]
+      - state: finale-overlay1
+        shader: unshaded
+        visible: false
+        map: ["enum.MonumentVisualLayers.FinaleLayer"]
+    offset: 0,1
+    drawdepth: Overdoors
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.MonumentVisuals.Monument:
+        enum.MonumentVisualLayers.MonumentLayer:
+          1: {state: stage2}
+          2: {state: stage3}
+      enum.MonumentVisuals.FinaleReached:
+        enum.MonumentVisualLayers.FinaleLayer:
+          1: {state: finale-overlay1}
+          2: {state: finale-overlay2}
+          3: {state: finale-overlay3}
+  - type: InteractionOutline
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: PointLight
+    enabled: true
+    castShadows: false
+    radius: 4.5
+    energy: 4
+    color: "#43286a"
+  - type: LightBehaviour
+    behaviours:
+     - !type:FadeBehaviour
+       interpolate: Linear
+       minDuration: 3
+       maxDuration: 5
+       startValue: 4.5
+       endValue: 1.5
+       property: Energy
+       enabled: true
+       isLooped: true
+       reverseWhenFinished: true
+  - type: AmbientSound
+    range: 3.5
+    volume: -9
+    sound:
+      path: /Audio/_Trauma/CosmicCult/god_ambient.ogg
+  - type: Monument
+    stage: 2
+    canActivate: true
+  - type: MonumentTransforming
+  - type: GuideHelp
+    guides:
+    - CosmicCult
+  - type: WarpPoint
+    location: The Monument
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-forthecult
+  - type: CosmicCorrupting
+    corruptionSpeed: 2
+    floodFillStarting: true
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: MonumentCosmicCultDestruction
+  name: The Monument
+  parent: BaseStructure
+  suffix: Destruiction, DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _Trauma/CosmicCult/Tileset/monument.rsi
+    layers:
+    - state: stage2-relocate-out
+      shader: unshaded
+    offset: 0,1
+    drawdepth: Mobs
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.1,-0.2,1.1,0.7"
+        mask:
+        - LargeMobMask
+        layer:
+        - WallLayer
+  - type: InteractionOutline
+  - type: Transform
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_Trauma/CosmicCult/monument_relocate.ogg
+      params:
+        volume: +8
+        pitch: 0.8
+  - type: TimedDespawn
+    lifetime: 3.8
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: MonumentCosmicCultSpawn
+  name: The Monument
+  parent: BaseStructure
+  suffix: Spawn, DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _Trauma/CosmicCult/Tileset/monument.rsi
+    layers:
+    - state: stage2-relocate-in
+      shader: unshaded
+    offset: 0,1
+    drawdepth: 11
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.1,-0.2,1.1,0.7"
+        mask:
+        - LargeMobMask
+        layer:
+        - WallLayer
+  - type: InteractionOutline
+  - type: Transform
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_Trauma/CosmicCult/monument_relocate.ogg
+      params:
+        volume: +8
+        pitch: 0.8
+  - type: TimedDespawn
+    lifetime: 3.8
+  - type: MonumentOnDespawn
+    prototype: MonumentCosmicCult
+    spawnTimer: 0 # Test fail without
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: MonumentCosmicCultSpawnMark
+  name: The Monumen't
+  description: The yet-to-become Monument, it still needs more cultists to make it's way into reality. Only visible to those aware of it.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Sprite
+    sprite: _Trauma/CosmicCult/Tileset/monument.rsi
+    layers:
+      - state: spawn-mark
+    offset: 0,1
+    drawdepth: Overdoors
+  - type: Visibility
+    layer: 32
+  - type: Transform
+    anchored: true
+  - type: InteractionOutline
+  - type: Clickable
+  - type: MonumentSpawnMark

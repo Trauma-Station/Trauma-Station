@@ -35,6 +35,7 @@ public sealed class SSDIndicatorSystem : EntitySystem
 
     private void OnGetStatusIcon(EntityUid uid, SSDIndicatorComponent component, ref GetStatusIconsEvent args)
     {
+        if (component.HideIcon) return; // Trauma
         if (component.IsSSD &&
             _cfg.GetCVar(CCVars.ICShowSSDIndicator) &&
             !_mobState.IsDead(uid) &&

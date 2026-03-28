@@ -1,0 +1,123 @@
+### ACTIVE INFLUENCES
+- type: influence
+  id: InfluenceAberrantLapse
+  name: influence-name-lapse
+  cost: 6
+  description: influence-description-lapse
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: lapse
+  action: ActionCosmicLapse
+  tier: 0
+
+- type: influence
+  id: InfluenceNullGlare
+  name: influence-name-glare
+  cost: 8
+  description: influence-description-glare
+  empoweredDescription: influence-description-glare-upgrade
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: glare
+  action: ActionCosmicGlare
+  tier: 0
+
+- type: influence
+  id: InfluenceForceIngress
+  name: influence-name-ingress
+  cost: 8
+  description: influence-description-ingress
+  empoweredDescription: influence-description-ingress-upgrade
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: ingress
+  action: ActionCosmicIngress
+  tier: 1
+
+- type: influence
+  id: InfluenceTransmutation
+  name: influence-name-transmutation
+  cost: 12
+  description: influence-description-transmutation
+  empoweredDescription: influence-description-transmutation-upgrade
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: transmute
+  add:
+  action: ActionCosmicTransmutation
+  tier: 1
+
+- type: influence
+  id: InfluenceShuntSubjectivity
+  name: influence-name-shunt
+  cost: 12
+  description: influence-description-shunt
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: blank
+  action: ActionCosmicBlank
+  tier: 2
+
+- type: influence
+  id: InfluenceConversion
+  name: influence-name-conversion
+  cost: 20
+  description: influence-description-conversion
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: shatter
+  add:
+  action: ActionCosmicConversion
+  tier: 2
+
+- type: influence
+  id: InfluenceAstralStride
+  name: influence-name-stride
+  cost: 16
+  description: influence-description-stride
+  empoweredDescription: influence-description-stride-upgrade
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: stride
+  add:
+  action: ActionCosmicStride
+  tier: 2
+
+- type: influence
+  id: InfluenceVacuousImposition
+  name: influence-name-imposition
+  cost: 18
+  description: influence-description-imposition
+  empoweredDescription: influence-description-imposition-upgrade
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: entropic
+  action: ActionCosmicImposition
+  tier: 3
+
+- type: influence
+  id: InfluenceAstralNova
+  name: influence-name-nova
+  cost: 24
+  description: influence-description-nova
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: nova
+  action: ActionCosmicNova
+  tier: 3
+
+
+### PASSIVE INFLUENCES
+
+- type: influence
+  id: InfluenceUnboundStep
+  name: influence-name-step
+  passive: true
+  cost: 8
+  description: influence-description-step
+  icon:
+    sprite: _Trauma/CosmicCult/Icons/abilities.rsi
+    state: step
+  add:
+  - type: MovementIgnoreGravity
+  tier: 1

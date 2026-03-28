@@ -1,0 +1,136 @@
+############ [ HARDSUIT ] ############
+
+# COSMIC CULT HARDSUIT BODY
+- type: entity
+  parent: [ ClothingOuterHardsuitBase ]
+  id: ClothingOuterHardsuitCosmicCult
+  name: entropic armor
+  description: An unsettling hardsuit, numbing to the touch. It pulses with a glow that makes you feel like you've forgotten something..
+  components:
+  - type: CosmicEquipment
+  - type: Sprite
+    sprite: _Trauma/CosmicCult/Clothing/armor.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: _Trauma/CosmicCult/Clothing/armor.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.4
+        Heat: 0.5
+        Asphyxiation: 0.6 # Kinda their whole thing so why not
+  - type: ModifyDelayedKnockdown # You can't have 20 cultists anymore, so this is kinda needed
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing # Goobstation - Modsuits change
+    clothingPrototypes:
+      head: ClothingHeadHelmetCosmicCult
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+#Shoulder mounted flashlight
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING-light
+        shader: unshaded
+  - type: Appearance
+  - type: HandheldLight
+    addPrefix: false
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: PointLight
+    enabled: false
+    color: "#42a4ae"
+    radius: 7
+    energy: 5.4
+    mask: /Textures/_Trauma/CosmicCult/LightMasks/cosmic.png
+    autoRot: true
+    netsync: false
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: radiating
+        interpolate: Linear
+        maxDuration: 2.0
+        startValue: 3.0
+        endValue: 2.0
+        isLooped: true
+        reverseWhenFinished: true
+      - !type:PulseBehaviour
+        id: blinking
+        interpolate: Nearest
+        maxDuration: 1.0
+        startValue: 0.1
+        endValue: 2.0
+        isLooped: true
+  - type: ItemTogglePointLight
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+  - type: BatterySelfRecharger
+    autoRechargeRate: 5
+  - type: TypingIndicatorClothing
+    proto: CosmicTyping
+  - type: UnholyItem # Goobstation Shitchap
+  - type: CosmicTransmutable
+    transmuteTo: null # No reforging
+
+
+# COSMIC CULT HARDSUIT HELMET
+- type: entity
+  parent: [ ClothingHeadHardsuitBase ]
+  id: ClothingHeadHelmetCosmicCult
+  name: entropic headgear
+  description: This headpiece seems to extrude from the hardsuit it's attached to as if the material is one single, contiguous whole.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/CosmicCult/Clothing/armor.rsi
+    layers:
+    - state: icon-helmet
+  - type: Clothing
+    sprite: _Trauma/CosmicCult/Clothing/armor.rsi
+    equipSound:
+      path: /Audio/_Trauma/CosmicCult/helmet_on.ogg
+    unequipSound:
+      path: /Audio/_Trauma/CosmicCult/helmet_off.ogg
+  - type: PressureProtection
+    highPressureMultiplier: 0.3
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.5
+        Radiation: 0.5
+        Caustic: 0.5
+  - type: UnholyItem # Goobstation Shitchap
+  - type: FlashImmunity # Goobstation
+  - type: FlashSoundSuppression # Goobstation
+  - type: TypingIndicatorClothing
+    proto: CosmicTyping
+  - type: SpeechOverride
+    emoteIDs:
+      Unsexed: CosmicEmotes
+      Female: CosmicEmotes
+      Male: CosmicEmotes
+    speechIDs: CosmicSpeech

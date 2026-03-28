@@ -1,0 +1,123 @@
+- type: entity
+  id: CosmicRiftBase
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+
+- type: entity
+  parent: CosmicRiftBase
+  id: CosmicRiftSmall
+  name: malign scar
+  description: A small hole between here and there.
+  components:
+  - type: Sprite
+    sprite: _Trauma/CosmicCult/Tileset/malign_scar.rsi
+    drawdepth: Mobs
+    snapCardinals: true
+    offset: 0.5,0.5
+    layers:
+      - state: base
+        shader: unshaded
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-cult-scar
+    othersText: cosmic-examine-text-scar
+  - type: Visibility
+    layer: 32 #monument vis layer
+  - type: AmbientSound
+    enabled: true
+    volume: 0
+    range: 12
+    sound:
+      path: /Audio/_Trauma/CosmicCult/rift_loop_1.ogg
+  - type: CosmicMalignRift
+    travelTime: 10
+    closeTime: 5
+    upgradedEntity: CosmicRiftMid
+    influenceLevel: 1
+
+- type: entity
+  parent: CosmicRiftBase
+  id: CosmicRiftMid
+  name: malign rift
+  description: A pathway between that-which-is and that-which-is-not.
+  components:
+  - type: Sprite
+    sprite: _Trauma/CosmicCult/Tileset/malignrift.rsi
+    drawdepth: Mobs
+    snapCardinals: true
+    offset: 0.5,0
+    layers:
+      - state: rift-unshaded
+        shader: unshaded
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-cult-rift
+    othersText: cosmic-examine-text-rift
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    castShadows: false
+    color: "#42a4ae"
+  - type: CosmicCorrupting
+    corruptionMaxTicks: 4
+    corruptionSpeed: 0.2
+    corruptionChance: 1
+    corruptionReduction: 0.1
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_Trauma/CosmicCult/rift_grow.ogg
+  - type: AmbientSound
+    enabled: true
+    volume: 0
+    range: 6
+    sound:
+      path: /Audio/_Trauma/CosmicCult/rift_loop_2.ogg
+  - type: CosmicMalignRift
+    bibleTime: 30
+    chaplainTime: 20
+    travelTime: 6
+    closeTime: 15
+    upgradedEntity: CosmicRiftBig
+    influenceLevel: 2
+
+- type: entity
+  parent: CosmicRiftBase
+  id: CosmicRiftBig
+  name: malign breach
+  description: Noöspheric energy is stirring within, ready to be unleashed onto realspace at any moment.
+  components:
+  - type: Sprite
+    sprite: _Trauma/CosmicCult/Tileset/malignrift.rsi
+    drawdepth: Mobs
+    snapCardinals: true
+    offset: 0,0.125
+    layers:
+      - state: rift-unshaded
+        shader: unshaded
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-cult-breach
+    othersText: cosmic-examine-text-breach
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    castShadows: false
+    color: "#42a4ae"
+  - type: CosmicCorrupting
+    corruptionMaxTicks: 9
+    corruptionSpeed: 0.1
+    corruptionChance: 1
+    corruptionReduction: 0.1
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_Trauma/CosmicCult/rift_grow.ogg
+  - type: AmbientSound
+    enabled: true
+    volume: 0
+    range: 12
+    sound:
+      path: /Audio/_Trauma/CosmicCult/rift_loop_3.ogg
+  - type: CosmicMalignRift
+    travelTime: 3
+    influenceLevel: 3
