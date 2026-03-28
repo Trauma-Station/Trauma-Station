@@ -17,6 +17,7 @@
     sprite:
       sprite: /Textures/_Goobstation/Wizard/Effects/blood.rsi
       state: blood
+  - type: BloodSplatterOnLand
   - type: Physics
     fixedRotation: false
     bodyType: Dynamic

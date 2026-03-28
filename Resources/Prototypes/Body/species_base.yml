@@ -14,6 +14,7 @@
   - type: Targeting
   - type: BodyStatus
   - type: Carriable
+  - type: FootprintOwner
   - type: CPRTraining # IPCs can try CPR i guess?? it won't work
   - type: StunVisuals
   - type: HasJobIcons
@@ -22,6 +23,7 @@
     - TauCetiBasic
     understands:
     - TauCetiBasic
+  - type: BloodSplatterer
   - type: CanEscapeInventory
   - type: CanBeShadowCocoon
   - type: Consciousness
