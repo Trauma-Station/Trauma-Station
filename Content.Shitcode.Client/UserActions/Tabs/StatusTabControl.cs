@@ -10,7 +10,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Timing;
 
-namespace Content.Client._Shitcode.UserActions.Tabs;
+namespace Content.Shitcode.Client.UserActions.Tabs;
 
 [GenerateTypedNameReferences]
 public sealed partial class StatusTabControl : BaseTabControl

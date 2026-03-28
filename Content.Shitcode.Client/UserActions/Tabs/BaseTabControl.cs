@@ -2,7 +2,7 @@
 
 using Robust.Client.UserInterface;
 
-namespace Content.Client._Shitcode.UserActions.Tabs;
+namespace Content.Shitcode.Client.UserActions.Tabs;
 
 [Virtual]
 public class BaseTabControl : Control

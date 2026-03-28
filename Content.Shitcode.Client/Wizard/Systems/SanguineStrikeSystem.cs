@@ -3,7 +3,7 @@
 using Content.Shitcode.Shared.Wizard.SanguineStrike;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._Shitcode.Wizard.Systems;
+namespace Content.Shitcode.Client.Wizard.Systems;
 
 public sealed class SanguineStrikeSystem : SharedSanguineStrikeSystem
 {

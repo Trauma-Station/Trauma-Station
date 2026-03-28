@@ -15,7 +15,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Client._Shitcode.UserActions.Tabs;
+namespace Content.Shitcode.Client.UserActions.Tabs;
 
 [GenerateTypedNameReferences]
 public sealed partial class EmotesTabControl : BaseTabControl

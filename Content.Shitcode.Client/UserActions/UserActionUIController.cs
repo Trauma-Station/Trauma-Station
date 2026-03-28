@@ -4,7 +4,7 @@ using Content.Goobstation.UIKit.UserActions.Controls;
 using Content.Client._Shitcode.UserActions.Tabs;
 using Robust.Client.UserInterface.Controllers;
 
-namespace Content.Client._Shitcode.UserActions;
+namespace Content.Shitcode.Client.UserActions;
 
 public sealed class UserActionUIController : UIController, IOnSystemChanged<UserActionUISystem>
 {

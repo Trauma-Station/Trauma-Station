@@ -2,6 +2,6 @@
 
 using Content.Shitcode.Shared.Wizard.MagicMirror;
 
-namespace Content.Client._Shitcode.Wizard.MagicMirror;
+namespace Content.Shitcode.Client.Wizard.MagicMirror;
 
 public sealed class WizardMirrorSystem : SharedWizardMirrorSystem;

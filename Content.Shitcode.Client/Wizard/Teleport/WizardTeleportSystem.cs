@@ -2,7 +2,7 @@
 
 using Content.Shitcode.Shared.Wizard.Teleport;
 
-namespace Content.Client._Shitcode.Wizard.Teleport;
+namespace Content.Shitcode.Client.Wizard.Teleport;
 
 public sealed class WizardTeleportSystem : SharedWizardTeleportSystem
 {

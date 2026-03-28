@@ -19,7 +19,7 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Log;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._Shitcode.Wizard.MagicMirror;
+namespace Content.Shitcode.Client.Wizard.MagicMirror;
 
 // almost all of this file is imports because an idiot didnt use ioc :)
 [GenerateTypedNameReferences]

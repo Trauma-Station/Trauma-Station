@@ -2,7 +2,7 @@
 using Content.Shitcode.Shared.Wizard.MagicMirror;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._Shitcode.Wizard.MagicMirror;
+namespace Content.Shitcode.Client.Wizard.MagicMirror;
 
 public sealed class WizardMirrorBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {

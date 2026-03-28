@@ -9,7 +9,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._Shitcode.Wizard.Spellblade;
+namespace Content.Shitcode.Client.Wizard.Spellblade;
 
 [GenerateTypedNameReferences]
 public sealed partial class SpellbladeMenu : RadialMenu

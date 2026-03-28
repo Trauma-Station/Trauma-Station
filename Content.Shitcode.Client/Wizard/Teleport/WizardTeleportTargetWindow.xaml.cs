@@ -8,7 +8,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client._Shitcode.Wizard.Teleport
+namespace Content.Shitcode.Client.Wizard.Teleport
 {
     [GenerateTypedNameReferences]
     public sealed partial class WizardTeleportTargetWindow : DefaultWindow

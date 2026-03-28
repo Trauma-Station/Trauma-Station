@@ -5,7 +5,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client._Shitcode.UserActions;
+namespace Content.Shitcode.Client.UserActions;
 
 [GenerateTypedNameReferences]
 public sealed partial class UserActionsPanel : Control

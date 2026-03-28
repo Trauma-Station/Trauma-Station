@@ -4,7 +4,7 @@ using Content.Shitcode.Shared.Wizard.Teleport;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._Shitcode.Wizard.Teleport;
+namespace Content.Shitcode.Client.Wizard.Teleport;
 
 [UsedImplicitly]
 public sealed class WizardTeleportBoundUserInterface : BoundUserInterface

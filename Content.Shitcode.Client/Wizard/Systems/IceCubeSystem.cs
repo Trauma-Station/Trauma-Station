@@ -2,6 +2,6 @@
 
 using Content.Shitcode.Shared.Wizard.Traps;
 
-namespace Content.Client._Shitcode.Wizard.Systems;
+namespace Content.Shitcode.Client.Wizard.Systems;
 
 public sealed class IceCubeSystem : SharedIceCubeSystem;

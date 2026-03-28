@@ -2,7 +2,7 @@
 
 using Robust.Shared.Player;
 
-namespace Content.Client._Shitcode.UserActions;
+namespace Content.Shitcode.Client.UserActions;
 
 public sealed class UserActionUISystem : EntitySystem
 {

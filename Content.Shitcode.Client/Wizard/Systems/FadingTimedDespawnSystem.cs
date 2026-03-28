@@ -4,7 +4,7 @@ using Content.Shitcode.Shared.Wizard.FadingTimedDespawn;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._Shitcode.Wizard.Systems;
+namespace Content.Shitcode.Client.Wizard.Systems;
 
 public sealed class FadingTimedDespawnSystem : SharedFadingTimedDespawnSystem
 {

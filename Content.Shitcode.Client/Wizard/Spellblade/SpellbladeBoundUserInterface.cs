@@ -7,7 +7,7 @@ using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._Shitcode.Wizard.Spellblade;
+namespace Content.Shitcode.Client.Wizard.Spellblade;
 
 [UsedImplicitly]
 public sealed class SpellbladeBoundUserInterface : BoundUserInterface

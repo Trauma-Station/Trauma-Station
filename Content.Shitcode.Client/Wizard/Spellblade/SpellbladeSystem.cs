@@ -3,7 +3,7 @@
 using Content.Shitcode.Shared.Wizard.Spellblade;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._Shitcode.Wizard.Spellblade;
+namespace Content.Shitcode.Client.Wizard.Spellblade;
 
 public sealed class SpellbladeSystem : SharedSpellbladeSystem
 {

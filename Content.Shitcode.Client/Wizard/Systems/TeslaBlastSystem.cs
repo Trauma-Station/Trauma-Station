@@ -2,7 +2,7 @@
 
 using Content.Shitcode.Shared.Wizard.TeslaBlast;
 
-namespace Content.Client._Shitcode.Wizard.Systems;
+namespace Content.Shitcode.Client.Wizard.Systems;
 
 public sealed class TeslaBlastSystem : SharedTeslaBlastSystem
 {

@@ -17,7 +17,7 @@ using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Client._Shitcode.Wizard.Trail;
+namespace Content.Shitcode.Client.Wizard.Trail;
 
 public sealed class TrailSystem : EntitySystem
 {

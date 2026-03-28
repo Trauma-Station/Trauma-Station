@@ -6,7 +6,7 @@ using Robust.Client.UserInterface.Controls;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
-namespace Content.Client._Shitcode.UserActions.Controls;
+namespace Content.Shitcode.Client.UserActions.Controls;
 
 public sealed class IconButton : Button
 {
