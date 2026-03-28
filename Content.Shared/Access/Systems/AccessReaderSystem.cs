@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Heretic;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -15,7 +18,6 @@ using Content.Shared.NameIdentifier;
 using Content.Shared.PDA;
 using Content.Shared.StationRecords;
 using Content.Shared.Tag;
-using Content.Trauma.Common.Heretic;
 using Robust.Shared.Containers;
 using Robust.Shared.Collections;
 using Robust.Shared.GameStates;
@@ -201,12 +203,12 @@ public sealed partial class AccessReaderSystem : EntitySystem // Trauma - made p
         if (!Resolve(target, ref reader, false))
             return true;
 
-        // Goob edit start
+        // <Trauma>
         var ev = new BeforeAccessReaderCheckEvent();
         RaiseLocalEvent(user, ref ev);
         if (ev.Cancelled)
             return false;
-        // Goob edit end
+        // </Trauma>
 
         if (!reader.Enabled)
             return true;

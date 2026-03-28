@@ -1,5 +1,5 @@
 // <Trauma>
-
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Hands;
@@ -9,7 +9,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
-using Content.Trauma.Common.Heretic;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 

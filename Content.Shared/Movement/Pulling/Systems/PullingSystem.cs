@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
 using Content.Shared.Weapons.Melee;
 // </Trauma>
@@ -27,7 +28,6 @@ using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
-using Content.Trauma.Common.Heretic;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Physics;
