@@ -7,6 +7,18 @@ using Content.DV.Common.Carrying;
 using Content.EinsteinEngines.Common.Silicon;
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Common.Religion;
+using Content.Shared._DV.Carrying;
+using Content.Shared._EinsteinEngines.Silicon.Components;
+using Content.Shared._Goobstation.Wizard.BindSoul;
+using Content.Shared._Goobstation.Wizard.Chuuni;
+using Content.Shared._Goobstation.Wizard.Components;
+using Content.Shared._Goobstation.Wizard.LesserSummonGuns;
+using Content.Shared._Goobstation.Wizard.Mutate;
+using Content.Shared._Goobstation.Wizard.Projectiles;
+using Content.Shared._Goobstation.Wizard.SanguineStrike;
+using Content.Shared._Goobstation.Wizard.SpellCards;
+using Content.Shared._Goobstation.Wizard.Teleport;
+using Content.Shared._Goobstation.Wizard.TeslaBlast;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Abilities.Mime;
 using Content.Shared.Access.Components;
@@ -138,7 +150,6 @@ public abstract class SharedSpellsSystem : CommonSpellsSystem
     [Dependency] private readonly SharedWizardTeleportSystem _teleport = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly TileFrictionController _tileFriction = default!;
@@ -173,7 +184,6 @@ public abstract class SharedSpellsSystem : CommonSpellsSystem
         SubscribeLocalEvent<ScreamForMeEvent>(OnScreamForMe);
         SubscribeLocalEvent<InstantSummonsEvent>(OnInstantSummons);
         SubscribeLocalEvent<WizardTeleportEvent>(OnTeleport);
-        SubscribeLocalEvent<TrapsSpellEvent>(OnTraps);
         SubscribeLocalEvent<SummonMobsEvent>(OnSummonMobs);
         SubscribeLocalEvent<SummonSimiansEvent>(OnSimians);
         SubscribeLocalEvent<ExsanguinatingStrikeEvent>(OnExsangunatingStrike);
@@ -828,72 +838,6 @@ public abstract class SharedSpellsSystem : CommonSpellsSystem
             return;
 
         _teleport.OnTeleportSpell(ev.Performer, ev.Action);
-    }
-
-    private void OnTraps(TrapsSpellEvent ev)
-    {
-        if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
-            return;
-
-        if (ev.Traps.Count == 0)
-            return;
-
-        if (_net.IsClient)
-        {
-            ev.Handled = true;
-            return;
-        }
-
-        if (!Mind.TryGetMind(ev.Performer, out var mind, out _))
-            return;
-
-        var range = ev.Range;
-        var mapPos = TransformSystem.GetMapCoordinates(ev.Performer);
-        var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
-        var circle = new Circle(mapPos.Position, range);
-        var grids = new List<Entity<MapGridComponent>>();
-        MapManager.FindGridsIntersecting(mapPos.MapId, box, ref grids);
-
-        bool IsTileValid((EntityCoordinates, TileRef) data)
-        {
-            var (coords, tile) = data;
-
-            if (_turf.IsSpace(tile))
-                return false;
-
-            var trapQuery = GetEntityQuery<WizardTrapComponent>();
-            var flags = LookupFlags.Static | LookupFlags.Sundries | LookupFlags.Sensors;
-            foreach (var (entity, fix) in Lookup.GetEntitiesInRange<FixturesComponent>(coords, 0.1f, flags))
-            {
-                if (fix.Fixtures.Any(x =>
-                        x.Value.Hard && (x.Value.CollisionLayer & (int) CollisionGroup.LowImpassable) != 0))
-                    return false;
-
-                if (trapQuery.HasComp(entity))
-                    return false;
-            }
-
-            return true;
-        }
-
-        var tiles = new List<(EntityCoordinates, TileRef)>();
-        foreach (var grid in grids)
-        {
-            tiles.AddRange(Map.GetTilesIntersecting(grid.Owner, grid.Comp, circle)
-                .Select(x => (Map.GridTileToLocal(grid.Owner, grid.Comp, x.GridIndices), x))
-                .Where(IsTileValid));
-        }
-
-        for (var i = 0; i < Math.Min(tiles.Count, ev.Amount); i++)
-        {
-            var (coords, _) = Random.PickAndTake(tiles);
-            var trap = Spawn(Random.Pick(ev.Traps), coords);
-            var trapComp = EnsureComp<WizardTrapComponent>(trap);
-            trapComp.IgnoredMinds.Add(mind);
-            Dirty(trap, trapComp);
-        }
-
-        ev.Handled = true;
     }
 
     private void OnSummonMobs(SummonMobsEvent ev)

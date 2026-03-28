@@ -56,6 +56,8 @@
       department: Security
       time: 3h
       inverted: true
+    - !type:OverallPlaytimeRequirement
+      time: 2h
     TechnicalAssistant:
     - !type:DepartmentTimeRequirement
       department: Engineering

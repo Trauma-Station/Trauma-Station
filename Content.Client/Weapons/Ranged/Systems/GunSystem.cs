@@ -182,10 +182,6 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
         }
 
-        if (TryComp<EntropicPlumeAffectedComponent>(entity, out var affected) &&
-            affected.NextAttack + TimeSpan.FromSeconds(0.1f) > Timing.CurTime) // Goobstation
-            return;
-
         var useKey = gun.UseKey ? EngineKeyFunctions.Use : EngineKeyFunctions.UseSecondary;
 
         if (_inputSystem.CmdStates.GetState(useKey) != BoundKeyState.Down && !gun.BurstActivated)

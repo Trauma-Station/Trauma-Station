@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 vanx <61917534+Vaaankas@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chat.Managers;
@@ -15,7 +11,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Globalization;
-using Content.Shitcode.Common.Heretic.Components;
+using Content.Trauma.Common.Heretic;
 
 namespace Content.White.Server.Examine;
 public sealed class ExaminableCharacterSystem : EntitySystem

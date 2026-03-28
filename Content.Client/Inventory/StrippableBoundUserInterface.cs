@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.Heretic.Components;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Linq;
 using System.Numerics;

@@ -3,8 +3,8 @@ using Content.Shitcode.Common.Wizard;
 using Content.Shitcode.Shared.Wizard.Components;
 using Content.Shitcode.Shared.Wizard.SpellCards;
 using Content.Shared.Damage.Components;
-using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -1016,7 +1016,9 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         // If we were targeting something else we should stop
         StopTargeting();
 
-        // TODO: FIX SHITCODE - Heretic Star Blast
+        // Goobstation
+        var ev = new TryPerformInstantWorldTargetActionEvent();
+        EntityManager.EventBus.RaiseLocalEvent(ent, ref ev);
 
         SelectingTargetFor = uid;
         // TODO inform the server

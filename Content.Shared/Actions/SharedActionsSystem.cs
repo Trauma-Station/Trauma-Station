@@ -2,6 +2,7 @@
 using Content.Shitcode.Common.Actions;
 using Content.Shared.Ghost;
 using Content.Shared.Popups;
+using Content.Trauma.Common.Heretic;
 using Robust.Shared.Network;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;

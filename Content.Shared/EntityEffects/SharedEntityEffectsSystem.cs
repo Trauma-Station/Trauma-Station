@@ -95,7 +95,7 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
             return false;
 
         var prob = effect.Probability * (effect.ScaleProbability ? scale : 1f); // Trauma - multiply by scale if ScaleProbability is true
-        if (effect.Probability <= 1f && !SharedRandomExtensions.PredictedProb(_timing, prob, GetNetEntity(target), GetNetEntity(user))) // Trauma - use prob
+        if (prob <= 1f && !SharedRandomExtensions.PredictedProb(_timing, prob, GetNetEntity(target), GetNetEntity(user))) // Trauma - use prob
                 return false;
 
         // See if conditions apply

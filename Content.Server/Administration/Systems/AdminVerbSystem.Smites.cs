@@ -3,7 +3,6 @@ using Content.Goobstation.Common.Speech;
 using Content.Server.Speech.EntitySystems;
 using Content.Shitcode.Shared.Wizard.Traps;
 using Content.Shared.Speech.Components;
-using Content.Shared.Temperature.Components;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -559,25 +558,6 @@ public sealed partial class AdminVerbSystem
 
             };
             args.Verbs.Add(ghostKick);
-        }
-
-        // Goobstation
-        if (HasComp<TemperatureComponent>(args.Target))
-        {
-            var iceCubeName = Loc.GetString("admin-smite-ice-cube-name").ToLowerInvariant();
-            Verb iceCube = new()
-            {
-                Text = iceCubeName,
-                Category = VerbCategory.Smite,
-                Icon = new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Wizard/Effects/effects.rsi"), "ice_cube"),
-                Act = () =>
-                {
-                    EnsureComp<IceCubeComponent>(args.Target);
-                },
-                Impact = LogImpact.Extreme,
-                Message = string.Join(": ", iceCubeName, Loc.GetString("admin-smite-ice-cube-description"))
-            };
-            args.Verbs.Add(iceCube);
         }
 
         if (TryComp<InventoryComponent>(args.Target, out var inventory))

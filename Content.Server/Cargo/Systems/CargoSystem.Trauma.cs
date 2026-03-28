@@ -15,18 +15,16 @@ public sealed partial class CargoSystem
 
     /// <summary>
     /// Check that the user has the account's approve access.
-    /// Does nothing when emagged with an access breaker.
+    /// Does nothing when emagged with an access breaker or for access-ignoring consoles.
     /// </summary>
     public bool CheckAccessPopup(Entity<CargoOrderConsoleComponent> ent, EntityUid user, CargoAccountPrototype account)
     {
-        if (!_emag.CheckFlag(ent, EmagType.Access) && !_accessReaderSystem.UserHasAccess(user, account.ApproveAccess))
-        {
-            ConsolePopup(user, Loc.GetString("cargo-console-order-not-allowed"));
-            PlayDenySound(ent, ent.Comp);
-            return false;
-        }
+        if (ent.Comp.IgnoreAccess || _emag.CheckFlag(ent, EmagType.Access) || _accessReaderSystem.UserHasAccess(user, account.ApproveAccess))
+            return true;
 
-        return true;
+        ConsolePopup(user, Loc.GetString("cargo-console-order-not-allowed"));
+        PlayDenySound(ent, ent.Comp);
+        return false;
     }
 
     public bool CheckAlertPopup(Entity<CargoOrderConsoleComponent> ent, EntityUid user, CargoOrderData order, EntityUid station)

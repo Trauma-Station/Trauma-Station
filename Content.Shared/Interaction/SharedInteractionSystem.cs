@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Interaction;
 using Content.Shitcode.Common.Heretic;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
