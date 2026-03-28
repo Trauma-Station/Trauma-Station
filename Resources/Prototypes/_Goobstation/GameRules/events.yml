@@ -59,3 +59,16 @@
     - PartyMaker
     - CommandMaid
     - PhoneMerchant
+
+- type: entity
+  parent: BaseGameRule
+  id: HellGooseSpawn
+  components:
+  - type: StationEvent
+    earliestStart: 30
+    minimumPlayers: 30
+    weight: 5
+    reoccurrenceDelay: 60
+  - type: VentHordeRule
+    table:
+      id: MobHellGoose
