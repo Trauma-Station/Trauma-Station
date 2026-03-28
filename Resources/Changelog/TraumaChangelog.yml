@@ -5653,3 +5653,10 @@ Entries:
   id: 664
   time: '2026-03-28T15:21:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1637
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lemonades being evil
+  id: 665
+  time: '2026-03-28T19:19:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1641
