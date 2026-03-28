@@ -36,7 +36,6 @@
   - MobFlammable
   id: MobShattered
   components:
-  - type: FootprintOwner
   - type: StunVisuals
   - type: FireVisuals
     alternateState: Standing
