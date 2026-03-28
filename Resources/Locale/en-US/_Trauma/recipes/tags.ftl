@@ -31,6 +31,3 @@ construction-graph-tag-improvised-bow = an improvised bow
 
 # food
 construction-graph-tag-CookedEgg = a cooked egg
-
-# materials
-construction-graph-tag-silver = a single silver bar

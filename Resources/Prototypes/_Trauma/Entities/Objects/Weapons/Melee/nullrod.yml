@@ -56,9 +56,9 @@
     prayDoAfterDuration: 10
 
 - type: entity
-  name: faith
   parent: BaseItem
   id: WeaponPistolFaith
+  name: faith
   description: "`Cause you gotta have Faith."
   components:
   - type: Nullrod

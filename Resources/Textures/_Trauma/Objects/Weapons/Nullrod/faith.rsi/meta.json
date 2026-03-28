@@ -1,11 +1,11 @@
 {
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Created by asardonicsailor (discord)",
     "version": 1,
     "size": {
         "x": 32,
         "y": 32
     },
-    "license": "CC-BY-SA-3.0",
-    "copyright": "'just asardonicsailor is fine' - asardonicsailor, who sprited this",
     "states": [
         {
             "name": "icon"

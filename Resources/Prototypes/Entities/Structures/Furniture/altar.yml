@@ -350,6 +350,14 @@
   parent: AltarConvertFestival
   name: white altar
   components:
+  # <Trauma>
+  - type: Construction
+    graph: AltarsGraph
+    node: ConvertWhiteNode
+  - type: AltarSource
+    rodProto: WeaponPistolFaith
+    effectProto: EffectSpark
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/Altars/Gods/convertaltar.rsi
     layers:
@@ -363,14 +371,7 @@
     radius: 1.5
     energy: 1
     color: "#fbceb1"
-  # <Trauma>
-  - type: Construction
-    graph: AltarsGraph
-    node: ConvertWhiteNode
-  - type: AltarSource
-    rodProto: WeaponPistolFaith
-    effectProto: EffectSpark
-  # </Trauma>
+
 
 - type: entity
   id: AltarConvertYellow
