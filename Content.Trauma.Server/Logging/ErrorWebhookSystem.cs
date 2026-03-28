@@ -109,7 +109,7 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
             return; // only care about errors
 
         var text = message.RenderMessage()
-            .replace(StackTracePrefix, string.Empty);
+            .Replace(StackTracePrefix, string.Empty);
         if (text.Contains(NetEntitySlop))
             return; // ignore state error spam for deleted entities referenced in a component, engine "maintainer" is a chud and won't do anything about it
 
