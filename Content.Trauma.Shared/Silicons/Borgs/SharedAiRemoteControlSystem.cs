@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Silicons.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Mind;
 using Content.Shared.Silicons.StationAi;
+using Content.Trauma.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Silicons.Borgs;

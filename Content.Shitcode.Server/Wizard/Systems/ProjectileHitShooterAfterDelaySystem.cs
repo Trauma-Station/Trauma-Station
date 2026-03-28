@@ -8,7 +8,7 @@
 using Content.Server._Goobstation.Wizard.Components;
 using Content.Shared.Projectiles;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class ProjectileHitShooterAfterDelaySystem : EntitySystem
 {

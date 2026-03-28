@@ -21,7 +21,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class SanguineStrikeSystem : SharedSanguineStrikeSystem
 {

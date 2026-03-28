@@ -21,7 +21,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Robust.Shared.GameObjects.Components.Localization;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class BindSoulSystem : SharedBindSoulSystem
 {

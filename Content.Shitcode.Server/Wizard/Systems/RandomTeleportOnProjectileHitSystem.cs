@@ -11,7 +11,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Teleportation;
 using Content.Shared.Whitelist;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class RandomTeleportOnProjectileHitSystem : EntitySystem
 {

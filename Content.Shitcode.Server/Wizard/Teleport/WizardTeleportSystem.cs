@@ -27,7 +27,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._Goobstation.Wizard.Teleport;
+namespace Content.Goobstation.Server.Wizard.Teleport;
 
 public sealed class WizardTeleportSystem : SharedWizardTeleportSystem
 {

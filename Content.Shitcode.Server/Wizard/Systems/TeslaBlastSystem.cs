@@ -11,7 +11,7 @@ using Content.Shitcode.Shared.Wizard.TeslaBlast;
 using Content.Shared.Electrocution;
 using Content.Shared.Physics;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class TeslaBlastSystem : SharedTeslaBlastSystem
 {

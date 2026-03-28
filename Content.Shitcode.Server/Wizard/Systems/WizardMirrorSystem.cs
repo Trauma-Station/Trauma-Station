@@ -20,7 +20,7 @@ using Content.Shared.Polymorph;
 using Content.Shared.Preferences;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class WizardMirrorSystem : SharedWizardMirrorSystem
 {

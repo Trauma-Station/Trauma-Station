@@ -7,7 +7,7 @@
 
 using Content.Shared.Whitelist;
 
-namespace Content.Server._Goobstation.Wizard.Components;
+namespace Content.Goobstation.Server.Wizard.Components;
 
 [RegisterComponent]
 public sealed partial class IceCubeOnProjectileHitComponent : Component

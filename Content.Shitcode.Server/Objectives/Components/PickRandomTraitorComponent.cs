@@ -8,7 +8,7 @@
 
 using Content.Server.Objectives.Components;
 
-namespace Content.Server._Goobstation.Objectives.Components;
+namespace Content.Goobstation.Server.Objectives.Components;
 
 /// <summary>
 /// Sets the target for <see cref="TargetObjectiveComponent"/> to a random traitor

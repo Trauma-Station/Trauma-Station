@@ -8,7 +8,7 @@
 using Content.Shitcode.Shared.Wizard.Components;
 using Content.Shared.Alert;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class CurseOfByondSystem : EntitySystem
 {

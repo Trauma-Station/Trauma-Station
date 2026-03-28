@@ -16,7 +16,7 @@ using Content.Shared.Verbs;
 using Robust.Server.Player;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class ScryingOrbSystem : SharedScryingOrbSystem
 {

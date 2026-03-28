@@ -13,7 +13,7 @@ using Content.Shared.Magic.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Throwing;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class ThrownLightningSystem : EntitySystem
 {

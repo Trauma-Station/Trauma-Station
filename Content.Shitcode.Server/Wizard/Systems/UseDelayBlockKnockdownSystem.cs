@@ -12,7 +12,7 @@ using Content.Trauma.Shared.TelescopicBaton;
 using Content.Shared.Timing;
 using Robust.Server.Audio;
 
-namespace Content.Server._Goobstation.Wizard.Systems;
+namespace Content.Goobstation.Server.Wizard.Systems;
 
 public sealed class UseDelayBlockKnockdownSystem : EntitySystem
 {
