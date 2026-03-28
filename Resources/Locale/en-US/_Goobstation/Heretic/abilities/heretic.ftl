@@ -23,6 +23,7 @@ heretic-ability-fail-mirror-jaunt-no-mirrors = There are no reflective surfaces 
 
 heretic-ability-lose-focus-shadow-cloak = As you lose your focus, you are pulled out of the shadows!
 heretic-ability-lose-focus-pale-cloak = As you lose your focus, you are pulled out of the light!
+heretic-ability-lose-focus-last-refuge = Without a focus, your refuge weakens and dissipates!
 
 heretic-cosmic-rune-fail-star-mark = Blocked by star mark!
 heretic-cosmic-rune-fail-unlinked = No linked rune!
@@ -47,6 +48,8 @@ heretic-aura-message = You can no longer hide what you truly are. After 1 minute
 ## paths exclusive
 heretic-rust-mark-itembreak = {$name} shatters into dust!
 mansus-infused-item-examine = [color=purple]The item's sheer presence alone gives you shivers. Should you really pick it up?[/color]
+heretic-lock-unlocked = unlocked!
+heretic-last-refuge-examine-message = [color=purple]{CAPITALIZE(SUBJECT($target))} is enveloped in an unholy haze![/color]
 
 ## mansus link
 heretic-manselink-fail-exists = This creature is already connected!
@@ -100,6 +103,8 @@ heretic-speech-star-touch = ST'R 'N'RG'!!
 heretic-speech-star-blast = R'T'T' ST'R!!
 heretic-speech-cosmic-expansion = C'SM'S 'XP'ND!
 heretic-speech-stargaze = SH''P D' W''P
+
+heretic-speech-bulglar-finesse = Y'O'K!
 
 heretic-speech-cleave = CL'VE!
 heretic-speech-bloodsiphon = FL'MS O'ET'RN'ITY!

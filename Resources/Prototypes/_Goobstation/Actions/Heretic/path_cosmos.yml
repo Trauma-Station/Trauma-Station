@@ -32,7 +32,11 @@
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: star_touch
   - type: InstantAction
-    event: !type:EventHereticStarTouch
+    event: !type:TouchSpellEvent
+      touchSpell: TouchSpellStar
+      touchSpellWhitelist:
+        components:
+        - StarTouch
   - type: HereticAction
     requireMagicItem: true
   - type: Tag

@@ -2,8 +2,8 @@
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.EntityEffects;
 using Content.Medical.Common.Targeting;
-using Content.Shared.Heretic;
 using Content.Shared.Temperature.Components;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;

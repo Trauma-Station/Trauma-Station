@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons;
 using Content.Goobstation.Common.Weapons.MeleeDash;
-using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._White.Blink;
 using Content.Shared.Wieldable.Components;
 // </Trauma>
@@ -77,12 +76,6 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             return;
 
         var entity = entityNull.Value;
-
-        // <Trauma>
-        if (TryComp<EntropicPlumeAffectedComponent>(entity, out var affected) &&
-            affected.NextAttack + TimeSpan.FromSeconds(0.1f) > Timing.CurTime)
-            return;
-        // </Trauma>
 
         if (!TryGetWeapon(entity, out var weaponUid, out var weapon))
             return;

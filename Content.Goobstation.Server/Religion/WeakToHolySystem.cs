@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Religion.Nullrod.Systems;
-using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Medical.Common.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 using Content.Shared.Hands;
 using Content.Shared.Inventory;
@@ -29,9 +25,6 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         base.Initialize();
 
         SubscribeLocalEvent<ShouldTakeHolyComponent, UnholyStatusChangedEvent>(OnUnholyStatus);
-
-        SubscribeLocalEvent<HereticRitualRuneComponent, StartCollideEvent>(OnCollide);
-        SubscribeLocalEvent<HereticRitualRuneComponent, EndCollideEvent>(OnCollideEnd);
 
         SubscribeLocalEvent<WeakToHolyComponent, ComponentShutdown>(OnWeakShutdown);
         SubscribeLocalEvent<WeakToHolyComponent, UnholyStatusChangedEvent>(OnWeakStatus);
@@ -120,25 +113,6 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         RemCompDeferred<AlwaysTakeHolyComponent>(ent);
     }
 
-    #region Holy Healing
-
-    // Passively heal on runes
-    private void OnCollide(Entity<HereticRitualRuneComponent> ent, ref StartCollideEvent args)
-    {
-        if (!TryComp<WeakToHolyComponent>(args.OtherEntity, out var weak))
-            return;
-
-        weak.IsColliding = true;
-    }
-
-    private void OnCollideEnd(Entity<HereticRitualRuneComponent> ent, ref EndCollideEvent args)
-    {
-        if (!TryComp<WeakToHolyComponent>(args.OtherEntity, out var weak))
-            return;
-
-        weak.IsColliding = false;
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -171,6 +145,4 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
 
         _toUpdate.Clear();
     }
-
-    #endregion
 }

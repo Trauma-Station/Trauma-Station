@@ -133,6 +133,13 @@ public partial class TraumaSystem
     private void OnPartHealAttempt(Entity<WoundableComponent> ent, ref PartHealAttemptEvent args)
     {
         args.Bleeding = ent.Comp.Bleeds > MinBleedToStopHealing;
+
+        if (_wound.GetWoundableWounds(ent, ent.Comp).Any(wound => !_wound.CanHealWound(wound, wound.Comp)))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (TraumasBlockingHealing.Any(traumaType => HasWoundableTrauma(ent, traumaType, ent.Comp, false)))
             args.Cancelled = true;
     }
