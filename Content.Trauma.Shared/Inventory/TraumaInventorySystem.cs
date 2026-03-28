@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Inventory;
+using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Tackle;
 
 namespace Content.Trauma.Shared.Inventory;
@@ -14,5 +15,6 @@ public sealed class TraumaInventorySystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<InventoryComponent, TackleEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, CheckMagicItemEvent>(_inventory.RelayEvent);
     }
 }

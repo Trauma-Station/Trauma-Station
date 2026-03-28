@@ -11,7 +11,6 @@ using Content.Shared.Administration.Systems;
 using Content.Shared.CombatMode;
 using Content.Shared.Examine;
 using Content.Shared.Ghost.Roles.Components;
-using Content.Shared.Heretic;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
@@ -26,14 +25,11 @@ using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
-using Content.Server.Heretic.Abilities;
-using Content.Server.Heretic.EntitySystems;
 using Content.Server.Jittering;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Roles;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Body;
 using Content.Shared.Coordinates;
@@ -43,13 +39,17 @@ using Content.Shared.Hands;
 using Content.Shared.Polymorph;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Speech.EntitySystems;
-using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Shared.Gibbing;
 using Content.Shared.NPC.Components;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Roles.Components;
 using Content.Trauma.Server.Chaplain;
+using Content.Trauma.Server.Heretic.Abilities;
 using Content.Trauma.Shared.Chaplain.Components;
+using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
+using Content.Trauma.Shared.Heretic.Components.Side;
+using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Shared.Audio;
@@ -65,6 +65,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
     private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnGhoulify =
         "ComponentsToRemoveOnGhoulify";
+
     private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnUnGhoulify =
         "ComponentsToRemoveOnUnGhoulify";
 
@@ -107,7 +108,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         SubscribeLocalEvent<GhoulDeconvertComponent, DamageUnholyEvent>(OnDamageUnholy,
             after: [typeof(WeakToHolySystem)]);
 
-        SubscribeLocalEvent<GhoulRoleComponent, GetBriefingEvent>(OnGetBriefing);
+        SubscribeLocalEvent<Shared.Heretic.Components.Ghoul.GhoulRoleComponent, GetBriefingEvent>(OnGetBriefing);
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
 
@@ -262,7 +263,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         }
     }
 
-    private void OnGetBriefing(Entity<GhoulRoleComponent> ent, ref GetBriefingEvent args)
+    private void OnGetBriefing(Entity<Shared.Heretic.Components.Ghoul.GhoulRoleComponent> ent, ref GetBriefingEvent args)
     {
         var uid = args.Mind.Comp.OwnedEntity;
 
@@ -332,9 +333,9 @@ public sealed class GhoulSystem : SharedGhoulSystem
             return;
         }
 
-        if (ent.Comp.OldEyeColor is {} eyeColor)
+        if (ent.Comp.OldEyeColor is { } eyeColor)
             _humanoid.SetEyeColor(ent, eyeColor);
-        if (ent.Comp.OldSkinColor is {} skinColor)
+        if (ent.Comp.OldSkinColor is { } skinColor)
             _humanoid.SetSkinColor(ent, skinColor);
 
         var species = _proto.Index(humanoid.Species);
@@ -371,7 +372,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
             }
 
             if (Exists(minion.CreationRitual) &&
-                TryComp(minion.CreationRitual.Value, out HereticRitualComponent? ritual))
+                TryComp(minion.CreationRitual.Value, out Shared.Heretic.Rituals.HereticRitualComponent? ritual))
             {
                 ritual.LimitedOutput.Remove(ent);
                 Dirty(minion.CreationRitual.Value, ritual);
@@ -408,7 +409,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (hasMind)
         {
             _mind.UnVisit(mindId, mind);
-            if (!_role.MindHasRole<GhoulRoleComponent>(mindId))
+            if (!_role.MindHasRole<Shared.Heretic.Components.Ghoul.GhoulRoleComponent>(mindId))
             {
                 SendBriefing(ent.Owner);
                 _role.MindAddRole(mindId, GhoulRole, mind);

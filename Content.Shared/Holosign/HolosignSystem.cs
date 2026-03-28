@@ -28,6 +28,11 @@ public sealed partial class HolosignSystem : EntitySystem // Trauma - made parti
         var charges = _powerCell.GetRemainingUses(ent.Owner, ent.Comp.ChargeUse);
         var maxCharges = _powerCell.GetMaxUses(ent.Owner, ent.Comp.ChargeUse);
 
+        // <Trauma> - don't show charge if it doesn't have battery
+        if (maxCharges == 0)
+            return;
+        // </Trauma>
+
         using (args.PushGroup(nameof(HolosignProjectorComponent)))
         {
             args.PushMarkup(Loc.GetString("limited-charges-charges-remaining", ("charges", charges)));
@@ -42,9 +47,9 @@ public sealed partial class HolosignSystem : EntitySystem // Trauma - made parti
     private void OnBeforeInteract(Entity<HolosignProjectorComponent> ent, ref BeforeRangedInteractEvent args)
     {
         if (args.Handled
-            || !args.CanReach // prevent placing out of range
+            // || !args.CanReach // prevent placing out of range
             || HasComp<StorageComponent>(args.Target) // if it's a storage component like a bag, we ignore usage so it can be stored
-            || CheckCoords(ent, ref args) is not {} coords // Goob - replaces power check
+            || CheckCoords(ent, ref args) is not {} coords // Goob - replaces power and CanReach check
             )
             return;
 

@@ -108,6 +108,10 @@
   - type: GuideHelp
     guides:
     - ExpandingRepairingStation
+  - type: Tag # Goobstation
+    tags:
+    - RodMetal
+    - DroneUsable
 
 - type: entity
   parent: PartRodMetal

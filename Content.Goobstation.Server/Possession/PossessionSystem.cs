@@ -18,7 +18,6 @@ using Content.Shared.Database;
 using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
 using Content.Shared.Ghost;
-using Content.Shared.Heretic;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs.Systems;
@@ -156,7 +155,6 @@ public sealed partial class PossessionSystem : SharedPossessionSystem
         List<(Type, string)> blockers =
         [
             (typeof(DevilComponent), "devil"),
-            (typeof(GhoulComponent), "ghoul"),
             (typeof(GhostComponent), "ghost"),
             (typeof(SpectralComponent), "ghost"),
             (typeof(TimedDespawnComponent), "temporary"),

@@ -1,7 +1,10 @@
+using Content.Shared.Charges.Components;
+using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
+using Content.Trauma.Common.Heretic;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
@@ -18,14 +21,12 @@ public sealed partial class HolosignSystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedChargesSystem _charges = default!;
 
     public static readonly ProtoId<TagPrototype> HolosignTag = "Holosign";
 
-    // FIXME: one of these is causing puddles to block projectors??
     private const int BlockMask = (int) (
         CollisionGroup.Impassable |
-        CollisionGroup.LowImpassable |
-        CollisionGroup.MidImpassable |
         CollisionGroup.HighImpassable);
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -37,6 +38,11 @@ public sealed partial class HolosignSystem
 
     private EntityCoordinates? CheckCoords(Entity<HolosignProjectorComponent> ent, ref BeforeRangedInteractEvent args)
     {
+        var ev = new BeforeHolosignUsedEvent(args.User, args.ClickLocation);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled || !ev.Handled && !args.CanReach)
+            return null;
+
         // places the holographic sign at the click location, snapped to grid.
         var coords = args.ClickLocation.SnapToGrid(EntityManager);
         var mapCoords = _transform.ToMapCoordinates(coords);
@@ -55,9 +61,10 @@ public sealed partial class HolosignSystem
                 return null;
         }
 
-        // if no battery or no charge, doesn't work
-        return _powerCell.TryUseCharge(ent.Owner, ent.Comp.ChargeUse, user: args.User, predicted: true)
-            ? coords
-            : null;
+        EntityUid? user = TryComp(ent, out LimitedChargesComponent? charges) ? null : args.User; // Don't show popups if it has limited charges (user is null = no popup)
+        if (!_powerCell.TryUseCharge(ent.Owner, ent.Comp.ChargeUse, user: user) && !_charges.TryUseCharge((ent, charges))) // if no battery or no charge, doesn't work
+            return null;
+
+        return coords;
     }
 }

@@ -5554,3 +5554,55 @@ Entries:
   id: 653
   time: '2026-03-27T10:30:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1619
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: QM digiboard no longer requires access to order things.
+  id: 654
+  time: '2026-03-27T14:59:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1621
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Raiders can no longer play cadet :(
+  id: 655
+  time: '2026-03-27T15:17:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1622
+- author: momoyawn
+  changes:
+  - type: Tweak
+    message: Justice can now Parry/Reflect depending on its mode.
+  id: 656
+  time: '2026-03-27T22:44:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1624
+- author: Aviu
+  changes:
+  - type: Add
+    message: Heretic lock path.
+  - type: Add
+    message: Star touch and knit flesh castable in combat mode.
+  - type: Add
+    message: Predicted heretic mark effects.
+  - type: Fix
+    message: Fix backstabs triggering from side and not from back.
+  - type: Fix
+    message: Fix ascended heretic flesh mimics killing their master.
+  - type: Fix
+    message: Fix wounds not healing sometimes when they should.
+  id: 657
+  time: '2026-03-28T02:16:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1233
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: The blob mouse transform into blob action now has a confirmation step.
+  id: 658
+  time: '2026-03-28T10:56:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1632
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed wooden barricades using metalworking skill.
+  id: 659
+  time: '2026-03-28T10:59:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1633

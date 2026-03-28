@@ -63,3 +63,15 @@
   - type: MeleeWeapon
     soundHit:
       collection: GlassBreak
+
+- type: entity
+  parent: ArmHammerShattered
+  id: ArmHammerShatteredEmpowered
+  components:
+  - type: Tag
+    tags:
+    - EmpoweredShatteredWeapon
+  - type: Multihit
+    multihitWhitelist:
+      tags:
+      - EmpoweredShatteredWeapon
