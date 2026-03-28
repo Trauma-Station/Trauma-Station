@@ -1,3 +1,5 @@
+﻿// SPDX-License-Identifier: AGPL-3.0-or-later
+
 namespace Content.Shitcode.Common.Wizard;
 
 public abstract partial class CommonActionTargetMarkSystem : EntitySystem

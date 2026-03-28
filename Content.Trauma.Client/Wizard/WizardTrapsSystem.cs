@@ -1,10 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-<<<<<<<< HEAD:Content.Shitcode.Client/Wizard/Systems/WizardTrapsSystem.cs
-using Content.Shitcode.Shared.Wizard.Traps;
-========
 using Content.Trauma.Shared.Wizard.Traps;
->>>>>>>> upstream:Content.Trauma.Client/Wizard/WizardTrapsSystem.cs
 using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Wizard;

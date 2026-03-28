@@ -1,10 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Atmos.EntitySystems;
-<<<<<<<< HEAD:Content.Shitcode.Server/Wizard/Systems/WizardTrapsSystem.cs
-using Content.Shitcode.Shared.Wizard.Traps;
-========
->>>>>>>> upstream:Content.Trauma.Server/Wizard/WizardTrapsSystem.cs
 using Content.Shared.Atmos.Components;
 using Content.Trauma.Shared.Wizard.Traps;
 

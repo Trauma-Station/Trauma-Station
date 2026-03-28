@@ -3,10 +3,6 @@
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Effects;
-<<<<<<<< HEAD:Content.Shitcode.Shared/Wizard/Traps/SharedWizardTrapsSystem.cs
-using Content.Shitcode.Shared.Wizard.FadingTimedDespawn;
-========
->>>>>>>> upstream:Content.Trauma.Shared/Wizard/Traps/SharedWizardTrapsSystem.cs
 using Content.Medical.Common.Targeting;
 using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
@@ -36,11 +32,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-<<<<<<<< HEAD:Content.Shitcode.Shared/Wizard/Traps/SharedWizardTrapsSystem.cs
-namespace Content.Shitcode.Shared.Wizard.Traps;
-========
 namespace Content.Trauma.Shared.Wizard.Traps;
->>>>>>>> upstream:Content.Trauma.Shared/Wizard/Traps/SharedWizardTrapsSystem.cs
 
 public abstract class SharedWizardTrapsSystem : EntitySystem
 {
