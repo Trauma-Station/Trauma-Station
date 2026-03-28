@@ -24,7 +24,7 @@ public sealed partial class LabyrinthPortalComponent : Component
     public bool Paused;
 
     [DataField]
-    public EntityUid HereticMind;
+    public EntityUid? HereticMind;
 
     [DataField]
     public List<EntityUid> SpawnedMobs = new();

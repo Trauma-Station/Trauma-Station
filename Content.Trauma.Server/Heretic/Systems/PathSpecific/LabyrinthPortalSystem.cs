@@ -4,6 +4,7 @@ using System.Linq;
 using Content.Shared.Mind;
 using Content.Shared.Physics;
 using Content.Shared.Random.Helpers;
+using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Server.Heretic.Components.PathSpecific;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Physics.Components;
@@ -29,7 +30,7 @@ public sealed class LabyrinthPortalSystem : EntitySystem
                                              CollisionGroup.LowImpassable | CollisionGroup.MidImpassable);
 
     private EntityQuery<MindComponent> _mindQuery;
-    private EntityQuery<Shared.Heretic.Components.HereticComponent> _hereticQuery;
+    private EntityQuery<HereticComponent> _hereticQuery;
 
     public override void Initialize()
     {
@@ -39,7 +40,7 @@ public sealed class LabyrinthPortalSystem : EntitySystem
         SubscribeLocalEvent<LabyrinthPortalComponent, SetGhoulBoundHereticEvent>(OnBoundHeretic);
 
         _mindQuery = GetEntityQuery<MindComponent>();
-        _hereticQuery = GetEntityQuery<Shared.Heretic.Components.HereticComponent>();
+        _hereticQuery = GetEntityQuery<HereticComponent>();
     }
 
     private void OnBoundHeretic(Entity<LabyrinthPortalComponent> ent, ref SetGhoulBoundHereticEvent args)
@@ -97,13 +98,13 @@ public sealed class LabyrinthPortalSystem : EntitySystem
             var spawned = Spawn(mob, xform.Coordinates);
             portal.SpawnedMobs.Add(spawned);
 
-            if (!Exists(portal.HereticMind) || !_hereticQuery.TryComp(portal.HereticMind, out var heretic) ||
-                !_mindQuery.TryComp(portal.HereticMind, out var mind) ||
+            if (!Exists(portal.HereticMind) || !_hereticQuery.TryComp(portal.HereticMind.Value, out var heretic) ||
+                !_mindQuery.TryComp(portal.HereticMind.Value, out var mind) ||
                 mind.OwnedEntity is not { } body)
                 continue;
 
             heretic.Minions.Add(spawned);
-            var ev = new SetGhoulBoundHereticEvent(body, portal.HereticMind, null);
+            var ev = new SetGhoulBoundHereticEvent(body, portal.HereticMind.Value, null);
             RaiseLocalEvent(spawned, ref ev);
         }
     }
