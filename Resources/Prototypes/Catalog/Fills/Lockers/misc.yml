@@ -210,6 +210,10 @@
       prob: 0.05
     - id: SheetBrass10
       prob: 0.05
+    - id: Whetstone
+      prob: 0.25
+    - id: WeaponBracing
+      prob: 0.25
     # </Trauma>
     # Tools
     - !type:NestedSelector

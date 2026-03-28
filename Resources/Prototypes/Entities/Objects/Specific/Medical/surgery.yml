@@ -318,8 +318,8 @@
 
 - type: entity
   name: circular saw
-  id: [SawElectric, MetalToolDurabilityStrong]
-  parent: Saw
+  id: SawElectric
+  parent: [Saw, MetalToolDurabilityStrong]
   description: For heavy duty cutting.
   components:
   - type: Sprite

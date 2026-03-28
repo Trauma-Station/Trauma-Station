@@ -92,7 +92,7 @@
 
 - type: entity
   name: supermatter halberd
-  parent: [BaseItem, BaseMagicalContraband]
+  parent: [BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnlyWizard]
   id: SupermatterHalberd
   description: The revered weapon of Oblivion Enforcers, used to enforce the Order's will.
   components:
@@ -196,7 +196,7 @@
 
 - type: entity
   name: high frequency blade
-  parent: [BaseSword, BaseMagicalContraband]
+  parent: [BaseSword, BaseMagicalContraband, KnifeDurabilitySharpenOnlyWizard]
   id: HighFrequencyBlade
   description: A sword reinforced by a powerful alternating current and resonating at extremely high vibration frequencies. This oscillation weakens the molecular bonds of anything it cuts, thereby increasing its cutting ability.
   components:
@@ -246,7 +246,7 @@
 
 - type: entity
   name: spellblade
-  parent: [BaseSword, BaseMagicalContraband]
+  parent: [BaseSword, BaseMagicalContraband, KnifeDurabilitySharpenOnlyWizard]
   id: Spellblade
   description: An enchanted blade with a series of runes along the side.
   components:
@@ -293,7 +293,7 @@
 - type: entity
   name: echo katana
   description: Vibrations are constantly flowing through this sword, like they desperately try to find a way out.
-  parent: [ LavalandBaseKatana, BaseMagicalContraband ]
+  parent: [ LavalandBaseKatana, BaseMagicalContraband, KnifeDurabilitySharpenOnlyWizard ]
   id: EchoKatana
   components:
   - type: Sprite

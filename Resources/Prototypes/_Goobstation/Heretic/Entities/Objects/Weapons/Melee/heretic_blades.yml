@@ -19,7 +19,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband ]
+  parent: [ BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnly, KnifeDurabilitySharpenOnly]
   id: HereticBladeBaseNoTeleport
   abstract: true
   name: eldritch blade
@@ -39,7 +39,7 @@
     wideAnimationRotation: -125
     damage:
       types:
-        Slash: 15 # moving to 15 to encourage more spell use
+        Slash: 17 # moving to 17 to encourage more spell use, can be sharpened to hit 20 again
       armorPenetration: 0.3
       woundSeverityMultipliers:
         Slash: 1.5

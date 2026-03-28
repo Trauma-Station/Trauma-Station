@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [BaseItem, BracingDurability]
   id: BaseWeaponCrusher
   name: crusher
   description: An early design of the proto-kinetic accelerator.

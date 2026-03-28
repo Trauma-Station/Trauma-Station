@@ -166,7 +166,7 @@
       reagents:
       - ReagentId: Sulfur
         Quantity: 300
-    bleedReductionAmount: 5
+    bleedReductionAmount: 15
   - type: TemperatureDamage
     coldDamage:
       types:
