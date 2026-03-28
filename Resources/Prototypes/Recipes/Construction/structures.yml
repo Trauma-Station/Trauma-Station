@@ -136,7 +136,7 @@
     WallsKnowledge: 1
     FabricationKnowledge: 1
   practical:
-    CarvingKnowledge: 2
+    WallsKnowledge: 1 # it's just hammering wood together
   # </Trauma>
 
 - type: construction

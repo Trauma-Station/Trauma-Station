@@ -5592,3 +5592,71 @@ Entries:
   id: 657
   time: '2026-03-28T02:16:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1233
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: The blob mouse transform into blob action now has a confirmation step.
+  id: 658
+  time: '2026-03-28T10:56:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1632
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed wooden barricades using metalworking skill.
+  id: 659
+  time: '2026-03-28T10:59:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1633
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed chaplain rosary healing pAIs and borgs.
+  id: 660
+  time: '2026-03-28T11:03:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1634
+- author: HRP sec main
+  changes:
+  - type: Add
+    message: >-
+      Added contraband tags to cleaver, kitchen knife, clown hardsuit, luxury
+      mining hardsuit, atmos firesuit & helmet, paramedic voidsuit and sharp
+      surgery tools.
+  id: 661
+  time: '2026-03-28T11:38:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1620
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed construction menu so you can see all recipes but only make ones
+      you have the knowledge for.
+  - type: Tweak
+    message: >-
+      Construction menu now shows both theory and practical skills to make
+      things.
+  id: 662
+  time: '2026-03-28T11:48:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1635
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed unidentified corpses being alive...
+  id: 663
+  time: '2026-03-28T12:44:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1636
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Explosion damage resistance is now part coverage-based, wearing a bombsuit
+      helmet won't protect your legs. Explosions deal their full damage to every
+      uncovered part!
+  id: 664
+  time: '2026-03-28T15:21:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1637
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lemonades being evil
+  id: 665
+  time: '2026-03-28T19:19:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1641

@@ -1,0 +1,52 @@
+# Parent for all modsuit pieces in a set
+
+- type: entity
+  abstract: true
+  id: BaseModsuitPieceSecurity
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+
+- type: entity
+  abstract: true
+  id: BaseModsuitPieceParamedic
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.85
+
+- type: entity
+  abstract: true
+  id: BaseModsuitPieceEngineer
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.35
+
+- type: entity
+  abstract: true
+  id: BaseModsuitPieceAtmos
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.45
+
+# Heads
+
+- type: entity
+  abstract: true
+  id: BaseModsuitPieceCaptain
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+
+- type: entity
+  abstract: true
+  id: BaseModsuitPieceHOS
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+
+- type: entity
+  abstract: true
+  id: BaseModsuitPieceRD
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
