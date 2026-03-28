@@ -1,6 +1,6 @@
 - type: entity
   name: iradomini
-  parent: BaseItem
+  parent: [ BaseItem, BaseChaplainContraband ]
   id: WeaponPistolIradomini
   description: A powerful crossbow for the crusader with style.
   components:
@@ -56,7 +56,7 @@
     prayDoAfterDuration: 10
 
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, BaseChaplainContraband ]
   id: WeaponPistolFaith
   name: faith
   description: "`Cause you gotta have Faith."
