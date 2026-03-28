@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: BaseCarving
   name: elder carving
@@ -61,6 +55,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/carvings.rsi
+    state: tentacle_rune
   - type: Sprite
     state: tentacle_rune
   - type: WizardTrap
@@ -81,6 +78,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/carvings.rsi
+    state: madness_rune
   - type: Sprite
     state: madness_rune
   - type: WizardTrap
@@ -98,6 +98,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Icon
+    sprite: _Goobstation/Heretic/carvings.rsi
+    state: alert_rune
   - type: Sprite
     color: '#FFFFFF0a'
     state: alert_rune
@@ -113,27 +116,3 @@
       - HumanoidProfile
       - BorgChassis
   - type: AlertCarving
-
-- type: runeCarving
-  id: GraspingCarving
-  desc: Grasping Carving. When stepped on, causes heavy damage leg damage and stuns the victim for 5 seconds. Has 1 charge.
-  icon:
-    sprite: _Goobstation/Heretic/carvings.rsi
-    state: tentacle_rune
-  protoId: GraspingCarving
-
-- type: runeCarving
-  id: MadCarving
-  desc: Mad Carving. When stepped on, causes heavy stamina damage, blindness, and muteness the victim. Has 2 charges.
-  icon:
-    sprite: _Goobstation/Heretic/carvings.rsi
-    state: madness_rune
-  protoId: MadCarving
-
-- type: runeCarving
-  id: AlertCarving
-  desc: Alert Carving. A nearly invisible rune that, when stepped on, alerts the carver who triggered it and where, also allowing them to teleport to rune location.
-  icon:
-    sprite: _Goobstation/Heretic/carvings.rsi
-    state: alert_rune
-  protoId: AlertCarving

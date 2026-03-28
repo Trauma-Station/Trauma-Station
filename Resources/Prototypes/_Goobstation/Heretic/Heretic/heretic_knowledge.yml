@@ -536,6 +536,90 @@
   actionPrototypes:
   - ActionResetStarGazerConsciousness
 
+## lock path
+- type: hereticKnowledge
+  id: StewardsSecret
+  path: Lock
+  stage: 1
+  ritualPrototypes:
+  - RitualBladeLock
+
+- type: hereticKnowledge
+  id: GraspOfLock
+  path: Lock
+  stage: 2
+  mindEvent: !type:HereticModifySideKnowledgeDraftsEvent
+    sideKnowledgeDrafts:
+      HereticPathSideT1: 1
+      HereticPathSideT2: 1
+      HereticPathSideT3: 1
+
+- type: hereticKnowledge
+  id: MarkOfLock
+  path: Lock
+  stage: 3
+
+- type: hereticKnowledge
+  id: KeyKeepersBurden
+  path: Lock
+  sideKnowledge: true
+  stage: 4
+  ritualPrototypes:
+  - RitualEldritchId
+
+- type: hereticKnowledge
+  id: ConciergesRite
+  path: Lock
+  stage: 5
+  ritualPrototypes:
+  - RitualConcierge
+
+- type: hereticKnowledge
+  id: BurglarsFinesse
+  path: Lock
+  sideKnowledge: true
+  stage: 6
+  actionPrototypes:
+  - ActionHereticBurglarsFinesse
+
+- type: hereticKnowledge
+  id: OpeningBlade
+  path: Lock
+  stage: 7
+
+- type: hereticKnowledge
+  id: CaretakersLastRefuge
+  path: Lock
+  sideKnowledge: true
+  stage: 8
+  actionPrototypes:
+  - ActionHereticLastRefuge
+
+- type: hereticKnowledge
+  id: AscensionLock
+  stage: 9
+  path: Lock
+  ritualPrototypes:
+  - RitualAscensionLock
+
+- type: hereticKnowledge
+  id: UnlockTheLabyrinth
+  stage: 10
+  path: Lock
+  event: !type:HereticAscensionCosmosEvent # Uses cosmos ascension cause its basically the same (xray vision)
+    addedComponents:
+    - type: SpecialLowTempImmunity
+    - type: SpecialHighTempImmunity
+    - type: SpecialPressureImmunity
+    - type: NightVision
+      color: white
+      activateSound: null
+      deactivateSound: null
+      drawOverlay: false
+  actionPrototypes:
+  - ActionHereticShapeshiftLock
+
+### side paths
 - type: hereticKnowledge
   id: RitualOfKnowledge
   sideKnowledge: true

@@ -15,3 +15,17 @@
     radius: 2
     energy: 1
     color: "#4E2952"
+  - type: StarTouch
+  - type: TouchSpell
+    cooldown: 15
+    speech: heretic-speech-star-touch
+    sound:
+      path: /Audio/Items/welder.ogg
+    targetWhitelist:
+      components:
+      - MobState
+  - type: MeleeWeapon
+    canHeavyAttack: false
+    damage:
+      types:
+        Heat: 0

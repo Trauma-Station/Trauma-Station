@@ -1,0 +1,33 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Damage;
+using Robust.Shared.GameStates;
+
+namespace Content.Trauma.Shared.Heretic.Curses.Components;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class FragileCurseComponent : Component
+{
+    [DataField]
+    public DamageModifierSet ModifierSet = new()
+    {
+        Coefficients =
+        {
+            {"Blunt", 2},
+            {"Slash", 2},
+            {"Piercing", 2},
+            {"Heat", 2},
+            {"Cold", 2},
+            {"Shock", 2},
+            {"Asphyxiation", 2},
+            {"Bloodloss", 2},
+            {"Caustic", 2},
+            {"Poison", 2},
+            {"Radiation", 2},
+            {"Cellular", 2},
+            {"Ion", 2},
+            {"Holy", 2},
+        },
+        IgnoreArmorPierceFlags = (int) PartialArmorPierceFlags.All,
+    };
+}

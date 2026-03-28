@@ -274,10 +274,10 @@ public sealed partial class DamageableSystem
         }
 
         // <Shitmed> - add ignoreGlobalModifiers, check woundable
-        if (damageDone.Empty)
-            return damageDone;
+        // if (damageDone.Empty)
+        //    return damageDone;
 
-        OnEntityDamageChanged((ent, ent.Comp), damageDone, interruptsDoAfters, origin, ignoreGlobalModifiers);
+        OnEntityDamageChanged((ent, ent.Comp), damageDone, interruptsDoAfters, origin, ignoreGlobalModifiers, damage);
         if (_body.GetBody(ent) is {} parentBody)
         {
             // This means that the damaged part was a woundable

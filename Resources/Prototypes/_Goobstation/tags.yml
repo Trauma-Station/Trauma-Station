@@ -212,6 +212,9 @@
   id: EmergencyPlasmaTank
 
 - type: Tag
+  id: EmpoweredShatteredWeapon
+
+- type: Tag
   id: EnergySpeedloader
 
 - type: Tag
@@ -312,6 +315,9 @@
 
 - type: Tag
   id: HereticBladeBlade
+
+- type: Tag
+  id: HereticBladeLock
 
 - type: Tag
   id: HereticCarving
@@ -512,6 +518,9 @@
   id: RipleyMkII
 
 - type: Tag
+  id: RodMetal
+
+- type: Tag
   id: Rosary
 
 - type: Tag
@@ -684,6 +693,9 @@
 
 - type: Tag
   id: WizardHat
+
+- type: Tag
+  id: WoodPlank
 
 # XENOBIO - START
 

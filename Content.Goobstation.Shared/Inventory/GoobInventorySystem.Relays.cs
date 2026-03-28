@@ -11,7 +11,6 @@ using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Flash;
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
-using Content.Shared.Heretic;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 
@@ -26,7 +25,6 @@ public partial class GoobInventorySystem
         base.Initialize();
         SubscribeLocalEvent<InventoryComponent, DelayedKnockdownAttemptEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, VaporCheckEyeProtectionEvent>(RelayInventoryEvent);
-        SubscribeLocalEvent<InventoryComponent, CheckMagicItemEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetFlashbangedEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, FlashDurationMultiplierEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetStandingUpTimeMultiplierEvent>(RelayInventoryEvent);
