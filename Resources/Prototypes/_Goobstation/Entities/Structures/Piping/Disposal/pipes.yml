@@ -5,7 +5,7 @@
   parent: DisposalPipeBase
   name: disposal pipe blocker
   description: A pipe that allows movement of objects on one side and blocks it on the other.
-  categories: [ DoNotMap ] # mapping it is anti fun
+  suffix: DO NOT MAP # mapping it is anti fun
   components:
   - type: Sprite
     drawdepth: ThickPipe
