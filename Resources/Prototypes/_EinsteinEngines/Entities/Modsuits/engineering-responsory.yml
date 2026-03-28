@@ -29,7 +29,7 @@
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [ClothingModsuitHelmetERT, BaseModsuitPieceERTEngi ]
+  parent: [ BaseModsuitHelmetERT, BaseModsuitPieceERTEngi ]
   id: ClothingModsuitHelmetResponsoryEngineering
   name: Engineering Responsory modsuit helmet
   description: A state-of-the-art helmet designed by NanoTrasen for the Engineering Responsory modsuit. It includes a built-in HUD.
