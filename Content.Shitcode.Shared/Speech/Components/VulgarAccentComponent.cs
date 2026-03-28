@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 // CREATED BY Goldminermac
 // https://github.com/space-wizards/space-station-14/pull/31149
