@@ -48,7 +48,6 @@
   suffix: Corner
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_full_corner
 
 - type: entity
@@ -57,7 +56,6 @@
   suffix: Left
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_left_cap
 
 - type: entity
@@ -66,7 +64,6 @@
   suffix: Right
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_right_cap
 
 - type: entity
@@ -75,7 +72,6 @@
   suffix: Solo
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_solo_cap
 
 - type: entity
@@ -83,7 +79,6 @@
   parent: RMCStairs
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_kutjevo_full
 
 - type: entity
@@ -92,7 +87,6 @@
   suffix: Corner
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_kutjevo_full_corner
 
 - type: entity
@@ -101,7 +95,6 @@
   suffix: Left
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_kutjevo_left_cap
 
 - type: entity
@@ -110,7 +103,6 @@
   suffix: Right
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_kutjevo_right_cap
 
 - type: entity
@@ -119,7 +111,6 @@
   suffix: Solo
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_kutjevo_solo_cap
 
 - type: entity
@@ -127,7 +118,6 @@
   parent: RMCStairs
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_ice_full
 
 - type: entity
@@ -136,7 +126,6 @@
   suffix: Corner
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_ice_full_corner
 
 - type: entity
@@ -145,7 +134,6 @@
   suffix: Left
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_ice_left_cap
 
 - type: entity
@@ -154,7 +142,6 @@
   suffix: Right
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_ice_right_cap
 
 - type: entity
@@ -163,7 +150,6 @@
   suffix: Solo
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_ice_solo_cap
 
 ## New
@@ -173,7 +159,6 @@
   parent: RMCStairs
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_dark_full
 
 - type: entity
@@ -182,7 +167,6 @@
   suffix: Corner
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_dark_full_corner
 
 - type: entity
@@ -191,7 +175,6 @@
   suffix: Left
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_dark_left_cap
 
 - type: entity
@@ -200,7 +183,6 @@
   suffix: Right
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_dark_right_cap
 
 - type: entity
@@ -209,7 +191,6 @@
   suffix: Solo
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_dark_solo_cap
 
 - type: entity
@@ -217,7 +198,6 @@
   parent: RMCStairs
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_red_full
 
 - type: entity
@@ -226,7 +206,6 @@
   suffix: Corner
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_red_full_corner
 
 - type: entity
@@ -235,7 +214,6 @@
   suffix: Left
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_red_left_cap
 
 - type: entity
@@ -244,7 +222,6 @@
   suffix: Right
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_red_right_cap
 
 - type: entity
@@ -253,7 +230,6 @@
   suffix: Solo
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_red_solo_cap
 
 - type: entity
@@ -261,7 +237,6 @@
   parent: RMCStairs
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_white_full
 
 - type: entity
@@ -270,7 +245,6 @@
   suffix: Corner
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_white_full_corner
 
 - type: entity
@@ -279,7 +253,6 @@
   suffix: Left
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_white_left_cap
 
 - type: entity
@@ -288,7 +261,6 @@
   suffix: Right
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_white_right_cap
 
 - type: entity
@@ -297,16 +269,13 @@
   suffix: Solo
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_white_solo_cap
 
 - type: entity
-  id: RMCStairsWood
+  id: RMCStairsWoodBase
   parent: RMCStairs
+  abstract: true
   components:
-  - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
-    state: p_stair_wood_full
   - type: Damageable
     damageModifierSet: Wood
     damageContainer: StructuralInorganic
@@ -329,127 +298,46 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+
+
+- type: entity
+  id: RMCStairsWood
+  parent: RMCStairsWoodBase
+  components:
+  - type: Sprite
+    state: p_stair_wood_full
 
 - type: entity
   id: RMCStairsWoodCorner
-  parent: RMCStairs
+  parent: RMCStairsWoodBase
   suffix: Corner
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_wood_full_corner
-  - type: Damageable
-    damageModifierSet: Wood
-    damageContainer: StructuralInorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 350
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank1:
-            min: 1
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
 
 - type: entity
   id: RMCStairsWoodLeft
-  parent: RMCStairs
+  parent: RMCStairsWoodBase
   suffix: Left
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_wood_left_cap
   - type: Damageable
     damageModifierSet: Wood
     damageContainer: StructuralInorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 350
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank1:
-            min: 1
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
 
 - type: entity
   id: RMCStairsWoodRight
-  parent: RMCStairs
+  parent: RMCStairsWoodBase
   suffix: Right
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_wood_right_cap
-  - type: Damageable
-    damageModifierSet: Wood
-    damageContainer: StructuralInorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 350
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank1:
-            min: 1
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
 
 - type: entity
   id: RMCStairsWoodSolo
-  parent: RMCStairs
+  parent: RMCStairsWoodBase
   suffix: Solo
   components:
   - type: Sprite
-    sprite: _Starlight/Structures/p_stairs.rsi
     state: p_stair_wood_solo_cap
-  - type: Damageable
-    damageModifierSet: Wood
-    damageContainer: StructuralInorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 350
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank1:
-            min: 1
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]

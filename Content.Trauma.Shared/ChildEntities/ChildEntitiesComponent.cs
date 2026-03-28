@@ -29,18 +29,5 @@ public sealed partial class ChildEntitiesComponent : Component
 /// <summary>
 /// Holds the <see cref="EntProtoId"/> and the offset of the entity we want to attach
 /// </summary>
-[Serializable, NetSerializable, DataDefinition]
-public sealed partial class ChildEntityInfo
-{
-    /// <summary>
-    /// The prototype of the entity we want to attach to the parent
-    /// </summary>
-    [DataField]
-    public EntProtoId Prototype;
-
-    /// <summary>
-    /// The position offset that is applied to the entity when spawned
-    /// </summary>
-    [DataField]
-    public Vector2 Offset;
-}
+[Serializable, NetSerializable, DataRecord]
+public partial record struct ChildEntityInfo(EntProtoId Prototype, Vector2 Offset);

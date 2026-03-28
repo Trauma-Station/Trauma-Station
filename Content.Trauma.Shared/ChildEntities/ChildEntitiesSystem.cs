@@ -19,14 +19,15 @@ public sealed class ChildEntitiesSystem : EntitySystem
     {
         // We iterate over all the stored child prototypes and spawn them attached to the owner of this component,
         // accounting for offset and rotation.
+        var xform = Transform(ent.Owner);
         foreach (var child in ent.Comp.ChildPrototypes)
         {
-            var coords = Transform(ent).Coordinates;
-            var rotation = Transform(ent).LocalRotation;
+            var coords = xform.Coordinates;
+            var rotation = xform.LocalRotation;
 
-            coords = coords.WithPosition(coords.Position + child.Offset);
+            var pos = coords.WithPosition(coords.Position + child.Offset);
 
-            var childEnt = PredictedSpawnAttachedTo(child.Prototype, coords, null, rotation);
+            var childEnt = PredictedSpawnAttachedTo(child.Prototype, pos, null, rotation);
             ent.Comp.Children.Add(childEnt);
         }
 
