@@ -695,7 +695,7 @@
     count: 1
 
 - type: entity
-  parent: [ MaterialBase, BaseKnife ]
+  parent: [ MaterialBase, BaseKnife, NonweaponDurability] # Trauma - Durability
   id: MaterialToothSharkminnow
   name: sharkminnow tooth
   description: Looks sharp. Sharp enough to poke someone's eye out. Holy fuck it's big.

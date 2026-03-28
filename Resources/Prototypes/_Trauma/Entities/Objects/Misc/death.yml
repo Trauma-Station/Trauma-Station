@@ -1,0 +1,24 @@
+- type: entity
+  parent: BaseItem
+  id: PlushieGore
+  name: plushie gore
+  description: Harden you heart...
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/gore.rsi
+    state: icon
+  - type: Edible
+    requiresSpecialDigestion: true
+  - type: FlavorProfile
+    flavors:
+    - fiber
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 5
+  - type: Tag
+    tags:
+      - ClothMade

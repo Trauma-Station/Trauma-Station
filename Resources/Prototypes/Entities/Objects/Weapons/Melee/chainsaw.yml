@@ -18,7 +18,7 @@
 
 - type: entity
   name: chainsaw
-  parent: BaseItem
+  parent: [BaseItem, KnifeDurabilityStrong] # Trauma
   id: Chainsaw
   description: A very large chainsaw. Usually you use this for cutting down trees... usually.
   components:

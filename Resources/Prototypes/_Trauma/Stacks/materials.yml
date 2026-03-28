@@ -25,3 +25,24 @@
   name: stack-whetstone
   icon: { sprite: /Textures/_Trauma/Objects/tools/weaponreinforcement.rsi, state: icon }
   spawn: Whetstone1
+
+- type: stack
+  parent: BaseIngotStack
+  id: BrassIngot
+  name: stack-brass-ingot
+  icon: { sprite: /Textures_Trauma/Objects/Specific/forging.rsi, state: ingot_brass_hot }
+  spawn: BrassIngot
+
+- type: stack
+  parent: BaseIngotStack
+  id: SteelIngot
+  name: stack-steek-ingot
+  icon: { sprite: /Textures_Trauma/Objects/Specific/forging.rsi, state: ingot_steel_hot }
+  spawn: SteelIngot
+
+- type: stack
+  parent: BaseIngotStack
+  id: PlasteelIngot
+  name: stack-plasteel-ingot
+  icon: { sprite: /Textures_Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel_hot }
+  spawn: PlasteelIngot

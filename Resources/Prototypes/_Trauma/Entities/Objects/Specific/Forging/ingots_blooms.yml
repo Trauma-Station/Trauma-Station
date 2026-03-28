@@ -215,6 +215,13 @@
     cooledPrototype: BrassIngotIntermediarytoCold
   - type: Sprite
     state: ingot_brass_hot
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      BrassIngot: 100
+  - type: Stack
+    stackType: BrassIngot
+    count: 1
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -454,9 +461,13 @@
     cooledPrototype: SteelIngotIntermediarytoCold
   - type: Sprite
     state: ingot_steel_hot
-  - type: Tag
-    tags:
-    - IngotSteel
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      SteelIngot: 100
+  - type: Stack
+    stackType: SteelIngot
+    count: 1
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
@@ -696,9 +707,13 @@
     cooledPrototype: PlasteelIngotIntermediarytoCold
   - type: Sprite
     state: ingot_plasteel_hot
-  - type: Tag
-    tags:
-    - IngotPlasteel
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      PlasteelIngot: 100
+  - type: Stack
+    stackType: PlasteelIngot
+    count: 1
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp

@@ -68,7 +68,6 @@
   - type: Appearance
   - type: StaticPrice
     price: 500
-
   - type: EmitSoundOnPickup
     sound:
       collection: PistolsPickUp

@@ -66,3 +66,18 @@ durability-shaft-6 = The staft has a massive crack.
 
 durability-shaft-7 = The staft explodes into pieces!
 durability-shaft-8 = The staft has cracked in two!
+
+# Glass Weapons
+durability-glass-2 = The glass cracks!
+durability-glass-3 = The glass makes an audible crack.
+durability-glass-4 = The glass shatters!
+
+# Unique
+
+durability-plush-9 = The plushie is destroyed by the force of the blow...
+durability-plush-10 = Your friend is reduced to a pile of gore...
+durability-plush-11 = No coming back from that one...
+
+durability-book-9 = The book explodes into a storm of paper!
+durability-book-10 = The book's stem is completely ripped off!
+durability-book-11 = The book's cover flies across the room!

@@ -16,7 +16,7 @@
     idleState: icon
     runningState: burning
     staticPacks:
-    - CharcoalBurnerStatic
+    - AnvilStatic
   - type: Destructible
     thresholds:
     - trigger:

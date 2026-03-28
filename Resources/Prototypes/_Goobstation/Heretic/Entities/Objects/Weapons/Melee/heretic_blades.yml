@@ -19,7 +19,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnly, KnifeDurabilitySharpenOnly]
+  parent: [ BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnly]
   id: HereticBladeBaseNoTeleport
   abstract: true
   name: eldritch blade

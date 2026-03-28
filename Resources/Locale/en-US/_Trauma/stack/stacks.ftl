@@ -1,6 +1,8 @@
 stack-bracing = bracing
 stack-brick = brick
-stack-ingot = ingot
+stack-brass-ingot = brass ingot
+stack-steel-ingot = steel ingot
+stack-plasteel-ingot = plasteel ingot
 stack-charcoal = charcoal
 stack-rev-gear = gear
 stack-rev-bolt = bolt
