@@ -48,6 +48,9 @@
     tags:
     - MagazinePistolSmall
     - MagazinePistol
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Pistols/kolibri.rsi # TODO: edit so it has mag visuals
     layers:
