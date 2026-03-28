@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 <<<<<<<< HEAD:Content.EinsteinEngines.Shared/TelescopicBaton/KnockdownOnHitComponent.cs
 // SPDX-FileCopyrightText: 2024 Remuchi <72476615+Remuchi@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
