@@ -108,7 +108,6 @@ public abstract partial class TouchSpellSpecialEvent : EntityEventArgs
     public bool Invoke;
 }
 
-[Serializable, NetSerializable]
 public sealed partial class MansusGraspSpecialEvent : TouchSpellSpecialEvent;
 
 [ByRefEvent]

@@ -94,7 +94,7 @@ public sealed partial class TouchSpellEvent : InstantActionEvent
     [DataField(required: true)]
     public EntProtoId<TouchSpellComponent> TouchSpell;
 
-    [DataField]
+    [DataField, NonSerialized]
     public TouchSpellSpecialEvent? SpecialEvent;
 
     [DataField(required: true)]
