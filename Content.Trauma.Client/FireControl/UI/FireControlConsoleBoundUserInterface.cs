@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-// Copyright Rane (elijahrane@gmail.com) 2025
-// All rights reserved. Relicensed under AGPL with permission
-
 using Content.Trauma.Shared.FireControl;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;

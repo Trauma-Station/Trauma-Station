@@ -1,9 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-// Monolith - This file is licensed under AGPLv3
-// Copyright (c) 2025 Monolith
-// See AGPLv3.txt for details.
-
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Shuttles.Components;
 using Content.Trauma.Shared.Shuttles.Events;

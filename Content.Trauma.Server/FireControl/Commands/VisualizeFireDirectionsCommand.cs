@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-// Copyright Rane (elijahrane@gmail.com) 2025
-// All rights reserved. Relicensed under AGPL with permission
-
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
