@@ -110,6 +110,9 @@ MedicalBiofabMachineBoard: null
 
 # 2026-03-13 necrosol was removed
 NecrosolChemistryBottle: ArcryoxChemistryBottle
+
+# 2026-03-28 blockers being mapped is anti fun
+DisposalBlocker: DisposalPipe
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
