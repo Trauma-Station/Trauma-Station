@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.DV.Common.CartridgeLoader.Cartridges;
 using Content.Shared.CartridgeLoader;
 using Robust.Shared.Serialization;

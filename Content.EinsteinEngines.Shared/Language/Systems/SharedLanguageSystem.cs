@@ -1,8 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using System.Text;
 using Content.EinsteinEngines.Common.Language;
-using Content.EinsteinEngines.Common.Language.Systems;
 using Content.EinsteinEngines.Common.Language.Components;
+using Content.EinsteinEngines.Common.Language.Systems;
 using Content.EinsteinEngines.Shared.Language.Components;
 using Content.EinsteinEngines.Shared.Language.Events;
 using Content.Shared.GameTicking;
@@ -24,8 +26,8 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
 
     private StringBuilder _builder = new();
 
-    [Dependency] protected readonly IPrototypeManager _prototype = default!;
-    [Dependency] protected readonly SharedGameTicker _ticker = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SharedGameTicker _ticker = default!;
 
     public override void Initialize()
     {

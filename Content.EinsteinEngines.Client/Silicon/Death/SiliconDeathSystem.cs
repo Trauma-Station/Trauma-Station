@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.EinsteinEngines.Shared.Silicon.Death;
 
 namespace Content.EinsteinEngines.Client.Silicon.Death;
 
-// Goobstation - Split SiliconDeathSystem into shared/server/client
 public sealed class SiliconDeathSystem : SharedSiliconDeathSystem;

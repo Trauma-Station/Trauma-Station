@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shitcode.Shared.Heretic.Components;
 using Content.Shared.Mech.Components;
 // </Trauma>
 using System.Numerics;

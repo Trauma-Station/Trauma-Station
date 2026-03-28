@@ -1,12 +1,8 @@
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+using Content.EinsteinEngines.Common.Language;
 using Content.Shared.Administration;
-using Content.EinsteinEngines.Shared.Language;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
 

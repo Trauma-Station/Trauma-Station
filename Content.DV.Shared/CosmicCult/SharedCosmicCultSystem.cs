@@ -1,6 +1,10 @@
-using Content.Goobstation.Common.Religion;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
 using Content.DV.Shared.CosmicCult.Components;
 using Content.DV.Shared.CosmicCult.Prototypes;
+using Content.DV.Shared.Roles;
+using Content.Goobstation.Common.Religion;
 using Content.Shared.Actions;
 using Content.Shared.Antag;
 using Content.Shared.Examine;
@@ -12,14 +16,12 @@ using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Stacks;
-using Content.DV.Shared.Roles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using System.Linq;
 
 
 namespace Content.DV.Shared.CosmicCult;

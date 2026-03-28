@@ -1,20 +1,20 @@
-using Content.Client.Alerts;
-using Content.Client.UserInterface.Systems.Alerts.Controls;
-using Content.DV.Shared.CosmicCult.Components.Examine;
-using Content.DV.Shared.CosmicCult.Components;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Numerics;
 using Content.DV.Shared.CosmicCult;
+using Content.DV.Shared.CosmicCult.Components;
+using Content.DV.Shared.CosmicCult.Components.Examine;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.StatusIcon.Components;
-using Robust.Client.GameObjects;
 using Robust.Client.Audio;
+using Robust.Client.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Numerics;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.DV.Client.CosmicCult;

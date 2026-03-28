@@ -1,7 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Examine;
-using Robust.Shared.Physics.Events;
-using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
 namespace Content.DV.Shared.CosmicCult;

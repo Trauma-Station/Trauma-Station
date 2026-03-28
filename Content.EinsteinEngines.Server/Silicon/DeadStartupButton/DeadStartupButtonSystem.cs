@@ -1,19 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Lightning;
-using Content.Server.Popups;
-using Content.Shared.PowerCell;
-using Content.EinsteinEngines.Server.Silicon.Charge;
-using Content.Server.Lightning.Components;
-using Content.Shared.Power.EntitySystems;
 using Content.EinsteinEngines.Shared.Silicon.DeadStartupButton;
+using Content.Server.Lightning;
+using Content.Server.Lightning.Components;
+using Content.Server.Popups;
 using Content.Shared.Audio;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Power.EntitySystems;
+using Content.Shared.PowerCell;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 

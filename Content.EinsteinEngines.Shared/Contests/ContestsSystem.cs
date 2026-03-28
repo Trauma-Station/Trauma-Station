@@ -3,11 +3,12 @@
 using Content.Goobstation.Common.CCVar;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 
-namespace Content.EinsteinEngines.Shared.Contests
+namespace Content.EinsteinEngines.Shared.Contests;
 
 public sealed partial class ContestsSystem : EntitySystem
 {
@@ -215,7 +216,7 @@ public sealed partial class ContestsSystem : EntitySystem
     {
         if (_doContestSystem
             || _doHealthContests
-            || !_mobThreshold.TryGetThresholdForState(performer, Mobs.MobState.Critical, out var threshold))
+            || !_mobThreshold.TryGetThresholdForState(performer, MobState.Critical, out var threshold))
             return 1f;
 
         var value = _damage.GetTotalDamage(performer).Float() / threshold.Value.Float();
@@ -228,8 +229,8 @@ public sealed partial class ContestsSystem : EntitySystem
     {
         if (_doContestSystem
             || _doHealthContests
-            || !_mobThreshold.TryGetThresholdForState(performer, Mobs.MobState.Critical, out var perfThreshold)
-            || !_mobThreshold.TryGetThresholdForState(target, Mobs.MobState.Critical, out var targetThreshold))
+            || !_mobThreshold.TryGetThresholdForState(performer, MobState.Critical, out var perfThreshold)
+            || !_mobThreshold.TryGetThresholdForState(target, MobState.Critical, out var targetThreshold))
             return 1f;
 
         var perfValue = _damage.GetTotalDamage(performer).Float() / perfThreshold.Value.Float();

@@ -1,4 +1,5 @@
-using Content.EinsteinEngines.Shared.Language.Components;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.EinsteinEngines.Shared.Language.Systems;
 using Content.EinsteinEngines.Shared.Revolutionary.Components;
 using Content.Shared.Charges.Systems;
@@ -9,7 +10,6 @@ using Content.Shared.Flash;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Random.Helpers;

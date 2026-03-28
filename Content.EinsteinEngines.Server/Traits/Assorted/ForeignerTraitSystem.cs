@@ -1,12 +1,14 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
-using Content.Server.Hands.Systems;
+using Content.EinsteinEngines.Common.Language;
+using Content.EinsteinEngines.Common.Language.Components;
 using Content.EinsteinEngines.Server.Language;
+using Content.EinsteinEngines.Shared.Language.Components.Translators;
+using Content.Server.Hands.Systems;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
-using Content.EinsteinEngines.Shared.Language;
-using Content.EinsteinEngines.Shared.Language.Components;
-using Content.EinsteinEngines.Shared.Language.Components.Translators;
 using Content.Shared.Storage;
 using Robust.Shared.Prototypes;
 

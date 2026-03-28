@@ -1,25 +1,14 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.EinsteinEngines.Shared.Silicon.Systems;
-using Content.Shared.Bed.Sleep;
-using Content.EinsteinEngines.Server.Silicon.Charge;
-using Content.Server.Humanoid;
-using Content.Shared.Humanoid;
-using Content.Shared.Power.Components;
-using Content.Shared.StatusEffectNew;
-// Goobstation Start - Energycrit
-using Content.Server.Radio;
 using Content.EinsteinEngines.Shared.Silicon.Death;
+using Content.EinsteinEngines.Shared.Silicon.Systems;
+using Content.Server.Radio;
 using Content.Shared.Actions;
 using Content.Shared.CombatMode;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Power.Components;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-// Goobstation End - Energycrit
 
 namespace Content.EinsteinEngines.Server.Silicon.Death;
 

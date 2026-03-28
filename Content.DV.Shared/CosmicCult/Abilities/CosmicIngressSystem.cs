@@ -1,7 +1,8 @@
-using Content.Shared.Doors.Systems;
-using Content.DV.Shared.CosmicCult;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Doors.Components;
+using Content.Shared.Doors.Systems;
 using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;

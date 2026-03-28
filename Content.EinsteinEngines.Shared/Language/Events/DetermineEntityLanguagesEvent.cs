@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.EinsteinEngines.Common.Language;
 using Robust.Shared.Prototypes;
 

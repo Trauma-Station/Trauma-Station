@@ -1,5 +1,7 @@
-using Content.Shared.Flash;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.DV.Shared.CosmicCult.Components;
+using Content.Shared.Flash;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;

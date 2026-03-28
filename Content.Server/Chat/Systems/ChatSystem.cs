@@ -8,9 +8,9 @@ using Content.Server.Effects;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
-using Content.EinsteinEngines.Shared.Language;
-using Content.EinsteinEngines.Shared.Language.Systems;
-using Content.Shitcode.Shared.Wizard.Chuuni;
+using Content.EinsteinEngines.Common.Language;
+using Content.EinsteinEngines.Common.Language.Systems;
+using Content.Shitcode.Common.Wizard.Chuuni;
 using Content.Trauma.Common.Speech;
 using Content.Starlight.Common.CollectiveMind;
 // </Trauma>
@@ -63,7 +63,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
     [Dependency] private readonly ScryingOrbSystem _scrying = default!;
     [Dependency] private readonly CollectiveMindUpdateSystem _collectiveMind = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private readonly CommonLanguageSystem _language = default!;
     // </Trauma>
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;

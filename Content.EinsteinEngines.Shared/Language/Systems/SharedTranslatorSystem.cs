@@ -1,14 +1,10 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 ImWeax <59857479+ImWeax@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.EinsteinEngines.Common.Language.Systems;
+using Content.EinsteinEngines.Shared.Language.Components.Translators;
 using Content.Shared.Examine;
 using Content.Shared.Toggleable; // Ignore, touching for REUSE Headers.
-using Content.EinsteinEngines.Shared.Language.Components.Translators;
-using Content.EinsteinEngines.Common.Language.Systems;
 
 namespace Content.EinsteinEngines.Shared.Language.Systems;
 

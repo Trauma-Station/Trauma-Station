@@ -1,29 +1,18 @@
-// didn't even put the original authors :face_holding_back_tears:
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using Content.Shared.Containers.ItemSlots;
-using Content.Shared.DoAfter;
-using Content.Shared.PowerCell.Components;
+using Content.EinsteinEngines.Shared.Power.Components;
 using Content.EinsteinEngines.Shared.Silicon;
 using Content.EinsteinEngines.Shared.Silicon.Charge;
-using Content.Shared.Verbs;
-using Robust.Shared.Utility;
-using Content.Shared.Power.EntitySystems;
-using Content.Shared.PowerCell;
+using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Power.Components;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
-// Goobstation Start - Energycrit
-using Content.EinsteinEngines.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
+using Content.Shared.PowerCell;
+using Content.Shared.PowerCell.Components;
+using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
-// Goobstation End
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Utility;
 
 namespace Content.EinsteinEngines.Shared.Power;
 
@@ -96,7 +85,7 @@ public sealed class BatteryDrinkerSystem : EntitySystem
 
     private void OnDoAfter(EntityUid uid, BatteryDrinkerComponent drinkerComp, DoAfterEvent args)
     {
-        if (args.Cancelled || args.Target is not {} source)
+        if (args.Cancelled || args.Target is not { } source)
             return;
 
         if (!TryComp<BatteryDrinkerSourceComponent>(source, out var sourceComp))

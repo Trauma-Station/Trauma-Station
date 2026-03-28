@@ -1,12 +1,8 @@
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Administration.Logs;
-using Content.Server.Cargo.Components;
-using Content.Server.Stack;
 using Content.EinsteinEngines.Shared.Silicon.BlindHealing;
+using Content.Server.Administration.Logs;
+using Content.Server.Stack;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -34,7 +30,7 @@ public sealed class BlindHealingSystem : SharedBlindHealingSystem
         SubscribeLocalEvent<BlindHealingComponent, HealingDoAfterEvent>(OnHealingFinished);
     }
 
-     private void OnHealingFinished(EntityUid uid, BlindHealingComponent component, HealingDoAfterEvent args)
+    private void OnHealingFinished(EntityUid uid, BlindHealingComponent component, HealingDoAfterEvent args)
     {
         if (args.Cancelled || args.Target == null
             || !TryComp<BlindableComponent>(args.Target, out var blindComp)

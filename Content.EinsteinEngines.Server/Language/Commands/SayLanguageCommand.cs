@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chat.Systems;
@@ -29,7 +26,7 @@ public sealed class SayLanguageCommand : IConsoleCommand
         if (player.Status != SessionStatus.InGame)
             return;
 
-        if (player.AttachedEntity is not {} playerEntity)
+        if (player.AttachedEntity is not { } playerEntity)
         {
             shell.WriteError(Loc.GetString("shell-must-be-attached-to-entity"));
             return;

@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Skubman <ba.fallaria@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -41,7 +37,7 @@ public sealed class IgniteFromGasSystem : EntitySystem
     private void OnOrganInsertedInto(Entity<FlammableComponent> ent, ref OrganInsertedIntoEvent args)
     {
         if (!TryComp<IgniteFromGasPartComponent>(args.Organ, out var ignitePart) ||
-            args.Organ.Comp.Category is not {} category)
+            args.Organ.Comp.Category is not { } category)
             return;
 
         var ignite = EnsureComp<IgniteFromGasComponent>(ent);
@@ -53,7 +49,7 @@ public sealed class IgniteFromGasSystem : EntitySystem
 
     private void OnOrganRemovedFrom(Entity<IgniteFromGasComponent> ent, ref OrganRemovedFromEvent args)
     {
-        if (!HasComp<IgniteFromGasPartComponent>(args.Organ) || args.Organ.Comp.Category is not {} category)
+        if (!HasComp<IgniteFromGasPartComponent>(args.Organ) || args.Organ.Comp.Category is not { } category)
             return;
 
         ent.Comp.IgnitableBodyParts.Remove(category);

@@ -1,6 +1,5 @@
-using Content.DV.Shared.CosmicCult.Components;
-using Content.DV.Shared.CosmicCult.Prototypes;
-using Robust.Shared.Prototypes;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Serialization;
 
 namespace Content.DV.Shared.CosmicCult;
@@ -12,6 +11,4 @@ public enum CosmicShopKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class CosmicShopBuiState() : BoundUserInterfaceState
-{
-}
+public sealed class CosmicShopBuiState() : BoundUserInterfaceState;

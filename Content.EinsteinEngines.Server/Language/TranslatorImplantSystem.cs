@@ -1,13 +1,8 @@
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.Knowledge.Systems;
-using Content.EinsteinEngines.Shared.Language;
+using Content.EinsteinEngines.Common.Language.Components;
 using Content.EinsteinEngines.Shared.Language.Components;
 using Content.EinsteinEngines.Shared.Language.Events;
-using Content.EinsteinEngines.Shared.Language.Systems;
 using Content.Shared.Implants.Components;
 using Robust.Shared.Containers;
 

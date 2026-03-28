@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Client.UserInterface.Controls;
 using Content.DV.Shared.CosmicCult;
@@ -24,7 +26,7 @@ public sealed partial class CosmicShopMenu : FancyWindow
     public Action<ProtoId<InfluencePrototype>>? OnGainButtonPressed;
     public Action? OnLevelUpConfirmed;
     public Action? OnRespecConfirmed;
-    private InfluencePrototype? SelectedInfluence = null;
+    private InfluencePrototype? _selectedInfluence = null;
     private TimeSpan? _timer;
     private TimeSpan _respecLockTime = TimeSpan.FromSeconds(0.8);
     private TimeSpan _respecResetTime = TimeSpan.FromSeconds(4);
@@ -48,7 +50,7 @@ public sealed partial class CosmicShopMenu : FancyWindow
         UpdateEntropy(state);
         UpdateInfluences(state);
         UpdateLevelupConfirmation(state);
-        if (SelectedInfluence is { } influence) OpenInfluenceDetails(influence, state);
+        if (_selectedInfluence is { } influence) OpenInfluenceDetails(influence, state);
     }
 
     /// <summary>
@@ -142,7 +144,7 @@ public sealed partial class CosmicShopMenu : FancyWindow
     /// </summary>
     private void OpenInfluenceDetails(InfluencePrototype influenceProto, CosmicCultComponent state)
     {
-        SelectedInfluence = influenceProto;
+        _selectedInfluence = influenceProto;
         InfluenceInfoContainer.RemoveAllChildren();
         var uiBoxState = GetUIBoxStateForInfluence(influenceProto, state);
         var influenceBox = new InfluenceUIBox(influenceProto, uiBoxState);

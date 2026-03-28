@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.ActionBlocker;
@@ -38,6 +28,7 @@ using System.Numerics;
 using Content.EinsteinEngines.Shared.Contests;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind.Components;
+using Content.DV.Common.Carrying;
 
 namespace Content.DV.Shared.Carrying;
 
@@ -53,7 +44,7 @@ public sealed class CarryingSystem : EntitySystem
     [Dependency] private readonly SharedPseudoItemSystem _pseudoItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StandingStateSystem _standingState = default!;
-    [Dependency] private readonly SharedVirtualItemSystem  _virtualItem = default!;
+    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly ContestsSystem _contests = default!;
 
@@ -186,7 +177,7 @@ public sealed class CarryingSystem : EntitySystem
     /// </summary>
     private void OnInteractionAttempt(Entity<BeingCarriedComponent> ent, ref InteractionAttemptEvent args)
     {
-        if (args.Target is not {} target)
+        if (args.Target is not { } target)
             return;
 
         var targetParent = Transform(target).ParentUid;

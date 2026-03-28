@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Popups;
 using Content.EinsteinEngines.Shared.Silicon.EmitBuzzWhileDamaged;
+using Content.Server.Popups;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared.Mobs.Components;
 
 namespace Content.EinsteinEngines.Server.Silicon.EmitBuzzOnCrit;
 

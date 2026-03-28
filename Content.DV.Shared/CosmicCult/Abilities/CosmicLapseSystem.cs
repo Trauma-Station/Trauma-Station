@@ -1,10 +1,12 @@
-using Content.Shared.Polymorph.Systems;
-using Content.Shared.Popups;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.DV.Shared.CosmicCult.Components;
 using Content.DV.Shared.CosmicCult.Components.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Polymorph;
+using Content.Shared.Polymorph.Systems;
+using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 

@@ -1,5 +1,8 @@
-namespace Content.DV.Shared.CosmicCult.Components;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+
+namespace Content.DV.Shared.CosmicCult.Components;
 
 [RegisterComponent]
 [AutoGenerateComponentPause]

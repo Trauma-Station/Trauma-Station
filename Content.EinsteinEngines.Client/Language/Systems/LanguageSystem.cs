@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.EinsteinEngines.Shared.Language;
-using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Common.Language;
+using Content.EinsteinEngines.Common.Language.Components;
 using Content.EinsteinEngines.Shared.Language.Events;
 using Content.EinsteinEngines.Shared.Language.Systems;
 using Robust.Client.Player;

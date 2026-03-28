@@ -1,22 +1,15 @@
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Rouge2t7 <sarahoneill132@hotmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.Popups;
-using Content.Shared.PowerCell;
-using Content.Shared.PowerCell.Components;
-using Content.EinsteinEngines.Shared.Language;
-using Content.EinsteinEngines.Shared.Language.Components;
+using Content.EinsteinEngines.Common.Language;
+using Content.EinsteinEngines.Common.Language.Components;
 using Content.EinsteinEngines.Shared.Language.Components.Translators;
 using Content.EinsteinEngines.Shared.Language.Events;
 using Content.EinsteinEngines.Shared.Language.Systems;
+using Content.Shared.Interaction;
+using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Popups;
+using Content.Shared.PowerCell;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -79,7 +72,7 @@ public sealed class TranslatorSystem : SharedTranslatorSystem
 
     private void OnTranslatorInserted(EntityUid translator, HandheldTranslatorComponent component, EntGotInsertedIntoContainerMessage args)
     {
-        if (args.Container.Owner is not {Valid: true} holder || !HasComp<LanguageSpeakerComponent>(holder))
+        if (args.Container.Owner is not { Valid: true } holder || !HasComp<LanguageSpeakerComponent>(holder))
             return;
 
         var intrinsic = EnsureComp<HoldsTranslatorComponent>(holder);
@@ -124,7 +117,7 @@ public sealed class TranslatorSystem : SharedTranslatorSystem
             _language.UpdateEntityLanguages(holder);
 
             // Update the current language of the entity if necessary
-            if (isEnabled && translatorComp.SetLanguageOnInteract && firstNewLanguage is {})
+            if (isEnabled && translatorComp.SetLanguageOnInteract && firstNewLanguage is { })
                 _language.SetLanguage((holder, languageComp), firstNewLanguage);
         }
 

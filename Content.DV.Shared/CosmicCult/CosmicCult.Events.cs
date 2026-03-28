@@ -1,18 +1,12 @@
-using Robust.Shared.Serialization;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 namespace Content.DV.Shared.CosmicCult;
 
-public sealed partial class CosmicSiphonIndicatorEvent() : EntityEventArgs
-{
-}
+public sealed partial class CosmicSiphonIndicatorEvent() : EntityEventArgs;
 
-public sealed partial class CosmicCultLeadChangedEvent() : EntityEventArgs
-{
-}
+public sealed partial class CosmicCultLeadChangedEvent() : EntityEventArgs;
 
-public sealed partial class CosmicCultAddedCultistEvent(): EntityEventArgs
-{
-}
+public sealed partial class CosmicCultAddedCultistEvent() : EntityEventArgs;
 
 [ByRefEvent]
 public record struct CosmicAbilityAttemptEvent(EntityUid Target, bool PlayEffects = false, bool Cancelled = false);

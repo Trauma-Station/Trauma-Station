@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.DV.Shared.CosmicCult.Components;
 using Content.Shared.Actions;
 using Robust.Shared.Audio.Systems;
