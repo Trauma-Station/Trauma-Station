@@ -6,7 +6,7 @@
 
 using Robust.Shared.Prototypes;
 using Robust.Shared.Localization;
-using Content.EinsteinEngines.Shared.Language;
+using Content.Trauma.Shared.Language;
 using System.Linq;
 using System.Collections.Generic;
 

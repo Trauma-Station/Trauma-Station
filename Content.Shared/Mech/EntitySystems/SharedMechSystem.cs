@@ -31,7 +31,7 @@
 using System.Linq;
 using Content.Goobstation.Common.CCVar; // Goob Edit
 using Content.Goobstation.Common.Mech; // Goobstation
-using Content.VG.Shared.TileMovement; // Goobstation
+using Content.Trauma.Shared.TileMovement; // Goobstation
 using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;

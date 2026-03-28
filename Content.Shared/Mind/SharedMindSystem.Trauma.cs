@@ -1,5 +1,5 @@
-using Content.EinsteinEngines.Shared.Language.Components;
-using Content.EinsteinEngines.Shared.Language.Systems;
+using Content.Trauma.Shared.Language.Components;
+using Content.Trauma.Shared.Language.Systems;
 
 namespace Content.Shared.Mind;
 

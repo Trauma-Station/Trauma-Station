@@ -11,7 +11,7 @@ using Content.Server.Roles;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Robust.Shared.Prototypes;
-using Content.Starlight.Common.CollectiveMind;
+using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Goobstation.Server.Shadowling.Systems;
 

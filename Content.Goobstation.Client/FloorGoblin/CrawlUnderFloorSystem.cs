@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.FloorGoblin;
-using Content.Starlight.Shared.VentCrawling;
+using Content.Trauma.Shared.VentCrawling;
 using Content.Shared.VentCrawler.Tube.Components;
 using Robust.Client.GameObjects;
 using Robust.Shared.Map.Components;

@@ -1,4 +1,4 @@
-using Content.EinsteinEngines.Shared.Language;
+using Content.Trauma.Shared.Language;
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.Prototypes;

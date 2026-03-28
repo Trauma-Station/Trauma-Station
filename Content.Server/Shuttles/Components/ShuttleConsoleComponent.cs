@@ -15,7 +15,7 @@
 // SPDX-License-Identifier: MIT
 
 using System.Numerics;
-using Content.NF.Shared.Shuttles.Events;
+using Content.Trauma.Shared.Shuttles.Events;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;

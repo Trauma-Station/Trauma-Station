@@ -10,7 +10,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.DV.Common.CartridgeLoader.Cartridges; // DeltaV
+using Content.Trauma.Common.CartridgeLoader.Cartridges; // DeltaV
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.CartridgeLoader.Cartridges;

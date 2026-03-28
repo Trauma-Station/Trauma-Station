@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.DV.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.CosmicCult.Components;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Mind;

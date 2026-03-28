@@ -2,7 +2,7 @@
 
 using Content.Goobstation.Shared.SlaughterDemon.Objectives;
 using Content.Goobstation.Shared.SlaughterDemon.Other;
-using Content.EinsteinEngines.Shared.Silicon.Components;
+using Content.Trauma.Shared.Silicon.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;

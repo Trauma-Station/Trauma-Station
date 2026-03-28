@@ -44,7 +44,7 @@ namespace Content.Client.Voting.UI
                 FollowVoteTarget.OnPressed += _ => AttemptFollowVoteEntity();
             }
 
-            Modulate = Color.White.WithAlpha(0.75f);
+            Modulate = Color.Trauma.WithAlpha(0.75f);
             _voteButtons = new Button[vote.Entries.Length];
             var group = new ButtonGroup();
 

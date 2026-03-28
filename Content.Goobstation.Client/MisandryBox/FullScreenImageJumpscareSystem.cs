@@ -67,7 +67,7 @@ public sealed class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, 
     private async Task Shock(Control texture)
     {
         // Ram in
-        texture.Modulate = Robust.Shared.Maths.Color.White.WithAlpha(1);
+        texture.Modulate = Robust.Shared.Maths.Color.Trauma.WithAlpha(1);
 
         await Task.Delay(350);
 
@@ -75,7 +75,7 @@ public sealed class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, 
         for (int i = 10; i >= 0; i--)
         {
             var alpha = i / 10f;
-            texture.Modulate = Robust.Shared.Maths.Color.White.WithAlpha(alpha);
+            texture.Modulate = Robust.Shared.Maths.Color.Trauma.WithAlpha(alpha);
             await Task.Delay(75);
         }
 

@@ -2,7 +2,7 @@
 
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.Vehicles;
-using Content.EinsteinEngines.Shared.Contests;
+using Content.Trauma.Shared.Contests;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Item;

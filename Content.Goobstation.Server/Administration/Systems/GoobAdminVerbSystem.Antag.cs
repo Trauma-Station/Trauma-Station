@@ -3,7 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Common.Blob;
 using Content.Server.Administration.Managers;
-using Content.EinsteinEngines.Shared.Silicon.Components;
+using Content.Trauma.Shared.Silicon.Components;
 using Content.Server.Administration.Systems;
 using Content.Shared.Administration;
 using Content.Shared.Database;

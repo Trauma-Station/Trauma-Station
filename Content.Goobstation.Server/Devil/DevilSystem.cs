@@ -29,7 +29,7 @@ using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Components;
-using Content.EinsteinEngines.Shared.Silicon.Components;
+using Content.Trauma.Shared.Silicon.Components;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Body;

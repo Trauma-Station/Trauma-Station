@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.DV.Shared.NanoChat;
+using Content.Trauma.Shared.NanoChat;
 // </Trauma>
 using Content.Server.Access.Components;
 using Content.Server.Popups;

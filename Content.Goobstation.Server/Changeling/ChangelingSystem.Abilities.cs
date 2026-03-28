@@ -43,7 +43,7 @@ using Content.Shared.Actions.Components;
 using Content.Goobstation.Shared.Devour.Events;
 using Content.Server.Actions;
 using Content.Shared.Mindshield.Components;
-using Content.Starlight.Common.CollectiveMind;
+using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Goobstation.Server.Changeling;
 

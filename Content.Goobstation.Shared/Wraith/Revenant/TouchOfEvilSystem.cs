@@ -3,7 +3,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.White.Shared.Grab;
+using Content.Trauma.Shared.Grab;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Popups;

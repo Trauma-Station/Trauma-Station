@@ -88,7 +88,7 @@ namespace Content.Client.Hands
 
             if (IconOverride != null)
             {
-                screen.DrawTexture(IconOverride, mousePos.Position - IconOverride.Size / 2 + offsetVec, Color.White.WithAlpha(0.75f));
+                screen.DrawTexture(IconOverride, mousePos.Position - IconOverride.Size / 2 + offsetVec, Color.Trauma.WithAlpha(0.75f));
                 return;
             }
 
@@ -102,7 +102,7 @@ namespace Content.Client.Hands
                 _entMan.EventBus.RaiseLocalEvent(player, ref comboEv);
                 if (comboEv.AttackTypes is { Count: > 0 })
                 {
-                    var color = Color.White.WithAlpha(0.75f);
+                    var color = Color.Trauma.WithAlpha(0.75f);
                     for (var i = 0; i < comboEv.AttackTypes.Count; i++)
                     {
                         var rsiActual = _resourceCache.GetResource<RSIResource>(ComboAttackRsi).RSI;
@@ -133,7 +133,7 @@ namespace Content.Client.Hands
                 var texture = _sprite.Frame0(selectedProto.Icon);
                 screen.DrawTexture(texture,
                     mousePos.Position - texture.Size / 2 + offsetVec,
-                    Color.White.WithAlpha(0.75f));
+                    Color.Trauma.WithAlpha(0.75f));
                 return;
             }
 
@@ -149,7 +149,7 @@ namespace Content.Client.Hands
                 screen.DrawEntity(handEntity.Value, halfSize, new Vector2(1f, 1f) * uiScale, Angle.Zero, Angle.Zero, Direction.South, sprite);
             }, Color.Transparent);
 
-            screen.DrawTexture(_renderBackbuffer.Texture, mousePos.Position - halfSize + offsetVec, Color.White.WithAlpha(0.75f));
+            screen.DrawTexture(_renderBackbuffer.Texture, mousePos.Position - halfSize + offsetVec, Color.Trauma.WithAlpha(0.75f));
         }
     }
 }

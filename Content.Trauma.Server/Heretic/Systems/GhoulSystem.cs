@@ -31,7 +31,7 @@ using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Roles;
 using Content.Shared._Shitcode.Heretic.Components;
-using Content.Starlight.Shared.CollectiveMind;
+using Content.Trauma.Shared.CollectiveMind;
 using Content.Shared.Body;
 using Content.Shared.Coordinates;
 using Content.Shared.Roles;

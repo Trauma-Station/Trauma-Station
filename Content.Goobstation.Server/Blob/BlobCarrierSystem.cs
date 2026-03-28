@@ -14,9 +14,9 @@ using Content.Shared.Mobs;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.EinsteinEngines.Server.Language;
-using Content.EinsteinEngines.Shared.Language;
-using Content.EinsteinEngines.Shared.Language.Events;
+using Content.Trauma.Server.Language;
+using Content.Trauma.Shared.Language;
+using Content.Trauma.Shared.Language.Events;
 
 namespace Content.Goobstation.Server.Blob;
 

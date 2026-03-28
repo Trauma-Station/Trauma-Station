@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.EinsteinEngines.Common.Language;
-using Content.Starlight.Common.CollectiveMind;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.CollectiveMind;
 // </Trauma>
 using System.Collections.Frozen;
 using System.Text.RegularExpressions;

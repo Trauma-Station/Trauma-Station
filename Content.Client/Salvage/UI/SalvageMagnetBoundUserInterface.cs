@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.DV.Common.Salvage; // DeltaV
+using Content.Trauma.Common.Salvage; // DeltaV
 using Robust.Client.Player; // DeltaV
 // </Trauma>
 using Content.Client.Message;

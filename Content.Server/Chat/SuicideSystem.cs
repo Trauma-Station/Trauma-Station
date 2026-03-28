@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Shared.Possession;
-using Content.White.Shared.Xenomorphs.Infection;
-using Content.EinsteinEngines.Shared.Silicon.Components;
+using Content.Trauma.Shared.Xenomorphs.Infection;
+using Content.Trauma.Shared.Silicon.Components;
 using Content.Medical.Shared.Consciousness;
 // </Trauma>
 using Content.Server.Ghost;

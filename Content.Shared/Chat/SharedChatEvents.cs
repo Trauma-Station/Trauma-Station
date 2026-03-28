@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.EinsteinEngines.Common.Language;
+using Content.Trauma.Common.Language;
 // </Trauma>
 using Content.Shared.Inventory;
 using Content.Shared.Radio;

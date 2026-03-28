@@ -6,7 +6,7 @@
 
 using Content.Shared.Chat;
 using Content.Shared.Speech;
-using Content.EinsteinEngines.Shared.Language;
+using Content.Trauma.Shared.Language;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;

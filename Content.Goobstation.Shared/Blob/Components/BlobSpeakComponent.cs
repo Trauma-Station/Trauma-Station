@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.EinsteinEngines.Shared.Language;
+using Content.Trauma.Shared.Language;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 

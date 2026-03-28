@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.NF.Shared.Shuttles.Events;
+using Content.Trauma.Shared.Shuttles.Events;
 
 namespace Content.Server.Shuttles.Components
 {

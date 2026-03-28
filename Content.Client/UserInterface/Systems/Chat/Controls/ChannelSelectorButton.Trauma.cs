@@ -1,5 +1,5 @@
 using Content.Shared.Chat;
-using Content.Starlight.Common.CollectiveMind;
+using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Client.UserInterface.Systems.Chat.Controls;
 public sealed partial class ChannelSelectorButton

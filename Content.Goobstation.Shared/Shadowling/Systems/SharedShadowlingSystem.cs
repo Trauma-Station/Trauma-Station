@@ -25,7 +25,7 @@ using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
-using Content.Starlight.Common.CollectiveMind;
+using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems;
 

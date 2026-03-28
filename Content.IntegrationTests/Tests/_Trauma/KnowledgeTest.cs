@@ -1,7 +1,7 @@
 #nullable enable
 
 using System.Collections.Generic;
-using Content.EinsteinEngines.Shared.Language;
+using Content.Trauma.Shared.Language;
 using Content.Shared.Body;
 using Content.Shared.Roles;
 using Content.Trauma.Common.Knowledge.Components;

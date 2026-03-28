@@ -1,4 +1,6 @@
-using Content.CorvaxNext.Shared.Silicons.Borgs.Components; // Goob
+// <Trauma>
+using Content.Trauma.Shared.Silicons.Borgs.Components;
+// </Trauma>
 using Content.Server.Inventory;
 using Content.Shared.Inventory;
 using Content.Shared.Radio.Components;

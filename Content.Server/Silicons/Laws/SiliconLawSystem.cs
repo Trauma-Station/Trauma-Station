@@ -1,10 +1,10 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
-using Content.DV.Server.CosmicCult;
+using Content.Trauma.Server.CosmicCult;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
-using Content.CorvaxNext.Shared.Silicons.Borgs.Components;
+using Content.Trauma.Shared.Silicons.Borgs.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
 using Content.Shared.Random;

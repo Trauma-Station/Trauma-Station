@@ -17,7 +17,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 // <Trauma>
-using Content.EinsteinEngines.Common.Humanoid; // EE Plasmeme Change
+using Content.Trauma.Common.Humanoid; // EE Plasmeme Change
 // </Trauma>
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Dataset;

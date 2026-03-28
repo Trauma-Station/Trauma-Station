@@ -61,7 +61,7 @@ public sealed class PopupUIController : UIController, IOnStateEntered<GameplaySt
 
         var updatedPosition = position - new Vector2(0f, MathF.Min(8f, 12f * (popup.TotalTime * popup.TotalTime + popup.TotalTime)));
         var font = _smallFont;
-        var color = Color.White.WithAlpha(alpha);
+        var color = Color.Trauma.WithAlpha(alpha);
 
         switch (popup.Type)
         {

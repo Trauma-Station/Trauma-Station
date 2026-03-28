@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Content.DV.Common.CartridgeLoader.Cartridges;
+using Content.Trauma.Common.CartridgeLoader.Cartridges;
 
 namespace Content.Shared.CartridgeLoader.Cartridges;
 

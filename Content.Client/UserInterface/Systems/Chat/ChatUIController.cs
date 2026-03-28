@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Starlight.Common.CollectiveMind;
+using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Common.Input;
 // </Trauma>
 using System.Globalization;

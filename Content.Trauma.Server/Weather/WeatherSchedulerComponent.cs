@@ -4,11 +4,7 @@ using Content.Shared.Destructible.Thresholds;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-<<<<<<<< HEAD:Content.DV.Server/Weather/WeatherSchedulerComponent.cs
-namespace Content.DV.Server.Weather;
-========
 namespace Content.Trauma.Server.Weather;
->>>>>>>> upstream:Content.Trauma.Server/Weather/WeatherSchedulerComponent.cs
 
 /// <summary>
 /// Makes weather randomly happen every so often.

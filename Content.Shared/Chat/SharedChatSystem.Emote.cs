@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.MisandryBox;
-using Content.EinsteinEngines.Common.Language.Systems;
+using Content.Trauma.Common.Language.Systems;
 // </Trauma>
 using System.Collections.Frozen;
 using Content.Shared.Chat.Prototypes;

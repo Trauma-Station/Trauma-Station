@@ -74,11 +74,11 @@ public sealed partial class CompassControl : LayoutContainer
         {
             var verticalStart = gridTopLeft + new Vector2(i * cellStep, 0);
             var verticalEnd = verticalStart + new Vector2(0, gridSize);
-            handle.DrawLine(verticalStart, verticalEnd, Color.White.WithAlpha(0.2f));
+            handle.DrawLine(verticalStart, verticalEnd, Color.Trauma.WithAlpha(0.2f));
 
             var horizontalStart = gridTopLeft + new Vector2(0, i * cellStep);
             var horizontalEnd = horizontalStart + new Vector2(gridSize, 0);
-            handle.DrawLine(horizontalStart, horizontalEnd, Color.White.WithAlpha(0.2f));
+            handle.DrawLine(horizontalStart, horizontalEnd, Color.Trauma.WithAlpha(0.2f));
         }
 
         handle.DrawRect(new UIBox2(gridTopLeft, gridBottomRight), Color.White, false);

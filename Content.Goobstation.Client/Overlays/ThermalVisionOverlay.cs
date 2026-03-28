@@ -152,10 +152,10 @@ public sealed class ThermalVisionOverlay : Overlay
 
                 layerData[i] = (layer.Shader, layer.Color);
                 layer.Shader = null;
-                _sprite.LayerSetColor(layer, Color.White.WithAlpha(layer.Color.A));
+                _sprite.LayerSetColor(layer, Color.Trauma.WithAlpha(layer.Color.A));
             }
 
-            _sprite.SetColor((uid, sprite), Color.White.WithAlpha(alpha));
+            _sprite.SetColor((uid, sprite), Color.Trauma.WithAlpha(alpha));
             handle.UseShader(_protoMan.Index<ShaderPrototype>(shader).Instance());
         }
         else

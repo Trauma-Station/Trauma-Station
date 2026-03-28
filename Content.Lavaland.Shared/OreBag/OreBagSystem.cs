@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.DV.Shared.Salvage.Components;
+using Content.Trauma.Shared.Salvage.Components;
 using Content.Shared.DragDrop;
 using Content.Shared.Storage;
 using Content.Shared.Interaction;

@@ -6,7 +6,7 @@ using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Flashbang;
 using Content.Goobstation.Shared.Stunnable;
 using Content.Shitcode.Shared.Wizard.Chuuni;
-using Content.White.Shared.Standing;
+using Content.Trauma.Shared.Standing;
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Flash;
 using Content.Goobstation.Shared.Disease;

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.EinsteinEngines.Shared.Silicon.IPC;
+using Content.Trauma.Shared.Silicon.IPC;
 using Content.Shared.Radio.Components;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;

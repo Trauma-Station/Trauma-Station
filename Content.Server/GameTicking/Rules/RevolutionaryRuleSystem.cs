@@ -5,7 +5,7 @@ using Content.Server.Antag.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
 using Content.Server.Speech.Components;
-using Content.EinsteinEngines.Shared.Revolutionary;
+using Content.Trauma.Shared.Revolutionary;
 using Content.Shared.Heretic;
 using Content.Shared.Revolutionary;
 using Content.Shared._EinsteinEngines.Revolutionary;

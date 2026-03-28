@@ -5,7 +5,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Content.Starlight.Common.CollectiveMind;
+using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Goobstation.Shared.Blob.Components;
 

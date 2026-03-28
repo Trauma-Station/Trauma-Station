@@ -232,14 +232,14 @@ namespace Content.Client.Chat.UI
 
             if (!_entityManager.TryGetComponent<TransformComponent>(_senderEntity, out var xform) || xform.MapID != _eyeManager.CurrentEye.Position.MapId)
             {
-                Modulate = Color.White.WithAlpha(0);
+                Modulate = Color.Trauma.WithAlpha(0);
                 return;
             }
 
             if (timeLeft <= FadeTime.TotalSeconds)
             {
                 // Update alpha if we're fading.
-                Modulate = Color.White.WithAlpha(timeLeft / (float)FadeTime.TotalSeconds);
+                Modulate = Color.Trauma.WithAlpha(timeLeft / (float)FadeTime.TotalSeconds);
             }
             else
             {
@@ -322,7 +322,7 @@ namespace Content.Client.Chat.UI
             {
                 StyleClasses = { "speechBox", speechStyleClass },
                 Children = { label },
-                ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity))
+                ModulateSelfOverride = Color.Trauma.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity))
             };
 
             return panel;
@@ -352,20 +352,20 @@ namespace Content.Client.Chat.UI
                 {
                     StyleClasses = { "speechBox", speechStyleClass },
                     Children = { label },
-                    ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity)),
+                    ModulateSelfOverride = Color.Trauma.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity)),
                 };
                 return unfanciedPanel;
             }
 
             var bubbleHeader = new RichTextLabel
             {
-                ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleSpeakerOpacity)),
+                ModulateSelfOverride = Color.Trauma.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleSpeakerOpacity)),
                 Margin = new Thickness(1, 1, 1, 1),
             };
 
             var bubbleContent = new RichTextLabel
             {
-                ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleTextOpacity)),
+                ModulateSelfOverride = Color.Trauma.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleTextOpacity)),
                 MaxWidth = SpeechMaxWidth,
                 Margin = new Thickness(2, 6, 2, 2),
                 StyleClasses = { "bubbleContent" },
@@ -380,7 +380,7 @@ namespace Content.Client.Chat.UI
             {
                 StyleClasses = { "speechBox", speechStyleClass },
                 Children = { bubbleContent },
-                ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity)),
+                ModulateSelfOverride = Color.Trauma.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity)),
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Bottom,
                 Margin = new Thickness(4, 14, 4, 2)
@@ -390,7 +390,7 @@ namespace Content.Client.Chat.UI
             {
                 StyleClasses = { "speechBox", speechStyleClass },
                 Children = { bubbleHeader },
-                ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.ChatFancyNameBackground) ? ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity) : 0f),
+                ModulateSelfOverride = Color.Trauma.WithAlpha(ConfigManager.GetCVar(CCVars.ChatFancyNameBackground) ? ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity) : 0f),
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Top
             };

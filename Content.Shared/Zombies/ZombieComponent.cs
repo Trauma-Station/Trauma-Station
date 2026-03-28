@@ -6,7 +6,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
-using Content.EinsteinEngines.Shared.Language;
+using Content.Trauma.Shared.Language;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;

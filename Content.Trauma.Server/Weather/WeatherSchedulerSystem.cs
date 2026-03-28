@@ -8,11 +8,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-<<<<<<<< HEAD:Content.DV.Server/Weather/WeatherSchedulerSystem.cs
-namespace Content.DV.Server.Weather;
-========
 namespace Content.Trauma.Server.Weather;
->>>>>>>> upstream:Content.Trauma.Server/Weather/WeatherSchedulerSystem.cs
 
 public sealed class WeatherSchedulerSystem : EntitySystem
 {
@@ -40,7 +36,7 @@ public sealed class WeatherSchedulerSystem : EntitySystem
             comp.NextUpdate = now + duration;
 
             var mapId = Comp<MapComponent>(map).MapId;
-            if (stage.Weather is {} weather)
+            if (stage.Weather is { } weather)
             {
                 // crossfade weather smoothly so as one ends the next starts
                 if (HasWeather(comp, comp.Stage - 1))
@@ -50,7 +46,7 @@ public sealed class WeatherSchedulerSystem : EntitySystem
                 _weather.TryAddWeather(map, weather, out _, duration);
             }
 
-            if (stage.Message is {} message)
+            if (stage.Message is { } message)
             {
                 var msg = Loc.GetString(message);
                 _chat.ChatMessageToManyFiltered(

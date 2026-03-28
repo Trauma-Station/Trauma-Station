@@ -18,7 +18,7 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
-using Content.Starlight.Shared.CollectiveMind;
+using Content.Trauma.Shared.CollectiveMind;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Trigger.Systems;
 using Content.Shared.Zombies;

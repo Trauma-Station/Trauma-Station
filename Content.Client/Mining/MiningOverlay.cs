@@ -91,7 +91,7 @@ public sealed class MiningOverlay : Overlay
             var alpha = animTime < viewerComp.AnimationDuration
                 ? 0
                 : (float)Math.Clamp((animTime - viewerComp.AnimationDuration) / viewerComp.AnimationDuration, 0f, 1f);
-            var color = Color.White.WithAlpha(alpha);
+            var color = Color.Trauma.WithAlpha(alpha);
 
             handle.DrawTexture(texture, -(Vector2)texture.Size / 2f / EyeManager.PixelsPerMeter, layer.Rotation, modulate: color);
 

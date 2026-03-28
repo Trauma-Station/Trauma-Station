@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.DV.Common.CCVars;
+using Content.Trauma.Common.CCVars;
 // </Trauma>
 using Content.Shared.Abilities;
 using Robust.Client.Graphics;

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.FixedPoint;
-using Content.White.Shared.ListViewSelector;
+using Content.Trauma.Shared.ListViewSelector;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;

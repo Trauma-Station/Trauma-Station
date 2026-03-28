@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.EinsteinEngines.Common.Silicon;
+using Content.Trauma.Common.Silicon;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 // </Trauma>

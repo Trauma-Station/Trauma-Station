@@ -3,8 +3,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
-using Content.DV.Common.Carrying;
-using Content.EinsteinEngines.Common.Silicon;
+using Content.Trauma.Common.Carrying;
+using Content.Trauma.Common.Silicon;
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Common.Religion;
 using Content.Shared._DV.Carrying;
