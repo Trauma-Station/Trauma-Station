@@ -131,10 +131,10 @@
     price: 500
 
 - type: entity
-  name: CentComm pen
+  name: Patriots pen
   parent: [BaseAdvancedPen, BaseCentcommContraband]
   id: PenCentcom
-  description: In an attempt to keep up with the "power" of the cybersun bureaucracy, NT made a replica of cyber pen, in their corporate style.
+  description: In an attempt to keep up with the "power" of the cybersun bureaucracy, the Patriots made a replica of cyber pen, in their corporate style.
   components:
   - type: Sprite
     state: pen_centcom
@@ -142,10 +142,10 @@
     heldPrefix: pen_centcom
 
 - type: entity
-  name: captain's fountain pen
+  name: Big Boss's fountain pen
   parent: PenEmbeddable
   id: PenCap
-  description: A luxurious fountain pen for the captain of the station.
+  description: A luxurious fountain pen for Big Boss.
   components:
   - type: Sprite
     state: pen_cap

@@ -12,7 +12,7 @@
 - type: entity
   id: SuitStorageDetective
   parent: SuitStorageBase
-  suffix: Detective
+  suffix: Interrogator
   components:
   - type: EntityTableContainerFill
     containers:

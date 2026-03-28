@@ -102,8 +102,8 @@ blob-alert-out-off-station = The blob was removed because it was found outside t
 # Announcment
 blob-alert-recall-shuttle = The emergency shuttle can not be sent while there is a level 5 biohazard present on the station.
 blob-alert-detect = Confirmed outbreak of level 5 biohazard aboard the station. All personnel must contain the outbreak.
-blob-alert-critical = Biohazard level critical, nuclear authentication codes have been sent to the station. Central Command orders any remaining personnel to activate the self-destruction mechanism.
-blob-alert-critical-NoNukeCode = Biohazard level critical. Central Command orders any remaining personnel to seek shelter, and await resque.
+blob-alert-critical = Biohazard level critical, nuclear authentication codes have been sent to the station. The Patriots order any remaining personnel to activate the self-destruction mechanism.
+blob-alert-critical-NoNukeCode = Biohazard level critical. The patriots order any remaining personnel to seek shelter, and await rescue.
 blob-alert-shuttle-arrived = Biohazard detected on board. All personnel must evacuate immediately.
 
 # Actions

@@ -22,6 +22,6 @@ xenomorphs-crewmajor = Decisive crew victory!
 xenomorphs-cond-nukeexplodedonstation = The crew destroyed the xenomorphs with the nuclear fission explosive.
 xenomorphs-cond-nukeactiveinstation = The crew left the armed nuclear fission explosive on the station.
 xenomorphs-cond-xenotakeoverstation = The xenomorphs managed to take over the station.
-xenomorphs-cond-xenoinfiltratedoncentcom = Xenomorphs infiltrated the Central Command station.
+xenomorphs-cond-xenoinfiltratedoncentcom = Xenomorphs infiltrated Outer Heaven.
 xenomorphs-cond-allreproducexenodead = The crew eliminated all Xenomorphs capable of reproduction.
 xenomorphs-cond-allcrewdead = All crew members have died.

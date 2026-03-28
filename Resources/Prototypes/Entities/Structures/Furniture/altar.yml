@@ -44,7 +44,7 @@
 - type: entity
   id: AltarNanotrasen
   parent: AltarBase
-  name: nanotrasen altar
+  name: Diamond Dogs altar
   components:
   - type: Sprite
     sprite: Structures/Furniture/Altars/Gods/nanotrasen.rsi

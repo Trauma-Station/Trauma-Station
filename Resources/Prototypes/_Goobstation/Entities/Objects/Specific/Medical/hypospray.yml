@@ -91,7 +91,7 @@
   parent: [BaseHypospray, BaseCentcommContraband]
   id: AmnestizineHypospray
   suffix: DO NOT MAP
-  description: A specialized cartridge injector intended for Central Command personnel. Primarily used to inject amnestics.
+  description: A specialized cartridge injector intended for the Patriots. Primarily used to inject amnestics.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Medical/amnestic_hypo.rsi
@@ -382,11 +382,11 @@
           Quantity: 10
 
 - type: entity
-  name: centcomm advanced stimulant
+  name: Patriots advanced stimulant
   parent: [ChemicalMedipen, BaseCentcommContraband]
   id: CentcommStimpack
   suffix: DO NOT MAP
-  description: According to a Nanotrasen funded study, it has zero addictive properties.
+  description: According to a Patriots funded study, it has zero addictive properties.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Medical/medipen.rsi

@@ -51,35 +51,28 @@ delivery-spam-1 =   Robust Toolbox - Special Offer!
                     -CHEAP! ONLY ONE ORGAN! THAT'S LESS THAN TWO ORGANS!
                     -DOESN'T HAVE TO BE YOUR ORGAN! WE DON'T JUDGE!
 
-delivery-spam-2 =   Reasons to choose Nanotrasen!
-    .desc =         An advertisement for Nanotrasen.
+delivery-spam-2 =   Reasons to choose Diamond Dogs!
+    .desc =         An advertisement for the Diamond Dogs PMC.
     .content =      {-delivery-header-nanotrasen}
 
-                    {"[head=2]TOP THREE REASONS WHY THE SYNDICATE IS INCOMPETENT[/head]"}
+                    {"[head=2]TOP THREE REASONS WHY THE SOVIETS ARE INCOMPETENT[/head]"}
 
                     {"[bold]NUMBER ONE[/bold]"}
-                    THEIR SLEEPER AGENTS ARE INCOMPETENT! THEY CAN'T EVEN KILL A PASSENGER WITH A DEATHWISH!
+                    THEIR SLEEPER AGENTS ARE INCOMPETENT! THEY CAN'T EVEN KILL A PRIVATE WITH A DEATHWISH!
 
                     {"[bold]NUMBER TWO[/bold]"}
-                    THEIR CIVILIANS ARE WEAK TO BULLETS! TRUST ME, WE TRIED! UNLIKE THE NANOTRASEN CIVILIANS, SYNDICATE CIVILIANS DIE FROM A BULLET TO THE SKULL! BULLETS WE HAVE!
+                    THEIR CIVILIANS ARE WEAK TO BULLETS! TRUST ME, WE TRIED! UNLIKE THE DIAMOND DOGS, SOVIET CIVILIANS DIE FROM A BULLET TO THE SKULL! BULLETS WE HAVE!
 
                     {"[bold]NUMBER THREE[/bold]"}
-                    THEIR LOGO IS HORRIBLE! THEY THINK THEY'RE COOL WITH THEIR LOGO! OOH, LOOK AT ME, I'M SO COOL! OOH, SNAKE THAT'S ALSO AN S! HOW CREATIVE! MY THREE YEAR OLD SON COULD DRAW A BETTER LOGO!
+                    THEIR LOGO IS HORRIBLE! THEY THINK THEY'RE COOL WITH THEIR LOGO! OOH, LOOK AT ME, I'M SO COOL! OOH, A HAMMER AND SICKLE! HOW CREATIVE! MY THREE YEAR OLD SON COULD DRAW A BETTER LOGO!
 
-delivery-spam-3 =   Reasons to choose The Syndicate!
-    .desc =         An advertisement for The Syndicate.
+delivery-spam-3 =   Reasons to defect to the Soviet Union!
+    .desc =         An advertisement for The Soviet Union.
     .content =      {-delivery-header-syndicate}
 
-                    {"[head=2]TOP THREE REASONS WHY NANOTRASEN IS INCOMPETENT[/head]"}
+                    {"[head=2]TOP THREE REASONS WHY THE DIAMOND DOGS ARE INCOMPETENT[/head]"}
 
-                    {"[bold]NUMBER ONE[/bold]"}
-                    THEIR GUNS SUCK! THEY DON'T EVEN HAVE SNIPER RIFLES! THEIR SECURITY FORCES CAN'T EVEN CARRY BIG GUNS IN MOST SITUATIONS!
-
-                    {"[bold]NUMBER TWO[/bold]"}
-                    THEIR COMMANDERS? THEY DIE FROM A SINGLE SHOT! NO COOL ARMOR! JUST BANG, DEAD! LAME! OUR COMMANDERS GET COOL HARDSUITS!
-
-                    {"[bold]NUMBER THREE[/bold]"}
-                    THEIR MURDER METHODS ARE UNINSPIRED! IT'S JUST GUN! THERE'S NO THROWING PEOPLE INTO DEEP SPACE, NO FEEDING PEOPLE INTO RECYCLERS WITH SAFETY MODE DISENGAGED, NO SLIPPING BOMBS INTO POCKETS! SO BORING!
+                    {"[bold]Data Expunged[/bold]"}
 
 delivery-spam-4 =   Tired of science blowing up?
     .desc =         Follow these simple steps to ensure it never happens again!

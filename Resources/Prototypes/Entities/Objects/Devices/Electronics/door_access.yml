@@ -14,7 +14,7 @@
 - type: entity
   parent: DoorElectronics
   id: DoorElectronicsCaptain
-  suffix: Captain, Locked
+  suffix: Big Boss, Locked
   components:
   - type: AccessReader
     access: [["Captain"]]
@@ -227,7 +227,7 @@
 - type: entity
   parent: DoorElectronics
   id: DoorElectronicsDetective
-  suffix: Detective, Locked
+  suffix: Interrogator, Locked
   components:
   - type: AccessReader
     access: [["Detective"]]

@@ -12,8 +12,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: CentcomAgentSkirt
-  name: centcom agent skirt
-  description: A skirt worn by CentComs legal team. Smells of burnt coffee.
+  name: patriots agent skirt
+  description: A skirt worn by the Patriots' legal team. Smells of burnt coffee.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Uniforms/Jumpskirt/centcom_agent.rsi

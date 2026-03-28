@@ -5,11 +5,11 @@ cosmic-shop-interface-title = Influence Attunment
 cosmic-shop-interface-progress-bar = {$percentage}%
 
 # Entropy
-cosmic-shop-interface-entropy-title = Entropy
-cosmic-shop-interface-entropy-value = {$infused} Entropy
+cosmic-shop-interface-entropy-title = Science
+cosmic-shop-interface-entropy-value = {$infused} Science
 cosmic-shop-interface-entropy-available-label = Available for use:
-cosmic-shop-interface-entropy-next-stage-title = Entropy untill next Stage:
-cosmic-shop-interface-cultists-next-stage-title = Cultists required for next Stage:
+cosmic-shop-interface-entropy-next-stage-title = Science until next Stage:
+cosmic-shop-interface-cultists-next-stage-title = Scientologists required for next Stage:
 
 # Influences
 cosmic-shop-interface-influences-unlocked = Unlocked
@@ -18,7 +18,7 @@ cosmic-shop-interface-influences-owned = Owned
 cosmic-shop-interface-influences-cost = Cost:
 cosmic-shop-interface-influences-purchased = Obtained
 cosmic-shop-interface-influences-owned-tooltip = You already own this influence.
-cosmic-shop-interface-influences-unlocked-not-enough-entropy-tooltip = You need {$entropy} more entropy to gain this influence.
+cosmic-shop-interface-influences-unlocked-not-enough-entropy-tooltip = You need {$entropy} more science to gain this influence.
 cosmic-shop-interface-influences-locked-tooltip = You are not yet strong enough to obtain this influence.
 cosmic-shop-interface-respec-amount = {$count ->
     [1]  You can respec once.

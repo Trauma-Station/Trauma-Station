@@ -16,15 +16,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <Document>
-  # Traitors
+  # Soviet Agents
 
   <Box>
-    [color=#999999][italic]"WHISKEY. ECHO. WHISKEY. LIMA. ALPHA. DELTA. AGENT, YOU HAVE BEEN ACTIVATED."[/italic][/color]
+    [color=#999999][italic]"I've defected to the Soviet Union."[/italic][/color]
   </Box>
   <Box>
     <GuideEntityEmbed Entity="PosterContrabandSyndicateRecruitment" Caption=""/>
   </Box>
-  Traitors are antagonists employed by the [color=#ff0000]Syndicate.[/color] You are a sleeper agent who has access to various tools and weapons through your [bold]uplink[/bold].
+  Soviet agents are antagonists employed by the [color=#ff0000]Soviet Union[/color]. You are a sleeper agent who has access to various tools and weapons through your [bold]uplink[/bold].
   You also receive [bold]codewords[/bold] to identify other agents, and a coordinated team of traitors can have [italic]brutal results.[/italic]
 
   Anyone besides [textlink="department heads" link="Command"] or members of [textlink="Security" link="Security"] can be a traitor.
@@ -71,7 +71,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   If you can't maroon your target or they're too important to leave alive, you'll have to get your hands dirty and [color=cyan]murder[/color] them. Make sure your target is not alive when the [bold]evacuation shuttle gets to CentComm,[/bold] and don't let them be resuscitated.
 
-  Remember, the Syndicate want only your targets dead. [color=red]Try to avoid mass murder or major damage to the station,[/color] as the more innocent lives you take, the more of a liability you become.
+  Remember, the Soviet Union only wants your targets dead. [color=red]Try to avoid mass murder or major damage to the station,[/color] as the more innocent lives you take, the more of a liability you become.
 
   ## Evasion & Self-Termination
   Your objectives may require you to [italic][color=cyan]make it to CentComm without being killed or captured.[/color][/italic] Don't let [color=#cb0000]Security[/color] stop you, complete your other objectives and [bold]come back alive.[/bold]
@@ -84,7 +84,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   The target may be in their office, or on their person. It may become necessary to kill whoever is carrying it, if you cannot pickpocket them.
 
   Some of the things you may be tasked with include:
-  - Stealing the [color=yellow]Captain[/color]'s [bold]ID Card[/bold], [bold]antique laser pistol[/bold], [bold]jetpack[/bold], or [bold]nuclear authentication disk[/bold].
+  - Stealing the [color=yellow]Big Boss[/color]'s [bold]ID Card[/bold], [bold]antique laser pistol[/bold], [bold]jetpack[/bold], or [bold]nuclear authentication disk[/bold].
   <Box>
     <GuideEntityEmbed Entity="CaptainIDCard" Caption=""/>
     <GuideEntityEmbed Entity="WeaponAntiqueLaser" Caption=""/>
@@ -101,7 +101,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <GuideEntityEmbed Entity="ClothingOuterHardsuitRd" Caption=""/>
     <GuideEntityEmbed Entity="HandTeleporter" Caption=""/>
   </Box>
-  - Stealing the [color=#cb0000]Head of Security[/color]'s [bold]energy magnum[/bold].
+  - Stealing the [color=#cb0000]Executive Officer[/color]'s [bold]energy magnum[/bold].
   <Box>
     <GuideEntityEmbed Entity="WeaponEnergyMagnum" Caption=""/>
   </Box>

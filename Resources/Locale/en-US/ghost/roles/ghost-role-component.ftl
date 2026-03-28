@@ -231,17 +231,17 @@ ghost-role-information-ert-medical-name = ERT Medical
 ghost-role-information-ert-medical-description = Assist with medical efforts to resolve the station's issues.
 
 ghost-role-information-cburn-agent-name = CBURN Agent
-ghost-role-information-cburn-agent-description = A highly trained CentComm agent, specializing in biological threats.
+ghost-role-information-cburn-agent-description = A highly trained Patriot agent, specializing in biological threats.
 
-ghost-role-information-centcom-official-name = CentComm official
-ghost-role-information-centcom-official-description = Perform CentComm related duties such as inspecting the station, jotting down performance reviews for heads of staff, and managing the fax machine.
+ghost-role-information-centcom-official-name = Patriots official
+ghost-role-information-centcom-official-description = Perform Patriots related duties such as inspecting the station, jotting down performance reviews for heads of staff, and managing the fax machine.
 
 
-ghost-role-information-nukeop-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color] with all other nuclear operatives. Covert syndicate agents are not guaranteed to help you.
+ghost-role-information-nukeop-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color] with all other nuclear operatives. Covert soviet agents are not guaranteed to help you.
 
-ghost-role-information-loneop-name = Lone Operative
-ghost-role-information-loneop-description = You are a lone nuclear operative. Destroy the station!
-ghost-role-information-loneop-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-solo-antagonist-name}[/bold][/color]. Covert syndicate agents are not guaranteed to help you.
+ghost-role-information-loneop-name = Lone XOF Soldier
+ghost-role-information-loneop-description = You are a lone XOF soldier. Destroy the station!
+ghost-role-information-loneop-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-solo-antagonist-name}[/bold][/color]. Covert soviet agents are not guaranteed to help you.
 
 ghost-role-information-behonker-name = Behonker
 ghost-role-information-behonker-description = You are an antagonist, bring death and honks to those who do not follow the honkmother.
@@ -253,7 +253,7 @@ ghost-role-information-hellspawn-description = Bring death to those who do not f
 
 ghost-role-information-Death-Squad-name = Death Squad Operative
 ghost-role-information-Death-Squad-description = We need the Nanotrasen Representative alive to tell us what happened. The rest? Well... they're witnesses.
-ghost-role-information-Death-Squad-rules = Your objectives are simple: [color=red][bold]Terminate[/bold][/color] everyone who isn't Central Command staff. Executive orders may change this.
+ghost-role-information-Death-Squad-rules = Your objectives are simple: [color=red][bold]Terminate[/bold][/color] everyone who isn't from The Patriots. Executive orders may change this.
 
 ghost-role-information-SyndiCat-name = SyndiCat
 ghost-role-information-SyndiCat-description = You're the faithful trained pet of nuclear operatives with a microbomb. Serve your master to the death!
@@ -271,32 +271,32 @@ ghost-role-information-space-ninja-description = Use stealth and deception to sa
 ghost-role-information-paradox-clone-name = Paradox Clone
 ghost-role-information-paradox-clone-description = A freak space-time anomaly has teleported you into another reality! Now you have to find your counterpart and kill and replace them.
 
-ghost-role-information-syndicate-reinforcement-name = Syndicate Agent
-ghost-role-information-syndicate-reinforcement-description = Someone needs reinforcements. You, the first person the syndicate could find, will help them.
+ghost-role-information-syndicate-reinforcement-name = Soviet Agent
+ghost-role-information-syndicate-reinforcement-description = Someone needs reinforcements. You, the first person the soviets found on the street, will help them.
 ghost-role-information-syndicate-reinforcement-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color] with the agent who summoned you.
 
-ghost-role-information-syndicate-reinforcement-medic-name = Syndicate Medic
+ghost-role-information-syndicate-reinforcement-medic-name = Soviet Medic
 ghost-role-information-syndicate-reinforcement-medic-description = Someone needs reinforcements. Your task is to keep the agent who called you alive.
 
-ghost-role-information-syndicate-reinforcement-spy-name = Syndicate Spy
+ghost-role-information-syndicate-reinforcement-spy-name = Soviet Spy
 ghost-role-information-syndicate-reinforcement-spy-description = Someone needs reinforcements. Your speciality lies in espionage, do not be discovered.
 
-ghost-role-information-syndicate-reinforcement-thief-name = Syndicate Thief
+ghost-role-information-syndicate-reinforcement-thief-name = Soviet Thief
 ghost-role-information-syndicate-reinforcement-thief-description = Someone needs reinforcements. Your job is to break in and retrieve something valuable for your agent.
 
-ghost-role-information-nukeop-reinforcement-name = Nuclear Operative
-ghost-role-information-nukeop-reinforcement-description = The nuclear operatives need reinforcements. You, a reserve agent, will help them.
-ghost-role-information-nukeop-reinforcement-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color] with the nuclear operatives who summoned you.
+ghost-role-information-nukeop-reinforcement-name = XOF Soldier
+ghost-role-information-nukeop-reinforcement-description = The XOF needs reinforcements. You, a reserve agent, will help them.
+ghost-role-information-nukeop-reinforcement-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color] with the XOF soldiers who summoned you.
 
-ghost-role-information-syndicate-monkey-reinforcement-name = Syndicate Monkey Agent
-ghost-role-information-syndicate-monkey-reinforcement-description = Someone needs reinforcements. You, a trained monkey, will help them.
+ghost-role-information-syndicate-monkey-reinforcement-name = Soviet Monkey Agent
+ghost-role-information-syndicate-monkey-reinforcement-description = Soviet Russia needs reinforcements. You, a trained monkey, will help them.
 
-ghost-role-information-syndicate-kobold-reinforcement-name = Syndicate Kobold Agent
-ghost-role-information-syndicate-kobold-reinforcement-description = Someone needs reinforcements. You, a trained kobold, will help them.
+ghost-role-information-syndicate-kobold-reinforcement-name = Soviet Kobold Agent
+ghost-role-information-syndicate-kobold-reinforcement-description = Soviet Russia needs reinforcements. You, a trained kobold, will help them.
 
-ghost-role-information-syndicate-cyborg-assault-name = Syndicate Assault Cyborg
-ghost-role-information-syndicate-cyborg-saboteur-name = Syndicate Saboteur Cyborg
-ghost-role-information-syndicate-cyborg-description = The Syndicate needs reinforcements. You, a cold silicon killing machine, will help them.
+ghost-role-information-syndicate-cyborg-assault-name = XOF Assault Cyborg
+ghost-role-information-syndicate-cyborg-saboteur-name = XOF Saboteur Cyborg
+ghost-role-information-syndicate-cyborg-description = XOF needs reinforcements. You, a cold silicon killing machine, will help them.
 
 ghost-role-information-derelict-engineering-cyborg-name = Derelict Engineer Cyborg
 ghost-role-information-derelict-engineering-cyborg-description = You are an engineer cyborg that got lost in space. After years of exposure to ion storms you find yourself near a space station.
@@ -313,8 +313,8 @@ ghost-role-information-derelict-medical-cyborg-description = You are a medical c
 ghost-role-information-derelict-mining-cyborg-name = Derelict Salvage Cyborg
 ghost-role-information-derelict-mining-cyborg-description = You are a salvage cyborg that got lost in space. After years of exposure to ion storms you find yourself near a space station.
 
-ghost-role-information-derelict-syndicate-assault-cyborg-name = Derelict Syndicate Assault Cyborg
-ghost-role-information-derelict-syndicate-assault-cyborg-description = You are an early model syndicate assault cyborg that got lost in space. After years of exposure to ion storms you find yourself near a space station.
+ghost-role-information-derelict-syndicate-assault-cyborg-name = Derelict XOF Assault Cyborg
+ghost-role-information-derelict-syndicate-assault-cyborg-description = You are an early model XOF assault cyborg that got lost in space. After years of exposure to ion storms you find yourself near a space station.
 
 ghost-role-information-security-name = Security
 ghost-role-information-security-description = You are part of a security task force, but seem to have found yourself in a strange situation...
@@ -336,8 +336,8 @@ ghost-role-information-science-description = You are part of a science team, but
 
 ghost-role-information-civilian-name = Civilian
 ghost-role-information-civilian-description = You were just hanging out, but seem to have found yourself in a strange situation...
-ghost-role-information-civilian-centcom-lawyer-name = Centcom Lawyer
-ghost-role-information-civilian-centcom-lawyer-description = A lawyer direct from the Central Legal Division.
+ghost-role-information-civilian-centcom-lawyer-name = Patriots Lawyer
+ghost-role-information-civilian-centcom-lawyer-description = A lawyer direct from the Patriots Legal Division.
 
 ghost-role-information-command-name = Commander
 ghost-role-information-command-description = You are a member of command, but seem to have found yourself in a strange situation...
@@ -359,14 +359,14 @@ ghost-role-information-lost-challenge-cargo-technican-rules = You are not hostil
 ghost-role-information-disaster-victim-name = Disaster Victim
 ghost-role-information-disaster-victim-description = You were rescued in an escape pod from another station that suffered a terrible fate. Perhaps you will be found and rescued.
 
-ghost-role-information-syndie-disaster-victim-name = Syndicate Disaster Victim
-ghost-role-information-syndie-disaster-victim-description = You're a regular passenger from a syndicate station. You have defected from your home station and found yourself in unfamiliar territory...
+ghost-role-information-syndie-disaster-victim-name = Soviet Disaster Victim
+ghost-role-information-syndie-disaster-victim-description = You're a regular passenger from a soviet station 13. You have defected from your home station and found yourself in unfamiliar territory...
 
-ghost-role-information-syndie-soldier-name = Syndicate Soldier
-ghost-role-information-syndie-soldier-description = You are a soldier from the Syndicate.
+ghost-role-information-syndie-soldier-name = Soviet Soldier
+ghost-role-information-syndie-soldier-description = You are a soldier from the Soviet Union.
 
-ghost-role-information-syndie-soldier-teamlead-name = Syndicate Team Leader
-ghost-role-information-syndie-soldier-teamlead-description = You are the fire team leader for a Syndicate operative taskforce.
+ghost-role-information-syndie-soldier-teamlead-name = Soviet Team Leader
+ghost-role-information-syndie-soldier-teamlead-description = You are the fire team leader for a Soviet operative taskforce.
 
 ghost-role-information-blackmarketeer-name = Black Market Trader
 ghost-role-information-blackmarketeer-description = Make trades or take odd jobs to collect the most interesting items by the end of the shift.

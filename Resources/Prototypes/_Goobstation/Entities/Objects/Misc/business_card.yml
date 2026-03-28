@@ -1,8 +1,8 @@
 - type: entity
   id: CentralCommandBusinessCard
-  name: centcomm business card
+  name: Patriots business card
   parent: Paper
-  description: A green card with nanotrasen's logo. There's something written on the back.
+  description: "A green card with nanotrasen's logo. There's something written on the back: 'La Li Lu Le Lo'. What could it mean?"
   components:
   - type: Sprite
     sprite: Objects/Misc/bureaucracy.rsi

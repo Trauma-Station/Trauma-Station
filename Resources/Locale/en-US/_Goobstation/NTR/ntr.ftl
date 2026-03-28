@@ -45,7 +45,7 @@ ntr-executive-cigar-desc = A standard premium cigar case. Only executives are pe
 ntr-executive-whiskey-name = Premium whiskey
 ntr-executive-whiskey-desc = A full bottle of premium whiskey, distilled in 2879 in Space Spain from the last non-synthetic grapes in existence.
 
-ntr-executive-glasses-name = CentComm glasses
+ntr-executive-glasses-name = Patriot glasses
 ntr-executive-glasses-desc = For when you need to look more important than you actually are.
 
 ntr-executive-savaliniaharunianisimious-name = Svalinn laser pistol
@@ -63,7 +63,7 @@ ntr-executive-cassette-desc = A cassette player to listen to tunes while you clo
 # response teams
 
 ntr-executive-ert-sec-name = Call ERT Security
-ntr-executive-ert-sec-desc = Request an Emergency Response Team security unit from Central Command. Deployed for extreme threats like nuclear operatives or revolutions. Misuse will result in severe consequences.
+ntr-executive-ert-sec-desc = Request an Emergency Response Team security unit from the Patriots. Deployed for extreme threats like nuclear operatives or revolutions. Misuse will result in severe consequences.
 
 ntr-executive-ert-med-name = Call ERT Medical
 ntr-executive-ert-med-desc = Request an Emergency Response Team medical unit. Specializes in mass casualty events and post-crisis recovery. Not equipped for combat situations.
@@ -139,7 +139,7 @@ ntr-bounty-console-manifest-entry =
         *[other] {$item} x{$amount}
     }
 
-ntr-bounty-console-flavor-left = Bounties approved by Central Command. Bribes not included. Probably.
+ntr-bounty-console-flavor-left = Bounties approved by the Patriots. Bribes not included. Probably.
 
 ntr-console-task-fail-insert = Task failed.
 ntr-console-reagent-fail = Not enough reagents to complete the task!

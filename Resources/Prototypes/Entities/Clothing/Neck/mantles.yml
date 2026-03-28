@@ -15,8 +15,8 @@
 - type: entity
   parent: [ClothingNeckBase, BaseCommandContraband]
   id: ClothingNeckMantleCap
-  name: captain's mantle
-  description: A comfortable and chique mantle befitting of only the most experienced captain.
+  name: Big Boss's mantle
+  description: A comfortable and chique mantle befitting of only an S rank Big Boss.
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/capmantle.rsi
@@ -38,7 +38,7 @@
   parent: [ClothingNeckBase, BaseCommandContraband]
   id: ClothingNeckMantleCMO
   name: chief medical officer's mantle
-  description: For a CMO that has been in enough medbays to know that more PPE means less central command dry cleaning visits when the shift is over.
+  description: For a CMO that has been in enough medbays to know that more PPE means less Patriots dry cleaning visits when the shift is over.
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/cmomantle.rsi
@@ -59,8 +59,8 @@
 - type: entity
   parent: [ClothingNeckBase, BaseCommandContraband]
   id: ClothingNeckMantleHOS
-  name: head of security's mantle
-  description: Shootouts with syndicate agents are just another Tuesday for this HoS. This mantle is a symbol of commitment to the station.
+  name: executive officer's mantle
+  description: Shootouts with XOF soldiers are just another Tuesday for this XO. This mantle is a symbol of commitment to the Boss.
   components:
   - type: Sprite
     sprite: Clothing/Neck/mantles/hosmantle.rsi

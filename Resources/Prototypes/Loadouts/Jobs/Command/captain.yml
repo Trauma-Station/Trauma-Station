@@ -93,25 +93,25 @@
 - type: loadout
   id: CaptainJumpsuit
   equipment:
-    jumpsuit: ClothingUniformJumpsuitCaptain
+    jumpsuit: ClothingUniformJumpsuitOliveDrabs
 
 
 - type: loadout
   id: CaptainJumpskirt
   equipment:
-    jumpsuit: ClothingUniformJumpskirtCaptain
+    jumpsuit: ClothingUniformJumpsuitOliveDrabs
 
 
 - type: loadout
   id: CaptainFormalSuit
   equipment:
-    jumpsuit: ClothingUniformJumpsuitCapFormal
+    jumpsuit: ClothingUniformJumpsuitTigerStripes
 
 
 - type: loadout
   id: CaptainFormalSkirt
   equipment:
-    jumpsuit: ClothingUniformJumpskirtCapFormalDress
+    jumpsuit: ClothingUniformJumpsuitTigerStripes
 
 
 - type: loadout # goob

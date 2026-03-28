@@ -130,7 +130,7 @@
   parent: BaseFigurine
   id: ToyFigurineCaptain
   name: captain figure
-  description: A figurine depicting the standard outfit of a captain belonging to a civilian-sector Nanotrasen vessel.
+  description: A figurine depicting the standard outfit of an old navy captain.
   components:
   - type: Sprite
     state: captain
@@ -140,8 +140,8 @@
 - type: entity
   parent: BaseFigurine
   id: ToyFigurineHeadOfSecurity
-  name: head of security figure
-  description: A figurine depicting the glorious head of the Security department.
+  name: executive officer figure
+  description: A figurine depicting the highest ranking officer of the Diamond Dogs, second only to Big Boss.
   components:
   - type: Sprite
     state: hos
@@ -162,8 +162,8 @@
 - type: entity
   parent: BaseFigurine
   id: ToyFigurineDetective
-  name: detective figure
-  description: A figurine depicting a Detective wearing their iconic trench coat.
+  name: interrogator figure
+  description: A figurine depicting the Interrogator wearing his iconic trench coat.
   components:
   - type: Sprite
     state: detective

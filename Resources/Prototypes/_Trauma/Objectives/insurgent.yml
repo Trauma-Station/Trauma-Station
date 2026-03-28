@@ -12,8 +12,8 @@
 - type: entity
   parent: [ BaseInsurgentObjective, BaseLivingObjective]
   id: InsurgentEscapeObjective
-  name: Escape to centcomm alive and unrestrained.
-  description: For the insurgence to succeed, you must keep your cover and reach Central Command in one piece.
+  name: Escape to Outer Heaven alive and unrestrained.
+  description: For the insurgence to succeed, you must keep your cover and reach Outer Heaven in one piece.
   components:
   - type: Objective
     difficulty: 1

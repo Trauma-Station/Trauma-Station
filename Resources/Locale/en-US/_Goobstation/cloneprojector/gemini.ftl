@@ -24,6 +24,6 @@ ghost-role-information-gemini-clone-name = Gemini Hologram
 ghost-role-information-gemini-clone-description = Assist the Research Director in any and all of their tasks. Maybe burn a city or two if they want.
 
 ghost-role-information-monozygotic-clone-name = Monozygotic Hologram
-ghost-role-information-monozygotic-clone-description = Assist Central Command in any and all of their tasks.
+ghost-role-information-monozygotic-clone-description = Assist the Patriots in any and all of their tasks.
 
 monozygotic-projector-clone-name-suffix = - Zygote

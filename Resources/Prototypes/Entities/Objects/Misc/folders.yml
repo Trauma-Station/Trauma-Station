@@ -260,8 +260,8 @@
   parent: BoxFolderBaseEmpty
   id: BoxFolderCentComEmpty
   categories: [ DoNotMap ]
-  name: CentComm folder
-  description: CentComm's miserable little pile of secrets!
+  name: Patriots folder
+  description: The Patriots' miserable little pile of secrets!
   components:
   - type: Sprite
     layers:
@@ -383,8 +383,8 @@
 - type: entity
   parent: BoxFolderClipboardEmpty
   id: BoxFolderCentComClipboardEmpty
-  name: CentComm clipboard
-  description: A luxurious clipboard upholstered with green velvet. Often seen carried by CentComm officials, seldom seen actually used.
+  name: Patriots clipboard
+  description: A luxurious clipboard upholstered with green velvet. Often seen carried by the Patriots, seldom seen actually used.
   components:
   - type: Sprite
     sprite: Objects/Misc/cc-clipboard.rsi

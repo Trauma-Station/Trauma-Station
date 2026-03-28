@@ -130,8 +130,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtCaptain
-  name: captain's jumpskirt
-  description: It's a blue jumpskirt with some gold markings denoting the rank of "Captain".
+  name: Big Boss's jumpskirt
+  description: "You didn't mean to install THAT mod..."
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/captain.rsi
@@ -295,7 +295,7 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtHoS
-  name: head of security's jumpskirt
+  name: executive officer's jumpskirt
   description: It's bright red and rather crisp, much like security's victims tend to be.
   components:
   - type: Sprite
@@ -320,8 +320,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtHoSAlt
-  name: head of security's turtleneck
-  description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Head of Security.
+  name: executive officer's turtleneck
+  description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Executive Officer.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/hos_alt.rsi
@@ -331,8 +331,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtHoSParadeMale
-  name: head of security's parade uniform
-  description: A head of security's luxury-wear, for special occasions.
+  name: executive officer's parade uniform
+  description: The Executive Officer's luxury-wear, for special occasions.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/hos_parade.rsi
@@ -600,8 +600,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtCapFormalDress
-  name: captain's formal dress
-  description: A dress for special occasions.
+  name: Big Boss's formal dress
+  description: A dress for... impressing miller..?!
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/capformaldress.rsi
@@ -611,7 +611,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtCentcomFormalDress
-  name: central command formal dress
+  name: patriots formal dress
   description: A dress for special occasions.
   components:
   - type: Sprite
@@ -622,8 +622,8 @@
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtHosFormal
-  name: hos's formal dress
-  description: A dress for special occasions.
+  name: executive officer's formal dress
+  description: A dress for courting Snake?!
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/hosformaldress.rsi

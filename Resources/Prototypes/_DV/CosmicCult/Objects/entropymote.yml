@@ -1,8 +1,8 @@
 - type: entity
   parent: [ MaterialBase ]
   id: MaterialCosmicCultEntropy
-  name: mote of entropy
-  description: A solidified mote of entropic essence. Numbing to the touch.
+  name: mote of science
+  description: A solidified mote of scientific. Numbing to the touch.
   suffix: 20
   components:
   - type: Stack

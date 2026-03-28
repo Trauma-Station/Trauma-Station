@@ -7,12 +7,12 @@ roles-antag-generic-team-antagonist-name = Team Antagonist
 roles-antag-generic-silicon-antagonist-name = Silicon Antagonist
 
 ## Goob - replaced Syndicate agent with Traitor
-roles-antag-syndicate-agent-name = Traitor
+roles-antag-syndicate-agent-name = Soviet Agent
 roles-antag-syndicate-agent-objective = Complete your objectives without being caught.
 
-roles-antag-syndicate-agent-sleeper-name = Syndicate sleeper agent
+roles-antag-syndicate-agent-sleeper-name = Soviet sleeper agent
 ## Goob - replaced Syndicate agent with Traitor
-roles-antag-syndicate-agent-sleeper-objective = A form of traitor that can activate at any point in the middle of the shift.
+roles-antag-syndicate-agent-sleeper-objective = A form of Soviet agent that can activate at any point in the middle of the shift.
 
 roles-antag-initial-infected-name = Initial Infected
 roles-antag-initial-infected-objective = Once you turn, infect as many other crew members as possible.

@@ -243,6 +243,10 @@ public abstract class SharedItemSystem : EntitySystem
         args.PushMarkup(Loc.GetString("item-component-on-examine-size",
             ("size", GetItemSizeLocale(component.Size))),
             priority: -2);
+
+        args.PushMarkup("[color=red]Made by Hideo Kojima[/color]");
+        args.PushMarkup("[color=red]Created and directed by Hideo Kojima[/color]");
+        args.PushMarkup("[color=red]Original director: Hideo Kojima[/color]");
     }
 
     public ItemSizePrototype GetSizePrototype(ProtoId<ItemSizePrototype> id)

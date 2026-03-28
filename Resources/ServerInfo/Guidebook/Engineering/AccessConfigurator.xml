@@ -39,7 +39,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   A device with no access requirements set, like a public access airlock, can be modified using any valid station ID card.
 
   ## Repairing access-broken ID card readers
-  Syndicate agents may attempt to hack access-restricted devices through the use of an [color=#a4885c]Authentication Disruptor[/color].
+  Soviet agents may attempt to hack access-restricted devices through the use of an [color=#a4885c]Authentication Disruptor[/color].
   This nefarious tool will completely short out any ID card readers that are attached to the device, making it all-access.
 
   <Box>

@@ -52,8 +52,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakCentcom
-  name: central commander's cloak
-  description: A pompous and elite green cloak with a nice gold trim, tailored specifically to the Central Commander. It's so heavy, the gold trim might be real.
+  name: patriot's cloak
+  description: A pompous and elite green cloak with a nice gold trim, tailored specifically to the Patriots' head honcho. It's so heavy, the gold trim might be real.
   components:
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/centcomcloakformal.rsi
@@ -63,7 +63,7 @@
 - type: entity
   parent: [ClothingNeckBase, BaseCommandContraband]
   id: ClothingNeckCloakCap
-  name: captain's cloak
+  name: Big Boss's cloak
   description: A pompous and comfy blue cloak with a nice gold trim, while not particularly valuable as your other possessions, it sure is fancy.
   components:
   - type: Sprite
@@ -74,7 +74,7 @@
 - type: entity
   parent: [ClothingNeckBase, BaseCommandContraband]
   id: ClothingNeckCloakHos
-  name: head of security's cloak
+  name: executive officer's cloak
   description: An exquisite dark and red cloak fitting for those who can assert dominance over wrongdoers. Take a stab at being civil in prosecution!
   components:
   - type: Sprite
@@ -158,7 +158,7 @@
 - type: entity
   parent: [ClothingNeckBase, BaseCommandContraband]
   id: ClothingNeckCloakCapFormal
-  name: captain's formal cloak
+  name: Big Boss's formal cloak
   description: A lavish and decorated cloak for special occasions.
   components:
   - type: Sprite

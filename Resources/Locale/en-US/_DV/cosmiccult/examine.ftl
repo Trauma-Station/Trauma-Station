@@ -1,5 +1,5 @@
 ## CREW EXAMINES
-cosmic-examine-text-contraband = [color=#4cabb3]This is highly illegal contraband with unknown properties![/color]
+cosmic-examine-text-contraband = [color=#4cabb3]This is highly illegal contraband with scientological properties![/color]
 cosmic-examine-text-structures = [color=#4cabb3]This object should not be on the station![/color]
 cosmic-examine-text-entities = [color=#4cabb3]This entity should not be on the station![/color]
 cosmic-examine-text-glyphs = [color=#4cabb3]The etched lines are deeply unnerving to gaze upon.[/color]
@@ -21,8 +21,8 @@ cosmic-examine-text-culteffigy = [color=#4cabb3]This may prove useful.[/color]
 
 ## GLYPH EXAMINES
 cosmic-examine-glyph-cultcount = {$COUNT ->
-    [1] [color=#4cabb3]Requires only a single cultist to activate.[/color]
-    *[other] [color=#4cabb3]Requires {$COUNT} cultists to activate.[/color]
+    [1] [color=#4cabb3]Requires only a single scientologist to activate.[/color]
+    *[other] [color=#4cabb3]Requires {$COUNT} scientologists to activate.[/color]
 }
 
 cosmic-examine-glyph-truth = [color=#4cabb3]Instills the pure, indelible truth. Able to convert absolutely anyone to join our ranks.[/color]
@@ -34,5 +34,5 @@ cosmic-examine-glyph-warding = [color=#4cabb3]Transmutes pressure-resistant clot
 
 ## TRANSMUTE EXAMINES
 cosmic-examine-transmutable = This can be transmuted into [color=#4cabb3]{$result}[/color].
-cosmic-examine-transmutable-empowerment = [color=#4cabb3]Only empowered cultists can transmute this.[/color]
+cosmic-examine-transmutable-empowerment = [color=#4cabb3]Only empowered scientologists can transmute this.[/color]
 cosmic-examine-transmutable-verb-text = Transmutability.

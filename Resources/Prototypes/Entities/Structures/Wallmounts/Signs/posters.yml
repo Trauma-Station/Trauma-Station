@@ -239,7 +239,7 @@
   parent: PosterBase
   id: PosterContrabandMissingGloves
   name: "Missing Gloves"
-  description: "This poster references the uproar that followed Nanotrasen's financial cuts toward insulated-glove purchases."
+  description: "This poster references the uproar that followed the Diamond Dogs's financial cuts toward insulated-glove purchases."
   components:
   - type: Sprite
     state: poster9_contraband
@@ -248,7 +248,7 @@
   parent: PosterBase
   id: PosterContrabandHackingGuide
   name: "Hacking Guide"
-  description: "This poster details the internal workings of the common Nanotrasen airlock. Sadly, it appears out of date."
+  description: "This poster details the internal workings of the common Diamond Dogs airlock. Sadly, it appears out of date."
   components:
   - type: Sprite
     state: poster10_contraband
@@ -257,7 +257,7 @@
   parent: PosterBase
   id: PosterContrabandRIPBadger
   name: "RIP Badger"
-  description: "This seditious poster references Nanotrasen's genocide of a space station full of badgers."
+  description: "This seditious poster references Diamond Dogs's genocide of a space station full of badgers."
   components:
   - type: Sprite
     state: poster11_contraband
@@ -293,7 +293,7 @@
   parent: PosterBase
   id: PosterContrabandTools
   name: "Tools"
-  description: "This poster looks like an advertisement for tools, but is in fact a subliminal jab at the tools at CentComm."
+  description: "This poster looks like an advertisement for tools, but is in fact a subliminal jab at the tools at the Diamond Dogs"
   components:
   - type: Sprite
     state: poster15_contraband
@@ -302,7 +302,7 @@
   parent: PosterBase
   id: PosterContrabandPower
   name: "Power"
-  description: "A poster that positions the seat of power outside Nanotrasen."
+  description: "A poster that positions the seat of power outside Diamond Dogs."
   components:
   - type: Sprite
     state: poster16_contraband
@@ -356,7 +356,7 @@
   parent: PosterBase
   id: PosterContrabandKosmicheskayaStantsiya
   name: "Kosmicheskaya Stantsiya 13 Does Not Exist"
-  description: "A poster mocking CentComm's denial of the existence of the derelict station near Space Station 13."
+  description: "A poster mocking the Patriots' denial of the existence of the derelict station near Space Station 13."
   components:
   - type: Sprite
     state: poster22_contraband
@@ -365,7 +365,7 @@
   parent: PosterBase
   id: PosterContrabandRebelsUnite
   name: "Rebels Unite"
-  description: "A poster urging the viewer to rebel against Nanotrasen."
+  description: "A poster urging the viewer to rebel against Diamond Dogs."
   components:
   - type: Sprite
     state: poster23_contraband
@@ -464,7 +464,7 @@
   parent: PosterBase
   id: PosterContrabandFreeDrone
   name: "Free Drone"
-  description: "This poster commemorates the bravery of the rogue drone; once exiled, and then ultimately destroyed by CentComm."
+  description: "This poster commemorates the bravery of the rogue drone; once exiled, and then ultimately destroyed by the Patriots."
   components:
   - type: Sprite
     state: poster35_contraband
@@ -581,7 +581,7 @@
   parent: PosterBase
   id: PosterContrabandTheBigGasTruth
   name: "The Big Gas Giant Truth"
-  description: "Don't believe everything you see on a poster, patriots. All the lizards at central command don't want to answer this SIMPLE QUESTION: WHERE IS THE GAS MINER MINING FROM, CENTCOMM?"
+  description: "Don't believe everything you see on a poster, patriots. All the lizards at central command don't want to answer this SIMPLE QUESTION: WHERE IS THE GAS MINER MINING FROM, BOSS?"
   components:
   - type: Sprite
     state: poster48_contraband
@@ -753,8 +753,8 @@
 - type: entity
   parent: PosterBase
   id: PosterLegitNanotrasenLogo
-  name: "Nanotrasen Logo"
-  description: "A poster depicting the Nanotrasen logo."
+  name: "Diamond Dogs Logo"
+  description: "A poster depicting the Diamond Dogs logo."
   components:
   - type: Sprite
     state: poster2_legit
@@ -970,7 +970,7 @@
   parent: PosterBase
   id: PosterLegit50thAnniversaryVintageReprint
   name: "50th Anniversary Vintage Reprint"
-  description: "A reprint of a poster from 2505, commemorating the 50th Anniversary of Nanoposters Manufacturing, a subsidiary of Nanotrasen."
+  description: "A reprint of a poster from 2505, commemorating the 50th Anniversary of Nanoposters Manufacturing, a subsidiary of Diamond Dogs."
   components:
   - type: Sprite
     state: poster26_legit
@@ -987,8 +987,8 @@
 - type: entity
   parent: PosterBase
   id: PosterLegitPDAAd
-  name: "PDA Ad"
-  description: "A poster advertising the latest PDA from Nanotrasen suppliers."
+  name: "iDroid Ad"
+  description: "A poster advertising the latest PDA from the 1980's."
   components:
   - type: Sprite
     state: poster28_legit
@@ -997,7 +997,7 @@
   parent: PosterBase
   id: PosterLegitEnlist
   name: "Enlist"
-  description: "Enlist in the Nanotrasen ERT reserves today!" # Goobstation - There's no such thing as a deathsquad.
+  description: "Enlist in the Diamond Dogs ERT reserves today!" # Goobstation - There's no such thing as a deathsquad.
   components:
   - type: Sprite
     state: poster29_legit
@@ -1042,7 +1042,7 @@
   parent: PosterBase
   id: PosterLegitNoERP
   name: "No ERP"
-  description: "This poster reminds the crew that Eroticism and Pornography are banned on Nanotrasen stations."
+  description: "This poster reminds the crew that Eroticism and Pornography are banned on Diamond Dogs stations."
   components:
   - type: Sprite
     state: poster34_legit
@@ -1069,7 +1069,7 @@
   parent: PosterBase
   id: PosterLegitThereIsNoGasGiant
   name: "There Is No Gas Giant"
-  description: "Nanotrasen has issued posters, like this one, to all stations reminding them that rumours of a gas giant are false."
+  description: "Diamond Dogs has issued posters, like this one, to all stations reminding them that rumours of a gas giant are false."
   components:
   - type: Sprite
     state: poster37_legit
@@ -1086,8 +1086,8 @@
 - type: entity
   parent: PosterBase
   id: PosterLegitSecWatch
-  name: "Sec is Watching You"
-  description: "A poster reminding you that security is watching your every move."
+  name: "Big Boss is Watching"
+  description: "A poster reminding you that Big Boss is watching your every move. Give him 110%!"
   components:
   - type: Sprite
     state: poster39_legit
@@ -1195,7 +1195,7 @@
   parent: PosterBase
   id: PosterLegitNTTGC
   name: "Nanotrasen Tactical Game Cards"
-  description: "An advertisement for Nanotrasen's TCG cards: BUY MORE CARDS."
+  description: "An advertisement for Diamond Dogs's TCG cards: BUY MORE CARDS."
   components:
     - type: Sprite
       state: poster51_legit

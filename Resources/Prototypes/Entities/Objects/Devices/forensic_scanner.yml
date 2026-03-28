@@ -146,7 +146,7 @@
   parent: ForensicReportPaper
   id: PaperAccessLogs
   name: access logs
-  description: A printout from the detective's trusty LogProbe.
+  description: A printout from the interrogator's trusty LogProbe.
   components:
   - type: PaperVisuals
     headerImagePath: null

@@ -219,7 +219,7 @@ reagent-name-long-island-iced-tea = Long Island iced tea
 reagent-desc-long-island-iced-tea = The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only.
 
 reagent-name-manhattan = Manhattan
-reagent-desc-manhattan = The Detective's undercover drink of choice. He never could stomach gin...
+reagent-desc-manhattan = The Interrogator's undercover drink of choice. He never could stomach gin...
 
 reagent-name-manhattan-project = Manhattan Project
 reagent-desc-manhattan-project = A scientist's drink of choice, for pondering ways to blow up the ship.
@@ -290,7 +290,7 @@ reagent-desc-snow-white = A cold refreshment.
 reagent-name-sui-dream = sui dream
 reagent-desc-sui-dream = 'Comprised of: White soda, blue Curaçao, melon liquor.'
 
-reagent-name-syndicate-bomb = syndicate bomb
+reagent-name-syndicate-bomb = tsar bomba
 reagent-desc-syndicate-bomb = Somebody set us up the bomb!
 
 reagent-name-tequila-sunrise = tequila sunrise

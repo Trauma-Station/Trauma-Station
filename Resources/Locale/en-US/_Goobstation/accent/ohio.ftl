@@ -67,10 +67,10 @@ accent-ohio-words-replace-12 = unalived
 accent-ohio-words-13 = nukie
 accent-ohio-words-replace-13 = sussy baka impostor from Among Us
 
-accent-ohio-words-14 = syndicate
+accent-ohio-words-14 = soviets
 accent-ohio-words-replace-14 = sussy baka impostor from Among Us
 
-accent-ohio-words-15 = syndi
+accent-ohio-words-15 = soviet
 accent-ohio-words-replace-15 = sussy baka impostor from Among Us
 
 accent-ohio-words-16 = traitor

@@ -139,7 +139,7 @@
         maxDistance: 5
 
 - type: entity
-  name: captain's rubber stamp
+  name: Big Boss's rubber stamp
   parent: [RubberStampBase, BaseCommandContraband]
   id: RubberStampCaptain
   categories: [ DoNotMap ]
@@ -152,7 +152,7 @@
     state: stamp-cap
 
 - type: entity
-  name: CentComm rubber stamp
+  name: Patriots rubber stamp
   parent: RubberStampBase
   id: RubberStampCentcom
   categories: [ DoNotMap ]
@@ -243,7 +243,7 @@
     state: stamp-hop
 
 - type: entity
-  name: head of security's rubber stamp
+  name: executive officer's rubber stamp
   parent: [RubberStampBase, BaseCommandContraband]
   id: RubberStampHos
   categories: [ DoNotMap ]
@@ -360,7 +360,7 @@
     state: stamp-deny
 
 - type: entity
-  name: detective's rubber stamp
+  name: interrogator's rubber stamp
   parent: [RubberStampBase, BaseSecurityContraband]
   id: RubberStampDetective
   categories: [ DoNotMap ]

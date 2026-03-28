@@ -30,7 +30,7 @@ cmd-launchemergencyshuttle-desc = Early launches the emergency shuttle if possib
 cmd-launchemergencyshuttle-help = Usage: launchemergencyshuttle
 
 # Emergency shuttle
-emergency-shuttle-left = The Emergency Shuttle has left the station. Estimate {$transitTime} seconds until the shuttle arrives at CentComm.
+emergency-shuttle-left = The Emergency Shuttle has left the station. Estimate {$transitTime} seconds until the shuttle arrives at Outer Heaven.
 emergency-shuttle-launch-time = The emergency shuttle will launch in {$consoleAccumulator} seconds.
 emergency-shuttle-docked = The Emergency Shuttle has docked {$direction} of the station, {$location}. It will leave in {$time} seconds.{$extended}
 emergency-shuttle-good-luck = The Emergency Shuttle is unable to find a station. Good luck.
@@ -55,5 +55,5 @@ emergency-shuttle-ui-authorizations = Authorizations
 emergency-shuttle-ui-remaining = Remaining: {$remaining}
 
 # Map Misc.
-map-name-centcomm = Central Command
+map-name-centcomm = Outer Heaven
 map-name-terminal = Arrivals Terminal

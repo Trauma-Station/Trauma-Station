@@ -69,7 +69,7 @@
 # Nuclear Operative
 - type: entity
   categories: [ HideSpawnMenu ]
-  name: Nuclear Operative
+  name: XOF Operative
   parent: MobHuman
   id: MobHumanNukeOp
   components:

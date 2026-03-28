@@ -390,8 +390,8 @@
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitCap
-  name: captain's spacesuit helmet # Goob edit
-  description: Special spacesuit helmet, made for the captain of the station. # Goob edit
+  name: Big Boss's spacesuit helmet # Goob edit
+  description: Special spacesuit helmet, made for Big Boss.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/capspace.rsi
@@ -512,12 +512,12 @@
     - CorgiWearable
     - WhitelistChameleon
 
-#Head of Security's hardsuit
+#Executive Officer's hardsuit
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitSecurityRed
-  name: head of security's hardsuit helmet # Goob edit
-  description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the HoS. # Goob edit
+  name: executive officer's hardsuit helmet # Goob edit
+  description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the XO. # Goob edit
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/security-red.rsi

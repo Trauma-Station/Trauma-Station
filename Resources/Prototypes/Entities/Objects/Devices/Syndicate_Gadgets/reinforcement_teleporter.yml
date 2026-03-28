@@ -111,8 +111,8 @@
 - type: entity
   parent: ReinforcementRadio
   id: ReinforcementRadioSyndicateNukeops # Reinforcement radio exclusive to nukeops uplink
-  name: nuclear operative radio
-  description: Call in a nuclear operative of questionable quality, instantly! Basic nukeop equipment provided.
+  name: XOF operative radio
+  description: Call in a nuclear operative of questionable quality, instantly! Basic XOF equipment provided.
   suffix: NukeOps
   components:
   - type: GhostRole

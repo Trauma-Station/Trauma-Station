@@ -179,8 +179,8 @@
 - type: entity
   parent: [ClothingHeadBase, BaseCommandContraband]
   id: ClothingHeadHatBeretHeadOfSecurityAdvanced
-  name: head of security's parade beret
-  description: A particularly gilded beret, designed for the Head of Security.
+  name: executive officer's parade beret
+  description: A particularly gilded beret, designed for the XO of Diamond Dogs.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Head/Hats/hos-expi.rsi

@@ -15,6 +15,7 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
 
     private GhostGui? Gui => UIManager.GetActiveUIWidgetOrNull<GhostGui>();
 
+    public static event Action<GhostGui>? OnGuiLoaded; // Trauma
 
     public override void Initialize()
     {
@@ -126,6 +127,7 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
         Gui.GhostRolesPressed += GhostRolesPressed;
         Gui.TargetWindow.WarpClicked += OnWarpClicked;
         Gui.TargetWindow.OnGhostnadoClicked += OnGhostnadoClicked;
+        OnGuiLoaded?.Invoke(Gui); // Trauma
 
         UpdateGui();
     }

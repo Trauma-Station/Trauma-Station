@@ -390,8 +390,8 @@
 - type: entity
   parent: [ BaseComputerCircuitboard, BaseCentcommContraband ]
   id: CentcommCommsComputerCircuitboard
-  name: central command communications computer board
-  description: A computer printed circuit board for a central command communications console.
+  name: patriots communications computer board
+  description: A computer printed circuit board for a patriots communications console.
   components:
   - type: Sprite
     state: cpu_centcomm

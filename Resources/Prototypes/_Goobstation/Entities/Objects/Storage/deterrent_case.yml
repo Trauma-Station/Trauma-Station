@@ -1,7 +1,7 @@
 - type: entity
   id: DeterrentCase
   name: deterrent case
-  description: A small green case filled with a Central Command members best friends. Warm to the touch.
+  description: A small green case filled with the Patriots' best friends. Warm to the touch.
   parent: [ BaseStorageItem, BaseBagOpenClose, BaseCentcommContraband ]
   components:
   - type: Sprite

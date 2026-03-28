@@ -47,7 +47,7 @@
   parent: BasePlushieLizardJob
   id: PlushieLizardJobCaptain
   name: captain lizard plushie
-  description: An adorable stuffed toy that resembles a lizardperson as the captain. There's bits of pie on its face.
+  description: An adorable stuffed toy that resembles a lizardperson as an old naval captain. There's bits of pie on its face.
   components:
   - type: Sprite
     state: captain
@@ -128,7 +128,7 @@
   parent: BasePlushieLizardJob
   id: PlushieLizardJobDetective
   name: detective lizard plushie
-  description: An adorable stuffed toy that resembles a lizardperson as a detective. Seems ready for a mystery.
+  description: An adorable stuffed toy that resembles a lizardperson as an old-timey detective. Seems ready for a mystery.
   components:
   - type: Sprite
     state: detective
@@ -145,8 +145,8 @@
 - type: entity
   parent: BasePlushieLizardJob
   id: PlushieLizardJobHeadofsecurity
-  name: head of security lizard plushie
-  description: An adorable stuffed toy that resembles a lizardperson as the head of security. It seems to have been ripped and re-stitched a few times.
+  name: executive officer lizard plushie
+  description: An adorable stuffed toy that resembles a lizardperson as the executive officer. It seems to have been ripped and re-stitched a few times.
   components:
   - type: Sprite
     state: headofsecurity

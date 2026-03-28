@@ -69,13 +69,13 @@ holopad-command-vault = Command - Vault
 holopad-command-bridge-hallway = Command - Bridge Hallway
 holopad-command-meeting-room = Command - Meeting Room
 holopad-command-lounge = Command - Lounge
-holopad-command-captain = Command - Captain
-holopad-command-hop = Command - HoP
+holopad-command-captain = Command - Big Boss
+holopad-command-hop = Command - HOP
 holopad-command-cmo = Command - CMO
 holopad-command-qm = Command - QM
 holopad-command-ce = Command - CE
 holopad-command-rd = Command - RD
-holopad-command-hos = Command - HoS
+holopad-command-hos = Command - XO
 
 # Science
 holopad-science-anomaly = Science - Anomaly
@@ -127,7 +127,7 @@ holopad-security-brig = Security - Brig
 holopad-security-warden = Security - Warden
 holopad-security-interrogation = Security - Interrogation
 holopad-security-breakroom = Security - Breakroom
-holopad-security-detective = Security - Detective
+holopad-security-detective = Security - Interrogator
 holopad-security-perma = Security - Perma
 holopad-security-courtroom = Security - Courtroom
 holopad-security-lawyer = Security - Lawyer
@@ -166,4 +166,4 @@ holopad-station-bridge = Station - Bridge
 holopad-station-cargo-bay = Station - Cargo Bay
 
 # CentComm
-holopad-centcomm-evac = CentComm - Evacuation Shuttle
+holopad-centcomm-evac = Patriots - Evacuation Shuttle

@@ -198,7 +198,7 @@
   parent: [BaseCommandContraband, ClothingShoesBootsJack]
   id: ClothingShoesBootsJackAdvanced
   name: advanced jackboots
-  description: This pair of jackboots was designed for the Head of Security. No one knows why are they called advanced, but they are for sure advanced in drip.
+  description: This pair of jackboots was designed for the Executive Officer. No one knows why are they called advanced, but they are for sure advanced in drip.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/Shoes/Boots/advanced_jackboots.rsi

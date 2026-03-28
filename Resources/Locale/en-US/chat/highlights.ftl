@@ -1,14 +1,14 @@
 # Command
-highlights-captain = Captain, "Cap", Bridge, Command
+highlights-captain = Boss, Snake, Ishmael, Jack, John, "Cap", Bridge, Command
 highlights-head-of-personnel = Head Of Personnel, "HoP", Service, Bridge, Command
 highlights-chief-engineer = Chief Engineer, "CE", Engineering, Engineer, "Engi", Bridge, Command
 highlights-chief-medical-officer = Chief Medical Officer, "CMO", Medbay, Medical, "Med", Bridge, Command
-highlights-head-of-security = Head of Security, "HoS", Armory, Security, "Sec", Bridge, Command
+highlights-head-of-security = Executive Officer, "XO", Miller, Armory, Security, "Sec", Bridge, Command
 highlights-quartermaster = Quartermaster, "QM", Cargo, Supply, Bridge, Command
-highlights-research-director = Research Director, "RD", Science, "Sci", "RND", "R&D", Bridge, Command
+highlights-research-director = Huey, Emmerich, Research Director, "RD", Science, "Sci", "RND", "R&D", Bridge, Command
 
 # Security
-highlights-detective = Detective, "Det", Armory, Security, "Sec"
+highlights-detective = Interrogator, Ocelot, "Det", Armory, Security, "Sec"
 highlights-security-cadet = Security Cadet, Secoff, Cadet, Armory, Security, "Sec"
 highlights-security-officer = Security Officer, Secoff, Officer, Armory, Security, "Sec"
 highlights-warden = Warden, "Ward", Brig, Genpop, Jail, "Prison", Armory, Security, "Sec"

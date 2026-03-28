@@ -141,8 +141,8 @@
 - type: entity
   parent: [ EncryptionKey, BaseCentcommContraband ]
   id: EncryptionKeyCentCom
-  name: central command encryption key
-  description: An encryption key used by captain's bosses.
+  name: patriots encryption key
+  description: An encryption key used by Big Boss's bosses.
   components:
   - type: EncryptionKey
     channels:

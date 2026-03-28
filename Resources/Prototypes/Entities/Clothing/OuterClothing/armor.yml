@@ -124,8 +124,8 @@
 - type: entity
   parent: [ClothingOuterArmorBase, BaseSecurityContraband]
   id: ClothingOuterVestDetective
-  name: detective's vest
-  description: A hard-boiled private investigator's armored vest.
+  name: interrogator's vest
+  description: A hard-boiled private investigator's armored vest, repurposed by the interrogator.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Vests/detvest.rsi
@@ -175,8 +175,8 @@
 - type: entity
   parent: [ClothingOuterArmorCaptainCarapace, BaseCentcommContraband]
   id: ClothingOuterArmorCentcommCarapace
-  name: centcomm carapace
-  description: 'An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to centcomm officials and agents.'
+  name: Patriots carapace
+  description: 'An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to the Patriots.'
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Armor/centcomm_carapace.rsi

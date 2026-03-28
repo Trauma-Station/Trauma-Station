@@ -10,7 +10,7 @@ thaven-mood-cosmic-unfamiliarity-desc = The world around you is strange and unfa
 thaven-mood-cosmic-fakemonument-name = Malign Monument
 thaven-mood-cosmic-fakemonument-desc = A great shadow fills your minds' eye, the silhouette of a looming structure. A Monument. You must find it or make one yourself, at all costs.
 
-thaven-mood-cosmic-wakingdream-name = Cosmic Dream
+thaven-mood-cosmic-wakingdream-name = Scientific Dream
 thaven-mood-cosmic-wakingdream-desc = This reality is an illusion, a great dream that you share from beyond the veil of nothing, for all things have long since ended. Rejoice!
 
 thaven-mood-cosmic-livingnightmare-name = Entropic Nightmare

@@ -119,7 +119,7 @@ selectable-set-syndicate-western-description =
 
 selectable-set-syndicate-sus-name = Suspicion Bundle
 selectable-set-syndicate-sus-description =
-    When the traitor is sus. The traitor is you, of course.
+    When the soviet is sus. The soviet is you, of course.
     Contains: an advanced contortionist jumpsuit, betrayal knife, miniature
     energy crossbow, stealth suit, and a syndicate encryption key.
 
@@ -166,16 +166,17 @@ selectable-set-security-modsuit-desc =
     A modular hardsuit with ceramic inserts to provide more protection
     than the hardsuit counterpart, but with less mobility.
 
-selectable-set-headofsecurity-voidsuit-name = Head of security's hardsuit
+selectable-set-headofsecurity-voidsuit-name = Executive Officer's hardsuit
 selectable-set-headofsecurity-voidsuit-desc =
     A light hardsuit with material cut from non-vital areas to slightly increase
     the armour value of the vital organs and increase mobility
     compared to the standard security hardsuit.
 
-selectable-set-headofsecurity-modsuit-name = Head of security's 'bulwark' modsuit
+selectable-set-headofsecurity-modsuit-name = Executive Officer's 'bulwark' modsuit
 selectable-set-headofsecurity-modsuit-desc =
-    A modular hardsuit with expensive plastitanium armour for the head of security's use.
+    A modular hardsuit with expensive plastitanium armour for the XO's use.
     Comes equipped with an AI operated on-board intravenous stim injector.
+    Never forget what they took from us.
 
 selectable-set-engineering-voidsuit-name = Engineering hardsuit
 selectable-set-engineering-voidsuit-desc =
@@ -187,17 +188,18 @@ selectable-set-engineering-modsuit-desc =
     replaced with external cameras to better protect against explosions
     and other external threats.
 
-selectable-set-captain-voidsuit-name = Captain's parade hardsuit
+selectable-set-captain-voidsuit-name = Big Boss's parade hardsuit
 selectable-set-captain-voidsuit-desc =
-    Captain's light hardsuit made custom fitted for formal occasions, lightly
+    Big Boss's light hardsuit made custom fitted for formal occasions, lightly
     armored to protect during a calm shift, all while still retaining
     common spacewalking capabilities.
 
-selectable-set-captain-modsuit-name = Captain's 'Magnate' modsuit
+selectable-set-captain-modsuit-name = Big Boss's 'Invisible' modsuit
 selectable-set-captain-modsuit-desc =
     A modular hardsuit perfectly shined, adorned, and armored for the best of
-    the best, fitted with custom plating, cooling fluid, and diamonds to
+    the best, fitted with custom plating, cooling fluid, and Diamonds to
     make even the toughest of times leading seem like nothing to you.
+    Comes with built-in stealth camoflague.
 
 
 selectable-set-research-director-voidsuit-name = RD's hardsuit

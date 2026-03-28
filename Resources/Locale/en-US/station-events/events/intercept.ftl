@@ -3,4 +3,4 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-station-event-communication-interception = Attention! Enemy communication intercepted. Security level elevated.
+station-event-communication-interception = Attention! Enemy memes intercepted. Security has been recalled.

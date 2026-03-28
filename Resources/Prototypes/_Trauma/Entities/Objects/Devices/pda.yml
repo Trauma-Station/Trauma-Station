@@ -1,8 +1,8 @@
 - type: entity
   parent: BasePDA
   id: GeneticistPDA
-  name: geneticist PDA
-  description: Unfortunately, this PDA does not come with a free sample of Hulk DNA.
+  name: geneticist iDroid
+  description: Unfortunately, this iDroid does not come with a free sample of Hulk DNA.
   components:
   - type: Icon
     state: pda-genetics
@@ -19,7 +19,7 @@
 - type: entity
   parent: BasePDA
   id: PhoneMerchantPDA
-  name: phone merchant PDA
+  name: phone merchant iDroid
   description: Ring a ding ding!
   components:
   - type: Pda

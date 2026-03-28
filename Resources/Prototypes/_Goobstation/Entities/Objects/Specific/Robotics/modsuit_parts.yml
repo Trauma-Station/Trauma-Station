@@ -215,7 +215,7 @@
 - type: entity
   id: ModsuitPlatingHeadOfSecurity
   parent: PartModsuit
-  name: MOD standard head of security 'bulwark' plating
+  name: MOD standard executive officer's 'bulwark' plating
   description: A part used in MOD construction.
   components:
   - type: Sprite
@@ -235,7 +235,7 @@
 - type: entity
   id: ModsuitPlatingCaptain
   parent: PartModsuit
-  name: MOD standard captain's magnate plating
+  name: MOD standard Big Boss's magnate plating
   description: A part used in MOD construction.
   components:
   - type: Sprite

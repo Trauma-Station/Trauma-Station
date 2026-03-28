@@ -430,9 +430,9 @@
 - type: entity
   parent: [ClothingHeadHatWizardBaseArmor, ClothingHeadHatWizardBase]
   id: ClothingHeadHatCentCommwizardReal
-  name: CentComm wizard hat
+  name: Patriots wizard hat
   suffix: ADMIN
-  description: A pristine green and gold wizard hat, regulation issue for Central Command's arcane operatives. Worn only by those authorized to wield classified thaumaturgic instruments.
+  description: A pristine green and gold wizard hat, regulation issue for the Patriots' arcane operatives. Worn only by those authorized to wield classified thaumaturgic instruments.
   components:
   - type: Sprite
     sprite: _Goobstation/Wizard/Clothing/Head/comwizard.rsi
@@ -442,9 +442,9 @@
 - type: entity
   parent: [ClothingOuterWizardBaseArmor, ClothingOuterWizardBase]
   id: ClothingOuterWizardCentCommReal
-  name: CentComm wizard robes
+  name: Patriots wizard robes
   suffix: ADMIN
-  description: A pristine green and gold gem-lined robe, regulation issue for Central Command's arcane operatives. Worn only by those authorized to wield classified thaumaturgic instruments.
+  description: A pristine green and gold gem-lined robe, regulation issue for the Patriots' arcane operatives. Worn only by those authorized to wield classified thaumaturgic instruments.
   components:
   - type: Sprite
     sprite: _Goobstation/Wizard/Clothing/OuterClothing/comwizard.rsi

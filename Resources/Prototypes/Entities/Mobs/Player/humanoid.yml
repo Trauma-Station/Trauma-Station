@@ -591,7 +591,7 @@
 ## Central Command
 
 - type: entity
-  name: CentComm official
+  name: Patriots official
   id: RandomHumanoidSpawnerCentcomOfficial
   components:
     - type: Sprite
@@ -643,7 +643,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerNukeOp
-  name: Nuclear Operative
+  name: XOF Operative
   components:
     - type: Sprite
       sprite: Mobs/Species/Human/parts.rsi

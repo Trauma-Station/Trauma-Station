@@ -37,7 +37,7 @@
 - type: entity
   parent: [BaseTraitorObjective, BaseLivingObjective]
   id: EscapeShuttleObjective
-  name: Escape to CentComm alive and unrestrained via the escape shuttle.
+  name: Escape to Outer Heaven alive and unrestrained via the escape shuttle.
   description: One of our undercover agents will debrief you when you arrive. Don't show up in cuffs.
   components:
   - type: Objective
@@ -105,7 +105,7 @@
 - type: entity
   parent: [BaseTraitorObjective, BaseKillObjective]
   id: KillRandomHeadObjective
-  description: We need this head gone and you probably know why. Make sure they don't make it to CentComm, even if they're dead. Good luck, agent.
+  description: We need this head gone and you probably know why. Make sure they don't make it to Outer Heaven, even if they're dead. Good luck, agent.
   components:
   - type: Objective
     # technically its still possible for KillRandomPersonObjective to roll a head but this is guaranteed, so higher difficulty

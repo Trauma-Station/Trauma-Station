@@ -2,7 +2,7 @@
   parent: BaseMentalAction
   id: ActionCosmicShop
   name: Attune Influence
-  description: Spend gathered entropy to unlock new powers, or view the Cult's progress.
+  description: Spend gathered science to unlock new powers, or view Scientology's progress.
   components:
   - type: Action
     icon:
@@ -19,8 +19,8 @@
 - type: entity
   parent: BaseAction
   id: ActionCosmicSiphon
-  name: Siphon Entropy
-  description: Silently siphon entropy from your target.
+  name: Siphon Science
+  description: Silently siphon science from your target. Nice alliteration.
   components:
   - type: Action
     useDelay: 30
@@ -287,7 +287,7 @@
 - type: entity
   parent: BaseAction
   id: ActionCosmicColossusSunder
-  name: Entropic Sunder
+  name: Scientific Sunder
   description: Warp to the target location and unleash a shockwave of malign energy.
   components:
   - type: Action
@@ -343,7 +343,7 @@
 - type: entity
   id: ActionCosmicColossusEffigy
   name: Beckon an Effigy
-  description: Draw out an Effigy of Entropy into realspace.
+  description: Draw out an Effigy of Science into realspace.
   components:
   - type: Action
     useDelay: 999

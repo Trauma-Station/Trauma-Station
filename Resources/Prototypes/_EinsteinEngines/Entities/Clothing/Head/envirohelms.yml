@@ -62,8 +62,8 @@
 - type: entity
   parent: ClothingHeadEnvirohelmBase
   id: ClothingHeadEnvirohelmCaptain
-  name: captain's envirosuit helmet
-  description: A special containment helmet designed for the Captain.
+  name: Big Boss's envirosuit helmet
+  description: A special containment helmet designed for Big Boss.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/captain.rsi
@@ -98,8 +98,8 @@
 - type: entity
   parent: ClothingHeadEnvirohelmEnviroslacksColorOrange
   id: ClothingHeadEnvirohelmDetective
-  name: detective's envirosuit helmet
-  description: A special containment helmet designed for detectives, protecting them from burning alive, alongside other undesirables.
+  name: interrogator's envirosuit helmet
+  description: A special containment helmet designed the interrogator, protecting them from burning alive, alongside other undesirables.
 
 - type: entity
   parent: ClothingHeadEnvirohelmBase
@@ -166,8 +166,8 @@
 - type: entity
   parent: ClothingHeadEnvirohelmBase
   id: ClothingHeadEnvirohelmHoS
-  name: head of security's envirosuit helmet
-  description: A special containment helmet designed for the Head of Security. The pair of gold stripes differentiates them from other members of security.
+  name: executive officer's envirosuit helmet
+  description: A special containment helmet designed for the Executive Officer. The pair of gold stripes differentiates them from other members of security.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/hos.rsi
@@ -553,8 +553,8 @@
 - type: entity
   parent: ClothingHeadEnvirohelmBase
   id: ClothingHeadEnvirohelmCentcomAgent
-  name: CentCom agent's envirosuit helmet
-  description: A special containment helmet designed for CentCom's legal team. You know, so any coffee spills don't kill the poor sod.
+  name: Patriots agent's envirosuit helmet
+  description: A special containment helmet designed for the Patriots' legal team. You know, so any coffee spills don't kill the poor sod.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/centcom_agent.rsi
@@ -565,8 +565,8 @@
 - type: entity
   parent: ClothingHeadEnvirohelmBase
   id: ClothingHeadEnvirohelmCentcomOfficial
-  name: CentCom official's envirosuit helmet
-  description: A special containment helmet designed for CentCom Staff. They sure do love their green.
+  name: Patriots official's envirosuit helmet
+  description: A special containment helmet designed for the Patriots Staff. They sure do love their green.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/centcom_official.rsi
@@ -577,8 +577,8 @@
 - type: entity
   parent: ClothingHeadEnvirohelmBase
   id: ClothingHeadEnvirohelmCentcomOfficer
-  name: CentCom officer's envirosuit helmet
-  description: A special containment helmet designed for CentCom Officers.
+  name: Patriots officer's envirosuit helmet
+  description: A special containment helmet designed for the Patriots Officers.
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/Head/Envirohelms/centcom_officer.rsi

@@ -37,7 +37,7 @@
 # head of security
 - type: entity
   id: UndeterminedVoidsuitHeadOfSecurity
-  name: head of security hardsuit selector
+  name: executive officer hardsuit selector
   description: A small remote utilizing bluespace technology to drop in a hardsuit or modsuit of your choosing.
   parent: [ BaseItem, BaseSetSelector, BaseSecurityContraband ]
   components:
@@ -67,7 +67,7 @@
 # Cappy Suit
 - type: entity
   id: UndeterminedVoidsuitCaptain
-  name: captain hardsuit selector
+  name: Big Boss hardsuit selector
   description: A small remote utilizing bluespace technology to drop in a hardsuit or modsuit of your choosing.
   parent: [ BaseItem, BaseSetSelector, BaseCommandContraband ]
   components:

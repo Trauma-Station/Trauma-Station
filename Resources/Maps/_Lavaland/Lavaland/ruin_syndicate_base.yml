@@ -20041,7 +20041,7 @@ entities:
     components:
     - type: MetaData
       desc: This syringe used to hold a deadly pathogen, now it's empty.
-      name: Empty romerol syringe
+      name: Empty puppet parasites syringe
     - type: Transform
       parent: 4
     - type: SolutionContainerManager

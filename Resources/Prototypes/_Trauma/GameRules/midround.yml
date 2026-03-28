@@ -4,8 +4,6 @@
   parent: BaseGameRule
   id: BasicAntagEventScheduler
   components:
-  - type: RuleSchedulerLimit
-    limit: 3
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: BasicAntagEventsTable
@@ -21,19 +19,16 @@
   parent: BaseGameRule
   id: ModerateAntagEventScheduler
   components:
-  - type: RuleSchedulerLimit
-    limit: 2
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: ModerateAntagEventsTable
-    # starts 20-27 mins in
-    minimumTimeUntilFirstEvent: 1200
-    maximumSpanUntilFirstEvent: 450
-    # 15-25 mins between each antag
+    # starts 40-60 mins in
+    minimumTimeUntilFirstEvent: 2400
+    maximumSpanUntilFirstEvent: 3600
+    # 30-50 mins between each antag
     minMaxEventTiming:
-      min: 900
-      max: 1500
-
+      min: 1800
+      max: 3000
 
 ## Shadow demon
 

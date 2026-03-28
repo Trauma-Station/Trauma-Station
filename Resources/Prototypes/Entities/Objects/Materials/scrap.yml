@@ -322,7 +322,7 @@
   parent: BaseScrap
   id: ScrapFaxMachine
   name: fax machine
-  description: The unfortunate result of one too many ASCII arts being sent to Central Command.
+  description: The unfortunate result of one too many ASCII arts being sent to the Patriots.
   components:
   - type: Sprite
     layers:

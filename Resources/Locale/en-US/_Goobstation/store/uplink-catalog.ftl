@@ -43,7 +43,7 @@ uplink-hardsuit-cybersun-stealth-desc = Reverse-engineered from Spider Clan tech
 
 # Cybersun Dreadnought suit
 uplink-hardsuit-cybersun-dreadnought-name = Cybersun Dreadnought suit
-uplink-hardsuit-cybersun-dreadnought-desc = An insanely tough combat hardsuit utilizing hyper-bluespace enhanced plasteel to make an almost impenetrable wall out of the wearer. However, only the absolutely insane syndicate followers will put this on. Because of its weight, it must be tightened very hard, to the point of impaling the user and being unable to be taken off without completely ripping off their skin. The syndicate sends their regards.
+uplink-hardsuit-cybersun-dreadnought-desc = An insanely tough combat hardsuit utilizing hyper-bluespace enhanced plasteel to make an almost impenetrable wall out of the wearer. However, only the absolutely insane soviet followers will put this on. Because of its weight, it must be tightened very hard, to the point of impaling the user and being unable to be taken off without completely ripping off their skin. The Soviet Union sends its regards.
 
 # Misc
 
@@ -53,7 +53,7 @@ uplink-gondola-desc = Crate containing one standard issue gondola.
 uplink-operative-radio-name = Nuclear Operative Teleporter
 uplink-operative-radio-desc = Radio in a nuclear operative of extremely questionable quality. No off button, buy this if you're ready to party. They have basic nuclear operative gear.
 
-uplink-mobroach-microbomb-name = SyndiRoach Teleporter
+uplink-mobroach-microbomb-name = CipheRoach Teleporter
 uplink-mobroach-microbomb-desc = Call in a handy mothroach equipped with a microbomb implant. Explodes when seriously injured.
 
 uplink-signaller-name = Advanced Remote Signaller
@@ -93,7 +93,7 @@ uplink-adv-mimery-desc = The classical two part series on how to further hone yo
 # Weapons
 
 uplink-contractor-baton-name = Contractor Baton
-uplink-contractor-baton-desc = A compact, specialised baton assigned to Syndicate contractors. Applies light electrical shocks to targets. These shocks are capable of affecting the inner circuitry of most robots as well, applying a short stun.
+uplink-contractor-baton-desc = A compact, specialised baton assigned to Soviet contractors. Applies light electrical shocks to targets. These shocks are capable of affecting the inner circuitry of most robots as well, applying a short stun.
 
 uplink-weapon-burner-name = Burner Heavy Rifle
 uplink-weapon-burner-desc = The Burner Heavy Rifle, an excellent breaching and suppression weapon.
@@ -107,19 +107,19 @@ uplink-l6-saw-desc = More dakka: The iconic L6 light machine gun.
 uplink-m90-name = M-90
 uplink-m90-desc = An M-90 combat rifle.
 
-uplink-syndicate-disabler-name = Syndicate Disabler
+uplink-syndicate-disabler-name = Soviet Disabler
 uplink-syndicate-disabler-desc = An advanced disabler built from a reverse-engineered Nanotrasen prototype. While it lacks a bit of stopping power, it makes up for it with a recharging cell.
 
 uplink-dualetta-bundle-name = Dualetta Bundle
-uplink-dualetta-bundle-desc = Comes with 2 Dualetta pistols, 2 machine pistol magazines, combat gloves, noir suit, detectives trenchcoat, and laceup shoes.
+uplink-dualetta-bundle-desc = Comes with 2 Dualetta pistols, 2 machine pistol magazines, combat gloves, noir suit, interrogator's trenchcoat, and laceup shoes.
 
 uplink-anaconda-name = Anaconda
 uplink-anaconda-desc = The pride of the Cybersun arms concern, this heavy pistol is designed to feed itself with the built-in fabricator.
 
-uplink-bulk-mosin-name = Syndicate bulk rifle crate
+uplink-bulk-mosin-name = Soviet bulk rifle crate
 uplink-bulk-mosin-desc = 10 WW4-era rifles to arm you, your friends, and your cat. Saves 40% on shipping costs by buying in bulk.
 
-uplink-whimsy-bundle-name = Syndicate Joy & Whimsy Bundle
+uplink-whimsy-bundle-name = Soviet Joy & Whimsy Bundle
 uplink-whimsy-bundle-desc = Do YOU like spreading joy & whimsy? Well, Donk Co. has the solution for you! Contains a LIMITED EDITION axe and enough candy to kill a man.
 
 uplink-m7s-name = M7S "Ventilator"
@@ -276,7 +276,7 @@ uplink-autosurgeon-jumpstarter-heart-desc = Replaces the user's heart with a jum
 
 # Wearables
 
-uplink-helmet-swat-name = Syndicate SWAT Helmet
+uplink-helmet-swat-name = Soviet SWAT Helmet
 uplink-helmet-swat-desc = Robust helmet that offers good protection and also suppresses flashbang sounds to some extent.
 
 uplink-reverse-bear-trap-name = Reverse Bear Trap
@@ -316,13 +316,13 @@ uplink-dimension-pot-name = Dimension Pot
 uplink-dimension-pot-desc = A portal to your own pocket dimension disguised in the form of a potted plant, for when stashing one item isn't quite enough.
 
 uplink-pizza-bomb-name = Nefarious Pizza bomb
-uplink-pizza-bomb-desc = First pioneered by terrorists, now is used by the syndicate for eliminating high value targets. Do not open before explosion.
+uplink-pizza-bomb-desc = First pioneered by terrorists, now used by the Soviets for eliminating high value targets. Do not open before explosion.
 
 uplink-pizza-party-crate-name = Pizza Party Crate
 uplink-pizza-party-crate-desc = A crate coming in the form of disaster pizza delivery. Filled with pizzas and pizza bombs to throw the most explosive pizza party ever. Unfortunately you can't seem to remember which one is which.
 
 uplink-undetermined-bundle-name = Undetermined Bundle Crate
-uplink-undetermined-bundle-desc = This crate comes with three random bundles and allows to choose one of them. Guaranteed to include Syndicate encryption key.
+uplink-undetermined-bundle-desc = This crate comes with three random bundles and allows to choose one of them. Guaranteed to include a Soviet encryption key.
 
 uplink-energy-pickaxe-name = Energy Pickaxe
 uplink-energy-pickaxe-desc = A holographic mining tool with blades comprised of hard light that also serves a deadly melee weapon. Rock and stone!
@@ -330,14 +330,14 @@ uplink-energy-pickaxe-desc = A holographic mining tool with blades comprised of 
 uplink-bloodred-cassette-name = Bloodred Casette Player
 uplink-bloodred-cassette-desc = Provided by the most egotistical fashion designers of Cybersun, a portable music player!
 
-uplink-syndiedrobe-name = Syndiedrobe
-uplink-syndiedrobe-desc = A vending machine stocked with Syndicate-branded clothing. Simple, sharp, and unmistakably red-and-black, it offers operatives a way to dress with Syndicate style.
+uplink-syndiedrobe-name = SovietDrobe
+uplink-syndiedrobe-desc = A vending machine stocked with Soviet-branded clothing. Simple, sharp, and unmistakably red-and-black, it offers operatives a way to dress with Soviet style.
 
-uplink-customboard-name = Custom Syndicate Lawboard
+uplink-customboard-name = Custom Soviet Lawboard
 uplink-customboard-desc = A modified lawboard that allows the user to change the laws to anything they want. Comes with Antimov pre-installed.
 
-uplink-cddisksyndicate-name = Syndicate Advertisement CD
-uplink-cddisksyndicate-desc = 102.9 Syndicate radio
+uplink-cddisksyndicate-name = Soviet Advertisement CD
+uplink-cddisksyndicate-desc = 102.9 Soviet numbers station
 
 uplink-cddisknumber-name = Number Station CD
 uplink-cddisknumber-desc = Call in a threat to distract the station... good luck playing the whole thing.

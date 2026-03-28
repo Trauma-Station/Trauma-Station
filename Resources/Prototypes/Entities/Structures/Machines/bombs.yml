@@ -180,8 +180,8 @@
 - type: entity
   parent: [BaseHardBomb, BaseSyndicateAnchoredContraband]
   id: SyndicateBomb
-  name: syndicate bomb
-  description: A bomb for Syndicate operatives and agents alike. The real deal, no more training, get to it!
+  name: tsar bomba
+  description: A bomb for XOF operatives and Soviet agents alike. The real deal, no more training, get to it!
   components:
     - type: Sprite
       sprite: Structures/Machines/bomb.rsi
