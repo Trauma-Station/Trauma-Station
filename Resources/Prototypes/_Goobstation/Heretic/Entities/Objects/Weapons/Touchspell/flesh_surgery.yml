@@ -43,6 +43,20 @@
     speed: 3
   - type: BoneSaw
     speed: 3
+  - type: TouchSpell
+    cooldown: 5
+    speech: heretic-speech-flesh-surgery
+    sound:
+      path: /Audio/Items/welder.ogg
+    bypassNullrod: true
+    targetWhitelist:
+      components:
+      - Ghoul
+  - type: MeleeWeapon
+    canHeavyAttack: false
+    damage:
+      types:
+        Heat: 0
   - type: FleshSurgery
     delay: 0.8 # Hand picked to not trigger health analyzer UI
   - type: SurgeryIgnoreClothing

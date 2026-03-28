@@ -58,6 +58,7 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundableComponent, BeforeDamageChangedEvent>(DudeItsJustLikeMatrix);
         SubscribeLocalEvent<WoundableComponent, WoundHealAttemptOnWoundableEvent>(HealWoundsOnWoundableAttempt);
         SubscribeLocalEvent<WoundableComponent, CheckPartBleedingEvent>(OnCheckPartBleeding);
+        SubscribeLocalEvent<WoundableComponent, CheckPartWoundedEvent>(OnCheckPartWounded);
         SubscribeLocalEvent<WoundableComponent, HealBleedingWoundsEvent>(OnHealBleedingWounds);
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<WoundableComponent, DamageSetEvent>(OnDamageSet);
@@ -208,6 +209,18 @@ public sealed partial class WoundSystem
             args.Cancelled = true;
     }
 
+    private void OnCheckPartWounded(Entity<WoundableComponent> ent, ref CheckPartWoundedEvent args)
+    {
+        foreach (var wound in GetWoundableWounds(ent, ent.Comp))
+        {
+            if (!args.DamageKeys.Contains(wound.Comp.DamageType))
+                continue;
+
+            args.Wounded = true;
+            return;
+        }
+    }
+
     private void OnCheckPartBleeding(Entity<WoundableComponent> ent, ref CheckPartBleedingEvent args)
     {
         foreach (var wound in GetWoundableWounds(ent, ent.Comp))
@@ -335,7 +348,8 @@ public sealed partial class WoundSystem
         string woundId,
         FixedPoint2 severity,
         [NotNullWhen(true)] out Entity<WoundComponent>? woundInduced,
-        WoundableComponent? woundable = null)
+        WoundableComponent? woundable = null,
+        ProtoId<DamageGroupPrototype>? damageGroup = null)
     {
         woundInduced = null;
         if (severity == FixedPoint2.Zero || !Resolve(uid, ref woundable))
@@ -344,16 +358,18 @@ public sealed partial class WoundSystem
         if (TryContinueWound(uid, woundId, severity, out woundInduced, woundable))
             return true;
 
-        var wound = TryCreateWound(
-            uid,
-            woundId,
-            severity,
-            out woundInduced,
+        var protoId = damageGroup?.Id ??
             (from @group in _prototype.EnumeratePrototypes<DamageGroupPrototype>()
                 where @group.DamageTypes.Contains(woundId)
-                select @group).FirstOrDefault()
-                ?.ID,
-            woundable);
+                select @group).FirstOrDefault()?.ID;
+
+        var wound = protoId != null && TryCreateWound(
+                uid,
+                woundId,
+                severity,
+                out woundInduced,
+                protoId,
+                woundable);
         return wound;
     }
 
@@ -419,11 +435,12 @@ public sealed partial class WoundSystem
             !Resolve(uid, ref woundable))
             return false;
 
-        var proto = _prototype.Index(id);
         foreach (var wound in GetWoundableWounds(uid, woundable))
         {
-            if (proto.ID != wound.Comp.DamageType
-                || wound.Comp.IsScar)
+            if (Prototype(wound)?.ID is not { } woundId)
+                continue;
+
+            if (id != woundId || wound.Comp.IsScar)
                 continue;
 
             ApplyWoundSeverity(wound, severity, wound);

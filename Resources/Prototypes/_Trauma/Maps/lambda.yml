@@ -66,6 +66,7 @@
           Janitor: [ 2, 3 ]
           Chaplain: [ 1, 1 ]
           Librarian: [ 1, 1 ]
+          Lawyer: [ 2, 2 ]
       - type: StationBlobConfig
         stageBegin: 40
         stageCritical: 450

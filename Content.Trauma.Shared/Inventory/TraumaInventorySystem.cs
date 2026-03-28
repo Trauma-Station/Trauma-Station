@@ -3,6 +3,7 @@
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Trauma.Shared.SecTrack;
+using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Tackle;
 
 namespace Content.Trauma.Shared.Inventory;
@@ -17,5 +18,6 @@ public sealed class TraumaInventorySystem : EntitySystem
 
         SubscribeLocalEvent<InventoryComponent, TackleEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, RefreshEquipmentHudEvent<ShowSquadIconsComponent>>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, CheckMagicItemEvent>(_inventory.RelayEvent);
     }
 }

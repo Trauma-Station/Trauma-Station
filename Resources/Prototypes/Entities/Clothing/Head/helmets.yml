@@ -315,7 +315,7 @@
 
 #Janitorial Bombsuit Helmet
 - type: entity
-  parent: ClothingHeadHelmetBombSuit
+  parent: [ ClothingHeadHelmetBombSuit, BaseJanitorContraband ] # Trauma - Made it contraband
   id: ClothingHeadHelmetJanitorBombSuit
   name: janitorial bombsuit helmet
   description: A heavy helmet designed to withstand explosions formed from reactions between chemicals.

@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Heretic;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -199,6 +202,13 @@ public sealed partial class AccessReaderSystem : EntitySystem // Trauma - made p
     {
         if (!Resolve(target, ref reader, false))
             return true;
+
+        // <Trauma>
+        var ev = new BeforeAccessReaderCheckEvent();
+        RaiseLocalEvent(user, ref ev);
+        if (ev.Cancelled)
+            return false;
+        // </Trauma>
 
         if (!reader.Enabled)
             return true;

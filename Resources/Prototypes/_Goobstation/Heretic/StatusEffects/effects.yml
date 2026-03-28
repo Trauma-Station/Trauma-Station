@@ -267,3 +267,38 @@
   - type: ForcedStealthStatusEffect
     visibility: 0.3
   - type: BlockHereticActionsStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: LockMarkedStatusEffect
+  name: lock marked
+  components:
+  - type: AccessDeniedStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: LastRefugeStatusEffect
+  name: caretaker's last refuge
+  components:
+  - type: HereticCloakedStatusEffect
+    loseFocusMessage: heretic-ability-lose-focus-last-refuge
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: LastRefuge
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: FuriousSteelStatusEffect
+  name: furious steel
+  components:
+  - type: AddProtectiveBladesStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: SilverMaelstromStatusEffect
+  name: silver maelstrom
+  components:
+  - type: AddProtectiveBladesStatusEffect
+    interval: 7.5
+    maxBlades: 5
+    refreshBlades: true

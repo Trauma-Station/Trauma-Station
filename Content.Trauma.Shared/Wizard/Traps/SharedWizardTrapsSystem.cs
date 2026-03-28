@@ -1,0 +1,325 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
+using System.Numerics;
+using Content.Goobstation.Common.Effects;
+using Content.Medical.Common.Targeting;
+using Content.Shared._Goobstation.Wizard;
+using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Electrocution;
+using Content.Shared.Examine;
+using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Ghost;
+using Content.Shared.Magic;
+using Content.Shared.Maps;
+using Content.Shared.Mind;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
+using Content.Shared.Popups;
+using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
+using Content.Shared.Traits.Assorted;
+using Content.Shared.Whitelist;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Player;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+
+namespace Content.Trauma.Shared.Wizard.Traps;
+
+public abstract class SharedWizardTrapsSystem : EntitySystem
+{
+    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SparksSystem _spark = default!;
+    [Dependency] private readonly SharedElectrocutionSystem _electrocution = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedMagicSystem _magic = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly EntityLookupSystem _look = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IMapManager _mapMan = default!;
+
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<WizardTrapComponent, ExamineAttemptEvent>(OnExamineAttempt);
+        SubscribeLocalEvent<WizardTrapComponent, ExaminedEvent>(OnExamine);
+        SubscribeLocalEvent<WizardTrapComponent, PreventCollideEvent>(OnPreventCollide);
+        SubscribeLocalEvent<WizardTrapComponent, StartCollideEvent>(OnStartCollide);
+
+        SubscribeLocalEvent<StunTrapComponent, TrapTriggeredEvent>(OnStunTriggered);
+        SubscribeLocalEvent<ChillTrapComponent, TrapTriggeredEvent>(OnChillTriggered);
+        SubscribeLocalEvent<BlindingTrapComponent, TrapTriggeredEvent>(OnBlindTriggered);
+        SubscribeLocalEvent<DamageTrapComponent, TrapTriggeredEvent>(OnDamageTriggered);
+
+        SubscribeLocalEvent<TrapsSpellEvent>(OnTraps);
+    }
+
+    private void OnTraps(TrapsSpellEvent ev)
+    {
+        if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
+            return;
+
+        if (ev.Traps.Count == 0)
+            return;
+
+        if (_net.IsClient)
+        {
+            ev.Handled = true;
+            return;
+        }
+
+        if (!_mind.TryGetMind(ev.Performer, out var mind, out _))
+            return;
+
+        var range = ev.Range;
+        var mapPos = _transform.GetMapCoordinates(ev.Performer);
+        var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
+        var circle = new Circle(mapPos.Position, range);
+        var grids = new List<Entity<MapGridComponent>>();
+        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+
+        bool IsTileValid((EntityCoordinates, TileRef) data)
+        {
+            var (coords, tile) = data;
+
+            if (_turf.IsSpace(tile))
+                return false;
+
+            var trapQuery = GetEntityQuery<WizardTrapComponent>();
+            var flags = LookupFlags.Static | LookupFlags.Sundries | LookupFlags.Sensors;
+            foreach (var (entity, fix) in _look.GetEntitiesInRange<FixturesComponent>(coords, 0.1f, flags))
+            {
+                if (fix.Fixtures.Any(x =>
+                        x.Value.Hard && (x.Value.CollisionLayer & (int) CollisionGroup.LowImpassable) != 0))
+                    return false;
+
+                if (trapQuery.HasComp(entity))
+                    return false;
+            }
+
+            return true;
+        }
+
+        var tiles = new List<(EntityCoordinates, TileRef)>();
+        foreach (var grid in grids)
+        {
+            tiles.AddRange(_map.GetTilesIntersecting(grid.Owner, grid.Comp, circle)
+                .Select(x => (_map.GridTileToLocal(grid.Owner, grid.Comp, x.GridIndices), x))
+                .Where(IsTileValid));
+        }
+
+        for (var i = 0; i < Math.Min(tiles.Count, ev.Amount); i++)
+        {
+            var (coords, _) = _random.PickAndTake(tiles);
+            var trap = Spawn(_random.Pick(ev.Traps), coords);
+            var trapComp = EnsureComp<WizardTrapComponent>(trap);
+            trapComp.IgnoredMinds.Add(mind);
+            Dirty(trap, trapComp);
+        }
+
+        ev.Handled = true;
+    }
+
+    private void OnDamageTriggered(Entity<DamageTrapComponent> ent, ref TrapTriggeredEvent args)
+    {
+        _damageable.TryChangeDamage(args.Victim, ent.Comp.Damage, true, targetPart: TargetBodyPart.Feet);
+        if (_net.IsServer && ent.Comp.SpawnedEntity is { } toSpawn)
+            Spawn(toSpawn, _transform.GetMapCoordinates(ent));
+    }
+
+    private void OnBlindTriggered(Entity<BlindingTrapComponent> ent, ref TrapTriggeredEvent args)
+    {
+        var (_, comp) = ent;
+
+        if (!TryComp(args.Victim, out StatusEffectsComponent? status))
+            return;
+
+        _status.TryAddStatusEffect<TemporaryBlindnessComponent>(args.Victim,
+            "TemporaryBlindness",
+            comp.BlindDuration,
+            true,
+            status);
+
+        _status.TryAddStatusEffect<BlurryVisionComponent>(args.Victim,
+            "BlurryVision",
+            comp.BlurDuration,
+            true,
+            status);
+    }
+
+    private void OnChillTriggered(Entity<ChillTrapComponent> ent, ref TrapTriggeredEvent args)
+    {
+        EnsureComp<IceCubeComponent>(args.Victim);
+    }
+
+    private void OnStunTriggered(Entity<StunTrapComponent> ent, ref TrapTriggeredEvent args)
+    {
+        var (uid, comp) = ent;
+        var victim = args.Victim;
+
+        _electrocution.TryDoElectrocution(victim, uid, comp.Damage, comp.StunTime, true, ignoreInsulation: true);
+    }
+
+    private void OnStartCollide(Entity<WizardTrapComponent> ent, ref StartCollideEvent args)
+    {
+        var (uid, comp) = ent;
+
+        if (comp.Triggered)
+            return;
+
+        if (_net.IsClient && _player.LocalEntity != args.OtherEntity)
+            return;
+
+        if (HasComp<GodmodeComponent>(args.OtherEntity) || HasComp<IceCubeComponent>(args.OtherEntity))
+            return;
+
+        if (IsEntityMindIgnored(args.OtherEntity, comp))
+            return;
+
+        if (!comp.Silent)
+        {
+            _popup.PopupClient(Loc.GetString("trap-triggered-message", ("trap", uid)),
+                args.OtherEntity,
+                PopupType.LargeCaution);
+        }
+
+        comp.Triggered = true;
+        comp.Charges--;
+        Dirty(ent);
+
+        if (HasComp<FadingTimedDespawnComponent>(uid))
+            return;
+
+        if (comp.StunTime > TimeSpan.Zero)
+            _stun.TryUpdateParalyzeDuration(args.OtherEntity, comp.StunTime);
+
+        RaiseLocalEvent(uid, new TrapTriggeredEvent(args.OtherEntity));
+
+        if (comp.Sparks)
+        {
+            _spark.DoSparks(Transform(uid).Coordinates,
+                comp.MinSparks,
+                comp.MaxSparks,
+                comp.MinVelocity,
+                comp.MaxVelocity,
+                comp.TriggerSound == null);
+        }
+
+        _audio.PlayPredicted(comp.TriggerSound, args.OtherEntity, args.OtherEntity);
+
+        if (_net.IsClient)
+            return;
+
+        if (comp.Effect != null)
+            Spawn(comp.Effect.Value, _transform.GetMapCoordinates(uid));
+
+        if (comp.Charges <= 0)
+        {
+            QueueDel(uid);
+            return;
+        }
+
+        Timer.Spawn(comp.TimeBetweenTriggers,
+            () =>
+            {
+                if (!TryComp(uid, out WizardTrapComponent? trap))
+                    return;
+
+                trap.Triggered = false;
+                Dirty(uid, trap);
+            });
+    }
+
+    private void OnPreventCollide(Entity<WizardTrapComponent> ent, ref PreventCollideEvent args)
+    {
+        if (IsEntityMindIgnored(args.OtherEntity, ent.Comp))
+            args.Cancelled = true;
+    }
+
+    private void OnExamine(Entity<WizardTrapComponent> ent, ref ExaminedEvent args)
+    {
+        var (uid, comp) = ent;
+
+        if (!comp.CanReveal)
+            return;
+
+        if (TerminatingOrDeleted(uid))
+            return;
+
+        if (HasComp<FadingTimedDespawnComponent>(uid))
+            return;
+
+        if (IsEntityMindIgnored(args.Examiner, comp))
+            return;
+
+        if (!_transform.InRange(uid, args.Examiner, comp.ExamineRange))
+            return;
+
+        _popup.PopupClient(Loc.GetString("trap-revealed-message", ("trap", uid)), args.Examiner, PopupType.Medium);
+        if (_net.IsServer)
+            _popup.PopupEntity(Loc.GetString("trap-flare-message", ("trap", uid)), uid, PopupType.MediumCaution);
+
+        Appearance.SetData(uid, TrapVisuals.Alpha, 0.8f);
+
+        var fading = EnsureComp<FadingTimedDespawnComponent>(uid);
+        fading.Lifetime = 0.5f;
+        fading.FadeOutTime = 1f;
+        Dirty(uid, fading);
+    }
+
+    private void OnExamineAttempt(Entity<WizardTrapComponent> ent, ref ExamineAttemptEvent args)
+    {
+        var (uid, comp) = ent;
+
+        if (TerminatingOrDeleted(uid))
+            return;
+
+        if (IsEntityMindIgnored(args.Examiner, comp))
+            return;
+
+        if (!comp.CanReveal ||
+            HasComp<TemporaryBlindnessComponent>(args.Examiner) ||
+            HasComp<PermanentBlindnessComponent>(args.Examiner) ||
+            !_transform.InRange(uid, args.Examiner, comp.ExamineRange))
+            args.Cancel();
+    }
+
+    private bool IsEntityMindIgnored(EntityUid user, WizardTrapComponent trap)
+    {
+        if (HasComp<GhostComponent>(user) || HasComp<SpectralComponent>(user) || !HasComp<MobStateComponent>(user))
+            return true;
+
+        if (trap.TargetedEntityWhitelist != null && !_whitelist.IsWhitelistPass(trap.TargetedEntityWhitelist, user))
+            return true;
+
+        if (_whitelist.IsWhitelistPass(trap.IgnoredEntityWhitelist, user))
+            return true;
+
+        return _mind.TryGetMind(user, out var mind, out _) && trap.IgnoredMinds.Contains(mind);
+    }
+}
+
+public sealed class TrapTriggeredEvent(EntityUid victim) : EntityEventArgs
+{
+    public EntityUid Victim = victim;
+}

@@ -92,6 +92,12 @@ public sealed partial class HealingSystem
         if (AnyHealable((part, damageable), healing.Damage))
             return true;
 
+        // see if there are any wounds to heal
+        var ev2 = new CheckPartWoundedEvent(healing.Damage.DamageDict.Keys.Select(x => x.Id).ToList());
+        RaiseLocalEvent(part, ref ev2);
+        if (ev2.Wounded)
+            return true;
+
         if (healing.BloodlossModifier == 0)
             return false;
 

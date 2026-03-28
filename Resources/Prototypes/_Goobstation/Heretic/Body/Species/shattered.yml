@@ -84,8 +84,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      150: Critical
-      251: Dead
+      250: Critical
+      260: Dead
   - type: ShatteredRisen
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
@@ -212,6 +212,12 @@
         volume: -8
   - type: Insulated
   - type: FlashImmunity
+  - type: FlashSoundSuppression
+    protectionRange: 0
+  - type: CollectiveMind
+    defaultChannel: MansusLink
+    channels:
+    - MansusLink
 
 ## Base
 

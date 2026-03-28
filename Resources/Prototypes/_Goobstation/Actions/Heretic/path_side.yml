@@ -15,7 +15,6 @@
   components:
   - type: Action
     checkCanInteract: false
-    checkConsciousness: false
     useDelay: 10
     itemIconStyle: NoItem
     icon:

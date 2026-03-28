@@ -1,6 +1,9 @@
 # Trauma - only up to date maps are in the default pool
 - type: gameMapPool
   id: DefaultMapPool
+  requiredAreas:
+  - AreaKitchen # for chef CQC
+  - AreaMaints # for ambience and maints spawn rules
   maps:
   #- Atlas
   #- Amber

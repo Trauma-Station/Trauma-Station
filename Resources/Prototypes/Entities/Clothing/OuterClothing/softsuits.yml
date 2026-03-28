@@ -111,7 +111,7 @@
 #Paramedic Voidsuit
 #Despite having resistances and looking like a hardsuit, this parents off the EVA suit so it goes here.
 - type: entity
-  parent: [ ClothingOuterEVASuitBase, ClothingOuterBaseToggleable ]
+  parent: [ ClothingOuterEVASuitBase, ClothingOuterBaseToggleable, BaseMedicalContraband ] # Trauma - Made it contraband
   id: ClothingOuterHardsuitVoidParamed
   name: paramedic hardsuit # Goob edit - it has high pressure protection and resistances, call it a hardsuit
   description: A hardsuit made for paramedics. # Goob edit
