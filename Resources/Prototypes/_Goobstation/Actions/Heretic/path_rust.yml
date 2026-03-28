@@ -95,6 +95,16 @@
     requireMagicItem: false
 
 - type: entity
+  parent: ActionHereticRustCharge
+  id: ActionHereticRustChargeShort
+  components:
+  - type: Action
+    useDelay: 10
+  - type: WorldTargetAction
+    event: !type:EventHereticRustCharge
+      distance: 3
+
+- type: entity
   parent: BaseAction
   id: ActionHereticRustWave
   name: Patron's Reach

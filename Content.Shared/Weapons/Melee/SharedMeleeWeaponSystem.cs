@@ -1,10 +1,10 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Parry;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Physics.Components;

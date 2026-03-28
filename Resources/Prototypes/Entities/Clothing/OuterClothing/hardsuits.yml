@@ -585,7 +585,7 @@
 
 #Luxury Mining Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ ClothingOuterHardsuitBase, BaseCargoContraband ] # Trauma - Made it contraband
   id: ClothingOuterHardsuitLuxury #DO NOT MAP - https://github.com/space-wizards/space-station-14/pull/19738#issuecomment-1703486738
   name: luxury mining hardsuit # Goob edit
   description: A refurbished mining hardsuit, fashioned after the Quartermaster's colors. Graphene lining provides less protection, but is much easier to move. # Goob edit
@@ -1217,7 +1217,7 @@
 #MISC. HARDSUITS
 #Clown Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ ClothingOuterHardsuitBase, BaseHonkraband ] # Trauma - Made it contraband
   id: ClothingOuterHardsuitClown
   name: clown hardsuit # Goob edit
   description: A custom-made clown hardsuit. # Goob edit

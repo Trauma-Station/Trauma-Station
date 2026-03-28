@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Random;
 using Content.Trauma.Common.Botany;
 using Content.Trauma.Shared.Botany.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Botany.PlantAnalyzer;
@@ -11,16 +13,16 @@ namespace Content.Trauma.Shared.Botany.PlantAnalyzer;
 ///     The information about the last scanned plant/seed is stored here.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerScannedSeedPlantInformation : BoundUserInterfaceState //Funkystation - Swapped to set BoundUserInterfaceState instead of BoundUserInterfaceMessage
+public sealed class PlantAnalyzerScannedSeedPlantInformation : BoundUserInterfaceState
 {
     public NetEntity? TargetEntity;
     public bool IsTray;
 
     public string? SeedName;
-    public string[]? SeedChem;
+    public ProtoId<ReagentPrototype>[]? SeedChem;
     public HarvestType HarvestType;
-    public string[]? ExudeGases; //Funkystation - Swapped to string
-    public string[]? ConsumeGases; //Funkystation - Swapped to string
+    public string[]? ExudeGases;
+    public string[]? ConsumeGases;
     public float Endurance;
     public int SeedYield;
     public float Lifespan;
