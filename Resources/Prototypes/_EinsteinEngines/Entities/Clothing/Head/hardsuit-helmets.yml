@@ -18,13 +18,9 @@
   - type: PressureProtection
     highPressureMultiplier: 0.50
     lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
   - type: Armor
-    coverage:
-    - Torso
-    - Arm
-    - Hand
-    - Leg
-    - Foot
     modifiers:
       coefficients:
         Blunt: 0.70
@@ -33,7 +29,7 @@
         Heat: 0.70
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: ClothingHeadHelmetHardsuitCombatStandard
   id: ClothingHeadHelmetHardsuitCombatOfficer
   name: security combat hardsuit helmet
   components:
@@ -42,9 +38,9 @@
   - type: Clothing
     sprite: _DV/Clothing/Head/Hardsuits/Combat/officer.rsi
 
-# Medical Combat Hardsuits
+# Medical Combat Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: ClothingHeadHelmetHardsuitCombatStandard
   id: ClothingHeadHelmetHardsuitCombatMedical
   name: medical combat hardsuit helmet
   description: A lightweight armoured helmet with full-face blue visor and head-mounted light.
@@ -57,14 +53,9 @@
     color: "#00FFFF"
   - type: PressureProtection
     highPressureMultiplier: 0.60
-    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.60
   - type: Armor
-    coverage:
-    - Torso
-    - Arm
-    - Hand
-    - Leg
-    - Foot
     modifiers:
       coefficients:
         Blunt: 0.85
@@ -74,7 +65,7 @@
 
 # Riot Combat Hardsuits
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: ClothingHeadHelmetHardsuitCombatStandard
   id: ClothingHeadHelmetHardsuitCombatRiot
   name: riot combat hardsuit helmet
   description: A heavy armoured helmet with a sealed visor with yellow slits and dual head-mounted lights.
@@ -83,18 +74,11 @@
     sprite: _DV/Clothing/Head/Hardsuits/Combat/riot.rsi
   - type: Clothing
     sprite: _DV/Clothing/Head/Hardsuits/Combat/riot.rsi
-  - type: PointLight
-    color: "#ffeead"
   - type: PressureProtection
     highPressureMultiplier: 0.45
-    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.40
   - type: Armor
-    coverage:
-    - Torso
-    - Arm
-    - Hand
-    - Leg
-    - Foot
     modifiers:
       coefficients:
         Blunt: 0.65

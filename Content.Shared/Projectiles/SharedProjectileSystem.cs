@@ -118,10 +118,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             _transform.SetLocalPosition(uid, xform.LocalPosition + rotation.RotateVec(component.Offset), xform);
         }
 
-        // <Trauma> - for projectiles use PlayLocal since clients predict their physics
-        if (user == null && _net.IsServer)
-            _audio.PlayPvs(component.Sound, uid);
-        else if (_timing.IsFirstTimePredicted)
+        // <Trauma> - use PlayLocal for predicted embedding
+        if (_timing.IsFirstTimePredicted)
             _audio.PlayLocal(component.Sound, uid, null);
         // </Trauma>
         component.EmbeddedIntoUid = target;
@@ -131,8 +129,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         EnsureComp<EmbeddedContainerComponent>(target, out var embeddedContainer);
 
-        // <Trauma> - just warn instead of assert and have a useful message
-        if (embeddedContainer.EmbeddedObjects.Contains(uid))
+        // <Trauma> - just warn instead of assert and have a useful message, only matters for non-prediction ticks
+        if (embeddedContainer.EmbeddedObjects.Contains(uid) && _timing.IsFirstTimePredicted)
             Log.Warning($"Entity {ToPrettyString(uid)} was not supposed to be embedded into {ToPrettyString(target)}!");
         // </Trauma>
 

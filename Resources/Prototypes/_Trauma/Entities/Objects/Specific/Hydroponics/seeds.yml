@@ -1,12 +1,13 @@
 - type: entity
   parent: SeedBase
-  id: CombustibleLemonSeeds
-  name: packet of combustible lemon seeds
+  id: LemonadeSeeds
+  name: packet of lemonade seeds
+  description: Not to be confused with the drink.
   components:
   - type: Seed
-    seedId: CombustibleLemon
+    seedId: Lemonade
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Hydroponics/combustible_lemon.rsi
+    sprite: _Trauma/Objects/Specific/Hydroponics/lemonade.rsi
 
 - type: entity
   parent: SeedBase

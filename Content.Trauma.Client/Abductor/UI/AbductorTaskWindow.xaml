@@ -1,0 +1,38 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Title="{Loc 'abductor-task-window-title'}"
+        SetSize="900 500"
+        Stylesheet="Alien">
+    <BoxContainer Name="LinkContainer" Align="Center">
+        <Label Name="LinkLabel" Text="{Loc 'abductor-task-window-link'}" Align="Center" HorizontalExpand="True" VerticalExpand="True"/>
+    </BoxContainer>
+    <BoxContainer Name="ScanContainer" Orientation="Vertical" Align="Center" Visible="False">
+        <controls:StripeBack Margin="4" MaxWidth="260">
+            <Button Name="ScanButton" Text="{Loc 'abductor-task-window-scan'}" MaxWidth="240" Margin="4"/>
+        </controls:StripeBack>
+    </BoxContainer>
+    <BoxContainer Name="ScannedContainer" Orientation="Horizontal" Visible="False">
+		<BoxContainer Orientation="Vertical" HorizontalExpand="True">
+    		<ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+		        <BoxContainer Name="TasksContainer" Orientation="Vertical"/>
+	        </ScrollContainer>
+	        <controls:HLine Margin="4 8" Thickness="1"/>
+	        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Align="Center">
+	        	<Label Name="Ayylmao" Text="👽" Align="Right" Margin="4"/>
+		        <Label Text="{Loc 'abductor-task-window-footer'}" Align="Left" Margin="12"/>
+	        </BoxContainer>
+		</BoxContainer>
+    	<PanelContainer Margin="8">
+	        <BoxContainer Orientation="Vertical" Margin="8">
+	            <Label Name="SubjectName"/>
+	            <Label Name="SubjectSpecies"/>
+	            <SpriteView Name="SpriteView" MinSize="128 128" Scale="4 4"/>
+	            <Label Text="{Loc 'abductor-task-window-inferior'}" Margin="30"/>
+	        </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</controls:FancyWindow>

@@ -13,3 +13,19 @@
   components:
   - type: Contraband
     severity: RevMajor
+
+- type: entity
+  id: BaseChefContraband
+  parent: BaseRestrictedContraband
+  abstract: true
+  components:
+  - type: Contraband
+    allowedJobs: [ Chef, ServiceWorker, Bartender ]
+
+- type: entity
+  id: BaseSecurityScienceContraband
+  parent: BaseRestrictedContraband
+  abstract: true
+  components:
+  - type: Contraband
+    allowedDepartments: [ Security, Science ]

@@ -1,71 +1,49 @@
 - type: construction
+  abstract: true
+  id: BaseAutomationFilter
+  graph: AutomationFilter
+  category: construction-category-misc
+  objectType: Item
+  theory:
+    ElectronicsKnowledge: 1
+  useQuality: false
+
+- type: construction
+  parent: BaseAutomationFilter
   id: AutomationFilterLabel
-  graph: AutomationFilter
   targetNode: label
-  category: construction-category-misc
-  objectType: Item
-  theory:
-    ElectronicsKnowledge: 1
 
 - type: construction
+  parent: BaseAutomationFilter
   id: AutomationFilterName
-  graph: AutomationFilter
   targetNode: name
-  category: construction-category-misc
-  objectType: Item
-  theory:
-    ElectronicsKnowledge: 1
 
 - type: construction
+  parent: BaseAutomationFilter
   id: AutomationFilterStack
-  graph: AutomationFilter
   targetNode: stack
-  category: construction-category-misc
-  objectType: Item
-  theory:
-    ElectronicsKnowledge: 1
 
 - type: construction
+  parent: BaseAutomationFilter
   id: AutomationFilterPressure
-  graph: AutomationFilter
   targetNode: pressure
-  category: construction-category-misc
-  objectType: Item
-  theory:
-    ElectronicsKnowledge: 1
 
 - type: construction
+  parent: BaseAutomationFilter
   id: AutomationFilterCombined
-  graph: AutomationFilter
   targetNode: combined
-  category: construction-category-misc
-  objectType: Item
-  theory:
-    ElectronicsKnowledge: 1
 
 - type: construction
+  parent: BaseAutomationFilter
   id: AutomationFilterAnchor
-  graph: AutomationFilter
   targetNode: anchor
-  category: construction-category-misc
-  objectType: Item
-  theory:
-    ElectronicsKnowledge: 1
 
 - type: construction
+  parent: BaseAutomationFilter
   id: AutomationFilterMob
-  graph: AutomationFilter
   targetNode: mob
-  category: construction-category-misc
-  objectType: Item
-  theory:
-    ElectronicsKnowledge: 1
 
 - type: construction
+  parent: BaseAutomationFilter
   id: AutomationFilterCuff
-  graph: AutomationFilter
   targetNode: cuff
-  category: construction-category-misc
-  objectType: Item
-  theory:
-    ElectronicsKnowledge: 1

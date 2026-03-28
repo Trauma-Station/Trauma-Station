@@ -5,7 +5,7 @@
   name: Sacrifice
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
     state: heart-on
   - type: HereticRitual
@@ -53,7 +53,7 @@
   name: Amber Focus
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/amber_focus.rsi
     state: icon
   - type: HereticRitual
@@ -91,7 +91,7 @@
   name: Relentless Heartbeat
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: living_heart
   - type: HereticRitual
@@ -135,7 +135,7 @@
   name: Codex Cicatrix
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/book.rsi
     state: icon-on
   - type: HereticRitual
@@ -179,7 +179,7 @@
   name: Feast of Owls
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: god_transmit
   - type: HereticRitual
@@ -202,7 +202,7 @@
   name: Nightwatcher's Secret
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_ash.rsi
     state: icon
   - type: HereticRitual
@@ -258,7 +258,7 @@
   name: Mask of Madness
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/mad_mask.rsi
     state: icon
   - type: HereticRitual
@@ -308,7 +308,7 @@
   name: Ashlord's Rite
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: ashlord_rite2
   - type: HereticRitual
@@ -365,7 +365,7 @@
   name: Cutting Edge
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_blade.rsi
     state: icon
   - type: HereticRitual
@@ -421,7 +421,7 @@
   name: Maelstrom of Silver
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: protective_blade
   - type: HereticRitual
@@ -480,7 +480,7 @@
   name: Principle of Hunger
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_flesh.rsi
     state: icon
   - type: HereticRitual
@@ -550,7 +550,7 @@
   name: Imperfect Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: Mobs/Species/Skeleton/parts.rsi
     state: full
   - type: HereticRitual
@@ -596,11 +596,10 @@
       applyOn: Delete
       effects:
       - !type:Delete
-    - !type:GhoulifyEffect
-      applyOn: Result
     - !type:EffectsRitualEffect
       applyOn: Result
       effects:
+      - !type:GhoulifyEffect
       - !type:AddComponents
         components:
         - type: Muted
@@ -662,7 +661,7 @@
   name: Raw Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: raw_prophet
   - type: HereticRitual
@@ -719,7 +718,7 @@
   name: Lonely Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: stalker
   - type: HereticRitual
@@ -783,7 +782,7 @@
   name: Priest’s Final Hymn
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: final_hymn
   - type: HereticRitual
@@ -839,7 +838,7 @@
   name: Glimmer of Winter
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_void.rsi
     state: icon
   - type: HereticRitual
@@ -896,7 +895,7 @@
   name: Waltz at the End of Time
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: Interface/Alerts/temperature.rsi
     state: cold3
   - type: HereticRitual
@@ -957,7 +956,7 @@
   name: Blacksmith's Tale
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_rust.rsi
     state: icon
   - type: HereticRitual
@@ -1013,7 +1012,7 @@
   name: Rustbringer's Oath
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: ascension_rust
   - type: HereticRitual
@@ -1078,7 +1077,7 @@
   name: Eternal Gate
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_cosmos.rsi
     state: icon
   - type: HereticRitual
@@ -1129,13 +1128,12 @@
         from: 0
         to: 3
 
-
 - type: entity
   id: RitualAscensionCosmos
   name: Creators's Gift
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: stargazer
   - type: HereticRitual
@@ -1188,13 +1186,233 @@
     tags:
     - RitualAscension
 
+### lock path
+- type: entity
+  id: RitualBladeLock
+  name: A Steward's Secret
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Blades/blade_lock.rsi
+    state: icon
+  - type: HereticRitual
+    limit: 2
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+        - whitelist:
+            tags:
+            - Crowbar
+          name: heretic-ritual-ingredient-crowbar
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        HereticBladeLock: 1
+    limitReachedEffects:
+    - !type:FindLostLimitedOutputEffect
+      applyOn: Platform
+      result: Lost
+      minRange: 3.5
+    - !type:TeleportToRuneEffect
+      applyOn: Result
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Lost
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-lost-blades
+      - !type:TryApplyEffectSequenceCondition
+        from: 0
+        to: 3
+
+- type: entity
+  id: RitualEldritchId
+  name: Key Keeper's Burden
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    state: gold
+  - type: HereticRitual
+    cancelLoc: heretic-ritual-fail-no-id-card
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Targets
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - IdCard
+        blacklist:
+          components:
+          - EldritchIdCard
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - RodMetal
+          name: heretic-ritual-ingredient-metal-rod
+        - whitelist:
+            components:
+            - Door
+          name: heretic-ritual-ingredient-door
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Targets
+        result: Result
+        min: 1
+        max: 1
+        cancelLoc: heretic-ritual-fail-no-id-card
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Result
+      effects:
+      - !type:AddComponents
+        components:
+        - type: EldritchIdCard
+
+- type: entity
+  id: RitualConcierge
+  name: Concierge's Rite
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/heretichandbook.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - Crayon
+          name: heretic-ritual-ingredient-crayon
+        - whitelist:
+            tags:
+            - WoodPlank
+          name: heretic-ritual-ingredient-wood-plank
+        - whitelist:
+            tags:
+            - Multitool
+          name: heretic-ritual-ingredient-multitool
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        LabyrinthHandbook: 1
+
+- type: entity
+  id: RitualAscensionLock
+  name: Unlock the Labyrinth
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/abilities_heretic.rsi
+    state: labyrinth
+  - type: HereticRitual
+    cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+      conditions:
+      - !type:CanAscendCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend
+      - !type:ObjectivesCompleteCondition
+        applyOn: Mind
+        cancelLoc: heretic-ritual-fail-cannot-ascend-objectives
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Eligible
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - HumanoidProfile
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      - !type:HasOrgan
+        organCategory: Heart
+        inverted: true
+    - !type:SacrificeEffect
+      applyOn: Targets
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Eligible
+        result: Targets
+        min: 3
+        max: 3
+        cancelLoc: heretic-ritual-fail-sacrifice-lock
+    - !type:EffectsRitualEffect
+      applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:EventHereticAscension
+        - !type:EventHereticUpdateTargets
+        - !type:EventHereticAddKnowledge
+          knowledge:
+          - UnlockTheLabyrinth
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        LabyrinthTear: 1
+  - type: Tag
+    tags:
+    - RitualAscension
+
 ### side knowledge
 - type: entity
   id: RitualKnowledge
   name: Ritual of Knowledge
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/book.rsi
     state: icon
   - type: HereticRitual
@@ -1228,7 +1446,7 @@
   name: Armorer's Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/eldritch_armor.rsi
     state: icon
   - type: HereticRitual
@@ -1272,7 +1490,7 @@
   name: Priest's Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: eldritch_flask
   - type: HereticRitual
@@ -1310,7 +1528,7 @@
   name: Ashen Eyes
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_medalion.rsi
     state: icon
   - type: HereticRitual
@@ -1352,7 +1570,7 @@
   name: Void Cloak
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi
     state: icon
   - type: HereticRitual
@@ -1394,7 +1612,7 @@
   name: Scorching Shark
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: fire_shark_icon
   - type: HereticRitual
@@ -1439,7 +1657,7 @@
   name: Phylactery of Damnation
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Entities/phylactery.rsi
     state: icon
   - type: HereticRitual
@@ -1491,7 +1709,7 @@
   name: Ether of the Newborn
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Entities/Potions/ether.rsi
     state: icon
   - type: HereticRitual
@@ -1546,7 +1764,7 @@
   name: Rusted Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: rust_walker
   - type: HereticRitual
@@ -1606,7 +1824,7 @@
   name: Carving Knife
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: rune_carver
   - type: HereticRitual
@@ -1648,7 +1866,7 @@
   name: Codex Morbus
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/book_morbus.rsi
     state: icon-on
   - type: HereticRitual
@@ -1702,7 +1920,7 @@
   name: Greaves of the Prophet
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/Shoes/greaves.rsi
     state: icon
   - type: HereticRitual
@@ -1754,7 +1972,7 @@
   name: Shattered Ritual
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
     state: ghoul_shattered
   - type: HereticRitual
@@ -1817,20 +2035,22 @@
     - !type:AddToLimitRitualEffect
       applyOn: Polymorphed
       result: Ghoul
-    - !type:GhoulifyEffect
+    - !type:EffectsRitualEffect
       applyOn: Ghoul
-      giveBlade: false
-      health: 250
-      changeAppearance: false
-      deathBehavior: GibOrgans
-      canDeconvert: false
+      effects:
+      - !type:GhoulifyEffect
+        giveBlade: false
+        health: 250
+        changeAppearance: false
+        deathBehavior: GibOrgans
+        canDeconvert: false
 
 - type: entity
   id: RitualMawedCrucible
   name: Mawed Crucible
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
     state: crucible
   - type: HereticRitual
@@ -1868,7 +2088,7 @@
   name: Through the Boundary
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/Entities/sword.rsi
     state: icon
   - type: HereticRitual
@@ -1914,7 +2134,7 @@
   name: Maid in the Mirror
   categories: [ HideSpawnMenu ]
   components:
-  - type: Icon
+  - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: maid
   - type: HereticRitual
