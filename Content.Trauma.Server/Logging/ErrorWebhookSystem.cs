@@ -116,7 +116,9 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
         var name = LogMessage.LogLevelToName(message.Level.ToRobust());
         var content = $"{DateTime.Now:o} [{name}] {sawmillName}: {text}";
         if (message.Exception is {} e)
-            content += $"\n```\n{e.ToString().Replace(StackTracePrefix, string.Empty)}\n```";
+            content += $"\n{e.ToString().Replace(StackTracePrefix, string.Empty)}\n";
+
+        content = $"```{content}```";
 
         // trim the end of the stack trace if its too long, usually not important
         if (content.Length > 2000)
