@@ -22,7 +22,7 @@
       shoes: ClothingModsuitBootsResponsoryJanitorial
 
 - type: entity
-  parent: [ BaseModsuitGauntletsErt, BaseModsuitPieceERTJanitor ]
+  parent: [ BaseModsuitGauntletsERT, BaseModsuitPieceERTJanitor ]
   id: ClothingModsuitGauntletsResponsoryJanitorial
   name: Janitorial Responsory modsuit gauntlets
   description: A pair of gauntlets made for the Janitorial Responsory modsuit.
