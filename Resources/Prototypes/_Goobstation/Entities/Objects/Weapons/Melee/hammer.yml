@@ -10,7 +10,7 @@
 
 - type: entity
   name: hammer
-  parent: BaseItem
+  parent: [BaseItem, ForgeToolDurability]
   id: MeleeHammer
   description: 3 steel 2 wood
   components:

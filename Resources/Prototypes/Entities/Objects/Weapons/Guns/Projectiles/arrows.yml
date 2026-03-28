@@ -188,7 +188,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 5
+        damage: 3
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -245,7 +245,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 5
+        damage: 3
       behaviors:
       - !type:PlaySoundBehavior
         sound:

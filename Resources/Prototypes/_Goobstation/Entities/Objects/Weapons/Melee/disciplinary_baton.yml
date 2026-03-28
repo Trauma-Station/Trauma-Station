@@ -1,6 +1,6 @@
 - type: entity
   id: TelescopicBatonAdvanced
-  parent: [TelescopicBaton, BaseCentcommContraband]
+  parent: [TelescopicBaton, BaseCentcommContraband, BracingDurability]
   name: disciplinary baton
   description: A compact and slightly harmful personal defense weapon, designed to discipline shoddy workers. Sturdy enough to knock the feet out from under attackers.
   components:

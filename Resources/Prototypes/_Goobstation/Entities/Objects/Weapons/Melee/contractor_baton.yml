@@ -10,7 +10,7 @@
 
 - type: entity
   id: ContractorBaton
-  parent: [BaseSyndicateContraband, TelescopicBaton]
+  parent: [BaseSyndicateContraband, TelescopicBaton, BracingDurability]
   name: contractor baton
   description: A compact, specialised baton assigned to Syndicate contractors. Applies light electrical shocks to targets.
   components:
