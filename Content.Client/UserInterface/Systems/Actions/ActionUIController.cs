@@ -4,6 +4,7 @@ using Content.Shared._Goobstation.Wizard.Components;
 using Content.Shared._Goobstation.Wizard.SpellCards;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -22,7 +23,6 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Input;
-using Content.Trauma.Common.Heretic;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
