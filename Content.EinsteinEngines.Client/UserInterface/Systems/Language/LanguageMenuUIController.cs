@@ -1,20 +1,13 @@
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 FoxxoTrystan <45297731+FoxxoTrystan@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Client.Player;
-using System.Numerics;
 using Content.Client.Gameplay;
-using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.EinsteinEngines.Client.Language;
-using Content.Shared.Input;
 using Content.Trauma.Common.Input;
 using JetBrains.Annotations;
+using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
@@ -23,12 +16,11 @@ using Robust.Shared.Utility;
 
 namespace Content.EinsteinEngines.Client.UserInterface.Systems.Language;
 
+[UsedImplicitly]
 public sealed class LanguageMenuUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IResourceCache _cache = default!;
-
-    public const string ButtonName = "LanguageButton";
 
     private LanguageMenuWindow? _menu;
     private MenuButton? _button;
@@ -38,46 +30,36 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
         base.Initialize();
 
         GameTopMenuBarUIController.OnLoad += OnLoadGameBar;
+        GameTopMenuBarUIController.OnUnload += OnUnloadGameBar;
     }
+
     private void OnLoadGameBar(GameTopMenuBar bar)
     {
-        EnsureButton(bar);
+        _button = bar.LanguageButton;
+
+        LoadButton();
     }
 
-    private MenuButton? EnsureButton(GameTopMenuBar bar)
+    private void OnUnloadGameBar(GameTopMenuBar bar)
     {
-        // first try find it
-        foreach (var child in bar.Children)
-        {
-            if (child.Name == ButtonName)
-                return (MenuButton) child;
-        }
+        UnloadButton();
+        _button = null;
+    }
 
-        // insert at the same index as admin button (so before it)
-        var index = bar.AdminButton.GetPositionInParent();
+    public void LoadButton()
+    {
+        if (_button is not { })
+            return;
 
-        // add a new button for the first time it's loaded
-        var button = new MenuButton()
-        {
-            Name = ButtonName,
-            Icon = _cache.GetResource<TextureResource>(new ResPath("/Textures/Interface/emotes.svg.192dpi.png")).Texture,
-            ToolTip = Loc.GetString("game-hud-open-martial-arts-menu-button-tooltip"),
-            BoundKey = EinsteinEnginesKeyFunctions.OpenLanguageMenu,
-            MinSize = new Vector2(42, 64),
-            HorizontalExpand = true,
-        };
-        button.AddStyleClass(StyleClass.ButtonSquare);
-        button.Pressed = _menu != null;
-        button.OnPressed += _ => ToggleMartialArtsMenu(false); // not centered on mouse since it's at the top of your screen rn
+        _button.OnPressed += LanguageButtonPressed;
+    }
 
-        bar.AddChild(button);
-        button.SetPositionInParent(index);
+    public void UnloadButton()
+    {
+        if (_button is not { })
+            return;
 
-        return _button = button;
-
-
-        CommandBinds.Builder.Bind(ContentKeyFunctions.OpenLanguageMenu,
-            InputCmdHandler.FromDelegate(_ => ToggleWindow())).Register<LanguageMenuUIController>();
+        _button.OnPressed -= LanguageButtonPressed;
     }
 
     public void OnStateEntered(GameplayState state)
@@ -98,8 +80,10 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
                 _button.Pressed = true;
         };
 
-        CommandBinds.Builder.Bind(ContentKeyFunctions.OpenLanguageMenu,
-            InputCmdHandler.FromDelegate(_ => ToggleWindow())).Register<LanguageMenuUIController>();
+        CommandBinds.Builder
+            .Bind(TraumaKeyFunctions.OpenLanguageMenu,
+                InputCmdHandler.FromDelegate(_ => ToggleWindow()))
+            .Register<LanguageMenuUIController>();
     }
 
     public void OnStateExited(GameplayState state)
@@ -113,23 +97,7 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
         CommandBinds.Unregister<LanguageMenuUIController>();
     }
 
-    public void UnloadButton()
-    {
-        if (_button is not { })
-            return;
-
-        _button.OnPressed -= LanguageButtonPressed;
-    }
-
-    public void LoadButton()
-    {
-        if (_button is not { })
-            return;
-
-        _button.OnPressed += LanguageButtonPressed;
-    }
-
-    private void LanguageButtonPressed(ButtonEventArgs args)
+    private void LanguageButtonPressed(BaseButton.ButtonEventArgs args)
     {
         ToggleWindow();
     }

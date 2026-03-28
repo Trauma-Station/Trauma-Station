@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.RMC14.Client.LinkAccount;
+using Content.Shitcode.Common.LinkAccount;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Robust.Shared;
 // </Trauma>
@@ -24,6 +24,10 @@ namespace Content.Client.UserInterface.Systems.EscapeMenu;
 [UsedImplicitly]
 public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
+    // <Trauma>
+    [Dependency] private readonly ILinkAccountManager _linkAccount = default!; // RMC - Patreon
+    private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.EscapeButton; // RMC - Patreon
+    // </Trauma>
     [Dependency] private readonly IClientConsoleHost _console = default!;
     [Dependency] private readonly IUriOpener _uri = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
@@ -31,12 +35,9 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
     [Dependency] private readonly InfoUIController _info = default!;
     [Dependency] private readonly OptionsUIController _options = default!;
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
     [Dependency] private readonly FeedbackPopupUIController _feedback = null!;
 
     private Options.UI.EscapeMenu? _escapeWindow;
-
-    private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.EscapeButton; // RMC - Patreon
 
     public override void Initialize()  // RMC - Patreon
     {

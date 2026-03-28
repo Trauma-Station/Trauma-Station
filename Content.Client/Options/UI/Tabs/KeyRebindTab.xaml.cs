@@ -244,7 +244,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.OpenCraftingMenu);
             AddButton(ContentKeyFunctions.OpenGuidebook);
             AddButton(ContentKeyFunctions.OpenInventoryMenu);
-            AddButton(EinsteinEnginesKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
+            AddButton(TraumaKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
             AddButton(ContentKeyFunctions.OpenAHelp);
             AddButton(ContentKeyFunctions.OpenActionsMenu);
             AddButton(ContentKeyFunctions.OpenEmotesMenu);

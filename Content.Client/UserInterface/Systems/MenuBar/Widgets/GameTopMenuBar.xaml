@@ -79,7 +79,7 @@
         Name="LanguageButton"
         Access="Internal"
         Icon="{xe:Tex '/Textures/_EinsteinEngines/Interface/language.png'}"
-        BoundKey = "{x:Static is:EinsteinEnginesKeyFunctions.OpenLanguageMenu}"
+        BoundKey = "{x:Static is:TraumaKeyFunctions.OpenLanguageMenu}"
         ToolTip="Open the Language Menu"
         MinSize="42 64"
         HorizontalExpand="True"
