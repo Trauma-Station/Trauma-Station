@@ -18,8 +18,6 @@
     damage:
       types:
         Blunt: 4
-  - type: StaminaDamageOnCollide
-    damage: 5
   - type: Item
     size: Small
   - type: Boomerang # Goobstation
