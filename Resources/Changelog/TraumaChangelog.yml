@@ -5606,3 +5606,10 @@ Entries:
   id: 659
   time: '2026-03-28T10:59:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1633
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed chaplain rosary healing pAIs and borgs.
+  id: 660
+  time: '2026-03-28T11:03:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1634
