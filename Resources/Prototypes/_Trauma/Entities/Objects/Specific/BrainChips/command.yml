@@ -1,11 +1,13 @@
 - type: entity
   parent: BaseSkillChip
   id: SkillChipCaptain
-  name: skill chip (captain)
+  name: skill chip (big boss)
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 50
+      MeleeKnowledge: 100
+      AthleticsKnowledge: 100 # 10m/s sprint for several kms... fittest man on the planet
+      MartialArtCQC: 100
       ShootingKnowledge: 50
       LiteracyKnowledge: 50 # your whole job is to delegate and lead :godo:
       StrengthKnowledge: 20
