@@ -986,7 +986,7 @@
 
 - type: entity
   parent: [BaseScrewdriverShankHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: ScrewdriverShankBrassHot
   name: hot brass screwdriver shank
   components:
   - type: ChangeOnCool
@@ -1240,7 +1240,7 @@
 
 - type: entity
   parent: [BaseWrenchForgedHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: WrenchForgedBrassHot
   name: hot brass wrench
   components:
   - type: ChangeOnCool
@@ -1367,7 +1367,7 @@
 
 - type: entity
   parent: [BaseTinyBladesHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: TinyBladesBrassHot
   name: hot brass tiny blades
   components:
   - type: ChangeOnCool
@@ -1494,7 +1494,7 @@
 
 - type: entity
   parent: [BaseSwordBladeHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: SwordBladeBrassHot
   name: hot brass blade
   components:
   - type: ChangeOnCool
@@ -1621,7 +1621,7 @@
 
 - type: entity
   parent: [BaseChainMailSheetHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: ChainMailBrassHot
   name: hot brass chainmail sheet
   components:
   - type: ChangeOnCool
@@ -1748,7 +1748,7 @@
 
 - type: entity
   parent: [BaseHalberdHeadHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: HalberdHeadBrassHot
   name: hot brass halberd head
   components:
   - type: ChangeOnCool
@@ -1875,7 +1875,7 @@
 
 - type: entity
   parent: [BaseLongswordBladeHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: LongswordBladeBrassHot
   name: hot brass long blade
   components:
   - type: ChangeOnCool
@@ -2002,7 +2002,7 @@
 
 - type: entity
   parent: [BaseMetalPlateHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: MetalPlateBrassHot
   name: hot brass plate
   components:
   - type: ChangeOnCool
@@ -2129,7 +2129,7 @@
 
 - type: entity
   parent: [BaseWarhammerHeadHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: WarhammerHeadBrassHot
   name: hot brass warhammer head
   components:
   - type: ChangeOnCool
@@ -2256,7 +2256,7 @@
 
 - type: entity
   parent: [BasePickaxeHeadHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: PickaxeHeadBrassHot
   name: hot brass pickaxe head
   components:
   - type: ChangeOnCool
@@ -2383,7 +2383,7 @@
 
 - type: entity
   parent: [BaseThinBladeHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: ThinBladeBrassHot
   name: hot brass thin blade
   components:
   - type: ChangeOnCool
@@ -2510,7 +2510,7 @@
 
 - type: entity
   parent: [BaseArrowHeadsHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: ArrowHeadsBrassHot
   name: hot brass arrow heads
   components:
   - type: ChangeOnCool
@@ -2638,7 +2638,7 @@
 
 - type: entity
   parent: [BaseSpearHeadHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: SpearHeadBrassHot
   name: hot brass spear head
   components:
   - type: ChangeOnCool
@@ -2764,7 +2764,7 @@
 
 - type: entity
   parent: [BaseMorningstarHeadHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: MorningStarBrassHot
   name: hot brass morningstar head
   components:
   - type: ChangeOnCool
@@ -2891,7 +2891,7 @@
 
 - type: entity
   parent: [BaseShieldBossHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: ShieldBossBrassHot
   name: hot brass shield boss
   components:
   - type: ChangeOnCool
