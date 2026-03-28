@@ -266,7 +266,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (now < ent.Comp.TimeToNextExperience || ent.Comp.LearnedLevel >= Math.Min(limit, 100))
             return;
 
-        ent.Comp.TimeToNextExperience = now + TimeSpan.FromSeconds(5);
+        ent.Comp.TimeToNextExperience = now + ent.Comp.TimeBetweenExperience;
         ent.Comp.Experience += added + ent.Comp.BonusExperience;
         Dirty(ent);
 
@@ -393,7 +393,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public Entity<KnowledgeComponent>? RaiseMastery(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int mastery, bool popup = true)
     {
-        if (EnsureKnowledge(ent, id, popup: popup) is not {} unit)
+        if (EnsureKnowledge(ent, id, popup: popup) is not { } unit)
             return null;
 
         mastery += GetMastery(unit.Comp.LearnedLevel);
@@ -552,10 +552,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             return (uid, comp);
 
         // otherwise try use the cached brain
-        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent || !ent.IsValid())
+        if (_holderQuery.CompOrNull(uid)?.KnowledgeEntity is not { } ent || TerminatingOrDeleted(ent))
             return null;
 
-        return (ent, _containerQuery.Comp(ent));
+        if (_containerQuery.TryComp(ent, out var container))
+            return (ent, container);
+
+        Log.Error($"Knowledge entity {ToPrettyString(ent)} of holder {ToPrettyString(uid)} did not have KnowledgeContainerComponent!");
+        return null;
     }
 
     /// <summary>
@@ -614,11 +618,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public string GetMasteryString(Entity<KnowledgeComponent> ent)
         => GetMasteryString(GetMastery(ent.Comp.NetLevel));
 
-    /// <summary>
-    /// Get the name for a given mastery number.
-    /// Throws if it is out of bounds.
-    /// </summary>
-    public string GetMasteryString(int mastery)
+    public override string GetMasteryString(int mastery)
         => Loc.GetString("knowledge-mastery-" + MasteryNames[Math.Clamp(mastery, 0, 5)]);
 
     public override int GetMastery(int level)

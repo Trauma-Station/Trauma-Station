@@ -17,7 +17,6 @@
     - VendingMachineHotfood
     - VendingMachineFitness
     - VendingMachineWeeb
-    - VendorMimic # :)
     # </Trauma>
     - VendingMachineChang
     - VendingMachineCigs
@@ -40,8 +39,12 @@
     - VendingMachineSovietSoda #Boda
     - VendingMachineSpaceUp
     - VendingMachineStarkist
-    chance: 1
-
+    chance: 0.99 # Trauma, was 1
+    # <Trauma>
+    rarePrototypes:
+    - RandomVendingAnyMimic
+    rareChance: 0.01
+    # </Trauma>
 
 - type: entityTable
   id: ClothingVendorTable

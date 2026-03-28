@@ -136,7 +136,7 @@ public sealed class WoundedSoldierSystem : EntitySystem
             threshold <= 0f || !Resolve(ent, ref ent.Comp1, false))
             return 0f;
 
-        var damage = _threshold.CheckVitalDamage(ent, ent.Comp1);
+        var damage = _threshold.CheckVitalDamage((ent, ent.Comp1));
 
         return Math.Clamp(damage.Float() / threshold.Value.Float(), 0f, 1f);
     }

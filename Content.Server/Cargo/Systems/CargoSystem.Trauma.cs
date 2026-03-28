@@ -7,10 +7,12 @@ using Content.Shared.Emag.Systems;
 namespace Content.Server.Cargo.Systems;
 
 /// <summary>
-/// Trauma - methods for cargo order restrictions
+/// Trauma - methods for cargo order restrictions and destinations
 /// </summary>
 public sealed partial class CargoSystem
 {
+    private List<(string, NetEntity)> _dests = new();
+
     /// <summary>
     /// Check that the user has the account's approve access.
     /// Does nothing when emagged with an access breaker.
@@ -39,5 +41,33 @@ public sealed partial class CargoSystem
         }
 
         return true;
+    }
+
+    public List<(string, NetEntity)> GetDestinations(EntityUid console)
+    {
+        _dests.Clear();
+        var map = Transform(console).MapID;
+
+        var atsQuery = EntityQueryEnumerator<TradeStationComponent, TransformComponent>();
+        while (atsQuery.MoveNext(out var uid, out _, out var xform))
+        {
+            if (xform.MapID != map)
+                continue;
+
+            var meta = MetaData(uid);
+            _dests.Add((Name(uid, meta), GetNetEntity(uid, meta)));
+        }
+
+        var query = EntityQueryEnumerator<CargoTelepadComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var xform))
+        {
+            if (xform.MapID != map)
+                continue;
+
+            var meta = MetaData(uid);
+            _dests.Add((Name(uid, meta), GetNetEntity(uid, meta)));
+        }
+
+        return _dests;
     }
 }

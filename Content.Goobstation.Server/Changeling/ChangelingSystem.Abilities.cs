@@ -293,8 +293,13 @@ public sealed partial class ChangelingSystem
 
         var totalFood = FixedPoint2.New(0);
         foreach (var (_, sol) in _solution.EnumerateSolutions((target, solMan)))
+        {
+            var solution = sol.Comp.Solution;
             foreach (var proto in BiomassAbsorbedChemicals)
-                totalFood += sol.Comp.Solution.GetTotalPrototypeQuantity(proto);
+            {
+                totalFood += solution.GetTotalPrototypeQuantity(proto);
+            }
+        }
 
         if (edible.RequiresSpecialDigestion || totalFood == 0) // no eating winter coats or food that won't give you anything
         {

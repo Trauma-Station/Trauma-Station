@@ -15,20 +15,20 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   Normally a body has 11 main parts. Those being:
 
   <Box>
-<GuideEntityEmbed Entity="HeadHuman" Caption="head"/>
+<GuideEntityEmbed Entity="OrganHumanHead" Caption="head"/>
 </Box>
 <Box>
-<GuideEntityEmbed Entity="RightHandHuman" Caption="right hand"/>
-<GuideEntityEmbed Entity="RightArmHuman" Caption="right arm"/>
-<GuideEntityEmbed Entity="TorsoHuman" Caption="torso"/>
-<GuideEntityEmbed Entity="LeftArmHuman" Caption="left arm"/>
-<GuideEntityEmbed Entity="LeftHandHuman" Caption="left hand"/>
+<GuideEntityEmbed Entity="OrganHumanHandRight" Caption="right hand"/>
+<GuideEntityEmbed Entity="OrganHumanArmRight" Caption="right arm"/>
+<GuideEntityEmbed Entity="OrganHumanTorso" Caption="torso"/>
+<GuideEntityEmbed Entity="OrganHumanArmLeft" Caption="left arm"/>
+<GuideEntityEmbed Entity="OrganHumanHandLeft" Caption="left hand"/>
 </Box>
 <Box>
-<GuideEntityEmbed Entity="RightFootHuman" Caption="right foot"/>
-<GuideEntityEmbed Entity="RightLegHuman" Caption="right leg"/>
-<GuideEntityEmbed Entity="LeftLegHuman" Caption="left leg"/>
-<GuideEntityEmbed Entity="LeftFootHuman" Caption="left foot"/>
+<GuideEntityEmbed Entity="OrganHumanFootRight" Caption="right foot"/>
+<GuideEntityEmbed Entity="OrganHumanLegRight" Caption="right leg"/>
+<GuideEntityEmbed Entity="OrganHumanLegLeft" Caption="left leg"/>
+<GuideEntityEmbed Entity="OrganHumanFootLeft" Caption="left foot"/>
 </Box>
 
 Certain species might have more or less parts, such as tails, wings, or extra limbs, but this is the rough outline of what you'll see.

@@ -83,10 +83,14 @@
     - Alive
     damage:
       types:
+        Blunt: -0.17
+        Slash: -0.17
+        Piercing: -0.17
+        Heat: -0.13
+        Cold: -0.13
+        Shock: -0.13
+        Caustic: -0.13
         Poison: -0.5
-      groups:
-        Brute: -0.5
-        Burn: -0.5
   - type: NightVision
     color: "#008080"
     activateSound: null

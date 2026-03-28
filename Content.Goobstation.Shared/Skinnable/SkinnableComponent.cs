@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
@@ -13,6 +14,12 @@ public sealed partial class SkinnableComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Skinned;
+
+    /// <summary>
+    /// Whitelist this mob is checked against to allow skinning.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? Whitelist;
 
     /// <summary>
     /// Sprite to set every limb's visuals to which previously had <see cref="UnskinnedSprite"/>.
@@ -31,7 +38,7 @@ public sealed partial class SkinnableComponent : Component
     public TimeSpan SkinningDoAfterDuation = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public DamageSpecifier DamageOnSkinned = new() { DamageDict = new Dictionary<string, FixedPoint2> { { "Slash", 50 } } };
+    public DamageSpecifier DamageOnSkinned = new() { DamageDict = new() { { "Slash", 50 } } };
 
     [DataField]
     public SoundSpecifier SkinSound = new SoundPathSpecifier("/Audio/_Shitmed/Medical/Surgery/scalpel1.ogg");

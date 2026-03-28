@@ -19,6 +19,12 @@ public sealed partial class CyberneticsComponent : Component
     public bool Disabled;
 
     /// <summary>
+    /// Chance to get disabled by an EMP.
+    /// </summary>
+    [DataField]
+    public float DisableChance = 1f;
+
+    /// <summary>
     /// Damage to deal to the part containing this organ, or the part itself.
     /// </summary>
     [DataField]

@@ -258,15 +258,19 @@
     category: NeurotoxinGland
   - type: ChildOrgan
     parents: [ Head ]
+  - type: NeurotoxinGland
+  - type: OrganActions
+    actions:
+    - ActionAcidSpit
   - type: OrganComponents
     onAdd:
     - type: RechargeBasicEntityAmmo
       rechargeCooldown: 0.75
     - type: PlasmaAmmoProvider
-      fireCost: 55
+      fireCost: 20
       proto: BulletNeurotoxin
     - type: Gun
-      fireRate: 0.75
+      fireRate: 0.60
       useKey: false
       selectedMode: FullAuto
       availableModes:

@@ -420,6 +420,7 @@
   description: Revolting unless you're french.
   components:
   - type: GhostRole
+    prob: 0 # Trauma
     makeSentient: true
     allowSpeech: false
     allowMovement: true
@@ -566,8 +567,7 @@
   suffix: Smite
   components:
   - type: GhostRole
-    mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    prob: 1 # Trauma
   - type: MobStateActions
     actions:
       Alive:
@@ -585,9 +585,7 @@
   suffix: Speed
   components:
   - type: GhostRole
-    name: ghost-role-information-snailspeed-name
-    description: ghost-role-information-snailspeed-description
-    rules: ghost-role-information-freeagent-rules
+    prob: 1 # Trauma
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -612,9 +610,7 @@
   name: Snoth
   components:
   - type: GhostRole
-    name: ghost-role-information-snoth-name
-    description: ghost-role-information-snoth-description
-    rules: ghost-role-information-freeagent-rules
+    prob: 1 # Trauma
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]

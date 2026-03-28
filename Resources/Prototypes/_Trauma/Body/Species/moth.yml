@@ -10,3 +10,19 @@
       state: empty # no sprite since the markings actually control it
   - type: SpeedModifierOrgan
     weightlessAcceleration: 0.5 # 50% faster base acceleration in space/0G
+
+- type: entity
+  parent: OrganMothWings
+  id: OrganMothWingsDefault
+  suffix: Moth, Default
+  components:
+  - type: Sprite
+    color: "#FFDA93FF"
+  - type: VisualOrgan
+    profile:
+      skinColor: "#FFDA93FF"
+  - type: VisualOrganMarkings
+    markings:
+      Wings:
+      - markingId: MothWingsDefault
+        markingColor: [ "#FFDA93FF" ]

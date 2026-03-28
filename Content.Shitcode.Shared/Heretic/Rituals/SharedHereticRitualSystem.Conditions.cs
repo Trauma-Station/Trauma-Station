@@ -54,7 +54,7 @@ public abstract partial class SharedHereticRitualSystem
     private void OnObjectivesComplete(Entity<HereticComponent> ent,
         ref HereticRitualConditionEvent<ObjectivesCompleteCondition> args)
     {
-        args.Result = _heretic.ObjectivesAllowAscension((ent, ent, null));
+        args.Result = _heretic.ObjectivesAllowAscension(ent);
     }
 
     private void OnCanAscend(Entity<HereticComponent> ent, ref HereticRitualConditionEvent<CanAscendCondition> args)

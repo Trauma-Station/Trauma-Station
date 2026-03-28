@@ -1654,9 +1654,7 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  theory:
-    MechanicsKnowledge: 1
-  useQuality: false
+  theory: {} # autolathe made it for you, just place it down chud
   # </Trauma>
 
 - type: construction

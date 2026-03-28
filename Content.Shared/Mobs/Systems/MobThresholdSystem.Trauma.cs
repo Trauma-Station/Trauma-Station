@@ -2,6 +2,7 @@
 using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
@@ -14,15 +15,8 @@ public sealed partial class MobThresholdSystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly BodySystem _body = default!;
-
-    private EntityQuery<BodyComponent> _bodyQuery;
-    private EntityQuery<DamageableComponent> _damageQuery;
-
-    private void InitializeTrauma()
-    {
-        _bodyQuery = GetEntityQuery<BodyComponent>();
-        _damageQuery = GetEntityQuery<DamageableComponent>();
-    }
+    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private readonly EntityQuery<DamageableComponent> _damageQuery = default!;
 
     /// <summary>
     /// Version of GetScaledDamage that also gets the parts damage, indexed by organ category.
@@ -61,15 +55,40 @@ public sealed partial class MobThresholdSystem
         foreach (var organ in _body.GetOrgans((target1, oldBody)))
         {
             if (organ.Comp.Category is not {} category
-                || !_damageQuery.TryComp(organ, out var damageable)
-                || damageable.Damage.GetTotal() == 0)
+                || !_damageQuery.TryComp(organ, out var damageable))
                 continue;
 
-            var modifiedDamage = damageable.Damage / ent1DeadThreshold.Value * ent2DeadThreshold.Value;
+            var damage = _damageable.GetAllDamage((organ, damageable));
+            if (damage.GetTotal() <= 0)
+                continue;
+
+            var modifiedDamage = damage / ent1DeadThreshold.Value * ent2DeadThreshold.Value;
             if (!organDamages.TryAdd(category, modifiedDamage))
                 organDamages[category] += modifiedDamage;
         }
 
         return organDamages;
+    }
+
+    /// <summary>
+    /// Calculates the total damage from vital body parts (Head, Torso), for mobs with Body.
+    /// For non-mobs, returns the total damage from the target entity.
+    /// </summary>
+    /// <returns>Total damage from vital body parts, or total damage if not a Body mob.</returns>
+    public FixedPoint2 CheckVitalDamage(Entity<DamageableComponent?> ent)
+    {
+        if (!_damageQuery.Resolve(ent, ref ent.Comp, false))
+            return FixedPoint2.Zero;
+
+        if (!_bodyQuery.HasComp(ent))
+            return _damageable.GetTotalDamage(ent);
+
+        var result = FixedPoint2.Zero;
+        foreach (var part in _body.GetVitalParts(ent))
+        {
+            result += _damageable.GetTotalDamage(part);
+        }
+
+        return result;
     }
 }

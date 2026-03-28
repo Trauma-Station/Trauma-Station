@@ -15,6 +15,7 @@ public sealed partial class MobThresholdSystem : EntitySystem // Trauma - made p
 {
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -26,8 +27,6 @@ public sealed partial class MobThresholdSystem : EntitySystem // Trauma - made p
         SubscribeLocalEvent<MobThresholdsComponent, DamageChangedEvent>(OnDamaged);
         SubscribeLocalEvent<MobThresholdsComponent, UpdateMobStateEvent>(OnUpdateMobState);
         SubscribeLocalEvent<MobThresholdsComponent, MobStateChangedEvent>(OnThresholdsMobState);
-
-        InitializeTrauma(); // Trauma
     }
 
     private void OnGetState(EntityUid uid, MobThresholdsComponent component, ref ComponentGetState args)
@@ -272,7 +271,7 @@ public sealed partial class MobThresholdSystem : EntitySystem // Trauma - made p
         if (!TryGetThresholdForState(target2, MobState.Dead, out var ent2DeadThreshold, threshold2))
             ent2DeadThreshold = 0;
 
-        damage = oldDamage.Damage / ent1DeadThreshold.Value * ent2DeadThreshold.Value; // Shitmed - multiply first, divide second
+        damage = (_damageable.GetAllDamage((target1, oldDamage)) / ent1DeadThreshold.Value) * ent2DeadThreshold.Value;
         return true;
     }
 
@@ -339,7 +338,7 @@ public sealed partial class MobThresholdSystem : EntitySystem // Trauma - made p
         MobThresholdsComponent thresholdsComponent, DamageableComponent damageableComponent, EntityUid? origin = null)
     {
         if (_net.IsClient) return; // Trauma - don't predict it, it doesnt get networked somehow and mispredicts badly from shitmed
-        var damage = CheckVitalDamage(target, damageableComponent); // Trauma - check vital damage instead of total
+        var damage = CheckVitalDamage((target, damageableComponent)); // Trauma - check vital damage instead of total
         foreach (var (threshold, mobState) in thresholdsComponent.Thresholds.Reverse())
         {
             if (damage < threshold) // Trauma - use damage from above
@@ -408,7 +407,7 @@ public sealed partial class MobThresholdSystem : EntitySystem // Trauma - made p
             }
 
             if (TryGetNextState(target, currentMobState, out var nextState, threshold) &&
-                TryGetPercentageForState(target, nextState.Value, CheckVitalDamage(target, damageable), out var percentage)) // Goob - vital instead of total damage
+                TryGetPercentageForState(target, nextState.Value, CheckVitalDamage((target, damageable)), out var percentage)) // Goob - vital instead of total damage
             {
                 percentage = FixedPoint2.Clamp(percentage.Value, 0, 1);
 

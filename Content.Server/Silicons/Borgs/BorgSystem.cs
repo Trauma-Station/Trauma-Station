@@ -2,6 +2,7 @@ using Content.Server.Administration.Managers;
 using Content.Shared.Body.Events;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -32,6 +33,7 @@ public sealed partial class BorgSystem : SharedBorgSystem
     [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     public static readonly ProtoId<JobPrototype> BorgJobId = "Borg";
 

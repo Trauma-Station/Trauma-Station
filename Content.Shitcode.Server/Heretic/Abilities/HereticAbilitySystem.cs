@@ -1,31 +1,7 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Marcus F <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 the biggest bruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 thebiggestbruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 // the fucking eye of the shitcode storm
 
-using System.Linq;
-using Content.Trauma.Common.MartialArts;
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Heretic;
 using Content.Medical.Shared.Body;
@@ -111,7 +87,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly PvsOverrideSystem _pvs = default!;
     [Dependency] private readonly CloningSystem _cloning = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
@@ -384,28 +359,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
         var bloodQuery = GetEntityQuery<BloodstreamComponent>();
 
-        var fleshQuery = EntityQueryEnumerator<FleshPassiveComponent, DamageableComponent>();
-        while (fleshQuery.MoveNext(out var uid, out var flesh, out var dmg))
-        {
-            flesh.Accumulator += frameTime;
-
-            if (flesh.Accumulator < flesh.HealInterval)
-                continue;
-
-            flesh.Accumulator = 0f;
-
-            var realMult = 2;
-
-            if (realMult <= 0f)
-                continue;
-
-            var toHeal = -realMult * AllDamage;
-            var bloodHeal = realMult * flesh.BloodHealMultiplier;
-            var bleedHeal = -realMult * flesh.BleedReductionMultiplier;
-
-            IHateWoundMed((uid, dmg, null), toHeal, bloodHeal, bleedHeal);
-        }
-
         var rustChargeQuery = EntityQueryEnumerator<RustObjectsInRadiusComponent, TransformComponent>();
         while (rustChargeQuery.MoveNext(out var uid, out var rust, out var xform))
         {
@@ -477,7 +430,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
                                 respirator);
                         }
 
-                        if (damageable != null && damageable.TotalDamage < FixedPoint2.Epsilon)
+                        if (damageable != null && _dmg.GetTotalDamage((uid, damageable)) < FixedPoint2.Epsilon)
                         {
                             if (bodyQuery.TryComp(uid, out var body))
                                 _bodyRestore.RestoreBody((uid, body));

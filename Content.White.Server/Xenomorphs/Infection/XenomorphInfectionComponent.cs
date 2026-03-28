@@ -28,10 +28,12 @@ public sealed partial class XenomorphInfectionComponent : SharedXenomorphInfecti
     [DataField]
     public Dictionary<int, EntityEffect[]> Effects = new ();
 
+    [DataField]
+    public EntityUid? SourceMindId;
+
     [ViewVariables]
     public TimeSpan NextPointsAt;
 
     [ViewVariables]
     public EntityUid? Infected;
-
 }

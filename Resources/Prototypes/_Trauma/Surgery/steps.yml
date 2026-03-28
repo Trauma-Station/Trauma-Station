@@ -15,7 +15,7 @@
   - type: SurgeryDamageChangeEffect
     damage:
       types:
-        Brute: 15
+        Slash: 15
     sleepModifier: 0.2
   - type: SurgeryStepPainInflicter
     painDuration: 30

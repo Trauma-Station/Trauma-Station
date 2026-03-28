@@ -195,9 +195,10 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
         }
         ent.Comp.StoredObjects.RemoveAll(uid => _consumed.Contains(uid));
 
+        var sol = solution.Comp.Solution;
         foreach (var (reagent, quantity) in _reagents)
         {
-            solution.Comp.Solution.RemoveReagent(reagent, quantity, ignoreReagentData: true);
+            sol.RemoveReagent(reagent, quantity, ignoreReagentData: true);
         }
         _solution.UpdateChemicals(solution);
 

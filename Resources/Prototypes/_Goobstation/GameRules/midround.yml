@@ -184,11 +184,10 @@
     earliestStart: 15
     minimumPlayers: 15
     maxOccurrences: 2
-  - type: VentCrittersRule
-    max: 1
-    table: !type:GroupSelector
-      children:
-      - id: MobFloorGoblin
+    duration: 5
+  - type: VentHordeRule
+    table:
+      id: MobFloorGoblin
 
 # Midround Devil
 - type: entity
@@ -247,7 +246,7 @@
         text: grey-tide-role-greeting
         color: Red
         sound: /Audio/_Goobstation/Music/the_gray_tide_song.ogg
-  - type: AntagRandomSpawn # TODO replace with MaintsSpawnRuleComponent once mapped
+  - type: MaintsSpawnRule
   - type: AntagObjectives
     objectives:
     - GrayTideKillEveryoneObjective
@@ -276,7 +275,7 @@
         text: tunnel-clown-role-greeting
         color: Pink
         sound: /Audio/_Goobstation/Misc/clownalwayswinsshort.ogg
-  - type: AntagRandomSpawn # TODO replace with MaintsSpawnRuleComponent once mapped
+  - type: MaintsSpawnRule
   - type: AntagObjectives
     objectives:
     - TunnelClownProtectMaintenanceObjective
@@ -480,8 +479,8 @@
     earliestStart: 15
     minimumPlayers: 15
     maxOccurrences: 2
-  - type: VentCrittersRule
-    max: 1
+    duration: 5
+  - type: VentHordeRule
     table:
       id: MobClownGoblin
 

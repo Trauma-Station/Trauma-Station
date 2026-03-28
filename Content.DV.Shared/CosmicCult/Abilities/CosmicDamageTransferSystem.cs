@@ -30,7 +30,7 @@ public sealed class CosmicDamageTransferSystem : EntitySystem
 
         args.Handled = true;
 
-        var damage = _damage.GetDamage((args.Target, damageComp));
+        var damage = _damage.GetAllDamage((args.Target, damageComp));
         _damage.TryChangeDamage(ent.Owner, damage, ignoreResistances: true);
         _rejuvenate.PerformRejuvenate(args.Target);
 

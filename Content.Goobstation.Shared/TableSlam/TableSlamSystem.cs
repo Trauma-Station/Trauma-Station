@@ -123,13 +123,13 @@ public sealed class TableSlamSystem : EntitySystem
             _damageableSystem.TryChangeDamage(ent.Owner,
                 new DamageSpecifier()
                 {
-                    DamageDict = new Dictionary<string, FixedPoint2> { { "Blunt", ent.Comp.TabledDamage } },
+                    DamageDict = new() { { "Blunt", ent.Comp.TabledDamage } },
                 },
                 targetPart: TargetBodyPart.Chest);
             _damageableSystem.TryChangeDamage(ent.Owner,
                 new DamageSpecifier()
                 {
-                    DamageDict = new Dictionary<string, FixedPoint2> { { "Blunt", ent.Comp.TabledDamage } },
+                    DamageDict = new() { { "Blunt", ent.Comp.TabledDamage } },
                 });
         }
 

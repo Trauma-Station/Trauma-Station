@@ -64,7 +64,7 @@ public sealed partial class HereticAbilitySystem
         // change this behavior if this ability is ever given to heretic
         if (TryComp(user, out DamageableComponent? userDamage) &&
             TryComp(polymorphed.Value, out DamageableComponent? polymorphedDamage))
-            _dmg.SetDamage((polymorphed.Value, polymorphedDamage), userDamage.Damage);
+            _dmg.SetDamage((polymorphed.Value, polymorphedDamage), _dmg.GetAllDamage((user, userDamage)));
 
         _npcFaction.AddFaction(polymorphed.Value, HereticSystem.HereticFactionId);
 
@@ -74,19 +74,18 @@ public sealed partial class HereticAbilitySystem
         var speech = Loc.GetString(ent.Comp.Speech);
 
         // Spawning a timer because otherwise speech wouldn't trigger (same issue as wizard polymorphs)
-        Timer.Spawn(200,
-            () =>
-            {
-                if (!Timing.InSimulation)
-                    return;
+        Timer.Spawn(200, () =>
+        {
+            if (!Timing.InSimulation)
+                return;
 
-                _pvs.RemoveSessionOverride(user, session);
+            _pvs.RemoveSessionOverride(user, session);
 
-                if (TerminatingOrDeleted(polymorphed.Value))
-                    return;
+            if (TerminatingOrDeleted(polymorphed.Value))
+                return;
 
-                _chat.TrySendInGameICMessage(polymorphed.Value, speech, InGameICChatType.Speak, false);
-            });
+            _chat.TrySendInGameICMessage(polymorphed.Value, speech, InGameICChatType.Speak, false);
+        });
     }
 
     private void OnShapeshift(Entity<GhoulComponent> ent, ref EventHereticShapeshift args)

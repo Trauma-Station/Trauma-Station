@@ -33,7 +33,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   ## Eldritch Influences
   <Box>
-    <GuideEntityEmbed Entity="EldritchInfluence" Caption=""/>
+    <GuideEntityEmbed Entity="EldritchInfluenceT1" Caption="Tier 1"/>
+    <GuideEntityEmbed Entity="EldritchInfluenceT2" Caption="Tier 2"/>
+    <GuideEntityEmbed Entity="EldritchInfluenceT3" Caption="Tier 3"/>
   </Box>
   Influences are the easy way to gain power points. Whenever there are Heretics aboard Space Station 14, influences will randomly spawn across the station.
   They are not visible to the naked eye of a crew member, however they [bold]will[/bold] become visible after harvesting, aside from suddenly changing colors.

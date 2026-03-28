@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -102,13 +97,14 @@ public abstract class SharedSanguineStrikeSystem : EntitySystem
         var ev = new LifeStealHealEvent();
         RaiseLocalEvent(ent, ref ev);
 
-        var totalUserDamage = ent.Comp.TotalDamage;
-        if (totalUserDamage <= FixedPoint2.Zero)
+        var damage = _damageable.GetAllDamage(ent);
+        var total = damage.GetTotal();
+        if (total <= FixedPoint2.Zero)
             return;
 
-        var toHeal = ent.Comp.Damage;
-        if (amount < totalUserDamage)
-            toHeal *= amount / totalUserDamage;
+        var toHeal = damage;
+        if (amount < total)
+            toHeal *= amount / total;
 
         _damageable.TryChangeDamage(ent,
             -toHeal,

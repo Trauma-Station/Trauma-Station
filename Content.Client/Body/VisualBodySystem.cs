@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Medical.Common.Body;
+// </Trauma>
 using System.Linq;
 using Content.Shared.Body;
 using Content.Shared.CCVar;
@@ -77,8 +80,8 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
 
     private void RemoveVisual(Entity<VisualOrganComponent> ent, EntityUid target)
     {
-        // <Trauma> - removed parts have their body's skin colour
-        if (ent.Comp.Data.Color is {} color)
+        // <Trauma> - removed parts have their body's skin colour. not enabled for eyes yet until it supports an iris layer
+        if (ent.Comp.Data.Color is {} color && !HasComp<InternalOrganComponent>(ent))
             _sprite.SetColor(ent.Owner, color);
         // </Trauma>
         if (!_sprite.LayerMapTryGet(target, ent.Comp.Layer, out var index, false)) // Trauma - don't log for missing layers

@@ -81,8 +81,8 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 5
+      types:
+        Blunt: 5
   - type: DamageStateVisuals
     states:
       Alive:
@@ -123,9 +123,14 @@
     allowedStates:
     - Alive
     damage:
-      groups:
-        Brute: -0.5
-        Burn: -0.5
+      types:
+        Blunt: -0.16
+        Slash: -0.16
+        Piercing: -0.16
+        Heat: -0.13
+        Cold: -0.13
+        Shock: -0.13
+        Caustic: -0.13
   - type: StaticPrice
     price: 3000
   - type: Insulated # Goobstation

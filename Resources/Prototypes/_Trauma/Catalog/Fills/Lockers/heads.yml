@@ -2,6 +2,7 @@
   id: LockerFillQuarterMasterTrauma
   table: !type:AllSelector
     children:
+    - id: BoxSkillChipsCargo
     - id: CargoMegaphone
 
 - type: entityTable
@@ -16,6 +17,7 @@
   id: LockerFillChiefEngineerTrauma
   table: !type:AllSelector
     children:
+    - id: BoxSkillChipsEngi
     - id: RCDRechargingCE # replaces regular RCD
     - id: RPD
     - id: BaseHandheldStationMapPowerCe
@@ -28,6 +30,7 @@
   id: LockerFillChiefMedicalOfficerTrauma
   table: !type:AllSelector
     children:
+    - id: BoxSkillChipsMed
     - id: ClothingBackpackDuffelSurgeryFilled
     - id: ChemistryHotplateFlatPack
     - id: Multitool # for linking cloning machines
@@ -41,6 +44,7 @@
   id: LockerFillResearchDirectorTrauma
   table: !type:AllSelector
     children:
+    - id: BoxSkillChipsSci
     - id: AnomalyLocator # added anomaly locator to (try) reduce the amount of anoms that crit
     - id: CigarCase # RD needs cigs for uhh... science...
       prob: 0.15
@@ -52,6 +56,7 @@
   id: LockerFillHeadOfSecurityTrauma
   table: !type:AllSelector
     children:
+    - id: BoxSkillChipsSec
     - id: ClothingBeltSheathHeadOfSecurityFilled
     - id: ReinforcementCallerHos
     - id: TelescopicShield

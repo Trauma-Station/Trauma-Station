@@ -29,7 +29,8 @@ public sealed partial class SkillControl : BoxContainer
     public void SetMastery(string name, int mastery, int racialBase = 0)
     {
         Mastery = mastery;
-        var cost = _costs[mastery];
+        // only show the cost for the added mastery, not net
+        var cost = _costs[Math.Max(mastery - racialBase, 0)];
         MasteryLabel.Text = Loc.GetString("knowledge-editor-mastery", ("mastery", name), ("cost", cost));
         IncreaseButton.Disabled = mastery >= _costs.Length - 1;
         DecreaseButton.Disabled = mastery <= racialBase;

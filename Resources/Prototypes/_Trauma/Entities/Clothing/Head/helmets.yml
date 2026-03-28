@@ -64,3 +64,20 @@
   - type: FireProtection
     reduction: 0.2
   - type: FaceHuggerBlocker #trauma
+
+- type: entity
+  parent: ClothingHeadHatHelmetTemplar
+  id: ClothingHeadHatHelmetVenerator
+  name: venerator headpiece
+  description: The light of christ, strangely non-light emitting.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Misc/venerator.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Misc/venerator.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    layers: {}

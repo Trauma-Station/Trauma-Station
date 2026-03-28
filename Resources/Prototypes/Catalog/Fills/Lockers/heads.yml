@@ -155,6 +155,8 @@
   id: LockerFillChiefEngineerNoHardsuit
   table: !type:AllSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: LockerFillChiefEngineerTrauma
     - id: AccessConfigurator
     - id: BoxEncryptionKeyEngineering
     - id: CigarCase
