@@ -22,7 +22,7 @@
       shoes: ClothingModsuitBootsResponsoryMedical
 
 - type: entity
-  parent: [ BaseModsuitGaunletsERT, BaseModsuitPieceERTMedical ]
+  parent: [ BaseModsuitGauntletsERT, BaseModsuitPieceERTMedical ]
   id: ClothingModsuitGauntletsResponsoryMedical
   name: Medical Responsory modsuit gauntlets
   description: A pair of gauntlets made for the Medical Responsory hardsuit.
