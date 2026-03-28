@@ -392,8 +392,9 @@ public sealed partial class WoundSystem
     {
         woundCreated = null;
 
-        if (!IsWoundPrototypeValid(woundProtoId)
-            || !Resolve(uid, ref woundable))
+        if (TerminatingOrDeleted(uid) ||
+            !IsWoundPrototypeValid(woundProtoId) ||
+            !Resolve(uid, ref woundable))
             return false;
 
         var wound = Spawn(woundProtoId);
@@ -404,6 +405,7 @@ public sealed partial class WoundSystem
         else
         {
             // The wound failed some important checks, and we cannot let an invalid wound to be spawned!
+            // holy esl
             if (_net.IsServer && !IsClientSide(wound))
                 QueueDel(wound);
 
