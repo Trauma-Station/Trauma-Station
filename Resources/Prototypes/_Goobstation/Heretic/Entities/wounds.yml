@@ -8,7 +8,6 @@
     woundType: External
     woundVisibility: Always
     scarWound: SlashScar
-    integrityMultiplier: 0.25
     selfHealMultiplier: 0
     mangleSeverity: Severe
     canBeHealed: false # Only heals via tend wounds surgery

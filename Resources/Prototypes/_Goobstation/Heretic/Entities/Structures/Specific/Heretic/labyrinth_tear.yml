@@ -24,7 +24,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-        radius: 1.5
+          radius: 1.5
         layer:
           - SlipLayer
         mask:
