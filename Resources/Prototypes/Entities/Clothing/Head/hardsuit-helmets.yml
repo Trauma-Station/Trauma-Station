@@ -689,7 +689,6 @@
   description: An elite version of the blood-red hardsuit's helmet, with improved armor and fireproofing. Property of Gorlex Marauders. # Goob edit
   components:
   # <Trauma>
-  - type: FlashImmunity
   - type: FlashSoundSuppression
   - type: ExplosionResistance
     damageCoefficient: 0.2
