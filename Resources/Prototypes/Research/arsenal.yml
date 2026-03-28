@@ -186,6 +186,7 @@
   - MagazineBoxRifleUranium
   - BoxShotgunUranium
   # Goobstation R&D Console rework start
+  - MagazineBoxPistolHoly # Trauma, fuck you.
   position: 7,2
   technologyPrerequisites:
   - DraconicMunitions
