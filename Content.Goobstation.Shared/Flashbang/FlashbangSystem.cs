@@ -4,6 +4,7 @@ using Content.Goobstation.Common.Flash;
 using Content.Shared.Examine;
 using Content.Shared.Flash;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Tag;
 using Content.Shared.Stunnable;
 
@@ -27,6 +28,9 @@ public sealed class FlashbangSystem : EntitySystem
 
     private void OnExamined(Entity<FlashSoundSuppressionComponent> ent, ref ExaminedEvent args)
     {
+        if (HasComp<MobStateComponent>(ent))
+            return;
+
         var range = ent.Comp.ProtectionRange;
         var message = range > 0
             ? Loc.GetString("flash-sound-suppression-examine", ("range", range))

@@ -6,7 +6,6 @@ using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Goobstation.Shared.Mindcontrol;
 using Content.Goobstation.Shared.Shadowling.Components;
-using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Body;
@@ -39,7 +38,6 @@ public abstract class SharedShadowlingSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
     public static readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
     public static readonly ProtoId<OrganCategoryPrototype> TorsoCategory = "Torso";
@@ -230,8 +228,7 @@ public abstract class SharedShadowlingSystem : EntitySystem
 
         return HasComp<MobStateComponent>(target)
                && !HasComp<ShadowlingComponent>(target)
-               && !HasComp<ThrallComponent>(target)
-               && !_heretic.TryGetHereticComponent(target, out _, out _);
+               && !HasComp<ThrallComponent>(target);
     }
 
     public void DoEnthrall(EntityUid uid, EntProtoId components, SimpleDoAfterEvent args)

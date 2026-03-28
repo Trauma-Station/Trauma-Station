@@ -5568,3 +5568,27 @@ Entries:
   id: 655
   time: '2026-03-27T15:17:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1622
+- author: momoyawn
+  changes:
+  - type: Tweak
+    message: Justice can now Parry/Reflect depending on its mode.
+  id: 656
+  time: '2026-03-27T22:44:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1624
+- author: Aviu
+  changes:
+  - type: Add
+    message: Heretic lock path.
+  - type: Add
+    message: Star touch and knit flesh castable in combat mode.
+  - type: Add
+    message: Predicted heretic mark effects.
+  - type: Fix
+    message: Fix backstabs triggering from side and not from back.
+  - type: Fix
+    message: Fix ascended heretic flesh mimics killing their master.
+  - type: Fix
+    message: Fix wounds not healing sometimes when they should.
+  id: 657
+  time: '2026-03-28T02:16:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1233

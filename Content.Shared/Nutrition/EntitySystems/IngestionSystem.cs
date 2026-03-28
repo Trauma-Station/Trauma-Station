@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Trauma.Common.Nutrition;
+using Content.Trauma.Common.Heretic;
 using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.Heretic;
 // </Trauma>
 ﻿using Content.Shared.Administration.Logs;
 using Content.Shared.Body;

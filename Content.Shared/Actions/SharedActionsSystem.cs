@@ -1,8 +1,7 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard;
 using Content.Shared.Ghost;
-using Content.Shared.Heretic;
 using Content.Shared.Popups;
+using Content.Trauma.Common.Heretic;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 // </Trauma>
@@ -436,23 +435,16 @@ public abstract partial class SharedActionsSystem : EntitySystem
             ev.Entity = targetEntity;
         }
 
-        // Goobtation start
+        // <Trauma>
         return;
 
         bool Fallback()
         {
-            if (ent.Comp.Event is not InstantWorldTargetActionEvent instantWorldEv)
-                return false;
-
-            instantWorldEv.Target = EntityCoordinates.Invalid;
-            instantWorldEv.Entity = null;
-
-            _adminLogger.Add(LogType.Action,
-                $"{ToPrettyString(user):user} is performing the {Name(ent):action} action provided by {ToPrettyString(provider):provider}.");
-
-            return true;
+            var ev = new ValidateInstantWorldTargetActionEvent(user, provider);
+            RaiseLocalEvent(ent, ref ev);
+            return ev.Result;
         }
-        // Goobstation end
+        // </Trauma>
     }
 
     public bool ValidateEntityTarget(EntityUid user, EntityUid target, Entity<EntityTargetActionComponent> ent)
