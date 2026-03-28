@@ -98,7 +98,7 @@
 - type: entity
   name: drill
   id: Drill
-  parent: [ BaseToolSurgery, BaseMedicalScienceContraband ] # Trauma
+  parent: BaseToolSurgery
   description: A surgical drill for making holes into hard material.
   components:
   - type: Sprite
