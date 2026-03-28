@@ -70,7 +70,7 @@
 - type: entity
   name: cautery
   id: Cautery
-  parent: [ BaseToolSurgery, BaseMedicalScienceContraband ] # Trauma
+  parent: BaseToolSurgery
   description: A surgical tool used to cauterize open wounds.
   components:
   - type: Sprite
@@ -98,7 +98,7 @@
 - type: entity
   name: drill
   id: Drill
-  parent: BaseToolSurgery
+  parent: [ BaseToolSurgery, BaseMedicalScienceContraband ] # Trauma
   description: A surgical drill for making holes into hard material.
   components:
   - type: Sprite
