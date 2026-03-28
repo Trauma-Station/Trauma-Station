@@ -6,18 +6,18 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-cigs-1 = Space cigs taste good like a cigarette should.
-advertisement-cigs-2 = I'd rather toolbox than switch.
-advertisement-cigs-3 = Smoke!
-advertisement-cigs-4 = Don't believe the reports - smoke today!
-advertisement-cigs-5 = Probably not bad for you!
-advertisement-cigs-6 = Don't believe the scientists!
-advertisement-cigs-7 = It's good for you!
-advertisement-cigs-8 = Don't quit, buy more!
+advertisement-cigs-1 = Local cigars should taste like cigars..
+advertisement-cigs-2 = I love empty toolboxes.
+advertisement-cigs-3 = Do not smoke!
+advertisement-cigs-4 = Don't believe the reports, smoke it now!
+advertisement-cigs-5 = Not bad for you!
+advertisement-cigs-6 = Don't believe what scientists say!
+advertisement-cigs-7 = Good for you!
+advertisement-cigs-8 = Don't stop and buy more!
 advertisement-cigs-9 = Nicotine heaven.
-advertisement-cigs-10 = Best cigarettes since 2150.
-advertisement-cigs-11 = Award-winning cigs.
-advertisement-cigs-12 = Here to take an edge off work!
-thankyou-cigs-1 = You've got 'em, now smoke 'em!
-thankyou-cigs-2 = You probably won't regret it!
-thankyou-cigs-3 = You'll become an addict in no time!
+advertisement-cigs-10 = The best cigar since 2150
+advertisement-cigs-11 = Happy cigar
+advertisement-cigs-12 = Find jobs here!
+thankyou-cigs-1 = We smoke together!
+thankyou-cigs-2 = You won't regret it!
+thankyou-cigs-3 = You will be connected soon!

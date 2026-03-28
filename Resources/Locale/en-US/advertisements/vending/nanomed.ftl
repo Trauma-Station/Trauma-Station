@@ -5,12 +5,12 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-nanomed-1 = Go save some lives!
-advertisement-nanomed-2 = The best stuff for your medbay.
-advertisement-nanomed-3 = Only the finest tools.
-advertisement-nanomed-4 = Natural chemicals!
-advertisement-nanomed-5 = This stuff saves lives.
-advertisement-nanomed-6 = Don't you want some?
-advertisement-nanomed-7 = Ping!
-advertisement-nanomed-8 = Make sure not to overdose people!
-advertisement-nanomed-9 = Go overdose people!
+advertisement-nanomed-1 = Life saving
+advertisement-nanomed-2 = This is Medibai at its best.
+advertisement-nanomed-3 = FOR USE ONLY.
+advertisement-nanomed-4 = Natural Medicine!
+advertisement-nanomed-5 = Dr.
+advertisement-nanomed-6 = I will not like you.
+advertisement-nanomed-7 = Login!
+advertisement-nanomed-8 = Do not exceed this value.
+advertisement-nanomed-9 = excellent.

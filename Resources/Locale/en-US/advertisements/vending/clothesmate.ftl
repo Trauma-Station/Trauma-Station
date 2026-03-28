@@ -8,10 +8,10 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-clothes-1 = Dress for success!
-advertisement-clothes-2 = Prepare to look swagalicious!
-advertisement-clothes-3 = Look at all this swag!
-advertisement-clothes-4 = Why leave style up to fate? Use the ClothesMate!
-advertisement-clothes-5 = Now with added neck warmers!
-advertisement-clothes-6 = You are looking stylish!
-advertisement-clothes-7 = Lovely outfit you have going there!
+advertisement-clothes-1 = Dress up for success!
+advertisement-clothes-2 = drink!
+advertisement-clothes-3 = We've all seen the shame!
+advertisement-clothes-4 = What is nature and destiny? Use ClothesMate!
+advertisement-clothes-5 = Now with another tablet movie!
+advertisement-clothes-6 = you are very beautiful
+advertisement-clothes-7 = Get dressed and go out!

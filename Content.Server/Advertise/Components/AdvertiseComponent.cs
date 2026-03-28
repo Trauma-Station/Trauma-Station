@@ -23,14 +23,14 @@ public sealed partial class AdvertiseComponent : Component
     /// Minimum time in seconds to wait before saying a new ad, in seconds. Has to be larger than or equal to 1.
     /// </summary>
     [DataField]
-    public int MinimumWait { get; private set; } = 8 * 60;
+    public int MinimumWait { get; private set; } = 1 * 60;
 
     /// <summary>
     /// Maximum time in seconds to wait before saying a new ad, in seconds. Has to be larger than or equal
     /// to <see cref="MinimumWait"/>
     /// </summary>
     [DataField]
-    public int MaximumWait { get; private set; } = 10 * 60;
+    public int MaximumWait { get; private set; } = 2 * 60;
 
     /// <summary>
     /// If true, the delay before the first advertisement (at MapInit) will ignore <see cref="MinimumWait"/>

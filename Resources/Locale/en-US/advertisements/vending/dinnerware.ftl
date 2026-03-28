@@ -5,13 +5,13 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-dinnerware-1 = Mm, food stuffs!
-advertisement-dinnerware-2 = Food and food accessories.
-advertisement-dinnerware-3 = Get your plates!
-advertisement-dinnerware-4 = You like forks?
-advertisement-dinnerware-5 = I like forks.
-advertisement-dinnerware-6 = Woo, utensils.
-advertisement-dinnerware-7 = You don't really need these...
-advertisement-dinnerware-8 = Take them if you want them!
-advertisement-dinnerware-9 = I'm pretty sure beakers are a must-have.
-advertisement-dinnerware-10 = WHY ARE THERE SO MANY KINDS OF MUGS?
+advertisement-dinnerware-1 = Eat!
+advertisement-dinnerware-2 = food and drink
+advertisement-dinnerware-3 = Grab a plate!
+advertisement-dinnerware-4 = Did you enjoy this season?
+advertisement-dinnerware-5 = I want to be perfect.
+advertisement-dinnerware-6 = Wow, this is a tool.
+advertisement-dinnerware-7 = You don't want...
+advertisement-dinnerware-8 = If you want to buy
+advertisement-dinnerware-9 = I think food is important.
+advertisement-dinnerware-10 = Why are there so many glasses?

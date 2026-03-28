@@ -7,8 +7,8 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-atmosdrobe-1 = Get your inflammable clothing right here!!!
-advertisement-atmosdrobe-2 = Protects you against plasma fires!
-advertisement-atmosdrobe-3 = Enjoy your off-brand engineering clothing!
-advertisement-atmosdrobe-4 = Always under control of your atmosphere!
-advertisement-atmosdrobe-5 = Providing comfort in every breath!
+advertisement-atmosdrobe-1 = Burn your clothes here!
+advertisement-atmosdrobe-2 = Protect yourself from plasma fire!
+advertisement-atmosdrobe-3 = Enjoy the unknown design tools!
+advertisement-atmosdrobe-4 = Always check your location!
+advertisement-atmosdrobe-5 = A promise of comfort for every soul!

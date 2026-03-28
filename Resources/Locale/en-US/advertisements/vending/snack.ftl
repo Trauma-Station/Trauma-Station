@@ -5,24 +5,24 @@
 #
 # SPDX-License-Identifier: MIT
 
-advertisement-snack-1 = Try our new nougat bar!
-advertisement-snack-2 = Twice the calories for half the price!
-advertisement-snack-3 = The healthiest!
-advertisement-snack-4 = Award-winning chocolate bars!
-advertisement-snack-5 = Mmm! So good!
-advertisement-snack-6 = Oh my god it's so juicy!
-advertisement-snack-7 = Have a snack.
-advertisement-snack-8 = Snacks are good for you!
-advertisement-snack-9 = Have some more Getmore!
-advertisement-snack-10 = Best quality snacks straight from mars.
+advertisement-snack-1 = Check out the new Nougat Bar!
+advertisement-snack-2 = space and calories together!
+advertisement-snack-3 = Hello!
+advertisement-snack-4 = Win Chocolate!
+advertisement-snack-5 = mm! Very pleasant!
+advertisement-snack-6 = Yummy!
+advertisement-snack-7 = Breakfast.
+advertisement-snack-8 = Good breakfast!
+advertisement-snack-9 = Get More!
+advertisement-snack-10 = Good food on Mars.
 advertisement-snack-11 = We love chocolate!
-advertisement-snack-12 = Try our new jerky!
-advertisement-snack-13 = Our suspicious jerky is totally not going to get you ejected into space!
-advertisement-snack-14 = Available to eat for most species!
-advertisement-snack-15 = Perfect for when you're on the verge of starvation!
-thankyou-snack-1 = Eat up!
-thankyou-snack-2 = Enjoy your product!
-thankyou-snack-3 = Have a nice snack.
+advertisement-snack-12 = Try our new flavor!
+advertisement-snack-13 = Our snacks won't send you anything!
+advertisement-snack-14 = big breakfast!
+advertisement-snack-15 = big breakfast!
+thankyou-snack-1 = Lunch!
+thankyou-snack-2 = happy shopping!
+thankyou-snack-3 = Sugar for breakfast.
 thankyou-snack-4 = Delicious!
-thankyou-snack-5 = Yummy!
-thankyou-snack-6 = Thank you for purchasing our snacks!
+thankyou-snack-5 = Delicious!
+thankyou-snack-6 = Thanks for buying a snack!

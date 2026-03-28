@@ -6,17 +6,17 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-happyhonk-1 = Honk! Honk! Why not order a Happy Honk Meal today?
-advertisement-happyhonk-2 = Clowns deserve a hug, if you see one be sure to show your appreciation.
-advertisement-happyhonk-3 = If you find the Golden Honker then pray to the gods, you are one lucky person.
-advertisement-happyhonk-4 = Happy Honk: it's a meal, it's a deal, it's got a plastic toy that will make you squeal.
-advertisement-happyhonk-5 = What's black and white and red all over? The mime and she died from blunt head trauma.
-advertisement-happyhonk-6 = How many security officers does it take to arrest you? Three, one to beat you to death, one to cuff you and one to dump your body in maintenance.
-advertisement-happyhonk-7 = Happy Honk is not responsible for the quality of the food placed within our Happy Honk meal boxes.
-advertisement-happyhonk-8 = Why not ask for our limited edition Mime Happy Honk Meal?
-advertisement-happyhonk-9 = Happy Honk is a trademark of Honk! co. and is far superior to Robust XOF Food corp.
-advertisement-happyhonk-10 = Our Happy Honk meals are sure to offer a great surprise!
-thankyou-happyhonk-1 = Honk!
-thankyou-happyhonk-2 = Honk honk!
-thankyou-happyhonk-3 = Go share the fun! Honk!
-thankyou-happyhonk-4 = Go slip people! Honk!
+advertisement-happyhonk-1 = Good morning. Good morning. How can I order Hank's Takeout today?
+advertisement-happyhonk-2 = You should hug him and thank him when you see him.
+advertisement-happyhonk-3 = If you see golden hair, please pray to Buddha and luck will help you.
+advertisement-happyhonk-4 = Happy Hank. Food, plastic and toys make me cry.
+advertisement-happyhonk-5 = Gwyn a Koch His mother died of a head injury.
+advertisement-happyhonk-6 = How many policemen have you caught? Third, someone kills you, someone ties you up, or someone throws your body across the room.
+advertisement-happyhonk-7 = Hank Hank is not responsible for the type of food in the lunch box.
+advertisement-happyhonk-8 = Why not order the limited edition Mime Happy Hong?
+advertisement-happyhonk-9 = You have a clear direction. All of Logan Nucky Food Company.
+advertisement-happyhonk-10 = Our food will surprise you.
+thankyou-happyhonk-1 = Baby!
+thankyou-happyhonk-2 = Come on!
+thankyou-happyhonk-3 = Share your joy. Try it.
+thankyou-happyhonk-4 = People are hiding. There is no

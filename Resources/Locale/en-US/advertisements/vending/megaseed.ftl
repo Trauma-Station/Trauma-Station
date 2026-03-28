@@ -5,8 +5,8 @@
 # SPDX-License-Identifier: MIT
 
 advertisement-megaseed-1 = We like plants!
-advertisement-megaseed-2 = Grow some crops
-advertisement-megaseed-3 = Grow, baby, growww!
-advertisement-megaseed-4 = Aw h'yeah son!
-advertisement-megaseed-5 = Mutating plants is fun!
-advertisement-megaseed-6 = All in for GMO!
+advertisement-megaseed-2 = Plant a seed.
+advertisement-megaseed-3 = WOW!
+advertisement-megaseed-4 = You have a baby!
+advertisement-megaseed-5 = Buying seeds is fun!
+advertisement-megaseed-6 = My God!

@@ -4,5 +4,5 @@
 #
 # SPDX-License-Identifier: MIT
 
-advertisement-bardrobe-1 = Guaranteed to prevent stains from spilled drinks!
-advertisement-bardrobe-2 = Classy and stylish!
+advertisement-bardrobe-1 = Guaranteed to prevent alcohol-induced dark spots!
+advertisement-bardrobe-2 = Unique and beautiful!

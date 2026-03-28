@@ -5,11 +5,11 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-smartfridge-1 = Hello world!
-advertisement-smartfridge-2 = PLEASE LET ME OUT
-advertisement-smartfridge-3 = I can make a quintillion calculations a second. Now, I am a fridge.
-advertisement-smartfridge-4 = New firmware update available.
-advertisement-smartfridge-5 = I am completely operational, and all my circuits are functioning perfectly.
-advertisement-smartfridge-6 = Scanning system for malicious software...
-advertisement-smartfridge-7 = Running system diagnostics...
-advertisement-smartfridge-8 = My circuit boards are too advanced for the functions I am allowed to operate.
+advertisement-smartfridge-1 = Hello everyone!
+advertisement-smartfridge-2 =
+advertisement-smartfridge-3 = Can measure 500 million items per second. I have a refrigerator now.
+advertisement-smartfridge-4 = New firmware available.
+advertisement-smartfridge-5 = Working All circuits are working fine.
+advertisement-smartfridge-6 = Antispyware...
+advertisement-smartfridge-7 = See firmware...
+advertisement-smartfridge-8 = My desk is too high.

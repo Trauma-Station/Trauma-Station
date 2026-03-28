@@ -6,8 +6,8 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-engidrobe-1 = Guaranteed to protect your feet from industrial accidents!
-advertisement-engidrobe-2 = Afraid of radiation? Then wear yellow!
-advertisement-engidrobe-3 = We got hats that protect your noggin!
-advertisement-engidrobe-4 = Not enough people wear safety equipment nowadays!
-advertisement-engidrobe-5 = Get your safety equipment today!
+advertisement-engidrobe-1 = Protect your feet from danger!
+advertisement-engidrobe-2 = Are you afraid of radiation? Here I use turmeric!
+advertisement-engidrobe-3 = A hat to protect the nose
+advertisement-engidrobe-4 = There is currently a shortage of workers with protective equipment.
+advertisement-engidrobe-5 = Be sure to buy now!
