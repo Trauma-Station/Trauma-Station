@@ -24,13 +24,10 @@
   components:
   - type: Projectile
     damage:
+      groups:
+        Brute: -5
+        Burn: -5
       types:
-        Piercing: -2.5
-        Slash: -2.5
-        Blunt: -2.5
-        Heat: -2.5
-        Cold: -2.5
-        Shock: -2.5
         Holy: 12.5
   - type: HolyIgniteOnCollide
     fireStacks: 2
