@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.DeviceNetwork;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -25,7 +16,6 @@ public sealed partial class SurveillanceCameraComponent : Component
 
     // Monitors != Viewers, as viewers are entities that are tied
     // to a player session that's viewing from this camera
-    //
     // Monitors are grouped sets of viewers, and may be
     // completely different monitor types (e.g., monitor console,
     // AI, etc.)

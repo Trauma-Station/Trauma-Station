@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client._Shitcode.Silo;
 using Content.Goobstation.Common.Silo;
 using Content.Shared.Materials;

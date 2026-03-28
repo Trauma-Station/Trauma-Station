@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Temperature;
 using Content.Goobstation.Common.Temperature.Components;
 using Content.Server._Goobstation.Wizard.Systems;
