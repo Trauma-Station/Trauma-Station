@@ -15,9 +15,8 @@
     severity: RevMajor
 
 - type: entity
-  id: BaseChaplainContraband
-  parent: BaseRestrictedContraband
   abstract: true
+  id: BaseChaplainContraband
   components:
   - type: Contraband
     allowedJobs: [ Chaplain ]
