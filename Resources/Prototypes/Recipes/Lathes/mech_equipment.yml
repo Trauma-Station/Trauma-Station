@@ -31,6 +31,13 @@
   parent: BaseMechEquipmentRecipe
   id: MechEquipmentHorn
   result: MechEquipmentHorn
+  # <Trauma> - add it to honker category
+  categories:
+  - Mech
+  - Parts
+  - MechEquipment
+  - Honker
+  # </Trauma>
   materials:
     Steel: 500
     Bananium: 200
