@@ -34,7 +34,6 @@
   recipes:
   - ProximitySensor
   - Drone # Goob
-  - AiRemoteBrain # Goob
 
 - type: latheRecipePack
   id: BorgModules

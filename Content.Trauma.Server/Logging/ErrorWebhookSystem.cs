@@ -118,11 +118,12 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
         if (message.Exception is {} e)
             content += $"\n{e.ToString().Replace(StackTracePrefix, string.Empty)}\n";
 
-        content = $"```{content}```";
-
         // trim the end of the stack trace if its too long, usually not important
-        if (content.Length > 2000)
-            content = content[0..2000];
+        var limit = 2000 - 8;
+        if (content.Length > limit)
+            content = content[0..limit];
+
+        content = $"```\n{content}\n```";
 
         Messages.Enqueue(content);
     }

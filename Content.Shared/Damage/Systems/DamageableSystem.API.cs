@@ -624,7 +624,7 @@ public sealed partial class DamageableSystem
     [Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")]
     public IReadOnlyDictionary<ProtoId<DamageGroupPrototype>, FixedPoint2> GetDamagePerGroup(Entity<DamageableComponent?> ent)
     {
-        if (!_damageableQuery.Resolve(ent, ref ent.Comp))
+        if (!_damageableQuery.Resolve(ent, ref ent.Comp, false)) // Trauma - no log error
             return new Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2>();
 
         // <Trauma> - let body handle it

@@ -34,6 +34,7 @@
   id: ClothingModsuitHelmetCorporate
   name: Corporate modsuit helmet
   description: A state-of-the-art helmet designed by NanoTrasen for the Corporate modsuit. It includes a built-in HUD.
+  categories: [HideSpawnMenu]
 
 - type: entity
   parent: [ ClothingModsuitChestplateApocryphal, BaseModsuitPieceCorporate ]
