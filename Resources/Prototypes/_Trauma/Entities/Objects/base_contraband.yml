@@ -31,8 +31,8 @@
     allowedDepartments: [ Security, Science ]
 
 - type: entity
-  id: BaseChaplainContraband
   abstract: true
+  id: BaseChaplainContraband
   parent: BaseRestrictedContraband
   components:
   - type: Contraband
