@@ -1142,7 +1142,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         // goob end
 
         // <Trauma> - allow source entity to replace font
-        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
+        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech?.FontId);
         RaiseLocalEvent(source, ref fontEv);
         // </Trauma>
 
