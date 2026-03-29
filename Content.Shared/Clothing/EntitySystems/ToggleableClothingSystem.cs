@@ -265,6 +265,8 @@ public sealed class ToggleableClothingSystem : EntitySystem
             var restore = !TerminatingOrDeleted(args.Equipee);
             foreach (var (partUid, slot) in parts)
             {
+                // it's being deleted not taken off, no contact here
+                _inventorySystem.TryUnequip(args.Equipee, slot, force: true, triggerHandContact: false);
                 PredictedQueueDel(partUid);
                 if (restore &&
                     CompOrNull<AttachedClothingComponent>(partUid)?.ClothingContainer?.ContainedEntity is {} stored &&
@@ -272,7 +274,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
                 {
                     _containerSystem.TryRemoveFromContainer(stored);
                     _inventorySystem.TryEquip(args.Equipee, stored, slot,
-                        force: true, triggerHandContact: false); // it's being deleted not taken off, no contact
+                        force: true, triggerHandContact: false);
                 }
             }
             return;
