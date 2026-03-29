@@ -47,7 +47,7 @@ public class MapLoadBenchmark
         PoolManager.Shutdown();
     }
 
-    public static string[] MapsSource { get; } = {"Empty", "Saltern", "Box", "Bagel", "Dev", "CentComm", "Atlas", "Core", "TestTeg", "Packed", "Origin", "Omega", "Cluster", "Reach", "Meta", "Marathon", "Nume", "MeteorArena", "Fland", "Oasis", "Barratry", "Kettle", "Submarine", "Lambda", "Leonid", "Delta", "Amber", "Chloris", "Cog"}; //Goobstation, readds maps;. Trauma, DELETE SERPENTCREST
+    public static string[] MapsSource { get; } = {"Empty", "Saltern", "Box", "Bagel", "Dev", "CentComm", "Atlas", "Core", "TestTeg", "Packed", "Origin", "Omega", "Cluster", "Reach", "Meta", "Marathon", "Nume", "MeteorArena", "Fland", "Oasis", "Barratry", "Kettle", "Submarine", "Lambda", "Leonid", "Delta", "Amber", "Chloris", "Cog"}; //Trauma - Completely Changed. NUKED SERPENTCREST
 
     [ParamsSource(nameof(MapsSource))]
     public string Map;
