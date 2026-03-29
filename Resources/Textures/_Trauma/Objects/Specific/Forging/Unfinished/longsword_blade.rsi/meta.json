@@ -11,10 +11,10 @@
       "name": "icon"
     },
     {
-      "name": "crossguard"
+      "name": "handle"
     },
     {
-      "name": "handle"
+      "name": "head"
     },
     {
       "name": "inhand-right",
@@ -22,6 +22,22 @@
     },
     {
       "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "handle-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "handle-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "head-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "head-inhand-left",
       "directions": 4
     }
   ]

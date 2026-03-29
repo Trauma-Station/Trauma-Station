@@ -11,11 +11,45 @@
       "name": "icon"
     },
     {
+      "name": "head"
+    },
+    {
+      "name": "handle"
+    },
+    {
+      "name": "head_wielded"
+    },
+    {
+      "name": "head_shield"
+    },
+    {
+      "name": "handle_shield"
+    },
+    {
+      "name": "handle_wielded"
+    },
+    {
       "name": "inhand-right",
       "directions": 4
     },
     {
       "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "head-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "head-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "handle-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "handle-inhand-left",
       "directions": 4
     }
   ]

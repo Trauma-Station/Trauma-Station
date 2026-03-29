@@ -8,6 +8,12 @@
     },
     "states": [
         {
+            "name": "adamantine"
+        },
+        {
+            "name": "adamantinebrittle"
+        },
+        {
             "name": "anvil_top"
         },
         {
@@ -75,6 +81,12 @@
         },
         {
             "name": "bloomplasteelhot"
+        },
+        {
+            "name": "bloomadamantine"
+        },
+        {
+            "name": "bloomadamantinehot"
         },
         {
             "name": "handlesmall"

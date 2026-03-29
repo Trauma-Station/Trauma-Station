@@ -9,7 +9,6 @@
     drawdepth: SmallObjects
     snapCardinals: true
     state: cold
-  - type: PlaceableSurface
   - type: Fixtures
     fixtures:
       itemcollide:
@@ -49,6 +48,8 @@
   - type: Construction
     graph: CharcoalForge
     node: unlit
+  - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: CharcoalForgeUnlit
@@ -63,12 +64,22 @@
     state: burning
   - type: SolutionHeater
     heatPerSecond: 160
-  - type: ItemPlacer
-    maxEntities: 4
-    whitelist:
-      components:
-      - Temperature
-      # We need a system for entity heating for this and fireplaces
   - type: Construction
     graph: CharcoalForge
     node: lit
+  - type: ItemSlotHeater
+    slot: ItemCabinet
+    temp: 50000
+    maxTemp: 4000
+  - type: ItemSlots
+    slots:
+      ItemCabinet:
+        insertSound:
+          path: /Audio/Effects/Vehicle/vehiclestartup.ogg
+        ejectSound:
+          path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
+        ejectOnInteract: true
+        whitelist:
+          components:
+          - InternalTemperature
+

@@ -156,3 +156,27 @@
     knockdownTimeMultiplier: 1.75
     minDistance: 1.5
     skillMod: -1
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesForge
+  name: forge gloves
+  description: Good for handling metal without burning yourself.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/forge.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Hands/Gloves/forge.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-brown
+  - type: FingerprintMask
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
+        Caustic: 5
+  - type: DamageOnHoldingImmune
+  - type: Construction
+    graph: ClothingHandsGlovesForge
+    node: finish

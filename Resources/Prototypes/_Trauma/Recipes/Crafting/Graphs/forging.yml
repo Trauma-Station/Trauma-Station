@@ -22,6 +22,10 @@
     entity: HandleLarge
     edges:
     - to: handlemedium
+      completed:
+        - !type:SpawnPrototype
+          prototype: HandleSmall
+          amount: 1
       steps:
       - tool: Slicing
         doAfter: 1
@@ -30,6 +34,10 @@
     entity: HandleMedium
     edges:
     - to: handlesmall
+      completed:
+        - !type:SpawnPrototype
+          prototype: HandleSmall
+          amount: 1
       steps:
       - tool: Slicing
         doAfter: 1
@@ -137,3 +145,439 @@
           state: cement
   - node: finish
     entity: WetBrick
+
+- type: constructionGraph # Todo, add leather
+  id: ClothingHandsGlovesForge
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: Durathread
+        amount: 3
+        doAfter: 5
+  - node: finish
+    entity: ClothingHandsGlovesForge
+
+# Forge Knifes
+
+- type: constructionGraph
+  id: ForgeKnife
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: handle
+      steps:
+      - tag: HandleSmall
+        doAfter: 10
+        name: construction-graph-tag-smallhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlesmall
+
+  - node: handle
+    entity: KnifeCraftStart
+    edges:
+
+
+    - to: knifebrass
+      steps:
+      - tag: KnifeBladeBrass
+        doAfter: 3
+
+    - to: knifesteel
+      steps:
+      - tag: KnifeBladeSteel
+        doAfter: 3
+
+    - to: knifeplasteel
+      steps:
+      - tag: KnifeBladePlasteel
+        doAfter: 3
+
+
+    - to: combatknifebrass
+      steps:
+      - tag: CombatKnifeBladeBrass
+        doAfter: 3
+
+    - to: combatknifesteel
+      steps:
+      - tag: CombatKnifeBladeSteel
+        doAfter: 3
+
+    - to: combatknifeplasteel
+      steps:
+      - tag: CombatKnifeBladePlasteel
+        doAfter: 3
+
+
+    - to: cleaverbrass
+      steps:
+      - tag: CleaverBladeBrass
+        doAfter: 3
+
+    - to: cleaversteel
+      steps:
+      - tag: CleaverBladeSteel
+        doAfter: 3
+
+    - to: cleaverplasteel
+      steps:
+      - tag: CleaverBladePlasteel
+        doAfter: 3
+
+
+    - to: kukribrass
+      steps:
+      - tag: KukriBladeBrass
+        doAfter: 3
+
+    - to: kukristeel
+      steps:
+      - tag: KukriBladeSteel
+        doAfter: 3
+
+    - to: kukriplasteel
+      steps:
+      - tag: KukriBladePlasteel
+        doAfter: 3
+
+
+  - node: knifebrass
+    entity: BrassForgeKnife
+
+  - node: knifesteel
+    entity: SteelForgeKnife
+
+  - node: knifeplasteel
+    entity: PlasteelForgeKnife
+
+
+  - node: combatknifebrass
+    entity: BrassForgeCombatKnife
+
+  - node: combatknifesteel
+    entity: SteelForgeCombatKnife
+
+  - node: combatknifeplasteel
+    entity: PlasteelForgeCombatKnife
+
+
+  - node: cleaverbrass
+    entity: BrassForgeCleaver
+
+  - node: cleaversteel
+    entity: SteelForgeCleaver
+
+  - node: cleaverplasteel
+    entity: PlasteelForgeCleaver
+
+
+  - node: kukribrass
+    entity: BrassForgeKukri
+
+  - node: kukristeel
+    entity: SteelForgeKukri
+
+  - node: kukriplasteel
+    entity: PlasteelForgeKukri
+
+# Tools
+
+- type: constructionGraph
+  id: ForgeTool
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: handle
+      steps:
+      - tag: HandleSmall
+        doAfter: 10
+        name: construction-graph-tag-smallhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlesmall
+
+  - node: handle
+    entity: ToolCraftStart
+    edges:
+
+    - to: hammerbrass
+      steps:
+      - tag: HammerHeadBrass
+        doAfter: 3
+
+    - to: hammersteel
+      steps:
+      - tag: HammerHeadSteel
+        doAfter: 3
+
+    - to: hammerplasteel
+      steps:
+      - tag: HammerHeadPlasteel
+        doAfter: 3
+
+
+    - to: screwdriverbrass
+      steps:
+      - tag: ScrewdriverShankBrass
+        doAfter: 3
+
+    - to: screwdriversteel
+      steps:
+      - tag: ScrewdriverShankSteel
+        doAfter: 3
+
+    - to: screwdriverplasteel
+      steps:
+      - tag: ScrewdriverShankSteel
+        doAfter: 3
+
+  - node: hammerbrass
+    entity: BrassForgeHammer
+
+  - node: hammersteel
+    entity: SteelForgeHammer
+
+  - node: hammerplasteel
+    entity: PlasteelForgeHammer
+
+
+  - node: screwdriverbrass
+    entity: BrassForgeScrewdriver
+
+  - node: screwdriversteel
+    entity: SteelForgeScrewdriver
+
+  - node: screwdriverplasteel
+    entity: PlasteelForgeScrewdriver
+
+# Arrows
+
+- type: constructionGraph
+  id: ForgeArrow
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: handle
+      steps:
+      - tag: HandleSmall
+        doAfter: 1
+        name: construction-graph-tag-smallhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlesmall
+
+  - node: handle
+    entity: ArrowCraftStart
+    edges:
+
+    - to: arrowbrass
+      steps:
+      - tag: ArrowHeadBrass
+        doAfter: 3
+      - material: Cloth
+        amount: 1
+        doAfter: 1
+
+    - to: arrowsteel
+      steps:
+      - tag: ArrowHeadSteel
+        doAfter: 3
+      - material: Cloth
+        amount: 1
+        doAfter: 1
+
+    - to: arrowplasteel
+      steps:
+      - tag: ArrowHeadPlasteel
+        doAfter: 3
+      - material: Cloth
+        amount: 1
+        doAfter: 1
+
+  - node: arrowbrass
+    entity: ForgeArrowBrass
+
+  - node: arrowsteel
+    entity: ForgeArrowSteel
+
+  - node: arrowplasteel
+    entity: ForgeArrowPlasteel
+
+# Forge Sword
+
+- type: constructionGraph
+  id: ForgeSword
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: handle
+      steps:
+      - tag: HandleSmall
+        doAfter: 10
+        name: construction-graph-tag-smallhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlesmall
+
+  - node: handle
+    entity: SwordCraftStart
+    edges:
+
+
+    - to: swordbrass
+      steps:
+      - tag: SwordBladeBrass
+        doAfter: 3
+
+    - to: swordsteel
+      steps:
+      - tag: SwordBladeSteel
+        doAfter: 3
+
+    - to: swordplasteel
+      steps:
+      - tag: SwordBladePlasteel
+        doAfter: 3
+
+
+    - to: longswordbrass
+      steps:
+      - tag: LongswordBladeBrass
+        doAfter: 3
+
+    - to: longswordsteel
+      steps:
+      - tag: LongswordBladeSteel
+        doAfter: 3
+
+    - to: longswordplasteel
+      steps:
+      - tag: LongswordBladePlasteel
+        doAfter: 3
+
+
+    - to: katanabrass
+      steps:
+      - tag: KatanaBladeBrass
+        doAfter: 3
+
+    - to: katanasteel
+      steps:
+      - tag: KatanaBladeSteel
+        doAfter: 3
+
+    - to: katanaplasteel
+      steps:
+      - tag: KatanaBladePlasteel
+        doAfter: 3
+
+
+  - node: swordbrass
+    entity: BrassForgeArmingsword
+
+  - node: swordsteel
+    entity: SteelForgeArmingsword
+
+  - node: swordplasteel
+    entity: PlasteelForgeArmingsword
+
+
+  - node: longswordbrass
+    entity: BrassForgeLongsword
+
+  - node: longswordsteel
+    entity: SteelForgeLongsword
+
+  - node: longswordplasteel
+    entity: PlasteelForgeLongsword
+
+
+  - node: katanabrass
+    entity: BrassForgeKatana
+
+  - node: katanasteel
+    entity: SteelForgeKatana
+
+  - node: katanaplasteel
+    entity: PlasteelForgeKatana
+
+# Forge Blugeon
+
+- type: constructionGraph
+  id: ForgeBlugeon
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: handle
+      steps:
+      - tag: HandleMedium
+        doAfter: 10
+        name: construction-graph-tag-mediumhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: HandleMedium
+
+  - node: handle
+    entity: BlugeonCraftStart
+    edges:
+
+
+    - to: warhammerbrass
+      steps:
+      - tag: WarhammerHeadBrass
+        doAfter: 3
+
+    - to: warhammersteel
+      steps:
+      - tag: WarhammerHeadSteel
+        doAfter: 3
+
+    - to: warhammerplasteel
+      steps:
+      - tag: WarhammerHeadPlasteel
+        doAfter: 3
+
+
+    - to: morningstarbrass
+      steps:
+      - tag: MorningstarHeadBrass
+        doAfter: 3
+
+    - to: morningstarsteel
+      steps:
+      - tag: MorningstarHeadSteel
+        doAfter: 3
+
+    - to: morningstarplasteel
+      steps:
+      - tag: MorningstarHeadPlasteel
+        doAfter: 3
+
+
+  - node: warhammerbrass
+    entity: BrassForgeWarhammer
+
+  - node: warhammersteel
+    entity: SteelForgeWarhammer
+
+  - node: warhammerplasteel
+    entity: PlasteelForgeWarhammer
+
+
+  - node: morningstarbrass
+    entity: BrassForgeMorningstar
+
+  - node: morningstarsteel
+    entity: SteelForgeMorningstar
+
+  - node: morningstarplasteel
+    entity: PlasteelForgeMorningstar

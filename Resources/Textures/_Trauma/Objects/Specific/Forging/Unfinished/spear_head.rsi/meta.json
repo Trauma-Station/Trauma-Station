@@ -11,11 +11,57 @@
       "name": "icon"
     },
     {
+      "name": "head"
+    },
+    {
+      "name": "handle"
+    },
+    {
       "name": "inhand-right",
       "directions": 4
     },
     {
       "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "head-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "head-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "handle-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "handle-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "handle-wielded-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "handle-wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "head-wielded-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "head-wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-left",
       "directions": 4
     }
   ]

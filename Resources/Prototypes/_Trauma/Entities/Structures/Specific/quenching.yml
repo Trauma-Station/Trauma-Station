@@ -9,7 +9,6 @@
     drawdepth: SmallObjects
     snapCardinals: true
     state: icon
-  - type: PlaceableSurface
   - type: Fixtures
     fixtures:
       itemcollide:
@@ -43,7 +42,19 @@
             SheetSteel1:
               min: 2
               max: 3
-# Need system for this
   - type: Construction
     graph: QuenchingBarrel
     node: finish
+  - type: ItemSlotHeater
+    slot: ItemCabinet
+    temp: -250000
+    maxTemp: 100
+  - type: ItemSlots
+    slots:
+      ItemCabinet:
+        ejectOnInteract: true
+        whitelist:
+          components:
+          - InternalTemperature
+  - type: Clickable
+  - type: InteractionOutline

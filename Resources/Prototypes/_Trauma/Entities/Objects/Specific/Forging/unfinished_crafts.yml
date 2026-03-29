@@ -234,6 +234,10 @@
   parent: [BaseKnifeBlade, BrassColor]
   id: KnifeBladeBrass
   name: brass knife blade
+  components:
+  - type: Tag
+    tags:
+      - KnifeBladeBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -268,6 +272,10 @@
   parent: [BaseKnifeBlade, SteelColor]
   id: KnifeBladeSteel
   name: steel knife blade
+  components:
+  - type: Tag
+    tags:
+      - KnifeBladeSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -302,7 +310,10 @@
   parent: [BaseKnifeBlade, PlasteelColor]
   id: KnifeBladePlasteel
   name: plasteel knife blade
-
+  components:
+  - type: Tag
+    tags:
+      - KnifeBladePlasteel
 # Hammer
 
 - type: entity
@@ -361,6 +372,10 @@
   parent: [BaseHammerHead, BrassColor]
   id: HammerHeadBrass
   name: brass hammer head
+  components:
+  - type: Tag
+    tags:
+      - HammerHeadBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -395,6 +410,10 @@
   parent: [BaseHammerHead, SteelColor]
   id: HammerHeadSteel
   name: steel hammer head
+  components:
+  - type: Tag
+    tags:
+      - HammerHeadSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -429,6 +448,10 @@
   parent: [BaseHammerHead, PlasteelColor]
   id: HammerHeadPlasteel
   name: plasteel hammer head
+  components:
+  - type: Tag
+    tags:
+      - HammerHeadPlasteel
 
 # Combat knife
 
@@ -488,6 +511,10 @@
   parent: [BaseCombatKnifeBlade, BrassColor]
   id: CombatKnifeBladeBrass
   name: brass combat knife blade
+  components:
+  - type: Tag
+    tags:
+      - CombatKnifeBladeBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -522,6 +549,10 @@
   parent: [BaseCombatKnifeBlade, SteelColor]
   id: CombatKnifeBladeSteel
   name: steel combat knife blade
+  components:
+  - type: Tag
+    tags:
+      - CombatKnifeBladeSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -556,6 +587,10 @@
   parent: [BaseCombatKnifeBlade, PlasteelColor]
   id: CombatKnifeBladePlasteel
   name: plasteel combat knife blade
+  components:
+  - type: Tag
+    tags:
+      - CombatKnifeBladePlasteel
 
 #   - Cleaver
 
@@ -615,6 +650,10 @@
   parent: [BaseCleaverBlade, BrassColor]
   id: CleaverBladeBrass
   name: brass cleaver blade
+  components:
+  - type: Tag
+    tags:
+      - CleaverBladeBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -649,6 +688,10 @@
   parent: [BaseCleaverBlade, SteelColor]
   id: CleaverBladeSteel
   name: steel cleaver blade
+  components:
+  - type: Tag
+    tags:
+      - CleaverBladeSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -683,6 +726,10 @@
   parent: [BaseCleaverBlade, PlasteelColor]
   id: CleaverBladePlasteel
   name: plasteel cleaver blade
+  components:
+  - type: Tag
+    tags:
+      - CleaverBladePlasteel
 
 #   - KukriBlade
 
@@ -742,6 +789,10 @@
   parent: [BaseKukriBlade, BrassColor]
   id: KukriBladeBrass
   name: brass kukri blade
+  components:
+  - type: Tag
+    tags:
+      - KukriBladeBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -776,6 +827,10 @@
   parent: [BaseKukriBlade, SteelColor]
   id: KukriBladeSteel
   name: steel kukri blade
+  components:
+  - type: Tag
+    tags:
+      - KukriBladeSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -810,6 +865,10 @@
   parent: [BaseKukriBlade, PlasteelColor]
   id: KukriBladePlasteel
   name: plasteel kukri blade
+  components:
+  - type: Tag
+    tags:
+      - KukriBladePlasteel
 
 #   - SurvivalKnife
 
@@ -863,7 +922,7 @@
   name: hot brass survival knife
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: BrassForgeSurvivalKnife
 
 - type: entity
   parent: [BaseSurvivalKnife, BrassColor]
@@ -897,7 +956,7 @@
   name: hot steel survival knife
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeSteel
+    cooledPrototype: SteelForgeSurvivalKnife
 
 - type: entity
   parent: [BaseSurvivalKnife, SteelColor]
@@ -931,7 +990,7 @@
   name: hot plasteel survival knife
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifePlasteel
+    cooledPrototype: PlasteelForgeSurvivalKnife
 
 - type: entity
   parent: [BaseSurvivalKnife, PlasteelColor]
@@ -990,12 +1049,16 @@
   name: hot brass screwdriver shank
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: ScrewdriverShankBrass
 
 - type: entity
   parent: [BaseScrewdriverShank, BrassColor]
   id: ScrewdriverShankBrass
   name: brass screwdriver shank
+  components:
+  - type: Tag
+    tags:
+      - ScrewdriverShankBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -1030,6 +1093,10 @@
   parent: [BaseScrewdriverShank, SteelColor]
   id: ScrewdriverShankSteel
   name: steel screwdriver shank
+  components:
+  - type: Tag
+    tags:
+      - ScrewdriverShankSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -1064,6 +1131,10 @@
   parent: [BaseScrewdriverShank, PlasteelColor]
   id: ScrewdriverShankPlasteel
   name: plasteel screwdriver shank
+  components:
+  - type: Tag
+    tags:
+      - ScrewdriverShankPlasteel
 
 #   - Crowbar
 
@@ -1113,11 +1184,11 @@
 
 - type: entity
   parent: [BaseCrowbarForgedHot, BaseBrassHot]
-  id: SurvivalKnifeBrassHot
+  id: CrowbarForgedBrassHot
   name: hot brass crowbar
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: BrassForgeCrowbar
 
 - type: entity
   parent: [BaseCrowbarForged, BrassColor]
@@ -1151,7 +1222,7 @@
   name: hot steel crowbar
   components:
   - type: ChangeOnCool
-    cooledPrototype: CrowbarForgedSteel
+    cooledPrototype: SteelForgeCrowbar
 
 - type: entity
   parent: [BaseCrowbarForged, SteelColor]
@@ -1185,7 +1256,7 @@
   name: hot plasteel crowbar
   components:
   - type: ChangeOnCool
-    cooledPrototype: CrowbarForgedPlasteel
+    cooledPrototype: PlasteelForgeCrowbar
 
 - type: entity
   parent: [BaseCrowbarForged, PlasteelColor]
@@ -1244,7 +1315,7 @@
   name: hot brass wrench
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: WrenchForgedBrass
 
 - type: entity
   parent: [BaseWrenchForged, BrassColor]
@@ -1371,7 +1442,7 @@
   name: hot brass tiny blades
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: TinyBladesBrass
 
 - type: entity
   parent: [BaseTinyBlades, BrassColor]
@@ -1498,12 +1569,16 @@
   name: hot brass blade
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: SwordBladeBrass
 
 - type: entity
   parent: [BaseSwordBlade, BrassColor]
   id: SwordBladeBrass
   name: brass blade
+  components:
+  - type: Tag
+    tags:
+      - SwordBladeBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -1538,6 +1613,10 @@
   parent: [BaseSwordBlade, SteelColor]
   id: SwordBladeSteel
   name: steel blade
+  components:
+  - type: Tag
+    tags:
+      - SwordBladeSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -1572,7 +1651,10 @@
   parent: [BaseSwordBlade, PlasteelColor]
   id: SwordBladePlasteel
   name: plasteel blade
-
+  components:
+  - type: Tag
+    tags:
+      - SwordBladePlasteel
 #   - ChainMail
 
 - type: entity
@@ -1625,7 +1707,7 @@
   name: hot brass chainmail sheet
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: ChainMailBrass
 
 - type: entity
   parent: [BaseChainMailSheet, BrassColor]
@@ -1752,7 +1834,7 @@
   name: hot brass halberd head
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: HalberdHeadBrass
 
 - type: entity
   parent: [BaseHalberdHead, BrassColor]
@@ -1879,12 +1961,16 @@
   name: hot brass long blade
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: LongswordBladeBrass
 
 - type: entity
   parent: [BaseLongswordBlade, BrassColor]
   id: LongswordBladeBrass
   name: brass long blade
+  components:
+  - type: Tag
+    tags:
+      - LongswordBladeBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -1919,6 +2005,10 @@
   parent: [BaseLongswordBlade, SteelColor]
   id: LongswordBladeSteel
   name: steel long blade
+  components:
+  - type: Tag
+    tags:
+      - LongswordBladeSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -1953,6 +2043,10 @@
   parent: [BaseLongswordBlade, PlasteelColor]
   id: LongswordBladePlasteel
   name: plasteel long blade
+  components:
+  - type: Tag
+    tags:
+      - LongswordBladePlasteel
 
 #   - PlateArmor
 
@@ -2006,7 +2100,7 @@
   name: hot brass plate
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: MetalPlateBrass
 
 - type: entity
   parent: [BaseMetalPlate, BrassColor]
@@ -2133,12 +2227,16 @@
   name: hot brass warhammer head
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: WarhammerHeadBrass
 
 - type: entity
   parent: [BaseWarhammerHead, BrassColor]
   id: WarhammerHeadBrass
   name: brass warhammer head
+  components:
+  - type: Tag
+    tags:
+      - WarhammerHeadBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -2173,6 +2271,10 @@
   parent: [BaseWarhammerHead, SteelColor]
   id: WarhammerHeadSteel
   name: steel warhammer head
+  components:
+  - type: Tag
+    tags:
+      - WarhammerHeadSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -2207,6 +2309,10 @@
   parent: [BaseWarhammerHead, PlasteelColor]
   id: WarhammerHeadPlasteel
   name: plasteel warhammer head
+  components:
+  - type: Tag
+    tags:
+      - WarhammerHeadPlasteel
 
 #   - PickaxeHead
 
@@ -2260,7 +2366,7 @@
   name: hot brass pickaxe head
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: PickaxeHeadBrass
 
 - type: entity
   parent: [BasePickaxeHead, BrassColor]
@@ -2387,12 +2493,16 @@
   name: hot brass thin blade
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: ThinBladeBrass
 
 - type: entity
   parent: [BaseThinBlade, BrassColor]
   id: ThinBladeBrass
   name: brass thin blade
+  components:
+  - type: Tag
+    tags:
+      - KatanaBladeBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -2427,6 +2537,10 @@
   parent: [BaseThinBlade, SteelColor]
   id: ThinBladeSteel
   name: steel thin blade
+  components:
+  - type: Tag
+    tags:
+      - KatanaBladeSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -2461,6 +2575,10 @@
   parent: [BaseThinBlade, PlasteelColor]
   id: ThinBladePlasteel
   name: plasteel thin blade
+  components:
+  - type: Tag
+    tags:
+      - KatanaBladePlasteel
 
 #   - ArrowHeads
 
@@ -2502,7 +2620,7 @@
       - !type:SpawnEntitiesBehavior
         offset: 0
         spawn:
-          ArrowHeadsBrassHot:
+          Brassarrowheads:
             min: 1
             max: 1
       - !type:DoActsBehavior
@@ -2514,12 +2632,16 @@
   name: hot brass arrow heads
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: ArrowHeadsBrass
 
 - type: entity
   parent: [BaseArrowHeads, BrassColor]
   id: ArrowHeadsBrass
   name: brass arrow heads
+  components:
+  - type: Tag
+    tags:
+      - ArrowHeadBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -2536,7 +2658,7 @@
       - !type:SpawnEntitiesBehavior
         offset: 0
         spawn:
-          ArrowHeadsSteelHot:
+          Steelarrowheads:
             min: 1
             max: 1
       - !type:DoActsBehavior
@@ -2554,6 +2676,10 @@
   parent: [BaseArrowHeads, SteelColor]
   id: ArrowHeadsSteel
   name: steel arrow heads
+  components:
+  - type: Tag
+    tags:
+      - ArrowHeadSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -2570,7 +2696,7 @@
       - !type:SpawnEntitiesBehavior
         offset: 0
         spawn:
-          ArrowHeadsPlasteelHot:
+          Steelarrowheads:
             min: 1
             max: 1
       - !type:DoActsBehavior
@@ -2588,7 +2714,10 @@
   parent: [BaseArrowHeads, PlasteelColor]
   id: ArrowHeadsPlasteel
   name: plasteel arrow heads
-
+  components:
+  - type: Tag
+    tags:
+      - ArrowHeadPlasteel
 
 #   - SpearHead
 
@@ -2642,7 +2771,7 @@
   name: hot brass spear head
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: SpearHeadBrass
 
 - type: entity
   parent: [BaseSpearHead, BrassColor]
@@ -2768,12 +2897,16 @@
   name: hot brass morningstar head
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: MorningStarBrass
 
 - type: entity
   parent: [BaseMorningstarHead, BrassColor]
   id: MorningstarHeadBrass
   name: brass morningstar head
+  components:
+  - type: Tag
+    tags:
+      - MorningstarHeadBrass
 
 - type: entity
   parent: BaseSteelUnfinishedHot
@@ -2808,6 +2941,10 @@
   parent: [BaseMorningstarHead, SteelColor]
   id: MorningstarHeadSteel
   name: steel morningstar head
+  components:
+  - type: Tag
+    tags:
+      - MorningstarHeadSteel
 
 - type: entity
   parent: BasePlasteelUnfinishedHot
@@ -2842,6 +2979,10 @@
   parent: [BaseMorningstarHead, PlasteelColor]
   id: MorningstarHeadPlasteel
   name: plasteel morningstar head
+  components:
+  - type: Tag
+    tags:
+      - MorningstarHeadPlasteel
 
 #   - ShieldBoss
 
@@ -2895,7 +3036,7 @@
   name: hot brass shield boss
   components:
   - type: ChangeOnCool
-    cooledPrototype: SurvivalKnifeBrass
+    cooledPrototype: ShieldBossBrass
 
 - type: entity
   parent: [BaseShieldBoss, BrassColor]

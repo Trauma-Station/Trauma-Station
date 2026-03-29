@@ -323,7 +323,6 @@
       repairable: true
       repairMaterials:
         Whetstone: 15, 25
-        Whetstone1: 15, 25
       repairDoAfter: 3
       onBreakBehavior: !type:PlaySoundBehavior
         sound:
@@ -366,7 +365,6 @@
       repairable: true
       repairMaterials:
         Whetstone: 15, 25
-        Whetstone1: 15, 25
       repairDoAfter: 3
       onBreakBehavior: !type:PlaySoundBehavior
         sound:
