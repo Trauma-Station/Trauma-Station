@@ -614,11 +614,18 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.95
     sprintModifier: 0.95
+  - type: Construction
+    graph: ForgeTool
+    node: screwdriverbrass
 
 - type: entity
   parent: [BaseForgedSteel, BaseForgeScrewdriver]
   id: SteelForgeScrewdriver
   name: steel screwdriver
+  components:
+  - type: Construction
+    graph: ForgeTool
+    node: screwdriversteel
 
 - type: entity
   parent: [BaseForgedPlasteel, BaseForgeScrewdriver]
@@ -629,7 +636,9 @@
     damage:
       types:
         Piercing: 7.5
-
+  - type: Construction
+    graph: ForgeTool
+    node: screwdriverplasteel
 # Crowbar
 
 - type: entity
