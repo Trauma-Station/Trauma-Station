@@ -5,6 +5,10 @@
   components:
   # <Trauma>
   - type: TileMovement
+  - type: RotationCooldown
+    delay: 2
+    sound:
+      path: /Audio/Mecha/mechmove03.ogg
   - type: UnpoweredFlashlight # mech lights for all mechs, it's unpowered to match hardsuits
   - type: PointLight
     enabled: false
