@@ -32,8 +32,8 @@
 
 - type: entity
   id: BaseChaplainContraband
-  parent: BaseRestrictedContraband
   abstract: true
+  parent: BaseRestrictedContraband
   components:
   - type: Contraband
     allowedJobs: [ Chaplain ]
