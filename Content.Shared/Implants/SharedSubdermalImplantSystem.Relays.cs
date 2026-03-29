@@ -25,7 +25,7 @@ public abstract partial class SharedSubdermalImplantSystem
     /// <summary>
     /// Relays events from the implanted to the implant.
     /// </summary>
-    private void RelayToImplantEvent<T>(EntityUid uid, ImplantedComponent component, T args) where T : notnull
+    public void RelayToImplantEvent<T>(EntityUid uid, ImplantedComponent component, T args) where T : notnull // Trauma - made public
     {
         if (!_container.TryGetContainer(uid, ImplanterComponent.ImplantSlotId, out var implantContainer))
             return;
