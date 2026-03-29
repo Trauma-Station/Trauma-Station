@@ -275,13 +275,18 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
         var ev = new GetMeleeDamageEvent(uid, new(component.Damage * Damageable.UniversalMeleeDamageModifier), new(), user, component.ResistanceBypass);
         RaiseLocalEvent(uid, ref ev);
-        // <Goobstation> - raise an event on the user too for strength augments
-        var userEv = new GetUserMeleeDamageEvent(uid, ev.Damage, ev.Modifiers);
-        RaiseLocalEvent(user, ref userEv);
-        // this currently does nothing since they are classes, but it's futureproofing for struct DamageSpecifier.
-        ev.Damage = userEv.Damage;
-        ev.Modifiers = userEv.Modifiers;
-        // </Goobstation>
+        // <Trauma> - raise an event on the user too for strength augments, knowledge, etc
+        // only consider if the user is punching or holding a weapon
+        // non-held weapons are stuff like mechs which don't take physical effort to use, so don't apply strength etc
+        if (uid == user || _hands.IsHolding(user, uid))
+        {
+            var userEv = new GetUserMeleeDamageEvent(uid, ev.Damage, ev.Modifiers);
+            RaiseLocalEvent(user, ref userEv);
+            // this currently does nothing since they are classes, but it's futureproofing for struct DamageSpecifier.
+            ev.Damage = userEv.Damage;
+            ev.Modifiers = userEv.Modifiers;
+        }
+        // </Trauma>
 
         return DamageSpecifier.ApplyModifierSets(ev.Damage, ev.Modifiers);
     }
