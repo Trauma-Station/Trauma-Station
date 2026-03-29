@@ -177,6 +177,24 @@ public sealed partial class BodySystem
     }
 
     /// <summary>
+    /// Get the number of vital parts for an entity, falls back to 1 for non-mobs.
+    /// </summary>
+    public int GetVitalParts(Entity<BodyComponent?> body)
+    {
+        if (!_bodyQuery.Resolve(body, ref body.Comp, false) || body.Comp.Organs?.ContainedEntities is not {} organs)
+            return 1;
+
+        int vital = 0;
+        foreach (var organ in organs)
+        {
+            if (GetCategory(organ) is {} category && VitalParts.Contains(category))
+                vital++;
+        }
+
+        return vital;
+    }
+
+    /// <summary>
     /// Converts Enums from BodyPartType to their Targeting system equivalent.
     /// </summary>
     public TargetBodyPart GetTargetBodyPart(BodyPartType type, BodyPartSymmetry symmetry)

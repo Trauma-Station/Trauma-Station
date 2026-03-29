@@ -230,3 +230,10 @@ Entries:
   id: 24
   time: '2026-03-26T19:48:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1600
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed all mapped disposal blockers, fun is infact legal.
+  id: 25
+  time: '2026-03-29T00:03:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1654

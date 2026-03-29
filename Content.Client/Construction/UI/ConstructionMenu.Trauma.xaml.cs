@@ -13,32 +13,50 @@ public sealed partial class ConstructionMenu
 
     private readonly CommonKnowledgeSystem _knowledge = default!;
 
+    // TODO: make this an event a trauma.client system injects with
     public void AddSkillRequirements(ConstructionPrototype proto)
     {
-        var skills = proto.Practical ?? proto.Theory;
-        if (skills.Count <= 0)
+        var same = proto.Practical == null;
+        RecipeConstructionList.AddChild(new Label()
         {
-            var text = Loc.GetString("construction-menu-requirement-none");
-            var label = new RichTextLabel
+            Text = Loc.GetString("construction-menu-requirement-theory", ("same", same))
+        });
+        AddSkills(proto.Theory);
+
+        if (proto.Practical is {} practical)
+        {
+            RecipeConstructionList.AddChild(new Label()
             {
-                Text = text,
-            };
-            RecipeConstructionList.AddChild(label);
-            return;
+                Text = Loc.GetString("construction-menu-requirement-practical")
+            });
+            AddSkills(practical);
+        }
+    }
+
+    private void AddSkills(Dictionary<EntProtoId, int> skills)
+    {
+        if (skills.Count == 0)
+        {
+            RecipeConstructionList.AddChild(new Label()
+            {
+                Text = Loc.GetString("construction-menu-requirement-none")
+            });
         }
 
         foreach (var (id, amount) in skills)
         {
+            // TODO: use AllSkills
             if (!_proto.Resolve(id, out var prototype) || !prototype.TryGetComponent<KnowledgeComponent>("Knowledge", out var skill))
                 continue;
 
-            var text = Loc.GetString("construction-menu-requirement-display", ("name", prototype.Name), ("amount", _knowledge.GetMasteryString(amount)));
-            var label = new RichTextLabel
+            var text = Loc.GetString("construction-menu-requirement-display",
+                ("name", prototype.Name),
+                ("amount", _knowledge.GetMasteryString(amount)));
+            RecipeConstructionList.AddChild(new Label()
             {
                 Text = text,
                 Modulate = skill.Color
-            };
-            RecipeConstructionList.AddChild(label);
+            });
         }
     }
 }

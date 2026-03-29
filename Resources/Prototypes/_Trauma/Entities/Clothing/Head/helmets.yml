@@ -30,8 +30,8 @@
         Radiation: 0.75
         Caustic: 0.75
   - type: ExplosionResistance
-    damageCoefficient: 0.75
-  - type: FaceHuggerBlocker #trauma
+    damageCoefficient: 0.4
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: [ ClothingHeadHelmetArmoredBase, BaseRevMajorContraband ]
@@ -45,8 +45,6 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Head/Helmets/revflamearmor.rsi
   - type: Armor
-    coverage:
-    - Head
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -60,10 +58,10 @@
         Piercing: 0.7
         Heat: 0.5
   - type: ExplosionResistance
-    damageCoefficient: 0.90
+    damageCoefficient: 0.4
   - type: FireProtection
     reduction: 0.2
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadHatHelmetTemplar
