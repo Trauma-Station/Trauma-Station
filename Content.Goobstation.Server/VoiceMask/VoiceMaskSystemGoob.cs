@@ -4,6 +4,7 @@ using Content.Goobstation.Shared.VoiceMask;
 using Content.Server.VoiceMask;
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Implants;
+using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.VoiceMask;
@@ -22,6 +23,7 @@ public sealed partial class VoiceMaskSystemGoob : EntitySystem
     {
         SubscribeLocalEvent<VoiceMaskComponent, VoiceMaskChangeJobIconMessage>(OnChangeJobIcon);
         SubscribeLocalEvent<VoiceMaskComponent, ImplantRelayEvent<TransformSpeakerJobIconEvent>>(OnTransformJobIcon);
+        SubscribeLocalEvent<VoiceMaskComponent, InventoryRelayedEvent<TransformSpeakerJobIconEvent>>(OnTransformJobIcon);
     }
 
     private void OnChangeJobIcon(Entity<VoiceMaskComponent> entity, ref VoiceMaskChangeJobIconMessage ev)
@@ -40,13 +42,23 @@ public sealed partial class VoiceMaskSystemGoob : EntitySystem
 
     private void OnTransformJobIcon(Entity<VoiceMaskComponent> ent, ref ImplantRelayEvent<TransformSpeakerJobIconEvent> args)
     {
+        TransformJobIcon(ent, ref args.Event);
+    }
+
+    private void OnTransformJobIcon(Entity<VoiceMaskComponent> ent, ref InventoryRelayedEvent<TransformSpeakerJobIconEvent> args)
+    {
+        TransformJobIcon(ent, ref args.Args);
+    }
+
+    private void TransformJobIcon(Entity<VoiceMaskComponent> ent, ref TransformSpeakerJobIconEvent args)
+    {
         if (!ent.Comp.Active)
             return;
 
         if (ent.Comp.JobIconProtoId is { } jobIcon)
-            args.Event.JobIcon = jobIcon;
+            args.JobIcon = jobIcon;
 
         if (!string.IsNullOrWhiteSpace(ent.Comp.JobName))
-            args.Event.JobName = ent.Comp.JobName;
+            args.JobName = ent.Comp.JobName;
     }
 }
