@@ -22,7 +22,6 @@
         Radiation: -1.5
         Cellular: -3
     delay: 9
-  - type: Timer
   - type: TimedSpawner
     prototypes:
     - MobMadRat

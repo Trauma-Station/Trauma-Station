@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.Construction.Prototypes;
 
 [Prototype]
-public sealed partial class ConstructionPrototype : IPrototype
+public sealed partial class ConstructionPrototype : IPrototype, IInheritingPrototype // Trauma - use inheritance
 {
     [DataField("conditions")] private List<IConstructionCondition> _conditions = new();
 

@@ -8,6 +8,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;
 using Content.Shared.Spawners.Components;
+using Content.Shared.Throwing;
 using Content.Trauma.Shared.Medical.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -32,6 +33,16 @@ public sealed class BloodSplatterSystem : EntitySystem
         SubscribeLocalEvent<BloodSplattererComponent, BeingGibbedEvent>(OnGib);
         SubscribeLocalEvent<BrainSplattererComponent, BeingGibbedEvent>(OnBrainGib);
         SubscribeLocalEvent<BloodSplattererComponent, VomitedEvent>(OnVomit);
+
+        SubscribeLocalEvent<BloodSplatterOnLandComponent, LandEvent>(OnLand);
+    }
+
+    private void OnLand(Entity<BloodSplatterOnLandComponent> ent, ref LandEvent args)
+    {
+        SpawnDecal(ent, ent.Comp.Color, ent.Comp.Decal);
+
+        if (ent.Comp.DeleteEntity)
+            PredictedQueueDel(ent);
     }
 
     private void OnBrainGib(Entity<BrainSplattererComponent> ent, ref BeingGibbedEvent args)
@@ -92,14 +103,19 @@ public sealed class BloodSplatterSystem : EntitySystem
         ent.Comp.NextSplashAvailable = _timing.CurTime + ent.Comp.SplashCooldown;
     }
 
-    private void SpawnDecal(Entity<BloodSplattererComponent> ent, BloodstreamComponent bloodstream, string decal)
+    private void SpawnDecal(EntityUid ent, BloodstreamComponent bloodstream, string decal)
     {
         var entitybloodstream = bloodstream.BloodReferenceSolution;
-        var spawnedDecal = EntityManager.CreateEntityUninitialized(decal, ent.Owner.ToCoordinates());
+        SpawnDecal(ent, entitybloodstream.GetColor(_prototypes), decal);
+    }
+
+    private void SpawnDecal(EntityUid ent, Color color, string decal)
+    {
+        var spawnedDecal = EntityManager.CreateEntityUninitialized(decal, ent.ToCoordinates());
 
         if (TryComp<RandomDecalSpawnerComponent>(spawnedDecal, out var randomDecal))
         {
-            randomDecal.Color = entitybloodstream.GetColor(_prototypes);
+            randomDecal.Color = color;
         }
 
         EntityManager.InitializeAndStartEntity(spawnedDecal);

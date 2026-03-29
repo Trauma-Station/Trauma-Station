@@ -1,13 +1,8 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 vanx <61917534+Vaaankas@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chat.Managers;
 using Content.Goobstation.Common.Examine; // Goobstation Change
 using Content.Goobstation.Common.CCVar; // Goobstation Change
-using Content.Shared._Goobstation.Heretic.Components; // Goobstation Change
 using Content.Shared.Chat;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
@@ -16,6 +11,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Globalization;
+using Content.Trauma.Common.Heretic;
 
 namespace Content.Server._White.Examine;
 public sealed class ExaminableCharacterSystem : EntitySystem

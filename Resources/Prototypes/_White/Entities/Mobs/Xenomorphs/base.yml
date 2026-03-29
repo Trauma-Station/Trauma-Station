@@ -164,7 +164,6 @@
     enabled: true
     groups:
     - XenomorphAccess
-  - type: BloodSplatterer # Trauma
   - type: KnowledgeGrant
     skills:
       ThrowingKnowledge: 50

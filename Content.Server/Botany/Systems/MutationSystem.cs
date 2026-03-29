@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Botany;
+using Content.Shared.Chemistry.Reagent;
 // </Trauma>
 using Content.Shared.Atmos;
 using Content.Shared.EntityEffects;
@@ -107,7 +108,7 @@ public sealed class MutationSystem : EntitySystem
         return result;
     }
 
-    private void CrossChemicals(ref Dictionary<string, SeedChemQuantity> val, Dictionary<string, SeedChemQuantity> other)
+    private void CrossChemicals(ref Dictionary<ProtoId<ReagentPrototype>, SeedChemQuantity> val, Dictionary<ProtoId<ReagentPrototype>, SeedChemQuantity> other) // Trauma - protoid
     {
         // Go through chemicals from the pollen in swab
         foreach (var otherChem in other)

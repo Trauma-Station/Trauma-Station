@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Heretic.Components;
 using Content.Shared._Goobstation.Wizard.Mutate;
 using Content.Shared.Stunnable;
 using Content.Shared.Projectiles;
@@ -38,9 +37,6 @@ public sealed class KnockdownOnCollideSystem : EntitySystem
             _hulk.Roar((target, hulk), 1f);
             return;
         }
-
-        if (HasComp<RustbringerComponent>(target))
-            return;
 
         _stun.TryKnockdown(target, time: null, drop: component.DropItems);
     }
