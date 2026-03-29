@@ -25,7 +25,7 @@
       collection: MetalThud
   - type: HTN
     rootTask:
-      task: HonkbotCompound
+      task: SimpleHostileCompound
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
@@ -47,6 +47,17 @@
   - type: InteractionPopup
     interactSuccessString: goida-1
     interactFailureString: goida-1
+  - type: NPCRetaliation # Trauma - sentient goidabots that attack if you hit them
+    attackMemoryLength: 10
+  - type: GroupRetaliation
+    range: 5
+  - type: GhostRole
+    name: ghost-role-information-goidabot-name
+    description: ghost-role-information-goidabot-desc
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+  - type: GhostTakeoverAvailable
 
 - type: localizedDataset
   id: Goida
