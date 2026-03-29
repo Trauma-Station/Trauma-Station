@@ -5,6 +5,6 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-station-event-bureaucratic-error-announcement = A recent bureaucratic error in the Organic Resources Department may result in personnel shortages in some departments and redundant staffing in others.
-station-event-clerical-error-announcement = A minor clerical error in the Organic Resources Department has resulted in the permanent destruction of some of the station records.
-station-event-job-distribution-error-announcement = Due to an error in the Job Assignment System, unexpected personnel that were intended for other facilities may arrive at your station.
+station-event-bureaucratic-error-announcement = Due to an error in the Department of Energy list, some offices are missing, others are missing.
+station-event-clerical-error-announcement = Due to a product error, some files will be permanently deleted.
+station-event-job-distribution-error-announcement =  An unexpected job arrived at your station and was sent to another station due to a job distribution error.

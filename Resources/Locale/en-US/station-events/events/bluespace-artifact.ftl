@@ -4,12 +4,12 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-bluespace-artifact-event-announcement = Our readings have detected an incoming object of alien origin. Please inform the research team of { $sighting }.
+bluespace-artifact-event-announcement = A rare item was found in the search. Contact the research team.  Please inform the research team of { $sighting }.
 
-bluespace-artifact-sighting-1 = bright flashes of light
-bluespace-artifact-sighting-2 = strange sounds coming from maintenance tunnels
-bluespace-artifact-sighting-3 = otherworldly structures
-bluespace-artifact-sighting-4 = incomprehensible alien objects
-bluespace-artifact-sighting-5 = unfamiliar objects in strange places
-bluespace-artifact-sighting-6 = unknown alien artifacts
-bluespace-artifact-sighting-7 = explosions of light accompanied by weird sounds
+bluespace-artifact-sighting-1 = bright light
+bluespace-artifact-sighting-2 = Strange noises from the ground
+bluespace-artifact-sighting-3 = more options
+bluespace-artifact-sighting-4 = Artifact View
+bluespace-artifact-sighting-5 = Strange things in other places
+bluespace-artifact-sighting-6 = Alien Artifact Sighting
+bluespace-artifact-sighting-7 = Rays of light and mysterious sounds.

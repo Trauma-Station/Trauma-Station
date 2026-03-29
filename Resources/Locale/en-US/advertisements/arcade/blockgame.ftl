@@ -4,29 +4,29 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-block-game-1 = Legally distinct!
-advertisement-block-game-2 = What the hell is a T-spin?
-advertisement-block-game-3 = These blocks aren't going to clear themselves!
-advertisement-block-game-4 = Beep boop! Bwoooop!
-advertisement-block-game-5 = Let's play a game!
-advertisement-block-game-6 = 6 whole colors of gameplay!
-advertisement-block-game-7 = Hot 8-bit action!
-advertisement-block-game-8 = Blocks, blocks, blocks!
-advertisement-block-game-9 = Think YOU can claim the high score?
-advertisement-block-game-10 = Nanotrasen Block Game IS what TetrISN'T!
-advertisement-block-game-11 = Now with blast processing!
-advertisement-block-game-12 = Our lawyers are standing by!
-advertisement-block-game-13 = Hallelujah, it's raining blocks!
+advertisement-block-game-1 = Varies by rule.
+advertisement-block-game-2 = What is T-Spinner?
+advertisement-block-game-3 = This block will not be removed.
+advertisement-block-game-4 = Boom! you!
+advertisement-block-game-5 = Let's play together.
+advertisement-block-game-6 = 6-play
+advertisement-block-game-7 = 8 models from Bitfire
+advertisement-block-game-8 = Add 8 blocking games
+advertisement-block-game-9 = Think you can score more goals?
+advertisement-block-game-10 = Do not use Nanorazino to block games.
+advertisement-block-game-11 = Now there's a bomb.
+advertisement-block-game-12 = block.
+advertisement-block-game-13 = Glory to the Day of God.
 
-thankyou-block-game-1 = Play again soon!
-thankyou-block-game-2 = Well played!
-thankyou-block-game-3 = Just one more game?
-thankyou-block-game-4 = Stopping so soon?
-thankyou-block-game-5 = The blocks will miss you.
-thankyou-block-game-6 = Thanks for playin'!
-thankyou-block-game-7 = Come back soon!
-thankyou-block-game-8 = Beep bwooop!
-thankyou-block-game-9 = There's always time for another game!
-thankyou-block-game-10 = Don't give up now!
-thankyou-block-game-11 = There are always more blocks!
-thankyou-block-game-12 = The blocks await your return!
+thankyou-block-game-1 = New game coming soon!
+thankyou-block-game-2 = great game!
+thankyou-block-game-3 = another game?
+thankyou-block-game-4 = Blocked now?
+thankyou-block-game-5 = Thanks for blocking me.
+thankyou-block-game-6 = Thanks for playing this game.
+thankyou-block-game-7 = Hurry up!
+thankyou-block-game-8 = BOOM!
+thankyou-block-game-9 = Time to play a new game.
+thankyou-block-game-10 = Don't wait!
+thankyou-block-game-11 = next block
+thankyou-block-game-12 = Wait for the block to return

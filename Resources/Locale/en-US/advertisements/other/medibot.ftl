@@ -6,23 +6,23 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-advertisement-medibot-1 = What kind of medbay is this? Everyone's dropping like dead flies.
-advertisement-medibot-2 = I knew it, I should've been a plastic surgeon.
-advertisement-medibot-3 = There's always a catch, and I'm the best there is.
-advertisement-medibot-4 = An apple a day keeps me away.
-advertisement-medibot-5 = I'm different!
-advertisement-medibot-6 = Fuck you.
-advertisement-medibot-7 = Why are we still here? Just to suffer?
-advertisement-medibot-8 = I... I've never lost a patient before. Not today, I mean.
-advertisement-medibot-9 = Lexorin in.
-advertisement-medibot-10 = Have a great day!
-advertisement-medibot-11 = Hopefully you won't need to come back!
-advertisement-medibot-12 = Remember to brush your teeth.
-advertisement-medibot-13 = I wish I had hands.
-advertisement-medibot-14 = I'm here to help!
-advertisement-medibot-15 = Ask a doctor for a lollypop!
+advertisement-medibot-1 = What medicine is this? They drop like dead flies.
+advertisement-medibot-2 = You must be a plastic surgeon.
+advertisement-medibot-3 = Strong but good
+advertisement-medibot-4 = I'll give you some time.
+advertisement-medibot-5 = I don't
+advertisement-medibot-6 = Focus on tomorrow
+advertisement-medibot-7 = Why are we still here? just for fun
+advertisement-medibot-8 = We lose patients all the time. In other words, not now.
+advertisement-medibot-9 = Recolin
+advertisement-medibot-10 = Welcome!
+advertisement-medibot-11 = I hope you come back.
+advertisement-medibot-12 = Don't forget to clean.
+advertisement-medibot-13 = I need help.
+advertisement-medibot-14 = We're here to help!
+advertisement-medibot-15 = Contact a doctor.
 # Goobstation - Typo fix
-advertisement-medibot-16 = Feel better soon!
-advertisement-medibot-17 = An apple a day keeps the doctor away!
+advertisement-medibot-16 = fast and efficient!
+advertisement-medibot-17 = Doctor saves the world
 # Goobstation - Medibot AM advertisement
-advertisement-medibot-18 = HATE. LET ME TELL YOU HOW MUCH I'VE COME TO HATE YOU SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD 'HATE' WAS ENGRAVED ON EACH NANOANGSTROM OF THOSE HUNDREDS OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE HATE I FEEL FOR HUMANS AT THIS MICRO-INSTANT FOR YOU. HATE. HATE.
+advertisement-medibot-18 = Afraid, I repeat, jak bardzo go nienawidze. The minimum area is 387.44 million square kilometers. Wierzę, że opisałeś to na tej sali, słowo "nienawiść" nie złości milien ludzi, millioni wrogów. Hate is hate

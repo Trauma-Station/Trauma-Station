@@ -3,4 +3,4 @@
 #
 # SPDX-License-Identifier: MIT
 
-station-event-breaker-flip-announcement = Based on { $data }, we have opted to disable specific APCs to avoid damage to equipment. Please contact the engineering department to re-enable them.
+station-event-breaker-flip-announcement = We have decided to disable some programs to avoid compromising { $data }. Contact our technical department to get started.

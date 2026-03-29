@@ -10,48 +10,48 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-alert-level-announcement = Attention! Station alert level is now {$name}! {$announcement}
+alert-level-announcement = blood! Home inspection {$name}! {$announcement}
 
 alert-level-unknown = Unknown.
 alert-level-unknown-instructions = Unknown.
 
 alert-level-green = Green
-alert-level-green-announcement = It is now safe to return to your workplaces.
+alert-level-green-announcement = I am happy to be back at work.
 alert-level-green-instructions = Do your job.
 
 alert-level-blue = Blue
-alert-level-blue-announcement = There is a confirmed threat to the station. Security should perform random checks. Crewmembers are advised to be vigilant and report suspicious activity to security.
-alert-level-blue-instructions = Crewmembers are advised to be vigilant and report suspicious activity to security.
+alert-level-blue-announcement = risk during installation. Enter the security check.
+alert-level-blue-instructions = Team members should monitor security and report suspicious activity.
 
-alert-level-red = Red
-alert-level-red-announcement = There is an immediate threat to the station. Security should prepare to use lethal force if necessary. Crewmembers should find a safe place to shelter in, and are advised to follow any present authorities.
-alert-level-red-instructions = Crewmembers should find a safe place to shelter in, and are advised to follow any present authorities.
+alert-level-red = red
+alert-level-red-announcement = Station still in trouble. If necessary, the safe must be ready for use. Employees must maintain a safe environment and comply with all applicable laws.
+alert-level-red-instructions = Personnel should seek a safe location and follow appropriate instructions.
 
-alert-level-violet = Violet
-alert-level-violet-announcement = There is a viral threat on the station. Medical staff are advised to isolate crewmembers with any symptoms. Crewmembers are advised to distance themselves from others and perform safety measures to prevent further spread.
-alert-level-violet-instructions = Crewmembers are advised to distance themselves from others and perform safety measures to prevent further spread.
+alert-level-violet = violet
+alert-level-violet-announcement = This site is infected. Medical staff should isolate patients. Members should protect each other and try not to spread the virus.
+alert-level-violet-instructions = separation of sailors. Be careful not to get infected.
 
-alert-level-yellow = Yellow
-alert-level-yellow-announcement = There is a structural or atmospheric threat within the station. Engineering staff are advised to immediately respond and perform safety measures. Crewmembers are advised to stay away from the threat, and stay in their workplaces if necessary.
-alert-level-yellow-instructions = Crewmembers are advised to stay away from the threat, and stay in their workplaces if necessary.
+alert-level-yellow = yellow
+alert-level-yellow-announcement = The website or configuration environment is not secure. A security task force should be formed and evaluated. Employees are advised not to leave work and continue to work if necessary.
+alert-level-yellow-instructions = Bombers should avoid the threat and take action if necessary.
 
-alert-level-gamma = Gamma
-alert-level-gamma-announcement = The Patriots have ordered the Gamma security level on the station. Security is to have weapons equipped at all times, and all civilians are to immediately seek their nearest head for transportation to a secure location.
-alert-level-gamma-instructions = All civilians are to immediately seek their nearest head for transportation to a secure location.
+alert-level-gamma = more
+alert-level-gamma-announcement = Range reports are an alert level that integrates air defense and civil defense.
+alert-level-gamma-instructions = Warning for everyone to be safe.
 
-alert-level-delta = Delta
-alert-level-delta-announcement = The station is currently under threat of imminent destruction. Crewmembers are advised to listen to heads of staff for more information.
-alert-level-delta-instructions = Crewmembers are advised to listen to heads of staff for more information.
+alert-level-delta = delta
+alert-level-delta-announcement = support removed. Employees should ask the driver for more information.
+alert-level-delta-instructions = Team members must follow the leader's instructions.
 
-alert-level-epsilon = Epsilon
-alert-level-epsilon-announcement = The Patriots have ordered the Epsilon security level on the station. Consider all contracts terminated. XOF joint strike force inbound.
-alert-level-epsilon-instructions = Consider all contracts terminated.
+alert-level-epsilon = epsilon!
+alert-level-epsilon-announcement = Patriot has added epsilon security to its site. All contracts are void. The XOF strike force continues.
+alert-level-epsilon-instructions = always die.
 
-alert-level-omicron = Omicron
-alert-level-omicron-announcement = Station override activated. Await further orders from The Patriots, stay in your departments.
-alert-level-omicron-instructions = Await further orders.
+alert-level-omicron = micron
+alert-level-omicron-announcement = Location change announced. New players are coming.
+alert-level-omicron-instructions = Awaiting additional instructions.
 
 ## DeltaV - Cosmic Cult
-alert-level-octarine = Octarine
-alert-level-octarine-announcement = A cataclysmic noospheric event threatens to envelop realspace. Station crew are to contain the event if possible, or else evacuate.
-alert-level-octarine-instructions = Crewmembers are advised to listen to heads of staff for more information.
+alert-level-octarine = Octree is the level of chaos.
+alert-level-octarine-announcement = Something interesting is happening. Agricultural workers should correct this condition or stop it if possible.
+alert-level-octarine-instructions = Read the Instructions for Use for more information.
