@@ -44,5 +44,5 @@
   parent: BaseIngotStack
   id: PlasteelIngot
   name: stack-plasteel-ingot
-  icon: { sprite: /Textures_Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel_hot }
-  spawn: PlasteelIngot/
+  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel_hot }
+  spawn: PlasteelIngot
