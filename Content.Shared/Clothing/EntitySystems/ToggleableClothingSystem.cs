@@ -195,7 +195,6 @@ public sealed class ToggleableClothingSystem : EntitySystem
     }
 
     public bool IsToggled(Entity<ToggleableClothingComponent> ent, EntityUid clothing) // Goobstation
-///
     {
         return !ent.Comp.Container.Contains(clothing);
     }
@@ -262,9 +261,19 @@ public sealed class ToggleableClothingSystem : EntitySystem
         // if e.g. a modsuit gets deleted, delete all of its parts immediately. unequipping will be done automatically
         if (TerminatingOrDeleted(toggleable))
         {
-            foreach (var partUid in parts.Keys)
+            // only restore if the mob wearing it isn't being deleted too
+            var restore = !TerminatingOrDeleted(args.Equipee);
+            foreach (var (partUid, slot) in parts)
             {
                 PredictedQueueDel(partUid);
+                if (restore &&
+                    CompOrNull<AttachedClothingComponent>(partUid)?.ClothingContainer?.ContainedEntity is {} stored &&
+                    !Deleted(stored))
+                {
+                    _containerSystem.TryRemoveFromContainer(stored);
+                    _inventorySystem.TryEquip(args.Equipee, stored, slot,
+                        force: true, triggerHandContact: false); // it's being deleted not taken off, no contact
+                }
             }
             return;
         }
