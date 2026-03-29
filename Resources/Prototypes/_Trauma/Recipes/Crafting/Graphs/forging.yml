@@ -45,6 +45,13 @@
   - node: handlesmall
     entity: HandleSmall
 
+  - node: handlemedium
+    entity: HandleMedium
+
+
+  - node: handlelarge
+    entity: HandleLarge
+
 - type: constructionGraph
   id: AnvilTop
   start: start

@@ -605,7 +605,7 @@
     storedRotation: -45
 
 - type: entity
-  parent: [BaseForgedBrass, BaseForgeScrewdriver]
+  parent: [BaseForgeScrewdriver, BaseForgedBrass]
   id: BrassForgeScrewdriver
   name: brass screwdriver
   components:
@@ -619,7 +619,7 @@
     node: screwdriverbrass
 
 - type: entity
-  parent: [BaseForgedSteel, BaseForgeScrewdriver]
+  parent: [BaseForgeScrewdriver, BaseForgedSteel]
   id: SteelForgeScrewdriver
   name: steel screwdriver
   components:
@@ -628,7 +628,7 @@
     node: screwdriversteel
 
 - type: entity
-  parent: [BaseForgedPlasteel, BaseForgeScrewdriver]
+  parent: [BaseForgeScrewdriver, BaseForgedPlasteel]
   id: PlasteelForgeScrewdriver
   name: plasteel screwdriver
   components:
@@ -688,6 +688,8 @@
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench_complete.rsi
     storedRotation: -45
+
+
 
 - type: entity
   parent: [BaseForgeWrench, BaseForgedBrass]
