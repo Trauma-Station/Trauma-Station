@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content._Trauma.Shared.CosmicCult;
 using Content._Trauma.Shared.CosmicCult.Components;
 using Content._Trauma.Shared.CosmicCult.Prototypes;

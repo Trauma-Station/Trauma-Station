@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 /* TODO kill
 using Content.Goobstation.Common.Religion;
 using Content.Server.Actions;

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Flash;
 using Content.Trauma.Common.CosmicCult;
 using Content.Trauma.Common.CosmicCult.Components;

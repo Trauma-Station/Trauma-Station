@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Doors.Systems;
 using Content.Trauma.Common.CosmicCult.Components;
 using Content.Shared.Doors.Components;
