@@ -52,6 +52,10 @@
       path: /Audio/Weapons/bladeslice.ogg
     angle: 60
     animation: WeaponArcThrust
+  - type: Parry
+    maxParries: 3
+    maxReflects: 0
+    parryMinSkill: 30
   - type: GhostRole
     name: justice-role-name
     description: justice-role-description
@@ -94,6 +98,8 @@
             path: /Audio/Weapons/bladeslice.ogg
           angle: 60
           animation: WeaponArcThrust
+        - type: Parry
+          maxReflects: 0
 
       stun: !type:ItemSwitchState
         verb: stun
@@ -112,6 +118,8 @@
           animation: WeaponArcThrust
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
+        - type: Parry
+          maxReflects: 2
         - type: StaminaDamageOnHit
           damage: 20
           overtime: 15
@@ -138,6 +146,8 @@
           animation: WeaponArcThrust
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
+        - type: Parry
+          maxReflects: 2
         soundStateActivate:
           collection: sparks
           params:
@@ -163,6 +173,8 @@
           animation: WeaponArcThrust
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
+        - type: Parry
+          maxReflects: 2
         soundStateActivate:
           collection: sparks
           params:
@@ -195,6 +207,8 @@
               Heat: 25
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
+        - type: Parry
+          maxReflects: 2
         soundStateActivate:
           collection: sparks
           params:

@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Cargo;
+// </Trauma>
 using Content.Shared.Cargo;
 using Content.Client.Cargo.UI;
 using Content.Shared.Cargo.BUI;
@@ -109,6 +112,7 @@ namespace Content.Client.Cargo.BUI
             {
                 SendMessage(new CargoConsoleToggleLimitMessage());
             };
+            _menu.OnSetDestination += dest => SendPredictedMessage(new CargoConsoleSetDestinationMessage(dest)); // Trauma
 
             _menu.OpenCentered();
         }
@@ -145,6 +149,7 @@ namespace Content.Client.Cargo.BUI
 
             _menu?.UpdateStation(station);
             Populate(cState.Orders);
+            _menu?.UpdateDestinations(cState.Destinations); // Trauma
         }
 
         protected override void Dispose(bool disposing)

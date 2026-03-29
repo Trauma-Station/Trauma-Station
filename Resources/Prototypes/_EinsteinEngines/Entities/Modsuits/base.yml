@@ -1,0 +1,19 @@
+- type: entity
+  abstract: true
+  id: BaseModsuitBatteryAntique
+  suffix: Antique Power Cell
+  components:
+  - type: ContainerFill
+    containers:
+      cell_slot:
+      - PowerCellAntiqueProto
+
+- type: entity
+  abstract: true
+  id: BaseModsuitBatteryMicroreactor
+  suffix: Microreactor
+  components:
+  - type: ContainerFill
+    containers:
+      cell_slot:
+      - PowerCellMicroreactor

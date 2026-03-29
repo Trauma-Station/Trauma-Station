@@ -44,7 +44,7 @@
   name: command gateway
   components:
   - type: Sprite
-    state: showroom
+    state: gateway
 
 - type: entity
   parent: BaseAreaCommand

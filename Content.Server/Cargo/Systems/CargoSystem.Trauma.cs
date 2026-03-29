@@ -7,24 +7,24 @@ using Content.Shared.Emag.Systems;
 namespace Content.Server.Cargo.Systems;
 
 /// <summary>
-/// Trauma - methods for cargo order restrictions
+/// Trauma - methods for cargo order restrictions and destinations
 /// </summary>
 public sealed partial class CargoSystem
 {
+    private List<(string, NetEntity)> _dests = new();
+
     /// <summary>
     /// Check that the user has the account's approve access.
-    /// Does nothing when emagged with an access breaker.
+    /// Does nothing when emagged with an access breaker or for access-ignoring consoles.
     /// </summary>
     public bool CheckAccessPopup(Entity<CargoOrderConsoleComponent> ent, EntityUid user, CargoAccountPrototype account)
     {
-        if (!_emag.CheckFlag(ent, EmagType.Access) && !_accessReaderSystem.UserHasAccess(user, account.ApproveAccess))
-        {
-            ConsolePopup(user, Loc.GetString("cargo-console-order-not-allowed"));
-            PlayDenySound(ent, ent.Comp);
-            return false;
-        }
+        if (ent.Comp.IgnoreAccess || _emag.CheckFlag(ent, EmagType.Access) || _accessReaderSystem.UserHasAccess(user, account.ApproveAccess))
+            return true;
 
-        return true;
+        ConsolePopup(user, Loc.GetString("cargo-console-order-not-allowed"));
+        PlayDenySound(ent, ent.Comp);
+        return false;
     }
 
     public bool CheckAlertPopup(Entity<CargoOrderConsoleComponent> ent, EntityUid user, CargoOrderData order, EntityUid station)
@@ -39,5 +39,33 @@ public sealed partial class CargoSystem
         }
 
         return true;
+    }
+
+    public List<(string, NetEntity)> GetDestinations(EntityUid console)
+    {
+        _dests.Clear();
+        var map = Transform(console).MapID;
+
+        var atsQuery = EntityQueryEnumerator<TradeStationComponent, TransformComponent>();
+        while (atsQuery.MoveNext(out var uid, out _, out var xform))
+        {
+            if (xform.MapID != map)
+                continue;
+
+            var meta = MetaData(uid);
+            _dests.Add((Name(uid, meta), GetNetEntity(uid, meta)));
+        }
+
+        var query = EntityQueryEnumerator<CargoTelepadComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var xform))
+        {
+            if (xform.MapID != map)
+                continue;
+
+            var meta = MetaData(uid);
+            _dests.Add((Name(uid, meta), GetNetEntity(uid, meta)));
+        }
+
+        return _dests;
     }
 }

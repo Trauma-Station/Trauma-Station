@@ -7,12 +7,7 @@ using Content.Shared._Goobstation.Wizard;
 using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
-using Content.Shared.Actions;
-using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
-using Content.Shared.Heretic;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
@@ -680,7 +675,6 @@ public abstract class SharedMagicSystem : EntitySystem
 
         List<(Type, string)> blockers = new()
         {
-            (typeof(GhoulComponent), "ghoul"),
             // Mindswapping with aghost real.
             (typeof(GhostComponent), "ghost"),
             (typeof(SpectralComponent), "ghost"),

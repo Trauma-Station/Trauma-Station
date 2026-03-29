@@ -19,7 +19,6 @@ public sealed partial class MobThresholdSystem : EntitySystem // Trauma - made p
 
     public override void Initialize()
     {
-        InitializeTrauma(); // Trauma
         SubscribeLocalEvent<MobThresholdsComponent, ComponentGetState>(OnGetState);
         SubscribeLocalEvent<MobThresholdsComponent, ComponentHandleState>(OnHandleState);
 

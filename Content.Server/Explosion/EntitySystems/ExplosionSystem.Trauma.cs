@@ -1,12 +1,17 @@
 using Content.Goobstation.Common.CCVar;
+using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Explosion;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem
 {
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
+
     private float PartVariation;
     private float WoundMultiplier;
 
@@ -25,6 +30,22 @@ public sealed partial class ExplosionSystem
         foreach (var type in _types)
         {
             damage.WoundSeverityMultipliers.TryAdd(type, WoundMultiplier);
+        }
+    }
+
+    private void DamageBody(Entity<BodyComponent> ent, DamageSpecifier damage, string explosion)
+    {
+        foreach (var part in _body.GetExternalOrgans(ent.AsNullable()))
+        {
+            var resistanceEv = new GetExplosionResistanceEvent(explosion);
+            RaiseLocalEvent(part, ref resistanceEv);
+            resistanceEv.DamageCoefficient = Math.Max(0, resistanceEv.DamageCoefficient);
+
+            var partDamage = resistanceEv.DamageCoefficient != 1
+                ? damage * resistanceEv.DamageCoefficient
+                : damage;
+
+            _damageableSystem.ChangeDamage(part.Owner, partDamage, ignoreResistances: true, ignoreGlobalModifiers: true);
         }
     }
 }

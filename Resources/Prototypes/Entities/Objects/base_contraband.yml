@@ -187,6 +187,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Medical, Science ]
+    allowedJobs: [ Brigmedic ] # Trauma
 
 # contraband restricted by job by some degree
 - type: entity

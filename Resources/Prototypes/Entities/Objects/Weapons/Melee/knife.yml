@@ -51,7 +51,7 @@
     transmuteTo: SwordCosmicCult
 
 - type: entity
-  parent: BaseKnife
+  parent: [BaseKnife, BaseChefContraband] # Trauma - Made it contraband
   id: KitchenKnife
   name: kitchen knife
   description: A general purpose Chef's Knife made by Asters Merchant Guild. Guaranteed to stay sharp for years to come..
@@ -82,7 +82,7 @@
 
 - type: entity
   name: butcher's cleaver
-  parent: BaseKnife
+  parent: [BaseKnife, BaseChefContraband] # Trauma - Made it contraband
   id: ButchCleaver
   description: A huge blade used for chopping and chopping up meat. This includes clowns and clown-by-products.
   components:

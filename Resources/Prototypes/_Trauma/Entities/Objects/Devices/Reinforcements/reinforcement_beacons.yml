@@ -1,7 +1,7 @@
 - type: entity
+  abstract: true
   id: BaseReinforcementBeacon
   name: reinforcement beacon
-  abstract: true
   description: A reinforcement beacon placed by a nanotrasen command member, it can be destroyed to prevent the reinforcement from arriving.
   placement:
     mode: SnapgridCenter
@@ -46,7 +46,12 @@
     mindRoles:
     - MindRoleGhostRoleNeutral
     raffle:
-      settings: reinforcement
+      settings: reinforcement # TODO: make raffle normal but delay the ghost role opening by a few minutes
+  - type: GhostCharacterSpawner
+    components:
+    - type: IdBind
+    - type: Loadout
+      roleLoadout: [ RoleSurvivalStandard ]
   - type: Transform
     anchored: true
 
@@ -55,18 +60,25 @@
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconSecurityOfficer
-  categories: [ HideSpawnMenu ]
+  suffix: Security
   components:
   - type: GhostRole
     job: SecurityOfficer
     name: ghost-role-information-reinforcement-sec-name
-  - type: GhostRoleMobSpawner
-    prototype: SecurityReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ ReinforcementOfficer ]
+      roleLoadout: [ RoleSurvivalSecurity ]
+    - type: AutoImplant
+      implants:
+      - MindShieldImplant
+    - type: AntagImmune
 
 - type: entity
   parent: ReinforcementBeaconSecurityOfficer
   id: ReinforcementBeaconSecurityOfficerFast
-  categories: [ HideSpawnMenu ]
+  suffix: Security, Fast
   components:
   - type: GhostRole
     name: ghost-role-information-reinforcement-fast-sec-name
@@ -76,102 +88,119 @@
 - type: entity
   parent: ReinforcementBeaconSecurityOfficer
   id: ReinforcementBeaconSpecialistOfficerLaser
-  categories: [ HideSpawnMenu ]
+  suffix: Security, Laser
   components:
   - type: GhostRole
     name: ghost-role-information-reinforcement-specialist-sec-name
-  - type: GhostRoleMobSpawner
-    prototype: SecurityReinforcementSpecialist
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ ReinforcementOfficerSpec ]
 
 # Service
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconBartender
-  categories: [ HideSpawnMenu ]
+  suffix: Bartender
   components:
   - type: GhostRole
     job: Bartender
     name: ghost-role-information-reinforcement-bartender-name
-  - type: GhostRoleMobSpawner
-    prototype: BartenderReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ BartenderReinforcement ]
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconChef
-  categories: [ HideSpawnMenu ]
+  suffix: Chef
   components:
   - type: GhostRole
     job: Chef
     name: ghost-role-information-reinforcement-chef-name
-  - type: GhostRoleMobSpawner
-    prototype: ChefReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ ChefReinforcement ]
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconBotanist
-  categories: [ HideSpawnMenu ]
+  suffix: Botanist
   components:
   - type: GhostRole
     job: Botanist
     name: ghost-role-information-reinforcement-botanist-name
-  - type: GhostRoleMobSpawner
-    prototype: BotanistReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ BotanistReinforcement ]
 
 # Engi
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconEngi
-  categories: [ HideSpawnMenu ]
+  suffix: Engineer
   components:
   - type: GhostRole
     job: StationEngineer
     name: ghost-role-information-reinforcement-engi-name
-  - type: GhostRoleMobSpawner
-    prototype: EngiReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ EngineerReinforcement ]
+      roleLoadout: [ RoleSurvivalExtended ]
 
 - type: entity
-  parent: BaseReinforcementBeacon
+  parent: ReinforcementBeaconEngi
   id: ReinforcementBeaconAtmos
-  categories: [ HideSpawnMenu ]
+  suffix: Atmos
   components:
   - type: GhostRole
     job: AtmosphericTechnician
     name: ghost-role-information-reinforcement-atmos-name
-  - type: GhostRoleMobSpawner
-    prototype: AtmosReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ AtmosReinforcement ]
 
 # Science
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconSci
-  categories: [ HideSpawnMenu ]
+  suffix: Scientist
   components:
   - type: GhostRole
     job: Scientist
     name: ghost-role-information-reinforcement-sci-name
-  - type: GhostRoleMobSpawner
-    prototype: ScienceReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ ScienceReinforcement ]
 
 # Civilian
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconAssistant
-  categories: [ HideSpawnMenu ]
+  suffix: Assistant
   components:
   - type: GhostRole
     job: Passenger
     name: ghost-role-information-reinforcement-assistant-name
-  - type: GhostRoleMobSpawner
-    prototype: AssistantReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ AssistantReinforcement ]
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconDClass
-  categories: [ HideSpawnMenu ]
+  suffix: D-Class
   components:
   - type: GhostRole
     name: ghost-role-information-reinforcement-DClass-name
@@ -179,55 +208,65 @@
     rules: ghost-role-information-freeagent-rules
     mindRoles:
     - MindRoleGhostRoleFreeAgent
-  - type: GhostRoleMobSpawner
-    prototype: DClassReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ DClassReinforcement ]
 
 # Medical
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconDoctor
-  categories: [ HideSpawnMenu ]
+  suffix: Medical Doctor
   components:
   - type: GhostRole
     job: MedicalDoctor
     name: ghost-role-information-reinforcement-doctor-name
-  - type: GhostRoleMobSpawner
-    prototype: DoctorReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ DoctorReinforcement ]
+      roleLoadout: [ RoleSurvivalMedical ]
 
 - type: entity
-  parent: BaseReinforcementBeacon
+  parent: ReinforcementBeaconDoctor
   id: ReinforcementBeaconChemist
-  categories: [ HideSpawnMenu ]
+  suffix: Chemist
   components:
   - type: GhostRole
     job: Chemist
     name: ghost-role-information-reinforcement-chemist-name
-    description: ghost-role-information-reinforcement-description
-    rules: ghost-role-information-nonantagonist-rules
-  - type: GhostRoleMobSpawner
-    prototype: ChemistReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ ChemistReinforcement ]
 
 # Cargo
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconCargo
-  categories: [ HideSpawnMenu ]
+  suffix: Cargo Tech
   components:
   - type: GhostRole
     job: CargoTechnician
     name: ghost-role-information-reinforcement-cargo-name
-  - type: GhostRoleMobSpawner
-    prototype: CargoReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [CargoReinforcement]
 
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconSalv
-  categories: [ HideSpawnMenu ]
+  suffix: Salvage
   components:
   - type: GhostRole
     job: SalvageSpecialist
     name: ghost-role-information-reinforcement-salv-name
-  - type: GhostRoleMobSpawner
-    prototype: SalvageReinforcement
+  - type: GhostCharacterSpawner
+    components:
+    - type: Loadout
+      prototypes: [ SalvageReinforcement ]
+      roleLoadout: [ RoleSurvivalExtended ]
