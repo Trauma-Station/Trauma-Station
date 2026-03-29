@@ -45,6 +45,7 @@ public sealed partial class EndRoundCreditsControl : ScrollContainer
         foreach (var (_, name) in _gameTicker.StationNames)
         {
             stationName = name;
+            break;
         }
 
         var headerFont = new VectorFont(cache.GetResource<FontResource>(Pixellari), HeaderFontSize);
