@@ -17,6 +17,9 @@
   id: CartridgeTurret
 
 - type: Tag
+  id: Chili
+
+- type: Tag
   id: CookedEgg
 
 - type: Tag
@@ -48,6 +51,9 @@
 
 - type: Tag
   id: Ed209WeaponsControl
+
+- type: Tag
+  id: EggPlant
 
 - type: Tag
   id: EncryptionRevolutionary
@@ -86,6 +92,9 @@
   id: MimicToolbox
 
 - type: Tag
+  id: Peas
+
+- type: Tag
   id: QMBoard
 
 - type: Tag
@@ -110,6 +119,9 @@
   id: RevTurretBoard
 
 - type: Tag
+  id: Rice
+
+- type: Tag
   id: RitualAscension
 
 - type: Tag
@@ -126,6 +138,9 @@
 
 - type: Tag
   id: TechfabMachineBoard
+
+- type: Tag
+  id: Tomato
 
 - type: Tag
   id: T45Frame

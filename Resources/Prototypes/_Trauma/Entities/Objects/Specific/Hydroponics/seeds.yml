@@ -18,3 +18,11 @@
     seedId: CocaPlant
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
+
+- type: entity
+  parent: AppleSeeds
+  name: packet of apple seeds
+  id: DeliciousAppleSeeds
+  components:
+  - type: Seed
+    seedId: deliciousApple

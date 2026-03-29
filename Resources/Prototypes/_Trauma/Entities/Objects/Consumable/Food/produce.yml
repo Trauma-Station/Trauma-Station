@@ -68,3 +68,17 @@
     butcheringType: Knife
     spawned:
     - id: LemonGrenade
+
+- type: entity
+  name: delicious looking apple
+  parent: FoodApple
+  id: FoodDeliciousApple
+  description: It's a delicious piece of Eden.
+  components:
+  - type: Produce
+    seedId: apple
+  - type: Tag
+    tags:
+    - Fruit
+    - Apple
+    - DeliciousLookingApple
