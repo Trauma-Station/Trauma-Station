@@ -57,4 +57,4 @@
   - type: Animateable
   - type: Construction
     graph: CharcoalOven
-    node: finished
+    node: finish
