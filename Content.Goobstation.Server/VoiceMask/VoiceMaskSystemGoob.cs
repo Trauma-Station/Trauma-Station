@@ -40,6 +40,9 @@ public sealed partial class VoiceMaskSystemGoob : EntitySystem
 
     private void OnTransformJobIcon(Entity<VoiceMaskComponent> ent, ref ImplantRelayEvent<TransformSpeakerJobIconEvent> args)
     {
+        if (!ent.Comp.Active)
+            return;
+
         if (ent.Comp.JobIconProtoId is { } jobIcon)
             args.Event.JobIcon = jobIcon;
 
