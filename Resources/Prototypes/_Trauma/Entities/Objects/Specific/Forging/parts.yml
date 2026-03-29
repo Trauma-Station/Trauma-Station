@@ -151,7 +151,7 @@
       - HandleSmall
   - type: Construction
     graph: Handle
-    node: small
+    node: handlesmall
 
 - type: entity
   parent: BaseItem
@@ -167,7 +167,7 @@
       - HandleMedium
   - type: Construction
     graph: Handle
-    node: medium
+    node: handlemedium
 
 - type: entity
   parent: BaseItem
@@ -183,7 +183,7 @@
       - HandleLarge
   - type: Construction
     graph: Handle
-    node: large
+    node: handlelarge
 
 # Anvil
 
