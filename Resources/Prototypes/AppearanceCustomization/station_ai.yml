@@ -28,6 +28,11 @@
   - StationAiIconNotMalf
   - StationAiIconHelios
   - StationAiIconHouse
+  - StationAiIconRainbow
+  - StationAiIconAlien
+  - StationAiIconGoon
+  - StationAiIconWeird
+  - StationAiIconInverted
   # </Trauma>
 
 - type: stationAiCustomizationGroup
