@@ -8,7 +8,7 @@
   },
   "states": [
     {
-      "name": "ai-alien",
+      "name": "ai_alien",
       "delays": [
         [
           0.1,
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "name": "ai-alien_dead",
+      "name": "ai_alien_dead",
       "delays": [
         [
           0.1,
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "name": "ai-database_dead",
+      "name": "ai_database_dead",
       "delays": [
         [
           0.7,
@@ -853,7 +853,7 @@
       "name": "ai_red_dot"
     },
     {
-      "name": "ai-weird",
+      "name": "ai_weird",
       "delays": [
         [
           0.2,
@@ -875,7 +875,7 @@
       ]
     },
     {
-      "name": "ai-weird_dead",
+      "name": "ai_weird_dead",
       "delays": [
         [
           0.2,
