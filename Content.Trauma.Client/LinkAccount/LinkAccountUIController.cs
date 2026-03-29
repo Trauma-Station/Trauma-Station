@@ -5,7 +5,7 @@ using Content.Client.Lobby.UI;
 using Content.Client.Message;
 using Content.Goobstation.Common.CCVar;
 using Content.Trauma.Shared.LinkAccount;
-using Content.Shitcode.Common.LinkAccount;
+using Content.Trauma.Common.LinkAccount;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Configuration;

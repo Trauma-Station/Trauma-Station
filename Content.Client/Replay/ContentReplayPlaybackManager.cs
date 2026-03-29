@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.Wizard;
+using Content.Trauma.Common.Wizard;
 // </Trauma>
 using Content.Client.Administration.Managers;
 using Content.Client.Launcher;

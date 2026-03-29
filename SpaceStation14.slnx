@@ -57,10 +57,6 @@
   <Project Path="Content.Medical.Client/Content.Medical.Client.csproj" />
   <Project Path="Content.Medical.Common/Content.Medical.Common.csproj" />
   <Project Path="Content.ModuleManager/Content.ModuleManager.csproj" />
-  <Project Path="Content.Shitcode.Server/Content.Shitcode.Server.csproj" />
-  <Project Path="Content.Shitcode.Shared/Content.Shitcode.Shared.csproj" />
-  <Project Path="Content.Shitcode.Client/Content.Shitcode.Client.csproj" />
-  <Project Path="Content.Shitcode.Common/Content.Shitcode.Common.csproj" />
   <!-- </Trauma> -->
   <Project Path="Content.Tests/Content.Tests.csproj" />
   <Project Path="Content.Tools/Content.Tools.csproj" />

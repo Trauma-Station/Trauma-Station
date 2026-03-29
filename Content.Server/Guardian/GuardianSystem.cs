@@ -1,5 +1,5 @@
 using Content.Server.Popups;
-using Content.Shitcode.Shared.Wizard.Guardian;
+using Content.Trauma.Shared.Wizard.Guardian;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;

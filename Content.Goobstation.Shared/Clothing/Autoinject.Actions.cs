@@ -2,6 +2,6 @@
 
 using Content.Shared.Actions;
 
-namespace Content.Shitcode.Shared.Clothing;
+namespace Content.Trauma.Shared.Clothing;
 
 public sealed partial class ActionActivateAutoInjectorEvent : InstantActionEvent { }

@@ -2,7 +2,7 @@
 
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Sandevistan;
-using Content.Shitcode.Shared.Wizard.Projectiles;
+using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Shared.Abilities;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;

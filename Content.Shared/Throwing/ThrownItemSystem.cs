@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Shared.Wizard.TimeStop;
+using Content.Trauma.Shared.Wizard.TimeStop;
 using Content.Trauma.Common.Throwing;
 using Robust.Shared.Player;
 // </Trauma>

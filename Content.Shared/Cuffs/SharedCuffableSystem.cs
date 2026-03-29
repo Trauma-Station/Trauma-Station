@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.Cuffs;
+using Content.Trauma.Common.Cuffs;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;

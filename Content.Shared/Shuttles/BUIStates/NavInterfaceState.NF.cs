@@ -1,4 +1,4 @@
-using Content.Shitcode.Common.Shuttles;
+using Content.Trauma.Common.Shuttles;
 
 namespace Content.Shared.Shuttles.BUIStates;
 

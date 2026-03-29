@@ -1,4 +1,4 @@
-using Content.Shitcode.Shared.Weapons.Ranged;
+using Content.Trauma.Shared.Weapons.Ranged;
 using Content.Shared.Examine;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;

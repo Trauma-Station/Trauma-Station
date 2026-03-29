@@ -1,5 +1,5 @@
 using Content.Server.NPC.Components;
-using Content.Shitcode.Shared.Weapons.SmartGun;
+using Content.Trauma.Shared.Weapons.SmartGun;
 using Content.Shared.CombatMode;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;

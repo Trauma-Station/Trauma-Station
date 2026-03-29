@@ -2,7 +2,7 @@
 
 using System.Linq;
 using System.Numerics;
-using Content.Shitcode.Common.Radar;
+using Content.Trauma.Common.Radar;
 using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Radar;

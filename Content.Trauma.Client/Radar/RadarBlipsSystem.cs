@@ -2,7 +2,7 @@
 
 using System.Numerics;
 using Content.Trauma.Shared.Radar;
-using Content.Shitcode.Common.Radar;
+using Content.Trauma.Common.Radar;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Radar;

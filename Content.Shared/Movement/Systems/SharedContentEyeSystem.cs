@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.Shitcode.Shared.Wizard.ScryingOrb;
+using Content.Trauma.Shared.Wizard.ScryingOrb;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Camera;

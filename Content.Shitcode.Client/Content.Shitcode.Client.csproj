@@ -10,7 +10,7 @@
 	<Import Project="../MSBuild/Content.props" />
 	<ItemGroup>
 		<ProjectReference Include="../Content.Client/Content.Client.csproj" />
-		<ProjectReference Include="../Content.Shitcode.Shared/Content.Shitcode.Shared.csproj" />
+		<ProjectReference Include="../Content.Trauma.Shared/Content.Trauma.Shared.csproj" />
 	</ItemGroup>
 
 	<Import Project="../RobustToolbox/Imports/Client.props" />

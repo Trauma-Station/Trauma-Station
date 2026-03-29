@@ -2,7 +2,7 @@
 
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Shitcode.Shared.Weapons.AmmoSelector;
+using Content.Trauma.Shared.Weapons.AmmoSelector;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Hands.EntitySystems;

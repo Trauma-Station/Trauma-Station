@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Shared.Wizard.Projectiles;
+using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;

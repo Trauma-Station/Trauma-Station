@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chemistry.Components;
-using Content.Shitcode.Shared.Weapons.Ranged;
+using Content.Trauma.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 

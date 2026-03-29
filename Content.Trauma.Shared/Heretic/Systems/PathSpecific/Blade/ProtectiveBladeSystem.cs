@@ -5,7 +5,7 @@ using System.Numerics;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Follower;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shitcode.Shared.Heretic.Systems;
+using Content.Trauma.Shared.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitcode.Heretic.Systems;
 using Content.Shared._Shitcode.Heretic.Systems.Abilities;

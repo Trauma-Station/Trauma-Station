@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Speech;
 using Content.Server.Speech.EntitySystems;
-using Content.Shitcode.Shared.Wizard.Traps;
+using Content.Trauma.Shared.Wizard.Traps;
 using Content.Shared.Speech.Components;
 // </Trauma>
 using System.Linq;

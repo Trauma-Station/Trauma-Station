@@ -9,7 +9,7 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shitcode.Common.Medical.HealthAnalyzer;
+namespace Content.Trauma.Common.Medical.HealthAnalyzer;
 
 // state specific to each scan mode
 [Serializable, NetSerializable]

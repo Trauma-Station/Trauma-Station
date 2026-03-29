@@ -14,7 +14,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.MedicalScanner;
 using Content.Shared.Mobs.Systems;
-using Content.Shitcode.Common.Medical.HealthAnalyzer;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Medical;

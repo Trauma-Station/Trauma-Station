@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
-using Content.Shitcode.Common.LinkAccount;
+using Content.Trauma.Common.LinkAccount;
 // </Trauma>
 using System.Linq;
 using Content.Client.UserInterface.Screens;

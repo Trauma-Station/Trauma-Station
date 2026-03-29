@@ -2,7 +2,7 @@
 using Content.Goobstation.Common.Weapons;
 using Content.Goobstation.Common.Weapons.MeleeDash;
 using Content.Trauma.Common.Weapons;
-using Content.Shitcode.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Shared.Wieldable.Components;
 // </Trauma>
 using System.Linq;

@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Interaction;
-using Content.Shitcode.Common.Heretic;
+using Content.Trauma.Common.Heretic;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Trauma.Common.Heretic;

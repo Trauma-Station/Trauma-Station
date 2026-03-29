@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shitcode.Shared.Heretic.Components;
-using Content.Shitcode.Shared.Wizard.Mutate;
+using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Wizard.Mutate;
 using Content.Shared.Stunnable;
 using Content.Shared.Projectiles;
 using Content.Shared.Throwing;

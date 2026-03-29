@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.DoAfter;
 using Content.Shared.Projectiles;
-using Content.Shitcode.Common.Cuffs;
+using Content.Trauma.Common.Cuffs;
 // </Trauma>
 using Content.Shared.Alert;
 using Content.Shared.CombatMode.Pacification;

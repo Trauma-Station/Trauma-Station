@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.LinkAccount;
+using Content.Trauma.Common.LinkAccount;
 // </Trauma>
 using System.Linq;
 using System.Numerics;

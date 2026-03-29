@@ -1,5 +1,5 @@
 // <RMC>
-using Content.Shitcode.Common.LinkAccount;
+using Content.Trauma.Common.LinkAccount;
 // </RMC>
 using Content.Client.Changelog;
 using Content.Client.Stylesheets;

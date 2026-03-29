@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.Shuttles;
+using Content.Trauma.Common.Shuttles;
 // </Trauma>
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;

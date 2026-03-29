@@ -10,8 +10,8 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
-<<<<<<<< HEAD:Content.Shitcode.Shared/Wizard/Traps/IceCubeComponent.cs
-namespace Content.Shitcode.Shared.Wizard.Traps;
+<<<<<<<< HEAD:Content.Trauma.Shared/Wizard/Traps/IceCubeComponent.cs
+namespace Content.Trauma.Shared.Wizard.Traps;
 ========
 namespace Content.Trauma.Shared.Wizard.Traps;
 >>>>>>>> upstream:Content.Trauma.Shared/Wizard/Traps/IceCubeComponent.cs

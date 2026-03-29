@@ -1,7 +1,7 @@
 // <Trauma>
-using Content.Shitcode.Common.Wizard;
-using Content.Shitcode.Shared.Wizard.Components;
-using Content.Shitcode.Shared.Wizard.SpellCards;
+using Content.Trauma.Common.Wizard;
+using Content.Trauma.Shared.Wizard.Components;
+using Content.Trauma.Shared.Wizard.SpellCards;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
 using Content.Trauma.Common.Heretic;

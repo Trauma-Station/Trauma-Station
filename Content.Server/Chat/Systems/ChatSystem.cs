@@ -10,7 +10,7 @@ using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Systems;
-using Content.Shitcode.Common.Wizard.Chuuni;
+using Content.Trauma.Common.Wizard.Chuuni;
 using Content.Trauma.Common.Speech;
 using Content.Trauma.Common.CollectiveMind;
 // </Trauma>

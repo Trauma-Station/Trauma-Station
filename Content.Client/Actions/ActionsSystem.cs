@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.Wizard;
+using Content.Trauma.Common.Wizard;
 using Content.Goobstation.Common.Actions;
 // </Trauma>
 using System.IO;

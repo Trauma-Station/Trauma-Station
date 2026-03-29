@@ -2,11 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-<<<<<<<< HEAD:Content.Shitcode.Common/Heretic/TargetInteractionRelayComponent.cs
-namespace Content.Shitcode.Common.Heretic;
-========
 namespace Content.Trauma.Common.Heretic;
->>>>>>>> upstream:Content.Trauma.Common/Heretic/TargetInteractionRelayComponent.cs
 
 /// <summary>
 /// Same as InteractionRelayComponent but relays target interactions, not user

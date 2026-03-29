@@ -6,11 +6,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-<<<<<<<< HEAD:Content.Shitcode.Shared/Wizard/Traps/WizardTrapComponent.cs
-namespace Content.Shitcode.Shared.Wizard.Traps;
-========
 namespace Content.Trauma.Shared.Wizard.Traps;
->>>>>>>> upstream:Content.Trauma.Shared/Wizard/Traps/WizardTrapComponent.cs
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class WizardTrapComponent : Component

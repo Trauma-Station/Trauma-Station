@@ -2,7 +2,7 @@
 // Copyright (c) 2024 New Frontiers Contributors
 // See AGPLv3.txt for details.
 
-using Content.Shitcode.Common.Shuttles;
+using Content.Trauma.Common.Shuttles;
 using Content.Shared.Shuttles.BUIStates;
 using System.Numerics;
 using Content.Shared.Shuttles.Components;

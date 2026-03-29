@@ -3,7 +3,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Flammability;
 using Content.Medical.Common.Targeting;
 using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shitcode.Shared.Wizard.Spellblade;
+using Content.Trauma.Shared.Wizard.Spellblade;
 using Content.Shared.Body;
 using Robust.Shared.Configuration;
 // </Trauma>

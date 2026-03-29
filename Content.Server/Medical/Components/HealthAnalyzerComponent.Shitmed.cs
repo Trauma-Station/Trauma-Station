@@ -1,4 +1,4 @@
-using Content.Shitcode.Common.Medical.HealthAnalyzer;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 
 namespace Content.Server.Medical.Components;
 

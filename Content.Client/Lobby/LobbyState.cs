@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.LinkAccount;
+using Content.Trauma.Common.LinkAccount;
 // </Trauma>
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;

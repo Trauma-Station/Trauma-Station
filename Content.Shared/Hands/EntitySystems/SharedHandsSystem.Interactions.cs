@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Hands;
-using Content.Shitcode.Common.Hands;
+using Content.Trauma.Common.Hands;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Examine;

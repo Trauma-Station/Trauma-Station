@@ -2,8 +2,8 @@
 
 using Robust.Shared.GameStates;
 
-<<<<<<<< HEAD:Content.Shitcode.Common/Heretic/TargetInteractionRelayComponent.cs
-namespace Content.Shitcode.Common.Heretic;
+<<<<<<<< HEAD:Content.Trauma.Common/Heretic/TargetInteractionRelayComponent.cs
+namespace Content.Trauma.Common.Heretic;
 ========
 namespace Content.Trauma.Common.Heretic;
 >>>>>>>> upstream:Content.Trauma.Common/Heretic/TargetInteractionRelayComponent.cs

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shitcode.Common.LinkAccount;
+using Content.Trauma.Common.LinkAccount;
 using Content.Trauma.Client.IoC;
 using Content.Trauma.Client.ItemSlotRenderer;
 using Robust.Client.Graphics;

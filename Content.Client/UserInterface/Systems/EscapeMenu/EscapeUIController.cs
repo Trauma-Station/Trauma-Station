@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.LinkAccount;
+using Content.Trauma.Common.LinkAccount;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Robust.Shared;
 // </Trauma>

@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Shared.Body;
-using Content.Shitcode.Common.Medical.HealthAnalyzer;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Robust.Shared.Prototypes;
 // </Trauma>
 using Content.Shared.MedicalScanner;

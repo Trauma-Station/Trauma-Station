@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitcode.Common.Weapons.AmmoSelector;
+using Content.Trauma.Common.Weapons.AmmoSelector;
 using Content.Trauma.Common.MartialArts;
 // </Trauma>
 using System.Numerics;

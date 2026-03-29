@@ -1,6 +1,6 @@
 // <Trauma>
 using Robust.Shared.Timing;
-using Content.Shitcode.Common.Radar;
+using Content.Trauma.Common.Radar;
 // </Trauma>
 using System.Numerics;
 using Content.Shared.Shuttles.BUIStates;

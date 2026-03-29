@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Damage.Events;
 using Content.Goobstation.Common.Stunnable;
-using Content.Shitcode.Common.Damage;
+using Content.Trauma.Common.Damage;
 using Content.Trauma.Common.Damage;
 // </Trauma>
 using System.Linq;
