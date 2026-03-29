@@ -47,7 +47,7 @@ public class MapLoadBenchmark
         PoolManager.Shutdown();
     }
 
-    public static string[] MapsSource { get; } = {"Empty", "Saltern", "Box", "Bagel", "Dev", "CentComm", "Atlas", "Core", "TestTeg", "Packed", "Origin", "Omega", "Cluster", "Reach", "Meta", "Marathon", "Nume", "MeteorArena", "Fland", "Oasis", "Barratry", "Kettle", "Submarine", "Lambda", "Leonid", "Delta", "Amber", "Chloris", "Cog"}; //Trauma - Completely Changed. NUKED SERPENTCREST
+    public static string[] MapsSource { get; } = { "Empty", "Saltern", "Box", "Bagel", "Dev", "CentComm", "Atlas", "Core", "TestTeg", "Packed", "Origin", "Omega", "Cluster", "Reach", "Meta", "Marathon", "Nume", "MeteorArena", "Fland", "Oasis", "Barratry", "Kettle", "Submarine", "Lambda", "Leonid", "Delta", "Amber", "Chloris", "Cog", "Serpentcrest"}; // Trauma - completely changed
 
     [ParamsSource(nameof(MapsSource))]
     public string Map;
