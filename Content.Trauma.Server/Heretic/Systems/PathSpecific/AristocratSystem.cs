@@ -2,7 +2,6 @@
 
 using System.Linq;
 using System.Numerics;
-using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Audio;
 using Content.Shared.Atmos;

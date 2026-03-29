@@ -50,6 +50,7 @@ jobs:
         path: |
           bin/Content.*/*.json
           bin/Content.IntegrationTests/*.dll
+          bin/Content.IntegrationTests/*.pdb
           bin/Content.IntegrationTests/runtimes/linux-x64/**
           bin/Content.MapRenderer/*.dll
           bin/Content.Tests/*.dll

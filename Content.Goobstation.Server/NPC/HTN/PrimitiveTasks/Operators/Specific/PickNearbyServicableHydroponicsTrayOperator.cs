@@ -38,6 +38,8 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     [DataField(required: true)]
     public string TargetMoveKey = string.Empty;
 
+    private HashSet<Entity<PlantHolderComponent>> _targets = new();
+
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
@@ -54,27 +56,26 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
         if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entMan) || !_entMan.TryGetComponent<PlantbotComponent>(owner, out _))
             return (false, null);
 
-        var entityQuery = _entMan.GetEntityQuery<PlantHolderComponent>();
         var emagged = _entMan.HasComponent<EmaggedComponent>(owner);
 
-        foreach (var target in _lookup.GetEntitiesInRange(owner, range))
+        var coords = _entMan.GetComponent<TransformComponent>(owner).Coordinates;
+        _targets.Clear();
+        _lookup.GetEntitiesInRange(coords, range, _targets);
+        foreach (var target in _targets)
         {
-            if (!entityQuery.TryGetComponent(target, out var plantHolderComponent))
-                continue;
-
-            if (plantHolderComponent is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed, Harvest: false } && (!emagged || plantHolderComponent.Dead || plantHolderComponent.WaterLevel <= 0f)) // Trauma
+            if (target.Comp is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed, Harvest: false } && (!emagged || target.Comp.Dead || target.Comp.WaterLevel <= 0f))
                 continue;
 
             //Needed to make sure it doesn't sometimes stop right outside it's interaction range
             var pathRange = SharedInteractionSystem.InteractionRange - 1f;
-            var path = await _pathfinding.GetPath(owner, target, pathRange, cancelToken);
+            var path = await _pathfinding.GetPath(owner, target.Owner, pathRange, cancelToken);
 
             if (path.Result == PathResult.NoPath)
                 continue;
 
             return (true, new Dictionary<string, object>()
             {
-                {TargetKey, target},
+                {TargetKey, target.Owner},
                 {TargetMoveKey, _entMan.GetComponent<TransformComponent>(target).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });

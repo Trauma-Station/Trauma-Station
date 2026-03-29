@@ -5643,3 +5643,78 @@ Entries:
   id: 663
   time: '2026-03-28T12:44:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1636
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Explosion damage resistance is now part coverage-based, wearing a bombsuit
+      helmet won't protect your legs. Explosions deal their full damage to every
+      uncovered part!
+  id: 664
+  time: '2026-03-28T15:21:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1637
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lemonades being evil
+  id: 665
+  time: '2026-03-28T19:19:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1641
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed weldbots not working.
+  id: 666
+  time: '2026-03-28T20:28:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1645
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix heretic living heart not working.
+  id: 667
+  time: '2026-03-28T22:57:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1651
+- author: loltart
+  changes:
+  - type: Add
+    message: >-
+      Added a new sandevistan variant, the Statveka. It seemingly slows down
+      time near the user but only lasts for a limited amount of time.
+  - type: Tweak
+    message: >-
+      Major sandevistan additions. The sandevistan now have a status alert
+      telling you what your current load level is. If you hover your mouse over
+      it, it will tell you your thresholds. (20 seconds causes jittering, 40
+      causes damage, 60 causes death, etc)
+  - type: Tweak
+    message: the normal sandevistan now gives a 50% speed boost to do-afters.
+  - type: Tweak
+    message: Brand new trail for the sandevistan.
+  - type: Tweak
+    message: Sandevistans no longer have a build up to be disabled.
+  - type: Tweak
+    message: The cyberpsychosis bundle now comes with the new sandevistan variant.
+  id: 668
+  time: '2026-03-29T00:23:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1617
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Re-enabled blood splatters and footprints. The experiment is over.
+  id: 669
+  time: '2026-03-29T07:13:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1653
+- author: Fat-Engineer-Gaming
+  changes:
+  - type: Add
+    message: Added 21 new AI Core sprites!
+  id: 670
+  time: '2026-03-29T10:21:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1613
+- author: Bon-Man
+  changes:
+  - type: Add
+    message: Added ID Card for D-Class
+  id: 671
+  time: '2026-03-29T10:56:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1664

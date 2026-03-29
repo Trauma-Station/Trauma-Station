@@ -195,7 +195,6 @@ public sealed class ToggleableClothingSystem : EntitySystem
     }
 
     public bool IsToggled(Entity<ToggleableClothingComponent> ent, EntityUid clothing) // Goobstation
-///
     {
         return !ent.Comp.Container.Contains(clothing);
     }
@@ -249,6 +248,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
+        // <Trauma> - shitcode fully rewritten...
         _clothing.SetEquippedPrefix(toggleable, null);
 
         // Check if container exists and we have linked clothings
@@ -257,6 +257,28 @@ public sealed class ToggleableClothingSystem : EntitySystem
 
         var parts = comp.ClothingUids;
         var affectedParts = new List<(EntityUid, string)>();
+
+        // if e.g. a modsuit gets deleted, delete all of its parts immediately. unequipping will be done automatically
+        if (TerminatingOrDeleted(toggleable))
+        {
+            // only restore if the mob wearing it isn't being deleted too
+            var restore = !TerminatingOrDeleted(args.Equipee);
+            foreach (var (partUid, slot) in parts)
+            {
+                // it's being deleted not taken off, no contact here
+                _inventorySystem.TryUnequip(args.Equipee, slot, force: true, triggerHandContact: false);
+                PredictedQueueDel(partUid);
+                if (restore &&
+                    CompOrNull<AttachedClothingComponent>(partUid)?.ClothingContainer?.ContainedEntity is {} stored &&
+                    !Deleted(stored))
+                {
+                    _containerSystem.TryRemoveFromContainer(stored);
+                    _inventorySystem.TryEquip(args.Equipee, stored, slot,
+                        force: true, triggerHandContact: false);
+                }
+            }
+            return;
+        }
 
         // if your toggleable clothing is a backslot and gets forcefully removed i.e. gibbing, Robust likes to forcefully eject the container(s)
         // you can try this by making a regular outerclothing item a back item with VV and equipping the toggle, then smiting yourself
@@ -299,6 +321,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
 
             _inventorySystem.TryUnequip(args.Equipee, slot, force: true, triggerHandContact: true);
         }
+        // </Trauma>
     }
 
     private void OnRemoveToggleable(Entity<ToggleableClothingComponent> toggleable, ref ComponentRemove args)
