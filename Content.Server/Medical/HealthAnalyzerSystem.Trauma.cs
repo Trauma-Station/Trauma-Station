@@ -9,7 +9,6 @@ using Content.Medical.Shared.Wounds;
 using Content.Server.Medical.Components;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Shared.Chemistry.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.MedicalScanner;
@@ -164,23 +163,23 @@ public sealed partial class HealthAnalyzerSystem
         return organs;
     }
 
-    private Dictionary<NetEntity, Solution> FetchChemicalData(EntityUid target)
+    private List<NetEntity> FetchChemicalData(EntityUid target)
     {
-        var solutionsList = new Dictionary<NetEntity, Solution>();
+        var solutionsList = new List<NetEntity>();
 
         if (TryComp<BloodstreamComponent>(target, out var blood) &&
             _solutionContainerSystem.ResolveSolution(target, blood.BloodSolutionName, ref blood.BloodSolution, out var bloodSol))
         {
-            solutionsList.Add(GetNetEntity(blood.BloodSolution.Value), bloodSol);
+            solutionsList.Add(GetNetEntity(blood.BloodSolution.Value));
         }
 
         // TODO SHITMED: this is already networked????
         foreach (var stomach in _body.GetOrgans<StomachComponent>(target))
         {
-            if (stomach.Comp.Solution is not {} solution)
+            if (stomach.Comp.Solution is not { } solution)
                 continue;
 
-            solutionsList.Add(GetNetEntity(solution), solution.Comp.Solution);
+            solutionsList.Add(GetNetEntity(solution));
         }
 
         return solutionsList;

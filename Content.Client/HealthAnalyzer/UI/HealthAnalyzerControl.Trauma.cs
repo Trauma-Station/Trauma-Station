@@ -1,32 +1,35 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Globalization;
+using System.Linq;
+using System.Numerics;
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Wounds;
-using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
-using Content.Shared.FixedPoint;
 using Content.Shared.MedicalScanner;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
 
 namespace Content.Client.HealthAnalyzer.UI;
 
 public sealed partial class HealthAnalyzerControl
 {
+    private readonly SharedSolutionContainerSystem _solution;
+
     public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
 
@@ -39,6 +42,7 @@ public sealed partial class HealthAnalyzerControl
 
     private void InitializeTrauma()
     {
+        _solution = _entityManager.System<SharedSolutionContainerSystem>();
         _wound = _entityManager.System<WoundSystem>();
 
         _bodyPartControls = new Dictionary<ProtoId<OrganCategoryPrototype>, TextureButton>
@@ -296,7 +300,18 @@ public sealed partial class HealthAnalyzerControl
         ConditionsListContainer.RemoveAllChildren();
         GroupsContainer.RemoveAllChildren();
 
-        DrawSolutionDiagnostics(state.Solutions);
+        var solutions = new Dictionary<NetEntity, Solution>();
+        foreach (var netEnt in state.SolutionEntities)
+        {
+            var uid = _entityManager.GetEntity(netEnt);
+
+            foreach (var (_, solution) in _solution.EnumerateSolutions(uid))
+            {
+                solutions.Add(netEnt, solution.Comp.Solution);
+            }
+        }
+
+        DrawSolutionDiagnostics(solutions);
 
         ConditionsListContainer.AddChild(new RichTextLabel
         {

@@ -2,9 +2,7 @@
 
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Common.Wounds;
 using Content.Shared.Body;
-using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -49,12 +47,11 @@ public sealed class HealthAnalyzerOrgansState : HealthAnalyzerScanState
 [Serializable, NetSerializable]
 public sealed class HealthAnalyzerChemicalsState : HealthAnalyzerScanState
 {
-    // TODO SHITMED: use networked solution state instead of serializing?
-    public readonly Dictionary<NetEntity, Solution> Solutions;
+    public readonly List<NetEntity> SolutionEntities;
 
-    public HealthAnalyzerChemicalsState(Dictionary<NetEntity, Solution> solutions)
+    public HealthAnalyzerChemicalsState(List<NetEntity> solutionEntities)
     {
-        Solutions = solutions;
+        SolutionEntities = solutionEntities;
     }
 }
 

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shitmed.Shared.Medical.HealthAnalyzer;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Content.Shared.FixedPoint;
 // </Trauma>
 using Content.Server.Medical.Components;

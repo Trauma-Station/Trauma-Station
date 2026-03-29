@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage.Components;
@@ -17,9 +16,9 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Trauma.Shared.Wizard.Projectiles;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
@@ -35,12 +34,12 @@ public abstract class SharedBindSoulSystem : EntitySystem
     [Dependency] protected readonly SharedContainerSystem Container = default!;
     [Dependency] protected readonly NpcFactionSystem Faction = default!;
     [Dependency] protected readonly GrammarSystem Grammar = default!;
-    [Dependency] private   readonly TagSystem _tag = default!;
-    [Dependency] private   readonly SharedActionsSystem _actions = default!;
-    [Dependency] private   readonly GibbingSystem _gibbing = default!;
-    [Dependency] private   readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private   readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private   readonly INetManager _net = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedGravitySystem _gravity = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public static readonly ProtoId<TagPrototype> IgnoreBindSoulTag = "IgnoreBindSoul"; // Goobstation
 
@@ -99,7 +98,7 @@ public abstract class SharedBindSoulSystem : EntitySystem
         if (!Deleting(args.Container))
             QueueDel(args.Container);
 
-        if (ent.Comp.Item is not {} item)
+        if (ent.Comp.Item is not { } item)
             return;
 
         if (!ItemExistsAndOnSamePlane(item, xform.MapUid, out var itemXform))

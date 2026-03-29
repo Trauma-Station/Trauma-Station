@@ -3,18 +3,7 @@
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Magic;
 using Content.Goobstation.Common.Religion;
-using Content.Trauma.Shared.Wizard;
-using Content.Trauma.Shared.Wizard.BindSoul;
-using Content.Trauma.Shared.Wizard.Chuuni;
-using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
-using Content.Shared.Actions;
-using Content.Shared.FixedPoint;
-using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Goobstation.Wizard.BindSoul;
-using Content.Shared._Goobstation.Wizard.Chuuni;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
@@ -70,6 +59,7 @@ public abstract class SharedMagicSystem : EntitySystem
     // <Trauma>
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private readonly CommonWizardSystem _wizard = default!;
     // </Trauma>
     [Dependency] private readonly ISerializationManager _seriMan = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -199,7 +189,7 @@ public abstract class SharedMagicSystem : EntitySystem
         var flags = SlotFlags.OUTERCLOTHING | SlotFlags.HEAD;
         var requiredSlots = 2;
         if (_inventory.TryGetSlotEntity(args.Performer, "eyes", out var eyepatch) &&
-            HasComp<ChuuniEyepatchComponent>(eyepatch.Value))
+            _wizard.IsChunni(eyepatch))
         {
             requiresSpeech = true;
             flags = SlotFlags.OUTERCLOTHING;
@@ -664,41 +654,23 @@ public abstract class SharedMagicSystem : EntitySystem
         if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
 
-        if (IsTouchSpellDenied(ev.Target)) // Goobstation
+        // Goobstation start
+        if (IsTouchSpellDenied(ev.Target))
         {
             ev.Handled = true;
             return;
         }
 
-        // Goobstation start
-        if (_mobState.IsIncapacitated(ev.Target) || HasComp<ZombieComponent>(ev.Target))
-        {
-            _popup.PopupClient(Loc.GetString("spell-fail-mindswap-dead"), ev.Performer, ev.Performer);
-            return;
-        }
 
-        // raise blocker event (why the fuck was this done as a list lol)
         var blockEv = new BeforeMindSwappedEvent();
         RaiseLocalEvent(ev.Target, ref blockEv);
 
-        List<(Type, string)> blockers = new()
-        {
-            // Mindswapping with aghost real.
-            (typeof(GhostComponent), "ghost"),
-            (typeof(SpectralComponent), "ghost"),
-            (typeof(TimedDespawnComponent), "temporary"),
-            (typeof(FadingTimedDespawnComponent), "temporary"),
-        };
-
-        // someone should nuke the list and make all of the components use the event. that someone is not me.
         if (blockEv.Cancelled)
         {
             _popup.PopupClient(Loc.GetString($"spell-fail-mindswap-{blockEv.Message}"), ev.Performer, ev.Performer);
             return;
         }
 
-        if (blockers.Any(x => CheckMindswapBlocker(x.Item1, x.Item2)))
-            return;
         // Goobstation end
 
         ev.Handled = true;
@@ -827,15 +799,6 @@ public abstract class SharedMagicSystem : EntitySystem
             {
                 return factions.Where(x => factionsToTransfer.Contains(x));
             }
-        }
-
-        bool CheckMindswapBlocker(Type type, string message)
-        {
-            if (!HasComp(ev.Target, type))
-                return false;
-
-            _popup.PopupClient(Loc.GetString($"spell-fail-mindswap-{message}"), ev.Performer, ev.Performer);
-            return true;
         }
         // Goobstation end
     }
