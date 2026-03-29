@@ -32,8 +32,6 @@
       steps:
       - tag: HammerHeadSteel
         doAfter: 3
-      - tag: HammerHeadBrass
-        doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
           sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
@@ -42,8 +40,6 @@
     - to: hammerplasteel
       steps:
       - tag: HammerHeadPlasteel
-        doAfter: 3
-      - tag: HammerHeadBrass
         doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
@@ -55,8 +51,6 @@
       steps:
       - tag: ScrewdriverShankBrass
         doAfter: 3
-      - tag: HammerHeadBrass
-        doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
           sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
@@ -66,8 +60,6 @@
       steps:
       - tag: ScrewdriverShankSteel
         doAfter: 3
-      - tag: HammerHeadBrass
-        doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
           sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
@@ -76,8 +68,6 @@
     - to: screwdriverplasteel
       steps:
       - tag: ScrewdriverShankSteel
-        doAfter: 3
-      - tag: HammerHeadBrass
         doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
