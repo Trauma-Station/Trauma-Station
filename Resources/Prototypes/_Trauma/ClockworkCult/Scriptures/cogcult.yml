@@ -13,4 +13,3 @@
     - !type:AddActions
       actions:
       - ActionBlink
-
