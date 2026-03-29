@@ -2,14 +2,15 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Common.Temperature.Components;
 using Content.Goobstation.Shared.Bible; // Goobstation - Bible
 using Content.Shared.Actions;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Popups;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Interaction;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.CosmicCult.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -26,18 +27,18 @@ public sealed class CosmicRiftSystem : EntitySystem
     [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<CosmicRiftComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<BibleComponent, GetVerbsEvent<UtilityVerb>>(AddPurgeVerb);
-        SubscribeLocalEvent<CosmicRiftComponent, GetVerbsEvent<ActivationVerb>>(AddTravelVerb);
-        SubscribeLocalEvent<CosmicRiftComponent, InteractHandEvent>(OnInteract);
-        SubscribeLocalEvent<CosmicRiftComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<CosmicRiftComponent, GetVerbsEvent<AlternativeVerb>>(AddTravelVerb);
         SubscribeLocalEvent<CosmicRiftComponent, EventPurgeRiftDoAfter>(OnPurgeDoAfter);
-        SubscribeLocalEvent<CosmicCultistComponent, EventAbsorbRiftDoAfter>(OnAbsorbDoAfter);
     }
+
+    #region Base Logic
 
     private void OnStartup(Entity<CosmicRiftComponent> ent, ref ComponentStartup args)
     {
@@ -55,10 +56,11 @@ public sealed class CosmicRiftSystem : EntitySystem
                 continue;
 
             comp.EntropyStored++;
-            comp.EntropyTimer = _timing.CurTime + comp.EntropyTime
+            comp.EntropyTimer = _timing.CurTime + comp.EntropyTime;
         }
     }
 
+    #endregion
     #region Verbs
 
     private void AddPurgeVerb(Entity<BibleComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
@@ -100,17 +102,17 @@ public sealed class CosmicRiftSystem : EntitySystem
                 _doAfter.TryStartDoAfter(doargs);
             },
             Text = Loc.GetString("cosmic-cult-verb-rift-purge-name"),
-            Message = Loc.GetString("cosmic-cult-verb-rift-purge-desc", ("target", target), ("item", item))
+            Message = Loc.GetString("cosmic-cult-verb-rift-purge-desc", ("target", target), ("item", item)),
+            IconEntity = GetNetEntity(ent)
         };
         args.Verbs.Add(verb);
     }
 
-    private void AddHarvestVerb(Entity<CosmicRiftComponent> ent, ref GetVerbsEvent<ActivationVerb> args) // TODO make an alt verb
+    private void AddHarvestVerb(Entity<CosmicRiftComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
     {
         if (!args.CanAccess
         || !args.CanInteract
-        || args.Using == null
-        || !HasComp<CosmicCultistComponent>(args.User))
+        || !TryComp<CosmicCultistComponent>(args.User, out var cultComp))
             return;
 
         var user = args.User;
@@ -118,11 +120,36 @@ public sealed class CosmicRiftSystem : EntitySystem
         {
             Act = () =>
             {
-                _popup.PopupClient(Loc.GetString("cosmiccult-rift-beginpurge"), user, user);
+                var transferred = _cult.AddEntropy((user, cultComp), ent.Comp.EntropyStored);
+                ent.Comp.EntropyStored -= transferred;
+                _popup.PopupClient(
+                    Loc.GetString("cosmic-cult-verb-rift-harvest-popup",
+                    ("count", transferred),
+                    ("target", ent)),
+                    ent, user);
+            },
+            Text = Loc.GetString("cosmic-cult-verb-rift-harvest-name"),
+            Message = Loc.GetString("cosmic-cult-verb-rift-harvest-desc", ("target", ent))
+        };
+        args.Verbs.Add(verb);
+    }
+
+    private void AddTravelVerb(Entity<CosmicRiftComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess
+        || !args.CanInteract
+        || !HasComp<CosmicCultistComponent>(args.User))
+            return;
+
+        var user = args.User;
+        var verb = new AlternativeVerb()
+        {
+            Act = () =>
+            {
                 var doargs = new DoAfterArgs(EntityManager,
                     user,
                     ent.Comp.TravelTime,
-                    new EventPurgeRiftDoAfter(),
+                    new EventTravelRiftDoAfter(),
                     user,
                     user)
                 {
@@ -136,39 +163,70 @@ public sealed class CosmicRiftSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    private void AddTravelVerb(Entity<CosmicRiftComponent> ent, ref GetVerbsEvent<ActivationVerb> args) // TODO make an alt verb
+    private void AddUpgradeVerb(Entity<CosmicRiftComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanAccess
         || !args.CanInteract
-        || args.Using == null
-        || !HasComp<CosmicCultistComponent>(args.User))
+        || !HasComp<CosmicCultistComponent>(args.User)
+        || ent.Comp.UpgradeProto is not { } protoId
+        || !_proto.Resolve(protoId, out var proto))
             return;
 
         var user = args.User;
-        var verb = new ActivationVerb()
+        var verb = new Verb()
         {
             Act = () =>
             {
-                _popup.PopupClient(Loc.GetString("cosmiccult-rift-beginpurge"), user, user);
                 var doargs = new DoAfterArgs(EntityManager,
                     user,
-                    ent.Comp.TravelTime,
-                    new EventPurgeRiftDoAfter(),
+                    ent.Comp.UpgradeTime,
+                    new EventUpgradeRiftDoAfter(),
                     user,
-                    user)
+                    ent)
                 {
                     DistanceThreshold = 1.5f, BreakOnDamage = true, BreakOnHandChange = false, BreakOnMove = true, MovementThreshold = 0.5f,
                 };
                 _doAfter.TryStartDoAfter(doargs);
             },
-            Text = Loc.GetString("cosmic-cult-verb-rift-travel-name"),
-            Message = Loc.GetString("cosmic-cult-verb-rift-travel-desc", ("target", ent))
+            Text = Loc.GetString("cosmic-cult-verb-rift-upgrade-name"),
+            Message = Loc.GetString("cosmic-cult-verb-rift-upgrade-desc", ("target", ent))
+        };
+        args.Verbs.Add(verb);
+    }
+
+    private void AddDestroyVerb(Entity<CosmicRiftComponent> ent, ref GetVerbsEvent<Verb> args)
+    {
+        if (!args.CanAccess
+        || !args.CanInteract
+        || !HasComp<CosmicCultistComponent>(args.User)
+        || ent.Comp.CloseTime is not { } closteTime)
+            return;
+
+        var user = args.User;
+        var verb = new Verb()
+        {
+            Act = () =>
+            {
+                var doargs = new DoAfterArgs(EntityManager,
+                    user,
+                    closteTime,
+                    new EventCloseRiftDoAfter(),
+                    user,
+                    ent)
+                {
+                    DistanceThreshold = 1.5f, Hidden = true, BreakOnDamage = true, BreakOnHandChange = false, BreakOnMove = true, MovementThreshold = 0.5f,
+                };
+                _doAfter.TryStartDoAfter(doargs);
+            },
+            Text = Loc.GetString("cosmic-cult-verb-rift-destroy-name"),
+            Message = Loc.GetString("cosmic-cult-verb-rift-destroy-desc", ("target", ent))
         };
         args.Verbs.Add(verb);
     }
 
     #endregion
-
+    #region DoAfters
+/*
     private void OnAbsorbDoAfter(Entity<CosmicCultistComponent> uid, ref EventAbsorbRiftDoAfter args)
     {
         var comp = uid.Comp;
@@ -194,7 +252,6 @@ public sealed class CosmicRiftSystem : EntitySystem
         EnsureComp<CosmicNonRespiratingComponent>(args.User);
         RemComp<HungerComponent>(args.User); // Eschew Metabolism is kill, rifts give the effect instead
         RemComp<ThirstComponent>(args.User);
-        _cult.AddEntropy(uid, rift.EntropyGranted);
         _popup.PopupCoordinates(
             Loc.GetString("cosmiccult-rift-absorb", ("NAME", Identity.Entity(args.Args.User, EntityManager))),
             Transform(args.Args.User).Coordinates,
@@ -204,7 +261,7 @@ public sealed class CosmicRiftSystem : EntitySystem
         if (comp.CosmicShopActionEntity is { } shop)
             _ui.SetUiState(shop, CosmicShopKey.Key, new CosmicShopBuiState());
     }
-
+*/
     private void OnPurgeDoAfter(Entity<CosmicRiftComponent> uid, ref EventPurgeRiftDoAfter args)
     {
         if (args.Args.Target == null || args.Cancelled || args.Handled)
@@ -220,4 +277,5 @@ public sealed class CosmicRiftSystem : EntitySystem
             PopupType.Medium);
         QueueDel(uid);
     }
+    #endregion
 }

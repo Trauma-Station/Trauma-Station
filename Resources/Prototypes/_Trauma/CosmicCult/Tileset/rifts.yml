@@ -37,6 +37,8 @@
     closeTime: 5
     upgradedEntity: CosmicRiftMid
     influenceLevel: 1
+    entropyTime: 60
+    entropyCap: 10
 
 - type: entity
   parent: CosmicRiftBase
@@ -81,6 +83,8 @@
     closeTime: 15
     upgradedEntity: CosmicRiftBig
     influenceLevel: 2
+    entropyTime: 30
+    entropyCap: 20
 
 - type: entity
   parent: CosmicRiftBase
@@ -121,3 +125,5 @@
   - type: CosmicMalignRift
     travelTime: 3
     influenceLevel: 3
+    entropyTime: 15
+    entropyCap: 30

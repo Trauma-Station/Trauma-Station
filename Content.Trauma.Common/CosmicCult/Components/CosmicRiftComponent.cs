@@ -55,7 +55,7 @@ public sealed partial class CosmicRiftComponent : Component
     /// Entity prototype to spawn when a cultist tries to upgrade the rift. If null, the rift cannot be upgraded.
     /// </summary>
     [DataField]
-    public EntProtoId? UpgradedEntity;
+    public EntProtoId? UpgradeProto;
 
     /// <summary>
     /// The level of influences this rift unlocks for it's creator.
@@ -79,7 +79,7 @@ public sealed partial class CosmicRiftComponent : Component
     /// How often this rift generates entropy.
     /// </summary>
     [DataField]
-    public TimeSpan EntropyTime = TimeSpan.FromSeconds(15);
+    public TimeSpan EntropyTime = TimeSpan.FromSeconds(60);
 
     [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan EntropyTimer = default!;
