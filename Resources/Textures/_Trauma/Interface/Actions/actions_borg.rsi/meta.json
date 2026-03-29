@@ -9,6 +9,9 @@
     "states": [
         {
             "name": "xenoborg-silenced-laser-module"
+        },
+        {
+            "name": "xenoborg-aprocket-module"
         }
     ]
 }

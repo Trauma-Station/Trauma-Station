@@ -5,8 +5,13 @@
   parent: [ BaseWeaponBattery, BaseMajorContraband ]
   components:
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_missilerack
+    sprite: _Trauma/Objects/Weapons/Guns/Launchers/xenoborg_aprocket_launcher.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-2
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
   - type: Gun
     minAngle: 0
     maxAngle: 0
@@ -25,3 +30,7 @@
   - type: Battery
     maxCharge: 200
     startingCharge: 200
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: true

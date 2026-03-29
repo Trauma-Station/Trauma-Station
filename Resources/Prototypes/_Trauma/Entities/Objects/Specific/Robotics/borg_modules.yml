@@ -79,4 +79,4 @@
     - item: WeaponRocketLauncherXenoborgStructural
     - item: XenoborgKnife
   - type: BorgModuleIcon
-    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: xenoborg-silenced-laser-module }
+    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: xenoborg-aprocket-module }
