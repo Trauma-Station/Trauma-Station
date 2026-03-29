@@ -18,12 +18,10 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -47,8 +45,6 @@ public sealed class CosmicChantrySystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
     [Dependency] private readonly EntityManager _entMan = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
 
     /// <summary>
     /// Mind role to add to colossi.
