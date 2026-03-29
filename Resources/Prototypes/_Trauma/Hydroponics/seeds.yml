@@ -25,7 +25,7 @@
       Min: 1
       Max: 4
       PotencyDivisor: 25
-    CLF3:
+    ChlorineTrifluoride:
       Min: 1
       Max: 1
       PotencyDivisor: 100

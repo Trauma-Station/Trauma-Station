@@ -27,7 +27,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 namespace Content.IntegrationTests.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("MapTests")] // Trauma - only run these in map tests job
     public sealed class PostMapInitTest
     {
         private const bool SkipTestMaps = true;
@@ -429,6 +429,18 @@ namespace Content.IntegrationTests.Tests
                     var spawnPoints = entManager.EntityQuery<SpawnPointComponent>()
                         .Where(x => x.SpawnType == SpawnPointType.Job && x.Job != null)
                         .Select(x => x.Job.Value);
+
+                    // <Trauma> - dont allow unused jobs
+                    var unused = new List<ProtoId<JobPrototype>>();
+                    foreach (var job in spawnPoints)
+                    {
+                        if (!jobs.Contains(job))
+                            unused.Add(job);
+                    }
+                    Assert.That(unused,
+                        Is.Empty,
+                        $"Found unused job spawnpoints for {string.Join(", ", unused)} on {mapProto}. Add them to the map prototype or remove them!");
+                    // </Trauma>
 
                     jobs.ExceptWith(spawnPoints);
 

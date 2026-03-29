@@ -15,6 +15,9 @@
     layers:
     - state: icon
     scale: 0.5, 0.5
+  - type: OrganActions
+    actions:
+    - ActionToggleSandevistan
   - type: OrganComponents
     onAdd:
     - type: SandevistanUser

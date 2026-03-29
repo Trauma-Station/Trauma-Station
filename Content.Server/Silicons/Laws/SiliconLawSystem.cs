@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.CustomLawboard;
 using Content.Server._DV.CosmicCult;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
 using Content.Shared.Random;
@@ -83,12 +82,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid)
-            || HasComp<StationAiCustomizationComponent>(uid)) // skip a law's notification for remotable and AI
-            return;
-        // Corvax-Next-AiRemoteControl-End
 
         var msg = Loc.GetString("laws-notify");
         var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
@@ -181,11 +174,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         if (component.Lawset == null)
             component.Lawset = GetLawset(component.Laws);
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid)) // You can't emag controllable entities
-            return;
-        // Corvax-Next-AiRemoteControl-End
 
         // Show the silicon has been subverted.
         component.Subverted = true;
@@ -372,33 +360,11 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             }
             SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
 
-            // Corvax-Next-AiRemoteControl-Start
-            if (TryComp<StationAiHeldComponent>(update, out var stationAiHeldComp)
-                && stationAiHeldComp.CurrentConnectedEntity != null
-                && HasComp<SiliconLawProviderComponent>(stationAiHeldComp.CurrentConnectedEntity))
-            {
-                SetLaws(lawset, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
-            }
-            // Corvax-Next-AiRemoteControl-End
-
             RaiseLocalEvent(new AILawUpdatedEvent(update, provider.Laws)); // Trauma
         }
 
         ent.Comp.LastLawset = provider.Laws; // Goob
     }
-
-    // Corvax-Next-AiRemoteControl-Start
-    public void SetLawsSilent(List<SiliconLaw> newLaws, EntityUid target, SoundSpecifier? cue = null)
-    {
-        if (!TryComp<SiliconLawProviderComponent>(target, out var component))
-            return;
-
-        if (component.Lawset == null)
-            component.Lawset = new SiliconLawset();
-
-        component.Lawset.Laws = newLaws;
-    }
-    // Corvax-Next-AiRemoteControl-End
 
     // Goob edit start
     private void ApplyExperimentalLaws(Entity<SiliconLawUpdaterComponent> ent, Entity<ExperimentalLawProviderComponent, SiliconLawProviderComponent> experiment)

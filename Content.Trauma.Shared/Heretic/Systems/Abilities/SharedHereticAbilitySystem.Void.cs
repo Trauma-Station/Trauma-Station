@@ -1,0 +1,132 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
+using Content.Goobstation.Common.BlockTeleport;
+using Content.Medical.Common.Targeting;
+using Content.Shared.Gravity;
+using Content.Shared.Interaction;
+using Content.Shared.Movement.Systems;
+using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
+using Content.Trauma.Shared.Heretic.Events;
+
+namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
+
+public abstract partial class SharedHereticAbilitySystem
+{
+    protected virtual void SubscribeVoid()
+    {
+        SubscribeLocalEvent<HereticVoidBlinkEvent>(OnVoidBlink);
+        SubscribeLocalEvent<HereticVoidPullEvent>(OnVoidPull);
+        SubscribeLocalEvent<HereticVoidConduitEvent>(OnVoidConduit);
+
+        SubscribeLocalEvent<AristocratComponent, IsWeightlessEvent>(OnIsWeightless);
+        SubscribeLocalEvent<AristocratComponent, RefreshWeightlessModifiersEvent>(OnRefreshFriction);
+    }
+
+    private void OnRefreshFriction(Entity<AristocratComponent> ent, ref RefreshWeightlessModifiersEvent args)
+    {
+        // Intentionally don't multiply the values to prevent void ascended moths to be extra speedy
+        args.WeightlessFriction = ent.Comp.Friction;
+        args.WeightlessAcceleration = ent.Comp.Acceleration;
+        args.WeightlessModifier = ent.Comp.Modifier;
+    }
+
+    private void OnIsWeightless(Entity<AristocratComponent> ent, ref IsWeightlessEvent args)
+    {
+        args.Handled = true;
+        args.IsWeightless = true;
+    }
+
+    private void OnVoidConduit(HereticVoidConduitEvent args)
+    {
+        if (!TryUseAbility(args))
+            return;
+
+        PredictedSpawnAtPosition(args.VoidConduit, Transform(args.Performer).Coordinates);
+    }
+
+    private void OnVoidBlink(HereticVoidBlinkEvent args)
+    {
+        if (!TryUseAbility(args, false))
+            return;
+
+        Heretic.TryGetHereticComponent(args.Performer, out var heretic, out _);
+
+        var ent = args.Performer;
+
+        var path = heretic?.CurrentPath ?? HereticPath.Void;
+
+        var ev = new TeleportAttemptEvent();
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled)
+            return;
+
+        var target = _transform.ToMapCoordinates(args.Target);
+        if (!Examine.InRangeUnOccluded(ent, target, SharedInteractionSystem.MaxRaycastRange))
+        {
+            // can only dash if the destination is visible on screen
+            Popup.PopupClient(Loc.GetString("dash-ability-cant-see"), ent, ent);
+            return;
+        }
+
+        var people = GetNearbyPeople(ent, args.Radius, path);
+        var xform = Transform(ent);
+
+        PredictedSpawnAtPosition(args.InEffect, xform.Coordinates);
+        _transform.SetCoordinates(ent, xform, args.Target);
+        PredictedSpawnAtPosition(args.OutEffect, args.Target);
+
+        var condition = path == HereticPath.Void;
+
+        people.AddRange(GetNearbyPeople(ent, args.Radius, path));
+        foreach (var pookie in people.ToHashSet())
+        {
+            if (condition)
+                Voidcurse.DoCurse(pookie, 2);
+            _dmg.ChangeDamage(pookie.Owner,
+                args.Damage * _body.GetVitalBodyPartRatio(pookie.Owner),
+                true,
+                origin: ent,
+                targetPart: TargetBodyPart.All,
+                canMiss: false);
+        }
+
+        args.Handled = true;
+    }
+
+    private void OnVoidPull(HereticVoidPullEvent args)
+    {
+        if (!TryUseAbility(args))
+            return;
+
+        Heretic.TryGetHereticComponent(args.Performer, out var heretic, out _);
+
+        var ent = args.Performer;
+
+        var path = heretic?.CurrentPath ?? HereticPath.Void;
+        var condition = path == HereticPath.Void;
+        var coords = Transform(ent).Coordinates;
+
+        var pookies = GetNearbyPeople(ent, args.Radius, path);
+        foreach (var pookie in pookies)
+        {
+            _dmg.ChangeDamage(pookie.Owner,
+                args.Damage * _body.GetVitalBodyPartRatio(pookie.Owner),
+                true,
+                origin: ent,
+                targetPart: TargetBodyPart.All,
+                canMiss: false);
+
+            _stun.TryUpdateParalyzeDuration(pookie.Owner, args.StunTime);
+            _stun.TryKnockdown(pookie.Owner, args.KnockDownTime, refresh: true);
+
+            if (condition)
+                Voidcurse.DoCurse(pookie, 3);
+
+            _throw.TryThrow(pookie, coords);
+        }
+
+        PredictedSpawnAtPosition(args.InEffect, coords);
+    }
+}

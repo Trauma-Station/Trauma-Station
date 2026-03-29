@@ -5,6 +5,7 @@
   components:
   - type: Sprite
     state: maints
+  - type: MaintsSpawnLocation # for slasher and xenos
 
 - type: entity
   parent: BaseAreaStation

@@ -11,4 +11,10 @@ public sealed partial class CargoOrderConsoleComponent
     [DataField, AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
     public NetEntity? Destination;
+
+    /// <summary>
+    /// Allows disabling access check for the target account.
+    /// </summary>
+    [DataField]
+    public bool IgnoreAccess;
 }

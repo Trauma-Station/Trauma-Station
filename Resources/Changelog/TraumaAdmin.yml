@@ -73,3 +73,10 @@ Entries:
   id: 10
   time: '2026-03-20T20:11:40.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1485
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed antag smites applying to you instead of the target...
+  id: 11
+  time: '2026-03-25T21:49:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1582

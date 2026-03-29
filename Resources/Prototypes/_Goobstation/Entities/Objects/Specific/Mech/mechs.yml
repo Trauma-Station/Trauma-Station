@@ -78,7 +78,7 @@
     baseState: ripleymkii
     openState: ripleymkii-open
     brokenState: ripleymkii-broken
-    mechToPilotDamageMultiplier: 0.4
+    mechToPilotDamageMultiplier: 0.1
     airtight: true
     pilotWhitelist:
       components:
@@ -136,7 +136,7 @@
     baseState: clarke
     openState: clarke-open
     brokenState: clarke-broken
-    mechToPilotDamageMultiplier: 0.5
+    mechToPilotDamageMultiplier: 0.1
     airtight: true
     pilotWhitelist:
       components:
@@ -207,7 +207,7 @@
     baseState: gygax
     openState: gygax-open
     brokenState: gygax-broken
-    mechToPilotDamageMultiplier: 0.3
+    mechToPilotDamageMultiplier: 0.05
     airtight: true
     pilotWhitelist:
       components:
@@ -266,7 +266,7 @@
     baseState: durand
     openState: durand-open
     brokenState: durand-broken
-    mechToPilotDamageMultiplier: 0.25
+    mechToPilotDamageMultiplier: 0
     airtight: true
     maxIntegrity: 400
     pilotWhitelist:
@@ -333,7 +333,7 @@
     baseState: marauder
     openState: marauder-open
     brokenState: marauder-broken
-    mechToPilotDamageMultiplier: 0.1
+    mechToPilotDamageMultiplier: 0
     airtight: true
     maxIntegrity: 500
     maxEquipmentAmount: 4
@@ -406,7 +406,7 @@
     baseState: seraph
     openState: seraph-open
     brokenState: seraph-broken
-    mechToPilotDamageMultiplier: 0.05
+    mechToPilotDamageMultiplier: 0
     airtight: true
     maxIntegrity: 550
     maxEquipmentAmount: 5
@@ -482,7 +482,7 @@
     baseState: darkgygax
     openState: darkgygax-open
     brokenState: darkgygax-broken
-    mechToPilotDamageMultiplier: 0.15
+    mechToPilotDamageMultiplier: 0.05
     airtight: true
     maxIntegrity: 300
     maxEquipmentAmount: 4
@@ -555,7 +555,7 @@
     baseState: mauler
     openState: mauler-open
     brokenState: mauler-broken
-    mechToPilotDamageMultiplier: 0.1
+    mechToPilotDamageMultiplier: 0
     airtight: true
     maxIntegrity: 500
     maxEquipmentAmount: 5
