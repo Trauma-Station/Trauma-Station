@@ -17,6 +17,6 @@ public sealed class TraumaInventorySystem : EntitySystem
 
         SubscribeLocalEvent<InventoryComponent, TackleEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, CheckMagicItemEvent>(_inventory.RelayEvent);
-        SubscribeLocalEvent<InventoryComponent, TransformSpeakerJobIconEvent>(_inventory.RefRelayEvent);
+        SubscribeLocalEvent<InventoryComponent, TransformSpeakerJobIconEvent>(_inventory.RelayEvent);
     }
 }
