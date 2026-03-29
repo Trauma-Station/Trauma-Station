@@ -19,18 +19,9 @@
         - Belt
     - type: AccessOverrider
       accessLevels:
-      # <Trauma>
-      - NanotrasenRepresentative
-      - Journalism
-      - Library
-      - Robotics
-      - Genetics
-      - Revolutionary
       - Armory
       - Atmospherics
       - Bar
-      - BasicSilicon
-      - Borg
       - Brig
       - Detective
       - Captain
@@ -58,15 +49,15 @@
       - Salvage
       - Security
       - Service
-      - StationAi
       - Theatre
-      - CentralCommand
-      - NuclearOperative
-      - SyndicateAgent
-      - Wizard
-      - Xenoborg
+      # Trauma
+      - NanotrasenRepresentative
       - GenpopEnter
       - GenpopLeave
+      - Journalism
+      - Library
+      - Robotics
+      - Genetics
       # </Trauma>
       privilegedIdSlot:
         name: id-card-console-privileged-id

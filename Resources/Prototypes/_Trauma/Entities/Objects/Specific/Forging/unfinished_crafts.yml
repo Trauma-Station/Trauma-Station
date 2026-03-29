@@ -2893,7 +2893,7 @@
 
 - type: entity
   parent: [BaseMorningstarHeadHot, BaseBrassHot]
-  id: MorningStarHeadBrassHot
+  id: MorningstarHeadBrassHot
   name: hot brass morningstar head
   components:
   - type: ChangeOnCool

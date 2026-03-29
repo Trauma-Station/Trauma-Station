@@ -6,6 +6,9 @@
   description: A bag of cement, mix it with water to prepare it.
   components:
   - type: Appearance
+  - type: Item
+    size: Huge
+  - type: MultiHandedItem
   - type: GenericVisualizer
     visuals:
       enum.OpenableVisuals.Opened:
@@ -116,10 +119,6 @@
     slipData:
       launchForwardsMultiplier: 3
   - type: TriggerOnStepTrigger
-  - type: DamageUserOnTrigger
-    damage:
-      types:
-        Piercing: 15
   - type: DeleteOnTrigger
   - type: SpawnOnTrigger
     proto: WetCement

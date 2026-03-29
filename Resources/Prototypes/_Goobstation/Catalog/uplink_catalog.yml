@@ -1053,10 +1053,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
 
 - type: listing
   id: UplinkMagazineHighCaliber

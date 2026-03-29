@@ -80,12 +80,13 @@
   id: UplinkThrowingKnivesKit
   name: uplink-knives-kit-name
   description: uplink-knives-kit-desc
-  icon: { sprite: /Textures/Objects/Weapons/Melee/throwing_knife.rsi, state: icon }
+  icon: { sprite: /Textures/Objects/Weapons/Melee/throwing_knife.rsi, state: icon } # Trauma
   productEntity: ClothingBeltKnifeRig # Trauma
   cost:
     Telecrystal: 20 # goob - Pretty weak, but resusable ranged crit potential shouldn't be less.
   categories:
     - UplinkWeaponry
+
 - type: listing
   id: UplinkGlovesNorthStar
   name: uplink-gloves-north-star-name
