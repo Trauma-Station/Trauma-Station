@@ -555,14 +555,6 @@
   id: TrashBananiumPeel
   name: bananium peel
   components:
-  # <Trauma>
-  - type: Perishable
-    rotAfter: 999999999 # I am a hero
-    molsPerSecondPerUnitMass: 0
-  - type: 
-    entity: FoodRot
-    stage: 1
-  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: peel
