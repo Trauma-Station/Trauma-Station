@@ -47,7 +47,6 @@
 - type: entity
   parent: CMPlatformBase
   id: CMPlatform
-  name: platform
   components:
   - type: Fixtures
     fixtures:
@@ -70,7 +69,6 @@
 - type: entity
   parent: CMPlatformBase
   id: CMPlatformCorner
-  name: platform
   components:
   - type: Fixtures
     fixtures:
@@ -102,7 +100,6 @@
 - type: entity
   parent: CMPlatformBase
   id: RMCPlatformCornerSmall
-  name: platform
   components:
   - type: Fixtures
     fixtures:
@@ -147,7 +144,6 @@
 - type: entity
   parent: CMPlatformBase
   id: CMPlatformDark
-  name: platform
   components:
   - type: Fixtures
     fixtures:
@@ -170,7 +166,6 @@
 - type: entity
   parent: CMPlatformBase
   id: CMPlatformCornerDark
-  name: platform
   components:
   - type: Fixtures
     fixtures:
@@ -202,7 +197,6 @@
 - type: entity
   parent: CMPlatformBase
   id: RMCPlatformCornerSmallDark
-  name: platform
   components:
   - type: Fixtures
     fixtures:
@@ -247,7 +241,6 @@
 - type: entity
   parent: CMPlatformBase
   id: CMPlatformWood
-  name: platform
   components:
   - type: Fixtures
     fixtures:
@@ -270,7 +263,6 @@
 - type: entity
   parent: CMPlatformBase
   id: CMPlatformCornerWood
-  name: platform
   components:
   - type: Fixtures
     fixtures:
@@ -302,7 +294,6 @@
 - type: entity
   parent: CMPlatformBase
   id: RMCPlatformCornerSmallWood
-  name: platform
   components:
   - type: Fixtures
     fixtures:
