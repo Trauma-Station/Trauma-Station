@@ -594,7 +594,7 @@
 # Screwdriver
 
 - type: entity
-  parent: Screwdriver
+  parent: BaseItem
   id: BaseForgeScrewdriver
   abstract: true
   components:
