@@ -1695,7 +1695,7 @@
       - !type:SpawnEntitiesBehavior
         offset: 0
         spawn:
-          ChainMailSheetBrassHot:
+          ChainMailBrassHot:
             min: 1
             max: 1
       - !type:DoActsBehavior
@@ -1707,7 +1707,7 @@
   name: hot brass chainmail sheet
   components:
   - type: ChangeOnCool
-    cooledPrototype: ChainMailBrass
+    cooledPrototype: ChainMailSheetBrass
 
 - type: entity
   parent: [BaseChainMailSheet, BrassColor]
@@ -2893,11 +2893,11 @@
 
 - type: entity
   parent: [BaseMorningstarHeadHot, BaseBrassHot]
-  id: MorningStarBrassHot
+  id: MorningStarHeadBrassHot
   name: hot brass morningstar head
   components:
   - type: ChangeOnCool
-    cooledPrototype: MorningStarBrass
+    cooledPrototype: MorningstarHeadBrass
 
 - type: entity
   parent: [BaseMorningstarHead, BrassColor]

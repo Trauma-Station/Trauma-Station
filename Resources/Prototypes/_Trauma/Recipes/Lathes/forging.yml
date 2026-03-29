@@ -12,7 +12,7 @@
   result: AshPile
   completetime: 30
   materials:
-    Wood: 50
+    Wood: 750
 
 # Anvil
 
@@ -293,7 +293,7 @@
   result: SwordBladeBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -302,7 +302,7 @@
   result: SwordBladeSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -311,7 +311,7 @@
   result: SwordBladePlasteelUnfinishedHot
   completetime: 0
   materials:
-    PlasteelIngot: 100
+    PlasteelIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -347,7 +347,7 @@
   result: HalberdHeadBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 500
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -356,7 +356,7 @@
   result: HalberdHeadSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 500
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -365,7 +365,7 @@
   result: HalberdHeadPlasteelUnfinishedHot
   completetime: 0
   materials:
-    PlasteelIngot: 100
+    PlasteelIngot: 500
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -374,7 +374,7 @@
   result: LongswordBladeBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 500
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -383,7 +383,7 @@
   result: LongswordBladeSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 500
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -392,7 +392,7 @@
   result: LongswordBladePlasteelUnfinishedHot
   completetime: 0
   materials:
-    PlasteelIngot: 100
+    PlasteelIngot: 500
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -401,7 +401,7 @@
   result: MetalPlateBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -410,7 +410,7 @@
   result: MetalPlateSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -419,7 +419,7 @@
   result: MetalPlatePlasteelUnfinishedHot
   completetime: 0
   materials:
-    PlasteelIngot: 100
+    PlasteelIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -428,7 +428,7 @@
   result: WarhammerHeadBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 300
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -437,7 +437,7 @@
   result: WarhammerHeadSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 300
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -455,7 +455,7 @@
   result: PickaxeHeadBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -464,7 +464,7 @@
   result: PickaxeHeadSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -473,7 +473,7 @@
   result: PickaxeHeadPlasteelUnfinishedHot
   completetime: 0
   materials:
-    PlasteelIngot: 100
+    PlasteelIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -482,7 +482,7 @@
   result: ThinBladeBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -491,7 +491,7 @@
   result: ThinBladeSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -500,7 +500,7 @@
   result: ThinBladePlasteelUnfinishedHot
   completetime: 0
   materials:
-    PlasteelIngot: 100
+    PlasteelIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -536,7 +536,7 @@
   result: SpearHeadBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 300
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -545,7 +545,7 @@
   result: SpearHeadSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 300
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -554,7 +554,7 @@
   result: SpearHeadPlasteelUnfinishedHot
   completetime: 0
   materials:
-    PlasteelIngot: 100
+    PlasteelIngot: 300
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -563,7 +563,7 @@
   result: MorningstarHeadBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 300
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -572,7 +572,7 @@
   result: MorningstarHeadSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 300
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -581,7 +581,7 @@
   result: MorningstarHeadPlasteelUnfinishedHot
   completetime: 0
   materials:
-    PlasteelIngot: 100
+    PlasteelIngot: 300
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -590,7 +590,7 @@
   result: ShieldBossBrassUnfinishedHot
   completetime: 0
   materials:
-    BrassIngot: 100
+    BrassIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -599,7 +599,7 @@
   result: ShieldBossSteelUnfinishedHot
   completetime: 0
   materials:
-    SteelIngot: 100
+    SteelIngot: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -608,4 +608,4 @@
   result: ShieldBossPlasteelUnfinishedHot
   completetime: 0
   materials:
-    PlasteelIngot: 100
+    PlasteelIngot: 200

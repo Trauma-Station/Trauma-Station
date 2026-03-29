@@ -23,7 +23,7 @@
 - type: entity
   name: plasteel arrowhead spawner
   parent: BaseItem
-  id: Steelarrowheads
+  id: Plateelarrowheads
   categories: [ HideSpawnMenu ]
   components:
   - type: EntityTableSpawner

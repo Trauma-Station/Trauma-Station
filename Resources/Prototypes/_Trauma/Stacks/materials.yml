@@ -36,7 +36,7 @@
 - type: stack
   parent: BaseIngotStack
   id: SteelIngot
-  name: stack-steek-ingot
+  name: stack-steel-ingot
   icon: { sprite: /Textures_Trauma/Objects/Specific/forging.rsi, state: ingot_steel_hot }
   spawn: SteelIngot
 

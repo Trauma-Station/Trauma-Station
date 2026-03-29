@@ -524,7 +524,7 @@
         name: construction-graph-tag-mediumhandle
         icon:
           sprite: _Trauma/Objects/Specific/forging.rsi
-          state: HandleMedium
+          state: handlemedium
 
   - node: handle
     entity: BlugeonCraftStart

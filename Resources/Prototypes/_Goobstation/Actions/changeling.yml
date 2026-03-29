@@ -705,7 +705,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 60 #it lasts 10 seconds
+    useDelay: 15 #it lasts 10 seconds
     checkCanInteract: false
     checkConsciousness: false
     itemIconStyle: NoItem
