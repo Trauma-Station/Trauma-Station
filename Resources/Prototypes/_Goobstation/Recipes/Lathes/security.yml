@@ -172,6 +172,7 @@
 
 # Mech Weapons
 - type: latheRecipe
+  abstract: true
   parent: BaseRedAlert
   id: BaseCombatMechWeapon
   completetime: 10
