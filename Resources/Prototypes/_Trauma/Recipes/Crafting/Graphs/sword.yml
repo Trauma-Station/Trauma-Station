@@ -1,0 +1,98 @@
+# Forge Sword
+
+- type: constructionGraph
+  id: ForgeSword
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: handle
+      steps:
+      - tag: HandleSmall
+        doAfter: 10
+        name: construction-graph-tag-smallhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlesmall
+
+  - node: handle
+    entity: SwordCraftStart
+    edges:
+
+
+    - to: swordbrass
+      steps:
+      - tag: SwordBladeBrass
+        doAfter: 3
+
+    - to: swordsteel
+      steps:
+      - tag: SwordBladeSteel
+        doAfter: 3
+
+    - to: swordplasteel
+      steps:
+      - tag: SwordBladePlasteel
+        doAfter: 3
+
+
+    - to: longswordbrass
+      steps:
+      - tag: LongswordBladeBrass
+        doAfter: 3
+
+    - to: longswordsteel
+      steps:
+      - tag: LongswordBladeSteel
+        doAfter: 3
+
+    - to: longswordplasteel
+      steps:
+      - tag: LongswordBladePlasteel
+        doAfter: 3
+
+
+    - to: katanabrass
+      steps:
+      - tag: KatanaBladeBrass
+        doAfter: 3
+
+    - to: katanasteel
+      steps:
+      - tag: KatanaBladeSteel
+        doAfter: 3
+
+    - to: katanaplasteel
+      steps:
+      - tag: KatanaBladePlasteel
+        doAfter: 3
+
+
+  - node: swordbrass
+    entity: BrassForgeArmingsword
+
+  - node: swordsteel
+    entity: SteelForgeArmingsword
+
+  - node: swordplasteel
+    entity: PlasteelForgeArmingsword
+
+
+  - node: longswordbrass
+    entity: BrassForgeLongsword
+
+  - node: longswordsteel
+    entity: SteelForgeLongsword
+
+  - node: longswordplasteel
+    entity: PlasteelForgeLongsword
+
+
+  - node: katanabrass
+    entity: BrassForgeKatana
+
+  - node: katanasteel
+    entity: SteelForgeKatana
+
+  - node: katanaplasteel
+    entity: PlasteelForgeKatana
