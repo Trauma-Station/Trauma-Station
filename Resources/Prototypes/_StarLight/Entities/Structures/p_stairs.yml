@@ -322,9 +322,6 @@
   components:
   - type: Sprite
     state: p_stair_wood_left_cap
-  - type: Damageable
-    damageModifierSet: Wood
-    damageContainer: StructuralInorganic
 
 - type: entity
   id: RMCStairsWoodRight
