@@ -33,7 +33,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared._CorvaxNext.Silicons.Borgs; // Cortex-Next
 
 namespace Content.Shared.Silicons.StationAi;
 
@@ -65,8 +64,6 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     [Dependency] private readonly StationAiVisionSystem _vision = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-
-    [Dependency] private readonly SharedAiRemoteControlSystem _remoteSystem = default!; // Corvax-Next-AiRemoteControl
 
     // StationAiHeld is added to anything inside of an AI core.
     // StationAiHolder indicates it can hold an AI positronic brain (e.g. holocard / core).
@@ -210,16 +207,15 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     {
         args.Handled = true;
 
-        // Shitmed - Starlight Abductors Change Start
+        // <Trauma> - allow changing the target for abductor eye
         var target = args.Target;
         if (ent.Comp.AllowCrossGrid && TryComp(ent, out RelayInputMoverComponent? relay))
             target = relay.RelayEntity;
-        // Shitmed Change End
-
         var targetXform = Transform(target);
+        // </Trauma>
 
         // No cross-grid
-        if (targetXform.GridUid != Transform(args.User).GridUid && !ent.Comp.AllowCrossGrid) // Shitmed Change
+        if (targetXform.GridUid != Transform(args.User).GridUid && !ent.Comp.AllowCrossGrid) // Trauma - check AllowCrossGrid
         {
             return;
         }
@@ -251,13 +247,6 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         // Try to insert our thing into them
         if (_slots.CanEject(ent.Owner, args.User, ent.Comp.Slot))
         {
-            // Corvax-Next-AiRemoteControl-Start
-            if (ent.Comp.Slot.Item != null
-                && TryComp<StationAiHeldComponent>(ent.Comp.Slot.Item, out var stationAiHeldComp))
-                if (stationAiHeldComp.CurrentConnectedEntity != null)
-                    _remoteSystem.ReturnMindIntoAi(stationAiHeldComp.CurrentConnectedEntity.Value);
-            // Corvax-Next-AiRemoteControl-End
-
             if (!_slots.TryInsert(args.Args.Target.Value, targetHolder.Slot, ent.Comp.Slot.Item!.Value, args.User, excludeUserAudio: true))
             {
                 return;

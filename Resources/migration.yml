@@ -113,6 +113,9 @@ NecrosolChemistryBottle: ArcryoxChemistryBottle
 
 # 2026-03-28 blockers being mapped is anti fun
 DisposalBlocker: DisposalPipe
+
+# 2026-03-29 no chud boris
+AiRemoteBrain: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
