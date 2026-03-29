@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityEffects;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.ClockworkCult.Scripture;
@@ -16,4 +18,11 @@ public sealed partial class ScriptureComponent : Component
     /// </summary>
     [DataField]
     public int PowerCost = 1000;
+
+    /// <summary>
+    /// Effects to run on recital.
+    /// E.g. giving an action to the user, or spawning a structure
+    /// </summary>
+    [DataField]
+    public EntityEffect[] RecitalEffects;
 };

@@ -6,6 +6,10 @@
   - type: GameRule # placeholder
     chaosScore: 350
     minPlayers: 15
+  - type: AntagPlayerEffects
+    effects:
+    - !type:ChangeFaction
+      newFaction: ClockworkCult
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     agentName: role-clockwork-cultist

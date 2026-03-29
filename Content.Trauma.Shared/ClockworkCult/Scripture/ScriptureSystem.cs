@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Shared.EntityEffects;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Prototypes;
 using Content.Trauma.Shared.ClockworkCult.Slab;
@@ -20,6 +21,7 @@ public sealed partial class ScriptureSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
     [Dependency] private readonly EntityQuery<ScriptureComponent> _scriptureQuery = default!;
 
     /// <summary>
@@ -72,8 +74,14 @@ public sealed partial class ScriptureSystem : EntitySystem
         _container.ShutdownContainer(container);
     }
 
+    /// <summary>
+    /// Handles basic reciting logic.
+    /// Checks against the user to see if they hold the correct requirements to recite (e.g. power)
+    /// Applies the recital effects on the user, if user is capable of reciting.
+    /// </summary>
     private void OnRecite(Entity<ScriptureContainerComponent> ent, ref ScriptureReciteMessage args)
     {
+        // TODO: Must marked as a clockwork cultist to recite!!
         if (!_proto.TryIndex(args.Scripture, out var scripture)
             || !scripture.TryGetComponent<ScriptureComponent>(out var scriptureComponent))
             return;
@@ -85,6 +93,7 @@ public sealed partial class ScriptureSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
+        _entityEffects.ApplyEffects(user, scriptureComponent.RecitalEffects);
         Log.Debug("The scripture got recited");
     }
 
@@ -111,6 +120,7 @@ public sealed partial class ScriptureSystem : EntitySystem
     /// <returns></returns>
     public bool TryAddScripture(EntityUid target, EntProtoId scriptureProto)
     {
+        // TODO: Do duplicate scripture check
         if (!CanAddScripture(scriptureProto))
             return false;
 
@@ -152,9 +162,13 @@ public sealed partial class ScriptureSystem : EntitySystem
 
         return null;
     }
-    #endregion
 
-    private bool CanAddScripture(EntProtoId scripture)
+    /// <summary>
+    /// Determines whether we can add a scripture to an entity
+    /// </summary>
+    /// <param name="scripture"></param> The prototype of the scripture
+    /// <returns></returns>
+    public bool CanAddScripture(EntProtoId scripture)
     {
         if (!_proto.Resolve(scripture, out var scriptureData))
             return false;
@@ -164,4 +178,5 @@ public sealed partial class ScriptureSystem : EntitySystem
 
         return true;
     }
+    #endregion
 }

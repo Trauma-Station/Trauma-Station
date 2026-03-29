@@ -40,6 +40,8 @@ public sealed class ClockworkSlabSystem : EntitySystem
 
         var now = _timing.CurTime;
 
+        // TODO: Should be seperate component
+        // TODO: Should have an active variant so it doesn't run for 4noraisin
         var eqe = EntityQueryEnumerator<ClockworkSlabComponent>();
         while (eqe.MoveNext(out var uid, out var comp))
         {
@@ -64,6 +66,8 @@ public sealed class ClockworkSlabSystem : EntitySystem
     private void OnMapInit(Entity<ClockworkSlabComponent> ent, ref MapInitEvent args)
     {
         // Add all scripture prototypes that are available
+        // TODO: Scriptures shouldn't be stored like that on the slab, rather one entity should hold them (not gamerule cuz its in server)
+        // TODO: and said entity should sync scriptures between all slabs (entity should be smth in-game, not nullspace, not destroyable!)
         foreach (var scripture in _scripture.AllScriptures)
         {
             _scripture.TryAddScripture(ent.Owner, scripture);
