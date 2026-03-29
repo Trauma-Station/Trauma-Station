@@ -11,6 +11,12 @@
       "name": "icon"
     },
     {
+      "name": "crossguard"
+    },
+    {
+      "name": "handle"
+    },
+    {
       "name": "inhand-right",
       "directions": 4
     },

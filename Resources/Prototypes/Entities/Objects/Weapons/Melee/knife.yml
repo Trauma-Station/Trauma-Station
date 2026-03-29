@@ -15,6 +15,7 @@
   - type: MeleeWeapon
     animationRotation: -135 # WWDP
     wideAnimationRotation: -135
+    canWideSwing: false # Trauma
     damage:
       types:
         Slash: 10
@@ -101,6 +102,11 @@
         Slash: 13
   - type: Item
     size: Normal
+    shape: # Trauma
+    - 0,0,0,0
+    - 1,0,2,1
+    storedRotation: 27 # Trauma
+    storedOffset: 5,-5 # Trauma
     sprite: Objects/Weapons/Melee/cleaver.rsi
   - type: GuideHelp
     guides:
@@ -206,6 +212,8 @@
   - type: Item
     sprite: Objects/Weapons/Melee/kukri_knife.rsi
     storedSprite: null
+    storedOffset: -1,1 # Trauma
+    storedRotation: -45 # Trauma
 
 - type: entity
   parent: [ClothingHeadHatGreyFlatcap, BaseMinorContraband, KnifeDurabilityWeak] # Trauma - Durability

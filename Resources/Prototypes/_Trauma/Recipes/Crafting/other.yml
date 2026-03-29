@@ -27,8 +27,7 @@
   targetNode: finish
   category: construction-category-tools
   objectType: Item
-  theory: {}
-  practical:
+  theory:
     MaterialsKnowledge: 1
     FabricationKnowledge: 1
   useQuality: false
@@ -40,8 +39,7 @@
   targetNode: finish
   category: construction-category-tools
   objectType: Item
-  theory: {}
-  practical:
+  theory:
     MaterialsKnowledge: 1
     FabricationKnowledge: 1
   useQuality: false

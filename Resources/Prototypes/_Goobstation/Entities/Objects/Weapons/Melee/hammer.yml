@@ -30,6 +30,8 @@
   - type: Item
     size: Small
     sprite: _Goobstation/Objects/Weapons/Melee/hammer.rsi
+    storedOffset: 1,-1
+    storedRotation: -45
   - type: Tag
     tags:
     - Hammer

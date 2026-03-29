@@ -449,7 +449,7 @@
     state: bloomsteel
 
 - type: entity
-  parent: [BaseForgeItemHot, SteelOverheatable]
+  parent: [BaseForgeItemHot, SteelOverheatable, MaterialBase]
   id: SteelIngot
   name: steel ingot
   description: A strong piece of metal, ready to be forged.
@@ -695,7 +695,7 @@
     state: bloomplasteel
 
 - type: entity
-  parent: [BaseForgeItemHot, PlasteelOverheatable]
+  parent: [BaseForgeItemHot, PlasteelOverheatable, MaterialBase]
   id: PlasteelIngot
   name: plasteel ingot
   description: A very robust piece of metal, ready to be forged.

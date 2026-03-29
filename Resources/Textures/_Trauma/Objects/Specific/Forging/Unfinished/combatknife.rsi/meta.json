@@ -11,6 +11,9 @@
       "name": "icon"
     },
     {
+      "name": "handle"
+    },
+    {
       "name": "inhand-right",
       "directions": 4
     },

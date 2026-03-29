@@ -255,4 +255,7 @@
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 1
+  practical:
+    TailoringKnowledge: 1
+  useQuality: false
   # </Trauma>

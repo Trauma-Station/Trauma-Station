@@ -189,7 +189,7 @@
 
 - type: latheRecipe
   parent: BaseToolRecipe
-  id: ScrewdriverSteelUnfinishedHot
+  id: ScrewdriverShankSteelUnfinishedHot
   icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi, state: icon, color: "#f7aa74" }
   result: ScrewdriverShankSteelUnfinishedHot
   completetime: 0
@@ -198,7 +198,7 @@
 
 - type: latheRecipe
   parent: BaseToolRecipe
-  id: ScrewdriverPlasteelUnfinishedHot
+  id: ScrewdriverShankPlasteelUnfinishedHot
   icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi, state: icon, color: "#d9b6f5" }
   result: ScrewdriverShankPlasteelUnfinishedHot
   completetime: 0
@@ -558,27 +558,27 @@
 
 - type: latheRecipe
   parent: BaseToolRecipe
-  id: MorningStarBrassUnfinishedHot
+  id: MorningstarHeadBrassUnfinishedHot
   icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi, state: icon, color: "#ff9d57" }
-  result: MorningStarBrassUnfinishedHot
+  result: MorningstarHeadBrassUnfinishedHot
   completetime: 0
   materials:
     BrassIngot: 100
 
 - type: latheRecipe
   parent: BaseToolRecipe
-  id: MorningStarSteelUnfinishedHot
+  id: MorningstarHeadSteelUnfinishedHot
   icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi, state: icon, color: "#f7aa74" }
-  result: MorningStarSteelUnfinishedHot
+  result: MorningstarHeadSteelUnfinishedHot
   completetime: 0
   materials:
     SteelIngot: 100
 
 - type: latheRecipe
   parent: BaseToolRecipe
-  id: MorningStarPlasteelUnfinishedHot
+  id: MorningstarHeadPlasteelUnfinishedHot
   icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi, state: icon, color: "#d9b6f5" }
-  result: MorningStarPlasteelUnfinishedHot
+  result: MorningstarHeadPlasteelUnfinishedHot
   completetime: 0
   materials:
     PlasteelIngot: 100
