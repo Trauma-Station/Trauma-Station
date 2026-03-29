@@ -50,5 +50,5 @@
   - type: Animateable
   - type: Construction
     graph: Anvil
-    node: AnvilComplete
+    node: finish
   - type: PlaceableSurface

@@ -89,7 +89,7 @@
       - state: brick-inhand-right
   - type: Construction
     graph: WetBrick
-    node: finished
+    node: finish
   - type: CollisionWake
     enabled: false
   - type: Fixtures
