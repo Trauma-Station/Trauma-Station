@@ -23,32 +23,66 @@
       steps:
       - tag: HammerHeadBrass
         doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
 
     - to: hammersteel
       steps:
       - tag: HammerHeadSteel
         doAfter: 3
+      - tag: HammerHeadBrass
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
 
     - to: hammerplasteel
       steps:
       - tag: HammerHeadPlasteel
         doAfter: 3
+      - tag: HammerHeadBrass
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
 
 
     - to: screwdriverbrass
       steps:
       - tag: ScrewdriverShankBrass
         doAfter: 3
+      - tag: HammerHeadBrass
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
 
     - to: screwdriversteel
       steps:
       - tag: ScrewdriverShankSteel
         doAfter: 3
+      - tag: HammerHeadBrass
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
 
     - to: screwdriverplasteel
       steps:
       - tag: ScrewdriverShankSteel
         doAfter: 3
+      - tag: HammerHeadBrass
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
 
   - node: hammerbrass
     entity: BrassForgeHammer
