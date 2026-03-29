@@ -1142,7 +1142,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         // goob end
 
         // <Trauma> - allow source entity to replace font
-        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech?.FontId);
+        speech ??= GetSpeechVerb(source, message);
+        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
         RaiseLocalEvent(source, ref fontEv);
         // </Trauma>
 
@@ -1151,7 +1152,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("entityName", entityName),
             ("verb", Loc.GetString(verbId)),
             ("fontType", fontEv.Font), // Trauma - use Font from above
-            ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize), // goob edit - "loudSpeakFont"
+            ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize),
             ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
             ("message", message),
             ("language", languageDisplay));
