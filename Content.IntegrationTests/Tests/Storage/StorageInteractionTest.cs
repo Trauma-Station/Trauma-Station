@@ -54,7 +54,7 @@ public sealed class StorageInteractionTest : InteractionTest
         // <Trauma> - pick up the backpack as well to allow interactions with the pda inside of it
         await Server.WaitPost(() =>
         {
-            Assert.That(HandSys.TryPickupAnyHand(SPlayer, backpack));
+            Assert.That(HandSys.TryPickupAnyHand(SPlayer!, backpack));
         });
         // </Trauma>
 
