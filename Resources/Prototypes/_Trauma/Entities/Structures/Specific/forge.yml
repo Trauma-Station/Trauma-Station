@@ -73,8 +73,7 @@
     maxTemp: 4000
   - type: ContainerContainer
     containers:
-      ItemCabinet: !type:ContainerSlot
-  - type: ItemSlots
+      ItemCabinet: !type:ContainerSlotrent
     slots:
       ItemCabinet:
         insertSound:

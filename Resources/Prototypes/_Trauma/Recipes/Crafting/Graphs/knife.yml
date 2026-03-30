@@ -26,7 +26,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
     - to: knifesteel
@@ -35,7 +35,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
     - to: knifeplasteel
@@ -44,7 +44,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
 
@@ -54,7 +54,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
     - to: combatknifesteel
@@ -63,7 +63,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
     - to: combatknifeplasteel
@@ -72,7 +72,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
 
@@ -82,7 +82,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
     - to: cleaversteel
@@ -91,7 +91,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
     - to: cleaverplasteel
@@ -100,7 +100,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
 
@@ -110,7 +110,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
     - to: kukristeel
@@ -119,7 +119,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
     - to: kukriplasteel
@@ -128,7 +128,7 @@
         doAfter: 3
         name: construction-graph-tag-knifeblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
           state: icon
 
 
