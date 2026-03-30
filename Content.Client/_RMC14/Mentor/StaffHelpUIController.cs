@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Content.Client._RMC14.Mentor;
 using Content.Client.Administration.Systems;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Bwoink;
@@ -13,13 +12,14 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
-namespace Content.Trauma.Client.Mentor;
+namespace Content.Client._RMC14.Mentor;
 
 public sealed class StaffHelpUIController : UIController, IOnSystemChanged<BwoinkSystem>
 {
@@ -38,7 +38,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private StaffHelpWindow? _staffHelpWindow;
     private MentorHelpWindow? _mentorHelpWindow;
     private MentorWindow? _mentorWindow;
-    private string? _mHelpSound;
+    private SoundSpecifier? _mHelpSound;
     private bool _unread;
 
     public override void Initialize()
@@ -49,7 +49,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _net.RegisterNetMessage<MentorHelpMsg>();
         _net.RegisterNetMessage<DeMentorMsg>();
         _net.RegisterNetMessage<ReMentorMsg>();
-        _config.OnValueChanged(TraumaCVars.RMCMentorHelpSound, v => _mHelpSound = v, true);
+        _config.OnValueChanged(TraumaCVars.RMCMentorHelpSound, v => _mHelpSound = new SoundPathSpecifier(v), true);
     }
 
     private void OnMentorStatus(MentorStatusMsg msg)

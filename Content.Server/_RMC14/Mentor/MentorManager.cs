@@ -1,22 +1,22 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Content.Server.Administration;
+using Content.Server.Administration.Managers;
 using Content.Server.Database;
 using Content.Server.Players.RateLimiting;
 using Content.Shared._RMC14.Mentor;
 using Content.Shared.Administration;
+using Content.Shared.Mind;
 using Content.Shared.Players.RateLimiting;
-using Content.Shared.Roles;
 using Content.Trauma.Common.CCVar;
 using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Server.Mentor;
+namespace Content.Server._RMC14.Mentor;
 
 public sealed class MentorManager : IPostInjectInit
 {
+    [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -25,38 +25,9 @@ public sealed class MentorManager : IPostInjectInit
     [Dependency] private readonly UserDbDataManager _userDb = default!;
 
     private const string RateLimitKey = "MentorHelp";
-    private static readonly ProtoId<JobPrototype> MentorJob = "CMSeniorEnlistedAdvisor";
 
     private readonly List<ICommonSession> _activeMentors = new();
     private readonly Dictionary<NetUserId, bool> _mentors = new();
-
-    private async Task LoadData(ICommonSession player, CancellationToken cancel)
-    {
-        var userId = player.UserId;
-        var isMentor = await _db.IsJobWhitelisted(player.UserId, MentorJob, cancel);
-
-        if (!isMentor)
-        {
-            var dbData = await _db.GetAdminDataForAsync(userId, cancel);
-            var flags = AdminFlags.None;
-            if (dbData?.AdminRank?.Flags != null)
-            {
-                flags |= AdminFlagsHelper.NamesToFlags(dbData.AdminRank.Flags.Select(p => p.Flag));
-            }
-
-            if (dbData?.Flags != null)
-            {
-                flags |= AdminFlagsHelper.NamesToFlags(dbData.Flags.Select(p => p.Flag));
-            }
-
-            isMentor = flags.HasFlag(AdminFlags.MentorHelp);
-        }
-
-        _mentors[player.UserId] = isMentor;
-
-        if (isMentor)
-            _activeMentors.Add(player);
-    }
 
     private void FinishLoad(ICommonSession player)
     {
@@ -97,32 +68,23 @@ public sealed class MentorManager : IPostInjectInit
         if (!_player.TryGetSessionById(message.MsgChannel.UserId, out var author))
             return;
 
-        SendMentorMessage(author.UserId, author.Name, author.UserId, author.Name, message.Message, message.MsgChannel);
+        var mind = _entity.System<SharedMindSystem>();
+        SendMentorMessage(author.UserId, author.Name, author.UserId, mind.GetCharacterName(author.UserId) ?? author.Name, message.Message, message.MsgChannel);
     }
 
-    private void OnDeMentor(DeMentorMsg message)
+    private void OnAdminPermsChanged(AdminPermsChangedEventArgs args)
     {
-        if (!_player.TryGetSessionById(message.MsgChannel.UserId, out var session) ||
-            !_activeMentors.Contains(session))
+        if (_admin.HasAdminFlag(args.Player, AdminFlags.MentorHelp) && !_activeMentors.Contains(args.Player))
         {
-            return;
+            _activeMentors.Add(args.Player);
+            SendMentorStatus(args.Player);
         }
 
-        _activeMentors.Remove(session);
-        SendMentorStatus(session);
-    }
-
-    private void OnReMentor(ReMentorMsg message)
-    {
-        if (!_player.TryGetSessionById(message.MsgChannel.UserId, out var session) ||
-            !_mentors.TryGetValue(session.UserId, out var mentor) ||
-            !mentor)
+        if (!_admin.HasAdminFlag(args.Player, AdminFlags.MentorHelp) && _activeMentors.Contains(args.Player))
         {
-            return;
+            _activeMentors.Remove(args.Player);
+            SendMentorStatus(args.Player);
         }
-
-        _activeMentors.Add(session);
-        SendMentorStatus(session);
     }
 
     private void SendMentorStatus(ICommonSession player)
@@ -183,9 +145,7 @@ public sealed class MentorManager : IPostInjectInit
         _net.RegisterNetMessage<MentorSendMessageMsg>(OnMentorSendMessage);
         _net.RegisterNetMessage<MentorHelpMsg>(OnMentorHelpMessage);
         _net.RegisterNetMessage<MentorMessagesReceivedMsg>();
-        _net.RegisterNetMessage<DeMentorMsg>(OnDeMentor);
-        _net.RegisterNetMessage<ReMentorMsg>(OnReMentor);
-        _userDb.AddOnLoadPlayer(LoadData);
+
         _userDb.AddOnFinishLoad(FinishLoad);
         _userDb.AddOnPlayerDisconnect(ClientDisconnected);
         _rateLimit.Register(
@@ -196,5 +156,7 @@ public sealed class MentorManager : IPostInjectInit
                 _ => { }
             )
         );
+
+        _admin.OnPermsChanged += OnAdminPermsChanged;
     }
 }

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 
 namespace Content.Trauma.Common.CCVar;
@@ -141,5 +142,16 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<int> DecalDespawnLimit =
         CVarDef.Create("trauma.decal_despawn_limit", 128, CVar.SERVER | CVar.REPLICATED);
 
+    #endregion
+
+    #region Mentor
+    public static readonly CVarDef<float> RMCMentorHelpRateLimitPeriod =
+        CVarDef.Create("rmc.mentor_help_rate_limit_period", 2f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> RMCMentorHelpRateLimitCount =
+        CVarDef.Create("rmc.mentor_help_rate_limit_count", 10, CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> RMCMentorHelpSound =
+        CVarDef.Create("rmc.mentor_help_sound", "/Audio/_RMC14/Effects/Admin/mhelp.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
     #endregion
 }
