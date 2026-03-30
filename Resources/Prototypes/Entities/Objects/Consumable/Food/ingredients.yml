@@ -370,6 +370,11 @@
         reagents:
         - ReagentId: Sugar
           Quantity: 50
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Sugar
+  # </Trauma>
 
 - type: entity
   parent: ReagentPacketBase
