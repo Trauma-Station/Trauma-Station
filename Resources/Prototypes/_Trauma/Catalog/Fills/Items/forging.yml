@@ -1,6 +1,5 @@
 - type: entity
   name: brass arrowhead spawner
-  parent: BaseItem
   id: Brassarrowheads
   categories: [ HideSpawnMenu ]
   components:
@@ -11,7 +10,6 @@
 
 - type: entity
   name: steel arrowhead spawner
-  parent: BaseItem
   id: Steelarrowheads
   categories: [ HideSpawnMenu ]
   components:
@@ -22,7 +20,6 @@
 
 - type: entity
   name: plasteel arrowhead spawner
-  parent: BaseItem
   id: Plateelarrowheads
   categories: [ HideSpawnMenu ]
   components:

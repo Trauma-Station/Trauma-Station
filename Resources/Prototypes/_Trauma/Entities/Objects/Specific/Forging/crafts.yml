@@ -248,9 +248,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
     storedOffset: -1,1
     storedRotation: -45
   - type: EmbeddableProjectile
@@ -317,9 +317,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+    sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+    sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
   - type: MeleeWeapon
     animationRotation: -135
     wideAnimationRotation: -135
@@ -371,9 +371,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/combatknife.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/combatknife.rsi
     storedSprite: null
     storedOffset: -1,-2
     storedRotation: -45
@@ -438,9 +438,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/cleaver.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/cleaver.rsi
 
 - type: entity
   parent: [BaseForgeCleaver, BaseForgedBrass]
@@ -488,9 +488,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+    sprite: _Trauma/Objects/Specific/Forging/kukri.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+    sprite: _Trauma/Objects/Specific/Forging/kukri.rsi
   - type: MeleeWeapon
     animationRotation: -135
     wideAnimationRotation: -135
@@ -542,9 +542,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/survival_knife.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/survival_knife.rsi
     storedSprite: null
     storedOffset: -1,-2
     storedRotation: -45
@@ -599,9 +599,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/screwdriver.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/screwdriver.rsi
     storedRotation: -90
   - type: EmitSoundOnPickup
     sound:
@@ -710,9 +710,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+    sprite: _Trauma/Objects/Specific/Forging/crowbar.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+    sprite: _Trauma/Objects/Specific/Forging/crowbar.rsi
     storedRotation: -45
 
 - type: entity
@@ -747,9 +747,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench_complete.rsi
+    sprite: _Trauma/Objects/Specific/Forging/wrench_complete.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench_complete.rsi
+    sprite: _Trauma/Objects/Specific/Forging/wrench_complete.rsi
     storedRotation: -45
 
 
@@ -789,9 +789,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
     storedRotation: -45
     shape:
     - 0,0,0,4
@@ -868,13 +868,13 @@
 #   abstract: true
 #   components:
 #   - type: Sprite
-#     sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+#     sprite: _Trauma/Objects/Specific/Forging/halberd_head.rsi
 #     layers:
 #     - state: head
 #       color: "#e79962"
 #     - state: handle
 #   - type: Item
-#     sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+#     sprite: _Trauma/Objects/Specific/Forging/halberd_head.rsi
 #     inhandVisuals:
 #       left:
 #       - state: head-inhand-left
@@ -941,9 +941,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/longsword_blade.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/longsword_blade.rsi
     storedRotation: -45
     shape:
     - 0,0,0,6
@@ -1019,9 +1019,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/warhammer_head.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/warhammer_head.rsi
     storedRotation: -45
     shape:
     - 0,0,0,2
@@ -1092,9 +1092,9 @@
 #   abstract: true
 #   components:
 #   - type: Sprite
-#     sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+#     sprite: _Trauma/Objects/Specific/Forging/pickaxe_head.rsi
 #   - type: Item
-#     sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+#     sprite: _Trauma/Objects/Specific/Forging/pickaxe_head.rsi
 
 # - type: entity
 #   parent: [BaseForgePickaxe, BaseForgedBrassCrossGuard]
@@ -1135,9 +1135,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/thin_blade.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/thin_blade.rsi
     storedRotation: -45
     shape:
     - 0,0,0,4
@@ -1274,13 +1274,13 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/spear_head.rsi
     layers:
     - state: head
       color: "#dac7f5"
     - state: handle
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/spear_head.rsi
     size: Large
     shape:
     - 0,0,8,0
@@ -1410,9 +1410,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/morningstar_head.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/morningstar_head.rsi
     storedRotation: -45
     shape:
     - 0,0,0,2

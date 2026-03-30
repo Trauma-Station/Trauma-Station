@@ -71,6 +71,9 @@
     slot: ItemCabinet
     temp: 50000
     maxTemp: 4000
+  - type: ContainerContainer
+    containers:
+      ItemSlots: !type:ContainerSlot
   - type: ItemSlots
     slots:
       ItemCabinet:

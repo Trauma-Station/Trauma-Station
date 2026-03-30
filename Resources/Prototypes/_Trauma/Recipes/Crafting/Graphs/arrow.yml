@@ -25,7 +25,7 @@
         doAfter: 3
         name: construction-graph-tag-arrowhead
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+          sprite: _Trauma/Objects/Specific/Forging/arrowheads.rsi
           state: icon
       - material: Cloth
         amount: 1
@@ -37,7 +37,7 @@
         doAfter: 3
         name: construction-graph-tag-arrowhead
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+          sprite: _Trauma/Objects/Specific/Forging/arrowheads.rsi
           state: icon
       - material: Cloth
         amount: 1
@@ -49,7 +49,7 @@
         doAfter: 3
         name: construction-graph-tag-arrowhead
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+          sprite: _Trauma/Objects/Specific/Forging/arrowheads.rsi
           state: icon
       - material: Cloth
         amount: 1

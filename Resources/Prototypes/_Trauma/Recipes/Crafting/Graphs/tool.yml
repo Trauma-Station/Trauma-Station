@@ -25,7 +25,7 @@
         doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
           state: icon
 
     - to: hammersteel
@@ -34,7 +34,7 @@
         doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
           state: icon
 
     - to: hammerplasteel
@@ -43,7 +43,7 @@
         doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
           state: icon
 
 
@@ -53,7 +53,7 @@
         doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
           state: icon
 
     - to: screwdriversteel
@@ -62,7 +62,7 @@
         doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
           state: icon
 
     - to: screwdriverplasteel
@@ -71,7 +71,7 @@
         doAfter: 3
         name: construction-graph-tag-toolhead
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
           state: icon
 
   - node: hammerbrass

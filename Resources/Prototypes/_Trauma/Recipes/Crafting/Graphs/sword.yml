@@ -26,7 +26,7 @@
         doAfter: 3
         name: construction-graph-tag-swordblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
           state: icon
 
     - to: swordsteel
@@ -35,7 +35,7 @@
         doAfter: 3
         name: construction-graph-tag-swordblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
           state: icon
 
     - to: swordplasteel
@@ -44,7 +44,7 @@
         doAfter: 3
         name: construction-graph-tag-swordblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
           state: icon
 
 
@@ -54,7 +54,7 @@
         doAfter: 3
         name: construction-graph-tag-swordblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
           state: icon
 
     - to: longswordsteel
@@ -63,7 +63,7 @@
         doAfter: 3
         name: construction-graph-tag-swordblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
           state: icon
 
     - to: longswordplasteel
@@ -72,7 +72,7 @@
         doAfter: 3
         name: construction-graph-tag-swordblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
           state: icon
 
 
@@ -82,7 +82,7 @@
         doAfter: 3
         name: construction-graph-tag-swordblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
           state: icon
 
     - to: katanasteel
@@ -91,7 +91,7 @@
         doAfter: 3
         name: construction-graph-tag-swordblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
           state: icon
 
     - to: katanaplasteel
@@ -100,7 +100,7 @@
         doAfter: 3
         name: construction-graph-tag-swordblade
         icon:
-          sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+          sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
           state: icon
 
 

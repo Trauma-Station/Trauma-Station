@@ -185,11 +185,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
 
 - type: entity
   parent: BaseItem
@@ -197,9 +197,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/knifeblade.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -323,11 +323,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+    sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
 
 - type: entity
   parent: BaseItem
@@ -335,9 +335,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+    sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+    sprite: _Trauma/Objects/Specific/Forging/hammerhead.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -462,11 +462,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/combatknife.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/combatknife.rsi
 
 - type: entity
   parent: BaseItem
@@ -474,9 +474,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/combatknife.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/combatknife.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -601,11 +601,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/cleaver.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/cleaver.rsi
 
 - type: entity
   parent: BaseItem
@@ -613,9 +613,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/cleaver.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/cleaver.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -740,11 +740,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/kukri.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+    sprite: _Trauma/Objects/Specific/Forging/kukri.rsi
 
 - type: entity
   parent: BaseItem
@@ -752,9 +752,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+    sprite: _Trauma/Objects/Specific/Forging/kukri.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+    sprite: _Trauma/Objects/Specific/Forging/kukri.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -879,11 +879,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/survival_knife.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/survival_knife.rsi
 
 - type: entity
   parent: BaseItem
@@ -891,9 +891,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/survival_knife.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+    sprite: _Trauma/Objects/Specific/Forging/survival_knife.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -1006,11 +1006,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/screwdriver.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/screwdriver.rsi
 
 - type: entity
   parent: BaseItem
@@ -1018,9 +1018,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/screwdriver.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+    sprite: _Trauma/Objects/Specific/Forging/screwdriver.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -1145,11 +1145,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/crowbar.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+    sprite: _Trauma/Objects/Specific/Forging/crowbar.rsi
 
 - type: entity
   parent: BaseItem
@@ -1157,9 +1157,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+    sprite: _Trauma/Objects/Specific/Forging/crowbar.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+    sprite: _Trauma/Objects/Specific/Forging/crowbar.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -1272,11 +1272,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/wrench.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
+    sprite: _Trauma/Objects/Specific/Forging/wrench.rsi
 
 - type: entity
   parent: BaseItem
@@ -1284,9 +1284,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
+    sprite: _Trauma/Objects/Specific/Forging/wrench.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
+    sprite: _Trauma/Objects/Specific/Forging/wrench.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -1399,11 +1399,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/tiny_blades.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi
+    sprite: _Trauma/Objects/Specific/Forging/tiny_blades.rsi
 
 - type: entity
   parent: BaseItem
@@ -1411,9 +1411,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi
+    sprite: _Trauma/Objects/Specific/Forging/tiny_blades.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi
+    sprite: _Trauma/Objects/Specific/Forging/tiny_blades.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -1526,11 +1526,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
 
 - type: entity
   parent: BaseItem
@@ -1538,9 +1538,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/sword_blade.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -1664,11 +1664,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/chainmail.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi
+    sprite: _Trauma/Objects/Specific/Forging/chainmail.rsi
 
 - type: entity
   parent: BaseItem
@@ -1676,9 +1676,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi
+    sprite: _Trauma/Objects/Specific/Forging/chainmail.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi
+    sprite: _Trauma/Objects/Specific/Forging/chainmail.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -1791,11 +1791,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/halberd_head.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/halberd_head.rsi
 
 - type: entity
   parent: BaseItem
@@ -1803,9 +1803,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/halberd_head.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/halberd_head.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -1918,11 +1918,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/longsword_blade.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/longsword_blade.rsi
 
 - type: entity
   parent: BaseItem
@@ -1930,9 +1930,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/longsword_blade.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/longsword_blade.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -2057,11 +2057,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/armor_plate.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+    sprite: _Trauma/Objects/Specific/Forging/armor_plate.rsi
 
 - type: entity
   parent: BaseItem
@@ -2069,9 +2069,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+    sprite: _Trauma/Objects/Specific/Forging/armor_plate.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+    sprite: _Trauma/Objects/Specific/Forging/armor_plate.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -2184,11 +2184,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/warhammer_head.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/warhammer_head.rsi
 
 - type: entity
   parent: BaseItem
@@ -2196,9 +2196,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/warhammer_head.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/warhammer_head.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -2323,11 +2323,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/pickaxe_head.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/pickaxe_head.rsi
 
 - type: entity
   parent: BaseItem
@@ -2335,9 +2335,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/pickaxe_head.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/pickaxe_head.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -2450,11 +2450,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/thin_blade.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/thin_blade.rsi
 
 - type: entity
   parent: BaseItem
@@ -2462,9 +2462,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/thin_blade.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+    sprite: _Trauma/Objects/Specific/Forging/thin_blade.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -2589,11 +2589,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/arrowheads.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+    sprite: _Trauma/Objects/Specific/Forging/arrowheads.rsi
 
 - type: entity
   parent: BaseItem
@@ -2601,9 +2601,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+    sprite: _Trauma/Objects/Specific/Forging/arrowheads.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+    sprite: _Trauma/Objects/Specific/Forging/arrowheads.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -2728,11 +2728,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/spear_head.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/spear_head.rsi
 
 - type: entity
   parent: BaseItem
@@ -2740,9 +2740,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/spear_head.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/spear_head.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -2854,11 +2854,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/morningstar_head.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/morningstar_head.rsi
 
 - type: entity
   parent: BaseItem
@@ -2866,9 +2866,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/morningstar_head.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+    sprite: _Trauma/Objects/Specific/Forging/morningstar_head.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
@@ -2993,11 +2993,11 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi
+      - sprite: _Trauma/Objects/Specific/Forging/shield_boss.rsi
         state: icon
         shader: unshaded
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi
+    sprite: _Trauma/Objects/Specific/Forging/shield_boss.rsi
 
 - type: entity
   parent: BaseItem
@@ -3005,9 +3005,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi
+    sprite: _Trauma/Objects/Specific/Forging/shield_boss.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi
+    sprite: _Trauma/Objects/Specific/Forging/shield_boss.rsi
 
 - type: entity
   parent: BaseBrassUnfinishedHot
