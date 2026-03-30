@@ -338,6 +338,12 @@
   description: Rich in potassium.
   components:
   # <Trauma>
+  - type: AddComponentsOnEaten
+    whiteList:
+    - MobWhiteRooster
+    components:
+    - type: EggFertilizer
+      specialReplacement: MobChickClown
   - type: Healing # Bananas heal clown car
     damageContainers:
     - ClowncarDamageContainer
