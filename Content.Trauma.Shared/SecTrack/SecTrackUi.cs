@@ -150,4 +150,3 @@ public sealed class RemoveTimerMessage(string timerUid) : BoundUserInterfaceMess
 {
 public string TimerUid = timerUid;
 }
-
