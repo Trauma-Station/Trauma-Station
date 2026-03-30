@@ -4,7 +4,7 @@ namespace Content.Shared.Roles;
 /// Raised directed on an entity when a new starting gear prototype has been equipped.
 /// </summary>
 [ByRefEvent]
-public record struct StartingGearEquippedEvent(EntityUid Entity)
+public record struct StartingGearEquippedEvent(EntityUid Entity, IEquipmentLoadout StartingGear) // <Trauma> - Changed to include starting gear prototype for IPC encryption key spawning.
 {
     public readonly EntityUid Entity = Entity;
 }

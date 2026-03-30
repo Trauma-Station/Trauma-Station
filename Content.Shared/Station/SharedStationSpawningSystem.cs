@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Whitelist; // Goobstation
+// </Trauma>
 using System.Linq;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -8,13 +11,14 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Trauma.Shared.Silicon.IPC; // DeltaV
-using Content.Shared.Whitelist; // Goobstation
 
 namespace Content.Shared.Station;
 
 public abstract class SharedStationSpawningSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Goobstation
+    // </Trauma>
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] protected readonly InventorySystem InventorySystem = default!;
@@ -22,8 +26,6 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
-    [Dependency] private readonly InternalEncryptionKeySpawner _internalEncryption = default!; // DeltaV
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Goobstation
     private EntityQuery<HandsComponent> _handsQuery;
     private EntityQuery<InventoryComponent> _inventoryQuery;
     private EntityQuery<StorageComponent> _storageQuery;
@@ -104,12 +106,6 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     /// </summary>
     public void EquipStartingGear(EntityUid entity, StartingGearPrototype? startingGear, bool raiseEvent = true)
     {
-        // Begin DeltaV Additions: Fix nukie IPCs not having comms
-        if (startingGear is not {} proto)
-            return;
-
-        _internalEncryption.TryInsertEncryptionKey(entity, proto);
-        // End DeltaV Additions
         EquipStartingGear(entity, (IEquipmentLoadout?) startingGear, raiseEvent);
     }
 
@@ -186,7 +182,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
 
         if (raiseEvent)
         {
-            var ev = new StartingGearEquippedEvent(entity);
+            var ev = new StartingGearEquippedEvent(entity, startingGear);
             RaiseLocalEvent(entity, ref ev);
         }
     }

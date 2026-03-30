@@ -11,13 +11,25 @@ public sealed class InternalEncryptionKeySpawner : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<StartingGearEquippedEvent>(OnRoleAdded);
+    }
+
+    public void OnRoleAdded(StartingGearEquippedEvent ev)
+    {
+        TryInsertEncryptionKey(ev.Entity, ev.StartingGear);
+    }
+
     /// <summary>
     /// Inserts an IPC's encryption key from starting gear headset.
     /// </summary>
     /// <remarks>
     /// Doesn't support a profile's loadouts, have fun.
     /// </remarks>
-    public void TryInsertEncryptionKey(EntityUid target, StartingGearPrototype startingGear)
+    public void TryInsertEncryptionKey(EntityUid target, IEquipmentLoadout startingGear)
     {
         if (!TryComp<EncryptionKeyHolderComponent>(target, out var keyHolder)
             || !startingGear.Equipment.TryGetValue("ears", out var headsetId)

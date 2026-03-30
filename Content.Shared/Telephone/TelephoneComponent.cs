@@ -1,6 +1,8 @@
+// <Trauma>
+using Content.Trauma.Common.Language;
+// </Trauma>
 using Content.Shared.Chat;
 using Content.Shared.Speech;
-using Content.Trauma.Shared.Language;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
