@@ -23,3 +23,6 @@ round-end-credits-trauma-jargon = Filmed on location at Trauma Station LTD
     Nanotrasen Takes No Responsibility For Any Injuries Sustained While On Set
 
     All Rights Not Reserved
+
+
+HideoKojima = Hideo Kojima
