@@ -74,6 +74,7 @@
   - type: ContainerContainer
     containers:
       ItemCabinet: !type:ContainerSlotrent
+  - type: ItemSlots
     slots:
       ItemCabinet:
         insertSound:
