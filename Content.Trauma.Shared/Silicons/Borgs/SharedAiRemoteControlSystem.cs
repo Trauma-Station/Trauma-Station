@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
+using Content.Shared.Emoting;
 using Content.Shared.Mind;
 using Content.Shared.Silicons.StationAi;
+using Content.Trauma.Common.Silicons.Borgs;
 using Content.Trauma.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Serialization;
 
@@ -17,6 +19,14 @@ public abstract class SharedAiRemoteControlSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<StationAiHeldComponent, OnIntellicardInsertEvent>(OnIntellicardInsert);
+    }
+
+    private void OnIntellicardInsert(Entity<StationAiHeldComponent> ent, ref OnIntellicardInsertEvent args)
+    {
+        if (ent.Comp.CurrentConnectedEntity is { } entity)
+            ReturnMindIntoAi(entity);
     }
 
     public void ReturnMindIntoAi(EntityUid entity)

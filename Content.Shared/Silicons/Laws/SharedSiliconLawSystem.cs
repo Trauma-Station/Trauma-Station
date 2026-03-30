@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Silicons.Laws;
+// </Trauma>
 using Content.Shared.Emag.Systems;
 using Content.Shared.Mind;
 using Content.Shared.Overlays;
@@ -6,7 +9,6 @@ using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Wires;
 using Robust.Shared.Audio;
-using Content.Trauma.Shared.Silicons.Borgs.Components;
 
 namespace Content.Shared.Silicons.Laws;
 
@@ -15,6 +17,9 @@ namespace Content.Shared.Silicons.Laws;
 /// </summary>
 public abstract partial class SharedSiliconLawSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonSlavedBorgSystem _slave = default!;
+    // </Trauma>
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
@@ -36,7 +41,7 @@ public abstract partial class SharedSiliconLawSystem : EntitySystem
             return;
 
         // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid))
+        if (_slave.IsSlavedBorg(uid))
             return;
         // Corvax-Next-AiRemoteControl-End
 

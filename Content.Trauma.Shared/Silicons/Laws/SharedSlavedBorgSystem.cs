@@ -2,17 +2,20 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Emoting;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.StationAi;
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Silicons.Borgs;
+using Content.Trauma.Common.Silicons.Laws;
 using Content.Trauma.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Silicons.Laws;
 
-public abstract class SharedSlavedBorgSystem : EntitySystem
+public abstract class SharedSlavedBorgSystem : CommonSlavedBorgSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
@@ -48,5 +51,10 @@ public abstract class SharedSlavedBorgSystem : EntitySystem
         _borg.BorgDeactivate((args.Chassis, chassis), user: args.Chassis);
         RemComp<AiRemoteControllerComponent>(args.Chassis);
         RemComp<StationAiVisionComponent>(args.Chassis);
+    }
+
+    public override bool IsSlavedBorg(EntityUid uid)
+    {
+        return HasComp<AiRemoteControllerComponent>(uid);
     }
 }
