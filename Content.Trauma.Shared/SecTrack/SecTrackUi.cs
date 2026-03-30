@@ -83,16 +83,10 @@ public sealed class RenameSquadMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class UpdateSquadDescriptionMessage : BoundUserInterfaceMessage
+public sealed class UpdateSquadDescriptionMessage(string squadId, string description) : BoundUserInterfaceMessage
 {
-    public string SquadId { get; }
-    public string Description { get; }
-
-    public UpdateSquadDescriptionMessage(string squadId, string description)
-    {
-        SquadId = squadId;
-        Description = description;
-    }
+    public string SquadId = squadId;
+    public string Description = description;
 }
 
 [Serializable, NetSerializable]
@@ -120,7 +114,12 @@ public sealed class RemoveMemberFromSquadMessage : BoundUserInterfaceMessage
         MemberId = memberId;
     }
 }
-
+[Serializable, NetSerializable]
+public sealed class (string ) : BoundUserInterfaceMessage
+{
+public string  = ;
+public string  = ;
+}
 [Serializable, NetSerializable]
 public sealed class ChangeSquadIconMessage : BoundUserInterfaceMessage
 {
@@ -133,38 +132,22 @@ public sealed class ChangeSquadIconMessage : BoundUserInterfaceMessage
         IconId = iconId;
     }
 }
-
 [Serializable, NetSerializable]
-public sealed class ChangeSquadStatusMessage : BoundUserInterfaceMessage
+public sealed class ChangeSquadStatusMessage(string squadId, string status) : BoundUserInterfaceMessage
 {
-    public string SquadId { get; }
-    public SquadStatus Status { get; }
-
-    public ChangeSquadStatusMessage(string squadId, SquadStatus status)
-    {
-        SquadId = squadId;
-        Status = status;
-    }
+public string SquadId = squadId;
+public string Status = status;
 }
 
 [Serializable, NetSerializable]
-public sealed class TimerUpdateState : BoundUserInterfaceState
+public sealed class TimerUpdateState(string timers) : BoundUserInterfaceMessage
 {
-    public List<TimerEntry> Timers { get; }
+public string Timers = timers;
 
-    public TimerUpdateState(List<TimerEntry> timers)
-    {
-        Timers = timers;
-    }
 }
-
 [Serializable, NetSerializable]
-public sealed class RemoveTimerMessage : BoundUserInterfaceMessage
+public sealed class RemoveTimerMessage(string timerUid) : BoundUserInterfaceMessage
 {
-    public NetEntity TimerUid { get; }
-
-    public RemoveTimerMessage(NetEntity timerUid)
-    {
-        TimerUid = timerUid;
-    }
+public string TimerUid = timerUid;
 }
+
