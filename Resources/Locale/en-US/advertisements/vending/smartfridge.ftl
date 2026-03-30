@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 advertisement-smartfridge-1 = Hello everyone!
-advertisement-smartfridge-2 =
+advertisement-smartfridge-2 = (there was an empty message but game code is chuddy)
 advertisement-smartfridge-3 = Can measure 500 million items per second. I have a refrigerator now.
 advertisement-smartfridge-4 = New firmware available.
 advertisement-smartfridge-5 = Working All circuits are working fine.
