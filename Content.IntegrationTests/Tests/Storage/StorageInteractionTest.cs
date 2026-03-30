@@ -13,6 +13,27 @@ namespace Content.IntegrationTests.Tests.Storage;
 
 public sealed class StorageInteractionTest : InteractionTest
 {
+    // <Trauma> - give this test mob 2 hands
+    protected override string PlayerPrototype => "InteractionTestMobStorage";
+
+    [TestPrototypes]
+    private const string TestPrototypes = @"
+- type: entity
+  parent: InteractionTestMob
+  id: InteractionTestMobStorage
+  components:
+  - type: Hands
+    hands:
+      hand_left:
+        location: Left
+      hand_right:
+        location: Right
+    sortedHands:
+    - hand_left
+    - hand_right
+    ";
+    // </Trauma>
+
     /// <summary>
     /// Check that players can interact with items in storage if the storage UI is open
     /// </summary>
