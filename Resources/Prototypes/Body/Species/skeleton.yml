@@ -214,8 +214,6 @@
   # <Shitmed>
   components:
   - type: Inorganic
-  - type: Damageable
-    damageModifierSet: Skeleton
   # </Shitmed>
 
 - type: entity
@@ -225,8 +223,6 @@
   components:
   # <Shitmed>
   - type: BodyPart
-  - type: Damageable
-    damageModifierSet: Skeleton
   # </Shitmed>
   - type: Sprite
     sprite: Mobs/Species/Skeleton/parts.rsi
