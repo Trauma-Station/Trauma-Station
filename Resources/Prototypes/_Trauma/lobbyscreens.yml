@@ -1,29 +1,29 @@
 - type: lobbyBackground
   id: hereticLobbyArt
-  background: /Textures/_Trauma/LobbyScreens/hereticLobbyArt.webp
+  background: /Textures/_Trauma/LobbyScreens/mgs1.webp
   title: lobby-state-background-the-heretic
-  artist: asardonicsailor
+  artist: Hideo Kojima
 
 - type: lobbyBackground
   id: changelingLobbyArt
-  background: /Textures/_Trauma/LobbyScreens/changeling_lobby_art.webp
+  background: /Textures/_Trauma/LobbyScreens/mgs2.webp
   title: lobby-state-background-the-changeling
-  artist: asardonicsailor
+  artist: Hideo Kojima
 
 - type: lobbyBackground
   id: hereticLobbyArt2
-  background: /Textures/_Trauma/LobbyScreens/heretic_lobby_art2.webp
+  background: /Textures/_Trauma/LobbyScreens/mgs3.webp
   title: lobby-state-background-the-mansus
-  artist: asardonicsailor
+  artist: Hideo Kojima
 
 - type: lobbyBackground
   id: revLobbyArt
-  background: /Textures/_Trauma/LobbyScreens/rev_lobby_art.webp
+  background: /Textures/_Trauma/LobbyScreens/mgs4.webp
   title: lobby-state-background-the-revolution
-  artist: asardonicsailor
+  artist: Hideo Kojima
 
 - type: lobbyBackground
   id: syndicateLobbyArt
-  background: /Textures/_Trauma/LobbyScreens/syndicate_lobby_art.webp
+  background: /Textures/_Trauma/LobbyScreens/mgs5.webp
   title: lobby-state-background-the-syndicate
-  artist: asardonicsailor
+  artist: Hideo Kojima
