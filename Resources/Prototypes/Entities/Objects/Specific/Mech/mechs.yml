@@ -170,6 +170,11 @@
   name: Ripley APLU
   description: Versatile and lightly armored, the Ripley is useful for almost any heavy work scenario. The "APLU" stands for Autonomous Power Loading Unit.
   components:
+  # <Trauma>
+  - type: Construction
+    graph: Ripley
+    node: ripley
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     noRot: true
@@ -181,23 +186,26 @@
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: Mech
+    # <Trauma>
+    entryDelay: 1.5 # faster to make it easier for delivery work
+    # </Trauma>
     baseState: ripley
     openState: ripley-open
     brokenState: ripley-broken
-    mechToPilotDamageMultiplier: 0.25 # Trauma - was 0.75
+    mechToPilotDamageMultiplier: 0.5 # Trauma - was 0.75
     pilotWhitelist:
       components:
         - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
-    attackRate: 1
+    attackRate: 0.5 # Trauma - was 1, its not designed for combat
     damage:
       types:
         Blunt: 25 # Goobstation - Make ripley punch hard
         Structural: 30 # Goobstation - Make ripley punch hard
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.25
-    baseSprintSpeed: 2.25 #Goobedit
+    baseSprintSpeed: 3.6
 
 - type: entity
   id: MechRipleyBattery
