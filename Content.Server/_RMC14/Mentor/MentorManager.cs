@@ -8,6 +8,7 @@ using Content.Shared.Mind;
 using Content.Shared.Players.RateLimiting;
 using Content.Trauma.Common.CCVar;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -17,6 +18,7 @@ public sealed class MentorManager : IPostInjectInit
 {
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IEntityManager _entity = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -147,14 +149,19 @@ public sealed class MentorManager : IPostInjectInit
 
         _userDb.AddOnFinishLoad(FinishLoad);
         _userDb.AddOnPlayerDisconnect(ClientDisconnected);
-        _rateLimit.Register(
-            RateLimitKey,
-            new RateLimitRegistration(
-                TraumaCVars.RMCMentorHelpRateLimitPeriod,
-                TraumaCVars.RMCMentorHelpRateLimitCount,
-                _ => { }
-            )
-        );
+
+        if (_config.IsCVarRegistered(TraumaCVars.RMCMentorHelpRateLimitPeriod.Name) &&
+            _config.IsCVarRegistered(TraumaCVars.RMCMentorHelpRateLimitCount.Name))
+        {
+            _rateLimit.Register(
+                RateLimitKey,
+                new RateLimitRegistration(
+                    TraumaCVars.RMCMentorHelpRateLimitPeriod,
+                    TraumaCVars.RMCMentorHelpRateLimitCount,
+                    _ => { }
+                )
+            );
+        }
 
         _admin.OnPermsChanged += OnAdminPermsChanged;
     }
