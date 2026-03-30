@@ -47,7 +47,7 @@
     <GuideEntityEmbed Entity="AltarTechnology"/>
     <GuideEntityEmbed Entity="MicroManipulatorStockPart"/>
   </Box>
-  
+
   ## Faith
   A dinky pistol that heals people with bullets, don't ask. Applies holy damage to unholy enemies with the same bullets. Pray to reload.
   <Box>
