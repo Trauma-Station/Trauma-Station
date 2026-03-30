@@ -1,7 +1,9 @@
+// <Trauma>
+using Content.Client._RMC14.Mentor;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
-using Content.Client._RMC14.Mentor;
 using Content.Client.Administration.Managers;
 using Content.Client.Administration.Systems;
 using Content.Client.Administration.UI.Bwoink;
@@ -40,12 +42,12 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
     [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
     [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly StaffHelpUIController _staffHelp = default!;
+    [Dependency] private readonly StaffHelpUIController _staffHelp = default!; // Trauma
     [UISystemDependency] private readonly AudioSystem _audio = default!;
 
     private BwoinkSystem? _bwoinkSystem;
-    public MenuButton? GameAHelpButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.AHelpButton;
-    public Button? LobbyAHelpButton => (UIManager.ActiveScreen as LobbyGui)?.AHelpButton;
+    public MenuButton? GameAHelpButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.AHelpButton; // Trauma - Made public
+    public Button? LobbyAHelpButton => (UIManager.ActiveScreen as LobbyGui)?.AHelpButton; // Trauma - Made public
     public IAHelpUIHandler? UIHelper;
     private bool _discordRelayActive;
     private bool _hasUnreadAHelp;
@@ -93,9 +95,9 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
 
     private void AHelpButtonPressed(BaseButton.ButtonEventArgs obj)
     {
-        _staffHelp.ToggleWindow();
-        // EnsureUIHelper();
+        // EnsureUIHelper(); - Trauma commented out
         // UIHelper!.ToggleWindow();
+        _staffHelp.ToggleWindow();
     }
 
     public void OnSystemLoaded(BwoinkSystem system)
@@ -251,7 +253,7 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
         helper.Control.PopOut.Visible = false;
     }
 
-    public void UnreadAHelpReceived()
+    public void UnreadAHelpReceived() // Trauma - Made public
     {
         GameAHelpButton?.StyleClasses.Add(StyleClass.Negative);
         LobbyAHelpButton?.StyleClasses.Add(StyleClass.Negative);

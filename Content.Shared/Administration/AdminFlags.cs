@@ -131,7 +131,7 @@ namespace Content.Shared.Administration
         FullAdmin = 1 << 22,
 
         /// <summary>
-        ///     Lets you use the mentor help system.
+        ///    RMC - Lets you use the mentor help system.
         /// </summary>
         MentorHelp = 1 << 30,
 
