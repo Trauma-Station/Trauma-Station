@@ -6,7 +6,7 @@
   Altars can be set to fit your desired look by applying a required item to the base altar, you can remove the applied item to return the altar to base form using a crowbar.
   WARNING: Nullrod transformation is a non-reversible process, so choose wisely.
 
-  ## Nullrod:
+  ## Nullrod
   Old reliable, the nullrod you will arrive on station with. Typically changed out from instantly due to having no special ability, but using it is a real flex of how robust you are.
   <Box>
     <GuideEntityEmbed Entity="Nullrod"/>
