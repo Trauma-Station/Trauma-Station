@@ -27,13 +27,13 @@ public sealed partial class CargoSystem
         return false;
     }
 
-    public bool CheckAlertPopup(Entity<CargoOrderConsoleComponent> ent, EntityUid user, CargoOrderData order, EntityUid station)
+    public bool CheckAlertPopup(Entity<CargoOrderConsoleComponent> ent, EntityUid user, CargoProductPrototype product, EntityUid station)
     {
         if (!_emag.CheckFlag(ent, EmagType.Interaction)
-            && order.RequiredAlerts is {} alerts
+            && product.RequiredAlerts is {} alerts
             && (CompOrNull<AlertLevelComponent>(station)?.CurrentLevel is not {} current || !alerts.Contains(current)))
         {
-            ConsolePopup(user, Loc.GetString("cargo-console-alert-level", ("product", order.ProductName)));
+            ConsolePopup(user, Loc.GetString("cargo-console-alert-level", ("product", product.Name)));
             PlayDenySound(ent, ent.Comp);
             return false;
         }

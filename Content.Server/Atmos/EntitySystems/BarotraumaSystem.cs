@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Atmos;
 using Content.Medical.Common.Targeting;
 using Content.Server._Goobstation.Wizard.Systems;
 using Content.Shared._Goobstation.Wizard.Spellblade;
+using Content.Shared.Atmos.Components;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;

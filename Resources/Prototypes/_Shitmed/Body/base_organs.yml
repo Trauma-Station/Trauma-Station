@@ -122,7 +122,7 @@
   components:
   - type: BodyPart
     partType: Leg
-  - type: MovementBodyPart
+  - type: Leg
   - type: Woundable
     integrity: 80
     integrityCap: 80

@@ -25,7 +25,7 @@
   - type: SpaceGarbage
 # <Trauma>
   - type: Perishable
-    rotAfter: 600
+    rotAfter: 1200
     molsPerSecondPerUnitMass: 0
   - type: RotInto
     entity: FoodRot

@@ -80,7 +80,7 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
 
             return (true, new Dictionary<string, object>()
             {
-                {TargetKey, target},
+                {TargetKey, target.Owner},
                 {TargetMoveKey, _entMan.GetComponent<TransformComponent>(target).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });

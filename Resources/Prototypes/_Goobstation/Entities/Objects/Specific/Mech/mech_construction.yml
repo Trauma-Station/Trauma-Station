@@ -62,9 +62,9 @@
     state: ripleymkii_harness+o
     noRot: true
   - type: Construction
-    graph: RipleyMKIIHarness
+    graph: RipleyMKII
     node: start
-    defaultTarget: ripleymkiiHarness
+    defaultTarget: ripleymkii
 
 - type: entity
   id: RipleyMKIIChassis
@@ -82,9 +82,9 @@
     noRot: true
     state: ripleymkii0
   - type: Construction
-    graph: RipleyMKIIHarness
+    graph: RipleyMKII
     node: start
-    defaultTarget: ripleymkiiHarness
+    defaultTarget: ripleymkii
 
 # Clarke
 
