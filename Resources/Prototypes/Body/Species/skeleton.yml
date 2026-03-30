@@ -244,6 +244,12 @@
 - type: entity
   parent: [ OrganBaseHead, OrganSkeletonPersonExternal ]
   id: OrganSkeletonPersonHead
+  # <Trauma>
+  components:
+  - type: Construction
+    graph: SpiritCandle
+    node: start
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganSkeletonPersonExternal ]
