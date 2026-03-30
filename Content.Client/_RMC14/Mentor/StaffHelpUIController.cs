@@ -34,7 +34,6 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private readonly Dictionary<NetUserId, string> _destinationNames = new();
 
     private bool _isMentor;
-    private bool _canReMentor;
     private StaffHelpWindow? _staffHelpWindow;
     private MentorHelpWindow? _mentorHelpWindow;
     private MentorWindow? _mentorWindow;
@@ -47,15 +46,13 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _net.RegisterNetMessage<MentorMessagesReceivedMsg>(OnMentorHelpReceived);
         _net.RegisterNetMessage<MentorSendMessageMsg>();
         _net.RegisterNetMessage<MentorHelpMsg>();
-        _net.RegisterNetMessage<DeMentorMsg>();
-        _net.RegisterNetMessage<ReMentorMsg>();
+
         _config.OnValueChanged(TraumaCVars.RMCMentorHelpSound, v => _mHelpSound = new SoundPathSpecifier(v), true);
     }
 
     private void OnMentorStatus(MentorStatusMsg msg)
     {
         _isMentor = msg.IsMentor;
-        _canReMentor = msg.CanReMentor;
 
         if (_isMentor)
             _mentorHelpWindow?.Close();
@@ -187,8 +184,6 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private MentorHelpWindow CreateMentorHelpWindow()
     {
         var window = new MentorHelpWindow();
-        window.ReMentorButton.OnPressed += _ => _net.ClientSendMessage(new ReMentorMsg());
-        window.ReMentorButton.Visible = _canReMentor;
         window.Chat.OnTextEntered += args =>
         {
             window.Chat.Clear();
@@ -214,7 +209,6 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private MentorWindow CreateMentorWindow()
     {
         var window = new MentorWindow();
-        window.DeMentorButton.OnPressed += _ => _net.ClientSendMessage(new DeMentorMsg());
         window.Chat.OnTextEntered += args =>
         {
             var msg = new MentorSendMessageMsg { Message = args.Text, To = window.SelectedPlayer };
