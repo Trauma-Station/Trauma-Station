@@ -70,7 +70,7 @@ public abstract class SharedSiloSystem : CommonSiloSystem
         Dirty(args.Sink, utilizer);
     }
 
-    public bool TryGetMaterialAmount(EntityUid machine, string material, out int amount)
+    public override bool TryGetMaterialAmount(EntityUid machine, string material, out int amount)
     {
         amount = 0;
         var silo = GetSilo(machine);
@@ -81,7 +81,7 @@ public abstract class SharedSiloSystem : CommonSiloSystem
         return true;
     }
 
-    public bool TryGetTotalMaterialAmount(EntityUid machine, out int amount)
+    public override bool TryGetTotalMaterialAmount(EntityUid machine, out int amount)
     {
         amount = 0;
         var silo = GetSilo(machine);
@@ -92,7 +92,7 @@ public abstract class SharedSiloSystem : CommonSiloSystem
         return true;
     }
 
-    public void DirtySilo(EntityUid machine)
+    public override void DirtySilo(EntityUid machine)
     {
         var silo = GetSilo(machine);
         if (silo is not { } || !TryComp<MaterialStorageComponent>(silo, out var siloComp))

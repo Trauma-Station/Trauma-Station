@@ -1,4 +1,6 @@
-using Content.Trauma.Shared.Mining.Components; // Frontier
+// <Trauma>
+using Content.Trauma.Common.Mining; // Frontier
+// </Trauma>
 using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Mining.Components;

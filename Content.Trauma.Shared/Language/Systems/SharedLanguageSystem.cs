@@ -155,10 +155,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         Dirty(ent);
     }
 
-    /// <summary>
-    ///     Adds a new language to the respective lists of intrinsically known languages of the given entity.
-    /// </summary>
-    public void AddLanguage(EntityUid uid, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true)
+    public override void AddLanguage(EntityUid uid, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true)
     {
         var ev = new AddLanguageEvent(language, addSpoken, addUnderstood);
         RaiseLocalEvent(uid, ref ev);

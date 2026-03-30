@@ -2,11 +2,10 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Content.Shared.Mining;
 
-namespace Content.Trauma.Shared.Mining.Components;
+namespace Content.Trauma.Common.Mining;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(MiningScannerSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class InnateMiningScannerViewerComponent : Component
 {
     [DataField, ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]

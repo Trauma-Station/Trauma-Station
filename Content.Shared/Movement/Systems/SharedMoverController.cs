@@ -1,7 +1,7 @@
 // <Trauma>
-using Content.Trauma.Shared.StepTrigger.Components;
+using Content.Trauma.Common.StepTrigger;
+using Content.Trauma.Common.TileMovement;
 using Content.Shared.Physics;
-using Content.Trauma.Shared.TileMovement;
 using Content.Shared.Standing;
 using Content.Trauma.Common.Movement;
 // </Trauma>

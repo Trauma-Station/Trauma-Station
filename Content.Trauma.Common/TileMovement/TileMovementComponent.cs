@@ -5,7 +5,7 @@ using Content.Shared.Movement.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
-namespace Content.Trauma.Shared.TileMovement;
+namespace Content.Trauma.Common.TileMovement;
 
 /// <summary>
 /// When attached to an entity with an InputMoverComponent, all mob movement on that entity will

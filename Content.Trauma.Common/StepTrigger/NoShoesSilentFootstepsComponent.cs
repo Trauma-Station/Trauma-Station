@@ -2,7 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Trauma.Shared.StepTrigger.Components;
+namespace Content.Trauma.Common.StepTrigger;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class NoShoesSilentFootstepsComponent : Component;

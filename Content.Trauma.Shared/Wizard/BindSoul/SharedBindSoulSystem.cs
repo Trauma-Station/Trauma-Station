@@ -16,6 +16,7 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Trauma.Common.Wizard;
 using Content.Trauma.Shared.Wizard.Projectiles;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -40,8 +41,6 @@ public abstract class SharedBindSoulSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly INetManager _net = default!;
-
-    public static readonly ProtoId<TagPrototype> IgnoreBindSoulTag = "IgnoreBindSoul"; // Goobstation
 
     private static readonly ProtoId<TagPrototype> ActionTag = "BindSoulAction";
 
@@ -81,7 +80,7 @@ public abstract class SharedBindSoulSystem : EntitySystem
 
     private void OnMindGetRemoved(Entity<SoulBoundComponent> ent, ref MindGotRemovedEvent args)
     {
-        if (_net.IsClient || _tag.HasTag(args.Container, IgnoreBindSoulTag) || HasComp<GhostComponent>(args.Container) ||
+        if (_net.IsClient || HasComp<MindSwappingComponent>(args.Container) || HasComp<GhostComponent>(args.Container) ||
             Terminating(args.Container))
             return;
 

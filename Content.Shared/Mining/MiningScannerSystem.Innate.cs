@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Mining.Components;
-using Content.Trauma.Shared.Mining.Components;
+using Content.Trauma.Common.Mining;
 
 namespace Content.Shared.Mining;
 

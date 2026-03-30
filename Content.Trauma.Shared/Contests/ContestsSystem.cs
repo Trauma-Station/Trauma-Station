@@ -5,12 +5,13 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Trauma.Common.Contests;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 
 namespace Content.Trauma.Shared.Contests;
 
-public sealed partial class ContestsSystem : EntitySystem
+public sealed partial class ContestsSystem : CommonContestsSystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
@@ -95,75 +96,55 @@ public sealed partial class ContestsSystem : EntitySystem
 
     /// <summary>
     ///     Outputs the ratio of mass between a performer and a target, accepts either EntityUids or PhysicsComponents in any combination
-    ///     If you have physics components already in your function, use <see cref="MassContest(PhysicsComponent, float)" /> instead
+    ///     If you don't have physics components already in your function, use <see cref="MassContest(EntityUid, float)" /> instead
     /// </summary>
     /// <param name="performerUid"></param>
     /// <param name="targetUid"></param>
-    public float MassContest(EntityUid performerUid, EntityUid targetUid, bool bypassClamp = false, float rangeFactor = 1f)
+    public override float MassContest(PhysicsComponent performerPhysics, PhysicsComponent targetPhysics, bool bypassClamp = false, float rangeFactor = 1f)
     {
+        // 1. Unified Guard Clause
         if (_doContestSystem
             || _doMassContests
-            || !TryComp<PhysicsComponent>(performerUid, out var performerPhysics)
-            || !TryComp<PhysicsComponent>(targetUid, out var targetPhysics)
             || performerPhysics.Mass == 0
             || targetPhysics.InvMass == 0)
             return 1f;
 
-        return _allowClampOverride && bypassClamp
-            ? performerPhysics.Mass * targetPhysics.InvMass
-            : Math.Clamp(performerPhysics.Mass * targetPhysics.InvMass,
-                1 - _massContestsMaxPercentage * rangeFactor,
-                1 + _massContestsMaxPercentage * rangeFactor);
+        var ratio = performerPhysics.Mass * targetPhysics.InvMass;
+
+        // 2. Calculated Return
+        if (_allowClampOverride && bypassClamp)
+            return ratio;
+
+        return Math.Clamp(ratio,
+            1 - _massContestsMaxPercentage * rangeFactor,
+            1 + _massContestsMaxPercentage * rangeFactor);
     }
 
-    /// <inheritdoc cref="MassContest(EntityUid, EntityUid, bool, float)"/>
-    public float MassContest(EntityUid performerUid, PhysicsComponent targetPhysics, bool bypassClamp = false, float rangeFactor = 1f)
+    /// <inheritdoc cref="MassContest(PhysicsComponent, PhysicsComponent, bool, float)"/>
+    public override float MassContest(EntityUid performerUid, EntityUid targetUid, bool bypassClamp = false, float rangeFactor = 1f)
     {
-        if (_doContestSystem
-            || _doMassContests
-            || !TryComp<PhysicsComponent>(performerUid, out var performerPhysics)
-            || performerPhysics.Mass == 0
-            || targetPhysics.InvMass == 0)
+        if (!TryComp<PhysicsComponent>(performerUid, out var p) || !TryComp<PhysicsComponent>(targetUid, out var t))
             return 1f;
 
-        return _allowClampOverride && bypassClamp
-            ? performerPhysics.Mass * targetPhysics.InvMass
-            : Math.Clamp(performerPhysics.Mass * targetPhysics.InvMass,
-                1 - _massContestsMaxPercentage * rangeFactor,
-                1 + _massContestsMaxPercentage * rangeFactor);
+        return MassContest(p, t, bypassClamp, rangeFactor);
     }
 
-    /// <inheritdoc cref="MassContest(EntityUid, EntityUid, bool, float)"/>
-    public float MassContest(PhysicsComponent performerPhysics, EntityUid targetUid, bool bypassClamp = false, float rangeFactor = 1f)
+    /// <inheritdoc cref="MassContest(PhysicsComponent, PhysicsComponent, bool, float)"/>
+    public override float MassContest(EntityUid performerUid, PhysicsComponent targetPhysics, bool bypassClamp = false, float rangeFactor = 1f)
     {
-        if (_doContestSystem
-            || _doMassContests
-            || !TryComp<PhysicsComponent>(targetUid, out var targetPhysics)
-            || performerPhysics.Mass == 0
-            || targetPhysics.InvMass == 0)
+        if (!TryComp<PhysicsComponent>(performerUid, out var p))
             return 1f;
 
-        return _allowClampOverride && bypassClamp
-            ? performerPhysics.Mass * targetPhysics.InvMass
-            : Math.Clamp(performerPhysics.Mass * targetPhysics.InvMass,
-                1 - _massContestsMaxPercentage * rangeFactor,
-                1 + _massContestsMaxPercentage * rangeFactor);
+        return MassContest(p, targetPhysics, bypassClamp, rangeFactor);
     }
 
-    /// <inheritdoc cref="MassContest(EntityUid, EntityUid, bool, float)"/>
-    public float MassContest(PhysicsComponent performerPhysics, PhysicsComponent targetPhysics, bool bypassClamp = false, float rangeFactor = 1f)
+    /// <inheritdoc cref="MassContest(PhysicsComponent, PhysicsComponent, bool, float)"/>
+    public override float MassContest(PhysicsComponent performerPhysics, EntityUid targetUid, bool bypassClamp = false, float rangeFactor = 1f)
     {
-        if (_doContestSystem
-            || _doMassContests
-            || performerPhysics.Mass == 0
-            || targetPhysics.InvMass == 0)
+        if (!TryComp<PhysicsComponent>(targetUid, out var t))
             return 1f;
 
-        return _allowClampOverride && bypassClamp
-            ? performerPhysics.Mass * targetPhysics.InvMass
-            : Math.Clamp(performerPhysics.Mass * targetPhysics.InvMass,
-                1 - _massContestsMaxPercentage * rangeFactor,
-                1 + _massContestsMaxPercentage * rangeFactor);
+        return MassContest(performerPhysics, t, bypassClamp, rangeFactor);
     }
 
     #endregion

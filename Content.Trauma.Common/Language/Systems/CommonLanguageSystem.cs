@@ -33,4 +33,9 @@ public abstract class CommonLanguageSystem : EntitySystem
     ///     Returns the current language of the given entity, assumes Universal if it's not a language speaker.
     /// </summary>
     public abstract LanguagePrototype GetLanguage(Entity<LanguageSpeakerComponent?> ent);
+
+    /// <summary>
+    ///     Adds a new language to the respective lists of intrinsically known languages of the given entity.
+    /// </summary>
+    public abstract void AddLanguage(EntityUid uid, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true);
 }

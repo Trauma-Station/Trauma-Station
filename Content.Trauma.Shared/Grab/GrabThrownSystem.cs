@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Trauma.Common.Grab;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
-using System.Numerics;
-using Content.Shared.Stunnable;
-using Content.Shared.Standing;
-using Robust.Shared.Physics.Components;
 
 namespace Content.Trauma.Shared.Grab;
 
-public sealed class GrabThrownSystem : EntitySystem
+public sealed class GrabThrownSystem : CommonGrabThrownSystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
@@ -30,6 +30,11 @@ public sealed class GrabThrownSystem : EntitySystem
 
         SubscribeLocalEvent<GrabThrownComponent, StartCollideEvent>(HandleCollide);
         SubscribeLocalEvent<GrabThrownComponent, StopThrowEvent>(OnStopThrow);
+    }
+
+    public override bool IsGrabThrown(EntityUid thrown)
+    {
+        return HasComp<GrabThrownComponent>(thrown);
     }
 
     private void HandleCollide(Entity<GrabThrownComponent> ent, ref StartCollideEvent args)
@@ -49,7 +54,7 @@ public sealed class GrabThrownSystem : EntitySystem
         if (!HasComp<DamageableComponent>(ent))
             RemComp<GrabThrownComponent>(ent);
 
-        if(!TryComp<PhysicsComponent>(ent, out var physicsComponent))
+        if (!TryComp<PhysicsComponent>(ent, out var physicsComponent))
             return;
 
         ent.Comp.IgnoreEntity.Add(args.OtherEntity);
@@ -77,23 +82,18 @@ public sealed class GrabThrownSystem : EntitySystem
         RemCompDeferred(uid, comp);
     }
 
-    /// <summary>
-    /// Throwing entity to the direction and ensures GrabThrownComponent with params
-    /// </summary>
-    /// <param name="uid">Entity to throw</param>
-    /// <param name="thrower">Entity that throws</param>
-    /// <param name="vector">Direction</param>
-    /// <param name="grabThrownSpeed">How fast you fly when thrown</param>
-    /// <param name="staminaDamage">Stamina damage on collide</param>
-    /// <param name="damageToUid">Damage to entity on collide</param>
-    public void Throw(
+    public override void Throw(
         EntityUid uid,
         EntityUid thrower,
         Vector2 vector,
         float grabThrownSpeed,
-        DamageSpecifier? damageToUid = null,
+        float damageScale = 0,
         bool drop = true)
     {
+        var damageToUid = new DamageSpecifier();
+        damageToUid.DamageDict.Add("Blunt", 5);
+        damageToUid *= damageScale;
+
         var comp = EnsureComp<GrabThrownComponent>(uid);
         comp.IgnoreEntity.Add(thrower);
         comp.DamageOnCollide = damageToUid;

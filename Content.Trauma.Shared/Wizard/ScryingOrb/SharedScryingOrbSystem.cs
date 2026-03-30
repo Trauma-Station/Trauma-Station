@@ -3,15 +3,16 @@
 using System.Linq;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
+using Content.Trauma.Common.Wizard;
 
 namespace Content.Trauma.Shared.Wizard.ScryingOrb;
 
-public abstract class SharedScryingOrbSystem : EntitySystem
+public abstract class SharedScryingOrbSystem : CommonScryingOrbSystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
-    public bool IsScryingOrbEquipped(EntityUid uid)
+    public override bool IsScryingOrbEquipped(EntityUid uid)
     {
         var scryingOrbQuery = GetEntityQuery<ScryingOrbComponent>();
         if (_hands.EnumerateHeld(uid).Any(held => scryingOrbQuery.HasComponent(held)))
