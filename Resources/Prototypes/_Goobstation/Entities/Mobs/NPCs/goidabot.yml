@@ -47,11 +47,12 @@
   - type: InteractionPopup
     interactSuccessString: goida-1
     interactFailureString: goida-1
-  - type: NPCRetaliation # Trauma - sentient goidabots that attack if you hit them
+  - type: NPCRetaliation
     attackMemoryLength: 10
   - type: GroupRetaliation
     range: 5
   - type: GhostRole
+    prob: 0.1
     name: ghost-role-information-goidabot-name
     description: ghost-role-information-goidabot-desc
     rules: ghost-role-information-freeagent-rules
