@@ -269,5 +269,5 @@
       types:
         Blunt: 2
         Heat: 2
-        Structural: 100
+        Structural: 45
     ignoreResistances: true # This needs ProjectileDamageWhitelistComponent
