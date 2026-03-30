@@ -5,14 +5,17 @@
   id: ClothingHeadHelmetBase
   abstract: true
   components:
-  # Goobstation edit start
+  # <Trauma>
+  - type: Armor
+    coverage:
+    - Head
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/helmet_pickup.ogg
   - type: EmitSoundOnDrop
     sound:
       path: /Audio/_Goobstation/Items/handling/helmet_drop.ogg
-  # Goobstation edit end
+  # </Trauma>
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -27,8 +30,6 @@
   abstract: true
   components:
   - type: Armor #Values seem to let the user survive one extra hit if attacked consistently.
-    coverage:
-    - Head
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -95,8 +96,6 @@
   - type: Clothing
     sprite: Clothing/Head/Helmets/swat.rsi
   - type: Armor
-    coverage:
-    - Head
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3
@@ -147,8 +146,6 @@
     sprite: Clothing/Head/Helmets/light_riot.rsi
   - type: IngestionBlocker
   - type: Armor
-    coverage:
-    - Head
     modifiers:
       coefficients:
         Blunt: 0.1 # Trauma, was 0.35
@@ -174,8 +171,6 @@
   - type: ExplosionResistance
     damageCoefficient: 0.1 # Trauma - bombsuits protect 90% of damage with part coverage
   - type: Armor
-    coverage:
-    - Head
     modifiers:
       coefficients:
         Heat: 0.8
@@ -217,8 +212,6 @@
     sprite: Clothing/Head/Helmets/cult.rsi
   - type: IngestionBlocker
   - type: Armor
-    coverage:
-    - Head
     modifiers:
       coefficients:
         Blunt: 0.45
@@ -251,8 +244,6 @@
       Hair: HEAD
       Snout: HEAD
   - type: Armor # Goobstation
-    coverage:
-    - Head
     modifiers:
       coefficients:
         Blunt: 0.8
@@ -313,8 +304,6 @@
   - type: IngestionBlocker
   - type: IdentityBlocker
   - type: Armor # Goobstation
-    coverage:
-    - Head
     modifiers:
       coefficients:
         Blunt: 0.45
@@ -355,8 +344,6 @@
       Hair: HEAD
       Snout: HEAD
   - type: Armor
-    coverage:
-    - Head
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -403,8 +390,6 @@
       Snout: HEAD
   - type: BreathMask
   - type: Armor
-    coverage:
-    - Head
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -430,8 +415,6 @@
   - type: Clothing
     sprite: Clothing/Head/Helmets/linghelmet.rsi
   - type: Armor #admeme item so it should be fine being overpowered while helmets are still intentionally kneecapped.
-    coverage:
-    - Head
     traumaDeductions:
       Dismemberment: 0.4
       OrganDamage: 0.4
@@ -538,8 +521,6 @@
   - type: Clothing
     sprite: Clothing/Head/Helmets/syndie-raid.rsi
   - type: Armor
-    coverage:
-    - Head
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2

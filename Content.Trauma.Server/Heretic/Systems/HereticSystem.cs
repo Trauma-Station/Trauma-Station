@@ -61,6 +61,7 @@ public sealed class HereticSystem : SharedHereticSystem
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly HereticRuleSystem _rule = default!;
+    [Dependency] private readonly HumanoidProfileSystem _profile = default!;
 
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
@@ -499,22 +500,8 @@ public sealed class HereticSystem : SharedHereticSystem
         if (!_mind.TryGetMind(uid, out var mind, out _) || !_job.MindTryGetJobId(mind, out var jobId) || jobId == null)
             return null;
 
-        /* TODO NUBODY: use api if it gets made
-        var appearance = new HumanoidCharacterAppearance(hair.Item1,
-            hair.Item2,
-            facialHair.Item1,
-            facialHair.Item2,
-            humanoid.EyeColor,
-            humanoid.SkinColor,
-            humanoid.MarkingSet.GetForwardEnumerator().ToList());
-        */
-
-        var profile = new HumanoidCharacterProfile().WithGender(humanoid.Gender)
-            .WithSex(humanoid.Sex)
-            .WithSpecies(humanoid.Species)
-            .WithName(MetaData(uid).EntityName)
-            .WithAge(humanoid.Age);
-            //.WithCharacterAppearance(appearance);
+        if (_profile.CreateProfile((uid, humanoid)) is not { } profile)
+            return null;
 
         var netEntity = GetNetEntity(uid);
 

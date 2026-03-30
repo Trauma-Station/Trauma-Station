@@ -1483,6 +1483,7 @@
         Flesh: ClothingOuterArmorHereticFlesh
         Blade: ClothingOuterArmorHereticBlade
         Cosmos: ClothingOuterArmorHereticCosmos
+        Lock: ClothingOuterArmorHereticLock
         Rust: ClothingOuterArmorHeretic
 
 - type: entity

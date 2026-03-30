@@ -67,4 +67,10 @@ public sealed partial class TileMovementComponent : Component
     /// </summary>
     [AutoNetworkedField]
     public Vector2? LastTickLocalCoordinates;
+
+    /// <summary>
+    /// True if it was added from a mech pilot.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool FromMech;
 }

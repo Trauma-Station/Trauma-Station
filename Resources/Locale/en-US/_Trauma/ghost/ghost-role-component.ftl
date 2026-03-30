@@ -26,6 +26,9 @@ ghost-role-ratma-desc = Hunt and kill.
 ghost-role-information-breadling-namee = Breadling
 ghost-role-information-BreadLing-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.
 
+ghost-role-information-goidabot-name = goida bot
+ghost-role-information-goidabot-desc = ГОЙДА
+
 ghost-role-information-animal-name = An animal
 ghost-role-information-animal-rules = You are an [color={role-type-animal-color}][bold]{role-type-animal-name}[/bold][/color]. Act like the animal you are does.
                                          This means to not go around killing people / causing problems for no reason.

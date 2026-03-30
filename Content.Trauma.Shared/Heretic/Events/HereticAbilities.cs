@@ -115,10 +115,12 @@ public sealed partial class EventHereticCloak : InstantActionEvent
 }
 
 // living heart
-[Serializable, NetSerializable] public sealed class EventHereticLivingHeartActivate : BoundUserInterfaceMessage // triggers the logic
+[Serializable, NetSerializable]
+public sealed class EventHereticLivingHeartActivate(NetEntity target) : BoundUserInterfaceMessage
 {
-    public NetEntity? Target { get; set; }
+    public NetEntity Target = target;
 }
+
 [Serializable, NetSerializable] public enum HereticLivingHeartKey : byte
 {
     Key
