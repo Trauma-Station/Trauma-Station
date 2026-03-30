@@ -24,15 +24,63 @@
         shader: unshaded
         map: ["light"]
         visible: false
-  - type: FootstepModifier # it flies instead of walking
-    footstepSoundCollection:
-      collection: FootstepHoverXenoborg
-  - type: MovementAlwaysTouching # it flies in space with thrusters
+  - type: MovementAlwaysTouching # it flies in space with sheer will.
   - type: FlashImmunity
   - type: BorgChassis
     maxModules: 4
     hasMindState: rocketeer_e
     noMindState: rocketeer_e_r
+    moduleWhitelist:
+      tags:
+      - XenoborgModuleGeneric
+      - XenoborgModuleRocketeer
+  - type: ContainerFill
+    containers:
+      borg_brain:
+      - MMIFilled
+      borg_module:
+      - XenoborgModuleBasic
+      - XenoborgModuleTool
+      - XenoborgModuleRocketeer
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+
+- type: entity
+  parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
+  id: XenoborgTripod
+  name: tripod xenoborg
+  suffix: with brain
+  description: A man-machine hybrid that aims to replicate itself. They love extracting brains to insert into fresh Xenoborg chassis to grow their army. This is a tripod type, specialized in structural damage.
+  components:
+  - type: BorgTransponder
+    name: tripod xenoborg
+    sprite:
+      sprite: _Trauma/Mobs/Silicon/Xenoborgs/tripod.rsi
+      state: tripod
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Xenoborgs/tripod.rsi
+    layers:
+      - state: tripod
+      - state: tripod_e
+        map: ["enum.BorgVisualLayers.Light"]
+        shader: unshaded
+        visible: false
+      - state: tripod_l
+        shader: unshaded
+        map: ["light"]
+        visible: false
+  - type: MovementAlwaysTouching # it flies in space with sheer will.
+  - type: FootstepModifier # sounds cool
+    footstepSoundCollection:
+      collection: FootstepHeavySuit
+  - type: FlashImmunity
+  - type: BorgChassis
+    maxModules: 4
+    hasMindState: tripod_e
+    noMindState: tripod_e_r
     moduleWhitelist:
       tags:
       - XenoborgModuleGeneric
