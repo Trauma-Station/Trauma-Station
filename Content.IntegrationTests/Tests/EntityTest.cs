@@ -40,9 +40,12 @@ namespace Content.IntegrationTests.Tests
                 .Where(p => !p.Abstract)
                 .Where(p => !pair.IsTestPrototype(p))
                 .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
-                .Where(p => !p.Components.ContainsKey("Supermatter")) // Goobstation - Supermatter eats everything, oh no!
                 .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
-                .Where(p => !p.Components.ContainsKey("GameRule")) // Trauma - are you stupid why would you do this
+                // <Trauma>
+                .Where(p => !p.Components.ContainsKey("Supermatter")) // Supermatter eats everything, oh no!
+                .Where(p => !p.Components.ContainsKey("GameRule")) // are you stupid why would you do this
+                .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // randomly spawns things...
+                // </Trauma>
                 .Select(p => p.ID)
                 .ToList();
             // Goobstation edit end
@@ -166,6 +169,7 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("SpawnOnDespawn")) // it leaves entities behind if lifetime is under 15s
                     .Where(p => !p.Components.ContainsKey("Meteor")) // spawning the rocks gives it a stroke
                     .Where(p => !p.Components.ContainsKey("Mutation")) // waste of time, mutation test exists
+                    .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // spawns things
                     // </Trauma>
                     .Select(p => p.ID)
                     .ToList();
@@ -369,6 +373,7 @@ namespace Content.IntegrationTests.Tests
                 "PendingSlimeSpawn", // shut the fuck up please
                 "Slime",
                 "Anomaly", // they can spawn spark effects
+                "LabyrinthPortal", // it randomly spawns things
                 // </Trauma>
             };
 

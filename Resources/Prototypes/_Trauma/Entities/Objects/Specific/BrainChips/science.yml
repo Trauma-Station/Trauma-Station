@@ -7,6 +7,7 @@
     skills:
       ElectronicsKnowledge: 50
       ScienceKnowledge: 50
+      BotsKnowledge: 50
       # TODO: mech skill
   # TODO: suplex immovable rods, parity
 
@@ -29,7 +30,8 @@
   - type: KnowledgeGrantOnWear
     skills:
       ElectronicsKnowledge: 26
-      ScienceKnowledge: 26
+      ScienceKnowledge: 50
+      BotsKnowledge: 20 # not as good as robo
 
 - type: entity
   parent: BaseSkillChip
@@ -40,6 +42,7 @@
     skills:
       ElectronicsKnowledge: 10
       ScienceKnowledge: 10
+      BotsKnowledge: 10
 
 - type: entity
   parent: BaseSkillChip
@@ -48,6 +51,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ElectronicsKnowledge: 26
+      ElectronicsKnowledge: 50
       ScienceKnowledge: 26
+      BotsKnowledge: 50
       # TODO: goida mech skill

@@ -62,6 +62,9 @@
   id: EncryptionRevolutionary
 
 - type: Tag
+  id: FaithGun
+
+- type: Tag
   id: FlamethrowerBackpack
 
 - type: Tag

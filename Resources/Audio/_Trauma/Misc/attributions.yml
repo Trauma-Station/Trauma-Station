@@ -1,0 +1,9 @@
+- files: ["sande_start.ogg, sande_loop.ogg, sande_end.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Made by Loltart"
+  source: "https://goida.zip/"
+
+- files: ["sande_overload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Made by DRAGON-STUDIO, modified by Loltart"
+  source: "https://pixabay.com/sound-effects/horror-glitch-sound-effect-450447/"

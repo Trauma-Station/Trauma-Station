@@ -2,9 +2,8 @@
 
 using Content.Goobstation.Common.SpaceImmunityOnBuckle;
 using Content.Goobstation.Common.Temperature.Components;
-using Content.Server.Atmos.Components;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Buckle.Components;
-
 
 namespace Content.Goobstation.Server.SpaceImmunityOnBuckle;
 
