@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.TileMovement;
 using Content.Server.Atmos;
 using Content.Shared.Gravity;
 using Robust.Server.GameObjects;
@@ -36,7 +37,6 @@ using Robust.Shared.Utility;
 using Content.Shared.Prying.Systems;
 using Microsoft.Extensions.ObjectPool;
 using Prometheus;
-using Content.Goobstation.Common.TileMovement;
 
 namespace Content.Server.NPC.Systems;
 

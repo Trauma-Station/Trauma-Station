@@ -21,7 +21,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Actions.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
-using Content.Goobstation.Common.TileMovement;
+using Content.Trauma.Common.TileMovement;
 
 namespace Content.Goobstation.Shared.Vehicles;
 

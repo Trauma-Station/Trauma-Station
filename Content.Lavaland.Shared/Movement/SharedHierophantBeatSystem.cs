@@ -3,7 +3,7 @@
 using Content.Shared.Alert;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Prototypes;
-using Content.Goobstation.Common.TileMovement;
+using Content.Trauma.Common.TileMovement;
 
 namespace Content.Lavaland.Shared.Movement;
 
