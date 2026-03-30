@@ -73,7 +73,7 @@ public sealed class MindcontrolSystem : EntitySystem
             !component.BriefingSent)
         {
             _popup.PopupEntity(Loc.GetString("mindcontrol-popup-start"), uid, PopupType.LargeCaution);
-            _antag.SendBriefing(session, Loc.GetString("mindcontrol-briefing-start", ("master", (Name(master))), Color.Red, component.MindcontrolStartSound);
+            _antag.SendBriefing(session, Loc.GetString("mindcontrol-briefing-start", ("master", Name(master))), Color.Red, component.MindcontrolStartSound);
             component.BriefingSent = true;
         }
         _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(uid)} is Mindcontrolled by {ToPrettyString(master)}.");
