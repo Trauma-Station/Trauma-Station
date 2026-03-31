@@ -342,6 +342,12 @@ public sealed partial class GoobCVars
     public static readonly CVarDef<bool> BarksEnabled =
         CVarDef.Create("voice.barks_enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 
+    /// <summary>
+    /// Client volume setting for barks.
+    /// </summary>
+    public static readonly CVarDef<float> BarksVolume =
+        CVarDef.Create("voice.barks_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     #endregion
 
     #region Queue
