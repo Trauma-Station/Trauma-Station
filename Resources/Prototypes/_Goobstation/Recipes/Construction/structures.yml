@@ -85,7 +85,6 @@
 - type: construction
   id: AirlockSealed
   graph: Airlock
-  startNode: start
   targetNode: sealedAirlock
   category: construction-category-structures
   objectType: Structure
@@ -101,7 +100,6 @@
 - type: construction
   id: AirlockSealedGlass
   graph: Airlock
-  startNode: start
   targetNode: sealedGlassAirlock
   category: construction-category-structures
   objectType: Structure

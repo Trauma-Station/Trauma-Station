@@ -1,0 +1,89 @@
+# For items completely made out of a metal
+- type: entity
+  abstract: true
+  id: BaseMetallic
+  components:
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Metallic
+  - type: AtmosExposed
+  - type: BlackBody
+  - type: PointLight
+    netsync: false # light is done clientside
+    enabled: false
+    castShadows: false
+  - type: Temperature
+    currentTemperature: 290
+    specificHeat: 500
+    atmosTemperatureTransferEfficiency: 0.005
+  - type: InternalTemperature
+    thickness: 0.1
+    area: 1
+    conductivity: 100
+  - type: DamageOnHolding
+    enabled: false # enabled when hot
+    damage:
+      types:
+        Heat: 5
+  # TODO: melting into a reagent puddle above extreme temperature
+  # TODO: picking up a 1200C ingot should melt your hands off
+
+- type: entity
+  abstract: true
+  parent: BaseMetallic
+  id: BaseMetallicBrass
+  components:
+  - type: Metallic
+    minTemp: 794
+    idealTemp: 850
+
+- type: entity
+  abstract: true
+  parent: BaseMetallic
+  id: BaseMetallicSteel
+  components:
+  - type: Metallic
+    minTemp: 1218
+    idealTemp: 1260
+
+- type: entity
+  abstract: true
+  parent: BaseMetallic
+  id: BaseMetallicPlasteel
+  components:
+  - type: Metallic
+    minTemp: 1456
+    idealTemp: 1483
+
+# Workable, already above ideal temp
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicBrass
+  id: BaseWorkableBrass
+  components:
+  - type: Metallic
+    workable: true
+  - type: Temperature
+    currentTemperature: 950
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicSteel
+  id: BaseWorkableSteel
+  components:
+  - type: Metallic
+    workable: true
+  - type: Temperature
+    currentTemperature: 1300
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicPlasteel
+  id: BaseWorkablePlasteel
+  components:
+  - type: Metallic
+    workable: true
+  - type: Temperature
+    currentTemperature: 1500

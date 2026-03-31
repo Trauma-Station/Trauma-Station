@@ -82,7 +82,7 @@
   parent: [BaseGlovesTackle, BaseSecurityContraband]
   id: ClothingHandsGlovesRocket
   name: rocket gloves
-  description: The ultimate in high risk, high reward, perfect for when you need to stop a criminal from fifty feet away or die trying. Banned in most Spinward gridiron football and rugby leagues. (Alt + q to tackle.)
+  description: The ultimate in high risk, high reward, perfect for when you need to stop a criminal from fifty feet away or die trying. Banned in most Spinward gridiron football and rugby leagues. (Alt + Q to tackle.)
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/rocket.rsi
@@ -109,7 +109,7 @@
   parent: BaseGlovesTackle
   id: ClothingHandsGlovesDolphin
   name: dolphin gloves
-  description: Sleek, aerodynamic gripper gloves that are less effective at actually performing takedowns, but more effective at letting the user sail through the hallways and cause accidents. (Alt + q to tackle.)
+  description: Sleek, aerodynamic gripper gloves that are less effective at actually performing takedowns, but more effective at letting the user sail through the hallways and cause accidents. (Alt + Q to tackle.)
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/dolphin.rsi
@@ -136,7 +136,7 @@
   parent: [BaseGlovesTackle, BaseMinorContraband]
   id: ClothingHandsGlovesGripper
   name: improvised gripper gloves
-  description: Ratty looking gloves wrapped with sticky tape. Beware anyone wearing these, for they clearly have no shame and nothing to lose. (Alt + q to tackle.)
+  description: Ratty looking gloves wrapped with sticky tape. Beware anyone wearing these, for they clearly have no shame and nothing to lose. (Alt + Q to tackle.)
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/gripper.rsi

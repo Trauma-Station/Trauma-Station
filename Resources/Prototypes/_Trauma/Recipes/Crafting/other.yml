@@ -1,7 +1,6 @@
 - type: construction
   id: SheetPaper
   graph: SheetPaper
-  startNode: start
   targetNode: paper sheet
   category: construction-category-materials
   objectType: Item
@@ -13,7 +12,6 @@
 - type: construction
   id: PowerArmorStand
   graph: PowerArmorStand
-  startNode: start
   targetNode: PowerArmorStand
   category: construction-category-antagonist
   objectType: Item
@@ -21,9 +19,8 @@
     RevolutionaryKnowledge: 3
 
 - type: construction
-  id: Bracing
-  graph: Bracing
-  startNode: start
+  abstract: true
+  id: BaseRepairItem
   targetNode: finish
   category: construction-category-tools
   objectType: Item
@@ -33,13 +30,11 @@
   useQuality: false
 
 - type: construction
+  parent: BaseRepairItem
+  id: Bracing
+  graph: Bracing
+
+- type: construction
+  parent: BaseRepairItem
   id: Whetstone
   graph: Whetstone
-  startNode: start
-  targetNode: finish
-  category: construction-category-tools
-  objectType: Item
-  theory:
-    MaterialsKnowledge: 1
-    FabricationKnowledge: 1
-  useQuality: false
