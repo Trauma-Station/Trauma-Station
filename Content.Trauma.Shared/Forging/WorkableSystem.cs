@@ -4,6 +4,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
+using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
 
 namespace Content.Trauma.Shared.Forging;
