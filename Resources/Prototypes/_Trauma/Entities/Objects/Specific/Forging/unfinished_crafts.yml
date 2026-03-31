@@ -56,7 +56,7 @@
   - type: Workable
     remaining: 200
   - type: Sprite
-    laysers:
+    layers:
     - state: ingot_plasteel
       shader: Emissive
 
@@ -847,7 +847,7 @@
   name: unfinished steel halberd head
   components:
   - type: Workable
-    result: HaldberdHeadSteel
+    result: HalberdHeadSteel
 
 - type: entity
   parent: [ BaseHalberdHead, BaseWroughtSteel ]
@@ -860,7 +860,7 @@
   name: unfinished plasteel halberd head
   components:
   - type: Workable
-    result: HaldberdHeadPlasteel
+    result: HalberdHeadPlasteel
 
 - type: entity
   parent: [ BaseHalberdHead, BaseWroughtPlasteel ]
