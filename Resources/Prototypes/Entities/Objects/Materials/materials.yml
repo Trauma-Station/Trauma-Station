@@ -744,6 +744,12 @@
   name: bones
   suffix: Full
   components:
+  # <Trauma> - its used by recycling now
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Bone: 100
+  # </Trauma>
   - type: Stack
     stackType: Bones
     baseLayer: base
@@ -768,11 +774,6 @@
           Quantity: 3
   - type: Item
     heldPrefix: bones
-  # <Trauma>
-  - type: PhysicalComposition
-    materialComposition:
-      Bone: 100
-  # </Trauma>
 
 - type: entity
   parent: MaterialBones
