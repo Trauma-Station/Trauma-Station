@@ -63,6 +63,7 @@
 # Base wrought and still hot, needs quenching
 
 - type: entity
+  abstract: true
   parent: BaseForgeItem
   id: BaseWroughtMetal
   description: Let it cool for a while or quench it.
