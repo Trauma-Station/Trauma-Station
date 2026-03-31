@@ -6,13 +6,13 @@ using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Flashbang;
 using Content.Goobstation.Shared.Stunnable;
 using Content.Trauma.Shared.Wizard.Chuuni;
-using Content.Trauma.Shared.Standing;
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Flash;
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Goobstation.Shared.Standing;
 
 namespace Content.Goobstation.Shared.Inventory;
 

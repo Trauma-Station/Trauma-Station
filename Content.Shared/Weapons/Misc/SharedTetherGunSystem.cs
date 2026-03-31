@@ -1,5 +1,7 @@
+// <Trauma>
+using Content.Trauma.Common.Weapons.Misc;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
-using Content.Trauma.Shared.Weapons.Misc;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Hands.Components;

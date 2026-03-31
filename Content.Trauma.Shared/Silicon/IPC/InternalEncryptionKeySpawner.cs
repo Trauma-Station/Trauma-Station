@@ -29,9 +29,10 @@ public sealed class InternalEncryptionKeySpawner : EntitySystem
     /// <remarks>
     /// Doesn't support a profile's loadouts, have fun.
     /// </remarks>
-    public void TryInsertEncryptionKey(EntityUid target, IEquipmentLoadout startingGear)
+    public void TryInsertEncryptionKey(EntityUid target, IEquipmentLoadout? startingGear)
     {
         if (!TryComp<EncryptionKeyHolderComponent>(target, out var keyHolder)
+            || startingGear is not { }
             || !startingGear.Equipment.TryGetValue("ears", out var headsetId)
             || string.IsNullOrEmpty(headsetId))
             return;

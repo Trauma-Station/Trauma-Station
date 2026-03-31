@@ -4,7 +4,7 @@ using Content.Shared.DoAfter;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.VentCrawling;
+namespace Content.Trauma.Common.VentCrawling;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class VentCrawlerComponent : Component

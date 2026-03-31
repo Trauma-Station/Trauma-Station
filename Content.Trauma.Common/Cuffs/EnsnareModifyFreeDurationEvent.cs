@@ -7,5 +7,5 @@ namespace Content.Trauma.Common.Cuffs;
 /// <summary>
 /// Raised on an entity to see if anything modifies it ensnare duration time to get out.
 /// </summary>
-[Serializable, NetSerializable]
+[ByRefEvent]
 public record struct EnsnareModifyFreeDurationEvent(EntityUid Target, float FreeTime);

@@ -291,7 +291,7 @@ public abstract partial class SharedBorgSystem : EntitySystem
 
         // <Trauma> - Corvax-Next-AiRemoteControl-Start
         var ev = new BorgChassisInteractAfterEvent(chassis.Owner, args.User);
-        RaiseLocalEvent(used, ev);
+        RaiseLocalEvent(used, ref ev);
         if (ev.Handled)
         {
             args.Handled = true;

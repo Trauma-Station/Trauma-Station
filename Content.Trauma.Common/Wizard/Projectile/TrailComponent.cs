@@ -6,11 +6,11 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Utility;
 
-namespace Content.Trauma.Shared.Wizard.Projectiles;
+namespace Content.Trauma.Common.Wizard.Projectile;
 
 // Make more fields auto networked if you need to.
 // Changing Lifetime and Frequency may lead to unexpected results, especially if frequency is greater than lifetime
-[RegisterComponent,NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TrailComponent : Component
 {
     /// <summary>

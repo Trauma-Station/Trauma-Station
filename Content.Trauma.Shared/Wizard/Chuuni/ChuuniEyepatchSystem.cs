@@ -127,24 +127,3 @@ public sealed class ChuuniEyepatchSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 }
-
-public sealed class GetSpellInvocationEvent(MagicSchool school, EntityUid performer)
-    : EntityEventArgs, IInventoryRelayEvent
-{
-    public SlotFlags TargetSlots => SlotFlags.EYES;
-
-    public MagicSchool School = school;
-
-    public EntityUid Performer = performer;
-
-    public DamageSpecifier ToHeal = new();
-
-    public LocId? Invocation;
-}
-
-public sealed class GetMessageColorOverrideEvent : EntityEventArgs, IInventoryRelayEvent
-{
-    public SlotFlags TargetSlots => SlotFlags.EYES;
-
-    public Color? Color = null;
-}

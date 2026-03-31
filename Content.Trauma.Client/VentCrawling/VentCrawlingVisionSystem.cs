@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.SubFloor;
+using Content.Trauma.Common.VentCrawling;
 using Content.Trauma.Shared.VentCrawling;
 using Robust.Client.Player;
 using Robust.Shared.Timing;

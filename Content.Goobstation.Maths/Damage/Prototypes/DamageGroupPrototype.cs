@@ -1,4 +1,4 @@
-using Content.Shared.Damage.Components;
+//using Content.Shared.Damage.Components; - <Trauma>
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Damage.Prototypes

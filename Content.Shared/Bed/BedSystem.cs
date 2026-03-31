@@ -22,7 +22,7 @@ namespace Content.Shared.Bed;
 public sealed class BedSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly CommonSiliconSystem _silicon;
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
     // </Trauma>
     [Dependency] private readonly ActionContainerSystem _actConts = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;

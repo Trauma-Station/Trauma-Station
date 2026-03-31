@@ -131,7 +131,7 @@ public abstract partial class SharedHandsSystem : EntitySystem
             if (activeItem is { } activeItemNotNull)
             {
                 var dropEv = new ItemDropAttemptEvent();
-                RaiseLocalEvent(activeItemNotNull, dropEv);
+                RaiseLocalEvent(activeItemNotNull, ref dropEv);
                 if (dropEv.Cancelled)
                     return false;
             }

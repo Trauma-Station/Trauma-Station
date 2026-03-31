@@ -17,6 +17,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Content.Server.Inventory;
 using Content.Shared.Hands.EntitySystems;
+using Content.Trauma.Common.VentCrawling;
 
 namespace Content.Trauma.Server.VentCrawling;
 

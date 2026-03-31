@@ -1,4 +1,6 @@
-using Content.Trauma.Shared.Weapons.Ranged;
+// <Trauma>
+using Content.Trauma.Common.Weapons.Ranged;
+// </Trauma>
 using Content.Shared.Examine;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;

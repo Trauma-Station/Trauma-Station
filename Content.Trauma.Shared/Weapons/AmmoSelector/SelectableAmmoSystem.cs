@@ -6,7 +6,6 @@ using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Weapons.AmmoSelector;
 using Content.Trauma.Shared.Wizard.UserInterface;
@@ -16,7 +15,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Weapons.AmmoSelector;
 
-public sealed class SelectableAmmoSystem : EntitySystem
+public sealed class SelectableAmmoSystem : CommonSelectableAmmoSystem
 {
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -63,7 +62,7 @@ public sealed class SelectableAmmoSystem : EntitySystem
         _audio.PlayPredicted(ent.Comp.SoundSelect, ent, args.Actor);
     }
 
-    public bool TrySetProto(Entity<AmmoSelectorComponent> ent, ProtoId<SelectableAmmoPrototype> proto)
+    public override bool TrySetProto(Entity<AmmoSelectorComponent> ent, ProtoId<SelectableAmmoPrototype> proto)
     {
         if (!_protoManager.Resolve(proto, out var index))
             return false;
@@ -153,17 +152,17 @@ public sealed class SelectableAmmoSystem : EntitySystem
 
     private bool ShouldSetFireCost(SelectableAmmoPrototype proto)
     {
-        return (proto.Flags & (int) SelectableAmmoFlags.ChangeWeaponFireCost) != 0;
+        return (proto.Flags & SelectableAmmoFlags.ChangeWeaponFireCost) != 0;
     }
 
     private bool ShouldSetSound(SelectableAmmoPrototype proto)
     {
-        return (proto.Flags & (int) SelectableAmmoFlags.ChangeWeaponFireSound) != 0;
+        return (proto.Flags & SelectableAmmoFlags.ChangeWeaponFireSound) != 0;
     }
 
     private bool ShouldSetFireRate(SelectableAmmoPrototype proto)
     {
-        return (proto.Flags & (int) SelectableAmmoFlags.ChangeWeaponFireRate) != 0;
+        return (proto.Flags & SelectableAmmoFlags.ChangeWeaponFireRate) != 0;
     }
 }
 

@@ -7,5 +7,5 @@ namespace Content.Trauma.Common.Cuffs;
 /// <summary>
 /// Raised on the user to see if it can uncuff instantly.
 /// </summary>
-[Serializable, NetSerializable]
+[ByRefEvent]
 public record struct InstantUncuffEvent(EntityUid Target, EntityUid Cuff, bool CuffsBroken = false);

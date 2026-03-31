@@ -2,7 +2,7 @@
 
 using Content.Shared.Inventory;
 
-namespace Content.Trauma.Shared.Standing;
+namespace Content.Goobstation.Shared.Standing;
 
 public sealed class GetStandingUpTimeMultiplierEvent : EntityEventArgs, IInventoryRelayEvent
 {

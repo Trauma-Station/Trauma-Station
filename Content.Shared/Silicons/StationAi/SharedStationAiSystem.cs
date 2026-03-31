@@ -255,7 +255,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
             if (ent.Comp.Slot.Item is { } item)
             {
                 var ev = new OnIntellicardInsertEvent();
-                RaiseLocalEvent(item, ev);
+                RaiseLocalEvent(item, ref ev);
             }
             // </Trauma>
 

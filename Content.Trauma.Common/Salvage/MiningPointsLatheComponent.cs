@@ -2,7 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Trauma.Shared.Salvage.Components;
+namespace Content.Trauma.Common.Salvage;
 
 /// <summary>
 /// Adds points to <see cref="MiningPointsComponent"/> when making a recipe that has miningPoints set.

@@ -7,10 +7,13 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Revolutionary.Components;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Zombies;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Shared.Wizard.Chuuni;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
+using Content.Trauma.Shared.Wizard.Projectiles;
+using Content.Trauma.Shared.Wizard.TimeStop;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
@@ -34,11 +37,18 @@ public sealed partial class SharedWizardSystem : CommonWizardSystem
 
         SubscribeLocalEvent<AfterMindSwappedEvent>(OnMindswapAfter);
         SubscribeLocalEvent<AfterMindSwappedEvent>(OnFactionSwap);
+
+        SubscribeLocalEvent<ReflectiveComponent, ProjectileReflectedEvent>(OnReflection);
     }
 
     public override bool IsChunni(EntityUid? eyepatch)
     {
         return HasComp<ChuuniEyepatchComponent>(eyepatch);
+    }
+
+    public override bool IsMovementBlocked(EntityUid? wizard)
+    {
+        return HasComp<FrozenComponent>(wizard);
     }
 
     private void OnMindswapGhost(Entity<GhostComponent> ent, ref BeforeMindSwappedEvent args)
@@ -147,5 +157,10 @@ public sealed partial class SharedWizardSystem : CommonWizardSystem
         // 4. Fallback logic: If a body is now factionless, give them the default
         if (perfComp.Factions.Count == 0) _faction.AddFaction(args.Performer, fallback);
         if (tarComp.Factions.Count == 0) _faction.AddFaction(args.Target, fallback);
+    }
+
+    private void OnReflection(Entity<ReflectiveComponent> ent, ref ProjectileReflectedEvent args)
+    {
+        RemComp<HomingProjectileComponent>(ent);
     }
 }

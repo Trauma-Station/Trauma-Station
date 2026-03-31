@@ -7,6 +7,7 @@ using Content.Trauma.Shared.VentCrawling;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Containers;
+using Content.Trauma.Common.VentCrawling;
 
 namespace Content.Trauma.Server.VentCrawling;
 

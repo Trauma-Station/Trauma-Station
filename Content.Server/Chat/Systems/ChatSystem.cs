@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using Content.Goobstation.Common.Chat;
 using Content.Goobstation.Common.Traits;
 using Content.Goobstation.Shared.Loudspeaker.Events;
-using Content.Server._Goobstation.Wizard.Systems;
+using Content.Goobstation.Common.Wizard.Systems;
 using Content.Server.Effects;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Speech;

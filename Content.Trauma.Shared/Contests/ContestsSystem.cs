@@ -150,7 +150,7 @@ public sealed partial class ContestsSystem : CommonContestsSystem
     #endregion
     #region Stamina Contests
 
-    public float StaminaContest(EntityUid performer, bool bypassClamp = false, float rangeFactor = 1f)
+    public override float StaminaContest(EntityUid performer, bool bypassClamp = false, float rangeFactor = 1f)
     {
         if (_doContestSystem
             || _doStaminaContests
@@ -174,7 +174,7 @@ public sealed partial class ContestsSystem : CommonContestsSystem
             : 1 - Math.Clamp(perfStamina.StaminaDamage / perfStamina.CritThreshold, 0, 0.25f * rangeFactor);
     }
 
-    public float StaminaContest(EntityUid performer, EntityUid target, bool bypassClamp = false, float rangeFactor = 1f)
+    public override float StaminaContest(EntityUid performer, EntityUid target, bool bypassClamp = false, float rangeFactor = 1f)
     {
         if (_doContestSystem
             || _doStaminaContests
@@ -193,7 +193,7 @@ public sealed partial class ContestsSystem : CommonContestsSystem
 
     #region Health Contests
 
-    public float HealthContest(EntityUid performer, bool bypassClamp = false, float rangeFactor = 1f)
+    public override float HealthContest(EntityUid performer, bool bypassClamp = false, float rangeFactor = 1f)
     {
         if (_doContestSystem
             || _doHealthContests
@@ -206,7 +206,7 @@ public sealed partial class ContestsSystem : CommonContestsSystem
             : 1 - Math.Clamp(value, 0, 0.25f * rangeFactor);
     }
 
-    public float HealthContest(EntityUid performer, EntityUid target, bool bypassClamp = false, float rangeFactor = 1f)
+    public override float HealthContest(EntityUid performer, EntityUid target, bool bypassClamp = false, float rangeFactor = 1f)
     {
         if (_doContestSystem
             || _doHealthContests

@@ -624,6 +624,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override int GetMastery(int level)
         => level switch
         {
+            >= 100 => 6, // 6th mastery doesn't exist, but we can use this to say max level
             >= 88 => 5,
             >= 76 => 4,
             >= 51 => 3,
@@ -647,6 +648,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override int GetInverseMastery(int mastery)
         => mastery switch
         {
+            >= 6 => 100, // 6th mastery doesn't exist, but we can use this to say max level
             >= 5 => 88,
             >= 4 => 76,
             >= 3 => 51,
