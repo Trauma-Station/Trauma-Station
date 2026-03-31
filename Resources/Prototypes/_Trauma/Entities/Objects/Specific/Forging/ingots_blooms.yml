@@ -44,12 +44,13 @@
   abstract: true
   parent: [ BaseForgeItem, MaterialBase ]
   id: BaseMetalIngot
+  suffix: Hot
   components:
   - type: Material
   - type: Stack
     count: 1
   - type: Tag
-    tags: [ Ingot ]
+    tags: [ IngotWorkable ]
   - type: MetallicTags
     workable: [ IngotWorkable ] # added while in the ideal temperature range
   - type: MetallicPopups
@@ -123,7 +124,7 @@
     result: BrassIngot
 
 - type: entity
-  parent: [ BaseMetalIngot, BrassOverheatable]
+  parent: [ BaseWorkableBrass, BaseMetalIngot, BrassOverheatable]
   id: BrassIngot
   name: brass ingot
   description: A softer piece of metal, can be forged at relatively low temperatures.
@@ -207,7 +208,7 @@
     result: SteelIngot
 
 - type: entity
-  parent: [ BaseMetalIngot, SteelOverheatable ]
+  parent: [ BaseWorkableSteel, BaseMetalIngot, SteelOverheatable ]
   id: SteelIngot
   name: steel ingot
   description: A strong piece of metal, can be forged at moderately high temperatures.
@@ -223,6 +224,8 @@
     stackType: SteelIngot
   - type: MetallicTags
     workable: [ IngotWorkable, IngotWorkableSteel ]
+  - type: Tag
+    tags: [ IngotWorkable, IngotWorkableSteel ]
 
 # Plasteel - 1483K +- 27K
 
@@ -295,7 +298,7 @@
     result: PlasteelIngot
 
 - type: entity
-  parent: [ BaseMetalIngot, PlasteelOverheatable ]
+  parent: [ BaseWorkablePlasteel, BaseMetalIngot, PlasteelOverheatable ]
   id: PlasteelIngot
   name: plasteel ingot
   description: A very robust piece of metal, can be forged at extreme temperatures.
