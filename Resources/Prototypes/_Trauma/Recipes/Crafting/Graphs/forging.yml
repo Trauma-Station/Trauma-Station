@@ -65,6 +65,7 @@
         icon:
           sprite: _Trauma/Objects/Specific/forging.rsi
           state: ingot_steel_hot
+        doAfter: 5
       - tag: IngotSteel
         name: construction-graph-tag-ingotsteel
         icon:
@@ -86,6 +87,7 @@
         icon:
           sprite: _Trauma/Objects/Specific/forging.rsi
           state: ingot_steel_hot
+        doAfter: 5
       - tag: IngotSteel
         name: construction-graph-tag-ingotsteel
         icon:

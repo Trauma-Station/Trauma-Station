@@ -366,6 +366,9 @@
   - type: Stack
     stackType: SteelIngot
     count: 1
+  - type: Tag
+    tags:
+      - IngotSteel
 
 - type: entity  ## Needs these so it doesnt break everything sadly
   parent: BaseForgeItemNoTemp
