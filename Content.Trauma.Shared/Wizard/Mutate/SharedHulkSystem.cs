@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Cargo;
 using Content.Shared.Cuffs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
@@ -9,6 +10,8 @@ using Content.Shared.Slippery;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Cuffs;
+using Content.Trauma.Common.Knockdown;
 using Content.Trauma.Common.Wizard;
 using Robust.Shared.Prototypes;
 
@@ -35,6 +38,7 @@ public abstract class SharedHulkSystem : EntitySystem
         SubscribeLocalEvent<HulkComponent, InstantUncuffEvent>(OnUncuff);
         SubscribeLocalEvent<HulkComponent, EnsnareBrokenEvent>(OnEnsnareBreak);
         SubscribeLocalEvent<HulkComponent, EnsnareModifyFreeDurationEvent>(OnEnsnareModifyDuration);
+        SubscribeLocalEvent<HulkComponent, KnockdownOnCollideAttemptEvent>(OnKnockDownAttempt);
     }
 
     private void OnStartup(Entity<HulkComponent> ent, ref ComponentStartup args)
@@ -98,6 +102,12 @@ public abstract class SharedHulkSystem : EntitySystem
     {
         if (ent.Owner == args.Target)
             args.FreeTime = 0;
+    }
+
+    private void OnKnockDownAttempt(Entity<HulkComponent> ent, ref KnockdownOnCollideAttemptEvent args)
+    {
+        Roar(ent);
+        args.Cancelled = true;
     }
 
     protected virtual void UpdateColorStartup(Entity<HulkComponent> hulk)

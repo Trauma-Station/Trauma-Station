@@ -2,7 +2,7 @@
 
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Trauma.Shared.ListViewSelector;
+using Content.Goobstation.Shared.ListViewSelector;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Popups;

@@ -2,7 +2,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.ListViewSelector;
+namespace Content.Goobstation.Shared.ListViewSelector;
 
 [Serializable, NetSerializable]
 public record ListViewSelectorEntry(string Id, string Name = "", string Description = "");

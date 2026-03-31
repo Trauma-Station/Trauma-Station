@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Teleportation.Systems;
+using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
-namespace Content.Goobstation.Shared.EntityEffects.Effects;
+namespace Content.Trauma.Shared.EntityEffects.Effects;
 
 public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
 {

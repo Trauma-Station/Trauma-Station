@@ -3,12 +3,12 @@
 using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Effects;
-using Content.Trauma.Common.MartialArts;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Teleportation;
+using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -16,7 +16,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 
-namespace Content.Goobstation.Shared.Teleportation.Systems;
+namespace Content.Trauma.Shared.Teleportation.Systems;
 
 [Virtual]
 public partial class SharedRandomTeleportSystem : EntitySystem

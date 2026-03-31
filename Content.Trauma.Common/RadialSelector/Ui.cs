@@ -3,7 +3,7 @@
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-namespace Content.Trauma.Shared.RadialSelector;
+namespace Content.Trauma.Common.RadialSelector;
 
 [NetSerializable, Serializable]
 public enum RadialSelectorUiKey : byte

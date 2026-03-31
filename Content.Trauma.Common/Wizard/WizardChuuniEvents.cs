@@ -1,3 +1,4 @@
+using Content.Shared.Damage;
 using Content.Shared.Inventory;
 
 namespace Content.Trauma.Common.Wizard;

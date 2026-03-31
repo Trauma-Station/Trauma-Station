@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Teleportation.Systems;
+using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Stack;
 using Content.Shared.Database;
@@ -8,7 +8,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Stacks;
 using Content.Shared.Teleportation;
 
-namespace Content.Goobstation.Server.Teleportation.Systems;
+namespace Content.Trauma.Server.Teleportation.Systems;
 
 public sealed class RandomTeleportSystem : EntitySystem
 {

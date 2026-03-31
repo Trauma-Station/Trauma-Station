@@ -2,14 +2,14 @@
 
 using Content.Client.Lathe.UI;
 using Content.Client.UserInterface.Controls;
-using Content.Trauma.Shared.ListViewSelector;
+using Content.Goobstation.Shared.ListViewSelector;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 
 // ReSharper disable InconsistentNaming
 
-namespace Content.Trauma.Client.ListViewSelector;
+namespace Content.Goobstation.Client.ListViewSelector;
 
 [UsedImplicitly]
 public sealed class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)

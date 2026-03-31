@@ -87,16 +87,12 @@ public sealed class GrabThrownSystem : CommonGrabThrownSystem
         EntityUid thrower,
         Vector2 vector,
         float grabThrownSpeed,
-        float damageScale = 0,
+        DamageSpecifier? damage,
         bool drop = true)
     {
-        var damageToUid = new DamageSpecifier();
-        damageToUid.DamageDict.Add("Blunt", 5);
-        damageToUid *= damageScale;
-
         var comp = EnsureComp<GrabThrownComponent>(uid);
         comp.IgnoreEntity.Add(thrower);
-        comp.DamageOnCollide = damageToUid;
+        comp.DamageOnCollide = damage;
 
         _stun.TryCrawling(uid, drop: drop);
         _throwing.TryThrow(uid, vector, grabThrownSpeed, animated: false);

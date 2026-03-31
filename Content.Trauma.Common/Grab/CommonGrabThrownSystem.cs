@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
+using Content.Shared.Damage;
 
 namespace Content.Trauma.Common.Grab;
 
@@ -20,12 +18,12 @@ public abstract partial class CommonGrabThrownSystem : EntitySystem
     /// <param name="vector">Direction</param>
     /// <param name="grabThrownSpeed">How fast you fly when thrown</param>
     /// <param name="staminaDamage">Stamina damage on collide</param>
-    /// <param name="damageScale">Damage to scale on collide</param>
+    /// <param name="damage">Damage to apply on collide</param>
     public abstract void Throw(
         EntityUid uid,
         EntityUid thrower,
         Vector2 vector,
         float grabThrownSpeed,
-        float damageScale = 0,
+        DamageSpecifier? damage,
         bool drop = true);
 }

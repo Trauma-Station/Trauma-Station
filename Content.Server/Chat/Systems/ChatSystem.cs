@@ -10,7 +10,7 @@ using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Systems;
-using Content.Trauma.Common.Wizard.Chuuni;
+using Content.Trauma.Common.Wizard;
 using Content.Trauma.Common.Speech;
 using Content.Trauma.Common.CollectiveMind;
 // </Trauma>
@@ -60,8 +60,8 @@ namespace Content.Server.Chat.Systems;
 public sealed partial class ChatSystem : SharedChatSystem
 {
     // <Trauma>
-    [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
-    [Dependency] private readonly ScryingOrbSystem _scrying = default!;
+    [Dependency] private readonly CommonGhostVisibilitySystem _ghostVisibility = default!;
+    [Dependency] private readonly CommonScryingOrbSystem _scrying = default!;
     [Dependency] private readonly CollectiveMindUpdateSystem _collectiveMind = default!;
     [Dependency] private readonly CommonLanguageSystem _language = default!;
     // </Trauma>

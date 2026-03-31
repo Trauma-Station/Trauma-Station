@@ -79,11 +79,15 @@ public sealed partial class PullingSystem
         var distanceToCursor = args.Direction.Length();
         var direction = args.Direction.Normalized() * MathF.Min(distanceToCursor, component.ThrowingDistance);
 
+        // <Trauma>
+        var damageToUid = new DamageSpecifier();
+        damageToUid.DamageDict.Add("Blunt", 5);
+        // </Trauma>
         _grabThrown.Throw(args.BlockingEntity,
             uid,
             direction,
             component.GrabThrownSpeed,
-            component.GrabThrowDamageModifier); // Throwing the grabbed person
+            damageToUid * component.GrabThrowDamageModifier); // Throwing the grabbed person
         _throwing.TryThrow(uid, -direction * throwerPhysics.InvMass); // Throws back the grabber
         _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), uid, uid);
         component.NextStageChange = _timing.CurTime.Add(TimeSpan.FromSeconds(3f)); // To avoid grab and throw spamming
