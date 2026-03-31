@@ -203,7 +203,7 @@
     - Wizard
 
 - type: entity
-  parent: [BaseCrowbar, BaseMagicalContraband] # Trauma - Contraband marker
+  parent: [BaseCrowbar, BaseMagicalContraband, UnbeakableDurability] # Trauma - Contraband marker
   id: CrowbarWizard
   description: A compact multipurpose tool to pry open doors and destroy stations.
   suffix: Wizard # Trauma

@@ -136,8 +136,6 @@ public sealed class AdminTranslatorCommand : ToolshedCommand
     {
         if (TryComp<HandheldTranslatorComponent>(uid, out var handheld))
             translator = handheld;
-        else if (TryComp<TranslatorImplantComponent>(uid, out var implant))
-            translator = implant;
         else if (TryComp<IntrinsicTranslatorComponent>(uid, out var intrinsic))
             translator = intrinsic;
         else

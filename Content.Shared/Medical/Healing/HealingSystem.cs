@@ -184,9 +184,6 @@ public sealed partial class HealingSystem : EntitySystem // Trauma - made partia
             args.Handled = true;
     }
 
-    // Goobstation start
-    // Goobstation end
-
     private bool TryHeal(Entity<HealingComponent> healing, Entity<DamageableComponent?> target, EntityUid user)
     {
         if (!Resolve(target, ref target.Comp, false))

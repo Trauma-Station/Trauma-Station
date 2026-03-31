@@ -17,20 +17,20 @@ public sealed partial class LegsSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
 
     private EntityQuery<LegsComponent> _query;
-    private EntityQuery<MovementBodyPartComponent> _legQuery;
+    private EntityQuery<LegComponent> _legQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _query = GetEntityQuery<LegsComponent>();
-        _legQuery = GetEntityQuery<MovementBodyPartComponent>();
+        _legQuery = GetEntityQuery<LegComponent>();
 
         SubscribeLocalEvent<LegsComponent, StandAttemptEvent>(OnStandAttempt);
         SubscribeLocalEvent<LegsComponent, AttemptStopPullingEvent>(OnAttemptStopPulling);
 
-        SubscribeLocalEvent<MovementBodyPartComponent, OrganGotInsertedEvent>(OnLegAdded);
-        SubscribeLocalEvent<MovementBodyPartComponent, OrganGotRemovedEvent>(OnLegRemoved);
+        SubscribeLocalEvent<LegComponent, OrganGotInsertedEvent>(OnLegAdded);
+        SubscribeLocalEvent<LegComponent, OrganGotRemovedEvent>(OnLegRemoved);
         SubscribeLocalEvent<LegsParalyzedComponent, MapInitEvent>(OnParalyzedInit,
             after: [ typeof(InitialBodySystem) ]); // run after the organs are added
         SubscribeLocalEvent<LegsParalyzedComponent, RefreshMovementSpeedModifiersEvent>(OnRefresh);
@@ -58,7 +58,7 @@ public sealed partial class LegsSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnLegAdded(Entity<MovementBodyPartComponent> ent, ref OrganGotInsertedEvent args)
+    private void OnLegAdded(Entity<LegComponent> ent, ref OrganGotInsertedEvent args)
     {
         if (!_query.TryComp(args.Target, out var comp))
             return;
@@ -69,7 +69,7 @@ public sealed partial class LegsSystem : EntitySystem
         UpdateMovementSpeed((args.Target, comp));
     }
 
-    private void OnLegRemoved(Entity<MovementBodyPartComponent> ent, ref OrganGotRemovedEvent args)
+    private void OnLegRemoved(Entity<LegComponent> ent, ref OrganGotRemovedEvent args)
     {
         if (TerminatingOrDeleted(args.Target) || !_query.TryComp(args.Target, out var comp))
             return;
@@ -89,7 +89,7 @@ public sealed partial class LegsSystem : EntitySystem
             return;
         foreach (var leg in legs.Legs)
         {
-            RemComp<MovementBodyPartComponent>(leg);
+            RemComp<LegComponent>(leg);
         }
         legs.Legs.Clear();
         Dirty(ent, legs);

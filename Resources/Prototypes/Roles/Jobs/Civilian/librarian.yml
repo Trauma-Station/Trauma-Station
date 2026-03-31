@@ -10,11 +10,6 @@
   - Library # Trauma - TODO, remove service after mapping is done
   - Service
   - Maintenance
-  # <Trauma>
-  special: # Librarian should speak most languages.
-  - !type:AddImplantSpecial
-    implants: [ LibrarianTranslatorImplant ]
-  # </Trauma>
 - type: startingGear
   id: LibrarianGear
   equipment:

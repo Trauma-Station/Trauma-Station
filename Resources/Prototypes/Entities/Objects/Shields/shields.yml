@@ -655,6 +655,8 @@
       # WD EDIT END
     # <Trauma>
     - type: Parry
+      reflects:
+      - energy
       maxReflects: 10
       reflectMinSkill: 50
       maxParries: 0

@@ -65,7 +65,7 @@
   description: uplink-energycrossbow-desc
   productEntity: WeaponEnergyCrossbow
   cost:
-    Telecrystal: 50 # Trauma
+    Telecrystal: 30 # Trauma
   categories:
   - UplinkWeaponry
   conditions:
@@ -80,8 +80,8 @@
   id: UplinkThrowingKnivesKit
   name: uplink-knives-kit-name
   description: uplink-knives-kit-desc
-  icon: { sprite: /Textures/Objects/Storage/boxicons.rsi, state: throwing_knives }
-  productEntity: ThrowingKnivesKit
+  icon: { sprite: /Textures/Objects/Weapons/Melee/throwing_knife.rsi, state: icon } # Trauma
+  productEntity: ClothingBeltKnifeRig # Trauma
   cost:
     Telecrystal: 20 # goob - Pretty weak, but resusable ranged crit potential shouldn't be less.
   categories:
@@ -169,11 +169,11 @@
     Telecrystal: 50 # Trauma - was 14, made cheaper and 5x: you could just buy guns so its not so crazy
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
+  # conditions: # Trauma, this gun is fine for nukies
+  # - !type:StoreWhitelistCondition
+  #   blacklist:
+  #     tags:
+  #     - NukeOpsUplink
 
 - type: listing
   id: UplinkBulldog
@@ -187,25 +187,25 @@
   - UplinkWeaponry
   conditions:
   - !type:StoreWhitelistCondition
-    blacklist:
+    whitelist: # Trauma - move big guns to nukies
       tags:
       - NukeOpsUplink
 
-- type: listing
-  id: UplinkBulldogBundle
-  name: uplink-bulldog-bundle-name
-  description: uplink-bulldog-bundle-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/bulldog.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledShotgun
-  cost:
-    Telecrystal: 100 # Trauma - was 20, 5x
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
+# - type: listing - Trauma
+#   id: UplinkBulldogBundle
+#   name: uplink-bulldog-bundle-name
+#   description: uplink-bulldog-bundle-desc
+#   icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/bulldog.rsi, state: icon }
+#   productEntity: ClothingBackpackDuffelSyndicateFilledShotgun
+#   cost:
+#     Telecrystal: 100 # Trauma - was 20, 5x
+#   categories:
+#   - UplinkWeaponry
+#   conditions:
+#   - !type:StoreWhitelistCondition
+#     whitelist:
+#       tags:
+#       - NukeOpsUplink
 
 - type: listing
   id: UplinkEstocBundle
@@ -235,26 +235,26 @@
   - UplinkWeaponry
   conditions:
   - !type:StoreWhitelistCondition
-    blacklist:
+    whitelist: # Trauma
       tags:
       - NukeOpsUplink
 
 
-- type: listing
-  id: UplinkGrenadeLauncherBundle
-  name: uplink-grenade-launcher-bundle-name
-  description: uplink-grenade-launcher-bundle-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Launchers/china_lake.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
-  cost:
-    Telecrystal: 150 # goob
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
+# - type: listing - Trauma
+#   id: UplinkGrenadeLauncherBundle
+#   name: uplink-grenade-launcher-bundle-name
+#   description: uplink-grenade-launcher-bundle-desc
+#   icon: { sprite: /Textures/Objects/Weapons/Guns/Launchers/china_lake.rsi, state: icon }
+#   productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
+#   cost:
+#     Telecrystal: 150 # goob
+#   categories:
+#   - UplinkWeaponry
+#   conditions:
+#   - !type:StoreWhitelistCondition
+#     whitelist:
+#       tags:
+#       - NukeOpsUplink
 
 - type: listing
   id: UplinkL6Saw #goob
@@ -266,6 +266,13 @@
     Telecrystal: 100 # goob
   categories:
   - UplinkWeaponry
+  # <Trauma>
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+  # </Trauma>
 
 # Explosives
 
@@ -399,7 +406,7 @@
   description: uplink-emp-grenade-desc
   productEntity: EmpGrenade
   cost:
-    Telecrystal: 4 # goob - implanter is 10 and infintely better lmao
+    Telecrystal: 5 # goob - implanter is 10 and infintely better lmao
   categories:
   - UplinkExplosives
   conditions: # Goob, two times cheaper for nukies
@@ -486,10 +493,10 @@
   id: UplinkPistol9mmMagazine
   name: uplink-pistol-magazine-name
   description: uplink-pistol-magazine-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base-icon }
-  productEntity: MagazinePistolHighCapacity
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
+  productEntity: MagazinePistol # Trauma
   cost:
-    Telecrystal: 2 # goob - Ammo should be cheap.
+    Telecrystal: 6
   categories:
   - UplinkAmmo
 
@@ -501,7 +508,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistolSubMachineGun
   cost:
-    Telecrystal: 5 # Trauma - was 2, cheaper and 5x: Ammo should be cheap. 96 dmg per TC.
+    Telecrystal: 10 # Trauma - was 2
   categories:
   - UplinkAmmo
 
@@ -516,6 +523,13 @@
     Telecrystal: 5 # Trauma - was 2, cheaper and 5x
   categories:
   - UplinkAmmo
+  # <Trauma>
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+  # </Trauma>
 
 - type: listing
   id: UplinkMagazineShotgunSlug
@@ -527,6 +541,13 @@
     Telecrystal: 4 # Trauma - was 2, cheaper (slug -1) and 5x
   categories:
   - UplinkAmmo
+  # <Trauma>
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+  # </Trauma>
 
 # For the Cobra
 - type: listing
@@ -536,7 +557,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: red-icon }
   productEntity: MagazinePistolCaselessRifle
   cost:
-    Telecrystal: 3 # goob
+    Telecrystal: 5
   categories:
   - UplinkAmmo
 
@@ -561,6 +582,13 @@
     Telecrystal: 5 # goob - on par with c20
   categories:
   - UplinkAmmo
+  # <Trauma>
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+  # </Trauma>
 
 # for the hristov
 - type: listing
@@ -724,10 +752,10 @@
       whitelist:
         tags:
           - NukeOpsUplink
-    - !type:BuyerWhitelistCondition
-      blacklist:
-        components:
-          - SurplusBundle
+    # - !type:BuyerWhitelistCondition # Trauma
+    #   blacklist:
+    #     components:
+    #       - SurplusBundle
 
 # Deception
 - type: listing
@@ -757,7 +785,7 @@
   description: uplink-stealth-box-desc
   productEntity: StealthBox
   cost:
-    Telecrystal: 20 # goob - 20 TC's a balance tier, and the stealth box's not good enough to lose a 20/40/80 TC item for.
+    Telecrystal: 15 #Trauma, reduce price of gimmick items
   categories:
   - UplinkDeception
 
@@ -1107,10 +1135,10 @@
     whitelist:
       tags:
       - NukeOpsUplink
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
+  # - !type:BuyerWhitelistCondition
+  #   blacklist:
+  #     components:
+  #     - SurplusBundle
 
 
 - type: listing
@@ -1858,10 +1886,10 @@
   categories:
   - UplinkPointless
   conditions:
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
+  # - !type:BuyerWhitelistCondition # Trauma
+  #   blacklist:
+  #     components:
+  #     - SurplusBundle
 
 - type: listing
   id: UplinkScarfSyndieRed

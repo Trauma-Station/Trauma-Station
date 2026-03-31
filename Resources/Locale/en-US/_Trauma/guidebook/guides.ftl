@@ -17,3 +17,7 @@ guide-entry-devil-clauses = Devil Clauses
 guide-entry-shadow-demon = Shadow Demon
 guide-entry-slasher = Slasher
 guide-entry-slaughter-demon = Slaughter Demon
+
+guide-entry-skills = Skills
+
+guide-entry-chaplain-nullrodforms = Nullrod Forms

@@ -1088,6 +1088,7 @@
   - type: MobPrice
     price: 3000 # it is a truly valuable creature
   - type: GhostRole
+    prob: 0 # Trauma
     name: ghost-role-information-smile-name
     description: ghost-role-information-smile-description
     rules: ghost-role-information-nonantagonist-rules

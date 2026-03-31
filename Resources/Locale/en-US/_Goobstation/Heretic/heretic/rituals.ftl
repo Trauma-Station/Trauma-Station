@@ -60,6 +60,7 @@ heretic-ritual-fail-sacrifice-ash = Not enough burning corpses.
 heretic-ritual-fail-sacrifice-blade = Not enough headless corpses..
 heretic-ritual-fail-sacrifice-rust = Not enough rotting or silicon corpses.
 heretic-ritual-fail-sacrifice-cosmos = Not enough star marked corpses.
+heretic-ritual-fail-sacrifice-lock = Some of them still have heart in their chest.
 heretic-ritual-fail-limit = You have reached a limit of items that this ritual provides.
 heretic-ritual-fail-no-lost-blades = No lost blades can be found.
 heretic-ritual-fail-already-ascended = You are already ascended.
@@ -67,6 +68,7 @@ heretic-ritual-fail-cannot-ascend = You cannot ascend.
 heretic-ritual-fail-cannot-ascend-objectives = You must complete your objectives in order to ascend.
 heretic-ritual-fail-lookup-empty = There's nothing on the rune.
 heretic-ritual-fail-ghoulify = There is no corpse to ghoulify.
+heretic-ritual-fail-no-id-card = Ritual requires ID card.
 
 ## side quests
 heretic-ritual-side-knowledge = Ritual of Knowledge

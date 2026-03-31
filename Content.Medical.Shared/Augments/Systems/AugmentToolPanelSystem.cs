@@ -22,17 +22,13 @@ public sealed class AugmentToolPanelSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
-    private EntityQuery<BodyPartComponent> _partQuery = default!;
-    private EntityQuery<ChildOrganComponent> _childQuery = default!;
-    private EntityQuery<HandsComponent> _handsQuery = default!;
+    [Dependency] private readonly EntityQuery<BodyPartComponent> _partQuery = default!;
+    [Dependency] private readonly EntityQuery<ChildOrganComponent> _childQuery = default!;
+    [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _partQuery = GetEntityQuery<BodyPartComponent>();
-        _childQuery = GetEntityQuery<ChildOrganComponent>();
-        _handsQuery = GetEntityQuery<HandsComponent>();
 
         SubscribeLocalEvent<AugmentToolPanelComponent, OrganDisabledEvent>(OnOrganDisabled);
         SubscribeLocalEvent<AugmentToolPanelActiveItemComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
@@ -74,7 +70,7 @@ public sealed class AugmentToolPanelSystem : EntitySystem
         if (!_handsQuery.TryComp(body, out var handsComp))
             return;
 
-        if (_childQuery.Comp(augment).Parent is not {} partUid)
+        if (_childQuery.Comp(augment).Parent is not {} partUid || TerminatingOrDeleted(partUid))
             return;
 
         // the arm's symmetry is the same as the hand

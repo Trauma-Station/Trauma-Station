@@ -49,7 +49,7 @@ public sealed class SummonVoidCreatureSystem : EntitySystem
     private void OnChooseVoidCreature(Entity<ChooseVoidCreatureComponent> ent, ref ChooseVoidCreatureEvent args)
     {
         _ui.TryToggleUi(ent.Owner, RadialSelectorUiKey.Key, ent.Owner);
-        _ui.SetUiState(ent.Owner, RadialSelectorUiKey.Key, new TrackedRadialSelectorState(ent.Comp.AvailableSummons));
+        _ui.SetUiState(ent.Owner, RadialSelectorUiKey.Key, new RadialSelectorState(ent.Comp.AvailableSummons));
     }
 
     private void OnSummonVoidCreatureSelected(Entity<ChooseVoidCreatureComponent> ent, ref RadialSelectorSelectedMessage args)

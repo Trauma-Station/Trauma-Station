@@ -27,16 +27,16 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
         _window.ReloadVerbs(_protomanager);
         _window.AddVerbs();
 
-        // GabyStation start Radio icons
+        // <Trauma>
         _window.ReloadJobIcons();
         _window.AddJobIcons();
-        // GabyStation end Radio icons
+        _window.OnJobIconChanged += id => SendMessage(new VoiceMaskChangeJobIconMessage(id));
+        // </Trauma>
 
         _window.OnNameChange += OnNameSelected;
         _window.OnVerbChange += verb => SendMessage(new VoiceMaskChangeVerbMessage(verb));
         _window.OnToggle += OnToggle;
         _window.OnAccentToggle += OnAccentToggle;
-        _window.OnJobIconChanged += id => SendMessage(new VoiceMaskChangeJobIconMessage(id)); // Goob
     }
 
     private void OnNameSelected(string name)
@@ -62,7 +62,7 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
         }
 
         _window.UpdateState(cast.Name, cast.Verb, cast.Active, cast.AccentHide);
-        _window.SetCurrentJobIcon(cast.JobIcon); // GabyStation -> Radio icons
+        _window.SetCurrentJobIcon(cast.JobIcon); // Trauma
     }
 
     protected override void Dispose(bool disposing)

@@ -96,11 +96,13 @@ public sealed partial class PendingPirateRuleSystem : GameRuleSystem<PendingPira
             var reason = Loc.GetString($"pirates-ransom-{announcer}-desc", ("num", price));
             var requester = Loc.GetString($"pirates-announcer-{announcer}");
 
-            var ransom = new CargoOrderData(orderId, component.RansomPrototype, name, price, 1, requester, reason, bank.PrimaryAccount, 30);
+            /* TODO: update this dogshit
+            var ransom = new CargoOrderData(orderId, component.RansomPrototype, 1, requester, reason, bank.PrimaryAccount);
 
             component.Order = ransom;
 
             _cargo.TryAddOrder(station.Value, bank.PrimaryAccount, ransom, cargoDb);
+            */
         }
 
         SendAnnouncement((uid, component), AnnouncementType.Threat);

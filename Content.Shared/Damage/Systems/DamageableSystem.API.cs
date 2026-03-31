@@ -161,7 +161,6 @@ public sealed partial class DamageableSystem
         if (damage.Empty)
             return damageDone;
 
-        var vitalDamage = GetVitalDamage(damage); // Goob
         var before = new BeforeDamageChangedEvent(damage, origin,
             false, canBeCancelled, targetPart); // Shitmed
         RaiseLocalEvent(ent, ref before);
@@ -170,25 +169,6 @@ public sealed partial class DamageableSystem
             return damageDone;
 
         damage = before.Damage; // Trauma
-
-        // <Goob> - For entities with a body, route damage through body parts and then sum it up
-        if (_bodyQuery.HasComp(ent))
-        {
-            damage -= vitalDamage;
-            damage.TrimZeros();
-
-            var appliedDamage = ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
-                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
-
-            var appliedVitalDamage = ApplyDamageToBodyParts(ent, vitalDamage, origin, ignoreResistances,
-                interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
-
-            damageDone += appliedDamage;
-            damageDone += appliedVitalDamage;
-
-            return damageDone;
-        }
-        // </Goob>
 
         // Apply resistances
         if (!ignoreResistances)
@@ -247,6 +227,14 @@ public sealed partial class DamageableSystem
                 return damageDone;
         }
 
+        // <Goob> - For entities with a body, route damage through body parts. no damage is added to the body's DamageableComponent
+        if (_bodyQuery.HasComp(ent))
+        {
+            return ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
+                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
+        }
+        // </Goob>
+
         if (!ignoreGlobalModifiers)
             damage = ApplyUniversalAllModifiers(damage);
 
@@ -274,10 +262,10 @@ public sealed partial class DamageableSystem
         }
 
         // <Shitmed> - add ignoreGlobalModifiers, check woundable
-        if (damageDone.Empty)
-            return damageDone;
+        // if (damageDone.Empty)
+        //    return damageDone;
 
-        OnEntityDamageChanged((ent, ent.Comp), damageDone, interruptsDoAfters, origin, ignoreGlobalModifiers);
+        OnEntityDamageChanged((ent, ent.Comp), damageDone, interruptsDoAfters, origin, ignoreGlobalModifiers, damage);
         if (_body.GetBody(ent) is {} parentBody)
         {
             // This means that the damaged part was a woundable
@@ -436,10 +424,11 @@ public sealed partial class DamageableSystem
 
         var damage = new DamageSpecifier();
         damage.DamageDict.EnsureCapacity(groupProto.DamageTypes.Count);
+        var allDamage = GetAllDamage(ent.AsNullable()); // Trauma
 
         foreach (var damageId in groupProto.DamageTypes)
         {
-            if (!ent.Comp.Damage.DamageDict.TryGetValue(damageId, out var value))
+            if (!allDamage.DamageDict.TryGetValue(damageId, out var value)) // Trauma - use allDamage from above
                 continue;
             if (value > FixedPoint2.Zero)
                 damage.DamageDict.Add(damageId, value);
@@ -456,9 +445,12 @@ public sealed partial class DamageableSystem
     public DamageSpecifier GetPositiveDamage(Entity<DamageableComponent> ent)
     {
         var damage = new DamageSpecifier();
-        damage.DamageDict.EnsureCapacity(ent.Comp.Damage.DamageDict.Count);
+        // <Trauma> - use GetAllDamage not comp.Damage
+        var allDamage = GetAllDamage(ent.AsNullable());
+        damage.DamageDict.EnsureCapacity(allDamage.DamageDict.Count);
 
-        foreach (var (damageId, value) in ent.Comp.Damage.DamageDict)
+        foreach (var (damageId, value) in allDamage.DamageDict)
+        // </Trauma>
         {
             if (value > FixedPoint2.Zero)
                 damage.DamageDict.Add(damageId, value);
@@ -620,7 +612,7 @@ public sealed partial class DamageableSystem
     [Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")]
     public IReadOnlyDictionary<ProtoId<DamageGroupPrototype>, FixedPoint2> GetDamagePerGroup(Entity<DamageableComponent?> ent)
     {
-        if (!_damageableQuery.Resolve(ent, ref ent.Comp))
+        if (!_damageableQuery.Resolve(ent, ref ent.Comp, false)) // Trauma - no log error
             return new Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2>();
 
         // <Trauma> - let body handle it

@@ -12,9 +12,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Atmos.Components;
-using Content.Server.Atmos.Piping.Components;
 using Content.Shared.Atmos;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Atmos.Components;
 
 namespace Content.Server.Atmos.EntitySystems;
 

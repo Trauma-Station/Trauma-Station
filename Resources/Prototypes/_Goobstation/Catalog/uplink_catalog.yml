@@ -92,16 +92,6 @@
     -  UplinkDisruption
 
 - type: listing
-  id: UplinkRemoteSignallerAdvanced
-  name: uplink-signaller-name
-  description: uplink-signaller-desc
-  productEntity: RemoteSignallerAdvanced
-  cost:
-    Telecrystal: 8
-  categories:
-    -  UplinkDisruption
-
-- type: listing
   id: UplinkSarinGasGrenade
   name: uplink-sarin-gas-grenade-name
   description: uplink-sarin-gas-grenade-desc
@@ -349,6 +339,11 @@
     Telecrystal: 100 # don't kill me piras
   categories:
   - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkBowHardlight
@@ -366,16 +361,16 @@
       tags:
       - NukeOpsUplink
 
-- type: listing
-  id: UplinkDualettaBundle
-  name: uplink-dualetta-bundle-name
-  description: uplink-dualetta-bundle-desc
-  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Pistols/Dualetta.rsi, state: icon }
-  productEntity: BriefcaseSyndieDualettaBundleFilled
-  cost:
-    Telecrystal: 50
-  categories:
-  - UplinkWeaponry
+# - type: listing - Miserable to fight against
+#   id: UplinkDualettaBundle
+#   name: uplink-dualetta-bundle-name
+#   description: uplink-dualetta-bundle-desc
+#   icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Pistols/Dualetta.rsi, state: icon }
+#   productEntity: BriefcaseSyndieDualettaBundleFilled
+#   cost:
+#     Telecrystal: 50
+#   categories:
+#   - UplinkWeaponry
 
 - type: listing
   id: UplinkPistolAnaconda
@@ -403,17 +398,6 @@
     - UplinkWeaponry
 
 # Wearables
-
-- type: listing
-  id: UplinkClothingDreadnought
-  name: uplink-hardsuit-cybersun-dreadnought-name
-  description: uplink-hardsuit-cybersun-dreadnought-desc
-  icon: { sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/dreadnought.rsi, state: icon }
-  productEntity: CrateSyndicateDreadnought
-  cost:
-    Telecrystal: 150
-  categories:
-  - UplinkWearables
 
 - type: listing
   id: UplinkClothingBeltMilitaryRigGrenadier
@@ -538,7 +522,7 @@
   icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Melee/hisgrace.rsi, state: icon }
   productEntity: HisGrace
   cost:
-    Telecrystal: 100
+    Telecrystal: 125
   categories:
   - UplinkJob
   conditions:
@@ -1016,6 +1000,11 @@
     Telecrystal: 12 # Buying granades this way is ~14% cheaper than getting them from china-lake bundles
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkGrenadeFrag
@@ -1027,6 +1016,11 @@
     Telecrystal: 12 # Buying granades this way is ~14% cheaper than getting them from china-lake bundles
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkGrenadeMPAPERS
@@ -1038,6 +1032,11 @@
     Telecrystal: 3
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkMagazineLightRifleBox
@@ -1049,6 +1048,11 @@
     Telecrystal: 20
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkMagazineHighCaliber
@@ -1060,6 +1064,11 @@
     Telecrystal: 8
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkMagazineHighCaliberExplosive
@@ -1071,6 +1080,11 @@
     Telecrystal: 12
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 #- type: listing # A box, really? Why not like... mags?
 #  id: UplinkHighCaliberBox
@@ -1109,10 +1123,10 @@
   id: UplinkHighCapacityMagazinePistol
   name: uplink-highcap-pistol-mag-name
   description: uplink-highcap-pistol-mag-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base }
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base-icon }
   productEntity: MagazinePistolHighCapacity
   cost:
-    Telecrystal: 3
+    Telecrystal: 7
   categories:
   - UplinkAmmo
 
@@ -1126,11 +1140,6 @@
     Telecrystal: 25 # Same as what it was before being removed
   categories:
   - UplinkDisruption
-  conditions:
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
 
 - type: listing
   id: UplinkSyndicateWeaponModuleAdvanced
@@ -1313,7 +1322,7 @@
   description: uplink-dimension-pot-desc
   productEntity: DimensionPot
   cost:
-    Telecrystal: 40
+    Telecrystal: 15
   categories:
   - UplinkDeception
 
@@ -1345,10 +1354,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
 
 - type: listing
   id: UplinkEnergyPickaxe

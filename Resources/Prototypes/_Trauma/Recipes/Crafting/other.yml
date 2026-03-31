@@ -19,3 +19,27 @@
   objectType: Item
   theory:
     RevolutionaryKnowledge: 3
+
+- type: construction
+  id: Bracing
+  graph: Bracing
+  startNode: start
+  targetNode: finish
+  category: construction-category-tools
+  objectType: Item
+  theory:
+    MaterialsKnowledge: 1
+    FabricationKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: Whetstone
+  graph: Whetstone
+  startNode: start
+  targetNode: finish
+  category: construction-category-tools
+  objectType: Item
+  theory:
+    MaterialsKnowledge: 1
+    FabricationKnowledge: 1
+  useQuality: false

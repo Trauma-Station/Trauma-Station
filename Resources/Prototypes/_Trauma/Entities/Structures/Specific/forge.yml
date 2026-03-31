@@ -1,0 +1,87 @@
+- type: entity
+  parent: BaseStructure
+  id: CharcoalForgeUnlit
+  name: unlit charcoal forge
+  description: A charcoal forge, will burn for a long time when lit.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Forging/forge.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: cold
+  - type: Fixtures
+    fixtures:
+      itemcollide:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.14,-0.05,0.15,0.25"
+        layer:
+        - HighImpassable
+        hard: false
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.14,-0.05,0.15,0.25"
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetSteel1:
+              min: 2
+              max: 3
+            Charcoal1:
+              min: 5
+              max: 7
+  - type: Construction
+    graph: CharcoalForge
+    node: unlit
+  - type: Clickable
+  - type: InteractionOutline
+
+- type: entity
+  parent: CharcoalForgeUnlit
+  id: CharcoalForgeLit
+  name: charcoal forge
+  description: A charcoal forge, it will be burning for quite some time.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Forging/forge.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: burning
+  - type: SolutionHeater
+    heatPerSecond: 160
+  - type: Construction
+    graph: CharcoalForge
+    node: lit
+  - type: ItemSlotHeater
+    slot: ItemCabinet
+    temp: 50000
+    maxTemp: 4000
+  - type: ContainerContainer
+    containers:
+      ItemCabinet: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      ItemCabinet:
+        insertSound:
+          path: /Audio/Effects/Vehicle/vehiclestartup.ogg
+        ejectSound:
+          path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
+        ejectOnInteract: true
+        whitelist:
+          components:
+          - InternalTemperature

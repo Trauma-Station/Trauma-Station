@@ -10,3 +10,16 @@
         children:
         - id: WeaponLaserSidearm
           amount: 3
+
+- type: entity
+  parent: CrateSecgear
+  id: CrateSecurityGunpowder
+  name: gunpowder crate
+  description: Contains one shipment of gunpowder. Requires security access to open.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: GunpowderCase
+          amount: 1

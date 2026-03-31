@@ -1,0 +1,36 @@
+# Make a ton more jobs available and infinite interns on very high pop
+- type: jobSlotsOverride
+  id: HighPop
+  min: 85
+  jobs:
+    # Silicon
+    Borg: 4
+    # Service
+    Bartender: 3
+    Botanist: 5
+    Chef: 4
+    ServiceWorker: -1
+    # Engineering
+    AtmosphericTechnician: 5
+    StationEngineer: 8
+    TechnicalAssistant: -1
+    # Medical
+    MedicalDoctor: 10
+    Paramedic: 4
+    MedicalIntern: -1
+    # Science
+    Scientist: 10
+    Geneticist: 3
+    ResearchAssistant: -1
+    # Security
+    SecurityCadet: -1
+    # Cargo
+    SalvageSpecialist: 8
+    CargoTechnician: -1
+    # Civilian
+    Clown: 2 # prepare for trouble
+    Mime: 2 # and make it double!
+    Musician: 3
+    Janitor: -1 # fuck it clean everything
+    Librarian: 2
+    Lawyer: 3

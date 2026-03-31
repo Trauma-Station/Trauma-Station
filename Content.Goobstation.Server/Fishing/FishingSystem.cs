@@ -141,6 +141,9 @@ public sealed class FishingSystem : SharedFishingSystem
         var fish = Spawn(fishId, position);
         // Throw da fish back to the player because it looks funny
         var direction = Xform.GetWorldPosition(target) - Xform.GetWorldPosition(fish);
+        if (direction == Vector2.Zero)
+            return;
+
         var length = direction.Length();
         var distance = Math.Clamp(length, 0.5f, 15f);
         direction *= distance / length;

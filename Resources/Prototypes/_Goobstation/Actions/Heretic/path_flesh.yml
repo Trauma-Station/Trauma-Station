@@ -20,7 +20,11 @@
       state: flesh_surgery
     checkCanInteract: true
   - type: InstantAction
-    event: !type:EventHereticFleshSurgery
+    event: !type:TouchSpellEvent
+      touchSpell: TouchSpellFleshSurgery
+      touchSpellWhitelist:
+        components:
+        - FleshSurgery
   - type: HereticAction
   - type: Tag
     tags:

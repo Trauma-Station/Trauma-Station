@@ -1,0 +1,130 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
+using Content.Goobstation.Common.Bloodstream;
+using Content.Goobstation.Shared.Clothing;
+using Content.Medical.Shared.Wounds;
+using Content.Shared.Body;
+using Content.Shared.Damage.Events;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
+using Content.Trauma.Server.Heretic.Components.PathSpecific;
+
+namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
+
+public sealed class ChampionStanceSystem : EntitySystem
+{
+    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<ChampionStanceComponent, DamageModifyEvent>(OnDamageModify);
+        SubscribeLocalEvent<ChampionStanceComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
+        SubscribeLocalEvent<ChampionStanceComponent, GetBloodlossDamageMultiplierEvent>(OnGetBloodlossMultiplier);
+        SubscribeLocalEvent<ChampionStanceComponent, ComponentStartup>(OnChampionStartup);
+        SubscribeLocalEvent<ChampionStanceComponent, ComponentShutdown>(OnChampionShutdown);
+        SubscribeLocalEvent<ChampionStanceComponent, ModifySlowOnDamageSpeedEvent>(OnChampionModifySpeed);
+        SubscribeLocalEvent<ChampionStanceComponent, OrganInsertedIntoEvent>(OnOrganInsertedInto);
+        SubscribeLocalEvent<ChampionStanceComponent, OrganRemovedFromEvent>(OnOrganRemovedFrom);
+        SubscribeLocalEvent<ChampionStanceComponent, DelayedKnockdownAttemptEvent>(OnDelayedKnockdownAttempt);
+    }
+
+    private void OnDelayedKnockdownAttempt(Entity<ChampionStanceComponent> ent,
+        ref DelayedKnockdownAttemptEvent args)
+    {
+        if (!Condition(ent))
+            return;
+
+        args.Cancel();
+    }
+
+    private void OnChampionModifySpeed(Entity<ChampionStanceComponent> ent, ref ModifySlowOnDamageSpeedEvent args)
+    {
+        var dif = 1f - args.Speed;
+        if (dif <= 0f)
+            return;
+
+        // reduces the slowness modifier by the given coefficient
+        args.Speed += dif * 0.5f;
+    }
+
+    private void OnChampionShutdown(Entity<ChampionStanceComponent> ent, ref ComponentShutdown args)
+    {
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void OnChampionStartup(Entity<ChampionStanceComponent> ent, ref ComponentStartup args)
+    {
+        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void OnGetBloodlossMultiplier(Entity<ChampionStanceComponent> ent,
+        ref GetBloodlossDamageMultiplierEvent args)
+    {
+        args.Multiplier *= 0.5f;
+    }
+
+    public bool Condition(Entity<ChampionStanceComponent> ent)
+    {
+        if (!TryComp(ent, out MobThresholdsComponent? thresholdComp))
+            return false;
+
+        if (!_threshold.TryGetThresholdForState(ent, MobState.SoftCrit, out var threshold, thresholdComp) &&
+            !_threshold.TryGetThresholdForState(ent, MobState.Critical, out threshold, thresholdComp) &&
+            !_threshold.TryGetThresholdForState(ent, MobState.Dead, out threshold, thresholdComp))
+            return false;
+
+        return _threshold.CheckVitalDamage(ent.Owner) >= threshold.Value * 0.5f;
+    }
+
+    private void OnDamageModify(Entity<ChampionStanceComponent> ent, ref DamageModifyEvent args)
+    {
+        if (!Condition(ent))
+            return;
+
+        var dict = args.OriginalDamage.DamageDict.ToDictionary();
+        foreach (var key in dict.Keys)
+        {
+            if (args.OriginalDamage.WoundSeverityMultipliers.TryGetValue(key, out var existing))
+                dict[key] = existing * 0.5f;
+            else
+                dict[key] = 0.5f;
+        }
+
+        args.Damage.WoundSeverityMultipliers = dict;
+    }
+
+    private void OnBeforeStaminaDamage(Entity<ChampionStanceComponent> ent, ref BeforeStaminaDamageEvent args)
+    {
+        if (!Condition(ent))
+            return;
+
+        args.Value *= 0.5f;
+    }
+
+    private void OnOrganInsertedInto(Entity<ChampionStanceComponent> ent, ref OrganInsertedIntoEvent args)
+    {
+        // can't touch this
+        if (!TryComp(args.Organ, out WoundableComponent? woundable))
+            return;
+
+        woundable.CanRemove = false;
+        Dirty(args.Organ, woundable);
+    }
+
+    private void OnOrganRemovedFrom(Entity<ChampionStanceComponent> ent, ref OrganRemovedFromEvent args)
+    {
+        // can touch this
+        if (!TryComp(args.Organ, out WoundableComponent? woundable))
+            return;
+
+        woundable.CanRemove = true;
+        Dirty(args.Organ, woundable);
+    }
+}

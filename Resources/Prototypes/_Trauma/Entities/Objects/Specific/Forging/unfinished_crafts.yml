@@ -1,0 +1,3112 @@
+# Base
+
+- type: entity
+  parent: [BaseForgeItemHot, BrassOverheatable]
+  id: BaseBrassUnfinishedHot
+  abstract: true
+  description: Finish it by smashing it into shape with a hammer!
+  components:
+  - type: Temperature
+    currentTemperature: 1560
+  - type: ChangeOnCool
+    coolTemp: 1460
+    cooledPrototype: BrassIngotIntermediarytoCold
+  - type: Sprite
+    state: ingot_brass_hot
+  - type: Damageable
+
+- type: entity
+  parent: [BaseForgeItemHot, SteelOverheatable]
+  id: BaseSteelUnfinishedHot
+  abstract: true
+  description: Finish it by smashing it into shape with a hammer!
+  components:
+  - type: Temperature
+    currentTemperature: 2300
+  - type: ChangeOnCool
+    coolTemp: 2275
+    cooledPrototype: SteelIngotIntermediarytoCold
+  - type: Sprite
+    state: ingot_steel_hot
+  - type: Damageable
+
+- type: entity
+  parent: [BaseForgeItemHot, PlasteelOverheatable]
+  id: BasePlasteelUnfinishedHot
+  abstract: true
+  description: Finish it by smashing it into shape with a hammer!
+  components:
+  - type: Temperature
+    currentTemperature: 2700
+  - type: ChangeOnCool
+    coolTemp: 2650
+    cooledPrototype: PlasteelIngotIntermediarytoCold
+  - type: Sprite
+    state: ingot_plasteel_hot
+  - type: Damageable
+
+- type: entity
+  parent: [BaseForgeItemHot, BrassOverheatable]
+  id: BaseBrassHot
+  abstract: true
+  description: Let it cool for a while or quench it.
+  components:
+  - type: Temperature
+    currentTemperature: 1560
+  - type: ChangeOnCool
+    coolTemp: 100
+  - type: Sprite
+    color: "#ff9d57"
+    shader: unshaded
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ff9d57"
+        shader: unshaded
+      right:
+      - state: inhand-right
+        color: "#ff9d57"
+        shader: unshaded
+
+- type: entity
+  parent: [BaseForgeItemHot, SteelOverheatable]
+  id: BaseSteelHot
+  abstract: true
+  description: Let it cool for a while or quench it.
+  components:
+  - type: Temperature
+    currentTemperature: 2300
+  - type: ChangeOnCool
+    coolTemp: 100
+  - type: Sprite
+    color: "#f7aa74"
+    shader: unshaded
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#f7aa74"
+        shader: unshaded
+      right:
+      - state: inhand-right
+        color: "#f7aa74"
+        shader: unshaded
+  - type: PointLight
+    radius: 1.4
+    energy: 7
+    color: "#f7aa74"
+
+- type: entity
+  parent: [BaseForgeItemHot, PlasteelOverheatable]
+  id: BasePlasteelHot
+  abstract: true
+  description: Let it cool for a while or quench it.
+  components:
+  - type: Temperature
+    currentTemperature: 2700
+  - type: ChangeOnCool
+    coolTemp: 100
+  - type: Sprite
+    color: "#d9b6f5"
+    shader: unshaded
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#d9b6f5"
+        shader: unshaded
+      right:
+      - state: inhand-right
+        color: "#d9b6f5"
+        shader: unshaded
+  - type: PointLight
+    radius: 1.4
+    energy: 7
+    color: "#d9b6f5"
+
+- type: entity
+  parent: BaseItem
+  id: BrassColor
+  abstract: true
+  components:
+  - type: Sprite
+    color: "#e79962"
+    state: icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#e79962"
+      right:
+      - state: inhand-right
+        color: "#e79962"
+
+- type: entity
+  parent: BaseItem
+  id: SteelColor
+  abstract: true
+  components:
+  - type: Sprite
+    color: "#d7dbe9"
+    state: icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#d7dbe9"
+      right:
+      - state: inhand-right
+        color: "#d7dbe9"
+
+- type: entity
+  parent: BaseItem
+  id: PlasteelColor
+  abstract: true
+  components:
+  - type: Sprite
+    color: "#dac7f5"
+    state: icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#dac7f5"
+      right:
+      - state: inhand-right
+        color: "#dac7f5"
+
+# Knife
+
+- type: entity
+  parent: BaseItem
+  id: BaseKnifeBladeHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseKnifeBlade
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: KnifeBladeBrassUnfinishedHot
+  name: unfinished brass knife blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          KnifeBladeBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseKnifeBladeHot, BaseBrassHot]
+  id: KnifeBladeBrassHot
+  name: hot brass knife blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: KnifeBladeBrass
+
+- type: entity
+  parent: [BaseKnifeBlade, BrassColor]
+  id: KnifeBladeBrass
+  name: brass knife blade
+  components:
+  - type: Tag
+    tags:
+      - KnifeBladeBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: KnifeBladeSteelUnfinishedHot
+  name: unfinished steel knife blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          KnifeBladeSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseKnifeBladeHot, BaseSteelHot]
+  id: KnifeBladeSteelHot
+  name: hot steel knife blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: KnifeBladeSteel
+
+- type: entity
+  parent: [BaseKnifeBlade, SteelColor]
+  id: KnifeBladeSteel
+  name: steel knife blade
+  components:
+  - type: Tag
+    tags:
+      - KnifeBladeSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: KnifeBladePlasteelUnfinishedHot
+  name: unfinished plasteel knife blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          KnifeBladePlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseKnifeBladeHot, BasePlasteelHot]
+  id: KnifeBladePlasteelHot
+  name: hot plasteel knife blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: KnifeBladePlasteel
+
+- type: entity
+  parent: [BaseKnifeBlade, PlasteelColor]
+  id: KnifeBladePlasteel
+  name: plasteel knife blade
+  components:
+  - type: Tag
+    tags:
+      - KnifeBladePlasteel
+# Hammer
+
+- type: entity
+  parent: BaseItem
+  id: BaseHammerHeadHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseHammerHead
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: HammerHeadBrassUnfinishedHot
+  name: unfinished brass hammer head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          HammerHeadBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseHammerHeadHot, BaseBrassHot]
+  id: HammerHeadBrassHot
+  name: hot brass hammer head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: HammerHeadBrass
+
+- type: entity
+  parent: [BaseHammerHead, BrassColor]
+  id: HammerHeadBrass
+  name: brass hammer head
+  components:
+  - type: Tag
+    tags:
+      - HammerHeadBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: HammerHeadSteelUnfinishedHot
+  name: unfinished steel hammer head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          HammerHeadSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseHammerHeadHot, BaseSteelHot]
+  id: HammerHeadSteelHot
+  name: hot steel hammer head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: HammerHeadSteel
+
+- type: entity
+  parent: [BaseHammerHead, SteelColor]
+  id: HammerHeadSteel
+  name: steel hammer head
+  components:
+  - type: Tag
+    tags:
+      - HammerHeadSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: HammerHeadPlasteelUnfinishedHot
+  name: unfinished plasteel hammer head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          HammerHeadPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseHammerHeadHot, BasePlasteelHot]
+  id: HammerHeadPlasteelHot
+  name: hot plasteel hammer head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: HammerHeadPlasteel
+
+- type: entity
+  parent: [BaseHammerHead, PlasteelColor]
+  id: HammerHeadPlasteel
+  name: plasteel hammer head
+  components:
+  - type: Tag
+    tags:
+      - HammerHeadPlasteel
+
+# Combat knife
+
+- type: entity
+  parent: BaseItem
+  id: BaseCombatKnifeBladeHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseCombatKnifeBlade
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: CombatKnifeBladeBrassUnfinishedHot
+  name: unfinished brass combat knife blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          CombatKnifeBladeBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseCombatKnifeBladeHot, BaseBrassHot]
+  id: CombatKnifeBladeBrassHot
+  name: hot brass combat knife blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: CombatKnifeBladeBrass
+
+- type: entity
+  parent: [BaseCombatKnifeBlade, BrassColor]
+  id: CombatKnifeBladeBrass
+  name: brass combat knife blade
+  components:
+  - type: Tag
+    tags:
+      - CombatKnifeBladeBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: CombatKnifeBladeSteelUnfinishedHot
+  name: unfinished steel combat knife blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          CombatKnifeBladeSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseCombatKnifeBladeHot, BaseSteelHot]
+  id: CombatKnifeBladeSteelHot
+  name: hot steel combat knife blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: CombatKnifeBladeSteel
+
+- type: entity
+  parent: [BaseCombatKnifeBlade, SteelColor]
+  id: CombatKnifeBladeSteel
+  name: steel combat knife blade
+  components:
+  - type: Tag
+    tags:
+      - CombatKnifeBladeSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: CombatKnifeBladePlasteelUnfinishedHot
+  name: unfinished plasteel combat knife blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          CombatKnifeBladePlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseCombatKnifeBladeHot, BasePlasteelHot]
+  id: CombatKnifeBladePlasteelHot
+  name: hot plasteel combat knife blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: CombatKnifeBladePlasteel
+
+- type: entity
+  parent: [BaseCombatKnifeBlade, PlasteelColor]
+  id: CombatKnifeBladePlasteel
+  name: plasteel combat knife blade
+  components:
+  - type: Tag
+    tags:
+      - CombatKnifeBladePlasteel
+
+#   - Cleaver
+
+- type: entity
+  parent: BaseItem
+  id: BaseCleaverBladeHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseCleaverBlade
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: CleaverBladeBrassUnfinishedHot
+  name: unfinished brass cleaver blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          CleaverBladeBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseCleaverBladeHot, BaseBrassHot]
+  id: CleaverBladeBrassHot
+  name: hot brass cleaver blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: CleaverBladeBrass
+
+- type: entity
+  parent: [BaseCleaverBlade, BrassColor]
+  id: CleaverBladeBrass
+  name: brass cleaver blade
+  components:
+  - type: Tag
+    tags:
+      - CleaverBladeBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: CleaverBladeSteelUnfinishedHot
+  name: unfinished steel cleaver blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          CleaverBladeSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseCleaverBladeHot, BaseSteelHot]
+  id: CleaverBladeSteelHot
+  name: hot steel cleaver blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: CleaverBladeSteel
+
+- type: entity
+  parent: [BaseCleaverBlade, SteelColor]
+  id: CleaverBladeSteel
+  name: steel cleaver blade
+  components:
+  - type: Tag
+    tags:
+      - CleaverBladeSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: CleaverBladePlasteelUnfinishedHot
+  name: unfinished plasteel cleaver blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          CleaverBladePlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseCleaverBladeHot, BasePlasteelHot]
+  id: CleaverBladePlasteelHot
+  name: hot plasteel cleaver blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: CleaverBladePlasteel
+
+- type: entity
+  parent: [BaseCleaverBlade, PlasteelColor]
+  id: CleaverBladePlasteel
+  name: plasteel cleaver blade
+  components:
+  - type: Tag
+    tags:
+      - CleaverBladePlasteel
+
+#   - KukriBlade
+
+- type: entity
+  parent: BaseItem
+  id: BaseKukriBladeHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseKukriBlade
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: KukriBladeBrassUnfinishedHot
+  name: unfinished brass kukri blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          KukriBladeBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseKukriBladeHot, BaseBrassHot]
+  id: KukriBladeBrassHot
+  name: hot brass kukri blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: KukriBladeBrass
+
+- type: entity
+  parent: [BaseKukriBlade, BrassColor]
+  id: KukriBladeBrass
+  name: brass kukri blade
+  components:
+  - type: Tag
+    tags:
+      - KukriBladeBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: KukriBladeSteelUnfinishedHot
+  name: unfinished steel kukri blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          KukriBladeSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseKukriBladeHot, BaseSteelHot]
+  id: KukriBladeSteelHot
+  name: hot steel kukri blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: KukriBladeSteel
+
+- type: entity
+  parent: [BaseKukriBlade, SteelColor]
+  id: KukriBladeSteel
+  name: steel kukri blade
+  components:
+  - type: Tag
+    tags:
+      - KukriBladeSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: KukriBladePlasteelUnfinishedHot
+  name: unfinished plasteel kukri blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          KukriBladePlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseKukriBladeHot, BasePlasteelHot]
+  id: KukriBladePlasteelHot
+  name: hot plasteel kukri blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: KukriBladePlasteel
+
+- type: entity
+  parent: [BaseKukriBlade, PlasteelColor]
+  id: KukriBladePlasteel
+  name: plasteel kukri blade
+  components:
+  - type: Tag
+    tags:
+      - KukriBladePlasteel
+
+#   - SurvivalKnife
+
+- type: entity
+  parent: BaseItem
+  id: BaseSurvivalKnifeHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseSurvivalKnife
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: SurvivalKnifeBrassUnfinishedHot
+  name: unfinished brass survival knife
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SurvivalKnifeBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseSurvivalKnifeHot, BaseBrassHot]
+  id: SurvivalKnifeBrassHot
+  name: hot brass survival knife
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: BrassForgeSurvivalKnife
+
+- type: entity
+  parent: [BaseSurvivalKnife, BrassColor]
+  id: SurvivalKnifeBrass
+  name: brass survival knife
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: SurvivalKnifeSteelUnfinishedHot
+  name: unfinished steel survival knife
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SurvivalKnifeSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseSurvivalKnifeHot, BaseSteelHot]
+  id: SurvivalKnifeSteelHot
+  name: hot steel survival knife
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: SteelForgeSurvivalKnife
+
+- type: entity
+  parent: [BaseSurvivalKnife, SteelColor]
+  id: SurvivalKnifeSteel
+  name: steel survival knife
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: SurvivalKnifePlasteelUnfinishedHot
+  name: unfinished plasteel survival knife
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SurvivalKnifePlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseSurvivalKnifeHot, BasePlasteelHot]
+  id: SurvivalKnifePlasteelHot
+  name: hot plasteel survival knife
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: PlasteelForgeSurvivalKnife
+
+- type: entity
+  parent: [BaseSurvivalKnife, PlasteelColor]
+  id: SurvivalKnifePlasteel
+  name: plasteel survival knife
+
+#   - Scredriver
+
+- type: entity
+  parent: BaseItem
+  id: BaseScrewdriverShankHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseScrewdriverShank
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: ScrewdriverShankBrassUnfinishedHot
+  name: unfinished brass screwdriver shank
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrewdriverShankBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseScrewdriverShankHot, BaseBrassHot]
+  id: ScrewdriverShankBrassHot
+  name: hot brass screwdriver shank
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ScrewdriverShankBrass
+
+- type: entity
+  parent: [BaseScrewdriverShank, BrassColor]
+  id: ScrewdriverShankBrass
+  name: brass screwdriver shank
+  components:
+  - type: Tag
+    tags:
+      - ScrewdriverShankBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: ScrewdriverShankSteelUnfinishedHot
+  name: unfinished steel screwdriver shank
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrewdriverShankSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseScrewdriverShankHot, BaseSteelHot]
+  id: ScrewdriverShankSteelHot
+  name: hot steel screwdriver shank
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ScrewdriverShankSteel
+
+- type: entity
+  parent: [BaseScrewdriverShank, SteelColor]
+  id: ScrewdriverShankSteel
+  name: steel screwdriver shank
+  components:
+  - type: Tag
+    tags:
+      - ScrewdriverShankSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: ScrewdriverShankPlasteelUnfinishedHot
+  name: unfinished plasteel screwdriver shank
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrewdriverShankPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseScrewdriverShankHot, BasePlasteelHot]
+  id: ScrewdriverShankPlasteelHot
+  name: hot plasteel screwdriver shank
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ScrewdriverShankPlasteel
+
+- type: entity
+  parent: [BaseScrewdriverShank, PlasteelColor]
+  id: ScrewdriverShankPlasteel
+  name: plasteel screwdriver shank
+  components:
+  - type: Tag
+    tags:
+      - ScrewdriverShankPlasteel
+
+#   - Crowbar
+
+- type: entity
+  parent: BaseItem
+  id: BaseCrowbarForgedHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseCrowbarForged
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: CrowbarForgedBrassUnfinishedHot
+  name: unfinished brass crowbar
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          CrowbarForgedBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseCrowbarForgedHot, BaseBrassHot]
+  id: CrowbarForgedBrassHot
+  name: hot brass crowbar
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: BrassForgeCrowbar
+
+- type: entity
+  parent: [BaseCrowbarForged, BrassColor]
+  id: CrowbarForgedBrass
+  name: brass crowbar
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: CrowbarForgedSteelUnfinishedHot
+  name: unfinished steel crowbar
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          CrowbarForgedSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseCrowbarForgedHot, BaseSteelHot]
+  id: CrowbarForgedSteelHot
+  name: hot steel crowbar
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: SteelForgeCrowbar
+
+- type: entity
+  parent: [BaseCrowbarForged, SteelColor]
+  id: CrowbarForgedSteel
+  name: steel crowbar
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: CrowbarForgedPlasteelUnfinishedHot
+  name: unfinished plasteel crowbar
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          CrowbarForgedPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseCrowbarForgedHot, BasePlasteelHot]
+  id: CrowbarForgedPlasteelHot
+  name: hot plasteel crowbar
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: PlasteelForgeCrowbar
+
+- type: entity
+  parent: [BaseCrowbarForged, PlasteelColor]
+  id: CrowbarForgedPlasteel
+  name: plasteel crowbar
+
+#   - Wrench
+
+- type: entity
+  parent: BaseItem
+  id: BaseWrenchForgedHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseWrenchForged
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: WrenchForgedBrassUnfinishedHot
+  name: unfinished brass wrench
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          WrenchForgedBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseWrenchForgedHot, BaseBrassHot]
+  id: WrenchForgedBrassHot
+  name: hot brass wrench
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: WrenchForgedBrass
+
+- type: entity
+  parent: [BaseWrenchForged, BrassColor]
+  id: WrenchForgedBrass
+  name: brass wrench
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: WrenchForgedSteelUnfinishedHot
+  name: unfinished steel wrench
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          WrenchForgedSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseWrenchForgedHot, BaseSteelHot]
+  id: WrenchForgedSteelHot
+  name: hot steel wrench
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: WrenchForgedSteel
+
+- type: entity
+  parent: [BaseWrenchForged, SteelColor]
+  id: WrenchForgedSteel
+  name: steel wrench
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: WrenchForgedPlasteelUnfinishedHot
+  name: unfinished plasteel wrench
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          WrenchForgedPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseWrenchForgedHot, BasePlasteelHot]
+  id: WrenchForgedPlasteelHot
+  name: hot plasteel wrench
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: WrenchForgedPlasteel
+
+- type: entity
+  parent: [BaseWrenchForged, PlasteelColor]
+  id: WrenchForgedPlasteel
+  name: plasteel wrench
+
+#   - Tiny
+
+- type: entity
+  parent: BaseItem
+  id: BaseTinyBladesHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseTinyBlades
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: TinyBladesBrassUnfinishedHot
+  name: unfinished brass tiny blades
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          TinyBladesBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseTinyBladesHot, BaseBrassHot]
+  id: TinyBladesBrassHot
+  name: hot brass tiny blades
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: TinyBladesBrass
+
+- type: entity
+  parent: [BaseTinyBlades, BrassColor]
+  id: TinyBladesBrass
+  name: brass tiny blades
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: TinyBladesSteelUnfinishedHot
+  name: unfinished steel tiny blades
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          TinyBladesSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseTinyBladesHot, BaseSteelHot]
+  id: TinyBladesSteelHot
+  name: hot steel tiny blades
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: TinyBladesSteel
+
+- type: entity
+  parent: [BaseTinyBlades, SteelColor]
+  id: TinyBladesSteel
+  name: steel tiny blades
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: TinyBladesPlasteelUnfinishedHot
+  name: unfinished plasteel tiny blades
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          TinyBladesPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseTinyBladesHot, BasePlasteelHot]
+  id: TinyBladesPlasteelHot
+  name: hot plasteel tiny blades
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: TinyBladesPlasteel
+
+- type: entity
+  parent: [BaseTinyBlades, PlasteelColor]
+  id: TinyBladesPlasteel
+  name: plasteel tiny blades
+
+#   - Arming
+
+- type: entity
+  parent: BaseItem
+  id: BaseSwordBladeHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseSwordBlade
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: SwordBladeBrassUnfinishedHot
+  name: unfinished brass blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SwordBladeBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseSwordBladeHot, BaseBrassHot]
+  id: SwordBladeBrassHot
+  name: hot brass blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: SwordBladeBrass
+
+- type: entity
+  parent: [BaseSwordBlade, BrassColor]
+  id: SwordBladeBrass
+  name: brass blade
+  components:
+  - type: Tag
+    tags:
+      - SwordBladeBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: SwordBladeSteelUnfinishedHot
+  name: unfinished steel blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SwordBladeSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseSwordBladeHot, BaseSteelHot]
+  id: SwordBladeSteelHot
+  name: hot steel blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: SwordBladeSteel
+
+- type: entity
+  parent: [BaseSwordBlade, SteelColor]
+  id: SwordBladeSteel
+  name: steel blade
+  components:
+  - type: Tag
+    tags:
+      - SwordBladeSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: SwordBladePlasteelUnfinishedHot
+  name: unfinished plasteel blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SwordBladePlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseSwordBladeHot, BasePlasteelHot]
+  id: SwordBladePlasteelHot
+  name: hot plasteel blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: SwordBladePlasteel
+
+- type: entity
+  parent: [BaseSwordBlade, PlasteelColor]
+  id: SwordBladePlasteel
+  name: plasteel blade
+  components:
+  - type: Tag
+    tags:
+      - SwordBladePlasteel
+#   - ChainMail
+
+- type: entity
+  parent: BaseItem
+  id: BaseChainMailSheetHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseChainMailSheet
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: ChainMailSheetBrassUnfinishedHot
+  name: unfinished brass chainmail sheet
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ChainMailBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseChainMailSheetHot, BaseBrassHot]
+  id: ChainMailBrassHot
+  name: hot brass chainmail sheet
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ChainMailSheetBrass
+
+- type: entity
+  parent: [BaseChainMailSheet, BrassColor]
+  id: ChainMailSheetBrass
+  name: brass chainmail sheet
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: ChainMailSheetSteelUnfinishedHot
+  name: unfinished steel chainmail sheet
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ChainMailSheetSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseChainMailSheetHot, BaseSteelHot]
+  id: ChainMailSheetSteelHot
+  name: hot steel chainmail sheet
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ChainMailSheetSteel
+
+- type: entity
+  parent: [BaseChainMailSheet, SteelColor]
+  id: ChainMailSheetSteel
+  name: steel chainmail sheet
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: ChainMailSheetPlasteelUnfinishedHot
+  name: unfinished plasteel chainmail sheet
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ChainMailSheetPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseChainMailSheetHot, BasePlasteelHot]
+  id: ChainMailSheetPlasteelHot
+  name: hot plasteel chainmail sheet
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ChainMailSheetPlasteel
+
+- type: entity
+  parent: [BaseChainMailSheet, PlasteelColor]
+  id: ChainMailSheetPlasteel
+  name: plasteel chainmail sheet
+
+#   - HalberdHead
+
+- type: entity
+  parent: BaseItem
+  id: BaseHalberdHeadHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseHalberdHead
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: HalberdHeadBrassUnfinishedHot
+  name: unfinished brass halberd head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          HalberdHeadBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseHalberdHeadHot, BaseBrassHot]
+  id: HalberdHeadBrassHot
+  name: hot brass halberd head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: HalberdHeadBrass
+
+- type: entity
+  parent: [BaseHalberdHead, BrassColor]
+  id: HalberdHeadBrass
+  name: brass halberd head
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: HalberdHeadSteelUnfinishedHot
+  name: unfinished steel halberd head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          HalberdHeadSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseHalberdHeadHot, BaseSteelHot]
+  id: HalberdHeadSteelHot
+  name: hot steel halberd head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: HalberdHeadSteel
+
+- type: entity
+  parent: [BaseHalberdHead, SteelColor]
+  id: HalberdHeadSteel
+  name: steel halberd head
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: HalberdHeadPlasteelUnfinishedHot
+  name: unfinished plasteel halberd head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          HalberdHeadPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseHalberdHeadHot, BasePlasteelHot]
+  id: HalberdHeadPlasteelHot
+  name: hot plasteel halberd head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: HalberdHeadPlasteel
+
+- type: entity
+  parent: [BaseHalberdHead, PlasteelColor]
+  id: HalberdHeadPlasteel
+  name: plasteel halberd head
+
+#   - LongswordBlade
+
+- type: entity
+  parent: BaseItem
+  id: BaseLongswordBladeHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseLongswordBlade
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: LongswordBladeBrassUnfinishedHot
+  name: unfinished brass long blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          LongswordBladeBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseLongswordBladeHot, BaseBrassHot]
+  id: LongswordBladeBrassHot
+  name: hot brass long blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: LongswordBladeBrass
+
+- type: entity
+  parent: [BaseLongswordBlade, BrassColor]
+  id: LongswordBladeBrass
+  name: brass long blade
+  components:
+  - type: Tag
+    tags:
+      - LongswordBladeBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: LongswordBladeSteelUnfinishedHot
+  name: unfinished steel long blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          LongswordBladeSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseLongswordBladeHot, BaseSteelHot]
+  id: LongswordBladeSteelHot
+  name: hot steel long blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: LongswordBladeSteel
+
+- type: entity
+  parent: [BaseLongswordBlade, SteelColor]
+  id: LongswordBladeSteel
+  name: steel long blade
+  components:
+  - type: Tag
+    tags:
+      - LongswordBladeSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: LongswordBladePlasteelUnfinishedHot
+  name: unfinished plasteel long blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          LongswordBladePlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseLongswordBladeHot, BasePlasteelHot]
+  id: LongswordBladePlasteelHot
+  name: hot plasteel long blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: LongswordBladePlasteel
+
+- type: entity
+  parent: [BaseLongswordBlade, PlasteelColor]
+  id: LongswordBladePlasteel
+  name: plasteel long blade
+  components:
+  - type: Tag
+    tags:
+      - LongswordBladePlasteel
+
+#   - PlateArmor
+
+- type: entity
+  parent: BaseItem
+  id: BaseMetalPlateHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseMetalPlate
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: MetalPlateBrassUnfinishedHot
+  name: unfinished brass plate
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          MetalPlateBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseMetalPlateHot, BaseBrassHot]
+  id: MetalPlateBrassHot
+  name: hot brass plate
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: MetalPlateBrass
+
+- type: entity
+  parent: [BaseMetalPlate, BrassColor]
+  id: MetalPlateBrass
+  name: brass plate
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: MetalPlateSteelUnfinishedHot
+  name: unfinished steel plate
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          MetalPlateSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseMetalPlateHot, BaseSteelHot]
+  id: MetalPlateSteelHot
+  name: hot steel plate
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: MetalPlateSteel
+
+- type: entity
+  parent: [BaseMetalPlate, SteelColor]
+  id: MetalPlateSteel
+  name: steel plate
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: MetalPlatePlasteelUnfinishedHot
+  name: unfinished plasteel plate
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          MetalPlatePlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseMetalPlateHot, BasePlasteelHot]
+  id: MetalPlatePlasteelHot
+  name: hot plasteel plate
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: MetalPlatePlasteel
+
+- type: entity
+  parent: [BaseMetalPlate, PlasteelColor]
+  id: MetalPlatePlasteel
+  name: plasteel plate
+
+#   - Warhammer
+
+- type: entity
+  parent: BaseItem
+  id: BaseWarhammerHeadHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseWarhammerHead
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: WarhammerHeadBrassUnfinishedHot
+  name: unfinished brass warhammer head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          WarhammerHeadBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseWarhammerHeadHot, BaseBrassHot]
+  id: WarhammerHeadBrassHot
+  name: hot brass warhammer head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: WarhammerHeadBrass
+
+- type: entity
+  parent: [BaseWarhammerHead, BrassColor]
+  id: WarhammerHeadBrass
+  name: brass warhammer head
+  components:
+  - type: Tag
+    tags:
+      - WarhammerHeadBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: WarhammerHeadSteelUnfinishedHot
+  name: unfinished steel warhammer head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          WarhammerHeadSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseWarhammerHeadHot, BaseSteelHot]
+  id: WarhammerHeadSteelHot
+  name: hot steel warhammer head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: WarhammerHeadSteel
+
+- type: entity
+  parent: [BaseWarhammerHead, SteelColor]
+  id: WarhammerHeadSteel
+  name: steel warhammer head
+  components:
+  - type: Tag
+    tags:
+      - WarhammerHeadSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: WarhammerHeadPlasteelUnfinishedHot
+  name: unfinished plasteel warhammer head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          WarhammerHeadPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseWarhammerHeadHot, BasePlasteelHot]
+  id: WarhammerHeadPlasteelHot
+  name: hot plasteel warhammer head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: WarhammerHeadPlasteel
+
+- type: entity
+  parent: [BaseWarhammerHead, PlasteelColor]
+  id: WarhammerHeadPlasteel
+  name: plasteel warhammer head
+  components:
+  - type: Tag
+    tags:
+      - WarhammerHeadPlasteel
+
+#   - PickaxeHead
+
+- type: entity
+  parent: BaseItem
+  id: BasePickaxeHeadHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BasePickaxeHead
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: PickaxeHeadBrassUnfinishedHot
+  name: unfinished brass pickaxe head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          PickaxeHeadBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BasePickaxeHeadHot, BaseBrassHot]
+  id: PickaxeHeadBrassHot
+  name: hot brass pickaxe head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: PickaxeHeadBrass
+
+- type: entity
+  parent: [BasePickaxeHead, BrassColor]
+  id: PickaxeHeadBrass
+  name: brass pickaxe head
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: PickaxeHeadSteelUnfinishedHot
+  name: unfinished steel pickaxe head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          PickaxeHeadSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BasePickaxeHeadHot, BaseSteelHot]
+  id: PickaxeHeadSteelHot
+  name: hot steel pickaxe head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: PickaxeHeadSteel
+
+- type: entity
+  parent: [BasePickaxeHead, SteelColor]
+  id: PickaxeHeadSteel
+  name: steel pickaxe head
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: PickaxeHeadPlasteelUnfinishedHot
+  name: unfinished plasteel pickaxe head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          PickaxeHeadPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BasePickaxeHeadHot, BasePlasteelHot]
+  id: PickaxeHeadPlasteelHot
+  name: hot plasteel pickaxe head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: PickaxeHeadPlasteel
+
+- type: entity
+  parent: [BasePickaxeHead, PlasteelColor]
+  id: PickaxeHeadPlasteel
+  name: plasteel pickaxe head
+
+#   - ThinBlade
+
+- type: entity
+  parent: BaseItem
+  id: BaseThinBladeHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseThinBlade
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: ThinBladeBrassUnfinishedHot
+  name: unfinished brass thin blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ThinBladeBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseThinBladeHot, BaseBrassHot]
+  id: ThinBladeBrassHot
+  name: hot brass thin blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ThinBladeBrass
+
+- type: entity
+  parent: [BaseThinBlade, BrassColor]
+  id: ThinBladeBrass
+  name: brass thin blade
+  components:
+  - type: Tag
+    tags:
+      - KatanaBladeBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: ThinBladeSteelUnfinishedHot
+  name: unfinished steel thin blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ThinBladeSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseThinBladeHot, BaseSteelHot]
+  id: ThinBladeSteelHot
+  name: hot steel thin blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ThinBladeSteel
+
+- type: entity
+  parent: [BaseThinBlade, SteelColor]
+  id: ThinBladeSteel
+  name: steel thin blade
+  components:
+  - type: Tag
+    tags:
+      - KatanaBladeSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: ThinBladePlasteelUnfinishedHot
+  name: unfinished plasteel thin blade
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ThinBladePlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseThinBladeHot, BasePlasteelHot]
+  id: ThinBladePlasteelHot
+  name: hot plasteel thin blade
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ThinBladePlasteel
+
+- type: entity
+  parent: [BaseThinBlade, PlasteelColor]
+  id: ThinBladePlasteel
+  name: plasteel thin blade
+  components:
+  - type: Tag
+    tags:
+      - KatanaBladePlasteel
+
+#   - ArrowHeads
+
+- type: entity
+  parent: BaseItem
+  id: BaseArrowHeadsHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseArrowHeads
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: ArrowHeadsBrassUnfinishedHot
+  name: unfinished brass arrow heads
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          Brassarrowheads:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseArrowHeadsHot, BaseBrassHot]
+  id: ArrowHeadsBrassHot
+  name: hot brass arrow heads
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ArrowHeadsBrass
+
+- type: entity
+  parent: [BaseArrowHeads, BrassColor]
+  id: ArrowHeadsBrass
+  name: brass arrow heads
+  components:
+  - type: Tag
+    tags:
+      - ArrowHeadBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: ArrowHeadsSteelUnfinishedHot
+  name: unfinished steel arrow heads
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          Steelarrowheads:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseArrowHeadsHot, BaseSteelHot]
+  id: ArrowHeadsSteelHot
+  name: hot steel arrow heads
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ArrowHeadsSteel
+
+- type: entity
+  parent: [BaseArrowHeads, SteelColor]
+  id: ArrowHeadsSteel
+  name: steel arrow heads
+  components:
+  - type: Tag
+    tags:
+      - ArrowHeadSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: ArrowHeadsPlasteelUnfinishedHot
+  name: unfinished plasteel arrow heads
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          Steelarrowheads:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseArrowHeadsHot, BasePlasteelHot]
+  id: ArrowHeadsPlasteelHot
+  name: hot plasteel arrow heads
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ArrowHeadsPlasteel
+
+- type: entity
+  parent: [BaseArrowHeads, PlasteelColor]
+  id: ArrowHeadsPlasteel
+  name: plasteel arrow heads
+  components:
+  - type: Tag
+    tags:
+      - ArrowHeadPlasteel
+
+#   - SpearHead
+
+- type: entity
+  parent: BaseItem
+  id: BaseSpearHeadHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseSpearHead
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: SpearHeadBrassUnfinishedHot
+  name: unfinished brass spear head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SpearHeadBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseSpearHeadHot, BaseBrassHot]
+  id: SpearHeadBrassHot
+  name: hot brass spear head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: SpearHeadBrass
+
+- type: entity
+  parent: [BaseSpearHead, BrassColor]
+  id: SpearHeadBrass
+  name: brass spear head
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: SpearHeadSteelUnfinishedHot
+  name: unfinished steel spear head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SpearHeadSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseSpearHeadHot, BaseSteelHot]
+  id: SpearHeadSteelHot
+  name: hot steel spear head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: SpearHeadSteel
+
+- type: entity
+  parent: [BaseSpearHead, SteelColor]
+  id: SpearHeadSteel
+  name: steel spear head
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: SpearHeadPlasteelUnfinishedHot
+  name: unfinished plasteel spear head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          SpearHeadPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseSpearHeadHot, BasePlasteelHot]
+  id: SpearHeadPlasteelHot
+  name: hot plasteel spear head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: SpearHeadPlasteel
+
+- type: entity
+  parent: [BaseSpearHead, PlasteelColor]
+  id: SpearHeadPlasteel
+  name: plasteel spear head
+
+#   - MorningStar
+- type: entity
+  parent: BaseItem
+  id: BaseMorningstarHeadHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseMorningstarHead
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: MorningstarHeadBrassUnfinishedHot
+  name: unfinished brass morningstar head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          MorningstarHeadBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseMorningstarHeadHot, BaseBrassHot]
+  id: MorningstarHeadBrassHot
+  name: hot brass morningstar head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: MorningstarHeadBrass
+
+- type: entity
+  parent: [BaseMorningstarHead, BrassColor]
+  id: MorningstarHeadBrass
+  name: brass morningstar head
+  components:
+  - type: Tag
+    tags:
+      - MorningstarHeadBrass
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: MorningstarHeadSteelUnfinishedHot
+  name: unfinished steel morningstar head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          MorningstarHeadSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseMorningstarHeadHot, BaseSteelHot]
+  id: MorningstarHeadSteelHot
+  name: hot steel morningstar head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: MorningstarHeadSteel
+
+- type: entity
+  parent: [BaseMorningstarHead, SteelColor]
+  id: MorningstarHeadSteel
+  name: steel morningstar head
+  components:
+  - type: Tag
+    tags:
+      - MorningstarHeadSteel
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: MorningstarHeadPlasteelUnfinishedHot
+  name: unfinished plasteel morningstar head
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          MorningstarHeadPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseMorningstarHeadHot, BasePlasteelHot]
+  id: MorningstarHeadPlasteelHot
+  name: hot plasteel morningstar head
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: MorningstarHeadPlasteel
+
+- type: entity
+  parent: [BaseMorningstarHead, PlasteelColor]
+  id: MorningstarHeadPlasteel
+  name: plasteel morningstar head
+  components:
+  - type: Tag
+    tags:
+      - MorningstarHeadPlasteel
+
+#   - ShieldBoss
+
+- type: entity
+  parent: BaseItem
+  id: BaseShieldBossHot
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi
+        state: icon
+        shader: unshaded
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BaseShieldBoss
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi
+
+- type: entity
+  parent: BaseBrassUnfinishedHot
+  id: ShieldBossBrassUnfinishedHot
+  name: unfinished brass shield boss
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ShieldBossBrassHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseShieldBossHot, BaseBrassHot]
+  id: ShieldBossBrassHot
+  name: hot brass shield boss
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ShieldBossBrass
+
+- type: entity
+  parent: [BaseShieldBoss, BrassColor]
+  id: ShieldBossBrass
+  name: brass shield boss
+
+- type: entity
+  parent: BaseSteelUnfinishedHot
+  id: ShieldBossSteelUnfinishedHot
+  name: unfinished steel shield boss
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ShieldBossSteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseShieldBossHot, BaseSteelHot]
+  id: ShieldBossSteelHot
+  name: hot steel shield boss
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ShieldBossSteel
+
+- type: entity
+  parent: [BaseShieldBoss, SteelColor]
+  id: ShieldBossSteel
+  name: steel shield boss
+
+- type: entity
+  parent: BasePlasteelUnfinishedHot
+  id: ShieldBossPlasteelUnfinishedHot
+  name: unfinished plasteel shield boss
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ShieldBossPlasteelHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: [BaseShieldBossHot, BasePlasteelHot]
+  id: ShieldBossPlasteelHot
+  name: hot plasteel shield boss
+  components:
+  - type: ChangeOnCool
+    cooledPrototype: ShieldBossPlasteel
+
+- type: entity
+  parent: [BaseShieldBoss, PlasteelColor]
+  id: ShieldBossPlasteel
+  name: plasteel shield boss

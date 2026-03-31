@@ -1,0 +1,487 @@
+# Cement
+- type: entity
+  parent: [ReagentPacketBase, ItemHeftyBase]
+  id: ReagentContainerCement
+  name: cement bag
+  description: A bag of cement, mix it with water to prepare it.
+  components:
+  - type: Appearance
+  - type: Item
+    size: Huge
+  - type: MultiHandedItem
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {state: "bag_open"} # open
+          False: {state: "bag_closed"} # closed
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    layers:
+    - state: bag_closed
+      map: ["enum.OpenableVisuals.Layer"]
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 200
+        reagents:
+        - ReagentId: Cement
+          Quantity: 200
+
+- type: entity
+  parent: BaseItem
+  id: WetCement
+  name: wet cement
+  description: Fresh cement, needs to be molded into bricks.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Materials/materials.rsi
+    state: cement
+  - type: Item
+    sprite: _Trauma/Objects/Materials/materials.rsi
+    size: Small
+    inhandVisuals:
+      left:
+      - state: brick-inhand-left
+      right:
+      - state: brick-inhand-right
+  - type: Tag
+    tags:
+    - Cement
+
+- type: entity
+  parent: BaseItem
+  id: WetBrick
+  name: wet brick
+  description: A newly made wet brick, leave it out to dry for a while.
+  components:
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 6000
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          Brick1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOverTime
+    damage:
+      types:
+        Slash: 30
+    interval: 1
+    ignoreResistances: true
+  - type: Sprite
+    sprite: _Trauma/Objects/Materials/materials.rsi
+    state: brick_wet
+  - type: Item
+    sprite: _Trauma/Objects/Materials/materials.rsi
+    size: Small
+    inhandVisuals:
+      left:
+      - state: brick-inhand-left
+      right:
+      - state: brick-inhand-right
+  - type: Construction
+    graph: WetBrick
+    node: finish
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        hard: false
+        layer:
+        - LowImpassable
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        density: 30
+        mask:
+        - ItemMask
+  - type: StepTrigger
+    intersectRatio: 0.2
+    triggerGroups:
+      types:
+      - Caltrop
+  - type: Slippery
+    slipSound:
+      path: /Audio/Effects/gib1.ogg
+    slipData:
+      launchForwardsMultiplier: 3
+  - type: TriggerOnStepTrigger
+  - type: DeleteOnTrigger
+  - type: SpawnOnTrigger
+    proto: WetCement
+# Handles
+
+- type: entity
+  parent: BaseItem
+  id: UnfinishedHandle
+  name: unfinished handle
+  description: An unfinished handle, use a knife to cut it into shape.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: unfinishedhandle
+  - type: Construction
+    graph: Handle
+    node: unfinishedhandle
+
+- type: entity
+  parent: BaseItem
+  id: HandleSmall
+  name: small handle
+  description: A small handle, suitable for small weapons and tools, like knives or screwdrivers.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: handlesmall
+  - type: Tag
+    tags:
+      - HandleSmall
+  - type: Construction
+    graph: Handle
+    node: handlesmall
+
+- type: entity
+  parent: BaseItem
+  id: HandleMedium
+  name: medium handle
+  description: A medium handle, suitable for medium sized weapons, such as morningstars and pickaxes. Can be cut down for smaller handles.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: handlemedium
+  - type: Tag
+    tags:
+      - HandleMedium
+  - type: Construction
+    graph: Handle
+    node: handlemedium
+
+- type: entity
+  parent: BaseItem
+  id: HandleLarge
+  name: large handle
+  description: A large handle, suitable for giant weapons such as halberds and spears. Can be cut down for smaller handles.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: handlelarge
+  - type: Tag
+    tags:
+      - HandleLarge
+  - type: Construction
+    graph: Handle
+    node: handlelarge
+
+# Anvil
+
+# Anvil Top
+
+- type: entity
+  parent: BaseForgeItemHot
+  id: AnvilTopUnfinishedHot
+  name: unfinished anvil top
+  description: Beat it into shape!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: anvil_top_unfinished_hot
+  - type: DamageOnHolding # Need immunity component for some gloves
+    enabled: true
+    damage:
+      types:
+        Heat: 15
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          AnvilTopHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Temperature
+    currentTemperature: 2300
+  - type: ChangeOnCool
+    coolTemp: 2000
+    cooledPrototype: AnvilTopUnfinishedIntermediarytoCold
+  - type: Construction
+    graph: AnvilTop
+    node: finish
+
+- type: entity  ## Needs these so it doesnt break everything sadly
+  parent: BaseForgeItemNoTemp
+  id: AnvilTopUnfinishedIntermediarytoHot
+  categories: [HideSpawnMenu]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: SpawnOnDespawn
+    prototype: AnvilTopUnfinishedHot
+  - type: Sprite
+    state: anvil_top_unfinished_hot
+
+- type: entity  ## Needs these so it doesnt break everything sadly
+  parent: BaseForgeItemNoTemp
+  id: AnvilTopUnfinishedIntermediarytoCold
+  categories: [HideSpawnMenu]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: SpawnOnDespawn
+    prototype: AnvilTopUnfinished
+  - type: Sprite
+    state: anvil_top_unfinished
+
+- type: entity
+  parent: BaseForgeItemCold
+  id: AnvilTopUnfinished
+  name: cold unfinished anvil top
+  description: It has grown too cold to work, warm it back up.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: anvil_top_unfinished
+  - type: Temperature
+    currentTemperature: 2000
+  - type: BurnableFood
+    burnTemp: 2300
+    burnedFoodPrototype: AnvilTopUnfinishedIntermediarytoCold
+
+- type: entity
+  parent: BaseForgeItemHot
+  id: AnvilTopHot
+  name: hot anvil top
+  description: The top part of an anvil, give it some time to cool down!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: anvil_top_hot
+  - type: DamageOnHolding # Need immunity component for some gloves
+    enabled: true
+    damage:
+      types:
+        Heat: 15
+  - type: Temperature
+    currentTemperature: 2300
+  - type: ChangeOnCool
+    coolTemp: 2000
+    cooledPrototype: AnvilTopIntermediarytoCold
+
+- type: entity  ## Needs these so it doesnt break everything sadly
+  parent: BaseForgeItemNoTemp
+  id: AnvilTopIntermediarytoHot
+  categories: [HideSpawnMenu]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: SpawnOnDespawn
+    prototype: AnvilTopHot
+  - type: Sprite
+    state: anvil_top_hot
+
+- type: entity  ## Needs these so it doesnt break everything sadly
+  parent: BaseForgeItemNoTemp
+  id: AnvilTopIntermediarytoCold
+  categories: [HideSpawnMenu]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: SpawnOnDespawn
+    prototype: AnvilTop
+  - type: Sprite
+    state: anvil_top
+
+- type: entity
+  parent: BaseForgeItemCold
+  id: AnvilTop
+  name: anvil top
+  description: The top part of an anvil.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: anvil_top
+  - type: Tag
+    tags:
+      - AnvilTop
+  - type: Temperature
+    currentTemperature: 2000
+  - type: BurnableFood
+    burnTemp: 2300
+    burnedFoodPrototype: AnvilTopIntermediarytoCold
+
+# Anvil Bottom
+
+- type: entity
+  parent: BaseForgeItemHot
+  id: AnvilBottomUnfinishedHot
+  name: unfinished anvil bottom
+  description: Beat it into shape!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: anvil_bottom_unfinished_hot
+  - type: DamageOnHolding # Need immunity component for some gloves
+    enabled: true
+    damage:
+      types:
+        Heat: 15
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          AnvilBottomHot:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Temperature
+    currentTemperature: 2300
+  - type: ChangeOnCool
+    coolTemp: 2000
+    cooledPrototype: AnvilBottomUnfinishedIntermediarytoCold
+  - type: Construction
+    graph: AnvilBottom
+    node: finish
+
+- type: entity  ## Needs these so it doesnt break everything sadly
+  parent: BaseForgeItemNoTemp
+  id: AnvilBottomUnfinishedIntermediarytoHot
+  categories: [HideSpawnMenu]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: SpawnOnDespawn
+    prototype: AnvilBottomUnfinishedHot
+  - type: Sprite
+    state: anvil_bottom_unfinished_hot
+
+- type: entity  ## Needs these so it doesnt break everything sadly
+  parent: BaseForgeItemNoTemp
+  id: AnvilBottomUnfinishedIntermediarytoCold
+  categories: [HideSpawnMenu]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: SpawnOnDespawn
+    prototype: AnvilBottomUnfinished
+  - type: Sprite
+    state: anvil_bottom_unfinished
+
+- type: entity
+  parent: BaseForgeItemCold
+  id: AnvilBottomUnfinished
+  name: cold unfinished anvil bottom
+  description: It has grown too cold to work, warm it back up.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: anvil_bottom_unfinished
+  - type: Temperature
+    currentTemperature: 2000
+  - type: BurnableFood
+    burnTemp: 2300
+    burnedFoodPrototype: AnvilBottomUnfinishedIntermediarytoHot
+
+- type: entity
+  parent: BaseForgeItemHot
+  id: AnvilBottomHot
+  name: hot anvil bottom
+  description: The bottom part of an anvil, give it some time to cool down!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: anvil_bottom_hot
+  - type: DamageOnHolding # Need immunity component for some gloves
+    enabled: true
+    damage:
+      types:
+        Heat: 15
+  - type: Temperature
+    currentTemperature: 2300
+  - type: ChangeOnCool
+    coolTemp: 2000
+    cooledPrototype: AnvilBottomIntermediarytoCold
+
+- type: entity  ## Needs these so it doesnt break everything sadly
+  parent: BaseForgeItemNoTemp
+  id: AnvilBottomIntermediarytoHot
+  categories: [HideSpawnMenu]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: SpawnOnDespawn
+    prototype: AnvilBottomHot
+  - type: Sprite
+    state: anvil_bottom_hot
+
+- type: entity  ## Needs these so it doesnt break everything sadly
+  parent: BaseForgeItemNoTemp
+  id: AnvilBottomIntermediarytoCold
+  categories: [HideSpawnMenu]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: SpawnOnDespawn
+    prototype: AnvilBottom
+  - type: Sprite
+    state: anvil_bottom
+
+- type: entity
+  parent: BaseForgeItemCold
+  id: AnvilBottom
+  name: anvil bottom
+  description: The bottom part of an anvil.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: anvil_bottom
+  - type: Construction
+    graph: Anvil
+    node: start
+  - type: Temperature
+    currentTemperature: 2000
+  - type: BurnableFood
+    burnTemp: 2300
+    burnedFoodPrototype: AnvilBottomIntermediarytoHot
+
+# Unwelded
+
+- type: entity
+  parent: BaseItem
+  id: AnvilUnwelded
+  name: unwelded anvil
+  description: Both parts of an anvil, needs to be welded to complete.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: anvil_unwelded
+  - type: Construction
+    graph: Anvil
+    node: unwelded

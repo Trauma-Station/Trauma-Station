@@ -94,7 +94,12 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
     /// <summary>
     /// Prefix to remove from stack trace paths.
     /// </summary>
-    public const string StackTracePrefix = "/home/runner/work/Trauma-Station/";
+    public const string StackTracePrefix = "/home/runner/work/Trauma-Station/Trauma-Station/";
+
+    /// <summary>
+    /// Ignore errors that contain this string.
+    /// </summary>
+    public const string NetEntitySlop = "Can't resolve \"Robust.Shared.GameObjects.MetaDataComponent\" on entity";
 
     public Queue<string> Messages = new();
 
@@ -103,14 +108,22 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
         if (message.Level < LogEventLevel.Error)
             return; // only care about errors
 
+        var text = message.RenderMessage()
+            .Replace(StackTracePrefix, string.Empty);
+        if (text.Contains(NetEntitySlop))
+            return; // ignore state error spam for deleted entities referenced in a component, engine "maintainer" is a chud and won't do anything about it
+
         var name = LogMessage.LogLevelToName(message.Level.ToRobust());
-        var content = $"{DateTime.Now:o} [{name}] {sawmillName}: {message.RenderMessage()}";
+        var content = $"{DateTime.Now:o} [{name}] {sawmillName}: {text}";
         if (message.Exception is {} e)
-            content += $"\n```\n{e.ToString().Replace(StackTracePrefix, string.Empty)}\n```";
+            content += $"\n{e.ToString().Replace(StackTracePrefix, string.Empty)}\n";
 
         // trim the end of the stack trace if its too long, usually not important
-        if (content.Length > 2000)
-            content = content[0..2000];
+        var limit = 2000 - 8;
+        if (content.Length > limit)
+            content = content[0..limit];
+
+        content = $"```\n{content}\n```";
 
         Messages.Enqueue(content);
     }

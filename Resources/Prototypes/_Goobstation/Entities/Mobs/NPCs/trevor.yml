@@ -35,6 +35,7 @@
         Base: trevor_dead
   - type: GhostTakeoverAvailable
   - type: GhostRole
+    prob: 0.25 # Trauma - cull ghostrole amount. Brings inline with other "pets" like the boxing kangaroo
     makeSentient: true
     name: ghost-role-information-trevor-name
     description: ghost-role-information-trevor-description

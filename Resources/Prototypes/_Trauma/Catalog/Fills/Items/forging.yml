@@ -1,0 +1,62 @@
+- type: entity
+  name: brass arrowhead spawner
+  id: Brassarrowheads
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: BrassarrowheadsHot
+    offset: 0.25
+
+- type: entity
+  name: steel arrowhead spawner
+  id: Steelarrowheads
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: SteelarrowheadsHot
+    offset: 0.25
+
+- type: entity
+  name: plasteel arrowhead spawner
+  id: Plateelarrowheads
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: PlasteelarrowheadsHot
+    offset: 0.25
+
+- type: entityTable
+  id: BrassarrowheadsHot
+  table: !type:AllSelector
+    children:
+    - id: ArrowHeadsBrassHot
+    - id: ArrowHeadsBrassHot
+    - id: ArrowHeadsBrassHot
+    - id: ArrowHeadsBrassHot
+    - id: ArrowHeadsBrassHot
+    - id: ArrowHeadsBrassHot
+
+- type: entityTable
+  id: SteelarrowheadsHot
+  table: !type:AllSelector
+    children:
+    - id: ArrowHeadsSteelHot
+    - id: ArrowHeadsSteelHot
+    - id: ArrowHeadsSteelHot
+    - id: ArrowHeadsSteelHot
+    - id: ArrowHeadsSteelHot
+    - id: ArrowHeadsSteelHot
+
+- type: entityTable
+  id: PlasteelarrowheadsHot
+  table: !type:AllSelector
+    children:
+    - id: ArrowHeadsPlasteelHot
+    - id: ArrowHeadsPlasteelHot
+    - id: ArrowHeadsPlasteelHot
+    - id: ArrowHeadsPlasteelHot
+    - id: ArrowHeadsPlasteelHot
+    - id: ArrowHeadsPlasteelHot

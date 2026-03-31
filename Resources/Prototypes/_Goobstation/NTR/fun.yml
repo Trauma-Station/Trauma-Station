@@ -138,7 +138,7 @@
       launchForwardsMultiplier: 3.0
   - type: CleansForensics
   - type: FloorCleaner
-    cleanDelay: 3 # goida soap
+    radius: 1.5 # just as good as a mop
 
 - type: entity
   parent: SoapGold

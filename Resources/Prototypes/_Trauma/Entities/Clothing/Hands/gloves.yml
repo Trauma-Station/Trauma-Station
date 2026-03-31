@@ -82,7 +82,7 @@
   parent: [BaseGlovesTackle, BaseSecurityContraband]
   id: ClothingHandsGlovesRocket
   name: rocket gloves
-  description: The ultimate in high risk, high reward, perfect for when you need to stop a criminal from fifty feet away or die trying. Banned in most Spinward gridiron football and rugby leagues.
+  description: The ultimate in high risk, high reward, perfect for when you need to stop a criminal from fifty feet away or die trying. Banned in most Spinward gridiron football and rugby leagues. (Alt + q to tackle.)
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/rocket.rsi
@@ -109,7 +109,7 @@
   parent: BaseGlovesTackle
   id: ClothingHandsGlovesDolphin
   name: dolphin gloves
-  description: Sleek, aerodynamic gripper gloves that are less effective at actually performing takedowns, but more effective at letting the user sail through the hallways and cause accidents.
+  description: Sleek, aerodynamic gripper gloves that are less effective at actually performing takedowns, but more effective at letting the user sail through the hallways and cause accidents. (Alt + q to tackle.)
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/dolphin.rsi
@@ -136,7 +136,7 @@
   parent: [BaseGlovesTackle, BaseMinorContraband]
   id: ClothingHandsGlovesGripper
   name: improvised gripper gloves
-  description: Ratty looking gloves wrapped with sticky tape. Beware anyone wearing these, for they clearly have no shame and nothing to lose.
+  description: Ratty looking gloves wrapped with sticky tape. Beware anyone wearing these, for they clearly have no shame and nothing to lose. (Alt + q to tackle.)
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/gripper.rsi
@@ -156,3 +156,27 @@
     knockdownTimeMultiplier: 1.75
     minDistance: 1.5
     skillMod: -1
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesForge
+  name: forge gloves
+  description: Good for handling metal without burning yourself.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/forge.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Hands/Gloves/forge.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-brown
+  - type: FingerprintMask
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
+        Caustic: 5
+  - type: DamageOnHoldingImmune
+  - type: Construction
+    graph: ClothingHandsGlovesForge
+    node: finish

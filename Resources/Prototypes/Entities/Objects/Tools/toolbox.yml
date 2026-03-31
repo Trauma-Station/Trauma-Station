@@ -50,7 +50,7 @@
 
 - type: entity
   id: ToolboxBase
-  parent: BaseStorageItem
+  parent: [BaseStorageItem, MetalToolDurabilityToolbox] # Trauma
   abstract: true
   components:
   - type: Sprite
@@ -199,7 +199,7 @@
     heavyStaminaCost: 10 # goob edit
     damage:
       types:
-        Blunt: 20
+        Blunt: 16
 
 - type: entity
   name: golden toolbox

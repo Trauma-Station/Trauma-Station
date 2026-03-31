@@ -70,7 +70,7 @@
 
 - type: entity
   name: fire extinguisher
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma - Durability
   id: FireExtinguisher
   description: It extinguishes fires.
   components:
@@ -181,7 +181,7 @@
 
 - type: entity
   name: pocket fire extinguisher
-  parent: FireExtinguisher
+  parent: [FireExtinguisher, MetalToolDurabilityWeak] # Trauma - Durability
   id: FireExtinguisherMini
   description: A light and compact fibreglass-framed model fire extinguisher. It holds less water than its bigger brother.
   components:

@@ -1,6 +1,4 @@
 // <Trauma>
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
-using Content.Shared.StationAi;
 using Content.Trauma.Common.Silicons.Borgs;
 // </Trauma>
 using Content.Shared.Access.Systems;
@@ -203,14 +201,6 @@ public abstract partial class SharedBorgSystem : EntitySystem
             _mind.TransferTo(mindId, args.Entity, mind: mind);
         }
         // <Trauma>
-        // TODO: move this into an event handler
-        if (HasComp<AiRemoteBrainComponent>(args.Entity))
-        {
-            BorgDeactivate(chassis, user: chassis);
-            RemComp<AiRemoteControllerComponent>(chassis);
-            RemComp<StationAiVisionComponent>(chassis);
-        }
-
         var ev = new BorgBrainRemovedEvent(chassis, args.Entity);
         RaiseLocalEvent(args.Entity, ref ev);
         var borgEv = new BrainRemovedFromBorgEvent(args.Entity);
@@ -231,19 +221,8 @@ public abstract partial class SharedBorgSystem : EntitySystem
 
     private void OnMindRemoved(Entity<BorgChassisComponent> chassis, ref MindRemovedMessage args)
     {
-        BorgDeactivate(chassis); // Trauma - use helper method
-    }
-
-    /// <summary>
-    /// Trauma - moved out of OnMindRemoved, added user for predicted popup
-    /// </summary>
-    private void BorgDeactivate(Entity<BorgChassisComponent> chassis, EntityUid? user = null)
-    {
-        var msg = Loc.GetString("borg-mind-removed", ("name", Identity.Name(chassis.Owner, EntityManager)));
-        if (user != null)
-            _popup.PopupPredicted(msg, chassis, user);
-        else
-            _popup.PopupEntity(msg, chassis);
+        // Unpredicted because the event is raised on the server.
+        _popup.PopupEntity(Loc.GetString("borg-mind-removed", ("name", Identity.Name(chassis.Owner, EntityManager))), chassis.Owner);
 
         SetActive(chassis, false);
         // Turn off the light so that the no-player visuals can be seen.
@@ -262,7 +241,6 @@ public abstract partial class SharedBorgSystem : EntitySystem
         var used = args.Used;
         TryComp<BorgBrainComponent>(used, out var brain);
         TryComp<BorgModuleComponent>(used, out var module);
-        TryComp<AiRemoteBrainComponent>(used, out var aiBrain); // Corvax-Next-AiRemoteControl
 
         if (TryComp<WiresPanelComponent>(chassis, out var panel) && !panel.Open)
         {
@@ -296,21 +274,7 @@ public abstract partial class SharedBorgSystem : EntitySystem
             _adminLog.Add(LogType.Action, LogImpact.Low,
                 $"{args.User} installed module {used} into borg {chassis.Owner}");
             args.Handled = true;
-            return; // Trauma
         }
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (chassis.Comp.BrainEntity == null && aiBrain != null && _whitelist.IsWhitelistPassOrNull(chassis.Comp.BrainWhitelist, used))
-        {
-            EnsureComp<AiRemoteControllerComponent>(chassis);
-            _container.Insert(used, chassis.Comp.BrainContainer);
-            _adminLog.Add(LogType.Action, LogImpact.Medium,
-                $"{ToPrettyString(args.User):player} installed ai remote brain {ToPrettyString(used)} into borg {ToPrettyString(chassis)}");
-            TryActivate(chassis);
-            args.Handled = true;
-            return;
-        }
-        // Corvax-Next-AiRemoteControl-End
     }
 
     // Make the borg slower without power.

@@ -1,0 +1,611 @@
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: Charcoal
+  result: Charcoal15
+  completetime: 30
+  materials:
+    Wood: 1500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: AshPile
+  result: AshPile
+  completetime: 30
+  materials:
+    Wood: 750
+
+# Anvil
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: KnifeBladeBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi, state: icon, color: "#ff9d57" }
+  result: KnifeBladeBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: KnifeBladeSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi, state: icon, color: "#f7aa74" }
+  result: KnifeBladeSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: KnifeBladePlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi, state: icon, color: "#d9b6f5" }
+  result: KnifeBladePlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: HammerHeadBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi, state: icon, color: "#ff9d57" }
+  result: HammerHeadBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: HammerHeadSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi, state: icon, color: "#f7aa74" }
+  result: HammerHeadSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: HammerHeadPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi, state: icon, color: "#d9b6f5" }
+  result: HammerHeadPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CombatKnifeBladeBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi, state: icon, color: "#ff9d57" }
+  result: CombatKnifeBladeBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CombatKnifeBladeSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi, state: icon, color: "#f7aa74" }
+  result: CombatKnifeBladeSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CombatKnifeBladePlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi, state: icon, color: "#d9b6f5" }
+  result: CombatKnifeBladePlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CleaverBladeBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi, state: icon, color: "#ff9d57" }
+  result: CleaverBladeBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CleaverBladeSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi, state: icon, color: "#f7aa74" }
+  result: CleaverBladeSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CleaverBladePlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi, state: icon, color: "#d9b6f5" }
+  result: CleaverBladePlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: KukriBladeBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi, state: icon, color: "#ff9d57" }
+  result: KukriBladeBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: KukriBladeSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi, state: icon, color: "#f7aa74" }
+  result: KukriBladeSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: KukriBladePlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi, state: icon, color: "#d9b6f5" }
+  result: KukriBladePlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SurvivalKnifeBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi, state: icon, color: "#ff9d57" }
+  result: SurvivalKnifeBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SurvivalKnifeSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi, state: icon, color: "#f7aa74" }
+  result: SurvivalKnifeSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SurvivalKnifePlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi, state: icon, color: "#d9b6f5" }
+  result: SurvivalKnifePlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ScrewdriverShankBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi, state: icon, color: "#ff9d57" }
+  result: ScrewdriverShankBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ScrewdriverShankSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi, state: icon, color: "#f7aa74" }
+  result: ScrewdriverShankSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ScrewdriverShankPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi, state: icon, color: "#d9b6f5" }
+  result: ScrewdriverShankPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CrowbarForgedBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi, state: icon, color: "#ff9d57" }
+  result: CrowbarForgedBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CrowbarForgedSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi, state: icon, color: "#f7aa74" }
+  result: CrowbarForgedSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: CrowbarForgedPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi, state: icon, color: "#d9b6f5" }
+  result: CrowbarForgedPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: WrenchForgedBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi, state: icon, color: "#ff9d57" }
+  result: WrenchForgedBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: WrenchForgedSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi, state: icon, color: "#f7aa74" }
+  result: WrenchForgedSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: WrenchForgedPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi, state: icon, color: "#d9b6f5" }
+  result: WrenchForgedPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: TinyBladesBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi, state: icon, color: "#ff9d57" }
+  result: TinyBladesBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: TinyBladesSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi, state: icon, color: "#f7aa74" }
+  result: TinyBladesSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: TinyBladesPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi, state: icon, color: "#d9b6f5" }
+  result: TinyBladesPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SwordBladeBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi, state: icon, color: "#ff9d57" }
+  result: SwordBladeBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SwordBladeSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi, state: icon, color: "#f7aa74" }
+  result: SwordBladeSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SwordBladePlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi, state: icon, color: "#d9b6f5" }
+  result: SwordBladePlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ChainMailSheetBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi, state: icon, color: "#ff9d57" }
+  result: ChainMailSheetBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ChainMailSheetSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi, state: icon, color: "#f7aa74" }
+  result: ChainMailSheetSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ChainMailSheetPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi, state: icon, color: "#d9b6f5" }
+  result: ChainMailSheetPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: HalberdHeadBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi, state: icon, color: "#ff9d57" }
+  result: HalberdHeadBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: HalberdHeadSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi, state: icon, color: "#f7aa74" }
+  result: HalberdHeadSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: HalberdHeadPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi, state: icon, color: "#d9b6f5" }
+  result: HalberdHeadPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: LongswordBladeBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi, state: icon, color: "#ff9d57" }
+  result: LongswordBladeBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: LongswordBladeSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi, state: icon, color: "#f7aa74" }
+  result: LongswordBladeSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: LongswordBladePlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi, state: icon, color: "#d9b6f5" }
+  result: LongswordBladePlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: MetalPlateBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi, state: icon, color: "#ff9d57" }
+  result: MetalPlateBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: MetalPlateSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi, state: icon, color: "#f7aa74" }
+  result: MetalPlateSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: MetalPlatePlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi, state: icon, color: "#d9b6f5" }
+  result: MetalPlatePlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: WarhammerHeadBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi, state: icon, color: "#ff9d57" }
+  result: WarhammerHeadBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 300
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: WarhammerHeadSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi, state: icon, color: "#f7aa74" }
+  result: WarhammerHeadSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 300
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: WarhammerHeadPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi, state: icon, color: "#d9b6f5" }
+  result: WarhammerHeadPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: PickaxeHeadBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi, state: icon, color: "#ff9d57" }
+  result: PickaxeHeadBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: PickaxeHeadSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi, state: icon, color: "#f7aa74" }
+  result: PickaxeHeadSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: PickaxeHeadPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi, state: icon, color: "#d9b6f5" }
+  result: PickaxeHeadPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ThinBladeBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi, state: icon, color: "#ff9d57" }
+  result: ThinBladeBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ThinBladeSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi, state: icon, color: "#f7aa74" }
+  result: ThinBladeSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ThinBladePlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi, state: icon, color: "#d9b6f5" }
+  result: ThinBladePlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ArrowHeadsBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi, state: icon, color: "#ff9d57" }
+  result: ArrowHeadsBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ArrowHeadsSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi, state: icon, color: "#f7aa74" }
+  result: ArrowHeadsSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ArrowHeadsPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi, state: icon, color: "#d9b6f5" }
+  result: ArrowHeadsPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SpearHeadBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi, state: icon, color: "#ff9d57" }
+  result: SpearHeadBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 300
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SpearHeadSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi, state: icon, color: "#f7aa74" }
+  result: SpearHeadSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 300
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SpearHeadPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi, state: icon, color: "#d9b6f5" }
+  result: SpearHeadPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 300
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: MorningstarHeadBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi, state: icon, color: "#ff9d57" }
+  result: MorningstarHeadBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 300
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: MorningstarHeadSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi, state: icon, color: "#f7aa74" }
+  result: MorningstarHeadSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 300
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: MorningstarHeadPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi, state: icon, color: "#d9b6f5" }
+  result: MorningstarHeadPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 300
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ShieldBossBrassUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi, state: icon, color: "#ff9d57" }
+  result: ShieldBossBrassUnfinishedHot
+  completetime: 0
+  materials:
+    BrassIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ShieldBossSteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi, state: icon, color: "#f7aa74" }
+  result: ShieldBossSteelUnfinishedHot
+  completetime: 0
+  materials:
+    SteelIngot: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ShieldBossPlasteelUnfinishedHot
+  icon: { sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi, state: icon, color: "#d9b6f5" }
+  result: ShieldBossPlasteelUnfinishedHot
+  completetime: 0
+  materials:
+    PlasteelIngot: 200

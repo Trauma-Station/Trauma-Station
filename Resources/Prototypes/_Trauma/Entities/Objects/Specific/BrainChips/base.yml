@@ -24,6 +24,8 @@
     name: brainchip-rename # they get anonymized once installed so health analyzer etc can't out you
   - type: Cybernetics
     disableChance: 0.1 # should be a rare funny thing rather than common huge annoyance
+    empDamage:
+      types: {} # losing your skills is the focus
   # TODO: skills guide examine
 
 - type: entity

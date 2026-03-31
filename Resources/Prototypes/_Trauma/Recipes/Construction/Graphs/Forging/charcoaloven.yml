@@ -1,0 +1,18 @@
+- type: constructionGraph
+  id: CharcoalOven
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 5
+      - tag: Igniter
+        name: construction-graph-tag-igniter
+        icon:
+          sprite: Objects/Devices/igniter.rsi
+          state: icon
+  - node: finish
+    entity: CharcoalOven

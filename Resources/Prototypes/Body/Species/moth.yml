@@ -47,6 +47,11 @@
     enum.HumanoidVisualLayers.RFoot:
       limit: 1
       required: false
+  # <Trauma>
+  appearances:
+    enum.HumanoidVisualLayers.Wings:
+      matchSkin: true
+  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance
@@ -209,11 +214,6 @@
   id: OrganMoth
   abstract: true
   suffix: Moth
-  # <Shitmed>
-  components:
-  - type: Damageable
-    damageModifierSet: Moth
-  # </Shitmed>
 
 - type: entity
   id: OrganMothMetabolizer

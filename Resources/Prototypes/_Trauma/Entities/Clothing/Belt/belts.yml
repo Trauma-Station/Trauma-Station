@@ -8,3 +8,28 @@
     sprite: Clothing/Belt/mercwebbing.rsi
   - type: Clothing
     sprite: Clothing/Belt/mercwebbing.rsi
+
+- type: entity
+  parent: [ClothingBeltStorageBase, BaseSyndicateContraband]
+  id: ClothingBeltKnifeRig
+  name: thowing knife rig
+  description: A specialised bandolier meant to hold throwing knives.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/throwingkniferig.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/throwingkniferig.rsi
+  - type: StaticPrice
+    price: 500
+  - type: Storage
+    grid:
+    - 0,0,7,1
+    quickInsert: true
+    whitelist:
+      tags:
+      - ThrowingKnife
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: ThrowingKnife
+        amount: 8

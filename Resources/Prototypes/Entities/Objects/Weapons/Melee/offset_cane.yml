@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, BracingDurabilityWeak] # Trauma - Durability
   id: OffsetCane
   name: standard offset cane
   description: A standard offset cane, essential for getting around when your legs aren't up to the task. May or may not grant you the wisdom of the elderly.
@@ -62,7 +62,7 @@
     sprite: Objects/Weapons/Melee/offset_canes/mime.rsi
 
 - type: entity
-  parent: OffsetCane
+  parent: [OffsetCane, BracingDurability]
   id: OffsetCaneNT
   name: nanotrasen offset cane
   description: A nanotrasen standard issue offset cane with the NT logo, favored by those who prefer a more corporate look.
@@ -74,7 +74,7 @@
     sprite: Objects/Weapons/Melee/offset_canes/nanotrasen.rsi
 
 - type: entity
-  parent: OffsetCane
+  parent: [OffsetCane, WoodDurabilityWeak]
   id: OffsetCaneWood
   name: wooden offset cane
   description: A wooden offset cane, a classic choice for those who appreciate natural materials and a sturdy grip.

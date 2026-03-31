@@ -127,7 +127,7 @@
         type: InstrumentBoundUserInterface
         requireInputValidation: false
       enum.RadialSelectorUiKey.Key: # WWDP
-        type: TrackedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI
       enum.ListViewSelectorUiKey.Key: # WWDP
         type: ListViewSelectorBUI
   #- type: TriggerOnMobstateChange  | disabled because it was only used for 2nd life

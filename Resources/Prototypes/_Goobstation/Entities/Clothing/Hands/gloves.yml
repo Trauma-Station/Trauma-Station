@@ -338,7 +338,7 @@
 # Knuckle Dusters
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, KnuckleWeaponsDurability]
   id: ClothingHandsKnuckleDustersBase
   abstract: true
   components:
@@ -353,7 +353,7 @@
     size: Small
     storedRotation: -90
   - type: MeleeWeapon
-    attackRate: 1.5
+    attackRate: 1
     damage:
       types:
         Blunt: 12
@@ -409,7 +409,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 12
+        Blunt: 16
   - type: PhysicalComposition
     materialComposition:
       Gold: 500

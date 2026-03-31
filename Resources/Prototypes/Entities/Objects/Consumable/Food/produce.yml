@@ -444,14 +444,6 @@
   id: TrashBananaPeel
   name: banana peel
   components:
-  # <Trauma>
-  - type: Perishable
-    rotAfter: 900 # won't someone please think of the clowns
-    molsPerSecondPerUnitMass: 0
-  - type: RotInto
-    entity: FoodRot
-    stage: 1
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
     state: peel
@@ -563,14 +555,6 @@
   id: TrashBananiumPeel
   name: bananium peel
   components:
-  # <Trauma>
-  - type: Perishable
-    rotAfter: 999999999 # I am a hero
-    molsPerSecondPerUnitMass: 0
-  - type: RotInto
-    entity: FoodRot
-    stage: 1
-  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
     state: peel

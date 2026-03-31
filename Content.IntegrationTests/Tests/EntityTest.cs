@@ -40,9 +40,12 @@ namespace Content.IntegrationTests.Tests
                 .Where(p => !p.Abstract)
                 .Where(p => !pair.IsTestPrototype(p))
                 .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
-                .Where(p => !p.Components.ContainsKey("Supermatter")) // Goobstation - Supermatter eats everything, oh no!
                 .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
-                .Where(p => !p.Components.ContainsKey("GameRule")) // Trauma - are you stupid why would you do this
+                // <Trauma>
+                .Where(p => !p.Components.ContainsKey("Supermatter")) // Supermatter eats everything, oh no!
+                .Where(p => !p.Components.ContainsKey("GameRule")) // are you stupid why would you do this
+                .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // randomly spawns things...
+                // </Trauma>
                 .Select(p => p.ID)
                 .ToList();
             // Goobstation edit end
@@ -166,6 +169,7 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("SpawnOnDespawn")) // it leaves entities behind if lifetime is under 15s
                     .Where(p => !p.Components.ContainsKey("Meteor")) // spawning the rocks gives it a stroke
                     .Where(p => !p.Components.ContainsKey("Mutation")) // waste of time, mutation test exists
+                    .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // spawns things
                     // </Trauma>
                     .Select(p => p.ID)
                     .ToList();
@@ -369,19 +373,23 @@ namespace Content.IntegrationTests.Tests
                 "PendingSlimeSpawn", // shut the fuck up please
                 "Slime",
                 "Anomaly", // they can spawn spark effects
+                "LabyrinthPortal", // it randomly spawns things
                 // </Trauma>
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
 
-            var protoIds = server.ProtoMan
-                .EnumeratePrototypes<EntityPrototype>()
-                .Where(p => !p.Abstract)
-                .Where(p => !pair.IsTestPrototype(p))
-                .Where(p => !excluded.Any(p.Components.ContainsKey))
-                .Where(p => p.Categories.All(x => x.ID != SpawnerCategory))
-                .Select(p => p.ID)
-                .ToList();
+            // <Trauma> - unroll linq slop, don't need to check abstract, check spawner category pointer instead of strings
+            var protoIds = new List<EntProtoId>();
+            var spawnerCategory = server.ProtoMan.Index(SpawnerCategory);
+            foreach (var p in server.ProtoMan.EnumeratePrototypes<EntityPrototype>())
+            {
+                if (pair.IsTestPrototype(p) || excluded.Any(p.Components.ContainsKey) || p.Categories.Contains(spawnerCategory))
+                    continue;
+
+                protoIds.Add(p.ID);
+            }
+            // </Trauma>
 
             protoIds.Sort();
             var mapId = MapId.Nullspace;
@@ -395,6 +403,20 @@ namespace Content.IntegrationTests.Tests
 
             await pair.RunTicksSync(3);
 
+            // <Trauma> - reuse allocations lol
+            var serverEntities = new HashSet<EntityUid>();
+            var clientEntities = new HashSet<EntityUid>();
+            void AddEntities(IEntityManager entMan, HashSet<EntityUid> entities)
+            {
+                var audioQuery = entMan.GetEntityQuery<AudioComponent>();
+                foreach (var e in entMan.GetEntities())
+                {
+                    if (!audioQuery.HasComp(e))
+                        entities.Add(e);
+                }
+            }
+            // </Trauma>
+
             // We consider only non-audio entities, as some entities will just play sounds when they spawn.
             int Count(IEntityManager ent) => ent.EntityCount - ent.Count<AudioComponent>();
             IEnumerable<EntityUid> Entities(IEntityManager entMan) => entMan.GetEntities().Where(e => !entMan.HasComponent<AudioComponent>(e));
@@ -405,8 +427,12 @@ namespace Content.IntegrationTests.Tests
                 {
                     var count = Count(server.EntMan);
                     var clientCount = Count(client.EntMan);
-                    var serverEntities = new HashSet<EntityUid>(Entities(server.EntMan));
-                    var clientEntities = new HashSet<EntityUid>(Entities(client.EntMan));
+                    // <Trauma> - clear + add instead of reallocating tree every time?
+                    serverEntities.Clear();
+                    AddEntities(server.EntMan, serverEntities);
+                    clientEntities.Clear();
+                    AddEntities(client.EntMan, clientEntities);
+                    // </Trauma>
                     EntityUid uid = default;
                     await server.WaitPost(() => uid = server.EntMan.SpawnEntity(protoId, coords));
                     await pair.RunTicksSync(3);
