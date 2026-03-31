@@ -1,6 +1,7 @@
 # less material and time efficient than a forge, basically
 # only for bootstrapping if you lose your starting parts
 - type: construction
+  abstract: true
   id: BaseRevParts
   graph: RevParts
   category: construction-category-antagonist
