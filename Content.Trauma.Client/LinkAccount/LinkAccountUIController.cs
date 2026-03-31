@@ -15,6 +15,8 @@ using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.LineEdit;
 using static Robust.Client.UserInterface.Controls.TabContainer;
+using Content.Client.Lobby;
+using Content.Client.UserInterface.Systems.EscapeMenu;
 
 namespace Content.Trauma.Client.LinkAccount;
 
@@ -39,11 +41,23 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
         _linkAccount.Updated += OnUpdated;
 
         LinkBanner.OnLinkBanner += HookFunctions;
+        LobbyState.OnCreated += HookFunctionsLobby;
+        EscapeUIController.OnCreated += HookFunctionsEscape;
     }
 
     private void HookFunctions(LinkBanner banner)
     {
         banner.OnToggleWindow = () => ToggleWindow();
+    }
+
+    private void HookFunctionsLobby(LobbyState lobby)
+    {
+        lobby.OnTogglePatronPerksWindow = () => TogglePatronPerksWindow();
+    }
+
+    private void HookFunctionsEscape(EscapeUIController escape)
+    {
+        escape.OnTogglePatronPerksWindow = () => TogglePatronPerksWindow();
     }
 
     private void OnCode(Guid code)

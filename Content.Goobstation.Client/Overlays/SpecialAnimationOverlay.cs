@@ -110,7 +110,7 @@ public sealed class SpecialAnimationOverlay : Overlay
             Color.Transparent);
 
         var opacity = _currentAnimation.Opacity;
-        screen.DrawTexture(_target.Texture, Vector2.Zero, Color.Trauma.WithAlpha(opacity));
+        screen.DrawTexture(_target.Texture, Vector2.Zero, Color.White.WithAlpha(opacity));
 
         // Render text
         if (_currentAnimation.Text == null)

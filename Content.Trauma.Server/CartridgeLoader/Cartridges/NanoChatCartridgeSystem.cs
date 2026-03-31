@@ -18,7 +18,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
-using Robust.Shared.Utility; // Goob
+using Robust.Shared.Utility;
+using Content.Trauma.Common.NanoChat; // Goob
 
 namespace Content.Trauma.Server.CartridgeLoader.Cartridges;
 

@@ -24,6 +24,10 @@ namespace Content.Client.Lobby
 {
     public sealed class LobbyState : Robust.Client.State.State
     {
+        // <Trauma>
+        [Dependency] private readonly ICommonCurrencyManager _serverCur = default!; // Goobstation - server currency
+        [Dependency] private readonly ILinkAccountManager _linkAccount = default!; // RMC - Patreon
+        // </Trauma>
         [Dependency] private readonly IBaseClient _baseClient = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
@@ -32,10 +36,13 @@ namespace Content.Client.Lobby
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IVoteManager _voteManager = default!;
-        [Dependency] private readonly ICommonCurrencyManager _serverCur = default!; // Goobstation - server currency
-        [Dependency] private readonly ILinkAccountManager _linkAccount = default!; // RMC - Patreon
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
         [Dependency] private readonly IPrototypeManager _protoMan = default!;
+
+        // <Trauma>
+        public static Action<LobbyState>? OnCreated;
+        public Action? OnTogglePatronPerksWindow;
+        // </Trauma>
 
         private ClientGameTicker _gameTicker = default!;
         private ContentAudioSystem _contentAudioSystem = default!;
@@ -84,6 +91,9 @@ namespace Content.Client.Lobby
             _gameTicker.LobbyLateJoinStatusUpdated += LobbyLateJoinStatusUpdated;
 
             _serverCur.ClientBalanceChange += UpdatePlayerBalance; // Goobstation - Goob Coin
+            // <Trauma>
+            OnCreated?.Invoke(this);
+            // </Trauma>
         }
 
         protected override void Shutdown()
@@ -120,7 +130,7 @@ namespace Content.Client.Lobby
 
         private void OnPatronPerksPressed(BaseButton.ButtonEventArgs obj)
         {
-            _userInterfaceManager.GetUIController<LinkAccountUIController>().TogglePatronPerksWindow();
+            OnTogglePatronPerksWindow?.Invoke();
         }
 
         private void OnReadyPressed(BaseButton.ButtonEventArgs args)

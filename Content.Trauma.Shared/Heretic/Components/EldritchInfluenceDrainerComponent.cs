@@ -6,11 +6,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-<<<<<<<< HEAD:Content.Trauma.Shared/Wizard/Projectiles/RejuvenateOnProjectileHitComponent.cs
-namespace Content.Trauma.Shared.Wizard.Projectiles;
-========
 namespace Content.Trauma.Shared.Heretic.Components;
->>>>>>>> upstream:Content.Trauma.Shared/Heretic/Components/EldritchInfluenceDrainerComponent.cs
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class RejuvenateOnProjectileHitComponent : Component

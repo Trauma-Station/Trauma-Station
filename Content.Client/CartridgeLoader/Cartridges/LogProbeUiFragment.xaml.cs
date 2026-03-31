@@ -15,7 +15,7 @@ public sealed partial class LogProbeUiFragment : BoxContainer
     public static Action<LogProbeUiFragment>? OnCreated;
     public Action<NanoChatData>? OnSetupNanoChatView;
     public Action<NanoChatData>? OnDisplayNanoChat;
-    public Action<List<PulledAccessLog>>? OnSetupAccessLogView;
+    public Action? OnSetupAccessLogView;
     public Action<List<PulledAccessLog>>? OnDisplayAccessLogs;
     // </Trauma>
 
@@ -44,14 +44,14 @@ public sealed partial class LogProbeUiFragment : BoxContainer
 
         if (state.NanoChatData is { } nano)
         {
-            SetupNanoChatView(nano);
+            OnSetupNanoChatView?.Invoke(nano);
             OnDisplayNanoChat?.Invoke(nano);
         }
         else
         {
-            SetupAccessLogView();
+            OnSetupAccessLogView?.Invoke();
             if (state.PulledLogs.Count > 0)
-                DisplayAccessLogs(state.PulledLogs);
+                OnDisplayAccessLogs?.Invoke(state.PulledLogs);
         }
     }
 

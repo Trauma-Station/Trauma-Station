@@ -4,9 +4,9 @@ using Content.Trauma.Common.CartridgeLoader.Cartridges;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Trauma.Shared.NanoChat;
+namespace Content.Trauma.Common.NanoChat;
 
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedNanoChatSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(CommonNanoChatSystem))]
 [AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class NanoChatCardComponent : Component
 {

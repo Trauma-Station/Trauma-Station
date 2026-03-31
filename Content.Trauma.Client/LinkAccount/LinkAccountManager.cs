@@ -19,6 +19,7 @@ public sealed class LinkAccountManager : ILinkAccountManager, IPostInjectInit
     public SharedRMCRoundEndShoutouts? RoundEndShoutout { get; private set; }
 
     public event Action<Guid>? CodeReceived;
+
     public event Action? Updated;
 
     private void OnCode(LinkAccountCodeMsg message)

@@ -22,7 +22,7 @@ public sealed partial class LogProbeUiFragmentDeltaV : UIController
     {
         window.OnDisplayNanoChat = (state) => DisplayNanoChatData(window, state);
         window.OnSetupNanoChatView = (state) => SetupNanoChatView(window, state);
-        window.OnSetupAccessLogView = _ => SetupAccessLogView(window);
+        window.OnSetupAccessLogView = () => SetupAccessLogView(window);
         window.OnDisplayAccessLogs = (state) => DisplayAccessLogs(window, state);
     }
 

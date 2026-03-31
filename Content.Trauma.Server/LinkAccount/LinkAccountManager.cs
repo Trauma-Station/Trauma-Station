@@ -3,6 +3,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Trauma.Common.LinkAccount;
 using Content.Trauma.Shared.LinkAccount;
 using Robust.Shared.Network;
 using Robust.Shared.Player;

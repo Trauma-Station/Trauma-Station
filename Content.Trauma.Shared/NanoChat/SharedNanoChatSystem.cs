@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.CartridgeLoader.Cartridges;
 using Content.Shared.Examine;
+using Content.Trauma.Common.CartridgeLoader.Cartridges;
+using Content.Trauma.Common.NanoChat;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.NanoChat;
@@ -9,7 +10,7 @@ namespace Content.Trauma.Shared.NanoChat;
 /// <summary>
 ///     Base system for NanoChat functionality shared between client and server.
 /// </summary>
-public abstract class SharedNanoChatSystem : EntitySystem
+public abstract class SharedNanoChatSystem : CommonNanoChatSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -35,10 +36,7 @@ public abstract class SharedNanoChatSystem : EntitySystem
 
     #region Public API Methods
 
-    /// <summary>
-    ///     Gets the NanoChat number for a card.
-    /// </summary>
-    public uint? GetNumber(Entity<NanoChatCardComponent?> card)
+    public override uint? GetNumber(Entity<NanoChatCardComponent?> card)
     {
         if (!Resolve(card, ref card.Comp))
             return null;
@@ -46,10 +44,7 @@ public abstract class SharedNanoChatSystem : EntitySystem
         return card.Comp.Number;
     }
 
-    /// <summary>
-    ///     Sets the NanoChat number for a card.
-    /// </summary>
-    public void SetNumber(Entity<NanoChatCardComponent?> card, uint number)
+    public override void SetNumber(Entity<NanoChatCardComponent?> card, uint number)
     {
         if (!Resolve(card, ref card.Comp))
             return;
@@ -69,10 +64,7 @@ public abstract class SharedNanoChatSystem : EntitySystem
         card.Comp.IsClosed = closed;
     }
 
-    /// <summary>
-    ///     Gets the recipients dictionary from a card.
-    /// </summary>
-    public IReadOnlyDictionary<uint, NanoChatRecipient> GetRecipients(Entity<NanoChatCardComponent?> card)
+    public override IReadOnlyDictionary<uint, NanoChatRecipient> GetRecipients(Entity<NanoChatCardComponent?> card)
     {
         if (!Resolve(card, ref card.Comp))
             return new Dictionary<uint, NanoChatRecipient>();
@@ -91,10 +83,7 @@ public abstract class SharedNanoChatSystem : EntitySystem
         return card.Comp.Messages;
     }
 
-    /// <summary>
-    ///     Sets a specific recipient in the card.
-    /// </summary>
-    public void SetRecipient(Entity<NanoChatCardComponent?> card, uint number, NanoChatRecipient recipient)
+    public override void SetRecipient(Entity<NanoChatCardComponent?> card, uint number, NanoChatRecipient recipient)
     {
         if (!Resolve(card, ref card.Comp))
             return;
@@ -103,9 +92,6 @@ public abstract class SharedNanoChatSystem : EntitySystem
         Dirty(card);
     }
 
-    /// <summary>
-    ///     Gets a specific recipient from the card.
-    /// </summary>
     public NanoChatRecipient? GetRecipient(Entity<NanoChatCardComponent?> card, uint number)
     {
         if (!Resolve(card, ref card.Comp) || !card.Comp.Recipients.TryGetValue(number, out var recipient))
@@ -114,10 +100,7 @@ public abstract class SharedNanoChatSystem : EntitySystem
         return recipient;
     }
 
-    /// <summary>
-    ///     Gets all messages for a specific recipient.
-    /// </summary>
-    public List<NanoChatMessage>? GetMessagesForRecipient(Entity<NanoChatCardComponent?> card, uint recipientNumber)
+    public override List<NanoChatMessage>? GetMessagesForRecipient(Entity<NanoChatCardComponent?> card, uint recipientNumber)
     {
         if (!Resolve(card, ref card.Comp) || !card.Comp.Messages.TryGetValue(recipientNumber, out var messages))
             return null;
@@ -125,10 +108,7 @@ public abstract class SharedNanoChatSystem : EntitySystem
         return new List<NanoChatMessage>(messages);
     }
 
-    /// <summary>
-    ///     Adds a message to a recipient's conversation.
-    /// </summary>
-    public void AddMessage(Entity<NanoChatCardComponent?> card, uint recipientNumber, NanoChatMessage message)
+    public override void AddMessage(Entity<NanoChatCardComponent?> card, uint recipientNumber, NanoChatMessage message)
     {
         if (!Resolve(card, ref card.Comp))
             return;
@@ -235,10 +215,7 @@ public abstract class SharedNanoChatSystem : EntitySystem
         return recipient.HasUnread;
     }
 
-    /// <summary>
-    ///     Clears all messages and recipients from the card.
-    /// </summary>
-    public void Clear(Entity<NanoChatCardComponent?> card)
+    public override void Clear(Entity<NanoChatCardComponent?> card)
     {
         if (!Resolve(card, ref card.Comp))
             return;

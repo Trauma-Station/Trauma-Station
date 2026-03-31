@@ -273,7 +273,7 @@ public sealed partial class SensorMonitoringWindow : FancyWindow, IComputerWindo
             }
             handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList,
                 vertices.AsSpan(0, countVtx),
-                Color.Trauma.WithAlpha(0.1f));
+                Color.White.WithAlpha(0.1f));
         }
     }
 }

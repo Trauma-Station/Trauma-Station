@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Serialization;
+using Content.Shared.Damage;
 
 namespace Content.Trauma.Common.Damage;
 
 /// <summary>
-/// Ignore any damage taken from the HealthChangeEntityEffect system. Raised on an entity.
+/// Raised on an entity taking damage from the HealthChangeEntityEffect system.
 /// </summary>
 [ByRefEvent]
-public record struct IgnoreHeathChangeEvent(bool Immune);
+public record struct OnHealthChangeEvent(DamageSpecifier Damage);

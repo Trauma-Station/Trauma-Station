@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Trauma.Shared.RadialSelector;
 using Content.Shared.UserInterface;
-using Robust.Shared.GameObjects;
+using Content.Trauma.Common.RadialSelector;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.SetSelector;

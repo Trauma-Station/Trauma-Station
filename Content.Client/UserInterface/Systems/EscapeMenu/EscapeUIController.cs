@@ -37,6 +37,11 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
     [Dependency] private readonly FeedbackPopupUIController _feedback = null!;
 
+    // <Trauma>
+    public static Action<EscapeUIController>? OnCreated;
+    public Action? OnTogglePatronPerksWindow;
+    // </Trauma>
+
     private Options.UI.EscapeMenu? _escapeWindow;
 
     public override void Initialize()  // RMC - Patreon
@@ -46,6 +51,10 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
             if (_escapeWindow != null)
                 _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
         };
+
+        // <Trauma>
+        OnCreated?.Invoke(this);
+        // </Trauma>
     }
 
     public void UnloadButton()
@@ -110,7 +119,7 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         _escapeWindow.PatronPerksButton.OnPressed += _ => // RMC - Patreon
         {
             CloseEscapeWindow();
-            UIManager.GetUIController<LinkAccountUIController>().TogglePatronPerksWindow();
+            OnTogglePatronPerksWindow?.Invoke();
         };
 
         _escapeWindow.RulesButton.OnPressed += _ =>

@@ -14,28 +14,14 @@ namespace Content.Trauma.Shared.Language.Systems;
 
 public abstract class SharedLanguageSystem : CommonLanguageSystem
 {
-    /// <summary>
-    /// A cached instance of <see cref="PsychomanticPrototype"/>.
-    /// </summary>
-    public static LanguagePrototype Psychomantic { get; private set; } = default!;
-
-    /// <summary>
-    ///     A cached instance of <see cref="UniversalPrototype"/>
-    /// </summary>
-    public static LanguagePrototype Universal { get; private set; } = default!;
-
-    private StringBuilder _builder = new();
-
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedGameTicker _ticker = default!;
+
+    private StringBuilder _builder = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        Universal = _prototype.Index<LanguagePrototype>(UniversalPrototype);
-        // Initialize the Psychomantic prototype
-        Psychomantic = _prototype.Index<LanguagePrototype>(PsychomanticPrototype);
 
         SubscribeLocalEvent<UniversalLanguageSpeakerComponent, DetermineEntityLanguagesEvent>(OnDetermineUniversalLanguages);
         SubscribeAllEvent<LanguagesSetMessage>(OnClientSetLanguage);
@@ -50,10 +36,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         return proto;
     }
 
-    /// <summary>
-    ///     Obfuscate a message using the given language.
-    /// </summary>
-    public string ObfuscateSpeech(string message, LanguagePrototype language)
+    public override string ObfuscateSpeech(string message, LanguagePrototype language)
     {
         _builder.Clear();
         language.Obfuscation.Obfuscate(_builder, message, this);
@@ -97,7 +80,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
 
     #region Public API
 
-    public bool CanUnderstand(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
+    public override bool CanUnderstand(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
     {
         if (language == PsychomanticPrototype || language == UniversalPrototype || TryComp<UniversalLanguageSpeakerComponent>(ent, out var uni) && uni.Enabled)
             return true;

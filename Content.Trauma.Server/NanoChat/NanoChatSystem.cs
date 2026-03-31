@@ -14,6 +14,7 @@ using Content.Shared.PDA;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Trauma.Common.NanoChat;
 
 namespace Content.Trauma.Server.NanoChat;
 

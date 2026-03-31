@@ -7,4 +7,6 @@ public interface ILinkAccountManager
     IReadOnlyList<SharedRMCPatron> GetPatrons();
     bool CanViewPatronPerks();
     public SharedRMCPatronTier? Tier { get; set; }
+
+    public event Action? Updated;
 }

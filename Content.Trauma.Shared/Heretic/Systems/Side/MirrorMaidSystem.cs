@@ -63,7 +63,7 @@ public sealed class MirrorMaidSystem : EntitySystem
 
         _status.TryUpdateStatusEffectDuration(args.Examiner, ent.Comp.ExamineStatus, ent.Comp.ExamineDelay);
 
-        _color.RaiseEffect(Color.Trauma.WithAlpha(0.5f),
+        _color.RaiseEffect(Color.White.WithAlpha(0.5f),
             new() { ent },
             Filter.Pvs(ent).RemovePlayerByAttachedEntity(args.Examiner),
             0.5f);

@@ -7,6 +7,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Heretic.Components;
 
 namespace Content.Trauma.Shared.Wizard.Projectiles;
 

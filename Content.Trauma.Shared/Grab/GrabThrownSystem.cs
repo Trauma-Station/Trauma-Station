@@ -87,7 +87,7 @@ public sealed class GrabThrownSystem : CommonGrabThrownSystem
         EntityUid thrower,
         Vector2 vector,
         float grabThrownSpeed,
-        DamageSpecifier? damage,
+        DamageSpecifier? damage = null,
         bool drop = true)
     {
         var comp = EnsureComp<GrabThrownComponent>(uid);

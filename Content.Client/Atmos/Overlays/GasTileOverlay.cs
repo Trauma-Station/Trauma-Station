@@ -230,7 +230,7 @@ namespace Content.Client.Atmos.Overlays
                             {
                                 var opacity = gas.Opacity[i];
                                 if (opacity > 0)
-                                    state.drawHandle.DrawTexture(state.frames[i][state.frameCounter[i]], tilePosition, Color.Trauma.WithAlpha(opacity));
+                                    state.drawHandle.DrawTexture(state.frames[i][state.frameCounter[i]], tilePosition, Color.White.WithAlpha(opacity));
                             }
                         }
                     }
@@ -293,7 +293,7 @@ namespace Content.Client.Atmos.Overlays
                         var opacity = atmos.OverlayData.Opacity[i];
 
                         if (opacity > 0)
-                            handle.DrawTexture(_frames[i][_frameCounter[i]], tilePosition, Color.Trauma.WithAlpha(opacity));
+                            handle.DrawTexture(_frames[i][_frameCounter[i]], tilePosition, Color.White.WithAlpha(opacity));
                     }
                 }
             }

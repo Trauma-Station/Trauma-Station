@@ -1,7 +1,5 @@
 // <Trauma>
 using Content.Trauma.Common.Wizard;
-using Content.Trauma.Shared.Wizard.Components;
-using Content.Trauma.Shared.Wizard.SpellCards;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
 using Content.Trauma.Common.Heretic;

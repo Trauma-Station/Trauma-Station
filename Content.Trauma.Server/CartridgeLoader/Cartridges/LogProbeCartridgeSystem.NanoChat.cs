@@ -2,6 +2,7 @@
 
 using Content.Shared.Audio;
 using Content.Shared.CartridgeLoader;
+using Content.Trauma.Common.NanoChat;
 using Content.Trauma.Shared.CartridgeLoader.Cartridges;
 using Content.Trauma.Shared.NanoChat;
 using Robust.Shared.Audio;

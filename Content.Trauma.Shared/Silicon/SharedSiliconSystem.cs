@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Silicon.Components;
 using Content.Shared.Alert;
 using Content.Shared.Bed.Sleep;
-using Robust.Shared.Serialization;
 using Content.Shared.Movement.Systems;
 using Content.Trauma.Common.Silicon;
+using Content.Trauma.Shared.Drone;
+using Content.Trauma.Shared.Silicon.Components;
+using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Silicon.Systems;
 
@@ -93,6 +94,11 @@ public abstract class SharedSiliconChargeSystem : CommonSiliconSystem
     public override bool IsSilicon(EntityUid uid)
     {
         return HasComp<SiliconComponent>(uid);
+    }
+
+    public override bool IsDrone(EntityUid uid)
+    {
+        return HasComp<DroneComponent>(uid);
     }
 }
 

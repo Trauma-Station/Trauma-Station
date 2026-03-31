@@ -300,8 +300,8 @@ public sealed partial class GunSystem : SharedGunSystem
                     InterpolationMode = AnimationInterpolationMode.Linear,
                     KeyFrames =
                     {
-                        new AnimationTrackProperty.KeyFrame(Color.Trauma.WithAlpha(1f), 0),
-                        new AnimationTrackProperty.KeyFrame(Color.Trauma.WithAlpha(0f), lifetime)
+                        new AnimationTrackProperty.KeyFrame(Color.White.WithAlpha(1f), 0),
+                        new AnimationTrackProperty.KeyFrame(Color.White.WithAlpha(0f), lifetime)
                     }
                 }
             }

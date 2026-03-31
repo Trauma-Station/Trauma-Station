@@ -7,6 +7,27 @@ namespace Content.Trauma.Common.Language.Systems;
 
 public abstract class CommonLanguageSystem : EntitySystem
 {
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+
+    /// <summary>
+    /// A cached instance of <see cref="PsychomanticPrototype"/>.
+    /// </summary>
+    public static LanguagePrototype Psychomantic { get; private set; } = default!;
+
+    /// <summary>
+    ///     A cached instance of <see cref="UniversalPrototype"/>
+    /// </summary>
+    public static LanguagePrototype Universal { get; private set; } = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+
+        Universal = _prototype.Index<LanguagePrototype>(UniversalPrototype);
+        Psychomantic = _prototype.Index<LanguagePrototype>(PsychomanticPrototype);
+    }
+
     /// <summary>
     ///     The language used as a fallback in cases where an entity suddenly becomes a Language Speaker (e.g. the usage of make-sentient).
     /// </summary>
@@ -38,4 +59,11 @@ public abstract class CommonLanguageSystem : EntitySystem
     ///     Adds a new language to the respective lists of intrinsically known languages of the given entity.
     /// </summary>
     public abstract void AddLanguage(EntityUid uid, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true);
+
+    /// <summary>
+    ///     Obfuscate a message using the given language.
+    /// </summary>
+    public abstract string ObfuscateSpeech(string message, LanguagePrototype language);
+
+    public abstract bool CanUnderstand(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language);
 }

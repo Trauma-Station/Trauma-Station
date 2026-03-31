@@ -31,22 +31,16 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
         damageSpec *= args.Scale;
 
         // <Goob>
-        if (args.Effect.ScaleByTemperature is {} scaleTemp)
+        if (args.Effect.ScaleByTemperature is { } scaleTemp)
         {
             damageSpec *= TryComp<TemperatureComponent>(entity, out var temp)
                 ? scaleTemp.GetEfficiencyMultiplier(temp.CurrentTemperature, args.Scale, false)
                 : FixedPoint2.Zero;
         }
 
-        // TODO: FIX SHITCODE
-        var ev = new IgnoreHeathChangeEvent();
+        var ev = new OnHealthChangeEvent(damageSpec);
         RaiseLocalEvent(entity, ref ev);
-        if (ev.Immune)
-        {
-            damageSpec = DamageSpecifier.GetNegative(damageSpec);
-            if (damageSpec.GetTotal() == FixedPoint2.Zero)
-                return;
-        }
+        damageSpec = ev.Damage;
         // </Goob>
 
         _damageable.TryChangeDamage(
