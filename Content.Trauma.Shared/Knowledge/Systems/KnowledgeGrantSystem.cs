@@ -97,6 +97,13 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             {
                 _knowledge.EnsureKnowledge(brain, id, level);
             }
+            if (ent.Comp.GrantEverything)
+            {
+                foreach (var id in _knowledge.AllKnowledges.Keys)
+                {
+                    _knowledge.EnsureKnowledge(brain, id, 100);
+                }
+            }
             PredictedQueueDel(ent);
             PredictedSpawnNextToOrDrop(ent.Comp.Ash, user);
             return;

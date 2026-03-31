@@ -1,35 +1,32 @@
 - type: construction
-  id: HandleSmall
-  graph: Handle
-  startNode: start
-  targetNode: unfinishedhandle
+  abstract: true
+  id: BaseForgingItem
+  targetNode: finish
   category: construction-category-forging
   objectType: Item
   theory:
     FabricationKnowledge: 1
+
+- type: construction
+  parent: BaseForgingItem
+  id: HandleSmall
+  graph: Handle
+  targetNode: unfinishedhandle
   practical:
     CarvingKnowledge: 1
   useQuality: false
 
 - type: construction
+  parent: BaseForgingItem
   id: ClothingHandsGlovesForge
   graph: ClothingHandsGlovesForge
-  startNode: start
-  targetNode: finish
-  category: construction-category-forging
-  objectType: Item
-  theory:
-    FabricationKnowledge: 1
   practical:
     TailoringKnowledge: 3
 
 - type: construction
+  parent: BaseForgingItem
   id: AnvilBottom
   graph: AnvilBottom
-  startNode: start
-  targetNode: finish
-  category: construction-category-forging
-  objectType: Item
   theory:
     FabricationKnowledge: 2
   practical:
@@ -37,25 +34,14 @@
   useQuality: false
 
 - type: construction
+  parent: AnvilBottom
   id: AnvilTop
   graph: AnvilTop
-  startNode: start
-  targetNode: finish
-  category: construction-category-forging
-  objectType: Item
-  theory:
-    FabricationKnowledge: 2
-  practical:
-    MetalworkingKnowledge: 1
-  useQuality: false
 
 - type: construction
+  parent: BaseForgingItem
   id: SteelScraps
   graph: SteelScraps
-  startNode: start
-  targetNode: finish
-  category: construction-category-forging
-  objectType: Item
   theory:
     FabricationKnowledge: 0
   practical:
@@ -63,49 +49,28 @@
   useQuality: false
 
 - type: construction
+  parent: SteelScraps
   id: BrassScraps
   graph: BrassScraps
-  startNode: start
-  targetNode: finish
-  category: construction-category-forging
-  objectType: Item
-  theory:
-    FabricationKnowledge: 0
-  practical:
-    MetalworkingKnowledge: 0
-  useQuality: false
 
 - type: construction
+  parent: SteelScraps
   id: PlasteelScraps
   graph: PlasteelScraps
-  startNode: start
-  targetNode: finish
-  category: construction-category-forging
-  objectType: Item
-  theory:
-    FabricationKnowledge: 0
-  practical:
-    MetalworkingKnowledge: 0
-  useQuality: false
 
 - type: construction
+  parent: BaseForgingItem
   id: WetBrick
   graph: WetBrick
-  startNode: start
-  targetNode: finish
-  category: construction-category-forging
-  objectType: Item
   theory:
     FabricationKnowledge: 0
   useQuality: false
 
 - type: construction
+  parent: BaseForgingItem
   id: ForgeKnife
   graph: ForgeKnife
-  startNode: start
   targetNode: handle
-  category: construction-category-forging
-  objectType: Item
   theory:
     FabricationKnowledge: 2
   practical:
@@ -113,12 +78,10 @@
     WeaponsKnowledge: 3
 
 - type: construction
+  parent: BaseForgingItem
   id: ForgeTool
   graph: ForgeTool
-  startNode: start
   targetNode: handle
-  category: construction-category-forging
-  objectType: Item
   theory:
     FabricationKnowledge: 1
   practical:
@@ -126,12 +89,10 @@
     WeaponsKnowledge: 3
 
 - type: construction
+  parent: BaseForgingItem
   id: ForgeArrow
   graph: ForgeArrow
-  startNode: start
   targetNode: handle
-  category: construction-category-forging
-  objectType: Item
   theory:
     FabricationKnowledge: 1
   practical:
@@ -139,12 +100,10 @@
     WeaponsKnowledge: 5
 
 - type: construction
+  parent: BaseForgingItem
   id: ForgeSword
   graph: ForgeSword
-  startNode: start
   targetNode: handle
-  category: construction-category-forging
-  objectType: Item
   theory:
     FabricationKnowledge: 3
   practical:
@@ -152,12 +111,10 @@
     WeaponsKnowledge: 4
 
 - type: construction
+  parent: BaseForgingItem
   id: ForgeBlugeon
   graph: ForgeBlugeon
-  startNode: start
   targetNode: handle
-  category: construction-category-forging
-  objectType: Item
   theory:
     FabricationKnowledge: 3
   practical:

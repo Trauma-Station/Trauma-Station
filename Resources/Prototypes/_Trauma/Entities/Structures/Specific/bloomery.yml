@@ -1,3 +1,5 @@
+# TODO: BRUH DO THIS WITH CODE
+
 # Unloaded
 
 - type: entity
@@ -28,17 +30,21 @@
     damageModifierSet: StructuralMetallic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger: !type:DamageTrigger
         damage: 200
       behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:SpawnEntitiesBehavior
-          spawn:
-            Brick1:
-              min: 13
-              max: 15
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Brick1:
+            min: 13
+            max: 15
   - type: Sprite
     sprite: _Trauma/Structures/Forging/bloomery.rsi
     state: cold

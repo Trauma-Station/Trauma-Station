@@ -16,6 +16,7 @@
   color: "#b6946d"
   price: 0.1 # $10 for 1 unit
 
+# TODO: remove ingot materials, ingot should be a tag and just use the existing material
 - type: material
   id: BrassIngot
   stackEntity: BrassIngot

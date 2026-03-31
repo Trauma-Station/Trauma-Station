@@ -1,4 +1,5 @@
 # Arrows
+# TODO: make all this shit generic, it should just require any arrow head and have code properly combine them
 
 - type: constructionGraph
   id: ForgeArrow
