@@ -383,6 +383,15 @@
   - type: Tag
     tags:
     - ImprovisedShotgun # Goobstation
+    - Trash # Trauma
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 150
+      Steel: 150
+      Plastic: 100
+      Wood: 150
+  #</Trauma>
 
 - type: entity
   name: improvised shotgun

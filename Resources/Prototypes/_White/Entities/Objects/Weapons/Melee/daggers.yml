@@ -10,7 +10,7 @@
 - type: entity
   name: betrayal knife
   description: Watch your back!
-  parent: [BaseKnife, BaseSyndicateContraband, KnifeDurability] # Trauma - Durability
+  parent: [BaseKnife, BaseSyndicateContraband, KnifeDurabilitySharpenOnly] # Trauma - Durability
   id: BetrayalKnife
   components:
   - type: Sprite

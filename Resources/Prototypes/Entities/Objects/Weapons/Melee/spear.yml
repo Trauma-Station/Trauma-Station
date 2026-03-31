@@ -141,27 +141,15 @@
   description: A spear with a reinforced glass shard as a tip.
   components:
   # <Trauma>
-  - type: Destructible
-    thresholds:
-    - trigger: !type:DamageTrigger
-        damage: 12
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          PartRodMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 3
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Steel: 50
+  - type: Tag
+    tags:
+    - Spear
+    - ScurretWearable
+    - Trash
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/reinforced_spear.rsi
@@ -184,27 +172,16 @@
   description: A spear with a plasma shard as a tip.
   components:
   # <Trauma>
-  - type: Destructible
-    thresholds:
-    - trigger: !type:DamageTrigger
-        damage: 15
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          PartRodMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 2
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Steel: 50
+      Plasma: 50
+  - type: Tag
+    tags:
+    - Spear
+    - ScurretWearable
+    - Trash
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/plasma_spear.rsi
@@ -227,27 +204,16 @@
   description: A spear with a uranium shard as a tip.
   components:
   # <Trauma>
-  - type: Destructible
-    thresholds:
-    - trigger: !type:DamageTrigger
-        damage: 15
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          PartRodMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 2
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Steel: 50
+      Uranium: 50
+  - type: Tag
+    tags:
+    - Spear
+    - ScurretWearable
+    - Trash
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/uranium_spear.rsi
@@ -300,6 +266,14 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Bone: 200
+  - type: Tag
+    tags:
+    - Trash
+  # </Trauma>
 
 - type: entity
   name: sharkminnow tooth spear
@@ -320,3 +294,14 @@
         Piercing: 30 #goobedit - buff spear variant, nerf tooth.
   - type: Construction
     graph: SpearSharkMinnow
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Steel: 50
+  - type: Tag
+    tags:
+    - Spear
+    - ScurretWearable
+    - Trash
+  # </Trauma>

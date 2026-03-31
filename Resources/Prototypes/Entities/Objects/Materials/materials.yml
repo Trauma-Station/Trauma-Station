@@ -768,6 +768,11 @@
           Quantity: 3
   - type: Item
     heldPrefix: bones
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Bone: 100
+  # </Trauma>
 
 - type: entity
   parent: MaterialBones

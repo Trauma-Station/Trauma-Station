@@ -55,6 +55,12 @@
   - type: Construction
     graph: BoneAxeConstructionGraph
     node: axe
+  - type: PhysicalComposition
+    materialComposition:
+      Bone: 300
+  - type: Tag
+    tags:
+    - Trash
 
 - type: entity
   name: bone dagger
@@ -85,3 +91,7 @@
   - type: Tag
     tags:
     - Knife
+    - Trash
+  - type: PhysicalComposition
+    materialComposition:
+      Bone: 100
