@@ -11,3 +11,10 @@
   interval: 5.0
   chance: 0.3
   withChat: true
+
+- type: autoEmote
+  id: Honk
+  emote: Honk
+  interval: 13.0
+  chance: 0.7
+  withChat: true
