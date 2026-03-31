@@ -15,6 +15,8 @@ public sealed partial class BurnableFoodSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
+    private List<Entity<BurnableFoodComponent>> _burned = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -31,6 +33,23 @@ public sealed partial class BurnableFoodSystem : EntitySystem
             || internalTemp.Temperature < ent.Comp.BurnTemp)
             return;
 
+        // deferred because it's called from a TemperatureComponent update loop
+        _burned.Add(ent);
+    }
+
+    public override void FrameUpdate(float frameTime)
+    {
+        base.FrameUpdate(frameTime);
+
+        foreach (var ent in _burned)
+        {
+            Burn(ent);
+        }
+        _burned.Clear();
+    }
+
+    public void Burn(Entity<BurnableFoodComponent> ent)
+    {
         var originalName = Name(ent);
         var newEnt = SpawnAtPosition(ent.Comp.BurnedFoodPrototype, Transform(ent.Owner).Coordinates);
 

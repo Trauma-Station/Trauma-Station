@@ -22,7 +22,7 @@
   stackEntity: BrassIngot
   name: materials-brass-ingot
   unit: materials-unit-ingot
-  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_brass_hot }
+  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_brass }
   color: "#cc8739"
   price: 1 # $100 for 1 unit
 
@@ -31,7 +31,7 @@
   stackEntity: SteelIngot
   name: materials-steel-ingot
   unit: materials-unit-ingot
-  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_steel_hot }
+  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_steel }
   color: "#6a7b85"
   price: 1 # $100 for 1 unit
 
@@ -40,7 +40,7 @@
   stackEntity: PlasteelIngot
   name: materials-plasteel-ingot
   unit: materials-unit-ingot
-  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel_hot }
+  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel }
   color: "#7dafd1"
   price: 1 # $100 for 1 unit
 

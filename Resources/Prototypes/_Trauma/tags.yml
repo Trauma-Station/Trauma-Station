@@ -107,6 +107,9 @@
   id: IngotWorkable
 
 - type: Tag
+  id: IngotWorkableSteel
+
+- type: Tag
   id: MagazineTurret
 
 - type: Tag

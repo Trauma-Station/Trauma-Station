@@ -31,7 +31,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseMetalic
+  parent: BaseMetallic
   id: BaseMetallicBrass
   components:
   - type: Metallic
@@ -55,3 +55,35 @@
   - type: Metallic
     minTemp: 1456
     idealTemp: 1483
+
+# Workable, already above ideal temp
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicBrass
+  id: BaseWorkableBrass
+  components:
+  - type: Metallic
+    workable: true
+  - type: Temperature
+    currentTemperature: 950
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicSteel
+  id: BaseWorkableSteel
+  components:
+  - type: Metallic
+    workable: true
+  - type: Temperature
+    currentTemperature: 1300
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicPlasteel
+  id: BaseWorkablePlasteel
+  components:
+  - type: Metallic
+    workable: true
+  - type: Temperature
+    currentTemperature: 1500

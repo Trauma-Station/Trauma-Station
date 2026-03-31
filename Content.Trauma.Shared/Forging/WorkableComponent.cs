@@ -34,6 +34,12 @@ public sealed partial class WorkableComponent : Component
     /// </summary>
     [DataField(required: true)]
     public EntProtoId Result;
+
+    /// <summary>
+    /// How many items to spawn.
+    /// </summary>
+    [DataField]
+    public int Amount = 1;
 }
 
 /// <summary>

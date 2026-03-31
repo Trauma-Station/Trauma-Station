@@ -48,7 +48,6 @@
   - node: handlemedium
     entity: HandleMedium
 
-
   - node: handlelarge
     entity: HandleLarge
 
@@ -60,19 +59,19 @@
     edges:
     - to: finish
       steps:
-      - tag: IngotSteel
+      - tag: IngotWorkableSteel
         name: construction-graph-tag-ingotsteel
         icon:
           sprite: _Trauma/Objects/Specific/forging.rsi
-          state: ingot_steel_hot
+          state: ingot_steel
         doAfter: 5
-      - tag: IngotSteel
+      - tag: IngotWorkableSteel
         name: construction-graph-tag-ingotsteel
         icon:
           sprite: _Trauma/Objects/Specific/forging.rsi
-          state: ingot_steel_hot
+          state: ingot_steel
   - node: finish
-    entity: AnvilTopUnfinishedHot
+    entity: AnvilTopUnfinished
 
 - type: constructionGraph
   id: AnvilBottom
@@ -82,19 +81,19 @@
     edges:
     - to: finish
       steps:
-      - tag: IngotSteel
+      - tag: IngotWorkableSteel
         name: construction-graph-tag-ingotsteel
         icon:
           sprite: _Trauma/Objects/Specific/forging.rsi
-          state: ingot_steel_hot
+          state: ingot_steel
         doAfter: 5
-      - tag: IngotSteel
+      - tag: IngotWorkableSteel
         name: construction-graph-tag-ingotsteel
         icon:
           sprite: _Trauma/Objects/Specific/forging.rsi
-          state: ingot_steel_hot
+          state: ingot_steel
   - node: finish
-    entity: AnvilBottomUnfinishedHot
+    entity: AnvilBottomUnfinished
 
 - type: constructionGraph
   id: SteelScraps
@@ -104,9 +103,9 @@
     edges:
     - to: finish
       steps:
-        - material: Steel
-          amount: 3
-          doAfter: 3
+      - material: Steel
+        amount: 3
+        doAfter: 3
   - node: finish
     entity: SteelScraps
 
@@ -118,9 +117,9 @@
     edges:
     - to: finish
       steps:
-        - material: Plasteel
-          amount: 3
-          doAfter: 3
+      - material: Plasteel
+        amount: 3
+        doAfter: 3
   - node: finish
     entity: PlasteelScraps
 
@@ -132,9 +131,9 @@
     edges:
     - to: finish
       steps:
-        - material: Brass
-          amount: 3
-          doAfter: 3
+      - material: Brass
+        amount: 3
+        doAfter: 3
   - node: finish
     entity: BrassScraps
 

@@ -27,13 +27,15 @@
   id: BaseMetalBloom
   description: Refine it by smashing it with a hammer into shape!
   components:
+  - type: Metallic
+    workable: true # starts with workable heat out of the bloomery
   - type: Workable
     remaining: 25
   # TODO: heat up whatever attacked it so you can't use a bat or whatever, have to use metal hammers
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
-        damage: 100
+        damage: 300
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ] # no ingot for you
@@ -68,7 +70,7 @@
     burnSound: null
 
 - type: entity
-  parent: [ BaseMetalScraps, BaseMaterialBrass ]
+  parent: [ BaseMetalScraps, BaseMetallicBrass ]
   id: BrassScraps
   name: brass scraps
   components:
@@ -83,7 +85,7 @@
     graph: BrassScraps
 
 - type: entity
-  parent: [ BaseForgeItem, BaseMaterialBrass ]
+  parent: [ BaseForgeItem, BaseMetallicBrass ]
   id: OverheatedBrass
   name: overheated brass
   description: The metal has overheated and become brittle, smash it apart to make it usable.
@@ -109,14 +111,13 @@
       shader: Emissive
 
 - type: entity
-  parent: [ BaseMetalBloom, BrassOverheatable ]
+  parent: [ BaseWorkableBrass, BaseMetalBloom, BrassOverheatable ]
   id: BrassBloom
   name: brass bloom
-  description: Refine it by smashing it with a hammer into shape!
   components:
   - type: Sprite
     layers:
-    - state: bloombrasshot
+    - state: bloombrass
       shader: Emissive
   - type: Workable
     result: BrassIngot
@@ -129,7 +130,7 @@
   components:
   - type: Sprite
     layers:
-    - state: ingot_brass_hot
+    - state: ingot_brass
       shader: Emissive
   - type: PhysicalComposition
     materialComposition:
@@ -193,7 +194,7 @@
       shader: Emissive
 
 - type: entity
-  parent: [ BaseMetalBloom, SteelOverheatable ]
+  parent: [ BaseWorkableSteel, BaseMetalBloom, SteelOverheatable ]
   id: SteelBloom
   name: steel bloom
   components:
@@ -220,6 +221,8 @@
       SteelIngot: 100
   - type: Stack
     stackType: SteelIngot
+  - type: MetallicTags
+    workable: [ IngotWorkable, IngotWorkableSteel ]
 
 # Plasteel - 1483K +- 27K
 
@@ -278,7 +281,7 @@
       shader: Emissive
 
 - type: entity
-  parent: [ BaseMetalBloom, PlasteelOverheatable ]
+  parent: [ BaseWorkablePlasteel, BaseMetalBloom, PlasteelOverheatable ]
   id: PlasteelBloom
   name: plasteel bloom
   description: Refine it by smashing it with a hammer into shape!

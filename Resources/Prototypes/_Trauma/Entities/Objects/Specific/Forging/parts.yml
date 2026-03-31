@@ -207,7 +207,7 @@
 # Anvil Top
 
 - type: entity
-  parent: BaseAnvilPiece
+  parent: [ BaseWorkableSteel, BaseAnvilPiece ]
   id: AnvilTopUnfinished
   name: unfinished anvil top
   description: Beat it into shape!
@@ -244,7 +244,7 @@
 # Anvil Bottom
 
 - type: entity
-  parent: BaseAnvilPiece
+  parent: [ BaseWorkableSteel, BaseAnvilPiece ]
   id: AnvilBottomUnfinished
   name: unfinished anvil bottom
   description: Beat it into shape!
@@ -273,6 +273,7 @@
   - type: Construction
     graph: Anvil
     node: start
+    defaultTarget: anvil
 
 # Unwelded
 
@@ -288,3 +289,4 @@
   - type: Construction
     graph: Anvil
     node: unwelded
+    defaultTarget: anvil

@@ -16,10 +16,10 @@
   - node: unwelded
     entity: AnvilUnwelded
     edges:
-    - to: finish
+    - to: anvil
       steps:
       - tool: Welding
         doAfter: 10
 
-  - node: finish
+  - node: anvil
     entity: AnvilComplete
