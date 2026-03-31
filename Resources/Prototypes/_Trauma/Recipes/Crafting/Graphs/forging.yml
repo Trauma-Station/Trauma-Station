@@ -15,8 +15,8 @@
     edges:
     - to: handlelarge
       steps:
-      - tool: Slicing
-        doAfter: 1
+        - tool: Slicing
+          doAfter: 1
 
   - node: handlelarge
     entity: HandleLarge
@@ -27,8 +27,8 @@
           prototype: HandleSmall
           amount: 1
       steps:
-      - tool: Slicing
-        doAfter: 1
+        - tool: Slicing
+          doAfter: 1
 
   - node: handlemedium
     entity: HandleMedium
@@ -39,17 +39,11 @@
           prototype: HandleSmall
           amount: 1
       steps:
-      - tool: Slicing
-        doAfter: 1
+        - tool: Slicing
+          doAfter: 1
 
   - node: handlesmall
     entity: HandleSmall
-
-  - node: handlemedium
-    entity: HandleMedium
-
-  - node: handlelarge
-    entity: HandleLarge
 
 - type: constructionGraph
   id: AnvilTop

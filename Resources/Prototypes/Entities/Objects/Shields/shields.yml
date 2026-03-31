@@ -312,6 +312,12 @@
         params:
           variation: 0.2
           volume: -11
+    - type: PhysicalComposition
+      materialComposition:
+        Cardboard: 300
+    - type: Tag
+      tags:
+      - Trash
     # </Trauma>
 
 - type: entity
@@ -323,6 +329,7 @@
     - type: Tag #goobstation
       tags:
        - MakeshiftShield
+       - Trash # Trauma
     - type: Sprite
       state: makeshift-icon
     - type: Item
@@ -386,6 +393,9 @@
         params:
           variation: 0.2
           volume: -11
+    - type: PhysicalComposition
+      materialComposition:
+        Steel: 250
     # </Trauma>
 
 - type: entity

@@ -6024,3 +6024,12 @@ Entries:
   id: 696
   time: '2026-03-31T19:36:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1748
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Shit weapons can be destroyed by the recycler.
+  - type: Fix
+    message: Fixed some forge bugs
+  id: 697
+  time: '2026-03-31T19:53:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1747

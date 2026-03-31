@@ -3,10 +3,12 @@
   reactants:
     Carbon:
       amount: 1
-    SpaceGlue:
+    Ash:
+      amount: 2
+    Aluminium:
       amount: 2
   products:
-    Cement: 3
+    Cement: 5
 
 - type: reaction
   id: CementWetReaction

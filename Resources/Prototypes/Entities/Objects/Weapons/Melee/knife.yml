@@ -266,6 +266,7 @@
     - CombatKnife
     - Knife
     - Shiv
+    - Trash # Trauma
   - type: Construction
     graph: Shiv
     node: icon
@@ -282,30 +283,12 @@
   - type: DisarmMalus
     malus: 0.225
   - type: UndetectableContraband #Goobstation-Contraband detector
-  - type: Destructible # <Trauma>
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlass:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: DamageOnHit # Do not fucking delete this shit, armok added improvised weapons breaking for a reason
-    damage:
-      types:
-        Blunt: 1
-  - type: Damageable
-    damageContainer: Inorganic # </Trauma>
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+  #</Trauma>
 
 - type: entity
   name: reinforced shiv
@@ -325,24 +308,19 @@
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
-  - type: Destructible # <Trauma>
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 15
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlassReinforced:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ] # </Trauma>
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+      Steel: 50
+  - type: Tag
+    tags:
+    - CombatKnife
+    - Knife
+    - Shiv
+    - Trash
+  #</Trauma>
 
 - type: entity
   name: plasma shiv
@@ -362,24 +340,19 @@
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
-  - type: Destructible # <Trauma>
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 20
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlassPlasma:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ] # </Trauma>
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+      Plasma: 50
+  - type: Tag
+    tags:
+    - CombatKnife
+    - Knife
+    - Shiv
+    - Trash
+  #</Trauma>
 
 - type: entity
   name: uranium shiv
@@ -400,24 +373,19 @@
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
-  - type: Destructible # <Trauma>
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 20
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlassUranium:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ] # </Trauma>
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+      Uranium: 50
+  - type: Tag
+    tags:
+    - CombatKnife
+    - Knife
+    - Shiv
+    - Trash
+  #</Trauma>
 
 - type: entity
   name: throwing knife

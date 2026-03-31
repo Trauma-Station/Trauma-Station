@@ -156,6 +156,7 @@
     tags:
     - ShellShotgun
     - ShellShotgunLight
+    - Trash # Trauma
   - type: Sprite
     layers:
       - state: improvised
@@ -167,6 +168,13 @@
     proto: PelletShotgunImprovisedSpread
   - type: SpentAmmoVisuals
     state: "improvised"
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Plastic: 50
+      Glass: 200
+  #</Trauma>
 
 - type: entity
   parent: [ BaseShellShotgun, BaseSecurityContraband ]
