@@ -71,7 +71,7 @@
 - type: cargoProduct
   id: ServiceSmokeables
   icon:
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/green.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/newstation.rsi # Trauma
     state: closed
   product: CrateServiceSmokeables
   cost: 1500
@@ -81,7 +81,7 @@
 - type: cargoProduct
   id: ServiceCustomSmokable
   icon:
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/green.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/sodfield.rsi # Trauma
     state: closed
   product: CrateServiceCustomSmokable
   cost: 1000
