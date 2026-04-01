@@ -67,18 +67,18 @@
 - type: entity
   id: CigCartonGreen
   parent: [ BoxCardboard, BaseBagOpenClose ]
-  name: Newstations carton # Trauma
-  description: "A carton containing 6 packs of Newstations."
+  name: Spessman's Smokes carton
+  description: "A carton containing 6 packets of Spessman's Smokes."
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/newstation.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/green.rsi
     layers:
       - state: closed
         map: ["closeLayer"]
       - state: open
         map: ["openLayer"]
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/newstation.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/green.rsi
     size: Normal
   - type: Storage
     grid:
@@ -102,15 +102,15 @@
 - type: entity
   id: CigCartonRed
   parent: CigCartonGreen
-  name: Dromad Red 99s carton # Trauma
-  description: A carton containing 6 packs of Dromads.
+  name: Dromedaryco carton
+  description: A carton containing 6 packets of Dromedarycos.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/dromad.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/red.rsi
     layers:
       - state: closed
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/dromad.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/red.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -120,15 +120,15 @@
 - type: entity
   id: CigCartonBlue
   parent: CigCartonGreen
-  name: Sodfield Blue carton # Trauma
-  description: A carton containing 6 packs of Sodfield Blue.
+  name: AcmeCo carton
+  description: A carton containing 6 packets of AcmeCo.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/sodfield.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/blue.rsi
     layers:
       - state: closed
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/sodfield.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/blue.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -138,15 +138,15 @@
 - type: entity
   id: CigCartonBlack
   parent: CigCartonGreen
-  name: Solaria carton # Trauma
-  description: A carton containing 6 packs of Solaria.
+  name: Nomads carton
+  description: A carton containing 6 packets of Nomads.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/solaria.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/black.rsi
     layers:
       - state: closed
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/solaria.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/black.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -160,7 +160,7 @@
   description: A carton containg 3 packs of Dan's soaked smokes.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/mixed.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/mixed.rsi
     layers:
       - state: closed
   - type: Item

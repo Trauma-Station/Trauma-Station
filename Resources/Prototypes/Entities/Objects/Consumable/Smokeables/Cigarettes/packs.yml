@@ -13,27 +13,27 @@
       visible: false
     - state: cig1
       map: ["cig1"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig2
       map: ["cig2"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig3
       map: ["cig3"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig4
       map: ["cig4"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig5
       map: ["cig5"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig6
       map: ["cig6"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
   - type: Tag
     tags:
@@ -87,27 +87,27 @@
       visible: false
     - state: cig1
       map: ["cig1"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig2
       map: ["cig2"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig3
       map: ["cig3"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig4
       map: ["cig4"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig5
       map: ["cig5"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig6
       map: ["cig6"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
+      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
   - type: Tag
     tags:
@@ -148,9 +148,9 @@
   description: A label on the packaging reads, dying with joy!
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/newstation.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/newstation.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi
 
 - type: entity
   id: CigPackRed
@@ -159,9 +159,9 @@
   description: The most popular brand of Space Cigarettes. There is an image of some kind of humanoid dromedary creature in a salt desert.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/dromad.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/dromad.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
 
 - type: entity
   id: CigPackBlue
@@ -170,9 +170,9 @@
   description: Light smokes, most of their ad campaigns are targetted towards shaft miners.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/sodfield.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/sodfield.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
 
 - type: entity
   id: CigPackBlack
@@ -181,9 +181,9 @@
   description: An incredibly harsh cigarette, the packaging has sol common on it and golden images of locations from Old Terra.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/solaria.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/solaria.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
 
 - type: entity
   id: CigPackSyndicate
