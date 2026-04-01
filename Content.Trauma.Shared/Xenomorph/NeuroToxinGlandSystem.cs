@@ -34,5 +34,6 @@ public sealed class NeurotoxinGlandSystem : EntitySystem
         ent.Comp.Active = !ent.Comp.Active;
         _popup.PopupPredicted(Loc.GetString(ent.Comp.Active ? "neurotoxin-gland-activated" : "neurotoxin-gland-deactivated"), args.Performer, args.Performer);
         Dirty(ent);
+        args.Handled = true;
     }
 }
