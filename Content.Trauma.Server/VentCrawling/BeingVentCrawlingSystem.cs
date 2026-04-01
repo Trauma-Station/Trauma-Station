@@ -4,14 +4,15 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
-using Content.Trauma.Shared.VentCrawling.Components;
 using Content.Shared.Actions.Events;
-using Content.Shared.Interaction.Events;
+using Content.Shared.Atmos;
 using Content.Shared.Hands;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.NodeContainer;
 using Content.Shared.Throwing;
+using Content.Trauma.Shared.VentCrawling.Components;
 
 namespace Content.Trauma.Server.VentCrawling;
 
