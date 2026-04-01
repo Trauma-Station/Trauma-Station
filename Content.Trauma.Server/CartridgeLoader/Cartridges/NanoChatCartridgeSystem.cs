@@ -8,18 +8,18 @@ using Content.Server.Radio;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.CartridgeLoader;
+using Content.Shared.CCVar;
 using Content.Shared.Database;
+using Content.Shared.PDA;
+using Content.Shared.Radio.Components;
+using Content.Trauma.Common.CartridgeLoader.Cartridges;
+using Content.Trauma.Common.NanoChat; // Goob
 using Content.Trauma.Shared.CartridgeLoader.Cartridges;
 using Content.Trauma.Shared.NanoChat;
-using Content.Shared.PDA;
-using Content.Shared.Radio;
-using Content.Shared.Radio.Components;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Content.Shared.CCVar;
-using Robust.Shared.Configuration;
 using Robust.Shared.Utility;
-using Content.Trauma.Common.NanoChat; // Goob
 
 namespace Content.Trauma.Server.CartridgeLoader.Cartridges;
 
@@ -286,7 +286,7 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
         var message = new NanoChatMessage(
             _timing.CurTime,
             content,
-            (uint)card.Comp.Number
+            (uint) card.Comp.Number
         );
 
         // Attempt delivery
@@ -471,7 +471,7 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
                 senderRecipient with { HasUnread = true });
 
         if (recipient.Comp.NotificationsMuted ||
-            recipient.Comp.PdaUid is not {} pdaUid ||
+            recipient.Comp.PdaUid is not { } pdaUid ||
             !TryComp<CartridgeLoaderComponent>(pdaUid, out var loader) ||
             // Don't notify if the recipient has the NanoChat program open with this chat selected.
             (hasSelectedCurrentChat &&

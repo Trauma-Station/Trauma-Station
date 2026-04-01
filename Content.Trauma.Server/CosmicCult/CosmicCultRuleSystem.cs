@@ -1,48 +1,49 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Common.Temperature.Components;
 using Content.Goobstation.Shared.Religion; // Goobstation - Shitchap
 using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Trauma.Server.CosmicCult.Components;
 using Content.Server.Actions;
-using Content.Shared.Administration.Systems;
 using Content.Server.Antag;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.Rotting;
 using Content.Server.Audio;
-using Content.Server.Cuffs;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
+using Content.Server.Cuffs;
 using Content.Server.EUI;
-using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Rules;
 using Content.Server.Ghost;
-using Content.Server.Objectives.Components;
-using Content.Shared.Radio.Components;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
-using Content.Shared.Eye;
-using Content.Trauma.Shared.CosmicCult.Components.Examine;
-using Content.Trauma.Shared.CosmicCult.Components;
-using Content.Trauma.Shared.CosmicCult.Prototypes;
-using Content.Trauma.Shared.CosmicCult;
-using Content.Trauma.Shared.Roles;
+using Content.Shared.Administration.Systems;
 using Content.Shared.Audio;
 using Content.Shared.Cuffs.Components;
+using Content.Shared.Eye;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Light.Components;
-using Content.Shared.Mind.Components;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
 using Content.Shared.Zombies;
+using Content.Trauma.Server.CosmicCult.Components;
+using Content.Trauma.Server.Objectives.Components;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.CosmicCult.Components.Examine;
+using Content.Trauma.Shared.CosmicCult.Prototypes;
+using Content.Trauma.Shared.Roles;
 using Robust.Server.Audio;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -51,7 +52,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Trauma.Server.CosmicCult;
 
@@ -290,7 +290,7 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                 if (!TryComp(cultist, out MobStateComponent? state)
                     || state.CurrentState == MobState.Dead
                     || !TryComp(cultist, out MindContainerComponent? mindContainer)
-                    || mindContainer.Mind is not {} mind)
+                    || mindContainer.Mind is not { } mind)
                     continue;
 
                 var ascendant = Spawn("MobCosmicAstralAscended", Transform(cultist).Coordinates);

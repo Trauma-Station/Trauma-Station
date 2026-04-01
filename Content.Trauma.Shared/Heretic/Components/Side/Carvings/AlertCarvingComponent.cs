@@ -8,17 +8,14 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Shared.Heretic.Components.Side.Carvings;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class SwapOnProjectileHitComponent : Component
+public sealed partial class AlertCarvingComponent : Component
 {
     [DataField]
-    public SoundSpecifier? Sound;
+    public EntityUid? User;
 
     [DataField]
-    public EntProtoId Effect = "SwapSpellEffect";
+    public SoundSpecifier? AlertSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/curse.ogg");
 
     [DataField]
-    public EntityWhitelist Whitelist;
-
-    [DataField]
-    public bool DeleteProjectileOnSwap;
+    public int TeleportDelay = 5000;
 }

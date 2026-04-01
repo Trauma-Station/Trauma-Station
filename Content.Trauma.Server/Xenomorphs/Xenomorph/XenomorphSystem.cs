@@ -1,20 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Trauma.Server.Language;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
-using Content.Server.Chat.Systems;
-using Content.Trauma.Shared.Language;
-using Content.Medical.Shared.Traumas;
-using Content.Trauma.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
-using Content.Shared.FixedPoint;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Server.Language;
+using Content.Trauma.Shared.Xenomorphs.Xenomorph;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;

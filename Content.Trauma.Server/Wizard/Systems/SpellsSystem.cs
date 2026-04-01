@@ -4,11 +4,9 @@ using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Actions;
 using Content.Goobstation.Common.Bloodstream;
-using Content.Goobstation.Shared.Teleportation.Systems;
+using Content.Goobstation.Server.Wizard.Components;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Server._Goobstation.Wizard.Components;
-using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Antag;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Managers;
@@ -47,9 +45,9 @@ using Content.Shared.Roles.Components;
 using Content.Shared.Speech.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Wizard;
+using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.BindSoul;
-using Content.Trauma.Shared.Wizard.Chuuni;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
@@ -101,12 +99,30 @@ public sealed class SpellsSystem : SharedSpellsSystem
         SubscribeLocalEvent<MindContainerComponent, SummonSimiansMaxedOutEvent>(OnMonkeyAscension);
         SubscribeLocalEvent<BloodlossDamageMultiplierComponent, StoppedTakingBloodlossDamageEvent>(OnBloodlossStopped);
         SubscribeLocalEvent<BloodlossDamageMultiplierComponent, GetBloodlossDamageMultiplierEvent>(OnGetBloodlossMultiplier);
+
+        SubscribeNetworkEvent<StopTargetingEvent>(OnStopTargeting);
+        SubscribeAllEvent<ChargeSpellRaysEffectEvent>(OnChargeEffect);
     }
 
     private void OnGetBloodlossMultiplier(Entity<BloodlossDamageMultiplierComponent> ent,
         ref GetBloodlossDamageMultiplierEvent args)
     {
         args.Multiplier *= ent.Comp.Multiplier;
+    }
+
+    private void OnChargeEffect(ChargeSpellRaysEffectEvent ev)
+    {
+        var uid = GetEntity(ev.Uid);
+
+        CreateChargeEffect(uid, ev);
+    }
+
+    private void OnStopTargeting(StopTargetingEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession != _player.LocalSession)
+            return;
+
+        StopTargeting?.Invoke();
     }
 
     protected override void CreateChargeEffect(EntityUid uid, ChargeSpellRaysEffectEvent ev)

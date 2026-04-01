@@ -1,7 +1,7 @@
 <controls:StatusTabControl
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:maths="using:Robust.Shared.Maths;assembly=Robust.Shared.Maths"
+    xmlns:maths="using:Robust.Shared.Maths"
     xmlns:info="using:Content.Client.Info"
     xmlns:controls="using:Content.Trauma.Client.UserActions.Tabs"
     xmlns:actions="using:Content.Client.UserInterface.Systems.Actions.Widgets">

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Effects;
-using Content.Server._Goobstation.Wizard.Components;
+using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Electrocution;
-using Content.Trauma.Shared.Wizard.Projectiles;
-using Content.Shared.Magic.Components;
-using Content.Shared.StatusEffect;
 using Content.Shared.Throwing;
+using Content.Trauma.Common.Wizard;
+using Content.Trauma.Common.Wizard.Projectile;
+using Content.Trauma.Server.Wizard.Systems;
 
 namespace Content.Goobstation.Server.Wizard.Systems;
 

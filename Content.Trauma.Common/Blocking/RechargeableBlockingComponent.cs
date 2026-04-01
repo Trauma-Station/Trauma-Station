@@ -11,7 +11,9 @@ public sealed partial class RechargeableBlockingComponent : Component
     [DataField]
     public float ChargedRechargeRate = 2f;
 
-    // Percentage of maxCharge to be able to activate item again.
+    /// <summary>
+    /// Percentage of maxCharge to be able to activate item again.
+    /// </summary>
     [DataField]
     public float RechargePercentage = 0.1f;
 

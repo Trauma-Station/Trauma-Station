@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Goobstation.Server.Wizard.Components;
-using Content.Goobstation.Server.Wizard.Store;
 using Content.Server.Antag;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
@@ -15,6 +14,7 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Random;
+using Content.Trauma.Common.Wizard;
 using Content.Trauma.Shared.Objectives;
 using Content.Trauma.Shared.Wizard;
 using Robust.Server.Player;

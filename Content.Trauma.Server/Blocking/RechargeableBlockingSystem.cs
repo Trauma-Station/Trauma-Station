@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Blocking;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Item.ItemToggle;
@@ -9,7 +8,7 @@ using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
-using Content.Shared.PowerCell.Components;
+using Content.Trauma.Common.Blocking;
 
 namespace Content.Trauma.Server.Blocking;
 
@@ -39,7 +38,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
 
     private int GetRemainingTime(EntityUid uid)
     {
-        if (_battery.GetBattery(uid) is not {} battery || battery.Comp.ChargeRate == 0)
+        if (_battery.GetBattery(uid) is not { } battery || battery.Comp.ChargeRate == 0)
             return 0;
 
         var remaining = battery.Comp.MaxCharge - _battery.GetCharge(battery.AsNullable());
@@ -48,7 +47,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
 
     private void OnDamageChanged(EntityUid uid, RechargeableBlockingComponent component, DamageChangedEvent args)
     {
-        if (_battery.GetBattery(uid) is not {} battery
+        if (_battery.GetBattery(uid) is not { } battery
             || !_itemToggle.IsActivated(uid)
             || args.DamageDelta == null)
             return;
@@ -81,7 +80,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
 
     private void CheckCharge(EntityUid uid, RechargeableBlockingComponent component)
     {
-        if (_battery.GetBattery(uid) is not {} battery)
+        if (_battery.GetBattery(uid) is not { } battery)
             return;
 
         BatterySelfRechargerComponent? recharger;

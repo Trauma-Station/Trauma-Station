@@ -2,9 +2,9 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Effects;
-using Content.Server._Goobstation.Wizard.Components;
-using Content.Trauma.Shared.TelescopicBaton;
+using Content.Goobstation.Server.Wizard.Components;
 using Content.Shared.Timing;
+using Content.Trauma.Shared.TelescopicBaton;
 using Robust.Server.Audio;
 
 namespace Content.Goobstation.Server.Wizard.Systems;

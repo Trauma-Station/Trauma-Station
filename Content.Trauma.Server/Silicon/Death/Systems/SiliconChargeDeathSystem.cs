@@ -1,24 +1,24 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Silicon.Death;
-using Content.Trauma.Shared.Silicon.Systems;
 using Content.Server.Radio;
 using Content.Shared.Actions;
 using Content.Shared.CombatMode;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Power.Components;
+using Content.Shared.PowerCell;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
+using Content.Trauma.Shared.Silicon.Death;
+using Content.Trauma.Shared.Silicon.Systems;
 
 namespace Content.Trauma.Server.Silicon.Death;
 
 public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
 {
-    // Goobstation Start - Energycrit
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
-    // Goobstation End - Energycrit
+    [Dependency] private readonly PowerCellSystem _powerCell = default!;
 
     public override void Initialize()
     {

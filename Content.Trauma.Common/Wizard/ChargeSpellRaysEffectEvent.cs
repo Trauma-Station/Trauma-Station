@@ -5,7 +5,7 @@ using Robust.Shared.Serialization;
 namespace Content.Trauma.Common.Wizard;
 
 [Serializable, NetSerializable]
-public readonly struct ChargeSpellRaysEffectEvent(NetEntity uid)
+public sealed class ChargeSpellRaysEffectEvent(NetEntity uid) : EntityEventArgs
 {
-    public readonly NetEntity Uid = uid;
+    public NetEntity Uid = uid;
 }

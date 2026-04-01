@@ -3,18 +3,17 @@
 using System.Linq;
 using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
-using Content.Shared.Kitchen.Components; // Trauma - moved microwaved event to shared
 using Content.Server.NameIdentifier;
 using Content.Shared.Database;
-using Content.Trauma.Shared.CartridgeLoader.Cartridges;
-using Content.Trauma.Shared.NanoChat;
 using Content.Shared.Kitchen;
 using Content.Shared.NameIdentifier;
 using Content.Shared.PDA;
+using Content.Trauma.Common.CartridgeLoader.Cartridges;
+using Content.Trauma.Common.NanoChat;
+using Content.Trauma.Shared.NanoChat;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Trauma.Common.NanoChat;
 
 namespace Content.Trauma.Server.NanoChat;
 
@@ -149,7 +148,7 @@ public sealed class NanoChatSystem : SharedNanoChatSystem
 
         // Assign a random number
         _name.GenerateUniqueName(ent, _nameIdentifierGroup, out var number);
-        ent.Comp.Number = (uint)number;
+        ent.Comp.Number = (uint) number;
         Dirty(ent);
     }
 }

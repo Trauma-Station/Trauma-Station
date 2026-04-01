@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server._Goobstation.Wizard.Systems;
-using Content.Trauma.Shared.Wizard;
-using Content.Trauma.Shared.Wizard.EventSpells;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles.Events;
 using Content.Shared.Chat;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Database;
-using Content.Shared.GameTicking.Components;
+using Content.Trauma.Server.Wizard.Systems;
+using Content.Trauma.Shared.Wizard;
+using Content.Trauma.Shared.Wizard.EventSpells;
 using Robust.Server.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -83,7 +83,7 @@ public sealed class GlobalTileMovementSystem : EntitySystem
 
     private void OnGhostRoleSpawnerUsed(GhostRoleSpawnerUsedEvent args)
     {
-        if (GetRule() is not {} rule)
+        if (GetRule() is not { } rule)
             return;
 
         EntityManager.AddComponents(args.Spawned, rule.Comp.Components);
@@ -91,7 +91,7 @@ public sealed class GlobalTileMovementSystem : EntitySystem
 
     private void OnPlayerSpawn(PlayerSpawnCompleteEvent ev)
     {
-        if (GetRule() is not {} rule ||
+        if (GetRule() is not { } rule ||
             !ev.LateJoin ||
             TerminatingOrDeleted(ev.Mob))
             return;

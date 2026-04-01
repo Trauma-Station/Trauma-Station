@@ -1,17 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Clothing.Systems;
+using Content.Server.Respawn;
+using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Destructible.Thresholds.Behaviors;
 using Content.Shared.Destructible.Thresholds.Triggers;
-using Content.Server.Respawn;
-using Content.Trauma.Shared.Wizard;
-using Content.Trauma.Shared.Wizard.BindSoul;
-using Content.Shared.Destructible;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Trauma.Server.Wizard.Systems;
+using Content.Trauma.Shared.Wizard;
+using Content.Trauma.Shared.Wizard.BindSoul;
 using Robust.Shared.GameObjects.Components.Localization;
 
 namespace Content.Goobstation.Server.Wizard.Systems;

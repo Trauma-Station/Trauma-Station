@@ -2,20 +2,20 @@
 
 using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Server._Goobstation.Wizard.Systems;
+using Content.Server._Goobstation.Wizard.Teleport;
 using Content.Server.Actions;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
-using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
-using Content.Trauma.Shared.Wizard.Teleport;
-using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Magic.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Shared.Warps;
+using Content.Trauma.Common.Wizard;
+using Content.Trauma.Server.Wizard.Systems;
+using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
+using Content.Trauma.Shared.Wizard.Teleport;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;

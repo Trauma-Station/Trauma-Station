@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.FixedPoint;
-using Content.Trauma.Shared.RadialSelector;
 using Content.Shared.Actions.Components;
+using Content.Shared.FixedPoint;
+using Content.Trauma.Common.RadialSelector;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Xenomorphs.Evolution;

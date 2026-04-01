@@ -1,16 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
-using Content.Server._Goobstation.Wizard.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Trauma.Shared.Wizard.Mutate;
 using Content.Shared.Chat;
 using Content.Shared.Humanoid;
 using Content.Shared.Sprite;
 using Content.Shared.Weapons.Ranged.Components;
-using Robust.Server.Console.Commands;
+using Content.Trauma.Shared.Wizard.Mutate;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
@@ -49,9 +46,9 @@ public sealed class HulkSystem : SharedHulkSystem
 
         if (HasComp<HumanoidProfileComponent>(uid))
         {
-            if (comp.OldEyeColor is {} eyeColor)
+            if (comp.OldEyeColor is { } eyeColor)
                 _humanoid.SetEyeColor(uid, eyeColor);
-            if (comp.OldSkinColor is {} skinColor)
+            if (comp.OldSkinColor is { } skinColor)
                 _humanoid.SetSkinColor(uid, skinColor);
         }
 

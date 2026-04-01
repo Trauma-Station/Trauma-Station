@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server._Goobstation.Wizard.Components;
+using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Polymorph.Components;
-using Content.Server.Polymorph.Systems;
-using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Shared.Polymorph;
+using Content.Trauma.Common.Wizard.Projectile;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
@@ -32,7 +31,7 @@ public sealed class WizardJauntSystem : EntitySystem
         var query = EntityQueryEnumerator<WizardJauntComponent, PolymorphedEntityComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var jaunt, out var polymorphed, out var xform))
         {
-            if (jaunt.JauntEndEffectEntity is {} endEffect)
+            if (jaunt.JauntEndEffectEntity is { } endEffect)
             {
                 _transform.SetMapCoordinates(endEffect, _transform.GetMapCoordinates(xform));
                 continue;

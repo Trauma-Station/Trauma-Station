@@ -22,6 +22,10 @@
 		<ProjectReference Include="../Content.Server/Content.Server.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Heretic\Store\" />
+	</ItemGroup>
+
 	<Import Project="../RobustToolbox/Imports/Server.props" />
 	<Import Project="../RobustToolbox/Imports/Shared.props" />
 	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />

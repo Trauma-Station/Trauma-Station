@@ -6,10 +6,11 @@ using Content.Server.Chat.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 
-namespace Content.Goobstation.Server.Hastur.Systems
+namespace Content.Trauma.Server.Hastur.Systems
 {
     public sealed class MassWhisperSystem : EntitySystem
     {

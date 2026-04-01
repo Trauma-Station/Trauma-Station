@@ -10,7 +10,6 @@ namespace Content.Trauma.Shared.Objectives;
 public sealed partial class TraumaTargetObjectiveSystem : EntitySystem
 {
     [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly TargetObjectiveSystem _target = default!;
 

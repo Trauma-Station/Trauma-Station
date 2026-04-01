@@ -1,25 +1,25 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Damage;
-using Content.Shared.Tag;
-using Content.Shared.Whitelist;
+using Content.Shared.Store;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class RejuvenateOnProjectileHitComponent : Component
+public sealed partial class EldritchInfluenceDrainerComponent : Component
 {
     [DataField]
-    public EntityWhitelist UndeadList = new();
+    public float Time = 8f;
 
     [DataField]
-    public DamageSpecifier Damage = new();
+    public bool Hidden;
 
     [DataField]
-    public bool ReverseEffects;
-
-    [DataField]
-    public ProtoId<TagPrototype> SoulTappedTag = "SoulTapped";
+    public Dictionary<int, ProtoId<StoreCategoryPrototype>> TierToCategory = new()
+    {
+        { 1, "HereticPathSideT1" },
+        { 2, "HereticPathSideT2" },
+        { 3, "HereticPathSideT3" },
+    };
 }

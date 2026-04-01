@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server._Goobstation.Wizard.Components;
+using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Singularity.EntitySystems;
 
 namespace Content.Goobstation.Server.Wizard.Systems;

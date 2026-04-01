@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
-using Content.Trauma.Shared.Radar;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
+using Content.Trauma.Common.Radar;
+using Content.Trauma.Shared.Radar;
 
 namespace Content.Trauma.Server.Radar;
 
@@ -24,8 +25,8 @@ public sealed partial class RadarBlipSystem : EntitySystem
         if (!TryComp<RadarConsoleComponent>(radarUid, out var radar))
             return;
 
-        var blips = AssembleBlipsReport((EntityUid)radarUid, radar);
-        var hitscans = AssembleHitscanReport((EntityUid)radarUid, radar);
+        var blips = AssembleBlipsReport((EntityUid) radarUid, radar);
+        var hitscans = AssembleHitscanReport((EntityUid) radarUid, radar);
 
         // Combine the blips and hitscan lines
         var giveEv = new GiveBlipsEvent(blips, hitscans);

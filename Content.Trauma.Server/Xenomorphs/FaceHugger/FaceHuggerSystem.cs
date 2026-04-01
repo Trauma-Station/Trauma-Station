@@ -1,18 +1,36 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Clothing.Components;
 using Content.Medical.Common.Body;
+using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
+using Content.Shared._White.Xenomorphs.FaceHugger;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Body;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
+using Content.Trauma.Server.Xenomorphs.Infection;
+using Content.Trauma.Shared.Xenomorphs.FaceHugger;
+using Content.Trauma.Shared.Xenomorphs.Infection;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Shared.Physics.Events;
@@ -20,26 +38,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Trauma.Shared.Xenomorphs.Infection;
-using Content.Shared.Body;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
-using Content.Shared.Chemistry;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent;
-using Content.Shared.FixedPoint;
-using Content.Goobstation.Shared.Clothing.Components;
-using Content.Server.Construction.Conditions;
-using Content.Trauma.Shared.Xenomorphs.FaceHugger;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Throwing;
-using Content.Shared.Atmos.Components;
-using Content.Server.Nutrition.EntitySystems;
-using Content.Shared.Nutrition.Components;
-using Content.Shared.Mind.Components;
-using Content.Server.Mind;
-using Content.Server._White.Xenomorphs.Infection;
 
 namespace Content.Trauma.Server.Xenomorphs.FaceHugger;
 
@@ -235,15 +233,15 @@ public sealed class FaceHuggerSystem : EntitySystem
 
     private void Infect(EntityUid uid, FaceHuggerComponent component)
     {
-        if (component.InfectionPrototype is not {} proto
+        if (component.InfectionPrototype is not { } proto
             || !TryComp<ClothingComponent>(uid, out var clothing)
             || clothing.InSlot != component.Slot
             || !_container.TryGetContainingContainer((uid, null, null), out var target)
-            || _body.GetOrgan(target.Owner, component.InfectionTarget) is not {} targetOrgan)
+            || _body.GetOrgan(target.Owner, component.InfectionTarget) is not { } targetOrgan)
             return;
 
         var organ = Spawn(proto);
-        if (_body.GetCategory(organ) is not {} category)
+        if (_body.GetCategory(organ) is not { } category)
         {
             Log.Error($"Invalid xeno larva {ToPrettyString(organ)} had no organ category!");
             Del(organ);
@@ -352,7 +350,7 @@ public sealed class FaceHuggerSystem : EntitySystem
     public bool CanInject(EntityUid uid, FaceHuggerComponent component, EntityUid target)
     {
         // injection disabled
-        if (component.SleepChem is not {} reagent)
+        if (component.SleepChem is not { } reagent)
             return false;
 
         // Check if facehugger is properly equipped
@@ -376,7 +374,7 @@ public sealed class FaceHuggerSystem : EntitySystem
     public Solution CreateSleepChemicalSolution(FaceHuggerComponent component, float amount)
     {
         var solution = new Solution();
-        if (component.SleepChem is {} reagent)
+        if (component.SleepChem is { } reagent)
             solution.AddReagent(reagent, amount);
         return solution;
     }

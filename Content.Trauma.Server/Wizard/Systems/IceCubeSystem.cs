@@ -1,10 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Temperature.Systems;
-<<<<<<<< HEAD:Content.Trauma.Server/Wizard/Systems/IceCubeSystem.cs
-using Content.Trauma.Shared.Wizard.Traps;
-========
->>>>>>>> upstream:Content.Trauma.Server/Wizard/IceCubeSystem.cs
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Prototypes;
@@ -119,7 +115,7 @@ public sealed class IceCubeSystem : SharedIceCubeSystem
 
     private float InverseLerp(float min, float max, float value)
     {
-        return max <= min ? 1f : Math.Clamp((value - min) / (max - min), 0f , 1f);
+        return max <= min ? 1f : Math.Clamp((value - min) / (max - min), 0f, 1f);
     }
 
     private void OnTemperatureChange(Entity<IceCubeComponent> ent, ref OnTemperatureChangeEvent args)

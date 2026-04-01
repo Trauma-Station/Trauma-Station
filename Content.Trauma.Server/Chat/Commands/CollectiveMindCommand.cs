@@ -3,13 +3,11 @@
 using Content.Server.Chat.Systems;
 using Content.Shared.Administration;
 using Content.Shared.Chat;
-using Robust.Shared.Player;
+using Content.Shared.Mobs.Systems;
+using Content.Trauma.Common.CollectiveMind;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
-
-// Goobstation - Stop Crit Hivemind
-using Content.Trauma.Shared.CollectiveMind;
-using Content.Shared.Mobs.Systems;
+using Robust.Shared.Player;
 
 
 namespace Content.Server.Chat.Commands
@@ -32,7 +30,7 @@ namespace Content.Server.Chat.Commands
             if (player.Status != SessionStatus.InGame)
                 return;
 
-            if (player.AttachedEntity is not {} playerEntity)
+            if (player.AttachedEntity is not { } playerEntity)
             {
                 shell.WriteError("You don't have an entity!");
                 return;

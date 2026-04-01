@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Server.Objectives;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Nuke;
 using Content.Server.Station.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Objectives.Components;
+using Content.Trauma.Server.GameTicking.Rules;
 
-namespace Content.Goobstation.Server.Objectives;
+namespace Content.Trauma.Server.Objectives;
 
 public sealed class DetonateNukeObjectiveSystem : EntitySystem
 {
