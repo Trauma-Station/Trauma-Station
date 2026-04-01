@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
+using Content.Goobstation.Server.Objectives.Components;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
@@ -14,6 +15,7 @@ using Content.Shared.Store.Components;
 using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Roles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -142,7 +144,7 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
         while (query.MoveNext(out var mindId, out var heretic, out var mind))
         {
             var name = _objective.GetTitle((mindId, mind), Name(mind.OwnedEntity ?? mindId));
-            if (_mind.TryGetObjectiveComp<Objectives.HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
+            if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             {
                 if (objective.Researched > mostKnowledge)
                     mostKnowledge = objective.Researched;

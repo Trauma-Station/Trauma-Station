@@ -4,17 +4,21 @@ using Lidgren.Network;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.LinkAccount;
+namespace Content.Trauma.Common.LinkAccount;
 
-public sealed class RMCClearGhostColorMsg : NetMessage
+public sealed class LinkAccountCodeMsg : NetMessage
 {
-    public override MsgGroups MsgGroup => MsgGroups.Command;
+    public Guid Code;
+
+    public override MsgGroups MsgGroup => MsgGroups.Core;
 
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
+        Code = buffer.ReadGuid();
     }
 
     public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
     {
+        buffer.Write(Code);
     }
 }

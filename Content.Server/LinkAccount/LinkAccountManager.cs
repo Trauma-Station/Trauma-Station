@@ -4,16 +4,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Trauma.Common.LinkAccount;
-using Content.Trauma.Shared.LinkAccount;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Color = System.Drawing.Color;
 
-namespace Content.Trauma.Server.LinkAccount;
+namespace Content.Server.LinkAccount;
 
-public sealed class LinkAccountManager : ILinkAccountManagerServer, IPostInjectInit
+public sealed class LinkAccountManager : IPostInjectInit
 {
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly INetManager _net = default!;

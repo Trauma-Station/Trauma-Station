@@ -5,8 +5,8 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.JoinQueue;
 using Content.Goobstation.Shared.JoinQueue;
 using Content.Server.Connection;
+using Content.Server.LinkAccount;
 using Content.Shared.CCVar;
-using Content.Trauma.Common.LinkAccount;
 using Prometheus;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -44,7 +44,7 @@ public sealed class JoinQueueManager : IJoinQueueManager
     [Dependency] private readonly IConnectionManager _connection = default!;
     [Dependency] private readonly IConfigurationManager _configuration = default!;
     [Dependency] private readonly IServerNetManager _net = default!;
-    [Dependency] private readonly ILinkAccountManagerServer _linkAccount = default!;
+    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
 
     /// <summary>
     ///     Queue of active player sessions

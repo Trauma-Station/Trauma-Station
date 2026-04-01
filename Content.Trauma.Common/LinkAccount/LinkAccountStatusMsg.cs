@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.IO;
-using Content.Trauma.Common.LinkAccount;
 using Lidgren.Network;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.LinkAccount;
+namespace Content.Trauma.Common.LinkAccount;
 
 public sealed class LinkAccountStatusMsg : NetMessage
 {

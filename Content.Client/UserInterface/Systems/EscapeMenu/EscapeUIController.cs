@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Trauma.Common.LinkAccount;
+using Content.Client.LinkAccount;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Robust.Shared;
 // </Trauma>
@@ -25,7 +25,7 @@ namespace Content.Client.UserInterface.Systems.EscapeMenu;
 public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
     // <Trauma>
-    [Dependency] private readonly ILinkAccountManagerClient _linkAccount = default!; // RMC - Patreon
+    [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
     private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.EscapeButton; // RMC - Patreon
     // </Trauma>
     [Dependency] private readonly IClientConsoleHost _console = default!;

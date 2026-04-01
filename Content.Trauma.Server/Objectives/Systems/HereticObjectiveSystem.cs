@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Server.Objectives.Components;
 using Content.Server.Mind;
 using Content.Server.Objectives.Systems;
 using Content.Shared.Mind;

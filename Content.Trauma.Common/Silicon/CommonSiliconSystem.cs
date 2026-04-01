@@ -2,6 +2,9 @@
 
 namespace Content.Trauma.Common.Silicon;
 
+/// <summary>
+/// Minimal API for other modules to use.
+/// </summary>
 public abstract class CommonSiliconSystem : EntitySystem
 {
     /// <summary>

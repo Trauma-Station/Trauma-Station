@@ -2,10 +2,10 @@
 
 using Content.Goobstation.Common.CCVar;
 using Content.Server.GameTicking;
+using Content.Server.LinkAccount;
 using Content.Shared.Ghost;
 using Content.Trauma.Common.LinkAccount;
 using Content.Trauma.Shared.GhostColor;
-using Content.Trauma.Shared.LinkAccount;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;

@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.LinkAccount;
 using Content.Trauma.Common.LinkAccount;
 using Robust.Shared.Network;
 
-namespace Content.Trauma.Client.LinkAccount;
+namespace Content.Client.LinkAccount;
 
-public sealed class LinkAccountManager : ILinkAccountManagerClient, IPostInjectInit
+public sealed class LinkAccountManager : IPostInjectInit
 {
     [Dependency] private readonly INetManager _net = default!;
 

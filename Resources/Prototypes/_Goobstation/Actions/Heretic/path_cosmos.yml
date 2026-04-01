@@ -61,7 +61,7 @@
     range: 0
     checkCanAccess: false
   - type: WorldTargetAction
-    event: !type:WorldTargetAction
+    event: !type:EventHereticStarBlast
     # Replace with its used in yml chud
     # anyway
     # its a shitcode way just murder it all

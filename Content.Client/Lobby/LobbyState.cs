@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Trauma.Common.LinkAccount;
+using Content.Client.LinkAccount;
 // </Trauma>
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
@@ -26,7 +26,7 @@ namespace Content.Client.Lobby
     {
         // <Trauma>
         [Dependency] private readonly ICommonCurrencyManager _serverCur = default!; // Goobstation - server currency
-        [Dependency] private readonly ILinkAccountManagerClient _linkAccount = default!; // RMC - Patreon
+        [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
         // </Trauma>
         [Dependency] private readonly IBaseClient _baseClient = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;

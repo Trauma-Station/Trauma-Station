@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Info;
+using Content.Client.LinkAccount;
+using Content.Client.Lobby;
 using Content.Client.Lobby.UI;
 using Content.Client.Message;
+using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Goobstation.Common.CCVar;
-using Content.Trauma.Shared.LinkAccount;
 using Content.Trauma.Common.LinkAccount;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -13,10 +15,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BaseButton;
-using static Robust.Client.UserInterface.Controls.LineEdit;
 using static Robust.Client.UserInterface.Controls.TabContainer;
-using Content.Client.Lobby;
-using Content.Client.UserInterface.Systems.EscapeMenu;
 
 namespace Content.Trauma.Client.LinkAccount;
 

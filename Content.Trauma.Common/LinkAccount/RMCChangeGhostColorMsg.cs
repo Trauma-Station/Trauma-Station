@@ -4,24 +4,21 @@ using Lidgren.Network;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.LinkAccount;
+namespace Content.Trauma.Common.LinkAccount;
 
-public sealed class RMCChangeLobbyMessageMsg : NetMessage
+public sealed class RMCChangeGhostColorMsg : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.Command;
 
-    public string? Text;
+    public Color Color;
 
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
-        if (buffer.PeekStringSize() > 10000)
-            return;
-
-        Text = buffer.ReadString();
+        Color = buffer.ReadColor();
     }
 
     public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
     {
-        buffer.Write(Text);
+        buffer.Write(Color);
     }
 }
