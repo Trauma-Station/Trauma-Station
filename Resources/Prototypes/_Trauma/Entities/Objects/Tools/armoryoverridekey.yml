@@ -6,6 +6,10 @@
   components:
   - type: Emag
     emagType: Access
+  - type: EmagWhitelist
+    whitelist:
+      components:
+      - StationAlertLevelLock # basically jsut gun safes
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/ntr_override.rsi
     state: icon
@@ -32,7 +36,7 @@
     sprite: _Trauma/Objects/tools/overridecomponents.rsi
   - type: Tag
     tags:
-      - OverrideKeyComponents
+    - OverrideKeyComponents
   - type: Construction
     graph: ArmoryOverrideKey
     node: start

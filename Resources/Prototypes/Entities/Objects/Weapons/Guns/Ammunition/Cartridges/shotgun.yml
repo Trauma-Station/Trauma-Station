@@ -148,10 +148,15 @@
   name: improvised shotgun shell
   description: A homemade shotgun shell loaded with chunks of glass shrapnel. Surprisingly effective, but the spread is so wide that you couldn't hit the broad side of a barn.
   components:
+  # <Trauma>
+  - type: StaticPrice
+    price: 50 # Trauma - fix arbitrage
+  # </Trauma>
   - type: Tag
     tags:
     - ShellShotgun
     - ShellShotgunLight
+    - Trash # Trauma
   - type: Sprite
     layers:
       - state: improvised
@@ -163,6 +168,13 @@
     proto: PelletShotgunImprovisedSpread
   - type: SpentAmmoVisuals
     state: "improvised"
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Plastic: 50
+      Glass: 200
+  #</Trauma>
 
 - type: entity
   parent: [ BaseShellShotgun, BaseSecurityContraband ]

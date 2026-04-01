@@ -187,289 +187,93 @@
 
 # Anvil
 
+- type: entity
+  abstract: true
+  parent: [ BaseForgeItem, BaseMetallicSteel ]
+  id: BaseAnvilPiece
+  components:
+  - type: DamageOnHolding
+    damage:
+      types:
+        Heat: 15
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
 # Anvil Top
 
 - type: entity
-  parent: BaseForgeItemHot
-  id: AnvilTopUnfinishedHot
+  parent: [ BaseWorkableSteel, BaseAnvilPiece ]
+  id: AnvilTopUnfinished
   name: unfinished anvil top
   description: Beat it into shape!
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: anvil_top_unfinished_hot
-  - type: DamageOnHolding # Need immunity component for some gloves
-    enabled: true
-    damage:
-      types:
-        Heat: 15
-  - type: Damageable
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 200
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        offset: 0
-        spawn:
-          AnvilTopHot:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: Temperature
-    currentTemperature: 2300
-  - type: ChangeOnCool
-    coolTemp: 2000
-    cooledPrototype: AnvilTopUnfinishedIntermediarytoCold
+    layers:
+    - state: anvil_top_unfinished
+      shader: Emissive
+  - type: Workable
+    remaining: 200
+    result: AnvilTop
   - type: Construction
     graph: AnvilTop
     node: finish
 
-- type: entity  ## Needs these so it doesnt break everything sadly
-  parent: BaseForgeItemNoTemp
-  id: AnvilTopUnfinishedIntermediarytoHot
-  categories: [HideSpawnMenu]
-  components:
-  - type: TimedDespawn
-    lifetime: 0.1
-  - type: SpawnOnDespawn
-    prototype: AnvilTopUnfinishedHot
-  - type: Sprite
-    state: anvil_top_unfinished_hot
-
-- type: entity  ## Needs these so it doesnt break everything sadly
-  parent: BaseForgeItemNoTemp
-  id: AnvilTopUnfinishedIntermediarytoCold
-  categories: [HideSpawnMenu]
-  components:
-  - type: TimedDespawn
-    lifetime: 0.1
-  - type: SpawnOnDespawn
-    prototype: AnvilTopUnfinished
-  - type: Sprite
-    state: anvil_top_unfinished
-
 - type: entity
-  parent: BaseForgeItemCold
-  id: AnvilTopUnfinished
-  name: cold unfinished anvil top
-  description: It has grown too cold to work, warm it back up.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: anvil_top_unfinished
-  - type: Temperature
-    currentTemperature: 2000
-  - type: BurnableFood
-    burnTemp: 2300
-    burnedFoodPrototype: AnvilTopUnfinishedIntermediarytoCold
-
-- type: entity
-  parent: BaseForgeItemHot
-  id: AnvilTopHot
-  name: hot anvil top
-  description: The top part of an anvil, give it some time to cool down!
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: anvil_top_hot
-  - type: DamageOnHolding # Need immunity component for some gloves
-    enabled: true
-    damage:
-      types:
-        Heat: 15
-  - type: Temperature
-    currentTemperature: 2300
-  - type: ChangeOnCool
-    coolTemp: 2000
-    cooledPrototype: AnvilTopIntermediarytoCold
-
-- type: entity  ## Needs these so it doesnt break everything sadly
-  parent: BaseForgeItemNoTemp
-  id: AnvilTopIntermediarytoHot
-  categories: [HideSpawnMenu]
-  components:
-  - type: TimedDespawn
-    lifetime: 0.1
-  - type: SpawnOnDespawn
-    prototype: AnvilTopHot
-  - type: Sprite
-    state: anvil_top_hot
-
-- type: entity  ## Needs these so it doesnt break everything sadly
-  parent: BaseForgeItemNoTemp
-  id: AnvilTopIntermediarytoCold
-  categories: [HideSpawnMenu]
-  components:
-  - type: TimedDespawn
-    lifetime: 0.1
-  - type: SpawnOnDespawn
-    prototype: AnvilTop
-  - type: Sprite
-    state: anvil_top
-
-- type: entity
-  parent: BaseForgeItemCold
+  parent: BaseAnvilPiece
   id: AnvilTop
   name: anvil top
-  description: The top part of an anvil.
+  description: The top part of an anvil. Put it on the bottom half once it has cooled down.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: anvil_top
+    layers:
+    - state: anvil_top
+      shader: Emissive
   - type: Tag
-    tags:
-      - AnvilTop
-  - type: Temperature
-    currentTemperature: 2000
-  - type: BurnableFood
-    burnTemp: 2300
-    burnedFoodPrototype: AnvilTopIntermediarytoCold
+  - type: Metallic
+    minTemp: 333 # has to be reasonably cool for welding it, 60C
+    idealTemp: 350
+    workable: true # want to cool it instead of heat it
+  - type: MetallicTags
+    unworkable: [ AnvilTop ]
 
 # Anvil Bottom
 
 - type: entity
-  parent: BaseForgeItemHot
-  id: AnvilBottomUnfinishedHot
+  parent: [ BaseWorkableSteel, BaseAnvilPiece ]
+  id: AnvilBottomUnfinished
   name: unfinished anvil bottom
   description: Beat it into shape!
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: anvil_bottom_unfinished_hot
-  - type: DamageOnHolding # Need immunity component for some gloves
-    enabled: true
-    damage:
-      types:
-        Heat: 15
-  - type: Damageable
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 200
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        offset: 0
-        spawn:
-          AnvilBottomHot:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: Temperature
-    currentTemperature: 2300
-  - type: ChangeOnCool
-    coolTemp: 2000
-    cooledPrototype: AnvilBottomUnfinishedIntermediarytoCold
+    layers:
+    - state: anvil_bottom_unfinished
+      shader: Emissive
+  - type: Workable
+    remaining: 200
+    result: AnvilBottom
   - type: Construction
     graph: AnvilBottom
     node: finish
 
-- type: entity  ## Needs these so it doesnt break everything sadly
-  parent: BaseForgeItemNoTemp
-  id: AnvilBottomUnfinishedIntermediarytoHot
-  categories: [HideSpawnMenu]
-  components:
-  - type: TimedDespawn
-    lifetime: 0.1
-  - type: SpawnOnDespawn
-    prototype: AnvilBottomUnfinishedHot
-  - type: Sprite
-    state: anvil_bottom_unfinished_hot
-
-- type: entity  ## Needs these so it doesnt break everything sadly
-  parent: BaseForgeItemNoTemp
-  id: AnvilBottomUnfinishedIntermediarytoCold
-  categories: [HideSpawnMenu]
-  components:
-  - type: TimedDespawn
-    lifetime: 0.1
-  - type: SpawnOnDespawn
-    prototype: AnvilBottomUnfinished
-  - type: Sprite
-    state: anvil_bottom_unfinished
-
 - type: entity
-  parent: BaseForgeItemCold
-  id: AnvilBottomUnfinished
-  name: cold unfinished anvil bottom
-  description: It has grown too cold to work, warm it back up.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: anvil_bottom_unfinished
-  - type: Temperature
-    currentTemperature: 2000
-  - type: BurnableFood
-    burnTemp: 2300
-    burnedFoodPrototype: AnvilBottomUnfinishedIntermediarytoHot
-
-- type: entity
-  parent: BaseForgeItemHot
-  id: AnvilBottomHot
-  name: hot anvil bottom
-  description: The bottom part of an anvil, give it some time to cool down!
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: anvil_bottom_hot
-  - type: DamageOnHolding # Need immunity component for some gloves
-    enabled: true
-    damage:
-      types:
-        Heat: 15
-  - type: Temperature
-    currentTemperature: 2300
-  - type: ChangeOnCool
-    coolTemp: 2000
-    cooledPrototype: AnvilBottomIntermediarytoCold
-
-- type: entity  ## Needs these so it doesnt break everything sadly
-  parent: BaseForgeItemNoTemp
-  id: AnvilBottomIntermediarytoHot
-  categories: [HideSpawnMenu]
-  components:
-  - type: TimedDespawn
-    lifetime: 0.1
-  - type: SpawnOnDespawn
-    prototype: AnvilBottomHot
-  - type: Sprite
-    state: anvil_bottom_hot
-
-- type: entity  ## Needs these so it doesnt break everything sadly
-  parent: BaseForgeItemNoTemp
-  id: AnvilBottomIntermediarytoCold
-  categories: [HideSpawnMenu]
-  components:
-  - type: TimedDespawn
-    lifetime: 0.1
-  - type: SpawnOnDespawn
-    prototype: AnvilBottom
-  - type: Sprite
-    state: anvil_bottom
-
-- type: entity
-  parent: BaseForgeItemCold
+  parent: BaseAnvilPiece
   id: AnvilBottom
   name: anvil bottom
   description: The bottom part of an anvil.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: anvil_bottom
+    layers:
+    - state: anvil_bottom
+      shader: Emissive
   - type: Construction
     graph: Anvil
     node: start
-  - type: Temperature
-    currentTemperature: 2000
-  - type: BurnableFood
-    burnTemp: 2300
-    burnedFoodPrototype: AnvilBottomIntermediarytoHot
+    defaultTarget: anvil
 
 # Unwelded
 
@@ -485,3 +289,4 @@
   - type: Construction
     graph: Anvil
     node: unwelded
+    defaultTarget: anvil

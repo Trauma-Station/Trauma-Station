@@ -104,13 +104,10 @@
   id: Iradomini
 
 - type: Tag
-  id: IngotBrass
+  id: IngotWorkable
 
 - type: Tag
-  id: IngotSteel
-
-- type: Tag
-  id: IngotPlasteel
+  id: IngotWorkableSteel
 
 - type: Tag
   id: MagazineTurret
