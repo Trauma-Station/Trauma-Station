@@ -71,14 +71,14 @@
   description: "A carton containing 6 packs of Newstations."
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/newstation.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/newstation.rsi # Trauma
     layers:
       - state: closed
         map: ["closeLayer"]
       - state: open
         map: ["openLayer"]
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/newstation.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/newstation.rsi
     size: Normal
   - type: Storage
     grid:
@@ -106,11 +106,11 @@
   description: A carton containing 6 packs of Dromads.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/dromad.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/dromad.rsi # Trauma
     layers:
       - state: closed
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/dromad.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/dromad.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -124,11 +124,11 @@
   description: A carton containing 6 packs of Sodfield Blue.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/sodfield.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/sodfield.rsi # Trauma
     layers:
       - state: closed
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/sodfield.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/sodfield.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -142,11 +142,11 @@
   description: A carton containing 6 packs of Solaria.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/solaria.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/solaria.rsi # Trauma
     layers:
       - state: closed
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/solaria.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/solaria.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -160,11 +160,11 @@
   description: A carton containg 3 packs of Dan's soaked smokes.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/mixed.rsi # Trauma
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/mixed.rsi # Trauma
     layers:
       - state: closed
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/mixed.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/mixed.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase:

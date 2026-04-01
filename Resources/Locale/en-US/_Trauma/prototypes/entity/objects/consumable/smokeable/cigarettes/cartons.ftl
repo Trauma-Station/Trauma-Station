@@ -1,23 +1,23 @@
-ent-ID = CigCartonGreen
+ent-CigCartonGreen = Newstation Carton
     .desc = A carton containing 6 packs of Newstations.
 
-ent-ID = CigCartonRed
+ent-CigCartonRed = Dromad Red 99 Carton
     .desc = A carton containing 6 packs of Dromad Red 99s.
 
-ent-ID = CigCartonBlack
+ent-CigCartonBlack = Solaria Carton
     .desc = A carton containing 6 packs of Solaria.
 
-ent-ID = CigCartonBlue
+ent-CigCartonBlue = Sodfield Blue Carton
     .desc = A carton containing 6 packs of Sodfield Blues.
 
-ent-ID = CigCartonMixed
+ent-CigCartonMixed = Dan's Soaked Smokes Carton
     .desc = A carton containing 6 packs of Dan's Soaked Smokes.
 
-ent-ID = CigCartonSyndicate
+ent-CigCartonSyndicate = Interdyne Herbals Carton
     .desc = A carton containing 6 packs of Interdyne Herbals.
 
-ent-ID = CigCartonMedical
-    .desc = A carton containing 6 packs of Chemlab Menthols.
+ent-CigCartonMedical = ChemLab Menthols Carton
+    .desc = A carton containing 6 packs of ChemLab Menthols.
 
-ent-ID = CigCartonBotany
+ent-CigCartonBotany = Hydroponic Herbals Carton
     .desc = A carton containing 6 packs of Hydroponic Herbals.

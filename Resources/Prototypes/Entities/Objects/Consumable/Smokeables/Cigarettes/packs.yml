@@ -148,9 +148,9 @@
   description: A label on the packaging reads, dying with joy!
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/newstation.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/newstation.rsi
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/newstation.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/newstation.rsi
 
 - type: entity
   id: CigPackRed
@@ -159,9 +159,9 @@
   description: The most popular brand of Space Cigarettes. There is an image of some kind of humanoid dromedary creature in a salt desert.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/dromad.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/dromad.rsi
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/dromad.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/dromad.rsi
 
 - type: entity
   id: CigPackBlue
@@ -170,9 +170,9 @@
   description: Light smokes, most of their ad campaigns are targetted towards shaft miners.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/sodfield.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/sodfield.rsi
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/sodfield.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/sodfield.rsi
 
 - type: entity
   id: CigPackBlack
@@ -181,9 +181,9 @@
   description: An incredibly harsh cigarette, the packaging has sol common on it and golden images of locations from Old Terra.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/solaria.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/solaria.rsi
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/solaria.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/solaria.rsi
 
 - type: entity
   id: CigPackSyndicate
@@ -192,9 +192,9 @@
   description: Elite cigarettes for elite syndicate agents. Infused with medicine for when you need to do more than calm your nerves.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -209,9 +209,9 @@
   description: Dan worked with NT chemistry to dispose of excess chemicals, ENJOY.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
   - type: Item
-    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:NestedSelector
