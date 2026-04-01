@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using System.Text.Json.Serialization;
 //using Content.Shared.Damage.Components; - <Trauma>

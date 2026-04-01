@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
 <controls:ConfigTabControl
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Trauma.Client.UserActions.Tabs">
