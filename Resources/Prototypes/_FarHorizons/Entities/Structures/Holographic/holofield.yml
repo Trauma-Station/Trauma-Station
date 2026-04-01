@@ -254,10 +254,10 @@
   - type: Clickable
   - type: Physics
     bodyType: Static
-    canCollide: false
   - type: Fixtures
     fixtures:
       fix1:
+        hard: false
         shape:
           !type:PhysShapeAabb
           bounds: "-0.5,-0.5,0.5,0.5"
@@ -265,9 +265,11 @@
         - FullTileMask
         layer:
         - GlassLayer
+  - type: SpriteFade
   - type: Sprite
     sprite: _FarHorizons/Structures/Holo/holographic_field.rsi
     noRot: false
+    drawdepth: Overdoors
     layers:
     - state: field
       shader: unshaded
@@ -316,6 +318,7 @@
     sprite: _FarHorizons/Structures/Holo/holographic_barrier.rsi
     state: field
     noRot: false
+    drawdepth: Overdoors
     layers:
     - state: field
       shader: unshaded
@@ -369,3 +372,63 @@
         sound:
           collection: GlassBreak
   - type: GenericField
+
+- type: entity
+  id: HomographicField
+  name: Holographic Field
+  description: A Holographic Field that blocks airflow?
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: SpriteFade
+  - type: Sprite
+    sprite: _FarHorizons/Structures/Holo/homographic_field.rsi
+    noRot: false
+    drawdepth: Overdoors
+    layers:
+    - state: field
+      shader: unshaded
+  - type: Icon
+    sprite: _FarHorizons/Structures/Holo/homographic_field.rsi
+    state: field
+  - type: SyncSprite
+  - type: Transform
+    anchored: true
+  - type: BlockWeather
+  - type: Tag
+    tags:
+    - Wall
+  - type: PointLight
+    enabled: true
+    radius: 6
+  - type: RgbLightController
+    cycleRate: 0.5
+    layers: [ 0 ]
+  - type: GenericField
+  - type: DamageContacts
+    damage:
+      types:
+        Heat: 15
+        Structural: 30
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.3
+    sprintSpeedModifier: 0.3
+  - type: IgniteOnCollide
+    fixtureId: fix1
+    fireStacks: 5
+    count : -1

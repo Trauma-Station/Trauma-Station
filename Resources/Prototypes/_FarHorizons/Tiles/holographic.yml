@@ -3,11 +3,10 @@
   name: Holographic Tile
   sprite: /Textures/_FarHorizons/Tiles/holographic.png
   baseTurf: Space
-  isSubfloor: true
-  weather: true
-  footstepSounds:
-    collection: FootstepBorg
+  isSubfloor: false
   friction: 0.1
   isSpace: true
-  heatCapacity: 0
-  mass: 0
+  heatCapacity: 5000
+  mass: 800
+  indestructible: true
+  editorHidden: true

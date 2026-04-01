@@ -20,24 +20,6 @@ public sealed partial class GenericFieldComponent : Component
     public bool TempTile = false;
 
     /// <summary>
-    /// what tile was made with the entity?
-    /// </summary>
-    [ViewVariables]
-    public TileRef Tileref;
-
-    /// <summary>
-    /// MapGrid for tile that was made with the entity
-    /// </summary>
-    [ViewVariables]
-    public MapGridComponent MapGrid;
-
-    /// <summary>
-    /// GridUid for tile that was made with the entity
-    /// </summary>
-    [ViewVariables]
-    public EntityUid GridUid;
-
-    /// <summary>
     /// how much damage to heal per second
     /// </summary>
     [ViewVariables]

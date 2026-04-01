@@ -18,7 +18,11 @@ using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Content.Server.DeviceLinking.Systems;
-using Content.Shared.DeviceLinking;
+// using Content.Shared.DeviceLinking;
+using Content.Shared.Emag.Systems;
+using Content.Shared.Light;
+using Content.Shared.Light.Components;
+using Content.Shared.Lock;
 
 namespace Content.Server._FarHorizons.GenericFieldGenerator.EntitySystems;
 
@@ -36,6 +40,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly GenericFieldSystem _genericfield = default!;
     [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
+    [Dependency] private readonly SharedRgbLightControllerSystem _rgbSystem = default!;
+    [Dependency] private readonly EmagSystem _emag = default!;
 
     public override void Initialize()
     {
@@ -52,6 +58,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         SubscribeLocalEvent<GenericFieldGeneratorComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ChargeChangedEvent>(OnChargeChanged);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, SignalReceivedEvent>(OnSignalReceived);
+        SubscribeLocalEvent<GenericFieldGeneratorComponent, GotEmaggedEvent>(OnGotEmagged);
     }
 
     public override void Update(float frameTime)
@@ -86,11 +93,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
     #region Events
 
-    private void OnInit(EntityUid generator, GenericFieldGeneratorComponent component, ComponentInit _)
-    {
-        _signalSystem.EnsureSinkPorts(generator, component.TogglePort, component.OnPort, component.OffPort);
-        // _signalSystem.EnsureSourcePorts(generator, component.ConnectionStatusPort, component.FieldConnectedPort, component.FieldDisconnectedPort);
-    }
+    private void OnInit(EntityUid generator, GenericFieldGeneratorComponent component, ComponentInit _) => _signalSystem.EnsureSinkPorts(generator, component.TogglePort, component.OnPort, component.OffPort);
 
     private void OnMapInit(Entity<GenericFieldGeneratorComponent> generator, ref MapInitEvent args)
     {
@@ -189,33 +192,23 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         if (component.Connections == null)
             return;
 
+        if (component.Removing)
+            return;
+        component.Removing = true;
+
         var value = component.Connections.Value;
         var (otheruid, othercomponent) = value.Item1;
 
         foreach (var field in value.Item2)
         {
-            if (TryComp<GenericFieldComponent>(field, out var fieldComp))
+            if (TryComp<GenericFieldComponent>(field, out var fieldComp) && fieldComp.TempTile)
                 _genericfield.TempTileCleanup((field, fieldComp));
             QueueDel(field);
         }
 
-        // if (TryComp<DeviceLinkSourceComponent>(uid, out _))
-        // {
-        //     _signalSystem.SendSignal(uid, component.ConnectionStatusPort, false);
-        //     _signalSystem.InvokePort(uid, component.FieldDisconnectedPort);
-        // }
-
-        // if (TryComp<DeviceLinkSourceComponent>(otheruid, out _))
-        // {
-        //     _signalSystem.SendSignal(otheruid, othercomponent.ConnectionStatusPort, false);
-        //     _signalSystem.InvokePort(otheruid, othercomponent.FieldDisconnectedPort);
-        // }
-
-        ChangeConnectionLightVisualizer(value.Item1);
-        UpdateConnectionLights(value.Item1);
-
         othercomponent.Connections = null;
         component.Connections = null;
+        component.Removing = false;
 
         if (component.IsConnected)
             _popupSystem.PopupEntity(Loc.GetString("comp-genericfield-disconnected"), uid, PopupType.LargeCaution);
@@ -225,6 +218,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
         component.IsConnected = false;
         othercomponent.IsConnected = false;
+        ChangeConnectionLightVisualizer(value.Item1);
+        UpdateConnectionLights(value.Item1);
         ChangeConnectionLightVisualizer(generator);
         UpdateConnectionLights(generator);
         _adminLogger.Add(LogType.FieldGeneration, LogImpact.Medium, $"{ToPrettyString(uid)} lost field connections");
@@ -291,6 +286,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// <param name="generator"></param>
     public void FieldDestroyed(Entity<GenericFieldGeneratorComponent> generator)
     {
+        if (generator.Comp.Removing)
+            return;
         if (TryComp<BatteryComponent>(generator, out var batteryComponent))
             _battery.UseCharge(generator.Owner, batteryComponent.MaxCharge);
         
@@ -299,6 +296,35 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     }
 
     private void OnChargeChanged(Entity<GenericFieldGeneratorComponent> generator, ref ChargeChangedEvent args) => ChangePowerVisualizer(generator);
+
+    private void OnGotEmagged(Entity<GenericFieldGeneratorComponent> generator, ref GotEmaggedEvent args)
+    {
+        if (!_emag.CompareFlag(args.Type, EmagType.Interaction))
+        {
+            args.Handled = false;
+            return;
+        }
+
+        if (TryComp<LockComponent>(generator, out var lockcomp) && lockcomp.Locked)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("comp-genericfield-locked"), generator);
+            args.Handled = false;
+            return;
+        }
+
+        generator.Comp.CreatedField = "HomographicField";
+
+        //makes the generator go rainbow, no reason to ever remove this beacause emag cant be removed without deconstructing
+        var rgb = EnsureComp<RgbLightControllerComponent>(generator);
+        _rgbSystem.SetCycleRate(generator, 0.5f, rgb);
+
+        if (!generator.Comp.IsConnected)
+            _popupSystem.PopupEntity(Loc.GetString("comp-genericfield-emag"), generator, PopupType.LargeCaution);
+
+        RemoveConnections(generator);
+
+        args.Handled = true;
+    }
 
     #endregion
 
@@ -392,18 +418,6 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// <returns></returns>
     private List<EntityUid> GenerateFieldConnection(Entity<GenericFieldGeneratorComponent> firstGen, Entity<GenericFieldGeneratorComponent> secondGen)
     {
-        // if (TryComp<DeviceLinkSourceComponent>(firstGen, out _))
-        // {
-        //     _signalSystem.SendSignal(firstGen, firstGen.Comp.ConnectionStatusPort, true);
-        //     _signalSystem.InvokePort(firstGen, firstGen.Comp.FieldConnectedPort);
-        // }
-
-        // if (TryComp<DeviceLinkSourceComponent>(secondGen, out _))
-        // {
-        //     _signalSystem.SendSignal(secondGen, secondGen.Comp.ConnectionStatusPort, true);
-        //     _signalSystem.InvokePort(secondGen, secondGen.Comp.FieldConnectedPort);
-        // }
-
         var fieldList = new List<EntityUid>();
         var gen1Coords = Transform(firstGen).Coordinates;
         var gen2Coords = Transform(secondGen).Coordinates;
@@ -438,18 +452,15 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
                         break;
 
                     var gridUid = Transform(firstGen).ParentUid;
-                    fieldComp.GridUid = gridUid;
-
+                    
                     if (!TryComp<MapGridComponent>(gridUid, out var mapGrid)) 
                         break;
 
-                    fieldComp.MapGrid = mapGrid;
-
                     var tile = _mapSystem.GetTileRef(gridUid, mapGrid, _transformSystem.GetMapCoordinates(newField, fieldXForm));
-                    fieldComp.Tileref = tile; //GenericFieldComponent needs to know what tile it is
 
                     _tile.ReplaceTile(tile, (ContentTileDefinition)tileDef, gridUid, mapGrid);
                     fieldComp.TempTile = true;
+                    
                     if (!_transformSystem.AnchorEntity(newField)) // if this fails to anchor, something has gone horribly wrong
                         RemoveConnections(firstGen); //remove connection and so it can try again
                 }

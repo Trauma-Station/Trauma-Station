@@ -78,6 +78,11 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     /// </summary>
     [DataField("retryWait")]
     public float RetryWait;
+    
+    /// <summary>
+    /// Used to retry connection when fully charged, but not connected
+    /// </summary>
+    public bool Removing = false;
 
     //Ports
     [DataField]

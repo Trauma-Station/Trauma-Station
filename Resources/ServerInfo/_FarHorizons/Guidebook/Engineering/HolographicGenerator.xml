@@ -10,7 +10,7 @@
 	Holographic Generators are machines that can be used to create permanent holograms for as long as the Generator is powered.
 
 	When a pair of Generators of the same type are placed facing eachother and connected to power, a field is formed between the 2 generators.
-	Generators will only form connections when at full power and remain active until their internal batteries are fully drained. 
+	Holographic Generators will only form connections when at full power and if the space between the 2 Generators isn't Obstructed. The Holographic Generator will remain active until their internal batteries are fully drained. 
 	Only one of the generators in a pair needs to be powered, but connecting both generators to power is still a good idea.
 	<Box>
 		<GuideEntityEmbed Entity="HolographicFieldGenerator" Rotation="90"/>
