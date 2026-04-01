@@ -68,8 +68,8 @@
     FoodSnackLollypopWrappedMystery: 10
     FoodSnackLollypopWrappedTricordrazine: 8
     NitrousOxideTankFilled: 2
+    CigPackMedical: 1
     # </Trauma>
-    CigPackMedical: 1 # Goob
   contrabandInventory:
     PillCanisterRandom: 3
     PillSpaceDrugs: 3

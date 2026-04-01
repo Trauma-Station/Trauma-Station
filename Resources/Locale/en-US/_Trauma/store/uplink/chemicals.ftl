@@ -2,3 +2,5 @@ uplink-hypopen-desc-trauma = A chemical hypospray disguised as a pen, capable of
 
 uplink-cigcarton-name = Interdyne Herbals Carton
 uplink-cigcarton-desc = Elite cigarettes for elite agents. Infused with medicine for when you need to do more than calm your nerves. Now sold in cartons!
+
+uplink-cigarettes-name-trauma = Interdyne Herbals Pack

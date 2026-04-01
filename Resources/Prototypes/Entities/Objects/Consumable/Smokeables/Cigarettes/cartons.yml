@@ -67,8 +67,8 @@
 - type: entity
   id: CigCartonGreen
   parent: [ BoxCardboard, BaseBagOpenClose ]
-  name: Newstations carton # Trauma
-  description: "A carton containing 6 packs of Newstations."
+  name: newstations-carton-name
+  description: newstations-carton-desc
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/newstation.rsi # Trauma

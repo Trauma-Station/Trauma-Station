@@ -13,27 +13,27 @@
       visible: false
     - state: cig1
       map: ["cig1"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig2
       map: ["cig2"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig3
       map: ["cig3"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig4
       map: ["cig4"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig5
       map: ["cig5"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig6
       map: ["cig6"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
   - type: Tag
     tags:
@@ -87,27 +87,27 @@
       visible: false
     - state: cig1
       map: ["cig1"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig2
       map: ["cig2"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig3
       map: ["cig3"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig4
       map: ["cig4"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig5
       map: ["cig5"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
     - state: cig6
       map: ["cig6"]
-      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi # Trauma
       visible: false
   - type: Tag
     tags:
