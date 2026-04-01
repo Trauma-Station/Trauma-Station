@@ -119,6 +119,9 @@
   id: OverrideKeyComponents
 
 - type: Tag
+  id: MimeMask
+
+- type: Tag
   id: MimicToolbox
 
 - type: Tag

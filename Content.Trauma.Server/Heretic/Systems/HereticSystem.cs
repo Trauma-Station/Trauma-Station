@@ -32,6 +32,7 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
+using Content.Trauma.Server.Abductor;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
@@ -62,6 +63,7 @@ public sealed class HereticSystem : SharedHereticSystem
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly HereticRuleSystem _rule = default!;
     [Dependency] private readonly HumanoidProfileSystem _profile = default!;
+    [Dependency] private readonly AbductorVestDisguiseSystem _disguise = default!;
 
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
@@ -538,6 +540,9 @@ public sealed class HereticSystem : SharedHereticSystem
                     _actions.SetUseDelay(action, changeUseDelay.NewUseDelay);
             }
         }
+
+        // Restore appearance if it was changed by envy knife
+        _disguise.RestoreAppearance(uid, false);
 
         var pathLoc = path.ToString().ToLower();
         var ascendSound =
