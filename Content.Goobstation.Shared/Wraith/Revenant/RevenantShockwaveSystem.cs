@@ -29,7 +29,6 @@ public sealed class RevenantShockwaveSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EntityQuery<StatusEffectsComponent> _statusEffectsQuery = default!;
 
     private HashSet<Entity<DamageableComponent>> _targets = new();
 
