@@ -62,6 +62,9 @@
     graph: Bracing
     node: finish
   - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Bracing: 100
 
 - type: entity
   parent: WeaponBracing

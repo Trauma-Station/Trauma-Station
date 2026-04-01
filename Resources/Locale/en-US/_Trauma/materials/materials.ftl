@@ -1,3 +1,4 @@
+materials-bone = bone
 materials-charcoal = charcoal
 materials-brick = brick
 materials-brass-ingot = brass ingot
