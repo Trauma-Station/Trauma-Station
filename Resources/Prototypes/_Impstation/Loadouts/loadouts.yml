@@ -7,14 +7,21 @@
     - Decapoid
 
 # Pre-equipped species gear
-# Full tank for aquatics as part of any Survival loadout
 - type: loadout
   id: LoadoutSpeciesAquaticFullTank
   effects:
   - !type:GroupLoadoutEffect
     proto: Aquatic
   equipment:
-    suitstorage: DecapoidVaporTankFilled
+    suitstorage: DecapoidVaporTank
+
+- type: loadout
+  id: LoadoutDecapoidClaw
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Aquatic
+  equipment:
+    suitstorage: DecapoidClawItem
 
 # Tank Harnesses for jobs that don't spawn with outerwear
 - type: loadout
@@ -42,15 +49,6 @@
   storage:
     back:
     - ClothingOuterVestTank
-
-- type: loadout
-  id: LoadoutTankHarnessAquaticCommandWithOuterwear
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: Aquatic
-  storage:
-    back:
-    - ClothingOuterVestTankCommand
 
 # Breath Tool On Face
 - type: loadout

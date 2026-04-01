@@ -65,5 +65,5 @@
 
 - type: guideEntry
   id: Decapoid
-  name: Decapoid
+  name: species-name-decapoid
   text: "/ServerInfo/_Impstation/Guidebook/Mobs/Decapoid.xml"

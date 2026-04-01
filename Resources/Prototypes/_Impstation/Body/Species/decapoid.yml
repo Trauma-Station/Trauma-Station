@@ -101,12 +101,6 @@
   abstract: true
   name: Urist McCrab
   components:
-  - type: Barotrauma
-    damage:
-      types:
-        blunt: 0 # immune to space
-  - type: Absorbable
-  - type: Hunger # removed thirst
   - type: Icon
     sprite: _Impstation/Mobs/Species/Decapoid/parts.rsi
     state: full
@@ -118,7 +112,6 @@
       mask:
         tags:
           - Vaporizer
-
     failMessage: decapoid-cant-speak
   - type: Respirator
     damage:
@@ -157,28 +150,21 @@
       Brute:
         sprite: _Impstation/Mobs/Effects/decapoid_brute_damage.rsi # todo: make this cover the legs.
         color: "#162581"
-  - type: Reactive
-    groups:
-      Flammable: [ Touch ]
-      Extinguish: [ Touch ]
-      Acidic:  [ Touch ]
   - type: Vocal
     sounds:
       Male: UnisexDecapoid
       Female: UnisexDecapoid
       Unsexed: UnisexDecapoid # male and female sounds have to 1) exist and 2) come first, otherwise urists will spawn without emote sounds 66% of the time, because this game is poorly programmed
   - type: MovementSpeedModifier
-    baseSprintSpeed: 3.5
-    baseWalkSpeed: 1.5
     weightlessAcceleration: 1.5 # move more easily in space
     weightlessFrictionNoInput: 2 # more control over movement in space
     weightlessModifier: 1
   - type: TemperatureDamage
     heatDamageThreshold: 380 # slightly more vulnerable to heat
-    coldDamageThreshold: 0 # immune to space
+    coldDamageThreshold: 0 # immune to cold
     coldDamage:
       types:
-        Cold : 0 # immune to space
+        Cold : 0 # immune to cold
     heatDamage:
       types:
         Heat : 1
@@ -268,7 +254,7 @@
   components:
   - type: VisualOrgan
     data:
-      sprite: Mobs/Species/Slime/parts.rsi
+      sprite: _Impstation/Mobs/Species/Decapoid/parts.rsi
   - type: VisualOrganMarkings
     markingData:
       group: Decapoid
@@ -384,3 +370,8 @@
     maxReagents: 3
     stages: [ Digestion, Bloodstream, Metabolites, Respiration ]
   - type: Lung
+  - type: Sprite # There's no sprite for those so human lungs it is
+    sprite: Mobs/Species/Human/organs.rsi
+    layers:
+    - state: lung-l
+    - state: lung-r
