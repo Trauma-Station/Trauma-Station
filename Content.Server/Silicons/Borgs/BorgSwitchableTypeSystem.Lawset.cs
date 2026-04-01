@@ -2,7 +2,6 @@ using Content.Server.Silicons.Laws;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Trauma.Common.Silicon;
-using Content.Trauma.Common.Silicons.Laws;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Silicons.Borgs;
@@ -13,7 +12,6 @@ namespace Content.Server.Silicons.Borgs;
 /// </summary>
 public sealed partial class BorgSwitchableTypeSystem
 {
-    [Dependency] private readonly CommonSlavedBorgSystem _slavedBorg = default!;
     [Dependency] private readonly SiliconLawSystem _law = default!;
 
     private void ConfigureLawset(EntityUid uid, ProtoId<SiliconLawsetPrototype> id)
@@ -22,8 +20,8 @@ public sealed partial class BorgSwitchableTypeSystem
 
         _law.SetLaws(laws.Laws, uid);
 
-        var LawsetChangedev = new SiliconLawsetChangedEvent();
-        RaiseLocalEvent(uid, ref LawsetChangedev);
+        var lawsetChangedev = new SiliconLawsetChangedEvent();
+        RaiseLocalEvent(uid, ref lawsetChangedev);
 
         // re-add law 0 and final law based on new lawset
         if (CompOrNull<EmagSiliconLawComponent>(uid)?.OwnerName != null)

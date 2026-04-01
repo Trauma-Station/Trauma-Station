@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Atmos;
 using Content.Medical.Common.Targeting;
+using Content.Shared.Atmos.Components;
 using Content.Trauma.Common.Wizard;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;

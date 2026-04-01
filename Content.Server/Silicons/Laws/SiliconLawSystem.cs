@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.CustomLawboard;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
 using Content.Trauma.Common.Silicon;
-using Content.Trauma.Common.Silicons.Laws;
 using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
 using Content.Shared.Random;
@@ -45,7 +44,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly IonLawSystem _ionLaw = default!;
     [Dependency] private readonly ResearchSystem _research = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly CommonSlavedBorgSystem _borg = default!;
     // </Trauma>
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -84,12 +82,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (_borg.IsSlavedBorg(uid)
-            || HasComp<StationAiCustomizationComponent>(uid)) // skip a law's notification for remotable and AI
-            return;
-        // Corvax-Next-AiRemoteControl-End
 
         var msg = Loc.GetString("laws-notify");
         var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
@@ -182,11 +174,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         if (component.Lawset == null)
             component.Lawset = GetLawset(component.Laws);
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (_borg.IsSlavedBorg(uid)) // You can't emag controllable entities
-            return;
-        // Corvax-Next-AiRemoteControl-End
 
         // Show the silicon has been subverted.
         component.Subverted = true;
@@ -375,18 +362,8 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
                 crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
                 Dirty(update, crewIconComp);
             }
-            RaiseLocalEvent(update, new AILawUpdatedEvent());
             SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
-
-            // Corvax-Next-AiRemoteControl-Start
-            if (TryComp<StationAiHeldComponent>(update, out var stationAiHeldComp)
-                && stationAiHeldComp.CurrentConnectedEntity is { } connected
-                && HasComp<SiliconLawProviderComponent>(stationAiHeldComp.CurrentConnectedEntity))
-            {
-                SetLaws(lawset, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
-                RaiseLocalEvent(connected, new AILawUpdatedEvent());
-            }
-            // Corvax-Next-AiRemoteControl-End
+            RaiseLocalEvent(update, new AILawUpdatedEvent());
         }
 
     }

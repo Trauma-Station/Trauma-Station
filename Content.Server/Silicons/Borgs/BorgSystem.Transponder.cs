@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Shared.Drone;
-using Content.Trauma.Common.Silicons.Laws;
 using Robust.Shared.Player;
 // </Trauma>
 using Content.Shared.DeviceNetwork;
@@ -21,9 +20,6 @@ namespace Content.Server.Silicons.Borgs;
 /// <inheritdoc/>
 public sealed partial class BorgSystem
 {
-    // <Trauma>
-    [Dependency] private readonly CommonSlavedBorgSystem _borg = default!;
-    // </Trauma>
     private void InitializeTransponder()
     {
         SubscribeLocalEvent<BorgTransponderComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
@@ -58,8 +54,6 @@ public sealed partial class BorgSystem
                 hpPercent,
                 chassis.ModuleCount,
                 hasBrain,
-                canDisable,
-                _borg.IsSlavedBorg(uid)); // Corvax-Next-AiRemoteControl
                 canDisable);
 
             var payload = new NetworkPayload()

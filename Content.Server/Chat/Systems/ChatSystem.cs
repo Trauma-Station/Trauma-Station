@@ -2,6 +2,7 @@
 using Content.Goobstation.Common.Chat;
 using Content.Goobstation.Common.Traits;
 using Content.Goobstation.Shared.Loudspeaker.Events;
+using Content.Shared.Speech;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Systems;
 using Content.Trauma.Common.Wizard;

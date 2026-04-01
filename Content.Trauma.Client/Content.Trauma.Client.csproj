@@ -17,6 +17,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Shuttles\UI\" />
+	  <Folder Include="Silicons\Borgs\" />
 	</ItemGroup>
 
 	<Import Project="../RobustToolbox/Imports/Client.props" />
