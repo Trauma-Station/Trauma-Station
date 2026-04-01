@@ -13,6 +13,7 @@
     netsync: false # light is done clientside
     enabled: false
     castShadows: false
+    falloff: 4
   - type: Temperature
     currentTemperature: 290
     specificHeat: 500

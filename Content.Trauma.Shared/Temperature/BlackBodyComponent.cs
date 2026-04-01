@@ -18,6 +18,12 @@ public sealed partial class BlackBodyComponent : Component
     /// </summary>
     [DataField]
     public float MaxLightRadius = 1f;
+
+    /// <summary>
+    /// The current color calculated by the client.
+    /// </summary>
+    [ViewVariables]
+    public Color Color;
 }
 
 [Serializable, NetSerializable]

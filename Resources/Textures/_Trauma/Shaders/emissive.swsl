@@ -2,8 +2,9 @@ uniform highp vec4 emissive;
 
 void fragment() {
     highp vec4 col = zTexture(UV) * MODULATE;
-    highp vec3 base = col.xyz * lightSample;
-    COLOR = vec4(base + emissive.xyz * emissive.a, col.a);
+    highp vec3 emcol = emissive.xyz * emissive.a;
+    highp vec3 base = col.xyz * (lightSample + emcol * 5);
+    COLOR = vec4(base + emcol, col.a);
 	// already applied lighting to the base texture, evil shit to make it not apply lighting to the emissive part
     COLOR /= MODULATE * LIGHT;
 }

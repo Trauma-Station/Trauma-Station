@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Clothing;
+using Content.Shared.Hands;
+using Content.Shared.Item;
 using Content.Trauma.Shared.Temperature;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -10,6 +13,7 @@ namespace Content.Trauma.Client.Temperature;
 
 public sealed class BlackBodyVisualizerSystem : VisualizerSystem<BlackBodyComponent>
 {
+    [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly EntityQuery<PointLightComponent> _lightQuery = default!;
     [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
@@ -22,6 +26,14 @@ public sealed class BlackBodyVisualizerSystem : VisualizerSystem<BlackBodyCompon
     public const float SpeedOfLight = 299792458f; // m/s
     public const float Gamma = 1f / 2.2f;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<BlackBodyComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
+        SubscribeLocalEvent<BlackBodyComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
+    }
+
     protected override void OnAppearanceChange(EntityUid uid, BlackBodyComponent comp, ref AppearanceChangeEvent args)
     {
         if (!_spriteQuery.TryComp(uid, out var sprite) ||
@@ -29,21 +41,16 @@ public sealed class BlackBodyVisualizerSystem : VisualizerSystem<BlackBodyCompon
             return;
 
         var color = GetEmissiveColor(temperature);
-        foreach (var ilayer in sprite.AllLayers)
+        if (comp.Color == color)
+            return; // no change
+
+        comp.Color = color;
+        foreach (var layer in sprite.AllLayers)
         {
-            var layer = (SpriteComponent.Layer) ilayer;
-            if (layer.ShaderPrototype != EmissiveShader || layer.Shader is not {} shader)
-                continue;
-
-            // ensure it is mutable before modifying it
-            if (!shader.Mutable)
-            {
-                shader = shader.Duplicate();
-                layer.Shader = shader;
-            }
-
-            shader.SetParameter("emissive", color);
+            SetLayerEmissive((SpriteComponent.Layer) layer, color);
         }
+
+        _item.VisualsChanged(uid); // update inhands and clothing sprites too
 
         var light = _lightQuery.Comp(uid);
         var glowing = temperature > MinGlowTemp;
@@ -60,6 +67,47 @@ public sealed class BlackBodyVisualizerSystem : VisualizerSystem<BlackBodyCompon
         _light.SetColor(uid, color, light);
         _light.SetEnergy(uid, energy, light);
         _light.SetRadius(uid, radius, light);
+    }
+
+    private void OnHeldVisualsUpdated(Entity<BlackBodyComponent> ent, ref HeldVisualsUpdatedEvent args)
+    {
+        UpdateLayers(args.User, ent.Comp.Color, args.RevealedLayers);
+    }
+
+    private void OnEquipmentVisualsUpdated(Entity<BlackBodyComponent> ent, ref EquipmentVisualsUpdatedEvent args)
+    {
+        UpdateLayers(args.Equipee, ent.Comp.Color, args.RevealedLayers);
+    }
+
+    private void UpdateLayers(EntityUid uid, Color color, HashSet<string> keys)
+    {
+        if (!_spriteQuery.TryComp(uid, out var sprite))
+            return;
+
+        var ent = (uid, sprite);
+        foreach (var key in keys)
+        {
+            if (SpriteSystem.LayerMapTryGet(ent, key, out var index, true) &&
+                SpriteSystem.TryGetLayer(ent, index, out var layer, true))
+            {
+                SetLayerEmissive(layer, color);
+            }
+        }
+    }
+
+    private void SetLayerEmissive(SpriteComponent.Layer layer, Color color)
+    {
+        if (layer.ShaderPrototype != EmissiveShader || layer.Shader is not {} shader)
+            return;
+
+        // ensure it is mutable before modifying it
+        if (!shader.Mutable)
+        {
+            shader = shader.Duplicate();
+            layer.Shader = shader;
+        }
+
+        shader.SetParameter("emissive", color);
     }
 
     // rgb is the black body visible radiation color
@@ -94,8 +142,11 @@ public sealed class BlackBodyVisualizerSystem : VisualizerSystem<BlackBodyCompon
         Correct(ref g);
         Correct(ref b);
 
-        // at 1200K it is purely glow, no base texture
-        var a = Math.Clamp(MathF.Pow(t / 1200f, 2f), 0f, 1f);
+        // alpha curve that looks nice, no physical basis at all
+        // y = ln1.347x - 0.118x + 0.312 where x is in kK
+        // above 1800K it is purely glow, no base texture
+        var x = t * 0.001f;
+        var a = Math.Clamp(MathF.Log(1.347f * x) - 0.118f * x + 0.313f, 0f, 1f);
         return new Color(r, g, b, a);
     }
 

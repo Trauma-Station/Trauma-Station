@@ -6,11 +6,13 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Forging;
 
 public sealed class WorkableSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMetalSystem _metal = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -29,6 +31,7 @@ public sealed class WorkableSystem : EntitySystem
     private void OnDamageChanged(Entity<WorkableComponent> ent, ref DamageChangedEvent args)
     {
         if (TerminatingOrDeleted(ent) ||
+            !_timing.IsFirstTimePredicted ||
             args.DamageDelta is not {} delta ||
             args.Origin is not {} user || // random explosion can't forge something, youd need a really really specific shaped charge
             !delta.DamageDict.TryGetValue(ent.Comp.DamageType, out var dealt))
