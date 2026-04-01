@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Client.LinkAccount;
-// </Trauma>
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
@@ -96,9 +93,6 @@ namespace Content.Client.Entry
 
         public override void Init()
         {
-            // <Trauma>
-            IoCManager.Register<IPostInjectInit, LinkAccountManager>();
-            // </Trauma>
             Dependencies.BuildGraph();
             Dependencies.InjectDependencies(this);
 
