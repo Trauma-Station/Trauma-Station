@@ -43,7 +43,7 @@
     guid: 416c163c-c65f-438d-87b1-fcbe7dfc571f
 
 - type: loadoutEffectGroup
-  id: ToasterStrudels
+  id: Tenshi
   effects:
   - !type:PlayerGUIDLoadoutEffect
     guid: 553a2f9c-4584-4396-963a-017efdf812f5
