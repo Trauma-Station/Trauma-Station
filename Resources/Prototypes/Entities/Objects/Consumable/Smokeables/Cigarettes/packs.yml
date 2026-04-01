@@ -13,27 +13,27 @@
       visible: false
     - state: cig1
       map: ["cig1"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig2
       map: ["cig2"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig3
       map: ["cig3"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig4
       map: ["cig4"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig5
       map: ["cig5"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig6
       map: ["cig6"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
   - type: Tag
     tags:
@@ -87,27 +87,27 @@
       visible: false
     - state: cig1
       map: ["cig1"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig2
       map: ["cig2"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig3
       map: ["cig3"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig4
       map: ["cig4"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig5
       map: ["cig5"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
     - state: cig6
       map: ["cig6"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
       visible: false
   - type: Tag
     tags:
@@ -143,58 +143,58 @@
 
 - type: entity
   id: CigPackGreen
-  parent: CigPackBase
-  name: Spessman's Smokes packet
-  description: A label on the packaging reads, Wouldn't a slow death make a change?
+  parent: CigPackBaseSoft # Trauma
+  name: Newstation soft pack
+  description: A label on the packaging reads, dying with joy!
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/newstation.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/newstation.rsi
 
 - type: entity
   id: CigPackRed
   parent: CigPackBase
-  name: DromedaryCo packet
-  description: The most popular brand of Space Cigarettes, sponsors of the Space Olympics.
+  name: Dromad Red 99s pack # Trauma
+  description: The most popular brand of Space Cigarettes. There is an image of some kind of humanoid dromedary creature in a salt desert.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/dromad.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/dromad.rsi
 
 - type: entity
   id: CigPackBlue
   parent: CigPackBase
-  name: AcmeCo packet
-  description: For those who somehow want to obtain the record for the most amount of cancerous tumors.
+  name: Sodfield Blue pack # Trauma
+  description: Light smokes, most of their ad campaigns are targetted towards shaft miners.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/sodfield.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/sodfield.rsi
 
 - type: entity
   id: CigPackBlack
-  parent: CigPackBase
-  name: Nomads packet
-  description: Nomads's extra strong, for when your life is more extra hard.
+  parent: CigPackBaseSoft # Trauma
+  name: Solaria soft pack
+  description: An incredibly harsh cigarette, the packaging has sol common on it and golden images of locations from Old Terra.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/solaria.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/solaria.rsi
 
 - type: entity
   id: CigPackSyndicate
   parent: [CigPackBase, BaseSyndicateContraband]
-  name: Interdyne herbals packet
+  name: Interdyne herbals pack
   description: Elite cigarettes for elite syndicate agents. Infused with medicine for when you need to do more than calm your nerves.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase:
@@ -209,9 +209,9 @@
   description: Dan worked with NT chemistry to dispose of excess chemicals, ENJOY.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:NestedSelector
