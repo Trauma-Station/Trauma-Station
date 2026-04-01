@@ -16,16 +16,20 @@ public sealed class NeurotoxinGlandSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BodyComponent, ShotAttemptedEvent>(_body.RefRelayBodyEvent);
+        SubscribeLocalEvent<BodyComponent, ShotAttemptedEvent>(_body.RelayEvent);
         SubscribeLocalEvent<NeurotoxinGlandComponent, ToggleAcidSpitEvent>(OnToggleAcidSpit);
         SubscribeLocalEvent<NeurotoxinGlandComponent, BodyRelayedEvent<ShotAttemptedEvent>>(OnShotAttempted);
     }
 
     private void OnShotAttempted(Entity<NeurotoxinGlandComponent> ent, ref BodyRelayedEvent<ShotAttemptedEvent> args)
     {
+        if (ent.Comp.Active)
+            return;
+
         // Prevent shooting if the gland is not active. It still lets them shove.
-        if (!ent.Comp.Active)
-            args.Args.Cancel();
+        var ev = args.Args;
+        ev.Cancel();
+        args.Args = ev; // holy dogshit please never ever do this
     }
 
     private void OnToggleAcidSpit(Entity<NeurotoxinGlandComponent> ent, ref ToggleAcidSpitEvent args)
