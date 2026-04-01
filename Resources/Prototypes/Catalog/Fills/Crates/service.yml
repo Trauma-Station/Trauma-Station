@@ -90,7 +90,7 @@
 - type: entity
   parent: CrateGenericSteel
   id: CrateServiceSmokeables
-  name: `les crate
+  name: smokeables crate
   description: Tired of a quick death on the station? Order this crate and chain-smoke your way to a coughy demise!
   components:
   - type: EntityTableContainerFill
