@@ -148,7 +148,7 @@
   parent: ClothingOuterStorageBase
   id: PatreonGungeonologist
   name: bomber jacket
-  description: A green bomber jacket, dont ask what it is made out of.
+  description: A green bomber jacket, dont ask what it's made out of.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Patreon/TheGungeonologist/bomberjacket.rsi
@@ -167,21 +167,10 @@
     sprite: _Trauma/Objects/Patreon/TheGungeonologist/cupgoggles.rsi
 
 - type: entity
-  parent: ClothingBackpackSatchel
-  id: PatreonGribley
-  name: disgusting beast
-  description: What the fuck is this thing?
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Patreon/gribley.rsi
-  - type: Clothing
-    sprite: _Trauma/Objects/Patreon/gribley.rsi
-
-- type: entity
   parent: ClothingNeckBase
   id: PatreonBias
-  name: heirpohant trophey
-  description: What the fuck is this thing?
+  name: hierophant trophy
+  description: The decapitated head of a hierophant.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Patreon/_bias.rsi
@@ -227,14 +216,14 @@
   name: real headslime
   description: Squishy... ew.
   components:
-    - type: AddAccentClothing
-      accent: ReplacementAccent
-      replacement: dementia
+  - type: AddAccentClothing
+    accent: ReplacementAccent
+    replacement: dementia
 
 - type: entity
-  name: Dwingle
   parent: SimpleMobBase
   id: PatreonBumblebirb
+  name: Dwingle
   description: It's dwingling itself.
   components:
   - type: LanguageSpeaker
