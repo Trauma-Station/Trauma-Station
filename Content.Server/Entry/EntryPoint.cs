@@ -101,7 +101,7 @@ namespace Content.Server.Entry
         {
             base.Init();
             // <Trauma>
-            IoCManager.Register<LinkAccountManager, LinkAccountManager>();
+            IoCManager.Register<IPostInjectInit, LinkAccountManager>();
             // </Trauma>
             Dependencies.BuildGraph();
             Dependencies.InjectDependencies(this);

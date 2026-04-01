@@ -97,7 +97,7 @@ namespace Content.Client.Entry
         public override void Init()
         {
             // <Trauma>
-            IoCManager.Register<LinkAccountManager, LinkAccountManager>();
+            IoCManager.Register<IPostInjectInit, LinkAccountManager>();
             // </Trauma>
             Dependencies.BuildGraph();
             Dependencies.InjectDependencies(this);
