@@ -78,7 +78,7 @@
 #Longswords
 - type: entity
   name: captain's sabre
-  parent: [ BaseSword, BaseCommandContraband ]
+  parent: [ KnifeDurabilityStrong, BaseSword, BaseCommandContraband ] # Trauma - durability
   id: CaptainSabre
   description: A ceremonial weapon belonging to the captain of the station.
   components:
