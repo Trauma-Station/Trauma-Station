@@ -38,7 +38,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.CloneProjector;
@@ -59,7 +58,6 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly CarryingSystem _carrying = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
@@ -440,10 +438,9 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
             || !TryComp<ActionComponent>(actionEntity, out var actionComp))
             return;
 
-        _actions.SetCooldown(projector.Owner, _timing.CurTime + projector.Comp.DestroyedCooldown);
+        _actions.SetCooldown((actionEntity, actionComp), projector.Comp.DestroyedCooldown);
 
         _actions.UpdateAction((actionEntity, actionComp));
-        Dirty(actionEntity, actionComp);
     }
 
     private bool CanUseProjector(Entity<CloneProjectorComponent> projector, EntityUid user)

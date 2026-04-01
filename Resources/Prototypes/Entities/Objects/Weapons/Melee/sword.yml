@@ -240,7 +240,7 @@
 #Other/Weird
 - type: entity
   name: throngler
-  parent: [ BaseSword, BaseMajorContraband, UnbeakableDurability ]
+  parent: [ UnbreakableDurability, BaseSword, BaseMajorContraband ] # Trauma - durability
   id: Throngler
   description: If Security dares take it from you, just remind them that they are indeed mortal.
   components:

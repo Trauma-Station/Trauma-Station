@@ -16,12 +16,13 @@
   color: "#b6946d"
   price: 0.1 # $10 for 1 unit
 
+# TODO: remove ingot materials, ingot should be a tag and just use the existing material
 - type: material
   id: BrassIngot
   stackEntity: BrassIngot
   name: materials-brass-ingot
   unit: materials-unit-ingot
-  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_brass_hot }
+  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_brass }
   color: "#cc8739"
   price: 1 # $100 for 1 unit
 
@@ -30,7 +31,7 @@
   stackEntity: SteelIngot
   name: materials-steel-ingot
   unit: materials-unit-ingot
-  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_steel_hot }
+  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_steel }
   color: "#6a7b85"
   price: 1 # $100 for 1 unit
 
@@ -39,7 +40,7 @@
   stackEntity: PlasteelIngot
   name: materials-plasteel-ingot
   unit: materials-unit-ingot
-  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel_hot }
+  icon: { sprite: _Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel }
   color: "#7dafd1"
   price: 1 # $100 for 1 unit
 
@@ -59,4 +60,14 @@
   unit: materials-unit-use
   icon: { sprite: _Trauma/Objects/tools/weaponreinforcement.rsi, state: icon }
   color: "#000000"
+  price: 0
+
+# <Trauma
+- type: material
+  id: Bone
+  stackEntity: MaterialBones1
+  name: materials-gunpowder
+  unit: materials-unit-piece
+  icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: bones }
+  color: "#A9A9A9"
   price: 0

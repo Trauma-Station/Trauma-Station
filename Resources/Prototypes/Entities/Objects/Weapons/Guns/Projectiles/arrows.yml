@@ -146,6 +146,14 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 50
   # </Trauma>
 
 - type: entity
@@ -202,6 +210,15 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 50
+      Plasma: 50
   # </Trauma>
 
 - type: entity
@@ -259,6 +276,15 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 50
+      Uranium: 50
   # </Trauma>
 
 - type: entity
@@ -315,6 +341,13 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
   # </Trauma>
 
 - type: entity
@@ -341,3 +374,13 @@
   - type: Construction
     graph: CardArrow
     node: CardArrow
+# <Trauma>
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Cardboard: 50
+# </Trauma>

@@ -696,7 +696,7 @@
     count: 1
 
 - type: entity
-  parent: [ MaterialBase, BaseKnife, NonweaponDurability] # Trauma - Durability
+  parent: [ NonweaponDurability, MaterialBase, BaseKnife ] # Trauma - Durability
   id: MaterialToothSharkminnow
   name: sharkminnow tooth
   description: Looks sharp. Sharp enough to poke someone's eye out. Holy fuck it's big.
@@ -744,6 +744,12 @@
   name: bones
   suffix: Full
   components:
+  # <Trauma> - its used by recycling now
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Bone: 100
+  # </Trauma>
   - type: Stack
     stackType: Bones
     baseLayer: base
