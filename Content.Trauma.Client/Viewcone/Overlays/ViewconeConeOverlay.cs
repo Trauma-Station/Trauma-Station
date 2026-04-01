@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client.Eye;
 using Content.Shared.MouseRotator;
 using Content.Trauma.Shared.Viewcone;
+using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
 
@@ -20,6 +21,7 @@ public sealed class ViewconeConeOverlay : Overlay
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     private readonly SharedTransformSystem _xform;
+    private readonly ViewconeAngleSystem _angle;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     public override bool RequestScreenTexture => true;
@@ -27,7 +29,7 @@ public sealed class ViewconeConeOverlay : Overlay
     public static ProtoId<ShaderPrototype> ShaderPrototype = "Viewcone";
     private readonly ShaderInstance _viewconeShader;
 
-    private Entity<EyeComponent, TransformComponent>? _eyeEntity;
+    private Entity<ViewconeComponent, EyeComponent, TransformComponent>? _eyeEntity;
     private float _coneAngle;
     private float _coneFeather;
     private float _coneIgnoreRadius;
@@ -38,7 +40,10 @@ public sealed class ViewconeConeOverlay : Overlay
         IoCManager.InjectDependencies(this);
 
         _xform = _ent.System<SharedTransformSystem>();
+        _angle = _ent.System<ViewconeAngleSystem>();
+
         _viewconeShader = _proto.Index(ShaderPrototype).InstanceUnique();
+        ZIndex = -6;
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -57,11 +62,14 @@ public sealed class ViewconeConeOverlay : Overlay
             if (args.Viewport.Eye != eye.Eye)
                 continue;
 
-            _coneAngle = viewcone.ConeAngle;
+            // TODO dont really like that this has to get the angle twice (once here and once in the alpha overlay)
+            // but its not really like its a huge inefficiency (this only has to happen twice per frame and its like a trivial event relay with no logic)
+            // and i really dont want to make it stateful
+            _coneAngle = _angle.GetAngle((uid, viewcone));
             _coneFeather = viewcone.ConeFeather;
             _coneIgnoreRadius = (viewcone.ConeIgnoreRadius - viewcone.ConeIgnoreFeather) * 50f;
             _coneIgnoreFeather = Math.Max(viewcone.ConeIgnoreFeather * 200f, 8f);
-            _eyeEntity = (uid, eye, xform);
+            _eyeEntity = (uid, viewcone, eye, xform);
             break;
         }
 
@@ -76,19 +84,9 @@ public sealed class ViewconeConeOverlay : Overlay
         var worldHandle = args.WorldHandle;
         var viewport = args.WorldBounds;
 
-        var (uid, eye, xform) = _eyeEntity.Value;
+        var (uid, viewcone, eye, xform) = _eyeEntity.Value;
         var zoom = eye.Zoom.X;
-        var eyeAngle = eye.Rotation;
-        var playerAngle = _xform.GetWorldRotation(xform);
-
-        if (_ent.HasComponent<MouseRotatorComponent>(uid))
-        {
-            var mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
-            if (mousePos.MapId != MapId.Nullspace)
-                playerAngle = (mousePos.Position - _xform.GetMapCoordinates((uid, xform)).Position).ToAngle() + Angle.FromDegrees(90.0);
-        }
-
-        var viewAngle = (float) (playerAngle + eyeAngle).Theta;
+        var viewAngle = (float) viewcone.ViewAngle.Theta;
 
         _viewconeShader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
         _viewconeShader.SetParameter("Zoom", zoom);

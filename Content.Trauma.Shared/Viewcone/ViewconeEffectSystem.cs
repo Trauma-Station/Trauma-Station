@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Common.Movement;
+using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 

@@ -5,17 +5,17 @@
 uniform sampler2D SCREEN_TEXTURE;
 uniform highp float Zoom;
 
-uniform highp float ConeAngle; //= 270.0
-uniform highp float ConeFeather; //= 10.0;
-uniform highp float ConeIgnoreRadius; //= 0.5;
-uniform highp float ConeIgnoreFeather; //= 0.1;
+uniform highp float ConeAngle;
+uniform highp float ConeFeather;
+uniform highp float ConeIgnoreRadius;
+uniform highp float ConeIgnoreFeather;
 
 uniform highp float ViewAngle;
 
 const highp float grainMult = 0.35;
 const highp float grainBase = 0.6;
 
-const highp float grayscaleFactor = 0.72;
+const highp float grayscaleFactor = 0.82;
 
 void fragment(){
     highp vec2 pixelSize = vec2(1.0/SCREEN_PIXEL_SIZE.x, 1.0/SCREEN_PIXEL_SIZE.y);

@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client.Eye;
 using Content.Shared.MouseRotator;
 using Content.Trauma.Client.Viewcone.ComponentTree;
 using Content.Trauma.Shared.Viewcone;
+using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Client.Input;
 using Robust.Shared.Enums;
 using Robust.Shared.Map.Components;
 
@@ -20,14 +21,14 @@ namespace Content.Trauma.Client.Viewcone.Overlays;
 public sealed class ViewconeSetAlphaOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IInputManager _input = default!;
     private readonly ViewconeOverlaySystem _cone;
+    private readonly ViewconeAngleSystem _angle;
     private readonly ViewconeOcclusionSystem _tree;
     private readonly TransformSystem _xform;
     private readonly SpriteSystem _sprite;
 
     private readonly EntityQuery<SpriteComponent> _spriteQuery;
+    private readonly EntityQuery<ViewconeClientOverrideComponent> _overrideQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowEntities;
 
@@ -39,11 +40,13 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
         IoCManager.InjectDependencies(this);
 
         _cone = _ent.System<ViewconeOverlaySystem>();
+        _angle = _ent.System<ViewconeAngleSystem>();
         _tree = _ent.System<ViewconeOcclusionSystem>();
         _xform  = _ent.System<TransformSystem>();
         _sprite = _ent.System<SpriteSystem>();
 
         _spriteQuery = _ent.GetEntityQuery<SpriteComponent>();
+        _overrideQuery = _ent.GetEntityQuery<ViewconeClientOverrideComponent>();
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -56,8 +59,8 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
 
         // This is really stupid but there isn't another way to reverse an eye entity from just an IEye afaict
         // It's not really inefficient though. theres only at most a few of these inside PVS anyway
-        var enumerator = _ent.AllEntityQueryEnumerator<ViewconeComponent, EyeComponent>();
-        while (enumerator.MoveNext(out var uid, out var viewcone, out var eye))
+        var enumerator = _ent.AllEntityQueryEnumerator<LerpingEyeComponent, EyeComponent, ViewconeComponent>();
+        while (enumerator.MoveNext(out var uid, out _, out var eye, out var viewcone))
         {
             if (args.Viewport.Eye != eye.Eye)
                 continue;
@@ -77,27 +80,13 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
         var (ent, eye, cone) = _nextEye.Value;
 
         var eyeTransform = _ent.GetComponent<TransformComponent>(ent);
-        var (eyePos, eyeRot) = _xform.GetWorldPositionRotation(eyeTransform);
+        var eyePos = _xform.GetWorldPosition(eyeTransform);
+        var eyeRot = cone.ViewAngle - eye.Rotation; // subtract rotation cuz idk. the lerp adds it but this doesnt want it for some reason idk.
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // !! Thank You Bhijn God (TYBG) for 95% of the rest of this methods code !!
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        if (_ent.HasComponent<MouseRotatorComponent>(ent))
-        {
-            // this should work for multiviewport. at least, about as well as people will expect
-            // this wont run for other eye entities that have viewcones
-            // (if any even end up existing.. I probably made all this code viewport agnostic for no reason)
-            // (but it'd be nice to have cameras that have viewcones. right. right)
-            // (Withers )
-            // but for a separate viewport following the same mouserotator entity, idk, it probably works fine.
-            // when is that even going to happen.
-            var mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
-            if (mousePos.MapId == eyeTransform.MapID)
-                eyeRot = (mousePos.Position - _xform.GetMapCoordinates(eyeTransform).Position).ToWorldAngle();
-        }
-
-        var radConeAngle = MathHelper.DegreesToRadians(cone.ConeAngle);
+        var radConeAngle = MathHelper.DegreesToRadians(_angle.GetAngle((ent, cone)));
         var radConeFeather = MathHelper.DegreesToRadians(cone.ConeFeather);
 
         _cone.CachedBaseAlphas.Clear();
@@ -105,7 +94,11 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
         foreach (var entry in occludables)
         {
             var (comp, xform) = entry;
-            var uid = entry.Uid; // this uses component.Owner internally... oh well
+            var uid = entry.Uid;
+
+            // dynamic clientside disabling, for effects like pulled entities
+            if (_overrideQuery.HasComp(uid))
+                continue;
 
             if (!_spriteQuery.TryComp(uid, out var sprite))
                 continue;
@@ -122,15 +115,18 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
             var distLength = dist.Length();
             var angleDist = Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot);
 
+            var baseAlpha = sprite.Color.A;
             var angleAlpha = (float) Math.Clamp((Math.Abs(angleDist.Theta) - (radConeAngle * 0.5f)) + (radConeFeather * 0.5f), 0f, radConeFeather) / radConeFeather;
             var distAlpha = Math.Clamp((distLength - cone.ConeIgnoreRadius) + (cone.ConeIgnoreFeather * 0.5f), 0f, cone.ConeIgnoreFeather) / cone.ConeIgnoreFeather;
             var targetAlpha = Math.Max(1f - angleAlpha, 1f - distAlpha);
 
             // save the results so we can use it in resetalpha overlay
-            _cone.CachedBaseAlphas.Add(((uid, sprite), sprite.Color.A));
+            _cone.CachedBaseAlphas.Add(((uid, sprite), baseAlpha));
 
-            var alpha = comp.Inverted ? 1f - targetAlpha : targetAlpha;
+            // multiply by the base alpha of the sprite (sprites which were already invisible for other reasons should stay invisible)
+            var alpha = (comp.Inverted ? 1f - targetAlpha : targetAlpha) * (comp.OverrideBaseAlpha ? 1f : baseAlpha);
             _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(alpha));
+            _sprite.SetVisible((uid, sprite), alpha > 0f);
         }
     }
 }
