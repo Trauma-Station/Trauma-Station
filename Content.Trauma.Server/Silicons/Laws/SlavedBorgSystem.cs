@@ -5,6 +5,7 @@ using Content.Trauma.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Robust.Shared.Prototypes;
+using Content.Trauma.Common.Silicon;
 
 namespace Content.Trauma.Server.Silicons.Laws;
 
@@ -23,6 +24,7 @@ public sealed class SlavedBorgSystem : SharedSlavedBorgSystem
         // need to run after so it doesnt get overriden by the actual lawset
         SubscribeLocalEvent<SlavedBorgComponent, GetSiliconLawsEvent>(OnGetSiliconLaws, after: [typeof(SiliconLawSystem)]);
         SubscribeLocalEvent<SlavedBorgComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<SlavedBorgComponent, SiliconLawsetChangedEvent>(OnLawsetChanged);
     }
 
     private void OnGetSiliconLaws(Entity<SlavedBorgComponent> ent, ref GetSiliconLawsEvent args)
@@ -42,6 +44,15 @@ public sealed class SlavedBorgSystem : SharedSlavedBorgSystem
 
         if (provider.Lawset is { } lawset)
             RemoveLaw(lawset, ent.Comp.Law);
+    }
+
+    public void OnLawsetChanged(Entity<SlavedBorgComponent> ent, ref SiliconLawsetChangedEvent args)
+    {
+        if (!TryComp<SiliconLawProviderComponent>(ent, out var provider))
+            return;
+
+        if (provider.Lawset is { } lawset)
+            AddLaw(lawset, ent.Comp.Law);
     }
 
     /// <summary>

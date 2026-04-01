@@ -14,4 +14,17 @@ public abstract partial class CommonMiningPointsSystem : EntitySystem
     /// if user can claim mining points
     /// <summary>
     public abstract bool CanClaimPoints(EntityUid user);
+
+    /// <summary>
+    /// Tries to find the user's id card and gets its <see cref="MiningPointsComponent"/>.
+    /// </summary>
+    /// <remarks>
+    /// Component is nullable for easy usage with the API due to Entity&lt;T&gt; not being usable for Entity&lt;T?&gt; arguments.
+    /// </remarks>
+    public abstract Entity<MiningPointsComponent?>? TryFindIdCard(EntityUid user);
+
+    /// <summary>
+    /// Removes points from a holder, returning true if it succeeded.
+    /// </summary>
+    public abstract bool RemovePoints(Entity<MiningPointsComponent?> ent, uint amount);
 }

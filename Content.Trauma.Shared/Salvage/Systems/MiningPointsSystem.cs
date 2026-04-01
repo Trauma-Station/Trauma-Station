@@ -91,13 +91,7 @@ public sealed class MiningPointsSystem : CommonMiningPointsSystem
         return TryFindIdCard(user);
     }
 
-    /// <summary>
-    /// Tries to find the user's id card and gets its <see cref="MiningPointsComponent"/>.
-    /// </summary>
-    /// <remarks>
-    /// Component is nullable for easy usage with the API due to Entity&lt;T&gt; not being usable for Entity&lt;T?&gt; arguments.
-    /// </remarks>
-    public Entity<MiningPointsComponent?>? TryFindIdCard(EntityUid user)
+    public override Entity<MiningPointsComponent?>? TryFindIdCard(EntityUid user)
     {
         if (!_idCard.TryFindIdCard(user, out var idCard))
             return null;
@@ -116,10 +110,7 @@ public sealed class MiningPointsSystem : CommonMiningPointsSystem
         return comp.Points >= points;
     }
 
-    /// <summary>
-    /// Removes points from a holder, returning true if it succeeded.
-    /// </summary>
-    public bool RemovePoints(Entity<MiningPointsComponent?> ent, uint amount)
+    public override bool RemovePoints(Entity<MiningPointsComponent?> ent, uint amount)
     {
         if (!_query.Resolve(ent, ref ent.Comp) || amount > ent.Comp.Points)
             return false;

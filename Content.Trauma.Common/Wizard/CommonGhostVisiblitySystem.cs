@@ -6,4 +6,9 @@ public abstract class CommonGhostVisibilitySystem : EntitySystem
     ///     Determines whether ghosts are currently visible to living players.
     /// </summary>
     public abstract bool GhostsVisible();
+
+    /// <summary>
+    /// Determines whether a ghost can be seen by other ghosts.
+    /// </summary>
+    public abstract bool IsVisible(EntityUid uid);
 }

@@ -374,14 +374,14 @@ public sealed class MindSystem : SharedMindSystem
         }
 
         if (mind.OwnedEntity != null) // Goobstation
-            _tag.AddTag(mind.OwnedEntity.Value, SharedBindSoulSystem.IgnoreBindSoulTag);
-        _tag.AddTag(target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+            EnsureComp<MindSwappingComponent>(mind.OwnedEntity.Value);
+        EnsureComp<MindSwappingComponent>(target);
 
         MakeSentient(target);
         TransferTo(mindId, target, ghostCheckOverride: true, mind: mind);
 
         if (mind.OwnedEntity != null) // Goobstation
-            _tag.AddTag(mind.OwnedEntity.Value, SharedBindSoulSystem.IgnoreBindSoulTag);
-        _tag.RemoveTag(target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+            EnsureComp<MindSwappingComponent>(mind.OwnedEntity.Value);
+        EnsureComp<MindSwappingComponent>(target);
     }
 }

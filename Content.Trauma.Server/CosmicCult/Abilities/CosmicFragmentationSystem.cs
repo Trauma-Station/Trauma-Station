@@ -3,16 +3,17 @@
 using Content.Server.Actions;
 using Content.Server.Antag;
 using Content.Server.Popups;
-using Content.Shared.Radio.Components;
-using Content.Trauma.Shared.CosmicCult;
-using Content.Trauma.Shared.CosmicCult.Components;
-using Content.Trauma.Shared.Silicons;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC;
 using Content.Shared.Radio;
+using Content.Shared.Radio.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.Laws.Components;
+using Content.Trauma.Common.Silicon;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.Silicons;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
@@ -33,7 +34,7 @@ public sealed class CosmicFragmentationSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AILawUpdatedEvent>(OnLawInserted);
+        SubscribeLocalEvent<SiliconLawUpdaterComponent, AILawUpdatedEvent>(OnLawInserted);
 
         SubscribeLocalEvent<BorgChassisComponent, MalignFragmentationEvent>(OnFragmentBorg);
         SubscribeLocalEvent<SiliconLawUpdaterComponent, MalignFragmentationEvent>(OnFragmentAi);
@@ -89,15 +90,15 @@ public sealed class CosmicFragmentationSystem : EntitySystem
         _container.Insert(lawboard, container, Transform(args.Target), true);
     }
 
-    private void OnLawInserted(AILawUpdatedEvent args)
+    private void OnLawInserted(Entity<SiliconLawUpdaterComponent> ent, ref AILawUpdatedEvent args)
     {
-        if (!TryComp<IntrinsicRadioTransmitterComponent>(args.Target, out var radio) || !TryComp<ActiveRadioComponent>(args.Target, out var transmitter))
+        if (!TryComp<IntrinsicRadioTransmitterComponent>(ent, out var radio) || !TryComp<ActiveRadioComponent>(ent, out var transmitter))
             return;
-        if (args.Lawset.Id == "CosmicCultLaws")
+        if (ent.Comp.LastLawset.Id == "CosmicCultLaws")
         {
             radio.Channels.Add(_cultRadio);
             transmitter.Channels.Add(_cultRadio);
-            _antag.SendBriefing(args.Target, Loc.GetString("cosmiccult-silicon-subverted-briefing"), Color.FromHex("#4cabb3"), null);
+            _antag.SendBriefing(ent, Loc.GetString("cosmiccult-silicon-subverted-briefing"), Color.FromHex("#4cabb3"), null);
         }
         else
         {

@@ -65,12 +65,4 @@ public sealed class GhostVisibilitySystem : SharedGhostVisibilitySystem
 
         _log.Add(LogType.EventRan, LogImpact.Extreme, $"Ghosts have been summoned via wizard spellbook.");
     }
-
-    public bool IsVisible(GhostComponent component)
-    {
-        if (!GhostsVisible())
-            return false;
-
-        return !component.CanGhostInteract;
-    }
 }

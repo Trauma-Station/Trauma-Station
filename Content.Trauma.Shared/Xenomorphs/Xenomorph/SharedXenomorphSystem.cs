@@ -5,6 +5,7 @@ using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Xenomorphs;
 using Content.Trauma.Shared.Xenomorphs.Infection;
+using Content.Trauma.Shared.Xenomorphs.Larva;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Xenomorphs.Xenomorph;
@@ -35,5 +36,10 @@ public abstract class SharedXenomorphSystem : CommonXenomorphSystem
     public override bool IsSlimed(EntityUid uid)
     {
         return HasComp<XenomorphPreventSuicideComponent>(uid);
+    }
+
+    public override bool IsVictim(EntityUid uid)
+    {
+        return HasComp<XenomorphLarvaVictimComponent>(uid);
     }
 }

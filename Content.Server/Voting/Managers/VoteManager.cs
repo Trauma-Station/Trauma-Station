@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Voting;
+// </Trauma>
 using System.Collections;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -8,7 +11,6 @@ using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Maps;
-using Content.Trauma.Shared.CosmicCult.Components; // DeltaV - Cosmic Cult
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -24,6 +26,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Server.Construction.Completions;
 
 namespace Content.Server.Voting.Managers
 {
@@ -454,11 +457,13 @@ namespace Content.Server.Voting.Managers
                     return false;
             }
 
-            // Begin DeltaV - Cosmic Cult
-            if (eligibility == VoterEligibility.CosmicCult)
-                if (!_entityManager.HasComponent<CosmicCultComponent>(player.AttachedEntity))
-                    return false;
-            // End DeltaV - Cosmic Cult
+            // <Trauma> - Cosmic Cult
+            var ev = new CheckVotingEligibilityEvent();
+            if (player.AttachedEntity is { } playerEntity)
+            _entityManager.EventBus.RaiseLocalEvent(playerEntity, ref ev);
+            if (ev.Cancelled)
+                return false;
+            // </Trauma>
 
             return true;
         }

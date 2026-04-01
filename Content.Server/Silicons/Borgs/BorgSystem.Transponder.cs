@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Shared.Drone;
 using Content.Trauma.Common.Silicons.Laws;
 using Robust.Shared.Player;
 // </Trauma>

@@ -1,11 +1,11 @@
-using Content.Trauma.Common.Silicons;
-using Content.Trauma.Common.Silicons.Laws;
 using Content.Server.Silicons.Laws;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
+using Content.Trauma.Common.Silicon;
+using Content.Trauma.Common.Silicons.Laws;
 using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Server.Silicons.Borgs;
+namespace Content.Server.Silicons.Borgs;
 
 /// <summary>
 /// Handles lawset patching when switching type.
@@ -20,10 +20,10 @@ public sealed partial class BorgSwitchableTypeSystem
     {
         var laws = _law.GetLawset(id);
 
-        if (TryComp<SlavedBorgComponent>(uid, out var slaved))
-            _slavedBorg.AddLaw(laws, slaved.Law);
-
         _law.SetLaws(laws.Laws, uid);
+
+        var LawsetChangedev = new SiliconLawsetChangedEvent();
+        RaiseLocalEvent(uid, ref LawsetChangedev);
 
         // re-add law 0 and final law based on new lawset
         if (CompOrNull<EmagSiliconLawComponent>(uid)?.OwnerName != null)

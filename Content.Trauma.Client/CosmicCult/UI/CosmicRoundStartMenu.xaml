@@ -3,7 +3,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <controls:FancyWindow xmlns="https://spacestation14.io"
-                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:controls="using:Content.Client.UserInterface.Controls"
                       Title="{Loc 'cosmiccult-ui-roundstart-title'}">
     <BoxContainer Orientation="Vertical" Margin="10">
         <Label Text="{Loc 'cosmiccult-ui-roundstart-text-1'}" Margin="5" Align="Center"/>

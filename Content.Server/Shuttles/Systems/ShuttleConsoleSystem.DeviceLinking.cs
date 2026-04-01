@@ -2,10 +2,10 @@
 
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Shuttles.Components;
-using Content.Trauma.Shared.Shuttles.Events;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
+using Content.Trauma.Common.Shuttles.Events;
 
 namespace Content.Server.Shuttles.Systems;
 

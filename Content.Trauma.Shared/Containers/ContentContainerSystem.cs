@@ -3,6 +3,7 @@
 using System.Linq;
 using Content.Shared.Body;
 using Content.Shared.Mind.Components;
+using Content.Trauma.Common.Polymorph;
 using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Containers;

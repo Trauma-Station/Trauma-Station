@@ -4,6 +4,4 @@ using Content.Trauma.Shared.Wizard.EventSpells;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 
-public sealed class GhostVisibilitySystem : SharedGhostVisibilitySystem
-{
-}
+public sealed class GhostVisibilitySystem : SharedGhostVisibilitySystem;

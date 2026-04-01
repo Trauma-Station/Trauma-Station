@@ -18,6 +18,7 @@ using Content.Shared.Roles;
 using Content.Shared.Stacks;
 using Content.Trauma.Common.Body;
 using Content.Trauma.Common.Mindshield;
+using Content.Trauma.Common.Voting;
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
 using Content.Trauma.Shared.Roles;
@@ -60,6 +61,7 @@ public abstract class SharedCosmicCultSystem : EntitySystem
         SubscribeLocalEvent<CosmicNonRespiratingComponent, SuffocationBeforeEvent>(OnSuffocationBefore);
         SubscribeLocalEvent<CosmicLesserCultistComponent, RemoveMindShieldEvent>(OnRemoveMindShieldLesserCultist);
         SubscribeLocalEvent<CosmicCultComponent, RemoveMindShieldEvent>(OnRemoveMindShieldCultist);
+        SubscribeLocalEvent<CosmicCultComponent, CheckVotingEligibilityEvent>(OnVoting);
     }
 
     private void OnShouldTakeHoly(Entity<CosmicCultComponent> ent, ref UserShouldTakeHolyEvent args)
@@ -93,6 +95,13 @@ public abstract class SharedCosmicCultSystem : EntitySystem
             shieldComp.Broken = true;
             Dirty(ent, shieldComp);
         }
+    }
+
+    private void OnVoting(Entity<CosmicCultComponent> ent, ref CheckVotingEligibilityEvent args)
+    {
+        if (args.Cancelled)
+            return;
+        args.Cancelled = true; // Cultists are not eligible to vote
     }
 
     private void OnUseInHand(Entity<CosmicEntropyMoteComponent> ent, ref UseInHandEvent args)

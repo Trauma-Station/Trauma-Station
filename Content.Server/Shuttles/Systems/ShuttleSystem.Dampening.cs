@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Shuttles.Components;
-using Content.Trauma.Shared.Shuttles.Events;
+using Content.Trauma.Common.Shuttles;
+using Content.Trauma.Common.Shuttles.Events;
 
 namespace Content.Server.Shuttles.Systems;
 

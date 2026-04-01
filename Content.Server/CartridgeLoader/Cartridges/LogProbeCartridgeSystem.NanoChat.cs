@@ -1,13 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Audio;
 using Content.Shared.CartridgeLoader;
+using Content.Trauma.Common.CartridgeLoader.Cartridges;
 using Content.Trauma.Common.NanoChat;
-using Content.Trauma.Shared.CartridgeLoader.Cartridges;
-using Content.Trauma.Shared.NanoChat;
-using Robust.Shared.Audio;
 
-namespace Content.Trauma.Server.CartridgeLoader.Cartridges;
+namespace Content.Server.CartridgeLoader.Cartridges;
 
 public sealed partial class LogProbeCartridgeSystem
 {

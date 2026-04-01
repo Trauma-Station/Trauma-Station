@@ -3,11 +3,9 @@
 using Content.Goobstation.Shared.Hastur.Components;
 using Content.Goobstation.Shared.Hastur.Events;
 using Content.Server.Chat.Systems;
-using Content.Trauma.Shared.Heretic.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 

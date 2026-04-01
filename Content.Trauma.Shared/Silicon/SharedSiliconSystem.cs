@@ -2,10 +2,13 @@
 
 using Content.Shared.Alert;
 using Content.Shared.Bed.Sleep;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Drone;
 using Content.Shared.Movement.Systems;
+using Content.Trauma.Common.Body;
 using Content.Trauma.Common.Silicon;
-using Content.Trauma.Shared.Drone;
 using Content.Trauma.Shared.Silicon.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Silicon.Systems;
@@ -13,6 +16,8 @@ namespace Content.Trauma.Shared.Silicon.Systems;
 public abstract class SharedSiliconChargeSystem : CommonSiliconSystem
 {
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+
+    private static readonly ProtoId<DamageTypePrototype> IonDamageType = "Ion";
 
     public override void Initialize()
     {
@@ -27,6 +32,7 @@ public abstract class SharedSiliconChargeSystem : CommonSiliconSystem
         SubscribeLocalEvent<SiliconComponent, ItemSlotEjectAttemptEvent>(OnItemSlotEjectAttempt);
         */
         SubscribeLocalEvent<SiliconComponent, TryingToSleepEvent>(OnTryingToSleep);
+        SubscribeLocalEvent<SiliconComponent, SuicideDamageEvent>(OnSuicide);
     }
 
     // Monolith - IPC Rework
@@ -86,9 +92,14 @@ public abstract class SharedSiliconChargeSystem : CommonSiliconSystem
     /// <summary>
     ///     Silicon entities can now also be Living player entities. We may want to prevent them from sleeping if they can't sleep.
     /// </summary>
-    private void OnTryingToSleep(EntityUid uid, SiliconComponent component, ref TryingToSleepEvent args)
+    private void OnTryingToSleep(Entity<SiliconComponent> ent, ref TryingToSleepEvent args)
     {
-        args.Cancelled = !component.DoSiliconsDreamOfElectricSheep;
+        args.Cancelled = !ent.Comp.DoSiliconsDreamOfElectricSheep;
+    }
+
+    private void OnSuicide(Entity<SiliconComponent> ent, ref SuicideDamageEvent args)
+    {
+        args.DamageType = IonDamageType;
     }
 
     public override bool IsSilicon(EntityUid uid)

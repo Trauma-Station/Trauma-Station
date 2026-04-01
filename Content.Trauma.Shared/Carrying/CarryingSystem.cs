@@ -1,13 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Events;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
@@ -22,17 +25,15 @@ using Content.Shared.Storage;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Carrying;
+using Content.Trauma.Common.Polymorph;
+using Content.Trauma.Shared.Contests;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using System.Numerics;
-using Content.Trauma.Shared.Contests;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Mind.Components;
-using Content.Trauma.Common.Carrying;
 
 namespace Content.Trauma.Shared.Carrying;
 
-public sealed class CarryingSystem : EntitySystem
+public sealed class CarryingSystem : CommonCarryingSystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly CarryingSlowdownSystem _slowdown = default!;
@@ -301,7 +302,7 @@ public sealed class CarryingSystem : EntitySystem
         return true;
     }
 
-    public void DropCarried(EntityUid carrier, EntityUid carried)
+    public override void DropCarried(EntityUid carrier, EntityUid carried)
     {
         Drop(carried);
         RemComp<CarryingComponent>(carrier); // get rid of this first so we don't recursively fire that event

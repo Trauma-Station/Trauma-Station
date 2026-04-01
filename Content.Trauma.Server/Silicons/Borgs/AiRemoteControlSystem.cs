@@ -3,15 +3,18 @@
 using Content.Server.Silicons.Laws;
 using Content.Shared.Actions;
 using Content.Shared.Mind;
+using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.StationAi;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Silicons.Borgs;
 using Content.Trauma.Shared.Silicons.Borgs;
 using Content.Trauma.Shared.Silicons.Borgs.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Silicons.Borgs;
 
@@ -34,6 +37,7 @@ public sealed class AiRemoteControlSystem : SharedAiRemoteControlSystem
         SubscribeLocalEvent<AiRemoteControllerComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<StationAiHeldComponent, AiRemoteControllerComponent.RemoteDeviceActionMessage>(OnUiRemoteAction);
         SubscribeLocalEvent<StationAiHeldComponent, ToggleRemoteDevicesScreenEvent>(OnToggleRemoteDevicesScreen);
+        SubscribeLocalEvent<AiRemoteControllerComponent, BorgTypeChangedEvent>(OnBorgTypeChanged);
     }
 
     private void OnMapInit(Entity<AiRemoteControllerComponent> entity, ref MapInitEvent args)
@@ -148,6 +152,28 @@ public sealed class AiRemoteControlSystem : SharedAiRemoteControlSystem
 
         var state = new RemoteDevicesBuiState(remoteDevices);
         _userInterface.SetUiState(uid, RemoteDeviceUiKey.Key, state);
+    }
+
+    private void OnBorgTypeChanged(Entity<AiRemoteControllerComponent> ent, ref BorgTypeChangedEvent args)
+    {
+        HashSet<ProtoId<RadioChannelPrototype>> radioChannels = new();
+        if (TryComp(ent, out IntrinsicRadioTransmitterComponent? transmitter))
+            radioChannels.UnionWith(transmitter.Channels);
+
+        if (TryComp(ent, out ActiveRadioComponent? activeRadio))
+            radioChannels.UnionWith(activeRadio.Channels);
+
+        if (transmitter is { } && TryComp(ent.Comp.AiHolder, out IntrinsicRadioTransmitterComponent? stationAiTransmitter))
+        {
+            ent.Comp.PreviouslyTransmitterChannels = [.. radioChannels];
+            transmitter.Channels = [.. stationAiTransmitter.Channels];
+        }
+
+        if (activeRadio is { } && TryComp(ent.Comp.AiHolder, out ActiveRadioComponent? stationAiActiveRadio))
+        {
+            ent.Comp.PreviouslyActiveRadioChannels = [.. radioChannels];
+            activeRadio.Channels = [.. stationAiActiveRadio.Channels];
+        }
     }
 
     private void OnUiRemoteAction(EntityUid uid, StationAiHeldComponent component, AiRemoteControllerComponent.RemoteDeviceActionMessage msg)

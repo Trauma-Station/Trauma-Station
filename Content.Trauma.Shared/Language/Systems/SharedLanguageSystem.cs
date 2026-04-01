@@ -145,10 +145,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         return;
     }
 
-    /// <summary>
-    ///     Removes a language from the respective lists of intrinsically known languages of the given entity.
-    /// </summary>
-    public void RemoveLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool removeSpoken = true, bool removeUnderstood = true)
+    public override void RemoveLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool removeSpoken = true, bool removeUnderstood = true)
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return;
@@ -175,10 +172,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         return false;
     }
 
-    /// <summary>
-    ///     Immediately refreshes the cached lists of spoken and understood languages for the given entity.
-    /// </summary>
-    public void UpdateEntityLanguages(Entity<LanguageSpeakerComponent?> ent)
+    public override void UpdateEntityLanguages(Entity<LanguageSpeakerComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return;

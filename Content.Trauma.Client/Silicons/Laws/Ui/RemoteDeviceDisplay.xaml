@@ -3,7 +3,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <Control xmlns="https://spacestation14.io"
-         xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+         xmlns:customControls="using:Content.Client.Administration.UI.CustomControls"
          Margin="0 0 0 10">
     <PanelContainer VerticalExpand="True" StyleClasses="BackgroundDark">
         <BoxContainer Orientation="Vertical"

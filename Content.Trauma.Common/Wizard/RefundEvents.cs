@@ -2,7 +2,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.Wizard.Refund;
+namespace Content.Trauma.Common.Wizard;
 
 [Serializable, NetSerializable]
 public sealed class StoreRefundState(List<RefundListingData> listings, bool refundDisabled) : BoundUserInterfaceState

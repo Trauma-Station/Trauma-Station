@@ -61,9 +61,19 @@ public abstract class CommonLanguageSystem : EntitySystem
     public abstract void AddLanguage(EntityUid uid, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true);
 
     /// <summary>
+    ///     Removes a language from the respective lists of intrinsically known languages of the given entity.
+    /// </summary>
+    public abstract void RemoveLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool removeSpoken = true, bool removeUnderstood = true);
+
+    /// <summary>
     ///     Obfuscate a message using the given language.
     /// </summary>
     public abstract string ObfuscateSpeech(string message, LanguagePrototype language);
 
     public abstract bool CanUnderstand(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language);
+
+    /// <summary>
+    ///     Immediately refreshes the cached lists of spoken and understood languages for the given entity.
+    /// </summary>
+    public abstract void UpdateEntityLanguages(Entity<LanguageSpeakerComponent?> ent);
 }

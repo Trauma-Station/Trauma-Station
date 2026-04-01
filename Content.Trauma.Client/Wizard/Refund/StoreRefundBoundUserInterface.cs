@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Wizard.Refund;
+using Content.Trauma.Common.Wizard;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 

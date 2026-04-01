@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Sandevistan;
-using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Shared.Abilities;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
+using Content.Trauma.Common.Wizard.Projectile;
 using Robust.Shared.Audio;
 
 // Ideally speaking this should be on the heart itself... but this also works.

@@ -3,7 +3,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <DefaultWindow xmlns="https://spacestation14.io"
-               xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+               xmlns:ui="using:Content.Client.UserInterface.Controls"
                Title="{Loc language-menu-window-title}"
                SetSize="300 300">
     <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="150">

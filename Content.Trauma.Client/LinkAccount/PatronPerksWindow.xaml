@@ -4,8 +4,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <controls:PatronPerksWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Trauma.Client.LinkAccount"
-    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:controls="using:Content.Trauma.Client.LinkAccount"
+    xmlns:cc="using:Content.Client.Administration.UI.CustomControls"
     Title="{Loc 'rmc-ui-patron-perks'}"
     MinSize="625 475">
     <TabContainer Name="Tabs" Access="Public">

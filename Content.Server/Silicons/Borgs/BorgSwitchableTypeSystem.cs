@@ -34,20 +34,8 @@ public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeS
             activeRadio.Channels = [.. radioChannels];
 
         // Corvax-Next-AiRemoteControl-Start
-        if (TryComp(ent, out AiRemoteControllerComponent? aiRemoteComp))
-        {
-            if (TryComp(aiRemoteComp.AiHolder, out IntrinsicRadioTransmitterComponent? stationAiTransmitter) && transmitter != null)
-            {
-                aiRemoteComp.PreviouslyTransmitterChannels = [.. radioChannels];
-                transmitter.Channels = [.. stationAiTransmitter.Channels];
-            }
-
-            if (TryComp(aiRemoteComp.AiHolder, out ActiveRadioComponent? stationAiActiveRadio) && activeRadio != null)
-            {
-                aiRemoteComp.PreviouslyActiveRadioChannels = [.. radioChannels];
-                activeRadio.Channels = [.. stationAiActiveRadio.Channels];
-            }
-        }
+        var ev = new BorgTypeChangedEvent();
+        RaiseLocalEvent(ent, ev);
         // Corvax-Next-AiRemoteControl-End
 
         // Borg transponder for the robotics console

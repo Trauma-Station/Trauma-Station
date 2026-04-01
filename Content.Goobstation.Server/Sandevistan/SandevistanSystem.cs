@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Numerics;
 using Content.Goobstation.Shared.Sandevistan;
-using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Shared.Abilities;
 using Content.Shared.Actions;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs;
@@ -14,9 +13,9 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Wizard.Projectile;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
-using System.Numerics;
 
 namespace Content.Goobstation.Server.Sandevistan;
 

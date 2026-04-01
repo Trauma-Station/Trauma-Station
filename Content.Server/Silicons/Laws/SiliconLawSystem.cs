@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
+using Content.Trauma.Common.Silicon;
 using Content.Trauma.Common.Silicons.Laws;
 using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
@@ -363,6 +364,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
 
+        // <Trauma>
+        ent.Comp.LastLawset = provider.Laws; // Goob
+        var ev = new AILawUpdatedEvent();
+        // </Trauma>
         while (query.MoveNext(out var update))
         {
             if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
@@ -370,21 +375,21 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
                 crewIconComp.UncertainCrewBorder = DefaultCrewLawset != provider.Laws;
                 Dirty(update, crewIconComp);
             }
+            RaiseLocalEvent(update, new AILawUpdatedEvent());
             SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
 
             // Corvax-Next-AiRemoteControl-Start
             if (TryComp<StationAiHeldComponent>(update, out var stationAiHeldComp)
-                && stationAiHeldComp.CurrentConnectedEntity != null
+                && stationAiHeldComp.CurrentConnectedEntity is { } connected
                 && HasComp<SiliconLawProviderComponent>(stationAiHeldComp.CurrentConnectedEntity))
             {
                 SetLaws(lawset, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
+                RaiseLocalEvent(connected, new AILawUpdatedEvent());
             }
             // Corvax-Next-AiRemoteControl-End
 
-            RaiseLocalEvent(new AILawUpdatedEvent(update, provider.Laws)); // Trauma
         }
 
-        ent.Comp.LastLawset = provider.Laws; // Goob
     }
 
     // Corvax-Next-AiRemoteControl-Start

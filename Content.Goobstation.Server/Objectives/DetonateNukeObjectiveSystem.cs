@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Nuke;
 using Content.Server.Station.Components;
