@@ -1,4 +1,4 @@
-﻿using Content.Shared.Power.Components;
+using Content.Shared.Power.Components;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.ClockworkCult.Power.Components;
 
@@ -19,7 +19,6 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 public sealed class ClockworkPowerSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
-    // [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly EntityQuery<PowerVeinComponent> _powerVeinQuery = default!;
 
     /// <inheritdoc/>
