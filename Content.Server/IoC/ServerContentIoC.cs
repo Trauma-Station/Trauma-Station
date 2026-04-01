@@ -88,6 +88,7 @@ internal static class ServerContentIoC
         //deps.Register<DiscordChatLink>(); // Trauma
         deps.Register<IMoMMILink, MoMMILink>(); // Trauma
         deps.Register<IPostInjectInit, LinkAccountManager>(); // RMC - Patreon
+        deps.Register<LinkAccountManager>(); // RMC - Patreon
         deps.Register<ServerFeedbackManager>();
         deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
     }

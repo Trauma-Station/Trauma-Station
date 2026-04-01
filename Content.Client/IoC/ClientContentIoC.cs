@@ -70,6 +70,7 @@ namespace Content.Client.IoC
             collection.Register<ClientFeedbackManager>();
             collection.Register<ISharedFeedbackManager, ClientFeedbackManager>();
             collection.Register<IPostInjectInit, LinkAccountManager>(); // Trauma - RMC - Patreon
+            collection.Register<LinkAccountManager>(); // Trauma - RMC - Patreon
         }
     }
 }
