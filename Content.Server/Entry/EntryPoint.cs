@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Server.LinkAccount;
-// </Trauma>
 using System.Threading.Tasks;
 using Content.Server.Acz;
 using Content.Server.Administration;
@@ -100,9 +97,6 @@ namespace Content.Server.Entry
         public override void Init()
         {
             base.Init();
-            // <Trauma>
-            IoCManager.Register<IPostInjectInit, LinkAccountManager>();
-            // </Trauma>
             Dependencies.BuildGraph();
             Dependencies.InjectDependencies(this);
 
