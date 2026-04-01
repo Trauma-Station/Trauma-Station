@@ -18,7 +18,6 @@ using Content.Shared.Maps;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffect;
-using Content.Shared.Tag;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
@@ -42,7 +41,6 @@ public sealed class CarvingKnifeSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly GravitySystem _gravity = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
