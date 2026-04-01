@@ -13,7 +13,6 @@ using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
