@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Disposal.Tube;
-using Content.Shared._DV.Construction;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Trauma.Shared.Disposals;
@@ -26,7 +25,7 @@ public sealed class TraumaServerDisposalsSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (args.Handled || args.Target is not {} target)
+        if (args.Handled || args.Target is not { } target)
             return;
 
         if (!TryComp<DisposalTubeComponent>(target, out var tube))
@@ -40,7 +39,7 @@ public sealed class TraumaServerDisposalsSystem : EntitySystem
 
     private void OnInteract(Entity<AddExtraTubeSpeedComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Handled || !args.CanReach || args.Target is not {} target)
+        if (args.Handled || !args.CanReach || args.Target is not { } target)
             return;
 
         if (!TryComp<DisposalTubeComponent>(args.Target, out var tube) || tube.Speed >= tube.MaxUpgradeSpeed)
