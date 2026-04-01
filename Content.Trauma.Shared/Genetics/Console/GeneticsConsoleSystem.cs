@@ -38,7 +38,6 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityQuery<GeneticsConsoleComponent> _query = default!;
     [Dependency] private readonly EntityQuery<MaterialStorageComponent> _materialQuery = default!;
 
     private StringBuilder _builder = new();

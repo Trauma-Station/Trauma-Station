@@ -19,7 +19,6 @@ public sealed class UniqueEnzymesSystem : EntitySystem
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
 
-    [Dependency] private readonly EntityQuery<DetailExaminableComponent> _detailQuery = default!;
     [Dependency] private readonly EntityQuery<FingerprintComponent> _printsQuery = default!;
     [Dependency] private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
 

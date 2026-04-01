@@ -21,7 +21,7 @@ public abstract class SharedShadowCocoonSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<ShadowCocoonMakerComponent> _makerQuery;
+    [Dependency] private readonly EntityQuery<ShadowCocoonMakerComponent> _makerQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

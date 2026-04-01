@@ -13,7 +13,6 @@ namespace Content.Trauma.Shared.Mobs;
 public sealed class MobStateComponentsSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityQuery<AliveMobComponent> _aliveQuery = default!;
     [Dependency] private readonly EntityQuery<SleepingComponent> _sleepingQuery = default!;
 
     public override void Initialize()

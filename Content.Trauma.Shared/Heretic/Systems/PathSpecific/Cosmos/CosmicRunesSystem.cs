@@ -137,7 +137,7 @@ public sealed class CosmicRunesSystem : EntitySystem
         var coords = Transform(ent).Coordinates;
         _teleporting.Clear();
         _lookup.GetEntitiesInRange(coords, ent.Comp.Range, _teleporting, LookupFlags.Dynamic);
-        _teleporting.Add((user, null)); // also teleport the user
+        _teleporting.Add((user, default!)); // also teleport the user
         EntityUid? pulling = null;
         var grabStage = GrabStage.No;
         PullerComponent? puller = null;
@@ -148,7 +148,7 @@ public sealed class CosmicRunesSystem : EntitySystem
         {
             pulling = pulled;
             grabStage = puller.GrabStage;
-            _teleporting.Add((pulled, null));
+            _teleporting.Add((pulled, default!));
         }
 
         foreach (var entity in _teleporting)

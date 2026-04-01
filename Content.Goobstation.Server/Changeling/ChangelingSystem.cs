@@ -382,7 +382,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
             var modifier = soundEv.ProtectionRange < float.MaxValue ? 0.5f : 1f;
             _stun.TryUpdateParalyzeDuration(target, stunTime * modifier);
-            _stun.TryKnockdown(target, knockdownTime * modifier);
+            _stun.TryKnockdown(target.AsNullable(), knockdownTime * modifier);
         }
     }
 
