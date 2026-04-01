@@ -6103,3 +6103,16 @@ Entries:
   id: 705
   time: '2026-04-01T14:01:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1713
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: >-
+      You can now make upgrade kits to update how fast things come out of
+      disposal pipes
+  - type: Tweak
+    message: >-
+      Things that come out of a disposal pipe can now go back into a disposal
+      unit if one is in the way
+  id: 706
+  time: '2026-04-01T22:34:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1776

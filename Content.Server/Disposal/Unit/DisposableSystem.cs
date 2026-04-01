@@ -124,8 +124,15 @@ namespace Content.Server.Disposal.Unit
                     {
                         var directionAngle = direction.ToAngle();
                         directionAngle += _xformSystem.GetWorldRotation(gridXform);
-                        _throwing.TryThrow(entity, directionAngle.ToWorldVec() * 3f, 10f,
-                            predicted: false); // Trauma
+                        // <Trauma>
+                        if (_physicsQuery.TryGetComponent(entity, out var physBody))
+                            _physicsSystem.SetCanCollide(entity, true, body: physBody);
+                        var speed = 10f;
+                        if (TryComp<DisposalTubeComponent>(holder.CurrentTube, out var tube))
+                            speed = tube.Speed;
+                        // </Trauma>
+                        _throwing.TryThrow(entity, directionAngle.ToWorldVec() * 3f, speed,
+                            predicted: false); // Trauma - predicted and speed
                     }
                 }
             }
