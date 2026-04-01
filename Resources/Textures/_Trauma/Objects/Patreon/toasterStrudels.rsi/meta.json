@@ -12,34 +12,8 @@
     },
     {
         "name": "equipped-HELMET",
-        "directions": 4,
-        "delays": [
-          [
-            0.5,
-            0.5,
-            0.5,
-            0.5
-          ],
-          [
-            0.5,
-            0.5,
-            0.5,
-            0.5
-          ],
-          [
-            0.5,
-            0.5,
-            0.5,
-            0.5
-          ],
-          [
-            0.5,
-            0.5,
-            0.5,
-            0.5
-          ]
-        ]
-      },
+        "directions": 4
+    },
     {
       "name": "inhand-left",
       "directions": 4
