@@ -45,7 +45,7 @@ using Robust.Shared.Containers;
 namespace Content.Server.Disposal.Tube;
 
 [RegisterComponent]
-[Access(typeof(DisposalTubeSystem), typeof(DisposableSystem))]
+// [Access(typeof(DisposalTubeSystem), typeof(DisposableSystem))] - Trauma remove larper
 public sealed partial class DisposalTubeComponent : Component
 {
     [DataField]
