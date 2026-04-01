@@ -218,7 +218,7 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
         RaiseLocalEvent(uid, ref ev);
     }
 
-    // If we don't make a shallow clone of this, collor will be overwritten on original object  that PrototypeLayerData is referencing when changing profiles
+    // If we don't make a shallow clone of this, color will be overwritten on original object that PrototypeLayerData is referencing when changing profiles
     private PrototypeLayerData CloneData(PrototypeLayerData other)
     {
         return new PrototypeLayerData

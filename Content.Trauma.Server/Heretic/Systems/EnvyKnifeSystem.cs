@@ -34,6 +34,7 @@ public sealed class EnvyKnifeSystem : EntitySystem
             !TryComp(victim, out BodyComponent? body))
             return;
 
+        // If not heretic and not ghoul or heretic and ascended then can't use it
         if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _) &&
             !HasComp<GhoulComponent>(args.User) || heretic?.Ascended is true)
             return;
