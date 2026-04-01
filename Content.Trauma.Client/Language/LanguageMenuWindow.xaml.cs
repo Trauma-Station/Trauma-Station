@@ -23,14 +23,6 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
         _language.OnLanguagesChanged += UpdateState;
     }
 
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-
-        if (disposing)
-            _language.OnLanguagesChanged -= UpdateState;
-    }
-
     protected override void Opened()
     {
         UpdateState();

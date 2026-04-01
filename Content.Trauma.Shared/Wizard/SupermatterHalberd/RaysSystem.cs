@@ -1,20 +1,21 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Trauma.Common.Wizard;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Wizard.SupermatterHalberd;
 
-public sealed class RaysSystem : EntitySystem
+public sealed class RaysSystem : CommonRaysSystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    public EntityUid? DoRays(MapCoordinates coords,
+    public override EntityUid? DoRays(MapCoordinates coords,
         Color colorA,
         Color colorB,
         int min = 5,

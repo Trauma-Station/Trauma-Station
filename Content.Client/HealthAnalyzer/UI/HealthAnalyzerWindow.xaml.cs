@@ -14,8 +14,8 @@ namespace Content.Client.HealthAnalyzer.UI;
 public sealed partial class HealthAnalyzerWindow : FancyWindow
 {
     // <Shitmed>
-    public event Action<OrganCategoryPrototype>? OnBodyPartSelected;
-    public event Action<HealthAnalyzerMode>? OnModeChanged;
+    public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
+    public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
     // </Shitmed>
 
     public HealthAnalyzerWindow()

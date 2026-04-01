@@ -13,7 +13,7 @@ using Color = System.Drawing.Color;
 
 namespace Content.Trauma.Server.LinkAccount;
 
-public sealed class LinkAccountManager : IPostInjectInit
+public sealed class LinkAccountManager : ILinkAccountManagerServer, IPostInjectInit
 {
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly INetManager _net = default!;

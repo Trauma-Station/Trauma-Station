@@ -1,6 +1,8 @@
+// <Trauma>
+using Content.Trauma.Common.CartridgeLoader.Cartridges; // DeltaV
+// </Trauma>
 using Content.Shared.CartridgeLoader.Cartridges;
 ﻿using Content.Shared.Paper;
-using Content.Trauma.Shared.CartridgeLoader.Cartridges; // DeltaV
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;

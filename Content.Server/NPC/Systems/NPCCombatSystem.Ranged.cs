@@ -1,5 +1,4 @@
 using Content.Server.NPC.Components;
-using Content.Trauma.Shared.Weapons.SmartGun;
 using Content.Shared.CombatMode;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
@@ -8,6 +7,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
+using Content.Goobstation.Shared.Weapons.SmartGun;
 
 namespace Content.Server.NPC.Systems;
 

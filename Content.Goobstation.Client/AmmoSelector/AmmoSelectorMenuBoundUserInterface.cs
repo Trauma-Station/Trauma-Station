@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Weapons.AmmoSelector;
+using Content.Trauma.Common.Weapons.AmmoSelector;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.Input;

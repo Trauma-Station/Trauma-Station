@@ -2,7 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Trauma.Shared.Wizard.Guardian;
+namespace Content.Trauma.Common.Wizard.Guardian;
 
 // I hate server components I hate server components I hate server components
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

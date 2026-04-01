@@ -6,7 +6,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Trauma.Shared.Weapons.SmartGun;
+namespace Content.Goobstation.Shared.Weapons.SmartGun;
 
 /// <summary>
 /// Activates a laser pointer when wielding an item

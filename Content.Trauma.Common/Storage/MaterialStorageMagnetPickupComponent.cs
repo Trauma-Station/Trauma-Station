@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Trauma.Shared.Storage.Components;
+namespace Content.Trauma.Common.Storage;
 
 /// <summary>
 /// Applies an ongoing pickup area around the attached entity.

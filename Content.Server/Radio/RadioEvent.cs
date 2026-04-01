@@ -1,5 +1,5 @@
 using Content.Shared.Chat;
-using Content.Trauma.Shared.Language;
+using Content.Trauma.Common.Language;
 using Content.Shared.Radio;
 
 namespace Content.Server.Radio;

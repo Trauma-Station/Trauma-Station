@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Server._Goobstation.Wizard.NPC;
 using Content.Shared.Foldable;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Wieldable;

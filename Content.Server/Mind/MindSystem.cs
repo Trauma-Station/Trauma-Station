@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Shared.Mind.Components;
-using Content.Trauma.Shared.Wizard.BindSoul;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Tag;
 // </Trauma>

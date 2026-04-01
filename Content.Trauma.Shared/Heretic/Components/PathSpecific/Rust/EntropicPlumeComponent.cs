@@ -1,24 +1,22 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.FixedPoint;
-using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class LifeStealOnProjectileHitComponent : Component
+public sealed partial class EntropicPlumeComponent : Component
 {
     [DataField]
-    public EntityWhitelist Whitelist;
+    public float Duration = 10f;
 
     [DataField]
-    public FixedPoint2 LifeStealAmount = 20;
+    public Dictionary<string, FixedPoint2> Reagents = new()
+    {
+        { "Mold", 5f },
+    };
 
     [DataField]
-    public FixedPoint2 BloodStealAmount = 25;
-
-    [DataField]
-    public EntProtoId Effect = "SanguineBloodEffect";
+    public List<EntityUid> AffectedEntities = new();
 }

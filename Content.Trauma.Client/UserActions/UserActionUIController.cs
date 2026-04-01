@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.UIKit.UserActions.Controls;
-using Content.Client._Shitcode.UserActions.Tabs;
+using Content.Trauma.Client.UserActions.Tabs;
 using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Trauma.Client.UserActions;

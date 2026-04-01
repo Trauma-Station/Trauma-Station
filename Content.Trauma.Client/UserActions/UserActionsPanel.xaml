@@ -1,7 +1,7 @@
 <controls:UserActionsPanel
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._Shitcode.UserActions"
-    xmlns:tabs="clr-namespace:Content.Client._Shitcode.UserActions.Tabs">
+    xmlns:controls="clr-namespace:Content.Trauma.Client.UserActions"
+    xmlns:tabs="clr-namespace:Content.Trauma.Client.UserActions.Tabs">
 
     <PanelContainer StyleClasses="BackgroundDark" Name="MainPanel" MinWidth="300" MinHeight="190" VerticalExpand="True" HorizontalExpand="True">
 

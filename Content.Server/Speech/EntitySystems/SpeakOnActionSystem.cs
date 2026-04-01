@@ -2,9 +2,9 @@
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.FixedPoint;
-using Content.Trauma.Shared.Wizard.Chuuni;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Magic.Components;
+using Content.Trauma.Common.Wizard;
 // </Trauma>
 using Content.Server.Chat.Systems;
 using Content.Shared.Actions.Events;

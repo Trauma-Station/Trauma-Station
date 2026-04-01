@@ -9,7 +9,6 @@ namespace Content.Client.Chat
     public sealed class CollectiveMindSystem : EntitySystem
     {
         [Dependency] private readonly IChatManager _chat = default!;
-        [Dependency] private readonly IPlayerManager _player = default!;
 
         public override void Initialize()
         {

@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.Salvage;
-using Content.Trauma.Shared.Salvage.Components;
 using Content.Goobstation.Common.Silo;
 using Content.Lavaland.Common.Mining;
 using Content.Shared.Access.Systems;

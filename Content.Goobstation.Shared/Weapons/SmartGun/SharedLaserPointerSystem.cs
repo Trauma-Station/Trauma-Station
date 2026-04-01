@@ -13,7 +13,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Trauma.Shared.Weapons.SmartGun;
+namespace Content.Goobstation.Shared.Weapons.SmartGun;
 
 public abstract class SharedLaserPointerSystem : EntitySystem
 {

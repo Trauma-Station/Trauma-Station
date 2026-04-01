@@ -26,7 +26,7 @@ namespace Content.Client.Lobby
     {
         // <Trauma>
         [Dependency] private readonly ICommonCurrencyManager _serverCur = default!; // Goobstation - server currency
-        [Dependency] private readonly ILinkAccountManager _linkAccount = default!; // RMC - Patreon
+        [Dependency] private readonly ILinkAccountManagerClient _linkAccount = default!; // RMC - Patreon
         // </Trauma>
         [Dependency] private readonly IBaseClient _baseClient = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;

@@ -1,8 +1,7 @@
 // <Trauma>
 using Content.Medical.Common.Targeting;
-using Content.Server._Goobstation.Wizard.Systems;
-using Content.Trauma.Shared.Silicon.Components;
-using Content.Trauma.Shared.Xenomorphs.Infection;
+using Content.Trauma.Common.Silicon;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.Body;
 using Robust.Shared.Utility;
 // </Trauma>
@@ -53,7 +52,7 @@ namespace Content.Server.Ghost
     public sealed class GhostSystem : SharedGhostSystem
     {
         // <Trauma>
-        [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
+        [Dependency] private readonly CommonGhostVisibilitySystem _ghostVisibility = default!;
         // </Trauma>
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly IAdminLogManager _adminLog = default!;

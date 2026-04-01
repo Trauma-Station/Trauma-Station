@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Trauma.Shared.LinkAccount;
 using Content.Shared.Humanoid.Markings;
 // </Trauma>
 using System.Collections.Immutable;

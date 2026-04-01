@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Wizard.Projectiles;
-using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Wieldable.Components;
 using Content.Lavaland.Common.Weapons.Ranged;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Wieldable.Components;
+using Content.Trauma.Shared.Wizard.Projectiles;
 
 namespace Content.Trauma.Shared.Weapons.SmartGun;
 

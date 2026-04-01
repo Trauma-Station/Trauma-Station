@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Trauma.Shared.Storage.Components;
+using Content.Trauma.Common.Storage;
 using Content.Shared.Tag;
 // </Trauma>
 using System.Linq;

@@ -7,8 +7,6 @@ using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Trauma.Client.Language;
 using Content.Trauma.Common.Input;
 using JetBrains.Annotations;
-using Robust.Client.Player;
-using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input.Binding;
@@ -19,9 +17,6 @@ namespace Content.Trauma.Client.UserInterface.Systems.Language;
 [UsedImplicitly]
 public sealed class LanguageMenuUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-
     private LanguageMenuWindow? _menu;
     private MenuButton? _button;
 

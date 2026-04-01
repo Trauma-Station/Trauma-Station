@@ -2,7 +2,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.Shuttles.Events
+namespace Content.Trauma.Common.Shuttles.Events
 {
     /// <summary>
     /// Sent when a network port button is pressed on the shuttle console.

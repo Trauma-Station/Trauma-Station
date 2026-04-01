@@ -3,13 +3,13 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Shuttles.UI;
-using Content.Trauma.Shared.FireControl;
 using Content.Shared.Physics;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Trauma.Client.Radar;
-using Content.Trauma.Shared.Radar;
+using Content.Trauma.Common.Radar;
+using Content.Trauma.Shared.FireControl;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
@@ -129,7 +129,7 @@ public sealed class FireControlNavControl : BaseShuttleControl
             _updateAccumulator = 0;
 
             if (_consoleEntity != null)
-                _blips.RequestBlips((EntityUid)_consoleEntity);
+                _blips.RequestBlips((EntityUid) _consoleEntity);
         }
 
         if (_isMouseDown && _isMouseInside)
@@ -143,7 +143,7 @@ public sealed class FireControlNavControl : BaseShuttleControl
                     _lastMousePos = mousePos;
                 }
                 TryFireAtPosition(_lastMousePos);
-                _lastFireTime = (float)currentTime;
+                _lastFireTime = (float) currentTime;
             }
         }
     }
@@ -330,7 +330,8 @@ public sealed class FireControlNavControl : BaseShuttleControl
             if (_isMouseInside && _controllables != null)
             {
                 var worldPos = blip.Item1;
-                var isFireControllable = _controllables.Any(c => {
+                var isFireControllable = _controllables.Any(c =>
+                {
                     var coords = EntManager.GetCoordinates(c.Coordinates);
                     var entityMapPos = _transform.ToMapCoordinates(coords);
                     return Vector2.Distance(entityMapPos.Position, worldPos) < 0.1f &&
@@ -346,7 +347,7 @@ public sealed class FireControlNavControl : BaseShuttleControl
                     var cursorWorldPos = Vector2.Transform(cursorViewPos, viewToWorld);
 
                     var direction = cursorWorldPos - worldPos;
-                    var ray = new CollisionRay(worldPos, direction.Normalized(), (int)CollisionGroup.Impassable);
+                    var ray = new CollisionRay(worldPos, direction.Normalized(), (int) CollisionGroup.Impassable);
 
                     var results = _physics.IntersectRay(xform.MapID, ray, direction.Length(), ignoredEnt: _coordinates?.EntityId);
 
@@ -468,7 +469,7 @@ public sealed class FireControlNavControl : BaseShuttleControl
             case RadarBlipShape.Arrow:
                 DrawArrow(handle, position, size, color);
                 break;
-            // Ring shapes are handled by DrawShieldRing for constant thickness
+                // Ring shapes are handled by DrawShieldRing for constant thickness
         }
     }
 
@@ -546,7 +547,7 @@ public sealed class FireControlNavControl : BaseShuttleControl
         if (currentTime - _lastCursorUpdateTime < CursorUpdateInterval)
             return;
 
-        _lastCursorUpdateTime = (float)currentTime;
+        _lastCursorUpdateTime = (float) currentTime;
 
         // Convert mouse position to world coordinates for missile tracking
         if (_coordinates == null || _rotation == null || OnRadarClick == null)

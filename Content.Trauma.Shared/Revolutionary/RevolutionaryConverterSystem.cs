@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Language.Systems;
-using Content.Trauma.Shared.Revolutionary.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Dataset;
@@ -14,6 +12,10 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Revolutionary.Components;
+using Content.Trauma.Common.Language.Components;
+using Content.Trauma.Common.Revolutionary;
+using Content.Trauma.Shared.Language.Systems;
+using Content.Trauma.Shared.Revolutionary.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -54,7 +56,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
 
     private bool SpeakPropaganda(Entity<RevolutionaryConverterComponent> conversionToolEntity, EntityUid user)
     {
-        if(_speechLocalization == null
+        if (_speechLocalization == null
             || _speechLocalization.Values.Count == 0
             || conversionToolEntity.Comp.Silent)
             return false;
@@ -142,16 +144,4 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
         else
             ConvertTarget(converter.Owner, target, user);
     }
-}
-
-/// <summary>
-/// Called after a converter is used on another person to check for rev conversion.
-/// Raised on the user of the converter, the target hit by the converter, and the converter used.
-/// </summary>
-[ByRefEvent]
-public readonly struct AfterRevolutionaryConvertedEvent(EntityUid target, EntityUid? user, EntityUid? used)
-{
-    public readonly EntityUid Target = target;
-    public readonly EntityUid? User = user;
-    public readonly EntityUid? Used = used;
 }

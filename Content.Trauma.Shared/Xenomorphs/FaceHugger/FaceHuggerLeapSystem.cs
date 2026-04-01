@@ -2,6 +2,7 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Throwing;
+using Content.Trauma.Shared.Xenomorphs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 

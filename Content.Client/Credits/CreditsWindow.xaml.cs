@@ -29,7 +29,7 @@ namespace Content.Client.Credits;
 public sealed partial class CreditsWindow : DefaultWindow
 {
     // <Trauma>
-    [Dependency] private readonly ILinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly ILinkAccountManagerClient _linkAccount = default!;
     // </Trauma>
     [Dependency] private readonly IResourceManager _resourceManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;

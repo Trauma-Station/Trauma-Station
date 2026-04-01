@@ -3,11 +3,13 @@
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Trauma.Common.Xenomorphs;
+using Content.Trauma.Shared.Xenomorphs.Infection;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Xenomorphs.Xenomorph;
 
-public abstract class SharedXenomorphSystem : EntitySystem
+public abstract class SharedXenomorphSystem : CommonXenomorphSystem
 {
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -28,5 +30,10 @@ public abstract class SharedXenomorphSystem : EntitySystem
 
         _popup.PopupClient(Loc.GetString("xenomorph-pickup-item-fail"), args.Item, uid);
         args.Cancel();
+    }
+
+    public override bool IsSlimed(EntityUid uid)
+    {
+        return HasComp<XenomorphPreventSuicideComponent>(uid);
     }
 }

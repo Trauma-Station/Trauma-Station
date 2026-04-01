@@ -56,7 +56,7 @@ public sealed partial class MaterialStorageControl : ScrollContainer
         if (materialStorage.ConnectToSilo)
         {
             var silo = _silo.GetSilo(_owner.Value);
-            if (!_entityManager.TryGetComponent<SiloComponent>(silo, out var siloComp))
+            if (!_entityManager.TryGetComponent<MaterialStorageComponent>(silo, out var siloComp))
                 return;
             storage = silo != null
                 ? siloComp.Storage.Select(pair => (pair.Key.Id, pair.Value)).ToDictionary()

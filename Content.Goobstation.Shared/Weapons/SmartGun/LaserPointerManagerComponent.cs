@@ -4,7 +4,7 @@ using System.Numerics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.Weapons.SmartGun;
+namespace Content.Goobstation.Shared.Weapons.SmartGun;
 
 /// <summary>
 /// Component attached to an entity in nullspace,

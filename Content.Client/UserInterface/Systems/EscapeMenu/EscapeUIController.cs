@@ -25,7 +25,7 @@ namespace Content.Client.UserInterface.Systems.EscapeMenu;
 public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
     // <Trauma>
-    [Dependency] private readonly ILinkAccountManager _linkAccount = default!; // RMC - Patreon
+    [Dependency] private readonly ILinkAccountManagerClient _linkAccount = default!; // RMC - Patreon
     private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.EscapeButton; // RMC - Patreon
     // </Trauma>
     [Dependency] private readonly IClientConsoleHost _console = default!;

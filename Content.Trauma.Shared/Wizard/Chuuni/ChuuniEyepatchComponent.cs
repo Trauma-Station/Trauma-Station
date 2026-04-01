@@ -2,6 +2,7 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.Magic.Components;
+using Content.Trauma.Common.Wizard;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 

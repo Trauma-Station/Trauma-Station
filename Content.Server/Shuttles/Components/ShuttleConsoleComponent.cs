@@ -1,5 +1,7 @@
+// <Trauma>
+using Content.Trauma.Common.Shuttles;
+// </Trauma>
 using System.Numerics;
-using Content.Trauma.Shared.Shuttles.Events;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;

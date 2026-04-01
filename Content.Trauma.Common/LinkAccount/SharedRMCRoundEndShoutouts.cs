@@ -2,7 +2,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.LinkAccount;
+namespace Content.Trauma.Common.LinkAccount;
 
 [Serializable, NetSerializable]
 public sealed record SharedRMCRoundEndShoutouts(string? NT)

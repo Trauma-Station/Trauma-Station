@@ -1,21 +1,28 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Components;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class KnockdownOnHitComponent : Component
+public sealed partial class SpriteRandomOffsetComponent : Component
 {
     [DataField]
-    public TimeSpan Duration = TimeSpan.FromSeconds(1);
+    public float MinX = -0.25f;
 
     [DataField]
-    public bool DropItems = false;
+    public float MaxX = 0.25f;
 
     [DataField]
-    public bool RefreshDuration = true;
+    public float MinY = -0.25f;
 
     [DataField]
-    public bool KnockdownOnHeavyAttack = true; // Goobstation
+    public float MaxY = 0.25f;
+}
+
+[Serializable, NetSerializable]
+public enum OffsetVisuals : byte
+{
+    Offset
 }

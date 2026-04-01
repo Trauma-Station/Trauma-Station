@@ -20,11 +20,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-<<<<<<<< HEAD:Content.Trauma.Shared/Wizard/Traps/SharedIceCubeSystem.cs
 namespace Content.Trauma.Shared.Wizard.Traps;
-========
-namespace Content.Trauma.Shared.Wizard.Traps;
->>>>>>>> upstream:Content.Trauma.Shared/Wizard/Traps/SharedIceCubeSystem.cs
 
 public abstract class SharedIceCubeSystem : EntitySystem
 {

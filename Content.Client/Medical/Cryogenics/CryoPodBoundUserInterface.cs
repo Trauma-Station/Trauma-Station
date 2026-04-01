@@ -27,8 +27,8 @@ public sealed class CryoPodBoundUserInterface : BoundUserInterface
         _window.OnEjectBeakerPressed += EjectBeakerPressed;
         _window.OnInjectPressed += InjectPressed;
         // <Shitmed>
-        _window.OnBodyPartSelected += SendBodyPartMessage;
-        _window.OnModeChanged += SendModeMessage;
+        _window.OnBodyPartSelected += (part, _) => SendBodyPartMessage(part);
+        _window.OnModeChanged += (mode, _) => SendModeMessage(mode);
         // </Shitmed>
     }
 

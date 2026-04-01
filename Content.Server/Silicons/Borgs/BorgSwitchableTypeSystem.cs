@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Trauma.Shared.Silicons.Borgs.Components;
+using Content.Trauma.Common.Silicons.Borgs;
 // </Trauma>
 using Content.Server.Inventory;
 using Content.Shared.Inventory;

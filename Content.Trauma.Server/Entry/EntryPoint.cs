@@ -1,7 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.LinkAccount;
+using Content.Trauma.Server.LinkAccount;
 using Robust.Shared.ContentPack;
 
 namespace Content.Trauma.Server.Entry;
 
-public sealed class EntryPoint : GameServer;
+public sealed class EntryPoint : GameServer
+{
+    public override void Init()
+    {
+        base.Init();
+
+        IoCManager.Register<ILinkAccountManagerServer, LinkAccountManager>();
+    }
+}

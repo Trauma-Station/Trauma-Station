@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.LinkAccount;
+using Content.Client.UserInterface;
 using Content.Trauma.Client.IoC;
 using Content.Trauma.Client.ItemSlotRenderer;
+using Content.Trauma.Client.LinkAccount;
+using Content.Trauma.Client.UserInterface;
+using Content.Trauma.Common.LinkAccount;
 using Robust.Client.Graphics;
 using Robust.Shared.ContentPack;
 
@@ -23,7 +26,8 @@ public sealed class EntryPoint : GameClient
     {
         base.Init();
 
-        IoCManager.Register<ILinkAccountManager, LinkAccountManager>();
+        IoCManager.Register<ILinkAccountManagerClient, LinkAccountManager>();
+        IoCManager.Register<IUserActionPanelManager, UserActionPanelManager>();
     }
 
     public override void PostInit()

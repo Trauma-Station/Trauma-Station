@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.Shuttles;
 using Robust.Shared.Serialization;
 
-namespace Content.Trauma.Shared.Shuttles.Events;
+namespace Content.Trauma.Common.Shuttles.Events;
 
 /// <summary>
 /// Raised on the client when it wishes to change the inertial dampening of a ship.

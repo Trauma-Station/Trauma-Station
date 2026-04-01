@@ -3,7 +3,6 @@
 using System.Linq;
 using System.Numerics;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
-using Content.Trauma.Shared.Wizard.Guardian;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Emoting;
@@ -22,6 +21,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
+using Content.Trauma.Common.Wizard.Guardian;
 
 namespace Content.Trauma.Shared.Wizard.TimeStop;
 

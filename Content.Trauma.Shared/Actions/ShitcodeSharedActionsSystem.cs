@@ -3,8 +3,8 @@
 using Content.Shared.Actions.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
-using Content.Shared.Heretic;
 using Content.Trauma.Common.Actions;
+using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Actions;

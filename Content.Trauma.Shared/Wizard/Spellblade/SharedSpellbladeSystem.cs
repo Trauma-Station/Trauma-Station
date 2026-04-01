@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Trauma.Shared.Blink;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
@@ -12,17 +11,19 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Timing;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee;
+using Content.Trauma.Common.Wizard;
+using Content.Trauma.Shared.Blink;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Wizard.Spellblade;
 
-public abstract class SharedSpellbladeSystem : EntitySystem
+public abstract class SharedSpellbladeSystem : CommonSpellbladeSystem
 {
     [Dependency] protected readonly UseDelaySystem UseDelay = default!;
     [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] private   readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private   readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
 
@@ -175,5 +176,10 @@ public abstract class SharedSpellbladeSystem : EntitySystem
     public bool IsHoldingItemWithComponent<T>(EntityUid user) where T : Component
     {
         return _hands.EnumerateHeld(user).Any(HasComp<T>);
+    }
+
+    public override bool IsHoldingItemWithFireSpellbladeEnchantmentComponent(EntityUid user)
+    {
+        return IsHoldingItemWithComponent<FireSpellbladeEnchantmentComponent>(user);
     }
 }

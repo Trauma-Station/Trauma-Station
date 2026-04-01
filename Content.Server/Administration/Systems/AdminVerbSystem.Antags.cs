@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Server.Wizard.Components;
+using Content.Trauma.Common.Wizard.Components;
 // </Trauma>
 using Content.Server.Antag;
 using Content.Server.GameTicking;

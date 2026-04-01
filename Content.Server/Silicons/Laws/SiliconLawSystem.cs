@@ -1,10 +1,9 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
-using Content.Trauma.Server.CosmicCult;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
-using Content.Trauma.Shared.Silicons.Borgs.Components;
+using Content.Trauma.Common.Silicons.Laws;
 using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
 using Content.Shared.Random;
@@ -45,6 +44,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly IonStormSystem _ionStorm = default!;
     [Dependency] private readonly ResearchSystem _research = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private readonly CommonSlavedBorgSystem _borg = default!;
     // </Trauma>
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -85,7 +85,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             return;
 
         // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid)
+        if (_borg.IsSlavedBorg(uid)
             || HasComp<StationAiCustomizationComponent>(uid)) // skip a law's notification for remotable and AI
             return;
         // Corvax-Next-AiRemoteControl-End
@@ -183,7 +183,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             component.Lawset = GetLawset(component.Laws);
 
         // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid)) // You can't emag controllable entities
+        if (_borg.IsSlavedBorg(uid)) // You can't emag controllable entities
             return;
         // Corvax-Next-AiRemoteControl-End
 

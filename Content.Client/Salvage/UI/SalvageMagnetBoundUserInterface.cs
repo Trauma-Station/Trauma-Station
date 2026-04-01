@@ -1,4 +1,5 @@
 // <Trauma>
+using System.Linq;
 using Content.Trauma.Common.Salvage; // DeltaV
 using Robust.Client.Player; // DeltaV
 // </Trauma>

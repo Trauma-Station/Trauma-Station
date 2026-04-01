@@ -2,8 +2,8 @@
 
 using Content.Client.Construction;
 using Content.Client.UserInterface.Controls;
-using Content.Shared._White.RadialSelector;
 using Content.Shared.Construction.Prototypes;
+using Content.Trauma.Common.RadialSelector;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
@@ -58,7 +58,7 @@ public sealed class RadialSelectorMenuBUI : BoundUserInterface
         var models = new List<RadialMenuOptionBase>();
         foreach (var entry in entries)
         {
-            if (entry.Category is {} category)
+            if (entry.Category is { } category)
             {
                 var children = CreateModels(category.Entries);
                 models.Add(new RadialMenuNestedLayerOption(children)
@@ -67,7 +67,7 @@ public sealed class RadialSelectorMenuBUI : BoundUserInterface
                     IconSpecifier = RadialMenuIconSpecifier.With(category.Icon)
                 });
             }
-            else if (entry.Prototype is {} proto)
+            else if (entry.Prototype is { } proto)
             {
                 models.Add(new RadialMenuActionOption<string>(OnPressed, proto)
                 {

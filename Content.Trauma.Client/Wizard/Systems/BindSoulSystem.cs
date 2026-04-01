@@ -3,6 +3,7 @@
 using System.Linq;
 using Content.Trauma.Shared.Wizard.BindSoul;
 using Robust.Client.GameObjects;
+using Content.Shared.DrawDepth;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 
@@ -23,7 +24,7 @@ public sealed class BindSoulSystem : SharedBindSoulSystem
             return;
 
         var color = Color.FromHex("#003300");
-        var drawDepth = (int) Shared.DrawDepth.DrawDepth.Items;
+        var drawDepth = (int) Content.Shared.DrawDepth.DrawDepth.Items;
 
         if (sprite.DrawDepth < drawDepth)
             _sprite.SetDrawDepth((ent.Owner, sprite), drawDepth);

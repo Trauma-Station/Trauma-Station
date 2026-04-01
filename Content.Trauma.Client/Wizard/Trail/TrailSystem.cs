@@ -2,9 +2,9 @@
 
 using System.Linq;
 using System.Numerics;
-using Content.Trauma.Shared.Wizard.Projectiles;
-using Content.Trauma.Shared.Wizard.TimeStop;
 using Content.Shared.Coordinates;
+using Content.Trauma.Common.Wizard.Projectile;
+using Content.Trauma.Shared.Wizard.TimeStop;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;

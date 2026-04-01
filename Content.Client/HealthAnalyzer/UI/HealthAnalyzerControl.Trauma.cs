@@ -3,7 +3,6 @@
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
-using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Wounds;
@@ -28,7 +27,7 @@ namespace Content.Client.HealthAnalyzer.UI;
 
 public sealed partial class HealthAnalyzerControl
 {
-    private readonly SharedSolutionContainerSystem _solution;
+    private SharedSolutionContainerSystem _solution;
 
     public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;

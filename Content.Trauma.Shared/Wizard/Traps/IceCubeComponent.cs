@@ -10,11 +10,7 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
-<<<<<<<< HEAD:Content.Trauma.Shared/Wizard/Traps/IceCubeComponent.cs
 namespace Content.Trauma.Shared.Wizard.Traps;
-========
-namespace Content.Trauma.Shared.Wizard.Traps;
->>>>>>>> upstream:Content.Trauma.Shared/Wizard/Traps/IceCubeComponent.cs
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent

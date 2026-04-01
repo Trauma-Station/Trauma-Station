@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Server._Goobstation.Wizard.Components;
+using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Server.Atmos.EntitySystems;
@@ -11,12 +11,8 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Server.Station.Systems;
-using Content.Trauma.Shared.Wizard;
-using Content.Trauma.Shared.Wizard.BindSoul;
-using Content.Shared._Shitcode.Roles;
 using Content.Shared.Atmos;
 using Content.Shared.Chat;
-using Content.Shared.Cloning;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
@@ -30,13 +26,16 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Parallax;
 using Content.Shared.Roles.Components;
 using Content.Shared.Station.Components;
+using Content.Trauma.Common.Wizard.Components;
+using Content.Trauma.Shared.Roles;
+using Content.Trauma.Shared.Wizard;
+using Content.Trauma.Shared.Wizard.BindSoul;
 using Robust.Server.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class WizardRuleSystem : GameRuleSystem<WizardRuleComponent>
 {
@@ -104,7 +103,7 @@ public sealed class WizardRuleSystem : GameRuleSystem<WizardRuleComponent>
         var query = EntityQueryEnumerator<WizardRuleComponent, ActiveGameRuleComponent>();
         while (query.MoveNext(out _, out var rule, out _))
         {
-            if (rule.TargetStation is {} station && _station.GetLargestGrid(station) is {} grid)
+            if (rule.TargetStation is { } station && _station.GetLargestGrid(station) is { } grid)
                 return Transform(grid).MapUid;
         }
 

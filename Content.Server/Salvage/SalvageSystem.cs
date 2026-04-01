@@ -1,5 +1,7 @@
+// <Trauma>
+using Content.Trauma.Common.Salvage; // DeltaV
+// </Trauma>
 using Content.Server.Radio.EntitySystems;
-using Content.Trauma.Shared.Salvage.Systems; // DeltaV
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -27,6 +29,9 @@ namespace Content.Server.Salvage
 {
     public sealed partial class SalvageSystem : SharedSalvageSystem
     {
+        // <Trauma>
+        [Dependency] private readonly CommonMiningPointsSystem _points = default!; // DeltaV
+        // </Trauma>
         [Dependency] private readonly IChatManager _chat = default!;
         [Dependency] private readonly IConfigurationManager _configurationManager = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
@@ -41,7 +46,6 @@ namespace Content.Server.Salvage
         [Dependency] private readonly LabelSystem _labelSystem = default!;
         [Dependency] private readonly MapLoaderSystem _loader = default!;
         [Dependency] private readonly MetaDataSystem _metaData = default!;
-        [Dependency] private readonly MiningPointsSystem _points = default!; // DeltaV
         [Dependency] private readonly RadioSystem _radioSystem = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;

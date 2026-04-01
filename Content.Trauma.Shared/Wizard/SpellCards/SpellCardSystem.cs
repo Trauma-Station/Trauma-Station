@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Shared.Friction;
+using Content.Trauma.Common.Wizard;
+using Content.Trauma.Common.Wizard.Projectile;
 using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Trauma.Shared.Wizard.TimeStop;
-using Content.Shared.Friction;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;

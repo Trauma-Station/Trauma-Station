@@ -6,7 +6,7 @@ using Robust.Shared.Network;
 
 namespace Content.Trauma.Client.LinkAccount;
 
-public sealed class LinkAccountManager : ILinkAccountManager, IPostInjectInit
+public sealed class LinkAccountManager : ILinkAccountManagerClient, IPostInjectInit
 {
     [Dependency] private readonly INetManager _net = default!;
 

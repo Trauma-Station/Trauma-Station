@@ -2,7 +2,7 @@
 
 namespace Content.Trauma.Common.LinkAccount;
 
-public interface ILinkAccountManager
+public interface ILinkAccountManagerClient
 {
     IReadOnlyList<SharedRMCPatron> GetPatrons();
     bool CanViewPatronPerks();

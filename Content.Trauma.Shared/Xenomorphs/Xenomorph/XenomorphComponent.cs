@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Language;
-using Content.Trauma.Shared.Xenomorphs.Caste;
 using Content.Shared.Damage;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Shared.Xenomorphs.Caste;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 

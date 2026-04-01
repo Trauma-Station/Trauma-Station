@@ -1,4 +1,7 @@
-using Content.Trauma.Server.Forensics.Components;
+// <Trauma>
+using Content.Trauma.Common.Forensics;
+using Robust.Shared.Timing; // Goobstation
+// </Trauma>
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
@@ -26,7 +29,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory.Events;
-using Robust.Shared.Timing; // Goobstation
 
 namespace Content.Server.Forensics
 {
@@ -43,10 +45,8 @@ namespace Content.Server.Forensics
         {
             SubscribeLocalEvent<HandsComponent, ContactInteractionEvent>(OnInteract);
             SubscribeLocalEvent<FingerprintComponent, MapInitEvent>(OnFingerprintInit, after: new[] { typeof(BloodstreamSystem) });
-            SubscribeLocalEvent<ScentComponent, DidEquipEvent>(OnEquip); // Einstein Engines
             // The solution entities are spawned on MapInit as well, so we have to wait for that to be able to set the DNA in the bloodstream correctly without ResolveSolution failing
             SubscribeLocalEvent<DnaComponent, MapInitEvent>(OnDNAInit, after: new[] { typeof(BloodstreamSystem) });
-            SubscribeLocalEvent<ScentComponent, MapInitEvent>(OnScentInit, after: new[] { typeof(BloodstreamSystem) }); // Einstein Engines
 
             SubscribeLocalEvent<ForensicsComponent, GibbedBeforeDeletionEvent>(OnBeingGibbed);
             SubscribeLocalEvent<ForensicsComponent, MeleeHitEvent>(OnMeleeHit);
@@ -76,11 +76,6 @@ namespace Content.Server.Forensics
             ApplyEvidence(uid, args.Other);
         }
 
-        private void OnEquip(EntityUid uid, ScentComponent component, DidEquipEvent args) // Einstein Engines
-        {
-            ApplyScent(uid, args.Equipment);
-        }
-
         private void OnFingerprintInit(Entity<FingerprintComponent> ent, ref MapInitEvent args)
         {
             if (ent.Comp.Fingerprint == null)
@@ -98,16 +93,6 @@ namespace Content.Server.Forensics
                 RaiseLocalEvent(ent.Owner, ref ev);
             }
 
-        }
-
-        private void OnScentInit(EntityUid uid, ScentComponent component, MapInitEvent args) // Einstein Engines
-        {
-            component.Scent = GenerateFingerprint(length: 5);
-
-            var updatecomp = EnsureComp<ForensicsComponent>(uid);
-            updatecomp.Scent = component.Scent;
-
-            Dirty(uid, updatecomp);
         }
 
         private void OnBeingGibbed(Entity<ForensicsComponent> ent, ref GibbedBeforeDeletionEvent args)
@@ -260,8 +245,10 @@ namespace Content.Server.Forensics
             if (hasRemovableDNA || totalPrintsAndFibers > 0)
             {
                 var cleanDelay = cleanForensicsEntity.Comp.CleanDelay;
-                if (HasComp<ScentComponent>(target)) // EinsteinEngines
-                    cleanDelay += 30;
+                // <Trauma>
+                var ev = new BeforeCleanEvent(cleanDelay);
+                RaiseLocalEvent(target, ref ev);
+                // </Trauma>
 
                 var doAfterArgs = new DoAfterArgs(EntityManager, user, cleanDelay, new CleanForensicsDoAfterEvent(), cleanForensicsEntity, target: target, used: cleanForensicsEntity)
                 {
@@ -308,29 +295,10 @@ namespace Content.Server.Forensics
             if (TryComp<ResidueComponent>(args.Used, out var residue))
                 targetComp.Residues.Add(string.IsNullOrEmpty(residue.ResidueColor) ? Loc.GetString("forensic-residue", ("adjective", residue.ResidueAdjective)) : Loc.GetString("forensic-residue-colored", ("color", residue.ResidueColor), ("adjective", residue.ResidueAdjective)));
 
-            if (TryComp<ScentComponent>(args.Target, out var scentComp)) // Einstein Engines - Start
-            {
-                var generatedscent = GenerateFingerprint(length: 5);
-                scentComp.Scent = generatedscent;
-                targetComp.Scent = generatedscent;
-
-                if (args.Target is { Valid: true } target
-                    && _inventory.TryGetSlots(target, out var slotDefinitions))
-                    foreach (var slot in slotDefinitions)
-                    {
-                        if (!_inventory.TryGetSlotEntity(target, slot.Name, out var slotEnt))
-                            continue;
-
-                        EnsureComp<ForensicsComponent>(slotEnt.Value, out var recipientComp);
-                        recipientComp.Scent = generatedscent;
-
-                        Dirty(slotEnt.Value, recipientComp);
-                    }
-            }
-
-            if (args.Target is { Valid: true } targetuid)
-                Dirty(targetuid, targetComp); // Einstein Engines - End
-
+            // <Trauma>
+            var ev = new ForensicsCleanedEvent();
+            RaiseLocalEvent(args.Target.Value, ref ev);
+            // </Trauma>
         }
 
         public string GenerateFingerprint(int length = 16) // Einstein Engines - Length
@@ -367,18 +335,6 @@ namespace Content.Server.Forensics
 
             if (TryComp<FingerprintComponent>(user, out var fingerprint) && CanAccessFingerprint(user, out _))
                 component.Fingerprints.Add(fingerprint.Fingerprint ?? "");
-        }
-
-        private void ApplyScent(EntityUid user, EntityUid target) // Einstein Engines
-        {
-            if (HasComp<ScentComponent>(target))
-                return;
-
-            var component = EnsureComp<ForensicsComponent>(target);
-            if (TryComp<ScentComponent>(user, out var scent))
-                component.Scent = scent.Scent;
-
-            Dirty(target, component);
         }
 
         // TODO: Delete this. A lot of systems are manually raising this method event instead of calling the identical <see cref="TransferDna"/> method.

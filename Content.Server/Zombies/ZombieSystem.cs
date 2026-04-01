@@ -1,10 +1,7 @@
 // <Trauma>
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Trauma.Server.Language;
-using Content.Trauma.Shared.Language;
-using Content.Trauma.Shared.Language.Components;
-using Content.Trauma.Shared.Language.Events;
+using Content.Trauma.Common.Language.Systems;
 using Content.Shared.Blocking;
 // </Trauma>
 using Content.Shared.NPC.Prototypes;
@@ -40,6 +37,9 @@ namespace Content.Server.Zombies
 {
     public sealed partial class ZombieSystem : SharedZombieSystem
     {
+        // <Trauma>
+        [Dependency] private readonly CommonLanguageSystem _language = default!; // Goob
+        // </Trauma>
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly IPrototypeManager _protoManager = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
@@ -52,7 +52,6 @@ namespace Content.Server.Zombies
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedRoleSystem _role = default!;
-        [Dependency] private readonly LanguageSystem _language = default!; // Goob
 
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
 

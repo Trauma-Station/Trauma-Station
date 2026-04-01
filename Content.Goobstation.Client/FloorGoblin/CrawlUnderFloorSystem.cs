@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.FloorGoblin;
-using Content.Shared.VentCrawler.Tube.Components;
+using Content.Trauma.Common.VentCrawling;
 using Robust.Client.GameObjects;
 using Robust.Shared.Map.Components;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
-using Content.Trauma.Common.VentCrawling;
 
 namespace Content.Goobstation.Client.FloorGoblin;
 

@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Trauma.Shared.Wizard.BindSoul;
 using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
 using Content.Medical.Common.Targeting;

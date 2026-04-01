@@ -5,6 +5,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Shared.Heretic.Components;
 
 namespace Content.Trauma.Shared.TelescopicBaton;
 
