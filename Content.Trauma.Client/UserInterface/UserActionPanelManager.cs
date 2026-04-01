@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.UserInterface;
 using Content.Trauma.Client.UserActions;
 using Robust.Client.UserInterface;

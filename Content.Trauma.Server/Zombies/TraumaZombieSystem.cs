@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Zombies;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Server.Language;
