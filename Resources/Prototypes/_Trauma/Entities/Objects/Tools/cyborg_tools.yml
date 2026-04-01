@@ -1,0 +1,119 @@
+- type: entity
+  parent: [Crowbar, UnbeakableDurability]
+  id: BorgCrowbar
+
+- type: entity
+  parent: [Wrench, UnbeakableDurability]
+  id: BorgWrench
+
+- type: entity
+  parent: [Screwdriver, UnbeakableDurability]
+  id: BorgScrewdriver
+
+- type: entity
+  parent: [Wirecutter, UnbeakableDurability]
+  id: BorgWirecutter
+
+- type: entity
+  parent: [RefuelingWelder, UnbeakableDurability]
+  id: BorgRefuelingWelder
+
+- type: entity
+  parent: [MeleeHammer, UnbeakableDurability]
+  id: BorgMeleeHammer
+
+- type: entity
+  parent: [WelderIndustrial, UnbeakableDurability]
+  id: BorgWelderIndustrial
+
+- type: entity
+  parent: [Scalpel, UnbeakableDurability]
+  id: BorgScalpel
+
+- type: entity
+  parent: [SawElectric, UnbeakableDurability]
+  id: BorgSawElectric
+
+- type: entity
+  parent: [Drill, UnbeakableDurability]
+  id: BorgDrill
+
+- type: entity
+  parent: [Cautery, UnbeakableDurability]
+  id: BorgCautery
+
+- type: entity
+  parent: [JetpackXenoborg, UnbeakableDurability]
+  id: BorgJetpackXenoborg
+
+- type: entity
+  parent: [SyndicateJawsOfLife, UnbeakableDurability]
+  id: BorgSyndicateJawsOfLife
+
+- type: entity
+  parent: [MiningDrill, UnbeakableDurability]
+  id: BorgMiningDrill
+
+- type: entity
+  parent: [KukriKnife, UnbeakableDurability]
+  id: BorgKukriKnife
+
+- type: entity
+  parent: [HydroponicsToolHatchet, UnbeakableDurability]
+  id: BorgHydroponicsToolHatchet
+
+- type: entity
+  parent: [HydroponicsToolScythe, UnbeakableDurability]
+  id: BorgHydroponicsToolScythe
+
+- type: entity
+  parent: [HydroponicsToolMiniHoe, UnbeakableDurability]
+  id: BorgHydroponicsToolMiniHoe
+
+- type: entity
+  parent: [HydroponicsToolSpade, UnbeakableDurability]
+  id: BorgHydroponicsToolSpade
+
+- type: entity
+  parent: [HydroponicsToolClippers, UnbeakableDurability]
+  id: BorgHydroponicsToolClippers
+
+- type: entity
+  parent: [MopItem, UnbeakableDurability]
+  id: BorgMopItem
+
+- type: entity
+  parent: [Pen, UnbeakableDurability]
+  id: BorgPen
+
+- type: entity
+  parent: [WelderExperimental, UnbeakableDurability]
+  id: BorgWelderExperimental
+
+- type: entity
+  parent: [PowerDrill, UnbeakableDurability]
+  id: BorgPowerDrill
+
+- type: entity
+  parent: [JawsOfLife, UnbeakableDurability]
+  id: BorgJawsOfLife
+
+- type: entity
+  parent: [EnergyCautery, UnbeakableDurability]
+  id: BorgEnergyCautery
+
+- type: entity
+  parent: [EnergyScalpel, UnbeakableDurability]
+  id: BorgEnergyScalpel
+
+- type: entity
+  parent: [Shovel, UnbeakableDurability]
+  id: BorgShovel
+
+- type: entity
+  parent: [MiningDrillDiamond, UnbeakableDurability]
+  id: BorgMiningDrillDiamond
+
+- type: entity
+  parent: [AdvMopItem, UnbeakableDurability]
+  id: BorgAdvMopItem
