@@ -129,7 +129,7 @@ public sealed class RespiratorSystem : EntitySystem
             if (!CanBreathe(uid, respirator)) // Goobstation edit
             {
                 var ev = new SuffocationBeforeEvent();
-                RaiseLocalEvent(uid, ev);
+                RaiseLocalEvent(uid, ref ev);
                 if (ev.Cancelled)
                     continue;
 

@@ -1,6 +1,6 @@
-// </Trauma>
-using Content.Trauma.Shared.Wizard.Refund;
 // <Trauma>
+using Content.Trauma.Common.Wizard;
+// </Trauma>
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;

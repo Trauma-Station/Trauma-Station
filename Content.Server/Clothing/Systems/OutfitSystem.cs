@@ -144,7 +144,7 @@ public sealed class OutfitSystem : EntitySystem
 
         // <Trauma>
         var ev = new StartingGearEquippedEvent(target, startingGear);
-        RaiseLocalEvent(ev);
+        RaiseLocalEvent(target, ref ev);
         // </Trauma>
 
         return true;

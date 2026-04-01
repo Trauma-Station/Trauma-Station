@@ -15,12 +15,12 @@ public sealed class InternalEncryptionKeySpawner : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StartingGearEquippedEvent>(OnRoleAdded);
+        SubscribeLocalEvent<EncryptionKeyHolderComponent, StartingGearEquippedEvent>(OnRoleAdded);
     }
 
-    public void OnRoleAdded(StartingGearEquippedEvent ev)
+    public void OnRoleAdded(Entity<EncryptionKeyHolderComponent> ent, ref StartingGearEquippedEvent ev)
     {
-        TryInsertEncryptionKey(ev.Entity, ev.StartingGear);
+        TryInsertEncryptionKey(ent, ev.StartingGear);
     }
 
     /// <summary>
@@ -29,25 +29,24 @@ public sealed class InternalEncryptionKeySpawner : EntitySystem
     /// <remarks>
     /// Doesn't support a profile's loadouts, have fun.
     /// </remarks>
-    public void TryInsertEncryptionKey(EntityUid target, IEquipmentLoadout? startingGear)
+    public void TryInsertEncryptionKey(Entity<EncryptionKeyHolderComponent> ent, IEquipmentLoadout? startingGear)
     {
-        if (!TryComp<EncryptionKeyHolderComponent>(target, out var keyHolder)
-            || startingGear is not { }
+        if (startingGear is not { }
             || !startingGear.Equipment.TryGetValue("ears", out var headsetId)
             || string.IsNullOrEmpty(headsetId))
             return;
 
-        var headset = Spawn(headsetId, Transform(target).Coordinates);
+        var headset = Spawn(headsetId, Transform(ent.Owner).Coordinates);
         if (!HasComp<EncryptionKeyHolderComponent>(headset)
             || !TryComp<ContainerFillComponent>(headset, out var fillComp)
             || !fillComp.Containers.TryGetValue(EncryptionKeyHolderComponent.KeyContainerName, out var defaultKeys))
             return;
 
-        _container.CleanContainer(keyHolder.KeyContainer);
+        _container.CleanContainer(ent.Comp.KeyContainer);
 
         foreach (var key in defaultKeys)
         {
-            SpawnInContainerOrDrop(key, target, keyHolder.KeyContainer.ID);
+            SpawnInContainerOrDrop(key, ent.Owner, ent.Comp.KeyContainer.ID);
         }
 
         Del(headset);

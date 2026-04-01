@@ -35,7 +35,7 @@ public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeS
 
         // Corvax-Next-AiRemoteControl-Start
         var ev = new BorgTypeChangedEvent();
-        RaiseLocalEvent(ent, ev);
+        RaiseLocalEvent(ent, ref ev);
         // Corvax-Next-AiRemoteControl-End
 
         // Borg transponder for the robotics console

@@ -613,7 +613,7 @@ namespace Content.Server.Ghost
 
                         // <Trauma>
                         var ev = new SuicideDamageEvent(AsphyxiationDamageType);
-                        RaiseLocalEvent(playerEntity.Value, ev);
+                        RaiseLocalEvent(playerEntity.Value, ref ev);
                         DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(ev.DamageType), dealtDamage);
 
                         TargetBodyPart? targetPart = HasComp<BodyComponent>(playerEntity) ? TargetBodyPart.Chest : null;

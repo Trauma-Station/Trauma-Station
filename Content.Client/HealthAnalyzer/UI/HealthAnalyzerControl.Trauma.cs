@@ -27,7 +27,6 @@ namespace Content.Client.HealthAnalyzer.UI;
 
 public sealed partial class HealthAnalyzerControl
 {
-    private SharedSolutionContainerSystem _solution;
 
     public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
@@ -41,7 +40,6 @@ public sealed partial class HealthAnalyzerControl
 
     private void InitializeTrauma()
     {
-        _solution = _entityManager.System<SharedSolutionContainerSystem>();
         _wound = _entityManager.System<WoundSystem>();
 
         _bodyPartControls = new Dictionary<ProtoId<OrganCategoryPrototype>, TextureButton>
