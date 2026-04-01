@@ -103,6 +103,9 @@
   - StorageBinCircuitboard
   - InteractorCircuitboard
   # End Goobstation Additions
+  # <Trauma>
+  - UpgradeKitTubeSpeed
+  # </Trauma>
   - SheetifierMachineCircuitboard
   # Goobstation R&D Console rework start
   position: 1,-2
