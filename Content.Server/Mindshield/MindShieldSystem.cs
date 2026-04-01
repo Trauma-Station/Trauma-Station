@@ -25,7 +25,7 @@ public sealed class MindShieldSystem : EntitySystem
     [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
     [Dependency] private readonly RoleSystem _roleSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    //[Dependency] private readonly PopupSystem _popupSystem = default!; // Trauma - unused now
     [Dependency] private readonly SharedRevolutionarySystem _revolutionary = default!; // Goobstation
 
     public override void Initialize()

@@ -2,7 +2,6 @@
 using Content.Goobstation.Shared.Mind.Components;
 using Content.Trauma.Common.Wizard;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Tag;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
@@ -23,9 +22,6 @@ namespace Content.Server.Mind;
 
 public sealed class MindSystem : SharedMindSystem
 {
-    // <Trauma>
-    [Dependency] private readonly TagSystem _tag = default!;
-    // </Trauma>
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPlayerManager _players = default!;

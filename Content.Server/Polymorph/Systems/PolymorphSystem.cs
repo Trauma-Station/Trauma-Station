@@ -1,16 +1,11 @@
 // <Trauma>
 using Content.Shared.Actions.Components;
-using Content.Shared.Buckle.Components;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
 using Content.Shared.Polymorph.Systems;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Tag;
 using Content.Trauma.Common.Polymorph;
 using Content.Trauma.Common.Wizard;
-using Robust.Shared.Map;
-using Robust.Shared.Physics;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
 using System.Linq;
@@ -48,7 +43,6 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     // </Trauma>
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
