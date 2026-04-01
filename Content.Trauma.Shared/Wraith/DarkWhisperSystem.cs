@@ -16,8 +16,7 @@ public sealed class DarkWhisperSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-
-    private EntityQuery<DarkWhisperComponent> _darkWhisperQuery;
+    [Dependency] private readonly EntityQuery<DarkWhisperComponent> _darkWhisperQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -28,8 +27,6 @@ public sealed class DarkWhisperSystem : EntitySystem
         SubscribeLocalEvent<DarkWhisperComponent, EntitySpokeEvent>(OnDarkWhisperSpoke);
 
         SubscribeAllEvent<TypingChangedEvent>(OnTypingChanged);
-
-        _darkWhisperQuery = GetEntityQuery<DarkWhisperComponent>();
     }
 
     public override void Update(float frameTime)

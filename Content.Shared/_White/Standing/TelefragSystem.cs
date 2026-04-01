@@ -20,6 +20,8 @@ public sealed class TelefragSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
 
+    private HashSet<Entity<CrawlerComponent>> _targets = new();
+
     public void DoTelefrag(EntityUid uid,
         EntityCoordinates coords,
         TimeSpan knockdownTime,
@@ -30,10 +32,12 @@ public sealed class TelefragSystem : EntitySystem
         if (range <= 0f || knockdownTime <= TimeSpan.Zero)
             return;
 
-        var entities = _lookup.GetEntitiesInRange(coords, range, LookupFlags.Dynamic);
-        foreach (var ent in entities.Where(ent => ent != uid && !_standing.IsDown(ent)))
+        _targets.Clear();
+        _lookup.GetEntitiesInRange(coords, range, _targets, LookupFlags.Dynamic);
+        foreach (var ent in _targets)
         {
-            _stun.TryKnockdown(ent, knockdownTime, true, autoStand: autoStand, drop: drop);
+            if (ent.Owner != uid && !_standing.IsDown(ent.Owner))
+                _stun.TryKnockdown(ent.AsNullable(), knockdownTime, true, autoStand: autoStand, drop: drop);
         }
     }
 }

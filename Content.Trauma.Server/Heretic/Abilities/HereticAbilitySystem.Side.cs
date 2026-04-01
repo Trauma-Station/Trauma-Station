@@ -16,6 +16,11 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
+    [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+
+    private HashSet<Entity<MobStateComponent>> _targets = new();
+    private HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();
+
     protected override void SubscribeSide()
     {
         base.SubscribeSide();
@@ -51,9 +56,9 @@ public sealed partial class HereticAbilitySystem
     private void OnMirrorJaunt(EventMirrorJaunt args)
     {
         var uid = args.Performer;
-
-        if (Lookup.GetEntitiesInRange<ReflectiveSurfaceComponent>(Transform(uid).Coordinates, args.LookupRange).Count ==
-            0)
+        var coords = Transform(uid).Coordinates;
+        Lookup.GetEntitiesInRange(coords, args.LookupRange, _mirrors);
+        if (_mirrors.Count == 0)
         {
             Popup.PopupEntity(Loc.GetString("heretic-ability-fail-mirror-jaunt-no-mirrors"), uid, uid);
             return;
@@ -110,12 +115,11 @@ public sealed partial class HereticAbilitySystem
 
         Spawn(args.Effect, args.Target);
 
-        var bloodQuery = GetEntityQuery<BloodstreamComponent>();
-
         var hasTargets = false;
 
-        var targets = Lookup.GetEntitiesInRange<MobStateComponent>(args.Target, args.Range, LookupFlags.Dynamic);
-        foreach (var (target, _) in targets)
+        _targets.Clear();
+        Lookup.GetEntitiesInRange(args.Target, args.Range, _targets, LookupFlags.Dynamic);
+        foreach (var (target, _) in _targets)
         {
             if (target == args.Performer)
                 continue;
@@ -124,7 +128,7 @@ public sealed partial class HereticAbilitySystem
 
             _dmg.TryChangeDamage(target, args.Damage, true, origin: args.Performer);
 
-            if (!bloodQuery.TryComp(target, out var blood))
+            if (!_bloodQuery.TryComp(target, out var blood))
                 continue;
 
             _blood.TryModifyBloodLevel((target, blood), args.BloodModifyAmount);

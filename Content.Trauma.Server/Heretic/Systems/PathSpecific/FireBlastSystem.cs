@@ -13,6 +13,7 @@ using Content.Shared.Physics;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
+using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
 using Robust.Server.Audio;
@@ -30,6 +31,11 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
     [Dependency] private readonly StunSystem _stun = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private readonly EntityQuery<FlammableComponent> _flammableQuery = default!;
+    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
+
+    private HashSet<Entity<MobStateComponent>> _targets = new();
 
     public override void Initialize()
     {
@@ -58,24 +64,14 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         Spawn(origin.Comp.BonusEffect, pos);
         _audio.PlayPvs(origin.Comp.Sound, pos);
 
-        var ghoulQuery = GetEntityQuery<GhoulComponent>();
-        var flammableQuery = GetEntityQuery<FlammableComponent>();
-        var mobStateQuery = GetEntityQuery<MobStateComponent>();
-
-        // Prioritize alive targets on fire, closest to origin
-        var result = _lookup.GetEntitiesInRange(origin, origin.Comp.BonusRange, flags: LookupFlags.Dynamic)
-            .Select(x => (x, flammableQuery.CompOrNull(x)))
-            .Where(x => x.Item2 != null && x.Item1 != origin.Owner &&
-                        (!_heretic.TryGetHereticComponent(x.Item1, out var heretic, out _) ||
-                         heretic.CurrentPath != HereticPath.Ash) &&
-                        !ghoulQuery.HasComp(x.Item1) &&
-                        mobStateQuery.HasComp(x.Item1));
-
-        foreach (var (uid, flam) in result)
+        GetTargets(Transform(origin), origin.Comp.BonusRange);
+        foreach (var ent in _targets)
         {
+            var uid = ent.Owner;
+
             _flammable.AdjustFireStacks(uid,
                 origin.Comp.BonusFireStacks,
-                flam,
+                null,
                 true,
                 origin.Comp.FireProtectionPenetration);
 
@@ -89,6 +85,21 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
                 splitDamage: SplitDamageBehavior.SplitEnsureAll,
                 canMiss: false);
         }
+    }
+
+    private void GetTargets(TransformComponent xform, float range)
+    {
+        _targets.Clear();
+        _lookup.GetEntitiesInRange(xform.Coordinates, range, _targets, flags: LookupFlags.Dynamic);
+        _targets.RemoveWhere(ent =>
+        {
+            var uid = ent.Owner;
+            if (_ghoulQuery.HasComp(uid))
+                return true; // leave ghouls alone
+
+            // ash heretics are immune
+            return _heretic.TryGetHereticComponent(uid, out var heretic, out _) && heretic.CurrentPath == HereticPath.Ash;
+        });
     }
 
     private bool TrySendBeam(Entity<FireBlastedComponent> origin)
@@ -107,32 +118,26 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
                 return false;
         }
 
-        var ghoulQuery = GetEntityQuery<GhoulComponent>();
-        var flammableQuery = GetEntityQuery<FlammableComponent>();
-        var mobStateQuery = GetEntityQuery<MobStateComponent>();
-
         var xform = Transform(origin);
         var pos = Xform.GetWorldPosition(xform);
 
+        GetTargets(xform, origin.Comp.FireBlastRange);
         // Prioritize alive targets on fire, closest to origin
-        var result = _lookup.GetEntitiesInRange(origin, origin.Comp.FireBlastRange, flags: LookupFlags.Dynamic)
-            .Select(x => (x, flammableQuery.CompOrNull(x), mobStateQuery.CompOrNull(x),
+        var result = _targets
+            .Select(x => (x, _flammableQuery.CompOrNull(x),
                 (Xform.GetWorldPosition(x) - pos).LengthSquared()))
-            .Where(x => x is { Item2: not null, Item3: not null } && x.Item1 != origin.Owner &&
-                        (!_heretic.TryGetHereticComponent(x.Item1, out var heretic, out _) ||
-                         heretic.CurrentPath != HereticPath.Ash) &&
-                        !ghoulQuery.HasComp(x.Item1) &&
-                        !Status.HasEffectComp<Shared.Heretic.Components.StatusEffects.FireBlastedStatusEffectComponent>(x.Item1) &&
-                        !origin.Comp.HitEntities.Contains(x.Item1))
-            .OrderBy(x => x.Item3!.CurrentState)
+            .Where(x => x.Item2 != null && x.Item1.Owner != origin.Owner &&
+                !Status.HasEffectComp<FireBlastedStatusEffectComponent>(x.Item1.Owner) &&
+                !origin.Comp.HitEntities.Contains(x.Item1.Owner))
+            .OrderBy(x => x.Item1.Comp.CurrentState)
             .ThenByDescending(x => x.Item2!.OnFire)
-            .ThenBy(x => x.Item4)
+            .ThenBy(x => x.Item3)
             .FirstOrNull();
 
         if (result == null)
             return false;
 
-        var (target, flam, _, _) = result.Value;
+        var (target, flam, _) = result.Value;
 
         var ev = new BeforeCastTouchSpellEvent(target);
         RaiseLocalEvent(target, ev, true);
@@ -168,8 +173,8 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
 
         _flammable.AdjustFireStacks(target, origin.Comp.FireStacks, flam, true, origin.Comp.FireProtectionPenetration);
 
-        Dmg.TryChangeDamage(target,
-            origin.Comp.FireBlastDamage * Body.GetVitalBodyPartRatio(target),
+        Dmg.TryChangeDamage(target.Owner,
+            origin.Comp.FireBlastDamage * Body.GetVitalBodyPartRatio(target.Owner),
             origin: origin,
             targetPart: TargetBodyPart.All,
             splitDamage: SplitDamageBehavior.SplitEnsureAll,
@@ -191,26 +196,22 @@ public sealed class FireBlastSystem : SharedFireBlastSystem
         var dist = MathF.Min(dir.Length(), origin.Comp.FireBlastRange);
         var result = _physics.IntersectRay(originPos.MapId, ray, dist, origin, false);
 
-        var flammableQuery = GetEntityQuery<FlammableComponent>();
-        var ghoulQuery = GetEntityQuery<GhoulComponent>();
-        var mobStateQuery = GetEntityQuery<MobStateComponent>();
-
         foreach (var ent in result)
         {
             if (ent.HitEntity == target)
                 continue;
 
-            if (!mobStateQuery.HasComp(ent.HitEntity))
+            if (!_mobQuery.HasComp(ent.HitEntity))
                 return;
 
-            if (ghoulQuery.HasComp(ent.HitEntity))
+            if (_ghoulQuery.HasComp(ent.HitEntity))
                 continue;
 
             if (_heretic.TryGetHereticComponent(ent.HitEntity, out var heretic, out _) &&
                 heretic.CurrentPath == HereticPath.Ash)
                 continue;
 
-            if (flammableQuery.TryComp(ent.HitEntity, out var flam))
+            if (_flammableQuery.TryComp(ent.HitEntity, out var flam))
             {
                 _flammable.AdjustFireStacks(ent.HitEntity,
                     origin.Comp.CollisionFireStacks,

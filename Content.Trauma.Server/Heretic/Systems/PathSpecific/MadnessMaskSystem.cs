@@ -11,27 +11,40 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Jittering;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Temperature;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
 public sealed class MadnessMaskSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
+
+    public static readonly EntProtoId StatusEffectSeeingRainbow = "StatusEffectSeeingRainbow";
+
+    private HashSet<Entity<Content.Shared.StatusEffect.StatusEffectsComponent>> _targets = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<MadnessMaskComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MadnessMaskComponent, BeingUnequippedAttemptEvent>(OnUnequip);
         SubscribeLocalEvent<MadnessMaskComponent, InventoryRelayedEvent<GetFireProtectionEvent>>(OnGetProtection);
         SubscribeLocalEvent<MadnessMaskComponent, InventoryRelayedEvent<ModifyChangedTemperatureEvent>>(
             OnTemperatureChangeAttempt);
+    }
+
+    private void OnMapInit(Entity<MadnessMaskComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.UpdateDelay;
     }
 
     private void OnUnequip(Entity<MadnessMaskComponent> ent, ref BeingUnequippedAttemptEvent args)
@@ -67,23 +80,22 @@ public sealed class MadnessMaskSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        var now = _timing.CurTime;
         var query = EntityQueryEnumerator<MadnessMaskComponent, ClothingComponent>();
         while (query.MoveNext(out var uid, out var mask, out var clothing))
         {
-            if (clothing.InSlot == null)
+            if (clothing.InSlot == null || now < mask.NextUpdate)
                 continue;
 
-            mask.UpdateAccumulator += frameTime;
+            mask.NextUpdate = now + mask.UpdateDelay;
 
-            if (mask.UpdateAccumulator < mask.UpdateTimer)
-                continue;
-
-            mask.UpdateAccumulator = 0;
-
-            var lookup = _lookup.GetEntitiesInRange(uid, 5f);
-            foreach (var look in lookup)
+            var coords = Transform(uid).Coordinates;
+            _targets.Clear();
+            _lookup.GetEntitiesInRange(coords, 5f, _targets);
+            foreach (var target in _targets)
             {
                 // heathens exclusive
+                var look = target.Owner;
                 if (_heretic.IsHereticOrGhoul(look))
                     continue;
 
@@ -96,7 +108,7 @@ public sealed class MadnessMaskSystem : EntitySystem
                 if (_random.Prob(.25f))
                 {
                     _statusEffect.TryAddStatusEffectDuration(look,
-                        "StatusEffectSeeingRainbow",
+                        StatusEffectSeeingRainbow,
                         out _,
                         TimeSpan.FromSeconds(10f));
                 }

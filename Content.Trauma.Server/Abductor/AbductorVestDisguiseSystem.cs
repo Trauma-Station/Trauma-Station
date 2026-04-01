@@ -21,6 +21,7 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private readonly EntityQuery<VisualOrganMarkingsComponent> _organMarkingsQuery = default!;
 
     private static readonly List<EntProtoId> HumanVisualOrgans = new()
     {
@@ -242,10 +243,9 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
 
     public IEnumerable<Entity<VisualOrganComponent, VisualOrganMarkingsComponent>> GetOrgans(Entity<BodyComponent?> ent)
     {
-        var query = GetEntityQuery<VisualOrganMarkingsComponent>();
         foreach (var (organ, visual) in _body.GetOrgans<VisualOrganComponent>(ent))
         {
-            if (query.TryComp(organ, out var markings))
+            if (_organMarkingsQuery.TryComp(organ, out var markings))
                 yield return (organ, visual, markings);
         }
     }

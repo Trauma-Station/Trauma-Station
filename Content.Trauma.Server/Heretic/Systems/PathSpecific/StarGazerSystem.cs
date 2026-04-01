@@ -22,6 +22,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
@@ -47,9 +48,10 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly BodySystem _body = default!;
-
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+
+    private HashSet<Entity<MobStateComponent>> _targets = default!;
 
     public override void Initialize()
     {
@@ -179,14 +181,14 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
     {
         base.Update(frameTime);
 
-        var xformQuery = GetEntityQuery<TransformComponent>();
         var jointQuery = GetEntityQuery<ComplexJointVisualsComponent>();
         var mobStateQuery = GetEntityQuery<MobStateComponent>();
         var starGazeQuery = GetEntityQuery<StarGazeComponent>();
         var ghostRoleQuery = GetEntityQuery<GhostRoleComponent>();
         var actorQuery = GetEntityQuery<ActorComponent>();
-        var minionQuery = GetEntityQuery<Shared.Heretic.Components.Ghoul.HereticMinionComponent>();
+        var minionQuery = GetEntityQuery<HereticMinionComponent>();
 
+        // TODO: JESUS FUCKING CHRIST
         var query = EntityQueryEnumerator<StarGazerComponent, MindContainerComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var starGazer, out var mindContainer, out var xform))
         {
@@ -314,12 +316,12 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
 
             var target = starGaze.CursorPosition.Value;
             var endpoint = starGaze.Endpoint!.Value;
-            var endpointXform = xformQuery.GetComponent(endpoint);
-            var pos = Xform.GetWorldPosition(endpointXform, xformQuery);
+            var endpointXform = Transform(endpoint);
+            var pos = Xform.GetWorldPosition(endpointXform);
             var dir = target.Position - pos;
             var len = dir.Length();
 
-            var gazerPos = Xform.GetWorldPosition(xform, xformQuery);
+            var gazerPos = Xform.GetWorldPosition(xform);
             var newPos = pos + dir * starGaze.LaserSpeed / len;
             var dir2 = newPos - gazerPos;
             var len2 = dir2.Length();
@@ -358,18 +360,16 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
                 gazerPos + offset + new Vector2(cLen, starGaze.LaserThickness));
             var boxRot = new Box2Rotated(box, angle, gazerPos + offset);
 
-            var noobs = _lookup.GetEntitiesIntersecting(xform.MapID, boxRot, LookupFlags.Dynamic);
-            foreach (var noob in noobs)
+            _targets.Clear();
+            _lookup.GetEntitiesIntersecting(xform.MapID, boxRot, _targets, LookupFlags.Dynamic);
+            foreach (var noob in _targets)
             {
                 if (noob == minion?.BoundHeretic)
                     continue;
 
-                if (!mobStateQuery.TryComp(noob, out var mobState))
-                    continue;
-
-                if (_mobState.IsIncapacitated(noob, mobState))
+                if (_mobState.IsIncapacitated(noob, noob.Comp))
                 {
-                    var coords = xformQuery.Comp(noob).Coordinates;
+                    var coords = Transform(noob).Coordinates;
                     _admin.Add(LogType.Gib,
                         LogImpact.Medium,
                         $"{ToPrettyString(uid):user} ashed {ToPrettyString(noob):target} using star gazer laser beam");
@@ -390,9 +390,9 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
                     continue;
                 }
 
-                _mark.TryApplyStarMark((noob, mobState));
-                _dmg.TryChangeDamage(noob,
-                    starGaze.Damage * _body.GetVitalBodyPartRatio(noob),
+                _mark.TryApplyStarMark(noob.AsNullable());
+                _dmg.TryChangeDamage(noob.Owner,
+                    starGaze.Damage * _body.GetVitalBodyPartRatio(noob.Owner),
                     origin: uid,
                     targetPart: TargetBodyPart.All,
                     splitDamage: SplitDamageBehavior.SplitEnsureAll);
@@ -402,17 +402,15 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
             }
 
             var boxRot2 = new Box2Rotated(box.Enlarged(starGaze.GravityPullSizeModifier), angle, gazerPos + offset);
-            var noobs2 = _lookup.GetEntitiesIntersecting(xform.MapID, boxRot2, LookupFlags.Dynamic);
-            foreach (var noob in noobs2)
+            _targets.Clear();
+            _lookup.GetEntitiesIntersecting(xform.MapID, boxRot2, _targets, LookupFlags.Dynamic);
+            foreach (var noob in _targets)
             {
                 if (noob == minion?.BoundHeretic)
                     continue;
 
-                if (!mobStateQuery.HasComp(noob))
-                    continue;
-
-                var noobXform = xformQuery.Comp(noob);
-                var noobPos = Xform.GetWorldPosition(noobXform, xformQuery);
+                var noobXform = Transform(noob);
+                var noobPos = Xform.GetWorldPosition(noobXform);
 
                 var a = pos + offset - noobPos;
                 var b = gazerPos + offset - noobPos;

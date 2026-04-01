@@ -38,6 +38,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly EntityQuery<ShadowCloakEntityComponent> _cloakQuery = default!;
 
     private static readonly ProtoId<TagPrototype> ActionTag = "ShadowCloakAction";
 
@@ -232,11 +233,10 @@ public abstract class SharedShadowCloakSystem : EntitySystem
         var xform = Transform(ent);
 
         var revealCooldown = TimeSpan.FromMinutes(1);
-        var shadowCloakQuery = GetEntityQuery<ShadowCloakEntityComponent>();
         var children = xform.ChildEnumerator;
         while (children.MoveNext(out var child))
         {
-            if (!shadowCloakQuery.TryComp(child, out var cloak))
+            if (!_cloakQuery.TryComp(child, out var cloak))
                 continue;
 
             revealCooldown = cloak.RevealCooldown;
@@ -259,11 +259,10 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
         var xform = Transform(ent);
 
-        var shadowCloakQuery = GetEntityQuery<ShadowCloakEntityComponent>();
         var children = xform.ChildEnumerator;
         while (children.MoveNext(out var child))
         {
-            if (!shadowCloakQuery.TryComp(child, out var shadowCloak))
+            if (!_cloakQuery.TryComp(child, out var shadowCloak))
                 continue;
 
             shadowCloak.User = ent;
@@ -298,11 +297,10 @@ public abstract class SharedShadowCloakSystem : EntitySystem
     {
         var xform = Transform(ent);
 
-        var shadowCloakQuery = GetEntityQuery<ShadowCloakEntityComponent>();
         var children = xform.ChildEnumerator;
         while (children.MoveNext(out var child))
         {
-            if (!shadowCloakQuery.TryComp(child, out var shadowCloak))
+            if (!_cloakQuery.TryComp(child, out var shadowCloak))
                 continue;
 
             shadowCloak.User = ent;

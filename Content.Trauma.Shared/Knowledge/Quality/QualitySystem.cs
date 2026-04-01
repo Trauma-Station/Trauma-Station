@@ -40,8 +40,7 @@ public sealed class QualitySystem : EntitySystem
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-
-    private EntityQuery<QualityComponent> _query;
+    [Dependency] private readonly EntityQuery<QualityComponent> _query = default!;
 
     private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
     private static readonly ProtoId<KnowledgeCategoryPrototype> CraftingCategory = "Crafting";
@@ -49,8 +48,6 @@ public sealed class QualitySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<QualityComponent>();
 
         // quality effects
         SubscribeLocalEvent<QualityComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);

@@ -7,13 +7,11 @@ namespace Content.Trauma.Shared.Genetics.Abilities;
 
 public sealed class TemperatureDamageMutationSystem : EntitySystem
 {
-    private EntityQuery<TemperatureDamageComponent> _query;
+    [Dependency] private readonly EntityQuery<TemperatureDamageComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<TemperatureDamageComponent>();
 
         SubscribeLocalEvent<TemperatureDamageMutationComponent, MutationAddedEvent>(OnAdded);
         SubscribeLocalEvent<TemperatureDamageMutationComponent, MutationRemovedEvent>(OnRemoved);

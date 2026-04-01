@@ -34,9 +34,10 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
+using Content.Shared.StatusEffect;
 using Content.Shared.Stealth.Components;
 using Content.Shared.Store.Components;
-using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -49,16 +50,23 @@ namespace Content.Goobstation.Server.Changeling;
 
 public sealed partial class ChangelingSystem
 {
-    #region Dependencies
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly GibbingSystem _gibbing = default!;
-    #endregion
 
     public static readonly EntProtoId ActionLayEgg = "ActionLayEgg";
     public static readonly ProtoId<ReagentPrototype> PolytrinicAcid = "PolytrinicAcid";
     public static readonly ProtoId<CollectiveMindPrototype> HivemindProto = "Lingmind";
     public static readonly ProtoId<DamageGroupPrototype> AbsorbedDamageGroup = "Genetic";
-    public List<ProtoId<ReagentPrototype>> BiomassAbsorbedChemicals = new() { "Nutriment", "Protein", "UncookedAnimalProteins", "Fat" }; // fat so absorbing raw meat good
+    public static readonly List<ProtoId<ReagentPrototype>> BiomassAbsorbedChemicals = new()
+    {
+        "Nutriment",
+        "Protein",
+        "UncookedAnimalProteins",
+        "Fat" // fat so absorbing raw meat good
+    };
+
+    private HashSet<Entity<CrawlerComponent>> _crawlers = new();
+    private HashSet<Entity<PoweredLightComponent>> _lights = new();
 
     protected override void InitAbilities()
     {
@@ -490,13 +498,14 @@ public sealed partial class ChangelingSystem
         DoScreech(uid, comp); // screenshake
         TryScreechStun(uid, comp); // the actual thing
 
-        var power = comp.ShriekPower;
-        var lights = GetEntityQuery<PoweredLightComponent>();
-        var lookup = _lookup.GetEntitiesInRange(uid, power);
+        var coords = Transform(uid).Coordinates;
+        _lights.Clear();
+        _lookup.GetEntitiesInRange(coords, comp.ShriekPower, _lights);
 
-        foreach (var ent in lookup)
-            if (lights.HasComponent(ent))
-                _light.TryDestroyBulb(ent);
+        foreach (var light in _lights)
+        {
+            _light.TryDestroyBulb(light);
+        }
 
         args.Handled = true;
     }

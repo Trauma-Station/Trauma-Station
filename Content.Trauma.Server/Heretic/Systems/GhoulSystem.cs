@@ -185,14 +185,10 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
     private void ProcessVoicelessDeadBody(EntityUid uid, bool makeRemovable)
     {
-        var woundableQuery = GetEntityQuery<WoundableComponent>();
-        foreach (var organ in _body.GetOrgans(uid))
+        foreach (var organ in _body.GetOrgans<ChildOrganComponent>(uid))
         {
-            if (woundableQuery.TryComp(organ, out var woundable) && woundable.RootWoundable == organ.Owner)
-                continue;
-
             if (makeRemovable)
-                RemCompDeferred<UnremoveableOrganComponent>(organ);
+                RemComp<UnremoveableOrganComponent>(organ);
             else
                 EnsureComp<UnremoveableOrganComponent>(organ);
         }

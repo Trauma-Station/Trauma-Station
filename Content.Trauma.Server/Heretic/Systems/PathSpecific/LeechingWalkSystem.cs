@@ -36,34 +36,18 @@ public sealed class LeechingWalkSystem : EntitySystem
     [Dependency] private readonly StunSystem _stun = default!;
     [Dependency] private readonly Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly EntityQuery<DamageableComponent> _damageableQuery = default!;
+    [Dependency] private readonly EntityQuery<TemperatureComponent> _temperatureQuery = default!;
+    [Dependency] private readonly EntityQuery<StaminaComponent> _staminaQuery = default!;
+    [Dependency] private readonly EntityQuery<StatusEffectsComponent> _statusQuery = default!;
+    [Dependency] private readonly EntityQuery<RespiratorComponent> _respiratorQuery = default!;
+    [Dependency] private readonly EntityQuery<HereticComponent> _hereticQuery = default!;
+    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
     private static readonly TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
-
-    private EntityQuery<DamageableComponent> _damageableQuery;
-    private EntityQuery<TemperatureComponent> _temperatureQuery;
-    private EntityQuery<StaminaComponent> _staminaQuery;
-    private EntityQuery<StatusEffectsComponent> _statusQuery;
-    private EntityQuery<RespiratorComponent> _respiratorQuery;
-    private EntityQuery<HereticComponent> _hereticQuery;
-    private EntityQuery<GhoulComponent> _ghoulQuery;
-    private EntityQuery<BodyComponent> _bodyQuery;
-    private EntityQuery<BloodstreamComponent> _bloodQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _damageableQuery = GetEntityQuery<DamageableComponent>();
-        _temperatureQuery = GetEntityQuery<TemperatureComponent>();
-        _staminaQuery = GetEntityQuery<StaminaComponent>();
-        _statusQuery = GetEntityQuery<StatusEffectsComponent>();
-        _respiratorQuery = GetEntityQuery<RespiratorComponent>();
-        _hereticQuery = GetEntityQuery<HereticComponent>();
-        _ghoulQuery = GetEntityQuery<GhoulComponent>();
-        _bodyQuery = GetEntityQuery<BodyComponent>();
-        _bloodQuery = GetEntityQuery<BloodstreamComponent>();
-    }
 
     public override void Update(float frameTime)
     {
