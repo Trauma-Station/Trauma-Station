@@ -697,7 +697,7 @@ public abstract class SharedMagicSystem : EntitySystem
 
         // <Trauma>
         var afterEv = new AfterMindSwappedEvent(ev.Performer, ev.Target);
-        RaiseLocalEvent(afterEv);
+        RaiseLocalEvent(ref afterEv);
 
         if (_net.IsServer)
         {

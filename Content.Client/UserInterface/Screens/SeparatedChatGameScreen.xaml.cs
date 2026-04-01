@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Client.UserInterface;
-// </Trauma>
 using System.Numerics;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Chat.Widgets;
@@ -15,6 +12,8 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
 {
     public const string StyleClassChatContainer = "ChatContainer";
     public const string StyleClassChatOutput = "ChatOutput";
+
+    public static Action<SeparatedChatGameScreen>? OnCreated;
 
     public SeparatedChatGameScreen()
     {
@@ -36,8 +35,7 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
 
         ViewportContainer.OnResized += ResizeActionContainer;
         // <Trauma>
-        if (IoCManager.Resolve<IUserActionPanelManager>() is { } manager)
-            manager.InjectPanel(UserActionsPlaceholder);
+        OnCreated?.Invoke(this);
         // </Trauma>
     }
 

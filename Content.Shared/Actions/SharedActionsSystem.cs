@@ -403,7 +403,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         {
             // <Trauma> - check fallback instead of setting it to false immediately
             var evCheck = new CheckWorldInstantActionEvent(user, provider);
-            RaiseLocalEvent(ent, evCheck);
+            RaiseLocalEvent(ent, ref evCheck);
             args.Invalid |= !evCheck.Fallback;
             // </Trauma>
             return;
@@ -418,7 +418,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         {
             // <Trauma>
             var evCheck = new CheckWorldInstantActionEvent(user, provider);
-            RaiseLocalEvent(ent, evCheck);
+            RaiseLocalEvent(ent, ref evCheck);
             // </Trauma>
             return;
         }
@@ -430,7 +430,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
             !ValidateEntityTarget(user, targetEntity.Value, (ent, entTarget))))
         {
             var evCheck = new CheckWorldInstantActionEvent(user, provider);
-            RaiseLocalEvent(ent, evCheck);
+            RaiseLocalEvent(ent, ref evCheck);
             args.Invalid |= !evCheck.Fallback; // Goob edit
             return;
         }

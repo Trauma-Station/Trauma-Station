@@ -20,13 +20,6 @@ public sealed class EntryPoint : GameClient
         ContentTraumaClientIoC.Register(Dependencies);
     }
 
-    public override void Init()
-    {
-        base.Init();
-
-        IoCManager.Register<IUserActionPanelManager, UserActionPanelManager>();
-    }
-
     public override void PostInit()
     {
         _overlay.AddOverlay(new SpriteToLayerBullshitOverlay());
