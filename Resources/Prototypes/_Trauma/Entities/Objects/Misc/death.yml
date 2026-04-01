@@ -2,7 +2,7 @@
   parent: BaseItem
   id: PlushieGore
   name: plushie gore
-  description: Harden you heart...
+  description: Harden your heart...
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Misc/gore.rsi
@@ -21,4 +21,4 @@
           Quantity: 5
   - type: Tag
     tags:
-      - ClothMade
+    - ClothMade

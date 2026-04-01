@@ -128,7 +128,7 @@
 - type: material
   id: Gunpowder
   stackEntity: MaterialGunpowder # Trauma
-  name: materials-gunpowder
+  name: materials-bone
   unit: materials-unit-piece
   icon: { sprite: Objects/Misc/reagent_fillings.rsi, state: powderpile }
   color: "#A9A9A9"

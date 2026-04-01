@@ -1,804 +1,804 @@
-  - type: entity
-    id: NonweaponDurability # Todo, add duct tape
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        25: Worn
-        50: Damaged
-        75: Broken
-        100: Destroyed
-      damageProbability: .75
-      damagePopups:
-        Worn:
-        - durability-metal-0
-        - durability-metal-1
-        Damaged:
-        - durability-metal-2
-        - durability-metal-3
-        - durability-metal-4
-        Broken:
-        - durability-metal-5
-        - durability-metal-6
-        - durability-metal-7
-        Destroyed:
-        - durability-metal-9
-        - durability-wood-9
-      minDamageRoll: 12.5
-      maxDamageRoll: 25
-      maxRepairBonus: 0
-      repairable: false
+- type: entity
+  id: NonweaponDurability # Todo, add duct tape
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      25: Worn
+      50: Damaged
+      75: Broken
+      100: Destroyed
+    damageProbability: .75
+    damagePopups:
+      Worn:
+      - durability-metal-0
+      - durability-metal-1
+      Damaged:
+      - durability-metal-2
+      - durability-metal-3
+      - durability-metal-4
+      Broken:
+      - durability-metal-5
+      - durability-metal-6
+      - durability-metal-7
+      Destroyed:
+      - durability-metal-9
+      - durability-wood-9
+    minDamageRoll: 12.5
+    maxDamageRoll: 25
+    maxRepairBonus: 0
+    repairable: false
 
-  - type: entity
-    id: GlassDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        25: Worn
-        50: Damaged
-        75: Broken
-        100: Destroyed
-      damageProbability: .5
-      damagePopups:
-        Worn:
-        - durability-glass-2
-        - durability-glass-3
-        Damaged:
-        - durability-glass-2
-        - durability-glass-3
-        Broken:
-        - durability-glass-2
-        - durability-glass-3
-        Destroyed:
-        - durability-glass-4
-      minDamageRoll: 10
-      maxDamageRoll: 15
-      maxRepairBonus: 0
-      repairable: false
+- type: entity
+  id: GlassDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      25: Worn
+      50: Damaged
+      75: Broken
+      100: Destroyed
+    damageProbability: .5
+    damagePopups:
+      Worn:
+      - durability-glass-2
+      - durability-glass-3
+      Damaged:
+      - durability-glass-2
+      - durability-glass-3
+      Broken:
+      - durability-glass-2
+      - durability-glass-3
+      Destroyed:
+      - durability-glass-4
+    minDamageRoll: 10
+    maxDamageRoll: 15
+    maxRepairBonus: 0
+    repairable: false
 
-  - type: entity
-    id: UnbeakableDurability
-    abstract: true
-    components:
-    - type: Durability
-      damageProbability: 0
-      repairable: false
+- type: entity
+  id: UnbeakableDurability
+  abstract: true
+  components:
+  - type: Durability
+    damageProbability: 0
+    repairable: false
 
-  - type: entity
-    id: MetalToolDurabilityWeak
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        20: Worn
-        40: Damaged
-        60: Broken
-        100: Destroyed
-      damageProbability: .75
-      damagePopups:
-        Worn:
-        - durability-metal-0
-        - durability-metal-1
-        Damaged:
-        - durability-metal-2
-        - durability-metal-3
-        - durability-metal-4
-        Broken:
-        - durability-metal-5
-        - durability-metal-6
-        - durability-metal-7
-        Destroyed:
-        - durability-metal-9
-        - durability-wood-9
-      minDamageRoll: 5
-      maxDamageRoll: 10
-      maxRepairBonus: 0
-      repairable: true
-      repairTool: Welding
-      toolRepairAmount: 10, 3
-      fuelCost: 5
-      repairDoAfter: 3
-      onBreakBehavior: !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-          params:
-            volume: -6
+- type: entity
+  id: MetalToolDurabilityWeak
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      20: Worn
+      40: Damaged
+      60: Broken
+      100: Destroyed
+    damageProbability: .75
+    damagePopups:
+      Worn:
+      - durability-metal-0
+      - durability-metal-1
+      Damaged:
+      - durability-metal-2
+      - durability-metal-3
+      - durability-metal-4
+      Broken:
+      - durability-metal-5
+      - durability-metal-6
+      - durability-metal-7
+      Destroyed:
+      - durability-metal-9
+      - durability-wood-9
+    minDamageRoll: 5
+    maxDamageRoll: 10
+    maxRepairBonus: 0
+    repairable: true
+    repairTool: Welding
+    toolRepairAmount: 10, 3
+    fuelCost: 5
+    repairDoAfter: 3
+    onBreakBehavior: !type:PlaySoundBehavior
+      sound:
+        collection: MetalBreak
+        params:
+          volume: -6
 
-  - type: entity
-    id: MetalToolDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        75: Damaged
-        85: Broken
-        100: Destroyed
-      damageProbability: .50
-      damagePopups:
-        Worn:
-        - durability-metal-0
-        - durability-metal-1
-        Damaged:
-        - durability-metal-2
-        - durability-metal-3
-        - durability-metal-4
-        Broken:
-        - durability-metal-5
-        - durability-metal-6
-        - durability-metal-7
-        Destroyed:
-        - durability-metal-8
-        - durability-metal-9
-        - durability-metal-10
-        - durability-wood-9
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      maxRepairBonus: 0
-      repairable: true
-      repairTool: Welding
-      toolRepairAmount: 10, 15
-      fuelCost: 5
-      repairDoAfter: 3
-      onBreakBehavior: !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-          params:
-            volume: -6
+- type: entity
+  id: MetalToolDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      75: Damaged
+      85: Broken
+      100: Destroyed
+    damageProbability: .50
+    damagePopups:
+      Worn:
+      - durability-metal-0
+      - durability-metal-1
+      Damaged:
+      - durability-metal-2
+      - durability-metal-3
+      - durability-metal-4
+      Broken:
+      - durability-metal-5
+      - durability-metal-6
+      - durability-metal-7
+      Destroyed:
+      - durability-metal-8
+      - durability-metal-9
+      - durability-metal-10
+      - durability-wood-9
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    maxRepairBonus: 0
+    repairable: true
+    repairTool: Welding
+    toolRepairAmount: 10, 15
+    fuelCost: 5
+    repairDoAfter: 3
+    onBreakBehavior: !type:PlaySoundBehavior
+      sound:
+        collection: MetalBreak
+        params:
+          volume: -6
 
-  - type: entity
-    id: MetalToolDurabilityStrong
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        67: Damaged
-        84: Broken
-        100: Destroyed
-      damageProbability: .25
-      damagePopups:
-        Worn:
-        - durability-metal-0
-        - durability-metal-1
-        Damaged:
-        - durability-metal-2
-        - durability-metal-3
-        - durability-metal-4
-        Broken:
-        - durability-metal-5
-        - durability-metal-6
-        - durability-metal-7
-        Destroyed:
-        - durability-metal-8
-        - durability-metal-9
-        - durability-metal-10
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      maxRepairBonus: 0
-      repairable: true
-      repairTool: Welding
-      toolRepairAmount: 10, 15
-      fuelCost: 5
-      repairDoAfter: 3
-      onBreakBehavior: !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-          params:
-            volume: -6
+- type: entity
+  id: MetalToolDurabilityStrong
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      67: Damaged
+      84: Broken
+      100: Destroyed
+    damageProbability: .25
+    damagePopups:
+      Worn:
+      - durability-metal-0
+      - durability-metal-1
+      Damaged:
+      - durability-metal-2
+      - durability-metal-3
+      - durability-metal-4
+      Broken:
+      - durability-metal-5
+      - durability-metal-6
+      - durability-metal-7
+      Destroyed:
+      - durability-metal-8
+      - durability-metal-9
+      - durability-metal-10
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    maxRepairBonus: 0
+    repairable: true
+    repairTool: Welding
+    toolRepairAmount: 10, 15
+    fuelCost: 5
+    repairDoAfter: 3
+    onBreakBehavior: !type:PlaySoundBehavior
+      sound:
+        collection: MetalBreak
+        params:
+          volume: -6
 
-  - type: entity
-    id: KnuckleWeaponsDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        67: Damaged
-        84: Broken
-        100: Destroyed
-      damageProbability: .25
-      damagePopups:
-        Worn:
-        - durability-metal-0
-        - durability-metal-1
-        Damaged:
-        - durability-metal-2
-        - durability-metal-3
-        - durability-metal-4
-        Broken:
-        - durability-metal-5
-        - durability-metal-6
-        - durability-metal-7
-        Destroyed:
-        - durability-metal-8
-        - durability-metal-9
-        - durability-metal-10
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      maxRepairBonus: 0
-      repairable: false
-      onBreakBehavior: !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-          params:
-            volume: -6
+- type: entity
+  id: KnuckleWeaponsDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      67: Damaged
+      84: Broken
+      100: Destroyed
+    damageProbability: .25
+    damagePopups:
+      Worn:
+      - durability-metal-0
+      - durability-metal-1
+      Damaged:
+      - durability-metal-2
+      - durability-metal-3
+      - durability-metal-4
+      Broken:
+      - durability-metal-5
+      - durability-metal-6
+      - durability-metal-7
+      Destroyed:
+      - durability-metal-8
+      - durability-metal-9
+      - durability-metal-10
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    maxRepairBonus: 0
+    repairable: false
+    onBreakBehavior: !type:PlaySoundBehavior
+      sound:
+        collection: MetalBreak
+        params:
+          volume: -6
 
-  - type: entity
-    parent: MetalToolDurabilityStrong
-    id: MetalToolDurabilityToolbox
-    abstract: true
-    components:
-    - type: Durability
-      deleteOnDestroyed: false
+- type: entity
+  parent: MetalToolDurabilityStrong
+  id: MetalToolDurabilityToolbox
+  abstract: true
+  components:
+  - type: Durability
+    deleteOnDestroyed: false
 
-  - type: entity
-    id: KnifeDurabilityWeak
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        75: Damaged
-        85: Broken
-        100: Destroyed
-      damageProbability: .75
-      damagePopups:
-        Worn:
-        - durability-blade-0
-        - durability-blade-1
-        Damaged:
-        - durability-blade-2
-        - durability-blade-3
-        - durability-blade-4
-        Broken:
-        - durability-blade-5
-        - durability-blade-6
-        - durability-blade-7
-        Destroyed:
-        - durability-blade-8
-        - durability-blade-9
-        - durability-blade-10
-      minDamageRoll: 5
-      maxDamageRoll: 10
-      maxRepairBonus: 10
-      repairable: true
-      repairMaterials:
-        Whetstone: 15, 25
-      repairDoAfter: 3
-      onBreakBehavior: !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-          params:
-            volume: -6
+- type: entity
+  id: KnifeDurabilityWeak
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      75: Damaged
+      85: Broken
+      100: Destroyed
+    damageProbability: .75
+    damagePopups:
+      Worn:
+      - durability-blade-0
+      - durability-blade-1
+      Damaged:
+      - durability-blade-2
+      - durability-blade-3
+      - durability-blade-4
+      Broken:
+      - durability-blade-5
+      - durability-blade-6
+      - durability-blade-7
+      Destroyed:
+      - durability-blade-8
+      - durability-blade-9
+      - durability-blade-10
+    minDamageRoll: 5
+    maxDamageRoll: 10
+    maxRepairBonus: 10
+    repairable: true
+    repairMaterials:
+      Whetstone: 15, 25
+    repairDoAfter: 3
+    onBreakBehavior: !type:PlaySoundBehavior
+      sound:
+        collection: MetalBreak
+        params:
+          volume: -6
 
-  - type: entity
-    id: KnifeDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        75: Damaged
-        85: Broken
-        100: Destroyed
-      damageProbability: .50
-      damagePopups:
-        Worn:
-        - durability-blade-0
-        - durability-blade-1
-        Damaged:
-        - durability-blade-2
-        - durability-blade-3
-        - durability-blade-4
-        Broken:
-        - durability-blade-5
-        - durability-blade-6
-        - durability-blade-7
-        Destroyed:
-        - durability-blade-8
-        - durability-blade-9
-        - durability-blade-10
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      maxRepairBonus: 10
-      repairable: true
-      repairMaterials:
-        Whetstone: 15, 25
-      repairDoAfter: 3
-      onBreakBehavior: !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-          params:
-            volume: -6
+- type: entity
+  id: KnifeDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      75: Damaged
+      85: Broken
+      100: Destroyed
+    damageProbability: .50
+    damagePopups:
+      Worn:
+      - durability-blade-0
+      - durability-blade-1
+      Damaged:
+      - durability-blade-2
+      - durability-blade-3
+      - durability-blade-4
+      Broken:
+      - durability-blade-5
+      - durability-blade-6
+      - durability-blade-7
+      Destroyed:
+      - durability-blade-8
+      - durability-blade-9
+      - durability-blade-10
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    maxRepairBonus: 10
+    repairable: true
+    repairMaterials:
+      Whetstone: 15, 25
+    repairDoAfter: 3
+    onBreakBehavior: !type:PlaySoundBehavior
+      sound:
+        collection: MetalBreak
+        params:
+          volume: -6
 
-  - type: entity
-    id: KnifeDurabilityStrong
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        75: Damaged
-        85: Broken
-        100: Destroyed
-      damageProbability: .25
-      damagePopups:
-        Worn:
-        - durability-blade-0
-        - durability-blade-1
-        Damaged:
-        - durability-blade-2
-        - durability-blade-3
-        - durability-blade-4
-        Broken:
-        - durability-blade-5
-        - durability-blade-6
-        - durability-blade-7
-        Destroyed:
-        - durability-blade-8
-        - durability-blade-9
-        - durability-blade-10
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      maxRepairBonus: 10
-      repairable: true
-      repairMaterials:
-        Whetstone: 15, 25
-      repairDoAfter: 3
-      onBreakBehavior: !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-          params:
-            volume: -6
+- type: entity
+  id: KnifeDurabilityStrong
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      75: Damaged
+      85: Broken
+      100: Destroyed
+    damageProbability: .25
+    damagePopups:
+      Worn:
+      - durability-blade-0
+      - durability-blade-1
+      Damaged:
+      - durability-blade-2
+      - durability-blade-3
+      - durability-blade-4
+      Broken:
+      - durability-blade-5
+      - durability-blade-6
+      - durability-blade-7
+      Destroyed:
+      - durability-blade-8
+      - durability-blade-9
+      - durability-blade-10
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    maxRepairBonus: 10
+    repairable: true
+    repairMaterials:
+      Whetstone: 15, 25
+    repairDoAfter: 3
+    onBreakBehavior: !type:PlaySoundBehavior
+      sound:
+        collection: MetalBreak
+        params:
+          volume: -6
 
-  - type: entity
-    id: KnifeDurabilitySharpenOnly
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-      damageProbability: .25
-      damagePopups:
-        Worn:
-        - durability-blade-0
-        - durability-blade-1
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      maxRepairBonus: 30
-      repairable: true
-      repairMaterials:
-        Whetstone: 15, 25
-      repairDoAfter: 3
+- type: entity
+  id: KnifeDurabilitySharpenOnly
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+    damageProbability: .25
+    damagePopups:
+      Worn:
+      - durability-blade-0
+      - durability-blade-1
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    maxRepairBonus: 30
+    repairable: true
+    repairMaterials:
+      Whetstone: 15, 25
+    repairDoAfter: 3
 
-  - type: entity
-    id: KnifeDurabilitySharpenOnlyWizard
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-      damageProbability: .25
-      damagePopups:
-        Worn:
-        - durability-blade-0
-        - durability-blade-1
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      maxRepairBonus: 30
-      repairable: true
-      repairMaterials:
-        Whetstone: 15, 25
-      repairDoAfter: 3
+- type: entity
+  id: KnifeDurabilitySharpenOnlyWizard
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+    damageProbability: .25
+    damagePopups:
+      Worn:
+      - durability-blade-0
+      - durability-blade-1
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    maxRepairBonus: 30
+    repairable: true
+    repairMaterials:
+      Whetstone: 15, 25
+    repairDoAfter: 3
 
-  - type: entity
-    id: BracingDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        65: Damaged
-        80: Broken
-        100: Destroyed
-      damageProbability: .25
-      damagePopups:
-        Worn:
-        - durability-metal-0
-        - durability-metal-1
-        Damaged:
-        - durability-metal-2
-        - durability-metal-3
-        - durability-metal-4
-        - durability-handle-2
-        - durability-handle-3
-        - durability-handle-4
-        Broken:
-        - durability-metal-5
-        - durability-metal-6
-        - durability-metal-7
-        - durability-handle-5
-        - durability-handle-6
-        Destroyed:
-        - durability-metal-8
-        - durability-metal-9
-        - durability-metal-10
-        - durability-handle-7
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          SheetPlastic1:
-            min: 1
-            max: 2
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      repairDoAfter: 3
-      repairMaterials:
-        Bracing: 15, 25
-      maxRepairBonus: 0
+- type: entity
+  id: BracingDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .25
+    damagePopups:
+      Worn:
+      - durability-metal-0
+      - durability-metal-1
+      Damaged:
+      - durability-metal-2
+      - durability-metal-3
+      - durability-metal-4
+      - durability-handle-2
+      - durability-handle-3
+      - durability-handle-4
+      Broken:
+      - durability-metal-5
+      - durability-metal-6
+      - durability-metal-7
+      - durability-handle-5
+      - durability-handle-6
+      Destroyed:
+      - durability-metal-8
+      - durability-metal-9
+      - durability-metal-10
+      - durability-handle-7
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        SheetPlastic1:
+          min: 1
+          max: 2
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    repairDoAfter: 3
+    repairMaterials:
+      Bracing: 15, 25
+    maxRepairBonus: 0
 
-  - type: entity
-    id: BracingDurabilityWeak
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        65: Damaged
-        80: Broken
-        100: Destroyed
-      damageProbability: .75
-      damagePopups:
-        Worn:
-        - durability-metal-0
-        - durability-metal-1
-        Damaged:
-        - durability-metal-2
-        - durability-metal-3
-        - durability-metal-4
-        - durability-handle-2
-        - durability-handle-3
-        - durability-handle-4
-        Broken:
-        - durability-metal-5
-        - durability-metal-6
-        - durability-metal-7
-        - durability-handle-5
-        - durability-handle-6
-        Destroyed:
-        - durability-metal-8
-        - durability-metal-9
-        - durability-metal-10
-        - durability-handle-7
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          SheetPlastic1:
-            min: 1
-            max: 2
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      repairDoAfter: 3
-      repairMaterials:
-        Bracing: 15, 25
-      maxRepairBonus: 0
+- type: entity
+  id: BracingDurabilityWeak
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .75
+    damagePopups:
+      Worn:
+      - durability-metal-0
+      - durability-metal-1
+      Damaged:
+      - durability-metal-2
+      - durability-metal-3
+      - durability-metal-4
+      - durability-handle-2
+      - durability-handle-3
+      - durability-handle-4
+      Broken:
+      - durability-metal-5
+      - durability-metal-6
+      - durability-metal-7
+      - durability-handle-5
+      - durability-handle-6
+      Destroyed:
+      - durability-metal-8
+      - durability-metal-9
+      - durability-metal-10
+      - durability-handle-7
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        SheetPlastic1:
+          min: 1
+          max: 2
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    repairDoAfter: 3
+    repairMaterials:
+      Bracing: 15, 25
+    maxRepairBonus: 0
 
-  - type: entity
-    id: ForgeToolDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        65: Damaged
-        80: Broken
-        100: Destroyed
-      damageProbability: .1
-      damagePopups:
-        Worn:
-        - durability-metal-0
-        - durability-metal-1
-        Damaged:
-        - durability-metal-2
-        - durability-metal-3
-        - durability-metal-4
-        - durability-handle-2
-        - durability-handle-3
-        - durability-handle-4
-        Broken:
-        - durability-metal-5
-        - durability-metal-6
-        - durability-metal-7
-        - durability-handle-5
-        - durability-handle-6
-        Destroyed:
-        - durability-metal-8
-        - durability-metal-9
-        - durability-metal-10
-        - durability-handle-7
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          SheetSteel1:
-            min: 1
-            max: 2
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      repairDoAfter: 3
-      repairMaterials:
-        Bracing: 15, 25
-      maxRepairBonus: 0
+- type: entity
+  id: ForgeToolDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .1
+    damagePopups:
+      Worn:
+      - durability-metal-0
+      - durability-metal-1
+      Damaged:
+      - durability-metal-2
+      - durability-metal-3
+      - durability-metal-4
+      - durability-handle-2
+      - durability-handle-3
+      - durability-handle-4
+      Broken:
+      - durability-metal-5
+      - durability-metal-6
+      - durability-metal-7
+      - durability-handle-5
+      - durability-handle-6
+      Destroyed:
+      - durability-metal-8
+      - durability-metal-9
+      - durability-metal-10
+      - durability-handle-7
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        SheetSteel1:
+          min: 1
+          max: 2
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    repairDoAfter: 3
+    repairMaterials:
+      Bracing: 15, 25
+    maxRepairBonus: 0
 
-  - type: entity
-    id: WoodDurabilityWeak
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        65: Damaged
-        80: Broken
-        100: Destroyed
-      damageProbability: .75
-      damagePopups:
-        Worn:
-        - durability-wood-0
-        - durability-wood-1
-        Damaged:
-        - durability-wood-2
-        - durability-wood-3
-        - durability-wood-4
-        - durability-handle-2
-        - durability-handle-3
-        - durability-handle-4
-        Broken:
-        - durability-wood-5
-        - durability-wood-6
-        - durability-wood-7
-        - durability-handle-5
-        - durability-handle-6
-        Destroyed:
-        - durability-wood-8
-        - durability-wood-9
-        - durability-wood-10
-        - durability-handle-7
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank1:
-            min: 2
-            max: 3
-      minDamageRoll: 5
-      maxDamageRoll: 10
-      repairDoAfter: 3
-      repairMaterials:
-        Bracing: 15, 25
-      maxRepairBonus: 0
+- type: entity
+  id: WoodDurabilityWeak
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .75
+    damagePopups:
+      Worn:
+      - durability-wood-0
+      - durability-wood-1
+      Damaged:
+      - durability-wood-2
+      - durability-wood-3
+      - durability-wood-4
+      - durability-handle-2
+      - durability-handle-3
+      - durability-handle-4
+      Broken:
+      - durability-wood-5
+      - durability-wood-6
+      - durability-wood-7
+      - durability-handle-5
+      - durability-handle-6
+      Destroyed:
+      - durability-wood-8
+      - durability-wood-9
+      - durability-wood-10
+      - durability-handle-7
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        MaterialWoodPlank1:
+          min: 2
+          max: 3
+    minDamageRoll: 5
+    maxDamageRoll: 10
+    repairDoAfter: 3
+    repairMaterials:
+      Bracing: 15, 25
+    maxRepairBonus: 0
 
-  - type: entity
-    id: WoodDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        65: Damaged
-        80: Broken
-        100: Destroyed
-      damageProbability: .5
-      damagePopups:
-        Worn:
-        - durability-wood-0
-        - durability-wood-1
-        Damaged:
-        - durability-wood-2
-        - durability-wood-3
-        - durability-wood-4
-        - durability-handle-2
-        - durability-handle-3
-        - durability-handle-4
-        Broken:
-        - durability-wood-5
-        - durability-wood-6
-        - durability-wood-7
-        - durability-handle-5
-        - durability-handle-6
-        Destroyed:
-        - durability-wood-8
-        - durability-wood-9
-        - durability-wood-10
-        - durability-handle-7
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank1:
-            min: 2
-            max: 3
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      repairDoAfter: 3
-      repairMaterials:
-        Bracing: 15, 25
-      maxRepairBonus: 0
+- type: entity
+  id: WoodDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .5
+    damagePopups:
+      Worn:
+      - durability-wood-0
+      - durability-wood-1
+      Damaged:
+      - durability-wood-2
+      - durability-wood-3
+      - durability-wood-4
+      - durability-handle-2
+      - durability-handle-3
+      - durability-handle-4
+      Broken:
+      - durability-wood-5
+      - durability-wood-6
+      - durability-wood-7
+      - durability-handle-5
+      - durability-handle-6
+      Destroyed:
+      - durability-wood-8
+      - durability-wood-9
+      - durability-wood-10
+      - durability-handle-7
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        MaterialWoodPlank1:
+          min: 2
+          max: 3
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    repairDoAfter: 3
+    repairMaterials:
+      Bracing: 15, 25
+    maxRepairBonus: 0
 
-  - type: entity
-    id: SpearDurabilityStrong
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        65: Damaged
-        80: Broken
-        100: Destroyed
-      damageProbability: .50
-      damagePopups:
-        Worn:
-        - durability-blade-1
-        - durability-blade-2
-        Damaged:
-        - durability-shaft-2
-        - durability-shaft-3
-        - durability-shaft-4
-        - durability-blade-4
-        Broken:
-        - durability-shaft-5
-        - durability-shaft-6
-        Destroyed:
-        - durability-shaft-7
-        - durability-shaft-8
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          HandleLarge:
-            min: 1
-            max: 1
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      repairDoAfter: 3
-      repairMaterials:
-        Bracing: 15, 25
-        Whetstone: 15, 25
-      maxRepairBonus: 0
+- type: entity
+  id: SpearDurabilityStrong
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .50
+    damagePopups:
+      Worn:
+      - durability-blade-1
+      - durability-blade-2
+      Damaged:
+      - durability-shaft-2
+      - durability-shaft-3
+      - durability-shaft-4
+      - durability-blade-4
+      Broken:
+      - durability-shaft-5
+      - durability-shaft-6
+      Destroyed:
+      - durability-shaft-7
+      - durability-shaft-8
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        HandleLarge:
+          min: 1
+          max: 1
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    repairDoAfter: 3
+    repairMaterials:
+      Bracing: 15, 25
+      Whetstone: 15, 25
+    maxRepairBonus: 0
 
-  - type: entity
-    id: SpearDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        65: Damaged
-        80: Broken
-        100: Destroyed
-      damageProbability: .50
-      damagePopups:
-        Worn:
-        - durability-blade-1
-        - durability-blade-2
-        Damaged:
-        - durability-shaft-2
-        - durability-shaft-3
-        - durability-shaft-4
-        - durability-blade-4
-        Broken:
-        - durability-shaft-5
-        - durability-shaft-6
-        Destroyed:
-        - durability-shaft-7
-        - durability-shaft-8
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          HandleLarge:
-            min: 1
-            max: 1
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      repairDoAfter: 3
-      repairMaterials:
-        Bracing: 15, 25
-        Whetstone: 15, 25
-      maxRepairBonus: 0
+- type: entity
+  id: SpearDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .50
+    damagePopups:
+      Worn:
+      - durability-blade-1
+      - durability-blade-2
+      Damaged:
+      - durability-shaft-2
+      - durability-shaft-3
+      - durability-shaft-4
+      - durability-blade-4
+      Broken:
+      - durability-shaft-5
+      - durability-shaft-6
+      Destroyed:
+      - durability-shaft-7
+      - durability-shaft-8
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        HandleLarge:
+          min: 1
+          max: 1
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    repairDoAfter: 3
+    repairMaterials:
+      Bracing: 15, 25
+      Whetstone: 15, 25
+    maxRepairBonus: 0
 
-  - type: entity
-    id: SpearDurabilityWeak
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        50: Worn
-        65: Damaged
-        80: Broken
-        100: Destroyed
-      damageProbability: .75
-      damagePopups:
-        Worn:
-        - durability-blade-1
-        - durability-blade-2
-        Damaged:
-        - durability-shaft-2
-        - durability-shaft-3
-        - durability-shaft-4
-        - durability-blade-4
-        Broken:
-        - durability-shaft-5
-        - durability-shaft-6
-        Destroyed:
-        - durability-shaft-7
-        - durability-shaft-8
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          SheetPlastic1:
-            min: 1
-            max: 2
-      minDamageRoll: 2.5
-      maxDamageRoll: 5
-      repairDoAfter: 3
-      repairMaterials:
-        Bracing: 15, 25
-        Whetstone: 15, 25
-      maxRepairBonus: 0
+- type: entity
+  id: SpearDurabilityWeak
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .75
+    damagePopups:
+      Worn:
+      - durability-blade-1
+      - durability-blade-2
+      Damaged:
+      - durability-shaft-2
+      - durability-shaft-3
+      - durability-shaft-4
+      - durability-blade-4
+      Broken:
+      - durability-shaft-5
+      - durability-shaft-6
+      Destroyed:
+      - durability-shaft-7
+      - durability-shaft-8
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        SheetPlastic1:
+          min: 1
+          max: 2
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    repairDoAfter: 3
+    repairMaterials:
+      Bracing: 15, 25
+      Whetstone: 15, 25
+    maxRepairBonus: 0
 
 # Unique
 
-  - type: entity
-    id: PlushieDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        100: Destroyed
-      damageProbability: .05
-      damagePopups:
-        Destroyed:
-        - durability-plush-9
-        - durability-plush-10
-        - durability-plush-11
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          PlushieGore:
-            min: 1
-            max: 1
-      minDamageRoll: 999
-      maxDamageRoll: 999
-      maxRepairBonus: 0
-      repairable: false
+- type: entity
+  id: PlushieDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      100: Destroyed
+    damageProbability: .05
+    damagePopups:
+      Destroyed:
+      - durability-plush-9
+      - durability-plush-10
+      - durability-plush-11
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        PlushieGore:
+          min: 1
+          max: 1
+    minDamageRoll: 999
+    maxDamageRoll: 999
+    maxRepairBonus: 0
+    repairable: false
 
-  - type: entity
-    id: BookDurability
-    abstract: true
-    components:
-    - type: Durability
-      durabilityThresholds:
-        0: Pristine
-        100: Destroyed
-      damageProbability: .25
-      damagePopups:
-        Destroyed:
-        - durability-book-9
-        - durability-book-10
-        - durability-book-11
-      onBreakBehavior: !type:SpawnEntitiesBehavior
-        spawn:
-          SheetPaper1:
-            min: 3
-            max: 5
-      minDamageRoll: 999
-      maxDamageRoll: 999
-      maxRepairBonus: 0
-      repairable: false
+- type: entity
+  id: BookDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      100: Destroyed
+    damageProbability: .25
+    damagePopups:
+      Destroyed:
+      - durability-book-9
+      - durability-book-10
+      - durability-book-11
+    onBreakBehavior: !type:SpawnEntitiesBehavior
+      spawn:
+        SheetPaper1:
+          min: 3
+          max: 5
+    minDamageRoll: 999
+    maxDamageRoll: 999
+    maxRepairBonus: 0
+    repairable: false

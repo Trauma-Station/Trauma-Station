@@ -12,7 +12,7 @@
 - type: entity
   parent: [ClothingBeltStorageBase, BaseSyndicateContraband]
   id: ClothingBeltKnifeRig
-  name: thowing knife rig
+  name: throwing knife rig
   description: A specialised bandolier meant to hold throwing knives.
   components:
   - type: Sprite

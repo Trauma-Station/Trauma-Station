@@ -1,15 +1,15 @@
 - type: entity
-  id: GunpowderBottle
   parent: BaseStorageItem
+  id: GunpowderBottle
   name: gunpowder bottle
-  description: Holds gunpowder, a crucial component in making bullets.
   suffix: empty
+  description: Holds gunpowder, a crucial component in making bullets.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Storage/gunpowderbottle.rsi
     layers:
-      - map: [ base ]
-        state: closed
+    - map: [ base ]
+      state: closed
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -34,20 +34,18 @@
       - GunpowderBottle
 
 - type: entity
-  id: GunpowderBottlePartFull
   parent: GunpowderBottle
-  suffix: part_full
-  categories: [HideSpawnMenu]
+  id: GunpowderBottlePartFull
+  suffix: quarter full
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase:
         id: MaterialGunpowder30
-        amount: 1
 
 - type: entity
-  id: GunpowderBottleFull
   parent: GunpowderBottle
+  id: GunpowderBottleFull
   suffix: full
   components:
   - type: EntityTableContainerFill

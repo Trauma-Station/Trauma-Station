@@ -235,7 +235,7 @@
   - UplinkWeaponry
   conditions:
   - !type:StoreWhitelistCondition
-    whitelist: # Trauma
+    whitelist: # Trauma - was blacklist
       tags:
       - NukeOpsUplink
 

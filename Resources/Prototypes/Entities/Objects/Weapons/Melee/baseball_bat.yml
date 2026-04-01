@@ -99,6 +99,7 @@
   - type: Tag
     tags:
     - BaseballBat
+    - Trash # Truama
   - type: UndetectableContraband #Goobstation-Contraband detector
 
 - type: entity

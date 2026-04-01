@@ -6,10 +6,9 @@
   components:
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponLaserSidearm
-          amount: 3
+      entity_storage:
+        id: WeaponLaserSidearm
+        amount: 3
 
 - type: entity
   parent: CrateSecgear
@@ -19,7 +18,5 @@
   components:
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: GunpowderCase
-          amount: 1
+      entity_storage:
+        id: GunpowderCase
