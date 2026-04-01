@@ -159,7 +159,7 @@ namespace Content.Server.Disposal.Unit
                             _physicsSystem.SetCanCollide(entity, true, body: physBody);
                         var speed = 10f;
                         if (TryComp<DisposalTubeComponent>(holder.CurrentTube, out var tube))
-                            speed = tube.ExtraSpeed;
+                            speed = tube.Speed;
                         // </Trauma>
                         _throwing.TryThrow(entity, directionAngle.ToWorldVec() * 3f, speed,
                             predicted: false); // Trauma - predicted and speed

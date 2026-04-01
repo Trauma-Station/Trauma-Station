@@ -11,6 +11,7 @@ public sealed class TraumaServerDisposalsSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<AddExtraTubeSpeedComponent, AfterInteractEvent>(OnInteract);
@@ -23,14 +24,14 @@ public sealed class TraumaServerDisposalsSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (args.Handled || args.Args.Target is not {} target)
+        if (args.Handled || args.Target is not {} target)
             return;
 
-        if (!TryComp<DisposalTubeComponent>(args.Target, out var tube))
+        if (!TryComp<DisposalTubeComponent>(target, out var tube))
             return;
 
         args.Handled = true;
-        tube.ExtraSpeed += ent.Comp.Amount;
+        tube.Speed += ent.Comp.Amount;
 
         PredictedQueueDel(ent);
     }
@@ -40,7 +41,7 @@ public sealed class TraumaServerDisposalsSystem : EntitySystem
         if (args.Handled || !args.CanReach || args.Target is not {} target)
             return;
 
-        if (!TryComp<DisposalTubeComponent>(args.Target, out _))
+        if (!TryComp<DisposalTubeComponent>(args.Target, out var tube) || tube.Speed >= tube.MaxUpgradeSpeed)
             return;
 
         ent.Comp.SoundStream = _audio.PlayPvs(ent.Comp.UpgradeSound, ent)?.Entity;

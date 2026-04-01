@@ -2,7 +2,7 @@
   parent: BaseItem
   id: UpgradeKitTubeSpeed
   name: tube speed upgrade kit
-  description: An upgrade kit with all the parts needed to upgrade disposals tube. This one allows the ejection speed of the tube to be increased.
+  description: An upgrade kit with all the parts needed to upgrade a disposal tube. This one allows the ejection speed of the tube to be increased.
   components:
   - type: Sprite
     sprite: _DV/Objects/Tools/lathe_upgrade_kit.rsi

@@ -3,8 +3,14 @@ namespace Content.Server.Disposal.Tube;
 public sealed partial class DisposalTubeComponent
 {
     /// <summary>
-    /// Any Extra speed the item should get when exiting a tube
+    /// How fast the item exiting the disposal tube should get thrown at
     /// </summary>
     [DataField]
-    public float ExtraSpeed = 10f;
+    public float Speed = 10f;
+
+    /// <summary>
+    /// The limit on what upgrade kits can increase the speed to.
+    /// </summary>
+    [DataField]
+    public float MaxUpgradeSpeed = 50f;
 }
