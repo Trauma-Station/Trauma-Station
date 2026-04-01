@@ -129,6 +129,20 @@
     sprite: _Trauma/Objects/Patreon/gribley.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/gribley.rsi
+  - type: GhostRole
+    prob: 1
+    makeSentient: true
+    name: ghost-role-information-disgustingbackpack-name
+    description: ghost-role-information-disgustingbackpack-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleAnimal
+  - type: GhostTakeoverAvailable
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -313,6 +327,15 @@
     attackMemoryLength: 5
   - type: GroupRetaliation
     range: 5
+  - type: GhostRole
+    prob: 1
+    makeSentient: true
+    name: ghost-role-information-dwingle-name
+    description: ghost-role-information-dwingle-description
+    rules: ghost-role-information-animal-rules
+    mindRoles:
+    - MindRoleGhostRoleAnimal
+  - type: GhostTakeoverAvailable
 
 - type: entity
   parent: RehydratableAnimalCube

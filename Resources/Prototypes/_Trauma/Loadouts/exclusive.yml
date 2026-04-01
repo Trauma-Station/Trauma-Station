@@ -43,7 +43,7 @@
     guid: 416c163c-c65f-438d-87b1-fcbe7dfc571f
 
 - type: loadoutEffectGroup
-  id: Tenshi
+  id: ToasterStrudels
   effects:
   - !type:PlayerGUIDLoadoutEffect
     guid: 553a2f9c-4584-4396-963a-017efdf812f5
@@ -108,6 +108,12 @@
   effects:
   - !type:PlayerGUIDLoadoutEffect
     guid: 22787576-964c-4b72-97ef-5cff0cde7bb6
+
+- type: loadoutEffectGroup
+  id: Wraith_man
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 179d5e03-6b1a-4f92-bb31-2f4fe4fd631d
 
 #Items (ADD TO ExclusiveItems OR IT WONT EXIST)
 - type: loadout
@@ -256,3 +262,11 @@
     back:
     - PatreonWraith
 
+- type: loadout
+  id: PatreonToasterStrudels
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ToasterStrudels
+  storage:
+    back:
+    - PatreonToasterStrudels
