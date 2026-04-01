@@ -32,6 +32,8 @@
   id: LockerFillCaptainNoLaser
   table: !type:AllSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: LockerFillCaptainTrauma
     - id: CaptainIDCard
     - id: CigarGoldCase
       prob: 0.25
@@ -155,6 +157,8 @@
   id: LockerFillChiefEngineerNoHardsuit
   table: !type:AllSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: LockerFillChiefEngineerTrauma
     - id: AccessConfigurator
     - id: BoxEncryptionKeyEngineering
     - id: CigarCase

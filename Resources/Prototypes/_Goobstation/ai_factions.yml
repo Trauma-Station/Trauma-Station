@@ -8,15 +8,20 @@
   - Heretic
   - Wizard
   - Blob
+  - Insurgent
 
 - type: npcFaction
   id: Balloon
   # Balloons can't attack
+  # <Trauma>
+  hostile:
+  - Insurgent
 
 - type: npcFaction
   id: Monkey
   hostile:
   - Balloon # Custom faction specifically for attacking bloons
+  - Insurgent
 
 - type: npcFaction
   id: Wraith
@@ -34,6 +39,7 @@
   - Heretic
   - Blob
   - PirateFaction
+  - Insurgent
   friendly:
   - Lavafauna
 
@@ -57,6 +63,7 @@
   - Shadowling
   - Wizard
   - PirateFaction
+  - Insurgent
   friendly:
   - Dragon
 
@@ -80,3 +87,4 @@
   - Lavafauna
   - AllHostile
   - Xenoborg
+  - Insurgent

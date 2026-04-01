@@ -14,4 +14,11 @@ public sealed partial class TriggerInsideBodyPartComponent : BaseTriggerOnXCompo
 {
     [DataField]
     public TimeSpan Delay;
+
+    /// <summary>
+    /// Optional popup shown when you enter the bodypart.
+    /// Gets passed "delay" as <see cref="Delay"/>'s TotalSeconds.
+    /// </summary>
+    [DataField]
+    public LocId? Popup;
 }

@@ -176,9 +176,14 @@
     delay: 1 # Visual, doesn't do shit
   - type: LeechOnMarker
     leech:
-      groups:
-        Brute: -20
-        Burn: -20
+      types:
+        Blunt: -20
+        Slash: -20
+        Piercing: -20
+        Heat: -20
+        Cold: -20
+        Shock: -20
+        Caustic: -20
   - type: Gun
     projectileSpeed: 15
     soundGunshot: /Audio/_DV/CosmicCult/projectile_razor.ogg

@@ -38,6 +38,8 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Augments/power.rsi
     state: cell
+  - type: ChildOrgan
+    parents: [ Torso ]
   - type: Organ
     category: AugmentPowerCell
   - type: OrganComponents
@@ -76,6 +78,8 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Augments/power.rsi
     state: cell
+  - type: ChildOrgan
+    parents: [ Torso ]
   - type: Organ
     category: AugmentCharger
   - type: AugmentCharger

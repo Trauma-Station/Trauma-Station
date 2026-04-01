@@ -92,6 +92,8 @@
   graph: MakeshiftJuicer
   startNode: start
   targetNode: juicer
+  category: construction-category-tools
+  objectType: Item
   # <Trauma>
   theory:
     FabricationKnowledge: 2

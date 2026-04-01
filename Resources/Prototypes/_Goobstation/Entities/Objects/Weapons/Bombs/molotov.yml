@@ -154,4 +154,5 @@
         hard: false
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu # Unintended in advanced
+    - TraumaFire

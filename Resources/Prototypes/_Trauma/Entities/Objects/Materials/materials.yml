@@ -6,3 +6,97 @@
   - type: Stack
     stackType: Gunpowder
     count: 30
+
+- type: entity
+  parent: OreBase
+  id: Charcoal
+  name: charcoal
+  suffix: Full
+  description: Created by burning wood with minimal oxygen, it burns much hotter than wood.
+  components:
+  - type: Stack
+    stackType: Charcoal
+  - type: Sprite
+    state: coal
+  - type: Material
+  - type: Extractable
+    grindableSolutionName: coal
+  - type: SolutionContainerManager
+    solutions:
+      coal:
+        reagents:
+        - ReagentId: Charcoal
+          Quantity: 10
+  - type: PhysicalComposition
+    materialComposition:
+      Charcoal: 100
+  - type: Item
+    heldPrefix: coal
+
+- type: entity
+  parent: Charcoal
+  id: Charcoal1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: Charcoal
+  id: Charcoal5
+  suffix: Five
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: Charcoal
+  id: Charcoal10
+  suffix: Ten
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: Charcoal
+  id: Charcoal15
+  suffix: Fifteen
+  components:
+  - type: Stack
+    count: 15
+
+- type: entity
+  parent: MaterialBase
+  id: Brick
+  name: brick
+  suffix: Full
+  description: An insulative brick, perfect for a bloomery.
+  components:
+  - type: Sprite
+    state: brick
+    layers:
+    - state: brick
+      map: ["base"]
+  - type: Appearance
+  - type: Stack
+    stackType: Brick
+    count: 30
+    baseLayer: base
+    layerStates:
+    - brick
+    - brick_2
+    - brick_3
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Brick: 100
+  - type: Item
+    heldPrefix: brick
+
+- type: entity
+  parent: Brick
+  id: Brick1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1

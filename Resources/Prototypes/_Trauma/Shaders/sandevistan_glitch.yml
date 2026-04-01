@@ -1,0 +1,6 @@
+- type: shader
+  id: SandevistanGlitch
+  kind: source
+  path: "/Textures/_Trauma/Shaders/sandevistan_glitch.swsl"
+  params:
+    intensity: 1.0

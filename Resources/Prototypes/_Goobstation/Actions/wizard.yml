@@ -296,8 +296,9 @@
     canTargetSelf: false
     event: !type:CorpseExplosionEvent
       damage:
-        groups:
-          Brute: 100
+        types:
+          Blunt: 80
+          Piercing: 20
   - type: SpeakOnAction
     sentence: action-speech-spell-corpse-explosion
   - type: Magic

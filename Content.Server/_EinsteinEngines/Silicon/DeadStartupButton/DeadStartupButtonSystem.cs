@@ -1,19 +1,15 @@
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Lightning;
 using Content.Server.Popups;
 using Content.Shared.PowerCell;
 using Content.Server._EinsteinEngines.Silicon.Charge;
-using Content.Server.Lightning.Components; // Goobstation - Fix IPC shock loops
-using Content.Shared.Power.EntitySystems; // Goobstation - Energycrit
+using Content.Server.Lightning.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared._EinsteinEngines.Silicon.DeadStartupButton;
 using Content.Shared.Audio;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -25,6 +21,7 @@ namespace Content.Server._EinsteinEngines.Silicon.DeadStartupButton;
 
 public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
@@ -32,16 +29,16 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly LightningSystem _lightning = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!; // Goobstation - Energycrit
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<DeadStartupButtonComponent, OnDoAfterButtonPressedEvent>(OnDoAfter);
         SubscribeLocalEvent<DeadStartupButtonComponent, ElectrocutedEvent>(OnElectrocuted);
         SubscribeLocalEvent<DeadStartupButtonComponent, MobStateChangedEvent>(OnMobStateChanged);
-
     }
 
     private void OnDoAfter(EntityUid uid, DeadStartupButtonComponent comp, OnDoAfterButtonPressedEvent args)
@@ -49,13 +46,13 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
         if (args.Handled || args.Cancelled
             || !TryComp<MobStateComponent>(uid, out var mobStateComponent)
             || !_mobState.IsDead(uid, mobStateComponent)
-            || !TryComp<MobThresholdsComponent>(uid, out var mobThresholdsComponent)
-            || !TryComp<DamageableComponent>(uid, out var damageable))
+            || !TryComp<MobThresholdsComponent>(uid, out var mobThresholdsComponent))
             return;
 
+        var damage = _damageable.GetTotalDamage(uid);
         // Check if entity have critical state
         if (_mobThreshold.TryGetThresholdForState(uid, MobState.Critical, out var criticalThreshold, mobThresholdsComponent)
-            && damageable.TotalDamage < criticalThreshold)
+            && damage < criticalThreshold)
         {
             _mobState.ChangeMobState(uid, MobState.Alive, mobStateComponent);
             return;
@@ -63,14 +60,14 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
 
         // Check if entity have dead state
         if (_mobThreshold.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold, mobThresholdsComponent)
-            && damageable.TotalDamage < deadThreshold)
+            && damage < deadThreshold)
         {
             _mobState.ChangeMobState(uid, MobState.Alive, mobStateComponent);
             return;
         }
 
         _audio.PlayPvs(comp.BuzzSound, uid, AudioHelpers.WithVariation(0.05f, _robustRandom));
-        _popup.PopupEntity(Loc.GetString("dead-startup-system-reboot-failed", ("target", MetaData(uid).EntityName)), uid);
+        _popup.PopupEntity(Loc.GetString("dead-startup-system-reboot-failed", ("target", Name(uid))), uid);
         Spawn("EffectSparks", Transform(uid).Coordinates);
     }
 

@@ -1,6 +1,6 @@
 - type: entity
   name: stun baton
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem, BaseSecurityContraband, BracingDurability] # Trauma - Durability
   id: Stunbaton
   description: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
@@ -68,6 +68,12 @@
         length: 2.5
   - type: Item
     heldPrefix: off
+  # <Trauma>
+    shape:
+    - 0,0,2,0
+  # <Trauma>
+    storedRotation: 45 # Goob
+
     size: Normal
   - type: Clothing
     sprite: Objects/Weapons/Melee/stunbaton.rsi
@@ -114,7 +120,7 @@
 
 - type: entity
   name: truncheon
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem, BaseSecurityContraband, BracingDurability] # Trauma - Durability
   id: Truncheon
   description: A rigid, steel-studded baton, meant to harm.
   components:
@@ -132,6 +138,11 @@
     bluntStaminaDamageFactor: 1.5
   - type: Item
     size: Normal
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # <Trauma>
   - type: Tag
     tags:
     - Truncheon

@@ -129,8 +129,7 @@
     deleteOnCollide: false
     onlyCollideWhenShot: true
     damage:
-      types:
-        Brute: 0
+      types: {}
   - type: Sprite
     noRot: true
     sprite: Structures/Storage/closet.rsi
@@ -281,16 +280,8 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
-    layers:
-    - state: magicm_yellow # Goob edit
-      shader: unshaded
-  - type: Projectile
-    damage:
-      types:
-        Heat: 0 # Goob edit
-  - type: RejuvenateOnProjectileHit # Goobstation
+  # <Trauma>
+  - type: RejuvenateOnProjectileHit
     undeadList:
       components:
       - Zombie
@@ -299,11 +290,11 @@
     damage:
       types:
         Heat: 600
-  - type: Reflective # Goobstation
+  - type: Reflective
     reflective: Magic
-  - type: Ammo # Goobstation
+  - type: Ammo
     muzzleFlash: null
-  - type: Trail # Goobstation
+  - type: Trail
     lerpTime: 0.05
     frequency: 0.02
     lifetime: 1
@@ -312,6 +303,16 @@
     sprite:
       sprite: /Textures/Objects/Weapons/Guns/Projectiles/magic.rsi
       state: magicm_yellow
+  # </Trauma>
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: magicm_yellow # Goob edit
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types: {} # Trauma - removed slop -200 every damage, just use rejuvenate instead
+    ignoreResistances: true
 
 - type: entity
   id: BulletInstakillMagic

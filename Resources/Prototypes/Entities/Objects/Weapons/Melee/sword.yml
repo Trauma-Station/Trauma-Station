@@ -2,7 +2,7 @@
 
 #BaseSword
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, KnifeDurability] # Trauma - Durability
   id: BaseSword
   abstract: true
   components:
@@ -240,7 +240,7 @@
 #Other/Weird
 - type: entity
   name: throngler
-  parent: [ BaseSword, BaseMajorContraband ]
+  parent: [ BaseSword, BaseMajorContraband, UnbeakableDurability ]
   id: Throngler
   description: If Security dares take it from you, just remind them that they are indeed mortal.
   components:

@@ -49,6 +49,10 @@
     - id: Binoculars
     - id: PlushieLizardJobWarden
       prob: 0.02
+    # <Trauma>
+    - id: GunpowderBottlePartFull
+    - id: ReinforcementCallerHos
+    # </Trauma>
 
 - type: entityTable
   id: FillLockerWardenHarduit

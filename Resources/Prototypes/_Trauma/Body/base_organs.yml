@@ -53,7 +53,7 @@
   - type: Organ
     category: Wings
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: BodyPart
     partType: Wings
     slots: []

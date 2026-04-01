@@ -1,6 +1,6 @@
 - type: entity
   name: bone axe
-  parent: [ BaseItem, BaseMajorContraband ]
+  parent: [ BaseItem, BaseMajorContraband, KnifeDurability ]
   id: BoneAxe
   description: An axe made of bones. A primitive hunters favorite... probably.
   components:
@@ -58,7 +58,7 @@
 
 - type: entity
   name: bone dagger
-  parent: [ BaseKnife, BaseMajorContraband ]
+  parent: [ BaseKnife, BaseMajorContraband, KnifeDurability ]
   id: DaggerBone
   description: A sharpened bone. The bare minimum in survival.
   components:

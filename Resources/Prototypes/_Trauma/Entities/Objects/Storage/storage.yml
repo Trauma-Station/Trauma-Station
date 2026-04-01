@@ -1,0 +1,131 @@
+- type: entity
+  id: GunpowderBottle
+  parent: BaseStorageItem
+  name: gunpowder bottle
+  description: Holds gunpowder, a crucial component in making bullets.
+  suffix: empty
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Storage/gunpowderbottle.rsi
+    layers:
+      - map: [ base ]
+        state: closed
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,1,1
+    whitelist:
+      tags:
+      - Gunpowder
+  - type: Item
+    size: Tiny
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        base:
+          True: { state: open }
+          False: { state: closed }
+  - type: Appearance
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 125
+  - type: Tag
+    tags:
+      - GunpowderBottle
+
+- type: entity
+  id: GunpowderBottlePartFull
+  parent: GunpowderBottle
+  suffix: part_full
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: MaterialGunpowder30
+        amount: 1
+
+- type: entity
+  id: GunpowderBottleFull
+  parent: GunpowderBottle
+  suffix: full
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: MaterialGunpowder30
+        amount: 4
+
+- type: entity
+  parent: BaseStorageItem
+  id: GunpowderCase
+  name: gunpowder case
+  components:
+  - type: Sprite # I cannot get this to work right, it should show the remaining gunpowder bottles when open
+    sprite: _Trauma/Objects/Storage/gunpowdercase.rsi
+    state: closed
+    layers:
+    - state: closed
+      map: ["closeLayer"]
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: pack1
+      map: ["pack1"]
+      visible: false
+    - state: pack2
+      map: ["pack2"]
+      visible: false
+    - state: pack3
+      map: ["pack3"]
+      visible: false
+    - state: pack4
+      map: ["pack4"]
+      visible: false
+    - state: pack5
+      map: ["pack5"]
+      visible: false
+    - state: pack6
+      map: ["pack6"]
+      visible: false
+  - type: Item
+    size: Normal
+  - type: Storage
+    grid:
+    - 0,0,2,1
+    whitelist:
+      tags:
+      - GunpowderBottle
+    maxItemSize: Huge
+    hideStackVisualsWhenClosed: true
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: GunpowderBottlePartFull
+        amount: 6
+  - type: ItemCounter
+    count:
+      tags: [GunpowderBottle]
+    composite: true
+    layerStates:
+    - pack1
+    - pack2
+    - pack3
+    - pack4
+    - pack5
+    - pack6
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        closeLayer:
+          Open: { visible: false }
+          Closed: { visible: true }
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+  - type: Appearance
+  - type: ClothingSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.75
+  - type: HeldSpeedModifier
+  - type: MultiHandedItem

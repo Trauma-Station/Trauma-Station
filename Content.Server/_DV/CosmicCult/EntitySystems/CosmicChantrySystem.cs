@@ -4,7 +4,6 @@ using Content.Server.Chat.Systems;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared.Damage;
@@ -19,12 +18,10 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -48,8 +45,6 @@ public sealed class CosmicChantrySystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
     [Dependency] private readonly EntityManager _entMan = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
 
     /// <summary>
     /// Mind role to add to colossi.
@@ -88,33 +83,28 @@ public sealed class CosmicChantrySystem : EntitySystem
                 victimComp.Chantry = (uid, comp);
                 if (_cultRule.AssociatedGamerule(uid) is { } cult) cult.Comp.ActiveChantry = uid;
 
-                if (_threshold.TryGetThresholdForState(victim, MobState.Critical, out var damage) && TryComp<DamageableComponent>(victim, out var damageable) && damage > _damage.GetDamage((victim, damageable)).GetTotal())
+                if (_threshold.TryGetThresholdForState(victim, MobState.Critical, out var damage))
                 {
-                    damage -= _damage.GetDamage((victim, damageable)).GetTotal();
-                    DamageSpecifier dspec = new();
-                    dspec.DamageDict.Add("Slash", damage.Value);
-                    _damage.TryChangeDamage(victim, dspec, true);
+                    var total = _damage.GetTotalDamage(victim);
+                    if (damage > total)
+                    {
+                        damage -= total;
+                        DamageSpecifier dspec = new();
+                        dspec.DamageDict.Add("Slash", damage.Value);
+                        _damage.ChangeDamage(victim, dspec, true);
+                    }
                 }
 
                 if (!TryComp<BorgChassisComponent>(victim, out var borgComp) || borgComp.BrainEntity is not { } borgBrain) return;
                 var newBrain = Spawn(comp.Mindsink);
                 _containerSystem.EmptyContainer(borgComp.BrainContainer);
-                if (HasComp<AiRemoteBrainComponent>(borgBrain))
-                { // B.O.R.I.S gets yeeted, don't want to trap the AI inside a colossus
-                    _containerSystem.TryRemoveFromContainer(borgBrain, force: true);
-                    _throw.TryThrow(borgBrain, _random.NextVector2(2f, 3f), baseThrowSpeed: 10, uid, 0, 0, false, false);
-                    _containerSystem.Insert(newBrain, borgComp.BrainContainer);
-                    MakeVictimGhostRole(victim);
-                }
+                // fully replaced the brain with a mindsink
+                _containerSystem.Insert(newBrain, borgComp.BrainContainer);
+                if (_mind.TryGetMind(victim, out var mindEnt, out _))
+                    _mind.TransferTo(mindEnt, newBrain);
                 else
-                { // Anything else just gets fully replaced with a mindsink
-                    _containerSystem.Insert(newBrain, borgComp.BrainContainer);
-                    if (_mind.TryGetMind(victim, out var mindEnt, out _))
-                        _mind.TransferTo(mindEnt, newBrain);
-                    else
-                        MakeVictimGhostRole(victim);
-                    QueueDel(borgBrain);
-                }
+                    MakeVictimGhostRole(victim);
+                QueueDel(borgBrain);
             }
             if (_timing.CurTime >= comp.SpawnTimer && !comp.Spawned)
             {

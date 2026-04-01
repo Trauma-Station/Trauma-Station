@@ -1,0 +1,165 @@
+- type: construction
+  id: HandleSmall
+  graph: Handle
+  startNode: start
+  targetNode: unfinishedhandle
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: ClothingHandsGlovesForge
+  graph: ClothingHandsGlovesForge
+  startNode: start
+  targetNode: finish
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    TailoringKnowledge: 3
+
+- type: construction
+  id: AnvilBottom
+  graph: AnvilBottom
+  startNode: start
+  targetNode: finish
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: AnvilTop
+  graph: AnvilTop
+  startNode: start
+  targetNode: finish
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: SteelScraps
+  graph: SteelScraps
+  startNode: start
+  targetNode: finish
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: BrassScraps
+  graph: BrassScraps
+  startNode: start
+  targetNode: finish
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: PlasteelScraps
+  graph: PlasteelScraps
+  startNode: start
+  targetNode: finish
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: WetBrick
+  graph: WetBrick
+  startNode: start
+  targetNode: finish
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: ForgeKnife
+  graph: ForgeKnife
+  startNode: start
+  targetNode: handle
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 3
+    WeaponsKnowledge: 3
+
+- type: construction
+  id: ForgeTool
+  graph: ForgeTool
+  startNode: start
+  targetNode: handle
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 3
+    WeaponsKnowledge: 3
+
+- type: construction
+  id: ForgeArrow
+  graph: ForgeArrow
+  startNode: start
+  targetNode: handle
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 5
+    WeaponsKnowledge: 5
+
+- type: construction
+  id: ForgeSword
+  graph: ForgeSword
+  startNode: start
+  targetNode: handle
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 3
+  practical:
+    MetalworkingKnowledge: 4
+    WeaponsKnowledge: 4
+
+- type: construction
+  id: ForgeBlugeon
+  graph: ForgeBlugeon
+  startNode: start
+  targetNode: handle
+  category: construction-category-forging
+  objectType: Item
+  theory:
+    FabricationKnowledge: 3
+  practical:
+    MetalworkingKnowledge: 4
+    WeaponsKnowledge: 4

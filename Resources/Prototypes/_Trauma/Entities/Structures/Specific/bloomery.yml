@@ -1,0 +1,335 @@
+# Unloaded
+
+- type: entity
+  parent: BaseStructure
+  id: BloomeryCold
+  name: unlit bloomery
+  description: Needs to be loaded with charcoal and metal scraps before firing.
+  components:
+  - type: Animateable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            Brick1:
+              min: 13
+              max: 15
+  - type: Sprite
+    sprite: _Trauma/Structures/Forging/bloomery.rsi
+    state: cold
+  - type: Construction
+    graph: BloomeryCold
+    node: bloomery
+
+# Loaded
+
+- type: entity
+  parent: BloomeryCold
+  id: BloomeryColdBrass
+  name: unlit bloomery
+  description: Loaded with brass, just needs firing.
+  categories: [HideSpawnMenu]
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            Brick1:
+              min: 13
+              max: 15
+            Charcoal1:
+              min: 4
+              max: 5
+            BrassScraps:
+              min: 1
+              max: 1
+  - type: Construction
+    graph: BloomeryCold
+    node: bloomerybrass
+
+- type: entity
+  parent: BloomeryCold
+  id: BloomeryColdPlasteel
+  name: unlit bloomery
+  description: Loaded with plasteel, just needs firing.
+  categories: [HideSpawnMenu]
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            Brick1:
+              min: 13
+              max: 15
+            Charcoal1:
+              min: 4
+              max: 5
+            PlasteelScraps:
+              min: 1
+              max: 1
+  - type: Construction
+    graph: BloomeryCold
+    node: bloomeryplasteel
+
+- type: entity
+  parent: BloomeryCold
+  id: BloomeryColdSteel
+  name: unlit bloomery
+  description: Loaded with steel, just needs firing.
+  categories: [HideSpawnMenu]
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            Brick1:
+              min: 13
+              max: 15
+            Charcoal1:
+              min: 4
+              max: 5
+            SteelScraps:
+              min: 1
+              max: 1
+  - type: Construction
+    graph: BloomeryCold
+    node: bloomerysteel
+
+# Lit
+
+- type: entity
+  parent: BloomeryCold
+  id: BloomeryLitBrass
+  name: lit bloomery
+  description: Loaded with brass, give it some time to burn and it will be ready.
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: burning
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60000
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            BloomeryCompleteBrass:
+              min: 1
+              max: 1
+  - type: DamageOverTime
+    damage:
+      types:
+        Slash: 1000
+    interval: 1
+  - type: Construction
+    graph: BloomeryCold
+    node: bloomerybrasslit
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: NormalMode
+  - type: PointLight
+    radius: 2
+    energy: 3
+    color: "#ff8227"
+
+- type: entity
+  parent: BloomeryCold
+  id: BloomeryLitSteel
+  name: lit bloomery
+  description: Loaded with steel, give it some time to burn and it will be ready.
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: burning
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60000
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            BloomeryCompleteSteel:
+              min: 1
+              max: 1
+  - type: DamageOverTime
+    damage:
+      types:
+        Slash: 1000
+    interval: 1
+  - type: Construction
+    graph: BloomeryCold
+    node: bloomerysteellit
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: NormalMode
+  - type: PointLight
+    radius: 2
+    energy: 3
+    color: "#ff8227"
+
+- type: entity
+  parent: BloomeryCold
+  id: BloomeryLitPlasteel
+  name: lit bloomery
+  description: Loaded with plasteel, give it some time to burn and it will be ready.
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: burning
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60000
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            BloomeryCompletePlasteel:
+              min: 1
+              max: 1
+  - type: DamageOverTime
+    damage:
+      types:
+        Slash: 1000
+    interval: 1
+  - type: Construction
+    graph: BloomeryCold
+    node: bloomeryplasteellit
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: NormalMode
+  - type: PointLight
+    radius: 2
+    energy: 3
+    color: "#ff8227"
+
+# Complete
+
+- type: entity
+  parent: BloomeryCold
+  id: BloomeryCompletePlasteel
+  name: smoking bloomery
+  description: Looks ready, smash it open.
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: complete
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            Brick1:
+              min: 13
+              max: 15
+            PlasteelBloom:
+              min: 1
+              max: 1
+
+- type: entity
+  parent: BloomeryCold
+  id: BloomeryCompleteSteel
+  name: smoking bloomery
+  description: Looks ready, smash it open.
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: complete
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            Brick1:
+              min: 13
+              max: 15
+            SteelBloom:
+              min: 1
+              max: 1
+
+- type: entity
+  parent: BloomeryCold
+  id: BloomeryCompleteBrass
+  name: smoking bloomery
+  description: Looks ready, smash it open.
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: complete
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            Brick1:
+              min: 13
+              max: 15
+            BrassBloom:
+              min: 1
+              max: 1

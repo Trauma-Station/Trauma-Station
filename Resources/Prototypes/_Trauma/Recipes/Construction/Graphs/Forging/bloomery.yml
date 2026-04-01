@@ -1,0 +1,82 @@
+- type: constructionGraph
+  id: BloomeryCold
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: bloomery
+      steps:
+      - material: Brick
+        amount: 15
+        doAfter: 5
+
+  - node: bloomery
+    entity: BloomeryCold
+    edges:
+    - to: bloomeryplasteel
+      steps:
+      - tag: PlasteelScraps
+        name: construction-graph-tag-plasteelscraps
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: plasteel
+        doAfter: 1
+      - material: Charcoal
+        amount: 5
+        doAfter: 1
+    - to: bloomerysteel
+      steps:
+      - tag: SteelScraps
+        name: construction-graph-tag-steelscraps
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: steel
+        doAfter: 1
+      - material: Charcoal
+        amount: 5
+        doAfter: 1
+    - to: bloomerybrass
+      steps:
+      - tag: BrassScraps
+        name: construction-graph-tag-brassscraps
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: brass
+        doAfter: 1
+      - material: Charcoal
+        amount: 5
+        doAfter: 1
+
+  - node: bloomeryplasteel
+    entity: BloomeryColdPlasteel
+    edges:
+    - to: bloomeryplasteellit
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: bloomerysteel
+    entity: BloomeryColdSteel
+    edges:
+    - to: bloomerysteellit
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: bloomerybrass
+    entity: BloomeryColdBrass
+    edges:
+    - to: bloomerybrasslit
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: bloomeryplasteellit
+    entity: BloomeryLitPlasteel
+
+  - node: bloomerysteellit
+    entity: BloomeryLitSteel
+
+  - node: bloomerybrasslit
+    entity: BloomeryLitBrass

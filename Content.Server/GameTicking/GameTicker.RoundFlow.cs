@@ -1,11 +1,13 @@
 // <Trauma>
 using Content.Goobstation.Common.LastWords;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Mind.Components;
-using Content.Shared.Humanoid;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -573,12 +575,10 @@ namespace Content.Server.GameTicking
 
                 var roles = _roles.MindGetAllRoleInfo(mindId);
 
-                // Goobstation - End of round last words
-                #region Goob Station - End of round last words
-
+                // <Trauma> - last words/damage
                 var lastWords = "";
                 var mobState = MobState.Invalid;
-                var damagePerGroup = new Dictionary<string, FixedPoint2>();
+                var damagePerGroup = new Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2>();
                 var lastMob = TryComp<MindLastMobComponent>(mindId, out var lastMobComponent)
                     ? lastMobComponent.LastMob
                     : null;
@@ -593,12 +593,13 @@ namespace Content.Server.GameTicking
                     if (TryComp<MobStateComponent>(lastMob, out var mobStateComp))
                         mobState = mobStateComp.CurrentState;
 
-                    if (TryComp<DamageableComponent>(lastMob, out var damageableComp))
-                        damagePerGroup = damageableComp.DamagePerGroup;
+                    // TODO: store a thing on the mind when gibbing/cremating/singuloing someone for special displaying
+                    foreach (var (group, amount) in _damageable.GetDamagePerGroup(lastMob.Value))
+                    {
+                        damagePerGroup[group] = amount;
+                    }
                 }
-
-                #endregion
-                // END
+                // </Trauma>
 
                 var playerEndRoundInfo = new RoundEndMessageEvent.RoundEndPlayerInfo()
                 {
@@ -617,10 +618,11 @@ namespace Content.Server.GameTicking
                     AntagPrototypes = roles.Where(role => role.Antagonist).Select(role => role.Prototype).ToArray(),
                     Observer = observer,
                     Connected = connected,
-                    // Goob Station - End of Round Screen
+                    // <Trauma>
                     LastWords = lastWords,
                     EntMobState = mobState,
-                    DamagePerGroup = damagePerGroup
+                    DamagePerGroup = damagePerGroup,
+                    // </Trauma>
                 };
                 listOfPlayerInfo.Add(playerEndRoundInfo);
             }

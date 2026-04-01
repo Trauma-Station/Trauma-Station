@@ -352,7 +352,6 @@
   parent: FoodEgg
   suffix: Fertilized, Chicken
   components:
-  - type: Timer
   - type: TimedSpawner
     prototypes:
     - MobChicken
@@ -519,14 +518,15 @@
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
   - type: GhostRole
+    prob: 0 # Trauma - was 0.25
     makeSentient: true
     allowSpeech: true
     allowMovement: true
     name: ghost-role-information-mothroach-name
     description: ghost-role-information-mothroach-description
-    rules: ghost-role-information-freeagent-rules
+    rules: ghost-role-information-animal-rules # Trauma
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleAnimal # Trauma
   - type: Fixtures
     fixtures:
       fix1:
@@ -819,7 +819,6 @@
   parent: FoodEgg
   suffix: Fertilized, Duck
   components:
-    - type: Timer
     - type: TimedSpawner
       prototypes:
       - MobDuckMallard
@@ -1357,7 +1356,7 @@
     - DoorBumpOpener
     - FootstepSound
   - type: GhostRole
-    prob: 0.25
+    prob: 0 # Trauma - was 0.25
     name: ghost-role-information-kangaroo-name
     description: ghost-role-information-kangaroo-description
     rules: ghost-role-information-nonantagonist-rules
@@ -1571,9 +1570,9 @@
     makeSentient: true
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
-    rules: ghost-role-information-freeagent-rules # Goobstation - remove: 1984
+    rules: ghost-role-information-animal-rules # Goobstation - remove: 1984
     mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    - MindRoleGhostRoleAnimal # Trauma
   - type: GhostTakeoverAvailable
   - type: Clumsy
     gunShootFailDamage:
@@ -1731,9 +1730,9 @@
     name: ghost-role-information-kobold-name
     description: ghost-role-information-kobold-description
     # <Trauma> Parity with Monkeys being free agents.
-    rules: ghost-role-information-freeagent-rules
+    rules: ghost-role-information-animal-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    - MindRoleGhostRoleAnimal
     # </Trauma>
 
 - type: entity
@@ -1806,14 +1805,15 @@
   - type: VentCrawler # goobstation - Ventcrawl
     enterDelay: 0.5
   - type: GhostRole
+    prob: 0.3 # Trauma - add % chance to mouse ghostrole
     makeSentient: true
     allowSpeech: true
     allowMovement: true
     name: ghost-role-information-mouse-name
     description: ghost-role-information-mouse-description
-    rules: ghost-role-information-freeagent-rules
+    rules: ghost-role-information-animal-rules # Trauma
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleAnimal # Trauma
   - type: GhostTakeoverAvailable
   - type: Speech
     speechSounds: Squeak
@@ -2146,6 +2146,7 @@
   id: MobMouseCancer
   components:
   - type: GhostRole
+    prob: 1 # Trauma - Ensure evil mice get their ghostrole
     name: ghost-role-information-cancer-mouse-name
     description: ghost-role-information-cancer-mouse-description
     rules: ghost-role-information-freeagent-rules
@@ -2575,8 +2576,8 @@
     angle: 0
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 5
+      types:
+        Piercing: 5
   - type: Item
     size: Normal
     sprite: Mobs/Animals/grenadepenguin.rsi
@@ -2753,13 +2754,15 @@
   - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute from base.yml.
     allowedStates:
     - Alive
-    damageCap: 89
     damage:
       types:
         Poison: -0.07
-      groups:
-        Brute: -0.07
-        Burn: -0.07
+        Blunt: -0.03
+        Slash: -0.03
+        Piercing: -0.03
+        Heat: -0.03
+        Cold: -0.03
+        Shock: -0.03
   - type: NightVision # Goobstation - Nigthvision
     color: "#808080"
     activateSound: null
@@ -3663,6 +3666,7 @@
   components:
   - type: VentCrawler # goobstation - Ventcrawl
   - type: GhostRole
+    prob: 0 # Trauma
     makeSentient: true
     allowSpeech: true
     allowMovement: true

@@ -1,0 +1,63 @@
+- type: entity
+  parent: BaseStructure
+  id: QuenchingBarrel
+  name: quenching barrel
+  description: A quenching barrel for cooling down hot metal.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Forging/quenching.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: icon
+  - type: Fixtures
+    fixtures:
+      itemcollide:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.14,-0.05,0.15,0.25"
+        layer:
+        - HighImpassable
+        hard: false
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.14,-0.05,0.15,0.25"
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetSteel1:
+              min: 2
+              max: 3
+  - type: Construction
+    graph: QuenchingBarrel
+    node: finish
+  - type: ItemSlotHeater
+    slot: ItemCabinet
+    temp: -250000
+    maxTemp: 100
+  - type: ContainerContainer
+    containers:
+      ItemCabinet: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      ItemCabinet:
+        ejectOnInteract: true
+        whitelist:
+          components:
+          - InternalTemperature
+  - type: Clickable
+  - type: InteractionOutline

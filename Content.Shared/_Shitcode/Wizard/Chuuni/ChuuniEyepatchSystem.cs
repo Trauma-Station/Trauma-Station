@@ -1,13 +1,9 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
@@ -21,10 +17,11 @@ namespace Content.Shared._Goobstation.Wizard.Chuuni;
 
 public sealed class ChuuniEyepatchSystem : EntitySystem
 {
+    [Dependency] private readonly ClothingSystem _clothing = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
 
     public override void Initialize()
     {
@@ -68,20 +65,22 @@ public sealed class ChuuniEyepatchSystem : EntitySystem
     {
         args.Args.Invocation = ent.Comp.Invocations[args.Args.School];
 
-        var performer = args.Args.Performer;
-        if (!TryComp(performer, out DamageableComponent? damageable))
+        if (ent.Comp.CanHeal)
             return;
 
-        if (!ent.Comp.CanHeal || damageable.TotalDamage <= FixedPoint2.Zero)
+        var performer = args.Args.Performer;
+        var damage = _damageable.GetAllDamage(performer);
+        var total = damage.GetTotal();
+        if (total <= FixedPoint2.Zero)
             return;
 
         ent.Comp.Accumulator = 0f;
         Dirty(ent);
 
-        if (ent.Comp.HealAmount < damageable.TotalDamage)
-            args.Args.ToHeal = damageable.Damage * ent.Comp.HealAmount / damageable.TotalDamage;
+        if (ent.Comp.HealAmount < total)
+            args.Args.ToHeal = damage * ent.Comp.HealAmount / total;
         else
-            args.Args.ToHeal = damageable.Damage;
+            args.Args.ToHeal = damage;
     }
 
     private void OnExamine(Entity<ChuuniEyepatchComponent> ent, ref ExaminedEvent args)

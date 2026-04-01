@@ -10,7 +10,6 @@ using Content.Medical.Common.DoAfter;
 using Content.Medical.Common.Healing;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Common.Weapons;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Pain;
@@ -59,12 +58,11 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundableComponent, BeforeDamageChangedEvent>(DudeItsJustLikeMatrix);
         SubscribeLocalEvent<WoundableComponent, WoundHealAttemptOnWoundableEvent>(HealWoundsOnWoundableAttempt);
         SubscribeLocalEvent<WoundableComponent, CheckPartBleedingEvent>(OnCheckPartBleeding);
+        SubscribeLocalEvent<WoundableComponent, CheckPartWoundedEvent>(OnCheckPartWounded);
         SubscribeLocalEvent<WoundableComponent, HealBleedingWoundsEvent>(OnHealBleedingWounds);
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<WoundableComponent, DamageSetEvent>(OnDamageSet);
         SubscribeLocalEvent<HandOrganComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfterDelay);
-        SubscribeLocalEvent<WoundableComponent, AttemptHandsMeleeEvent>(OnAttemptHandsMelee);
-        SubscribeLocalEvent<WoundableComponent, AttemptHandsShootEvent>(OnAttemptHandsShoot);
         SubscribeLocalEvent<TraumaInflicterComponent, TraumaBeingRemovedEvent>(OnTraumaBeingRemoved);
 
         SubscribeLocalEvent<BodyComponent, DecapitateEvent>(OnDecapitate);
@@ -211,6 +209,18 @@ public sealed partial class WoundSystem
             args.Cancelled = true;
     }
 
+    private void OnCheckPartWounded(Entity<WoundableComponent> ent, ref CheckPartWoundedEvent args)
+    {
+        foreach (var wound in GetWoundableWounds(ent, ent.Comp))
+        {
+            if (!args.DamageKeys.Contains(wound.Comp.DamageType))
+                continue;
+
+            args.Wounded = true;
+            return;
+        }
+    }
+
     private void OnCheckPartBleeding(Entity<WoundableComponent> ent, ref CheckPartBleedingEvent args)
     {
         foreach (var wound in GetWoundableWounds(ent, ent.Comp))
@@ -283,13 +293,11 @@ public sealed partial class WoundSystem
 
         UpdateWoundableIntegrity(ent, ent.Comp);
 
-        if (!TryComp<DamageableComponent>(ent, out var damage))
-            return;
-
         var value = args.Damage;
-        foreach (var type in damage.Damage.DamageDict.Keys)
+        var damage = _damageable.GetAllDamage(ent.Owner);
+        foreach (var type in damage.DamageDict.Keys)
         {
-            var mul = damage.Damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
+            var mul = damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
             TryInduceWound(ent, type, value * mul, out _, ent.Comp);
         }
     }
@@ -300,28 +308,6 @@ public sealed partial class WoundSystem
         // make a thing like LegsComponent that makes doafters longer with missing hands
         if (_trauma.GetBone(ent.Owner) is {} bone)
             RaiseLocalEvent(bone, args.Args);
-    }
-
-    private void OnAttemptHandsMelee(EntityUid uid, WoundableComponent component, ref AttemptHandsMeleeEvent args)
-    {
-        if (component.WoundableIntegrity > 25
-            || args.Cancelled
-            || _body.GetBody(uid) is not {} body)
-            return;
-
-        if (TryFumble("arm-fumble", new SoundPathSpecifier("/Audio/Effects/slip.ogg"), body, 0.20f))
-            args.Cancelled = true;
-    }
-
-    private void OnAttemptHandsShoot(EntityUid uid, WoundableComponent component, ref AttemptHandsShootEvent args)
-    {
-        if (component.WoundableIntegrity > 25
-            || args.Cancelled
-            || _body.GetBody(uid) is not {} body)
-            return;
-
-        if (TryFumble("arm-fumble", new SoundPathSpecifier("/Audio/Effects/slip.ogg"), body, 0.20f))
-            args.Cancelled = true;
     }
 
     #endregion
@@ -362,7 +348,8 @@ public sealed partial class WoundSystem
         string woundId,
         FixedPoint2 severity,
         [NotNullWhen(true)] out Entity<WoundComponent>? woundInduced,
-        WoundableComponent? woundable = null)
+        WoundableComponent? woundable = null,
+        ProtoId<DamageGroupPrototype>? damageGroup = null)
     {
         woundInduced = null;
         if (severity == FixedPoint2.Zero || !Resolve(uid, ref woundable))
@@ -371,16 +358,18 @@ public sealed partial class WoundSystem
         if (TryContinueWound(uid, woundId, severity, out woundInduced, woundable))
             return true;
 
-        var wound = TryCreateWound(
-            uid,
-            woundId,
-            severity,
-            out woundInduced,
+        var protoId = damageGroup?.Id ??
             (from @group in _prototype.EnumeratePrototypes<DamageGroupPrototype>()
                 where @group.DamageTypes.Contains(woundId)
-                select @group).FirstOrDefault()
-                ?.ID,
-            woundable);
+                select @group).FirstOrDefault()?.ID;
+
+        var wound = protoId != null && TryCreateWound(
+                uid,
+                woundId,
+                severity,
+                out woundInduced,
+                protoId,
+                woundable);
         return wound;
     }
 
@@ -403,8 +392,9 @@ public sealed partial class WoundSystem
     {
         woundCreated = null;
 
-        if (!IsWoundPrototypeValid(woundProtoId)
-            || !Resolve(uid, ref woundable))
+        if (TerminatingOrDeleted(uid) ||
+            !IsWoundPrototypeValid(woundProtoId) ||
+            !Resolve(uid, ref woundable))
             return false;
 
         var wound = Spawn(woundProtoId);
@@ -415,6 +405,7 @@ public sealed partial class WoundSystem
         else
         {
             // The wound failed some important checks, and we cannot let an invalid wound to be spawned!
+            // holy esl
             if (_net.IsServer && !IsClientSide(wound))
                 QueueDel(wound);
 
@@ -446,11 +437,12 @@ public sealed partial class WoundSystem
             !Resolve(uid, ref woundable))
             return false;
 
-        var proto = _prototype.Index(id);
         foreach (var wound in GetWoundableWounds(uid, woundable))
         {
-            if (proto.ID != wound.Comp.DamageType
-                || wound.Comp.IsScar)
+            if (Prototype(wound)?.ID is not { } woundId)
+                continue;
+
+            if (id != woundId || wound.Comp.IsScar)
                 continue;
 
             ApplyWoundSeverity(wound, severity, wound);
@@ -1229,20 +1221,6 @@ public sealed partial class WoundSystem
             new WoundVisualizerGroupData(GetWoundableWounds(woundable).Select(ent => GetNetEntity(ent)).ToList()));
     }
 
-    private bool TryFumble(string message, SoundPathSpecifier sound, EntityUid body, float odds)
-    {
-        var rand = new System.Random((int) _timing.CurTick.Value);
-        if (rand.NextFloat() < odds)
-        {
-            _popup.PopupClient(Loc.GetString(message), body, PopupType.Medium);
-            var ev = new DropHandItemsEvent();
-            RaiseLocalEvent(body, ref ev, false);
-            _audio.PlayPredicted(sound, body, body);
-            return true;
-        }
-        return false;
-    }
-
     #endregion
 
     #region Helpers
@@ -1304,12 +1282,8 @@ public sealed partial class WoundSystem
             if (_body.GetCategory(part.Owner) is not {} category)
                 continue;
 
-            if (!TryComp<DamageableComponent>(part, out var damageable))
-                continue;
-
             var nearestSeverity = WoundableSeverity.Severed;
-            var damage = damageable.TotalDamage;
-
+            var damage = _damageable.GetTotalDamage(part.Owner);
             foreach (var (severity, threshold) in part.Comp.Thresholds.OrderByDescending(kv => kv.Value))
             {
                 if (damage <= 0)

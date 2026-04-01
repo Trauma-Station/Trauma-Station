@@ -15,7 +15,7 @@ using Content.Shared.Body;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
-using Content.Shared.FixedPoint;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.HealthExaminable;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
@@ -158,9 +158,12 @@ public sealed class PartStatusSystem : EntitySystem
                 || wound.Comp.WoundSeverity == WoundSeverity.Healed)
                 continue;
 
-            if (!damageSeverities.TryGetValue(wound.Comp.DamageType, out var existingSeverity) ||
+            if (wound.Comp.AlwaysShowInInspects ||
+                !damageSeverities.TryGetValue(wound.Comp.DamageType, out var existingSeverity) ||
                 wound.Comp.WoundSeverity > existingSeverity)
-                damageSeverities[_proto.Index(wound.Comp.DamageGroup).LocalizedName] = wound.Comp.WoundSeverity;
+                damageSeverities[wound.Comp.TextString == null
+                    ? _proto.Index(wound.Comp.DamageGroup).ID
+                    : wound.Comp.TextString] = wound.Comp.WoundSeverity;
 
             if (TryComp<BleedInflicterComponent>(wound, out var bleeds) && bleeds.IsBleeding)
                 isBleeding = true;
@@ -288,8 +291,7 @@ public sealed class PartStatusSystem : EntitySystem
         var maxSeverity = WoundSeverity.Healed;
         foreach (var (type, severity) in damageSeverities)
         {
-            if (type is not ("Brute" or "Burn") // At some point we gonna de-hardcode this, but i doubt that day is soon.
-                || severity <= maxSeverity)
+            if (!WoundSeverityCheck(type) || severity <= maxSeverity)
                 continue;
 
             maxSeverity = severity;
@@ -302,7 +304,7 @@ public sealed class PartStatusSystem : EntitySystem
         var descriptions = new List<string>();
         foreach (var (type, severity) in damageSeverities)
         {
-            if (type is not ("Brute" or "Burn"))
+            if (!WoundSeverityCheck(type))
                 continue;
 
             var cappedSeverity = severity > WoundSeverity.Severe ? WoundSeverity.Severe : severity;
@@ -317,6 +319,11 @@ public sealed class PartStatusSystem : EntitySystem
         }
 
         return descriptions;
+    }
+
+    private bool WoundSeverityCheck(string type)
+    {
+        return !_proto.HasIndex<DamageGroupPrototype>(type) || type is "Brute" or "Burn";
     }
 
     private List<string> GetTraumaDescriptions(PartStatus partStatus, bool inspectingSelf)

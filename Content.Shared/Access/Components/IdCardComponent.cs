@@ -27,7 +27,7 @@ public sealed partial class IdCardComponent : Component
     private string? _jobTitle;
 
     [Access(typeof(SharedIdCardSystem), typeof(SharedPdaSystem), typeof(SharedAgentIdCardSystem), Other = AccessPermissions.ReadWriteExecute)]
-    public string? LocalizedJobTitle { set => _jobTitle = value; get => _jobTitle ?? (JobTitle is {} loc ? Loc.GetString(loc) : null); } // Trauma - ternary instead of ?? Empty
+    public string? LocalizedJobTitle { set => _jobTitle = value; get => _jobTitle ?? (JobTitle != null ? Loc.GetString(JobTitle) : string.Empty); }
 
     /// <summary>
     /// The state of the job icon rsi.
@@ -54,6 +54,8 @@ public sealed partial class IdCardComponent : Component
     /// Determines if accesses from this card should be logged by <see cref="AccessReaderComponent"/>
     /// </summary>
     [DataField]
+    [AutoNetworkedField] // Goobstation
+    [Access( Other = AccessPermissions.ReadWrite)] // Goobstation
     public bool BypassLogging;
 
     [DataField]
@@ -63,5 +65,6 @@ public sealed partial class IdCardComponent : Component
     public LocId FullNameLocId = "access-id-card-component-owner-full-name-job-title-text";
 
     [DataField]
+    [Access( Other = AccessPermissions.ReadWrite)] // Goobstation
     public bool CanMicrowave = true;
 }

@@ -26,7 +26,8 @@ public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<Humanoi
     {
         "IPC",
         "Shadowling", // no ontag
-        "Skeleton"
+        "Skeleton",
+        "Shattered"
     };
 
     private List<ProtoId<SpeciesPrototype>> _species = new();

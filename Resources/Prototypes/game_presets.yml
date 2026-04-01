@@ -138,19 +138,11 @@
     - secret
     - sekrit
   name: secret-title
-  showInVote: true # Trauma
+  showInVote: true
   description: secret-description
   rules:
-  # <Trauma> - completely changed every rule
+  - Insurgency # Trauma
   - Secret
-  - BasicRoundstartVariation
-  - SpaceTrafficControlEventScheduler
-  - BasicStationEventScheduler
-  - BasicAntagEventScheduler
-  - ModerateAntagEventScheduler
-  - Insurgency # Always some shitters for sec to deal with
-  - SubTraitorRandom # Always 50% chance of at least one traitor
-  # </Trauma>
 
 - type: gamePreset
   id: Sandbox

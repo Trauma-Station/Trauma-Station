@@ -1,0 +1,83 @@
+- type: entity
+  id: OverlayCMPlatformBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Starlight/Structures/platforms_overlay.rsi
+    drawdepth: Items
+    noRot: false
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: OverlayCMPlatform
+  parent: OverlayCMPlatformBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: platform
+
+- type: entity
+  id: OverlayCMPlatformCorner
+  parent: OverlayCMPlatformBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: platform_corner
+
+- type: entity
+  id: OverlayRMCPlatformCornerSmall
+  parent: OverlayCMPlatformBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: platform_deco
+
+- type: entity
+  id: OverlayCMPlatformDark
+  parent: OverlayCMPlatformBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: platform_dark
+
+- type: entity
+  id: OverlayCMPlatformCornerDark
+  parent: OverlayCMPlatformBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: platform_corner_dark
+
+- type: entity
+  id: OverlayRMCPlatformCornerSmallDark
+  parent: OverlayCMPlatformBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: platform_deco_dark
+
+- type: entity
+  id: OverlayCMPlatformWood
+  parent: OverlayCMPlatformBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: platform_wood
+
+- type: entity
+  id: OverlayCMPlatformCornerWood
+  parent: OverlayCMPlatformBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: platform_corner_wood
+
+- type: entity
+  id: OverlayRMCPlatformCornerSmallWood
+  parent: OverlayCMPlatformBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: platform_deco_wood

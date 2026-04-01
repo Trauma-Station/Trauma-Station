@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Server.Administration.Systems;
 using Content.Shared.Verbs;
 
 namespace Content.Goobstation.Server.Administration.Systems;
@@ -10,12 +11,7 @@ public sealed partial class GoobAdminVerbSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GetVerbsEvent<Verb>>(GetVerbs);
-    }
-
-    private void GetVerbs(GetVerbsEvent<Verb> args)
-    {
-        AddAntagVerbs(args);
-        AddSmiteVerbs(args);
+        SubscribeLocalEvent<GetAntagVerbsEvent>(OnGetAntagVerbs);
+        SubscribeLocalEvent<GetVerbsEvent<Verb>>(AddSmiteVerbs);
     }
 }

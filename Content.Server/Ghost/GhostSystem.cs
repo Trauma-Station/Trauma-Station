@@ -606,7 +606,8 @@ namespace Content.Server.Ghost
                             && TryComp<MobThresholdsComponent>(playerEntity, out var thresholds))
                         {
                             var playerDeadThreshold = _mobThresholdSystem.GetThresholdForState(playerEntity.Value, MobState.Dead, thresholds);
-                            dealtDamage = playerDeadThreshold - _mobThresholdSystem.CheckVitalDamage(playerEntity.Value, damageable); // Trauma - use vital damage
+                            dealtDamage = playerDeadThreshold -
+                                _mobThresholdSystem.CheckVitalDamage((playerEntity.Value, damageable)); // Trauma - use vital damage
                         }
 
                         // <Trauma>

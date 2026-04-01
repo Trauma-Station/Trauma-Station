@@ -1,0 +1,18 @@
+- type: entityTable
+  id: ToolboxWAREntityTable
+  table: !type:AllSelector
+    children:
+    - id: Crowbar
+    - id: Wrench
+    - id: Screwdriver
+    - id: Wirecutter
+    - id: Welder
+    - id: Multitool
+    - id: ClothingHandsGlovesCombat
+    - id: ClothingMaskGasSyndicate
+    - !type:GroupSelector
+      children:
+      - id: NukeOpsDeclarationOfWar
+        weight: 0.3
+      - id: NukeOpsDeclarationOfWarBroken
+        weight: 0.7

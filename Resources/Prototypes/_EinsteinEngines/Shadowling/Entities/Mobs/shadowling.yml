@@ -67,8 +67,9 @@
     damage:
       types:
         Heat: -20
-      groups:
-        Brute: -20
+        Blunt: -6.66
+        Slash: -6.66
+        Piercing: -6.66
   - type: SlowOnDamage
     speedModifierThresholds:
       600: 0.5

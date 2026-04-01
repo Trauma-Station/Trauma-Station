@@ -15,10 +15,6 @@
   name: xenomorph-caste-sentinel
 
 - type: xenomorphCaste
-  id: Maid
-  name: xenomorph-caste-maid
-
-- type: xenomorphCaste
   id: Praetorian
   name: xenomorph-caste-praetorian
   needCasteDeath: Queen

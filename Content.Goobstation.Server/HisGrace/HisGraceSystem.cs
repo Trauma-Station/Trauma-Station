@@ -7,12 +7,12 @@ using Content.Goobstation.Shared.Overlays;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Server.Atmos.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -172,7 +172,7 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
             return;
 
         // 5 blunt per entity consumed
-        hisGrace.Comp.CurrentDamageIncrease.DamageDict["Blunt"] = hisGrace.Comp.EntitiesAbsorbed * 5;
+        hisGrace.Comp.CurrentDamageIncrease.DamageDict["Blunt"] = hisGrace.Comp.EntitiesAbsorbed * 2;
         melee.Damage = hisGrace.Comp.BaseDamage + hisGrace.Comp.CurrentDamageIncrease;
 
         Dirty(hisGrace, melee);
@@ -319,8 +319,7 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
         // revive if dead
         if (_state.IsDead(user)
             && _threshold.TryGetDeadThreshold(user, out var deadThreshold)
-            && TryComp<DamageableComponent>(user, out var damageable)
-            && _threshold.CheckVitalDamage(user, damageable) < deadThreshold
+            && _threshold.CheckVitalDamage(user) < deadThreshold
             && hisGrace.Comp.IsHeld)
         {
             _state.ChangeMobState(user, MobState.Critical);

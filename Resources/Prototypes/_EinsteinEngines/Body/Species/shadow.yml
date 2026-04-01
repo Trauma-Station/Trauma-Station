@@ -63,12 +63,12 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 40
     damage:
       types:
         Heat: -0.14
-      groups:
-        Brute: -0.14
+        Blunt: -0.14
+        Slash: -0.14
+        Piercing: -0.14
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:

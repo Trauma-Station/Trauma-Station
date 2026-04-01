@@ -110,7 +110,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma
   id: GasTankBase
   components:
   - type: Sprite

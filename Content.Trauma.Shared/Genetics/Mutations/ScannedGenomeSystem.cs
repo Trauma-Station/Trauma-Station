@@ -181,7 +181,8 @@ public sealed class ScannedGenomeSystem : EntitySystem
                 continue;
             }
 
-            sequences.Add(new SequenceState(sequence.Bases, sequence.OriginalBases, data.Number, data.Discovered ? id.ToString() : null));
+            var rarity = _mutation.GetRarity(id);
+            sequences.Add(new SequenceState(sequence.Bases, sequence.OriginalBases, data.Number, rarity, data.Discovered ? id.ToString() : null));
         }
     }
 

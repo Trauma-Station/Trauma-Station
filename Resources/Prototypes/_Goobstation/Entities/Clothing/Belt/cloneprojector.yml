@@ -22,8 +22,8 @@
     size: Large
   - type: CloneProjector
     damageOnDestroyed:
-      groups:
-        Brute: 10
+      types:
+        Blunt: 10
     addedComponents:
     - type: GhostTakeoverAvailable
     - type: AntagImmune
@@ -98,8 +98,7 @@
       soulOwnedNotDevil: true
     - type: Flammable
       damage:
-        types:
-          burn: 0 # required for whatever reason, go fuck yourself
+        types: {}
     - type: FireVisuals
     - type: Respirator
       damage:

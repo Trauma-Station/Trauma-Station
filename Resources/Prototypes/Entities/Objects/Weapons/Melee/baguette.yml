@@ -8,7 +8,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ FoodBreadBaguette, BaseSword, BaseSyndicateContraband ]
+  parent: [ FoodBreadBaguette, BaseSword, BaseSyndicateContraband, KnifeDurability] # Trauma - Durability
   id: WeaponBaguette
   suffix: Weapon
   components:

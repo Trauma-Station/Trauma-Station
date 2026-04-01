@@ -7,6 +7,7 @@
   - type: Mutation
     instability: 25
     difficulty: 16
+    rarity: Mythical
   - type: ActionMutation
     action: ActionMutationShockTouch
 
@@ -41,6 +42,7 @@
   - type: Mutation
     instability: 35
     difficulty: 16
+    rarity: Mythical
   #- type: ActionMutation
   #  action: ActionMutationMendingTouch
   # TODO: jesus christ this has a lot of logic

@@ -1,0 +1,15 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<ContainerButton xmlns="https://spacestation14.io"
+        xmlns:graphics="using:Robust.Client.Graphics"
+        Margin="12 8"
+        Disabled="True">
+    <PanelContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="4">
+            <Label Name="TaskName" HorizontalExpand="True"/>
+            <Label Name="Status" Visible="False" Margin="4"/>
+        </BoxContainer>
+    </PanelContainer>
+</ContainerButton>

@@ -15,7 +15,7 @@
   - type: MeleeWeapon # Same dps, more wounding and range compared to blade, but no AP
     damage:
       types:
-        Slash: 20
+        Slash: 17
       woundSeverityMultipliers:
         Slash: 2
     angle: 90

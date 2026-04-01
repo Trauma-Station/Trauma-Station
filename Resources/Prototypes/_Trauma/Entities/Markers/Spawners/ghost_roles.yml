@@ -1,10 +1,11 @@
 - type: entity
   parent: BaseAntagSpawner
-  id: SpawnPointInsurgent
-  name: insurgent spawn point
-  categories: [ Spawner ]
+  id: GhostRoleSpawnerInsurgent
+  name: insurgent ghost role spawner
   components:
   - type: GhostRole
+    name: roles-antag-insurgent-name
+    description: roles-antag-insurgent-objective
     rules: ghost-role-information-rules-team-antagonist
     mindRoles:
     - MindRoleInsurgent
@@ -13,3 +14,5 @@
     layers:
     - state: green
     - state: passenger
+    - sprite: Clothing/Mask/gas.rsi
+      state: icon

@@ -18,7 +18,7 @@
 
 - type: entity
   name: chainsaw
-  parent: BaseItem
+  parent: [BaseItem, KnifeDurabilityStrong] # Trauma
   id: Chainsaw
   description: A very large chainsaw. Usually you use this for cutting down trees... usually.
   components:
@@ -57,6 +57,14 @@
   - type: Item
     size: Normal
     sprite: Objects/Weapons/Melee/chainsaw.rsi
+  # <Trauma>
+    shape:
+    - 0,0,1,1
+    - 1,1,4,1
+    storedRotation: 45
+    storedOffset: -15,6
+  # </Trauma>
+
   - type: DisarmMalus
   - type: RefillableSolution
     solution: Welder

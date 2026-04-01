@@ -1,0 +1,65 @@
+- type: construction
+  id: CharcoalOven
+  graph: CharcoalOven
+  startNode: start
+  targetNode: finish
+  placementMode: SnapgridCenter
+  category: construction-category-forging
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 2
+  useQuality: false
+
+- type: construction
+  id: BloomeryCold
+  graph: BloomeryCold
+  startNode: start
+  targetNode: bloomery
+  placementMode: SnapgridCenter
+  category: construction-category-forging
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    FabricationKnowledge: 2
+  useQuality: false
+
+- type: construction
+  id: CharcoalForge
+  graph: CharcoalForge
+  startNode: start
+  targetNode: unlit
+  placementMode: SnapgridCenter
+  category: construction-category-forging
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 2
+  useQuality: false
+
+- type: construction
+  id: QuenchingBarrel
+  graph: QuenchingBarrel
+  startNode: start
+  targetNode: finish
+  placementMode: SnapgridCenter
+  category: construction-category-forging
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    MetalworkingKnowledge: 2
+  useQuality: false

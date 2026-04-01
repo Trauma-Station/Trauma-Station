@@ -21,6 +21,8 @@ public sealed partial class GeneticSequencer : BoxContainer
     public event Action<uint>? OnWriteMutation;
     public event Action<uint>? OnSequence;
     public event Action<uint>? OnResetSequence;
+    public event Action? OnPrintScan;
+    public event Action<uint>? OnPrintSequence;
 
     private EntityUid? _mob;
     private Entity<GeneticsDiskComponent>? _disk;
@@ -65,6 +67,13 @@ public sealed partial class GeneticSequencer : BoxContainer
         {
             UpdateSequence();
             UpdateWriteButton();
+        };
+
+        PrintScanButton.OnPressed += _ => OnPrintScan?.Invoke();
+        PrintSequenceButton.OnPressed += _ =>
+        {
+            if (SequenceButtons.Index is {} s)
+                OnPrintSequence?.Invoke(s);
         };
     }
 
@@ -118,6 +127,12 @@ public sealed partial class GeneticSequencer : BoxContainer
         Scanner.UpdateHasScanner(hasScanner);
     }
 
+    public void UpdateHasPrintout(bool hasPrintout)
+    {
+        PrintScanButton.Visible = hasPrintout;
+        PrintSequenceButton.Visible = hasPrintout;
+    }
+
     public void UpdateDisk(Entity<GeneticsDiskComponent>? disk)
     {
         _disk = disk;
@@ -128,6 +143,12 @@ public sealed partial class GeneticSequencer : BoxContainer
     {
         _writeCooldown = cooldown;
         UpdateWriteButton();
+    }
+
+    public void UpdatePrintCooldown(bool cooldown)
+    {
+        PrintScanButton.Disabled = cooldown;
+        PrintSequenceButton.Disabled = cooldown;
     }
 
     private void UpdateWriteButton()
