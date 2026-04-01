@@ -25,7 +25,7 @@ public abstract class SharedBloodCrawlSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityQuery<ActionsComponent> _actionsQuery = default!;
 
-    private HashSet<Entity<PuddleComponent>> _puddles;
+    private HashSet<Entity<PuddleComponent>> _puddles = new();
 
     /// <inheritdoc/>
     public override void Initialize()
