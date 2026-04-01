@@ -469,7 +469,7 @@ namespace Content.Server.Atmos.EntitySystems
                 if (curTime < flammable.NextUpdate)
                     continue;
 
-                flammable.NextUpdate += UpdateTime;
+                flammable.NextUpdate = curTime + UpdateTime; // Trauma - add to curTime instead of +=
 
                 // Check if we finished resisting.
                 if (curTime > flammable.ResistCompleteTime)

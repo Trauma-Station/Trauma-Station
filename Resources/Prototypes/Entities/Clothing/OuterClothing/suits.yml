@@ -27,7 +27,7 @@
         Piercing: 0.9
         Heat: 0.8
   - type: ExplosionResistance
-    damageCoefficient: 0.15
+    damageCoefficient: 0.1 # Trauma - bombsuits protect 90% of damage with part coverage
   - type: GroupExamine
   - type: Tag
     tags:

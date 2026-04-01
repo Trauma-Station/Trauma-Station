@@ -29,6 +29,11 @@
     autoRechargeRate: 50
     autoRechargePauseTime: 40
   - type: DisarmMalus
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
   - type: Tag
     tags:
     - Justice

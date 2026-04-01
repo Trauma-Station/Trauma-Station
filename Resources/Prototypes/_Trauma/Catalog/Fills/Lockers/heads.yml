@@ -4,6 +4,7 @@
     children:
     - id: BoxSkillChipsCargo
     - id: CargoMegaphone
+    - id: ArmoryOverrideKeyComponents
 
 - type: entityTable
   id: LockerFillHeadOfPersonnelTrauma
@@ -12,6 +13,7 @@
     - id: ClothingHeadsetAltCommand
     - id: CommandMegaphone
     - id: ReinforcementCallerHoP
+    - id: ArmoryOverrideKeyComponents
 
 - type: entityTable
   id: LockerFillChiefEngineerTrauma
@@ -25,6 +27,7 @@
     - id: CartridgeRocketSingularityBuster
     - id: WeaponLauncherSingularityBuster
     - id: MachinePowerTransmissionLaserFlatpack
+    - id: ArmoryOverrideKeyComponents
 
 - type: entityTable
   id: LockerFillChiefMedicalOfficerTrauma
@@ -39,6 +42,7 @@
     - id: ClothingBeltMilitaryWebbingCMOFilled
     - id: DiseaseDiagnoserFlatPack
     - id: VaccinatorFlatPack
+    - id: ArmoryOverrideKeyComponents
 
 - type: entityTable
   id: LockerFillResearchDirectorTrauma
@@ -51,6 +55,7 @@
     - id: ClothingBeltGeminiHoloProjector # Who better to do science with than yourself?
     - id: MMI
     - id: FreeformLawboard
+    - id: ArmoryOverrideKeyComponents
 
 - type: entityTable
   id: LockerFillHeadOfSecurityTrauma
@@ -58,5 +63,11 @@
     children:
     - id: BoxSkillChipsSec
     - id: ClothingBeltSheathHeadOfSecurityFilled
-    - id: ReinforcementCallerHos
     - id: TelescopicShield
+    - id: ArmoryOverrideKeyComponents
+
+- type: entityTable
+  id: LockerFillCaptainTrauma
+  table: !type:AllSelector
+    children:
+    - id: ArmoryOverrideKeyComponents

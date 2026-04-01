@@ -22,13 +22,13 @@ public sealed partial class ParryExhaustionComponent : Component
     /// How fast exhaustion is regenerated when not being attacked, per second.
     /// </summary>
     [DataField]
-    public float ExhaustionRegenRate = 0.25f;
+    public float ExhaustionRegenRate = 0.1f;
 
     /// <summary>
     /// How much time must pass since last reflect attempt in order to start reducing exhaustion.
     /// </summary>
     [DataField]
-    public TimeSpan ExhaustionRegenDelay = TimeSpan.FromSeconds(3);
+    public TimeSpan ExhaustionRegenDelay = TimeSpan.FromSeconds(10);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
     public TimeSpan ExhaustionRegenTimer;

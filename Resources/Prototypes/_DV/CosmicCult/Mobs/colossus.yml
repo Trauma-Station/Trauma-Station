@@ -225,6 +225,9 @@
       - Ghost
       - CosmicCult
       - CosmicColossus
+  - type: InnateWaypointer
+    waypointerProtoIds:
+    - NTStationWaypointer
 
 - type: entity
   parent: [ MobCosmicColossusBase ]

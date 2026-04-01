@@ -353,6 +353,12 @@
     fireCost: 20 # Trauma was 25
   - type: Item
     size: Large
+  # <Trauma>
+    shape:
+    - 0,0,3,0
+    - 1,1,2,1
+    storedOffset: 0,-5
+  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_gun.rsi
     layers:
@@ -383,7 +389,14 @@
     proto: RedLaserPractice
     fireCost: 62.5
   - type: PacifismAllowedGun
-
+  # <Trauma>
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,3,0
+    - 1,1,2,1
+    storedOffset: 0,-5
+  # </Trauma>
 - type: entity
   name: pulse pistol
   parent: [BaseWeaponBatterySmall, BaseCentcommContraband]

@@ -1,0 +1,26 @@
+# - type: entity # Todo, add a way for this to be charge based
+#   name: flashlight
+#   parent: FlashlightLantern
+#   id: FlashlightEMP
+#   suffix: EMP
+#   description: It lights the way to freedom.
+#   components:
+#   - type: MeleeWeapon
+#     canWideSwing: false
+#     damage:
+#       types:
+#         Blunt: 0
+#     soundHit:
+#       path: /Audio/_Goobstation/Weapons/Baton/woodhit.ogg
+#   - type: EmpOnTrigger
+#     range: 1.5
+#     disableDuration: 15
+#   - type: TriggerOnMeleeHit
+#   - type: LimitedCharges
+#     maxCharges: 3
+#   - type: AutoRecharge
+#     rechargeDuration: 30
+#   - type: ActionOnInteract
+#     requiresCharge: true
+#     actions:
+#     - ActionRgbLight

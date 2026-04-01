@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared._Imp.Drone;
 using Robust.Shared.Player;
 // </Trauma>
@@ -55,8 +54,7 @@ public sealed partial class BorgSystem
                 hpPercent,
                 chassis.ModuleCount,
                 hasBrain,
-                canDisable,
-                HasComp<AiRemoteControllerComponent>(uid)); // Corvax-Next-AiRemoteControl
+                canDisable);
 
             var payload = new NetworkPayload()
             {
@@ -83,7 +81,6 @@ public sealed partial class BorgSystem
                 hpPercent,
                 0,
                 hasBrain,
-                false, // Corvax-Next-AiRemoteControl
                 false);
 
             var payload = new NetworkPayload()

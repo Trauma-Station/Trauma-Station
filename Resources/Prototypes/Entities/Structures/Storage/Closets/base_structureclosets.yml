@@ -106,6 +106,7 @@
         - MachineMask
         layer:
         - MachineLayer
+        - BulletImpassable # Goobstation - Crawling
   - type: EntityStorage
     # Goob start; allow changing collisionmasks to remove when opening containers
     masksToRemove: 84
