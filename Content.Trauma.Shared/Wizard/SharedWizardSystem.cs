@@ -134,7 +134,7 @@ public sealed partial class SharedWizardSystem : CommonWizardSystem
         }
     }
 
-    private void OnFactionSwap(AfterMindSwappedEvent args)
+    private void OnFactionSwap(ref AfterMindSwappedEvent args)
     {
         // These are the only factions we want to "follow" the mind
         var factionsToTransfer = new List<ProtoId<NpcFactionPrototype>> { "Wizard", "Assistant" };

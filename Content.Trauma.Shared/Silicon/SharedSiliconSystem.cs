@@ -13,7 +13,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Silicon.Systems;
 
-public abstract class SharedSiliconChargeSystem : CommonSiliconSystem
+public sealed class SharedSiliconChargeSystem : CommonSiliconSystem
 {
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
 
