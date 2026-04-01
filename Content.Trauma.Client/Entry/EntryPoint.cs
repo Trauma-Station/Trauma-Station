@@ -18,6 +18,7 @@ public sealed class EntryPoint : GameClient
         base.PreInit();
 
         ContentTraumaClientIoC.Register(Dependencies);
+        IoCManager.InjectDependencies(this);
     }
 
     public override void PostInit()

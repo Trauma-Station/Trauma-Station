@@ -38,7 +38,6 @@ public sealed partial class SharedWizardSystem : CommonWizardSystem
         SubscribeLocalEvent<ZombieComponent, BeforeMindSwappedEvent>(OnMindswapZombie);
 
         SubscribeLocalEvent<AfterMindSwappedEvent>(OnMindswapAfter);
-        SubscribeLocalEvent<AfterMindSwappedEvent>(OnFactionSwap);
 
         SubscribeLocalEvent<ReflectiveComponent, ProjectileReflectedEvent>(OnReflection);
     }
@@ -112,6 +111,7 @@ public sealed partial class SharedWizardSystem : CommonWizardSystem
         TransferComponent<HeadRevolutionaryComponent>(args.Performer, args.Target);
         TransferComponent<WizardComponent>(args.Performer, args.Target);
         TransferComponent<ApprenticeComponent>(args.Performer, args.Target);
+        OnFactionSwap(ref args);
     }
 
     private void TransferComponent<T>(EntityUid a, EntityUid b) where T : IComponent, new()
