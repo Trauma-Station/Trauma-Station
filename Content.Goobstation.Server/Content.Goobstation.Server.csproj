@@ -30,9 +30,5 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <ProjectReference Include="..\Content.Server\Content.Server.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Teleportation\Systems\" />
-  </ItemGroup>
-
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
 </Project>

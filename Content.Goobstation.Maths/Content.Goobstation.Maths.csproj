@@ -10,12 +10,6 @@
       <ProjectReference Include="..\Content.ModuleManager\Content.ModuleManager.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Update="Materials\MaterialComponent.cs">
-        <SubType>Component</SubType>
-      </Compile>
-    </ItemGroup>
-
     <Import Project="../RobustToolbox/Imports/Shared.props" />
     <Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
 </Project>
