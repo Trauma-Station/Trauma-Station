@@ -22,7 +22,6 @@ namespace Content.Goobstation.Server.Possession;
 
 public sealed partial class PossessionSystem : SharedPossessionSystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;

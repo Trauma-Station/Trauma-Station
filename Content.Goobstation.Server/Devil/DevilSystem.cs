@@ -19,7 +19,6 @@ using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Actions;
 using Content.Server.Antag.Components;
-using Content.Shared.Destructible;
 using Content.Server.Hands.Systems;
 using Content.Server.Jittering;
 using Content.Server.Mind;
