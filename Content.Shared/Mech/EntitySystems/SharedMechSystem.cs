@@ -2,7 +2,6 @@
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Mech;
 using Content.Trauma.Common.TileMovement;
-using Content.Goobstation.Common.Mech;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Access.Components;
