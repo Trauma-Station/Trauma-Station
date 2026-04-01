@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretAntiInsurgent
+  suffix: AntiInsurgent
+  components:
+  - type: NpcFactionMember
+    factions:
+    - InsurgentDestroyer9000
+  - type: BallisticAmmoProvider
+    proto: CartridgeTurret
+    capacity: 500

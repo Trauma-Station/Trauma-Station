@@ -185,9 +185,9 @@ public abstract class SharedEmitSoundSystem : EntitySystem
         component.NextSound = Timing.CurTime + EmitSoundOnCollideComponent.CollideCooldown;
         var sound = component.Sound;
 
-        if (_netMan.IsServer && sound != null)
+        if (_netMan.IsClient && sound != null && Timing.IsFirstTimePredicted) // Trauma - Client instead of Server, client predicts throwing etc. also check predicted
         {
-            _audioSystem.PlayPvs(_audioSystem.ResolveSound(sound), uid, AudioParams.Default.WithVolume(volume));
+            _audioSystem.PlayLocal(sound, uid, null, AudioParams.Default.WithVolume(volume)); // Trauma - PlayLocal, dont resolve sound
         }
     }
 

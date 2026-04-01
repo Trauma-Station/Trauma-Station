@@ -2,13 +2,13 @@
 
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.Atmos.Components;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Managers;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;

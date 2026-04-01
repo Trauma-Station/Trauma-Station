@@ -210,16 +210,15 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     {
         args.Handled = true;
 
-        // Shitmed - Starlight Abductors Change Start
+        // <Trauma> - allow changing the target for abductor eye
         var target = args.Target;
         if (ent.Comp.AllowCrossGrid && TryComp(ent, out RelayInputMoverComponent? relay))
             target = relay.RelayEntity;
-        // Shitmed Change End
-
         var targetXform = Transform(target);
+        // </Trauma>
 
         // No cross-grid
-        if (targetXform.GridUid != Transform(args.User).GridUid && !ent.Comp.AllowCrossGrid) // Shitmed Change
+        if (targetXform.GridUid != Transform(args.User).GridUid && !ent.Comp.AllowCrossGrid) // Trauma - check AllowCrossGrid
         {
             return;
         }

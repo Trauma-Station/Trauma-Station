@@ -10,7 +10,7 @@ namespace Content.Shared.Body;
 /// Defines an organ that applies markings on top of the layer specified in <see cref="VisualOrganComponent" />
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true, fieldDeltas: true)]
-[Access(typeof(SharedVisualBodySystem))]
+// [Access(typeof(SharedVisualBodySystem))] // Trauma
 public sealed partial class VisualOrganMarkingsComponent : Component
 {
     /// <summary>

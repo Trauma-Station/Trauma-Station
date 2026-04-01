@@ -60,6 +60,7 @@ public sealed partial class BorgSystem
                 hasBrain,
                 canDisable,
                 _borg.IsSlavedBorg(uid)); // Corvax-Next-AiRemoteControl
+                canDisable);
 
             var payload = new NetworkPayload()
             {
@@ -86,7 +87,6 @@ public sealed partial class BorgSystem
                 hpPercent,
                 0,
                 hasBrain,
-                false, // Corvax-Next-AiRemoteControl
                 false);
 
             var payload = new NetworkPayload()

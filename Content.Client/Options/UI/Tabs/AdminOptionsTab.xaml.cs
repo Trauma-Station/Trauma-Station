@@ -91,7 +91,7 @@ public sealed partial class AdminOptionsTab : Control
         Control.AddOptionPercentSlider(
             GoobCVars.AdminNotificationVolume,
             NotificationsVolumeSlider,
-            scale: ContentAudioSystem.AdminNotificationsMultiplier);
+            scale: 1f);
         // Goobstation End
     }
 }

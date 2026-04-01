@@ -18,6 +18,7 @@ public sealed class DeleteEffectSystem : EntityEffectSystem<MetaDataComponent, D
 {
     protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<Delete> args)
     {
-        PredictedDel(ent.AsNullable());
+        if (!TerminatingOrDeleted(ent, ent.Comp))
+            PredictedDel(ent.AsNullable());
     }
 }

@@ -7,7 +7,6 @@ using Content.Goobstation.Shared.Religion; // Goobstation - Shitchap
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.Antag;
-using Content.Server.Atmos.Components;
 using Content.Server.Atmos.Rotting;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
@@ -21,6 +20,7 @@ using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Audio;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Eye;
 using Content.Shared.GameTicking.Components;

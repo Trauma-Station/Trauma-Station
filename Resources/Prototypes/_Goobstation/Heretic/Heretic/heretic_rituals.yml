@@ -1483,6 +1483,7 @@
         Flesh: ClothingOuterArmorHereticFlesh
         Blade: ClothingOuterArmorHereticBlade
         Cosmos: ClothingOuterArmorHereticCosmos
+        Lock: ClothingOuterArmorHereticLock
         Rust: ClothingOuterArmorHeretic
 
 - type: entity
@@ -1757,6 +1758,49 @@
       applyOn: Platform
       output:
         PotionEther: 1
+
+- type: entity
+  id: RitualEnvyKnife
+  name: Rite of Stolen Faces
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/envy_knife.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+        - whitelist:
+            components:
+            - Heart
+          name: heretic-ritual-ingredient-heart
+        - whitelist:
+            tags:
+            - MimeMask
+            - ClownMask
+          name: heretic-ritual-ingredient-mime-clown-mask
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        EnvyKnife: 1
 
 ## stage 6
 - type: entity

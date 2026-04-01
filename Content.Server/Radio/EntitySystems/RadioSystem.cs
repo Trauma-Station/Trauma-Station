@@ -167,7 +167,7 @@ public sealed partial class RadioSystem : EntitySystem // Trauma - made partial
         //     ("channel", $"\\[{channel.LocalizedName}\\]"),
         //     ("name", name),
         //     ("message", content));
-        var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, language, jobIcon, jobName); // Einstein Engines - Language
+        var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, language, speech, jobIcon, jobName); // Einstein Engines - Language
 
         // most radios are relayed to chat, so lets parse the chat message beforehand
         // var chat = new ChatMessage(
@@ -186,7 +186,7 @@ public sealed partial class RadioSystem : EntitySystem // Trauma - made partial
         var obfuscated = _language.ObfuscateSpeech(content, language);
         // Goobstation - Chat Pings
         // Added GetNetEntity(messageSource), to source
-        var obfuscatedWrapped = WrapRadioMessage(messageSource, channel, name, obfuscated, language, jobIcon, jobName);
+        var obfuscatedWrapped = WrapRadioMessage(messageSource, channel, name, obfuscated, language, speech, jobIcon, jobName);
         var notUdsMsg = new ChatMessage(ChatChannel.Radio, obfuscated, obfuscatedWrapped, GetNetEntity(messageSource), null);
         var ev = new RadioReceiveEvent(messageSource, channel, msg, notUdsMsg, language, radioSource);
         // Einstein Engines - Language end
@@ -247,11 +247,11 @@ public sealed partial class RadioSystem : EntitySystem // Trauma - made partial
         string name,
         string message,
         LanguagePrototype language,
+        SpeechVerbPrototype speech,
         ProtoId<JobIconPrototype>? jobIcon, // Goob edit
         string? jobName = null) // Gaby Radio icons
     {
         // TODO: code duplication with ChatSystem.WrapMessage
-        var speech = _chat.GetSpeechVerb(source, message);
         var languageColor = channel.Color;
 
         // Goobstation - Bolded Language Overrides begin

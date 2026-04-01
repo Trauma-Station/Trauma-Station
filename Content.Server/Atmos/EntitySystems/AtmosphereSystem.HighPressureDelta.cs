@@ -1,4 +1,3 @@
-using Content.Server.Atmos.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Humanoid;
@@ -130,7 +129,7 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
 
             // Used by ExperiencePressureDifference to correct push/throw directions from tile-relative to physics world.
-            var gridWorldRotation = _transformSystem.GetWorldRotation(gridAtmosphere);
+            var gridWorldRotation = XformSystem.GetWorldRotation(gridAtmosphere);
 
             // If we're using monstermos, smooth out the yeet direction to follow the flow
             //TODO This is bad, don't run this. It just makes the throws worse by somehow rounding them to orthogonal
@@ -245,9 +244,8 @@ namespace Content.Server.Atmos.EntitySystems
                     //TODO Consider replacing throw target with proper trigonometry angles.
                     if (throwTarget != EntityCoordinates.Invalid)
                     {
-                        var pos = throwTarget.ToMap(EntityManager, _transformSystem).Position - xform.WorldPosition + dirVec;
-                        _throwing.TryThrow(uid, pos.Normalized() * MathF.Min(moveForce, SpaceWindMaxVelocity), moveForce,
-                            predicted: false); // Trauma
+                        var pos = ((XformSystem.ToMapCoordinates(throwTarget).Position - XformSystem.GetWorldPosition(xform)).Normalized() + dirVec).Normalized();
+                        _physics.ApplyLinearImpulse(uid, pos * moveForce, body: physics);
                     }
                     else
                     {

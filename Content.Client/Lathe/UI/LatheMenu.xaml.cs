@@ -47,12 +47,11 @@ public sealed partial class LatheMenu : DefaultWindow
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        InitializeTrauma();
 
         _spriteSystem = _entityManager.System<SpriteSystem>();
         _lathe = _entityManager.System<LatheSystem>();
         _materialStorage = _entityManager.System<MaterialStorageSystem>();
-        _miningPoints = _entityManager.System<CommonMiningPointsSystem>(); // DeltaV
-        _silo = _entityManager.System<CommonSiloSystem>(); // Goobstation
 
         SearchBar.OnTextChanged += _ =>
         {
@@ -74,7 +73,6 @@ public sealed partial class LatheMenu : DefaultWindow
         FilterOption.OnItemSelected += OnItemSelected;
 
         ServerListButton.OnPressed += a => OnServerListButtonPressed?.Invoke(a);
-        ResetQueueList.OnPressed += a => OnResetQueueListButtonPressed?.Invoke(a); // Goobstation
 
         DeleteFabricating.OnPressed += _ => DeleteFabricatingAction?.Invoke();
     }
@@ -93,24 +91,7 @@ public sealed partial class LatheMenu : DefaultWindow
             AmountLineEdit.SetText(latheComponent.DefaultProductionAmount.ToString());
         }
 
-        // Begin DeltaV Additions: Mining points UI
-        MiningPointsContainer.Visible = _entityManager.TryGetComponent<MiningPointsComponent>(Entity, out var points);
-        MiningPointsClaimButton.OnPressed += _ => OnClaimMiningPoints?.Invoke();
-
-        if (points != null)
-        {
-            UpdateMiningPoints(points.Points);
-            if (!IsSiloConnected(Entity, out var warning, true))
-            {
-                MiningPointsNoConnectionWarning.Visible = true;
-
-                if (warning != null)
-                    MiningPointsNoConnectionWarning.SetMessage(FormattedMessage.FromMarkupOrThrow(warning));
-            }
-        }
-
-        MaterialsList.SetOwner(Entity);
-        // End DeltaV Additions
+        UpdateMiningPoints(); // Trauma
     }
 
     /// <summary>
@@ -136,11 +117,14 @@ public sealed partial class LatheMenu : DefaultWindow
                     continue;
             }
 
-            if (SearchBar.Text.Trim().Length != 0)
+            // <Trauma> - don't trim it twice, use proper case insensitive search
+            var query = SearchBar.Text.Trim();
+            if (query.Length > 0)
             {
-                if (_lathe.GetRecipeName(recipe).ToLowerInvariant().Contains(SearchBar.Text.Trim().ToLowerInvariant()))
+                if (_lathe.GetRecipeName(recipe).Contains(query, StringComparison.CurrentCultureIgnoreCase))
                     recipesToShow.Add(proto);
             }
+            // </Trauma>
             else
             {
                 recipesToShow.Add(proto);

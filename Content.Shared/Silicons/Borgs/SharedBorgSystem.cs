@@ -222,19 +222,8 @@ public abstract partial class SharedBorgSystem : EntitySystem
 
     private void OnMindRemoved(Entity<BorgChassisComponent> chassis, ref MindRemovedMessage args)
     {
-        BorgDeactivate(chassis); // Trauma - use helper method
-    }
-
-    /// <summary>
-    /// Trauma - moved out of OnMindRemoved, added user for predicted popup
-    /// </summary>
-    public void BorgDeactivate(Entity<BorgChassisComponent> chassis, EntityUid? user = null)
-    {
-        var msg = Loc.GetString("borg-mind-removed", ("name", Identity.Name(chassis.Owner, EntityManager)));
-        if (user != null)
-            _popup.PopupPredicted(msg, chassis, user);
-        else
-            _popup.PopupEntity(msg, chassis);
+        // Unpredicted because the event is raised on the server.
+        _popup.PopupEntity(Loc.GetString("borg-mind-removed", ("name", Identity.Name(chassis.Owner, EntityManager))), chassis.Owner);
 
         SetActive(chassis, false);
         // Turn off the light so that the no-player visuals can be seen.
@@ -286,7 +275,6 @@ public abstract partial class SharedBorgSystem : EntitySystem
             _adminLog.Add(LogType.Action, LogImpact.Low,
                 $"{args.User} installed module {used} into borg {chassis.Owner}");
             args.Handled = true;
-            return; // Trauma
         }
 
         // <Trauma> - Corvax-Next-AiRemoteControl-Start

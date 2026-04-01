@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2024 NULL882 <gost6865@yandex.ru>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Ripley MK-II
 - type: latheRecipe
   id: RipleyMKIIHarness
@@ -234,7 +230,9 @@
   id: MechEquipmentDrill
   result: WeaponMechMeleeDrill
   categories:
+  - Mech
   - MechEquipment
+  - Clarke
   completetime: 10
   materials:
     Steel: 1000
@@ -244,7 +242,9 @@
   id: MechEquipmentDrillDiamond
   result: WeaponMechMeleeDrillDiamond
   categories:
+  - Mech
   - MechEquipment
+  - Clarke
   completetime: 10
   materials:
     Steel: 1000
@@ -256,7 +256,9 @@
   id: MechEquipmentHonkerBananaMortar
   result: WeaponMechSpecialBananaMortar
   categories:
+  - Mech
   - MechEquipment
+  - Honker
   completetime: 10
   materials:
     Steel: 1150
@@ -266,7 +268,9 @@
   id: MechEquipmentHonkerMousetrapMortar
   result: WeaponMechSpecialMousetrapMortar
   categories:
+  - Mech
   - MechEquipment
+  - Honker
   completetime: 10
   materials:
     Steel: 1200
@@ -277,6 +281,8 @@
   id: MechAirTank
   result: MechAirTank
   categories:
+  - Mech
+  - Parts
   - MechEquipment
   completetime: 10
   materials:
@@ -284,11 +290,6 @@
     Glass: 150
 
 - type: latheRecipe
+  parent: MechAirTank
   id: MechThruster
   result: MechThruster
-  categories:
-  - MechEquipment
-  completetime: 10
-  materials:
-    Steel: 1000
-    Glass: 150

@@ -42,7 +42,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 {
     // <Trauma>
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IonStormSystem _ionStorm = default!;
+    [Dependency] private readonly IonLawSystem _ionLaw = default!;
     [Dependency] private readonly ResearchSystem _research = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly CommonSlavedBorgSystem _borg = default!;
@@ -387,23 +387,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
                 RaiseLocalEvent(connected, new AILawUpdatedEvent());
             }
             // Corvax-Next-AiRemoteControl-End
-
         }
 
     }
-
-    // Corvax-Next-AiRemoteControl-Start
-    public void SetLawsSilent(List<SiliconLaw> newLaws, EntityUid target, SoundSpecifier? cue = null)
-    {
-        if (!TryComp<SiliconLawProviderComponent>(target, out var component))
-            return;
-
-        if (component.Lawset == null)
-            component.Lawset = new SiliconLawset();
-
-        component.Lawset.Laws = newLaws;
-    }
-    // Corvax-Next-AiRemoteControl-End
 
     // Goob edit start
     private void ApplyExperimentalLaws(Entity<SiliconLawUpdaterComponent> ent, Entity<ExperimentalLawProviderComponent, SiliconLawProviderComponent> experiment)
@@ -491,7 +477,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         laws.Laws.RemoveAt(_random.Next(laws.Laws.Count));
 
         // generate a new law...
-        var newLaw = _ionStorm.GenerateLaw();
+        var newLaw = _ionLaw.GetIonLaw();
 
         // see if the law we add will replace a random existing law or be a new glitched order one
         if (laws.Laws.Count > 0)

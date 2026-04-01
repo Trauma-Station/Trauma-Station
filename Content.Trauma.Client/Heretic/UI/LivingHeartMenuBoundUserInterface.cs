@@ -5,7 +5,7 @@ using Content.Client.Lobby.UI.ProfileEditorControls;
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Client.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Components;
-using Content.Trauma.Shared.Heretic.Rituals;
+using Content.Trauma.Shared.Heretic.Events;
 using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -33,7 +33,7 @@ public sealed class LivingHeartMenuBoundUserInterface(EntityUid owner, Enum uiKe
             return;
 
         _menu = this.CreateWindow<SimpleRadialMenu>();
-        _menu.Track(Owner);
+        _menu.Track(player);
         var buttonModels = ConvertToButtons(heretic.SacrificeTargets);
         _menu.SetButtons(buttonModels);
 
@@ -78,6 +78,6 @@ public sealed class LivingHeartMenuBoundUserInterface(EntityUid owner, Enum uiKe
 
     private void HandleRadialMenuClick(NetEntity ent)
     {
-        SendPredictedMessage(new HereticRitualMessage(ent));
+        SendMessage(new EventHereticLivingHeartActivate(ent));
     }
 }

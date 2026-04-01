@@ -65,7 +65,22 @@
   - type: Item
     size: Small
 
-# TODO: These should just give you an xp gain buff rather than make you stronge bruh
+# Debug
+
+- type: entity
+  parent: [BookSkillbook, BaseMagicalContraband]
+  id: BookDebug
+  name: The Hitchikers Guide to the Galaxy
+  suffix: debug
+  description: Teaches you everything.
+  components:
+  - type: Sprite
+    layers:
+    - state: melee
+  - type: KnowledgeGrantOnUse
+    grantEverything: true
+
+# TODO: These should just give you an xp gain buff rather than make you stronger bruh
 - type: entity
   parent: BookSkillbook
   id: BookSchematic

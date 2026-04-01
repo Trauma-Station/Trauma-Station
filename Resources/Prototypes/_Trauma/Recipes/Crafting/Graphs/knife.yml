@@ -1,0 +1,172 @@
+# Forge Knifes
+
+- type: constructionGraph
+  id: ForgeKnife
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: handle
+      steps:
+      - tag: HandleSmall
+        doAfter: 10
+        name: construction-graph-tag-smallhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlesmall
+
+  - node: handle
+    entity: KnifeCraftStart
+    edges:
+
+
+    - to: knifebrass
+      steps:
+      - tag: KnifeBladeBrass
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+    - to: knifesteel
+      steps:
+      - tag: KnifeBladeSteel
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+    - to: knifeplasteel
+      steps:
+      - tag: KnifeBladePlasteel
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+
+    - to: combatknifebrass
+      steps:
+      - tag: CombatKnifeBladeBrass
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+    - to: combatknifesteel
+      steps:
+      - tag: CombatKnifeBladeSteel
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+    - to: combatknifeplasteel
+      steps:
+      - tag: CombatKnifeBladePlasteel
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+
+    - to: cleaverbrass
+      steps:
+      - tag: CleaverBladeBrass
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+    - to: cleaversteel
+      steps:
+      - tag: CleaverBladeSteel
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+    - to: cleaverplasteel
+      steps:
+      - tag: CleaverBladePlasteel
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+
+    - to: kukribrass
+      steps:
+      - tag: KukriBladeBrass
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+    - to: kukristeel
+      steps:
+      - tag: KukriBladeSteel
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+    - to: kukriplasteel
+      steps:
+      - tag: KukriBladePlasteel
+        doAfter: 3
+        name: construction-graph-tag-knifeblade
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+          state: icon
+
+
+  - node: knifebrass
+    entity: BrassForgeKnife
+
+  - node: knifesteel
+    entity: SteelForgeKnife
+
+  - node: knifeplasteel
+    entity: PlasteelForgeKnife
+
+
+  - node: combatknifebrass
+    entity: BrassForgeCombatKnife
+
+  - node: combatknifesteel
+    entity: SteelForgeCombatKnife
+
+  - node: combatknifeplasteel
+    entity: PlasteelForgeCombatKnife
+
+
+  - node: cleaverbrass
+    entity: BrassForgeCleaver
+
+  - node: cleaversteel
+    entity: SteelForgeCleaver
+
+  - node: cleaverplasteel
+    entity: PlasteelForgeCleaver
+
+
+  - node: kukribrass
+    entity: BrassForgeKukri
+
+  - node: kukristeel
+    entity: SteelForgeKukri
+
+  - node: kukriplasteel
+    entity: PlasteelForgeKukri

@@ -77,7 +77,7 @@
   name: dragon tail
   description: Unique glands in this tail let space carp fly in a vacuum.
   components:
-  - type: MovementBodyPart
+  - type: Leg
     walkSpeed: 2.5
     sprintSpeed: 5.5
   - type: Sprite

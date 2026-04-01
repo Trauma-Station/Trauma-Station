@@ -24,19 +24,21 @@ namespace Content.Client.Lathe.UI
 
             _menu = this.CreateWindowCenteredRight<LatheMenu>();
             _menu.SetEntity(Owner);
+            // <Trauma>
+            _menu.OnResetQueueList += () => SendMessage(new LatheQueueResetMessage());
+            _menu.OnClaimMiningPoints += () => SendMessage(new LatheClaimMiningPointsMessage());
+            // </Trauma>
 
             _menu.OnServerListButtonPressed += _ =>
             {
                 SendMessage(new ConsoleServerSelectionMessage());
             };
-            _menu.OnResetQueueListButtonPressed += _ => SendMessage(new LatheQueueResetMessage()); // Goobstation
 
             _menu.RecipeQueueAction += (recipe, amount) =>
             {
                 SendMessage(new LatheQueueRecipeMessage(recipe, amount));
             };
 
-            _menu.OnClaimMiningPoints += () => SendMessage(new LatheClaimMiningPointsMessage()); // DeltaV
             _menu.QueueDeleteAction += index => SendMessage(new LatheDeleteRequestMessage(index));
             _menu.QueueMoveUpAction += index => SendMessage(new LatheMoveRequestMessage(index, -1));
             _menu.QueueMoveDownAction += index => SendMessage(new LatheMoveRequestMessage(index, 1));

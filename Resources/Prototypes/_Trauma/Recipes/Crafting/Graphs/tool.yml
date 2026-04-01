@@ -1,0 +1,94 @@
+# Tools
+
+- type: constructionGraph
+  id: ForgeTool
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: handle
+      steps:
+      - tag: HandleSmall
+        doAfter: 10
+        name: construction-graph-tag-smallhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlesmall
+
+  - node: handle
+    entity: ToolCraftStart
+    edges:
+
+    - to: hammerbrass
+      steps:
+      - tag: HammerHeadBrass
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
+
+    - to: hammersteel
+      steps:
+      - tag: HammerHeadSteel
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
+
+    - to: hammerplasteel
+      steps:
+      - tag: HammerHeadPlasteel
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
+
+
+    - to: screwdriverbrass
+      steps:
+      - tag: ScrewdriverShankBrass
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
+
+    - to: screwdriversteel
+      steps:
+      - tag: ScrewdriverShankSteel
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
+
+    - to: screwdriverplasteel
+      steps:
+      - tag: ScrewdriverShankSteel
+        doAfter: 3
+        name: construction-graph-tag-toolhead
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+          state: icon
+
+  - node: hammerbrass
+    entity: BrassForgeHammer
+
+  - node: hammersteel
+    entity: SteelForgeHammer
+
+  - node: hammerplasteel
+    entity: PlasteelForgeHammer
+
+
+  - node: screwdriverbrass
+    entity: BrassForgeScrewdriver
+
+  - node: screwdriversteel
+    entity: SteelForgeScrewdriver
+
+  - node: screwdriverplasteel
+    entity: PlasteelForgeScrewdriver

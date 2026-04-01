@@ -188,11 +188,6 @@
   id: OrganDiona
   abstract: true
   suffix: Diona
-  # <Shitmed>
-  components:
-  - type: Damageable
-    damageModifierSet: Diona
-  # </Shitmed>
 
 - type: entity
   id: OrganDionaMetabolizer

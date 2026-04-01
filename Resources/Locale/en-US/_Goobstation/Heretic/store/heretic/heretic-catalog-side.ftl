@@ -1,28 +1,3 @@
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Visne <vincefvanwijk@gmail.com>
-# SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 RemberBL <timmermanrembrandt@gmail.com>
-# SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 knowledge-path-side-knowledge-name = Ritual of Knowledge
 knowledge-path-side-knowledge-desc =
     Everything can be a key to unlocking the secrets behind the Gates. I must be wary and wise.
@@ -85,6 +60,15 @@ knowledge-path-side-s4-realignment-desc =
     Grants you Realignment a spell that will remove stuns, knockdowns and restraints from you and realign your body rapidly for a short period.
     During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack.
     Doesn't require focus to cast.
+
+knowledge-path-side-s4-envy-name = Rite of Stolen Faces
+knowledge-path-side-s4-envy-desc =
+    One day, a thief grew tired of stealing gold, so he began stealing something far more valuable: identities.
+
+    Transmute a knife, a heart and a mask of a clown or a mime to create Envy's Knife.
+    Envy's Knife changes your appearance and name to whoever you stabbed with it.
+    You can revert back to your identity at will.
+    Ascension reveals your true identity and prevents you from using the knife.
 
 ## stage 6
 knowledge-path-side-s6-ice-spear-name = Mysteries of Creation

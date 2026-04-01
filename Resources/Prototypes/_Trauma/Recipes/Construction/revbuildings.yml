@@ -1,183 +1,88 @@
 - type: construction
-  id: RevForge
+  abstract: true
+  id: BaseRevMachine
   graph: RevMachine
-  startNode: start
-  targetNode: industrial forge
   placementMode: SnapgridCenter
   category: construction-category-antagonist
   objectType: Structure
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  theory:
+    RevolutionaryKnowledge: 2
+  useQuality: false
+
+- type: construction
+  parent: BaseRevMachine
+  id: RevForge
+  targetNode: industrial forge
   theory:
     RevolutionaryKnowledge: 0
-  useQuality: false
 
 - type: construction
+  parent: BaseRevMachine
   id: RevPrintingPress
-  graph: RevMachine
-  startNode: start
   targetNode: printing press
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-  useQuality: false
 
 - type: construction
+  parent: BaseRevMachine
   id: RevTelecommsWorkbench
-  graph: RevMachine
-  startNode: start
   targetNode: telecomms workshop
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-  useQuality: false
 
 - type: construction
+  parent: BaseRevMachine
   id: RevTelesphere
-  graph: RevMachine
-  startNode: start
   targetNode: telesphere
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-  useQuality: false
 
 - type: construction
+  parent: BaseRevMachine
   id: Rev3DPrinter
-  graph: RevMachine
-  startNode: start
   targetNode: 3D printer
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-  useQuality: false
 
 - type: construction
+  parent: BaseRevMachine
   id: RevBulletPress
-  graph: RevMachine
-  startNode: start
   targetNode: bullet press
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-  useQuality: false
 
 - type: construction
+  parent: BaseRevMachine
   id: RevMicroelectronicsAssembler
-  graph: RevMachine
-  startNode: start
   targetNode: microelectronics assembler
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-  useQuality: false
 
 - type: construction
+  parent: BaseRevMachine
   id: RevUniformPrinter
-  graph: RevMachine
-  startNode: start
   targetNode: uniform printer
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-  useQuality: false
 
 - type: construction
+  parent: BaseRevMachine
   id: RevTechAnalyzer
-  graph: RevMachine
-  startNode: start
   targetNode: tech analyzer
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-  useQuality: false
 
 - type: construction
-  id: RevTurretPistol
-  graph: RevTurret
-  startNode: start
-  targetNode: pistol turret
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 1
-  practical:
-    MechanicsKnowledge: 2
-
-- type: construction
-  id: RevTurretSMG
-  graph: RevTurret
-  startNode: start
-  targetNode: SMG turret
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 1
-  practical:
-    MechanicsKnowledge: 2
-
-- type: construction
+  parent: BaseRevMachine
   id: RevPlasmaFoundry
-  graph: RevMachine
-  startNode: start
   targetNode: plasma foundry
-  placementMode: SnapgridCenter
-  category: construction-category-antagonist
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
+
+# Turrets
+
+- type: construction
+  abstract: true
+  parent: BaseRevMachine
+  id: BaseRevTurret
+  graph: RevTurret
   theory:
     RevolutionaryKnowledge: 2
-  useQuality: false
+    WeaponsKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
+
+- type: construction
+  parent: BaseRevTurret
+  id: RevTurretPistol
+  targetNode: pistol turret
+
+- type: construction
+  parent: BaseRevTurret
+  id: RevTurretSMG
+  targetNode: SMG turret

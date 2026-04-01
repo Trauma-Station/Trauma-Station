@@ -79,6 +79,7 @@
       reagents:
       - ReagentId: AdvancedMutationToxin
         Quantity: 300
+    bleedReductionAmount: 30
   - type: VentCrawler
   - type: Prying
     speedModifier: 15
@@ -91,7 +92,7 @@
     - TauCetiBasic
   - type: ThermalVision
   - type: Stamina
-    baseCritThreshold: 120
+    baseCritThreshold: 9999
   - type: FlashImmunity
   - type: Puller
     needsHands: false

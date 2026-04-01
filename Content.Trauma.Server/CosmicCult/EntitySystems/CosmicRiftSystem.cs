@@ -5,12 +5,12 @@ using Content.Goobstation.Common.Temperature.Components;
 using Content.Trauma.Server.CosmicCult.Abilities;
 using Content.Trauma.Server.CosmicCult.Components;
 using Content.Server.Actions;
-using Content.Server.Atmos.Components;
 using Content.Goobstation.Shared.Bible; // Goobstation - Bible
 using Content.Server.Popups;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Shared.Actions.Components;
+using Content.Shared.Atmos.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;

@@ -338,7 +338,7 @@
 # Knuckle Dusters
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, KnuckleWeaponsDurability]
   id: ClothingHandsKnuckleDustersBase
   abstract: true
   components:
@@ -353,7 +353,7 @@
     size: Small
     storedRotation: -90
   - type: MeleeWeapon
-    attackRate: 1.5
+    attackRate: 1
     damage:
       types:
         Blunt: 12
@@ -385,7 +385,7 @@
   #   node: icon
 
 - type: entity
-  parent: [ClothingHandsKnuckleDustersBase, BaseSyndicateContraband]
+  parent: [UnbreakableDurability, ClothingHandsKnuckleDustersBase, BaseSyndicateContraband]
   id: ClothingHandsKnuckleDustersSyndicate
   name: syndicate knuckle dusters
   description: Plastitanium knuckle dusters branded with the syndicate logo. A real man beats someone to death with these.
@@ -409,7 +409,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 12
+        Blunt: 16
   - type: PhysicalComposition
     materialComposition:
       Gold: 500

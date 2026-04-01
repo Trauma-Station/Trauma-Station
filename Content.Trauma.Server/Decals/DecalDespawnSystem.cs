@@ -75,7 +75,7 @@ public sealed class DecalDespawnSystem : EntitySystem
     public void QueueDespawn(EntityUid grid, uint decal)
     {
         DebugTools.Assert(HasComp<MapGridComponent>(grid), $"{ToPrettyString(grid)} is not a grid!");
-        if (_buffer.Push((grid, decal), out var old))
+        if (_buffer.Push((grid, decal), out var old) && Exists(old.Item1))
             _decal.RemoveDecal(old.Item1, old.Item2);
     }
 }

@@ -897,7 +897,7 @@
 
 - type: entity
   name: stick of cannabis butter
-  parent: FoodButter
+  parent: [FoodButter, BaseMinorContraband] # Trauma
   id: FoodCannabisButter
   description: Add this to your favorite baked goods for an irie time.
   components:

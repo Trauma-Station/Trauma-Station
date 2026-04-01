@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
@@ -122,8 +123,13 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     {
         string loc;
 
-        var target = GetEntity(args.Target);
-        if (target == null)
+        if (!Heretic.TryGetHereticComponent(args.Actor, out var heretic, out _))
+            return;
+
+        if (heretic.SacrificeTargets.All(x => x.Entity != args.Target))
+            return;
+
+        if (!TryGetEntity(args.Target, out var target))
             return;
 
         if (!TryComp<MobStateComponent>(target, out var mobstate))
