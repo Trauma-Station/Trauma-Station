@@ -12,6 +12,11 @@
       actions:
         - ActionSelfToggleGuardian
     - type: Targeting
+    - type: LanguageSpeaker
+      speaks:
+      - TauCetiBasic
+      understands:
+      - TauCetiBasic
     # </Trauma>
     - type: LagCompensation
     - type: GhostRole

@@ -199,8 +199,6 @@
   suffix: slime person
   # <Shitmed>
   components:
-  - type: Damageable
-    damageModifierSet: Slime
   - type: SolutionContainerManager
     solutions:
       food:

@@ -35,7 +35,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, NonweaponDurability] # Trauma - Durability
   id: UtensilBase
   abstract: true
   components:

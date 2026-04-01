@@ -1,6 +1,6 @@
 - type: entity
   name: iradomini
-  parent: BaseItem
+  parent: [ BaseItem, BaseChaplainContraband ]
   id: WeaponPistolIradomini
   description: A powerful crossbow for the crusader with style.
   components:
@@ -54,3 +54,50 @@
   - type: ReloadOnPray
   - type: AlternatePrayable
     prayDoAfterDuration: 10
+
+- type: entity
+  parent: [ BaseItem, BaseChaplainContraband ]
+  id: WeaponPistolFaith
+  name: faith
+  description: "`Cause you gotta have Faith."
+  components:
+  - type: Nullrod
+    damageOnUntrainedUse:
+      types:
+        Piercing: 20
+    UntrainedUseString: nullrod-faith-untrained-usage-popup
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Nullrod/faith.rsi
+    state: icon
+  - type: Gun
+    minAngle: 0
+    maxAngle: 5
+    angleIncrease: 1
+    angleDecay: 3
+    fireRate: 1
+    availableModes:
+    - SemiAuto
+  - type: Item
+    size: Tiny
+  - type: BasicEntityAmmoProvider
+    proto: BulletPistolSilverBig
+    capacity: 5
+    count: 5
+  - type: AmmoCounter
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Tag
+    tags:
+    - Nullrod
+    - FaithGun
+  - type: DivineIntervention
+  - type: Reflect
+    reflectProb: 1
+    reflects:
+    - Magic
+    slotFlags:
+    - NONE
+  - type: ReloadOnPray
+  - type: AlternatePrayable
+    prayDoAfterDuration: 2.5

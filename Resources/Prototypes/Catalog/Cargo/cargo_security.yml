@@ -41,7 +41,7 @@
     sprite: Clothing/Head/Helmets/security.rsi
     state: icon
   product: CrateSecurityHelmet
-  cost: 550
+  cost: 1000 # Trauma, was 550
   category: cargoproduct-category-name-security
   group: market
 

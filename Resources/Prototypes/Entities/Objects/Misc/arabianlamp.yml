@@ -59,7 +59,7 @@
 
 - type: entity
   name: lamp
-  parent: BaseItem
+  parent: [BaseItem, NonweaponDurability] # Trauma - Durability
   id: ArabianLamp
   description: Why the heck won't this piece of junk open!?
   components:

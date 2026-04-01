@@ -10,6 +10,7 @@
     FurnitureKnowledge: 1
   practical:
     CarvingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -24,6 +25,7 @@
     FurnitureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -39,6 +41,7 @@
     ElectronicsKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -54,6 +57,7 @@
     FurnitureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -66,6 +70,7 @@
   # <Trauma>
   theory:
     FurnitureKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -81,6 +86,7 @@
     FabricationKnowledge: 1
   practical:
     CarvingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -94,6 +100,7 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -107,6 +114,7 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -120,6 +128,7 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -132,6 +141,7 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -146,4 +156,5 @@
     FabricationKnowledge: 1
   practical:
     CarvingKnowledge: 2
+  useQuality: false
   # </Trauma>

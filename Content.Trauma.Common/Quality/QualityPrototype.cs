@@ -14,7 +14,7 @@ public sealed partial class QualityPrototype : IPrototype
     public float Gun = 0.9f;
 
     [DataField]
-    public float Armor = 0.87f;
+    public float Armor = 0.95f;
 
     [DataField]
     public float ClothingDelay = 0.87f;
@@ -47,8 +47,8 @@ public sealed partial class QualityPrototype : IPrototype
     public float ShieldFlat = 1.12f;
 
     [DataField]
-    public float MeleeDamage = 1.1f;
+    public float MeleeDamage = 1.05f;
 
     [DataField]
-    public float Price = 1.1f;
+    public float Price = 1.5f;
 }

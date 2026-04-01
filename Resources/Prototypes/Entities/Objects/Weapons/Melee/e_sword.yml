@@ -57,7 +57,7 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 15
+        Slash: 10 # Trauma, was 15
         Heat: 15
         Structural: 20
       woundSeverityMultipliers: # Goobstation
@@ -94,7 +94,7 @@
   - type: Parry # Trauma
     reflects:
       - Energy
-    maxParries: 3
+    maxParries: 2
     maxReflects: 10
     reflectSpread: 60
   - type: IgnitionSource

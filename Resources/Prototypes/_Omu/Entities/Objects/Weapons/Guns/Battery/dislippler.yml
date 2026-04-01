@@ -31,9 +31,6 @@
     - type: BatteryAmmoProvider
       proto: BulletDislippler
       fireCost: 100
-    - type: Multishot
-      spreadMultiplier: 1.25
-      spreadAddition: 10
     - type: BatterySelfRecharger
       autoRechargeRate: 50
 

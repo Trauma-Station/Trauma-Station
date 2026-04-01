@@ -12,6 +12,7 @@ using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared._Starlight.CollectiveMind;
+using Content.Shared.Speech;
 using Content.Trauma.Common.Speech;
 // </Trauma>
 using System.Globalization;
@@ -572,13 +573,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         // The chat message wrapped in a "x says y" string.
-        var wrappedMessage = WrapPublicMessage(source, name, message, language: language, colorOverride);
+        var wrappedMessage = WrapPublicMessage(source, name, message, speech, language: language, colorOverride);
         // The chat message obfuscated via language obfuscation.
         var obfuscated = SanitizeInGameICMessage(source, _language.ObfuscateSpeech(message, language), out var emoteStr, true, _configurationManager.GetCVar(CCVars.ChatPunctuation),
         (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
         || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en"));
         // The language-obfuscated message wrapped in a "x says y" string.
-        var wrappedObfuscated = WrapPublicMessage(source, name, obfuscated, language: language, colorOverride);
+        var wrappedObfuscated = WrapPublicMessage(source, name, obfuscated, speech, language: language, colorOverride);
         // Einstein Engines - Language end
 
         SendInVoiceRange(
@@ -1078,10 +1079,10 @@ public sealed partial class ChatSystem : SharedChatSystem
        /// <summary>
     ///     Wraps a message sent by the specified entity into an "x says y" string.
     /// </summary>
-    public string WrapPublicMessage(EntityUid source, string name, string message, LanguagePrototype? language = null, Color? colorOverride = null)
+    public string WrapPublicMessage(EntityUid source, string name, string message, SpeechVerbPrototype speech, LanguagePrototype? language = null, Color? colorOverride = null)
     {
-        var wrapId = GetSpeechVerb(source, message).Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message";
-        return WrapMessage(wrapId, InGameICChatType.Speak, source, name, message, language, colorOverride);
+        var wrapId = speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message";
+        return WrapMessage(wrapId, InGameICChatType.Speak, source, name, message, speech, language, colorOverride);
     }
 
     /// <summary>
@@ -1089,19 +1090,18 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// </summary>
     public string WrapWhisperMessage(EntityUid source, LocId defaultWrap, string entityName, string message, LanguagePrototype? language = null, Color? colorOverride = null)
     {
-        return WrapMessage(defaultWrap, InGameICChatType.Whisper, source, entityName, message, language, colorOverride);
+        return WrapMessage(defaultWrap, InGameICChatType.Whisper, source, entityName, message, null, language, colorOverride);
     }
 
     /// <summary>
     ///     Wraps a message sent by the specified entity into the specified wrap string.
     /// </summary>
-    public string WrapMessage(LocId wrapId, InGameICChatType chatType, EntityUid source, string entityName, string message, LanguagePrototype? language, Color? colorOverride)
+    public string WrapMessage(LocId wrapId, InGameICChatType chatType, EntityUid source, string entityName, string message, SpeechVerbPrototype? speech, LanguagePrototype? language, Color? colorOverride)
     {
-        var speech = GetSpeechVerb(source, message);
         language ??= _language.GetLanguage(source);
 
         // Goobstation - Bolded Language Overrides begin
-        if (language.SpeechOverride.BoldFontId != null && speech.Bold)
+        if (language.SpeechOverride.BoldFontId != null && speech?.Bold == true)
             wrapId = "chat-manager-entity-say-bolded-language-wrap-message";
         // Goobstation end
 
@@ -1110,7 +1110,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
             ? _random.Pick(verbsOverride).ToString()
-            : _random.Pick(speech.SpeechVerbStrings);
+            : (speech is null ? string.Empty : _random.Pick(speech.SpeechVerbStrings));
         var color = DefaultSpeakColor;
         colorOverride ??= language.SpeechOverride.Color;
         if (colorOverride != null)
@@ -1142,6 +1142,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         // goob end
 
         // <Trauma> - allow source entity to replace font
+        speech ??= GetSpeechVerb(source, message);
         var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
         RaiseLocalEvent(source, ref fontEv);
         // </Trauma>
@@ -1151,7 +1152,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("entityName", entityName),
             ("verb", Loc.GetString(verbId)),
             ("fontType", fontEv.Font), // Trauma - use Font from above
-            ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize), // goob edit - "loudSpeakFont"
+            ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize),
             ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
             ("message", message),
             ("language", languageDisplay));

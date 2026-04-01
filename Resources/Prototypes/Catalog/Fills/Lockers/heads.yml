@@ -32,6 +32,8 @@
   id: LockerFillCaptainNoLaser
   table: !type:AllSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: LockerFillCaptainTrauma
     - id: CaptainIDCard
     - id: CigarGoldCase
       prob: 0.25

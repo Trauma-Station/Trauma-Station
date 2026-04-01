@@ -7,8 +7,9 @@
   theory:
     FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 2
-    CarvingKnowledge: 2
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+  qualityPrototype: ShitCraft
 
 - type: construction
   id: BoneDaggerConstruction
@@ -19,5 +20,6 @@
   theory:
     FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 2
-    CarvingKnowledge: 2
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+  qualityPrototype: ShitCraft

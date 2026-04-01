@@ -29,7 +29,7 @@
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: ExplosionResistance
-    damageCoefficient: 0.90
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -62,7 +62,7 @@
         Piercing: 0.3
         Heat: 0.8
   - type: ExplosionResistance
-    damageCoefficient: 0.9
+    damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -124,6 +124,11 @@
   - type: Armor
     coverage:
     - Torso
+    - Leg
+    - Arm
+    - Hand
+    - Foot
+    - Tail
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -140,7 +145,7 @@
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: ExplosionResistance
-    damageCoefficient: 0.90
+    damageCoefficient: 0.4
   - type: ModifyDelayedKnockdown
     delayDelta: 2
     knockdownTimeDelta: -2
@@ -159,7 +164,7 @@
       path: /Audio/_Trauma/Revs/flamethrower.ogg
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container {}
+      toggleable-clothing: !type:Container
 
 - type: entity
   parent: ClothingOuterArmorTemplar

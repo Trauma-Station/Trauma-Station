@@ -33,3 +33,72 @@
 
   - node: PowerArmorStand
     entity: RevPowerArmorStand
+
+- type: constructionGraph
+  id: ArmoryOverrideKey
+  start: start
+  graph:
+  - node: start
+    entity: ArmoryOverrideKeyComponents
+    edges:
+    - to: finished
+      steps:
+      - tag: OverrideKeyComponents
+        doAfter: 5
+        name: construction-graph-tag-overridekeycomponents
+        icon:
+          sprite: _Trauma/Objects/tools/overridecomponents.rsi
+          state: icon
+      - tag: OverrideKeyComponents
+        doAfter: 5
+        name: construction-graph-tag-overridekeycomponents
+        icon:
+          sprite: _Trauma/Objects/tools/overridecomponents.rsi
+          state: icon
+      - tag: OverrideKeyComponents
+        doAfter: 5
+        name: construction-graph-tag-overridekeycomponents
+        icon:
+          sprite: _Trauma/Objects/tools/overridecomponents.rsi
+          state: icon
+      - tool: Screwing
+        doAfter: 3
+
+  - node: finished
+    entity: ArmoryOverrideKey
+
+- type: constructionGraph
+  id: Bracing
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      completed:
+        - !type:SetStackCount
+          amount: 1
+      steps:
+        - material: MetalRod
+          amount: 3
+        - material: Cable
+          amount: 3
+  - node: finish
+    entity: WeaponBracing
+
+- type: constructionGraph
+  id: Whetstone
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      completed:
+        - !type:SetStackCount
+          amount: 1
+      steps:
+        - material: Steel
+          amount: 1
+        - material: Brick
+          amount: 1
+  - node: finish
+    entity: Whetstone

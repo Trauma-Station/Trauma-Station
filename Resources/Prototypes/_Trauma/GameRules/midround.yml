@@ -4,6 +4,8 @@
   parent: BaseGameRule
   id: BasicAntagEventScheduler
   components:
+  - type: RuleSchedulerLimit
+    limit: 10
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: BasicAntagEventsTable

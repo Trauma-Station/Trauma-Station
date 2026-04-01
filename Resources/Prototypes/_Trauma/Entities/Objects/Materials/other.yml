@@ -1,0 +1,41 @@
+- type: entity
+  parent: BaseStructure
+  id: AshPile
+  name: massive ash pile
+  description: Smash it up a bit to seperate it.
+  components:
+  - type: Animateable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            Ash:
+              min: 15
+              max: 30
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/ashpile.rsi
+    state: icon

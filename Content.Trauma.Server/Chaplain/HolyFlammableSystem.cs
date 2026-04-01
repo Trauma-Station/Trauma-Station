@@ -211,7 +211,7 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     public void HolyExtinguish(EntityUid uid, HolyFlammableComponent? flammable = null)
     {
-        if (!Resolve(uid, ref flammable) || !flammable.CanExtinguish)
+        if (!Resolve(uid, ref flammable, false) || !flammable.CanExtinguish)
             return;
 
         RemCompDeferred<OnHolyFireComponent>(uid);

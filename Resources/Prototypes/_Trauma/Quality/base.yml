@@ -1,3 +1,55 @@
 # This one is the standard coefficients for quality.
 - type: quality
   id: BaseQuality
+  gun: 0.9
+  armor: 0.95
+  clothingDelay: 0.87
+  explosionResist: 0.87
+  staminaResist: 0.87
+  health: 0.8
+  selfDamage: 0.87
+  damage: 1.125
+  projectile: 1.125
+  durability: 1.12
+  shield: 1.12
+  shieldFlat: 1.12
+  meleeDamage: 1.05
+  price: 1.5
+
+- type: quality
+  id: ShitCraft
+  gun: 0.95
+  armor: 0.95
+  clothingDelay: 0.95
+  explosionResist: 0.95
+  staminaResist: 0.95
+  health: 0.95
+  selfDamage: 0.95
+  damage: 1.05 # This is throwing damage for some reason
+  projectile: 1.05
+  durability: 1.05
+  shield: 1.05
+  shieldFlat: 1.05
+  meleeDamage: 1.05
+  price: 1.25
+
+- type: quality
+  id: Cardboard
+  gun: 0.99
+  armor: 0.99
+  clothingDelay: 0.99
+  explosionResist: 0.99
+  staminaResist: 0.99
+  health: 0.99
+  selfDamage: 0.99
+  damage: 1.01
+  projectile: 1.01
+  durability: 1.01
+  shield: 1.01
+  shieldFlat: 1.01
+  meleeDamage: 1.01
+  price: 1.25
+
+- type: quality
+  id: ShitBullets
+  projectile: 1.15 # Double damage at robust, make shit bullets do 1/2 real bullet damage

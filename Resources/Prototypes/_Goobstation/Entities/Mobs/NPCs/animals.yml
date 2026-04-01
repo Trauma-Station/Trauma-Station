@@ -249,9 +249,9 @@
     allowMovement: true
     name: ghost-role-information-lootbug-name
     description: ghost-role-information-lootbug-description
-    rules: ghost-role-information-freeagent-rules
+    rules: ghost-role-information-animal-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    - MindRoleGhostRoleAnimal
   - type: GhostTakeoverAvailable
   - type: Speech
     speechVerb: SmallMob
@@ -921,3 +921,8 @@
       Male: ClownGoblin
       Female: ClownGoblin
       Unsexed: ClownGoblin
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic

@@ -15,7 +15,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [BaseItem, NonweaponDurability]
   id: ShardCrystalBase
   name: crystal shard
   description:  A small piece of crystal.

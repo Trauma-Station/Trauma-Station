@@ -35,10 +35,10 @@
     agentName: insurgent-round-end-agent-name
     definitions:
     - prefRoles: [ Insurgent ]
-      spawnerPrototype: SpawnPointInsurgent
+      spawnerPrototype: GhostRoleSpawnerInsurgent
       startingGear: Insurgent
       unequipOldGear: true
-      max: 8
+      max: 4
       playerRatio: 10
       roleLoadout:
       - RoleSurvivalStandard

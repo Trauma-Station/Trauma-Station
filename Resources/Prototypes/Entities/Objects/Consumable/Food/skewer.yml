@@ -89,7 +89,7 @@
 # Kebabs
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, NonweaponDurability] # Trauma - Durability
   id: FoodKebabSkewer
   name: skewer
   description: A thin rod of metal used to skewer just about anything and cook it.

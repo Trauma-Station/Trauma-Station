@@ -460,8 +460,12 @@ public sealed partial class ExplosionSystem
                     continue;
 
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
-                _damageableSystem.TryChangeDamage((entity, damageable), damage, ignoreResistances: true, ignoreGlobalModifiers: true,
-                    targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.Split); // Shitmed
+                // <Trauma> - use original damage and part-specific resistance logic for mobs
+                if (_bodyQuery.TryComp(entity, out var body))
+                    DamageBody((entity, body), originalDamage, id);
+                else
+                    _damageableSystem.TryChangeDamage((entity, damageable), damage, ignoreResistances: true, ignoreGlobalModifiers: true);
+                // </Trauma>
 
                 if (_actorQuery.HasComp(entity))
                 {

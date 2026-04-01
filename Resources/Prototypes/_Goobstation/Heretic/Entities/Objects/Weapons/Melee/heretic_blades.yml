@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband ]
+  parent: [ BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnly]
   id: HereticBladeBaseNoTeleport
   abstract: true
   name: eldritch blade
@@ -19,7 +19,7 @@
     wideAnimationRotation: -125
     damage:
       types:
-        Slash: 20
+        Slash: 17 # moving to 17 to encourage more spell use, can be sharpened to hit 20 again
       armorPenetration: 0.3
       woundSeverityMultipliers:
         Slash: 1.5

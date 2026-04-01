@@ -1,23 +1,14 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 ss14-Starlight <ss14-Starlight@outlook.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
-using Content.Shared.NodeContainer;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Shared._Starlight.VentCrawling.Components;
+using Content.Shared.Atmos;
 using Content.Shared.Actions.Events;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Hands;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
+using Content.Shared.NodeContainer;
 using Content.Shared.Throwing;
 
 namespace Content.Server._Starlight.VentCrawling;

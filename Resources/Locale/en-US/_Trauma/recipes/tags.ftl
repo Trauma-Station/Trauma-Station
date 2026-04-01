@@ -16,6 +16,7 @@ construction-graph-tag-fusion-core = a fusion core
 
 # tools
 construction-graph-tag-welder-experimental = an experimental welding tool
+construction-graph-tag-overridekeycomponents = override key components
 
 # structures
 construction-graph-tag-nail = a nail
@@ -31,3 +32,24 @@ construction-graph-tag-improvised-bow = an improvised bow
 
 # food
 construction-graph-tag-CookedEgg = a cooked egg
+
+# forging
+construction-graph-tag-brassscraps = brass scraps
+construction-graph-tag-plasteelscraps = plasteel scraps
+construction-graph-tag-steelscraps = steel scraps
+construction-graph-tag-anviltop = the top half of an anvil
+construction-graph-tag-ingotsteel = hot steel ingot
+construction-graph-tag-ingotbrass = hot brass ingot
+construction-graph-tag-ingotplasteel = hot plasteel ingot
+construction-graph-tag-cement = cement
+construction-graph-tag-brass = brass part
+construction-graph-tag-steel = steel part
+construction-graph-tag-plasteel = plasteel part
+construction-graph-tag-smallhandle = small handle
+construction-graph-tag-mediumhandle = medium handle
+construction-graph-tag-largehandle = large handle
+construction-graph-tag-arrowhead = any arrowhead
+construction-graph-tag-knifeblade = any knife blade
+construction-graph-tag-swordblade = any sword blade
+construction-graph-tag-toolhead = any tool head
+construction-graph-tag-blugeon = any blugeon head

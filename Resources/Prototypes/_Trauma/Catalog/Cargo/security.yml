@@ -5,5 +5,15 @@
     state: base
   product: CrateSecurityWeaponLaserSidearm
   cost: 4000
-  category: cargoproduct-category-name-security
+  category: cargoproduct-category-name-armory
+  group: market
+
+- type: cargoProduct
+  id: SecurityGunpowderCrate
+  icon:
+    sprite: _Trauma/Objects/Storage/gunpowderbottle.rsi
+    state: closed
+  product: CrateSecurityGunpowder
+  cost: 15000
+  category: cargoproduct-category-name-armory
   group: market
