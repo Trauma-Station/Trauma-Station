@@ -110,7 +110,7 @@
     guid: 22787576-964c-4b72-97ef-5cff0cde7bb6
 
 - type: loadoutEffectGroup
-  id: Wraith_man
+  id: ToasterStrudels
   effects:
   - !type:PlayerGUIDLoadoutEffect
     guid: 179d5e03-6b1a-4f92-bb31-2f4fe4fd631d

@@ -219,6 +219,10 @@
   - type: AddAccentClothing
     accent: ReplacementAccent
     replacement: dementia
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/toasterStrudels.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/toasterStrudels.rsi
 
 - type: entity
   parent: SimpleMobBase
