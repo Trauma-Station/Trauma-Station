@@ -209,15 +209,6 @@
     - PatreonGungeonologist2
 
 - type: loadout
-  id: PatreonGrimbly
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: Grimbly
-  storage:
-    back:
-    - PatreonGribley
-
-- type: loadout
   id: Patreon_Bias
   effects:
   - !type:GroupLoadoutEffect
