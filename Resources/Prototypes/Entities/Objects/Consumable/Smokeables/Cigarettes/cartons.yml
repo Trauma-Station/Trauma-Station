@@ -102,7 +102,7 @@
 - type: entity
   id: CigCartonRed
   parent: CigCartonGreen
-  name: Dromedaryco carton
+  name: DromedaryCo carton
   description: A carton containing 6 packets of Dromedarycos.
   components:
   - type: Sprite
@@ -157,7 +157,7 @@
   id: CigCartonMixed
   parent: CigCartonGreen
   name: Dan's soaked smokes
-  description: A carton containg 3 packs of Dan's soaked smokes.
+  description: A carton containg 3 packets of Dan's soaked smokes.
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/mixed.rsi

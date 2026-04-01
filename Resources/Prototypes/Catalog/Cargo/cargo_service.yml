@@ -84,7 +84,7 @@
 - type: cargoProduct
   id: ServiceCustomSmokable
   icon:
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/blue.rsi
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/green.rsi
     state: closed
   product: CrateServiceCustomSmokable
   cost: 1000
