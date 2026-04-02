@@ -68,8 +68,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 
     #endregion
 
-    public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
-
     public override void Initialize()
     {
         base.Initialize();

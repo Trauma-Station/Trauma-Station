@@ -3,6 +3,7 @@
 using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
+using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Body;
@@ -117,6 +118,8 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             { "Holy", 1 },
         },
     };
+
+    public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
 
     public override void Initialize()
     {

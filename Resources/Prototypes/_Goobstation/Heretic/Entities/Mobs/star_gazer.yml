@@ -118,7 +118,7 @@
     effect: EffectCosmicSlash
   - type: HealingAura
     componentHealMultipliers:
-      CosmosPassive: 2
+      CosmosPassive: 1.5
   - type: Tag
     tags:
     - CannotSuicide

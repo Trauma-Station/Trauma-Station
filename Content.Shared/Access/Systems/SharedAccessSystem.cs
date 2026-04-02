@@ -67,12 +67,15 @@ namespace Content.Shared.Access.Systems
         ///     Replaces the set of access tags we have with the provided set.
         /// </summary>
         /// <param name="access">The new access tags</param>
-        public bool TrySetTags(EntityUid uid, IEnumerable<ProtoId<AccessLevelPrototype>> newTags, AccessComponent? access = null)
+        public bool TrySetTags(EntityUid uid, IEnumerable<ProtoId<AccessLevelPrototype>> newTags, AccessComponent? access = null, bool overwrite = true) // Trauma - added overwrite
         {
             if (!Resolve(uid, ref access))
                 return false;
 
-            access.Tags.Clear();
+            // <Trauma>
+            if (overwrite)
+                access.Tags.Clear();
+            // </Trauma>
             access.Tags.UnionWith(newTags);
             Dirty(uid, access);
 

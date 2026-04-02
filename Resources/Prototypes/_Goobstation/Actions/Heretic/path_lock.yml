@@ -22,9 +22,10 @@
     canTargetSelf: false
     event: !type:EventHereticBulglarFinesse
   - type: HereticAction
-    requireMagicItem: true
+    requireMagicItem: false
   - type: SpeakOnAction
     sentence: heretic-speech-bulglar-finesse
+    chatType: Whisper
 
 - type: entity
   parent: BaseAction
