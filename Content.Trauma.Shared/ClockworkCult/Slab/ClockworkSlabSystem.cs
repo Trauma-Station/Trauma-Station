@@ -1,12 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Interaction.Events;
+using Content.Shared.Charges.Systems;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Power;
-using Content.Shared.Power.EntitySystems;
 using Content.Trauma.Shared.ClockworkCult.Components;
 using Content.Trauma.Shared.ClockworkCult.Scripture;
-using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ClockworkCult.Slab;
@@ -19,7 +16,7 @@ namespace Content.Trauma.Shared.ClockworkCult.Slab;
 public sealed class ClockworkSlabSystem : EntitySystem
 {
     [Dependency] private readonly ScriptureSystem _scripture = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityQuery<ClockworkCultistComponent> _clockworkCultistQuery = default!;
 
@@ -51,12 +48,12 @@ public sealed class ClockworkSlabSystem : EntitySystem
             if (now < comp.NextUpdate)
                 continue;
 
-            if (_battery.GetCharge(uid) <= comp.Charge)
+            if (_charges.GetCurrentCharges(uid) <= comp.Charge)
                 continue;
 
             // Remove charge from slab, and transfer it to cultist
-            _battery.UseCharge(uid, comp.Charge);
-            _battery.ChangeCharge(holder, comp.Charge);
+            _charges.TryUseCharges(uid, comp.Charge);
+            _charges.AddCharges(holder, comp.Charge);
 
             comp.NextUpdate = now + comp.Update;
             Dirty(uid, comp);

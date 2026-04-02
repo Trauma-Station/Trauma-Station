@@ -22,8 +22,7 @@
       mindRoles:
       - MindRoleClockworkCultist
       components:
-      - type: Battery
-        maxCharge: 1000 # TODO: Needs adjusting
-        startingCharge: 0
-      - type: ExaminableBattery
+      - type: LimitedCharges
+        maxCharges: 1000 # TODO: Needs adjusting
+        lastCharges: -1 # Starts on 0 if its negative
       - type: ClockworkCultist

@@ -8,7 +8,7 @@ namespace Content.Shared.Charges.Components;
 /// Requires LimitedChargesComponent to function.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedChargesSystem))]
+// [Access(typeof(SharedChargesSystem))] Trauma - made removed access
 public sealed partial class AutoRechargeComponent : Component
 {
     /// <summary>

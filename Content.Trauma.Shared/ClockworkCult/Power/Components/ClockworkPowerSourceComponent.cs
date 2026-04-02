@@ -7,7 +7,7 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Components;
 /// <summary>
 /// If anchored on top of a <see cref="PowerVeinComponent"/>, it starts generating power.
 ///
-/// Requires <see cref="AnchorableComponent"/> and <see cref="BatteryComponent"/>.
+/// Requires <see cref="AnchorableComponent"/> and <see cref="LimitedChargesComponent"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
@@ -17,14 +17,7 @@ public sealed partial class ClockworkPowerSourceComponent : Component
     public bool Active;
 
     /// <summary>
-    /// The rate in which the power source is getting recharged.
-    /// Used to set values on <see cref="BatterySelfRechargerComponent"/>.
-    /// </summary>
-    [DataField]
-    public float RechargeRate;
-
-    /// <summary>
-    /// How often to recharge the battery.
+    /// How often to recharge the charges.
     /// </summary>
     [DataField]
     public TimeSpan RechargeTime;

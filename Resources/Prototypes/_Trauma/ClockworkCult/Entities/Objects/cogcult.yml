@@ -23,10 +23,8 @@
         type: ClockworkSlabBUI
 
   # Power Functions
-  - type: Battery
-    maxCharge: 2000
-    startingCharge: 0
-  - type: BatterySelfRecharger
-    autoRechargeRate: 10 # TODO: Needs adjusting
-    autoRechargePauseTime: 20 # TODO: Needs adjusting
-  - type: ExaminableBattery
+  - type: LimitedCharges
+    maxCharges: 2000
+    lastCharges: 100
+  - type: AutoRecharge
+    rechargeDuration: 2 # TODO: Expand it to support multiples charges per update bruh

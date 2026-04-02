@@ -1,0 +1,7 @@
+- type: entity
+  id: PowerVeinArea
+  name: Power Vein
+  description: A vein
+  parent: BaseArea
+  components:
+  - type: PowerVein

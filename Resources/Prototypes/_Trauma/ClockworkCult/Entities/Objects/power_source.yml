@@ -1,0 +1,15 @@
+- type: entity
+  id: BaseClockworkPowerSource
+  name: Clockwork Power Source
+  description: Testing.
+  parent: BaseStructureDynamic
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    state: office-dark
+  - type: ClockworkPowerSource
+    rechargeRate: 50
+    rechargeTime: 2
+  - type: LimitedCharges
+    maxCharges: 1000
+    lastCharges: -1 # Starts at 0 if negative

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -25,13 +24,13 @@ public sealed partial class ClockworkSlabComponent : Component
     /// How often to try to transfer power to the holder.
     /// </summary>
     [DataField]
-    public TimeSpan Update = TimeSpan.FromSeconds(1f); // TODO: Higher?
+    public TimeSpan Update = TimeSpan.FromSeconds(1f);
 
     /// <summary>
     /// How much power to try to transfer every update
     /// </summary>
     [DataField]
-    public float Charge = 10;
+    public int Charge = 10;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField, AutoNetworkedField]

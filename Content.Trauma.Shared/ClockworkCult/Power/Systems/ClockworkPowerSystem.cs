@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Power.Components;
+using Content.Shared.Charges.Components;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.ClockworkCult.Power.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 
@@ -21,6 +22,7 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 public sealed class ClockworkPowerSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityQuery<PowerVeinComponent> _powerVeinQuery = default!;
 
     /// <inheritdoc/>
@@ -39,7 +41,14 @@ public sealed class ClockworkPowerSystem : EntitySystem
         // We are un-anchoring it while its active, so remove the Self Recharging component
         if (!args.Anchored && ent.Comp.Active)
         {
-            RemCompDeferred<BatterySelfRechargerComponent>(ent.Owner);
+            if (_timing.ApplyingState)
+                return;
+
+            // TODO:
+            // Make it so you can lock anchor them in place,
+            // since removing this comp will result in losing all charges
+            // (not intended, but this can't act as storage so its good lol)
+            RemCompDeferred<AutoRechargeComponent>(ent.Owner);
             ent.Comp.Active = false;
 
             Dirty(ent);
@@ -59,9 +68,11 @@ public sealed class ClockworkPowerSystem : EntitySystem
         // Using battery self recharger since it's better than writing a system that does the same thing lol
         if (args.Anchored && !ent.Comp.Active)
         {
-            var comp = EnsureComp<BatterySelfRechargerComponent>(ent.Owner);
-            comp.AutoRechargeRate = ent.Comp.RechargeRate;
-            comp.AutoRechargePauseTime = ent.Comp.RechargeTime;
+            if (_timing.ApplyingState)
+                return;
+
+            var comp = EnsureComp<AutoRechargeComponent>(ent.Owner);
+            comp.RechargeDuration = ent.Comp.RechargeTime;
 
             ent.Comp.Active = true;
 

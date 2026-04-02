@@ -20,7 +20,6 @@ public sealed partial class ScriptureSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
     [Dependency] private readonly EntityQuery<ScriptureComponent> _scriptureQuery = default!;
 
@@ -35,7 +34,7 @@ public sealed partial class ScriptureSystem : EntitySystem
     {
         base.Initialize();
 
-        InitializeBattery();
+        InitializeCharges();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
