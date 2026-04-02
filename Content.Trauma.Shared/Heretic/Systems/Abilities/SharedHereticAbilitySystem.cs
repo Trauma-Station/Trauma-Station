@@ -3,7 +3,6 @@
 using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Body;
@@ -36,6 +35,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
