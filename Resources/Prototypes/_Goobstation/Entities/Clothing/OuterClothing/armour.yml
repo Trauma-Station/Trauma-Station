@@ -1,28 +1,5 @@
-# SPDX-FileCopyrightText: 2024 BoуterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Icepick <122653407+Icepicked@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <92357316+Piras314@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 a_person <40855173+a-person5660@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 BramvanZijp <56019239+BramvanZijp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Durathred web vest
 - type: entity
   parent: ClothingOuterVestWeb
@@ -36,7 +13,7 @@
     sprite: _Goobstation/Clothing/Armor/durathread_web_vest.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -44,12 +21,12 @@
         Piercing: 0.4
         Heat: 0.6
   - type: ExplosionResistance
-    damageCoefficient: 0.9
+    damageCoefficient: 0.75
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 # Durathread plated vest
 - type: entity
@@ -64,7 +41,7 @@
     sprite: _Goobstation/Clothing/Armor/durathread_armour.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -72,12 +49,12 @@
         Piercing: 0.6
         Heat: 0.4
   - type: ExplosionResistance
-    damageCoefficient: 0.9
+    damageCoefficient: 0.75
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
-    damageCoefficient: 0.1
+    damageCoefficient: 0.5
 
 # Helldiver
 - type: entity
@@ -161,56 +138,6 @@
     clothingPrototypes:
       head: ClothingHeadHatHoodWinterCapFancy
 
-# Blueshield Armour Vest
-- type: entity
-  parent: [ BaseCentcommContraband, ClothingOuterArmorCaptainCarapace ]
-  id: ClothingBlueshieldArmourVest
-  name: blueshield's security armour
-  description: An armoured vest with the badge of the blueshield. Utilizes bluespace technology to be more compact.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Armor/bso_armour.rsi
-  - type: Clothing
-    sprite: _Goobstation/Clothing/Armor/bso_armour.rsi
-  - type: Item
-    size: Normal
-
-- type: entity
-  parent: ClothingBlueshieldArmourVest
-  id: ClothingBlueshieldArmoredJacket
-  name: blueshield's armored jacket
-  description: A jacket with sewn-in reinforcement layers.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/OuterClothing/Armor/blueshield_jacket.rsi
-  - type: Clothing
-    sprite: _Goobstation/Clothing/OuterClothing/Armor/blueshield_jacket.rsi
-
-- type: entity
-  parent: ClothingBlueshieldArmourVest
-  id: ClothingBlueshieldArmoredCowboyJacket
-  name: blueshield's armored cowboy jacket
-  description: A jacket to protect important people in wild areas.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/OuterClothing/Armor/blueshield_cowboy_jacket.rsi
-  - type: Clothing
-    sprite: _Goobstation/Clothing/OuterClothing/Armor/blueshield_cowboy_jacket.rsi
-
-- type: entity
-  parent: [ BaseCentcommContraband, ClothingOuterWinterCapArmored ]
-  id: ClothingOuterWinterBlueshield
-  name: blueshield's armored winter coat
-  description: A blue winter coat reinforced with kevlar in the chest area.
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/OuterClothing/Wintercoats/bso_winter_coat.rsi
-  - type: Clothing
-    sprite: _Goobstation/Clothing/OuterClothing/Wintercoats/bso_winter_coat.rsi
-  - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodWinterBso
-
 # CentralCommand
 
 - type: entity
@@ -225,7 +152,7 @@
     sprite: _Goobstation/Clothing/Armor/covert_armor.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     modifiers:
       coefficients:
         Blunt: 0.35
@@ -233,7 +160,7 @@
         Piercing: 0.35
         Heat: 0.35
   - type: ExplosionResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.1
   - type: ModifyDelayedKnockdown
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -273,8 +200,7 @@
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Hand
     - Leg
@@ -287,7 +213,7 @@
         Piercing: 0.5
         Heat: 0.7
   - type: ExplosionResistance
-    damageCoefficient: 0.7
+    damageCoefficient: 0.6
   - type: ToggleableClothing
     stripDelay: null
     clothingPrototypes:
@@ -310,7 +236,7 @@
   - type: Sprite
     state: icon-evil
   - type: ExplosionResistance # Nerfed
-    damageCoefficient: 0.5
+    damageCoefficient: 0.3
   - type: ModifyDelayedKnockdown # Nerfed
     delayDelta: 2
     knockdownTimeDelta: -2
@@ -330,7 +256,7 @@
     sprite: _Goobstation/Clothing/OuterClothing/Armor/queen_carapace.rsi
   - type: Armor
     coverage:
-    - Chest
+    - Torso
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.4
@@ -349,7 +275,7 @@
     sprintModifier: 1.0
   - type: HeldSpeedModifier
   - type: ExplosionResistance
-    damageCoefficient: 0.65
+    damageCoefficient: 0.3
   - type: GroupExamine
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 2.5
@@ -364,12 +290,11 @@
   parent: [ClothingOuterPonchoClassic, BaseMajorContraband]
   id: ClothingOuterPonchoClassicRobust
   name: authentic cowboys poncho
-  description: A poncho made for real cowboy's.
+  description: A poncho made for real cowboys.
   components:
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -383,7 +308,7 @@
         Piercing: 0.55
         Heat: 0.7
   - type: ExplosionResistance
-    damageCoefficient: 0.90
+    damageCoefficient: 0.8
   - type: ModifyDelayedKnockdown
     delayDelta: 2
     knockdownTimeDelta: -2
@@ -403,8 +328,7 @@
     sprite: _ShitChap/Clothing/OuterClothing/Misc/templar.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Leg
     - Tail
@@ -419,7 +343,7 @@
     walkModifier: 1
     sprintModifier: 1
   - type: ExplosionResistance
-    damageCoefficient: 0.6
+    damageCoefficient: 0.5
   - type: FireProtection
     reduction: 0.6
 

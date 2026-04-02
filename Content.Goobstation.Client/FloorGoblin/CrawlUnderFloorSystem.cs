@@ -1,9 +1,6 @@
-// SPDX-FileCopyrightText: 2025 Evaisa <mail@evaisa.dev>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.FloorGoblin;
-using Content.Shared._DV.Abilities;
 using Content.Shared._Starlight.VentCrawling;
 using Content.Shared.VentCrawler.Tube.Components;
 using Robust.Client.GameObjects;
@@ -14,7 +11,6 @@ namespace Content.Goobstation.Client.FloorGoblin;
 
 public sealed partial class HideUnderFloorAbilitySystem : SharedCrawlUnderFloorSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;

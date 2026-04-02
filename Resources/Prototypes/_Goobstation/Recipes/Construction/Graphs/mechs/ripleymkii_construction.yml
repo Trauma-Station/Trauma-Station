@@ -12,6 +12,9 @@
     edges:
     - to: ripleymkii
       steps:
+      - assemblyId: RipleyMkIIChassis
+        guideString: ripleymkii-construction-guide-string
+
       - tool: Anchoring
         doAfter: 1
         completed:
@@ -115,7 +118,7 @@
       - tag: MechAirTank
         name: construction-graph-tag-exosuit-air-tank
         icon:
-          sprite: Objects/Specific/Mech/mecha_equipment.rsi
+          sprite: _Goobstation/Objects/Specific/Mech/mecha_equipment.rsi
           state: mecha_air_tank
 
       - tool: Anchoring

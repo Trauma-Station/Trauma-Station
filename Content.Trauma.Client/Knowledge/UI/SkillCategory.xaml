@@ -1,0 +1,8 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<BoxContainer xmlns="https://spacestation14.io"
+        Orientation="Vertical">
+    <Label Name="SkillLabel" HorizontalExpand="True" Margin="0 5"/>
+</BoxContainer>

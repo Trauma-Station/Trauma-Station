@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Power;
 
@@ -79,4 +79,3 @@ public sealed class BatterySetDischargeRateMessage(float rate) : BoundUserInterf
 {
     public float Rate = rate;
 }
-

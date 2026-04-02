@@ -3,7 +3,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityEffects.Effects.Body;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.Prototypes;
@@ -220,7 +220,7 @@ public sealed partial class IngestionSystem
             if (reagent.Metabolisms == null)
                 continue;
 
-            foreach (var entry in reagent.Metabolisms.Values)
+            foreach (var entry in reagent.Metabolisms.Metabolisms.Values)
             {
                 foreach (var effect in entry.Effects)
                 {
@@ -271,7 +271,7 @@ public sealed partial class IngestionSystem
             if (reagent.Metabolisms == null)
                 continue;
 
-            foreach (var entry in reagent.Metabolisms.Values)
+            foreach (var entry in reagent.Metabolisms.Metabolisms.Values)
             {
                 foreach (var effect in entry.Effects)
                 {

@@ -1,0 +1,16 @@
+- type: entity
+  parent: AmmoProviderShotgunShell
+  id: BoxShotgunBreaching
+  name: ammunition box (12 Gauge breaching)
+  description: A cardboard box of 12 Gauge shotgun shells. Intended to hold breaching ammunition... they forgot to make the box look different.
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunBreaching
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Boxes/shotgun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: breaching

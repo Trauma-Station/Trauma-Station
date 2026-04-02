@@ -11,7 +11,7 @@ public sealed partial class PowerCellSystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
 
-    private Entity<PredictedBatteryComponent>? FindBattery(EntityUid uid)
+    private Entity<BatteryComponent>? FindBattery(EntityUid uid)
     {
         var ev = new FindBatteryEvent();
         RaiseLocalEvent(uid, ref ev);
@@ -35,5 +35,5 @@ public record struct FindBatteryEvent() : IInventoryRelayEvent
 {
     public SlotFlags TargetSlots { get; } = SlotFlags.WITHOUT_POCKET;
 
-    public Entity<PredictedBatteryComponent>? FoundBattery;
+    public Entity<BatteryComponent>? FoundBattery;
 }

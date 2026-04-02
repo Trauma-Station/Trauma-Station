@@ -264,7 +264,6 @@ entities:
     - type: GridPathfinding
     - type: Godmode
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: AirCanister
   entities:
   - uid: 214

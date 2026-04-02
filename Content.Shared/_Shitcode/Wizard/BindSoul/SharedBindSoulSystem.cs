@@ -10,11 +10,10 @@ using System.Linq;
 using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
-using Content.Shared.Gibbing.Events;
+using Content.Shared.Gibbing;
 using Content.Shared.Gravity;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -43,10 +42,9 @@ public abstract class SharedBindSoulSystem : EntitySystem
     [Dependency] protected readonly GrammarSystem Grammar = default!;
     [Dependency] private   readonly TagSystem _tag = default!;
     [Dependency] private   readonly SharedActionsSystem _actions = default!;
-    [Dependency] private   readonly SharedBodySystem _body = default!;
+    [Dependency] private   readonly GibbingSystem _gibbing = default!;
     [Dependency] private   readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private   readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private   readonly IPrototypeManager _proto = default!;
     [Dependency] private   readonly INetManager _net = default!;
 
     public static readonly ProtoId<TagPrototype> IgnoreBindSoulTag = "IgnoreBindSoul"; // Goobstation
@@ -101,7 +99,7 @@ public abstract class SharedBindSoulSystem : EntitySystem
         var coords = TransformSystem.GetMapCoordinates(args.Container, xform);
 
         if (!Deleting(args.Container))
-            _body.GibBody(args.Container, true, contents: GibContentsOption.Skip);
+            _gibbing.Gib(args.Container);
 
         if (!Deleting(args.Container))
             QueueDel(args.Container);
@@ -111,7 +109,7 @@ public abstract class SharedBindSoulSystem : EntitySystem
 
         if (!ItemExistsAndOnSamePlane(item, xform.MapUid, out var itemXform))
         {
-            if (item == null || itemXform == null)
+            if (itemXform == null)
                 return;
 
             // Item exists but on another plane, respawn it

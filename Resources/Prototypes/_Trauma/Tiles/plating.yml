@@ -1,0 +1,5 @@
+- type: tile
+  parent: BasePlating
+  id: PlatingBurnt
+  name: tiles-plating
+  sprite: /Textures/_Trauma/Tiles/plating_burnt.png

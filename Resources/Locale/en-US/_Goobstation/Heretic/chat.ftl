@@ -1,4 +1,4 @@
-# influence gain and fracture examine messages must have newlimes because otherwise they wouldn't fit
+# influence gain and fracture examine messages must have newlines because otherwise they wouldn't fit in chat window
 
 influence-base-message = [textshader="{$text}" font="DefaultBold" size={$size} shader="Eldritch"]
 

@@ -1,0 +1,14 @@
+- type: entity
+  id: BaseMobHemocyanin
+  abstract: true
+  components:
+  - type: BodyCache # Shitmed
+  - type: Body
+  - type: InitialBody # Shitmed - replaced container fill
+    organs:
+      Torso: OrganAnimalTorso # Shitmed
+      Lungs: OrganAnimalLungs
+      Heart: OrganArachnidHeart
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys

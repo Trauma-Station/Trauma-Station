@@ -1,0 +1,4 @@
+- files: ["dna_discovered.gif", "dna_extra.gif", "dna_undiscovered.gif"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation"
+  source: "https://github.com/tgstation/tgstation/tree/93185eeb3ed5b1df38d7ff43734c290054b67b6f/icons/ui/dna"

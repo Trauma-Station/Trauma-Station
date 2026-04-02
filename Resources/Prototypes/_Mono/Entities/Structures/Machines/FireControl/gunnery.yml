@@ -39,7 +39,7 @@
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: ExaminableBattery
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
   - type: StaticPrice
     price: 100
   - type: ActivatableUI
@@ -127,8 +127,8 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: ApcPowerReceiver
-    powerLoad: 200
+  - type: PowerState
+    workingPowerDraw: 200
   - type: ExtensionCableReceiver
   - type: ActivatableUIRequiresPower
   - type: Sprite

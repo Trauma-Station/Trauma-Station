@@ -1,27 +1,15 @@
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Tag;
-using Robust.Shared.Serialization.Manager;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
 public sealed class ClothingGrantingSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly ISerializationManager _serializationManager = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
 
     public override void Initialize()
     {
@@ -40,49 +28,26 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
         if (!clothing.Slots.HasFlag(args.SlotFlags)) return;
 
-        // Goobstation
-        //if (component.Components.Count > 1)
-        //{
-        //    Logger.Error("Although a component registry supports multiple components, we cannot bookkeep more than 1 component for ClothingGrantComponent at this time.");
-        //    return;
-        //}
-
-        foreach (var (name, data) in component.Components)
+        var user = args.Equipee;
+        component.Active.Clear();
+        foreach (var name in component.Components.Keys)
         {
-            var newComp = (Component) _componentFactory.GetComponent(name);
-
-            if (HasComp(args.Equipee, newComp.GetType()))
-                continue;
-
-            newComp.Owner = args.Equipee;
-
-            var temp = (object) newComp;
-            _serializationManager.CopyTo(data.Component, ref temp);
-            EntityManager.AddComponent(args.Equipee, (Component)temp!);
-
-            component.Active[name] = true; // Goobstation
+            var type = Factory.GetRegistration(name).Type;
+            if (!HasComp(user, type))
+                component.Active.Add(name);
         }
+        EntityManager.AddComponents(user, component.Components);
     }
 
     private void OnCompUnequip(EntityUid uid, ClothingGrantComponentComponent component, GotUnequippedEvent args)
     {
-        // Goobstation
-        //if (!component.IsActive) return;
-
-        foreach (var (name, data) in component.Components)
+        var user = args.Equipee;
+        foreach (var name in component.Active)
         {
-            // Goobstation
-            if (!component.Active.ContainsKey(name) || !component.Active[name])
-                continue;
-
-            var newComp = (Component) _componentFactory.GetComponent(name);
-
-            RemComp(args.Equipee, newComp.GetType());
-            component.Active[name] = false; // Goobstation
+            var type = Factory.GetRegistration(name).Type;
+            RemComp(user, type);
         }
-
-        // Goobstation
-        //component.IsActive = false;
+        component.Active.Clear();
     }
 
 
@@ -94,10 +59,12 @@ public sealed class ClothingGrantingSystem : EntitySystem
         if (!clothing.Slots.HasFlag(args.SlotFlags))
             return;
 
-        EnsureComp<TagComponent>(args.Equipee);
-        _tagSystem.AddTag(args.Equipee, component.Tag);
-
-        component.IsActive = true;
+        var user = args.Equipee;
+        var tags = EnsureComp<TagComponent>(user);
+        var tag = component.Tag;
+        component.IsActive = !_tag.HasTag(tags, tag);
+        if (component.IsActive)
+            _tag.AddTag((user, tags), tag);
     }
 
     private void OnTagUnequip(EntityUid uid, ClothingGrantTagComponent component, GotUnequippedEvent args)
@@ -105,8 +72,7 @@ public sealed class ClothingGrantingSystem : EntitySystem
         if (!component.IsActive)
             return;
 
-        _tagSystem.RemoveTag(args.Equipee, component.Tag);
-
+        _tag.RemoveTag(args.Equipee, component.Tag);
         component.IsActive = false;
     }
 }

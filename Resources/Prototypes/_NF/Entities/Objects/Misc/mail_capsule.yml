@@ -33,11 +33,9 @@
           tags:
           - Book
           - Document
-          - Mail
           components:
-          - Mail
+          - Delivery
           - Paper
-          #- HyperlinkBook # Goobstation
         insertOnInteract: true
         priority: 3
       food_slot:
@@ -57,7 +55,7 @@
         startingItem: null
         whitelist:
           components:
-          - Cash # Goob Edit - Turns out, spesos don't have a CurrencyComp
+          - Cash # Goob Edit - Turns out, Currency is server-only
         insertOnInteract: true
         priority: 2 # Goob Edit - Spesos are both food and money, so check for money first
   - type: ContainerContainer
@@ -94,11 +92,9 @@
           tags:
           - Book
           - Document
-          - Mail
           components:
-          - Mail
+          - Delivery
           - Paper
-          #- HyperlinkBook # Goobstation
     sprite: _NF/Objects/Misc/mail_capsule.rsi
   - type: Dumpable
   - type: Damageable

@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Emoting;
@@ -101,20 +96,16 @@ public sealed class MeleeDashSystem : EntitySystem
 
     private void OnDash(MeleeDashEvent msg, EntitySessionEventArgs args)
     {
-        if (args.SenderSession.AttachedEntity == null)
-            return;
-
-        var user = args.SenderSession.AttachedEntity.Value;
-
-        if (_standing.IsDown(user))
-            return;
-
-        if (_container.IsEntityInContainer(user))
+        if (args.SenderSession.AttachedEntity is not {} user ||
+            _standing.IsDown(user) ||
+            _container.IsEntityInContainer(user))
             return;
 
         var weapon = GetEntity(msg.Weapon);
 
-        if (!TryComp(weapon, out MeleeDashComponent? dash) ||
+        if (TerminatingOrDeleted(weapon) ||
+            !_hands.IsHolding(user, weapon) ||
+            !TryComp(weapon, out MeleeDashComponent? dash) ||
             !TryComp(weapon, out UseDelayComponent? delay) || _useDelay.IsDelayed((weapon, delay)))
             return;
 

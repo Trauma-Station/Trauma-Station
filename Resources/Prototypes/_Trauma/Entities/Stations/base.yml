@@ -5,4 +5,4 @@
   - type: AlertLevelLocking
     requiredLevel: blue
     lockedLevel: red
-    lockTime: 10m # if you change this update the alert levels guidebook too
+    lockTime: 5m # if you change this update the alert levels guidebook too

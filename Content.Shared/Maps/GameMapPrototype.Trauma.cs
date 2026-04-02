@@ -1,6 +1,3 @@
-using Content.Shared._Lavaland.Procedural.Prototypes;
-using Robust.Shared.Prototypes;
-
 namespace Content.Shared.Maps;
 
 /// <summary>
@@ -10,7 +7,8 @@ public sealed partial class GameMapPrototype
 {
     /// <summary>
     /// Contains info about planets that we have to spawn assigned from this game map.
+    /// Not protoid because its in lavaland.shared
     /// </summary>
     [DataField]
-    public List<ProtoId<LavalandMapPrototype>> Planets = new() { "Lavaland" };
+    public List<string> Planets = new() { "Lavaland" };
 }

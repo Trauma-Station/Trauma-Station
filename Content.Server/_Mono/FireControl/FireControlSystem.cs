@@ -391,27 +391,24 @@ public sealed partial class FireControlSystem : EntitySystem
             if (!TryComp<GunComponent>(localWeapon, out var gun))
                 continue;
 
-            if (TryComp<TransformComponent>(localWeapon, out var weaponXform))
-            {
-                var currentMapCoords = _xform.GetMapCoordinates(localWeapon, weaponXform);
-                var destinationMapCoords = targetCoords.ToMap(EntityManager, _xform);
+            var weaponX = Transform(localWeapon);
+            var currentMapCoords = _xform.GetMapCoordinates(localWeapon, weaponX);
+            var destinationMapCoords = targetCoords.ToMap(EntityManager, _xform);
 
-                if (destinationMapCoords.MapId == currentMapCoords.MapId && currentMapCoords.MapId != MapId.Nullspace)
+            if (destinationMapCoords.MapId == currentMapCoords.MapId && currentMapCoords.MapId != MapId.Nullspace)
+            {
+                var diff = destinationMapCoords.Position - currentMapCoords.Position;
+                if (diff.LengthSquared() > 0.01f)
                 {
-                    var diff = destinationMapCoords.Position - currentMapCoords.Position;
-                    if (diff.LengthSquared() > 0.01f)
+                    // Only rotate the gun if it has line of sight to the target
+                    if (HasLineOfSight(localWeapon, currentMapCoords.Position, destinationMapCoords.Position, currentMapCoords.MapId))
                     {
-                        // Only rotate the gun if it has line of sight to the target
-                        if (HasLineOfSight(localWeapon, currentMapCoords.Position, destinationMapCoords.Position, currentMapCoords.MapId))
-                        {
-                            var goalAngle = Angle.FromWorldVec(diff);
-                            _rotateToFace.TryRotateTo(localWeapon, goalAngle, 0f, Angle.FromDegrees(1), float.MaxValue, weaponXform);
-                        }
+                        var goalAngle = Angle.FromWorldVec(diff);
+                        _rotateToFace.TryRotateTo(localWeapon, goalAngle, 0f, Angle.FromDegrees(1), float.MaxValue, weaponX);
                     }
                 }
             }
 
-            var weaponX = Transform(localWeapon);
             var targetPos = targetCoords.ToMap(EntityManager, _xform);
 
             if (targetPos.MapId != weaponX.MapID)

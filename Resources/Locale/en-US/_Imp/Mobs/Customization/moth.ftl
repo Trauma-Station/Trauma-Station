@@ -245,4 +245,3 @@ marking-WingsDragonfly-dragonfly3 = Tail
 
 marking-WingsLanternfly = Wings (Lanternfly)
 marking-WingsLanternfly-lanternfly = Wings
-

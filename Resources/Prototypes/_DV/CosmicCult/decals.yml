@@ -1,0 +1,21 @@
+- type: decal
+  id: CosmicAshTrail
+  defaultCleanable: true
+  defaultSnap: false
+  sprite:
+    sprite: _DV/CosmicCult/Decals/astral-ash.rsi
+    state: astral-ash
+
+- type: entity
+  parent: DecalSpawnerBase
+  id: DecalSpawnerCosmicAsh
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - CosmicAshTrail
+    radius: 0.1
+    maxDecals: 1
+    prob: 1
+    zIndex: 5
+    cleanable: true
+    deleteSpawnerAfterSpawn: true

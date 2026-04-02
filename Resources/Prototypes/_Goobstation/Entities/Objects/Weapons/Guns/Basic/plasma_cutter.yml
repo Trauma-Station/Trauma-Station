@@ -24,7 +24,7 @@
     size: Normal
     shape:
     - 0,0,2,2
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 1500
     startingCharge: 1500
   - type: MaterialEnergy
@@ -44,6 +44,6 @@
   id: WeaponPlasmaCutterEmpty
   suffix: Empty
   components:
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 1500
     startingCharge: 0

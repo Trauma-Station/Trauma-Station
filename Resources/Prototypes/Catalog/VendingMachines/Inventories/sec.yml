@@ -70,6 +70,8 @@
     CartridgeSaline: 2
     CartridgeBicaridine: 2
     CartridgeDermaline: 2 # Goobstation - end
+    Whetstone: 5 # Trauma
+    WeaponBracing: 5 # Trauma
   # security officers need to follow a diet regimen!
   contrabandInventory:
     WeaponMeleeNeedle: 2
@@ -78,4 +80,3 @@
     #box evidence
   emaggedInventory: # Goobstation
     SarinGasGrenade: 1
-    WeaponFlareGunSecurity: 2

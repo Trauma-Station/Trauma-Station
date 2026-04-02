@@ -1,8 +1,6 @@
 // <Trauma>
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._Starlight.CollectiveMind;
-using Robust.Shared.Console;
-using Robust.Shared.Player;
 using Robust.Shared.Serialization;
 // </Trauma>
 using System.Collections.Frozen;
@@ -38,7 +36,6 @@ public abstract partial class SharedChatSystem : EntitySystem
     public const char EmotesAltPrefix = '*';
     public const char AdminPrefix = ']';
     public const char WhisperPrefix = ',';
-    public const char TelepathicPrefix = '='; //Nyano - Summary: Adds the telepathic channel's prefix.
     public const char CollectiveMindPrefix = '+'; // Goobstation - Starlight collective mind port
     public const char DefaultChannelKey = 'h';
 
@@ -402,7 +399,10 @@ public abstract partial class SharedChatSystem : EntitySystem
     public static string InjectTagAroundString(ChatMessage message, string targetString, string tag, string? tagParameter)
     {
         var rawmsg = message.WrappedMessage;
+        // TODO: Figure out if there's any way we can cache this, and if not then rewrite this to not use regex.
+#pragma warning disable RA0026
         rawmsg = Regex.Replace(rawmsg, "(?i)(" + targetString + ")(?-i)(?![^[]*])", $"[{tag}={tagParameter}]$1[/{tag}]");
+#pragma warning restore RA0026
         return rawmsg;
     }
 
@@ -586,7 +586,6 @@ public enum InGameICChatType : byte
     Emote,
     Whisper,
     // <Goob>
-    Telepathic,
     CollectiveMind
     // </Goob>
 }

@@ -1,42 +1,16 @@
-# SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BramvanZijp <56019239+BramvanZijp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 # ScatteringGrenade is intended for grenades that spawn entities, especially those with timers
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: GrenadeBase
   id: ScatteringGrenadeBase
   components:
-  - type: Appearance
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
-  - type: Damageable
-    damageContainer: Inorganic
   - type: ScatteringGrenade
-  - type: TriggerOnUse
-  - type: TimerTrigger
-    delay: 3
-  - type: Tag
-    tags:
-    - HandGrenade
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape: !type:PhysShapeCircle
-          radius: 0.2
-        density: 20 # derived from base_item
-        mask:
-        - ItemMask
-        restitution: 0.3
-        friction: 0.2
 
 - type: entity
-  parent: [FragileGrenadeBase, ScatteringGrenadeBase, BaseSecurityContraband]
+  parent: [FragileGrenadeBase, ScatteringGrenadeBase, TimerGrenadeBase, BaseSecurityContraband]
   id: ClusterBang
   name: clusterbang
   description: Can be used only with flashbangs. Explodes several times.
@@ -87,13 +61,13 @@
     sound:
       path: "/Audio/Machines/door_lock_off.ogg"
     positional: true
-  - type: Construction #Trauma
+  - type: Construction # Trauma
     graph: ClusterBangGraph
     node: start
     deconstructionTarget: null
 
 - type: entity
-  parent: [VolatileGrenadeBase, ScatteringGrenadeBase, BaseSyndicateContraband]
+  parent: [VolatileGrenadeBase, ScatteringGrenadeBase, TimerGrenadeBase, BaseSyndicateContraband]
   id: ClusterGrenade
   name: ClusterGrenade
   description: Why use one grenade when you can use three at once!
@@ -127,18 +101,28 @@
     deconstructionTarget: null
 
 - type: entity
-  parent: [FragileGrenadeBase, ScatteringGrenadeBase, BaseSyndicateContraband]
+  parent: [FragileGrenadeBase, ScatteringGrenadeBase, ImpactGrenadeBase, BaseSyndicateContraband]
   id: ClusterBananaPeel
   name: cluster banana peel
   description: Splits into 6 explosive banana peels after throwing, guaranteed fun!
   components:
+  # <Trauma> - fix resolve failure and it doing nothing when destroyed
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:TriggerBehavior
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
-    state: produce
+    layers:
+    - state: produce
   - type: ScatteringGrenade
     fillPrototype: TrashBananaPeelExplosive
     capacity: 6
     delayBeforeTriggerContents: 20
+    triggerKey: trigger
   - type: LandAtCursor
   - type: DamageOnLand
     damage:
@@ -152,7 +136,7 @@
     positional: true
 
 - type: entity
-  parent: [SoapSyndie, ScatteringGrenadeBase, BaseSyndicateContraband]
+  parent: [SoapSyndie, ScatteringGrenadeBase, ImpactGrenadeBase, BaseSyndicateContraband]
   id: SlipocalypseClusterSoap
   name: slipocalypse clustersoap
   description: Spreads small pieces of syndicate soap over an area upon landing on the floor.
@@ -162,6 +146,7 @@
     layers:
     - state: syndie-4
   - type: ScatteringGrenade
+    triggerKey: trigger
     fillPrototype: SoapletSyndie
     capacity: 30
     delayBeforeTriggerContents: 60
@@ -182,7 +167,7 @@
     price: 1000
 
 - type: entity
-  parent: [FragileGrenadeBase, ScatteringGrenadeBase]
+  parent: [FragileGrenadeBase, ScatteringGrenadeBase, TimerGrenadeBase]
   id: GrenadeFoamDart
   name: foam dart grenade
   description: Releases a bothersome spray of foam darts that cause severe welching.

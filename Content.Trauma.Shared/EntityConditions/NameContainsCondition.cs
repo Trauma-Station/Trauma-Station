@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityConditions;
 using Robust.Shared.Prototypes;
 
@@ -17,7 +18,7 @@ public sealed partial class NameContainsCondition : EntityConditionBase<NameCont
     public string Name = string.Empty;
 
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
-        => Loc.GetString("entity-effect-condition-guidebook-has-mob-name", ("name", Name));
+        => Loc.GetString("entity-condition-guidebook-has-mob-name", ("name", Name));
 }
 
 public sealed partial class NameContainsConditionSystem : EntityConditionSystem<MetaDataComponent, NameContainsCondition>

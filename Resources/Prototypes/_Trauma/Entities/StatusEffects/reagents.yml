@@ -1,0 +1,116 @@
+- type: entity
+  parent: StatusEffectSlowdown
+  id: TriclorSlowdownStatusEffect
+  name: triclor slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.8
+    walkSpeedModifier: 0.8
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: SarinSlowdownStatusEffect
+  name: sarin slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.7
+    walkSpeedModifier: 0.7
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: MicroplasticsStatusEffect
+  name: microplastics buildup
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.9
+    walkSpeedModifier: 0.9
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: OleoresinSlowdownStatusEffect
+  name: oleoresin slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.3
+    walkSpeedModifier: 0.3
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: FentanylSlowdownStatusEffect
+  name: fentanyl slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.8
+    walkSpeedModifier: 0.8
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: AmnestizineSlowdownStatusEffect
+  name: amnestizine slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.4
+    walkSpeedModifier: 0.4
+
+- type: entity
+  parent: StatusEffectSpeed
+  id: AranespStatusEffect
+  name: aranesp speedup
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 1.3
+    walkSpeedModifier: 1.3
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: ProbitalSlowdownStatusEffect
+  name: probital slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.8
+    walkSpeedModifier: 0.8
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: TirimolSlowdownStatusEffect
+  name: tirimol slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.75
+    walkSpeedModifier: 0.75
+
+- type: entity
+  parent: StatusEffectSlowdown
+  id: AtropineSlowdownStatusEffect
+  name: atropine slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.75
+    walkSpeedModifier: 0.75
+
+- type: entity
+  parent: StatusEffectSpeed
+  id: EpinephrineStatusEffect
+  name: epinephrine rush
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 1.1
+    walkSpeedModifier: 1.1
+
+- type: entity
+  parent: StatusEffectSpeed
+  id: CaffeineRushStatusEffect
+  name: caffeine rush
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 1.1
+    walkSpeedModifier: 1.1
+
+- type: entity
+  parent: StatusEffectSpeed
+  id: CaffeineSlowdownStatusEffect
+  name: caffeine slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.7
+    walkSpeedModifier: 0.7

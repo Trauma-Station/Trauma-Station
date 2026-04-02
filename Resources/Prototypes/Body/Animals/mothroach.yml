@@ -1,0 +1,14 @@
+- type: entity
+  id: BaseMobMothroach
+  abstract: true
+  components:
+  - type: BodyCache # Shitmed
+  - type: Body
+  - type: InitialBody # Shitmed - replaced container fill
+    organs:
+      Torso: OrganAnimalTorso # Shitmed
+      Lungs: OrganAnimalLungs
+      Heart: OrganAnimalHeart
+      Stomach: OrganMothStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys

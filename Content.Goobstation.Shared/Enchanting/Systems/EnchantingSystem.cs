@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Enchanting.Components;
@@ -80,10 +77,9 @@ public sealed class EnchantingSystem : EntitySystem
     private void CacheEnchants()
     {
         _enchants.Clear();
-        var factory = EntityManager.ComponentFactory;
         foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.TryGetComponent<EnchantComponent>(out var comp, factory))
+            if (proto.TryGetComponent<EnchantComponent>(out var comp, Factory))
                 _enchants.Add(proto.ID, comp);
         }
     }

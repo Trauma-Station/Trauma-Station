@@ -1,6 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Goobstation.UIKit.UserInterface.Controls;
+using Content.Trauma.Common.Heretic;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.Map;
@@ -52,7 +55,7 @@ public sealed class ButtonTag : IMarkupTagHandler
         button.OnPressed += _ =>
         {
             var ev = new ButtonTagPressedEvent(id, ent, coords);
-            _entMan.EventBus.RaiseEvent(EventSource.Local, ref ev);
+            _entMan.EntityNetManager.SendSystemNetworkMessage(ev);
             button.Disabled = true;
         };
         button.HorizontalAlignment = Control.HAlignment.Left;

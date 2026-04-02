@@ -1,12 +1,6 @@
-using Robust.Shared.Serialization;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 namespace Content.Goobstation.Shared.StationRadio.Events;
 
-[Serializable, NetSerializable]
-public sealed class StationRadioMediaStoppedEvent : EntityEventArgs
-{
-    public StationRadioMediaStoppedEvent()
-    {
-
-    }
-}
+[ByRefEvent]
+public record struct StationRadioMediaStoppedEvent();

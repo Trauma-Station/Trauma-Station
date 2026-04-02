@@ -15,8 +15,7 @@
   - type: TimedDespawn
     lifetime: 5
   - type: SpawnOnDespawn
-    prototypes:
-    - XenoExtractChronofield
+    prototype: XenoExtractChronofield
 
 - type: entity
   id: XenoGooWall
@@ -164,7 +163,6 @@
     - MobSnail
     - MobSnailSpeed
     - MobSnailMoth
-    - MobXenomorphMaid
     offset: 0.0
 
 - type: entity

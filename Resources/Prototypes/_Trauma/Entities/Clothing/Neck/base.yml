@@ -1,0 +1,14 @@
+# ClothingNeckBase without butcherable / clothmade / edible stuff
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingNeckUnbutcherableBase
+  components:
+  - type: Item
+    size: Small
+  - type: Clothing
+    quickEquip: true
+    slots:
+    - neck
+  - type: Sprite
+    state: icon

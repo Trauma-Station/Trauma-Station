@@ -65,12 +65,6 @@
   color: "#c18851"
 
 - type: collectiveMind
-  id: Empathy
-  name: collective-mind-empathy
-  keycode: 's'
-  color: "#7f32a8"
-
-- type: collectiveMind
   id: Binglemind
   name: collective-mind-bingle
   keycode: 'w'

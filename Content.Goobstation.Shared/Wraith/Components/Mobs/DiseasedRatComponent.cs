@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Polymorph;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -13,10 +15,10 @@ public sealed partial class DiseasedRatComponent : Component
 }
 
 [Prototype]
-public sealed class DiseasedRatFormUnlockPrototype : IPrototype
+public sealed partial class DiseasedRatFormUnlockPrototype : IPrototype
 {
     [IdDataField]
-    public string ID { get; } = default!;
+    public string ID { get; private set; } = default!;
 
     [DataField]
     public int FilthRequired;

@@ -79,7 +79,7 @@ The [color=#c8a404]Yellow Alert[/color] will appear for massive damage to the st
 The [color=#ba292c]Red Alert[/color] will appear for major hostile activities and/or threats to the station.
 
 <!-- Trauma - red alert is locked now -->
-[color=#ba292c]Red Alert[/color] can only be activated when [color=#1b67a5]Blue Alert[/color] has been in effect for at least 10 minutes.
+[color=#ba292c]Red Alert[/color] can only be activated when [color=#1b67a5]Blue Alert[/color] has been in effect for at least [color=#1b67a5]5 minutes[/color].
 
 <Table Columns="1">
   <ColorBox Color="#8b0000">

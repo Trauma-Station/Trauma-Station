@@ -16,9 +16,9 @@ using Content.Shared.StepTrigger.Systems;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.StepTrigger.Components;
+// TODO: Move to goobmod kys
 /// <summary>
 ///     Goobstation: This component marks an entity as being immune to all step triggers.
-///     For example, a Harpy being so low density, that they don't set off landmines.
 /// </summary>
 /// <remarks>
 ///     This is the "Earliest Possible Exit" method, and therefore isn't possible to un-cancel.

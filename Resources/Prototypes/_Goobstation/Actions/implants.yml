@@ -27,7 +27,7 @@
       components:
       - Transform
       - MobState
-    canTargetSelf: false 
+    canTargetSelf: false
     event: !type:SwapSpellEvent
       sound:
         path: /Audio/Effects/Lightning/lightningbolt.ogg
@@ -55,4 +55,3 @@
       components:
       - Body
     event: !type:NaniteMendEvent
-

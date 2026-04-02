@@ -481,6 +481,7 @@ public partial class SharedGunSystem
         }
 
         DebugTools.Assert(component.AmmoSlots.Count == component.Capacity);
+        UpdateAmmoCount(uid); // Trauma - lets client predict the first shot, shitcode
     }
 
     [Serializable, NetSerializable]

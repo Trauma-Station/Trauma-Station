@@ -1,7 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Server.Disposal.Unit;
+using Content.Shared.Ghost;
 using Content.Shared.Physics;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
@@ -24,6 +27,7 @@ public sealed class LightDetectionSystem : SharedLightDetectionSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly EntityQuery<GhostComponent> _ghostQuery = default!;
 
     protected override string SawmillName => "light_damage";
 
@@ -82,10 +86,11 @@ public sealed class LightDetectionSystem : SharedLightDetectionSystem
         {
             var (uid, comp, xform) = UpdateEnts[index];
 
-            //ignore lights while travelling through disposals
-            if (LightSys.HasComp<BeingDisposedComponent>(uid))
+            //ignore lights while travelling through disposals and personal lights from ghosts
+            if (LightSys.HasComp<BeingDisposedComponent>(uid) || LightSys._ghostQuery.HasComp(uid))
             {
                 comp.CurrentLightLevel = 0f;
+                LightSys.Dirty(uid, comp);
                 return;
             }
 
@@ -147,7 +152,11 @@ public sealed class LightDetectionSystem : SharedLightDetectionSystem
                 totalLightLevel += pointLight.Energy * (1f - t * t);
             }
 
+            var ev = new LightLevelUpdated(totalLightLevel, comp.CurrentLightLevel);
+            LightSys.RaiseLocalEvent(uid, ref ev);
+
             comp.CurrentLightLevel = totalLightLevel;
+            LightSys.Dirty(uid, comp);
         }
     }
 }

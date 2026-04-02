@@ -46,10 +46,6 @@ ghost-role-information-navy-captain-name = Navy Captain
 ghost-role-information-navy-captain-description = Classified.
 ghost-role-information-navy-captain-rules = You are beholden to no rules.
 
-ghost-role-information-special-operations-officer-name = Special Operations Officer
-ghost-role-information-special-operations-officer-description = Send, brief, and direct emergency response teams or other Nanotrasen forces. Release the nuclear codes, or don't.
-ghost-role-information-special-operations-officer-rules = Bring the Nanotrasen Representative in alive, the rest are just collateral. [color=#yellow][bold]Navy Captain[/bold][/color] orders may change this.
-
 ghost-role-information-navy-officer-name = Navy Officer
 ghost-role-information-navy-officer-description = Answer faxes and radio communications directed at Central Command. Perform investigations on the station and it's crew.
 ghost-role-information-navy-officer-rules = Follow the orders of the [color=#yellow][bold]Navy Captain[/bold][/color]. In the absence of one, make your own judgements.
@@ -76,12 +72,6 @@ ghost-role-information-trevor-description = Securities trusted battle steed.
 ghost-role-information-Gman-name = The G-Man
 ghost-role-information-Gman-description = The right man in the wrong place can make all the difference in the world.
 ghost-role-information-Gman-rules = You are beholden to no rules or boundaries. Death cannot hold you, and neither can Nanotrasen.
-
-# Blueshild Deputy
-
-ghost-role-information-bsd-name = Blueshield Deputy
-ghost-role-information-bsd-description = You were called onto the station by the NTR, obey him, protect Command, follow the law.
-ghost-role-information-bsd-rules = Follow the orders given you by the [color=yellow][bold]NanoTrasen Representative[/bold][/color], protect command.
 
 # interns
 ghost-role-intern-name = CentComm intern
@@ -145,8 +135,6 @@ ghost-role-information-wraith-name-token = Wraith (Token)
 
 # Misc-Midround Antags
 
-ghost-role-information-grey-tide-name = The Grey Tide
-ghost-role-information-grey-tide-description = Against all the evil that shitsec can conjure, all the wickedness that sci can produce, we will send unto them only you. Robust and shit until it is done.
 grey-tide-role-greeting = Long forgotten in the depths of maints, you are [color=#880808]THE GREY-TIDE [/color], the clothes you wear have fused with your body from extensive robusting, this station isn't theirs to conquer...
 tide-objective-kill-everyone-desc = This station has wronged you for the last time, robust and tide until they are all dead.
 tide-objective-condition-kill-everyone-else-title = Robust everyone.
@@ -190,3 +178,8 @@ ghost-role-information-clown-goblin-name = Clown goblin
 ghost-role-information-clown-goblin-description = A terrible creature, born out of hell.
 
 ghost-role-information-slasher-token = The Slasher (Token)
+
+ghost-role-information-contractor-name = Syndicate Contractor
+ghost-role-information-contractor-token = Syndicate Contractor (Token)
+ghost-role-information-contractor-description = GET DA... tider..?
+contractor-role-greeting = You are a [color=#611b2b]Syndicate Contractor[/color], a bounty hunter, you are tasked with retreving targets from the station, dead or alive.

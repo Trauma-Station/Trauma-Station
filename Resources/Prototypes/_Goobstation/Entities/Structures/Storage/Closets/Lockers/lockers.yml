@@ -6,22 +6,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  abstract: true # Trauma
-  id: LockerBlueshieldOfficer
-  name: blueshield officer locker
-  parent: LockerBaseSecure
-  components:
-  - type: Appearance
-  - type: Sprite
-    sprite: _Goobstation/Structures/Storage/closet.rsi
-  - type: AccessReader
-    access: [["BlueshieldOfficer"]]
-  - type: EntityStorageVisuals
-    stateBaseClosed: bso
-    stateDoorOpen: bso_open
-    stateDoorClosed: bso_door
-
-- type: entity
   id: LockerNanorep
   name: nanotrasen representative locker
   parent: LockerBaseSecure

@@ -1,17 +1,13 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.DelayedDeath;
 using Content.Goobstation.Shared.CheatDeath;
 using Content.Goobstation.Shared.Devour.Events;
-using Content.Server._Shitmed.DelayedDeath;
+using Content.Medical.Shared.DelayedDeath;
 using Content.Server.Actions;
 using Content.Server.Jittering;
 using Content.Shared.Administration.Systems;
-using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Components;
@@ -24,8 +20,9 @@ namespace Content.Goobstation.Server.Devil.CheatDeath;
 
 public sealed partial class CheatDeathSystem : EntitySystem
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenateSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly ActionsSystem _actionsSystem = default!;
     [Dependency] private readonly JitteringSystem _jitter = default!;
@@ -84,7 +81,7 @@ public sealed partial class CheatDeathSystem : EntitySystem
         if (!_mobStateSystem.IsDead(ent) && !ent.Comp.CanCheatStanding)
         {
             var failPopup = Loc.GetString("action-cheat-death-fail-not-dead");
-            _popupSystem.PopupEntity(failPopup, ent, ent, PopupType.LargeCaution);
+            _popup.PopupEntity(failPopup, ent, ent, PopupType.LargeCaution);
 
             return;
         }
@@ -100,18 +97,18 @@ public sealed partial class CheatDeathSystem : EntitySystem
         if (ent.Comp.ReviveAmount <= 0 || HasComp<UnrevivableComponent>(ent))
         {
             var failPopup = Loc.GetString("action-cheat-death-fail-no-lives");
-            _popupSystem.PopupEntity(failPopup, ent, ent, PopupType.LargeCaution);
+            _popup.PopupEntity(failPopup, ent, ent, PopupType.LargeCaution);
 
             return;
         }
 
         // If the holy damage exceeds the crit state, do not allow revives.
-        if (!TryComp<DamageableComponent>(ent, out var damageable)
-            || !_thresholdSystem.TryGetIncapThreshold(ent, out var incapThreshold)
-            || damageable.Damage.DamageDict["Holy"] >= incapThreshold)
+        var damage = _damageable.GetAllDamage(ent.Owner);
+        if (!_thresholdSystem.TryGetIncapThreshold(ent, out var incapThreshold)
+            || damage.DamageDict.GetValueOrDefault("Holy") >= incapThreshold)
         {
             var failPopup = Loc.GetString("action-cheat-death-holy-damage");
-            _popupSystem.PopupEntity(failPopup, ent, ent, PopupType.LargeCaution);
+            _popup.PopupEntity(failPopup, ent, ent, PopupType.LargeCaution);
 
             return;
         }
@@ -120,12 +117,12 @@ public sealed partial class CheatDeathSystem : EntitySystem
         if (_mobStateSystem.IsDead(ent) && !ent.Comp.CanCheatStanding)
         {
             var popup = Loc.GetString("action-cheated-death-dead", ("name", Name(ent)));
-            _popupSystem.PopupEntity(popup, ent, PopupType.LargeCaution);
+            _popup.PopupEntity(popup, ent, PopupType.LargeCaution);
         }
         else
         {
             var popup = Loc.GetString("action-cheated-death-alive", ("name", Name(ent)));
-            _popupSystem.PopupEntity(popup, ent, PopupType.LargeCaution);
+            _popup.PopupEntity(popup, ent, PopupType.LargeCaution);
         }
 
         // Revive entity

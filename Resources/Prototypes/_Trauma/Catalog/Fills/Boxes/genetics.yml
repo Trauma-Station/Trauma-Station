@@ -1,0 +1,14 @@
+- type: entity
+  parent: BoxCardboard
+  id: BoxGeneticsDisk
+  name: genetics disk box
+  description: A box of blank genetics disks.
+  components:
+  - type: StorageFill
+    contents:
+    - id: GeneticsDisk
+      amount: 9
+  - type: Sprite
+    layers:
+    - state: box
+    - state: encryptokey # TODO: make a sprite for it

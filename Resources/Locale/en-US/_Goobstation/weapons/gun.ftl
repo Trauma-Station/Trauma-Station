@@ -7,9 +7,6 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# EnergyGunComponent
-energygun-examine-fire-mode = Set to {$mode} bolt.
-
 # Hardlight Bow
 ammo-selector-examine-mode = Current mode: {$mode}
 mode-select-verb-text = Select firing mode

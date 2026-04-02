@@ -1,35 +1,44 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using System.Threading;
+// <Trauma>
+using Content.Trauma.Common.Spawners;
+// </Trauma>
 using Content.Server.Spawners.Components;
 using Robust.Shared.Random;
-using Content.Shared.Friends.Components; // Shitmed Change
-using Content.Shared._Shitmed.Spawners.EntitySystems; // Shitmed Change
+using Robust.Shared.Timing;
 
 namespace Content.Server.Spawners.EntitySystems;
 
 public sealed class SpawnerSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TimedSpawnerComponent, ComponentInit>(OnSpawnerInit);
-        SubscribeLocalEvent<TimedSpawnerComponent, ComponentShutdown>(OnTimedSpawnerShutdown);
+
+        SubscribeLocalEvent<TimedSpawnerComponent, MapInitEvent>(OnMapInit);
     }
 
-    private void OnSpawnerInit(EntityUid uid, TimedSpawnerComponent component, ComponentInit args)
+    public override void Update(float frameTime)
     {
-        component.TokenSource?.Cancel();
-        component.TokenSource = new CancellationTokenSource();
-        uid.SpawnRepeatingTimer(TimeSpan.FromSeconds(component.IntervalSeconds), () => OnTimerFired(uid, component), component.TokenSource.Token);
+        base.Update(frameTime);
+
+        var curTime = _timing.CurTime;
+        var query = EntityQueryEnumerator<TimedSpawnerComponent>();
+        while (query.MoveNext(out var uid, out var timedSpawner))
+        {
+            if (timedSpawner.NextFire > curTime)
+                continue;
+
+            OnTimerFired(uid, timedSpawner);
+
+            timedSpawner.NextFire += timedSpawner.IntervalSeconds;
+        }
+    }
+
+    private void OnMapInit(Entity<TimedSpawnerComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.NextFire = _timing.CurTime + ent.Comp.IntervalSeconds;
     }
 
     private void OnTimerFired(EntityUid uid, TimedSpawnerComponent component)
@@ -43,16 +52,11 @@ public sealed class SpawnerSystem : EntitySystem
         for (var i = 0; i < number; i++)
         {
             var entity = _random.Pick(component.Prototypes);
-            // Shitmed Change Start
+            // <Trauma> - store the spawned entity, raise an event on the spawner
             var spawnedEnt = SpawnAtPosition(entity, coordinates);
-            var ev = new SpawnerSpawnedEvent(spawnedEnt, HasComp<PettableFriendComponent>(spawnedEnt));
-            RaiseLocalEvent(uid, ev);
-            // Shitmed Change End
+            var ev = new SpawnerSpawnedEvent(spawnedEnt);
+            RaiseLocalEvent(uid, ref ev);
+            // </Trauma>
         }
-    }
-
-    private void OnTimedSpawnerShutdown(EntityUid uid, TimedSpawnerComponent component, ComponentShutdown args)
-    {
-        component.TokenSource?.Cancel();
     }
 }

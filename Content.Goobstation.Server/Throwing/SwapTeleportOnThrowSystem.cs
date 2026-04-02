@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Throwing;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Audio.Systems;

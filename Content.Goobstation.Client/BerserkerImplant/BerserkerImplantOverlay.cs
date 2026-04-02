@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -8,7 +10,7 @@ namespace Content.Goobstation.Client.BerserkerImplant;
 
 public sealed class BerserkerImplantOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -18,11 +20,13 @@ public sealed class BerserkerImplantOverlay : Overlay
 
     public float BlurAmount = 0f;
 
+    public static readonly ProtoId<ShaderPrototype> BlurryVisionX = "BlurryVisionX";
+
     public BerserkerImplantOverlay()
     {
         IoCManager.InjectDependencies(this);
 
-        _blurShader = _prototype.Index<ShaderPrototype>("BlurryVisionX").InstanceUnique();
+        _blurShader = _proto.Index(BlurryVisionX).InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)

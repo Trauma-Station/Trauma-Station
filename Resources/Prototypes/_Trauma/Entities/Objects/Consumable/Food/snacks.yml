@@ -1,0 +1,81 @@
+# Junk food that contains lab grown nutriment
+# basically red 40 / corn syrup slop
+- type: entity
+  abstract: true
+  parent: FoodSnackHealthyBase
+  id: FoodSnackBase
+  components:
+  # TODO: could have negative food effects if thats ever added
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
+        - ReagentId: LabGrownNutriment
+          Quantity: 1
+
+# Organic snacks, made by the chef so no slop
+# Can't use them in cooking though because microwave is utter shitcode :)
+# go raid the vending machines
+
+- type: entity
+  parent: FoodSnackChocolate
+  id: FoodSnackChocolateOrganic
+  name: organic chocolate bar
+  description: Tastes better in Europe, but it's good enough for you.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodPacketChocolateTrash
+    - id: FoodSnackChocolateBarOrganic
+
+- type: entity
+  parent: FoodSnackHealthyBase
+  id: FoodSnackChocolateBarOrganic
+  name: organic chocolate bar
+  description: Tastes better in Europe, but it's good enough for you.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - chocolate
+  - type: Sprite
+    state: chocolatebar-open
+  - type: Item
+    heldPrefix: chocolatebar-open
+    storedOffset: 1,-2
+  - type: Tag
+    tags:
+    - FoodSnack
+    - ReptilianFood
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15 # bonus 5 for making snack
+        - ReagentId: Theobromine
+          Quantity: 3
+        - ReagentId: CocoaPowder
+          Quantity: 1
+
+- type: entity
+  parent: FoodSnackHealthyBase
+  id: FoodSnackPopcornOrganic
+  name: organic popcorn
+  description: Grown by some jerk on a space station, popped by some jerk on a space station.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - corn
+    - salt
+    - butter
+  - type: Sprite
+    state: popcorn
+  - type: Item
+    heldPrefix: popcorn
+  - type: Edible
+    trash:
+    - FoodPacketPopcornTrash

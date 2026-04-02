@@ -80,7 +80,7 @@
     sprite: Clothing/Shoes/color.rsi
     layers:
     - state: icon
-      color: "#0089EF"    
+      color: "#0089EF"
     - state: soles-icon
   - type: Item
     inhandVisuals:
@@ -111,7 +111,7 @@
     sprite: Clothing/Shoes/color.rsi
     layers:
     - state: icon
-      color: "#723A02"    
+      color: "#723A02"
     - state: soles-icon
   - type: Item
     inhandVisuals:
@@ -142,7 +142,7 @@
     sprite: Clothing/Shoes/color.rsi
     layers:
     - state: icon
-      color: "#5ABF2F"    
+      color: "#5ABF2F"
     - state: soles-icon
   - type: Item
     inhandVisuals:
@@ -173,7 +173,7 @@
     sprite: Clothing/Shoes/color.rsi
     layers:
     - state: icon
-      color: "#EF8100"    
+      color: "#EF8100"
     - state: soles-icon
   - type: Item
     inhandVisuals:
@@ -204,7 +204,7 @@
     sprite: Clothing/Shoes/color.rsi
     layers:
     - state: icon
-      color: "#940000"    
+      color: "#940000"
     - state: soles-icon
   - type: Item
     inhandVisuals:
@@ -235,7 +235,7 @@
     sprite: Clothing/Shoes/color.rsi
     layers:
     - state: icon
-      color: "#EBE216"    
+      color: "#EBE216"
     - state: soles-icon
   - type: Item
     inhandVisuals:
@@ -266,7 +266,7 @@
     sprite: Clothing/Shoes/color.rsi
     layers:
     - state: icon
-      color: "#9C0DE1"    
+      color: "#9C0DE1"
     - state: soles-icon
   - type: Item
     inhandVisuals:

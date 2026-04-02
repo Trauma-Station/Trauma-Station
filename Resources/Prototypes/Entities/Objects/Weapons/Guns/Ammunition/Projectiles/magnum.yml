@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseBullet
+  parent: BaseBulletKinetic # Trauma
   id: BulletMagnum
   categories: [ HideSpawnMenu ]
   name: bullet (.45 magnum)
@@ -21,7 +21,7 @@
         Blunt: 1
 
 - type: entity
-  parent: BaseBulletIncendiary
+  parent: [BaseBulletIncendiary, BaseBulletKinetic] # Trauma
   id: BulletMagnumIncendiary
   categories: [ HideSpawnMenu ]
   name: bullet (.45 magnum incendiary)
@@ -33,7 +33,7 @@
         Heat: 9
 
 - type: entity
-  parent: BaseBulletAP
+  parent: [BaseBulletAP, BaseBulletKinetic] # Trauma
   id: BulletMagnumAP
   categories: [ HideSpawnMenu ]
   name: bullet (.45 magnum armor-piercing)
@@ -45,7 +45,7 @@
       armorPenetration: 0.75 # Goobstation
 
 - type: entity
-  parent: BaseBulletUranium
+  parent: [BaseBulletUranium, BaseBulletKinetic] # Trauma
   id: BulletMagnumUranium
   categories: [ HideSpawnMenu ]
   name: bullet (.45 magnum uranium)

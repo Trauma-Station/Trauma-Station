@@ -126,7 +126,7 @@ public sealed class TrailOverlay : Overlay
             if (trail.Sprite == null)
             {
                 handle.SetTransform(Matrix3x2.Identity);
-                if (xform.MapID == args.MapId)
+                if (trail.ConnectLineToTrailEntity && xform.MapID == args.MapId)
                 {
                     var start = trail.TrailData[^1].Position;
                     DrawTrailLine(start, position, trail.Color, trail.Scale, bounds, handle);

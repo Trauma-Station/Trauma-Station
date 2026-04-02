@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: TourettesSwearing
+  values:
+    prefix: tourettes-swear-
+    count: 8

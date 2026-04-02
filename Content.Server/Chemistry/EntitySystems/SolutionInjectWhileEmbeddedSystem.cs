@@ -1,20 +1,9 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Server.Body.Systems;
-using Content.Server.Chemistry.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Events;
-using Content.Shared.Inventory;
-using Content.Shared.Popups;
-using Content.Shared.Projectiles;
-using Content.Shared.Tag;
+// <Trauma>
 using Robust.Shared.Physics.Components;
+// </Trauma>
+using Content.Server.Chemistry.Components;
+using Content.Shared.Chemistry.Events;
+using Content.Shared.Projectiles;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Chemistry.EntitySystems;
@@ -25,15 +14,11 @@ namespace Content.Server.Chemistry.EntitySystems;
 public sealed class SolutionInjectWhileEmbeddedSystem : EntitySystem
 {
 	[Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<SolutionInjectWhileEmbeddedComponent, MapInitEvent>(OnMapInit);
     }
 

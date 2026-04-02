@@ -2,7 +2,6 @@ using Content.Shared.Body.Components;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Behaviors;
-using Content.Shared.Gibbing.Events; // Shitmed Change
 using JetBrains.Annotations;
 
 namespace Content.Server.Destructible.Thresholds.Behaviors
@@ -11,18 +10,27 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
     [DataDefinition]
     public sealed partial class GibBehavior : IThresholdBehavior
     {
-        [DataField] public GibType GibType = GibType.Gib; // Shitmed Change
-        [DataField] public GibContentsOption GibContents = GibContentsOption.Drop; // Shitmed Change
         [DataField("recursive")] private bool _recursive = true;
+        /// <summary>
+        /// Trauma - delete the gibs afterwards if true.
+        /// </summary>
+        [DataField]
+        public bool DeleteGibs;
 
         public LogImpact Impact => LogImpact.Extreme;
 
         public void Execute(EntityUid owner, SharedDestructibleSystem system, EntityUid? cause = null)
         {
-            if (system.EntityManager.TryGetComponent(owner, out BodyComponent? body))
+            // <Trauma> - store gibs for deletion if enabled
+            var gibs = system.Gibbing.Gib(owner, _recursive);
+            if (DeleteGibs)
             {
-                system.BodySystem.GibBody(owner, _recursive, body, gib: GibType, contents: GibContents); // Shitmed Change
+                foreach (var gib in gibs)
+                {
+                    system.EntityManager.QueueDeleteEntity(gib);
+                }
             }
+            // </Trauma>
         }
     }
 }

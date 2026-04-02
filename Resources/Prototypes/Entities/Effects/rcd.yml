@@ -22,7 +22,7 @@
     tags:
     - HideContextMenu
   - type: AnimationPlayer
-  
+
 - type: entity
   parent: EffectRCDBase
   id: EffectRCDDeconstructPreview
@@ -30,7 +30,7 @@
   components:
   - type: Sprite
     state: deconstructPreview
-  
+
 - type: entity
   parent: EffectRCDBase
   id: EffectRCDConstruct0
@@ -40,7 +40,7 @@
     state: construct0
   - type: TimedDespawn
     lifetime: 1.2
-    
+
 - type: entity
   parent: EffectRCDBase
   id: EffectRCDConstruct1
@@ -50,7 +50,7 @@
     state: construct1
   - type: TimedDespawn
     lifetime: 2.2
-    
+
 - type: entity
   parent: EffectRCDBase
   id: EffectRCDConstruct2
@@ -60,7 +60,7 @@
     state: construct2
   - type: TimedDespawn
     lifetime: 3.2
-    
+
 - type: entity
   parent: EffectRCDBase
   id: EffectRCDConstruct3
@@ -70,7 +70,7 @@
     state: construct3
   - type: TimedDespawn
     lifetime: 4.2
-    
+
 - type: entity
   parent: EffectRCDBase
   id: EffectRCDConstruct4
@@ -90,7 +90,7 @@
     state: deconstruct2
   - type: TimedDespawn
     lifetime: 3.2
-    
+
 - type: entity
   parent: EffectRCDBase
   id: EffectRCDDeconstruct4

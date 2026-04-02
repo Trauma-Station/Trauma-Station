@@ -2137,7 +2137,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
-    - type: FTLDrive
 - proto: ActionToggleInternals
   entities:
   - uid: 2417

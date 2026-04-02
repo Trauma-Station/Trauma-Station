@@ -12,28 +12,15 @@
   color: "#ffde7448"
   physicalDesc: reagent-physical-desc-translucent
   metabolisms:
-    Narcotic:
+    Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-        damage:
-          groups:
-            Brute: -1
-          types:
-            Heat: -0.5
-            Shock: -0.5
-            Cold: -0.5
-            Radiation: -0.5
       - !type:Emote
         emote: Yawn
         showInChat: true
         probability: 0.03
-      - !type:GenericStatusEffect
-        key: Drowsiness
-        component: Drowsiness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
         time: 2.5
         type: Add
       - !type:SuppressPain
@@ -41,9 +28,6 @@
         time: 30
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         - !type:ReagentCondition
           reagent: Morphine
           min: 16

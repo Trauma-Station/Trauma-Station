@@ -1,0 +1,18 @@
+## Mob
+
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceSpaceAdder
+  name: space adder appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganCobraTorso
+      # Organs
+      Heart: OrganAnimalHeart # regular heart
+      Lungs: OrganCarpLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys

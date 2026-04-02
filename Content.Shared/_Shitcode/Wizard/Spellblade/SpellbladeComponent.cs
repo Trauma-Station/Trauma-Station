@@ -76,10 +76,10 @@ public sealed partial class BluespaceSpellbladeEnchantmentEvent : EntityEventArg
 public sealed partial class FireSpellbladeEnchantmentEvent : EntityEventArgs
 {
     [DataField]
-    public float Range = 4f;
+    public float Range = 2f;
 
     [DataField]
-    public float FireStacks = 10f;
+    public float FireStacks = 20f;
 
     [DataField]
     public float FireStacksOnHit = 2f;

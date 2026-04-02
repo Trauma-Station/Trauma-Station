@@ -1,8 +1,8 @@
 // <Trauma>
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Bible.Components;
 // </Trauma>
 using Content.Server.Ghost.Roles.Events;
@@ -21,6 +21,7 @@ using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
@@ -110,6 +111,11 @@ namespace Content.Server.Bible
                 return;
             }
 
+            // <Trauma>
+            var bibleUsedEv = new BibleUsedEvent();
+            RaiseLocalEvent(args.Target.Value, ref bibleUsedEv);
+            // </Trauma>
+
             if (!HasComp<BibleUserComponent>(args.User))
             {
                 _popupSystem.PopupEntity(Loc.GetString("bible-sizzle"), args.User, args.User);
@@ -159,6 +165,9 @@ namespace Content.Server.Bible
 
                 _audio.PlayPvs(component.HealSoundPath, args.User);
                 _delay.TryResetDelay((uid, useDelay));
+
+                if (component.HealingLightEffect.HasValue)
+                    Spawn(component.HealingLightEffect.Value, new EntityCoordinates(args.Target.Value, default));
             }
             else
             {

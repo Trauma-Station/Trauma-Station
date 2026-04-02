@@ -71,16 +71,16 @@
           Quantity: 15
 
 - type: entity
-  id: NecrosolChemistryBottle
+  id: ArcryoxChemistryBottle
   parent: BaseChemistryBottleFilled
-  name: necrosol bottle
+  name: acryox bottle
   components:
   - type: SolutionContainerManager
     solutions:
       drink:
         maxVol: 30
         reagents:
-        - ReagentId: Necrosol
+        - ReagentId: Arcryox
           Quantity: 30
 
 # Premium Alcohol: wait, it's just marketing?

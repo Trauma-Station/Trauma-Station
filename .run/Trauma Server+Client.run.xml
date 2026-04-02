@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Trauma Server+Client" type="CompoundRunConfigurationType">
+    <toRun name="Content.Trauma.Client" type="DotNetProject" />
+    <toRun name="Content.Trauma.Server" type="DotNetProject" />
+    <method v="2" />
+  </configuration>
+</component>

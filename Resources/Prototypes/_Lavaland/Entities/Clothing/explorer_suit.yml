@@ -37,8 +37,7 @@
     sprite: _Lavaland/Equipment/explorer_suit.rsi
   - type: Armor
     coverage:
-    - Chest
-    - Groin
+    - Torso
     - Arm
     - Leg
     - Tail

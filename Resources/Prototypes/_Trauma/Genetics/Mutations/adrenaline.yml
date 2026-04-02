@@ -1,0 +1,39 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationAdrenalineRush
+  name: Adrenaline Rush
+  description: Allows the host to trigger their body's adrenaline response at will.
+  components:
+  - type: Mutation
+    instability: 25
+  - type: ActionMutation
+    action: ActionMutationAdrenaline
+
+- type: entity
+  parent: BaseMutationAction
+  id: ActionMutationAdrenaline
+  name: Adrenaline!
+  description: Energize yourself, pushing your body to its limits!
+  components:
+  - type: Action
+    checkCanInteract: false # its your heart or something
+    useDelay: 2m
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: adrenaline
+    itemIconStyle: BigAction
+  - type: InjectChemicalsAction
+    main:
+      # no Pump Up and using adrenaline instead of determination
+      # synaptizine is a poison for some reason, so use stimulants instead
+      reagents: [ Stimulants, Epinephrine ]
+      quantity: 5 # these are very strong so less amount than 13
+      popup: MutationAdrenalineRush-inject-popup
+    # no confusion system so theres no confusion reagent
+    comedown:
+      reagents: [ TiringSolution ]
+      quantity: 7
+      popup: MutationAdrenalineRush-comedown-popup
+    comedownDelay: 25
+  - type: InstantAction
+    event: !type:InjectChemicalsActionEvent

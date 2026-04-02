@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: MIT
 
 - type: entity
-  parent: [ GrenadeBase, BaseMinorContraband ]
+  parent: [ TimerGrenadeBase, BaseMinorContraband ]
   id: PipeBomb
   name: pipe bomb
   description: An improvised explosive made from pipes and wire.

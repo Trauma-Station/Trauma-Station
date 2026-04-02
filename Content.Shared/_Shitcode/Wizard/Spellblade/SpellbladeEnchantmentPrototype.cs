@@ -10,21 +10,20 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._Goobstation.Wizard.Spellblade;
 
-[DataDefinition]
-[Prototype("spellbladeEnchantment")]
+[Prototype]
 public sealed partial class SpellbladeEnchantmentPrototype : IPrototype
 {
     [IdDataField]
-    public string ID { get; private set; }
+    public string ID { get; private set; } = string.Empty;
 
     [DataField(required: true)]
-    public SpriteSpecifier Icon;
+    public SpriteSpecifier Icon = default!;
 
     [DataField(required: true)]
     public LocId Name;
 
     [DataField(required: true)]
-    public string Desc;
+    public string Desc = string.Empty;
 
     [DataField(required: true)]
     public object? Event;

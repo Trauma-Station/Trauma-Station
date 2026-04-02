@@ -283,7 +283,7 @@ public sealed class WizardRuleSystem : GameRuleSystem<WizardRuleComponent>
 
         _antag.SendBriefing(target, Loc.GetString("wizard-role-greeting", ("station", station)), Color.Cyan, null);
 
-        if (!TryComp(target, out HumanoidAppearanceComponent? humanoid) || humanoid.Age >= 60)
+        if (!TryComp(target, out HumanoidProfileComponent? humanoid) || humanoid.Age >= 60)
             return true;
 
         // Wizards are old

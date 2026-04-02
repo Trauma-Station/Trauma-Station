@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: CosmicGlyphBase
   name: base glyph
@@ -25,7 +19,6 @@
         - SlipLayer
   - type: Physics
   - type: Clickable
-  - type: CosmicGlyph
   - type: CosmicCultExamine
     othersText: cosmic-examine-text-glyphs
   - type: Sprite
@@ -45,13 +38,6 @@
     layers:
       - state: truth
     drawdepth: Puddles
-  - type: CosmicGlyphConversion
-    negateProtection: true
-  - type: CosmicGlyph
-    requiredCultists: 3
-    activationDamage:
-      types:
-        Asphyxiation: 10
   - type: CosmicCultExamine
     cultistText: cosmic-examine-glyph-truth
 
@@ -65,12 +51,6 @@
     layers:
     - state: knowledge
     drawdepth: Puddles
-  - type: CosmicGlyphConversion
-  - type: CosmicGlyph
-    requiredCultists: 1
-    activationDamage:
-      types:
-        Asphyxiation: 10
   - type: CosmicCultExamine
     cultistText: cosmic-examine-glyph-knowledge
 
@@ -84,17 +64,6 @@
     - sprite: _DV/CosmicCult/Objects/glyphs_floor.rsi
       state: cessation
     drawdepth: Puddles
-  - type: CosmicGlyphTransmute
-    transmutations:
-    - CosmicVacuousSpire
-    whitelist:
-      components:
-      - PortableScrubber
-  - type: CosmicGlyph
-    requiredCultists: 1
-    activationDamage:
-      types:
-        Asphyxiation: 10
   - type: CosmicCultExamine
     cultistText: cosmic-examine-glyph-cessation
 
@@ -108,19 +77,6 @@
     layers:
     - state: blades
     drawdepth: Puddles
-  - type: CosmicGlyphTransmute
-    transmutations:
-    - SwordCosmicCult
-    - SpearCosmicCult
-    - ScytheCosmicCult
-    whitelist:
-      components:
-      - Sharp
-  - type: CosmicGlyph
-    requiredCultists: 1
-    activationDamage:
-      types:
-        Asphyxiation: 10
   - type: CosmicCultExamine
     cultistText: cosmic-examine-glyph-blades
 
@@ -134,19 +90,6 @@
     layers:
     - state: warding
     drawdepth: Puddles
-  - type: CosmicGlyphTransmute
-    transmutations:
-    - ClothingOuterHardsuitCosmicCult
-    whitelist:
-      requireAll: true
-      components:
-      - ClothingSpeedModifier
-      - PressureProtection
-  - type: CosmicGlyph
-    requiredCultists: 1
-    activationDamage:
-      types:
-        Asphyxiation: 10
   - type: CosmicCultExamine
     cultistText: cosmic-examine-glyph-warding
 
@@ -160,8 +103,5 @@
     layers:
     - state: projection
     drawdepth: Puddles
-  - type: CosmicGlyphAstralProjection
-  - type: CosmicGlyph
-    requiredCultists: 1
   - type: CosmicCultExamine
     cultistText: cosmic-examine-glyph-projection

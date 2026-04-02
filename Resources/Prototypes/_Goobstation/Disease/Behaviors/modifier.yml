@@ -19,9 +19,8 @@
   - type: DiseaseEntityEffect
     timeScale: false
     effects:
-    - !type:MovespeedModifier
-      walkSpeedModifier: 0.65
-      sprintSpeedModifier: 0.65
+    - !type:ModifyStatusEffect
+      effectProto: SluggishStatusEffect
 
 - type: entity
   id: DiseaseBehaviorTemperature

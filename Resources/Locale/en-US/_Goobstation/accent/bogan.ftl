@@ -4,10 +4,10 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-accent-bogan-prefix-1 = Fuckin', 
-accent-bogan-prefix-2 = Ye nah, 
-accent-bogan-prefix-3 = Nah, yeah, nah, 
-accent-bogan-prefix-4 = Mmmmm,  
+accent-bogan-prefix-1 = Fuckin',
+accent-bogan-prefix-2 = Ye nah,
+accent-bogan-prefix-3 = Nah, yeah, nah,
+accent-bogan-prefix-4 = Mmmmm,
 
 accent-bogan-suffix-1 = , cunt.
 accent-bogan-suffix-2 = , fuckin' oath.
@@ -46,7 +46,7 @@ accent-bogan-words-10 = popcorn
 accent-bogan-words-replace-10 = popcoin
 
 accent-bogan-words-11 = asshole
-accent-bogan-words-replace-11 = dog cunt 
+accent-bogan-words-replace-11 = dog cunt
 
 accent-bogan-words-12 = roach
 accent-bogan-words-replace-12 = stingin' roger
@@ -81,7 +81,7 @@ accent-bogan-words-replace-21 = tradie
 accent-bogan-words-22 = cargo tech
 accent-bogan-words-replace-22 = tradie
 
-accent-bogan-words-23 = cargo 
+accent-bogan-words-23 = cargo
 accent-bogan-words-replace-23 = tradies
 
 accent-bogan-words-24 = its
@@ -154,13 +154,13 @@ accent-bogan-words-46 = a tider
 accent-bogan-words-replace-46 = an eshay
 
 accent-bogan-words-47 = mushrooms
-accent-bogan-words-replace-47 = shrooms 
+accent-bogan-words-replace-47 = shrooms
 
 accent-bogan-words-48 = bar
 accent-bogan-words-replace-48 = bottle-o
 
 accent-bogan-words-49 = chicken
-accent-bogan-words-replace-49 = chook 
+accent-bogan-words-replace-49 = chook
 
 accent-bogan-words-50 = criminal
 accent-bogan-words-replace-50 = crook
@@ -177,7 +177,7 @@ accent-bogan-words-replace-53 = lollies
 accent-bogan-words-54 = drunk
 accent-bogan-words-replace-54 = pissed
 
-accent-bogan-words-55 = happy 
+accent-bogan-words-55 = happy
 accent-bogan-words-replace-55 = stoked
 
 accent-bogan-words-56 = sad
@@ -240,10 +240,10 @@ accent-bogan-words-replace-74 = dolla store
 accent-bogan-words-75 = money
 accent-bogan-words-replace-75 = cash
 
-accent-bogan-words-76 = its ok 
+accent-bogan-words-76 = its ok
 accent-bogan-words-replace-76 = she'll be right
 
-accent-bogan-words-77 = shut up 
+accent-bogan-words-77 = shut up
 accent-bogan-words-replace-77 = fuck up
 
 accent-bogan-words-78 = go away

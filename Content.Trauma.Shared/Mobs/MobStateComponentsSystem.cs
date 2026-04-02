@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -12,16 +13,11 @@ namespace Content.Trauma.Shared.Mobs;
 public sealed class MobStateComponentsSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-
-    private EntityQuery<AliveMobComponent> _aliveQuery;
-    private EntityQuery<SleepingComponent> _sleepingQuery;
+    [Dependency] private readonly EntityQuery<SleepingComponent> _sleepingQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _aliveQuery = GetEntityQuery<AliveMobComponent>();
-        _sleepingQuery = GetEntityQuery<SleepingComponent>();
 
         SubscribeLocalEvent<MobStateComponent, MapInitEvent>(OnMapInit);
 

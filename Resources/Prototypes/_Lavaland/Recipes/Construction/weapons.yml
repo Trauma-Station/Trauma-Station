@@ -1,0 +1,25 @@
+- type: construction
+  id: BoneAxeConstruction
+  graph: BoneAxeConstructionGraph
+  category: construction-category-weapons
+  targetNode: axe
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+  qualityPrototype: ShitCraft
+
+- type: construction
+  id: BoneDaggerConstruction
+  graph: DaggerBoneConstructionGraph
+  category: construction-category-weapons
+  targetNode: dagger
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+  qualityPrototype: ShitCraft

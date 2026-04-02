@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from mojave-sun-13 at https://github.com/Mojave-Sun/mojave-sun-13/blob/26050c34e7ee53b818ee9c96ee5ea4e8f09e2f18/mojave/icons/objects/melee/melee_inventory.dmi",
+  "size": {
+    "x": 40,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "powerfist"
+    }
+  ]
+}

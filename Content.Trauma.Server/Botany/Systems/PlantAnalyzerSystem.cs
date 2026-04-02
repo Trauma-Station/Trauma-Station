@@ -1,8 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Liamofthesky <157073227+Liamofthesky@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ReconPangolin <67752926+ReconPangolin@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 taydeo <td12233a@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
 using Content.Server.Botany;
@@ -10,7 +6,6 @@ using Content.Server.Botany.Components;
 using Content.Shared.Atmos;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
-using Content.Shared.PowerCell;
 using Content.Shared.Random;
 using Content.Trauma.Common.Botany;
 using Content.Trauma.Server.Botany.Components;
@@ -25,7 +20,6 @@ namespace Content.Trauma.Server.Botany.Systems;
 public sealed class PlantAnalyzerSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
@@ -43,55 +37,26 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
     private void OnAfterInteract(Entity<PlantAnalyzerComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target is not { } target)
+        if (args.Target is not { } target || !args.CanReach || ent.Comp.Busy || !IsValidTarget(target))
             return;
 
-        if (!args.CanReach || !_cell.HasActivatableCharge(ent.Owner, user: args.User))
-            return;
-
-        if (ent.Comp.DoAfter != null)
-            return;
-
-        if (HasComp<SeedComponent>(target) || TryComp<PlantHolderComponent>(target, out var plantHolder) && plantHolder.Seed != null)
+        var delay = ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Scan
+            ? ent.Comp.Settings.ScanDelay
+            : ent.Comp.Settings.ModeDelay;
+        var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, new PlantAnalyzerDoAfterEvent(), ent, target: target, used: ent)
         {
-
-            if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Scan)
-            {
-                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.ScanDelay, new PlantAnalyzerDoAfterEvent(), ent, target: target, used: ent)
-                {
-                    NeedHand = true,
-                    BreakOnDamage = true,
-                    BreakOnMove = true,
-                    MovementThreshold = 0.01f
-                };
-                _doAfter.TryStartDoAfter(doAfterArgs, out ent.Comp.DoAfter);
-            }
-            else
-            {
-                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.Settings.ModeDelay, new PlantAnalyzerDoAfterEvent(), ent, target: target, used: ent)
-                {
-                    NeedHand = true,
-                    BreakOnDamage = true,
-                    BreakOnMove = true,
-                    MovementThreshold = 0.01f
-                };
-                _doAfter.TryStartDoAfter(doAfterArgs, out ent.Comp.DoAfter);
-            }
-        }
+            NeedHand = true,
+            BreakOnDamage = true,
+            BreakOnMove = true,
+            MovementThreshold = 0.01f
+        };
+        ent.Comp.Busy = _doAfter.TryStartDoAfter(doAfterArgs);
     }
 
     private void OnDoAfter(Entity<PlantAnalyzerComponent> ent, ref PlantAnalyzerDoAfterEvent args)
     {
-        ent.Comp.DoAfter = null;
-        if (args.Handled || args.Cancelled)
-            return;
-        // Double charge use for scan.
-        if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Scan)
-        {
-            if (!_cell.TryUseActivatableCharge(ent.Owner, user: args.User))
-                return;
-        }
-        if (args.Target is not { } target || !_cell.TryUseActivatableCharge(ent.Owner, user: args.User))
+        ent.Comp.Busy = false;
+        if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
         if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Scan)
@@ -112,6 +77,14 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         }
         _ui.TryOpenUi(args.User, PlantAnalyzerUiKey.Key, ent);
         args.Handled = true;
+    }
+
+    private bool IsValidTarget(EntityUid target)
+    {
+        if (TryComp<PlantHolderComponent>(target, out var plantHolder))
+            return plantHolder.Seed != null;
+
+        return HasComp<SeedComponent>(target);
     }
 
     public void ExtractGene(Entity<PlantAnalyzerComponent> ent, EntityUid target)
@@ -141,47 +114,49 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
     public void InjectGene(Entity<PlantAnalyzerComponent> ent, EntityUid target)
     {
-        if (ent.Comp.DatabankIndex < 0 || ent.Comp.DatabankIndex >= ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count)
+        if (!TryComp<SeedComponent>(target, out var seedComp) ||
+            ent.Comp.DatabankIndex < 0 ||
+            // jesus christ
+            ent.Comp.DatabankIndex >= ent.Comp.GeneBank.Count + ent.Comp.ConsumeGasesBank.Count + ent.Comp.ExudeGasesBank.Count + ent.Comp.ChemicalBank.Count)
             return;
-        if (TryComp<SeedComponent>(target, out var seedComp))
+
+        if (seedComp.Seed != null)
         {
-            if (seedComp.Seed != null)
-            {
-                SetGeneFromInteger(ent, ref seedComp.Seed);
-            }
-            else
-            {
-                if (seedComp.SeedId == null || !_proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
-                    return;
-                seedComp.Seed = protoSeed.Clone();
-                SetGeneFromInteger(ent, ref seedComp.Seed);
-            }
+            SetGeneFromInteger(ent, ref seedComp.Seed);
         }
+        else
+        {
+            if (seedComp.SeedId == null || !_proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+                return;
+            seedComp.Seed = protoSeed.Clone();
+            SetGeneFromInteger(ent, ref seedComp.Seed);
+        }
+
         _audio.PlayPvs(ent.Comp.InjectEndSound, ent);
         SendDatabase(ent);
     }
 
     public void DeleteMutations(Entity<PlantAnalyzerComponent> ent, EntityUid target)
     {
-        if (TryComp<SeedComponent>(target, out var seedComp))
+        if (!TryComp<SeedComponent>(target, out var seedComp))
+            return;
+
+        if (seedComp.Seed != null)
         {
-            if (seedComp.Seed != null)
-            {
-                seedComp.Seed.Mutations.Clear();
-            }
-            else
-            {
-                if (seedComp.SeedId == null || !_proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
-                    return;
-                seedComp.Seed = protoSeed.Clone();
-                seedComp.Seed.Mutations.Clear();
-            }
+            seedComp.Seed.Mutations.Clear();
         }
+        else
+        {
+            if (seedComp.SeedId == null || !_proto.Resolve(seedComp.SeedId, out SeedPrototype? protoSeed))
+                return;
+            seedComp.Seed = protoSeed.Clone();
+            seedComp.Seed.Mutations.Clear();
+        }
+
         _audio.PlayPvs(ent.Comp.DeleteMutationEndSound, ent);
     }
     public void ReadScannedPlant(Entity<PlantAnalyzerComponent> ent, EntityUid target)  //Funkystation - Renamed to match plants instead of copying HealthAnalyzer func names
     {
-
         if (TryComp<SeedComponent>(target, out var seedComp))
         {
             if (seedComp.Seed != null)
@@ -289,8 +264,9 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
     public void SetMode(Entity<PlantAnalyzerComponent> ent, PlantAnalyzerModes mode)
     {
-        if (ent.Comp.DoAfter != null)
+        if (ent.Comp.Busy)
             return;
+
         ent.Comp.Settings.AnalyzerModes = mode;
 
         if (ent.Comp.Settings.AnalyzerModes == PlantAnalyzerModes.Implant)
@@ -313,8 +289,9 @@ public sealed class PlantAnalyzerSystem : EntitySystem
 
     public void GeneIterate(Entity<PlantAnalyzerComponent> ent, int mode, bool isDatabank)
     {
-        if (ent.Comp.DoAfter != null)
+        if (ent.Comp.Busy)
             return;
+
         if (isDatabank)
         {
             ent.Comp.DatabankIndex = mode;
@@ -395,7 +372,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
     }
     public void SendDatabase(Entity<PlantAnalyzerComponent> ent)
     {
-        _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.MutationBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
+        _ui.SetUiState(ent.Owner, PlantAnalyzerUiKey.Key, new PlantAnalyzerSeedDatabank(ent.Comp.GeneBank, ent.Comp.ConsumeGasesBank, ent.Comp.ExudeGasesBank, ent.Comp.ChemicalBank, ent.Comp.GeneIndex, ent.Comp.DatabankIndex));
     }
     // This is some shit which is really fucking wack.
     public void GetGeneFromInteger(Entity<PlantAnalyzerComponent> ent, SeedData seed)
@@ -458,7 +435,8 @@ public sealed class PlantAnalyzerSystem : EntitySystem
                         19 => (float) Convert.ToInt16(seed.Viable),
                         20 => (float) Convert.ToInt16(seed.Ligneous),
                         21 => (float) Convert.ToInt16(seed.CanScream),
-                        22 => (float) Convert.ToInt16(seed.TurnIntoKudzu)
+                        22 => (float) Convert.ToInt16(seed.TurnIntoKudzu),
+                        _ => 0f
                     };
                     ent.Comp.GeneBank.Add(new GeneData(index, value));
                     break;

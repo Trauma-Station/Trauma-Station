@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.CardboardBox;
+// </Trauma>
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Access.Components;
 using Content.Shared.CardboardBox;
@@ -77,6 +80,15 @@ public sealed class CardboardBoxSystem : SharedCardboardBoxSystem
         //Play effect & sound
         if (component.Mover != null)
         {
+            // <Trauma>
+            var attemptEv = new BoxAlertAttemptEvent();
+            RaiseLocalEvent(uid, ref attemptEv);
+            if (attemptEv.Cancelled)
+                return;
+
+            var ev = new BoxAlertedEvent();
+            RaiseLocalEvent(uid, ref ev);
+            // </Trauma>
             if (_timing.CurTime > component.EffectCooldown)
             {
                 RaiseNetworkEvent(new PlayBoxEffectMessage(GetNetEntity(uid), GetNetEntity(component.Mover.Value)));
@@ -94,6 +106,12 @@ public sealed class CardboardBoxSystem : SharedCardboardBoxSystem
 
     private void AfterStorageClosed(EntityUid uid, CardboardBoxComponent component, ref StorageAfterCloseEvent args)
     {
+        // <Trauma>
+        var attemptEv = new BoxStealthAttemptEvent();
+        RaiseLocalEvent(uid, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+        // </Trauma>
         // If this box has a stealth/chameleon effect, enable the stealth effect.
         if (TryComp(uid, out StealthComponent? stealth))
         {

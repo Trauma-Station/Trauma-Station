@@ -1,0 +1,10 @@
+- type: injectorMode
+  id: PhylacteryDrainMode
+  drawSound: /Audio/Items/hypospray.ogg
+  drawPopupTarget: injector-component-feel-prick-message
+  delayPerVolume: 0
+  behavior: Draw
+  name: injector-component-drain-mode-name
+  transferAmounts:
+  - 5
+  mobTime: 0

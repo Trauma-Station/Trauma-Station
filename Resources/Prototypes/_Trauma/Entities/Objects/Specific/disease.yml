@@ -1,0 +1,29 @@
+- type: entity
+  parent: [ BaseItem, BaseSyndicateContraband ]
+  id: DiseaseDnaSampler
+  name: syndicate DNA sampler
+  description: A genetic engineering device which can scan and encode DNA onto a stored retrovirus. Single-use only.
+  suffix: Empty
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/dnasampler.rsi
+    state: icon
+  - type: DiseaseDnaSampler
+  - type: ActivatableUI
+    key: enum.DiseaseDnaSamplerUiKey.Key
+    inHandsOnly: true
+    singleUser: true
+  - type: UserInterface
+    interfaces:
+      enum.DiseaseDnaSamplerUiKey.Key:
+        type: DiseaseDnaSamplerBUI
+
+- type: entity
+  parent: DiseaseDnaSampler
+  id: DiseaseDnaSamplerFoxDie
+  suffix: FOXDIE
+  components:
+  - type: DiseaseDnaSampler
+    disease: DiseaseFoxDie

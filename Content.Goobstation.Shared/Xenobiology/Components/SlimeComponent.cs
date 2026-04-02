@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
@@ -75,7 +71,7 @@ public sealed partial class SlimeComponent : Component
     /// <summary>
     /// The entity which has tamed this slime.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityUid? Tamer;
 
     [DataField]
@@ -84,7 +80,7 @@ public sealed partial class SlimeComponent : Component
     /// <summary>
     /// The entity, if any, currently being consumed by the slime.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, AutoNetworkedField]
     public EntityUid? LatchedTarget;
 
     /// <summary>

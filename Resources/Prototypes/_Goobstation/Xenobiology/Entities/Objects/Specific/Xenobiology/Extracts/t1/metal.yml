@@ -1,0 +1,41 @@
+- type: entity
+  id: MetalSlimeExtract
+  parent: BaseSlimeExtract
+  name: metal slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#595959"
+      shader: XenoMetallic
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:SpawnEntity
+        entity: SheetGlass15
+      - !type:SpawnEntity
+        entity: SheetRGlass1
+        number: 5 # pick up that can freeman
+    - reagents: [ Plasma ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReaction
+      - !type:SpawnEntity
+        entity: SheetSteel15
+      - !type:SpawnEntity
+        entity: SheetPlasteel1
+        number: 5 # pick up that can freeman
+    - reagents: [ Blood ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractFail
+  - type: Tag
+    tags:
+    - XenobiologyMetalExtract

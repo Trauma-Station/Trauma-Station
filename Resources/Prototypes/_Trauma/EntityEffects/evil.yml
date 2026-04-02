@@ -1,0 +1,10 @@
+# for debug effect stick admin aboos
+- type: entityEffect
+  id: Tator
+  effects:
+  - !type:MakeTraitor
+
+- type: entityEffect
+  id: Vomit
+  effects:
+  - !type:Vomit

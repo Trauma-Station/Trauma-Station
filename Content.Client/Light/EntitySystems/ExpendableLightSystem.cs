@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 T-Stalker <43253663+DogZeroX@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.Light.Components;
 using Content.Shared.Light.Components;
 using Robust.Client.GameObjects;
@@ -23,7 +10,6 @@ public sealed class ExpendableLightSystem : VisualizerSystem<ExpendableLightComp
     [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly LightBehaviorSystem _lightBehavior = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -67,37 +53,37 @@ public sealed class ExpendableLightSystem : VisualizerSystem<ExpendableLightComp
                 comp.PlayingStream = _audioSystem.PlayPvs(
                     comp.LoopedSound, uid)?.Entity;
 
-                if (_sprite.LayerMapTryGet((uid, args.Sprite), ExpendableLightVisualLayers.Overlay, out var layerIdx, true))
+                if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), ExpendableLightVisualLayers.Overlay, out var layerIdx, true))
                 {
                     if (!string.IsNullOrWhiteSpace(comp.IconStateLit))
-                        _sprite.LayerSetRsiState((uid, args.Sprite), layerIdx, comp.IconStateLit);
+                        SpriteSystem.LayerSetRsiState((uid, args.Sprite), layerIdx, comp.IconStateLit);
                     if (!string.IsNullOrWhiteSpace(comp.SpriteShaderLit))
                         args.Sprite.LayerSetShader(layerIdx, comp.SpriteShaderLit);
                     else
                         args.Sprite.LayerSetShader(layerIdx, null, null);
                     if (comp.GlowColorLit.HasValue)
-                        _sprite.LayerSetColor((uid, args.Sprite), layerIdx, comp.GlowColorLit.Value);
-                    _sprite.LayerSetVisible((uid, args.Sprite), layerIdx, true);
+                        SpriteSystem.LayerSetColor((uid, args.Sprite), layerIdx, comp.GlowColorLit.Value);
+                    SpriteSystem.LayerSetVisible((uid, args.Sprite), layerIdx, true);
                 }
 
                 if (comp.GlowColorLit.HasValue)
-                    _sprite.LayerSetColor((uid, args.Sprite), ExpendableLightVisualLayers.Glow, comp.GlowColorLit.Value);
-                _sprite.LayerSetVisible((uid, args.Sprite), ExpendableLightVisualLayers.Glow, true);
+                    SpriteSystem.LayerSetColor((uid, args.Sprite), ExpendableLightVisualLayers.Glow, comp.GlowColorLit.Value);
+                SpriteSystem.LayerSetVisible((uid, args.Sprite), ExpendableLightVisualLayers.Glow, true);
 
                 break;
             case ExpendableLightState.Dead:
                 comp.PlayingStream = _audioSystem.Stop(comp.PlayingStream);
-                if (_sprite.LayerMapTryGet((uid, args.Sprite), ExpendableLightVisualLayers.Overlay, out layerIdx, true))
+                if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), ExpendableLightVisualLayers.Overlay, out layerIdx, true))
                 {
                     if (!string.IsNullOrWhiteSpace(comp.IconStateSpent))
-                        _sprite.LayerSetRsiState((uid, args.Sprite), layerIdx, comp.IconStateSpent);
+                        SpriteSystem.LayerSetRsiState((uid, args.Sprite), layerIdx, comp.IconStateSpent);
                     if (!string.IsNullOrWhiteSpace(comp.SpriteShaderSpent))
                         args.Sprite.LayerSetShader(layerIdx, comp.SpriteShaderSpent);
                     else
                         args.Sprite.LayerSetShader(layerIdx, null, null);
                 }
 
-                _sprite.LayerSetVisible((uid, args.Sprite), ExpendableLightVisualLayers.Glow, false);
+                SpriteSystem.LayerSetVisible((uid, args.Sprite), ExpendableLightVisualLayers.Glow, false);
                 break;
         }
     }

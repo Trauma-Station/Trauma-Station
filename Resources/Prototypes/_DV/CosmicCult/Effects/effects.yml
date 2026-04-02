@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   categories: [ HideSpawnMenu ]
   id: WeaponArcCosmic
@@ -47,11 +41,11 @@
   - type: TimedDespawn
     lifetime: 0.5
   - type: Transform
-    noRot: true
     anchored: true
   - type: Sprite
+    snapCardinals: true
     layers:
-    - sprite: _DV/CosmicCult/Effects/tiles_spawn.rsi
+    - sprite: _DV/CosmicCult/Effects/tile_spawn.rsi
       state: floorglow
       shader: unshaded
     drawdepth: Mobs
@@ -163,16 +157,16 @@
     castShadows: false
   - type: LightBehaviour
     behaviours:
-     - !type:FadeBehaviour
-       interpolate: Linear
-       minDuration: 2.025
-       maxDuration: 2.025
-       startValue: 0.1
-       endValue: 2
-       property: Energy
-       enabled: true
-       isLooped: true
-       reverseWhenFinished: true
+    - !type:FadeBehaviour
+      interpolate: Linear
+      minDuration: 2.025
+      maxDuration: 2.025
+      startValue: 0.1
+      endValue: 2
+      property: Energy
+      enabled: true
+      isLooped: true
+      reverseWhenFinished: true
 
 - type: entity
   categories: [ HideSpawnMenu ]
@@ -275,11 +269,12 @@
   description: A trace of malign light..
   components:
   - type: TimedDespawn
-    lifetime: 50
+    lifetime: 30
   - type: CosmicCultExamine
     cultistText: cosmic-examine-text-malignecho
   - type: InteractionOutline
   - type: Sprite
+    drawdepth: 2
     layers:
     - sprite: _DV/CosmicCult/Effects/effect_echo.rsi
       state: vfx
@@ -350,3 +345,79 @@
       enabled: true
       isLooped: true
       reverseWhenFinished: true
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseCosmicVFX
+  id: CosmicColossusAttack1Vfx
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Sprite
+    snapCardinals: true
+    layers:
+    - sprite: _DV/CosmicCult/Effects/colossus_attack.rsi
+      state: attack1
+      shader: unshaded
+  - type: PointLight
+    color: "#42a4ae"
+    radius: 5
+    energy: 5
+    castShadows: true
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      interpolate: Linear
+      minDuration: 1.5
+      maxDuration: 1.5
+      startValue: 0.1
+      endValue: 5
+      property: Energy
+      enabled: true
+      isLooped: true
+      reverseWhenFinished: true
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseCosmicVFX
+  id: CosmicSunderAbilityVFX
+  components:
+  - type: Transform
+    noRot: true
+  - type: TimedDespawn
+    lifetime: 0.6
+  - type: Sprite
+    drawdepth: 5
+    layers:
+    - sprite: _DV/CosmicCult/Effects/ability_sundervfx.rsi
+      state: vfx
+      shader: unshaded
+  - type: PointLight
+    color: "#42a4ae"
+    radius: 10
+    energy: 10
+    castShadows: true
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseCosmicVFX
+  id: CosmicConversionAbilityVFX
+  components:
+  - type: Transform
+    noRot: true
+  - type: TimedDespawn
+    lifetime: 6
+  - type: Sprite
+    offset: 0,0.6
+    drawdepth: 5
+    layers:
+    - sprite: _DV/CosmicCult/Tileset/cosmiceffigy.rsi # Asset reuse go BRRRR
+      state: unshaded_bg
+      shader: unshaded

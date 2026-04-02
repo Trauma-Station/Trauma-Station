@@ -13,8 +13,9 @@ using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Destructible.Thresholds;
+using Content.Shared.EntityEffects;
 using Content.Shared.Explosion;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Item;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.Physics;
@@ -444,13 +445,13 @@ public sealed partial class ChargeMagicEvent : InstantActionEvent
     public ProtoId<TagPrototype> WandTag = "WizardWand";
 
     [DataField]
-    public float WandChargeRate = 1000f;
+    public float WandChargeRate = 10000f;
 
     [DataField]
-    public float MinWandDegradeCharge = 1000f;
+    public float MinWandDegradeCharge = 500f;
 
     [DataField]
-    public float WandDegradePercentagePerCharge = 0.5f;
+    public float WandDegradePercentagePerCharge = 0.1f;
 
     [DataField]
     public List<ProtoId<TagPrototype>> RechargeTags = new()
@@ -466,10 +467,13 @@ public sealed partial class BlinkSpellEvent : InstantActionEvent
     public MinMax Radius = new(0, 6);
 }
 
-public sealed partial class TileToggleSpellEvent : EntityTargetActionEvent
+public sealed partial class EntityEffectSpellEvent : EntityTargetActionEvent
 {
     [DataField]
     public SoundSpecifier? Sound;
+
+    [DataField(required: true)]
+    public EntityEffect[] Effects = default!;
 }
 
 [DataDefinition]
@@ -477,12 +481,6 @@ public sealed partial class GlobalTileToggleEvent : EntityEventArgs
 {
     [DataField]
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_Goobstation/Wizard/ghost.ogg");
-}
-
-public sealed partial class PredictionToggleSpellEvent : EntityTargetActionEvent
-{
-    [DataField]
-    public SoundSpecifier? Sound;
 }
 
 [DataDefinition]

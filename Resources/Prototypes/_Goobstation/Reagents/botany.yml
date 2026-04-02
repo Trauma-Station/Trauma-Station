@@ -16,7 +16,7 @@
   - !type:PlantAdjustNutrition
     amount: 4 # stronger than EZ-nutrient, but not very practical to use anyways
   metabolisms:
-    Food:
+    Digestion:
       effects:
       - !type:SatiateHunger
         conditions:
@@ -42,13 +42,13 @@
     probability: 0.3
     amount: 1
   metabolisms:
-    Food:
+    Digestion:
       effects:
       - !type:SatiateHunger
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plant ]
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.2 # powerful at healing diona, but slow
       effects:
       - !type:HealthChange

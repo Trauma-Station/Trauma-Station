@@ -1,0 +1,27 @@
+uniform highp vec4 col1;
+uniform highp vec4 col2;
+uniform highp vec4 col3;
+uniform highp vec4 params;
+
+void fragment() {
+    lowp float pixelSize = 32.0;
+    highp float blur = params.x;
+    highp float prop1 = params.y;
+    highp float prop2 = params.z;
+
+    highp vec4 sprite = zTexture(UV);
+
+    if (sprite.a == 0.0) {
+        discard;
+    }
+
+    highp float coord = floor(UV2.y * pixelSize) / pixelSize;
+
+    lowp float p1 = min(prop1, prop2);
+    lowp float p2 = max(prop1, prop2);
+
+    highp float t1 = smoothstep(p1 - blur, p1 + blur, coord);
+    highp float t2 = smoothstep(p2 - blur, p2 + blur, coord);
+    highp vec3 blend1 = mix(col1.rgb, col2.rgb, t1);
+    COLOR = vec4(mix(blend1, col3.rgb, t2) * sprite.rgb, sprite.a);
+}

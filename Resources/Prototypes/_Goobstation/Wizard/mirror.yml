@@ -24,8 +24,6 @@
     - Reptilian
     - SlimePerson
     - Diona
-    - Harpy
-    - Yowie
     - Arachnid
     - Moth
     - Gingerbread
@@ -42,3 +40,4 @@
     interfaces:
       enum.WizardMirrorUiKey.Key:
         type: WizardMirrorBoundUserInterface
+  - type: ReflectiveSurface # Goob

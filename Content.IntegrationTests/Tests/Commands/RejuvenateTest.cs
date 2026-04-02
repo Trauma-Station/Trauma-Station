@@ -3,7 +3,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.GameObjects;
@@ -89,7 +89,7 @@ namespace Content.IntegrationTests.Tests.Commands
                     Assert.That(mobStateSystem.IsDead(human, mobState), Is.False);
                     Assert.That(mobStateSystem.IsIncapacitated(human, mobState), Is.False);
 
-                    Assert.That(damageable.TotalDamage, Is.EqualTo(FixedPoint2.Zero));
+                    Assert.That(damSystem.GetTotalDamage((human, damageable)), Is.EqualTo(FixedPoint2.Zero));
                 });
             });
             await pair.CleanReturnAsync();

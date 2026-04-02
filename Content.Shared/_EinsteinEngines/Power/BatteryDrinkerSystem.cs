@@ -31,7 +31,7 @@ public sealed class BatteryDrinkerSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly PredictedBatterySystem _battery = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Goobstation - Energycrit
@@ -40,7 +40,7 @@ public sealed class BatteryDrinkerSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PredictedBatteryComponent, GetVerbsEvent<AlternativeVerb>>(AddAltVerb);
+        SubscribeLocalEvent<BatteryComponent, GetVerbsEvent<AlternativeVerb>>(AddAltVerb);
         SubscribeLocalEvent<PowerCellSlotComponent, GetVerbsEvent<AlternativeVerb>>(AddAltVerb); // Goobstation - Energycrit
 
         SubscribeLocalEvent<BatteryDrinkerComponent, BatteryDrinkerDoAfterEvent>(OnDoAfter);
@@ -102,7 +102,7 @@ public sealed class BatteryDrinkerSystem : EntitySystem
         if (!TryComp<BatteryDrinkerSourceComponent>(source, out var sourceComp))
             return;
 
-        var sourceBattery = Comp<PredictedBatteryComponent>(source);
+        var sourceBattery = Comp<BatteryComponent>(source);
 
         var drinker = uid;
         if (!_powerCell.TryGetBatteryFromEntityOrSlot(drinker, out var drinkerBattery))

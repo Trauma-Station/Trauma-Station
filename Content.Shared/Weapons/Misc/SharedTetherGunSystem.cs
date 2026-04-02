@@ -155,6 +155,14 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
         gunUid = null;
         gun = null;
 
+        // <Trauma> - check user for the case of telekinesis, also lets sentient tether guns maybe work
+        if (TryComp(user, out gun))
+        {
+            gunUid = user;
+            return true;
+        }
+        // </Trauma>
+
         if (!_hands.TryGetActiveItem(user, out var activeItem) ||
             !TryComp(activeItem, out gun) ||
             _container.IsEntityInContainer(user))
@@ -202,8 +210,10 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
         if (!component.CanTetherAlive && _mob.IsAlive(target))
             return false;
 
+        /* Trauma - you can trivially bypass this by just getting on the chair after tethering, no reason to have it
         if (TryComp<StrapComponent>(target, out var strap) && strap.BuckledEntities.Count > 0)
             return false;
+        */
 
         return true;
     }
@@ -260,7 +270,8 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
         Dirty(gunUid, component);
     }
 
-    protected virtual void StopTether(EntityUid gunUid, BaseForceGunComponent component, bool land = true, bool transfer = false)
+    // Trauma - made public
+    public virtual void StopTether(EntityUid gunUid, BaseForceGunComponent component, bool land = true, bool transfer = false)
     {
         if (component.Tethered == null)
             return;

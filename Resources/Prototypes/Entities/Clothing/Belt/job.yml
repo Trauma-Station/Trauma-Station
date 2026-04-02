@@ -33,6 +33,7 @@
       - Hammer # Goobstation
       - Nailgun # Goobstation
       - MagazineNailgun # Goobstation
+      - HereticBladeLock # Goobstation
       components:
       - StationMap
       - SprayPainter
@@ -191,11 +192,9 @@
       # <Goob>
       - Tourniquet
       - MedicalPatch
-      - AutoinjectorCartridge
       - HandheldCrewMonitor
       # </Goob>
       components:
-      - Hypospray
       - Injector
       - Pill
       - HandLabeler
@@ -204,6 +203,7 @@
       - Defibrillator
       - SyringeGun
       - GunApplySolution # syndicate dart gun
+      - SolutionCartridge
       # </Goob>
   - type: ItemMapper
     sprite: *BeltOverlay
@@ -214,7 +214,7 @@
           - Bottle
       hypo:
         whitelist:
-          components:
+          tags:
           - Hypospray
       pill:
         whitelist:

@@ -1,0 +1,7 @@
+- type: entity
+  abstract: true
+  save: false
+  parent: BaseSpeciesAppearanceOrganless
+  id: BaseSpeciesAppearance
+  components:
+  - type: NeedsTongue # almost all humanoids need to have a tongue to speak

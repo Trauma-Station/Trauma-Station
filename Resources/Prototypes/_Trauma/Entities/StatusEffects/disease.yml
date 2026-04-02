@@ -1,0 +1,13 @@
+- type: entity
+  parent: StatusEffectBase
+  id: StatusEffectHeartAttack
+  name: heart attack
+  components:
+  - type: RejuvenateRemovedStatusEffect
+  - type: StatusEffectEffects
+    effects:
+    - !type:HealthChange
+      damage:
+        types:
+          Asphyxiation: 15
+      useTargeting: false

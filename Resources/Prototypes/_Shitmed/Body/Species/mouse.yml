@@ -1,0 +1,41 @@
+## Mob
+
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: BaseMobMouse
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganMouseTorso
+      # Organs
+      Heart: OrganAnimalHeart
+      Lungs: OrganAnimalLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys
+      EggSack: OrganMouseEggSack
+
+## Base
+
+- type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganMouse
+  suffix: mouse
+
+## Parts
+
+- type: entity
+  parent: [ OrganAnimalTorso, OrganMouse ]
+  id: OrganMouseTorso
+  components:
+  - type: BodyPart
+    slots:
+    - Heart
+    - Lungs
+    - Stomach
+    - Liver
+    - Kidneys
+    - EggSack

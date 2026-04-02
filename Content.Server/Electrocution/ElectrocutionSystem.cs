@@ -167,19 +167,9 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
 
     private void OnElectrifiedStartCollide(EntityUid uid, ElectrifiedComponent electrified, ref StartCollideEvent args)
     {
-        // Goob edit start
         if (!electrified.OnBump)
             return;
-        if (TryComp(uid, out BeamComponent? beam))
-        {
-            var struck = EnsureComp<StruckByLightningComponent>(args.OtherEntity);
-            if (!struck.BeamIndices.Add(beam.BeamIndex))
-                return;
-            if (TryComp(uid, out TimedDespawnComponent? despawn))
-                struck.Lifetime = MathF.Max(struck.Lifetime, despawn.Lifetime + 1f);
-        }
         TryDoElectrifiedAct(uid, args.OtherEntity, 1, electrified);
-        // Goob edit end
     }
 
     private void OnElectrifiedAttacked(EntityUid uid, ElectrifiedComponent electrified, AttackedEvent args)

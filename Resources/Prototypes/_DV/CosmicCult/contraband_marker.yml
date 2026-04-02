@@ -1,0 +1,10 @@
+- type: contrabandSeverity
+  id: Cosmic
+  examineText: cosmic-examine-text-contraband
+
+- type: entity
+  id: BaseCosmicContraband
+  abstract: true
+  components:
+  - type: Contraband
+    severity: Cosmic

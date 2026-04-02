@@ -1,6 +1,12 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Common.Atmos;
+using Content.Goobstation.Common.Body.Components;
+using Content.Goobstation.Common.Temperature.Components;
 using Content.Goobstation.Shared.PhaseShift;
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
+using Content.Goobstation.Shared.Supermatter.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
@@ -10,20 +16,15 @@ using Content.Shared.Popups;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 using Content.Shared.Movement.Pulling.Events;
-using Robust.Shared.Network;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Hands;
-using Content.Goobstation.Common.Footprints;
 using Content.Shared.Movement.Components;
 using Content.Shared.Speech.Muting;
 using Content.Shared.Emoting;
-using Content.Goobstation.Common.Atmos;
-using Content.Goobstation.Common.Body.Components;
-using Content.Goobstation.Common.Temperature.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using Content.Shared.Ghost;
@@ -32,16 +33,19 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Electrocution;
 using Content.Shared.Standing;
-using Content.Goobstation.Shared.Supermatter.Components;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Pointing;
-using Robust.Shared.Timing;
+using Content.Trauma.Common.Footprints;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;
 
 public sealed class SlasherIncorporealSystem : EntitySystem
 {
+    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStealthSystem _stealth = default!;
@@ -55,11 +59,14 @@ public sealed class SlasherIncorporealSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    private const string FootstepSoundTag = "FootstepSound";
+    private static readonly ProtoId<TagPrototype> FootstepSoundTag = "FootstepSound";
+
+    private HashSet<Entity<PhysicsComponent>> _entities = new();
 
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<SlasherIncorporealComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<SlasherIncorporealComponent, ComponentShutdown>(OnShutdown);
 
@@ -434,11 +441,11 @@ public sealed class SlasherIncorporealSystem : EntitySystem
     private void OnBeforeDamageBodyPart(EntityUid uid, DamageableComponent damageable, ref BeforeDamageChangedEvent args)
     {
         // Check if this is a body part, and if so, check if the parent body is an incorporeal slasher
-        if (!TryComp<BodyPartComponent>(uid, out var bodyPart) || bodyPart.Body == null)
+        if (_body.GetBody(uid) is not {} body)
             return;
 
         // Check if the parent body has the incorporeal component and is incorporeal
-        if (TryComp<SlasherIncorporealComponent>(bodyPart.Body.Value, out var slasherComp) && slasherComp.IsIncorporeal)
+        if (TryComp<SlasherIncorporealComponent>(body, out var slasherComp) && slasherComp.IsIncorporeal)
             args.Cancelled = true;
     }
 
@@ -464,7 +471,7 @@ public sealed class SlasherIncorporealSystem : EntitySystem
     private void OnFootprintLeaveAttempt(EntityUid uid, SlasherIncorporealComponent comp, ref FootprintLeaveAttemptEvent args)
     {
         if (comp.IsIncorporeal)
-            args.Cancel();
+            args.Cancelled = true;
     }
 
     private void OnAnyActionAttempt(Entity<ActionComponent> action, ref ActionAttemptEvent args)
@@ -490,7 +497,7 @@ public sealed class SlasherIncorporealSystem : EntitySystem
             if (HasComp<GhostComponent>(other))
                 continue;
 
-            if (!HasComp<HumanoidAppearanceComponent>(other))
+            if (!HasComp<HumanoidProfileComponent>(other))
                 continue;
 
             if (_mobState.IsDead(other))
@@ -509,17 +516,18 @@ public sealed class SlasherIncorporealSystem : EntitySystem
 
     private bool IsInsideSolidObject(EntityUid uid)
     {
-        var entities = _lookup.GetEntitiesInRange(uid, 1f, LookupFlags.Static | LookupFlags.Sundries);
+        // TODO: use turf helpers or something instead of reinventing the wheel
+        var coords = Transform(uid).Coordinates;
+        var flags = LookupFlags.Static | LookupFlags.Sundries;
+        _entities.Clear();
+        _lookup.GetEntitiesInRange(coords, 1f, _entities, flags);
 
-        foreach (var entity in entities)
+        foreach (var entity in _entities)
         {
-            if (entity == uid)
+            if (entity.Owner == uid)
                 continue;
 
-            // Check if the entity is solid and impassable
-            if (!TryComp<PhysicsComponent>(entity, out var physics))
-                continue;
-
+            var physics = entity.Comp;
             if (!physics.CanCollide || !physics.Hard)
                 continue;
 

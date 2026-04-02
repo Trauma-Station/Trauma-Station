@@ -7,8 +7,7 @@
   flavor: bitter
   color: "#1abcff"
   metabolisms:
-    Poison:
-      metabolismRate: 0.5
+    Bloodstream:
       conditions:
       - !type:NameContainsCondition
         name: John
@@ -67,13 +66,13 @@
         emote: Scream
         probability: 0.1
   metabolisms:
-    Poison:
-      metabolismRate: 3.00 # Okay damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
+    Bloodstream:
+      metabolismRate: 3 # Okay damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
       - !type:HealthChange
         damage:
           types:
-            Caustic: 4
+            Caustic: 12 # 4/u, comparable to other acids. it's fucking nitric acid
       - !type:PopupMessage
         type: Local
         visualType: Large

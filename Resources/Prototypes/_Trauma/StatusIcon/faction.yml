@@ -1,0 +1,12 @@
+- type: factionIcon
+  id: AbductorMindControl
+  isShaded: true
+  priority: 11
+  locationPreference: Left
+  showTo:
+    components:
+      - ShowAntagIcons
+      - Abductor
+  icon:
+    sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
+    state: Mindcontrolled

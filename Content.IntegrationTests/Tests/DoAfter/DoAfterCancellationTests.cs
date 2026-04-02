@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.IntegrationTests.Tests.Construction.Interaction;
 using Content.IntegrationTests.Tests.Interaction;
@@ -93,9 +84,9 @@ public sealed class DoAfterCancellationTests : InteractionTest
         // Goob edit start - instant prying
         Assert.That(ActiveDoAfters.Count(), Is.EqualTo(0));
         await AssertTile(Plating);
-        return;
         // Goob edit end
 
+        /* Trauma
         // Second DoAfter cancels the first.
         await Server.WaitPost(() => InteractSys.UserInteraction(SEntMan.GetEntity(Player), SEntMan.GetCoordinates(TargetCoords), SEntMan.GetEntity(Target)));
         Assert.That(ActiveDoAfters.Count(), Is.EqualTo(0));
@@ -105,6 +96,7 @@ public sealed class DoAfterCancellationTests : InteractionTest
         await InteractUsing(Pry);
         Assert.That(ActiveDoAfters.Count(), Is.EqualTo(0));
         await AssertTile(Plating);
+        */
     }
 
     [Test]

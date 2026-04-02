@@ -71,11 +71,10 @@
   - type: DevilContract
 
 - type: entity
+  parent: PaperDevilContractBlank
   id: PaperDevilContract
   suffix: "Devil Contract"
-  parent: BaseDevilContract
   components:
-  - type: DevilContract
   - type: Paper
     content: default-contract-content
 

@@ -1,0 +1,152 @@
+## PARITY
+
+- type: scrollPrayer
+  id: BaconEggs
+  verb: GIVE
+  subjects: [ "BACON & EGGS" ]
+  items: !type:AllSelector
+    children:
+    - id: FoodMeatBaconCooked
+    - id: FoodMealFriedegg
+
+- type: scrollPrayer
+  id: Cabbage
+  verb: GIVE
+  subjects: [ "CABBAGE" ]
+  items:
+    id: FoodCabbage
+
+- type: scrollPrayer
+  id: Carrot
+  verb: GIVE
+  subjects: [ "CARROT" ]
+  items:
+    id: FoodCarrot
+
+- type: scrollPrayer
+  id: Cheese
+  verb: GIVE
+  subjects: [ "CHEESE" ]
+  items:
+    id: FoodCheeseSlice
+
+- type: scrollPrayer
+  id: DriedMeat
+  verb: GIVE
+  subjects: [ "DRIED MEAT" ]
+  items:
+    id: FoodSnackSus # jerky is dried meat...
+
+- type: scrollPrayer
+  id: Mushroom
+  verb: GIVE
+  subjects: [ "MUSHROOM", "DRIED MUSHROOM", "GLOW MUSHROOM" ]
+  items:
+    id: FoodMushroom # not dried sorry chud
+
+- type: scrollPrayer
+  id: Egg
+  verb: GIVE
+  subjects: [ "EGG" ]
+  items: !type:GroupSelector
+    children:
+    - id: FoodEgg
+    - id: EggSpider
+      weight: 0.05
+    - id: EggSpiderFertilized
+      weight: 0.05
+    - id: XenoEgg
+      weight: 0.1
+
+- type: scrollPrayer
+  id: MeatPie
+  verb: GIVE
+  subjects: [ "MEATPIE" ]
+  items:
+    id: FoodPieMeat
+
+- type: scrollPrayer
+  id: MixNMatch
+  verb: GIVE
+  subjects: [ "MIX'N'MATCH" ]
+  items:
+    id: FoodSoupStew
+
+- type: scrollPrayer
+  id: MoldyBread
+  verb: GIVE
+  subjects: [ "MOLDY BREAD" ]
+  items:
+    id: FoodBreadMoldySlice
+
+- type: scrollPrayer
+  id: RottenMeat
+  verb: GIVE
+  subjects: [ "ROTTEN MEAT" ]
+  items:
+    id: FoodMeatRotten
+
+- type: scrollPrayer
+  id: Salami
+  verb: GIVE
+  subjects: [ "SALAMI" ]
+  items:
+    id: FoodMeatSalami
+
+- type: scrollPrayer
+  id: Salmonsnake
+  verb: GIVE
+  subjects: [ "SALMONSNAKE" ]
+  items:
+    id: MobCobraSpace # theres no salmonsnake meat, have a live snake instead
+
+- type: scrollPrayer
+  id: Tomato
+  verb: GIVE
+  subjects: [ "TOMATO" ]
+  items:
+    id: FoodTomato
+
+- type: scrollPrayer
+  id: VegetablePie
+  verb: GIVE
+  subjects: [ "VEGETABLE PIE" ]
+  items:
+    id: FoodPiePumpkin # pumpkin is a vegetable i think
+
+- type: scrollPrayer
+  id: WheatFlour
+  verb: GIVE
+  subjects: [ "WHEAT FLOUR" ]
+  items:
+    id: ReagentContainerFlour
+
+## NON PARITY
+
+- type: scrollPrayer
+  id: BlueTomato
+  verb: GIVE
+  subjects: [ "BLUE TOMATO" ]
+  items:
+    id: FoodBlueTomato
+
+- type: scrollPrayer
+  id: BluespaceTomato
+  verb: GIVE
+  subjects: [ "BLUESPACE TOMATO" ]
+  items:
+    id: FoodBluespaceTomato
+
+- type: scrollPrayer
+  id: Burger
+  verb: GIVE
+  subjects: [ "BURGER" ]
+  items:
+    id: FoodBurgerBig
+
+- type: scrollPrayer
+  id: Pizza
+  verb: GIVE
+  subjects: [ "PIZZA", "ARNOLD'S" ]
+  items:
+    id: FoodPizzaArnold

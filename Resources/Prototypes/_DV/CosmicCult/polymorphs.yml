@@ -3,10 +3,7 @@
   configuration:
     entity: CosmicPolymorphEntHuman
     forced: true
-    inventory: None
-    transferName: false
-    transferDamage: true
-    duration: 12
+    duration: 15
     polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
 
 - type: polymorph
@@ -14,10 +11,7 @@
   configuration:
     entity: CosmicPolymorphEntArachnid
     forced: true
-    inventory: None
-    transferName: false
-    transferDamage: true
-    duration: 12
+    duration: 15
     polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
 
 - type: polymorph
@@ -25,10 +19,7 @@
   configuration:
     entity: CosmicPolymorphEntDiona
     forced: true
-    inventory: None
-    transferName: false
-    transferDamage: true
-    duration: 12
+    duration: 15
     polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
 
 - type: polymorph
@@ -36,22 +27,15 @@
   configuration:
     entity: CosmicPolymorphEntMoth
     forced: true
-    inventory: None
-    transferName: false
-    transferDamage: true
-    duration: 12
+    duration: 15
     polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
-
 
 - type: polymorph
   id: CosmicLapseMobVox
   configuration:
     entity: CosmicPolymorphEntVox
     forced: true
-    inventory: None
-    transferName: false
-    transferDamage: true
-    duration: 12
+    duration: 15
     polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
 
 - type: polymorph
@@ -59,10 +43,7 @@
   configuration:
     entity: CosmicPolymorphEntSnail
     forced: true
-    inventory: None
-    transferName: false
-    transferDamage: true
-    duration: 12
+    duration: 15
     polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
 
 - type: polymorph
@@ -70,15 +51,11 @@
   configuration:
     entity: CosmicPolymorphEntDecapoid
     forced: true
-    inventory: None
-    transferName: false
-    transferDamage: true
-    duration: 12
+    duration: 15
     polymorphSound: /Audio/_DV/CosmicCult/ability_lapse.ogg
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  parent: BaseStructure
   abstract: true
   id: CosmicPolymorphEnt
   name: "Unknown" # The question marks crash regex gg
@@ -111,20 +88,11 @@
        enabled: true
        isLooped: true
        reverseWhenFinished: true
-  - type: SpriteFade
   - type: Speech
     enabled: False
   - type: Transform
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.1,0.2,0.375"
-        mask:
-        - LargeMobMask
-        layer:
-        - WallLayer
+  - type: Visibility
+    layer: 32 #monument vis layer
 
 - type: entity
   categories: [ HideSpawnMenu ]

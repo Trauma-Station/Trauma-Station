@@ -1,5 +1,5 @@
 - type: entity
-  parent: [VolatileGrenadeBase, GrenadeBase, BaseSecurityContraband ]
+  parent: [VolatileGrenadeBase, TimerGrenadeBase, BaseSecurityContraband ]
   id: SmokeGrenade
   name: smoke grenade
   description: A tactical grenade that releases a large, long-lasting cloud of smoke when used.
@@ -97,11 +97,17 @@
     deconstructionTarget: null
 
 - type: entity
-  parent: [ BaseEngineeringContraband, VolatileGrenadeBase, GrenadeBase ] # Prevent inheriting DeleteOnTrigger from SmokeGrenade
+  parent: [ BaseEngineeringContraband, VolatileGrenadeBase, TimerGrenadeBase ] # Prevent inheriting DeleteOnTrigger from SmokeGrenade
   id: AirGrenade
   name: air grenade
   description: A special solid state chemical grenade used for quickly releasing standard air into a spaced area. Fills up to 30 tiles!
   components:
+  # <Trauma>
+  - type: Construction
+    graph: AirGrenadeGraph
+    node: start
+    deconstructionTarget: null
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Grenades/airboom.rsi
   - type: EmitSoundOnTrigger
@@ -131,7 +137,10 @@
         enabled:
           True: { state: active }
           False: { state: spent }
-  - type: Construction # Trauma
-    graph: AirGrenadeGraph
-    node: start
-    deconstructionTarget: null
+  - type: RemoveComponentsOnTrigger # should prevent it from being re-triggered
+    keysIn:
+    - timer
+    triggerOnce: true
+    components:
+    - type: TriggerOnUse
+    - type: TimerTrigger

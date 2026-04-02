@@ -1,0 +1,15 @@
+- type: entity
+  parent: MobMonkey
+  id: MobMonkeyGhostrole # Exists soley to make ghostrole monkey shuttles for gimmicks.
+  suffix: Ghostrole
+  components:
+  - type: GhostRole
+    prob: 1
+
+- type: entity
+  parent: MobKobold
+  id: MobKoboldGhostrole # Ditto
+  suffix: Ghostrole
+  components:
+  - type: GhostRole
+    prob: 1

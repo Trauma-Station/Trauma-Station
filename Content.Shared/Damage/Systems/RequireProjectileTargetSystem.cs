@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Projectiles;
-using Content.Shared._DV.Abilities;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 // </Trauma>
@@ -44,10 +43,10 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
         // Goob edit start
         if (TryComp(other, out TargetedProjectileComponent? targeted))
         {
-            if (targeted.Target == null || targeted.Target == ent)
+            if (GetEntity(targeted.Target) is not {} target || target == ent.Owner)
                 return;
 
-            var ev = new ShouldTargetedProjectileCollideEvent(targeted.Target.Value);
+            var ev = new ShouldTargetedProjectileCollideEvent(target);
             RaiseLocalEvent(ent, ev);
             if (ev.Handled)
                 return;
@@ -60,10 +59,6 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
             // Prevents shooting out of while inside of crates
             var shooter = projectile.Shooter;
             if (!shooter.HasValue)
-                return;
-
-            // Goobstation - Crawling
-            if (TryComp<CrawlUnderObjectsComponent>(shooter, out var crawl) && crawl.Enabled)
                 return;
 
             if (TryComp(ent, out PhysicsComponent? physics) && physics.LinearVelocity.Length() > 2.5f) // Goobstation

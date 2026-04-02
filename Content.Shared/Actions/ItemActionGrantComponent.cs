@@ -60,7 +60,7 @@ public sealed partial class ItemActionGrantComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool ActiveIfWorn;
-    
+
     // Goobstation start
     [DataField]
     public SlotFlags? RestrictedSlots;

@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipCaptain
+  name: skill chip (captain)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
+      LiteracyKnowledge: 50 # your whole job is to delegate and lead :godo:
+      StrengthKnowledge: 20
+      ToughnessKnowledge: 10
+  # TODO: nuke disk serial parity
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipNanotrasenRepresentative
+  name: skill chip (NTR)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      LiteracyKnowledge: 50

@@ -1,35 +1,12 @@
-// SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Jezithyr <Jezithyr.@gmail.com>
-// SPDX-FileCopyrightText: 2022 Jezithyr <Jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2022 Jezithyr <jmaster9999@gmail.com>
-// SPDX-FileCopyrightText: 2022 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <wrexbe@protonmail.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 SpaceManiac <tad@platymuus.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using System.Numerics;
 using Content.Client.Administration.Managers;
 using Content.Client.Gameplay;
-using Content.Client.Markers;
 using Content.Client.Sandbox;
-using Content.Client.SubFloor;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.DecalPlacer;
 using Content.Client.UserInterface.Systems.Sandbox.Windows;
 using Content.Shared.Input;
 using JetBrains.Annotations;
-using Robust.Client.Debugging;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -49,14 +26,10 @@ namespace Content.Client.UserInterface.Systems.Sandbox;
 public sealed class SandboxUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<SandboxSystem>
 {
     [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly ILightManager _light = default!;
     [Dependency] private readonly IClientAdminManager _admin = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    [UISystemDependency] private readonly DebugPhysicsSystem _debugPhysics = default!;
-    [UISystemDependency] private readonly MarkerSystem _marker = default!;
     [UISystemDependency] private readonly SandboxSystem _sandbox = default!;
 
     private SandboxWindow? _window;
@@ -136,13 +109,6 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
         _window.OnOpen += () => { SandboxButton!.Pressed = true; };
         _window.OnClose += () => { SandboxButton!.Pressed = false; };
 
-        // TODO: These need moving to opened so at least if they're not synced properly on open they work.
-        _window.ToggleLightButton.Pressed = !_light.Enabled;
-        _window.ToggleFovButton.Pressed = !_eye.CurrentEye.DrawFov;
-        _window.ToggleShadowsButton.Pressed = !_light.DrawShadows;
-        _window.ShowMarkersButton.Pressed = _marker.MarkersVisible;
-        _window.ShowBbButton.Pressed = (_debugPhysics.Flags & PhysicsDebugFlags.Shapes) != 0x0;
-
         _window.AiOverlayButton.OnPressed += args =>
         {
             var player = _player.LocalEntity;
@@ -171,6 +137,7 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
         _window.ToggleSubfloorButton.OnPressed += _ => _sandbox.ToggleSubFloor();
         _window.ShowMarkersButton.OnPressed += _ => _sandbox.ShowMarkers();
         _window.ShowBbButton.OnPressed += _ => _sandbox.ShowBb();
+        _window.ToggleThermalVisionButton.OnToggled += _ => _sandbox.ToggleThermalVision();
     }
 
     private void CheckSandboxVisibility()
@@ -223,7 +190,7 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
         return _sandbox.Copy(session, coords, uid);
     }
 
-    public void ToggleWindow()
+    public void ToggleWindow() // Trauma - made public
     {
         if (_window == null)
             return;

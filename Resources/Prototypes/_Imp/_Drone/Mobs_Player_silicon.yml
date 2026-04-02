@@ -71,10 +71,28 @@
   - type: Physics
     bodyType: KinematicController
   - type: Hands
+    hands:
+      # Unremovable tools
+      hand1:
+        location: Right
+      hand2: {}
+      hand3: {}
+      hand4:
+        location: Left
+      # Materials etc
+      hand5:
+        location: Right
+      hand6:
+        location: Left
+    sortedHands:
+    - hand1
+    - hand2
+    - hand3
+    - hand4
+    - hand5
+    - hand6
     showInHands: false
   - type: ComplexInteraction
-  - type: Body
-    prototype: Drone
   - type: IntrinsicRadioReceiver
   #- type: IntrinsicRadioTransmitter
   #  channels:
@@ -191,12 +209,13 @@
       30: 0.7
       50: 0.5
   - type: Temperature
-    heatDamageThreshold: 5000
     currentTemperature: 310.15
     specificHeat: 42
+  - type: TemperatureDamage
+    heatDamageThreshold: 5000
     heatDamage:
       types:
-        Heat : 1 #per second, scales with temperature & other constants
+        Heat: 1 #per second, scales with temperature & other constants
   - type: Sprite
     drawdepth: SmallMobs
     layers:
@@ -228,7 +247,6 @@
           Off: { state: shell }
           On: { state: drone }
   - type: LanguageSpeaker # Einstein Engines - Language
-  - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
     - DroneTalk
     understands:

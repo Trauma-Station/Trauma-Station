@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: CodeWords
+  values:
+    prefix: CodeWords-dataset-
+    count: 9

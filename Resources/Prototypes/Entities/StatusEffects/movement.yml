@@ -76,6 +76,8 @@
     blacklist:
       tags:
       - StunImmune
+      components: # Trauma
+      - Realignment
   - type: StatusEffectAlert
     alert: Stun
   - type: StunnedStatusEffect

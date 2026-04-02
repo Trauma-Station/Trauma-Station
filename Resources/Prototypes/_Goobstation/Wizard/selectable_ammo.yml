@@ -12,8 +12,8 @@
   color: darkorange
   soundGunshot:
     path: /Audio/Magic/fireball.ogg
-  fireRate: 1
-  fireCost: 250
+  fireRate: 1.5
+  fireCost: 1250
   flags: All
   protoId: ProjectileFireball
 
@@ -26,8 +26,8 @@
   color: lightgreen
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg
-  fireCost: 750
-  fireRate: 0.5
+  fireCost: 1000
+  fireRate: 1.5
   flags: All
   protoId: ProjectileHealingBolt
 
@@ -41,7 +41,7 @@
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg
   fireRate: 4
-  fireCost: 50
+  fireCost: 250
   flags: All
   protoId: ProjectileSpellCardPurpleSpread
 
@@ -55,7 +55,7 @@
   soundGunshot:
     path: /Audio/_Goobstation/Wizard/wand_teleport.ogg
   fireRate: 1.5
-  fireCost: 100
+  fireCost: 500
   flags: All
   protoId: ProjectileTeleBolt
 
@@ -69,7 +69,7 @@
   soundGunshot:
     path: /Audio/Magic/fireball.ogg
   fireRate: 1.5
-  fireCost: 150
+  fireCost: 1000
   flags: All
   protoId: ProjectileFieryBolt
 
@@ -83,7 +83,7 @@
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg
   fireRate: 1.5
-  fireCost: 200
+  fireCost: 500
   flags: All
   protoId: ProjectileSwapBolt
 
@@ -97,7 +97,7 @@
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg
   fireRate: 1.5
-  fireCost: 150
+  fireCost: 500
   flags: All
   protoId: ProjectileBeeBolt
 
@@ -110,8 +110,8 @@
   color: darkred
   soundGunshot:
     path: /Audio/_Goobstation/Wizard/wandodeath.ogg
-  fireRate: 0.5
-  fireCost: 750
+  fireRate: 1.5
+  fireCost: 3300
   flags: All
   protoId: ProjectileDeathBolt
 
@@ -125,7 +125,7 @@
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg
   fireRate: 1.5
-  fireCost: 250
+  fireCost: 1000
   flags: All
   protoId: ProjectileIceCubeBolt
 
@@ -138,8 +138,8 @@
   color: "#1AE51A"
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg
-  fireRate: 2.5
-  fireCost: 100
+  fireRate: 1.5
+  fireCost: 500
   flags: All
   protoId: ProjectileXRayBolt
 
@@ -153,7 +153,7 @@
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg
   fireRate: 1.5
-  fireCost: 150
+  fireCost: 1000
   flags: All
   protoId: ProjectileEmpBolt
 
@@ -166,8 +166,8 @@
   color: "#28005B"
   soundGunshot:
     path: /Audio/_Goobstation/Wizard/smoke.ogg
-  fireRate: 1
-  fireCost: 100
+  fireRate: 1.5
+  fireCost: 500
   flags: All
   protoId: ProjectileSmokeBolt
 
@@ -181,7 +181,7 @@
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg
   fireRate: 1.5
-  fireCost: 100
+  fireCost: 500
   flags: All
   protoId: ProjectileBlindingBolt
 
@@ -194,8 +194,8 @@
   color: red
   soundGunshot:
     path: /Audio/_Goobstation/Wizard/crackandbleed.ogg
-  fireRate: 2
-  fireCost: 100
+  fireRate: 1.5
+  fireCost: 250
   flags: All
   protoId: ProjectileVampiricBolt
 
@@ -208,7 +208,7 @@
   color: "#FF87FF"
   soundGunshot:
     path: /Audio/_Goobstation/Wizard/magic_missile.ogg
-  fireRate: 2
-  fireCost: 100
+  fireRate: 1.5
+  fireCost: 500
   flags: All
   protoId: ProjectileMagicMissileLesser

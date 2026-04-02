@@ -36,6 +36,13 @@
   components:
   - type: Sprite
     state: mecha_clamp
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MultiHandedItem
   - type: MechGrabber
     blacklist: # Goobstation blacklist
       tags:
@@ -56,6 +63,13 @@
   components:
   - type: Sprite
     state: mecha_clamp_small
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-small
+      right:
+      - state: inhand-right-small
+  - type: MultiHandedItem
   - type: MechGrabber
     blacklist: # Goobstation blacklist
       tags:
@@ -84,6 +98,13 @@
   - type: Sprite
     # TODO: use own sprite
     state: mecha_honker
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-honk
+      right:
+      - state: inhand-right-honk
+  - type: MultiHandedItem
   - type: MechSoundboard
     sounds:
     - collection: BikeHorn

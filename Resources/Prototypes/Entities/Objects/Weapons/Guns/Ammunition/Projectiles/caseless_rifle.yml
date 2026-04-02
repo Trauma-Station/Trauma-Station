@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseBullet
+  parent: BaseBulletKinetic # Trauma
   id: BulletCaselessRifle
   categories: [ HideSpawnMenu ]
   name: bullet (9.5mm HP) # Goobstation edit

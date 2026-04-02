@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Common.AlertLevel;
 using Robust.Shared.Timing;
 
@@ -22,7 +23,7 @@ public abstract class SharedAlertLevelLockingSystem : EntitySystem
     private void OnChangeAlertLevelAttempt(Entity<AlertLevelLockingComponent> ent, ref ChangeAlertLevelAttemptEvent args)
     {
         // don't care about non-locked alert
-        if (args.AlertLevel != ent.Comp.LockedLevel)
+        if (args.AlertLevel != ent.Comp.LockedLevel || args.AlertLevel == args.CurrentLevel)
             return;
 
         // allow it if on the required alert level for enough time

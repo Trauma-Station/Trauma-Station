@@ -1,12 +1,6 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Jake Huxell <JakeHuxell@pm.me>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Shuttles.Components;
 using JetBrains.Annotations;
+using Robust.Shared.Map.Components;
 
 namespace Content.Shared.Shuttles.Systems;
 
@@ -48,6 +42,30 @@ public abstract partial class SharedShuttleSystem
         }
 
         return string.IsNullOrEmpty(entName) ? Loc.GetString("shuttle-console-unknown") : entName;
+    }
+
+    /// <summary>
+    /// Checks if the GridUid has the specified IFF-Flag.
+    /// </summary>
+    /// <param name="gridUid">The grid whose IFF-Flags are being checked.</param>
+    /// <param name="requiredFlag">The required IFF-Flag.</param>
+    /// <param name="component">The IFF component of the grid.</param>
+    /// <returns>
+    /// Returns true if the grid has the required IFF-Flag, otherwise false.
+    /// </returns>
+    /// <remarks>
+    /// Returns false if the Uid is not a grid and the required IFF-Flag is anything but <see cref="IFFFlags.None"/>, otherwise true.
+    /// </remarks>
+    [PublicAPI]
+    public bool HasIFFFlag(EntityUid gridUid, IFFFlags requiredFlag, IFFComponent? component = null)
+    {
+        // Check if it's a grid.
+        if (!HasComp<MapGridComponent>(gridUid))
+            return requiredFlag == IFFFlags.None;
+
+        component ??= EnsureComp<IFFComponent>(gridUid);
+
+        return component.Flags.HasFlag(requiredFlag);
     }
 
     /// <summary>

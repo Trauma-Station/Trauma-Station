@@ -29,7 +29,6 @@ public sealed class GreytideVirusRule : StationEventSystem<GreytideVirusRuleComp
 {
     [Dependency] private readonly AccessReaderSystem _access = default!;
     [Dependency] private readonly SharedAirlockSystem _airlock = default!; // Goobstation - Greytide Virus EA instead of open-bolt
-    [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;

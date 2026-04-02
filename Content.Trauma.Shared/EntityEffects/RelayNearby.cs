@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityEffects;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
@@ -61,6 +62,7 @@ public sealed partial class RelayNearby : EntityEffectBase<RelayNearby>
 
 public sealed class RelayNearbyEffectSystem : EntityEffectSystem<TransformComponent, RelayNearby>
 {
+    [Dependency] private readonly EffectDataSystem _data = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
@@ -93,8 +95,12 @@ public sealed class RelayNearbyEffectSystem : EntityEffectSystem<TransformCompon
             if (uid == ent.Owner) // don't apply to itself
                 continue;
 
-            if (_whitelist.CheckBoth(uid, blacklist: blacklist, whitelist: whitelist))
-                _effects.TryApplyEffect(uid, relayed, args.Scale);
+            if (!_whitelist.CheckBoth(uid, blacklist: blacklist, whitelist: whitelist))
+                continue;
+
+            _data.CopyData(ent, uid);
+            _effects.TryApplyEffect(uid, relayed, args.Scale, args.User);
+            _data.ClearData(uid);
         }
     }
 }

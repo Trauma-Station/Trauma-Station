@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Goobstation.Common.Footprints;
 using Content.Shared.Chemistry.Reagent;
 // </Trauma>
 using Content.Server.Fluids.Components;
@@ -11,7 +10,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Database;
 using Content.Shared.Effects;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Fluids.Components;
 using Content.Shared.IdentityManagement;
@@ -384,7 +383,40 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
     // TODO: This can be predicted once https://github.com/space-wizards/RobustToolbox/pull/5849 is merged
     /// <inheritdoc/>
-    public override bool TrySplashSpillAt(EntityUid uid,
+    public override bool TrySplashSpillAt(Entity<SpillableComponent?> entity,
+        EntityCoordinates coordinates,
+        out EntityUid puddleUid,
+        out Solution spilled,
+        bool sound = true,
+        EntityUid? user = null)
+    {
+        puddleUid = EntityUid.Invalid;
+        spilled = new Solution();
+
+        if (!Resolve(entity, ref entity.Comp))
+            return false;
+
+        if (!_solutionContainerSystem.TryGetSolution(entity.Owner, entity.Comp.SolutionName, out var solution))
+            return false;
+
+        spilled = solution.Value.Comp.Solution;
+
+        return TrySplashSpillAt(entity, coordinates, solution.Value, out puddleUid, sound, user);
+    }
+
+    private bool TrySplashSpillAt(EntityUid entity,
+        EntityCoordinates coordinates,
+        Entity<SolutionComponent> solution,
+        out EntityUid puddleUid,
+        bool sound = true,
+        EntityUid? user = null)
+    {
+        var result = TrySplashSpillAt(entity, coordinates, solution.Comp.Solution, out puddleUid, sound, user);
+        _solutionContainerSystem.UpdateChemicals(solution);
+        return result;
+    }
+
+    public override bool TrySplashSpillAt(EntityUid entity,
         EntityCoordinates coordinates,
         Solution solution,
         out EntityUid puddleUid,
@@ -396,6 +428,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         if (solution.Volume == 0)
             return false;
 
+        var spilled = solution.SplitSolution(solution.Volume);
         var targets = new List<EntityUid>();
         var reactive = new HashSet<Entity<ReactiveComponent>>();
         _lookup.GetEntitiesInRange(coordinates, 1.0f, reactive);
@@ -406,27 +439,32 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
             // sorry! no overload for returning uid, so .owner must be used
             var owner = ent.Owner;
 
+            if (owner == user) // Goobtation - can't spill at yourself (have to use melee)
+                continue;
+
             // between 5 and 30%
-            var splitAmount = solution.Volume * _random.NextFloat(0.05f, 0.30f);
-            var splitSolution = solution.SplitSolution(splitAmount);
+            var splitAmount = spilled.Volume * _random.NextFloat(0.05f, 0.30f);
+            var splitSolution = spilled.SplitSolution(splitAmount);
 
             if (user != null)
             {
                 AdminLogger.Add(LogType.Landed,
-                    $"{ToPrettyString(user.Value):user} threw {ToPrettyString(uid):entity} which splashed a solution {SharedSolutionContainerSystem.ToPrettyString(solution):solution} onto {ToPrettyString(owner):target}");
+                    $"{ToPrettyString(user.Value):user} threw {ToPrettyString(entity):entity} which splashed a solution {SharedSolutionContainerSystem.ToPrettyString(spilled):solution} onto {ToPrettyString(owner):target}");
             }
 
             targets.Add(owner);
             Reactive.DoEntityReaction(owner, splitSolution, ReactionMethod.Touch);
-            Popups.PopupEntity(
-                Loc.GetString("spill-land-spilled-on-other", ("spillable", uid),
-                    ("target", Identity.Entity(owner, EntityManager))), owner, PopupType.SmallCaution);
+            Popups.PopupEntity(Loc.GetString("spill-land-spilled-on-other",
+                    ("spillable", entity),
+                    ("target", Identity.Entity(owner, EntityManager))),
+                owner,
+                PopupType.SmallCaution);
         }
 
-        _color.RaiseEffect(solution.GetColor(_prototypeManager), targets,
-            Filter.Pvs(uid, entityManager: EntityManager));
+        _color.RaiseEffect(spilled.GetColor(_prototypeManager), targets,
+            Filter.Pvs(entity, entityManager: EntityManager));
 
-        return TrySpillAt(coordinates, solution, out puddleUid, sound);
+        return TrySpillAt(coordinates, spilled, out puddleUid, sound);
     }
 
     /// <inheritdoc/>
@@ -505,7 +543,6 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, mapGrid, tileRef.GridIndices);
         var puddleQuery = GetEntityQuery<PuddleComponent>();
         var sparklesQuery = GetEntityQuery<EvaporationSparkleComponent>();
-        var footprintQuery = GetEntityQuery<FootprintComponent>(); // Corvax-Next-Footprints
 
         while (anchored.MoveNext(out var ent))
         {
@@ -518,11 +555,6 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
             if (!puddleQuery.TryGetComponent(ent, out var puddle))
                 continue;
-
-            // Corvax-Next-Footprints-Start
-            if (footprintQuery.HasComp(ent))
-                continue;
-            // Corvax-Next-Footprints-End
 
             if (TryAddSolution(ent.Value, solution.SplitSolution(solution.Volume), sound, puddleComponent: puddle)) // goobstation
             {
@@ -558,17 +590,11 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
         var anc = _map.GetAnchoredEntitiesEnumerator(tile.GridUid, grid, tile.GridIndices);
         var puddleQuery = GetEntityQuery<PuddleComponent>();
-        var footprintQuery = GetEntityQuery<FootprintComponent>(); // Corvax-Next-Footprints
 
         while (anc.MoveNext(out var ent))
         {
             if (!puddleQuery.HasComponent(ent.Value))
                 continue;
-
-            // Corvax-Next-Footprints-Start
-            if (footprintQuery.HasComponent(ent.Value))
-                continue;
-            // Corvax-Next-Footprints-End
 
             puddleUid = ent.Value;
             return true;

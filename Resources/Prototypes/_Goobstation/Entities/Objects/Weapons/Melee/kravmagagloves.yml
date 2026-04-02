@@ -22,9 +22,11 @@
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-red
-  - type: ClothingGrantComponent
-    component:
-    - type: KravMaga
+  - type: KnowledgeGrantOnWear
+    skills:
+      MartialArtKravMaga: 50
+    experience:
+      MartialArtKravMaga: 2
   - type: GuideHelp
     guides:
     - KravMaga

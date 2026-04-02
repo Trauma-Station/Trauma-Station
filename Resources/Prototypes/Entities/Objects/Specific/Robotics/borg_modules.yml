@@ -454,6 +454,23 @@
 
 # generic modules
 - type: entity
+  id: BorgModulePrying
+  parent: [ BaseBorgModule ]
+  name: prying module
+  description: A universal cyborg module which allows the unit to pry open doors.
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+    - state: icon-tools
+  - type: ComponentBorgModule
+    components:
+    - type: Prying
+      speedModifier: 1.5
+      useSound:
+        path: /Audio/Items/jaws_pry.ogg
+
+- type: entity
   id: BorgModuleCable
   parent: [ BaseBorgModule, BaseProviderBorgModule ]
   name: cable cyborg module
@@ -486,8 +503,8 @@
         whitelist:
           tags:
           - CableCoil
-    - item: Wirecutter
-    - item: Crowbar
+    - item: BorgWirecutter # Trauma - Durability
+    - item: BorgCrowbar # Trauma - Durability
     - item: trayScanner
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: wire-module }
@@ -539,13 +556,13 @@
     - state: icon-tools
   - type: ItemBorgModule
     hands:
-    - item: Crowbar
-    - item: Wrench
-    - item: Screwdriver
-    - item: Wirecutter
-    - item: WelderIndustrial
+    - item: BorgCrowbar # Trauma - Durability
+    - item: BorgWrench # Trauma - Durability
+    - item: BorgScrewdriver # Trauma - Durability
+    - item: BorgWirecutter # Trauma - Durability
+    - item: BorgWelderIndustrial # Trauma - Durability
     - item: Multitool
-    - item: MeleeHammer # Goobstation
+    - item: BorgMeleeHammer # Trauma - Durability
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: tool-module }
 
@@ -592,7 +609,7 @@
   - type: ItemBorgModule
     hands:
     - item: AppraisalTool
-    - item: Pen
+    - item: BorgPen # Trauma - Durability
     - item: HandLabeler
     - item: RubberStampApproved
     - item: RubberStampDenied
@@ -611,7 +628,7 @@
     - state: icon-mining
   - type: ItemBorgModule
     hands:
-    - item: MiningDrill
+    - item: BorgMiningDrill # Trauma - Durability
     #- item: Shovel # Goob
     - item: MineralScannerUnpowered
     - item: BorgOreBag
@@ -630,8 +647,8 @@
     - state: icon-mining-adv
   - type: ItemBorgModule
     hands:
-    - item: MiningDrillDiamond
-    - item: Shovel
+    - item: BorgMiningDrillDiamond # Trauma - Durability
+    - item: BorgShovel # Trauma - Durability
     - item: AdvancedMineralScannerUnpowered
     - item: OreBagOfHolding
     - item: WeaponProtoKineticAccelerator # Goob
@@ -658,7 +675,7 @@
     - item: WeaponGrapplingGun
     - item: BorgFireExtinguisher
     - item: BorgHandheldGPSBasic
-    #- item: HandHeldMassScannerBorg # Goob - no mass scanners
+    - item: HandHeldMassScannerBorg
     - item: LavalandJaunterRecharging # Goob
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: grappling-module }
@@ -676,9 +693,9 @@
     - state: icon-tools-adv
   - type: ItemBorgModule
     hands:
-    - item: JawsOfLife
-    - item: PowerDrill
-    - item: WelderExperimental
+    - item: BorgJawsOfLife # Trauma - Durability
+    - item: BorgPowerDrill # Trauma - Durability
+    - item: BorgWelderExperimental # Trauma - Durability
     - item: Multitool
     - item: RemoteSignallerAdvanced
     - item: GeigerCounter # Goob
@@ -822,7 +839,8 @@
     - state: icon-mop
   - type: ItemBorgModule
     hands:
-    - item: MopItem
+    - item: BorgMopItem # Trauma - Durability
+    - item: WireBrush
     - item: BorgBucket
     - item: BorgSprayBottle
     - item: HoloprojectorBorg
@@ -841,7 +859,8 @@
     - state: icon-mop-adv
   - type: ItemBorgModule
     hands:
-    - item: AdvMopItem
+    - item: BorgAdvMopItem # Trauma - Durability
+    - item: WireBrushElectrical
     - item: BorgMegaSprayBottle
     - item: HoloprojectorBorg
     - item: BorgDropper
@@ -867,7 +886,7 @@
     - state: icon-diagnosis
   - type: ItemBorgModule
     hands:
-    - item: HandheldHealthAnalyzerUnpowered
+    - item: HandheldHealthAnalyzer
     - item: ClothingNeckStethoscope
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: diagnosis-module }
@@ -875,7 +894,7 @@
 - type: entity
   id: BorgModuleTopicals
   parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
-  name: topicals cyborg module
+  name: first aid cyborg module
   components:
   - type: Sprite
     layers:
@@ -883,7 +902,18 @@
     - state: icon-treatment
   - type: ItemBorgModule
     hands:
-    - item: HandheldHealthAnalyzerUnpowered
+    - item: HandheldHealthAnalyzer
+    # <Trauma>
+    - item: MedicalHyposprayFilled # hypo replaces chud injector
+    - item: Syringe # for patients with no hypoport
+    - item: ChemistryEmptyVial
+      hand:
+        emptyLabel: borg-slot-small-containers-empty
+        emptyRepresentative: ChemistryEmptyVial
+        whitelist:
+          tags:
+          - CentrifugeCompatible
+    # </Trauma>
     - item: Gauze
       hand:
         emptyLabel: borg-slot-topicals-empty
@@ -902,13 +932,6 @@
       hand:
         emptyLabel: borg-slot-topicals-empty
         emptyRepresentative: Ointment
-        whitelist:
-          components:
-          - Healing
-    - item: Bloodpack
-      hand:
-        emptyLabel: borg-slot-topicals-empty
-        emptyRepresentative: Bloodpack
         whitelist:
           components:
           - Healing
@@ -933,12 +956,11 @@
     - state: icon-defib
   - type: ItemBorgModule
     hands:
-    - item: HandheldHealthAnalyzerUnpowered
+    - item: HandheldHealthAnalyzer
     - item: DefibrillatorOneHandedUnpowered
-    - item: Crowbar
+    - item: BorgCrowbar # Trauma - Durability
     - item: BorgFireExtinguisher
     - item: BorgHandheldGPSBasic
-    - item: HandLabeler
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: defib-module }
 
@@ -950,79 +972,83 @@
   - type: Sprite
     layers:
     - state: medical
-    - state: icon-chem
+    - state: icon-chemist
   - type: ItemBorgModule
     hands:
-    - item: HandheldHealthAnalyzerUnpowered
+    - item: HandLabeler
     - item: Syringe
-    - item: BorgDropper
-    - item: BaseChemistryEmptyVial
+      hand:
+        emptyLabel: borg-slot-injector-dropper-empty
+        emptyRepresentative: Syringe
+        whitelist:
+          tags:
+          - Dropper
+          - Syringe
+    - item: PillCanister
       hand:
         emptyLabel: borg-slot-small-containers-empty
-        emptyRepresentative: BaseChemistryEmptyVial
+        emptyRepresentative: PillCanister
+        whitelist:
+          tags:
+          - PillCanister
+          - Bottle
+          - Pill
+    - item: Beaker
+      hand:
+        emptyLabel: borg-slot-chemical-containers-empty
+        emptyRepresentative: Beaker
         whitelist:
           components:
           - FitsInDispenser
-    - item: BaseChemistryEmptyVial
+          tags:
+          - ChemDispensable
+    - item: Beaker
       hand:
-        emptyLabel: borg-slot-small-containers-empty
-        emptyRepresentative: BaseChemistryEmptyVial
+        emptyLabel: borg-slot-chemical-containers-empty
+        emptyRepresentative: Beaker
         whitelist:
           components:
           - FitsInDispenser
-    - item: BaseChemistryEmptyVial
-      hand:
-        emptyLabel: borg-slot-small-containers-empty
-        emptyRepresentative: BaseChemistryEmptyVial
-        whitelist:
-          components:
-          - FitsInDispenser
+          tags:
+          - ChemDispensable
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: chem-module }
 
 - type: entity
-  id: BorgModuleAdvancedChemical
+  id: BorgModuleAdvancedTopical
   parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
-  name: advanced chemical cyborg module
+  name: advanced first aid cyborg module
   description: Advanced medical module containing the cyborg adaptation of the highly coveted hypospray. Now your cyborgs can inject crew-harmers with chloral hydrate even faster!
   components:
   - type: Sprite
     layers:
     - state: medical
-    - state: icon-chemist
+    - state: icon-chem
   - type: ItemBorgModule
     hands:
-    - item: HandheldHealthAnalyzerUnpowered
+    - item: HandheldHealthAnalyzer
     - item: BorgHypo
-    - item: Syringe
-    - item: BorgDropper
-    - item: Beaker
+    - item: Gauze
       hand:
-        emptyLabel: borg-slot-chemical-containers-empty
-        emptyRepresentative: Beaker
+        emptyLabel: borg-slot-topicals-empty
+        emptyRepresentative: Gauze
         whitelist:
           components:
-          - FitsInDispenser
-          tags:
-          - ChemDispensable
-    - item: Beaker
+          - Healing
+    - item: Brutepack
       hand:
-        emptyLabel: borg-slot-chemical-containers-empty
-        emptyRepresentative: Beaker
+        emptyLabel: borg-slot-topicals-empty
+        emptyRepresentative: Brutepack
         whitelist:
           components:
-          - FitsInDispenser
-          tags:
-          - ChemDispensable
-    - item: Beaker
+          - Healing
+    - item: Ointment
       hand:
-        emptyLabel: borg-slot-chemical-containers-empty
-        emptyRepresentative: Beaker
+        emptyLabel: borg-slot-topicals-empty
+        emptyRepresentative: Ointment
         whitelist:
           components:
-          - FitsInDispenser
-          tags:
-          - ChemDispensable
+          - Healing
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-chem-module }
 
@@ -1043,10 +1069,10 @@
     - item: SprayBottle
     - item: GasAnalyzer
     - item: BorgDropper
-    - item: BaseChemistryEmptyVial
+    - item: ChemistryEmptyVial
       hand:
         emptyLabel: borg-slot-small-containers-empty
-        emptyRepresentative: BaseChemistryEmptyVial
+        emptyRepresentative: ChemistryEmptyVial
         whitelist:
           components:
           - FitsInDispenser
@@ -1188,9 +1214,9 @@
     - state: icon-gardening
   - type: ItemBorgModule
     hands:
-    - item: HydroponicsToolMiniHoe
-    - item: HydroponicsToolSpade
-    - item: HydroponicsToolClippers
+    - item: BorgHydroponicsToolMiniHoe # Trauma - Durability
+    - item: BorgHydroponicsToolSpade # Trauma - Durability
+    - item: BorgHydroponicsToolClippers # Trauma - Durability
     - item: Syringe # Trauma
     - item: Bucket
     - hand: # Trauma - make service borgs 1% useful
@@ -1213,8 +1239,8 @@
     - state: icon-harvesting
   - type: ItemBorgModule
     hands:
-    - item: HydroponicsToolScythe
-    - item: HydroponicsToolHatchet
+    - item: BorgHydroponicsToolScythe # Trauma - Durability
+    - item: BorgHydroponicsToolHatchet # Trauma - Durability
     - item: PlantBag
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: harvesting-module }
@@ -1312,7 +1338,7 @@
       - state: icon-syndicate
     - type: ItemBorgModule
       hands:
-      - item: SyndicateJawsOfLife # Goob - was Crowbar
+      - item: BorgSyndicateJawsOfLife # Trauma - Durability, was crowbar
       - item: Emag
       - item: AccessBreaker
       - item: PinpointerSyndicateNuclear
@@ -1505,12 +1531,12 @@
     - state: icon-xenoborg-tools
   - type: ItemBorgModule
     hands:
-    - item: Crowbar
-    - item: Wrench
-    - item: Screwdriver
-    - item: Wirecutter
+    - item: BorgCrowbar # Trauma - Durability
+    - item: BorgWrench # Trauma - Durability
+    - item: BorgScrewdriver # Trauma - Durability
+    - item: BorgWirecutter # Trauma - Durability
     - item: Multitool
-    - item: RefuelingWelder
+    - item: BorgRefuelingWelder # Trauma - Durability
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-tool-module }
 
@@ -1629,7 +1655,7 @@
     - item: PinpointerMothership
     - item: HandheldStationMapUnpowered
     - item: WeaponGrapplingGun
-    - item: JetpackXenoborg
+    - item: BorgJetpackXenoborg # Trauma - Durability
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-space-movement-module }
 
@@ -1645,8 +1671,8 @@
     - state: icon-xenoborg-sword
   - type: ItemBorgModule
     hands:
-    - item: KukriKnife
-    - item: JetpackXenoborg
+    - item: BorgKukriKnife # Trauma - Durability
+    - item: BorgJetpackXenoborg # Trauma - Durability
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword-module }
 
@@ -1663,7 +1689,7 @@
   - type: ItemBorgModule
     hands:
     - item: EnergyDaggerLoudBlue
-    - item: JetpackXenoborg
+    - item: BorgJetpackXenoborg # Trauma - Durability
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword2-module }
 
@@ -1671,7 +1697,7 @@
   parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleHypo
   name: nocturine hypo xenoborg module
-  description: Module with a self-refilling nocturine hypo.
+  description: Module with a self-refilling nocturine hypospray.
   components:
   - type: Sprite
     layers:
@@ -1679,7 +1705,7 @@
     - state: icon-xenoborg-hypo
   - type: ItemBorgModule
     hands:
-    - item: NocturineHypo
+    - item: DartGunXenoborg # Trauma replaced hypo
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-hypo-module }
 
@@ -1695,7 +1721,7 @@
     - state: icon-xenoborg-projector
   - type: ItemBorgModule
     hands:
-    - item: ChameleonProjector
+    - item: ChameleonProjectorNoBattery
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-projector-module }
 

@@ -5,20 +5,39 @@
   description: A writhing nightmare. The facehugger clings to its victim's face, forcibly inserting a xenomorph fetus.
   components:
   - type: Sprite
-    sprite: _White/Mobs/Aliens/Xenomorphs/facehugger.rsi
+    sprite: _Trauma/Mobs/Xenos/facehugger.rsi
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: facehugger
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: facehugger-moving
+    noMovementLayers:
+      movement:
+        state: facehugger
+  - type: GhostTakeoverAvailable
+  - type: ThrowableFacehugger # Goobstation
+    minThrowForce: 5.0 # Goobstation
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-facehugger-name
+    description: ghost-role-information-facehugger-description
+    rules: ghost-role-information-rules-default-xeno
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle:
+      settings: default
   - type: Clothing
-    sprite: _White/Mobs/Aliens/Xenomorphs/facehugger.rsi
+    sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
   - type: IngestionBlocker
   - type: Blindfold
   - type: AddAccentClothing
     accent: ReplacementAccent
     replacement: mumble
-  - type: ThrowableFacehugger # Goobstation
-    minThrowForce: 5.0 # Goobstation
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Xenomorph
@@ -44,9 +63,10 @@
       types:
         Blunt: 0
   - type: Temperature
+    currentTemperature: 310.15
+  - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
-    currentTemperature: 310.15
   - type: Butcherable
     spawned:
     - id: FoodMeatXeno
@@ -64,8 +84,8 @@
       types:
         Blunt: 15
     damageOnInfect:
-      groups:
-        Genetic: 100
+      types:
+        Cellular: 100
     sleepChem: Nocturine # ID of the Chemical we want to inject  - Goobstation start
     sleepChemAmount: 10 # Amount in units (Often no need to use more than 10u for most chems)
     minChemicalThreshold: 8 # Minimum amount of the chemical required to prevent additional injections
@@ -76,6 +96,9 @@
         Slash: 5 # Damage dealt when blocked by a breathable mask
     maskBlockSound:
       collection: MetalThud # Sound collection for when the facehugger hits the mask - Goobstation end
+  - type: Tag
+    tags:
+    - XenomorphItem
   - type: StepTrigger
     intersectRatio: 0.2
     requiredTriggeredSpeed: 0.0
@@ -84,11 +107,8 @@
   - type: NpcFactionMember
     factions:
     - Xeno
-  - type: Tag
-    tags:
-    - XenomorphItem
   - type: Physics
-    bodyType: Dynamic
+    bodyType: KinematicController
   - type: CollisionWake
     enabled: false
   - type: RequireProjectileTarget
@@ -118,3 +138,62 @@
         layer:
         - LowImpassable
         hard: false
+  - type: LanguageSpeaker # Trauma
+    speaks:
+    - Xeno
+#    - XenoHivemind # Trauma
+    understands:
+    - Xeno
+#    - XenoHivemind # Trauma
+    - Hissing
+    - Draconic
+  - type: Speech
+    speechSounds: Xenomorph
+    speechVerb: SmallMob
+  - type: ReplacementAccent
+    accent: xeno
+  - type: Vocal
+    sounds:
+      Male: Xenomorph
+      Female: Xenomorph
+      Unsexed: Xenomorph
+  - type: CollectiveMind # Trauma
+    defaultChannel: Xenomorphivemind
+    channels:
+    - Xenomorphivemind
+  # <Trauma>
+  - type: ThermalVision
+    toggleAction: ToggleThermalVisionXenomorph
+    color: white
+    drawOverlay: false
+    lightRadius: 10
+    strength: 0
+    noise: 0
+    tint: 3, 3, 3
+  - type: Destructible # This prevents GIGA lag
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+  - type: LarvaInfestationVision
+  - type: TypingIndicator
+    proto: alien
+  - type: ZombieImmune
+  - type: NoSlip
+  - type: ShowHealthIcons
+  - type: VentCrawler
+  - type: Pinpointer
+    whitelist:
+      components:
+      - XenomorphQueen
+    alert: QueenFinder
+    isActive: true
+    canToggle: false
+    canEmag: false
+    canExamine: false
+  - type: FaceHuggerLeap
+  # </Trauma>

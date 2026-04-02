@@ -1,13 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: polymorph
   id: AshJaunt
   configuration:
@@ -16,6 +6,7 @@
     duration: 3
     attachToGridOrMap: true
     showPopup: false
+    allowRepeatedMorphs: true
 
 - type: polymorph
   id: AshJauntLong
@@ -24,6 +15,46 @@
     forced: true
     duration: 7
     attachToGridOrMap: true
+    allowRepeatedMorphs: true
+
+- type: polymorph
+  id: SpaceJaunt
+  configuration:
+    entity: PolymorphSpaceJaunt
+    forced: true
+    attachToGridOrMap: true
+    showPopup: false
+    allowRepeatedMorphs: true
+    polymorphSound:
+      path: /Audio/_Goobstation/Heretic/cosmic_energy.ogg
+    exitPolymorphSound:
+      path: /Audio/_Goobstation/Heretic/cosmic_energy.ogg
+
+- type: polymorph
+  id: MirrorJaunt
+  configuration:
+    entity: PolymorphMirrorJaunt
+    forced: true
+    attachToGridOrMap: true
+    showPopup: false
+    allowRepeatedMorphs: true
+    polymorphSound:
+      path: /Audio/_Goobstation/Heretic/glass_reverse.ogg
+    exitPolymorphSound:
+      path: /Audio/_Goobstation/Heretic/glass_reverse.ogg
+
+- type: polymorph
+  id: ShatteredRisen
+  configuration:
+    entity: MobShattered
+    forced: true
+    transferName: true
+    transferDamage: false
+    revertOnCrit: false
+    revertOnDeath: false
+    transferHumanoidAppearance: false
+    inventory: Drop
+    allowRepeatedMorphs: true
 
 - type: polymorph
   id: EldritchHorror
@@ -34,6 +65,7 @@
     transferDamage: false
     revertOnCrit: false
     revertOnDeath: false
+    allowRepeatedMorphs: true
 
 - type: polymorph
   id: VoidPrison
@@ -47,6 +79,8 @@
     polymorphSound: /Audio/_Goobstation/Heretic/voidblink.ogg
     showPopup: false
     attachToGridOrMap: true
+    allowRepeatedMorphs: true
+    allowMovement: false
 
 # shapeshifts
 - type: polymorph
@@ -57,7 +91,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -68,7 +106,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -79,7 +121,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -90,7 +136,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -101,7 +151,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -112,7 +166,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -123,7 +181,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -134,7 +196,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -145,7 +211,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -156,7 +226,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -167,7 +241,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -178,7 +256,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -189,7 +271,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -200,7 +286,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -211,7 +301,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -222,7 +316,11 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
 
 - type: polymorph
@@ -233,5 +331,99 @@
     revertOnCrit: true
     revertOnDeath: true
     skipRevertConfirmation: true
+    allowRepeatedMorphs: true
     componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
     - component: Ghoul
+
+- type: polymorph
+  id: ShapeshiftStalkerLock
+  configuration:
+    entity: MobGhoulStalkerLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftProphetLock
+  configuration:
+    entity: MobGhoulProphetLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftMaidLock
+  configuration:
+    entity: MobGhoulMirrorMaidLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftFireSharkLock
+  configuration:
+    entity: MobGhoulFireSharkLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftRustWalkerLock
+  configuration:
+    entity: MobGhoulRustWalkerLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftShatteredLock
+  configuration:
+    entity: MobShatteredLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar

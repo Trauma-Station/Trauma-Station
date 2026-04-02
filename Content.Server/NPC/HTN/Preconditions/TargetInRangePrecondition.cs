@@ -1,15 +1,7 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
 using Content.Server.Stealth;
 using Content.Shared.Stealth.Components;
+// </Trauma>
 using Robust.Shared.Map;
 
 namespace Content.Server.NPC.HTN.Preconditions;
@@ -34,6 +26,9 @@ public sealed partial class TargetInRangePrecondition : HTNPrecondition
         _stealth = sysManager.GetEntitySystem<StealthSystem>(); // goob edit
     }
 
+    [DataField]
+    public bool Invert;
+
     public override bool IsMet(NPCBlackboard blackboard)
     {
         if (!blackboard.TryGetValue<EntityCoordinates>(NPCBlackboard.OwnerCoordinates, out var coordinates, _entManager))
@@ -41,13 +36,9 @@ public sealed partial class TargetInRangePrecondition : HTNPrecondition
 
         if (!blackboard.TryGetValue<EntityUid>(TargetKey, out var target, _entManager)
         || !_entManager.TryGetComponent<TransformComponent>(target, out var targetXform)
-        // goob edit - stealthed entities can't be seen by npcs
-        || (_entManager.TryGetComponent<StealthComponent>(target, out var stealth) && _stealth.GetVisibility(target, stealth) <= stealth.ExamineThreshold))
+        || (_entManager.TryGetComponent<StealthComponent>(target, out var stealth) && _stealth.GetVisibility(target, stealth) <= stealth.ExamineThreshold)) // Trauma
             return false;
 
-
-
-        var transformSystem = _entManager.System<SharedTransformSystem>;
-        return _transformSystem.InRange(coordinates, targetXform.Coordinates, blackboard.GetValueOrDefault<float>(RangeKey, _entManager));
+        return _transformSystem.InRange(coordinates, targetXform.Coordinates, blackboard.GetValueOrDefault<float>(RangeKey, _entManager)) ^ Invert;
     }
 }

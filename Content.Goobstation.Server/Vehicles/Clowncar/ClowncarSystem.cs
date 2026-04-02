@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
@@ -27,13 +19,12 @@ namespace Content.Goobstation.Server.Vehicles.Clowncar;
 
 public sealed class ClowncarSystem : SharedClowncarSystem
 {
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     /// <inheritdoc/>
 
@@ -58,7 +49,7 @@ public sealed class ClowncarSystem : SharedClowncarSystem
 
         if (vehicle.Driver == null)
         {
-            _chatSystem.TrySendInGameICMessage(args.Performer, Loc.GetString("clowncar-thank-no-driver"), InGameICChatType.Speak, false);
+            _chat.TrySendInGameICMessage(args.Performer, Loc.GetString("clowncar-thank-no-driver"), InGameICChatType.Speak, false);
             args.Handled = true;
 
             if (_container.TryGetContainer(uid, component.Container, out var container))
@@ -68,7 +59,7 @@ public sealed class ClowncarSystem : SharedClowncarSystem
         }
 
         var message = Loc.GetString("clowncar-thank-driver", ("driver", vehicle.Driver));
-        _chatSystem.TrySendInGameICMessage(args.Performer, message, InGameICChatType.Speak, false);
+        _chat.TrySendInGameICMessage(args.Performer, message, InGameICChatType.Speak, false);
         args.Handled = true;
 
         if (component.ThankCounter >= 5)
@@ -174,13 +165,13 @@ public sealed class ClowncarSystem : SharedClowncarSystem
     private void OnQuietInTheBack(EntityUid uid, ClowncarComponent component, QuietBackThereActionEvent args)
     {
         component.ThankCounter = 0;
-        _chatSystem.TrySendInGameICMessage(args.Performer, Loc.GetString("clowncar-quiet-in-the-back"), InGameICChatType.Speak, false);
+        _chat.TrySendInGameICMessage(args.Performer, Loc.GetString("clowncar-quiet-in-the-back"), InGameICChatType.Speak, false);
         args.Handled = true;
     }
 
     private void OnDrivingWithStyle(Entity<JukeboxComponent> clownCar, ref DrivingWithStyleActionEvent args)
     {
-        _uiSystem.TryOpenUi(clownCar.Owner, JukeboxUiKey.Key, args.Performer);
+        _ui.TryOpenUi(clownCar.Owner, JukeboxUiKey.Key, args.Performer);
         args.Handled = true;
     }
 }

@@ -40,12 +40,6 @@ trait-language-elyran-desc =
     Elyran Standard is the official tongue of the Republic of Elyra.
     Constructed using elements of Farsi - Arabic - and Turkish - influence from all three of these languages can be seen throughout its grammar and vocabulary.
 
-trait-language-valyrianstandard-name = Valyrian Standard
-trait-language-valyrianstandard-desc =
-    A language descended from eastern european languages of old earth - Valyrian Standard is the commonly spoken tongue of Harpies brought up on their homeworld of Valyrian 4b
-    It is rarely spoken outside of the worlds of its native speakers, and has in modern times been supplanted by the 'Conlangs of the Sol Alliance.
-    Its speakers are those who wish to uphold the traditions and beliefs of ancient peoples from before the colonial era.
-
 trait-language-novunederic-name = Novu-Nederic
 trait-language-novunederic-desc =
     Once the language of seafarers and merchants, now the voice of spacers, terraformers, and pioneers.

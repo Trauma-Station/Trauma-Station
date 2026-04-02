@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Mindcontrol;
@@ -39,7 +29,7 @@ public sealed class MindcontrolSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    [ValidatePrototypeId<EntityPrototype>] static EntProtoId mindRole = "MindRoleBrainwashed";
+    private static EntProtoId MindRole = "MindRoleBrainwashed";
 
     public override void Initialize()
     {
@@ -56,37 +46,37 @@ public sealed class MindcontrolSystem : EntitySystem
     }
     public void OnShutdown(EntityUid uid, MindcontrolledComponent component, ComponentShutdown arg)
     {
+        if (TerminatingOrDeleted(uid))
+            return;
+
         _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(5f));
-        if (_mindSystem.TryGetMind(uid, out var mindId, out _))
-            _roleSystem.MindRemoveRole<MindcontrolledRoleComponent>(mindId);
+        if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
+            _roleSystem.MindRemoveRole<MindcontrolledRoleComponent>((mindId, mind));
         _popup.PopupEntity(Loc.GetString("mindcontrol-popup-stop"), uid, PopupType.Large);
         _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(uid)} is no longer Mindcontrolled.");
     }
     public void Start(EntityUid uid, MindcontrolledComponent component)
     {
-        if (component.Master == null)
-            return;
-        if (HasComp<MindShieldComponent>(uid))  //you somhow managed to implant somone whit a mindshield.
-            return;
-        if (uid == component.Master.Value)  //good jobb, you implanted yourself
-            return;
-        if (!_mindSystem.TryGetMind(uid, out var mindId, out var mind))   //no mind, how can you mindcontrol whit no mind?
+        if (component.Master is not {} master ||
+            HasComp<MindShieldComponent>(uid) || // you somehow managed to implant someone with a mindshield.
+            uid == master || // good job, you implanted yourself
+            !_mindSystem.TryGetMind(uid, out var mindId, out var mind)) // no mind, how can you mindcontrol with no mind?
             return;
 
-        _roleSystem.MindAddRole(mindId, mindRole.Id, silent: true);
+        _roleSystem.MindAddRole(mindId, MindRole, mind, silent: true);
 
-        if (_roleSystem.MindHasRole<MindcontrolledRoleComponent>(mindId, out var mr))
-            AddComp(mr.Value, new RoleBriefingComponent { Briefing = MakeBriefing(component.Master.Value) }, true);
+        if (_roleSystem.MindHasRole<MindcontrolledRoleComponent>((mindId, mind), out var mr))
+            AddComp(mr.Value, new RoleBriefingComponent { Briefing = MakeBriefing(master) }, true);
 
         if (_player.TryGetSessionById(mind.UserId, out var session) &&
             session != null &&
             !component.BriefingSent)
         {
             _popup.PopupEntity(Loc.GetString("mindcontrol-popup-start"), uid, PopupType.LargeCaution);
-            _antag.SendBriefing(session, Loc.GetString("mindcontrol-briefing-start", ("master", (MetaData(component.Master.Value).EntityName))), Color.Red, component.MindcontrolStartSound);
+            _antag.SendBriefing(session, Loc.GetString("mindcontrol-briefing-start", ("master", Name(master))), Color.Red, component.MindcontrolStartSound);
             component.BriefingSent = true;
         }
-        _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(uid)} is Mindcontrolled by {ToPrettyString(component.Master.Value)}.");
+        _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(uid)} is Mindcontrolled by {ToPrettyString(master)}.");
     }
     private void OnMindAdded(EntityUid uid, MindcontrolledComponent component, MindAddedMessage args)  //  OnMindAdded is if somone whit out a mind gets implanted, like Ian before given cognezine or somone dead ghost.
     {

@@ -1,4 +1,4 @@
-using Content.Shared._Shitmed.Targeting; // Shitmed Change
+using Content.Medical.Common.Targeting; // Shitmed Change
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Timing;
@@ -34,9 +34,6 @@ public sealed class PassiveDamageSystem : EntitySystem
         {
             // Make sure they're up for a damage tick
             if (comp.NextDamage > curTime)
-                continue;
-
-            if (comp.DamageCap != 0 && damage.TotalDamage >= comp.DamageCap)
                 continue;
 
             // Set the next time they can take damage

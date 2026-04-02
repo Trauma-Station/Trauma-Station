@@ -79,6 +79,7 @@ namespace Content.Server.NPC.Pathfinding
         public override void Initialize()
         {
             base.Initialize();
+            InitializeTrauma(); // Trauma
 
             _accessQuery = GetEntityQuery<AccessReaderComponent>();
             _destructibleQuery = GetEntityQuery<DestructibleComponent>();
@@ -104,6 +105,7 @@ namespace Content.Server.NPC.Pathfinding
         public override void Update(float frameTime)
         {
             base.Update(frameTime);
+            if (_disabled) return; // Trauma - disabling pathfinding for tests
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = _parallel.ParallelProcessCount,

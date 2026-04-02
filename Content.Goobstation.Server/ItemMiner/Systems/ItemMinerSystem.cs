@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.ItemMiner;
@@ -111,7 +107,7 @@ public sealed class ItemMinerSystem : EntitySystem
                     var entProto = _proto.Index(miner.Proto);
 
                     // from here on `spawned` and `amt` stand for stack counts and not entity counts
-                    if (entProto.TryGetComponent<StackComponent>(out var stackComp, EntityManager.ComponentFactory))
+                    if (entProto.TryGetComponent<StackComponent>(out var stackComp, Factory))
                     {
                         spawned *= stackComp.Count;
                         remaining *= stackComp.Count;

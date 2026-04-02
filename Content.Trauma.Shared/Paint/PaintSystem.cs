@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Charges.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -15,14 +16,11 @@ public sealed class PaintSystem : EntitySystem
     [Dependency] private readonly OpenableSystem _openable = default!;
     [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-
-    private EntityQuery<PaintCanComponent> _query;
+    [Dependency] private readonly EntityQuery<PaintCanComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<PaintCanComponent>();
 
         SubscribeLocalEvent<PaintCanComponent, EffectsToolUseAttemptEvent>(OnUseAttempt);
         SubscribeLocalEvent<PaintCanComponent, EffectsToolUsedEvent>(OnUsed);

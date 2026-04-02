@@ -1,5 +1,5 @@
 using Content.Shared.Damage.Components;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Destructible.Thresholds.Triggers;
@@ -20,6 +20,6 @@ public sealed partial class DamageTrigger : IThresholdTrigger
 
     public bool Reached(Entity<DamageableComponent> damageable, SharedDestructibleSystem system)
     {
-        return damageable.Comp.TotalDamage >= Damage;
+        return system.Damageable.GetTotalDamage(damageable.AsNullable()) >= Damage;
     }
 }

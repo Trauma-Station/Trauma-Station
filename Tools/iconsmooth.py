@@ -90,4 +90,3 @@ full_finale.paste(tiles[out_states[0][1]][1], (0, 0))
 full_finale.paste(tiles[out_states[0][2]][2], (subtile_w, 0))
 full_finale.paste(tiles[out_states[0][3]][3], (0, subtile_h))
 full_finale.save(out_prefix + "full.png")
-

@@ -7,7 +7,7 @@
 time-transfer-panel-title = Time Transfer
 time-transfer-panel-player-label = Player
 time-transfer-panel-time = Time
-time-transfer-panel-add-time = Add time 
+time-transfer-panel-add-time = Add time
 time-transfer-panel-set-time = Set time
 time-transfer-panel-set-time-confirm = Confirm
 time-transfer-panel-warning-no-player = Player not selected

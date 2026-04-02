@@ -12,6 +12,7 @@
   description: A robust thing.
   components:
   - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Mech/mecha_equipment.rsi
     state: paddy_claw
   - type: MeleeWeapon
     hidden: true

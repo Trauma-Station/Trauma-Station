@@ -1,0 +1,51 @@
+uniform highp vec4 col1;
+uniform highp vec4 col2;
+uniform highp vec4 params;
+
+//
+// https://gamedev.stackexchange.com/a/59808
+//
+//   Author: sam hocevar
+// Answered: Jul 27, 2013 at 13:33
+//  License: CC BY-SA 3.0
+//
+
+highp vec3 rgb2hsv(highp vec3 c)
+{
+    highp vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    highp vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    highp vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    highp float d = q.x - min(q.w, q.y);
+    /* float e = 1.0e-10; */
+    highp float e = 0.0000000001;
+    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+highp vec3 hsv2rgb(highp vec3 c)
+{
+    highp vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    highp vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
+
+void fragment() {
+    lowp float pixelSize = 32.0;
+    highp float blur = params.x;
+    highp float prop = params.y;
+
+    highp vec4 sprite = zTexture(UV);
+
+    if (sprite.a == 0.0) {
+        discard;
+    }
+
+    highp float coord = floor(UV2.y * pixelSize) / pixelSize;
+
+    highp vec3 hsv1 = rgb2hsv(col1.rgb);
+    highp vec3 hsv2 = rgb2hsv(col2.rgb);
+    highp float h = mix(hsv1.x, hsv2.x, smoothstep(prop - blur, prop + blur, coord));
+    highp vec3 hsv = vec3(h, hsv1.y * hsv2.y, hsv1.z * hsv2.z);
+    COLOR = vec4(hsv2rgb(hsv) * sprite.rgb, sprite.a);
+}

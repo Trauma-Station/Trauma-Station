@@ -1,0 +1,38 @@
+# base area prototype
+# this is like markerbase without marker, clickable and interaction outline to not make mapping very annoying
+- type: entity
+  abstract: true
+  save: false # areas use custom serialization in MapAreaSystem
+  id: BaseArea
+  suffix: Area # to avoid adding area to every entity name
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Sprite
+    drawdepth: Overdoors
+    sprite: _Trauma/Markers/Areas/station.rsi
+    state: error
+  - type: Physics # for lookup to work
+  - type: Fixtures
+    fixtures:
+      area:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+  - type: PlacementReplacement
+    key: areas
+  - type: Area
+  - type: Tag
+    tags:
+    - ForceFixRotations
+
+- type: entity
+  abstract: true
+  parent: BaseArea
+  id: BaseAreaStation
+  components:
+  - type: Sprite
+    state: station
+  # maybe do something with this in the future

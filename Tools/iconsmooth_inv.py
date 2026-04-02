@@ -84,4 +84,3 @@ for i in [7, 6, 5, 4, 3, 2, 1, 0]:
 
 # Done!
 full_finale.save(output_name)
-

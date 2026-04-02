@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.StatusIcon;
 using Robust.Client.GameObjects;
@@ -12,22 +14,22 @@ namespace Content.Goobstation.UIKit.UserInterface.RichText;
 public sealed class IconTag : IMarkupTagHandler
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
     private SpriteSystem? _spriteSystem;
 
     public string Name => "icon";
 
-    public bool TryGetControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
+    public bool TryCreateControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
     {
         if (!node.Attributes.TryGetValue("src", out var id) || id.StringValue == null)
         {
             control = null;
             return false;
         }
-        _spriteSystem ??= _entitySystem.GetEntitySystem<SpriteSystem>();
+        _spriteSystem ??= _entMan.System<SpriteSystem>();
         var texture = _prototype.TryIndex<JobIconPrototype>(id.StringValue, out var iconPrototype)
-                ? _spriteSystem.Frame0(iconPrototype.Icon)
-                : null;
+            ? _spriteSystem.Frame0(iconPrototype.Icon)
+            : null;
         var icon = new TextureRect
         {
             Texture = texture,

@@ -9,8 +9,8 @@
         Caustic: 0.95
   - type: IgniteFromGasImmunity
     parts:
-    - LeftHand
-    - RightHand
+    - HandLeft
+    - HandRight
   - type: Tag
     tags:
     - ClothMade

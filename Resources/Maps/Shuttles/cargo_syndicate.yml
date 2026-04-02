@@ -197,7 +197,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-    - type: FTLDrive
 - proto: AirCanister
   entities:
   - uid: 140

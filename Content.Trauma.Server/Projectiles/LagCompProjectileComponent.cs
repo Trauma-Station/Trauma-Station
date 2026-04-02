@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Projectiles;
@@ -15,6 +16,12 @@ public sealed partial class LagCompProjectileComponent : Component
     /// </summary>
     [ViewVariables]
     public ICommonSession? ShooterSession;
+
+    /// <summary>
+    /// The mob that shot the projectile.
+    /// </summary>
+    [DataField]
+    public EntityUid Shooter;
 
     /// <summary>
     /// Entities currently being considered for lag compensated collision.

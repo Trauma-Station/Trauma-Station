@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 unknown <Administrator@DESKTOP-PMRIVVA.kommune.indresogn.no>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
@@ -21,17 +12,21 @@ using Content.Shared.Popups;
 using Content.Shared.Actions;
 using Content.Shared.Polymorph;
 using Content.Shared.Actions.Events;
-using Robust.Server.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
+// TODO: predict everything but polymorph bruh
 namespace Content.Goobstation.Server.Bingle;
 
 public sealed class BingleSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+
+    public static readonly EntProtoId ActionBingleUpgrade = "ActionBingleUpgrade";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -76,7 +71,7 @@ public sealed class BingleSystem : EntitySystem
         if (component.Upgraded)
             return;
 
-        _actions.AddAction(uid, "ActionBingleUpgrade", uid);
+        _actions.AddAction(uid, ActionBingleUpgrade, uid);
 
         _popup.PopupEntity(Loc.GetString("bingle-upgrade-success"), uid, uid);
         component.Upgraded = true;

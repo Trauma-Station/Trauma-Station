@@ -12,6 +12,9 @@
     edges:
     - to: gygax
       steps:
+      - assemblyId: GygaxChassis
+        guideString: mech-construction-guide-string
+
       - tool: Anchoring
         doAfter: 1
         completed:
@@ -142,7 +145,7 @@
       - tag: MechAirTank
         name: construction-graph-tag-exosuit-air-tank
         icon:
-          sprite: Objects/Specific/Mech/mecha_equipment.rsi
+          sprite: _Goobstation/Objects/Specific/Mech/mecha_equipment.rsi
           state: mecha_air_tank
 
       - tool: Anchoring
@@ -151,7 +154,7 @@
       - tag: MechThruster
         name: construction-graph-tag-exosuit-thruster
         icon:
-          sprite: Objects/Specific/Mech/mecha_equipment.rsi
+          sprite: _Goobstation/Objects/Specific/Mech/mecha_equipment.rsi
           state: mecha_bin
 
       - tool: Anchoring

@@ -1,34 +1,20 @@
-# SPDX-FileCopyrightText: 2022 Andreas Kämper <andreas@kaemper.tech>
-# SPDX-FileCopyrightText: 2022 Emisse <99158783+Emisse@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Fishfish458 <47410468+Fishfish458@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 fishfish458 <fishfish458>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Joel Hedtjärn <joel.hedtjarn@gmail.com>
-# SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: vendingMachineInventory
   id: ChemDrobeInventory
   startingInventory:
-    ClothingUniformJumpsuitChemistry: 2
-    ClothingUniformJumpskirtChemistry: 2
-    ClothingOuterCoatLabChem: 2
-    ClothingShoesColorWhite: 2
-    ClothingBackpackChemistry: 2
-    ClothingBackpackSatchelChemistry: 2
-    ClothingBackpackDuffelChemistry: 2
-    ClothingBackpackMessengerChemistry: 2 # Frontier
-    ChemBag: 2
-    HandLabeler: 3
-    ClothingBeltMedical: 2
-    ClothingHandsGlovesLatex: 2
-    ClothingHeadsetMedical: 2
-    ClothingOuterWinterChem: 2
-    ClothingEyesGlassesChemical: 2
+    # Essential
+    ClothingEyesGlassesChemical: 1
+    # Optional
+    ClothingHeadsetMedical: 1
+    ClothingBackpackChemistry: 1
+    ClothingBackpackSatchelChemistry: 1
+    ClothingBackpackDuffelChemistry: 1
+    ClothingBackpackMessengerChemistry: 1 # Frontier
+    ChemBag: 1
+    ClothingUniformJumpsuitChemistry: 1
+    ClothingUniformJumpskirtChemistry: 1
+    ClothingOuterCoatLabChem: 1
+    ClothingOuterWinterChem: 1
+    ClothingHandsGlovesLatex: 1
+    ClothingShoesColorWhite: 1
   contrabandInventory:
     ToyFigurineChemist: 1

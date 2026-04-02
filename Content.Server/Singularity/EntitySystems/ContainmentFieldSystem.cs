@@ -111,8 +111,8 @@
 
 using Content.Goobstation.Common.Singularity;
 using Content.Server.Popups;
-using Content.Server.Shuttles.Components;
 using Content.Server.Singularity.Events;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Popups;
 using Content.Shared.Singularity.Components;
 using Content.Shared.Throwing;
@@ -140,8 +140,8 @@ public sealed class ContainmentFieldSystem : EntitySystem
         var otherBody = args.OtherEntity;
 
         // Goobstation
-        var ev = new ContainmentFieldThrowEvent(uid);
-        RaiseLocalEvent(otherBody, ref ev);
+        var ev = new ContainmentFieldThrowEvent(otherBody, uid);
+        RaiseLocalEvent(otherBody, ref ev, true);
         if (ev.Cancelled)
             return;
 

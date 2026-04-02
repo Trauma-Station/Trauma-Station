@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Flashbang;
@@ -99,6 +93,15 @@ public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // t
 
     private void OnGetState(EntityUid uid, TComp component, ref ComponentGetState args)
     {
+        var lightRadius = 0f;
+        string? thermalShader = null;
+
+        if (component is ThermalVisionComponent thermal)
+        {
+            lightRadius = thermal.LightRadius;
+            thermalShader = thermal.ThermalShader;
+        }
+
         args.State = new SwitchableVisionOverlayComponentState
         {
             Color = component.Color,
@@ -108,7 +111,8 @@ public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // t
             ActivateSound = component.ActivateSound,
             DeactivateSound = component.DeactivateSound,
             ToggleAction = component.ToggleAction,
-            LightRadius = component is ThermalVisionComponent thermal ? thermal.LightRadius : 0f,
+            LightRadius = lightRadius,
+            ThermalShader = thermalShader,
             DrawOverlay = component.DrawOverlay,
             OverlayOpacity = component.OverlayOpacity,
         };
@@ -136,7 +140,10 @@ public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // t
         }
 
         if (component is ThermalVisionComponent thermal)
+        {
             thermal.LightRadius = state.LightRadius;
+            thermal.ThermalShader = state.ThermalShader;
+        }
 
         if (component.IsActive == state.IsActive)
             return;

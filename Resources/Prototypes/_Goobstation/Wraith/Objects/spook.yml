@@ -54,7 +54,7 @@
   - type: UserInterface
     interfaces:
       enum.RadialSelectorUiKey.Key:
-        type: TrackedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI
   - type: FlipLights
   - type: BurnLights
   - type: CreateEctoplasm

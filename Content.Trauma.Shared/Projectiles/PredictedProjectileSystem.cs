@@ -1,16 +1,21 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Projectiles;
 using Content.Goobstation.Common.Weapons.Penetration;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Destructible;
 using Content.Shared.Effects;
 using Content.Shared.Camera;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Bulletholes;
+using Content.Trauma.Shared.Executions;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -37,17 +42,13 @@ public sealed class PredictedProjectileSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
 
-    private EntityQuery<ProjectileComponent> _query;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
+    [Dependency] private readonly EntityQuery<ProjectileComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private readonly EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ProjectileComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
     }
@@ -71,7 +72,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
     {
         if (!_query.TryComp(uid, out var comp) ||
             !_physicsQuery.TryComp(uid, out var physics) ||
-            FindHardFixture(target) is not {} otherFixture)
+            FindHardFixture(target) is not { } otherFixture)
             return;
 
         DoHit((uid, comp, physics), target, otherFixture);
@@ -97,11 +98,15 @@ public sealed class PredictedProjectileSystem : EntitySystem
     public void DoHit(Entity<ProjectileComponent, PhysicsComponent> ent, EntityUid target, Fixture otherFixture)
     {
         var (uid, comp, ourBody) = ent;
-        if (comp.ProjectileSpent || comp is { Weapon: null, OnlyCollideWhenShot: true })
+        if (comp is { Weapon: null, OnlyCollideWhenShot: true })
+            return;
+
+        // ignore spent in prediction ticks to allow for embedding to be predicted properly
+        if (comp.ProjectileSpent && _timing.IsFirstTimePredicted)
             return;
 
         // it's here so this check is only done once before possible hit
-        var attemptEv = new ProjectileReflectAttemptEvent(uid, comp, false);
+        var attemptEv = new ProjectileReflectAttemptEvent(uid, comp, false, target);
         RaiseLocalEvent(target, ref attemptEv);
         if (attemptEv.Cancelled)
         {
@@ -115,23 +120,27 @@ public sealed class PredictedProjectileSystem : EntitySystem
         var ev = new ProjectileHitEvent(comp.Damage * _damageable.UniversalProjectileDamageModifier, target, shooter);
         RaiseLocalEvent(uid, ref ev);
 
+        var targetEv = new GotHitByProjectileEvent(uid);
+        RaiseLocalEvent(target, ref targetEv);
+
         var otherName = ToPrettyString(target);
         var damageRequired = _destructible.DestroyedAt(target);
         if (TryComp<DamageableComponent>(target, out var damageable))
         {
-            damageRequired -= damageable.TotalDamage;
+            damageRequired -= _damageable.GetTotalDamage((target, damageable));
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
 
-        // <Goob>
-        TargetBodyPart? targetPart = null;
+        var targetPart = _gun.GetTargetPart(shooter, target);
         if (TryComp(uid, out ProjectileMissTargetPartChanceComponent? missComp) &&
             !missComp.PerfectHitEntities.Contains(target))
             targetPart = TargetBodyPart.Chest;
-        // </Goob>
+        if (TryComp<BeingExecutedComponent>(target, out var executed)) // TODO: make this better idk why its shooting groin and shit
+            targetPart = executed.TargetPart;
         var deleted = Deleted(target);
 
-        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart) && Exists(shooter))
+        var canMiss = executed == null; // if you are executing someone its PB, no missing
+        if (_damageable.TryChangeDamage((target, damageable), ev.Damage, out var damage, comp.IgnoreResistances, origin: shooter, targetPart: targetPart, canMiss: canMiss, increaseOnly: comp.IncreaseOnly) && Exists(shooter))
         {
             if (!deleted && _net.IsServer) // intentionally not predicting so you know if color flashes its 100% a hit
             {
@@ -142,78 +151,11 @@ public sealed class PredictedProjectileSystem : EntitySystem
                 LogImpact.Medium,
                 $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(shooter):user} hit {otherName:target} and dealt {damage:damage} damage");
 
-            // <Goob> - Splits penetration change if target have PenetratableComponent
-            if (!TryComp<PenetratableComponent>(target, out var penetratable))
-            {
-                // If the object won't be destroyed, it "tanks" the penetration hit.
-                if (damage.GetTotal() < damageRequired)
-                {
-                    comp.ProjectileSpent = true;
-                }
-
-                if (!comp.ProjectileSpent)
-                {
-                    comp.PenetrationAmount += damageRequired;
-                    // The projectile has dealt enough damage to be spent.
-                    if (comp.PenetrationAmount >= comp.PenetrationThreshold)
-                    {
-                        comp.ProjectileSpent = true;
-                    }
-                }
-            }
-            else
-            {
-                // Goobstation - Here penetration threshold count as "penetration health".
-                // If it's lower than damage than penetation damage entity cause it deletes projectile
-                if (comp.PenetrationThreshold < penetratable.PenetrateDamage)
-                {
-                    comp.ProjectileSpent = true;
-                }
-
-                comp.PenetrationThreshold -= FixedPoint2.New(penetratable.PenetrateDamage);
-                comp.Damage *= (1 - penetratable.DamagePenaltyModifier);
-            }
-            // </Goob>
-
-            // If penetration is to be considered, we need to do some checks to see if the projectile should stop.
-            if (comp.PenetrationThreshold != 0)
-            {
-                // If a damage type is required, stop the bullet if the hit entity doesn't have that type.
-                if (comp.PenetrationDamageTypeRequirement != null)
-                {
-                    var stopPenetration = false;
-                    foreach (var requiredDamageType in comp.PenetrationDamageTypeRequirement)
-                    {
-                        if (!damage.DamageDict.Keys.Contains(requiredDamageType))
-                        {
-                            stopPenetration = true;
-                            break;
-                        }
-                    }
-                    if (stopPenetration)
-                        comp.ProjectileSpent = true;
-                }
-
-                // If the object won't be destroyed, it "tanks" the penetration hit.
-                if (damage.GetTotal() < damageRequired)
-                {
-                    comp.ProjectileSpent = true;
-                }
-
-                if (!comp.ProjectileSpent)
-                {
-                    comp.PenetrationAmount += damageRequired;
-                    // The projectile has dealt enough damage to be spent.
-                    if (comp.PenetrationAmount >= comp.PenetrationThreshold)
-                    {
-                        comp.ProjectileSpent = true;
-                    }
-                }
-            }
-            else
-            {
-                comp.ProjectileSpent = true;
-            }
+            comp.ProjectileSpent = !TryPenetrate((uid, comp), target, damage, damageRequired);
+        }
+        else
+        {
+            comp.ProjectileSpent = true;
         }
 
         // <Goob>
@@ -233,11 +175,64 @@ public sealed class PredictedProjectileSystem : EntitySystem
         }
 
         if ((comp.DeleteOnCollide && comp.ProjectileSpent) || (comp.NoPenetrateMask & otherFixture.CollisionLayer) != 0) // Goobstation - Make x-ray arrows not penetrate blob
+        {
+            var deleteEv = new DeletingProjectileEvent(uid);
+            RaiseLocalEvent(ref deleteEv);
             PredictedQueueDel(uid);
+        }
 
         if (comp.ImpactEffect != null && TryComp(uid, out TransformComponent? xform) && _timing.IsFirstTimePredicted)
         {
             RaiseLocalEvent(new ImpactEffectEvent(comp.ImpactEffect, GetNetCoordinates(xform.Coordinates)));
         }
+    }
+
+    private bool TryPenetrate(Entity<ProjectileComponent> projectile, EntityUid target, DamageSpecifier damage, FixedPoint2 damageRequired)
+    {
+        var comp = projectile.Comp;
+        // <Goob> - Splits penetration change if target have PenetratableComponent
+        if (TryComp<PenetratableComponent>(target, out var penetratable))
+        {
+            // Here penetration threshold count as "penetration health".
+            // If it's lower than damage than penetation damage entity cause it deletes projectile
+            if (comp.PenetrationThreshold < penetratable.PenetrateDamage)
+                return false;
+
+            comp.PenetrationThreshold -= FixedPoint2.New(penetratable.PenetrateDamage);
+            comp.Damage *= (1 - penetratable.DamagePenaltyModifier);
+            return true;
+        }
+        // </Goob>
+
+        // If penetration is to be considered, we need to do some checks to see if the projectile should stop.
+        if (comp.PenetrationThreshold == 0)
+            return false;
+        // If a damage type is required, stop the bullet if the hit entity doesn't have that type.
+        if (comp.PenetrationDamageTypeRequirement != null)
+        {
+            foreach (var requiredDamageType in comp.PenetrationDamageTypeRequirement)
+            {
+                if (!damage.DamageDict.Keys.Contains(requiredDamageType))
+                    return false;
+            }
+        }
+
+        // If the object won't be destroyed, it "tanks" the penetration hit.
+        if (damage.GetTotal() < damageRequired)
+        {
+            return false;
+        }
+
+        if (!comp.ProjectileSpent)
+        {
+            comp.PenetrationAmount += damageRequired;
+            // The projectile has dealt enough damage to be spent.
+            if (comp.PenetrationAmount >= comp.PenetrationThreshold)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 c4llv07e <38111072+c4llv07e@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Eye;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
@@ -56,8 +45,7 @@ public abstract class SharedTrayScannerSystem : EntitySystem
         var comp = EnsureComp<TrayScannerUserComponent>(user);
         comp.Count++;
 
-        if (comp.Count > 1)
-            return;
+        // Trauma - removed the count check, refreshing vis mask costs nothing
 
         _eye.RefreshVisibilityMask(user);
     }
@@ -72,11 +60,11 @@ public abstract class SharedTrayScannerSystem : EntitySystem
 
         comp.Count--;
 
+        _eye.RefreshVisibilityMask(user); // Trauma - moved above the condition, always refresh it
         if (comp.Count > 0)
             return;
 
         RemComp<TrayScannerUserComponent>(user);
-        _eye.RefreshVisibilityMask(user);
     }
 
     private void OnTrayHandUnequipped(Entity<TrayScannerComponent> ent, ref GotUnequippedHandEvent args)

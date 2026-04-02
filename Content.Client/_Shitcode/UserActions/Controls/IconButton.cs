@@ -11,14 +11,12 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client._Shitcode.UserActions.Controls;
 
-[Virtual]
-public class IconButton : Button
+public sealed class IconButton : Button
 {
     private readonly BoxContainer _mainContainer;
 
     public readonly TextureRect Icon;
-    public readonly RichTextLabel Label;
-    //public readonly PanelContainer HighlightRect;
+    public new readonly RichTextLabel Label;
 
     public IconButton(string name)
     {

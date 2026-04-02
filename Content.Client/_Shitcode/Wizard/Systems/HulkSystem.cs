@@ -28,7 +28,7 @@ public sealed class HulkSystem : SharedHulkSystem
         if (TerminatingOrDeleted(uid))
             return;
 
-        if (HasComp<HumanoidAppearanceComponent>(uid))
+        if (HasComp<HumanoidProfileComponent>(uid))
             return;
 
         if (!TryComp<SpriteComponent>(uid, out var sprite))
@@ -51,7 +51,7 @@ public sealed class HulkSystem : SharedHulkSystem
 
         var (uid, comp) = hulk;
 
-        if (HasComp<HumanoidAppearanceComponent>(uid))
+        if (HasComp<HumanoidProfileComponent>(uid))
             return;
 
         if (!TryComp<SpriteComponent>(uid, out var sprite))

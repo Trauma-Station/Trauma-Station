@@ -1,0 +1,130 @@
+- type: entity
+  id: CosmicVacuousSpire
+  parent: [ BaseStructureDynamic, BaseCosmicContraband ]
+  name: vacuous spire
+  description: Its surface shifts and moves strangely, despite no visible power source...
+  components:
+  - type: AtmosDevice
+    joinSystem: true
+  - type: CosmicSpire
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-forthecult
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.375,0.25,0.4"
+        density: 200
+        mask:
+        - LargeMobMask
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/cosmicspire.rsi
+    offset: 0, 0.5
+    layers:
+      - state: base-disabled
+        map: ["base"]
+      - state: overlay
+        map: ["vfx"]
+        shader: unshaded
+        visible: false
+    drawdepth: Mobs
+    noRot: true
+  - type: GenericVisualizer
+    visuals:
+      enum.SpireVisuals.Status:
+        base:
+          On: {state: base-enabled}
+          Off: {state: base-disabled}
+        vfx:
+          On: {visible: True}
+          Off: {visible: False}
+  - type: Appearance
+  - type: AmbientSound
+    enabled: false
+    volume: -5
+    range: 12
+    sound:
+      path: /Audio/_DV/CosmicCult/spire_draining.ogg
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: RCDDeconstructable
+    deconstructable: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+  - type: PointLight
+    radius: 2
+    energy: 1.6
+    enabled: false
+    castShadows: false
+    color: "#42a4ae"
+
+# This one is currently unobtainable (and not fully implemented), because I can't figure out why the fuck PowerDeviceVisuals doesn't work properly and it's driving me insane. Please help.
+- type: entity
+  id: CosmicPowerSink
+  parent: [ BaseItem, BaseCosmicContraband ]
+  name: entropic crystallizer
+  description: Sprawling tendrils thrust into nearby wiring, almost as if alive, yet completely foreign to this reality.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Objects/powersink.rsi
+    layers:
+      - state: base
+      - state: overlay
+        map: ["powered"]
+        shader: unshaded
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 5000
+  - type: ExtensionCableReceiver
+    receptionRange: 0
+  - type: Item
+    size: Normal
+  - type: SubFloorHide
+  - type: CollideOnAnchor
+  - type: Anchorable
+    delay: 1
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-forthecult
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger: # overkill threshold
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -8
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Visibility # No idea how but lack of this causes a test fail?

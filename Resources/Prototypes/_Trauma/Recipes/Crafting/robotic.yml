@@ -1,0 +1,44 @@
+- type: construction
+  id: ButtBot
+  graph: ButtBot
+  targetNode: bot
+  category: construction-category-utilities
+  objectType: Item
+  theory:
+    ToysKnowledge: 1
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
+
+#- type: construction
+#  id: CyberButtBot
+#  graph: CyberButtBot
+#  targetNode: bot
+#  category: construction-category-utilities
+#  objectType: Item
+#  theory:
+#    BotsKnowledge: 1
+
+- type: construction
+  id: DuckBot
+  graph: DuckBot
+  targetNode: bot
+  category: construction-category-utilities
+  objectType: Item
+  theory:
+    CookingKnowledge: 2
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
+
+- type: construction
+  id: BoogieBot
+  graph: BoogieBot
+  targetNode: bot
+  category: construction-category-utilities
+  objectType: Item
+  theory:
+    ElectronicsKnowledge: 1
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1

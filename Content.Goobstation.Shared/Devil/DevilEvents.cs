@@ -1,10 +1,7 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Devil.Contract;
+using Content.Medical.Common.Body;
 using Content.Shared.Inventory;
 using Robust.Shared.Serialization;
 
@@ -41,7 +38,7 @@ public sealed class IsEyesCoveredCheckEvent : EntityEventArgs, IInventoryRelayEv
 
 // Contract Events
 
-[ImplicitDataDefinitionForInheritors, DataDefinition]
+[ImplicitDataDefinitionForInheritors]
 public abstract partial class BaseDevilContractEvent : EntityEventArgs
 {
     /// <summary>
@@ -55,17 +52,14 @@ public abstract partial class BaseDevilContractEvent : EntityEventArgs
     public EntityUid Target;
 }
 
-[DataDefinition, Serializable]
 public sealed partial class DevilContractSoulOwnershipEvent : BaseDevilContractEvent;
 
-[DataDefinition, Serializable]
-public sealed partial class DevilContractLoseHandEvent : BaseDevilContractEvent;
+public sealed partial class DevilContractLosePartEvent : BaseDevilContractEvent
+{
+    [DataField(required: true)]
+    public BodyPartType Part;
+}
 
-[DataDefinition, Serializable]
-public sealed partial class DevilContractLoseLegEvent : BaseDevilContractEvent;
-
-[DataDefinition, Serializable]
 public sealed partial class DevilContractLoseOrganEvent : BaseDevilContractEvent;
 
-[DataDefinition, Serializable]
 public sealed partial class DevilContractChanceEvent : BaseDevilContractEvent;

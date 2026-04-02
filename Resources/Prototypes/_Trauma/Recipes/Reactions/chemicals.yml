@@ -1,4 +1,27 @@
 - type: reaction
+  id: Cement
+  reactants:
+    Carbon:
+      amount: 1
+    Ash:
+      amount: 2
+    Aluminium:
+      amount: 2
+  products:
+    Cement: 5
+
+- type: reaction
+  id: CementWetReaction
+  reactants:
+    Cement:
+      amount: 5
+    Water:
+      amount: 5
+  effects:
+    - !type:SpawnEntity
+      entity: WetCement
+
+- type: reaction
   id: SodiumBicarbonate
   reactants:
     SodiumCarbonate:
@@ -60,3 +83,58 @@
   products:
     AceticAnhydride: 1
     Water: 1
+
+- type: reaction
+  id: CalciumCarbonateDecomposition
+  minTemp: 1013
+  reactants:
+    CalciumCarbonate:
+      amount: 1
+  products:
+    CalciumOxide: 1
+    CarbonDioxide: 1
+
+- type: reaction
+  id: CalciumOxideHydration
+  reactants:
+    CalciumOxide:
+      amount: 1
+    Water:
+      amount: 1
+  products:
+    CalciumHydroxide: 1
+  effects:
+    - !type:AdjustTemperature
+      amount: 200 # Like cryostylane-iodine reaction, but making heat
+
+- type: reaction
+  id: FullFatOilReaction
+  reactants:
+    Oil:
+      amount: 1
+    Fat:
+      amount: 1
+  products:
+    FullFatOils: 2
+
+- type: reaction
+  id: CocainePowderReaction
+  reactants:
+    CocaSlurry:
+      amount: 3
+    WeldingFuel:
+      amount: 1
+  products:
+    Cocaine: 1
+    Microplastics: 3
+
+- type: reaction
+  id: CocaineFreebasing
+  minTemp: 474
+  reactants:
+    Cocaine:
+      amount: 4
+  products:
+    CrackCocaine: 1
+    Microplastics: 2
+    VentCrud: 1

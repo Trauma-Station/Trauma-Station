@@ -17,4 +17,3 @@ public sealed partial class AddTagsOnTriggerComponent : BaseXOnTriggerComponent
     [DataField, AutoNetworkedField]
     public List<ProtoId<TagPrototype>> Tags = new();
 }
-

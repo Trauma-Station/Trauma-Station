@@ -4,8 +4,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Shitmed.Targeting;
+using Content.Shared.Body;
 using Content.Shared.Atmos;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._EinsteinEngines.Atmos.Components;
 
@@ -43,8 +44,8 @@ public sealed partial class IgniteFromGasComponent : Component
     /// <summary>
     ///   The body parts that are vulnerable to ignition when exposed, and their fire stack values.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    public Dictionary<TargetBodyPart, float> IgnitableBodyParts = new();
+    [DataField]
+    public Dictionary<ProtoId<OrganCategoryPrototype>, float> IgnitableBodyParts = new();
 
     /// <summary>
     ///   How many moles of the gas is needed to trigger ignition.

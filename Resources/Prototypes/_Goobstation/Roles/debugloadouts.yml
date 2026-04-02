@@ -112,32 +112,6 @@
     head: ClothingHeadHelmetBasicAlt
 
 - type: startingGear
-  id: BlueShieldOfficerGearDebug
-  parent: BlueshieldOfficerGear
-  equipment:
-    outerClothing: ClothingBlueshieldArmourVest
-    head: ClothingHeadHatBeretBlueshield
-    gloves: ClothingHandsGlovesCombat
-    shoes: ClothingShoesBootsJack
-    jumpsuit: ClothingUniformJumpsuitBlueshieldShirt
-
-- type: startingGear
-  id: BlueShieldOfficerGearSuit
-  parent: BlueShieldOfficerGearDebug
-  equipment:
-    outerClothing: ClothingOuterHardsuitBlueshieldLight
-    head: ClothingHeadHelmetHardsuitBlueshield
-
-- type: startingGear
-  id: BlueShieldOfficerGearModSuit
-  parent: BlueShieldOfficerGearDebug
-  equipment:
-    outerClothing: ClothingModsuitChestplatePraetorian
-    head: ClothingModsuitHelmetPraetorian
-    back: ClothingModsuitPraetorian
-    gloves: ClothingModsuitGauntletsPraetorian
-
-- type: startingGear
   id: WizardHardsuitGearDebug
   parent: WizardHardsuitGear
   equipment:

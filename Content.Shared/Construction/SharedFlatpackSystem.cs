@@ -1,16 +1,7 @@
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Jake Huxell <JakeHuxell@pm.me>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 SpeltIncorrectyl <66873282+SpeltIncorrectyl@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared.Construction.Components;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Construction.Components;
+using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -22,25 +13,30 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction;
 
 public abstract class SharedFlatpackSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    // </Trauma>
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] private readonly AnchorableSystem _anchorable = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] protected readonly MachinePartSystem MachinePart = default!;
-    [Dependency] protected readonly SharedMaterialStorageSystem MaterialStorage = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] protected readonly MachinePartSystem MachinePart = default!;
+    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected readonly SharedMaterialStorageSystem MaterialStorage = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -87,28 +83,29 @@ public abstract class SharedFlatpackSystem : EntitySystem
             return;
         }
 
-        var buildPos = _map.TileIndicesFor(grid, gridComp, xform.Coordinates);
-        var coords = _map.ToCenterCoordinates(grid, buildPos);
-
-        // TODO FLATPAK
-        // Make this logic smarter. This should eventually allow for shit like building microwaves on tables and such.
-        // Also: make it ignore ghosts
-        if (_entityLookup.AnyEntitiesIntersecting(coords, LookupFlags.Dynamic | LookupFlags.Static))
+        if (!PrototypeManager.Resolve(comp.Entity, out var proto) ||
+            !proto.TryGetComponent<FixturesComponent>(out var fixture, EntityManager.ComponentFactory))
         {
-            // this popup is on the server because the predicts on the intersection is crazy
-            if (_net.IsServer)
-                _popup.PopupEntity(Loc.GetString("flatpack-unpack-no-room"), uid, args.User);
             return;
         }
 
-        if (_net.IsServer)
+        var (layer, mask) = SharedPhysicsSystem.GetHardCollision(fixture);
+        var buildPos = _map.TileIndicesFor(grid, gridComp, xform.Coordinates);
+
+        if (!_anchorable.TileFree((grid, gridComp), buildPos, layer, mask))
         {
-            var spawn = Spawn(comp.Entity, _map.GridTileToLocal(grid, gridComp, buildPos));
-            _adminLogger.Add(LogType.Construction,
-                LogImpact.Low,
-                $"{ToPrettyString(args.User):player} unpacked {ToPrettyString(spawn):entity} at {xform.Coordinates} from {ToPrettyString(uid):entity}");
-            QueueDel(uid);
+            _popup.PopupPredicted(Loc.GetString("flatpack-unpack-no-room"), uid, args.User);
+            return;
         }
+
+        // <Trauma> - predict this and remove local rotation
+        var spawn = PredictedSpawnAtPosition(comp.Entity, _map.GridTileToLocal(grid, gridComp, buildPos));
+        _transform.SetLocalRotation(spawn, 0);
+        _adminLogger.Add(LogType.Construction,
+            LogImpact.Low,
+            $"{ToPrettyString(args.User):player} unpacked {ToPrettyString(spawn):entity} at {xform.Coordinates} from {ToPrettyString(uid):entity}");
+        PredictedQueueDel(uid);
+        // </Trauma>
 
         _audio.PlayPredicted(comp.UnpackSound, args.Used, args.User);
     }
@@ -136,14 +133,34 @@ public abstract class SharedFlatpackSystem : EntitySystem
         Appearance.SetData(ent, FlatpackVisuals.Machine, MetaData(board).EntityPrototype?.ID ?? string.Empty);
     }
 
-    /// <param name="machineBoard">The machine board to pack. If null, this implies we are packing a computer board</param>
-    public Dictionary<string, int> GetFlatpackCreationCost(Entity<FlatpackCreatorComponent> entity, Entity<MachineBoardComponent>? machineBoard)
+    /// <summary>
+    /// Returns the prototype from a board that the flatpacker will create.
+    /// </summary>
+    public bool TryGetFlatpackResultPrototype(EntityUid board, [NotNullWhen(true)] out EntProtoId? prototype)
     {
-        Dictionary<string, int> cost = new();
+        prototype = null;
+
+        if (TryComp<MachineBoardComponent>(board, out var machine))
+            prototype = machine.Prototype;
+        else if (TryComp<ComputerBoardComponent>(board, out var computer))
+            prototype = computer.Prototype;
+        return prototype is not null;
+    }
+
+    /// <summary>
+    /// Tries to get the cost to produce an item, fails if unable to produce it.
+    /// </summary>
+    /// <param name="entity">The flatpacking machine</param>
+    /// <param name="machineBoard">The machine board to pack. If null, this implies we are packing a computer board</param>
+    /// <param name="cost">Cost to produce</param>
+    public bool TryGetFlatpackCreationCost(Entity<FlatpackCreatorComponent> entity, EntityUid machineBoard, out Dictionary<string, int> cost)
+    {
+        cost = new();
         Dictionary<ProtoId<MaterialPrototype>, int> baseCost;
-        if (machineBoard is not null)
+        if (TryComp<MachineBoardComponent>(machineBoard, out var machineBoardComp))
         {
-            cost = MachinePart.GetMachineBoardMaterialCost(machineBoard.Value, -1);
+            if (!MachinePart.TryGetMachineBoardMaterialCost((machineBoard, machineBoardComp), out cost, -1))
+                return false;
             baseCost = entity.Comp.BaseMachineCost;
         }
         else
@@ -155,6 +172,6 @@ public abstract class SharedFlatpackSystem : EntitySystem
             cost[mat] -= amount;
         }
 
-        return cost;
+        return true;
     }
 }

@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Fax;
@@ -13,4 +10,4 @@ namespace Content.Goobstation.Shared.Fax;
 /// Set Handled to true to cancel normal fax behavior.
 /// </summary>
 [ByRefEvent]
-public record struct GettingFaxedSentEvent(ref readonly Entity<FaxMachineComponent> Fax, ref readonly FaxSendMessage Args, bool Handled = false);
+public record struct GettingFaxedSentEvent(Entity<FaxMachineComponent> Fax, EntityUid Actor, bool Handled = false);

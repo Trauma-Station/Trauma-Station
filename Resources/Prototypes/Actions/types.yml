@@ -166,12 +166,14 @@
   components:
   - type: Action
     checkCanInteract: false
-    useDelay: 30
+    useDelay: 5  # Trauma, was 30
     itemIconStyle: BigAction
     priority: -20
     icon:
       sprite: Objects/Weapons/Grenades/empgrenade.rsi
       state: icon
+  - type: LimitedCharges # Trauma
+    maxCharges: 3
 
 - type: entity
   parent: BaseImplantAction
@@ -413,16 +415,15 @@
 #     useDelay: 1
 #     itemIconStyle: BigAction
 
-#  TODO: Add back once we have animated tails again. Were removed due to the sprite rework, causing all of them to not fit anymore.
-# - type: entity
-#   parent: ActionToggleWagging
-#   id: ActionToggleWaggingVulpkanin
-#   components:
-#   - type: Action
-#     icon: { sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
-#     iconOn: { sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
-#     itemIconStyle: NoItem
-#     useDelay: 1 # Prevents Emote Spam
+- type: entity
+  parent: ActionToggleWagging
+  id: ActionToggleWaggingVulpkanin
+  components:
+  - type: Action
+    icon: { sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
+    iconOn: { sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
+    itemIconStyle: NoItem
+    useDelay: 1 # Prevents Emote Spam
 
 - type: entity
   parent: BaseAction

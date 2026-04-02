@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Jezithyr <jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Hands.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Prototypes;
@@ -27,8 +20,12 @@ public sealed class PullerTest
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
 
-        var compFactory = server.ResolveDependency<IComponentFactory>();
-        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        // <Trauma> - microoptimisation shit
+        var compFactory = server.EntMan.ComponentFactory;
+        var protoManager = server.ProtoMan;
+        var handsName = compFactory.GetComponentName<HandsComponent>();
+        var pullerName = compFactory.GetComponentName<PullerComponent>();
+        // </Trauma>
 
         await server.WaitAssertion(() =>
         {
@@ -36,13 +33,13 @@ public sealed class PullerTest
             {
                 foreach (var proto in protoManager.EnumeratePrototypes<EntityPrototype>())
                 {
-                    if (!proto.TryGetComponent(out PullerComponent? puller, compFactory))
+                    if (!proto.TryGetComponent<PullerComponent>(pullerName, out var puller)) // Trauma - use cached pullerName from above
                         continue;
 
                     if (!puller.NeedsHands)
                         continue;
 
-                    Assert.That(proto.HasComponent<HandsComponent>(compFactory), $"Found puller {proto} with NeedsHand pulling but has no hands?");
+                    Assert.That(proto.Components.ContainsKey(handsName), $"Found puller {proto} with NeedsHand pulling but has no hands?"); // Trauma - used cached handsName from above
                 }
             });
         });

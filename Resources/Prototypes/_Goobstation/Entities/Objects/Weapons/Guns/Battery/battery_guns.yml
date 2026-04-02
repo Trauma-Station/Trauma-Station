@@ -74,10 +74,6 @@
     wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
     soundHit:
       collection: MetalThud # Goobstation ^
-  - type: Multishot # Goobstation V
-    missChance: 0.4
-    spreadMultiplier: 3
-    spreadAddition: 50 #very hard to hold two of these steady let alone steady while shooting them
 
 - type: entity
   id: BaseWeaponCustomCellSmall
@@ -126,7 +122,7 @@
     fireRate: 1.5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 600
     startingCharge: 600
   - type: MaterialEnergy
@@ -154,7 +150,7 @@
   id: WeaponPlasmaRifleEmpty
   suffix: Empty
   components:
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 600
     startingCharge: 0
 
@@ -227,7 +223,7 @@
     proto: BulletDisabler
     fireCost: 50
   - type: PacifismAllowedGun
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 40
 
 - type: entity
@@ -262,10 +258,7 @@
     - type: BatteryAmmoProvider
       proto: BulletSyndicateDisabler
       fireCost: 100
-    - type: Multishot
-      spreadMultiplier: 1.25
-      spreadAddition: 10
-    - type: PredictedBatterySelfRecharger
+    - type: BatterySelfRecharger
       autoRechargeRate: 50
 
 - type: entity
@@ -277,14 +270,14 @@
   - type: Tag
     tags:
     - Rifle
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 80
 
 - type: entity
-  name: CR-2 energy assault rifle
+  name: energy rifle
   parent: [ BaseWeaponCustomCell, BaseGunWieldable, BaseSecurityContraband ]
   id: WeaponEnergyRifle
-  description: An advanced energy rifle capable of firing various bolts depending on the powercell magazine.
+  description: An energy rifle capable of firing various bolts depending on the powercell magazine.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Battery/energy_rifle.rsi
@@ -324,7 +317,7 @@
             - EnergyMagAmmo
 
 - type: entity
-  name: DT-12 "Lawbringer"
+  name: Lawbringer
   parent: [BaseWeaponBatterySmall, BaseGrandTheftContraband]
   id: WeaponEnergyGunLawbringer
   description: A versatile energy gun, with many different modes. The owner of this gun embodies the law itself.
@@ -345,7 +338,7 @@
       path: /Audio/_DV/Weapons/Guns/Gunshots/laser.ogg
     soundEmpty:
       path: /Audio/_DV/Weapons/Guns/Empty/dry_fire.ogg
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 1000
     startingCharge: 1000
   - type: BatteryAmmoProvider
@@ -418,7 +411,7 @@
     canCreateVacuum: false
     deleteAfterExplosion: false
     repeatable: true
-  - type: PredictedBatterySelfRecharger
+  - type: BatterySelfRecharger
     autoRechargeRate: 50
     autoRechargePauseTime: 40
 
@@ -458,6 +451,6 @@
   - type: BatteryAmmoProvider
     proto: RifleBulletEnergyGunIon # yes i just copy cr-2 ion bullet
     fireCost: 40
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 800
     startingCharge: 800

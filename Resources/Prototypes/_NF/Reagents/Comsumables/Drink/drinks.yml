@@ -12,16 +12,13 @@
   flavor: fast
   color: "#3061e3"
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Ethanol: 0.03
+        Desoxyephedrine: 0.25
       effects:
       - !type:SatiateThirst
         factor: 1
-      - !type:AdjustReagent
-        reagent: Ethanol
-        amount: 0.03
-      - !type:AdjustReagent
-        reagent: Desoxyephedrine
-        amount: 0.25
   metamorphicSprite:
     sprite: _NF/Objects/Consumable/Drinks/ginandsonic.rsi
     state: icon_empty
@@ -38,13 +35,12 @@
   flavor: greed
   color: "#eed037"
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Ethanol: 0.3
       effects:
       - !type:SatiateThirst
         factor: 0.2
-      - !type:AdjustReagent
-        reagent: Ethanol
-        amount: 0.3
   metamorphicSprite:
     sprite: _NF/Objects/Consumable/Drinks/goldencat.rsi
     state: icon_empty
@@ -61,13 +57,12 @@
   flavor: blast
   color: "#8c934c"
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Ethanol: 0.4
       effects:
       - !type:SatiateThirst
         factor: 1
-      - !type:AdjustReagent
-        reagent: Ethanol
-        amount: 0.4
       - !type:Explosion
         explosionType: Default
         maxIntensity: 0.1
@@ -91,13 +86,12 @@
   flavor: torpedo
   color: "#d4db9a"
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Ethanol: 0.4
       effects:
       - !type:SatiateThirst
         factor: 0.8
-      - !type:AdjustReagent
-        reagent: Ethanol
-        amount: 0.4
   metamorphicSprite:
     sprite: _NF/Objects/Consumable/Drinks/torpedojuice.rsi
     state: icon_empty
@@ -114,25 +108,14 @@
   flavor: bees
   color: "#f1d25f"
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Ethanol: 0.2
       effects:
       - !type:SatiateThirst
         factor: 0.5
-      - !type:AdjustReagent
-        reagent: Ethanol
-        amount: 0.2
       - !type:SatiateHunger
         factor: 0.1
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: -0.05
-            Radiation: -0.05
-            Asphyxiation: 1
-        conditions:
-        - !type:ReagentCondition
-          reagent: BeesKnees
-          min: 35
       - !type:ModifyBloodLevel
         amount: 0.2
   metamorphicSprite:

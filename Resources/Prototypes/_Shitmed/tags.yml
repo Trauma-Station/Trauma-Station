@@ -20,9 +20,6 @@
   id: AugmentCellCasing
 
 - type: Tag
-  id: AugmentPaperworkToolElectronics
-
-- type: Tag
   id: AugmentRechargerCasing
 
 - type: Tag
@@ -42,9 +39,6 @@
 
 - type: Tag
   id: AugmentStrengthCasing
-
-- type: Tag
-  id: CantInteract
 
 - type: Tag
   id: ShowWires

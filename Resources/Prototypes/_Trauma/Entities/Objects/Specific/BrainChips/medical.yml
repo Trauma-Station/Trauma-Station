@@ -1,0 +1,70 @@
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipChiefMedicalOfficer
+  name: skill chip (CMO)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FirstAidKnowledge: 50
+      SurgeryKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipChemist
+  name: skill chip (chemist)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ChemistryKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipMedicalDoctor
+  name: skill chip (medical)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FirstAidKnowledge: 30
+      SurgeryKnowledge: 26
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipMedicalIntern
+  name: skill chip (medical intern)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FirstAidKnowledge: 26
+      SurgeryKnowledge: 10
+    # TODO: xp boost?
+
+# TODO: make surgeon skillchip if someone makes organ loadouts
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipParamedic
+  name: skill chip (paramedic)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FirstAidKnowledge: 26
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipPsychologist
+  name: skill chip (psychologist)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ChemistryKnowledge: 26
+  # TODO: supermatter hallucination thing parity
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipVirologist
+  name: skill chip (virologist)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FirstAidKnowledge: 26
+      # TODO

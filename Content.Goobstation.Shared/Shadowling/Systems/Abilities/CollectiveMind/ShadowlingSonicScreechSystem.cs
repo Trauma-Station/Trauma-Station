@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Shadowling.Components;
@@ -85,7 +81,7 @@ public sealed class ShadowlingSonicScreechSystem : EntitySystem
                 continue;
             }
 
-            if (HasComp<HumanoidAppearanceComponent>(entity))
+            if (HasComp<HumanoidProfileComponent>(entity))
                 PredictedSpawnAtPosition(component.ProtoFlash, Transform(entity).Coordinates);
         }
 

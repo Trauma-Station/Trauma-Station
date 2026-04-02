@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Trauma.Shared.Paint;
@@ -16,8 +17,7 @@ public sealed class PaintVisualizerSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-
-    private EntityQuery<SpriteComponent> _spriteQuery;
+    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public static readonly ProtoId<ShaderPrototype> ShaderId = "Greyscale";
     public ShaderInstance Shader = default!;
@@ -25,8 +25,6 @@ public sealed class PaintVisualizerSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _spriteQuery = GetEntityQuery<SpriteComponent>();
 
         Shader = _proto.Index(ShaderId).Instance();
 
@@ -64,11 +62,8 @@ public sealed class PaintVisualizerSystem : EntitySystem
         var spriteEnt = new Entity<SpriteComponent?>(ent, sprite);
         foreach (var (key, color) in ent.Comp.LayerColors)
         {
-            if (!sprite.LayerMapTryGet(key, out var index))
-                continue;
-
-            sprite.LayerSetShader(index, null, null);
-            _sprite.LayerSetColor(spriteEnt, index, color);
+            sprite.LayerSetShader(key, null, null);
+            _sprite.LayerSetColor(spriteEnt, key, color);
         }
     }
 
@@ -114,7 +109,7 @@ public sealed class PaintVisualizerSystem : EntitySystem
         var spriteEnt = new Entity<SpriteComponent?>(ent, sprite);
         foreach (var key in keys)
         {
-            if (!sprite.LayerMapTryGet(key, out var index))
+            if (!_sprite.LayerMapTryGet(spriteEnt, key, out var index, true))
                 continue;
 
             sprite.LayerSetShader(index, Shader, ShaderId);

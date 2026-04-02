@@ -24,6 +24,7 @@
     - IPC
     - Plasmaman
   guides: [ Zombies ]
+  dontShowInCredits: true # Trauma
 
 - type: antag
   id: Zombie
@@ -38,3 +39,4 @@
     - IPC
     - Plasmaman
   guides: [ Zombies ]
+  creditImage: /Textures/_Trauma/EndCredits/Antags/zombies.png # Trauma

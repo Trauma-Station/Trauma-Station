@@ -1,0 +1,207 @@
+## Common
+
+- type: entityTable
+  id: PackageArtsCrafts
+  table: !type:AllSelector
+    children:
+    - id: CrayonBox
+    - id: Paper
+      amount: 3,5
+
+- type: entityTable
+  id: PackageCheese
+  table: !type:AllSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: FoodCheese
+      - id: FoodChevre
+    - id: KnifePlastic
+
+## Uncommon
+
+- type: entityTable
+  id: PackageSignallerKit
+  table: !type:AllSelector
+    children:
+    - id: Multitool
+    - id: RemoteSignaller
+
+- type: entityTable
+  id: PackageHonkSupplement
+  table: !type:AllSelector
+    children:
+    - id: BikeHorn
+    - id: FoodPieBananaCream
+    - id: FoodBanana
+
+- type: entityTable
+  id: PackageSoaps
+  table: !type:AllSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: BoxSoapsAssorted
+      - id: BoxSoapsAssortedOmega
+    - !type:GroupSelector
+      children:
+      - id: PaperMailNTSoapAd1
+      - id: PaperMailNTSoapAd2
+
+- type: entityTable
+  id: PackageRestraints
+  table: !type:AllSelector
+    children:
+    - id: Handcuffs
+    - id: ClothingMaskMuzzle
+    - id: ClothingEyesBlindfold
+
+# Costumes
+
+- type: entityTable
+  id: PackageCostumeMaid
+  table: !type:AllSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: ClothingUniformJumpskirtJanimaid
+      - id: ClothingUniformJumpskirtJanimaidmini
+    - id: MegaSprayBottle
+    - id: ClothingHandsGlovesColorWhite
+
+- type: entityTable
+  id: PackageCostumeWizard
+  table: !type:AllSelector
+    children:
+    - id: ClothingOuterWizard
+    - id: ClothingHeadHatWizard
+    - id: ClothingShoesWizard
+    - id: PonderingOrb
+      prob: 0.3
+    - id: RGBStaff
+      prob: 0.1
+
+- type: entityTable
+  id: PackageCostumeNurse
+  table: !type:AllSelector
+    children:
+    - id: ClothingUniformJumpskirtOfLife
+    - id: ClothingHeadNurseHat
+    - !type:GroupSelector
+      children:
+      - id: Syringe
+      - id: SyringePoisonFentUsed
+        weight: 0.1 # :)
+
+- type: entityTable
+  id: PackageCostumeTacticalMaid
+  table: !type:AllSelector
+    children:
+    - id: ClothingUniformJumpskirtTacticalMaid
+    - id: ClothingHeadHatTacticalMaidHeadband
+    - id: MegaSprayBottle
+    - id: ClothingHandsTacticalMaidGloves
+
+- type: entityTable
+  id: PackageCostumeNoir
+  table: !type:AllSelector
+    children:
+    - id: ClothingUniformJumpsuitDetectiveGrey
+    - id: ClothingUniformJumpskirtDetectiveGrey
+    - id: ClothingHeadHatBowlerHat
+    - id: ClothingOuterCoatGentle
+## Rare
+
+- type: entityTable
+  id: SwordRandom
+  table: !type:GroupSelector
+    children:
+    - id: FoamCutlass
+    - id: Katana
+      weight: 0.5
+    - id: CaneSheathFilled
+      weight: 0.3
+    - id: Cutlass
+      weight: 0.1
+    - id: ClothingBeltSheathFilled # Little dangerous between the reflect and the damage
+      weight: 0.03
+
+- type: entityTable
+  id: PackageWitchery
+  table: !type:AllSelector
+    children:
+    - id: Bible
+    - id: ClothingHeadHatWitch1
+    - id: ClothingOuterSuitWitchRobes
+
+- type: entityTable
+  id: PackageMutatedProduce
+  table: !type:RepeatSelector
+    count: 5
+    repeated: !type:GroupSelector
+      children:
+      - id: FoodLaughinPeaPod
+      - id: FoodMimana
+      - id: FoodLemoon
+      - id: FoodBlueTomato
+      - id: FoodBloodTomato
+      - id: FoodKoibean
+      - id: FoodGoldenApple
+      - id: FoodGlasstle
+      - id: FoodLily
+        weight: 0.5
+      - id: FoodAmbrosiaDeus
+        weight: 0.5
+      - id: FoodSpacemansTrumpet
+        weight: 0.25
+      - id: FoodBluespaceTomato
+        weight: 0.1
+      - id: FoodFakeCapfruit
+        weight: 0.05
+
+- type: entityTable
+  id: InstrumentRandom
+  table: !type:GroupSelector
+    children:
+    - id: TromboneInstrument
+    - id: FrenchHornInstrument
+    - id: SaxophoneInstrument
+    - id: EuphoniumInstrument
+    - id: AcousticGuitarInstrument
+    - id: ElectricGuitarInstrument
+    - id: BassGuitarInstrument
+    - id: RockGuitarInstrument
+    - id: BanjoInstrument
+    - id: ViolinInstrument
+    - id: CelloInstrument
+    - id: ViolaInstrument
+    - id: BagpipeInstrument
+    - id: SynthesizerInstrument
+    - id: AccordionInstrument
+    - id: GlockenspielInstrument
+    - id: XylophoneInstrument
+
+- type: entityTable
+  id: PackagePowerTool
+  table: !type:AllSelector
+    children:
+    - id: PaperMailNFPowerTool
+    - !type:GroupSelector
+      children:
+      - id: JawsOfLife
+      - id: PowerDrill
+      - id: WelderIndustrial
+        weight: 0.6
+      - id: WelderIndustrialAdvanced
+        weight: 0.3
+      - id: WelderExperimental
+        weight: 0.1
+
+- type: entityTable
+  id: BuildABuddyRandom
+  table: !type:GroupSelector
+    children:
+    - id: BoxBuildABuddyHuman
+    - id: BoxBuildABuddyReptilian
+    - id: BoxBuildABuddySlime
+    - id: BoxBuildABuddyVox

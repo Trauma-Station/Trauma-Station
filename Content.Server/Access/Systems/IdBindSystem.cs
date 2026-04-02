@@ -47,4 +47,3 @@ public sealed class IdBindSystem : EntitySystem
         RemCompDeferred<IdBindComponent>(ent);
     }
 }
-

@@ -1,25 +1,5 @@
-# SPDX-FileCopyrightText: 2024 EmoGarbage404 <retron404@gmail.com>
-# SPDX-FileCopyrightText: 2024 Fenn <162015305+TooSillyFennec@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ps3Moira <113228053+ps3moira@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Eagle <lincoln.mcqueen@gmail.com>
-# SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 vanx <61917534+Vaaankas@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, WoodDurabilityWeak] # Trauma
   id: Cane
   name: cane
   description: A standard wooden cane. Can help disabled people move easier. # Goobstation
@@ -29,6 +9,11 @@
     state: cane
   - type: Item
     size: Normal
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # <Trauma>
     sprite: Objects/Weapons/Melee/cane.rsi
   - type: Appearance
   - type: MobilityAid
@@ -50,7 +35,7 @@
 
 - type: entity
   name: cane blade
-  parent: [BaseSword, BaseSyndicateContraband]
+  parent: [KnifeDurabilitySharpenOnly, BaseSword, BaseSyndicateContraband]
   id: CaneBlade
   description: A sharp blade with a cane shaped hilt. Enchanted with fire powers by a fellow book lover. # Goobstation
   components:
@@ -67,6 +52,11 @@
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     sprite: Objects/Weapons/Melee/cane_blade.rsi
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # <Trauma>
   - type: Tag
     tags:
       - CaneBlade

@@ -15,9 +15,8 @@ namespace Content.Client.Chat
 {
     public sealed class CollectiveMindSystem : EntitySystem
     {
-        [Dependency] private readonly IChatManager _chatManager = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly CollectiveMindUpdateSystem _collectiveSystem = default!;
+        [Dependency] private readonly IChatManager _chat = default!;
+        [Dependency] private readonly IPlayerManager _player = default!;
 
         public override void Initialize()
         {
@@ -26,16 +25,16 @@ namespace Content.Client.Chat
             SubscribeLocalEvent<CollectiveMindComponent, ComponentRemove>(OnRemove);
         }
 
-        public bool IsCollectiveMind => CompOrNull<CollectiveMindComponent>(_playerManager.LocalPlayer?.ControlledEntity) != null;
+        public bool IsCollectiveMind => CompOrNull<CollectiveMindComponent>(_player.LocalEntity) != null;
 
         private void OnInit(EntityUid uid, CollectiveMindComponent component, ComponentInit args)
         {
-            _chatManager.UpdatePermissions();
+            _chat.UpdatePermissions();
         }
 
         private void OnRemove(EntityUid uid, CollectiveMindComponent component, ComponentRemove args)
         {
-            _chatManager.UpdatePermissions();
+            _chat.UpdatePermissions();
         }
     }
 }

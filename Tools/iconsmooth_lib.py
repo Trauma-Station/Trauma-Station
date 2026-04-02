@@ -201,4 +201,3 @@ REM is computed from subtracting the subtile size from the tile size.
 """
 
 explain_prefix = "Resources/Textures/Structures/catwalk.rsi/catwalk_"
-

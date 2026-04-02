@@ -1,8 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Liamofthesky <157073227+Liamofthesky@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ReconPangolin <67752926+ReconPangolin@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 taydeo <td12233a@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
 using Content.Client.UserInterface.Controls;
@@ -107,11 +103,13 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 }
                 foreach (var gene in _internalConsumeGasesDatabank)
                 {
-                    DatabaseList.AddItem($"Consume {Loc.GetString($"gases-{gene.GasID.ToString()}")}: {gene.GasValue}");
+                    var gas = Loc.GetString("gases-" + gene.GasID.ToString().ToLower());
+                    DatabaseList.AddItem($"Consume {gas}: {gene.GasValue}");
                 }
                 foreach (var gene in _internalExudeGasesDatabank)
                 {
-                    DatabaseList.AddItem($"Exude {Loc.GetString($"gases-{gene.GasID.ToString()}")}: {gene.GasValue}");
+                    var gas = Loc.GetString("gases-" + gene.GasID.ToString().ToLower());
+                    DatabaseList.AddItem($"Exude {gas}: {gene.GasValue}");
                 }
                 foreach (var gene in _internalChemicalsDatabank)
                 {
@@ -234,7 +232,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         }
 
         Traits.Text = Loc.GetString("plant-analyzer-plant-mutations-text", ("traits", mutations.ToString()));
-        
+
         StringBuilder speciation = new();
         if (msg.Speciation is null)
         {

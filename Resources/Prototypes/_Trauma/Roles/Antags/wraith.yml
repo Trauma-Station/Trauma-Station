@@ -1,0 +1,10 @@
+- type: antag
+  id: WraithRoundstart
+  name: roles-antag-wraith-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-wraith-objective
+  guides: [ Wraith ]
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 36000

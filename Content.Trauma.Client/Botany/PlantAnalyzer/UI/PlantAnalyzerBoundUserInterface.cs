@@ -1,8 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Liamofthesky <157073227+Liamofthesky@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ReconPangolin <67752926+ReconPangolin@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 taydeo <td12233a@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
 using Content.Trauma.Shared.Botany.Components;
@@ -67,7 +63,7 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
         if (_window != null)
             _window.OnClose -= Close;
 
-        _window?.Dispose();
+        _window?.Orphan();
     }
     public void DeleteDatabaseEntry(int index)
     {
@@ -102,4 +98,3 @@ public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
         }
     }
 }
-

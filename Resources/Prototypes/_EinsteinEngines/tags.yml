@@ -2,4 +2,7 @@
   id: Envirohelm
 
 - type: Tag
+  id: IPCMaskWearable
+
+- type: Tag
   id: PlasmamanSafe

@@ -40,7 +40,7 @@ public sealed class ClientFoodSequenceSystem : SharedFoodSequenceSystem
 
         //Add new layers
         // <Trauma> change it to regular for loop so it can modify layer sprite which is a struct
-        for (int counter = 0; counter < start.Comp.FoodLayers.Count;)
+        for (int counter = 0; counter < start.Comp.FoodLayers.Count; counter++)
         {
             var state = start.Comp.FoodLayers[counter];
             // </Trauma>
@@ -50,7 +50,12 @@ public sealed class ClientFoodSequenceSystem : SharedFoodSequenceSystem
                 {
                     var rsiPath = spriteComp.BaseRSI?.Path.ToString();
                     if (rsiPath == null)
+                    // <Trauma> - this is a programmer error, log it instead of silently ignoring it
+                    {
+                        Log.Error($"Prototype {prototype.Name} ({prototype.ID}) had no sprite path!");
                         continue;
+                    }
+                    // </Trauma>
                     var layercount = 0;
                     foreach (var layer in spriteComp.AllLayers)
                     {
@@ -80,7 +85,7 @@ public sealed class ClientFoodSequenceSystem : SharedFoodSequenceSystem
 
                     }
                 }
-                counter++;
+                //counter++; // Trauma - use for loop instead
                 continue;
             }
 

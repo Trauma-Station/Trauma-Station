@@ -52,6 +52,12 @@ public sealed partial class HealthAnalyzerComponent : Component
     public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
 
     /// <summary>
+    /// If the last state of the health analyzer was active (e.g. they are in range of the patient).
+    /// </summary>
+    [DataField]
+    public bool IsAnalyzerActive = false;
+
+    /// <summary>
     /// How long it takes to scan someone.
     /// </summary>
     [DataField]
@@ -68,6 +74,12 @@ public sealed partial class HealthAnalyzerComponent : Component
     /// </summary>
     [DataField]
     public EntityUid? CurrentBodyPart;
+
+    /// <summary>
+    /// Shitmed Change: The current mode of the scanner.
+    /// </summary>
+    [DataField]
+    public HealthAnalyzerMode CurrentMode = HealthAnalyzerMode.Body;
 
     /// <summary>
     /// The maximum range in tiles at which the analyzer can receive continuous updates, a value of null will be infinite range
@@ -92,10 +104,4 @@ public sealed partial class HealthAnalyzerComponent : Component
     /// </summary>
     [DataField]
     public bool Silent;
-
-    /// <summary>
-    /// Shitmed Change: The current mode of the scanner.
-    /// </summary>
-    [DataField]
-    public HealthAnalyzerMode CurrentMode = HealthAnalyzerMode.Body;
 }

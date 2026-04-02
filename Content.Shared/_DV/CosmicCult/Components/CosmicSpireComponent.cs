@@ -12,7 +12,7 @@ public sealed partial class CosmicSpireComponent : Component
     public bool Enabled;
 
     [DataField]
-    public float DrainRate = 550;
+    public float DrainRate = 250; // 6-ish entropy per minute
 
     [DataField]
     public float DrainThreshHold = 2500;

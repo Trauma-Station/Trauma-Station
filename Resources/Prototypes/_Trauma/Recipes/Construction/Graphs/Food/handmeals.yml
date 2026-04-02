@@ -1,0 +1,46 @@
+- type: constructionGraph
+  id: Friedeggs
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: fried
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 350
+
+  - node: fried
+    entity: FoodEggFried
+    edges:
+    - to: twoeggs
+      steps:
+      - tag: CookedEgg
+        name: construction-graph-tag-CookedEgg
+        icon:
+          sprite: _Trauma/Objects/Consumable/Food/egg.rsi
+          state: cooked
+
+  - node: twoeggs
+    entity: FoodMealFriedegg
+
+# Egg Toast
+
+- type: constructionGraph
+  id: EggToast
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: CookedEgg
+        name: construction-graph-tag-CookedEgg
+        icon:
+          sprite: _Trauma/Objects/Consumable/Food/egg.rsi
+          state: cooked
+
+  - node: finish
+    entity: FoodEggToast

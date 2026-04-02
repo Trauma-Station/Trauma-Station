@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseVehicle
+  parent: BaseGroundVehicle
   id: VehicleSkeletonMotorcycle
   name: skeleton motorcycle
   description: Bad to the Bone.

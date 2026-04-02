@@ -1,7 +1,7 @@
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Reagent;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.EntityEffects.Effects.Body;
@@ -19,7 +19,12 @@ public sealed partial class CleanBloodstreamEntityEffectSystem : EntityEffectSys
     {
         var scale = args.Scale * args.Effect.CleanseRate;
 
-        _bloodstream.FlushChemicals((entity, entity), scale, args.Effect.Excluded);
+        // <Trauma>
+        if (args.Effect.Excluded is { } excluded)
+            _bloodstream.FlushChemicals((entity, entity), scale, excluded);
+        else
+            _bloodstream.FlushChemicals((entity, entity), scale);
+        // </Trauma>
     }
 }
 
@@ -36,7 +41,7 @@ public sealed partial class CleanBloodstream : EntityEffectBase<CleanBloodstream
     ///     An optional chemical to ignore when doing removal.
     /// </summary>
     [DataField]
-    public ProtoId<ReagentPrototype>? Excluded;
+    public ProtoId<ReagentPrototype>[]? Excluded; // Trauma - made into an array
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-clean-bloodstream", ("chance", Probability));

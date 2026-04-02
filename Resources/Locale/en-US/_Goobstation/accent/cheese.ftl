@@ -5,7 +5,7 @@ accent-cheese-words-2 = gotta
 accent-cheese-words-replace-2 = gouda
 
 accent-cheese-words-3 = got to
-accent-cheese-words-replace-3 = gouda 
+accent-cheese-words-replace-3 = gouda
 
 accent-cheese-words-4 = be
 accent-cheese-words-replace-4 = brie
@@ -35,7 +35,7 @@ accent-cheese-words-12 = brief
 accent-cheese-words-replace-12 = BRIE-f
 
 accent-cheese-words-13 = blue
-accent-cheese-words-replace-13 = bleu 
+accent-cheese-words-replace-13 = bleu
 
 accent-cheese-words-14 = hi
 accent-cheese-words-replace-14 = uhm, cheesed to meet you?

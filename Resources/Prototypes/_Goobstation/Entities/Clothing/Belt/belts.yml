@@ -1,24 +1,3 @@
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GMWQ <garethquaile@gmail.com>
-# SPDX-FileCopyrightText: 2025 Gareth Quaile <garethquaile@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Lincoln McQueen <lincoln.mcqueen@gmail.com>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 TurboTracker <130304754+TurboTrackerss14@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 floatingfeeling <karaadastra@gmail.com>
-# SPDX-FileCopyrightText: 2025 freturt <dimadimafamilia939@gmail.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: [ ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseCommandContraband ]
   id: ClothingBeltMilitaryWebbingCMO
@@ -49,16 +28,16 @@
         - Dropper
         - Tourniquet #Goobstation
         - MedicalPatch # Goobstation
-        - AutoinjectorCartridge # Goobstation
         - HandheldCrewMonitor # Goobstation
+        - SyringeCase # Goobstation
       components:
-        - Hypospray
         - Injector
         - Pill
         - HandLabeler
         - SurgeryTool # Shitmed Change
         - Defibrillator # Goobstation
         - GunApplySolution # Goobstation - Syndicate dart gun
+        - SolutionCartridge
   - type: ExplosionResistance
     damageCoefficient: 0.25
 
@@ -104,7 +83,11 @@
     sprite: _Goobstation/Clothing/Belt/judobelt.rsi
   - type: Clothing
     sprite: _Goobstation/Clothing/Belt/judobelt.rsi
-  - type: GrantCorporateJudo
+  - type: KnowledgeGrantOnWear
+    skills:
+      MartialArtCorporateJudo: 50
+    experience:
+      MartialArtCorporateJudo: 2
   - type: Storage
     whitelist:
       tags:
@@ -161,7 +144,7 @@
         - Ointment
       components:
         - Pill
-        - Hypospray
+        - Injector
         - SyringeGun
         - SurgeryTool
         - Defibrillator
@@ -261,25 +244,18 @@
       - SlimeExtract
 
 - type: entity
-  parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseCentcommContraband]
-  id: ClothingBeltMilitaryWebbingBSOFilled
-  name: blueshield chest rig
-  description: A set of tactical webbing worn by Central Command support units.
+  parent: ClothingBeltChemBagXenobiology
+  id: ClothingBeltChemBagXenobiologyHolding
+  name: xenobiology pouch of holding
+  description: A larger slime-resistant pouch intended for use by Xenobiologists. Smells of bluespace extract and monkey hair.
   components:
   - type: Sprite
-    sprite: Clothing/Belt/militarywebbing.rsi
+    sprite: _Goobstation/Clothing/Belt/xenobag_holding.rsi
   - type: Clothing
-    sprite: Clothing/Belt/militarywebbing.rsi
-  - type: ExplosionResistance
-    damageCoefficient: 0.05
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: CombatInjector
-        - id: TirimolChemistryVial
-        - id: OmnizineChemistryVial
-        - id: ProcenylLazideChemistryVial
+    sprite: _Goobstation/Clothing/Belt/xenobag_holding.rsi
+  - type: Storage
+    grid:
+    - 0,0,19,9
 
 - type: entity
   parent: ClothingBeltUtilityFilled
@@ -287,3 +263,47 @@
   suffix: Unremoveable
   components:
   - type: Unremoveable
+
+- type: entity
+  parent: [ ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseSyndicateContraband ]
+  id: ClothingBeltSecurityWebbingContractorFilled
+  name: contractor's chest rig
+  description: "A chest rig with deep pockets, often used by contractors and bounty hunters."
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/securitywebbing.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/securitywebbing.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,6,2
+  - type: ChameleonClothing
+    slot: [belt]
+    default: ClothingBeltSecurityWebbingContractorFilled
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.ChameleonUiKey.Key:
+        type: ChameleonBoundUserInterface
+  - type: ExplosionResistance
+    damageCoefficient: 0.05
+  - type: StorageFill
+    contents:
+    - id: SyndicateJawsOfLife
+      amount: 1
+    - id: PowerDrill
+      amount: 1
+    - id: WelderExperimental
+      amount: 1
+    - id: Multitool
+      amount: 1
+    - id: MedkitCombatFilled
+      amount: 1
+    - id: ContractorBaton
+      amount: 1
+    - id: Zipties
+      amount: 4
+    - id: SyndicateBusinessCard
+      amount: 1

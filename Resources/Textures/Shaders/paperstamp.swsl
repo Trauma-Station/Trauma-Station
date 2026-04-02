@@ -26,4 +26,3 @@ void fragment() {
         COLOR.a *= min(0.9, 0.4 + smoothstep(0.05, 0.3, stampNoise));
     }
 }
-

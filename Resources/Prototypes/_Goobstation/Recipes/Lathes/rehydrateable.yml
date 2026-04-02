@@ -50,14 +50,6 @@
     Plasma: 250
 
 - type: latheRecipe
-  id: HarpyCube
-  result: HarpyCube
-  completetime: 30
-  materials:
-    Biomass: 70
-    Plasma: 250
-
-- type: latheRecipe
   id: ReptilianCube
   result: ReptilianCube
   completetime: 30
@@ -68,14 +60,6 @@
 - type: latheRecipe
   id: SlimePersonCube
   result: SlimePersonCube
-  completetime: 30
-  materials:
-    Biomass: 70
-    Plasma: 250
-
-- type: latheRecipe
-  id: YowieCube
-  result: YowieCube
   completetime: 30
   materials:
     Biomass: 70

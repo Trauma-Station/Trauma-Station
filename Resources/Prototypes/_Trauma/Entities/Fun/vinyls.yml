@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseVinylDisk
+  id: VinylDiskTrauma
+  name: "vinyl disk: TRAUMA"
+  components:
+  - type: Sprite
+    state: green-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/_Trauma/RadioStation/Music/TRAUMA.ogg

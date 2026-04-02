@@ -2,16 +2,67 @@
   id: AdvancedMagboots
 
 - type: Tag
+  id: AnvilBottom
+
+- type: Tag
+  id: AnvilTop
+
+- type: Tag
+  id: BowImprovised
+
+- type: Tag
+  id: BrassScraps
+
+- type: Tag
+  id: Bracing
+
+- type: Tag
+  id: Butt
+
+- type: Tag
   id: CartridgeRPG2
 
 - type: Tag
   id: CartridgeTurret
 
 - type: Tag
+  id: Cement
+
+- type: Tag
+  id: CookedEgg
+
+- type: Tag
+  id: CyberButt
+
+- type: Tag
   id: DataChip
 
 - type: Tag
+  id: Ed209Shell
+
+- type: Tag
+  id: Ed209Hat
+
+- type: Tag
+  id: Ed209LegR
+
+- type: Tag
+  id: Ed209LegL
+
+- type: Tag
+  id: Ed209AiControl
+
+- type: Tag
+  id: Ed209IFF
+
+- type: Tag
+  id: Ed209WeaponsControl
+
+- type: Tag
   id: EncryptionRevolutionary
+
+- type: Tag
+  id: FaithGun
 
 - type: Tag
   id: FlamethrowerBackpack
@@ -23,13 +74,55 @@
   id: FlamethrowerTank
 
 - type: Tag
+  id: ForceHereticMinion
+
+- type: Tag
   id: ForgeMold
+
+- type: Tag
+  id: FusionCore
+
+- type: Tag
+  id: Gunpowder
+
+- type: Tag
+  id: GunpowderBottle
 
 - type: Tag
   id: HandTeleporter
 
 - type: Tag
+  id: HandleSmall
+
+- type: Tag
+  id: HandleMedium
+
+- type: Tag
+  id: HandleLarge
+
+- type: Tag
+  id: Iradomini
+
+- type: Tag
+  id: IngotWorkable
+
+- type: Tag
+  id: IngotWorkableSteel
+
+- type: Tag
   id: MagazineTurret
+
+- type: Tag
+  id: OverrideKeyComponents
+
+- type: Tag
+  id: MimeMask
+
+- type: Tag
+  id: MimicToolbox
+
+- type: Tag
+  id: PlasteelScraps
 
 - type: Tag
   id: QMBoard
@@ -56,7 +149,173 @@
   id: RevTurretBoard
 
 - type: Tag
+  id: RitualAscension
+
+- type: Tag
+  id: RitualBladeBlade
+
+- type: Tag
+  id: RitualFeastOfOwls
+
+- type: Tag
+  id: RitualKnowledge
+
+- type: Tag
+  id: SpellIgnoreForestAdmonitions
+
+- type: Tag
+  id: SteelScraps
+
+- type: Tag
   id: TechfabMachineBoard
 
 - type: Tag
+  id: ThrowingKnife
+
+- type: Tag
+  id: T45Frame
+
+- type: Tag
+  id: T45LegL
+
+- type: Tag
+  id: T45LegR
+
+- type: Tag
+  id: T45ArmR
+
+- type: Tag
+  id: T45ArmL
+
+- type: Tag
+  id: T45Chest
+
+- type: Tag
+  id: T45Helmet
+
+- type: Tag
+  id: TraumaFire
+
+- type: Tag
   id: WelderExperimental
+
+- type: Tag
+  id: Whetstone
+
+# Forge Knife
+
+- type: Tag
+  id: KnifeBladeBrass
+
+- type: Tag
+  id: KnifeBladeSteel
+
+- type: Tag
+  id: KnifeBladePlasteel
+
+- type: Tag
+  id: CombatKnifeBladeBrass
+
+- type: Tag
+  id: CombatKnifeBladeSteel
+
+- type: Tag
+  id: CombatKnifeBladePlasteel
+
+- type: Tag
+  id: CleaverBladeBrass
+
+- type: Tag
+  id: CleaverBladeSteel
+
+- type: Tag
+  id: CleaverBladePlasteel
+
+- type: Tag
+  id: KukriBladeBrass
+
+- type: Tag
+  id: KukriBladeSteel
+
+- type: Tag
+  id: KukriBladePlasteel
+
+# Forge Tool
+
+- type: Tag
+  id: HammerHeadBrass
+
+- type: Tag
+  id: HammerHeadSteel
+
+- type: Tag
+  id: HammerHeadPlasteel
+
+- type: Tag
+  id: ScrewdriverShankBrass
+
+- type: Tag
+  id: ScrewdriverShankSteel
+
+- type: Tag
+  id: ScrewdriverShankPlasteel
+
+# Arrows
+
+- type: Tag
+  id: ArrowHeadBrass
+
+- type: Tag
+  id: ArrowHeadSteel
+
+- type: Tag
+  id: ArrowHeadPlasteel
+
+# Swords
+
+- type: Tag
+  id: SwordBladeBrass
+
+- type: Tag
+  id: SwordBladeSteel
+
+- type: Tag
+  id: SwordBladePlasteel
+
+- type: Tag
+  id: LongswordBladeBrass
+
+- type: Tag
+  id: LongswordBladeSteel
+
+- type: Tag
+  id: LongswordBladePlasteel
+
+- type: Tag
+  id: KatanaBladeBrass
+
+- type: Tag
+  id: KatanaBladeSteel
+
+- type: Tag
+  id: KatanaBladePlasteel
+
+# Blugeons
+
+- type: Tag
+  id: WarhammerHeadBrass
+
+- type: Tag
+  id: WarhammerHeadSteel
+
+- type: Tag
+  id: WarhammerHeadPlasteel
+
+- type: Tag
+  id: MorningstarHeadBrass
+
+- type: Tag
+  id: MorningstarHeadSteel
+
+- type: Tag
+  id: MorningstarHeadPlasteel

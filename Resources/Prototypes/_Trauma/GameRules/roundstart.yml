@@ -1,3 +1,17 @@
+# i love this dogshit system nobody has improved for 2 years :)
+- type: entity
+  parent: BaseGameRule
+  id: SubGamemodesRuleNoHeretic
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: Thief
+      prob: 0.5
+    - id: Devil
+      prob: 0.02
+    - id: Shadowling
+      prob: 0.02
+
 - type: entity
   parent: BaseGameRule
   id: Insurgency
@@ -12,17 +26,20 @@
     - InsurgentEscapeObjective
     #- InsurgentAllSurviveObjective # TODO
   - type: AntagLoadProfileRule
+    speciesOverride: Human
+    speciesOverrideBlacklist:
+    - Plasmaman # instantly dies
+  - type: InsurgencyRule
   - type: AntagSelection
     selectionTime: PrePlayerSpawn # need to move them to their shittle
     agentName: insurgent-round-end-agent-name
     definitions:
     - prefRoles: [ Insurgent ]
-      spawnerPrototype: SpawnPointInsurgent
+      spawnerPrototype: GhostRoleSpawnerInsurgent
       startingGear: Insurgent
       unequipOldGear: true
-      max: 8
+      max: 4
       playerRatio: 10
-      chaosScore: 50
       roleLoadout:
       - RoleSurvivalStandard
       components:
@@ -35,10 +52,6 @@
   parent: DuoAbductorSpawn
   id: DuoAbductorRoundstart
   components:
-  - type: StationEvent
-    chaos: # 20 chaos because abductors aren't mean to actively harm crew just experiment
-      Hostile: 20
-    earliestStart: 0 # its roundstart chud
   # I LOVE GOIDA COPY PASTING THE ENTIRE THING
   # this just has ghost roles removed, pref roles added and players are picked roundstart
   - type: AntagSelection
@@ -118,3 +131,61 @@
       - type: AbductorScientist # Should be removed when we have proper teleportation system
       mindRoles:
       - MindRoleAbductorAgent
+
+- type: entity
+  parent: BaseGameRule
+  id: SubTraitorRandom
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: SubTraitor
+      prob: 0.5
+
+- type: entity
+  parent: BaseGameRule
+  id: HereticGamemode
+  components:
+  - type: HereticRule
+  - type: GameRule
+    minPlayers: 15
+  - type: AntagObjectives
+    objectives:
+    - HereticKnowledgeObjective
+    - HereticSacrificeObjective
+    - HereticSacrificeHeadObjective
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
+    agentName: heretic-roundend-name
+    definitions:
+    - prefRoles: [ Heretic ]
+      max: 6
+      playerRatio: 10
+      lateJoinAdditional: true
+      jobBlacklist: [ Chaplain ]
+      blacklist:
+        components:
+        - CommandStaff
+      mindRoles:
+      - MindRoleHeretic
+
+- type: entity
+  parent: BaseGameRule
+  id: ShadowlingGamemode
+  components:
+  - type: ShadowlingRule
+  - type: GameRule
+    minPlayers: 30
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ Shadowling ]
+      max: 3
+      playerRatio: 25
+      jobBlacklist: [ Chaplain ]
+      blacklist:
+        components:
+        - CommandStaff
+      mindRoles:
+      - MindRoleShadowling
+  - type: AntagObjectives
+    objectives:
+    - ShadowlingAscendObjective

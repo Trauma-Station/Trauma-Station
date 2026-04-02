@@ -12,7 +12,7 @@
     layers:
     - state: star_gazer
       offset: 0, 1
-  - type: ActionsProvider
+  - type: ActionGrant
     actions:
     - ActionHereticCosmicExpansion
     - ActionHereticStarBlast
@@ -90,12 +90,11 @@
   - type: ContentEye
     maxZoom: 1.5, 1.5
     targetZoom: 1.5, 1.5
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks: []
     understands: []
   - type: UniversalLanguageSpeaker
   - type: TowerOfBabel
-  - type: LanguageSpeaker
   - type: CosmicTrail
     strength: 10
   - type: PointLight
@@ -117,6 +116,9 @@
   - type: EventHorizonIgnore
   - type: SpacetimeSpellbladeEnchantment # It's not a spellblade, trust
     effect: EffectCosmicSlash
+  - type: HealingAura
+    componentHealMultipliers:
+      CosmosPassive: 2
   - type: Tag
     tags:
     - CannotSuicide

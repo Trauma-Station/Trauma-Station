@@ -9,6 +9,13 @@
 # Table: null
 
 # <Trauma> - too lazy to port debugoks multi migration thing
+# 2026-3-2026
+ClosetMaintenanceFilledRandom: RandomMaintsCloset
+
+# 2026-01-07
+GunSafeDisabler: GunSafePhaser
+WeaponDisabler: WeaponLaserSidearm
+
 # 2025-10-30
 DVSmartFridgeMedical: SmartFridgeMedical
 
@@ -38,11 +45,87 @@ BoxMagazineMagnumSubMachineGun: BoxMagazineRifle
 # 2025-01-01 Trauma Remove scurret poster
 PosterLegitHelio: null
 
-# 2024-01-05 Actually use the ToiletCisternLoot table. 
+# 2026-01-05 Actually use the ToiletCisternLoot table.
 ToiletEmpty: ToiletFilled
+
+# 2026-01-08 back to wizden mail
+MailTeleporter: CargoMailTeleporter
+MailMetricsCartridge: null
+ComputerShuttleSalvage: ComputerShuttleMiningLavaland # 2 maps had this for some reason...
+
+# 2026-01-19 Goob reference purge
+PlushieBingleYakub: null
+PosterContrabandGoobYakub: null
+PosterLegitGoobDurkPlush: null
+PosterLegitGoobLouieVote: null
+PlushieSamantha: null
+PlushieBoggle: null
+PlushieDurk: null
+PlushieBrizby: null
+PlushieBaldzby: null
+PlushieLouie: null
+PlushieJvne: null
+PlushieFern: null
+PlushieNigel: null
+PlushieLehmin: null
+
+# 2026-01-21 remove ftl drives
+MachineFTLDrive: null
+MachineFTLDriveHigh: null
+MachineFTLDriveAutomated: null
+MachineFTLDriveDebug: null
+MachineFTLDriveCircuitboard: null
+MachineFTLDriveHighCircuitboard: null
+
+# 2026-01-29 migrate away water vapor tanks because some chud mapped it
+DoubleEmergencyWaterVaporTankFilled: DoubleEmergencyOxygenTankFilled
+LockerShaftMinerFilledHardsuit: LockerSalvageSpecialistFilledHardsuit
+
+# 2026-02-12 renamed a bunch of organs
+BasicCyberneticEyes: OrganCyberneticEyes
+DiagnosticCyberneticEyes: OrganCyberneticEyesDiagnostic
+MedicalCyberneticEyes: OrganCyberneticEyesMedical
+SecurityCyberneticEyes: OrganCyberneticEyesSecurity
+BioSynthHeart: OrganBioSynthHeart
+ChestSkeleton: OrganSkeletonPersonTorso
+ChestHuman: OrganHumanTorso
+
+# 2026-02-18 removed vulp plushie
+PlushieVulp: null
+
+# 2026-03-02 removed playing cards
+CardDeckBlack: null
+CardDeckSyndicate: null
+CardDeckNanotrasen: null
+CardBoxBlack: null
+CardBoxSyndicate: null
+CardBoxNanotrasen: null
+
+# 2026-03-04
+RotaryPhoneStand: RotaryPhoneStandNoRot
+
+# 2026-03-10 this gives martial arts, no longer harmless maint loot
+MaterialHideBear: MaterialHideCorgi
+
+# 2026-03-12 this being roundstart is slop
+MedicalBiofabricator: null
+MedicalBiofabMachineBoard: null
+
+# 2026-03-13 necrosol was removed
+NecrosolChemistryBottle: ArcryoxChemistryBottle
+
+# 2026-03-28 blockers being mapped is anti fun
+DisposalBlocker: DisposalPipe
+
+# 2026-03-29 no chud boris
+AiRemoteBrain: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
+
+# 2026-01-10 Goobstation Change Mapped Chem to Energy Chem by default
+ChemDispenser: EnergyChemDispenser
+
 AirlockBoxerGlassLocked: AirlockServiceGlassLocked
 AirlockClownGlassLocked: AirlockServiceGlassLocked
 AirlockClownLocked: AirlockServiceGlassLocked
@@ -121,7 +204,6 @@ GunSafeAdjutantShotgun: null
 GunSafeEnergyGunMini: null
 GunSafeVulcanRifle: null
 HatSpawner: null
-KitchenDeepFryer: null
 KvassTankFull: null
 LockerForensicMantisFilled: null
 LunchboxSecurityFilledRandom: null
@@ -793,9 +875,6 @@ MagazineBoxCaselessRifle10x24: null
 MagazineBoxCaselessRifleBig: null
 MagazinePistolHighCapacityRubber: null
 
-# 2025-03-09 - Shitmed Woundmed, separating torsos into chest and groin
-TorsoHuman: ChestHuman
-TorsoSkeleton: ChestSkeleton
 # 2025-03-18
 EpinephrineChemistryBottle: ChemistryBottleEpinephrine
 RobustHarvestChemistryBottle: ChemistryBottleRobustHarvest
@@ -816,8 +895,6 @@ MuteToxinChemistryBottle: ChemistryBottleMuteToxin
 LeadChemistryBottle: ChemistryBottleLead
 ToxinChemistryBottle: ChemistryBottleToxin
 
-# Goob - making wizden maps compatible to support mapping efforts. 2025-04-13.
-CargoMailTeleporter: MailTeleporter
 ClothingMaskBlushingMime: ClothingMaskSexyMime
 ClothingMaskBlushingClown: ClothingMaskSexyMime
 MachineMaterialSilo: null
@@ -825,6 +902,20 @@ CrateMaterialSilo: null
 
 # 2025-03-29
 ClothingBackpackDuffelSyndicateRaidBundle: ClothingBackpackSyndicateRaidBundle
+
+# 2025-04-14
+MailRobustToolsSpam: MailSpamLetter
+MailNanotrasenSpam: MailSpamLetter
+MailSyndicateSpam: MailSpamLetter
+MailAlternativeDimensionSpam: MailSpamLetter
+MailNarsieCultSpam: MailSpamLetter
+MailRageCageSpam: MailSpamLetter
+MailVoyageAdvertisementSpam: MailSpamLetter
+MailScienceSpiderClanSpam: MailSpamLetter
+MailAllAccessSpam: MailSpamLetter
+MailCentcommRetributionSpam: MailSpamLetter
+MailEvilLizardSpam: MailSpamLetter
+MailParentsNeedMoneySpam: MailSpamLetter
 
 # 2025-04-15
 SimpleXenoArtifact: ComplexXenoArtifact
@@ -968,6 +1059,9 @@ ClothingUniformJumpsuitParamedicNT: ClothingUniformJumpsuitParamedic
 # 2025-08-29
 PrefilledSyringe: Syringe
 
+# 2025-09-12
+BaseChemistryEmptyVial: ChemistryEmptyVial
+
 # 2025-10-6
 BibleTanakh: null
 BibleSatanic: null
@@ -984,9 +1078,15 @@ ToySkeleton: ToyFigurineSkeleton
 # Trauma - 2025-10-19
 LockerBlueshieldOfficerFilled: null
 DresserBlueshieldOfficerFilled: null
+HolopadCommandBSO: null
 UniqueLockerBlueshieldOfficerFilled: null
 AirlockBlueshieldOfficerCommandLocked: AirlockCentralCommandLocked
 AirlockBlueshieldOfficerCommandGlassLocked: AirlockCentralCommandGlassLocked
+SpawnMobHumanBSOBase: null
+SpawnMobHumanBSOModSuit: null
+SpawnMobHumanBSOSuit: null
+SpawnPointBlueshieldOfficer: null
+BSOManual: DragonKungFuManual
 
 # 2025-10-28
 DrinkKiraSpecial: DrinkOrangeLimeSodaGlass
@@ -1012,3 +1112,69 @@ SpawnPointBoxer: null
 FigureSpawner: MechFigurineSpawner50
 ToySpawner: PlushieSpawner50
 SpacemenFigureSpawner: SpacemenFigurineSpawner90
+
+# 2026-01-07
+HandheldHealthAnalyzerUnpowered: HandheldHealthAnalyzer
+HandheldHealthAnalyzerEmpty: HandheldHealthAnalyzer
+
+#2026-01-09
+BorgModuleAdvancedChemical: BorgModuleAdvancedTopical
+
+# 2026-01-14
+HeadHuman: OrganHumanHead
+HeadSkeleton: OrganSkeletonPersonHead
+LeftArmHuman: OrganHumanArmLeft
+LeftArmSkeleton: OrganSkeletonPersonArmLeft
+LeftHandSkeleton: OrganSkeletonPersonHandLeft
+LeftLegHuman: OrganHumanLegLeft
+LeftLegSkeleton: OrganSkeletonPersonLegLeft
+RightArmHuman: OrganHumanArmRight
+RightHandSkeleton: OrganSkeletonPersonHandRight
+RightLegHuman: OrganHumanLegRight
+TorsoSkeleton: OrganSkeletonPersonTorso
+RightArmSkeleton: OrganSkeletonPersonArmRight
+
+# 2026-01-19
+#TowelColorOrange: null # Trauma - kept towels
+#TowelColorPurple: null
+#TowelColorRed: null
+#TowelColorBlue: null
+#TowelColorDarkBlue: null
+#TowelColorLightBlue: null
+#TowelColorTeal: null
+#TowelColorBrown: null
+#TowelColorLightBrown: null
+#TowelColorGray: null
+#TowelColorGreen: null
+#TowelColorDarkGreen: null
+#TowelColorGold: null
+#TowelColorOrange: null
+#TowelColorBlack: null
+#TowelColorPink: null
+#TowelColorYellow: null
+#TowelColorMaroon: null
+#TowelColorSilver: null
+#TowelColorMime: null
+
+# 2026-02-18
+# Replace cargo order crates which contain exactly one item with the item, parcel wrapped.
+CrateVendingMachineRestockBoozeFilled: VendingMachineRestockBooze
+CrateVendingMachineRestockChefvendFilled: VendingMachineRestockChefvend
+CrateVendingMachineRestockClothesFilled: VendingMachineRestockClothes
+CrateVendingMachineRestockAutoDrobeFilled: VendingMachineRestockCostumes
+CrateVendingMachineRestockCondimentStationFilled: VendingMachineRestockCondimentStation
+CrateVendingMachineRestockDinnerwareFilled: VendingMachineRestockDinnerware
+CrateVendingMachineRestockGamesFilled: VendingMachineRestockGames
+CrateVendingMachineRestockPTechFilled: VendingMachineRestockPTech
+#CrateVendingMachineRestockSalvageEquipmentFilled: VendingMachineRestockSalvageEquipment # Trauma - doesnt exist anymore
+CrateVendingMachineRestockVendomatFilled: VendingMachineRestockVendomat
+CrateVendingMachineRestockTankDispenserFilled: VendingMachineRestockTankDispenser
+# The crates below contained _two_ of the restock items, so these are technically not direct migrations. But eh.
+CrateVendingMachineRestockHotDrinksFilled: VendingMachineRestockHotDrinks
+CrateVendingMachineRestockRobustSoftdrinksFilled: VendingMachineRestockRobustSoftdrinks
+CrateVendingMachineRestockSmokesFilled: VendingMachineRestockSmokes
+CrateVendingMachineRestockHappyHonkFilled: VendingMachineRestockHappyHonk
+CrateVendingMachineRestockGetmoreChocolateCorpFilled: VendingMachineRestockGetmoreChocolateCorp
+CrateVendingMachineRestockChangFilled: VendingMachineRestockChang
+CrateVendingMachineRestockDiscountDansFilled: VendingMachineRestockDiscountDans
+CrateVendingMachineRestockDonutFilled: VendingMachineRestockDonut

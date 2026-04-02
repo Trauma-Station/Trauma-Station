@@ -1,0 +1,4 @@
+- type: skinColoration
+  id: NoColor
+  strategy: !type:ClampedHsvColoration
+    value: [1, 1]

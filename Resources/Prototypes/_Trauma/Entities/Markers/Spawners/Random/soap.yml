@@ -1,0 +1,10 @@
+- type: entityTable # max size 1x2
+  id: AllSoapsCheap
+  table: !type:GroupSelector
+    children:
+    - id: SoapNT
+      weight: 2
+    - id: Soap
+    - id: SoapHomemade
+    - id: SoapDeluxe
+    # no rare soaps

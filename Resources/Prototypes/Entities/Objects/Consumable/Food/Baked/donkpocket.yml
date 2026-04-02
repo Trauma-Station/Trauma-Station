@@ -84,7 +84,7 @@
 # Base
 
 - type: entity
-  parent: FoodInjectableBase
+  parent: FoodUnperishableBase # Trauma - Donkpockets are unperishable.
   id: FoodDonkpocketBase
   abstract: true
   components:

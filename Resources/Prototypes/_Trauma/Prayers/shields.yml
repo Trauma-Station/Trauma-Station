@@ -1,0 +1,39 @@
+## PARITY
+
+- type: scrollPrayer
+  id: EagleShield
+  verb: GIVE
+  subjects: [ "EAGLE SHIELD" ]
+  items: !type:GroupSelector
+    children:
+    - id: RiotBulletShield
+    - id: BlueShieldShield
+      weight: 0.6 # it's just a shield so it can be fairly common
+    - id: MakeshiftShield
+      weight: 0.1 # trolled
+
+- type: scrollPrayer
+  id: SpiderShield
+  verb: GIVE
+  subjects: [ "SPIDER SHIELD" ]
+  items:
+    id: WebShield
+
+- type: scrollPrayer
+  id: WoodenBuckler
+  verb: GIVE
+  subjects: [ "WOODEN BUCKLER" ]
+  items:
+    id: WoodenBuckler
+
+## NON PARITY
+
+- type: scrollPrayer
+  id: EnergyShield
+  verb: GIVE
+  subjects: [ "ENERGY SHIELD" ]
+  items: !type:GroupSelector
+    children:
+    - id: EnergyShield
+    - id: BrokenEnergyShield
+      weight: 0.2 # trolled

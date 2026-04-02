@@ -14,8 +14,7 @@
 - type: latheRecipePack
   id: IPCPartsStatic
   recipes:
-  - ChestIPC
-  - GroinIPC
+  - TorsoIPC
   - LeftArmIPC
   - RightArmIPC
   - LeftLegIPC
@@ -73,14 +72,11 @@
   - LeftFootCybernetic
   - RightFootCybernetic
   - BasicCyberneticEyes
-  - BasicCyberneticHeart
   - BasicCyberneticLungs
-  - BasicCyberneticLiver
 
 - type: latheRecipePack
   id: AdvancedCybernetics
   recipes:
-  - UpgradedCyberneticHeart
   - UpgradedCyberneticLungs
   - JawsOfLifeLeftArm
   - JawsOfLifeRightArm

@@ -1,0 +1,4 @@
+- type: entity
+  parent: [ OrganBaseTongue, OrganSpriteHumanInternal, OrganDionaInternal ]
+  id: OrganDionaTongue
+  # TODO: unique sprite lol

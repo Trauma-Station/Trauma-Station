@@ -1,0 +1,8 @@
+- type: emoteSounds
+  id: ShadowDemon
+  parent: BaseMobEmotes
+  sounds:
+    Laugh:
+      collection: ShadowDemonLaugh
+    Scream:
+      collection: ShadowDemonScream

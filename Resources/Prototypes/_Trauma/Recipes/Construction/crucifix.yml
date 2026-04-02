@@ -1,7 +1,6 @@
 - type: construction
   id: Crucifix
   graph: Crucifix
-  startNode: start
   targetNode: crucified
   placementMode: SnapgridCenter
   category: construction-category-structures
@@ -9,3 +8,8 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  theory:
+    WeaponsKnowledge: 0
+    FurnitureKnowledge: 0
+  practical:
+    CarvingKnowledge: 2

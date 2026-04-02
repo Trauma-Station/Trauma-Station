@@ -646,22 +646,6 @@
     sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/centcom_officer.rsi
 
 - type: entity
-  parent: ClothingUniformEnvirosuitBase
-  id: ClothingUniformEnvirosuitBlueshield
-  name: blueshield's envirosuit
-  description: An envirosuit designed for Plasmamen employed as the Blueshield.
-  components:
-  - type: Sprite
-    sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/blueshield_officer.rsi
-  - type: Clothing
-    sprite: _EinsteinEngines/Clothing/Uniforms/Envirosuits/blueshield_officer.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.95
-        Heat: 0.95
-
-- type: entity
   parent: ClothingUniformEnvirosuitCustomBase
   id: ClothingUniformEnvirosuitCourier
   name: courier's envirosuit
@@ -1060,8 +1044,8 @@
 - type: entity
   parent: ClothingUniformEnvirosuitCustomBase
   id: ClothingUniformEnvirosuitQM
-  name: logistics officer's envirosuit
-  description: An air-tight suit designed to be used by Plasmamen insane enough to achieve the rank of "Logistics Officer".
+  name: quartermaster's envirosuit
+  description: An air-tight suit designed to be used by Plasmamen insane enough to achieve the rank of "Quartermaster".
   components:
   - type: Sprite
     layers:

@@ -1,49 +1,3 @@
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 SweptWasTaken <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 ZeroDayDaemon <60460608+ZeroDayDaemon@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-# SPDX-FileCopyrightText: 2022 Fishfish458 <47410468+Fishfish458@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 KIBORG04 <bossmira4@gmail.com>
-# SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Morb <14136326+Morb0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Sam Weaver <weaversam8@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Veritius <45957058+Veritius@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 fishfish458 <fishfish458>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2023 Floofi <126319569+Shadowtheprotogen546@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Jeff <velcroboy333@hotmail.com>
-# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Moony <moony@hellomouse.net>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 T-Stalker <43253663+DogZeroX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Velcroboy <107660393+IamVelcroboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Veritius <veritiusgaming@gmail.com>
-# SPDX-FileCopyrightText: 2023 lapatison <100279397+lapatison@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ashley Woodiss-Field <ash@DESKTOP-H64M4AI.localdomain>
-# SPDX-FileCopyrightText: 2024 ColesMagnum <98577947+AW-FulCode@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Firewatch <54725557+musicmanvr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Hanz <41141796+Hanzdegloker@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 RumiTiger <154005209+RumiTiger@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Sybil <azurerosegarden@gmail.com>
-# SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-# SPDX-FileCopyrightText: 2024 c4llv07e <kseandi@gmail.com>
-# SPDX-FileCopyrightText: 2024 cool dolphin <36332236+Afrokada@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ike709 <ike709@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: reagent
   id: Coffee
   name: reagent-name-coffee
@@ -54,8 +8,10 @@
   color: "#664300"
   recognizable: true
   metabolisms:
-    Drink:
+    Digestion:
       metabolismRate: 0.05 # Goobstation: Very slow metabolism
+      metabolites:
+        Theobromine: 0.1
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -63,22 +19,26 @@
         effectProto: StatusEffectDrowsiness
         time: 2
         type: Remove
-      - !type:AdjustReagent
-        reagent: Theobromine
-        amount: 0.05
-      - !type:Jitter # Goobstation: Coffee causes jitteriness and alters speed
+      # <Goob>
+      - !type:Jitter # Coffee causes jitteriness and alters speed
         conditions:
         - !type:ReagentCondition
           reagent: Coffee
           min: 25
-      - !type:MovespeedModifier
-        walkSpeedModifier: 1.1
-        sprintSpeedModifier: 1.1
+      - !type:ModifyStatusEffect
+        effectProto: CaffeineRushStatusEffect
         conditions:
         - !type:ReagentCondition
           reagent: Coffee
           min: 25
           max: 99
+      - !type:ModifyStatusEffect # Drinking too much causes chest pain and slows you down
+        effectProto: CaffeineSlowdownStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Coffee
+          min: 100
+      # </Goob>
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
@@ -86,13 +46,6 @@
         - !type:ReagentCondition
           reagent: Coffee
           min: 75
-      - !type:MovespeedModifier # Goobstation: Drinking too much causes chest pain and slows you down
-        walkSpeedModifier: 0.70
-        sprintSpeedModifier: 0.70
-        conditions:
-        - !type:ReagentCondition
-          reagent: Coffee
-          min: 100
       - !type:PopupMessage
         visualType: Medium
         messages: ["ephedrine-effect-tight-pain", "ephedrine-effect-heart-pounds"]
@@ -119,13 +72,9 @@
   color: "#664300"
   recognizable: true
   metabolisms:
-    Drink:
-      effects:
-      - !type:SatiateThirst
-        factor: 2
-      - !type:AdjustReagent
-        reagent: Theobromine
-        amount: 0.05
+    Digestion:
+      metabolites:
+        Theobromine: 0.1
 
 - type: reagent
   id: Cream
@@ -136,7 +85,7 @@
   flavor: creamy
   color: "#DFD7AF"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 1
@@ -150,7 +99,7 @@
   flavor: nutty
   color: "#f4eadb"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 4 # Coconut water is 94% water
@@ -164,7 +113,7 @@
   flavor: creamy
   color: "#FFEABF"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -184,7 +133,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -240,13 +189,12 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Theobromine: 0.1
       effects:
       - !type:SatiateThirst
         factor: 2
-      - !type:AdjustReagent
-        reagent: Theobromine
-        amount: 0.05
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 2
@@ -282,13 +230,10 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
-      effects:
-      - !type:SatiateThirst
-        factor: 2
-      - !type:AdjustReagent
-        reagent: Theobromine
-        amount: 0.05
+    Digestion:
+      metabolites:
+        Theobromine: 0.1
+
 
 - type: reagent
   id: JuiceBerryPoison
@@ -300,16 +245,10 @@
   flavor: bitter
   color: "#6600CC"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
-    Poison:
-      effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 1
@@ -330,7 +269,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -350,22 +289,18 @@
     - !type:PlantAdjustWater
       amount: 0.9
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 4
-      - !type:HealthChange
+      - !type:EvenHealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goob - milk heals plasmamen because skeleton
           type: [ Plasmaman ]
           inverted: true
         damage:
-          groups:
-            Brute: -0.90
-          types:
-            Heat: -0.30
-            Shock: -0.30
-            Caustic: -0.30
+          Brute: -0.9
+          Burn: -0.9
 
 - type: reagent
   id: MilkGoat
@@ -383,7 +318,7 @@
   color: "#DEDACD"
   recognizable: true
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 4
@@ -406,7 +341,7 @@
   flavor: terrible
   color: "#faffba"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: -2
@@ -418,7 +353,7 @@
   #group: Drinks - Goob: Drinks guidebook split
   physicalDesc: reagent-physical-desc-nothing
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -440,7 +375,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 6
@@ -448,13 +383,7 @@
         effectProto: StatusEffectDrowsiness
         time: 3
         type: Remove
-    Poison:
-      effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
         damage:
           types:
             Poison: 1
@@ -485,7 +414,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
@@ -504,13 +433,9 @@
   color: "#8a5a3a"
   recognizable: true
   metabolisms:
-    Drink:
-      effects:
-      - !type:SatiateThirst
-        factor: 2
-      - !type:AdjustReagent
-        reagent: Theobromine
-        amount: 0.05
+    Digestion:
+      metabolites:
+        Theobromine: 0.1
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/teaglass.rsi
     state: icon_empty
@@ -549,11 +474,11 @@
   meltingPoint: 0.0
   friction: 0.4
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 4
-    Gas:
+    Respiration:
       effects:
       - !type:HealthChange
         ignoreResistances: true
@@ -579,7 +504,7 @@
   boilingPoint: 100.0
   friction: 0.05 # Copied from Ice Crust
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 3 # Slightly worse for quenching thirst than just straight water
@@ -602,7 +527,7 @@
   flavor: cheapnoodles
   color: "#664300"
   metabolisms:
-    Food:
+    Digestion:
       effects:
       - !type:SatiateHunger
         factor: 1
@@ -616,7 +541,7 @@
   flavor: cheapnoodles
   color: "#664300"
   metabolisms:
-    Food:
+    Digestion:
       effects:
       - !type:SatiateHunger
         factor: 4
@@ -636,13 +561,12 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Theobromine: 0.1
       effects:
       - !type:SatiateThirst
         factor: 4
-      - !type:AdjustReagent
-        reagent: Theobromine
-        amount: 0.05
 
 - type: reagent
   id: Pilk
@@ -653,7 +577,7 @@
   flavor: pilk
   color: "#e7c69f"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
         - !type:SatiateThirst
           factor: 1
@@ -709,7 +633,7 @@
   flavor: mopwata
   color: "#59502b"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 0.6

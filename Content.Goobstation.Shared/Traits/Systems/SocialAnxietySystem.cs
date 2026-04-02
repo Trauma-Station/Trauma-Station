@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Traits.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.IdentityManagement;

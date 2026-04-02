@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
@@ -27,10 +21,12 @@ public sealed class BaseSwitchableOverlay<TComp> : Overlay where TComp : Switcha
 
     public bool IsActive = true;
 
+    public readonly ProtoId<ShaderPrototype> NightVision = "NightVision";
+
     public BaseSwitchableOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _prototype.Index<ShaderPrototype>("NightVision").InstanceUnique();
+        _shader = _prototype.Index(NightVision).InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)

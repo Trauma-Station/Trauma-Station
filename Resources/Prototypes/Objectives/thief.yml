@@ -111,7 +111,6 @@
     difficulty: 0.8
 
 - type: entity
-  abstract: true # Trauma - upstream mail isn't cherry picked
   parent: BaseThiefStealCollectionObjective
   id: MailStealCollectionObjective
   components:
@@ -168,19 +167,17 @@
   - type: Objective
     difficulty: 0.1 # just for fun, collecting LAMP on Moth
 
-- type: entity  # Goobstation
+- type: entity
   parent: BaseThiefStealCollectionObjective
-  id: BatteryStealCollectionObjective
+  id: ClothingEyesHudsStealCollectionObjective
   components:
-  - type: SpeciesRequirement
-    allowedSpecies:
-    - IPC
   - type: StealCondition
-    stealGroup: Battery
-    minCollectionSize: 5
-    maxCollectionSize: 30
+    stealGroup: ClothingEyesHuds
+    minCollectionSize: 7
+    maxCollectionSize: 12
+    verifyMapExistence: false
   - type: Objective
-    difficulty: 0.5 # just for fun, collectings Battery for ipc
+    difficulty: 0.3
 
 # steal item
 
@@ -314,17 +311,6 @@
     difficulty: 0.7
 
 - type: entity                                      #Service subgroup
-  parent: BaseThiefStealObjective
-  id: ClothingEyesHudBeerStealObjective
-  components:
-  - type: NotJobRequirement
-    jobs: [ Bartender, ServiceWorker ]
-  - type: StealCondition
-    stealGroup: ClothingEyesHudBeer
-  - type: Objective
-    difficulty: 0.3
-
-- type: entity
   parent: BaseThiefStealObjective
   id: BibleStealObjective
   components:

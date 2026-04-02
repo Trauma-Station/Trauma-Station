@@ -1,0 +1,21 @@
+- type: reagent
+  id: TiringSolution
+  group: Toxins
+  name: reagent-name-tiring-solution
+  desc: reagent-desc-tiring-solution
+  physicalDesc: reagent-physical-desc-cloudy
+  flavor: tiredness
+  color: "#000000"
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.75
+      effects:
+      # not parity but idc im not making an effect to scale it based on health
+      - !type:TakeStaminaDamage
+        amount: 10
+      - !type:PopupMessage
+        type: Local
+        visualType: Small
+        probability: 0.16
+        messages:
+        - entity-effect-popup-tiredness

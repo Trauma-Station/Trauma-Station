@@ -1,24 +1,26 @@
-using Content.Goobstation.Maths.FixedPoint;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.NTR;
+
 /// <summary>
 /// This is a prototype for a cargo bounty, a set of items
 /// that must be sold together in a labeled container in order
 /// to receive a monetary reward.
 /// </summary>
-[Prototype, Serializable, NetSerializable]
-public sealed class NtrTaskPrototype : IPrototype
+[Prototype]
+public sealed partial class NtrTaskPrototype : IPrototype
 {
-    [DataField]
-    public string Proto { get; init; } = default!;
-
     /// <inheritdoc/>
     [IdDataField]
     public string ID { get; private set; } = default!;
+
+    [DataField(required: true)]
+    public EntProtoId Proto;
 
     /// <summary>
     /// The monetary reward for completing the bounty
@@ -30,7 +32,7 @@ public sealed class NtrTaskPrototype : IPrototype
     /// A description for flava purposes.
     /// </summary>
     [DataField]
-    public LocId Description = string.Empty;
+    public LocId Description;
 
     /// <summary>
     /// The entries that must be satisfied for the ntr bounty to be complete.
@@ -54,52 +56,54 @@ public sealed class NtrTaskPrototype : IPrototype
     public float Cooldown; //in seconds
 
     [DataField]
-    public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> Reagents { get; init; } = new();
+    public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> Reagents = new();
 
     [DataField]
-    public string SolutionName { get; private set; } = "drink"; // i want to end it all already
+    public string SolutionName = "drink"; // i want to end it all already
 
     [DataField("reagentTask")] // shitcod
-    public bool IsReagentTask { get; init; }
+    public bool IsReagentTask;
 
     [DataField]
-    public int Penalty { get; } = 1;
+    public int Penalty = 1;
 }
 
-[DataDefinition, Serializable, NetSerializable]
-public readonly partial record struct NtrTaskItemEntry()
+[DataDefinition]
+public partial record struct NtrTaskItemEntry()
 {
     [DataField]
-    public List<string> Stamps { get; init; } = new();
+    public List<string> Stamps = new();
 
     /// <summary>
     /// A whitelist for determining what items satisfy the entry.
     /// </summary>
-    [DataField]
-    public EntityWhitelist Whitelist { get; init; } = default!;
+    [DataField(required: true)]
+    public EntityWhitelist Whitelist = default!;
 
     /// <summary>
     /// How much of the item must be present to satisfy the entry
     /// </summary>
     [DataField]
-    public int Amount { get; init; } = 1;
+    public int Amount = 1;
 
     [DataField]
-    public bool InstantCompletion { get; init; } = false;
+    public bool InstantCompletion;
 
     /// <summary>
     /// A player-facing name for the item.
     /// </summary>
     [DataField]
-    public LocId Name { get; init; } = string.Empty;
+    public LocId Name;
 }
 
-// [DataDefinition, Serializable, NetSerializable]
-// public sealed partial class NtrTaskReagentEntry
-// {
-//     [DataField("reagent")]
-//     public string Reagent = string.Empty;
+/*
+[DataDefinition]
+public sealed partial class NtrTaskReagentEntry
+{
+    [DataField]
+    public string Reagent = string.Empty;
 
-//     [DataField("amount")]
-//     public int Amount;
-// }
+    [DataField]
+    public int Amount;
+}
+*/

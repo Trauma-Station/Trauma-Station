@@ -1,0 +1,19 @@
+- type: entity
+  parent: MarkerBase
+  id: RandomMaintsCloset
+  name: maintenance closet
+  suffix: Random Filled/Mimic
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Storage/closet.rsi
+        state: generic
+      - sprite: Structures/Storage/closet.rsi
+        state: generic_door
+  - type: RandomSpawner
+    prototypes:
+    - ClosetMaintenanceFilledRandom
+    rarePrototypes:
+    - LockerMimic
+    rareChance: 0.005

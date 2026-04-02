@@ -1,0 +1,6 @@
+- type: mutationRecipe
+  id: ChemSpike
+  result: MutationChemSpike
+  required:
+  - MutationTongueSpike
+  - MutationStimmed

@@ -15,7 +15,7 @@ namespace Content.Shared._Starlight.CollectiveMind
     [RegisterComponent, NetworkedComponent]
     public sealed partial class CollectiveMindComponent : Component
     {
-        [DataField("minds")]
+        [DataField]
         public Dictionary<string, int> Minds = new();
 
         [DataField]

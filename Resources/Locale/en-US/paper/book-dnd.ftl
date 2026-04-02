@@ -158,4 +158,3 @@ book-cnc-sheet = C&C 5e Character Sheet
     9: Name  Casting Time  Range  Duration  Components  Ritual?
     --------------------------------------------------------------------------------------
     Carps and Crypts 5e
-

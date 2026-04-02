@@ -126,21 +126,6 @@
   speciesWhitelist:
     - Vox
 
-# harpy
-- type: soundCollection
-  id: HarpyBark
-  files:
-  - /Audio/_DV/Voice/Harpy/chirp1.ogg
-
-- type: bark
-  id: Harpy
-  name: Harpy
-  volume: 1
-  soundCollection:
-    collection: HarpyBark
-  speciesWhitelist:
-    - Harpy
-
 # Squeak
 - type: soundCollection
   id: SqueakBark

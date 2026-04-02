@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseThiefStealCollectionObjective
+  id: BatteryStealCollectionObjective
+  components:
+  - type: SpeciesRequirement
+    allowedSpecies:
+    - IPC
+  - type: StealCondition
+    stealGroup: Battery
+    minCollectionSize: 5
+    maxCollectionSize: 30
+  - type: Objective
+    difficulty: 0.5 # just for fun, collectings Battery for ipc

@@ -7,9 +7,13 @@
 
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
+
 namespace Content.Shared._Goobstation.Wizard.EventSpells;
 
 [RegisterComponent]
 public sealed partial class GlobalTileMovementRuleComponent : Component
 {
+    [DataField(required: true)]
+    public ComponentRegistry Components = default!;
 }

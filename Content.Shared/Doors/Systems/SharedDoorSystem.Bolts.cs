@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ScarKy0 <scarky0@onet.eu>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
@@ -155,14 +142,14 @@ public abstract partial class SharedDoorSystem
             || entity.Comp.Powered
             && !entity.Comp.BoltWireCut
             || !TryComp(args.Used, out ToolComponent? toolComp)
-            || !_toolsSystem.HasQuality(args.Used, entity.Comp.UnboltToolQuality)
-            || !_sharedWiresSystem.IsPanelOpen(entity.Owner))
+            || !_tools.HasQuality(args.Used, entity.Comp.UnboltToolQuality)
+            || !_wires.IsPanelOpen(entity.Owner))
             return;
 
         var efficientToolTime = entity.Comp.ManualUnboltTime / toolComp.SpeedModifier;
         var doAfterArgs = new DoAfterArgs(EntityManager, args.User, efficientToolTime, new ManualBoltingDoAfterEvent(), entity, entity);
 
-        if (_doAfterSystem.TryStartDoAfter(doAfterArgs))
+        if (_doAfter.TryStartDoAfter(doAfterArgs))
         {
             Audio.PlayPredicted(toolComp.UseSound, entity, args.User);
             args.Handled = true;

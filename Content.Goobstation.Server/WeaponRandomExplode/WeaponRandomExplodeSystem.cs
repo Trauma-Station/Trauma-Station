@@ -1,13 +1,7 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Explosion.EntitySystems;
-using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Random;
 
@@ -16,6 +10,7 @@ namespace Content.Goobstation.Server.WeaponRandomExplode;
 public sealed class WeaponRandomExplodeSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly SharedExplosionSystem _explosion = default!;
 
     public override void Initialize()
@@ -30,7 +25,8 @@ public sealed class WeaponRandomExplodeSystem : EntitySystem
         if (component.ExplosionChance <= 0)
             return;
 
-        if (!TryComp<BatteryComponent>(uid, out var battery) || battery.CurrentCharge <= 0)
+        var charge = _battery.GetCharge(uid);
+        if (charge <= 0)
             return;
 
         // TODO: use predicted random and move this to shared
@@ -40,7 +36,7 @@ public sealed class WeaponRandomExplodeSystem : EntitySystem
         var intensity = 1;
         if (component.MultiplyByCharge > 0)
         {
-            intensity = Convert.ToInt32(component.MultiplyByCharge * (battery.CurrentCharge / 100));
+            intensity = Convert.ToInt32(component.MultiplyByCharge * (charge / 100));
         }
 
         _explosion.QueueExplosion(

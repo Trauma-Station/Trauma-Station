@@ -11,6 +11,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Preferences;
 using Content.Shared.VoiceMask;
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;
@@ -30,7 +31,7 @@ public sealed class IdentitySystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedCriminalRecordsConsoleSystem _criminalRecordsConsole = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly HumanoidProfileSystem _humanoidProfile = default!;
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
 
     // The name of the container holding the identity entity
@@ -221,7 +222,7 @@ public sealed class IdentitySystem : EntitySystem
     /// and their 'presumed name' and 'presumed job' being the name/job on their ID card, if they have one.
     /// </summary>
     // Goob - added raiseEvent
-    private IdentityRepresentation GetIdentityRepresentation(Entity<InventoryComponent?, HumanoidAppearanceComponent?> target, bool raiseEvent = true)
+    private IdentityRepresentation GetIdentityRepresentation(Entity<InventoryComponent?, HumanoidProfileComponent?> target, bool raiseEvent = true)
     {
         // <Goob>
         if (raiseEvent)
@@ -235,7 +236,7 @@ public sealed class IdentitySystem : EntitySystem
 
         var age = 18;
         var gender = Gender.Epicene;
-        var species = SharedHumanoidAppearanceSystem.DefaultSpecies;
+        var species = HumanoidCharacterProfile.DefaultSpecies;
 
         // Always use their actual age and gender, since that can't really be changed by an ID.
         if (Resolve(target, ref target.Comp2, false))
@@ -245,7 +246,7 @@ public sealed class IdentitySystem : EntitySystem
             species = target.Comp2.Species;
         }
 
-        var ageString = _humanoid.GetAgeRepresentation(species, age);
+        var ageString = _humanoidProfile.GetAgeRepresentation(species, age);
         var trueName = Name(target);
         if (!Resolve(target, ref target.Comp1, false))
             return new(trueName, gender, ageString, string.Empty);

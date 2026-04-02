@@ -61,6 +61,6 @@
   - type: BatteryAmmoProvider
     proto: BulletDeclone
     fireCost: 125
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 2000
     startingCharge: 2000

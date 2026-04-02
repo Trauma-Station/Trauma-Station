@@ -101,22 +101,6 @@
     sprite: Clothing/Ears/Headsets/security.rsi
 
 - type: entity
-  parent: [ClothingHeadsetAlt, BaseCentcommContraband]
-  id: ClothingHeadsetAltBlueshield
-  name: blueshield officers over-ear headset
-  components:
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - EncryptionKeyCommand
-      - EncryptionKeyCentCom
-      - EncryptionKeyCommon
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Ears/Headsets/blueshield.rsi
-  - type: Clothing
-    sprite: _Goobstation/Clothing/Ears/Headsets/blueshield.rsi
-
-- type: entity
   parent: ClothingHeadsetCommand
   id: ClothingHeadsetCommandService
   name: command-service headset
@@ -132,7 +116,7 @@
 - type: entity
   parent: ClothingHeadsetAlt
   id: ClothingHeadsetAltRadioHost
-  name: Radio host's over-ear headset
+  name: radio host's over-ear headset
   description: An over-ear headset with extra foam padding around the ears.
   components:
   - type: ContainerFill

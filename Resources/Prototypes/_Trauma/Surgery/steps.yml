@@ -15,7 +15,7 @@
   - type: SurgeryDamageChangeEffect
     damage:
       types:
-        Brute: 15
+        Slash: 15
     sleepModifier: 0.2
   - type: SurgeryStepPainInflicter
     painDuration: 30
@@ -40,3 +40,53 @@
   parent: SurgeryStepInsertOrgan
   id: SurgeryStepInsertHypoport
   name: Add hypoport assembly
+
+- type: entity
+  parent: SurgeryStepInsertOrgan
+  id: SurgeryStepInsertBrainChip
+  name: Insert brain chip
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepOpenPanel
+  name: Unscrew panel
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Screwdriver
+    add:
+    - type: PanelOpen
+    duration: 2
+  - type: Sprite
+    sprite: Objects/Tools/screwdriver.rsi
+    state: screwdriver-map
+
+- type: entity
+  parent: SurgeryStepOpenPanel
+  id: SurgeryStepClosePanel
+  name: Close panel
+  components:
+  - type: SurgeryStep
+    add: null
+    remove:
+    - type: PanelOpen
+
+- type: entity
+  parent: SurgeryStepSealBones
+  id: SurgeryStepCreateJoint
+  name: Create joint
+  components:
+  - type: SurgeryStep
+    remove: null
+    add:
+    - type: JointCreated
+
+- type: entity
+  parent: SurgeryStepCloseBloodOutputs
+  id: SurgeryStepStitchJoint
+  name: Stitch joint blood vessels
+  components:
+  - type: SurgeryStep
+    remove: null
+    add:
+    - type: JointStitched

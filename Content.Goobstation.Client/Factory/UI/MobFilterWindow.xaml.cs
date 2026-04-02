@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.UserInterface.Controls;
 using Content.Goobstation.Shared.Factory.Filters;
 using Content.Shared.Mobs;

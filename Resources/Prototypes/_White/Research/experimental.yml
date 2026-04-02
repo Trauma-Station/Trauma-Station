@@ -19,7 +19,7 @@
   discipline: Experimental
   tier: 2
   cost: 10000
-  position: -5,-1
+  position: -7,-7
   recipeUnlocks:
   - ClothingEyesNightVisionGoggles
   technologyPrerequisites:
@@ -34,8 +34,8 @@
   discipline: Experimental
   tier: 2
   cost: 10000
-  position: -6,-1
+  position: -8,-7
   recipeUnlocks:
   - ClothingEyesThermalVisionGoggles
   technologyPrerequisites:
-  - ModsuitsTech
+  - NightVisionTech

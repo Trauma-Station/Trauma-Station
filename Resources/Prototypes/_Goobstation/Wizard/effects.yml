@@ -106,6 +106,9 @@
     duration: 0.5
   - type: TimedDespawn
     lifetime: 0.5
+  - type: Tag
+    tags:
+    - HideContextMenu
 
 - type: entity
   parent: BaseFlashEffect
@@ -353,6 +356,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Trail
+    color: red
     endAngle: 320
     particleAmount: 9
     maxParticleAmount: 45

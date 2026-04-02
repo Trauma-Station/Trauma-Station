@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Server.Station.Systems;
 using Content.Shared.Maps;
-using System.Linq;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -149,7 +148,7 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
                 continue;
 
             if (_atmosphere.IsTileSpace(grid.Owner, Transform(grid.Owner).MapUid, tile)
-                || _atmosphere.IsTileAirBlocked(grid.Owner, tile, mapGridComp: grid.Comp))
+                || _atmosphere.IsTileAirBlockedCached(grid.Owner, tile))
                 continue;
 
             targetCoords = _map.GridTileToLocal(grid.Owner, grid.Comp, tile);

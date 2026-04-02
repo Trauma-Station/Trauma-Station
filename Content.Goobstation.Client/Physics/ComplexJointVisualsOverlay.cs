@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
@@ -31,6 +23,8 @@ public sealed class ComplexJointVisualsOverlay : Overlay
 
     private readonly ShaderInstance _unshadedShader;
 
+    public static readonly ProtoId<ShaderPrototype> Unshaded = "unshaded";
+
     public ComplexJointVisualsOverlay(IEntityManager entManager, IPrototypeManager prototype, IGameTiming timing)
     {
         ZIndex = 5;
@@ -42,7 +36,7 @@ public sealed class ComplexJointVisualsOverlay : Overlay
         _sprite = entManager.System<SpriteSystem>();
         _transform = entManager.System<TransformSystem>();
 
-        _unshadedShader = prototype.Index<ShaderPrototype>("unshaded").Instance();
+        _unshadedShader = prototype.Index(Unshaded).Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)

@@ -1,16 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 FaDeOkno <logkedr18@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: technology
@@ -27,7 +14,7 @@
   - PinpointerArtifact
   - PinpointerAnomaly
   - PinpointerBorg
-  position: -3,-3
+  position: -7,-6
   technologyPrerequisites:
   - DeterrenceTechnologies
 
@@ -47,7 +34,7 @@
   - ModsuitGauntlets
   - ModsuitShell
   - ModsuitPlatingExternal
-  position: -4,-1
+  position: -6,-7
   technologyPrerequisites:
   - MagnetsTech
 
@@ -63,7 +50,7 @@
   recipeUnlocks:
   - SlimeGrinderMachineCircuitboard
   - ClothingBackpackXenoBioTank
-  position: -3,3
+  position: -6,-2
   technologyPrerequisites:
   - BasicXenoArcheology
 
@@ -78,7 +65,7 @@
   cost: 5000
   recipeUnlocks:
   - MaterialBSCrystal
-  position: -4,-2
+  position: -8,-6
   technologyPrerequisites:
   - DeterrenceTechnologies
 
@@ -93,7 +80,7 @@
   cost: 7500
   recipeUnlocks:
   - ExperimentalCircuitBoard
-  position: -4,0
+  position: -7,-5
   technologyPrerequisites:
   - AdvancedAnomalyResearch
 
@@ -108,6 +95,21 @@
   cost: 15000
   recipeUnlocks:
   - XenoCompatibilityImplanter
-  position: -5,0
+  position: -8,-5
   technologyPrerequisites:
   - ExperimentalScience
+
+- type: technology
+  id: XenobagHolding
+  name: research-technology-xenobag-holding
+  icon:
+    sprite: _Goobstation/Clothing/Belt/xenobag_holding.rsi
+    state: icon
+  discipline: Experimental
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - ClothingBeltChemBagXenobiologyHolding
+  position: -4,3
+  technologyPrerequisites:
+  - Xenobiology

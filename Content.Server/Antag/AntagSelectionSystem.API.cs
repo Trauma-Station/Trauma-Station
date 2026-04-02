@@ -1,20 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Antag.Components;
@@ -98,20 +81,6 @@ public sealed partial class AntagSelectionSystem
 
         return count;
     }
-
-    // goob edit
-    public List<ICommonSession> GetAliveConnectedPlayers(IList<ICommonSession> pool)
-    {
-        var l = new List<ICommonSession>();
-        foreach (var session in pool)
-        {
-            if (session.Status is SessionStatus.Disconnected or SessionStatus.Zombie)
-                continue;
-            l.Add(session);
-        }
-        return l;
-    }
-    // goob edit end
 
     /// <summary>
     /// Gets the number of antagonists that should be present for a given antag definition based on the provided pool.
@@ -450,47 +419,6 @@ public sealed partial class AntagSelectionSystem
             }
         }
 
-        return result;
-    }
-
-    /// <summary>
-    /// Get all definition blacklists from sessions that have been preselected for antag. | GOOBSTATION
-    /// </summary>
-    public Dictionary<ICommonSession, List<ProtoId<JobPrototype>>> GetPreSelectedAntagSessionsWithBlacklist(AntagSelectionDefinition? except = null)
-    {
-        var result = new Dictionary<ICommonSession, List<ProtoId<JobPrototype>>>();
-        var query = QueryAllRules();
-
-        while (query.MoveNext(out var uid, out var comp, out _))
-        {
-            if (HasComp<EndedGameRuleComponent>(uid))
-                continue;
-
-            foreach (var def in comp.Definitions)
-            {
-                if (def.Equals(except))
-                    continue;
-
-                if (comp.PreSelectedSessions.TryGetValue(def, out var sessions))
-                {
-                    foreach (var session in sessions)
-                    {
-                        // Get the blacklisted jobs for this antag definition
-                        var blacklist = def.JobBlacklist ?? new List<ProtoId<JobPrototype>>();
-
-                        // If session already exists, merge the blacklists
-                        if (result.TryGetValue(session, out var existingBlacklist))
-                        {
-                            existingBlacklist.AddRange(blacklist);
-                        }
-                        else
-                        {
-                            result[session] = new List<ProtoId<JobPrototype>>(blacklist);
-                        }
-                    }
-                }
-            }
-        }
         return result;
     }
 }

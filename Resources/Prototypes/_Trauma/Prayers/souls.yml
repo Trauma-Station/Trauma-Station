@@ -1,0 +1,27 @@
+## PARITY
+
+- type: scrollPrayer
+  id: SoulButterfly
+  verb: GIVE
+  subjects: [ "BUTTERFLY" ]
+  items:
+    id: MobButterfly # it has a soul inside
+
+## NON PARITY
+
+- type: scrollPrayer
+  id: FloorGoblin
+  verb: GIVE
+  subjects: [ "FLOOR GOBLIN" ]
+  items:
+    id: MobFloorGoblin # it also has a soul inside
+
+# in funger you can only get the meat
+- type: scrollPrayer
+  id: SoulSalmonsnake
+  verb: GIVE
+  subjects: [ "SALMONSNAKE SOUL" ]
+  effects:
+  # blessing and a (minor) curse, you can't get cybernetic limbs now
+  - !type:NestedEffect
+    proto: Salmonsnake

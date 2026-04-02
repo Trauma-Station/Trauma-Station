@@ -6,14 +6,9 @@
   physicalDesc: reagent-physical-desc-pungent
   color: "#c4f5ff"
   metabolisms:
-    Poison:
-      metabolismRate: 0.5
+    Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition
-            type: [ Yowie ]
-            inverted: true
         damage:
           types: # methanol is bad for your health
             Poison: 3
@@ -38,15 +33,11 @@
   contrabandSeverity: Major # you probably aren't making this or the other explosives with permission from HOS
   color: "#e0c009"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         damage:
-          types: # do not eat C4
+          types: # do not eat/shoot up C4
             Poison: 3
 
 - type: reagent
@@ -59,13 +50,9 @@
   contrabandSeverity: Major
   color: white
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         damage:
           types: # Oil is not good
             Poison: 1
@@ -80,13 +67,50 @@
   contrabandSeverity: Major
   color: white
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Yowie ]
-          inverted: true
         damage:
           types: # do not eat C4's bigger brother
             Poison: 2
+
+- type: reagent
+  id: Burnite
+  name: reagent-name-burnite
+  group: Pyrotechnic
+  desc: reagent-desc-burnite
+  physicalDesc: reagent-physical-desc-odorless
+  contrabandSeverity: Major
+  color: white
+  tileReactions:
+  - !type:CreateEntityTileReaction
+    entity: MolotovFire
+    maxOnTileWhitelist:
+      tags: [ TraumaFire ]
+  - !type:FlammableTileReaction
+    temperatureMultiplier: 5
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: 1
+            Poison: 1
+      - !type:AdjustTemperature
+        amount: 6000
+      - !type:Flammable
+        multiplier: 0.4
+      - !type:Ignite
+  reactiveEffects:
+    Flammable:
+      methods: [ Touch ]
+      effects:
+      - !type:Flammable
+        multiplier: 0.3
+      - !type:Ignite
+      - !type:PopupMessage
+        messages: [ "clf3-it-burns", "clf3-get-away" ] # just copy and pasted from clf3 why not
+        visualType: MediumCaution
+        probability: 0.3
+        type: Local

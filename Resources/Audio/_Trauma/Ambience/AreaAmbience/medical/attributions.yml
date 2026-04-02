@@ -1,0 +1,4 @@
+- files: ["ambimo1.ogg, ambimo2.ogg, ambinice.ogg, ambiviro.ogg, ambiviro1.ogg, ambiviro2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from /tg/station"
+  source: "https://github.com/tgstation/tgstation/tree/731d72a58cd8089d070730ce4daf24357f609c30/sound/ambience/medical"

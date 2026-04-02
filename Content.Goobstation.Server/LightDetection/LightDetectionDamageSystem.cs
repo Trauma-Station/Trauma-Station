@@ -1,9 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Medical.Surgery.Pain.Systems;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
-using Content.Shared._Shitmed.Targeting;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
+using Content.Medical.Shared.Pain;
+using Content.Medical.Shared.Wounds;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Audio;
@@ -27,13 +29,20 @@ public sealed class LightDetectionDamageSystem : SharedLightDetectionDamageSyste
     {
         base.Update(frameTime);
 
+        var now = _timing.CurTime;
+
         var query = EntityQueryEnumerator<LightDetectionDamageComponent, LightDetectionComponent>();
         while (query.MoveNext(out var uid, out var comp, out var lightDet))
         {
-            if (comp.NextUpdate > _timing.CurTime)
-                return;
+            if (comp.NextUpdate > now)
+                continue;
 
             comp.NextUpdate = _timing.CurTime + comp.UpdateInterval;
+
+            var ev = new LightDamageUpdateAttemptEvent();
+            RaiseLocalEvent(uid, ref ev);
+            if (ev.Cancelled)
+                continue;
 
             UpdateDetectionValues(comp, lightDet.CurrentLightLevel);
             DirtyField(uid, comp, nameof(LightDetectionDamageComponent.DetectionValue));
@@ -42,14 +51,13 @@ public sealed class LightDetectionDamageSystem : SharedLightDetectionDamageSyste
             {
                 _damageable.TryChangeDamage(uid, comp.DamageToDeal * comp.ResistanceModifier, splitDamage: SplitDamageBehavior.SplitEnsureAll);
                 _audio.PlayPvs(comp.SoundOnDamage, uid, AudioParams.Default.WithVolume(-2f));
-                return;
+                continue;
             }
 
             if (comp.DetectionValue > 0 && comp.HealOnShadows && !_mobState.IsDead(uid))
             {
                 _woundSystem.TryHealWoundsOnOwner(uid, comp.DamageToHeal, true);
                 _damageable.TryChangeDamage(uid, comp.DamageToHeal, true, false, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAllOrganic, canMiss: false);
-                return;
             }
         }
     }

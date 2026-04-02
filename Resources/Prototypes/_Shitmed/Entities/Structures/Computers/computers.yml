@@ -28,6 +28,7 @@
     radius: 1.5
     energy: 1.6
     color: "#FC0097"
+  - type: DoAfter
 
 - type: entity
   parent: ComputerComms
@@ -87,7 +88,4 @@
     layers:
     - state: eye
       shader: unshaded
-  - type: Tag
-    tags:
-    - CantInteract
   - type: AiEye # Trauma

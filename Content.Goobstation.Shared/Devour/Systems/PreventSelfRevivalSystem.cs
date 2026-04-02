@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Devour;
 using Content.Goobstation.Shared.Devour.Events;
 using Content.Shared.Popups;

@@ -1,14 +1,12 @@
-## Cosmic Cult Entropy Mote
-
 - type: entity
   parent: [ MaterialBase ]
   id: MaterialCosmicCultEntropy
   name: mote of entropy
-  description: A solidified mote of entropic essence. Feels numbing to the touch.
-  suffix: Full
+  description: A solidified mote of entropic essence. Numbing to the touch.
+  suffix: 20
   components:
   - type: Stack
-    count: 6
+    count: 20
     stackType: Entropy
     baseLayer: base
     layerStates:
@@ -26,66 +24,29 @@
     sprite: _DV/CosmicCult/Objects/entropymote.rsi
     size: Small
   - type: CosmicEntropyMote
-  - type: Tag
-    tags:
-      - Entropy
-  - type: Extractable
-    grindableSolutionName: grind
-  - type: SolutionContainerManager
-    solutions:
-      grind:
-        reagents:
-        - ReagentId: Entropy
-          Quantity: 1.5
-  - type: UnholyItem # Goobstation Shitchap
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-forthecult
+    othersText: cosmic-examine-text-mote
 
 - type: entity
   parent: MaterialCosmicCultEntropy
   id: MaterialCosmicCultEntropy1
-  suffix: One
+  suffix: 1
   components:
   - type: Stack
     count: 1
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: MaterialCosmicCultEntropy
-  id: MaterialCosmicCultEntropy2
-  suffix: Two
+  id: MaterialCosmicCultEntropy10
+  suffix: 10
   components:
   - type: Stack
-    count: 2
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: MaterialCosmicCultEntropy
-  id: MaterialCosmicCultEntropy3
-  suffix: Three
-  components:
-  - type: Stack
-    count: 3
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: MaterialCosmicCultEntropy
-  id: MaterialCosmicCultEntropy4
-  suffix: Four
-  components:
-  - type: Stack
-    count: 4
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: MaterialCosmicCultEntropy
-  id: MaterialCosmicCultEntropy5
-  suffix: Five
-  components:
-  - type: Stack
-    count: 5
+    count: 10
 
 - type: stack
   id: Entropy
   name: stack-cosmic-cult-entropy
   icon: { sprite: _DV/CosmicCult/Objects/entropymote.rsi, state: mote }
   spawn: MaterialCosmicCultEntropy1
-  maxCount: 6
+  maxCount: 20

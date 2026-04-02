@@ -1,22 +1,26 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Virology;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class DiseasePenComponent : Component
 {
-    [ViewVariables]
+    [DataField]
     public int? Genotype;
 
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public EntityUid? DiseaseUid;
 
-    [ViewVariables]
-    public bool Used = false;
+    [DataField]
+    public bool Used;
 
-    [DataField, ViewVariables]
+    [DataField]
     public SoundSpecifier InjectSound = new SoundPathSpecifier("/Audio/Items/hypospray.ogg");
 
     [DataField]

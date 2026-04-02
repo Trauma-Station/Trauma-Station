@@ -1,11 +1,10 @@
 // <Trauma>
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared._Imp.Drone;
 using Robust.Shared.Player;
 // </Trauma>
 using Content.Shared.DeviceNetwork;
 using Content.Shared.Damage.Components;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
@@ -55,8 +54,7 @@ public sealed partial class BorgSystem
                 hpPercent,
                 chassis.ModuleCount,
                 hasBrain,
-                canDisable,
-                HasComp<AiRemoteControllerComponent>(uid)); // Corvax-Next-AiRemoteControl
+                canDisable);
 
             var payload = new NetworkPayload()
             {
@@ -83,7 +81,6 @@ public sealed partial class BorgSystem
                 hpPercent,
                 0,
                 hasBrain,
-                false, // Corvax-Next-AiRemoteControl
                 false);
 
             var payload = new NetworkPayload()
@@ -215,7 +212,7 @@ public sealed partial class BorgSystem
             return 1;
         }
 
-        return 1 - ((FixedPoint2)(damageable.TotalDamage / threshold)).Float();
+        return 1 - ((FixedPoint2)(_damageable.GetTotalDamage((uid, damageable)) / threshold)).Float();
     }
 
     /// <summary>

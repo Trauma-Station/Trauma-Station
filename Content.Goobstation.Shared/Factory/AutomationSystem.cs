@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Factory.Slots;
@@ -94,10 +90,10 @@ public sealed class AutomationSystem : EntitySystem
     private void CacheEntities()
     {
         _automatable.Clear();
-        var factory = EntityManager.ComponentFactory;
+        var name = Factory.GetComponentName<AutomationSlotsComponent>();
         foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.HasComponent<AutomationSlotsComponent>(factory))
+            if (proto.Components.ContainsKey(name))
                 _automatable.Add(proto.ID);
         }
 

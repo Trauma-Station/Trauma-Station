@@ -1,0 +1,88 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="using:Content.Client.UserInterface.Controls"
+                      xmlns:graphics="using:Robust.Client.Graphics"
+                      Title="{Loc 'cosmic-shop-interface-title'}"
+                      MinSize="650 600"
+                      SetSize="750 620">
+    <BoxContainer Orientation="Vertical" Margin="5 5 5 0">
+        <!-- Header -->
+        <BoxContainer Orientation="Horizontal" Margin="7">
+            <!-- Icon -->
+            <TextureRect Name="CosmicShopIcon"
+                         TexturePath="/Textures/_DV/CosmicCult/Interface/mote_3.png"
+                         Stretch="KeepAspectCentered"
+                         VerticalAlignment="Center"
+                         MinSize="32 32"
+                         TextureScale="2 2"/>
+            <!-- Progress bar -->
+            <BoxContainer Orientation="Vertical">
+                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label HorizontalAlignment="Center" Text="{Loc 'cosmic-shop-interface-entropy-next-stage-title'}" Margin="0 0 5 0"  StyleClasses="LabelSmall" />
+                    <Label HorizontalAlignment="Center" Name="EntropyUntilNextStage" FontColorOverride="#4CA7AD" StyleClasses="LabelSmall" />
+                </BoxContainer>
+                <ProgressBar Name="CultProgressBar" SetHeight="30" MaxValue="100" HorizontalExpand="True"  Margin="5">
+                    <Label Name="ProgressBarPercentage" HorizontalAlignment="Center"/>
+                </ProgressBar>
+                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label HorizontalAlignment="Center" Text="{Loc 'cosmic-shop-interface-cultists-next-stage-title'}" Margin="0 0 5 0"  StyleClasses="LabelSmall" />
+                    <Label HorizontalAlignment="Center" Name="CultisttUntilNextCultStage" FontColorOverride="#4CA7AD" StyleClasses="LabelSmall" />
+                </BoxContainer>
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" MinWidth="4" Margin="6 0"/>
+            <!-- Entropy -->
+            <BoxContainer Name="EntropyArea" HorizontalExpand="True" MinHeight="60" Orientation="Vertical" Margin="0 0 0 0">
+                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label HorizontalAlignment="Center" Text="{Loc 'cosmic-shop-interface-entropy-available-label'}" Margin="0 0 5 0"  StyleClasses="LabelSmall" />
+                    <Label HorizontalAlignment="Center" Name="AvailableEntropy" FontColorOverride="#4CA7AD" StyleClasses="LabelSmall" />
+                </BoxContainer>
+                <RichTextLabel Name="RespecText" HorizontalAlignment="Center" />
+                <Button Name="RespecButton"
+                        Text="{Loc 'cosmic-shop-interface-respec-button'}"
+                        StyleClasses="ButtonColorPurpleAndCool"
+                        Margin="5"
+                        SetWidth="80"
+                        SetHeight="35"
+                        HorizontalAlignment="Right"/>
+            </BoxContainer>
+        </BoxContainer>
+        <PanelContainer StyleClasses="LowDivider" MinHeight="4" Margin="0 5 0 0" />
+        <!-- Main body -->
+        <BoxContainer Orientation="Vertical" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" VerticalExpand="True">
+                <PanelContainer StyleClasses="LowDivider" MinWidth="4"/>
+                <!-- Skill tree -->
+                <BoxContainer VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical">
+                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+                        <!-- Temporary, will be replaced with a skill tree in the future-->
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                            <BoxContainer Name="Level3" Orientation="Horizontal" HorizontalExpand="True" />
+                            <BoxContainer Name="Level2" Orientation="Horizontal" HorizontalExpand="True" />
+                            <BoxContainer Name="Level1" Orientation="Horizontal" HorizontalExpand="True" />
+                            <BoxContainer Name="Level0" Orientation="Horizontal" HorizontalExpand="True" />
+                        </BoxContainer>
+                    </ScrollContainer>
+                </BoxContainer>
+                <PanelContainer StyleClasses="LowDivider" MinWidth="4"/>
+                <!-- Influence details -->
+                <BoxContainer Name="InfluenceInfoContainer" MaxWidth="250" Orientation="Vertical">
+                    <!-- Filled out programatically -->
+                    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+                        <BoxContainer Name="InfluenceDetails" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" />
+                    </ScrollContainer>
+                </BoxContainer>
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" MinHeight="4"/>
+            <BoxContainer Name="LevelUpConfirmation" Orientation="Horizontal" Visible="false" VerticalAlignment="Bottom" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" HorizontalExpand="True">
+                    <RichTextLabel Name="ConsequenceLabel" HorizontalAlignment="Left" Margin="5"/>
+                </BoxContainer>
+                <Button Name="LevelUpConfirm"
+                        Text="{Loc 'cosmic-shop-interface-confirm-button'}"
+                        StyleClasses="ButtonColorPurpleAndCool"
+                        Margin="5"
+                        SetWidth="90"
+                        SetHeight="35" />
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

@@ -1,13 +1,11 @@
 // <Trauma>
-using Content.Goobstation.Common.Changeling;
-using Content.Goobstation.Shared.Changeling.Components;
+using Content.Trauma.Common.Kitchen;
 // </Trauma>
-using Content.Server.Body.Systems;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Body.Components;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.Gibbing;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Kitchen;
@@ -28,7 +26,7 @@ namespace Content.Server.Kitchen.EntitySystems;
 
 public sealed class SharpSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedDestructibleSystem _destructibleSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
@@ -74,20 +72,6 @@ public sealed class SharpSystem : EntitySystem
             return false;
         }
 
-        // <Goob> - can't butcher lings or their victims
-        // this intentionally uses the same message so you have to use 1% brainpower to deduce if the non-hollow body is a ling or not
-        if (HasComp<ChangelingIdentityComponent>(target))
-        {
-            _popupSystem.PopupEntity(Loc.GetString("comp-kitchen-spike-deny-absorbed", ("victim", Identity.Entity(target, EntityManager))), target, user);
-            return false;
-        }
-        if (HasComp<AbsorbedComponent>(target))
-        {
-            _popupSystem.PopupEntity(Loc.GetString("comp-kitchen-spike-deny-absorbed", ("victim", Identity.Entity(target, EntityManager))), target, user);
-            return false;
-        }
-        // </Goob>
-
         if (!sharp.Butchering.Add(target))
             return false;
 
@@ -119,6 +103,17 @@ public sealed class SharpSystem : EntitySystem
         }
 
         component.Butchering.Remove(args.Args.Target.Value);
+
+        // <Trauma> - lets the target mob prevent being butchered
+        var target = args.Args.Target.Value; // 5 year old shitcode award
+        var attemptEv = new ButcherAttemptEvent();
+        RaiseLocalEvent(target, ref attemptEv);
+        if (attemptEv.CancelPopup is {} loc)
+        {
+            _popupSystem.PopupEntity(Loc.GetString(loc, ("victim", Identity.Entity(target, EntityManager))), target, args.User);
+            return;
+        }
+        // </Trauma>
 
         var spawnEntities = EntitySpawnCollection.GetSpawns(butcher.SpawnedEntities, _robustRandom);
         var coords = _transform.GetMapCoordinates(args.Args.Target.Value);
@@ -152,7 +147,7 @@ public sealed class SharpSystem : EntitySystem
             args.Args.User,
             popupType);
 
-        _bodySystem.GibBody(args.Args.Target.Value); // does nothing if ent can't be gibbed
+        _gibbing.Gib(args.Args.Target.Value); // does nothing if ent can't be gibbed
         _destructibleSystem.DestroyEntity(args.Args.Target.Value);
 
         args.Handled = true;

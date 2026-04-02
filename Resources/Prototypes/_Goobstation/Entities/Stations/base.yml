@@ -1,0 +1,6 @@
+- type: entity
+  abstract: true
+  id: BaseStationNtrTasks
+  components:
+  - type: NtrTaskDatabase
+  - type: NtrBankAccount

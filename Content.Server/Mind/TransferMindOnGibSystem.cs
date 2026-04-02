@@ -1,14 +1,5 @@
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Linq;
-using Content.Shared.Body.Events;
+using Content.Shared.Gibbing;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Tag;
@@ -30,19 +21,19 @@ public sealed class TransferMindOnGibSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<TransferMindOnGibComponent, BeingGibbedEvent>(OnGib);
+        SubscribeLocalEvent<TransferMindOnGibComponent, GibbedBeforeDeletionEvent>(OnGib);
     }
 
-    private void OnGib(EntityUid uid, TransferMindOnGibComponent component, BeingGibbedEvent args)
+    private void OnGib(Entity<TransferMindOnGibComponent> ent, ref GibbedBeforeDeletionEvent args)
     {
-        if (!_mindSystem.TryGetMind(uid, out var mindId, out var mind))
+        if (!_mindSystem.TryGetMind(ent, out var mindId, out var mind))
             return;
 
-        var validParts = args.GibbedParts.Where(p => _tag.HasTag(p, component.TargetTag)).ToHashSet();
+        var validParts = args.Giblets.Where(p => _tag.HasTag(p, ent.Comp.TargetTag)).ToHashSet();
         if (!validParts.Any())
             return;
 
-        var ent = _random.Pick(validParts);
-        _mindSystem.TransferTo(mindId, ent, mind: mind);
+        var transfer = _random.Pick(validParts);
+        _mindSystem.TransferTo(mindId, transfer, mind: mind);
     }
 }

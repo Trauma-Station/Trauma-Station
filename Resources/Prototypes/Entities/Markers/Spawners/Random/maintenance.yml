@@ -118,6 +118,9 @@
         - id: ClothingNeckCloakPan
       - id: ToyFigurineSkeleton
       - id: MysteryFigureBox
+      # <Trauma>
+      - id: ClothingHandsGlovesGripper
+      # </Trauma>
       - id: FoodSnackLollypopWrappedMysteryNeutral # Goobstation - Lollypops!
       - id: RevolutionaryManifesto # Einstein Engines - Revolutionary Manifesto
       # Cult
@@ -169,6 +172,8 @@
       - id: CluwneHorn
       - id: ClothingShoesWizardSkates
       - id: FoodSnackLollypopWrappedMysteryEvil
+      - id: PlushieCosmicCult
+      - id: ClothingHandsGlovesRocket
       # </Trauma>
       - id: DrinkMugDog
       - id: CigarGold
@@ -337,6 +342,7 @@
       weight: 95
       children:
       - id: Machete
+      - id: Claymore
       - id: BaseBallBat
       - id: CombatKnife
       - id: Spear
@@ -394,16 +400,16 @@
   id: MaintenancePlantSpawner
   parent: MarkerBase
   components:
-    - type: Sprite
-      layers:
-        - state: red
-        - sprite: Objects/Misc/spaceshroom.rsi
-          state: structure
-    - type: RandomSpawner
-      prototypes:
-        - Spaceshroom
-      chance: 0.6
-      offset: 0.0
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Objects/Misc/spaceshroom.rsi
+        state: structure
+  - type: EntityTableSpawner
+    table:
+      id: Spaceshroom
+      prob: 0.6
+    offset: 0.0
 
 
 - type: entityTable

@@ -26,15 +26,6 @@
     - BoxSurvivalSlotsSecurityPlasma
 
 - type: loadout
-  id: EmergencyPlasmaMedical
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: PlasmaBreather
-  storage:
-    back:
-    - BoxSurvivalSlotsMedicalPlasma
-
-- type: loadout
   id: EmergencyPlasmaSyndicate
   effects:
   - !type:GroupLoadoutEffect

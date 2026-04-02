@@ -16,7 +16,6 @@
   icon: _Goobstation/Interface/Emotes/hiss.png
   whitelist:
     tags:
-    - HarpyEmotes
     - ReptilianEmotes
   blacklist:
     components:

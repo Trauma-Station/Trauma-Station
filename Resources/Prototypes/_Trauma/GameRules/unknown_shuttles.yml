@@ -1,0 +1,16 @@
+- type: entityTable
+  id: UnknownShuttlesFriendlyTable
+  table: !type:AllSelector
+    children:
+    - id: UnknownShuttleTravelingCuisine
+    - id: UnknownShuttleHonki
+    - id: UnknownShuttleAlienTourist
+
+# the chefs get cqc in the kitchen so its a little engaging
+# and food is more important here
+- type: entity
+  parent: BaseUnknownShuttleAnnouncedRule
+  id: UnknownShuttleTravelingCuisine
+  components:
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/ShuttleEvent/traveling_china_cuisine.yml

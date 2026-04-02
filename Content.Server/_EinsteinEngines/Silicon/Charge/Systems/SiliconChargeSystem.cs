@@ -7,7 +7,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.CCVar;
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Shared.Power.EntitySystems; // Goobstation - Energycrit
 using Content.Shared.PowerCell;
@@ -34,14 +33,13 @@ public sealed class SiliconChargeSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _moveMod = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly PredictedBatterySystem _battery = default!; // Goobstation - Energycrit
+    [Dependency] private readonly SharedBatterySystem _battery = default!; // Goobstation - Energycrit
 
     public override void Initialize()
     {
@@ -149,8 +147,9 @@ public sealed class SiliconChargeSystem : EntitySystem
 
     private float SiliconHeatEffects(EntityUid silicon, SiliconComponent siliconComp, float frameTime)
     {
-        if (!TryComp<TemperatureComponent>(silicon, out var temperComp)
-            || !TryComp<ThermalRegulatorComponent>(silicon, out var thermalComp))
+        if (!TryComp<TemperatureComponent>(silicon, out var temp) ||
+            !TryComp<TemperatureDamageComponent>(silicon, out var tempDamage) ||
+            !TryComp<ThermalRegulatorComponent>(silicon, out var thermalComp))
             return 0;
 
         // If the Silicon is hot, drain the battery faster, if it's cold, drain it slower, capped.
@@ -158,10 +157,10 @@ public sealed class SiliconChargeSystem : EntitySystem
         var upperThreshHalf = thermalComp.NormalBodyTemperature + thermalComp.ThermalRegulationTemperatureThreshold * 0.5f;
 
         // Check if the silicon is in a hot environment.
-        if (temperComp.CurrentTemperature > upperThreshHalf)
+        if (temp.CurrentTemperature > upperThreshHalf)
         {
             // Divide the current temp by the max comfortable temp capped to 4, then add that to the multiplier.
-            var hotTempMulti = Math.Min(temperComp.CurrentTemperature / upperThreshHalf, 4);
+            var hotTempMulti = Math.Min(temp.CurrentTemperature / upperThreshHalf, 4);
 
             // If the silicon is hot enough, it has a chance to catch fire.
 
@@ -171,24 +170,21 @@ public sealed class SiliconChargeSystem : EntitySystem
 
             siliconComp.OverheatAccumulator -= 5;
 
-            if (!EntityManager.TryGetComponent<FlammableComponent>(silicon, out var flamComp)
+            if (!TryComp<FlammableComponent>(silicon, out var flamComp)
                 || flamComp is { OnFire: true }
-                || !(temperComp.CurrentTemperature > temperComp.HeatDamageThreshold))
+                || !(temp.CurrentTemperature > tempDamage.HeatDamageThreshold))
                 return hotTempMulti;
 
             _popup.PopupEntity(Loc.GetString("silicon-overheating"), silicon, silicon, PopupType.MediumCaution);
-            if (!_random.Prob(Math.Clamp(temperComp.CurrentTemperature / (upperThresh * 5), 0.001f, 0.9f)))
+            if (!_random.Prob(Math.Clamp(temp.CurrentTemperature / (upperThresh * 5), 0.001f, 0.9f)))
                 return hotTempMulti;
 
-            // Goobstation: Replaced by KillOnOverheatSystem
-            //_flammable.AdjustFireStacks(silicon, Math.Clamp(siliconComp.FireStackMultiplier, -10, 10), flamComp);
-            //_flammable.Ignite(silicon, silicon, flamComp);
             return hotTempMulti;
         }
 
         // Check if the silicon is in a cold environment.
-        if (temperComp.CurrentTemperature < thermalComp.NormalBodyTemperature)
-            return 0.5f + temperComp.CurrentTemperature / thermalComp.NormalBodyTemperature * 0.5f;
+        if (temp.CurrentTemperature < thermalComp.NormalBodyTemperature)
+            return 0.5f + temp.CurrentTemperature / thermalComp.NormalBodyTemperature * 0.5f;
 
         return 0;
     }

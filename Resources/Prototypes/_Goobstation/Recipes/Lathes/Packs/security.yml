@@ -33,7 +33,6 @@
 - type: latheRecipePack
   id: SecurityWeaponsGoob
   recipes:
-  - WeaponSubMachineSmart
   - WeaponEnergyRifle
   - WeaponLaserCellRevolver
   - WeaponLaserCellSMG
@@ -47,7 +46,6 @@
   - EnergyMagRifleIon
   - EnergyMagRifleDisabler
   - EnergyMagRifleLethal
-  - MagazineSmart
   # - MagazineBoxShotgunIncendiaryHighCaliber # Trauma - remove 8 gauge
   # - MagazineBoxShotgunBeanbagHighCaliber
   # - MagazineBoxShotgunUraniumHighCaliber

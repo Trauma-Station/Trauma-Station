@@ -30,6 +30,7 @@
     damageOnImpact:
       types:
         Blunt: 0
+    sleepChem: null # fucking no
   - type: MeleeWeapon
     hidden: true
     canHeavyAttack: false

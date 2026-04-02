@@ -11,16 +11,19 @@
   abstract: true
   components:
   - type: Item
-    storedRotation: -90
+    storedRotation: 0
     size: Ginormous
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    sprite: _Goobstation/Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_camera
   - type: StaticPrice
     price: 100
   - type: PhysicalComposition
     materialComposition:
       Steel: 200
+  - type: GuideHelp
+    guides:
+    - Robotics
 
 - type: entity
   id: DurandArmorPlate
@@ -28,69 +31,50 @@
   name: durand armor plates
   description: Armor plates made of plasteel for Durand exosuit.
   components:
-    - type: Item
-      storedRotation: 0
-    - type: Sprite
-      sprite: _Goobstation/Objects/Specific/Mech/durand_construction.rsi
-      state: durand_armor
-    - type: Tag
-      tags:
-      - DurandArmor
-    - type: GuideHelp
-      guides:
-      - Robotics
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Mech/durand_construction.rsi
+    state: durand_armor
+  - type: Tag
+    tags:
+    - DurandArmor
 
 - type: entity
-  id: GygaxArmorPlate
   parent: BaseExosuitParts
+  id: GygaxArmorPlate
   name: gygax armor plates
   description: Armor plates made of steel for Gygax exosuit.
   components:
-    - type: Item
-      storedRotation: 0
-    - type: Sprite
-      sprite: _Goobstation/Objects/Specific/Mech/gygax_construction.rsi
-      state: gygax_armor
-    - type: Tag
-      tags:
-      - GygaxArmor
-    - type: GuideHelp
-      guides:
-      - Robotics
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Mech/gygax_construction.rsi
+    state: gygax_armor
+  - type: Tag
+    tags:
+    - GygaxArmor
 
 - type: entity
-  id: RipleyUpgradeKit
   parent: BaseExosuitParts
+  id: RipleyUpgradeKit
   name: exosuit upgrade kit
   description: This kit allows you to assemble an exosuit Ripley MK-II.
   components:
-    - type: Item
-      storedRotation: 0
-    - type: Sprite
-      state: ripleyupgrade
-    - type: Tag
-      tags:
-      - RipleyMKIIUpgradeKit
-    - type: GuideHelp
-      guides:
-      - Robotics
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: ripleyupgrade
+  - type: Tag
+    tags:
+    - RipleyMKIIUpgradeKit
 
 - type: entity
-  id: MechAirTank
   parent: BaseExosuitParts
+  id: MechAirTank
   name: exosuit air tank
   description: A special air canister capable of holding a large amount of air.
   components:
-    - type: Item
-      storedRotation: 0
-    - type: Sprite
-      state: mecha_air_tank
-    - type: Tag
-      tags:
-      - MechAirTank
-    - type: GuideHelp
-      guides:
-      - Robotics
+  - type: Sprite
+    state: mecha_air_tank
+  - type: Tag
+    tags:
+    - MechAirTank
 
 - type: entity
   id: MechThruster
@@ -98,13 +82,8 @@
   name: exosuit thruster
   description: A thruster with which the exosuit can safely move in the absence of gravity.
   components:
-    - type: Item
-      storedRotation: 0
-    - type: Sprite
-      state: mecha_bin
-    - type: Tag
-      tags:
-      - MechThruster
-    - type: GuideHelp
-      guides:
-      - Robotics
+  - type: Sprite
+    state: mecha_bin
+  - type: Tag
+    tags:
+    - MechThruster

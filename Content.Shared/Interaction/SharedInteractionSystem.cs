@@ -1,6 +1,11 @@
+// <Trauma>
+using Content.Goobstation.Common.Interaction;
+using Content.Shared.Ensnaring;
+using Content.Shared.Ensnaring.Components;
+using Content.Trauma.Common.Heretic;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Goobstation.Common.Interactions;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -75,6 +80,10 @@ namespace Content.Shared.Interaction
         [Dependency] private readonly TagSystem _tagSystem = default!;
         [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
+        // <Trauma>
+        [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
+        private EntityQuery<TargetInteractionRelayComponent> _targetRelayQuery;
+        // </Trauma>
         private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery;
         private EntityQuery<FixturesComponent> _fixtureQuery;
         private EntityQuery<ItemComponent> _itemQuery;
@@ -103,6 +112,9 @@ namespace Content.Shared.Interaction
 
         public override void Initialize()
         {
+            // <Trauma>
+            _targetRelayQuery = GetEntityQuery<TargetInteractionRelayComponent>();
+            // </Trauma>
             _ignoreUiRangeQuery = GetEntityQuery<IgnoreUIRangeComponent>();
             _fixtureQuery = GetEntityQuery<FixturesComponent>();
             _itemQuery = GetEntityQuery<ItemComponent>();
@@ -170,8 +182,7 @@ namespace Content.Shared.Interaction
                 // We permit ghosts to open uis unless explicitly blocked
                 if (ev.Message is not OpenBoundInterfaceMessage
                     || !HasComp<GhostComponent>(ev.Actor)
-                    || aUiComp?.BlockSpectators == true
-                    || _tagSystem.HasTag(ev.Actor, "CantInteract")) // Shitmed change
+                    || aUiComp?.BlockSpectators == true)
                 {
                     ev.Cancel();
                     return;
@@ -204,6 +215,9 @@ namespace Content.Shared.Interaction
 
         private bool UiRangeCheck(Entity<TransformComponent?> user, Entity<TransformComponent?> target, float range)
         {
+            if (range < 0) // Goobstation
+                return true;
+
             if (!Resolve(target, ref target.Comp))
                 return false;
 
@@ -220,8 +234,6 @@ namespace Content.Shared.Interaction
         /// <summary>
         ///     Prevents an item with the Unremovable component from being removed from a container by almost any means
         /// </summary>
-        ///
-        ///
         private void OnRemoveAttempt(EntityUid uid, UnremoveableComponent item, ContainerGettingRemovedAttemptEvent args)
         {
             // don't prevent the server state for the container from being applied to the client correctly
@@ -279,10 +291,32 @@ namespace Content.Shared.Interaction
 
             //is this user trying to pull themself?
             if (userEntity.Value == uid)
+            // <Trauma> - pull bolas and pray
+            {
+                if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && ensnareable.IsEnsnared)
+                {
+                    foreach (var bola in ensnareable.Container.ContainedEntities.ToList())
+                    {
+                        if (TryComp<EnsnaringComponent>(bola, out var ensnaring))
+                        {
+                            _snare.TryFree(uid, uid, bola, ensnaring);
+                            return false;
+                        }
+                    }
+                }
+                _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
                 return false;
+            }
+            // </Trauma>
 
             if (Deleted(uid))
                 return false;
+
+            // <Trauma>
+            if (_targetRelayQuery.TryComp(uid, out var relay) && relay.RelayPulls &&
+                Exists(relay.RelayEntity) && relay.RelayEntity.Value != uid)
+                return HandleTryPullObject(session, coords, relay.RelayEntity.Value);
+            // </Trauma>
 
             if (!InRangeUnobstructed(userEntity.Value, uid, popup: true))
                 return false;
@@ -419,6 +453,24 @@ namespace Content.Shared.Interaction
 
             if (target != null && Deleted(target.Value))
                 return;
+
+            // <Trauma>
+            if (_targetRelayQuery.TryComp(target, out var targetRelay) && Exists(targetRelay.RelayEntity) &&
+                targetRelay.RelayEntity.Value != target)
+            {
+                if (_actionBlockerSystem.CanInteract(user, target))
+                {
+                    UserInteraction(user,
+                        coordinates,
+                        targetRelay.RelayEntity.Value,
+                        altInteract,
+                        checkCanInteract,
+                        checkAccess,
+                        checkCanUse);
+                    return;
+                }
+            }
+            // </Trauma>
 
             if (!altInteract && _combatQuery.TryComp(user, out var combatMode) && combatMode.IsInCombatMode)
             {
@@ -708,8 +760,9 @@ namespace Content.Shared.Interaction
             if (!Resolve(other, ref other.Comp))
                 return false;
 
-            var ev = new InRangeOverrideEvent(origin, other);
+            var ev = new InRangeOverrideEvent(origin, other, range); // Trauma - added range
             RaiseLocalEvent(origin, ref ev);
+            range = ev.Range; // Trauma - potentially update the range if it was changed
 
             if (ev.Handled)
             {
@@ -1239,13 +1292,13 @@ namespace Content.Shared.Interaction
             if (checkCanUse && !_actionBlockerSystem.CanUseHeldEntity(user, used))
                 return false;
 
-            // Goobstation [
+            // <Goob>
             var useAttemptEv = new UseInHandAttemptEvent(user);
-            RaiseLocalEvent(used, useAttemptEv);
+            RaiseLocalEvent(used, ref useAttemptEv);
 
             if (useAttemptEv.Cancelled)
                 return false;
-            // ] Goobstation
+            // </Goob>
 
             var useMsg = new UseInHandEvent(user);
             RaiseLocalEvent(used, useMsg, true);
@@ -1494,6 +1547,18 @@ namespace Content.Shared.Interaction
             return ev.Handled;
         }
 
+        /// <summary>
+        /// Get a list of entities which are currently considered to be interacting with the specified target entity.
+        /// Note: the result set is cleared on call.
+        /// </summary>
+        public void GetEntitiesInteractingWithTarget(EntityUid target, HashSet<EntityUid> result)
+        {
+            result.Clear();
+
+            var ev = new GetInteractingEntitiesEvent(target, result);
+            RaiseLocalEvent(target, ref ev, true);
+        }
+
         [Obsolete("Use ActionBlockerSystem")]
         public bool SupportsComplexInteractions(EntityUid user)
         {
@@ -1563,12 +1628,24 @@ namespace Content.Shared.Interaction
     /// Override event raised directed on a user to check InRangeUnoccluded AND InRangeUnobstructed to the target if you require custom logic.
     /// </summary>
     [ByRefEvent]
-    public record struct InRangeOverrideEvent(EntityUid User, EntityUid Target)
+    // Trauma - added range
+    public record struct InRangeOverrideEvent(EntityUid User, EntityUid Target, float Range)
     {
         public readonly EntityUid User = User;
         public readonly EntityUid Target = Target;
+        public float Range = Range; // Trauma
 
         public bool Handled;
         public bool InRange = false;
+    }
+
+    /// <summary>
+    /// Raised to allow systems to provide entities which are interacting with the target entity.
+    /// </summary>
+    [ByRefEvent]
+    public record struct GetInteractingEntitiesEvent(EntityUid Target, HashSet<EntityUid> InteractingEntities)
+    {
+        public readonly EntityUid Target = Target;
+        public HashSet<EntityUid> InteractingEntities = InteractingEntities;
     }
 }

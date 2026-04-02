@@ -1,4 +1,6 @@
-using Content.Goobstation.Maths.FixedPoint;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.EntityEffects;

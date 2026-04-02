@@ -695,11 +695,14 @@
   id: SpellbookPaperRobe
   name: spellbook-paper-robe-name
   description: spellbook-paper-robe-desc
-  productEntity: ClothingOuterWizardPaperReal
+  productEntity: ClothingBackpackPaper
   cost:
     WizCoin: 1
   categories:
   - SpellbookEquipment
+  icon:
+    sprite: _Goobstation/Wizard/Clothing/OuterClothing/paperwizard.rsi
+    state: icon
 
 - type: listing
   id: SpellbookHighFrequencyBlade
@@ -707,7 +710,7 @@
   description: spellbook-high-freq-desc
   productEntity: HighFrequencyBlade
   cost:
-    WizCoin: 3
+    WizCoin: 2
   categories:
   - SpellbookEquipment
 
@@ -799,17 +802,6 @@
     WizCoin: 2
   categories:
   - SpellbookEquipment
-
-- type: listing
-  id: SpellbookNinjutsuScroll
-  name: spellbook-ninjutsu-name
-  description: spellbook-ninjutsu-desc
-  productEntity: NinjutsuScroll
-  cost:
-    WizCoin: 2
-  categories:
-  - SpellbookEquipment
-  disableRefund: true
 
 # Summons
 - type: listing

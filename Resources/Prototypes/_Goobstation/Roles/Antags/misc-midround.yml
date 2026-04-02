@@ -125,9 +125,9 @@
   equipment:
     ears: ClothingHeadsetAltSyndicate
     jumpsuit: ClothingUniformJumpsuitTacticool
-    eyes: ClothingEyesGlassesSunglasses
     shoes: ClothingShoesColorBlack
-    id: AgentIDCard
+    id: SyndicateIDCard
+    mask: ClothingMaskGasSyndicate
     gloves: ClothingHandsChameleonThief
     outerClothing: ClothingOuterHardsuitVoxRaiderStealth
     suitstorage: ExtendedEmergencyNitrogenTankFilled
@@ -140,4 +140,4 @@
     - DartGun
     - ChemistryBottleNocturine
     - ChemistryBottleNocturine
-    - HypopenBox
+    - AgentIDCard

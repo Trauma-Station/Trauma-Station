@@ -1,10 +1,5 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SaffronFennec <firefoxwolf2020@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Damage;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._DV.CosmicCult.Components;
@@ -16,13 +11,22 @@ namespace Content.Shared._DV.CosmicCult.Components;
 public sealed partial class CosmicAstralNovaComponent : Component
 {
     [DataField]
-    public bool DoStun = true;
+    public TimeSpan StunDuration = TimeSpan.FromSeconds(4f);
 
     [DataField]
-    public DamageSpecifier CosmicNovaDamage = new()
+    public DamageSpecifier AreaDamage = new()
     {
         DamageDict = new() {
             { "Asphyxiation", 5 }
         }
     };
+
+    [DataField]
+    public float AreaRange = 2.5f;
+
+    /// <summary>
+    ///     Entities not affected by astral nova
+    /// </summary>
+    [DataField(required: true)]
+    public EntityWhitelist AreaBlacklist = new();
 }

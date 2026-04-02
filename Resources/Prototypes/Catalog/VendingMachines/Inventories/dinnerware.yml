@@ -59,9 +59,12 @@
     DrinkMugOne: 1
     DrinkMugRainbow: 2
     DrinkMugRed: 2
+    MortarAndPestle: 1
+    HandheldJuicer: 1
   contrabandInventory:
     CandyBowl: 1
     BarSpoon: 2
     DrinkShaker: 2
   emaggedInventory: # Goobstation
     CombatKnife: 1
+    ThrowingKnife: 1

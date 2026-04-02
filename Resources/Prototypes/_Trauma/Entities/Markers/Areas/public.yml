@@ -1,0 +1,161 @@
+# Civilian areas that aren't associated with a job
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaCryosleep
+  name: cryosleep
+  components:
+  - type: Sprite
+    state: cryo
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaDorms
+  name: dorms
+  components:
+  - type: Sprite
+    state: dorms
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaDisposals
+  name: disposals
+  components:
+  - type: Sprite
+    state: disposals
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaEscapePods
+  name: escape pods
+  components:
+  - type: Sprite
+    state: escape_pods
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaEvacHall
+  name: evac hall
+  components:
+  - type: Sprite
+    state: evac_hall
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaEvacLounge
+  name: evac lounge
+  components:
+  - type: Sprite
+    state: evac_lounge
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaFitness
+  name: fitness
+  components:
+  - type: Sprite
+    state: fitness
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaGarden
+  name: garden
+  components:
+  - type: Sprite
+    state: garden
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaHallway
+  name: hallway
+  components:
+  - type: Sprite
+    state: hallway
+
+- type: entity
+  parent: AreaHallway
+  id: AreaHallwayCentral
+  name: central hallway
+  components:
+  - type: Sprite
+    state: central_hall
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaLaserTag
+  name: laser tag
+  components:
+  - type: Sprite
+    state: laser_tag
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaLaundry
+  name: laundry room
+  components:
+  - type: Sprite
+    state: laundry_room
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaLounge
+  name: lounge
+  components:
+  - type: Sprite
+    state: lounge
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaPool
+  name: pool
+  components:
+  - type: Sprite
+    state: pool
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaRecRoom
+  name: rec room
+  components:
+  - type: Sprite
+    state: rec_room
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaRestroom
+  name: restroom
+  components:
+  - type: Sprite
+    state: restroom
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaSauna
+  name: sauna
+  components:
+  - type: Sprite
+    state: sauna
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaShower
+  name: shower
+  components:
+  - type: Sprite
+    state: shower
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaToilet
+  name: toilet
+  components:
+  - type: Sprite
+    state: toilet
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaVacantRoom
+  name: vacant room
+  components:
+  - type: Sprite
+    state: vacant_room

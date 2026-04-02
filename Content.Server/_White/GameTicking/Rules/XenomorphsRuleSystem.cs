@@ -320,7 +320,7 @@ public sealed class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRuleComponen
         var humans = new List<EntityUid>();
         stationGrids ??= GetStationGrids();
 
-        var players = AllEntityQuery<HumanoidAppearanceComponent, ActorComponent, MobStateComponent, TransformComponent>();
+        var players = AllEntityQuery<HumanoidProfileComponent, ActorComponent, MobStateComponent, TransformComponent>();
         while (players.MoveNext(out var uid, out _, out _, out var mobStateComponent, out var xform))
         {
             if (_mobState.IsDead(uid, mobStateComponent)

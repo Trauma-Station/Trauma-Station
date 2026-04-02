@@ -1,12 +1,12 @@
 - type: entity
-  parent: BaseMobXenomorphAdult
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphQueen ]
   id: BaseMobXenomorphQueen
   name: xenomorph queen
   description: The highest individual, the central element and mother of the Hive. The destruction of the Queen in most cases means the collapse of the Hive.
   abstract: true
   components:
   - type: Sprite
-    sprite: _White/Mobs/Aliens/Xenomorphs/queen.rsi
+    sprite: _Trauma/Mobs/Xenos/queen.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: xenomorph
@@ -18,20 +18,10 @@
   - type: XenomorphQueen
   - type: TailLash
     tailDamage:
-      groups:
-        Brute: 5
+      types:
+        Slash: 5
     inject:
-      ChloralHydrate: 10 # Goobstation - new chemical
-  #- type: ActionGrant # Goobstation - moved to organs
-  #  actions:
-  #  - ActionTransferPlasma
-  #  - ActionSpawnWallResin
-  #  - ActionSpawnResinMembrane
-  #  - ActionSpawnResinNest
-  #  - ActionSpawnResinWeedNode
-  #  - ActionSpawnXenomorphEgg
-  - type: Body
-    prototype: XenomorphQueen
+      ChloralHydrate: 10
   - type: TypingIndicator
     proto: alien_royal
   - type: Fixtures
@@ -48,36 +38,37 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      735: Critical
-      750: Dead
+      400: Critical
+      425: Dead
   - type: SlowOnDamage
     speedModifierThresholds:
-      600: 0.9
-      645: 0.7
-      690: 0.6
+      375: 0.9
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 2.5
+    baseWalkSpeed: 3
+    baseSprintSpeed: 3
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 50
+      types:
+        Blunt: 10
+        Slash: 20
+        Piercing: 20
   - type: Deathgasp
     prototype: XenomorphQueenDeathgasp
   - type: Speech
     speechSounds: Xenomorph
     speechVerb: LargeMob
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     - TauCetiBasic
     understands:
     - Xeno
-#    - XenoHivemind # Goobstation - collective mind
     - Hissing
     - Draconic
     - TauCetiBasic
+  - type: QueenRoar
+  - type: XenomorphShoveTracker
+    shoveThreshold: 1
   # - type: GuideHelp
   #   guides:
   #   - XenomorphQueen
@@ -107,6 +98,4 @@
     baseSprintSpeed: 3.8
   - type: SlowOnDamage
     speedModifierThresholds:
-      600: 0.7
-      645: 0.6
-      690: 0.5
+      375: 0.9

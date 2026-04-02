@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects;
 using Content.Shared.IdentityManagement;
@@ -20,14 +21,11 @@ public sealed class EffectsToolSystem : EntitySystem
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-
-    private EntityQuery<EffectsToolComponent> _query;
+    [Dependency] private EntityQuery<EffectsToolComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<EffectsToolComponent>();
 
         SubscribeLocalEvent<EffectsToolComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<EffectsToolComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);
@@ -124,10 +122,8 @@ public sealed class EffectsToolSystem : EntitySystem
 
         // do the thing, effects are expected to call MarkUsed
         ent.Comp.Used = false;
-        _data.SetUser(target, user);
         _data.SetTool(target, ent);
-        _effects.ApplyEffects(target, ent.Comp.Effects);
-        _data.ClearUser(target);
+        _effects.ApplyEffects(target, ent.Comp.Effects, user: user);
         _data.ClearTool(target);
 
         if (!ent.Comp.Used)

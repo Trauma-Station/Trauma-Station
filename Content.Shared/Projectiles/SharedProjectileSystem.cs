@@ -1,8 +1,6 @@
 // <Trauma>
 using Content.Shared.Damage.Components;
-using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
-using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Numerics;
 using Content.Shared.Damage;
@@ -32,9 +30,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!; // Goob
-
-    private static readonly ProtoId<TagPrototype> GunCanAimShooterTag = "GunCanAimShooter"; // Goob
 
     public override void Initialize()
     {
@@ -123,7 +118,10 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             _transform.SetLocalPosition(uid, xform.LocalPosition + rotation.RotateVec(component.Offset), xform);
         }
 
-        _audio.PlayPredicted(component.Sound, uid, null);
+        // <Trauma> - use PlayLocal for predicted embedding
+        if (_timing.IsFirstTimePredicted)
+            _audio.PlayLocal(component.Sound, uid, null);
+        // </Trauma>
         component.EmbeddedIntoUid = target;
         var ev = new EmbedEvent(user, target);
         RaiseLocalEvent(uid, ref ev);
@@ -131,8 +129,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         EnsureComp<EmbeddedContainerComponent>(target, out var embeddedContainer);
 
-        // <Trauma> - just warn instead of assert and have a useful message
-        if (embeddedContainer.EmbeddedObjects.Contains(uid))
+        // <Trauma> - just warn instead of assert and have a useful message, only matters for non-prediction ticks
+        if (embeddedContainer.EmbeddedObjects.Contains(uid) && _timing.IsFirstTimePredicted)
             Log.Warning($"Entity {ToPrettyString(uid)} was not supposed to be embedded into {ToPrettyString(target)}!");
         // </Trauma>
 
@@ -225,7 +223,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         if ((component.Shooter == args.OtherEntity || component.Weapon == args.OtherEntity) &&
             component.Weapon != null && _tag.HasTag(component.Weapon.Value, GunCanAimShooterTag) &&
-            TryComp(uid, out TargetedProjectileComponent? targeted) && targeted.Target == args.OtherEntity)
+            TryComp(uid, out TargetedProjectileComponent? targeted) && GetEntity(targeted.Target) == args.OtherEntity)
             return;
         // /Goobstation
 
@@ -236,6 +234,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     }
 
     // Goobstation - Crawling fix
+    // TODO: no reason for this to be in core
     private void EmbeddablePreventCollision(EntityUid uid, EmbeddableProjectileComponent component, ref PreventCollideEvent args)
     {
         if (TryComp<RequireProjectileTargetComponent>(args.OtherEntity, out var requireTarget) && requireTarget.IgnoreThrow && requireTarget.Active)
@@ -275,7 +274,8 @@ public sealed class ImpactEffectEvent : EntityEventArgs
 /// Raised when an entity is just about to be hit with a projectile but can reflect it
 /// </summary>
 [ByRefEvent]
-public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled) : IInventoryRelayEvent
+// Trauma - add Target
+public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, EntityUid Target) : IInventoryRelayEvent
 {
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
 }

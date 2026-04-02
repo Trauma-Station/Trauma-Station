@@ -1,0 +1,9 @@
+- type: entity
+  parent: BulletTemperatureCold
+  id: BulletTemperatureCryo
+  name: cryo beam
+
+- type: entity
+  parent: BulletTemperatureHot
+  id: BulletTemperaturePyro
+  name: hot beam

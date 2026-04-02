@@ -1,0 +1,24 @@
+<Document>
+# Skills
+
+Skills are a thing innate to non-simple mobs. They're stored on the brain.
+
+Skills determine several aspects of your character, such as innate toughness or quality crafting. Skills can be broken down into six distinct categories:
+
+<GuideKnowledgeMasteryEmbed/>
+
+You can buy skills at character creation, found under the skills tab, to improve your character.
+
+It goes without saying, but skills can also be improved. If you practice what that skill does, you will gain experience in that skill. When you get enough, the game will automatically roll a new level.
+
+Different masteries unlocks different benefits and maluses to gameplay. Experiment and see what works.
+
+There are also skill chips:
+
+<Box>
+  <GuideEntityEmbed Entity="SkillChipPassenger"/>
+</Box>
+
+Every job has one and they provide job specific skills. They can be inserted or removed from the body through surgery.
+
+</Document>

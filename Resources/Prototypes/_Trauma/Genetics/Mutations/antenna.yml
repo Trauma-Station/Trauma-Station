@@ -1,0 +1,51 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationAntenna
+  name: Antenna
+  description: The affected person sprouts an antenna. This is known to allow them to access common radio channel passively.
+  components:
+  - type: Mutation
+    instability: 10
+  - type: RadioMutation
+    channels:
+    - Common
+  # TODO: add sprite layer with antenna
+
+- type: entity
+  parent: BaseMutation
+  id: MutationMindReader
+  name: Mind Reader
+  description: The affected person can look into the recent memories of others.
+  components:
+  - type: Mutation
+    instability: 10
+  - type: RemovesMutation
+    removes:
+    - MutationAntenna
+    # keep your paranoia :)
+  - type: ActionMutation
+    action: ActionMutationMindRead
+  # TODO: evil thing
+  # TODO: 20% chance to tell them "You feel something foreign enter your mind."
+  # TODO: say up to 3 lines of last chat messages, with each having 50% chance
+  # TODO: doxx the real identity
+
+- type: entity
+  parent: BaseMutationAction
+  id: ActionMutationMindRead
+  name: Mindread
+  description: Read the target's mind.
+  components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi
+      state: mindread
+    itemIconStyle: BigAction
+    useDelay: 5
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:MindReadActionEvent
+    whitelist:
+      components:
+      - MindContainer
+  - type: MindReadAction

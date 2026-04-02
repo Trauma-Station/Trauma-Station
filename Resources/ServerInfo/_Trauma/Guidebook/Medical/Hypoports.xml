@@ -24,7 +24,7 @@ Very useful to have for patients that have hypoports!
 You can use the detailed health examine button to see if someone has a hypoport installed.
 
 The standard hypoport can be made at a medfab or exofab roundstart and allows anyone with a hypospray to easily inject you with medicines.
-This hypoport is what you get for free if you enable the [bold]Hypoport[/bold] trait.
+This hypoport is what you get for free as a station role, unless you enable the [bold]No Hypoport[/bold] trait or remove it in-round.
 
 [color=#c96dbf]Science[/color] is able to research [bold]secure hypoports[/bold] which check the user's ID.
 The access needed starts out as Medical, but can be changed using a multitool.
@@ -47,7 +47,7 @@ The first surgery to do is opening a hypoport cavity. Once you've done that you 
 
 # Hypoports as a traitor
 
-Because not everyone will have a hypoport, you can no longer rely on hypopen with nocturine being a guaranteed KO. As a result it's much cheaper (and you can just get a regular hypo anyway)
+Because some players may choose to not have a hypoport, you can no longer rely on hypopen with nocturine being a guaranteed KO. As a result it's much cheaper (and you can just get a regular hypo anyway)
 
 If you are a traitor with a hypoport you can use it to easily heal yourself on the go. If you change a secure hypoport's access to Syndicate, an Agent ID will allow you alone to use it.
 Very handy if the doctors are carrying poisons on them, "just in case".

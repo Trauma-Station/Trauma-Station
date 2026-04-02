@@ -18,10 +18,8 @@
   - Monkey
   - Kobold
   - Abductor
-  - Yowie
   - IPC
   - Diona
-  - Harpy
   - Vox # Pasha
   - Gingerbread # Soecusn
   - Plasmaman
@@ -31,6 +29,8 @@
   - Vulpkanin
   - SlimePerson
   - Dwarf
+  - Feroxi
+  - Chitinid
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
@@ -158,46 +158,6 @@
   - type: RandomMetadata
     nameSegments:
     - NamesMilitaryFirstLeader
-    - NamesMilitaryLast
-    nameFormat: name-format-standard
-
-# Special Operations Officer
-
-- type: entity
-  id: RandomHumanoidSpawnerSpecialOperationsOfficers
-  name: Special Operations Officer
-  suffix: CentComm
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Uniforms/Jumpsuit/navy_gold.rsi
-    state: icon
-  - type: RandomMetadata
-    nameSegments:
-    - NamesMilitaryFirstHighRank
-    - NamesMilitaryLast
-    nameFormat: name-format-standard
-  - type: RandomHumanoidSpawner
-    settings: SpecialOperationsOfficer
-
-- type: randomHumanoidSettings
-  id: SpecialOperationsOfficer
-  parent: CentcommHumanoid
-  randomizeName: false
-  components:
-  - type: AutoImplant
-    implants: [ FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant]
-  - type: GhostRole
-    name: ghost-role-information-special-operations-officer-name
-    description: ghost-role-information-special-operations-officer-description
-    rules: ghost-role-information-special-operations-officer-rules
-    raffle:
-      settings: short
-  - type: Loadout
-    prototypes: [ SpecialOperationsOfficerGear ]
-    roleLoadout: [ RoleSurvivalEVA ]
-  - type: RandomMetadata
-    nameSegments:
-    - NamesMilitaryFirstHighRank
     - NamesMilitaryLast
     nameFormat: name-format-standard
 
@@ -420,7 +380,6 @@
     implants: [ FreedomImplant, NutrimentPumpImplant, SpaceProofImplant ]
   - type: RandomHumanoidAppearance
     randomizeName: false
-    hair: HairBald
   - type: GhostRole
     name: ghost-role-information-conquest-name
     description: ghost-role-information-conquest-description
@@ -474,9 +433,10 @@
       - !type:GibBehavior { }
   - type: NoSlip
   - type: Temperature
-    heatDamageThreshold: 5000
     currentTemperature: 310.15
     specificHeat: 42
+  - type: TemperatureDamage
+    heatDamageThreshold: 5000
     heatDamage:
       types:
         Heat: -1
@@ -493,12 +453,12 @@
     - Alive
     - Critical
     - Dead
-    damageCap: 0
     damage:
       types:
         Heat: -3
-      groups:
-        Brute: -3
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
   - type: StatusEffects
     allowed:
     - PressureImmunity

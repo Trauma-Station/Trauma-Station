@@ -5,3 +5,19 @@
   components:
   - type: AccessReader
     access: [["Revolutionary"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsGenetics
+  suffix: Genetics, Locked
+  components:
+  - type: AccessReader
+    access: [["Genetics"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsLibrary
+  suffix: Library, Locked
+  components:
+  - type: AccessReader
+    access: [["Library"]]

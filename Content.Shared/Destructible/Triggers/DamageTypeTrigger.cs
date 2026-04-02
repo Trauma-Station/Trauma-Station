@@ -1,6 +1,6 @@
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
-using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -28,7 +28,7 @@ public sealed partial class DamageTypeTrigger : IThresholdTrigger
 
     public bool Reached(Entity<DamageableComponent> damageable, SharedDestructibleSystem system)
     {
-        return damageable.Comp.Damage.DamageDict.TryGetValue(DamageType, out var damageReceived) &&
+        return system.Damageable.GetAllDamage(damageable.AsNullable()).DamageDict.TryGetValue(DamageType, out var damageReceived) &&
                damageReceived >= Damage;
     }
 }

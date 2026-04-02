@@ -1,4 +1,5 @@
 - type: emoteSounds
+  parent: BaseMobEmotes
   id: Xenomorph
   params:
     variation: 0.125
@@ -25,8 +26,6 @@
       collection: CatHisses
     MonkeyScreeches:
       collection: MonkeyScreeches
-    RobotBeep:
-      collection: RobotBeeps
     Yawn:
       collection: XenomorphHiss
       params:
@@ -35,13 +34,9 @@
       collection: XenomorphSnores
       params:
         volume: -12
-    Honk:
-      collection: BikeHorn
     Sigh:
       collection: MaleSigh
     Crying:
       collection: MaleCry
     Whistle:
       collection: Whistles
-    Weh:
-      collection: Weh

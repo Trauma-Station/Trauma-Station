@@ -1,6 +1,13 @@
+stack-bracing = bracing
+stack-brick = brick
+stack-brass-ingot = brass ingot
+stack-steel-ingot = steel ingot
+stack-plasteel-ingot = plasteel ingot
+stack-charcoal = charcoal
 stack-rev-gear = gear
 stack-rev-bolt = bolt
 stack-rev-nut = nut
 stack-rev-gun-parts = gun parts
 stack-rev-ball-bearings = ball bearings
 stack-rev-engine-parts = engine parts
+stack-whetstone = whetstone

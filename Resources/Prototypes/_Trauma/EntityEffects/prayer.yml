@@ -1,0 +1,8 @@
+- type: entityEffect
+  id: Salmonsnake
+  effects:
+  - !type:RelayBodyParts
+    effects:
+    - !type:ModifyWoundable
+  - !type:ModifyBleed
+    amount: -20

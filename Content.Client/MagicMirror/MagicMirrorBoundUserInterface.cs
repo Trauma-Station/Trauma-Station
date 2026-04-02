@@ -1,15 +1,4 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared.Humanoid.Markings;
+using Content.Client.Humanoid;
 using Content.Shared.MagicMirror;
 using Robust.Client.UserInterface;
 
@@ -19,6 +8,8 @@ public sealed class MagicMirrorBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private MagicMirrorWindow? _window;
+
+    private readonly MarkingsViewModel _markingsModel = new();
 
     public MagicMirrorBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -30,47 +21,25 @@ public sealed class MagicMirrorBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindow<MagicMirrorWindow>();
 
-        _window.OnHairSelected += tuple => SelectHair(MagicMirrorCategory.Hair, tuple.id, tuple.slot);
-        _window.OnHairColorChanged += args => ChangeColor(MagicMirrorCategory.Hair, args.marking, args.slot);
-        _window.OnHairSlotAdded += delegate () { AddSlot(MagicMirrorCategory.Hair); };
-        _window.OnHairSlotRemoved += args => RemoveSlot(MagicMirrorCategory.Hair, args);
+        _window.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
 
-        _window.OnFacialHairSelected += tuple => SelectHair(MagicMirrorCategory.FacialHair, tuple.id, tuple.slot);
-        _window.OnFacialHairColorChanged +=
-            args => ChangeColor(MagicMirrorCategory.FacialHair, args.marking, args.slot);
-        _window.OnFacialHairSlotAdded += delegate () { AddSlot(MagicMirrorCategory.FacialHair); };
-        _window.OnFacialHairSlotRemoved += args => RemoveSlot(MagicMirrorCategory.FacialHair, args);
-    }
+        _window.MarkingsPicker.SetModel(_markingsModel);
 
-    private void SelectHair(MagicMirrorCategory category, string marking, int slot)
-    {
-        SendMessage(new MagicMirrorSelectMessage(category, marking, slot));
-    }
-
-    private void ChangeColor(MagicMirrorCategory category, Marking marking, int slot)
-    {
-        SendMessage(new MagicMirrorChangeColorMessage(category, new(marking.MarkingColors), slot));
-    }
-
-    private void RemoveSlot(MagicMirrorCategory category, int slot)
-    {
-        SendMessage(new MagicMirrorRemoveSlotMessage(category, slot));
-    }
-
-    private void AddSlot(MagicMirrorCategory category)
-    {
-        SendMessage(new MagicMirrorAddSlotMessage(category));
+        _markingsModel.MarkingsChanged += (_, _) =>
+        {
+            SendMessage(new MagicMirrorSelectMessage(_markingsModel.Markings));
+        };
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
 
-        if (state is not MagicMirrorUiState data || _window == null)
-        {
+        if (state is not MagicMirrorUiState data)
             return;
-        }
 
-        _window.UpdateState(data);
+        _markingsModel.OrganData = data.OrganMarkingData;
+        _markingsModel.OrganProfileData = data.OrganProfileData;
+        _markingsModel.Markings = data.AppliedMarkings;
     }
 }

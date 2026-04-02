@@ -1,74 +1,13 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2024 12rabbits <53499656+12rabbits@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Alice "Arimah" Heurlin <30327355+arimah@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <65184747+Dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Eoin Mcloughlin <helloworld@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 HS <81934438+HolySSSS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <51352440+JIPDawg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <JIPDawg93@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Moomoobeef <62638182+Moomoobeef@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-// SPDX-FileCopyrightText: 2024 PursuitInAshes <pursuitinashes@gmail.com>
-// SPDX-FileCopyrightText: 2024 QueerNB <176353696+QueerNB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Saphire Lattice <lattice@saphi.re>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Thomas <87614336+Aeshus@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Truoizys <153248924+Truoizys@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 osjarw <62134478+osjarw@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 stellar-novas <stellar_novas@riseup.net>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Maps;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Weather;
@@ -77,236 +16,193 @@ public abstract class SharedWeatherSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly IPrototypeManager ProtoMan = default!;
+    [Dependency] protected readonly SharedAudioSystem Audio = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefManager = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedRoofSystem _roof = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
+    private EntityQuery<WeatherStatusEffectComponent> _weatherQuery;
+
+    public static readonly TimeSpan StartupTime = TimeSpan.FromSeconds(15);
+    public static readonly TimeSpan ShutdownTime = TimeSpan.FromSeconds(15);
 
     public override void Initialize()
     {
         base.Initialize();
+
         _blockQuery = GetEntityQuery<BlockWeatherComponent>();
-        SubscribeLocalEvent<WeatherComponent, EntityUnpausedEvent>(OnWeatherUnpaused);
+        _weatherQuery = GetEntityQuery<WeatherStatusEffectComponent>();
     }
 
-    private void OnWeatherUnpaused(EntityUid uid, WeatherComponent component, ref EntityUnpausedEvent args)
-    {
-        foreach (var weather in component.Weather.Values)
-        {
-            weather.StartTime += args.PausedTime;
-
-            if (weather.EndTime != null)
-                weather.EndTime = weather.EndTime.Value + args.PausedTime;
-        }
-        component.NextUpdate += args.PausedTime; // DeltaV
-    }
-
-    public bool CanWeatherAffect(EntityUid uid, MapGridComponent grid, TileRef tileRef, RoofComponent? roofComp = null)
+    public bool CanWeatherAffect(Entity<MapGridComponent?, RoofComponent?> ent, TileRef tileRef)
     {
         if (tileRef.Tile.IsEmpty)
             return true;
 
-        if (Resolve(uid, ref roofComp, false) && _roof.IsRooved((uid, grid, roofComp), tileRef.GridIndices))
+        if (!Resolve(ent, ref ent.Comp1))
             return false;
 
-        var tileDef = (ContentTileDefinition) _tileDefManager[tileRef.Tile.TypeId];
+        if (Resolve(ent, ref ent.Comp2, false) && _roof.IsRooved((ent, ent.Comp1, ent.Comp2), tileRef.GridIndices))
+            return false;
+
+        var tileDef = (ContentTileDefinition)_tileDefManager[tileRef.Tile.TypeId];
 
         if (!tileDef.Weather)
             return false;
 
-        var anchoredEntities = _mapSystem.GetAnchoredEntitiesEnumerator(uid, grid, tileRef.GridIndices);
+        var anchoredEntities = _mapSystem.GetAnchoredEntitiesEnumerator(ent, ent.Comp1, tileRef.GridIndices);
 
-        while (anchoredEntities.MoveNext(out var ent))
+        while (anchoredEntities.MoveNext(out var anchored))
         {
-            if (_blockQuery.HasComponent(ent.Value))
+            if (_blockQuery.HasComponent(anchored.Value))
                 return false;
         }
 
         return true;
-
     }
 
-    public float GetPercent(WeatherData component, EntityUid mapUid)
+    /// <summary>
+    /// Calculates the current “strength” of the specified weather based on the duration of the status effect.
+    /// Between 0 and 1.
+    /// </summary>
+    public float GetWeatherPercent(Entity<StatusEffectComponent> ent)
     {
-        var pauseTime = _metadata.GetPauseTime(mapUid);
-        var elapsed = Timing.CurTime - (component.StartTime + pauseTime);
-        var duration = component.Duration;
+        var elapsed = Timing.CurTime - ent.Comp.StartEffectTime;
+        var duration = ent.Comp.Duration;
         var remaining = duration - elapsed;
-        float alpha;
 
-        if (remaining < WeatherComponent.ShutdownTime)
-        {
-            alpha = (float) (remaining / WeatherComponent.ShutdownTime);
-        }
-        else if (elapsed < WeatherComponent.StartupTime)
-        {
-            alpha = (float) (elapsed / WeatherComponent.StartupTime);
-        }
+        if (remaining < ShutdownTime)
+            return (float)(remaining / ShutdownTime);
+        else if (elapsed < StartupTime)
+            return (float)(elapsed / StartupTime);
         else
-        {
-            alpha = 1f;
-        }
-
-        return alpha;
-    }
-
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        if (!Timing.IsFirstTimePredicted)
-            return;
-
-        var curTime = Timing.CurTime;
-
-        var query = EntityQueryEnumerator<WeatherComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (comp.Weather.Count == 0)
-                continue;
-
-            foreach (var (proto, weather) in comp.Weather)
-            {
-                var endTime = weather.EndTime;
-
-                // Ended
-                if (endTime != null && endTime < curTime)
-                {
-                    EndWeather(uid, comp, proto);
-                    continue;
-                }
-
-                var remainingTime = endTime - curTime;
-
-                // Admin messed up or the likes.
-                if (!ProtoMan.TryIndex<WeatherPrototype>(proto, out var weatherProto))
-                {
-                    Log.Error($"Unable to find weather prototype for {comp.Weather}, ending!");
-                    EndWeather(uid, comp, proto);
-                    continue;
-                }
-
-                // Shutting down
-                if (endTime != null && remainingTime < WeatherComponent.ShutdownTime)
-                {
-                    SetState(uid, WeatherState.Ending, comp, weather, weatherProto);
-                }
-                // Starting up
-                else
-                {
-                    var startTime = weather.StartTime;
-                    var elapsed = Timing.CurTime - startTime;
-
-                    if (elapsed < WeatherComponent.StartupTime)
-                    {
-                        SetState(uid, WeatherState.Starting, comp, weather, weatherProto);
-                    }
-                    // Begin DeltaV: Set state to Running when it finishes the starting time
-                    else
-                        SetState(uid, WeatherState.Running, comp, weather, weatherProto);
-                    // End DeltaV
-                }
-
-                // Run whatever code we need.
-                Run(uid, weather, weatherProto, frameTime);
-            }
-        }
+            return 1f;
     }
 
     /// <summary>
-    /// Shuts down all existing weather and starts the new one if applicable.
+    /// Attempts to add a new weather status effect to the specified map.
+    /// Does not remove or replace any other existing weather effects on the map.
+    /// If the specified weather effect already exists, its duration will be overridden.
     /// </summary>
-    public void SetWeather(MapId mapId, WeatherPrototype? proto, TimeSpan? endTime)
+    /// <param name="mapId">The <see cref="MapId"/> of the target map to apply the weather effect to.</param>
+    /// <param name="weatherProto">The prototype ID (<see cref="EntProtoId"/>) of the weather status effect to add.</param>
+    /// <param name="weatherEnt">When this method returns, contains the <see cref="EntityUid"/> of the weather entity if the operation succeeded; otherwise, <c>null</c>.</param>
+    /// <param name="duration">Optional. The duration for which the weather should exist on the map. If <c>null</c>, the weather will persist indefinitely.</param>
+    /// <returns><c>true</c> if the weather was successfully added or updated; otherwise, <c>false</c>.</returns>
+    public bool TryAddWeather(MapId mapId, EntProtoId weatherProto, [NotNullWhen(true)] out EntityUid? weatherEnt, TimeSpan? duration = null)
     {
+        weatherEnt = null;
+
         if (!_mapSystem.TryGetMap(mapId, out var mapUid))
-            return;
-
-        var weatherComp = EnsureComp<WeatherComponent>(mapUid.Value);
-
-        foreach (var (eProto, weather) in weatherComp.Weather)
-        {
-            // if we turn off the weather, we don't want endTime = null
-            if (proto == null)
-                endTime ??= Timing.CurTime + WeatherComponent.ShutdownTime;
-
-            // Reset cooldown if it's an existing one.
-            if (proto is not null && eProto == proto.ID)
-            {
-                weather.EndTime = endTime;
-                if (weather.State == WeatherState.Ending)
-                    weather.State = WeatherState.Running;
-
-                Dirty(mapUid.Value, weatherComp);
-                continue;
-            }
-
-            // Speedrun
-            var end = Timing.CurTime + WeatherComponent.ShutdownTime;
-
-            if (weather.EndTime == null || weather.EndTime > end)
-            {
-                weather.EndTime = end;
-                Dirty(mapUid.Value, weatherComp);
-            }
-        }
-
-        if (proto != null)
-            StartWeather(mapUid.Value, weatherComp, proto, endTime);
-    }
-
-    /// <summary>
-    /// Run every tick when the weather is running.
-    /// </summary>
-    protected virtual void Run(EntityUid uid, WeatherData weather, WeatherPrototype weatherProto, float frameTime) { }
-
-    protected void StartWeather(EntityUid uid, WeatherComponent component, WeatherPrototype weather, TimeSpan? endTime)
-    {
-        if (component.Weather.ContainsKey(weather.ID))
-            return;
-
-        var data = new WeatherData()
-        {
-            StartTime = Timing.CurTime,
-            EndTime = endTime,
-        };
-
-        component.Weather.Add(weather.ID, data);
-        Dirty(uid, component);
-    }
-
-    protected virtual void EndWeather(EntityUid uid, WeatherComponent component, string proto)
-    {
-        if (!component.Weather.TryGetValue(proto, out var data))
-            return;
-
-        _audio.Stop(data.Stream);
-        data.Stream = null;
-        component.Weather.Remove(proto);
-        Dirty(uid, component);
-    }
-
-    protected virtual bool SetState(EntityUid uid, WeatherState state, WeatherComponent component, WeatherData weather, WeatherPrototype weatherProto)
-    {
-        if (weather.State.Equals(state))
             return false;
 
-        weather.State = state;
-        Dirty(uid, component);
-        return true;
+        return TryAddWeather(mapUid.Value, weatherProto, out weatherEnt, duration);
     }
 
-    [Serializable, NetSerializable]
-    protected sealed class WeatherComponentState : ComponentState
+    /// <summary>
+    /// Adds a new weather to a map. Does not remove other existing weathers. If this type of weather already exists, it simply overrides its duration.
+    /// </summary>
+    /// <param name="mapUid">Target map entity</param>
+    /// <param name="weatherProto">EntProtoId of weather status effect</param>
+    /// <param name="weatherEnt">When this method returns, contains the <see cref="EntityUid"/> of the weather entity if the operation succeeded; otherwise, <c>null</c>.</param>
+    /// <param name="duration">How long this weather should exist on the map? If null - infinite duration</param>
+    public bool TryAddWeather(EntityUid mapUid, EntProtoId weatherProto, [NotNullWhen(true)] out EntityUid? weatherEnt, TimeSpan? duration = null)
     {
-        public Dictionary<ProtoId<WeatherPrototype>, WeatherData> Weather;
+        return _statusEffects.TrySetStatusEffectDuration(mapUid, weatherProto, out weatherEnt, duration);
+    }
 
-        public WeatherComponentState(Dictionary<ProtoId<WeatherPrototype>, WeatherData> weather)
+    /// <summary>
+    /// Checks if a specific weather exists on the given map.
+    /// </summary>
+    /// <param name="mapId">Target mapId</param>
+    /// <param name="weatherProto">EntProtoId of weather status effect</param>
+    /// <returns>True if the weather exists, otherwise false</returns>
+    public bool HasWeather(MapId mapId, EntProtoId weatherProto)
+    {
+        if (!_mapSystem.TryGetMap(mapId, out var mapUid))
+            return false;
+
+        return _statusEffects.TryGetStatusEffect(mapUid.Value, weatherProto, out _);
+    }
+
+    /// <summary>
+    /// Slowly remove weather from a map. It should be gone after <see cref="ShutdownTime"/> seconds.
+    /// </summary>
+    /// <param name="mapId">Target mapId</param>
+    /// <param name="weatherProto">EntProtoId of weather status effect</param>
+    public bool TryRemoveWeather(MapId mapId, EntProtoId weatherProto)
+    {
+        if (!_mapSystem.TryGetMap(mapId, out var mapUid))
+            return false;
+
+        return TryRemoveWeather(mapUid.Value, weatherProto);
+    }
+
+    /// <summary>
+    /// Slowly remove weather from map. It should be gone after <see cref="ShutdownTime"/> seconds.
+    /// </summary>
+    /// <param name="mapUid">Target entity map</param>
+    /// <param name="weatherProto">EntProtoId of weather status effect</param>
+    public bool TryRemoveWeather(EntityUid mapUid, EntProtoId weatherProto)
+    {
+        if (!_statusEffects.TryGetStatusEffect(mapUid, weatherProto, out var weatherEnt))
+            return false;
+
+        if (!_weatherQuery.HasComp(weatherEnt))
+            return false;
+
+        return _statusEffects.TrySetStatusEffectDuration(mapUid, weatherProto, ShutdownTime);
+    }
+
+    /// <summary>
+    /// Removes all weather conditions except the specified one. If the specified weather does not exist on the map, it adds it.
+    /// Returns true if the specified weather is present or was added, false otherwise.
+    /// </summary>
+    /// <param name="mapId">Target mapId</param>
+    /// <param name="weatherProto">EntProtoId of weather status effect</param>
+    /// <param name="weatherEnt">When this method returns, contains the <see cref="EntityUid"/> of the weather entity if the operation succeeded; otherwise, <c>null</c>.</param>
+    /// <param name="duration">How long this weather should exist on map? If null - infinite duration</param>
+    /// <returns><c>true</c> if the specified weather is present or was added; otherwise, <c>false</c>.</returns>
+    public bool TrySetWeather(MapId mapId, EntProtoId? weatherProto, out EntityUid? weatherEnt, TimeSpan? duration = null)
+    {
+        weatherEnt = null;
+        if (!_mapSystem.TryGetMap(mapId, out var mapUid))
+            return false;
+
+        // Remove all other weather effects except the specified one
+        if (_statusEffects.TryEffectsWithComp<WeatherStatusEffectComponent>(mapUid, out var effects))
         {
-            Weather = weather;
+            foreach (var effect in effects)
+            {
+                var effectProto = Prototype(effect);
+                if (effectProto is null)
+                    continue;
+
+                if (effectProto != weatherProto)
+                {
+                    TryRemoveWeather(mapUid.Value, effectProto);
+                }
+                else
+                {
+                    weatherEnt = effect;
+                }
+            }
         }
+
+        // If weatherProto is null, we just removed all weather and return true
+        if (weatherProto is null)
+            return true;
+
+        // If the specified weather already exists, just update its duration
+        if (weatherEnt != null)
+        {
+            TryAddWeather(mapUid.Value, weatherProto.Value, out weatherEnt, duration);
+            return true;
+        }
+
+        // Otherwise, add the specified weather
+        return TryAddWeather(mapUid.Value, weatherProto.Value, out weatherEnt, duration);
     }
 }

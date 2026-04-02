@@ -6,4 +6,3 @@ xenomorphs-queen-not-enough-plasma = Not enough plasma. Need { $plasma } more.
 xenomorphs-queen-promotion-invalid-target = Can only target other xenomorphs for promotion.
 xenomorphs-queen-already-praetorian = This xenomorph is already a Praetorian!
 xenomorphs-queen-promotion-success = Promoted { $target } to Praetorian!
-

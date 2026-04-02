@@ -14,7 +14,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseBullet
+  parent: BaseBulletKinetic # Trauma
   id: BulletHeavyRifle
   categories: [ HideSpawnMenu ]
   name: bullet (.10 rifle)

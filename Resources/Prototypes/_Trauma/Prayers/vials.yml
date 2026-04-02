@@ -1,0 +1,120 @@
+## PARITY
+
+- type: scrollPrayer
+  id: VialBlack
+  verb: GIVE
+  subjects: [ "BLACK VIAL", "OIL" ]
+  items:
+    id: VialBlack
+
+- type: scrollPrayer
+  id: VialBlood
+  verb: GIVE
+  subjects: [ "BLOOD VIAL" ]
+  items:
+    id: VialBlood
+
+- type: scrollPrayer
+  id: VialBlue
+  verb: GIVE
+  subjects: [ "BLUE VIAL" ]
+  items:
+    id: VialBlue
+
+- type: scrollPrayer
+  id: VialBrown
+  verb: GIVE
+  subjects: [ "Brown vial" ] # the wiki has it all like this?
+  items:
+    id: VialBrown
+
+- type: scrollPrayer
+  id: VialElixirBody
+  verb: GIVE
+  subjects: [ "ELIXIR OF BODY" ]
+  items:
+    id: VialElixirBody
+
+- type: scrollPrayer
+  id: VialElixirMind
+  verb: GIVE
+  subjects: [ "ELIXIR OF MIND" ]
+  items:
+    id: VialElixirMind
+
+- type: scrollPrayer
+  id: VialExplosive
+  verb: GIVE
+  subjects: [ "EXPLOSIVE VIAL" ]
+  items:
+    id: VialExplosive
+
+- type: scrollPrayer
+  id: VialGreen
+  verb: GIVE
+  subjects: [ "GREEN VIAL" ]
+  items:
+    id: VialGreen
+
+- type: scrollPrayer
+  id: VialLightBlue
+  verb: GIVE
+  subjects: [ "LIGHT BLUE VIAL" ]
+  items:
+    id: VialLightBlue
+
+- type: scrollPrayer
+  id: VialMurky
+  verb: GIVE
+  subjects: [ "MURKY VIAL" ]
+  items:
+    id: VialMurky
+
+- type: scrollPrayer
+  id: VialOrange
+  verb: GIVE
+  subjects: [ "ORANGE VIAL" ]
+  items:
+    id: VialOrange
+
+- type: scrollPrayer
+  id: VialPurple
+  verb: GIVE
+  subjects: [ "PURPLE VIAL" ]
+  items:
+    id: VialPurple
+
+- type: scrollPrayer
+  id: VialRed
+  verb: GIVE
+  subjects: [ "RED VIAL" ]
+  items:
+    id: VialRed
+
+- type: scrollPrayer
+  id: VialWater
+  verb: GIVE
+  subjects: [ "WATER VIAL" ]
+  items:
+    id: VialWater
+
+- type: scrollPrayer
+  id: VialWhite
+  verb: GIVE
+  subjects: [ "WHITE VIAL" ]
+  items:
+    id: VialWhite
+
+- type: scrollPrayer
+  id: VialWormJuice
+  verb: GIVE
+  subjects: [ "WORM JUICE" ]
+  items:
+    id: VialWormJuice
+
+- type: scrollPrayer
+  id: VialYellow
+  verb: GIVE
+  subjects: [ "YELLOW VIAL", "GNOME MILK" ]
+  items:
+    id: VialYellow

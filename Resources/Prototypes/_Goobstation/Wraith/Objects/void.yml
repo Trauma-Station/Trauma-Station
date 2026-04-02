@@ -15,7 +15,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 50
+          damage: 100
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -66,4 +66,4 @@
   - type: UserInterface # allows them to use radial selector
     interfaces:
       enum.RadialSelectorUiKey.Key:
-        type: TrackedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI

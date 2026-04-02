@@ -89,6 +89,12 @@ public sealed partial class TrailComponent : Component
     public Angle EndAngle;
 
     /// <summary>
+    /// Controls the randomness of angle
+    /// </summary>
+    [DataField]
+    public float AngleVariation;
+
+    /// <summary>
     /// The less this value is, the more frequent the particles will be. This is basically time of each cycle.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -166,6 +172,13 @@ public sealed partial class TrailComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public SpriteSpecifier? Sprite;
+
+    /// <summary>
+    /// If trail draws line, should it connect to trail entity?
+    /// Don't use it if entity position is disconnected from trail data
+    /// </summary>
+    [DataField]
+    public bool ConnectLineToTrailEntity = true;
 
     [DataField]
     public float Scale = 1f;

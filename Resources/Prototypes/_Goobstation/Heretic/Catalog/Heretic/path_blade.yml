@@ -31,9 +31,12 @@
   name: knowledge-path-blade-s1-name
   description: knowledge-path-blade-s1-desc
   icon: { sprite: _Goobstation/Heretic/Blades/blade_blade.rsi, state: icon }
-  productHereticKnowledge: CuttingEdge
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - CuttingEdge
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathBlade
   conditions:
@@ -56,9 +59,12 @@
   name: knowledge-path-blade-s2-name
   description: knowledge-path-blade-s2-desc
   icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
-  productHereticKnowledge: GraspOfBlade
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - GraspOfBlade
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathBlade
   conditions:
@@ -69,15 +75,17 @@
     whitelist:
     - Blade
 
-# side
 - type: listing
   id: HereticBladePath3
   name: knowledge-path-blade-s3-name
   description: knowledge-path-blade-s3-desc
-  icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon-on }
-  productHereticKnowledge: DanceOfTheBrand
+  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MarkOfBlade
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathBlade
   conditions:
@@ -88,12 +96,16 @@
     whitelist:
     - Blade
 
+# side
 - type: listing
   id: HereticBladePath4
   name: knowledge-path-blade-s4-name
   description: knowledge-path-blade-s4-desc
-  icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
-  productHereticKnowledge: MarkOfBlade
+  icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon-on }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - DanceOfTheBrand
   cost:
     KnowledgePoint: 2
   categories:
@@ -110,8 +122,11 @@
   id: HereticBladePath5
   name: knowledge-path-blade-s5-name
   description: knowledge-path-blade-s5-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: realignment }
-  productHereticKnowledge: Realignment
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: sacraments }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - SacramentsOfPower
   cost:
     KnowledgePoint: 2
   categories:
@@ -130,9 +145,12 @@
   name: knowledge-path-blade-s6-name
   description: knowledge-path-blade-s6-desc
   icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon-on }
-  productHereticKnowledge: TornChampionStance
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - TornChampionStance
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathBlade
   conditions:
@@ -148,7 +166,10 @@
   name: knowledge-path-blade-s7-name
   description: knowledge-path-blade-s7-desc
   icon: { sprite: _Goobstation/Heretic/mansus_grasp.rsi, state: icon }
-  productHereticKnowledge: EmpoweredBlades
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - EmpoweredBlades
   cost:
     KnowledgePoint: 2
   categories:
@@ -167,9 +188,12 @@
   name: knowledge-path-blade-s8-name
   description: knowledge-path-blade-s8-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: furious_steel }
-  productHereticKnowledge: FuriousSteel
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - FuriousSteel
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 2
   categories:
   - HereticPathBlade
   conditions:
@@ -185,9 +209,12 @@
   name: knowledge-path-blade-s9-name
   description: knowledge-path-blade-s9-desc
   icon: { sprite: _Goobstation/Heretic/items.rsi, state: protective_blade }
-  productHereticKnowledge: AscensionBlade
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - AscensionBlade
   cost:
-    KnowledgePoint: 3
+    KnowledgePoint: 2
   categories:
   - HereticPathBlade
   conditions:

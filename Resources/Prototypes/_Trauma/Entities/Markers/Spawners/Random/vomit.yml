@@ -1,0 +1,22 @@
+- type: entity
+  parent: DecalSpawnerBase
+  id: DecalSpawnerVomit
+  suffix: Vomit
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - vomitDecal1
+    - vomitDecal2
+    - vomitDecal3
+    - vomitDecal4
+    - vomitDecal5
+    - vomitDecal6
+    - vomitDecal7
+    radius: 0.5
+    color: "#87ab08"
+    randomRotation: true
+    maxDecals: 1
+    prob: 1
+    zIndex: 5
+    cleanable: true
+    deleteSpawnerAfterSpawn: true

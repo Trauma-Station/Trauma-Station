@@ -1,8 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons.Multishot;
 using Content.Goobstation.Common.Weapons.Ranged;
-using Content.Shared._Lavaland.Weapons.Ranged.Events;
-using Content.Shared._Shitmed.Weapons.Ranged.Events;
+using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Shared.Mech.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Content.Trauma.Common.Projectiles;
@@ -145,14 +144,9 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     private void OnShootRequest(RequestShootEvent msg, EntitySessionEventArgs args)
     {
-        // Goobstation - Multishot - Ensures that guns shooting at same time.
-        var gunUid = GetEntity(msg.Gun);
-
-        if (HasComp<MultishotComponent>(gunUid))
-            return;
-        // Goobstation - End
         var user = args.SenderSession.AttachedEntity;
 
+        // <Goob> - mech relaying, check gun below, multishot, lock-on targeting
         if (user == null ||
             !_combatMode.IsInCombatMode(user))
             return;
@@ -160,20 +154,20 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (TryComp<MechPilotComponent>(user.Value, out var mechPilot))
             user = mechPilot.Mech;
 
-        if (!TryGetGun(user.Value, out var ent, out var gun) ||
-            HasComp<ItemComponent>(user))
+        if (!TryGetGun(user.Value, out var ent, out var gun))
             return;
 
-        if (ent != GetEntity(msg.Gun))
+        if (HasComp<MultishotComponent>(ent)) // let multishot system handle it
             return;
 
         gun.ShootCoordinates = GetCoordinates(msg.Coordinates);
-        // Goob edit start
         var potentialTarget = GetEntity(msg.Target);
         if (gun.Target == null || !gun.BurstActivated || !gun.LockOnTargetBurst)
             gun.Target = potentialTarget;
-        // Goob edit end
         AttemptShoot(user.Value, ent, gun);
+        // </Goob>
+        if (msg.Continuous)
+            gun.ShotCounter = 0;
     }
 
     private void OnStopShootRequest(RequestStopShootEvent ev, EntitySessionEventArgs args)
@@ -467,8 +461,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out var userImpulse, user, throwItems: attemptEv.ThrowItems);
         var shotEv = new GunShotEvent(user, ev.Ammo);
         RaiseLocalEvent(gunUid, ref shotEv);
-        var shotBodyEv = new GunShotBodyEvent(gunUid, gun); // Shitmed Change
-        RaiseLocalEvent(user, shotBodyEv); // Shitmed Change
 
         UpdateAmmoCount(gunUid); //GoobStation - Multishot
         if (!userImpulse || !TryComp<PhysicsComponent>(user, out var userPhysics))
@@ -525,9 +517,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         // <Trauma> - prevent shooting with 0,0 direction
         if (mapDirection == Vector2.Zero)
             return;
-        // </Trauma>
+        var recoilScale = GetRecoilScale(user, gunUid);
         var mapAngle = mapDirection.ToAngle();
-        var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user); // Trauma - pass gunUid and user
+        var angle = GetRecoilAngle(Timing.CurTime, (gunUid, gun), mapDirection.ToAngle(), user, recoilScale); // Trauma - pass gunUid and user
+        // </Trauma>
 
         userImpulse = true;
 
@@ -565,6 +558,10 @@ public abstract partial class SharedGunSystem : EntitySystem
                     if (!cartridge.Spent)
                     {
                         var uid = PredictedSpawnAtPosition(cartridge.Prototype, fromEnt);
+                        // <Trauma>
+                        var cartEv = new CartridgeFiredEvent(uid);
+                        RaiseLocalEvent(ent!.Value, ref cartEv);
+                        // </Trauma>
                         CreateAndFireProjectiles(uid, cartridge);
 
                         RaiseLocalEvent(ent!.Value, new AmmoShotEvent()
@@ -620,9 +617,17 @@ public abstract partial class SharedGunSystem : EntitySystem
 
             // <Trauma>
             if (userImpulse)
-                Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
+                Recoil(user, mapDirection, gun.CameraRecoilScalarModified * recoilScale);
             // </Trauma>
         }
+
+        // <Trauma> - TODO: kill this, use AmmoShotUserEvent?
+        if (user is { } userA)
+        {
+            var ev = new AmmoShotUserEvent();
+            RaiseLocalEvent(userA, ref ev);
+        }
+        // </Trauma>
 
         RaiseLocalEvent(gunUid, new AmmoShotEvent()
         {
@@ -647,19 +652,18 @@ public abstract partial class SharedGunSystem : EntitySystem
                 var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,
                     mapAngle + spreadEvent.Spread / 2, ammoSpreadComp.Count);
 
-                ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
+                ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation - add target coords
                 shotProjectiles.Add(ammoEnt);
 
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = PredictedSpawnAtPosition(ammoSpreadComp.Proto, fromEnt);
-                    // Lavaland Change: Raise event when a projectile/pellet is fired from a gun.
-                    RaiseLocalEvent(gunUid, new ProjectileShotEvent()
-                    {
-                        FiredProjectile = newuid
-                    });
-                    SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId)); // Goob
-                    ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation
+                    // <Trauma>
+                    var pelletEv = new SpreadPelletFiredEvent(newuid);
+                    RaiseLocalEvent(ammoEnt, ref pelletEv);
+                    SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId));
+                    // </Trauma>
+                    ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, targetCoordinates: toMapBeforeRecoil); // Goobstation - add target coords
                     shotProjectiles.Add(newuid);
                 }
             }
@@ -703,6 +707,11 @@ public abstract partial class SharedGunSystem : EntitySystem
             var ev = new PlayerShotProjectileEvent(uid, userUid);
             RaiseLocalEvent(ref ev);
         }
+        if (gunUid is {} gun)
+        {
+            var shotEv = new ProjectileShotEvent(uid);
+            RaiseLocalEvent(gun, ref shotEv);
+        }
         // </Trauma>
     }
 
@@ -733,7 +742,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// <summary>
     /// Drops a single cartridge / shell
     /// </summary>
-    protected void EjectCartridge(
+    public void EjectCartridge( // Trauma - made public
         // <Trauma>
         System.Random rand, // predicted random instance for the gun
         EntityUid? user,
@@ -784,7 +793,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         RemCompDeferred<AmmoComponent>(uid);
     }
 
-    protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
+    public void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null) // Trauma - made public
     {
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);
@@ -909,7 +918,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         bool dirty = true)
     {
         targeted = EnsureComp<TargetedProjectileComponent>(projectile);
-        targeted.Target = TerminatingOrDeleted(target) ? null : target; // Goobstation - set to null if deleted
+        targeted.Target = TerminatingOrDeleted(target) ? null : GetNetEntity(target); // Trauma - set to null if deleted, use NetEntity otherwise
         if (dirty)
             Dirty(projectile, targeted);
     }

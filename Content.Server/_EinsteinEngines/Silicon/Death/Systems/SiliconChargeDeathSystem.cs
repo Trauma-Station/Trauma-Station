@@ -25,9 +25,6 @@ namespace Content.Server._EinsteinEngines.Silicon.Death;
 
 public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
 {
-    [Dependency] private readonly SleepingSystem _sleep = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearanceSystem = default!;
     // Goobstation Start - Energycrit
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -83,7 +80,7 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
             args.Cancel();
     }
 
-    private void SiliconDead(EntityUid uid, SiliconDownOnDeadComponent siliconDeadComp, Entity<PredictedBatteryComponent>? battery)
+    private void SiliconDead(EntityUid uid, SiliconDownOnDeadComponent siliconDeadComp, Entity<BatteryComponent>? battery)
     {
         if (siliconDeadComp.Dead)
             return;
@@ -99,11 +96,13 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
         _standing.Down(uid);
         EnsureComp<KnockedDownComponent>(uid);
 
-        if (TryComp(uid, out HumanoidAppearanceComponent? humanoidAppearanceComponent))
+        /* TODO NUBODY: reimplement this slop in the future if there's an api made
+        if (TryComp(uid, out HumanoidProfileComponent? humanoid)
         {
             var layers = HumanoidVisualLayersExtension.Sublayers(HumanoidVisualLayers.HeadSide);
-            _humanoidAppearanceSystem.SetLayersVisibility((uid, humanoidAppearanceComponent), layers, false);
+            _humanoid.SetLayersVisibility((uid, humanoid), layers, false);
         }
+        */
 
         // SiliconDownOnDeadComponent moved to shared
         siliconDeadComp.Dead = true;
@@ -117,7 +116,7 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
         RaiseLocalEvent(uid, ref ev);
     }
 
-    private void SiliconUnDead(EntityUid uid, SiliconDownOnDeadComponent siliconDeadComp, Entity<PredictedBatteryComponent>? battery)
+    private void SiliconUnDead(EntityUid uid, SiliconDownOnDeadComponent siliconDeadComp, Entity<BatteryComponent>? battery)
     {
         if (!siliconDeadComp.Dead)
             return;
@@ -146,10 +145,10 @@ public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
 ///     An event raised after a Silicon has gone down due to charge.
 /// </summary>
 [ByRefEvent]
-public readonly record struct SiliconChargeDeathEvent(EntityUid Silicon, Entity<PredictedBatteryComponent>? Battery);
+public readonly record struct SiliconChargeDeathEvent(EntityUid Silicon, Entity<BatteryComponent>? Battery);
 
 /// <summary>
 ///     An event raised after a Silicon has reawoken due to an increase in charge.
 /// </summary>
 [ByRefEvent]
-public readonly record struct SiliconChargeAliveEvent(EntityUid Silicon, Entity<PredictedBatteryComponent>? Battery);
+public readonly record struct SiliconChargeAliveEvent(EntityUid Silicon, Entity<BatteryComponent>? Battery);

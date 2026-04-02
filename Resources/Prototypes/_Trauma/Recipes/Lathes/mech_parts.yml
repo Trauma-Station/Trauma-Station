@@ -1,0 +1,55 @@
+- type: latheRecipe
+  parent: BaseRedAlert
+  id: ED209Endoskeleton
+  result: ED209Endoskeleton
+  completetime: 10
+  materials:
+    Steel: 3000
+    Glass: 2000
+
+- type: latheRecipe
+  parent: BaseRedAlert
+  id: EDShell
+  result: EDShell
+  completetime: 10
+  materials:
+    Steel: 1200
+
+- type: latheRecipe
+  parent: BaseRedAlert
+  id: EDLegR
+  result: EDLegR
+  completetime: 10
+  materials:
+    Steel: 1200
+
+- type: latheRecipe
+  parent: BaseRedAlert
+  id: EDLegL
+  result: EDLegL
+  completetime: 10
+  materials:
+    Steel: 1200
+
+- type: latheRecipe
+  parent: BaseRedAlert
+  id: EDHead
+  result: EDHead
+  completetime: 10
+  materials:
+    Steel: 1200
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseRedAlert ]
+  id: EDAiCoreElectronics
+  result: EDAiCoreElectronics
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseRedAlert ]
+  id: EDIFFElectronics
+  result: EDIFFElectronics
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseRedAlert ]
+  id: EDWeaponControlsElectronics
+  result: EDWeaponControlsElectronics

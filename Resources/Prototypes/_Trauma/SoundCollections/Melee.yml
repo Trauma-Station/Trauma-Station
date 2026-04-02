@@ -1,0 +1,6 @@
+- type: soundCollection
+  id: PowerFistHit
+  files:
+  - /Audio/_Trauma/Weapons/Melee/PowerFist/powerfist_hit1.ogg
+  - /Audio/_Trauma/Weapons/Melee/PowerFist/powerfist_hit2.ogg
+  - /Audio/_Trauma/Weapons/Melee/PowerFist/powerfist_hit3.ogg

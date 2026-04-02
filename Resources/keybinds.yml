@@ -50,6 +50,10 @@ binds:
 - function: ResistGrab # Goob
   type: State
   key: B
+- function: Tackle # Trauma
+  type: State
+  key: Q
+  mod1: Alt
 # Shuttle
 - function: ShuttleStrafeUp
   type: State
@@ -203,6 +207,9 @@ binds:
 - function: OpenLanguageMenu # Einstein Engines - Language
   type: State
   key: L
+- function: OpenMartialArtsMenu # Trauma
+  type: State
+  key: O
 - function: TextCursorSelect
   # TextCursorSelect HAS to be above ExamineEntity
   # So that LineEdit receives it correctly.

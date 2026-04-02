@@ -1,35 +1,42 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
+using Robust.Shared.Map;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.Controls;
 
-[Virtual]
-public class StaticSpriteView : Control
+// fuck you drunk shitcoders
+public sealed class StaticSpriteView : Control
 {
-    protected SpriteSystem? SpriteSystem;
+    private SpriteSystem? _sprite;
     private SharedTransformSystem? _transform;
-    protected readonly IEntityManager EntMan;
+    private readonly IEntityManager EntMan;
 
-    private SpriteComponent? _cachedSprite;
     private readonly Angle _cachedWorldRotation = Angle.Zero;
 
     [ViewVariables]
-    public SpriteComponent? Sprite => Entity?.Comp1;
+    public SpriteComponent? Sprite => Entity?.Comp;
 
+    /// <summary>
+    /// The fake entity with a sprite copied from the original.
+    /// </summary>
     [ViewVariables]
-    public Entity<SpriteComponent, TransformComponent>? Entity { get; private set; }
+    public Entity<SpriteComponent>? Entity { get; private set; }
 
+    /// <summary>
+    /// The original netentity which we are copying.
+    /// </summary>
     [ViewVariables]
     public NetEntity? NetEnt { get; private set; }
+
+    /// <summary>
+    /// The original local entity which we are copying.
+    /// </summary>
+    public EntityUid? RealEntity;
 
     public bool IsVisible { get; set; } = true;
 
@@ -150,6 +157,13 @@ public class StaticSpriteView : Control
         SetEntity(uid);
     }
 
+    protected override void Deparented()
+    {
+        base.Deparented();
+
+        Reset();
+    }
+
     public void SetEntity(NetEntity netEnt)
     {
         if (netEnt == NetEnt)
@@ -158,35 +172,42 @@ public class StaticSpriteView : Control
         if (EntMan.TryGetEntity(netEnt, out var uid))
         {
             SetEntity(uid);
+            return;
         }
-        else
-        {
-            // Подписаться на событие появления сущности
-            Entity = null;
-            NetEnt = netEnt;
-        }
+
+        Reset();
+    }
+
+    public void Reset()
+    {
+        EntMan.DeleteEntity(Entity?.Owner);
+        Entity = null;
+        RealEntity = null;
+        NetEnt = null;
     }
 
     public void SetEntity(EntityUid? uid)
     {
-        if (Entity?.Owner == uid)
+        if (RealEntity == uid)
             return;
 
-        if (!EntMan.TryGetComponent(uid, out SpriteComponent? sprite)
-            || !EntMan.TryGetComponent(uid, out TransformComponent? xform))
+        if (!EntMan.TryGetComponent(uid, out SpriteComponent? sprite))
         {
-            Entity = null;
-            NetEnt = null;
+            Reset();
             return;
         }
 
-        // Создаем глубокую копию спрайта
-        _cachedSprite = new SpriteComponent();
-        _cachedSprite.CopyFrom(sprite); // Используем встроенный метод копирования
+        _sprite ??= EntMan.System<SpriteSystem>();
 
-        Entity = new(uid.Value, sprite, xform);
+        var fake = Entity?.Owner ?? EntMan.Spawn();
+        var fakeSprite = EntMan.EnsureComponent<SpriteComponent>(fake);
+        Entity = (fake, fakeSprite);
+        _sprite.CopySprite((uid.Value, sprite), Entity.Value.AsNullable());
+
         NetEnt = EntMan.GetNetEntity(uid);
+        RealEntity = uid;
     }
+
     protected override Vector2 MeasureOverride(Vector2 availableSize)
     {
         // TODO Make this get called when sprite bounds/properties update?
@@ -196,10 +217,12 @@ public class StaticSpriteView : Control
 
     private void UpdateSize()
     {
-        if (!ResolveEntity(out _, out var sprite, out _))
+        if (ResolveEntity() is not {} ent)
             return;
 
-        var spriteBox = sprite.CalculateRotatedBoundingBox(default,  _worldRotation ?? Angle.Zero, _eyeRotation)
+        _sprite ??= EntMan.System<SpriteSystem>();
+
+        var spriteBox = _sprite.CalculateBounds(ent, Vector2.Zero, _worldRotation ?? Angle.Zero, _eyeRotation)
             .CalcBoundingBox();
 
         if (!SpriteOffset)
@@ -241,10 +264,10 @@ public class StaticSpriteView : Control
 
     protected override void Draw(IRenderHandle renderHandle)
     {
-        if (!ResolveEntity(out var uid, out _, out var xform) || _cachedSprite == null)
+        if (ResolveEntity() is not {} ent)
             return;
 
-        SpriteSystem ??= EntMan.System<SpriteSystem>();
+        _sprite ??= EntMan.System<SpriteSystem>();
         _transform ??= EntMan.System<TransformSystem>();
 
         var stretchVec = Stretch switch
@@ -257,7 +280,7 @@ public class StaticSpriteView : Control
 
         var offset = SpriteOffset
             ? Vector2.Zero
-            : - (-_eyeRotation).RotateVec(_cachedSprite.Offset * _scale) * new Vector2(1, -1) * EyeManager.PixelsPerMeter;
+            : - (-_eyeRotation).RotateVec(ent.Comp.Offset * _scale) * new Vector2(1, -1) * EyeManager.PixelsPerMeter;
 
         var position = PixelSize / 2 + offset * stretch * UIScale;
         var scale = Scale * UIScale * stretch;
@@ -267,37 +290,26 @@ public class StaticSpriteView : Control
         world.Modulate *= Modulate * ActualModulateSelf;
 
         renderHandle.DrawEntity(
-            uid,
+            ent,
             position,
             scale,
             _cachedWorldRotation, // Используем сохраненный поворот
             _eyeRotation,
             OverrideDirection,
-            _cachedSprite, // Кэшированный спрайт
-            xform
+            ent.Comp
         );
 
         world.Modulate = oldModulate;
     }
 
-    private bool ResolveEntity(
-        out EntityUid uid,
-        [NotNullWhen(true)] out SpriteComponent? sprite,
-        [NotNullWhen(true)] out TransformComponent? xform)
+    private Entity<SpriteComponent>? ResolveEntity()
     {
-        sprite = _cachedSprite; // Возвращаем кэшированный спрайт
-        xform = null; // Не используем текущий transform
-
         if (NetEnt != null && Entity == null && EntMan.TryGetEntity(NetEnt, out var ent))
             SetEntity(ent);
 
-        if (Entity != null)
-        {
-            uid = Entity.Value.Owner;
-            return !EntMan.Deleted(uid);
-        }
+        if (Entity is not {} fake || EntMan.Deleted(RealEntity))
+            return null;
 
-        uid = default;
-        return false;
+        return fake;
     }
 }

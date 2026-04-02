@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;

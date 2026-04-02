@@ -9,8 +9,8 @@
 - type: entity
   parent: [ BaseMajorContraband, BaseWeaponShotgun, BaseGunWieldable ]
   id: WeaponShotgunDevastator
-  name: devastator shotgun
-  description: A 4 barrel shotgun that's surprisingly shit, the barrels are barely lined up... but it's still deadly.
+  name: Devastator
+  description: A 4 barrel shotgun, inaccurate as hell but the results speak for themselves. Uses 12 gauge shotgun shells.
   suffix: Full
   components:
   - type: Sprite
@@ -22,13 +22,20 @@
     sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devastator.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Shotguns/devastator.rsi
-  - type: GunRequiresWield
+  - type: GunRequiresWield # ah yes let me one-hand the quad barrel shotgun
   - type: Gun
-    fireRate: 4
+    fireRate: 3 # Was 4 but I nerfed it a bit because it felt fucky at 4
   - type: GunSpreadModifier
-    spread: 2
+    spread: 1.5 # Was 2 but I wanted it to be more useful at range... still shit though.
   - type: BallisticAmmoProvider
     capacity: 4
+  - type: MeleeWeapon
+    wideAnimationRotation: -90 # Barrel thumps are cool.
+    animationRotation: -90
+    angle: 0
+    animation: WeaponArcThrust
+  # I tried adding durability but it had occasional crashes in a dev environment, its probably nothing but I don't like that.
+  # I also had it vary more from other shotguns but eh, it just has to barrel thump.
 
 - type: entity
   parent: WeaponShotgunDevastator
@@ -37,3 +44,7 @@
   components:
   - type: BallisticAmmoProvider
     proto: null
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevGuns
+    node: Devastator

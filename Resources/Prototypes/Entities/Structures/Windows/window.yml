@@ -147,6 +147,7 @@
   - type: BlockWeather
   - type: SoundBlocker # Trauma
     soundBlockPercent: 0.5
+  - type: ReflectiveSurface # Goob
 
 - type: entity
   parent: Window
@@ -285,6 +286,7 @@
       sprite: Structures/Windows/cracks_directional.rsi
   - type: StaticPrice
     price: 15
+  - type: ReflectiveSurface # Goob
 
 - type: entity
   id: WindowDirectionalRCDResistant

@@ -81,7 +81,9 @@
 
 using Content.Server.Humanoid.Components;
 using Content.Server.RandomMetadata;
+using Content.Shared.Body;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -94,11 +96,11 @@ namespace Content.Server.Humanoid.Systems;
 /// </summary>
 public sealed class RandomHumanoidSystem : EntitySystem
 {
+    [Dependency] private readonly HumanoidProfileSystem _humanoidProfile = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
-
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -127,8 +129,6 @@ public sealed class RandomHumanoidSystem : EntitySystem
 
         _metaData.SetEntityName(humanoid, prototype.RandomizeName ? profile.Name : name);
 
-        _humanoid.LoadProfile(humanoid, profile);
-
         if (prototype.Components != null)
         {
             foreach (var entry in prototype.Components.Values)
@@ -140,6 +140,9 @@ public sealed class RandomHumanoidSystem : EntitySystem
         }
 
         EntityManager.InitializeAndStartEntity(humanoid);
+
+        _visualBody.ApplyProfileTo(humanoid, profile);
+        _humanoidProfile.ApplyProfileTo(humanoid, profile);
 
         return humanoid;
     }

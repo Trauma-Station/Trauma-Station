@@ -1,0 +1,10 @@
+# Blast door
+
+- type: entity
+  parent: BlastDoor
+  id: BlastDoorRobotics
+  suffix: Robotics, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsRobotics ]

@@ -1,0 +1,33 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
+
+namespace Content.Lavaland.Shared.Audio;
+
+/// <summary>
+/// Attaches a rules prototype to sound files to play ambience.
+/// </summary>
+[Prototype]
+public sealed partial class BossMusicPrototype : IPrototype
+{
+    [IdDataField] public string ID { get; private set; } = string.Empty;
+
+    [DataField("fade")]
+    public bool FadeIn;
+
+    [DataField(required: true)]
+    public SoundSpecifier Sound = default!;
+
+    [DataField]
+    public float FadeInTime = 5f;
+
+    [DataField]
+    public float FadeOutTime = 5f;
+
+    /// <summary>
+    /// Sets the playback position when the boss is defeated.
+    /// </summary>
+    [DataField]
+    public float? PositionOnEnd;
+}

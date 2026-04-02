@@ -12,7 +12,7 @@
     graph: RevHelmet
     deconstructionTarget: null
     node: finished
-  - type: Armor # same values as BSO chud gear, it should much stronger than a 1 cloth cap hat you can make roundstart as any role
+  - type: Armor # same values as (rip) BSO chud gear, it should much stronger than a 1 cloth cap hat you can make roundstart as any role
     coverage:
     - Head
     traumaDeductions:
@@ -27,8 +27,6 @@
         Slash: 0.3
         Piercing: 0.3
         Heat: 0.3
-        Radiation: 0.75
-        Caustic: 0.75
   - type: ExplosionResistance
     damageCoefficient: 0.75
 
@@ -44,8 +42,6 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Head/Helmets/revflamearmor.rsi
   - type: Armor
-    coverage:
-    - Head
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
@@ -59,6 +55,24 @@
         Piercing: 0.7
         Heat: 0.5
   - type: ExplosionResistance
-    damageCoefficient: 0.90
+    damageCoefficient: 0.4
   - type: FireProtection
     reduction: 0.2
+  - type: FaceHuggerBlocker
+
+- type: entity
+  parent: ClothingHeadHatHelmetTemplar
+  id: ClothingHeadHatHelmetVenerator
+  name: venerator headpiece
+  description: The light of christ, strangely non-light emitting.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Misc/venerator.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Misc/venerator.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    layers: {}

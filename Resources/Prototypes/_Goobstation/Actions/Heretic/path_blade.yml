@@ -11,31 +11,29 @@
 # actions
 - type: entity
   parent: BaseAction
-  id: ActionHereticRealignment
-  name: Realignment
-  description: Recover from all stuns and knockdowns, gaining short term pacifism.
-  categories: [ HideSpawnMenu ]
+  id: ActionHereticSacraments
+  name: Sacraments of Power
+  description: Become immune to all damage temporarily, sending it back to attackers.
   components:
   - type: Action
     checkCanInteract: false
-    checkConsciousness: false
-    useDelay: 10 # Trauma edit
+    useDelay: 50
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: realignment
+      state: sacraments
   - type: InstantAction
-    event: !type:EventHereticRealignment
+    event: !type:EventHereticSacraments
   - type: HereticAction
     requireMagicItem: true
-    messageLoc: heretic-speech-realignment
+  - type: SpeakOnAction
+    sentence: heretic-speech-blade-sacraments
 
 - type: entity
   parent: BaseAction
   id: ActionHereticFuriousSteel
-  name: Furious steel
+  name: Furious Steel
   description: Summon three orbiting protecting blades around you.
-  categories: [ HideSpawnMenu ]
   components:
   - type: Action
     checkCanInteract: false
@@ -48,7 +46,8 @@
     event: !type:EventHereticFuriousSteel
   - type: HereticAction
     requireMagicItem: true
-    messageLoc: heretic-speech-blade-furioussteel
+  - type: SpeakOnAction
+    sentence: heretic-speech-blade-furioussteel
   - type: ChangeUseDelayOnAscension
     newUseDelay: 30
     requiredPath: Blade

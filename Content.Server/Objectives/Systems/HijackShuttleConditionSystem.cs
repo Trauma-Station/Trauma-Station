@@ -68,7 +68,7 @@ public sealed class HijackShuttleConditionSystem : EntitySystem
     private bool IsShuttleHijacked(EntityUid shuttleGridId, EntityUid mindId)
     {
         var gridPlayers = Filter.BroadcastGrid(shuttleGridId).Recipients;
-        var humanoids = GetEntityQuery<HumanoidAppearanceComponent>();
+        var humanoids = GetEntityQuery<HumanoidProfileComponent>();
         var cuffable = GetEntityQuery<CuffableComponent>();
 
         var agentOnShuttle = false;

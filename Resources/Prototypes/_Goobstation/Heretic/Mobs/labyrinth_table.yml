@@ -1,0 +1,9 @@
+- type: weightedRandomEntity
+  id: LabyrinthPortalSpawnTable
+  weights:
+    MobGhoulStalker: 4
+    MobGhoulProphet: 1
+    MobGhoulMirrorMaid: 2
+    MobGhoulFireShark: 4
+    MobGhoulRustWalker: 4
+    MobGhoulShattered: 1

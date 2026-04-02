@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Based on scroll from https://github.com/tgstation/tgstation/blob/80ab61c8c7741e1d95e5f168357a9e6e61b38f2c/icons/obj/scrolls.dmi, edited by GoidaYAMLWarrior (github)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        }
+    ]
+}

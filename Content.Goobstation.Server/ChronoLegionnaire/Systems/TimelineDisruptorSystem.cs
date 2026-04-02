@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.ChronoLegionnaire.Components;
@@ -21,11 +15,12 @@ namespace Content.Goobstation.Server.ChronoLegionnaire.Systems;
 // TODO move to shared all of this can be predicted?
 public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly ContainerSystem _containerSystem = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -46,7 +41,7 @@ public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
         if (args.Handled || !args.Complex)
             return;
 
-        if (!_itemSlotsSystem.TryGetSlot(ent, comp.DisruptionSlot, out var disruptionSlot))
+        if (!_slots.TryGetSlot(ent, comp.DisruptionSlot, out var disruptionSlot))
             return;
 
         if (disruptionSlot.ContainerSlot == null || disruptionSlot.ContainerSlot.ContainedEntities.Count == 0)
@@ -59,7 +54,7 @@ public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
 
     private bool TryCheckContainer(Entity<TimelineDisruptorComponent> ent)
     {
-        if (!_containerSystem.TryGetContainer(ent, ent.Comp.DisruptionSlot, out var container))
+        if (!_container.TryGetContainer(ent, ent.Comp.DisruptionSlot, out var container))
             return false;
 
         if (container.ContainedEntities.Count == 0)
@@ -80,7 +75,7 @@ public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
         if (!Resolve(ent, ref appearance, false))
             return;
 
-        _appearanceSystem.SetData(ent, TimelineDisruptiorVisuals.ContainerInserted, isContain, appearance);
+        _appearance.SetData(ent, TimelineDisruptiorVisuals.ContainerInserted, isContain, appearance);
     }
 
     private void OnContainerChanged(EntityUid uid, TimelineDisruptorComponent component, ContainerModifiedMessage args)
@@ -100,13 +95,13 @@ public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
         disruptor.Disruption = true;
         disruptor.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
         disruptor.DisruptionEndTime = _timing.CurTime + disruptor.DisruptionDuration;
-        disruptor.DisruptionSoundStream = _audioSystem.PlayPredicted(disruptor.DusruptionSound, ent, null)?.Entity;
+        disruptor.DisruptionSoundStream = _audio.PlayPredicted(disruptor.DusruptionSound, ent, null)?.Entity;
 
-        _appearanceSystem.SetData(ent, TimelineDisruptiorVisuals.Disrupting, true);
+        _appearance.SetData(ent, TimelineDisruptiorVisuals.Disrupting, true);
         Dirty(uid, disruptor);
     }
 
-    protected void StopDisrupting(Entity<TimelineDisruptorComponent> ent)
+    private void StopDisrupting(Entity<TimelineDisruptorComponent> ent)
     {
         var (_, disruptor) = ent;
 
@@ -114,7 +109,7 @@ public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
             return;
 
         disruptor.Disruption = false;
-        _appearanceSystem.SetData(ent, TimelineDisruptiorVisuals.Disrupting, false);
+        _appearance.SetData(ent, TimelineDisruptiorVisuals.Disrupting, false);
 
         Dirty(ent, ent.Comp);
     }
@@ -125,7 +120,7 @@ public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
 
         Dirty(ent, disruptor);
 
-        if (!_itemSlotsSystem.TryGetSlot(ent, disruptor.DisruptionSlot, out var disruptionSlot))
+        if (!_slots.TryGetSlot(ent, disruptor.DisruptionSlot, out var disruptionSlot))
             return;
 
         EntityUid? cage = disruptionSlot.ContainerSlot!.ContainedEntity;
@@ -141,12 +136,12 @@ public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
         foreach (var contained in contents)
         {
             // Removing entity from container to delete it without ghost breaking
-            _containerSystem.RemoveEntity(cage.Value, contained);
+            _container.RemoveEntity(cage.Value, contained);
             QueueDel(contained);
         }
 
-        disruptor.DisruptionSoundStream = _audioSystem.Stop(disruptor.DisruptionSoundStream);
-        _audioSystem.PlayPredicted(disruptor.DisruptionCompleteSound, ent, null);
+        disruptor.DisruptionSoundStream = _audio.Stop(disruptor.DisruptionSoundStream);
+        _audio.PlayPredicted(disruptor.DisruptionCompleteSound, ent, null);
     }
 
     public override void Update(float frameTime)
@@ -159,14 +154,14 @@ public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
             if (!disruptor.Disruption)
                 continue;
 
-            if (!_itemSlotsSystem.TryGetSlot(uid, disruptor.DisruptionSlot, out var disruptionSlot))
+            if (!_slots.TryGetSlot(uid, disruptor.DisruptionSlot, out var disruptionSlot))
                 continue;
 
             // Check if we removed stasis container from disruptor
             if ((disruptionSlot.ContainerSlot == null || disruptionSlot.ContainerSlot.ContainedEntity == null) && disruptor.Disruption)
             {
                 StopDisrupting((uid, disruptor));
-                disruptor.DisruptionSoundStream = _audioSystem.Stop(disruptor.DisruptionSoundStream);
+                disruptor.DisruptionSoundStream = _audio.Stop(disruptor.DisruptionSoundStream);
                 continue;
             }
 

@@ -1,4 +1,4 @@
-- files: 
+- files:
   - demon_laugh.ogg
   - demon_laugh2.ogg
   - demon_scream.ogg
@@ -6,7 +6,7 @@
   copyright: "Tim Rockk, converted to OGG and Mono by Luminal"
   source: "https://opengameart.org/content/demon-voice"
 
-- files: 
+- files:
   - demon_speech.ogg
   - demon_speech2.ogg
   license: "CC0-1.0"

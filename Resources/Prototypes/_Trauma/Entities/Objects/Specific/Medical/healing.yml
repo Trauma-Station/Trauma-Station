@@ -1,0 +1,17 @@
+# keep entry weight in RandomSafePillTable synced with number of items here
+- type: entityTable
+  id: RandomSafePillTrauma
+  table: !type:GroupSelector
+    children:
+    - id: PillTramadol
+    - id: PillOxycodone
+    - id: PillIbuprofen
+
+# keep entry weight in RandomSafeSyringeTable synced with number of items here
+- type: entityTable
+  id: RandomSafeSyringeTrauma
+  table: !type:GroupSelector
+    children:
+    - id: SyringeTramadol
+    - id: SyringeOxycodone
+    - id: SyringeIbuprofen

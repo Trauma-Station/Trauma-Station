@@ -115,6 +115,11 @@
   name: signal-port-name-alt-interact
   description: signal-port-description-alt-interact
 
+- type: sinkPort
+  id: UseInHand
+  name: signal-port-name-use-in-hand
+  description: signal-port-description-use-in-hand
+
 # Autodoc
 
 - type: sinkPort

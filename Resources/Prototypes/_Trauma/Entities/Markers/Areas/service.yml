@@ -1,0 +1,91 @@
+- type: entity
+  abstract: true
+  parent: BaseAreaStation
+  id: BaseAreaService
+  name: service
+  components:
+  - type: DepartmentArea
+    department: Service
+
+# For the kitchen itself
+- type: entity
+  parent: BaseAreaService
+  id: AreaKitchen
+  name: kitchen
+  components:
+  - type: Sprite
+    state: kitchen
+
+# For the seating area between kitchen and bar
+- type: entity
+  parent: AreaKitchen
+  id: AreaCafeteria
+  name: cafeteria
+  components:
+  - type: Sprite
+    state: cafeteria
+
+# For the kitchen freezer room
+- type: entity
+  parent: AreaKitchen
+  id: AreaColdRoom
+  name: cold room
+  components:
+  - type: Sprite
+    state: kitchen_cold
+
+- type: entity
+  parent: AreaKitchen
+  id: AreaKitchenBackRoom
+  name: kitchen back room
+  components:
+  - type: Sprite
+    state: kitchen_back
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaBarber
+  name: barber
+  components:
+  - type: Sprite
+    state: barber
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaBar
+  name: bar
+  components:
+  - type: Sprite
+    state: bar
+
+- type: entity
+  parent: AreaBar
+  id: AreaBarBackRoom
+  name: bar back room
+  components:
+  - type: Sprite
+    state: bar_back_room
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaDiner
+  name: diner
+  components:
+  - type: Sprite
+    state: diner
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaBotany
+  name: hydro
+  components:
+  - type: Sprite
+    state: hydro
+
+- type: entity
+  parent: BaseAreaService
+  id: AreaServiceHall
+  name: service hall
+  components:
+  - type: Sprite
+    state: service_hall

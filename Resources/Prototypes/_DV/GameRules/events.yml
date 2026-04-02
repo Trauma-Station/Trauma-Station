@@ -14,14 +14,10 @@
     minimumPlayers: 15
     weight: 4
     duration: 30
-    eventType: Neutral
-  - type: GameRule
-    chaosScore: 40
- #- type: PrecognitionResult
- #  message: psionic-power-precognition-mothroach-spawn-result-message
-  - type: VentCrittersRule
+  - type: VentHordeRule
     table:
       id: MobMothmaggot
+      amount: 4, 8
 
 - type: entity
   parent: BaseGameRule
@@ -30,15 +26,7 @@
   - type: StationEvent
     earliestStart: 15
     minimumPlayers: 15
-    weight: 0.4 #this should be rare to throw people off, otherwise it happens every shift
-    eventType: Neutral
-    startAnnouncement: cosmiccult-announce-tier2-warning
-    startAnnouncementColor: "#cae8e8"
-    startAudio:
-      path: /Audio/_DV/CosmicCult/tier2.ogg
-  - type: GameRule
-    chaosScore: -50
-  - type: RandomMultipleSpawnRule
-    prototype: CosmicMalignRift
-    minAmount: 2
-    maxAmount: 4
+    weight: 1 #this should be rare to throw people off, otherwise it happens every shift. Not THAT rare, though. This is still as rare as midround wizard.
+    duration: 20
+    occursDuringRoundEnd: false
+  - type: MalignRiftSpawnRule

@@ -1,6 +1,6 @@
 - type: entity
   name: stun baton
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem, BaseSecurityContraband, BracingDurability] # Trauma - Durability
   id: Stunbaton
   description: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
@@ -11,7 +11,6 @@
       map: [ "enum.ToggleableVisuals.Layer" ]
   - type: Stunbaton
     energyPerUse: 50
-    lightAttackEnergyMultiplier: 2 # Goob edit
   - type: ItemToggle
     predictable: false
     soundActivate:
@@ -43,10 +42,10 @@
     animation: WeaponArcThrust
   # it was ~35 now it's 55 so it's a buff ig
   - type: StaminaDamageOnHit # Trauma - edited values
-    damage: 5
+    damage: 15
     overtime: 5
-    lightAttackOvertimeDamageMultiplier: 5
-    lightAttackDamageMultiplier: 5
+    lightAttackOvertimeDamageMultiplier: 4
+    lightAttackDamageMultiplier: 4
     sound: /Audio/Weapons/egloves.ogg
   # <Goob>
   - type: DelayedKnockdownOnHit
@@ -60,7 +59,7 @@
   #  sound: /Audio/Weapons/egloves.ogg
   #- type: LandAtCursor # it deals stamina damage when thrown
   # </Goob>
-  - type: PredictedBattery
+  - type: Battery
     maxCharge: 1000
     startingCharge: 1000
   - type: UseDelay
@@ -69,6 +68,12 @@
         length: 2.5
   - type: Item
     heldPrefix: off
+  # <Trauma>
+    shape:
+    - 0,0,2,0
+  # <Trauma>
+    storedRotation: 45 # Goob
+
     size: Normal
   - type: Clothing
     sprite: Objects/Weapons/Melee/stunbaton.rsi
@@ -106,15 +111,16 @@
   - type: GuideHelp
     guides:
     - Security
-  - type: MartialArtBlocked # Goobstation - Martial Arts
-    form: CorporateJudo # Goobstation - Martial Arts
+  - type: KnowledgeGrantOnWear # Trauma - Knowledge
+    blocked:
+      MartialArtCorporateJudo: true
   - type: Tag # Goob
     tags:
     - StunBaton
 
 - type: entity
   name: truncheon
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem, BaseSecurityContraband, BracingDurability] # Trauma - Durability
   id: Truncheon
   description: A rigid, steel-studded baton, meant to harm.
   components:
@@ -132,6 +138,11 @@
     bluntStaminaDamageFactor: 1.5
   - type: Item
     size: Normal
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # <Trauma>
   - type: Tag
     tags:
     - Truncheon
@@ -145,8 +156,9 @@
   - type: Appearance
   - type: StaticPrice
     price: 80
-  - type: MartialArtBlocked # Trauma
-    form: CorporateJudo
+  - type: KnowledgeGrantOnWear # Trauma - Knowledge
+    blocked:
+      MartialArtCorporateJudo: true
   - type: GuideHelp
     guides:
     - Security

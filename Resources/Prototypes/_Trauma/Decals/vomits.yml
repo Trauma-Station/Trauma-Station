@@ -1,0 +1,62 @@
+- type: decal
+  id: vomitDecal1
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/vomit.rsi
+    state: vomit_1
+
+- type: decal
+  id: vomitDecal2
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/vomit.rsi
+    state: vomit_2
+
+- type: decal
+  id: vomitDecal3
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/vomit.rsi
+    state: vomit_3
+
+- type: decal
+  id: vomitDecal4
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/vomit.rsi
+    state: vomit_4
+
+- type: decal
+  id: vomitDecal5
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/vomit.rsi
+    state: vomit_5
+
+- type: decal
+  id: vomitDecal6
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/vomit.rsi
+    state: vomit_6
+
+- type: decal
+  id: vomitDecal7
+  defaultCleanable: true
+  defaultCustomColor: true
+  defaultSnap: false
+  sprite:
+    sprite: _Trauma/Effects/vomit.rsi
+    state: vomit_7

@@ -1,0 +1,93 @@
+- type: constructionGraph
+  id: T45Armor
+  start: start
+  graph:
+  - node: start
+    entity: PowerArmorFrame
+    edges:
+    - to: T45
+      steps:
+      - assemblyId: generic
+        guideString: t45-construction-guide-string
+      - tool: Welding
+        doAfter: 10
+      - tag: RevArmorPlate
+        name: construction-graph-tag-armorplate
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: armorplate
+        doAfter: 4
+      - tool: Hammering
+        doAfter: 2
+      - tool: Screwing
+        doAfter: 2
+      - tool: Anchoring
+        doAfter: 2
+      - tag: RevArmorPlate
+        name: construction-graph-tag-armorplate
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: armorplate
+        doAfter: 4
+      - tool: Hammering
+        doAfter: 2
+      - tool: Screwing
+        doAfter: 2
+      - tag: FusionCore
+        name: construction-graph-tag-fusion-core
+        icon:
+          sprite: _Trauma/Objects/Devices/fusionCore.rsi
+          state: fusion_core
+        doAfter: 4
+      - tag: RevArmorPlate
+        name: construction-graph-tag-armorplate
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: armorplate
+        doAfter: 4
+      - tag: RevArmorPlate
+        name: construction-graph-tag-armorplate
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: armorplate
+        doAfter: 4
+      - tag: RevArmorPlate
+        name: construction-graph-tag-armorplate
+        icon:
+          sprite: _Trauma/Objects/Revs/components.rsi
+          state: armorplate
+        doAfter: 4
+      - tool: Anchoring
+        doAfter: 5
+      - tool: Welding
+        doAfter: 10
+      - tool: Anchoring
+        doAfter: 5
+      - material: RevGunParts
+        amount: 3
+      - material: RevBolt
+      - material: RevNut
+      - tool: Anchoring
+        doAfter: 2
+      - tool: Welding
+        doAfter: 15
+
+  - node: T45
+    entity: T45PowerArmor
+
+- type: constructionGraph
+  id: PowerArmorFrame
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: Frame
+      steps:
+      - material: Plasteel
+        amount: 20
+      - material: Steel
+        amount: 30
+        doAfter: 15
+
+  - node: Frame
+    entity: PowerArmorFrame

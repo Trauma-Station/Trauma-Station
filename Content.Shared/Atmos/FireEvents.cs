@@ -1,4 +1,4 @@
-﻿using Content.Shared.Inventory;
+using Content.Shared.Inventory;
 using Content.Shared.Nutrition.Components;
 
 namespace Content.Shared.Atmos;
@@ -18,6 +18,12 @@ public struct ExtinguishEvent : IInventoryRelayEvent
     /// Amount of firestacks changed. Should be a negative number.
     /// </summary>
     public float FireStacksAdjustment;
+
+    /// <summary>
+    /// Trauma - true if extinguished by holy source, e.g. holy water.
+    /// Used to prevent holy fire being extinguished.
+    /// </summary>
+    public bool Holy;
 
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
 }

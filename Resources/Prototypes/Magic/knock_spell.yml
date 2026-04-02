@@ -29,7 +29,7 @@
       state: knock
   - type: InstantAction
     event: !type:KnockSpellEvent
-      range: 3 # Goob edit
+      range: 5 # Trauma edit
   - type: Magic # Goobstation
     requiresSpeech: true
     school: Transmutation

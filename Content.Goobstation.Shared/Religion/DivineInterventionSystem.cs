@@ -1,10 +1,7 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Religion;
+using Content.Shared._DV.CosmicCult;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
@@ -32,6 +29,8 @@ public sealed class DivineInterventionSystem : EntitySystem
         SubscribeLocalEvent<BeforeCastTouchSpellEvent>(OnTouchSpellAttempt);
 
         SubscribeLocalEvent<DivineInterventionComponent, TouchSpellDenialRelayEvent>(OnTouchSpellDenied);
+
+        SubscribeLocalEvent<CosmicAbilityAttemptEvent>(OnCosmicAbilityAttempt);
     }
 
     /// <summary>
@@ -69,6 +68,13 @@ public sealed class DivineInterventionSystem : EntitySystem
     }
     //Overload Method
     public bool ShouldDeny(EntityUid target) => ShouldDeny(target, out _);
+
+    public void OnCosmicAbilityAttempt(ref CosmicAbilityAttemptEvent args)
+    {
+        if (!ShouldDeny(args.Target, out var denyingItem)) return;
+        args.Cancelled = true;
+        if (args.PlayEffects && denyingItem is { } item) DenialEffects(item, args.Target);
+    }
 
     #region Flavour
     /// <summary>
@@ -121,9 +127,9 @@ public sealed class DivineInterventionSystem : EntitySystem
     /// <summary>
     /// Used where dependency is possible i.e. GoobMod Magic.
     /// </summary>
-    public bool TouchSpellDenied(EntityUid uid)
+    public bool TouchSpellDenied(EntityUid uid, bool doEffects = true)
     {
-        var ev = new BeforeCastTouchSpellEvent(uid);
+        var ev = new BeforeCastTouchSpellEvent(uid, doEffects);
         RaiseLocalEvent(uid, ev, true);
 
         return ev.Cancelled;

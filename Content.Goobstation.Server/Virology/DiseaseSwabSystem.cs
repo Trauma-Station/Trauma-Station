@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Disease.Components;
 using Content.Goobstation.Shared.Disease.Systems;
 using Content.Goobstation.Shared.Virology;
 using Content.Shared.Examine;
@@ -27,7 +30,7 @@ public sealed class DiseaseSwabSystem : EntitySystem
             return;
 
         // Target must have diseases
-        if (!TryComp<Shared.Disease.Components.DiseaseCarrierComponent>(args.Target, out var carrier))
+        if (!TryComp<DiseaseCarrierComponent>(args.Target, out var carrier))
         {
             _popup.PopupEntity(Loc.GetString("disease-swab-cant-swab", ("target", args.Target)), args.User, args.User);
             return;
@@ -45,7 +48,7 @@ public sealed class DiseaseSwabSystem : EntitySystem
             return;
 
         // Pick a random disease
-        var diseaseToClone = _random.Pick(carrier.Diseases);
+        var diseaseToClone = _random.Pick(carrier.Diseases.ContainedEntities);
         SetDisease((ent, ent.Comp), diseaseToClone);
         args.Handled = true;
     }

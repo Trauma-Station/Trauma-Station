@@ -43,7 +43,7 @@
     - id: TrashBananiumPeel
       weight: 0.5
     - id: TrashBananaPeelExplosive
-      weight: 0.001 # 1 in 6,500
+      weight: 0.010 # Trauma - 1 in 650 :godo:
 
 - type: entity
   parent: MarkerBase

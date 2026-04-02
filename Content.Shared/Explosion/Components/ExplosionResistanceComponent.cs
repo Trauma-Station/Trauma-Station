@@ -93,8 +93,7 @@ namespace Content.Shared.Explosion.Components;
 ///     This is desirable over just using damage modifier sets, given that equipment like bomb-suits need to
 ///     significantly reduce the damage, but shouldn't be silly overpowered in regular combat.
 /// </remarks>
-[NetworkedComponent, RegisterComponent]
-[Access(typeof(SharedExplosionSystem))]
+[NetworkedComponent, RegisterComponent] // Trauma - removed system specific access
 public sealed partial class ExplosionResistanceComponent : Component
 {
     /// <summary>

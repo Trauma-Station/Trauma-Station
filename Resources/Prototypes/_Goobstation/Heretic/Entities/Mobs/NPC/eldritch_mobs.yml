@@ -1,32 +1,23 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
+- type: entity
+  parent: [OrganBaseTorso, OrganAnimalSpriteExternal]
+  id: OrganTorsoGhoul
+  components:
+  - type: BodyPart
+    slots: []
+  - type: Boneless
 
 - type: entity
-  parent: [ SimpleMobBase, MobCombat ]
-  id: BaseMobGhoul
+  parent:
+  - BaseSimpleMob
+  - MobAtmosExposed
+  - MobCombat
+  - MobFlammable
+  id: BaseMobHereticSummon
   abstract: true
   components:
-  - type: WeakToHoly
-    alwaysTakeHoly: true
-  - type: Ghoul
   - type: MovementSpeedModifier
-    baseWalkSpeed: 4.5 # Trauma edit
-    baseSprintSpeed: 4.5 # Trauma edit
+    baseWalkSpeed: 4.5
+    baseSprintSpeed: 4.5
   - type: InputMover
   - type: MobMover
   - type: Reactive
@@ -71,6 +62,36 @@
   - type: Grammar
     attributes:
       gender: male
+  - type: CollectiveMind
+    defaultChannel: MansusLink
+    channels:
+    - MansusLink
+  - type: Targeting
+  - type: Climbing
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+    - Stutter
+    - Electrocution
+    - TemporaryBlindness
+    - Pacified
+    - StaminaModifier
+    - Flashed
+    - RadiationProtection
+    - Adrenaline
+  - type: FloatingVisuals
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+
+- type: entity
+  id: BaseMobHereticGhoul
+  abstract: true
+  components:
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
@@ -82,54 +103,36 @@
     - MindRoleGhoul
     raffle:
       settings: short
-  - type: CollectiveMind
-    defaultChannel: MansusLink
-    channels:
-    - MansusLink
+  - type: Ghoul
   - type: HTN
     rootTask:
       task: HereticSummonCompound
     blackboard:
       NavSmash: !type:Bool
         true
-  - type: Targeting
-  - type: Bloodstream
-    maxBleedAmount: 0
+  - type: NameIdentifier
+    group: GenericNumber
 
 - type: entity
-  parent: BaseMobGhoul
-  id: MobGhoulStalker
+  id: BaseMobGhoulLock
+  abstract: true
+  components:
+  - type: Aura
+    auraColor: "#53277e"
+    auraFarm: 1
+    distortion: 0.03
+
+- type: entity
+  parent: [BaseMobHereticSummon, BaseMobAnimal]
+  id: MobGhoulStalkerBase
   name: flesh stalker
   description: An abomination cobbled together from varied remains. Its appearance changes slightly every time you blink.
+  abstract: true
   components:
-  - type: Ghoul
-    totalHealth: 150
-    ghostRoleName: ghostrole-stalker-name
-    ghostRoleDesc: ghostrole-stalker-desc
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: stalker
-  - type: GhostRole
-    name: ghostrole-stalker-name
-    description: ghostrole-stalker-desc
-    mindRoles:
-    - MindRoleGhoul
-  - type: ActionsProvider
-    actions:
-    - ActionHereticJaunt
-    - ActionActivateEmp
-    - ActionHereticShapeshift
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 4.5 # Trauma edit
-    baseSprintSpeed: 4.5 # Trauma edit
   - type: FlashImmunity
-  - type: ThermalVision
-    thermalShader: null
-    isActive: true
-    color: white
-    drawOverlay: false
-    lightRadius: 0
-    toggleAction: null
   - type: MeleeWeapon
     animation: WeaponArcClaw
     damage:
@@ -138,15 +141,57 @@
         Piercing: 10
 
 - type: entity
-  parent: BaseMobGhoul
-  id: MobGhoulProphet
-  name: raw prophet
-  description: An abomination stitched together from a few severed arms and one swollen, orphaned eye.
+  parent: [BaseMobHereticGhoul, MobGhoulStalkerBase]
+  id: MobGhoulStalker
   components:
   - type: Ghoul
-    totalHealth: 65
-    ghostRoleName: ghostrole-prophet-name
-    ghostRoleDesc: ghostrole-prophet-desc
+    totalHealth: 150
+    ghostRoleName: ghostrole-stalker-name
+    ghostRoleDesc: ghostrole-stalker-desc
+  - type: GhostRole
+    name: ghostrole-stalker-name
+    description: ghostrole-stalker-desc
+    mindRoles:
+    - MindRoleGhoul
+  - type: ActionGrant
+    actions:
+    - ActionHereticJaunt
+    - ActionActivateEmp
+    - ActionHereticShapeshift
+  - type: ThermalVision
+    thermalShader: null
+    isActive: true
+    color: white
+    drawOverlay: false
+    lightRadius: 0
+    toggleAction: null
+
+- type: entity
+  parent: [BaseMobGhoulLock, MobGhoulStalkerBase]
+  id: MobGhoulStalkerLock
+  name: empowered flesh stalker
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5.5
+    baseSprintSpeed: 5.5
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      250: Critical
+      260: Dead
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 20
+        Piercing: 15
+
+- type: entity
+  parent: [BaseMobHereticSummon, BaseMobAnimal]
+  id: MobGhoulProphetBase
+  name: raw prophet
+  description: An abomination stitched together from a few severed arms and one swollen, orphaned eye.
+  abstract: true
+  components:
   - type: Sprite
     noRot: true
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
@@ -160,27 +205,11 @@
     noMovementLayers:
       movement:
         state: raw_prophet
-  - type: GhostRole
-    name: ghostrole-prophet-name
-    description: ghostrole-prophet-desc
-    mindRoles:
-    - MindRoleGhoul
-  - type: ActionsProvider
-    actions:
-    - ActionHereticJauntLong
-    - ActionHereticMansusLink
   - type: HealingAura
     selfHealMultiplier: 2
     componentHealMultipliers:
-      Heretic: 1
+      FleshPassive: 1
       Ghoul: 2
-  - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
-  - type: Eye
-    drawFov: false
   - type: ContentEye
     maxZoom: 1.25, 1.25
     targetZoom: 1.25, 1.25
@@ -188,27 +217,171 @@
   - type: ShowHealthIcons
 
 - type: entity
-  parent: [BaseMobGhoul, FlyingMobBase]
-  id: MobGhoulFireShark
-  name: fire shark
-  description: It is a eldritch dwarf space shark, also known as a fire shark.
+  parent: [BaseMobHereticGhoul, MobGhoulProphetBase]
+  id: MobGhoulProphet
+  components:
+  - type: ActionGrant
+    actions:
+    - ActionHereticJauntLong
+    - ActionHereticMansusLink
+  - type: Ghoul
+    totalHealth: 65
+    ghostRoleName: ghostrole-prophet-name
+    ghostRoleDesc: ghostrole-prophet-desc
+  - type: GhostRole
+    name: ghostrole-prophet-name
+    description: ghostrole-prophet-desc
+    mindRoles:
+    - MindRoleGhoul
+  - type: NightVision
+    color: white
+    activateSound: null
+    deactivateSound: null
+    drawOverlay: false
+  - type: Eye
+    drawFov: false
+
+- type: entity
+  parent: [BaseMobGhoulLock, MobGhoulProphetBase]
+  id: MobGhoulProphetLock
+  name: empowered raw prophet
+  components:
+  - type: HealingAura
+    componentHealMultipliers:
+      Ghoul: 3
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Critical
+      110: Dead
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 20
+        Piercing: 15
+
+- type: entity
+  parent: [BaseMobHereticSummon, FlyingMobBase]
+  id: MobGhoulMirrorMaidBase
+  name: maid in the mirror
+  description: A floating and flowing wisp of chilled air. Glancing at it causes it to shimmer slightly.
+  abstract: true
+  components:
+  - type: Body
+  - type: InitialBody
+    organs:
+      Torso: OrganTorsoGhoul
+  - type: Sprite
+    sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+    state: maid
+  - type: ActionGrant
+    actions:
+    - ActionMirrorJaunt
+  - type: MirrorMaid
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5
+    baseSprintSpeed: 5
+  - type: FlashImmunity
+  - type: NightVision
+    color: aquamarine
+    activateSound: null
+    deactivateSound: null
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      collection: GlassBreak
+    damage:
+      types:
+        Slash: 10
+        Piercing: 10
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection:
+          GlassBreak
+    soundTypes:
+      Heat:
+        collection:
+          MeatLaserImpact
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 25
+        mask:
+          - Opaque # Can go through windows
+        layer:
+          - FlyingMobLayer
+  - type: Reflect # It's a mirror
+    reflectProb: 1
+    reflects:
+      - Energy
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Heat: -1
+        Cold: -1
+        Shock: -1
+        Asphyxiation: -1
+        Bloodloss: -1
+        Caustic: -1
+        Poison: -1
+        Radiation: -1
+        Cellular: -1
+        Holy: -1
+  - type: Insulated
+  - type: Damageable
+    damageContainer: InorganicMetaphysical
+    damageModifierSet: MirrorMaid
+  - type: MovementIgnoreGravity
+
+- type: entity
+  parent: [BaseMobHereticGhoul, MobGhoulMirrorMaidBase]
+  id: MobGhoulMirrorMaid
   components:
   - type: Ghoul
-    spawnOnDeathPrototype: SheetPlasma1
-    totalHealth: 15
-    ghostRoleName: ghostrole-fire-shark-name
-    ghostRoleDesc: ghostrole-fire-shark-desc
+    spawnOnDeathPrototype: ShardGlass
+    totalHealth: 80
+    ghostRoleName: ghostrole-maid-name
+    ghostRoleDesc: ghostrole-maid-desc
+  - type: GhostRole
+    name: ghostrole-maid-name
+    description: ghostrole-maid-desc
+    mindRoles:
+    - MindRoleGhoul
+
+- type: entity
+  parent: [BaseMobGhoulLock, MobGhoulMirrorMaidBase]
+  id: MobGhoulMirrorMaidLock
+  name: empowered maid in the mirror
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      120: Critical
+      130: Dead
+
+- type: entity
+  parent: [BaseMobHereticSummon, FlyingMobBase]
+  id: MobGhoulFireSharkBase
+  name: fire shark
+  description: It is a eldritch dwarf space shark, also known as a fire shark.
+  abstract: true
+  components:
+  - type: Body
+  - type: InitialBody
+    organs:
+      Torso: OrganTorsoGhoul
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: fire_shark
-  - type: GhostRole
-    name: ghostrole-fire-shark-name
-    description: ghostrole-fire-shark-desc
-    mindRoles:
-    - MindRoleGhoul
-  - type: Body
-    prototype: null
-    bodyType: Simple
   - type: IgniteOnMeleeHit
     fireStacks: 2
   - type: MovementSpeedModifier
@@ -230,7 +403,7 @@
     damage:
       types:
         Heat: 0
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamage:
       types:
         Heat: 0
@@ -247,6 +420,46 @@
         Quantity: 10
     bleedReductionAmount: 0.1
     maxBleedAmount: 0.5
+    bloodlossDamage:
+      types:
+        Bloodloss: 0.5
+    bloodlossHealDamage:
+      types:
+        Bloodloss: -1
+
+- type: entity
+  parent: [BaseMobHereticGhoul, MobGhoulFireSharkBase]
+  id: MobGhoulFireShark
+  components:
+  - type: Ghoul
+    spawnOnDeathPrototype: SheetPlasma1
+    totalHealth: 15
+    ghostRoleName: ghostrole-fire-shark-name
+    ghostRoleDesc: ghostrole-fire-shark-desc
+  - type: GhostRole
+    name: ghostrole-fire-shark-name
+    description: ghostrole-fire-shark-desc
+    mindRoles:
+    - MindRoleGhoul
+
+- type: entity
+  parent: [BaseMobGhoulLock, MobGhoulFireSharkBase]
+  id: MobGhoulFireSharkLock
+  name: empowered fire shark
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Critical
+      90: Dead
+  - type: IgniteOnMeleeHit
+    fireStacks: 4
+  - type: MeleeWeapon
+    damage:
+      types:
+        Heat: 8
+        Slash: 8
+        Piercing: 8
 
 - type: entity
   parent:
@@ -255,14 +468,14 @@
   - MobFlammable
   - MobAtmosExposed
   - MobPolymorphable
-  id: MobGhoulRustWalker
+  id: MobGhoulRustWalkerBase
   name: rust walker
   description: A grinding, clanking construct which leaches life from its surroundings with every armoured step.
   components:
-  - type: Ghoul
-    totalHealth: 100
-    ghostRoleName: ghostrole-rustwalker-name
-    ghostRoleDesc: ghostrole-rustwalker-desc
+  - type: Body
+  - type: InitialBody
+    organs:
+      Torso: OrganTorsoGhoul
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     layers:
@@ -275,10 +488,6 @@
     noMovementLayers:
       movement:
         state: rust_walker
-  - type: ActionsProvider
-    actions:
-    - ActionHereticAggressiveSpread
-    - ActionHereticRustWave
   - type: LeechingWalk
   - type: MeleeWeapon
     soundHit:
@@ -322,15 +531,6 @@
   - type: Grammar
     attributes:
       gender: male
-  - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
-    name: ghostrole-rustwalker-name
-    description: ghostrole-rustwalker-desc
-    rules: ghostrole-ghoul-rules
-    raffle:
-      settings: short
   - type: CollectiveMind
     defaultChannel: MansusLink
     channels:
@@ -343,16 +543,8 @@
     groups:
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: SiliconMetaphysical
   - type: HealthExaminable
     examinableTypes:
     - Blunt
@@ -372,16 +564,14 @@
     doAfterDelay: 8
     fuelCost: 15
   - type: FloatingVisuals
-  - type: Body
-    bodyType: Simple
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
   - type: NameIdentifier
     group: GenericNumber
   - type: Insulated
   - type: MovementSpeedModifier
-    baseWalkSpeed: 4.5 # Trauma edit
-    baseSprintSpeed: 4.5 # Trauma edit
+    baseWalkSpeed: 4.5
+    baseSprintSpeed: 4.5
   - type: FlashImmunity
   - type: HTN
     rootTask:
@@ -390,3 +580,82 @@
       NavSmash: !type:Bool
         true
   - type: Targeting
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+
+
+- type: entity
+  parent: [BaseMobHereticGhoul, MobGhoulRustWalkerBase]
+  id: MobGhoulRustWalker
+  components:
+  - type: Ghoul
+    totalHealth: 100
+    ghostRoleName: ghostrole-rustwalker-name
+    ghostRoleDesc: ghostrole-rustwalker-desc
+  - type: GhostRole
+    name: ghostrole-rustwalker-name
+    description: ghostrole-rustwalker-desc
+    rules: ghostrole-ghoul-rules
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ActionGrant
+    actions:
+    - ActionHereticAggressiveSpread
+    - ActionHereticRustWave
+
+- type: entity
+  parent: [BaseMobGhoulLock, MobGhoulRustWalkerBase]
+  id: MobGhoulRustWalkerLock
+  name: empowered rust walker
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      150: Critical
+      160: Dead
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 25
+        Ion: 25
+        Structural: 200
+  - type: RustObjectsInRadius
+    rustStrength: -1
+    rustRadius: 3
+  - type: ActionGrant
+    actions:
+    - ActionHereticRustChargeShort
+
+- type: entity
+  parent: [BaseMobHereticGhoul, MobShattered]
+  id: MobGhoulShattered
+  components:
+  - type: Ghoul
+    giveBlade: false
+    totalHealth: 250
+    changeHumanoidProfile: false
+    deathBehavior: GibOrgans
+    canDeconvert: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+
+- type: entity
+  parent: [BaseMobGhoulLock, MobShattered]
+  id: MobShatteredLock
+  name: empowered shattered risen
+  components:
+  - type: ShatteredRisen
+    weapon1: ArmBladeShatteredEmpowered
+    weapon2: ArmHammerShatteredEmpowered

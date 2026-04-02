@@ -14,7 +14,7 @@
   flavor: sour
   color: "#d9f929"
   metabolisms:
-    Medicine:
+    Digestion:
       effects:
       - !type:SatiateThirst
       - !type:HealthChange

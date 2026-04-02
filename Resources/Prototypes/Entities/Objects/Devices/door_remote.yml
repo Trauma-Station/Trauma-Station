@@ -228,9 +228,10 @@
     - Engineering
 
 - type: entity
-  parent: [DoorRemoteDefault, BaseCommandContraband]
+  parent: [DoorRemoteCanEletrifyDoors, BaseCommandContraband]
   id: DoorRemoteAll
   name: super door remote
+  description: A gadget which can open and bolt doors remotely. This one works even on wooden doors!
   suffix: Admeme
   components:
   - type: Sprite
@@ -242,6 +243,8 @@
       color: "#22871a"
   - type: DoorRemote
     includeUserAccess: true
+    requireInRangeUnoccluded: false
+    requireTagWhitelist: false
   - type: Access
     groups:
     - AllAccess
@@ -253,7 +256,7 @@
     - Xenoborg
 
 - type: entity
-  parent: [ DoorRemoteCanEletrifyDoors, BaseXenoborgContraband ]
+  parent: [DoorRemoteCanEletrifyDoors, BaseXenoborgContraband]
   id: DoorRemoteXenoborg
   name: xenoborg door remote
   components:

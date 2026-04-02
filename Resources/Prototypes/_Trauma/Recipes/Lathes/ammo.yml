@@ -12,3 +12,11 @@
   categories:
   - Ammo
   - Boxes
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: BoxShotgunBreaching
+  result: BoxShotgunBreaching
+  materials:
+    Steel: 190
+    Plasteel: 100

@@ -1,0 +1,11 @@
+## Parts
+
+- type: entity
+  parent: OrganAnimalTorso
+  id: OrganSlimesTorso
+  name: slime body
+  components:
+  - type: BodyPart
+    slots:
+    - Stomach # sentient slime core
+    - Lungs # slime lungs

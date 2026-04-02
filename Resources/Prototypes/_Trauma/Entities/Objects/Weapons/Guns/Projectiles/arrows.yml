@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseArrow
+  id: HolyArrow
+  name: arrow of purity
+  description: The spear of destiny looks a little small, huh.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/arrows.rsi
+    layers:
+    - state: tail
+      color: white
+    - state: rod
+      color: brown
+    - state: tip
+      color: yellow
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+        Holy: 50 # Insanely high damage for a nullrod form, however the crossbow takes 10s to reload. so good luck :)
+  - type: TimedDespawn
+    lifetime: 60 # Can't farm arrows. However can be stolen by others and fired from a normal bow (funny)

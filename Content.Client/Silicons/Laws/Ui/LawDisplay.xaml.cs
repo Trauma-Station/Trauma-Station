@@ -1,15 +1,5 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Hreno <hrenor@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.Chat.Managers;
-using Content.Client.Message;
+using Content.Client.RichText;
 using Content.Shared.Chat;
 using Content.Shared.Radio;
 using Content.Shared.Silicons.Laws;
@@ -47,8 +37,8 @@ public sealed partial class LawDisplay : Control
         var lawIdentifierPlaintext = FormattedMessage.RemoveMarkupPermissive(lawIdentifier);
         var lawDescriptionPlaintext = FormattedMessage.RemoveMarkupPermissive(lawDescription);
 
-        LawNumberLabel.SetMarkup(lawIdentifier);
-        LawLabel.SetMessage(lawDescription);
+        LawNumberLabel.SetMessage(FormattedMessage.FromMarkupPermissive(lawIdentifier), UserFormattableTags.SiliconAllowedTags);
+        LawLabel.SetMessage(FormattedMessage.FromMarkupPermissive(lawDescription), UserFormattableTags.SiliconAllowedTags);
 
         // If you can't talk, you can't state your laws...
         if (!_entityManager.TryGetComponent<SpeechComponent>(uid, out var speech) || speech.SpeechSounds is null)

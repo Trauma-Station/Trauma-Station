@@ -1,0 +1,19 @@
+## Mob
+
+# for space simplemobs that have space organs
+- type: entity
+  abstract: true
+  parent: BaseMobBody
+  id: AppearanceSpaceAnimal
+  name: space animal appearance
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganAnimalTorso
+      # Organs
+      Heart: OrganCarpHeart
+      Lungs: OrganCarpLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys

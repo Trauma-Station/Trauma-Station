@@ -85,5 +85,5 @@
       - ShowAntagIcons
       - Hivemind
   icon:
-    sprite: /Textures/Interface/Misc/job_icons.rsi
+    sprite: _Goobstation/Interface/Misc/job_icons.rsi
     state: Changeling

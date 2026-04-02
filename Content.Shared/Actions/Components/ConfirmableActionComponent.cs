@@ -29,7 +29,7 @@ namespace Content.Shared.Actions.Components;
 public sealed partial class ConfirmableActionComponent : Component
 {
     /// <summary>
-    /// Warning popup shown when priming the action. 
+    /// Warning popup shown when priming the action.
     /// </summary>
     // Goobstation - Modsuits - Removed required string
     [DataField]

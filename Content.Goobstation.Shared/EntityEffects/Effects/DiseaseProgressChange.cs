@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Goobstation.Shared.Disease.Systems;
@@ -39,7 +41,7 @@ public sealed class DiseaseProgressChangeEffectSystem : EntityEffectSystem<Disea
         var amt = args.Effect.ProgressModifier * args.Scale;
 
         var affected = args.Effect.AffectedType;
-        foreach (var diseaseUid in ent.Comp.Diseases)
+        foreach (var diseaseUid in ent.Comp.Diseases.ContainedEntities)
         {
             if (!TryComp<DiseaseComponent>(diseaseUid, out var disease) || disease.DiseaseType != affected)
                 continue;

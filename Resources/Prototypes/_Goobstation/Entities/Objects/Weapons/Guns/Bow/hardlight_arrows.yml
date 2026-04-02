@@ -222,3 +222,4 @@
     range: 1.5
     energyConsumption: 1000
     disableDuration: 5
+  - type: DeleteOnTrigger

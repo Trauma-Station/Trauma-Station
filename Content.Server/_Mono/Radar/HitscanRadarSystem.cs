@@ -10,8 +10,6 @@ namespace Content.Server._Mono.Radar;
 /// </summary>
 public sealed partial class HitscanRadarSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-
     public override void Initialize()
     {
         base.Initialize();

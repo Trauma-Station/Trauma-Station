@@ -7,10 +7,10 @@
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Server.Body.Systems;
 using Content.Shared._White.Standing;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Gibbing;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Tag;
@@ -19,6 +19,7 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server._White.Teleporter;
@@ -26,7 +27,7 @@ namespace Content.Server._White.Teleporter;
 public sealed class ExperimentalTeleporterSystem : EntitySystem
 {
     [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
@@ -37,6 +38,8 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
     [Dependency] private readonly TelefragSystem _telefrag = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
 
+    public static readonly ProtoId<TagPrototype> Wall = "Wall";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -46,11 +49,11 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
     private void OnUse(EntityUid uid, ExperimentalTeleporterComponent component, UseInHandEvent args)
     {
         if (_charges.IsEmpty(uid)
-            || !TryComp<TransformComponent>(args.User, out var xform)
             || (_containerSystem.IsEntityInContainer(args.User)
                 && !_containerSystem.TryRemoveFromContainer(args.User)))
             return;
 
+        var xform = Transform(args.User);
         var ev = new TeleportAttemptEvent(false);
         RaiseLocalEvent(args.User, ref ev);
         if (ev.Cancelled)
@@ -70,7 +73,7 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
             || EmergencyTeleportation(args.User, uid, component, xform, oldCoords, newOffset))
             return;
 
-        _bodySystem.GibBody(args.User, true, splatModifier: 3F);
+        _gibbing.Gib(args.User);
     }
 
     private bool EmergencyTeleportation(EntityUid uid, EntityUid teleporterUid, ExperimentalTeleporterComponent component, TransformComponent xform, EntityCoordinates oldCoords, Vector2 offset)
@@ -113,7 +116,7 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
 
         var anchoredEntities = _mapSystem.GetAnchoredEntities(tile.Value.GridUid, mapGridComponent, coords);
 
-        return anchoredEntities.Any(x => _tag.HasTag(x, "Wall"));
+        return anchoredEntities.Any(x => _tag.HasTag(x, Wall));
     }
 
     private Vector2 VectorRandomDirection(ExperimentalTeleporterComponent component, Vector2 offset, int length)

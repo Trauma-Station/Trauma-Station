@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
@@ -12,6 +8,7 @@ using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using System.Numerics;
@@ -29,6 +26,8 @@ public sealed class BackStabSystem : EntitySystem
 
     public static readonly SoundSpecifier BackstabSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Weapons/Effects/guillotine.ogg");
+
+    public static ProtoId<DamageTypePrototype> Slash = "Slash";
 
     public override void Initialize()
     {
@@ -51,7 +50,7 @@ public sealed class BackStabSystem : EntitySystem
 
         var damage = total * ent.Comp.DamageMultiplier;
 
-        args.BonusDamage += new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Slash"), damage - total);
+        args.BonusDamage += new DamageSpecifier(_prototypeManager.Index(Slash), damage - total);
     }
 
     public bool TryBackstab(EntityUid target,
@@ -72,7 +71,7 @@ public sealed class BackStabSystem : EntitySystem
 
         var xform = Transform(target);
         var userXform = Transform(user);
-        var a1 = -_transform.GetWorldRotation(xform);
+        var a1 = -_transform.GetWorldRotation(xform) + MathHelper.PiOver2;
         var a2 = new Angle(_transform.GetWorldPosition(userXform) - _transform.GetWorldPosition(xform));
         // when you are facing the same direction as the target (their back is turned)
         // angle is close to 0, when you are facing eachother the angle is close to 180

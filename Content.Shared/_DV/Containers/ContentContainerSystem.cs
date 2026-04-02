@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared.Body.Organ;
+using Content.Shared.Body;
 using Content.Shared.Mind.Components;
 using Robust.Shared.Containers;
 

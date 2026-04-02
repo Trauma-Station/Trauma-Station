@@ -92,13 +92,16 @@ signal-port-description-machine-failed = Signal port that gets pulsed after a ma
 signal-port-name-automation-slot-tool = Item: Tool
 signal-port-description-automation-slot-tool = An automation slot for an interactor's held tool.
 
+signal-port-name-alt-interact = Alt Interact Mode
+signal-port-description-alt-interact = Signal port to toggle alt interact mode, or set it to a HIGH/LOW value.
+
+signal-port-name-use-in-hand = Use In Hand Mode
+signal-port-description-use-in-hand = Signal port to toggle use in hand mode, or set it to a HIGH/LOW value. This will ignore targets and use Z or Alt+Z on the held tool.
+
 # Autodoc
 
 signal-port-name-automation-slot-autodoc-hand = Item: Autodoc Hand
 signal-port-description-automation-slot-autodoc-hand = An automation slot for an autodoc's held organ/part/etc from STORE ITEM / GRAB ITEM instructions.
-
-signal-port-name-alt-interact = Alt Interact Mode
-signal-port-description-alt-interact = Signal port to toggle alt interact mode, or set it to a HIGH/LOW value.
 
 # Gas Canister
 

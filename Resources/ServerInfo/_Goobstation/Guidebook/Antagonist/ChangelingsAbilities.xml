@@ -147,7 +147,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   </Box>
   - Changeling injects organic with 2 units of blind toxin, blinding the target for 12 seconds.
   - Can be used while cuffed or in lesser form.
-  - Does not work on Yowies.
   - Can stack with itself.
 
   ## Cryogenic Sting
@@ -166,7 +165,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   - Changeling injects organic with 2 units of mute toxin, muting the target for 40 seconds.
   - Can be used while cuffed or in lesser form.
   - Can stack with itself.
-  - Does not work on Yowies.
 
   ## Lethargic Sting
   <Box>
@@ -178,7 +176,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   - Deals 15 stamina damage per second for ten seconds
   - Can be used while cuffed or in lesser form.
   - Can stack with itself.
-  - Does not work on Yowies.
 
   ## False Armblade Sting
   <Box>

@@ -1,4 +1,4 @@
-﻿<Document>
+<Document>
   # Inlet Pressure Regulator
   The Inlet Pressure Regulator is a passive device that allows gas to escape from a [textlink="pipenet" link="PipeNetworks"] when the pressure exceeds a certain threshold.
 

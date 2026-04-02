@@ -1,0 +1,125 @@
+## Letters
+
+# keep weights in sync with LetterCommonEntityTable
+- type: entityTable
+  id: LetterCommonTrauma
+  table: !type:GroupSelector
+    children:
+    - id: Syringe # used or not, who knows
+    - id: FoodMealMint # a single mint...
+    - id: DelayedSmoke
+    - !type:NestedSelector
+      tableId: LetterVagueThreat
+    - !type:NestedSelector
+      tableId: LetterEMP
+    - !type:NestedSelector
+      tableId: LetterCigarettes
+
+# keep weights in sync with LetterUncommonEntityTable
+- type: entityTable
+  id: LetterUncommonTrauma
+  table: !type:GroupSelector
+    children:
+    - id: ClothingHeadFishCap
+    - id: MysteryFigureBox
+      amount: 1,3
+    - !type:NestedSelector
+      tableId: BikeHornRandom
+    - !type:NestedSelector
+      tableId: LetterMaterialsRandom
+    - !type:NestedSelector
+      tableId: CritterRandom
+    - !type:NestedSelector
+      tableId: CookieRandom
+      rolls: 4
+    - !type:NestedSelector
+      tableId: MuffinRandom
+      rolls: 4
+
+# keep weights in sync with LetterRareEntityTable
+- type: entityTable
+  id: LetterRareTrauma
+  table: !type:GroupSelector
+    children:
+    - id: ClothingEyesGlassesSunglasses
+    - id: EmergencyMedipen
+      amount: 2
+    - !type:NestedSelector
+      tableId: KnifeRandom
+    - !type:NestedSelector
+      tableId: LetterLuxuryPen
+    - !type:NestedSelector
+      tableId: LetterPAI
+    - !type:NestedSelector
+      tableId: LetterFlowers
+    - !type:NestedSelector
+      tableId: LetterCigars
+    - !type:NestedSelector
+      tableId: DonkPocketsRandom
+    - !type:NestedSelector
+      tableId: JointRandom
+      rolls: 3
+
+## Packages
+
+# keep weights in sync with PackageCommonEntityTable
+- type: entityTable
+  id: PackageCommonTrauma
+  table: !type:GroupSelector
+    children:
+    - id: FlashlightLantern
+    - id: FlashlightSeclite
+    - id: FoodBoxDonut
+    - !type:NestedSelector
+      tableId: PackageArtsCrafts
+    - !type:NestedSelector
+      tableId: PackageCheese
+
+# keep weights in sync with PackageUncommonEntityTable
+- type: entityTable
+  id: PackageUncommonTrauma
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: PackageSignallerKit
+    - !type:NestedSelector
+      tableId: PackageHonkSupplement
+    - id: DrinkBottleOfNothingFull
+    - id: PlantBGoneSpray
+    - !type:NestedSelector
+      tableId: PackageSoaps
+    - !type:NestedSelector
+      tableId: PackageRestraints
+    # Costumes
+    - !type:NestedSelector
+      tableId: PackageCostumeMaid
+    - !type:NestedSelector
+      tableId: PackageCostumeWizard
+    - !type:NestedSelector
+      tableId: PackageCostumeNurse
+    - !type:NestedSelector
+      tableId: PackageCostumeTacticalMaid
+    - !type:NestedSelector
+      tableId: PackageCostumeNoir
+
+# keep weights in sync with PackageRareEntityTable
+- type: entityTable
+  id: PackageRareTrauma
+  table: !type:GroupSelector
+    children:
+    - id: GrenadeFlashBang
+      amount: 3 # free
+    - id: PlushieThrongler
+      weight: 0.1 # rare
+    - !type:NestedSelector
+      tableId: SwordRandom
+    - !type:NestedSelector
+      tableId: PackageWitchery
+    - !type:NestedSelector
+      tableId: PackageMutatedProduce
+    - !type:NestedSelector
+      tableId: InstrumentRandom
+    - !type:NestedSelector
+      tableId: PackagePowerTool
+    - !type:NestedSelector
+      tableId: BuildABuddyRandom

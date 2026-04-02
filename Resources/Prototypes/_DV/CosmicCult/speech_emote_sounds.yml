@@ -1,0 +1,38 @@
+- type: emoteSounds
+  parent: BaseMobEmotes
+  id: CosmicEmotes
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_scream.ogg
+    Laugh:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_laugh.ogg
+    Crying:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_crying.ogg # The urge to use minecraft ghast sounds
+    Whistle:
+      collection: TrenchWhistle
+    Yawn:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_yawn.ogg
+    Gasp:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_gasp.ogg
+    DefaultDeathgasp:
+      path: /Audio/_DV/CosmicCult/Emotes/cosmic_ded.ogg
+
+- type: speechSounds
+  id: CosmicSpeech
+  saySound:
+    path: /Audio/_DV/CosmicCult/Emotes/cosmic_say.ogg
+  askSound:
+    path: /Audio/_DV/CosmicCult/Emotes/cosmic_ask.ogg
+  exclaimSound:
+    path: /Audio/_DV/CosmicCult/Emotes/cosmic_exclaim.ogg
+
+- type: emoteSounds #TODO: more sounds, this is pathethic.
+  parent: BaseSilicon
+  id: CosmicColossus
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      path: /Audio/_DV/CosmicCult/Emotes/colossus_laugh.ogg

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from mojave-sun-13 at https://github.com/Mojave-Sun/mojave-sun-13/blob/8fb5efc941504c6ad498acc48eccfc892398c287/mojave/icons/objects/workbench.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "station"
+    },
+    {
+      "name": "chains"
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Robust.Client.GameObjects;
@@ -58,14 +60,10 @@ public sealed class TextureTag : BaseTextureTag, IMarkupTagHandler
             tex = EntitySystemManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
         }
 
-        if (!TryDrawIcon(tex,
-                scaleValue.Value,
-                new Vector2((float) x, (float) y),
-                tooltip,
-                out var texture))
-            return false;
-
-        control = texture;
+        control = DrawIcon(tex,
+            scaleValue.Value,
+            new Vector2((float) x, (float) y),
+            tooltip);
         return true;
     }
 }

@@ -292,7 +292,7 @@ public sealed class StepTriggerSystem : EntitySystem
         if (!TryComp<StepTriggerComponent>(component.StepTrigger, out var step))
             return;
 
-        if (step.Colliding.Remove(uid) || step.CurrentlySteppedOn.Remove(uid))
+        if (step.Colliding.Remove(uid) | step.CurrentlySteppedOn.Remove(uid)) // bitwise or so they both get removed
             Dirty(component.StepTrigger, step);
     }
 

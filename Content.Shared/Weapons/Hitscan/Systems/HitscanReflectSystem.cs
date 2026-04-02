@@ -26,7 +26,7 @@ public sealed class HitscanReflectSystem : EntitySystem
             return;
 
         var ev = new HitScanReflectAttemptEvent(data.Shooter ?? data.Gun, data.Gun, hitscan.Comp.ReflectiveType, data.ShotDirection, false,
-            CompOrNull<HitscanBasicDamageComponent>(hitscan)?.Damage); // Trauma - shitcode version of old goob thing from #1152, it needs rework for new system
+            CompOrNull<HitscanBasicDamageComponent>(hitscan)?.Damage, data.HitEntity.Value); // Trauma - shitcode version of old goob thing from #1152, it needs rework for new system. And pass the target.
         RaiseLocalEvent(data.HitEntity.Value, ref ev);
 
         if (!ev.Reflected)

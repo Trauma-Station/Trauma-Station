@@ -11,4 +11,3 @@ public sealed partial class TargetLowTempCon : UtilityConsideration
     [DataField]
     public float MinTemp;
 }
-

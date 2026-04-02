@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingOuterBase, BaseChameleon]
+  parent: [ClothingOuterBase, AllowSuitStorageClothingGasTanks, BaseChameleon]
   id: ClothingOuterChameleon
   name: vest
   description: A thick vest with a rubbery, water-resistant shell.
@@ -18,9 +18,8 @@
       heatingCoefficient: 1.1
       coolingCoefficient: 0.1
     - type: Armor
-      coverage:
-      - Chest
-      - Groin
+      coverage: # Shitmed
+      - Torso
       - Tail
       - Arm
       modifiers:

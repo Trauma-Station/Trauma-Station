@@ -24,14 +24,6 @@
 
 - type: entity
   parent: DoorElectronics
-  id: DoorElectronicsBSO
-  suffix: BlueshieldOfficer, Locked
-  components:
-  - type: AccessReader
-    access: [["BlueshieldOfficer"]]
-
-- type: entity
-  parent: DoorElectronics
   id: DoorElectronicsRobotics
   suffix: Robotics, Locked
   components:

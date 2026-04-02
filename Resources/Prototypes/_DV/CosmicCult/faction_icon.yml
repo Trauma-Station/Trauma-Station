@@ -1,27 +1,29 @@
 - type: factionIcon
-  id: CosmicCultIcon
+  id: CosmicCultLesserIcon
   isShaded: false
   priority: 11
   showTo:
     components:
-      - CosmicCult
-      - CosmicAstralBody
-      - ShowAntagIcons
-      - RogueAscended
+    - CosmicCult
+    - CosmicColossus
+    - CosmicAstralBody
+    - ShowAntagIcons
+    - CosmicLesserCultist
   icon:
     sprite: /Textures/_DV/CosmicCult/Icons/antag_icons.rsi
     state: CosmicCult
 
 - type: factionIcon
-  id: CosmicCultLeadIcon
+  id: CosmicCultIcon
   isShaded: false
   priority: 11
   showTo:
     components:
-      - CosmicCult
-      - CosmicAstralBody
-      - ShowAntagIcons
-      - RogueAscended
+    - CosmicCult
+    - CosmicColossus
+    - CosmicAstralBody
+    - ShowAntagIcons
+    - CosmicLesserCultist
   icon:
     sprite: /Textures/_DV/CosmicCult/Icons/antag_icons.rsi
     state: CosmicCultLead

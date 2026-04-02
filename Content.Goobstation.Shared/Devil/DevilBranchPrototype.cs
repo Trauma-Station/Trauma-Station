@@ -1,9 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Devil;
 
 [Prototype("devilBranchPrototype")]
-public sealed class DevilBranchPrototype : IPrototype
+public sealed partial class DevilBranchPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; set; } = default!;

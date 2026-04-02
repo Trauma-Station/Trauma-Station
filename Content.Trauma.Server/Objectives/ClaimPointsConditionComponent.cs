@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 namespace Content.Trauma.Server.Objectives;
 
 /// <summary>
-/// Objective that requires a salvager to claim a points quota configured by cvars.
+/// Objective that requires a salvager to claim enough points to meet a quota.
 /// </summary>
 [RegisterComponent]
 public sealed partial class ClaimPointsConditionComponent : Component
@@ -12,4 +13,10 @@ public sealed partial class ClaimPointsConditionComponent : Component
     /// </summary>
     [DataField(required: true)]
     public LocId Desc;
+
+    /// <summary>
+    /// How many points are needed for greentext.
+    /// </summary>
+    [DataField]
+    public int Quota = 5000;
 }

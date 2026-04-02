@@ -1,0 +1,31 @@
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobKobold
+  name: Kobold Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: kobold
+      sprite: Mobs/Animals/kobold.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobKobold
+
+- type: entity
+  parent: SpawnMobKobold
+  id: SpawnMobKoboldGhostrole
+  name: Kobold Ghostrole Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobKoboldGhostrole
+
+- type: entity
+  parent: SpawnMobMonkey
+  id: SpawnMobMonkeyGhostrole
+  name: Monkey Ghostrole Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobMonkeyGhostrole

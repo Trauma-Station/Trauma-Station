@@ -14,14 +14,6 @@
     currentLabel: holopad-command-ntr
 
 - type: entity
-  parent: Holopad
-  id: HolopadCommandBSO
-  suffix: BSO
-  components:
-  - type: Label
-    currentLabel: holopad-command-bso
-
-- type: entity
   parent: HolopadBluespace
   id: HolopadCentComm
   suffix: Centcomm

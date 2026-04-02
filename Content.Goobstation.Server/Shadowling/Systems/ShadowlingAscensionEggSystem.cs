@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Overlays;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
@@ -47,6 +49,8 @@ public sealed class ShadowlingAscensionEggSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly ServerGlobalSoundSystem _globalSound = default!;
+
+    public static readonly EntProtoId NightmareAbilities = "NightmareAbilities";
 
     public override void Initialize()
     {
@@ -104,12 +108,12 @@ public sealed class ShadowlingAscensionEggSystem : EntitySystem
         if (component.ShadowlingInsideEntity != null)
             QueueDel(component.ShadowlingInsideEntity);
 
-        if (component.Creator == null
+        if (component.Creator is not {} creator
             || !component.StartTimer) // This indicates that the shadowling was inside the egg
             return;
 
-        var shadowlingComp = EntityManager.GetComponent<ShadowlingComponent>(component.Creator.Value);
-        _shadowling.OnPhaseChanged(component.Creator.Value, shadowlingComp, ShadowlingPhases.FailedAscension);
+        var shadowlingComp = Comp<ShadowlingComponent>(creator);
+        _shadowling.OnPhaseChanged(creator, shadowlingComp, ShadowlingPhases.FailedAscension);
         component.StartTimer = false;
     }
 
@@ -232,7 +236,7 @@ public sealed class ShadowlingAscensionEggSystem : EntitySystem
             _actions.RemoveAction(ascendant.ActionHatchEntity);
         }
 
-        var nightmareComps = _protoMan.Index("NightmareAbilities");
+        var nightmareComps = _protoMan.Index(NightmareAbilities);
         foreach (var thrall in thralls)
         {
             if (HasComp<LesserShadowlingComponent>(thrall))

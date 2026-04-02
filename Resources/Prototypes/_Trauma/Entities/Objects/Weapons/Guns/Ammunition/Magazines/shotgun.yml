@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseMagazineShotgun
+  id: MagazineShotgunBreaching
+  name: ammo drum (12 Gauge breaching)
+  description: A large drum magazine used by some military-grade automatic shotguns. Intended to hold specialized breaching ammo.
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunBreaching
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi
+    layers:
+      - state: mag-1
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: breaching
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#f1641f"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#f1641f"

@@ -10,10 +10,9 @@
     - SurgeryStepClampInternalBleeders
     - SurgeryStepRemoveOrgan
   - type: SurgeryPartCondition
-    parts: [ Chest ]
+    parts: [ Torso ]
   - type: SurgeryOrganCondition
-    organ:
-    - type: XenomorphInfection
+    organ: XenomorphLarva
 
 # - type: entity
 #   parent: SurgeryBase
@@ -30,8 +29,7 @@
 #   - type: SurgeryPartCondition
 #     parts: [ Torso ]
 #   - type: SurgeryOrganCondition
-#     organ:
-#     - type: XenomorphInfection
+#     organ: XenomorphLarva
 #     inverse: true
 #     reattaching: true
 
@@ -47,7 +45,6 @@
     - SurgeryStepClampInternalBleeders
     - SurgeryStepRemoveOrgan
   - type: SurgeryPartCondition
-    parts: [ Chest ]
+    parts: [ Torso ]
   - type: SurgeryOrganCondition
-    organ:
-    - type: XenomorphLarva
+    organ: XenomorphLarva

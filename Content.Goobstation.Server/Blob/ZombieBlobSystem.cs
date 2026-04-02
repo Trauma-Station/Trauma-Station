@@ -1,22 +1,7 @@
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Milon <milonpl.git@proton.me>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.Atmos.Components;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Managers;
 using Content.Server.Mind;
@@ -25,6 +10,7 @@ using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Speech.Components;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -33,7 +19,6 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared._Starlight.CollectiveMind;
-using Content.Shared.Tag;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Trigger.Systems;
 using Content.Shared.Zombies;
@@ -50,8 +35,6 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
 {
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -63,6 +46,9 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
     private const int ClimbingCollisionGroup = (int) (CollisionGroup.BlobImpassable);
 
     private readonly GasMixture _normalAtmos;
+
+    public static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
+
     public ZombieBlobSystem()
     {
         _normalAtmos = new GasMixture(Atmospherics.CellVolume)
@@ -132,20 +118,15 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
             oldFactions.Add(factionId);
             _faction.RemoveFaction(uid, factionId);
         }
-        _faction.AddFaction(uid, "Blob");
+        _faction.AddFaction(uid, BlobFaction);
         component.OldFactions = oldFactions;
-
-        // var accent = EnsureComp<ReplacementAccentComponent>(uid); // Languages - No need for accents.
-        // accent.Accent = "genericAggressive";
-
-        _tagSystem.AddTag(uid, "BlobMob");
 
         EnsureComp<PressureImmunityComponent>(uid);
 
-        if (TryComp<TemperatureComponent>(uid, out var temperatureComponent))
+        if (TryComp<TemperatureDamageComponent>(uid, out var tempDamage))
         {
-            component.OldColdDamageThreshold = temperatureComponent.ColdDamageThreshold;
-            temperatureComponent.ColdDamageThreshold = 0;
+            component.OldColdDamageThreshold = tempDamage.ColdDamageThreshold;
+            tempDamage.ColdDamageThreshold = 0;
         }
 
         if (TryComp<FixturesComponent>(uid, out var fixturesComp))
@@ -156,15 +137,6 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         var mindComp = EnsureComp<MindContainerComponent>(uid);
         if (mindComp.Mind != null)
         {
-            /*
-            if (!_roleSystem.MindHasRole<BlobRoleComponent>(mindComp.Mind.Value))
-            {
-                _roleSystem.MindAddRole(mindComp.Mind.Value, new BlobRoleComponent
-                {
-                    PrototypeId = "Blob"
-                });
-            }*/
-
             if (_player.TryGetSessionByEntity(mindComp.Mind.Value, out var session))
             {
                 _chatMan.DispatchServerMessage(session, Loc.GetString("blob-zombie-greeting"));
@@ -200,12 +172,10 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         // RemComp<ReplacementAccentComponent>(uid); // Languages - No need for accents.
         RemComp<PressureImmunityComponent>(uid);
 
-        if (TryComp<TemperatureComponent>(uid, out var temperatureComponent) && component.OldColdDamageThreshold != null)
+        if (TryComp<TemperatureDamageComponent>(uid, out var tempDamage) && component.OldColdDamageThreshold != null)
         {
-            temperatureComponent.ColdDamageThreshold = component.OldColdDamageThreshold.Value;
+            tempDamage.ColdDamageThreshold = component.OldColdDamageThreshold.Value;
         }
-
-        _tagSystem.RemoveTag(uid, "BlobMob");
 
         /*
         var mindComp = EnsureComp<MindContainerComponent>(uid);
@@ -222,7 +192,7 @@ public sealed class ZombieBlobSystem : SharedZombieBlobSystem
         {
             _faction.AddFaction(uid, factionId);
         }
-        _faction.RemoveFaction(uid, "Blob");
+        _faction.RemoveFaction(uid, BlobFaction);
 
         if (TryComp<FixturesComponent>(uid, out var fixtures))
         {

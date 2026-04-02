@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseMutation
+  id: MutationWebbingProduction
+  name: Webbing Production
+  description: Allows the user to lay webbing, and travel through it.
+  components:
+  - type: Mutation
+    instability: 25
+  - type: ActionMutation
+    action: ActionSpiderWeb
+  - type: TagMutation
+    added:
+    - SpiderCraft
+  - type: ComponentMutation
+    added:
+    - type: Sericulture # taken from Arachnid
+      productionLength: 2
+      entityProduced: MaterialWebSilk1
+      hungerCost: 4
+    - type: Spider # man, does whatever a spider can
+    - type: IgnoreSpiderWeb

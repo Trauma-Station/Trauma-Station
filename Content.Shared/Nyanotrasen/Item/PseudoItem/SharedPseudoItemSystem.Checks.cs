@@ -21,9 +21,6 @@ public partial class SharedPseudoItemSystem
         if (!Resolve(itemEnt, ref itemEnt.Comp) || !Resolve(storageEnt, ref storageEnt.Comp))
             return false;
 
-        if (!TryComp<MetaDataComponent>(itemEnt, out var metadata))
-            return false;
-
         TryComp<ItemComponent>(itemEnt, out var item);
         // If the entity doesn't have an item comp, create a fake one
         // The fake component is never actually added to the entity

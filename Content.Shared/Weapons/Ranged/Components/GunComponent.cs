@@ -293,11 +293,25 @@ public sealed partial class GunComponent : Component
     public float BurstCooldownModified;
 
     /// <summary>
-    /// Goobstation
-    /// How long should it take to execute with this gun
+    /// Mono
+    /// How long executing another person takes
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public float GunExecutionTime = 3.5f;
+    [DataField]
+    public float ExecutionTime = 6.0f;
+
+    /// <summary>
+    /// Mono
+    /// How long executing yourself takes
+    /// </summary>
+    [DataField]
+    public float SuicideTime = 2.0f;
+
+    /// <summary>
+    /// Mono
+    /// Damage multiplier when performing an execution
+    /// </summary>
+    [DataField]
+    public float ExecutionModifier = 11.0f;
 }
 
 [Flags]

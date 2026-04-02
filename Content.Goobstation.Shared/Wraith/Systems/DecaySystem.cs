@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Damage.Systems;
@@ -21,7 +23,7 @@ public sealed partial class DecaySystem : EntitySystem
 
     private void OnDecay(Entity<DecayComponent> ent, ref DecayEvent args)
     {
-        if (HasComp<HumanoidAppearanceComponent>(args.Target))
+        if (HasComp<HumanoidProfileComponent>(args.Target))
         {
             _stamina.TakeOvertimeStaminaDamage(args.Target, ent.Comp.StaminaDamageAmount);
             _popup.PopupClient(Loc.GetString("wraith-decay-human-alert"), args.Target, args.Target);

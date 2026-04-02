@@ -19,7 +19,7 @@
   - type: Action
     raiseOnUser: true # Goobstation
     checkCanInteract: false # Goobstation
-    useDelay: 10 # Goob edit
+    useDelay: 30 # Trauma edit
     itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/forcewall.ogg

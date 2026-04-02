@@ -1,0 +1,43 @@
+- type: entity
+  id: OilSlimeExtract
+  parent: BaseSlimeExtract
+  name: oil slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#383936"
+      shader: XenoMetallic
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractReagent
+      - !type:RelaySolution
+        name: extract
+        effects:
+        - !type:AdjustReagent
+          reagent: SpaceLube
+          amount: 15
+    - reagents: [ Plasma ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractEvil
+      - !type:Jitter
+        time: 5
+        frequency: 20
+      - !type:ModifyStatusEffect
+        time: 5
+        effectProto: XenobioExplodeStatusEffect
+    - reagents: [ Blood ]
+      methods: [ Touch, Injection ]
+      effects:
+      - !type:NestedEffect
+        proto: XenobioExtractFail
+  - type: Tag
+    tags:
+    - XenobiologyOilExtract

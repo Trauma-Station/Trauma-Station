@@ -55,9 +55,9 @@
   description: An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life!
   components:
   - type: LimitedCharges
-    maxCharges: 6
+    maxCharges: 3 # Trauma, was 6
   - type: AutoRecharge
-    rechargeDuration: 8
+    rechargeDuration: 30 # Trauma, was 8
   - type: Sprite
     sprite: Objects/Weapons/Guns/Basic/staves.rsi
     layers:

@@ -17,4 +17,3 @@
     useDelay: 10.0
   - type: InstantAction
     event: !type:MediGunUberActivateActionEvent
-    

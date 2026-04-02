@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 amogus <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Pirates;
@@ -16,6 +8,7 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -31,6 +24,7 @@ public sealed partial class ActivePirateRuleSystem : GameRuleSystem<ActivePirate
 
     private static readonly SoundSpecifier BriefingSound = new SoundPathSpecifier("/Audio/Ambience/Antag/pirate_start.ogg");
     private static readonly EntProtoId MindRole = "MindRolePirate";
+    private static readonly ProtoId<NpcFactionPrototype> PirateFaction = "PirateFaction";
 
     public override void Initialize()
     {
@@ -80,7 +74,7 @@ public sealed partial class ActivePirateRuleSystem : GameRuleSystem<ActivePirate
         var briefing = Loc.GetString("antag-pirate-briefing");
         _antag.SendBriefing(target, briefing, Color.OrangeRed, BriefingSound);
 
-        _npcFaction.AddFaction(target, "PirateFaction"); // yaml fucking sucks!!!
+        _npcFaction.AddFaction(target, PirateFaction); // yaml fucking sucks!!!
 
         return true;
     }

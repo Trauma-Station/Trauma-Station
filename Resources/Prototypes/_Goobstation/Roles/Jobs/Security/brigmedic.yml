@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: job
   id: Brigmedic
   name: job-name-brigmedic
@@ -21,9 +16,7 @@
   canBeAntag: false
   guides:
   - MedicalDoctor
-  - SOPBrigmedic
   - Medicine
-  goobcoins: 35
   access: # intentionally no medical access, not even hos has it, ask chemists instead of silently stealing meds
   - Security
   - Brig

@@ -8,7 +8,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase, BaseSyndicateContraband, TimerGrenadeBase]
   id: BeeGrenade
   name: Beenade
   description: Not the bees!!!

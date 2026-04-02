@@ -1,0 +1,48 @@
+- type: entity
+  abstract: true
+  parent: AppearanceXenomorphBase
+  id: AppearanceXenomorphLarva
+  components:
+  - type: InitialBody
+    organs:
+      # Parts
+      Torso: OrganXenomorphTorsoLarva
+      Head: OrganXenomorphHead
+      # Organs
+      Brain: OrganXenomorphBrain
+      Eyes: OrganXenomorphEyes
+      HiveNode: OrganXenomorphHiveNode
+      Liver: OrganXenomorphLiver
+      # Caste-Specific
+      PlasmaVessel: OrganXenomorphPlasmaVesselTiny
+
+## Parts
+
+- type: entity
+  parent: OrganXenomorphTorso
+  id: OrganXenomorphTorsoLarva
+  name: larva body
+  description: Extra scary snake.
+  components:
+  - type: BodyPart
+    slots:
+    - Head # :)))))))
+    - Liver
+    - PlasmaVessel
+
+## Organs
+
+- type: entity
+  parent: OrganXenomorphPlasmaVessel
+  id: OrganXenomorphPlasmaVesselTiny
+  name: tiny plasma vessel
+  components:
+  - type: Sprite
+    state: plasma_vessel_tiny
+  - type: OrganComponents
+    onAdd:
+    - type: PlasmaVessel
+      maxPlasma: 100
+  - type: OrganActions
+    actions:
+    - ActionTransferPlasma

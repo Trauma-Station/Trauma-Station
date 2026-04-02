@@ -38,6 +38,11 @@ loadout-group-psychologist-envirohelm = Psychologist envirohelm
 loadout-group-psychologist-envirosuit = Psychologist envirosuit
 loadout-group-psychologist-envirogloves = Psychologist envirogloves
 
+# Virologist
+loadout-group-virology-envirohelm = Virologist envirohelm
+loadout-group-virology-envirosuit = Virologist envirosuit
+loadout-group-virology-envirogloves = Virologist envirogloves
+
 # Cargo Technician
 loadout-group-cargo-technician-envirohelm = Cargo Technician envirohelm
 loadout-group-cargo-technician-envirosuit = Cargo Technician envirosuit
@@ -165,12 +170,6 @@ loadout-group-ntr-envirohelm = Nanotrasen Representative envirohelm
 loadout-group-ntr-envirosuit = Nanotrasen Representative envirosuit
 loadout-group-ntr-envirogloves = Nanotrasen Representative envirogloves
 loadout-group-ntr-gloves = Nanotrasen Representative gloves
-
-# Blueshield Officer
-loadout-group-bso-envirohelm = Blueshield Officer envirohelm
-loadout-group-bso-envirosuit = Blueshield Officer envirosuit
-loadout-group-bso-envirogloves = Blueshield Officer envirogloves
-loadout-group-bso-gloves = Blueshield Officer gloves
 
 # Reporter
 loadout-group-reporter-envirohelm = Reporter envirohelm

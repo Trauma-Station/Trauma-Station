@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Server.Devil.Contract;
 using Content.Goobstation.Shared.Slasher.Components;
 using Content.Goobstation.Shared.Slasher.Events;
@@ -14,9 +16,11 @@ using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Light.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -25,14 +29,12 @@ using Content.Shared.Standing;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weather;
+using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using FixedPoint2 = Content.Goobstation.Maths.FixedPoint.FixedPoint2;
 using System.Linq;
-using Content.Shared.Light.Components;
-using Robust.Server.GameObjects;
 
 namespace Content.Goobstation.Server.Slasher.Systems;
 
@@ -57,11 +59,14 @@ public sealed class SlasherSoulStealSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly SharedWeatherSystem _weather = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPoweredLightSystem _light = default!;
     [Dependency] private readonly SlasherRegenerateSystem _regenerate = default!;
+
+    public static readonly EntProtoId Storm = "WeatherStorm";
+
+    private HashSet<Entity<PoweredLightComponent>> _lights = new();
 
     public override void Initialize()
     {
@@ -235,8 +240,8 @@ public sealed class SlasherSoulStealSystem : EntitySystem
                 _alertLevel.SetLevel(station.Value, "red", true, true, true, false);
 
                 // Make it rain in space
-                var xform = Transform(user);
-                _weather.SetWeather(xform.MapID, _protoMan.Index<WeatherPrototype>("Storm"), null);
+                if (Transform(user).MapUid is {} map)
+                    _weather.TryAddWeather(map, Storm, out _);
 
                 // Make station announcement from Central Command
                 _chatSystem.DispatchStationAnnouncement(
@@ -417,29 +422,27 @@ public sealed class SlasherSoulStealSystem : EntitySystem
 
     private void FlickerLightsAround(EntityUid slasher, SlasherSoulStealComponent comp)
     {
-        var entities = _lookup.GetEntitiesInRange(slasher, comp.LightFlickerRadius).ToList();
-        _random.Shuffle(entities);
+        var coords = Transform(slasher).Coordinates;
+        _lights.Clear();
+        _lookup.GetEntitiesInRange(coords, comp.LightFlickerRadius, _lights);
+        var lights = _lights.ToList();
+        _random.Shuffle(lights);
 
         var flickerCounter = 0;
-        foreach (var entity in entities)
+        foreach (var light in lights)
         {
-            if (!HasComp<PointLightComponent>(entity) && !HasComp<PoweredLightComponent>(entity))
-                continue;
-
             var handled = false;
-
-            // For powered lights, 50/50 chance to either flicker or destroy the bulb
-            if (TryComp<PoweredLightComponent>(entity, out var lightComp) && _random.Prob(0.5f))
+            // 50/50 chance to either flicker or destroy the bulb
+            if (_random.Prob(0.5f))
             {
                 // Destroy the light bulb
-                if (_light.TryDestroyBulb(entity, lightComp))
-                    handled = true;
+                handled = _light.TryDestroyBulb(light, light.Comp);
             }
             else
             {
                 // Flicker the light via ghost boo event
                 var ev = new GhostBooEvent();
-                RaiseLocalEvent(entity, ev);
+                RaiseLocalEvent(light, ev);
                 handled = ev.Handled;
             }
 

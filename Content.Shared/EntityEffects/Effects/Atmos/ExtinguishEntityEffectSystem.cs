@@ -16,6 +16,7 @@ public sealed partial class ExtinguishEntityEffectSystem : EntityEffectSystem<Fl
         var ev = new ExtinguishEvent
         {
             FireStacksAdjustment = args.Effect.FireStacksAdjustment * args.Scale,
+            Holy = args.Effect.Holy, // Trauma
         };
 
         RaiseLocalEvent(entity, ref ev);
@@ -30,6 +31,12 @@ public sealed partial class Extinguish : EntityEffectBase<Extinguish>
     /// </summary>
     [DataField]
     public float FireStacksAdjustment = -1.5f;
+
+    /// <summary>
+    /// Trauma - true if extinguished by holy source, e.g. holy water
+    /// </summary>
+    [DataField]
+    public bool Holy;
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
         Loc.GetString("entity-effect-guidebook-extinguish-reaction", ("chance", Probability));

@@ -6,4 +6,3 @@
 
 attachment-bayonet-slot-name = Bayonet
 attachment-light-slot-name = Flashlight
-

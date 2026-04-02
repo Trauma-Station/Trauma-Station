@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseMobXenomorphAdult
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphSentinel ]
   id: BaseMobXenomorphSentinel
   name: xenomorph sentinel
   description: A specialized specimen designed to hit targets at a distance. Particularly dangerous in narrow corridors and confined spaces.
@@ -19,14 +19,8 @@
       visible: false
   - type: Xenomorph
     caste: Sentinel
-  #- type: ActionGrant # Goobstation - moved to organs
-  #  actions:
-  #  - ActionTransferPlasma
-  #  - ActionSpawnResinWeedNode
   - type: VentCrawler
   - type: Cuffable
-  - type: Body
-    prototype: XenomorphSentinel
   - type: MobThresholds
     thresholds:
       0: Alive

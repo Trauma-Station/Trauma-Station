@@ -1,0 +1,6 @@
+- type: mutationRecipe
+  id: ShockTouch
+  result: MutationShockTouch
+  required:
+  - MutationInsulated # does tg remove this?
+  - MutationRadioactivity

@@ -34,6 +34,8 @@
   components:
   - type: Contraband
     severity: Syndicate
+    allowedDepartments: [  ]
+    allowedJobs: [  ]
   - type: ScannableForPoints # Goobstation - NTR update
     points: 5
 
@@ -185,6 +187,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Medical, Science ]
+    allowedJobs: [ Brigmedic ] # Trauma
 
 # contraband restricted by job by some degree
 - type: entity

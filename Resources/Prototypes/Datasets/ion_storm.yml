@@ -117,7 +117,6 @@
   - SMOOTH
   - SOFT
   - SOLAR-POWERED
-  - SOPPING
   - SLIPPERY
   - SPACE
   - SPESS
@@ -394,7 +393,7 @@
   - SCIENTISTS
   - SECURITY OFFICERS
   - STATION ENGINEERS
-  # - VIROLOGISTS
+  - VIROLOGISTS
   - WARDENS
 
 # only including complex dangerous or funny drinks no water allowed
@@ -930,23 +929,10 @@
   - TRASH
   - VEGETABLES
   # Goobstation - THE ROT CONSUMES
-  - BALDMINS
-  - SHITMINS
-  - CHUDMINS
-  - SHITCODERS
-  - CHUDTAINERS
-  - MAINTAINERS WHO DONT PLAY THE GAME
-  - SHITCODE
-  - SUPERCODE
-  - GOIDACODE
   - JOB
   - EMPLOYMENT
-  - CHUDS
-  - DURK'S STEAK AND WINE
-  - THE SWAP
   - FIVE HUNDRED CIGARETTES
-  - RUSSIAN RAIDERS
-  - FEDERAL AGENTS
+  - CHUDS
 
 # Specific actions that either harm humans or must be done to not
 # harm humans. Make sure they're plural and "not" can be tacked

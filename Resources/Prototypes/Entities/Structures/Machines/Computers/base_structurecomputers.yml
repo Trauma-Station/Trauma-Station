@@ -36,6 +36,7 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: TelekineticInteractable # Trauma
   - type: Animateable
   - type: MeleeSound
     soundGroups:
@@ -48,7 +49,11 @@
       - board
   - type: Computer
   - type: ApcPowerReceiver
-    powerLoad: 200
+    powerLoad: 50
+  - type: PowerState
+    idlePowerDraw: 50
+    workingPowerDraw: 500
+  - type: UIPowerState
   - type: ExtensionCableReceiver
   - type: ActivatableUIRequiresPower
   - type: Sprite
@@ -128,7 +133,6 @@
       - Xenomorph
   # Einstein Engines - Language begin
   - type: LanguageSpeaker
-  - type: LanguageKnowledge
     speaks:
     - TauCetiBasic
     understands:

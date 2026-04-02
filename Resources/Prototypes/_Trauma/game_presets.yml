@@ -8,13 +8,15 @@
   description: insurgency-description
   showInVote: false
   rules:
+  - BasicRoundstartVariation
   - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
+  - SubGamemodesRule
   - Insurgency
 
-# survival+ but it has roundstart abductors and maybe thieves
 - type: gamePreset
   id: Abductors
   alias:
@@ -24,7 +26,66 @@
   showInVote: false
   minPlayers: 20
   rules:
-  - DuoAbductorRoundstart
-  - SubGamemodesRule
-  - SecretPlusRampingMid
   - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - DuoAbductorRoundstart
+
+- type: gamePreset
+  id: Heretics
+  alias:
+  - heretic
+  - heretics
+  name: heretics-title
+  description: heretics-description
+  showInVote: false
+  rules:
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRuleNoHeretic
+  - HereticGamemode
+
+- type: gamePreset
+  id: Shadowlings
+  alias:
+  - shadowling
+  - shadowlings
+  name: shadowling-title
+  description: shadowling-description
+  showInVote: false
+  rules:
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - ShadowlingGamemode
+
+- type: gamePreset
+  id: Wraith
+  alias:
+  - wraith
+  - ayyghost
+  - ghostie
+  name: wraith-title
+  description: wraith-description
+  showInVote: false
+  rules:
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - WraithRoundstart

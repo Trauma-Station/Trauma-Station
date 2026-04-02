@@ -11,12 +11,15 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared._Goobstation.Wizard.TimeStop;
+using Content.Shared.Coordinates;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.Player;
 using Robust.Shared.Animations;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -25,6 +28,8 @@ namespace Content.Client._Shitcode.Wizard.Trail;
 
 public sealed class TrailSystem : EntitySystem
 {
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -40,7 +45,7 @@ public sealed class TrailSystem : EntitySystem
         base.Initialize();
         _overlay.AddOverlay(new TrailOverlay(EntityManager, _protoMan, _timing));
 
-        SubscribeLocalEvent<TrailComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<TrailComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<TrailComponent, ComponentStartup>(OnStartup);
 
         _xformQuery = GetEntityQuery<TransformComponent>();
@@ -56,11 +61,18 @@ public sealed class TrailSystem : EntitySystem
         ent.Comp.LerpAccumulator = ent.Comp.LerpTime;
     }
 
-    private void OnRemove(Entity<TrailComponent> ent, ref ComponentRemove args)
+    private void OnShutdown(Entity<TrailComponent> ent, ref ComponentShutdown args)
     {
-        var (_, comp) = ent;
+        if (_player.LocalEntity is not { } player)
+            return;
 
-        if (!comp.SpawnRemainingTrail || comp.TrailData.Count == 0 || comp.Frequency <= 0f || comp.Lifetime <= 0f)
+        if (TerminatingOrDeleted(player))
+            return;
+
+        var (uid, comp) = ent;
+
+        if (HasComp<PredictedSpawnComponent>(uid) || !comp.SpawnRemainingTrail ||
+            comp.TrailData.Count == 0 || comp.Frequency <= 0f || comp.Lifetime <= 0f)
             return;
 
         if (comp.LastCoords.MapId != _eye.CurrentEye.Position.MapId)
@@ -69,9 +81,10 @@ public sealed class TrailSystem : EntitySystem
         if (comp.RenderedEntity != null && TerminatingOrDeleted(comp.RenderedEntity.Value))
             return;
 
-        var remainingTrail = Spawn(null, comp.LastCoords);
+        var remainingTrail = SpawnAttachedTo(null, player.ToCoordinates());
         EnsureComp<TimedDespawnComponent>(remainingTrail).Lifetime = comp.Lifetime;
         var trail = EnsureComp<TrailComponent>(remainingTrail);
+        trail.ConnectLineToTrailEntity = false;
         trail.SpawnRemainingTrail = false;
         trail.Frequency = 0f;
         trail.Lifetime = comp.Lifetime;
@@ -89,6 +102,7 @@ public sealed class TrailSystem : EntitySystem
         trail.ParticleAmount = comp.ParticleAmount;
         trail.StartAngle = comp.StartAngle;
         trail.EndAngle = comp.EndAngle;
+        trail.AngleVariation = comp.AngleVariation;
         trail.LerpTime = comp.LerpTime;
         trail.LerpAccumulator = comp.LerpAccumulator;
         trail.RenderedEntity = comp.RenderedEntity;
@@ -114,6 +128,9 @@ public sealed class TrailSystem : EntitySystem
         base.Update(frameTime);
 
         if (!_timing.IsFirstTimePredicted)
+            return;
+
+        if (_player.LocalEntity is not { } player)
             return;
 
         var query = EntityQueryEnumerator<TrailComponent, TransformComponent>();
@@ -172,6 +189,10 @@ public sealed class TrailSystem : EntitySystem
                 angle = physics.LinearVelocity.ToAngle();
             else
                 angle = xform.LocalRotation;
+
+            var variation = MathF.Abs(trail.AngleVariation);
+            if (variation > 0)
+                angle += Angle.FromDegrees(_random.NextFloat(-variation, variation));
 
             var start = trail.StartAngle + angle;
             var end = trail.EndAngle + angle;

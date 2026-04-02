@@ -43,18 +43,6 @@
   id: Dementia
 
 - type: statusEffect
-  id: MansusGraspAffected
-  alwaysAllowed: true
-
-- type: statusEffect
-  id: Realignment
-  alwaysAllowed: true
-
-- type: statusEffect
-  id: BlockProtectiveBladeShoot
-  alwaysAllowed: true
-
-- type: statusEffect
   id: DragonPower
   alert: DragonPower
   alwaysAllowed: true
@@ -62,11 +50,6 @@
 - type: statusEffect
   id: LossOfSurprise
   alert: LossOfSurprise
-  alwaysAllowed: true
-
-- type: statusEffect
-  id: ShadowCloak
-  alert: ShadowCloak
   alwaysAllowed: true
 
 - type: statusEffect
@@ -80,3 +63,15 @@
   name: stamina resistance modifier
   components:
   - type: StaminaResistanceModifierStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: EmoteVomitCounterStatusEffect
+  name: emote vomit
+  components:
+  - type: CounterStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: BlockVomitEmotesStatusEffect
+  name: block vomit emotes

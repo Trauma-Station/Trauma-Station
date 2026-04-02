@@ -21,25 +21,9 @@
   whitelist:
     tags:
     - ReptilianEmotes
-    - HarpyEmotes
   blacklist:
     components:
       - BorgChassis
   chatTriggers:
   - yip
   - yips
-
-- type: emote
-  id: Coo
-  name: chat-emote-name-coo
-  category: Vocal
-  chatMessages: [ "chat-emote-msg-coo" ]
-  whitelist:
-    tags:
-      - HarpyEmotes
-  blacklist:
-    components:
-      - BorgChassis
-  chatTriggers:
-  - coo
-  - coos

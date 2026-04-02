@@ -1,4 +1,4 @@
-﻿name: soft-repoban check
+name: soft-repoban check
 
 on:
   pull_request:

@@ -23,13 +23,12 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
 {
     private static readonly ProtoId<LocalizedDatasetPrototype> RevConvertSpeechProto = "RevolutionaryConverterSpeech";
 
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
-    [Dependency] private readonly SharedChargesSystem _chargesSystem = default!;
+    [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly SharedFlashSystem _flash = default!;
 
     private LocalizedDatasetPrototype? _speechLocalization;
@@ -42,7 +41,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
         SubscribeLocalEvent<RevolutionaryConverterComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RevolutionaryConverterComponent, AfterInteractEvent>(OnConverterAfterInteract);
 
-        _speechLocalization = _prototypeManager.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
+        _speechLocalization = _proto.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
     }
 
     private void OnUseInHand(Entity<RevolutionaryConverterComponent> ent, ref UseInHandEvent args)
@@ -73,7 +72,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
             || args.Target == null)
             return;
 
-        _chargesSystem.TryUseCharges(entity.Owner, entity.Comp.ConsumesCharges);
+        _charges.TryUseCharges(entity.Owner, entity.Comp.ConsumesCharges);
         ConvertTarget(args.Used.Value, args.Target.Value, args.User);
     }
 
@@ -89,12 +88,11 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
         if (args.Handled
             || !args.Target.HasValue
             || !args.CanReach
-            || !_chargesSystem.HasCharges(entity.Owner, entity.Comp.ConsumesCharges)
+            || !_charges.HasCharges(entity.Owner, entity.Comp.ConsumesCharges)
             || !HasComp<MindContainerComponent>(args.Target)
-            || !HasComp<HumanoidAppearanceComponent>(args.Target)) // TraumaStation change
+            || !HasComp<HumanoidProfileComponent>(args.Target))
             return;
 
-        // TraumaStation
         if (entity.Comp.ApplyFlashEffect)
             _flash.Flash(args.Target.Value, args.User, entity.Owner, entity.Comp.FlashDuration, entity.Comp.SlowToOnFlashed);
 
@@ -115,7 +113,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
 
         if (SpeakPropaganda(converter, user)
             // Note: this check is skipped if the speaker speaks lines and somehow doesn't have a languageSpeaker component.
-            && EntityManager.TryGetComponent<LanguageSpeakerComponent>(user, out var speakerComponent)) // returns true if the chosen conversion method uses a spoken line of text
+            && TryComp<LanguageSpeakerComponent>(user, out var speakerComponent)) // returns true if the chosen conversion method uses a spoken line of text
         {
             //check if spoken language can be understood by target
             if (!_language.CanUnderstand(target, speakerComponent.CurrentLanguage))
@@ -131,7 +129,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
                 converter.Owner,
                 target: target,
                 used: converter.Owner,
-                showTo: converter.Owner)
+                showTo: user)
             {
                 Hidden = !converter.Comp.VisibleDoAfter,
                 BreakOnMove = false,

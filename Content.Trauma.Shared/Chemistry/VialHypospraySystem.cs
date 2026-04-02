@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 
@@ -13,10 +14,10 @@ public sealed class VialHypospraySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<VialHyposprayComponent, HyposprayGetSolutionEvent>(OnGetSolution);
+        SubscribeLocalEvent<VialHyposprayComponent, InjectorGetSolutionEvent>(OnGetSolution);
     }
 
-    private void OnGetSolution(Entity<VialHyposprayComponent> ent, ref HyposprayGetSolutionEvent args)
+    private void OnGetSolution(Entity<VialHyposprayComponent> ent, ref InjectorGetSolutionEvent args)
     {
         if (args.Handled)
             return;

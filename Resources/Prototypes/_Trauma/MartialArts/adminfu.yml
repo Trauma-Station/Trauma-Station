@@ -1,0 +1,17 @@
+- type: combo
+  id: InstantStun
+  attacks:
+  - Disarm
+  levelRequired: 0
+
+- type: combo
+  id: InstantDeath
+  attacks:
+  - Harm
+  levelRequired: 0
+
+- type: combo
+  id: InstantRejuvenate
+  attacks:
+  - Hug
+  levelRequired: 0

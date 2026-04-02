@@ -37,3 +37,49 @@
   materials:
     Steel: 300
     Plasma: 100
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: T45Helmet
+  result: T45Helmet
+  materials:
+    Steel: 5000
+    Glass: 1000
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: T45Chest
+  result: T45Chest
+  materials:
+    Steel: 5000
+    Plasteel: 2000
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: T45ArmL
+  result: T45ArmL
+  materials:
+    Steel: 2500
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: T45ArmR
+  result: T45ArmR
+  materials:
+    Steel: 2500
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: T45LegL
+  result: T45LegL
+  materials:
+    Steel: 3000
+    Plasteel: 200
+
+- type: latheRecipe
+  parent: BaseRevFoundry
+  id: T45LegR
+  result: T45LegR
+  materials:
+    Steel: 3000
+    Plasteel: 200

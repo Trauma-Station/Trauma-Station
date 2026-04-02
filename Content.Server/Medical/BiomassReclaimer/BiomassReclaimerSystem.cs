@@ -193,11 +193,11 @@ namespace Content.Server.Medical.BiomassReclaimer
             });
         }
 
-        private void OnDragDropTarget(Entity<BiomassReclaimerComponent> reclaimer, ref DragDropTargetEvent args) // # GoobStation
+        // Goob
+        // TODO: move this shit out of here
+        private void OnDragDropTarget(Entity<BiomassReclaimerComponent> reclaimer, ref DragDropTargetEvent args)
         {   // Safety Checks, If the machine is on safety & if the target is vaild to avoid crashes.
-            if (args.Dragged == null
-            || !CanGib(reclaimer, args.Dragged)
-            || !TryComp<PhysicsComponent>(args.Dragged, out var physics))
+            if (!CanGib(reclaimer, args.Dragged) || !TryComp<PhysicsComponent>(args.Dragged, out var physics))
                 return;
             var delay = reclaimer.Comp.BaseInsertionDelay * physics.FixturesMass;
 
@@ -285,7 +285,7 @@ namespace Content.Server.Medical.BiomassReclaimer
                 _solution.ResolveSolution(toProcess, stream.BloodSolutionName, ref stream.BloodSolution, out var solution))
             {
                 component.BloodReagents = solution.Clone();
-                component.BloodReagents.ScaleSolution(50 / component.BloodReagents.Volume);
+                //component.BloodReagents.ScaleSolution(50 / component.BloodReagents.Volume); // Trauma - this makes no sense + divide by 0 for fully drained mobs
             }
             if (TryComp<ButcherableComponent>(toProcess, out var butcherableComponent))
             {
@@ -328,7 +328,7 @@ namespace Content.Server.Medical.BiomassReclaimer
 
             // Reject souled bodies in easy mode.
             if (_configManager.GetCVar(CCVars.BiomassEasyMode) &&
-                HasComp<HumanoidAppearanceComponent>(dragged) &&
+                HasComp<HumanoidProfileComponent>(dragged) &&
                 _minds.TryGetMind(dragged, out _, out var mind))
             {
                 if (mind.UserId != null && _playerManager.TryGetSessionById(mind.UserId.Value, out _))

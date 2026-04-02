@@ -349,6 +349,7 @@
       collection: FootstepTile
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: CosmicTable
+  - type: ReflectiveSurface # Goob
 
 - type: entity
   id: TableCard
@@ -463,6 +464,7 @@
       collection: FootstepTile
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: CosmicTable
+  - type: ReflectiveSurface # Goob
 
 - type: entity
   id: TablePlasmaGlass
@@ -522,6 +524,7 @@
       collection: FootstepTile
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: CosmicTable
+  - type: ReflectiveSurface # Goob
 
 - type: entity
   id: TableBrass
@@ -590,7 +593,7 @@
         acts: [ "Destruction" ]
       - !type:PlaySoundBehavior
         sound:
-          collection: GlassBreak
+          collection: WoodDestroy
     - trigger:
         !type:DamageTrigger
         damage: 15
@@ -782,6 +785,12 @@
     damageModifierSet: Wood
   - type: Destructible
     thresholds:
+    - trigger: # Excess damage, don't spawn entities
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 25

@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Clothing.Components;
@@ -13,4 +10,3 @@ public record struct ClothingAutoInjectRelayedEvent(EntityUid Target, MobState N
 {
     public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
-

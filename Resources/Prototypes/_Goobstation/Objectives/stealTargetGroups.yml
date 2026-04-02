@@ -58,3 +58,10 @@
   sprite:
     sprite: _Goobstation/Clothing/Belt/geminiprojector.rsi
     state: icon
+
+- type: stealTargetGroup
+  id: Battery
+  name: steal-target-groups-battery
+  sprite:
+    sprite: Objects/Power/power_cells.rsi
+    state: medium

@@ -1,0 +1,221 @@
+## Common
+
+- type: entityTable
+  id: LetterVagueThreat
+  table: !type:AllSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: PaperMailNFVagueThreat1
+      - id: PaperMailNFVagueThreat2
+      - id: PaperMailNFVagueThreat3
+      - id: PaperMailNFVagueThreat4
+      - id: PaperMailNFVagueThreat5
+      - id: PaperMailNFVagueThreat6
+      - id: PaperMailNFVagueThreat7
+      - id: PaperMailNFVagueThreat8
+      - id: PaperMailNFVagueThreat9
+      - id: PaperMailNFVagueThreat10
+      - id: PaperMailNFVagueThreat11
+      - id: PaperMailNFVagueThreat12
+    - !type:GroupSelector
+      children:
+      - id: KitchenKnife
+      - id: ButchCleaver
+      - id: CombatKnife
+      - id: SurvivalKnife
+      - id: SoapHomemade
+      - id: FoodMeat
+      - id: OrganHumanHeart
+
+- type: entityTable
+  id: LetterEMP
+  table: !type:AllSelector
+    children:
+    - id: DelayedEMP
+    - id: PaperMailNFEMPPreparedness
+
+- type: entityTable
+  id: LetterCigarettes
+  table: !type:AllSelector
+    children:
+    - id: CheapLighter
+    - !type:GroupSelector
+      children:
+      - id: CigPackBlack
+      - id: CigPackBlue
+      - id: CigPackGreen
+      - id: CigPackRed
+      - id: CigPackMixed
+      - id: CigPackSyndicate
+        weight: 0.25
+
+## Uncommon
+
+- type: entityTable
+  id: BikeHornRandom
+  table: !type:GroupSelector
+    children:
+    - id: BikeHorn
+      weight: 0.95
+    - id: CluwneHorn
+      weight: 0.05
+
+- type: entityTable
+  id: LetterMaterialsRandom
+  table: !type:AllSelector
+    children:
+    - id: IngotGold
+      amount: 0,5
+    - id: IngotSilver
+      amount: 0,5
+    - id: SheetUranium
+      amount: 0,2
+
+- type: entityTable
+  id: CritterRandom
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      weight: 2
+      children:
+      - id: MobCockroach
+      - id: MobLootbug
+      - id: MobSlug
+      - id: MobArgocyteSlurva # honorary bug?
+      - id: MobBee
+      - id: MobButterfly
+      - id: MobMothmaggot
+        weight: 0.1
+    - !type:GroupSelector
+      weight: 1
+      children:
+      - id: MobLizard
+      - id: MobSnake
+      - id: MobFrog
+    - !type:GroupSelector
+      weight: 1
+      children:
+      - id: MobMouse
+      - id: MobMouse1
+      - id: MobMouse2
+      - id: MobMousePlague
+        weight: 0.05
+      - id: MobMouseCancer
+        weight: 0.01
+
+- type: entityTable
+  id: CookieRandom
+  table: !type:GroupSelector
+    children:
+    - id: FoodBakedCookie
+    - id: FoodBakedCookieOatmeal
+    - id: FoodBakedCookieRaisin
+    - id: FoodBakedCookieSugar
+
+- type: entityTable
+  id: MuffinRandom
+  table: !type:GroupSelector
+    children:
+    - id: FoodBakedMuffin
+    - id: FoodBakedMuffinBerry
+    - id: FoodBakedMuffinCherry
+    - id: FoodBakedMuffinBluecherry
+
+## Rare
+
+- type: entityTable
+  id: KnifeRandom
+  table: !type:GroupSelector
+    children:
+    - id: KukriKnife
+    - id: Machete
+    - id: CombatKnife
+    - id: SurvivalKnife
+
+- type: entityTable
+  id: LuxuryPenRandom
+  table: !type:GroupSelector
+    children:
+    - id: LuxuryPen
+    - id: PenHop
+      weight: 0.25
+    - id: PenCap
+      weight: 0.25
+    - id: CyberPen
+      weight: 0.05
+    - id: PenCentcom
+      weight: 0.05
+
+- type: entityTable
+  id: LetterLuxuryPen
+  table: !type:AllSelector
+    children:
+    - !type:NestedSelector
+      tableId: LuxuryPenRandom
+    - id: PaperMailNFPaperPusherAd
+
+- type: entityTable
+  id: LetterPAI
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      weight: 0.8
+      children:
+      - id: PersonalAI
+      - id: GoldenPersonalAI
+        weight: 0.1
+      - id: SyndicatePersonalAI
+        weight: 0.02
+    - !type:GroupSelector
+      weight: 0.2
+      children:
+      - id: ScrapPAI
+      - id: ScrapPAIGold
+        weight: 0.1
+
+- type: entityTable
+  id: LetterFlowers
+  table: !type:AllSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: ClothingHeadHatFlowerWreath
+      - id: FoodPoppy
+    - id: FoodLily
+
+- type: entityTable
+  id: LetterCigars
+  table: !type:AllSelector
+    children:
+    - id: CigarGoldCase
+    - id: FlippoLighter
+      prob: 0.95
+
+- type: entityTable
+  id: DonkPocketsRandom
+  table: !type:GroupSelector
+    children:
+    - id: FoodBoxDonkpocket
+      weight: 4 # Higher probability, useful for chefs.
+    - id: FoodBoxDonkpocketSpicy
+    - id: FoodBoxDonkpocketTeriyaki
+    - id: FoodBoxDonkpocketPizza
+    - id: FoodBoxDonkpocketBerry
+    - id: FoodBoxDonkpocketStonk
+      weight: 0.5
+    - id: FoodBoxDonkpocketCarp
+      weight: 0.5
+    - id: FoodBoxDonkpocketHonk
+      weight: 0.5
+    - id: FoodBoxDonkpocketDink
+      weight: 0.5
+
+- type: entityTable
+  id: JointRandom
+  table: !type:GroupSelector
+    children:
+    - id: Joint
+    - id: JointRainbow
+    - id: BluntCigar
+    - id: BluntRainbow

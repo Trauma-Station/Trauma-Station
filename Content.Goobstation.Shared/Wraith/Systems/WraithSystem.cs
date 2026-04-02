@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Wraith.Actions;
 using Content.Goobstation.Shared.Wraith.Banishment;
 using Content.Goobstation.Shared.Wraith.Collisions;

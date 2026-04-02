@@ -14,5 +14,3 @@ void fragment() {
     COLOR = zTexture(UV + displacementValue * TEXTURE_PIXEL_SIZE * displacementSize * vec2(1.0, -1.0));
     COLOR.a *= displacementSample.a;
 }
-
-

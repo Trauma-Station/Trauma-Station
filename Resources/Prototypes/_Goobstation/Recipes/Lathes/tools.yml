@@ -44,14 +44,16 @@
     Wood: 200
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
   id: MagazineBoxNail
   result: MagazineBoxNail
+  categories:
+  - Ammo
+  completetime: 5
   materials:
     Steel: 400
 
 - type: latheRecipe
-  parent: BaseAmmoRecipe
+  parent: MagazineBoxNail
   id: MagazineBoxNailArmorPiercing
   result: MagazineBoxNailArmorPiercing
   materials:

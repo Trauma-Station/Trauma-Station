@@ -1,4 +1,4 @@
-﻿# For Sol Alliance Navy Deserters
+# For Sol Alliance Navy Deserters
 ghost-role-information-deserter-name = Solarian Navy Deserter
 ghost-role-information-deserter-description = "I've fucking had it with the quartermaster not giving me my damn paycheck! Let's take one of the dropships for a joyride and go looting to pay ourselves."
 ghost-role-information-deserter-rules =

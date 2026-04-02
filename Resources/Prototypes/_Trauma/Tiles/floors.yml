@@ -1,0 +1,11 @@
+- type: tile
+  parent: BaseStationTile
+  id: FloorSteelBurnt
+  name: tiles-steel-floor
+  sprite: /Textures/_Trauma/Tiles/steel_burnt.png # Trauma
+  variants: 2
+  placementVariants:
+  - 1.0
+  - 1.0
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175

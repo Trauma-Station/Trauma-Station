@@ -1,0 +1,7 @@
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
+  id: GeneticsConsoleCircuitboard
+  result: GeneticsConsoleCircuitboard
+  icon:
+    sprite: _Trauma/Structures/Machines/Computers/icons.rsi
+    state: genetics

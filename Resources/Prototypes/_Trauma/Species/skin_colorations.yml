@@ -1,3 +1,0 @@
-- type: skinColoration
-  id: NoColor
-  strategy: !type:NoColoration

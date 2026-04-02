@@ -1,0 +1,125 @@
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationNervousness
+  name: Nervousness
+  description: Causes the holder to stutter.
+  components:
+  - type: ComponentMutation
+    added:
+    - type: StutteringAccent
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationWacky
+  name: Wacky
+  description: You are not a clown. You are the entire circus.
+  components:
+  - type: SpeechFontOverride
+    font: LDFComicSans
+    sourceOnly: false
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationHeckaciousLarincks
+  name: Heckacious Larincks
+  description: duge what is WISH your words man...........
+  components:
+  - type: RemovesMutation
+    removes:
+    - MutationStoner
+  - type: ReplacementAccent
+    accent: Heckacious # not the same as ss13 but dear god im not writing all that byond shitcode
+
+# fun fact: mimes can take this then remove it to speak with vow intact
+- type: entity
+  parent: BaseMutation
+  id: MutationMute
+  name: Mute
+  description: Completely inhibits the vocal section of the brain.
+  components:
+  - type: Mutation
+    instability: -40
+  - type: RemovesMutation
+    removes:
+    - MutationUnintelligible # no free -70
+  - type: ComponentMutation
+    added:
+    - type: Muted
+
+- type: entity
+  parent: BaseMutation
+  id: MutationUnintelligible
+  name: Unintelligible
+  description: Partially inhibits the vocal center of the brain, severely distorting speech.
+  components:
+  - type: Mutation
+    instability: -30
+    conflicts:
+    - MutationMute # can upgrade to Mute
+  # TODO
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationSwedish
+  name: Swedish
+  description: A horrible mutation originating from the distant past. Thought to be eradicated after the incident in 2037.
+  components:
+  - type: CharactersAccent
+    chars:
+      w: [ "v" ]
+      j: [ "y" ]
+      b: [ "bj" ]
+      a: [ "å", "ä", "æ", "a" ]
+      o: [ "ö", "ø", "o" ]
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationChav
+  name: Chav
+  description: Unknown
+  components:
+  - type: BritishAccent
+
+- type: entity
+  parent: [ BaseFreeMutation, BaseTriggerMutation ]
+  id: MutationElvis
+  name: Elvis
+  description: "A terrifying mutation named after its 'patient-zero'."
+  components:
+  - type: ReplacementAccent
+    accent: Elvis
+  - type: RandomTrigger
+    prob: 0.075 # 7.5%
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayMutated
+      effect: !type:NestedEffect
+        conditions:
+        - !type:NestedCondition
+          proto: IsAwake
+        - !type:InContainerCondition
+          inverted: true # can't dance inside a locker bro
+        proto: MutationElvisDance
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationStoner
+  name: Stoner
+  description: A common mutation that severely decreases intelligence.
+  # TODO
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationMedieval
+  name: Medieval
+  description: A horrible mutation originating from the distant past, thought to have once been a common gene in all of old world Europe.
+  components:
+  - type: MedievalAccent
+
+- type: entity
+  parent: BaseFreeMutation
+  id: MutationPigLatin
+  name: Pig Latin
+  description: Historians say back in the 2020's humanity spoke entirely in this mystical language.
+  components:
+  - type: PigLatinAccent

@@ -1,0 +1,163 @@
+# Base
+
+- type: entity
+  abstract: true
+  parent: SurgeryBase
+  id: SurgeryOpenCavityBase
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryOrganSlotCondition
+    inverse: true
+  - type: SurgeryBodyComponentCondition
+    blacklist:
+      components:
+      - Silicon # cant open a cavity in clanker, plus they already have battery etc
+
+- type: entity
+  abstract: true
+  parent: SurgeryBase
+  id: SurgeryInstallAugmentBase
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+  - type: SurgeryOrganCondition
+    inverse: true
+    reattaching: true
+
+- type: entity
+  abstract: true
+  parent: SurgeryBase
+  id: SurgeryRemoveAugmentBase
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveOrgan
+
+# Power Cell Slot
+
+- type: entity
+  parent: SurgeryInstallAugmentBase
+  id: SurgeryInsertPowerCellSlot
+  name: Insert Power Cell Slot
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepInsertAugmentPowerCellSlot
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganCondition
+    organ: AugmentPowerCell
+  - type: SurgeryOrganSlotCondition
+    organSlot: AugmentPowerCell
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenPowerCellSlot
+  name: Open Cavity For Power Cell Slot
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: AugmentPowerCell
+
+- type: entity
+  parent: SurgeryRemoveAugmentBase
+  id: SurgeryRemovePowerCellSlot
+  name: Remove Power Cell Slot
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganCondition
+    organ: AugmentPowerCell
+
+# Power Cell Charger
+
+- type: entity
+  parent: SurgeryInstallAugmentBase
+  id: SurgeryInsertPowerCellCharger
+  name: Insert Internal Power Cell Charger
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepInsertAugmentPowerCellCharger
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganCondition
+    organ: AugmentCharger
+  - type: SurgeryOrganSlotCondition
+    organSlot: AugmentCharger
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenPowerCellCharger
+  name: Open Cavity For Power Cell Charger
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: AugmentCharger
+
+- type: entity
+  parent: SurgeryRemoveAugmentBase
+  id: SurgeryRemovePowerCellCharger
+  name: Remove Internal Power Cell Charger
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganCondition
+    organ: AugmentCharger
+
+# Arm
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenArmAugment
+  name: Open Cavity For Arm Augments
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision # no ribcage
+  - type: SurgeryPartCondition
+    parts: [ Arm ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: ArmAugment
+
+- type: entity
+  parent: SurgeryInstallAugmentBase
+  id: SurgeryInsertArmAugment
+  name: Insert Arm Augment
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision # no ribcage
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepInsertAugmentArm
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    parts: [ Arm ]
+  - type: SurgeryOrganCondition
+    organ: ArmAugment
+  - type: SurgeryOrganSlotCondition
+    organSlot: ArmAugment
+
+- type: entity
+  parent: SurgeryRemoveAugmentBase
+  id: SurgeryRemoveArmAugment
+  name: Remove Arm Augment
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision # no ribcage
+  - type: SurgeryPartCondition
+    parts: [ Arm ]
+  - type: SurgeryOrganCondition
+    organ: ArmAugment

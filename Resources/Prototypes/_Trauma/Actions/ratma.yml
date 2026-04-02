@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseAction
+  id: ActionRatmaJump
+  name: Jump
+  description: Jump after the food.
+  components:
+  - type: Action
+    useDelay: 0.5
+    icon:
+      sprite: Interface/Actions/jump.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:GravityJumpEvent {}

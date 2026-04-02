@@ -15,8 +15,9 @@
   - Syringe
   - PillCanister
   - HandLabeler
-  - ChemicalPayload
-  - BaseChemistryEmptyVial
+  - ChemicalPayload # Goob
+  - ChemistryEmptyVial
+  - ChemistryEmptyVialSmall
   - Dropper
 
 - type: latheRecipePack
@@ -48,6 +49,7 @@
   - WhiteCane
   - OffsetCane
   - OffsetCaneWood
+  #- JetInjector # Trauma - le quirky syringe
 
 - type: latheRecipePack
   id: RollerBedsStatic
@@ -85,24 +87,29 @@
   - ChemMasterMachineCircuitboard
   - CondenserMachineCircuitBoard
   - HotplateMachineCircuitboard
+  - EnergyChemDispenserMachineCircuitboard #Goob edit - all things that get base med boards get E-Chem
 
 ## Dynamic
 
 # Shared with protolathe
 - type: latheRecipePack
+  parent:
+  - TraumaChemistry # Trauma
   id: Chemistry
   recipes:
   - CryostasisBeaker
   - SyringeCryostasis
   - BluespaceBeaker
   - SyringeBluespace
-  - MedkitCombat #goob - Move combat kit to research
-  - VialBluespace # goob edit - bluespace vials
+  #- LauncherSyringe # Trauma - goob syringe gun instead
+  #- MiniSyringe # Trauma
+  #- AdvancedJetInjector # Trauma - le quirky syringe
 
 - type: latheRecipePack
+  parent:
+  - TraumaMedicalBoards # Trauma
   id: MedicalBoards
   recipes:
   - StasisBedMachineCircuitboard
   - CryoPodMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
-  - StasisOperatingTableCircuitboard # Corvax-Goob-StasisOperatingTable

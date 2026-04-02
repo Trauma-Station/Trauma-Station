@@ -1,0 +1,83 @@
+- type: entity
+  parent: BaseStructure
+  id: CosmicEffigy
+  name: effigy of entropy
+  description: An abhorrent malign anomaly. Raw entropy oozes forth, betraying its instability.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/cosmiceffigy.rsi
+    offset: 0, 1
+    layers:
+    - state: unshaded_bg
+      shader: unshaded
+    - state: base
+    - state: unshaded_fg
+      shader: unshaded
+    drawdepth: Mobs
+  - type: AmbientSound
+    volume: -5
+    range: 8
+    sound:
+      path: /Audio/_DV/CosmicCult/effigy_ambience.ogg
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-culteffigy
+    othersText: cosmic-examine-text-effigy
+  - type: CosmicCorrupting
+    corruptionReduction: 0.02
+    enabled: true
+    floodFillStarting: true
+    corruptionMaxTicks: 6
+    corruptionSpeed: 1.25
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        density: 50
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: Damageable
+    damageContainer: InorganicMetaphysical
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 400
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CosmicGlareAbilityVFX:
+                min: 1
+                max: 1
+          - !type:PlaySoundBehavior
+            sound:
+              path: /Audio/_DV/CosmicCult/effigy_supercritical.ogg
+  - type: PointLight
+    color: "#42a4ae"
+    radius: 4
+    energy: 4
+    castShadows: true
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      interpolate: Linear
+      minDuration: 2.25
+      maxDuration: 2.25
+      startValue: 2
+      endValue: 5
+      property: Energy
+      enabled: true
+      isLooped: true
+      reverseWhenFinished: true
+  - type: GuideHelp
+    guides:
+    - CosmicCult
+  - type: WarpPoint
+  - type: CosmicEffigy

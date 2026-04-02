@@ -7,3 +7,6 @@ objective-issuer-insurgents = Insurgents
 
 insurgency-title = Insurgency
 insurgency-description = Insurgents are among us...
+
+roles-antag-shadow-demon-name = Shadow Demon
+roles-antag-shadow-demon-objective = The darkness needs a King, and you got summoned to wear that crown.

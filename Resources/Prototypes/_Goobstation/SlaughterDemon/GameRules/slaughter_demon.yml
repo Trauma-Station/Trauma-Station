@@ -99,24 +99,13 @@
     minimumPlayers: 50
     duration: null
     maxOccurrences: 1
-    chaos:
-      Hostile: 200
-      Friend: 40
-      Medical: 200
-      Death: 200
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 900
-  - type: Tag
-    tags:
-    - MidroundAntag
   - type: AntagObjectives
     objectives:
-      - SlaughterDevourObjective
-      - AnnihilateAllJanitorsObjectiveFluff
-      - SpareCrewObjectiveFluff
-      - HuntTheBraveObjectiveFluff
-      - HuntTheCowardsObjectiveFluff
-      - ShowCrewPowerObjectiveFluff
-      - DriveInsaneObjectiveFluff
-      - SpreadBloodObjectiveFluff
+    - SlaughterDevourObjective
+    - AnnihilateAllJanitorsObjectiveFluff
+    - SpareCrewObjectiveFluff
+    - HuntTheBraveObjectiveFluff
+    - HuntTheCowardsObjectiveFluff
+    - ShowCrewPowerObjectiveFluff
+    - DriveInsaneObjectiveFluff
+    - SpreadBloodObjectiveFluff

@@ -108,7 +108,7 @@
   description: Melt into the Ethereal Plane for an even quicker getaway!
   components:
   - type: Action
-    useDelay: 22
+    useDelay: 20 # Trauma, was 22
 
 - type: entity
   parent: ActionPolymorphJaunt
@@ -117,4 +117,4 @@
   description: Are you even tangible anymore?
   components:
   - type: Action
-    useDelay: 14
+    useDelay: 10 # Trauma, was 14

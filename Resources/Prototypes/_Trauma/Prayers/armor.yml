@@ -1,0 +1,66 @@
+## PARITY
+
+- type: scrollPrayer
+  id: BlackDress
+  verb: GIVE
+  subjects: [ "BLACK DRESS" ]
+  items:
+    id: ClothingUniformJumpskirtReporter
+
+- type: scrollPrayer
+  id: SilkRoles
+  verb: GIVE
+  subjects: [ "EASTERN ROBES", "SILK ROBES" ]
+  items:
+    id: ClothingUniformJumpsuitWeb # made of real silk
+
+- type: scrollPrayer
+  id: FurArmor
+  verb: GIVE
+  subjects: [ "FUR ARMOR" ]
+  items:
+    id: ClothingOuterCoatExpensive
+
+- type: scrollPrayer
+  id: FurOutfit
+  verb: GIVE
+  subjects: [ "FUR OUTFIT" ]
+  items: !type:AllSelector
+    children:
+    - id: ClothingOuterRedRacoon
+    - id: ClothingHeadHatRedRacoon
+
+- type: scrollPrayer
+  id: GauntArmor
+  verb: GIVE
+  subjects: [ "GAUNT ARMOR", "PLATE MAIL" ]
+  items:
+    id: ClothingOuterArmorRev
+
+- type: scrollPrayer
+  id: GuardOutfit
+  verb: GIVE
+  subjects: [ "GUARD OUTFIT" ]
+  items: !type:AllSelector
+    children:
+    - id: ClothingEyesGlassesSecurity
+    - id: ClothingHeadsetAltSecurityRegular
+    - id: ClothingHeadHatBeretSecurity
+    - id: ClothingMaskGasSecurity
+    - id: ClothingHandsGlovesColorBlack
+    - id: ClothingShoesBootsJack
+    - id: ClothingUniformJumpsuitSec
+
+- type: scrollPrayer
+  id: HighPriest
+  verb: GIVE
+  subjects: [ "HIGH PRIEST'S" ]
+  items:
+    id: ClothingUniformJumpsuitERTChaplain
+
+- type: scrollPrayer
+  id: PriestRobe
+  verb: GIVE
+  subjects: [ "PRIEST'S ROBE" ]
+  items:
+    id: ClothingUniformJumpsuitChaplain
