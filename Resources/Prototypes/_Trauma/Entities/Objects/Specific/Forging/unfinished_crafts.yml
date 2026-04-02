@@ -67,6 +67,7 @@
   components:
   # TODO: quenching vs air cooling should matter, heat treatment gameplay
   - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi # gets replaced with the actual item
     layers:
     - state: icon
       map: [ "enum.MetallicVisuals.Layer" ]
