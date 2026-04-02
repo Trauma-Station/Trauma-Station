@@ -49,7 +49,7 @@
   stackEntity: Whetstone1
   name: materials-whetstone
   unit: materials-unit-use
-  icon: { sprite: _Trauma/Objects/tools/whetstone.rsi, state: icon }
+  icon: { sprite: _Trauma/Objects/Tools/whetstone.rsi, state: icon }
   color: "#000000"
   price: 0
 
@@ -58,7 +58,7 @@
   stackEntity: WeaponBracing1
   name: materials-bracing
   unit: materials-unit-use
-  icon: { sprite: _Trauma/Objects/tools/weaponreinforcement.rsi, state: icon }
+  icon: { sprite: _Trauma/Objects/Tools/weaponreinforcement.rsi, state: icon }
   color: "#000000"
   price: 0
 

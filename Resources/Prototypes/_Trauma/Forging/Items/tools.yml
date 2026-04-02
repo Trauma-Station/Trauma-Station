@@ -1,0 +1,57 @@
+- type: forgedItem
+  id: HammerHead
+  category: Tools
+  name: hammer head
+  construction: ForgedShortHandle
+  finished: ForgedHammer
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+  work: 75 # its small
+
+- type: forgedItem
+  id: ScrewdriverShank
+  category: Tools
+  name: screwdriver shank
+  construction: ForgedShortHandle
+  finished: ForgedScrewdriver
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+
+- type: forgedItem
+  id: PickaxeHead
+  category: Tools
+  name: pickaxe head
+  construction: ForgedMediumHandle
+  finished: ForgedPickaxe
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+  work: 170 # need to stretch an ingot out a lot
+  skills:
+    MetalworkingKnowledge: 2
+
+- type: forgedItem
+  id: Crowbar
+  category: Tools
+  result: ForgedCrowbar
+
+- type: entity
+  parent: [ BaseForgedReadyItem, Crowbar ]
+  id: ForgedCrowbar
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+
+- type: forgedItem
+  id: Wrench
+  category: Tools
+  result: ForgedWrench
+
+- type: entity
+  parent: [ BaseForgedReadyItem, Wrench ]
+  id: ForgedWrench
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench.rsi
