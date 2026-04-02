@@ -3,7 +3,7 @@
 using Content.Client.Construction;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Construction.Prototypes;
-using Content.Trauma.Shared.RadialSelector;
+using Content.Trauma.Common.RadialSelector;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
