@@ -3,8 +3,8 @@
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Goobstation.Shared.Disease.Systems;
-using Content.Shared._EinsteinEngines.Language;
 using Content.Shared.Chat;
+using Content.Trauma.Common.Language;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Disease;

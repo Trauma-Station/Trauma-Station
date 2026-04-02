@@ -24,7 +24,7 @@
   components:
   - type: Knowledge
     category: War
-    costs: [0, 2, 4, 6, 8, 10]
+    costs: [0, 2, 6, 9]
     color: "#f71818"
 
 - type: entity

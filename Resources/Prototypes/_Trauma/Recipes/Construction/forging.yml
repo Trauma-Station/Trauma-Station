@@ -1,65 +1,42 @@
 - type: construction
+  abstract: true
+  id: BaseForgingStructure
+  targetNode: finish
+  placementMode: SnapgridCenter
+  category: construction-category-forging
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    FabricationKnowledge: 2
+  useQuality: false
+
+- type: construction
+  parent: BaseForgingStructure
   id: CharcoalOven
   graph: CharcoalOven
-  startNode: start
-  targetNode: finish
-  placementMode: SnapgridCenter
-  category: construction-category-forging
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    FabricationKnowledge: 2
   practical:
     MetalworkingKnowledge: 2
-  useQuality: false
 
 - type: construction
+  parent: BaseForgingStructure
   id: BloomeryCold
   graph: BloomeryCold
-  startNode: start
   targetNode: bloomery
-  placementMode: SnapgridCenter
-  category: construction-category-forging
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    FabricationKnowledge: 2
-  useQuality: false
 
 - type: construction
+  parent: BaseForgingStructure
   id: CharcoalForge
   graph: CharcoalForge
-  startNode: start
   targetNode: unlit
-  placementMode: SnapgridCenter
-  category: construction-category-forging
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    FabricationKnowledge: 2
   practical:
     MetalworkingKnowledge: 2
-  useQuality: false
 
+# TODO: this should just be a heat exchange system for any reagent so you can have water/oil(maybe fire)/napalm (definitely fire) with their own heat capacities
 - type: construction
+  parent: BaseForgingStructure
   id: QuenchingBarrel
   graph: QuenchingBarrel
-  startNode: start
-  targetNode: finish
-  placementMode: SnapgridCenter
-  category: construction-category-forging
-  objectType: Structure
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    FabricationKnowledge: 2
   practical:
     MetalworkingKnowledge: 2
-  useQuality: false

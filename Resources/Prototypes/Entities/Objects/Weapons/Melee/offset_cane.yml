@@ -62,7 +62,7 @@
     sprite: Objects/Weapons/Melee/offset_canes/mime.rsi
 
 - type: entity
-  parent: [OffsetCane, BracingDurability]
+  parent: [BracingDurability, OffsetCane]
   id: OffsetCaneNT
   name: nanotrasen offset cane
   description: A nanotrasen standard issue offset cane with the NT logo, favored by those who prefer a more corporate look.

@@ -1,5 +1,7 @@
 // <Trauma>
+using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Mech;
+using Content.Trauma.Common.TileMovement;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Access.Components;

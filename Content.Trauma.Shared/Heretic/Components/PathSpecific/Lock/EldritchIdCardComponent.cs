@@ -42,13 +42,11 @@ public sealed class EldritchIdConfiguration(
     string? jobTitle,
     ProtoId<JobIconPrototype> jobIcon,
     List<ProtoId<DepartmentPrototype>> departments,
-    HashSet<ProtoId<AccessLevelPrototype>> tags,
     EntProtoId cardPrototype)
 {
     public readonly string? FullName = fullName;
     public readonly string? JobTitle = jobTitle;
     public readonly ProtoId<JobIconPrototype> JobIcon = jobIcon;
-    public readonly HashSet<ProtoId<AccessLevelPrototype>> AccessTags = tags;
     public readonly List<ProtoId<DepartmentPrototype>> Departments = departments;
     public readonly EntProtoId CardPrototype = cardPrototype;
 
@@ -61,7 +59,6 @@ public sealed class EldritchIdConfiguration(
                JobTitle == other.JobTitle &&
                JobIcon.Id == other.JobIcon.Id &&
                CardPrototype.Id == other.CardPrototype.Id &&
-               AccessTags.SetEquals(other.AccessTags) &&
                Departments.SequenceEqual(other.Departments);
     }
 
@@ -73,12 +70,6 @@ public sealed class EldritchIdConfiguration(
         hash.Add(JobTitle);
         hash.Add(JobIcon.Id);
         hash.Add(CardPrototype.Id);
-
-        hash.Add(AccessTags.Count);
-        foreach (var tag in AccessTags.OrderBy(x => x.Id))
-        {
-            hash.Add(tag);
-        }
 
         hash.Add(Departments.Count);
         foreach (var dept in Departments)

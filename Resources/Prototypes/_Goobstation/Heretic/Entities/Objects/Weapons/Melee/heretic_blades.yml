@@ -151,8 +151,8 @@
   - type: HereticBlade
     bonusEvent: !type:HereticBladeBonusWoundingEvent
       woundingBonus:
-        7: 2
-        10: 3
+        7: 1.25
+        10: 1.5
     probabilities:
       7: 0.35
       10: 0.65

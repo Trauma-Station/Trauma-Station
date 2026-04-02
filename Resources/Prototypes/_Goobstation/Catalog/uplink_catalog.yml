@@ -1225,15 +1225,15 @@
     whitelist:
     - Chef
 
-- type: listing
-  id: UplinkCapoeiraManual
-  name: uplink-capoeira-name
-  description: uplink-capoeira-desc
-  productEntity: CapoeiraManual
-  cost:
-    Telecrystal: 35
-  categories:
-  - UplinkWeaponry
+# - type: listing
+#   id: UplinkCapoeiraManual
+#   name: uplink-capoeira-name
+#   description: uplink-capoeira-desc
+#   productEntity: CapoeiraManual
+#   cost:
+#     Telecrystal: 35
+#   categories:
+#   - UplinkWeaponry
 
 - type: listing
   id: UplinkMysteriousScroll

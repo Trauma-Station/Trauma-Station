@@ -12,15 +12,13 @@
   - type: Fixtures
     fixtures:
       itemcollide:
-        shape:
-          !type:PhysShapeAabb
+        shape: !type:PhysShapeAabb
           bounds: "-0.14,-0.05,0.15,0.25"
         layer:
         - HighImpassable
         hard: false
       fix1:
-        shape:
-          !type:PhysShapeAabb
+        shape: !type:PhysShapeAabb
           bounds: "-0.14,-0.05,0.15,0.25"
         mask:
         - TabletopMachineMask
@@ -31,26 +29,31 @@
     damageModifierSet: StructuralMetallic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger: !type:DamageTrigger
         damage: 100
       behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-        - !type:SpawnEntitiesBehavior
-          spawn:
-            SheetSteel1:
-              min: 2
-              max: 3
-            Charcoal1:
-              min: 5
-              max: 7
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 3
+          Charcoal1:
+            min: 5
+            max: 7
   - type: Construction
     graph: CharcoalForge
     node: unlit
   - type: Clickable
   - type: InteractionOutline
 
+# TODO: control it with code not fucking 2 prototypes
 - type: entity
   parent: CharcoalForgeUnlit
   id: CharcoalForgeLit

@@ -5,7 +5,7 @@ using Content.Server.Antag.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
 using Content.Server.Speech.Components;
-using Content.Shared._EinsteinEngines.Revolutionary;
+using Content.Trauma.Common.Revolutionary;
 using Content.Shared.Speech.Muting;
 using System.Linq;
 // </Trauma>

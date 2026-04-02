@@ -1,9 +1,9 @@
 // <Trauma>
-using Content.Server._Goobstation.Wizard.NPC;
 using Content.Shared.Foldable;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
+using Content.Server.Wizard;
 // </Trauma>
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Hands.Systems;

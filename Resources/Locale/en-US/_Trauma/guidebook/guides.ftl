@@ -5,6 +5,7 @@ guide-entry-mutations = Mutations list
 guide-entry-xenobiology = Xenobiology
 
 guide-entry-tackle = Tackle
+guide-entry-forging = Forging
 
 guide-entry-civilian = Civilian Jobs
 

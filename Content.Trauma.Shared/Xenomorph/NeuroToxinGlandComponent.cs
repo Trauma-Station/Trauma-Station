@@ -11,5 +11,5 @@ namespace Content.Trauma.Shared.Xenomorph;
 public sealed partial class NeurotoxinGlandComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public bool Active = false;
+    public bool Active = true;
 }

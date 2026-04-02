@@ -17,8 +17,7 @@ public sealed class PaintVisualizerSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-
-    private EntityQuery<SpriteComponent> _spriteQuery;
+    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public static readonly ProtoId<ShaderPrototype> ShaderId = "Greyscale";
     public ShaderInstance Shader = default!;
@@ -26,8 +25,6 @@ public sealed class PaintVisualizerSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _spriteQuery = GetEntityQuery<SpriteComponent>();
 
         Shader = _proto.Index(ShaderId).Instance();
 

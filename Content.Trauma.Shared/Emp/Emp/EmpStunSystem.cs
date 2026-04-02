@@ -1,0 +1,31 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Emp;
+using Content.Trauma.Shared.Silicon.Components;
+using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.Stunnable;
+
+namespace Content.Goobstation.Shared.Emp;
+
+public sealed class EmpStunSystem : EntitySystem
+{
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<SiliconComponent, EmpPulseEvent>(OnEmpParalyze);
+        SubscribeLocalEvent<BorgChassisComponent, EmpPulseEvent>(OnEmpParalyze);
+    }
+
+    private void OnEmpParalyze(EntityUid uid, Component component, ref EmpPulseEvent args)
+    {
+        args.Affected = true;
+        args.Disabled = true;
+        var duration = args.Duration;
+        if (duration > TimeSpan.FromSeconds(15))
+            duration = TimeSpan.FromSeconds(15);
+        _stun.TryUpdateParalyzeDuration(uid, duration);
+    }
+}

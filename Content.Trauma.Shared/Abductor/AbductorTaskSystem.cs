@@ -15,7 +15,7 @@ public sealed class AbductorTaskSystem : EntitySystem
     [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    private EntityQuery<AbductorSubjectComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<AbductorSubjectComponent> _query = default!;
 
     // min-max random tasks to add
     // gland task is always added after this
@@ -33,8 +33,6 @@ public sealed class AbductorTaskSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<AbductorSubjectComponent>();
 
         SubscribeLocalEvent<AbductorSubjectComponent, MapInitEvent>(OnMapInit);
 

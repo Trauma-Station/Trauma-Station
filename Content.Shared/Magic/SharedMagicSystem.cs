@@ -3,10 +3,7 @@
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Magic;
 using Content.Goobstation.Common.Religion;
-using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Goobstation.Wizard.BindSoul;
-using Content.Shared._Goobstation.Wizard.Chuuni;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
@@ -61,7 +58,7 @@ public abstract class SharedMagicSystem : EntitySystem
 {
     // <Trauma>
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private readonly CommonWizardSystem _wizard = default!;
     // </Trauma>
     [Dependency] private readonly ISerializationManager _seriMan = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -80,7 +77,7 @@ public abstract class SharedMagicSystem : EntitySystem
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    //[Dependency] private readonly MobStateSystem _mobState = default!; // Trauma - unused now
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -191,7 +188,7 @@ public abstract class SharedMagicSystem : EntitySystem
         var flags = SlotFlags.OUTERCLOTHING | SlotFlags.HEAD;
         var requiredSlots = 2;
         if (_inventory.TryGetSlotEntity(args.Performer, "eyes", out var eyepatch) &&
-            HasComp<ChuuniEyepatchComponent>(eyepatch.Value))
+            _wizard.IsChunni(eyepatch))
         {
             requiresSpeech = true;
             flags = SlotFlags.OUTERCLOTHING;
@@ -656,41 +653,23 @@ public abstract class SharedMagicSystem : EntitySystem
         if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
 
-        if (IsTouchSpellDenied(ev.Target)) // Goobstation
+        // Goobstation start
+        if (IsTouchSpellDenied(ev.Target))
         {
             ev.Handled = true;
             return;
         }
 
-        // Goobstation start
-        if (_mobState.IsIncapacitated(ev.Target) || HasComp<ZombieComponent>(ev.Target))
-        {
-            _popup.PopupClient(Loc.GetString("spell-fail-mindswap-dead"), ev.Performer, ev.Performer);
-            return;
-        }
 
-        // raise blocker event (why the fuck was this done as a list lol)
         var blockEv = new BeforeMindSwappedEvent();
         RaiseLocalEvent(ev.Target, ref blockEv);
 
-        List<(Type, string)> blockers = new()
-        {
-            // Mindswapping with aghost real.
-            (typeof(GhostComponent), "ghost"),
-            (typeof(SpectralComponent), "ghost"),
-            (typeof(TimedDespawnComponent), "temporary"),
-            (typeof(FadingTimedDespawnComponent), "temporary"),
-        };
-
-        // someone should nuke the list and make all of the components use the event. that someone is not me.
         if (blockEv.Cancelled)
         {
             _popup.PopupClient(Loc.GetString($"spell-fail-mindswap-{blockEv.Message}"), ev.Performer, ev.Performer);
             return;
         }
 
-        if (blockers.Any(x => CheckMindswapBlocker(x.Item1, x.Item2)))
-            return;
         // Goobstation end
 
         ev.Handled = true;
@@ -704,8 +683,10 @@ public abstract class SharedMagicSystem : EntitySystem
 
         var tarHasMind = _mind.TryGetMind(ev.Target, out var tarMind, out var tarMindComp);
 
-        _tag.AddTag(ev.Performer, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
-        _tag.AddTag(ev.Target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        EnsureComp<MindSwappingComponent>(ev.Performer);
+        EnsureComp<MindSwappingComponent>(ev.Target);
+        // </Trauma>
 
         _mind.TransferTo(perMind, ev.Target);
 
@@ -714,143 +695,22 @@ public abstract class SharedMagicSystem : EntitySystem
             _mind.TransferTo(tarMind, ev.Performer);
         }
 
-        // Goobstation start
-        List<Type> components = new()
-        {
-            typeof(RevolutionaryComponent),
-            typeof(HeadRevolutionaryComponent),
-            typeof(WizardComponent),
-            typeof(ApprenticeComponent),
-        };
-
-        foreach (var component in components)
-        {
-            TransferComponent(component, ev.Performer, ev.Target);
-        }
-
-        TransferFactions();
+        // <Trauma>
+        var afterEv = new AfterMindSwappedEvent(ev.Performer, ev.Target);
+        RaiseLocalEvent(ref afterEv);
 
         if (_net.IsServer)
         {
             _audio.PlayEntity(ev.Sound, ev.Target, ev.Target);
             _audio.PlayEntity(ev.Sound, ev.Performer, ev.Performer);
         }
-        // Goobstation end
 
-        _tag.RemoveTag(ev.Performer, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
-        _tag.RemoveTag(ev.Target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        RemComp<MindSwappingComponent>(ev.Performer);
+        RemComp<MindSwappingComponent>(ev.Target);
+        // </Trauma>
 
         _stun.TryUpdateParalyzeDuration(ev.Target, ev.TargetStunDuration);
         _stun.TryUpdateParalyzeDuration(ev.Performer, ev.PerformerStunDuration);
-
-        // Goobstation start
-        return;
-
-        void TransferFactions()
-        {
-            TryComp(ev.Performer, out NpcFactionMemberComponent? performerFaction);
-            TryComp(ev.Target, out NpcFactionMemberComponent? targetFaction);
-
-            if (performerFaction == null && targetFaction == null)
-                return;
-
-            var performerHadFaction = true;
-            var targetHadFaction = true;
-
-            if (performerFaction == null)
-            {
-                performerFaction = AddComp<NpcFactionMemberComponent>(ev.Performer);
-                performerHadFaction = false;
-            }
-
-            if (targetFaction == null)
-            {
-                targetFaction = AddComp<NpcFactionMemberComponent>(ev.Target);
-                targetHadFaction = false;
-            }
-
-            List<ProtoId<NpcFactionPrototype>> factionsToTransfer = new()
-            {
-                "Wizard",
-                "Assistant",
-            };
-
-            ProtoId<NpcFactionPrototype> fallbackFaction = "NanoTrasen";
-
-            var performerFactions = new HashSet<ProtoId<NpcFactionPrototype>>();
-            var targetFactions = new HashSet<ProtoId<NpcFactionPrototype>>();
-
-            foreach (var faction in FilterFactions(performerFaction.Factions))
-            {
-                performerFactions.Add(faction);
-            }
-
-            foreach (var faction in FilterFactions(targetFaction.Factions))
-            {
-                targetFactions.Add(faction);
-            }
-
-            Entity<NpcFactionMemberComponent?> targetFactionEnt = (ev.Target, targetFaction);
-            foreach (var faction in targetFactions)
-            {
-                _faction.RemoveFaction(targetFactionEnt, faction, false);
-            }
-
-            Entity<NpcFactionMemberComponent?> performerFactionEnt = (ev.Performer, performerFaction);
-            foreach (var faction in performerFactions)
-            {
-                _faction.RemoveFaction(performerFactionEnt, faction, false);
-            }
-
-            if (performerHadFaction)
-                _faction.AddFactions(targetFactionEnt, performerFactions);
-
-            if (targetHadFaction)
-                _faction.AddFactions(performerFactionEnt, targetFactions);
-
-            if (targetFaction.Factions.Count == 0)
-                _faction.AddFaction(targetFactionEnt, fallbackFaction);
-
-            if (performerFaction.Factions.Count == 0)
-                _faction.AddFaction(performerFactionEnt, fallbackFaction);
-            return;
-
-            IEnumerable<ProtoId<NpcFactionPrototype>> FilterFactions(HashSet<ProtoId<NpcFactionPrototype>> factions)
-            {
-                return factions.Where(x => factionsToTransfer.Contains(x));
-            }
-        }
-
-        bool CheckMindswapBlocker(Type type, string message)
-        {
-            if (!HasComp(ev.Target, type))
-                return false;
-
-            _popup.PopupClient(Loc.GetString($"spell-fail-mindswap-{message}"), ev.Performer, ev.Performer);
-            return true;
-        }
-        // Goobstation end
-    }
-
-    private void TransferComponent(Type type, EntityUid a, EntityUid b)
-    {
-        var aHasComp = HasComp(a, type);
-        var bHasComp = HasComp(b, type);
-
-        if (aHasComp && bHasComp)
-            return;
-
-        var comp = Factory.GetComponent(type);
-        if (aHasComp)
-        {
-            AddComp(b, comp);
-            RemCompDeferred(a, type);
-        }
-        else if (bHasComp)
-        {
-            AddComp(a, comp);
-            RemCompDeferred(b, type);
-        }
     }
 
     #endregion

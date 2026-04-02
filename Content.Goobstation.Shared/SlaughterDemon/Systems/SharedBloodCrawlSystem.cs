@@ -23,25 +23,22 @@ public abstract class SharedBloodCrawlSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly EntityQuery<ActionsComponent> _actionsQuery = default!;
 
-    private EntityQuery<ActionsComponent> _actionQuery;
-    private EntityQuery<PuddleComponent> _puddleQuery;
+    private HashSet<Entity<PuddleComponent>> _puddles = new();
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
-        _actionQuery = GetEntityQuery<ActionsComponent>();
-        _puddleQuery = GetEntityQuery<PuddleComponent>();
 
         SubscribeLocalEvent<BloodCrawlComponent, ComponentStartup>(OnStartup);
-
         SubscribeLocalEvent<BloodCrawlComponent, BloodCrawlEvent>(OnBloodCrawl);
     }
 
     private void OnStartup(EntityUid uid, BloodCrawlComponent component, ComponentStartup args)
     {
-        if (!_actionQuery.TryGetComponent(uid, out var actions))
+        if (!_actionsQuery.TryGetComponent(uid, out var actions))
             return;
 
         _actions.AddAction(uid, component.ActionId, component: actions);
@@ -51,7 +48,7 @@ public abstract class SharedBloodCrawlSystem : EntitySystem
     {
         if (!IsStandingOnBlood((uid, component)))
         {
-            _popup.PopupClient(Loc.GetString("slaughter-blood-jaunt-fail"), uid, uid); // Trauma - PopupClient
+            _popup.PopupClient(Loc.GetString("slaughter-blood-jaunt-fail"), uid, uid);
             _actions.SetCooldown(args.Action.Owner, component.ActionCooldown);
             return;
         }
@@ -82,13 +79,12 @@ public abstract class SharedBloodCrawlSystem : EntitySystem
     /// </summary>
     public bool IsStandingOnBlood(Entity<BloodCrawlComponent> ent)
     {
-        var ents = _lookup.GetEntitiesInRange(ent.Owner, ent.Comp.SearchRange);
-        foreach (var entity in ents)
+        var coords = Transform(ent).Coordinates;
+        _puddles.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp.SearchRange, _puddles);
+        foreach (var puddle in _puddles)
         {
-            if (!_puddleQuery.TryComp(entity, out var puddle))
-                continue;
-
-            if (!_solution.ResolveSolution(entity, puddle.SolutionName, ref puddle.Solution, out var solution))
+            if (!_solution.ResolveSolution(puddle.Owner, puddle.Comp.SolutionName, ref puddle.Comp.Solution, out var solution))
                 continue;
 
             foreach (var reagent in solution.Contents)
@@ -102,9 +98,7 @@ public abstract class SharedBloodCrawlSystem : EntitySystem
     }
 
     protected virtual bool CheckAlreadyCrawling(Entity<BloodCrawlComponent> ent)
-    {
-        return false;
-    }
+        => false;
 
     protected virtual void PolymorphDemon(EntityUid user, ProtoId<PolymorphPrototype> polymorph) {}
 

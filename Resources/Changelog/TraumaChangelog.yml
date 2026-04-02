@@ -5991,3 +5991,174 @@ Entries:
   id: 692
   time: '2026-03-30T21:19:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1584
+- author: Armok
+  changes:
+  - type: Fix
+    message: Fix forging and durability bugs
+  id: 693
+  time: '2026-03-31T00:48:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1731
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Entropic Colossus now knows where the station is
+  id: 694
+  time: '2026-03-31T12:14:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1733
+- author: Lumminal
+  changes:
+  - type: Fix
+    message: >-
+      Fixed shadowlings and shadow demons taking damage from ghost personal
+      lights.
+  id: 695
+  time: '2026-03-31T18:12:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1744
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Metallic stuff for forging now glows with a realistic temperature scale,
+      if you are a blacksmith you should be able to tell metals temperatures by
+      eye.
+  id: 696
+  time: '2026-03-31T19:36:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1748
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Shit weapons can be destroyed by the recycler.
+  - type: Fix
+    message: Fixed some forge bugs
+  id: 697
+  time: '2026-03-31T19:53:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1747
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Surgically installing a shadow demon's heart now makes you weak to light
+      too...
+  id: 698
+  time: '2026-03-31T23:06:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1755
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Glowing hot metals now glow in-hand and if you had it equipped (forged
+      armour when)
+  id: 699
+  time: '2026-04-01T00:47:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1758
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed defib using total damage instead of vital damage.
+  id: 700
+  time: '2026-04-01T00:58:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1760
+- author: Armok
+  changes:
+  - type: Fix
+    message: Borg hand bug
+  id: 701
+  time: '2026-04-01T07:08:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1766
+- author: loltart
+  changes:
+  - type: Fix
+    message: Statveka users bullets are now slowed
+  id: 702
+  time: '2026-04-01T11:25:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1768
+- author: Aviu
+  changes:
+  - type: Fix
+    message: All weapons that shouldn't break or degrade don't do so anymore.
+  - type: Add
+    message: New heretic side knowledge.
+  id: 703
+  time: '2026-04-01T12:13:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1769
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed fire going out immediately for old mobs.
+  - type: Fix
+    message: Fixed xeno neurotoxin action not stopping you from shooting neurotoxin.
+  - type: Remove
+    message: >-
+      Librarian no longer has service access, every map should be updated with
+      library-locked doors instead.
+  id: 704
+  time: '2026-04-01T12:51:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1772
+- author: Fardownup
+  changes:
+  - type: Tweak
+    message: Justice sword is no longer worse than a stun baton.
+  - type: Tweak
+    message: Order is back to being 'Lawbringer'
+  id: 705
+  time: '2026-04-01T14:01:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1713
+- author: JohnJJohn
+  changes:
+  - type: Add
+    message: >-
+      You can now make upgrade kits to update how fast things come out of
+      disposal pipes
+  - type: Tweak
+    message: >-
+      Things that come out of a disposal pipe can now go back into a disposal
+      unit if one is in the way
+  id: 706
+  time: '2026-04-01T22:34:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1776
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plant analyzer gas names using raw strings.
+  id: 707
+  time: '2026-04-01T22:53:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1779
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Rust and stargazer healing nerfed.
+  - type: Tweak
+    message: Void pull and conduit nerfed.
+  - type: Tweak
+    message: Lock blade upgrade wounding nerfed.
+  - type: Add
+    message: >-
+      Eldritch id can now invert existing portals by clicking on them, alt-click
+      to remove portals.
+  - type: Add
+    message: >-
+      You don't need to change eldritch id appearance to swap accesses, it
+      combines all accesses from consumed cards.
+  - type: Tweak
+    message: Burglars Finesse no longer requires focus and invocation is whisper now.
+  - type: Fix
+    message: Fix not being able to place portals on open doors using eldritch id.
+  - type: Add
+    message: Lock ascension gives you mansus link access.
+  id: 708
+  time: '2026-04-02T03:23:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1780
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Tweaked a bunch of shitcode
+  id: 709
+  time: '2026-04-02T03:29:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1342
+- author: Armok
+  changes:
+  - type: Add
+    message: Heretic rituals and Forge guidebooks
+  id: 710
+  time: '2026-04-02T10:15:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1787

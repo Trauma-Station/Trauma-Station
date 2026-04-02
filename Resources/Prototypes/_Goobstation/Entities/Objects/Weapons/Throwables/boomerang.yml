@@ -24,6 +24,12 @@
   - type: Construction
     graph: boomerangGraph
     node: boomerangFinish
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 250
+  - type: Tag
+    tags:
+    - Trash
 
 - type: entity
   id: boomerangIncomplete

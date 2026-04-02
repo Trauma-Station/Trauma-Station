@@ -5,7 +5,7 @@
 
 - type: entity
   name: lollychop
-  parent: [BaseItem, BaseSyndicateContraband, KnifeDurabilityStrong]
+  parent: [BaseItem, BaseSyndicateContraband]
   id: LollyChop
   description: Fill (split) your buddies' tummies (skulls) with this delicious candy (cold steel).
   components:

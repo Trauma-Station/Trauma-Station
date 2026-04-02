@@ -13,7 +13,7 @@ namespace Content.Trauma.Server.Salvage;
 /// </summary>
 public sealed class MiningRewardsSystem : EntitySystem
 {
-    private EntityQuery<ActorComponent> _actorQuery;
+    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
 
     // TODO: put the dict on a round entity wsci
     private Dictionary<NetUserId, int> PointsPerPlayer = new();
@@ -21,8 +21,6 @@ public sealed class MiningRewardsSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _actorQuery = GetEntityQuery<ActorComponent>();
 
         SubscribeLocalEvent<MiningPointsClaimedEvent>(OnPointsClaimed);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);

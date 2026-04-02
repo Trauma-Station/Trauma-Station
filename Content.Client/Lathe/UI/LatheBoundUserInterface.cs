@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._DV.Salvage;
+using Content.Trauma.Common.Salvage;
 using Content.Goobstation.Shared.Lathe;
 // </Trauma>
 using Content.Shared.Lathe;
