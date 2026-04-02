@@ -23,7 +23,7 @@
     <ProjectReference Include="../Content.Trauma.Common/Content.Trauma.Common.csproj" />
     <ProjectReference Include="../Content.Trauma.Common/Content.Trauma.Common.csproj" />
     <ProjectReference Include="../Content.Trauma.Common/Content.Trauma.Common.csproj" />
-    <ProjectReference Include="../Content.Goobstation.Maths/Content.Goobstation.Maths.csproj" />
+    <ProjectReference Include="../Content.Common/Content.Common.csproj" />
     <!-- </Trauma> -->
     <ProjectReference Include="..\Content.Shared.Database\Content.Shared.Database.csproj" />
   </ItemGroup>

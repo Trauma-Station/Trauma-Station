@@ -658,7 +658,7 @@ namespace Content.Shared.Movement.Systems
         }
     }
 
-    // <Trauma> Moved to Goobstation.Maths
+    // <Trauma> Moved to Common
 
 
     [Flags]

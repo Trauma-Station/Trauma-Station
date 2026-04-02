@@ -198,4 +198,4 @@ public interface IClothingSlots
     SlotFlags Slots { get; }
 }
 
-// <Trauma> - moved to Goobstation.Maths
+// <Trauma> - moved to Common

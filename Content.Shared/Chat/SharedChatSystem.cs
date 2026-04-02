@@ -559,4 +559,4 @@ public abstract partial class SharedChatSystem : EntitySystem
     { }
 }
 
-// Trauma - moved to Content.Goobstation.Maths
+// Trauma - moved to Content.Common

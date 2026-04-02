@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>Content.Goobstation.Maths</RootNamespace>
+        <RootNamespace>Content.Common</RootNamespace>
     </PropertyGroup>
     <Import Project="../MSBuild/Content.props" />
 
