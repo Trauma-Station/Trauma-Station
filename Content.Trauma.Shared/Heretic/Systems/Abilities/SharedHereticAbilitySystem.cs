@@ -35,6 +35,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
@@ -117,6 +118,8 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             { "Holy", 1 },
         },
     };
+
+    public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
 
     public override void Initialize()
     {

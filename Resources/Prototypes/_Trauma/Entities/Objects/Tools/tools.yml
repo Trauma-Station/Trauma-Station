@@ -1,0 +1,11 @@
+- type: entity
+  parent: [MetalToolDurabilityWeak, BaseScrewdriver]
+  id: Screwdriver
+  components:
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        screwdriver: Rainbow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100

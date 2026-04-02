@@ -1,374 +1,86 @@
-# Base
-
 - type: entity
-  parent: BaseItem
   abstract: true
-  id: BaseForgedBrass
+  parent: BaseMetallicProcGen
+  id: BaseForgedProduct
   components:
   - type: Sprite
     layers:
     - state: icon
-      color: "#e79962"
+      shader: Emissive
+      map: [ "enum.MetallicVisuals.Layer" ]
     - state: handle
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#e79962"
+        shader: Emissive
       right:
       - state: inhand-right
-        color: "#e79962"
-  - type: HeldSpeedModifier
-  - type: Tool
-  speedModifier: 0.75
+        shader: Emissive
 
 - type: entity
-  parent: BaseForgedBrass
   abstract: true
-  id: BaseForgedBrassCrossGuard
+  parent: BaseForgedProduct
+  id: BaseForgedProductCrossGuard
   components:
   - type: Sprite
     layers:
     - state: icon
-      color: "#e79962"
+      shader: Emissive
+      map: [ "enum.MetallicVisuals.Layer" ]
     - state: handle
     - state: crossguard
 
 - type: entity
-  parent: BaseForgedBrass
   abstract: true
-  id: BaseForgedBrassSeperateHead
+  parent: BaseForgedProduct
+  id: BaseForgedProductSeparateHead
   components:
   - type: Sprite
     layers:
     - state: head
-      color: "#e79962"
+      shader: Emissive
+      map: [ "enum.MetallicVisuals.Layer" ]
     - state: handle
   - type: Item
     inhandVisuals:
       left:
       - state: head-inhand-left
-        color: "#e79962"
+        shader: Emissive
       - state: handle-inhand-left
       right:
       - state: head-inhand-right
-        color: "#e79962"
+        shader: Emissive
       - state: handle-inhand-right
 
-- type: entity
-  parent: BaseItem
-  abstract: true
-  id: BaseForgedSteel
-  components:
-  - type: Sprite
-    layers:
-    - state: icon
-      color: "#d7dbe9"
-    - state: handle
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#d7dbe9"
-      right:
-      - state: inhand-right
-        color: "#d7dbe9"
+# Knives
 
 - type: entity
-  parent: BaseForgedSteel
-  abstract: true
-  id: BaseForgedSteelCrossguard
-  components:
-  - type: Sprite
-    layers:
-    - state: icon
-      color: "#d7dbe9"
-    - state: handle
-    - state: crossguard
-
-- type: entity
-  parent: BaseForgedSteel
-  abstract: true
-  id: BaseForgedSteelSeperateHead
-  components:
-  - type: Sprite
-    layers:
-    - state: head
-      color: "#d7dbe9"
-    - state: handle
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: head-inhand-left
-        color: "#d7dbe9"
-      - state: handle-inhand-left
-      right:
-      - state: head-inhand-right
-        color: "#d7dbe9"
-      - state: handle-inhand-right
-
-- type: entity
-  parent: BaseItem
-  abstract: true
-  id: BaseForgedPlasteel
-  components:
-  - type: Sprite
-    layers:
-    - state: icon
-      color: "#dac7f5"
-    - state: handle
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#dac7f5"
-      right:
-      - state: inhand-right
-        color: "#dac7f5"
-  - type: Tool
-    speedModifier: 1.5
-
-- type: entity
-  parent: BaseForgedPlasteel
-  abstract: true
-  id: BaseForgedPlasteelCrossguard
-  components:
-  - type: Sprite
-    layers:
-    - state: icon
-      color: "#dac7f5"
-    - state: handle
-    - state: crossguard
-
-- type: entity
-  parent: BaseForgedPlasteel
-  abstract: true
-  id: BaseForgedPlasteelSeperateHead
-  components:
-  - type: Sprite
-    layers:
-    - state: head
-      color: "#dac7f5"
-    - state: handle
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: head-inhand-left
-        color: "#dac7f5"
-      - state: handle-inhand-left
-      right:
-      - state: head-inhand-right
-        color: "#dac7f5"
-      - state: handle-inhand-right
-
-- type: entity
-  parent: BaseItem
-  id: BaseForgeCraftStartSmall
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: handlesmall
-
-- type: entity
-  parent: BaseItem
-  id: BaseForgeCraftStartMedium
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: handlemedium
-
-- type: entity
-  parent: BaseItem
-  id: BaseForgeCraftStartLarge
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/forging.rsi
-    state: handlelarge
-
-# Craft Starts
-
-- type: entity
-  parent: BaseForgeCraftStartSmall
-  id: KnifeCraftStart
-  name: assemble forged knife
-  description: Add any knife blade.
-  components:
-  - type: Construction
-    graph: ForgeKnife
-    node: handle
-
-- type: entity
-  parent: BaseForgeCraftStartSmall
-  id: ToolCraftStart
-  name: assemble forged tool
-  description: Add any forged tool part
-  components:
-  - type: Construction
-    graph: ForgeTool
-    node: handle
-
-- type: entity
-  parent: BaseForgeCraftStartSmall
-  id: ArrowCraftStart
-  name: assemble forged arrow
-  description: Add cloth and any arrowhead.
-  components:
-  - type: Construction
-    graph: ForgeArrow
-    node: handle
-
-- type: entity
-  parent: BaseForgeCraftStartSmall
-  id: SwordCraftStart
-  name: assemble forged sword
-  description: Add any sword blade.
-  components:
-  - type: Construction
-    graph: ForgeSword
-    node: handle
-
-- type: entity
-  parent: BaseForgeCraftStartMedium
-  id: BlugeonCraftStart
-  name: assemble forged blugeon
-  description: Add any blugeon head.
-  components:
-  - type: Construction
-    graph: ForgeBlugeon
-    node: handle
-
-# Knife
-
-- type: entity
-  parent: BaseKnife
-  id: BaseForgeKnife
-  abstract: true
+  parent: [ BaseForgedProduct, KitchenKnife ]
+  id: ForgedKnife
+  name: knife
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
-    storedOffset: -1,1
-    storedRotation: -45
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/star_hit.ogg
-    offset: -0.15,0.0
-  - type: LandAtCursor
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Slash: 10
-  - type: ThrowingAngle
-    angle: 225
-  - type: MeleeWeapon
-    animationRotation: -135
-    wideAnimationRotation: -135
 
 - type: entity
-  parent: [BaseForgeKnife, BaseForgedBrass]
-  id: BrassForgeKnife
-  name: brass knife
-  components:
-  - type: MeleeWeapon
-    attackRate: 0.9
-    damage:
-      types:
-        Slash: 10
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-  - type: Construction
-    graph: ForgeKnife
-    node: knifebrass
-
-- type: entity
-  parent: [BaseForgeKnife, BaseForgedSteel]
-  id: SteelForgeKnife
-  name: steel knife
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 10
-  - type: Construction
-    graph: ForgeKnife
-    node: knifesteel
-
-- type: entity
-  parent: [BaseForgeKnife, BaseForgedPlasteel]
-  id: PlasteelForgeKnife
-  name: plasteel knife
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 12.5
-  - type: Construction
-    graph: ForgeKnife
-    node: knifeplasteel
-# Hammer
-
-- type: entity
-  parent: MeleeHammer
-  id: BaseForgeHammer
-  abstract: true
+  parent: [ BaseForgedProduct, ButchCleaver ]
+  id: ForgedCleaver
+  name: cleaver
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
   - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
-  - type: MeleeWeapon
-    animationRotation: -135
-    wideAnimationRotation: -135
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
 
 - type: entity
-  parent: [BaseForgeHammer, BaseForgedBrass]
-  id: BrassForgeHammer
-  name: brass hammer
-  components:
-  - type: MeleeWeapon
-    attackRate: 0.9
-    damage:
-      types:
-        Blunt: 12.5
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-  - type: Construction
-    graph: ForgeTool
-    node: hammerbrass
-
-- type: entity
-  parent: [BaseForgeHammer, BaseForgedSteel]
-  id: SteelForgeHammer
-  name: steel hammer
-  components:
-  - type: Construction
-    graph: ForgeTool
-    node: hammersteel
-
-- type: entity
-  parent: [BaseForgeHammer, BaseForgedPlasteel]
-  id: PlasteelForgeHammer
-  name: plasteel hammer
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 7.5
-  - type: Construction
-    graph: ForgeTool
-    node: hammerplasteel
-
-# Combat Knife
-
-- type: entity
-  parent: CombatKnife
-  id: BaseForgeCombatKnife
-  abstract: true
+  parent: [ BaseForgedProduct, CombatKnife ]
+  id: ForgedCombatKnife
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
@@ -376,170 +88,22 @@
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
     storedSprite: null
     storedOffset: -1,-2
-    storedRotation: -45
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/star_hit.ogg
-    offset: -0.15,0.0
-  - type: LandAtCursor
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Slash: 10
-  - type: ThrowingAngle
-    angle: 225
-  - type: MeleeWeapon
-    animationRotation: -135
-    wideAnimationRotation: -135
+    storedRotation: -45 # FIXME: this fucks storage because its shitcode
 
 - type: entity
-  parent: [BaseForgeCombatKnife, BaseForgedBrass]
-  id: BrassForgeCombatKnife
-  name: brass combat knife
-  components:
-  - type: MeleeWeapon
-    attackRate: 1.35
-    damage:
-      types:
-        Slash: 12
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-  - type: Construction
-    graph: ForgeKnife
-    node: combatknifebrass
-
-- type: entity
-  parent: [BaseForgeCombatKnife, BaseForgedSteel]
-  id: SteelForgeCombatKnife
-  name: steel combat knife
-  components:
-  - type: Construction
-    graph: ForgeKnife
-    node: combatknifesteel
-
-- type: entity
-  parent: [BaseForgeCombatKnife, BaseForgedPlasteel]
-  id: PlasteelForgeCombatKnife
-  name: plasteel combat knife
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 15
-  - type: Construction
-    graph: ForgeKnife
-    node: combatknifeplasteel
-
-# Cleaver
-
-- type: entity
-  parent: ButchCleaver
-  id: BaseForgeCleaver
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
-  - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
-
-- type: entity
-  parent: [BaseForgeCleaver, BaseForgedBrass]
-  id: BrassForgeCleaver
-  name: brass cleaver
-  components:
-  - type: MeleeWeapon
-    attackRate: 1.35
-    damage:
-      types:
-        Slash: 12
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-  - type: Construction
-    graph: ForgeKnife
-    node: cleaverbrass
-
-- type: entity
-  parent: [BaseForgeCleaver, BaseForgedSteel]
-  id: SteelForgeCleaver
-  name: steel cleaver
-  components:
-  - type: Construction
-    graph: ForgeKnife
-    node: cleaversteel
-
-- type: entity
-  parent: [BaseForgeCleaver, BaseForgedPlasteel]
-  id: PlasteelForgeCleaver
-  name: plasteel cleaver
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 16.25
-  - type: Construction
-    graph: ForgeKnife
-    node: cleaverplasteel
-# Kukri
-
-- type: entity
-  parent: KukriKnife
-  id: BaseForgeKukri
-  abstract: true
+  parent: [ BaseForgedProduct, KukriKnife ]
+  id: ForgedKukriKnife
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
-  - type: MeleeWeapon
-    animationRotation: -135
-    wideAnimationRotation: -135
 
 - type: entity
-  parent: [BaseForgeKukri, BaseForgedBrass]
-  id: BrassForgeKukri
-  name: brass kukri knife
-  components:
-  - type: MeleeWeapon
-    attackRate: 10
-    damage:
-      types:
-        Slash: 15
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-  - type: Construction
-    graph: ForgeKnife
-    node: kukribrass
-
-- type: entity
-  parent: [BaseForgeKukri, BaseForgedSteel]
-  id: SteelForgeKukri
-  name: steel kukri knife
-  components:
-  - type: Construction
-    graph: ForgeKnife
-    node: kukristeel
-
-- type: entity
-  parent: [BaseForgeKukri, BaseForgedPlasteel]
-  id: PlasteelForgeKukri
-  name: plasteel kukri knife
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 18.75
-  - type: Construction
-    graph: ForgeKnife
-    node: kukriplasteel
-
-# Survival knife
-
-- type: entity
-  parent: SurvivalKnife
-  id: BaseForgeSurvivalKnife
-  abstract: true
+  parent: [ BaseForgedProduct, SurvivalKnife, BaseMetallicProcGen ]
+  id: ForgedSurvivalKnife
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
@@ -548,245 +112,39 @@
     storedSprite: null
     storedOffset: -1,-2
     storedRotation: -45
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/star_hit.ogg
-    offset: -0.15,0.0
-  - type: LandAtCursor
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Slash: 10
-  - type: ThrowingAngle
-    angle: 225
-  - type: MeleeWeapon
-    animationRotation: -135
-    wideAnimationRotation: -135
+
+# Tools
 
 - type: entity
-  parent: [BaseForgeSurvivalKnife, BaseForgedBrass]
-  id: BrassForgeSurvivalKnife
-  name: brass survival knife
+  parent: [ BaseForgedProduct, MeleeHammer ]
+  id: ForgedHammer
+  categories: [ HideSpawnMenu ]
   components:
-  - type: MeleeWeapon
-    attackRate: 1.35
-    damage:
-      types:
-        Slash: 12
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
 
 - type: entity
-  parent: [BaseForgeSurvivalKnife, BaseForgedSteel]
-  id: SteelForgeSurvivalKnife
-  name: steel survival knife
-
-- type: entity
-  parent: [BaseForgeSurvivalKnife, BaseForgedPlasteel]
-  id: PlasteelForgeSurvivalKnife
-  name: plasteel survival knife
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 15
-
-# Screwdriver
-
-- type: entity
-  parent: BaseItem
-  id: BaseForgeScrewdriver
-  abstract: true
+  parent: [ BaseForgedProduct, BaseScrewdriver ]
+  id: ForgedScrewdriver
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
     storedRotation: -90
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_Goobstation/Items/handling/screwdriver_pickup.ogg
-  - type: EmitSoundOnDrop
-    sound:
-      path: /Audio/Items/screwdriver_drop.ogg
-  - type: Retractor
-    speed: 0.45
-  - type: Tending
-    speed: 0.65
-  - type: Screwdriver
-  - type: SurgeryTool
-    startSound:
-      collection: Screwdriver
-    endSound:
-      path: /Audio/_Shitmed/Medical/Surgery/retractor2.ogg
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.2
-        hard: false
-        density: 20
-        mask:
-        - ItemMask
-        restitution: 0.3
-        friction: 0.2
-  - type: ThrowingAngle
-    angle: -90
-  - type: EmbeddableProjectile
-    sound: /Audio/Weapons/star_hit.ogg
-    offset: -0.15,0.0
-    removalTime: 1.5
-  - type: LandAtCursor
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Piercing: 8
-        Structural: 1
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/Items/screwdriver_drop.ogg
-  - type: Tag
-    tags:
-    - Screwdriver
-    - DroneUsable
-  - type: MeleeWeapon
-    animationRotation: -90
-    wideAnimationRotation: -90
-    attackRate: 1
-    damage:
-      types:
-        Piercing: 6
-    soundHit:
-      path: "/Audio/Weapons/bladeslice.ogg"
-  - type: Tool
-    qualities:
-      - Screwing
-    useSound:
-      collection: Screwdriver
-  - type: StaticPrice
-    price: 30
 
-- type: entity
-  parent: [BaseForgeScrewdriver, BaseForgedBrass]
-  id: BrassForgeScrewdriver
-  name: brass screwdriver
-  components:
-  - type: MeleeWeapon
-    attackRate: 0.9
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-  - type: Construction
-    graph: ForgeTool
-    node: screwdriverbrass
-
-- type: entity
-  parent: [BaseForgeScrewdriver, BaseForgedSteel]
-  id: SteelForgeScrewdriver
-  name: steel screwdriver
-  components:
-  - type: Construction
-    graph: ForgeTool
-    node: screwdriversteel
-
-- type: entity
-  parent: [BaseForgeScrewdriver, BaseForgedPlasteel]
-  id: PlasteelForgeScrewdriver
-  name: plasteel screwdriver
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Piercing: 7.5
-  - type: Construction
-    graph: ForgeTool
-    node: screwdriverplasteel
-# Crowbar
-
-- type: entity
-  parent: Crowbar
-  id: BaseForgeCrowbar
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
-  - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
-    storedRotation: -45
-
-- type: entity
-  parent: [BaseForgeCrowbar, BaseForgedBrass]
-  id: BrassForgeCrowbar
-  name: brass crowbar
-  components:
-  - type: MeleeWeapon
-    attackRate: 0.9
-    damage:
-      types:
-        Blunt: 10
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-
-- type: entity
-  parent: [BaseForgeCrowbar, BaseForgedSteel]
-  id: SteelForgeCrowbar
-  name: steel crowbar
-
-- type: entity
-  parent: [BaseForgeCrowbar, BaseForgedPlasteel]
-  id: PlasteelForgeCrowbar
-  name: plasteel crowbar
-
-# Wrench
-
-- type: entity
-  parent: Wrench
-  id: BaseForgeWrench
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench_complete.rsi
-  - type: Item
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/wrench_complete.rsi
-    storedRotation: -45
-
-
-
-- type: entity
-  parent: [BaseForgeWrench, BaseForgedBrass]
-  id: BrassForgeWrench
-  name: brass wrench
-  components:
-  - type: MeleeWeapon
-    attackRate: 0.9
-    damage:
-      types:
-        Blunt: 6
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-
-- type: entity
-  parent: [BaseForgeWrench, BaseForgedSteel]
-  id: SteelForgeWrench
-  name: steel wrench
-
-- type: entity
-  parent: [BaseForgeWrench, BaseForgedPlasteel]
-  id: PlasteelForgeWrench
-  name: plasteel wrench
-
-
-# Tiny blade uses?
+# TODO: Tiny blade uses?
 
 # Arming Sword
 
 - type: entity
-  parent: BaseSword
-  id: BaseForgeArmingsword
-  abstract: true
+  parent: [ BaseForgedProductCrossGuard, BaseSword ]
+  id: ForgedSword
+  name: arming sword
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
@@ -814,131 +172,41 @@
         variation: 0.2
         volume: -11
 
-- type: entity
-  parent: [BaseForgeArmingsword, BaseForgedBrassCrossGuard]
-  id: BrassForgeArmingsword
-  name: brass arming sword
-  components:
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-  - type: MeleeWeapon
-    attackRate: 0.9
-    damage:
-      types:
-        Slash: 18
-      woundSeverityMultipliers:
-        Slash: 2
-  - type: Parry
-    maxParries: 2
-  - type: Construction
-    graph: ForgeSword
-    node: swordbrass
-
-- type: entity
-  parent: [BaseForgeArmingsword, BaseForgedSteelCrossguard]
-  id: SteelForgeArmingsword
-  name: steel arming sword
-  components:
-  - type: Construction
-    graph: ForgeSword
-    node: swordsteel
-
-- type: entity
-  parent: [BaseForgeArmingsword, BaseForgedPlasteelCrossguard]
-  id: PlasteelForgeArmingsword
-  name: plasteel arming sword
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 22.5
-      woundSeverityMultipliers:
-        Slash: 2
-  - type: Construction
-    graph: ForgeSword
-    node: swordplasteel
-# Chainmail?
+# TODO: Chainmail?
 
 # Halberd
 
-# - type: entity - Disabled until we have a way to do layers for weilded weapons
-#   parent: BaseSword
-#   id: BaseForgeHalberd
-#   abstract: true
-#   components:
-#   - type: Sprite
-#     sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
-#     layers:
-#     - state: head
-#       color: "#e79962"
-#     - state: handle
-#   - type: Item
-#     sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
-#     inhandVisuals:
-#       left:
-#       - state: head-inhand-left
-#         color: "#e79962"
-#       - state: handle-inhand-left
-#       right:
-#       - state: head-inhand-right
-#         color: "#e79962"
-#     storedRotation: -45
-#     shape:
-#     - 0,0,0,9
-#   - type: MeleeWeapon
-#     damage:
-#       types:
-#         Slash: 18
-#       woundSeverityMultipliers:
-#         Slash: 2
-#     soundHit:
-#       path: /Audio/Weapons/bladeslice.ogg
-#   - type: Wieldable
-
-# - type: entity
-#   parent: [BaseForgeHalberd, BaseForgedBrass]
-#   id: BrassForgeHalberd
-#   name: brass halberd
-#   components:
-#   - type: ClothingSpeedModifier
-#     walkModifier: 0.95
-#     sprintModifier: 0.95
-#   - type: MeleeWeapon
-#     attackRate: 0.9
-#     damage:
-#       types:
-#         Slash: 18
-#       woundSeverityMultipliers:
-#         Slash: 2
-#   - type: Parry
-#     maxParries: 2
-
-# - type: entity
-#   parent: [BaseForgeHalberd, BaseForgedSteel]
-#   id: SteelForgeHalberd
-#   name: steel halberd
-
-# - type: entity
-#   parent: [BaseForgeHalberd, BaseForgedPlasteel]
-#   id: PlasteelForgeHalberd
-#   name: plasteel halberd
-#   components:
-#   - type: Tool
-#     speedModifier: 1.5
-#   - type: MeleeWeapon
-#     damage:
-#       types:
-#         Slash: 22.5
-#       woundSeverityMultipliers:
-#         Slash: 2
+- type: entity
+  parent: [ BaseForgedProductSeparateHead, BaseSword ]
+  id: ForgedHalberd
+  name: halberd
+  description: A powerful polearm with an oddly shaped head.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+    size: Ginormous
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 4
+        Piercing: 18
+      woundSeverityMultipliers:
+        Slash: 2
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  #- type: Wieldable # TODO: wielding layers
 
 # Longsword
 
 - type: entity
-  parent: BaseSword
-  id: BaseLongsword
-  abstract: true
+  parent: [ BaseForgedProductSeparateHead, BaseSword ]
+  id: ForgedLongsword
+  name: longsword
+  description: "It's like a sword, but longer. Needs two hands to wield properly."
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
@@ -969,54 +237,16 @@
         volume: -11
   - type: MultiHandedItem
 
-- type: entity
-  parent: [BaseLongsword, BaseForgedBrassSeperateHead]
-  id: BrassForgeLongsword
-  name: brass longsword
-  components:
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-  - type: MeleeWeapon
-    attackRate: 0.72
-  - type: Parry
-    maxParries: 2
-  - type: Construction
-    graph: ForgeSword
-    node: longswordbrass
-
-- type: entity
-  parent: [BaseLongsword, BaseForgedSteelSeperateHead]
-  id: SteelForgeLongsword
-  name: steel longsword
-  components:
-  - type: Construction
-    graph: ForgeSword
-    node: longswordsteel
-
-- type: entity
-  parent: [BaseLongsword, BaseForgedPlasteelSeperateHead]
-  id: PlasteelForgeLongsword
-  name: plasteel longsword
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 27
-      woundSeverityMultipliers:
-        Slash: 2
-  - type: Construction
-    graph: ForgeSword
-    node: longswordplasteel
-
-# Metal Plate?
+# TODO: Metal Plate?
 
 # Warhammer
 
 - type: entity
-  parent: BaseItem
-  id: BaseWarhammer
-  abstract: true
+  parent: [ BaseForgedProductSeparateHead, BaseItem ]
+  id: ForgedWarhammer
+  name: warhammer
+  description: Every dwarf's gotta have one of these, or maybe forty thousand of them.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
@@ -1038,101 +268,29 @@
     wideAnimationRotation: -135
   - type: Tool
     qualities:
-      - Prying
-      - Hammering
+    - Prying
+    - Hammering
+
+# Pickaxe
 
 - type: entity
-  parent: [BaseWarhammer, BaseForgedBrassSeperateHead]
-  id: BrassForgeWarhammer
-  name: brass warhammer
+  parent: [ BaseForgedProductSeparateHead, Pickaxe ]
+  id: ForgedPickaxe
+  categories: [ HideSpawnMenu ]
   components:
-  - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.90
-  - type: MeleeWeapon
-    attackRate: 1
-    damage:
-      types:
-        Blunt: 20
-      woundSeverityMultipliers:
-        Blunt: 2
-  - type: Construction
-    graph: ForgeBlugeon
-    node: warhammerbrass
-
-- type: entity
-  parent: [BaseWarhammer, BaseForgedSteelSeperateHead]
-  id: SteelForgeWarhammer
-  name: steel warhammer
-  components:
-  - type: Construction
-    graph: ForgeBlugeon
-    node: warhammersteel
-
-- type: entity
-  parent: [BaseWarhammer, BaseForgedPlasteelSeperateHead]
-  id: PlasteelForgeWarhammer
-  name: plasteel warhammer
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 15
-      woundSeverityMultipliers:
-        Blunt: 2
-  - type: Construction
-    graph: ForgeBlugeon
-    node: warhammerplasteel
-
-# Pickaxe - Disabled along with halberd
-
-# - type: entity
-#   parent: Pickaxe
-#   id: BaseForgePickaxe
-#   abstract: true
-#   components:
-#   - type: Sprite
-#     sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
-#   - type: Item
-#     sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
-
-# - type: entity
-#   parent: [BaseForgePickaxe, BaseForgedBrassCrossGuard]
-#   id: BrassForgePickaxe
-#   name: brass pickaxe
-#   components:
-#   - type: ClothingSpeedModifier
-#     walkModifier: 0.9
-#     sprintModifier: 0.9
-#   - type: MeleeWeapon
-#     attackRate: 0.63
-
-# - type: entity
-#   parent: [BaseForgePickaxe, BaseForgedSteelCrossguard]
-#   id: SteelForgePickaxe
-#   name: steel pickaxe
-
-# - type: entity
-#   parent: [BaseForgePickaxe, BaseForgedPlasteelCrossguard]
-#   id: PlasteelForgePickaxe
-#   name: plasteel pickaxe
-#   components:
-#   - type: MeleeWeapon
-#     damage:
-#       types:
-#         Piercing: 6
-#   - type: IncreaseDamageOnWield
-#     damage:
-#       types:
-#         Piercing: 13
-#         Structural: 30
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
 
 # Katana
 
 - type: entity
-  parent: BaseSword
-  id: BaseForgeKatana
-  abstract: true
+  parent: [ BaseForgedProduct, BaseSword ]
+  id: ForgedKatana
+  name: katana
+  description: While they were out partying, I practiced the blade.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
@@ -1144,7 +302,7 @@
   - type: MeleeWeapon
     autoAttack: true
     attackRate: 3
-    # armorPenetration: -.7 # Currently not working
+    #armorPenetration: -0.7 # Currently not working
     damage:
       types:
         Slash: 5
@@ -1152,52 +310,14 @@
         Slash: 5
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: DisarmMalus
-
-- type: entity
-  parent: [BaseForgeKatana, BaseForgedBrass]
-  id: BrassForgeKatana
-  name: brass katana
-  components:
-  - type: ClothingSpeedModifier
-    walkModifier: 0.95
-    sprintModifier: 0.95
-  - type: MeleeWeapon
-    attackRate: 2.6
-  - type: Construction
-    graph: ForgeSword
-    node: katanabrass
-
-- type: entity
-  parent: [BaseForgeKatana, BaseForgedSteel]
-  id: SteelForgeKatana
-  name: steel katana
-  components:
-  - type: Construction
-    graph: ForgeSword
-    node: katanasteel
-
-- type: entity
-  parent: [BaseForgeKatana, BaseForgedPlasteel]
-  id: PlasteelForgeKatana
-  name: plasteel katana
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Slash: 22.5
-      woundSeverityMultipliers:
-        Slash: 3
-  - type: Construction
-    graph: ForgeSword
-    node: katanaplasteel
 
 # Arrows
 
 - type: entity
-  parent: BaseArrow
-  id: ForgeArrowBrass
-  name: brass tipped arrow
+  parent: [ BaseMetallicProcGen, SpearDurabilityWeak, BaseArrow ] # it's basically a mini spear
+  id: ForgedArrow
+  name: arrow
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -1206,7 +326,8 @@
     - state: rod
       color: brown
     - state: tip
-      color: "#e79962"
+      map: [ "enum.MetallicVisuals.Layer" ]
+      shader: Emissive
     - state: solution1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
@@ -1214,200 +335,27 @@
     damage:
       types:
         Piercing: 16
-  - type: Construction
-    graph: ForgeArrow
-    node: arrowbrass
-
-- type: entity
-  parent: BaseArrow
-  id: ForgeArrowSteel
-  name: steel tipped arrow
-  components:
-  - type: Sprite
-    layers:
-    - state: tail
-      color: red
-    - state: rod
-      color: brown
-    - state: tip
-      color: "#d7dbe9"
-    - state: solution1
-      map: ["enum.SolutionContainerLayers.Fill"]
-      visible: false
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 18
-  - type: Construction
-    graph: ForgeArrow
-    node: arrowsteel
-
-- type: entity
-  parent: BaseArrow
-  id: ForgeArrowPlasteel
-  name: plasteel tipped arrow
-  components:
-  - type: Sprite
-    layers:
-    - state: tail
-      color: red
-    - state: rod
-      color: brown
-    - state: tip
-      color: "#dac7f5"
-    - state: solution1
-      map: ["enum.SolutionContainerLayers.Fill"]
-      visible: false
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 20
-  - type: Construction
-    graph: ForgeArrow
-    node: arrowplasteel
 
 # Spear
 
-- type: entity # Spear sprites broken, gotta solve this
-  parent: BaseItem
-  id: BaseForgeSpear
-  abstract: true
+- type: entity
+  parent: [ BaseForgedProductSeparateHead, SpearDurabilityStrong, Spear ]
+  id: ForgedSpear
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
-    layers:
-    - state: head
-      color: "#dac7f5"
-    - state: handle
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
-    size: Large
-    shape:
-    - 0,0,8,0
-    storedRotation: 45
-    inhandVisuals:
-      left:
-      - state: head-inhand-left
-        color: "#dac7f5"
-      - state: handle-inhand-left
-      right:
-      - state: head-inhand-right
-        color: "#dac7f5"
-      - state: handle-inhand-right
-  - type: MeleeWeapon
-    canWideSwing: false
-    range: 2.2
-    attackRate: 0.6
-    animationRotation: -135
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Piercing: 10
-    angle: 0
-    animation: WeaponArcThrust
-    soundHit:
-      path: /Audio/Weapons/bladeslice.ogg
-  - type: IncreaseDamageOnWield
-    damage:
-      types:
-        Piercing: 10
-  - type: ThrowableBlocked
-  - type: CosmicTransmutable
-    transmuteTo: SpearCosmicCult
-  - type: EmbeddableProjectile
-    offset: -0.15,0.0
-  - type: ThrowingAngle
-    angle: 225
-  - type: LandAtCursor
-  - type: Tag
-    tags:
-    - Spear
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape: !type:PolygonShape
-          vertices:
-            - -0.08,-0.06 # Goob edit
-            - -0.06,-0.08 # Goob edit
-            - 0.40,0.30
-            - 0.30,0.40
-        density: 20
-        mask:
-        - ItemMask
-        restitution: 0.3
-        friction: 0.2
-  - type: Sharp
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Piercing: 25
-  - type: Wieldable
-  - type: UseDelay
-  - type: Appearance
-
-- type: entity
-  parent: [BaseForgeSpear, BaseForgedBrassSeperateHead]
-  id: BrassForgeSpear
-  name: brass spear
-  components:
-  - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.90
-  - type: MeleeWeapon
-    attackRate: 0.54
-  - type: Sprite
-    layers:
-    - state: head
-      color: "#e79962"
-    - state: handle
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: head-inhand-left
-        color: "#e79962"
-      - state: handle-inhand-left
-      right:
-      - state: head-inhand-right
-        color: "#e79962"
-      - state: handle-inhand-right
-
-- type: entity
-  parent: [BaseForgeSpear, BaseForgedSteelSeperateHead]
-  id: SteelForgeSpear
-  name: steel spear
-  components:
-  - type: Sprite
-    layers:
-    - state: head
-      color: "#d7dbe9"
-    - state: handle
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: head-inhand-left
-        color: "#d7dbe9"
-      - state: handle-inhand-left
-      right:
-      - state: head-inhand-right
-        color: "#d7dbe9"
-      - state: handle-inhand-right
-
-- type: entity
-  parent: [BaseForgeSpear, BaseForgedPlasteelSeperateHead]
-  id: PlasteelForgeSpear
-  name: plasteel spear
-  components:
-  - type: IncreaseDamageOnWield
-    damage:
-      types:
-        Piercing: 15
 
 # Morningstar
 
 - type: entity
-  parent: BaseItem
-  id: BaseMorningstar
-  abstract: true
+  parent: [ BaseForgedProductSeparateHead, BaseItem ]
+  id: ForgedMorningstar
+  name: morningstar
+  description: You REALLY don't want to get your skull caved in by this...
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
@@ -1429,49 +377,4 @@
     animationRotation: -135
     wideAnimationRotation: -135
 
-- type: entity
-  parent: [BaseMorningstar, BaseForgedBrassSeperateHead]
-  id: BrassForgeMorningstar
-  name: brass morningstar
-  components:
-  - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.90
-  - type: MeleeWeapon
-    attackRate: 0.9
-    damage:
-      types:
-        Blunt: 13
-        Piercing: 10
-      woundSeverityMultipliers:
-        Blunt: 2
-  - type: Construction
-    graph: ForgeBlugeon
-    node: morningstarbrass
-
-- type: entity
-  parent: [BaseMorningstar, BaseForgedSteelSeperateHead]
-  id: SteelForgeMorningstar
-  name: steel morningstar
-  components:
-  - type: Construction
-    graph: ForgeBlugeon
-    node: morningstarsteel
-
-- type: entity
-  parent: [BaseMorningstar, BaseForgedPlasteelSeperateHead]
-  id: PlasteelForgeMorningstar
-  name: plasteel morningstar
-  components:
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 7
-        Piercing: 13
-      woundSeverityMultipliers:
-        Blunt: 2
-  - type: Construction
-    graph: ForgeBlugeon
-    node: morningstarplasteel
-
-# Shield # gotta do this one once we fix sprites
+# TODO: Shield

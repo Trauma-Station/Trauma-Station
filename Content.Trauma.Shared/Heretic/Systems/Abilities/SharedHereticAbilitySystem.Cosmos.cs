@@ -18,13 +18,13 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<EventHereticCosmicRune>(OnCosmicRune);
         SubscribeLocalEvent<EventHereticStarBlast>(OnStarBlast);
         SubscribeLocalEvent<EventHereticCosmicExpansion>(OnExpansion);
-        SubscribeLocalEvent<HereticAscensionCosmosEvent>(OnAscension);
+        SubscribeLocalEvent<HereticAscensionCosmosEvent>(OnAscensionCosmos);
 
         SubscribeLocalEvent<StarBlastComponent, ProjectileHitEvent>(OnHit);
         SubscribeLocalEvent<StarBlastComponent, EntityTerminatingEvent>(OnEntityTerminating);
     }
 
-    private void OnAscension(HereticAscensionCosmosEvent args)
+    private void OnAscensionCosmos(HereticAscensionCosmosEvent args)
     {
         _eye.SetDrawFov(args.Heretic, args.Negative);
     }

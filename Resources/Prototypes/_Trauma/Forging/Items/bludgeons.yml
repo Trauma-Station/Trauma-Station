@@ -1,0 +1,25 @@
+- type: forgedItem
+  id: MorningstarHead
+  category: Bludgeons
+  name: morningstar head
+  construction: ForgedMediumHandle
+  finished: ForgedMorningstar
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+  work: 300 # its a fucking morningstar
+  cost: 3
+  skills:
+    MetalworkingKnowledge: 2
+    WeaponsKnowledge: 2
+
+- type: forgedItem
+  id: WarhammerHead
+  category: Bludgeons
+  name: warhammer head
+  construction: ForgedMediumHandle
+  finished: ForgedWarhammer
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+  work: 200 # its a fucking warhammer
+  cost: 2
+  skills:
+    MetalworkingKnowledge: 2
+    WeaponsKnowledge: 2

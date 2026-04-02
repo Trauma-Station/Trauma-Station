@@ -8,6 +8,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
@@ -61,14 +62,15 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
             return;
         }
 
-        if (HasComp<LockPortalComponent>(target) && (ent.Comp.PortalOne == target || ent.Comp.PortalTwo == target))
+        if (TryComp(target, out LockPortalComponent? portal))
         {
             args.Handled = true;
-            ClearPortals(ent);
+            InvertPortals((target, portal), args.User);
             return;
         }
 
-        if (!HasComp<DoorComponent>(target) || !TryComp(target, out PhysicsComponent? body) || !body.CanCollide)
+        if (!HasComp<DoorComponent>(target) || !TryComp(target, out PhysicsComponent? body) ||
+            (body.CollisionLayer & LockPortalSystem.LockPortalMask) == 0)
             return;
 
         var coords = Transform(target).Coordinates;
@@ -230,7 +232,6 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
         _idCard.TryChangeJobDepartment(ent, config.Departments, ent.Comp2);
         _idCard.TryChangeJobTitle(ent, config.JobTitle, ent.Comp2, user);
         _idCard.TryChangeJobIcon(ent, _proto.Index(config.JobIcon), ent.Comp2, user);
-        _access.TrySetTags(ent, config.AccessTags, ent.Comp3);
 
         ent.Comp1.CurrentProto = config.CardPrototype;
         DirtyField(ent.Owner, ent.Comp1, nameof(EldritchIdCardComponent.CurrentProto));
@@ -238,15 +239,15 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
         UpdateSprite((ent.Owner, ent.Comp1));
     }
 
-    private EldritchIdConfiguration? GetConfig(Entity<IdCardComponent?, AccessComponent?, EldritchIdCardComponent?> ent)
+    private EldritchIdConfiguration? GetConfig(Entity<IdCardComponent?, EldritchIdCardComponent?> ent)
     {
-        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2, false))
+        if (!Resolve(ent, ref ent.Comp1, false))
             return null;
 
         EntProtoId? proto = null;
 
-        if (Resolve(ent, ref ent.Comp3, false))
-            proto = ent.Comp3.CurrentProto;
+        if (Resolve(ent, ref ent.Comp2, false))
+            proto = ent.Comp2.CurrentProto;
 
         if (proto == null)
         {
@@ -259,22 +260,24 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
             ent.Comp1.LocalizedJobTitle,
             ent.Comp1.JobIcon,
             ent.Comp1.JobDepartments.ToList(),
-            ent.Comp2.Tags.ToHashSet(),
             proto.Value);
     }
 
-    private void ClearPortals(Entity<EldritchIdCardComponent> ent)
+    private void InvertPortals(Entity<LockPortalComponent> ent, EntityUid user)
     {
-        PredictedQueueDel(ent.Comp.PortalOne);
-        PredictedQueueDel(ent.Comp.PortalTwo);
+        ent.Comp.Inverted = !ent.Comp.Inverted;
+        DirtyField(ent.AsNullable(), nameof(LockPortalComponent.Inverted));
 
-        ent.Comp.PortalOne = null;
-        ent.Comp.PortalTwo = null;
-        DirtyFields(ent.Owner,
-            ent.Comp,
-            null,
-            nameof(EldritchIdCardComponent.PortalOne),
-            nameof(EldritchIdCardComponent.PortalTwo));
+        _popup.PopupClient(Loc.GetString("eldritch-id-card-component-portal-inverted",
+                ("inverted", ent.Comp.Inverted)),
+            user,
+            user);
+
+        if (!Exists(ent.Comp.LinkedPortal) || !TryComp(ent.Comp.LinkedPortal.Value, out LockPortalComponent? portal2))
+            return;
+
+        portal2.Inverted = ent.Comp.Inverted;
+        DirtyField(ent.Comp.LinkedPortal.Value, portal2, nameof(LockPortalComponent.Inverted));
     }
 
     private void EatCard(Entity<EldritchIdCardComponent> ent, Entity<IdCardComponent> idCard, EntityUid user)
@@ -287,6 +290,8 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
         if (config == null)
             return;
 
+        if (TryComp(idCard, out AccessComponent? access))
+            _access.TrySetTags(ent, access.Tags, overwrite: false);
         ent.Comp.Configs.Add(config);
         DirtyField(ent.Owner, ent.Comp, nameof(EldritchIdCardComponent.Configs));
 

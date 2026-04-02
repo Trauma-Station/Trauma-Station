@@ -68,15 +68,15 @@ public sealed class LeechingWalkSystem : EntitySystem
 
             _damageableQuery.TryComp(uid, out var damageable);
 
-            var multiplier = 2f;
+            var multiplier = 1.5f;
             var shouldHeal = true;
             if (_hereticQuery.TryComp(mindContainer.Mind, out var heretic))
             {
                 if (heretic.PathStage >= 7)
                 {
-                    if (heretic.Ascended)
+                    if (heretic is {Ascended: true, CurrentPath: HereticPath.Rust})
                     {
-                        multiplier = 5f;
+                        multiplier = 3.5f;
                         if (_respiratorQuery.TryComp(uid, out var respirator))
                         {
                             _respirator.UpdateSaturation(uid,
@@ -92,11 +92,11 @@ public sealed class LeechingWalkSystem : EntitySystem
                         }
                     }
                     else
-                        multiplier = 3f;
+                        multiplier = 2f;
                 }
             }
             else if (_ghoulQuery.HasComp(uid))
-                multiplier = 3f;
+                multiplier = 2f;
 
             RemCompDeferred<DelayedKnockdownComponent>(uid);
 

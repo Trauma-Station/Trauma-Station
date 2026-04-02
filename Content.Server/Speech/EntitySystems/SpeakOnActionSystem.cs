@@ -63,6 +63,6 @@ public sealed class SpeakOnActionSystem : SharedSpeakOnActionSystem
         if (string.IsNullOrWhiteSpace(speech))
             return;
 
-        _chat.TrySendInGameICMessage(user, Loc.GetString(speech), InGameICChatType.Speak, false);
+        _chat.TrySendInGameICMessage(user, Loc.GetString(speech), ent.Comp.ChatType, false); // Trauma - use ent.Comp.ChatType
     }
 }
