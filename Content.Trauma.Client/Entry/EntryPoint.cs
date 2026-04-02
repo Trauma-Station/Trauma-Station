@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Client.UserInterface;
 using Content.Trauma.Client.IoC;
 using Content.Trauma.Client.ItemSlotRenderer;
-using Content.Trauma.Client.UserInterface;
 using Robust.Client.Graphics;
 using Robust.Shared.ContentPack;
 
