@@ -28,14 +28,14 @@ using Content.Shared.Humanoid;
 
 namespace Content.Goobstation.Server.Wraith;
 
+// TODO: most of this shit just looks up X component in a range then does a thing to N of them, this should use entity effects instead of reinventing the wheel 50 times
 public sealed class SpookActionSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPoweredLightSystem _poweredLight = default!;
-    [Dependency] private readonly FlammableSystem _flammableSystem = default!;
+    [Dependency] private readonly FlammableSystem _flammable = default!;
     [Dependency] private readonly DoorSystem _door = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly SmokeSystem _smoke = default!;
@@ -44,25 +44,18 @@ public sealed class SpookActionSystem : EntitySystem
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    private EntityQuery<PoweredLightComponent> _poweredLightQuery;
-    private EntityQuery<DoorComponent> _doorQuery;
-    private EntityQuery<EntityStorageComponent> _entityStorageQuery;
-    private EntityQuery<ApcComponent> _apcQuery;
-    private EntityQuery<ActionComponent> _actionQuery;
-    private EntityQuery<FlammableComponent> _flammable;
-    private EntityQuery<HumanoidProfileComponent> _humanoidAppearanceQuery;
+    [Dependency] private readonly EntityQuery<DoorComponent> _doorQuery = default!;
+    [Dependency] private readonly EntityQuery<EntityStorageComponent> _entityStorageQuery = default!;
+    [Dependency] private readonly EntityQuery<ActionComponent> _actionQuery = default!;
+    [Dependency] private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
+
+    private HashSet<Entity<ApcComponent>> _apcs = new();
+    private HashSet<Entity<FlammableComponent>> _fireTargets = new();
+    private HashSet<Entity<PoweredLightComponent>> _lights = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _poweredLightQuery = GetEntityQuery<PoweredLightComponent>();
-        _doorQuery = GetEntityQuery<DoorComponent>();
-        _entityStorageQuery = GetEntityQuery<EntityStorageComponent>();
-        _apcQuery = GetEntityQuery<ApcComponent>();
-        _actionQuery = GetEntityQuery<ActionComponent>();
-        _flammable = GetEntityQuery<FlammableComponent>();
-        _humanoidAppearanceQuery = GetEntityQuery<HumanoidProfileComponent>();
 
         SubscribeLocalEvent<SpookMarkComponent, SpookEvent>(OnSpookEvent);
 
@@ -95,11 +88,14 @@ public sealed class SpookActionSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var entities = _lookup.GetEntitiesInRange(args.Performer, ent.Comp.FlipLightRadius).ToList();
-        _random.Shuffle(entities);
+        var coords = Transform(args.Performer).Coordinates;
+        _lights.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp.FlipLightRadius, _lights);
+        var lights = _lights.ToList();
+        _random.Shuffle(lights);
 
         var booCounter = 0;
-        foreach (var entity in entities)
+        foreach (var entity in lights)
         {
             var ev = new GhostBooEvent();
             RaiseLocalEvent(entity, ev);
@@ -117,28 +113,30 @@ public sealed class SpookActionSystem : EntitySystem
 
     private void OnBurnLights(Entity<BurnLightsComponent> ent, ref BurnLightsEvent args)
     {
-        var entities = _lookup.GetEntitiesInRange(args.Performer, ent.Comp.SearchRadius).ToList();
-        _random.Shuffle(entities);
+        var coords = Transform(args.Performer).Coordinates;
+        _lights.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp.SearchRadius, _lights);
+        var lights = _lights.ToList();
+        _random.Shuffle(lights);
 
         var lightBrokenCounter = 0;
-        foreach (var entity in entities)
+        foreach (var entity in lights)
         {
             if (lightBrokenCounter > ent.Comp.MaxBurnLights)
                 break;
 
-            if (!_poweredLightQuery.TryComp(entity, out var poweredLight))
-                continue;
+            _poweredLight.TryDestroyBulb(entity, entity.Comp);
 
-            _poweredLight.TryDestroyBulb(entity, poweredLight);
-
-            var bulbLookup = _lookup.GetEntitiesInRange(entity, ent.Comp.Range);
-            foreach (var target in bulbLookup)
+            coords = Transform(entity).Coordinates;
+            _fireTargets.Clear();
+            _lookup.GetEntitiesInRange(coords, ent.Comp.Range, _fireTargets);
+            foreach (var target in _fireTargets)
             {
-                if (!_flammable.TryGetComponent(target, out var fl) || _humanoidAppearanceQuery.HasComp(target))
+                if (_humanoidQuery.HasComp(target))
                     continue;
 
-                fl.FireStacks += ent.Comp.FireStack.Next(_random);
-                _flammableSystem.Ignite(target, entity, fl);
+                target.Comp.FireStacks += ent.Comp.FireStack.Next(_random);
+                _flammable.Ignite(target, entity, target.Comp);
             }
 
             lightBrokenCounter++;
@@ -210,6 +208,7 @@ public sealed class SpookActionSystem : EntitySystem
         if (map == null || grid == null)
             return;
 
+        // TODO: make this an entity effect and stop copy pasting ts
         var amount = _random.Next(ent.Comp.AmountMinMax.X, ent.Comp.AmountMinMax.Y + 1);
         for (var i = 0; i < amount; i++)
         {
@@ -232,18 +231,17 @@ public sealed class SpookActionSystem : EntitySystem
         if (TryComp<PassiveWraithPointsComponent>(ent.Owner, out var passiveWraithPoints))
             chargeToRemove *= (float)passiveWraithPoints.WpGeneration;
 
-        var looup = _lookup.GetEntitiesInRange(ent.Owner, ent.Comp.SearchRange).ToList();
-        _random.Shuffle(looup);
+        var coords = Transform(ent).Coordinates;
+        _apcs.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp.SearchRange, _apcs);
 
-        foreach (var entity in looup)
-        {
-            if (!_apcQuery.HasComp(entity))
-                continue;
+        if (_apcs.Count == 0)
+            return;
 
-            _battery.ChangeCharge(entity, -chargeToRemove);
-            _popup.PopupEntity(Loc.GetString("spook-apc-sap"), entity, PopupType.MediumCaution);
-            break;
-        }
+        var apc = _random.Pick(_apcs);
+        _battery.ChangeCharge(apc.Owner, -chargeToRemove);
+        _popup.PopupEntity(Loc.GetString("spook-apc-sap"), apc, PopupType.MediumCaution);
+
         args.Handled = true;
     }
 

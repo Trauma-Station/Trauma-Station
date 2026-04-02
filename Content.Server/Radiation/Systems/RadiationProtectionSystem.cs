@@ -1,4 +1,4 @@
-using Content.Server.Radiation.Components;
+using Content.Shared.Radiation.Components; // Trauma - moved to shared
 using Content.Shared.Damage.Components;
 using Robust.Shared.Prototypes;
 

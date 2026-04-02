@@ -95,6 +95,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
     [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
     public static readonly DamageSpecifier AllDamage = new()
     {
@@ -175,12 +176,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         var list = new List<Entity<MobStateComponent>>();
         var lookup = Lookup.GetEntitiesInRange<MobStateComponent>(coords ?? Transform(ent).Coordinates, range);
 
-        var ghoulQuery = GetEntityQuery<GhoulComponent>();
         foreach (var look in lookup)
         {
-            // ignore heretics with the same path*, affect everyone else
-            if (Heretic.TryGetHereticComponent(look.Owner, out var th, out _) && th.CurrentPath == path ||
-                ghoulQuery.HasComp(look))
+            // ignore ghouls and heretics with the same path, affect everyone else
+            if (_ghoulQuery.HasComp(look) || Heretic.TryGetHereticComponent(look.Owner, out var th, out _) && th.CurrentPath == path)
                 continue;
 
             if (checkNullRod)

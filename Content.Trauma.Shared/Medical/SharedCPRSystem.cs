@@ -41,6 +41,13 @@ public abstract class SharedCPRSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly EntityQuery<ActiveCPRComponent> _activeQuery = default!;
+    [Dependency] private readonly EntityQuery<CPRTrainingComponent> _trainingQuery = default!;
+    [Dependency] private readonly EntityQuery<DamageableComponent> _damageQuery = default!;
+    [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private readonly EntityQuery<InternalOrganComponent> _organQuery = default!;
+    [Dependency] private readonly EntityQuery<RottingComponent> _rottingQuery = default!;
+    [Dependency] private readonly EntityQuery<UnrevivableComponent> _unrevivableQuery = default!;
 
     /// <summary>
     /// Modifier for inhale volume on mobs that have CPR being done on them.
@@ -49,25 +56,9 @@ public abstract class SharedCPRSystem : EntitySystem
 
     public static readonly ProtoId<OrganCategoryPrototype> LungsCategory = "Lungs";
 
-    private EntityQuery<ActiveCPRComponent> _activeQuery;
-    private EntityQuery<CPRTrainingComponent> _trainingQuery;
-    private EntityQuery<DamageableComponent> _damageQuery;
-    private EntityQuery<MobStateComponent> _mobQuery;
-    private EntityQuery<InternalOrganComponent> _organQuery;
-    private EntityQuery<RottingComponent> _rottingQuery;
-    private EntityQuery<UnrevivableComponent> _unrevivableQuery;
-
     public override void Initialize()
     {
         base.Initialize();
-
-        _activeQuery = GetEntityQuery<ActiveCPRComponent>();
-        _trainingQuery = GetEntityQuery<CPRTrainingComponent>();
-        _damageQuery = GetEntityQuery<DamageableComponent>();
-        _mobQuery = GetEntityQuery<MobStateComponent>();
-        _organQuery = GetEntityQuery<InternalOrganComponent>();
-        _rottingQuery = GetEntityQuery<RottingComponent>();
-        _unrevivableQuery = GetEntityQuery<UnrevivableComponent>();
 
         SubscribeLocalEvent<CPRTrainingComponent, GetVerbsEvent<InnateVerb>>(OnGetVerbs);
 

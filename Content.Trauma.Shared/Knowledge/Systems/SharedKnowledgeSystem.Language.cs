@@ -20,7 +20,7 @@ public abstract partial class SharedKnowledgeSystem
     [Dependency] private readonly MetaDataSystem _meta = default!;
     //[Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private EntityQuery<LanguageKnowledgeComponent> _langQuery;
+    [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
 
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
     //private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
@@ -28,8 +28,6 @@ public abstract partial class SharedKnowledgeSystem
 
     private void InitializeLanguage()
     {
-        _langQuery = GetEntityQuery<LanguageKnowledgeComponent>();
-
         SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
             after: [ typeof(InitialBodySystem) ]); // great engine
         SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);

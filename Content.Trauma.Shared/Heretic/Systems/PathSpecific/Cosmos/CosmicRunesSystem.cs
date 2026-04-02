@@ -33,6 +33,8 @@ public sealed class CosmicRunesSystem : EntitySystem
     [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
     [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
 
+    private HashSet<Entity<StarMarkComponent>> _teleporting = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -132,28 +134,30 @@ public sealed class CosmicRunesSystem : EntitySystem
             SpawnAttachedTo(ent.Comp.Effect, ent.Comp.LinkedRune.Value.ToCoordinates());
         }
 
-        var toTeleport = _lookup.GetEntitiesInRange(Transform(ent).Coordinates, ent.Comp.Range, LookupFlags.Dynamic)
-            .Where(HasComp<StarMarkComponent>)
-            .ToHashSet();
-        toTeleport.Add(user);
+        var coords = Transform(ent).Coordinates;
+        _teleporting.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp.Range, _teleporting, LookupFlags.Dynamic);
+        _teleporting.Add((user, default!)); // also teleport the user
         EntityUid? pulling = null;
         var grabStage = GrabStage.No;
         PullerComponent? puller = null;
 
         var isUserCosmosHeretic = HasComp<StarGazerComponent>(user) || HasComp<CosmosPassiveComponent>(user);
 
-        if (isUserCosmosHeretic && TryComp(user, out puller) && puller.Pulling != null)
+        if (isUserCosmosHeretic && TryComp(user, out puller) && puller.Pulling is { } pulled)
         {
-            pulling = puller.Pulling.Value;
+            pulling = pulled;
             grabStage = puller.GrabStage;
-            toTeleport.Add(pulling.Value);
+            _teleporting.Add((pulled, default!));
         }
 
-        foreach (var entity in toTeleport)
+        foreach (var entity in _teleporting)
         {
-            _pulling.StopAllPulls(entity);
-            _transform.SetCoordinates(entity, xform.Coordinates);
-            _starMark.TryApplyStarMark(entity);
+            var uid = entity.Owner;
+            _pulling.StopAllPulls(uid);
+            // TODO: replace with teleport system
+            _transform.SetCoordinates(uid, xform.Coordinates);
+            _starMark.TryApplyStarMark(uid);
         }
 
         if (pulling != null)

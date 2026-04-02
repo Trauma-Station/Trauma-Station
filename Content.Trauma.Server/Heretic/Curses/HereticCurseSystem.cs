@@ -39,7 +39,6 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IAdminLogManager _log = default!;
-
     [Dependency] private readonly SharedSolutionContainerSystem _soln = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;
     [Dependency] private readonly VomitSystem _vomit = default!;
@@ -53,6 +52,8 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
     [Dependency] private readonly HereticRitualSystem _ritual = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private readonly EntityQuery<ForensicsComponent> _forensicsQuery = default!;
+    [Dependency] private readonly EntityQuery<PuddleComponent> _puddleQuery = default!;
 
     public override void Initialize()
     {
@@ -287,14 +288,11 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
 
     private DnaDict GetDnaDict(EntityUid rune)
     {
-        var forensicsQuery = GetEntityQuery<ForensicsComponent>();
-        var puddleQuery = GetEntityQuery<PuddleComponent>();
-
         DnaDict dnaDict = new();
         var look = _lookup.GetEntitiesInRange(rune, 1.5f, LookupFlags.Uncontained);
         foreach (var ent in look)
         {
-            if (puddleQuery.TryComp(ent, out var puddle))
+            if (_puddleQuery.TryComp(ent, out var puddle))
             {
                 foreach (var (dna, amount) in GetPuddleData(ent, puddle))
                 {
@@ -310,7 +308,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
                 continue;
             }
 
-            if (!forensicsQuery.TryComp(ent, out var forensics))
+            if (!_forensicsQuery.TryComp(ent, out var forensics))
                 continue;
 
             foreach (var dna in forensics.DNAs)

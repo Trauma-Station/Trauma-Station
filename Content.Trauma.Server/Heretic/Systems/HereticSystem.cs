@@ -64,9 +64,9 @@ public sealed class HereticSystem : SharedHereticSystem
     [Dependency] private readonly HereticRuleSystem _rule = default!;
     [Dependency] private readonly HumanoidProfileSystem _profile = default!;
     [Dependency] private readonly AbductorVestDisguiseSystem _disguise = default!;
-
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
+    [Dependency] private readonly EntityQuery<HereticMinionComponent> _minionQuery = default!;
 
     private float _timer;
     private const float PassivePointCooldown = 20f * 60f;
@@ -74,11 +74,8 @@ public sealed class HereticSystem : SharedHereticSystem
     private const int HereticVisFlags = (int) VisibilityFlags.EldritchInfluence;
 
     public static readonly ProtoId<NpcFactionPrototype> HereticFactionId = "Heretic";
-
     public static readonly ProtoId<NpcFactionPrototype> NanotrasenFactionId = "NanoTrasen";
-
     public static readonly ProtoId<TagPrototype> AscensionRitualTag = "RitualAscension";
-
     public static readonly ProtoId<TagPrototype> FeastOfOwlsRitualTag = "RitualFeastOfOwls";
 
     public override void Initialize()
@@ -190,10 +187,9 @@ public sealed class HereticSystem : SharedHereticSystem
     private void SetMinionsMaster(Entity<HereticComponent> ent, EntityUid? newMaster)
     {
         ent.Comp.Minions = ent.Comp.Minions.Where(Exists).ToHashSet();
-        var minionQuery = GetEntityQuery<HereticMinionComponent>();
         foreach (var uid in ent.Comp.Minions)
         {
-            if (!minionQuery.TryComp(uid, out var minion))
+            if (!_minionQuery.TryComp(uid, out var minion))
                 continue;
 
             minion.BoundHeretic = newMaster;

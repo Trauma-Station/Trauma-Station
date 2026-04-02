@@ -38,12 +38,11 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
     [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
     [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
+    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private readonly EntityQuery<StackComponent> _stackQuery = default!;
+    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
 
-    public SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
-
-    private EntityQuery<GhoulComponent> _ghoulQuery;
-    private EntityQuery<StackComponent> _stackQuery;
-    private EntityQuery<TagComponent> _tagQuery;
+    public static SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
 
     public const string Performer = "Performer";
     public const string Mind = "Mind";
@@ -59,10 +58,6 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         SubscribeLocalEvent<HereticRitualRuneComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<HereticRitualRuneComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<HereticRitualRuneComponent, HereticRitualMessage>(OnRitualChosenMessage);
-
-        _ghoulQuery = GetEntityQuery<GhoulComponent>();
-        _stackQuery = GetEntityQuery<StackComponent>();
-        _tagQuery = GetEntityQuery<TagComponent>();
 
         SubscribeConditions();
         SubscribeEffects();

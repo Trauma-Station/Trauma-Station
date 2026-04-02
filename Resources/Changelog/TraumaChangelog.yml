@@ -6116,3 +6116,10 @@ Entries:
   id: 706
   time: '2026-04-01T22:34:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1776
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed plant analyzer gas names using raw strings.
+  id: 707
+  time: '2026-04-01T22:53:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1779

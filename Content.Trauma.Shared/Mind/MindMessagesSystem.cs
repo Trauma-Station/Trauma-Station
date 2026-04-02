@@ -7,13 +7,11 @@ namespace Content.Trauma.Shared.Mind;
 
 public sealed class MindMessagesSystem : EntitySystem
 {
-    private EntityQuery<MindMessagesComponent> _query;
+    [Dependency] private readonly EntityQuery<MindMessagesComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<MindMessagesComponent>();
 
         // relay event to the mind, other systems can use it too
         SubscribeLocalEvent<MindContainerComponent, EntitySpokeEvent>(OnContainerSpoke);

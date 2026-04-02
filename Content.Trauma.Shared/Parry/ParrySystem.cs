@@ -42,9 +42,8 @@ public sealed class ParrySystem : EntitySystem
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
-
-    private EntityQuery<ReflectiveComponent> _reflectiveQuery;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private readonly EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;
 
     public override void Initialize()
     {
@@ -55,9 +54,6 @@ public sealed class ParrySystem : EntitySystem
         SubscribeLocalEvent<ParryComponent, HeldRelayedEvent<ParryAttemptEvent>>(OnParry);
 
         SubscribeLocalEvent<ParryComponent, ExaminedEvent>(OnExamine);
-
-        _reflectiveQuery = GetEntityQuery<ReflectiveComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
     }
 
     public override void Update(float frameTime)
