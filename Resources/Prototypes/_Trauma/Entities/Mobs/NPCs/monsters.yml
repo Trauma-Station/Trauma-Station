@@ -335,7 +335,7 @@
     actions:
       - Wailing
   - type: AmbientSound
-    volume: +300
+    volume: 6
     range: 18
     sound:
       path: /Audio/_Trauma/Actions/passive.ogg

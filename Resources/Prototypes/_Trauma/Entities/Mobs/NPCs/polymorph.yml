@@ -1,9 +1,9 @@
 - type: entity
   id: PolymorphWailingJaunt
-  name: Unknown
+  parent: [ Incorporeal, BaseMob ]
   categories: [HideSpawnMenu]
   description: You can't figure out what that is.
-  parent: [ Incorporeal, BaseMob ]
+  name: Unknown
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/wailinghorse.rsi

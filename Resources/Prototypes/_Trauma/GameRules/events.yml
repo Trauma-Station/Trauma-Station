@@ -63,10 +63,10 @@
     weight: 3
     duration: 5
     reoccurrenceDelay: 30
-  - type: VentHordeRule
-    table:
-      id: MobRatma
-      amount: 1, 1
+  # - type: VentHordeRule
+  #   table:
+  #     id: MobRatma
+  #     amount: 1, 1
 
 - type: entity
   id: WailingHorseSpawn
@@ -80,7 +80,7 @@
     weight: 3
     duration: 5
     reoccurrenceDelay: 30
-  - type: VentHordeRule
-    table:
-      id: MobWailingHorse
-      amount: 1, 1
+  # - type: VentHordeRule
+  #   table:
+  #     id: MobWailingHorse
+  #     amount: 1, 1
