@@ -27,6 +27,7 @@ public sealed class ForgingAnvilBUI : BoundUserInterface
                 Close(); // only close if you abort rather than start picking an item
         };
         _items = this.CreateWindow<SimpleRadialMenu>();
+        _items.Close();
         _forging = EntMan.System<ForgingSystem>();
         _metal = EntMan.System<SharedMetalSystem>();
     }
