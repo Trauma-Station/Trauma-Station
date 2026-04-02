@@ -87,4 +87,4 @@
         icon:
           sprite: _Trauma/Objects/Specific/forging.rsi
           state: handlesmall
-  - node: handle
+  - node: finished
