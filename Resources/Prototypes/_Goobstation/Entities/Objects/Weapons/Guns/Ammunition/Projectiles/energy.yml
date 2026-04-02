@@ -88,8 +88,8 @@
         Ion: 20
         Heat: 5
   - type: EmpOnTrigger
-    range: 1.5
-    energyConsumption: 1000
+    range: 1
+    energyConsumption: 200
     disableDuration: 1
   - type: DeleteOnTrigger
 
