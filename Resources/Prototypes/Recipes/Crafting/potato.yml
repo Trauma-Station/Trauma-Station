@@ -7,8 +7,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+    FabricationKnowledge: 3
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -20,8 +21,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+    FabricationKnowledge: 3
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -33,6 +35,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 3
-    TechnologyKnowledge: 3
+    FabricationKnowledge: 3
+  practical:
+    ElectronicsKnowledge: 3
   # </Trauma>

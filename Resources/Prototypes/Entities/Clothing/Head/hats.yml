@@ -1695,8 +1695,17 @@
     - PetWearable
     - CorgiWearable
   - type: KnowledgeGrantOnWear # Trauma
-    experience:
-      MartialArtCQC: 1
+    conditions:
+    # Kept you waiting, huh?
+    - !type:NameContainsCondition
+      name: Snake
+    - !type:SpeciesCondition
+      species: Human
+    - !type:HasMarking
+      organ: Head
+      marking: FacePaintSplitter
+    skills:
+      MartialArtCQC: 26
 
 - type: entity
   parent: ClothingHeadBase

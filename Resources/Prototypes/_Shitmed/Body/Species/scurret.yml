@@ -57,7 +57,7 @@
   id: OrganScurretTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganScurretExternal ]
+  parent: [ OrganBaseHeadBald, OrganScurretExternal ]
   id: OrganScurretHead
 
 - type: entity

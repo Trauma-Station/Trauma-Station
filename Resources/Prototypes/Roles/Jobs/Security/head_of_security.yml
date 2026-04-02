@@ -12,10 +12,10 @@
       time: 1h # knowing how to use the tools is important
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
-      time: 5h
+      time: 3h # Trauma, was 5
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 10h
+      time: 5h # Trauma, was 10
   weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
@@ -25,7 +25,6 @@
   - Security
   - SpaceLaw
   - Command
-  goobcoins: 45 #Goob content
   access:
   - HeadOfSecurity
   - Command

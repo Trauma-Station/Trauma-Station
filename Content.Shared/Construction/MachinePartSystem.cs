@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Construction.Components;
 using Content.Shared.Examine;
@@ -66,11 +58,11 @@ namespace Content.Shared.Construction
             }
         }
 
-        public Dictionary<string, int> GetMachineBoardMaterialCost(Entity<MachineBoardComponent> entity, int coefficient = 1)
+        public bool TryGetMachineBoardMaterialCost(Entity<MachineBoardComponent> entity, out Dictionary<string, int> materials, int coefficient = 1)
         {
             var (_, comp) = entity;
 
-            var materials = new Dictionary<string, int>();
+            materials = new Dictionary<string, int>();
 
             foreach (var (stackId, amount) in comp.StackRequirements)
             {
@@ -97,9 +89,14 @@ namespace Content.Shared.Construction
                         materials[mat] += matAmount * amount * coefficient;
                     }
                 }
+                else
+                {
+                    // The item has no material cost, so we cannot get the full cost.
+                    return false;
+                }
             }
 
-            var genericPartInfo = comp.ComponentRequirements.Values.Concat(comp.ComponentRequirements.Values);
+            var genericPartInfo = comp.ComponentRequirements.Values.Concat(comp.TagRequirements.Values);
             foreach (var info in genericPartInfo)
             {
                 var amount = info.Amount;
@@ -126,9 +123,15 @@ namespace Content.Shared.Construction
                         materials[mat] += matAmount * amount * coefficient;
                     }
                 }
+                else
+                {
+                    // The item has no material cost, so we cannot get the full cost.
+                    return false;
+                }
             }
 
-            return materials;
+            // We were able to construct all elements of the recipe.
+            return true;
         }
     }
 }

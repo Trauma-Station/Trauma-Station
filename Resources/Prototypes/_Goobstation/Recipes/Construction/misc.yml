@@ -5,6 +5,6 @@
   category: construction-category-misc
   objectType: Item
   theory:
-    SurvivalKnowledge: 1
+    FabricationKnowledge: 1
   practical:
-    HandmadeKnowledge: 3
+    CarvingKnowledge: 2

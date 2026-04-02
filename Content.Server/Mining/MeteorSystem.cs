@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration.Logs;
 using Content.Server.Destructible;
 using Content.Shared.Damage.Components;
@@ -51,12 +46,13 @@ public sealed class MeteorSystem : EntitySystem
         {
             threshold = FixedPoint2.MaxValue;
         }
-        var otherEntDamage = CompOrNull<DamageableComponent>(args.OtherEntity)?.TotalDamage ?? FixedPoint2.Zero;
+
+        var otherEntDamage = _damageable.GetTotalDamage(args.OtherEntity);
         // account for the damage that the other entity has already taken: don't overkill
         threshold -= otherEntDamage;
 
         // The max amount of damage our meteor can take before breaking.
-        var maxMeteorDamage = _destructible.DestroyedAt(uid) - CompOrNull<DamageableComponent>(uid)?.TotalDamage ?? FixedPoint2.Zero;
+        var maxMeteorDamage = _destructible.DestroyedAt(uid) - _damageable.GetTotalDamage(uid);
 
         // Cap damage so we don't overkill the meteor
         var trueDamage = FixedPoint2.Min(maxMeteorDamage, threshold);

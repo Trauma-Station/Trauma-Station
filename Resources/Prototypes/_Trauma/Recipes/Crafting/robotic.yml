@@ -6,7 +6,9 @@
   objectType: Item
   theory:
     ToysKnowledge: 1
-    BotsKnowledge: 2
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
 
 #- type: construction
 #  id: CyberButtBot
@@ -15,7 +17,7 @@
 #  category: construction-category-utilities
 #  objectType: Item
 #  theory:
-#    BotsKnowledge: 2
+#    BotsKnowledge: 1
 
 - type: construction
   id: DuckBot
@@ -25,7 +27,9 @@
   objectType: Item
   theory:
     CookingKnowledge: 2
-    BotsKnowledge: 2
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
 
 - type: construction
   id: BoogieBot
@@ -34,5 +38,7 @@
   category: construction-category-utilities
   objectType: Item
   theory:
-    ScienceKnowledge: 2
-    BotsKnowledge: 2
+    ElectronicsKnowledge: 1
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1

@@ -2,6 +2,7 @@
 # this is like markerbase without marker, clickable and interaction outline to not make mapping very annoying
 - type: entity
   abstract: true
+  save: false # areas use custom serialization in MapAreaSystem
   id: BaseArea
   suffix: Area # to avoid adding area to every entity name
   placement:

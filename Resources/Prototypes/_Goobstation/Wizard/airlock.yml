@@ -86,7 +86,6 @@
 - type: construction
   id: AirlockUranium
   graph: AirlockUranium
-  startNode: start
   targetNode: airlock
   category: construction-category-structures
   objectType: Structure
@@ -96,13 +95,12 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 2
+    AirlocksKnowledge: 1
   # </Trauma>
 
 - type: construction
   id: AirlockUraniumGlass
   graph: AirlockUranium
-  startNode: start
   targetNode: glassAirlock
   category: construction-category-structures
   objectType: Structure
@@ -112,7 +110,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 2
+    AirlocksKnowledge: 1
   # </Trauma>
 
 # Construction

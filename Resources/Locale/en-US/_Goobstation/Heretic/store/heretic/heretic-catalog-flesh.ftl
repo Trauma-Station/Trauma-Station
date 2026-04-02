@@ -34,7 +34,7 @@ knowledge-path-flesh-s2-name = Grasp of Flesh
 knowledge-path-flesh-s2-desc =
     My new found desires drove me to greater and greater heights.
 
-    Your Mansus Grasp gains the ability to create a ghoul out of corpse with a soul.
+    Your Mansus Grasp gains the ability to create a ghoul out of corpse.
     Ghouls have only 50 health and look like husks to the heathens' eyes.
     All ghouls get their own Bloody Blade that cannot be shattered and disappears on ghoul death.
     You are now able to consume raw flesh. Eating meat, organs and body parts will empower and heal you temporarily, the effect scales with your path stage.
@@ -53,7 +53,6 @@ knowledge-path-flesh-s4-desc =
     I found notes of a dark ritual, unfinished... yet still, I pushed forward.
 
     Allows you to transmute a corpse and a muzzle to create a Voiceless Dead.
-    The corpse does not need to have a soul.
     Voiceless Dead are mute ghouls, which have 150 health and a Bloody Blade.
     Voiceless Dead are better than regular ones at using Bloody Blades.
     Voiceless Dead body parts cannot be severed and its organs cannot be removed.

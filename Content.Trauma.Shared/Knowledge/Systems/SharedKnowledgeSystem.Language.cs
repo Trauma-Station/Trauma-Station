@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Common.Body;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared.Body;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Prototypes;
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.Language.Components;
+using Content.Trauma.Shared.Language.Components;
+using Content.Trauma.Shared.Language.Events;
+using Content.Trauma.Shared.Language.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -20,7 +20,7 @@ public abstract partial class SharedKnowledgeSystem
     [Dependency] private readonly MetaDataSystem _meta = default!;
     //[Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private EntityQuery<LanguageKnowledgeComponent> _langQuery;
+    [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
 
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
     //private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
@@ -28,16 +28,16 @@ public abstract partial class SharedKnowledgeSystem
 
     private void InitializeLanguage()
     {
-        _langQuery = GetEntityQuery<LanguageKnowledgeComponent>();
-
-        SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit);
+        SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
+            after: [ typeof(InitialBodySystem) ]); // great engine
         SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);
         SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeRemovedEvent>(OnLanguageRemoved);
 
         SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdd);
         SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemove);
         SubscribeLocalEvent<LanguageSpeakerComponent, UpdateLanguageEvent>(OnLanguageUpdate);
-        SubscribeLocalEvent<LanguageSpeakerComponent, BodyInitEvent>(OnLanguageBodyInit);
+        SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnSpeakerMapInit,
+            after: [ typeof(InitialBodySystem) ]);
 
         // Experience methods
         SubscribeLocalEvent<LanguageSpeakerComponent, EntitySpokeEvent>(OnLanguageSpoke);
@@ -51,13 +51,17 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnLanguageAdded(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
     {
-        EnsureComp<LanguageSpeakerComponent>(args.Holder);
+        var speaker = EnsureComp<LanguageSpeakerComponent>(args.Holder);
+        UpdateEntityLanguages((args.Holder, speaker));
     }
 
     private void OnLanguageRemoved(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
     {
         if (args.Container.Comp.ActiveLanguage == ent.Owner)
             ChangeLanguage(args.Container, null);
+
+        if (TryComp<LanguageSpeakerComponent>(args.Holder, out var speaker))
+            UpdateEntityLanguages((args.Holder, speaker));
     }
 
     /// <summary>
@@ -177,10 +181,14 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageBodyInit(Entity<LanguageSpeakerComponent> ent, ref BodyInitEvent args)
+    public void OnSpeakerMapInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
     {
         if (GetContainer(ent.Owner) is not { } brain)
+        {
+            // use mob yml languages
+            UpdateEntityLanguages(ent);
             return;
+        }
 
         var allLanguages = new List<(ProtoId<LanguagePrototype>, bool)>();
         foreach (var id in ent.Comp.Speaks)

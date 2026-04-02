@@ -4,7 +4,7 @@
 		<OutputPath>../bin/Content.Server/</OutputPath>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<OutputType Condition="'$(FullRelease)' != 'True'">Exe</OutputType>
-		<NoWarn>1998</NoWarn>
+		<NoWarn>0618</NoWarn>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<ServerGarbageCollection>true</ServerGarbageCollection>
 	</PropertyGroup>

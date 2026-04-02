@@ -11,7 +11,6 @@
     time: 5h
   weight: 10
   canBeAntag: false
-  goobcoins: 40 #Goob content
   icon: JobIconStationAi
   supervisors: job-supervisors-rd
   jobEntity: StationAiBrain
@@ -25,9 +24,8 @@
   playTimeTracker: JobBorg
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 10h
+      time: 1h # Trauma was 10
   canBeAntag: false
-  goobcoins: 20 #Goob content
   icon: JobIconBorg
   supervisors: job-supervisors-rd
   jobEntity: PlayerBorgBattery

@@ -19,12 +19,6 @@
         - Belt
     - type: AccessOverrider
       accessLevels:
-      # <Trauma>
-      - Genetics
-      - Journalism
-      - Library
-      - Robotics
-      # </Trauma>
       - Armory
       - Atmospherics
       - Bar
@@ -37,6 +31,8 @@
       - ChiefEngineer
       - ChiefMedicalOfficer
       - Command
+      - Cryogenics
+      - EmergencyShuttleRepealAll
       - Engineering
       - External
       - HeadOfPersonnel
@@ -54,8 +50,15 @@
       - Security
       - Service
       - Theatre
+      # Trauma
+      - NanotrasenRepresentative
       - GenpopEnter
       - GenpopLeave
+      - Journalism
+      - Library
+      - Robotics
+      - Genetics
+      # </Trauma>
       privilegedIdSlot:
         name: id-card-console-privileged-id
         ejectSound: /Audio/Machines/id_swipe.ogg

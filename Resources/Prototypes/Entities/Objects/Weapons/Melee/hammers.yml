@@ -12,7 +12,7 @@
 
 - type: entity
   name: sledgehammer
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityStrong] # Trauma - Durability
   id: Sledgehammer
   description: The perfect tool for wanton carnage.
   components:

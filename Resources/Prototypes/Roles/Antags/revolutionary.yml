@@ -22,6 +22,7 @@
     department: Command # Goob - was overall
     time: 10h
   guides: [ Revolutionaries ] # Goob
+  creditImage: /Textures/_Trauma/EndCredits/Antags/revolution.png # Trauma
 
 - type: antag
   id: Rev

@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Trauma.Common.Nutrition;
+using Content.Trauma.Common.Heretic;
 using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.Heretic;
 // </Trauma>
 ﻿using Content.Shared.Administration.Logs;
 using Content.Shared.Body;
@@ -169,6 +169,10 @@ public sealed partial class IngestionSystem : EntitySystem
 
     private void OnSolutionContainerChanged(Entity<EdibleComponent> entity, ref SolutionContainerChangedEvent args)
     {
+        // The changes are already networked as part of the same game state.
+        if (_timing.ApplyingState)
+            return;
+
         UpdateAppearance(entity);
     }
 

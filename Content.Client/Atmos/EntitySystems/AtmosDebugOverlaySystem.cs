@@ -1,20 +1,3 @@
-// SPDX-FileCopyrightText: 2020 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2020 ColdAutumnRain <73938872+ColdAutumnRain@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Metal Gear Sloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2020 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2021 GraniteSidewalk <32942106+GraniteSidewalk@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2022 ScalyChimp <72841710+scaly-chimp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.Atmos.Overlays;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.EntitySystems;
@@ -27,7 +10,9 @@ namespace Content.Client.Atmos.EntitySystems
     [UsedImplicitly]
     internal sealed class AtmosDebugOverlaySystem : SharedAtmosDebugOverlaySystem
     {
-        public readonly Dictionary<EntityUid, AtmosDebugOverlayMessage> TileData = new();
+        [Dependency] private readonly IOverlayManager _overlayManager = default!;
+
+        public readonly Dictionary<EntityUid, AtmosDebugOverlayMessage> TileData = [];
 
         // Configuration set by debug commands and used by AtmosDebugOverlay {
         /// <summary>Value source for display</summary>
@@ -42,6 +27,8 @@ namespace Content.Client.Atmos.EntitySystems
         public bool CfgCBM = false;
         // }
 
+        private AtmosDebugOverlay? _overlay;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -51,10 +38,6 @@ namespace Content.Client.Atmos.EntitySystems
             SubscribeNetworkEvent<AtmosDebugOverlayDisableMessage>(HandleAtmosDebugOverlayDisableMessage);
 
             SubscribeLocalEvent<GridRemovalEvent>(OnGridRemoved);
-
-            var overlayManager = IoCManager.Resolve<IOverlayManager>();
-            if(!overlayManager.HasOverlay<AtmosDebugOverlay>())
-                overlayManager.AddOverlay(new AtmosDebugOverlay(this));
         }
 
         private void OnGridRemoved(GridRemovalEvent ev)
@@ -68,19 +51,25 @@ namespace Content.Client.Atmos.EntitySystems
         private void HandleAtmosDebugOverlayMessage(AtmosDebugOverlayMessage message)
         {
             TileData[GetEntity(message.GridId)] = message;
+
+            if (_overlay is not null)
+                return;
+
+            _overlay = new AtmosDebugOverlay(this);
+            _overlayManager.AddOverlay(_overlay);
         }
 
         private void HandleAtmosDebugOverlayDisableMessage(AtmosDebugOverlayDisableMessage ev)
         {
             TileData.Clear();
+            RemoveOverlay();
         }
 
         public override void Shutdown()
         {
             base.Shutdown();
-            var overlayManager = IoCManager.Resolve<IOverlayManager>();
-            if (overlayManager.HasOverlay<AtmosDebugOverlay>())
-                overlayManager.RemoveOverlay<AtmosDebugOverlay>();
+
+            RemoveOverlay();
         }
 
         public void Reset(RoundRestartCleanupEvent ev)
@@ -91,6 +80,15 @@ namespace Content.Client.Atmos.EntitySystems
         public bool HasData(EntityUid gridId)
         {
             return TileData.ContainsKey(gridId);
+        }
+
+        private void RemoveOverlay()
+        {
+            if (_overlay is null)
+                return;
+
+            _overlayManager.RemoveOverlay(_overlay);
+            _overlay = null;
         }
     }
 

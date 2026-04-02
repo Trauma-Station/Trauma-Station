@@ -23,8 +23,10 @@
     fiberMaterial: fibers-leather
     fiberColor: fibers-red
   - type: KnowledgeGrantOnWear
+    skills:
+      MartialArtKravMaga: 50
     experience:
-      MartialArtKravMaga: 10
+      MartialArtKravMaga: 2
   - type: GuideHelp
     guides:
     - KravMaga

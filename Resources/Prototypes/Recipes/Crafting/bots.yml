@@ -8,6 +8,8 @@
   # <Trauma>
   theory:
     BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -20,6 +22,8 @@
   # <Trauma>
   theory:
     BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -33,6 +37,8 @@
   theory:
     BotsKnowledge: 1
     BananiumKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -45,6 +51,8 @@
   # <Trauma>
   theory:
     BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -57,6 +65,9 @@
   # <Trauma>
   theory:
     BotsKnowledge: 1
+    ChemistryKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -69,6 +80,8 @@
   # <Trauma>
   theory:
     BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -81,6 +94,8 @@
   # <Trauma>
   theory:
     BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -93,4 +108,6 @@
   # <Trauma>
   theory:
     BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>

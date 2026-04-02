@@ -3,7 +3,7 @@
 using Content.Goobstation.Shared.Clothing;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Server.Popups;
-using Content.Shared._Goobstation.Clothing;
+using Content.Trauma.Shared.Clothing;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;

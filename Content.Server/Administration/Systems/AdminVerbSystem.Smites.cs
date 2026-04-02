@@ -1,9 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Speech;
-using Content.Server.Speech.EntitySystems;
-using Content.Shared._Goobstation.Wizard.Traps;
 using Content.Shared.Speech.Components;
-using Content.Shared.Temperature.Components;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -102,6 +99,7 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly SuperBonkSystem _superBonkSystem = default!;
     [Dependency] private readonly SlipperySystem _slipperySystem = default!;
     [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     private readonly EntProtoId _actionViewLawsProtoId = "ActionViewLaws";
     private readonly ProtoId<SiliconLawsetPrototype> _crewsimovLawset = "Crewsimov";
@@ -237,17 +235,18 @@ public sealed partial class AdminVerbSystem
                 Icon = new SpriteSpecifier.Rsi(new ("/Textures/Clothing/Hands/Gloves/Color/yellow.rsi"), "icon"),
                 Act = () =>
                 {
+                    var totalDamage = _damageable.GetTotalDamage((args.Target, damageable));
                     int damageToDeal;
                     if (!_mobThresholdSystem.TryGetThresholdForState(args.Target, MobState.Critical, out var criticalThreshold)) {
                         // We can't crit them so try killing them.
                         if (!_mobThresholdSystem.TryGetThresholdForState(args.Target, MobState.Dead,
                                 out var deadThreshold))
                             return;// whelp.
-                        damageToDeal = deadThreshold.Value.Int() - (int)damageable.TotalDamage;
+                        damageToDeal = deadThreshold.Value.Int() - (int)totalDamage;
                     }
                     else
                     {
-                        damageToDeal = criticalThreshold.Value.Int() - (int)damageable.TotalDamage;
+                        damageToDeal = criticalThreshold.Value.Int() - (int)totalDamage;
                     }
 
                     if (damageToDeal <= 0)
@@ -557,25 +556,6 @@ public sealed partial class AdminVerbSystem
 
             };
             args.Verbs.Add(ghostKick);
-        }
-
-        // Goobstation
-        if (HasComp<TemperatureComponent>(args.Target))
-        {
-            var iceCubeName = Loc.GetString("admin-smite-ice-cube-name").ToLowerInvariant();
-            Verb iceCube = new()
-            {
-                Text = iceCubeName,
-                Category = VerbCategory.Smite,
-                Icon = new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Wizard/Effects/effects.rsi"), "ice_cube"),
-                Act = () =>
-                {
-                    EnsureComp<IceCubeComponent>(args.Target);
-                },
-                Impact = LogImpact.Extreme,
-                Message = string.Join(": ", iceCubeName, Loc.GetString("admin-smite-ice-cube-description"))
-            };
-            args.Verbs.Add(iceCube);
         }
 
         if (TryComp<InventoryComponent>(args.Target, out var inventory))

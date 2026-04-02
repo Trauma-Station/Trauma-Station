@@ -28,7 +28,7 @@ namespace Content.Server.GameTicking.Rules;
 public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
 {
     // <Trauma>
-    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     // </Trauma>
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
@@ -168,7 +168,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
         {
             _chat.DispatchStationAnnouncement(station, Loc.GetString("zombie-cburn-call"), colorOverride: Color.Crimson);
         }
-        _gameTicker.StartGameRule(comp.ZombieCBurnEvent);
+        _ticker.StartGameRule(comp.ZombieCBurnEvent);
         comp.ZombieCBurnCalled = true;
     }
 
@@ -234,7 +234,7 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
         var stationGrids = new HashSet<EntityUid>();
         if (!includeOffStation)
         {
-            foreach (var station in _gameTicker.GetSpawnableStations())  // Einstein Engines - Zombie Improvements Take 2
+            foreach (var station in _ticker.GetSpawnableStations())  // Einstein Engines - Zombie Improvements Take 2
             {
                 if (_station.GetLargestGrid(station) is { } grid)
                     stationGrids.Add(grid);

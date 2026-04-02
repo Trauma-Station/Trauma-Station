@@ -25,6 +25,14 @@
 
 - type: entity
   parent: BaseAreaSecurity
+  id: AreaSecurityCheckpoint
+  name: sec checkpoint
+  components:
+  - type: Sprite
+    state: sec_point
+
+- type: entity
+  parent: BaseAreaSecurity
   id: AreaDetective
   name: detective
   components:
@@ -41,11 +49,51 @@
 
 - type: entity
   parent: BaseAreaSecurity
+  id: AreaBrigMed
+  name: brig med
+  components:
+  - type: Sprite
+    state: sec_medical
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaExecution
+  name: execution room
+  components:
+  - type: Sprite
+    state: execute_room
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaFiringRange
+  name: firing range
+  components:
+  - type: Sprite
+    state: firing_range
+
+- type: entity
+  parent: BaseAreaSecurity
   id: AreaInterrogation
   name: interrogation
   components:
   - type: Sprite
     state: interrogation
+
+- type: entity
+  parent: AreaSecurity
+  id: AreaSecurityLockers
+  name: security locker room
+  components:
+  - type: Sprite
+    state: sec_locker_room
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaLaborCamp
+  name: labor camp
+  components:
+  - type: Sprite
+    state: sec_labor_camp
 
 - type: entity
   parent: BaseAreaSecurity
@@ -54,3 +102,27 @@
   components:
   - type: Sprite
     state: sec_prison
+
+- type: entity
+  parent: AreaPrison
+  id: AreaPrisonShower
+  name: prison shower
+  components:
+  - type: Sprite
+    state: prison_shower
+
+- type: entity
+  parent: AreaPrison
+  id: AreaPrisonVisit
+  name: prison visit
+  components:
+  - type: Sprite
+    state: prison_visit
+
+- type: entity
+  parent: BaseAreaSecurity
+  id: AreaWarden
+  name: warden
+  components:
+  - type: Sprite
+    state: warden

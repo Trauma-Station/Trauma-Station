@@ -350,7 +350,7 @@
       sprite: Objects/Specific/Hydroponics/tobacco.rsi
 
 - type: entity
-  parent: SeedBase
+  parent: [SeedBase, BaseMinorContraband] # Trauma
   name: packet of cannabis seeds
   description: "Taxable."
   id: CannabisSeeds
@@ -361,7 +361,7 @@
       sprite: Objects/Specific/Hydroponics/cannabis.rsi
 
 - type: entity
-  parent: SeedBase
+  parent: [SeedBase, BaseMinorContraband] # Trauma
   name: packet of rainbow cannabis seeds
   description: "These seeds grow into rainbow weed. Groovy... and also highly addictive."
   id: RainbowCannabisSeeds

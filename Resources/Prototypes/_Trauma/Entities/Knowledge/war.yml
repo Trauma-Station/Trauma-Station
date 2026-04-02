@@ -5,7 +5,6 @@
   components:
   - type: Knowledge
     experienceCost: 15
-    costs: [0, 6, 10, 16]
   - type: MeleeSpeedKnowledge
     # 75% to 125% speed scaling with level, tapers off
     # midlevel at lvl 25

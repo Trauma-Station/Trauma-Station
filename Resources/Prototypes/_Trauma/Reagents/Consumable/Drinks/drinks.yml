@@ -1,0 +1,29 @@
+- type: reagent
+  parent: BaseJuice
+  id: LemonadeLemonade
+  name: reagent-name-lemonadelemonade
+  desc: reagent-desc-lemonadelemonade
+  physicalDesc: reagent-physical-desc-tart
+  flavor: sweet
+  color: "#ff77a8" # Pink lemonade!
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/lemonadeglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:SatiateThirst
+        factor: 6 # Really good, actually
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: 0.5 # It got some kick to it I tell you hwhat
+      - !type:Explosion # Copy and pasted from genecide and nerfed because funny
+        explosionType: Default
+        maxIntensity: 0.1
+        intensityPerUnit: 0.1
+        intensitySlope: 1
+        maxTotalIntensity: 0.1

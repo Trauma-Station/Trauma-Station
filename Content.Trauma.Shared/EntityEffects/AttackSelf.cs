@@ -28,15 +28,7 @@ public sealed class AttackSelfEntityEvent : EntityEffectSystem<CombatModeCompone
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-
-    private EntityQuery<MeleeWeaponComponent> _query;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _query = GetEntityQuery<MeleeWeaponComponent>();
-    }
+    [Dependency] private readonly EntityQuery<MeleeWeaponComponent> _query = default!;
 
     protected override void Effect(Entity<CombatModeComponent> ent, ref EntityEffectEvent<AttackSelf> args)
     {

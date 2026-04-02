@@ -20,9 +20,10 @@ public sealed partial class BodySystem
         if (!_bodyQuery.Resolve(ent, ref ent.Comp))
             return false;
 
+        var query = GetEntityQuery<TComp>(); // Trauma - use a query bruh
         foreach (var organ in ent.Comp.Organs?.ContainedEntities ?? [])
         {
-            if (TryComp<TComp>(organ, out var comp))
+            if (query.TryComp(organ, out var comp)) // Trauma - use a query bruh
                 organs.Add((organ, comp));
         }
 

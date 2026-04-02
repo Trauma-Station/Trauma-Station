@@ -12,18 +12,14 @@ public sealed class ScannedGenomeSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
-
-    private EntityQuery<MutatableComponent> _mutatableQuery;
-    private EntityQuery<ScannedGenomeComponent> _query;
+    [Dependency] private readonly EntityQuery<MutatableComponent> _mutatableQuery = default!;
+    [Dependency] private readonly EntityQuery<ScannedGenomeComponent> _query = default!;
 
     private StringBuilder _builder = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _mutatableQuery = GetEntityQuery<MutatableComponent>();
-        _query = GetEntityQuery<ScannedGenomeComponent>();
 
         SubscribeLocalEvent<ScannedGenomeComponent, PolymorphedEvent>(OnPolymorphed);
         SubscribeLocalEvent<ScannedGenomeComponent, MutationRemovedEvent>(OnMutationRemoved);
@@ -36,14 +32,15 @@ public sealed class ScannedGenomeSystem : EntitySystem
             return;
 
         var comp = EnsureComp<ScannedGenomeComponent>(target);
-        DebugTools.Assert(comp.Sequences.Count == 0, $"Polymorphed {ToPrettyString(ent)} into a non-empty scanned gnome entity {ToPrettyString(target)}, its sequences would be wiped!");
+        DebugTools.Assert(comp.Sequences.Count == 0, $"Polymorphed {ToPrettyString(ent)} into a non-empty scanned genome entity {ToPrettyString(target)}, its sequences would be wiped!");
         TransferSequences(ent, (target, comp));
     }
 
     private void OnMutationRemoved(Entity<ScannedGenomeComponent> ent, ref MutationRemovedEvent args)
     {
         // check just incase you are VERY evil and have a mutation that is a mob or something crazy
-        if (ent.Owner != args.Target.Owner)
+        // also don't remove for polymorph
+        if (ent.Owner != args.Target.Owner || args.Automatic)
             return;
 
         RemoveSequence(ent, args.Id);
@@ -180,7 +177,8 @@ public sealed class ScannedGenomeSystem : EntitySystem
                 continue;
             }
 
-            sequences.Add(new SequenceState(sequence.Bases, sequence.OriginalBases, data.Number, data.Discovered ? id.ToString() : null));
+            var rarity = _mutation.GetRarity(id);
+            sequences.Add(new SequenceState(sequence.Bases, sequence.OriginalBases, data.Number, rarity, data.Discovered ? id.ToString() : null));
         }
     }
 

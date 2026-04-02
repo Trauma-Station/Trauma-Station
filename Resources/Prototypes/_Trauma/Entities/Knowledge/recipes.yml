@@ -1,0 +1,91 @@
+# TODO: bunch of different types of cooking
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: CookingKnowledge
+  name: Cooking
+  components:
+  - type: Knowledge
+    experienceCost: 15
+  - type: ExperienceOnCooking # it just makes sense
+    scale: 100 # cook 100 meals to master it from unskilled
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: MaterialsKnowledge
+  name: Materials
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: DoorsKnowledge
+  name: Doors
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: AirlocksKnowledge
+  name: Airlocks
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: ToysKnowledge
+  name: Toys
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: BananiumKnowledge
+  name: Bananium
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: BotsKnowledge
+  name: Bots
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: FurnitureKnowledge
+  name: Furniture
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: InfrastructureKnowledge
+  name: Infrastructure
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: ElectronicsKnowledge
+  name: Electronics
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: WallsKnowledge
+  name: Walls
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: ScienceKnowledge
+  name: Science
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: WindowsKnowledge
+  name: Windows
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: SpiderCraftKnowledge
+  name: Spider Webs
+  components:
+  - type: Knowledge
+    costs: null # Spider only
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: SmokeablesKnowledge
+  name: Smokeables
+
+- type: entity
+  parent: BaseRecipesKnowledge
+  id: RevolutionaryKnowledge
+  name: Revolutionary
+  components:
+  - type: Knowledge
+    costs: null # lol

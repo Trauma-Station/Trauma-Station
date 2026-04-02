@@ -24,9 +24,9 @@ public sealed partial class SlimeDamageOvertimeComponent : Component
     [DataField]
     public DamageSpecifier Damage = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
-            { "Caustic", 2.5 },
-        },
+            { "Caustic", 2.5 }
+        }
     };
 }

@@ -34,13 +34,11 @@
       effects:
       - !type:ModifyBloodLevel
         amount: 1.5
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: -1.75
-            Brute: -1.75
-          types:
-            Bloodloss: -1.25
+          Burn: -1.75
+          Brute: -1.75
+          Airloss: -1.25
       - !type:ModifyBloodLevel
         amount: 1.5
         conditions:
@@ -48,13 +46,11 @@
           min: 1
           max: 50
           worksOnLavaland: true
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: -4.75
-            Brute: -4.75
-          types:
-            Bloodloss: -1.25
+          Burn: -4.75
+          Brute: -4.75
+          Airloss: -1.25
         conditions:
         - !type:PressureCondition
           min: 1
@@ -96,7 +92,7 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         conditions:
         - !type:PressureCondition
           inverted: true # only do the damage outside of lavaland
@@ -104,15 +100,10 @@
           max: 50
           worksOnLavaland: true
         damage:
-          types:
-            Cold: 2
-            Asphyxiation: 1.75
-            Bloodloss: 3
-          groups:
-            Toxin: 1.5
-            Brute: 7.5
-            Burn: 4
-            Airloss: 1.5
+          Toxin: 1.5
+          Brute: 7.5
+          Burn: 4.5
+          Airloss: 3.25
       # Cuts the amount healed roughly by 50% when in normal pressure.
 
 - type: reagent
@@ -126,14 +117,10 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Brute: -2
-          types:
-            Heat: -1
-            Shock: -1
-            Cold: -1
+          Brute: -2
+          Burn: -3
 
 - type: reagent
   id: SerakaExtract
@@ -154,11 +141,10 @@
         amount: -1
       - !type:ModifyBloodLevel
         amount: 1
-      - !type:HealthChange # Overdose can cause blood to clot in the veins
+      - !type:EvenHealthChange # Overdose can cause blood to clot in the veins
         conditions:
         - !type:ReagentCondition
           reagent: SerakaExtract
           min: 8
         damage:
-          groups:
-            Airloss: 7
+          Airloss: 7

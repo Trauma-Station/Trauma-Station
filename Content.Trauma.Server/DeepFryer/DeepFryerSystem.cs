@@ -21,8 +21,7 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-
-    private EntityQuery<TagComponent> _tagQuery;
+    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
 
     private static readonly ProtoId<DamageTypePrototype> damageType = "Heat";
 
@@ -42,8 +41,6 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _tagQuery = GetEntityQuery<TagComponent>();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -195,9 +192,10 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
         }
         ent.Comp.StoredObjects.RemoveAll(uid => _consumed.Contains(uid));
 
+        var sol = solution.Comp.Solution;
         foreach (var (reagent, quantity) in _reagents)
         {
-            solution.Comp.Solution.RemoveReagent(reagent, quantity, ignoreReagentData: true);
+            sol.RemoveReagent(reagent, quantity, ignoreReagentData: true);
         }
         _solution.UpdateChemicals(solution);
 

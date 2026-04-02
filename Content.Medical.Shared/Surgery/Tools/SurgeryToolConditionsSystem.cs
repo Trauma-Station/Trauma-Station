@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.IgnitionSource.Components;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Smoking;
-using Content.Shared.Smoking.Components;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -50,7 +50,7 @@ public sealed class SurgeryToolConditionsSystem : EntitySystem
 
     private void OnMatchUsed(Entity<MatchstickComponent> ent, ref SurgeryToolUsedEvent args)
     {
-        SmokableUsed(ent, ent.Comp.CurrentState, ref args);
+        SmokableUsed(ent, ent.Comp.State, ref args);
     }
 
     private void OnSmokableUsed(Entity<SmokableComponent> ent, ref SurgeryToolUsedEvent args)

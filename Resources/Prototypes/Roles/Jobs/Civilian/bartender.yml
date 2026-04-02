@@ -3,17 +3,16 @@
   name: job-name-bartender
   description: job-description-bartender
   playTimeTracker: JobBartender
-  requirements:
-    - !type:DepartmentTimeRequirement
-      department: Civilian
-      time: 0.5h
+  # requirements: #Trauma
+  #   - !type:DepartmentTimeRequirement
+  #     department: Civilian
+  #     time: 0.5h
   startingGear: BartenderGear
   icon: "JobIconBartender"
   supervisors: job-supervisors-hop
   guides: # goobstation
   - Bartender
   - Drinks
-  goobcoins: 10 #Goob content
   access:
   - Service
   - Maintenance

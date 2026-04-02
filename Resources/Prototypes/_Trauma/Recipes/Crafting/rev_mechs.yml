@@ -1,19 +1,19 @@
 - type: construction
   id: Killdozer
   graph: Killdozer
-  startNode: start
   targetNode: Killdozer
   category: construction-category-antagonist
   objectType: Item
   theory:
     RevolutionaryKnowledge: 3
+  useQuality: false
 
 - type: construction
   id: PowerArmorFrame
   graph: PowerArmorFrame
-  startNode: start
   targetNode: Frame
   category: construction-category-antagonist
   objectType: Item
   theory:
     RevolutionaryKnowledge: 2
+  useQuality: false

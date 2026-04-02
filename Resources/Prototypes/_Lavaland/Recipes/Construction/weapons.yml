@@ -5,12 +5,11 @@
   targetNode: axe
   objectType: Item
   theory:
-    SurvivalKnowledge: 0
-    WeaponsKnowledge: 1
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 2
-    HandmadeKnowledge: 2
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+  qualityPrototype: ShitCraft
 
 - type: construction
   id: BoneDaggerConstruction
@@ -19,9 +18,8 @@
   targetNode: dagger
   objectType: Item
   theory:
-    SurvivalKnowledge: 0
-    WeaponsKnowledge: 1
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 2
-    HandmadeKnowledge: 2
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+  qualityPrototype: ShitCraft

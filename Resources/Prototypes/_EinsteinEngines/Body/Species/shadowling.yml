@@ -102,7 +102,7 @@
   id: OrganShadowlingTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganShadowlingExternal ]
+  parent: [ OrganBaseHeadBald, OrganShadowlingExternal ]
   id: OrganShadowlingHead
 
 - type: entity

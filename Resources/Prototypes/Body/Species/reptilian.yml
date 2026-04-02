@@ -50,6 +50,13 @@
     enum.HumanoidVisualLayers.RFoot:
       limit: 1
       required: false
+  # <Trauma>
+  appearances:
+    enum.HumanoidVisualLayers.Tail:
+      matchSkin: true
+    enum.HumanoidVisualLayers.Snout:
+      matchSkin: true
+  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance
@@ -246,7 +253,7 @@
     - enum.HumanoidVisualLayers.Tail
 
 - type: entity
-  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganReptilianExternal ]
+  parent: [ OrganBaseHeadSexed, OrganBaseHeadBald, OrganReptilianExternal ] # Trauma - bald
   id: OrganReptilianHead
   components:
   - type: VisualOrganMarkings

@@ -66,7 +66,7 @@ public sealed partial class KnowledgeComponent : Component
     /// <summary>
     /// Temporary levels that are granted by certain equipment and skillchips.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int TemporaryLevel;
 
     /// <summary>
@@ -86,6 +86,12 @@ public sealed partial class KnowledgeComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan TimeToNextExperience = TimeSpan.Zero;
+
+    /// <summary>
+    /// Stores what should be used to calculate the next xp timestamp.
+    /// </summary>
+    [DataField]
+    public TimeSpan TimeBetweenExperience = TimeSpan.FromSeconds(5);
 
     /// <summary>
     /// Array of point costs for each mastery level, including 0.

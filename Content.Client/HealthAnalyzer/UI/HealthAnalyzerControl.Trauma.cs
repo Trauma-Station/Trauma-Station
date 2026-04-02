@@ -1,31 +1,33 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-using Content.Goobstation.Shared.Disease;
+
+using System.Globalization;
+using System.Linq;
+using System.Numerics;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Wounds;
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
-using Content.Shared.FixedPoint;
 using Content.Shared.MedicalScanner;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
 
 namespace Content.Client.HealthAnalyzer.UI;
 
 public sealed partial class HealthAnalyzerControl
 {
+
     public event Action<ProtoId<OrganCategoryPrototype>?, EntityUid>? OnBodyPartSelected;
     public event Action<HealthAnalyzerMode, EntityUid>? OnModeChanged;
 
@@ -143,7 +145,8 @@ public sealed partial class HealthAnalyzerControl
         PartNameLabel.Visible = isPart;
         DamageLabelHeading.Visible = true;
         DamageLabel.Visible = true;
-        DamageLabel.Text = damageable.TotalDamage.ToString();
+        var damage = _damageable.GetAllDamage((target, damageable));
+        DamageLabel.Text = damage.GetTotal().ToString();
 
         var identity = Identity.Name(target, _entityManager);
         if (isPart)
@@ -153,11 +156,11 @@ public sealed partial class HealthAnalyzerControl
                 : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
         }
 
-        var damageSortedGroups =
-            damageable.DamagePerGroup.OrderByDescending(damage => damage.Value)
-                .ToDictionary(x => x.Key, x => x.Value);
+        var damageSortedGroups = _damageable.GetDamagePerGroup((target, damageable))
+            .OrderByDescending(damage => damage.Value)
+            .ToDictionary(x => x.Key, x => x.Value);
 
-        var damagePerType = damageable.Damage.DamageDict;
+        var damagePerType = damage.DamageDict;
 
         DrawDiagnosticGroups(damageSortedGroups, damagePerType);
 
@@ -294,7 +297,18 @@ public sealed partial class HealthAnalyzerControl
         ConditionsListContainer.RemoveAllChildren();
         GroupsContainer.RemoveAllChildren();
 
-        DrawSolutionDiagnostics(state.Solutions);
+        var solutions = new Dictionary<NetEntity, Solution>();
+        foreach (var netEnt in state.SolutionEntities)
+        {
+            var uid = _entityManager.GetEntity(netEnt);
+
+            foreach (var (_, solution) in _solution.EnumerateSolutions(uid))
+            {
+                solutions.Add(netEnt, solution.Comp.Solution);
+            }
+        }
+
+        DrawSolutionDiagnostics(solutions);
 
         ConditionsListContainer.AddChild(new RichTextLabel
         {

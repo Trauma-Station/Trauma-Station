@@ -13,6 +13,12 @@
   id: BookshelfEntityTable
   table: !type:AllSelector
     children:
+    # <Trauma>
+    - !type:NestedSelector
+      rolls: !type:RangeNumberSelector
+        range: 0, 1
+      tableId: RandomEmptyScroll
+    # </Trauma>
     # Randomly generated books
     - id: BookRandomStory
       amount: !type:RangeNumberSelector

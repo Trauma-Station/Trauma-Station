@@ -20,9 +20,6 @@
   id: AugmentCellCasing
 
 - type: Tag
-  id: AugmentPaperworkToolElectronics
-
-- type: Tag
   id: AugmentRechargerCasing
 
 - type: Tag

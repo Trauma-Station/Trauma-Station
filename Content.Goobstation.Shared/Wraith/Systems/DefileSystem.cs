@@ -2,7 +2,7 @@
 
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared._White.ListViewSelector;
+using Content.Goobstation.Shared.ListViewSelector;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Popups;
@@ -79,10 +79,11 @@ public sealed class DefileSystem : EntitySystem
             return false;
 
         // Ensure capacity is large enough before injecting
-        var needed = solComp.Solution.Volume + solution.Volume;
-        if (needed > solComp.Solution.MaxVolume)
+        var sol = solComp.Solution;
+        var needed = solution.Volume + sol.Volume;
+        if (needed > sol.MaxVolume)
         {
-            solComp.Solution.MaxVolume = needed;
+            sol.MaxVolume = needed;
             Dirty(targetSolution.Value, solComp);
         }
 

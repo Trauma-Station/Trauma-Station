@@ -277,7 +277,7 @@
   - type: StationEvent
     weight: 1
     duration: 1
-    earliestStart: 50
+    earliestStart: 75
     minimumPlayers: 20
     maxOccurrences: 2
   - type: BlobSpawnRule

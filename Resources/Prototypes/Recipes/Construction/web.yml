@@ -8,14 +8,14 @@
   placementMode: SnapgridCenter
   canRotate: false
   canBuildInImpassable: false
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 1
+  practical:
+    TailoringKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -28,14 +28,13 @@
   placementMode: SnapgridCenter
   canRotate: false
   canBuildInImpassable: false
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 1
+  practical:
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -48,14 +47,13 @@
   placementMode: SnapgridCenter
   canRotate: false
   canBuildInImpassable: false
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 1
+  practical:
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -67,12 +65,11 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 1
+  practical:
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -85,12 +82,11 @@
   placementMode: SnapgridCenter
   canRotate: false
   canBuildInImpassable: false
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 1
+  practical:
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -102,12 +98,11 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 1
+  practical:
+    TailoringKnowledge: 2
   # </Trauma>

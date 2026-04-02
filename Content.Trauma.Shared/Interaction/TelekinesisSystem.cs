@@ -19,18 +19,13 @@ public sealed class TelekinesisSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedTetherGunSystem _tether = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private EntityQuery<AdminFrozenComponent> _frozenQuery;
-    private EntityQuery<TelekineticInteractableComponent> _targetQuery;
-    private EntityQuery<TetherGunComponent> _tetherGunQuery;
+    [Dependency] private readonly EntityQuery<AdminFrozenComponent> _frozenQuery = default!;
+    [Dependency] private readonly EntityQuery<TelekineticInteractableComponent> _targetQuery = default!;
+    [Dependency] private readonly EntityQuery<TetherGunComponent> _tetherGunQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _frozenQuery = GetEntityQuery<AdminFrozenComponent>();
-        _targetQuery = GetEntityQuery<TelekineticInteractableComponent>();
-        _tetherGunQuery = GetEntityQuery<TetherGunComponent>();
 
         // this is evil but preferable to making a new event to uncancel interaction attempts.
         // anything important that might accidentally get overriden (admin freeze) is already checked in CanUseTelekinesis

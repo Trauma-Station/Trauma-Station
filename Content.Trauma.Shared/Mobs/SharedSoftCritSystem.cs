@@ -2,6 +2,8 @@
 
 using Content.Shared.Chat;
 using Content.Shared.Pulling.Events;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Stunnable;
 using Content.Trauma.Common.Body;
@@ -37,7 +39,7 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
 
         SubscribeLocalEvent<SoftCritMobComponent, ComponentStartup>(RefreshSpeed);
         SubscribeLocalEvent<SoftCritMobComponent, ComponentShutdown>(RefreshSpeed);
-        SubscribeLocalEvent<SoftCritMobComponent, AttemptStopPullingEvent>(OnAttemptStopPulling);
+        SubscribeLocalEvent<MobStateComponent, AttemptStopPullingEvent>(OnAttemptStopPulling);
         SubscribeLocalEvent<SoftCritMobComponent, SpeechTypeOverrideEvent>(OnSpeechTypeOverride);
         SubscribeLocalEvent<SoftCritMobComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
         SubscribeLocalEvent<SoftCritMobComponent, StandUpAttemptEvent>(OnStandUpAttempt);
@@ -52,10 +54,10 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
         _movement.RefreshMovementSpeedModifiers(uid);
     }
 
-    private void OnAttemptStopPulling(Entity<SoftCritMobComponent> ent, ref AttemptStopPullingEvent args)
+    private void OnAttemptStopPulling(Entity<MobStateComponent> ent, ref AttemptStopPullingEvent args)
     {
-        // too weak to resist being pulled away into maints
-        if (ent.Owner == args.User)
+        // too weak to resist being pulled away into maints if you aren't alive
+        if (ent.Comp.CurrentState != MobState.Alive && ent.Owner == args.User)
             args.Cancelled = true;
     }
 

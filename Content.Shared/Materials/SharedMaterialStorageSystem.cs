@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Silo;
+using Content.Goobstation.Common.Silo;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Interaction;
@@ -20,11 +20,11 @@ namespace Content.Shared.Materials;
 /// </summary>
 public abstract class SharedMaterialStorageSystem : EntitySystem
 {
+    [Dependency] private readonly CommonSiloSystem _silo = default!; // Goobstation
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedSiloSystem _silo = default!; // Goobstation
 
     /// <summary>
     /// Default volume for a sheet if the material's entity prototype has no material composition.
@@ -188,9 +188,12 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         if (component.ConnectToSilo)
         {
             var silo = _silo.GetSilo(uid);
+            if (!TryComp<MaterialStorageComponent>(silo, out var siloComp))
+                return false;
+
             if (dirty && silo != null)
-                Dirty(silo.Value);
-            storage = silo != null ? silo.Value.Comp.Storage : component.Storage;
+                Dirty(silo.Value, siloComp);
+            storage = silo != null ? siloComp.Storage : component.Storage;
             storageUid = silo != null ? silo.Value : uid;
         }
         else

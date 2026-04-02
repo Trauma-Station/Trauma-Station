@@ -1,14 +1,10 @@
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Sapphire <98045970+sapphirescript@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Prototypes;
-using Robust.Shared.Localization;
-using Content.Shared._EinsteinEngines.Language;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using Content.Trauma.Common.Language;
+using Robust.Shared.Localization;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.Traits;
 

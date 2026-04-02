@@ -6,7 +6,7 @@
   requirements:
   - !type:RoleTimeRequirement
     role: JobSecurityOfficer
-    time: 5h
+    time: 1h # Trauma, was 5
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
@@ -14,7 +14,6 @@
   guides: # goobstation
   - Forensics
   - Security
-  goobcoins: 30 #Goob content
   access:
   - Security
   - Brig

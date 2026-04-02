@@ -3,7 +3,7 @@
 using Content.Server.DoAfter;
 using Content.Server.Pinpointer;
 using Content.Server.Radio.EntitySystems;
-using Content.Shared._Goobstation.Security;
+using Content.Trauma.Shared.Security;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Radio;

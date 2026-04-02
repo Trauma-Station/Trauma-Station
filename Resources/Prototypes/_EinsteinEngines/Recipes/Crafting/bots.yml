@@ -7,7 +7,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 2
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -19,7 +21,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 2
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -31,7 +35,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 2
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -43,5 +49,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 2
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
   # </Trauma>

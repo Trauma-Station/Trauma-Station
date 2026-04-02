@@ -4,13 +4,13 @@
   startNode: start
   targetNode: tile
   category: construction-category-tiles
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  useQuality: false
+  practical:
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -19,13 +19,12 @@
   startNode: start
   targetNode: coat
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  practical:
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -34,13 +33,12 @@
   startNode: start
   targetNode: jumpsuit
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  practical:
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -49,13 +47,12 @@
   startNode: start
   targetNode: jumpskirt
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  practical:
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -65,13 +62,13 @@
   startNode: start
   targetNode: cloth
   category: construction-category-materials
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  useQuality: false
+  practical:
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -80,13 +77,12 @@
   startNode: start
   targetNode: shield
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  practical:
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -95,11 +91,10 @@
   startNode: start
   targetNode: boots
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
+  practical:
+    TailoringKnowledge: 4
   # </Trauma>

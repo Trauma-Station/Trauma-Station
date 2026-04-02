@@ -5,8 +5,8 @@ using Content.Goobstation.Shared.Wraith.Components.Mobs;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Server.Actions;
 using Content.Server.Mind;
-using Content.Shared._White.RadialSelector;
 using Content.Shared.Prototypes;
+using Content.Trauma.Common.RadialSelector;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -49,7 +49,7 @@ public sealed class SummonVoidCreatureSystem : EntitySystem
     private void OnChooseVoidCreature(Entity<ChooseVoidCreatureComponent> ent, ref ChooseVoidCreatureEvent args)
     {
         _ui.TryToggleUi(ent.Owner, RadialSelectorUiKey.Key, ent.Owner);
-        _ui.SetUiState(ent.Owner, RadialSelectorUiKey.Key, new TrackedRadialSelectorState(ent.Comp.AvailableSummons));
+        _ui.SetUiState(ent.Owner, RadialSelectorUiKey.Key, new RadialSelectorState(ent.Comp.AvailableSummons));
     }
 
     private void OnSummonVoidCreatureSelected(Entity<ChooseVoidCreatureComponent> ent, ref RadialSelectorSelectedMessage args)
@@ -66,7 +66,7 @@ public sealed class SummonVoidCreatureSystem : EntitySystem
         _mind.TransferTo(mindUid, newForm, mind: mind);
         _mind.UnVisit(mindUid, mind);
 
-        EntityManager.CopyComponents(ent.Owner, newForm);
+        CopyComps(ent.Owner, newForm);
         RemComp<ChooseVoidCreatureComponent>(newForm);
 
         _ui.CloseUi(ent.Owner, RadialSelectorUiKey.Key, args.Actor);

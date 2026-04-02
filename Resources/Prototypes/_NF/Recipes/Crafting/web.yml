@@ -4,14 +4,11 @@
   startNode: start
   targetNode: end
   category: construction-category-tools
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
-  # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
-  # </Trauma>
+  practical:
+    TailoringKnowledge: 3
 
 - type: construction
   id: ClothingNeckClassicPonchoWeb
@@ -19,14 +16,11 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
-  # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
-  # </Trauma>
+  practical:
+    TailoringKnowledge: 4
 
 - type: construction
   id: ClothingNeckPonchoWeb
@@ -34,14 +28,11 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
-  # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
-  # </Trauma>
+  practical:
+    TailoringKnowledge: 4
 
 - type: construction
   id: ClothingNeckCloakWeb
@@ -49,11 +40,8 @@
   startNode: start
   targetNode: end
   category: construction-category-clothing
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   objectType: Item
-  # <Trauma>
   theory:
     SpiderCraftKnowledge: 2
-  # </Trauma>
+  practical:
+    TailoringKnowledge: 4

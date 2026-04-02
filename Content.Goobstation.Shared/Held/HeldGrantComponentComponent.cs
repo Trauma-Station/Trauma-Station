@@ -9,8 +9,8 @@ public sealed partial class HeldGrantComponentComponent : Component
 {
     [DataField(required: true)]
     [AlwaysPushInheritance]
-    public ComponentRegistry Components { get; private set; } = new();
+    public ComponentRegistry Components = new();
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public Dictionary<string, bool> Active = new();
+    [DataField]
+    public HashSet<string> Active = new();
 }

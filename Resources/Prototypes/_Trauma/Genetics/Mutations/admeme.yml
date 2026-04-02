@@ -5,6 +5,7 @@
   components:
   - type: Mutation
     locked: true # no
+    rarity: Mythical
 
 - type: entity
   parent: BaseMutationAdmeme

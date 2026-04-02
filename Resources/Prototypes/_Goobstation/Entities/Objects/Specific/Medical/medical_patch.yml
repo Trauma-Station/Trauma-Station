@@ -221,15 +221,14 @@
 - type: construction
   id: MedicalPatchMakeshift
   graph: MedicalPatchMakeshift
-  startNode: start
   targetNode: medicalPatchMakeshift
   category: construction-category-tools
   objectType: Item
   theory:
     FirstAidKnowledge: 1
-    HandmadeKnowledge: 2
+    FabricationKnowledge: 1
   practical:
-    HandmadeKnowledge: 3
+    TailoringKnowledge: 1
 
 - type: constructionGraph
   id: SilkPatchMakeshift
@@ -248,14 +247,13 @@
 - type: construction
   id: SilkPatchMakeshift
   graph: SilkPatchMakeshift
-  startNode: start
   targetNode: silkPatchMakeshift
   category: construction-category-tools
   objectType: Item
-  entityWhitelist:
-    tags:
-    - SpiderCraft
   # <Trauma>
   theory:
     SpiderCraftKnowledge: 1
+  practical:
+    TailoringKnowledge: 1
+  useQuality: false
   # </Trauma>

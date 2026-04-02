@@ -75,7 +75,7 @@
       group: None # no undergarments, i cbf to make a kobold specific one
 
 - type: entity
-  parent: [ OrganBaseHead, OrganKoboldExternal ]
+  parent: [ OrganBaseHeadBald, OrganKoboldExternal ]
   id: OrganKoboldHead
 
 - type: entity

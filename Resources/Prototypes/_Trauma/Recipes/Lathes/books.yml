@@ -1,0 +1,166 @@
+- type: latheRecipe
+  id: BaseBluePrintRecipe
+  abstract: true
+  completetime: 180
+  materials:
+    Paper: 250
+
+- type: latheRecipe
+  id: BaseBookRecipe
+  abstract: true
+  completetime: 180
+  materials:
+    Paper: 500
+
+- type: latheRecipe
+  id: BaseAdvancedBookRecipe
+  abstract: true
+  completetime: 180
+  materials:
+    Paper: 1000
+
+# Blueprints
+
+- type: latheRecipe
+  id: BookMaterials
+  parent: BaseBluePrintRecipe
+  result: BookMaterials
+
+- type: latheRecipe
+  id: BookDoors
+  parent: BaseBluePrintRecipe
+  result: BookDoors
+
+- type: latheRecipe
+  id: BookAirlocks
+  parent: BaseBluePrintRecipe
+  result: BookAirlocks
+
+- type: latheRecipe
+  id: BookToys
+  parent: BaseBluePrintRecipe
+  result: BookToys
+
+- type: latheRecipe
+  id: BookBananium
+  parent: BaseBluePrintRecipe
+  result: BookBananium
+
+- type: latheRecipe
+  id: BookBots
+  parent: BaseBluePrintRecipe
+  result: BookBots
+
+- type: latheRecipe
+  id: BookFurniture
+  parent: BaseBluePrintRecipe
+  result: BookFurniture
+
+- type: latheRecipe
+  id: BookWalls
+  parent: BaseBluePrintRecipe
+  result: BookWalls
+
+- type: latheRecipe
+  id: BookInfrastructure
+  parent: BaseBluePrintRecipe
+  result: BookInfrastructure
+
+- type: latheRecipe
+  id: BookElectronics
+  parent: BaseBluePrintRecipe
+  result: BookElectronics
+
+- type: latheRecipe
+  id: BookWindows
+  parent: BaseBluePrintRecipe
+  result: BookWindows
+
+- type: latheRecipe
+  id: BookSmokeables
+  parent: BaseBluePrintRecipe
+  result: BookSmokeables
+
+# Books
+
+- type: latheRecipe
+  id: BookMelee
+  parent: BaseBookRecipe
+  result: BookMelee
+
+- type: latheRecipe
+  id: BookStrength
+  parent: BaseBookRecipe
+  result: BookStrength
+
+- type: latheRecipe
+  id: BookShooting
+  parent: BaseBookRecipe
+  result: BookShooting
+
+- type: latheRecipe
+  id: BookSurgery
+  parent: BaseBookRecipe
+  result: BookSurgery
+
+- type: latheRecipe
+  id: BookMagicalLiteracy
+  parent: BaseBookRecipe
+  result: BookMagicalLiteracy
+
+- type: latheRecipe
+  id: BookLiteracy
+  parent: BaseBookRecipe
+  result: BookLiteracy
+
+- type: latheRecipe
+  id: BookJanitor
+  parent: BaseBookRecipe
+  result: BookJanitor
+
+- type: latheRecipe
+  id: BookFabrication
+  parent: BaseBookRecipe
+  result: BookFabrication
+
+- type: latheRecipe
+  id: BookSurvival
+  parent: BaseBookRecipe
+  result: BookSurvival
+
+# Advanced Books
+
+- type: latheRecipe
+  id: BookMeleePrinted
+  parent: BaseAdvancedBookRecipe
+  result: BookMeleePrinted
+
+- type: latheRecipe
+  id: BookSurgeryPrinted
+  parent: BaseAdvancedBookRecipe
+  result: BookSurgeryPrinted
+
+- type: latheRecipe
+  id: BookMagicalLiteracyPrinted
+  parent: BaseAdvancedBookRecipe
+  result: BookMagicalLiteracyPrinted
+
+- type: latheRecipe
+  id: BookShootingPrinted
+  parent: BaseAdvancedBookRecipe
+  result: BookShootingPrinted
+
+- type: latheRecipe
+  id: BookLanguageTauCeti
+  parent: BaseAdvancedBookRecipe
+  result: BookLanguageTauCeti
+
+- type: latheRecipe
+  id: BookFabricationPrinted
+  parent: BaseAdvancedBookRecipe
+  result: BookFabricationPrinted
+
+- type: latheRecipe
+  id: BookSurvivalPrinted
+  parent: BaseAdvancedBookRecipe
+  result: BookSurvivalPrinted

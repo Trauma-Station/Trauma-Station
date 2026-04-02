@@ -9,6 +9,8 @@
   canBuildInImpassable: true
   theory:
     WallsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
 
 - type: construction
   id: SolarPanel
@@ -18,7 +20,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
 
 # Barricades
 
@@ -32,9 +34,9 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 3 # good cading is hard
+    WallsKnowledge: 1 # good cading is hard
   practical:
-    WallsKnowledge: 4
+    MetalworkingKnowledge: 4
 
 - type: construction
   id: BarricadeSteelFolding
@@ -46,9 +48,9 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 3
+    WallsKnowledge: 2
   practical:
-    WallsKnowledge: 4
+    MetalworkingKnowledge: 4
 
 - type: construction
   id: BarricadePlasteel
@@ -60,9 +62,9 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 3
+    WallsKnowledge: 2
   practical:
-    WallsKnowledge: 4
+    MetalworkingKnowledge: 4
 
 - type: construction
   id: BarricadePlasteelFolding
@@ -74,16 +76,15 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 3
+    WallsKnowledge: 2
   practical:
-    WallsKnowledge: 4
+    MetalworkingKnowledge: 4
 
 # Airlocks
 
 - type: construction
   id: AirlockSealed
   graph: Airlock
-  startNode: start
   targetNode: sealedAirlock
   category: construction-category-structures
   objectType: Structure
@@ -92,12 +93,13 @@
   conditions:
     - !type:TileNotBlocked
   theory:
-    AirlocksKnowledge: 2
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2
 
 - type: construction
   id: AirlockSealedGlass
   graph: Airlock
-  startNode: start
   targetNode: sealedGlassAirlock
   category: construction-category-structures
   objectType: Structure
@@ -106,4 +108,6 @@
   conditions:
     - !type:TileNotBlocked
   theory:
-    AirlocksKnowledge: 2
+    AirlocksKnowledge: 1
+  practical:
+    MechanicsKnowledge: 2

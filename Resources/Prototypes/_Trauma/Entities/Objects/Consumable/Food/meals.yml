@@ -1,0 +1,389 @@
+- type: entity
+  name: bingle soup
+  parent: FoodBowlBase
+  id: FoodSoupBingle
+  description: Somehow smells even worse now.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - offensive
+      - meat
+      - carrot
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/binglesoup.rsi
+    layers:
+    - state: bowl
+    - state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Protein
+          Quantity: 10
+        - ReagentId: BingleJuice
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Meat
+    - Soup
+
+- type: entity
+  name: blood soup
+  parent: FoodBowlBase
+  id: FoodSoupBlood
+  description: Popular with Russians.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - blood
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/bloodsoup.rsi
+    layers:
+    - state: bowl
+    - state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Protein
+          Quantity: 10
+        - ReagentId: Nutriment
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Meat
+    - Soup
+
+- type: entity
+  parent: FoodBurgerBase
+  id: FoodBreadSandwich
+  name: bread sandwich
+  description: A piece of bread, sandwiched between two pieces of bread.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bread
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/breadsandwich.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodChickenParm
+  name: chicken parmesan
+  description: April 4th, 7:30 PM.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/chickenparm.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 20
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodCornDog
+  name: corn dog
+  description: battered glizzy
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/corndog.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 10
+  - type: FlavorProfile
+    flavors:
+      - offensive
+      - meat
+      - bread
+  - type: Edible
+    trash:
+    - FoodKebabSkewer
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodHotDog
+  name: hot dog
+  description: unbattered glizzy
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/hotdog.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 10
+  - type: FlavorProfile
+    flavors:
+      - offensive
+      - meat
+      - bread
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodEggToast
+  name: egg toast
+  description: It's an egg on a toast!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/eggontoast.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 10
+  - type: FlavorProfile
+    flavors:
+      - offensive
+      - meat
+      - bread
+  - type: Construction
+    graph: EggToast
+    node: finish
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodEggRaw
+  name: raw egg
+  description: It's raw!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/egg.rsi
+    state: raw
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: Egg
+          Quantity: 6
+  - type: FlavorProfile
+    flavors:
+      - egg
+  - type: Construction
+    graph: Friedeggs
+    node: start
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodEggFried
+  name: fried egg
+  description: It is safe to eat and tasty!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/egg.rsi
+    state: cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: EggCooked
+          Quantity: 6
+  - type: FlavorProfile
+    flavors:
+      - egg
+  - type: Tag
+    tags:
+    - CookedEgg
+  - type: Construction
+    graph: Friedeggs
+    node: fried
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodFairyBread
+  name: fairy bread
+  description: From Australia.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/fairybread.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: FlavorProfile
+    flavors:
+      - sweet
+      - bread
+
+- type: entity
+  parent: FoodBowlBase
+  id: FoodGoulash
+  name: goulash
+  description: Traditional in Poland.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/goulash.rsi
+    layers:
+    - state: bowl
+    - state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Protein
+          Quantity: 5
+  - type: FlavorProfile
+    flavors:
+      - meat
+      - pasta
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodOffal
+  name: offal
+  description: A rich dish made of organs.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/offal.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Protein
+          Quantity: 20
+  - type: FlavorProfile
+    flavors:
+      - meat
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodRoastedMonkey
+  name: roasted monkey
+  description: A kingly feast! It originated in Brazil!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/roastedmonkey.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 200
+        reagents:
+        - ReagentId: Protein
+          Quantity: 125
+        - ReagentId: Nutriment
+          Quantity: 65
+  - type: FlavorProfile
+    flavors:
+      - meat
+      - apple
+      - mushroom
+  - type: Tag
+    tags:
+    - Meat
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  - type: HeldSpeedModifier
+  - type: MultiHandedItem
+  - type: Edible
+    trash:
+    - FoodPlate
+    - MaterialBones1
+    - MaterialBones1
+    - MaterialBones1
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodSausage
+  name: sausage
+  description: An ancient dish, made by cooking ground meat inside of intestine.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/sausage.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Protein
+          Quantity: 10
+  - type: FlavorProfile
+    flavors:
+      - meat
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodSpire
+  name: THE SPIRE
+  description: The tower of babel rises...
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/spire.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 99999
+        reagents:
+        - ReagentId: Protein
+          Quantity: 99999
+  - type: FlavorProfile
+    flavors:
+      - meat
+      - apotheosis
+      - bread
+  - type: Tag
+    tags:
+    - Meat
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,19,1
+    storedRotation: 90
+  - type: Perishable
+    rotAfter: 9999
+    molsPerSecondPerUnitMass: 0

@@ -17,7 +17,6 @@ public static partial class PoolManager
         // @formatter:off
         // <Trauma>
         (LavalandCVars.LavalandEnabled.Name, "false"),
-        (TraumaCVars.GhostBarEnabled.Name, "false"),
         (TraumaCVars.DisablePathfinding.Name, "true"), // 5GB memory usage spike in some tests and potential deadlocking
         // </Trauma>
         (CCVars.DatabaseSynchronous.Name,     "true"),

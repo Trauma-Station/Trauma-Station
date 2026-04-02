@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Content.Shared.Body;
 // </Trauma>
 using System.Linq;
@@ -8,6 +8,7 @@ using Content.Client.UserInterface.Controls;
 using Content.Shared.Atmos;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.EntityConditions.Conditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Medical.Cryogenics;
@@ -98,9 +99,7 @@ public sealed partial class CryoPodWindow : FancyWindow
         // Health analyzer
         var maybePatient = _entityManager.GetEntity(msg.Health.TargetEntity);
         var hasPatient = msg.Health.TargetEntity.HasValue;
-        var hasDamage = (hasPatient
-             && _entityManager.TryGetComponent(maybePatient, out DamageableComponent? damageable)
-             && damageable.TotalDamage > 0);
+        var hasDamage = hasPatient && msg.HasDamage;
 
         NoDamageText.Visible = (hasPatient && !hasDamage);
         HealthSection.Visible = hasPatient;

@@ -1,6 +1,6 @@
 - type: entity
   name: haycutters
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
   id: Haycutters
   description: This kills the wire. Moo!
   components:
@@ -27,7 +27,7 @@
 
 - type: entity
   name: moodriver
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
   id: Moodriver
   description: Turn to use. Moo!
   components:
@@ -50,7 +50,7 @@
 
 - type: entity
   name: wronch
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
   id: Wronch
   description: Wronch thing. Moo!
   components:
@@ -73,7 +73,7 @@
 
 - type: entity
   name: cowbar
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
   id: Cowbar
   description: Cow your problems away. Moo!
   components:
@@ -118,7 +118,7 @@
 
 - type: entity
   name: cowelding tool
-  parent: Welder
+  parent: [Welder, MetalToolDurabilityWeak] # Trauma
   id: Cowelder
   description: "Melts anything as long as it's fueled, don't forget your eye protection! Moo!"
   components:
@@ -154,7 +154,7 @@
 
 - type: entity
   name: cow toolbox
-  parent: ToolboxBase
+  parent: [ToolboxBase, MetalToolDurabilityWeak] # Trauma
   id: CowToolbox
   description: A weirdly shaped box, stocked with... tools?
   components:

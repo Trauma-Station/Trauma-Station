@@ -4,14 +4,16 @@
   description: job-description-lawyer
   playTimeTracker: JobLawyer
   requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 2.5h
+    # - !type:OverallPlaytimeRequirement
+    #   time: 2.5h
+    - !type:DepartmentTimeRequirement # Trauma
+      department: Security
+      time: 1h
   startingGear: LawyerGear
   icon: "JobIconLawyer"
   supervisors: job-supervisors-hop
   guides: # goobstation
   - SpaceLaw
-  goobcoins: 10 #Goob content
   access:
   #- Service # Trauma - piss off
   - Lawyer

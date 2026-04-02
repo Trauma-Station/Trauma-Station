@@ -7,5 +7,8 @@
   canBuildInImpassable: false
   targetNode: detector
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
     InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 2
+    ElectronicsKnowledge: 2

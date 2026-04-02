@@ -6,9 +6,9 @@
   description: A sterilized microchip assembly that can directly interface with the brain.
   components:
   - type: Sprite
-    sprite: Objects/Misc/module.rsi # TODO: make unique sprite
+    sprite: _Trauma/Objects/Specific/brain_chips.rsi
     layers:
-    - state: cpu_super
+    - state: icon
   - type: Item
     size: Tiny
   - type: Inorganic
@@ -17,11 +17,15 @@
   - type: Organ
     category: BrainChip
   - type: ChildOrgan
-    parentCategory: Head
+    parents: [ Head ]
   - type: OrganExamine
     examine: brainchip-detail-examine
   - type: RenamingOrgan
     name: brainchip-rename # they get anonymized once installed so health analyzer etc can't out you
+  - type: Cybernetics
+    disableChance: 0.1 # should be a rare funny thing rather than common huge annoyance
+    empDamage:
+      types: {} # losing your skills is the focus
   # TODO: skills guide examine
 
 - type: entity

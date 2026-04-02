@@ -4,3 +4,10 @@
   interval: 5.0
   chance: 0.7
   withChat: false
+
+- type: autoEmote
+  id: TweakBox
+  emote: Tweak
+  interval: 5.0
+  chance: 0.3
+  withChat: true

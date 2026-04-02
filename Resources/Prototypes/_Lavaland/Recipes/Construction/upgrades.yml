@@ -5,7 +5,6 @@
   targetNode: crystal
   objectType: Item
   theory:
-    TechnologyKnowledge: 2
     WeaponsKnowledge: 2
 
 - type: construction
@@ -15,7 +14,6 @@
   targetNode: crystal
   objectType: Item
   theory:
-    TechnologyKnowledge: 2
     WeaponsKnowledge: 2
 
 - type: construction
@@ -25,5 +23,4 @@
   targetNode: crystal
   objectType: Item
   theory:
-    TechnologyKnowledge: 2
     WeaponsKnowledge: 2

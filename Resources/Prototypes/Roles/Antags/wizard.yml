@@ -19,5 +19,6 @@
     species:
     - Plasmaman
   guides: [ Wizard ]
+  creditImage: /Textures/_Trauma/EndCredits/Antags/wizard.png # Trauma
 
 # See wizard_startinggear for wiz start gear options

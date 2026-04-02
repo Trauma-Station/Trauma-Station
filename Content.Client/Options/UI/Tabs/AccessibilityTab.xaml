@@ -18,6 +18,7 @@
                 <!-- <Trauma> -->
                 <CheckBox Name="HighlightSoundCheckBox" Text="{Loc 'ui-options-highlight-sound'}" />
                 <CheckBox Name="SkillPopupsCheckBox" Text="{Loc 'ui-options-show-skill-popups'}" />
+                <CheckBox Name="MovieCreditsCheckBox" Text="{Loc 'round-end-credits-trauma-show-credits'}" />
                 <!-- </Trauma> -->
                 <ui:OptionColorSlider Name="HighlightsColorSlider"
                     Title="{Loc 'ui-options-highlights-color'}"

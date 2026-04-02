@@ -32,8 +32,10 @@
     allowedStates:
     - Critical
     damage:
-      groups:
-        Brute: -15
+      types:
+        Blunt: -5
+        Slash: -5
+        Piercing: -5
   - type: HTN
     rootTask:
       task: SimpleHostileCompound

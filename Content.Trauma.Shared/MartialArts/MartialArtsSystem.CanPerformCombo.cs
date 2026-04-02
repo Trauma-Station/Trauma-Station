@@ -18,13 +18,10 @@ namespace Content.Trauma.Shared.MartialArts;
 public partial class MartialArtsSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
-
-    private EntityQuery<CanPerformComboComponent> _comboQuery;
+    [Dependency] private readonly EntityQuery<CanPerformComboComponent> _comboQuery = default!;
 
     private void InitializeCanPerformCombo()
     {
-        _comboQuery = GetEntityQuery<CanPerformComboComponent>();
-
         SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
     }
@@ -133,7 +130,7 @@ public partial class MartialArtsSystem
     }
 
     private int GetMartialArtLevel(EntityUid uid)
-        => _knowledge.GetActiveMartialArt(uid) is {} unit
+        => _knowledge.GetActiveMartialArt(uid) is { } unit
             ? _knowledge.GetLevel(unit)
             : 0;
 }

@@ -14,11 +14,11 @@ public sealed class DamageModifyKnowledgeSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<KnowledgeHolderComponent, BeforeDamageChangedEvent>(_knowledge.RelayActiveEvent);
-        SubscribeLocalEvent<DamageModifyKnowledgeComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
+        SubscribeLocalEvent<KnowledgeHolderComponent, DamageModifyEvent>(_knowledge.RelayActiveEvent);
+        SubscribeLocalEvent<DamageModifyKnowledgeComponent, DamageModifyEvent>(OnDamageModify);
     }
 
-    private void OnBeforeDamageChanged(Entity<DamageModifyKnowledgeComponent> ent, ref BeforeDamageChangedEvent args)
+    private void OnDamageModify(Entity<DamageModifyKnowledgeComponent> ent, ref DamageModifyEvent args)
     {
         // most environment things like radiation should have no origin?
         if (args.Damage.GetTotal() <= 0 || args.Origin == null)

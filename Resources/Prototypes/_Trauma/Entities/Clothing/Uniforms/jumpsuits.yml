@@ -80,3 +80,25 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/tigerStripes.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: naked
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitDisgusting
+  name: disgusting clothing
+  description: It smells almost as bad as the person wearing it.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/disgusting.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/disgusting.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWaiter
+  name: waiter outfit
+  description: Commonplace in the food service industry.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/waiter.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/waiter.rsi

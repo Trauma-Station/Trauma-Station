@@ -6,13 +6,13 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobChemist
-      time: 2.5h
+      time: 1h # Trauma was 2.5
     - !type:RoleTimeRequirement
       role: JobMedicalDoctor
-      time: 5h
+      time: 2h # Trauma was 5
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 10h
+      time: 5h # Trauma was 10
   weight: 10
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
@@ -23,7 +23,6 @@
   - Command
   - Chemicals
   - Virology
-  goobcoins: 40 #Goob content
   access:
   - Medical
   - Command

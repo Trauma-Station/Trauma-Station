@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Barks;
 using Content.Trauma.Common.Knowledge;
 using Robust.Shared.Prototypes;
@@ -13,5 +15,5 @@ public sealed partial class HumanoidProfileComponent
     public ProtoId<BarkPrototype> BarkVoice = HumanoidProfileSystem.DefaultBarkVoice;
 
     [DataField]
-    public KnowledgeProfile Knowledge = new(new());
+    public KnowledgeProfile Knowledge = new();
 }

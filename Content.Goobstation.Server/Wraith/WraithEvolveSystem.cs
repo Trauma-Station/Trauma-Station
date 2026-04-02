@@ -4,11 +4,11 @@ using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Server.Actions;
 using Content.Server.Mind;
-using Content.Shared._White.RadialSelector;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
+using Content.Trauma.Common.RadialSelector;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -27,6 +27,7 @@ public sealed class WraithEvolveSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly SharedPopupSystem _popups = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -56,7 +57,7 @@ public sealed class WraithEvolveSystem : EntitySystem
             return;
 
         _ui.TryToggleUi(ent.Owner, RadialSelectorUiKey.Key, ent.Owner);
-        _ui.SetUiState(ent.Owner, RadialSelectorUiKey.Key, new TrackedRadialSelectorState(ent.Comp.AvailableEvolutions));
+        _ui.SetUiState(ent.Owner, RadialSelectorUiKey.Key, new RadialSelectorState(ent.Comp.AvailableEvolutions));
 
         args.Handled = true;
     }
@@ -86,7 +87,7 @@ public sealed class WraithEvolveSystem : EntitySystem
         _mind.TransferTo(mindUid, newForm, mind: mind);
         _mind.UnVisit(mindUid, mind);
 
-        EntityManager.CopyComponents(uid, newForm);
+        CopyComps(uid, newForm);
 
         _admin.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent.Owner)} evolved to {ToPrettyString(newForm)} as a Wraith");
 

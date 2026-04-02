@@ -463,7 +463,7 @@
       - MobState
     damage:
       types:
-        Burn: 3
+        Heat: 3
         Holy: 20
     effect: { sprite: /Textures/_ShitChap/Effects/holy_beam.rsi, state: beam }
     sound: /Audio/Effects/holy.ogg

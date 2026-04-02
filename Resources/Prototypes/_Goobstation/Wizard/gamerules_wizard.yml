@@ -181,14 +181,17 @@
 - type: gamePreset
   id: Wizard
   alias:
-    - wiz
+  - wiz
   name: wizard-title
   description: wizard-description
   showInVote: false
   rules:
-    - Wizard
-    - SleepersOnWizardDeath
-    - BasicStationEventScheduler
-    - SpaceTrafficControlEventScheduler
-    - BasicRoundstartVariation
-    - SubGamemodesRule
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRuleNoWizard
+  - Wizard
+  - SleepersOnWizardDeath

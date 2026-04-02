@@ -17,6 +17,7 @@
     size: Huge
   - type: ItemToggle
     onUse: false
+  - type: InteractionOutline
   - type: DoAfter
   - type: Physics
     bodyType: Dynamic
@@ -105,7 +106,7 @@
   components:
   - type: AutoSurgeon
     entries:
-    - targetCategory: Heart
+    - targetCategory: Torso
       newOrganProto: OrganHeartSandevistan
 
 - type: entity
@@ -139,7 +140,7 @@
   components:
   - type: AutoSurgeon
     entries:
-    - targetCategory: Heart
+    - targetCategory: Torso
       newOrganProto: SyndicateBerserkerHeart
 
 - type: entity
@@ -149,5 +150,5 @@
   components:
   - type: AutoSurgeon
     entries:
-    - targetCategory: Heart
+    - targetCategory: Torso
       newOrganProto: SyndicateJumpstarterHeart

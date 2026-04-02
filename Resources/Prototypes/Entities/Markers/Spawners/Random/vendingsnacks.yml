@@ -26,4 +26,9 @@
       - VendingMachineSnackTeal
       - VendingMachineChang
       - VendingMachineDonut
-    chance: 1
+    chance: 0.99 # Trauma, was 1
+    # <Trauma>
+    rarePrototypes:
+    - RandomVendingSnacksMimic
+    rareChance: 0.01
+    # </Trauma>

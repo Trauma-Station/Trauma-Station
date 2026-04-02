@@ -28,13 +28,12 @@ public sealed class ShadowGrappleSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private readonly EntityQuery<HandheldLightComponent> _handheldQuery = default!;
 
     private const string GrappleJoint = "grappling";
 
     private static readonly EntProtoId Ash = "Ash";
-
-    private EntityQuery<MobStateComponent> _mobStateQuery;
-    private EntityQuery<HandheldLightComponent> _handheldQuery;
 
     private readonly HashSet<Entity<PoweredLightComponent>> _lights = new();
 
@@ -48,9 +47,6 @@ public sealed class ShadowGrappleSystem : EntitySystem
 
         SubscribeLocalEvent<ShadowGrappleComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ShadowGrappleComponent, ComponentShutdown>(OnShutdown);
-
-        _mobStateQuery = GetEntityQuery<MobStateComponent>();
-        _handheldQuery = GetEntityQuery<HandheldLightComponent>();
     }
 
     private void OnEmbed(Entity<ShadowGrappleProjectileComponent> ent, ref ProjectileEmbedEvent args)
@@ -78,19 +74,21 @@ public sealed class ShadowGrappleSystem : EntitySystem
             return;
 
         var target = args.Target;
-        _throwing.TryThrow(shooter, Transform(target).Coordinates, 10f, shooter, doSpin: true);
 
-        // Body, apply damage
-        if (_mobStateQuery.HasComp(target))
+        // Body, apply damage and throw them to us
+        if (_mobQuery.HasComp(target))
         {
             _damage.TryChangeDamage(target, ent.Comp.DamageOnHit);
             BreakLightsOnTarget(target);
 
             _stun.TryAddParalyzeDuration(target, ent.Comp.StunTime);
+
+            _throwing.TryThrow(target, Transform(shooter).Coordinates, 10f, shooter, doSpin: true);
             return;
         }
 
-        // Not a body, just destroy nearby lights
+        // Not a body, just destroy nearby lights and throw us there
+        _throwing.TryThrow(shooter, Transform(target).Coordinates, 10f, shooter, doSpin: true);
         BreakNearbyLights(target, args.Shooter, ent.Comp.BreakLightsRange);
     }
 
@@ -135,4 +133,4 @@ public sealed class ShadowGrappleSystem : EntitySystem
         }
     }
     #endregion
- }
+}

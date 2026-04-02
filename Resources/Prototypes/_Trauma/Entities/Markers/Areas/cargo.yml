@@ -17,6 +17,30 @@
 
 - type: entity
   parent: BaseAreaCargo
+  id: AreaCargoLobby
+  name: cargo lobby
+  components:
+  - type: Sprite
+    state: cargo_lobby
+
+- type: entity
+  parent: BaseAreaCargo
+  id: AreaCargoOffice
+  name: cargo office
+  components:
+  - type: Sprite
+    state: cargo_office
+
+- type: entity
+  parent: BaseAreaCargo
+  id: AreaPodBay
+  name: podbay
+  components:
+  - type: Sprite
+    state: podbay
+
+- type: entity
+  parent: BaseAreaCargo
   id: AreaSalvage
   name: salv
   components:

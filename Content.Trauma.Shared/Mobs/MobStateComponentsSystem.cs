@@ -13,16 +13,11 @@ namespace Content.Trauma.Shared.Mobs;
 public sealed class MobStateComponentsSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-
-    private EntityQuery<AliveMobComponent> _aliveQuery;
-    private EntityQuery<SleepingComponent> _sleepingQuery;
+    [Dependency] private readonly EntityQuery<SleepingComponent> _sleepingQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _aliveQuery = GetEntityQuery<AliveMobComponent>();
-        _sleepingQuery = GetEntityQuery<SleepingComponent>();
 
         SubscribeLocalEvent<MobStateComponent, MapInitEvent>(OnMapInit);
 

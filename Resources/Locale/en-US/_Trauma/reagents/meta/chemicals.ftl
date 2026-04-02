@@ -1,3 +1,6 @@
+reagent-name-cement = cement
+reagent-desc-cement = A chemical used for making bricks.
+
 reagent-name-potassium-sulfate = potassium sulfate
 reagent-desc-potassium-sulfate = Potassium in a water-soluble form, providing both potassium and sulfur. Used primarily as a fertilizer for plants.
 
@@ -48,3 +51,6 @@ reagent-desc-calcium-oxide = Also known as quicklime, used in cement, reacts wit
 
 reagent-name-calcium-hydroxide = calcium hydroxide
 reagent-desc-calcium-hydroxide = The result of calcium oxide reacting with water.
+
+reagent-name-burnite = burnite
+reagent-desc-burnite = Basically just chemical flame, it can create fires even in space! Well, as long as it's on a tile that is.

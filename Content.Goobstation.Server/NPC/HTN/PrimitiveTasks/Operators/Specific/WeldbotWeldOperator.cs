@@ -11,7 +11,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using System.Linq;
@@ -27,8 +26,7 @@ public sealed partial class WeldbotWeldOperator : HTNOperator
     private SharedAudioSystem _audio = default!;
     private SharedInteractionSystem _interaction = default!;
     private SharedPopupSystem _popup = default!;
-    private DamageableSystem _damageableSystem = default!;
-    private TagSystem _tagSystem = default!;
+    private DamageableSystem _damageable = default!;
 
     /// <summary>
     /// Target entity to inject.
@@ -44,8 +42,7 @@ public sealed partial class WeldbotWeldOperator : HTNOperator
         _audio = sysManager.GetEntitySystem<SharedAudioSystem>();
         _interaction = sysManager.GetEntitySystem<SharedInteractionSystem>();
         _popup = sysManager.GetEntitySystem<SharedPopupSystem>();
-        _damageableSystem = sysManager.GetEntitySystem<DamageableSystem>();
-        _tagSystem = sysManager.GetEntitySystem<TagSystem>();
+        _damageable = sysManager.GetEntitySystem<DamageableSystem>();
     }
 
     public override void TaskShutdown(NPCBlackboard blackboard, HTNOperatorStatus status)
@@ -63,24 +60,21 @@ public sealed partial class WeldbotWeldOperator : HTNOperator
 
         if (!_entMan.TryGetComponent<RepairableComponent>(target, out var repairComp)
             || !_entMan.TryGetComponent<WeldbotComponent>(owner, out var botComp)
-            || !_entMan.TryGetComponent<DamageableComponent>(target, out var damage)
-            || !_interaction.InRangeUnobstructed(owner, target)
-            || damage.Damage.DamageDict.Keys.Intersect(botComp.DamageAmount.DamageDict.Keys).All(key => damage.Damage.DamageDict[key] == 0)
-            && !_entMan.HasComponent<EmaggedComponent>(owner))
+            || !_entMan.TryGetComponent<DamageableComponent>(target, out var damageable)
+            || !_interaction.InRangeUnobstructed(owner, target))
             return HTNOperatorStatus.Failed;
 
-        if (botComp.IsEmagged)
-        {
-            _damageableSystem.ChangeDamage((target, damage), -botComp.DamageAmount, true, false);
-        }
-        else
-        {
-            _damageableSystem.ChangeDamage((target, damage), botComp.DamageAmount, true, false);
-        }
+        var damage = _damageable.GetAllDamage((target, damageable));
+        var emagged = _entMan.HasComponent<EmaggedComponent>(owner);
+        if (!emagged && damage.DamageDict.Keys.Intersect(botComp.DamageAmount.DamageDict.Keys).All(key => damage.DamageDict[key] == 0))
+            return HTNOperatorStatus.Failed; // nothing to heal
+
+        var dealt = botComp.IsEmagged ? -botComp.DamageAmount : botComp.DamageAmount;
+        _damageable.ChangeDamage((target, damageable), dealt, true, false, origin: owner);
 
         _audio.PlayPvs(botComp.WeldSound, target);
 
-        if (damage.Damage.DamageDict.Keys.Intersect(botComp.DamageAmount.DamageDict.Keys).All(key => damage.Damage.DamageDict[key] == 0)) //only say "all done if we're actually done!"
+        if (damage.DamageDict.Keys.Intersect(botComp.DamageAmount.DamageDict.Keys).All(key => damage.DamageDict[key] == 0)) // only say "all done!" if we're actually done
             _chat.TrySendInGameICMessage(owner, Loc.GetString("weldbot-finish-weld"), InGameICChatType.Speak, hideChat: true, hideLog: true);
 
         return HTNOperatorStatus.Finished;

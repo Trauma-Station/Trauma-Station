@@ -1,6 +1,9 @@
 # Trauma - only up to date maps are in the default pool
 - type: gameMapPool
   id: DefaultMapPool
+  requiredAreas:
+  - AreaKitchen # for chef CQC
+  - AreaMaints # for ambience and maints spawn rules
   maps:
   #- Atlas
   #- Amber
@@ -8,15 +11,13 @@
   - Box
   #- Cluster
   - Fland
-  - FlandHighPop
   - Loop
   - Marathon
   - Meta
   - Oasis
-  - OasisHighPop
   #- Omega
   - Origin
-  #- Saltern
+  - Saltern
   #- Packed
   #- Barratry
   - Kettle
@@ -27,3 +28,4 @@
   - Cog
   - Reach
   #- Serpentcrest
+  - Nume

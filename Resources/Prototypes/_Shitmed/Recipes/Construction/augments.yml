@@ -10,7 +10,6 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-    ScienceKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -23,7 +22,6 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-    ScienceKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -36,7 +34,6 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-    ScienceKnowledge: 2
   # </Trauma>
 
 # Arm
@@ -51,7 +48,6 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-    ScienceKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -64,20 +60,6 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-    ScienceKnowledge: 2
-  # </Trauma>
-
-- type: construction
-  id: AugmentPaperworkPanel
-  graph: AugmentToolsPanel
-  startNode: start
-  targetNode: "paperwork tools panel"
-  category: construction-category-utilities
-  canBuildInImpassable: false
-  # <Trauma>
-  theory:
-    ElectronicsKnowledge: 2
-    ScienceKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -90,7 +72,6 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-    ScienceKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -103,8 +84,6 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-    ScienceKnowledge: 3
   practical:
     ElectronicsKnowledge: 3
-    ScienceKnowledge: 4
   # </Trauma>

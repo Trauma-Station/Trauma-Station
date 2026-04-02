@@ -13,12 +13,10 @@ public sealed partial class GeneticsConsoleSystem
 {
     private List<SequenceState> _sequences = new();
 
-    private EntityQuery<GeneticsScannerComponent> _scannerQuery;
+    [Dependency] private readonly EntityQuery<GeneticsScannerComponent> _scannerQuery = default!;
 
     private void InitializeScanner()
     {
-        _scannerQuery = GetEntityQuery<GeneticsScannerComponent>();
-
         SubscribeLocalEvent<GeneticsScannerComponent, ScannerConnectedEvent>(OnScannerConnected);
         SubscribeLocalEvent<GeneticsScannerComponent, ScannerDisconnectedEvent>(OnScannerDisconnected);
         SubscribeLocalEvent<GeneticsScannerComponent, ScannerInsertedEvent>(OnScannerInserted);
@@ -139,7 +137,9 @@ public sealed partial class GeneticsConsoleSystem
 
     private void SetScannedMob(Entity<GeneticsScannerComponent?> ent, EntityUid? mob)
     {
-        if (!_scannerQuery.Resolve(ent, ref ent.Comp) || ent.Comp.ScannedMob == mob)
+        if (TerminatingOrDeleted(ent) ||
+            !_scannerQuery.Resolve(ent, ref ent.Comp) ||
+            ent.Comp.ScannedMob == mob)
             return;
 
         ent.Comp.ScannedMob = mob;

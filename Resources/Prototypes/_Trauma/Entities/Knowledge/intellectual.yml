@@ -5,7 +5,7 @@
   components:
   - type: Knowledge
     experienceCost: 30
-    costs: [0, 8, 12, 16, 20, 24, 32] # magic is hard...
+    costs: [0, 3, 6, 9, 12, 15] # magic is hard...
 
 - type: entity
   parent: BaseIntellectualKnowledge
@@ -14,4 +14,3 @@
   components:
   - type: Knowledge
     experienceCost: 20
-    costs: [0, 0, 1, 2, 4, 8] # almost everyone learns how to read at a basic level

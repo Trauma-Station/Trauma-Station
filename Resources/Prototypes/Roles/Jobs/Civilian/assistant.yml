@@ -7,7 +7,6 @@
   icon: "JobIconPassenger"
   supervisors: job-supervisors-everyone
   guides: [ Civilian ] # Trauma
-  goobcoins: 0 # Trauma
   access:
   - Maintenance
   # <Trauma>

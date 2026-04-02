@@ -62,7 +62,7 @@
   - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
     skills:
-      MartialArtCapoeira: 70
+      MartialArtCapoeira: 26 # Starts you with all moves, +12.5% movespeed, +50% attack speed, +50% damage
     doAfter: 2
   - type: GuideHelp
     guides:

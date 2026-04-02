@@ -7,6 +7,8 @@
   - type: DepartmentArea
     department: Engineering
 
+# Engi
+
 - type: entity
   parent: BaseAreaEngineering
   id: AreaEngineering
@@ -16,9 +18,159 @@
     state: engie
 
 - type: entity
+  parent: AreaEngineering
+  id: AreaEngine
+  name: engine room
+  components:
+  - type: Sprite
+    state: engine
+
+- type: entity
+  parent: AreaEngineering
+  id: AreaEngineBreak
+  name: engi break room
+  components:
+  - type: Sprite
+    state: engine_break
+
+- type: entity
+  parent: AreaEngineering
+  id: AreaEngineControl
+  name: engine control room
+  components:
+  - type: Sprite
+    state: engine_control
+
+- type: entity
+  parent: AreaEngineering
+  id: AreaEngineLobby
+  name: engi lobby
+  components:
+  - type: Sprite
+    state: engine_lobby
+
+- type: entity
+  parent: AreaEngineering
+  id: AreaEngineMonitor
+  name: engine monitor room
+  components:
+  - type: Sprite
+    state: engine_monitor
+
+- type: entity
+  parent: AreaEngineering
+  id: AreaEngineSM
+  name: supermatter engine
+  components:
+  - type: Sprite
+    state: engine_sm
+
+- type: entity
+  parent: AreaEngineering
+  id: AreaEngineSMRoom
+  name: engi supermatter room
+  components:
+  - type: Sprite
+    state: engine_sm_room
+
+- type: entity
+  parent: AreaEngineering
+  id: AreaEngineSmes
+  name: engi smes room
+  components:
+  - type: Sprite
+    state: engine_smes
+
+- type: entity
+  parent: AreaEngineering
+  id: AreaEngineStorage
+  name: engi storage room
+  components:
+  - type: Sprite
+    state: engine_storage
+
+# Atmos
+
+- type: entity
   parent: BaseAreaEngineering
   id: AreaAtmos
   name: atmos
   components:
   - type: Sprite
     state: atmos
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaAtmosEngine
+  name: atmos engine
+  suffix: TEG
+  components:
+  - type: Sprite
+    state: atmos_engine
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaAtmosOffice
+  name: atmos office
+  components:
+  - type: Sprite
+    state: atmos_office
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaAtmosGasStorage
+  name: atmos gas storage
+  components:
+  - type: Sprite
+    state: atmos_gas_storage
+
+# Engi adjacent
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaSubstation
+  name: substation locker
+  components:
+  - type: Sprite
+    state: substation
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaGravGen
+  name: grav gen
+  components:
+  - type: Sprite
+    state: grav_gen
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaSolarPanels
+  name: solar panels
+  description: For the solars airlocks, counts as inside engi.
+  components:
+  - type: Sprite
+    state: solar_panels
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaStationAnchor
+  name: station anchor
+  components:
+  - type: Sprite
+    state: anchor
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaTechStorage
+  name: tech storage
+  components:
+  - type: Sprite
+    state: tech_storage
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaTelecomms
+  name: telecomms
+  components:
+  - type: Sprite
+    state: tcom_sat

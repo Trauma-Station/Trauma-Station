@@ -14,7 +14,7 @@
   theory:
     FurnitureKnowledge: 0
   practical:
-    FurnitureKnowledge: 2
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -32,7 +32,7 @@
   theory:
     FurnitureKnowledge: 1
   practical:
-    FurnitureKnowledge: 3
+    MetalworkingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -50,7 +50,7 @@
   theory:
     FurnitureKnowledge: 0
   practical:
-    FurnitureKnowledge: 2
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 # ItemCabinets
@@ -67,7 +67,9 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
   # </Trauma>
 
 # Shelfs
@@ -85,7 +87,7 @@
   # <Trauma>
   theory: {} # it's 2 pieces of wood
   practical:
-    FurnitureKnowledge: 0 # nailing it to the wall or smth
+    CarvingKnowledge: 1 # nailing it to the wall or smth
   # </Trauma>
 
 - type: construction
@@ -102,7 +104,7 @@
   theory:
     FurnitureKnowledge: 0
   practical:
-    FurnitureKnowledge: 1
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -117,7 +119,9 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 # Reinforced
@@ -134,6 +138,8 @@
   # <Trauma>
   theory:
     FurnitureKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -148,7 +154,9 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -163,7 +171,9 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 # Departmental
@@ -179,7 +189,9 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -194,7 +206,9 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -209,5 +223,7 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>

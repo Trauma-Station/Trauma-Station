@@ -5,7 +5,6 @@
   components:
   - type: Knowledge
     experienceCost: 20
-    costs: [0, 3, 6, 10, 14] # no goku
   - type: ExperienceOnDamage # kenshi parity
   - type: DamageModifyKnowledge
     # same as stamina damage im lazy

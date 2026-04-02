@@ -10,33 +10,10 @@ public sealed partial class TraumaCVars
     #region Disabling features
 
     /// <summary>
-    /// Whether to enable the ghost bar.
-    /// This is not implemented in the UI, it is just to make tests not take 500 years to run.
-    /// </summary>
-    public static readonly CVarDef<bool> GhostBarEnabled =
-        CVarDef.Create("trauma.ghost_bar_enabled", true, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
     /// Whether to disable pathfinding, used for tests to not balloon memory usage and runtime.
     /// </summary>
     public static readonly CVarDef<bool> DisablePathfinding =
         CVarDef.Create("trauma.disable_pathfinding", false, CVar.SERVER);
-
-    #endregion
-
-    #region Mining rewards
-
-    /// <summary>
-    /// Maximum currency to possibly give a player from mining in a round.
-    /// </summary>
-    public static readonly CVarDef<int> MiningRewardLimit =
-        CVarDef.Create("trauma.mining_reward_limit", 100, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    /// How many mining points give 1 currency.
-    /// </summary>
-    public static readonly CVarDef<int> MiningRewardRatio =
-        CVarDef.Create("trauma.mining_reward_ratio", 50, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
 
@@ -133,8 +110,36 @@ public sealed partial class TraumaCVars
     /// Delay between each error message in seconds.
     /// Used to avoid hitting ratelimits
     /// </summary>
-    public static readonly CVarDef<double> ErrorWebhookDelay =
-        CVarDef.Create("trauma.error_webhook_delay", 0.3, CVar.SERVER);
+    public static readonly CVarDef<float> ErrorWebhookDelay =
+        CVarDef.Create("trauma.error_webhook_delay", 0.3f, CVar.SERVER);
+
+    #endregion
+
+    #region EndCredits
+
+    /// <summary>
+    /// Whether to play the cool end credits.
+    /// </summary>
+    public static readonly CVarDef<bool> PlayMovieEndCredits =
+        CVarDef.Create("trauma.play_credits", true, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    #endregion
+
+    #region Decals
+
+    /// <summary>
+    /// How long despawning decals like footprints and blood splatters last before despawning.
+    /// </summary>
+    public static readonly CVarDef<float> DecalDespawnTime =
+        CVarDef.Create("trauma.decal_despawn_time", 300f, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// How many decals are allowed to be despawning at the same time.
+    /// If another decal is spawned, it will remove the oldest decal.
+    /// If this value is changed ingame it will only take affected after restarting the round.
+    /// </summary>
+    public static readonly CVarDef<int> DecalDespawnLimit =
+        CVarDef.Create("trauma.decal_despawn_limit", 128, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
 }

@@ -8,6 +8,9 @@
   # <Trauma>
   theory:
     FurnitureKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -19,7 +22,10 @@
   objectType: Structure
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -31,8 +37,11 @@
   objectType: Structure
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
-    ElectronicsKnowledge: 2
+    FurnitureKnowledge: 1
+    ElectronicsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -45,8 +54,10 @@
   objectType: Structure
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
-    TechnologyKnowledge: 2
+    FurnitureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -58,7 +69,8 @@
   objectType: Structure
   # <Trauma>
   theory:
-    FurnitureKnowledge: 2
+    FurnitureKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -71,7 +83,10 @@
   objectType: Structure
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    CarvingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -84,7 +99,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -97,7 +113,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -110,7 +127,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -122,8 +140,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
-    TechnologyKnowledge: 2
+    FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -135,5 +153,8 @@
   objectType: Structure
   # <Trauma>
   theory:
-    HandmadeKnowledge: 1
+    FabricationKnowledge: 1
+  practical:
+    CarvingKnowledge: 2
+  useQuality: false
   # </Trauma>

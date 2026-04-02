@@ -1,0 +1,74 @@
+- type: entity
+  abstract: true
+  parent: BaseMetallic
+  id: BaseMetallicProcGen
+  components:
+  - type: Metallic
+    # these get set from the chosen metal at runtime
+    minTemp: 0
+    idealTemp: 0
+    metal: null
+
+- type: entity
+  parent: [ BaseForgeItem, BaseMetallicProcGen ]
+  id: UnfinishedForgedItem
+  name: unfinished thing
+  description: Finish it by smashing it into shape with a hammer!
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_brass # gets replaced by metal.ingotSprite
+      shader: Emissive
+  - type: Metallic
+    workable: true
+  - type: Workable
+    remaining: 100 # gets replaced by item.work * metal.workScale
+    result: UnfinishedForgedItem # replaced by item.result
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ] # broke it into pieces...
+
+- type: entity
+  abstract: true
+  parent: BaseForgeItem
+  id: BaseForgedReadyItem
+  components:
+  # these get color changed from the metal
+  - type: Sprite
+    layers:
+    - state: icon
+      shader: Emissive
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        shader: Emissive
+      right:
+      - state: inhand-right
+        shader: Emissive
+  - type: Metallic
+    minTemp: 353 # 80C, basically stone cold for metals
+    idealTemp: 383 # don't heat it up too much or it's hard to work with
+    workable: true # need to let it cool now
+    metal: null
+
+# Procedural piece forged from ingots. still hot, needs quenching for crafting
+
+- type: entity
+  parent: BaseForgedReadyItem
+  id: ForgedPart
+  description: Let it cool for a while or quench it.
+  categories: [ HideSpawnMenu ] # procedurally generated, no spawn menu!
+  components:
+  # TODO: quenching vs air cooling should matter, heat treatment gameplay
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi # gets replaced with the actual item
+    layers:
+    - state: icon
+      map: [ "enum.MetallicVisuals.Layer" ]
+      shader: Emissive

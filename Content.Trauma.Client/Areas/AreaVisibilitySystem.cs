@@ -24,7 +24,7 @@ public sealed class AreaVisibilitySystem : CommonAreaVisibilitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AreaComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<AreaComponent, ComponentInit>(OnInit);
 
         SandboxWindow.OnOpened += OnOpened;
     }
@@ -50,14 +50,15 @@ public sealed class AreaVisibilitySystem : CommonAreaVisibilitySystem
         SetVisible(!_visible);
     }
 
-    private void OnStartup(Entity<AreaComponent> ent, ref ComponentStartup args)
+    private void OnInit(Entity<AreaComponent> ent, ref ComponentInit args)
     {
         UpdateVisibility(ent);
     }
 
     private void UpdateVisibility(EntityUid uid)
     {
-        if (Transform(uid).MapID == MapId.Nullspace)
+        // don't hide them in the spawnmenu
+        if (Transform(uid).MapID == MapId.Nullspace && IsClientSide(uid))
             return;
 
         _sprite.SetVisible(uid, _visible);

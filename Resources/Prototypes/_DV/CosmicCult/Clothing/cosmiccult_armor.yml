@@ -58,8 +58,8 @@
   - type: PointLight
     enabled: false
     color: "#42a4ae"
-    radius: 5
-    energy: 3.4
+    radius: 7
+    energy: 5.4
     mask: /Textures/_DV/CosmicCult/LightMasks/cosmic.png
     autoRot: true
     netsync: false
@@ -80,6 +80,7 @@
         startValue: 0.1
         endValue: 2.0
         isLooped: true
+  - type: ItemTogglePointLight
   - type: Battery
     maxCharge: 100
     startingCharge: 100

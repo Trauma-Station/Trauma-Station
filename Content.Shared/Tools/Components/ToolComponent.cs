@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 namespace Content.Shared.Tools.Components;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(SharedToolSystem))]
+[AutoGenerateComponentState] // Trauma - networking and remove Access
 public sealed partial class ToolComponent : Component
 {
     [DataField]
@@ -16,6 +16,7 @@ public sealed partial class ToolComponent : Component
     ///     For tool interactions that have a delay before action this will modify the rate, time to wait is divided by this value
     /// </summary>
     [DataField]
+    [AutoNetworkedField] // Trauma
     public float SpeedModifier = 1f;
 
     [DataField]

@@ -1,0 +1,52 @@
+- type: entity
+  id: LabyrinthTear
+  name: ???
+  description: It stares back. There's no reason to remain. Run.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    scale: 3, 3
+    drawdepth: HighFloorObjects
+    sprite: _Goobstation/Heretic/Effects/effects.rsi
+    state: bhole3
+  - type: PointLight
+    enabled: true
+    radius: 20
+    energy: 2
+    color: "#53277e"
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+          - SlipLayer
+        mask:
+          - ItemMask
+        density: 1000
+        hard: false
+  - type: LabyrinthPortal
+  - type: Tag
+    tags:
+    - ForceHereticMinion
+  - type: TileEntityEffect
+    conditions:
+    - !type:WhitelistCondition
+      checkMind: true
+      blacklist:
+        components:
+        - Heretic
+        - Ghoul
+      guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+    effects:
+    - !type:GenericStatusEffect
+      key: TemporaryBlindness
+      component: TemporaryBlindness
+      type: Update
+      time: 20

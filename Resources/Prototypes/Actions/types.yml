@@ -166,12 +166,14 @@
   components:
   - type: Action
     checkCanInteract: false
-    useDelay: 30
+    useDelay: 5  # Trauma, was 30
     itemIconStyle: BigAction
     priority: -20
     icon:
       sprite: Objects/Weapons/Grenades/empgrenade.rsi
       state: icon
+  - type: LimitedCharges # Trauma
+    maxCharges: 3
 
 - type: entity
   parent: BaseImplantAction

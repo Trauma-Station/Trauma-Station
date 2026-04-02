@@ -91,7 +91,7 @@ public sealed partial class HumanoidCharacterProfileV1
     public HumanoidCharacterProfile ToV2()
     {
         return new(Name, FlavorText, Species, Age, Sex, Gender, Appearance.ToV2(Species), SpawnPriority, JobPriorities, PreferenceUnavailable, AntagPreferences, TraitPreferences, Loadouts,
-            BarkVoice, new(new())); // Trauma
+            BarkVoice, new()); // Trauma
     }
 }
 

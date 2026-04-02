@@ -23,7 +23,7 @@
     doAfterDuration: 1.0
 
 - type: entity
-  parent: BaseRevForgedWeapon
+  parent: [BaseRevForgedWeapon, BracingDurability]
   id: RevMace
   name: forged mace
   description: A robust mace, stuns enemies. Not great against modern armor, or for killing.
@@ -50,7 +50,7 @@
     speed: 1
 
 - type: entity
-  parent: BaseRevForgedWeapon
+  parent: [BaseRevForgedWeapon, KnifeDurability]
   id: RevSword
   name: forged sword
   description: A two handed sword, deals heavy damage.
@@ -99,9 +99,20 @@
         volume: -8
   - type: Construction
     graph: RevSword
+  # <Trauma>
+  - type: Parry
+    maxParries: 3
+    maxReflects: 0
+    parryMinSkill: 40
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
+  # </Trauma>
 
 - type: entity
-  parent: BaseRevForgedWeapon
+  parent: [BaseRevForgedWeapon, SpearDurability]
   id: RevPitchfork
   name: forged pitchfork
   description: A large pitchfork, can be thrown and has extended melee range.
@@ -137,7 +148,7 @@
     graph: RevPitchfork
 
 - type: entity
-  parent: BaseRevForgedWeapon
+  parent: [BaseRevForgedWeapon, KnifeDurability]
   id: RevKnife
   name: forged knife
   description: A small forged knife. It is concealable, can be tipped with poison and is usable with a shield.
@@ -220,7 +231,7 @@
     graph: RevKnife
 
 - type: entity
-  parent: BaseRevMeleeWeapon
+  parent: [BaseRevMeleeWeapon, MetalToolDurability]
   id: RevTorch
   name: combat torch
   description: A refined torch mounted with a steel head. Lights enemies on fire when hit.
@@ -302,3 +313,4 @@
     damage:
       types:
         Piercing: 10
+  - type: DeleteOnTrigger

@@ -37,8 +37,7 @@ public sealed class HolyFlammableSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StunSystem _stun = default!;
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private const float InitialGrowthRate = 1f;
     private const float IntermediateGrowthRate = 0.5f;
@@ -46,7 +45,7 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     public override void Initialize()
     {
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        base.Initialize();
 
         SubscribeLocalEvent<HolyFlammableComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<HolyFlammableComponent, RejuvenateEvent>(OnRejuvenate);
@@ -88,10 +87,10 @@ public sealed class HolyFlammableSystem : EntitySystem
     {
         foreach (var entity in args.HitEntities)
         {
-            if (!HasComp<ShouldTakeHolyComponent>(ent))
+            if (!HasComp<ShouldTakeHolyComponent>(entity))
                 continue;
 
-            var flammable = EnsureComp<HolyFlammableComponent>(ent);
+            var flammable = EnsureComp<HolyFlammableComponent>(entity);
 
             AdjustFireStacks(entity, ent.Comp.FireStacks, flammable, true);
         }
@@ -211,7 +210,7 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     public void HolyExtinguish(EntityUid uid, HolyFlammableComponent? flammable = null)
     {
-        if (!Resolve(uid, ref flammable) || !flammable.CanExtinguish)
+        if (!Resolve(uid, ref flammable, false) || !flammable.CanExtinguish)
             return;
 
         RemCompDeferred<OnHolyFireComponent>(uid);

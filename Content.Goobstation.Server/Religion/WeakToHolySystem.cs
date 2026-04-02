@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Religion.Nullrod.Systems;
-using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Medical.Common.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 using Content.Shared.Hands;
 using Content.Shared.Inventory;
@@ -19,7 +15,7 @@ namespace Content.Goobstation.Shared.Religion;
 
 public sealed class WeakToHolySystem : SharedWeakToHolySystem
 {
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly HashSet<Entity<ShouldTakeHolyComponent>> _toUpdate = new();
@@ -29,9 +25,6 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         base.Initialize();
 
         SubscribeLocalEvent<ShouldTakeHolyComponent, UnholyStatusChangedEvent>(OnUnholyStatus);
-
-        SubscribeLocalEvent<HereticRitualRuneComponent, StartCollideEvent>(OnCollide);
-        SubscribeLocalEvent<HereticRitualRuneComponent, EndCollideEvent>(OnCollideEnd);
 
         SubscribeLocalEvent<WeakToHolyComponent, ComponentShutdown>(OnWeakShutdown);
         SubscribeLocalEvent<WeakToHolyComponent, UnholyStatusChangedEvent>(OnWeakStatus);
@@ -120,25 +113,6 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         RemCompDeferred<AlwaysTakeHolyComponent>(ent);
     }
 
-    #region Holy Healing
-
-    // Passively heal on runes
-    private void OnCollide(Entity<HereticRitualRuneComponent> ent, ref StartCollideEvent args)
-    {
-        if (!TryComp<WeakToHolyComponent>(args.OtherEntity, out var weak))
-            return;
-
-        weak.IsColliding = true;
-    }
-
-    private void OnCollideEnd(Entity<HereticRitualRuneComponent> ent, ref EndCollideEvent args)
-    {
-        if (!TryComp<WeakToHolyComponent>(args.OtherEntity, out var weak))
-            return;
-
-        weak.IsColliding = false;
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -151,15 +125,13 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
                 continue;
             weakToHoly.NextPassiveHealTick = _timing.CurTime + weakToHoly.HealTickDelay;
 
-            if (!TryComp<DamageableComponent>(uid, out var damageable))
-                continue;
-
-            if (TerminatingOrDeleted(uid) || !damageable.Damage.DamageDict.TryGetValue("Holy", out _))
+            var damage = _damageable.GetAllDamage(uid);
+            if (TerminatingOrDeleted(uid) || damage.DamageDict.GetValueOrDefault("Holy") <= 0)
                 continue;
 
             // Rune healing vs passive healing
             var healing = weakToHoly.IsColliding ? weakToHoly.HealAmount : weakToHoly.PassiveAmount;
-            _damageableSystem.ChangeDamage(uid, healing, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            _damageable.ChangeDamage(uid, healing, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
         }
 
         if (_toUpdate.Count == 0)
@@ -173,6 +145,4 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
 
         _toUpdate.Clear();
     }
-
-    #endregion
 }
