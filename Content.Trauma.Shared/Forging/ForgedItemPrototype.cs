@@ -23,7 +23,7 @@ public sealed partial class ForgedItemPrototype : IPrototype, IInheritingPrototy
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<ForgedItemPrototype>))]
     public string[]? Parents { get; private set; }
 
-    [AbstractDataField]
+    [AbstractDataField, NeverPushInheritance]
     public bool Abstract { get; private set; }
 
     /// <summary>
