@@ -109,6 +109,11 @@
       path: /Audio/Effects/demon_attack1.ogg
       params:
         variation: 0.15
+  - type: PointLight
+    radius: 0
+    energy: 0
+    color: "#4faffb"
+  - type: NoSlip
 
 - type: entity
   name: breadling
@@ -232,3 +237,115 @@
     - TauCetiBasic
   - type: Physics
     bodyType: KinematicController
+
+- type: entity
+  name: wailing horse
+  parent: [ MobSpaceBasic, MobCombat ]
+  id: MobWailingHorse
+  description: It's chest beats with an unnatural rhythm.
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 2
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/wailinghorse.rsi
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/_Trauma/Actions/wailingStep.ogg
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 100
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: StaticPrice
+    price: 3000
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 300
+    bleedReductionAmount: 30
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: Stamina
+    baseCritThreshold: 9999
+  - type: FlashImmunity
+  - type: Puller
+    needsHands: false
+  - type: GhostRole
+    name: ghost-role-ratma-name
+    description: ghost-role-ratma-desc
+    rules: ghost-role-information-antagonist-rules
+    raffle:
+      settings: default
+  - type: PointLight
+    radius: 0
+    energy: 0
+    color: "#4faffb"
+  - type: NoSlip
+  - type: BloodCrawl
+    blood:
+    - Blood
+    - AmmoniaBlood
+    - InsectBlood
+    - CopperBlood
+    - ZombieBlood
+    - AlienBlood
+    - BlackBlood
+    - BloodChangeling
+    actionId: BloodCrawlActionWailing
+    searchRange: 1
+    jaunt: WailingJaunt
+  - type: ActionGrant
+    actions:
+      - Wailing
+  - type: AmbientSound
+    volume: 6
+    range: 18
+    sound:
+      path: /Audio/_Trauma/Actions/passive.ogg
+  - type: Insulated
+  - type: MeleeWeapon
+    range: 2.5
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Blunt: 10
+    altDisarm: false
+    canWideSwing: true

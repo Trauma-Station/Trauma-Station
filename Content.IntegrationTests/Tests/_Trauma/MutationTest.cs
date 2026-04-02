@@ -29,8 +29,8 @@ public sealed class MutationTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
 
-        var entMan = server.ResolveDependency<IEntityManager>();
-        var protoMan = server.ResolveDependency<IPrototypeManager>();
+        var entMan = server.EntMan;
+        var protoMan = server.ProtoMan;
         var mutation = entMan.System<MutationSystem>();
         var factory = entMan.ComponentFactory;
         // monkey polymorph mutation messes it up so exclude it

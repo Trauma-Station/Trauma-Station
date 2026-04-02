@@ -3,10 +3,13 @@
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
+using Content.Shared.Examine;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Teleportation.Components;
+using Content.Shared.Verbs;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Robust.Shared.Audio.Systems;
@@ -14,6 +17,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;
 
@@ -28,13 +32,56 @@ public sealed class LockPortalSystem : EntitySystem
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
 
+    public const int LockPortalMask = (int) CollisionGroup.InteractImpassable;
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<LockPortalComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<LockPortalComponent, EndCollideEvent>(OnEndCollide);
+        SubscribeLocalEvent<LockPortalComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
+        SubscribeLocalEvent<LockPortalComponent, ExaminedEvent>(OnExamine);
     }
+
+    private void OnExamine(Entity<LockPortalComponent> ent, ref ExaminedEvent args)
+    {
+        if (!_heretic.IsHereticOrGhoul(args.Examiner))
+            return;
+
+        var status = ent.Comp.Inverted
+            ? Loc.GetString("lock-portal-component-examine-inverted")
+            : Loc.GetString("lock-portal-component-examine-not-inverted");
+        args.PushMarkup(Loc.GetString("lock-portal-component-examine-message", ("status", status)));
+    }
+
+    private void OnGetVerbs(Entity<LockPortalComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        if (!_heretic.IsHereticOrGhoul(args.User))
+            return;
+
+        if (!HasComp<EldritchIdCardComponent>(args.Using))
+            return;
+
+        AlternativeVerb verb = new()
+        {
+            Text = Loc.GetString("lock-portal-component-clear-portals"),
+            Icon = new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "realitycrack"),
+            Act = () => ClearPortals(ent),
+        };
+
+        args.Verbs.Add(verb);
+    }
+
+    private void ClearPortals(Entity<LockPortalComponent> ent)
+    {
+        PredictedQueueDel(ent.Comp.LinkedPortal);
+        PredictedQueueDel(ent);
+    }
+
 
     private void OnEndCollide(Entity<LockPortalComponent> ent, ref EndCollideEvent args)
     {
@@ -156,7 +203,8 @@ public sealed class LockPortalSystem : EntitySystem
         List<Entity<DoorComponent, TransformComponent>> possibleDestinations = new();
         while (query.MoveNext(out var uid, out var door, out var body, out var xform))
         {
-            if (!body.CanCollide || uid == ourAirlock || xform.MapID != ourXform.MapID ||
+            if ((body.CollisionLayer & LockPortalMask) == 0 || uid == ourAirlock ||
+                xform.MapID != ourXform.MapID ||
                 xform.GridUid != ourXform.GridUid)
                 continue;
 

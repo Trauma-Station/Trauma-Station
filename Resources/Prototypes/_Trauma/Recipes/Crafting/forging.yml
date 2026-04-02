@@ -9,12 +9,22 @@
 
 - type: construction
   parent: BaseForgingItem
-  id: HandleSmall
+  id: HandleShort
   graph: Handle
-  targetNode: unfinishedhandle
+  targetNode: short handle
   practical:
     CarvingKnowledge: 1
   useQuality: false
+
+- type: construction
+  parent: HandleShort
+  id: HandleMedium
+  targetNode: medium handle
+
+- type: construction
+  parent: HandleShort
+  id: HandleLong
+  targetNode: wooden pole
 
 - type: construction
   parent: BaseForgingItem
@@ -65,58 +75,3 @@
   theory:
     FabricationKnowledge: 0
   useQuality: false
-
-- type: construction
-  parent: BaseForgingItem
-  id: ForgeKnife
-  graph: ForgeKnife
-  targetNode: handle
-  theory:
-    FabricationKnowledge: 2
-  practical:
-    MetalworkingKnowledge: 3
-    WeaponsKnowledge: 3
-
-- type: construction
-  parent: BaseForgingItem
-  id: ForgeTool
-  graph: ForgeTool
-  targetNode: handle
-  theory:
-    FabricationKnowledge: 1
-  practical:
-    MetalworkingKnowledge: 3
-    WeaponsKnowledge: 3
-
-- type: construction
-  parent: BaseForgingItem
-  id: ForgeArrow
-  graph: ForgeArrow
-  targetNode: handle
-  theory:
-    FabricationKnowledge: 1
-  practical:
-    MetalworkingKnowledge: 5
-    WeaponsKnowledge: 5
-
-- type: construction
-  parent: BaseForgingItem
-  id: ForgeSword
-  graph: ForgeSword
-  targetNode: handle
-  theory:
-    FabricationKnowledge: 3
-  practical:
-    MetalworkingKnowledge: 4
-    WeaponsKnowledge: 4
-
-- type: construction
-  parent: BaseForgingItem
-  id: ForgeBlugeon
-  graph: ForgeBlugeon
-  targetNode: handle
-  theory:
-    FabricationKnowledge: 3
-  practical:
-    MetalworkingKnowledge: 4
-    WeaponsKnowledge: 4

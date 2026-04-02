@@ -32,7 +32,7 @@ public sealed partial class ItemComponent : Component
     /// <summary>
     ///     Rsi of the sprite shown on the player when this item is in their hands. Used to generate a default entry for <see cref="InhandVisuals"/>
     /// </summary>
-    [Access(typeof(SharedItemSystem))]
+    [Access(Other = AccessPermissions.ReadWriteExecute)] // Trauma - free AA
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("sprite")]
     public string? RsiPath;

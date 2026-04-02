@@ -31,7 +31,7 @@ public sealed partial class VoidConduitComponent : Component
     {
         DamageDict =
         {
-            { "Structural", 30 },
+            { "Structural", 50 },
         },
     };
 

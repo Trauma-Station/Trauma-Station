@@ -580,7 +580,7 @@
   id: UnlockTheLabyrinth
   stage: 10
   path: Lock
-  event: !type:HereticAscensionCosmosEvent # Uses cosmos ascension cause its basically the same (xray vision)
+  event: !type:HereticAscensionLockEvent
     addedComponents:
     - type: SpecialLowTempImmunity
     - type: SpecialHighTempImmunity
