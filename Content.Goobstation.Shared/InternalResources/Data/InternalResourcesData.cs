@@ -25,6 +25,12 @@ public sealed partial class InternalResourcesData
     public float MaxAmount = 100;
 
     /// <summary>
+    /// Minimum amount of resources
+    /// </summary>
+    [DataField]
+    public float MinAmount = 0;
+
+    /// <summary>
     /// Resources regeneration rate per update time
     /// </summary>
     [DataField]
@@ -36,11 +42,12 @@ public sealed partial class InternalResourcesData
     [DataField(required: true)]
     public ProtoId<InternalResourcesPrototype> InternalResourcesType;
 
-    public InternalResourcesData(float maxAmount, float regenerationRate, float startingAmount, string protoId)
+    public InternalResourcesData(float maxAmount, float regenerationRate, float startingAmount, string protoId, float minAmount)
     {
         CurrentAmount = startingAmount;
         MaxAmount = maxAmount;
         RegenerationRate = regenerationRate;
         InternalResourcesType = protoId;
+        MinAmount = minAmount;
     }
 }

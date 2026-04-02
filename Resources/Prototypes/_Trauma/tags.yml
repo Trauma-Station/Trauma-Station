@@ -32,6 +32,9 @@
   id: Chili
 
 - type: Tag
+  id: Chilly
+
+- type: Tag
   id: Cement
 
 - type: Tag
@@ -75,6 +78,9 @@
 
 - type: Tag
   id: FaithGun
+
+- type: Tag
+  id: Fish
 
 - type: Tag
   id: FlamethrowerBackpack
@@ -126,6 +132,9 @@
 
 - type: Tag
   id: OverrideKeyComponents
+
+- type: Tag
+  id: MethApple
 
 - type: Tag
   id: MimeMask
