@@ -32,14 +32,6 @@
   equipment:
     outerClothing: ClothingOuterVestTank
 
-- type: loadout
-  id: LoadoutTankHarnessAquaticCommand
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: Aquatic
-  equipment:
-    outerClothing: ClothingOuterVestTankCommand
-
 # Tank harnesses for jobs that spawn with outerwear, puts them in their inventory instead of dropping items at their feet
 - type: loadout
   id: LoadoutTankHarnessAquaticWithOuterwear

@@ -37,14 +37,6 @@
   loadouts:
   - LoadoutTankHarnessAquatic
 
-- type: loadoutGroup
-  id: GroupTankHarnessCommandAquatic
-  name: loadout-group-tank-harness-command-aquatic
-  minLimit: 1
-  hidden: true
-  loadouts:
-  - LoadoutTankHarnessAquaticCommand
-
 # Tank harnesses for jobs that spawn with outerwear, puts them in their inventory instead of dropping items at their feet
 - type: loadoutGroup
   id: GroupTankHarnessWithOuterwearAquatic
@@ -53,14 +45,6 @@
   hidden: true
   loadouts:
   - LoadoutTankHarnessAquaticWithOuterwear
-
-- type: loadoutGroup
-  id: GroupTankHarnessCommandWithOuterwearAquatic
-  name: loadout-group-tank-harness-command-with-outerwear-aquatic
-  minLimit: 1
-  hidden: true
-  loadouts:
-  - LoadoutTankHarnessAquaticCommandWithOuterwear
 
 # vaporizer
 - type: loadoutGroup
