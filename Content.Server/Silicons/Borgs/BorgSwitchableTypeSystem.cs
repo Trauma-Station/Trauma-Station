@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Silicons.Borgs;
+// </Trauma>
 using Content.Server.Inventory;
 using Content.Shared.Inventory;
 using Content.Shared.Radio.Components;
@@ -29,6 +32,11 @@ public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeS
 
         if (TryComp(ent, out ActiveRadioComponent? activeRadio))
             activeRadio.Channels = [.. radioChannels];
+
+        // Corvax-Next-AiRemoteControl-Start
+        var ev = new BorgTypeChangedEvent();
+        RaiseLocalEvent(ent, ref ev);
+        // Corvax-Next-AiRemoteControl-End
 
         // Borg transponder for the robotics console
         if (TryComp(ent, out BorgTransponderComponent? transponder))

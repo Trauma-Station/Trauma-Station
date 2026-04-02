@@ -11,6 +11,7 @@
   text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/Heretics.xml"
   children:
   - HereticCurses
+  - HereticRituals # Truama
 
 - type: guideEntry
   id: HereticCurses

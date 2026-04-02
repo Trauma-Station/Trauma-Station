@@ -2,6 +2,7 @@
 
 using Content.Server.Polymorph.Systems;
 using Content.Server.Revolutionary.Components;
+using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Prototypes;
@@ -15,15 +16,12 @@ public sealed class HereticRitualSystem : SharedHereticRitualSystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _rand = default!;
 
-    private EntityQuery<CommandStaffComponent> _commandQuery;
-    private EntityQuery<Components.SecurityStaffComponent> _secQuery;
+    [Dependency] private readonly EntityQuery<CommandStaffComponent> _commandQuery = default!;
+    [Dependency] private readonly EntityQuery<SecurityStaffComponent> _secQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _commandQuery = GetEntityQuery<CommandStaffComponent>();
-        _secQuery = GetEntityQuery<Components.SecurityStaffComponent>();
 
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<PolymorphRitualEffect>>(OnPolymorph);
 

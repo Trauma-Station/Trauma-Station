@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Input;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Trauma.Common.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
 
@@ -19,7 +19,7 @@ public sealed class GrabReleaseBindSystem : EntitySystem
     public override void Initialize()
     {
         CommandBinds.Builder
-            .Bind(ContentKeyFunctions.ResistGrab,
+            .Bind(TraumaKeyFunctions.ResistGrab,
                 InputCmdHandler.FromDelegate(HandleResistGrab, handle: false, outsidePrediction: false))
             .Register<GrabReleaseBindSystem>();
     }

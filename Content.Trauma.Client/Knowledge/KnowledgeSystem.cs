@@ -47,7 +47,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
 
     private void OnGetAttackTypes(Entity<KnowledgeHolderComponent> ent, ref GetPerformedAttackTypesEvent args)
     {
-        if (GetActiveMartialArt(ent) is not {} skill ||
+        if (GetActiveMartialArt(ent) is not { } skill ||
             !TryComp<CanPerformComboComponent>(skill, out var combo))
             return;
 
@@ -106,8 +106,6 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     /// <summary>
     /// Returns the martial arts that a knowledge entity has, along with some helper data for the client.
     /// </summary>
-    /// <param name="target"></param>
-    /// <returns></returns>
     public List<(EntityUid, EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
     {
         if (GetKnowledgeWith<MartialArtsKnowledgeComponent>(target) is not {} arts)

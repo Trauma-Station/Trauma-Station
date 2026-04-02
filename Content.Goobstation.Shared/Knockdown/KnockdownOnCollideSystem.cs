@@ -1,16 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Wizard.Mutate;
-using Content.Shared.Stunnable;
 using Content.Shared.Projectiles;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Trauma.Common.Knockdown;
 
 namespace Content.Goobstation.Shared.Knockdown;
 
 public sealed class KnockdownOnCollideSystem : EntitySystem
 {
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedHulkSystem _hulk = default!;
 
     public override void Initialize()
     {
@@ -22,22 +21,21 @@ public sealed class KnockdownOnCollideSystem : EntitySystem
 
     private void OnEntityHit(Entity<KnockdownOnCollideComponent> ent, ref ThrowDoHitEvent args)
     {
-        ApplyEffects(args.Target, ent.Comp);
+        ApplyEffects(args.Target, ent);
     }
 
     private void OnProjectileHit(Entity<KnockdownOnCollideComponent> ent, ref ProjectileHitEvent args)
     {
-        ApplyEffects(args.Target, ent.Comp);
+        ApplyEffects(args.Target, ent);
     }
 
-    private void ApplyEffects(EntityUid target, KnockdownOnCollideComponent component)
+    private void ApplyEffects(EntityUid target, Entity<KnockdownOnCollideComponent> ent)
     {
-        if (TryComp(target, out HulkComponent? hulk))
-        {
-            _hulk.Roar((target, hulk), 1f);
+        var ev = new KnockdownOnCollideAttemptEvent(ent.Owner);
+        RaiseLocalEvent(target, ev);
+        if (ev.Cancelled)
             return;
-        }
 
-        _stun.TryKnockdown(target, time: null, drop: component.DropItems);
+        _stun.TryKnockdown(target, time: null, drop: ent.Comp.DropItems);
     }
 }

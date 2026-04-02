@@ -1,8 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Temperature;
 using Content.Goobstation.Common.Temperature.Components;
-using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._Goobstation.Wizard.Spellblade;
 using Content.Shared.Atmos;
+using Content.Trauma.Common.Wizard;
 
 namespace Content.Server.Temperature.Systems;
 
@@ -11,7 +12,7 @@ namespace Content.Server.Temperature.Systems;
 /// </summary>
 public sealed partial class TemperatureSystem
 {
-    [Dependency] private readonly SpellbladeSystem _spellblade = default!;
+    [Dependency] private readonly CommonSpellbladeSystem _spellblade = default!;
 
     // it was already hardcoded so idc
     private const float IdealTemperature = Atmospherics.T37C;
@@ -23,7 +24,7 @@ public sealed partial class TemperatureSystem
     }
 
     private bool CanTakeHeatDamage(EntityUid uid)
-        => !_spellblade.IsHoldingItemWithComponent<FireSpellbladeEnchantmentComponent>(uid);
+        => !_spellblade.IsHoldingItemWithFireSpellbladeEnchantmentComponent(uid);
 
     private void OnCheckLowTemperatureImmunity(Entity<SpecialLowTempImmunityComponent> ent, ref TemperatureImmunityEvent args)
     {

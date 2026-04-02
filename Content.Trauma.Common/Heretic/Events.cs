@@ -41,7 +41,4 @@ public record struct ValidateInstantWorldTargetActionEvent(EntityUid User, Entit
 public readonly record struct TryPerformInstantWorldTargetActionEvent;
 
 [ByRefEvent]
-public record struct ImmuneToPoisonDamageEvent(bool Immune = false);
-
-[ByRefEvent]
 public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Volume);

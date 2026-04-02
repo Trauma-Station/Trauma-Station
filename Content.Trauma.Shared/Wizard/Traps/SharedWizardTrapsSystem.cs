@@ -4,8 +4,6 @@ using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Effects;
 using Content.Medical.Common.Targeting;
-using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
@@ -22,6 +20,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -55,7 +54,7 @@ public abstract class SharedWizardTrapsSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
-
+    [Dependency] private readonly EntityQuery<WizardTrapComponent> _trapQuery = default!;
 
     public override void Initialize()
     {
@@ -105,7 +104,6 @@ public abstract class SharedWizardTrapsSystem : EntitySystem
             if (_turf.IsSpace(tile))
                 return false;
 
-            var trapQuery = GetEntityQuery<WizardTrapComponent>();
             var flags = LookupFlags.Static | LookupFlags.Sundries | LookupFlags.Sensors;
             foreach (var (entity, fix) in _look.GetEntitiesInRange<FixturesComponent>(coords, 0.1f, flags))
             {
@@ -113,7 +111,7 @@ public abstract class SharedWizardTrapsSystem : EntitySystem
                         x.Value.Hard && (x.Value.CollisionLayer & (int) CollisionGroup.LowImpassable) != 0))
                     return false;
 
-                if (trapQuery.HasComp(entity))
+                if (_trapQuery.HasComp(entity))
                     return false;
             }
 

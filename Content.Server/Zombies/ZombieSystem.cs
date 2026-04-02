@@ -1,10 +1,6 @@
 // <Trauma>
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Server._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared.Blocking;
 // </Trauma>
 using Content.Shared.NPC.Prototypes;
@@ -52,7 +48,6 @@ namespace Content.Server.Zombies
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedRoleSystem _role = default!;
-        [Dependency] private readonly LanguageSystem _language = default!; // Goob
 
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
 
@@ -88,10 +83,6 @@ namespace Content.Server.Zombies
             SubscribeLocalEvent<IncurableZombieComponent, MapInitEvent>(OnPendingMapInit);
 
             SubscribeLocalEvent<ZombifyOnDeathComponent, MobStateChangedEvent>(OnDamageChanged);
-
-            // Goob Edit - Prevent Zombies Speaking/Understanding Languages
-            SubscribeLocalEvent<ZombieComponent, DetermineEntityLanguagesEvent>(OnLanguageApply);
-            SubscribeLocalEvent<ZombieComponent, ComponentShutdown>(OnShutdown);
         }
 
         private void OnBeforeRemoveAnomalyOnDeath(Entity<PendingZombieComponent> ent, ref BeforeRemoveAnomalyOnDeathEvent args)
@@ -191,28 +182,6 @@ namespace Content.Server.Zombies
         private void OnGetCharacterUnrevivableIC(EntityUid uid, ZombieComponent component, ref GetCharacterUnrevivableIcEvent args)
         {
             args.Unrevivable = true;
-        }
-
-        private void OnStartup(EntityUid uid, ZombieComponent component, ComponentStartup args)
-        {
-            if (component.EmoteSoundsId == null
-                || TerminatingOrDeleted(uid)) // Goob Change
-                return;
-
-            // <Goob>
-            var comp = EnsureComp<LanguageSpeakerComponent>(uid); // Ensure they can speak language before adding language.
-            var spoken = comp.Understands;
-            var understood = comp.Understands;
-            spoken.Clear();
-            understood.Clear();
-            if (!string.IsNullOrEmpty(component.ForcedLanguage)) // Should never be false, but security either way.
-            {
-                spoken.Add(component.ForcedLanguage);
-                understood.Add(component.ForcedLanguage);
-            }
-            _language.EnsureValidLanguage((uid, comp));
-            _language.UpdateEntityLanguages((uid, comp));
-            // </Goob>
         }
 
         private void OnEmote(EntityUid uid, ZombieComponent component, ref EmoteEvent args)
@@ -366,35 +335,5 @@ namespace Content.Server.Zombies
         {
             _role.MindRemoveRole<ZombieRoleComponent>((args.Mind.Owner, args.Mind.Comp));
         }
-
-        #region Goob Language Changes
-
-        /// <summary>
-        ///     This forces the languages to reset and apply only the current language for the entity based on Zombie Component.
-        /// </summary>
-        private void OnLanguageApply(Entity<ZombieComponent> ent, ref DetermineEntityLanguagesEvent args)
-        {
-            if (ent.Comp.LifeStage is ComponentLifeStage.Removing
-                or ComponentLifeStage.Stopping
-                or ComponentLifeStage.Stopped)
-                return;
-
-            // Clear the languages and then apply the forced language.
-            args.SpokenLanguages.Clear();
-            args.UnderstoodLanguages.Clear();
-            args.SpokenLanguages.Add(ent.Comp.ForcedLanguage);
-            args.UnderstoodLanguages.Add(ent.Comp.ForcedLanguage);
-        }
-
-        // When comp is removed, reset languages.
-        private void OnShutdown(Entity<ZombieComponent> ent, ref ComponentShutdown args)
-        {
-            if (TerminatingOrDeleted(ent))
-                return;
-
-            _language.UpdateEntityLanguages(ent.Owner); // This uses ent.Owner because UpdateEntityLanguages checks for <LanguageSpeakerComponent>.
-        }
-
-        #endregion
     }
 }

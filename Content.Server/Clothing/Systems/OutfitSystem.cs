@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared._EinsteinEngines.Silicon.IPC;
 using Content.Shared.Radio.Components;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
@@ -26,7 +25,6 @@ public sealed class OutfitSystem : EntitySystem
 {
     // <Trauma>
     [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly InternalEncryptionKeySpawner _encryption = default!;
     // </Trauma>
     [Dependency] private readonly IServerPreferencesManager _preferenceManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -144,10 +142,10 @@ public sealed class OutfitSystem : EntitySystem
             _spawningSystem.EquipRoleLoadout(target, roleLoadout, jobProto);
         }
 
-        // Goobstation edit start
-        if (HasComp<EncryptionKeyHolderComponent>(target))
-            _encryption.TryInsertEncryptionKey(target, startingGear);
-        // Goobstation edit end
+        // <Trauma>
+        var ev = new StartingGearEquippedEvent(target, startingGear);
+        RaiseLocalEvent(target, ref ev);
+        // </Trauma>
 
         return true;
     }

@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Common.Surgery;
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Trauma.Common.Damage;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
@@ -20,7 +22,7 @@ public abstract partial class SharedHereticAbilitySystem
 
     protected virtual void SubscribeFlesh()
     {
-        SubscribeLocalEvent<FleshPassiveComponent, ImmuneToPoisonDamageEvent>(OnPoisonImmune);
+        SubscribeLocalEvent<FleshPassiveComponent, OnHealthChangeEvent>(OnPoisonImmune);
 
         SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryPainEvent>>(OnPain);
         SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryIgnorePreviousStepsEvent>>(OnIgnore);
@@ -28,9 +30,9 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<FleshSurgeryComponent, UseInHandEvent>(OnFleshSurgeryUse);
     }
 
-    private void OnPoisonImmune(Entity<FleshPassiveComponent> ent, ref ImmuneToPoisonDamageEvent args)
+    private void OnPoisonImmune(Entity<FleshPassiveComponent> ent, ref OnHealthChangeEvent args)
     {
-        args.Immune = true;
+        args.Damage.ClampMax(0);
     }
 
     private void OnTouchSpellUsed(Entity<FleshSurgeryComponent> ent, ref TouchSpellUsedEvent args)

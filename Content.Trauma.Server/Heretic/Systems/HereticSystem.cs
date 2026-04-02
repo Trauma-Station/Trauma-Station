@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Server.Objectives.Components;
 using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
@@ -26,7 +27,6 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
-using Content.Shared.Preferences;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
@@ -64,9 +64,9 @@ public sealed class HereticSystem : SharedHereticSystem
     [Dependency] private readonly HereticRuleSystem _rule = default!;
     [Dependency] private readonly HumanoidProfileSystem _profile = default!;
     [Dependency] private readonly AbductorVestDisguiseSystem _disguise = default!;
-
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
+    [Dependency] private readonly EntityQuery<HereticMinionComponent> _minionQuery = default!;
 
     private float _timer;
     private const float PassivePointCooldown = 20f * 60f;
@@ -74,11 +74,8 @@ public sealed class HereticSystem : SharedHereticSystem
     private const int HereticVisFlags = (int) VisibilityFlags.EldritchInfluence;
 
     public static readonly ProtoId<NpcFactionPrototype> HereticFactionId = "Heretic";
-
     public static readonly ProtoId<NpcFactionPrototype> NanotrasenFactionId = "NanoTrasen";
-
     public static readonly ProtoId<TagPrototype> AscensionRitualTag = "RitualAscension";
-
     public static readonly ProtoId<TagPrototype> FeastOfOwlsRitualTag = "RitualFeastOfOwls";
 
     public override void Initialize()
@@ -190,10 +187,9 @@ public sealed class HereticSystem : SharedHereticSystem
     private void SetMinionsMaster(Entity<HereticComponent> ent, EntityUid? newMaster)
     {
         ent.Comp.Minions = ent.Comp.Minions.Where(Exists).ToHashSet();
-        var minionQuery = GetEntityQuery<HereticMinionComponent>();
         foreach (var uid in ent.Comp.Minions)
         {
-            if (!minionQuery.TryComp(uid, out var minion))
+            if (!_minionQuery.TryComp(uid, out var minion))
                 continue;
 
             minion.BoundHeretic = newMaster;
@@ -302,7 +298,7 @@ public sealed class HereticSystem : SharedHereticSystem
         _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "KnowledgePoint", amount } }, mindId, store);
         _store.UpdateUserInterface(uid, mindId, store);
 
-        if (_mind.TryGetObjectiveComp<Objectives.HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
+        if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             objective.Researched += amount;
 
         UpdateObjectiveProgress((ent, ent.Comp1, ent.Comp3));
