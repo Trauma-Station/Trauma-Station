@@ -37,6 +37,13 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
         UpdateState(languageSpeaker.CurrentLanguage, languageSpeaker.Speaks);
     }
 
+    [Obsolete]
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        _language.OnLanguagesChanged -= UpdateState;
+    }
+
     public void UpdateState(ProtoId<LanguagePrototype> currentLanguage, List<ProtoId<LanguagePrototype>> spokenLanguages)
     {
         var langName = Loc.GetString($"language-{currentLanguage}-name");
