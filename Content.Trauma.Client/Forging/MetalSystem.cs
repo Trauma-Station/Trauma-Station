@@ -53,7 +53,7 @@ public sealed class MetalSystem : SharedMetalSystem
             foreach (var layer in layers)
             {
                 // no api for checking layer for a PrototypeLayerData so this is good enough
-                if (layer.Shader == EmissiveShader)
+                if (layer.Shader == EmissiveShader.ID)
                     layer.Color = color;
             }
         }
