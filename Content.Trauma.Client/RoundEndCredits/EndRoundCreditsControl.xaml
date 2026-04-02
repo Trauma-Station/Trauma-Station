@@ -4,12 +4,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <roundEndCredits:EndRoundCreditsControl
     xmlns="https://spacestation14.io"
-    xmlns:roundEndCredits="clr-namespace:Content.Trauma.Client.RoundEndCredits"
+    xmlns:roundEndCredits="using:Content.Trauma.Client.RoundEndCredits"
     MouseFilter="Ignore"
     ReserveScrollbarSpace="False"
     HScrollEnabled="False"
     HorizontalAlignment="Center"
-    VScrollBarHidden="True"
     Access="Public">
 
     <BoxContainer

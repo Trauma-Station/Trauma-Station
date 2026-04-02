@@ -104,19 +104,19 @@
   id: Iradomini
 
 - type: Tag
-  id: IngotBrass
+  id: IngotWorkable
 
 - type: Tag
-  id: IngotSteel
-
-- type: Tag
-  id: IngotPlasteel
+  id: IngotWorkableSteel
 
 - type: Tag
   id: MagazineTurret
 
 - type: Tag
   id: OverrideKeyComponents
+
+- type: Tag
+  id: MimeMask
 
 - type: Tag
   id: MimicToolbox

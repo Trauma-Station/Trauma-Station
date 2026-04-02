@@ -26,13 +26,10 @@ public abstract partial class SharedKnowledgeSystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-
-    private EntityQuery<MartialArtsKnowledgeComponent> _artQuery;
+    [Dependency] private readonly EntityQuery<MartialArtsKnowledgeComponent> _artQuery = default!;
 
     private void InitializeMartialArts()
     {
-        _artQuery = GetEntityQuery<MartialArtsKnowledgeComponent>();
-
         SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeAddedEvent>(OnMartialArtAdded);
         SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeRemovedEvent>(OnMartialArtRemoved);
 

@@ -210,13 +210,13 @@ public sealed partial class HereticVoidPullEvent : InstantActionEvent
     };
 
     [DataField]
-    public TimeSpan StunTime = TimeSpan.FromSeconds(0.5);
+    public bool DropItems;
 
     [DataField]
-    public TimeSpan KnockDownTime = TimeSpan.FromSeconds(3);
+    public TimeSpan KnockDownTime = TimeSpan.FromSeconds(4);
 
     [DataField]
-    public float Radius = 3f;
+    public float Radius = 2f;
 
     [DataField]
     public EntProtoId InEffect = "EffectVoidBlinkIn";
@@ -467,6 +467,7 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
 
 // ascensions
 public sealed partial class HereticAscensionCosmosEvent : HereticKnowledgeEvent;
+public sealed partial class HereticAscensionLockEvent : HereticKnowledgeEvent;
 #endregion
 
 public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent;

@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Silicons.Borgs; // Cortex-Next
+// </Trauma>
 using Content.Shared.Access.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -247,6 +250,14 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         // Try to insert our thing into them
         if (_slots.CanEject(ent.Owner, args.User, ent.Comp.Slot))
         {
+            // <Trauma> - Corvax-Next-AiRemoteControl-Start
+            if (ent.Comp.Slot.Item is { } item)
+            {
+                var ev = new OnIntellicardInsertEvent();
+                RaiseLocalEvent(item, ref ev);
+            }
+            // </Trauma>
+
             if (!_slots.TryInsert(args.Args.Target.Value, targetHolder.Slot, ent.Comp.Slot.Item!.Value, args.User, excludeUserAudio: true))
             {
                 return;

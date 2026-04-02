@@ -1,6 +1,6 @@
 // <Trauma>
+using Content.Trauma.Common.TileMovement;
 using Content.Server.Atmos;
-using Content.Shared._vg.TileMovement;
 using Content.Shared.Gravity;
 using Robust.Server.GameObjects;
 // </Trauma>

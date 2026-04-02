@@ -2,7 +2,6 @@
   id: BloomeryCold
   start: start
   graph:
-
   - node: start
     edges:
     - to: bloomery
@@ -11,6 +10,7 @@
         amount: 15
         doAfter: 5
 
+  # TODO: fill it with code not this shit
   - node: bloomery
     entity: BloomeryCold
     edges:

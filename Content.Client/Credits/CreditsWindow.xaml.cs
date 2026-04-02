@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Client._RMC14.LinkAccount;
+using Content.Client.LinkAccount;
 // </Trauma>
 using System.Linq;
 using System.Numerics;

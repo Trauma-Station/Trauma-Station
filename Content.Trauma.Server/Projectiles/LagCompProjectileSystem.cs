@@ -22,9 +22,8 @@ public sealed class LagCompProjectileSystem : EntitySystem
     [Dependency] private readonly LagCompensationSystem _lag = default!;
     [Dependency] private readonly PredictedProjectileSystem _projectile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private EntityQuery<ActorComponent> _actorQuery;
-    private EntityQuery<LagCompensationComponent> _lagQuery;
+    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private readonly EntityQuery<LagCompensationComponent> _lagQuery = default!;
 
     /// <summary>
     /// If a projectile is within this distance of a lag-comp'd position for a target, it counts as a hit.
@@ -34,9 +33,6 @@ public sealed class LagCompProjectileSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _actorQuery = GetEntityQuery<ActorComponent>();
-        _lagQuery = GetEntityQuery<LagCompensationComponent>();
 
         SubscribeLocalEvent<PlayerShotProjectileEvent>(OnShotProjectile);
         SubscribeLocalEvent<LagCompProjectileComponent, StartCollideEvent>(OnStartCollide);

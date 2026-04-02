@@ -1,9 +1,9 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
-using Content.Server._DV.CosmicCult;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
+using Content.Trauma.Common.Silicon;
 using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
 using Content.Shared.Random;
@@ -351,6 +351,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
 
+        // <Trauma>
+        ent.Comp.LastLawset = provider.Laws; // Goob
+        var ev = new AILawUpdatedEvent();
+        // </Trauma>
         while (query.MoveNext(out var update))
         {
             if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
@@ -359,11 +363,9 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
                 Dirty(update, crewIconComp);
             }
             SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
-
-            RaiseLocalEvent(new AILawUpdatedEvent(update, provider.Laws)); // Trauma
+            RaiseLocalEvent(update, new AILawUpdatedEvent());
         }
 
-        ent.Comp.LastLawset = provider.Laws; // Goob
     }
 
     // Goob edit start

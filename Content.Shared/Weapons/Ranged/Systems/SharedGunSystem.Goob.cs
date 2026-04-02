@@ -23,8 +23,6 @@ public abstract partial class SharedGunSystem
 
     private void InitializeGoob()
     {
-        InitializeBasicHitScan(); // wizard shitcode :(
-
         SubscribeLocalEvent<BasicEntityAmmoProviderComponent, DamageExamineEvent>(OnBasicEntityDamageExamine);
     }
 

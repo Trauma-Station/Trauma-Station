@@ -48,15 +48,12 @@ public sealed class GunExecutionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
-
-    private EntityQuery<ProjectileComponent> _projectileQuery;
+    [Dependency] private readonly EntityQuery<ProjectileComponent> _projectileQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
-
-        _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         /* Interaction */
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);

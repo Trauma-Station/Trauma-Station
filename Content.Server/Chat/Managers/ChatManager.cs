@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Server.LinkAccount; // RMC - Patreon
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -18,7 +21,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
-using Content.Server._RMC14.LinkAccount; // RMC - Patreon
 
 namespace Content.Server.Chat.Managers;
 
@@ -27,6 +29,9 @@ namespace Content.Server.Chat.Managers;
 /// </summary>
 internal sealed partial class ChatManager : IChatManager
 {
+    // <Trauma>
+    [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
+    // </Trauma>
     private static readonly Dictionary<string, string> PatronOocColors = new()
     {
         // I had plans for multiple colors and those went nowhere so...
@@ -46,7 +51,6 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
     //[Dependency] private readonly DiscordChatLink _discordLink = default!; // Trauma - wasn't cherry picked
     [Dependency] private readonly ILogManager _logManager = default!;
 

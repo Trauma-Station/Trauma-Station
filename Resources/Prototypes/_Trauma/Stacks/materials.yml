@@ -30,19 +30,19 @@
   parent: BaseIngotStack
   id: BrassIngot
   name: stack-brass-ingot
-  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_brass_hot }
+  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_brass }
   spawn: BrassIngot
 
 - type: stack
   parent: BaseIngotStack
   id: SteelIngot
   name: stack-steel-ingot
-  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_steel_hot }
+  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_steel }
   spawn: SteelIngot
 
 - type: stack
   parent: BaseIngotStack
   id: PlasteelIngot
   name: stack-plasteel-ingot
-  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel_hot }
+  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel }
   spawn: PlasteelIngot

@@ -1,13 +1,12 @@
 #nullable enable
 
 using System.Collections.Generic;
-using Content.Shared._EinsteinEngines.Language;
 using Content.Shared.Body;
 using Content.Shared.Roles;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Language;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 

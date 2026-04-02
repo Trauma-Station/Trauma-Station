@@ -20,20 +20,15 @@ public sealed class HypoportSystem : EntitySystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
-
-    private EntityQuery<IgnoreHypoportComponent> _ignoreQuery;
-    private EntityQuery<InjectorComponent> _injectorQuery;
-    private EntityQuery<PullerComponent> _pullerQuery;
+    [Dependency] private readonly EntityQuery<IgnoreHypoportComponent> _ignoreQuery = default!;
+    [Dependency] private readonly EntityQuery<InjectorComponent> _injectorQuery = default!;
+    [Dependency] private readonly EntityQuery<PullerComponent> _pullerQuery = default!;
 
     public static ProtoId<OrganCategoryPrototype> HypoportCategory = "Hypoport";
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _ignoreQuery = GetEntityQuery<IgnoreHypoportComponent>();
-        _injectorQuery = GetEntityQuery<InjectorComponent>();
-        _pullerQuery = GetEntityQuery<PullerComponent>();
 
         SubscribeLocalEvent<BodyComponent, TargetBeforeInjectEvent>(OnBeforeInject);
 

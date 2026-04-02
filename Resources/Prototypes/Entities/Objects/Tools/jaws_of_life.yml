@@ -75,7 +75,7 @@
 
 - type: entity
   name: syndicate jaws of death
-  parent: [JawsOfLifeBase, BaseSyndicateContraband] # Goob - JawsOfLifeBase
+  parent: [UnbreakableDurability, JawsOfLifeBase, BaseSyndicateContraband] # Goob - JawsOfLifeBase
   id: SyndicateJawsOfLife
   description: Useful for breaking into secure areas and other nefarious activities.
   components:
