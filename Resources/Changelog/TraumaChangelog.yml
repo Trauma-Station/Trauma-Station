@@ -6190,3 +6190,18 @@ Entries:
   id: 714
   time: '2026-04-02T20:05:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1793
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Massively reworked forging. The anvil is no longer a lathe, you put ingots
+      on it then you can use the anvil to pick which metal + item to craft.
+  - type: Tweak
+    message: >-
+      Changed how forged tools are made. You now click your tool head with the
+      handle then hammer it in twice, instead of using the construction menu.
+  - type: Fix
+    message: Fixed not being able to forge with plasteel.
+  id: 715
+  time: '2026-04-02T22:03:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1792

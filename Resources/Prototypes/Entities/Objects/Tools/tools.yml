@@ -77,8 +77,9 @@
 
 - type: entity
   name: screwdriver
-  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
-  id: Screwdriver
+  abstract: true # Trauma
+  parent: BaseItem
+  id: BaseScrewdriver # Trauma - moved random sprite and stuff to Screwdriver, this is base
   description: Industrial grade torque in a small screwdriving package.
   components:
   # <Trauma>
@@ -153,13 +154,15 @@
       - Screwing
     useSound:
       collection: Screwdriver
-  - type: RandomSprite
-    available:
-      - enum.DamageStateVisualLayers.Base:
-          screwdriver: Rainbow
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 100
+  # <Trauma> - moved to Screwdriver proper
+  #- type: RandomSprite
+  #  available:
+  #    - enum.DamageStateVisualLayers.Base:
+  #        screwdriver: Rainbow
+  #- type: PhysicalComposition
+  #  materialComposition:
+  #    Steel: 100
+  # </Trauma>
   - type: StaticPrice
     price: 30
 

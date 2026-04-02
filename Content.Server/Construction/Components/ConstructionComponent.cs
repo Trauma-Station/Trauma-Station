@@ -4,7 +4,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Server.Construction.Components
 {
-    [RegisterComponent, Access(typeof(ConstructionSystem))]
+    [RegisterComponent] // Trauma - removed Access
     public sealed partial class ConstructionComponent : SharedConstructionComponent // Goobstation
     {
         [DataField("graph", required:true, customTypeSerializer:typeof(PrototypeIdSerializer<ConstructionGraphPrototype>))]
