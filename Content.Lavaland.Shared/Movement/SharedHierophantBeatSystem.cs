@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._vg.TileMovement;
 using Content.Shared.Alert;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Prototypes;
+using Content.Trauma.Common.TileMovement;
 
 namespace Content.Lavaland.Shared.Movement;
 

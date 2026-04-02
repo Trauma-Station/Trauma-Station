@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Goobstation.Server.OnPray.HealNearOnPray;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Medical.Common.Damage;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
@@ -12,6 +10,7 @@ using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Revenant.Components;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -24,8 +23,8 @@ public sealed partial class HealNearOnPraySystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
     [Dependency] private readonly EntityQuery<CorporealComponent> _corporealQuery = default!;
-    [Dependency] private readonly EntityQuery<SiliconComponent> _siliconQuery = default!;
     [Dependency] private readonly EntityQuery<SpectralComponent> _spectralQuery = default!;
 
     private HashSet<Entity<BodyComponent>> _targets = new();
@@ -46,7 +45,7 @@ public sealed partial class HealNearOnPraySystem : EntitySystem
         {
             if (_mobState.IsDead(entity.Owner) ||
                 !_examine.InRangeUnOccluded(uid, entity, comp.Range) ||
-                _siliconQuery.HasComp(entity))
+                _silicon.IsSilicon(entity))
                 continue;
 
             // if its a ghost and its not in corporeal form then skip

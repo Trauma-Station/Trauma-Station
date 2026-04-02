@@ -1,19 +1,13 @@
 // <Trauma>
-using System.Collections.Immutable;
 using Content.Goobstation.Common.Chat;
 using Content.Goobstation.Common.Traits;
 using Content.Goobstation.Shared.Loudspeaker.Events;
-using Content.Server._Goobstation.Wizard.Systems;
-using Content.Server.Effects;
-using Content.Server.Players.RateLimiting;
-using Content.Server.Speech;
-using Content.Server.Speech.Components;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Systems;
-using Content.Shared._Goobstation.Wizard.Chuuni;
-using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Speech;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.Language.Systems;
+using Content.Trauma.Common.Wizard;
 using Content.Trauma.Common.Speech;
+using Content.Trauma.Common.CollectiveMind;
 // </Trauma>
 using System.Globalization;
 using System.Linq;
@@ -61,10 +55,10 @@ namespace Content.Server.Chat.Systems;
 public sealed partial class ChatSystem : SharedChatSystem
 {
     // <Trauma>
-    [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
-    [Dependency] private readonly ScryingOrbSystem _scrying = default!;
+    [Dependency] private readonly CommonGhostVisibilitySystem _ghostVisibility = default!;
+    [Dependency] private readonly CommonScryingOrbSystem _scrying = default!;
     [Dependency] private readonly CollectiveMindUpdateSystem _collectiveMind = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private readonly CommonLanguageSystem _language = default!;
     // </Trauma>
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
@@ -823,7 +817,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             source,
             hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal,
             player.UserId,
-            languageOverride: SharedLanguageSystem.Universal, // Einstein Engines - Language
+            languageOverride: CommonLanguageSystem.Universal, // Einstein Engines - Language
             checkLOS: LocalOOCRespectsLOS // Floofstation - Check Line-Of-Sight.
             );
 

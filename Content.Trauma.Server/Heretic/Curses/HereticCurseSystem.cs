@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
-using Content.Shared._Goobstation.Wizard;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
@@ -27,6 +26,7 @@ using Content.Trauma.Server.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Curses;
 using Content.Trauma.Shared.Heretic.Curses.Components;
 using Content.Trauma.Shared.Heretic.Systems;
+using Content.Trauma.Shared.Wizard;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;

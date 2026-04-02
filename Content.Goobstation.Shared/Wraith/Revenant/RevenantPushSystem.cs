@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared._White.Grab;
+using Content.Trauma.Common.Grab;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Wraith.Revenant;
@@ -11,7 +11,7 @@ namespace Content.Goobstation.Shared.Wraith.Revenant;
 /// </summary>
 public sealed class RevenantPushSystem : EntitySystem
 {
-    [Dependency] private readonly GrabThrownSystem _grab = default!;
+    [Dependency] private readonly CommonGrabThrownSystem _grab = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     /// <inheritdoc/>

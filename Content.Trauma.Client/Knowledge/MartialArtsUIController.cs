@@ -159,7 +159,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
             }
         };
 
-        if (_player.LocalEntity is not {} player)
+        if (_player.LocalEntity is not { } player)
             return martialArts;
 
         var arts = _knowledge.GetMartialArtsForClientDoohickey(player);

@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared._White.BackStab;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Gibbing;
@@ -11,6 +10,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.BackStab;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;

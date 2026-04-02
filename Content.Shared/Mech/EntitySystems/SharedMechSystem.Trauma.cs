@@ -1,5 +1,8 @@
+// <Trauma>
+using Content.Trauma.Common.Mech;
+using Content.Trauma.Common.TileMovement;
+// </Trauma>
 using Content.Goobstation.Common.CCVar;
-using Content.Shared._vg.TileMovement;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -8,7 +11,6 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.Equipment.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Trauma.Common.Mech;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 

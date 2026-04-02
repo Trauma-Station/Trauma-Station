@@ -12,7 +12,6 @@ using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Condemned;
 using Content.Goobstation.Shared.Exorcism;
 using Content.Goobstation.Shared.Religion;
-using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Supermatter.Components;
 using Content.Lavaland.Shared.Chasm;
 using Content.Medical.Common.Body;
@@ -20,22 +19,19 @@ using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Actions;
 using Content.Server.Antag.Components;
-using Content.Shared.Destructible;
 using Content.Server.Hands.Systems;
 using Content.Server.Jittering;
 using Content.Server.Mind;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
-using Content.Server.Temperature.Components;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body;
 using Content.Shared.CombatMode;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Destructible;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
@@ -48,6 +44,7 @@ using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Zombies;
+using Content.Trauma.Common.Silicon;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -59,6 +56,7 @@ namespace Content.Goobstation.Server.Devil;
 
 public sealed partial class DevilSystem : EntitySystem
 {
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly BodyPartSystem _part = default!;
@@ -215,7 +213,7 @@ public sealed partial class DevilSystem : EntitySystem
         // Other Devils and entities without souls have no authority over you.
         if (HasComp<DevilComponent>(args.Source)
         || HasComp<CondemnedComponent>(args.Source)
-        || HasComp<SiliconComponent>(args.Source)
+        || _silicon.IsSilicon(args.Source)
         || args.Source == devil.Owner)
             return;
 

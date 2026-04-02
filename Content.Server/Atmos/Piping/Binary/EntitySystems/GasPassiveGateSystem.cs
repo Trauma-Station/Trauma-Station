@@ -47,15 +47,11 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
                 // Calculate the number of moles to transfer to equalize the final pressure of
                 // both sides of the valve. You can derive this equation yourself by solving
                 // the equations:
-                //
                 //    P_inlet,final = P_outlet,final (pressure equilibrium)
                 //    n_inlet,initial + n_outlet,initial = n_inlet,final + n_outlet,final (mass conservation)
-                //
                 // These simplifying assumptions allow an easy closed-form solution:
-                //
                 //    T_inlet,initial = T_inlet,final
                 //    T_outlet,initial = T_outlet,final
-                //
                 // If you don't want to push through the math, just know that this behaves like a
                 // pump that can equalize pressure instantly, i.e. much faster than pressure or
                 // volume pumps.

@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Server.Objectives.Components;
 using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
@@ -26,7 +27,6 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
-using Content.Shared.Preferences;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
@@ -298,7 +298,7 @@ public sealed class HereticSystem : SharedHereticSystem
         _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "KnowledgePoint", amount } }, mindId, store);
         _store.UpdateUserInterface(uid, mindId, store);
 
-        if (_mind.TryGetObjectiveComp<Objectives.HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
+        if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             objective.Researched += amount;
 
         UpdateObjectiveProgress((ent, ent.Comp1, ent.Comp3));

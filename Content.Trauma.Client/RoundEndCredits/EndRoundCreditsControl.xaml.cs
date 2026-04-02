@@ -108,7 +108,7 @@ public sealed partial class EndRoundCreditsControl : ScrollContainer
         foreach (var antag in antags)
         {
             var antagBox = MakeAntagBox(message.AllPlayersEndInfo, playerNameFont, headerFont, antag, cache);
-            if (antagBox is {})
+            if (antagBox is { })
                 MainCreditVBox.AddChild(antagBox);
         }
 

@@ -161,6 +161,9 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
     private void OnMindswapAttempt(Entity<ChangelingComponent> ent, ref BeforeMindSwappedEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         args.Message = ent.Comp.MindswapText;
         args.Cancelled = true;
     }

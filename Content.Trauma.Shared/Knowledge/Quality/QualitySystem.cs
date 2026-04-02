@@ -18,6 +18,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Construction;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Common.Quality;
@@ -300,28 +301,7 @@ public sealed class QualitySystem : EntitySystem
             return;
         }
 
-        int lowestDelta = 0;
-        EntProtoId? lowestId = null;
-        EntProtoId knowledgeToUse = FabricationKnowledge;
-        bool setKnowledge = false;
-        foreach (var (id, delta) in ent.Comp.LevelDeltas)
-        {
-            if (_knowledge.GetKnowledge(brain, id) is not { } skill)
-                return;
-
-            if (skill.Comp.Category == CraftingCategory && !setKnowledge)
-            {
-                knowledgeToUse = id;
-                setKnowledge = true;
-            }
-
-            int smallestDelta = _knowledge.GetMastery(skill.Comp) - delta;
-            if ((lowestId is not { } || smallestDelta < lowestDelta) && knowledgeToUse != id)
-            {
-                lowestDelta = _knowledge.GetMastery(skill.Comp) - delta;
-                lowestId = id;
-            }
-        }
+        var (knowledgeToUse, lowestId, lowestDelta, skillDelta) = FindLowestDelta(brain, ent.Comp.LevelDeltas);
 
         var added = _knowledge.GetKnowledge(brain, knowledgeToUse)?.Comp.NetLevel ?? -1;
 
@@ -345,13 +325,43 @@ public sealed class QualitySystem : EntitySystem
         ApplyQuality(ent);
 
         // TODO: limit skill gain based on the recipe used
-        _knowledge.AddExperience(brain, knowledgeToUse, Math.Abs(ent.Comp.Quality / 2) + 3);
+        _knowledge.AddExperience(brain, knowledgeToUse, Math.Abs(ent.Comp.Quality / 2) + 3, _knowledge.GetInverseMastery(skillDelta + 2));
 
         if (lowestId is not { } actualId)
             return;
 
         // TODO: above
-        _knowledge.AddExperience(brain, actualId, Math.Abs(ent.Comp.Quality / 2) + 3);
+        _knowledge.AddExperience(brain, actualId, Math.Abs(ent.Comp.Quality / 2) + 3, _knowledge.GetInverseMastery(skillDelta + 2));
+    }
+
+    public (EntProtoId, EntProtoId?, int, int) FindLowestDelta(Entity<KnowledgeContainerComponent> brain, Dictionary<EntProtoId, int> levelDeltas)
+    {
+        int lowestDelta = 0;
+        int skillDelta = 0;
+        EntProtoId? lowestId = null;
+        EntProtoId knowledgeToUse = FabricationKnowledge;
+        bool setKnowledge = false;
+        foreach (var (id, delta) in levelDeltas)
+        {
+            if (_knowledge.GetKnowledge(brain, id) is not { } skill)
+                continue;
+
+            if (skill.Comp.Category == CraftingCategory && !setKnowledge)
+            {
+                knowledgeToUse = id;
+                setKnowledge = true;
+            }
+
+            int smallestDelta = _knowledge.GetMastery(skill.Comp) - delta;
+            if ((lowestId is not { } || smallestDelta < lowestDelta) && knowledgeToUse != id)
+            {
+                lowestDelta = _knowledge.GetMastery(skill.Comp) - delta;
+                lowestId = id;
+                skillDelta = delta;
+            }
+        }
+
+        return (knowledgeToUse, lowestId, lowestDelta, skillDelta);
     }
 
     private bool LevelDeltasMatch(Dictionary<EntProtoId, int> a, Dictionary<EntProtoId, int> b)

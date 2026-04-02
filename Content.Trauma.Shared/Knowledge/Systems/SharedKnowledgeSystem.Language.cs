@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
-using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Body;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Prototypes;
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.Language.Components;
+using Content.Trauma.Shared.Language.Components;
+using Content.Trauma.Shared.Language.Events;
+using Content.Trauma.Shared.Language.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 

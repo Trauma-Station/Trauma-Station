@@ -6123,3 +6123,35 @@ Entries:
   id: 707
   time: '2026-04-01T22:53:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1779
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Rust and stargazer healing nerfed.
+  - type: Tweak
+    message: Void pull and conduit nerfed.
+  - type: Tweak
+    message: Lock blade upgrade wounding nerfed.
+  - type: Add
+    message: >-
+      Eldritch id can now invert existing portals by clicking on them, alt-click
+      to remove portals.
+  - type: Add
+    message: >-
+      You don't need to change eldritch id appearance to swap accesses, it
+      combines all accesses from consumed cards.
+  - type: Tweak
+    message: Burglars Finesse no longer requires focus and invocation is whisper now.
+  - type: Fix
+    message: Fix not being able to place portals on open doors using eldritch id.
+  - type: Add
+    message: Lock ascension gives you mansus link access.
+  id: 708
+  time: '2026-04-02T03:23:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1780
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Tweaked a bunch of shitcode
+  id: 709
+  time: '2026-04-02T03:29:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1342

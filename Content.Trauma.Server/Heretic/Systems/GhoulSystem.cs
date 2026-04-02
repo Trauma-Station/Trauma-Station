@@ -1,16 +1,31 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Medical.Shared.Body;
+using Content.Medical.Shared.Wounds;
 using Content.Server.Antag;
 using Content.Server.Ghost.Roles.Components;
-using Content.Shared.Hands.Components;
 using Content.Server.Hands.Systems;
+using Content.Server.Jittering;
+using Content.Server.NPC;
+using Content.Server.NPC.HTN;
+using Content.Server.NPC.Systems;
+using Content.Server.Polymorph.Systems;
+using Content.Server.Roles;
+using Content.Server.Speech.EntitySystems;
 using Content.Server.Storage.EntitySystems;
-using Content.Shared._Shitcode.Roles;
 using Content.Shared.Administration.Systems;
+using Content.Shared.Body;
 using Content.Shared.CombatMode;
+using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Ghost.Roles.Components;
+using Content.Shared.Gibbing;
+using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
@@ -19,30 +34,14 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.NPC.Systems;
-using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Shared.Religion;
-using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Wounds;
-using Content.Server.Jittering;
-using Content.Server.NPC;
-using Content.Server.NPC.HTN;
-using Content.Server.NPC.Systems;
-using Content.Server.Roles;
-using Content.Shared._Starlight.CollectiveMind;
-using Content.Shared.Body;
-using Content.Shared.Coordinates;
-using Content.Shared.Roles;
-using Content.Shared.Species.Components;
-using Content.Shared.Hands;
-using Content.Shared.Polymorph;
-using Content.Server.Polymorph.Systems;
-using Content.Server.Speech.EntitySystems;
-using Content.Shared.Gibbing;
 using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
+using Content.Shared.Polymorph;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
+using Content.Shared.Species.Components;
+using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Server.Chaplain;
 using Content.Trauma.Server.Heretic.Abilities;
 using Content.Trauma.Shared.Chaplain.Components;
@@ -52,6 +51,7 @@ using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Content.Trauma.Shared.Heretic.Systems;
+using Content.Trauma.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
@@ -108,7 +108,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         SubscribeLocalEvent<GhoulDeconvertComponent, DamageUnholyEvent>(OnDamageUnholy,
             after: [typeof(WeakToHolySystem)]);
 
-        SubscribeLocalEvent<Shared.Heretic.Components.Ghoul.GhoulRoleComponent, GetBriefingEvent>(OnGetBriefing);
+        SubscribeLocalEvent<GhoulRoleComponent, GetBriefingEvent>(OnGetBriefing);
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
 
@@ -259,7 +259,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         }
     }
 
-    private void OnGetBriefing(Entity<Shared.Heretic.Components.Ghoul.GhoulRoleComponent> ent, ref GetBriefingEvent args)
+    private void OnGetBriefing(Entity<GhoulRoleComponent> ent, ref GetBriefingEvent args)
     {
         var uid = args.Mind.Comp.OwnedEntity;
 
@@ -405,7 +405,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (hasMind)
         {
             _mind.UnVisit(mindId, mind);
-            if (!_role.MindHasRole<Shared.Heretic.Components.Ghoul.GhoulRoleComponent>(mindId))
+            if (!_role.MindHasRole<GhoulRoleComponent>(mindId))
             {
                 SendBriefing(ent.Owner);
                 _role.MindAddRole(mindId, GhoulRole, mind);

@@ -62,6 +62,12 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:EventHereticStarBlast
+    # Replace with its used in yml chud
+    # anyway
+    # its a shitcode way just murder it all
+    # add a marker component to the star blast action yml and check for it in there
+    # instead of getting the event shitcode
+    # then make the star blast event just inherit WorldTargetActionEvent
   - type: HereticAction
     requireMagicItem: true
   - type: SpeakOnAction

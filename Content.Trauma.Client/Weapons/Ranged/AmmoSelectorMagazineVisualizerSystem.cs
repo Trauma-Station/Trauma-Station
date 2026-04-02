@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Weapons.Ranged.Components;
-using Content.Shared._Goobstation.Weapons.AmmoSelector;
+using Content.Trauma.Shared.Weapons.AmmoSelector;
 using Content.Shared.Rounding;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.GameObjects;
