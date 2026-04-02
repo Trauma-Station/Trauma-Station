@@ -35,3 +35,4 @@ public sealed class UserActionsPanelUIController : UIController, IOnStateEntered
         var panel = new UserActionsPanel();
         container.UserActionsPlaceholder.AddChild(panel);
     }
+}
