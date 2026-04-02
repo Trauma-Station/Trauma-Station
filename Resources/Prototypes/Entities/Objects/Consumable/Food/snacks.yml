@@ -547,7 +547,7 @@
           Quantity: 3
 
 - type: entity
-  parent: FoodSnackHealthyBase # Trauma - healthy snack, it's real cane sugar
+  parent: [FoodSnackHealthyBase, NonweaponDurability] # Trauma - Durability - healthy snack, it's real cane sugar
   id: FoodSnackSwirlLollipop
   name: swirl lollipop
   description: A swirly circle of pure concentrated sugar. Who's the biggest kid on the playground now?

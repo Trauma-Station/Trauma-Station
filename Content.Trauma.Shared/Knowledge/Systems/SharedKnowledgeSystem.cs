@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Trauma.Shared.Language.Systems;
 using Content.Shared.Body;
 using Content.Shared.Mind.Components;
 using Content.Shared.Random.Helpers;
@@ -35,6 +35,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] protected readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private readonly EntityQuery<AwakeMobComponent> _awakeQuery = default!;
+    [Dependency] private readonly EntityQuery<KnowledgeComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<KnowledgeContainerComponent> _containerQuery = default!;
+    [Dependency] private readonly EntityQuery<KnowledgeHolderComponent> _holderQuery = default!;
 
     /// <summary>
     /// Every knowledge prototype and its data.
@@ -48,11 +52,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         "expert",
         "master"
     ];
-
-    private EntityQuery<AwakeMobComponent> _awakeQuery;
-    private EntityQuery<KnowledgeComponent> _query;
-    private EntityQuery<KnowledgeContainerComponent> _containerQuery;
-    private EntityQuery<KnowledgeHolderComponent> _holderQuery;
 
     private bool _skillGain;
     private TimeSpan _nextUpdate;
@@ -79,11 +78,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
-
-        _awakeQuery = GetEntityQuery<AwakeMobComponent>();
-        _query = GetEntityQuery<KnowledgeComponent>();
-        _containerQuery = GetEntityQuery<KnowledgeContainerComponent>();
-        _holderQuery = GetEntityQuery<KnowledgeHolderComponent>();
 
         LoadSkillPrototypes();
     }
@@ -624,6 +618,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override int GetMastery(int level)
         => level switch
         {
+            >= 100 => 6, // 6th mastery doesn't exist, but we can use this to say max level
             >= 88 => 5,
             >= 76 => 4,
             >= 51 => 3,
@@ -647,6 +642,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override int GetInverseMastery(int mastery)
         => mastery switch
         {
+            >= 6 => 100, // 6th mastery doesn't exist, but we can use this to say max level
             >= 5 => 88,
             >= 4 => 76,
             >= 3 => 51,

@@ -28,8 +28,8 @@ public sealed class ContainerInteractionSystem : EntitySystem
 
         _container.TryGetContainingContainer((ent, ent.Comp, null), out var ourContainer);
         _container.TryGetContainingContainer(target, out var theirContainer);
-        // allow the same container or neither of them being inside containers
-        if (ourContainer == theirContainer)
+        // allow the same container, neither of them being inside containers or we are not in a container
+        if (ourContainer == theirContainer || ourContainer == null)
             return;
 
         // if they are different containers, allow it if one entity is contained by the other, directly or indirectly

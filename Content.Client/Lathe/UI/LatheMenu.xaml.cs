@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Trauma.Common.Salvage;
+using Content.Goobstation.Common.Silo;
+// </Trauma>
 using System.Linq;
 using System.Text;
 using Content.Client.Materials;

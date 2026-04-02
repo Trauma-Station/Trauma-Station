@@ -26,10 +26,11 @@ public sealed class DamageOnHoldingSystem : EntitySystem
 
     public void SetEnabled(EntityUid uid, bool enabled, DamageOnHoldingComponent? component = null)
     {
-        if (Resolve(uid, ref component))
+        if (Resolve(uid, ref component) && component.Enabled != enabled) // Trauma - don't do anything if it's the same
         {
             component.Enabled = enabled;
             component.NextDamage = _timing.CurTime;
+            Dirty(uid, component); // Trauma - dirty it bruh
         }
     }
 

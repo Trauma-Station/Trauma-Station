@@ -23,6 +23,13 @@
     state: spray_painter
   - type: Item
     sprite: Objects/Tools/spray_painter.rsi
+  # <Trauma>
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-4
+  # </Trauma>
   - type: ActivatableUI
     key: enum.SprayPainterUiKey.Key
   - type: UserInterface

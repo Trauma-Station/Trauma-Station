@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Robust.Shared.Prototypes;
+
+namespace Content.Trauma.Shared.VendingMachines;
+
+/// <summary>
+/// Similar to <c>VendingMachineInventoryPrototype</c> but for <see cref="ShopVendorComponent"/>.
+/// </summary>
+[Prototype]
+public sealed partial class ShopInventoryPrototype : IPrototype
+{
+    [IdDataField]
+    public string ID { get; private set; } = default!;
+
+    /// <summary>
+    /// The item listings for sale.
+    /// </summary>
+    [DataField(required: true)]
+    public List<ShopListing> Listings = new();
+}
+
+[DataRecord, Serializable]
+public partial record struct ShopListing(EntProtoId Id, uint Cost, LocId? OverrideName = null);

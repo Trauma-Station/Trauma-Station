@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared._White.BackStab;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Gibbing;
@@ -11,6 +10,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.BackStab;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -38,12 +38,11 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
     [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
     [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
+    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private readonly EntityQuery<StackComponent> _stackQuery = default!;
+    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
 
-    public SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
-
-    private EntityQuery<GhoulComponent> _ghoulQuery;
-    private EntityQuery<StackComponent> _stackQuery;
-    private EntityQuery<TagComponent> _tagQuery;
+    public static SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
 
     public const string Performer = "Performer";
     public const string Mind = "Mind";
@@ -59,10 +58,6 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         SubscribeLocalEvent<HereticRitualRuneComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<HereticRitualRuneComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<HereticRitualRuneComponent, HereticRitualMessage>(OnRitualChosenMessage);
-
-        _ghoulQuery = GetEntityQuery<GhoulComponent>();
-        _stackQuery = GetEntityQuery<StackComponent>();
-        _tagQuery = GetEntityQuery<TagComponent>();
 
         SubscribeConditions();
         SubscribeEffects();

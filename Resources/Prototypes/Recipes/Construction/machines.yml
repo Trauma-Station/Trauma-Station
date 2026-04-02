@@ -23,7 +23,7 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    MechanicsKnowledge: 0
+    ElectronicsKnowledge: 0
   practical:
     MechanicsKnowledge: 1
   # </Trauma>

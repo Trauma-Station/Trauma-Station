@@ -48,7 +48,6 @@
         - TableMask
         layer:
         - TableLayer
-        - BulletImpassable # Goobstation - Crawling
   - type: SpriteFade
   - type: Sprite
   - type: Icon

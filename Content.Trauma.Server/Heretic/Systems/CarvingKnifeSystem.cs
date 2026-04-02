@@ -18,8 +18,8 @@ using Content.Shared.Maps;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffect;
-using Content.Shared.Tag;
 using Content.Trauma.Common.Heretic;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Wizard.Traps;
@@ -32,6 +32,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
+// TODO: most of this shit can be moved to shared
 public sealed class CarvingKnifeSystem : EntitySystem
 {
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -40,7 +41,6 @@ public sealed class CarvingKnifeSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly GravitySystem _gravity = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
@@ -54,8 +54,8 @@ public sealed class CarvingKnifeSystem : EntitySystem
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
 
-    private static readonly ProtoId<TagPrototype> CarvingTag = "HereticCarving";
     private static readonly EntProtoId AlertEffect = "CarvingAlertedStatusEffect";
+    private HashSet<Entity<HereticCarvingComponent>> _carvings = new();
 
     public override void Initialize()
     {
@@ -209,13 +209,14 @@ public sealed class CarvingKnifeSystem : EntitySystem
 
     private void OnAfterInteract(Entity<CarvingKnifeComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target == null || !_tag.HasTag(args.Target.Value, CarvingTag))
+        if (args.Target is not {} target || !HasComp<HereticCarvingComponent>(target))
             return;
 
         if (!_heretic.IsHereticOrGhoul(args.User))
             return;
 
-        QueueDel(args.Target.Value);
+        // TODO: move this shit to share it can be fully predicted
+        QueueDel(target);
         _audio.PlayPvs(ent.Comp.Sound, ent);
 
         args.Handled = true;
@@ -272,14 +273,9 @@ public sealed class CarvingKnifeSystem : EntitySystem
     private bool CheckOtherCarvingsNearby(MapCoordinates coords)
     {
         var flags = LookupFlags.Static | LookupFlags.Sundries | LookupFlags.Sensors;
-        var lookup = _lookup.GetEntitiesInRange(coords, 0.5f, flags);
-        foreach (var ent in lookup)
-        {
-            if (_tag.HasTag(ent, CarvingTag))
-                return true;
-        }
-
-        return false;
+        _carvings.Clear();
+        _lookup.GetEntitiesInRange(coords, 0.5f, _carvings, flags);
+        return _carvings.Count == 0;
     }
 
     private void OnCarvingSelected(Entity<CarvingKnifeComponent> ent, ref RuneCarvingSelectedMessage args)

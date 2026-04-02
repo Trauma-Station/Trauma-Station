@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.StationEvents;
 using Content.Trauma.Shared.Knowledge.Systems;
+using Content.Trauma.Shared.Language.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.StationEvents;

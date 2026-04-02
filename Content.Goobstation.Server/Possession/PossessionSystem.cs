@@ -1,16 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Magic;
-using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Shared.Changeling.Components;
-using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Possession;
-using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Coordinates;
@@ -19,21 +13,14 @@ using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
-using Content.Shared.Mindshield.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Spawners;
-using static Content.Shared.Administration.Notes.AdminMessageEuiState;
 
 namespace Content.Goobstation.Server.Possession;
 
 public sealed partial class PossessionSystem : SharedPossessionSystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -46,6 +33,7 @@ public sealed partial class PossessionSystem : SharedPossessionSystem
         base.Initialize();
 
         SubscribeLocalEvent<PossessedComponent, EndPossessionEarlyEvent>(OnEarlyEnd);
+        SubscribeLocalEvent<PolymorphedEntityComponent, BeforeMindPossessEvent>(OnPossessPolymorph);
     }
 
     private void OnEarlyEnd(EntityUid uid, PossessedComponent comp, ref EndPossessionEarlyEvent args)
@@ -108,70 +96,22 @@ public sealed partial class PossessionSystem : SharedPossessionSystem
     /// <param name="HideActions">Should all actions be hidden during?</param>
     public bool TryPossessTarget(EntityUid possessed, EntityUid possessor, TimeSpan possessionDuration, bool pacifyPossessed, bool doesMindshieldBlock = false, bool doesChaplainBlock = true, bool hideActions = true, bool polymorphPossessor = true, bool doesImmuneBlock = true)
     {
-        // Possessing a dead guy? What.
-        if (_mobState.IsIncapacitated(possessed) || HasComp<ZombieComponent>(possessed))
-        {
-            _popup.PopupEntity(Loc.GetString("possession-fail-target-dead"), possessor, possessor);
-            return false;
-        }
-
-        // Can't possess polymorphed entities. Sends you straight to the shadow realm if you do.
-        if (HasComp<PolymorphedEntityComponent>(possessed))
-        {
-            _popup.PopupEntity(Loc.GetString("possession-fail-target-polymorphed"), possessor, possessor);
-            return false;
-        }
-
-        // Check for possession immunity (e.g., tinfoil hat)
-        if (doesImmuneBlock && HasComp<PossessionImmuneComponent>(possessed))
-        {
-            _popup.PopupEntity(Loc.GetString("possession-fail-target-immune"), possessor, possessor);
-            return false;
-        }
-
-        // if you ever wanted to prevent this
-        if (doesMindshieldBlock && HasComp<MindShieldComponent>(possessed))
-        {
-            _popup.PopupEntity(Loc.GetString("possession-fail-target-shielded"), possessor, possessor);
-            return false;
-        }
-
-        if (doesChaplainBlock && HasComp<BibleUserComponent>(possessed))
-        {
-            _popup.PopupEntity(Loc.GetString("possession-fail-target-chaplain"), possessor, possessor);
-            return false;
-        }
-
-        if (HasComp<PossessedComponent>(possessed))
-        {
-            _popup.PopupEntity(Loc.GetString("possession-fail-target-already-possessed"), possessor, possessor);
-            return false;
-        }
-
         var swapEv = new BeforeMindSwappedEvent();
         RaiseLocalEvent(possessed, ref swapEv);
 
-        // have fun moving all these to the event
-        List<(Type, string)> blockers =
-        [
-            (typeof(DevilComponent), "devil"),
-            (typeof(GhostComponent), "ghost"),
-            (typeof(SpectralComponent), "ghost"),
-            (typeof(TimedDespawnComponent), "temporary"),
-            (typeof(FadingTimedDespawnComponent), "temporary"),
-            (typeof(ShadowlingComponent), "shadowling"),
-        ];
+        var possessEv = new BeforeMindPossessEvent(doesImmuneBlock, doesMindshieldBlock, doesChaplainBlock);
+        RaiseLocalEvent(possessed, ref swapEv);
 
         if (swapEv.Cancelled)
         {
-            _popup.PopupEntity(Loc.GetString($"possession-fail-{swapEv.Message}"), possessor, possessor);
+            _popup.PopupEntity(Loc.GetString($"possession-fail-target-{swapEv.Message}"), possessor, possessor);
             return false;
         }
 
-        foreach (var (item1, item2) in blockers)
+        if (possessEv.Cancelled)
         {
-            if (CheckMindswapBlocker(item1, item2, possessed, possessor))
-                return false;
+            _popup.PopupEntity(Loc.GetString($"possession-fail-target-{possessEv.Message}"), possessor, possessor);
+            return false;
         }
 
         if (!_mind.TryGetMind(possessor, out var possessorMind, out _))
@@ -252,15 +192,6 @@ public sealed partial class PossessionSystem : SharedPossessionSystem
         _admin.Add(LogType.Mind, LogImpact.High, $"{ToPrettyString(possessor)} possessed {ToPrettyString(possessed)}");
     }
 
-    private bool CheckMindswapBlocker(Type type, string message, EntityUid possessed, EntityUid possessor)
-    {
-        if (!HasComp(possessed, type))
-            return false;
-
-        _popup.PopupEntity(Loc.GetString($"possession-fail-{message}"), possessor, possessor);
-        return true;
-    }
-
     private void UpdateFollowersToNewEntity(EntityUid oldEntity, EntityUid newEntity)
     {
         if (!TryComp<FollowedComponent>(oldEntity, out var followed))
@@ -275,5 +206,15 @@ public sealed partial class PossessionSystem : SharedPossessionSystem
                 _follower.StartFollowingEntity(follower, newEntity);
             }
         }
+    }
+
+    // Can't possess polymorphed entities. Sends you straight to the shadow realm if you do.
+    private void OnPossessPolymorph(Entity<PolymorphedEntityComponent> ent, ref BeforeMindPossessEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        args.Message = "polymorphed";
+        args.Cancelled = true;
     }
 }

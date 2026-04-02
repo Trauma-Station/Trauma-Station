@@ -26,12 +26,12 @@
       NerveDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.70
-        Slash: 0.70
-        Piercing: 0.70 #Can save you, but bullets will still hurt. Will take about 10 shots from a Viper before critting, as opposed to 7 while unarmored and 16~ with a bulletproof vest.
+        Blunt: 0.65 # Trauma, was 0.7
+        Slash: 0.65 # Trauma, was 0.7
+        Piercing: 0.65 # Trauma, was 0.7
         Heat: 0.80
   - type: ExplosionResistance
-    damageCoefficient: 0.7 # Trauma - was 0.9, part coverage makes it only protect your torso
+    damageCoefficient: 0.75 # Trauma, was 0.9
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -220,8 +220,8 @@
 
 #Elite web vest
 - type: entity
-  parent: [ClothingOuterArmorBase, AllowSuitStorageClothing, BaseSyndicateContraband,
-    ClothingOuterStorageBase ] # Trauma
+  parent: [BaseSyndicateContraband, ClothingOuterArmorBase, AllowSuitStorageClothing,
+    ClothingOuterStorageBase] # Trauma
   id: ClothingOuterVestWebElite
   name: elite web vest
   description: A synthetic armor vest. This one has added webbing and heat resistant fibers.

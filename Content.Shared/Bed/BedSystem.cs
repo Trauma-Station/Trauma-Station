@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._EinsteinEngines.Silicon.Components;
+using Content.Trauma.Common.Silicon;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 // </Trauma>
@@ -21,6 +21,9 @@ namespace Content.Shared.Bed;
 
 public sealed class BedSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
+    // </Trauma>
     [Dependency] private readonly ActionContainerSystem _actConts = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
@@ -157,7 +160,7 @@ public sealed class BedSystem : EntitySystem
             foreach (var healedEntity in strapComponent.BuckledEntities)
             {
                 if (_mobStateSystem.IsDead(healedEntity)
-                    || HasComp<SiliconComponent>(healedEntity)) // Goobstation
+                    || _silicon.IsSilicon(healedEntity)) // Trauma
                     continue;
 
                 var damage = bedComponent.Damage;

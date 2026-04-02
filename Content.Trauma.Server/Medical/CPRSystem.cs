@@ -9,15 +9,7 @@ namespace Content.Trauma.Server.Medical;
 public sealed class CPRSystem : SharedCPRSystem
 {
     [Dependency] private readonly RespiratorSystem _respirator = default!;
-
-    private EntityQuery<RespiratorComponent> _respiratorQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _respiratorQuery = GetEntityQuery<RespiratorComponent>();
-    }
+    [Dependency] private readonly EntityQuery<RespiratorComponent> _respiratorQuery = default!;
 
     protected override void TryInhale(EntityUid uid)
     {

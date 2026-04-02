@@ -38,7 +38,7 @@
       spawnerPrototype: GhostRoleSpawnerInsurgent
       startingGear: Insurgent
       unequipOldGear: true
-      max: 8
+      max: 4
       playerRatio: 10
       roleLoadout:
       - RoleSurvivalStandard

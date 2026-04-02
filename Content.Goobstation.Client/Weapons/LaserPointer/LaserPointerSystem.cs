@@ -3,7 +3,7 @@
 using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Client.Hands.Systems;
-using Content.Shared._Goobstation.Weapons.SmartGun;
+using Content.Goobstation.Shared.Weapons.SmartGun;
 using Content.Shared.CombatMode;
 using Content.Shared.Hands.Components;
 using Content.Shared.Wieldable.Components;

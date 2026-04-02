@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Imp.Drone;
+using Content.Shared.Drone;
 using Robust.Shared.Player;
 // </Trauma>
 using Content.Shared.DeviceNetwork;

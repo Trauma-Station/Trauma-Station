@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Projectiles;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Wizard;
+using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -18,13 +18,13 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<EventHereticCosmicRune>(OnCosmicRune);
         SubscribeLocalEvent<EventHereticStarBlast>(OnStarBlast);
         SubscribeLocalEvent<EventHereticCosmicExpansion>(OnExpansion);
-        SubscribeLocalEvent<HereticAscensionCosmosEvent>(OnAscension);
+        SubscribeLocalEvent<HereticAscensionCosmosEvent>(OnAscensionCosmos);
 
         SubscribeLocalEvent<StarBlastComponent, ProjectileHitEvent>(OnHit);
         SubscribeLocalEvent<StarBlastComponent, EntityTerminatingEvent>(OnEntityTerminating);
     }
 
-    private void OnAscension(HereticAscensionCosmosEvent args)
+    private void OnAscensionCosmos(HereticAscensionCosmosEvent args)
     {
         _eye.SetDrawFov(args.Heretic, args.Negative);
     }
@@ -39,14 +39,14 @@ public abstract partial class SharedHereticAbilitySystem
         var coords = Transform(ent).Coordinates;
 
         Heretic.TryGetHereticComponent(ent, out var heretic, out _);
-        var strength = heretic is {CurrentPath: HereticPath.Cosmos} ? heretic.PathStage : 10;
+        var strength = heretic is { CurrentPath: HereticPath.Cosmos } ? heretic.PathStage : 10;
 
         _starMark.ApplyStarMarkInRange(coords, ent, args.Range);
         _starMark.SpawnCosmicFields(coords, 2, strength);
 
         PredictedSpawnAtPosition(args.Effect, coords);
 
-        if (heretic is {Ascended: true, CurrentPath: HereticPath.Cosmos})
+        if (heretic is { Ascended: true, CurrentPath: HereticPath.Cosmos })
         {
             _starMark.SpawnCosmicFieldLine(coords, DirectionFlag.North, -4, 4, 3, strength);
             _starMark.SpawnCosmicFieldLine(coords, DirectionFlag.East, -4, 4, 3, strength);
@@ -64,7 +64,7 @@ public abstract partial class SharedHereticAbilitySystem
         var ent = args.Performer;
 
         Heretic.TryGetHereticComponent(ent, out var heretic, out _);
-        var strength = heretic is {CurrentPath: HereticPath.Cosmos} ? heretic.PathStage : 10;
+        var strength = heretic is { CurrentPath: HereticPath.Cosmos } ? heretic.PathStage : 10;
 
         if (Exists(starBlast.Projectile))
         {

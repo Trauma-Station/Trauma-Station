@@ -25,16 +25,13 @@ public sealed class MindReadActionSystem : EntitySystem
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
 
     private List<string> _recent = new();
-
-    private EntityQuery<ActorComponent> _actorQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _actorQuery = GetEntityQuery<ActorComponent>();
 
         SubscribeLocalEvent<MindReadActionComponent, MindReadActionEvent>(OnMindRead);
     }

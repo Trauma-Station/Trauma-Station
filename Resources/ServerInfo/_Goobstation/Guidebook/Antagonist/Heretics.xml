@@ -16,13 +16,22 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   In order to ascend, you must complete your objectives, research final ascension knowledge and perform ascension ritual on transmutation rune.
   All main knowledge except for starting ones cost 2 and all side knowledge cost 1.
 
-  You can gain knowledge points and become stronger through a few ways:
-  - Draining influences that spawn randomly around the station.
+  To start, you need to choose a path, currently there are six paths:
+  - The Ashen Path: Focuses on fire, damage over time, and early mobility. Great for new heretics.
+  - The Path of Void: Focuses on cold, silence, and stealth. Also great for new heretics.
+  - The Path of Flesh: Focuses on necromancy, summoning, and debuffs. Good for heretics that want friends.
+  - The Path of Lock: Focuses on mobility, access, and stealth. Good for heretics that want to be sneaky.
+  - The Rusted Path: Focuses on area control, and rapid healing. Good for heretics that want to be extremely tanky.
+  - The Path of Blade: Focuses on sheer melee power. Good for heretics that want a bloodbath.
+  - The Path of Cosmos: Focuses on teleportation and confusion! A very difficult heretic path to master.
+
+  After choosing your path; it's time to gather your first influences, this can be done in three ways.
   - Sacrificing crew members your dark patrons hunger for.
   - Automatically getting one knowledge point every 20 minutes.
+  - Draining influences that spawn randomly after you complete a scarifice.
 
   ## The Chaplain
-  A powerful foe indeed, try to steer clear of the Chaplain as their Null Rod and it's variants will deal holy damage to you while you're wielding heretical equipment!
+  A powerful foe indeed, try to steer clear of the Chaplain! Their Null Rod and it's variants will deal holy damage to you while you're wielding heretical equipment!
 
   Heretics can heal holy damage a few ways:
   - Standing on a transmutation rune.
@@ -37,17 +46,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <GuideEntityEmbed Entity="EldritchInfluenceT2" Caption="Tier 2"/>
     <GuideEntityEmbed Entity="EldritchInfluenceT3" Caption="Tier 3"/>
   </Box>
-  Influences are the easy way to gain power points. Whenever there are Heretics aboard Space Station 14, influences will randomly spawn across the station.
+  Influences are the easy way to gain power points. Anytime a heretic completes a sacrifice, influences will randomly spawn across the station.
   They are not visible to the naked eye of a crew member, however they [bold]will[/bold] become visible after harvesting, aside from suddenly changing colors.
-  Influences give 1 knowledge point and can be harvested with either [color=green]Codex Cicatrix[/color] or [color=green]Codex Morbus[/color].
+  Influences give 1 knowledge point when harvested normally, and can be harvested with either [color=green]Codex Cicatrix[/color] or [color=green]Codex Morbus[/color] to get a knowledge point in addition to a free side knowledge.
   <Box>
     <GuideEntityEmbed Entity="EldritchInfluenceSpent" Caption="Harvested influence. Notice the glow."/>
   </Box>
 
-  Each influence can only be harvested once, so the heretic that goes the fastest and grabs the most influences first has to do less killing and sacrificing to reach their ascensions.
+  Each influence can only be harvested once, so try to get them before other heretics, even if that means killing other heretics.
 
   ## Sacrifices
-  Now it's time for you to grow some balls and start sacrificing crewmembers for points.
+  The primary method for getting knowledge is by sacrificing crewmates.
   The Mansus desires only a select few Heathens (non-heretics) at any moment.
 
   At the start of the round you will be assigned four-five sacrifice targets.
@@ -107,7 +116,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   - Your Mansus Grasp will temporarily garble the speech of people who you use it on. This can let you get away with murder while comms are online, but be careful - it's not foolproof.
   - [color=purple]Influences[/color] can spawn in almost any location on the station, ranging from the main hallways and public restrooms to [color=cyan]Command staff offices[/color] and [color=red]restricted security areas[/color] in the Brig. It's best to check every area you can access, public and department.
   - Monkeys and other animals make for great, usually non-suspicious sources of organs or corpses for your heretical rituals.
-  - Most summoned ghouls will drop the components used to create them on death. While having them to die is not ideal, you can easily grab the parts and summon another.
+  - Most summoned ghouls will drop organs on death. While having them to die is not ideal, you can easily grab the parts and summon another.
   - [color=yellow]Eldritch Flask[/color], a stage 3 side path knowledge acts like a cryostasis beaker and has a total capacity of 100 units, meaning you can create deadly mixes that are easily triggered.
   - [color=yellow]Eldritch Essence[/color], contained in eldritch flask is able to rust tiles upon splashing on them. Contrariwise, [color=yellow]Space Cola[/color] clears tile rusting, which is useful for crew when fighting Rusted Path heretic.
 </Document>

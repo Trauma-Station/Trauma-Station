@@ -1,0 +1,94 @@
+# Forge Blugeon
+
+- type: constructionGraph
+  id: ForgeBlugeon
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: handle
+      steps:
+      - tag: HandleMedium
+        doAfter: 10
+        name: construction-graph-tag-mediumhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlemedium
+
+  - node: handle
+    entity: BlugeonCraftStart
+    edges:
+
+
+    - to: warhammerbrass
+      steps:
+      - tag: WarhammerHeadBrass
+        doAfter: 3
+        name: construction-graph-tag-blugeon
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+          state: icon
+
+    - to: warhammersteel
+      steps:
+      - tag: WarhammerHeadSteel
+        doAfter: 3
+        name: construction-graph-tag-blugeon
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+          state: icon
+
+    - to: warhammerplasteel
+      steps:
+      - tag: WarhammerHeadPlasteel
+        doAfter: 3
+        name: construction-graph-tag-blugeon
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+          state: icon
+
+    - to: morningstarbrass
+      steps:
+      - tag: MorningstarHeadBrass
+        doAfter: 3
+        name: construction-graph-tag-blugeon
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+          state: icon
+
+    - to: morningstarsteel
+      steps:
+      - tag: MorningstarHeadSteel
+        doAfter: 3
+        name: construction-graph-tag-blugeon
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+          state: icon
+
+    - to: morningstarplasteel
+      steps:
+      - tag: MorningstarHeadPlasteel
+        doAfter: 3
+        name: construction-graph-tag-blugeon
+        icon:
+          sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+          state: icon
+
+  - node: warhammerbrass
+    entity: BrassForgeWarhammer
+
+  - node: warhammersteel
+    entity: SteelForgeWarhammer
+
+  - node: warhammerplasteel
+    entity: PlasteelForgeWarhammer
+
+
+  - node: morningstarbrass
+    entity: BrassForgeMorningstar
+
+  - node: morningstarsteel
+    entity: SteelForgeMorningstar
+
+  - node: morningstarplasteel
+    entity: PlasteelForgeMorningstar

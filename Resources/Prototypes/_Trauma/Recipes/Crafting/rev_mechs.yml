@@ -1,7 +1,6 @@
 - type: construction
   id: Killdozer
   graph: Killdozer
-  startNode: start
   targetNode: Killdozer
   category: construction-category-antagonist
   objectType: Item
@@ -12,7 +11,6 @@
 - type: construction
   id: PowerArmorFrame
   graph: PowerArmorFrame
-  startNode: start
   targetNode: Frame
   category: construction-category-antagonist
   objectType: Item

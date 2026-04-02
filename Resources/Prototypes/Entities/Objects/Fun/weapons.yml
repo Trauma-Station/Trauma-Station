@@ -328,6 +328,14 @@
       params:
         variation: 0.2
         volume: -11
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Cardboard: 300
+  - type: Tag
+    tags:
+    - Trash
+  #</Trauma>
 
 - type: entity
   parent: [ BaseItem, BaseToySword ]

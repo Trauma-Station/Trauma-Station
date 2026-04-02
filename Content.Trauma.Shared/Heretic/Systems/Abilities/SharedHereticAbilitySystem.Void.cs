@@ -118,7 +118,6 @@ public abstract partial class SharedHereticAbilitySystem
                 targetPart: TargetBodyPart.All,
                 canMiss: false);
 
-            _stun.TryUpdateParalyzeDuration(pookie.Owner, args.StunTime);
             _stun.TryKnockdown(pookie.Owner, args.KnockDownTime, refresh: true);
 
             if (condition)

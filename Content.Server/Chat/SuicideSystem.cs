@@ -1,8 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Shared.Possession;
-using Content.Shared._White.Xenomorphs.Infection;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Medical.Shared.Consciousness;
+using Content.Trauma.Common.Silicon;
+using Content.Trauma.Common.Xenomorphs;
 // </Trauma>
 using Content.Server.Ghost;
 using Content.Server.Hands.Systems;
@@ -26,6 +25,10 @@ namespace Content.Server.Chat;
 
 public sealed class SuicideSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
+    [Dependency] private readonly CommonXenomorphSystem _xeno = default!;
+    // </Trauma>
     [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
@@ -111,7 +114,7 @@ public sealed class SuicideSystem : EntitySystem
         // CannotSuicide tag will allow the user to ghost, but also return to their mind
         // This is kind of weird, not sure what it applies to?
         if (_tagSystem.HasTag(victim, CannotSuicideTag)
-            || HasComp<XenomorphPreventSuicideComponent>(victim)) // Goob station - Xenomorphs
+            || _xeno.IsSlimed(victim)) // Goob station - Xenomorphs
             args.CanReturnToBody = true;
 
         if (_ghostSystem.OnGhostAttempt(victim.Comp.Mind.Value, args.CanReturnToBody, mind: mindComponent))
@@ -163,7 +166,7 @@ public sealed class SuicideSystem : EntitySystem
     private void OnDamageableSuicide(Entity<DamageableComponent> victim, ref SuicideEvent args)
     {
         if (args.Handled
-            || HasComp<XenomorphPreventSuicideComponent>(victim)) // Goob station - Xenomorphs
+            || _xeno.IsSlimed(victim)) // Goob station - Xenomorphs
             return;
 
         var othersMessage = Loc.GetString("suicide-command-default-text-others", ("name", Identity.Entity(victim, EntityManager)));
@@ -179,7 +182,7 @@ public sealed class SuicideSystem : EntitySystem
             return;
         }
 
-        if (HasComp<SiliconComponent>(victim)) // Goobstation
+        if (_silicon.IsSilicon(victim)) // Goobstation
             args.DamageType ??= "Shock";
         else
             args.DamageType ??= "Slash";

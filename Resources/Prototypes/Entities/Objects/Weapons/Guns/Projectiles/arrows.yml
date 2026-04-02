@@ -71,7 +71,6 @@
     maxFillLevels: 1
     fillBaseName: solution
 
-
 - type: entity
   parent: BaseArrow
   id: ArrowRegular
@@ -91,7 +90,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 35
+        Piercing: 20
 
 - type: entity
   parent: BaseArrow
@@ -114,10 +113,48 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 25
+        Piercing: 13 # Trauma, was 25
   - type: Construction
     graph: ImprovisedArrow
     node: ImprovisedArrow
+  # <Trauma>
+  - type: ThrowableBlocked
+  - type: DamageOnHit
+    damage:
+      types:
+        Blunt: 1
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 1
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 50
+  # </Trauma>
 
 - type: entity
   parent: BaseArrow
@@ -140,10 +177,49 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 30
+        Piercing: 13 # Trauma, was 30
   - type: Construction
     graph: ImprovisedArrowPlasma
     node: ImprovisedArrowPlasma
+  # <Trauma>
+  - type: ThrowableBlocked
+  - type: DamageOnHit
+    damage:
+      types:
+        Blunt: 1
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 1
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 50
+      Plasma: 50
+  # </Trauma>
 
 - type: entity
   parent: BaseArrow
@@ -166,11 +242,50 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 25
+        Piercing: 7 # Trauma, was 25
         Radiation: 5
   - type: Construction
     graph: ImprovisedArrowUranium
     node: ImprovisedArrowUranium
+  # <Trauma>
+  - type: ThrowableBlocked
+  - type: DamageOnHit
+    damage:
+      types:
+        Blunt: 1
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 1
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 50
+      Uranium: 50
+  # </Trauma>
 
 - type: entity
   parent: BaseArrow
@@ -193,10 +308,47 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 30
+        Piercing: 15 # Trauma, was 30
   - type: Construction
     graph: ImprovisedArrowCarp
     node: ImprovisedArrowCarp
+  # <Trauma>
+  - type: ThrowableBlocked
+  - type: DamageOnHit
+    damage:
+      types:
+        Blunt: 1
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 1
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+  # </Trauma>
 
 - type: entity
   parent: BaseArrow
@@ -222,3 +374,13 @@
   - type: Construction
     graph: CardArrow
     node: CardArrow
+# <Trauma>
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Cardboard: 50
+# </Trauma>

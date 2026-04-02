@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.Salvage.Components;
 using Content.Shared.DragDrop;
-using Content.Shared.Storage;
 using Content.Shared.Interaction;
 using Content.Shared.Materials;
+using Content.Shared.Storage;
+using Content.Trauma.Common.Salvage;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.OreBag;

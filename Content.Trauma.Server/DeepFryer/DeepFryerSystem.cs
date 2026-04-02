@@ -21,8 +21,7 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-
-    private EntityQuery<TagComponent> _tagQuery;
+    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
 
     private static readonly ProtoId<DamageTypePrototype> damageType = "Heat";
 
@@ -42,8 +41,6 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _tagQuery = GetEntityQuery<TagComponent>();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 

@@ -11,7 +11,6 @@ using Content.Server.Hands.Systems;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
-using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
@@ -26,6 +25,7 @@ using Content.Shared.Popups;
 using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Weather;
+using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Robust.Server.GameStates;
@@ -67,8 +67,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
 
     #endregion
-
-    public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
 
     public override void Initialize()
     {

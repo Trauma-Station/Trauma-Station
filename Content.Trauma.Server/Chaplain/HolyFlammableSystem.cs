@@ -37,8 +37,7 @@ public sealed class HolyFlammableSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StunSystem _stun = default!;
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private const float InitialGrowthRate = 1f;
     private const float IntermediateGrowthRate = 0.5f;
@@ -46,7 +45,7 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     public override void Initialize()
     {
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        base.Initialize();
 
         SubscribeLocalEvent<HolyFlammableComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<HolyFlammableComponent, RejuvenateEvent>(OnRejuvenate);

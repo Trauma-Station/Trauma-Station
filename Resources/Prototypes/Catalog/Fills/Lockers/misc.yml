@@ -198,9 +198,23 @@
     children:
     - id: StrangePill
       prob: 0.15
-    - !type:NestedSelector # Trauma
+    # <Trauma>
+    - !type:NestedSelector
       tableId: SprayPaintsDeath
       prob: 0.075
+    - id: GunpowderBottlePartFull
+      prob: 0.01
+    - id: ReagentContainerCement
+      prob: 0.05
+    - id: SheetPlasteel10
+      prob: 0.05
+    - id: SheetBrass10
+      prob: 0.05
+    - id: Whetstone
+      prob: 0.25
+    - id: WeaponBracing
+      prob: 0.25
+    # </Trauma>
     # Tools
     - !type:NestedSelector
       tableId: MaintToolsTable
