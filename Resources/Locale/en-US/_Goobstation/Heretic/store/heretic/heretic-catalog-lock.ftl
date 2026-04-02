@@ -1,27 +1,3 @@
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Visne <vincefvanwijk@gmail.com>
-# SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 RemberBL <timmermanrembrandt@gmail.com>
-# SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 knowledge-path-lock-s1-name = A Steward's Secret
 knowledge-path-lock-s1-desc =
     The Locked Labyrinth leads to freedom. But only the trapped Stewards know the correct path.
@@ -57,6 +33,7 @@ knowledge-path-lock-s4-desc =
     Click on a pair of airlocks with it to create a pair of portals, which will teleport you between them, but teleport non-heretics randomly.
     You can alt-click the card to invert this behavior for created portals.
     Each card may only sustain a single pair of portals at the same time.
+    Click the existing portal using eldritch id to invert it, alt-click it to remove both links.
     It also functions and appears the same as a regular ID Card.
     Using it on a normal ID card consumes it and gains its access, and you can use it in-hand to change its appearance to a card you fused.
 
@@ -65,13 +42,14 @@ knowledge-path-lock-s5-desc =
     The Concierge scribbled my name into the Handbook. "Welcome to your new home, fellow Steward."
 
     Allows you to transmute a crayon, a wooden plank, and a multitool to create a Labyrinth Handbook.
-    It can materialize a barricade at range that only you and people resistant to magic can pass. Has 5 charges which regenerate over time.
+    It can materialize a barricade at range that noone can pass. Has 5 charges which regenerate over time.
 
 knowledge-path-lock-s6-name = Burglar's Finesse
 knowledge-path-lock-s6-desc =
     Consorting with Burglar spirits is frowned upon, but a Steward will always want to learn about new doors.
 
     Grants you Burglar's Finesse, a single-target spell that puts a random item from the victims backpack into your hand.
+    Doesn't require focus to cast.
 
 knowledge-path-lock-s7-name = Opening Blade
 knowledge-path-lock-s7-desc =
@@ -95,4 +73,4 @@ knowledge-path-lock-s9-desc =
     When completed, you gain the ability to transform into empowered eldritch creatures and your keyblades will become even deadlier.
     In addition, you will create a tear to the Labyrinth's heart; a tear in reality located at the site of this ritual.
     Eldritch creatures will endlessly pour from this rift who are bound to obey your instructions.
-    You also gain x-ray vision as well as immunity to extreme pressure and temperature.
+    You also gain x-ray vision, mansus link hivemind access as well as immunity to extreme pressure and temperature.

@@ -20,14 +20,11 @@ public sealed class TelepathyActionSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-
-    private EntityQuery<ActorComponent> _actorQuery;
+    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _actorQuery = GetEntityQuery<ActorComponent>();
 
         SubscribeLocalEvent<TelepathyActionComponent, TelepathyActionEvent>(OnTelepathyPrompt);
 

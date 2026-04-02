@@ -22,6 +22,8 @@ public sealed class VoidPortalSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
+    private readonly HashSet<Entity<VoidSummonedComponent>> _summoned = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -98,9 +100,9 @@ public sealed class VoidPortalSystem : EntitySystem
         } while (attempts < MaxAttempts); // If it does not find a unobstructed tile it just spawns anyway at the last coordinate.
 
         // Count alive summoned mobs nearby
-        var nearbyEntities = _lookup.GetEntitiesInRange(spawnCoords, portal.SearchRange);
-        nearbyEntities.RemoveWhere(e => !HasComp<VoidSummonedComponent>(e));
-        int aliveSummonedCount = nearbyEntities.Count(e => !_mobState.IsDead(e));
+        _summoned.Clear();
+        _lookup.GetEntitiesInRange(spawnCoords, portal.SearchRange, _summoned);
+        int aliveSummonedCount = _summoned.Count(e => !_mobState.IsDead(e.Owner));
 
         // Decide what to spawn
         EntProtoId protoToSpawn;

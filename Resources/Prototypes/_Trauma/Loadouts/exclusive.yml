@@ -48,12 +48,6 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: 553a2f9c-4584-4396-963a-017efdf812f5
 
-- type: loadoutEffectGroup
-  id: Gribley
-  effects:
-  - !type:PlayerGUIDLoadoutEffect
-    guid: 959c5377-d1a9-4c8b-8a64-27e563846352
-
 # - type: loadoutEffectGroup
 #   id: Parorya
 #   effects:
@@ -66,18 +60,60 @@
 #   - !type:PlayerGUIDLoadoutEffect
 #     guid:
 
-- type: loadoutEffectGroup
-  id: Yonsim
-  effects:
-  - !type:PlayerGUIDLoadoutEffect
-    guid: 86e10de7-0259-498b-87c6-45739aa1e18d
-
 # - type: loadoutEffectGroup
 #   id: Cog
 #   effects:
 #   - !type:PlayerGUIDLoadoutEffect
 #     guid:
 # chef jacket black maroon
+
+- type: loadoutEffectGroup
+  id: TheGungeonologist
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 03cb0c9e-0de7-44dd-8466-d392620381fa
+
+- type: loadoutEffectGroup
+  id: Gribley
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 959c5377-d1a9-4c8b-8a64-27e563846352
+
+- type: loadoutEffectGroup
+  id: _Bias
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: eaae47dc-3aaf-4385-85fc-b2850fcba0dc
+
+- type: loadoutEffectGroup
+  id: Bumblebirb
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: ca8f8ea8-fa32-4c58-a6fe-39b8c75fb0aa
+
+- type: loadoutEffectGroup
+  id: EpsilonTheAnomaly
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 011a4da4-698c-47b3-9ef6-33981849de56
+
+- type: loadoutEffectGroup
+  id: iDoppel
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: e35b63d8-7994-499a-bb22-d98494b383fc
+
+- type: loadoutEffectGroup
+  id: Wraith_man
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 22787576-964c-4b72-97ef-5cff0cde7bb6
+
+- type: loadoutEffectGroup
+  id: ToasterStrudels
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 179d5e03-6b1a-4f92-bb31-2f4fe4fd631d
 
 #Items (ADD TO ExclusiveItems OR IT WONT EXIST)
 - type: loadout
@@ -161,3 +197,67 @@
   storage:
     back:
     - PatreonGribley
+
+- type: loadout
+  id: PatreonTheGungeonologist
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TheGungeonologist
+  storage:
+    back:
+    - PatreonGungeonologist
+    - PatreonGungeonologist2
+
+- type: loadout
+  id: Patreon_Bias
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: _Bias
+  storage:
+    back:
+    - PatreonBias
+
+- type: loadout
+  id: PatreonBumblebirb
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Bumblebirb
+  storage:
+    back:
+    - PatreonBumblebirb
+
+- type: loadout
+  id: PatreonEpsilonTheAnomaly
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EpsilonTheAnomaly
+  storage:
+    back:
+    - PatreonEpsilon
+
+- type: loadout
+  id: PatreoniDoppel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: iDoppel
+  storage:
+    back:
+    - PatreonIdoppel
+
+- type: loadout
+  id: PatreonWraith_man
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Wraith_man
+  storage:
+    back:
+    - PatreonWraith
+
+- type: loadout
+  id: PatreonToasterStrudels
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ToasterStrudels
+  storage:
+    back:
+    - PatreonToasterStrudels

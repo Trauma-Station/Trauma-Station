@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Hands;
-using Content.Shared._Goobstation.Wizard.ArcaneBarrage;
+using Content.Trauma.Common.Hands;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Examine;
@@ -128,13 +128,15 @@ public abstract partial class SharedHandsSystem : EntitySystem
             && TryGetActiveItem(session.AttachedEntity.Value, out var activeItem))
         {
             // Goobstation start
-            if (HasComp<DeleteOnDropAttemptComponent>(activeItem))
+            if (activeItem is { } activeItemNotNull)
             {
-                PredictedQueueDel(activeItem);
-                return false;
+                var dropEv = new ItemDropAttemptEvent();
+                RaiseLocalEvent(activeItemNotNull, ref dropEv);
+                if (dropEv.Cancelled)
+                    return false;
             }
 
-            if (session?.AttachedEntity is not {} ent)
+            if (session?.AttachedEntity is not { } ent)
                 return false;
 
             if (TryGetActiveItem(ent, out var item) && TryComp<VirtualItemComponent>(item, out var virtComp))

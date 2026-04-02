@@ -20,7 +20,7 @@ public sealed class SpeciesBUiTest
     [TestPrototypes]
     private const string Prototypes = $@"
 - type: entity
-  parent: BaseSpeciesMobOrganic
+  parent: [ BaseSpeciesMobOrganic, BaseSpeciesAppearance ]
   id: {BaseMobSpeciesTest}
   name: {BaseMobSpeciesTest}
 ";

@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Damage.Events;
 using Content.Goobstation.Common.Stunnable;
-using Content.Shared._Shitcode.Weapons.Misc;
 using Content.Trauma.Common.Damage;
 // </Trauma>
 using System.Linq;
@@ -168,7 +167,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             return;
 
         var stamQuery = GetEntityQuery<StaminaComponent>();
-        var toHit = new List<(EntityUid Entity, StaminaComponent Component)>();
+        var toHit = new List<EntityUid>();
 
         // Split stamina damage between all eligible targets.
         foreach (var ent in args.HitEntities)
@@ -176,7 +175,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             if (!stamQuery.TryGetComponent(ent, out var stam))
                 continue;
 
-            toHit.Add((ent, stam));
+            toHit.Add(ent);
         }
 
         // Goobstation
@@ -194,8 +193,10 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             overtime *= component.LightAttackOvertimeDamageMultiplier * outgoingModifier.Value;
         }
         // goobstation
-        foreach (var (ent, comp) in toHit)
+        foreach (var ent in toHit)
         {
+            if (!stamQuery.TryGetComponent(ent, out var comp))
+                continue;
 
             TakeStaminaDamage(ent, component.Damage * damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
             TakeOvertimeStaminaDamage(ent, component.Overtime * overtime);

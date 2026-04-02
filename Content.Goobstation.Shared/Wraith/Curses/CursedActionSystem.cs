@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Popups;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
@@ -20,6 +20,7 @@ public sealed class CursedActionSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
 
     private const int MaxCursesBeforeFinal = 4;
     /// <inheritdoc/>
@@ -29,7 +30,7 @@ public sealed class CursedActionSystem : EntitySystem
 
         SubscribeLocalEvent<ApplyCurseActionEvent>(OnApplyCurseAction);
 
-        SubscribeLocalEvent<SiliconComponent, AttemptCurseEvent>(OnSiliconAttempt);
+        SubscribeLocalEvent<AttemptCurseEvent>(OnSiliconAttempt);
         SubscribeLocalEvent<CurseImmuneComponent, AttemptCurseEvent>(OnAttemptCurseImmune);
     }
 
@@ -38,7 +39,7 @@ public sealed class CursedActionSystem : EntitySystem
         if (args.Curse == null)
             return;
 
-        var attemptEv = new AttemptCurseEvent(args.Performer);
+        var attemptEv = new AttemptCurseEvent(args.Target, args.Performer);
         RaiseLocalEvent(args.Target, ref attemptEv);
 
         if (attemptEv.Cancelled)
@@ -85,9 +86,10 @@ public sealed class CursedActionSystem : EntitySystem
     }
 
     #region Cancel Events
-    private void OnSiliconAttempt(Entity<SiliconComponent> ent, ref AttemptCurseEvent args)
+    private void OnSiliconAttempt(ref AttemptCurseEvent args)
     {
-        _popup.PopupClient(Loc.GetString("curse-fail-robot"), args.Curser, args.Curser);
+        if (_silicon.IsSilicon(args.Entity))
+            _popup.PopupClient(Loc.GetString("curse-fail-robot"), args.Curser, args.Curser);
         args.Cancelled = true;
     }
 

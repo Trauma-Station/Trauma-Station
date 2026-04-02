@@ -1,6 +1,6 @@
 - type: entity
   name: mini hoe
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma- Durability
   id: HydroponicsToolMiniHoe
   description: It's used for removing weeds or scratching your back.
   components:
@@ -28,7 +28,7 @@
 
 - type: entity
   name: plant clippers
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma- Durability
   id: HydroponicsToolClippers
   description: A tool used to take samples from plants.
   components:
@@ -69,7 +69,7 @@
 
 - type: entity
   name: scythe
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma- Durability
   id: HydroponicsToolScythe
   description: A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow.
   components:
@@ -84,6 +84,13 @@
         Slash: 10
   - type: Item
     size: Normal
+  # <Trauma>
+    shape:
+    - 0,0,1,0
+    - 0,1,0,2
+    storedOffset: -5,-5
+    storedRotation: -45
+  # </Trauma>
   - type: Clothing
     sprite: Objects/Tools/Hydroponics/scythe.rsi
     slots:
@@ -99,7 +106,7 @@
 
 - type: entity
   name: hatchet
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma- Durability
   id: HydroponicsToolHatchet
   description: A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood.
   components:
@@ -122,6 +129,13 @@
     storedSprite:
       state: storage
       sprite: Objects/Tools/Hydroponics/hatchet.rsi
+  # <Trauma>
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 1,1,1,1
+    storedOffset: 10,0
+  # </Trauma>
   - type: BoneSaw # Shitmed
     speed: 0.35
   - type: SurgeryTool # Shitmed
@@ -135,7 +149,7 @@
 
 - type: entity
   name: spade
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma- Durability
   id: HydroponicsToolSpade
   description: A small tool for digging and moving dirt.
   components:

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Wraith.Events;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Maps;
 using Content.Shared.StatusEffect;
@@ -29,13 +30,11 @@ public sealed class RevenantShockwaveSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
-    private EntityQuery<StatusEffectsComponent> _statusEffectsQuery;
+    private HashSet<Entity<DamageableComponent>> _targets = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _statusEffectsQuery = GetEntityQuery<StatusEffectsComponent>();
 
         SubscribeLocalEvent<RevenantShockwaveComponent, RevenantShockwaveEvent>(OnShockwave);
     }
@@ -44,20 +43,21 @@ public sealed class RevenantShockwaveSystem : EntitySystem
     {
         PryAnyTiles(ent);
 
-        if (ent.Comp.StructureDamage == null)
+        if (ent.Comp.StructureDamage is not {} damage)
             return;
 
-        var lookup = _lookup.GetEntitiesInRange(ent.Owner, ent.Comp.SearchRange);
-
-        foreach (var entity in lookup)
+        var coords = Transform(ent).Coordinates;
+        _targets.Clear();
+        _lookup.GetEntitiesInRange(coords, ent.Comp.SearchRange, _targets);
+        foreach (var entity in _targets)
         {
             if (_tag.HasTag(entity, ent.Comp.WallTag) || _tag.HasTag(entity, ent.Comp.WindowTag))
             {
-                _damageable.TryChangeDamage(entity, ent.Comp.StructureDamage, true, origin: ent.Owner);
+                _damageable.ChangeDamage(entity.AsNullable(), damage, true, origin: ent.Owner);
                 continue;
             }
 
-            _stun.KnockdownOrStun(entity, ent.Comp.KnockdownDuration);
+            _stun.KnockdownOrStun(entity.Owner, ent.Comp.KnockdownDuration);
         }
 
         _audio.PlayPredicted(ent.Comp.ShockSound, ent.Owner, null);

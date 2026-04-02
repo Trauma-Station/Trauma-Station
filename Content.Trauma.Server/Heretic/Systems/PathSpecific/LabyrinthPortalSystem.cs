@@ -20,6 +20,8 @@ public sealed class LabyrinthPortalSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly EntityLookupSystem _look = default!;
+    [Dependency] private readonly EntityQuery<MindComponent> _mindQuery = default!;
+    [Dependency] private readonly EntityQuery<HereticComponent> _hereticQuery = default!;
 
     private TimeSpan _nextSpawn;
     private readonly TimeSpan _spawnDelay = TimeSpan.FromSeconds(1);
@@ -29,18 +31,12 @@ public sealed class LabyrinthPortalSystem : EntitySystem
     private const int CollisionMask = (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable |
                                              CollisionGroup.LowImpassable | CollisionGroup.MidImpassable);
 
-    private EntityQuery<MindComponent> _mindQuery;
-    private EntityQuery<HereticComponent> _hereticQuery;
-
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<LabyrinthPortalComponent, HereticStateChangedEvent>(OnStateChanged);
         SubscribeLocalEvent<LabyrinthPortalComponent, SetGhoulBoundHereticEvent>(OnBoundHeretic);
-
-        _mindQuery = GetEntityQuery<MindComponent>();
-        _hereticQuery = GetEntityQuery<HereticComponent>();
     }
 
     private void OnBoundHeretic(Entity<LabyrinthPortalComponent> ent, ref SetGhoulBoundHereticEvent args)

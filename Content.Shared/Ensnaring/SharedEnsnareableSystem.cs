@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.DoAfter;
-using Content.Shared._Goobstation.Wizard.Mutate;
 using Content.Shared.Projectiles;
+using Content.Trauma.Common.Cuffs;
 // </Trauma>
 using Content.Shared.Alert;
 using Content.Shared.CombatMode.Pacification;
@@ -29,9 +29,6 @@ public sealed partial class EnsnareableDoAfterEvent : SimpleDoAfterEvent
 
 public abstract class SharedEnsnareableSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private   readonly SharedHulkSystem _hulk = default!;
-    // </Trauma>
     [Dependency] private   readonly AlertsSystem _alerts = default!;
     [Dependency] private   readonly MovementSpeedModifierSystem _speedModifier = default!;
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
@@ -102,9 +99,8 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         else
             _hands.PickupOrDrop(args.User, bola);
 
-        // TODO: make this an event
-        if (args.User == args.Target && TryComp(args.User, out HulkComponent? hulk))
-            _hulk.Roar((args.User, hulk));
+        var snareBrokenEv = new EnsnareBrokenEvent(args.Target);
+        RaiseLocalEvent(args.User, ref snareBrokenEv);
         // Goobstation end
 
         if (args.User == args.Target)
@@ -176,8 +172,11 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         var freeTime = user == target ? component.BreakoutTime : component.FreeTime;
         var breakOnMove = !component.CanMoveBreakout;
 
-        if (user == target && HasComp<HulkComponent>(user)) // Goobstation
-            freeTime = 0f;
+        // <Trauma>
+        var ev = new EnsnareModifyFreeDurationEvent(target, freeTime);
+        RaiseLocalEvent(user, ref ev);
+        freeTime = ev.FreeTime;
+        // </Trauma>
 
         var doAfterEventArgs = new DoAfterArgs(EntityManager, user, freeTime, new EnsnareableDoAfterEvent(), target, target: target, used: ensnare)
         {

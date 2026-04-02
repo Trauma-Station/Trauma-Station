@@ -1,0 +1,54 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Atmos;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+
+namespace Content.Trauma.Shared.CosmicCult.Components;
+
+[RegisterComponent]
+public sealed partial class CosmicSpireComponent : Component
+{
+
+    [DataField]
+    public bool Enabled;
+
+    [DataField]
+    public float DrainRate = 250; // 6-ish entropy per minute
+
+    [DataField]
+    public float DrainThreshHold = 2500;
+
+    [DataField]
+    public HashSet<Gas> DrainGases =
+    [
+        Gas.Oxygen,
+        Gas.Nitrogen,
+        Gas.CarbonDioxide,
+        Gas.WaterVapor,
+        Gas.Ammonia,
+        Gas.NitrousOxide,
+    ];
+
+    [DataField]
+    public GasMixture Storage = new();
+
+    [DataField]
+    public EntProtoId EntropyMote = "MaterialCosmicCultEntropy1";
+
+    [DataField]
+    public EntProtoId SpawnVFX = "CosmicGenericVFX";
+}
+
+[Serializable, NetSerializable]
+public enum SpireVisuals : byte
+{
+    Status,
+}
+
+[Serializable, NetSerializable]
+public enum SpireStatus : byte
+{
+    Off,
+    On,
+}

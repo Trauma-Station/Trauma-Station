@@ -338,7 +338,7 @@
   - type: InstantAction
     event: !type:ShriekDissonantEvent
   - type: ChangelingAction
-    chemicalCost: 30
+    chemicalCost: 45
     useOnFire: true
     useInLesserForm: true
     requireAbsorbed: 1
@@ -740,7 +740,7 @@
     chemicalCost: 20
     useInLesserForm: true
     useOnFire: true
-    requireAbsorbed: 1
+    requireAbsorbed: 2
 
 - type: entity
   parent: BaseAction

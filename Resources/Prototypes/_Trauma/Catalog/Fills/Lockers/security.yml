@@ -30,7 +30,9 @@
     - id: ContrabandDetectorFlatpack
     - id: SecurityMegaphone
     - id: WeaponEnergyShotgun
-    - id: SecTrackTablet # Corvax-SecTrack
+    - id: GunpowderBottlePartFull
+    - id: ReinforcementCallerHos
+    - id: SecTrackTablet
 
 - type: entityTable
   id: FillLockerSecurityTrauma

@@ -16,14 +16,11 @@ public sealed class GeneticsResearchConsoleSystem : EntitySystem
     [Dependency] private readonly MutationSystem _mutation = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly ResearchSystem _research = default!;
-
-    private EntityQuery<ResearchClientComponent> _clientQuery;
+    [Dependency] private readonly EntityQuery<ResearchClientComponent> _clientQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _clientQuery = GetEntityQuery<ResearchClientComponent>();
 
         SubscribeLocalEvent<GeneticsResearchConsoleComponent, MutationSequencedEvent>(OnSequenced);
     }

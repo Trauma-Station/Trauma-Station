@@ -1,4 +1,19 @@
 - type: reagent
+  id: Cement
+  name: reagent-name-cement
+  group: Pyrotechnic
+  desc: reagent-desc-cement
+  physicalDesc: reagent-physical-desc-pungent
+  color: "#7a7866"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 3
+
+- type: reagent
   id: SodiumBicarbonate
   name: reagent-name-sodium-bicarbonate
   desc: reagent-desc-sodium-bicarbonate

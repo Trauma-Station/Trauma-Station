@@ -171,9 +171,8 @@
     emagStaticPacks:
     - SecurityWeaponsStatic
     - SecurityAmmoStatic
-    - SyndicateAmmoStatic
+    # - SyndicateAmmoStatic # Trauma
     # Goobstation
-    - SyndicateAmmoLightStatic
     - ScienceExplosives
   - type: BlueprintReceiver
     whitelist:
@@ -509,13 +508,9 @@
     - SpecOpsGoogles
     - PowerCells
     # </Goob>
-  - type: EmagLatheRecipes
-    emagStaticPacks:
-    - SyndicateAmmoStatic
-    # <Goob>
-    - SyndicateAmmoLightStatic
-    - SyndicateAmmoHeavyStatic
-    # </Goob>
+  # - type: EmagLatheRecipes
+  #   emagStaticPacks:
+  #   # - SyndicateAmmoStatic # Trauma
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
 
@@ -547,13 +542,9 @@
       unlitRunningState: unlit-building
       staticPacks:
       - SecurityAmmoStatic
-    - type: EmagLatheRecipes
-      emagStaticPacks:
-      - SyndicateAmmoStatic
-      # <Goob>
-      - SyndicateAmmoLightStatic
-      - SyndicateAmmoHeavyStatic
-      # </Goob>
+    # - type: EmagLatheRecipes
+    #   emagStaticPacks:
+      # - SyndicateAmmoStatic # Trauma
     - type: MaterialStorage
       whitelist: *StandardMaterialWhitelist
 

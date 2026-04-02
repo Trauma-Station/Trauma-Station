@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.NPC.Components;
-using Content.Shared._Goobstation.Weapons.SmartGun;
 using Content.Shared.Wieldable.Components;
 using Robust.Server.GameStates;
+using Content.Goobstation.Shared.Weapons.SmartGun;
 
 namespace Content.Goobstation.Server.Weapons.Ranged;
 

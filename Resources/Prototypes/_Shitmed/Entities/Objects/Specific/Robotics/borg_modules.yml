@@ -9,12 +9,12 @@
     - state: icon-surgery
   - type: ItemBorgModule
     hands:
-    - item: Scalpel
-    - item: SawElectric
-    - item: Drill
+    - item: BorgScalpel # Trauma - Durability
+    - item: BorgSawElectric # Trauma - Durability
+    - item: BorgDrill # Trauma - Durability
     - item: Retractor
     - item: Hemostat
-    - item: Cautery
+    - item: BorgCautery # Trauma - Durability
     - item: MedicalStitches
     - item: BoneGel
     #- item: Bonesetter # Trauma - unused currently
@@ -39,8 +39,8 @@
     - state: icon-advanced-surgery
   - type: ItemBorgModule
     hands:
-    - item: EnergyScalpel
-    - item: EnergyCautery
+    - item: BorgEnergyScalpel # Trauma - Durabiltiy
+    - item: BorgEnergyCautery # Trauma - Durabiltiy
     - item: AdvancedRetractor
     - item: AdvancedBoneGel
     - hand:

@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [BaseItem, BracingDurability]
   id: BaseWeaponCrusher
   name: crusher
   description: An early design of the proto-kinetic accelerator.
@@ -233,6 +233,7 @@
     sprite: _Lavaland/Objects/Weapons/Crushers/crusher_halberd.rsi
   # Basically a crusher but better
   - type: MeleeWeapon
+    attackRate: 0.8
     range: 2.2
     damage:
       types:

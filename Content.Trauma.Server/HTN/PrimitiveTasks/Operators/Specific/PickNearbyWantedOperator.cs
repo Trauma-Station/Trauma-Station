@@ -21,13 +21,12 @@ namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 [DataDefinition]
 public sealed partial class PickNearbyWantedOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
     private SharedAudioSystem _audio = default!;
-
-    [DataField]
-    public string RangeKey = NPCBlackboard.SecuritronArrestRange;
+    private EntityQuery<CuffableComponent> _cuffableQuery = default!;
+    private EntityQuery<MobStateComponent> _mobQuery = default!;
 
     /// <summary>
     /// Target entity to inject
@@ -61,17 +60,16 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
         _audio = sysManager.GetEntitySystem<SharedAudioSystem>();
+
+        _cuffableQuery = _entMan.GetEntityQuery<CuffableComponent>();
+        _mobQuery = _entMan.GetEntityQuery<MobStateComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard, CancellationToken cancelToken)
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entManager))
-            return (false, null);
-
-        var cuffableQuery = _entManager.GetEntityQuery<CuffableComponent>();
-        var mobStateQuery = _entManager.GetEntityQuery<MobStateComponent>();
+        var range = 12f;
 
         _entities.Clear();
         _lookup.GetEntitiesInRange(owner.ToCoordinates(), range, _entities);
@@ -81,11 +79,11 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
             if (entity.Comp.StatusIcon != CriminalStatus)
                 continue;
 
-            if (!mobStateQuery.TryGetComponent(entity, out var state) || state.CurrentState != MobState.Alive)
+            if (!_mobQuery.TryComp(entity, out var state) || state.CurrentState != MobState.Alive)
                 continue;
 
             // we still want to stun them if they cant ever be fully arrested
-            if (cuffableQuery.TryGetComponent(entity, out var cuffable) && cuffable.CuffedHandCount > 0)
+            if (_cuffableQuery.TryComp(entity, out var cuffable) && cuffable.CuffedHandCount > 0)
                 continue;
 
             //Needed to make sure it doesn't sometimes stop right outside it's interaction range
@@ -96,7 +94,7 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
                 continue;
 
             if (TargetFoundSound != null &&
-                (!blackboard.TryGetValue<EntityUid>(TargetKey, out var oldTarget, _entManager) ||
+                (!blackboard.TryGetValue<EntityUid>(TargetKey, out var oldTarget, _entMan) ||
                  oldTarget != entity.Owner))
             {
                 var targetFoundSound = _audio.ResolveSound(TargetFoundSound);
@@ -106,7 +104,7 @@ public sealed partial class PickNearbyWantedOperator : HTNOperator
             return (true, new Dictionary<string, object>()
             {
                 {TargetKey, entity.Owner},
-                {TargetMoveKey, _entManager.GetComponent<TransformComponent>(entity).Coordinates},
+                {TargetMoveKey, _entMan.GetComponent<TransformComponent>(entity).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });
         }

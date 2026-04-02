@@ -42,17 +42,13 @@ public sealed class PredictedProjectileSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
 
-    private EntityQuery<ProjectileComponent> _query;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
+    [Dependency] private readonly EntityQuery<ProjectileComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private readonly EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ProjectileComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
     }

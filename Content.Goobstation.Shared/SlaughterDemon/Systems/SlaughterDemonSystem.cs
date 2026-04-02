@@ -12,11 +12,11 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Polymorph;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.SlaughterDemon.Systems;
@@ -32,22 +32,12 @@ public sealed class SlaughterDemonSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-
-    private EntityQuery<ActorComponent> _actorQuery;
-    private EntityQuery<BloodstreamComponent> _bloodstreamQuery;
-    private EntityQuery<MobStateComponent> _mobStateQuery;
+    [Dependency] private readonly EntityQuery<MobStateComponent> _mobStateQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
-
-        _actorQuery = GetEntityQuery<ActorComponent>();
-        _bloodstreamQuery = GetEntityQuery<BloodstreamComponent>();
-        _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
         // movement speed
         SubscribeLocalEvent<SlaughterDemonComponent, RefreshMovementSpeedModifiersEvent>(RefreshMovement);
@@ -141,7 +131,7 @@ public sealed class SlaughterDemonSystem : EntitySystem
         if (_mobStateQuery.TryComp(pullingEnt, out var mobState))
             _mobState.ChangeMobState(pullingEnt, MobState.Dead, mobState);
 
-        RemoveBlood(pullingEnt);
+        _bloodstream.SpillAllSolutions(pullingEnt);
 
         _audio.PlayPredicted(slaughterDevour.FeastSound, args.PreviousCoordinates, ent.Owner);
 
@@ -194,34 +184,17 @@ public sealed class SlaughterDemonSystem : EntitySystem
     private void OnPickup(Entity<SlaughterDemonComponent> ent, ref PickupAttemptEvent args) =>
         args.Cancel();
 
-    private void RemoveBlood(EntityUid uid)
-    {
-        if (!_bloodstreamQuery.TryComp(uid, out var comp))
-            return;
-
-        _bloodstream.SpillAllSolutions((uid, comp));
-    }
-
     #region Helper
 
     private void PlayMeatySound(Entity<SlaughterDemonComponent> ent)
     {
-        if (_netManager.IsClient)
+        if (!SharedRandomExtensions.PredictedProb(_timing, ent.Comp.BloodCrawlSoundChance, GetNetEntity(ent)))
             return;
 
-        if (!_random.Prob(ent.Comp.BloodCrawlSoundChance))
-            return;
-
-        var entities = _lookup.GetEntitiesInRange(ent.Owner, ent.Comp.BloodCrawlSoundLookup);
-        foreach (var entity in entities)
-        {
-            if (entity == ent.Owner
-                || !_actorQuery.HasComp(entity))
-                continue;
-
-            // ALEXA PLAY MEATY SOUND 🔊🔊
-            _audio.PlayEntity(ent.Comp.BloodCrawlSounds, entity, ent.Owner);
-        }
+        // ALEXA PLAY MEATY SOUND 🔊🔊
+        var parm = ent.Comp.BloodCrawlSounds.Params // chicken parm
+            .WithMaxDistance(ent.Comp.BloodCrawlSoundLookup);
+        _audio.PlayPredicted(ent.Comp.BloodCrawlSounds, ent, ent, parm);
     }
 
     #endregion

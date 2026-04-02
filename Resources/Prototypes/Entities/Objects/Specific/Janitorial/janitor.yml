@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma- Durability
   name: mop
   id: MopItem
   description: A mop that can't be stopped, viscera cleanup detail awaits.
@@ -351,7 +351,7 @@
     - type: DnaSubstanceTrace
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma- Durability
   id: WireBrush
   name: wire brush
   description: A bristly steel wire brush, perfect for scraping away even the toughest patches of rust.

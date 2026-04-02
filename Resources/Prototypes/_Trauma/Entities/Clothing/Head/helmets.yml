@@ -27,11 +27,8 @@
         Slash: 0.3
         Piercing: 0.3
         Heat: 0.3
-        Radiation: 0.75
-        Caustic: 0.75
   - type: ExplosionResistance
-    damageCoefficient: 0.4
-  - type: FaceHuggerBlocker
+    damageCoefficient: 0.75
 
 - type: entity
   parent: [ ClothingHeadHelmetArmoredBase, BaseRevMajorContraband ]

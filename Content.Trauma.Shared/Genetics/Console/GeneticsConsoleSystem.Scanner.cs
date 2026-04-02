@@ -13,12 +13,10 @@ public sealed partial class GeneticsConsoleSystem
 {
     private List<SequenceState> _sequences = new();
 
-    private EntityQuery<GeneticsScannerComponent> _scannerQuery;
+    [Dependency] private readonly EntityQuery<GeneticsScannerComponent> _scannerQuery = default!;
 
     private void InitializeScanner()
     {
-        _scannerQuery = GetEntityQuery<GeneticsScannerComponent>();
-
         SubscribeLocalEvent<GeneticsScannerComponent, ScannerConnectedEvent>(OnScannerConnected);
         SubscribeLocalEvent<GeneticsScannerComponent, ScannerDisconnectedEvent>(OnScannerDisconnected);
         SubscribeLocalEvent<GeneticsScannerComponent, ScannerInsertedEvent>(OnScannerInserted);

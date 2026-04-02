@@ -5,6 +5,7 @@ guide-entry-mutations = Mutations list
 guide-entry-xenobiology = Xenobiology
 
 guide-entry-tackle = Tackle
+guide-entry-forging = Forging
 
 guide-entry-civilian = Civilian Jobs
 
@@ -19,3 +20,5 @@ guide-entry-slasher = Slasher
 guide-entry-slaughter-demon = Slaughter Demon
 
 guide-entry-skills = Skills
+
+guide-entry-chaplain-nullrodforms = Nullrod Forms

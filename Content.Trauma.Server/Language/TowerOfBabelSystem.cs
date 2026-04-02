@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.Language.Components;
+using Content.Trauma.Shared.Language.Systems;
+using Robust.Shared.Prototypes;
+
+namespace Content.Trauma.Server.Language;
+
+public sealed class TowerOfBabelSystem : EntitySystem
+{
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly SharedLanguageSystem _language = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<TowerOfBabelComponent, MapInitEvent>(OnInit, before: [typeof(LanguageSystem)]);
+    }
+
+    private void OnInit(Entity<TowerOfBabelComponent> ent, ref MapInitEvent args)
+    {
+        if (!TryComp(ent, out LanguageSpeakerComponent? speaker))
+            return;
+
+        var spoken = speaker.Speaks;
+        spoken.Clear();
+        foreach (var proto in _proto.EnumeratePrototypes<LanguagePrototype>())
+        {
+            spoken.Add(proto.ID);
+        }
+        var understood = speaker.Understands;
+        understood.Clear();
+        understood.AddRange(spoken);
+        Dirty(ent.Owner, speaker);
+        _language.EnsureValidLanguage((ent.Owner, speaker));
+    }
+}

@@ -1,15 +1,11 @@
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Language.Systems; // EE
+// </Trauma>
 using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
 using Content.Server.Power.EntitySystems;
-using Content.Server._EinsteinEngines.Language; // EE
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Labels.Components;
@@ -33,6 +29,9 @@ namespace Content.Server.Telephone;
 
 public sealed class TelephoneSystem : SharedTelephoneSystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonLanguageSystem _language = default!; // Einstein Engines - Language
+    // </Trauma>
     [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly InteractionSystem _interaction = default!;
     [Dependency] private readonly IdCardSystem _idCardSystem = default!;
@@ -43,7 +42,6 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
-    [Dependency] private readonly LanguageSystem _language = default!; // Einstein Engines - Language
 
     // Has set used to prevent telephone feedback loops
     private HashSet<(EntityUid, string, Entity<TelephoneComponent>)> _recentChatMessages = new();
