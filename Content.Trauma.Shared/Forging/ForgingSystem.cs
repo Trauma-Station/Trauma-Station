@@ -253,7 +253,7 @@ public sealed class ForgingSystem : EntitySystem
         _transform.SetLocalRotation(uid, rot);
 
         if (wasHolding)
-            _hands.TryPickupAnyHand(user.Value, uid);
+            _hands.TryPickupAnyHand(user!.Value, uid);
 
         var ev = new ConstructionChangedEvent(uid);
         RaiseLocalEvent(part, ref ev);
