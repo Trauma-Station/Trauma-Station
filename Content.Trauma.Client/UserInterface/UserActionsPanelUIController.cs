@@ -12,7 +12,6 @@ namespace Content.Trauma.Client.UserInterface;
 public sealed class UserActionsPanelUIController : UIController, IOnStateEntered<GameplayState>
 {
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    [Dependency] private readonly ClientGameTicker _gameTicker = default!;
 
     public override void Initialize()
     {
