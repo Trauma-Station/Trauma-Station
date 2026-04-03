@@ -18,46 +18,57 @@ public sealed class DeafnessSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private float _originalVolume;
+    private bool _deaf;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<DeafComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<DeafComponent, ComponentShutdown>(OnDeafShutdown);
-        SubscribeLocalEvent<DeafComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<DeafComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<DeafComponent, ComponentStartup>(OnComponentStartUp);
+        SubscribeLocalEvent<DeafComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
     }
 
-    private void OnComponentStartUp(EntityUid uid, DeafComponent component, ComponentStartup args)
+    private void OnComponentStartup(EntityUid uid, DeafComponent component, ComponentStartup args)
     {
         if (_player.LocalEntity == uid)
-        {
-            // Save the current volume before muting
-            _originalVolume = _cfg.GetCVar(CCVars.AudioMasterVolume);
-            _audio.SetMasterGain(0);
-        }
+            TryDeafen();
     }
 
     private void OnDeafShutdown(EntityUid uid, DeafComponent component, ComponentShutdown args)
     {
         if (_player.LocalEntity == uid)
-            _audio.SetMasterGain(_originalVolume);
-    }
-
-    private void OnPlayerDetached(EntityUid uid, DeafComponent component, LocalPlayerDetachedEvent args)
-    {
-        if (_player.LocalEntity == uid)
-            _audio.SetMasterGain(_originalVolume);
+            TryUndeafen();
     }
 
     private void OnPlayerAttached(EntityUid uid, DeafComponent component, LocalPlayerAttachedEvent args)
     {
-        if (_player.LocalEntity == uid)
-        {
-            // Save volume when re-attaching too, in case it changed
-            _originalVolume = _cfg.GetCVar(CCVars.AudioMasterVolume);
-            _audio.SetMasterGain(0);
-        }
+        TryDeafen();
+    }
+
+    private void OnPlayerDetached(EntityUid uid, DeafComponent component, LocalPlayerDetachedEvent args)
+    {
+        TryUndeafen();
+    }
+
+    private void TryDeafen()
+    {
+        if (_deaf)
+            return; // don't set _originalVolume to 0 and thus cause gain to be locked at 0
+
+        // Save the current volume before muting
+        _originalVolume = _cfg.GetCVar(CCVars.AudioMasterVolume);
+        _audio.SetMasterGain(0);
+        _deaf = true;
+    }
+
+    private void TryUndeafen()
+    {
+        if (!_deaf)
+            return;
+
+        _audio.SetMasterGain(_originalVolume);
+        _deaf = false;
     }
 }
