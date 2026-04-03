@@ -248,22 +248,22 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
         var xform = Transform(ent);
         outPos = new EntityCoordinates();
 
-        if (!TryComp<MapGridComponent>(xform.GridUid, out var grid))
+        if (xform.GridUid is not {} gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
         {
             _popup.PopupClient(Loc.GetString("ghost-role-colossus-effigy-error-grid"), ent, ent);
             return false;
         }
 
-        var localTile = _map.GetTileRef(xform.GridUid.Value, grid, xform.Coordinates);
+        var localTile = _map.GetTileRef(gridUid, grid, xform.Coordinates);
         var targetIndices = localTile.GridIndices + new Vector2i(0, 1);
-        var pos = _map.ToCenterCoordinates(xform.GridUid.Value, targetIndices, grid);
+        var pos = _map.ToCenterCoordinates(gridUid, targetIndices, grid);
         outPos = pos;
 
         // CHECK IF IT'S BEING PLACED CHEESILY CLOSE TO SPACE or blocked by something
         var spaceDistance = 2;
         var worldPos = _transform.GetWorldPosition(xform);
         var mask = CollisionGroup.MachineMask;
-        foreach (var tile in _map.GetTilesIntersecting(xform.GridUid.Value, grid, new Circle(worldPos, spaceDistance)))
+        foreach (var tile in _map.GetTilesIntersecting(gridUid, grid, new Circle(worldPos, spaceDistance)))
         {
             if (_turf.IsSpace(tile))
             {
