@@ -30,3 +30,9 @@
   id: NormalMode
   coefficients:
     Structural: 1
+
+- type: damageModifierSet
+  id: Morph
+  coefficients:
+    Radiation: 0
+    Heat: 2
