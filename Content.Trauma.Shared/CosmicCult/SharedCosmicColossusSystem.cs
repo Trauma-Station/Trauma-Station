@@ -17,6 +17,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
@@ -57,7 +58,7 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
 
     private HashSet<Entity<MobStateComponent>> _mobs = [];
@@ -86,24 +87,26 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
             {
                 comp.AttackCharge = false;
                 _audio.PlayPredicted(comp.SunderSfx, ent, ent);
-                PredictedSpawnAtPosition(comp.SunderVfx, Transform(ent).Coordinates);
+                var coords = Transform(ent).Coordinates;
+                PredictedSpawnAtPosition(comp.SunderVfx, coords);
 
                 _mobs.Clear();
-                _lookup.GetEntitiesInRange<MobStateComponent>(Transform(ent).Coordinates, comp.SunderRange, _mobs);
-                _mobs.RemoveWhere(target => _entityWhitelist.IsValid(comp.SunderBlacklist, target));
+                _lookup.GetEntitiesInRange(coords, comp.SunderRange, _mobs);
+                _mobs.RemoveWhere(target => _whitelist.IsValid(comp.SunderBlacklist, target));
                 foreach (var mob in _mobs)
                 {
                     _stun.KnockdownOrStun(mob, comp.SunderStun);
                 }
 
                 _targets.Clear();
-                _lookup.GetEntitiesInRange<PhysicsComponent>(Transform(ent).Coordinates, comp.SunderRange, _targets);
-                _targets.RemoveWhere(target => _entityWhitelist.IsValid(comp.SunderBlacklist, target) || _container.TryGetOuterContainer(target, Transform(target), out _));
-                var userPosision = _transform.GetWorldPosition(ent);
+                _lookup.GetEntitiesInRange(coords, comp.SunderRange, _targets, LookupFlags.Dynamic); // no static, contained or uncollidable entities
+                // also dont throw ghosts
+                _targets.RemoveWhere(target => (target.Comp.CollisionMask & (int) CollisionGroup.GhostImpassable) != 0 || _whitelist.IsValid(comp.SunderBlacklist, target));
+                var userPos = _transform.ToWorldPosition(coords);
                 foreach (var target in _targets)
                 {
                     var targetPosition = _transform.GetWorldPosition(target);
-                    var direction = (targetPosition - userPosision).Normalized() * comp.SunderThrowDistance;
+                    var direction = (targetPosition - userPos).Normalized() * comp.SunderThrowDistance;
                     _throw.TryThrow(target, direction, baseThrowSpeed: 10, ent, 0, 0, false, false);
                 }
             }
@@ -255,11 +258,11 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
         var targetIndices = localTile.GridIndices + new Vector2i(0, 1);
         var pos = _map.ToCenterCoordinates(xform.GridUid.Value, targetIndices, grid);
         outPos = pos;
-        var box = new Box2(pos.Position + new Vector2(-0.4f, -0.4f), pos.Position + new Vector2(0.4f, 0.4f));
 
-        // CHECK IF IT'S BEING PLACED CHEESILY CLOSE TO SPACE
+        // CHECK IF IT'S BEING PLACED CHEESILY CLOSE TO SPACE or blocked by something
         var spaceDistance = 2;
         var worldPos = _transform.GetWorldPosition(xform);
+        var mask = CollisionGroup.MachineMask;
         foreach (var tile in _map.GetTilesIntersecting(xform.GridUid.Value, grid, new Circle(worldPos, spaceDistance)))
         {
             if (_turf.IsSpace(tile))
@@ -267,13 +270,12 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("ghost-role-colossus-effigy-error-space", ("DISTANCE", spaceDistance)), ent, ent);
                 return false;
             }
-        }
 
-        // CHECK FOR ENTITY AND ENVIRONMENTAL INTERSECTIONS
-        if (_lookup.AnyLocalEntitiesIntersecting(xform.GridUid.Value, box, LookupFlags.Dynamic | LookupFlags.Static, ent))
-        {
-            _popup.PopupClient(Loc.GetString("ghost-role-colossus-effigy-error-intersection"), ent, ent);
-            return false;
+            if (_turf.IsTileBlocked(tile, mask))
+            {
+                _popup.PopupClient(Loc.GetString("ghost-role-colossus-effigy-error-intersection"), ent, ent);
+                return false;
+            }
         }
 
         // IF THE OBJECTIVE OR LOCATION IS MISSING, PLACE IT ANYWHERE

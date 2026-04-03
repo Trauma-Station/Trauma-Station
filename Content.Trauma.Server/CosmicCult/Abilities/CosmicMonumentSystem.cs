@@ -3,13 +3,15 @@
 using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.Station;
-using Content.Trauma.Shared.CosmicCult.Components;
-using Content.Trauma.Shared.CosmicCult;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Physics;
 using Content.Trauma.Common.RoundEnd;
+using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.CosmicCult;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map;
+using Robust.Shared.Physics;
 using Robust.Shared.Timing;
 using System.Numerics;
 using System.Linq;
@@ -30,6 +32,7 @@ public sealed class CosmicMonumentSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private HashSet<Entity<MonumentSpawnMarkComponent>> _nearbyMarks = [];
+    private HashSet<Entity<FixturesComponent>> _blocking = [];
 
     public override void Initialize()
     {
@@ -171,15 +174,14 @@ public sealed class CosmicMonumentSystem : EntitySystem
         RemoveAllMonumentMarks();
     }
 
-    //todo this can probably be mostly moved to shared but my brain isn't cooperating w/ that rn
-    // ... and neither do I care enough to do this
+    // TODO: move to shared...
     private bool VerifyPlacement(Entity<CosmicCultComponent> uid, out EntityCoordinates outPos)
     {
         //MAKE SURE WE'RE STANDING ON A GRID
         var xform = Transform(uid);
         outPos = new EntityCoordinates();
 
-        if (!TryComp<MapGridComponent>(xform.GridUid, out var grid))
+        if (xform.GridUid is not {} gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-monument-spawn-error-grid"), uid, uid);
             return false;
@@ -194,7 +196,7 @@ public sealed class CosmicMonumentSystem : EntitySystem
         //CHECK IF IT'S BEING PLACED CHEESILY CLOSE TO SPACE
         var spaceDistance = 3;
         var worldPos = _transform.GetWorldPosition(xform);
-        foreach (var tile in _map.GetTilesIntersecting(xform.GridUid.Value, grid, new Circle(worldPos, spaceDistance)))
+        foreach (var tile in _map.GetTilesIntersecting(gridUid, grid, new Circle(worldPos, spaceDistance)))
         {
             if (_turf.IsSpace(tile))
             {
@@ -212,19 +214,39 @@ public sealed class CosmicMonumentSystem : EntitySystem
 
         var stationGrid = _station.GetLargestGrid(station);
 
-        if (stationGrid != null && stationGrid != xform.GridUid)
+        if (stationGrid != null && stationGrid != gridUid)
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-monument-spawn-error-station"), uid, uid);
             return false;
         }
 
         //CHECK FOR ENTITY AND ENVIRONMENTAL INTERSECTIONS
-        if (_lookup.AnyLocalEntitiesIntersecting(xform.GridUid.Value, box, LookupFlags.Dynamic | LookupFlags.Static, uid))
+        _blocking.Clear();
+        _lookup.GetLocalEntitiesIntersecting(gridUid, box, _blocking, LookupFlags.Dynamic | LookupFlags.Static);
+        foreach (var blocking in _blocking)
         {
+            if (blocking.Owner == uid.Owner || !BlockedBy(blocking.Comp))
+                continue;
+
             _popup.PopupEntity(Loc.GetString("cosmicability-monument-spawn-error-intersection"), uid, uid);
             return false;
         }
 
         return true;
+    }
+
+    private bool BlockedBy(FixturesComponent fixtures)
+    {
+        var mask = (int) CollisionGroup.MachineMask;
+        foreach (var fixture in fixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            if ((fixture.CollisionLayer & mask) != 0)
+                return true;
+        }
+
+        return false;
     }
 }
