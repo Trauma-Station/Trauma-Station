@@ -5,7 +5,15 @@ using Robust.Shared.GameStates;
 namespace Content.Trauma.Shared.ClockworkCult.Power.Components;
 
 /// <summary>
-/// Connects batteries to clockwork structures
+/// Connects entities with <see cref="ClockworkTransferrerComponent"/> to entities with <see cref="ClockworkStructureComponent"/>
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class ClockwinderComponent : Component;
+[AutoGenerateComponentState]
+public sealed partial class ClockwinderComponent : Component
+{
+    /// <summary>
+    /// The current selected transferrer
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? Transferrer;
+}

@@ -23,6 +23,7 @@ public sealed class ClockworkPowerSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ClockworkPowerTransferSystem _powerTransfer = default!;
     [Dependency] private readonly EntityQuery<PowerVeinComponent> _powerVeinQuery = default!;
 
     /// <inheritdoc/>
@@ -31,6 +32,8 @@ public sealed class ClockworkPowerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ClockworkPowerSourceComponent, AnchorStateChangedEvent>(OnAnchored);
+
+        SubscribeLocalEvent<ClockworkStructureComponent, ClockwinderInteractEvent>(OnClockwinder);
     }
 
     /// <summary>
@@ -81,5 +84,14 @@ public sealed class ClockworkPowerSystem : EntitySystem
             Dirty(ent.Owner, comp);
             Dirty(ent);
         }
+    }
+
+    private void OnClockwinder(Entity<ClockworkStructureComponent> ent, ref ClockwinderInteractEvent args)
+    {
+        if (args.Handled || args.Transferrer is not {} transferrer)
+            return;
+
+        // Add the connection to the transferrer
+        _powerTransfer.AddConnection(transferrer, ent.Owner);
     }
 }

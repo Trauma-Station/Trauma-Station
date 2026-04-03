@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseItem
+  id: Clockwinder
+  name: The Clockwinder
+  description: A strange key-like object that has multiple uses.
+  components:
+  - type: Item
+    sprite: _Shitmed/Objects/Weapons/Melee/wonderprod.rsi # TODO: change
+    size: Small
+  - type: Sprite
+    sprite: _Shitmed/Objects/Weapons/Melee/wonderprod.rsi # TODO: change
+    state: icon
+  - type: Clockwinder

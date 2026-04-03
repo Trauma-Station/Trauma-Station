@@ -10,6 +10,25 @@
   - type: ClockworkPowerSource
     rechargeRate: 50
     rechargeTime: 2
+  - type: ClockworkTransferrer # Can be connected to ClockworkStructure
+    maxConnections: 5
   - type: LimitedCharges
     maxCharges: 1000
     lastCharges: -1 # Starts at 0 if negative
+
+- type: entity
+  id: BaseClockworkStructure
+  name: Clockwork Structure
+  description: Testing.
+  parent: BaseStructureDynamic
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    state: office-dark
+  - type: ClockworkPowerSource
+    rechargeRate: 50
+    rechargeTime: 2
+  - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
+  - type: LimitedCharges
+    maxCharges: 1000
+    lastCharges: -1
