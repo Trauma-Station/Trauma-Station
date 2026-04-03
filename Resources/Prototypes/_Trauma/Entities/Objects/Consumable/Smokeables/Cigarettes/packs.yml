@@ -20,13 +20,9 @@
       sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/softpack-visualizer.rsi
       visible: false
   - type: ItemCounter
-    count:
-      tags: [Cigarette]
-    composite: true
     layerStates:
     - cig1
     - cig2
-  - type: Appearance
 
 - type: entity
   id: CigPackBotany
