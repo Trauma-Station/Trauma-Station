@@ -68,3 +68,61 @@
         nameFormat: name-format-slaughter
       - type: LightImmunity # Grants temporary light immunity so it survives AntagRandomSpawn | Remove once we get better spawns
         duration: 20
+
+## Shadowling
+
+- type: entity
+  parent: BaseShadowlingRule
+  id: ShadowlingMidround
+  components:
+  - type: AntagSpawner
+    prototype: MobShadowling
+  - type: MaintsSpawnRule
+  - type: AntagSelection
+    definitions:
+    - min: 1
+      max: 1
+      playerRatio: 1
+      blacklist:
+        components:
+        - CommandStaff
+      mindRoles:
+      - MindRoleShadowling
+      pickPlayer: false
+
+## Minor antags ninja threat
+
+- type: entity
+  parent: BaseGameRule
+  id: MidroundMinorAntagsRule
+  components:
+  - type: NestedRule
+    rules: !type:GroupSelector
+      rolls: 2, 3 # mild spam of chuds
+      children:
+      - id: TunnelClownMidround
+      - id: SingulothKnightsMidround
+      - id: DarkLordMidround # spawns chosen one after it's picked by a player
+      - id: MimeAssassinMidround
+      - id: DarkPriestMidround
+      - id: VoxRaidersMidround
+
+## Sleeper agents ninja threat, the ninja does the announcement
+
+- type: entity
+  parent: SleeperAgents
+  id: SleeperAgentsQuiet # cipher's assassin...
+  components:
+  - type: StationEvent
+    startAnnouncement: null
+    startAudio: null
+
+## Quiet version of wailing horse
+
+- type: entity
+  parent: WailingHorseSpawn
+  id: WailingHorseQuiet
+  components:
+  - type: StationEvent
+    startAnnouncement: null
+    startAudio: null

@@ -10,17 +10,18 @@ namespace Content.Trauma.Shared.Forging;
 /// Adds/removes tags to the entity based on its workability.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedMetalSystem))]
+[AutoGenerateComponentState]
 public sealed partial class MetallicTagsComponent : Component
 {
     /// <summary>
     /// Tags to add while workable.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<ProtoId<TagPrototype>> Workable = new();
 
     /// <summary>
     /// Tags to remove while unworkable.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<ProtoId<TagPrototype>> Unworkable = new();
 }

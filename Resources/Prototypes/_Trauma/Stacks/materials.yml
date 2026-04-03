@@ -16,33 +16,12 @@
   parent: BaseVerySmallStack
   id: Bracing
   name: stack-bracing
-  icon: { sprite: /Textures/_Trauma/Objects/tools/whetstone.rsi, state: icon }
+  icon: { sprite: /Textures/_Trauma/Objects/Tools/whetstone.rsi, state: icon }
   spawn: WeaponBracing1
 
 - type: stack
   parent: BaseVerySmallStack
   id: Whetstone
   name: stack-whetstone
-  icon: { sprite: /Textures/_Trauma/Objects/tools/weaponreinforcement.rsi, state: icon }
+  icon: { sprite: /Textures/_Trauma/Objects/Tools/weaponreinforcement.rsi, state: icon }
   spawn: Whetstone1
-
-- type: stack
-  parent: BaseIngotStack
-  id: BrassIngot
-  name: stack-brass-ingot
-  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_brass }
-  spawn: BrassIngot
-
-- type: stack
-  parent: BaseIngotStack
-  id: SteelIngot
-  name: stack-steel-ingot
-  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_steel }
-  spawn: SteelIngot
-
-- type: stack
-  parent: BaseIngotStack
-  id: PlasteelIngot
-  name: stack-plasteel-ingot
-  icon: { sprite: /Textures/_Trauma/Objects/Specific/forging.rsi, state: ingot_plasteel }
-  spawn: PlasteelIngot

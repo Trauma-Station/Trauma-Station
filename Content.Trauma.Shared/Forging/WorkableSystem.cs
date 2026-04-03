@@ -6,6 +6,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Forging;
@@ -16,6 +17,7 @@ public sealed class WorkableSystem : EntitySystem
     [Dependency] private readonly SharedMetalSystem _metal = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityQuery<WorkableComponent> _query = default!;
 
     public override void Initialize()
     {
@@ -43,11 +45,13 @@ public sealed class WorkableSystem : EntitySystem
             return;
         }
 
+        // TODO: require being on an anvil for plasteel or forging items from ingots.
+
         ent.Comp.Remaining -= dealt;
         if (ent.Comp.Remaining <= FixedPoint2.Zero)
-            CreateResult(ent);
+            CreateResult(ent, user);
         else
-            Dirty(ent);
+            DirtyField(ent, ent.Comp, nameof(WorkableComponent.Remaining));
     }
 
     private void OnExamined(Entity<WorkableComponent> ent, ref ExaminedEvent args)
@@ -70,18 +74,45 @@ public sealed class WorkableSystem : EntitySystem
         RaiseLocalEvent(args.Result, ev);
     }
 
-    private void CreateResult(Entity<WorkableComponent> ent)
+    private void CreateResult(Entity<WorkableComponent> ent, EntityUid? user)
     {
         var xform = Transform(ent);
         for (var i = 0; i < ent.Comp.Amount; i++)
         {
             var result = PredictedSpawnAtPosition(ent.Comp.Result, xform.Coordinates);
             _transform.SetLocalRotation(result, xform.LocalRotation);
-            var ev = new MetalWroughtEvent(result);
+            var ev = new MetalWroughtEvent(result, user);
             RaiseLocalEvent(ent, ref ev);
         }
         PredictedQueueDel(ent);
 
         ent.Comp.Amount = 0; // incase damage is changed multiple times in the same tick
+    }
+
+    public void SetRemaining(Entity<WorkableComponent?> ent, FixedPoint2 value)
+    {
+        if (!_query.Resolve(ent, ref ent.Comp) || ent.Comp.Remaining == value)
+            return;
+
+        ent.Comp.Remaining = value;
+        DirtyField(ent, ent.Comp, nameof(WorkableComponent.Remaining));
+    }
+
+    public void SetResult(Entity<WorkableComponent?> ent, [ForbidLiteral] EntProtoId id)
+    {
+        if (!_query.Resolve(ent, ref ent.Comp) || ent.Comp.Result == id)
+            return;
+
+        ent.Comp.Result = id;
+        DirtyField(ent, ent.Comp, nameof(WorkableComponent.Result));
+    }
+
+    public void SetAmount(Entity<WorkableComponent?> ent, int amount)
+    {
+        if (!_query.Resolve(ent, ref ent.Comp) || ent.Comp.Amount == amount)
+            return;
+
+        ent.Comp.Amount = amount;
+        DirtyField(ent, ent.Comp, nameof(WorkableComponent.Amount));
     }
 }

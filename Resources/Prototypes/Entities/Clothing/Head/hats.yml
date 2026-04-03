@@ -1701,6 +1701,8 @@
       name: Snake
     - !type:SpeciesCondition
       species: Human
+    - !type:SexCondition
+      sex: Male
     - !type:HasMarking
       organ: Head
       marking: FacePaintSplitter

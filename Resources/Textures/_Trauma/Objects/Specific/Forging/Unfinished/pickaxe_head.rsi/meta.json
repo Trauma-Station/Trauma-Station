@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "AsardonicSailor and Speedbro",
+  "copyright": "AsardonicSailor and Speedbro, modified by @deltanedas (github)",
   "size": {
     "x": 32,
     "y": 32
@@ -11,11 +11,33 @@
       "name": "icon"
     },
     {
+      "name": "handle"
+    },
+    {
+      "name": "head"
+    },
+    {
       "name": "inhand-right",
       "directions": 4
     },
     {
       "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "handle-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "handle-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "head-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "head-inhand-left",
       "directions": 4
     }
   ]
