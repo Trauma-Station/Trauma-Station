@@ -42,7 +42,11 @@ public sealed partial class StatusTabControl : BaseTabControl
     {
         if (_gameTicker == null)
         {
-            _gameTicker = _entMan.System<ClientGameTicker>();
+            if (!_entMan.TrySystem<ClientGameTicker>(out var ticker))
+            {
+                return false;
+            }
+            _gameTicker = ticker;
             _gameTicker.InGameInfoBlobUpdated += UpdateInfoBlob;
         }
         UpdateInfoBlob();
