@@ -144,8 +144,8 @@
 - type: entity
   id: CigPackGreen
   parent: CigPackBaseSoft # Trauma
-  name: Newstation soft pack
-  description: A label on the packaging reads, dying with joy!
+  name: Spessman's Smokes packet
+  description: "A label on the packaging reads, 'Wouldn't a slow death make a change?'"
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi
@@ -155,8 +155,8 @@
 - type: entity
   id: CigPackRed
   parent: CigPackBase
-  name: Dromad Red 99s pack # Trauma
-  description: The most popular brand of Space Cigarettes. There is an image of some kind of humanoid dromedary creature in a salt desert.
+  name: DromedaryCo packet
+  description: "The most popular brand of Space Cigarettes, sponsors of the Space Olympics."
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
@@ -166,8 +166,8 @@
 - type: entity
   id: CigPackBlue
   parent: CigPackBase
-  name: Sodfield Blue pack # Trauma
-  description: Light smokes, most of their ad campaigns are targetted towards shaft miners.
+  name: AcmeCo packet
+  description: "For those who somehow want to obtain the record for the most amount of cancerous tumors."
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
@@ -177,8 +177,8 @@
 - type: entity
   id: CigPackBlack
   parent: CigPackBaseSoft # Trauma
-  name: Solaria soft pack
-  description: An incredibly harsh cigarette, the packaging has sol common on it and golden images of locations from Old Terra.
+  name: Nomads packet
+  description: "Nomads's extra strong, for when your life is more extra hard."
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi

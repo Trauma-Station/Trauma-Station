@@ -1,8 +1,8 @@
 - type: entity
-  id: CigPackBaseSoft
-  parent: [ BaseStorageItem, BaseBagOpenClose ]
-  name: cigarette soft pack
   abstract: true
+  parent: CigPackBase
+  id: CigPackBaseSoft
+  name: cigarette soft pack
   components:
   - type: Sprite
     layers:
@@ -19,30 +19,6 @@
       map: ["cig2"]
       sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/softpack-visualizer.rsi
       visible: false
-  - type: Tag
-    tags:
-    - CigPack
-    - Trash
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 50
-  - type: SpaceGarbage
-  - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,1
-  - type: Storage
-    grid:
-    - 0,0,4,1
-    whitelist:
-      tags:
-      - Cigarette
-      - Lighter
-  - type: EntityTableContainerFill
-    containers:
-      storagebase:
-        id: Cigarette
-        amount: 10
   - type: ItemCounter
     count:
       tags: [Cigarette]

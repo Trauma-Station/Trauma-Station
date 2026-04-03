@@ -1,13 +1,11 @@
 - type: entity
-  id: CigCartonSyndicate
   parent: [CigCartonGreen, BaseSyndicateContraband]
+  id: CigCartonSyndicate
   name: Interdyne Herbals carton
   description: A carton containing 6 packets of Interdyne Herbals.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/syndicate.rsi
-    layers:
-      - state: closed
   - type: Item
     sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/syndicate.rsi
   - type: EntityTableContainerFill
@@ -17,15 +15,13 @@
         amount: 5
 
 - type: entity
-  id: CigCartonBotany
   parent: CigCartonGreen
+  id: CigCartonBotany
   name: Hydroponic Herbals carton
   description: A carton containing 6 packs of Hydroponic Herbals.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/botany.rsi
-    layers:
-      - state: closed
   - type: Item
     sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/botany.rsi
   - type: EntityTableContainerFill
@@ -35,15 +31,13 @@
         amount: 5
 
 - type: entity
-  id: CigCartonMedical
   parent: CigCartonGreen
+  id: CigCartonMedical
   name: Chemlab menthols carton
   description: A carton containing 6 packets of Chemlab menthols.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/chem.rsi
-    layers:
-      - state: closed
   - type: Item
     sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cartons/chem.rsi
   - type: EntityTableContainerFill
