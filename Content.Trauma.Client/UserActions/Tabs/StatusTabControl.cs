@@ -51,7 +51,7 @@ public sealed partial class StatusTabControl : BaseTabControl
 
     private void UpdateInfoBlob()
     {
-        if (_gameTicker?.InGameInfoBlob is {} info)
+        if (_gameTicker?.InGameInfoBlob is { } info)
             ServerInfo.SetInfoBlob(info);
     }
 }

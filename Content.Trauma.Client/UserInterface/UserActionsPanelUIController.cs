@@ -29,10 +29,18 @@ public sealed class UserActionsPanelUIController : UIController, IOnStateEntered
 
     public void InjectPanel(SeparatedChatGameScreen container)
     {
-        if (container.UserActionsPlaceholder.ChildCount > 0)
-            return;
+        UserActionsPanel? panel;
 
-        var panel = new UserActionsPanel();
-        container.UserActionsPlaceholder.AddChild(panel);
+        if (container.UserActionsPlaceholder.ChildCount > 0)
+        {
+            panel = container.UserActionsPlaceholder.GetChild(0) as UserActionsPanel;
+        }
+        else
+        {
+            panel = new UserActionsPanel();
+            container.UserActionsPlaceholder.AddChild(panel);
+        }
+
+        panel?.UpdateTabs();
     }
 }
