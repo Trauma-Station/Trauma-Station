@@ -6301,3 +6301,17 @@ Entries:
   id: 728
   time: '2026-04-03T15:55:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1830
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Removed evil lag from lavaland
+  id: 729
+  time: '2026-04-03T20:49:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1835
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: HappyHonk meal boxes now stop stored food from rotting!
+  id: 730
+  time: '2026-04-03T21:02:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1836
