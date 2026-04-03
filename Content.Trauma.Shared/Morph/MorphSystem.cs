@@ -8,7 +8,6 @@ using Content.Shared.Devour;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
-using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Polymorph.Components;
@@ -28,7 +27,6 @@ public sealed class MorphSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -69,7 +67,7 @@ public sealed class MorphSystem : EntitySystem
 
     private void OnMorphAction(Entity<MorphComponent> ent, ref MorphActionEvent args)
     {
-        _chameleon.TryDisguise(ent.Owner, ent, args.Target);
+        _chameleon.TryDisguise((ent, Comp<ChameleonProjectorComponent>(ent)), ent, args.Target);
         // TODO: completely copy inventory etc sprite layers
     }
 
