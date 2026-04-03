@@ -251,3 +251,14 @@ Entries:
   id: 27
   time: '2026-04-03T13:04:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1820
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Kettle: Added more bookshelves to the library and locked it for the
+      librarian.
+  - type: Fix
+    message: 'Kettle: Botany now has a biogenerator instead of biocube fabricator.'
+  id: 28
+  time: '2026-04-03T14:19:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1824
