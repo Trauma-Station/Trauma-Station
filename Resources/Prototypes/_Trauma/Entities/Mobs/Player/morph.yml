@@ -123,8 +123,15 @@
       components:
       - Morph # cant copy another morph
       - ChameleonProjector
-      - Pda
       - NukeDisk
+      - SubFloorHide # no hiding under the floor
+      # below are all invisible
+      - Pda
+      - Door
+      tags:
+      - Catwalk
+      - Wall
+      - Window
     disguiseProto: ChameleonDisguiseMorph
   - type: Butcherable
     spawned:
