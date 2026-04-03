@@ -6287,3 +6287,10 @@ Entries:
   id: 726
   time: '2026-04-03T13:14:28.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1822
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed IPCs not getting any radio keys.
+  id: 727
+  time: '2026-04-03T13:21:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1821
