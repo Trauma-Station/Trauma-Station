@@ -71,7 +71,7 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 950
+    currentTemperature: 900
 
 - type: entity
   abstract: true
@@ -91,4 +91,4 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 1500
+    currentTemperature: 1499
