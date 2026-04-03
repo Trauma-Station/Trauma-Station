@@ -244,7 +244,7 @@ public sealed class BinglePitSystem : EntitySystem
     private void ScaleUpPit(EntityUid uid, BinglePitComponent component)
     {
         _scale.SetSpriteScale(uid, Vector2.One * component.Level);
-        _physics.ScaleFixtures(uid, 1.3f);
+        _physics.ScaleFixtures(uid, component.HitBoxGrowthSize);
     }
 
     private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
