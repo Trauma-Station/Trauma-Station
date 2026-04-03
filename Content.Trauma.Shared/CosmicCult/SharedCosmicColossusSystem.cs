@@ -28,6 +28,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -39,6 +40,7 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -278,15 +280,17 @@ public abstract class SharedCosmicColossusSystem : EntitySystem
             }
         }
 
+        if (_net.IsClient)
+            return false; // can't predict past here sorry, client probably doesn't know about the target
+
         // IF THE OBJECTIVE OR LOCATION IS MISSING, PLACE IT ANYWHERE
-        if (!_mind.TryGetObjectiveComp<CosmicEffigyConditionComponent>(ent, out var obj) || obj.EffigyTarget == null)
+        if (!_mind.TryGetObjectiveComp<CosmicEffigyConditionComponent>(ent, out var obj) || obj.EffigyTarget is not { } target)
             return true;
 
-        var targetXform = Transform(obj.EffigyTarget.Value);
-        if (xform.MapID != targetXform.MapID || (_transform.GetWorldPosition(xform) - _transform.GetWorldPosition(targetXform)).LengthSquared() > 15 * 15)
+        if (!_transform.InRange(target, (ent, xform), 15))
         {
             if (TryComp<WarpPointComponent>(obj.EffigyTarget, out var warp) && warp.Location is not null)
-                _popup.PopupClient(Loc.GetString("ghost-role-colossus-effigy-error-location", ("LOCATION", warp.Location)), ent, ent);
+                _popup.PopupEntity(Loc.GetString("ghost-role-colossus-effigy-error-location", ("LOCATION", warp.Location)), ent, ent);
             return false;
         }
 
