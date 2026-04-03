@@ -13,7 +13,7 @@ namespace Content.Trauma.Client.RadialSelector;
 public sealed class RadialSelectorMenuBUI : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [UISystemDependency] private readonly ConstructionSystem _construction = default!;
+    private ConstructionSystem _construction;
 
     public SimpleRadialMenu Menu;
 
@@ -21,6 +21,8 @@ public sealed class RadialSelectorMenuBUI : BoundUserInterface
 
     public RadialSelectorMenuBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _construction = EntMan.System<ConstructionSystem>();
+
         Menu = this.CreateWindow<SimpleRadialMenu>();
 
         OnPressed = proto =>

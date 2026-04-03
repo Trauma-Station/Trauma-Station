@@ -6245,3 +6245,45 @@ Entries:
   id: 720
   time: '2026-04-03T01:46:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1808
+- author: Aviu
+  changes:
+  - type: Add
+    message: Better heretic guidebook.
+  id: 721
+  time: '2026-04-03T11:09:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1813
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenos not being able to evolve....
+  id: 722
+  time: '2026-04-03T11:14:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1816
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: You can no longer eat anything without a head.
+  id: 723
+  time: '2026-04-03T11:46:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1817
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed deafness never going away?
+  id: 724
+  time: '2026-04-03T12:14:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1818
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed empty scroll blood jaunt mispredicting.
+  id: 725
+  time: '2026-04-03T12:30:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1819
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blobbernauts being able to bleed.
+  id: 726
+  time: '2026-04-03T13:14:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1822

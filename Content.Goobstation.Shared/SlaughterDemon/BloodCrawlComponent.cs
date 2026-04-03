@@ -46,7 +46,7 @@ public sealed partial class BloodCrawlComponent : Component
     /// <summary>
     /// The reagents to look out for when searching for puddles
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public List<ProtoId<ReagentPrototype>> Blood = new();
 
     /// <summary>
