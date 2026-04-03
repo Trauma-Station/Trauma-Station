@@ -9,9 +9,10 @@ using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Trauma.Client.UserInterface;
 
-public sealed class UserActionsPanelUIController : UIController, IOnStateEntered<GameplayState>, IOnSystemLoaded<ClientGameTicker>
+public sealed class UserActionsPanelUIController : UIController, IOnStateEntered<GameplayState>
 {
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private readonly ClientGameTicker _gameTicker = default!;
 
     public override void Initialize()
     {
@@ -21,14 +22,6 @@ public sealed class UserActionsPanelUIController : UIController, IOnStateEntered
     }
 
     public void OnStateEntered(GameplayState state)
-    {
-        if (_uiManager.ActiveScreen is not SeparatedChatGameScreen screen)
-            return;
-
-        InjectPanel(screen);
-    }
-
-    public void OnSystemLoaded(ClientGameTicker system)
     {
         if (_uiManager.ActiveScreen is not SeparatedChatGameScreen screen)
             return;

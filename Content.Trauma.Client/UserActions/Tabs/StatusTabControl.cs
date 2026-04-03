@@ -11,6 +11,7 @@ namespace Content.Trauma.Client.UserActions.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<ClientGameTicker>
 {
+    [Dependency] private readonly IEntitySystemManager _entMan = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private ClientGameTicker? _gameTicker;
@@ -31,7 +32,10 @@ public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<
     public void OnSystemUnloaded(ClientGameTicker system)
     {
         if (_gameTicker is { })
+        {
             _gameTicker.InGameInfoBlobUpdated -= UpdateInfoBlob;
+            _gameTicker = null;
+        }
     }
 
 
@@ -49,6 +53,15 @@ public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<
 
     public override bool UpdateState()
     {
+        if (_gameTicker is not { } && _entMan is { })
+        {
+            // Use IoC to find the EntitySystemManager and get the ticker
+            if (_entMan.TryGetEntitySystem<ClientGameTicker>(out var ticker))
+            {
+                // Call our own OnSystemLoaded to set up the event and reference
+                OnSystemLoaded(ticker);
+            }
+        }
         UpdateInfoBlob();
         return true;
     }
