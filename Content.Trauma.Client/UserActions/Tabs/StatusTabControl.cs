@@ -55,11 +55,14 @@ public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<
     {
         if (_gameTicker is not { } && _entMan is { })
         {
-            // Use IoC to find the EntitySystemManager and get the ticker
-            if (_entMan.TryGetEntitySystem<ClientGameTicker>(out var ticker))
+            try
             {
-                // Call our own OnSystemLoaded to set up the event and reference
-                OnSystemLoaded(ticker);
+                if (_entMan.TryGetEntitySystem<ClientGameTicker>(out var ticker))
+                    OnSystemLoaded(ticker);
+            }
+            catch (Exception)
+            {
+                return true;
             }
         }
         UpdateInfoBlob();
