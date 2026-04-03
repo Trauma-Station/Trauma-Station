@@ -153,7 +153,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         if (prototype?.StartingGear != null)
         {
             var startingGear = _prototypeManager.Index<StartingGearPrototype>(prototype.StartingGear);
-            EquipStartingGear(entity.Value, startingGear, raiseEvent: false);
+            EquipStartingGear(entity.Value, startingGear, raiseEvent: true); // Trauma - do raise the event, IPCs need it
         }
 
         var gearEquippedEv = new StartingGearEquippedEvent(entity.Value);
