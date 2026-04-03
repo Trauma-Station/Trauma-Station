@@ -26,7 +26,7 @@
   parent: BaseRedAlert
   id: ArmoryLaserAssault
   icon:
-    sprite: _Trauma/Objects/Weapons/Guns/Battery/assault_laser.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/assault_laser_wide.rsi
     state: icon
   product: CrateArmoryLaserAssault
   cost: 7200

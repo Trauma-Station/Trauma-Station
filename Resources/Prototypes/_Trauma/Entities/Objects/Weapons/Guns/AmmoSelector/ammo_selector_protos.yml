@@ -6,7 +6,9 @@
     state: heavylaser
   protoId: LaserSidearmBullet
   fireCost: 62.5
-  flags: ChangeWeaponFireSound
+  flags:
+  - ChangeWeaponFireSound
+  - ChangeWeaponFireCost
   soundGunshot:
     path: /Audio/_Trauma/Weapons/Guns/Gunshots/laser2.ogg
 
@@ -17,7 +19,9 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     state: omnilaser
   protoId: BulletDisabler
-  fireCost: 62.5
-  flags: ChangeWeaponFireSound
+  fireCost: 31.25
+  flags:
+  - ChangeWeaponFireSound
+  - ChangeWeaponFireCost
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/taser2.ogg

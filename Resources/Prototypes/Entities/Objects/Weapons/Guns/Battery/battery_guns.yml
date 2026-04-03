@@ -294,7 +294,7 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/makeshift.rsi
   - type: BatteryAmmoProvider
-    proto: RedLaser
+    proto: LaserSidearmBullet # Trauma
     fireCost: 62.5
   - type: Battery
     maxCharge: 500
@@ -374,25 +374,16 @@
     price: 420
 
 - type: entity
-  name: practice laser carbine
-  parent: [BaseLaserRifle, BaseGunWieldable]
+  name: practice laser gun # Trauma
+  parent: WeaponLaserCarbine # Trauma - [BaseLaserRifle, BaseGunWieldable] > WeaponLaserCarbine
   id: WeaponLaserCarbinePractice
   description: This modified laser carbine fires nearly harmless beams in the 40-watt range, for target practice.
   components:
   - type: StaticPrice
     price: 300
   - type: BatteryAmmoProvider
-    proto: LaserCarbineBulletPractice # Trauma
-    fireCost: 62.5
+    proto: LaserGunBulletPractice # Trauma
   - type: PacifismAllowedGun
-  # <Trauma>
-  - type: Item
-    size: Large
-    shape:
-    - 0,0,3,0
-    - 1,1,2,1
-    storedOffset: 0,-5
-  # </Trauma>
 
 - type: entity
   name: pulse pistol
@@ -463,8 +454,7 @@
     selectedMode: SemiAuto
     fireRate: 3
     availableModes:
-      - SemiAuto
-      - FullAuto
+    - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
@@ -477,6 +467,19 @@
   - type: Tag
     tags:
     - Rifle
+  - type: AmmoSelector
+    prototypes:
+    - Pulse
+    - StunPulse
+  - type: UserInterface
+    interfaces:
+      enum.AmmoSelectorUiKey.Key:
+        type: AmmoSelectorMenuBoundUserInterface
+  - type: ActivatableUI
+    altVerb: true
+    verbOnly: true
+    verbText: mode-select-verb-text
+    key: enum.AmmoSelectorUiKey.Key
   # </Goob>
 
 - type: entity
@@ -509,7 +512,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
-    proto: PulseGunBullet # Trauma - was Pulse
+    proto: PulseGunBulletHeavy # Trauma - was Pulse
     fireCost: 100
   - type: Battery
     maxCharge: 40000
@@ -518,6 +521,20 @@
   - type: Tag
     tags:
     - Rifle
+  - type: AmmoSelector
+    prototypes:
+    - HeavyPulse
+    - LightPulse
+    - StunPulse
+  - type: UserInterface
+    interfaces:
+      enum.AmmoSelectorUiKey.Key:
+        type: AmmoSelectorMenuBoundUserInterface
+  - type: ActivatableUI
+    altVerb: true
+    verbOnly: true
+    verbText: mode-select-verb-text
+    key: enum.AmmoSelectorUiKey.Key
   # </Goob>
 
 - type: entity

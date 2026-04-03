@@ -74,7 +74,7 @@
   - type: HeldSpeedModifier
   - type: Gun
     projectileSpeed: 60
-    fireRate: 0.25
+    fireRate: 0.5
     selectedMode: FullAuto
     availableModes:
     - FullAuto

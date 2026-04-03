@@ -34,7 +34,7 @@
     zeroVisible: true
   - type: BatteryAmmoProvider
     proto: BulletDisabler
-    fireCost: 62.5
+    fireCost: 31.25
   - type: Tag
     tags:
     - Taser
@@ -65,13 +65,14 @@
   description: The burst fire Type 5/R Rapid Heat Delivery System, developed by Nanotrasen. Capable of firing a sustained volley of directed energy projectiles, though each individual projectile lacks the punch of the Type 5.
   components:
   - type: Gun
-    maxAngle: 36
+    maxAngle: 40
     selectedMode: Burst
     availableModes:
     - Burst
     fireRate: 4
+    burstFireRate: 8
     shotsPerBurst: 2
-    burstCooldown: 0.5
+    burstCooldown: 0.2
   - type: BatteryAmmoProvider
     proto: LaserCarbineBullet
     fireCost: 31.25
@@ -91,6 +92,7 @@
     availableModes:
     - Burst
     fireRate: 1
+    burstFireRate: 8
     shotsPerBurst: 2
     burstCooldown: 0.5
   - type: BatteryAmmoProvider
