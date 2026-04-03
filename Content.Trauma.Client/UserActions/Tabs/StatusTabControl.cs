@@ -34,9 +34,6 @@ public sealed partial class StatusTabControl : BaseTabControl
 
     public override bool UpdateState()
     {
-        if (_entMan is not { })
-            return false;
-
         if (_gameTicker is not { })
         {
             if (!IoCManager.Resolve<IEntitySystemManager>().TryGetEntitySystem<ClientGameTicker>(out var ticker))
