@@ -42,7 +42,7 @@
     earliestStart: 20
     weight: 3
     minimumPlayers: 30
-    maxOccurences: 1
+    maxReoccurences: 1
     duration: null
     occursDuringRoundEnd: false
   - type: MorphRule

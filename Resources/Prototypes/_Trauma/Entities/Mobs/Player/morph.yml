@@ -74,7 +74,10 @@
         Blunt: 20
         Structural: 30
   - type: Bloodstream
-    bloodMaxVolume: 50
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 50
   - type: Devourer
     devourAction: ActionMorphDevour
     soundStructureDevour: /Audio/Effects/sizzle.ogg
@@ -90,7 +93,7 @@
       - Item
     foodPreferenceWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
   - type: Morph
     actions:
     - ActionMorphReplicate
@@ -98,7 +101,7 @@
     - ActionUnMorph
     biomassWhitelist:
       components:
-      - Food # give biomass if food
+      - Edible # give biomass if food
       - MobState # give biomass if it can live
     biomassBlacklist:
       components:
@@ -119,7 +122,7 @@
     blacklist:
       components:
       - Morph # cant copy another morph
-      - ChameleonDisguiser
+      - ChameleonProjector
       - Pda
       - NukeDisk
     disguiseProto: ChameleonDisguiseMorph

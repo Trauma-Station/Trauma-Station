@@ -21,7 +21,7 @@
     itemIconStyle: BigAction
     icon:
       sprite: Objects/Consumable/Drinks/mug_one.rsi
-      state: icon-0
+      state: icon
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction
