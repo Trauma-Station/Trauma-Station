@@ -1,8 +1,5 @@
-// <Trauma>
 using Content.Trauma.Common.Mech;
 using Content.Trauma.Common.TileMovement;
-// </Trauma>
-using Content.Goobstation.Common.CCVar;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -11,7 +8,6 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.Equipment.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 
 namespace Content.Shared.Mech.EntitySystems;
@@ -19,7 +15,6 @@ namespace Content.Shared.Mech.EntitySystems;
 public abstract partial class SharedMechSystem
 {
     [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly EntityQuery<TileMovementComponent> _tileQuery = default!;
