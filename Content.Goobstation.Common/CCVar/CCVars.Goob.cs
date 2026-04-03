@@ -214,16 +214,6 @@ public sealed partial class GoobCVars
 
     #endregion
 
-    #region Mechs
-
-    /// <summary>
-    ///     Whether or not players can use mech guns outside of mechs.
-    /// </summary>
-    public static readonly CVarDef<bool> MechGunOutsideMech =
-        CVarDef.Create("mech.gun_outside_mech", true, CVar.SERVER | CVar.REPLICATED);
-
-    #endregion
-
     #region RMC
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =

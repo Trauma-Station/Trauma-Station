@@ -24,22 +24,17 @@ public abstract partial class SharedMechSystem
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly EntityQuery<TileMovementComponent> _tileQuery = default!;
 
-    private bool _canUseMechGunOutside;
-
     private void InitializeTrauma()
     {
         SubscribeLocalEvent<MechEquipmentComponent, ShotAttemptedEvent>(OnShotAttempted);
         SubscribeLocalEvent<MechPilotComponent, EntGotRemovedFromContainerMessage>(OnEntGotRemovedFromContainer);
         SubscribeLocalEvent<MechComponent, GotEmaggedEvent>(OnEmagged);
-
-        Subs.CVar(_cfg, GoobCVars.MechGunOutsideMech, value => _canUseMechGunOutside = value, true);
     }
 
     // TODO: this has no reason to be here
     private void OnShotAttempted(EntityUid uid, MechEquipmentComponent component, ref ShotAttemptedEvent args)
     {
-        if (!_canUseMechGunOutside &&
-            (component.EquipmentOwner is not {} mech ||
+        if ((component.EquipmentOwner is not {} mech ||
             !HasComp<MechComponent>(mech)))
         {
             args.Cancel();
