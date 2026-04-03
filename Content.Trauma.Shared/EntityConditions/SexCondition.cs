@@ -15,7 +15,7 @@ public sealed partial class SexCondition : EntityConditionBase<SexCondition>
     public Sex Sex;
 
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
-        => null;
+        => string.Empty;
 }
 
 public sealed partial class SexConditionSystem : EntityConditionSystem<HumanoidProfileComponent, SexCondition>
