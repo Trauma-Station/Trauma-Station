@@ -86,6 +86,8 @@
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/rocket.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Hands/Gloves/rocket.rsi
   - type: Item
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     inhandVisuals:
@@ -113,6 +115,8 @@
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/dolphin.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Hands/Gloves/dolphin.rsi
   - type: Item
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     inhandVisuals:
@@ -139,6 +143,8 @@
   description: Ratty looking gloves wrapped with sticky tape. Beware anyone wearing these, for they clearly have no shame and nothing to lose. (Alt + Q to tackle.)
   components:
   - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/gripper.rsi
+  - type: Clothing
     sprite: _Trauma/Clothing/Hands/Gloves/gripper.rsi
   - type: Item
     sprite: Clothing/Hands/Gloves/Color/color.rsi

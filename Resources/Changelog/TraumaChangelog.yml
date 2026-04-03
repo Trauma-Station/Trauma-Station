@@ -6205,3 +6205,43 @@ Entries:
   id: 715
   time: '2026-04-02T22:03:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1792
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Buffer lizards throwing and melee knowledge to not be 0..?
+  id: 716
+  time: '2026-04-03T00:16:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1800
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Fixed ActionsPanel
+  id: 717
+  time: '2026-04-03T00:19:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1799
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: You can now install a brain chip without surgery just by pressing Z.
+  id: 718
+  time: '2026-04-03T00:36:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1802
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Maybe fixed the extreme delay bug. If you see yourself say allcaps message
+      about a bug in looc, press tilde (`) to open the console and report the
+      error.
+  id: 719
+  time: '2026-04-03T01:43:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1805
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed ripper, rocket and dolphin gloves not having equipped clothing
+      sprites.
+  id: 720
+  time: '2026-04-03T01:46:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1808
