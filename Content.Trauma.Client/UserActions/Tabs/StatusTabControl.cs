@@ -28,7 +28,7 @@ public sealed partial class StatusTabControl : BaseTabControl
 
     protected override void FrameUpdate(FrameEventArgs e)
     {
-        if (_gameTicker != null)
+        if (_gameTicker is { })
         {
             var roundTime = _timing.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
             StationTime.Text = Loc.GetString("lobby-state-player-status-round-time", ("hours", roundTime.Hours), ("minutes", roundTime.Minutes));
@@ -40,7 +40,10 @@ public sealed partial class StatusTabControl : BaseTabControl
 
     public override bool UpdateState()
     {
-        if (_gameTicker == null)
+        if (_entMan is not { })
+            return false;
+
+        if (_gameTicker is not { })
         {
             if (!_entMan.TrySystem<ClientGameTicker>(out var ticker))
             {
