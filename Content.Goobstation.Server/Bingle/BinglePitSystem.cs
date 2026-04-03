@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System;
-using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Shared.Bingle;
@@ -9,7 +7,6 @@ using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Pinpointer;
 using Content.Server.Stunnable;
-using Content.Shared.Coordinates;
 using Content.Shared.Destructible;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Humanoid;
@@ -23,19 +20,12 @@ using Content.Shared.Stunnable;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
-using Content.Shared.Physics;
 using Content.Shared.Weapons.Melee.Events;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
