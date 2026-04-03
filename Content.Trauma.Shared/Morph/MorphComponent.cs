@@ -24,19 +24,19 @@ public sealed partial class MorphComponent : Component
     /// How much biomass it has.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 Biomass;
+    public FixedPoint2 Biomass = 20;
 
     /// <summary>
     /// How much biomass it costs to replicate.
     /// </summary>
     [DataField]
-    public FixedPoint2 ReplicateCost = 60;
+    public FixedPoint2 ReplicateCost = 150;
 
     /// <summary>
     /// How much biomass one Morph can store
     /// </summary>
     [DataField]
-    public FixedPoint2 MaxBiomass = 120;
+    public FixedPoint2 MaxBiomass = 1000; // doesnt exist in ss13 but just incase
 
     /// <summary>
     /// How long it takes to replicate.

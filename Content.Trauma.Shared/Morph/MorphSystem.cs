@@ -8,7 +8,11 @@ using Content.Shared.Devour;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Humanoid;
+using Content.Shared.Item;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Polymorph.Components;
 using Content.Shared.Polymorph.Systems;
@@ -16,7 +20,6 @@ using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Physics.Components;
 
 namespace Content.Trauma.Shared.Morph;
 
@@ -35,6 +38,10 @@ public sealed class MorphSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityQuery<ChameleonDisguisedComponent> _disguisedQuery = default!;
+    [Dependency] private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
+    [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
+    [Dependency] private readonly EntityQuery<MindContainerComponent> _mindQuery = default!;
+    [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
     [Dependency] private readonly EntityQuery<MorphComponent> _query = default!;
 
     public override void Initialize()
@@ -65,12 +72,6 @@ public sealed class MorphSystem : EntitySystem
         _alerts.ShowAlert(ent.Owner, ent.Comp.BiomassAlert);
     }
 
-    private void OnMorphAction(Entity<MorphComponent> ent, ref MorphActionEvent args)
-    {
-        _chameleon.TryDisguise((ent, Comp<ChameleonProjectorComponent>(ent)), ent, args.Target);
-        // TODO: completely copy inventory etc sprite layers
-    }
-
     private void ChangeBiomassAmount(Entity<MorphComponent> ent, FixedPoint2 amount)
     {
         ent.Comp.Biomass = FixedPoint2.Min(ent.Comp.Biomass + amount, ent.Comp.MaxBiomass);
@@ -82,11 +83,12 @@ public sealed class MorphSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not {} target)
             return;
 
+        // !
+        _chameleon.TryReveal(ent.Owner);
+
         var user = args.User;
-        if (!TryComp<PhysicsComponent>(target, out var physics))
-            _popup.PopupClient(Loc.GetString("morph-no-biomass-target"), ent, user, PopupType.MediumCaution);
-        else if (_whitelist.CheckBoth(target, ent.Comp.BiomassBlacklist, ent.Comp.BiomassWhitelist))
-            ChangeBiomassAmount(ent, physics.Mass);
+        if (_whitelist.CheckBoth(target, ent.Comp.BiomassBlacklist, ent.Comp.BiomassWhitelist))
+            ChangeBiomassAmount(ent, GetBiomass(target));
         else
             _popup.PopupClient(Loc.GetString("morph-no-biomass-target"), ent, user, PopupType.MediumCaution);
 
@@ -103,6 +105,12 @@ public sealed class MorphSystem : EntitySystem
         if (ent.Comp.Biomass <= ent.Comp.ReplicateCost)
         {
             _popup.PopupClient("Not enough biomass!", ent, ent, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_disguisedQuery.HasComp(ent))
+        {
+            _popup.PopupClient("You can't replicate while morphed!", ent, ent, PopupType.SmallCaution);
             return;
         }
 
@@ -187,5 +195,29 @@ public sealed class MorphSystem : EntitySystem
 
         _popup.PopupClient("You can't attack while morphed!", ent, ent);
         args.Cancelled = true;
+    }
+
+    private void OnMorphAction(Entity<MorphComponent> ent, ref MorphActionEvent args)
+    {
+        _chameleon.TryDisguise((ent, Comp<ChameleonProjectorComponent>(ent)), ent, args.Target);
+        // TODO: completely copy inventory etc sprite layers
+    }
+
+    /// <summary>
+    /// Get the biomass gained by devouring an entity.
+    /// </summary>
+    public FixedPoint2 GetBiomass(EntityUid uid)
+    {
+        if (!_mobQuery.HasComp(uid))
+            return 0; // you can eat items just to be annoying
+
+        if (_itemQuery.HasComp(uid))
+            return 5; // tiny mobs like mice, maybe a pAI
+
+        if (!_humanoidQuery.HasComp(uid))
+            return 10; // non-humanoids like pets
+
+        // player-controlled humanoids give 30, catatonic give 20
+        return _mindQuery.TryComp(uid, out var mind) && mind.HasMind ? 30 : 20;
     }
 }
