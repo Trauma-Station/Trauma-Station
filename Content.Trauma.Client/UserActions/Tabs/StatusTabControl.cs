@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 namespace Content.Trauma.Client.UserActions.Tabs;
 
 [GenerateTypedNameReferences]
-public sealed partial class StatusTabControl : BaseTabControl, IOnSystemLoaded<ClientGameTicker>, IOnSystemUnloaded<ClientGameTicker>
+public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<ClientGameTicker>
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -31,9 +31,7 @@ public sealed partial class StatusTabControl : BaseTabControl, IOnSystemLoaded<C
     public void OnSystemUnloaded(ClientGameTicker system)
     {
         if (_gameTicker is { })
-        {
             _gameTicker.InGameInfoBlobUpdated -= UpdateInfoBlob;
-        }
     }
 
 

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Gameplay;
+using Content.Client.GameTicking.Managers;
 using Content.Client.UserInterface.Screens;
 using Content.Trauma.Client.UserActions;
 using Robust.Client.UserInterface;
@@ -8,7 +9,7 @@ using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Trauma.Client.UserInterface;
 
-public sealed class UserActionsPanelUIController : UIController, IOnStateEntered<GameplayState>
+public sealed class UserActionsPanelUIController : UIController, IOnStateEntered<GameplayState>, IOnSystemLoaded<ClientGameTicker>
 {
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
@@ -20,6 +21,14 @@ public sealed class UserActionsPanelUIController : UIController, IOnStateEntered
     }
 
     public void OnStateEntered(GameplayState state)
+    {
+        if (_uiManager.ActiveScreen is not SeparatedChatGameScreen screen)
+            return;
+
+        InjectPanel(screen);
+    }
+
+    public void OnSystemLoaded(ClientGameTicker system)
     {
         if (_uiManager.ActiveScreen is not SeparatedChatGameScreen screen)
             return;
