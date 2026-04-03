@@ -1,0 +1,73 @@
+<Document>
+
+  # Path of Lock
+
+  Difficulty: [color=orange]Medium[/color]
+
+  The Path of Lock revolves around access, area denial, theft and gadgets.
+  Pick this path if you want a less confrontational playstyle and more interested in being a slippery rat.
+
+  ## Pros
+
+  - Your mansus grasp can open any lock, unlock every terminal and bypass any access restriction.
+  - Lock heretics get more side knowledge for free or at a discount, making it the perfect path if you want to experiment with the various trinkets the shop has to offer.
+  - Lock heretics don't gain visible aura after 8 knowledge points, making it perfect for being stealthy at latter stages.
+
+  ## Cons
+
+  - The weakest heretic path in direct combat, period.
+  - Very limited direct combat benefits.
+  - You have no defensive benefits or immunities.
+  - No mobility or direct additional teleportation
+  - Highly reliant on sourcing power from other departments, players and the game world.
+
+  ## Knowledge
+
+  <Table Columns="3">
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Knowledge Name</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Ingredients/Type</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Description</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">A Steward's Secret</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Knife, Crowbar</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a key blade.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Grasp of Lock</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp can unlock anything.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Key Keepers Burden</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Door, ID Card, Iron rod</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a Eldritch Card, allows you to link two doors to be portals for heretics, but randomly teleport heathens. It can also absorb access from id card by eating them.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Concierge's Rite</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Crayon, Wooden plank, Multitool</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a labyrinth handbook, a magic item that can materialize barricades that noone can pass.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Burglar's Finesse</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">An ability that steals a random item from the targets backpack and puts it into your hand.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Opening Blade</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your blade is now better at wounding and can cause weeping avulsion on attack. Your grasp no longer goes on cooldown from opening locks.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Caretaker's Last Refuge</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">A spell that makes you transparent and not dense, you cannot harm or be harmed, except by anti-magic items.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Unlock the Labyrinth</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Three corpses with removed hearts</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a labyrinth portal that rapidly summons creatures from Mansus, loyal to you. You get x-ray vision as well as pressure and temperature immunity. Your blades are even deadlier. You can shapeshift into empowered creatures of Mansus.</Box></ColorBox>
+  </Table>
+
+  ## Tips
+
+  - Your mansus grasp allows you to access everything, from airlocks, consoles and even exosuits, but it has no additional effects on players. It will however leave a mark that when triggered will make your victim unable to leave the room you are in.
+  - Your blade also functions as a crowbar! You can store it in utility belts And, in a pitch, use it to force open an airlock.
+  - Weeping avulsion triggered by your blade cannot be healed by topicals and chemicals, requiring surgery to heal.
+  - Triggering weeping avulsion on mangled torso force opens its ribcage, allowing you to easier ascend by removing heart via surgery.
+  - Your Eldritch ID can create a portal between 2 different airlocks. Useful if you want to establish a secret base.
+  - Use your labyrinth book to shake off pursuers. It creates impassible walls to anyone.
+
+</Document>
