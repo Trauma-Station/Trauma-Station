@@ -748,7 +748,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      Bone: 100
+      Bones: 100
   # </Trauma>
   - type: Stack
     stackType: Bones

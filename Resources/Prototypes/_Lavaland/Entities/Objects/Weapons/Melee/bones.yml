@@ -57,7 +57,7 @@
     node: axe
   - type: PhysicalComposition
     materialComposition:
-      Bone: 300
+      Bones: 300
   - type: Tag
     tags:
     - Trash
@@ -94,4 +94,4 @@
     - Trash
   - type: PhysicalComposition
     materialComposition:
-      Bone: 100
+      Bones: 100
