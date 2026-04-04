@@ -145,7 +145,7 @@
   id: CigPackGreen
   parent: CigPackBaseSoft # Trauma
   name: Spessman's Smokes packet
-  description: "A label on the packaging reads, 'Wouldn't a slow death make a change?'"
+  description: A label on the packaging reads, Wouldn't a slow death make a change?
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi
@@ -156,7 +156,7 @@
   id: CigPackRed
   parent: CigPackBase
   name: DromedaryCo packet
-  description: "The most popular brand of Space Cigarettes, sponsors of the Space Olympics."
+  description: The most popular brand of Space Cigarettes, sponsors of the Space Olympics.
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
@@ -167,7 +167,7 @@
   id: CigPackBlue
   parent: CigPackBase
   name: AcmeCo packet
-  description: "For those who somehow want to obtain the record for the most amount of cancerous tumors."
+  description: For those who somehow want to obtain the record for the most amount of cancerous tumors.
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
@@ -178,7 +178,7 @@
   id: CigPackBlack
   parent: CigPackBaseSoft # Trauma
   name: Nomads packet
-  description: "Nomads's extra strong, for when your life is more extra hard."
+  description: Nomads's extra strong, for when your life is more extra hard.
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
@@ -188,7 +188,7 @@
 - type: entity
   id: CigPackSyndicate
   parent: [CigPackBase, BaseSyndicateContraband]
-  name: Interdyne herbals pack
+  name: Interdyne herbals packet
   description: Elite cigarettes for elite syndicate agents. Infused with medicine for when you need to do more than calm your nerves.
   components:
   - type: Sprite
