@@ -44,7 +44,7 @@ public sealed class ScannedGenomeSystem : EntitySystem
             return;
 
         // don't remove dormant mutations
-        if (_mutation.IsForeign(args.Target.AsNullable(), args.Id))
+        if (_mutation.IsForeign(args.Target.Comp, args.Id))
             RemoveSequence(ent, args.Id);
     }
 
