@@ -71,6 +71,22 @@
     state: icon
   - type: Item
     size: Tiny
+  - type: Gun
+    minAngle: 0
+    maxAngle: 5
+    angleIncrease: 1
+    angleDecay: 3
+    fireRate: 1.1
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+      params:
+        volume: 0.5
+  - type: BasicEntityAmmoProvider
+    proto: BulletPistolSilverBig
+    capacity: 3
+    count: 3
   - type: AmmoCounter
   - type: ContainerContainer
     containers:
