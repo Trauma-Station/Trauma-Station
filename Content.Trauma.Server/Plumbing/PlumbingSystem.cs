@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
@@ -16,7 +18,7 @@ public sealed partial class PlumbingSystem : EntitySystem
     private readonly HashSet<PlumbingNet> _pipeNets = new();
 
     /// <summary>
-    /// Adds a PlumbingNet to the processing list. 
+    /// Adds a PlumbingNet to the processing list.
     /// Called by PlumbingNet.Initialize.
     /// </summary>
     [PublicAPI]
@@ -39,7 +41,7 @@ public sealed partial class PlumbingSystem : EntitySystem
     }
 
     /// <summary>
-    /// Updates all reagent networks. 
+    /// Updates all reagent networks.
     /// Replaces the Atmos 'AtmosTick' logic.
     /// </summary>
     public override void Update(float frameTime)
@@ -73,7 +75,7 @@ public sealed partial class PlumbingSystem : EntitySystem
     [PublicAPI]
     public Solution RemoveFromNet(PlumbingNet net, FixedPoint2 amount)
     {
-        // SplitSolution handles the math of taking a proportional 
+        // SplitSolution handles the math of taking a proportional
         // slice of every reagent currently in the 'Liquid' mix.
         return net.Liquid.SplitSolution(amount);
     }
