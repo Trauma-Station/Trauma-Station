@@ -40,6 +40,29 @@
   - type: Construction
     node: straightAlt2
 
+# FluidPipeBend
+- type: entity
+  parent: [FluidPipeLayerAlt1, FluidPipeBend]
+  id: FluidPipeBendAlt1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: ThinPipeAlt1
+    sprite: Structures/Piping/Atmospherics/pipe_alt1.rsi
+  - type: Construction
+    node: bendAlt1
+
+- type: entity
+  parent: [FluidPipeLayerAlt2, FluidPipeBend]
+  id: FluidPipeBendAlt2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: ThinPipeAlt2
+    sprite: Structures/Piping/Atmospherics/pipe_alt2.rsi
+  - type: Construction
+    node: bendAlt2
+
 # FluidPipeTJunction
 - type: entity
   parent: [FluidPipeLayerAlt1, FluidPipeTJunction]

@@ -10,12 +10,10 @@
   - FluidPipeStraight
   - FluidPipeStraightAlt1
   - FluidPipeStraightAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 0 # it's a pipe
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeStraightAlt1
@@ -30,12 +28,10 @@
   - FluidPipeStraight
   - FluidPipeStraightAlt1
   - FluidPipeStraightAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 0 # it's a pipe
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeStraightAlt2
@@ -50,12 +46,10 @@
   - FluidPipeStraight
   - FluidPipeStraightAlt1
   - FluidPipeStraightAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 0 # it's a pipe
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeBend
@@ -70,12 +64,10 @@
   - FluidPipeBend
   - FluidPipeBendAlt1
   - FluidPipeBendAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 0 # it's a bent pipe
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeBendAlt1
@@ -90,12 +82,10 @@
   - FluidPipeBend
   - FluidPipeBendAlt1
   - FluidPipeBendAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 0 # it's a bent pipe
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeBendAlt2
@@ -110,12 +100,10 @@
   - FluidPipeBend
   - FluidPipeBendAlt1
   - FluidPipeBendAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 0 # it's a bent pipe
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeTJunction
@@ -130,12 +118,10 @@
   - FluidPipeTJunction
   - FluidPipeTJunctionAlt1
   - FluidPipeTJunctionAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeTJunctionAlt1
@@ -150,12 +136,10 @@
   - FluidPipeTJunction
   - FluidPipeTJunctionAlt1
   - FluidPipeTJunctionAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeTJunctionAlt2
@@ -170,12 +154,10 @@
   - FluidPipeTJunction
   - FluidPipeTJunctionAlt1
   - FluidPipeTJunctionAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeFourway
@@ -190,12 +172,10 @@
   - FluidPipeFourway
   - FluidPipeFourwayAlt1
   - FluidPipeFourwayAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeFourwayAlt1
@@ -210,12 +190,10 @@
   - FluidPipeFourway
   - FluidPipeFourwayAlt1
   - FluidPipeFourwayAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeFourwayAlt2
@@ -230,12 +208,10 @@
   - FluidPipeFourway
   - FluidPipeFourwayAlt1
   - FluidPipeFourwayAlt2
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: FluidPipeManifold
@@ -245,9 +221,38 @@
   category: construction-category-utilities
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  # <Trauma>
   theory:
     InfrastructureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
-  # </Trauma>
+    
+# ATMOS UNARY
+- type: construction
+  id: GasVentPump
+  graph: GasUnary
+  startNode: start
+  targetNode: ventpump
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:NoUnstackableInTile
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+
+- type: construction
+  id: GasPassiveVent
+  graph: GasUnary
+  startNode: start
+  targetNode: passivevent
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:NoUnstackableInTile
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1

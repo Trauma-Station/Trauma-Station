@@ -52,9 +52,8 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
         if (Liquid.Contents.Count == 0 || Liquid.Volume == 0)
             return;
 
-        var location = Nodes.FirstOrDefault()?.Owner;
+        var location = Nodes.FirstOrDefault()?.Owner; // Temporary
 
-        // Call your brand new API!
         _chemical?.FullyReactRaw(Liquid, location);
     }
 
@@ -112,5 +111,8 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
             var share = currentSolution.SplitSolution(currentSolution.Volume * (net.Liquid.MaxVolume / totalMaxVol));
             net.Liquid.AddSolution(share, null); // Re-inject into the new sub-net
         }
+
+        _plumbing?.RemovePipeNet(this);
+        Removed = true;
     }
 }

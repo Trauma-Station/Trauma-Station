@@ -4,8 +4,10 @@ using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
 using Content.Trauma.Common.Plumbing;
+using Content.Trauma.Server.Plumbing.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Content.Trauma.Server.Plumbing;
 
@@ -48,6 +50,22 @@ public sealed partial class PlumbingSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        UpdateDevices(frameTime);
+        UpdateNets(frameTime);
+    }
+
+    private void UpdateDevices(float frameTime)
+    {
+        var ev = new PlumbingDeviceUpdateEvent(frameTime);
+        var query = EntityQueryEnumerator<PlumbingDeviceComponent>();
+        while (query.MoveNext(out var uid, out var device))
+        {
+            RaiseLocalEvent(uid, ref ev);
+        }
+    }
+
+    private void UpdateNets(float frameTime)
+    {
         _updateList.Clear();
         _updateList.AddRange(_pipeNets);
         foreach (var pipeNet in _updateList)

@@ -92,7 +92,7 @@ public partial class PlumbingNode : Node, ISolutionMixtureHolder, IRotatableNode
     ///     The <see cref="IPlumbingNet"/> this pipe is a part of.
     /// </summary>
     [ViewVariables]
-    private IPlumbingNet? PipeNet => (IPlumbingNet?) NodeGroup;
+    public IPlumbingNet? PipeNet => (IPlumbingNet?) NodeGroup;
 
     /// <summary>
     ///     The solution in this pipe.
