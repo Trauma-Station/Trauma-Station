@@ -31,6 +31,8 @@ Remember to test your PR again after making changes to it! Not doing so is one o
 
 All resources go in a `_Trauma` subdirectory inside the resource's folder, e.g. `Resources/Prototypes/_Trauma` for all YML prototypes.
 
+For entity prototypes, keep everything consistent and sort the top level fields by `abstract > categories > parent > id > name > suffix > description > placement > categories`.
+
 ### Update logic
 
 When querying for entities to update, the first component in an `EntityQueryEnumerator` should be the least common. The `ActiveXComponent` pattern is great for this, so you only ever query components that need to be updated.
