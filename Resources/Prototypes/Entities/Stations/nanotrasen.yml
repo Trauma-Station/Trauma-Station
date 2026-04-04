@@ -9,6 +9,11 @@
 - type: entity
   id: StandardNanotrasenStation
   parent:
+    # <Trauma>
+    - BaseStationWizardTarget
+    - BaseStationAlertLevelLocking
+    - BaseStationTraits
+    # </Trauma>
     - BaseStation
     - BaseStationNews
     - BaseStationCargo
@@ -28,10 +33,6 @@
     - BaseStationAllEventsEligible
     - BaseStationNanotrasen
     - BaseStationDeliveries
-    # <Trauma>
-    - BaseStationWizardTarget
-    - BaseStationAlertLevelLocking
-    # </Trauma>
   categories: [ HideSpawnMenu ]
   components:
     - type: Transform

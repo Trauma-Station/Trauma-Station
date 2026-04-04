@@ -1,0 +1,9 @@
+- type: stationTrait
+  id: BountifulBounties
+  group: Positive
+  report: "It seems collectors in this system are extra keen to on bounties, and will pay more to see their completion."
+  effects:
+  - !type:AddComponents
+    components:
+    - type: BountyModifier
+      modifier: 1.2
