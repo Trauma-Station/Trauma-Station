@@ -5,7 +5,7 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: AtmosDevice
+    - type: PlumbingDevice
     - type: Tag
       tags:
         - Unstackable
@@ -15,8 +15,8 @@
     - type: NodeContainer
       nodes:
         pipe:
-          !type:PipeNode
-          nodeGroupID: Pipe
+          !type:PlumbingNode
+          nodeGroupID: Fluid
           pipeDirection: South
     - type: CollideOnAnchor
 

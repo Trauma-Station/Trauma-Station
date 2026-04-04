@@ -74,7 +74,10 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
     {
         base.RemoveNode(node);
 
-        if (!node.Deleting || node is not PlumbingNode reagentNode || Liquid.Volume <= 0)
+        if (!node.Deleting)
+            return;
+
+        if (node is not PlumbingNode reagentNode || Liquid.Volume <= 0)
             return;
 
         if (Liquid.MaxVolume <= 0) return;

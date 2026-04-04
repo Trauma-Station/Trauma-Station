@@ -32,7 +32,7 @@ public sealed partial class PlumbingInsertionSystem : EntitySystem
         if (!TryComp<NodeContainerComponent>(uid, out var container))
             return;
 
-        if (!container.Nodes.TryGetValue("fluid", out var node) || node is not PlumbingNode pNode || pNode.PipeNet is not PlumbingNet net)
+        if (!container.Nodes.TryGetValue("pipe", out var node) || node is not PlumbingNode pNode || pNode.PipeNet is not PlumbingNet net)
             return;
 
         var availableSpace = net.Liquid.MaxVolume - net.Liquid.Volume;
@@ -48,7 +48,7 @@ public sealed partial class PlumbingInsertionSystem : EntitySystem
         {
             var maxDrain = FixedPoint2.Min(availableSpace, vent.TransferRate * args.FrameTime);
 
-            if (!TryComp<TransformComponent>(uid, out var xform) || xform.GridUid is { })
+            if (!TryComp(uid, out TransformComponent? xform) || xform.GridUid is not { })
                 return;
 
             if (!TryComp<MapGridComponent>(xform.GridUid, out var grid))

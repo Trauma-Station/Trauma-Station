@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
 using Content.Trauma.Common.Plumbing;
 using Content.Trauma.Server.Plumbing.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Content.Trauma.Server.Plumbing;
 
@@ -57,8 +55,8 @@ public sealed partial class PlumbingSystem : EntitySystem
     private void UpdateDevices(float frameTime)
     {
         var ev = new PlumbingDeviceUpdateEvent(frameTime);
-        var query = EntityQueryEnumerator<PlumbingDeviceComponent>();
-        while (query.MoveNext(out var uid, out var device))
+        var query = EntityQueryEnumerator<PlumbingDeviceComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var device, out _))
         {
             RaiseLocalEvent(uid, ref ev);
         }
