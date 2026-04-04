@@ -94,14 +94,14 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     [DataField]
     public ProtoId<SinkPortPrototype> OffPort = "Off";
 
-    // [DataField]
-    // public ProtoId<SourcePortPrototype> ConnectionStatusPort = "ConnectionStatus";
+    [DataField]
+    public ProtoId<SourcePortPrototype> ConnectionStatusPort = "ConnectionStatus";
     
-    // [DataField] 
-    // public ProtoId<SourcePortPrototype> FieldConnectedPort = "FieldConnected";
+    [DataField] 
+    public ProtoId<SourcePortPrototype> FieldConnectedPort = "FieldConnected";
 
-    // [DataField] 
-    // public ProtoId<SourcePortPrototype> FieldDisconnectedPort = "FieldDisconnected";
+    [DataField] 
+    public ProtoId<SourcePortPrototype> FieldDisconnectedPort = "FieldDisconnected";
 }
 
 [Serializable, NetSerializable]
