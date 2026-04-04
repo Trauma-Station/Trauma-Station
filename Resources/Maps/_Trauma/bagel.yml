@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 274.0.1
+  engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 03/24/2026 14:04:18
+  time: 04/03/2026 12:25:23
   entityCount: 25175
 maps:
 - 1
@@ -7298,7 +7298,8 @@ entities:
           6,3:
             0: 56588
           6,4:
-            0: 23900
+            0: 23892
+            3: 8
           7,1:
             0: 61678
           7,2:
@@ -8384,7 +8385,7 @@ entities:
             0: 112
             1: 28672
           17,-7:
-            3: 1
+            4: 1
             1: 4104
           17,-6:
             1: 4593
@@ -8483,17 +8484,17 @@ entities:
           -13,7:
             1: 39312
           -12,8:
-            4: 12
-            5: 3072
+            5: 12
+            6: 3072
           -11,5:
             0: 63351
           -11,6:
             0: 4607
             1: 49152
           -11,8:
-            4: 1
+            5: 1
             1: 17476
-            5: 256
+            6: 256
           -11,7:
             1: 17484
           -10,5:
@@ -8592,10 +8593,10 @@ entities:
             0: 255
             1: 57344
           -8,11:
-            6: 816
+            7: 816
             1: 34952
           -9,11:
-            6: 2176
+            7: 2176
             1: 8738
           -8,12:
             1: 34959
@@ -8712,7 +8713,7 @@ entities:
             1: 61713
           -12,9:
             0: 16
-            6: 3084
+            7: 3084
           -13,9:
             1: 39305
           -13,10:
@@ -8721,19 +8722,19 @@ entities:
             1: 35033
             0: 12544
           -12,10:
-            3: 12
-            6: 3072
+            4: 12
+            7: 3072
           -12,11:
-            6: 12
+            7: 12
           -11,9:
-            6: 257
+            7: 257
             1: 17476
           -11,10:
-            3: 1
-            6: 256
+            4: 1
+            7: 256
             1: 17476
           -11,11:
-            6: 1
+            7: 1
             1: 17476
           -11,12:
             1: 17487
@@ -8788,8 +8789,8 @@ entities:
             1: 15
           -13,12:
             1: 34952
-            5: 48
-            4: 12288
+            6: 48
+            5: 12288
           -12,13:
             1: 61455
           -13,13:
@@ -8824,11 +8825,11 @@ entities:
             1: 64719
           -7,14:
             1: 252
-            6: 57344
+            7: 57344
             0: 1024
           -7,15:
             1: 61440
-            6: 238
+            7: 238
             0: 1024
           -7,16:
             1: 65524
@@ -8887,8 +8888,8 @@ entities:
           -14,12:
             0: 1
             1: 8738
-            5: 128
-            4: 32768
+            6: 128
+            5: 32768
           -17,12:
             0: 52232
           -16,13:
@@ -9346,6 +9347,11 @@ entities:
           moles:
             Oxygen: 27.225372
             Nitrogen: 102.419266
+        - volume: 2500
+          temperature: 293.15
+          moles:
+            Oxygen: 21.596506
+            Nitrogen: 81.243996
         - volume: 2500
           temperature: 293.15
           moles:
@@ -11076,6 +11082,13 @@ entities:
     - type: Transform
       pos: 27.5,-5.5
       parent: 2
+  - uid: 483
+    components:
+    - type: MetaData
+      name: Bathroom
+    - type: Transform
+      pos: -16.5,-10.5
+      parent: 2
 - proto: AirlockAllServiceGlassLocked
   entities:
   - uid: 110
@@ -11173,9 +11186,6 @@ entities:
     - type: Transform
       pos: -29.5,37.5
       parent: 2
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
 - proto: AirlockBarLocked
   entities:
   - uid: 124
@@ -11670,6 +11680,15 @@ entities:
       name: AME Room
     - type: Transform
       pos: 3.5,24.5
+      parent: 2
+- proto: AirlockEVALocked
+  entities:
+  - uid: 347
+    components:
+    - type: MetaData
+      name: EVA Room
+    - type: Transform
+      pos: 2.5,-37.5
       parent: 2
 - proto: AirlockExternal
   entities:
@@ -12337,10 +12356,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,-0.5
       parent: 24729
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
-        DockStatus: False
 - proto: AirlockExternalLocked
   entities:
   - uid: 266
@@ -12808,18 +12823,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 42.5,2.5
       parent: 2
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
   - uid: 342
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 42.5,3.5
       parent: 2
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
 - proto: AirlockGlassShuttle
   entities:
   - uid: 343
@@ -12848,13 +12857,6 @@ entities:
       parent: 2
 - proto: AirlockHeadOfPersonnelLocked
   entities:
-  - uid: 347
-    components:
-    - type: MetaData
-      name: EVA Storage
-    - type: Transform
-      pos: 2.5,-37.5
-      parent: 2
   - uid: 348
     components:
     - type: MetaData
@@ -12929,6 +12931,15 @@ entities:
     components:
     - type: Transform
       pos: 28.5,-36.5
+      parent: 2
+- proto: AirlockLibraryLocked
+  entities:
+  - uid: 482
+    components:
+    - type: MetaData
+      name: Librarian's Room
+    - type: Transform
+      pos: -7.5,23.5
       parent: 2
 - proto: AirlockMaint
   entities:
@@ -13190,9 +13201,6 @@ entities:
     - type: Transform
       pos: 35.5,11.5
       parent: 2
-    - type: DeviceLinkSource
-      lastSignals:
-        DoorStatus: True
   - uid: 398
     components:
     - type: Transform
@@ -13747,20 +13755,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -31.5,-5.5
-      parent: 2
-- proto: AirlockServiceLocked
-  entities:
-  - uid: 482
-    components:
-    - type: MetaData
-      name: Librarian's Room
-    - type: Transform
-      pos: -7.5,23.5
-      parent: 2
-  - uid: 483
-    components:
-    - type: Transform
-      pos: -16.5,-10.5
       parent: 2
 - proto: AirlockShuttle
   entities:
@@ -62520,8 +62514,8 @@ entities:
         immutable: False
         temperature: 293.1496
         moles:
-          Oxygen: 1.6495836
-          Nitrogen: 6.2055764
+          Oxygen: 1.877957
+          Nitrogen: 7.0646954
 - proto: CrateEngineeringSecure
   entities:
   - uid: 9620
@@ -108073,6 +108067,8 @@ entities:
       parent: 2
   - uid: 16357
     components:
+    - type: MetaData
+      name: Gravity Generator
     - type: Transform
       pos: -13.5,3.5
       parent: 2

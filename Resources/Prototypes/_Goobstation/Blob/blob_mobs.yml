@@ -127,6 +127,7 @@
       - Blob
     - type: MovementIgnoreGravity # Trauma
     - type: Bloodstream
+      maxBleedAmount: 0 # no bleeding
       bloodReferenceSolution:
         reagents:
         - ReagentId: Blood
@@ -244,6 +245,7 @@
       guides:
       - Blob
     - type: Bloodstream
+      maxBleedAmount: 0 # no bleeding
       bloodReferenceSolution:
         reagents:
         - ReagentId: Blood

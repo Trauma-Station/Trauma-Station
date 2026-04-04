@@ -1,0 +1,34 @@
+<Document>
+  # Heretic Potions
+
+  ## Mawed Crucible
+
+  <Box>
+    <GuideEntityEmbed Entity="MawedCrucible"/>
+  </Box>
+
+  Mawed Crucible allows you to brew potions as heretic. Click on it and choose one of 3 potions to brew. You can also refill your eldritch flask with it by clicking on crucible with it.
+  Crucible functions based on internal mass which slowly refills automatically and can be refilled manually by feeding the crucible organs or body parts.
+  Crucible can be anchored and unanchored with Mansus Grasp or codex.
+
+  ## Potions
+
+  <Box>
+    <GuideEntityEmbed Entity="PotionCrucibleSoul"/>
+  </Box>
+
+  Brew of Crucible Soul allows you to walk through walls. After expiring, you are teleported to your original location. You can end the effect early by clicking on the alert. Has a cooldown between uses.
+
+  <Box>
+    <GuideEntityEmbed Entity="PotionDuskDawn"/>
+  </Box>
+
+  Brew of Dusk and Dawn gives you temporary x-ray vision.
+
+  <Box>
+    <GuideEntityEmbed Entity="PotionWoundedSoldier"/>
+  </Box>
+
+  Brew of Wounded Soldier Increases your physical strength, making your attacks more furious and making you take less damage, the more damaged you are. Your melee attacks heal your health and stamina but you take damage overtime, the healthier you are - the more overtime damage you take.
+
+</Document>

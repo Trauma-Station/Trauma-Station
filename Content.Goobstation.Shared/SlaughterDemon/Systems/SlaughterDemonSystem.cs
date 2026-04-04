@@ -79,6 +79,7 @@ public sealed class SlaughterDemonSystem : EntitySystem
             || component.Container == null)
             return;
 
+        ent.Comp.ConsumedMobs.RemoveAll(uid => TerminatingOrDeleted(uid));
         foreach (var entity in ent.Comp.ConsumedMobs)
         {
             _container.Insert(entity, component.Container);

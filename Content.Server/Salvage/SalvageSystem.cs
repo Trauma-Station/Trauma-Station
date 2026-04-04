@@ -2,9 +2,6 @@
 using Content.Trauma.Common.Salvage; // DeltaV
 // </Trauma>
 using Content.Server.Radio.EntitySystems;
-using Content.Shared.Examine;
-using Content.Shared.Interaction;
-using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Salvage;
 using Robust.Server.GameObjects;
