@@ -97,7 +97,7 @@
   parent:
   - AppearanceDecapoid
   - BaseSpeciesMobOrganic
-  id: BaseMobDecapoid
+  id: MobDecapoid
   name: Urist McCrab
   components:
   - type: Icon
@@ -192,11 +192,12 @@
     speechSounds: Decapoid
   - type: TypingIndicator
     proto: robot # todo: custom
+  - tupe: Exoskeleton # Prevents injections with syringes. Ideally it'd be on their body parts instead but eh.
 
 - type: entity # have to do this because otherwise decapoids would not display as having their vaporizer in the customization menu.
   save: false
-  id: BaseMobDecapoidInternals
-  parent: BaseMobDecapoid
+  id: MobDecapoidDoll
+  parent: MobDecapoid
   suffix: SpawnsWithInternals
   components:
   - type: Loadout

@@ -2,9 +2,6 @@ using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Damage.Prototypes;
-using Content.Shared.Mobs;
-using Content.Shared.Standing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
@@ -24,21 +21,6 @@ public sealed partial class BlockingSystem
         SubscribeLocalEvent<BlockingUserComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<BlockingUserComponent, AnchorStateChangedEvent>(OnAnchorChanged);
         SubscribeLocalEvent<BlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
-
-        // impstation edits
-        SubscribeLocalEvent<BlockingUserComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<BlockingUserComponent, DownedEvent>(OnDowned);
-    }
-
-    private void OnMobStateChanged(EntityUid uid, BlockingUserComponent comp, MobStateChangedEvent args)
-    {
-        if (args.NewMobState != MobState.Alive)
-            UserStopBlocking(uid, comp);
-    }
-
-    private void OnDowned(EntityUid uid, BlockingUserComponent comp, DownedEvent downed)
-    {
-        UserStopBlocking(uid, comp);
     }
 
     private void OnParentChanged(EntityUid uid, BlockingUserComponent component, ref EntParentChangedMessage args)
