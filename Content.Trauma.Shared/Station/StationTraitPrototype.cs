@@ -24,10 +24,17 @@ public sealed partial class StationTraitPrototype : IPrototype, IInheritingProto
     public bool Abstract { get; private set; }
 
     /// <summary>
-    /// Text shown in the station report.
+    /// Name of this trait
     /// </summary>
     [DataField(required: true)]
-    public string Report = string.Empty;
+    public string Name = string.Empty;
+
+    /// <summary>
+    /// Description shown in the station report.
+    /// If this is set to null, it will not be shown in the report.
+    /// </summary>
+    [DataField(required: true)]
+    public string? Report;
 
     [DataField]
     public StationTraitGroup Group = StationTraitGroup.Neutral;

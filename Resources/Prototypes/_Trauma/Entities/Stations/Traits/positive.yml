@@ -1,6 +1,7 @@
 - type: stationTrait
   id: BountifulBounties
   group: Positive
+  name: "Bountiful bounties"
   report: "It seems collectors in this system are extra keen to on bounties, and will pay more to see their completion."
   effects:
   - !type:AddComponents

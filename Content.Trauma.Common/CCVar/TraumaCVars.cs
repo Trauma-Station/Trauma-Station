@@ -142,4 +142,14 @@ public sealed partial class TraumaCVars
         CVarDef.Create("trauma.decal_despawn_limit", 128, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
+
+    #region Station Report
+
+    /// <summary>
+    /// The ingame year displayed on the station report.
+    /// </summary>
+    public static readonly CVarDef<int> InGameYear =
+        CVarDef.Create("trauma.in_game_year", 2125, CVar.SERVER | CVar.REPLICATED);
+
+    #endregion
 }

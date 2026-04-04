@@ -1,0 +1,12 @@
+- type: stationTrait
+  id: Blackout
+  group: Negative
+  name: "Blackout"
+  report: "Station lights seem to be damaged, be safe when starting your shift today."
+  effects:
+  # TODO: change it to overload lighting channel on APCs if anyone ever implements channels (lol)
+  - !type:StationQueryEffects
+    compName: PoweredLight
+    effects:
+    - !type:DestroyLightBulb
+      probability: 0.6

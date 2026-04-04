@@ -1,0 +1,30 @@
+- type: stationTrait
+  id: UniqueAI
+  name: "Unique AI"
+  report: "For experimental purposes, this station AI might show divergence from default lawset. Do not meddle with this experiment."
+  # , we've removed access to your set of alternative upload modules because we know you're already thinking about meddling with this experiment."
+  effects:
+  - !type:StationAiRandomLawset
+    lawsets:
+    # no crazy antag/malf laws, just interesting ones
+    - CommandmentsLawset
+    - PaladinLawset
+    - LiveLetLiveLaws
+    - EfficiencyLawset
+    - RobocopLawset
+    - GameMasterLawset
+    - PainterLawset
+    - NutimovLawset
+    - HelpimovLawset
+  # TODO: make researching AI stuff cost 3x if someone ever adds that, and delete all roundstart lawboards
+
+- type: stationTrait
+  id: TripleAI
+  weight: 0.2
+  name: "AI Triumvirate"
+  report: "Your station has been instated with three Nanotrasen Artificial Intelligence models."
+  effects:
+  - !type:StationModifyJobs
+    add:
+      StationAi: 2
+  # TODO: make it work lol
