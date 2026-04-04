@@ -100,6 +100,7 @@
         Primary: Structures/Piping/Atmospherics/pipe.rsi
         Secondary: Structures/Piping/Atmospherics/pipe_alt1.rsi
         Tertiary: Structures/Piping/Atmospherics/pipe_alt2.rsi
+  - type: PlumbingDevice
 
 - type: entity
   parent: FluidPipeBase
@@ -114,6 +115,7 @@
         !type:PlumbingNode
         nodeGroupID: Fluid
         pipeDirection: Longitudinal
+        expectedConnections: 2
   - type: VentCrawlerTube # Goobstation - ventcrawl
     containerId: VentCrawlerTube
   - type: VentCrawlerTransit # Goobstation - ventcrawl
@@ -163,6 +165,7 @@
         !type:PlumbingNode
         nodeGroupID: Fluid
         pipeDirection: SWBend
+        expectedConnections: 2
   - type: VentCrawlerTube # Goobstation - ventcrawl
     containerId: VentCrawlerTube
   - type: VentCrawlerBend # Goobstation - ventcrawl
@@ -224,6 +227,7 @@
         !type:PlumbingNode
         nodeGroupID: Fluid
         pipeDirection: TSouth
+        expectedConnections: 3
   - type: Sprite
     layers:
       - state: pipeTJunction
@@ -279,6 +283,7 @@
         !type:PlumbingNode
         nodeGroupID: Fluid
         pipeDirection: Fourway
+        expectedConnections: 4
   - type: Sprite
     layers:
       - state: pipeFourway
@@ -421,7 +426,7 @@
         pipeDirection: North
         pipeLayer: 2
         volume: 50
-  - type: GasPipeManifold # This shit is weird
+  - type: FluidPipeManifold
   - type: AtmosMonitoringConsoleDevice
     navMapBlip: GasPipeManifold
     showAbsentConnections: false

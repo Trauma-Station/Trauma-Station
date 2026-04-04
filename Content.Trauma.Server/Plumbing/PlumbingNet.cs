@@ -9,6 +9,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.NodeContainer;
 using Content.Shared.NodeContainer.NodeGroups;
 using Content.Trauma.Shared.Plumbing;
+using Serilog;
 
 namespace Content.Trauma.Server.Plumbing;
 
@@ -65,7 +66,7 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
         foreach (var node in groupNodes)
         {
             if (node is PlumbingNode reagentNode)
-                totalMaxVolume += reagentNode.MaxVolume;
+                totalMaxVolume += reagentNode.Volume;
         }
         Liquid.MaxVolume = totalMaxVolume;
     }
@@ -83,39 +84,58 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
         if (node is not PlumbingNode reagentNode || Liquid.Volume <= 0)
             return;
 
-        if (Liquid.MaxVolume <= 0) return;
-
-        // Remove the proportional amount of liquid that was inside this specific segment
-        var ratio = reagentNode.MaxVolume / Liquid.MaxVolume;
+        var ratio = reagentNode.Volume / Liquid.MaxVolume;
         var spillAmount = Liquid.SplitSolution(Liquid.Volume * ratio);
         var xform = _entMan?.GetComponent<TransformComponent>(node.Owner);
 
         if (spillAmount.Volume > 0 && xform is { } transform)
             _puddle?.TrySpillAt(transform.Coordinates, spillAmount, out _);
 
-        Liquid.MaxVolume -= reagentNode.MaxVolume;
+        Liquid.MaxVolume -= reagentNode.Volume;
     }
 
     public override void AfterRemake(IEnumerable<IGrouping<INodeGroup?, Node>> newGroups)
     {
         // Logic for splitting one big solution into smaller ones when a pipe is broken
-        var newNets = new List<PlumbingNet>();
+        var survivors = new List<PlumbingNet>();
+        var orphans = new List<PlumbingNode>();
+
         foreach (var group in newGroups)
         {
             if (group.Key is PlumbingNet net)
-                newNets.Add(net);
+                survivors.Add(net);
+
+            else if (group.Key is not { }) // This group has no network (it was deleted or disconnected)
+            {
+                foreach (var node in group)
+                {
+                    if (node is PlumbingNode pNode)
+                        orphans.Add(pNode);
+                }
+            }
         }
 
-        if (newNets.Count == 0) return;
+        var totalVolume = Liquid.Volume;
+        var totalCapacity = Liquid.MaxVolume;
 
-        // Distribute reagents based on the volume capacity of the new pipe networks
-        var totalMaxVol = Liquid.MaxVolume;
-        var currentSolution = Liquid;
-
-        foreach (var net in newNets)
+        foreach (var orphan in orphans)
         {
-            var share = currentSolution.SplitSolution(currentSolution.Volume * (net.Liquid.MaxVolume / totalMaxVol));
-            net.Liquid.AddSolution(share, null); // Re-inject into the new sub-net
+            var shareRatio = totalCapacity > 0 ? (orphan.Volume / totalCapacity) : 0;
+            var spillAmount = Liquid.SplitSolution(totalVolume * shareRatio);
+
+            if (spillAmount.Volume > 0 && _entMan is { } && _entMan.TryGetComponent<TransformComponent>(orphan.Owner, out var xform))
+                _puddle?.TrySpillAt(xform.Coordinates, spillAmount, out _);
+        }
+
+        if (survivors.Count > 0 && Liquid.Volume > 0)
+        {
+            var remainingCapacity = Liquid.MaxVolume;
+            foreach (var net in survivors)
+            {
+                var netRatio = remainingCapacity > 0 ? (net.Liquid.MaxVolume / remainingCapacity) : 0;
+                var share = Liquid.SplitSolution(Liquid.Volume * netRatio);
+                net.Liquid.AddSolution(share, null);
+            }
         }
 
         _plumbing?.RemovePipeNet(this);

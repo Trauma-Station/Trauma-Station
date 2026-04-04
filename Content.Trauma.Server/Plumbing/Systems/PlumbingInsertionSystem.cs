@@ -11,7 +11,7 @@ using Content.Trauma.Server.Plumbing.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
 
-namespace Content.Trauma.Server.Plumbing;
+namespace Content.Trauma.Server.Plumbing.Systems;
 
 public sealed partial class PlumbingInsertionSystem : EntitySystem
 {

@@ -39,6 +39,17 @@ public partial class PlumbingNode : Node, ISolutionMixtureHolder, IRotatableNode
     /// </summary>
     public PipeDirection CurrentPipeDirection { get; private set; }
 
+    /// <summary>
+    /// Expected connections of a pipe.
+    /// </summary>
+    [DataField]
+    public int ExpectedConnections = 1;
+
+    /// <summary>
+    /// Determines if a pipe is leaking.
+    /// </summary>
+    public bool IsLeaking => ReachableNodes.Count < ExpectedConnections;
+
     private HashSet<PlumbingNode>? _alwaysReachable;
 
     public void AddAlwaysReachable(PlumbingNode pipeNode)
@@ -110,8 +121,8 @@ public partial class PlumbingNode : Node, ISolutionMixtureHolder, IRotatableNode
         }
     }
 
-    [DataField("volume")]
-    public float MaxVolume { get; set; } = DefaultVolume;
+    [DataField]
+    public float Volume { get; set; } = DefaultVolume;
 
     private const float DefaultVolume = 200f;
 

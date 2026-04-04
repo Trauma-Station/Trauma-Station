@@ -18,6 +18,7 @@
           !type:PlumbingNode
           nodeGroupID: Fluid
           pipeDirection: South
+          expectedConnections: 1
     - type: CollideOnAnchor
 
 - type: entity
