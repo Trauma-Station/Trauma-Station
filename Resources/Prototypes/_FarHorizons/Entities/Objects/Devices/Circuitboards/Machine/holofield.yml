@@ -12,10 +12,6 @@
       stackRequirements:
         Glass: 5
         Cable: 10
-      componentRequirements:
-        PowerCell:
-          amount: 2
-          defaultPrototype: PowerCellMedium
 
 - type: entity
   id: HolographicBarrierGeneratorCircuitboard
@@ -31,7 +27,3 @@
       stackRequirements:
         PlasmaGlass: 5
         Cable: 10
-      componentRequirements:
-        PowerCell:
-          amount: 2
-          defaultPrototype: PowerCellMedium
