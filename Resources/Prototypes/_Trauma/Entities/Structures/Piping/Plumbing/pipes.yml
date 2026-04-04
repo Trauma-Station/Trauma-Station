@@ -421,9 +421,9 @@
         pipeDirection: North
         pipeLayer: 2
         volume: 50
-  - type: FluidPipeManifold
+  - type: GasPipeManifold # This shit is weird
   - type: AtmosMonitoringConsoleDevice
-    navMapBlip: FluidPipeManifold
+    navMapBlip: GasPipeManifold
     showAbsentConnections: false
   - type: AtmosDevice
   - type: Tag
