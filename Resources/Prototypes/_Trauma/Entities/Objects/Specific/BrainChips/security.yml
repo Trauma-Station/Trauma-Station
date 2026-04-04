@@ -37,8 +37,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 5
-      ShootingKnowledge: 5
+      MeleeKnowledge: 20
+      ShootingKnowledge: 20
     # TODO: xp gain boost
 
 - type: entity
@@ -49,7 +49,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       MeleeKnowledge: 26
-      ShootingKnowledge: 10
+      ShootingKnowledge: 26
 
 - type: entity
   parent: BaseSkillChip

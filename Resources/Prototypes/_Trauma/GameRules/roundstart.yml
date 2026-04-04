@@ -185,3 +185,14 @@
         - CommandStaff
       mindRoles:
       - MindRoleShadowling
+
+- type: entity
+  id: TraitorReinforcementNukeOps
+  parent: TraitorReinforcement
+  components:
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: InstallHypoportNukie
+    - !type:NestedEffect
+      proto: InstallSkillChipNukie

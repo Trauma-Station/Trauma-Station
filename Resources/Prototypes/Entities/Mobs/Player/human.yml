@@ -65,6 +65,10 @@
     nameFormat: name-format-nukie-operator
   - type: Loadout
     prototypes: [SyndicateOperativeReinforcementGear] # goobstation - duke nukies
+  # <Trauma>
+  - type: AutoTraitor
+    profile: TraitorReinforcementNukeOps
+  # </Trauma>
 
 # Nuclear Operative
 - type: entity
@@ -75,6 +79,15 @@
   components:
   - type: NukeOperative
   - type: RandomHumanoidAppearance
+  # <Trauma>
+  - type: TriggerOnSpawn
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:NestedEffect
+      proto: InstallHypoportNukie
+    - !type:NestedEffect
+      proto: InstallSkillChipNukie
+  # </Trauma>
 
 - type: entity
   categories: [ HideSpawnMenu ]

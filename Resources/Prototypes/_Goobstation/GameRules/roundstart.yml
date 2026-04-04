@@ -73,6 +73,10 @@
       lateJoinAdditional: true
       mindRoles:
       - MindRoleChangeling
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: ChangelingSkills
 
 - type: entity
   parent: BaseTraitorRule
