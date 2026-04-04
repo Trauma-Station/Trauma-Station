@@ -32,7 +32,7 @@ public abstract class SharedAntagSummonerSystem : EntitySystem
 
     private void OnMapInit(Entity<AntagSummonerComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.NextSummon += _timing.CurTime;
+        ent.Comp.NextSummon = ent.Comp.InitialCooldown + _timing.CurTime;
         Dirty(ent);
     }
 

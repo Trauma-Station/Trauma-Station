@@ -36,11 +36,16 @@ public sealed partial class AntagSummonerComponent : Component
 
     /// <summary>
     /// When another antag can next be summoned.
-    /// The default value is used as the initial delay from when the item is spawned.
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField, AutoNetworkedField]
-    public TimeSpan NextSummon = TimeSpan.FromMinutes(10);
+    public TimeSpan NextSummon;
+
+    /// <summary>
+    /// The initial delay for summoning item after this item is spawned.
+    /// </summary>
+    [DataField]
+    public TimeSpan InitialCooldown = TimeSpan.FromMinutes(10);
 
     /// <summary>
     /// How long you have to wait to summon another antag.
