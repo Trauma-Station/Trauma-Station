@@ -169,10 +169,9 @@
       - MindRoleHeretic
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseShadowlingRule
   id: ShadowlingGamemode
   components:
-  - type: ShadowlingRule
   - type: GameRule
     minPlayers: 30
   - type: AntagSelection
@@ -186,6 +185,3 @@
         - CommandStaff
       mindRoles:
       - MindRoleShadowling
-  - type: AntagObjectives
-    objectives:
-    - ShadowlingAscendObjective

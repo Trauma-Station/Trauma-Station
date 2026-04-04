@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Common.Blob;
-using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared.Administration;
 using Content.Shared.Database;
-using Content.Shared.Mind.Components;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
@@ -16,10 +12,12 @@ namespace Content.Goobstation.Server.Administration.Systems;
 
 public sealed partial class GoobAdminVerbSystem
 {
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
+
     private void OnGetAntagVerbs(ref GetAntagVerbsEvent args)
     {
         var target = args.Target;
-        if (HasComp<SiliconComponent>(target))
+        if (_silicon.IsSilicon(target))
             return;
 
         // Blob

@@ -15,8 +15,7 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-
-    private EntityQuery<DepartmentAreaComponent> _deptQuery;
+    [Dependency] private readonly EntityQuery<DepartmentAreaComponent> _deptQuery = default!;
 
     /// <summary>
     /// List of every area prototype in the game.
@@ -38,8 +37,6 @@ public sealed class AreaSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _deptQuery = GetEntityQuery<DepartmentAreaComponent>();
 
         SubscribeLocalEvent<AreaComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
 

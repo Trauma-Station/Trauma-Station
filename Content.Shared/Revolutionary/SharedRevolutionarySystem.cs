@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Mindshield;
+// </Trauma>
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
@@ -25,6 +28,9 @@ public abstract partial class SharedRevolutionarySystem : EntitySystem // Trauma
         SubscribeLocalEvent<RevolutionaryComponent, ComponentStartup>(DirtyRevComps);
         SubscribeLocalEvent<HeadRevolutionaryComponent, ComponentStartup>(DirtyRevComps);
         SubscribeLocalEvent<ShowAntagIconsComponent, ComponentStartup>(DirtyRevComps);
+        // <Trauma>
+        SubscribeLocalEvent<HeadRevolutionaryComponent, RemoveMindShieldEvent>(OnMindshieldRemoval);
+        // </Trauma>
     }
 
     /// <summary>

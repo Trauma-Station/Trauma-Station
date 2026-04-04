@@ -27,6 +27,7 @@
   table: !type:AllSelector
     children:
     - id: BlobSpawn
+    - id: MorphRule
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation
@@ -63,4 +64,22 @@
     reoccurrenceDelay: 30
   - type: VentHordeRule
     table:
-      id: MobMousePlague
+      id: MobRatma
+      amount: 1, 1
+
+- type: entity
+  id: WailingHorseSpawn
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 30
+    weight: 3
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table:
+      id: MobWailingHorse
+      amount: 1, 1

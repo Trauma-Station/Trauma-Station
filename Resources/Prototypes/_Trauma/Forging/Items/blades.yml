@@ -1,0 +1,98 @@
+- type: forgedItem
+  abstract: true
+  id: BaseKnife
+  category: Blades
+  construction: ForgedShortHandle
+  skills:
+    MetalworkingKnowledge: 1
+    WeaponsKnowledge: 1
+
+- type: forgedItem
+  abstract: true
+  parent: BaseKnife
+  id: BaseSword
+  skills:
+    MetalworkingKnowledge: 2
+    WeaponsKnowledge: 2
+
+# Knives
+
+- type: forgedItem
+  parent: BaseKnife
+  id: KnifeBlade
+  name: knife blade
+  finished: ForgedKnife
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+  work: 50 # knife is small
+
+- type: forgedItem
+  parent: BaseKnife
+  id: CleaverBlade
+  name: cleaver blade
+  finished: ForgedCleaver
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+  # TODO: faster with a very large hammer to flatten it out
+
+- type: forgedItem
+  parent: BaseKnife
+  id: CombatKnifeBlade
+  name: combat knife blade
+  finished: ForgedCombatKnife
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+  work: 125 # need the serrated edge...
+  # TODO: require a punch
+
+- type: forgedItem
+  parent: BaseKnife
+  id: SurvivalKnife
+  result: ForgedSurvivalKnife
+
+- type: forgedItem
+  parent: BaseKnife
+  id: KukriBlade
+  name: kukri blade
+  finished: ForgedKukriKnife
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+  work: 125 # same as combat knife
+  # TODO: require something to bend it
+
+# TODO: enable if anything gets added that uses it
+#- type: forgedItem
+#  parent: BaseKnife
+#  id: TinyBlades
+#  name: tiny blades
+#  tag: ForgedTinyBlades
+#  sprite: _Trauma/Objects/Specific/Forging/Unfinished/tiny_blades.rsi
+#  work: 50 # they're tiny but theres a lot of them
+#  # TODO: require a hotcut i think? to split it into multiple pieces
+
+- type: Tag
+  id: ForgedTinyBlades
+
+# Swords
+
+- type: forgedItem
+  parent: BaseSword
+  id: SwordBlade
+  name: blade
+  finished: ForgedSword
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+  work: 150
+
+- type: forgedItem
+  parent: BaseSword
+  id: LongswordBlade
+  name: long blade
+  finished: ForgedLongsword
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+  work: 200
+  cost: 2
+
+- type: forgedItem
+  parent: BaseSword
+  id: ThinBlade
+  name: thin blade
+  finished: ForgedKatana
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+  work: 220 # while they were out partying, i mastered the blade
+  cost: 2

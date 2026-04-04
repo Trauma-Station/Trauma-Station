@@ -1,4 +1,6 @@
-using Content.Shared._EinsteinEngines.Language;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Trauma.Common.Language;
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.Prototypes;

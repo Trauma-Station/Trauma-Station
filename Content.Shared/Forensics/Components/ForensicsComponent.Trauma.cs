@@ -1,8 +1,9 @@
-namespace Content.Shared.Forensics.Components
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Shared.Forensics.Components;
+
+public sealed partial class ForensicsComponent
 {
-    public sealed partial class ForensicsComponent
-    {
-        [DataField]
-        public bool CanStoreDNA = true;
-    }
+    [DataField]
+    public bool CanStoreDNA = true;
 }

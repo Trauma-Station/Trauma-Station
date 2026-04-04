@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Numerics;
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.Vehicles;
-using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Item;
 using Content.Shared.Throwing;
+using Content.Trauma.Common.Contests;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Goobstation.Shared.OfficeChair;
 
@@ -23,7 +22,7 @@ public sealed partial class VehicleWallPushSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly ContestsSystem _contests = default!;
+    [Dependency] private readonly CommonContestsSystem _contests = default!;
     [Dependency] private readonly INetConfigurationManager _config = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 

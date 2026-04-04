@@ -24,6 +24,7 @@ heretic-ability-fail-mirror-jaunt-no-mirrors = There are no reflective surfaces 
 heretic-ability-lose-focus-shadow-cloak = As you lose your focus, you are pulled out of the shadows!
 heretic-ability-lose-focus-pale-cloak = As you lose your focus, you are pulled out of the light!
 heretic-ability-lose-focus-last-refuge = Without a focus, your refuge weakens and dissipates!
+heretic-ability-fail-other-minds-nearby = Other minds nearby!
 
 heretic-cosmic-rune-fail-star-mark = Blocked by star mark!
 heretic-cosmic-rune-fail-unlinked = No linked rune!

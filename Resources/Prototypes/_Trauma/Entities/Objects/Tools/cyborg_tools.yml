@@ -1,149 +1,149 @@
 - type: entity
-  parent: [Crowbar, UnbeakableDurability]
+  parent: [UnbreakableDurability, Crowbar]
   id: BorgCrowbar
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [Wrench, UnbeakableDurability]
+  parent: [UnbreakableDurability, Wrench]
   id: BorgWrench
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [Screwdriver, UnbeakableDurability]
+  parent: [UnbreakableDurability, Screwdriver]
   id: BorgScrewdriver
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [Wirecutter, UnbeakableDurability]
+  parent: [UnbreakableDurability, Wirecutter]
   id: BorgWirecutter
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [RefuelingWelder, UnbeakableDurability]
+  parent: [UnbreakableDurability, RefuelingWelder]
   id: BorgRefuelingWelder
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [MeleeHammer, UnbeakableDurability]
+  parent: [UnbreakableDurability, MeleeHammer]
   id: BorgMeleeHammer
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [WelderIndustrial, UnbeakableDurability]
+  parent: [UnbreakableDurability, WelderIndustrial]
   id: BorgWelderIndustrial
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [Scalpel, UnbeakableDurability]
+  parent: [UnbreakableDurability, Scalpel]
   id: BorgScalpel
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [SawElectric, UnbeakableDurability]
+  parent: [UnbreakableDurability, SawElectric]
   id: BorgSawElectric
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [Drill, UnbeakableDurability]
+  parent: [UnbreakableDurability, Drill]
   id: BorgDrill
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [Cautery, UnbeakableDurability]
+  parent: [UnbreakableDurability, Cautery]
   id: BorgCautery
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [JetpackXenoborg, UnbeakableDurability]
+  parent: [UnbreakableDurability, JetpackXenoborg]
   id: BorgJetpackXenoborg
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [SyndicateJawsOfLife, UnbeakableDurability]
+  parent: [UnbreakableDurability, SyndicateJawsOfLife]
   id: BorgSyndicateJawsOfLife
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [MiningDrill, UnbeakableDurability]
+  parent: [UnbreakableDurability, MiningDrill]
   id: BorgMiningDrill
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [KukriKnife, UnbeakableDurability]
+  parent: [UnbreakableDurability, KukriKnife]
   id: BorgKukriKnife
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [HydroponicsToolHatchet, UnbeakableDurability]
+  parent: [UnbreakableDurability, HydroponicsToolHatchet]
   id: BorgHydroponicsToolHatchet
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [HydroponicsToolScythe, UnbeakableDurability]
+  parent: [UnbreakableDurability, HydroponicsToolScythe]
   id: BorgHydroponicsToolScythe
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [HydroponicsToolMiniHoe, UnbeakableDurability]
+  parent: [UnbreakableDurability, HydroponicsToolMiniHoe]
   id: BorgHydroponicsToolMiniHoe
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [HydroponicsToolSpade, UnbeakableDurability]
+  parent: [UnbreakableDurability, HydroponicsToolSpade]
   id: BorgHydroponicsToolSpade
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [HydroponicsToolClippers, UnbeakableDurability]
+  parent: [UnbreakableDurability, HydroponicsToolClippers]
   id: BorgHydroponicsToolClippers
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [MopItem, UnbeakableDurability]
+  parent: [UnbreakableDurability, MopItem]
   id: BorgMopItem
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [Pen, UnbeakableDurability]
+  parent: [UnbreakableDurability, Pen]
   id: BorgPen
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [WelderExperimental, UnbeakableDurability]
+  parent: [UnbreakableDurability, WelderExperimental]
   id: BorgWelderExperimental
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [PowerDrill, UnbeakableDurability]
+  parent: [UnbreakableDurability, PowerDrill]
   id: BorgPowerDrill
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [JawsOfLife, UnbeakableDurability]
+  parent: [UnbreakableDurability, JawsOfLife]
   id: BorgJawsOfLife
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [EnergyCautery, UnbeakableDurability]
+  parent: [UnbreakableDurability, EnergyCautery]
   id: BorgEnergyCautery
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [EnergyScalpel, UnbeakableDurability]
+  parent: [UnbreakableDurability, EnergyScalpel]
   id: BorgEnergyScalpel
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [Shovel, UnbeakableDurability]
+  parent: [UnbreakableDurability, Shovel]
   id: BorgShovel
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [MiningDrillDiamond, UnbeakableDurability]
+  parent: [UnbreakableDurability, MiningDrillDiamond]
   id: BorgMiningDrillDiamond
   categories: [HideSpawnMenu]
 
 - type: entity
-  parent: [AdvMopItem, UnbeakableDurability]
+  parent: [UnbreakableDurability, AdvMopItem]
   id: BorgAdvMopItem
   categories: [HideSpawnMenu]

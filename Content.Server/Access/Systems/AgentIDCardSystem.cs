@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._DV.NanoChat;
+using Content.Trauma.Common.NanoChat;
 // </Trauma>
 using Content.Server.Access.Components;
 using Content.Server.Popups;
@@ -26,7 +26,7 @@ namespace Content.Server.Access.Systems
     public sealed class AgentIDCardSystem : SharedAgentIdCardSystem
     {
         // <Trauma>
-        [Dependency] private readonly SharedNanoChatSystem _nanoChat = default!;
+        [Dependency] private readonly CommonNanoChatSystem _nanoChat = default!;
         // </Trauma>
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly IdCardSystem _cardSystem = default!;

@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Wraith.Components;
-using Content.Shared._White.RadialSelector;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Shared.UserInterface;
+using Content.Trauma.Common.RadialSelector;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Imp.Drone;
+using Content.Trauma.Common.Silicon;
 using Content.Shared.Access.Systems;
 using Content.Shared.PAI;
 using Content.Shared.Silicons.Borgs.Components;
@@ -16,6 +16,7 @@ public sealed class RadioJobIconSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
 
     // These are static vars rather than being inlined so that the YAML linter can verify that they actually exist.
     private static readonly ProtoId<JobIconPrototype> JobIconAI = new("JobIconStationAi");
@@ -63,7 +64,7 @@ public sealed class RadioJobIconSystem : EntitySystem
         if (HasComp<BorgChassisComponent>(ent)
             || HasComp<BorgBrainComponent>(ent)
             || HasComp<PAIComponent>(ent) // pAIs and Drones don't have radio access, but they can still get picked up by an intercom.
-            || HasComp<DroneComponent>(ent))
+            || _silicon.IsDrone(ent))
         {
             jobIcon = JobIconBorg;
             jobName = Loc.GetString("job-name-borg");

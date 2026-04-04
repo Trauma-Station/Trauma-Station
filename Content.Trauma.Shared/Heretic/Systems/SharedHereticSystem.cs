@@ -40,8 +40,8 @@ public abstract class SharedHereticSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
 
-    private EntityQuery<HereticComponent> _hereticQuery;
-    private EntityQuery<GhoulComponent> _ghoulQuery;
+    [Dependency] private readonly EntityQuery<HereticComponent> _hereticQuery = default!;
+    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
     private bool _ascensionRequiresObjectives;
 
@@ -54,9 +54,6 @@ public abstract class SharedHereticSystem : EntitySystem
         SubscribeLocalEvent<HereticComponent, ComponentInit>(OnInit);
 
         Subs.CVar(_cfg, GoobCVars.AscensionRequiresObjectives, value => _ascensionRequiresObjectives = value, true);
-
-        _hereticQuery = GetEntityQuery<HereticComponent>();
-        _ghoulQuery = GetEntityQuery<GhoulComponent>();
     }
 
     private void OnInit(Entity<HereticComponent> ent, ref ComponentInit args)

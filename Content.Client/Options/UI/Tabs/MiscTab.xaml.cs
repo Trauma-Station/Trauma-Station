@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
-using Content.Client._RMC14.LinkAccount;
+using Content.Client.LinkAccount;
 // </Trauma>
 using System.Linq;
 using Content.Client.UserInterface.Screens;

@@ -1,0 +1,37 @@
+- type: entity
+  id: PolymorphWailingJaunt
+  parent: [ Incorporeal, BaseMob ]
+  categories: [HideSpawnMenu]
+  description: You can't figure out what that is.
+  name: Unknown
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/wailinghorse.rsi
+    state: jaunting
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 12
+    baseWalkSpeed: 8
+  - type: Input
+    context: "ghost"
+  - type: NoSlip
+  - type: BloodCrawl
+    actionId: BloodCrawlActionWailing
+    isCrawling: true
+    blood:
+    - Blood
+    - AmmoniaBlood
+    - InsectBlood
+    - CopperBlood
+  - type: Visibility
+    layer: 2
+  - type: Spectral
+  - type: Eye
+    drawFov: false
+    visMask:
+    - Normal
+    - Ghost
+  - type: MindContainer
+  - type: MindExaminable
+  - type: Muted # 古布空间站 - ARMOK 1984
+  - type: IsDeadIC
+    dead: false

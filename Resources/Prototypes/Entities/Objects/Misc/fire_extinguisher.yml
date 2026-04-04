@@ -147,7 +147,7 @@
       Steel: 50
 
 - type: entity
-  parent: [FireExtinguisher, UnbeakableDurability] # Trauma
+  parent: [UnbreakableDurability, FireExtinguisher] # Trauma
   id: BorgFireExtinguisher
   name: maneuvering jet
   description: Based on fire extinguisher technology, the maneuvering jet is... well yes, its just a bigger fire extinguisher.

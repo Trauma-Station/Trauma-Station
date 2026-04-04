@@ -21,8 +21,7 @@ public abstract class SharedShadowCocoonSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-
-    private EntityQuery<ShadowCocoonMakerComponent> _shadowCocoonMakerQuery;
+    [Dependency] private readonly EntityQuery<ShadowCocoonMakerComponent> _makerQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -34,14 +33,12 @@ public abstract class SharedShadowCocoonSystem : EntitySystem
 
         SubscribeLocalEvent<ShadowCocoonComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltShadowCocoonVerbs);
         SubscribeLocalEvent<ShadowCocoonComponent, MapInitEvent>(OnMapInit);
-
-        _shadowCocoonMakerQuery = GetEntityQuery<ShadowCocoonMakerComponent>();
     }
 
     #region Shadow Cocoon Maker
     private void OnGetAltVerbs(Entity<CanBeShadowCocoonComponent> entity, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!_shadowCocoonMakerQuery.TryComp(args.User, out var shadowCocoonMaker))
+        if (!_makerQuery.TryComp(args.User, out var shadowCocoonMaker))
             return;
 
         if (!args.CanAccess || !args.CanInteract)
@@ -64,7 +61,7 @@ public abstract class SharedShadowCocoonSystem : EntitySystem
         if (_net.IsClient || args.Cancelled)
             return;
 
-        if (args.Target is not {} target || !_shadowCocoonMakerQuery.TryComp(args.User, out var shadowCocoonMaker))
+        if (args.Target is not {} target || !_makerQuery.TryComp(args.User, out var shadowCocoonMaker))
             return;
 
         var spawnAt = Transform(target).Coordinates;
@@ -95,14 +92,14 @@ public abstract class SharedShadowCocoonSystem : EntitySystem
 
     #region Shadow Cocoon Entity
     private void OnMapInit(Entity<ShadowCocoonComponent> ent, ref MapInitEvent args) =>
-        ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.Update;
+        ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.UpdateDelay;
 
     /// <summary>
     /// Shadow Cocoon has its own alternative verbs, which give it the ability to make random sounds via RandomIntervalSoundComponent when activated.
     /// </summary>
     private void OnGetAltShadowCocoonVerbs(Entity<ShadowCocoonComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!_shadowCocoonMakerQuery.HasComp(args.User))
+        if (!_makerQuery.HasComp(args.User))
             return;
 
         if (!args.CanAccess || !args.CanInteract)

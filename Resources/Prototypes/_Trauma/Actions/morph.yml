@@ -1,0 +1,59 @@
+- type: entity
+  parent: BaseAction
+  id: ActionMorphReplicate
+  name: Replicate
+  description: Copies your cells to create a replica of yourself. Costs 50 biomass.
+  components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Mobs/morph.rsi
+      state: morph
+  - type: InstantAction
+    event: !type:MorphReplicateActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionMorph
+  name: Morph
+  description: Warps your body to mimic the appearance of almost anything.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Consumable/Drinks/mug_one.rsi
+      state: icon
+  - type: TargetAction
+    interactOnMiss: false
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MobState
+      - Anchorable
+      - Item
+      tags:
+      - Bot
+    event: !type:MorphActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionUnMorph
+  name: Un-Morph
+  description: Tries to revert you to your original form if you are morphed.
+  components:
+  - type: Action
+    icon:
+      sprite: Objects/Devices/chameleon_projector.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:UnMorphActionEvent
+
+- type: entity
+  parent: ActionDevour
+  id: ActionMorphDevour
+  description: Attempt to eat an item or creature, increasing your biomass.
+  components:
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MobState
+      - Item

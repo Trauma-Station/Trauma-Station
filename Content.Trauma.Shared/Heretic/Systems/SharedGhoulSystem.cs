@@ -16,6 +16,9 @@ public abstract class SharedGhoulSystem : EntitySystem
 
     private void OnBeforeMindSwap(Entity<GhoulComponent> ent, ref BeforeMindSwappedEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         args.Cancelled = true;
         args.Message = "ghoul";
     }

@@ -285,7 +285,7 @@ namespace Content.Server.Medical.BiomassReclaimer
                 _solution.ResolveSolution(toProcess, stream.BloodSolutionName, ref stream.BloodSolution, out var solution))
             {
                 component.BloodReagents = solution.Clone();
-                component.BloodReagents.ScaleSolution(50 / component.BloodReagents.Volume);
+                //component.BloodReagents.ScaleSolution(50 / component.BloodReagents.Volume); // Trauma - this makes no sense + divide by 0 for fully drained mobs
             }
             if (TryComp<ButcherableComponent>(toProcess, out var butcherableComponent))
             {

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server._EinsteinEngines.Language;
+using Content.Trauma.Common.Language.Systems;
 using Content.Shared.EntityEffects;
 // </Trauma>
 using Content.Shared.GameTicking;
@@ -69,7 +69,7 @@ public sealed class TraitSystem : EntitySystem
 
             // Einstein Engines - Language begin (remove this if trait system refactor)
             // Remove/Add Languages required by the prototype
-            var language = EntityManager.System<LanguageSystem>();
+            var language = EntityManager.System<CommonLanguageSystem>();
 
             if (traitPrototype.RemoveLanguagesSpoken is not null)
                 foreach (var lang in traitPrototype.RemoveLanguagesSpoken)

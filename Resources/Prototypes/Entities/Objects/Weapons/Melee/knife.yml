@@ -257,7 +257,7 @@
 
 - type: entity
   name: shiv
-  parent: [BaseKnife, BaseMinorContraband, GlassDurability] # Trauma - Durability
+  parent: [GlassDurability, BaseKnife, BaseMinorContraband] # Trauma - Durability
   id: Shiv
   description: A crude weapon fashioned from a piece of cloth and a glass shard.
   components:

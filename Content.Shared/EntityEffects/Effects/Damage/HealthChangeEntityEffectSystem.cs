@@ -3,7 +3,7 @@ using Content.Medical.Common.Damage;
 using Content.Medical.Common.EntityEffects;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Temperature.Components;
-using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Damage;
 // </Trauma>
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -31,22 +31,16 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
         damageSpec *= args.Scale;
 
         // <Goob>
-        if (args.Effect.ScaleByTemperature is {} scaleTemp)
+        if (args.Effect.ScaleByTemperature is { } scaleTemp)
         {
             damageSpec *= TryComp<TemperatureComponent>(entity, out var temp)
                 ? scaleTemp.GetEfficiencyMultiplier(temp.CurrentTemperature, args.Scale, false)
                 : FixedPoint2.Zero;
         }
 
-        // flesh heretics ignore poison damage from chems
-        var ev = new ImmuneToPoisonDamageEvent();
+        var ev = new OnHealthChangeEvent(damageSpec);
         RaiseLocalEvent(entity, ref ev);
-        if (ev.Immune)
-        {
-            damageSpec = DamageSpecifier.GetNegative(damageSpec);
-            if (damageSpec.GetTotal() == FixedPoint2.Zero)
-                return;
-        }
+        damageSpec = ev.Damage;
         // </Goob>
 
         _damageable.TryChangeDamage(

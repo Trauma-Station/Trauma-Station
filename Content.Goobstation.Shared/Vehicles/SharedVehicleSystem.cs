@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
-using Content.Shared._vg.TileMovement;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Actions;
@@ -22,6 +21,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Actions.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
+using Content.Trauma.Common.TileMovement;
 
 namespace Content.Goobstation.Shared.Vehicles;
 

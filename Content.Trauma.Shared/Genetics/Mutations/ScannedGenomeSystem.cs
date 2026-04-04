@@ -12,18 +12,14 @@ public sealed class ScannedGenomeSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MutationSystem _mutation = default!;
-
-    private EntityQuery<MutatableComponent> _mutatableQuery;
-    private EntityQuery<ScannedGenomeComponent> _query;
+    [Dependency] private readonly EntityQuery<MutatableComponent> _mutatableQuery = default!;
+    [Dependency] private readonly EntityQuery<ScannedGenomeComponent> _query = default!;
 
     private StringBuilder _builder = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _mutatableQuery = GetEntityQuery<MutatableComponent>();
-        _query = GetEntityQuery<ScannedGenomeComponent>();
 
         SubscribeLocalEvent<ScannedGenomeComponent, PolymorphedEvent>(OnPolymorphed);
         SubscribeLocalEvent<ScannedGenomeComponent, MutationRemovedEvent>(OnMutationRemoved);

@@ -1,8 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Shared.Mind.Components;
-using Content.Shared._Goobstation.Wizard.BindSoul;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Tag;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
@@ -23,9 +22,6 @@ namespace Content.Server.Mind;
 
 public sealed class MindSystem : SharedMindSystem
 {
-    // <Trauma>
-    [Dependency] private readonly TagSystem _tag = default!;
-    // </Trauma>
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
@@ -374,14 +370,14 @@ public sealed class MindSystem : SharedMindSystem
         }
 
         if (mind.OwnedEntity != null) // Goobstation
-            _tag.AddTag(mind.OwnedEntity.Value, SharedBindSoulSystem.IgnoreBindSoulTag);
-        _tag.AddTag(target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+            EnsureComp<MindSwappingComponent>(mind.OwnedEntity.Value);
+        EnsureComp<MindSwappingComponent>(target);
 
         MakeSentient(target);
         TransferTo(mindId, target, ghostCheckOverride: true, mind: mind);
 
         if (mind.OwnedEntity != null) // Goobstation
-            _tag.AddTag(mind.OwnedEntity.Value, SharedBindSoulSystem.IgnoreBindSoulTag);
-        _tag.RemoveTag(target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+            EnsureComp<MindSwappingComponent>(mind.OwnedEntity.Value);
+        EnsureComp<MindSwappingComponent>(target);
     }
 }

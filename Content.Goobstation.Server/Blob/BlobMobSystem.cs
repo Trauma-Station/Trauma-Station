@@ -3,22 +3,16 @@
 using Content.Goobstation.Common.Blob;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.Chat.Systems;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Speech;
-using Robust.Shared.Player;
-using Content.Server._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
-using Content.Medical.Common.Targeting;
+using Content.Trauma.Common.Language.Systems;
 
 namespace Content.Goobstation.Server.Blob;
 
 public sealed class BlobMobSystem : SharedBlobMobSystem
 {
-    [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
 
     public override void Initialize()
@@ -27,24 +21,8 @@ public sealed class BlobMobSystem : SharedBlobMobSystem
 
         SubscribeLocalEvent<BlobMobComponent, BlobMobGetPulseEvent>(OnPulsed);
 
-        SubscribeLocalEvent<BlobSpeakComponent, DetermineEntityLanguagesEvent>(OnLanguageApply);
-        SubscribeLocalEvent<BlobSpeakComponent, ComponentStartup>(OnSpokeAdd);
-        SubscribeLocalEvent<BlobSpeakComponent, ComponentShutdown>(OnSpokeRemove);
         SubscribeLocalEvent<BlobSpeakComponent, TransformSpeakerNameEvent>(OnSpokeName);
         SubscribeLocalEvent<BlobSpeakComponent, SpeakAttemptEvent>(OnSpokeCan, after: new []{ typeof(SpeechSystem) });
-    }
-
-    private void OnLanguageApply(Entity<BlobSpeakComponent> ent, ref DetermineEntityLanguagesEvent args)
-    {
-        if (ent.Comp.LifeStage is
-           ComponentLifeStage.Removing
-           or ComponentLifeStage.Stopping
-           or ComponentLifeStage.Stopped)
-            return;
-
-        args.SpokenLanguages.Clear();
-        args.SpokenLanguages.Add(ent.Comp.Language);
-        args.UnderstoodLanguages.Add(ent.Comp.Language);
     }
 
     private void OnSpokeName(Entity<BlobSpeakComponent> ent, ref TransformSpeakerNameEvent args)
@@ -63,23 +41,6 @@ public sealed class BlobMobSystem : SharedBlobMobSystem
             return;
         }
         args.Uncancel();
-    }
-
-    private void OnSpokeRemove(Entity<BlobSpeakComponent> ent, ref ComponentShutdown args)
-    {
-        if (TerminatingOrDeleted(ent))
-            return;
-
-        _language.UpdateEntityLanguages(ent.Owner);
-    }
-
-    private void OnSpokeAdd(Entity<BlobSpeakComponent> ent, ref ComponentStartup args)
-    {
-        if (TerminatingOrDeleted(ent))
-            return;
-
-        if (TryComp<LanguageSpeakerComponent>(ent, out var speaker))
-            _language.EnsureValidLanguage((ent, speaker));
     }
 
     private void OnPulsed(EntityUid uid, BlobMobComponent component, BlobMobGetPulseEvent args) =>

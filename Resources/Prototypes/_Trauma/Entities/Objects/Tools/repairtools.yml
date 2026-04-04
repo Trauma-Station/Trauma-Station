@@ -6,14 +6,14 @@
   suffix: full
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/tools/whetstone.rsi
+    sprite: _Trauma/Objects/Tools/whetstone.rsi
     state: icon
   - type: Appearance
   - type: Stack
     stackType: Whetstone
     count: 5
   - type: Item
-    sprite: _Trauma/Objects/tools/whetstone.rsi
+    sprite: _Trauma/Objects/Tools/whetstone.rsi
     storedOffset: 0,-1
     storedRotation: 15
     size: Small
@@ -46,10 +46,10 @@
     tags:
     - Bracing
   - type: Sprite
-    sprite: _Trauma/Objects/tools/weaponreinforcement.rsi
+    sprite: _Trauma/Objects/Tools/weaponreinforcement.rsi
     state: icon
   - type: Item
-    sprite: _Trauma/Objects/tools/weaponreinforcement.rsi
+    sprite: _Trauma/Objects/Tools/weaponreinforcement.rsi
     storedOffset: 0,-1
     storedRotation: 45
     size: Small
