@@ -74,6 +74,9 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
     {
         base.RemoveNode(node);
 
+        if (Remaking)
+            return;
+
         if (!node.Deleting)
             return;
 
