@@ -14,7 +14,7 @@
       blockAmbience: false
     - type: NodeContainer
       nodes:
-        pipe:
+        fluid:
           !type:PlumbingNode
           nodeGroupID: Fluid
           pipeDirection: South

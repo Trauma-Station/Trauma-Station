@@ -32,7 +32,7 @@ public sealed partial class PlumbingInsertionSystem : EntitySystem
         if (!TryComp<NodeContainerComponent>(uid, out var container))
             return;
 
-        if (!container.Nodes.TryGetValue("pipe", out var node) || node is not PlumbingNode pNode || pNode.PipeNet is not PlumbingNet net)
+        if (!container.Nodes.TryGetValue(ent.Comp.InletName, out var node) || node is not PlumbingNode pNode || pNode.PipeNet is not PlumbingNet net)
             return;
 
         var availableSpace = net.Liquid.MaxVolume - net.Liquid.Volume;

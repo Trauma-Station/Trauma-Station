@@ -110,7 +110,7 @@
   components:
   - type: NodeContainer
     nodes:
-      pipe:
+      fluid:
         !type:PlumbingNode
         nodeGroupID: Fluid
         pipeDirection: Longitudinal
@@ -159,7 +159,7 @@
   components:
   - type: NodeContainer
     nodes:
-      pipe:
+      fluid:
         !type:PlumbingNode
         nodeGroupID: Fluid
         pipeDirection: SWBend
@@ -220,7 +220,7 @@
   components:
   - type: NodeContainer
     nodes:
-      pipe:
+      fluid:
         !type:PlumbingNode
         nodeGroupID: Fluid
         pipeDirection: TSouth
@@ -275,7 +275,7 @@
     noRot: true
   - type: NodeContainer
     nodes:
-      pipe:
+      fluid:
         !type:PlumbingNode
         nodeGroupID: Fluid
         pipeDirection: Fourway
