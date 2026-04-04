@@ -246,17 +246,17 @@
   parent: BaseGameRule
   id: BaseTraitorRuleNoObjectives
   components:
-  - type: TraitorRule
-  # TODO: codewords in yml
-  # TODO: uplink in yml
-  - type: AntagSelection
-    agentName: traitor-round-end-agent-name
   # <Trauma>
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect
       proto: TraitorSkills
   # </Trauma>
+  - type: TraitorRule
+  # TODO: codewords in yml
+  # TODO: uplink in yml
+  - type: AntagSelection
+    agentName: traitor-round-end-agent-name
 
 - type: entity
   abstract: true

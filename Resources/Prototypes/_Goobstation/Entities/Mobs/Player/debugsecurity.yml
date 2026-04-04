@@ -33,7 +33,7 @@
 
 - type: entity
   categories: [ ]
-  parent: MobHumanHos # Trauma
+  parent: MobHumanSecurityBase
   id: MobHumanHosModSuit
   name: Head Of Security ModSuit
   components:
@@ -48,7 +48,7 @@
 
 - type: entity
   categories: [ ]
-  parent: MobHumanHos # Trauma
+  parent: MobHumanSecurityBase
   id: MobHumanHoSSuit
   name: Head Of Security Suit
   components:
@@ -63,7 +63,7 @@
 
 - type: entity
   categories: [ ]
-  parent: MobHumanWarden # Trauma
+  parent: MobHumanSecurityBase
   id: MobHumanWardenSuit
   name: Warden Suit
   components:
@@ -78,7 +78,7 @@
 
 - type: entity
   categories: [ ]
-  parent: MobHumanBrigmedic # Trauma
+  parent: MobHumanSecurityBase
   id: MobHumanBrigmedicSuit
   name: Brigmedic Suit
   components:
@@ -165,12 +165,6 @@
     - NamesFirst
     - NamesLast
     nameFormat: name-format-standard
-  # <Trauma>
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: InstallSkillChipHeadOfSecurity
-  # </Trauma>
 
 - type: entity
   categories: [ ]
@@ -186,12 +180,6 @@
     - NamesFirst
     - NamesLast
     nameFormat: name-format-standard
-  # <Trauma>
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: InstallSkillChipBrigmedic
-  # </Trauma>
 
 - type: entity
   categories: [ ]
@@ -207,12 +195,6 @@
     - NamesFirst
     - NamesLast
     nameFormat: name-format-standard
-  # <Trauma>
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: InstallSkillChipWarden
-  # </Trauma>
 
 - type: entity
   categories: [ ]
@@ -232,10 +214,3 @@
   - type: AutoImplant
     implants:
     - MindShieldImplant
-  # <Trauma>
-  - type: TriggerOnSpawn
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: InstallSkillChipSecurityOfficer
-  # </Trauma>

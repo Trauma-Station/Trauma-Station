@@ -55,3 +55,17 @@
       FirstAidKnowledge: 88
       LiteracyKnowledge: 88
       MagicalLiteracyKnowledge: 88
+
+- type: entityEffect
+  id: InsurgentSkills
+  effects:
+  - !type:GrantSkills
+    skills:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 26
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
+      AthleticsKnowledge: 26
+      WeaponsKnowledge: 26
+      ThrowingKnowledge: 26
+      FirstAidKnowledge: 26

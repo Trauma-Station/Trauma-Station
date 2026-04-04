@@ -40,18 +40,6 @@
   id: MobSkeletonCloset
   name: closet skeleton
   components:
-  - type: GhostRole
-    name: ghost-role-information-closet-skeleton-name
-    description: ghost-role-information-closet-skeleton-description
-    rules: ghost-role-information-freeagent-rules
-    mindRoles:
-    - MindRoleGhostRoleFreeAgent
-    raffle:
-      settings: default
-  - type: GhostTakeoverAvailable
-  - type: Loadout
-    prototypes: [LimitedPassengerGear]
-  - type: RandomHumanoidAppearance
   # <Trauma>
   - type: KnowledgeGrant # Combat skills advanced, crafting skills master
     skills:
@@ -71,3 +59,15 @@
       MechanicsKnowledge: 88
       TailoringKnowledge: 88
   # </Trauma>
+  - type: GhostRole
+    name: ghost-role-information-closet-skeleton-name
+    description: ghost-role-information-closet-skeleton-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+  - type: Loadout
+    prototypes: [LimitedPassengerGear]
+  - type: RandomHumanoidAppearance

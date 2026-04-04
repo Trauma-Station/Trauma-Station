@@ -237,6 +237,12 @@
   parent: BaseGameRule
   id: NinjaSpawn
   components:
+  # <Trauma>
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: ChangelingSkills
+  # </Trauma>
   - type: StationEvent
     weight: 1 # Trauma - was 6
     duration: null
