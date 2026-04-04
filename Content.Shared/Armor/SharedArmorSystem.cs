@@ -123,9 +123,9 @@ public abstract class SharedArmorSystem : EntitySystem
             {
                 msg.PushNewline();
                 var armorType = Loc.GetString("armor-damage-type-" + coefficientArmor.Key.ToLower());
-                msg.AddMarkupOrThrow(Loc.GetString("armor-coefficient-value",
+                msg.AddMarkupOrThrow(Loc.GetString("armor-coefficient-value-trauma", // Trauma - better locale string
                     ("type", armorType),
-                    ("value", MathF.Round((1f - coefficientArmor.Value) * 100, 1))
+                    ("value", MathF.Abs(1f - coefficientArmor.Value) * 100), ("protect", coefficientArmor.Value < 1f) // Trauma - better values
                 ));
             }
 

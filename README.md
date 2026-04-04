@@ -1,12 +1,10 @@
 <p align="center"> <img alt="Space Station 14" width="750" height="600" src="https://github.com/Trauma-Station/Trauma-Station/blob/master/Resources/Textures/Logo/logo.png" /></p>
 
-This is a fork from the primary repo for  Goob Station called Trauma Station. To prevent people forking RobustToolbox, a "content" pack is loaded by the client and server. This content pack contains everything needed to play the game on one specific server this is the content pack for Trauma Station.
-
-If you want to host or create content for SS14, go to the [Space Station 14 repository](https://github.com/space-wizards/space-station-14) as it contains both RobustToolbox and the content pack for development of new content packs and is the base for your fork.
+This is a fork of [SS14](https://github.com/ called Trauma Station.
 
 ## Links
 
-[Trauma Station Discord](https://discord.gg/7ZKs7HadK5) | [Devbus Discord Server](https://discord.gg/f3rJaCuK) | [SS14 Forums](https://forum.spacestation14.com/) | [SS14 Website](https://spacestation14.com/)
+[Trauma Station Discord](https://discord.gg/7ZKs7HadK5) | [Devbus Discord Server](https://discord.gg/f3rJaCuK)
 
 ## Documentation/Wiki
 
@@ -14,10 +12,10 @@ SS14 Docs [docs site](https://docs.spacestation14.com/) has documentation on SS1
 
 ## Contributing
 
-We are happy to accept contributions from anybody. Get in [Development Discord Server](https://discord.gg/f3rJaCuK) if you want to help. Feel free to check the [list of issues](https://github.com/Trauma-Station/Trauma-Station/issues) that need to be done and anybody can pick them up. Don't be afraid to ask for help either!
-While following the [Space Station 14 contribution guidelines](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html) is not mandatory for Goob Station, we recommend reviewing them for best practices.
+We are happy to accept contributions from anybody. Get in [our Discord Server](https://discord.gg/7ZKs7HadK5) if you want to help. Feel free to check the [list of issues](https://github.com/Trauma-Station/Trauma-Station/issues) that need to be done and anybody can pick them up. Don't be afraid to ask for help either!
+Please read the [Contribution Guidelines](/CONTRIBUTING.md) before opening a pull request.
 
-We are not currently accepting translations of the game on our main repository. If you would like to translate the game into another language consider creating a fork or contributing to a fork.
+We are not accepting translations of the game on our repository.
 
 ## AI-generated contributions disclaimer
 This project does not accept low-effort or wholesale AI-generated contributions. Examples include, but are not limited to:
@@ -38,7 +36,7 @@ Exceptions to this are simple tools like Rider's single-line completion feature.
 
 ## License
 
-All code in this codebase is released under the AGPL-3.0-or-later license. Each file includes REUSE Specification headers or separate .license files that specify a dual license option. This dual licensing is provided to simplify the process for projects that are not using AGPL, allowing them to adopt the relevant portions of the code under an alternative license. You can review the complete texts of these licenses in the LICENSES/ directory.
+All code in this codebase is released under the AGPL-3.0-or-later license. Some files were taken from other repositories and sublicensed from their original licenses. You can review the complete texts of these licenses in the LICENSES/ directory.
 
 Most media assets are licensed under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) unless stated otherwise. Assets have their license and the copyright in the metadata file. [Example](https://github.com/space-wizards/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json).
 

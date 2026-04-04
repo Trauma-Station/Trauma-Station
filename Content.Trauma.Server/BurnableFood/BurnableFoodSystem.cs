@@ -43,7 +43,17 @@ public sealed partial class BurnableFoodSystem : EntitySystem
 
         foreach (var ent in _burned)
         {
-            Burn(ent);
+            if (!Exists(ent))
+                continue;
+
+            try
+            {
+                Burn(ent);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception while burning {ToPrettyString(ent)}: {e}");
+            }
         }
         _burned.Clear();
     }

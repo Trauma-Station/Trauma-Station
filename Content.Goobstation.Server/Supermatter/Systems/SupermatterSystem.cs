@@ -36,6 +36,7 @@ using Robust.Shared.IoC;
 using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Supermatter.Systems;
 
@@ -563,6 +564,10 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
     {
         var target = args.OtherEntity;
 
+        // ignore non-hard fixture collisions, or the wrong event target
+        if (args.OurEntity != uid || !args.OtherFixture.Hard)
+            return;
+
         // Stop immune entities from activating the sm.
         if (args.OtherBody.BodyType == BodyType.Static
             || HasComp<SupermatterImmuneComponent>(target)
@@ -598,6 +603,7 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
 
         if (!HasComp<ProjectileComponent>(target))
         {
+            var impact = HasComp<ActorComponent>(target) ? LogImpact.Extreme : LogImpact.Medium;
             _adminLog.Add(LogType.Supermatter, LogImpact.Medium, $"Supermatter {ToPrettyString(uid)} has consumed {ToPrettyString(target)}");
             Spawn("Ash", Transform(target).Coordinates);
             _audio.PlayPvs(sm.DustSound, uid);

@@ -110,6 +110,7 @@
 
 - type: material
   id: Bones
+  stackEntity: MaterialBones1 # Trauma
   name: materials-bones
   unit: materials-unit-piece
   icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: bones } # Trauma
@@ -128,7 +129,7 @@
 - type: material
   id: Gunpowder
   stackEntity: MaterialGunpowder # Trauma
-  name: materials-bone
+  name: materials-gunpowder
   unit: materials-unit-piece
   icon: { sprite: Objects/Misc/reagent_fillings.rsi, state: powderpile }
   color: "#A9A9A9"

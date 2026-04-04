@@ -42,7 +42,7 @@ public abstract partial class SharedGunSystem
     }
 
     public TargetBodyPart? GetTargetPart(EntityUid? shooter, EntityUid target)
-        => shooter is {} targeting
+        => shooter is {} targeting && Exists(targeting)
             ? GetTargetPart(targeting, TransformSystem.GetMapCoordinates(targeting), TransformSystem.GetMapCoordinates(target))
             : null;
 

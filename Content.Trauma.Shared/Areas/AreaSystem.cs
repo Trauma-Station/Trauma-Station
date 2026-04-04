@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Roles;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using System.Numerics;
 
 namespace Content.Trauma.Shared.Areas;
 
@@ -12,9 +12,9 @@ namespace Content.Trauma.Shared.Areas;
 /// </summary>
 public sealed class AreaSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly MapAreaSystem _mapArea = default!;
     [Dependency] private readonly EntityQuery<DepartmentAreaComponent> _deptQuery = default!;
 
     /// <summary>
@@ -96,28 +96,22 @@ public sealed class AreaSystem : EntitySystem
 
     /// <summary>
     /// Get the area at a given position.
-    /// It will be snapped to the nearest tile, if your position is already snapped use <see cref="GetAreaCentered"/>.
     /// </summary>
     public EntityUid? GetArea(EntityCoordinates coords)
-        => GetAreaCentered(coords.SnapToGrid(EntityManager, _map));
-
-    /// <summary>
-    /// Get the area at a given position which must be centered on a tile.
-    /// Only call this if the coordinates are already centered on a tile.
-    /// </summary>
-    public EntityUid? GetAreaCentered(EntityCoordinates coords)
     {
-        // TODO: if this is found to be expensive investigate:
-        // A. storing which area(s) an entity is in through collisions (while map is unpaused)
-        // B. having a quadtree etc to store areas instead of lookup
-        // C. only using entities to map areas, store them on a special grid component similar to decals or tile air mixes
-        _areas.Clear();
-        _lookup.GetEntitiesInRange(coords, Range, _areas, Flags);
-        foreach (var area in _areas)
+        if (_transform.GetGrid(coords) is not {} grid)
+            return null;
+
+        var pos = coords.Position;
+        if (coords.EntityId != grid)
         {
-            return area; // return the first area, should only ever be 1 because of placement replacement
+            // relative to some random entity, have to go from world to grid-local first
+            var matrix = _transform.GetInvWorldMatrix(grid);
+            var worldPos = _transform.ToWorldPosition(coords);
+            pos = Vector2.Transform(worldPos, matrix);
         }
-        return null;
+
+        return _mapArea.GetArea(grid, pos);
     }
 
     /// <summary>

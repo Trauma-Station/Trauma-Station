@@ -1,0 +1,20 @@
+<Document>
+  # Morph
+  <Box>
+    <GuideEntityEmbed Entity="MobMorph" />
+    <GuideEntityEmbed Entity="MobMorph" Caption=""/>
+    <GuideEntityEmbed Entity="ClownDummy" Caption=""/>
+    <GuideEntityEmbed Entity="MobMorph" Caption=""/>
+  </Box>
+  <Box>
+    [color=#999999][italic]A scene of morphs eating a delicious clown[/italic][/color]
+  </Box>
+
+  Morphs are interdimensional terrors from the netherworld, traveling to your station during mating season to eat organics and items to produce [color=#79b037]biomass[/color]
+  - Morphs gain biomass by eating food or other creatures such as mice, monkeys, and crew.
+  - Morphs can use biomass to divide, creating a copy of themselves
+  - Morphs can eat anything, allowing you to eat valuable gear and weapons if you get the chance
+  - Morphs can disguise as items or crew to trick prey into letting their guard down
+  - Morphs are resistant to all damage types except [color=#e6a009]heat[/color]
+  - Morphs are completely immune to [color=green]radiation[/color] damage.
+</Document>
