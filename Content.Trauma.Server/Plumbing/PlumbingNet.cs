@@ -12,7 +12,7 @@ using Content.Trauma.Shared.Plumbing;
 
 namespace Content.Trauma.Server.Plumbing;
 
-[NodeGroup(NodeGroupID.Reagent)] // Ensure you added this to the NodeGroupID enum
+[NodeGroup(NodeGroupID.Fluid)] // Ensure you added this to the NodeGroupID enum
 public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
 {
     [ViewVariables]

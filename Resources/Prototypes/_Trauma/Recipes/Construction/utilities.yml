@@ -1,0 +1,253 @@
+- type: construction
+  id: FluidPipeStraight
+  graph: FluidPipe
+  startNode: start
+  targetNode: straight
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeStraight
+  - FluidPipeStraightAlt1
+  - FluidPipeStraightAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 0 # it's a pipe
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeStraightAlt1
+  hide: true
+  graph: FluidPipe
+  startNode: start
+  targetNode: straightAlt1
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeStraight
+  - FluidPipeStraightAlt1
+  - FluidPipeStraightAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 0 # it's a pipe
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeStraightAlt2
+  hide: true
+  graph: FluidPipe
+  startNode: start
+  targetNode: straightAlt2
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeStraight
+  - FluidPipeStraightAlt1
+  - FluidPipeStraightAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 0 # it's a pipe
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeBend
+  name: construction-recipe-gas-pipe-bend
+  graph: FluidPipe
+  startNode: start
+  targetNode: bend
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeBend
+  - FluidPipeBendAlt1
+  - FluidPipeBendAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 0 # it's a bent pipe
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeBendAlt1
+  hide: true
+  graph: FluidPipe
+  startNode: start
+  targetNode: bendAlt1
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeBend
+  - FluidPipeBendAlt1
+  - FluidPipeBendAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 0 # it's a bent pipe
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeBendAlt2
+  hide: true
+  graph: FluidPipe
+  startNode: start
+  targetNode: bendAlt2
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeBend
+  - FluidPipeBendAlt1
+  - FluidPipeBendAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 0 # it's a bent pipe
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeTJunction
+  name: construction-recipe-gas-pipe-t-junction
+  graph: FluidPipe
+  startNode: start
+  targetNode: tjunction
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeTJunction
+  - FluidPipeTJunctionAlt1
+  - FluidPipeTJunctionAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeTJunctionAlt1
+  hide: true
+  graph: FluidPipe
+  startNode: start
+  targetNode: tjunctionAlt1
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeTJunction
+  - FluidPipeTJunctionAlt1
+  - FluidPipeTJunctionAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeTJunctionAlt2
+  hide: true
+  graph: FluidPipe
+  startNode: start
+  targetNode: tjunctionAlt2
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeTJunction
+  - FluidPipeTJunctionAlt1
+  - FluidPipeTJunctionAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeFourway
+  name: construction-recipe-gas-pipe-fourway
+  graph: FluidPipe
+  startNode: start
+  targetNode: fourway
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeFourway
+  - FluidPipeFourwayAlt1
+  - FluidPipeFourwayAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeFourwayAlt1
+  hide: true
+  graph: FluidPipe
+  startNode: start
+  targetNode: fourwayAlt1
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeFourway
+  - FluidPipeFourwayAlt1
+  - FluidPipeFourwayAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeFourwayAlt2
+  hide: true
+  graph: FluidPipe
+  startNode: start
+  targetNode: fourwayAlt2
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: true
+  alternativePrototypes:
+  - FluidPipeFourway
+  - FluidPipeFourwayAlt1
+  - FluidPipeFourwayAlt2
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>
+
+- type: construction
+  id: FluidPipeManifold
+  graph: FluidPipe
+  startNode: start
+  targetNode: manifold
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  # <Trauma>
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  # </Trauma>

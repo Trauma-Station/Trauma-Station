@@ -446,7 +446,7 @@ namespace Content.Server.NodeContainer.EntitySystems
                 NodeGroupID.WireNet => Color.DarkMagenta,
                 NodeGroupID.Teg => Color.Red,
                 NodeGroupID.ExCable => Color.Pink,
-                NodeGroupID.Reagent => Color.Brown, // Trauma - Plumbing
+                NodeGroupID.Fluid => Color.Brown, // Trauma - Plumbing
                 _ => Color.White
             };
         }

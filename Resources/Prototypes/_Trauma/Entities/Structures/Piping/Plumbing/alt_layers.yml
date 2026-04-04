@@ -1,0 +1,87 @@
+## This file contains duplicated pipe prototypes with
+## different layer offsets to faciliate mapping
+
+# Layer 1
+- type: entity
+  abstract: true
+  id: FluidPipeLayerAlt1
+  components:
+  - type: AtmosPipeLayers
+    pipeLayer: 1
+
+# Layer 2
+- type: entity
+  abstract: true
+  id: FluidPipeLayerAlt2
+  components:
+  - type: AtmosPipeLayers
+    pipeLayer: 2
+
+# FluidPipeStraight
+- type: entity
+  parent: [FluidPipeLayerAlt1, FluidPipeStraight]
+  id: FluidPipeStraightAlt1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: ThinPipeAlt1
+    sprite: Structures/Piping/Atmospherics/pipe_alt1.rsi
+  - type: Construction
+    node: straightAlt1
+
+- type: entity
+  parent: [FluidPipeLayerAlt2, FluidPipeStraight]
+  id: FluidPipeStraightAlt2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: ThinPipeAlt2
+    sprite: Structures/Piping/Atmospherics/pipe_alt2.rsi
+  - type: Construction
+    node: straightAlt2
+
+# FluidPipeTJunction
+- type: entity
+  parent: [FluidPipeLayerAlt1, FluidPipeTJunction]
+  id: FluidPipeTJunctionAlt1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: ThinPipeAlt1
+    sprite: Structures/Piping/Atmospherics/pipe_alt1.rsi
+  - type: Construction
+    node: tjunctionAlt1
+
+- type: entity
+  parent: [FluidPipeLayerAlt2, FluidPipeTJunction]
+  id: FluidPipeTJunctionAlt2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: ThinPipeAlt2
+    sprite: Structures/Piping/Atmospherics/pipe_alt2.rsi
+  - type: Construction
+    node: tjunctionAlt2
+
+# FluidPipeFourway
+- type: entity
+  parent: [FluidPipeLayerAlt1, FluidPipeFourway]
+  id: FluidPipeFourwayAlt1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: ThinPipeAlt1
+    sprite: Structures/Piping/Atmospherics/pipe_alt1.rsi
+  - type: Construction
+    node: fourwayAlt1
+
+- type: entity
+  parent: [FluidPipeLayerAlt2, FluidPipeFourway]
+  id: FluidPipeFourwayAlt2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: ThinPipeAlt2
+    sprite: Structures/Piping/Atmospherics/pipe_alt2.rsi
+  - type: Construction
+    node: fourwayAlt2

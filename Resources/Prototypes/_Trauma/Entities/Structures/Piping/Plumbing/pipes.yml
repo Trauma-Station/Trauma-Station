@@ -1,9 +1,9 @@
 - type: entity
   abstract: true
   parent: BaseItem
-  id: GasPipeSansLayers
-  name: gas pipe
-  description: Holds gas.
+  id: FluidPipeSansLayers
+  name: fluid pipe
+  description: Holds fluid.
   placement:
     mode: SnapgridCenter
   components:
@@ -44,7 +44,7 @@
             volume: -8
       - !type:SpawnEntitiesBehavior
         spawn:
-          GasPipeBroken:
+          FluidPipeBroken:
             min: 1
             max: 1
         offset: 0
@@ -89,21 +89,10 @@
       collection: PipeDrop
   # Goobstation edit end
 
-- type: entity  # Goobstation - ventcrawl
-  id: VentCrawlerHolder
-  categories: [ HideSpawnMenu ]
-  name: vent craw holder
-  components:
-    - type: VentCrawlerHolder
-    - type: InputMover
-    - type: ContainerContainer
-      containers:
-        VentCrawlerHolderComponent: !type:Container
-
 - type: entity
   abstract: true
-  parent: [GasPipeSansLayers, MetalToolDurabilityWeak] # Trauma
-  id: GasPipeBase
+  parent: [FluidPipeSansLayers, MetalToolDurabilityWeak] # Trauma
+  id: FluidPipeBase
   components:
   - type: AtmosPipeLayers
     spriteLayersRsiPaths:
@@ -112,47 +101,9 @@
         Secondary: Structures/Piping/Atmospherics/pipe_alt1.rsi
         Tertiary: Structures/Piping/Atmospherics/pipe_alt2.rsi
 
-#Note: The PipeDirection of the PipeNode should be the south-facing version, because the entity starts at an angle of 0 (south)
-
 - type: entity
-  # Goobstation - Allow device-on-pipe stacking
-  parent: GasPipeBase
-  id: GasPipeHalf
-  suffix: Half
-  placement:
-    mode: AlignAtmosPipeLayers
-  components:
-  - type: NodeContainer
-    nodes:
-      pipe:
-        !type:PipeNode
-        nodeGroupID: Pipe
-        pipeDirection: South
-  - type: Sprite
-    layers:
-    - state: pipeHalf
-      map: [ "enum.PipeVisualLayers.Pipe" ]
-  - type: AtmosPipeLayers
-    alternativePrototypes:
-      Primary: GasPipeHalf
-      Secondary: GasPipeHalfAlt1
-      Tertiary: GasPipeHalfAlt2
-  - type: Construction
-    graph: GasPipe
-    node: half
-  - type: Item
-    size: Small
-    storedSprite:
-      sprite: Structures/Piping/Atmospherics/pipe.rsi
-      state: storageHalf
-  - type: GuideHelp
-    guides:
-    - Pipes
-    - PipeNetworks
-
-- type: entity
-  parent: GasPipeBase
-  id: GasPipeStraight
+  parent: FluidPipeBase
+  id: FluidPipeStraight
   suffix: Straight
   placement:
     mode: AlignAtmosPipeLayers
@@ -160,8 +111,8 @@
   - type: NodeContainer
     nodes:
       pipe:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: Longitudinal
   - type: VentCrawlerTube # Goobstation - ventcrawl
     containerId: VentCrawlerTube
@@ -175,11 +126,11 @@
       map: [ "enum.PipeVisualLayers.Pipe" ]
   - type: AtmosPipeLayers
     alternativePrototypes:
-      Primary: GasPipeStraight
-      Secondary: GasPipeStraightAlt1
-      Tertiary: GasPipeStraightAlt2
+      Primary: FluidPipeStraight
+      Secondary: FluidPipeStraightAlt1
+      Tertiary: FluidPipeStraightAlt2
   - type: Construction
-    graph: GasPipe
+    graph: FluidPipe
     node: straight
   - type: Item
     storedSprite:
@@ -200,8 +151,8 @@
     - PipeNetworks
 
 - type: entity
-  parent: GasPipeBase
-  id: GasPipeBend
+  parent: FluidPipeBase
+  id: FluidPipeBend
   suffix: Bend
   placement:
     mode: AlignAtmosPipeLayers
@@ -209,8 +160,8 @@
   - type: NodeContainer
     nodes:
       pipe:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: SWBend
   - type: VentCrawlerTube # Goobstation - ventcrawl
     containerId: VentCrawlerTube
@@ -224,11 +175,11 @@
         map: [ "enum.PipeVisualLayers.Pipe" ]
   - type: AtmosPipeLayers
     alternativePrototypes:
-      Primary: GasPipeBend
-      Secondary: GasPipeBendAlt1
-      Tertiary: GasPipeBendAlt2
+      Primary: FluidPipeBend
+      Secondary: FluidPipeBendAlt1
+      Tertiary: FluidPipeBendAlt2
   - type: Construction
-    graph: GasPipe
+    graph: FluidPipe
     node: bend
   - type: Item
     shape:
@@ -261,8 +212,8 @@
     - PipeNetworks
 
 - type: entity
-  parent: GasPipeBase
-  id: GasPipeTJunction
+  parent: FluidPipeBase
+  id: FluidPipeTJunction
   placement:
     mode: AlignAtmosPipeLayers
   suffix: TJunction
@@ -270,8 +221,8 @@
   - type: NodeContainer
     nodes:
       pipe:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: TSouth
   - type: Sprite
     layers:
@@ -279,11 +230,11 @@
         map: [ "enum.PipeVisualLayers.Pipe" ]
   - type: AtmosPipeLayers
     alternativePrototypes:
-      Primary: GasPipeTJunction
-      Secondary: GasPipeTJunctionAlt1
-      Tertiary: GasPipeTJunctionAlt2
+      Primary: FluidPipeTJunction
+      Secondary: FluidPipeTJunctionAlt1
+      Tertiary: FluidPipeTJunctionAlt2
   - type: Construction
-    graph: GasPipe
+    graph: FluidPipe
     node: tjunction
   - type: Item
     heldPrefix: TJunction
@@ -314,8 +265,8 @@
       VentCrawlerTube: !type:Container
 
 - type: entity
-  parent: GasPipeBase
-  id: GasPipeFourway
+  parent: FluidPipeBase
+  id: FluidPipeFourway
   suffix: Fourway
   placement:
     mode: AlignAtmosPipeLayers
@@ -325,8 +276,8 @@
   - type: NodeContainer
     nodes:
       pipe:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: Fourway
   - type: Sprite
     layers:
@@ -334,11 +285,11 @@
         map: [ "enum.PipeVisualLayers.Pipe" ]
   - type: AtmosPipeLayers
     alternativePrototypes:
-      Primary: GasPipeFourway
-      Secondary: GasPipeFourwayAlt1
-      Tertiary: GasPipeFourwayAlt2
+      Primary: FluidPipeFourway
+      Secondary: FluidPipeFourwayAlt1
+      Tertiary: FluidPipeFourwayAlt2
   - type: Construction
-    graph: GasPipe
+    graph: FluidPipe
     node: fourway
   - type: VentCrawlerTube # Goobstation - ventcrawl
     containerId: VentCrawlerTube
@@ -370,8 +321,8 @@
     - PipeNetworks
 
 - type: entity
-  id: GasPipeBroken
-  parent: GasPipeBase
+  id: FluidPipeBroken
+  parent: FluidPipeBase
   name: broken pipe
   description: It used to hold gas.
   components:
@@ -385,7 +336,7 @@
   - type: AtmosPipeLayers
     numberOfPipeLayers: 1
   - type: Construction
-    graph: GasPipe
+    graph: FluidPipe
     node: broken
   - type: Item
     size: Small
@@ -403,8 +354,8 @@
     - PipeNetworks
 
 - type: entity
-  parent: GasPipeSansLayers
-  id: GasPipeManifold
+  parent: FluidPipeSansLayers
+  id: FluidPipeManifold
   name: gas pipe manifold
   description: Allows gas pipes of different configurations to be connected together.
   placement:
@@ -423,7 +374,7 @@
     - { sprite: Structures/Piping/Atmospherics/manifold.rsi, state: pipeConnector_alt1 }
     - { sprite: Structures/Piping/Atmospherics/manifold.rsi, state: pipeConnector_alt2 }
   - type: Construction
-    graph: GasPipe
+    graph: FluidPipe
     node: manifold
   - type: Item
     size: Small
@@ -435,44 +386,44 @@
   - type: NodeContainer
     nodes:
       south0:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: South
         pipeLayer: 0
         volume: 50
       south1:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: South
         pipeLayer: 1
         volume: 50
       south2:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: South
         pipeLayer: 2
         volume: 50
       north0:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: North
         pipeLayer: 0
         volume: 50
       north1:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: North
         pipeLayer: 1
         volume: 50
       north2:
-        !type:PipeNode
-        nodeGroupID: Pipe
+        !type:PlumbingNode
+        nodeGroupID: Fluid
         pipeDirection: North
         pipeLayer: 2
         volume: 50
-  - type: GasPipeManifold
+  - type: FluidPipeManifold
   - type: AtmosMonitoringConsoleDevice
-    navMapBlip: GasPipeManifold
+    navMapBlip: FluidPipeManifold
     showAbsentConnections: false
   - type: AtmosDevice
   - type: Tag

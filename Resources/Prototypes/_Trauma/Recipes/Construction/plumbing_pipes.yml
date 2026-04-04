@@ -1,5 +1,5 @@
 - type: constructionGraph
-  id: GasPipe
+  id: FluidPipe
   start: start
   graph:
   - node: start
@@ -101,7 +101,7 @@
         doAfter: 1
 
   - node: half
-    entity: GasPipeHalf
+    entity: FluidPipeHalf
     edges:
     - to: start
       conditions:
@@ -117,7 +117,7 @@
         doAfter: 1
 
   - node: halfAlt1
-    entity: GasPipeHalfAlt1
+    entity: FluidPipeHalfAlt1
     edges:
     - to: start
       conditions:
@@ -133,7 +133,7 @@
         doAfter: 1
 
   - node: halfAlt2
-    entity: GasPipeHalfAlt2
+    entity: FluidPipeHalfAlt2
     edges:
     - to: start
       conditions:
@@ -149,7 +149,7 @@
         doAfter: 1
 
   - node: straight
-    entity: GasPipeStraight
+    entity: FluidPipeStraight
     edges:
     - to: start
       conditions:
@@ -165,7 +165,7 @@
         doAfter: 1
 
   - node: straightAlt1
-    entity: GasPipeStraightAlt1
+    entity: FluidPipeStraightAlt1
     edges:
     - to: start
       conditions:
@@ -181,7 +181,7 @@
         doAfter: 1
 
   - node: straightAlt2
-    entity: GasPipeStraightAlt2
+    entity: FluidPipeStraightAlt2
     edges:
     - to: start
       conditions:
@@ -197,7 +197,7 @@
         doAfter: 1
 
   - node: bend
-    entity: GasPipeBend
+    entity: FluidPipeBend
     edges:
     - to: start
       conditions:
@@ -213,7 +213,7 @@
         doAfter: 1
 
   - node: bendAlt1
-    entity: GasPipeBendAlt1
+    entity: FluidPipeBendAlt1
     edges:
     - to: start
       conditions:
@@ -229,7 +229,7 @@
         doAfter: 1
 
   - node: bendAlt2
-    entity: GasPipeBendAlt2
+    entity: FluidPipeBendAlt2
     edges:
     - to: start
       conditions:
@@ -245,7 +245,7 @@
         doAfter: 1
 
   - node: tjunction
-    entity: GasPipeTJunction
+    entity: FluidPipeTJunction
     edges:
     - to: start
       conditions:
@@ -261,7 +261,7 @@
         doAfter: 1
 
   - node: tjunctionAlt1
-    entity: GasPipeTJunctionAlt1
+    entity: FluidPipeTJunctionAlt1
     edges:
     - to: start
       conditions:
@@ -277,7 +277,7 @@
         doAfter: 1
 
   - node: tjunctionAlt2
-    entity: GasPipeTJunctionAlt2
+    entity: FluidPipeTJunctionAlt2
     edges:
     - to: start
       conditions:
@@ -293,7 +293,7 @@
         doAfter: 1
 
   - node: fourway
-    entity: GasPipeFourway
+    entity: FluidPipeFourway
     edges:
     - to: start
       conditions:
@@ -309,7 +309,7 @@
         doAfter: 1
 
   - node: fourwayAlt1
-    entity: GasPipeFourwayAlt1
+    entity: FluidPipeFourwayAlt1
     edges:
     - to: start
       conditions:
@@ -325,7 +325,7 @@
         doAfter: 1
 
   - node: fourwayAlt2
-    entity: GasPipeFourwayAlt2
+    entity: FluidPipeFourwayAlt2
     edges:
     - to: start
       conditions:
@@ -341,7 +341,7 @@
         doAfter: 1
 
   - node: broken
-    entity: GasPipeBroken
+    entity: FluidPipeBroken
     edges:
     - to: start
       conditions:
@@ -357,7 +357,7 @@
         doAfter: 1
 
   - node: manifold
-    entity: GasPipeManifold
+    entity: FluidPipeManifold
     edges:
     - to: start
       conditions:
