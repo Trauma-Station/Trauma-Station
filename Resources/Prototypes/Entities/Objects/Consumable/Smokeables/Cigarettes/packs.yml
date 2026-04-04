@@ -143,7 +143,7 @@
 
 - type: entity
   id: CigPackGreen
-  parent: CigPackBase
+  parent: CigPackBaseSoft # Trauma
   name: Spessman's Smokes packet
   description: A label on the packaging reads, Wouldn't a slow death make a change?
   components:
@@ -176,7 +176,7 @@
 
 - type: entity
   id: CigPackBlack
-  parent: CigPackBase
+  parent: CigPackBaseSoft # Trauma
   name: Nomads packet
   description: Nomads's extra strong, for when your life is more extra hard.
   components:

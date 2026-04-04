@@ -32,12 +32,42 @@
       min: 1800
       max: 3000
 
-## Shadow demon
+## Morph
 
 - type: entity
   parent: BaseGameRule
-  id: BaseShadowDemonRule
+  id: MorphRule
+  components:
+  - type: StationEvent
+    earliestStart: 20
+    weight: 3
+    minimumPlayers: 30
+    duration: null
+    occursDuringRoundEnd: false
+  - type: MorphRule
+  - type: MaintsSpawnRule
+  - type: AntagSpawner
+    prototype: MobMorph
+  - type: AntagSelection
+    selectionTime: PostPlayerSpawn
+    agentName: morph-name-user
+    definitions:
+    - spawnerPrototype: GhostRoleSpawnerMorph
+      min: 1
+      max: 1
+      briefing:
+        text: morph-role-greeting
+        color: lime
+        sound: /Audio/_Trauma/Morph/mutate.ogg
+      mindRoles:
+      - MindRoleMorph
+
+## Shadow demon
+
+- type: entity
   abstract: true
+  parent: BaseGameRule
+  id: BaseShadowDemonRule
   components:
   - type: AntagSpawner
     prototype: BaseMobShadowDemon

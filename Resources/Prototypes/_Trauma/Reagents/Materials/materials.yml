@@ -33,12 +33,3 @@
   icon: { sprite: _Trauma/Objects/Tools/weaponreinforcement.rsi, state: icon }
   color: "#000000"
   price: 0
-
-- type: material
-  id: Bone
-  stackEntity: MaterialBones1
-  name: materials-gunpowder
-  unit: materials-unit-piece
-  icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: bones }
-  color: "#A9A9A9"
-  price: 0

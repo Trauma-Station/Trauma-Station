@@ -6340,3 +6340,80 @@ Entries:
   id: 733
   time: '2026-04-03T23:26:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1844
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: You can no longer use mech guns just by holding them...
+  id: 734
+  time: '2026-04-03T23:37:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1841
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added the Morph from Paradise station SS13. Be careful wandering maints...
+  id: 735
+  time: '2026-04-04T00:15:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1834
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed gunpowder being called bones in the secfab...
+  id: 736
+  time: '2026-04-04T00:51:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1848
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed zombie infection barely doing any damage.
+  id: 737
+  time: '2026-04-04T12:01:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1856
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed genetics scanned sequences sometimes incorrectly being removed.
+  id: 738
+  time: '2026-04-04T12:09:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1855
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Maybe really fixed the 15 second delay bug..?
+  id: 739
+  time: '2026-04-04T14:45:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1857
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lathes not linked to a silo deleting materials.
+  - type: Fix
+    message: Fixed supermatter ashing you if you go near it with sandevistan on.
+  id: 740
+  time: '2026-04-04T14:47:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1862
+- author: Big tobacco
+  changes:
+  - type: Add
+    message: >-
+      Added chemlab menthols, a cigarette that has a higher capacity for
+      reagents than regular ones
+  - type: Add
+    message: >-
+      Added hydroponic herbals, a botany-branded cigarette, 2 packs and 1 carton
+      can be found in the nutrimax vendor
+  - type: Add
+    message: Added interdyne herbals carton to the uplink, 5 packs for 15 TC
+  - type: Tweak
+    message: Changed all cigarette sprites to be more unique
+  id: 741
+  time: '2026-04-04T16:04:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1774
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the security funding booster for HOS, use it for free money if you
+      killed all the antags too fast!
+  id: 742
+  time: '2026-04-04T20:40:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1864

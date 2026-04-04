@@ -238,6 +238,14 @@
   id: SpearBone
   description: A spear made of bones.
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Bones: 200
+  - type: Tag
+    tags:
+    - Trash
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/bone_spear.rsi
   - type: Construction
@@ -266,14 +274,6 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  # <Trauma>
-  - type: PhysicalComposition
-    materialComposition:
-      Bone: 200
-  - type: Tag
-    tags:
-    - Trash
-  # </Trauma>
 
 - type: entity
   name: sharkminnow tooth spear
@@ -281,6 +281,17 @@
   id: SpearSharkMinnow
   description: A spear with a sharkminnow tooth as a tip.
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Steel: 50
+  - type: Tag
+    tags:
+    - Spear
+    - ScurretWearable
+    - Trash
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/sharkminnow_spear.rsi
   - type: MeleeWeapon
@@ -294,14 +305,3 @@
         Piercing: 30 #goobedit - buff spear variant, nerf tooth.
   - type: Construction
     graph: SpearSharkMinnow
-  # <Trauma>
-  - type: PhysicalComposition
-    materialComposition:
-      Glass: 50
-      Steel: 50
-  - type: Tag
-    tags:
-    - Spear
-    - ScurretWearable
-    - Trash
-  # </Trauma>

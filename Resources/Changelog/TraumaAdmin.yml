@@ -80,3 +80,10 @@ Entries:
   id: 11
   time: '2026-03-25T21:49:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1582
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: SM ashing players log is now extreme instead of medium.
+  id: 12
+  time: '2026-04-04T14:47:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1862
