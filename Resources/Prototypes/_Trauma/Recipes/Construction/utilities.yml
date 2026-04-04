@@ -225,7 +225,7 @@
     InfrastructureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
-    
+
 # ATMOS UNARY
 - type: construction
   id: GasVentPump
