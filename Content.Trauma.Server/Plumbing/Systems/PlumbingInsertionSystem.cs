@@ -27,7 +27,7 @@ public sealed partial class PlumbingInsertionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<FluidPassiveVentComponent, PlumbingDeviceUpdateEvent>(OnPassiveUpdate);
-        SubscribeLocalEvent<FluidVentComponent, PlumbingDeviceUpdateEvent>(OnActiveUpdate);
+        SubscribeLocalEvent<FluidVentPumpComponent, PlumbingDeviceUpdateEvent>(OnActiveUpdate);
     }
 
     private void OnPassiveUpdate(Entity<FluidPassiveVentComponent> ent, ref PlumbingDeviceUpdateEvent args)
@@ -67,7 +67,7 @@ public sealed partial class PlumbingInsertionSystem : EntitySystem
             Backflow(net, ent, -availableSpace);
     }
 
-    private void OnActiveUpdate(Entity<FluidVentComponent> ent, ref PlumbingDeviceUpdateEvent args)
+    private void OnActiveUpdate(Entity<FluidVentPumpComponent> ent, ref PlumbingDeviceUpdateEvent args)
     {
         var (uid, vent) = ent;
 
@@ -136,6 +136,6 @@ public sealed partial class PlumbingInsertionSystem : EntitySystem
         }
 
         var overflowSolution = net.Liquid.SplitSolution(overflowAmount);
-        _puddle.TrySpillAt(ent.Owner, overflowSolution, out _);
+        _puddle.TrySpillAt(ent.Owner, overflowSolution, out _, false);
     }
 }

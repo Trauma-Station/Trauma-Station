@@ -3,7 +3,7 @@
 namespace Content.Trauma.Server.Plumbing.Components;
 
 [RegisterComponent]
-public sealed partial class FluidVentComponent : Component
+public sealed partial class FluidVentPumpComponent : Component
 {
     [DataField("inlet")]
     public string InletName = "fluid";

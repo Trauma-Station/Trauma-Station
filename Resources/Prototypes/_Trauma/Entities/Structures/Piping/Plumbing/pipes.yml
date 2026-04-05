@@ -59,6 +59,7 @@
   - type: PipeColorVisuals
   - type: NodeContainer
   - type: PipeRestrictOverlap
+    group: Fluid
   - type: AtmosUnsafeUnanchor
   - type: AtmosPipeColor
   - type: AtmosMonitoringConsoleDevice

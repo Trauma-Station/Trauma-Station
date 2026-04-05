@@ -86,6 +86,10 @@ public sealed class PipeRestrictOverlapSystem : EntitySystem
         _anchoredEntities.Clear();
         _map.GetAnchoredEntities((grid, gridComp), indices, _anchoredEntities);
 
+        // <Trauma>
+        if (!TryComp<PipeRestrictOverlapComponent>(ent.Owner, out var rcomp))
+            return false;
+        // </Trauma>
         foreach (var otherEnt in _anchoredEntities)
         {
             // this should never actually happen but just for safety
@@ -95,6 +99,10 @@ public sealed class PipeRestrictOverlapSystem : EntitySystem
             if (!_nodeContainerQuery.TryComp(otherEnt, out var otherComp))
                 continue;
 
+            // <Trauma>
+            if (TryComp<PipeRestrictOverlapComponent>(otherEnt, out var rcompOther) && rcomp.Group != rcompOther.Group)
+                return false;
+            // </Trauma>
             if (PipeNodesOverlap(ent, (otherEnt, otherComp, Transform(otherEnt))))
                 return true;
         }
