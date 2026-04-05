@@ -12,10 +12,18 @@ namespace Content.Trauma.Shared.EntityEffects.Station;
 public sealed partial class StationModifyJobs : EntityEffectBase<StationModifyJobs>
 {
     /// <summary>
-    /// How many job slots to add for each job.
+    /// Adds or removes slots for a job.
+    /// Does nothing to overflow jobs.
     /// </summary>
-    [DataField(required: true)]
+    [DataField]
     public Dictionary<ProtoId<JobPrototype>, int> Add = new();
+
+    /// <summary>
+    /// Sets the slots for a job to a fixed value.
+    /// Overrides overflow jobs.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<JobPrototype>, int> Set = new();
 
     public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
         => null;

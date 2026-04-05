@@ -33,3 +33,6 @@
   - !type:StationRandomOverflowJob
     ignoredJobs:
     - StationAi # broken as fuck and has a dedicated trait
+  - !type:StationModifyJobs
+    set:
+      Passenger: 5 # no unlimited assistants, replace them with the picked job.
