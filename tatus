@@ -1,0 +1,57 @@
+[1mdiff --git a/Content.Trauma.Server/Station/StationTraitsSystem.cs b/Content.Trauma.Server/Station/StationTraitsSystem.cs[m
+[1mindex d47a3ad2c54..9780323d01e 100644[m
+[1m--- a/Content.Trauma.Server/Station/StationTraitsSystem.cs[m
+[1m+++ b/Content.Trauma.Server/Station/StationTraitsSystem.cs[m
+[36m@@ -138,7 +138,9 @@[m [mprivate void PickTraits(List<ProtoId<StationTraitPrototype>> picked, StationTrai[m
+             if (!_random.Prob(trait.Chance) ||[m
+                 trait.AnyConflicting(picked) ||[m
+                 picked.Contains(trait.ID)) // don't add a rule if it was already forced[m
+[31m-                pool.Add(trait);[m
+[32m+[m[32m                continue;[m
+[32m+[m
+[32m+[m[32m            pool.Add(trait);[m
+         }[m
+ [m
+         for (int i = 0; i < rolls; i++)[m
+[1mdiff --git a/Resources/Prototypes/_Trauma/Entities/Stations/Traits/negative.yml b/Resources/Prototypes/_Trauma/Entities/Stations/Traits/negative.yml[m
+[1mindex 46a786c5ba9..f0df069eb91 100644[m
+[1m--- a/Resources/Prototypes/_Trauma/Entities/Stations/Traits/negative.yml[m
+[1m+++ b/Resources/Prototypes/_Trauma/Entities/Stations/Traits/negative.yml[m
+[36m@@ -36,3 +36,14 @@[m
+   - !type:StationModifyJobs[m
+     set:[m
+       Passenger: 5 # no unlimited assistants, replace them with the picked job.[m
+[32m+[m
+[32m+[m[32m- type: stationTrait[m
+[32m+[m[32m  id: PostRevolutionaryFervor[m
+[32m+[m[32m  group: Negative[m
+[32m+[m[32m  chance: 0.4[m
+[32m+[m[32m  name: "Post-Revolutionary Fervor"[m
+[32m+[m[32m  report: "Your station was recently reclaimed from a revolutionary commune. We couldn't clean up after them in time."[m
+[32m+[m[32m  effects:[m
+[32m+[m[32m  - !type:StartGameRule[m
+[32m+[m[32m    rule: RevolutionaryDecalGraffitiVariationPass[m
+[32m+[m[32m  # TODO: maybe add a forge or something randomly in maints..?[m
+[1mdiff --git a/Resources/Prototypes/_Trauma/GameRules/station_traits.yml b/Resources/Prototypes/_Trauma/GameRules/station_traits.yml[m
+[1mindex 0881f034d04..0c0c70ce813 100644[m
+[1m--- a/Resources/Prototypes/_Trauma/GameRules/station_traits.yml[m
+[1m+++ b/Resources/Prototypes/_Trauma/GameRules/station_traits.yml[m
+[36m@@ -58,12 +58,9 @@[m
+       - !type:SpawnEntity[m
+         entity: SpawnSupplyLuckyWinner[m
+ [m
+[31m-- type: entityEffect[m
+[31m-  id: AAAAA[m
+[31m-  effects:[m
+[31m-  - !type:StationAreaEffects[m
+[31m-    areaComp: LuckyWinnerTarget[m
+[31m-    effects:[m
+[31m-    - !type:PopupMessage[m
+[31m-      messages: [ "HI BAR" ][m
+[31m-      type: Pvs[m
+[32m+[m[32m- type: entity[m
+[32m+[m[32m  parent: BasicDecalGraffitiVariationPass[m
+[32m+[m[32m  id: RevolutionaryDecalGraffitiVariationPass[m
+[32m+[m[32m  components:[m
+[32m+[m[32m  - type: EntitySpawnVariationPass[m
+[32m+[m[32m    tilesPerEntityAverage: 40 # 3x as common[m

@@ -138,7 +138,9 @@ public sealed class StationTraitsSystem : EntitySystem
             if (!_random.Prob(trait.Chance) ||
                 trait.AnyConflicting(picked) ||
                 picked.Contains(trait.ID)) // don't add a rule if it was already forced
-                pool.Add(trait);
+                continue;
+
+            pool.Add(trait);
         }
 
         for (int i = 0; i < rolls; i++)

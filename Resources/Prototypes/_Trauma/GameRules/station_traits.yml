@@ -58,12 +58,10 @@
       - !type:SpawnEntity
         entity: SpawnSupplyLuckyWinner
 
-- type: entityEffect
-  id: AAAAA
-  effects:
-  - !type:StationAreaEffects
-    areaComp: LuckyWinnerTarget
-    effects:
-    - !type:PopupMessage
-      messages: [ "HI BAR" ]
-      type: Pvs
+- type: entity
+  parent: BaseGameRule
+  id: RevolutionaryFervorVariation
+  components:
+  - type: RoundstartStationVariationRule
+    rules:
+    - id: RevolutionaryDecalGraffitiVariationPass

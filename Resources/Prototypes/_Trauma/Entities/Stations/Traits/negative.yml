@@ -36,3 +36,14 @@
   - !type:StationModifyJobs
     set:
       Passenger: 5 # no unlimited assistants, replace them with the picked job.
+
+- type: stationTrait
+  id: PostRevolutionaryFervor
+  group: Negative
+  chance: 0.4
+  name: "Post-Revolutionary Fervor"
+  report: "Your station was recently reclaimed from a revolutionary commune. We couldn't clean up after them in time."
+  effects:
+  - !type:StartGameRule
+    rule: RevolutionaryFervorVariation
+  # TODO: maybe add a forge or something randomly in maints..?
