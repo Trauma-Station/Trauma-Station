@@ -19,6 +19,7 @@ public sealed partial class PlumbingLeakSystem : EntitySystem
 
         SubscribeLocalEvent<PlumbingDeviceComponent, PlumbingDeviceUpdateEvent>(OnLeak);
     }
+
     private void OnLeak(Entity<PlumbingDeviceComponent> ent, ref PlumbingDeviceUpdateEvent args)
     {
         var (uid, vent) = ent;

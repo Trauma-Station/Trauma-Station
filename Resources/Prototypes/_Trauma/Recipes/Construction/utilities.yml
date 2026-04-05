@@ -256,3 +256,18 @@
     InfrastructureKnowledge: 1
   practical:
     MetalworkingKnowledge: 1
+
+- type: construction
+  id: FluidSprinkler
+  graph: FluidUnary
+  startNode: start
+  targetNode: fluidsprinkler
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:NoUnstackableInTile
+  theory:
+    InfrastructureKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1

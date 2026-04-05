@@ -64,6 +64,24 @@
       - tool: Welding
         doAfter: 1
 
+  - node: fluidsprinkler
+    entity: FluidSprinkler
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:DeleteEntity
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Welding
+        doAfter: 1
+
   - node: ventscrubber
     entity: FluidVentScrubber
     edges:

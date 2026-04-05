@@ -130,11 +130,12 @@
 
 - type: entity
   id: FluidTank
-  parent: BaseStructure
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
   name: fluid storage tank
   description: A large tank for storing liquids. It has a manual access port on top.
   placement:
     mode: SnapgridCenter
+    snapCardinals: true
   components:
   - type: SolutionContainerManager
     solutions:
@@ -148,6 +149,9 @@
         maxVolume: 0
         pipeDirection: South
         expectedConnections: 1
+  - type: Appearance
+  - type: PipeColorVisuals
+  - type: Rotatable
   - type: FluidTank
   - type: InjectableSolution
     solution: tank_buffer
@@ -155,11 +159,52 @@
     solution: tank_buffer
   - type: Sprite
     sprite: Objects/Misc/skub.rsi
+    state: icon
     # sprite: Structures/Piping/Plumbing/tank.rsi
     # state: tank_base
-  - type: Appearance
   # - type: SolutionContainerVisuals
   #   solutionName: tank_buffer # Tells the visualizer which solution to track
   - type: Transform
     anchored: true
   - type: Anchorable
+
+- type: entity
+  parent: FluidUnaryBase
+  id: FluidSprinkler
+  name: sprinkler
+  description: It's a sprinkler.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
+    - type: Sprite
+      drawdepth: FloorObjects
+      sprite: Structures/Piping/Atmospherics/vent.rsi
+      noRot: true
+      layers:
+        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeUnaryConnectors
+          map: [ "enum.PipeVisualLayers.Pipe" ]
+        - state: vent_passive
+          map: [ "enum.SubfloorLayers.FirstLayer" ]
+    - type: Appearance
+    - type: PipeColorVisuals
+    - type: FluidSprinkler
+    - type: Construction
+      graph: FluidUnary
+      node: fluidsprinkler
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: FluidVentOpening
+    - type: GuideHelp
+      guides:
+      - PassiveVent
+    - type: VentCrawlerEntry # Goobstation - ventcrawl
+    - type: VentCrawlerTube # Goobstation - ventcrawl
+      containerId: VentCrawlerTube
+    - type: ContainerContainer # Goobstation - ventcrawl
+      containers:
+        VentCrawlerTube: !type:Container
+    - type: Weldable  # Goobstation - ventcrawl
+      time: 3
