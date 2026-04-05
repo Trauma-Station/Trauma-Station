@@ -18,6 +18,6 @@ public sealed class StartGameRuleSystem : EntityEffectSystem<MetaDataComponent, 
         var rule = args.Effect.Rule;
         _ticker.StartGameRule(rule);
         if (args.User is {} user)
-            _adminLog.Add(LogType.EventStarted, LogImpact.High, $"{ToPrettyString(user):player} caused gamerule {rule} to be started via entity effect on {ToPrettyString(ent)}");
+            _adminLog.Add(LogType.EventStarted, LogImpact.High, $"{ToPrettyString(user):player} caused gamerule {rule} to be started via entity effect on {ToPrettyString(ent.AsNullable())}");
     }
 }
