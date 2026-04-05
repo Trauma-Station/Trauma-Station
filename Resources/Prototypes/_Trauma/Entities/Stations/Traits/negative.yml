@@ -25,6 +25,19 @@
       modifier: 1.2
 
 - type: stationTrait
+  id: LateArrivals
+  name: "Late arrivals"
+  report: "Sorry for that, we didn't expect to fly into that vomiting goose while bringing you to your new station."
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: SpawnPoint
+    effects:
+    - !type:Delete
+      conditions:
+      # only keep latejoin, observer etc
+      - !type:SpawnPointHasJob
+
+- type: stationTrait
   id: OverflowJobMistake
   group: Negative
   name: "Overflow bureaucracy mistake"
