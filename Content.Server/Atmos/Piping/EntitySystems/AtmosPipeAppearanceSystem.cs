@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Plumbing;
+// </Trauma>
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Shared.Atmos;
@@ -10,6 +13,9 @@ namespace Content.Server.Atmos.Piping.EntitySystems;
 
 public sealed partial class AtmosPipeAppearanceSystem : SharedAtmosPipeAppearanceSystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonPlumbingSystem _plumbing = default!;
+    // <Trauma>
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
 
@@ -54,6 +60,9 @@ public sealed partial class AtmosPipeAppearanceSystem : SharedAtmosPipeAppearanc
             }
         }
 
+        // <Trauma>
+        anyPipeNodes |= _plumbing.UpdateAppearance(uid, ref connected);
+        // </Trauma>
         if (!anyPipeNodes)
             return;
 

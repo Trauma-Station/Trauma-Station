@@ -67,8 +67,8 @@
             Out: { state: vent_out }
             Welded: { state: vent_welded }
             Lockout: { state: vent_lockout }
-    - type: GasVentPump
-      underPressureLockoutThreshold: 60
+    - type: FluidVentPump
+      MaxPushPressure: 60
     - type: Construction
       graph: FluidUnary
       node: ventpump

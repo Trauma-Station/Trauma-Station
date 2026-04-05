@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.ComponentModel;
 using System.IO.Pipelines;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
@@ -135,5 +136,30 @@ public sealed partial class PlumbingSystem : CommonPlumbingSystem
             throw new NotImplementedException();
 
         return (plumbingNode.OriginalPipeDirection.RotatePipeDirection(pipe.Comp.LocalRotation), plumbingNode.CurrentPipeLayer);
+    }
+
+    public override bool UpdateAppearance(EntityUid uid, ref HashSet<(EntityUid, AtmosPipeLayer)> connected)
+    {
+        NodeContainerComponent? container = null;
+        bool anyPipeNodes = false;
+
+        if (!Resolve(uid, ref container))
+            return false;
+
+        foreach (var node in container.Nodes.Values)
+        {
+            if (node is not PlumbingNode)
+                continue;
+
+            anyPipeNodes = true;
+
+            foreach (var connectedNode in node.ReachableNodes)
+            {
+                if (connectedNode is PlumbingNode { } plumbingNode)
+                    connected.Add((connectedNode.Owner, plumbingNode.CurrentPipeLayer));
+            }
+        }
+
+        return anyPipeNodes;
     }
 }
