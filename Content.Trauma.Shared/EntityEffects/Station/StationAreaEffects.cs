@@ -27,6 +27,12 @@ public sealed partial class StationAreaEffects : EntityEffectBase<StationAreaEff
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
 
+    [DataField]
+    public int Min = 1;
+
+    [DataField]
+    public int Max = 1;
+
     public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
         => null;
 }
@@ -60,10 +66,14 @@ public sealed class StationAreaEffectsSystem : EntityEffectSystem<StationDataCom
             _areas.Add(uid);
         }
 
-        if (_areas.Count == 0)
-            return;
+        var count = _random.Next(args.Effect.Min, args.Effect.Max);
+        for (int i = 0; i < count; i++)
+        {
+            if (_areas.Count == 0)
+                return;
 
-        var area = _random.Pick(_areas);
-        _effects.ApplyEffects(area, args.Effect.Effects);
+            var area = _random.PickAndTake(_areas);
+            _effects.ApplyEffects(area, args.Effect.Effects);
+        }
     }
 }

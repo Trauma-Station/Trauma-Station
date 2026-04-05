@@ -16,13 +16,20 @@
     rule: UniqueAIRule
   # TODO: make researching AI stuff cost 3x if someone ever adds that, and delete all roundstart lawboards
 
-#- type: stationTrait
-#  id: TripleAI
-#  chance: 0.2
-#  name: "AI Triumvirate"
-#  report: "Your station has been instated with three Nanotrasen Artificial Intelligence models."
-#  effects:
-#  - !type:StationModifyJobs
-#    add:
-#      StationAi: 2
-# TODO: make it work lol. it needs extra ai cores added, probably with spawners for where to put them
+- type: stationTrait
+  id: TripleAI
+  chance: 0.2
+  name: "AI Triumvirate"
+  report: "Your station has been instated with three Nanotrasen Artificial Intelligence models."
+  effects:
+  - !type:StationModifyJobs
+    add:
+      StationAi: 2
+  mapEffects:
+  - !type:StationAreaEffects # without extra ai cores latejoining AIs are stuck in purgatory
+    areaComp: ExtraAiCoreTarget
+    min: 2
+    max: 2
+    effects:
+    - !type:SpawnEntity
+      entity: PlayerStationAi
