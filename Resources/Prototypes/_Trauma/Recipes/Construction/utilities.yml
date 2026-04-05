@@ -228,8 +228,8 @@
 
 # ATMOS UNARY
 - type: construction
-  id: GasVentPump
-  graph: GasUnary
+  id: FluidVentPump
+  graph: FluidUnary
   startNode: start
   targetNode: ventpump
   category: construction-category-utilities
@@ -243,8 +243,8 @@
     MetalworkingKnowledge: 1
 
 - type: construction
-  id: GasPassiveVent
-  graph: GasUnary
+  id: FluidPassiveVent
+  graph: FluidUnary
   startNode: start
   targetNode: passivevent
   category: construction-category-utilities
