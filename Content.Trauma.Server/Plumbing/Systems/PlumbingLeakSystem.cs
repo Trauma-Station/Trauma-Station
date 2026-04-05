@@ -27,12 +27,10 @@ public sealed partial class PlumbingLeakSystem : EntitySystem
         foreach (var node in container.Nodes.Values)
         {
 
-            if (node is not PlumbingNode pNode || pNode.PipeNet is not { } || !pNode.IsLeaking)
+            if (node is not PlumbingNode pNode || pNode.PipeNet is not PlumbingNet net || !pNode.IsLeaking)
                 continue;
 
-            var net = pNode.PipeNet;
-
-            var pressure = net.Liquid.MaxVolume > 0 ? (float) (net.Liquid.Volume / net.Liquid.MaxVolume) : 0f;
+            var pressure = (net.Liquid.MaxVolume > 0 ? (float) (net.Liquid.Volume / net.Liquid.MaxVolume) : 0f) + net.ExternalPressureForce;
 
             if (pressure <= 0)
                 continue;
