@@ -7,16 +7,16 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Server.GameTicking.Rules.Components;
 
 /// <summary>
-/// Gamerule component to run entity effects on all players that spawn/join with a valid job.
+/// Gamerule component to run entity effects on all players that spawn/join, optionally with a valid job.
 /// </summary>
-[RegisterComponent, Access(typeof(JobEffectsRuleSystem))]
-public sealed partial class JobEffectsRuleComponent : Component
+[RegisterComponent, Access(typeof(PlayerEffectsRuleSystem))]
+public sealed partial class PlayerEffectsRuleComponent : Component
 {
     /// <summary>
-    /// Only run effects if the player has one of these jobs.
+    /// If non-null, only run effects if the player has one of these jobs.
     /// </summary>
-    [DataField(required: true)]
-    public HashSet<ProtoId<JobPrototype>> Jobs = new();
+    [DataField]
+    public HashSet<ProtoId<JobPrototype>>? Jobs;
 
     /// <summary>
     /// The effects to run on the player's attached entity.

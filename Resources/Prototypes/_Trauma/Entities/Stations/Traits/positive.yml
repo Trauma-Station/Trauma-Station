@@ -8,3 +8,12 @@
     components:
     - type: BountyModifier
       modifier: 1.2
+
+- type: stationTrait
+  id: FreeScarves
+  group: Positive
+  name: "Free scarves"
+  report: "The station is definitely not under attack by neck grappling aliens masquerading as wool. Definitely not."
+  effects:
+  - !type:StartGameRule
+    rule: FreeScarvesRule

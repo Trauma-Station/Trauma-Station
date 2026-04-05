@@ -2,7 +2,7 @@
   parent: BaseGameRule
   id: BananiumShipmentRule
   components:
-  - type: JobEffectsRule
+  - type: PlayerEffectsRule
     jobs: [ Clown ]
     effects:
     - !type:SpawnInsideSlot
@@ -16,7 +16,7 @@
   parent: BaseGameRule
   id: UniqueAIRule
   components:
-  - type: JobEffectsRule
+  - type: PlayerEffectsRule
     jobs: [ StationAi ]
     effects:
     - !type:RandomizeLawset
@@ -31,3 +31,15 @@
       - PainterLawset
       - NutimovLawset
       - HelpimovLawset
+
+- type: entity
+  parent: BaseGameRule
+  id: FreeScarvesRule
+  components:
+  - type: PlayerEffectsRule
+    effects:
+    - !type:EquipEntityTable
+      slot: neck
+      table: !type:NestedSelector
+        tableId: RandomScarf
+      silent: true

@@ -6,7 +6,7 @@ using Content.Trauma.Server.GameTicking.Rules.Components;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
-public sealed class JobEffectsRuleSystem : EntitySystem
+public sealed class PlayerEffectsRuleSystem : EntitySystem
 {
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
@@ -19,13 +19,10 @@ public sealed class JobEffectsRuleSystem : EntitySystem
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent args)
     {
-        if (args.JobId is not {} job)
-            return;
-
-        var query = EntityQueryEnumerator<JobEffectsRuleComponent>();
+        var query = EntityQueryEnumerator<PlayerEffectsRuleComponent>();
         while (query.MoveNext(out var comp))
         {
-            if (!comp.Jobs.Contains(job))
+            if (comp.Jobs is {} jobs && (args.JobId is not {} job || !jobs.Contains(job)))
                 continue;
 
             _effects.ApplyEffects(args.Mob, comp.Effects);
