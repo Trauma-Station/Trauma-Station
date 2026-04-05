@@ -97,9 +97,8 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
 
         var ratio = reagentNode.Volume / Liquid.MaxVolume;
         var spillAmount = Liquid.SplitSolution(Liquid.Volume * ratio);
-        var xform = _entMan?.GetComponent<TransformComponent>(node.Owner);
 
-        if (spillAmount.Volume > 0 && xform is { } transform)
+        if (spillAmount.Volume > 0 && _entMan is { } entMan && entMan.TryGetComponent<TransformComponent>(node.Owner, out var xform) && xform is { } transform)
             _puddle?.TrySpillAt(transform.Coordinates, spillAmount, out _);
 
         Liquid.MaxVolume -= reagentNode.Volume;

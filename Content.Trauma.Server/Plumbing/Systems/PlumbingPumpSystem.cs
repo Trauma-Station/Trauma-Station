@@ -34,6 +34,7 @@ public sealed class FluidPumpSystem : EntitySystem
 
         var outletPressure = (float) (outletNet.Liquid.Volume / outletNet.Liquid.MaxVolume) + outletNet.ExternalPressureForce;
         var inletPressure = (float) (inletNet.Liquid.Volume / inletNet.Liquid.MaxVolume) + inletNet.ExternalPressureForce;
+
         if (outletPressure >= comp.MaxOutputPressure + inletPressure)
             return;
 

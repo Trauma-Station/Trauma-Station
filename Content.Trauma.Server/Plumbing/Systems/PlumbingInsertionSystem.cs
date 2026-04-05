@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Fluids.EntitySystems;
+using Content.Server.Power.EntitySystems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
@@ -19,12 +20,14 @@ public sealed partial class PlumbingInsertionSystem : EntitySystem
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly PlumbingSystem _plumbing = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly PowerReceiverSystem _power = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<FluidPassiveVentComponent, PlumbingDeviceUpdateEvent>(OnPassiveUpdate);
+        SubscribeLocalEvent<FluidVentComponent, PlumbingDeviceUpdateEvent>(OnActiveUpdate);
     }
 
     private void OnPassiveUpdate(Entity<FluidPassiveVentComponent> ent, ref PlumbingDeviceUpdateEvent args)
@@ -62,6 +65,44 @@ public sealed partial class PlumbingInsertionSystem : EntitySystem
         }
         else if (pipePressure > 1.0f && puddlePressure < pipePressure)
             Backflow(net, ent, -availableSpace);
+    }
+
+    private void OnActiveUpdate(Entity<FluidVentComponent> ent, ref PlumbingDeviceUpdateEvent args)
+    {
+        var (uid, vent) = ent;
+
+        // 1. Power & Enabled Check
+        if (!_power.IsPowered(uid))
+            return;
+
+        if (!TryComp<NodeContainerComponent>(uid, out var container))
+            return;
+
+        if (!container.Nodes.TryGetValue(ent.Comp.InletName, out var node) || node is not PlumbingNode pNode || pNode.PipeNet is not PlumbingNet net)
+            return;
+
+        if (!TryComp(uid, out TransformComponent? xform) || xform.GridUid is not { } || !TryComp<MapGridComponent>(xform.GridUid, out var grid))
+            return;
+
+        var tile = _map.GetTileRef((xform.GridUid.Value, grid), xform.Coordinates);
+        var availableSpace = net.Liquid.MaxVolume - net.Liquid.Volume;
+        var pipePressure = (float) (net.Liquid.Volume / net.Liquid.MaxVolume) + net.ExternalPressureForce;
+
+        if (pipePressure >= vent.MaxPushPressure)
+            return;
+
+        if (!_puddle.TryGetPuddle(tile, out var puddleUid) || !TryComp<PuddleComponent>(puddleUid, out var puddleComp) || puddleComp.Solution is not { } puddleSol)
+            return; // Active drains don't backflow unless specifically designed to.
+
+        var puddlePressure = (float) (puddleSol.Comp.Solution.Volume / 50f); // lowkey 50 is a magic number, should replace it will like fluid density or some shit.
+        var pressureDiff = puddlePressure - pipePressure;
+        if (pressureDiff > 0)
+        {
+            if (availableSpace > 0)
+                Drain(net, puddleUid, puddleSol, pressureDiff, availableSpace, vent.TransferRate, args.FrameTime);
+            else
+                net.ExternalPressureForce += pressureDiff;
+        }
     }
 
     private void Drain(PlumbingNet net, EntityUid puddleUid, Entity<SolutionComponent> puddleSol, float pressureDiff, FixedPoint2 availableSpace, FixedPoint2 transferRate, float frameTime)
