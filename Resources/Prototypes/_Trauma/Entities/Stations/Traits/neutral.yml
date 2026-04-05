@@ -1,30 +1,28 @@
 - type: stationTrait
+  id: BananiumShipment
+  name: "Bananium Shipment"
+  report: "Rumor has it that the clown planet has been sending support packages to clowns in this system."
+  effects:
+  - !type:StartGameRule
+    rule: BananiumShipmentRule
+
+- type: stationTrait
   id: UniqueAI
   name: "Unique AI"
   report: "For experimental purposes, this station AI might show divergence from default lawset. Do not meddle with this experiment."
   # , we've removed access to your set of alternative upload modules because we know you're already thinking about meddling with this experiment."
   effects:
-  - !type:StationAiRandomLawset
-    lawsets:
-    # no crazy antag/malf laws, just interesting ones
-    - CommandmentsLawset
-    - PaladinLawset
-    - LiveLetLiveLaws
-    - EfficiencyLawset
-    - RobocopLawset
-    - GameMasterLawset
-    - PainterLawset
-    - NutimovLawset
-    - HelpimovLawset
+  - !type:StartGameRule
+    rule: UniqueAIRule
   # TODO: make researching AI stuff cost 3x if someone ever adds that, and delete all roundstart lawboards
 
-- type: stationTrait
-  id: TripleAI
-  weight: 0.2
-  name: "AI Triumvirate"
-  report: "Your station has been instated with three Nanotrasen Artificial Intelligence models."
-  effects:
-  - !type:StationModifyJobs
-    add:
-      StationAi: 2
-  # TODO: make it work lol
+#- type: stationTrait
+#  id: TripleAI
+#  chance: 0.2
+#  name: "AI Triumvirate"
+#  report: "Your station has been instated with three Nanotrasen Artificial Intelligence models."
+#  effects:
+#  - !type:StationModifyJobs
+#    add:
+#      StationAi: 2
+# TODO: make it work lol. it needs extra ai cores added, probably with spawners for where to put them

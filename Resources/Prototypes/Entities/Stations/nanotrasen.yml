@@ -12,6 +12,7 @@
     # <Trauma>
     - BaseStationWizardTarget
     - BaseStationAlertLevelLocking
+    - BaseStationReport
     - BaseStationTraits
     # </Trauma>
     - BaseStation

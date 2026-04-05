@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Server.GameTicking;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using System.Text;
 
 namespace Content.Trauma.Server.Station;
 
@@ -22,21 +24,70 @@ public sealed class StationTraitsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StationTraitsComponent, MapInitEvent>(OnTraitsInit);
+        SubscribeLocalEvent<StationTraitsComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RulePlayerSpawningEvent>(OnBeforePlayerSpawning);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         LoadPrototypes();
     }
 
-    private void OnTraitsInit(Entity<StationTraitsComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<StationTraitsComponent> ent, ref MapInitEvent args)
     {
-        var picked = PickTraits(ent);
-        foreach (var trait in picked)
+        // roll the traits to pick
+        var rolls = ent.Comp.Rolls;
+        foreach (var (group, chance) in ent.Comp.Groups)
         {
-            _effects.ApplyEffects(ent, _proto.Index(trait).Effects);
+            PickTraits(ent.Comp.Picked, group, chance, rolls);
         }
 
-        // TODO: queue sending a station report like 20 seconds into the round
+        // then apply them
+        foreach (var id in ent.Comp.Picked)
+        {
+            var trait = _proto.Index(id);
+            Log.Info($"Added station trait {id}");
+            try
+            {
+                if (trait.Effects is {} effects)
+                    _effects.ApplyEffects(ent, effects);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception while applying station trait {id} to {ToPrettyString(ent)}: {e}");
+            }
+
+            // and add most traits to the report
+            if (trait.Report != null)
+                ent.Comp.Reported.Add(id);
+        }
+    }
+
+    private void OnBeforePlayerSpawning(RulePlayerSpawningEvent args)
+    {
+        var query = EntityQueryEnumerator<StationTraitsComponent>();
+        while (query.MoveNext(out var station, out var comp))
+        {
+            // never run them multiple times, just incase
+            if (comp.RanMapEffects)
+                continue;
+            comp.RanMapEffects = true;
+
+            // will probably misbehave with multiple stations... oh well
+            foreach (var id in comp.Picked)
+            {
+                var trait = _proto.Index(id);
+                if (trait.MapEffects is not {} effects)
+                    continue;
+
+                try
+                {
+                    _effects.ApplyEffects(station, effects);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"Caught exception while applying map effects of station trait {id} to {ToPrettyString(station)}: {e}");
+                }
+            }
+        }
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
@@ -57,32 +108,41 @@ public sealed class StationTraitsSystem : EntitySystem
         }
     }
 
-    public List<ProtoId<StationTraitPrototype>> PickTraits(Entity<StationTraitsComponent> ent)
-    {
-        var picked = new List<ProtoId<StationTraitPrototype>>();
-        var rolls = ent.Comp.Rolls;
-        foreach (var (group, chance) in ent.Comp.Groups)
-        {
-            PickTraits(picked, group, chance, rolls);
-        }
-        return picked;
-    }
-
     private void PickTraits(List<ProtoId<StationTraitPrototype>> picked, StationTraitGroup group, float chance, int rolls)
     {
-        var pool = new List<StationTraitPrototype>(AllTraits[group]);
-        pool.RemoveAll(t => t.AnyConflicting(picked));
+        var all = AllTraits[group];
+        var pool = new List<StationTraitPrototype>(all.Count);
+        foreach (var trait in all)
+        {
+            if (_random.Prob(trait.Chance) && !trait.AnyConflicting(picked))
+                pool.Add(trait);
+        }
+
         for (int i = 0; i < rolls; i++)
         {
-            if (!_random.Prob(chance))
-                continue;
-
             if (pool.Count == 0)
                 return; // shouldn't really happen but whatever...
+
+            if (!_random.Prob(chance))
+                continue;
 
             var trait = _random.PickAndTake(pool);
             picked.Add(trait.ID);
             pool.RemoveAll(t => t.Conflicts.Contains(trait.ID));
+        }
+    }
+
+    public void AppendReport(StringBuilder sb, EntityUid station)
+    {
+        if (!TryComp<StationTraitsComponent>(station, out var traits) || traits.Reported.Count == 0)
+            return;
+
+        sb.AppendLine("[bold]Identified shift divergencies:[/bold]");
+        foreach (var id in traits.Reported)
+        {
+            var trait = _proto.Index(id);
+            if (trait.Report is {} report) // should always be true...
+                sb.AppendLine($"[italic]{trait.Name}[/italic] - {report}");
         }
     }
 }

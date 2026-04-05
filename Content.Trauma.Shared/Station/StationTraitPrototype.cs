@@ -40,16 +40,23 @@ public sealed partial class StationTraitPrototype : IPrototype, IInheritingProto
     public StationTraitGroup Group = StationTraitGroup.Neutral;
 
     /// <summary>
-    /// Weight for random picking.
+    /// Chance of this trait being in the group's pool at all.
+    /// Similar to a weight but simpler to implement.
     /// </summary>
     [DataField]
-    public float Weight = 1f;
+    public float Chance = 1f;
 
     /// <summary>
-    /// Entity effects applied to the station entity.
+    /// Entity effects applied to the station entity immediately.
     /// </summary>
-    [DataField(required: true)]
-    public EntityEffect[] Effects = default!;
+    [DataField]
+    public EntityEffect[]? Effects;
+
+    /// <summary>
+    /// Entity effects applied to the station entity after the map has been initialized, but before players have spawned.
+    /// </summary>
+    [DataField]
+    public EntityEffect[]? MapEffects;
 
     /// <summary>
     /// Traits this one conflicts with.

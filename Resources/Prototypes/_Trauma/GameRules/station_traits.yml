@@ -1,0 +1,33 @@
+- type: entity
+  parent: BaseGameRule
+  id: BananiumShipmentRule
+  components:
+  - type: JobEffectsRule
+    jobs: [ Clown ]
+    effects:
+    - !type:SpawnInsideSlot
+      slot: back
+      entity: MaterialBananium5
+    - !type:SpawnInsideSlot
+      slot: back
+      entity: PillCanisterPotassiumIodide # yeah... gonna need that
+
+- type: entity
+  parent: BaseGameRule
+  id: UniqueAIRule
+  components:
+  - type: JobEffectsRule
+    jobs: [ StationAi ]
+    effects:
+    - !type:RandomizeLawset
+      lawsets:
+      # no crazy antag/malf laws, just interesting ones
+      - CommandmentsLawset
+      - PaladinLawset
+      - LiveLetLiveLaws
+      - EfficiencyLawset
+      - RobocopLawset
+      - GameMasterLawset
+      - PainterLawset
+      - NutimovLawset
+      - HelpimovLawset

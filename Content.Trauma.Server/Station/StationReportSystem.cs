@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Chat;
 using Content.Shared.Paper;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using System.Text;
 
 namespace Content.Trauma.Server.Station;
@@ -15,7 +17,10 @@ namespace Content.Trauma.Server.Station;
 public sealed class StationReportSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly SharedPaperSystem _paper = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly PaperSystem _paper = default!;
+    [Dependency] private readonly SharedChatSystem _chat = default!;
+    [Dependency] private readonly StationTraitsSystem _traits = default!;
 
     private StringBuilder _sb = new();
     private int _year;
@@ -48,6 +53,11 @@ public sealed class StationReportSystem : EntitySystem
             {
                 SpawnReport(uid, proto, text);
             }
+
+            // TODO: custom greenshift/threat level announcement
+            _chat.DispatchStationAnnouncement(station,
+                "A summary of the station's situation has been copied and printed to all communications consoles.",
+                "Station Report");
         }
     }
 
@@ -62,6 +72,21 @@ public sealed class StationReportSystem : EntitySystem
     public string CreateReport(EntityUid station)
     {
         _sb.Clear();
+        var date = DateTime.UtcNow.ToString("ddd, MMM dd");
+        _sb.AppendLine($"[bolditalic]Nanotrasen Department of Intelligence Threat Advisory, Sol Sector, TCD {date}, {_year}:[/bolditalic]\n");
+
+        // TODO: actual dynamic gamemode reports lol
+        _sb.AppendLine("Advisory Level: [bold]Yellow Star[/bold]");
+        _sb.AppendLine("   Your sector's advisory level is Yellow Star.");
+        _sb.AppendLine("   Surveillance shows a credible risk of enemy attack against our assets in the Sol Sector.");
+        _sb.AppendLine("   We advise a heightened level of security alongside maintaining vigilance against potential threats.\n");
+
+        // TODO: station goals
+
+        _traits.AppendReport(_sb, station);
+
+        _sb.AppendLine($"\n\n[italic]This advisory is intended for the staff of {Name(station)}. If this is not your station, you must destroy this document immediately.[/italic]");
+
         return _sb.ToString();
     }
 
@@ -72,6 +97,6 @@ public sealed class StationReportSystem : EntitySystem
     {
         var coords = Transform(uid).Coordinates;
         var report = Spawn(proto, coords);
-        _paper.SetContents(report, text);
+        _paper.SetContent(report, text);
     }
 }

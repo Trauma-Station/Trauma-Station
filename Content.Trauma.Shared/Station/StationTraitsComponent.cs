@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Station;
 
 /// <summary>
 /// Station component to pick some random station traits before starting the round.
-/// It will then send a report to all communications consoles with a summary.
+/// They are shown in the station report.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class StationTraitsComponent : Component
@@ -23,4 +24,22 @@ public sealed partial class StationTraitsComponent : Component
     /// </summary>
     [DataField(required: true)]
     public Dictionary<StationTraitGroup, float> Groups = new();
+
+    /// <summary>
+    /// All picked traits which are active.
+    /// </summary>
+    [DataField]
+    public List<ProtoId<StationTraitPrototype>> Picked = new();
+
+    /// <summary>
+    /// All picked traits which are shown in the station report.
+    /// </summary>
+    [DataField]
+    public List<ProtoId<StationTraitPrototype>> Reported = new();
+
+    /// <summary>
+    /// Set to true to prevent running trait MapEffects multiple times.
+    /// </summary>
+    [DataField]
+    public bool RanMapEffects;
 }
