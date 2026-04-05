@@ -17,3 +17,14 @@
   effects:
   - !type:StartGameRule
     rule: FreeScarvesRule
+
+- type: stationTrait
+  id: GalacticGrant
+  group: Positive
+  name: "Galactic grant"
+  report: "Your station has been selected for a special grant. Some extra funds has been made available to your cargo department."
+  effects:
+  - !type:StationModifyBank
+    account: Cargo
+    min: 2000
+    max: 5000

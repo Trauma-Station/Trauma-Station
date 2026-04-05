@@ -143,13 +143,20 @@ public sealed partial class TraumaCVars
 
     #endregion
 
-    #region Station Report
+    #region Station Traits
+
+    /// <summary>
+    /// Whether to enable station traits.
+    /// Used to prevent tests failing for spawned gamerules.
+    /// </summary>
+    public static readonly CVarDef<bool> StationTraitsEnabled =
+        CVarDef.Create("trauma.station_traits_enabled", true, CVar.SERVER);
 
     /// <summary>
     /// The ingame year displayed on the station report.
     /// </summary>
     public static readonly CVarDef<int> InGameYear =
-        CVarDef.Create("trauma.in_game_year", 2125, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("trauma.in_game_year", 2125, CVar.SERVER);
 
     #endregion
 }

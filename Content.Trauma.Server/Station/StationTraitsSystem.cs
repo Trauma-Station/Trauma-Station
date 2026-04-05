@@ -2,7 +2,9 @@
 
 using Content.Server.GameTicking;
 using Content.Shared.EntityEffects;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Station;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Text;
@@ -11,6 +13,7 @@ namespace Content.Trauma.Server.Station;
 
 public sealed class StationTraitsSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
@@ -19,6 +22,9 @@ public sealed class StationTraitsSystem : EntitySystem
     /// All trait prototypes organized per group.
     /// </summary>
     public Dictionary<StationTraitGroup, List<StationTraitPrototype>> AllTraits = new();
+
+    private bool _enabled;
+    private List<ProtoId<StationTraitPrototype>> _forced = new();
 
     public override void Initialize()
     {
@@ -29,10 +35,22 @@ public sealed class StationTraitsSystem : EntitySystem
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         LoadPrototypes();
+
+        Subs.CVar(_cfg, TraumaCVars.StationTraitsEnabled, x => _enabled = x, true);
     }
 
     private void OnMapInit(Entity<StationTraitsComponent> ent, ref MapInitEvent args)
     {
+        if (!_enabled)
+            return;
+
+        // add any forced traits and reset them
+        foreach (var id in _forced)
+        {
+            ent.Comp.Picked.Add(id);
+        }
+        _forced.Clear();
+
         // roll the traits to pick
         var rolls = ent.Comp.Rolls;
         foreach (var (group, chance) in ent.Comp.Groups)
@@ -63,6 +81,9 @@ public sealed class StationTraitsSystem : EntitySystem
 
     private void OnBeforePlayerSpawning(RulePlayerSpawningEvent args)
     {
+        if (!_enabled)
+            return;
+
         var query = EntityQueryEnumerator<StationTraitsComponent>();
         while (query.MoveNext(out var station, out var comp))
         {
@@ -144,5 +165,19 @@ public sealed class StationTraitsSystem : EntitySystem
             if (trait.Report is {} report) // should always be true...
                 sb.AppendLine($"[italic]{trait.Name}[/italic] - {report}");
         }
+    }
+
+    /// <summary>
+    /// Force a trait to be picked for the next round.
+    /// This ignores conflicts limits etc.
+    /// This will be reset after the round starts.
+    /// </summary>
+    public bool ForceTrait(string id)
+    {
+        if (!_enabled || !_proto.HasIndex<StationTraitPrototype>(id))
+            return false;
+
+        _forced.Add(id);
+        return true;
     }
 }
