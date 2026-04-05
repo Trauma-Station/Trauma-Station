@@ -45,7 +45,7 @@ public sealed partial class AntagSummonerComponent : Component
     /// The initial delay for summoning item after this item is spawned.
     /// </summary>
     [DataField]
-    public TimeSpan InitialCooldown = TimeSpan.FromMinutes(10);
+    public TimeSpan InitialCooldown = TimeSpan.FromMinutes(30);
 
     /// <summary>
     /// How long you have to wait to summon another antag.
