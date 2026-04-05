@@ -30,7 +30,7 @@
     max: 5000
 
 - type: stationTrait
-  id: GalacticGrant
+  id: LuckyWinner
   group: Positive
   chance: 0.2
   name: "Lucky winner"
