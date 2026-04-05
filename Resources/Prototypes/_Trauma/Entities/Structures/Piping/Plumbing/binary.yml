@@ -1,0 +1,99 @@
+- type: entity
+  parent: FluidPipeBase
+  abstract: true
+  id: FluidBinaryBase
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: AtmosDevice
+  - type: Tag
+    tags:
+      - Unstackable
+  - type: SubFloorHide
+    blockInteractions: false
+    blockAmbience: false
+  - type: NodeContainer
+    nodes:
+      inlet:
+        !type:PlumbingNode
+        nodeGroupID: Fluid
+        pipeDirection: North
+      outlet:
+        !type:PlumbingNode
+        nodeGroupID: Fluid
+        pipeDirection: South
+  - type: AtmosPipeLayers
+    spriteRsiPaths:
+      Primary: Structures/Piping/Atmospherics/pump.rsi
+      Secondary: Structures/Piping/Atmospherics/pump_alt1.rsi
+      Tertiary: Structures/Piping/Atmospherics/pump_alt2.rsi
+
+- type: entity
+  parent: FluidBinaryBase
+  id: FluidPressurePump
+  name: fluid pump
+  description: A pump that moves fluid by pressure.
+  placement:
+    mode: AlignAtmosPipeLayers
+  components:
+  - type: ExtensionCableReceiver
+  - type: LightningTarget
+    priority: 1
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: Rotatable
+  - type: Transform
+    noRot: false
+  - type: SubFloorHide
+    visibleLayers:
+    - enum.SubfloorLayers.FirstLayer
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/pump.rsi
+    layers:
+    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+      state: pipeStraight
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+    - state: pumpPressure
+      map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+  - type: AtmosPipeLayers
+    alternativePrototypes:
+      Primary: FluidPressurePump
+      Secondary: FluidPressurePumpAlt1
+      Tertiary: FluidPressurePumpAlt2
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PumpVisuals.Enabled:
+        enabled:
+          True: { state: pumpPressureOn }
+          False: { state: pumpPressure }
+  - type: PipeColorVisuals
+  - type: FluidPump
+    enabled: false
+  - type: ActivatableUI
+    key: enum.GasPressurePumpUiKey.Key
+  - type: ActivatableUIRequiresAnchor
+  - type: UserInterface
+    interfaces:
+      enum.GasPressurePumpUiKey.Key:
+        type: GasPressurePumpBoundUserInterface
+  - type: Construction
+    graph: FluidBinary
+    node: pressurepump
+  - type: AmbientSound
+    enabled: false
+    volume: -9
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/gas_pump.ogg
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: GasFlowRegulator
+  - type: GuideHelp
+    guides:
+    - Pumps
+  - type: VentCrawlerTube # Goobstation - ventcrawl
+    containerId: VentCrawlerTube
+  - type: VentCrawlerTransit # Goobstation - ventcrawl
+  - type: ContainerContainer # Goobstation - ventcrawl
+    containers:
+      VentCrawlerTube: !type:Container
