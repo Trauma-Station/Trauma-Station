@@ -26,8 +26,11 @@
 
 - type: stationTrait
   id: LateArrivals
-  name: "Late arrivals"
+  group: Negative
+  chance: 0.4
+  name: "Late Arrivals"
   report: "Sorry for that, we didn't expect to fly into that vomiting goose while bringing you to your new station."
+  conflicts: [ RandomSpawns ]
   mapEffects:
   - !type:StationQueryEffects
     compName: SpawnPoint
@@ -36,6 +39,21 @@
       conditions:
       # only keep latejoin, observer etc
       - !type:SpawnPointHasJob
+
+- type: stationTrait
+  id: RandomSpawns
+  group: Negative
+  chance: 0.4
+  minPlayers: 30 # more fun with more people + getting stuck in a room on deadpop is bad
+  name: "Drive-by landing"
+  report: "Sorry for that, we missed your station by a few miles, so we just launched you towards your station in pods. Hope you don't mind!"
+  conflicts: [ LateArrivals ]
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: SpawnPoint
+    effects:
+    - !type:NestedEffect
+      proto: MakeSpawnPointDropPod # any job can spawn at any spawn point, in drop pods.
 
 - type: stationTrait
   id: OverflowJobMistake

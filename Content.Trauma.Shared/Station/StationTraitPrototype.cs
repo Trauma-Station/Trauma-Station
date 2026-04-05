@@ -47,6 +47,12 @@ public sealed partial class StationTraitPrototype : IPrototype, IInheritingProto
     public float Chance = 1f;
 
     /// <summary>
+    /// Minimum playercount to allow picking this trait.
+    /// </summary>
+    [DataField]
+    public int MinPlayers = 0;
+
+    /// <summary>
     /// Entity effects applied to the station entity immediately.
     /// </summary>
     [DataField]

@@ -5,6 +5,7 @@ using Content.Shared.EntityEffects;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Text;
@@ -16,6 +17,7 @@ public sealed class StationTraitsSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     /// <summary>
@@ -53,9 +55,10 @@ public sealed class StationTraitsSystem : EntitySystem
 
         // roll the traits to pick
         var rolls = ent.Comp.Rolls;
+        var players = _player.PlayerCount;
         foreach (var (group, chance) in ent.Comp.Groups)
         {
-            PickTraits(ent.Comp.Picked, group, chance, rolls);
+            PickTraits(ent.Comp.Picked, group, chance, rolls, players);
         }
 
         // then apply them
@@ -129,13 +132,14 @@ public sealed class StationTraitsSystem : EntitySystem
         }
     }
 
-    private void PickTraits(List<ProtoId<StationTraitPrototype>> picked, StationTraitGroup group, float chance, int rolls)
+    private void PickTraits(List<ProtoId<StationTraitPrototype>> picked, StationTraitGroup group, float chance, int rolls, int players)
     {
         var all = AllTraits[group];
         var pool = new List<StationTraitPrototype>(all.Count);
         foreach (var trait in all)
         {
-            if (!_random.Prob(trait.Chance) ||
+            if (players < trait.Players ||
+                !_random.Prob(trait.Chance) ||
                 trait.AnyConflicting(picked) ||
                 picked.Contains(trait.ID)) // don't add a rule if it was already forced
                 continue;
