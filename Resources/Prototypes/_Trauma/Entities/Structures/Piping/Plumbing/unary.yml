@@ -154,8 +154,9 @@
   - type: DrawableSolution
     solution: tank_buffer
   - type: Sprite
-    sprite: Structures/Piping/Plumbing/tank.rsi
-    state: tank_base
+    sprite: Objects/Misc/skub.rsi
+    # sprite: Structures/Piping/Plumbing/tank.rsi
+    # state: tank_base
   - type: Appearance
   # - type: SolutionContainerVisuals
   #   solutionName: tank_buffer # Tells the visualizer which solution to track
