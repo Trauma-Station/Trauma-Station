@@ -23,3 +23,13 @@
     components:
     - type: CargoPriceModifier
       modifier: 1.2
+
+- type: stationTrait
+  id: OverflowJobMistake
+  group: Negative
+  name: "Overflow bureaucracy mistake"
+  report: "It seems for some reason we put out the wrong job-listing for the overflow role this shift..." # the job is left as a surprise
+  mapEffects: # need this after station jobs are loaded but before job spawn
+  - !type:StationRandomOverflowJob
+    ignoredJobs:
+    - StationAi # broken as fuck and has a dedicated trait

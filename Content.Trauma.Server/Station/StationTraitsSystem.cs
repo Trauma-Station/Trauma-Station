@@ -135,7 +135,9 @@ public sealed class StationTraitsSystem : EntitySystem
         var pool = new List<StationTraitPrototype>(all.Count);
         foreach (var trait in all)
         {
-            if (_random.Prob(trait.Chance) && !trait.AnyConflicting(picked))
+            if (!_random.Prob(trait.Chance) ||
+                trait.AnyConflicting(picked) ||
+                picked.Contains(trait.ID)) // don't add a rule if it was already forced
                 pool.Add(trait);
         }
 
