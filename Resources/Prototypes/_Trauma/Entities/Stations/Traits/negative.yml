@@ -10,3 +10,16 @@
     effects:
     - !type:DestroyLightBulb
       probability: 0.6
+
+- type: stationTrait
+  id: DistantSupplyLines
+  group: Negative
+  chance: 0.6
+  name: "Distant supply lines"
+  report: "Due to the distance to our normal supply lines, cargo orders are more expensive."
+  conflicts: [ StrongSupplyLines ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: CargoPriceModifier
+      modifier: 1.2

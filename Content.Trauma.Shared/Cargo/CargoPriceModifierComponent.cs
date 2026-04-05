@@ -5,11 +5,11 @@ using Robust.Shared.GameStates;
 namespace Content.Trauma.Shared.Cargo;
 
 /// <summary>
-/// Station component that multiplies the reward for its cargo bounties.
+/// Station component that multiplies the price of cargo orders.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(CargoModifiersSystem))]
 [AutoGenerateComponentState]
-public sealed partial class BountyModifierComponent : Component
+public sealed partial class CargoPriceModifierComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public float Modifier = 1f;

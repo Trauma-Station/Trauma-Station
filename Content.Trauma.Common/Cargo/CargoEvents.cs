@@ -7,3 +7,9 @@ namespace Content.Trauma.Common.Cargo;
 /// </summary>
 [ByRefEvent]
 public record struct ModifyBountyRewardEvent(int Reward);
+
+/// <summary>
+/// Raised on a station entity to modify the price of a product.
+/// </summary>
+[ByRefEvent]
+public record struct ModifyCargoPriceEvent(int Price);

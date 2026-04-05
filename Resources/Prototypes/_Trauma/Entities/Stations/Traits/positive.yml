@@ -38,3 +38,15 @@
   effects:
   - !type:StartGameRule
     rule: LuckyWinnerRule
+
+- type: stationTrait
+  id: StrongSupplyLines
+  group: Positive
+  name: "Strong supply lines"
+  report: "Prices are low in this system, BUY BUY BUY!"
+  conflicts: [ DistantSupplyLines ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: CargoPriceModifier
+      modifier: 0.8
