@@ -71,6 +71,7 @@
     state: icon
   - type: Item
     size: Tiny
+    heldPrefix: silver
   - type: Gun
     minAngle: 0
     maxAngle: 5
