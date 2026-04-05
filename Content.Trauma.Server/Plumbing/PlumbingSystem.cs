@@ -15,6 +15,7 @@ public sealed partial class PlumbingSystem : EntitySystem
 
     // A collection of all active plumbing networks
     private readonly List<PlumbingNet> _updateList = new();
+    [ViewVariables]
     private readonly HashSet<PlumbingNet> _pipeNets = new();
 
     /// <summary>

@@ -9,7 +9,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.NodeContainer;
 using Content.Shared.NodeContainer.NodeGroups;
 using Content.Trauma.Shared.Plumbing;
-using Serilog;
 
 namespace Content.Trauma.Server.Plumbing;
 
@@ -30,6 +29,10 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
 
     private IEntityManager? _entMan;
 
+    /// <summary>
+    /// Static pressure build-up from external sources (like puddles).
+    /// </summary>
+    public float ExternalPressureForce = 0;
 
     public EntityUid? Grid { get; private set; }
 
@@ -50,10 +53,12 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
 
     public void Update()
     {
+        ExternalPressureForce = 0; // Resets the pressure so you don't get ghosting force and shit.
+
         if (Liquid.Contents.Count == 0 || Liquid.Volume == 0)
             return;
 
-        var location = Nodes.FirstOrDefault()?.Owner; // Temporary
+        var location = Nodes.FirstOrDefault()?.Owner; // TODO: This is a temporary fix, need to determine actual reaction location.
 
         _chemical?.FullyReactRaw(Liquid, location);
     }
