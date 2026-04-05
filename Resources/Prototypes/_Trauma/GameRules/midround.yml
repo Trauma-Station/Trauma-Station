@@ -50,7 +50,7 @@
     prototype: MobMorph
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
-    agentName: morph-name-user
+    agentName: morph-round-end-name
     definitions:
     - spawnerPrototype: GhostRoleSpawnerMorph
       min: 1

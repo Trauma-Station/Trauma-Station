@@ -6408,3 +6408,51 @@ Entries:
   id: 741
   time: '2026-04-04T16:04:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1774
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the security funding booster for HOS, use it for free money if you
+      killed all the antags too fast!
+  id: 742
+  time: '2026-04-04T20:40:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1864
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed small issues with morph.
+  id: 743
+  time: '2026-04-04T22:44:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1867
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Cargo Techs can now approve orders again
+  id: 744
+  time: '2026-04-05T00:21:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1869
+- author: momoyawn
+  changes:
+  - type: Tweak
+    message: >-
+      Nullrod "Faith" now has proper sound effects and two modes: Silver hurts
+      and Blessed heals.
+  id: 745
+  time: '2026-04-05T00:56:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1868
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Security funding booster can now summon a wider variety of antags.
+  id: 746
+  time: '2026-04-05T07:49:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1873
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed plague mouse event since plague mice had their diseases removed a
+      while ago.
+  id: 747
+  time: '2026-04-05T14:15:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1876

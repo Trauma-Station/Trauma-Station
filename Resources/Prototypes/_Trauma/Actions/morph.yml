@@ -2,7 +2,7 @@
   parent: BaseAction
   id: ActionMorphReplicate
   name: Replicate
-  description: Copies your cells to create a replica of yourself. Costs 50 biomass.
+  description: Copies your cells to create a replica of yourself. Costs 150 biomass.
   components:
   - type: Action
     icon:

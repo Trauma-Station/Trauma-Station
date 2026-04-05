@@ -93,8 +93,8 @@ public sealed class MorphSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("morph-no-biomass-target"), ent, user, PopupType.MediumCaution);
 
        // make sure the food is dead
-        if (!_mob.IsDead(target))
-           _mob.ChangeMobState(target, MobState.Dead);
+        if (_mobQuery.TryComp(target, out var mob) && !_mob.IsDead(target, mob))
+           _mob.ChangeMobState(target, MobState.Dead, mob);
     }
 
     private void OnMorphReplicate(Entity<MorphComponent> ent, ref MorphReplicateActionEvent args)

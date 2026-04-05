@@ -8,7 +8,6 @@
     - id: MalignRiftSpawn
     - id: FloorGoblinMidRound
     - id: ClownGoblinMigration
-    - id: PlagueMiceSpawn
 
 - type: entityTable
   id: BasicAntagEventsTrauma
@@ -33,22 +32,6 @@
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
-
-- type: entity
-  parent: BaseStationEventShortDelay
-  id: PlagueMiceSpawn
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
-    earliestStart: 20
-    minimumPlayers: 15
-    weight: 4 # annoying
-    reoccurrenceDelay: 60 # no spamming them
-    duration: 5
-  - type: VentHordeRule
-    table:
-      id: MobMousePlague
-      amount: 1, 3
 
 - type: entity
   id: RatmaSpawn
