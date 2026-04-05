@@ -28,3 +28,13 @@
     account: Cargo
     min: 2000
     max: 5000
+
+- type: stationTrait
+  id: GalacticGrant
+  group: Positive
+  chance: 0.2
+  name: "Lucky winner"
+  report: "Your station has won the grand prize of the annual station charity event. Free snacks will be delivered to the bar every now and then."
+  effects:
+  - !type:StartGameRule
+    rule: LuckyWinnerRule
