@@ -105,18 +105,4 @@ public sealed partial class TrySettingPipeLayerCompletedEvent : SimpleDoAfterEve
     }
 }
 
-[Serializable, NetSerializable]
-public enum AtmosPipeLayerVisuals
-{
-    Sprite,
-    SpriteLayers,
-    DrawDepth,
-}
-
-[Serializable, NetSerializable]
-public enum AtmosPipeLayer
-{
-    Primary,
-    Secondary,
-    Tertiary,
-}
+// Trauma - Plumbing - Moved to Common

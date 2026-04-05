@@ -127,3 +127,38 @@
         VentCrawlerTube: !type:Container
     - type: Weldable  # Goobstation - ventcrawl
       time: 3
+
+- type: entity
+  id: FluidTank
+  parent: BaseStructure
+  name: fluid storage tank
+  description: A large tank for storing liquids. It has a manual access port on top.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank_buffer:
+        maxVol: 1000
+  - type: NodeContainer
+    nodes:
+      fluid:
+        !type:PlumbingNode
+        nodeGroupID: Fluid
+        maxVolume: 0
+        pipeDirection: South
+        expectedConnections: 1
+  - type: FluidTank
+  - type: InjectableSolution
+    solution: tank_buffer
+  - type: DrawableSolution
+    solution: tank_buffer
+  - type: Sprite
+    sprite: Structures/Piping/Plumbing/tank.rsi
+    state: tank_base
+  - type: Appearance
+  # - type: SolutionContainerVisuals
+  #   solutionName: tank_buffer # Tells the visualizer which solution to track
+  - type: Transform
+    anchored: true
+  - type: Anchorable

@@ -1,7 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.IO.Pipelines;
+using Content.Server.NodeContainer.EntitySystems;
+using Content.Server.NodeContainer.NodeGroups;
+using Content.Server.NodeContainer.Nodes;
+using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.NodeContainer;
+using Content.Shared.RetractableItemAction;
 using Content.Trauma.Common.Plumbing;
 using Content.Trauma.Server.Plumbing.Components;
 using JetBrains.Annotations;
@@ -9,9 +17,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Plumbing;
 
-public sealed partial class PlumbingSystem : EntitySystem
+public sealed partial class PlumbingSystem : CommonPlumbingSystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly NodeGroupSystem _nodeGroup = default!;
 
     // A collection of all active plumbing networks
     private readonly List<PlumbingNet> _updateList = new();
@@ -95,5 +104,36 @@ public sealed partial class PlumbingSystem : EntitySystem
         // SplitSolution handles the math of taking a proportional
         // slice of every reagent currently in the 'Liquid' mix.
         return net.Liquid.SplitSolution(amount);
+    }
+
+    public override void UpdateNodeVisuals(EntityUid uid)
+    {
+        if (!TryComp<NodeContainerComponent>(uid, out var nodeContainer) || !TryComp<AtmosPipeLayersComponent>(uid, out var atmosPipe))
+            return;
+
+        // Update the layer values of all pipe nodes associated with the entity
+        foreach (var (id, node) in nodeContainer.Nodes)
+        {
+            if (node is not PlumbingNode { } pipeNode)
+                continue;
+
+            if (pipeNode.CurrentPipeLayer == atmosPipe.CurrentPipeLayer)
+                continue;
+
+            pipeNode.CurrentPipeLayer = atmosPipe.CurrentPipeLayer;
+
+            if (pipeNode.NodeGroup != null)
+                _nodeGroup.QueueRemakeGroup((BaseNodeGroup) pipeNode.NodeGroup);
+        }
+    }
+
+    public override bool IsPipeNode<T>(T node) { return node is PlumbingNode; }
+
+    public override (PipeDirection, AtmosPipeLayer) GetAllDirectionsAndLayers<T>(Entity<TransformComponent> pipe, T node)
+    {
+        if (node is not PlumbingNode plumbingNode)
+            throw new NotImplementedException();
+
+        return (plumbingNode.OriginalPipeDirection.RotatePipeDirection(pipe.Comp.LocalRotation), plumbingNode.CurrentPipeLayer);
     }
 }

@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Plumbing;
+// </Trauma>
 using Content.Server.Atmos.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
@@ -15,6 +18,9 @@ namespace Content.Server.Atmos.EntitySystems;
 /// </summary>
 public sealed partial class AtmosPipeLayersSystem : SharedAtmosPipeLayersSystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonPlumbingSystem _plumbing = default!;
+    // </Trauma>
     [Dependency] private readonly NodeGroupSystem _nodeGroup = default!;
     [Dependency] private readonly PipeRestrictOverlapSystem _pipeRestrictOverlap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -57,6 +63,10 @@ public sealed partial class AtmosPipeLayersSystem : SharedAtmosPipeLayersSystem
             if (pipeNode.NodeGroup != null)
                 _nodeGroup.QueueRemakeGroup((BaseNodeGroup)pipeNode.NodeGroup);
         }
+
+        // <Trauma> - plumbing - update
+        _plumbing.UpdateNodeVisuals(ent.Owner);
+        // </Trauma>
 
         // If a user wasn't responsible for unanchoring the pipe, leave it be
         if (user == null || used == null)

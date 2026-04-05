@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Plumbing;
+// </Trauma>
 using System.Linq;
 using Content.Server.Atmos.Components;
 using Content.Server.NodeContainer;
@@ -18,6 +21,9 @@ namespace Content.Server.Atmos.EntitySystems;
 /// </summary>
 public sealed class PipeRestrictOverlapSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly CommonPlumbingSystem _plumbing = default!;
+    // <Trauma>
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _xform = default!;
@@ -119,6 +125,10 @@ public sealed class PipeRestrictOverlapSystem : EntitySystem
                 // we need to rotate the pipe manually like this because the rotation doesn't update for pipes that are unanchored.
                 if (node is PipeNode pipeNode)
                     yield return (pipeNode.OriginalPipeDirection.RotatePipeDirection(pipe.Comp2.LocalRotation), pipeNode.CurrentPipeLayer);
+                // <Trauma>
+                if (_plumbing.IsPipeNode<Node?>(node))
+                    yield return _plumbing.GetAllDirectionsAndLayers<Node?>((pipe.Owner, pipe.Comp2), node);
+                // </Trauma>
             }
         }
     }
