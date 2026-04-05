@@ -162,4 +162,36 @@ public sealed partial class PlumbingSystem : CommonPlumbingSystem
 
         return anyPipeNodes;
     }
+
+    /// <summary>
+    /// Gets open directions on pipe
+    /// </summary>
+    public IEnumerable<Direction> GetOpenDirections(PlumbingNode pNode)
+    {
+        var directions = pNode.CurrentPipeDirection;
+
+        for (var i = 0; i < PipeDirectionHelpers.PipeDirections; i++)
+        {
+            var dir = (PipeDirection) (1 << i);
+
+            if (directions.HasDirection(dir) && !IsConnectedInDirection(pNode, dir))
+                yield return dir.ToDirection();
+        }
+    }
+
+    /// <summary>
+    /// Function that checks if the pipe has a connection in that direction.
+    /// </summary>
+    private bool IsConnectedInDirection(PlumbingNode pNode, PipeDirection dir)
+    {
+        foreach (var reachable in pNode.ReachableNodes)
+        {
+            if (reachable is not PlumbingNode neighbor)
+                continue;
+
+            if (neighbor.CurrentPipeDirection.HasDirection(dir.GetOpposite()))
+                return true;
+        }
+        return false;
+    }
 }
