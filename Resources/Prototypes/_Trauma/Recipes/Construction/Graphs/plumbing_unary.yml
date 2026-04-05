@@ -1,5 +1,5 @@
 - type: constructionGraph
-  id: GasUnary
+  id: FluidUnary
   start: start
   graph:
   - node: start
@@ -29,7 +29,7 @@
         doAfter: 1
 
   - node: ventpump
-    entity: GasVentPump
+    entity: FluidVentPump
     edges:
     - to: start
       conditions:
@@ -47,7 +47,7 @@
         doAfter: 1
 
   - node: passivevent
-    entity: GasPassiveVent
+    entity: FluidPassiveVent
     edges:
     - to: start
       conditions:
@@ -65,7 +65,7 @@
         doAfter: 1
 
   - node: ventscrubber
-    entity: GasVentScrubber
+    entity: FluidVentScrubber
     edges:
     - to: start
       conditions:
@@ -83,7 +83,7 @@
         doAfter: 1
 
   - node: outletinjector
-    entity: GasOutletInjector
+    entity: FluidOutletInjector
     edges:
     - to: start
       conditions:

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Goobstation.Server.Pirates.Ransom;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Shared.Chemistry.Components;
@@ -8,7 +9,10 @@ using Content.Shared.Chemistry.Reaction;
 using Content.Shared.FixedPoint;
 using Content.Shared.NodeContainer;
 using Content.Shared.NodeContainer.NodeGroups;
+using Content.Shared.Random;
+using Content.Shared.Random.Helpers;
 using Content.Trauma.Shared.Plumbing;
+using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Plumbing;
 
@@ -28,6 +32,8 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
     private PuddleSystem? _puddle;
 
     private IEntityManager? _entMan;
+
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     /// <summary>
     /// Static pressure build-up from external sources (like puddles).
@@ -58,7 +64,7 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
         if (Liquid.Contents.Count == 0 || Liquid.Volume == 0)
             return;
 
-        var location = Nodes.FirstOrDefault()?.Owner; // TODO: This is a temporary fix, need to determine actual reaction location.
+        var location = _random?.Pick(Nodes).Owner; // GOIDA
 
         _chemical?.FullyReactRaw(Liquid, location);
     }

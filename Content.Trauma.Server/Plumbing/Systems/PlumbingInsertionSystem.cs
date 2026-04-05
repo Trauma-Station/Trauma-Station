@@ -53,8 +53,7 @@ public sealed partial class PlumbingInsertionSystem : EntitySystem
 
         var puddlePressure = (float) (puddleSol.Comp.Solution.Volume / 50f); // lowkey 50 is a magic number, should replace it will like fluid density or some shit.
         var pressureDiff = puddlePressure - pipePressure;
-
-        if (pressureDiff < 0)
+        if (pressureDiff > 0)
         {
             if (availableSpace > 0)
                 Drain(net, puddleUid, puddleSol, pressureDiff, availableSpace, vent.TransferRate, args.FrameTime);
