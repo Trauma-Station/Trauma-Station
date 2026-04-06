@@ -5,10 +5,8 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Trauma.Common.Attribute.Components;
 using Content.Trauma.Common.Attribute.Systems;
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Silicons.Borgs;
 using Content.Trauma.Shared.Attribute.Components;
-using Content.Trauma.Shared.Language.Systems;
 using Content.Trauma.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -32,7 +30,6 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
     [Dependency] protected readonly IPrototypeManager _proto = default!;
     [Dependency] protected readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
     [Dependency] private readonly EntityQuery<AwakeMobComponent> _awakeQuery = default!;
     [Dependency] private readonly EntityQuery<AttributeComponent> _query = default!;
     [Dependency] private readonly EntityQuery<AttributeContainerComponent> _containerQuery = default!;
@@ -166,13 +163,13 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
     /// <returns>
     /// Null if spawning it fails.
     /// </returns>
-    public Entity<AttributeComponent>? EnsureAttribute(Entity<AttributeContainerComponent> ent, [ForbidLiteral] EntProtoId id, float value = 0)
+    public Entity<AttributeComponent>? EnsureAttribute(Entity<AttributeContainerComponent> ent, [ForbidLiteral] EntProtoId id, FixedPoint2 value)
     {
         if (GetAttribute(ent, id) is { } existing)
         {
-            if (existing.Comp.Attribute < value)
+            if (existing.Comp.Inherent < value)
             {
-                existing.Comp.Attribute = value;
+                existing.Comp.Inherent = value;
                 Dirty(existing, existing.Comp);
             }
             return existing;
@@ -186,7 +183,7 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         }
 
         var comp = _query.Comp(unit);
-        comp.Attribute = value;
+        comp.Inherent = value;
         Dirty(unit, comp);
 
         ent.Comp.AttributeDict[id] = unit;
@@ -213,9 +210,6 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         {
             EnsureAttribute(ent, id, level);
         }
-
-        var updateEv = new UpdateExperienceEvent();
-        RaiseLocalEvent(target, ref updateEv);
     }
 
     /// <summary>
@@ -365,6 +359,8 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         if (!_awakeQuery.HasComp(ent) || GetContainer(ent)?.Comp.Container is not { } container)
             return;
 
+        // TODO: Somehow pass synchornization into attribute.
+
         foreach (var unit in container.ContainedEntities)
         {
             RaiseLocalEvent(unit, ref args);
@@ -401,7 +397,7 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         if (GetContainer(uid) is { } brain)
             return brain;
 
-        // if there's no brain store knowledge on the mob itself
+        // if there's no brain store attribute on the mob itself
         var comp = EnsureComp<AttributeContainerComponent>(uid);
         LinkContainer(uid, (uid, comp));
         return (uid, comp);
@@ -416,25 +412,25 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
 }
 
 /// <summary>
-/// Raised on a knowledge entity after it gets added to a container.
+/// Raised on an attribute entity after it gets added to a container.
 /// </summary>
 [ByRefEvent]
 public record struct AttributeAddedEvent(Entity<AttributeContainerComponent> Container, EntityUid Holder);
 
 /// <summary>
-/// Raised on a knowledge entity after it has been removed from a container, before deleting it.
+/// Raised on an attribute entity after it has been removed from a container, before deleting it.
 /// </summary>
 [ByRefEvent]
 public record struct AttributeRemovedEvent(Entity<AttributeContainerComponent> Container, EntityUid Holder);
 
 /// <summary>
-/// Raised on an active knowledge entity just before deactivating it.
+/// Raised on an active attribute entity just before deactivating it.
 /// </summary>
 [ByRefEvent]
 public record struct AttributeEnabledEvent(Entity<AttributeContainerComponent> Container, EntityUid Holder);
 
 /// <summary>
-/// Raised on an active knowledge entity just after activating it.
+/// Raised on an active attribute entity just after activating it.
 /// </summary>
 [ByRefEvent]
 public record struct AttributeDisabledEvent(Entity<AttributeContainerComponent> Container, EntityUid Holder);
