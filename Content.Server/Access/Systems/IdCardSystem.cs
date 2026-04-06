@@ -42,9 +42,7 @@ public sealed class IdCardSystem : SharedIdCardSystem
         {
             float randomPick = _random.NextFloat();
 
-            //basically, it does a small check to decide if its mango is to blow up -Space
-
-            //roll microwave exploding -Space
+            // <Trauma> - gambling id can explode
             if (!micro.CanMicrowaveIdsSafely)
             {
                 float explodeCheck = _random.NextFloat();
@@ -56,11 +54,10 @@ public sealed class IdCardSystem : SharedIdCardSystem
                 }
 
             }
-
-            // then continue like normal -Space
+            // <Trauma>
 
             // if really unlucky, burn card
-            if (randomPick <= 0.10f)
+            if (randomPick <= 0.10f) // Trauma - was 0.15
             {
                 TryComp(uid, out TransformComponent? transformComponent);
                 if (transformComponent != null)
@@ -78,7 +75,7 @@ public sealed class IdCardSystem : SharedIdCardSystem
 
 
             // If they're unlucky, brick their ID
-            if (randomPick <= 0.4f)
+            if (randomPick <= 0.4f) // Trauma - was 0.25
             {
                 _popupSystem.PopupEntity(Loc.GetString("id-card-component-microwave-bricked", ("id", uid)), uid);
 

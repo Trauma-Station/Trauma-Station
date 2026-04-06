@@ -33,3 +33,15 @@
     effects:
     - !type:SpawnEntity
       entity: PlayerStationAi
+
+- type: stationTrait
+  id: AirlockMisconfiguration
+  chance: 0.5
+  name: "Airlock Misconfiguration"
+  report: "The last crew seemed to have messed with some of the airlocks' access levels. Apologies to your Chief Engineer in advance."
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: Airlock
+    effects:
+    - !type:ScrambleAccessReader
+      probability: 0.1
