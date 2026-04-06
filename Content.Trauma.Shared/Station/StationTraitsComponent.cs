@@ -38,6 +38,12 @@ public sealed partial class StationTraitsComponent : Component
     public List<ProtoId<StationTraitPrototype>> Reported = new();
 
     /// <summary>
+    /// Set to true to prevent running trait StartEffects multiple times.
+    /// </summary>
+    [DataField]
+    public bool RanStartEffects;
+
+    /// <summary>
     /// Set to true to prevent running trait MapEffects multiple times.
     /// </summary>
     [DataField]

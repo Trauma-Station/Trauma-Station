@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Events;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Station;
@@ -25,6 +26,8 @@ public sealed class StationTraitsSystem : EntitySystem
     /// </summary>
     public Dictionary<StationTraitGroup, List<StationTraitPrototype>> AllTraits = new();
 
+    private delegate EntityEffect[]? GetEffects(StationTraitPrototype trait);
+
     private bool _enabled;
     private List<ProtoId<StationTraitPrototype>> _forced = new();
 
@@ -33,6 +36,7 @@ public sealed class StationTraitsSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<StationTraitsComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnBeforePlayerSpawning);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
@@ -82,6 +86,22 @@ public sealed class StationTraitsSystem : EntitySystem
         }
     }
 
+    private void OnRoundStarting(RoundStartingEvent args)
+    {
+        if (!_enabled)
+            return;
+
+        var query = EntityQueryEnumerator<StationTraitsComponent>();
+        while (query.MoveNext(out var station, out var comp))
+        {
+            if (comp.RanStartEffects)
+                continue;
+            comp.RanStartEffects = true;
+
+            RunEffects((station, comp), trait => trait.StartEffects, "StartEffects");
+        }
+    }
+
     private void OnBeforePlayerSpawning(RulePlayerSpawningEvent args)
     {
         if (!_enabled)
@@ -90,26 +110,31 @@ public sealed class StationTraitsSystem : EntitySystem
         var query = EntityQueryEnumerator<StationTraitsComponent>();
         while (query.MoveNext(out var station, out var comp))
         {
-            // never run them multiple times, just incase
             if (comp.RanMapEffects)
                 continue;
             comp.RanMapEffects = true;
 
-            // will probably misbehave with multiple stations... oh well
-            foreach (var id in comp.Picked)
-            {
-                var trait = _proto.Index(id);
-                if (trait.MapEffects is not {} effects)
-                    continue;
+            RunEffects((station, comp), trait => trait.MapEffects, "MapEffects");
+        }
+    }
 
-                try
-                {
-                    _effects.ApplyEffects(station, effects);
-                }
-                catch (Exception e)
-                {
-                    Log.Error($"Caught exception while applying map effects of station trait {id} to {ToPrettyString(station)}: {e}");
-                }
+    private void RunEffects(Entity<StationTraitsComponent> ent, GetEffects getEffects, string name)
+    {
+        // will probably misbehave with multiple stations... oh well
+        var station = ent.Owner;
+        foreach (var id in ent.Comp.Picked)
+        {
+            var trait = _proto.Index(id);
+            if (getEffects(trait) is not {} effects)
+                continue;
+
+            try
+            {
+                _effects.ApplyEffects(station, effects);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception while applying map effects of station trait {id} to {ToPrettyString(station)}: {e}");
             }
         }
     }

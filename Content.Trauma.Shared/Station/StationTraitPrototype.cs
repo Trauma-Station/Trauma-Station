@@ -59,6 +59,12 @@ public sealed partial class StationTraitPrototype : IPrototype, IInheritingProto
     public EntityEffect[]? Effects;
 
     /// <summary>
+    /// Entity effects applied to the station entity after the map has been loaded, but before it has been initialized.
+    /// </summary>
+    [DataField]
+    public EntityEffect[]? StartEffects;
+
+    /// <summary>
     /// Entity effects applied to the station entity after the map has been initialized, but before players have spawned.
     /// </summary>
     [DataField]

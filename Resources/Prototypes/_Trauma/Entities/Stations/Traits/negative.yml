@@ -48,6 +48,27 @@
           - VendingMachine
 
 - type: stationTrait
+  id: EmptyMaint
+  group: Negative
+  name: "Cleared out maintenance"
+  report: "Our workers cleaned out most of the junk in the maintenace areas."
+  conflicts: [ FilledMaint ]
+  startEffects: # has to run before the map inits so it can change the spawners
+  - !type:StationQueryEffects
+    compName: MaintsClosetSpawner
+    includePaused: true
+    effects:
+    - !type:AddComponents
+      components:
+      - type: RandomSpawner
+        offset: 0
+        prototypes:
+        - ClosetMaintenanceFilledLess # just overriding this
+        rarePrototypes:
+        - LockerMimic
+        rareChance: 0.005
+
+- type: stationTrait
   id: DistantSupplyLines
   group: Negative
   chance: 0.6

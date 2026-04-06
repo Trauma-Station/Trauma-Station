@@ -24,6 +24,13 @@ public sealed partial class StationQueryEffects : EntityEffectBase<StationQueryE
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
 
+    /// <summary>
+    /// Include paused entities in the query.
+    /// Needed if you are running it on a pre-init map.
+    /// </summary>
+    [DataField]
+    public bool IncludePaused;
+
     public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
         => null;
 }
@@ -35,11 +42,12 @@ public sealed class StationQueryEffectsSystem : EntityEffectSystem<StationDataCo
 
     protected override void Effect(Entity<StationDataComponent> ent, ref EntityEffectEvent<StationQueryEffects> args)
     {
-        var type = Factory.GetRegistration(args.Effect.CompName).Type;
-        var effects = args.Effect.Effects;
+        var e = args.Effect;
+        var type = Factory.GetRegistration(e.CompName).Type;
+        var effects = e.Effects;
 
         var station = ent.Owner;
-        foreach (var (uid, _) in EntityManager.GetAllComponents(type))
+        foreach (var (uid, _) in EntityManager.GetAllComponents(type, e.IncludePaused))
         {
             if (_station.GetOwningStation(uid) != station)
                 continue;

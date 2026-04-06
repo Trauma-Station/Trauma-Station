@@ -10,6 +10,27 @@
       modifier: 1.2
 
 - type: stationTrait
+  id: FilledMaint
+  group: Positive
+  name: "Filled up maintenance"
+  report: "Our workers accidentally forgot more of their personal belongings in the maintenace areas."
+  conflicts: [ EmptyMaint ]
+  startEffects: # has to run before the map inits so it can change the spawners
+  - !type:StationQueryEffects
+    compName: MaintsClosetSpawner
+    includePaused: true
+    effects:
+    - !type:AddComponents
+      components:
+      - type: RandomSpawner
+        offset: 0
+        prototypes:
+        - ClosetMaintenanceFilledMore # just overriding this
+        rarePrototypes:
+        - LockerMimic
+        rareChance: 0.005
+
+- type: stationTrait
   id: FreeScarves
   group: Positive
   name: "Free scarves"
