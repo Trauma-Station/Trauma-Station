@@ -12,6 +12,42 @@
       probability: 0.6
 
 - type: stationTrait
+  id: BotLanguages
+  group: Negative
+  chance: 0.8
+  name: "Bot Language Matrix Malfunction"
+  report: "Your station's friendly bots have had their language matrix fried due to an ion storm, resulting in some strange and unfamiliar speech patterns."
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: LanguageSpeaker
+    effects:
+    - !type:AddRandomLanguage
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          tags:
+          - Bot
+
+- type: stationTrait
+  id: MachineLanguages
+  group: Negative
+  chance: 0.4
+  name: "Machine Language Matrix Malfunction"
+  report: "Your station's machines have had their language matrix fried due to an ion storm, resulting in some strange and unfamiliar speech patterns."
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: LanguageSpeaker
+    effects:
+    - !type:AddRandomLanguage
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Computer
+          - Machine
+          - VendingMachine
+
+- type: stationTrait
   id: DistantSupplyLines
   group: Negative
   chance: 0.6
