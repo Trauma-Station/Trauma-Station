@@ -4,8 +4,8 @@ meta:
   engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 04/05/2026 23:43:39
-  entityCount: 32580
+  time: 04/06/2026 10:05:18
+  entityCount: 32583
 maps:
 - 1
 grids:
@@ -9903,7 +9903,7 @@ entities:
           -12,-9:
             0: 32768
             2: 2
-            4: 136
+            3: 136
           -11,-8:
             0: 64985
           -11,-7:
@@ -9912,7 +9912,7 @@ entities:
             0: 26224
           -11,-9:
             0: 47240
-            4: 51
+            3: 51
           -10,-8:
             0: 64432
           -10,-7:
@@ -9981,17 +9981,17 @@ entities:
             2: 8738
             0: 34952
           -13,-12:
-            3: 224
-            4: 57344
+            4: 224
+            3: 57344
           -12,-11:
             2: 34
             0: 64136
           -13,-11:
-            4: 224
+            3: 224
             0: 57344
           -12,-10:
             0: 143
-            4: 32768
+            3: 32768
           -13,-10:
             0: 65518
           -13,-9:
@@ -10005,7 +10005,7 @@ entities:
             0: 16383
           -11,-10:
             0: 33211
-            4: 12288
+            3: 12288
           -11,-13:
             0: 65535
           -10,-12:
@@ -10034,7 +10034,7 @@ entities:
             5: 224
             6: 57344
           -13,-13:
-            4: 57568
+            3: 57568
           -11,-15:
             0: 65280
             2: 1
@@ -10332,7 +10332,7 @@ entities:
             2: 8750
           -20,-11:
             2: 4369
-            4: 52416
+            3: 52416
           -20,-10:
             2: 273
             0: 61152
@@ -10345,7 +10345,7 @@ entities:
           -19,-12:
             0: 56784
           -19,-11:
-            4: 4368
+            3: 4368
             0: 52940
           -19,-10:
             0: 56796
@@ -10944,11 +10944,11 @@ entities:
           moles: {}
         - volume: 2500
           temperature: 293.15
-          moles:
-            Plasma: 6666.982
+          moles: {}
         - volume: 2500
           temperature: 293.15
-          moles: {}
+          moles:
+            Plasma: 6666.982
         - volume: 2500
           temperature: 293.15
           moles:
@@ -23079,10 +23079,10 @@ entities:
     - type: Transform
       pos: 3.5,-65.5
       parent: 2
-  - uid: 10384
+  - uid: 31491
     components:
     - type: Transform
-      pos: 20.5,-30.5
+      pos: 20.5,-29.5
       parent: 2
 - proto: BedsheetBlack
   entities:
@@ -23119,10 +23119,10 @@ entities:
       parent: 2
 - proto: BedsheetCentcom
   entities:
-  - uid: 10385
+  - uid: 10384
     components:
     - type: Transform
-      pos: 20.5,-30.5
+      pos: 20.5,-29.5
       parent: 2
 - proto: BedsheetClown
   entities:
@@ -91349,10 +91349,10 @@ entities:
       parent: 2
 - proto: DresserNanorepFilled
   entities:
-  - uid: 9947
+  - uid: 10385
     components:
     - type: Transform
-      pos: 21.5,-30.5
+      pos: 20.5,-30.5
       parent: 2
 - proto: DresserQuarterMasterFilled
   entities:
@@ -165399,6 +165399,18 @@ entities:
     - type: Transform
       pos: -7.5,-5.5
       parent: 2
+- proto: SpawnPointNanotrasenRepresentative
+  entities:
+  - uid: 32113
+    components:
+    - type: Transform
+      pos: 21.5,-29.5
+      parent: 2
+  - uid: 32413
+    components:
+    - type: Transform
+      pos: 21.5,-28.5
+      parent: 2
 - proto: SpawnPointObserver
   entities:
   - uid: 25017
@@ -175654,6 +175666,13 @@ entities:
     components:
     - type: Transform
       pos: 30.57281,4.627015
+      parent: 2
+- proto: UniqueLockerNanorepFilled
+  entities:
+  - uid: 9947
+    components:
+    - type: Transform
+      pos: 21.5,-30.5
       parent: 2
 - proto: UprightPianoInstrument
   entities:
