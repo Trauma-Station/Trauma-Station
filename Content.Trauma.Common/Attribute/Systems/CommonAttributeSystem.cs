@@ -10,7 +10,7 @@ public abstract partial class CommonAttributeSystem : EntitySystem
     /// <summary>
     /// Gets a attribute unit based on its entity prototype ID.
     /// </summary>
-    public abstract Entity<AttributeComponent>? GetAttribute(EntityUid target, [ForbidLiteral] EntProtoId knowledgeUnit);
+    public abstract Entity<AttributeComponent>? GetAttribute(EntityUid target, [ForbidLiteral] EntProtoId attributeUnit);
 
     /// <summary>
     /// Clears attributes from the target entity.

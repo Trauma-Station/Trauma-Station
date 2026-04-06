@@ -20,7 +20,7 @@ using Robust.Shared.Utility;
 namespace Content.Trauma.Shared.Attribute.Systems;
 
 /// <summary>
-/// This handles all knowledge related entities.
+/// This handles all attribute related entities.
 /// </summary>
 public sealed partial class SharedAttributeSystem : CommonAttributeSystem
 {
@@ -36,7 +36,7 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
     [Dependency] private readonly EntityQuery<AttributeHolderComponent> _holderQuery = default!;
 
     /// <summary>
-    /// Every knowledge prototype and its data.
+    /// Every attribute prototype and its data.
     /// </summary>
     public Dictionary<EntProtoId, AttributeComponent> AllAttributes = new();
 
@@ -178,7 +178,7 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         PredictedTrySpawnInContainer(id, ent.Owner, AttributeContainerComponent.ContainerId, out var spawned);
         if (spawned is not { } unit)
         {
-            Log.Error($"Failed to spawn knowledge {id} for {ToPrettyString(ent)}!");
+            Log.Error($"Failed to spawn attribute {id} for {ToPrettyString(ent)}!");
             return null;
         }
 
@@ -199,14 +199,14 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
     }
 
     /// <summary>
-    /// Adds a list of attribute units to a knowledge container.
+    /// Adds a list of attribute units to a attribute container.
     /// </summary>
-    public void AddAttributeUnits(EntityUid target, Dictionary<EntProtoId, int> knowledgeList)
+    public void AddAttributeUnits(EntityUid target, Dictionary<EntProtoId, int> attributeList)
     {
         if (GetContainer(target) is not { } ent)
             return;
 
-        foreach (var (id, level) in knowledgeList)
+        foreach (var (id, level) in attributeList)
         {
             EnsureAttribute(ent, id, level);
         }
@@ -277,9 +277,9 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
             return null;
 
         var query = GetEntityQuery<T>();
-        foreach (var knowledge in container.ContainedEntities)
+        foreach (var attribute in container.ContainedEntities)
         {
-            if (query.HasComp(knowledge))
+            if (query.HasComp(attribute))
                 return target;
         }
 
@@ -294,18 +294,18 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         if (GetContainer(target)?.Comp.Container is not { } container)
             return null;
 
-        var knowledgeEnts = new List<Entity<T, AttributeComponent>>();
+        var attributeEnts = new List<Entity<T, AttributeComponent>>();
         var query = GetEntityQuery<T>();
-        foreach (var knowledge in container.ContainedEntities)
+        foreach (var attribute in container.ContainedEntities)
         {
-            if (!_query.TryComp(knowledge, out var knowledgeComp))
+            if (!_query.TryComp(attribute, out var attributeComp))
                 continue;
 
-            if (query.TryComp(knowledge, out var comp))
-                knowledgeEnts.Add((knowledge, comp, knowledgeComp));
+            if (query.TryComp(attribute, out var comp))
+                attributeEnts.Add((attribute, comp, attributeComp));
         }
 
-        return knowledgeEnts;
+        return attributeEnts;
     }
 
     /// <summary>
@@ -368,7 +368,7 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
     }
 
     /// <summary>
-    /// Relays an event to all non-martial arts knowledges a mob has.
+    /// Relays an event to all non-martial arts attributes a mob has.
     /// It also relays it to the active martial art, but not any inactive oens.
     /// </summary>
     public void RelayActiveEvent<T>(Entity<AttributeHolderComponent> ent, ref T args) where T : notnull
