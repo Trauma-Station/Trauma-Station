@@ -18,6 +18,4 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: MaintenanceLockerLoot
-        # it's 1.5x loot in tg but that would be ass to implement, so gamble instead
-        rolls: 2
-        prob: 0.75
+        rolls: 2 # 2x loot so has to be 50% chance of replacing it in the trait

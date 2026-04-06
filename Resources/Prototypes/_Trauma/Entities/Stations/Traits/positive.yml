@@ -21,6 +21,7 @@
     includePaused: true
     effects:
     - !type:AddComponents
+      probability: 0.5 # 50% chance of doubling the loot -> 1.5x loot
       components:
       - type: RandomSpawner
         offset: 0
