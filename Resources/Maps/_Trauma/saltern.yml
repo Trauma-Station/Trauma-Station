@@ -4,8 +4,8 @@ meta:
   engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 04/04/2026 13:50:45
-  entityCount: 12230
+  time: 04/05/2026 23:50:13
+  entityCount: 12234
 maps:
 - 1
 grids:
@@ -52971,11 +52971,6 @@ entities:
     - type: Transform
       pos: -17.5,27.5
       parent: 2
-  - uid: 8197
-    components:
-    - type: Transform
-      pos: -23.5,36.5
-      parent: 2
 - proto: OxygenTankFilled
   entities:
   - uid: 434
@@ -53486,6 +53481,14 @@ entities:
     - type: Transform
       pos: 42.5,23.5
       parent: 2
+- proto: PlasmaReinforcedWindowDirectional
+  entities:
+  - uid: 8197
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -22.5,36.5
+      parent: 2
 - proto: PlasmaTankFilled
   entities:
   - uid: 8271
@@ -53502,6 +53505,19 @@ entities:
     components:
     - type: Transform
       pos: 64.25282,0.19537628
+      parent: 2
+- proto: PlasmaWindoorSecureCommandLocked
+  entities:
+  - uid: 12231
+    components:
+    - type: Transform
+      pos: -23.5,42.5
+      parent: 2
+  - uid: 12232
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -23.5,36.5
       parent: 2
 - proto: PlasticFlapsAirtightClear
   entities:
@@ -61662,6 +61678,18 @@ entities:
     components:
     - type: Transform
       pos: -15.5,-38.5
+      parent: 2
+- proto: SpawnPointExtraAiCore
+  entities:
+  - uid: 12233
+    components:
+    - type: Transform
+      pos: -23.5,42.5
+      parent: 2
+  - uid: 12234
+    components:
+    - type: Transform
+      pos: -23.5,36.5
       parent: 2
 - proto: SpawnPointHeadOfPersonnel
   entities:
