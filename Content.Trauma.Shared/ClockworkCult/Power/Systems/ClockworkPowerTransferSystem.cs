@@ -18,6 +18,7 @@ public sealed class ClockworkPowerTransferSystem : EntitySystem
     [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityQuery<LimitedChargesComponent> _chargesQuery = default!;
+    [Dependency] private readonly EntityQuery<ClockworkTransferrerComponent> _transferrerQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -49,6 +50,11 @@ public sealed class ClockworkPowerTransferSystem : EntitySystem
 
             var chargesPerConnection = transferrer.Transfer / activeConnections;    // The charge to give per connection active
             var totalChargesToRemove = -(transferrer.Transfer * activeConnections); // The total charges to remove from us
+
+            // Check if we can transfer
+            var ourCharges = _charges.GetCurrentCharges((uid, chargesTransferrer));
+            if (ourCharges + totalChargesToRemove <= 0)
+                return;
 
             // Remove the charges from us, based on the amount of connections
             _charges.AddCharges((uid,chargesTransferrer), totalChargesToRemove);
@@ -109,6 +115,41 @@ public sealed class ClockworkPowerTransferSystem : EntitySystem
 
         // Establish the active component so power is transferred to the connections.
         EnsureComp<ActiveClockworkTransferrerComponent>(ent.Owner);
+    }
+
+    /// <summary>
+    /// Removes a connection from the transferrer
+    /// </summary>
+    public void RemoveConnection(Entity<ClockworkTransferrerComponent?> ent, EntityUid target)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        ent.Comp.Connections.Remove(target);
+        Dirty(ent);
+
+        // Stop updating if we don't have any connections
+        if (ent.Comp.Connections.Count <= 0)
+            RemCompDeferred<ActiveClockworkTransferrerComponent>(ent.Owner);
+    }
+
+    /// <summary>
+    /// Removes a clockwork structure from a transferrer
+    /// </summary>
+    public void RemoveConnection(Entity<ClockworkStructureComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp) || ent.Comp.Transferrer is not {} transferrer)
+            return;
+
+        if (!_transferrerQuery.TryComp(transferrer, out var transfer))
+            return;
+
+        RemoveConnection((transferrer, transfer), ent.Owner);
+
+        _popup.PopupPredicted("Removed connection from its network.", ent.Owner, null, PopupType.Medium);
+
+        ent.Comp.Transferrer = null;
+        Dirty(ent);
     }
 
     #endregion

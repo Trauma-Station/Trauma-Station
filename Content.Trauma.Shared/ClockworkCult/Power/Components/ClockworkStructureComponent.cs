@@ -9,4 +9,11 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Components;
 /// to an entity with this component.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class ClockworkStructureComponent : Component;
+public sealed partial class ClockworkStructureComponent : Component
+{
+    /// <summary>
+    /// From where this entity is getting charges.
+    /// </summary>
+    [DataField]
+    public EntityUid? Transferrer;
+}

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Charges.Components;
+using Content.Shared.Verbs;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.ClockworkCult.Power.Components;
 using Robust.Shared.Timing;
@@ -25,6 +26,7 @@ public sealed class ClockworkPowerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ClockworkPowerTransferSystem _powerTransfer = default!;
     [Dependency] private readonly EntityQuery<PowerVeinComponent> _powerVeinQuery = default!;
+    [Dependency] private readonly EntityQuery<ClockwinderComponent> _clockwinderQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -34,6 +36,7 @@ public sealed class ClockworkPowerSystem : EntitySystem
         SubscribeLocalEvent<ClockworkPowerSourceComponent, AnchorStateChangedEvent>(OnAnchored);
 
         SubscribeLocalEvent<ClockworkStructureComponent, ClockwinderInteractEvent>(OnClockwinder);
+        SubscribeLocalEvent<ClockworkStructureComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
     }
 
     /// <summary>
@@ -93,5 +96,27 @@ public sealed class ClockworkPowerSystem : EntitySystem
 
         // Add the connection to the transferrer
         _powerTransfer.AddConnection(transferrer, ent.Owner);
+
+        ent.Comp.Transferrer = transferrer;
+        Dirty(ent);
+    }
+
+    private void OnGetVerbs(Entity<ClockworkStructureComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract || !args.CanComplexInteract || args.Using is not {} itemUsing)
+            return;
+
+        if (!_clockwinderQuery.HasComp(itemUsing))
+            return;
+
+        args.Verbs.Add(new AlternativeVerb()
+        {
+            Text = "Clear Connection",
+            IconEntity = GetNetEntity(itemUsing),
+            Act = () =>
+            {
+                _powerTransfer.RemoveConnection(ent.AsNullable());
+            }
+        });
     }
 }
