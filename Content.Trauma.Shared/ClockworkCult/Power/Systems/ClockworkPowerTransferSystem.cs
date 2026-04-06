@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Charges.Components;
+using Content.Shared.Charges.Systems;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.ClockworkCult.Power.Components;
 using Robust.Shared.Timing;
@@ -13,7 +15,9 @@ public sealed class ClockworkPowerTransferSystem : EntitySystem
 {
     [Dependency] private readonly ClockwinderSystem _clockwinder = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly EntityQuery<LimitedChargesComponent> _chargesQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -27,16 +31,46 @@ public sealed class ClockworkPowerTransferSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        // TODO: Optimize this more?
         var now = _timing.CurTime;
+        var eqe = EntityQueryEnumerator<ActiveClockworkTransferrerComponent, ClockworkTransferrerComponent>();
+        while (eqe.MoveNext(out var uid, out var active, out var transferrer))
+        {
+            if (now < active.NextUpdate)
+                continue;
 
-        // TODO: Implement active component
+            if (!_chargesQuery.TryComp(uid, out var chargesTransferrer))
+                continue;
+
+            // The current active connections
+            var activeConnections = transferrer.Connections.Count;
+            if (activeConnections == 0) // should never happen
+                continue;
+
+            var chargesPerConnection = transferrer.Transfer / activeConnections;    // The charge to give per connection active
+            var totalChargesToRemove = -(transferrer.Transfer * activeConnections); // The total charges to remove from us
+
+            // Remove the charges from us, based on the amount of connections
+            _charges.AddCharges((uid,chargesTransferrer), totalChargesToRemove);
+            Log.Debug($"Removed {totalChargesToRemove} from: {uid.Id}.");
+
+            // Add the charges we removed to the connections
+            foreach (var structure in transferrer.Connections)
+            {
+                _charges.AddCharges(structure, chargesPerConnection - transferrer.TransferLossPerConnection);
+                Log.Debug($"Added {chargesPerConnection} to: {structure.Id}. " +
+                          $"Lost {transferrer.TransferLossPerConnection} charges.");
+            }
+
+            active.NextUpdate = now + transferrer.UpdateInterval;
+            Dirty(uid, active);
+        }
     }
 
     private void OnClockwinderInteract(Entity<ClockworkTransferrerComponent> ent, ref ClockwinderInteractEvent args)
     {
         // Either overrides the current transferrer, or sets it if there isn't one
         _clockwinder.SetTransferrer(args.Clockwinder,  ent.Owner);
-        args.Handled = true; // Handle here, since it may have ClockworkStructureComponent too
     }
 
     #region Public Api
@@ -44,11 +78,19 @@ public sealed class ClockworkPowerTransferSystem : EntitySystem
     /// <summary>
     /// Adds a new connection to the transferrer, and raises a <see cref="ClockworkConnectionEvent"/> event.
     /// </summary>
-    /// <param name="ent"></param>
-    /// <param name="target"></param>
     public void AddConnection(Entity<ClockworkTransferrerComponent?> ent, EntityUid target)
     {
         if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        if (ent.Comp.Connections.Contains(target))
+        {
+            _popup.PopupPredicted("Already exists in the connections!", target, null, PopupType.SmallCaution);
+            return;
+        }
+
+        // Disallow from transferring to same entity
+        if (ent.Owner == target)
             return;
 
         // More than max connections, can't connect!
@@ -65,16 +107,9 @@ public sealed class ClockworkPowerTransferSystem : EntitySystem
         ent.Comp.Connections.Add(target);
         Dirty(ent);
 
-        // Raise event here to update the charge output
-        var ev = new ClockworkConnectionEvent();
-        RaiseLocalEvent(ent.Owner, ref ev);
+        // Establish the active component so power is transferred to the connections.
+        EnsureComp<ActiveClockworkTransferrerComponent>(ent.Owner);
     }
 
     #endregion
 }
-
-/// <summary>
-/// Raised on the transferrer to update its power production.
-/// </summary>
-[ByRefEvent]
-public record struct ClockworkConnectionEvent;

@@ -8,10 +8,9 @@
     sprite: Structures/Furniture/chairs.rsi
     state: office-dark
   - type: ClockworkPowerSource
-    rechargeRate: 50
-    rechargeTime: 2
+    rechargeTime: 0.5 # 1 charge every half-second
   - type: ClockworkTransferrer # Can be connected to ClockworkStructure
-    maxConnections: 5
+    maxConnections: 2
   - type: LimitedCharges
     maxCharges: 1000
     lastCharges: -1 # Starts at 0 if negative
@@ -25,10 +24,25 @@
   - type: Sprite
     sprite: Structures/Furniture/chairs.rsi
     state: office-dark
-  - type: ClockworkPowerSource
-    rechargeRate: 50
-    rechargeTime: 2
   - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
   - type: LimitedCharges
     maxCharges: 1000
     lastCharges: -1
+
+- type: entity
+  id: BaseClockworkPowerPole
+  name: Clockwork Power Pole
+  description: Testing.
+  parent: BaseStructureDynamic
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    state: office-dark
+  - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
+  - type: ClockworkTransferrer # Can be connected to ClockworkStructure
+    maxConnections: 5
+    transferLossPerConnection: 1 # Gets decreased from Transfer variable
+    transfer: 10
+  - type: LimitedCharges
+    maxCharges: 500
+    lastCharges: -1 # Starts at 0 if negative

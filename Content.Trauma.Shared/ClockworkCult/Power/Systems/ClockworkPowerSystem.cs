@@ -88,7 +88,7 @@ public sealed class ClockworkPowerSystem : EntitySystem
 
     private void OnClockwinder(Entity<ClockworkStructureComponent> ent, ref ClockwinderInteractEvent args)
     {
-        if (args.Handled || args.Transferrer is not {} transferrer)
+        if (args.Transferrer is not {} transferrer)
             return;
 
         // Add the connection to the transferrer
