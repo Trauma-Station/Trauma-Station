@@ -207,7 +207,7 @@
   components:
   - type: StationEvent
     weight: 1 # Trauma - Was 3
-    earliestStart: 60 # Trauma - Was 30
+    earliestStart: 30
     #recorruenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 50
@@ -240,7 +240,7 @@
   - type: StationEvent
     weight: 1 # Trauma - was 6
     duration: null
-    earliestStart: 45
+    earliestStart: 40 # Trauma - Was 45. Lowered so it works better with our schedulers
     #reoccurrenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 30
@@ -597,7 +597,7 @@
   id: LoneOpsSpawn
   components:
   - type: StationEvent
-    earliestStart: 60 # Trauma - Was 35
+    earliestStart: 35
     weight: 1 # Trauma - was 5.5
     minimumPlayers: 50 # Goobstation - was 20
     duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
