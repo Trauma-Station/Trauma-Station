@@ -6,9 +6,9 @@ namespace Content.Trauma.Common.Attribute.Components;
 
 /// <summary>
 /// Stores information about an attribute, assigned
-/// to a dummy entity that is parented to some entity with <see cref="KnowledgeContainerComponent"/>, usually a brain.
+/// to a dummy entity that is parented to some entity with <see cref="AttributeContainerComponent"/>, usually a brain.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, EntityCategory("Knowledge")]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, EntityCategory("Attribute")]
 public sealed partial class AttributeComponent : Component
 {
     /// <summary>
