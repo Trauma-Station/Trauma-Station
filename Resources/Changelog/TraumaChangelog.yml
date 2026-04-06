@@ -6456,3 +6456,13 @@ Entries:
   id: 747
   time: '2026-04-05T14:15:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1876
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      You can no longer drag-drop items for construction, etc. It was way too
+      buggy with stuff like dead morphs and spiders letting you disguise or pry
+      doors.
+  id: 748
+  time: '2026-04-05T21:33:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1880

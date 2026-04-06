@@ -42,7 +42,6 @@
         - Book
   - type: StaticPrice
     price: 450
-  - type: DragDropTargetable
   # </Trauma>
   - type: MobMover
   - type: Mech

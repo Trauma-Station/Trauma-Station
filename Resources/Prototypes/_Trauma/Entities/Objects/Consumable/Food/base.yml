@@ -1,0 +1,21 @@
+- type: entity
+  abstract: true
+  id: BasePerishableFood
+  components:
+  - type: Perishable
+    rotAfter: 1200
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+  - type: AtmosExposed
+  - type: Temperature
+    currentTemperature: 290
+    specificHeat: 25
+  - type: TemperatureDamage
+  - type: InternalTemperature
+    thickness: 0.02
+    area: 0.02
+    conductivity: 15
+  - type: BurnableFood
+    burnTemp: 550
