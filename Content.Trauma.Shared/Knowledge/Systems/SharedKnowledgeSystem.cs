@@ -82,6 +82,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         LoadSkillPrototypes();
     }
 
+    /// <inheritdoc/>
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -92,7 +93,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         _nextUpdate = _timing.CurTime + _updateDelay;
 
         // client only predicts rolling for itself
-        if (_player.LocalEntity is {} player)
+        if (_player.LocalEntity is { } player)
         {
             UpdateHolder(player);
             return;
