@@ -7,8 +7,6 @@
     department: Silicon
   - type: Sprite
     state: ai
-  # TODO: remove after every map has ai core spawners mapped
-  - type: ExtraAiCoreTarget
 
 - type: entity
   parent: AreaAi
