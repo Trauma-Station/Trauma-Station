@@ -45,6 +45,7 @@ namespace Content.IntegrationTests.Tests
                 .Where(p => !p.Components.ContainsKey("Supermatter")) // Supermatter eats everything, oh no!
                 .Where(p => !p.Components.ContainsKey("GameRule")) // are you stupid why would you do this
                 .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // randomly spawns things...
+                .Where(p => !p.Components.ContainsKey("Area"))
                 // </Trauma>
                 .Select(p => p.ID)
                 .ToList();
@@ -170,6 +171,7 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("Meteor")) // spawning the rocks gives it a stroke
                     .Where(p => !p.Components.ContainsKey("Mutation")) // waste of time, mutation test exists
                     .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // spawns things
+                    .Where(p => !p.Components.ContainsKey("Area")) // deletes itself if spawned in space
                     // </Trauma>
                     .Select(p => p.ID)
                     .ToList();
@@ -374,6 +376,7 @@ namespace Content.IntegrationTests.Tests
                 "Slime",
                 "Anomaly", // they can spawn spark effects
                 "LabyrinthPortal", // it randomly spawns things
+                "Area", // map tests spawn ~every area anyway, this fails from trying to spawn an area in space
                 // </Trauma>
             };
 

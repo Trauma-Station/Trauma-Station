@@ -1,0 +1,5 @@
+- type: antag
+  id: Morph
+  name: ghost-role-information-morph-name
+  objective: ghost-role-information-morph-description
+  antagonist: true

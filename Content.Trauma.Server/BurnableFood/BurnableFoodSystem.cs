@@ -37,13 +37,23 @@ public sealed partial class BurnableFoodSystem : EntitySystem
         _burned.Add(ent);
     }
 
-    public override void FrameUpdate(float frameTime)
+    public override void Update(float frameTime)
     {
-        base.FrameUpdate(frameTime);
+        base.Update(frameTime);
 
         foreach (var ent in _burned)
         {
-            Burn(ent);
+            if (!Exists(ent))
+                continue;
+
+            try
+            {
+                Burn(ent);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception while burning {ToPrettyString(ent)}: {e}");
+            }
         }
         _burned.Clear();
     }

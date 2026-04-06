@@ -22,6 +22,8 @@
     # <Trauma>
     PlantAnalyzer: 2
     HydroponicsWateringCan: 1
+    CigPackBotany: 2
+    CigCartonBotany: 1
     # </Trauma>
   contrabandInventory:
     ChemistryBottleUnstableMutagen: 1

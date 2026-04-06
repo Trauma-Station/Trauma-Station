@@ -1,6 +1,6 @@
 # TODO: dont use a fucking lathe...
 - type: entity
-  parent: BaseMachine
+  parent: [ BaseMetallicSteel, BaseMachine ]
   id: AnvilComplete
   name: anvil
   description: Use this to make ingots into the desired creation.
@@ -8,15 +8,7 @@
   - type: Sprite
     sprite: _Trauma/Structures/Forging/anvil.rsi
     state: icon
-  - type: MaterialStorage
-    whitelist:
-      tags:
-      - IngotWorkable # have to heat it up to the right temperature
-  - type: Lathe
-    idleState: icon
-    runningState: burning
-    staticPacks:
-    - AnvilStatic
+  - type: ForgingAnvil
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
@@ -32,21 +24,13 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-  - type: Appearance
   - type: ActivatableUI
-    key: enum.LatheUiKey.Key
+    key: enum.AnvilUiKey.Key
   - type: UserInterface
     interfaces:
-      enum.LatheUiKey.Key:
-        type: LatheBoundUserInterface
-      enum.ResearchClientUiKey.Key:
-        type: ResearchClientBoundUserInterface
-  - type: AutomationSlots
-    slots:
-    - !type:AutomatedMaterialStorage
-      input: AutomationSlotMaterials
-      output: null
-  - type: Animateable
+      enum.AnvilUiKey.Key:
+        type: ForgingAnvilBUI
+  # TODO: automation upgrade signal port to create the last item
   - type: Construction
     graph: Anvil
     node: anvil

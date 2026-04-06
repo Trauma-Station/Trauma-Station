@@ -13,7 +13,7 @@ namespace Content.Trauma.Client.RadialSelector;
 public sealed class RadialSelectorMenuBUI : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    private readonly ConstructionSystem _construction;
+    private ConstructionSystem _construction;
 
     public SimpleRadialMenu Menu;
 
@@ -58,7 +58,7 @@ public sealed class RadialSelectorMenuBUI : BoundUserInterface
         var models = new List<RadialMenuOptionBase>();
         foreach (var entry in entries)
         {
-            if (entry.Category is { } category)
+            if (entry.Category is {} category)
             {
                 var children = CreateModels(category.Entries);
                 models.Add(new RadialMenuNestedLayerOption(children)
@@ -67,7 +67,7 @@ public sealed class RadialSelectorMenuBUI : BoundUserInterface
                     IconSpecifier = RadialMenuIconSpecifier.With(category.Icon)
                 });
             }
-            else if (entry.Prototype is { } proto)
+            else if (entry.Prototype is {} proto)
             {
                 models.Add(new RadialMenuActionOption<string>(OnPressed, proto)
                 {
