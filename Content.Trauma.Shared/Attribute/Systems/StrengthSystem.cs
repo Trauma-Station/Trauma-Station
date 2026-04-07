@@ -13,13 +13,10 @@ namespace Content.Trauma.Shared.Attribute.Systems;
 /// </summary>
 public sealed class StrengthSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAttributeSystem _attribute = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        // Actual Gameplay Methods
         SubscribeLocalEvent<AttributeHolderComponent, InstantUncuffEvent>(OnUncuff);
     }
 

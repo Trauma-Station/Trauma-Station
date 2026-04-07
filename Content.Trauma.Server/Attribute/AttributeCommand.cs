@@ -3,6 +3,7 @@
 using System.Linq;
 using Content.Server.Administration;
 using Content.Shared.Administration;
+using Content.Shared.FixedPoint;
 using Content.Trauma.Shared.Attribute.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
@@ -15,7 +16,7 @@ public sealed class AttributeCommand : ToolshedCommand
     private SharedAttributeSystem? _attribute;
 
     [CommandImplementation("add")]
-    public EntityUid Add([PipedArgument] EntityUid input, [CommandArgument] EntProtoId proto, [CommandArgument] int level)
+    public EntityUid Add([PipedArgument] EntityUid input, [CommandArgument] EntProtoId proto, [CommandArgument] FixedPoint2 level)
     {
         _attribute ??= GetSys<SharedAttributeSystem>();
 
@@ -25,7 +26,7 @@ public sealed class AttributeCommand : ToolshedCommand
     }
 
     [CommandImplementation("add")]
-    public IEnumerable<EntityUid> Add([PipedArgument] IEnumerable<EntityUid> input, [CommandArgument] EntProtoId proto, [CommandArgument] int level)
+    public IEnumerable<EntityUid> Add([PipedArgument] IEnumerable<EntityUid> input, [CommandArgument] EntProtoId proto, [CommandArgument] FixedPoint2 level)
         => input.Select(x => Add(x, proto, level));
 
     [CommandImplementation("list")]

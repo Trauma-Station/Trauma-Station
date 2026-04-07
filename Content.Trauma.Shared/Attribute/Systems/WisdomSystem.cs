@@ -11,8 +11,6 @@ namespace Content.Trauma.Shared.Attribute.Systems;
 /// </summary>
 public sealed partial class WisdomSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAttributeSystem _attribute = default!;
-
     public override void Initialize()
     {
         base.Initialize();
