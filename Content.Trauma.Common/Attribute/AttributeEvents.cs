@@ -71,12 +71,12 @@ public record struct GetMoraleModifierEvent(int Mod = 0);
 /// Raised on an attribute holder to determine if a contest has suceeded. Default logic should go as if this has succeeded.
 /// </summary>
 [ByRefEvent]
-public record struct OnAttributeSingleContest(Action<EntityUid> RaiseEvent, Func<int> GetMod, int Threshold = 10, bool Failed = false, bool CriticallyFailed = false, bool CriticallySucceeded = false, int Rolled = 0);
+public record struct OnAttributeSingleContest(int DiceUser = 20, int ModUser = 0, int Threshold = 10, bool Failed = false, bool CriticallyFailed = false, bool CriticallySucceeded = false);
 
 /// <summary>
 /// Raised on an attribute holder to determine if an opposed contest has suceeded. This call can go against items, whatever. Default logic should go as if this has succeeded.
 /// </summary>
 [ByRefEvent]
-public record struct OnAttributeOpposedContest(Action<EntityUid> RaiseEvent, Action<EntityUid> RaiseEvent2, Func<(int, int)> GetMod, EntityUid Opposer, bool Failed = false,
-    bool CriticallyFailedUser = false, bool CriticallySucceededUser = false, int RolledSelf = 0,
-    bool CriticallyFailedOpposed = false, bool CriticallySucceededOpposed = false, int RolledOpposed = 0);
+public record struct OnAttributeOpposedContest(EntityUid Opposer, int DiceUser = 20, int ModUser = 0, int DiceOpposed = 20, int ModOpposed = 0, bool Failed = false,
+    bool CriticallyFailedUser = false, bool CriticallySucceededUser = false,
+    bool CriticallyFailedOpposed = false, bool CriticallySucceededOpposed = false);

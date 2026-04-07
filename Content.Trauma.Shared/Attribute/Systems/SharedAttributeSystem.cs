@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Body;
+using Content.Shared.Chemistry;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.Random.Helpers;
@@ -411,37 +412,49 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
 
     private void OnSingleContest(Entity<AttributeHolderComponent> ent, ref OnAttributeSingleContest args)
     {
-        args.RaiseEvent(ent.Owner);
-        var mod = args.GetMod();
-
-        var rolled = RollContest(ent.Owner);
-        args.CriticallySucceeded = (rolled == 20);
-        args.CriticallyFailed = (rolled == 1);
-        args.Failed = (rolled + mod <= args.Threshold);
-        args.Rolled = rolled;
+        (args.DiceUser, args.CriticallySucceeded) = RollContest(args.DiceUser, ent.Owner);
+        args.Failed = (args.DiceUser + args.ModUser <= args.Threshold);
+        args.CriticallyFailed = (args.DiceUser == 1);
     }
 
     private void OnOpposedContest(Entity<AttributeHolderComponent> ent, ref OnAttributeOpposedContest args)
     {
-        args.RaiseEvent(ent.Owner);
-        args.RaiseEvent2(args.Opposer);
-        var mod = args.GetMod();
+        (args.DiceUser, args.CriticallySucceededUser) = RollContest(args.DiceUser, ent.Owner);
+        (args.DiceOpposed, args.CriticallySucceededOpposed) = RollContest(args.DiceOpposed, args.Opposer);
 
-        var rolled = RollContest(ent.Owner);
-        var opposing = RollContest(args.Opposer);
-
-        args.CriticallySucceededUser = (rolled == 20);
-        args.CriticallyFailedUser = (rolled == 1);
-        args.Failed = (rolled + mod.Item1 <= opposing + mod.Item2);
-        args.CriticallySucceededOpposed = (opposing == 20);
-        args.CriticallyFailedOpposed = (opposing == 1);
-        args.RolledSelf = rolled;
-        args.RolledOpposed = opposing;
+        args.Failed = (args.DiceUser + args.ModUser <= args.DiceOpposed + args.ModOpposed);
+        args.CriticallyFailedUser = (args.DiceUser == 1);
+        args.CriticallyFailedOpposed = (args.DiceOpposed == 1);
     }
 
-    private int RollContest(EntityUid uid)
+    private (int, bool) RollContest(int diceType, EntityUid uid)
     {
-        return SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid)).Next(1, 20 + 1);
+        var dice = diceType;
+        var pen = false;
+        int amount = 0;
+        int count = 0;
+
+        while (count < 10)
+        {
+            var rolled = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid)).Next(1, dice + 1);
+            amount += rolled;
+            if (rolled == dice)
+            {
+                pen = true;
+                amount -= 1;
+            }
+            else
+                return (amount, pen);
+            count++;
+            dice = dice switch
+            {
+                100 => 20,
+                20 => 6,
+                _ => dice,
+            };
+        }
+
+        return (amount, pen);
     }
 }
 
