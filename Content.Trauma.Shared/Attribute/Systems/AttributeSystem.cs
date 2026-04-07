@@ -3,6 +3,8 @@
 using Content.Shared.Body;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
+using Content.Shared.Random.Helpers;
+using Content.Trauma.Common.Attribute;
 using Content.Trauma.Common.Attribute.Components;
 using Content.Trauma.Common.Attribute.Systems;
 using Content.Trauma.Common.Silicons.Borgs;
@@ -55,7 +57,10 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         SubscribeLocalEvent<AttributeHolderComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
-        LoadSkillPrototypes();
+        SubscribeLocalEvent<AttributeHolderComponent, OnAttributeSingleContest>(OnSingleContest);
+        SubscribeLocalEvent<AttributeHolderComponent, OnAttributeOpposedContest>(OnOpposedContest);
+
+        LoadAttributePrototypes();
     }
 
     private void OnContainerStartup(Entity<AttributeContainerComponent> ent, ref ComponentStartup args)
@@ -138,10 +143,10 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<EntityPrototype>())
-            LoadSkillPrototypes();
+            LoadAttributePrototypes();
     }
 
-    private void LoadSkillPrototypes()
+    private void LoadAttributePrototypes()
     {
         AllAttributes.Clear();
         var name = Factory.GetComponentName<AttributeComponent>();
@@ -408,6 +413,41 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         FixedPoint2 rawY = minY + (input - minX) * (maxY - minY) / (maxX - minX);
 
         return rawY.Int();
+    }
+
+    private void OnSingleContest(Entity<AttributeHolderComponent> ent, ref OnAttributeSingleContest args)
+    {
+        args.RaiseEvent(ent.Owner);
+        var mod = args.GetMod();
+
+        var rolled = RollContest(ent.Owner);
+        args.CriticallySucceeded = (rolled == 20);
+        args.CriticallyFailed = (rolled == 1);
+        args.Failed = (rolled + mod <= args.Threshold);
+        args.Rolled = rolled;
+    }
+
+    private void OnOpposedContest(Entity<AttributeHolderComponent> ent, ref OnAttributeOpposedContest args)
+    {
+        args.RaiseEvent(ent.Owner);
+        args.RaiseEvent2(args.Opposer);
+        var mod = args.GetMod();
+
+        var rolled = RollContest(ent.Owner);
+        var opposing = RollContest(args.Opposer);
+
+        args.CriticallySucceededUser = (rolled == 20);
+        args.CriticallyFailedUser = (rolled == 1);
+        args.Failed = (rolled + mod.Item1 <= opposing + mod.Item2);
+        args.CriticallySucceededOpposed = (opposing == 20);
+        args.CriticallyFailedOpposed = (opposing == 1);
+        args.RolledSelf = rolled;
+        args.RolledOpposed = opposing;
+    }
+
+    private int RollContest(EntityUid uid)
+    {
+        return SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid)).Next(1, 20 + 1);
     }
 }
 

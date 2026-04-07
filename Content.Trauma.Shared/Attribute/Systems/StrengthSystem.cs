@@ -3,6 +3,7 @@
 using Content.Shared.FixedPoint;
 using Content.Trauma.Common.Attribute;
 using Content.Trauma.Common.Attribute.Components;
+using Content.Trauma.Common.Cuffs;
 using Content.Trauma.Shared.Attribute.Components;
 
 namespace Content.Trauma.Shared.Attribute.Systems;
@@ -24,6 +25,9 @@ public sealed class StrengthSystem : EntitySystem
         SubscribeLocalEvent<StrengthFeatComponent, GetStrengthFeatEvent>(OnStrengthFeat);
         SubscribeLocalEvent<AttributeHolderComponent, GetCarryLimitsEvent>(_attribute.RelayEvent);
         SubscribeLocalEvent<StrengthFeatComponent, GetCarryLimitsEvent>(OnCarry);
+
+        // Actual Gameplay Methods
+        SubscribeLocalEvent<AttributeHolderComponent, InstantUncuffEvent>(OnUncuff);
     }
 
     private void OnCalculateDamage(Entity<DamageAttributeComponent> ent, ref GetDamageModifierEvent args)
@@ -50,5 +54,19 @@ public sealed class StrengthSystem : EntitySystem
         args.Lift += SharedAttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, 32, 675);
         args.Carry += SharedAttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, 15, 384);
         args.Drag += SharedAttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, 80, 1688);
+    }
+
+    private void OnUncuff(Entity<AttributeHolderComponent> ent, ref InstantUncuffEvent args)
+    {
+        var selfEv = new GetStrengthFeatEvent();
+        var cuffsEv = new GetStrengthFeatEvent();
+
+        var ev = new OnAttributeOpposedContest(uid => RaiseLocalEvent(uid, ref selfEv), uid => RaiseLocalEvent(uid, ref cuffsEv), () => (selfEv.Mod, cuffsEv.Mod), args.Cuff);
+
+        RaiseLocalEvent(ent, ev);
+        if (ev.Failed)
+            return;
+
+        args.CuffsBroken = true;
     }
 }
