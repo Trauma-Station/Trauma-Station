@@ -84,6 +84,7 @@
     species: IPC
     # <Trauma>
   - type: KnowledgeHolder
+  - type: AttributeHolder
     # </Trauma>
 
 - type: entity

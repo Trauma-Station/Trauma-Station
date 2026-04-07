@@ -1556,6 +1556,7 @@
     dormant:
     - MutationMonkified
   - type: KnowledgeHolder
+  - type: AttributeHolder
   # </Trauma>
   - type: NameIdentifier
     group: Monkey
@@ -1595,6 +1596,7 @@
   components:
   # <Trauma>
   - type: KnowledgeHolder
+  - type: AttributeHolder
   # </Trauma>
   - type: NameIdentifier
     group: Monkey

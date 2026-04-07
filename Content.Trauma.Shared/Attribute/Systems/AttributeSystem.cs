@@ -26,11 +26,11 @@ namespace Content.Trauma.Shared.Attribute.Systems;
 /// </summary>
 public sealed partial class SharedAttributeSystem : CommonAttributeSystem
 {
-    [Dependency] protected readonly IConfigurationManager _cfg = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly IPrototypeManager _proto = default!;
-    [Dependency] protected readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityQuery<AwakeMobComponent> _awakeQuery = default!;
     [Dependency] private readonly EntityQuery<AttributeComponent> _query = default!;

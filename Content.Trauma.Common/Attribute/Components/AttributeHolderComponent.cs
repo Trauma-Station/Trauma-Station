@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Common.Attribute.Components;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AttributeHolderComponent : Component
 {
     /// <summary>
