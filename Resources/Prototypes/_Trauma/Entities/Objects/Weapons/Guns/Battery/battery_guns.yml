@@ -77,7 +77,7 @@
     burstCooldown: 0.2
   - type: BatteryAmmoProvider
     proto: LaserCarbineBullet
-    fireCost: 31.25
+    fireCost: 25
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_carbine.rsi
   - type: Clothing
