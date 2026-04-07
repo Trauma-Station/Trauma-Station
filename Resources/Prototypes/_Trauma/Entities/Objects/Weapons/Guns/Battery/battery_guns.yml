@@ -65,7 +65,9 @@
   description: The burst fire Type 5/R Rapid Heat Delivery System, developed by Nanotrasen. Capable of firing a sustained volley of directed energy projectiles, though each individual projectile lacks the punch of the Type 5.
   components:
   - type: Gun
-    maxAngle: 40
+    minAngle: 22
+    maxAngle: 46
+    angleIncrease: 2
     selectedMode: Burst
     availableModes:
     - Burst

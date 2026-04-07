@@ -164,7 +164,7 @@
       types:
         Heat: 20
   - type: IgniteOnCollide
-    fireStacks: 1.5
+    fireStacks: 1
 
 # Revolver
 
