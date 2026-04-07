@@ -2,6 +2,7 @@
 
 using Content.Goobstation.Common.Construction;
 using Content.Shared.Construction.Prototypes;
+using Content.Shared.Popups;
 using Content.Trauma.Common.Construction;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Quality;
@@ -19,6 +20,7 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly QualitySystem _quality = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<QualityPrototype> BaseQuality = "BaseQuality";
 
@@ -39,7 +41,7 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
         if (_knowledge.GetContainer(ent) is not { } brain)
         {
             if (args.LogError)
-                Log.Error($"{ToPrettyString(ent)} tried to construct {args.Prototype} without having a knowledge container!");
+                _popup.PopupEntity("You have no brain!", ent, ent, PopupType.MediumCaution);
             args.Cancelled = true;
             return;
         }
@@ -50,7 +52,12 @@ public sealed class ConstructionKnowledgeSystem : EntitySystem
         {
             if (!brain.Comp.KnowledgeDict.TryGetValue(id, out var unit) || _knowledge.GetMastery(unit) < mastery)
             {
-                Log.Error($"{ToPrettyString(ent)} tried to construct {args.Prototype} but is missing {id} mastery {mastery}!");
+                if (args.LogError)
+                {
+                    var masteryName = _knowledge.GetMasteryString(mastery);
+                    var name = _proto.Index(id).Name;
+                    _popup.PopupEntity("You are missing {masteryName} {name} to construct that!", ent, ent, PopupType.MediumCaution);
+                }
                 args.Cancelled = true;
                 return;
             }
