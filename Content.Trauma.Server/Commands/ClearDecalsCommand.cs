@@ -33,7 +33,7 @@ public sealed class ClearDecalsCommand : IConsoleCommand
         while (query.MoveNext(out var gridUid, out var decal))
         {
             _decals.Clear();
-            foreach (var id in decal.DecalIndex.Values)
+            foreach (var id in decal.DecalIndex.Keys)
             {
                 _decals.Add(id);
             }
