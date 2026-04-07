@@ -23,7 +23,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.Commands;
 
-//[TestFixture] // Trauma - don't run these tests at all, /suicide is disabled
+[TestFixture]
 public sealed class SuicideCommandTests
 {
 
@@ -65,6 +65,7 @@ public sealed class SuicideCommandTests
     /// Should successfully kill the player and ghost them
     /// </summary>
     [Test]
+    [Explicit] // Trauma - /suicide is disabled
     public async Task TestSuicide()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings
@@ -117,6 +118,7 @@ public sealed class SuicideCommandTests
     /// This should only deal as much damage as necessary to get to the dead threshold
     /// </summary>
     [Test]
+    [Explicit] // Trauma - /suicide is disabled
     public async Task TestSuicideWhileDamaged()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings
@@ -180,6 +182,7 @@ public sealed class SuicideCommandTests
     /// Should only ghost the player but not kill them
     /// </summary>
     [Test]
+    [Explicit] // Trauma - /suicide is disabled
     public async Task TestSuicideWhenCannotSuicide()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings
@@ -231,6 +234,7 @@ public sealed class SuicideCommandTests
     /// Run the suicide command while the player is holding an execution-capable weapon
     /// </summary>
     [Test]
+    [Explicit] // Trauma - /suicide is disabled
     public async Task TestSuicideByHeldItem()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings
