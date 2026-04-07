@@ -6,11 +6,9 @@ using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
-using Content.Shared.Light;
-using Content.Shared.Light.Components;
-using Content.Shared.Lock;
 using Content.Shared.Maps;
 using Content.Trauma.Shared.HolographicProjector.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
@@ -24,7 +22,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
@@ -33,10 +31,9 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly GenericFieldSystem _genericfield = default!;
     [Dependency] private readonly SharedDeviceLinkSystem _signalSystem = default!;
-    [Dependency] private readonly SharedRgbLightControllerSystem _rgbSystem = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -47,8 +44,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ReAnchorEvent>(OnReanchorEvent);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ComponentRemove>(OnComponentRemoved);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, ComponentStartup>(OnInit);
+        SubscribeLocalEvent<GenericFieldGeneratorComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ChargeChangedEvent>(OnChargeChanged);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, SignalReceivedEvent>(OnSignalReceived);
@@ -61,7 +57,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         var query = EntityQueryEnumerator<GenericFieldGeneratorComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (!TryComp<BatteryComponent>(uid, out var batteryComponent)
+            if (!HasComp<BatteryComponent>(uid)
             || _timing.CurTime < comp.PowerTimer)
                 continue;
 
@@ -74,18 +70,16 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
     #region Events
 
-    private void OnInit(Entity<GenericFieldGeneratorComponent> ent, ref ComponentStartup args)
+    private void OnStartup(Entity<GenericFieldGeneratorComponent> ent, ref ComponentStartup args)
     {
         _signalSystem.EnsureSinkPorts(ent, ent.Comp.TogglePort, ent.Comp.OnPort, ent.Comp.OffPort);
         _signalSystem.EnsureSourcePorts(ent, ent.Comp.ConnectionStatusPort, ent.Comp.FieldConnectedPort, ent.Comp.FieldDisconnectedPort);
-    }
-
-    private void OnMapInit(Entity<GenericFieldGeneratorComponent> ent, ref MapInitEvent args)
-    {
         ChangePowerVisualizer(ent);
         ChangeOnLightVisualizer(ent);
         UpdateConnectionLights(ent);
         ChangeConnectionLightVisualizer(ent);
+        if (!ent.Comp.Enabled) return;
+        TryGenerateFieldConnection(ent);
     }
 
     private void OnActivate(Entity<GenericFieldGeneratorComponent> ent, ref ActivateInWorldEvent args)
@@ -106,6 +100,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
         args.Handled = true;
         ChangeOnLightVisualizer(ent);
+        Dirty(ent, ent.Comp);
     }
 
     private void OnAnchorChanged(Entity<GenericFieldGeneratorComponent> ent, ref AnchorStateChangedEvent args)
@@ -128,27 +123,32 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     {
         if (!component.Enabled || !component.IsConnected) return;
 
-        _popupSystem.PopupClient(Loc.GetString("comp-genericfield-anchor-warning"), args.User, args.User, PopupType.LargeCaution);
+        _popup.PopupClient(Loc.GetString("comp-genericfield-anchor-warning"), args.User, args.User, PopupType.LargeCaution);
         args.Cancel();
     }
 
     private void TurnOn(Entity<GenericFieldGeneratorComponent> ent)
     {
-        if (ent.Comp.Connections != null)
-            return; // Already has an active connection
+        if (ent.Comp.ConnectedGenerator != null)
+            return;
 
-        _popupSystem.PopupClient(Loc.GetString("comp-genericfield-turned-on"), ent, _player.LocalEntity);
+        _popup.PopupClient(Loc.GetString("comp-genericfield-turned-on"), ent, _player.LocalEntity);
         ent.Comp.Enabled = true;
         TryGenerateFieldConnection(ent);
+        Dirty(ent, ent.Comp);
     }
 
     private void TurnOff(Entity<GenericFieldGeneratorComponent> ent)
     {
-        // This looks terrible, but it will stop the field from vanishing when battery is drained, but other genreator still has charge left
-        if (ent.Comp.Connections is { Item1.Comp.Charged: true }) return;
-
-        _popupSystem.PopupClient(Loc.GetString("comp-genericfield-turned-off"), ent, _player.LocalEntity);
+        _popup.PopupClient(Loc.GetString("comp-genericfield-turned-off"), ent, _player.LocalEntity);
+        _audio.PlayLocal(ent.Comp.DeactivationSound, ent, _player.LocalEntity);
         ent.Comp.Enabled = false;
+        if (ent.Comp.ConnectedGenerator is { } pair)
+        {
+            pair.Comp.Enabled = false;
+            Dirty(pair, pair.Comp);
+        }
+        Dirty(ent, ent.Comp);
         RemoveConnections(ent);
     }
 
@@ -158,21 +158,15 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// </summary>
     private void RemoveConnections(Entity<GenericFieldGeneratorComponent> ent)
     {
-        if (ent.Comp.Connections == null
-        || ent.Comp.Removing)
+        if (ent.Comp.ConnectedGenerator is not { } connectedGenerator)
             return;
 
-        var value = ent.Comp.Connections.Value; // Holy goida I ain't even touching that
-        var (otheruid, othercomponent) = value.Item1;
-
-        ent.Comp.Removing = true;
-        othercomponent.Removing = true;
-        ent.Comp.Connections = null;
-        othercomponent.Connections = null;
+        ent.Comp.ConnectedGenerator = null;
+        connectedGenerator.Comp.ConnectedGenerator = null;
         ent.Comp.IsConnected = false;
-        othercomponent.IsConnected = false;
+        connectedGenerator.Comp.IsConnected = false;
 
-        foreach (var field in value.Item2)
+        foreach (var field in ent.Comp.ConnectedFields)
         {
             if (TryComp<GenericFieldComponent>(field, out var fieldComp) && fieldComp.TempTile)
                 _genericfield.TempTileCleanup((field, fieldComp));
@@ -185,35 +179,40 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             _signalSystem.InvokePort(ent, ent.Comp.FieldDisconnectedPort);
         }
 
-        if (HasComp<DeviceLinkSourceComponent>(otheruid))
+        if (HasComp<DeviceLinkSourceComponent>(connectedGenerator))
         {
-            _signalSystem.SendSignal(otheruid, othercomponent.ConnectionStatusPort, false);
-            _signalSystem.InvokePort(otheruid, othercomponent.FieldDisconnectedPort);
+            _signalSystem.SendSignal(connectedGenerator, connectedGenerator.Comp.ConnectionStatusPort, false);
+            _signalSystem.InvokePort(connectedGenerator, connectedGenerator.Comp.FieldDisconnectedPort);
         }
 
 
         if (ent.Comp.IsConnected)
-            _popupSystem.PopupClient(Loc.GetString("comp-genericfield-disconnected"), ent, _player.LocalEntity, PopupType.LargeCaution);
+            _popup.PopupClient(Loc.GetString("comp-genericfield-disconnected"), ent, _player.LocalEntity, PopupType.LargeCaution);
 
-        if (othercomponent.IsConnected)
-            _popupSystem.PopupClient(Loc.GetString("comp-genericfield-disconnected"), otheruid, _player.LocalEntity, PopupType.LargeCaution);
+        if (connectedGenerator.Comp.IsConnected)
+            _popup.PopupClient(Loc.GetString("comp-genericfield-disconnected"), connectedGenerator, _player.LocalEntity, PopupType.LargeCaution);
 
-        ChangeConnectionLightVisualizer(value.Item1);
-        UpdateConnectionLights(value.Item1);
+        ChangeConnectionLightVisualizer(connectedGenerator);
+        UpdateConnectionLights(connectedGenerator);
         ChangeConnectionLightVisualizer(ent);
         UpdateConnectionLights(ent);
+        Dirty(ent, ent.Comp);
     }
 
     private void OnBatteryStateChanged(Entity<GenericFieldGeneratorComponent> ent, ref BatteryStateChangedEvent args)
     {
-        if (args.OldState != BatteryState.Empty && args.NewState == BatteryState.Empty && ent.Comp.Charged) //Checks if already charged to stop repeated activation when changing states rapidly
+        if (args.OldState != BatteryState.Empty && args.NewState == BatteryState.Empty && ent.Comp.Charged)
+        {
+            ent.Comp.Charged = false;
             TurnOff(ent);
-
-        if (args.OldState != BatteryState.Neither && args.NewState == BatteryState.Neither && ent.Comp.IsConnected) //Sets Charged back to true if still connected when recharged
+        }
+        else if (args.OldState != BatteryState.Full && args.NewState == BatteryState.Full && !ent.Comp.Charged)
+        {
             ent.Comp.Charged = true;
-
-        if (args.OldState != BatteryState.Full && args.NewState == BatteryState.Full && (!ent.Comp.Charged || !ent.Comp.IsConnected)) // also checks if not connected yet
-            TurnOn(ent);
+            if (ent.Comp.Enabled) // If it's on, try to connect it
+                TryGenerateFieldConnection(ent);
+        }
+        Dirty(ent, ent.Comp);
     }
 
     private void OnSignalReceived(Entity<GenericFieldGeneratorComponent> ent, ref SignalReceivedEvent args) //basic signal compatability
@@ -230,7 +229,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         {
             TurnOff(ent);
         }
-        if (args.Port == ent.Comp.TogglePort) // Toggle
+        if (args.Port == ent.Comp.TogglePort)
         {
             if (!ent.Comp.Enabled)
             {
@@ -242,6 +241,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             }
         }
         ChangeOnLightVisualizer(ent);
+        Dirty(ent, ent.Comp);
     }
 
     /// <summary>
@@ -250,13 +250,17 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// <param name="ent"></param>
     public void FieldDestroyed(Entity<GenericFieldGeneratorComponent> ent)
     {
-        if (ent.Comp.Removing)
+        if (ent.Comp.ConnectedGenerator is not { } pair)
             return;
 
         if (TryComp<BatteryComponent>(ent, out var batteryComponent))
             _battery.UseCharge(ent.Owner, batteryComponent.MaxCharge);
 
+        if (TryComp<BatteryComponent>(pair, out var pairBatteryComponent))
+            _battery.UseCharge(pair.Owner, pairBatteryComponent.MaxCharge);
+
         RemoveConnections(ent);
+        _audio.PlayLocal(ent.Comp.DeactivationSound, ent, _player.LocalEntity);
     }
 
     private void OnChargeChanged(Entity<GenericFieldGeneratorComponent> ent, ref ChargeChangedEvent args)
@@ -272,16 +276,15 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// This will attempt to establish a connection of fields between two generators.
     /// If all the checks pass and fields spawn, it will store this connection on each respective ent.
     /// </summary>
-    private bool TryGenerateFieldConnection(Entity<GenericFieldGeneratorComponent> ent)
+    private void TryGenerateFieldConnection(Entity<GenericFieldGeneratorComponent> ent)
     {
-        if (!ent.Comp.Enabled)
-            return false;
-
-        if (!Transform(ent).Anchored)
-            return false;
+        if (!ent.Comp.Enabled
+        || !ent.Comp.Charged
+        || !Transform(ent).Anchored)
+            return;
 
         var (worldPosition, worldRotation) = _transformSystem.GetWorldPositionRotation(Transform(ent));
-        var dirRad = worldRotation - Angle.FromDegrees(90); //needs to be like this for the raycast to work properly; changed to just use World Rotation and a fixed value
+        var dirRad = worldRotation - Angle.FromDegrees(90);
 
         var ray = new CollisionRay(worldPosition, dirRad.ToVec(), ent.Comp.CollisionMask);
         var rayCastResults = _physics.IntersectRay(Transform(ent).MapID, ray, ent.Comp.MaxLength, ent, false);
@@ -297,33 +300,31 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             break;
         }
         if (closestResult == null)
-            return false;
+            return;
 
         var target = closestResult.Value.HitEntity;
 
         if (!TryComp<GenericFieldGeneratorComponent>(target, out var otherFieldGeneratorComponent)
-        || otherFieldGeneratorComponent == ent.Comp
-        || !TryComp<PhysicsComponent>(target, out var collidableComponent)
-        || collidableComponent.BodyType != BodyType.Static
-        || Transform(ent).ParentUid != Transform(ent).ParentUid)
+        || !Transform(target).Anchored // Is the target anchored?
+        || Transform(ent).GridUid != Transform(target).GridUid // Are the generators on the same grid?
+        || otherFieldGeneratorComponent.CreatedField != ent.Comp.CreatedField // Are the generators creating the same type of field?
+        || Transform(ent).LocalRotation.GetCardinalDir() != Transform(target).LocalRotation.GetCardinalDir().GetOpposite()) // Are the generators facing eachother?
         {
-            return false;
+            return;
         }
 
-        if (otherFieldGeneratorComponent.CreatedField != ent.Comp.CreatedField) // check if other ent generates the same type of field
-            return false;
+        var otherFieldGenerator = (target, otherFieldGeneratorComponent);
+        ent.Comp.ConnectedGenerator = otherFieldGenerator;
+        otherFieldGeneratorComponent.ConnectedGenerator = otherFieldGenerator;
 
-        if (Transform(ent).LocalRotation.GetCardinalDir() != Transform(ent).LocalRotation.GetCardinalDir().GetOpposite()) // Both Generators facing opposite directions? works, dont touch it
-            return false;
-
-        var otherFieldGenerator = (ent, otherFieldGeneratorComponent);
         var fields = GenerateFieldConnection(ent, otherFieldGenerator);
 
-        ent.Comp.Connections = (otherFieldGenerator, fields);
-        otherFieldGeneratorComponent.Connections = (ent, fields);
+        ent.Comp.ConnectedFields = fields;
+        otherFieldGeneratorComponent.ConnectedFields = fields;
 
         if (!ent.Comp.IsConnected)
         {
+            ent.Comp.Enabled = true;
             ent.Comp.IsConnected = true;
             ChangeConnectionLightVisualizer(ent);
             UpdateConnectionLights(ent);
@@ -336,9 +337,12 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             UpdateConnectionLights(otherFieldGenerator);
         }
 
-        _popupSystem.PopupEntity(Loc.GetString("comp-genericfield-connected"), ent);
-        _popupSystem.PopupEntity(Loc.GetString("comp-genericfield-connected"), ent);
-        return true;
+        _popup.PopupClient(Loc.GetString("comp-genericfield-connected"), ent, _player.LocalEntity);
+        _popup.PopupClient(Loc.GetString("comp-genericfield-connected"), target, _player.LocalEntity);
+        _audio.PlayLocal(ent.Comp.ActivationSound, ent, _player.LocalEntity);
+        Dirty(ent, ent.Comp);
+        Dirty(target, otherFieldGeneratorComponent);
+        return;
     }
 
     /// <summary>
@@ -346,18 +350,15 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// </summary>
     /// <param name="firstGen">The source field ent</param>
     /// <param name="secondGen">The second ent that the source is connected to</param>
-    /// <remarks>
-    /// This is evil as fuck and I ain't fixing it any further.
-    /// </remarks>
     private List<EntityUid> GenerateFieldConnection(Entity<GenericFieldGeneratorComponent> firstGen, Entity<GenericFieldGeneratorComponent> secondGen)
     {
-        if (TryComp<DeviceLinkSourceComponent>(firstGen, out _))
+        if (HasComp<DeviceLinkSourceComponent>(firstGen))
         {
             _signalSystem.SendSignal(firstGen, firstGen.Comp.ConnectionStatusPort, true);
             _signalSystem.InvokePort(firstGen, firstGen.Comp.FieldConnectedPort);
         }
 
-        if (TryComp<DeviceLinkSourceComponent>(secondGen, out _))
+        if (HasComp<DeviceLinkSourceComponent>(secondGen))
         {
             _signalSystem.SendSignal(secondGen, secondGen.Comp.ConnectionStatusPort, true);
             _signalSystem.InvokePort(secondGen, secondGen.Comp.FieldConnectedPort);
@@ -367,48 +368,39 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         var gen1Coords = Transform(firstGen).Coordinates;
         var gen2Coords = Transform(secondGen).Coordinates;
 
-        var delta = (gen2Coords - gen1Coords).Position;
+        var delta = gen2Coords.Position - gen1Coords.Position;
         var dirVec = delta.Normalized();
         var stopDist = delta.Length();
         var currentOffset = dirVec;
+
         while (currentOffset.Length() < stopDist)
         {
             var currentCoords = gen1Coords.Offset(currentOffset);
-            var newField = Spawn(firstGen.Comp.CreatedField, currentCoords);
+            var newField = PredictedSpawnAtPosition(firstGen.Comp.CreatedField, currentCoords);
 
-            var fieldXForm = Transform(newField);
-            _transformSystem.SetParent(newField, fieldXForm, firstGen);
-            if (dirVec.GetDir() == Direction.East || dirVec.GetDir() == Direction.West)
-            {
-                var angle = fieldXForm.LocalPosition.ToAngle();
-                var rotateBy90 = angle.Degrees + 90;
-                var rotatedAngle = Angle.FromDegrees(rotateBy90);
-
-                fieldXForm.LocalRotation = rotatedAngle;
-            }
+            var xform = Transform(newField);
+            xform.LocalRotation = dirVec.ToAngle() + Math.PI / 2;
             fieldList.Add(newField);
             currentOffset += dirVec;
             if (TryComp<GenericFieldComponent>(newField, out var fieldComp))
             {
                 fieldComp.SourceGen = firstGen;
-                if (!_transformSystem.AnchorEntity(newField)) //check if entity can anchor normally first
-                {
-                    if (!_tiledef.TryGetDefinition("HolographicTile", out var tileDef))
-                        break;
+                if (_transformSystem.AnchorEntity(newField)) continue; //check if entity can anchor normally first
 
-                    var gridUid = Transform(firstGen).ParentUid;
+                if (!_tiledef.TryGetDefinition("HolographicTile", out var tileDef))
+                    break;
 
-                    if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
-                        break;
+                if (Transform(firstGen).GridUid is not { } gridUid
+                || !TryComp<MapGridComponent>(gridUid, out var mapGrid))
+                    break;
 
-                    var tile = _mapSystem.GetTileRef(gridUid, mapGrid, _transformSystem.GetMapCoordinates(newField, fieldXForm));
+                var tile = _mapSystem.GetTileRef(gridUid, mapGrid, _transformSystem.GetMapCoordinates(newField, xform));
+                _tile.ReplaceTile(tile, (ContentTileDefinition) tileDef, gridUid, mapGrid);
+                fieldComp.TempTile = true;
+                Dirty(newField, fieldComp);
 
-                    _tile.ReplaceTile(tile, (ContentTileDefinition) tileDef, gridUid, mapGrid);
-                    fieldComp.TempTile = true;
-
-                    if (!_transformSystem.AnchorEntity(newField)) // if this fails to anchor, something has gone horribly wrong
-                        RemoveConnections(firstGen); //remove connection and so it can try again
-                }
+                if (!_transformSystem.AnchorEntity(newField)) // if this fails to anchor, something has gone horribly wrong
+                    RemoveConnections(firstGen); //remove connection and so it can try again
             }
         }
         return fieldList;
@@ -428,13 +420,13 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// </summary>
     public void GridCheck(Entity<GenericFieldGeneratorComponent> ent)
     {
-        if (ent.Comp.Connections == null)
+        if (ent.Comp.ConnectedGenerator == null)
             return;
 
         var xFormQuery = GetEntityQuery<TransformComponent>();
 
-        var gen1ParentGrid = xFormQuery.GetComponent(ent).ParentUid;
-        var gent2ParentGrid = xFormQuery.GetComponent(ent.Comp.Connections.Value.Item1).ParentUid;
+        var gen1ParentGrid = xFormQuery.GetComponent(ent).GridUid;
+        var gent2ParentGrid = xFormQuery.GetComponent(ent.Comp.ConnectedGenerator.Value).GridUid;
 
         if (gen1ParentGrid != gent2ParentGrid)
             RemoveConnections(ent);

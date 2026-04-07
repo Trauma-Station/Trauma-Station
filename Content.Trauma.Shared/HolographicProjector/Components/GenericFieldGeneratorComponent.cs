@@ -1,10 +1,11 @@
+using Content.Shared.DeviceLinking;
 using Content.Shared.Physics;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Content.Shared.DeviceLinking;
 
 namespace Content.Trauma.Shared.HolographicProjector.Components;
 
@@ -16,7 +17,7 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     /// How much power should this field generator consume every 1/5th of a second?
     /// </summary>
     [DataField]
-    public float PowerDrain = 10f;
+    public float PowerDrain = 400f;
 
     /// <summary>
     /// How many tiles should this field check before giving up?
@@ -28,18 +29,21 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     /// Is the generator toggled on?
     /// </summary>
     [DataField]
+    [AutoNetworkedField]
     public bool Enabled;
 
     /// <summary>
     /// Is the generator Charged?
     /// </summary>
     [DataField]
+    [AutoNetworkedField]
     public bool Charged;
 
     /// <summary>
     /// Is this generator connected to fields?
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
+    [AutoNetworkedField]
     public bool IsConnected;
 
     /// <summary>
@@ -49,24 +53,24 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     public int CollisionMask = (int) (CollisionGroup.MobMask | CollisionGroup.Impassable | CollisionGroup.MachineMask | CollisionGroup.Opaque);
 
     /// <summary>
-    /// A collection of connections that the generator has based on direction.
+    /// The generator that this generator is paired with
+    /// </summary>
+    [ViewVariables]
+    public Entity<GenericFieldGeneratorComponent>? ConnectedGenerator;
+
+    /// <summary>
+    /// A list of fields created by this generator.
     /// Stores a list of fields connected between generators in this direction.
     /// </summary>
     [ViewVariables]
-    public (Entity<GenericFieldGeneratorComponent>, List<EntityUid>)? Connections;
+    public List<EntityUid> ConnectedFields = [];
 
     /// <summary>
     /// What fields should this spawn?
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField("createdField", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [AutoNetworkedField]
     public string CreatedField = "ContainmentField";
-
-    /// <summary>
-    /// How fast should the generator charge?
-    /// </summary>
-    [DataField]
-    public int ChargeRate = 100;
 
     /// <summary>
     /// Used to check if it's received power recently.
@@ -76,11 +80,6 @@ public sealed partial class GenericFieldGeneratorComponent : Component
 
     [DataField]
     public TimeSpan PowerTime = TimeSpan.FromSeconds(0.5);
-    
-    /// <summary>
-    /// Used to retry connection when fully charged, but not connected
-    /// </summary>
-    public bool Removing = false;
 
     //Ports
     [DataField]
@@ -94,12 +93,18 @@ public sealed partial class GenericFieldGeneratorComponent : Component
 
     [DataField]
     public ProtoId<SourcePortPrototype> ConnectionStatusPort = "ConnectionStatus";
-    
-    [DataField] 
+
+    [DataField]
     public ProtoId<SourcePortPrototype> FieldConnectedPort = "FieldConnected";
 
-    [DataField] 
+    [DataField]
     public ProtoId<SourcePortPrototype> FieldDisconnectedPort = "FieldDisconnected";
+
+    [DataField]
+    public SoundSpecifier ActivationSound = new SoundPathSpecifier("/Audio/Machines/phasein.ogg");
+
+    [DataField]
+    public SoundSpecifier DeactivationSound = new SoundPathSpecifier("/Audio/_Trauma/Effects/field_off.ogg");
 }
 
 [Serializable, NetSerializable]

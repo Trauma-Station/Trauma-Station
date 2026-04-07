@@ -1,10 +1,10 @@
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
+using Content.Trauma.Shared.HolographicProjector.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
-using Content.Trauma.Shared.HolographicProjector.Components;
 
 namespace Content.Trauma.Shared.HolographicProjector.EntitySystems;
 
@@ -21,7 +21,7 @@ public sealed class GenericFieldSystem : EntitySystem
 
         SubscribeLocalEvent<GenericFieldComponent, DestructionEventArgs>(OnDestructionEvent);
     }
-    
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -30,8 +30,8 @@ public sealed class GenericFieldSystem : EntitySystem
         while (query.MoveNext(out var uid, out var field, out var damageable))
         {
             if (_timing.CurTime < field.RegenTimer) continue;
-            
-            field.RegenTimer = RegenTime + _timing.CurTime;
+
+            field.RegenTimer = field.RegenTime + _timing.CurTime;
             _damageable.HealEvenly((uid, damageable), field.RegenRate);
         }
     }

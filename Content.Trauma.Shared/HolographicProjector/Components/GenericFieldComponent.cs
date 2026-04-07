@@ -1,10 +1,9 @@
-using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.HolographicProjector.Components;
 
-[RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentPause, AutoGenerateComponentState]
+[RegisterComponent]
+[AutoGenerateComponentPause]
 public sealed partial class GenericFieldComponent : Component
 {
     /// <summary>

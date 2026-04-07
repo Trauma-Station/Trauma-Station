@@ -78,7 +78,6 @@
           False: { visible: false }
   - type: Airtight
     noAirWhenFullyAirBlocked: true
-  - type: Occluder
   - type: Tag
     tags:
     - Wall
@@ -93,6 +92,7 @@
     voltage: Medium
   - type: WiresPanel
   - type: Lock
+    locked: false
   - type: Battery
     netsync: false
     maxCharge: 1500
@@ -104,7 +104,7 @@
     requirePower: true
     mediumVoltageNode: input
   - type: PowerNetworkBattery
-    maxChargeRate: 0 #Should always be 0 when using GenericFieldGenerator component
+    maxChargeRate: 2000
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
@@ -134,12 +134,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -148,8 +145,6 @@
         node: machineFrame
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: Ricochetable
-    chance: 0.2
   - type: RangedDamageSound
     soundGroups:
       Brute:
@@ -169,7 +164,6 @@
   parent: GenericFieldGeneratorBase
   id: HolographicFieldGenerator
   name: Holographic Field Generator
-  suffix: Engineering
   description: A machine that generates a Holographic Field when powered; Keeps the air where it belongs.
   components:
   - type: GenericFieldGenerator
@@ -181,19 +175,22 @@
   - type: LockedAnchorable
   - type: LockedWiresPanel
   - type: AccessReader
-    access: [["Atmospherics"]]
+    access: [["Engineering"]]
   - type: StaticPrice
     price: 150
 
 - type: entity
   parent: HolographicFieldGenerator
   id: HolographicFieldGeneratorPrefab
-  suffix: Engineering, Mapping
+  suffix: Mapping, Enabled
   components:
   - type: GenericFieldGenerator
     enabled: true
+    charged: true
   - type: Battery
     startingCharge: 1500
+  - type: Lock
+    locked: true
 
 #region Holographic Barrier
 
@@ -201,7 +198,6 @@
   parent: GenericFieldGeneratorBase
   id: HolographicBarrierGenerator
   name: Holographic Barrier Generator
-  suffix: Security
   description: A machine that generates a Holographic Barrier when powered; Keeps the crew where they belong.
   components:
   - type: GenericFieldGenerator
@@ -213,7 +209,7 @@
   - type: LockedAnchorable
   - type: LockedWiresPanel
   - type: AccessReader
-    access: [["Atmospherics"]]
+    access: [["Engineering"]]
   - type: StaticPrice
     price: 150
   - type: PointLight
@@ -227,12 +223,15 @@
 - type: entity
   parent: HolographicBarrierGenerator
   id: HolographicBarrierGeneratorPrefab
-  suffix: Security, Mapping
+  suffix: Mapping, Enabled
   components:
   - type: GenericFieldGenerator
     enabled: true
+    charged: true
   - type: Battery
     startingCharge: 1500
+  - type: Lock
+    locked: true
 
 #region Fields
 
@@ -273,7 +272,7 @@
   - type: Airtight
     noAirWhenFullyAirBlocked: false
   - type: RadiationBlocker
-    resistance: 35
+    resistance: 15
   - type: Transform
     anchored: true
   - type: BlockWeather
@@ -285,6 +284,10 @@
     radius: 3
     color: "#66ffea"
   - type: GenericField
+  - type: AmbientSound
+    range: 8
+    sound:
+      path: /Audio/Machines/scan_loop.ogg
 
 - type: entity
   id: HolographicFieldBarrier
@@ -351,8 +354,6 @@
     damageModifierSet: HardLightBarrier
   - type: ExaminableDamage
     messages: FieldMessages
-  - type: Pierceable
-    level: Rock
   - type: Destructible
     thresholds:
     - trigger:
@@ -365,3 +366,7 @@
         sound:
           collection: GlassBreak
   - type: GenericField
+  - type: AmbientSound
+    range: 8
+    sound:
+      path: /Audio/Machines/scan_loop.ogg
