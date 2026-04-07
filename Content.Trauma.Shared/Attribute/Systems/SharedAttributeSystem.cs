@@ -433,10 +433,11 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         var pen = false;
         int amount = 0;
         int count = 0;
+        var roller = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid));
 
         while (count < 10)
         {
-            var rolled = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid)).Next(1, dice + 1);
+            var rolled = roller.Next(1, dice + 1);
             amount += rolled;
             if (rolled == dice)
             {
