@@ -1,0 +1,51 @@
+- type: entity
+  id: StrengthAttribute
+  components:
+  - type: DamageAttribute
+  - type: StrengthFeat
+
+- type: entity
+  id: IntelligenceAttribute
+  components:
+  - type: AttackAttribute
+    minX: 1.01
+    maxX: 20.01
+    minY: -5
+    maxY: 3
+  - type: StrengthFeat
+
+- type: entity
+  id: WisdomAttribute
+  components:
+  - type: DefenseAttribute
+    minX: 1.01
+    maxX: 20.51
+    minY: -4
+    maxY: 3
+  - type: MentalAttribute
+
+- type: entity
+  id: DexterityAttribute
+  components:
+  - type: AttackAttribute
+    minX: 3.01
+    maxX: 20.51
+    minY: -4
+    maxY: 5
+  - type: DefenseAttribute
+    minX: 3.01
+    maxX: 20.51
+    minY: -5
+    maxY: 7
+  - type: AgilityFeat
+  - type: DodgeAttribute
+
+- type: entity
+  id: ConstitutionAttribute
+  components:
+  - type: PhysicalAttribute
+
+- type: entity
+  id: CharismaAttribute
+  components:
+  - type: MoraleAttribute

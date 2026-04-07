@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.Attribute.Components;
 /// Placed on an entity (normally an item) to provide something to check against.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class StrengthFeatOpposedComponent
+public sealed partial class StrengthFeatOpposedComponent : Component
 {
     /// <summary>
     /// This is what determines how hard it is to make the strength check. Higher value is harder, Lower is weaker.

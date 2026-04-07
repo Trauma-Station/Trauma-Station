@@ -8,4 +8,4 @@ namespace Content.Trauma.Shared.Attribute.Components;
 /// Attribute component to modify defense.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class DefenseAttributeComponent : Component;
+public sealed partial class DefenseAttributeComponent : BaseAttributeComponent;
