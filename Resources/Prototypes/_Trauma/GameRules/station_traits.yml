@@ -77,7 +77,7 @@
       - id: CarpMigrationRule
     # 5-10 minutes in
     minimumTimeUntilFirstEvent: 300
-    minimumSpanUntilFirstEvent: 300
+    maximumSpanUntilFirstEvent: 300
     # every 5-20 minutes after that
     minMaxEventTiming:
       min: 300
