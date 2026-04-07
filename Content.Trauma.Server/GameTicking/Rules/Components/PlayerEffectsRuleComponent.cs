@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.Roles;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.GameTicking.Rules.Components;
 

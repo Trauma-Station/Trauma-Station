@@ -7,7 +7,6 @@ using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Text;
 

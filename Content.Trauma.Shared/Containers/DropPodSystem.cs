@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
 namespace Content.Trauma.Shared.Containers;

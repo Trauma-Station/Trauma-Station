@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects.Station;
 

@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Shared.Language.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.EntityEffects;

@@ -5,7 +5,6 @@ using Content.Shared.EntityEffects.Effects.EntitySpawning;
 using Content.Shared.Inventory;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

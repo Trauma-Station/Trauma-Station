@@ -5,7 +5,6 @@ using Content.Shared.EntityTable;
 using Content.Shared.EntityTable.EntitySelectors;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

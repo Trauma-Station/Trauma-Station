@@ -4,7 +4,6 @@ using Content.Server.Silicons.Laws;
 using Content.Shared.EntityEffects;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Trauma.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.EntityEffects;

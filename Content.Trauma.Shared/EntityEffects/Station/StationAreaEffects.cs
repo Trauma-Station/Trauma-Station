@@ -5,7 +5,6 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.EntityEffects.Station;

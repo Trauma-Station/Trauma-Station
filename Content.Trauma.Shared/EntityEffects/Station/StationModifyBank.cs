@@ -5,7 +5,6 @@ using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects.Station;
 
