@@ -8,7 +8,6 @@ using Content.Shared.Effects;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Grab;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;

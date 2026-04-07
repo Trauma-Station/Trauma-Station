@@ -6,7 +6,6 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Wraith.Curses;
 

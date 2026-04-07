@@ -5,7 +5,6 @@ using Content.Goobstation.Shared.PhaseShift;
 using Content.Shared.Actions;
 using Content.Shared.CombatMode;
 using Content.Shared.Popups;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.ShadowDemon;
 

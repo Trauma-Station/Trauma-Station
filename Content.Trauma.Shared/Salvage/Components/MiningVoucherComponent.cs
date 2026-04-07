@@ -3,7 +3,6 @@
 using Content.Trauma.Shared.Salvage.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Salvage.Components;
 

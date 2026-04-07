@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Chat.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Dash;
 

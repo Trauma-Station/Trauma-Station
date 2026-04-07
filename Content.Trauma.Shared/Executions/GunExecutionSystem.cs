@@ -22,7 +22,6 @@ using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Executions;

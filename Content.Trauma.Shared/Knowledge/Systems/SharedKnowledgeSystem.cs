@@ -14,10 +14,7 @@ using Content.Trauma.Shared.MartialArts.Components;
 using Content.Trauma.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 

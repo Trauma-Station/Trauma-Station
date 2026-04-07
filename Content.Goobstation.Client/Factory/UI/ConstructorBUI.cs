@@ -10,7 +10,6 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Goobstation.Client.Factory.UI;

@@ -3,7 +3,6 @@
 using System.Numerics;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;

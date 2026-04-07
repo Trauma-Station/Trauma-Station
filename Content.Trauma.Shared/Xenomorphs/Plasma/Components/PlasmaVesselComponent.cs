@@ -2,9 +2,6 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.Alert;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Xenomorphs.Plasma.Components;
 

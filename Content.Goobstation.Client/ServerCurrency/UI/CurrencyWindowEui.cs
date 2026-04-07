@@ -3,7 +3,6 @@
 using Content.Client.Eui;
 using Content.Goobstation.Shared.ServerCurrency;
 using Content.Goobstation.Shared.ServerCurrency.UI;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.ServerCurrency.UI
 {

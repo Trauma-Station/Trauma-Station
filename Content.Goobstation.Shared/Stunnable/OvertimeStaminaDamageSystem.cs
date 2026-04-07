@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Common.Stunnable;
 using Content.Shared.Damage.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Stunnable;
 

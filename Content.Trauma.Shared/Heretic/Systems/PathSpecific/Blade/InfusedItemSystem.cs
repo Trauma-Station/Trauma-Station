@@ -14,7 +14,6 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 

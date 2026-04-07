@@ -7,7 +7,6 @@ using Content.Server.Administration.Notes;
 using Content.Server.EUI;
 using Content.Shared.Eui;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.ServerCurrency.UI
 {

@@ -3,7 +3,6 @@
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee.Events;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Animations;

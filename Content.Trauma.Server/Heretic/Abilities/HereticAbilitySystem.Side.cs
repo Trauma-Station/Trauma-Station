@@ -10,7 +10,6 @@ using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
 

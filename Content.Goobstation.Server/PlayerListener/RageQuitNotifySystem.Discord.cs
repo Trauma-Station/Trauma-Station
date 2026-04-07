@@ -3,7 +3,6 @@
 using Content.Goobstation.Common.CCVar;
 using Content.Server.Discord;
 using Content.Server.GameTicking;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Server.PlayerListener;
 

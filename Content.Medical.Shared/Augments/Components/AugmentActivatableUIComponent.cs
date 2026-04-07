@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Medical.Shared.Augments;

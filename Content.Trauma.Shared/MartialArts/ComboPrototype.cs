@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Trauma.Common.MartialArts;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.MartialArts;
 

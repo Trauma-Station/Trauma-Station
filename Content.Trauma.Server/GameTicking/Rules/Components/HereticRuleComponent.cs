@@ -2,7 +2,6 @@
 
 using Content.Shared.Store;
 using Content.Trauma.Server.Heretic.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Components;
 

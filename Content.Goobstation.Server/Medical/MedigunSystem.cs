@@ -22,7 +22,6 @@ using Content.Shared.Power.Components;
 using Content.Shared.Timing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 

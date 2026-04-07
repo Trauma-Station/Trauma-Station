@@ -8,7 +8,6 @@ using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.MartialArts;
 

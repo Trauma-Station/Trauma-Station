@@ -7,8 +7,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Polymorph;
 using Content.Shared.Polymorph.Systems;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 

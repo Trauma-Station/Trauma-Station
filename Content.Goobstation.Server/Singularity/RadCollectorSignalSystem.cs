@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.Factory;
 using Content.Server.DeviceLinking.Systems;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Singularity.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Singularity;
 

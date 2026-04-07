@@ -6,7 +6,6 @@ using Content.Shared.Polymorph;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 

@@ -10,7 +10,6 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;

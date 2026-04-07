@@ -2,7 +2,6 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.CosmicCult.Components;
 

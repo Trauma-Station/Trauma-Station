@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 

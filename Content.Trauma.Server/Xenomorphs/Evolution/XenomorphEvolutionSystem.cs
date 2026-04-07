@@ -19,7 +19,6 @@ using Content.Trauma.Shared.Xenomorphs.Xenomorph;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Xenomorphs.Evolution;

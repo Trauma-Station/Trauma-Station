@@ -6,7 +6,6 @@ using Content.Shared.Database;
 using Content.Shared.Objectives.Components;
 using Content.Trauma.Server.Heretic.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Objectives;
 

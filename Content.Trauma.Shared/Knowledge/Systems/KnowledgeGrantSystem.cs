@@ -7,8 +7,6 @@ using Content.Shared.Popups;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Components;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;

@@ -4,7 +4,6 @@ using Content.Shared.Damage.Components;
 using Content.Shared.EntityConditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 

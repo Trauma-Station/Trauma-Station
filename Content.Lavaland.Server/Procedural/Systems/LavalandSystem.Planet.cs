@@ -11,7 +11,6 @@ using Content.Shared.Parallax.Biomes;
 using Content.Shared.Salvage;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Server.Procedural.Systems;
 

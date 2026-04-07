@@ -5,7 +5,6 @@ using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Wizard.Spellblade;
 

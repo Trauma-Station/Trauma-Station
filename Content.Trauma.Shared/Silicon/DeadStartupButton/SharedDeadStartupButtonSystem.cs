@@ -5,8 +5,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Silicon.DeadStartupButton;

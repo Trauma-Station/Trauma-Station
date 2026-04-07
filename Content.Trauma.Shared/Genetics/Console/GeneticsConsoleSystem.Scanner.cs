@@ -5,7 +5,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.UserInterface;
 using Content.Trauma.Common.Medical;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 

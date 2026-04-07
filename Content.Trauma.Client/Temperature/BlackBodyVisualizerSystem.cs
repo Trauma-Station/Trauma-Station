@@ -7,7 +7,6 @@ using Content.Trauma.Shared.Temperature;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Maths;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Temperature;
 

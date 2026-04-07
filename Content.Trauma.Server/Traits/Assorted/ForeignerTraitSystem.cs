@@ -10,7 +10,6 @@ using Content.Server.Storage.EntitySystems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Storage;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Traits.Assorted;
 

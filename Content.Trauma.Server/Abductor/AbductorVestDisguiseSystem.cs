@@ -8,7 +8,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Preferences;
 using Content.Trauma.Shared.Body.Organ;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Abductor;
 

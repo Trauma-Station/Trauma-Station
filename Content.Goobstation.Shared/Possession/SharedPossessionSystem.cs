@@ -11,7 +11,6 @@ using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Possession;

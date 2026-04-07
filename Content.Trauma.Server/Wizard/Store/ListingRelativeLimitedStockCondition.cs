@@ -2,7 +2,6 @@
 
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wizard.Store;
 

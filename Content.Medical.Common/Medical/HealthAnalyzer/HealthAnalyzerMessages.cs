@@ -4,8 +4,6 @@ using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
 using Content.Shared.Body;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Common.Medical.HealthAnalyzer;
 
