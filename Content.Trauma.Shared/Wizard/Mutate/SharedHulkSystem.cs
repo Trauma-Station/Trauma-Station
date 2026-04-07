@@ -1,25 +1,20 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Cargo;
-using Content.Shared.Cuffs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Slippery;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Cuffs;
 using Content.Trauma.Common.Knockdown;
-using Content.Trauma.Common.Wizard;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Wizard.Mutate;
 
 public abstract class SharedHulkSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
@@ -89,7 +84,7 @@ public abstract class SharedHulkSystem : EntitySystem
     private void OnUncuff(Entity<HulkComponent> ent, ref InstantUncuffEvent args)
     {
         Roar(ent);
-        _cuffs.Uncuff(args.Target, ent, args.Cuff);
+        args.CuffsBroken = true;
     }
 
     private void OnEnsnareBreak(Entity<HulkComponent> ent, ref EnsnareBrokenEvent args)

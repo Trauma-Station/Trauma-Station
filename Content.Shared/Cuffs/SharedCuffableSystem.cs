@@ -650,10 +650,14 @@ namespace Content.Shared.Cuffs
                 }
 
                 // <Trauma>
+                // TODO: Make it so people can't just spam this open.
                 var attemptEv = new InstantUncuffEvent(target, cuff);
                 RaiseLocalEvent(user, ref attemptEv);
                 if (attemptEv.CuffsBroken)
+                {
+                    Uncuff(target, user, cuff);
                     return;
+                }
                 // </Trauma>
             }
 

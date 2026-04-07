@@ -16,7 +16,7 @@ public sealed class AttributeCommand : ToolshedCommand
     private SharedAttributeSystem? _attribute;
 
     [CommandImplementation("add")]
-    public EntityUid Add([PipedArgument] EntityUid input, [CommandArgument] EntProtoId proto, [CommandArgument] FixedPoint2 level)
+    public EntityUid Add([PipedArgument] EntityUid input, [CommandArgument] EntProtoId proto, [CommandArgument] int level)
     {
         _attribute ??= GetSys<SharedAttributeSystem>();
 
@@ -26,7 +26,7 @@ public sealed class AttributeCommand : ToolshedCommand
     }
 
     [CommandImplementation("add")]
-    public IEnumerable<EntityUid> Add([PipedArgument] IEnumerable<EntityUid> input, [CommandArgument] EntProtoId proto, [CommandArgument] FixedPoint2 level)
+    public IEnumerable<EntityUid> Add([PipedArgument] IEnumerable<EntityUid> input, [CommandArgument] EntProtoId proto, [CommandArgument] int level)
         => input.Select(x => Add(x, proto, level));
 
     [CommandImplementation("list")]

@@ -1,11 +1,20 @@
 - type: entity
+  id: BaseAttribute
+  abstract: true
+  components:
+  - type: Attribute
+    inherent: 1.01
+
+- type: entity
   id: StrengthAttribute
+  parent: BaseAttribute
   components:
   - type: DamageAttribute
   - type: StrengthFeat
 
 - type: entity
   id: IntelligenceAttribute
+  parent: BaseAttribute
   components:
   - type: AttackAttribute
     minX: 1.01
@@ -16,6 +25,7 @@
 
 - type: entity
   id: WisdomAttribute
+  parent: BaseAttribute
   components:
   - type: DefenseAttribute
     minX: 1.01
@@ -26,6 +36,7 @@
 
 - type: entity
   id: DexterityAttribute
+  parent: BaseAttribute
   components:
   - type: AttackAttribute
     minX: 3.01
@@ -42,10 +53,12 @@
 
 - type: entity
   id: ConstitutionAttribute
+  parent: BaseAttribute
   components:
   - type: PhysicalAttribute
 
 - type: entity
   id: CharismaAttribute
+  parent: BaseAttribute
   components:
   - type: MoraleAttribute
