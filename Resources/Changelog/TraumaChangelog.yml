@@ -6466,3 +6466,10 @@ Entries:
   id: 748
   time: '2026-04-05T21:33:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1880
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being polymorphed with implants duplicating their actions.
+  id: 749
+  time: '2026-04-07T07:25:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1896

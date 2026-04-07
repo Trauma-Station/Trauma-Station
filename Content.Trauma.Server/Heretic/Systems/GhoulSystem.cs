@@ -54,7 +54,6 @@ using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 

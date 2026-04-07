@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Common.ServerCurrency;
 

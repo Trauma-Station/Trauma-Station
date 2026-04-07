@@ -18,7 +18,6 @@ using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Physics.Dynamics;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Wizard;

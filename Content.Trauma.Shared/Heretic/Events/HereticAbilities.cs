@@ -10,10 +10,7 @@ using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Events;
 

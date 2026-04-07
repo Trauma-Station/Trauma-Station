@@ -2,7 +2,6 @@
 
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Heretic.Components;
 

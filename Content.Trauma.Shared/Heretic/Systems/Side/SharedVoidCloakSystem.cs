@@ -7,7 +7,6 @@ using Content.Shared.Temperature;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 

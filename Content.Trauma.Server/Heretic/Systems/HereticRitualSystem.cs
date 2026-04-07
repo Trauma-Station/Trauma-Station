@@ -5,7 +5,6 @@ using Content.Server.Revolutionary.Components;
 using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Rituals;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Heretic.Systems;

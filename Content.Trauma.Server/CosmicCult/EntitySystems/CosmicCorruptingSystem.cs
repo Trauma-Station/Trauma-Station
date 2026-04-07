@@ -10,7 +10,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Coordinates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 

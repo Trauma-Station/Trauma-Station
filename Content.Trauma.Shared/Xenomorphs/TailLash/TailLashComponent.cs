@@ -4,8 +4,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Xenomorphs.TailLash;
 

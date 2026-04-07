@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.Xenomorphs.Infection;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Xenomorphs.Infection;
 

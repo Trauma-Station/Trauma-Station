@@ -2,7 +2,6 @@
 
 using Content.Trauma.Common.CartridgeLoader.Cartridges;
 using Content.Shared.CartridgeLoader;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.CartridgeLoader.Cartridges;
 

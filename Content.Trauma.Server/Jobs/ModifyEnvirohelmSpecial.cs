@@ -7,7 +7,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Roles;
 using Content.Shared.Tag;
 using JetBrains.Annotations;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Jobs;
 

@@ -5,10 +5,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weather;
 using Content.Shared.Whitelist;
-using Robust.Shared.Network;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Weather;

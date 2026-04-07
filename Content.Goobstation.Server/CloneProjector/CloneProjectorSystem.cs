@@ -29,7 +29,6 @@ using Content.Shared.Whitelist;
 using Content.Trauma.Common.Carrying;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.CloneProjector;

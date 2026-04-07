@@ -5,8 +5,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Body;
 

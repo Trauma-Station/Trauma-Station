@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid;
 using Content.Shared.Trigger.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

@@ -2,7 +2,6 @@
 
 using System.Linq;
 using System.Numerics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;
 

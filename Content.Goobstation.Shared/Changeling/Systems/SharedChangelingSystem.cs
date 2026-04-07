@@ -8,7 +8,6 @@ using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;

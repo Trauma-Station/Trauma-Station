@@ -3,7 +3,6 @@
 using System.Numerics;
 using Content.Trauma.Common.Wizard;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Wizard.SupermatterHalberd;

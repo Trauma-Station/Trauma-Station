@@ -18,8 +18,6 @@ using Content.Shared.Tag;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;

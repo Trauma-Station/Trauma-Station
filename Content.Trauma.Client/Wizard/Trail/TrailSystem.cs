@@ -11,7 +11,6 @@ using Robust.Client.Player;
 using Robust.Shared.Animations;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;

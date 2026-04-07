@@ -13,7 +13,6 @@ using Content.Shared.Verbs;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;

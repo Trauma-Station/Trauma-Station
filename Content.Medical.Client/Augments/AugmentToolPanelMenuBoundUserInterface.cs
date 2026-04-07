@@ -4,7 +4,6 @@ using Content.Medical.Shared.Augments;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Client.Augments;
 

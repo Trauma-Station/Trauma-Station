@@ -4,7 +4,6 @@ using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Physics;
 using Content.Trauma.Shared.Heretic.Components;
-using Robust.Shared.GameStates;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;

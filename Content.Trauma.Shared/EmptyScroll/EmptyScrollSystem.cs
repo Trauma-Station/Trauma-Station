@@ -8,7 +8,6 @@ using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Paper;
 using Robust.Shared.Timing;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EmptyScroll;
 

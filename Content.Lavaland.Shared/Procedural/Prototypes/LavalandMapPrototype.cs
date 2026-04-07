@@ -3,7 +3,6 @@
 using Content.Shared.Atmos;
 using Content.Shared.Parallax.Biomes;
 using Content.Shared.Parallax.Biomes.Markers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Lavaland.Shared.Procedural.Prototypes;

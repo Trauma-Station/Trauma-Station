@@ -8,7 +8,6 @@ using Content.Trauma.Common.Language.Systems;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
 using Content.Shared.GameTicking;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Language.Systems;
 

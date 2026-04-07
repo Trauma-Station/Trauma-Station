@@ -8,7 +8,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Radio;
 using Content.Shared.Timing;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.PanicButton

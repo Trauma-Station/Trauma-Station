@@ -5,7 +5,6 @@ using Content.Shared.Hands;
 using Content.Trauma.Shared.Paint;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Paint;
 

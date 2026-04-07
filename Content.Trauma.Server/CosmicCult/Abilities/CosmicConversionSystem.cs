@@ -14,7 +14,6 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 

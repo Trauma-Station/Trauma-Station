@@ -2,7 +2,6 @@
 
 using Content.Shared.Body;
 using Content.Shared.Atmos;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Atmos.Components;
 

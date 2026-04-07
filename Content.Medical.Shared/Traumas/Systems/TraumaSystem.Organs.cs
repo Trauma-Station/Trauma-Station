@@ -12,7 +12,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.Traumas;
 

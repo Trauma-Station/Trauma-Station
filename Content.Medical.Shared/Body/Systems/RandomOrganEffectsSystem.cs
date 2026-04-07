@@ -3,7 +3,6 @@
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;

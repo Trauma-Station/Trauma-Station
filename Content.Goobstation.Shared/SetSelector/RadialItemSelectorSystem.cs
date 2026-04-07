@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Shared.UserInterface;
 using Content.Trauma.Common.RadialSelector;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.SetSelector;
 

@@ -6,10 +6,8 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 

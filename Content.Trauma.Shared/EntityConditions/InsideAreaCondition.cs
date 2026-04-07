@@ -4,7 +4,6 @@ using Content.Shared.EntityConditions;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Areas;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 

@@ -4,8 +4,8 @@ meta:
   engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 04/03/2026 14:03:09
-  entityCount: 27069
+  time: 04/05/2026 23:51:59
+  entityCount: 27077
 maps:
 - 1
 grids:
@@ -121633,6 +121633,28 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 33.5,-92.5
       parent: 2
+  - uid: 27036
+    components:
+    - type: Transform
+      pos: 16.5,-103.5
+      parent: 2
+  - uid: 27037
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 16.5,-105.5
+      parent: 2
+  - uid: 27038
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 24.5,-105.5
+      parent: 2
+  - uid: 27039
+    components:
+    - type: Transform
+      pos: 24.5,-103.5
+      parent: 2
 - proto: PlasmaWindoorSecureCommandLocked
   entities:
   - uid: 8540
@@ -121686,6 +121708,18 @@ entities:
     components:
     - type: Transform
       pos: 11.5,-86.5
+      parent: 2
+  - uid: 27040
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 17.5,-104.5
+      parent: 2
+  - uid: 27041
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.5,-104.5
       parent: 2
 - proto: PlasmaWindoorSecureScienceLocked
   entities:
@@ -142110,6 +142144,18 @@ entities:
     components:
     - type: Transform
       pos: -54.5,1.5
+      parent: 2
+- proto: SpawnPointExtraAiCore
+  entities:
+  - uid: 27042
+    components:
+    - type: Transform
+      pos: 16.5,-104.5
+      parent: 2
+  - uid: 27043
+    components:
+    - type: Transform
+      pos: 24.5,-104.5
       parent: 2
 - proto: SpawnPointHeadOfPersonnel
   entities:

@@ -2,7 +2,6 @@
 
 using Content.Lavaland.Shared.Megafauna.NumberSelectors;
 using Content.Lavaland.Shared.Megafauna.Selectors;
-using Robust.Shared.GameStates;
 
 namespace Content.Lavaland.Shared.Megafauna.Components;
 

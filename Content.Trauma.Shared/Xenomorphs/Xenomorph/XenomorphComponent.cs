@@ -3,8 +3,6 @@
 using Content.Shared.Damage;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Shared.Xenomorphs.Caste;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Xenomorphs.Xenomorph;
 

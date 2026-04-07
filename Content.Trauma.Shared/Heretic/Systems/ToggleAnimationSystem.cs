@@ -3,7 +3,6 @@
 using System.Threading;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Trauma.Shared.Heretic.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Timer = Robust.Shared.Timing.Timer;
 

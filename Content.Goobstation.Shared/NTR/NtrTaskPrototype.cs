@@ -3,7 +3,6 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.NTR;
 

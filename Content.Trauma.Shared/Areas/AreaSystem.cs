@@ -2,7 +2,6 @@
 
 using Content.Shared.Roles;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using System.Numerics;
 
 namespace Content.Trauma.Shared.Areas;

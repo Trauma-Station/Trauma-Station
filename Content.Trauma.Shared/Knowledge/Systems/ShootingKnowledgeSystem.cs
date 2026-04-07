@@ -4,7 +4,6 @@ using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Trauma.Common.Knowledge.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 public sealed class ShootingKnowledgeSystem : EntitySystem

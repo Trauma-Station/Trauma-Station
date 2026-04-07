@@ -16,7 +16,6 @@ using Content.Trauma.Shared.Wizard.Chuuni;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Trauma.Shared.Wizard.TimeStop;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
 namespace Content.Trauma.Shared.Wizard;

@@ -9,7 +9,6 @@ using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Tools;
 

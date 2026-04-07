@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Disease.Chemistry;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;

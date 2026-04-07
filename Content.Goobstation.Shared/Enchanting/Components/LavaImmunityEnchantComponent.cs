@@ -2,8 +2,6 @@
 
 using Content.Goobstation.Shared.Enchanting.Systems;
 using Content.Shared.StepTrigger.Prototypes;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Enchanting.Components;
 

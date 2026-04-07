@@ -7,7 +7,6 @@ using Content.Trauma.Shared.Language.Systems;
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Server.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
 
 namespace Content.Trauma.Server.Language.Commands;

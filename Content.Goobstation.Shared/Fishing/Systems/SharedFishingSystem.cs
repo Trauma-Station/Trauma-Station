@@ -7,9 +7,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 

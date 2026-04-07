@@ -12,7 +12,6 @@ using Content.Shared.Cargo.Components;
 using Content.Shared.Dataset;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Station.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Pirates.GameTicking.Rules;

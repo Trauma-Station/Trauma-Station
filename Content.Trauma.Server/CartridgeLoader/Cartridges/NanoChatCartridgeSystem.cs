@@ -17,7 +17,6 @@ using Content.Trauma.Common.NanoChat; // Goob
 using Content.Trauma.Shared.CartridgeLoader.Cartridges;
 using Content.Trauma.Shared.NanoChat;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 

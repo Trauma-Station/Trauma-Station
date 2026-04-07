@@ -19,7 +19,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 

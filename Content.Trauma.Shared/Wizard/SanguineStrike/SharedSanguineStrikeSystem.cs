@@ -12,7 +12,6 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Wizard.SanguineStrike;
 

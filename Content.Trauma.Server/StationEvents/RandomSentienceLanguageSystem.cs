@@ -5,7 +5,6 @@ using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.StationEvents;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.Language.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.StationEvents;
 

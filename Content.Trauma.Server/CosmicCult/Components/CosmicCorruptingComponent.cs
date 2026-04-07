@@ -2,7 +2,6 @@
 
 using Content.Trauma.Server.CosmicCult.EntitySystems;
 using Content.Shared.Maps;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Server.CosmicCult.Components;

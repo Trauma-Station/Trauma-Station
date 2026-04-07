@@ -20,7 +20,6 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Physics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wizard.Teleport;
 

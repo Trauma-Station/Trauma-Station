@@ -5,7 +5,6 @@ using Content.Server.Station.Systems;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Station;
 

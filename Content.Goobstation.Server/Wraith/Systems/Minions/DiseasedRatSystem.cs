@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.Wraith.Components.Mobs;
 using Content.Goobstation.Shared.Wraith.Minions.Plaguebringer;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Polymorph;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wraith.Systems.Minions;
 

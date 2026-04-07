@@ -14,7 +14,6 @@ using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Changeling.GameTicking.Rules;
 

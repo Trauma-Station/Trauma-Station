@@ -9,7 +9,6 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 

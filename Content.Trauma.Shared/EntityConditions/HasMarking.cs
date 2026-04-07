@@ -3,7 +3,6 @@
 using Content.Shared.Body;
 using Content.Shared.EntityConditions;
 using Content.Shared.Humanoid.Markings;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 

@@ -13,7 +13,6 @@ using Content.Trauma.Common.Kitchen;
 using Content.Trauma.Shared.DeepFryer;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Content.Trauma.Shared.DeepFryer.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.DeepFryer;
 

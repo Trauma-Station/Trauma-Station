@@ -8,7 +8,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.VoiceMask;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.VoiceMask;
 

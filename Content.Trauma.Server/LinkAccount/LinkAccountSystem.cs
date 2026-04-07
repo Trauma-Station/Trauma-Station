@@ -8,7 +8,6 @@ using Content.Trauma.Common.LinkAccount;
 using Content.Trauma.Shared.GhostColor;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 

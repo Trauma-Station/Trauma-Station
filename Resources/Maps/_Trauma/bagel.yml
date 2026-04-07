@@ -4,7 +4,7 @@ meta:
   engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 04/03/2026 12:25:23
+  time: 04/05/2026 21:50:32
   entityCount: 25175
 maps:
 - 1
@@ -130646,6 +130646,18 @@ entities:
     - type: Transform
       pos: -26.5,-29.5
       parent: 2
+- proto: SpawnPointExtraAiCore
+  entities:
+  - uid: 20944
+    components:
+    - type: Transform
+      pos: -116.5,26.5
+      parent: 2
+  - uid: 20945
+    components:
+    - type: Transform
+      pos: -106.5,26.5
+      parent: 2
 - proto: SpawnPointGeneticist
   entities:
   - uid: 25359
@@ -136584,16 +136596,6 @@ entities:
           showEnts: False
           occludes: True
           ents: []
-  - uid: 20944
-    components:
-    - type: Transform
-      pos: -106.5,26.5
-      parent: 2
-  - uid: 20945
-    components:
-    - type: Transform
-      pos: -116.5,26.5
-      parent: 2
   - uid: 20946
     components:
     - type: Transform

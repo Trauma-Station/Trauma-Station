@@ -6,7 +6,6 @@ using Content.Goobstation.Shared.Fishing.Systems;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Fishing;
 

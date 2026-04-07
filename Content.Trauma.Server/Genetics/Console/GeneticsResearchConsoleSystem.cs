@@ -6,7 +6,6 @@ using Content.Shared.Radio;
 using Content.Shared.Research.Components;
 using Content.Trauma.Shared.Genetics.Console;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Genetics.Console;
 

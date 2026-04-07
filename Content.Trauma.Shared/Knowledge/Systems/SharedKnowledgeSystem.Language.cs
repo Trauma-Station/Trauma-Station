@@ -9,7 +9,6 @@ using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
 using Content.Trauma.Shared.Language.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;

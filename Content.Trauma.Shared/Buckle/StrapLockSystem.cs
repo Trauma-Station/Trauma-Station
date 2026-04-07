@@ -15,7 +15,6 @@ using Content.Shared.Standing;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Throwing;
 using Robust.Shared.Player;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Buckle;
 
