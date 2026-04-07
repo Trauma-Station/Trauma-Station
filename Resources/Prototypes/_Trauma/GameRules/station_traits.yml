@@ -95,9 +95,9 @@
     # 10-15 minutes in
     minimumTimeUntilFirstEvent: 600
     maximumSpanUntilFirstEvent: 300
-    # every 15-30 minutes after that
+    # every 20-30 minutes after that
     minMaxEventTiming:
-      min: 900
+      min: 1200
       max: 1800
 
 - type: entity
