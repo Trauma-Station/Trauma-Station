@@ -23,7 +23,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.Commands;
 
-[TestFixture]
+//[TestFixture] // Trauma - don't run these tests at all, /suicide is disabled
 public sealed class SuicideCommandTests
 {
 
