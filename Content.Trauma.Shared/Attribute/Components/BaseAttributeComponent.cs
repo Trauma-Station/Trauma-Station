@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
@@ -11,25 +13,25 @@ public abstract partial class BaseAttributeComponent : Component
 {
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [DataField(required: true)]
     public FixedPoint2 MinX;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [DataField(required: true)]
     public FixedPoint2 MaxX;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [DataField(required: true)]
     public FixedPoint2 MinY;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [DataField(required: true)]
     public FixedPoint2 MaxY;
