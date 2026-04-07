@@ -63,7 +63,7 @@ public sealed class StrengthSystem : EntitySystem
 
         var ev = new OnAttributeOpposedContest(uid => RaiseLocalEvent(uid, ref selfEv), uid => RaiseLocalEvent(uid, ref cuffsEv), () => (selfEv.Mod, cuffsEv.Mod), args.Cuff);
 
-        RaiseLocalEvent(ent, ev);
+        RaiseLocalEvent(ent, ref ev);
         if (ev.Failed)
             return;
 
