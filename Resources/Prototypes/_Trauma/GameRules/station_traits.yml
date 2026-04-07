@@ -1,3 +1,5 @@
+# Neutral
+
 - type: entity
   parent: BaseGameRule
   id: BananiumShipmentRule
@@ -32,6 +34,8 @@
       - NutimovLawset
       - HelpimovLawset
 
+# Positive
+
 - type: entity
   parent: BaseGameRule
   id: FreeScarvesRule
@@ -57,6 +61,27 @@
       effects:
       - !type:SpawnEntity
         entity: SpawnSupplyLuckyWinner
+
+# Negative
+
+# cant really modify weights etc so just have a dedicated scheduler for it
+- type: entity
+  parent: BaseGameRule
+  id: CarpInfestationRule
+  components:
+  - type: RuleSchedulerLimit
+    limit: 8
+  - type: BasicStationEventScheduler
+    scheduledGameRules: !type:AllSelector
+      children:
+      - id: CarpMigrationRule
+    # 5-10 minutes in
+    minimumTimeUntilFirstEvent: 300
+    minimumSpanUntilFirstEvent: 300
+    # every 5-20 minutes after that
+    minMaxEventTiming:
+      min: 300
+      max: 1200
 
 - type: entity
   parent: BaseGameRule

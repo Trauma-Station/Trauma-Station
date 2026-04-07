@@ -13,6 +13,7 @@
   id: BasicAntagEventsTrauma
   table: !type:AllSelector
     children:
+    - id: CarpMigrationRule
     # TOOD: remove these if they fucking suck lmao
     - id: SingulothKnightsMidround
     - id: MimeAssassinMidround
@@ -32,6 +33,27 @@
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
+
+# TODO: actually have them migrating.
+# 1. spawn them far away in space
+# 2. pick a random area to set as the target
+# 3. custom htn to go to that target unless theres something to bite
+- type: entity
+  parent: BaseGameRule
+  id: CarpMigrationRule
+  components:
+  - type: StationEvent
+    weight: 1
+  - type: CarpMigrationRule
+  - type: SpaceSpawnRule
+  - type: AntagSpawner
+    prototype: MobCarpDragon
+  - type: AntagSelection
+    selectionTime: PostPlayerSpawn
+    definitions:
+    - min: 2
+      max: 3
+      pickPlayer: false
 
 - type: entity
   id: RatmaSpawn

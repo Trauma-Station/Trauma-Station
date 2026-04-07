@@ -48,6 +48,16 @@
           - VendingMachine
 
 - type: stationTrait
+  id: CarpInfestation
+  group: Negative
+  minPlayers: 15
+  name: "Carp infestation"
+  report: "Dangerous fauna is present in the area of this station."
+  effects:
+  - !type:StartGameRule
+    rule: CarpInfestationRule
+
+- type: stationTrait
   id: EmptyMaint
   group: Negative
   name: "Cleared out maintenance"
