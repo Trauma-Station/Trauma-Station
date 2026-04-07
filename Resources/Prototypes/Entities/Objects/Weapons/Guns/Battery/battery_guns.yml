@@ -352,7 +352,7 @@
       path: /Audio/_Trauma/Weapons/Guns/Gunshots/laser2.ogg # Trauma
   - type: BatteryAmmoProvider
     proto: LaserGunBullet # Trauma
-    fireCost: 62.5 # Trauma, was 25
+    fireCost: 20 # Trauma, was 25, 50 shots
   - type: Item
     size: Large
   - type: Sprite

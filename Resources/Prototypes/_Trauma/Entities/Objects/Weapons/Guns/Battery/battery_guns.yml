@@ -40,8 +40,8 @@
     - Taser
     - Sidearm
   - type: Battery
-    maxCharge: 625
-    startingCharge: 625
+    maxCharge: 600
+    startingCharge: 600
   - type: AmmoSelector
     prototypes:
     - BulletDisablerSidearm
@@ -72,8 +72,8 @@
     availableModes:
     - Burst
     fireRate: 4
-    burstFireRate: 8
-    shotsPerBurst: 2
+    burstFireRate: 18
+    shotsPerBurst: 3
     burstCooldown: 0.2
   - type: BatteryAmmoProvider
     proto: LaserCarbineBullet
@@ -82,6 +82,14 @@
     sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_carbine.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_carbine.rsi
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -10
+  - type: Battery
+    maxCharge: 975
+    startingCharge: 975
 
 - type: entity
   parent: WeaponLaserCarbine
@@ -99,7 +107,7 @@
     burstCooldown: 0.5
   - type: BatteryAmmoProvider
     proto: LaserGunBullet
-    fireCost: 62.5
+    fireCost: 65 # Trauma, was 25 # 40 shots
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Battery/assault_laser_wide.rsi
   - type: Clothing
