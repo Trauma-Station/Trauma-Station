@@ -6,11 +6,10 @@ meta:
   forkVersion: ""
   time: 04/07/2026 20:36:34
   entityCount: 1085
-maps:
-- 4
 grids:
-- 2
-orphans: []
+- 4
+orphans:
+- 4
 nullspace: []
 tilemap:
   0: Space
@@ -594,7 +593,7 @@ entities:
   - uid: 4
     components:
     - type: MetaData
-      name: Map Entity
+      name: Automated Trade Station
     - type: Transform
     - type: Map
       mapPaused: True

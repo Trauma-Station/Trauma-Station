@@ -6,11 +6,10 @@ meta:
   forkVersion: ""
   time: 03/24/2026 15:20:07
   entityCount: 205
-maps:
-- 198
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   4: Space
@@ -177,10 +176,8 @@ entities:
   - uid: 198
     components:
     - type: MetaData
-      name: Map Entity
+      name: Cargo Shuttle
     - type: Transform
-    - type: Map
-      mapPaused: True
     - type: GridTree
     - type: Broadphase
     - type: OccluderTree
