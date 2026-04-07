@@ -101,11 +101,3 @@
   - type: PhysicalComposition
     materialComposition:
       DrillHead: 100
-
-- type: entity
-  parent: WeaponBracing
-  id: WeaponBracing1
-  suffix: Single
-  components:
-  - type: Stack
-    count: 1
