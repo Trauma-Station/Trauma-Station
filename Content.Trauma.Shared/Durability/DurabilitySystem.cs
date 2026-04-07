@@ -340,7 +340,7 @@ public sealed class DurabilitySystem : EntitySystem
         {
             if (_tool.HasQuality(args.Used, ent.Comp.RepairTool, tool))
             {
-                _tool.UseTool(ent.Owner,
+                _tool.UseTool(args.Used,
                     args.User,
                     args.Target,
                     ent.Comp.RepairDoAfter,
