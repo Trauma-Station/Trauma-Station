@@ -85,6 +85,23 @@
 
 - type: entity
   parent: BaseGameRule
+  id: IonStormScheduler
+  components:
+  - type: RuleSchedulerLimit
+    limit: 3
+  - type: BasicStationEventScheduler
+    scheduledGameRules:
+      id: IonStorm
+    # 10-15 minutes in
+    minimumTimeUntilFirstEvent: 600
+    maximumSpanUntilFirstEvent: 300
+    # every 15-30 minutes after that
+    minMaxEventTiming:
+      min: 900
+      max: 1800
+
+- type: entity
+  parent: BaseGameRule
   id: RevolutionaryFervorVariation
   components:
   - type: RoundstartStationVariationRule

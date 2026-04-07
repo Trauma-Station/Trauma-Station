@@ -92,6 +92,16 @@
       modifier: 1.2
 
 - type: stationTrait
+  id: IonicStormfront
+  group: Negative
+  chance: 0.6
+  name: "Ionic Stormfront"
+  report: "An ionic stormfront is passing over your station's system. Expect an increased likelihood of ion storms afflicting your station's silicon units."
+  effects:
+  - !type:StartGameRule
+    rule: IonStormScheduler
+
+- type: stationTrait
   id: LateArrivals
   group: Negative
   chance: 0.4
