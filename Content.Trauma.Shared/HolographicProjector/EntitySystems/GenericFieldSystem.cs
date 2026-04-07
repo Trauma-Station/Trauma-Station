@@ -1,11 +1,12 @@
-using Content.Shared._FarHorizons.GenericFieldGenerator.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
+using Content.Trauma.Shared.HolographicProjector.Components;
 
-namespace Content.Server._FarHorizons.GenericFieldGenerator.EntitySystems;
+namespace Content.Trauma.Shared.HolographicProjector.EntitySystems;
 
 public sealed class GenericFieldSystem : EntitySystem
 {
@@ -13,6 +14,7 @@ public sealed class GenericFieldSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -27,10 +29,9 @@ public sealed class GenericFieldSystem : EntitySystem
         var query = EntityQueryEnumerator<GenericFieldComponent, DamageableComponent>();
         while (query.MoveNext(out var uid, out var field, out var damageable))
         {
-            field.Accumulator += frameTime;
-            if (!(field.Accumulator >= field.Threshold)) continue;
+            if (_timing.CurTime < field.RegenTimer) continue;
             
-            field.Accumulator -= field.Threshold; 
+            field.RegenTimer = RegenTime + _timing.CurTime;
             _damageable.HealEvenly((uid, damageable), field.RegenRate);
         }
     }

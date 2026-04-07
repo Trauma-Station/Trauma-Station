@@ -2,31 +2,32 @@ using Content.Shared.Physics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Content.Shared.DeviceLinking;
 
-namespace Content.Shared._FarHorizons.GenericFieldGenerator.Components;
+namespace Content.Trauma.Shared.HolographicProjector.Components;
 
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class GenericFieldGeneratorComponent : Component
 {
     /// <summary>
     /// How much power should this field generator consume every 1/5th of a second?
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("powerDrain")]
+    [DataField]
     public float PowerDrain = 10f;
 
     /// <summary>
     /// How many tiles should this field check before giving up?
     /// </summary>
-    [DataField("maxLength")]
+    [DataField]
     public float MaxLength = 8F;
 
     /// <summary>
     /// Is the generator toggled on?
     /// </summary>
-    [DataField("enabled")]
+    [DataField]
     public bool Enabled;
 
     /// <summary>
@@ -44,7 +45,7 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     /// <summary>
     /// The masks the raycast should not go through
     /// </summary>
-    [DataField("collisionMask")]
+    [DataField]
     public int CollisionMask = (int) (CollisionGroup.MobMask | CollisionGroup.Impassable | CollisionGroup.MachineMask | CollisionGroup.Opaque);
 
     /// <summary>
@@ -70,14 +71,11 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     /// <summary>
     /// Used to check if it's received power recently.
     /// </summary>
-    [DataField("accumulator")]
-    public float Accumulator;
+    [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan PowerTimer;
 
-    /// <summary>
-    /// Used to retry connection when fully charged, but not connected
-    /// </summary>
-    [DataField("retryWait")]
-    public float RetryWait;
+    [DataField]
+    public TimeSpan PowerTime = TimeSpan.FromSeconds(0.5);
     
     /// <summary>
     /// Used to retry connection when fully charged, but not connected

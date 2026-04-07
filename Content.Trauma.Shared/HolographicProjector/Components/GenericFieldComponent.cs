@@ -1,10 +1,10 @@
 using Robust.Shared.GameStates;
-using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._FarHorizons.GenericFieldGenerator.Components;
+namespace Content.Trauma.Shared.HolographicProjector.Components;
 
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class GenericFieldComponent : Component
 {
     /// <summary>
@@ -28,12 +28,12 @@ public sealed partial class GenericFieldComponent : Component
     /// <summary>
     /// Used to check if it's healed damage recently.
     /// </summary>
-    [DataField("accumulator")]
-    public float Accumulator;
+    [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan RegenTimer;
 
     /// <summary>
     /// How many seconds should the field wait to regenerate?
     /// </summary>
-    [DataField("threshold")]
-    public float Threshold = 0.2f;
+    [DataField]
+    public TimeSpan RegenTime = TimeSpan.FromSeconds(1);
 }
