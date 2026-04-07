@@ -99,7 +99,7 @@ public sealed partial class CCVars
     ///     How much time in seconds that needs to pass before a non-arrivals shuttle can FTL again.
     /// </summary>
     public static readonly CVarDef<float> FTLCooldown =
-        CVarDef.Create("shuttle.cooldown", 60f, CVar.SERVERONLY);
+        CVarDef.Create("shuttle.cooldown", 5f, CVar.SERVERONLY); // Trauma 60 > 5
 
     /// <summary>
     ///     How much time in seconds that needs to pass before the arrivals shuttle can FTL again.

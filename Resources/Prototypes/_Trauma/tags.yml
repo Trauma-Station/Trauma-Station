@@ -38,6 +38,9 @@
   id: DataChip
 
 - type: Tag
+  id: DrillHead
+
+- type: Tag
   id: Ed209Shell
 
 - type: Tag

@@ -1,16 +1,16 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 271.2.0
+  engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 03/02/2026 21:12:20
-  entityCount: 189
-maps: []
+  time: 04/07/2026 19:48:37
+  entityCount: 191
+maps:
+- 190
 grids:
 - 1
-orphans:
-- 1
+orphans: []
 nullspace: []
 tilemap:
   0: Space
@@ -28,6 +28,7 @@ entities:
     - type: MetaData
       name: Cargo Shuttle
     - type: Transform
+      parent: 190
     - type: MapGrid
       chunks:
         -1,0:
@@ -55,6 +56,9 @@ entities:
       bodyType: Dynamic
     - type: Fixtures
       fixtures: {}
+    - type: AreaGrid
+      chunks: {}
+      areaMap: {}
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
@@ -163,6 +167,16 @@ entities:
     - type: TileHistory
       chunkHistory: {}
     - type: ExplosionAirtightGrid
+  - uid: 190
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: GridTree
+    - type: Broadphase
+    - type: OccluderTree
 - proto: AirCanister
   entities:
   - uid: 2
@@ -1328,6 +1342,13 @@ entities:
     components:
     - type: Transform
       pos: -1.5,-3.5
+      parent: 1
+- proto: WeaponTurretAntiInsurgent
+  entities:
+  - uid: 191
+    components:
+    - type: Transform
+      pos: -2.5,2.5
       parent: 1
 - proto: WindoorCargoLocked
   entities:

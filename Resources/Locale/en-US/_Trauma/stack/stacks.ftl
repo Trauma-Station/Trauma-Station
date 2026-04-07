@@ -11,3 +11,4 @@ stack-rev-gun-parts = gun parts
 stack-rev-ball-bearings = ball bearings
 stack-rev-engine-parts = engine parts
 stack-whetstone = whetstone
+stack-drillhead = drill head
