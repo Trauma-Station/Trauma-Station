@@ -21,10 +21,8 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: grid
+      name: ayylmao
     - type: Transform
-      pos: -0.5520833,-0.5416667
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:

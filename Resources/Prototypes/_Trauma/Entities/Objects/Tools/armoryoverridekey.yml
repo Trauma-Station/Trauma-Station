@@ -29,11 +29,11 @@
   description: Part of the armory override device, keep it close and do not give it away unless its an absolute emergency.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/tools/overridecomponents.rsi
+    sprite: _Trauma/Objects/Tools/overridecomponents.rsi
     state: icon
   - type: Item
     size: Tiny
-    sprite: _Trauma/Objects/tools/overridecomponents.rsi
+    sprite: _Trauma/Objects/Tools/overridecomponents.rsi
   - type: Tag
     tags:
     - OverrideKeyComponents

@@ -240,6 +240,8 @@
   - type: Deathgasp
     prototype: SiliconDeathgasp
     needsCritical: false
+  - type: SurgeryTarget
+    sepsisImmune: true
   - type: Tag
     tags:
     - SiliconMob

@@ -1,0 +1,9 @@
+- type: listing
+  id: UplinkCigarettesCarton
+  name: uplink-cigcarton-name
+  description: uplink-cigcarton-desc
+  productEntity: CigCartonSyndicate
+  cost:
+    Telecrystal: 15
+  categories:
+  - UplinkChemicals

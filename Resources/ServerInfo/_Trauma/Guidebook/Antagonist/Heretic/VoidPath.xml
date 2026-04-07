@@ -1,0 +1,74 @@
+<Document>
+
+  # Path of Void
+
+  Difficulty: [color=lime]Easy[/color]
+
+  The Path of Void focuses on stealth, freezing cold, mobility and depressurization.
+  Pick this path if you enjoy being a highly mobile assassin who leaves their foes struggling to catch up.
+
+  ## Pros
+
+  - Your spells apply a stacking debuff that chills and slows targets.
+  - Early mobility spell.
+  - Highly stealthy.
+
+  ## Cons
+
+  - Has a difficult time fighting opponents immune to cold effects.,
+  - Has a difficult time with silicon-based lifeforms.,
+
+  ## Knowledge
+
+  <Table Columns="3">
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Knowledge Name</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Ingredients/Type</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Description</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Glimmer of Winter</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Knife, Cold atmosphere</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a void blade.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Grasp of Void</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will mute and chill victims. You become immune to cold temperatures.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mark of Void</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the void mark, freezing, muting, and applying void chill your target when activated.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Void Phase</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Teleports you to the target destination, damaging and muting nearby creatures.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Void Prison</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Locks your target in a frozen ball, making them unable to act, speak, or be damaged. Applies a void chill when they thaw.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Void Pull</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Pulls nearby heathens towards you, knocking them over, damaging, and applying void chill to them.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Seeking Blade</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your blade now freezes and applies void chill to enemies, as well as allowing you to teleport next to them by clicking them. You no longer need to breathe.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Void Conduit</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a void conduit that periodically pulses; breaking airlocks and windows, applying void chill to heathens, and granting heretics immunity to low pressures.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Waltz at the End of Time</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Three corpses in a cold atmosphere</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a winter storm on the station. Everything around you gets frozen and cursed by void chill. All your spell cooldowns are halved. You get full pressure and temperature immunity as well as thermal and night vision. You waltz in air at quickened speed.</Box></ColorBox>
+  </Table>
+
+  ## Tips
+
+  - Your Mansus Grasp allows you to mute your targets, making it ideal for silent assassinations. The grasp also applies a mark that when triggered by the void blade will apply the maximum amount of stacks of void chill to your target, slowing them down to a crawl.
+  - Void Cloak side knowledge can be used to hide one of your blades and a Codex Cicatrix when the hood is down, while acting as a focus when it's up.
+  - Void chill is a debuff applied by your spells, your grasp, your mark and your blade once you unlock the upgrade. Each stack slows your target movement speed by roughly 5% and makes them gradually colder, up to a maximum of 5 stacks.
+  - At 5 stacks void chill will also prevent your target from heating up.
+  - Void prison can put a target in stasis for 5 seconds. Ideal if you are fighting multiple opponents and need to isolate one target at a time.
+  - Void Conduit is your signature ability. It slowly destroys windows and airlocks around its area of effect. Use it to depressurize the station and expand your domain.
+
+</Document>

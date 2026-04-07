@@ -730,7 +730,7 @@
 
 - type: listing
   id: UplinkCigarettes
-  name: uplink-cigarettes-name
+  name: uplink-cigarettes-name-trauma # Trauma
   description: uplink-cigarettes-desc
   productEntity: CigPackSyndicate
   cost:

@@ -1,0 +1,42 @@
+- type: forgingCategory
+  abstract: true # TODO: enable once its implemented
+  id: Armor
+  name: armor
+  icon:
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+    state: icon
+
+- type: forgingCategory
+  id: Blades
+  name: blades
+  icon:
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+    state: icon
+
+- type: forgingCategory
+  id: Bludgeons
+  name: bludgeons
+  icon:
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+    state: icon
+
+- type: forgingCategory
+  id: Polearms
+  name: polearms
+  icon:
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+    state: icon
+
+- type: forgingCategory
+  id: Projectiles
+  name: projectiles
+  icon:
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+    state: icon
+
+- type: forgingCategory
+  id: Tools
+  name: tools
+  icon:
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/crowbar.rsi
+    state: icon
