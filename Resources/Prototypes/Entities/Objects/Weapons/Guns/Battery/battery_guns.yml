@@ -454,19 +454,16 @@
     selectedMode: SemiAuto
     fireRate: 3
     availableModes:
-    - SemiAuto
+    - SemiAuto # Trauma - removed FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
-    proto: PulseGunBullet
+    proto: PulseGunBullet # Trauma - was Pulse
     fireCost: 200
   - type: Battery
     maxCharge: 5000
     startingCharge: 5000
   # <Goob>
-  - type: Tag
-    tags:
-    - Rifle
   - type: AmmoSelector
     prototypes:
     - Pulse
@@ -480,6 +477,9 @@
     verbOnly: true
     verbText: mode-select-verb-text
     key: enum.AmmoSelectorUiKey.Key
+  - type: Tag
+    tags:
+    - Rifle
   # </Goob>
 
 - type: entity
@@ -518,9 +518,6 @@
     maxCharge: 40000
     startingCharge: 40000
   # <Goob>
-  - type: Tag
-    tags:
-    - Rifle
   - type: AmmoSelector
     prototypes:
     - HeavyPulse
@@ -535,6 +532,9 @@
     verbOnly: true
     verbText: mode-select-verb-text
     key: enum.AmmoSelectorUiKey.Key
+  - type: Tag
+    tags:
+    - Rifle
   # </Goob>
 
 - type: entity
