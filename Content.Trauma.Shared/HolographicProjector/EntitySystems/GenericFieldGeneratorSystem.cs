@@ -6,14 +6,10 @@ using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
-using Content.Shared.Maps;
 using Content.Trauma.Shared.HolographicProjector.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.HolographicProjector.EntitySystems;
@@ -26,13 +22,9 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly ITileDefinitionManager _tiledef = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly GenericFieldSystem _genericfield = default!;
     [Dependency] private readonly SharedDeviceLinkSystem _signalSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
@@ -91,15 +83,14 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
         if (ent.Comp.Enabled)
         {
-            TurnOff(ent);
+            TurnOff(ent, args.User);
         }
         else
         {
-            TurnOn(ent);
+            TurnOn(ent, args.User);
         }
 
         args.Handled = true;
-        ChangeOnLightVisualizer(ent);
         Dirty(ent, ent.Comp);
     }
 
@@ -123,48 +114,55 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     {
         if (!component.Enabled || !component.IsConnected) return;
 
-        _popup.PopupClient(Loc.GetString("comp-genericfield-anchor-warning"), args.User, args.User, PopupType.LargeCaution);
+        _popup.PopupPredicted(Loc.GetString("comp-genericfield-anchor-warning"), args.User, args.User, PopupType.LargeCaution);
         args.Cancel();
     }
 
-    private void TurnOn(Entity<GenericFieldGeneratorComponent> ent)
+    private void TurnOn(Entity<GenericFieldGeneratorComponent> ent, EntityUid? user = null)
     {
         if (ent.Comp.ConnectedGenerator != null)
             return;
 
-        _popup.PopupClient(Loc.GetString("comp-genericfield-turned-on"), ent, _player.LocalEntity);
+        _popup.PopupPredicted(Loc.GetString("comp-genericfield-turned-on"), ent, user);
         ent.Comp.Enabled = true;
-        TryGenerateFieldConnection(ent);
+        TryGenerateFieldConnection(ent, user);
+        if (ent.Comp.ConnectedGenerator is { } pair)
+        {
+            pair.Comp.Enabled = true;
+            ChangeOnLightVisualizer(pair);
+            Dirty(pair, pair.Comp);
+        }
+        ChangeOnLightVisualizer(ent);
         Dirty(ent, ent.Comp);
     }
 
-    private void TurnOff(Entity<GenericFieldGeneratorComponent> ent)
+    private void TurnOff(Entity<GenericFieldGeneratorComponent> ent, EntityUid? user = null)
     {
-        _popup.PopupClient(Loc.GetString("comp-genericfield-turned-off"), ent, _player.LocalEntity);
-        _audio.PlayLocal(ent.Comp.DeactivationSound, ent, _player.LocalEntity);
+        _popup.PopupPredicted(Loc.GetString("comp-genericfield-turned-off"), ent, user);
         ent.Comp.Enabled = false;
         if (ent.Comp.ConnectedGenerator is { } pair)
         {
             pair.Comp.Enabled = false;
+            ChangeOnLightVisualizer(pair);
             Dirty(pair, pair.Comp);
         }
+        ChangeOnLightVisualizer(ent);
         Dirty(ent, ent.Comp);
-        RemoveConnections(ent);
+        RemoveConnections(ent, user);
     }
-
 
     /// <summary>
     /// Deletes the fields and removes the respective connections for the generators.
     /// </summary>
-    private void RemoveConnections(Entity<GenericFieldGeneratorComponent> ent)
+    private void RemoveConnections(Entity<GenericFieldGeneratorComponent> ent, EntityUid? user = null)
     {
-        if (ent.Comp.ConnectedGenerator is not { } connectedGenerator)
+        if (ent.Comp.ConnectedGenerator is not { } pair)
             return;
 
         ent.Comp.ConnectedGenerator = null;
-        connectedGenerator.Comp.ConnectedGenerator = null;
+        pair.Comp.ConnectedGenerator = null;
         ent.Comp.IsConnected = false;
-        connectedGenerator.Comp.IsConnected = false;
+        pair.Comp.IsConnected = false;
 
         foreach (var field in ent.Comp.ConnectedFields)
         {
@@ -179,24 +177,21 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             _signalSystem.InvokePort(ent, ent.Comp.FieldDisconnectedPort);
         }
 
-        if (HasComp<DeviceLinkSourceComponent>(connectedGenerator))
+        if (HasComp<DeviceLinkSourceComponent>(pair))
         {
-            _signalSystem.SendSignal(connectedGenerator, connectedGenerator.Comp.ConnectionStatusPort, false);
-            _signalSystem.InvokePort(connectedGenerator, connectedGenerator.Comp.FieldDisconnectedPort);
+            _signalSystem.SendSignal(pair, pair.Comp.ConnectionStatusPort, false);
+            _signalSystem.InvokePort(pair, pair.Comp.FieldDisconnectedPort);
         }
 
+        _popup.PopupPredicted(Loc.GetString("comp-genericfield-disconnected"), ent, user, PopupType.LargeCaution);
+        _popup.PopupPredicted(Loc.GetString("comp-genericfield-disconnected"), pair, user, PopupType.LargeCaution);
+        _audio.PlayPredicted(ent.Comp.DeactivationSound, ent, user);
+        _audio.PlayPredicted(ent.Comp.DeactivationSound, pair, user);
 
-        if (ent.Comp.IsConnected)
-            _popup.PopupClient(Loc.GetString("comp-genericfield-disconnected"), ent, _player.LocalEntity, PopupType.LargeCaution);
-
-        if (connectedGenerator.Comp.IsConnected)
-            _popup.PopupClient(Loc.GetString("comp-genericfield-disconnected"), connectedGenerator, _player.LocalEntity, PopupType.LargeCaution);
-
-        ChangeConnectionLightVisualizer(connectedGenerator);
-        UpdateConnectionLights(connectedGenerator);
+        ChangeConnectionLightVisualizer(pair);
         ChangeConnectionLightVisualizer(ent);
+        UpdateConnectionLights(pair);
         UpdateConnectionLights(ent);
-        Dirty(ent, ent.Comp);
     }
 
     private void OnBatteryStateChanged(Entity<GenericFieldGeneratorComponent> ent, ref BatteryStateChangedEvent args)
@@ -204,7 +199,14 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         if (args.OldState != BatteryState.Empty && args.NewState == BatteryState.Empty && ent.Comp.Charged)
         {
             ent.Comp.Charged = false;
-            TurnOff(ent);
+            RemoveConnections(ent);
+
+            if (ent.Comp.ConnectedGenerator is not { } pair
+            || !TryComp<BatteryComponent>(pair, out var pairBattery)
+            || pairBattery.LastCharge < pairBattery.MaxCharge / 50f) // Less than 2% charge?
+                return;
+
+            pair.Comp.Charged = false; // Set it as discharged too, because otherwise it would turn off before fully discharging.
         }
         else if (args.OldState != BatteryState.Full && args.NewState == BatteryState.Full && !ent.Comp.Charged)
         {
@@ -254,13 +256,10 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             return;
 
         if (TryComp<BatteryComponent>(ent, out var batteryComponent))
-            _battery.UseCharge(ent.Owner, batteryComponent.MaxCharge);
+            _battery.UseCharge(ent.Owner, batteryComponent.MaxCharge); // Batery being drained disables the field anyway so we don't call it again.
 
         if (TryComp<BatteryComponent>(pair, out var pairBatteryComponent))
             _battery.UseCharge(pair.Owner, pairBatteryComponent.MaxCharge);
-
-        RemoveConnections(ent);
-        _audio.PlayLocal(ent.Comp.DeactivationSound, ent, _player.LocalEntity);
     }
 
     private void OnChargeChanged(Entity<GenericFieldGeneratorComponent> ent, ref ChargeChangedEvent args)
@@ -276,7 +275,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// This will attempt to establish a connection of fields between two generators.
     /// If all the checks pass and fields spawn, it will store this connection on each respective ent.
     /// </summary>
-    private void TryGenerateFieldConnection(Entity<GenericFieldGeneratorComponent> ent)
+    private void TryGenerateFieldConnection(Entity<GenericFieldGeneratorComponent> ent, EntityUid? user = null)
     {
         if (!ent.Comp.Enabled
         || !ent.Comp.Charged
@@ -337,9 +336,10 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             UpdateConnectionLights(otherFieldGenerator);
         }
 
-        _popup.PopupClient(Loc.GetString("comp-genericfield-connected"), ent, _player.LocalEntity);
-        _popup.PopupClient(Loc.GetString("comp-genericfield-connected"), target, _player.LocalEntity);
-        _audio.PlayLocal(ent.Comp.ActivationSound, ent, _player.LocalEntity);
+        _popup.PopupPredicted(Loc.GetString("comp-genericfield-connected"), ent, user);
+        _popup.PopupPredicted(Loc.GetString("comp-genericfield-connected"), target, user);
+        _audio.PlayPredicted(ent.Comp.ActivationSound, ent, user);
+        _audio.PlayPredicted(ent.Comp.ActivationSound, target, user);
         Dirty(ent, ent.Comp);
         Dirty(target, otherFieldGeneratorComponent);
         return;
@@ -379,28 +379,14 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             var newField = PredictedSpawnAtPosition(firstGen.Comp.CreatedField, currentCoords);
 
             var xform = Transform(newField);
+            _transformSystem.SetParent(newField, xform, firstGen);
             xform.LocalRotation = dirVec.ToAngle() + Math.PI / 2;
             fieldList.Add(newField);
             currentOffset += dirVec;
             if (TryComp<GenericFieldComponent>(newField, out var fieldComp))
             {
                 fieldComp.SourceGen = firstGen;
-                if (_transformSystem.AnchorEntity(newField)) continue; //check if entity can anchor normally first
-
-                if (!_tiledef.TryGetDefinition("HolographicTile", out var tileDef))
-                    break;
-
-                if (Transform(firstGen).GridUid is not { } gridUid
-                || !TryComp<MapGridComponent>(gridUid, out var mapGrid))
-                    break;
-
-                var tile = _mapSystem.GetTileRef(gridUid, mapGrid, _transformSystem.GetMapCoordinates(newField, xform));
-                _tile.ReplaceTile(tile, (ContentTileDefinition) tileDef, gridUid, mapGrid);
-                fieldComp.TempTile = true;
                 Dirty(newField, fieldComp);
-
-                if (!_transformSystem.AnchorEntity(newField)) // if this fails to anchor, something has gone horribly wrong
-                    RemoveConnections(firstGen); //remove connection and so it can try again
             }
         }
         return fieldList;
@@ -442,17 +428,17 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// </summary>
     private void ChangePowerVisualizer(Entity<GenericFieldGeneratorComponent> ent)
     {
-        if (!TryComp<BatteryComponent>(ent, out var batteryComponent))
+        if (!TryComp<BatteryComponent>(ent, out var comp))
             return;
-        var charge = batteryComponent.LastCharge;
+        var charge = comp.LastCharge;
         _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, charge switch //I dont like hardcoding these values, but I also dont feel like having a giant pile of if statments
         {
             <= 50 => PowerLevelVisuals.NoPower,
-            >= 1450 => PowerLevelVisuals.FullPower,
-            >= 1200 => PowerLevelVisuals.VeryHighPower,
-            >= 900 => PowerLevelVisuals.HighPower,
-            >= 600 => PowerLevelVisuals.MediumPower,
-            >= 300 => PowerLevelVisuals.LowPower,
+            >= 49500 => PowerLevelVisuals.FullPower,
+            >= 40000 => PowerLevelVisuals.VeryHighPower,
+            >= 30000 => PowerLevelVisuals.HighPower,
+            >= 20000 => PowerLevelVisuals.MediumPower,
+            >= 10000 => PowerLevelVisuals.LowPower,
             _ => PowerLevelVisuals.MinimalPower
         });
     }

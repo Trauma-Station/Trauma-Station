@@ -55,8 +55,7 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     /// <summary>
     /// The generator that this generator is paired with
     /// </summary>
-    [ViewVariables]
-    public Entity<GenericFieldGeneratorComponent>? ConnectedGenerator;
+    public Entity<GenericFieldGeneratorComponent>? ConnectedGenerator; // No VV cuz it looks ass
 
     /// <summary>
     /// A list of fields created by this generator.
@@ -79,7 +78,7 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     public TimeSpan PowerTimer;
 
     [DataField]
-    public TimeSpan PowerTime = TimeSpan.FromSeconds(0.5);
+    public TimeSpan PowerTime = TimeSpan.FromSeconds(0.2);
 
     //Ports
     [DataField]

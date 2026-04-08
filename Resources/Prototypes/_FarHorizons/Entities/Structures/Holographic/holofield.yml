@@ -44,8 +44,6 @@
     state: icon
   - type: GenericFieldGenerator
     createdField: HolographicField
-    chargeRate: 100
-    PowerDrain: 10f
   - type: PointLight
     enabled: false
     color: "#66ffea"
@@ -58,7 +56,7 @@
       enum.GenericFieldGeneratorVisuals.PowerLight:
         powerLight:
           NoPower: {visible: false}
-          MinimalPower : {visible: true, state: p1}
+          MinimalPower: {visible: true, state: p1}
           LowPower: {visible: true, state: p2}
           MediumPower: {visible: true, state: p3}
           HighPower: {visible: true, state: p4}
@@ -95,7 +93,7 @@
     locked: false
   - type: Battery
     netsync: false
-    maxCharge: 1500
+    maxCharge: 50000
     startingCharge: 0
   - type: Electrified
     onHandInteract: false
@@ -188,7 +186,7 @@
     enabled: true
     charged: true
   - type: Battery
-    startingCharge: 1500
+    startingCharge: 50000
   - type: Lock
     locked: true
 
@@ -229,7 +227,7 @@
     enabled: true
     charged: true
   - type: Battery
-    startingCharge: 1500
+    startingCharge: 50000
   - type: Lock
     locked: true
 
@@ -351,7 +349,7 @@
           EnergyMiss
   - type: Damageable
     damageContainer: Shield
-    damageModifierSet: HardLightBarrier
+    damageModifierSet: Metallic
   - type: ExaminableDamage
     messages: FieldMessages
   - type: Destructible
@@ -362,9 +360,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
   - type: GenericField
   - type: AmbientSound
     range: 8

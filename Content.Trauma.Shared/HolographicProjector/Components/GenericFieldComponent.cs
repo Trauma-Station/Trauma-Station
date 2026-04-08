@@ -22,7 +22,7 @@ public sealed partial class GenericFieldComponent : Component
     /// how much damage to heal per second
     /// </summary>
     [ViewVariables]
-    public float RegenRate = -1f;
+    public float RegenRate = -5f;
 
     /// <summary>
     /// Used to check if it's healed damage recently.
