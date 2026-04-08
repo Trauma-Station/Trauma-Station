@@ -4,14 +4,10 @@ using Content.Shared.CombatMode;
 using Content.Shared.Cuffs;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Components;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -22,8 +18,6 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
     [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
 
-    private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
-    private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     //private readonly float _missChance = 0.1f
 
     public override void Initialize()
@@ -31,8 +25,6 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MeleeSpeedKnowledgeComponent, GetMeleeAttackRateEvent>(OnGetMeleeAttackRate);
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetUserMeleeDamageEvent>(_knowledge.RelayActiveEvent);
-        SubscribeLocalEvent<MeleeDamageKnowledgeComponent, GetUserMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeExperience);
     }
 
@@ -40,12 +32,6 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     {
         var level = _knowledge.GetLevel(ent.Owner);
         args.Multipliers *= ent.Comp.Curve.GetCurve(level);
-    }
-
-    private void OnGetMeleeDamage(Entity<MeleeDamageKnowledgeComponent> ent, ref GetUserMeleeDamageEvent args)
-    {
-        var level = _knowledge.GetLevel(ent.Owner);
-        args.Damage *= ent.Comp.Curve.GetCurve(level);
     }
 
     // FIXME: wrong event to use bruh
@@ -81,10 +67,10 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
         };
 
         // give melee experience based on valid hit entities
-        _knowledge.AddExperience(brain, MeleeKnowledge, xpMelee, limit);
+        //_knowledge.AddExperience(brain, MeleeKnowledge, xpMelee, limit);
 
         // give strength experience based on weight. I'm not too sure how well it works to give melee experience based on the weight of hit things.
-        _knowledge.AddExperience(brain, StrengthKnowledge, Math.Min((int) (weight / 10), 10), limit);
+        //_knowledge.AddExperience(brain, StrengthKnowledge, Math.Min((int) (weight / 10), 10), limit);
     }
 
     // Miss Event Hook

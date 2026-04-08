@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Body;
-using Content.Shared.Chemistry;
+using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
+using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Attribute;
 using Content.Trauma.Common.Attribute.Components;
@@ -25,6 +26,7 @@ namespace Content.Trauma.Shared.Attribute.Systems;
 public sealed partial class SharedAttributeSystem : CommonAttributeSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityQuery<AwakeMobComponent> _awakeQuery = default!;
@@ -415,6 +417,8 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         (args.DiceUser, args.CriticallySucceeded) = RollContest(args.DiceUser, ent.Owner);
         args.Failed = (args.DiceUser + args.ModUser <= args.Threshold);
         args.CriticallyFailed = (args.DiceUser == 1);
+
+        _popup.PopupEntity($"{args.DiceUser}+{args.ModUser} vs. {args.Threshold}", ent, ent, PopupType.Medium);
     }
 
     private void OnOpposedContest(Entity<AttributeHolderComponent> ent, ref OnAttributeOpposedContest args)
@@ -425,6 +429,9 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         args.Failed = (args.DiceUser + args.ModUser <= args.DiceOpposed + args.ModOpposed);
         args.CriticallyFailedUser = (args.DiceUser == 1);
         args.CriticallyFailedOpposed = (args.DiceOpposed == 1);
+
+        _popup.PopupEntity($"{args.DiceUser}+{args.ModUser} vs. {args.DiceOpposed}+{args.ModOpposed}", ent, ent, PopupType.Medium);
+        _popup.PopupEntity($"{args.DiceOpposed}+{args.ModOpposed} vs. {args.DiceUser}+{args.ModUser}", args.Opposer, args.Opposer, PopupType.Medium);
     }
 
     private (int, bool) RollContest(int diceType, EntityUid uid)

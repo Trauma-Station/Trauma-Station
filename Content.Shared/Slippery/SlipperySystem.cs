@@ -223,7 +223,9 @@ public sealed class SlipAttemptEvent : EntityEventArgs, IInventoryRelayEvent
 [ByRefEvent]
 public record struct SlipCausingAttemptEvent (bool Cancelled);
 
+/// <summary>
 /// Raised on an entity that CAUSED some other entity to slip (e.g., the banana peel).
+/// </summary>
 /// <param name="Slipped">The entity being slipped</param>
 [ByRefEvent]
 public readonly record struct SlipEvent(EntityUid Slipped);
