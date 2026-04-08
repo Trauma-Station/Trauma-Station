@@ -64,7 +64,24 @@
 
 # Negative
 
-# cant really modify weights etc so just have a dedicated scheduler for it
+# cant really modify weights etc so just have a dedicated scheduler for thse
+- type: entity
+  parent: BaseGameRule
+  id: AnomalyStormRule
+  components:
+  - type: RuleSchedulerLimit
+    limit: 6
+  - type: BasicStationEventScheduler
+    scheduledGameRules:
+      id: AnomalySpawnRule
+    # 5-10 minutes in
+    minimumTimeUntilFirstEvent: 300
+    maximumSpanUntilFirstEvent: 300
+    # every 10-25 minutes after that
+    minMaxEventTiming:
+      min: 600
+      max: 1500
+
 - type: entity
   parent: BaseGameRule
   id: CarpInfestationRule
@@ -72,9 +89,8 @@
   - type: RuleSchedulerLimit
     limit: 8
   - type: BasicStationEventScheduler
-    scheduledGameRules: !type:AllSelector
-      children:
-      - id: CarpMigrationRule
+    scheduledGameRules:
+      id: CarpMigrationRule
     # 5-10 minutes in
     minimumTimeUntilFirstEvent: 300
     maximumSpanUntilFirstEvent: 300
