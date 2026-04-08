@@ -41,7 +41,7 @@
   - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
   - type: ClockworkTransferrer # Can be connected to ClockworkStructure
     maxConnections: 5
-    transferLossPerConnection: 1 # Gets decreased from Transfer variable
+    transferLossPerConnection: 3 # Gets decreased from Transfer variable
     transfer: 10
   - type: LimitedCharges
     maxCharges: 500

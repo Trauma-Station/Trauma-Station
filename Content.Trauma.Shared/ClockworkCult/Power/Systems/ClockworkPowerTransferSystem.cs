@@ -13,7 +13,7 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 /// </summary>
 public sealed class ClockworkPowerTransferSystem : EntitySystem
 {
-    [Dependency] private readonly ClockwinderSystem _clockwinder = default!;
+    [Dependency] private readonly SharedClockwinderSystem _clockwinder = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly IGameTiming _timing = default!;

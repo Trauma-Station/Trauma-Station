@@ -9,8 +9,6 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Components;
 /// Used on clockwork structures that can transfer their power charges to entities with <see cref="ClockworkStructureComponent"/>,
 /// via an entity with <see cref="ClockwinderComponent"/>.
 ///
-/// TODO: Add new charges api for clockwork cause ts not gonna work if this keeps up :sob: :pray:
-///
 /// Make sure your entity has <see cref="LimitedChargesComponent"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
@@ -48,6 +46,12 @@ public sealed partial class ClockworkTransferrerComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Connections = new();
+
+    /// <summary>
+    /// Color of the beam used in the <see cref="ClockworkTransferOverlay"/>.
+    /// </summary>
+    [DataField]
+    public Color Color = Color.Gold;
 }
 
 /// <summary>
