@@ -27,7 +27,7 @@
   name: Close Quarters Cooking
   description: Just like CQC, but only usable in the kitchen, freezer and cafeteria.
   components:
-  - type: MartialArtsKnowledge
+  - type: MartialArtsSkill
     giveExperience: false # only gain XP from cooking, do your job
   - type: ExperienceOnCooking
     scale: 5 # cook 200 meals to master it
@@ -87,7 +87,7 @@
     damageScaleCurve: !type:LinearSkillCurve
       skillScale: 2
       curveOffset: 1
-  - type: MeleeSpeedKnowledge
+  - type: MeleeSpeedSkill
     # 1x to 3x melee attack speed scaling with level
     curve: !type:LinearSkillCurve
       skillScale: 2

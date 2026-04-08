@@ -4,7 +4,6 @@
   id: BaseKnowledgeContainer
   components:
   - type: KnowledgeContainer
-  - type: AttributeContainer
   - type: ContainerContainer
     containers:
       knowledge: !type:Container

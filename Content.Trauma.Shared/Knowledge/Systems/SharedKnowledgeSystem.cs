@@ -10,8 +10,8 @@ using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.Silicons.Borgs;
+using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Language.Systems;
-using Content.Trauma.Shared.MartialArts.Components;
 using Content.Trauma.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -241,7 +241,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             // if you don't have it, you have a small change to learn it when gaining some xp
             if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))
-                EnsureKnowledge(ent, id, 0, popup);
+                EnsureKnowledge<SkillComponent>(ent, id, 0, popup);
             return;
         }
 
@@ -256,7 +256,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public void AddExperience(Entity<SkillComponent?> ent, EntityUid target, int added, int limit = 100)
     {
-        if (!_skillGain || !_query.Resolve(ent, ref ent.Comp))
+        if (!_skillGain || !_skillQuery.Resolve(ent, ref ent.Comp))
             return;
 
         var now = _timing.CurTime;
@@ -346,6 +346,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </returns>
     public Entity<T>? EnsureKnowledge<T>(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int level = 0, bool popup = true) where T : IComponent
     {
+        if (EnsureKnowledge(ent, id, level, popup) is { } unit && TryComp<T>(unit, out var comp))
+            return (unit, comp);
+        return null;
+    }
+
+    public EntityUid? EnsureKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int level = 0, bool popup = true)
+    {
         // Checkslop
         if (GetSkill(ent, id) is { } existing)
         {
@@ -354,9 +361,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 existing.Comp.LearnedLevel = level;
                 Dirty(existing, existing.Comp);
             }
-            if (TryComp<T>(existing.Owner, out var t))
-                return (existing.Owner, t);
-            return null;
+            return existing.Owner;
         }
         else if (GetAttribute(ent, id) is { } attribute)
         {
@@ -365,9 +370,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 attribute.Comp.Inherent = level;
                 Dirty(attribute, attribute.Comp);
             }
-            if (TryComp<T>(attribute.Owner, out var t))
-                return (attribute.Owner, t);
-            return null;
+            return attribute.Owner;
         }
         // Checkslop
 
@@ -394,11 +397,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         DirtyField(ent, ent.Comp, nameof(KnowledgeContainerComponent.KnowledgeDict));
 
         if (ent.Comp.Holder is not { } holder)
-        {
-            if (TryComp<T>(unit, out var t))
-                return (unit, t); // added knowledge to a loose brain...
-            return null;
-        }
+            return unit; // added knowledge to a loose brain...
         // Checkslop
 
         var ev = new KnowledgeAddedEvent(ent, holder);
@@ -409,9 +408,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             var msg = Loc.GetString("knowledge-unit-learned-popup", ("knowledge", Name(unit)));
             SkillPopup(msg, holder);
         }
-        if (TryComp<T>(unit, out var compT))
-            return (unit, compT);
-        return null; // Somehow, the try comp failed.
+        return unit;
     }
 
     /// <summary>
@@ -440,7 +437,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         foreach (var (id, level) in knowledgeList)
         {
-            EnsureKnowledge(ent, id, level, popup);
+            EnsureKnowledge<SkillComponent>(ent, id, level, popup);
         }
 
         var updateEv = new UpdateExperienceEvent();
@@ -540,6 +537,24 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     /// <summary>
+    /// Returns all Knowledge units inside the container component.
+    /// </summary>
+    public List<EntityUid>? TryGetAllKnowledgeUnits(EntityUid target)
+    {
+        if (GetContainer(target) is not { } ent)
+            return null;
+
+        var found = new List<EntityUid>();
+        foreach (var unit in ent.Comp.KnowledgeDict.Values)
+        {
+            found.Add(unit);
+        }
+
+        return found;
+    }
+
+
+    /// <summary>
     /// Returns the first knowledge entity of the target that has a given component.
     /// </summary>
     public EntityUid? HasKnowledgeComp<T>(EntityUid target) where T : IComponent
@@ -585,7 +600,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public bool IsHolder(EntityUid target)
         => _holderQuery.HasComp(target);
 
-    public override void ClearSkill(EntityUid target, bool deleteAll)
+    public override void ClearKnowledge(EntityUid target, bool deleteAll)
     {
         if (GetContainer(target) is not { } ent)
             return;

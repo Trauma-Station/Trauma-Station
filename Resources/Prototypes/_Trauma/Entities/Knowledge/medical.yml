@@ -3,7 +3,7 @@
   id: SurgeryKnowledge
   name: Surgery
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 24
 
 - type: entity
@@ -11,9 +11,9 @@
   id: FirstAidKnowledge
   name: First Aid
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 19
-  - type: InjectTimeKnowledge
+  - type: InjectTimeSkill
     # y = 1 + 1.4(0.6 - 0.01x)^3
     # 30% slower, 9% faster at lvl 0/100
     # no effect around lvl 60
@@ -28,5 +28,5 @@
   id: ChemistryKnowledge
   name: Chemistry
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 15

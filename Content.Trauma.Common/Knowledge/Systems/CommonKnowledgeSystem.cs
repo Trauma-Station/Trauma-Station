@@ -20,9 +20,9 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract Entity<AttributeComponent>? GetAttribute(EntityUid target, [ForbidLiteral] EntProtoId knowledgeUnit);
 
     /// <summary>
-    /// Clears a skill from the target entity.
+    /// Clears a knowledge from the target entity.
     /// </summary>
-    public abstract void ClearSkill(EntityUid target, bool deleteAll);
+    public abstract void ClearKnowledge(EntityUid target, bool deleteAll);
 
     /// <summary>
     /// Get every skill and the mastery level of a mob.

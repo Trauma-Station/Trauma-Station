@@ -78,7 +78,7 @@ public abstract partial class SharedMeleeWeaponSystem
     private void AdjustStaminaDamage(EntityUid user, ref float staminaDamage)
     {
         // TODO: use event for this bruh
-        if (_knowledge.GetKnowledge(user, MeleeKnowledge) is {} melee)
+        if (_knowledge.GetSkill(user, MeleeKnowledge) is {} melee)
         {
             staminaDamage *= 1 - _knowledge.SharpCurve(melee);
         }

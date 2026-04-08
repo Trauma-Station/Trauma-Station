@@ -10,13 +10,13 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Trauma.Client.Knowledge.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class KnowledgeTab : Control
+public sealed partial class SkillTab : Control
 {
     [Dependency] private readonly IEntitySystemManager _system = default!;
     private readonly KnowledgeSystem _knowledge;
     private readonly SpriteSystem _sprite;
 
-    public KnowledgeTab()
+    public SkillTab()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -28,7 +28,7 @@ public sealed partial class KnowledgeTab : Control
     /// <summary>
     /// Updates the specificied knowledge tab with the player's current martial arts knowledge.
     /// </summary>
-    public void UpdateKnowledgeTab(EntityUid player)
+    public void UpdateSkillTab(EntityUid player)
     {
         TabContainer.SetTabTitle(this, Loc.GetString("trauma-knowledge-title"));
 

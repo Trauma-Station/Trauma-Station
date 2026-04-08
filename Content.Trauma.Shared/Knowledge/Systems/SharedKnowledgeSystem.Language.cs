@@ -6,6 +6,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
+using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
 using Content.Trauma.Shared.Language.Systems;
@@ -20,7 +21,7 @@ public abstract partial class SharedKnowledgeSystem
     [Dependency] private readonly MetaDataSystem _meta = default!;
     //[Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    [Dependency] private readonly EntityQuery<LanguageSkillComponent> _langQuery = default!;
+    [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
 
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
     //private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
@@ -28,10 +29,10 @@ public abstract partial class SharedKnowledgeSystem
 
     private void InitializeLanguage()
     {
-        SubscribeLocalEvent<LanguageSkillComponent, MapInitEvent>(OnLanguageInit,
+        SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
             after: [ typeof(InitialBodySystem) ]); // great engine
-        SubscribeLocalEvent<LanguageSkillComponent, KnowledgeAddedEvent>(OnLanguageAdded);
-        SubscribeLocalEvent<LanguageSkillComponent, KnowledgeRemovedEvent>(OnLanguageRemoved);
+        SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);
+        SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeRemovedEvent>(OnLanguageRemoved);
 
         SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdd);
         SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemove);
@@ -43,19 +44,19 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<LanguageSpeakerComponent, EntitySpokeEvent>(OnLanguageSpoke);
     }
 
-    private void OnLanguageInit(Entity<LanguageSkillComponent> ent, ref MapInitEvent args)
+    private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
     {
         // to avoid copy pasting the name between each entity
         _meta.SetEntityName(ent.Owner, _language.GetLanguagePrototype(ent.Comp.LanguageId)!.Name);
     }
 
-    private void OnLanguageAdded(Entity<LanguageSkillComponent> ent, ref KnowledgeAddedEvent args)
+    private void OnLanguageAdded(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
     {
         var speaker = EnsureComp<LanguageSpeakerComponent>(args.Holder);
         UpdateEntityLanguages((args.Holder, speaker));
     }
 
-    private void OnLanguageRemoved(Entity<LanguageSkillComponent> ent, ref KnowledgeRemovedEvent args)
+    private void OnLanguageRemoved(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
     {
         if (args.Container.Comp.ActiveLanguage == ent.Owner)
             ChangeLanguage(args.Container, null);
@@ -87,7 +88,7 @@ public abstract partial class SharedKnowledgeSystem
     {
         var ev = new DetermineEntityLanguagesEvent();
         if (GetContainer(ent.Owner) is { } brain &&
-            GetKnowledgeWith<LanguageSkillComponent>(brain) is { } known)
+            GetSkillWith<LanguageKnowledgeComponent>(brain) is { } known)
         {
             foreach (var language in known)
             {
@@ -126,7 +127,7 @@ public abstract partial class SharedKnowledgeSystem
     private void SpeakerToKnowledge(Entity<LanguageSpeakerComponent> ent)
     {
         if (GetContainer(ent.Owner) is not { } brain ||
-            GetKnowledgeWith<LanguageSkillComponent>(brain) is not { } known)
+            GetSkillWith<LanguageKnowledgeComponent>(brain) is not { } known)
             return;
 
         foreach (var language in known)
@@ -149,7 +150,7 @@ public abstract partial class SharedKnowledgeSystem
 
         // We add the intrinsically known languages first so other systems can manipulate them easily
         var lang = args.Language;
-        EnsureKnowledge(brain, LanguageUnit(args.Language), 26);
+        EnsureKnowledge<SkillComponent>(brain, LanguageUnit(args.Language), 26);
 
         UpdateEntityLanguages(ent);
     }
@@ -158,7 +159,7 @@ public abstract partial class SharedKnowledgeSystem
     {
         var id = LanguageUnit(args.Language);
         if (GetContainer(ent.Owner) is not { } brain ||
-            GetKnowledge(brain, id) is not { } unit)
+            GetSkill(brain, id) is not { } unit)
             return;
 
         var langComp = _langQuery.Comp(unit);
@@ -204,7 +205,7 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (lang, speaks) in allLanguages)
         {
-            if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not { } unit)
+            if (EnsureKnowledge<SkillComponent>(brain, LanguageUnit(lang), 26) is not { } unit)
             {
                 Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
                 continue;
@@ -225,7 +226,7 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         var id = LanguageUnit(args.Language);
-        if (GetKnowledge(brain, id) is not { } unit)
+        if (GetSkill(brain, id) is not { } unit)
         {
             Log.Warning($"{ToPrettyString(ent)} spoke in language {args.Language} while not having knowledge of it!?");
             return;

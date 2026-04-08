@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Common.Knowledge;
-using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
@@ -92,7 +92,7 @@ public abstract partial class SharedKnowledgeSystem
     /// Returns null if the skill cannot be picked.
     /// </summary>
     public int[]? SkillCosts(EntProtoId id)
-        => AllKnowledges.TryGetValue(id, out var comp) && comp.Costs is { } costs
+        => AllSkills.TryGetValue(id, out var comp) && comp.Costs is { } costs
             ? costs
             : null;
 
@@ -101,7 +101,7 @@ public abstract partial class SharedKnowledgeSystem
     /// Returns null if the skill cannot be picked or the mastery is invalid.
     /// </summary>
     public int? SkillCost(EntProtoId id, int mastery)
-        => SkillCosts(id) is {} costs && mastery >= 0 && mastery < costs.Length
+        => SkillCosts(id) is { } costs && mastery >= 0 && mastery < costs.Length
             ? costs[mastery]
             : null;
 }

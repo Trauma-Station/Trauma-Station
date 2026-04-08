@@ -8,6 +8,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Shared.Physics.Components;

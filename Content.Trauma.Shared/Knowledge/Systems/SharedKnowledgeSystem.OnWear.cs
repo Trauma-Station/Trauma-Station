@@ -4,9 +4,9 @@ using Content.Shared.Body;
 using Content.Shared.Clothing;
 using Content.Shared.EntityConditions;
 using Content.Shared.Implants;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Silicons.Borgs;
-using Content.Trauma.Shared.Knowledge.Components;
-using Content.Trauma.Shared.MartialArts.Components;
+using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
@@ -70,7 +70,7 @@ public abstract partial class SharedKnowledgeSystem
         // Handle Skills (Temporary Levels)
         foreach (var (id, level) in ent.Comp.Skills)
         {
-            if (EnsureKnowledge(brain, id) is { } unit)
+            if (EnsureKnowledge<SkillComponent>(brain, id) is { } unit)
             {
                 unit.Comp.TemporaryLevel += level;
                 Dirty(unit);
@@ -91,7 +91,7 @@ public abstract partial class SharedKnowledgeSystem
         // Handle Blocks
         foreach (var id in ent.Comp.Blocked.Keys)
         {
-            if (GetKnowledge(brain, id) is { } unit && TryComp<MartialArtsSkillComponent>(unit, out var martial))
+            if (GetSkill(brain, id) is { } unit && TryComp<MartialArtsSkillComponent>(unit, out var martial))
             {
                 martial.TemporaryBlockedCounter++;
                 martial.Blocked = true;
@@ -111,7 +111,7 @@ public abstract partial class SharedKnowledgeSystem
         // Remove Skills
         foreach (var (id, level) in ent.Comp.Skills)
         {
-            if (GetKnowledge(brain, id) is not { } unit)
+            if (GetSkill(brain, id) is not { } unit)
                 continue;
 
             unit.Comp.TemporaryLevel = Math.Max(0, unit.Comp.TemporaryLevel - level);
@@ -140,7 +140,7 @@ public abstract partial class SharedKnowledgeSystem
         // Remove Blocks
         foreach (var id in ent.Comp.Blocked.Keys)
         {
-            if (GetKnowledge(brain, id) is { } unit && TryComp<MartialArtsSkillComponent>(unit, out var martial))
+            if (GetSkill(brain, id) is { } unit && TryComp<MartialArtsSkillComponent>(unit, out var martial))
             {
                 martial.Blocked = --martial.TemporaryBlockedCounter == 0;
                 Dirty(unit, martial);
@@ -169,7 +169,7 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (id, level) in skills)
         {
-            if (EnsureKnowledge(brain, id) is { } unit)
+            if (EnsureKnowledge<SkillComponent>(brain, id) is { } unit)
             {
                 unit.Comp.TemporaryLevel += level;
                 Dirty(unit);

@@ -6,7 +6,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Shared.Knowledge.Components;
+using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -95,13 +95,13 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             // no checking if you already had it, don't waste a cqc book if you already know it chud
             foreach (var (id, level) in ent.Comp.Skills)
             {
-                _knowledge.EnsureKnowledge(brain, id, level);
+                _knowledge.EnsureKnowledge<SkillComponent>(brain, id, level);
             }
             if (ent.Comp.GrantEverything)
             {
                 foreach (var id in _knowledge.AllSkills.Keys)
                 {
-                    _knowledge.EnsureKnowledge(brain, id, 100);
+                    _knowledge.EnsureKnowledge<SkillComponent>(brain, id, 100);
                 }
             }
             PredictedQueueDel(ent);
@@ -112,7 +112,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
         bool hasLearned = false;
         foreach (var (id, xp) in ent.Comp.Experience)
         {
-            if (_knowledge.EnsureKnowledge(brain, id) is not { } skill)
+            if (_knowledge.EnsureKnowledge<SkillComponent>(brain, id) is not { } skill)
                 continue;
 
             if (!(!ent.Comp.Skills.TryGetValue(id, out var skillCap) || (skill.Comp.LearnedLevel < skillCap || skillCap < 0)))

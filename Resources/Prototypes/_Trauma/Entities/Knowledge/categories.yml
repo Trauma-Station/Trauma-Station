@@ -3,7 +3,7 @@
   parent: BaseKnowledge
   abstract: true
   components:
-  - type: Knowledge
+  - type: Skill
     category: Medical
     color: "#1865d8"
 
@@ -12,7 +12,7 @@
   parent: BaseKnowledge
   abstract: true
   components:
-  - type: Knowledge
+  - type: Skill
     category: Physical
     costs: [0, 2, 4, 6, 8, 10] # combat skills cost 2x, no goku
     color: "#16e720"
@@ -22,7 +22,7 @@
   parent: BaseKnowledge
   abstract: true
   components:
-  - type: Knowledge
+  - type: Skill
     category: War
     costs: [0, 2, 6, 9]
     color: "#f71818"
@@ -32,7 +32,7 @@
   id: BaseCraftingKnowledge
   abstract: true
   components:
-  - type: Knowledge
+  - type: Skill
     category: Crafting
     color: "#0ba881"
     experienceCost: 20
@@ -43,7 +43,7 @@
   parent: BaseKnowledge
   abstract: true
   components:
-  - type: Knowledge
+  - type: Skill
     category: Intellectual
 
 - type: entity
@@ -51,7 +51,7 @@
   parent: BaseKnowledge
   abstract: true
   components:
-  - type: Knowledge
+  - type: Skill
     category: Scientific
     color: "#c01dcf"
 
@@ -60,7 +60,7 @@
   id: BaseRecipesKnowledge
   abstract: true
   components:
-  - type: Knowledge
+  - type: Skill
     category: Recipes
     color: "#f39b29"
     experienceCost: 20
@@ -71,7 +71,7 @@
   id: BaseLanguageKnowledge
   abstract: true
   components:
-  - type: Knowledge
+  - type: Skill
     category: Language
     learnedLevel: 26
     experienceCost: 16
@@ -87,49 +87,49 @@
   - type: Sprite
     sprite: _Goobstation/Interface/Misc/intents.rsi
     state: harm
-  - type: Knowledge
+  - type: Skill
     category: MartialArt
     experienceCost: 10
     color: "#c70000"
     costs: null # Being able to learn any of these roundstart is too much
-  - type: MartialArtsKnowledge
+  - type: MartialArtsSkill
     blocked: false
     icon: Objects/Misc/skub.rsi
 
 # Actual categories
 
-- type: knowledgeCategory
+- type: skillCategory
   id: MartialArt
   name: knowledge-category-Martial
 
-- type: knowledgeCategory
+- type: skillCategory
   id: Recipes
   name: knowledge-category-Recipes
 
-- type: knowledgeCategory
+- type: skillCategory
   id: Crafting
   name: knowledge-category-Crafting
 
-- type: knowledgeCategory
+- type: skillCategory
   id: Language
   name: knowledge-category-Languages
 
-- type: knowledgeCategory
+- type: skillCategory
   id: War
   name: knowledge-category-Combat
 
-- type: knowledgeCategory
+- type: skillCategory
   id: Medical
   name: knowledge-category-Medical
 
-- type: knowledgeCategory
+- type: skillCategory
   id: Physical
   name: knowledge-category-Physical
 
-- type: knowledgeCategory
+- type: skillCategory
   id: Intellectual
   name: knowledge-category-Intellectual
 
-- type: knowledgeCategory
+- type: skillCategory
   id: Scientific
   name: knowledge-category-Scientific

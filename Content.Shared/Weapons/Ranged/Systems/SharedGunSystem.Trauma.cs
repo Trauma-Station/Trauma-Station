@@ -119,7 +119,7 @@ public abstract partial class SharedGunSystem
         if (TryComp<GunComponent>(gun, out var gunComp) && gunComp.UnaffectedBySkill)
             return 1;
 
-        if (_knowledge.GetKnowledge(user, ShootingKnowledge) is not {} shooting)
+        if (_knowledge.GetSkill(user, ShootingKnowledge) is not {} shooting)
             return 3;
 
         var level = shooting.Comp.NetLevel;

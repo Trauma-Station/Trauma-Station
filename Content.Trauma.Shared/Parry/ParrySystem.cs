@@ -212,7 +212,7 @@ public sealed class ParrySystem : EntitySystem
     {
         return _proto.Resolve(knowledge, out var skillProto)
             && _knowledge.GetContainer(user) is { } brain
-            && _knowledge.GetKnowledge(brain, skillProto) is { } skill
+            && _knowledge.GetSkill(brain, skillProto) is { } skill
             && skill.Comp.NetLevel >= minLevel;
     }
 
@@ -225,7 +225,7 @@ public sealed class ParrySystem : EntitySystem
 
         if (!_proto.Resolve(item.Comp.RequiredSkill, out var skillProto)
         || _knowledge.GetContainer(user) is not { } brain
-        || _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
+        || _knowledge.GetSkill(brain, skillProto) is not { } skill)
             return false; // Shouldn't ever happen because we check this right after checking knowledge
 
         var result = exhComp.Exhaustion < 1f;
@@ -250,7 +250,7 @@ public sealed class ParrySystem : EntitySystem
         if (ent.Comp.MaxParries <= 0 ||
             !_proto.Resolve(ent.Comp.RequiredSkill, out var skillProto) ||
             _knowledge.GetContainer(args.Examiner) is not { } brain ||
-            _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
+            _knowledge.GetSkill(brain, skillProto) is not { } skill)
             return;
 
         var level = skill.Comp.NetLevel;
@@ -269,7 +269,7 @@ public sealed class ParrySystem : EntitySystem
             ent.Comp.MaxReflects <= 0 ||
             !_proto.Resolve(ent.Comp.RequiredSkill, out var skillProto) ||
             _knowledge.GetContainer(args.Examiner) is not { } brain ||
-            _knowledge.GetKnowledge(brain, skillProto) is not { } skill)
+            _knowledge.GetSkill(brain, skillProto) is not { } skill)
             return;
 
         var compTypes = ent.Comp.Reflects.ToString().Split(", ");

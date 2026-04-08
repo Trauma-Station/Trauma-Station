@@ -3,8 +3,8 @@
   id: JanitorKnowledge
   name: Janitor
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 5
-  - type: ThrowInsertKnowledge
+  - type: ThrowInsertSkill
     curve: !type:QuadraticSkillCurve
       skillScale: 2.9 # guaranteed success at lvl 30, dunk that can!

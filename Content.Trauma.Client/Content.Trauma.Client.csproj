@@ -20,4 +20,14 @@
 	<Import Project="../RobustToolbox/Imports/Shared.props" />
 	<Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
 	<Import Project="../RobustToolbox/MSBuild/XamlIL.targets" />
+	<ItemGroup>
+	  <AdditionalFiles Update="Knowledge\UI\AttributeTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </AdditionalFiles>
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Knowledge\UI\SkillTab.xaml.cs">
+	    <DependentUpon>SkillTab.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 </Project>

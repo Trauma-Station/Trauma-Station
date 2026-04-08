@@ -8,7 +8,6 @@
   components:
   # <Trauma>
   - type: KnowledgeHolder
-  - type: AttributeHolder
   - type: IntrinsicUI
     uis:
       enum.StationMapUiKey.Key:

@@ -10,7 +10,7 @@
   id: FabricationKnowledge
   name: Fabrication
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 15
     costs: [0, 1, 2, 3]
 

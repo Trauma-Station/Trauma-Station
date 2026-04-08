@@ -14,6 +14,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Shared.Prototypes;
@@ -128,7 +129,7 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         var unit = ev.Knowledge is { } id
-            ? GetKnowledge(ent, id)
+            ? GetSkill(ent, id)
             : null;
 
         if (unit != null && !_artQuery.HasComp(unit))

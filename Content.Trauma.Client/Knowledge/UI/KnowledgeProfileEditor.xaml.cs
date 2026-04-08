@@ -60,7 +60,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         UpdatePoints();
 
         EnabledSkills.RemoveAllChildren();
-        foreach (var (id, comp) in _knowledge.AllKnowledges)
+        foreach (var (id, comp) in _knowledge.AllSkills)
         {
             var name = _proto.Index(id).Name;
             if (comp.Costs is not { } costs)

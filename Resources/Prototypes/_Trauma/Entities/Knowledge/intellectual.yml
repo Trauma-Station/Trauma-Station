@@ -3,7 +3,7 @@
   id: MagicalLiteracyKnowledge
   name: Magical Literacy
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 30
     costs: [0, 3, 6, 9, 12, 15] # magic is hard...
 
@@ -12,5 +12,5 @@
   id: LiteracyKnowledge
   name: Literacy
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 20

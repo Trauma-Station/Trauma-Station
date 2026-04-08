@@ -3,10 +3,10 @@
   id: ToughnessKnowledge
   name: Toughness
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 20
   - type: ExperienceOnDamage # kenshi parity
-  - type: DamageModifyKnowledge
+  - type: DamageModifySkill
     # same as stamina damage im lazy
     # no debuff for lvl 0
     curve: !type:QuadraticSkillCurve
@@ -20,9 +20,9 @@
   id: StrengthKnowledge
   name: Strength
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 12
-  - type: MeleeDamageKnowledge
+  - type: MeleeDamageSkill
     # -12% to +25%, no change around lvl 45
     curve: !type:CubicSkillCurve
       skillScale: 1.13
@@ -34,9 +34,9 @@
   id: AthleticsKnowledge
   name: Athletics
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 12
-  - type: StaminaKnowledge
+  - type: StaminaSkill
     # no debuff at lvl 0, 37% damage reduction at lvl 100
     # you are in good shape not insulated from batong
     curve: !type:QuadraticSkillCurve
@@ -50,7 +50,7 @@
   id: ThrowingKnowledge
   name: Throwing
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 5
-  - type: ThrowInsertKnowledge # being better at throwing lets you slam dunk easier
+  - type: ThrowInsertSkill # being better at throwing lets you slam dunk easier
     curve: !type:QuadraticSkillCurve

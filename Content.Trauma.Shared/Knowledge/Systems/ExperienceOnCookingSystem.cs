@@ -2,7 +2,7 @@
 
 using Content.Trauma.Common.Kitchen;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Shared.Knowledge.Components;
+using Content.Trauma.Shared.Knowledge.Skills.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 

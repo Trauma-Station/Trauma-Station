@@ -11,6 +11,7 @@ using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Client.UserInterface.Controls;
@@ -58,26 +59,26 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     {
         _activeWindow = new WeakReference<CharacterWindow>(window);
 
-        KnowledgeTab? knowledgeTab = null;
+        SkillTab? skillTab = null;
         foreach (var child in window.Tabs.Children)
         {
-            if (child is KnowledgeTab)
+            if (child is SkillTab)
             {
-                knowledgeTab = (KnowledgeTab) child;
+                skillTab = (SkillTab) child;
                 break;
             }
         }
 
         TabContainer.SetTabTitle(window.CharacterTab, Loc.GetString("trauma-character-title"));
 
-        if (knowledgeTab == null)
+        if (skillTab == null)
         {
-            knowledgeTab = new KnowledgeTab();
-            window.Tabs.AddChild(knowledgeTab);
+            skillTab = new SkillTab();
+            window.Tabs.AddChild(skillTab);
         }
 
-        if (_player.LocalEntity is {} player)
-            knowledgeTab.UpdateKnowledgeTab(player);
+        if (_player.LocalEntity is { } player)
+            skillTab.UpdateSkillTab(player);
     }
 
     private void AddProfileEditorTab(HumanoidProfileEditor editor)
@@ -108,7 +109,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     /// </summary>
     public List<(EntityUid, EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
     {
-        if (GetKnowledgeWith<MartialArtsSkillComponent>(target) is not {} arts)
+        if (GetSkillWith<MartialArtsSkillComponent>(target) is not {} arts)
             return [];
 
         var list = new List<(EntityUid, EntProtoId, string)>();
@@ -122,13 +123,13 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
 
     public List<(ProtoId<SkillCategoryPrototype> Category, KnowledgeInfo Info)>? GrabAllKnowledge(EntityUid target)
     {
-        var knowledgeList = TryGetAllKnowledgeUnits(target);
+        var knowledgeList = TryGetAllSkillUnits(target);
 
         if (knowledgeList is not { } || knowledgeList.Count == 0)
             return null;
 
         return knowledgeList
-            .Select(ent => GetKnowledgeInfo(ent))
+            .Select(ent => GetSkillInfo(ent))
             .OrderBy(data => data.Category)
             .ThenBy(data => data.Info.Name)
             .ToList();

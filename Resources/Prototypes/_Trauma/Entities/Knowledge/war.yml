@@ -3,9 +3,9 @@
   id: MeleeKnowledge
   name: Melee
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 15
-  - type: MeleeSpeedKnowledge
+  - type: MeleeSpeedSkill
     # 75% to 125% speed scaling with level, tapers off
     # midlevel at lvl 25
     curve: !type:RootSkillCurve
@@ -17,5 +17,5 @@
   id: ShootingKnowledge
   name: Shooting
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 15

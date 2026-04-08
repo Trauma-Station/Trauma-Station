@@ -3,6 +3,7 @@
 using System.Linq;
 using Content.Server.Administration;
 using Content.Shared.Administration;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
@@ -19,7 +20,7 @@ public sealed class KnowledgeCommand : ToolshedCommand
     {
         _knowledge ??= GetSys<SharedKnowledgeSystem>();
 
-        if (_knowledge.GetContainer(input) is {} brain)
+        if (_knowledge.GetContainer(input) is { } brain)
             _knowledge.EnsureKnowledge(brain, proto, level);
         return input;
     }
@@ -40,7 +41,7 @@ public sealed class KnowledgeCommand : ToolshedCommand
             if (units == null)
                 return Array.Empty<EntityUid>();
 
-            return units.Select(u => u.Owner);
+            return units.Select(u => u);
         });
     }
 

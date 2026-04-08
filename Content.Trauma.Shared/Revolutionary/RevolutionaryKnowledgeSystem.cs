@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Revolutionary.Components;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Prototypes;
 
@@ -29,7 +30,7 @@ public sealed class RevolutionaryKnowledgeSystem : EntitySystem
         if (_knowledge.GetContainer(ent) is not { } brain)
             return;
 
-        _knowledge.EnsureKnowledge(brain, RevolutionaryKnowledge, 100, popup: false); // no popup, it's obvious and clashes with other stuff probably
+        _knowledge.EnsureKnowledge<SkillComponent>(brain, RevolutionaryKnowledge, 100, popup: false); // no popup, it's obvious and clashes with other stuff probably
     }
 
     private void OnRevShutdown(Entity<RevolutionaryComponent> ent, ref ComponentShutdown args)

@@ -4,7 +4,7 @@
   id: CookingKnowledge
   name: Cooking
   components:
-  - type: Knowledge
+  - type: Skill
     experienceCost: 15
   - type: ExperienceOnCooking # it just makes sense
     scale: 100 # cook 100 meals to master it from unskilled
@@ -74,7 +74,7 @@
   id: SpiderCraftKnowledge
   name: Spider Webs
   components:
-  - type: Knowledge
+  - type: Skill
     costs: null # Spider only
 
 - type: entity
@@ -87,5 +87,5 @@
   id: RevolutionaryKnowledge
   name: Revolutionary
   components:
-  - type: Knowledge
+  - type: Skill
     costs: null # lol

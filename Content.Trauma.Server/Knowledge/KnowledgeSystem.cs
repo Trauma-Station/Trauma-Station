@@ -27,7 +27,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     /// </summary>
     private void TransferKnowledge(Entity<KnowledgeHolderComponent> ent, ref TransferredToCloneEvent args)
     {
-        if (TryGetAllKnowledgeUnits(ent) is not { } found)
+        if (TryGetAllSkillUnits(ent) is not { } found)
             return;
 
         var mob = args.Cloned;

@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.Language.Components;
 /// Assigned to the knowledge entity that holds information about what languages the parent knows.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class LanguageSkillComponent : Component
+public sealed partial class LanguageKnowledgeComponent : Component
 {
     /// <summary>
     ///     Can this entity speak without any external tools.
