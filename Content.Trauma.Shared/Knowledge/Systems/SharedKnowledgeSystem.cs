@@ -3,7 +3,6 @@
 using Content.Shared.Body;
 using Content.Shared.Mind.Components;
 using Content.Shared.Random.Helpers;
-using Content.Trauma.Common.Attribute.Components;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;

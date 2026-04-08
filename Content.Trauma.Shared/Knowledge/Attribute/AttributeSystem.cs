@@ -3,8 +3,7 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
-using Content.Trauma.Common.Attribute;
-using Content.Trauma.Common.Attribute.Components;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;

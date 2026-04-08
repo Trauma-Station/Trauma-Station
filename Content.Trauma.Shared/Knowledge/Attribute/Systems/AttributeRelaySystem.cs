@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.Attribute;
-using Content.Trauma.Common.Attribute.Components;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 using Content.Trauma.Shared.Knowledge.Systems;

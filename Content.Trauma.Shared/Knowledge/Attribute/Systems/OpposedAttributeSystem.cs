@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Content.Trauma.Common.Attribute;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;

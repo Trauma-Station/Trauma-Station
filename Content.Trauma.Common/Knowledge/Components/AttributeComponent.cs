@@ -4,7 +4,7 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Common.Attribute.Components;
+namespace Content.Trauma.Common.Knowledge.Attribute.Components;
 
 /// <summary>
 /// Stores information about an attribute, assigned
