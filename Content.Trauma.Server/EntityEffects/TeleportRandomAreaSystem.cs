@@ -57,7 +57,7 @@ public sealed class TeleportRandomAreaSystem : EntityEffectSystem<TransformCompo
     }
 
     private bool IsTileUnsafe(Entity<TransformComponent> area)
-        => _atmos.GetTileMixture(area) is not {} mixture || // space
+        => _atmos.GetTileMixture(area.AsNullable()) is not {} mixture || // space
             mixture.Temperature <= 270 || mixture.Temperature >= 360 || // bad temp
             mixture.Pressure <= 20 || mixture.Pressure >= 300 || // bad pressure
             mixture[Oxygen] < 16; // not enough oxygen
