@@ -66,8 +66,8 @@
     weight: 0.5
     startAnnouncement: station-event-radiation-storm-announcement
     minimumPlayers: 25
-    recorrenceDelay: 20
-    maxOccurences: 3
+    reoccurrenceDelay: 20
+    maxOccurrences: 3
     duration: 1
   - type: RadiationStormRule
   - type: MapEffectsRule
