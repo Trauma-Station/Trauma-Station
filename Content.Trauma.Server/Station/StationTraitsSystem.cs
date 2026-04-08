@@ -212,4 +212,15 @@ public sealed class StationTraitsSystem : EntitySystem
         _forced.Add(id);
         return true;
     }
+
+    /// <summary>
+    /// Force all station traits, including conflicting ones, to be picked for the next round...
+    /// </summary>
+    public void ForceAllTraits()
+    {
+        foreach (var trait in _proto.EnumeratePrototypes<StationTraitPrototype>())
+        {
+            ForceTrait(trait.ID);
+        }
+    }
 }
