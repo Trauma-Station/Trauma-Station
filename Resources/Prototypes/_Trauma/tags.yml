@@ -122,6 +122,9 @@
   id: MagazineTurret
 
 - type: Tag
+  id: MagicMushroom
+
+- type: Tag
   id: OverrideKeyComponents
 
 - type: Tag
