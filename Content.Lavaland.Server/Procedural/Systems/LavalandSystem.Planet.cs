@@ -6,6 +6,7 @@ using Content.Lavaland.Server.Procedural.Components;
 using Content.Lavaland.Shared.Procedural.Components;
 using Content.Lavaland.Shared.Procedural.Prototypes;
 using Content.Shared.Atmos.Components;
+using Content.Shared.EntityEffects;
 using Content.Shared.Gravity;
 using Content.Shared.Parallax.Biomes;
 using Content.Shared.Salvage;
@@ -16,6 +17,8 @@ namespace Content.Lavaland.Server.Procedural.Systems;
 
 public sealed partial class LavalandSystem
 {
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+
     public bool SetupLavalandPlanet(
         ProtoId<LavalandMapPrototype> mapProto,
         out Entity<LavalandMapComponent>? lavaland,
@@ -83,9 +86,7 @@ public sealed partial class LavalandSystem
 
         _map.InitializeMap(lavalandMapId);
 
-        // Assign all other components to the map
-        if (prototype.AddComponents != null)
-            EntityManager.AddComponents(lavalandMap, prototype.AddComponents);
+        _effects.ApplyEffects(lavalandMap, prototype.MapEffects);
 
         // Preload here to prevent biome entities from overlaying with everything else
         _biome.Preload(lavalandMap, Comp<BiomeComponent>(lavalandMap), loadBox);

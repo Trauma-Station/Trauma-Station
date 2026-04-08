@@ -175,3 +175,13 @@
   - !type:StartGameRule
     rule: RevolutionaryFervorVariation
   # TODO: maybe add a forge or something randomly in maints..?
+
+- type: stationTrait
+  id: RadiationStormfront
+  group: Negative
+  chance: 0.4
+  name: "Radiation Stormfront"
+  report: "A radioactive stormfront is passing through your station's system. Expect an increased likelihood of radiation storms passing over your station."
+  effects:
+  - !type:StartGameRule
+    rule: RadiationStormfrontRule

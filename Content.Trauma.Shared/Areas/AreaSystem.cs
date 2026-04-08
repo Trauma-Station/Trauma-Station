@@ -94,13 +94,18 @@ public sealed class AreaSystem : EntitySystem
         => GetArea(Transform(target).Coordinates);
 
     /// <summary>
-    /// Get the area at a given position.
+    /// Get the area at a given position by finding its grid first.
     /// </summary>
     public EntityUid? GetArea(EntityCoordinates coords)
-    {
-        if (_transform.GetGrid(coords) is not {} grid)
-            return null;
+        => _transform.GetGrid(coords) is {} grid
+            ? GetArea(grid, coords)
+            : null;
 
+    /// <summary>
+    /// Get the area at a given position on a grid.
+    /// </summary>
+    public EntityUid? GetArea(EntityUid grid, EntityCoordinates coords)
+    {
         var pos = coords.Position;
         if (coords.EntityId != grid)
         {

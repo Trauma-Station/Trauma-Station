@@ -1,24 +1,66 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Atmos;
+using Content.Shared.EntityEffects;
+using Content.Shared.Parallax.Biomes;
+using Content.Shared.Parallax.Biomes.Markers;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Lavaland.Shared.Procedural.Prototypes;
 
 /// <summary>
-/// A simple wrapper that contains information about the planet, its static grid layout and a random ruin pool.
+/// Contains information about Lavaland planet configuration.
 /// </summary>
 [Prototype]
-public sealed partial class LavalandMapPrototype : IPrototype
+public sealed partial class LavalandPlanetPrototype : IPrototype, IInheritingPrototype
 {
-    /// <inheritdoc/>
     [IdDataField]
     public string ID { get; private set; } = default!;
 
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<LavalandPlanetPrototype>))]
+    public string[]? Parents { get; private set; }
+
+    [NeverPushInheritance]
+    [AbstractDataField]
+    public bool Abstract { get; private set; }
+
     [DataField(required: true)]
-    public ProtoId<LavalandPlanetPrototype> Planet = "Lavaland";
+    public LocId Name = "lavaland-planet-name-unknown";
 
     [DataField]
-    public ProtoId<LavalandLayoutPrototype>? Layout;
+    public float RestrictedRange = 512f;
+
+    [DataField(required: true)]
+    public GasMixture Atmosphere = GasMixture.SpaceGas;
 
     [DataField]
-    public ProtoId<LavalandRuinPoolPrototype>? Ruins;
+    public float Temperature = Atmospherics.T20C;
+
+    [DataField]
+    public Color MapLight = Color.FromHex("#D8B059");
+
+    [DataField("biome", required: true)]
+    public ProtoId<BiomeTemplatePrototype> BiomePrototype;
+
+    [DataField("markers")]
+    public List<ProtoId<BiomeMarkerLayerPrototype>> OreLayers = new()
+    {
+        "OreIron",
+        "OreCoal",
+        "OreQuartz",
+        "OreGold",
+        "OreSilver",
+        "OrePlasma",
+        "OreUranium",
+        "BSCrystal",
+        "OreBananium",
+        "OreArtifactFragment",
+        "OreDiamond",
+    };
+
+    /// <summary>
+    /// Entity effects to apply to the resulting map entity.
+    /// </summary>
+    [DataField]
+    public EntityEffect[] MapEffects = [];
 }

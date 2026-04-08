@@ -73,7 +73,7 @@
     limit: 6
   - type: BasicStationEventScheduler
     scheduledGameRules:
-      id: AnomalySpawnRule
+      id: AnomalySpawn
     # 5-10 minutes in
     minimumTimeUntilFirstEvent: 300
     maximumSpanUntilFirstEvent: 300
@@ -115,6 +115,23 @@
     minMaxEventTiming:
       min: 1200
       max: 1800
+
+- type: entity
+  parent: BaseGameRule
+  id: RadiationStormfrontRule
+  components:
+  - type: RuleSchedulerLimit
+    limit: 2
+  - type: BasicStationEventScheduler
+    scheduledGameRules:
+      id: RadiationStorm
+    # 10-15 minutes in
+    minimumTimeUntilFirstEvent: 600
+    maximumSpanUntilFirstEvent: 300
+    # every 40-60 minutes after that
+    minMaxEventTiming:
+      min: 2400
+      max: 3600
 
 - type: entity
   parent: BaseGameRule
