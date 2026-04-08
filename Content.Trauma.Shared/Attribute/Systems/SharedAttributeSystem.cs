@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Body;
-using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
@@ -418,7 +417,7 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         args.Failed = (args.DiceUser + args.ModUser <= args.Threshold);
         args.CriticallyFailed = (args.DiceUser == 1);
 
-        _popup.PopupEntity($"{args.DiceUser}+{args.ModUser} vs. {args.Threshold}", ent, ent, PopupType.Medium);
+        _popup.PopupPredicted($"{args.DiceUser}+{args.ModUser} vs. {args.Threshold}", ent, ent, PopupType.Medium);
     }
 
     private void OnOpposedContest(Entity<AttributeHolderComponent> ent, ref OnAttributeOpposedContest args)
@@ -430,8 +429,8 @@ public sealed partial class SharedAttributeSystem : CommonAttributeSystem
         args.CriticallyFailedUser = (args.DiceUser == 1);
         args.CriticallyFailedOpposed = (args.DiceOpposed == 1);
 
-        _popup.PopupEntity($"{args.DiceUser}+{args.ModUser} vs. {args.DiceOpposed}+{args.ModOpposed}", ent, ent, PopupType.Medium);
-        _popup.PopupEntity($"{args.DiceOpposed}+{args.ModOpposed} vs. {args.DiceUser}+{args.ModUser}", args.Opposer, args.Opposer, PopupType.Medium);
+        _popup.PopupPredicted($"{args.DiceUser}+{args.ModUser} vs. {args.DiceOpposed}+{args.ModOpposed}", ent, ent, PopupType.Medium);
+        _popup.PopupPredicted($"{args.DiceOpposed}+{args.ModOpposed} vs. {args.DiceUser}+{args.ModUser}", args.Opposer, args.Opposer, PopupType.Medium);
     }
 
     private (int, bool) RollContest(int diceType, EntityUid uid)

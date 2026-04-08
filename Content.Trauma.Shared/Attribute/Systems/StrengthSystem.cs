@@ -17,7 +17,6 @@ namespace Content.Trauma.Shared.Attribute.Systems;
 public sealed class StrengthSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -29,9 +28,6 @@ public sealed class StrengthSystem : EntitySystem
 
     private void OnUncuff(Entity<AttributeHolderComponent> ent, ref InstantUncuffEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         var selfEv = new GetStrengthFeatEvent();
         var cuffsEv = new GetStrengthFeatEvent();
 
@@ -45,7 +41,7 @@ public sealed class StrengthSystem : EntitySystem
         {
             var malus = EnsureComp<StrengthFeatTierdownComponent>(ent);
             malus.Mod += 2;
-            _popup.PopupEntity("You feel tired.", ent, ent, PopupType.Medium);
+            _popup.PopupPredicted("You feel tired.", ent, ent, PopupType.Medium);
             // TODO: Add a grunt or extertion event. Should cause a voice thingy or stamina damage.
             return;
         }
@@ -55,9 +51,6 @@ public sealed class StrengthSystem : EntitySystem
 
     private void OnDamageGet(Entity<AttributeHolderComponent> ent, ref GetUserMeleeDamageEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         var selfEv = new GetDamageModifierEvent();
 
         RaiseLocalEvent(ent.Owner, ref selfEv);

@@ -2,6 +2,7 @@
 
 using Content.Shared.Popups;
 using Content.Shared.Slippery;
+using Content.Shared.Stunnable;
 using Content.Trauma.Common.Attribute;
 using Content.Trauma.Common.Attribute.Components;
 using Robust.Shared.Timing;
@@ -14,7 +15,6 @@ namespace Content.Trauma.Shared.Attribute.Systems;
 public sealed class DexteritySystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly int _slipThreshold = 15;
     public override void Initialize()
@@ -26,7 +26,7 @@ public sealed class DexteritySystem : EntitySystem
 
     public void OnSlip(Entity<AttributeHolderComponent> ent, ref SlipAttemptEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
+        if (HasComp<NoSlipComponent>(ent) || HasComp<KnockedDownComponent>(ent))
             return;
 
         var selfEv = new GetAgilityFeatEvent();
@@ -37,17 +37,10 @@ public sealed class DexteritySystem : EntitySystem
 
         RaiseLocalEvent(ent, ref ev);
         var threshold = _slipThreshold - (ev.DiceUser + selfEv.Mod);
-        if (threshold > 5)
+        if (threshold > 0)
             return;
-        else if (threshold > 0)
-        {
-            _popup.PopupEntity("You begin to slip, but you somehow manage to keep your balance.", ent, ent, PopupType.Medium);
-            args.NoSlip = true;
-            args.SlowOverSlippery = true;
-            return;
-        }
 
-        _popup.PopupEntity("You begin to slip, but some deft footwork manages to keep you upright.", ent, ent, PopupType.Medium);
+        //_popup.PopupPredicted("You begin to slip, but some deft footwork manages to keep you upright.", ent, ent, PopupType.Medium);
         args.NoSlip = true;
     }
 }
