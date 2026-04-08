@@ -1,0 +1,6 @@
+- type: entity
+  parent: StatusEffectBase
+  id: StatusEffectFlip
+  name: flip
+  components:
+  - type: FlippingStatusEffect

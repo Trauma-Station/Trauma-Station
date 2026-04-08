@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Content.Trauma.Shared.Animations;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -10,26 +12,44 @@ namespace Content.Trauma.Client.Animations;
 
 public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animationSystem = default!;
+    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<FlippingComponent, AnimationCompletedEvent>(OnAnimationComplete);
-        SubscribeAllEvent<FlipOnHitEvent>(ev => PlayAnimation(GetEntity(ev.User)));
+        SubscribeLocalEvent<StatusEffectContainerComponent, AnimationCompletedEvent>(OnAnimationComplete);
+
+        SubscribeLocalEvent<FlippingStatusEffectComponent, StatusEffectRemovedEvent>(OnRemoved);
+        SubscribeLocalEvent<FlippingStatusEffectComponent, StatusEffectAppliedEvent>(OnApplied);
     }
 
-    private void OnAnimationComplete(Entity<FlippingComponent> ent, ref AnimationCompletedEvent args)
+    private void OnApplied(Entity<FlippingStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
-        if (args.Key != FlippingComponent.AnimationKey)
+        PlayAnimation(args.Target);
+    }
+
+    private void OnRemoved(Entity<FlippingStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
+    {
+        if (TerminatingOrDeleted(args.Target))
+            return;
+
+        _animation.Stop(args.Target, AnimationKey);
+    }
+
+    private void OnAnimationComplete(Entity<StatusEffectContainerComponent> ent, ref AnimationCompletedEvent args)
+    {
+        if (args.Key != AnimationKey)
+            return;
+
+        if (!Status.HasEffectComp<FlippingStatusEffectComponent>(ent))
             return;
 
         PlayAnimation(ent);
     }
 
-    protected override void PlayAnimation(EntityUid user)
+    private void PlayAnimation(EntityUid user)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
@@ -37,13 +57,8 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
         if (TerminatingOrDeleted(user))
             return;
 
-        if (_animationSystem.HasRunningAnimation(user, FlippingComponent.AnimationKey))
-        {
-            EnsureComp<FlippingComponent>(user);
+        if (_animation.HasRunningAnimation(user, AnimationKey))
             return;
-        }
-
-        RemComp<FlippingComponent>(user);
 
         var baseAngle = Angle.Zero;
         if (TryComp(user, out SpriteComponent? sprite))
@@ -53,7 +68,7 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
 
         var animation = new Animation
         {
-            Length = TimeSpan.FromMilliseconds(1600),
+            Length = Duration,
             AnimationTracks =
             {
                 new AnimationTrackComponentProperty
@@ -78,6 +93,6 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
             }
         };
 
-        _animationSystem.Play(user, animation, FlippingComponent.AnimationKey);
+        _animation.Play(user, animation, AnimationKey);
     }
 }
