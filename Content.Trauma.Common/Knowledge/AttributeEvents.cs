@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Content.Trauma.Common.Attribute;
+namespace Content.Trauma.Common.Knowledge;
 
 /// <summary>
 /// Raised on an attribute holder to calculate the damage modifier.

@@ -6,4 +6,4 @@ namespace Content.Trauma.Common.Stylesheets;
 /// Attribute for stylesheets to be loaded by the stylesheet manager.
 /// They can be gotten via <c>TryGetStylesheet</c> after loading.
 /// </summary>
-public sealed class LoadStylesheetAttribute : System.Attribute;
+public sealed class LoadStylesheetAttribute : Attribute;

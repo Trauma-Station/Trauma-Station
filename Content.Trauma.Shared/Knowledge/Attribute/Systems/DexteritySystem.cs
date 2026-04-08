@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Popups;
 using Content.Shared.Slippery;
 using Content.Shared.Stunnable;
-using Content.Trauma.Common.Attribute;
 using Content.Trauma.Common.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
