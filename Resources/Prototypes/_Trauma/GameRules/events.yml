@@ -73,7 +73,7 @@
   - type: MapEffectsRule
     effects:
     - !type:ModifyStatusEffect
-      effectProto: WeatherSchedulerRadStorm # removes itself when done
+      effectProto: WeatherSchedulerRadiationStorm # removes itself when done
 
 - type: entity
   id: RatmaSpawn
