@@ -1,42 +1,47 @@
 - type: entity
-  name: phaser
   parent: [ BaseWeaponBatterySmall, BaseSecurityContraband ]
   id: WeaponLaserSidearm
-  description: A trusty sidearm used by most space cops. Can be set to disable for wrangling criminals, and lethal for when the going gets tough.
+  name: phaser
+  description: The Type 5 Heat Delivery System, Compact Variant, developed by Nanotrasen. The workhorse of Nanotrasen's security forces, but in a more portable size. Sacrifices some stopping power and capacity for ease of carry and faster charging. Can be set to disable for wrangling criminals, and lethal for when the going gets tough.
   components:
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: Appearance
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/disabler.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_pistor.rsi
     layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
-      - state: mag-unshaded-4
-        map: ["enum.GunVisualLayers.MagUnshaded"]
-        shader: unshaded
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
   - type: Item
     storedOffset: -1,-5
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/disabler.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_pistor.rsi
     quickEquip: false
     slots:
-      - suitStorage
-      - Belt
-  - type: AmmoSelectorMagazineVisuals
+    - SuitStorage
+    - Belt
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
     zeroVisible: true
-    magSteps: 5
-    magStates:
-      BulletDisablerSidearm: mag
-      BulletLethalSidearm: mag-lethal
   - type: BatteryAmmoProvider
-    proto: SidearmDisable
-    fireCost: 80
+    proto: BulletDisabler
+    fireCost: 31.25
   - type: Tag
     tags:
     - Taser
     - Sidearm
   - type: Battery
-    maxCharge: 1000
-    startingCharge: 1000
+    maxCharge: 625
+    startingCharge: 625
   - type: AmmoSelector
     prototypes:
     - BulletDisablerSidearm
@@ -52,3 +57,61 @@
     guides:
     - Security
     - Antagonists
+
+- type: entity
+  parent: WeaponLaserCarbine
+  id: WeaponLaserGunCarbine
+  name: laser carbine
+  description: The burst fire Type 5/R Rapid Heat Delivery System, developed by Nanotrasen. Capable of firing a sustained volley of directed energy projectiles, though each individual projectile lacks the punch of the Type 5.
+  components:
+  - type: Gun
+    minAngle: 22
+    maxAngle: 46
+    angleIncrease: 2
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    fireRate: 4
+    burstFireRate: 8
+    shotsPerBurst: 2
+    burstCooldown: 0.2
+  - type: BatteryAmmoProvider
+    proto: LaserCarbineBullet
+    fireCost: 25
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_carbine.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_carbine.rsi
+
+- type: entity
+  parent: WeaponLaserCarbine
+  id: WeaponLaserGunAssault
+  name: assault laser rifle
+  description: The Type 5 Heat Delivery System, Assault Variant, developed by Nanotrasen. The workhorse of Nanotrasen's security forces and paramilitary organizations. While it sacrifices some stopping power and ease of use, its laser system is remarkably efficient and it boasts some resistance against electromagnetic interference.
+  components:
+  - type: Gun
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    fireRate: 1
+    burstFireRate: 8
+    shotsPerBurst: 2
+    burstCooldown: 0.5
+  - type: BatteryAmmoProvider
+    proto: LaserGunBullet
+    fireCost: 62.5
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/assault_laser_wide.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/assault_laser.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/assault_laser.rsi
+    size: Huge
+    shape:
+    - 0,0,4,2
+  - type: Battery
+    maxCharge: 2000
+    startingCharge: 2000
+  - type: EmpResistance
+    strengthMultiplier: 0.5
+    durationMultiplier: 0.5

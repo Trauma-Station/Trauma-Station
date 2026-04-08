@@ -82,6 +82,7 @@
 
 using System.Numerics;
 using Content.Client.Clickable;
+using Content.IntegrationTests.Fixtures;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.GameObjects;
@@ -89,7 +90,7 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
-    public sealed class ClickableTest
+    public sealed class ClickableTest : GameTest
     {
         private const double DirSouth = 0;
         private const double DirNorth = Math.PI;
@@ -126,7 +127,7 @@ namespace Content.IntegrationTests.Tests
         [TestCase("ClickTestRotatingCornerInvisibleNoRot", 0.25f, 0.25f, DirSouthEastJustShy, 1, ExpectedResult = true)]
         public async Task<bool> Test(string prototype, float clickPosX, float clickPosY, double angle, float scale)
         {
-            await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+            var pair = Pair;
             var server = pair.Server;
             var client = pair.Client;
 
@@ -148,7 +149,7 @@ namespace Content.IntegrationTests.Tests
             });
 
             // Let client sync up.
-            await pair.RunTicksSync(5);
+            await RunUntilSynced();
 
             var hit = false;
             var clientEnt = clientEntManager.GetEntity(serverEntManager.GetNetEntity(serverEnt));
@@ -170,8 +171,6 @@ namespace Content.IntegrationTests.Tests
             {
                 serverEntManager.DeleteEntity(serverEnt);
             });
-
-            await pair.CleanReturnAsync();
 
             return hit;
         }

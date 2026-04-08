@@ -1,11 +1,14 @@
-using System.Collections.Generic;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Preferences.Loadouts;
 using Robust.Shared.Prototypes;
+using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
 [TestFixture]
-public sealed class LoadoutOrphanTest
+public sealed class LoadoutOrphanTest : GameTest
 {
     /// <summary>
     /// Ensures that every <see cref="LoadoutPrototype"/> is present in at least 1 <see cref="LoadoutGroupPrototype"/>.
@@ -14,7 +17,7 @@ public sealed class LoadoutOrphanTest
     [Test]
     public async Task NoOrphanedLoadoutsTest()
     {
-        var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
         var proto = server.ProtoMan;
 
@@ -41,7 +44,5 @@ public sealed class LoadoutOrphanTest
                 }
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 }

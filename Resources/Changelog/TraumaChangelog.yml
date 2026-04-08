@@ -6473,3 +6473,77 @@ Entries:
   id: 749
   time: '2026-04-07T07:25:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1896
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to repair weapons durability with a welder.
+  id: 750
+  time: '2026-04-07T10:02:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1900
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed biomass reclaimer not working and bonking clown heads instead of
+      mincing them.
+  id: 751
+  time: '2026-04-07T14:09:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1902
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: You can no longer pull phones
+  id: 752
+  time: '2026-04-07T16:16:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1904
+- author: Armok
+  changes:
+  - type: Fix
+    message: 15 Second lag delay bug
+  id: 753
+  time: '2026-04-07T18:45:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1905
+- author: JohnJJohn
+  changes:
+  - type: Tweak
+    message: Possibly fixed credits
+  id: 754
+  time: '2026-04-07T19:19:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1907
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: >-
+      Ion rifle EMP blast was nerfed, and no longer instantly stunlocks
+      xenoborgs to death.
+  - type: Fix
+    message: Fixed abductors appearing way too often.
+  id: 755
+  time: '2026-04-07T21:14:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1887
+- author: Aviu
+  changes:
+  - type: Add
+    message: Antags, deathsquad, hecu, antag reinforcements have skills now.
+  - type: Fix
+    message: Skills now transfer on polymorph.
+  - type: Tweak
+    message: Buffed sec and nukie skills slightly.
+  id: 756
+  time: '2026-04-07T21:29:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1852
+- author: Aviu, RedTerrorDark
+  changes:
+  - type: Add
+    message: More roundstart laser gun variety, better sprites and sounds.
+  - type: Tweak
+    message: Reduced eye blur effect from lasers.
+  - type: Fix
+    message: Energy shotgun projectiles now pierce through glass.
+  - type: Tweak
+    message: Laser gun buffs.
+  - type: Tweak
+    message: Gun resprites (RedTerrorDark)
+  id: 757
+  time: '2026-04-07T21:33:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1894

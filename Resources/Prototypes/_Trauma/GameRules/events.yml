@@ -21,13 +21,13 @@
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
+    - id: MorphRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
     - id: BlobSpawn
-    - id: MorphRule
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation

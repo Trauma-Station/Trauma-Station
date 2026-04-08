@@ -345,8 +345,19 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+    layers:
+    - state: head
+      shader: Emissive
+      map: [ "enum.MetallicVisuals.Layer" ]
+    - state: handle
+    - state: spear1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Item
     sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+  - type: SolutionContainerVisuals
+    equippedFillBaseName: null # doesnt have an equipped sprite lol
+    equippedMaxFillLevels: 0
 
 # Morningstar
 
