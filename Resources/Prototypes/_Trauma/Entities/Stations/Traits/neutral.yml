@@ -7,6 +7,17 @@
     rule: BananiumShipmentRule
 
 - type: stationTrait
+  id: IanAdventure
+  name: "Ian's Adventure"
+  report: null # Kept you waiting, huh?
+  mapEffects: # ian has to spawn first, itd probably be weird to move the spawner instead of the spawned mob
+  - !type:StationQueryEffects
+    compName: IanAdventureTarget
+    effects:
+    - !type:TeleportRandomArea
+      safe: true
+
+- type: stationTrait
   id: UniqueAI
   name: "Unique AI"
   report: "For experimental purposes, this station AI might show divergence from default lawset. Do not meddle with this experiment."
