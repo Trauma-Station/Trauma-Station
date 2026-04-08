@@ -124,7 +124,7 @@
     limit: 2
   - type: BasicStationEventScheduler
     scheduledGameRules:
-      id: RadiationStorm
+      id: RadiationStormRule
     # 10-15 minutes in
     minimumTimeUntilFirstEvent: 600
     maximumSpanUntilFirstEvent: 300
