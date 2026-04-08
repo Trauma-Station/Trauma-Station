@@ -6547,3 +6547,26 @@ Entries:
   id: 757
   time: '2026-04-07T21:33:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1894
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Grab-throwing mice and other light mobs no longer knocks down anyone they
+      hit.
+  id: 758
+  time: '2026-04-08T06:56:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1915
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added 15 second delay hell lag back!
+  id: 759
+  time: '2026-04-08T10:42:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1917
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: No more map vote spamming while in the middle of a round :)
+  id: 760
+  time: '2026-04-08T12:37:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1908

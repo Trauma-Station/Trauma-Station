@@ -276,6 +276,19 @@ namespace Content.Server.Voting.Managers
 
             if (alone)
                 options.InitiatorTimeout = TimeSpan.FromSeconds(10);
+            // <Trauma> - only allow calling map vote when it matters
+            var roundEnd = _entityManager.System<RoundEndSystem>();
+            if (_gameTicker?.RunLevel == GameRunLevel.InRound && !roundEnd.IsRoundEndRequested())
+            {
+                if (initiator is { } session)
+                {
+                    _voteTimeout[initiator.UserId] = _timing.RealTime + options.Duration; // no spamming it
+                    var msg = "i died pls map vote";
+                    _chatManager.ChatMessageToOne(ChatChannel.Server, msg, msg, default, false, session.Channel);
+                }
+                return;
+            }
+            // </Trauma>
 
             foreach (var (k, v) in maps)
             {
