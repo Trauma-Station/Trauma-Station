@@ -69,6 +69,7 @@
     recorrenceDelay: 20
     maxOccurences: 3
     duration: 1
+  - type: RadiationStormRule
   - type: MapEffectsRule
     effects:
     - !type:ModifyStatusEffect
