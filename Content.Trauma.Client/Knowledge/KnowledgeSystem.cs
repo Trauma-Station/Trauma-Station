@@ -108,7 +108,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     /// </summary>
     public List<(EntityUid, EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
     {
-        if (GetKnowledgeWith<MartialArtsKnowledgeComponent>(target) is not {} arts)
+        if (GetKnowledgeWith<MartialArtsSkillComponent>(target) is not {} arts)
             return [];
 
         var list = new List<(EntityUid, EntProtoId, string)>();
@@ -120,7 +120,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         return list;
     }
 
-    public List<(ProtoId<KnowledgeCategoryPrototype> Category, KnowledgeInfo Info)>? GrabAllKnowledge(EntityUid target)
+    public List<(ProtoId<SkillCategoryPrototype> Category, KnowledgeInfo Info)>? GrabAllKnowledge(EntityUid target)
     {
         var knowledgeList = TryGetAllKnowledgeUnits(target);
 
@@ -160,7 +160,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             _popup.PopupEntity(args.Popup, player, player, PopupType.Small);
     }
 
-    public EntProtoId? GetEntProtoId(Entity<MartialArtsKnowledgeComponent>? martialArt)
+    public EntProtoId? GetEntProtoId(Entity<MartialArtsSkillComponent>? martialArt)
     {
         if (martialArt is not { } martialArtTrue)
             return null;

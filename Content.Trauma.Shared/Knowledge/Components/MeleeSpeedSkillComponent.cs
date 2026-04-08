@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Knowledge.Components;
 /// Multiplies melee attack speed according to a skill curve.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(MeleeKnowledgeSystem))]
-public sealed partial class MeleeSpeedKnowledgeComponent : Component
+public sealed partial class MeleeSpeedSkillComponent : Component
 {
     /// <summary>
     /// The curve to scale speed by, should never give 0 as it is for multiplying.

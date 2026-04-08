@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Knowledge.Components;
 /// Knowledge component that modifies physical damage taken.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(DamageModifyKnowledgeSystem))]
-public sealed partial class DamageModifyKnowledgeComponent : Component
+public sealed partial class DamageModifySkillComponent : Component
 {
     /// <summary>
     /// The curve to multiply damage by, this gets multiplied with so it should not be 0.

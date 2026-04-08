@@ -91,7 +91,7 @@ public abstract partial class SharedKnowledgeSystem
         // Handle Blocks
         foreach (var id in ent.Comp.Blocked.Keys)
         {
-            if (GetKnowledge(brain, id) is { } unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            if (GetKnowledge(brain, id) is { } unit && TryComp<MartialArtsSkillComponent>(unit, out var martial))
             {
                 martial.TemporaryBlockedCounter++;
                 martial.Blocked = true;
@@ -140,7 +140,7 @@ public abstract partial class SharedKnowledgeSystem
         // Remove Blocks
         foreach (var id in ent.Comp.Blocked.Keys)
         {
-            if (GetKnowledge(brain, id) is { } unit && TryComp<MartialArtsKnowledgeComponent>(unit, out var martial))
+            if (GetKnowledge(brain, id) is { } unit && TryComp<MartialArtsSkillComponent>(unit, out var martial))
             {
                 martial.Blocked = --martial.TemporaryBlockedCounter == 0;
                 Dirty(unit, martial);

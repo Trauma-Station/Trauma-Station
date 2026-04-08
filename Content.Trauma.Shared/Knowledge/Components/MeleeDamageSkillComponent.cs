@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Knowledge.Components;
 /// Adds bonus damage to your melee attacks using weapons or punching.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(MeleeKnowledgeSystem))]
-public sealed partial class MeleeDamageKnowledgeComponent : Component
+public sealed partial class MeleeDamageSkillComponent : Component
 {
     /// <summary>
     /// The curve to multiply damage by, this gets multiplied so it should not be 0.

@@ -12,13 +12,13 @@ namespace Content.Trauma.Common.Knowledge.Components;
 /// to a dummy entity that is parented to some entity with <see cref="KnowledgeContainerComponent"/>, usually a brain.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, EntityCategory("Knowledge")]
-public sealed partial class KnowledgeComponent : Component
+public sealed partial class SkillComponent : Component
 {
     /// <summary>
     /// Category of that knowledge.
     /// </summary>
     [DataField(required: true)]
-    public ProtoId<KnowledgeCategoryPrototype> Category;
+    public ProtoId<SkillCategoryPrototype> Category;
 
     /// <summary>
     /// Current learned level of this knowledge from 0-100.

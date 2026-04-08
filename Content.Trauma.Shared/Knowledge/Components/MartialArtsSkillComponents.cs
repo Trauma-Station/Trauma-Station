@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 namespace Content.Trauma.Shared.MartialArts.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class MartialArtsKnowledgeComponent : Component
+public sealed partial class MartialArtsSkillComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Blocked;

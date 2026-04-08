@@ -8,7 +8,7 @@ namespace Content.Trauma.Common.Knowledge.Prototypes;
 /// Specifies a category of knowledge, for example is it a skill or a memory.
 /// </summary>
 [Prototype]
-public sealed partial class KnowledgeCategoryPrototype : IPrototype
+public sealed partial class SkillCategoryPrototype : IPrototype
 {
     /// <inheritdoc/>
     [IdDataField]

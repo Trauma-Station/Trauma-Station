@@ -9,8 +9,8 @@ namespace Content.Trauma.Shared.Knowledge.Components;
 /// Knowledge component to modify injector time according to a skill curve.
 /// For instant injections (hyposprays) it will instead give it a delay at low skill.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(FirstAidKnowledgeSystem))]
-public sealed partial class InjectTimeKnowledgeComponent : Component
+[RegisterComponent, NetworkedComponent, Access(typeof(FirstAidSkillSystem))]
+public sealed partial class InjectTimeSkillComponent : Component
 {
     /// <summary>
     /// The skill curve to use.

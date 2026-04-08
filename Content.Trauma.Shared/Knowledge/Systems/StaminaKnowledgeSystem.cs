@@ -17,17 +17,17 @@ public sealed class StaminaKnowledgeSystem : EntitySystem
 
         SubscribeLocalEvent<KnowledgeHolderComponent, BeforeStaminaDamageEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<KnowledgeHolderComponent, TookStaminaDamageEvent>(_knowledge.RelayEvent);
-        SubscribeLocalEvent<StaminaKnowledgeComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
-        SubscribeLocalEvent<StaminaKnowledgeComponent, TookStaminaDamageEvent>(OnTookStaminaDamage);
+        SubscribeLocalEvent<StaminaSkillComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
+        SubscribeLocalEvent<StaminaSkillComponent, TookStaminaDamageEvent>(OnTookStaminaDamage);
     }
 
-    private void OnBeforeStaminaDamage(Entity<StaminaKnowledgeComponent> ent, ref BeforeStaminaDamageEvent args)
+    private void OnBeforeStaminaDamage(Entity<StaminaSkillComponent> ent, ref BeforeStaminaDamageEvent args)
     {
         var level = _knowledge.GetLevel(ent.Owner);
         args.Value *= ent.Comp.Curve.GetCurve(level);
     }
 
-    private void OnTookStaminaDamage(Entity<StaminaKnowledgeComponent> ent, ref TookStaminaDamageEvent args)
+    private void OnTookStaminaDamage(Entity<StaminaSkillComponent> ent, ref TookStaminaDamageEvent args)
     {
         var xp = Math.Min((int) args.Amount / ent.Comp.DamageScale, ent.Comp.MaxGain);
         // TODO: better limit

@@ -44,7 +44,7 @@ public sealed class QualitySystem : EntitySystem
     [Dependency] private readonly EntityQuery<QualityComponent> _query = default!;
 
     private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
-    private static readonly ProtoId<KnowledgeCategoryPrototype> CraftingCategory = "Crafting";
+    private static readonly ProtoId<SkillCategoryPrototype> CraftingCategory = "Crafting";
 
     public override void Initialize()
     {

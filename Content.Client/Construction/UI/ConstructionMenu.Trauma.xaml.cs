@@ -46,7 +46,7 @@ public sealed partial class ConstructionMenu
         foreach (var (id, amount) in skills)
         {
             // TODO: use AllSkills
-            if (!_proto.Resolve(id, out var prototype) || !prototype.TryGetComponent<KnowledgeComponent>("Knowledge", out var skill))
+            if (!_proto.Resolve(id, out var prototype) || !prototype.TryGetComponent<SkillComponent>("Knowledge", out var skill))
                 continue;
 
             var text = Loc.GetString("construction-menu-requirement-display",

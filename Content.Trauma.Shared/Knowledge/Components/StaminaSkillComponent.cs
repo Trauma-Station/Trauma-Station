@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Knowledge.Components;
 /// Modifies stamina damage taken and gives XP when taking stamina damage.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(StaminaKnowledgeSystem))]
-public sealed partial class StaminaKnowledgeComponent : Component
+public sealed partial class StaminaSkillComponent : Component
 {
     /// <summary>
     /// The curve to multiply stamina damage by, this gets multiplied with so it should not be 0.

@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Trauma.Common.Knowledge.Components;
 
 /// <summary>
-/// Contains knowledge entities inside with <see cref="KnowledgeComponent"/>.
+/// Contains knowledge entities inside with <see cref="SkillComponent"/>.
 /// Assigned to some physical bodies, for example brains.
 /// </summary>
 [RegisterComponent, NetworkedComponent]

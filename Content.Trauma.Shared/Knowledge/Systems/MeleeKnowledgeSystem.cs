@@ -24,11 +24,11 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MeleeSpeedKnowledgeComponent, GetMeleeAttackRateEvent>(OnGetMeleeAttackRate);
+        SubscribeLocalEvent<MeleeSpeedSkillComponent, GetMeleeAttackRateEvent>(OnGetMeleeAttackRate);
         SubscribeLocalEvent<MeleeHitEvent>(OnMeleeExperience);
     }
 
-    private void OnGetMeleeAttackRate(Entity<MeleeSpeedKnowledgeComponent> ent, ref GetMeleeAttackRateEvent args)
+    private void OnGetMeleeAttackRate(Entity<MeleeSpeedSkillComponent> ent, ref GetMeleeAttackRateEvent args)
     {
         var level = _knowledge.GetLevel(ent.Owner);
         args.Multipliers *= ent.Comp.Curve.GetCurve(level);

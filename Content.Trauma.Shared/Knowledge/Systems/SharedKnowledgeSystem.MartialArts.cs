@@ -26,12 +26,12 @@ public abstract partial class SharedKnowledgeSystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly EntityQuery<MartialArtsKnowledgeComponent> _artQuery = default!;
+    [Dependency] private readonly EntityQuery<MartialArtsSkillComponent> _artQuery = default!;
 
     private void InitializeMartialArts()
     {
-        SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeAddedEvent>(OnMartialArtAdded);
-        SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeRemovedEvent>(OnMartialArtRemoved);
+        SubscribeLocalEvent<MartialArtsSkillComponent, KnowledgeAddedEvent>(OnMartialArtAdded);
+        SubscribeLocalEvent<MartialArtsSkillComponent, KnowledgeRemovedEvent>(OnMartialArtRemoved);
 
         SubscribeLocalEvent<ComboActionsComponent, KnowledgeEnabledEvent>(OnComboActionsEnabled);
         SubscribeLocalEvent<ComboActionsComponent, KnowledgeDisabledEvent>(OnComboActionsDisabled);
@@ -51,7 +51,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeAllEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
     }
 
-    private void OnMartialArtAdded(Entity<MartialArtsKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
+    private void OnMartialArtAdded(Entity<MartialArtsSkillComponent> ent, ref KnowledgeAddedEvent args)
     {
         // if you learn a martial art without one active, automatically select it
         if (args.Container.Comp.ActiveMartialArt != null)
@@ -60,7 +60,7 @@ public abstract partial class SharedKnowledgeSystem
         ChangeMartialArts(args.Container, args.Holder, ent);
     }
 
-    private void OnMartialArtRemoved(Entity<MartialArtsKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
+    private void OnMartialArtRemoved(Entity<MartialArtsSkillComponent> ent, ref KnowledgeRemovedEvent args)
     {
         if (args.Container.Comp.ActiveMartialArt == ent.Owner)
             ChangeMartialArts(args.Container, args.Holder, null); // disables the skill internally

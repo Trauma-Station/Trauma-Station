@@ -36,7 +36,7 @@ public sealed partial class MartialArtsTabControl : BaseTabControl
 
         if (_player.LocalEntity is not {} player ||
             _knowledge.GetContainer(player) is not {} brain ||
-            _knowledge.GetKnowledgeWith<MartialArtsKnowledgeComponent>(brain) is not {} arts)
+            _knowledge.GetKnowledgeWith<MartialArtsSkillComponent>(brain) is not {} arts)
             return false;
 
         var button = CreateMartialArtsButton(null);
@@ -51,7 +51,7 @@ public sealed partial class MartialArtsTabControl : BaseTabControl
     }
 
 
-    private IconButton CreateMartialArtsButton(Entity<MartialArtsKnowledgeComponent>? martialArt)
+    private IconButton CreateMartialArtsButton(Entity<MartialArtsSkillComponent>? martialArt)
     {
         var (name, proto) = _entMan.TryGetComponent<MetaDataComponent>(martialArt, out var meta)
             ? (meta.EntityName, meta.EntityPrototype?.ID)

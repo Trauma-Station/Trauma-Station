@@ -9,8 +9,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <BoxContainer Orientation="Vertical">
         <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
             <BoxContainer Orientation="Vertical" Margin="8">
-                <BoxContainer Orientation="Vertical" Name="KnowledgeBox" Access="Public"/>
-                <controls:Placeholder Name="KnowledgePlaceholder" Access="Public" PlaceholderText="{Loc 'ui-character-knowledge-placeholder-text'}"/>
+                <BoxContainer Orientation="Vertical" Name="AttributeBox" Access="Public"/>
+                <controls:Placeholder Name="AttributePlaceholder" Access="Public" PlaceholderText="{Loc 'ui-character-attributee-placeholder-text'}"/>
             </BoxContainer>
         </ScrollContainer>
     </BoxContainer>

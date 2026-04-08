@@ -18,10 +18,10 @@ public sealed class FirstAidKnowledgeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<KnowledgeHolderComponent, UserModifyInjectTimeEvent>(_knowledge.RelayEvent);
-        SubscribeLocalEvent<InjectTimeKnowledgeComponent, UserModifyInjectTimeEvent>(OnModifyInjectTime);
+        SubscribeLocalEvent<InjectTimeSkillComponent, UserModifyInjectTimeEvent>(OnModifyInjectTime);
     }
 
-    private void OnModifyInjectTime(Entity<InjectTimeKnowledgeComponent> ent, ref UserModifyInjectTimeEvent args)
+    private void OnModifyInjectTime(Entity<InjectTimeSkillComponent> ent, ref UserModifyInjectTimeEvent args)
     {
         var level = _knowledge.GetLevel(ent.Owner);
         if (args.Delay > TimeSpan.Zero)

@@ -99,7 +99,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             }
             if (ent.Comp.GrantEverything)
             {
-                foreach (var id in _knowledge.AllKnowledges.Keys)
+                foreach (var id in _knowledge.AllSkills.Keys)
                 {
                     _knowledge.EnsureKnowledge(brain, id, 100);
                 }

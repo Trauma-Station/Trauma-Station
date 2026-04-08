@@ -56,7 +56,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
 
     private void ReloadSkills()
     {
-        Dictionary<ProtoId<KnowledgeCategoryPrototype>, BoxContainer> categories = [];
+        Dictionary<ProtoId<SkillCategoryPrototype>, BoxContainer> categories = [];
         UpdatePoints();
 
         EnabledSkills.RemoveAllChildren();

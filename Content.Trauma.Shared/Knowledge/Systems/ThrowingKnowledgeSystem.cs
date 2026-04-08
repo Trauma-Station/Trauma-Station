@@ -22,11 +22,11 @@ public sealed class ThrowingKnowledgeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<KnowledgeHolderComponent, ModifyThrowInsertChanceEvent>(_knowledge.RelayEvent);
-        SubscribeLocalEvent<ThrowInsertKnowledgeComponent, ModifyThrowInsertChanceEvent>(OnModifyThrowInsertChance);
+        SubscribeLocalEvent<ThrowInsertSkillComponent, ModifyThrowInsertChanceEvent>(OnModifyThrowInsertChance);
         SubscribeLocalEvent<PhysicsComponent, ModifyThrownSpeedEvent>(OnModifyThrowSpeed);
     }
 
-    private void OnModifyThrowInsertChance(Entity<ThrowInsertKnowledgeComponent> ent, ref ModifyThrowInsertChanceEvent args)
+    private void OnModifyThrowInsertChance(Entity<ThrowInsertSkillComponent> ent, ref ModifyThrowInsertChanceEvent args)
     {
         var level = _knowledge.GetLevel(ent);
         args.Chance += ent.Comp.Curve.GetCurve(level);

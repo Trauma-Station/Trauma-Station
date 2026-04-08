@@ -32,15 +32,15 @@ public sealed partial class KnowledgeTab : Control
     {
         TabContainer.SetTabTitle(this, Loc.GetString("trauma-knowledge-title"));
 
-        KnowledgeBox.RemoveAllChildren();
-        KnowledgePlaceholder.Visible = true;
+        SkillBox.RemoveAllChildren();
+        SkillPlaceholder.Visible = true;
 
         var doohickeys = _knowledge.GrabAllKnowledge(player);
         if (doohickeys == null)
             return;
 
-        KnowledgePlaceholder.Visible = false;
-        KnowledgeBox.SeparationOverride = 10;
+        SkillPlaceholder.Visible = false;
+        SkillBox.SeparationOverride = 10;
         foreach (var (groupId, conditions) in doohickeys)
         {
             var boxContainer = new BoxContainer
@@ -100,7 +100,7 @@ public sealed partial class KnowledgeTab : Control
 
             //Find category.
             Collapsible? groupContainer = null;
-            foreach (Control? child in KnowledgeBox.Children)
+            foreach (Control? child in SkillBox.Children)
             {
                 if (child is not Collapsible childNotNull || childNotNull.Name != groupId.Id)
                     continue;
@@ -121,7 +121,7 @@ public sealed partial class KnowledgeTab : Control
                 body.AddChild(innerStack);
                 groupContainer = new Collapsible(groupId.Id, body);
                 groupContainer.Name = groupId.Id;
-                KnowledgeBox.AddChild(groupContainer);
+                SkillBox.AddChild(groupContainer);
             }
 
             // Add skill to category.

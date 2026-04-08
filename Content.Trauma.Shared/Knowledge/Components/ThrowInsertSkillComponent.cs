@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Knowledge.Components;
 /// Knowledge component that makes it easier to land items in disposal units, according to a skill curve.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(ThrowingKnowledgeSystem))]
-public sealed partial class ThrowInsertKnowledgeComponent : Component
+public sealed partial class ThrowInsertSkillComponent : Component
 {
     /// <summary>
     /// The skill curve to use, gets added to chance so output should start at 0 for level 0.
