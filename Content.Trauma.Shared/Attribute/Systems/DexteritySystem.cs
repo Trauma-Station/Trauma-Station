@@ -36,12 +36,13 @@ public sealed class DexteritySystem : EntitySystem
         var ev = new OnAttributeSingleContest(20, selfEv.Mod, _slipThreshold);
 
         RaiseLocalEvent(ent, ref ev);
-        var threshold = _slipThreshold + selfEv.Mod - ev.DiceUser;
+        var threshold = _slipThreshold - (ev.DiceUser + selfEv.Mod);
         if (threshold > 5)
             return;
         else if (threshold > 0)
         {
             _popup.PopupEntity("You begin to slip, but you somehow manage to keep your balance.", ent, ent, PopupType.Medium);
+            args.NoSlip = true;
             args.SlowOverSlippery = true;
             return;
         }
