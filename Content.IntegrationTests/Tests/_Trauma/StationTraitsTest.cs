@@ -3,18 +3,14 @@
 using Content.IntegrationTests.Fixtures;
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
-using Content.Shared.Maps;
 using Content.Trauma.Server.Station;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
 [TestFixture]
 public sealed class StationTraitsTest : GameTest
 {
-    public static readonly ProtoId<GameMapPrototype> Map = "Bagel";
-
     /// <summary>
     /// Makes sure all traits can be added to a station at the same time without throwing.
     /// </summary>
@@ -27,7 +23,7 @@ public sealed class StationTraitsTest : GameTest
 
         traits.ForceAllTraits();
 
-        server.CfgMan.SetCVar(CCVars.GameMap, Map);
+        server.CfgMan.SetCVar(CCVars.GameMap, "Bagel"); // bagel has enough areas but not too big to bog down tests too much
 
         Assert.That(ticker.RunLevel, Is.EqualTo(GameRunLevel.PreRoundLobby));
         ticker.ToggleReadyAll(true);
