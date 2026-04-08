@@ -1,59 +1,57 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.StatusEffectNew;
-using Content.Shared.StatusEffectNew.Components;
 using Content.Trauma.Shared.Animations;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Animations;
 
 public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StatusEffectContainerComponent, AnimationCompletedEvent>(OnAnimationComplete);
+        SubscribeLocalEvent<AnimationCompletedEvent>(OnAnimationComplete);
 
-        SubscribeLocalEvent<FlippingStatusEffectComponent, StatusEffectRemovedEvent>(OnRemoved);
-        SubscribeLocalEvent<FlippingStatusEffectComponent, StatusEffectAppliedEvent>(OnApplied);
+        SubscribeNetworkEvent<FlipOnHitEvent>(ev => PlayAnimation(GetEntity(ev.User)));
+        SubscribeNetworkEvent<FlipOnHitStopEvent>(ev => StopAnimation(GetEntity(ev.User)));
     }
 
-    private void OnApplied(Entity<FlippingStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
+    private void OnAnimationComplete(AnimationCompletedEvent args)
     {
-        PlayAnimation(args.Target);
+        if (args.Key != AnimationKey || !args.Finished)
+            return;
+
+        if (!Status.HasEffectComp<FlippingStatusEffectComponent>(args.Uid))
+        {
+            RefreshSpriteRotation(args.Uid);
+            return;
+        }
+
+        PlayAnimation(args.Uid);
     }
 
-    private void OnRemoved(Entity<FlippingStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
+    protected override void StopAnimation(EntityUid user)
     {
-        if (TerminatingOrDeleted(args.Target))
-            return;
-
-        _animation.Stop(args.Target, AnimationKey);
+        _animation.Stop(user, AnimationKey);
+        RefreshSpriteRotation(user);
     }
 
-    private void OnAnimationComplete(Entity<StatusEffectContainerComponent> ent, ref AnimationCompletedEvent args)
+    private void RefreshSpriteRotation(Entity<SpriteComponent?> ent)
     {
-        if (args.Key != AnimationKey)
+        if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        if (!Status.HasEffectComp<FlippingStatusEffectComponent>(ent))
-            return;
-
-        PlayAnimation(ent);
+        _appearance.OnChangeData(ent, ent.Comp);
     }
 
-    private void PlayAnimation(EntityUid user)
+    protected override void PlayAnimation(EntityUid user)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         if (TerminatingOrDeleted(user))
             return;
 

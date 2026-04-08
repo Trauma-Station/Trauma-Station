@@ -20,19 +20,6 @@ public sealed class ProjectileImmunitySystem : EntitySystem
         SubscribeLocalEvent<ProjectileImmunityComponent, HitScanReflectAttemptEvent>(OnHitscanReflect);
     }
 
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var now = _timing.CurTime;
-        var query = EntityQueryEnumerator<ProjectileImmunityComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (comp.ExpireTime != null && now >= comp.ExpireTime)
-                RemCompDeferred<ProjectileImmunityComponent>(uid);
-        }
-    }
-
     private void OnPreventCollide(Entity<ProjectileImmunityComponent> ent, ref PreventCollideEvent args)
     {
         if (!HasComp<ProjectileComponent>(args.OtherEntity))
@@ -62,13 +49,13 @@ public sealed class ProjectileImmunitySystem : EntitySystem
 
         args.Reflected = true;
 
-        if (ent.Comp.DodgeEffect != null)
-            SpawnAttachedTo(ent.Comp.DodgeEffect.Value, new EntityCoordinates(ent, Vector2.Zero));
+        if (ent.Comp.DodgeEffect is { } effect)
+            PredictedSpawnAttachedTo(effect, new EntityCoordinates(ent, Vector2.Zero));
     }
 
     private void TrySpawnDodgeEffect(Entity<ProjectileImmunityComponent> ent, EntityUid projectile)
     {
-        if (ent.Comp.DodgeEffect == null)
+        if (ent.Comp.DodgeEffect is not { } effect)
             return;
 
         if (TerminatingOrDeleted(projectile))
@@ -77,6 +64,6 @@ public sealed class ProjectileImmunitySystem : EntitySystem
         if (!ent.Comp.DodgedEntities.Add(projectile))
             return;
 
-        SpawnAttachedTo(ent.Comp.DodgeEffect.Value, new EntityCoordinates(ent, Vector2.Zero));
+        PredictedSpawnAtPosition(effect, new EntityCoordinates(ent, Vector2.Zero));
     }
 }
