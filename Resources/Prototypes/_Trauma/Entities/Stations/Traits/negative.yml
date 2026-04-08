@@ -118,6 +118,16 @@
       - !type:SpawnPointHasJob
 
 - type: stationTrait
+  id: MeteorSwarm
+  group: Negative
+  chance: 0.4
+  name: "Meteor Swarm"
+  report: "The space around your station has an unusual number of asteroids orbiting your star."
+  effects:
+  - !type:StartGameRule
+    rule: MeteorSwarmScheduler # double the fun
+
+- type: stationTrait
   id: RandomSpawns
   group: Negative
   chance: 0.4
