@@ -191,7 +191,7 @@ namespace Content.Server.Preferences.Managers
                 loadouts,
                 // <Trauma>
                 profile.BarkVoice ?? HumanoidProfileSystem.DefaultBarkVoice,
-                KnowledgeProfile.Verify(profile.KnowledgeMastery, _prototypeManager)
+                KnowledgeProfile.Verify(profile.SkillRolls, profile.AttributePurchases, _prototypeManager)
                 // </Trauma>
             );
         }

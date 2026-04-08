@@ -168,7 +168,7 @@
   - type: KnowledgeGrant
     skills:
       ThrowingKnowledge: 50
-      StrengthKnowledge: 50
+      # StrengthKnowledge 50
 
 
 - type: entity

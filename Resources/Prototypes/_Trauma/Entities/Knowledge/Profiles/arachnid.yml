@@ -1,25 +1,33 @@
 - type: knowledgeProfile
   id: Arachnid
-  pointsLimit: 5 #Human but with max spidercraft
-  mastery:
+  pointsLimit: 50 # It's hard to get out of the nest.
+  attributes:
+    StrengthAttribute: 30
+    IntelligenceAttribute: -25 # They're a little dumb
+    WisdomAttribute: 0
+    DexterityAttribute: 40 # Creepy Crawlers
+    ConstitutionAttribute: -40 # Insects
+    LooksAttribute: -40 # Creepy MFs
+    CharismaAttribute: 0
+  skillRolls:
     # Crafting Recipe Skills
     CookingKnowledge: 0
-    MaterialsKnowledge: 1
-    DoorsKnowledge: 1
-    AirlocksKnowledge: 1
-    ToysKnowledge: 1
+    MaterialsKnowledge: 3
+    DoorsKnowledge: 3
+    AirlocksKnowledge: 3
+    ToysKnowledge: 3
     BananiumKnowledge: 0
     BotsKnowledge: 0
-    FurnitureKnowledge: 1
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-    WallsKnowledge: 1
+    FurnitureKnowledge: 3
+    InfrastructureKnowledge: 3
+    ElectronicsKnowledge: 3
+    WallsKnowledge: 3
     ScienceKnowledge: 0
-    WindowsKnowledge: 1
+    WindowsKnowledge: 3
     SmokeablesKnowledge: 0
-    SpiderCraftKnowledge: 4
+    SpiderCraftKnowledge: 12
     # Intelectual Skills
-    LiteracyKnowledge: 4
+    LiteracyKnowledge: 12
     MagicalLiteracyKnowledge: 0
     # Language Skills
     # Medical Skill
@@ -29,11 +37,6 @@
     # Physical Skill
     ThrowingKnowledge: 0
     AthleticsKnowledge: 0
-    StrengthKnowledge: 0
-    ToughnessKnowledge: 0
-    # Combat Skill
-    MeleeKnowledge: 0
-    ShootingKnowledge: 0
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0

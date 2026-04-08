@@ -10,11 +10,11 @@ namespace Content.Trauma.Client.Knowledge.UI;
 [GenerateTypedNameReferences]
 public sealed partial class SkillControl : BoxContainer
 {
-    public event Action<int>? OnChangeMastery;
-    private readonly int[] _costs;
-    public int Mastery;
+    public event Action<int>? OnChangeRolls;
+    private readonly int _costs;
+    public int Rolls;
 
-    public SkillControl(string name, int[] costs)
+    public SkillControl(string name, int costs)
     {
         RobustXamlLoader.Load(this);
 
@@ -22,19 +22,20 @@ public sealed partial class SkillControl : BoxContainer
 
         SkillLabel.Text = name;
 
-        DecreaseButton.OnPressed += _ => OnChangeMastery?.Invoke(-1);
-        IncreaseButton.OnPressed += _ => OnChangeMastery?.Invoke(+1);
+        DecreaseButton.OnPressed += _ => OnChangeRolls?.Invoke(-1);
+        IncreaseButton.OnPressed += _ => OnChangeRolls?.Invoke(+1);
     }
 
-    public void SetMastery(string name, int mastery, int racialBase = 0)
+    public void SetRolls(int rolls, int racialBase = 0)
     {
-        Mastery = mastery;
+        Rolls = rolls;
         // only show the cost for the added mastery, not net
-        var cost = _costs[Math.Max(mastery - racialBase, 0)];
-        MasteryLabel.Text = Loc.GetString("knowledge-editor-mastery", ("mastery", name), ("cost", cost));
-        IncreaseButton.Disabled = mastery >= _costs.Length - 1;
-        DecreaseButton.Disabled = mastery <= racialBase;
-        var color = mastery <= 0 ? Color.Gray : Color.White;
+        var amount = Math.Max(Rolls - racialBase, 0);
+        var cost = _costs * amount;
+        MasteryLabel.Text = $"Cost: {cost}, Rolls: {Rolls}";
+        IncreaseButton.Disabled = false;
+        DecreaseButton.Disabled = Rolls <= racialBase;
+        var color = Rolls - racialBase <= 0 ? Color.Gray : Color.White;
         MasteryLabel.Modulate = color;
         SkillLabel.Modulate = color;
     }

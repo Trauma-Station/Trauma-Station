@@ -94,10 +94,10 @@ public sealed partial class SkillComponent : Component
     public TimeSpan TimeBetweenExperience = TimeSpan.FromSeconds(5);
 
     /// <summary>
-    /// Array of point costs for each mastery level, including 0.
+    /// Point cost at round start for one roll.
     /// There are 6 of them total by default, removing will decrease the max mastery you can buy.
     /// If this is null, you can't opt in to this knowledge.
     /// </summary>
     [DataField(required: true)]
-    public int[]? Costs = null;
+    public int? Cost = null;
 }

@@ -1,8 +1,8 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
 using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.MartialArts;
-using Content.Trauma.Common.Parry;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
 using Content.Shared.Coordinates;
@@ -642,13 +642,11 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         Interaction.DoContactInteraction(user, target);
 
         // <Trauma>
-        if (component.CanParryLight)
-        {
-            var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, target.Value);
-            RaiseLocalEvent(target.Value, ref parryAttemptEv);
-            if (parryAttemptEv.Parried)
-                return;
-        }
+        var attackAttemptEv = new ActiveMeleeResolveEvent(target.Value, meleeUid, damage);
+        RaiseLocalEvent(user, ref attackAttemptEv);
+        if (attackAttemptEv.Cancelled)
+            return;
+        damage = attackAttemptEv.Damage;
         // </Trauma>
 
         // For stuff that cares about it being attacked.
@@ -830,18 +828,16 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             }
 
             // <Trauma>
-            if (component.CanParryWide)
-            {
-                var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, entity);
-                RaiseLocalEvent(entity, ref parryAttemptEv);
-                if (parryAttemptEv.Parried)
-                    continue;
-            }
+            var attackAttemptEv = new ActiveMeleeResolveEvent(entity, meleeUid, damage);
+            RaiseLocalEvent(user, ref attackAttemptEv);
+            if (attackAttemptEv.Cancelled)
+                continue;
+            var adjustedDamage = attackAttemptEv.Damage;
             // </Trauma>
 
             var attackedEvent = new AttackedEvent(meleeUid, user, GetCoordinates(ev.Coordinates));
             RaiseLocalEvent(entity, attackedEvent);
-            var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
+            var modifiedDamage = DamageSpecifier.ApplyModifierSets(adjustedDamage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
             // <Goob>
             modifiedDamage = DamageSpecifier.ApplyModifierSets(modifiedDamage, attackedEvent.ModifiersList);
             foreach (var type in modifiedDamage.DamageDict.Keys)
@@ -897,7 +893,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         {
             // <Trauma>
             var staminaDamage = component.HeavyStaminaCost * entities.Count;
-            AdjustStaminaDamage(user, ref staminaDamage);
             // </Trauma>
             // make it not immediate to prevent annoying stamcrits
             _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);

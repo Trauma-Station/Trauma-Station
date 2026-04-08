@@ -45,6 +45,11 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// Every skill prototype and its data.
     /// </summary>
     public Dictionary<EntProtoId, SkillComponent> AllSkills = new();
+
+    /// <summary>
+    /// Every attribute prototype and its data.
+    /// </summary>
+    public Dictionary<EntProtoId, AttributeComponent> AllAttributes = new();
     public static readonly LocId[] MasteryNames = [
         "unskilled",
         "novice",
@@ -80,7 +85,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
 
-        LoadSkillPrototypes();
+        LoadPrototypes();
     }
 
     /// <inheritdoc/>
@@ -200,8 +205,15 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<EntityPrototype>())
-            LoadSkillPrototypes();
+            LoadPrototypes();
     }
+
+    private void LoadPrototypes()
+    {
+        LoadSkillPrototypes();
+        LoadAttributePrototypes();
+    }
+
 
     private void LoadSkillPrototypes()
     {
@@ -214,6 +226,20 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
                 continue;
 
             AllSkills[proto.ID] = comp;
+        }
+    }
+
+    private void LoadAttributePrototypes()
+    {
+        AllAttributes.Clear();
+        var name = Factory.GetComponentName<AttributeComponent>();
+        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        {
+            // TODO: replace with TryComp after engine update
+            if (!proto.TryGetComponent<AttributeComponent>(name, out var comp))
+                continue;
+
+            AllAttributes[proto.ID] = comp;
         }
     }
 
@@ -307,9 +333,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         return true;
     }
 
-    public (ProtoId<SkillCategoryPrototype> Category, KnowledgeInfo Info) GetSkillInfo(Entity<SkillComponent> ent)
+    public (ProtoId<SkillCategoryPrototype> Category, SkillInfo Info) GetSkillInfo(Entity<SkillComponent> ent)
     {
-        var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite, ent.Comp.LearnedLevel, ent.Comp.NetLevel, ent.Comp.Experience, ent.Comp.ExperienceCost);
+        var knowledgeInfo = new SkillInfo("", "", ent.Comp.Color, ent.Comp.Sprite, ent.Comp.LearnedLevel, ent.Comp.NetLevel, ent.Comp.Experience, ent.Comp.ExperienceCost);
         // TODO: make this an event raised on ent
         var name = Name(ent);
         knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.NetLevel), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
@@ -333,6 +359,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             knowledgeInfo.Name = name;
         }
         return (ent.Comp.Category, knowledgeInfo);
+    }
+
+    public (int Order, AttributeInfo Info) GetAttributeInfo(Entity<AttributeComponent> ent)
+    {
+        var info = new AttributeInfo();
+
+        info.Name = Name(ent);
+        info.Description = Description(ent);
+        info.Inherent = ent.Comp.Inherent;
+        return (ent.Comp.Order, info);
     }
 
     /// <summary>
@@ -423,6 +459,20 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         var level = GetInverseMastery(mastery);
         unit.Comp.LearnedLevel = Math.Min(level, 100);
         Dirty(unit);
+        return unit;
+    }
+
+    /// <summary>
+    /// Raises a skill's mastery by rolls.
+    /// Adds skill if missing.
+    /// </summary>
+    public Entity<SkillComponent>? RaiseSkillByRolls(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int rolls, bool popup = true)
+    {
+        if (EnsureKnowledge<SkillComponent>(ent, id, popup: popup) is not { } unit)
+            return null;
+
+        AddExperience(ent, id, unit.Comp.ExperienceCost * rolls);
+        RollForLevelUp(unit, ent);
         return unit;
     }
 

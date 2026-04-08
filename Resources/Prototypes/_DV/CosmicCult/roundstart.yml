@@ -32,4 +32,4 @@
     effects:
     - !type:GrantSkills
       skills:
-        MeleeKnowledge: 60 # They like, only have melee weapons
+        # MeleeKnowledge 60 # They like, only have melee weapons

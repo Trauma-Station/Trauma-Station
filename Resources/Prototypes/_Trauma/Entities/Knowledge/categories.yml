@@ -14,7 +14,7 @@
   components:
   - type: Skill
     category: Physical
-    costs: [0, 2, 4, 6, 8, 10] # combat skills cost 2x, no goku
+    cost: 2
     color: "#16e720"
 
 - type: entity
@@ -24,7 +24,7 @@
   components:
   - type: Skill
     category: War
-    costs: [0, 2, 6, 9]
+    cost: 3
     color: "#f71818"
 
 - type: entity
@@ -76,7 +76,7 @@
     learnedLevel: 26
     experienceCost: 16
     color: "#ADD8E6"
-    costs: null # its currently fucked, have to use traits still :(
+    cost: null # its currently fucked, have to use traits still :(
   - type: LanguageKnowledge
 
 - type: entity
@@ -91,7 +91,7 @@
     category: MartialArt
     experienceCost: 10
     color: "#c70000"
-    costs: null # Being able to learn any of these roundstart is too much
+    cost: null # Being able to learn any of these roundstart is too much
   - type: MartialArtsSkill
     blocked: false
     icon: Objects/Misc/skub.rsi

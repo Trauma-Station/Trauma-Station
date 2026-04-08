@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Popups;
 using Content.Shared.Slippery;
 using Content.Shared.Stunnable;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
@@ -11,7 +13,7 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 /// </summary>
 public sealed class DexteritySystem : EntitySystem
 {
-    //[Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private readonly int _slipThreshold = 15;
     public override void Initialize()
@@ -37,7 +39,7 @@ public sealed class DexteritySystem : EntitySystem
         if (threshold > 0)
             return;
 
-        //_popup.PopupPredicted("You begin to slip, but some deft footwork manages to keep you upright.", ent, ent, PopupType.Medium);
+        _popup.PopupPredicted("You begin to slip, but some deft footwork manages to keep you upright.", ent, ent, PopupType.Medium);
         args.NoSlip = true;
     }
 }

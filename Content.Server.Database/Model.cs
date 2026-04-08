@@ -76,7 +76,19 @@ namespace Content.Server.Database
 
             // <Trauma> - store skills in json because i hate this shit. had to store profile for 3 things to use it
             var profile = modelBuilder.Entity<Profile>();
-            profile.Property(p => p.KnowledgeMastery)
+            profile.Property(p => p.SkillRolls)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v),
+                    s => string.IsNullOrEmpty(s)
+                        ? new()
+                        : JsonSerializer.Deserialize<Dictionary<string, int>>(s) ?? new()
+                )
+                .Metadata.SetValueComparer(new ValueComparer<Dictionary<string, int>>(
+                    (a, b) => a != null && b != null && a.Count == b.Count && !a.Except(b).Any(),
+                    dict => dict.GetHashCode(),
+                    dict => new Dictionary<string, int>(dict)
+                ));
+            profile.Property(p => p.AttributePurchases)
                 .HasConversion(
                     v => JsonSerializer.Serialize(v),
                     s => string.IsNullOrEmpty(s)
@@ -456,7 +468,8 @@ namespace Content.Server.Database
         public string Species { get; set; } = null!;
         // <Trauma>
         public string BarkVoice { get; set; } = null!;
-        public Dictionary<string, int> KnowledgeMastery { get; set; } = new();
+        public Dictionary<string, int> SkillRolls { get; set; } = new();
+        public Dictionary<string, int> AttributePurchases { get; set; } = new();
         // </Trauma>
         [Column(TypeName = "jsonb")] public JsonDocument? OrganMarkings { get; set; } = null!;
         [Column(TypeName = "jsonb")] public JsonDocument? Markings { get; set; } = null!;

@@ -13,7 +13,6 @@ public sealed class ShootingSkillSystem : EntitySystem
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
-    private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
     private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     public override void Initialize()
@@ -29,7 +28,7 @@ public sealed class ShootingSkillSystem : EntitySystem
         if (_knowledge.GetContainer(ent.Owner) is not { } brain)
             return;
         // TODO: scale it based on the gun, pistols are easier to shoot than railguns
-        _knowledge.AddExperience(brain, ShootingKnowledge, 1, 20);
+        // _knowledge.AddExperience(brain, ShootingKnowledge, 1, 20);
         _knowledge.AddExperience(brain, WeaponsKnowledge, 1, 20);
     }
 
@@ -39,6 +38,6 @@ public sealed class ShootingSkillSystem : EntitySystem
             return;
 
         // TODO: higher caliber has higher limit
-        _knowledge.AddExperience(brain, ShootingKnowledge, 1, 10);
+        // _knowledge.AddExperience(brain, ShootingKnowledge, 1, 10);
     }
 }

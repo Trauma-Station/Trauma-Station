@@ -277,10 +277,15 @@ namespace Content.Server.Database
 
             // <Trauma>
             profile.BarkVoice = humanoid.BarkVoice;
-            profile.KnowledgeMastery.Clear();
-            foreach (var (id, mastery) in humanoid.Knowledge.Mastery)
+            profile.SkillRolls.Clear();
+            foreach (var (id, skillRolls) in humanoid.Knowledge.SkillRolls)
             {
-                profile.KnowledgeMastery[id] = mastery;
+                profile.SkillRolls[id] = skillRolls;
+            }
+            profile.AttributePurchases.Clear();
+            foreach (var (id, purchases) in humanoid.Knowledge.Attributes)
+            {
+                profile.AttributePurchases[id] = purchases;
             }
             // </Trauma>
 

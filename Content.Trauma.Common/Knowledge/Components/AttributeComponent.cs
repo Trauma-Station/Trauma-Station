@@ -36,4 +36,10 @@ public sealed partial class AttributeComponent : Component
     /// </summary>
     [DataField]
     public bool Unremoveable = false;
+
+    /// <summary>
+    /// Order that the attributes should appear in.
+    /// </summary>
+    [DataField(required: true)]
+    public int Order;
 }

@@ -628,8 +628,8 @@
   # <Trauma>
   - type: KnowledgeGrantOnWear # gets added to the brain
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
+      # MeleeKnowledge 26
+      # ShootingKnowledge: 26
+      # StrengthKnowledge 26
+      # ToughnessKnowledge 26
   # </Trauma>

@@ -15,7 +15,8 @@ knowledge-construction-name = Construction: {$group}
 
 language-curse-pain = You hear bad language!
 
-trauma-knowledge-title = Knowledge Tab
+trauma-skill-title = Skills Tab
+trauma-attribute-title = Attributes Tab
 trauma-character-title = Character Tab
 
 knowledge-zenkai-boost = Your body is filled with a second wind as you finally understand something.

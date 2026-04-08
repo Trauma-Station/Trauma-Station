@@ -2,6 +2,7 @@
 
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
+using Content.Shared.FixedPoint;
 
 namespace Content.Trauma.Common.Knowledge;
 
@@ -14,20 +15,26 @@ namespace Content.Trauma.Common.Knowledge;
 public partial record struct KnowledgeProfile
 {
     /// <summary>
-    /// Each skill and the mastery level from [0, Costs.Length] (usually 5)
+    /// Each skill and the amount of rolls this skill will get
     /// </summary>
-    public Dictionary<EntProtoId, int> Mastery;
+    public Dictionary<EntProtoId, int> SkillRolls;
 
-    public KnowledgeProfile(Dictionary<EntProtoId, int> mastery)
+    /// <summary>
+    /// Each attribute that the character will have.
+    /// </summary>
+    public Dictionary<EntProtoId, int> Attributes;
+
+    public KnowledgeProfile(Dictionary<EntProtoId, int> attributes, Dictionary<EntProtoId, int> skillRolls)
     {
-        Mastery = mastery;
+        Attributes = attributes;
+        SkillRolls = skillRolls;
     }
 
     /// <summary>
     /// Create an empty profile which uses the parent as-is.
     /// </summary>
     public KnowledgeProfile()
-        : this(new Dictionary<EntProtoId, int>())
+        : this(new Dictionary<EntProtoId, int>(), new Dictionary<EntProtoId, int>())
     {
     }
 
@@ -35,35 +42,51 @@ public partial record struct KnowledgeProfile
     /// Make a deep copy of another profile
     /// </summary>
     public KnowledgeProfile(KnowledgeProfile other)
-        : this(new Dictionary<EntProtoId, int>(other.Mastery))
+        : this(new Dictionary<EntProtoId, int>(other.Attributes), new Dictionary<EntProtoId, int>(other.SkillRolls))
     {
     }
 
     /// <summary>
     /// Verify potentially outdated/untrusted profile data.
     /// </summary>
-    public static KnowledgeProfile Verify(Dictionary<string, int> mastery, IPrototypeManager proto)
+    public static KnowledgeProfile Verify(Dictionary<string, int> skillRolls, Dictionary<string, int> attributePurchases, IPrototypeManager proto)
     {
         var profile = new KnowledgeProfile();
-        foreach (var (id, change) in mastery)
+        foreach (var (id, change) in skillRolls)
         {
             // let's hope nobody ever changes a knowledge prototype to become non-knowledge...
             if (!proto.HasIndex(id))
                 continue;
 
-            profile.Mastery[id] = change;
+            // skill stuff
+            profile.SkillRolls[id] = change;
+        }
+        foreach (var (id, change) in attributePurchases)
+        {
+            // let's hope nobody ever changes a knowledge prototype to become non-knowledge...
+            if (!proto.HasIndex(id))
+                continue;
+
+            // skill stuff
+            profile.Attributes[id] = change;
         }
         return profile;
     }
 
     public bool MemberwiseEquals(KnowledgeProfile other)
     {
-        if (Mastery.Count != other.Mastery.Count)
+        if (SkillRolls.Count != other.SkillRolls.Count || Attributes.Count != other.Attributes.Count)
             return false;
 
-        foreach (var (id, change) in Mastery)
+        foreach (var (id, change) in SkillRolls)
         {
-            if (!other.Mastery.TryGetValue(id, out var otherChange) || otherChange != change)
+            if (!other.SkillRolls.TryGetValue(id, out var otherChange) || otherChange != change)
+                return false;
+        }
+
+        foreach (var (id, change) in Attributes)
+        {
+            if (!other.Attributes.TryGetValue(id, out var otherChange) || otherChange != change)
                 return false;
         }
 

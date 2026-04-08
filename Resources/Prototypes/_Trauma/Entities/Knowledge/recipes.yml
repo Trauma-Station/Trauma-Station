@@ -75,7 +75,7 @@
   name: Spider Webs
   components:
   - type: Skill
-    costs: null # Spider only
+    cost: null # Spider only
 
 - type: entity
   parent: BaseRecipesKnowledge
@@ -88,4 +88,4 @@
   name: Revolutionary
   components:
   - type: Skill
-    costs: null # lol
+    cost: null # lol

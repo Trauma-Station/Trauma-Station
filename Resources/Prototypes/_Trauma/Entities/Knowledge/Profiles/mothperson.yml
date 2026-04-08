@@ -1,7 +1,15 @@
 # Default for any species that has no knowledge profile of its own
 - type: knowledgeProfile
   id: Mothperson
-  pointsLimit: 5
+  pointsLimit: 120 # They love space, I guess.
+  attributes:
+    StrengthAttribute: -40
+    IntelligenceAttribute: 20 # NT hires them for a reason
+    WisdomAttribute: 20 
+    DexterityAttribute: -20 # Clumsy to a fault
+    ConstitutionAttribute: -50 # Do not let them near a flyswatter
+    LooksAttribute: -35 # Creepiest thing I've had the displeasure of seeing
+    CharismaAttribute: 0
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
@@ -30,11 +38,6 @@
     # Physical Skill
     ThrowingKnowledge: 0
     AthleticsKnowledge: 3
-    StrengthKnowledge: 0
-    ToughnessKnowledge: 0
-    # Combat Skill
-    MeleeKnowledge: 0
-    ShootingKnowledge: 0
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0

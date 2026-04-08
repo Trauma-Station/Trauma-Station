@@ -1,6 +1,14 @@
 - type: knowledgeProfile
-  id: Reptilian # Physically strong, mentally stupid as fuck
-  pointsLimit: 5
+  id: Reptilian
+  pointsLimit: 100
+  attributes:
+    StrengthAttribute: 100 # Physically strong
+    IntelligenceAttribute: -50 # Mentally stupid as fuck
+    WisdomAttribute: -50
+    DexterityAttribute: 0
+    ConstitutionAttribute: 0
+    LooksAttribute: 0
+    CharismaAttribute: 0
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
@@ -18,22 +26,17 @@
     WindowsKnowledge: 0
     SmokeablesKnowledge: 0
     # Intelectual Skills
-    LiteracyKnowledge: 2
+    LiteracyKnowledge: 6
     MagicalLiteracyKnowledge: 0
     # Language Skills
-    LanguageDraconic: 3
+    LanguageDraconic: 9
     # Medical Skill
     SurgeryKnowledge: 0
     FirstAidKnowledge: 0
     ChemistryKnowledge: 0
     # Physical Skill
-    ThrowingKnowledge: 1
-    AthleticsKnowledge: 2
-    StrengthKnowledge: 3
-    ToughnessKnowledge: 2
-    # Combat Skill
-    MeleeKnowledge: 2
-    ShootingKnowledge: 0
+    ThrowingKnowledge: 3
+    AthleticsKnowledge: 6
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0

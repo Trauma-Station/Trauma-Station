@@ -15,7 +15,6 @@ public sealed class ThrowingSkillSystem : EntitySystem
 {
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
 
-    private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId ThrowingKnowledge = "ThrowingKnowledge";
 
     public override void Initialize()
@@ -42,18 +41,7 @@ public sealed class ThrowingSkillSystem : EntitySystem
             return;
 
         // strength increases speed
-        if (_knowledge.GetSkill(brain, StrengthKnowledge) is { } strength)
-        {
-            var mastery = _knowledge.GetMastery(strength.Comp);
-            if (mastery < 2)
-            {
-                baseThrowSpeed *= 1 + _knowledge.SharpCurve(strength, 0, 26.0f) / 2.0f;
-            }
-            else if (mastery > 2)
-            {
-                baseThrowSpeed *= 1 + 0.5f * _knowledge.SharpCurve(strength, -50, 50.0f);
-            }
-        }
+        // TODO: Replace with strength call.
 
         // high throwing skill increases speed
         if (_knowledge.GetSkill(brain, ThrowingKnowledge) is { } throwing &&
@@ -68,7 +56,7 @@ public sealed class ThrowingSkillSystem : EntitySystem
         _knowledge.AddExperience(brain, ThrowingKnowledge, 1, (int) args.Distance * 5);
 
         // Make it so you can't just throw a wrapper over and over again.
-        _knowledge.AddExperience(brain, StrengthKnowledge, 1, (int) (weight / 10));
+        // _knowledge.AddExperience(brain, StrengthKnowledge, 1, (int) (weight / 10));
 
         args.BaseThrowSpeed = baseThrowSpeed;
     }

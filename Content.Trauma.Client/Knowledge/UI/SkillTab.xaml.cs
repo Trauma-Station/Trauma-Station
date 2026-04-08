@@ -30,12 +30,12 @@ public sealed partial class SkillTab : Control
     /// </summary>
     public void UpdateSkillTab(EntityUid player)
     {
-        TabContainer.SetTabTitle(this, Loc.GetString("trauma-knowledge-title"));
+        TabContainer.SetTabTitle(this, Loc.GetString("trauma-skill-title"));
 
         SkillBox.RemoveAllChildren();
         SkillPlaceholder.Visible = true;
 
-        var doohickeys = _knowledge.GrabAllKnowledge(player);
+        var doohickeys = _knowledge.GrabAllSkills(player);
         if (doohickeys == null)
             return;
 

@@ -5,10 +5,7 @@ using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Ranged.Components;
-using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -21,9 +18,7 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 public abstract partial class SharedGunSystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
 
-    private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
     private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     /// <summary>
@@ -113,18 +108,13 @@ public abstract partial class SharedGunSystem
     /// </summary>
     private float GetRecoilScale(EntityUid? userUid, EntityUid gun)
     {
-        if (userUid is not {} user || !HasComp<KnowledgeHolderComponent>(user))
+        if (userUid is not { } user || !HasComp<KnowledgeHolderComponent>(user))
             return 1;
 
         if (TryComp<GunComponent>(gun, out var gunComp) && gunComp.UnaffectedBySkill)
             return 1;
 
-        if (_knowledge.GetSkill(user, ShootingKnowledge) is not {} shooting)
-            return 3;
-
-        var level = shooting.Comp.NetLevel;
-        return level < 26
-            ? 3.0f - level / 26.0f - _knowledge.SharpCurve(shooting)
-            : (float) Math.Max(1.0f - Math.Pow((level - 50) / 50.0f, 2), 0.2f);
+        // TODO: Replace with prof/spec system.
+        return 1;
     }
 }

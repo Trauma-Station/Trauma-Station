@@ -95,7 +95,7 @@ public abstract partial class SharedSurgerySystem
     private void OnToolStep(Entity<SurgeryStepComponent> ent, ref SurgeryStepEvent args)
     {
         if (!TryToolAudio(ent, args))
-           return;
+            return;
 
         ApplyComponentChanges(args, ent.Comp);
         HandleOrganModifications(args, ent.Comp);
@@ -342,8 +342,8 @@ public abstract partial class SharedSurgerySystem
         EnsureComp<OrganReattachedComponent>(args.Tool);
 
         var ev = new SurgeryStepDamageChangeEvent(args.User, args.Body, args.Part, ent);
-            RaiseLocalEvent(ent, ref ev);
-            args.Complete = true;
+        RaiseLocalEvent(ent, ref ev);
+        args.Complete = true;
     }
 
     private void OnAddOrganCheck(Entity<SurgeryAddOrganStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)

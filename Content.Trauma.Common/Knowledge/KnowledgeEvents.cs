@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Damage;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -33,7 +34,20 @@ public record struct UpdateItemQualityEvent(EntityUid User);
 public record struct MartialArtDamageModifierEvent(EntityUid User, float Coefficient = 1.0f);
 
 /// <summary>
-///
+/// Raised on the attacker. Determines if attacker continues strike or no.
 /// </summary>
 [ByRefEvent]
-public record struct MissAttackEvent(int Adjust, bool Miss = false);
+public record struct ActiveMeleeResolveEvent(EntityUid Defender, EntityUid Weapon, DamageSpecifier Damage, bool Cancelled = false);
+
+/// <summary>
+/// Raised on the projectile. Determines if projectile strikes or not.
+/// </summary>
+[ByRefEvent]
+public record struct ActiveProjectileResolveEvent(EntityUid Defender, EntityUid Weapon, bool Cancelled = false);
+
+
+/// <summary>
+/// Raised on the defender. Get Possible Defense Dice.
+/// </summary>
+[ByRefEvent]
+public record struct GetDefenseDice(int Dice = 8);

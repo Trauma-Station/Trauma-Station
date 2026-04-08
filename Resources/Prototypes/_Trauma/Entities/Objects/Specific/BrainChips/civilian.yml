@@ -7,8 +7,8 @@
     skills:
       FabricationKnowledge: 26
       # evil NT mind control dulling the tiders
-      MeleeKnowledge: -5
-      ShootingKnowledge: -10
+      # MeleeKnowledge -5
+      # ShootingKnowledge: -10
 
 - type: entity
   parent: BaseSkillChip
@@ -42,7 +42,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       JanitorKnowledge: 26
-      MeleeKnowledge: 10 # mop hit hard ye
+      # MeleeKnowledge 10 # mop hit hard ye
 
 - type: entity
   parent: BaseSkillChip
@@ -52,7 +52,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       LiteracyKnowledge: 60 # it's their whole thing
-      ShootingKnowledge: 5 # your honour my client pleads 9mm
+      # ShootingKnowledge: 5 # your honour my client pleads 9mm
 
 - type: entity
   parent: BaseSkillChip

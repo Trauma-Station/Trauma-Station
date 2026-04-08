@@ -70,7 +70,7 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, -7, 7);
+        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, -14, 14);
     }
 
     private void OnStrengthFeat(Entity<StrengthFeatComponent> ent, ref GetStrengthFeatEvent args)

@@ -1,36 +1,5 @@
 - type: entity
   parent: BasePhysicalKnowledge
-  id: ToughnessKnowledge
-  name: Toughness
-  components:
-  - type: Skill
-    experienceCost: 20
-  - type: ExperienceOnDamage # kenshi parity
-  - type: DamageModifySkill
-    # same as stamina damage im lazy
-    # no debuff for lvl 0
-    curve: !type:QuadraticSkillCurve
-      skillScale: 0.6
-      skillOffset: -2.8
-      curveScale: 0.05
-      curveOffset: 0.6
-
-- type: entity
-  parent: BasePhysicalKnowledge
-  id: StrengthKnowledge
-  name: Strength
-  components:
-  - type: Skill
-    experienceCost: 12
-  - type: MeleeDamageSkill
-    # -12% to +25%, no change around lvl 45
-    curve: !type:CubicSkillCurve
-      skillScale: 1.13
-      skillOffset: -0.5
-      curveOffset: 1
-
-- type: entity
-  parent: BasePhysicalKnowledge
   id: AthleticsKnowledge
   name: Athletics
   components:

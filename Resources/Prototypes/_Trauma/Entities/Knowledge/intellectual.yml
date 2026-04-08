@@ -5,7 +5,7 @@
   components:
   - type: Skill
     experienceCost: 30
-    costs: [0, 3, 6, 9, 12, 15] # magic is hard...
+    cost: 3 # magic is hard...
 
 - type: entity
   parent: BaseIntellectualKnowledge

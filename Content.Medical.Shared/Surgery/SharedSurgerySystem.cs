@@ -3,6 +3,7 @@
 using System.Linq;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Surgery;
+using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Consciousness;
 using Content.Medical.Shared.Pain;
@@ -11,10 +12,9 @@ using Content.Medical.Shared.Surgery.Steps;
 using Content.Medical.Shared.Surgery.Steps.Parts;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
-using Content.Shared.Buckle.Components;
 using Content.Shared.Body;
+using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -22,6 +22,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Shared.Stacks;
@@ -107,6 +108,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SanitizedComponent, SurgerySanitizationEvent>(OnSanitization);
         SubscribeLocalEvent<SanitizedComponent, HeldRelayedEvent<SurgerySanitizationEvent>>(OnHeldSanitization);
 
+        //SubscribeLocalEvent<SurgeryTargetComponent, InteractUsingEvent>(OnInteractUsing);
+
         SubscribeLocalEvent<HandsComponent, SurgerySanitizationEvent>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, SurgeryPainEvent>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, SurgeryIgnorePreviousStepsEvent>(_hands.RefRelayEvent);
@@ -117,6 +120,59 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         LoadPrototypes();
     }
 
+    /*
+    private void OnInteractUsing(Entity<SurgeryTargetComponent> ent, InteractUsingEvent args)
+    {
+        if (args.Handled) return;
+
+        if (!TryComp<TargetingComponent>(args.User, out var targeting))
+            return;
+
+        var bestStep = GetValidSurgeryStep(args.Used, targeting.Target, ent.Owner);
+
+        if (bestStep != null)
+        {
+            TryDoSurgeryStep(ent.Owner, targeting.Target, args.User, bestStep, bestStep);
+            args.Handled = true;
+        }
+    }
+
+    public SurgeryStepComponent? GetValidSurgeryStep(EntityUid tool, EntityUid targetPart, EntityUid body)
+    {
+        foreach (var step in _stepCache.Values)
+        {
+            // 1. Tool Check: Does the tool have the required component defined in the step?
+            if (step.Tool == null) continue;
+
+            bool toolMatches = false;
+            foreach (var toolReg in step.Tool.Values)
+            {
+                if (HasComp(tool, toolReg.Component)) // Simplified check
+                {
+                    toolMatches = true;
+                    break;
+                }
+            }
+            if (!toolMatches) continue;
+
+            // 2. Condition Check: Raise the SurgeryStepCompleteCheckEvent 
+            // We check if the step is ALREADY done. If it's NOT done, it's a candidate.
+            var checkEv = new SurgeryStepCompleteCheckEvent(body, targetPart, tool);
+            RaiseLocalEvent(step.Owner, ref checkEv);
+
+            if (checkEv.Cancelled)
+            {
+                // If Cancelled is true, it means the condition for the step is NOT met 
+                // OR the step is ready to be performed. 
+                // (Note: You'll need to align this with how your specific SurgeryStep logic 
+                // flags "readiness" vs "completion").
+                return step;
+            }
+        }
+
+        return null;
+    }
+    */
     private void OnHeldSanitization(Entity<SanitizedComponent> ent, ref HeldRelayedEvent<SurgerySanitizationEvent> args)
     {
         if (ent.Comp.WorksInHands)
@@ -302,7 +358,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     private void OnOrganConditionValid(Entity<SurgeryOrganConditionComponent> ent, ref SurgeryValidEvent args)
     {
         var category = ent.Comp.Organ;
-        if (_part.GetOrgan(args.Part, category) is not {} organ)
+        if (_part.GetOrgan(args.Part, category) is not { } organ)
         {
             // no organ, invalid unless condition is inverted
             args.Cancelled |= !ent.Comp.Inverse;
@@ -421,6 +477,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (_standing.IsDown(entity))
             return true;
 
+        // TODO: Remove this slop, add bedsheets and shit.
         // you can't otherwise operate on something with no buckle
         // just let people do surgery on goliaths and shit
         if (!TryComp<BuckleComponent>(entity, out var buckle))

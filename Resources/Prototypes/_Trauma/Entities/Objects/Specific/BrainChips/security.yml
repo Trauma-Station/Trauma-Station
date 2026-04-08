@@ -5,8 +5,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 50
+      # MeleeKnowledge 26
+      # ShootingKnowledge: 50
       MartialArtCorporateJudo: 50
 
 - type: entity
@@ -26,8 +26,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 50
+      # MeleeKnowledge 26
+      # ShootingKnowledge: 50
       # TODO: something for detecting
 
 - type: entity
@@ -37,8 +37,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 5
-      ShootingKnowledge: 5
+      # MeleeKnowledge 5
+      # ShootingKnowledge: 5
     # TODO: xp gain boost
 
 - type: entity
@@ -48,8 +48,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 10
+      # MeleeKnowledge 26
+      # ShootingKnowledge: 10
 
 - type: entity
   parent: BaseSkillChip
@@ -58,7 +58,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
+      # MeleeKnowledge 26
+      # ShootingKnowledge: 26
       MartialArtKravMaga: 50 # strongest IDF soldier
       WeaponsKnowledge: 50

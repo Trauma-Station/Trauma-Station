@@ -3,8 +3,8 @@
 using Content.Shared.Damage;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Trauma.Common.Attribute;
 using Content.Trauma.Common.Cuffs;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 
@@ -44,6 +44,8 @@ public sealed class StrengthSystem : EntitySystem
             // TODO: Add a grunt or extertion event. Should cause a voice thingy or stamina damage.
             return;
         }
+
+        _popup.PopupClient("Holy shit, you broke free!", ent, ent, PopupType.Medium);
 
         args.CuffsBroken = true;
     }

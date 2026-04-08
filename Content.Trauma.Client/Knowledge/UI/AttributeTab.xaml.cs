@@ -30,13 +30,12 @@ public sealed partial class AttributeTab : Control
     /// </summary>
     public void UpdateAttributeTab(EntityUid player)
     {
-        /*
-        TabContainer.SetTabTitle(this, Loc.GetString("trauma-knowledge-title"));
+        TabContainer.SetTabTitle(this, Loc.GetString("trauma-attribute-title"));
 
         AttributeBox.RemoveAllChildren();
         AttributePlaceholder.Visible = true;
 
-        var doohickeys = _knowledge.TryGetAllAttributeUnits(player);
+        var doohickeys = _knowledge.GrabAllAttributes(player);
         if (doohickeys == null)
             return;
 
@@ -49,85 +48,30 @@ public sealed partial class AttributeTab : Control
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
             };
 
-            var textRect = new TextureRect
-            {
-                Margin = new Thickness(0, 8, 0, 0),
-            };
-            if (conditions.Sprite != null)
-                textRect.Texture = _sprite.Frame0(conditions.Sprite);
-
-            var box = new BoxContainer
-            {
-                MinSize = new System.Numerics.Vector2(10, 0),
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
-            };
-
-            var skillText = new RichTextLabel
+            var attributeName = new RichTextLabel
             {
                 Text = conditions.Name,
-                Modulate = conditions.Color,
-                SetWidth = 325,
+                SetWidth = 100,
                 HorizontalAlignment = HAlignment.Left,
             };
 
-            var masteryText = new RichTextLabel
+            var firstPart = new RichTextLabel
             {
-                Text = conditions.Description,
-                Modulate = conditions.Color,
-                SetWidth = 325,
-                HorizontalAlignment = HAlignment.Left,
-                StyleClasses = { "LabelSubText" }
+                Text = $"{conditions.Inherent.Int()}",
+                SetWidth = 100,
             };
 
-            var progressBar = new ProgressBar
+            var secondPart = new RichTextLabel
             {
-                MinValue = 0,
-                MaxValue = conditions.ExpCost,
-                Value = conditions.CurrentExp,
-                MinSize = new System.Numerics.Vector2(200, 20)
+                Text = $"{conditions.Inherent - conditions.Inherent.Int()}",
+                SetWidth = 100,
             };
 
-            var horizontalContainer = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Horizontal
-            };
+            boxContainer.AddChild(attributeName);
+            boxContainer.AddChild(firstPart);
+            boxContainer.AddChild(secondPart);
 
-            box.AddChild(skillText);
-            box.AddChild(masteryText);
-            horizontalContainer.AddChild(box);
-            horizontalContainer.AddChild(progressBar);
-            boxContainer.AddChild(textRect);
-            boxContainer.AddChild(horizontalContainer);
-
-            //Find category.
-            Collapsible? groupContainer = null;
-            foreach (Control? child in AttributeBox.Children)
-            {
-                if (child is not Collapsible childNotNull || childNotNull.Name != groupId.Id)
-                    continue;
-
-                groupContainer = childNotNull;
-            }
-
-            // Create category if categor not found.
-            if (groupContainer is not { })
-            {
-                var body = new CollapsibleBody();
-                var innerStack = new BoxContainer
-                {
-                    Orientation = BoxContainer.LayoutOrientation.Vertical,
-                    Name = "InnerStack",
-                    SeparationOverride = 10
-                };
-                body.AddChild(innerStack);
-                groupContainer = new Collapsible(groupId.Id, body);
-                groupContainer.Name = groupId.Id;
-                KnowledgeBox.AddChild(groupContainer);
-            }
-
-            // Add skill to category.
-            groupContainer.Body?.GetChild(0)?.AddChild(boxContainer);
+            AttributeBox.AddChild(boxContainer);
         }
-        */
     }
 }

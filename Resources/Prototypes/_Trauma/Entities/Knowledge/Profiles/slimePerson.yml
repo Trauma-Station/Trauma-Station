@@ -1,27 +1,35 @@
 - type: knowledgeProfile
   id: Slimeperson
-  pointsLimit: 10
+  pointsLimit: 80 # Life as a slime is hard. Last guy I knew met a tragic fate next to a sprinkler.
+  attributes:
+    StrengthAttribute: 0
+    IntelligenceAttribute: 0
+    WisdomAttribute: 0
+    DexterityAttribute: 30 # Slippery guys, huh
+    ConstitutionAttribute: 0
+    LooksAttribute: -60 # A face only a mother could love.
+    CharismaAttribute: 0
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
-    MaterialsKnowledge: 1
-    DoorsKnowledge: 1
-    AirlocksKnowledge: 1
-    ToysKnowledge: 1
+    MaterialsKnowledge: 3
+    DoorsKnowledge: 3
+    AirlocksKnowledge: 3
+    ToysKnowledge: 3
     BananiumKnowledge: 0
     BotsKnowledge: 0
-    FurnitureKnowledge: 1
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-    WallsKnowledge: 1
+    FurnitureKnowledge: 3
+    InfrastructureKnowledge: 3
+    ElectronicsKnowledge: 3
+    WallsKnowledge: 3
     ScienceKnowledge: 0
-    WindowsKnowledge: 1
+    WindowsKnowledge: 3
     SmokeablesKnowledge: 0
     # Intelectual Skills
-    LiteracyKnowledge: 4
+    LiteracyKnowledge: 12
     MagicalLiteracyKnowledge: 0
     # Language Skills
-    LanguageBubblish: 3
+    LanguageBubblish: 9
     # Medical Skill
     SurgeryKnowledge: 0
     FirstAidKnowledge: 0
@@ -29,11 +37,6 @@
     # Physical Skill
     ThrowingKnowledge: 0
     AthleticsKnowledge: 0
-    StrengthKnowledge: 0
-    ToughnessKnowledge: 0
-    # Combat Skill
-    MeleeKnowledge: 0
-    ShootingKnowledge: 0
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Trauma.Client.Knowledge;
 using Content.Trauma.Common.Knowledge;
@@ -43,6 +44,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
             _modified = true;
             ResetButton.Disabled = true;
             ReloadSkills();
+            ReloadAttributes();
         };
     }
 
@@ -51,6 +53,7 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         _profile = profile;
         _parent = _proto.Index(_proto.Index(species).Knowledge);
         ReloadSkills();
+        ReloadAttributes();
         UpdateReset();
     }
 
@@ -63,26 +66,26 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         foreach (var (id, comp) in _knowledge.AllSkills)
         {
             var name = _proto.Index(id).Name;
-            if (comp.Costs is not { } costs)
+            if (comp.Cost is not { } costs)
                 continue;
 
             var control = new SkillControl(name, costs);
-            var racialBase = _parent.Profile.Mastery.GetValueOrDefault(id);
-            var mastery = _profile.Mastery.GetValueOrDefault(id) + racialBase;
+            var racialBase = _parent.Profile.SkillRolls.GetValueOrDefault(id);
+            var mastery = _profile.SkillRolls.GetValueOrDefault(id) + racialBase;
 
-            control.SetMastery(_knowledge.GetMasteryString(mastery), mastery, racialBase);
+            control.SetRolls(mastery, racialBase);
 
-            control.OnChangeMastery += diff =>
+            control.OnChangeRolls += diff =>
             {
-                var sum = control.Mastery + diff;
-                if (sum >= costs.Length || sum < racialBase)
+                var sum = control.Rolls + diff;
+                if (sum < racialBase)
                     return;
 
-                control.SetMastery(_knowledge.GetMasteryString(sum), sum, racialBase);
+                control.SetRolls(sum, racialBase);
                 if (sum == 0)
-                    _profile.Mastery.Remove(id);
+                    _profile.SkillRolls.Remove(id);
                 else
-                    _profile.Mastery[id] = _profile.Mastery.GetValueOrDefault(id) + diff;
+                    _profile.SkillRolls[id] = _profile.SkillRolls.GetValueOrDefault(id) + diff;
 
                 _modified = true;
                 UpdatePoints();
@@ -101,6 +104,45 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
                 newCategory.AddChild(control);
                 categories.TryAdd(comp.Category, newCategory);
             }
+        }
+    }
+
+    private void ReloadAttributes()
+    {
+        UpdatePoints();
+
+        EnabledAttributes.RemoveAllChildren();
+
+        var sortedAttributes = _knowledge.AllAttributes
+        .OrderBy(attr => attr.Value.Order);
+        foreach (var (id, comp) in sortedAttributes)
+        {
+            var name = _proto.Index(id).Name;
+
+            var control = new AttributeControl(name);
+            var racialBase = _parent.Profile.Attributes.GetValueOrDefault(id);
+            var mastery = _profile.Attributes.GetValueOrDefault(id) + racialBase;
+            Log.Error($"Racial Base: {racialBase}, Attrib: {id}");
+            control.SetPurchased(mastery, racialBase);
+
+            control.OnChangePurchased += diff =>
+            {
+                var sum = control.Purchased + diff;
+                if (sum < racialBase)
+                    return;
+
+                control.SetPurchased(sum, racialBase);
+                if (sum == 0)
+                    _profile.Attributes.Remove(id);
+                else
+                    _profile.Attributes[id] = _profile.Attributes.GetValueOrDefault(id) + diff;
+
+                _modified = true;
+                UpdatePoints();
+                UpdateReset();
+            };
+
+            EnabledAttributes.AddChild(control);
         }
     }
 
@@ -126,7 +168,15 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
     {
         ResetButton.Disabled = true;
         // only enable if there are any non-zero skill changes
-        foreach (var level in _profile.Mastery.Values)
+        foreach (var level in _profile.SkillRolls.Values)
+        {
+            if (level != 0)
+            {
+                ResetButton.Disabled = false;
+                break;
+            }
+        }
+        foreach (var level in _profile.Attributes.Values)
         {
             if (level != 0)
             {

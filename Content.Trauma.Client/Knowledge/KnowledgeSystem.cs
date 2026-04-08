@@ -69,6 +69,16 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             }
         }
 
+        AttributeTab? attributeTab = null;
+        foreach (var child in window.Tabs.Children)
+        {
+            if (child is AttributeTab)
+            {
+                attributeTab = (AttributeTab) child;
+                break;
+            }
+        }
+
         TabContainer.SetTabTitle(window.CharacterTab, Loc.GetString("trauma-character-title"));
 
         if (skillTab == null)
@@ -77,8 +87,17 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
             window.Tabs.AddChild(skillTab);
         }
 
+        if (attributeTab == null)
+        {
+            attributeTab = new AttributeTab();
+            window.Tabs.AddChild(attributeTab);
+        }
+
         if (_player.LocalEntity is { } player)
+        {
             skillTab.UpdateSkillTab(player);
+            attributeTab.UpdateAttributeTab(player);
+        }
     }
 
     private void AddProfileEditorTab(HumanoidProfileEditor editor)
@@ -109,7 +128,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     /// </summary>
     public List<(EntityUid, EntProtoId, string)> GetMartialArtsForClientDoohickey(EntityUid target)
     {
-        if (GetSkillWith<MartialArtsSkillComponent>(target) is not {} arts)
+        if (GetSkillWith<MartialArtsSkillComponent>(target) is not { } arts)
             return [];
 
         var list = new List<(EntityUid, EntProtoId, string)>();
@@ -121,7 +140,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         return list;
     }
 
-    public List<(ProtoId<SkillCategoryPrototype> Category, KnowledgeInfo Info)>? GrabAllKnowledge(EntityUid target)
+    public List<(ProtoId<SkillCategoryPrototype> Category, SkillInfo Info)>? GrabAllSkills(EntityUid target)
     {
         var knowledgeList = TryGetAllSkillUnits(target);
 
@@ -131,6 +150,20 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         return knowledgeList
             .Select(ent => GetSkillInfo(ent))
             .OrderBy(data => data.Category)
+            .ThenBy(data => data.Info.Name)
+            .ToList();
+    }
+
+    public List<(int Order, AttributeInfo Info)>? GrabAllAttributes(EntityUid target)
+    {
+        var knowledgeList = TryGetAllAttributeUnits(target);
+
+        if (knowledgeList is not { } || knowledgeList.Count == 0)
+            return null;
+
+        return knowledgeList
+            .Select(ent => GetAttributeInfo(ent))
+            .OrderBy(data => data.Order)
             .ThenBy(data => data.Info.Name)
             .ToList();
     }

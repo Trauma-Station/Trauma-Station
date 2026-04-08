@@ -45,12 +45,6 @@ public sealed partial class ParryComponent : Component
     [DataField]
     public int ParryMinSkill = 30;
 
-    /// <summary>
-    /// The skill required to parry with this weapon.
-    /// </summary>
-    [DataField]
-    public EntProtoId RequiredSkill = "MeleeKnowledge";
-
     [DataField]
     public Angle ReflectSpread = Angle.FromDegrees(140);
 

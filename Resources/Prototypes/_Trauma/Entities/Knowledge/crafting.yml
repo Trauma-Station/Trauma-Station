@@ -12,7 +12,7 @@
   components:
   - type: Skill
     experienceCost: 15
-    costs: [0, 1, 2, 3]
+    cost: 1
 
 - type: entity
   parent: BaseCraftingKnowledge

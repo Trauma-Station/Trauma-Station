@@ -125,8 +125,8 @@
     # <Trauma>
     - type: KnowledgeGrant
       skills:
-        MeleeKnowledge: 50
-        ShootingKnowledge: 50
+        # MeleeKnowledge 50
+        # ShootingKnowledge: 50
         MagicalLiteracyKnowledge: 50
         LiteracyKnowledge: 50
     # </Trauma>
@@ -232,8 +232,8 @@
       - type: KnowledgeGrant
         skills:
           FabricationKnowledge: 50
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
+          # MeleeKnowledge 50
+          # ShootingKnowledge: 50
           MaterialsKnowledge: 50
           DoorsKnowledge: 50
           AirlocksKnowledge: 50
@@ -368,10 +368,10 @@
     components:
       - type: KnowledgeGrant
         skills:
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
-          StrengthKnowledge: 50
-          ToughnessKnowledge: 50
+          # MeleeKnowledge 50
+          # ShootingKnowledge: 50
+          # StrengthKnowledge 50
+          # ToughnessKnowledge 50
           AthleticsKnowledge: 50
   # </Trauma>
 
@@ -555,8 +555,8 @@
     components:
       - type: KnowledgeGrant
         skills:
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
+          # MeleeKnowledge 50
+          # ShootingKnowledge: 50
           SurgeryKnowledge: 50
           FirstAidKnowledge: 50
   # </Trauma>
@@ -670,8 +670,8 @@
     components:
       - type: KnowledgeGrant
         skills:
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
+          # MeleeKnowledge 50
+          # ShootingKnowledge: 50
           JanitorKnowledge: 50
   # </Trauma>
 

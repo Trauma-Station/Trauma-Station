@@ -102,13 +102,13 @@
     - state: strength
   - type: KnowledgeGrantOnUse
     skills:
-      StrengthKnowledge: 10
+      # StrengthKnowledge 10
       AthleticsKnowledge: 10
-      ToughnessKnowledge: 10
+      # ToughnessKnowledge 10
     experience:
-      StrengthKnowledge: 3
+      # StrengthKnowledge 3
       AthleticsKnowledge: 3
-      ToughnessKnowledge: 3
+      # ToughnessKnowledge 3
     doAfter: 2
 
 # Melee
@@ -125,10 +125,10 @@
     - state: melee
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 12
+      # MeleeKnowledge 12
       WeaponsKnowledge: 12
     experience:
-      MeleeKnowledge: 3
+      # MeleeKnowledge 3
       WeaponsKnowledge: 2
     doAfter: 2
 
@@ -144,10 +144,10 @@
     - state: melee
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 26
+      # MeleeKnowledge 26
       WeaponsKnowledge: 26
     experience:
-      MeleeKnowledge: 4
+      # MeleeKnowledge 4
       WeaponsKnowledge: 3
     doAfter: 2
 
@@ -163,10 +163,10 @@
     - state: melee
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 35
+      # MeleeKnowledge 35
       WeaponsKnowledge: 35
     experience:
-      MeleeKnowledge: 5
+      # MeleeKnowledge 5
       WeaponsKnowledge: 4
     doAfter: 2
 
@@ -184,10 +184,10 @@
     - state: shooting
   - type: KnowledgeGrantOnUse
     skills:
-      ShootingKnowledge: 12
+      # ShootingKnowledge: 12
       GunsmithingKnowledge: 12
     experience:
-      ShootingKnowledge: 3
+      # ShootingKnowledge: 3
       GunsmithingKnowledge: 2
     doAfter: 2
 
@@ -203,10 +203,10 @@
     - state: shooting
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 26
+      # MeleeKnowledge 26
       WeaponsKnowledge: 26
     experience:
-      MeleeKnowledge: 4
+      # MeleeKnowledge 4
       WeaponsKnowledge: 3
     doAfter: 2
 
@@ -222,10 +222,10 @@
     - state: shooting
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 35
+      # MeleeKnowledge 35
       WeaponsKnowledge: 35
     experience:
-      MeleeKnowledge: 5
+      # MeleeKnowledge 5
       WeaponsKnowledge: 4
     doAfter: 2
 

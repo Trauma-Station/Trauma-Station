@@ -1,6 +1,14 @@
 - type: knowledgeProfile
   id: Vox # lobotomite species
-  pointsLimit: 1
+  pointsLimit: 20 # Why does NT even hire them???
+  attributes:
+    StrengthAttribute: -100
+    IntelligenceAttribute: -100
+    WisdomAttribute: -100
+    DexterityAttribute: -100
+    ConstitutionAttribute: -100
+    LooksAttribute: -100
+    CharismaAttribute: -100
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
@@ -28,11 +36,6 @@
     # Physical Skill
     ThrowingKnowledge: 0
     AthleticsKnowledge: 0
-    StrengthKnowledge: 0
-    ToughnessKnowledge: 0
-    # Combat Skill
-    MeleeKnowledge: 0
-    ShootingKnowledge: 0
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0

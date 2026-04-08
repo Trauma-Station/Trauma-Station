@@ -7,13 +7,17 @@
 
 - type: entity
   id: StrengthAttribute
+  name: Strength
   parent: BaseAttribute
   components:
   - type: DamageAttribute
   - type: StrengthFeat
+  - type: Attribute
+    order: 0
 
 - type: entity
   id: IntelligenceAttribute
+  name: Intelligence
   parent: BaseAttribute
   components:
   - type: AttackAttribute
@@ -22,9 +26,12 @@
     minY: -5
     maxY: 3
   - type: StrengthFeat
+  - type: Attribute
+    order: 1
 
 - type: entity
   id: WisdomAttribute
+  name: Wisdom
   parent: BaseAttribute
   components:
   - type: DefenseAttribute
@@ -33,9 +40,12 @@
     minY: -4
     maxY: 3
   - type: MentalAttribute
+  - type: Attribute
+    order: 2
 
 - type: entity
   id: DexterityAttribute
+  name: Dexterity
   parent: BaseAttribute
   components:
   - type: AttackAttribute
@@ -50,15 +60,31 @@
     maxY: 7
   - type: AgilityFeat
   - type: DodgeAttribute
+  - type: Attribute
+    order: 3
 
 - type: entity
   id: ConstitutionAttribute
+  name: Constitution
   parent: BaseAttribute
   components:
   - type: PhysicalAttribute
+  - type: Attribute
+    order: 4
+
+- type: entity
+  id: LooksAttribute
+  name: Looks
+  parent: BaseAttribute
+  components:
+  - type: Attribute
+    order: 5
 
 - type: entity
   id: CharismaAttribute
+  name: Charisma
   parent: BaseAttribute
   components:
   - type: MoraleAttribute
+  - type: Attribute
+    order: 6
