@@ -19,7 +19,8 @@ public sealed partial class NoteEdit : FancyWindow
 
     public event Action<int, NoteType, string, NoteSeverity?, bool, DateTime?>? SubmitPressed;
 
-    public NoteEdit(SharedAdminNote? note, string playerName, bool canCreate, bool canEdit)
+    public NoteEdit(SharedAdminNote? note, string playerName, bool canCreate, bool canEdit,
+        bool canWatchlist) // Trauma
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
@@ -28,6 +29,7 @@ public sealed partial class NoteEdit : FancyWindow
         IsCreating = note is null;
         CanCreate = canCreate;
         CanEdit = canEdit;
+        CanWatchlist = canWatchlist; // Trauma
 
         ResetSubmitButton();
 
@@ -148,6 +150,7 @@ public sealed partial class NoteEdit : FancyWindow
                 UpdatePermanentCheckboxFields();
                 break;
             case (int) NoteType.Watchlist: // Watchlist: these are always secret and only shown to admins when the player logs on
+                if (!CanWatchlist) return; // Trauma
                 NoteType = NoteType.Watchlist;
                 SecretCheckBox.Disabled = true;
                 SecretCheckBox.Pressed = true;
