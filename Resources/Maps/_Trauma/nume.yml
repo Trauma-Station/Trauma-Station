@@ -149827,8 +149827,6 @@ entities:
       - - StationAi
       - - Command
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 3413
 - proto: WeaponEnergyTurretCommandControlPanel
