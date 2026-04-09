@@ -21,7 +21,7 @@
         density: 100
         hard: true
   - type: Sprite
-    sprite: _DV/CosmicCult/Tileset/cosmicconstructpylon.rsi
+    sprite: _DV/CosmicCult/Tileset/chantry.rsi
     layers:
       - state: spawnin
         map: ["base"]
