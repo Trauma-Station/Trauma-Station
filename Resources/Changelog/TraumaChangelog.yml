@@ -6616,3 +6616,12 @@ Entries:
   id: 766
   time: '2026-04-09T07:40:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1928
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Lasers can pass through open lockers like bullets do.
+  - type: Tweak
+    message: Sniper shots can now penetrate closed lockers.
+  id: 767
+  time: '2026-04-09T09:32:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1930
