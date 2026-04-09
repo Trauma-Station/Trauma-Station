@@ -3,7 +3,18 @@
 namespace Content.Trauma.Server.StationEvents.Components;
 
 /// <summary>
-/// Makes a lifesign alert announcement for carp migration event when started.
+/// Handles spawning logic for the carp migration event.
+/// Requires <c>SpaceSpawnRuleComponent</c> for picking the carp spawn location.
 /// </summary>
 [RegisterComponent]
-public sealed partial class CarpMigrationRuleComponent : Component;
+public sealed partial class CarpMigrationRuleComponent : Component
+{
+    [DataField]
+    public EntProtoId Proto = "MobCarpMigrating";
+
+    [DataField]
+    public int Min = 2;
+
+    [DataField]
+    public int Max = 4;
+}

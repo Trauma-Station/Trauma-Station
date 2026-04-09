@@ -3,8 +3,6 @@
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos;
 using Content.Shared.EntityEffects;
-using Content.Shared.Maps;
-using Content.Shared.Physics;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Map;
@@ -14,46 +12,30 @@ namespace Content.Trauma.Server.EntityEffects;
 
 public sealed class TeleportRandomAreaSystem : EntityEffectSystem<TransformComponent, TeleportRandomArea>
 {
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
 
     public const int Oxygen = (int) Gas.Oxygen;
 
-    private List<EntityCoordinates> _areas = new();
+    private List<Entity<TransformComponent>> _areas = new();
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<TeleportRandomArea> args)
     {
-        // TODO: make a open areas cache somewhere.....
-        var mask = CollisionGroup.MobMask;
-        _areas.Clear();
-        var query = EntityQueryEnumerator<AreaComponent, TransformComponent>();
         var map = ent.Comp.MapID;
-        var safe = args.Effect.Safe;
-        while (query.MoveNext(out var uid, out _, out var xform))
-        {
-            if (xform.MapID != map)
-                continue;
-
-            // TODO: add area teleport blacklist here if its needed for anything in the future
-
-            var coords = xform.Coordinates;
-            if (_turf.GetTileRef(coords) is not {} tile || _turf.IsTileBlocked(tile, mask))
-                continue;
-
-            if (safe && IsTileUnsafe((uid, xform)))
-                continue;
-
-            _areas.Add(coords);
-        }
-
+        // TODO: add area teleport blacklist check if its needed for anything in the future
+        Predicate<Entity<TransformComponent>> pred = args.Effect.Safe
+            ? _ => true
+            : IsTileUnsafe;
+        _areas.Clear();
+        _area.AddOpenAreas(map, _areas, pred);
         if (_areas.Count == 0)
             return;
 
         var area = _random.PickAndTake(_areas);
         // TODO: backport TeleportationSystem and use it with poof effects
-        _transform.SetCoordinates(ent.Owner, area);
+        _transform.SetCoordinates(ent.Owner, area.Comp.Coordinates);
     }
 
     private bool IsTileUnsafe(Entity<TransformComponent> area)
