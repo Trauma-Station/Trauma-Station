@@ -6625,3 +6625,12 @@ Entries:
   id: 767
   time: '2026-04-09T09:32:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1930
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed some midround antags that are meant to spawn in space spawning on
+      the ATS and stuff.
+  id: 768
+  time: '2026-04-09T09:46:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1932
