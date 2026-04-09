@@ -237,7 +237,7 @@
     - type: Barotrauma
       damage:
         types:
-          Blunt: 0.10 #per second, scales with pressure and other constants.
+          Blunt: 1 # Trauma - was 0.1, it didn't die on spaced plating because of atmos shitcode
     - type: Flammable
       fireSpread: true
       damage:
