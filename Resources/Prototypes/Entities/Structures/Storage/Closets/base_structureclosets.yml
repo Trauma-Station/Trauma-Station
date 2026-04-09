@@ -5,6 +5,10 @@
   description: A standard-issue Nanotrasen storage unit.
   abstract: true
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 15
+  # </Trauma>
   - type: Animateable
   - type: ResistLocker
   - type: Transform
