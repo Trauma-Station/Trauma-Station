@@ -34,12 +34,12 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DeadStartupButtonComponent, OnDoAfterButtonPressedEvent>(OnDoAfter);
+        SubscribeLocalEvent<DeadStartupButtonComponent, DeadStartupDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<DeadStartupButtonComponent, ElectrocutedEvent>(OnElectrocuted);
         SubscribeLocalEvent<DeadStartupButtonComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
-    private void OnDoAfter(EntityUid uid, DeadStartupButtonComponent comp, OnDoAfterButtonPressedEvent args)
+    private void OnDoAfter(EntityUid uid, DeadStartupButtonComponent comp, DeadStartupDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled
             || !TryComp<MobStateComponent>(uid, out var mobStateComponent)
@@ -47,7 +47,7 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
             || !TryComp<MobThresholdsComponent>(uid, out var mobThresholdsComponent))
             return;
 
-        var damage = _damageable.GetTotalDamage(uid);
+        var damage = _mobThreshold.CheckVitalDamage(uid);
         // Check if entity have critical state
         if (_mobThreshold.TryGetThresholdForState(uid, MobState.Critical, out var criticalThreshold, mobThresholdsComponent)
             && damage < criticalThreshold)
