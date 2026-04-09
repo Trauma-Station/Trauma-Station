@@ -47,11 +47,11 @@
     sound: /Audio/Weapons/boxingpunch2.ogg
   opponentEffects:
   - !type:TakeStaminaDamage
-    amount: 15
+    amount: 18
   - !type:HealthChange
     damage:
       types:
-        Blunt: 10
+        Blunt: 12
   levelRequired: 40
 
 - type: combo
@@ -65,17 +65,17 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
   - !type:TakeStaminaDamage
-    amount: 10
+    amount: 7
   - !type:HealthChange
     damage:
       types:
         Blunt: 6
   - !type:ModifyKnockdown
-    time: 2
+    time: 1.5
     drop: false
   opponentEffects:
   - !type:ModifyParalysis
-    time: 1
+    time: 2
   - !type:TakeStaminaDamage
     amount: 13
   - !type:HealthChange
@@ -106,13 +106,13 @@
     drop: false
   opponentEffects:
   - !type:ModifyParalysis
-    time: 2
+    time: 4
   - !type:TakeStaminaDamage
     amount: 20
   - !type:HealthChange
     damage:
       types:
-        Blunt: 15
+        Blunt: 18
   levelRequired: 36
   levelExceeded: 54
 
@@ -131,13 +131,13 @@
     drop: false
   opponentEffects:
   - !type:ModifyParalysis
-    time: 2
+    time: 6
   - !type:TakeStaminaDamage
     amount: 25
   - !type:HealthChange
     damage:
       types:
-        Blunt: 17
+        Blunt: 20
   levelRequired: 54
 
 - type: combo
@@ -311,7 +311,7 @@
       types:
         Blunt: 14
   levelRequired: 15
-  levelExcceeded: 30
+  levelExceeded: 30
 
 - type: combo
   id: ArmstrongHeadbutt
