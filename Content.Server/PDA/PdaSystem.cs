@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Trauma.Common.CCVars;
+using Robust.Shared.Configuration;
+// </Trauma>
 using Content.Server.Access.Systems;
 using Content.Server.AlertLevel;
 using Content.Server.CartridgeLoader;
@@ -38,6 +42,9 @@ namespace Content.Server.PDA
         [Dependency] private readonly UnpoweredFlashlightSystem _unpoweredFlashlight = default!;
         [Dependency] private readonly ContainerSystem _containerSystem = default!;
         [Dependency] private readonly IdCardSystem _idCard = default!;
+        [Dependency] private readonly IConfigurationManager _config = default!; // DeltaV
+
+        private static DateTime ServerDate; // DeltaV - PDA
 
         public override void Initialize()
         {
@@ -61,6 +68,13 @@ namespace Content.Server.PDA
             SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
             SubscribeLocalEvent<PdaComponent, InventoryRelayedEvent<ChameleonControllerOutfitSelectedEvent>>(OnRelayedEventToIdCard);
             SubscribeLocalEvent<PdaComponent, InventoryRelayedEvent<VoiceMaskNameUpdatedEvent>>(OnRelayedEventToIdCard);
+
+            // Begin DeltaV additions
+            Subs.CVar(_config,
+                DCCVars.YearOffset,
+                value => ServerDate = DateTime.Today.AddYears(value),
+                true);
+            // End DeltaV additions
         }
 
         private void OnRelayedEventToIdCard<T>(Entity<PdaComponent> ent, ref InventoryRelayedEvent<T> args)
@@ -191,6 +205,7 @@ namespace Content.Server.PDA
             var hasInstrument = HasComp<InstrumentComponent>(uid);
             var showUplink = HasComp<UplinkComponent>(uid) && IsUnlocked(uid);
 
+            pda.CurrentDate = pda.DateOverride ?? ServerDate; // DeltaV - PDA date
             UpdateStationName(uid, pda);
             UpdateAlertLevel(uid, pda);
             // TODO: Update the level and name of the station with each call to UpdatePdaUi is only needed for latejoin players.
@@ -213,6 +228,7 @@ namespace Content.Server.PDA
                     ActualOwnerName = pda.OwnerName,
                     IdOwner = id?.FullName,
                     JobTitle = id?.LocalizedJobTitle,
+                    CurrentDate = pda.CurrentDate, // DeltaV - PDA date
                     StationAlertLevel = pda.StationAlertLevel,
                     StationAlertColor = pda.StationAlertColor
                 },
