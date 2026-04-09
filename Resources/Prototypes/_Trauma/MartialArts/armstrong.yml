@@ -82,6 +82,8 @@
     damage:
       types:
         Blunt: 8
+  conditions:
+  - !type:StandingCondition
   levelRequired: 6 # TODO: make it require target to be standing, make it do knockback
   levelExceeded: 36
 
@@ -113,6 +115,8 @@
     damage:
       types:
         Blunt: 18
+  conditions:
+  - !type:StandingCondition
   levelRequired: 36
   levelExceeded: 54
 
@@ -138,6 +142,8 @@
     damage:
       types:
         Blunt: 20
+  conditions:
+  - !type:StandingCondition
   levelRequired: 54
 
 - type: combo
