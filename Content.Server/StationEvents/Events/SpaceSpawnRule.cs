@@ -12,6 +12,9 @@ namespace Content.Server.StationEvents.Events;
 /// </summary>
 public sealed class SpaceSpawnRule : StationEventSystem<SpaceSpawnRuleComponent>
 {
+    // <Trauma>
+    [Dependency] private readonly IMapManager _map = default!;
+    // </Trauma>
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -53,7 +56,7 @@ public sealed class SpaceSpawnRule : StationEventSystem<SpaceSpawnRuleComponent>
             var location = angle.ToVec() * distance;
 
             var position = center + location;
-            if (_transform.GetGrid(_transform.ToCoordinates(position)) != null)
+            if (_map.TryFindGridAt(xform.MapUid!.Value, position, out _, out _))
                 continue; // it's not in space it's on a grid, pick again
 
             // create the spawner!
