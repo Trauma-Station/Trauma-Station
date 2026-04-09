@@ -5,7 +5,6 @@ using Content.Server.Lightning;
 using Content.Server.Lightning.Components;
 using Content.Server.Popups;
 using Content.Shared.Audio;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -19,7 +18,6 @@ namespace Content.Trauma.Server.Silicon.DeadStartupButton;
 
 public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
@@ -48,7 +46,7 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
             return;
 
         var damage = _mobThreshold.CheckVitalDamage(uid);
-        // Check if entity have critical state
+        // Check if entity has a critical state
         if (_mobThreshold.TryGetThresholdForState(uid, MobState.Critical, out var criticalThreshold, mobThresholdsComponent)
             && damage < criticalThreshold)
         {
@@ -56,7 +54,7 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
             return;
         }
 
-        // Check if entity have dead state
+        // Check if entity has a dead state
         if (_mobThreshold.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold, mobThresholdsComponent)
             && damage < deadThreshold)
         {
