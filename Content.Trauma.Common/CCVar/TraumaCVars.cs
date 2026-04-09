@@ -139,7 +139,7 @@ public sealed partial class TraumaCVars
     /// If this value is changed ingame it will only take affected after restarting the round.
     /// </summary>
     public static readonly CVarDef<int> DecalDespawnLimit =
-        CVarDef.Create("trauma.decal_despawn_limit", 128, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("trauma.decal_despawn_limit", 1028, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
 }
