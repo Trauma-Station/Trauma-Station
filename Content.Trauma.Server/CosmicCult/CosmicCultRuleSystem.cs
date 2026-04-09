@@ -63,7 +63,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
     [Dependency] private readonly EuiManager _euiMan = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
