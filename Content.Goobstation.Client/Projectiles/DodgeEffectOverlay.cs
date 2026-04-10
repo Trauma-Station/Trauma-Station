@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Projectiles;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
