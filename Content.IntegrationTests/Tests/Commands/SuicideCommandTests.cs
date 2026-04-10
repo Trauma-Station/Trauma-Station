@@ -73,6 +73,7 @@ public sealed class SuicideCommandTests : GameTest
     /// Should successfully kill the player and ghost them
     /// </summary>
     [Test]
+    [Explicit] // Trauma - /suicide is disabled
     public async Task TestSuicide()
     {
         var pair = Pair;
@@ -118,6 +119,7 @@ public sealed class SuicideCommandTests : GameTest
     /// This should only deal as much damage as necessary to get to the dead threshold
     /// </summary>
     [Test]
+    [Explicit] // Trauma - /suicide is disabled
     public async Task TestSuicideWhileDamaged()
     {
         var pair = Pair;
@@ -174,6 +176,7 @@ public sealed class SuicideCommandTests : GameTest
     /// Should only ghost the player but not kill them
     /// </summary>
     [Test]
+    [Explicit] // Trauma - /suicide is disabled
     public async Task TestSuicideWhenCannotSuicide()
     {
         var pair = Pair;
@@ -218,6 +221,7 @@ public sealed class SuicideCommandTests : GameTest
     /// Run the suicide command while the player is holding an execution-capable weapon
     /// </summary>
     [Test]
+    [Explicit] // Trauma - /suicide is disabled
     public async Task TestSuicideByHeldItem()
     {
         var pair = Pair;

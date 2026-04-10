@@ -6547,3 +6547,111 @@ Entries:
   id: 757
   time: '2026-04-07T21:33:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1894
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Grab-throwing mice and other light mobs no longer knocks down anyone they
+      hit.
+  id: 758
+  time: '2026-04-08T06:56:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1915
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added 15 second delay hell lag back!
+  id: 759
+  time: '2026-04-08T10:42:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1917
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: No more map vote spamming while in the middle of a round :)
+  id: 760
+  time: '2026-04-08T12:37:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1908
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: >-
+      REJOICE, SPEECH BUBBLE FONTS HAVE NOW BEEN FIXED, THE CLOWNS WILL SPEAK IN
+      COMIC SANS AS GOD TRUELY INDENDED
+  id: 761
+  time: '2026-04-08T16:00:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1918
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Sec funding booster can only be used 30m in up from 10m.
+  id: 762
+  time: '2026-04-08T17:16:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1919
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed slop thief pinpointer.
+  id: 763
+  time: '2026-04-09T06:54:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1925
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed even health changes like trico and skeleton milk healing only
+      healing a random bodypart instead of all of them.
+  id: 764
+  time: '2026-04-09T07:01:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1926
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed emitters and other lasers not hitting the supermatter crystal.
+  id: 765
+  time: '2026-04-09T07:30:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1927
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed tendons not dying in spaced plating.
+  id: 766
+  time: '2026-04-09T07:40:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1928
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Lasers can pass through open lockers like bullets do.
+  - type: Tweak
+    message: Sniper shots can now penetrate closed lockers.
+  id: 767
+  time: '2026-04-09T09:32:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1930
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed some midround antags that are meant to spawn in space spawning on
+      the ATS and stuff.
+  id: 768
+  time: '2026-04-09T09:46:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1932
+- author: MayasMischef
+  changes:
+  - type: Remove
+    message: Removed BSO
+  id: 769
+  time: '2026-04-09T09:57:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1934
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Rebooting IPCs now uses vital damage instead of total damage.
+  id: 770
+  time: '2026-04-09T10:13:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1935
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Forged weapons are now contraband.
+  id: 771
+  time: '2026-04-09T17:42:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1946

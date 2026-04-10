@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Shared.EntityConditions;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -17,6 +18,7 @@ namespace Content.Trauma.Shared.MartialArts;
 public partial class MartialArtsSystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
     [Dependency] private readonly EntityQuery<CanPerformComboComponent> _comboQuery = default!;
 
     private void InitializeCanPerformCombo()
@@ -91,10 +93,10 @@ public partial class MartialArtsSystem
             var list = ent.Comp.LastAttacks.GetRange(sum, proto.AttackTypes.Count).AsEnumerable();
             var attackList = proto.AttackTypes.AsEnumerable();
 
-            if (level < proto.LevelRequired || (level > proto.LevelExceeded && proto.LevelExceeded > 0))
-                continue;
-
-            if (!list.SequenceEqual(attackList))
+            if (level < proto.LevelRequired || (level > proto.LevelExceeded && proto.LevelExceeded > 0) ||
+                !list.SequenceEqual(attackList) ||
+                !_conditions.TryConditions(performer, proto.UserConditions) ||
+                !_conditions.TryConditions(target, proto.Conditions))
                 continue;
 
             OverrideCombo(performer, target, proto, ent, level);

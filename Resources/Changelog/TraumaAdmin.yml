@@ -106,3 +106,10 @@ Entries:
   id: 14
   time: '2026-04-07T07:25:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1896
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Trialmins can no longer make watchlists, hitler dead.
+  id: 15
+  time: '2026-04-09T18:42:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1948

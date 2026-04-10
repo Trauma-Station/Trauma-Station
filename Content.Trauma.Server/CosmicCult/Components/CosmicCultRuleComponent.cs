@@ -48,12 +48,6 @@ public sealed partial class CosmicCultRuleComponent : Component
     public HashSet<EntityUid> Cultists = [];
 
     /// <summary>
-    /// When true, prevents the wincondition state of Cosmic Cult from being changed.
-    /// </summary>
-    [DataField]
-    public bool WinLocked;
-
-    /// <summary>
     /// When true, Malign Rifts are unable to spawn.
     /// </summary>
     [DataField]
@@ -65,17 +59,11 @@ public sealed partial class CosmicCultRuleComponent : Component
     [DataField]
     public bool UpdateAllCultists;
 
-    /// <summary>
-    /// Chance that a rift spawn will be replaced with a more dangerous fracture.
-    /// </summary>
-    [DataField]
-    public float FractureChance;
-
     [DataField]
     public EntityUid ActiveChantry;
 
     [DataField]
-    public WinType WinType = WinType.CrewMinor;
+    public WinType WinType = WinType.CrewWin; // If the cult didn't summon the Unknown, that's a crew win
 
     /// <summary>
     ///     The cult's monument
@@ -119,12 +107,6 @@ public sealed partial class CosmicCultRuleComponent : Component
     public int TotalCult;
 
     /// <summary>
-    ///     Percentage of crew that have been converted into cultists
-    /// </summary>
-    [DataField]
-    public double PercentConverted;
-
-    /// <summary>
     ///     How much entropy has been siphoned by the cult
     /// </summary>
     [DataField]
@@ -139,26 +121,8 @@ public sealed partial class CosmicCultRuleComponent : Component
     public bool IncreasingTier;
 }
 
-public enum WinType : byte // TODO make a gentle sledgehammer pass over this
+public enum WinType : byte
 {
-    /// <summary>
-    ///    Cult major win. The Cosmic Cult beckoned the final curtain call.
-    /// </summary>
-    CultMajor,
-    /// <summary>
-    ///    Cult minor win. More than half of the cultists are still alive and free.
-    /// </summary>
-    CultMinor,
-    /// <summary>
-    ///     Neutral. More than half of the cult are dead and not even on centcomm.
-    /// </summary>
-    Neutral,
-    /// <summary>
-    ///     Crew minor win. More than half of the cultists are arrested.
-    /// </summary>
-    CrewMinor,
-    /// <summary>
-    ///     Crew major win. All cultists arrested.
-    /// </summary>
-    CrewMajor,
+    CultWin,
+    CrewWin,
 }
