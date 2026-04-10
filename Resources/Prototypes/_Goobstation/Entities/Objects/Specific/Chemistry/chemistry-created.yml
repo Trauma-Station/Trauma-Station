@@ -37,3 +37,6 @@
           Quantity: 5
         - ReagentId: GastroToxin
           Quantity: 5
+  - type: Tag
+    tags:
+    - SynthMeat

@@ -191,6 +191,9 @@
   id: Sugar
 
 - type: Tag
+  id: SynthMeat
+
+- type: Tag
   id: SteelScraps
 
 - type: Tag
