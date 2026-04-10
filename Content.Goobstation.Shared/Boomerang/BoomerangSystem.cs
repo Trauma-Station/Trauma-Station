@@ -48,11 +48,11 @@ public sealed class BoomerangSystem : EntitySystem
 
         foreach (var (uid, coords, speed, thrower) in _toThrow)
         {
-            if (!TerminatingOrDeleted(uid) && (thrower == null || !TerminatingOrDeleted(thrower)))
-            {
-                _physics.SetLinearVelocity(uid, Vector2.Zero);
-                _throwingSystem.TryThrow(uid, coords, speed, user: thrower, recoil: false, playSound: false);
-            }
+            if (TerminatingOrDeleted(uid) || thrower != null && TerminatingOrDeleted(thrower))
+                continue;
+
+            _physics.SetLinearVelocity(uid, Vector2.Zero);
+            _throwingSystem.TryThrow(uid, coords, speed, user: thrower, recoil: false, playSound: false);
         }
 
         _toThrow.Clear();

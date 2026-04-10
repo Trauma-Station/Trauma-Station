@@ -49,7 +49,7 @@ public abstract class SharedXRayVisionSystem : EntitySystem
             return;
 
         if (_status.TryEffectsWithComp<XRayVisionStatusEffectComponent>(args.Target, out var effects))
-            effects.Remove(ent.Owner);
+            effects.RemoveWhere(x => x.Owner == ent.Owner);
 
         if (_timing.IsFirstTimePredicted)
             ent.Comp.ShouldRemoveFov = eye.DrawFov && effects is not { Count: > 0 };
