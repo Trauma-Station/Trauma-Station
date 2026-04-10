@@ -170,7 +170,7 @@
         Shock: -7.5
     damage:
       types:
-        Holy: 7 # Aoe free damage :drools:
+        Holy: 7
   - type: Tag
     tags:
     - Rosary
