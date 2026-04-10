@@ -16,7 +16,7 @@ public sealed class DodgeEffectOverlay : Overlay
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    private SharedTransformSystem? _transform;
+    private SharedTransformSystem _transform = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -32,9 +32,6 @@ public sealed class DodgeEffectOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (_transform == null)
-            return;
-
         var worldHandle = args.WorldHandle;
         var now = _timing.RealTime;
 
