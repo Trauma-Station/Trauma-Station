@@ -8,7 +8,7 @@
   - type: Sprite
     layers:
     - state: green
-    - sprite: _White/Mobs/Aliens/Xenomorphs/facehugger.rsi
+    - sprite: _Trauma/Mobs/Xenos/facehugger.rsi
       state: facehugger
   - type: ConditionalSpawner
     prototypes:
@@ -92,7 +92,7 @@
   - type: Sprite
     layers:
     - state: green
-    - sprite: _White/Mobs/Aliens/Xenomorphs/queen.rsi
+    - sprite: _Trauma/Mobs/Xenos/queen.rsi
       state: xenomorph
   - type: ConditionalSpawner
     prototypes:
