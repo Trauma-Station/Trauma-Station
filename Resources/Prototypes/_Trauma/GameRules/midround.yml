@@ -139,12 +139,29 @@
 ## Sleeper agents ninja threat, the ninja does the announcement
 
 - type: entity
-  parent: SleeperAgents
+  parent: BaseTraitorRule
   id: SleeperAgentsQuiet # cipher's assassin...
   components:
   - type: StationEvent
-    startAnnouncement: null
-    startAudio: null
+    earliestStart: 30
+    weight: 8
+    minimumPlayers: 15
+    maxOccurrences: 1 # can only happen once per round
+    duration: null # the rule has to last the whole round not 1 second
+    occursDuringRoundEnd: false
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ TraitorSleeper ]
+      fallbackRoles: [ Traitor ]
+      min: 1
+      max: 2
+      playerRatio: 10
+      blacklist:
+        components:
+        - AntagImmune
+        - CommandStaff
+      mindRoles:
+      - MindRoleTraitorSleeper
 
 ## Quiet version of wailing horse
 
