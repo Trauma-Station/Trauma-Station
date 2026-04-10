@@ -19,7 +19,7 @@
     wideAnimationRotation: -125
     damage:
       types:
-        Slash: 17 # moving to 17 to encourage more spell use, can be sharpened to hit 20 again
+        Slash: 20
       armorPenetration: 0.3
       woundSeverityMultipliers:
         Slash: 1.5

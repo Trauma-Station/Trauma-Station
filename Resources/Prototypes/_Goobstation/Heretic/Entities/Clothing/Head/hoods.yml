@@ -41,7 +41,6 @@
         Piercing: 0.5
         Heat: 0.5
         Caustic: 0.5
-        # Holy: 1.25
     traumaDeductions:
       Dismemberment: 0.5
       OrganDamage: 0.5
@@ -137,7 +136,6 @@
         Piercing: 0.7
         Heat: 0.7
         Caustic: 0.7
-        # Holy: 1.25
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3

@@ -4,8 +4,8 @@
 namespace Content.Trauma.Shared.Heretic.Crucible.Components;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class XRayVisionComponent : Component
+public sealed partial class XRayVisionStatusEffectComponent : Component
 {
     [DataField]
-    public bool EyeHadFov;
+    public bool ShouldRemoveFov = true;
 }
