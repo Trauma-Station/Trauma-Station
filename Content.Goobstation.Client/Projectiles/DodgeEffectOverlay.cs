@@ -1,8 +1,6 @@
 using Content.Goobstation.Shared.Projectiles;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Numerics;
 
@@ -14,63 +12,38 @@ public sealed class DodgeEffectOverlay : Overlay
 
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    private SharedTransformSystem? _xformSystem;
+    private SharedTransformSystem? _transform;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     private readonly ShaderInstance _shader;
     private const float EffectWorldSize = 1.75f;
 
-    public readonly Dictionary<EntityUid, (TimeSpan Time, float Seed)> Effects = new();
-
-    public void AddEffect(EntityUid uid, TimeSpan time)
-    {
-        Effects[uid] = (time, _random.NextFloat() * 1000f);
-    }
-
-    public void RemoveEffect(EntityUid uid)
-    {
-        Effects.Remove(uid);
-    }
-
     public DodgeEffectOverlay()
     {
         IoCManager.InjectDependencies(this);
         _shader = _protoMan.Index(ShaderProto).InstanceUnique();
-    }
-
-    protected override bool BeforeDraw(in OverlayDrawArgs args)
-    {
-        if (_xformSystem == null && !_entMan.TrySystem(out _xformSystem))
-            return false;
-
-        return Effects.Count > 0;
+        _transform = _entMan.System<SharedTransformSystem>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (_xformSystem == null)
+        if (_transform == null)
             return;
 
         var worldHandle = args.WorldHandle;
         var now = _timing.RealTime;
 
-        foreach (var (uid, effect) in Effects)
+        var query = _entMan.EntityQueryEnumerator<DodgeEffectComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var dodge, out var xform))
         {
-            if (!_entMan.TryGetComponent<DodgeEffectComponent>(uid, out var dodge))
-                continue;
-
-            if (!_entMan.TryGetComponent<TransformComponent>(uid, out var xform))
-                continue;
-
             if (xform.MapID != args.MapId)
                 continue;
 
-            var worldPos = _xformSystem.GetWorldPosition(uid);
-            var elapsed = (float) (now - effect.Time).TotalSeconds;
+            var worldPos = _transform.GetWorldPosition(uid);
+            var elapsed = (float) (now - dodge.Time).TotalSeconds;
             var progress = Math.Clamp(elapsed / dodge.Duration, 0f, 1f);
 
             var screenCenter = args.Viewport.WorldToLocal(worldPos);
@@ -82,7 +55,7 @@ public sealed class DodgeEffectOverlay : Overlay
             _shader.SetParameter("progress", progress);
             _shader.SetParameter("center", screenCenter);
             _shader.SetParameter("size", screenSize);
-            _shader.SetParameter("seed", effect.Seed);
+            _shader.SetParameter("seed", dodge.Seed);
 
             var worldBox = Box2.CenteredAround(worldPos, new Vector2(EffectWorldSize, EffectWorldSize));
 
