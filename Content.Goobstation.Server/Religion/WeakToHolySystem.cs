@@ -33,6 +33,28 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         SubscribeLocalEvent<UnholyItemComponent, GotUnequippedEvent>(OnUnquip);
         SubscribeLocalEvent<UnholyItemComponent, GotEquippedHandEvent>(OnHandEquip);
         SubscribeLocalEvent<UnholyItemComponent, GotUnequippedHandEvent>(OnHandUnequip);
+        SubscribeLocalEvent<UnholyItemComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<UnholyItemComponent, ComponentShutdown>(OnShutdown);
+    }
+
+    private void OnShutdown(Entity<UnholyItemComponent> ent, ref ComponentShutdown args)
+    {
+        var parent = Transform(ent).ParentUid;
+        if (TerminatingOrDeleted(parent) || !HasComp<WeakToHolyComponent>(parent))
+            return;
+
+        var ev = new UnholyStatusChangedEvent(parent, ent, false);
+        RaiseLocalEvent(parent, ref ev);
+    }
+
+    private void OnStartup(Entity<UnholyItemComponent> ent, ref ComponentStartup args)
+    {
+        var parent = Transform(ent).ParentUid;
+        if (TerminatingOrDeleted(parent) || !HasComp<WeakToHolyComponent>(parent))
+            return;
+
+        var ev = new UnholyStatusChangedEvent(parent, ent, true);
+        RaiseLocalEvent(parent, ref ev);
     }
 
     private void OnHandUnequip(Entity<UnholyItemComponent> ent, ref GotUnequippedHandEvent args)
