@@ -70,7 +70,6 @@ entities:
         None: 0.25
       dampingModifier: 0.25
     - type: ImplicitRoof
-    - type: FTLDrive
     - type: GridPathfinding
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
