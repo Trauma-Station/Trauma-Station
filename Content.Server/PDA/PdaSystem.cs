@@ -32,6 +32,7 @@ namespace Content.Server.PDA
 {
     public sealed class PdaSystem : SharedPdaSystem
     {
+        [Dependency] private readonly IConfigurationManager _config = default!; // DeltaV
         [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
         [Dependency] private readonly InstrumentSystem _instrument = default!;
         [Dependency] private readonly RingerSystem _ringer = default!;
@@ -42,9 +43,8 @@ namespace Content.Server.PDA
         [Dependency] private readonly UnpoweredFlashlightSystem _unpoweredFlashlight = default!;
         [Dependency] private readonly ContainerSystem _containerSystem = default!;
         [Dependency] private readonly IdCardSystem _idCard = default!;
-        [Dependency] private readonly IConfigurationManager _config = default!; // DeltaV
 
-        private static DateTime ServerDate; // DeltaV - PDA
+        private DateTime ServerDate; // DeltaV - PDA
 
         public override void Initialize()
         {
@@ -205,7 +205,7 @@ namespace Content.Server.PDA
             var hasInstrument = HasComp<InstrumentComponent>(uid);
             var showUplink = HasComp<UplinkComponent>(uid) && IsUnlocked(uid);
 
-            pda.CurrentDate = pda.DateOverride ?? ServerDate; // DeltaV - PDA date
+            pda.CurrentDate = ServerDate; // DeltaV - PDA date
             UpdateStationName(uid, pda);
             UpdateAlertLevel(uid, pda);
             // TODO: Update the level and name of the station with each call to UpdatePdaUi is only needed for latejoin players.

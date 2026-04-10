@@ -64,7 +64,7 @@ public sealed class DCCVars
         CVarDef.Create("cosmiccult.extra_entropy_for_finale", 150, CVar.SERVER);    
 
     /// <summary>
-    /// What year it is in the game. Actual value shown in game is server date + this value.
+    /// The offset for in-game date (the date will be server date + this amount of years).
     /// </summary>
     public static readonly CVarDef<int> YearOffset =
         CVarDef.Create("game.current_year_offset", 739, CVar.SERVERONLY);

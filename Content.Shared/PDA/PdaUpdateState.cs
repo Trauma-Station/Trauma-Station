@@ -49,6 +49,6 @@ namespace Content.Shared.PDA
         public string? JobTitle;
         public string? StationAlertLevel;
         public Color StationAlertColor;
-        public DateTime? CurrentDate; // DeltaV - PDA date
+        public DateTime CurrentDate; // DeltaV - PDA date
     }
 }
