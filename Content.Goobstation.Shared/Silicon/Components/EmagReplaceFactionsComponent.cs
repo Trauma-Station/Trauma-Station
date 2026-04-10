@@ -3,8 +3,6 @@
 using Content.Shared.Silicons.Bots;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Silicon.Components;
 

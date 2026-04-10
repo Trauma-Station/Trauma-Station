@@ -7,7 +7,6 @@ using Content.Shared.Implants;
 using Content.Trauma.Common.Silicons.Borgs;
 using Content.Trauma.Shared.Knowledge.Components;
 using Content.Trauma.Shared.MartialArts.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 

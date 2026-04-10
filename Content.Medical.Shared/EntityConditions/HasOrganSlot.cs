@@ -4,7 +4,6 @@ using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityConditions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityConditions;
 

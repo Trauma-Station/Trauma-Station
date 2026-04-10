@@ -2,7 +2,6 @@
 
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Interaction.GunBlock;

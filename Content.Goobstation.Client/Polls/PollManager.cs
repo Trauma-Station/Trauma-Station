@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Goobstation.Shared.Polls;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Client.Polls;
 

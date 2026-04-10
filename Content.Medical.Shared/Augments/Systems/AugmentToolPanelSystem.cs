@@ -70,7 +70,7 @@ public sealed class AugmentToolPanelSystem : EntitySystem
         if (!_handsQuery.TryComp(body, out var handsComp))
             return;
 
-        if (_childQuery.Comp(augment).Parent is not {} partUid)
+        if (_childQuery.Comp(augment).Parent is not {} partUid || TerminatingOrDeleted(partUid))
             return;
 
         // the arm's symmetry is the same as the hand

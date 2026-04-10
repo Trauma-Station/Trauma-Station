@@ -3,7 +3,6 @@
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Heretic.Components;
 

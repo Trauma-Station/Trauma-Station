@@ -4,7 +4,6 @@ using Content.Shared.Coordinates;
 using Content.Shared.EntityEffects;
 using Content.Shared.Xenoarchaeology.Artifact;
 using Content.Shared.Xenoarchaeology.Artifact.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityEffects;
 

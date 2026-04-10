@@ -129,3 +129,230 @@
     sprite: _Trauma/Objects/Patreon/gribley.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/gribley.rsi
+  - type: GhostRole
+    prob: 1
+    makeSentient: true
+    name: ghost-role-information-disgustingbackpack-name
+    description: ghost-role-information-disgustingbackpack-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleAnimal
+  - type: GhostTakeoverAvailable
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: PatreonGungeonologist
+  name: bomber jacket
+  description: A green bomber jacket, dont ask what it's made out of.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/TheGungeonologist/bomberjacket.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/TheGungeonologist/bomberjacket.rsi
+
+- type: entity
+  parent: ClothingEyesBase
+  id: PatreonGungeonologist2
+  name: cup goggles
+  description: Good for keeping sand out of your eyes.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/TheGungeonologist/cupgoggles.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/TheGungeonologist/cupgoggles.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: PatreonBias
+  name: hierophant trophy
+  description: The decapitated head of a hierophant.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/_bias.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/_bias.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: PatreonEpsilon
+  name: void cape
+  description: It's cold to the touch.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/epsilon.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/epsilon.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: PatreonIdoppel
+  name: stained outfit
+  description: A stinky outfit stained by it's owner's impressive devotion to work.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/idoppel.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/idoppel.rsi
+
+- type: entity
+  parent: ClothingMaskGas
+  id: PatreonWraith
+  name: skull mask
+  description: A skull mask! You're not sure if this is real or not...
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/wraith.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/wraith.rsi
+
+- type: entity
+  parent: ClothingHeadHatAnimalHeadslime
+  id: PatreonToasterStrudels
+  name: real headslime
+  description: Squishy... ew.
+  components:
+  - type: AddAccentClothing
+    accent: ReplacementAccent
+    replacement: dementia
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/toasterStrudels.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/toasterStrudels.rsi
+
+- type: entity
+  parent: SimpleMobBase
+  id: PatreonBumblebirb
+  name: Dwingle
+  description: It's dwingling itself.
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: ReplacementAccent
+    accent: dementia
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Objects/Patreon/bumblebirb.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: icon
+  - type: Item
+    size: Tiny
+  - type: HTN
+    constantlyReplan: false
+    rootTask:
+      task: MouseCompound
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1
+        density: 50
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      30: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.5
+    baseSprintSpeed : 5
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: icon
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 50
+  - type: Edible
+  - type: FlavorProfile
+    flavors:
+    - horrible
+    - terrible
+    - chewy
+  - type: Hunger
+    baseDecayRate: 0.25
+  - type: Extractable
+    grindableSolutionName: food
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Slime
+          Quantity: 50
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatSlime
+  - type: Damageable
+    damageContainer: Biological
+  - type: Tag
+    tags:
+    - Trash
+    - VimPilot
+  - type: NonSpreaderZombie
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/_Trauma/Patreon/DWINGLE.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 0
+  - type: NPCRetaliation
+    attackMemoryLength: 5
+  - type: GroupRetaliation
+    range: 5
+  - type: GhostRole
+    prob: 1
+    makeSentient: true
+    name: ghost-role-information-dwingle-name
+    description: ghost-role-information-dwingle-description
+    rules: ghost-role-information-animal-rules
+    mindRoles:
+    - MindRoleGhostRoleAnimal
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  parent: RehydratableAnimalCube
+  id: DwingleCube
+  name: dwingle cube
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - PatreonBumblebirb
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  parent: BoxCardboard
+  name: dwingle cube box
+  id: DwingleCubeBox
+  description: Giving you 8 of these is going to send me to hell.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: DwingleCube
+        amount: 8
+  - type: Sprite
+    sprite: Objects/Misc/monkeycube.rsi
+    state: box

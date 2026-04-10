@@ -10,7 +10,6 @@ using Content.Shared.Gibbing;
 using Content.Shared.Spawners.Components;
 using Content.Shared.Throwing;
 using Content.Trauma.Shared.Medical.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 

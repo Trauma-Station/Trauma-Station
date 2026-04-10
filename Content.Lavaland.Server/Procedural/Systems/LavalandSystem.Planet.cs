@@ -3,15 +3,14 @@
 using System.Numerics;
 using Content.Lavaland.Server.Biome;
 using Content.Lavaland.Server.Procedural.Components;
-using Content.Server.Atmos.Components;
 using Content.Lavaland.Shared.Procedural.Components;
 using Content.Lavaland.Shared.Procedural.Prototypes;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Gravity;
 using Content.Shared.Parallax.Biomes;
 using Content.Shared.Salvage;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Server.Procedural.Systems;
 

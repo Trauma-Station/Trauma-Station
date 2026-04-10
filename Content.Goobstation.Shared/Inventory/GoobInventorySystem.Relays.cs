@@ -3,16 +3,15 @@
 using Content.Goobstation.Shared.Chemistry;
 using Content.Goobstation.Shared.Clothing;
 using Content.Goobstation.Shared.Devil;
-using Content.Goobstation.Shared.Flashbang;
-using Content.Goobstation.Shared.Stunnable;
-using Content.Shared._Goobstation.Wizard.Chuuni;
-using Content.Shared._White.Standing;
-using Content.Shared.Chat.RadioIconsEvents;
-using Content.Shared.Flash;
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
+using Content.Goobstation.Shared.Flashbang;
+using Content.Goobstation.Shared.Standing;
+using Content.Goobstation.Shared.Stunnable;
+using Content.Shared.Flash;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Trauma.Common.Wizard;
 
 namespace Content.Goobstation.Shared.Inventory;
 

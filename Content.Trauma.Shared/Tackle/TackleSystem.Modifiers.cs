@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Wizard.Mutate;
+using Content.Trauma.Shared.Wizard.Mutate;
 using Content.Shared.Clumsy;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs;

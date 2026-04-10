@@ -2,7 +2,6 @@
 
 using System.Threading.Tasks;
 using Robust.Shared.Asynchronous;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Common.ServerCurrency;
 

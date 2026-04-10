@@ -1,12 +1,9 @@
-// <Trauma>
-using Content.Shared._Starlight.CollectiveMind;
-// </Trauma>
 using System.Numerics;
 using Content.Shared.Chat;
 
 namespace Content.Client.UserInterface.Systems.Chat.Controls;
 
-public sealed class ChannelSelectorButton : ChatPopupButton<ChannelSelectorPopup>
+public sealed partial class ChannelSelectorButton : ChatPopupButton<ChannelSelectorPopup> // <Trauma> - Collective Mind Declaration
 {
     public event Action<ChatSelectChannel>? OnChannelSelect;
 
@@ -69,25 +66,5 @@ public sealed class ChannelSelectorButton : ChatPopupButton<ChannelSelectorPopup
             ChatSelectChannel.Admin => Color.HotPink,
             _ => Color.DarkGray
         };
-    }
-
-    // Goobstation - Starlight collective mind port
-    public void UpdateChannelSelectButton(ChatSelectChannel channel, Shared.Radio.RadioChannelPrototype? radio, CollectiveMindPrototype? collectiveMind = null)
-    {
-        if (radio != null)
-        {
-            Text = Loc.GetString(radio.Name);
-            Modulate = radio?.Color ?? ChannelSelectColor(channel);
-        }
-        else if (collectiveMind != null)
-        {
-            Text = Loc.GetString(collectiveMind.Name);
-            Modulate = collectiveMind.Color;
-        }
-        else
-        {
-            Text = ChannelSelectorName(channel);
-            Modulate = ChannelSelectColor(channel);
-        }
     }
 }

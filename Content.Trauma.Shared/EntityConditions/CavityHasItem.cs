@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityConditions;
 using Content.Trauma.Shared.Body.Part;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 

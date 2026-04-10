@@ -1,5 +1,8 @@
+// <Trauma>
+using Robust.Shared.Maths; // Goobstation
+using Content.Trauma.Common.Wizard.Guardian;
+// </Trauma>
 using Content.Server.Popups;
-using Content.Shared._Goobstation.Wizard.Guardian;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -19,7 +22,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
-using Robust.Shared.Maths; // Goobstation
 using Robust.Shared.Utility;
 
 namespace Content.Server.Guardian

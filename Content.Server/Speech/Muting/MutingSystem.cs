@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server._EinsteinEngines.Language;
+using Content.Trauma.Common.Language.Systems;
 // </Trauma>
 using Content.Server.Popups;
 using Content.Server.Speech.EntitySystems;
@@ -15,7 +15,7 @@ namespace Content.Server.Speech.Muting
     public sealed class MutingSystem : EntitySystem
     {
         // <Trauma>
-        [Dependency] private readonly LanguageSystem _languages = default!;
+        [Dependency] private readonly CommonLanguageSystem _languages = default!;
         // </Trauma>
         [Dependency] private readonly PopupSystem _popupSystem = default!;
 

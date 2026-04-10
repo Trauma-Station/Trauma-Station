@@ -1,16 +1,4 @@
-// SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <zddm@outlook.es>
-// SPDX-FileCopyrightText: 2021 Javier Guardia Fernández <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Atmos;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos;
@@ -20,12 +8,12 @@ namespace Content.IntegrationTests.Tests.Atmos
 {
     [TestFixture]
     [TestOf(typeof(GasMixture))]
-    public sealed class GasMixtureTest
+    public sealed class GasMixtureTest : GameTest
     {
         [Test]
         public async Task TestMerge()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             var atmosphereSystem = server.ResolveDependency<IEntitySystemManager>().GetEntitySystem<AtmosphereSystem>();
@@ -69,8 +57,6 @@ namespace Content.IntegrationTests.Tests.Atmos
                     Assert.That(a.GetMoles(Gas.Oxygen), Is.EqualTo(50));
                 });
             });
-
-            await pair.CleanReturnAsync();
         }
 
         [Test]
@@ -82,7 +68,7 @@ namespace Content.IntegrationTests.Tests.Atmos
         [TestCase(Atmospherics.BreathPercentage)]
         public async Task RemoveRatio(float ratio)
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             await server.WaitAssertion(() =>
@@ -116,8 +102,6 @@ namespace Content.IntegrationTests.Tests.Atmos
                     Assert.That(a.GetMoles(Gas.Nitrogen), Is.EqualTo(100 - b.GetMoles(Gas.Nitrogen)));
                 });
             });
-
-            await pair.CleanReturnAsync();
         }
     }
 }

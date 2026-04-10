@@ -27,7 +27,6 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Body.Part;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 

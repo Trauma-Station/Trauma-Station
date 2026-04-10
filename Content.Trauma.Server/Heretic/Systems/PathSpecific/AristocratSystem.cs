@@ -27,7 +27,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -59,6 +58,8 @@ public sealed class AristocratSystem : EntitySystem
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
+    [Dependency] private readonly EntityQuery<AirlockComponent> _airlockQuery = default!;
+    [Dependency] private readonly EntityQuery<StatusEffectsComponent> _statusQuery = default!;
 
     private static readonly EntProtoId IceTilePrototype = "IceCrust";
     private static readonly EntProtoId IceWallPrototype = "WallIce";
@@ -66,7 +67,7 @@ public sealed class AristocratSystem : EntitySystem
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
     private static readonly ProtoId<TagPrototype> Window = "Window";
 
-    private static readonly TimeSpan ConduitDelay = TimeSpan.FromSeconds(1);
+    private static readonly TimeSpan ConduitDelay = TimeSpan.FromSeconds(2);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
 
     private readonly HashSet<Entity<FreezableWallComponent>> _walls = new();
@@ -228,10 +229,6 @@ public sealed class AristocratSystem : EntitySystem
 
         _nextUpdate = now + ConduitDelay;
 
-        var airlockQuery = GetEntityQuery<AirlockComponent>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var statusQuery = GetEntityQuery<StatusEffectsComponent>();
-
         HashSet<EntityUid> ignored = new();
         var conduitQuery = EntityQueryEnumerator<VoidConduitComponent, TransformComponent>();
         while (conduitQuery.MoveNext(out var uid, out var conduit, out var xform))
@@ -244,7 +241,7 @@ public sealed class AristocratSystem : EntitySystem
 
             FreezeAtmos((uid, xform));
 
-            var (pos, rot) = _xform.GetWorldPositionRotation(xform, xformQuery);
+            var (pos, rot) = _xform.GetWorldPositionRotation(xform);
 
             var box = Box2.CenteredAround(pos, Vector2.One * (1f + conduit.Range * 2f));
             var rotated = new Box2Rotated(box, rot, pos);
@@ -259,7 +256,7 @@ public sealed class AristocratSystem : EntitySystem
                 if (_heretic.IsHereticOrGhoul(ent))
                 {
                     ignored.Add(ent);
-                    if (statusQuery.TryComp(ent, out var status))
+                    if (_statusQuery.TryComp(ent, out var status))
                     {
                         _status.TryAddStatusEffect<PressureImmunityComponent>(ent,
                             "PressureImmunity",
@@ -280,7 +277,7 @@ public sealed class AristocratSystem : EntitySystem
 
                 var dmg = conduit.StructureDamage;
 
-                if (airlockQuery.HasComp(ent))
+                if (_airlockQuery.HasComp(ent))
                 {
                     _audio.PlayPvs(conduit.AirlockDamageSound, Transform(ent).Coordinates);
                     ignored.Add(ent);
@@ -466,6 +463,7 @@ public sealed class AristocratSystem : EntitySystem
             var newTile = _prot.Index(SnowTilePrototype);
             _tile.ReplaceTile(tile.Value, newTile);
 
+            // TODO: turf or something bruh
             var condition = _lookup.GetEntitiesInRange(pos, .1f, LookupFlags.Static | LookupFlags.Sensors)
                 .All(e => Prototype(e)?.ID != IceTilePrototype.Id);
             if (condition)

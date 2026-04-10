@@ -2,7 +2,6 @@
 
 using Content.Medical.Shared.Pain;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Consciousness;

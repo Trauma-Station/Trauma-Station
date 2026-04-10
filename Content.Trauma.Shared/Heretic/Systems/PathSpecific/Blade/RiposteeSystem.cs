@@ -13,10 +13,8 @@ using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 

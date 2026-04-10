@@ -9,7 +9,6 @@ using Content.Server.Objectives;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.MisandryBox.JobObjective;
 

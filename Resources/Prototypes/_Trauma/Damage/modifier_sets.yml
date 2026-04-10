@@ -25,3 +25,14 @@
     Piercing: 15
     Heat: 15
     Structural: 15
+
+- type: damageModifierSet
+  id: NormalMode
+  coefficients:
+    Structural: 1
+
+- type: damageModifierSet
+  id: Morph
+  coefficients:
+    Radiation: 0
+    Heat: 2

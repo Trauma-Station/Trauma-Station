@@ -2,7 +2,6 @@
 
 using Content.Medical.Shared.Pain;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
 
 namespace Content.Medical.Shared.Surgery.Steps;
 

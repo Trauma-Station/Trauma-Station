@@ -44,3 +44,4 @@ heretic-ritual-ingredient-gold = gold bar
 heretic-ritual-ingredient-heretic-blade = heretic blade
 heretic-ritual-ingredient-id-card = ID card
 heretic-ritual-ingredient-suit-sensors = suit with sensors
+heretic-ritual-ingredient-mime-clown-mask = mime or clown mask

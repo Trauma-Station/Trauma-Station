@@ -3,8 +3,6 @@
 using Content.Lavaland.Shared.Shuttles.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Shared.Shuttles.Components;
 

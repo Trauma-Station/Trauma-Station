@@ -5,8 +5,6 @@ using Content.Lavaland.Shared.EntityShapes.Components;
 using Content.Lavaland.Shared.EntityShapes.Shapes;
 using Content.Lavaland.Shared.Megafauna.Events;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.EntityShapes;

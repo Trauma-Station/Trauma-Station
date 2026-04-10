@@ -9,8 +9,6 @@ using Content.Shared.Nutrition;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Lollypop;
@@ -108,7 +106,7 @@ public sealed class LollypopSystem : EntitySystem
 
         var flavors = _flavorProfile.GetLocalizedFlavorsMessage(user, soln);
         var proto = _proto.Index(edible.Edible);
-        var msg = Loc.GetString(proto.Message, ("food", uid), ("flavors", flavors));
+        var msg = Loc.GetString(proto.Message, ("food", uid), ("flavors", flavors), ("satiated", false));
         if (predicted)
             _popup.PopupClient(msg, user, user);
         else

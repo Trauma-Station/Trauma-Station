@@ -14,7 +14,6 @@ using Content.Trauma.Server.Decals;
 using Content.Trauma.Shared.Footprints;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Configuration;
 using System.Numerics;
 
@@ -31,10 +30,9 @@ public sealed class FootprintSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-
-    private EntityQuery<MapGridComponent> _gridQuery = default!;
-    private EntityQuery<NoFootprintsComponent> _noFootprintsQuery = default!;
-    private EntityQuery<PuddleComponent> _puddleQuery = default!;
+    [Dependency] private readonly EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private readonly EntityQuery<NoFootprintsComponent> _noFootprintsQuery = default!;
+    [Dependency] private readonly EntityQuery<PuddleComponent> _puddleQuery = default!;
 
     public static readonly ProtoId<DecalPrototype> Footprint = "Footprint";
     public static readonly ProtoId<DecalPrototype> BodySmear = "BodySmear";
@@ -47,11 +45,9 @@ public sealed class FootprintSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<FootprintOwnerComponent, MoveEvent>(OnMove);
+        base.Initialize();
 
-        _gridQuery = GetEntityQuery<MapGridComponent>();
-        _noFootprintsQuery = GetEntityQuery<NoFootprintsComponent>();
-        _puddleQuery = GetEntityQuery<PuddleComponent>();
+        SubscribeLocalEvent<FootprintOwnerComponent, MoveEvent>(OnMove);
 
         Subs.CVar(_cfg, GoobCVars.MinimumPuddleSizeForFootprints, value => _minimumPuddleSize = value, true);
     }

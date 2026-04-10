@@ -4,7 +4,6 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Skinnable;
 

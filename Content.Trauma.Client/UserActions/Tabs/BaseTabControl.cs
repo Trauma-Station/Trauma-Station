@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Robust.Client.UserInterface;
+
+namespace Content.Trauma.Client.UserActions.Tabs;
+
+[Virtual]
+public class BaseTabControl : Control
+{
+    public virtual bool UpdateState() { return true; }
+}

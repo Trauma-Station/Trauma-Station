@@ -10,7 +10,7 @@
     SpiderCraftKnowledge: 2
   useQuality: false
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -24,7 +24,7 @@
   theory:
     SpiderCraftKnowledge: 2
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -38,7 +38,7 @@
   theory:
     SpiderCraftKnowledge: 2
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -52,7 +52,7 @@
   theory:
     SpiderCraftKnowledge: 2
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -67,6 +67,8 @@
   theory:
     SpiderCraftKnowledge: 2
   useQuality: false
+  practical:
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -80,7 +82,7 @@
   theory:
     SpiderCraftKnowledge: 2
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -94,5 +96,5 @@
   theory:
     SpiderCraftKnowledge: 2
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>

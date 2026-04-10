@@ -1,26 +1,9 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 faint <46868845+ficcialfaint@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Binary.Components;
-using Content.Server.Atmos.Piping.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Examine;
 using JetBrains.Annotations;
 
@@ -64,15 +47,11 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
                 // Calculate the number of moles to transfer to equalize the final pressure of
                 // both sides of the valve. You can derive this equation yourself by solving
                 // the equations:
-                //
                 //    P_inlet,final = P_outlet,final (pressure equilibrium)
                 //    n_inlet,initial + n_outlet,initial = n_inlet,final + n_outlet,final (mass conservation)
-                //
                 // These simplifying assumptions allow an easy closed-form solution:
-                //
                 //    T_inlet,initial = T_inlet,final
                 //    T_outlet,initial = T_outlet,final
-                //
                 // If you don't want to push through the math, just know that this behaves like a
                 // pump that can equalize pressure instantly, i.e. much faster than pressure or
                 // volume pumps.

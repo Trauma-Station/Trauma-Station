@@ -9,10 +9,12 @@
   - type: KnowledgeGrantOnWear
     skills:
       # Nukies are well-trained
-      MeleeKnowledge: 50
-      ShootingKnowledge: 40
-      StrengthKnowledge: 40
-      WeaponsKnowledge: 40
+      MeleeKnowledge: 51
+      ShootingKnowledge: 51
+      StrengthKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
       ThrowingKnowledge: 26
       FirstAidKnowledge: 26
       WallsKnowledge: 26

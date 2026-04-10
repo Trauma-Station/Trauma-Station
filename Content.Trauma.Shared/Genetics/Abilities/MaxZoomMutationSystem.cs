@@ -9,14 +9,11 @@ namespace Content.Trauma.Shared.Genetics.Abilties;
 public sealed class MaxZoomMutationSystem : EntitySystem
 {
     [Dependency] private readonly SharedContentEyeSystem _eye = default!;
-
-    private EntityQuery<ContentEyeComponent> _query;
+    [Dependency] private readonly EntityQuery<ContentEyeComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ContentEyeComponent>();
 
         SubscribeLocalEvent<MaxZoomMutationComponent, MutationAddedEvent>(OnAdded);
         SubscribeLocalEvent<MaxZoomMutationComponent, MutationRemovedEvent>(OnRemoved);

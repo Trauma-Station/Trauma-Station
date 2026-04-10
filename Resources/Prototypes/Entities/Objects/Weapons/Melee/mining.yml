@@ -1,6 +1,6 @@
 - type: entity
   name: pickaxe
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityStrong] # Trauma - Durability
   id: Pickaxe
   description: Notched to perfection, for jamming it into rocks.
   components:
@@ -43,7 +43,7 @@
 
 - type: entity
   name: mining drill
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityStrong] # Trauma - Durability
   id: MiningDrill
   description: Powerful tool used to quickly drill through rocks.
   components:

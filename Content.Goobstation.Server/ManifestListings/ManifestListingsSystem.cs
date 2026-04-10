@@ -7,7 +7,6 @@ using Content.Goobstation.Shared.ManifestListings;
 using Content.Shared.Actions.Components;
 using Content.Shared.Mind;
 using Content.Shared.Store;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.ManifestListings;

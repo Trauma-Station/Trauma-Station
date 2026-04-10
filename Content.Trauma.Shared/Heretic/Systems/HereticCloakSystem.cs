@@ -6,7 +6,6 @@ using Content.Shared.StatusEffectNew.Components;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 

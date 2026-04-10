@@ -3,11 +3,11 @@
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Clothing;
 using Content.Server.Stunnable;
-using Content.Shared._Shitcode.Weapons.Misc;
 using Content.Shared.Armor;
 using Content.Shared.Inventory;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
+using Content.Trauma.Common.Damage;
 
 namespace Content.Goobstation.Server.Weapons.DelayedKnockdown;
 
@@ -108,7 +108,7 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
         if (TryComp(uid, out UseDelayComponent? delay))
             _delay.TryResetDelay((uid, delay), id: comp.UseDelay);
 
-        foreach (var (hit, _) in args.HitEntities)
+        foreach (var hit in args.HitEntities)
         {
             if (!HasComp<StandingStateComponent>(hit))
                 continue;

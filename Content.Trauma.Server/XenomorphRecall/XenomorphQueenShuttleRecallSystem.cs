@@ -3,7 +3,7 @@
 using Content.Server.Chat.Systems;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
-using Content.Shared._White.Xenomorphs.Queen;
+using Content.Trauma.Shared.Xenomorphs.Queen;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Localization;

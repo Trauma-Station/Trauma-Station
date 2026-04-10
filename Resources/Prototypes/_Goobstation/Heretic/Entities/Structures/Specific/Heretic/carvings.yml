@@ -32,7 +32,7 @@
   - type: Tag
     tags:
     - HideContextMenu
-    - HereticCarving
+  - type: HereticCarving
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible

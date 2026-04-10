@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
 using Content.Lavaland.Common.Weapons.Ranged;
-using Content.Lavaland.Shared.Pressure;
 using Content.Lavaland.Shared.Weapons.Upgrades.Components;
-using Content.Shared._Goobstation.Weapons.Ranged;
 using Content.Shared.Actions;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage.Systems;
@@ -15,9 +14,9 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Weapons.Ranged;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Lavaland.Shared.Weapons.Upgrades;
 
@@ -165,7 +164,7 @@ public sealed partial class GunUpgradeSystem : EntitySystem
 
         foreach (var itemSlot in itemSlots.Slots.Values)
         {
-            if (itemSlot.Item is {} item && _upgradeQuery.TryComp(item, out var upgrade))
+            if (itemSlot.Item is { } item && _upgradeQuery.TryComp(item, out var upgrade))
                 _upgrades.Add((item, upgrade));
         }
 

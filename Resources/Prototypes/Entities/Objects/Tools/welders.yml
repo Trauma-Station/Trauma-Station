@@ -104,7 +104,7 @@
 
 - type: entity
   name: welding tool
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma
   id: Welder
   description: "Melts anything as long as it's fueled, don't forget your eye protection!"
   components:

@@ -4,8 +4,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Atmos;
 using Content.Shared.Botany.Components;
 using Content.Trauma.Common.Botany;
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Botany.Components;
 

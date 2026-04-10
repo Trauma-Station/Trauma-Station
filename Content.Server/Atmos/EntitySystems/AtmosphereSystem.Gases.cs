@@ -1,20 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Jezithyr <jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2024 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2024 PraxisMapper <praxismapper@gmail.com>
-// SPDX-FileCopyrightText: 2024 drakewill-CRL <46307022+drakewill-CRL@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Content.Server.Atmos.Reactions;
@@ -84,22 +67,6 @@ namespace Content.Server.Atmos.EntitySystems
         }
 
         /// <summary>
-        ///     Calculates the thermal energy for a gas mixture.
-        /// </summary>
-        public float GetThermalEnergy(GasMixture mixture)
-        {
-            return mixture.Temperature * GetHeatCapacity(mixture);
-        }
-
-        /// <summary>
-        ///     Calculates the thermal energy for a gas mixture, using a cached heat capacity value.
-        /// </summary>
-        public float GetThermalEnergy(GasMixture mixture, float cachedHeatCapacity)
-        {
-            return mixture.Temperature * cachedHeatCapacity;
-        }
-
-        /// <summary>
         ///     Add 'dQ' Joules of energy into 'mixture'.
         /// </summary>
         public void AddHeat(GasMixture mixture, float dQ)
@@ -107,28 +74,6 @@ namespace Content.Server.Atmos.EntitySystems
             var c = GetHeatCapacity(mixture);
             float dT = dQ / c;
             mixture.Temperature += dT;
-        }
-
-        /// <summary>
-        ///     Merges the <see cref="giver"/> gas mixture into the <see cref="receiver"/> gas mixture.
-        ///     The <see cref="giver"/> gas mixture is not modified by this method.
-        /// </summary>
-        public void Merge(GasMixture receiver, GasMixture giver)
-        {
-            if (receiver.Immutable) return;
-
-            if (MathF.Abs(receiver.Temperature - giver.Temperature) > Atmospherics.MinimumTemperatureDeltaToConsider)
-            {
-                var receiverHeatCapacity = GetHeatCapacity(receiver);
-                var giverHeatCapacity = GetHeatCapacity(giver);
-                var combinedHeatCapacity = receiverHeatCapacity + giverHeatCapacity;
-                if (combinedHeatCapacity > Atmospherics.MinimumHeatCapacity)
-                {
-                    receiver.Temperature = (GetThermalEnergy(giver, giverHeatCapacity) + GetThermalEnergy(receiver, receiverHeatCapacity)) / combinedHeatCapacity;
-                }
-            }
-
-            NumericsHelpers.Add(receiver.Moles, giver.Moles);
         }
 
         /// <summary>
@@ -523,10 +468,8 @@ namespace Content.Server.Atmos.EntitySystems
             return GasCompareResult.NoExchange;
         }
 
-        /// <summary>
-        ///     Performs reactions for a given gas mixture on an optional holder.
-        /// </summary>
-        public ReactionResult React(GasMixture mixture, IGasMixtureHolder? holder)
+        [PublicAPI]
+        public override ReactionResult React(GasMixture mixture, IGasMixtureHolder? holder)
         {
             var reaction = ReactionResult.NoReaction;
             var temperature = mixture.Temperature;

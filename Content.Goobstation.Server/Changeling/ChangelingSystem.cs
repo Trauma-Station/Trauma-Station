@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-// <Trauma>
-using Content.Trauma.Common.MartialArts;
-// </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Actions;
@@ -73,10 +70,10 @@ using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
 using Content.Trauma.Common.Genetics.Mutations;
+using Content.Trauma.Common.MartialArts;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -118,6 +115,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
     [Dependency] private readonly ChangelingRuleSystem _changelingRuleSystem = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
+    [Dependency] private readonly EntityQuery<ChangelingIdentityComponent> _lingQuery = default!;
 
     public override void Initialize()
     {
@@ -162,6 +160,9 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
     private void OnMindswapAttempt(Entity<ChangelingComponent> ent, ref BeforeMindSwappedEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         args.Message = ent.Comp.MindswapText;
         args.Cancelled = true;
     }
@@ -367,28 +368,23 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     /// </summary>
     public void TryScreechStun(EntityUid uid, ChangelingIdentityComponent comp)
     {
-        var nearbyEntities = _lookup.GetEntitiesInRange(uid, comp.ShriekPower);
+        var coords = Transform(uid).Coordinates;
+        _crawlers.Clear();
+        _lookup.GetEntitiesInRange(coords, comp.ShriekPower, _crawlers);
 
-        var stunTime = 2f;
-        var knockdownTime = 4f;
-
-        foreach (var player in nearbyEntities)
+        var stunTime = TimeSpan.FromSeconds(2);
+        var knockdownTime = TimeSpan.FromSeconds(4);
+        foreach (var target in _crawlers)
         {
-            if (HasComp<ChangelingIdentityComponent>(player))
+            if (_lingQuery.HasComp(target))
                 continue;
 
             var soundEv = new GetFlashbangedEvent(float.MaxValue);
-            RaiseLocalEvent(player, soundEv);
+            RaiseLocalEvent(target, soundEv);
 
-            if (soundEv.ProtectionRange < float.MaxValue)
-            {
-                _stun.TryUpdateParalyzeDuration(player, TimeSpan.FromSeconds(stunTime / 2f));
-                _stun.TryKnockdown(player, TimeSpan.FromSeconds(knockdownTime / 2f));
-                continue;
-            }
-
-            _stun.TryUpdateParalyzeDuration(player, TimeSpan.FromSeconds(stunTime));
-            _stun.TryKnockdown(player, TimeSpan.FromSeconds(knockdownTime));
+            var modifier = soundEv.ProtectionRange < float.MaxValue ? 0.5f : 1f;
+            _stun.TryUpdateParalyzeDuration(target, stunTime * modifier);
+            _stun.TryKnockdown(target.AsNullable(), knockdownTime * modifier);
         }
     }
 

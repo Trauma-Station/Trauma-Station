@@ -1015,7 +1015,7 @@
   theory:
     FurnitureKnowledge: 0
   practical:
-    WallsKnowledge: 1
+    CarvingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1034,7 +1034,7 @@
   theory:
     FurnitureKnowledge: 1
   practical:
-    WallsKnowledge: 1
+    CarvingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -1654,7 +1654,9 @@
   conditions:
     - !type:TileNotBlocked
   # <Trauma>
-  theory: {} # autolathe made it for you, just place it down chud
+  theory:
+    ElectronicsKnowledge: 0 # This lets it train elcetronics
+  useQuality: false
   # </Trauma>
 
 - type: construction

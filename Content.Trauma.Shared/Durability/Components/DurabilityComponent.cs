@@ -14,7 +14,8 @@ namespace Content.Trauma.Shared.Durability.Components;
 /// <summary>
 /// Allows the entity to be damaged and repaired with items or specific interactions.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class DurabilityComponent : Component
 {
     /// <summary>
@@ -28,6 +29,12 @@ public sealed partial class DurabilityComponent : Component
     /// </summary>
     [DataField]
     public SortedDictionary<FixedPoint2, DurabilityState> StateThresholds = [];
+
+    /// <summary>
+    /// Scale applied to all <see cref="DurabilityThresholds"/>.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 DurabilityScale = 1;
 
     /// <summary>
     /// The total amount of damage this entity has sustained.

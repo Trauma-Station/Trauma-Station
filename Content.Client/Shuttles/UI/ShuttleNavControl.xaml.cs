@@ -1,7 +1,6 @@
 // <Trauma>
-using Content.Client._Mono.Radar;
-using Content.Shared._Mono.Radar;
 using Robust.Shared.Timing;
+using Content.Trauma.Common.Radar;
 // </Trauma>
 using System.Numerics;
 using Content.Shared.Shuttles.BUIStates;
@@ -25,7 +24,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
 {
     // <Trauma>
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    private readonly RadarBlipsSystem _blips;
+    private readonly CommonRadarBlipsSystem _blips;
     // </Trauma>
     [Dependency] private readonly IMapManager _mapManager = default!;
     private readonly SharedShuttleSystem _shuttles;
@@ -84,7 +83,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         RobustXamlLoader.Load(this);
         _shuttles = EntManager.System<SharedShuttleSystem>();
         _transform = EntManager.System<SharedTransformSystem>();
-        _blips = EntManager.System<RadarBlipsSystem>(); // Trauma
+        _blips = EntManager.System<CommonRadarBlipsSystem>(); // Trauma
 
         OnMouseEntered += HandleMouseEntered;
         OnMouseExited += HandleMouseExited;

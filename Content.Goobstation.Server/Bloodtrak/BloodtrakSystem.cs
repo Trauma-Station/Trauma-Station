@@ -11,7 +11,6 @@ using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Timing;
 using Robust.Shared.Timing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Bloodtrak;
 

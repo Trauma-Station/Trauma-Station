@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.NTR.Documents; //amount of times this whole system was re-done: 3
 using Content.Shared.Paper;
-using Robust.Shared.Prototypes; //amount of hours wasted trying to understand papersystem: 29
 using Robust.Shared.Random;                     //skill issue.
 
 // todo: clean these usings

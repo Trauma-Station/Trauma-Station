@@ -4,7 +4,6 @@ using System.Linq;
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Trauma.Shared.Knowledge.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
 
 namespace Content.Trauma.Server.Knowledge;

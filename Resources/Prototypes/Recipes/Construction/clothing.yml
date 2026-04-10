@@ -66,6 +66,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory: {} # it's cardboard
   practical:
     TailoringKnowledge: 0
@@ -80,6 +81,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory: {} # it's cardboard
   practical:
     TailoringKnowledge: 0
