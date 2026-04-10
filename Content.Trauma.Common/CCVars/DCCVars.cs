@@ -61,7 +61,7 @@ public sealed class DCCVars
     /// The delay between the monument getting upgraded to tier 3 and the finale starting.
     /// </summary>
     public static readonly CVarDef<int> CosmicCultFinaleDelaySeconds =
-        CVarDef.Create("cosmiccult.extra_entropy_for_finale", 150, CVar.SERVER);    
+        CVarDef.Create("cosmiccult.extra_entropy_for_finale", 150, CVar.SERVER);
 
     /// <summary>
     /// What year it is in the game. Actual value shown in game is server date + this value.
