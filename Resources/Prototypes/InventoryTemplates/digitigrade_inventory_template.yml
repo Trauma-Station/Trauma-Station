@@ -110,7 +110,9 @@
       stripTime: 3
       uiWindowPos: 2,0
       strippingWindowPos: 2,5
-      dependsOn: outerClothing
+      # <Trauma>
+      #dependsOn: outerClothing
+      # </Trauma>
       displayName: Suit Storage
     - name: id
       slotTexture: id
