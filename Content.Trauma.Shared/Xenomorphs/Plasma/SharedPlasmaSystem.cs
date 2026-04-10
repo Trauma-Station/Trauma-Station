@@ -39,7 +39,8 @@ public abstract class SharedPlasmaSystem : EntitySystem
         component.Plasma = FixedPoint2.Min(component.Plasma + amount, component.MaxPlasma);
         Dirty(uid, component);
 
-        RaiseLocalEvent(uid, new PlasmaAmountChangeEvent(component.Plasma));
+        var ev = new PlasmaAmountChangeEvent(component.Plasma);
+        RaiseLocalEvent(uid, ref ev);
 
         _alerts.ShowAlert(uid, component.PlasmaAlert);
 
