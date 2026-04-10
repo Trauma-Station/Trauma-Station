@@ -158,7 +158,7 @@
     sound: /Audio/Weapons/boxingpunch3.ogg
   - !type:ModifyStatusEffect
     effectProto: StatusEffectAttackSpeed
-    type: add
+    type: Add
     time: 2
   opponentEffects:
   - !type:TakeStaminaDamage
@@ -182,7 +182,7 @@
     sound: /Audio/Weapons/boxingpunch3.ogg
   - !type:ModifyStatusEffect
     effectProto: StatusEffectAttackSpeed
-    type: add
+    type: Add
     time: 3
   opponentEffects:
   - !type:TakeStaminaDamage
@@ -206,7 +206,7 @@
     sound: /Audio/Weapons/boxingpunch3.ogg
   - !type:ModifyStatusEffect
     effectProto: StatusEffectAttackSpeed
-    type: add
+    type: Add
     time: 4
   opponentEffects:
   - !type:TakeStaminaDamage
