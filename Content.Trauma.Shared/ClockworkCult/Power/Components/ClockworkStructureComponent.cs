@@ -15,5 +15,5 @@ public sealed partial class ClockworkStructureComponent : Component
     /// From where this entity is getting charges.
     /// </summary>
     [DataField]
-    public EntityUid? Transferrer;
+    public List<EntityUid?> Transferrers = new();
 }

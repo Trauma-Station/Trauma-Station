@@ -46,12 +46,6 @@ public sealed partial class ClockworkTransferrerComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Connections = new();
-
-    /// <summary>
-    /// Color of the beam used in the <see cref="ClockworkTransferOverlay"/>.
-    /// </summary>
-    [DataField]
-    public Color Color = Color.Gold;
 }
 
 /// <summary>

@@ -1,12 +1,21 @@
 - type: entity
-  id: BaseClockworkPowerSource
+  id: BaseClockworkStructure
+  parent: BaseStructureDynamic
+  abstract: true
+  components:
+  - type: ClockworkConnectionHolder
+
+- type: entity
+  id: ClockworkPowerSource
   name: Clockwork Power Source
   description: Testing.
-  parent: BaseStructureDynamic
+  parent: BaseClockworkStructure
   components:
   - type: Sprite
     sprite: Structures/Furniture/chairs.rsi
     state: office-dark
+
+  # Clockwork Components
   - type: ClockworkPowerSource
     rechargeTime: 0.5 # 1 charge every half-second
   - type: ClockworkTransferrer # Can be connected to ClockworkStructure
@@ -16,28 +25,32 @@
     lastCharges: -1 # Starts at 0 if negative
 
 - type: entity
-  id: BaseClockworkStructure
+  id: ClockworkStructure
   name: Clockwork Structure
   description: Testing.
-  parent: BaseStructureDynamic
+  parent: BaseClockworkStructure
   components:
   - type: Sprite
     sprite: Structures/Furniture/chairs.rsi
     state: office-dark
+  - type: ClockworkConnectionHolder
+    connection: Ratvarian
   - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
   - type: LimitedCharges
     maxCharges: 1000
     lastCharges: -1
 
 - type: entity
-  id: BaseClockworkPowerPole
+  id: ClockworkPowerPole
   name: Clockwork Power Pole
   description: Testing.
-  parent: BaseStructureDynamic
+  parent: BaseClockworkStructure
   components:
   - type: Sprite
     sprite: Structures/Furniture/chairs.rsi
     state: office-dark
+  - type: ClockworkConnectionHolder
+    transferConnection: Ratvarian
   - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
   - type: ClockworkTransferrer # Can be connected to ClockworkStructure
     maxConnections: 5
@@ -46,3 +59,81 @@
   - type: LimitedCharges
     maxCharges: 500
     lastCharges: -1 # Starts at 0 if negative
+
+# Martyr Connections
+- type: entity
+  id: ClockworkPowerMartyrConnector
+  name: Clockwork Martyr Connector
+  description: Testing.
+  parent: BaseClockworkStructure
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    state: office-dark
+  - type: ClockworkConnectionHolder
+    connection: Ratvarian
+    transferConnection: Martyr # we transfer the martyr connection
+    allowOverwrite: false
+  - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
+  - type: ClockworkTransferrer # Can be connected to ClockworkStructure
+    maxConnections: 1
+    transferLossPerConnection: 1 # Gets decreased from Transfer variable
+    transfer: 20
+  - type: LimitedCharges
+    maxCharges: 250
+    lastCharges: -1 # Starts at 0 if negative
+
+- type: entity
+  id: ClockworkStructureMartyr
+  name: Clockwork Structure Martyr
+  description: Testing.
+  parent: BaseClockworkStructure
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    state: office-dark
+  - type: ClockworkConnectionHolder
+    connection: Martyr # we only accept martyr connections
+  - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
+  - type: LimitedCharges
+    maxCharges: 1000
+    lastCharges: -1
+
+# Maiden Connections
+- type: entity
+  id: ClockworkPowerMaidenConnector
+  name: Clockwork Maiden Connector
+  description: Testing.
+  parent: BaseClockworkStructure
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    state: office-dark
+  - type: ClockworkConnectionHolder
+    connection: Ratvarian
+    transferConnection: Maiden # we transfer the martyr connection
+    allowOverwrite: false
+  - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
+  - type: ClockworkTransferrer # Can be connected to ClockworkStructure
+    maxConnections: 1
+    transferLossPerConnection: 1 # Gets decreased from Transfer variable
+    transfer: 20
+  - type: LimitedCharges
+    maxCharges: 250
+    lastCharges: -1 # Starts at 0 if negative
+
+- type: entity
+  id: ClockworkStructureMaiden
+  name: Clockwork Structure Maiden
+  description: Testing.
+  parent: BaseClockworkStructure
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    state: office-dark
+  - type: ClockworkConnectionHolder
+    connection: Maiden # we only accept martyr connections
+  - type: ClockworkStructure # Can be connected to a ClockworkTransferrer
+  - type: LimitedCharges
+    maxCharges: 1000
+    lastCharges: -1

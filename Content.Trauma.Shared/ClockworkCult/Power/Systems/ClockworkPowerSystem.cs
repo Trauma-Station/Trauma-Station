@@ -19,10 +19,9 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 /// The <see cref="ClockwinderComponent"/> is responsible for connecting a structure with a transferrer.
 ///
 /// TODO for finishing prototype:
-/// 1. Add support for checking for distance (e.g. can't connect a power source to a structure if its too far away)
-/// 2. Add support for unique connections and structures that require them (e.g. blue/gold/red connections must connect to blue/gold/red machines)
-/// 3. Add support for vein variants (strong veins, weak veins)
-/// 4. Add support for ClockworkStructures to add/rem components when they are above X charges and are anchored!
+/// 1. Add support for checking for distance and possibly check if obstructed (e.g. can't connect a power source to a structure if its too far away)
+/// 2. Add support for vein variants (strong veins, weak veins)
+/// 3. Add support for ClockworkStructures to add/rem components when they are above X charges and are anchored!
 ///
 /// </summary>
 public sealed class ClockworkPowerSystem : EntitySystem
@@ -102,7 +101,7 @@ public sealed class ClockworkPowerSystem : EntitySystem
         // Add the connection to the transferrer
         _powerTransfer.AddConnection(transferrer, ent.Owner);
 
-        ent.Comp.Transferrer = transferrer;
+        ent.Comp.Transferrers.Add(transferrer);
         Dirty(ent);
     }
 

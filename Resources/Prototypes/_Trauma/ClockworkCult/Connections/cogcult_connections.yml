@@ -1,0 +1,16 @@
+# Main Connection Type
+- type: clockworkConnection
+  id: Ratvarian
+  name: Rat'varian
+  color: Gold
+
+# Secondary Connection Types
+- type: clockworkConnection
+  id: Martyr
+  name: Mar'tyr
+  color: Red
+
+- type: clockworkConnection
+  id: Maiden
+  name: Mai'den
+  color: White

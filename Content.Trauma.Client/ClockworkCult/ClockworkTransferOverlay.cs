@@ -5,12 +5,15 @@ using Content.Trauma.Shared.ClockworkCult.Power.Components;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.ClockworkCult;
 
 public sealed class ClockworkTransferOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+
     private readonly SharedTransformSystem _transformSystem;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -29,14 +32,18 @@ public sealed class ClockworkTransferOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var query = _entMan.EntityQueryEnumerator<ClockworkTransferrerComponent>();
-        while (query.MoveNext(out var uid, out var transfer))
+        var query = _entMan.EntityQueryEnumerator<ClockworkTransferrerComponent, ClockworkConnectionHolderComponent>();
+        while (query.MoveNext(out var uid, out var transfer, out var connectionHolder))
         {
             var sourceTransform = _entMan.GetComponent<TransformComponent>(uid);
             if (sourceTransform.MapID == MapId.Nullspace)
                 continue;
 
             var sourcePos = _transformSystem.GetWorldPosition(sourceTransform);
+
+            var connectionColor = Color.Beige; // default color if it fails to find prototype
+            if (_prototype.TryIndex(connectionHolder.TransferConnection, out var connectionType))
+                connectionColor = connectionType.ConnectionColor;
 
             foreach (var connection in transfer.Connections)
             {
@@ -56,7 +63,7 @@ public sealed class ClockworkTransferOverlay : Overlay
                 var transform = Matrix3Helpers.CreateTransform(midPoint, angle);
 
                 args.WorldHandle.SetTransform(transform);
-                args.WorldHandle.DrawRect(box, transfer.Color);
+                args.WorldHandle.DrawRect(box, connectionColor);
             }
         }
 

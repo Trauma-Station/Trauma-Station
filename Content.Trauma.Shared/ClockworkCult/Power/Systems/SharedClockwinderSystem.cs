@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Trauma.Shared.ClockworkCult.Power.Components;
 using Robust.Shared.Timing;
@@ -14,6 +16,7 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 public abstract class SharedClockwinderSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -21,6 +24,7 @@ public abstract class SharedClockwinderSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ClockwinderComponent, AfterInteractEvent>(OnInteract);
+        SubscribeLocalEvent<ClockwinderComponent, UseInHandEvent>(OnUsed);
         SubscribeLocalEvent<ClockwinderComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAlt);
     }
 
@@ -29,10 +33,15 @@ public abstract class SharedClockwinderSystem : EntitySystem
         if (!args.CanReach || args.Target is not {} target)
             return;
 
-        // First of all, we must interact with a valid entity with ClockworkTransferrerComponent,
-        // since we don't want to transfer charges from a normal structure to another normal structure.
-        var ev = new ClockwinderInteractEvent(ent.Comp.Transferrer, ent.Owner);
+        var ev = new ClockwinderInteractEvent( ent.Comp.Transferrer, ent.Owner);
         RaiseLocalEvent(target, ref ev);
+    }
+
+    private void OnUsed(Entity<ClockwinderComponent> ent, ref  UseInHandEvent args)
+    {
+        // Just clear the transferrer
+        SetTransferrer(ent.AsNullable(), null);
+        _popup.PopupClient("Transferrer has been cleared.", ent.Owner, args.User, PopupType.Medium);
     }
 
     private void OnGetAlt(Entity<ClockwinderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -63,7 +72,7 @@ public abstract class SharedClockwinderSystem : EntitySystem
     /// </summary>
     /// <param name="ent"></param>
     /// <param name="transferrer"></param>
-    public void SetTransferrer(Entity<ClockwinderComponent?> ent, EntityUid transferrer)
+    public void SetTransferrer(Entity<ClockwinderComponent?> ent, EntityUid? transferrer)
     {
         if (!Resolve(ent, ref ent.Comp))
             return;
