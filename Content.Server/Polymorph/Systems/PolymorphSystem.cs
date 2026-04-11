@@ -1,15 +1,11 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared.Actions.Components;
-using Content.Shared.Buckle.Components;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
 using Content.Shared.Polymorph.Systems;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Tag;
-using Robust.Shared.Map;
-using Robust.Shared.Physics;
+using Content.Trauma.Common.Polymorph;
+using Content.Trauma.Common.Wizard;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
 using System.Linq;
@@ -47,7 +43,6 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     // </Trauma>
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
@@ -394,12 +389,16 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
             }
         }
 
-        _tag.AddTag(uid, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        EnsureComp<MindSwappingComponent>(uid);
+        // </Trauma>
 
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
             _mindSystem.TransferTo(mindId, child, mind: mind);
 
-        _tag.RemoveTag(uid, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        RemComp<MindSwappingComponent>(uid);
+        // </Trauma>
 
         //Ensures a map to banish the entity to
         EnsurePausedMap();
@@ -507,12 +506,16 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
             }
         }
 
-        _tag.AddTag(uid, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        EnsureComp<MindSwappingComponent>(uid);
+        // </Trauma>
 
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
             _mindSystem.TransferTo(mindId, parent, mind: mind);
 
-        _tag.RemoveTag(uid, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        RemComp<MindSwappingComponent>(uid);
+        // </Trauma>
 
         if (TryComp<PolymorphableComponent>(parent, out var polymorphableComponent))
             polymorphableComponent.LastPolymorphEnd = _gameTiming.CurTime;

@@ -18,12 +18,10 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
@@ -44,6 +42,7 @@ public abstract class SharedStarMarkSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private readonly EntityQuery<CosmicFieldComponent> _fieldQuery = default!;
 
     public static readonly EntProtoId StarMarkStatusEffect = "StatusEffectStarMark";
     public static readonly EntProtoId CosmicField = "WallFieldCosmic";
@@ -98,7 +97,6 @@ public abstract class SharedStarMarkSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var cosmicFieldQuery = GetEntityQuery<CosmicFieldComponent>();
         var curTime = _timing.CurTime;
 
         var query2 = EntityQueryEnumerator<CosmosPassiveComponent, SpeedModifiedByContactComponent, StaminaComponent, PhysicsComponent>();
@@ -113,7 +111,7 @@ public abstract class SharedStarMarkSystem : EntitySystem
             if (stam.StaminaDamage <= 0f)
                 continue;
 
-            if (!_physics.GetContactingEntities(uid, phys).Any(cosmicFieldQuery.HasComp))
+            if (!_physics.GetContactingEntities(uid, phys).Any(_fieldQuery.HasComp))
                 continue;
 
             _stam.TryTakeStamina(uid, passive.StaminaHeal, stam);

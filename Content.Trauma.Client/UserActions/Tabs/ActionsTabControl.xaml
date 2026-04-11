@@ -1,0 +1,25 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:ActionsTabControl
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Trauma.Client.UserActions.Tabs"
+    xmlns:actions="clr-namespace:Content.Client.UserInterface.Systems.Actions.Widgets">
+
+    <PanelContainer StyleClasses="BackgroundDark">
+        <ScrollContainer VerticalExpand="True"
+                         HorizontalExpand="True"
+                         Margin="2"
+                         MinHeight="100"
+                         HScrollEnabled="False">
+            <BoxContainer Name="ActionsContainer2"
+                          Orientation="Vertical"
+                          HorizontalExpand="True"
+                          Margin="2">
+                <!-- <actions:ActionsBar Name="Actions2" Access="Public" /> -->
+            </BoxContainer>
+        </ScrollContainer>
+    </PanelContainer>
+
+</controls:ActionsTabControl>

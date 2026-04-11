@@ -7,7 +7,6 @@ using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;

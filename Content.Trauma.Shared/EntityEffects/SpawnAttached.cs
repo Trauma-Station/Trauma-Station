@@ -3,7 +3,6 @@
 using Content.Shared.Coordinates;
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects.EntitySpawning;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

@@ -4,7 +4,6 @@ using System.Numerics;
 using Content.Goobstation.Shared.Sandevistan;
 using Content.Shared.Tag;
 using Robust.Client.GameObjects;
-using Robust.Shared.Prototypes;
 using DrawDepthEnum = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Trauma.Client.Sandevistan;

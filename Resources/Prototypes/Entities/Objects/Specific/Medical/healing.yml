@@ -243,8 +243,8 @@
       - Biological
     damage:
       types:
-        Bloodloss: -2.5 #lowers bloodloss damage, was .5 buffed due to Limb Damage Changes (Goobstation)
-    modifyBloodLevel: -30 #used to restore 5% blood per use, now restores about 10% blood per use on standard Buffed due to Limb Damage Changes (Goobstation)
+        Bloodloss: -20 # Trauma, was 2. Our bloodloss damage is much more brutal
+    modifyBloodLevel: -60 #Trauma, was 15.
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
       params:

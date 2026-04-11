@@ -1,0 +1,7 @@
+- type: entity
+  id: GuidebookArmstrongKarateIcon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Interface/Misc/armstrongkarate.rsi
+    state: icon

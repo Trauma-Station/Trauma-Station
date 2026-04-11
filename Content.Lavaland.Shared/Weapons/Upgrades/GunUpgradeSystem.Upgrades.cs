@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
 using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Lavaland.Shared.Pressure;
 using Content.Lavaland.Shared.Weapons.Upgrades.Components;
-using Content.Goobstation.Common.Weapons;
-using Content.Shared._Goobstation.Weapons.Ranged;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Weapons.Ranged;
 using Robust.Shared.Containers;
 
 namespace Content.Lavaland.Shared.Weapons.Upgrades;
@@ -99,7 +99,7 @@ public sealed partial class GunUpgradeSystem
 
     private void OnVampirismProjectileHit(Entity<ProjectileVampirismComponent> ent, ref ProjectileHitEvent args)
     {
-        if (args.Shooter is not {} shooter || !HasComp<MobStateComponent>(args.Target))
+        if (args.Shooter is not { } shooter || !HasComp<MobStateComponent>(args.Target))
             return;
 
         _damage.ChangeDamage(shooter, ent.Comp.DamageOnHit, ignoreResistances: true);
@@ -119,7 +119,7 @@ public sealed partial class GunUpgradeSystem
         if (!TryComp<ProjectileComponent>(args.FiredProjectile, out var projectile))
             return;
 
-        if (ent.Comp.BonusDamage is {} bonus)
+        if (ent.Comp.BonusDamage is { } bonus)
             projectile.Damage += bonus;
         projectile.Damage *= ent.Comp.Modifier;
         Dirty(args.FiredProjectile, projectile);
@@ -137,13 +137,13 @@ public sealed partial class GunUpgradeSystem
         comp.SavedLowerBound = pdc.LowerBound;
         comp.SavedUpperBound = pdc.UpperBound;
 
-        if (comp.NewAppliedModifier is {} newModifier)
+        if (comp.NewAppliedModifier is { } newModifier)
             pdc.AppliedModifier = newModifier;
-        if (comp.NewApplyWhenInRange is {} newApplyInRange)
+        if (comp.NewApplyWhenInRange is { } newApplyInRange)
             pdc.ApplyWhenInRange = newApplyInRange;
-        if (comp.NewLowerBound is {} newLower)
+        if (comp.NewLowerBound is { } newLower)
             pdc.LowerBound = newLower;
-        if (comp.NewUpperBound is {} newUpper)
+        if (comp.NewUpperBound is { } newUpper)
             pdc.UpperBound = newUpper;
         Dirty(weapon, pdc);
     }

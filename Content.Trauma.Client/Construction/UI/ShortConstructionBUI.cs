@@ -12,7 +12,6 @@ using Robust.Client.Placement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Construction.UI;
 

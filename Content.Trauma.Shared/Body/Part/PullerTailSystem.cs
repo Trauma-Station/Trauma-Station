@@ -10,16 +10,12 @@ namespace Content.Trauma.Shared.Body.Part;
 public sealed class PullerTailSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-
-    private EntityQuery<HumanoidProfileComponent> _humanoidQuery;
-    private EntityQuery<PullerComponent> _pullerQuery;
+    [Dependency] private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
+    [Dependency] private readonly EntityQuery<PullerComponent> _pullerQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _humanoidQuery = GetEntityQuery<HumanoidProfileComponent>();
-        _pullerQuery = GetEntityQuery<PullerComponent>();
 
         SubscribeLocalEvent<PullerTailComponent, OrganGotInsertedEvent>(OnInserted);
         SubscribeLocalEvent<PullerTailComponent, OrganGotRemovedEvent>(OnRemoved);

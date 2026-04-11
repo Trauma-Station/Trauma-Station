@@ -246,6 +246,12 @@
   parent: BaseGameRule
   id: BaseTraitorRuleNoObjectives
   components:
+  # <Trauma>
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+  # </Trauma>
   - type: TraitorRule
   # TODO: codewords in yml
   # TODO: uplink in yml

@@ -2,7 +2,6 @@
 
 using System.Numerics;
 using JetBrains.Annotations;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;
 

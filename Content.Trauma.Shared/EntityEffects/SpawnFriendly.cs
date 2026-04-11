@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects.EntitySpawning;
 using Content.Shared.NPC.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

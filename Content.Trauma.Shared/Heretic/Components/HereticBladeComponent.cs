@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Heretic.Components;
 

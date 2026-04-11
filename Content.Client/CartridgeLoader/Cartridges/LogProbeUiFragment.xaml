@@ -23,6 +23,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <BoxContainer Orientation="Vertical" Margin="4 8">
             <!-- DeltaV begin - Add title label -->
             <Label Name="TitleLabel"
+                   Access="Public"
                    Text="{Loc 'log-probe-header-access'}"
                    StyleClasses="LabelHeading"
                    HorizontalAlignment="Center"
@@ -31,6 +32,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
             <!-- DeltaV begin - Add card number display -->
             <Label Name="CardNumberLabel"
+                   Access="Public"
                    StyleClasses="LabelSubText"
                    HorizontalAlignment="Center"
                    Margin="0 0 0 8"
@@ -41,13 +43,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <BoxContainer Orientation="Horizontal">
                 <Label Align="Right" SetWidth="26" ClipText="True" Text="{Loc 'log-probe-label-number'}"/>
                 <Label Align="Center" SetWidth="100" ClipText="True" Text="{Loc 'log-probe-label-time'}"/>
-                <Label Name="ContentLabel" Align="Left" SetWidth="390" ClipText="True" Text="{Loc 'log-probe-label-accessor'}"/>
+                <Label Name="ContentLabel" Access="Public" Align="Left" SetWidth="390" ClipText="True" Text="{Loc 'log-probe-label-accessor'}"/>
             </BoxContainer>
             <!-- DeltaV end -->
         </BoxContainer>
     </PanelContainer>
     <ScrollContainer VerticalExpand="True" HScrollEnabled="True">
-        <BoxContainer Orientation="Vertical" Name="ProbedDeviceContainer"/>
+        <BoxContainer Orientation="Vertical" Name="ProbedDeviceContainer" Access="Public"/>
     </ScrollContainer>
     <BoxContainer Orientation="Horizontal" Margin="4 8">
         <Button Name="PrintButton" HorizontalAlignment="Left" Text="{Loc 'log-probe-print-button'}" Disabled="True"/>

@@ -1,0 +1,58 @@
+- type: stationTrait
+  id: BananiumShipment
+  name: "Bananium Shipment"
+  report: "Rumor has it that the clown planet has been sending support packages to clowns in this system."
+  effects:
+  - !type:StartGameRule
+    rule: BananiumShipmentRule
+
+- type: stationTrait
+  id: IanAdventure
+  name: "Ian's Adventure"
+  report: null # Kept you waiting, huh?
+  mapEffects: # ian has to spawn first, itd probably be weird to move the spawner instead of the spawned mob
+  - !type:StationQueryEffects
+    compName: IanAdventureTarget
+    effects:
+    - !type:TeleportRandomArea
+      safe: true
+
+- type: stationTrait
+  id: UniqueAI
+  name: "Unique AI"
+  report: "For experimental purposes, this station AI might show divergence from default lawset. Do not meddle with this experiment."
+  # , we've removed access to your set of alternative upload modules because we know you're already thinking about meddling with this experiment."
+  effects:
+  - !type:StartGameRule
+    rule: UniqueAIRule
+  # TODO: make researching AI stuff cost 3x if someone ever adds that, and delete all roundstart lawboards
+
+- type: stationTrait
+  id: TripleAI
+  chance: 0.2
+  name: "AI Triumvirate"
+  report: "Your station has been instated with three Nanotrasen Artificial Intelligence models."
+  effects:
+  - !type:StationModifyJobs
+    add:
+      StationAi: 2
+  mapEffects:
+  - !type:StationAreaEffects # without extra ai cores latejoining AIs are stuck in purgatory
+    areaComp: ExtraAiCoreTarget
+    min: 2
+    max: 2
+    effects:
+    - !type:SpawnEntity
+      entity: PlayerStationAi
+
+- type: stationTrait
+  id: AirlockMisconfiguration
+  chance: 0.5
+  name: "Airlock Misconfiguration"
+  report: "The last crew seemed to have messed with some of the airlocks' access levels. Apologies to your Chief Engineer in advance."
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: Airlock
+    effects:
+    - !type:ScrambleAccessReader
+      probability: 0.1

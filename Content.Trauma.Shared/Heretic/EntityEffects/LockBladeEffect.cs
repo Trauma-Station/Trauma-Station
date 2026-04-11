@@ -5,17 +5,15 @@ using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Surgery.Steps.Parts;
 using Content.Medical.Shared.Wounds;
-using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.Throwing;
+using Content.Trauma.Common.Wizard.Projectile;
 using Content.Trauma.Shared.BloodSplatter;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 

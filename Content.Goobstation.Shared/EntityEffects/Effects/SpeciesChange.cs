@@ -3,7 +3,6 @@
 using Content.Shared.Humanoid;
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid.Prototypes;
-using Robust.Shared.Prototypes;
 using Content.Shared.Polymorph;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;

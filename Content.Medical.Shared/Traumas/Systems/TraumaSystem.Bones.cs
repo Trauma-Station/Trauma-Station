@@ -10,7 +10,6 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;

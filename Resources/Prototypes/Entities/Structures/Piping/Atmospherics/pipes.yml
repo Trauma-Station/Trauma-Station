@@ -212,7 +212,7 @@
 
 - type: entity
   abstract: true
-  parent: GasPipeSansLayers
+  parent: [GasPipeSansLayers, MetalToolDurabilityWeak] # Trauma
   id: GasPipeBase
   components:
   - type: AtmosPipeLayers

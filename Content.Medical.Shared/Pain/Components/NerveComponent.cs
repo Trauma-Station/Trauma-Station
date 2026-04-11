@@ -2,8 +2,6 @@
 
 using System.Linq;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Pain;
 

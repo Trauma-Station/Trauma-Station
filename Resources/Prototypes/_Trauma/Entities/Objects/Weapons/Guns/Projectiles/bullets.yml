@@ -25,12 +25,27 @@
   - type: Projectile
     damage:
       types:
-        Piercing: -2.5
-        Slash: -2.5
-        Blunt: -2.5
-        Heat: -2.5
-        Cold: -2.5
-        Shock: -2.5
-        Holy: 12.5
+        Piercing: 5
+        Holy: 5
   - type: HolyIgniteOnCollide
-    fireStacks: 2
+    fireStacks: 3.5
+
+- type: entity
+  id: BulletFaithHeal
+  name: blessed shot
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: magicm_yellow
+  - type: Projectile
+    damage:
+      types:
+        Piercing: -5.0
+        Slash: -5.0
+        Blunt: -5.0
+        Heat: -5.0
+        Cold: -5.0
+        Shock: -5.0

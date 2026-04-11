@@ -19,28 +19,10 @@
 #
 - type: entity
   abstract: true
-  parent: EdibleBase
+  parent: [ EdibleBase, BasePerishableFood ] # Trauma - most food is perishable
   id: FoodBase
   components:
   - type: SpaceGarbage
-# <Trauma>
-  - type: Perishable
-    rotAfter: 1200
-    molsPerSecondPerUnitMass: 0
-  - type: RotInto
-    entity: FoodRot
-    stage: 1
-  - type: Temperature
-    currentTemperature: 290
-    specificHeat: 25
-  - type: TemperatureDamage
-  - type: InternalTemperature
-    thickness: 0.02
-    area: 0.02
-    conductivity: 15
-  - type: BurnableFood
-    burnTemp: 550
-#</Trauma>
 
 # This base type is used to cover all of the "obvious" things that should be doable to open-package food.
 # Practically this means injection.

@@ -5,3 +5,4 @@
   id: BaseSpeciesAppearance
   components:
   - type: NeedsTongue # almost all humanoids need to have a tongue to speak
+  - type: EatingNeedsOrgan # need a mouth/head to eat

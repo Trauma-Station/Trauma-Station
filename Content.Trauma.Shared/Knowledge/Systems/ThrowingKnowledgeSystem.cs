@@ -6,7 +6,6 @@ using Content.Trauma.Common.Throwing;
 using Content.Trauma.Shared.Containers;
 using Content.Trauma.Shared.Knowledge.Components;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 

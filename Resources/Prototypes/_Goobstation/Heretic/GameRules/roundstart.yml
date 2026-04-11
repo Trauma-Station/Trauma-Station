@@ -43,6 +43,10 @@
         - CommandStaff
       mindRoles:
       - MindRoleHeretic
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity
   parent: BaseGameRule
@@ -70,3 +74,7 @@
         - CommandStaff
       mindRoles:
       - MindRoleHeretic
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills

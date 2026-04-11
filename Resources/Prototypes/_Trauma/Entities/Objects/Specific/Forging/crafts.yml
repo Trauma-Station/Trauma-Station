@@ -1,0 +1,391 @@
+- type: entity
+  abstract: true
+  parent: [ BaseMetallicProcGen, BaseMinorContraband ]
+  id: BaseForgedProduct
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      shader: Emissive
+      map: [ "enum.MetallicVisuals.Layer" ]
+    - state: handle
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        shader: Emissive
+      right:
+      - state: inhand-right
+        shader: Emissive
+
+- type: entity
+  abstract: true
+  parent: BaseForgedProduct
+  id: BaseForgedProductCrossGuard
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      shader: Emissive
+      map: [ "enum.MetallicVisuals.Layer" ]
+    - state: handle
+    - state: crossguard
+
+- type: entity
+  abstract: true
+  parent: BaseForgedProduct
+  id: BaseForgedProductSeparateHead
+  components:
+  - type: Sprite
+    layers:
+    - state: head
+      shader: Emissive
+      map: [ "enum.MetallicVisuals.Layer" ]
+    - state: handle
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: head-inhand-left
+        shader: Emissive
+      - state: handle-inhand-left
+      right:
+      - state: head-inhand-right
+        shader: Emissive
+      - state: handle-inhand-right
+
+# Knives
+
+- type: entity
+  parent: [ BaseForgedProduct, KitchenKnife ]
+  id: ForgedKnife
+  name: knife
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/knifeblade.rsi
+
+- type: entity
+  parent: [ BaseForgedProduct, ButchCleaver ]
+  id: ForgedCleaver
+  name: cleaver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/cleaver.rsi
+
+- type: entity
+  parent: [ BaseForgedProduct, CombatKnife ]
+  id: ForgedCombatKnife
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/combatknife.rsi
+    storedSprite: null
+    storedOffset: -1,-2
+    storedRotation: -45 # FIXME: this fucks storage because its shitcode
+
+- type: entity
+  parent: [ BaseForgedProduct, KukriKnife ]
+  id: ForgedKukriKnife
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/kukri.rsi
+
+- type: entity
+  parent: [ BaseForgedProduct, SurvivalKnife, BaseMetallicProcGen ]
+  id: ForgedSurvivalKnife
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/survival_knife.rsi
+    storedSprite: null
+    storedOffset: -1,-2
+    storedRotation: -45
+
+# Tools
+
+- type: entity
+  parent: [ BaseForgedProduct, MeleeHammer ]
+  id: ForgedHammer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+
+- type: entity
+  parent: [ BaseForgedProduct, BaseScrewdriver ]
+  id: ForgedScrewdriver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/screwdriver.rsi
+    storedRotation: -90
+
+# TODO: Tiny blade uses?
+
+# Arming Sword
+
+- type: entity
+  parent: [ BaseForgedProductCrossGuard, BaseSword ]
+  id: ForgedSword
+  name: arming sword
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
+    storedRotation: -45
+    shape:
+    - 0,0,0,4
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 18
+      woundSeverityMultipliers:
+        Slash: 2
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: DisarmMalus
+  - type: Parry
+    maxParries: 1
+    maxReflects: 0
+    parryMinSkill: 50
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
+
+# TODO: Chainmail?
+
+# Halberd
+
+- type: entity
+  parent: [ BaseMajorContraband, BaseForgedProductSeparateHead, BaseSword ]
+  id: ForgedHalberd
+  name: halberd
+  description: A powerful polearm with an oddly shaped head.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
+    size: Ginormous
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 4
+        Piercing: 18
+      woundSeverityMultipliers:
+        Slash: 2
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  #- type: Wieldable # TODO: wielding layers
+
+# Longsword
+
+- type: entity
+  parent: [ BaseForgedProductSeparateHead, BaseSword ]
+  id: ForgedLongsword
+  name: longsword
+  description: "It's like a sword, but longer. Needs two hands to wield properly."
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
+    storedRotation: -45
+    shape:
+    - 0,0,0,6
+  - type: MeleeWeapon
+    attackRate: 0.8
+    range: 1.6
+    damage:
+      types:
+        Slash: 22
+      woundSeverityMultipliers:
+        Slash: 2
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: DisarmMalus
+  - type: Parry
+    maxParries: 1
+    maxReflects: 0
+    parryMinSkill: 50
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
+  - type: MultiHandedItem
+
+# TODO: Metal Plate?
+
+# Warhammer
+
+- type: entity
+  parent: [ BaseForgedProductSeparateHead, BaseItem ]
+  id: ForgedWarhammer
+  name: warhammer
+  description: Every dwarf's gotta have one of these, or maybe forty thousand of them.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
+    storedRotation: -45
+    shape:
+    - 0,0,0,2
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 20
+      woundSeverityMultipliers:
+        Blunt: 2
+    soundHit:
+      collection: MetalThud
+    animationRotation: -135
+    wideAnimationRotation: -135
+  - type: Tool
+    qualities:
+    - Prying
+    - Hammering
+
+# Pickaxe
+
+- type: entity
+  parent: [ BaseForgedProductSeparateHead, Pickaxe ]
+  id: ForgedPickaxe
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
+
+# Katana
+
+- type: entity
+  parent: [ BaseForgedProduct, BaseSword ]
+  id: ForgedKatana
+  name: katana
+  description: While they were out partying, I practiced the blade.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
+    storedRotation: -45
+    shape:
+    - 0,0,0,4
+  - type: MeleeWeapon
+    autoAttack: true
+    attackRate: 3
+    #armorPenetration: -0.7 # Currently not working
+    damage:
+      types:
+        Slash: 5
+      woundSeverityMultipliers:
+        Slash: 5
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+# Arrows
+
+- type: entity
+  parent: [ BaseMetallicProcGen, SpearDurabilityWeak, BaseArrow ] # it's basically a mini spear
+  id: ForgedArrow
+  name: arrow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: tail
+      color: red
+    - state: rod
+      color: brown
+    - state: tip
+      map: [ "enum.MetallicVisuals.Layer" ]
+      shader: Emissive
+    - state: solution1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 16
+
+# Spear
+
+- type: entity
+  parent: [ BaseForgedProductSeparateHead, SpearDurabilityStrong, Spear ]
+  id: ForgedSpear
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+    layers:
+    - state: head
+      shader: Emissive
+      map: [ "enum.MetallicVisuals.Layer" ]
+    - state: handle
+    - state: spear1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
+  - type: SolutionContainerVisuals
+    equippedFillBaseName: null # doesnt have an equipped sprite lol
+    equippedMaxFillLevels: 0
+
+# Morningstar
+
+- type: entity
+  parent: [ BaseForgedProductSeparateHead, BaseItem ]
+  id: ForgedMorningstar
+  name: morningstar
+  description: You REALLY don't want to get your skull caved in by this...
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
+    storedRotation: -45
+    shape:
+    - 0,0,0,2
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 10
+        Piercing: 10
+      woundSeverityMultipliers:
+        Blunt: 2
+    soundHit:
+      collection: MetalThud
+    animationRotation: -135
+    wideAnimationRotation: -135
+
+# TODO: Shield

@@ -18,7 +18,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Prototypes;
 using Content.Medical.Shared.Wounds;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Weapons.Melee.Events;
 using System.Linq;

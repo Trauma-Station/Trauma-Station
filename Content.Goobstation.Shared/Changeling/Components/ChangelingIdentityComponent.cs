@@ -4,8 +4,6 @@ using Content.Shared.Preferences;
 using Content.Shared.StatusIcon;
 using Content.Trauma.Common.Genetics.Mutations;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Changeling.Components;
 

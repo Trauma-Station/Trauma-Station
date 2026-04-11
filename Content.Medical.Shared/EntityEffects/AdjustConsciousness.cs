@@ -5,7 +5,6 @@ using Content.Medical.Shared.Pain;
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.EntityEffects;

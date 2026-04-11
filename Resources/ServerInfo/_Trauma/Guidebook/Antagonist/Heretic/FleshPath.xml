@@ -1,0 +1,79 @@
+<Document>
+
+  # Path of Flesh
+
+  Difficulty: [color=yellow]Varies[/color]
+
+  The Path of Flesh revolves around summoning ghouls and monstrosities to do your bidding.
+  Pick this path if you enjoy the fantasy of being a necromancer commanding legions of allies.
+
+  ## Pros
+
+  - Can turn dead humanoids into fragile but loyal ghouls.
+  - Strong mark effect.
+  - Access to a versatile list of summoned minions.
+  - Your summons are very versatile and can quickly overwhelm the crew should you coordinate your attacks
+  - Eating organs and body parts grants various boons (depending on your path stage).
+
+  ## Cons
+
+  - A high degree of your progression is obtaining additional summoned monsters.
+  - You have very little utility beyond your summoned monsters.
+  - You gain no inherent access to defensive, offensive or mobility spells.
+  - You are mostly focused around supporting your minions.
+
+  ## Knowledge
+
+  <Table Columns="3">
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Knowledge Name</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Ingredients/Type</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Description</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Principle of Hunger</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Knife, Blood</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a bloody blade.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Grasp of Flesh</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp can raise the dead as loyal ghouls. Additionally you grow stronger from eating raw meat and organs, as well as become immune to poison.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mark of Flesh</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the flesh mark, creating flesh mimic of the victim that attack them when triggered.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Imperfect Ritual</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Corpse, Muzzle</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Raises the corpse as a Voiceless Dead, a strong, but silent minion.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Knitting of Flesh</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Grants a spell that works as all surgical tools, heals minions, and provides health analysis and hud.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Raw Ritual</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Eyes, Stomach, Blood</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a raw prophet, an entity that can link your summons minds via the mansus link. It is also a strong scout and heals heretics and monsters around it.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Bleeding Steel</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your bloody blades now cause heavy bleeding on attack.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Lonely Ritual</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Heart, Stomach, Lung, Pen</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a flesh stalker, a strong combat summon with a jaunt, shapeshift and EMP.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Priest's Final Hymn</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Four corpses</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Taking damage now summons loyal flesh mimics of yourself. You gain pressure and temperature immunity. Knit Flesh can now be used in hand to heal ghouls in area.</Box></ColorBox>
+  </Table>
+
+  ## Tips
+
+  - Your Mansus Grasp allows you to turn dead humanoids into ghouls (even mindshielded humanoids like security officers and the captain). It also Leaves a mark that spawns a loyal flesh mimic when triggered by your bloody blade.
+  - As a Flesh Heretic, organs and dead bodies are your best friends! You can use them for rituals, to heal or to gain buffs.
+  - Your Flesh Surgery spell can heal your summons. It also acts like a good surgery tool that bypasses surgery steps and works through clothes.
+  - Raw Prophets can link you and other summons in a telepathic network, allowing for long distance co-ordination. They also have healing aura for you and your minions.
+  - Flesh Stalkers are decent combatants with the ability to disguise themselves as various creatures. They can also utilize an EMP spell.
+  - Your success with this path is reliant on how knowledgable or robust your minions are. However, there is always power in numbers; the more minions, the higher your chances of success.
+  - Your minions are more expendable than you are. Do not be afraid to tell them to go to their deaths. You can just recover them later... maybe.
+
+</Document>

@@ -1,0 +1,33 @@
+- type: entity
+  id: BloodCrawlActionWailing
+  parent: BaseAction
+  name: Wailing Crawl
+  description: Find your way closer to the wounded.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Actions/wailing.rsi
+      state: wailingteleport
+    useDelay: 4
+  - type: InstantAction
+    event: !type:BloodCrawlEvent
+
+- type: entity
+  parent: BaseAction
+  id: Wailing
+  name: Wail
+  description: Throw them away from you.
+  components:
+  - type: Action
+    raiseOnUser: true
+    checkCanInteract: false
+    useDelay: 30
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Trauma/Actions/screamAbility.ogg
+    icon:
+      sprite: _Trauma/Actions/wailing.rsi
+      state: wailing
+  - type: InstantAction
+    event: !type:RepulseEvent

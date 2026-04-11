@@ -1,0 +1,34 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.StatusIcon;
+using Robust.Shared.Audio;
+
+namespace Content.Trauma.Shared.CosmicCult.Components;
+
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
+public sealed partial class CosmicLesserCultistComponent : Component
+{
+    /// <summary>
+    /// The status icon prototype displayed for cosmic cultists.
+    /// </summary>
+    [DataField]
+    public ProtoId<FactionIconPrototype> StatusIcon = "CosmicCultLesserIcon";
+
+    /// <summary>
+    /// Whether or not this cultist was weak to holy before conversion.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool WasWeakToHoly;
+
+    [DataField]
+    public EntProtoId DamageTransferAction = "ActionCosmicDamageTransfer";
+
+    public EntityUid? DamageTransferActionEntity;
+
+    [DataField]
+    public EntProtoId TransferVFX = "CosmicGenericVFX";
+
+    [DataField]
+    public SoundSpecifier TransferSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/glyph_trigger.ogg");
+}

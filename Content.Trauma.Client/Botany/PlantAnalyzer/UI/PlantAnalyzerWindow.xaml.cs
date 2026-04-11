@@ -103,11 +103,13 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 }
                 foreach (var gene in _internalConsumeGasesDatabank)
                 {
-                    DatabaseList.AddItem($"Consume {Loc.GetString($"gases-{gene.GasID.ToString()}")}: {gene.GasValue}");
+                    var gas = Loc.GetString("gases-" + gene.GasID.ToString().ToLower());
+                    DatabaseList.AddItem($"Consume {gas}: {gene.GasValue}");
                 }
                 foreach (var gene in _internalExudeGasesDatabank)
                 {
-                    DatabaseList.AddItem($"Exude {Loc.GetString($"gases-{gene.GasID.ToString()}")}: {gene.GasValue}");
+                    var gas = Loc.GetString("gases-" + gene.GasID.ToString().ToLower());
+                    DatabaseList.AddItem($"Exude {gas}: {gene.GasValue}");
                 }
                 foreach (var gene in _internalChemicalsDatabank)
                 {

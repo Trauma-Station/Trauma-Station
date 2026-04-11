@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
 using Content.Server.Lathe.Components;

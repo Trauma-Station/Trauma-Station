@@ -10,6 +10,8 @@ namespace Content.Trauma.Server.Heretic.Curses;
 
 public sealed partial class HereticCurseSystem
 {
+    [Dependency] private readonly EntityQuery<FlammableComponent> _flammableQuery = default!;
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -35,8 +37,6 @@ public sealed partial class HereticCurseSystem
             _vomit.Vomit(status.AppliedTo.Value);
         }
 
-        var flammableQuery = GetEntityQuery<FlammableComponent>();
-
         var flamesQuery = EntityQueryEnumerator<CurseOfFlamesStatusEffectComponent, StatusEffectComponent>();
         while (flamesQuery.MoveNext(out _, out var flames, out var status))
         {
@@ -45,7 +45,7 @@ public sealed partial class HereticCurseSystem
 
             flames.NextIgnition = curTime + flames.Delay;
 
-            if (!flammableQuery.TryComp(target, out var flam))
+            if (!_flammableQuery.TryComp(target, out var flam))
                 continue;
 
             if (flam.FireStacks > flames.MinFireStacks &&

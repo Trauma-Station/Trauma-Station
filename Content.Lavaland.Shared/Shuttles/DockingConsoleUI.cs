@@ -3,7 +3,6 @@
 using Content.Lavaland.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Timing;
-using Robust.Shared.Serialization;
 
 namespace Content.Lavaland.Shared.Shuttles;
 

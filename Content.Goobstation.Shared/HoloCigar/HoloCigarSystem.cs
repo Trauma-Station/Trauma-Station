@@ -10,7 +10,6 @@ using Content.Shared.Verbs;
 using Content.Trauma.Common.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.HoloCigar;

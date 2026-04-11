@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Temperature;
 
@@ -17,13 +16,14 @@ public sealed partial class ItemSlotHeaterComponent : Component
     public string Slot;
 
     /// <summary>
-    /// The heat to apply to the entity
+    /// The heat to apply to the entity in Kelvin per <see cref="Update"/> period.
     /// </summary>
     [DataField]
     public float Temp = 100f;
 
     /// <summary>
-    /// The max temperature the item can have
+    /// The max temperature the item can have.
+    /// This changes to minimum if <see cref="Temp"/> is negative.
     /// </summary>
     [DataField]
     public float MaxTemp = 300f;

@@ -8,7 +8,6 @@ using Content.Client.Guidebook.Richtext;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Guidebook.Controls;
 

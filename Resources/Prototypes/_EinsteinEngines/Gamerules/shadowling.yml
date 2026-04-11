@@ -1,8 +1,17 @@
 - type: entity
+  abstract: true
   parent: BaseGameRule
-  id: Shadowling
+  id: BaseShadowlingRule
   components:
   - type: ShadowlingRule
+  - type: AntagObjectives
+    objectives:
+    - ShadowlingAscendObjective
+
+- type: entity
+  parent: BaseShadowlingRule
+  id: Shadowling
+  components:
   - type: GameRule
     minPlayers: 30
   - type: AntagSelection
@@ -16,6 +25,3 @@
         - CommandStaff
       mindRoles:
       - MindRoleShadowling
-  - type: AntagObjectives
-    objectives:
-    - ShadowlingAscendObjective

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem, BaseSecurityContraband, BracingDurability]
   id: WeaponBillyClub
   name: billy club
   description: A lightweight wooden baton for incapacitating people with. Delivers less-than-lethal force for incapacitation.
