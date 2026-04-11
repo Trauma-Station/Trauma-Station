@@ -78,19 +78,11 @@
     attackRate: 0.8
     damage:
       types:
-        Slash: 10
-        Holy: 13
+        Slash: 12
+        Holy: 8 # Land a mark hit for higher holy damage
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Wieldable
-  - type: LeechOnMarker
-    leech:
-      types:
-        Blunt: -6.66
-        Slash: -6.66
-        Piercing: -6.66
-        Asphyxiation: -5
-        Bloodloss: -5
   - type: Clothing
     sprite: _ShitChap/Objects/Weapons/Nullrod/holyclaymore.rsi
     slots:
@@ -154,9 +146,6 @@
       types:
         Blunt: 3
         Holy: 10
-  - type: HeldSpeedModifier # HOLY.. AURA!
-    walkModifier: 1.15
-    sprintModifier: 1.15
   - type: Item
     size: Small
     sprite: _ShitChap/Objects/Weapons/Nullrod/rosary.rsi
@@ -181,7 +170,7 @@
         Shock: -7.5
     damage:
       types:
-        Holy: 20
+        Holy: 7
   - type: Tag
     tags:
     - Rosary
@@ -208,8 +197,6 @@
         Holy: 14
     soundHit:
       path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
-  - type: IgniteOnMeleeHit # emphasis on FLAMING GIFT!!
-    fireStacks: 0.25
   - type: HolyIgniteOnMeleeHit
     fireStacks: 3.0
   - type: Cautery
@@ -261,7 +248,7 @@
     damage:
       types:
         Slash: 7
-        Holy: 12
+        Holy: 8
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: ItemRandomizeMovementspeed
@@ -300,7 +287,7 @@
     attackRate: 3
     damage:
       types:
-        Holy: 7
+        Holy: 4
         Blunt: 1
     soundHit:
       collection: BoxingHit
@@ -341,14 +328,14 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Slash: 10
-        Holy: 14
+        Slash: 8
+        Holy: 8
   - type: MeleeWeapon
     attackRate: 1.5
     damage:
       types:
         Slash: 5
-        Holy: 10
+        Holy: 7
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -471,7 +458,7 @@
     attackRate: 0.8
     damage:
       types:
-        Holy: 12
+        Holy: 10
         Blunt: 10
     soundHit:
       collection: RubberHammer
@@ -562,7 +549,7 @@
     attackRate: 0.9
     damage:
       types:
-        Holy: 14
+        Holy: 10
         Blunt: 9
     soundHit:
       path: /Audio/Weapons/smash.ogg
@@ -617,7 +604,7 @@
         Blunt: 2
         Slash: 3
         Structural: 20
-        Holy: 6
+        Holy: 3
     soundHit:
       path: /Audio/Weapons/chainsaw.ogg
       params:
@@ -717,7 +704,7 @@
 
 - type: entity
   name: blessing of the reaper
-  parent: [Nullrod, ArmBlade, BaseMajorContraband]
+  parent: [Nullrod, ArmBladeChangeling, BaseMajorContraband]
   id: BlessingOfTheReaper
   description: A special undroppable armblade nullrod, it's blessed by the dark gods.
   components:
@@ -729,13 +716,13 @@
     sprite: _Goobstation/Objects/Weapons/Melee/blessing_reaper.rsi
   - type: Unremoveable
   - type: MeleeWeapon
-    wideAnimationRotation: 90
-    attackRate: 0.75
     damage:
       types:
-        Slash: 25
-        Piercing: 15
-        Holy: 10
+        Slash: 15
+        Structural: 10
+        Holy: 5
+      woundSeverityMultipliers:
+        Slash: 1
 
 - type: entity
   parent: BaseNullrod
@@ -772,7 +759,7 @@
     damage:
       types:
         Piercing: 10
-        Holy: 18
+        Holy: 15
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -784,7 +771,7 @@
     damage:
       types:
         Piercing: 15
-        Holy: 25
+        Holy: 20
   - type: EmbeddableProjectile
     offset: -0.15,0.0
   - type: ThrowingAngle

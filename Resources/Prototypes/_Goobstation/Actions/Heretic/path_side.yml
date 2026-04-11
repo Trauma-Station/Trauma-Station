@@ -53,25 +53,25 @@
 - type: entity
   parent: BaseAction
   id: ActionHereticCleave
-  name: Cleave
-  description: Causes severe bleeding on a target and several targets around them.
+  name: Crimson Cleave
+  description: A targeted spell that heals you while damaging the enemies. It cleanses you of all wounds as well.
   components:
   - type: Action
-    useDelay: 45
+    useDelay: 30
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: cleave
+      state: blood_siphon
     checkCanInteract: false
   - type: TargetAction
     checkCanAccess: false
-    range: 4
+    range: 5
   - type: WorldTargetAction
     event: !type:EventHereticCleave
   - type: HereticAction
     requireMagicItem: true
   - type: SpeakOnAction
-    sentence: heretic-speech-cleave
+    sentence: heretic-speech-bloodsiphon
 
 - type: entity
   parent: BaseAction

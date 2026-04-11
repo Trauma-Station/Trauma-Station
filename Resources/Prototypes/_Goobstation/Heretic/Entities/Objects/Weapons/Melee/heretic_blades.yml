@@ -19,7 +19,7 @@
     wideAnimationRotation: -125
     damage:
       types:
-        Slash: 17 # moving to 17 to encourage more spell use, can be sharpened to hit 20 again
+        Slash: 17
       armorPenetration: 0.3
       woundSeverityMultipliers:
         Slash: 1.5
@@ -28,6 +28,10 @@
   - type: Item
     size: Normal
     sprite: _Goobstation/Heretic/Blades/eldritch_blade-inhands.rsi
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedRotation: 180
   - type: Scalpel
     speed: 1.5
   - type: BoneSaw

@@ -6740,3 +6740,46 @@ Entries:
   id: 780
   time: '2026-04-10T21:27:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1972
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Airlocks and shutters now revert to their assemblies before fully
+      destroying, dropping steel in the process.
+  id: 781
+  time: '2026-04-11T12:36:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1976
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed xeno evolution so a queen/praetorian can only ever be evolved to
+      once, even if an old one died.
+  id: 782
+  time: '2026-04-11T16:39:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1971
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix carving knife not working.
+  - type: Tweak
+    message: Nerfed some nullrods to me not so insane.
+  - type: Tweak
+    message: >-
+      Boomerangs behave like boomerangs more and shouldn't damage one target
+      multiple times hopefully.
+  - type: Tweak
+    message: Heretic blades have less size in inventory.
+  - type: Add
+    message: Heretics get temporary xray vision near unspent influences.
+  - type: Add
+    message: Cleave spell replaced with Crimson Cleave (a better version).
+  - type: Tweak
+    message: Sacraments of power cooldown 50 -> 30.
+  - type: Remove
+    message: Scorching shark ritual limit.
+  - type: Add
+    message: Chaplain can roll changeling, shadowling, zombie, thief and heretic.
+  id: 783
+  time: '2026-04-11T18:15:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1956

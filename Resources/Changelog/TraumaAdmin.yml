@@ -113,3 +113,12 @@ Entries:
   id: 15
   time: '2026-04-09T18:42:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1948
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed godmode not protecting from explosions or other things that directly
+      damage limbs.
+  id: 16
+  time: '2026-04-11T18:54:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1980

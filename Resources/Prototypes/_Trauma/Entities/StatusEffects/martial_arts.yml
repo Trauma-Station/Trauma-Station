@@ -33,3 +33,13 @@
   parent: StatusEffectSlowdown
   id: CircleKickSlowdownStatusEffect
   name: circle kick slowdown
+
+# for armstrong machine gun fist
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectAttackSpeed
+  name: attack speed
+  components:
+  - type: Rallied
+    ralliedStrength: 0.8
+    ralliedAttackSpeed: 2
