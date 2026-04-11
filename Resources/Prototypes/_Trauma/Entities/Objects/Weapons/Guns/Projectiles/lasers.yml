@@ -334,6 +334,18 @@
   - type: IgniteOnCollide
     fireStacks: 0.25
 
+- type: entity
+  id: SMGLaserBlue
+  parent: SMGLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectDisabler
+  - type: Sprite
+    layers:
+    - state: lightbolt
+      color: "#2684ff"
+
 # Sniper
 
 - type: entity

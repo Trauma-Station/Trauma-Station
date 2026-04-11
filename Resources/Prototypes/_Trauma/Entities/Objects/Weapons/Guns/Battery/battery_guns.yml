@@ -98,3 +98,34 @@
     tags:
     - Sidearm
     - LaserWeapon
+
+- type: entity
+  parent: WeaponLaserGunXenoborg
+  id: WeaponTripodXenoborgMinigun
+  name: xenoborg mounted minigun
+  components:
+  - type: Sprite
+    sprite: _Impstation/Objects/Weapons/Guns/Lasers/xenoborg_laser_cannon.rsi # i dont feel like making a new sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-1
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: true
+  - type: BatteryAmmoProvider
+    proto: SMGLaserBlue
+    fireCost: 10
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: BatterySelfRecharger
+    autoRechargeRate: 10
+  - type: Gun
+    fireRate: 5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto

@@ -53,7 +53,7 @@
   id: XenoborgTripod
   name: tripod xenoborg
   suffix: with brain
-  description: A man-machine hybrid that aims to replicate itself. They love extracting brains to insert into fresh Xenoborg chassis to grow their army. This is a tripod type, specialized in structural damage.
+  description: A man-machine hybrid that aims to replicate itself. They love extracting brains to insert into fresh Xenoborg chassis to grow their army. This is a tripod type, specialized in supressing fire.
   components:
   - type: BorgTransponder
     name: tripod xenoborg
@@ -84,7 +84,51 @@
     moduleWhitelist:
       tags:
       - XenoborgModuleGeneric
-      - XenoborgModuleRocketeer
+      - XenoborgModuleTripod
+  - type: MovementSpeedModifier # Slower then a scout, faster then an average xorg.
+    baseWalkSpeed : 2.3
+    baseSprintSpeed : 5.3
+  - type: MobThresholds # Little bit more squishy.
+    thresholds:
+      0: Alive
+      80: Critical
+      180: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Critical: BorgCrit
+      Dead: BorgDead
+    showOverlays: false
+    allowRevives: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer_xenoborg.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PinpointerMothershipPiece: # drop a piece of core pinpointer upon being destructed (4 pieces to make a core pinpointer)
+            min: 1
+            max: 1
+      - !type:EmptyContainersBehaviour
+        containers:
+        - borg_brain
+        - borg_module
+        - cell_slot
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: ContainerFill
     containers:
       borg_brain:
@@ -92,7 +136,7 @@
       borg_module:
       - XenoborgModuleBasic
       - XenoborgModuleTool
-      - XenoborgModuleRocketeer
+      - XenoborgModuleTripod
   - type: ItemSlots
     slots:
       cell_slot:

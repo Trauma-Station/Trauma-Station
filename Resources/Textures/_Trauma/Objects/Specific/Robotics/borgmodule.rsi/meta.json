@@ -11,10 +11,16 @@
             "name": "xenoborg_rocketeer"
         },
         {
+            "name": "xenoborg_tripod"
+        },
+        {
             "name": "icon-xenoborg-rocketeer"
         },
         {
             "name": "icon-xenoborg-disruptor"
+        },
+        {
+            "name": "icon-xenoborg-tripod"
         }
     ]
 }
