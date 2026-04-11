@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
@@ -17,12 +18,12 @@ namespace Content.IntegrationTests.Tests
     /// </summary>
     [TestFixture]
     [Category("MapTests")] // Trauma
-    public sealed class SaveLoadSaveTest
+    public sealed class SaveLoadSaveTest : GameTest
     {
         [Test]
         public async Task CreateSaveLoadSaveGrid()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var entManager = server.ResolveDependency<IEntityManager>();
             var mapLoader = entManager.System<MapLoaderSystem>();
@@ -86,10 +87,9 @@ namespace Content.IntegrationTests.Tests
                 }
             });
             testSystem.Enabled = false;
-            await pair.CleanReturnAsync();
         }
 
-        private const string TestMap = "Maps/_Trauma/bagel.yml"; // Trauma
+        private new const string TestMap = "Maps/_Trauma/bagel.yml"; // Trauma
 
         /// <summary>
         ///     Loads the default map, runs it for 5 ticks, then assert that it did not change.
@@ -97,7 +97,7 @@ namespace Content.IntegrationTests.Tests
         [Test]
         public async Task LoadSaveTicksSaveBagel()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var mapLoader = server.ResolveDependency<IEntitySystemManager>().GetEntitySystem<MapLoaderSystem>();
             var mapSys = server.System<SharedMapSystem>();
@@ -168,7 +168,6 @@ namespace Content.IntegrationTests.Tests
 
             testSystem.Enabled = false;
             await server.WaitPost(() => mapSys.DeleteMap(mapId));
-            await pair.CleanReturnAsync();
         }
 
         /// <summary>
@@ -184,7 +183,7 @@ namespace Content.IntegrationTests.Tests
         [Test]
         public async Task LoadTickLoadBagel()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             var mapLoader = server.System<MapLoaderSystem>();
@@ -242,7 +241,6 @@ namespace Content.IntegrationTests.Tests
             testSystem.Enabled = false;
             await server.WaitPost(() => mapSys.DeleteMap(mapId1));
             await server.WaitPost(() => mapSys.DeleteMap(mapId2));
-            await pair.CleanReturnAsync();
         }
 
         /// <summary>

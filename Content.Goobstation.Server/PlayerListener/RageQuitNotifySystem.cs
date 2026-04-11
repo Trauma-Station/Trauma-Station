@@ -7,7 +7,6 @@ using Content.Shared.Chat;
 using Content.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 

@@ -1,4 +1,4 @@
-<!-- Guidelines: https://docs.spacestation14.io/en/getting-started/pr-guideline -->
+<!-- Guidelines: https://github.com/Trauma-Station/Trauma-Station/blob/master/CONTRIBUTING.md -->
 <!-- NOTE: All code submitted to this repository is ALWAYS licensed under the AGPL-3.0-or-later license.  -->
 ## About the PR
 <!-- What did you change? -->
@@ -15,12 +15,15 @@ Small fixes/refactors are exempt. -->
 
 ## Requirements
 <!-- Confirm the following by placing an X in the brackets without spaces inside (for example: [X] ): -->
-- [ ] I have read and am following the [Pull Request and Changelog Guidelines](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html).
+- [ ] I have read and am following the [Contributing Guidelines](https://github.com/Trauma-Station/Trauma-Station/blob/master/CONTRIBUTING.md).
 - [ ] I have added media to this PR or it does not require an in-game showcase.
-<!-- You should understand that not following the above may get your PR closed at maintainer’s discretion -->
+<!-- You should understand that not following the above may get your PR closed at a maintainer's discretion -->
 
 ## Breaking changes
-<!-- List any breaking changes, including namespaces, public class/method/field changes, prototype renames; and provide instructions for fixing them. -->
+<!--
+List any breaking changes, including namespaces, public class/method/field changes, prototype renames; and provide instructions for fixing them.
+You only need to consider this if there are other PRs open or in the works that would be massively broken by this.
+-->
 
 **Changelog**
 <!-- Add a Changelog entry to make players aware of new features or changes that could affect gameplay.

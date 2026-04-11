@@ -1,3 +1,17 @@
+# Misc
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: SpawnSupplyEmpty
+  id: DropPodPlayer
+  name: crew drop pod
+  components:
+  - type: ContainerContainer
+    containers:
+      contents: !type:Container
+  - type: DropPod
+    container: contents
+
 # Science
 
 - type: entity

@@ -14,8 +14,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;

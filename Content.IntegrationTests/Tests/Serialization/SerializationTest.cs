@@ -9,6 +9,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Robust.Shared.Reflection;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Manager.Attributes;
@@ -17,7 +18,7 @@ using Robust.Shared.Serialization.Markdown.Value;
 namespace Content.IntegrationTests.Tests.Serialization;
 
 [TestFixture]
-public sealed partial class SerializationTest
+public sealed partial class SerializationTest : GameTest
 {
     /// <summary>
     /// Check that serializing generic enums works as intended. This should really be in engine, but engine
@@ -26,7 +27,7 @@ public sealed partial class SerializationTest
     [Test]
     public async Task SerializeGenericEnums()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
         var seriMan = server.ResolveDependency<ISerializationManager>();
         var refMan = server.ResolveDependency<IReflectionManager>();
@@ -76,8 +77,6 @@ public sealed partial class SerializationTest
         Assert.That(seriMan.ValidateNode<TestEnum>(genericNode).GetErrors().Any(), Is.True);
         Assert.That(seriMan.ValidateNode<Enum>(typedNode).GetErrors().Any(), Is.True);
         Assert.That(seriMan.ValidateNode<TestEnum>(typedNode).GetErrors().Any(), Is.False);
-
-        await pair.CleanReturnAsync();
     }
 
     private enum TestEnum : byte { Aa, Bb, Cc, Dd }

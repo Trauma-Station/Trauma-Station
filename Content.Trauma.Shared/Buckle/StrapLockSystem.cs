@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.Carrying;
+using Content.Trauma.Shared.Carrying;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.EntityEffects;
@@ -15,7 +15,6 @@ using Content.Shared.Standing;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Throwing;
 using Robust.Shared.Player;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Buckle;
 

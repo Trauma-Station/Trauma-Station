@@ -8,13 +8,11 @@ namespace Content.Trauma.Shared.Genetics.Abilities;
 
 public sealed class ThermalRegulatorMutationSystem : EntitySystem
 {
-    private EntityQuery<ThermalRegulatorComponent> _query;
+    [Dependency] private readonly EntityQuery<ThermalRegulatorComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ThermalRegulatorComponent>();
 
         SubscribeLocalEvent<ThermalRegulatorMutationComponent, MutationAddedEvent>(OnAdded);
         SubscribeLocalEvent<ThermalRegulatorMutationComponent, MutationRemovedEvent>(OnRemoved);

@@ -10,7 +10,6 @@ using Content.Shared.Decals;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Lavaland.Server.Procedural.Systems;

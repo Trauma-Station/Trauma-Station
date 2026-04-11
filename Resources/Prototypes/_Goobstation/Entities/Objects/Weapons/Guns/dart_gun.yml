@@ -27,10 +27,6 @@
       path: /Audio/Weapons/Guns/Empty/empty.ogg
     clumsyProof: true
   - type: PacifismAllowedGun
-  - type: Multishot # Goobstation V
-    missChance: 0.2
-    spreadMultiplier: 1
-    spreadAddition: 15
   - type: AmmoCounter
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 5

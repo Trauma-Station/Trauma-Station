@@ -2,9 +2,7 @@
 
 using Content.Shared.GameTicking;
 using Robust.Shared.Enums;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Ghost;
 

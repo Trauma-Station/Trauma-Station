@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Globalization;
 
 namespace Content.Client.Communications.UI;

@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityTable.EntitySelectors;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Components;
 
@@ -21,8 +19,17 @@ public sealed partial class KnowledgeGrantOnUseComponent : Component
     /// <summary>
     /// Experience that will be added per use.
     /// </summary>
+    /// <remarks>
+    /// Does nothing right now
+    /// </remarks>
     [DataField, AlwaysPushInheritance]
     public Dictionary<EntProtoId, int> Experience = new();
+
+    /// <summary>
+    /// Grants literally every single skill at level 100 if true.
+    /// </summary>
+    [DataField]
+    public bool GrantEverything;
 
     /// <summary>
     /// Length of a single doafter to learn this knowledge.

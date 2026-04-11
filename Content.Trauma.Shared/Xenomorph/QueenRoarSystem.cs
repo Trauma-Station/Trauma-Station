@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._White.Xenomorphs;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Content.Trauma.Shared.Xenomorphs;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.Xenomorph;

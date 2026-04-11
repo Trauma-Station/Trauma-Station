@@ -7,7 +7,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.Damage;

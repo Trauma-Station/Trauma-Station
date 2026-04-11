@@ -86,6 +86,10 @@
   - type: Stamina
     baseCritThreshold: 999
   - type: FlashImmunity
+  - type: PointLight
+    radius: 0
+    energy: 0
+    color: "#4faffb"
 
 - type: entity
   parent: BaseMobMimic

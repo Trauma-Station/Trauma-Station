@@ -3,8 +3,6 @@
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Mobs;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Body;
 

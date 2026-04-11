@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Random;
+
+namespace Content.Goobstation.Server.Wizard.Components;
+
+[RegisterComponent]
+public sealed partial class SpellsGrantComponent : Component
+{
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool Granted;
+
+    [DataField]
+    public HashSet<EntProtoId> GuaranteedActions = new();
+
+    [DataField]
+    public ProtoId<WeightedRandomEntityPrototype>? RandomActions;
+
+    [DataField]
+    public float TotalWeight;
+
+    [DataField]
+    public EntProtoId? AntagProfile;
+}

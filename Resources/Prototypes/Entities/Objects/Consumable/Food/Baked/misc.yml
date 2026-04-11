@@ -698,7 +698,7 @@
     - Slice
 
 - type: entity
-  parent: FoodBakedBase
+  parent: [FoodBakedBase, BaseMinorContraband] # Trauma
   id: FoodBakedCannabisBrownieBatch
   name: special brownies
   description: A pan of "special" brownies.
@@ -730,7 +730,7 @@
     slice: FoodBakedCannabisBrownie
 
 - type: entity
-  parent: FoodBakedBase
+  parent: [FoodBakedBase, BaseMinorContraband] # Trauma
   id: FoodBakedCannabisBrownie
   name: special brownie
   description: A "special" brownie.

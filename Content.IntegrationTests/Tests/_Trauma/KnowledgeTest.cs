@@ -1,20 +1,21 @@
-#nullable enable
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Collections.Generic;
-using Content.Shared._EinsteinEngines.Language;
+#nullable enable
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Body;
 using Content.Shared.Roles;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Language;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
 [TestFixture]
-public sealed class KnowledgeTest
+public sealed class KnowledgeTest : GameTest
 {
     public static readonly EntProtoId Human = "MobHuman";
 
@@ -25,7 +26,7 @@ public sealed class KnowledgeTest
     [Test]
     public async Task TestBrainKnowledgeTransfer()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
         var entMan = server.EntMan;
         var knowledge = entMan.System<SharedKnowledgeSystem>();
@@ -53,8 +54,6 @@ public sealed class KnowledgeTest
 
             entMan.DeleteEntity(human);
         });
-
-        await pair.CleanReturnAsync();
     }
 
     /// <summary>
@@ -64,7 +63,7 @@ public sealed class KnowledgeTest
     [Test]
     public async Task TestBorgMMIKnowledgeTransfer()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+        var pair = Pair;
         var server = pair.Server;
         var entMan = server.EntMan;
         var containerSys = entMan.System<SharedContainerSystem>();
@@ -90,8 +89,6 @@ public sealed class KnowledgeTest
 
             Assert.That(borgComp.KnowledgeEntity, Is.Null, "Borg knowledge should clear after MMI ejection");
         });
-
-        await pair.CleanReturnAsync();
     }
 
 
@@ -101,8 +98,7 @@ public sealed class KnowledgeTest
     [Test]
     public async Task TestAllLanguageKnowledgeExists()
     {
-        await using var pair = await PoolManager.GetServerClient();
-
+        var pair = Pair;
         var server = pair.Server;
         var proto = server.ProtoMan;
 
@@ -119,8 +115,6 @@ public sealed class KnowledgeTest
 
             Assert.That(missing, Is.Empty, $"The following languages are missing their 'Language<ID>' entity prototypes: \n{string.Join("\n", missing)}");
         });
-
-        await pair.CleanReturnAsync();
     }
 
     /// <summary>
@@ -129,8 +123,7 @@ public sealed class KnowledgeTest
     [Test]
     public async Task TestJobSkillChips()
     {
-        await using var pair = await PoolManager.GetServerClient();
-
+        var pair = Pair;
         var server = pair.Server;
         var proto = server.ProtoMan;
 
@@ -150,7 +143,5 @@ public sealed class KnowledgeTest
 
             Assert.That(missing, Is.Empty, $"The following jobs are missing their 'SkillChip<ID>' entity prototypes:\n{string.Join("\n", missing)}");
         });
-
-        await pair.CleanReturnAsync();
     }
 }

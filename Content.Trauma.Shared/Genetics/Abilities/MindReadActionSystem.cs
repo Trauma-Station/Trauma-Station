@@ -8,7 +8,6 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Mind;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
@@ -25,16 +24,13 @@ public sealed class MindReadActionSystem : EntitySystem
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
 
     private List<string> _recent = new();
-
-    private EntityQuery<ActorComponent> _actorQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _actorQuery = GetEntityQuery<ActorComponent>();
 
         SubscribeLocalEvent<MindReadActionComponent, MindReadActionEvent>(OnMindRead);
     }

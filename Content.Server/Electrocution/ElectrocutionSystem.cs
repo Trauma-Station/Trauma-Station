@@ -1,8 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Effects;
-using Content.Server._Goobstation.Wizard.Components;
-using Content.Server.Beam.Components;
-using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 // </Trauma>
 using Content.Server.Administration.Logs;

@@ -82,6 +82,11 @@
     - RadiationProtection
     - Adrenaline
   - type: FloatingVisuals
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
 
 - type: entity
   id: BaseMobHereticGhoul
@@ -568,6 +573,19 @@
     baseWalkSpeed: 4.5
     baseSprintSpeed: 4.5
   - type: FlashImmunity
+  - type: HTN
+    rootTask:
+      task: HereticSummonCompound
+    blackboard:
+      NavSmash: !type:Bool
+        true
+  - type: Targeting
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+
 
 - type: entity
   parent: [BaseMobHereticGhoul, MobGhoulRustWalkerBase]

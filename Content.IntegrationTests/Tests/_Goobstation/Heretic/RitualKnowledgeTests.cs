@@ -1,16 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Collections.Generic;
-using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Dataset;
 using Content.Shared.Tag;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Content.IntegrationTests.Tests._Goobstation.Heretic;
 
 [TestFixture, TestOf(typeof(Trauma.Shared.Heretic.Components.Side.HereticKnowledgeRitualComponent))]
-public sealed class RitualKnowledgeTests
+public sealed class RitualKnowledgeTests : GameTest
 {
     private static readonly ProtoId<DatasetPrototype> KnowledgeDataset = "EligibleTags";
 
@@ -21,7 +22,7 @@ public sealed class RitualKnowledgeTests
         // a dataset of tag prototype IDs, so we'll have to do it
         // in a test fixture. Sad.
 
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.ResolveDependency<IEntityManager>();
@@ -41,14 +42,12 @@ public sealed class RitualKnowledgeTests
                 }
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 
     [Test]
     public async Task ValidateTagsHaveItems()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.ResolveDependency<IEntityManager>();
@@ -78,7 +77,5 @@ public sealed class RitualKnowledgeTests
             var unusedTags = dataset.Except(usedTags).ToHashSet();
             Assert.That(unusedTags, Is.Empty, $"The following ritual item tags are not used by any obtainable entity prototypes: {string.Join(", ", unusedTags)}");
         });
-
-        await pair.CleanReturnAsync();
     }
 }

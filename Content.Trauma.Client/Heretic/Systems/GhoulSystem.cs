@@ -3,7 +3,6 @@
 using Content.Shared.StatusIcon.Components;
 using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Client.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 

@@ -8,7 +8,6 @@ using Content.Shared.Storage;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Power.EntitySystems;
 using System.Linq;
-using Robust.Shared.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Access.Systems;
 

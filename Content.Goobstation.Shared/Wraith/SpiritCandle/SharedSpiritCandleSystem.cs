@@ -12,7 +12,6 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Goobstation.Shared.Wraith.SpiritCandle;

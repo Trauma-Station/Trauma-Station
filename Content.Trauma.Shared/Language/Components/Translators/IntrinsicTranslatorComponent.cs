@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Trauma.Shared.Language.Components.Translators;
+
+/// <summary>
+///   A translator attached to an entity that translates its speech.
+///   An example is a translator implant that allows the speaker to speak another Language.
+/// </summary>
+[RegisterComponent, Virtual]
+public partial class IntrinsicTranslatorComponent : Translators.BaseTranslatorComponent
+{
+}

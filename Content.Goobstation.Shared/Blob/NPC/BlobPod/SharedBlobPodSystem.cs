@@ -9,7 +9,6 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Verbs;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Blob.NPC.BlobPod;
 

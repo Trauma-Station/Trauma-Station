@@ -34,11 +34,11 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-    private static EntityQuery<GhostComponent> _ghostQuery;
-    private static EntityQuery<SpectralComponent> _spectralQuery;
-    private static EntityQuery<RelayInputMoverComponent> _relayedQuery;
-    private static EntityQuery<AiEyeComponent> _aiEyeQuery;
-    private static EntityQuery<SoundBlockerComponent> _blockerQuery;
+    [Dependency] private readonly EntityQuery<GhostComponent> _ghostQuery = default!;
+    [Dependency] private readonly EntityQuery<SpectralComponent> _spectralQuery = default!;
+    [Dependency] private readonly EntityQuery<RelayInputMoverComponent> _relayedQuery = default!;
+    [Dependency] private readonly EntityQuery<AiEyeComponent> _aiEyeQuery = default!;
+    [Dependency] private readonly EntityQuery<SoundBlockerComponent> _blockerQuery = default!;
 
     // Tile indices -> blocker entities
     [ViewVariables]
@@ -65,12 +65,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _ghostQuery = GetEntityQuery<GhostComponent>();
-        _spectralQuery = GetEntityQuery<SpectralComponent>();
-        _relayedQuery = GetEntityQuery<RelayInputMoverComponent>();
-        _aiEyeQuery = GetEntityQuery<AiEyeComponent>();
-        _blockerQuery = GetEntityQuery<SoundBlockerComponent>();
 
         _xform.OnGlobalMoveEvent += OnMove;
 

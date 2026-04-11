@@ -2,8 +2,6 @@
 
 using Content.Shared.Alert;
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Chaplain.Components;
 

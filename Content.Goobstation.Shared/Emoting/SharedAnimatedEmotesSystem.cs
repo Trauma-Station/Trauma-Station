@@ -4,7 +4,6 @@ using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Medical;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Emoting;
 

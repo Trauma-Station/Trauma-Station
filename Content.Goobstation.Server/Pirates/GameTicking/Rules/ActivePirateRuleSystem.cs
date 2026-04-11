@@ -11,7 +11,6 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Pirates.GameTicking.Rules;
 

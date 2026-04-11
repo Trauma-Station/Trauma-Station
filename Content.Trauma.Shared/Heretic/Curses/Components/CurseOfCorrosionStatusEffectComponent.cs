@@ -2,7 +2,6 @@
 
 using System.Numerics;
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Heretic.Curses.Components;
 

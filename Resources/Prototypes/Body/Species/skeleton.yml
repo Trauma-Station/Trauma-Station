@@ -214,8 +214,6 @@
   # <Shitmed>
   components:
   - type: Inorganic
-  - type: Damageable
-    damageModifierSet: Skeleton
   # </Shitmed>
 
 - type: entity
@@ -225,8 +223,6 @@
   components:
   # <Shitmed>
   - type: BodyPart
-  - type: Damageable
-    damageModifierSet: Skeleton
   # </Shitmed>
   - type: Sprite
     sprite: Mobs/Species/Skeleton/parts.rsi
@@ -244,6 +240,12 @@
 - type: entity
   parent: [ OrganBaseHead, OrganSkeletonPersonExternal ]
   id: OrganSkeletonPersonHead
+  # <Trauma>
+  components:
+  - type: Construction
+    graph: SpiritCandle
+    node: start
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganSkeletonPersonExternal ]

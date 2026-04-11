@@ -5,7 +5,6 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityConditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Rituals.EntityEffects;
 

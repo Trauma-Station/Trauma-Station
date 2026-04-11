@@ -13,7 +13,6 @@ using Content.Shared.Actions;
 using Content.Shared.Polymorph;
 using Content.Shared.Actions.Events;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 // TODO: predict everything but polymorph bruh
 namespace Content.Goobstation.Server.Bingle;

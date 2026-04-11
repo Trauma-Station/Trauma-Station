@@ -35,7 +35,7 @@
     canHeavyAttack: false # How can you swing a nail
     damage:
       types:
-        Piercing: 12
+        Piercing: 1
     animation: WeaponArcThrust
     soundHit:
       path: /Audio/Weapons/pierce.ogg

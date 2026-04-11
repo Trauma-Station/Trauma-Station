@@ -4,8 +4,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Medical.Components;

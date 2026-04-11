@@ -38,7 +38,7 @@
       spawnerPrototype: GhostRoleSpawnerInsurgent
       startingGear: Insurgent
       unequipOldGear: true
-      max: 8
+      max: 4
       playerRatio: 10
       roleLoadout:
       - RoleSurvivalStandard
@@ -169,10 +169,9 @@
       - MindRoleHeretic
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseShadowlingRule
   id: ShadowlingGamemode
   components:
-  - type: ShadowlingRule
   - type: GameRule
     minPlayers: 30
   - type: AntagSelection
@@ -186,6 +185,14 @@
         - CommandStaff
       mindRoles:
       - MindRoleShadowling
-  - type: AntagObjectives
-    objectives:
-    - ShadowlingAscendObjective
+
+- type: entity
+  id: TraitorReinforcementNukeOps
+  parent: TraitorReinforcement
+  components:
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: InstallHypoportNukie
+    - !type:NestedEffect
+      proto: InstallSkillChipNukie

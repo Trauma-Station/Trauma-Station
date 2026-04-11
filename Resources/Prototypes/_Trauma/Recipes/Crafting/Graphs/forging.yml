@@ -1,0 +1,117 @@
+- type: constructionGraph
+  id: AnvilTop
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: IngotWorkableSteel
+        name: construction-graph-tag-ingotsteel
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: ingot_steel
+        doAfter: 5
+      - tag: IngotWorkableSteel
+        name: construction-graph-tag-ingotsteel
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: ingot_steel
+  - node: finish
+    entity: AnvilTopUnfinished
+
+- type: constructionGraph
+  id: AnvilBottom
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: IngotWorkableSteel
+        name: construction-graph-tag-ingotsteel
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: ingot_steel
+        doAfter: 5
+      - tag: IngotWorkableSteel
+        name: construction-graph-tag-ingotsteel
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: ingot_steel
+  - node: finish
+    entity: AnvilBottomUnfinished
+
+- type: constructionGraph
+  id: SteelScraps
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: Steel
+        amount: 3
+        doAfter: 3
+  - node: finish
+    entity: SteelScraps
+
+- type: constructionGraph
+  id: PlasteelScraps
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: Plasteel
+        amount: 3
+        doAfter: 3
+  - node: finish
+    entity: PlasteelScraps
+
+- type: constructionGraph
+  id: BrassScraps
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: Brass
+        amount: 3
+        doAfter: 3
+  - node: finish
+    entity: BrassScraps
+
+- type: constructionGraph
+  id: WetBrick
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: Cement
+        doAfter: 0.5
+        name: construction-graph-tag-cement
+        icon:
+          sprite: _Trauma/Objects/Materials/materials.rsi
+          state: cement
+  - node: finish
+    entity: WetBrick
+
+- type: constructionGraph # Todo, add leather
+  id: ClothingHandsGlovesForge
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: Durathread
+        amount: 3
+        doAfter: 5
+      # TODO: some kind of insulation, your ass is not handling 2 thousand degree metals with some quirky gloves
+  - node: finish
+    entity: ClothingHandsGlovesForge

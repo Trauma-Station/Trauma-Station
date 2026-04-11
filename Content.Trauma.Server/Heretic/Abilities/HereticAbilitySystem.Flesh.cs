@@ -27,13 +27,13 @@ using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly EntityQuery<CartridgeAmmoComponent> _cartridgeQuery = default!;
 
     private static readonly ProtoId<CloningSettingsPrototype> Settings = "FleshMimic";
     private static readonly ProtoId<OrganCategoryPrototype> StomachCategory = "Stomach";
@@ -226,14 +226,13 @@ public sealed partial class HereticAbilitySystem
             {
                 EnsureComp<GhoulWeaponComponent>(weaponClone);
                 ghoul.BoundWeapon = weaponClone;
-                var cartridgeQuery = GetEntityQuery<CartridgeAmmoComponent>();
                 if (TryComp(weaponClone, out ContainerManagerComponent? containerManager))
                 {
                     foreach (var container in containerManager.Containers.Values)
                     {
                         foreach (var contained in container.ContainedEntities)
                         {
-                            if (!cartridgeQuery.HasComp(contained))
+                            if (!_cartridgeQuery.HasComp(contained))
                                 EnsureComp<UnremoveableComponent>(contained);
                         }
                     }

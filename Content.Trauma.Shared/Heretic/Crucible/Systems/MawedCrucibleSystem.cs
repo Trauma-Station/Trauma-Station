@@ -15,7 +15,6 @@ using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Messages;
 using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 

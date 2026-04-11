@@ -2,7 +2,6 @@
 
 using Content.Shared.Body;
 using Content.Shared.EntityConditions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityConditions;
 

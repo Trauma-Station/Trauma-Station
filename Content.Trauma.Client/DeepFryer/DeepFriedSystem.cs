@@ -6,7 +6,6 @@ using Content.Shared.Hands;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.DeepFryer;
 

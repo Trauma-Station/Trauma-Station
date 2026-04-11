@@ -4,8 +4,6 @@ using Content.Lavaland.Shared.Aggression;
 using Content.Lavaland.Shared.Megafauna.Components;
 using Content.Lavaland.Shared.Megafauna.Selectors;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.Megafauna.Systems;

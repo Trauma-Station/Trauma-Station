@@ -1,8 +1,8 @@
 // <Trauma>
 using Content.Medical.Common.Targeting;
-using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._White.Xenomorphs.Infection;
+using Content.Trauma.Common.Body;
+using Content.Trauma.Common.Wizard;
+using Content.Trauma.Common.Xenomorphs;
 using Content.Shared.Body;
 using Robust.Shared.Utility;
 // </Trauma>
@@ -47,13 +47,15 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using NetCord.Rest;
 
 namespace Content.Server.Ghost
 {
     public sealed class GhostSystem : SharedGhostSystem
     {
         // <Trauma>
-        [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
+        [Dependency] private readonly CommonGhostVisibilitySystem _ghostVisibility = default!;
+        [Dependency] private readonly CommonXenomorphSystem _xeno = default!;
         // </Trauma>
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly IAdminLogManager _adminLog = default!;
@@ -87,7 +89,6 @@ namespace Content.Server.Ghost
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
-        private static readonly ProtoId<DamageTypePrototype> IonDamageType = "Ion"; // Trauma
 
         public override void Initialize()
         {
@@ -213,7 +214,7 @@ namespace Content.Server.Ghost
             var visibility = EnsureComp<VisibilityComponent>(uid);
 
             if (_gameTicker.RunLevel != GameRunLevel.PostRound
-                && !_ghostVisibility.IsVisible(component)) // Goob
+                && !_ghostVisibility.IsVisible(uid)) // Goob
             {
                 _visibilitySystem.AddLayer((uid, visibility), (int) VisibilityFlags.Ghost, false);
                 _visibilitySystem.RemoveLayer((uid, visibility), (int) VisibilityFlags.Normal, false);
@@ -598,7 +599,7 @@ namespace Content.Server.Ghost
                     canReturn = true;
 
                     // <Goob> - added this check
-                    if (!HasComp<XenomorphPreventSuicideComponent>(playerEntity.Value))
+                    if (!_xeno.IsSlimed(playerEntity.Value))
                     {
                         FixedPoint2 dealtDamage = 200;
 
@@ -611,11 +612,9 @@ namespace Content.Server.Ghost
                         }
 
                         // <Trauma>
-                        // TODO SHITMED: make this an event jesus christ
-                        var damageType = HasComp<SiliconComponent>(playerEntity)
-                            ? IonDamageType
-                            : AsphyxiationDamageType;
-                        DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(damageType), dealtDamage);
+                        var ev = new SuicideDamageEvent(AsphyxiationDamageType);
+                        RaiseLocalEvent(playerEntity.Value, ref ev);
+                        DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(ev.DamageType), dealtDamage);
 
                         TargetBodyPart? targetPart = HasComp<BodyComponent>(playerEntity) ? TargetBodyPart.Chest : null;
                         _damageable.ChangeDamage(playerEntity.Value, damage, true, targetPart: targetPart);

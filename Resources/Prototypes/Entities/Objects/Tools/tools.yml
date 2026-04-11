@@ -1,6 +1,6 @@
 - type: entity
   name: wirecutter
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
   id: Wirecutter
   description: This kills the wire.
   components:
@@ -77,8 +77,9 @@
 
 - type: entity
   name: screwdriver
+  abstract: true # Trauma
   parent: BaseItem
-  id: Screwdriver
+  id: BaseScrewdriver # Trauma - moved random sprite and stuff to Screwdriver, this is base
   description: Industrial grade torque in a small screwdriving package.
   components:
   # <Trauma>
@@ -153,19 +154,21 @@
       - Screwing
     useSound:
       collection: Screwdriver
-  - type: RandomSprite
-    available:
-      - enum.DamageStateVisualLayers.Base:
-          screwdriver: Rainbow
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 100
+  # <Trauma> - moved to Screwdriver proper
+  #- type: RandomSprite
+  #  available:
+  #    - enum.DamageStateVisualLayers.Base:
+  #        screwdriver: Rainbow
+  #- type: PhysicalComposition
+  #  materialComposition:
+  #    Steel: 100
+  # </Trauma>
   - type: StaticPrice
     price: 30
 
 - type: entity
   name: wrench
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
   id: Wrench
   description: 'A common tool for assembly and disassembly. Remember: lefty latchy, righty removey.'
   components:
@@ -359,7 +362,7 @@
 #Later on these should switch probably switch damage when changing the tool behavior.
 - type: entity
   name: power drill
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
   id: PowerDrill
   description: A simple powered hand drill.
   components:
