@@ -11,3 +11,80 @@
       params:
         loop: true
         volume: -20 # much quieter
+
+- type: entity
+  parent: WeatherFallout
+  id: WeatherRadiationStorm
+  components:
+  - type: WeatherDamage
+    damage:
+      types:
+        Radiation: 2
+    safeIndoors: false # entire station is indoors...
+    safeAreas:
+    - AreaAiUpload
+    # TODO: make AI access area and replace the not really AI sat places with that, then add AreaAi here
+    - AreaMaints
+    - AreaRadstorm
+    - AreaPrisonShower # not quite toilet
+
+# Schedulers
+
+- type: entity
+  abstract: true
+  parent: StatusEffectBase
+  id: BaseWeatherScheduler
+  components:
+  - type: WeatherScheduler
+  - type: StatusEffect
+    whitelist:
+      components:
+      - Map
+
+- type: entity
+  parent: BaseWeatherScheduler
+  id: WeatherSchedulerAshStorm
+  components:
+  - type: WeatherScheduler
+    stages:
+    - duration: # 10-15 minutes of calm
+        min: 600
+        max: 900
+    - weather: WeatherAshfallLight
+      message: ash-storm-telegraph
+      duration:
+        min: 90
+        max: 120
+    - weather: WeatherAshfall
+      message: ash-storm-alert
+      duration:
+        min: 120
+        max: 180
+    - weather: WeatherAshfallLight
+      message: ash-storm-clearing
+      duration:
+        min: 30
+        max: 30
+
+- type: entity
+  parent: BaseWeatherScheduler
+  id: WeatherSchedulerRadiationStorm
+  components:
+  - type: WeatherScheduler
+    temporary: true # it's a station event and has no rest period
+    stages:
+    - weather: WeatherFallout
+      message: radiation-storm-telegraph
+      duration:
+        min: 40
+        max: 40
+    - weather: WeatherRadiationStorm
+      message: radiation-storm-alert
+      duration: # 1-2.5 mins
+        min: 60
+        max: 150
+    - weather: WeatherFallout
+      message: radiation-storm-clearing
+      duration:
+        min: 10
+        max: 10

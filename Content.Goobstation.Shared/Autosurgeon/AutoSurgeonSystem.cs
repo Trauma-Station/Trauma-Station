@@ -9,9 +9,6 @@ using Content.Shared.Examine;
 using Content.Shared.Forensics;
 using Content.Shared.Item.ItemToggle.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Autosurgeon;
 

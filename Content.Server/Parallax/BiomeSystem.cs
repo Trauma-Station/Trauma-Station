@@ -897,14 +897,6 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 
         foreach (var chunk in component.LoadedChunks)
         {
-            // <Lavaland> - optimistation real
-            var attemptEv = new ChunkUnloadAttemptEvent(chunk);
-            RaiseLocalEvent(gridUid, ref attemptEv);
-
-            if (attemptEv.Cancelled)
-                continue;
-            // </Lavaland>
-
             if (active.Contains(chunk) || !component.LoadedChunks.Remove(chunk))
                 continue;
 

@@ -1,11 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Numerics;
 using Content.Goobstation.Common.Hands;
-using Content.Trauma.Common.MartialArts;
-using Content.Shared._EinsteinEngines.Contests;
-using Content.Shared._White.Grab;
 using Content.Shared.CombatMode;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Cuffs;
-using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -18,18 +17,18 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Speech;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Contests;
+using Content.Trauma.Common.Grab;
+using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics.Joints;
 using Robust.Shared.Player;
-using Robust.Shared.Random;
-using System.Numerics;
 
 namespace Content.Shared.Movement.Pulling.Systems;
 
@@ -38,8 +37,8 @@ namespace Content.Shared.Movement.Pulling.Systems;
 /// </summary>
 public sealed partial class PullingSystem
 {
-    [Dependency] private readonly ContestsSystem _contests = default!;
-    [Dependency] private readonly GrabThrownSystem _grabThrown = default!;
+    [Dependency] private readonly CommonContestsSystem _contests = default!;
+    [Dependency] private readonly CommonGrabThrownSystem _grabThrown = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
@@ -73,21 +72,22 @@ public sealed partial class PullingSystem
         TryStopPull(args.BlockingEntity, comp, uid, true);
 
         if (!_combatMode.IsInCombatMode(uid)
-            || HasComp<GrabThrownComponent>(args.BlockingEntity)
+            || _grabThrown.IsGrabThrown(args.BlockingEntity)
             || stage <= GrabStage.Soft)
             return;
 
         var distanceToCursor = args.Direction.Length();
         var direction = args.Direction.Normalized() * MathF.Min(distanceToCursor, component.ThrowingDistance);
 
-        var damage = new DamageSpecifier();
-        damage.DamageDict.Add("Blunt", 5);
-
+        // <Trauma>
+        var damageToUid = new DamageSpecifier();
+        damageToUid.DamageDict.Add("Blunt", 5);
+        // </Trauma>
         _grabThrown.Throw(args.BlockingEntity,
             uid,
             direction,
             component.GrabThrownSpeed,
-            damage * component.GrabThrowDamageModifier); // Throwing the grabbed person
+            damageToUid * component.GrabThrowDamageModifier); // Throwing the grabbed person
         _throwing.TryThrow(uid, -direction * throwerPhysics.InvMass); // Throws back the grabber
         _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"), uid, uid);
         component.NextStageChange = _timing.CurTime.Add(TimeSpan.FromSeconds(3f)); // To avoid grab and throw spamming

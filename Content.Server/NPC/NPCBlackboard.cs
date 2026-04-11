@@ -1,19 +1,3 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Hands.Systems;
@@ -53,8 +37,6 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
         {"RotateSpeed", float.MaxValue},
         {"VisionRadius", 10f},
         {"AggroVisionRadius", 10f},
-        {SecuritronArrestRange, 12f}, // Trauma
-        {SecuritronPatrolRange, 96f}, // Trauma
     };
 
     /// <summary>
@@ -328,8 +310,6 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
     public const string WeldbotWeldRange = "WeldbotWeldRange"; // Einstein Engines
     public const string FillbotPickupRange = "FillbotPickupRange"; // Einstein Engines
     public const string PlantbotServiceRange = "PlantbotServiceRange"; // Einstein Engines
-    public const string SecuritronArrestRange = "SecuritronArrestRange"; // Trauma
-    public const string SecuritronPatrolRange = "SecuritronPatrolRange"; // Trauma
 
     public const string MeleeMissChance = "MeleeMissChance";
 

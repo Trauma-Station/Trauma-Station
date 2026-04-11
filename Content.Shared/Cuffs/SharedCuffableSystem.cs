@@ -1,7 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard.Mutate;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Systems;
+using Content.Trauma.Common.Cuffs;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -47,7 +45,6 @@ namespace Content.Shared.Cuffs
     // TODO remove all the IsServer() checks.
     public abstract partial class SharedCuffableSystem : EntitySystem
     {
-        [Dependency] private readonly SharedHulkSystem _hulk = default!; // Goob
         [Dependency] private readonly INetManager _net = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
         [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
@@ -652,12 +649,12 @@ namespace Content.Shared.Cuffs
                     return;
                 }
 
-                if (TryComp(user, out HulkComponent? hulk)) // Goobstation
-                {
-                    _hulk.Roar((user, hulk));
-                    Uncuff(target, user, cuff); // user is checked to be target earlier
+                // <Trauma>
+                var attemptEv = new InstantUncuffEvent(target, cuff);
+                RaiseLocalEvent(user, ref attemptEv);
+                if (attemptEv.CuffsBroken)
                     return;
-                }
+                // </Trauma>
             }
 
             var doAfterEventArgs = new DoAfterArgs(EntityManager, user, uncuffTime, new UnCuffDoAfterEvent(), target, target, cuff)

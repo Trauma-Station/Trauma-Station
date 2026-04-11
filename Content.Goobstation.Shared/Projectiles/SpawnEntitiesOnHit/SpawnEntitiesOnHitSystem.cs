@@ -2,7 +2,6 @@
 
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Goobstation.Shared.Projectiles.SpawnEntitiesOnHit;

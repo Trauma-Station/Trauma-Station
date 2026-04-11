@@ -5,6 +5,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Entry;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
@@ -12,12 +13,12 @@ using Robust.Shared.ContentPack;
 namespace Content.IntegrationTests.Tests;
 
 [TestFixture]
-public sealed class ConfigPresetTests
+public sealed class ConfigPresetTests : GameTest
 {
     [Test]
     public async Task TestLoadAll()
     {
-        var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var resources = server.ResolveDependency<IResourceManager>();
@@ -75,7 +76,5 @@ public sealed class ConfigPresetTests
                     Assert.Fail($"CVar {name} was not reset to its original value.");
             }
         });
-
-        await pair.CleanReturnAsync();
     }
 }

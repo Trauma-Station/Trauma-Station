@@ -6,7 +6,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Vehicles.Clowncar;
 

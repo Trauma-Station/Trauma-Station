@@ -11,7 +11,6 @@ using Robust.Shared.Utility;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Client.UserInterface.Systems.PartStatus.Widgets;

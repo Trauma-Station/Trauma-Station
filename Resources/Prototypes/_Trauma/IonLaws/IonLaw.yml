@@ -1,0 +1,39 @@
+- type: ionLaw
+  id: Maximise
+  lawString: ion-storm-maximise
+  selectorWeightAdjust:
+    IonStormObjects: 0.6
+    RandomManifestFill: 0.2
+    IonStormConcepts: 0.1
+    food: 0.1
+
+- type: ionLaw
+  id: MaximiseAll
+  lawString: ion-storm-maximise-all
+  selectorWeightAdjust:
+    IonStormObjects: 0.6
+    RandomManifestFill: 0.2
+    IonStormConcepts: 0.1
+    food: 0.1
+
+- type: ionLaw
+  id: Minimise
+  lawString: ion-storm-minimise
+  selectorWeightAdjust:
+    IonStormObjects: 0.6
+    RandomManifestFill: 0.2
+    IonStormConcepts: 0.1
+    food: 0.1
+
+- type: ionLaw
+  id: MinimiseAll
+  lawString: ion-storm-minimise-all
+  selectorWeightAdjust:
+    IonStormObjects: 0.6
+    RandomManifestFill: 0.2
+    IonStormConcepts: 0.1
+    food: 0.1
+
+- type: ionLaw
+  id: RemakePlace
+  lawString: ion-storm-remake

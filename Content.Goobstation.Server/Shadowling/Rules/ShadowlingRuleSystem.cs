@@ -15,7 +15,6 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Shadowling.Rules;
 

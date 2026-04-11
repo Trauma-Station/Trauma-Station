@@ -61,7 +61,7 @@
 - type: influence
   id: InfluenceConversion
   name: influence-name-conversion
-  cost: 20
+  cost: 15
   description: influence-description-conversion
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseKnife, BaseSalvageContraband ]
+  parent: [ BaseKnife, BaseSalvageContraband, KnifeDurabilityStrong ]
   id: WeaponCrusherDagger
   name: kinetic dagger
   description: A scaled down version of a proto-kinetic crusher. Uses kinetic energy to vibrate the blade at high speeds.

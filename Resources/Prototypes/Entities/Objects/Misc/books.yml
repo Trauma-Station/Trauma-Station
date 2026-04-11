@@ -1,6 +1,6 @@
 - type: entity
   name: book
-  parent: BaseItem
+  parent: [BaseItem, BookDurability] # Trauma - Durability
   id: BookBase
   description: A hardcover book.
   components:
@@ -85,7 +85,7 @@
     transmuteTo: BookCosmicCult
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, BookDurability] # Trauma - Durability
   id: BaseGuidebook
   abstract: true
   suffix: guidebook

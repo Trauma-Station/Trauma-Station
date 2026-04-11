@@ -3,9 +3,6 @@
 using Content.Medical.Common.Wounds;
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage.Prototypes;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Wounds;
 
@@ -73,7 +70,7 @@ public sealed partial class WoundComponent : Component
     public WoundVisibility WoundVisibility = WoundVisibility.Always;
 
     /// <summary>
-    /// "Can be healed".
+    /// "Can be healed". Tend wounds surgery bypasses that
     /// </summary>
     [DataField]
     public bool CanBeHealed = true;
@@ -88,7 +85,13 @@ public sealed partial class WoundComponent : Component
     /// String of text used for displaying things about the wound in popups and self inspects.
     /// </summary>
     [DataField]
-    public string TextString = "wound";
+    public string? TextString;
+
+    /// <summary>
+    /// "Always show in inspects"
+    /// </summary>
+    [DataField]
+    public bool AlwaysShowInInspects;
 
     /// <summary>
     /// Multiplier for self-healing.

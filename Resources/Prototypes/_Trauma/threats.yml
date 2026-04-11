@@ -1,0 +1,34 @@
+- type: ninjaHackingThreat
+  id: Colossus
+  announcement: terror-colossus
+  rule: ColossusSpawn
+
+- type: ninjaHackingThreat
+  id: Xenomorphs
+  announcement: terror-xenomorphs
+  rule: XenomorphsInfestation
+
+- type: ninjaHackingThreat
+  id: SleeperAgents
+  announcement: station-event-communication-interception # replaces the event announcement
+  rule: SleeperAgentsQuiet
+
+- type: ninjaHackingThreat
+  id: Bingle
+  announcement: terror-bingle
+  rule: BingleSpawn
+
+- type: ninjaHackingThreat
+  id: Shadowling
+  announcement: terror-shadows
+  rule: ShadowlingMidround
+
+- type: ninjaHackingThreat
+  id: MinorAntags
+  announcement: terror-minor-antags
+  rule: MidroundMinorAntagsRule
+
+- type: ninjaHackingThreat
+  id: WailingHorse
+  announcement: terror-shadows
+  rule: WailingHorseQuiet

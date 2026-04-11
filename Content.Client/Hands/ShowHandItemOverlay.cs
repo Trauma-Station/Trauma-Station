@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Weapons.AmmoSelector;
+using Content.Trauma.Common.Weapons.AmmoSelector;
 using Content.Trauma.Common.MartialArts;
 // </Trauma>
 using System.Numerics;
@@ -96,7 +96,7 @@ namespace Content.Client.Hands
             var handEntity = _hands.GetActiveHandEntity();
 
             // Goob edit start
-            if (_player.LocalEntity is {} player)
+            if (_player.LocalEntity is { } player)
             {
                 var comboEv = new GetPerformedAttackTypesEvent(null);
                 _entMan.EventBus.RaiseLocalEvent(player, ref comboEv);

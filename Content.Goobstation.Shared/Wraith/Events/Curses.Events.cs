@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Wraith.Curses;
 using Content.Shared.Actions;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Events;
 
@@ -48,7 +47,7 @@ public sealed partial class ApplyCurseActionEvent : EntityTargetActionEvent
 /// </summary>
 /// <param name="Target"></param> The target trying to apply the curse to
 [ByRefEvent]
-public record struct AttemptCurseEvent(EntityUid Curser, bool Cancelled = false);
+public record struct AttemptCurseEvent(EntityUid Entity, EntityUid Curser, bool Cancelled = false);
 
 /// <summary>
 /// Raised to the target once a curse is applied to them

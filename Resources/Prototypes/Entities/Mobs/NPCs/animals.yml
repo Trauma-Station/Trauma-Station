@@ -352,7 +352,6 @@
   parent: FoodEgg
   suffix: Fertilized, Chicken
   components:
-  - type: Timer
   - type: TimedSpawner
     prototypes:
     - MobChicken
@@ -525,9 +524,9 @@
     allowMovement: true
     name: ghost-role-information-mothroach-name
     description: ghost-role-information-mothroach-description
-    rules: ghost-role-information-freeagent-rules
+    rules: ghost-role-information-animal-rules # Trauma
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleAnimal # Trauma
   - type: Fixtures
     fixtures:
       fix1:
@@ -820,7 +819,6 @@
   parent: FoodEgg
   suffix: Fertilized, Duck
   components:
-    - type: Timer
     - type: TimedSpawner
       prototypes:
       - MobDuckMallard
@@ -1572,9 +1570,9 @@
     makeSentient: true
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
-    rules: ghost-role-information-freeagent-rules # Goobstation - remove: 1984
+    rules: ghost-role-information-animal-rules # Goobstation - remove: 1984
     mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    - MindRoleGhostRoleAnimal # Trauma
   - type: GhostTakeoverAvailable
   - type: Clumsy
     gunShootFailDamage:
@@ -1732,9 +1730,9 @@
     name: ghost-role-information-kobold-name
     description: ghost-role-information-kobold-description
     # <Trauma> Parity with Monkeys being free agents.
-    rules: ghost-role-information-freeagent-rules
+    rules: ghost-role-information-animal-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    - MindRoleGhostRoleAnimal
     # </Trauma>
 
 - type: entity
@@ -1813,9 +1811,9 @@
     allowMovement: true
     name: ghost-role-information-mouse-name
     description: ghost-role-information-mouse-description
-    rules: ghost-role-information-freeagent-rules
+    rules: ghost-role-information-animal-rules # Trauma
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleAnimal # Trauma
   - type: GhostTakeoverAvailable
   - type: Speech
     speechSounds: Squeak

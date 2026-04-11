@@ -1,0 +1,492 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Clothing.Components;
+using Content.Medical.Common.Body;
+using Content.Server.Mind;
+using Content.Server.Popups;
+using Content.Server.Stunnable;
+using Content.Shared._White.Xenomorphs.FaceHugger;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Body;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Clothing.Components;
+using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
+using Content.Shared.Hands;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Whitelist;
+using Content.Trauma.Server.Xenomorphs.Infection;
+using Content.Trauma.Shared.Xenomorphs.FaceHugger;
+using Content.Trauma.Shared.Xenomorphs.Infection;
+using Robust.Server.Audio;
+using Robust.Server.Containers;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Player;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+
+namespace Content.Trauma.Server.Xenomorphs.FaceHugger;
+
+public sealed class FaceHuggerSystem : EntitySystem
+{
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!; // Goobstation
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!; // Goobstation
+    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly CommonBodyPartSystem _part = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
+
+    private HashSet<Entity<InventoryComponent>> _targets = new();
+    private TimeSpan _nextUpdate;
+    private static readonly TimeSpan _updateDelay = TimeSpan.FromSeconds(0.25);
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<FaceHuggerComponent, StartCollideEvent>(OnCollideEvent);
+        SubscribeLocalEvent<FaceHuggerComponent, MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<FaceHuggerComponent, GotEquippedHandEvent>(OnPickedUp);
+        SubscribeLocalEvent<FaceHuggerComponent, StepTriggeredOffEvent>(OnStepTriggered);
+        SubscribeLocalEvent<FaceHuggerComponent, GotEquippedEvent>(OnGotEquipped);
+        SubscribeLocalEvent<FaceHuggerComponent, BeingUnequippedAttemptEvent>(OnBeingUnequippedAttempt);
+
+        // Goobstation - Throwing behavior
+        SubscribeLocalEvent<ThrowableFacehuggerComponent, ThrownEvent>(OnThrown);
+        SubscribeLocalEvent<ThrowableFacehuggerComponent, ThrowDoHitEvent>(OnThrowDoHit);
+        SubscribeLocalEvent<FaceHuggerLeapComponent, ThrowDoHitEvent>(OnLeapHit);
+    }
+
+    /// <summary>
+    /// Checks if a facehugger is sentient.
+    /// </summary>
+    private bool IsSentient(EntityUid uid)
+    {
+        if (TryComp<MindContainerComponent>(uid, out var mindContainer)
+            && mindContainer.HasMind)
+            return true;
+
+        return false;
+    }
+
+    private void OnCollideEvent(EntityUid uid, FaceHuggerComponent component, StartCollideEvent args)
+    {
+        if (IsSentient(uid))
+            return;
+
+        TryEquipFaceHugger(uid, args.OtherEntity, component);
+    }
+
+
+    private void OnMeleeHit(EntityUid uid, FaceHuggerComponent component, MeleeHitEvent args)
+    {
+        if (args.HitEntities.FirstOrNull() is not { } target)
+            return;
+
+        TryEquipFaceHugger(uid, target, component);
+    }
+
+    private void OnPickedUp(EntityUid uid, FaceHuggerComponent component, GotEquippedHandEvent args)
+    {
+        if (IsSentient(uid))
+            return;
+
+        TryEquipFaceHugger(uid, args.User, component);
+    }
+
+    private void OnStepTriggered(EntityUid uid, FaceHuggerComponent component, ref StepTriggeredOffEvent args)
+    {
+        if (IsSentient(uid))
+            return;
+
+        if (component.Active)
+            TryEquipFaceHugger(uid, args.Tripper, component);
+    }
+
+    private void OnGotEquipped(EntityUid uid, FaceHuggerComponent component, GotEquippedEvent args)
+    {
+        if (args.Slot != component.Slot
+            || _mobState.IsDead(uid)
+            || _entityWhitelist.IsWhitelistPass(component.Blacklist, args.Equipee))
+            return;
+        _popup.PopupEntity(Loc.GetString("xenomorphs-face-hugger-equip", ("equipment", uid)), uid, args.Equipee);
+        _popup.PopupEntity(
+            Loc.GetString("xenomorphs-face-hugger-equip-other",
+                ("equipment", uid),
+                ("target", Identity.Entity(args.Equipee, EntityManager))),
+            uid,
+            Filter.PvsExcept(args.Equipee),
+            true);
+
+        _stun.TryKnockdown(args.Equipee, component.KnockdownTime, true);
+
+        if (component.InfectionPrototype.HasValue)
+            EnsureComp<XenomorphPreventSuicideComponent>(args.Equipee); //Prevent suicide for infected
+
+        if (!component.InfectionPrototype.HasValue)
+            return;
+
+        component.InfectIn = _timing.CurTime + _random.Next(component.MinInfectTime, component.MaxInfectTime);
+    }
+
+    private void OnBeingUnequippedAttempt(EntityUid uid,
+        FaceHuggerComponent component,
+        BeingUnequippedAttemptEvent args)
+    {
+        if (component.Slot != args.Slot || args.Unequipee != args.UnEquipTarget ||
+            component.InfectionPrototype == null || _mobState.IsDead(uid))
+            return;
+
+        _popup.PopupEntity(
+            Loc.GetString("xenomorphs-face-hugger-unequip", ("equipment", Identity.Entity(uid, EntityManager))),
+            uid,
+            args.Unequipee);
+        args.Cancel();
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var time = _timing.CurTime;
+        if (time < _nextUpdate)
+            return;
+
+        _nextUpdate = time + _updateDelay;
+
+        var query = EntityQueryEnumerator<FaceHuggerComponent>();
+        while (query.MoveNext(out var uid, out var faceHugger))
+        {
+            if (!faceHugger.Active && time > faceHugger.RestIn)
+                faceHugger.Active = true;
+
+            if (faceHugger.InfectIn != TimeSpan.Zero && time > faceHugger.InfectIn)
+            {
+                faceHugger.InfectIn = TimeSpan.Zero;
+                Infect(uid, faceHugger);
+            }
+
+            // Handle continuous chemical injection when equipped
+            if (TryComp<ClothingComponent>(uid, out var clothing) && clothing.InSlot != null && !_mobState.IsDead(uid))
+            {
+                // Initialize NextInjectionTime if it's zero
+                if (faceHugger.NextInjectionTime == TimeSpan.Zero)
+                {
+                    faceHugger.NextInjectionTime = time + faceHugger.InitialInjectionDelay;
+                    continue;
+                }
+
+                if (time >= faceHugger.NextInjectionTime)
+                {
+                    // Get the entity that has this item equipped
+                    if (_container.TryGetContainingContainer(uid, out var container) && container.Owner != uid)
+                    {
+                        InjectChemicals(uid, faceHugger, container.Owner);
+                        // Set the next injection time based on the current time plus interval
+                        faceHugger.NextInjectionTime = time + faceHugger.InjectionInterval;
+                    }
+                }
+            }
+
+            // don't try to jump at anyone in a bag locker etc
+            if (_container.IsEntityInContainer(uid))
+                continue;
+
+            if (faceHugger.Active && clothing?.InSlot == null
+                && !IsSentient(uid))
+            {
+                _targets.Clear();
+                _lookup.GetEntitiesInRange<InventoryComponent>(Transform(uid).Coordinates, 1.5f, _targets);
+                foreach (var entity in _targets)
+                {
+                    if (TryEquipFaceHugger(uid, entity, faceHugger))
+                        break;
+                }
+            }
+        }
+    }
+
+    private void Infect(EntityUid uid, FaceHuggerComponent component)
+    {
+        if (component.InfectionPrototype is not { } proto
+            || !TryComp<ClothingComponent>(uid, out var clothing)
+            || clothing.InSlot != component.Slot
+            || !_container.TryGetContainingContainer((uid, null, null), out var target)
+            || _body.GetOrgan(target.Owner, component.InfectionTarget) is not { } targetOrgan)
+            return;
+
+        var organ = Spawn(proto);
+        if (_body.GetCategory(organ) is not { } category)
+        {
+            Log.Error($"Invalid xeno larva {ToPrettyString(organ)} had no organ category!");
+            Del(organ);
+            return;
+        }
+
+        if (_body.GetOrgan(target.Owner, category) != null)
+        {
+            // already infected
+            Del(organ);
+            return;
+        }
+
+        _part.TryAddSlot(targetOrgan, category); // ensure it can be inserted
+        if (!_body.InsertOrgan(target.Owner, organ))
+        {
+            Del(organ);
+            return;
+        }
+
+        if (_mind.TryGetMind(uid, out var mindId, out var mindComp)
+            && TryComp<XenomorphInfectionComponent>(organ, out var xenoInfection))
+        {
+            xenoInfection.SourceMindId = mindId;
+            _mind.TransferTo(mindId, organ, mind: mindComp);
+        }
+
+
+        _damageable.TryChangeDamage(uid, component.DamageOnInfect, true);
+    }
+
+    public bool TryEquipFaceHugger(EntityUid uid, EntityUid target, FaceHuggerComponent component)
+    {
+        if (!component.Active || _mobState.IsDead(uid) || _mobState.IsDead(target) || _entityWhitelist.IsWhitelistPass(component.Blacklist, target))
+            return false;
+
+        // Check for any blocking masks or equipment
+        if (CheckAndHandleMaskOrHemet(target, out var blocker))
+        {
+            // If blocked by a breathable mask, deal damage and schedule a retry
+            if (blocker.HasValue && TryComp<BreathToolComponent>(blocker, out _))
+            {
+                // Deal damage to the target
+                _damageable.TryChangeDamage(target, component.MaskBlockDamage);
+
+                // Play the mask block sound
+                _audio.PlayPvs(component.MaskBlockSound, uid);
+
+                // Show popup messages
+                _popup.PopupEntity(
+                    Loc.GetString("xenomorphs-face-hugger-mask-blocked",
+                        ("mask", blocker.Value),
+                        ("facehugger", uid)),
+                    target, target);
+
+                _popup.PopupEntity(
+                    Loc.GetString("xenomorphs-face-hugger-mask-blocked-other",
+                        ("facehugger", uid),
+                        ("target", target),
+                        ("mask", blocker.Value)),
+                    target, Filter.PvsExcept(target), true);
+
+                // Schedule a retry after the delay
+                component.RestIn = _timing.CurTime + component.AttachAttemptDelay;
+                component.Active = false;
+
+                // Drop the facehugger near you
+                _transform.SetCoordinates(uid, Transform(target).Coordinates.Offset(_random.NextVector2(0.5f)));
+
+                return false;
+            }
+
+            // Original behavior for other blockers
+            _audio.PlayPvs(component.SoundOnImpact, uid);
+            _damageable.TryChangeDamage(uid, component.DamageOnImpact);
+            _popup.PopupEntity(
+                Loc.GetString("xenomorphs-face-hugger-try-equip",
+                    ("equipment", uid),
+                    ("equipmentBlocker", blocker!.Value)),
+                uid);
+
+            _popup.PopupEntity(
+                Loc.GetString("xenomorphs-face-hugger-try-equip-other",
+                    ("equipment", uid),
+                    ("equipmentBlocker", blocker.Value),
+                    ("target", Identity.Entity(target, EntityManager))),
+                uid, Filter.PvsExcept(target), true);
+
+            return false;
+        }
+
+        // Set the rest time and deactivate
+        var restTime = _random.Next(component.MinRestTime, component.MaxRestTime);
+        component.RestIn = _timing.CurTime + restTime;
+        component.Active = false;
+
+        // Try to equip the facehugger
+        return _inventory.TryEquip(target, uid, component.Slot, true, true);
+    } // Gooobstation end
+
+    #region Injection Code
+    /// <summary>
+    /// Checks if the facehugger can inject chemicals into the target
+    /// Goobstation
+    /// </summary>
+    public bool CanInject(EntityUid uid, FaceHuggerComponent component, EntityUid target)
+    {
+        // injection disabled
+        if (component.SleepChem is not { } reagent)
+            return false;
+
+        // Check if facehugger is properly equipped
+        if (!TryComp<ClothingComponent>(uid, out var clothingComp) || clothingComp.InSlot == null)
+            return component.Active;
+
+        // Check if target already has the sleep chemical
+        if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
+            _solutions.ResolveSolution(target, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution) &&
+            bloodSolution.TryGetReagentQuantity(new ReagentId(reagent, null), out var quantity) &&
+            quantity > FixedPoint2.New(component.MinChemicalThreshold))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Creates a solution with the sleep chemical
+    /// </summary>
+    public Solution CreateSleepChemicalSolution(FaceHuggerComponent component, float amount)
+    {
+        var solution = new Solution();
+        if (component.SleepChem is { } reagent)
+            solution.AddReagent(reagent, amount);
+        return solution;
+    }
+
+    /// <summary>
+    /// Main method to handle chemical injection
+    /// </summary>
+    public void InjectChemicals(EntityUid uid, FaceHuggerComponent component, EntityUid target)
+    {
+        if (!CanInject(uid, component, target))
+            return;
+
+        var solution = CreateSleepChemicalSolution(component, component.SleepChemAmount);
+        _bloodstream.TryAddToBloodstream(target, solution);
+    }
+    #endregion
+
+    #region Handle Face Masks
+    /// <summary>
+    /// Checks if the target has a breathable mask or any other blocking equipment.
+    /// Returns true if there's a blocker, false otherwise.
+    /// Goobstation
+    /// </summary>
+    private bool CheckAndHandleMaskOrHemet(EntityUid target, out EntityUid? blocker)
+    {
+        blocker = null;
+        if (_inventory.TryGetSlotEntity(target, "head", out var headUid))
+        {
+            // If the headgear has an ingestion blocker component, it's a blocker
+            var sealable = new SealableClothingComponent();
+            if ((HasComp<FaceHuggerBlockerComponent>(headUid) && !TryComp<SealableClothingComponent>(headUid, out sealable)) || (HasComp<FaceHuggerBlockerComponent>(headUid) && sealable.IsSealed))
+            {
+                blocker = headUid;
+                return true;
+            }
+            // If it's just regular headgear, remove it
+            _inventory.TryUnequip(target, "head", true);
+        }
+        // Check for breathable mask
+        if (_inventory.TryGetSlotEntity(target, "mask", out var maskUid))
+        {
+            // If the mask is a breath tool (gas mask) and is functional, block the facehugger
+            if (TryComp<IngestionBlockerComponent>(maskUid, out var ingestionBlocker) && ingestionBlocker.BlockSmokeIngestion)
+            {
+                blocker = maskUid;
+                return true;
+            }
+            // If it's just a regular mask, remove it
+            _inventory.TryUnequip(target, "mask", true);
+        }
+
+        return false;
+    }
+    #endregion
+
+    #region Throwing Behavior
+
+    /// <summary>
+    /// Handles the start of a facehugger throw.
+    /// Marks the facehugger as being in flight to track its state.
+    /// Goobstation
+    /// </summary>
+    private void OnThrown(EntityUid uid, ThrowableFacehuggerComponent component, ThrownEvent args)
+    {
+        // Mark the facehugger as flying to track its airborne state
+        component.IsFlying = true;
+
+        // Make sure the facehugger is active when thrown
+        if (TryComp<FaceHuggerComponent>(uid, out var faceHugger))
+            faceHugger.Active = true;
+    }
+
+    /// <summary>
+    /// Handles the facehugger's collision with a target after being thrown.
+    /// Attempts to attach to a valid target if conditions are met.
+    /// </summary>
+    private void OnThrowDoHit(EntityUid uid, ThrowableFacehuggerComponent component, ThrowDoHitEvent args)
+    {
+        // Only process if the facehugger was actually thrown (not just dropped)
+        if (!component.IsFlying)
+            return;
+
+        // Reset flying state as the throw has completed
+        component.IsFlying = false;
+        var target = args.Target;
+
+        // Only proceed if the target is a valid living entity
+        if (!HasComp<MobStateComponent>(target))
+            return;
+
+        // If this is a valid facehugger entity
+        if (TryComp<FaceHuggerComponent>(uid, out var faceHugger))
+            // Make sure the facehugger is active before trying to attach
+            faceHugger.Active = true;
+    }
+
+    #endregion
+
+    #region Leap Action
+
+    private void OnLeapHit(Entity<FaceHuggerLeapComponent> ent, ref ThrowDoHitEvent args)
+    {
+        if (!ent.Comp.IsLeaping)
+            return;
+
+        ent.Comp.IsLeaping = false;
+
+        if (!HasComp<MobStateComponent>(args.Target))
+            return;
+
+        if (TryComp<FaceHuggerComponent>(ent.Owner, out var faceHugger))
+            TryEquipFaceHugger(ent.Owner, args.Target, faceHugger);
+    }
+    #endregion
+}

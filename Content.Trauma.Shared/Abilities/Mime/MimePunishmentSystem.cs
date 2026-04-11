@@ -3,7 +3,6 @@
 using Content.Shared.Abilities.Mime;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Common.Abilities.Mime;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Abilities.Mime;
 

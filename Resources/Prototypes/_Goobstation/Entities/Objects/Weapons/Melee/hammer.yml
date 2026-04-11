@@ -10,7 +10,7 @@
 
 - type: entity
   name: hammer
-  parent: BaseItem
+  parent: [BaseItem, ForgeToolDurability]
   id: MeleeHammer
   description: 3 steel 2 wood
   components:
@@ -23,13 +23,15 @@
     attackRate: 1
     damage:
       types:
-        Blunt: 12
+        Blunt: 10
     heavyStaminaCost: 6
     soundHit:
-      collection: MetalThud
+      path: /Audio/_Trauma/Weapons/Melee/forging/tink.ogg
   - type: Item
     size: Small
     sprite: _Goobstation/Objects/Weapons/Melee/hammer.rsi
+    storedOffset: 1,-1
+    storedRotation: -45
   - type: Tag
     tags:
     - Hammer

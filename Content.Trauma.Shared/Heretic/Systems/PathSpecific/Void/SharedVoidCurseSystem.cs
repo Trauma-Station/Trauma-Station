@@ -1,0 +1,91 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Common.Temperature;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Temperature.Components;
+using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
+
+namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
+
+public abstract class SharedVoidCurseSystem : EntitySystem
+{
+    [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<VoidCurseComponent, TemperatureChangeAttemptEvent>(OnTemperatureChangeAttempt);
+        SubscribeLocalEvent<VoidCurseComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMoveSpeed);
+        SubscribeLocalEvent<VoidCurseComponent, ComponentRemove>(OnRemove);
+    }
+
+    private void OnRemove(Entity<VoidCurseComponent> ent, ref ComponentRemove args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        _modifier.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void OnTemperatureChangeAttempt(Entity<VoidCurseComponent> ent, ref TemperatureChangeAttemptEvent args)
+    {
+        if (!args.Cancelled && ent.Comp.Stacks >= ent.Comp.MaxStacks && args.CurrentTemperature > args.LastTemperature)
+            args.Cancelled = true;
+    }
+
+    private void OnRefreshMoveSpeed(Entity<VoidCurseComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        var modifier = 1f - ent.Comp.Stacks * 0.14f;
+        if (TryComp(ent, out TemperatureSpeedComponent? tempSpeed) &&
+            tempSpeed.CurrentSpeedModifier != null && tempSpeed.CurrentSpeedModifier != 0f)
+            modifier /= 1.2f * tempSpeed.CurrentSpeedModifier.Value;
+
+        modifier = Math.Clamp(modifier, 0f, 1f);
+
+        args.ModifySpeed(modifier, modifier, true);
+    }
+
+    protected void RefreshLifetime(VoidCurseComponent comp)
+    {
+        comp.Lifetime = comp.MaxLifetime + comp.LifetimeIncreasePerLevel * comp.Stacks;
+    }
+
+    public bool DoCurse(EntityUid uid, int stacks = 1, int max = 0)
+    {
+        if (stacks < 1)
+            return false;
+
+        if (!HasComp<MobStateComponent>(uid))
+            return false; // ignore non mobs because holy shit
+
+        if (_heretic.TryGetHereticComponent(uid, out var h, out _) && h.CurrentPath == HereticPath.Void ||
+            HasComp<GhoulComponent>(uid))
+            return false;
+
+        var ev = new BeforeCastTouchSpellEvent(uid, false);
+        RaiseLocalEvent(uid, ev, true);
+        if (ev.Cancelled)
+            return false;
+
+        var curse = EnsureComp<VoidCurseComponent>(uid);
+
+        if (max > 0 && curse.Stacks > max)
+            return false;
+
+        if (max > 0 && curse.Stacks + stacks > max)
+            stacks = Math.Max(0, max - (int) curse.Stacks);
+
+        curse.Stacks = Math.Clamp(curse.Stacks + stacks, 0, curse.MaxStacks);
+        RefreshLifetime(curse);
+        Dirty(uid, curse);
+
+        _modifier.RefreshMovementSpeedModifiers(uid);
+        return true;
+    }
+}

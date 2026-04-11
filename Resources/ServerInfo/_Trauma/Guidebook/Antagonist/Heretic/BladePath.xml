@@ -1,0 +1,77 @@
+<Document>
+
+  # Path of Blade
+
+  Difficulty: [color=orange]Medium[/color]
+
+  The Path of Blade is as the name suggests.
+  You are highly competent at cutting your opponents to ribbons.
+  Pick this path if you want to fight, and you want to be the best at fighting.
+
+  ## Pros
+
+  - Capable of blocking incoming attacks, retaliating with a riposte.
+  - Rapidly deals damage through dual-wielded blades and channeled strikes.
+  - High defense against stuns and knockdowns.
+  - Highly lethal combatant in a direct combat with a single opponent.
+
+  ## Cons
+
+  - Requires a high degree of skill input.
+  - Without blades, the path loses most of its fighting power.
+  - Lacks mobility options.
+  - Lacks environmental protections.
+
+  ## Knowledge
+
+  <Table Columns="3">
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Knowledge Name</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Ingredients/Type</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Description</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">The Cutting Edge</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Two Knives</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a sundered blade.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Grasp of the Blade</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will stun targets that are lying down or facing away from you.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mark of the Blade</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the blade mark, creating flying blades that protect you from attacks when active, throw with an empty hand to use then as a ranged attack.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Dance of the Brand</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Being attacked while holding a heretic blade triggers a riposte, knocking down your attacker. Triggers once per 20 seconds.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Sacraments of Power</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Grants a spell that gives you total damage immunity and some damage reflect for 5 seconds, takes 1 second to start up. Cannot attack while active.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Stance of the Torn Champion</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You are now immune to delimbing, as well as resistant to bloodloss and slowdown. Grows stronger when under 50% health.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Empowered Blades</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You can attack with two blades at once, you can also use your grasp to empower blades.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Furious Steel</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons three flying blades to protect you.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Maelstrom of Silver</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Three headless corpses</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You gain a regenerating ring of blades. Your Furious Steel ability cooldown is halved. You deal more damage with your blades and have lifesteal on attacks. Knockdown and stun time is halved, you also become immune to disarms.</Box></ColorBox>
+  </Table>
+
+  ## Tips
+
+  - Your Mansus Grasp will stun your opponent if they are attacked from behind or while they are prone. Triggering the mark will grant you a orbiting knife that will protect you from one melee or ranged attack.
+  - You are highly reliant on approaching opponents in melee. Slips and bolas are your worst enemy. You can counteract slips by crafting a pair of Greaves Of The Prophet, or remove restraints Realignment.
+  - Sacraments of Power makes you immune to damage, harming people trying to attack you but you cannot use melee or ranged weapons while it's active. Use it as an escape or rush tool.
+  - With Empowered Blades, your offensive power grows considerably. You are able to fight with dual-wielded blades, and can empower them by activating your Mansus Grasp while wielding your blades. Left click attack with empowered blade on living target triggers grasp effect and applies blade mark. Your blades also deal additional damage to structures.
+  - Maintaining a good offense also creates a good defense. With orbiting blades, you are able to block additional incoming attacks. Remember that you can use throw key with empty hand to throw the orbiting blades, dealing heavy damage and destroying structures.
+
+</Document>

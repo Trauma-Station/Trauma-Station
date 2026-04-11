@@ -119,7 +119,7 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
         ApplyVisual(ent, body);
     }
 
-    protected override void SetOrganMarkings(Entity<VisualOrganMarkingsComponent> ent, Dictionary<HumanoidVisualLayers, List<Marking>> markings)
+    public override void SetOrganMarkings(Entity<VisualOrganMarkingsComponent> ent, Dictionary<HumanoidVisualLayers, List<Marking>> markings) // Trauma - made public
     {
         base.SetOrganMarkings(ent, markings);
 

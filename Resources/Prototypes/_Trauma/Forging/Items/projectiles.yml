@@ -1,0 +1,12 @@
+- type: forgedItem
+  id: ArrowHeads
+  category: Projectiles
+  name: arrow heads
+  construction: ForgedArrow
+  finished: ForgedArrow
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/arrowheads.rsi
+  work: 150 # theres so many of them and they're very intricate
+  amount: 6
+  skills:
+    MetalworkingKnowledge: 1
+    WeaponsKnowledge: 1

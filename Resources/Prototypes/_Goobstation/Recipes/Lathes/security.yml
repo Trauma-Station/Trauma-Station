@@ -1,28 +1,3 @@
-# SPDX-FileCopyrightText: 2024 NULL882 <gost6865@yandex.ru>
-# SPDX-FileCopyrightText: 2024 Remuchi <72476615+Remuchi@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2024 a_person <40855173+a-person5660@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 Creatorbot01 <creatorbot02@gmail.com>
-# SPDX-FileCopyrightText: 2025 Creatorbot01 <creatorbot20@gmail.com>
-# SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: latheRecipe
@@ -197,12 +172,19 @@
 
 # Mech Weapons
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
-  id: WeaponMechCombatImmolationGun
-  result: WeaponMechCombatImmolationGun
+  abstract: true
+  parent: BaseRedAlert
+  id: BaseCombatMechWeapon
+  completetime: 10
   categories:
   - MechWeapons
-  completetime: 10
+  - Gygax
+  - Durand
+
+- type: latheRecipe
+  parent: BaseCombatMechWeapon
+  id: WeaponMechCombatImmolationGun
+  result: WeaponMechCombatImmolationGun
   materials:
     Steel: 2800
     Plastic: 1000
@@ -210,12 +192,9 @@
     Glass: 500
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseCombatMechWeapon
   id: WeaponMechCombatSolarisLaser
   result: WeaponMechCombatSolarisLaser
-  categories:
-  - MechWeapons
-  completetime: 10
   materials:
     Steel: 1650
     Plastic: 300
@@ -223,12 +202,9 @@
     Glass: 200
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseCombatMechWeapon
   id: WeaponMechCombatFiredartLaser
   result: WeaponMechCombatFiredartLaser
-  categories:
-  - MechWeapons
-  completetime: 10
   materials:
     Steel: 1200
     Plastic: 200
@@ -236,70 +212,52 @@
     Glass: 50
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseCombatMechWeapon
   id: WeaponMechCombatUltraRifle
   result: WeaponMechCombatUltraRifle
-  categories:
-  - MechWeapons
-  completetime: 10
   materials:
     Steel: 1000
     Plastic: 200
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseCombatMechWeapon
   id: WeaponMechCombatShotgun
   result: WeaponMechCombatShotgun
-  categories:
-  - MechWeapons
-  completetime: 10
   materials:
     Steel: 1600
     Plastic: 550
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseCombatMechWeapon
   id: WeaponMechCombatShotgunIncendiary
   result: WeaponMechCombatShotgunIncendiary
-  categories:
-  - MechWeapons
-  completetime: 10
   materials:
     Steel: 1500
     Plastic: 800
     Plasma: 300
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseCombatMechWeapon
   id: WeaponMechCombatDisabler
   result: WeaponMechCombatDisabler
-  categories:
-  - MechWeapons
-  completetime: 10
   materials:
     Steel: 750
     Glass: 250
     Plastic: 300
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseCombatMechWeapon
   id: WeaponMechCombatFlashbangLauncher
   result: WeaponMechCombatFlashbangLauncher
-  categories:
-  - MechWeapons
-  completetime: 10
   materials:
     Steel: 1200
     Glass: 300
     Plastic: 450
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseCombatMechWeapon
   id: WeaponMechCombatMissileRack8
   result: WeaponMechCombatMissileRack8
-  categories:
-  - MechWeapons
-  completetime: 10
   materials:
     Steel: 2500
     Glass: 1500
@@ -308,9 +266,6 @@
 - type: latheRecipe
   id: MechEquipmentKineticAccelerator
   result: WeaponMechIndustrialKineticAccelerator
-  categories:
-  - MechWeapons
-  completetime: 10
   materials:
     Steel: 1500
     Glass: 750

@@ -15,7 +15,6 @@ using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Store;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 

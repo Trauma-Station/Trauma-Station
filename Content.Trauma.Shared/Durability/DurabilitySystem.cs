@@ -20,9 +20,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Shared.Durability.Components;
 using Content.Trauma.Shared.Durability.Events;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -90,10 +88,11 @@ public sealed class DurabilitySystem : EntitySystem
         comp.Damage += amount;
         if (comp.Damage < -comp.MaxRepairBonus)
             comp.Damage = -comp.MaxRepairBonus; // cap lower bound
+        DirtyField(uid, comp, nameof(DurabilityComponent.Damage));
 
         var oldState = comp.DurabilityState;
         comp.DurabilityState = GetDurabilityState(comp);
-        Dirty(uid, comp);
+        DirtyField(uid, comp, nameof(DurabilityComponent.DurabilityState));
         // Don't raise the event if it didn't actually change.
         if (comp.DurabilityState != oldState)
         {
@@ -122,7 +121,7 @@ public sealed class DurabilitySystem : EntitySystem
                 !comp.DurabilityThresholds.ContainsValue(DurabilityState.Reinforced) && comp.Damage < 0)
                 return DurabilityState.Reinforced;
 
-            if (comp.Damage < threshold)
+            if (comp.Damage < threshold * comp.DurabilityScale)
                 continue;
 
             return durabilityState;
@@ -322,7 +321,7 @@ public sealed class DurabilitySystem : EntitySystem
         if (TryComp<MeleeWeaponComponent>(args.Attacker, out var userMelee))
         {
             userMelee.NextAttack = _timing.CurTime + TimeSpan.FromSeconds(1 / userMelee.AttackRate);
-            Dirty(args.Attacker.Value, userMelee);
+            DirtyField(args.Attacker.Value, userMelee, nameof(MeleeWeaponComponent.NextAttack));
         }
     }
 
@@ -337,11 +336,15 @@ public sealed class DurabilitySystem : EntitySystem
         if (args.Target != ent.Owner || args.Handled)
             return;
 
+        // don't care if it's not damaged and can't be over-repaired any further
+        if (ent.Comp.Damage <= -ent.Comp.MaxRepairBonus)
+            return;
+
         if (TryComp<ToolComponent>(args.Used, out var tool) && ent.Comp.RepairTool is not null)
         {
             if (_tool.HasQuality(args.Used, ent.Comp.RepairTool, tool))
             {
-                _tool.UseTool(ent.Owner,
+                _tool.UseTool(args.Used,
                     args.User,
                     args.Target,
                     ent.Comp.RepairDoAfter,
@@ -417,6 +420,15 @@ public sealed class DurabilitySystem : EntitySystem
         _tool.PlayToolSound(args.Used.Value, Comp<ToolComponent>(args.Used.Value), args.User);
 
         args.Handled = true;
+    }
+
+    public void SetScale(Entity<DurabilityComponent?> ent, FixedPoint2 scale)
+    {
+        if (!Resolve(ent, ref ent.Comp, false) || ent.Comp.DurabilityScale == scale)
+            return;
+
+        ent.Comp.DurabilityScale = scale;
+        DirtyField(ent, ent.Comp, nameof(DurabilityComponent.DurabilityScale));
     }
 }
 

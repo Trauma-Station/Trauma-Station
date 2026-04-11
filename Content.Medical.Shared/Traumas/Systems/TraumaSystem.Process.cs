@@ -14,8 +14,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
@@ -133,6 +131,13 @@ public partial class TraumaSystem
     private void OnPartHealAttempt(Entity<WoundableComponent> ent, ref PartHealAttemptEvent args)
     {
         args.Bleeding = ent.Comp.Bleeds > MinBleedToStopHealing;
+
+        if (_wound.GetWoundableWounds(ent, ent.Comp).Any(wound => !_wound.CanHealWound(wound, wound.Comp)))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (TraumasBlockingHealing.Any(traumaType => HasWoundableTrauma(ent, traumaType, ent.Comp, false)))
             args.Cancelled = true;
     }

@@ -5,7 +5,7 @@
 
 - type: entity
   name: wooden wand
-  parent: BaseItem
+  parent: [BaseItem, WoodDurabilityWeak]
   id: WeaponWoodenWand
   description: Handcrafted wooden wand with a anomaly core.
   components:

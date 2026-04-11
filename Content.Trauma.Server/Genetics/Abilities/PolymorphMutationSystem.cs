@@ -10,14 +10,11 @@ namespace Content.Trauma.Server.Genetics.Abilities;
 public sealed class PolymorphMutationSystem : EntitySystem
 {
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
-
-    private EntityQuery<HumanoidProfileComponent> _humanoidQuery;
+    [Dependency] private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _humanoidQuery = GetEntityQuery<HumanoidProfileComponent>();
 
         SubscribeLocalEvent<PolymorphMutationComponent, MutationAddedEvent>(OnMutationAdded);
         SubscribeLocalEvent<PolymorphMutationComponent, MutationRemovedEvent>(OnMutationRemoved);

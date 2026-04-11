@@ -5,7 +5,6 @@ using System.Numerics;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Shaders;
 

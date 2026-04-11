@@ -46,11 +46,6 @@
   rule: UnknownShuttleInstigator
 
 - type: ninjaHackingThreat
-  id: GreyTide
-  announcement: terror-grey-tide
-  rule: GreyTideAntagMidround
-
-- type: ninjaHackingThreat
   id: Revolutionary
   announcement: terror-lone-operative
   rule: RevolutionaryMidround

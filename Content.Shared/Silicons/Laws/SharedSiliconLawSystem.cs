@@ -6,7 +6,6 @@ using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Wires;
 using Robust.Shared.Audio;
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 
 namespace Content.Shared.Silicons.Laws;
 
@@ -34,11 +33,6 @@ public abstract partial class SharedSiliconLawSystem : EntitySystem
 
         if (_emag.CheckFlag(uid, EmagType.Interaction))
             return;
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid))
-            return;
-        // Corvax-Next-AiRemoteControl-End
 
         // prevent self-emagging
         if (uid == args.UserUid)

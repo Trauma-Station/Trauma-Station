@@ -9,4 +9,8 @@ public static class TraumaKeyFunctions
 {
     public static readonly BoundKeyFunction OpenMartialArtsMenu = "OpenMartialArtsMenu";
     public static readonly BoundKeyFunction Tackle = "Tackle";
+    public static readonly BoundKeyFunction FocusCollectiveMindChat = "FocusCollectiveMindChatWindow"; // Goobstation - Starlight collective mind port
+    public static readonly BoundKeyFunction OpenLanguageMenu = "OpenLanguageMenu"; // Einstein Engines - Language
+    public static readonly BoundKeyFunction ResistGrab = "ResistGrab"; // Goobstation - Grab Intent
+    public static readonly BoundKeyFunction Sprint = "Sprint"; // Goobstation
 }
