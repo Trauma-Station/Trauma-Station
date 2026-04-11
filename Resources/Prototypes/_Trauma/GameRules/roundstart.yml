@@ -161,7 +161,6 @@
       max: 6
       playerRatio: 10
       lateJoinAdditional: true
-      jobBlacklist: [ Chaplain ]
       blacklist:
         components:
         - CommandStaff
@@ -179,7 +178,6 @@
     - prefRoles: [ Shadowling ]
       max: 3
       playerRatio: 25
-      jobBlacklist: [ Chaplain ]
       blacklist:
         components:
         - CommandStaff

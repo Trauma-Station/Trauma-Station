@@ -43,8 +43,7 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (TerminatingOrDeleted(parent) || !HasComp<WeakToHolyComponent>(parent))
             return;
 
-        var ev = new UnholyStatusChangedEvent(parent, ent, false);
-        RaiseLocalEvent(parent, ref ev);
+        ChangeUnholyStatus(ent, parent, false);
     }
 
     private void OnStartup(Entity<UnholyItemComponent> ent, ref ComponentStartup args)
@@ -53,20 +52,17 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (TerminatingOrDeleted(parent) || !HasComp<WeakToHolyComponent>(parent))
             return;
 
-        var ev = new UnholyStatusChangedEvent(parent, ent, true);
-        RaiseLocalEvent(parent, ref ev);
+        ChangeUnholyStatus(ent, parent, true);
     }
 
     private void OnHandUnequip(Entity<UnholyItemComponent> ent, ref GotUnequippedHandEvent args)
     {
-        var ev = new UnholyStatusChangedEvent(args.User, ent, false);
-        RaiseLocalEvent(args.User, ref ev);
+        ChangeUnholyStatus(ent, args.User, false);
     }
 
     private void OnHandEquip(Entity<UnholyItemComponent> ent, ref GotEquippedHandEvent args)
     {
-        var ev = new UnholyStatusChangedEvent(args.User, ent, true);
-        RaiseLocalEvent(args.User, ref ev);
+        ChangeUnholyStatus(ent, args.User, true);
     }
 
     private void OnUnquip(Entity<UnholyItemComponent> ent, ref GotUnequippedEvent args)
@@ -74,8 +70,7 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 
-        var ev = new UnholyStatusChangedEvent(args.Equipee, ent, false);
-        RaiseLocalEvent(args.Equipee, ref ev);
+        ChangeUnholyStatus(ent, args.Equipee, false);
     }
 
     private void OnEquip(Entity<UnholyItemComponent> ent, ref GotEquippedEvent args)
@@ -83,8 +78,13 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 
-        var ev = new UnholyStatusChangedEvent(args.Equipee, ent, true);
-        RaiseLocalEvent(args.Equipee, ref ev);
+        ChangeUnholyStatus(ent, args.Equipee, true);
+    }
+
+    private void ChangeUnholyStatus(EntityUid source, EntityUid user, bool status)
+    {
+        var ev = new UnholyStatusChangedEvent(user, source, status);
+        RaiseLocalEvent(user, ref ev);
     }
 
     private void OnUnholyStatus(Entity<ShouldTakeHolyComponent> ent, ref UnholyStatusChangedEvent args)

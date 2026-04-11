@@ -66,7 +66,6 @@
     - prefRoles: [ Changeling ]
       max: 4
       playerRatio: 12
-      jobBlacklist: [ Chaplain ] # GOOBSTATION
       blacklist:
         components:
         - CommandStaff
@@ -261,7 +260,6 @@
     definitions:
     - prefRoles: [ Blob ]
       allowNonHumans: true
-      jobBlacklist: [ Chaplain ] # Goobstation
       blacklist:
         components:
         - CommandStaff

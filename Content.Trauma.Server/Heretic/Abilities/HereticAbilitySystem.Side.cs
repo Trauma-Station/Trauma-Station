@@ -132,7 +132,7 @@ public sealed partial class HereticAbilitySystem
                 _lifesteal.LifeSteal((args.Performer, damageable), dmg.GetTotal());
 
             if (!_bloodQuery.TryComp(target, out var blood))
-                return;
+                continue;
 
             _blood.TryModifyBleedAmount((target, blood), blood.MaxBleedAmount);
             _bloodStealTargets.Add(target);
