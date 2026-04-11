@@ -846,7 +846,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
-    proto: LaserSidearmBullet # Trauma
+    proto: RedMediumLaser
     fireCost: 100
   - type: BatterySelfRecharger
     autoRechargeRate: 40
