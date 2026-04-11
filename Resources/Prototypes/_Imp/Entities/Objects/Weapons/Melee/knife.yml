@@ -1,6 +1,6 @@
 - type: entity
   name: Xenoborg Blade
-  parent: KukriKnife
+  parent: BorgKukriKnife
   id: XenoborgKnife
   description: 4265 6520656666696369656E742E. # "Be Efficent"
   components:
