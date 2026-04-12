@@ -3,9 +3,10 @@
   id: CosmicCult
   components:
   - type: CosmicCultRule
+  - type: LoadMapRule
+    mapPath: /Maps/_DV/Nonstations/cosmicvoid.yml
   - type: GameRule
-    minPlayers: 15 # Ultra lowpop cult is now possible. Would it be good? Idk we'd have to test that.
-    chaosScore: 1200
+    minPlayers: 20
   - type: AntagObjectives
     objectives:
     - CosmicFinalityObjective
@@ -14,9 +15,9 @@
   - type: AntagSelection
     definitions:
     - prefRoles: [ CosmicAntagCultist ]
-      min: 1 # It just works trust me
+      min: 3
       max: 8
-      playerRatio: 10
+      playerRatio: 7
       jobBlacklist: [ Chaplain ] # GOOBSTATION
       blacklist:
         components:
@@ -27,3 +28,8 @@
       - type: CosmicCult
       mindRoles:
       - MindRoleCosmicCult
+  - type: AntagPlayerEffects
+    effects:
+    - !type:GrantSkills
+      skills:
+        MeleeKnowledge: 60 # They like, only have melee weapons

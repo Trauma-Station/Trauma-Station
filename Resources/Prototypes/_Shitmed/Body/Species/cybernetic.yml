@@ -128,7 +128,7 @@
   id: OrganCyberneticSpeed
   description: A cybernetic leg that allows its wearer to run faster.
   components:
-  - type: MovementBodyPart
+  - type: Leg
     walkSpeed: 3.125
     sprintSpeed: 5.175
 

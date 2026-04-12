@@ -5,7 +5,6 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.NTR.Events;
 

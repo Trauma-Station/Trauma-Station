@@ -2,11 +2,9 @@
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Targeting;
 using Content.Goobstation.Common.Body.Components;
-using Content.Goobstation.Common.MartialArts;
-using Content.Goobstation.Shared.Body;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared.Movement.Pulling.Components;
+using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Body;
+using Content.Shared.Movement.Pulling.Components;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
@@ -88,7 +86,7 @@ public sealed class RespiratorSystem : EntitySystem
             && pullable.GrabStage == GrabStage.Suffocate)
             return false;
 
-        return !HasComp<KravMagaBlockedBreathingComponent>(uid);
+        return !HasComp<BlockedBreathingComponent>(uid);
     }
     // Goobstation end
     private void OnMapInit(Entity<RespiratorComponent> ent, ref MapInitEvent args)
@@ -130,13 +128,10 @@ public sealed class RespiratorSystem : EntitySystem
 
             if (!CanBreathe(uid, respirator)) // Goobstation edit
             {
-                // DeltaV: Cosmic Cult - One line change but a refactor would be better. this is kinda cringe.
-                // Makes cultists gasp and respirate but not asphyxiate in space.
-                if (TryComp<CosmicNonRespiratingComponent>(uid, out var cultComponent)
-                    && cultComponent.Enabled
-                    && (cultComponent.EnableWhenCritical && _mobState.IsIncapacitated(uid)
-                    || cultComponent.EnableWhenAlive && _mobState.IsAlive(uid)))
-                    return;
+                var ev = new SuffocationBeforeEvent();
+                RaiseLocalEvent(uid, ref ev);
+                if (ev.Cancelled)
+                    continue;
 
                 if (_gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)
                 {

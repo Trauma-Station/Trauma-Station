@@ -61,8 +61,6 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Hierophant
-  - type: CombatPower # Goobstation
-    factor: 4 # times more dangerous than a crew-member
 
 - type: entity
   name: Brimdemon
@@ -143,8 +141,6 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Hierophant
-  - type: CombatPower # Goobstation
-    factor: 4 # times more dangerous than a crew-member
 
 - type: entity
   name: Rabble
@@ -209,5 +205,3 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Hierophant
-  - type: CombatPower # Goobstation
-    factor: 4 # times more dangerous than a crew-member

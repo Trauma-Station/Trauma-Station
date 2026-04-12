@@ -2,7 +2,6 @@
 
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Blob.Components;
 
@@ -24,7 +23,7 @@ public sealed partial class BlobTileComponent : Component
     [DataField]
     public DamageSpecifier HealthOfPulse = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             { "Blunt", -4 },
             { "Slash", -4 },
@@ -38,7 +37,7 @@ public sealed partial class BlobTileComponent : Component
     [DataField]
     public DamageSpecifier FlashDamage = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             { "Heat", 24 },
         }

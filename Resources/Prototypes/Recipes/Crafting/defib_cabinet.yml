@@ -10,3 +10,10 @@
   canBuildInImpassable: true
   conditions:
   - !type:WallmountCondition
+  # <Trauma>
+  theory:
+    ElectronicsKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  useQuality: false
+  # </Trauma>

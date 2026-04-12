@@ -239,7 +239,7 @@ public abstract partial class SharedStackSystem : EntitySystem
             Category = VerbCategory.Split,
             Act = () =>
             {
-                _ui.TryOpenUi(ent.Owner, StackCustomSplitUiKey.Key, user, predicted: true);
+                _ui.TryOpenUi(ent.Owner, StackCustomSplitUiKey.Key, user);
             },
             Priority = priority - 1
         };

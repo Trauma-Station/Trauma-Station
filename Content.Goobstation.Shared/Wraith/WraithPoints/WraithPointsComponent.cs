@@ -2,8 +2,6 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.Alert;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.WraithPoints;
 

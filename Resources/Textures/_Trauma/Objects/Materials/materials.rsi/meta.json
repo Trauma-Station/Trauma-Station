@@ -42,6 +42,26 @@
       ]
     },
     {
+      "name": "brick"
+    },
+    {
+      "name": "brick_wet"
+    },
+    {
+      "name": "brick-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "brick-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "brick_2"
+    },
+    {
+      "name": "brick_3"
+    },
+    {
       "name": "cardboard"
     },
     {
@@ -60,6 +80,9 @@
     },
     {
       "name": "cathide"
+    },
+    {
+      "name": "cement"
     },
     {
       "name": "cloth"

@@ -70,8 +70,17 @@
   - AppearanceDiona
   - BaseSpeciesMobOrganic
   id: MobDiona
-  name: McUrist Plants
+  name: Urist McPlants
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RootSpeak
+    understands:
+    - TauCetiBasic
+    - RootSpeak
+  # </Trauma>
   - type: Respirator
     damage:
       types:
@@ -179,11 +188,6 @@
   id: OrganDiona
   abstract: true
   suffix: Diona
-  # <Shitmed>
-  components:
-  - type: Damageable
-    damageModifierSet: Diona
-  # </Shitmed>
 
 - type: entity
   id: OrganDionaMetabolizer
@@ -224,7 +228,7 @@
   id: OrganDionaTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganDionaExternal ]
+  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # Trauma - bald tree
   id: OrganDionaHead
 
 - type: entity

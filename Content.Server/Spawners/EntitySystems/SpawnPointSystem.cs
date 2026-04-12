@@ -45,6 +45,18 @@ public sealed class SpawnPointSystem : EntitySystem
             }
         }
 
+        // <Trauma> - if there is no job spawn, fall back to latejoin point instead of ghost/antag spawns...
+        if (possiblePositions.Count == 0)
+        {
+            var latejoin = EntityQueryEnumerator<SpawnPointComponent>();
+            while (latejoin.MoveNext(out var uid, out var spawnPoint))
+            {
+                if (spawnPoint.SpawnType == SpawnPointType.LateJoin)
+                    possiblePositions.Add(Transform(uid).Coordinates);
+            }
+        }
+        // </Trauma>
+
         if (possiblePositions.Count == 0)
         {
             // Ok we've still not returned, but we need to put them /somewhere/.

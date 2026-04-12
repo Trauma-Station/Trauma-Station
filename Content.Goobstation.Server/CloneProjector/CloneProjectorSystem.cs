@@ -1,22 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.CloneProjector;
 using Content.Goobstation.Shared.CloneProjector.Clone;
-using Content.Shared.Emp;
 using Content.Server.Ghost.Roles.Components;
-using Content.Shared._DV.Carrying;
-using Content.Shared._EinsteinEngines.Silicon.IPC;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Body;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Holopad;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Components;
@@ -24,21 +18,17 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Radio.Components;
 using Content.Shared.Storage;
-using Content.Shared.Strip.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Carrying;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.CloneProjector;
@@ -59,9 +49,8 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly CarryingSystem _carrying = default!;
+    [Dependency] private readonly CommonCarryingSystem _carrying = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly MobThresholdSystem _thresholds = default!;
 
@@ -95,11 +84,12 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
         var status = Loc.GetString("clone-projector-examined-status", ("cloneStatus", projector.Comp.CloneUid != null));
         args.PushMarkup(status);
 
-        if (!TryComp<DamageableComponent>(projector.Comp.CloneUid, out var damageable)
-            || !_thresholds.TryGetDeadThreshold(projector.Comp.CloneUid.Value, out var deathThreshold))
+        if (projector.Comp.CloneUid is not {} clone ||
+            !_thresholds.TryGetDeadThreshold(clone, out var deathThreshold))
             return;
 
-        var remainingHealth = deathThreshold - damageable.TotalDamage;
+        var damage = _damageable.GetTotalDamage(clone);
+        var remainingHealth = deathThreshold - damage;
         var health = Loc.GetString("clone-projector-examined-health", ("cloneHealth", remainingHealth / deathThreshold * 100 ));
         args.PushMarkup(health);
     }
@@ -439,10 +429,9 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
             || !TryComp<ActionComponent>(actionEntity, out var actionComp))
             return;
 
-        _actions.SetCooldown(projector.Owner, _timing.CurTime + projector.Comp.DestroyedCooldown);
+        _actions.SetCooldown((actionEntity, actionComp), projector.Comp.DestroyedCooldown);
 
         _actions.UpdateAction((actionEntity, actionComp));
-        Dirty(actionEntity, actionComp);
     }
 
     private bool CanUseProjector(Entity<CloneProjectorComponent> projector, EntityUid user)

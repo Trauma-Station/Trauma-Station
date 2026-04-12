@@ -2,7 +2,6 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.SlaughterDemon.Other;
 
@@ -19,7 +18,7 @@ public sealed partial class DemonsKissComponent : Component
     [DataField]
     public DamageSpecifier Damage = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>()
+        DamageDict = new()
         {
             { "Blunt", 25},
             { "Slash",  25},

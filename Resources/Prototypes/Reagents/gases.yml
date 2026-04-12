@@ -199,19 +199,15 @@
           types:
             Poison:
               0.5
-      - !type:HealthChange
+      - !type:EvenHealthChange
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plasmaman ]
         damage:
-          groups:
-            Brute: -2
-          types:
-            Heat: -0.66
-            Shock: -0.66
-            Caustic: -0.66
-            Asphyxiation: -0.66
-            Poison: -0.66
+          Brute: -2
+          Burn: -2
+          Airloss: -1
+          Toxin: -1
       # </Goob>
   reactiveEffects:
     Flammable:
@@ -467,9 +463,10 @@
           type: [ Slime, Cybernetic ] # Goob - added Cybernetic
           inverted: true
         ignoreResistances: true
+        scaling: true
         damage:
           types:
-            Poison: 0.25
+            Poison: 1
 
 - type: reagent
   id: Frezon

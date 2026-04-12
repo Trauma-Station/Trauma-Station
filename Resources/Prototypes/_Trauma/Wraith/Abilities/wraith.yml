@@ -1,0 +1,43 @@
+- type: entity
+  id: MidroundWraithAbilities
+  name: Midround Wraith Abilities
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Haunt
+  - type: BloodWriting
+  - type: Decay
+  - type: DemonicWhisper
+  - type: PossessObject
+  - type: SpookMark
+  - type: DarkWhisper
+  - type: AbsorbCorpse
+    damage: # damage they take when they eat a corpse with forma
+      types:
+        Slash: 25
+        Blunt: 25
+  - type: WraithCommand
+    blacklist:
+      components:
+      - MobState
+      - Body
+      - Edible
+      - EntityStorage
+      - Solution
+      - ReagentDispenser
+      tags:
+      - ChemDispensable
+    searchRange: 7
+    stunDuration: 1
+  - type: ActionGrant
+    actions:
+    - ActionPossessObject
+    - ActionDecay
+    - ActionDarkWhisper
+    - ActionCommand
+    - ActionAbsorbCorpse
+    # - ActionAnimateObject
+    - ActionWhisper
+    - ActionBloodWriting
+    - ActionSpook
+    - ActionToggleGhosts
+    - ActionToggleLighting

@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Tag;
+
 namespace Content.Goobstation.Shared.Clothing.Components;
 
 [RegisterComponent]
 public sealed partial class ClothingGrantTagComponent : Component
 {
-    [DataField("tag", required: true), ViewVariables(VVAccess.ReadWrite)]
-    public string Tag = "";
+    [DataField(required: true)]
+    public ProtoId<TagPrototype> Tag;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool IsActive = false;
+    [DataField]
+    public bool IsActive;
 }

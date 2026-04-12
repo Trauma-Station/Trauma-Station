@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, KnifeDurability]
   id: BaseKnife
   abstract: true
   components:
@@ -15,6 +15,7 @@
   - type: MeleeWeapon
     animationRotation: -135 # WWDP
     wideAnimationRotation: -135
+    canWideSwing: false # Trauma
     damage:
       types:
         Slash: 10
@@ -51,7 +52,7 @@
     transmuteTo: SwordCosmicCult
 
 - type: entity
-  parent: BaseKnife
+  parent: [BaseKnife, BaseChefContraband] # Trauma - Made it contraband
   id: KitchenKnife
   name: kitchen knife
   description: A general purpose Chef's Knife made by Asters Merchant Guild. Guaranteed to stay sharp for years to come..
@@ -82,7 +83,7 @@
 
 - type: entity
   name: butcher's cleaver
-  parent: BaseKnife
+  parent: [BaseKnife, BaseChefContraband] # Trauma - Made it contraband
   id: ButchCleaver
   description: A huge blade used for chopping and chopping up meat. This includes clowns and clown-by-products.
   components:
@@ -101,6 +102,11 @@
         Slash: 13
   - type: Item
     size: Normal
+    shape: # Trauma
+    - 0,0,0,0
+    - 1,0,2,1
+    storedRotation: 27 # Trauma
+    storedOffset: 5,-5 # Trauma
     sprite: Objects/Weapons/Melee/cleaver.rsi
   - type: GuideHelp
     guides:
@@ -206,9 +212,11 @@
   - type: Item
     sprite: Objects/Weapons/Melee/kukri_knife.rsi
     storedSprite: null
+    storedOffset: -1,1 # Trauma
+    storedRotation: -45 # Trauma
 
 - type: entity
-  parent: [ClothingHeadHatGreyFlatcap, BaseMinorContraband]
+  parent: [ClothingHeadHatGreyFlatcap, BaseMinorContraband, KnifeDurabilityWeak] # Trauma - Durability
   id: BladedFlatcapGrey
   name: grey flatcap
   description: Fashionable for both the working class and old man Jenkins. It has glass shards hidden in the brim.
@@ -249,7 +257,7 @@
 
 - type: entity
   name: shiv
-  parent: [BaseKnife, BaseMinorContraband]
+  parent: [GlassDurability, BaseKnife, BaseMinorContraband] # Trauma - Durability
   id: Shiv
   description: A crude weapon fashioned from a piece of cloth and a glass shard.
   components:
@@ -258,6 +266,7 @@
     - CombatKnife
     - Knife
     - Shiv
+    - Trash # Trauma
   - type: Construction
     graph: Shiv
     node: icon
@@ -274,30 +283,12 @@
   - type: DisarmMalus
     malus: 0.225
   - type: UndetectableContraband #Goobstation-Contraband detector
-  - type: Destructible # <Trauma>
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlass:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: DamageOnHit
-    damage:
-      types:
-        Blunt: 1
-  - type: Damageable
-    damageContainer: Inorganic # </Trauma>
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+  #</Trauma>
 
 - type: entity
   name: reinforced shiv
@@ -317,24 +308,19 @@
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
-  - type: Destructible # <Trauma>
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 15
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlassReinforced:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ] # </Trauma>
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+      Steel: 50
+  - type: Tag
+    tags:
+    - CombatKnife
+    - Knife
+    - Shiv
+    - Trash
+  #</Trauma>
 
 - type: entity
   name: plasma shiv
@@ -354,24 +340,19 @@
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
-  - type: Destructible # <Trauma>
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 20
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlassPlasma:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ] # </Trauma>
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+      Plasma: 50
+  - type: Tag
+    tags:
+    - CombatKnife
+    - Knife
+    - Shiv
+    - Trash
+  #</Trauma>
 
 - type: entity
   name: uranium shiv
@@ -392,24 +373,19 @@
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
-  - type: Destructible # <Trauma>
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 20
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlassUranium:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ] # </Trauma>
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 50
+      Cloth: 50
+      Uranium: 50
+  - type: Tag
+    tags:
+    - CombatKnife
+    - Knife
+    - Shiv
+    - Trash
+  #</Trauma>
 
 - type: entity
   name: throwing knife
@@ -421,6 +397,7 @@
     tags:
     - CombatKnife
     - Knife
+    - ThrowingKnife   # Trauma
   - type: Sprite
     sprite: Objects/Weapons/Melee/throwing_knife.rsi
     state: icon
@@ -465,7 +442,7 @@
 
 - type: entity
   name: utility knife
-  parent: BaseItem
+  parent: [BaseItem, KnifeDurabilityWeak] # Trauma - Durability
   id: UtilityKnife
   description: A knife with a retractable, tiny blade. Useful as a box cutter and letter opener, among other things.
   components:

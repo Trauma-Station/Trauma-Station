@@ -1,18 +1,7 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Trevor Day <tday93@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -84,7 +73,7 @@ public abstract class SharedDiceSystem : EntitySystem
 
     private void Roll(Entity<DiceComponent> entity, EntityUid? user = null)
     {
-        var rand = new System.Random((int)_timing.CurTick.Value);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(entity));
 
         var roll = rand.Next(1, entity.Comp.Sides + 1);
         SetCurrentSide(entity, roll);

@@ -30,9 +30,6 @@
   id: JobNavyOfficerUndercover
 
 - type: playTimeTracker
-  id: JobSpecialOperationsOfficer
-
-- type: playTimeTracker
   id: JobDiplomat
 
 - type: playTimeTracker

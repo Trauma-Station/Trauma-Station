@@ -1,71 +1,77 @@
 - type: construction
   id: RevLiberator
   graph: RevGuns
-  startNode: start
   targetNode: liberator
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 0 # revs dont get automatic weapons knowledge :)
+  practical:
+    GunsmithingKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: RevResistance
   graph: RevGuns
-  startNode: start
   targetNode: resistance
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 0
+  practical:
+    GunsmithingKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: RPG2
   graph: RevGuns
-  startNode: start
   targetNode: RPG2
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 1
+  practical:
+    GunsmithingKnowledge: 4
+    WeaponsKnowledge: 3
 
 - type: construction
   id: Flamethrower
   graph: RevGuns
-  startNode: start
   targetNode: Flamethrower
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 1
+  practical:
+    GunsmithingKnowledge: 4
+    WeaponsKnowledge: 3
 
 - type: construction
   id: Devastator
   graph: RevGuns
-  startNode: start
   targetNode: Devastator
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2
+  practical:
+    GunsmithingKnowledge: 2
+    WeaponsKnowledge: 2
 
 - type: construction
   id: RevIED
   graph: RevIED
-  startNode: start
   targetNode: IED
   category: construction-category-antagonist
   objectType: Item
-  entityWhitelist:
-    components:
-    - HeadRevolutionary
-    - Revolutionary
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 2
+  practical:
+    MechanicsKnowledge: 2
+    WeaponsKnowledge: 2

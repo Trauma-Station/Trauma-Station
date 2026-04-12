@@ -8,3 +8,7 @@
     data:
       sprite: _Trauma/empty.rsi
       state: empty # no sprite since the markings actually control it
+  - type: OrganComponents
+    onAdd:
+    - type: Wagging
+      action: ActionToggleWaggingVulpkanin

@@ -27,3 +27,44 @@
   - type: Appearance
   - type: Extractable
     grindableSolutionName: food
+
+- type: entity
+  parent: FoodProduceBase
+  id: FoodLemonade
+  name: lemonade
+  description: When life gives you lemons, commit arson. With the lemons.
+  suffix: Food
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sour
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 9
+        reagents:
+        - ReagentId: Napalm
+          Quantity: 5
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/lemonade.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: Lemonade
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceLemonade # lol
+        Quantity: 10
+  - type: Tag
+    tags:
+    - Fruit
+  - type: Edible
+    trash:
+    - LemonGrenade
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: LemonGrenade

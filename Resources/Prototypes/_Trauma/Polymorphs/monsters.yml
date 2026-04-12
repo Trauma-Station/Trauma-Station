@@ -1,0 +1,12 @@
+- type: polymorph
+  id: WailingJaunt
+  configuration:
+    entity: PolymorphWailingJaunt
+    forced: true
+    attachToGridOrMap: true
+    showPopup: false
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+    - component: AmbientSound

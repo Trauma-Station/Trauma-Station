@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 271.1.0
+  engineVersion: 271.2.0
   forkId: ""
   forkVersion: ""
-  time: 01/25/2026 10:58:54
-  entityCount: 2457
+  time: 03/02/2026 21:15:52
+  entityCount: 2458
 maps:
 - 1
 grids:
@@ -738,6 +738,8 @@ entities:
     - type: RadiationGridResistance
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
+    - type: TileHistory
+      chunkHistory: {}
 - proto: AirAlarm
   entities:
   - uid: 3
@@ -3992,13 +3994,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 26.5,-17.5
       parent: 2
-- proto: ChemDispenser
-  entities:
-  - uid: 612
-    components:
-    - type: Transform
-      pos: -5.5,-1.5
-      parent: 2
 - proto: ChemDispenserEmpty
   entities:
   - uid: 613
@@ -4480,6 +4475,13 @@ entities:
     components:
     - type: Transform
       pos: 11.5,-1.5
+      parent: 2
+- proto: EnergyChemDispenser
+  entities:
+  - uid: 612
+    components:
+    - type: Transform
+      pos: -5.5,-1.5
       parent: 2
 - proto: FaxMachineSyndie
   entities:
@@ -8658,6 +8660,15 @@ entities:
     - type: Transform
       pos: 31.5,4.5
       parent: 2
+- proto: RotaryPhoneStandHidden
+  entities:
+  - uid: 2458
+    components:
+    - type: Transform
+      pos: 4.5,-1.5
+      parent: 2
+    - type: RotaryPhoneHolder
+      name: Totally Not A bunch Of Nuclear Armed Clowns
 - proto: SheetPlasma10
   entities:
   - uid: 1360

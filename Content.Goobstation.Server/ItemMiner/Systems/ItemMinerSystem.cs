@@ -9,7 +9,6 @@ using Content.Server.Stack;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.ItemMiner;
 
@@ -107,7 +106,7 @@ public sealed class ItemMinerSystem : EntitySystem
                     var entProto = _proto.Index(miner.Proto);
 
                     // from here on `spawned` and `amt` stand for stack counts and not entity counts
-                    if (entProto.TryGetComponent<StackComponent>(out var stackComp, EntityManager.ComponentFactory))
+                    if (entProto.TryGetComponent<StackComponent>(out var stackComp, Factory))
                     {
                         spawned *= stackComp.Count;
                         remaining *= stackComp.Count;

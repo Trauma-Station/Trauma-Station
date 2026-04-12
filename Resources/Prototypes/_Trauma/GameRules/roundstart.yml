@@ -1,3 +1,17 @@
+# i love this dogshit system nobody has improved for 2 years :)
+- type: entity
+  parent: BaseGameRule
+  id: SubGamemodesRuleNoHeretic
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: Thief
+      prob: 0.5
+    - id: Devil
+      prob: 0.02
+    - id: Shadowling
+      prob: 0.02
+
 - type: entity
   parent: BaseGameRule
   id: Insurgency
@@ -15,17 +29,17 @@
     speciesOverride: Human
     speciesOverrideBlacklist:
     - Plasmaman # instantly dies
+  - type: InsurgencyRule
   - type: AntagSelection
     selectionTime: PrePlayerSpawn # need to move them to their shittle
     agentName: insurgent-round-end-agent-name
     definitions:
     - prefRoles: [ Insurgent ]
-      spawnerPrototype: SpawnPointInsurgent
+      spawnerPrototype: GhostRoleSpawnerInsurgent
       startingGear: Insurgent
       unequipOldGear: true
-      max: 8
+      max: 4
       playerRatio: 10
-      chaosScore: 50
       roleLoadout:
       - RoleSurvivalStandard
       components:
@@ -38,10 +52,6 @@
   parent: DuoAbductorSpawn
   id: DuoAbductorRoundstart
   components:
-  - type: StationEvent
-    chaos: # 20 chaos because abductors aren't mean to actively harm crew just experiment
-      Hostile: 20
-    earliestStart: 0 # its roundstart chud
   # I LOVE GOIDA COPY PASTING THE ENTIRE THING
   # this just has ghost roles removed, pref roles added and players are picked roundstart
   - type: AntagSelection
@@ -150,23 +160,17 @@
     - prefRoles: [ Heretic ]
       max: 6
       playerRatio: 10
-      chaosScore: 250
       lateJoinAdditional: true
-      jobBlacklist: [ Chaplain ]
       blacklist:
         components:
         - CommandStaff
       mindRoles:
       - MindRoleHeretic
-  - type: Tag
-    tags:
-    - RoundstartAntag
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseShadowlingRule
   id: ShadowlingGamemode
   components:
-  - type: ShadowlingRule
   - type: GameRule
     minPlayers: 30
   - type: AntagSelection
@@ -174,16 +178,19 @@
     - prefRoles: [ Shadowling ]
       max: 3
       playerRatio: 25
-      chaosScore: 500
-      jobBlacklist: [ Chaplain ]
       blacklist:
         components:
         - CommandStaff
       mindRoles:
       - MindRoleShadowling
-  - type: AntagObjectives
-    objectives:
-    - ShadowlingAscendObjective
-  - type: Tag
-    tags:
-    - RoundstartAntag
+
+- type: entity
+  id: TraitorReinforcementNukeOps
+  parent: TraitorReinforcement
+  components:
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: InstallHypoportNukie
+    - !type:NestedEffect
+      proto: InstallSkillChipNukie

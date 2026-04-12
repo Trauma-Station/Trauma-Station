@@ -4,14 +4,12 @@ using Content.Goobstation.Shared.Clothing.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Tag;
-using Robust.Shared.Serialization.Manager;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
 public sealed class ClothingGrantingSystem : EntitySystem
 {
-    [Dependency] private readonly ISerializationManager _serializationManager = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
 
     public override void Initialize()
     {
@@ -30,35 +28,26 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
         if (!clothing.Slots.HasFlag(args.SlotFlags)) return;
 
-        foreach (var (name, data) in component.Components)
+        var user = args.Equipee;
+        component.Active.Clear();
+        foreach (var name in component.Components.Keys)
         {
-            var newComp = (Component) Factory.GetComponent(name);
-
-            if (HasComp(args.Equipee, newComp.GetType()))
-                continue;
-
-            newComp.Owner = args.Equipee;
-
-            var temp = (object) newComp;
-            _serializationManager.CopyTo(data.Component, ref temp);
-            EntityManager.AddComponent(args.Equipee, (Component)temp!);
-
-            component.Active[name] = true;
+            var type = Factory.GetRegistration(name).Type;
+            if (!HasComp(user, type))
+                component.Active.Add(name);
         }
+        EntityManager.AddComponents(user, component.Components);
     }
 
     private void OnCompUnequip(EntityUid uid, ClothingGrantComponentComponent component, GotUnequippedEvent args)
     {
-        foreach (var (name, data) in component.Components)
+        var user = args.Equipee;
+        foreach (var name in component.Active)
         {
-            if (!component.Active.ContainsKey(name) || !component.Active[name])
-                continue;
-
-            var newComp = (Component) Factory.GetComponent(name);
-
-            RemComp(args.Equipee, newComp.GetType());
-            component.Active[name] = false;
+            var type = Factory.GetRegistration(name).Type;
+            RemComp(user, type);
         }
+        component.Active.Clear();
     }
 
 
@@ -70,10 +59,12 @@ public sealed class ClothingGrantingSystem : EntitySystem
         if (!clothing.Slots.HasFlag(args.SlotFlags))
             return;
 
-        EnsureComp<TagComponent>(args.Equipee);
-        _tagSystem.AddTag(args.Equipee, component.Tag);
-
-        component.IsActive = true;
+        var user = args.Equipee;
+        var tags = EnsureComp<TagComponent>(user);
+        var tag = component.Tag;
+        component.IsActive = !_tag.HasTag(tags, tag);
+        if (component.IsActive)
+            _tag.AddTag((user, tags), tag);
     }
 
     private void OnTagUnequip(EntityUid uid, ClothingGrantTagComponent component, GotUnequippedEvent args)
@@ -81,8 +72,7 @@ public sealed class ClothingGrantingSystem : EntitySystem
         if (!component.IsActive)
             return;
 
-        _tagSystem.RemoveTag(args.Equipee, component.Tag);
-
+        _tag.RemoveTag(args.Equipee, component.Tag);
         component.IsActive = false;
     }
 }

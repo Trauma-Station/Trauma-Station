@@ -171,9 +171,8 @@
     emagStaticPacks:
     - SecurityWeaponsStatic
     - SecurityAmmoStatic
-    - SyndicateAmmoStatic
+    # - SyndicateAmmoStatic # Trauma
     # Goobstation
-    - SyndicateAmmoLightStatic
     - ScienceExplosives
   - type: BlueprintReceiver
     whitelist:
@@ -253,8 +252,10 @@
     - ConstructionBagOfHolding
     # Einstein Engines Packs
     - Translators
-    # Botany Trauma
-    - BotanyTrauma # Trauma
+    # <Trauma>
+    - BotanyTrauma
+    - TraumaScienceClothing
+    # </Trauma>
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo
@@ -470,6 +471,8 @@
   - type: Lathe
     idleState: icon
     runningState: icon
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
     staticPacks:
     - SecurityEquipmentStatic
     - SecurityPracticeStatic
@@ -505,13 +508,9 @@
     - SpecOpsGoogles
     - PowerCells
     # </Goob>
-  - type: EmagLatheRecipes
-    emagStaticPacks:
-    - SyndicateAmmoStatic
-    # <Goob>
-    - SyndicateAmmoLightStatic
-    - SyndicateAmmoHeavyStatic
-    # </Goob>
+  # - type: EmagLatheRecipes
+  #   emagStaticPacks:
+  #   # - SyndicateAmmoStatic # Trauma
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
 
@@ -539,15 +538,13 @@
     - type: Lathe
       idleState: icon
       runningState: icon
+      unlitIdleState: unlit
+      unlitRunningState: unlit-building
       staticPacks:
       - SecurityAmmoStatic
-    - type: EmagLatheRecipes
-      emagStaticPacks:
-      - SyndicateAmmoStatic
-      # <Goob>
-      - SyndicateAmmoLightStatic
-      - SyndicateAmmoHeavyStatic
-      # </Goob>
+    # - type: EmagLatheRecipes
+    #   emagStaticPacks:
+      # - SyndicateAmmoStatic # Trauma
     - type: MaterialStorage
       whitelist: *StandardMaterialWhitelist
 
@@ -573,6 +570,8 @@
   - type: Lathe
     idleState: icon
     runningState: icon
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
     staticPacks:
     - TopicalsStatic
     - ChemistryStatic

@@ -1,11 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Damage.Events;
-using Content.Goobstation.Common.MartialArts;
 using Content.Goobstation.Common.Stunnable;
-using Content.Shared._Shitcode.Weapons.Misc;
-using Content.Shared.Jittering;
-using Content.Shared.Speech.EntitySystems;
-using Robust.Shared.Random;
+using Content.Trauma.Common.Damage;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -165,20 +161,13 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             return;
         }
 
-        // Goobstation - Martial Arts
-        if (TryComp<MartialArtsKnowledgeComponent>(args.User, out var knowledgeComp)
-            && TryComp<MartialArtBlockedComponent>(args.Weapon, out var blockedComp)
-            && knowledgeComp.MartialArtsForm == blockedComp.Form)
-            return;
-        // Goobstation
-
         var ev = new StaminaDamageOnHitAttemptEvent(args.Direction == null, false); // Goob edit
         RaiseLocalEvent(uid, ref ev);
         if (ev.Cancelled)
             return;
 
         var stamQuery = GetEntityQuery<StaminaComponent>();
-        var toHit = new List<(EntityUid Entity, StaminaComponent Component)>();
+        var toHit = new List<EntityUid>();
 
         // Split stamina damage between all eligible targets.
         foreach (var ent in args.HitEntities)
@@ -186,37 +175,31 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             if (!stamQuery.TryGetComponent(ent, out var stam))
                 continue;
 
-            toHit.Add((ent, stam));
+            toHit.Add(ent);
         }
 
         // Goobstation
         RaiseLocalEvent(uid, new StaminaDamageMeleeHitEvent(toHit, args.Direction));
 
-        // goobstation
-        foreach (var (ent, comp) in toHit)
+        // <Goob>
+        // raise event to modify outgoing stamina damage by multiplier or something
+        var damage = 1.0f;
+        var overtime = 1.0f;
+        var outgoingModifier = new ModifyOutgoingStaminaDamageEvent(1f);
+        RaiseLocalEvent(args.User, ref outgoingModifier);
+        if (args.Direction == null)
         {
-            var hitEvent = new BeforeStaminaDamageEvent(1f);
-            // raise event for each entity hit
-            RaiseLocalEvent(ent, ref hitEvent);
+            damage *= component.LightAttackDamageMultiplier * outgoingModifier.Value;
+            overtime *= component.LightAttackOvertimeDamageMultiplier * outgoingModifier.Value;
+        }
+        // goobstation
+        foreach (var ent in toHit)
+        {
+            if (!stamQuery.TryGetComponent(ent, out var comp))
+                continue;
 
-            // <Goob>
-            // raise event to modify outgoing stamina damage by multiplier or something
-            var outgoingModifier = new ModifyOutgoingStaminaDamageEvent(1f);
-            RaiseLocalEvent(args.User, ref outgoingModifier);
-
-            var damageImmediate = component.Damage;
-            var damageOvertime = component.Overtime;
-            damageImmediate *= hitEvent.Value * outgoingModifier.Value;
-            damageOvertime *= hitEvent.Value * outgoingModifier.Value;
-            // </Goob>
-            if (args.Direction == null)
-            {
-                damageImmediate *= component.LightAttackDamageMultiplier;
-                damageOvertime *= component.LightAttackOvertimeDamageMultiplier;
-            }
-
-            TakeStaminaDamage(ent, damageImmediate / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
-            TakeOvertimeStaminaDamage(ent, damageOvertime);
+            TakeStaminaDamage(ent, component.Damage * damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, immediate: true);
+            TakeOvertimeStaminaDamage(ent, component.Overtime * overtime);
         }
     }
 
@@ -250,18 +233,8 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        // goobstation
-        var hitEvent = new BeforeStaminaDamageEvent(1f);
-        RaiseLocalEvent(target, ref hitEvent);
-
-        var damage = component.Damage;
-        var overtime = component.Overtime;
-
-        damage *= hitEvent.Value;
-        overtime *= hitEvent.Value;
-
-        TakeStaminaDamage(target, damage, source: source ?? uid, sound: component.Sound); // Goob edit - use source as damage source if not null
-        TakeOvertimeStaminaDamage(target, overtime); // Goobstation
+        TakeStaminaDamage(target, component.Damage, source: source ?? uid, sound: component.Sound); // Goob edit - use source as damage source if not null
+        TakeOvertimeStaminaDamage(target, component.Overtime); // Goobstation
     }
 
     private void UpdateStaminaVisuals(Entity<StaminaComponent> entity)
@@ -312,8 +285,12 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (!hasComp)
             overtime = EnsureComp<OvertimeStaminaDamageComponent>(uid);
 
-        overtime!.Amount = hasComp ? overtime.Amount + value : value;
-        overtime!.Damage = hasComp ? overtime.Damage + value : value;
+        // <Trauma>
+        var ev = new BeforeStaminaDamageEvent(value);
+        RaiseLocalEvent(uid, ref ev);
+        overtime!.Amount = hasComp ? overtime.Amount + ev.Value : ev.Value;
+        overtime!.Damage = hasComp ? overtime.Damage + ev.Value : ev.Value;
+        // </Trauma>
     }
 
     public void TakeStaminaDamage(EntityUid uid, float value, StaminaComponent? component = null,
@@ -390,6 +367,11 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             else
                 _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(uid):target} took {value} stamina damage");
         }
+
+        // <Trauma>
+        var tookEv = new TookStaminaDamageEvent(uid, value);
+        RaiseLocalEvent(uid, ref tookEv);
+        // </Trauma>
 
         if (visual)
         {

@@ -1,9 +1,11 @@
 // <Trauma>
-using Content.Goobstation.Common.Interactions;
+using Content.Goobstation.Common.Interaction;
+using Content.Shared.Ensnaring;
+using Content.Shared.Ensnaring.Components;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -79,6 +81,7 @@ namespace Content.Shared.Interaction
         [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
         // <Trauma>
+        [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
         private EntityQuery<TargetInteractionRelayComponent> _targetRelayQuery;
         // </Trauma>
         private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery;
@@ -288,8 +291,19 @@ namespace Content.Shared.Interaction
 
             //is this user trying to pull themself?
             if (userEntity.Value == uid)
-            // <Trauma> - add popup, CDDA parity
+            // <Trauma> - pull bolas and pray
             {
+                if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && ensnareable.IsEnsnared)
+                {
+                    foreach (var bola in ensnareable.Container.ContainedEntities.ToList())
+                    {
+                        if (TryComp<EnsnaringComponent>(bola, out var ensnaring))
+                        {
+                            _snare.TryFree(uid, uid, bola, ensnaring);
+                            return false;
+                        }
+                    }
+                }
                 _popupSystem.PopupClient(Loc.GetString("interaction-system-pull-self"), uid, uid);
                 return false;
             }
@@ -1280,7 +1294,7 @@ namespace Content.Shared.Interaction
 
             // <Goob>
             var useAttemptEv = new UseInHandAttemptEvent(user);
-            RaiseLocalEvent(used, useAttemptEv);
+            RaiseLocalEvent(used, ref useAttemptEv);
 
             if (useAttemptEv.Cancelled)
                 return false;

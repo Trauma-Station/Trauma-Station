@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Kitchen;
+// </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Construction;
 using Content.Server.Explosion.EntitySystems;
@@ -372,6 +375,8 @@ namespace Content.Server.Kitchen.EntitySystems
             args.Handled = true;
             _handsSystem.TryDropIntoContainer(args.User, args.Used, ent.Comp.Storage);
             UpdateUserInterfaceState(ent, ent.Comp);
+
+            ent.Comp.LastUser = args.User; // Trauma - store user for later
         }
 
         private void OnBreak(Entity<MicrowaveComponent> ent, ref BreakageEventArgs args)
@@ -657,6 +662,17 @@ namespace Content.Server.Kitchen.EntitySystems
 
                 if (active.PortionedRecipe.Item1 != null)
                 {
+                    // <Trauma>
+                    if (microwave.LastUser is { } user)
+                    {
+                        var result = active.PortionedRecipe.Item1.Result;
+                        var count = active.PortionedRecipe.Item2;
+                        var ev = new CookedFoodEvent(user, result, count);
+                        RaiseLocalEvent(user, ref ev);
+                        microwave.LastUser = null; // no cheesing by setting it 1 time then automating it
+                    }
+                    // </Trauma>
+
                     var coords = Transform(uid).Coordinates;
                     for (var i = 0; i < active.PortionedRecipe.Item2; i++)
                     {

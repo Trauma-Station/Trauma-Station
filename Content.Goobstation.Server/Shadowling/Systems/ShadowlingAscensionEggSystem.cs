@@ -22,7 +22,6 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -108,12 +107,12 @@ public sealed class ShadowlingAscensionEggSystem : EntitySystem
         if (component.ShadowlingInsideEntity != null)
             QueueDel(component.ShadowlingInsideEntity);
 
-        if (component.Creator == null
+        if (component.Creator is not {} creator
             || !component.StartTimer) // This indicates that the shadowling was inside the egg
             return;
 
-        var shadowlingComp = EntityManager.GetComponent<ShadowlingComponent>(component.Creator.Value);
-        _shadowling.OnPhaseChanged(component.Creator.Value, shadowlingComp, ShadowlingPhases.FailedAscension);
+        var shadowlingComp = Comp<ShadowlingComponent>(creator);
+        _shadowling.OnPhaseChanged(creator, shadowlingComp, ShadowlingPhases.FailedAscension);
         component.StartTimer = false;
     }
 

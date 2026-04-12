@@ -119,7 +119,7 @@
   description: It looks so much like jelly. I wonder what it tastes like?
   components:
   # <Trauma>
-  - type: LanguageKnowledge # replaces accent
+  - type: LanguageSpeaker # replaces accent
     speaks:
     - Bubblish
     understands:

@@ -46,10 +46,6 @@ ghost-role-information-navy-captain-name = Navy Captain
 ghost-role-information-navy-captain-description = Classified.
 ghost-role-information-navy-captain-rules = You are beholden to no rules.
 
-ghost-role-information-special-operations-officer-name = Special Operations Officer
-ghost-role-information-special-operations-officer-description = Send, brief, and direct emergency response teams or other Nanotrasen forces. Release the nuclear codes, or don't.
-ghost-role-information-special-operations-officer-rules = Bring the Nanotrasen Representative in alive, the rest are just collateral. [color=#yellow][bold]Navy Captain[/bold][/color] orders may change this.
-
 ghost-role-information-navy-officer-name = Navy Officer
 ghost-role-information-navy-officer-description = Answer faxes and radio communications directed at Central Command. Perform investigations on the station and it's crew.
 ghost-role-information-navy-officer-rules = Follow the orders of the [color=#yellow][bold]Navy Captain[/bold][/color]. In the absence of one, make your own judgements.
@@ -139,8 +135,6 @@ ghost-role-information-wraith-name-token = Wraith (Token)
 
 # Misc-Midround Antags
 
-ghost-role-information-grey-tide-name = The Grey Tide
-ghost-role-information-grey-tide-description = Against all the evil that shitsec can conjure, all the wickedness that sci can produce, we will send unto them only you. Robust and shit until it is done.
 grey-tide-role-greeting = Long forgotten in the depths of maints, you are [color=#880808]THE GREY-TIDE [/color], the clothes you wear have fused with your body from extensive robusting, this station isn't theirs to conquer...
 tide-objective-kill-everyone-desc = This station has wronged you for the last time, robust and tide until they are all dead.
 tide-objective-condition-kill-everyone-else-title = Robust everyone.

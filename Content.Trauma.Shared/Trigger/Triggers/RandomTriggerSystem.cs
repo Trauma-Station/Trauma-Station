@@ -13,6 +13,8 @@ public sealed class RandomTriggerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
 
+    private List<Entity<RandomTriggerComponent>> _triggering = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -25,7 +27,6 @@ public sealed class RandomTriggerSystem : EntitySystem
         base.Update(frameTime);
 
         var now = _timing.CurTime;
-        var tick = (int) _timing.CurTick.Value;
         var query = EntityQueryEnumerator<RandomTriggerComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -33,13 +34,18 @@ public sealed class RandomTriggerSystem : EntitySystem
                 continue;
 
             comp.NextUpdate = now + comp.UpdateDelay;
-            var seed = SharedRandomExtensions.HashCodeCombine(tick, GetNetEntity(uid).Id);
-            var rand = new Random(seed);
-            if (!rand.Prob(comp.Prob))
+            if (!SharedRandomExtensions.PredictedProb(_timing, comp.Prob, GetNetEntity(uid)))
                 continue;
 
-            _trigger.Trigger(uid, key: comp.KeyOut);
+            // wait until outside the query to trigger incase it spawns/deletes a RandomTrigger
+            _triggering.Add((uid, comp));
         }
+
+        foreach (var ent in _triggering)
+        {
+            _trigger.Trigger(ent.Owner, key: ent.Comp.KeyOut);
+        }
+        _triggering.Clear();
     }
 
     private void OnMapInit(Entity<RandomTriggerComponent> ent, ref MapInitEvent args)

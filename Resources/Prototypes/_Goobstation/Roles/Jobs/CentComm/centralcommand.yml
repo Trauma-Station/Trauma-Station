@@ -126,47 +126,6 @@
     pocket1: WeaponPistolCentcommAgent
 
 
-# Special Operations Officer
-
-- type: job
-  id: SpecialOperationsOfficer
-  name: job-name-special-operations-officer
-  description: job-description-operations-officer
-  playTimeTracker: JobSpecialOperationsOfficer
-  setPreference: false
-  startingGear: SpecialOperationsOfficerGear
-  icon: "JobIconNanotrasen"
-  supervisors: job-supervisors-commander
-  canBeAntag: false
-  requirements:
-    - !type:AgeRequirement
-      requiredAge: 21
-  accessGroups:
-    - AllAccess
-  access:
-    - CentralCommand
-    - NanotrasenRepresentative
-  special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant]
-
-- type: startingGear
-  id: SpecialOperationsOfficerGear
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitSpecOps
-    shoes: ClothingShoesBootsJackFilled
-    head: ClothingHeadHatBeretSecurity
-    eyes: ClothingEyesGlassesDeathsquad
-    gloves: ClothingHandsGlovesCombat
-    back: ClothingBackpackSatchelLeatherFilledSpecOps
-    outerClothing: ClothingOuterArmourInvisible
-    neck: ExecutiveIDCard
-    id: SpecialOperationsOfficerPDA
-    ears: ClothingHeadsetAltCentCom
-    belt: ClothingBeltHolsterFilledCentComm
-    suitstorage: WeaponRifleAnnie
-    pocket1: WeaponRevolverMateba
-
 # Diplomat
 
 - type: job

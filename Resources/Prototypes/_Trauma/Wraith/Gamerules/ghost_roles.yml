@@ -1,0 +1,14 @@
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostWraithRoundstart
+  components:
+  - type: GhostRole
+    name: ghost-role-information-wraith-name
+    description: ghost-role-information-wraith-description
+    rules: ghost-role-information-wraith-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+  - type: Sprite
+    sprite: /Textures/_Goobstation/Wraith/wraith.rsi
+    state: icon

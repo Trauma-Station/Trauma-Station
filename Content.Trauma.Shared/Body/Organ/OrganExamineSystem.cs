@@ -20,7 +20,7 @@ public sealed class OrganExamineSystem : EntitySystem
 
     private void OnHealthExamined(Entity<OrganExamineComponent> ent, ref BodyRelayedEvent<HealthBeingExaminedEvent> args)
     {
-        var identity = Identity.Entity(ent.Owner, EntityManager);
+        var identity = Identity.Entity(args.Body, EntityManager);
         var message = args.Args.Message;
         message.AddMarkupOrThrow(Loc.GetString(ent.Comp.Examine, ("target", identity), ("organ", ent)));
         message.PushNewline();

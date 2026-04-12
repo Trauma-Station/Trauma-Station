@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
 
 namespace Content.Medical.Shared.Cybernetics;
 
@@ -17,6 +16,12 @@ public sealed partial class CyberneticsComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Disabled;
+
+    /// <summary>
+    /// Chance to get disabled by an EMP.
+    /// </summary>
+    [DataField]
+    public float DisableChance = 1f;
 
     /// <summary>
     /// Damage to deal to the part containing this organ, or the part itself.

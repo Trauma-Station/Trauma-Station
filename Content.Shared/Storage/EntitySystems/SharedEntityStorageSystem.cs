@@ -415,7 +415,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
 
     public bool CanOpen(EntityUid user, EntityUid target, bool silent = false, EntityStorageComponent? component = null)
     {
-        if (!Resolve(target, ref component))
+        if (!Resolve(target, ref component, false)) // Trauma - don't log errors shitter
             return false;
 
         if (!HasComp<HandsComponent>(user))

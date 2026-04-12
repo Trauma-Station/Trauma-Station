@@ -19,7 +19,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Blob;
@@ -283,7 +282,7 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
     //             }
     //         }
     //         if (spawn)
-    //             EntityManager.SpawnEntity("BlobBorder", tileRef.GridIndices.ToEntityCoordinates(xform.GridUid.Value, _map));
+    //             Spawn("BlobBorder", tileRef.GridIndices.ToEntityCoordinates(xform.GridUid.Value, _map));
     //     }
     // }
 
@@ -339,7 +338,7 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
     //         }
     //     }
     //
-    //     EntityManager.SpawnEntity(component.BlobBorder, xform.Coordinates);
+    //     Spawn(component.BlobBorder, xform.Coordinates);
     // }
     //
     // private void OnStartup(EntityUid uid, BlobTileComponent component, ComponentStartup args)
@@ -429,11 +428,11 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
     //             spawn = false;
     //         }
     //         if (spawn)
-    //             EntityManager.SpawnEntity(component.BlobBorder, tileRef.GridIndices.ToEntityCoordinates(xform.GridUid.Value, _map));
+    //             Spawn(component.BlobBorder, tileRef.GridIndices.ToEntityCoordinates(xform.GridUid.Value, _map));
     //     }
     //     if (spaceNearCenter)
     //     {
-    //         EntityManager.SpawnEntity(component.BlobBorder, xform.Coordinates);
+    //         Spawn(component.BlobBorder, xform.Coordinates);
     //     }
     // }
     public void SwapSpecials(Entity<BlobNodeComponent> from, Entity<BlobNodeComponent> to)

@@ -1,5 +1,6 @@
 // <Trauma>
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Trauma.Common.CollectiveMind;
+using Content.Trauma.Common.Input;
 // </Trauma>
 using System.Globalization;
 using System.Linq;
@@ -64,7 +65,6 @@ public sealed partial class ChatUIController : UIController
 
     [UISystemDependency] private readonly ExamineSystem? _examine = default;
     [UISystemDependency] private readonly GhostSystem? _ghost = default;
-    [UISystemDependency] private readonly CollectiveMindSystem? _collectiveMind = default!; // Goobstation - Starlight collective mind port
     [UISystemDependency] private readonly TypingIndicatorSystem? _typingIndicator = default;
     [UISystemDependency] private readonly ChatSystem? _chatSys = default;
     [UISystemDependency] private readonly TransformSystem? _transform = default;
@@ -242,7 +242,7 @@ public sealed partial class ChatUIController : UIController
             InputCmdHandler.FromDelegate(_ => CycleChatChannel(false)));
 
         // Goobstation - Starlight collective mind port
-        _input.SetInputCommand(ContentKeyFunctions.FocusCollectiveMindChat,
+        _input.SetInputCommand(TraumaKeyFunctions.FocusCollectiveMindChat,
             InputCmdHandler.FromDelegate(_ => FocusChannel(ChatSelectChannel.CollectiveMind)));
 
         var gameplayStateLoad = UIManager.GetUIController<GameplayStateLoadController>();
@@ -583,7 +583,7 @@ public sealed partial class ChatUIController : UIController
         }
 
         // Goobstation - Starlight collective mind port
-        if (_collectiveMind != null && _collectiveMind.IsCollectiveMind)
+        if (EntityManager.HasComponent<CollectiveMindComponent>(_player.LocalEntity))
         {
             FilterableChannels |= ChatChannel.CollectiveMind;
             CanSendChannels |= ChatSelectChannel.CollectiveMind;

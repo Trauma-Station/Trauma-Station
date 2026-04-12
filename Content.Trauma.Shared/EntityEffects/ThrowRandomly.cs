@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -31,8 +30,7 @@ public sealed class ThrowRandomlyEffectSystem : EntityEffectSystem<MetaDataCompo
 
     protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<ThrowRandomly> args)
     {
-        var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(ent, ent.Comp).Id);
-        var rand = new Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent, ent.Comp));
         var angle = rand.NextAngle();
         var direction = angle.ToVec();
 

@@ -18,10 +18,10 @@ using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Executions;
@@ -47,15 +47,12 @@ public sealed class GunExecutionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
-
-    private EntityQuery<ProjectileComponent> _projectileQuery;
+    [Dependency] private readonly EntityQuery<ProjectileComponent> _projectileQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
-
-        _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         /* Interaction */
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);
@@ -141,6 +138,8 @@ public sealed class GunExecutionSystem : EntitySystem
 
         var coords = Transform(args.Shooter).Coordinates;
         var projectile = PredictedSpawnAtPosition(ent.Comp.Prototype, coords);
+        var firedEv = new CartridgeFiredEvent(projectile);
+        RaiseLocalEvent(ent, ref firedEv);
         // now have the actual projectile impact the target
         // for most bullets this just does hit, shotguns will do it for each pellet
         DoImpact(args.Weapon, projectile, args.Shooter, args.Target);

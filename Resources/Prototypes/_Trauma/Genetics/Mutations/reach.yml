@@ -7,6 +7,7 @@
   - type: Mutation
     instability: 35
     difficulty: 18
+    rarity: Mythical
   - type: ComponentMutation
     added:
     - type: Telekinesis
@@ -53,6 +54,7 @@
   - type: Mutation
     instability: 35
     difficulty: 24 # good luck chuddy
+    rarity: Mythical
   # TODO: prevent wearing gloves, disable picking up two handed items
   - type: EffectsMutation
     added:

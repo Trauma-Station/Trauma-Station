@@ -2,7 +2,6 @@
 
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 

@@ -157,7 +157,7 @@
 
 - type: entity
   name: seclite
-  parent: [FlashlightLantern, BaseSecurityCargoContraband] # Goob edit - Also allowed for Cargo
+  parent: [FlashlightLantern, BaseSecurityCargoContraband, BracingDurability] # Goob edit - Also allowed for Cargo - Trauma - Durability
   id: FlashlightSeclite
   description: A robust flashlight used by security.
   components:

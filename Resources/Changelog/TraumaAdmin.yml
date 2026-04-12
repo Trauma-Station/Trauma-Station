@@ -38,3 +38,87 @@ Entries:
   id: 5
   time: '2026-02-26T12:12:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/881
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added showareas command for toggling visibility of area entities.
+  id: 6
+  time: '2026-03-04T11:21:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/993
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added a cvar trauma.skill_gain to disable gaining XP.
+  id: 7
+  time: '2026-03-07T14:17:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1094
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: CBURN, ERT, DS no longer have skills you'll have to do it yourself.
+  id: 8
+  time: '2026-03-12T10:17:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1199
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added antag smite for insurgents.
+  id: 9
+  time: '2026-03-20T17:41:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1477
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added entityreport command to show the most common entities on the server.
+  id: 10
+  time: '2026-03-20T20:11:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1485
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed antag smites applying to you instead of the target...
+  id: 11
+  time: '2026-03-25T21:49:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1582
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: SM ashing players log is now extreme instead of medium.
+  id: 12
+  time: '2026-04-04T14:47:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1862
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the cleardecals command, use it if the server lags like crazy from
+      decals.
+  id: 13
+  time: '2026-04-07T07:00:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1895
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Implants no longer allow being implanted into anything via admeme
+      implanter, you have to VV the implant and remove its whitelist/blacklist
+      now.
+  id: 14
+  time: '2026-04-07T07:25:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1896
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Trialmins can no longer make watchlists, hitler dead.
+  id: 15
+  time: '2026-04-09T18:42:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1948
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed godmode not protecting from explosions or other things that directly
+      damage limbs.
+  id: 16
+  time: '2026-04-11T18:54:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1980

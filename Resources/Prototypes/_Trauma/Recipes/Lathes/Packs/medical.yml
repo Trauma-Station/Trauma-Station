@@ -6,6 +6,7 @@
   id: TraumaMedicalStatic
   recipes:
   - MedicalHyposprayEmpty
+  - MedicalCigCarton
 
 - type: latheRecipePack
   id: TraumaCyberneticsStatic
@@ -24,3 +25,9 @@
   recipes:
   - MedkitCombat
   - VialBluespace
+
+- type: latheRecipePack
+  id: TraumaMedicalBoards
+  recipes:
+  - StasisOperatingTableCircuitboard
+  - MedicalBiofabMachineBoard

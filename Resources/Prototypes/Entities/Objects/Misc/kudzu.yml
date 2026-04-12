@@ -237,7 +237,7 @@
     - type: Barotrauma
       damage:
         types:
-          Blunt: 0.10 #per second, scales with pressure and other constants.
+          Blunt: 1 # Trauma - was 0.1, it didn't die on spaced plating because of atmos shitcode
     - type: Flammable
       fireSpread: true
       damage:
@@ -273,6 +273,10 @@
   id: ShadowKudzu
   parent: [ BaseKudzu, BaseShadow ]
   components:
+    # <Trauma>
+    - type: TimedDespawn
+      lifetime: 180 # enough for antags to make use of it, not enough to be round ending aids
+    # </Trauma>
     - type: Physics
       canCollide: false
     - type: Occluder

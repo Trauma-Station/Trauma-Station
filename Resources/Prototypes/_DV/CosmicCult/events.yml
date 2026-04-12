@@ -3,14 +3,13 @@
   id: ColossusSpawn
   components:
   - type: StationEvent
-    weight: 3
-    earliestStart: 30
-    reoccurrenceDelay: 20
+    weight: 1
+    earliestStart: 40
+    reoccurrenceDelay: 30
     minimumPlayers: 40
     duration: null
   - type: SpaceSpawnRule
   - type: GameRule
-    chaosScore: 600 # Same as dragon
   - type: AntagSpawner
     prototype: MobCosmicColossusLone
   - type: AntagObjectives

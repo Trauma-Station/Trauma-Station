@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.Factory.Slots;
 using Content.Shared.Prototypes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Factory;
 
@@ -90,10 +89,10 @@ public sealed class AutomationSystem : EntitySystem
     private void CacheEntities()
     {
         _automatable.Clear();
-        var factory = EntityManager.ComponentFactory;
+        var name = Factory.GetComponentName<AutomationSlotsComponent>();
         foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.HasComponent<AutomationSlotsComponent>(factory))
+            if (proto.Components.ContainsKey(name))
                 _automatable.Add(proto.ID);
         }
 

@@ -8,7 +8,7 @@
   spawn: PartRodMetal1
 
 - type: stack
-  parent: BaseVerySmallStack
+  parent: BaseMediumStack # Trauma
   id: Gunpowder
   name: stack-gunpowder
   icon: { sprite: /Textures/Objects/Misc/reagent_fillings.rsi, state: powderpile }

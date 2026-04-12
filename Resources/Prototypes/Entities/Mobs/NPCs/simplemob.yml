@@ -13,7 +13,6 @@
       Flammable: [Touch]
       Extinguish: [Touch]
       Acidic: [Touch, Ingestion]
-  - type: Internals
   - type: MovementSpeedModifier
     baseWalkSpeed : 4
     baseSprintSpeed : 4
@@ -76,8 +75,6 @@
   suffix: AI
   abstract: true
   components:
-  - type: CombatPower # Goobstation
-    factor: 0.5 # As dangerous as half a crew-member
   - type: Hunger
     thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
       Overfed: 100

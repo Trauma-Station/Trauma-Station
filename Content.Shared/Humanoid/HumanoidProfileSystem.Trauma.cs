@@ -1,7 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Barks;
 using Content.Shared.Body;
 using Content.Shared.DetailExaminable;
 using Content.Shared.Preferences;
+using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Enums;
 using Robust.Shared.GameObjects.Components.Localization;
 using Robust.Shared.Prototypes;
@@ -14,6 +18,7 @@ namespace Content.Shared.Humanoid;
 public sealed partial class HumanoidProfileSystem
 {
     [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
 
     public static readonly ProtoId<BarkPrototype> DefaultBarkVoice = "Alto";
@@ -57,7 +62,14 @@ public sealed partial class HumanoidProfileSystem
         comp.VoicePrototypeId = voicePrototypeId;
         Dirty(ent, comp);
         ent.Comp.BarkVoice = voicePrototypeId;
-        Dirty(ent);
+    }
+
+    public void SetKnowledgeProfile(Entity<HumanoidProfileComponent> ent, KnowledgeProfile profile)
+    {
+        ent.Comp.Knowledge = profile;
+
+        var parent = _prototype.Index(ent.Comp.Species).Knowledge;
+        _knowledge.ApplyProfile(ent, parent, profile);
     }
 
     // god i love shitcode having 0 apis so i must write even more shitcode
@@ -87,7 +99,8 @@ public sealed partial class HumanoidProfileSystem
             new(),
             new(),
             new(),
-            ent.Comp.BarkVoice);
+            ent.Comp.BarkVoice,
+            new(ent.Comp.Knowledge));
     }
 
     /// <summary>

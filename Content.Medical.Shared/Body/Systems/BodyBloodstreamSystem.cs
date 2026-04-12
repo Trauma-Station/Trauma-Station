@@ -365,8 +365,8 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
             return;
 
         // TODO SHITMED: predicted wounds popups etc
-        _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/lightburn.ogg"), body);
-        _popup.PopupEntity(Loc.GetString("bloodstream-component-wounds-cauterized"),
+        _audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/lightburn.ogg"), body, body);
+        _popup.PopupClient(Loc.GetString("bloodstream-component-wounds-cauterized"),
             body,
             body,
             PopupType.MediumCaution);

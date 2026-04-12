@@ -305,6 +305,11 @@
       state: boxer
     - type: RandomHumanoidSpawner
       settings: VisitorBoxer
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 26
+    # </Trauma>
 
 - type: entity
   id: RandomHumanoidVisitorChaplain
@@ -315,6 +320,12 @@
       state: chaplain
     - type: RandomHumanoidSpawner
       settings: VisitorChaplain
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        LiteracyKnowledge: 26
+        MagicalLiteracyKnowledge: 50
+    # </Trauma>
 
 - type: entity
   id: RandomHumanoidVisitorChef
@@ -567,6 +578,15 @@
       state: banner_syndicate
     - type: RandomHumanoidSpawner
       settings: SyndieSoldierTeamLeader
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 50
+        ShootingKnowledge: 50
+        StrengthKnowledge: 50
+        ToughnessKnowledge: 50
+        MartialArtCQC: 50
+    # </Trauma>
 
 - type: entity
   id: RandomHumanoidSyndieSoldier
@@ -577,6 +597,15 @@
       state: banner_syndicate
     - type: RandomHumanoidSpawner
       settings: SyndieSoldier
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 26
+        ShootingKnowledge: 26
+        StrengthKnowledge: 26
+        ToughnessKnowledge: 26
+        MartialArtCQC: 26
+    # </Trauma>
 
 - type: entity
   id: RandomHumanoidSyndieVisitor
@@ -587,6 +616,14 @@
       state: banner_syndicate
     - type: RandomHumanoidSpawner
       settings: SyndieVisitor
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 15
+        ShootingKnowledge: 15
+        StrengthKnowledge: 15
+        ToughnessKnowledge: 15
+    # </Trauma>
 
 - type: entity
   id: RandomHumanoidPirateScooner
@@ -598,6 +635,14 @@
       state: banner-red
     - type: RandomHumanoidSpawner
       settings: PirateScooner
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 40
+        ShootingKnowledge: 30
+        StrengthKnowledge: 30
+        ToughnessKnowledge: 30
+    # </Trauma>
 
 - type: entity
   id: RandomHumanoidPirateCaptainScooner
@@ -609,6 +654,14 @@
       state: banner-red
     - type: RandomHumanoidSpawner
       settings: PirateCaptainScooner
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 30
+        ShootingKnowledge: 20
+        StrengthKnowledge: 20
+        ToughnessKnowledge: 20
+    # </Trauma>
 
 ### Other
 
@@ -621,7 +674,14 @@
       state: banner-yellow
     - type: RandomHumanoidSpawner
       settings: VisitorBlackmarketeer
-
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 20
+        ShootingKnowledge: 20
+        StrengthKnowledge: 20
+        ToughnessKnowledge: 20
+    # </Trauma>
 
 - type: entity
   id: RandomHumanoidCossack
@@ -632,3 +692,11 @@
       state: banner-yellow
     - type: RandomHumanoidSpawner
       settings: Cossack
+    # <Trauma>
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 20
+        ShootingKnowledge: 20
+        StrengthKnowledge: 20
+        ToughnessKnowledge: 20
+    # </Trauma>

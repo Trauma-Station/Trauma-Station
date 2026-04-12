@@ -1,8 +1,10 @@
 // <Trauma>
+using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Common.Parry;
 using Content.Goobstation.Common.Weapons;
-using Content.Goobstation.Common.MartialArts;
 using Content.Lavaland.Common.Weapons;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Physics.Components;
@@ -273,13 +275,18 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
         var ev = new GetMeleeDamageEvent(uid, new(component.Damage * Damageable.UniversalMeleeDamageModifier), new(), user, component.ResistanceBypass);
         RaiseLocalEvent(uid, ref ev);
-        // <Goobstation> - raise an event on the user too for strength augments
-        var userEv = new GetUserMeleeDamageEvent(uid, ev.Damage, ev.Modifiers);
-        RaiseLocalEvent(user, ref userEv);
-        // this currently does nothing since they are classes, but it's futureproofing for struct DamageSpecifier.
-        ev.Damage = userEv.Damage;
-        ev.Modifiers = userEv.Modifiers;
-        // </Goobstation>
+        // <Trauma> - raise an event on the user too for strength augments, knowledge, etc
+        // only consider if the user is punching or holding a weapon
+        // non-held weapons are stuff like mechs which don't take physical effort to use, so don't apply strength etc
+        if (uid == user || _hands.IsHolding(user, uid))
+        {
+            var userEv = new GetUserMeleeDamageEvent(uid, ev.Damage, ev.Modifiers);
+            RaiseLocalEvent(user, ref userEv);
+            // this currently does nothing since they are classes, but it's futureproofing for struct DamageSpecifier.
+            ev.Damage = userEv.Damage;
+            ev.Modifiers = userEv.Modifiers;
+        }
+        // </Trauma>
 
         return DamageSpecifier.ApplyModifierSets(ev.Damage, ev.Modifiers);
     }
@@ -618,7 +625,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         var hitEvent = new MeleeHitEvent(new List<EntityUid> { target.Value }, user, meleeUid, damage, null, GetCoordinates(ev.Coordinates)); // Goob edit
         RaiseLocalEvent(meleeUid, hitEvent, true); // Goob station - broadcast
 
-
         if (hitEvent.Handled)
             return;
 
@@ -635,6 +641,16 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // somewhat messy scuffle. See also, heavy attacks.
         Interaction.DoContactInteraction(user, target);
 
+        // <Trauma>
+        if (component.CanParryLight)
+        {
+            var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, target.Value);
+            RaiseLocalEvent(target.Value, ref parryAttemptEv);
+            if (parryAttemptEv.Parried)
+                return;
+        }
+        // </Trauma>
+
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
         RaiseLocalEvent(target.Value, attackedEvent);
@@ -642,7 +658,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // <Goob>
         modifiedDamage = DamageSpecifier.ApplyModifierSets(modifiedDamage, attackedEvent.ModifiersList);
         var comboEv = new ComboAttackPerformedEvent(user, target.Value, meleeUid, ComboAttackType.Harm);
-        RaiseLocalEvent(user, comboEv);
+        RaiseLocalEvent(user, ref comboEv);
         // </Goob>
 
         if (Damageable.TryChangeDamage(target.Value, modifiedDamage, out var damageResult, origin:user, ignoreResistances:resistanceBypass,
@@ -799,10 +815,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         var appliedDamage = new DamageSpecifier();
-        // <Goob>
-        var seed = SharedRandomExtensions.HashCodeCombine(GetNetEntity(meleeUid).Id, (int) Timing.CurTick.Value);
-        var random = new System.Random(seed);
-        // </Goob>
 
         for (var i = targets.Count - 1; i >= 0; i--)
         {
@@ -817,6 +829,16 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 continue;
             }
 
+            // <Trauma>
+            if (component.CanParryWide)
+            {
+                var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, entity);
+                RaiseLocalEvent(entity, ref parryAttemptEv);
+                if (parryAttemptEv.Parried)
+                    continue;
+            }
+            // </Trauma>
+
             var attackedEvent = new AttackedEvent(meleeUid, user, GetCoordinates(ev.Coordinates));
             RaiseLocalEvent(entity, attackedEvent);
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
@@ -828,7 +850,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                     modifiedDamage.WoundSeverityMultipliers[type] *= component.HeavyAttackWoundMultiplier;
             }
             var comboEv = new ComboAttackPerformedEvent(user, entity, meleeUid, ComboAttackType.HarmLight);
-            RaiseLocalEvent(user, comboEv);
+            RaiseLocalEvent(user, ref comboEv);
             // </Goob>
 
             var damageResult = Damageable.ChangeDamage(entity, modifiedDamage, origin: user, ignoreResistances: resistanceBypass,
@@ -872,8 +894,14 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
         // goob edit - stunmeta
         if (TryComp<StaminaComponent>(user, out var stamina) && entities.Count != 0)
+        {
+            // <Trauma>
+            var staminaDamage = component.HeavyStaminaCost * entities.Count;
+            AdjustStaminaDamage(user, ref staminaDamage);
+            // </Trauma>
             // make it not immediate to prevent annoying stamcrits
-            _stamina.TakeStaminaDamage(user, component.HeavyStaminaCost * (entities.Count - 1), stamina, visual: false, immediate: false);
+            _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);
+        }
 
         return true;
     }
@@ -999,7 +1027,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         {
             _meleeSound.PlaySwingSound(user, meleeUid, component);
             var selfComboEv = new ComboAttackPerformedEvent(user, user, meleeUid, ComboAttackType.Disarm);
-            RaiseLocalEvent(user, selfComboEv);
+            RaiseLocalEvent(user, ref selfComboEv);
             return false;
         }
 
@@ -1016,7 +1044,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return false;
 
         var comboEv = new ComboAttackPerformedEvent(user, target, meleeUid, ComboAttackType.Disarm);
-        RaiseLocalEvent(user, comboEv);
+        RaiseLocalEvent(user, ref comboEv);
         // Goobstation end
 
         PhysicalShove(user, target);

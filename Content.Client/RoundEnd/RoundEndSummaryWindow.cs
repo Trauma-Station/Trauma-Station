@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Goobstation.Common.StationReport;
 using Content.Goobstation.UIKit.UserInterface.Controls;
 using Content.Client.Stylesheets;
 using Content.Shared.Mobs;
@@ -239,18 +240,7 @@ namespace Content.Client.RoundEnd
                     var highestDamage = playerInfo.DamagePerGroup
                         .OrderByDescending(kvp => kvp.Value)
                         .First();
-                    var typeAdj = highestDamage.Key switch
-                    {
-                        "Burn" => "fiery",
-                        "Brute" => "crushing",
-                        "Toxin" => "poisonous",
-                        "Airloss" => "suffocating",
-                        "Genetic" => "twisted",
-                        "Metaphysical" => "otherworldly",
-                        "Electronic" => "shocking",
-                        _ => "mysterious",
-                    };
-
+                    var typeAdj = Loc.GetString("damage-death-adjective-" + highestDamage.Key);
                     deathLabel.SetMarkup(
                         Loc.GetString("round-end-summary-window-death",
                             ("severity", severityAdj),
@@ -266,7 +256,7 @@ namespace Content.Client.RoundEnd
                         if (damage.Value <= 0)
                             continue;
 
-                        var color = damage.Key switch
+                        var color = damage.Key.ToString() switch
                         {
                             "Burn" => Color.Orange,
                             "Brute" => Color.Red,
@@ -324,11 +314,12 @@ namespace Content.Client.RoundEnd
 
             return playerManifestTab;
         }
+        // TODO: make this shitcode injected instead of shitting this up
         private BoxContainer MakeStationReportTab()
         {
             string stationReportText = Loc.GetString("no-station-report-summited");
             //gets the stationreport varibible and sets the station report tab text to it if the map doesn't have a tablet will say No station report submitted
-            var stationReportSystem = _entityManager.System<Goobstation.Common.StationReport.StationReportSystem>();
+            var stationReportSystem = _entityManager.System<CommonNtrStationReportSystem>();
             if (!string.IsNullOrWhiteSpace(stationReportSystem.StationReportText) && stationReportSystem.StationReportText != Loc.GetString("station-report-text"))
             {
                 stationReportText = Loc.GetString(

@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.EntityEffects;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Buckle;
 

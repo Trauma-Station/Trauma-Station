@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Input;
 // </Trauma>
 using System.Numerics;
 using Content.Client.Stylesheets;
@@ -180,7 +181,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.Walk);
             AddCheckBox("ui-options-hotkey-toggle-walk", _cfg.GetCVar(CCVars.ToggleWalk), HandleToggleWalk);
             AddCheckBox("ui-options-hotkey-default-walk", _cfg.GetCVar(GoobCVars.DefaultWalk), HandleDefaultWalk); // Goob
-            AddButton(ContentKeyFunctions.Sprint); // Goob
+            AddButton(TraumaKeyFunctions.Sprint); // Goob
             InitToggleWalk();
             AddButton(ContentKeyFunctions.ToggleKnockdown);
 
@@ -202,13 +203,14 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.Drop);
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
-            AddButton(ContentKeyFunctions.ResistGrab); // Goob
+            AddButton(TraumaKeyFunctions.ResistGrab); // Goob
             AddButton(ContentKeyFunctions.SwapHandsReverse);
             AddButton(ContentKeyFunctions.MoveStoredItem);
             AddButton(ContentKeyFunctions.RotateStoredItem);
             AddButton(ContentKeyFunctions.SaveItemLocation);
 
             AddHeader("ui-options-header-interaction-adv");
+            AddButton(TraumaKeyFunctions.Tackle); // Trauma
             AddButton(ContentKeyFunctions.SmartEquipBackpack);
             AddButton(ContentKeyFunctions.SmartEquipBelt);
             AddButton(ContentKeyFunctions.SmartEquipPocket1);
@@ -242,7 +244,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.OpenCraftingMenu);
             AddButton(ContentKeyFunctions.OpenGuidebook);
             AddButton(ContentKeyFunctions.OpenInventoryMenu);
-            AddButton(ContentKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
+            AddButton(TraumaKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
             AddButton(ContentKeyFunctions.OpenAHelp);
             AddButton(ContentKeyFunctions.OpenActionsMenu);
             AddButton(ContentKeyFunctions.OpenEmotesMenu);
@@ -256,6 +258,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.WindowCloseRecent);
             AddButton(EngineKeyFunctions.EscapeMenu);
             AddButton(ContentKeyFunctions.EscapeContext);
+            AddButton(TraumaKeyFunctions.OpenMartialArtsMenu); // Trauma
 
             // <Trauma>
             // TODO: change to scrolling x/y

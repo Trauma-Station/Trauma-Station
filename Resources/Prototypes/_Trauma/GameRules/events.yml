@@ -8,64 +8,91 @@
     - id: MalignRiftSpawn
     - id: FloorGoblinMidRound
     - id: ClownGoblinMigration
-    - id: PlagueMiceSpawn
+    - id: RadiationStormRule
+
+- type: entityTable
+  id: BasicAntagEventsTrauma
+  table: !type:AllSelector
+    children:
+    - id: CarpMigrationRule
+    # TOOD: remove these if they fucking suck lmao
+    - id: SingulothKnightsMidround
+    - id: MimeAssassinMidround
+    - id: VoxRaidersMidround
+    - id: TunnelClownMidround
+    - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
+    - id: ParadoxCloneSpawn
+    - id: MorphRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
     - id: BlobSpawn
-    # - id: LoneAbductorSpawn
     - id: DuoAbductorSpawn
     - id: BingleSpawn
-    # - id: SlaughterDemonMidround - Wizard/Ninja only antag, maybe devil eventually
     - id: XenomorphsInfestation
-    # TOOD: remove these if they fucking suck lmao
-    - id: GreyTideAntagMidround
-    - id: SingulothKnightsMidround
-    - id: DarkLordMidround
-    - id: MimeAssassinMidround
-    - id: DarkPriestMidround
-    - id: VoxRaidersMidround
-    - id: TunnelClownMidround
-    #- id: WraithMidround # if someone makes it less chuddy
-    # - id: ChangelingMidround # Trauma - We dont want lings in other game modes people hate it
-    # - id: HereticMidround # Trauma - Heretics scale too slowly here to do this
-    # - id: Devilmidround # Trauma - Devil midround does not make sense and is kinda weird
-    - id: Dud50
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
 
 - type: entity
-  parent: BaseStationEventShortDelay
-  id: PlagueMiceSpawn
+  parent: BaseGameRule
+  id: CarpMigrationRule
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
-    earliestStart: 20
-    minimumPlayers: 15
-    weight: 4 # annoying
-    reoccurrenceDelay: 60 # no spamming them
-    duration: 30
-    chaos:
-      Hostile: 20
-      Medical: 100
-    eventType: HostilesSpawn
-  - type: GameRule
-    chaosScore: 200
-  - type: VentCrittersRule
-    min: 1
-    max: 3
-    playerRatio: 50
-    table:
-      id: MobMousePlague
+    duration: 1
+    weight: 1
+  - type: CarpMigrationRule
+  - type: SpaceSpawnRule
 
 - type: entity
   parent: BaseGameRule
-  id: Dud50
+  id: RadiationStormRule
   components:
   - type: StationEvent
-    weight: 50
+    weight: 0.5
+    startAnnouncement: station-event-radiation-storm-announcement
+    minimumPlayers: 25
+    reoccurrenceDelay: 20
+    maxOccurrences: 3
     duration: 1
-  - type: GameRule
-    chaosScore: 200
+  - type: RadiationStormRule
+  - type: MapEffectsRule
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: WeatherSchedulerRadiationStorm
+      time: null # it removes itself when done
+
+- type: entity
+  id: RatmaSpawn
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 30
+    weight: 3
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table:
+      id: MobRatma
+      amount: 1, 1
+
+- type: entity
+  id: WailingHorseSpawn
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 30
+    weight: 3
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table:
+      id: MobWailingHorse
+      amount: 1, 1

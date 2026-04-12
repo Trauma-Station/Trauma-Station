@@ -14,6 +14,7 @@ namespace Content.Trauma.Shared.Loadouts;
 /// </summary>
 public sealed partial class PlayerGUIDLoadoutEffect : LoadoutEffect
 {
+    // TODO: validate this shit in linter
     [DataField(required: true)]
     public string Guid;
 
@@ -27,7 +28,15 @@ public sealed partial class PlayerGUIDLoadoutEffect : LoadoutEffect
             return false;
         }
 
-        _guid ??= new Guid(Guid);
+        try
+        {
+            _guid ??= new Guid(Guid);
+        }
+        catch
+        {
+            reason = FormattedMessage.FromUnformatted($"Loadout effect {Guid} is malformed, please report this bug!");
+            return false;
+        }
 
         if (session.UserId == _guid)
         {

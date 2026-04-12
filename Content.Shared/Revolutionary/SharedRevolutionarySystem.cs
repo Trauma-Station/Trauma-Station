@@ -1,15 +1,6 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 EmoGarbage404 <retron404@gmail.com>
-// SPDX-FileCopyrightText: 2023 coolmankid12345 <55817627+coolmankid12345@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 coolmankid12345 <coolmankid12345@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Mindshield;
+// </Trauma>
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
@@ -21,7 +12,7 @@ using Content.Shared.Antag;
 
 namespace Content.Shared.Revolutionary;
 
-public abstract class SharedRevolutionarySystem : EntitySystem
+public abstract partial class SharedRevolutionarySystem : EntitySystem // Trauma - made partial
 {
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedStunSystem _sharedStun = default!;
@@ -34,10 +25,12 @@ public abstract class SharedRevolutionarySystem : EntitySystem
         SubscribeLocalEvent<RevolutionaryComponent, ComponentGetStateAttemptEvent>(OnRevCompGetStateAttempt);
         SubscribeLocalEvent<HeadRevolutionaryComponent, ComponentGetStateAttemptEvent>(OnRevCompGetStateAttempt);
 
-        SubscribeLocalEvent<RevolutionaryComponent, ComponentStartup>(OnRevolutionaryComponentStartup); // Goob Station - Revolutionary Language
-        SubscribeLocalEvent<HeadRevolutionaryComponent, ComponentStartup>(OnRevolutionaryComponentStartup); // Goob Station - Revolutionary Language
-
-        SubscribeLocalEvent<ShowAntagIconsComponent, ComponentStartup>(OnRevolutionaryComponentStartup);
+        SubscribeLocalEvent<RevolutionaryComponent, ComponentStartup>(DirtyRevComps);
+        SubscribeLocalEvent<HeadRevolutionaryComponent, ComponentStartup>(DirtyRevComps);
+        SubscribeLocalEvent<ShowAntagIconsComponent, ComponentStartup>(DirtyRevComps);
+        // <Trauma>
+        SubscribeLocalEvent<HeadRevolutionaryComponent, RemoveMindShieldEvent>(OnMindshieldRemoval);
+        // </Trauma>
     }
 
     /// <summary>
@@ -47,7 +40,7 @@ public abstract class SharedRevolutionarySystem : EntitySystem
     {
         if (HasComp<HeadRevolutionaryComponent>(uid))
         {
-            comp.Broken = true; // Goobstation - Broken mindshield implant instead of break it
+            comp.Broken = true; // Goobstation - Break the mindshield implant instead of removing it
             Dirty(uid, comp);
             return;
         }
@@ -101,7 +94,7 @@ public abstract class SharedRevolutionarySystem : EntitySystem
     /// becomes a rev then we need to send all the components to it. To my knowledge there is no way to do this on a
     /// per client basis so we are just dirtying all the components.
     /// </summary>
-    public virtual void OnRevolutionaryComponentStartup<T>(EntityUid someUid, T someComp, ComponentStartup ev) // Goob Station - Revolutionary Language (made public virtual)
+    private void DirtyRevComps<T>(EntityUid someUid, T someComp, ComponentStartup ev)
     {
         var revComps = AllEntityQuery<RevolutionaryComponent>();
         while (revComps.MoveNext(out var uid, out var comp))
@@ -114,14 +107,5 @@ public abstract class SharedRevolutionarySystem : EntitySystem
         {
             Dirty(uid, comp);
         }
-    }
-
-    // GoobStation
-    /// <summary>
-    /// Change headrevs ability to convert people
-    /// </summary>
-    public void ToggleConvertAbility(Entity<HeadRevolutionaryComponent> headRev, bool toggle = true)
-    {
-        headRev.Comp.ConvertAbilityEnabled = toggle;
     }
 }

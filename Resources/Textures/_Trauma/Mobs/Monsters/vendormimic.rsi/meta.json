@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "asardonicsailor",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "alive",
+      "delays": [
+        [
+          0.15,
+          0.10,
+          0.10,
+          0.10,
+          0.15,
+          0.10,
+          0.10,
+          0.15
+        ]
+    ]
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

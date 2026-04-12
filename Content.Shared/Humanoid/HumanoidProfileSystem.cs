@@ -24,12 +24,15 @@ public sealed partial class HumanoidProfileSystem : EntitySystem // Trauma - mad
         if (!Resolve(ent, ref ent.Comp))
             return;
 
-        SetBarkVoice((ent, ent.Comp), profile.BarkVoice); // Trauma
         ent.Comp.Gender = profile.Gender;
         ent.Comp.Age = profile.Age;
         ent.Comp.Species = profile.Species;
         ent.Comp.Sex = profile.Sex;
         Dirty(ent);
+        // <Trauma>
+        SetBarkVoice((ent, ent.Comp), profile.BarkVoice);
+        SetKnowledgeProfile((ent, ent.Comp), profile.Knowledge);
+        // </Trauma>
 
         var sexChanged = new SexChangedEvent(ent.Comp.Sex, profile.Sex);
         RaiseLocalEvent(ent, ref sexChanged);

@@ -40,8 +40,8 @@
   id: SpawnPointWizard
   components:
   - type: GhostRole
-    name: roles-wizard-name
-    description: roles-wizard-objective
+    name: roles-antag-wizard-name
+    description: roles-antag-wizard-objective-goob
     rules: ghost-role-information-antagonist-rules
     mindRoles:
     - MindRoleGhostRoleFreeAgent

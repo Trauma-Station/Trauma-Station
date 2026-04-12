@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Silicons.StationAi;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Silicon.AiCameraWarping;
 

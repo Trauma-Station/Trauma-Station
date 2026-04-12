@@ -51,3 +51,6 @@
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/_Goobstation/Heretic/wail.ogg
+  - type: GuideHelp
+    guides:
+    - HereticPotions

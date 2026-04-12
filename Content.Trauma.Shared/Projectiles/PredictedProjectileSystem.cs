@@ -16,7 +16,6 @@ using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Bulletholes;
 using Content.Trauma.Shared.Executions;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
@@ -42,17 +41,13 @@ public sealed class PredictedProjectileSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedProjectileSystem _projectile = default!;
 
-    private EntityQuery<ProjectileComponent> _query;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
+    [Dependency] private readonly EntityQuery<ProjectileComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private readonly EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ProjectileComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
     }
@@ -76,7 +71,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
     {
         if (!_query.TryComp(uid, out var comp) ||
             !_physicsQuery.TryComp(uid, out var physics) ||
-            FindHardFixture(target) is not {} otherFixture)
+            FindHardFixture(target) is not { } otherFixture)
             return;
 
         DoHit((uid, comp, physics), target, otherFixture);
@@ -102,11 +97,15 @@ public sealed class PredictedProjectileSystem : EntitySystem
     public void DoHit(Entity<ProjectileComponent, PhysicsComponent> ent, EntityUid target, Fixture otherFixture)
     {
         var (uid, comp, ourBody) = ent;
-        if (comp.ProjectileSpent || comp is { Weapon: null, OnlyCollideWhenShot: true })
+        if (comp is { Weapon: null, OnlyCollideWhenShot: true })
+            return;
+
+        // ignore spent in prediction ticks to allow for embedding to be predicted properly
+        if (comp.ProjectileSpent && _timing.IsFirstTimePredicted)
             return;
 
         // it's here so this check is only done once before possible hit
-        var attemptEv = new ProjectileReflectAttemptEvent(uid, comp, false);
+        var attemptEv = new ProjectileReflectAttemptEvent(uid, comp, false, target);
         RaiseLocalEvent(target, ref attemptEv);
         if (attemptEv.Cancelled)
         {
@@ -127,7 +126,7 @@ public sealed class PredictedProjectileSystem : EntitySystem
         var damageRequired = _destructible.DestroyedAt(target);
         if (TryComp<DamageableComponent>(target, out var damageable))
         {
-            damageRequired -= damageable.TotalDamage;
+            damageRequired -= _damageable.GetTotalDamage((target, damageable));
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
 

@@ -1,18 +1,10 @@
-// SPDX-FileCopyrightText: 2021 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Net;
+using Content.Server.Administration.Logs;
 using Content.Server.Database;
 using Content.Shared.CCVar;
+using Content.Shared.Database;
 using Content.Shared.Info;
+using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 
@@ -23,6 +15,8 @@ public sealed class RulesManager
     [Dependency] private readonly IServerDbManager _dbManager = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     private static DateTime LastValidReadTime => DateTime.UtcNow - TimeSpan.FromDays(60);
 
@@ -35,8 +29,8 @@ public sealed class RulesManager
 
     private async void OnConnected(object? sender, NetChannelArgs e)
     {
-         var isLocalhost = IPAddress.IsLoopback(e.Channel.RemoteEndPoint.Address) &&
-                               _cfg.GetCVar(CCVars.RulesExemptLocal);
+        var isLocalhost = IPAddress.IsLoopback(e.Channel.RemoteEndPoint.Address) &&
+                            _cfg.GetCVar(CCVars.RulesExemptLocal);
 
         var lastRead = await _dbManager.GetLastReadRules(e.Channel.UserId);
         var hasCooldown = lastRead > LastValidReadTime;
@@ -54,5 +48,7 @@ public sealed class RulesManager
     {
         var date = DateTime.UtcNow;
         await _dbManager.SetLastReadRules(message.MsgChannel.UserId, date);
+        if (message.FuckRules && _player.TryGetSessionById(message.MsgChannel.UserId, out var session))
+            _adminLog.Add(LogType.Connection, LogImpact.Extreme, $"Player {session} used the fuckrules command.");
     }
 }

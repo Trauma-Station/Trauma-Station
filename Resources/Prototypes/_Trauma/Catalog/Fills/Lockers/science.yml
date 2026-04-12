@@ -1,3 +1,27 @@
+# Roboticist
+
+- type: entity
+  parent: LockerRoboticist
+  id: LockerRoboticsFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: LockerFillRoboticist
+
+- type: entityTable
+  id: LockerFillRoboticist
+  table: !type:AllSelector
+    children:
+    - id: ClothingHandsGlovesRobohands
+    - id: ClothingHeadsetRobotics
+    - id: ClothingMaskSterile
+    - id: ClothingOuterCoatRobo
+    - id: ClothingOuterWinterRobo
+    - id: ClothingBeltUtilityFilled
+    - id: ClothingEyesHudDiagnostic
+
 # Geneticist
 
 - type: entity

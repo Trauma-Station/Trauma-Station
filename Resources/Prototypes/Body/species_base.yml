@@ -6,7 +6,7 @@
   - MobDamageable
   - MobPolymorphable
   - StripableInventoryBase
-  - BaseSpeciesAppearance
+  #- BaseSpeciesAppearance # Trauma - every species inherits this itself
   id: BaseSpeciesMob
   save: false
   components:
@@ -18,13 +18,14 @@
   - type: CPRTraining # IPCs can try CPR i guess?? it won't work
   - type: StunVisuals
   - type: HasJobIcons
-  - type: LanguageKnowledge # all mobs should speak TauCeti unless otherwise specified, to prevent universal.
+  - type: LanguageSpeaker # all mobs should speak TauCeti unless otherwise specified, to prevent universal.
     speaks:
     - TauCetiBasic
     understands:
     - TauCetiBasic
   - type: BloodSplatterer
   - type: CanEscapeInventory
+  - type: CanBeShadowCocoon
   - type: Consciousness
     cap: 190
     threshold: 95
@@ -45,9 +46,10 @@
       100: SoftCrit
       150: Critical
       200: Dead
-  - type: Mutatable
   - type: Destructible
     thresholds: [] # remove gib threshold, you can gib the torso instead
+  - type: Tackler
+  - type: KnowledgeHolder
   # </Trauma>
   # Shitmed - woundable visuals used instead
   #- type: DamageVisuals
@@ -222,6 +224,7 @@
   - type: WraithAbsorbable
   - type: DiseaseCarrier
   - type: Scent
+  - type: Mutatable
   - type: Immunity
     affectedTypes:
     - Viral
@@ -238,12 +241,12 @@
   #- type: PassiveDamage # Trauma - no
   #  allowedStates:
   #  - Alive
-  #  damageCap: 20
   #  damage:
   #    types:
   #      Heat: -0.07
-  #    groups:
-  #      Brute: -0.07
+  #      Blunt: -0.05
+  #      Piercing: -0.05
+  #      Slash: -0.05
   - type: Fingerprint
   - type: Blindable
   - type: Temperature

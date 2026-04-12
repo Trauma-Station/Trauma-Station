@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.Administration;
 using Content.Client.Administration.UI.Tabs.PlayerTab;
 using Content.Client.Audio; // Goobstation - Admin Notifications
@@ -97,7 +91,7 @@ public sealed partial class AdminOptionsTab : Control
         Control.AddOptionPercentSlider(
             GoobCVars.AdminNotificationVolume,
             NotificationsVolumeSlider,
-            scale: ContentAudioSystem.AdminNotificationsMultiplier);
+            scale: 1f);
         // Goobstation End
     }
 }

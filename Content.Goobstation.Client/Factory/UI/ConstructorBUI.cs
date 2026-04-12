@@ -5,11 +5,11 @@ using Content.Client.Construction.UI;
 using Content.Goobstation.Shared.Factory;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Goobstation.Client.Factory.UI;
@@ -17,6 +17,7 @@ namespace Content.Goobstation.Client.Factory.UI;
 public sealed class ConstructorBUI : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    private readonly CommonKnowledgeSystem _knowledge = default!;
     private readonly ConstructionSystem _construction;
     private readonly EntityWhitelistSystem _whitelist;
     private readonly SpriteSystem _sprite;
@@ -29,6 +30,7 @@ public sealed class ConstructorBUI : BoundUserInterface
 
     public ConstructorBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _knowledge = EntMan.System<CommonKnowledgeSystem>();
         _construction = EntMan.System<ConstructionSystem>();
         _whitelist = EntMan.System<EntityWhitelistSystem>();
         _sprite = EntMan.System<SpriteSystem>();
@@ -52,7 +54,9 @@ public sealed class ConstructorBUI : BoundUserInterface
             {
                 _id = item.Prototype.ID;
                 _menu.SetRecipeInfo(item.Prototype.Name ?? "", item.Prototype.Description ?? "", item?.TargetPrototype,
-                    item!.Prototype.Type != ConstructionType.Item, true); // TODO: favourites
+                    item!.Prototype.Type != ConstructionType.Item, true, // TODO: favourites
+                    true,
+                    item.Prototype);
 
                 GenerateStepList(item.Prototype);
             }
@@ -119,12 +123,27 @@ public sealed class ConstructorBUI : BoundUserInterface
         var isEmptyCategory = string.IsNullOrEmpty(category) || category == _forAllCategoryName;
 
         _recipes.Clear();
+        var skills = _knowledge.GetSkillMasteries(user);
+        var useKnowledge = _construction.IsKnowledgeHolder(user);
+        // FUCK YOU, copy pasta
+        bool CanUnderstand(ConstructionPrototype recipe)
+        {
+            foreach (var (id, needed) in recipe.Theory)
+            {
+                if (!skills.TryGetValue(id, out var mastery) || mastery < needed)
+                    return false;
+            }
+            return true;
+        }
         foreach (var recipe in _proto.EnumeratePrototypes<ConstructionPrototype>())
         {
             if (recipe.Hide)
                 continue;
 
             if (_whitelist.IsWhitelistFail(recipe.EntityWhitelist, user))
+                continue;
+
+            if (useKnowledge && !CanUnderstand(recipe))
                 continue;
 
             if (searching

@@ -23,7 +23,6 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Numerics;
 using System.Text;
@@ -145,8 +144,7 @@ public sealed partial class PTLSystem : EntitySystem
 
         var usedMJ = energyUsed / megajoule;
         // some random formula i found in bounty thread i popped it into desmos i think it looks good
-        var spesos = (int) (usedMJ * 500 / (Math.Log(usedMJ * 5) + 1));
-
+        var spesos = (int) (usedMJ * 650 / (Math.Log(usedMJ * 2) + 1));
         if (!double.IsFinite(spesos) || spesos < 0)
             return;
 

@@ -2,11 +2,9 @@
 
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Materials;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Genetics.Console;
@@ -71,7 +69,8 @@ public sealed partial class GeneticsConsoleComponent : Component
     {
         DamageDict = new()
         {
-            { "Cellular", 50 }
+            { "Cellular", 20 },
+            { "Radiation", 15 }
         }
     };
 
@@ -140,14 +139,20 @@ public sealed partial class GeneticsConsoleComponent : Component
     #region Printing
 
     /// <summary>
-    /// Items that can be printed and the delay for it.
+    /// Biomass material to use.
+    /// </summary>
+    [DataField]
+    public ProtoId<MaterialPrototype> Biomass = "Biomass";
+
+    /// <summary>
+    /// Items that can be printed and how many biomass cubes to use.
     /// </summary>
     [DataField]
     public List<GeneticsPrint> Prints = new()
     {
-        new(TimeSpan.FromSeconds(60), "GeneticsMutator"),
-        new(TimeSpan.FromSeconds(15), "GeneticsActivator"),
-        new(TimeSpan.FromSeconds(30), "GeneticsCleanser") // not parity, fuck chud mutadone
+        new(20, "GeneticsMutator"),
+        new(10, "GeneticsActivator"),
+        new(15, "GeneticsCleanser") // not parity, fuck chud mutadone
     };
 
     /// <summary>
@@ -156,6 +161,12 @@ public sealed partial class GeneticsConsoleComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField, AutoNetworkedField]
     public TimeSpan NextPrint = TimeSpan.Zero;
+
+    /// <summary>
+    /// How long to wait before printing another item.
+    /// </summary>
+    [DataField]
+    public TimeSpan PrintDelay = TimeSpan.FromSeconds(5);
 
     /// <summary>
     /// Sound played when printing an item.
@@ -261,4 +272,4 @@ public sealed class GeneticsConsoleState(List<SequenceState> sequences) : BoundU
 }
 
 [DataRecord]
-public partial record struct GeneticsPrint(TimeSpan Delay, EntProtoId Proto);
+public partial record struct GeneticsPrint(int Cost, EntProtoId Proto);

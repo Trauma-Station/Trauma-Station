@@ -7,3 +7,13 @@
   id: tiredness
   flavorType: Complex
   description: flavor-complex-tiredness
+
+- type: flavor
+  id: blood
+  flavorType: Complex
+  description: flavor-complex-blood
+
+- type: flavor
+  id: apotheosis
+  flavorType: Complex
+  description: flavor-complex-apotheosis

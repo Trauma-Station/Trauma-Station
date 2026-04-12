@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
@@ -44,4 +41,4 @@ public partial record struct UnknownBase(uint Index, char Value = 'X');
 
 // EntProtoId? doesnt work properly with Serializable for some reason, so using string
 [Serializable, NetSerializable]
-public record struct SequenceState(string Bases, string OriginalBases, int Number, string? Mutation);
+public record struct SequenceState(string Bases, string OriginalBases, int Number, MutationRarity Rarity, string? Mutation);

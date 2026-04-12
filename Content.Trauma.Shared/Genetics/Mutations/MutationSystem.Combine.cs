@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
@@ -64,6 +63,9 @@ public sealed partial class MutationSystem
     /// </summary>
     public EntProtoId<MutationComponent>? CombineMutations(EntProtoId<MutationComponent> a, EntProtoId<MutationComponent> b)
     {
+        if (a == b)
+            return null;
+
         if (!Recipes.TryGetValue(a, out var results))
             return null;
 

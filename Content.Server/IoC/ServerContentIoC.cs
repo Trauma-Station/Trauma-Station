@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server._RMC14.LinkAccount;
+using Content.Server.LinkAccount;
 using Content.Server.MoMMI;
 // </Trauma>
 using Content.Server.Administration;
@@ -87,6 +87,7 @@ internal static class ServerContentIoC
         //deps.Register<DiscordLink>(); // Trauma - wasn't cherry picked
         //deps.Register<DiscordChatLink>(); // Trauma
         deps.Register<IMoMMILink, MoMMILink>(); // Trauma
+        deps.Register<IPostInjectInit, LinkAccountManager>(); // RMC - Patreon
         deps.Register<LinkAccountManager>(); // RMC - Patreon
         deps.Register<ServerFeedbackManager>();
         deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();

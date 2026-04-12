@@ -90,6 +90,14 @@
     damage:
       types:
         Blunt: 15
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 300
+  - type: Tag
+    tags:
+    - Trash
+  # </Trauma>
 
 - type: entity
   name: energy bola

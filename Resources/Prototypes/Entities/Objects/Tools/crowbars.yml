@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma
   id: BaseCrowbar
   name: crowbar
   description: A multipurpose tool used for many tasks, such as prying doors or bludgeoning interdimensional invaders.

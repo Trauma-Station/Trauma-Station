@@ -3,7 +3,6 @@
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
@@ -35,11 +34,7 @@ public sealed class TakeStaminaDamageSystem : EntityEffectSystem<StaminaComponen
 
     protected override void Effect(Entity<StaminaComponent> ent, ref EntityEffectEvent<TakeStaminaDamage> args)
     {
-        // TODO: wtf is this shitcode, investigate
-        if (args.Scale != 1f)
-            return;
-
-        var amount = args.Effect.Amount;
+        var amount = args.Effect.Amount * args.Scale;
         var immediate = args.Effect.Immediate;
         _stamina.TakeStaminaDamage(ent, amount, ent.Comp, visual: false, immediate: immediate);
     }

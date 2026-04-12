@@ -3,6 +3,13 @@
 namespace Content.Medical.Common.Body;
 
 /// <summary>
+/// Raised after a body has its bodyparts added on mapinit.
+/// Useful to avoid having to order 20 systems after it.
+/// </summary>
+[ByRefEvent]
+public record struct BodyInitEvent();
+
+/// <summary>
 /// Event raised on the body then organ to allow prevention of insertion.
 /// Not raised when inserted directly via container API, e.g. ContainerFill.
 /// </summary>
@@ -26,4 +33,4 @@ public record struct EyesDamagedEvent(EntityUid Body, int Damage);
 /// Event raised on a mob to decapitate it.
 /// </summary>
 [ByRefEvent]
-public record struct DecapitateEvent(EntityUid? User = null, bool Handled = true);
+public record struct DecapitateEvent(EntityUid? User = null, bool Handled = false);

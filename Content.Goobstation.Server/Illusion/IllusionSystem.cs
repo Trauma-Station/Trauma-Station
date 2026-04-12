@@ -16,6 +16,7 @@ using Content.Shared.Cloning;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -33,7 +34,6 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 
@@ -44,6 +44,7 @@ public sealed class IllusionSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
 
     [Dependency] private readonly CloningSystem _cloning = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly TransformSystem _xform = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
@@ -126,7 +127,7 @@ public sealed class IllusionSystem : EntitySystem
             (_threshold.TryGetThresholdForState(user, MobState.Critical, out var hp, thresholds) ||
              _threshold.TryGetThresholdForState(user, MobState.Dead, out hp, thresholds)))
         {
-            var damage = damageable.TotalDamage;
+            var damage = _damage.GetTotalDamage((user, damageable));
             var totalHp = hp - damage;
             if (totalHp <= 0)
             {

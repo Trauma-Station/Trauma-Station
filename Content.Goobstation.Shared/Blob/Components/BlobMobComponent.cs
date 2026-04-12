@@ -2,7 +2,6 @@
 
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Blob.Components;
 
@@ -12,7 +11,7 @@ public sealed partial class BlobMobComponent : Component
     [ViewVariables(VVAccess.ReadOnly), DataField("healthOfPulse")]
     public DamageSpecifier HealthOfPulse = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             { "Blunt", -4 },
             { "Slash", -4 },
@@ -20,9 +19,9 @@ public sealed partial class BlobMobComponent : Component
             { "Heat", -4 },
             { "Cold", -4 },
             { "Shock", -4 },
-            { "Poison", -4 }, //Trauma
-            { "Genetic", -4 }, //Trauma
-            { "Radiation", -4 }, //Trauma
+            { "Poison", -4 },
+            { "Radiation", -4 },
+            { "Cellular", -4 }
         }
     };
 }

@@ -10633,8 +10633,6 @@ entities:
     - type: Transform
       pos: 1.5051062,4.500698
       parent: 1
-- proto: RandomHumanoidSpawnerSpecialOperationsOfficers
-  entities:
   - uid: 964
     components:
     - type: Transform

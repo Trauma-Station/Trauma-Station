@@ -4,8 +4,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Atmos;
 using Content.Shared.Botany.Components;
 using Content.Trauma.Common.Botany;
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Botany.Components;
 
@@ -30,7 +28,7 @@ public partial record struct GasData(Gas GasID, float GasValue);
 // 0 - float, 1 - int, 2 - Enum HarvestType, 3 - bool
 public partial struct SeedDataTypes
 {
-    public enum SeedDataType
+    public enum SeedDataType : byte
     {
         Float,
         Int,

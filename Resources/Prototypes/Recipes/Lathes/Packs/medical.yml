@@ -106,9 +106,10 @@
   #- AdvancedJetInjector # Trauma - le quirky syringe
 
 - type: latheRecipePack
+  parent:
+  - TraumaMedicalBoards # Trauma
   id: MedicalBoards
   recipes:
   - StasisBedMachineCircuitboard
   - CryoPodMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
-  - StasisOperatingTableCircuitboard # Corvax-Goob-StasisOperatingTable

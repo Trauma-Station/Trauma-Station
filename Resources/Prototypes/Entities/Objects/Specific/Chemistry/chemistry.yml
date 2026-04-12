@@ -102,6 +102,10 @@
     damage:
       types:
         Blunt: 10
+  - type: SaltLinePlacer # Trauma - Wraith
+    saltLine: SaltLine
+  - type: ConsumeOnSaltLine # Trauma - Wraith
+    amount: 1
 
 - type: entity
   parent: BaseItem

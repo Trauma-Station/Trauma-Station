@@ -3,8 +3,6 @@
 using Content.Medical.Common.Traumas;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.Traumas;
 

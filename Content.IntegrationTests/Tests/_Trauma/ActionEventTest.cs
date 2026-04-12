@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Actions.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
@@ -10,7 +12,7 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// Prevents runtime errors when someone tries to use the action.
 /// </summary>
 [TestFixture]
-public sealed class ActionEventTest
+public sealed class ActionEventTest : GameTest
 {
     /// <summary>
     /// Actions which have their event set at runtime, these won't be checked for validity
@@ -24,7 +26,7 @@ public sealed class ActionEventTest
     [Test]
     public async Task CheckTargetActions()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var factory = server.EntMan.ComponentFactory;
@@ -75,7 +77,5 @@ public sealed class ActionEventTest
                 }
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 }

@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Temperature.Systems;
 
 namespace Content.Server.Temperature.Components;
@@ -16,7 +11,7 @@ namespace Content.Server.Temperature.Components;
 /// Too hot? Suffering heatstroke, start sweating to cool off and increase thirst.
 /// Too cold? Suffering hypothermia, start shivering to warm up and increase hunger.
 /// </remarks>
-[RegisterComponent, Access(typeof(TemperatureSystem))]
+[RegisterComponent] // Trauma - no access
 public sealed partial class InternalTemperatureComponent : Component
 {
     /// <summary>

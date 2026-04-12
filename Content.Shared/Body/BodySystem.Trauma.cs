@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
@@ -151,11 +153,12 @@ public sealed partial class BodySystem
     /// <summary>
     /// Gets the fraction of bodyparts that are vital.
     /// For a torso or torso+head this is 1, for invalid bodies this is 0.
+    /// Non-bodies will return 1 for damage scaling etc.
     /// </summary>
     public float GetVitalBodyPartRatio(Entity<BodyComponent?> body)
     {
         if (!_bodyQuery.Resolve(body, ref body.Comp, false) || body.Comp.Organs?.ContainedEntities is not {} organs)
-            return 0f;
+            return 1f;
 
         // TODO SHITMED: change vital to just be a bool on OrganCategoryPrototype
         int total = 0;
@@ -173,6 +176,24 @@ public sealed partial class BodySystem
         return vital == 0
             ? 0f // no dividing by zero incase a body somehow has no parts?!
             : (float) total / vital;
+    }
+
+    /// <summary>
+    /// Get the number of vital parts for an entity, falls back to 1 for non-mobs.
+    /// </summary>
+    public int GetVitalParts(Entity<BodyComponent?> body)
+    {
+        if (!_bodyQuery.Resolve(body, ref body.Comp, false) || body.Comp.Organs?.ContainedEntities is not {} organs)
+            return 1;
+
+        int vital = 0;
+        foreach (var organ in organs)
+        {
+            if (GetCategory(organ) is {} category && VitalParts.Contains(category))
+                vital++;
+        }
+
+        return vital;
     }
 
     /// <summary>
@@ -415,8 +436,7 @@ public sealed partial class BodySystem
             return targetPart;
 
         var totalWeight = targetComp.TargetOdds[targetPart].Values.Sum();
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(target).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(target));
         var randomValue = rand.NextFloat() * totalWeight;
 
         foreach (var (part, weight) in targetComp.TargetOdds[targetPart])
@@ -435,8 +455,7 @@ public sealed partial class BodySystem
         if (children.Count == 0)
             return TargetBodyPart.Chest;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(target).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(target));
         return _part.GetTargetBodyPart(rand.Pick(children)) ?? TargetBodyPart.Chest;
     }
 

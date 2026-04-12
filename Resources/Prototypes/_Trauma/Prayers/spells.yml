@@ -55,10 +55,10 @@
   id: LegSweep
   verb: TEACH
   subjects: [ "LEG SWEEP" ]
-  effects:
-  - !type:AddComponents
-    components:
-    - type: KravMaga # it has leg sweep
+  # effects:
+  # - !type:AddComponents
+    # components:
+    # - type: KravMaga # it has leg sweep
 
 - type: scrollPrayer
   id: Steal
@@ -106,7 +106,7 @@
   effects:
   - !type:MakeTraitor
     probability: 0.65
-    rule: TraitorReinforcement # no uplink chud
+    rule: TraitorPrayer # no uplink chud
 
 - type: scrollPrayer
   id: DAGD
@@ -151,6 +151,7 @@
   - !type:AddComponents
     components:
     - type: BloodCrawl
+      jaunt: BloodCrawlJauntPrayer
       blood:
       - Blood
       - AmmoniaBlood

@@ -9,6 +9,8 @@
 # Table: null
 
 # <Trauma> - too lazy to port debugoks multi migration thing
+# 2026-3-2026
+ClosetMaintenanceFilledRandom: RandomMaintsCloset
 
 # 2026-01-07
 GunSafeDisabler: GunSafePhaser
@@ -98,6 +100,25 @@ CardDeckNanotrasen: null
 CardBoxBlack: null
 CardBoxSyndicate: null
 CardBoxNanotrasen: null
+
+# 2026-03-04
+RotaryPhoneStand: RotaryPhoneStandNoRot
+
+# 2026-03-10 this gives martial arts, no longer harmless maint loot
+MaterialHideBear: MaterialHideCorgi
+
+# 2026-03-12 this being roundstart is slop
+MedicalBiofabricator: null
+MedicalBiofabMachineBoard: null
+
+# 2026-03-13 necrosol was removed
+NecrosolChemistryBottle: ArcryoxChemistryBottle
+
+# 2026-03-28 blockers being mapped is anti fun
+DisposalBlocker: DisposalPipe
+
+# 2026-03-29 no chud boris
+AiRemoteBrain: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -1115,3 +1136,26 @@ RightArmSkeleton: OrganSkeletonPersonArmRight
 #TowelColorMaroon: null
 #TowelColorSilver: null
 #TowelColorMime: null
+
+# 2026-02-18
+# Replace cargo order crates which contain exactly one item with the item, parcel wrapped.
+CrateVendingMachineRestockBoozeFilled: VendingMachineRestockBooze
+CrateVendingMachineRestockChefvendFilled: VendingMachineRestockChefvend
+CrateVendingMachineRestockClothesFilled: VendingMachineRestockClothes
+CrateVendingMachineRestockAutoDrobeFilled: VendingMachineRestockCostumes
+CrateVendingMachineRestockCondimentStationFilled: VendingMachineRestockCondimentStation
+CrateVendingMachineRestockDinnerwareFilled: VendingMachineRestockDinnerware
+CrateVendingMachineRestockGamesFilled: VendingMachineRestockGames
+CrateVendingMachineRestockPTechFilled: VendingMachineRestockPTech
+#CrateVendingMachineRestockSalvageEquipmentFilled: VendingMachineRestockSalvageEquipment # Trauma - doesnt exist anymore
+CrateVendingMachineRestockVendomatFilled: VendingMachineRestockVendomat
+CrateVendingMachineRestockTankDispenserFilled: VendingMachineRestockTankDispenser
+# The crates below contained _two_ of the restock items, so these are technically not direct migrations. But eh.
+CrateVendingMachineRestockHotDrinksFilled: VendingMachineRestockHotDrinks
+CrateVendingMachineRestockRobustSoftdrinksFilled: VendingMachineRestockRobustSoftdrinks
+CrateVendingMachineRestockSmokesFilled: VendingMachineRestockSmokes
+CrateVendingMachineRestockHappyHonkFilled: VendingMachineRestockHappyHonk
+CrateVendingMachineRestockGetmoreChocolateCorpFilled: VendingMachineRestockGetmoreChocolateCorp
+CrateVendingMachineRestockChangFilled: VendingMachineRestockChang
+CrateVendingMachineRestockDiscountDansFilled: VendingMachineRestockDiscountDans
+CrateVendingMachineRestockDonutFilled: VendingMachineRestockDonut

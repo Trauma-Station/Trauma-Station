@@ -1,60 +1,7 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Alice "Arimah" Heurlin <30327355+arimah@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 HS <81934438+HolySSSS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Truoizys <153248924+Truoizys@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2024 Zylofan <80375291+Zylofan@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 osjarw <62134478+osjarw@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
-// SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 McBosserson <148172569+McBosserson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Milon <plmilonpl@gmail.com>
-// SPDX-FileCopyrightText: 2025 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-// SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Unlumination <144041835+Unlumy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-// SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Goobstation.Common.Silo;
+// </Trauma>
 using System.Linq;
-using Content.Shared._Goobstation.Silo;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Stacks;
@@ -73,11 +20,11 @@ namespace Content.Shared.Materials;
 /// </summary>
 public abstract class SharedMaterialStorageSystem : EntitySystem
 {
+    [Dependency] private readonly CommonSiloSystem _silo = default!; // Goobstation
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedSiloSystem _silo = default!; // Goobstation
 
     /// <summary>
     /// Default volume for a sheet if the material's entity prototype has no material composition.
@@ -137,7 +84,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return 0; //you have nothing
-        if (component.ConnectToSilo && _silo.TryGetMaterialAmount(uid, material, out var amount)) // Goobstation
+        if (_silo.TryGetMaterialAmount(uid, material, out var amount)) // Goobstation
             return amount;
         return component.Storage.GetValueOrDefault(material, 0);
     }
@@ -152,7 +99,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return 0;
-        if (component.ConnectToSilo && _silo.TryGetTotalMaterialAmount(uid, out var amount)) // Goobstation
+        if (_silo.TryGetTotalMaterialAmount(uid, out var amount)) // Goobstation
             return amount;
         return component.Storage.Values.Sum();
     }
@@ -187,11 +134,11 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         if (!CanTakeVolume(uid, volume, component))
             return false;
 
-        if (!component.IgnoreMaterialWhiteList) // Goobstation Change - Shitcode.
+        if (volume > 0 && !component.IgnoreMaterialWhiteList) // Trauma - add these conditions to disable the whitelist check
             if (component.MaterialWhiteList == null ? false : !component.MaterialWhiteList.Contains(materialId))
                 return false;
 
-        if (component.ConnectToSilo && _silo.TryGetMaterialAmount(uid, materialId, out var siloAmount)) // Goobstation
+        if (_silo.TryGetMaterialAmount(uid, materialId, out var siloAmount)) // Goobstation
             return siloAmount + volume >= 0;
 
         var amount = component.Storage.GetValueOrDefault(materialId);
@@ -235,35 +182,26 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         if (!CanChangeMaterialAmount(uid, materialId, volume, component))
             return false;
 
-        // Goob start
-        EntityUid storageUid;
-        Dictionary<ProtoId<MaterialPrototype>, int> storage;
-        if (component.ConnectToSilo)
+        // <Trauma> - change the silo's materials instead, if it's linked to one
+        if (_silo.GetSilo(uid) is {} silo)
         {
-            var silo = _silo.GetSilo(uid);
-            if (dirty && silo != null)
-                Dirty(silo.Value);
-            storage = silo != null ? silo.Value.Comp.Storage : component.Storage;
-            storageUid = silo != null ? silo.Value : uid;
+            uid = silo;
+            if (!TryComp<MaterialStorageComponent>(uid, out component))
+                return false;
         }
-        else
-        {
-            storage = component.Storage;
-            storageUid = uid;
-        }
+        // </Trauma>
 
-        var existing = storage.GetOrNew(materialId);
-        // Goob end
+        var existing = component.Storage.GetOrNew(materialId);
 
         existing += volume;
 
         if (existing == 0)
-            storage.Remove(materialId); // Goob edit
+            component.Storage.Remove(materialId);
         else
-            storage[materialId] = existing; // Goob edit
+            component.Storage[materialId] = existing;
 
         var ev = new MaterialAmountChangedEvent();
-        RaiseLocalEvent(storageUid, ref ev); // Goob edit
+        RaiseLocalEvent(uid, ref ev);
 
         if (dirty)
             Dirty(uid, component);

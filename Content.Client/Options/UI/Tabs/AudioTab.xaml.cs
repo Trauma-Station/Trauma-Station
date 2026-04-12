@@ -36,7 +36,7 @@ public sealed partial class AudioTab : Control
         Control.AddOptionPercentSlider(
             GoobCVars.BarksVolume,
             SliderVolumeBarks,
-            scale: ContentAudioSystem.BarksMultiplier);
+            scale: 3f);
         // Goob Station - Barks-end
 
         Control.AddOptionPercentSlider(
@@ -64,16 +64,12 @@ public sealed partial class AudioTab : Control
             SliderVolumeInterface,
             scale: ContentAudioSystem.InterfaceMultiplier);
 
+        // <Trauma>
         Control.AddOptionPercentSlider(
-            GoobCVars.VoiceChatVolume,
-            SliderVolumeVoiceChat,
-            -8, 10);
-
-        // Goobstation - Highlight Chat Ping/Audio!
-        Control.AddOptionPercentSlider(
-            CCVars.ChatHighlightVolume,
+            TraumaCVars.ChatHighlightVolume,
             SliderHighlightVolume,
             scale: 1f);
+        // </Trauma>
 
         Control.AddOptionSlider(
             CCVars.MaxAmbientSources,
@@ -81,7 +77,6 @@ public sealed partial class AudioTab : Control
             _cfg.GetCVar(CCVars.MinMaxAmbientSourcesConfigured),
             _cfg.GetCVar(CCVars.MaxMaxAmbientSourcesConfigured));
 
-        Control.AddOptionCheckBox(GoobCVars.VoiceChatHearSelf, HearSelfCheckBox);
         Control.AddOptionCheckBox(CCVars.LobbyMusicEnabled, LobbyMusicCheckBox);
         Control.AddOptionCheckBox(CCVars.RestartSoundsEnabled, RestartSoundsCheckBox);
         Control.AddOptionCheckBox(CCVars.EventMusicEnabled, EventMusicCheckBox);

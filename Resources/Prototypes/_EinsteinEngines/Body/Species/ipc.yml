@@ -9,7 +9,7 @@
       required: true
       default: [ MobIPCHeadDefault ]
     enum.HumanoidVisualLayers.Hair:
-      limit: 1
+      limit: 0
       required: false
     enum.HumanoidVisualLayers.Face:
       limit: 1
@@ -82,6 +82,9 @@
       IPCPump: OrganIPCPump
   - type: HumanoidProfile
     species: IPC
+    # <Trauma>
+  - type: KnowledgeHolder
+    # </Trauma>
 
 - type: entity
   parent:
@@ -90,7 +93,7 @@
   - BaseSpeciesMob
   id: MobIPC
   components:
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
     - RobotTalk
@@ -237,6 +240,8 @@
   - type: Deathgasp
     prototype: SiliconDeathgasp
     needsCritical: false
+  - type: SurgeryTarget
+    sepsisImmune: true
   - type: Tag
     tags:
     - SiliconMob
@@ -314,7 +319,7 @@
     - IPCPump
 
 - type: entity
-  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganIPCExternal ]
+  parent: [ OrganBaseHeadSexed, OrganBaseHeadBald, OrganIPCExternal ]
   id: OrganIPCHead
   components:
   - type: BodyPart
@@ -323,6 +328,7 @@
     - Eyes
     - Tongue
     - Ears
+    - BrainChip # USB 6.0
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganIPCExternal ]

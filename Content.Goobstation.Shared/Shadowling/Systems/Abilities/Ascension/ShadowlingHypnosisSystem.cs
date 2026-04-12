@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.Ascension;
 using Content.Shared.Actions;
 using Content.Shared.Humanoid;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.Ascension;
 

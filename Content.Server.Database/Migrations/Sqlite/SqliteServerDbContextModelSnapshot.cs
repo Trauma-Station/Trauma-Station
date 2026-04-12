@@ -1164,6 +1164,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("hair_name");
 
+                    b.Property<string>("KnowledgeMastery")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("knowledge_mastery");
+
                     b.Property<byte[]>("Markings")
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");

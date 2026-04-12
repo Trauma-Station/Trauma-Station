@@ -11,15 +11,12 @@ namespace Content.Trauma.Shared.Disease;
 /// </summary>
 public sealed class DnaTargetDiseaseSystem : EntitySystem
 {
-    private EntityQuery<DnaComponent> _dnaQuery;
-    private EntityQuery<DnaTargetDiseaseComponent> _query;
+    [Dependency] private readonly EntityQuery<DnaComponent> _dnaQuery = default!;
+    [Dependency] private readonly EntityQuery<DnaTargetDiseaseComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _dnaQuery = GetEntityQuery<DnaComponent>();
-        _query = GetEntityQuery<DnaTargetDiseaseComponent>();
 
         SubscribeLocalEvent<DnaTargetDiseaseComponent, DiseaseGainedEvent>(OnDiseaseGained);
         SubscribeLocalEvent<DnaTargetDiseaseComponent, DiseaseCloneEvent>(OnClonedInto);

@@ -1,7 +1,9 @@
+// <Trauma>
+using Content.Trauma.Common.Xenomorphs;
+// </Trauma>
 using Content.Server.Administration;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
-using Content.Shared._White.Xenomorphs.Larva;
 using Content.Shared.Chat;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -17,6 +19,9 @@ namespace Content.Server.Mobs;
 /// </summary>
 public sealed partial class CritMobActionsSystem : EntitySystem // Goob - made partial
 {
+    // <Trauma>
+    [Dependency] private readonly CommonXenomorphSystem _xeno = default!;
+    // </Trauma>
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly DeathgaspSystem _deathgasp = default!;
     [Dependency] private readonly IServerConsoleHost _host = default!;
@@ -37,7 +42,7 @@ public sealed partial class CritMobActionsSystem : EntitySystem // Goob - made p
 
     private void OnSuccumb(EntityUid uid, MobStateActionsComponent component, CritSuccumbEvent args)
     {
-        if (!TryComp<ActorComponent>(uid, out var actor) || !_mobState.IsCritical(uid) || HasComp<XenomorphLarvaVictimComponent>(uid))
+        if (!TryComp<ActorComponent>(uid, out var actor) || !_mobState.IsCritical(uid) || _xeno.IsVictim(uid))
             return;
 
         _host.ExecuteCommand(actor.PlayerSession, "ghost");

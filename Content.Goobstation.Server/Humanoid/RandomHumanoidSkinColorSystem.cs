@@ -2,7 +2,6 @@
 
 using Content.Shared.Decals;
 using Content.Shared.Humanoid;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Humanoid;

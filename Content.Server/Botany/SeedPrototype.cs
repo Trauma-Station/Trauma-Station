@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Shared.Chemistry.Reagent;
 using Content.Trauma.Common.Botany;
 // </Trauma>
 using Content.Shared.Atmos;
@@ -9,8 +10,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Utility;
-
-using Content.Server.EntityEffects;
 
 namespace Content.Server.Botany;
 
@@ -112,7 +111,7 @@ public partial class SeedData
     [DataField]
     public List<EntProtoId> ProductPrototypes = new();
 
-    [DataField] public Dictionary<string, SeedChemQuantity> Chemicals = new();
+    [DataField] public Dictionary<ProtoId<ReagentPrototype>, SeedChemQuantity> Chemicals = new(); // Trauma - use protoid holy shit
 
     [DataField] public Dictionary<Gas, float> ConsumeGasses = new();
 
@@ -248,7 +247,7 @@ public partial class SeedData
             PacketPrototype = PacketPrototype,
             ProductPrototypes = new List<EntProtoId>(ProductPrototypes),
             MutationPrototypes = new List<ProtoId<SeedPrototype>>(MutationPrototypes),
-            Chemicals = new Dictionary<string, SeedChemQuantity>(Chemicals),
+            Chemicals = new Dictionary<ProtoId<ReagentPrototype>, SeedChemQuantity>(Chemicals), // Trauma - protoid
             ConsumeGasses = new Dictionary<Gas, float>(ConsumeGasses),
             ExudeGasses = new Dictionary<Gas, float>(ExudeGasses),
 
@@ -309,7 +308,7 @@ public partial class SeedData
             ProductPrototypes = new List<EntProtoId>(other.ProductPrototypes),
             MutationPrototypes = new List<ProtoId<SeedPrototype>>(other.MutationPrototypes),
 
-            Chemicals = new Dictionary<string, SeedChemQuantity>(Chemicals),
+            Chemicals = new Dictionary<ProtoId<ReagentPrototype>, SeedChemQuantity>(Chemicals), // Trauma - protoid
             ConsumeGasses = new Dictionary<Gas, float>(ConsumeGasses),
             ExudeGasses = new Dictionary<Gas, float>(ExudeGasses),
 

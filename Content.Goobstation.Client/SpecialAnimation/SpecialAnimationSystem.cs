@@ -5,7 +5,6 @@ using Content.Goobstation.Shared.SpecialAnimation;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.SpecialAnimation;
 

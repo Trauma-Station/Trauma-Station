@@ -377,7 +377,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
 
         if (!comp.DoAfters.TryGetValue(id, out var doAfter))
         {
-            Log.Error($"Attempted to cancel do after with an invalid id ({id}) on entity {ToPrettyString(entity)}");
+            Log.Warning($"Attempted to cancel do after with an invalid id ({id}) on entity {ToPrettyString(entity)}"); // Trauma - warning not error, this has 0 debuggable info
             return;
         }
 

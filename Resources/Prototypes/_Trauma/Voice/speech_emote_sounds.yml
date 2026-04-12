@@ -102,8 +102,6 @@
   parent: BaseMobEmotes
   id: BaseMoth
   sounds:
-    Flap:
-      path: /Audio/_Goobstation/Voice/Moth/moth_flap.ogg
     # it had none
     Yawn:
       collection: MaleYawn

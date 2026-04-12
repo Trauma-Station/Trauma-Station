@@ -22,7 +22,6 @@ using Content.Shared.Power.Components;
 using Content.Shared.Timing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -137,7 +136,7 @@ public sealed class MedigunSystem : SharedMedigunSystem
             return false;
 
         var healing = comp.UberActivated ? comp.UberHealing : comp.Healing;
-        var originalDamage = damageable.TotalDamage;
+        var originalDamage = _damage.GetTotalDamage((healed, damageable));
 
         _damage.ChangeDamage(
             (healed, damageable),
@@ -153,7 +152,7 @@ public sealed class MedigunSystem : SharedMedigunSystem
 
         _bloodstreamSystem.TryModifyBloodLevel(healed, comp.BleedingAmountModifier);
 
-        var afterDamage = damageable.TotalDamage;
+        var afterDamage = _damage.GetTotalDamage((healed, damageable));
         var healedAmount = originalDamage - afterDamage;
 
         if (!comp.UberActivated)

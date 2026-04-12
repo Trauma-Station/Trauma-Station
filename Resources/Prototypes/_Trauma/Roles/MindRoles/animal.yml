@@ -1,0 +1,8 @@
+- type: entity
+  parent: [ MindRoleGhostRoleNeutral ]
+  id: MindRoleGhostRoleAnimal
+  name: Ghost Role (Animal)
+  components:
+  - type: MindRole
+    roleType: FreeAgent
+    sortWeight: 30

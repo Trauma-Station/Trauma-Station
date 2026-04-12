@@ -5,8 +5,6 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Components;
 
@@ -55,6 +53,12 @@ public sealed partial class AbsorbCorpseComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? AbsorbSound = new SoundCollectionSpecifier("Wraith_SoulSucc");
+
+    /// <summary>
+    /// How long the doafter of absorbing the corpse is
+    /// </summary>
+    [DataField]
+    public TimeSpan AbsorbDoAfter = TimeSpan.FromSeconds(8);
 
     [ViewVariables]
     public ProtoId<TagPrototype> Tag = "VimPilot";

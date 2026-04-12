@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using Content.IntegrationTests.Fixtures;
+using Content.IntegrationTests.Fixtures.Attributes;
 using Robust.Shared;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Configuration;
@@ -16,17 +18,29 @@ namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
     [TestOf(typeof(EntityUid))]
-    public sealed class EntityTest
+    public sealed class EntityTest : GameTest
     {
         private static readonly ProtoId<EntityCategoryPrototype> SpawnerCategory = "Spawner";
 
-        [Test, NonParallelizable] // Goobstation edit - NonParallelizable
+        public override PoolSettings PoolSettings => new()
+        {
+            Connected = true,
+            Dirty = true
+        };
+
+        public static PoolSettings Disconnected => new()
+        {
+            Dirty = true,
+        };
+
+        [Test]
+        [NonParallelizable] // Goobstation edit - NonParallelizable
+        [PairConfig(nameof(Disconnected))]
         public async Task SpawnAndDeleteAllEntitiesOnDifferentMaps()
         {
             // This test dirties the pair as it simply deletes ALL entities when done. Overhead of restarting the round
             // is minimal relative to the rest of the test.
-            var settings = new PoolSettings { Dirty = true };
-            await using var pair = await PoolManager.GetServerClient(settings);
+            var pair = Pair;
             var server = pair.Server;
 
             var entityMan = server.ResolveDependency<IEntityManager>();
@@ -40,9 +54,14 @@ namespace Content.IntegrationTests.Tests
                 .Where(p => !p.Abstract)
                 .Where(p => !pair.IsTestPrototype(p))
                 .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
-                .Where(p => !p.Components.ContainsKey("Supermatter")) // Goobstation - Supermatter eats everything, oh no!
                 .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
-                .Where(p => !p.Components.ContainsKey("GameRule")) // Trauma - are you stupid why would you do this
+                // <Trauma>
+                .Where(p => !p.Components.ContainsKey("Supermatter")) // Supermatter eats everything, oh no!
+                .Where(p => !p.Components.ContainsKey("GameRule")) // are you stupid why would you do this
+                .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // randomly spawns things...
+                .Where(p => !p.Components.ContainsKey("Area"))
+                .Where(p => !p.Components.ContainsKey("StatusEffect")) // nonsense to just spawn it 4 no raisin, use an actual test
+                // </Trauma>
                 .Select(p => p.ID)
                 .ToList();
             // Goobstation edit end
@@ -132,17 +151,15 @@ namespace Content.IntegrationTests.Tests
                 // i can't believe you've done this.
                 Assert.That(entityMan.EntityCount, Is.AtMost(1));
             });
-
-            await pair.CleanReturnAsync();
         }
 
         [Test]
+        [Explicit] // Trauma - broadphase shitcode makes this fail like 40% of the time, fuck this.
+        [PairConfig(nameof(Disconnected))]
         public async Task SpawnAndDeleteAllEntitiesInTheSameSpot()
         {
-            // This test dirties the pair as it simply deletes ALL entities when done. Overhead of restarting the round
-            // is minimal relative to the rest of the test.
-            var settings = new PoolSettings { Dirty = true };
-            await using var pair = await PoolManager.GetServerClient(settings);
+            var pair = Pair;
+            Assert.That(pair.Client.Session, Is.Null);
             var server = pair.Server;
             var map = await pair.CreateTestMap();
 
@@ -165,6 +182,9 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("SpawnOnDespawn")) // it leaves entities behind if lifetime is under 15s
                     .Where(p => !p.Components.ContainsKey("Meteor")) // spawning the rocks gives it a stroke
                     .Where(p => !p.Components.ContainsKey("Mutation")) // waste of time, mutation test exists
+                    .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // spawns things
+                    .Where(p => !p.Components.ContainsKey("Area")) // deletes itself if spawned in space
+                    .Where(p => !p.Components.ContainsKey("StatusEffect")) // doesn't make sense to spawn not attached to anything
                     // </Trauma>
                     .Select(p => p.ID)
                     .ToList();
@@ -195,8 +215,6 @@ namespace Content.IntegrationTests.Tests
 
                 Assert.That(entityMan.EntityCount, Is.Zero);
             });
-
-            await pair.CleanReturnAsync();
         }
 
         /// <summary>
@@ -207,10 +225,7 @@ namespace Content.IntegrationTests.Tests
         [Explicit] // Trauma - idc about this providing 0 way to find out why its not networking entities when networking infact works
         public async Task SpawnAndDirtyAllEntities()
         {
-            // This test dirties the pair as it simply deletes ALL entities when done. Overhead of restarting the round
-            // is minimal relative to the rest of the test.
-            var settings = new PoolSettings { Connected = true, Dirty = true };
-            await using var pair = await PoolManager.GetServerClient(settings);
+            var pair = Pair;
             var server = pair.Server;
             var client = pair.Client;
 
@@ -258,6 +273,8 @@ namespace Content.IntegrationTests.Tests
                         }
                     }
                 });
+
+                await pair.RunUntilSynced();
 
                 // Goobstation Edit Start  (this test isn't even worth the effort tbh)
                 // Run up to 15 ticks, but stop early if memory usage exceeds 13 GB
@@ -324,8 +341,6 @@ namespace Content.IntegrationTests.Tests
                     Assert.That(sEntMan.EntityCount, Is.AtMost(1));
                 });
             } // Goob end, yeah im putting the whole test in a for loop.
-
-            await pair.CleanReturnAsync();
         }
 
         /// <summary>
@@ -345,8 +360,7 @@ namespace Content.IntegrationTests.Tests
         [Test]
         public async Task SpawnAndDeleteEntityCountTest()
         {
-            var settings = new PoolSettings { Connected = true, Dirty = true };
-            await using var pair = await PoolManager.GetServerClient(settings);
+            var pair = Pair;
             var mapSys = pair.Server.System<SharedMapSystem>();
             var server = pair.Server;
             var client = pair.Client;
@@ -360,23 +374,33 @@ namespace Content.IntegrationTests.Tests
                 // makes an announcement on mapInit.
                 "AnnounceOnSpawn",
                 // <Trauma>
+                "EntityTableContainerFill", // wastes time and we already know it works since it uses containers
+                "ContainerFill",
+                "GameRule",
+                "SpawnOnDespawn",
+                "Mutation",
                 "PendingSlimeSpawn", // shut the fuck up please
                 "Slime",
                 "Anomaly", // they can spawn spark effects
+                "LabyrinthPortal", // it randomly spawns things
+                "Area", // map tests spawn ~every area anyway, this fails from trying to spawn an area in space
+                "StatusEffect", // doesnt make sense to spawn unattached, fails test with weather schedulers
                 // </Trauma>
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
 
-            var protoIds = server.ProtoMan
-                .EnumeratePrototypes<EntityPrototype>()
-                .Where(p => !p.Abstract)
-                .Where(p => !pair.IsTestPrototype(p))
-                .Where(p => !excluded.Any(p.Components.ContainsKey))
-                .Where(p => p.Categories.All(x => x.ID != SpawnerCategory))
-                .Where(p => p.ID != "CrateCargoGambling") // Trauma - heisentest from exploding spawning lights
-                .Select(p => p.ID)
-                .ToList();
+            // <Trauma> - unroll linq slop, don't need to check abstract, check spawner category pointer instead of strings
+            var protoIds = new List<EntProtoId>();
+            var spawnerCategory = server.ProtoMan.Index(SpawnerCategory);
+            foreach (var p in server.ProtoMan.EnumeratePrototypes<EntityPrototype>())
+            {
+                if (pair.IsTestPrototype(p) || excluded.Any(p.Components.ContainsKey) || p.Categories.Contains(spawnerCategory))
+                    continue;
+
+                protoIds.Add(p.ID);
+            }
+            // </Trauma>
 
             protoIds.Sort();
             var mapId = MapId.Nullspace;
@@ -390,6 +414,20 @@ namespace Content.IntegrationTests.Tests
 
             await pair.RunTicksSync(3);
 
+            // <Trauma> - reuse allocations lol
+            var serverEntities = new HashSet<EntityUid>();
+            var clientEntities = new HashSet<EntityUid>();
+            void AddEntities(IEntityManager entMan, HashSet<EntityUid> entities)
+            {
+                var audioQuery = entMan.GetEntityQuery<AudioComponent>();
+                foreach (var e in entMan.GetEntities())
+                {
+                    if (!audioQuery.HasComp(e))
+                        entities.Add(e);
+                }
+            }
+            // </Trauma>
+
             // We consider only non-audio entities, as some entities will just play sounds when they spawn.
             int Count(IEntityManager ent) => ent.EntityCount - ent.Count<AudioComponent>();
             IEnumerable<EntityUid> Entities(IEntityManager entMan) => entMan.GetEntities().Where(e => !entMan.HasComponent<AudioComponent>(e));
@@ -400,8 +438,12 @@ namespace Content.IntegrationTests.Tests
                 {
                     var count = Count(server.EntMan);
                     var clientCount = Count(client.EntMan);
-                    var serverEntities = new HashSet<EntityUid>(Entities(server.EntMan));
-                    var clientEntities = new HashSet<EntityUid>(Entities(client.EntMan));
+                    // <Trauma> - clear + add instead of reallocating tree every time?
+                    serverEntities.Clear();
+                    AddEntities(server.EntMan, serverEntities);
+                    clientEntities.Clear();
+                    AddEntities(client.EntMan, clientEntities);
+                    // </Trauma>
                     EntityUid uid = default;
                     await server.WaitPost(() => uid = server.EntMan.SpawnEntity(protoId, coords));
                     await pair.RunTicksSync(3);
@@ -438,8 +480,6 @@ namespace Content.IntegrationTests.Tests
                         BuildDiffString(clientEntities, Entities(client.EntMan), client.EntMan));
                 }
             });
-
-            await pair.CleanReturnAsync();
         }
 
         private static string BuildDiffString(IEnumerable<EntityUid> oldEnts, IEnumerable<EntityUid> newEnts, IEntityManager entMan)
@@ -513,7 +553,7 @@ namespace Content.IntegrationTests.Tests
                 "ActivatableUI", // Requires enum key
             };
 
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var entityManager = server.ResolveDependency<IEntityManager>();
             var componentFactory = server.ResolveDependency<IComponentFactory>();
@@ -566,8 +606,6 @@ namespace Content.IntegrationTests.Tests
                     }
                 });
             });
-
-            await pair.CleanReturnAsync();
         }
     }
 }

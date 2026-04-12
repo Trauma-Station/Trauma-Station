@@ -70,6 +70,7 @@
   - type: Mutation
     instability: 10
     difficulty: 16
+    rarity: Rare
     conflicts:
     - MutationAcromegaly
     - MutationGigantism
@@ -140,8 +141,7 @@
         types: # literally just copied semi random values a chud picked
           Blunt: 5
           Piercing: 4
-        groups:
-          Burn: 3
+          Heat: 3
 
 - type: entity
   parent: [ BaseFreeMutation, BaseTriggerMutation ]

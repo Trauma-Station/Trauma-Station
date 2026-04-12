@@ -39,17 +39,14 @@ cosmiccult-roundend-entropy-count = The cult siphoned {$count} Entropy.
 cosmiccult-roundend-list-start = The cultists were:
 cosmiccult-roundend-list-name-user = - [color=#4cabb3]{$name}[/color] ([color=gray]{$user}[/color])
 
-cosmiccult-roundend-cultmajor = [color=#4cabb3]Cosmic Cult major victory![/color]
+cosmiccult-roundend-cultwin = [color=#4cabb3]Cosmic Cult major victory![/color]
 cosmiccult-roundend-cultminor = [color=#4cabb3]Cosmic Cult minor victory![/color]
 cosmiccult-roundend-neutral = [color=yellow]Neutral ending![/color]
 cosmiccult-roundend-crewminor = [color=green]Crew minor victory![/color]
-cosmiccult-roundend-crewmajor = [color=green]Crew major victory![/color]
+cosmiccult-roundend-crewwin = [color=green]Crew major victory![/color]
 
-cosmiccult-summary-cultmajor = The cosmic cultists ushered in the end!
-cosmiccult-summary-cultminor = The cult will live to see another day.
-cosmiccult-summary-neutral = The cult has suffered losses, but they will recover.
-cosmiccult-summary-crewminor = Most cosmic cultists were captured.
-cosmiccult-summary-crewmajor = All cosmic cultists were captured!
+cosmiccult-summary-cultwin = The cosmic cultists ushered in the end!
+cosmiccult-summary-crewwin = Crew survived the efforts of the Cosmic Cult!
 
 cosmiccult-elimination-shuttle-call = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle has been automatically called to the station. Please deliver any infected personnel to CentComm for processing. ETA: {$time} {$units}.
 cosmiccult-elimination-announcement = Based on scans from our long-range sensors, the Noöspheric anomaly has subsided. We thank you for your prudence. An emergency shuttle is already inbound. Please deliver any infected personnel to CentComm for processing.
@@ -147,8 +144,8 @@ objective-cosmiccult-steward-charactermenu = You must direct the cult to usher i
 
 objective-condition-entropy-title = SIPHON ENTROPY
 objective-condition-entropy-desc = Collectively siphon at least {$count} entropy from the crew.
-objective-condition-culttier-title = EMPOWER THE MONUMENT
-objective-condition-culttier-desc = Ensure that The Monument is brought to full power.
+objective-condition-culttier-title = ATTAIN POWER
+objective-condition-culttier-desc = Gather enough entropy to reach for the end.
 objective-condition-victory-title = USHER IN THE END
 objective-condition-victory-desc = Beckon The Unknown, and herald the final curtain call.
 

@@ -35,7 +35,21 @@
   id: ExclusiveItems
   name: loadout-group-exclusive
   minLimit: 0
+  hideLocked: true # don't need to see other peoples items silly
   loadouts:
   - CybersunFlippo
   - PatreonTia
   - PatreonTenshi
+  - PatreonTurboTracker
+  - PatreonWeax
+  - PatreonTheLongQuiet
+  - PatreonOwenCarpenter
+  - PatreonGamingFungus420
+  - PatreonGribley
+  - PatreonTheGungeonologist
+  - Patreon_Bias
+  - PatreonBumblebirb
+  - PatreonEpsilonTheAnomaly
+  - PatreoniDoppel
+  - PatreonWraith_man
+  - PatreonToasterStrudels

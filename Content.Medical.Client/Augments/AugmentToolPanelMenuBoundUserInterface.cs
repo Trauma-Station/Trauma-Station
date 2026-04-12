@@ -4,7 +4,6 @@ using Content.Medical.Shared.Augments;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Client.Augments;
 
@@ -36,6 +35,6 @@ public sealed class AugmentToolPanelMenuBoundUserInterface : BoundUserInterface
 
     public void SendSwitchMessage(EntityUid? desiredTool)
     {
-        SendMessage(new AugmentToolPanelSwitchMessage(_ent.GetNetEntity(desiredTool)));
+        SendPredictedMessage(new AugmentToolPanelSwitchMessage(_ent.GetNetEntity(desiredTool)));
     }
 }

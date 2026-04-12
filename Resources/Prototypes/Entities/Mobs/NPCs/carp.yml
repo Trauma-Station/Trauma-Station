@@ -40,10 +40,10 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        40: Dead
+        25: Dead # Trauma - 40 > 25 - 3 shots from phaser
     - type: MovementSpeedModifier
       baseWalkSpeed: 2.5
-      baseSprintSpeed: 3.5
+      baseSprintSpeed: 4.5 # Trauma 3.5 > 4.5 - Can catch up to people
     - type: Stamina
       baseCritThreshold: 100
     - type: DamageStateVisuals
@@ -80,7 +80,7 @@
         - CannotSuicide
     # - type: ReplacementAccent
     #   accent: genericAggressive
-    - type: LanguageKnowledge # goob edit - swap replacement accent for language
+    - type: LanguageSpeaker # Trauma - swap replacement accent for language
       speaks:
       - Carptongue
       understands:

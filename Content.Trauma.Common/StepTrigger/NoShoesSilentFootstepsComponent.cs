@@ -1,0 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+
+namespace Content.Trauma.Common.StepTrigger;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class NoShoesSilentFootstepsComponent : Component;

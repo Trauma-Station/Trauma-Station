@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Goobstation.Common.CCVar;
-using Robust.Shared.Configuration;
-// </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Client.Lobby;
@@ -25,9 +21,8 @@ namespace Content.Client.Construction.UI
     /// model. This is where the bulk of UI work is done, either calling functions in the model to change state, or collecting
     /// data out of the model to *present* to the screen though the UI framework.
     /// </summary>
-    internal sealed class ConstructionMenuPresenter : IDisposable
+    internal sealed partial class ConstructionMenuPresenter : IDisposable // Trauma - made partial
     {
-        [Dependency] private readonly IConfigurationManager _cfg = default!; // Goobstation
         [Dependency] private readonly EntityManager _entManager = default!;
         [Dependency] private readonly IEntitySystemManager _systemManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -48,7 +43,6 @@ namespace Content.Client.Construction.UI
         private List<ConstructionPrototype> _favoritedRecipes = [];
         private readonly Dictionary<string, ContainerButton> _recipeButtons = new();
         private string _selectedCategory = string.Empty;
-        private bool _autoFocusSearch = false; // Goobstation
         private const string FavoriteCatName = "construction-category-favorites";
         private const string ForAllCategoryName = "construction-category-all";
 
@@ -95,6 +89,7 @@ namespace Content.Client.Construction.UI
         {
             // This is a lot easier than a factory
             IoCManager.InjectDependencies(this);
+            InitializeTrauma(); // Trauma
             _constructionView = new ConstructionMenu();
             _whitelistSystem = _entManager.System<EntityWhitelistSystem>();
             _spriteSystem = _entManager.System<SpriteSystem>();
@@ -129,14 +124,7 @@ namespace Content.Client.Construction.UI
 
             SetFavorites(_preferencesManager.Preferences?.ConstructionFavorites ?? []);
             OnViewPopulateRecipes(_constructionView, (string.Empty, string.Empty));
-
-            // <Goob>
-            _autoFocusSearch = _cfg.GetCVar(GoobCVars.AutoFocusSearchOnBuildMenu);
-            _cfg.OnValueChanged(GoobCVars.AutoFocusSearchOnBuildMenu, UpdateAutoFocus, false);
-            // </Goob>
         }
-
-        private void UpdateAutoFocus(bool value) { _autoFocusSearch = value; } // Goobstation EDIT
 
         public void OnHudCraftingButtonToggled(BaseButton.ButtonToggledEventArgs args)
         {
@@ -394,7 +382,11 @@ namespace Content.Client.Construction.UI
                 prototype.Description!,
                 proto,
                 prototype.Type != ConstructionType.Item,
-                !_favoritedRecipes.Contains(prototype));
+                !_favoritedRecipes.Contains(prototype),
+                // <Trauma>
+                CanUnderstand(prototype),
+                prototype);
+                // </Trauma>
 
             var stepList = _constructionView.RecipeStepList;
             GenerateStepList(prototype, stepList);
@@ -627,6 +619,13 @@ namespace Content.Client.Construction.UI
             }
             else
             {
+                // <Trauma> - update recipes whenever opening the window
+                if (_playerManager.LocalEntity is { } player)
+                {
+                    _useSkills = _constructionSystem!.IsKnowledgeHolder(player);
+                    _skills = _knowledge.GetSkillMasteries(player);
+                }
+                // </Trauma>
                 WindowOpen = true;
                 _uiManager.GetActiveUIWidget<GameTopMenuBar>()
                     .CraftingButton.SetClickPressed(true); // This does not call CraftingButtonToggled

@@ -1,10 +1,9 @@
 // <Trauma>
 using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Shared.CustomLawboard;
-using Content.Server._DV.CosmicCult;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Research.Systems;
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Content.Trauma.Common.Silicon;
 using Content.Shared.FixedPoint;
 using Content.Shared.Radio;
 using Content.Shared.Random;
@@ -42,7 +41,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 {
     // <Trauma>
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IonStormSystem _ionStorm = default!;
+    [Dependency] private readonly IonLawSystem _ionLaw = default!;
     [Dependency] private readonly ResearchSystem _research = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     // </Trauma>
@@ -83,12 +82,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid)
-            || HasComp<StationAiCustomizationComponent>(uid)) // skip a law's notification for remotable and AI
-            return;
-        // Corvax-Next-AiRemoteControl-End
 
         var msg = Loc.GetString("laws-notify");
         var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
@@ -181,11 +174,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         if (component.Lawset == null)
             component.Lawset = GetLawset(component.Laws);
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (HasComp<AiRemoteControllerComponent>(uid)) // You can't emag controllable entities
-            return;
-        // Corvax-Next-AiRemoteControl-End
 
         // Show the silicon has been subverted.
         component.Subverted = true;
@@ -363,6 +351,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
 
+        // <Trauma>
+        ent.Comp.LastLawset = provider.Laws; // Goob
+        var ev = new AILawUpdatedEvent();
+        // </Trauma>
         while (query.MoveNext(out var update))
         {
             if (TryComp<ShowCrewIconsComponent>(update, out var crewIconComp))
@@ -371,34 +363,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
                 Dirty(update, crewIconComp);
             }
             SetLaws(lawset, update, provider.LawUploadSound); // Trauma - lawset itself is a List now
-
-            // Corvax-Next-AiRemoteControl-Start
-            if (TryComp<StationAiHeldComponent>(update, out var stationAiHeldComp)
-                && stationAiHeldComp.CurrentConnectedEntity != null
-                && HasComp<SiliconLawProviderComponent>(stationAiHeldComp.CurrentConnectedEntity))
-            {
-                SetLaws(lawset, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
-            }
-            // Corvax-Next-AiRemoteControl-End
-
-            RaiseLocalEvent(new AILawUpdatedEvent(update, provider.Laws)); // Trauma
+            RaiseLocalEvent(update, new AILawUpdatedEvent());
         }
 
-        ent.Comp.LastLawset = provider.Laws; // Goob
     }
-
-    // Corvax-Next-AiRemoteControl-Start
-    public void SetLawsSilent(List<SiliconLaw> newLaws, EntityUid target, SoundSpecifier? cue = null)
-    {
-        if (!TryComp<SiliconLawProviderComponent>(target, out var component))
-            return;
-
-        if (component.Lawset == null)
-            component.Lawset = new SiliconLawset();
-
-        component.Lawset.Laws = newLaws;
-    }
-    // Corvax-Next-AiRemoteControl-End
 
     // Goob edit start
     private void ApplyExperimentalLaws(Entity<SiliconLawUpdaterComponent> ent, Entity<ExperimentalLawProviderComponent, SiliconLawProviderComponent> experiment)
@@ -486,7 +454,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         laws.Laws.RemoveAt(_random.Next(laws.Laws.Count));
 
         // generate a new law...
-        var newLaw = _ionStorm.GenerateLaw();
+        var newLaw = _ionLaw.GetIonLaw();
 
         // see if the law we add will replace a random existing law or be a new glitched order one
         if (laws.Laws.Count > 0)

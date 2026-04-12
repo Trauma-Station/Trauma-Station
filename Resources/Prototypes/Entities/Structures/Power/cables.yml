@@ -64,6 +64,10 @@
   name: HV power cable
   description: An orange high voltage power cable.
   components:
+  # <Trauma>
+  - type: PlacementReplacement
+    key: cable_hv
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Power/Cables/hv_cable.rsi
     state: hvcable_0
@@ -122,6 +126,10 @@
   name: MV power cable
   description: A medium voltage power cable.
   components:
+  # <Trauma>
+  - type: PlacementReplacement
+    key: cable_mv
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Power/Cables/mv_cable.rsi
     layers:
@@ -176,6 +184,10 @@
   name: LV power cable
   description: A cable used to connect machines to an APC. #APCs aren't area defined anymore so need this cable to connect things to the APC. This description should be dynamic in future.
   components:
+  # <Trauma>
+  - type: PlacementReplacement
+    key: cable_lv
+  # </Trauma>
   - type: Sprite
     color: "#566e52" # Trauma - was Green
     sprite: Structures/Power/Cables/lv_cable.rsi

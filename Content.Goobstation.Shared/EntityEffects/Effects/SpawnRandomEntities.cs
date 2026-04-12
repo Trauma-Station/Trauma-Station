@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects.EntitySpawning;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -21,8 +20,7 @@ public sealed class SpawnRandomEntitiesEffectSystem : EntityEffectSystem<Transfo
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<SpawnRandomEntities> args)
     {
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var quantity = rand.Next(1, args.Effect.Number + 1);
 
         var proto = args.Effect.Entity;

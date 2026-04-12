@@ -41,9 +41,8 @@ public sealed class PredictedHandsSystem : EntitySystem
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<VirtualItemComponent> _virtualQuery;
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private readonly EntityQuery<VirtualItemComponent> _virtualQuery = default!;
 
     /// <summary>
     /// Items dropped when the holder falls down will be launched in
@@ -62,9 +61,6 @@ public sealed class PredictedHandsSystem : EntitySystem
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.ThrowItemInHand, new PointerInputCmdHandler(HandleThrowItem))
             .Register<PredictedHandsSystem>();
-
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _virtualQuery = GetEntityQuery<VirtualItemComponent>();
     }
 
     public override void Shutdown()
@@ -79,8 +75,7 @@ public sealed class PredictedHandsSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         if (!rand.Prob(args.DisarmProbability))
             return;
 
@@ -199,8 +194,7 @@ public sealed class PredictedHandsSystem : EntitySystem
         var holderVelocity = _physicsQuery.CompOrNull(entity)?.LinearVelocity ?? Vector2.Zero;
         var spreadMaxAngle = Angle.FromDegrees(DropHeldItemsSpread);
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(entity).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(entity));
 
         foreach (var hand in entity.Comp.Hands.Keys)
         {

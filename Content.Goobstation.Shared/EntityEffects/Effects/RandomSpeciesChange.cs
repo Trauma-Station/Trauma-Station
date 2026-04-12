@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -26,7 +25,8 @@ public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<Humanoi
     {
         "IPC",
         "Shadowling", // no ontag
-        "Skeleton"
+        "Skeleton",
+        "Shattered"
     };
 
     private List<ProtoId<SpeciesPrototype>> _species = new();
@@ -42,8 +42,7 @@ public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<Humanoi
 
     protected override void Effect(Entity<HumanoidProfileComponent> ent, ref EntityEffectEvent<RandomSpeciesChange> args)
     {
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new System.Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var species = rand.Pick(_species);
         _speciesChange.Polymorph(ent, species);
     }

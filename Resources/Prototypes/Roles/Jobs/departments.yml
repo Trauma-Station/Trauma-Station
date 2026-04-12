@@ -3,6 +3,7 @@
   name: department-Cargo
   description: department-Cargo-description
   color: "#A46106"
+  weight: 7 # Trauma
   roles:
   - CargoTechnician
   - Quartermaster
@@ -12,19 +13,20 @@
   id: Civilian
   name: department-Civilian
   description: department-Civilian-description
-  color: "#9FED58"
+  color: "#6C6A78" # Trauma - assistant grey
   weight: -10
   roles:
   # <Trauma>
   - RadioHost
   - PartyMaker
+  - PhoneMerchant
   # </Trauma>
-  - Bartender
-  - Botanist
+  #- Bartender # Trauma - moved to Service
+  #- Botanist # Trauma - moved to Service
   - Chaplain
-  - Chef
+  #- Chef # Trauma - moved to Service
   - Clown
-  - HeadOfPersonnel
+  #- HeadOfPersonnel # Trauma - moved to Service
   - Janitor
   - Lawyer
   - Librarian
@@ -33,8 +35,7 @@
   - Passenger
   - Reporter
   - Visitor
-  - ServiceWorker # Trauma
-  - PhoneMerchant # Trauma
+  #- ServiceWorker # Trauma - moved to Service
 
 - type: department
   id: CentralCommand
@@ -53,11 +54,9 @@
   - DeathSquad
   - HecuOperative
   # <Trauma>
-  - NanotrasenRepresentative
   - NavyOfficer
   - NavyCaptain
   - NavyOfficerUndercover
-  - SpecialOperationsOfficer
   - Diplomat
   - GovernmentMan
   # </Trauma>
@@ -99,6 +98,7 @@
   name: department-Engineering
   description: department-Engineering-description
   color: "#EFB341"
+  weight: 12 # Trauma
   roles:
   - AtmosphericTechnician
   - ChiefEngineer
@@ -110,6 +110,7 @@
   name: department-Medical
   description: department-Medical-description
   color: "#52B4E9"
+  weight: 10 # Trauma
   roles:
   # <Trauma>
   - Virologist
@@ -143,6 +144,7 @@
   name: department-Science
   description: department-Science-description
   color: "#D381C9"
+  weight: 15 # Trauma
   roles:
   # <Trauma>
   - Roboticist
@@ -157,6 +159,7 @@
   name: department-Silicon
   description: department-Silicon-description
   color: "#D381C9"
+  weight: -15 # Trauma
   roles:
   - Borg
   - StationAi
@@ -166,7 +169,7 @@
   name: department-Specific
   description: department-Specific-description
   color: "#9FED58"
-  weight: 10
+  weight: 0 # Trauma - was 10
   roles:
   - Reporter
   - Psychologist

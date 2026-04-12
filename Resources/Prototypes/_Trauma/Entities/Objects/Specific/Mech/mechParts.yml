@@ -117,9 +117,10 @@
       collection: PowerFistHit
     attackRate: 0.5
     damage:
-      groups:
-        Brute: 30
       types:
+        Blunt: 20
+        Slash: 5
+        Piercing: 5
         Structural: 60
 
 - type: entity

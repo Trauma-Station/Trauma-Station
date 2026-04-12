@@ -1,0 +1,300 @@
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageCat
+  components:
+  - type: LanguageKnowledge
+    languageId: Cat
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageDog
+  components:
+  - type: LanguageKnowledge
+    languageId: Dog
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageFox
+  components:
+  - type: LanguageKnowledge
+    languageId: Fox
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageXeno
+  components:
+  - type: LanguageKnowledge
+    languageId: Xeno
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageMonkey
+  components:
+  - type: LanguageKnowledge
+    languageId: Monkey
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageMouse
+  components:
+  - type: LanguageKnowledge
+    languageId: Mouse
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageChicken
+  components:
+  - type: LanguageKnowledge
+    languageId: Chicken
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageDuck
+  components:
+  - type: LanguageKnowledge
+    languageId: Duck
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageCow
+  components:
+  - type: LanguageKnowledge
+    languageId: Cow
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageSheep
+  components:
+  - type: LanguageKnowledge
+    languageId: Sheep
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageKangaroo
+  components:
+  - type: LanguageKnowledge
+    languageId: Kangaroo
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguagePig
+  components:
+  - type: LanguageKnowledge
+    languageId: Pig
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageCrab
+  components:
+  - type: LanguageKnowledge
+    languageId: Crab
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageKobold
+  components:
+  - type: LanguageKnowledge
+    languageId: Kobold
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageHissing
+  components:
+  - type: LanguageKnowledge
+    languageId: Hissing
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguagePenguin
+  components:
+  - type: LanguageKnowledge
+    languageId: Penguin
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageDeer
+  components:
+  - type: LanguageKnowledge
+    languageId: Deer
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageUniversal
+  components:
+  - type: LanguageKnowledge
+    languageId: Universal
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageRobotTalk
+  components:
+  - type: LanguageKnowledge
+    languageId: RobotTalk
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageDroneTalk
+  components:
+  - type: LanguageKnowledge
+    languageId: DroneTalk
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguagePsychomantic
+  components:
+  - type: LanguageKnowledge
+    languageId: Psychomantic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageBlob
+  components:
+  - type: LanguageKnowledge
+    languageId: Blob
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageEldritch
+  components:
+  - type: LanguageKnowledge
+    languageId: Eldritch
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageRootSpeak
+  components:
+  - type: LanguageKnowledge
+    languageId: RootSpeak
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageMoffic
+  components:
+  - type: LanguageKnowledge
+    languageId: Moffic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageDraconic
+  components:
+  - type: LanguageKnowledge
+    languageId: Draconic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageAzaziba
+  components:
+  - type: LanguageKnowledge
+    languageId: Azaziba
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageCalcic
+  components:
+  - type: LanguageKnowledge
+    languageId: Calcic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageBubblish
+  components:
+  - type: LanguageKnowledge
+    languageId: Bubblish
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageNewKinPidgin
+  components:
+  - type: LanguageKnowledge
+    languageId: NewKinPidgin
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageXeeplian
+  components:
+  - type: LanguageKnowledge
+    languageId: Xeeplian
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageElyran
+  components:
+  - type: LanguageKnowledge
+    languageId: Elyran
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageFreespeak
+  components:
+  - type: LanguageKnowledge
+    languageId: Freespeak
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageNovuNederic
+  components:
+  - type: LanguageKnowledge
+    languageId: NovuNederic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageSolCommon
+  components:
+  - type: LanguageKnowledge
+    languageId: SolCommon
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageTauCetiBasic
+  components:
+  - type: LanguageKnowledge
+    languageId: TauCetiBasic
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageTradeband
+  components:
+  - type: LanguageKnowledge
+    languageId: Tradeband
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageSpaceItalian
+  components:
+  - type: LanguageKnowledge
+    languageId: SpaceItalian
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageCarptongue
+  components:
+  - type: LanguageKnowledge
+    languageId: Carptongue
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageFloorGoblin
+  components:
+  - type: LanguageKnowledge
+    languageId: FloorGoblin
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageCheval
+  components:
+  - type: LanguageKnowledge
+    languageId: Cheval
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageBingle
+  components:
+  - type: LanguageKnowledge
+    languageId: Bingle
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageXenoHivemind
+  components:
+  - type: LanguageKnowledge
+    languageId: XenoHivemind

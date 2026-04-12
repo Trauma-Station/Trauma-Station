@@ -7,7 +7,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.StationRadio.Systems;
 
@@ -62,7 +61,7 @@ public sealed class StationRadioReceiverSystem : EntitySystem
 
     private void SetAudible(StationRadioReceiverComponent comp, bool audible)
     {
-        if (comp.SoundEntity is {} sound)
+        if (comp.SoundEntity is {} sound && !TerminatingOrDeleted(sound))
             _audio.SetVolume(sound, audible ? comp.DefaultParams.Volume : float.NegativeInfinity);
     }
 }

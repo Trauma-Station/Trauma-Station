@@ -21,6 +21,7 @@ public sealed partial class SandboxWindow : DefaultWindow
     private readonly DebugPhysicsSystem _debugPhysicsSystem;
     private readonly MarkerSystem _markerSystem;
     private readonly SubFloorHideSystem _subFloorSystem;
+    public static event Action<SandboxWindow>? OnOpened; // Trauma
 
     public SandboxWindow()
     {
@@ -35,6 +36,7 @@ public sealed partial class SandboxWindow : DefaultWindow
     protected override void Opened()
     {
         base.Opened();
+        OnOpened?.Invoke(this); // Trauma
 
         ToggleSubfloorButton.Pressed = _subFloorSystem.ShowAll;
         ToggleLightButton.Pressed = !_lightManager.Enabled;

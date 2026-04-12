@@ -16,8 +16,6 @@ using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 using Vector2 = System.Numerics.Vector2;
@@ -418,7 +416,7 @@ public abstract class SharedSealableClothingSystem : EntitySystem
                 return false;
             }
 
-            comp.ProcessQueue.Enqueue(EntityManager.GetNetEntity(sealeable));
+            comp.ProcessQueue.Enqueue(GetNetEntity(sealeable));
         }
 
         comp.IsInProcess = true;
@@ -448,7 +446,7 @@ public abstract class SharedSealableClothingSystem : EntitySystem
                 return;
             }
 
-            var processingPart = EntityManager.GetEntity(comp.ProcessQueue.Dequeue());
+            var processingPart = GetEntity(comp.ProcessQueue.Dequeue());
             Dirty(control);
 
             if (!TryComp<SealableClothingComponent>(processingPart, out var sealableComponent) || !comp.IsInProcess)

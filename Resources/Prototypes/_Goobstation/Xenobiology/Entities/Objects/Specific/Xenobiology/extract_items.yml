@@ -38,7 +38,7 @@
   - type: Organ
     category: Heart
   - type: ChildOrgan
-    parentCategory: Torso
+    parents: [ Torso ]
   - type: OrganComponents
     onAdd:
     - type: LightningArcShooter

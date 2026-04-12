@@ -70,7 +70,6 @@
     # - type: BlobSpeak
     # Einstein Engines - Language begin
     - type: LanguageSpeaker
-    - type: LanguageKnowledge
       speaks:
       - Blob
       understands:
@@ -127,6 +126,13 @@
       guides:
       - Blob
     - type: MovementIgnoreGravity # Trauma
+    - type: Bloodstream
+      maxBleedAmount: 0 # no bleeding
+      bloodReferenceSolution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 50
+      bleedReductionAmount: 30
 
 # Blobbernaut
 - type: entity
@@ -164,7 +170,6 @@
     # - type: BlobSpeak
     # Einstein Engines - Language begin
     - type: LanguageSpeaker
-    - type: LanguageKnowledge
       speaks:
       - Blob
       understands:
@@ -240,11 +245,12 @@
       guides:
       - Blob
     - type: Bloodstream
+      maxBleedAmount: 0 # no bleeding
       bloodReferenceSolution:
         reagents:
         - ReagentId: Blood
           Quantity: 300
-      bleedReductionAmount: 5
+      bleedReductionAmount: 30
     - type: MovementIgnoreGravity # Trauma
 
 # Observer
@@ -263,7 +269,6 @@
     # Einstein Engines - Language begin
     - type: LanguageSpeaker
       currentLanguage: Blob
-    - type: LanguageKnowledge
       speaks:
       - Blob
       understands:

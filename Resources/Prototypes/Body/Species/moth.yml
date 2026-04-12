@@ -47,6 +47,11 @@
     enum.HumanoidVisualLayers.RFoot:
       limit: 1
       required: false
+  # <Trauma>
+  appearances:
+    enum.HumanoidVisualLayers.Wings:
+      matchSkin: true
+  # </Trauma>
 
 - type: entity
   parent: BaseSpeciesAppearance
@@ -140,13 +145,22 @@
   id: MobMoth
   name: Urist McFluff
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Moffic
+    understands:
+    - TauCetiBasic
+    - Moffic
+  # </Trauma>
   - type: Damageable
     damageModifierSet: Moth
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Speech
     speechVerb: Moth
-    allowedEmotes: ['Chitter', 'Squeak']
+    allowedEmotes: ['Chitter', 'Squeak', 'Flap']
   - type: TypingIndicator
     proto: moth
   - type: Bloodstream
@@ -167,7 +181,9 @@
       Male: UnisexMoth
       Female: UnisexMoth
       Unsexed: UnisexMoth
-  #- type: MovementSpeedModifier
+  - type: BodyEmotes
+    soundsId: MothBodyEmotes
+  #- type: MovementSpeedModifier # Trauma - moved to wings
   #  baseWeightlessAcceleration: 1.5 # Move around more easily in space.
   #  baseWeightlessFriction: 1
   #  baseWeightlessModifier: 1
@@ -198,11 +214,6 @@
   id: OrganMoth
   abstract: true
   suffix: Moth
-  # <Shitmed>
-  components:
-  - type: Damageable
-    damageModifierSet: Moth
-  # </Shitmed>
 
 - type: entity
   id: OrganMothMetabolizer
@@ -243,7 +254,7 @@
   id: OrganMothTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganMothExternal ]
+  parent: [ OrganBaseHeadBald, OrganMothExternal ] # Trauma - bald
   id: OrganMothHead
   components:
   - type: VisualOrganMarkings

@@ -53,7 +53,7 @@
         type: InstrumentBoundUserInterface
         requireInputValidation: false
       enum.RadialSelectorUiKey.Key:
-        type: TrackedRadialSelectorMenuBUI
+        type: RadialSelectorMenuBUI
 
 - type: entity
   parent: [BaseMobXenomorphDungeon, BaseMobXenomorphDrone]

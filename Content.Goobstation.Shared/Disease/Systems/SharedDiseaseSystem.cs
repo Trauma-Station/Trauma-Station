@@ -7,8 +7,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -169,8 +167,10 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
 
         if (!args.Ent.Comp.EffectImmune)
         {
-            foreach (var effectUid in ent.Comp.Effects.ContainedEntities)
+            // not using foreach incase it gets modified by event handlers
+            for (int i = 0; i < ent.Comp.Effects.Count; i++)
             {
+                var effectUid = ent.Comp.Effects.ContainedEntities[i];
                 if (!EffectQuery.TryComp(effectUid, out var effect))
                     continue;
 

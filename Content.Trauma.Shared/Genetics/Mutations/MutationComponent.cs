@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
@@ -30,6 +28,13 @@ public sealed partial class MutationComponent : Component
     /// </summary>
     [DataField]
     public int Difficulty = 8;
+
+    /// <summary>
+    /// Rarity value shown on the genetics scanner.
+    /// No functional effect.
+    /// </summary>
+    [DataField]
+    public MutationRarity Rarity;
 
     /// <summary>
     /// The target mob this mutation is from.
@@ -69,3 +74,29 @@ public record struct MutationAddedEvent(Entity<MutatableComponent> Target, Entit
 /// </summary>
 [ByRefEvent]
 public record struct MutationRemovedEvent(Entity<MutatableComponent> Target, Entity<MutationComponent> Mutation, EntProtoId<MutationComponent> Id, EntityUid? User, bool Automatic, bool Predicted);
+
+/// <summary>
+/// Rarity tier shown in the scanner UI.
+/// </summary>
+[Serializable]
+public enum MutationRarity : byte
+{
+    Common,
+    Rare,
+    Mythical
+}
+
+public static class MutationRarityHelpers
+{
+    /// <summary>
+    /// Get the character representing a rarity value.
+    /// </summary>
+    public static char RarityChar(this MutationRarity rarity)
+        => rarity switch
+        {
+            MutationRarity.Common => 'C',
+            MutationRarity.Rare => 'R',
+            MutationRarity.Mythical => 'M',
+            _ => '?'
+        };
+}

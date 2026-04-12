@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Zachary Higgs <compgeek223@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Implants;
@@ -63,6 +58,7 @@ public sealed class FakeMindShieldSystem : EntitySystem
                 continue;
 
             component.IsEnabled = args.ChameleonOutfit.HasMindShield;
+            _actions.SetToggled(action, args.ChameleonOutfit.HasMindShield);
             Dirty(uid, component);
 
             if (actionComp.UseDelay != null)

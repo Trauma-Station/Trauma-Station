@@ -4,3 +4,8 @@
   category: construction-category-weapons
   targetNode: hammer
   objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+    MetalworkingKnowledge: 1

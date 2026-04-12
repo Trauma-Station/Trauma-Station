@@ -80,6 +80,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Theatre",
         // <Trauma>
         "Journalism",
+        "Library",
         // </Trauma>
     };
 

@@ -119,7 +119,7 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             else
             {
                 // Set the sprite state and light properties based on fire stacks.
-                if (fireStacksHoly > component.FireStackAlternateState && !string.IsNullOrEmpty(component.AlternateState))
+                if (fireStacksHoly > 10 && !string.IsNullOrEmpty(component.AlternateState))
                     SpriteSystem.LayerSetRsiState((uid, sprite), indexHoly, component.AlternateState);
                 else
                     SpriteSystem.LayerSetRsiState((uid, sprite), indexHoly, component.NormalState);

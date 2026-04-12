@@ -1,0 +1,112 @@
+- type: entity
+  parent: BaseAction
+  id: ActionLegSweep
+  name: Leg Sweep
+  description: Sweeps the legs out from under a target to knock them down for a few seconds.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 2.5
+    icon:
+      sprite: _Goobstation/Actions/kravmaga.rsi
+      state: legsweep
+  - type: InstantAction
+    event: !type:PerformMartialArtComboEvent
+        combo: KravLegSweep
+  - type: Sprite # For guidebook
+    sprite: _Goobstation/Actions/kravmaga.rsi
+    state: legsweep
+
+- type: entity
+  parent: BaseAction
+  id: ActionNeckChop
+  name: Neck Chop
+  description: A hard swing with the side of your hand deals some damage and disables the target's ability to speak for twenty seconds
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 2.5
+    icon:
+      sprite: _Goobstation/Actions/kravmaga.rsi
+      state: neckchop
+  - type: InstantAction
+    event: !type:PerformMartialArtComboEvent
+        combo: KravNeckChop
+  - type: Sprite # For guidebook
+    sprite: _Goobstation/Actions/kravmaga.rsi
+    state: neckchop
+
+- type: entity
+  parent: BaseAction
+  id: ActionLungPunch
+  name: Lung Punch
+  description: Deals 30 stamina damage and prevents breathing for ten seconds. Four of those will incapacitate a target less-than-lethally, but beware of the loss of breath you cause.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 2.5
+    icon:
+      sprite: _Goobstation/Actions/kravmaga.rsi
+      state: lungpunch
+  - type: InstantAction
+    event: !type:PerformMartialArtComboEvent
+        combo: KravLungPunch
+  - type: Sprite # For guidebook
+    sprite: _Goobstation/Actions/kravmaga.rsi
+    state: lungpunch
+
+- type: combo
+  id: KravLegSweep
+  attacks: []
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-slam
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:LegSweep
+    time: 4
+  levelRequired: 26
+
+- type: combo
+  id: KravNeckChop
+  attacks: []
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-kick
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:GenericStatusEffect
+    key: Stutter
+    time: 20
+    type: Add
+  levelRequired: 26
+
+- type: combo
+  id: KravLungPunch
+  attacks: []
+  userEffects:
+  - !type:PopupMessage
+    messages:
+    - cqc-restrain
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 30
+  - !type:GenericStatusEffect
+    key: Stutter
+    time: 30
+    type: Add
+  - !type:ModifyKnockdown
+    time: 1
+    drop: true
+    type: Add
+  - !type:BlockedBreathing
+    time: 10
+  levelRequired: 26

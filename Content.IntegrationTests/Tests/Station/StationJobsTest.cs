@@ -1,22 +1,6 @@
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Veritius <veritiusgaming@gmail.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Moony <moony@hellomouse.net>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Collections.Generic;
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Maps;
@@ -32,7 +16,7 @@ namespace Content.IntegrationTests.Tests.Station;
 
 [TestFixture]
 [TestOf(typeof(StationJobsSystem))]
-public sealed class StationJobsTest
+public sealed class StationJobsTest : GameTest
 {
     private const string StationMapId = "FooStation";
 
@@ -72,25 +56,30 @@ public sealed class StationJobsTest
 
 - type: job
   id: TAssistant
+  name: job-name-passenger # Trauma - its required now
   playTimeTracker: PlayTimeDummyAssistant
 
 - type: job
   id: TMime
   weight: 20
+  name: job-name-mime # Trauma - its required now
   playTimeTracker: PlayTimeDummyMime
 
 - type: job
   id: TClown
   weight: -10
+  name: job-name-clown # Trauma - its required now
   playTimeTracker: PlayTimeDummyClown
 
 - type: job
   id: TCaptain
   weight: 10
+  name: job-name-captain # Trauma - its required now
   playTimeTracker: PlayTimeDummyCaptain
 
 - type: job
   id: TChaplain
+  name: job-name-chaplain # Trauma - its required now
   playTimeTracker: PlayTimeDummyChaplain
 ";
 
@@ -102,7 +91,7 @@ public sealed class StationJobsTest
     [Test]
     public async Task AssignJobsTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
@@ -170,13 +159,12 @@ public sealed class StationJobsTest
                 Assert.That(assigned.Values.Select(x => x.Item1).ToList(), Does.Contain("TCaptain"));
             });
         });
-        await pair.CleanReturnAsync();
     }
 
     [Test]
     public async Task AdjustJobsTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
@@ -220,13 +208,12 @@ public sealed class StationJobsTest
                 Assert.That(stationJobs.IsJobUnlimited(station, "TChaplain"), "Could not make TChaplain unlimited.");
             });
         });
-        await pair.CleanReturnAsync();
     }
 
     [Test]
     public async Task InvalidRoundstartJobsTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
@@ -264,7 +251,6 @@ public sealed class StationJobsTest
                 }
             });
         });
-        await pair.CleanReturnAsync();
     }
 }
 

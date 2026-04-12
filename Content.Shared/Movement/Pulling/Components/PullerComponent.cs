@@ -1,4 +1,6 @@
-using Content.Goobstation.Common.MartialArts;
+// <Trauma
+using Content.Trauma.Common.MartialArts;
+// </Trauma>
 using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;

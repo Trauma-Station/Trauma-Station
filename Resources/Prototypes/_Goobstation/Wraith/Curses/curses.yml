@@ -91,8 +91,10 @@
   components:
   - type: CurseDeath
     baseDamage:
-      groups:
-        Brute: 5
+      types:
+        Blunt: 1.33
+        Slash: 1.33
+        Piercing: 1.33
     rampMultiplier: 1.5 # The death curse deals more damage the longer it is on the curse holder.
   effects:
     0.5:
@@ -117,10 +119,9 @@
       showInChat: true
     - !type:SpawnEntity
       entity: PuddleBloodSmall
-    - !type:HealthChange
+    - !type:EvenHealthChange
       damage:
-        groups:
-          Brute: 10
+        Brute: 10
 #    - !type:PlaySoundBehavior This causes the ProtoID to be invalid for some reason
 #     sound:
 #      collection: Flesh_Tear

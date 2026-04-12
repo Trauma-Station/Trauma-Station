@@ -9,7 +9,6 @@ using Content.Shared.Mobs.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.MisandryBox.Appender;
 

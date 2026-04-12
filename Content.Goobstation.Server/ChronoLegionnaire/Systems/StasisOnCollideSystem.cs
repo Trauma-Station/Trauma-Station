@@ -22,7 +22,7 @@ public sealed class StasisOnCollideSystem : EntitySystem
 
     private void TryCollideStasis(Entity<StasisOnCollideComponent> projectile, EntityUid target)
     {
-        if (EntityManager.TryGetComponent<StatusEffectsComponent>(target, out var status))
+        if (TryComp<StatusEffectsComponent>(target, out var status))
         {
             _stasisSystem.TryStasis((target, status), true, projectile.Comp.StasisTime);
         }

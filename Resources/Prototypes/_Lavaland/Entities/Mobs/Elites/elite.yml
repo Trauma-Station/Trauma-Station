@@ -62,8 +62,6 @@
     soundId: Miniboss
   - type: Aggressive # also required component for aggro checking
     forgiveRange: 20.0
-  - type: CombatPower # Goobstation
-    factor: 8 # times more dangerous than a crew-member
 
 - type: entity
   name: Legionnaire

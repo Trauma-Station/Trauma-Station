@@ -3,8 +3,6 @@
 using Content.Goobstation.Shared.Clothing.Systems;
 using Content.Shared.Inventory;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Clothing.Components;
 

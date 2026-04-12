@@ -4,7 +4,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
-using Robust.Shared.GameStates;
 
 namespace Content.Medical.Shared.Pain;
 

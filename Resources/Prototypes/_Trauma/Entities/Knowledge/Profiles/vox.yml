@@ -1,0 +1,46 @@
+- type: knowledgeProfile
+  id: Vox # lobotomite species
+  pointsLimit: 1
+  mastery:
+    # Crafting Recipe Skills
+    CookingKnowledge: 0
+    MaterialsKnowledge: 0
+    DoorsKnowledge: 0
+    AirlocksKnowledge: 0
+    ToysKnowledge: 0
+    BananiumKnowledge: 0
+    BotsKnowledge: 0
+    FurnitureKnowledge: 0
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+    WallsKnowledge: 0
+    ScienceKnowledge: 0
+    WindowsKnowledge: 0
+    SmokeablesKnowledge: 0
+    # Intelectual Skills
+    LiteracyKnowledge: 0
+    MagicalLiteracyKnowledge: 0
+    # Language Skills
+    # Medical Skill
+    SurgeryKnowledge: 0
+    FirstAidKnowledge: 0
+    ChemistryKnowledge: 0
+    # Physical Skill
+    ThrowingKnowledge: 0
+    AthleticsKnowledge: 0
+    StrengthKnowledge: 0
+    ToughnessKnowledge: 0
+    # Combat Skill
+    MeleeKnowledge: 0
+    ShootingKnowledge: 0
+    # Crafting Quality
+    FabricationKnowledge: 0
+    WeaponsKnowledge: 0
+    ArmorKnowledge: 0
+    MetalworkingKnowledge: 0
+    CarvingKnowledge: 0
+    GunsmithingKnowledge: 0
+    MechanicsKnowledge: 0
+    TailoringKnowledge: 0
+    # Misc Skill
+    JanitorKnowledge: 5 # Only thing they are good for

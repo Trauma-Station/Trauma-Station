@@ -20,8 +20,8 @@ namespace Content.Goobstation.Shared.Shadowling.Systems;
 public sealed class AntiMindControlItemSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedChargesSystem _charges = default!;
 
     /// <inheritdoc/>
@@ -47,7 +47,7 @@ public sealed class AntiMindControlItemSystem : EntitySystem
 
         if (!_charges.HasCharges(uid, 1))
         {
-            _popupSystem.PopupPredicted(
+            _popup.PopupPredicted(
                 Loc.GetString("anti-mind-max-charges-reached"),
                 args.User,
                 args.User,
@@ -97,7 +97,7 @@ public sealed class AntiMindControlItemSystem : EntitySystem
 
         if (HasComp<LesserShadowlingComponent>(target))
         {
-            _popupSystem.PopupPredicted(Loc.GetString("mind-control-lesser-shadowling"), user, user, PopupType.MediumCaution);
+            _popup.PopupPredicted(Loc.GetString("mind-control-lesser-shadowling"), user, user, PopupType.MediumCaution);
             return;
         }
 
@@ -105,16 +105,13 @@ public sealed class AntiMindControlItemSystem : EntitySystem
         {
             RemComp<ThrallComponent>(target);
 
-            if (!HasComp<EnthrallResistanceComponent>(target))
-                EnsureComp<EnthrallResistanceComponent>(target);
-
-            var enthrallRes = EntityManager.GetComponent<EnthrallResistanceComponent>(target);
+            var enthrallRes = EnsureComp<EnthrallResistanceComponent>(target);
             enthrallRes.ExtraTime += enthrallRes.ExtraTimeUpdate;
 
-            _popupSystem.PopupPredicted(Loc.GetString("mind-control-thrall-done"), target, target, PopupType.MediumCaution);
+            _popup.PopupPredicted(Loc.GetString("mind-control-thrall-done"), target, target, PopupType.MediumCaution);
         }
 
-        _audioSystem.PlayPredicted(
+        _audio.PlayPredicted(
             new SoundPathSpecifier("/Audio/Weapons/flash.ogg"),
             user,
             target,

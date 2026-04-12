@@ -47,7 +47,6 @@
     sounds:
       Unsexed: Duende
   - type: LanguageSpeaker
-  - type: LanguageKnowledge
     speaks:
     - FloorGoblin
     understands:

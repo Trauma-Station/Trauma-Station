@@ -36,8 +36,3 @@
   subjects: [ "INFINITE AMMO", "INVISIBLE", "CQC" ]
   items:
     id: ClothingHeadHatSolidHeadband
-  effects:
-  - !type:AddComponents
-    probability: 0.2
-    components:
-    - type: GrantCqc

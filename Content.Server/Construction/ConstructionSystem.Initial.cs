@@ -1,72 +1,11 @@
-// SPDX-FileCopyrightText: 2019 Silver <Silvertorch5@gmail.com>
-// SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Alex S <43192081+MemeProof@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Clyybber <darkmine956@gmail.com>
-// SPDX-FileCopyrightText: 2020 ColdAutumnRain <73938872+ColdAutumnRain@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 ComicIronic <comicironic@gmail.com>
-// SPDX-FileCopyrightText: 2020 Exp <theexp111@gmail.com>
-// SPDX-FileCopyrightText: 2020 F77F <66768086+F77F@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 FL-OZ <58238103+FL-OZ@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 FL-OZ <anotherscuffed@gmail.com>
-// SPDX-FileCopyrightText: 2020 Jackson Lewis <inquisitivepenguin@protonmail.com>
-// SPDX-FileCopyrightText: 2020 Memory <58238103+FL-OZ@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2020 V�ctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 V�ctor Aguilera Puerto <zddm@outlook.es>
-// SPDX-FileCopyrightText: 2020 chairbender <kwhipke1@gmail.com>
-// SPDX-FileCopyrightText: 2020 py01 <60152240+collinlunn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 py01 <pyronetics01@gmail.com>
-// SPDX-FileCopyrightText: 2020 scuffedjays <yetanotherscuffed@gmail.com>
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Kara D <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2021 Mads Glahder <32570017+boiled-water-tsar@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Metal Gear Sloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@gmail.com>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2022 J�lio C�sar Ueti <52474532+Mirino97@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 PixelTK <85175107+PixelTheKermit@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Theomund <34360334+Theomund@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 keronshb <keronshb@live.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Construction;
+using Content.Goobstation.Common.Construction;
+using Content.Shared.Mind.Components;
+// </Trauma>
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Content.Goobstation.Common.Construction; // Goobstation
 using Content.Server.Construction.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Construction;
@@ -79,7 +18,6 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
-using Content.Shared.Mind.Components; // Goobstation
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -112,10 +50,6 @@ namespace Content.Server.Construction
             SubscribeNetworkEvent<TryStartStructureConstructionMessage>(HandleStartStructureConstruction);
             SubscribeNetworkEvent<TryStartItemConstructionMessage>(HandleStartItemConstruction);
         }
-
-        // Goobstation - conflict landmine; should ideally not be in the system or be a cvar but whatever
-        // replaces wizcode magic constants
-        public const float ConstructGrabRange = 2f;
 
         // LEGACY CODE. See warning at the top of the file!
         private IEnumerable<EntityUid> EnumerateNearby(EntityUid user)
@@ -159,12 +93,11 @@ namespace Content.Server.Construction
 
             var pos = _transformSystem.GetMapCoordinates(user);
 
-            // Goobstation - conflict landmine: replace magic constant with ConstructGrabRange
-            foreach (var near in _lookupSystem.GetEntitiesInRange(pos, ConstructGrabRange, LookupFlags.Contained | LookupFlags.Dynamic | LookupFlags.Sundries | LookupFlags.Approximate))
+            foreach (var near in _lookupSystem.GetEntitiesInRange(pos, 2f, LookupFlags.Contained | LookupFlags.Dynamic | LookupFlags.Sundries | LookupFlags.Approximate))
             {
                 if (near == user)
                     continue;
-                if (_interactionSystem.InRangeUnobstructed(pos, near, ConstructGrabRange) && _container.IsInSameOrParentContainer(user, near))
+                if (_interactionSystem.InRangeUnobstructed(pos, near, 2f) && _container.IsInSameOrParentContainer(user, near))
                     yield return near;
             }
         }
@@ -415,6 +348,13 @@ namespace Content.Server.Construction
                 return false;
             }
 
+            // <Trauma>
+            var ev = new ConstructAttemptEvent(prototype);
+            RaiseLocalEvent(user, ref ev);
+            if (ev.Cancelled)
+                return false;
+            // </Trauma>
+
             if (_whitelistSystem.IsWhitelistFail(constructionPrototype.EntityWhitelist, user))
             {
                 _popup.PopupEntity(Loc.GetString("construction-system-cannot-start"), user, user);
@@ -473,7 +413,7 @@ namespace Content.Server.Construction
                 return false;
 
             // <Goobstation>
-            var constructedEv = new ConstructedEvent(item);
+            var constructedEv = new ConstructedEvent(item, prototype);
             RaiseLocalEvent(user, ref constructedEv);
             // </Goobstation>
 
@@ -493,8 +433,7 @@ namespace Content.Server.Construction
                     GetCoordinates(ev.Location),
                     ev.Angle,
                     ev.Ack,
-                    args.SenderSession,
-                    ev.With);
+                    args.SenderSession);
         }
 
         /// <summary>
@@ -506,8 +445,7 @@ namespace Content.Server.Construction
             EntityCoordinates location,
             Angle angle,
             int ack = 0,
-            ICommonSession? senderSession = null,
-            NetEntity? with = null)
+            ICommonSession? senderSession = null)
         {
             // </Goobstation>
             if (!PrototypeManager.TryIndex(prototypeName, out ConstructionPrototype? constructionPrototype))
@@ -516,6 +454,16 @@ namespace Content.Server.Construction
                 RaiseNetworkEvent(new AckStructureConstructionMessage(ack), user);
                 return false;
             }
+
+            // <Trauma>
+            var ev = new ConstructAttemptEvent(prototypeName);
+            RaiseLocalEvent(user, ref ev);
+            if (ev.Cancelled)
+            {
+                RaiseNetworkEvent(new AckStructureConstructionMessage(ack), user);
+                return false;
+            }
+            // </Trauma>
 
             if (!PrototypeManager.TryIndex(constructionPrototype.Graph, out ConstructionGraphPrototype? constructionGraph))
             {
@@ -577,25 +525,6 @@ namespace Content.Server.Construction
                     _beingBuilt[session].Remove(ack);
             }
 
-            // Goobstation
-            EntityUid? entWith = with == null ? null : GetEntity(with);
-            if (with != null && entWith != null)
-            {
-                // sus client can't use steel half the station away to build
-                var userPos = _transformSystem.GetMapCoordinates(user);
-                var withPos = _transformSystem.GetMapCoordinates(entWith.Value);
-                if (!_container.IsInSameOrParentContainer(user, entWith.Value)
-                    || !_interactionSystem.InRangeUnobstructed(userPos, withPos, ConstructGrabRange))
-                {
-                    Cleanup();
-                    return false;
-                }
-            }
-            else if (hands != null)
-            {
-                entWith = _handsSystem.GetActiveItem((user, hands));
-            }
-
             if (!_actionBlocker.CanInteract(user, null))
             {
                 Cleanup();
@@ -619,41 +548,46 @@ namespace Content.Server.Construction
             if(edge == null)
                 throw new InvalidDataException($"Can't find edge from starting node to the next node in pathfinding! Recipe: {prototypeName}");
 
-            if (_handsSystem.GetActiveItem((user, hands)) is {} holding
-                && senderSession != null) // Goobstation - don't check this for constructor machine
+            var valid = false;
+            if (_handsSystem.GetActiveItem((user, hands)) is not {Valid: true} holding // Trauma - renamed holding to holdingUid
+                && senderSession != null) // Trauma - don't check this for constructor machine
             {
-                var valid = false;
-
-                if (entWith == null) // Goobstation - don't check for constructor machine
-                {
-                    Cleanup();
-                    return false;
-                }
-
-                // No support for conditions here!
-
-                foreach (var step in edge.Steps)
-                {
-                    switch (step)
-                    {
-                        case EntityInsertConstructionGraphStep entityInsert:
-                            if (entityInsert.EntityValid(holding, EntityManager, Factory))
-                                valid = true;
-                            break;
-                        case ToolConstructionGraphStep _:
-                            throw new InvalidDataException("Invalid first step for item recipe!");
-                    }
-
-                    if (valid)
-                        break;
-                }
-
-                if (!valid)
-                {
-                    Cleanup();
-                    return false;
-                }
+                Cleanup();
+                return false;
             }
+            // <Trauma> - constructor doesn't use it
+            else
+            {
+                holding = EntityUid.Invalid;
+            }
+
+            if (holding.IsValid())
+            {
+            // </Trauma>
+            // No support for conditions here!
+
+            foreach (var step in edge.Steps)
+            {
+                switch (step)
+                {
+                    case EntityInsertConstructionGraphStep entityInsert:
+                        if (entityInsert.EntityValid(holding, EntityManager, Factory))
+                            valid = true;
+                        break;
+                    case ToolConstructionGraphStep _:
+                        throw new InvalidDataException("Invalid first step for item recipe!");
+                }
+
+                if (valid)
+                    break;
+            }
+
+            if (!valid)
+            {
+                Cleanup();
+                return false;
+            }
+            } // Trauma - close IsValid condition above
 
             if (await Construct(user,
                     (ack + constructionPrototype.GetHashCode()).ToString(),
@@ -668,7 +602,7 @@ namespace Content.Server.Construction
             }
 
             // <Goobstation>
-            var constructedEv = new ConstructedEvent(structure);
+            var constructedEv = new ConstructedEvent(structure, prototypeName);
             RaiseLocalEvent(user, ref constructedEv);
             // </Goobstation>
 

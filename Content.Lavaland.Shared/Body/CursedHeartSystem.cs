@@ -93,7 +93,7 @@ public sealed class CursedHeartSystem : EntitySystem
             return;
         }
 
-        _audio.PlayGlobal(new SoundPathSpecifier("/Audio/_Lavaland/heartbeat.ogg"), args.User);
+        _audio.PlayLocal(new SoundPathSpecifier("/Audio/_Lavaland/heartbeat.ogg"), uid, args.User);
         var heart = EnsureComp<CursedHeartComponent>(args.User);
         heart.LastPump = _timing.CurTime;
         QueueDel(uid);

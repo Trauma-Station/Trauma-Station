@@ -1,0 +1,13 @@
+# Robotics
+
+- type: entity
+  parent: AirlockScience
+  id: AirlockRobotics
+  suffix: Robotics
+  # TODO: non-chem sprites
+
+- type: entity
+  parent: AirlockScienceGlass
+  id: AirlockRoboticsGlass
+  suffix: Robotics
+  # TODO: non-chem sprites

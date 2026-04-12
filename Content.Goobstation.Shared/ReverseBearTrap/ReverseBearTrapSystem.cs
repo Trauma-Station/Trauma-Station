@@ -23,11 +23,8 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.ReverseBearTrap;
@@ -245,11 +242,8 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         if (args.Cancelled || trap.Wearer is not {} target)
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
-        var rand = new System.Random(seed);
-
         var prefix = "";
-        if (rand.Prob(trap.CurrentEscapeChance))
+        if (SharedRandomExtensions.PredictedProb(_timing, trap.CurrentEscapeChance, GetNetEntity(uid)))
         {
             ResetTrap(uid, trap);
         }
@@ -270,9 +264,10 @@ public sealed partial class ReverseBearTrapSystem : EntitySystem
         if (args.Cancelled || args.Target is not { } target || args.Used is not { } used)
             return;
 
+        var user = args.User;
         if (!_inventory.TryGetSlotEntity(target, "head", out var _)
-            && _inventory.TryEquip(target, used, "head", true, true))
-            ArmTrap(used, trap, target, args.User);
+            && _inventory.TryEquip(user, target, used, "head", predicted: true))
+            ArmTrap(used, trap, target, user);
     }
 
     private void OnWeldFinished(EntityUid uid, ReverseBearTrapComponent trap, WeldFinishedEvent args)

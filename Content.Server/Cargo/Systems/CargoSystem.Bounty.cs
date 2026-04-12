@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Cargo;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Cargo.Components;
@@ -129,7 +132,11 @@ public sealed partial class CargoSystem
                 ("item", Loc.GetString(entry.Name)))}");
             msg.PushNewline();
         }
-        msg.AddMarkupOrThrow(Loc.GetString("bounty-console-manifest-reward", ("reward", prototype.Reward)));
+        // <Trauma> - raise event to modify the reward
+        var ev = new ModifyBountyRewardEvent(prototype.Reward);
+        RaiseLocalEvent(stationId, ref ev);
+        msg.AddMarkupOrThrow(Loc.GetString("bounty-console-manifest-reward", ("reward", ev.Reward)));
+        // </Trauma>
         _paperSystem.SetContent((uid, paper), msg.ToMarkup());
     }
 
@@ -163,7 +170,11 @@ public sealed partial class CargoSystem
         args.Handled = true;
 
         component.Calculating = true;
-        args.Price = bountyPrototype.Reward - _pricing.GetPrice(container.Owner);
+        // <Trauma> - raise event to modify the reward
+        var ev = new ModifyBountyRewardEvent(bountyPrototype.Reward);
+        RaiseLocalEvent(station, ref ev);
+        args.Price = ev.Reward - _pricing.GetPrice(container.Owner);
+        // </Trauma>
         component.Calculating = false;
     }
 
@@ -434,7 +445,11 @@ public sealed partial class CargoSystem
             return false;
 
         _nameIdentifier.GenerateUniqueName(uid, BountyNameIdentifierGroup, out var randomVal);
-        var newBounty = new CargoBountyData(bounty, randomVal);
+        // <Trauma> - set reward to the actual reward given
+        var ev = new ModifyBountyRewardEvent(bounty.Reward);
+        RaiseLocalEvent(uid, ref ev);
+        var newBounty = new CargoBountyData(bounty, randomVal, ev.Reward);
+        // </Trauma>
         // This bounty id already exists! Probably because NameIdentifierSystem ran out of ids.
         if (component.Bounties.Any(b => b.Id == newBounty.Id))
         {
@@ -442,7 +457,7 @@ public sealed partial class CargoSystem
             Log.Warning("Failed to add bounty {ID} because another one with the same ID already existed!", newBounty.Id);
             return false;
         }
-        component.Bounties.Add(new CargoBountyData(bounty, randomVal));
+        component.Bounties.Add(newBounty); // Trauma - use newBounty instead of making a second struct..? why
         _adminLogger.Add(LogType.Action, LogImpact.Low, $"Added bounty \"{bounty.ID}\" (id:{component.TotalBounties}) to station {ToPrettyString(uid)}");
         component.TotalBounties++;
         return true;

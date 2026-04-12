@@ -18,8 +18,6 @@ loadout-group-ntr-jumpsuit = Nanotrasen Representative jumpsuit
 loadout-group-ntr-belt = Nanotrasen Representative belt
 loadout-group-ntr-shoes = Nanotrasen Representative shoes
 
-loadout-group-reporter-outerclothing = Reporter outer clothing
-
 loadout-group-roboticist-head = Roboticist head
 loadout-group-roboticist-jumpsuit = Roboticist jumpsuit
 loadout-group-roboticist-backpack = Roboticist backpack

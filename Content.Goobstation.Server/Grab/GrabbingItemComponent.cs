@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.MartialArts;
-using Robust.Shared.GameStates;
+using Content.Trauma.Common.MartialArts;
 
 namespace Content.Goobstation.Server.Grab;
 

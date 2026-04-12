@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.CCVar;
+// </Trauma>
 using System.Linq;
 using System.Text.RegularExpressions;
 using Robust.Client.Audio;
@@ -48,7 +51,6 @@ public sealed partial class ChatUIController : IOnSystemChanged<CharacterInfoSys
 
     public event Action<string>? HighlightsUpdated;
 
-    #region Highlight chat ping sound!
     // Goobstation
     /// <summary>
     /// Plays the highlight sound effect if enabled in settings
@@ -59,11 +61,12 @@ public sealed partial class ChatUIController : IOnSystemChanged<CharacterInfoSys
         if (_state.CurrentState is not GameplayStateBase)
             return;
 
-        if (!_config.GetCVar(CCVars.ChatHighlightSound))
+        // TODO: cache this dogshit
+        if (!_config.GetCVar(TraumaCVars.ChatHighlightSound))
             return;
 
         // Get the volume setting and apply it to the audio params
-        var volume = _config.GetCVar(CCVars.ChatHighlightVolume);
+        var volume = _config.GetCVar(TraumaCVars.ChatHighlightVolume);
         var volumeDb = MathF.Log10(Math.Clamp(volume, 0f, 1f)) * 20f;
         var audioParams = AudioParams.Default.WithVolume(volumeDb);
 
@@ -71,7 +74,6 @@ public sealed partial class ChatUIController : IOnSystemChanged<CharacterInfoSys
         _ent.System<AudioSystem>().PlayGlobal(HighlightSoundPath, Filter.Local(), false, audioParams);
     }
     // Goobstation End
-    #endregion
 
     private void InitializeHighlights()
     {

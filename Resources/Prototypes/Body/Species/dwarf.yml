@@ -42,7 +42,7 @@
   - AppearanceDwarf
   - MobHuman
   id: MobDwarf
-  name: Urist McHands The Dwarf
+  name: Urist McHands the Dwarf
   components:
   # <Trauma>
   - type: Mutatable # dwarves have dwarfism

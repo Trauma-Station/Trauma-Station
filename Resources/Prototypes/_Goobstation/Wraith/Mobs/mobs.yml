@@ -40,7 +40,7 @@
       path: /Audio/Effects/bone_rattle.ogg
     damage:
       types:
-        Blunt: 15
+        Blunt: 13
         Structural: 30
   - type: MobState
   - type: Fixtures
@@ -154,7 +154,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 40
+          damage: 30
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -210,7 +210,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Blunt: 7
+        Blunt: 5
   - type: MobState
   - type: Fixtures
     fixtures:
@@ -278,7 +278,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      60: Dead
+      35: Dead
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Metallic
@@ -289,7 +289,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Slash: 10
+        Slash: 7
   - type: NoSlip
   - type: Pullable
   - type: InputMover
@@ -371,7 +371,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 60
+          damage: 35
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -412,7 +412,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      40: Dead
+      30: Dead
   - type: MeleeWeapon
     altDisarm: false
     animation: WeaponArcBite
@@ -420,7 +420,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Slash: 12
+        Slash: 8
   - type: NoSlip
   - type: Pullable
   - type: InputMover
@@ -470,7 +470,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Piercing: 10
+        Piercing: 7
   - type: MobState
   - type: Fixtures
     fixtures:
@@ -508,7 +508,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 30
+          damage: 20
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -538,12 +538,12 @@
       collection: Flesh_Stab
     damage:
       types:
-        Piercing: 15
+        Piercing: 8
   - type: Destructible
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 50
+          damage: 30
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -590,7 +590,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Slash: 13
+        Slash: 7
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepHeavySuit
@@ -601,7 +601,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 50
+          damage: 30
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -986,7 +986,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 50
+          damage: 25
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -1023,7 +1023,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 75
+          damage: 40
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]

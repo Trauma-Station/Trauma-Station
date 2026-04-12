@@ -4,7 +4,6 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 
@@ -33,6 +32,9 @@ public sealed partial class GeneticsConsoleSystem
             var pos = _transform.GetWorldPosition(xform);
             comp.Scanners.RemoveAll(scanner =>
             {
+                if (TerminatingOrDeleted(scanner))
+                    return true;
+
                 var scannerXform = Transform(scanner);
                 if (scannerXform.MapUid != map)
                 {

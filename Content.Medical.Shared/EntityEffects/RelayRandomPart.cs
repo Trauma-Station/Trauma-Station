@@ -5,7 +5,6 @@ using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -72,9 +71,7 @@ public sealed class RelayRandomPartEffectSystem : EntityEffectSystem<BodyCompone
             return;
         }
 
-        // TODO: PredictedRandom when it's real
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(ent).Id);
-        var rand = new Random(seed);
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var picked = rand.Pick(_parts);
         _effects.TryApplyEffect(picked, effect.Effect, args.Scale, args.User);
     }

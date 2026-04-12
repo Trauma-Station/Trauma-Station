@@ -90,12 +90,11 @@
   - type: ContentEye
     maxZoom: 1.5, 1.5
     targetZoom: 1.5, 1.5
-  - type: LanguageKnowledge
+  - type: LanguageSpeaker
     speaks: []
     understands: []
   - type: UniversalLanguageSpeaker
   - type: TowerOfBabel
-  - type: LanguageSpeaker
   - type: CosmicTrail
     strength: 10
   - type: PointLight
@@ -119,7 +118,7 @@
     effect: EffectCosmicSlash
   - type: HealingAura
     componentHealMultipliers:
-      CosmosPassive: 2
+      CosmosPassive: 1.5
   - type: Tag
     tags:
     - CannotSuicide

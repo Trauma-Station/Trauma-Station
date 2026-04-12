@@ -2,8 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Wraith.Events;
 
@@ -18,7 +16,7 @@ public sealed partial class BloodWritingEvent : InstantActionEvent;
 public sealed partial class AbsorbCorpseEvent : EntityTargetActionEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class AbsorbCorpseDoAfter : SimpleDoAfterEvent;
+public sealed partial class AbsorbCorpseDoAfterEvent : SimpleDoAfterEvent;
 
 public sealed partial class SpookEvent : WorldTargetActionEvent;
 
@@ -34,7 +32,7 @@ public sealed partial class PossessObjectEvent : EntityTargetActionEvent
     public ComponentRegistry ToAdd = new();
 
     [DataField]
-    public HashSet<string> ToRemove = new();
+    public ComponentRegistry ToRemove = new(); // TODO: use ComponentFilter
 }
 
 public sealed partial class WraithEvolveEvent : InstantActionEvent;
