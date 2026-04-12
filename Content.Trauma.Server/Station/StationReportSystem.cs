@@ -30,7 +30,7 @@ public sealed class StationReportSystem : EntitySystem
 
         SubscribeLocalEvent<StationReportComponent, MapInitEvent>(OnMapInit);
 
-        Subs.CVar(_cfg, DCCVars.YearOffset, y => _years = y, true);
+        Subs.CVar(_cfg, TraumaCVars.YearOffset, y => _years = y, true);
     }
 
     public override void Update(float frameTime)

@@ -1,6 +1,4 @@
-// <Trauma>
-using Content.Trauma.Common.CCVars;
-// </Trauma>
+using Content.Trauma.Common.CCVar;
 using Content.Shared.Abilities;
 using Robust.Client.Graphics;
 using Robust.Shared.Configuration;
@@ -25,7 +23,7 @@ public sealed partial class DogVisionSystem : EntitySystem
         SubscribeLocalEvent<DogVisionComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<DogVisionComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
 
-        Subs.CVar(_cfg, DCCVars.NoVisionFilters, OnNoVisionFiltersChanged);
+        Subs.CVar(_cfg, TraumaCVars.NoVisionFilters, OnNoVisionFiltersChanged);
 
         _overlay = new();
     }
