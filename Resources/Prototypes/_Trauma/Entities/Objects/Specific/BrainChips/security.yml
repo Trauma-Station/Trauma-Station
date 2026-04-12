@@ -62,3 +62,5 @@
       ShootingKnowledge: 26
       MartialArtKravMaga: 50 # strongest IDF soldier
       WeaponsKnowledge: 50
+      FirstAidKnowledge: 26 # Brigmedic isn't real
+      SurgeryKnowledge: 20
