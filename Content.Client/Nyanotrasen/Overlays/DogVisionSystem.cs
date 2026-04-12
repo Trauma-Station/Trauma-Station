@@ -13,6 +13,7 @@ public sealed partial class DogVisionSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _playerMan = default!;
 
     private DogVisionOverlay _overlay = default!;
+    private bool _enabled = true;
 
     public override void Initialize()
     {
@@ -30,7 +31,7 @@ public sealed partial class DogVisionSystem : EntitySystem
 
     private void OnDogVisionInit(EntityUid uid, DogVisionComponent component, ComponentInit args)
     {
-        if (uid == _playerMan.LocalEntity && !_cfg.GetCVar(DCCVars.NoVisionFilters))
+        if (uid == _playerMan.LocalEntity && _enabled)
             _overlayMan.AddOverlay(_overlay);
     }
 
@@ -42,7 +43,7 @@ public sealed partial class DogVisionSystem : EntitySystem
 
     private void OnPlayerAttached(EntityUid uid, DogVisionComponent component, LocalPlayerAttachedEvent args)
     {
-        if (!_cfg.GetCVar(DCCVars.NoVisionFilters))
+        if (_enabled)
             _overlayMan.AddOverlay(_overlay);
     }
 
@@ -53,6 +54,7 @@ public sealed partial class DogVisionSystem : EntitySystem
 
     private void OnNoVisionFiltersChanged(bool enabled)
     {
+        _enabled = enabled;
         if (enabled)
             _overlayMan.RemoveOverlay(_overlay);
         else
