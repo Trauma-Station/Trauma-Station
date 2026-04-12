@@ -6783,3 +6783,17 @@ Entries:
   id: 783
   time: '2026-04-11T18:15:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1956
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed NTR's bag etc being contra for them.
+  id: 784
+  time: '2026-04-12T19:02:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1989
+- author: RatherUncreativeName
+  changes:
+  - type: Add
+    message: Added Defile to midround wraith.
+  id: 785
+  time: '2026-04-12T22:28:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1992

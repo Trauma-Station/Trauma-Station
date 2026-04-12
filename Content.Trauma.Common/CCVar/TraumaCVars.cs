@@ -15,6 +15,12 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<bool> DisablePathfinding =
         CVarDef.Create("trauma.disable_pathfinding", false, CVar.SERVER);
 
+    /// <summary>
+    /// Disables DogVision which sandevistan uses.
+    /// </summary>
+    public static readonly CVarDef<bool> NoVisionFilters =
+        CVarDef.Create("accessibility.no_vision_filters", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     #endregion
 
     #region AudioMuffle
@@ -153,10 +159,11 @@ public sealed partial class TraumaCVars
         CVarDef.Create("trauma.station_traits_enabled", true, CVar.SERVER);
 
     /// <summary>
-    /// The ingame year displayed on the station report.
+    /// The offset for in-game date (the date will be server date + this amount of years).
+    /// Displayed in the station report and PDAs.
     /// </summary>
-    public static readonly CVarDef<int> InGameYear =
-        CVarDef.Create("trauma.in_game_year", 2125, CVar.SERVER);
+    public static readonly CVarDef<int> YearOffset =
+        CVarDef.Create("game.current_year_offset", 739, CVar.SERVERONLY);
 
     #endregion
 }

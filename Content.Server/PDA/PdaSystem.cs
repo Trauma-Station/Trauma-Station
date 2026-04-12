@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Trauma.Common.CCVars;
+using Content.Trauma.Common.CCVar;
 using Robust.Shared.Configuration;
 // </Trauma>
 using Content.Server.Access.Systems;
@@ -69,12 +69,12 @@ namespace Content.Server.PDA
             SubscribeLocalEvent<PdaComponent, InventoryRelayedEvent<ChameleonControllerOutfitSelectedEvent>>(OnRelayedEventToIdCard);
             SubscribeLocalEvent<PdaComponent, InventoryRelayedEvent<VoiceMaskNameUpdatedEvent>>(OnRelayedEventToIdCard);
 
-            // Begin DeltaV additions
+            // <Trauma>
             Subs.CVar(_config,
-                DCCVars.YearOffset,
+                TraumaCVars.YearOffset,
                 value => ServerDate = DateTime.Today.AddYears(value),
                 true);
-            // End DeltaV additions
+            // </Trauma>
         }
 
         private void OnRelayedEventToIdCard<T>(Entity<PdaComponent> ent, ref InventoryRelayedEvent<T> args)
