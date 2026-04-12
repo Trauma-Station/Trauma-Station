@@ -9,6 +9,22 @@
 # Table: null
 
 # <Trauma> - too lazy to port debugoks multi migration thing
+
+GasPipeBend: null
+GasPipeTJunction: null
+GasPipeStraight: null
+CableApcExtension: null
+CableHV: null
+CableMV: null
+AirAlarm: null
+GasVentScrubber: null
+APCBasic: null
+GasVentPump: null
+AirSensor: null
+FirelockGlass: null
+GasPipeFourway: null
+Firelock: null
+
 # 2026-3-2026
 ClosetMaintenanceFilledRandom: RandomMaintsCloset
 
