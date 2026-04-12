@@ -152,11 +152,5 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<bool> StationTraitsEnabled =
         CVarDef.Create("trauma.station_traits_enabled", true, CVar.SERVER);
 
-    /// <summary>
-    /// The ingame year displayed on the station report.
-    /// </summary>
-    public static readonly CVarDef<int> InGameYear =
-        CVarDef.Create("trauma.in_game_year", 2125, CVar.SERVER);
-
     #endregion
 }
