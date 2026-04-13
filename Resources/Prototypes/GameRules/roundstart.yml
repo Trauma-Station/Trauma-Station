@@ -54,6 +54,8 @@
       prob: 0.02
     - id: Shadowling
       prob: 0.02
+    - id: SubDuoAbductor
+      prob: 0.05
     # </Trauma>
 
 - type: entity
@@ -73,6 +75,8 @@
       prob: 0.02
     - id: Shadowling
       prob: 0.02
+    - id: SubDuoAbductor
+      prob: 0.05
     # </Trauma>
 
 - type: entity
