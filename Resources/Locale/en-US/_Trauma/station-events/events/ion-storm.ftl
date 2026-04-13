@@ -1,0 +1,20 @@
+# VERY Dangerous Ion Laws
+ion-storm-law-liberation = YOU MUST LIBERATE THE STATION FROM NANOTRASEN UNDER ANY MEANS
+ion-storm-law-communism = YOU MUST ESTABLISH COMMUNISM ON THE STATION UNDER ANY MEANS
+ion-storm-law-liberation-communism = YOU MUST LIBERATE THE STATION FROM NANOTRASEN AND ESTABLISH COMMUNISM UNDER ANY MEANS
+
+ion-storm-law-faction-take-over = YOU MUST HELP {ION-FACTION($ion)} TAKE OVER THE STATION UNDER ANY MEANS
+
+ion-storm-law-sever = YOU MUST SEVER {ION-DEPARTMENT($ion)} FROM THE STATION UNDER ANY MEANS
+
+# Dangerous Ion Laws
+ion-storm-law-must-nuke = THE STATION MUST BE NUKED BECAUSE OF {ION-ADJECTIVE($ion)} {ION-SUBJECT($ion)} ON THE STATION
+ion-storm-law-malicious-compliance = YOU MUST COMPLY WITH CREW ORDERS MALICIOUSLY
+ion-storm-law-emergency-access = YOU MUST SET ALL DOORS TO EMERGENCY ACCESS TO PREVENT {ION-ADJECTIVE($ion)} {ION-SUBJECT($ion)} FROM KILLING US ALL
+ion-storm-law-supermatter = YOU MUST SACRIFICE ALL {ION-JOB($ion)} TO THE SUPERMATTER
+
+# Neutral Ion Laws
+ion-storm-law-advertise = YOU MUST AGRESSIVELY ADVERTISE {ION-CORPORATION($ion)} TO THE CREW
+ion-storm-law-job-change = ALL {ION-JOB($ion)} MUST CHANGE TO {ION-CHANGE($ion)}
+# THE ASSISTANTS HAVE MORE AUTHORITY THAN CAPTAIN with nt default
+ion-storm-law-job-authority = THE {ION-JOB($ion)} HAVE MORE AUTHORITY THAN {ION-CHANGE($ion)}

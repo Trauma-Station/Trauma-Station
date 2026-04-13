@@ -15,7 +15,7 @@
   - BRASS
   - BURNING
   - CHEESE-EATING
-#  - CHRISTMAS-STEALING # todo: bring back Dec 1st
+  - CHRISTMAS-STEALING # Trauma - the grinch is always here, i feel jolly today
   - CLOWN-POWERED
   - CLOWN
   - COLORFUL
@@ -201,6 +201,9 @@
   - MILDLY
   - NOT VERY
   - SEVERELY
+  # <Trauma>
+  - EXPLODELY
+  # </Trauma>
 
 # Areas are specific places, on the station or otherwise.
 - type: dataset
@@ -234,6 +237,29 @@
   - THE WIZARD'S DEN
   - TIDELAND
   # </Goob>
+  # <Trauma>
+  - ANTE
+  - BORGINATOR 5000 DELUXE HD EDITION
+  - ENVY
+  - FRAUD
+  - GLUTTONY
+  - GREED
+  - GOD HIMSELF
+  - HERESY
+  - LIMBO
+  - PRIDE
+  - PRIMUM MOBILE
+  - PARADISE
+  - SLOTH
+  - SOMEWHERE WICKED THIS WAY
+  - THE XENOBORG MOTHERSHIP
+  - THE EMPYREAN
+  - THE CITY OF DIS
+  - TREACHERY
+  - VIOLENCE
+  - WRATH
+  - YOUR MOMS HOUSE
+  # </Trauma>
   - ALPHA COMPLEX
   - A HAUNTED PIZZERIA # fnaf
   - A RESEARCH LABORATORY NEAR THE SOUTH POLE
@@ -246,7 +272,7 @@
   - CENTCOMM
   - CHEMICAL LAB
   - CLOWN PLANET
-  - EARTH
+  - TERRA # Trauma - proper name for the earth (our planet) is terra. i know im a nerd
   - ENGINEERING
   - HELL
   - IMPERIUM
@@ -296,7 +322,7 @@
   - ART
   - BADNESS
   - BALDNESS
-  - BRAINROT # Goobstation
+#  - BRAINROT # Goobstation # Traumastation - fuck off
   - BRAVERY
   - CAPITALISM
   - CHAOS
@@ -372,7 +398,7 @@
   - CREW-MEMBERS
   - CYBORGS
   - DETECTIVES
-  # - GENETICISTS
+  - GENETICISTS # Trauma - Geneticists are real now
   - HEADS OF PERSONNEL
   - HEADS OF SECURITY
   - HEADS OF STAFF
@@ -509,7 +535,7 @@
   - BE ANNOYING
   - BE DISTRACTED
   - BE EFFICIENT
-  # - BE A REAL SCRUNGLE, JUST A CUTE LIL' GUY # Not this playerbase mate
+  - BE A REAL SCRUNGLE, JUST A CUTE LIL' GUY # Trauma - joy and whimsy are important
   - BE HAPPY
   - BE POLITE
   - BE QUIET
@@ -691,7 +717,7 @@
   - ENGINES
   - EQUIPMENT
   - ERRORS
-#  - EXTERMINATORS
+  - EXTERMINATORS # trauma - more variety
   - EXPLOSIVES
   - EYEWEAR
   - FEDORAS
@@ -929,10 +955,10 @@
   - TRASH
   - VEGETABLES
   # Goobstation - THE ROT CONSUMES
-  - JOB
+#  - CHUDS # traumastation - fuck off
   - EMPLOYMENT
   - FIVE HUNDRED CIGARETTES
-  - CHUDS
+  - JOB
 
 # Specific actions that either harm humans or must be done to not
 # harm humans. Make sure they're plural and "not" can be tacked
@@ -1107,6 +1133,7 @@
   - PREDATORS
   - REVENANTS
   - ROGUE CYBORGS
+  - RATMA # Traumastation
   - SERIAL KILLERS
   - SHIT SECURITY OFFICERS
   - SINGULARITIES

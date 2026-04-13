@@ -1,0 +1,48 @@
+# Corporations that exist in-universe
+- type: dataset
+  id: IonStormCorporations
+  values:
+  - DONK CORPORATION
+  - HONK CORPORATION
+  - NANOTRASEN
+  - WAFFLE CORPORATION
+  - PTECH
+  - INTERDYNE
+  - CYBERSUN INDUSTRIES
+  - XION MANUFACTURING GROUP
+  - ZENG-HU PHARMACEUTICALS
+  - SHELLGUARD MUNITIONS
+  - MR CHANG'S
+  - DISCOUNT DAN'S
+  - SHADY CIGS
+  - ROBUST INDUSTRIES
+  - VLAD'S SALADS
+  - DR. GIBB
+  - PLASTEEL CHEF'S
+  - GETMORE CHOCOLATE CORPORATION
+
+# Well.. it's in the name...
+- type: dataset
+  id: IonStormDepartments
+  values:
+  - COMMAND
+  - ENGINEERING
+  - MEDICAL
+  - SCIENCE
+  - SECURITY
+  - SERVICE
+
+# Well.. it's in the name...
+- type: dataset
+  id: IonStormFactions
+  values:
+  - INSURGENTS
+  - MR SPACE'S GLORIOUS SPACE EMPIRE
+  - NANOTRASEN
+  - REVOLUTIONARIES
+  - THE FREELANCERS
+  - THE SOLAR FEDERATION
+  - THE SYNDICATE
+  - THE GLORIOUS STATE OF CARGONIA
+  - UNION OF SOVIET SOCIALIST PLANETS
+  - XENOBORGS
