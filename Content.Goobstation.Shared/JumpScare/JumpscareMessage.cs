@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.IO;
+using Lidgren.Network;
+
+namespace Content.Goobstation.Shared.JumpScare;
+
+public sealed class JumpscareMessage : NetMessage
+{
+    public string ImagePath = "";
+
+    public override MsgGroups MsgGroup { get; } = MsgGroups.String;
+
+    public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
+    {
+        ImagePath = buffer.ReadString();
+    }
+
+    public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
+    {
+        buffer.Write(ImagePath);
+    }
+}

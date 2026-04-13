@@ -32,6 +32,13 @@ public sealed partial class StationAreaEffects : EntityEffectBase<StationAreaEff
     [DataField]
     public int Max = 1;
 
+    /// <summary>
+    /// Check that valid locations don't have anything blocking mob movement on their tiles.
+    /// This includes windoors...
+    /// </summary>
+    [DataField]
+    public bool CheckBlocked = true;
+
     public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
         => null;
 }
@@ -47,7 +54,8 @@ public sealed class StationAreaEffectsSystem : EntityEffectSystem<StationDataCom
 
     protected override void Effect(Entity<StationDataComponent> ent, ref EntityEffectEvent<StationAreaEffects> args)
     {
-        var type = Factory.GetRegistration(args.Effect.AreaComp).Type;
+        var e = args.Effect;
+        var type = Factory.GetRegistration(e.AreaComp).Type;
 
         // TODO: make a open areas cache somewhere...
         var station = ent.Owner;
@@ -59,20 +67,20 @@ public sealed class StationAreaEffectsSystem : EntityEffectSystem<StationDataCom
                 continue;
 
             var coords = Transform(uid).Coordinates;
-            if (_turf.GetTileRef(coords) is not {} tile || _turf.IsTileBlocked(tile, mask))
+            if (e.CheckBlocked && (_turf.GetTileRef(coords) is not {} tile || _turf.IsTileBlocked(tile, mask)))
                 continue;
 
             _areas.Add(uid);
         }
 
-        var count = _random.Next(args.Effect.Min, args.Effect.Max);
+        var count = _random.Next(e.Min, e.Max);
         for (int i = 0; i < count; i++)
         {
             if (_areas.Count == 0)
                 return;
 
             var area = _random.PickAndTake(_areas);
-            _effects.ApplyEffects(area, args.Effect.Effects);
+            _effects.ApplyEffects(area, e.Effects);
         }
     }
 }

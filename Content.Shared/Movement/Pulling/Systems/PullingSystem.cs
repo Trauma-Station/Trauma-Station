@@ -241,7 +241,7 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
 
     private void OnStopBeingPulledAlert(Entity<PullableComponent> ent, ref StopBeingPulledAlertEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !_blocker.CanInteract(ent, null)) // Trauma - check action blockers
             return;
 
         args.Handled = TryStopPull(ent, ent, ent);

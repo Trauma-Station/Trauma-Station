@@ -494,8 +494,6 @@
     layers:
       - state: green
       - state: brigmedic
-  - type: SpawnPoint # goob
-    job_id: Brigmedic
 
 # SPECIAL
 # ERT

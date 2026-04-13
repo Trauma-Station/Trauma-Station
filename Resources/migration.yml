@@ -119,6 +119,12 @@ DisposalBlocker: DisposalPipe
 
 # 2026-03-29 no chud boris
 AiRemoteBrain: null
+
+# 2026-04-12 kill brigmedic
+SpawnPointBrigmedic: null
+
+# 2026-04-13 kill chud signaller
+PanicButton: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
