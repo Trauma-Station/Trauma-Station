@@ -119,23 +119,6 @@
       - MindRoleShadowling
       pickPlayer: false
 
-## Minor antags ninja threat
-
-- type: entity
-  parent: BaseGameRule
-  id: MidroundMinorAntagsRule
-  components:
-  - type: NestedRule
-    rules: !type:GroupSelector
-      rolls: 2, 3 # mild spam of chuds
-      children:
-      - id: TunnelClownMidround
-      - id: SingulothKnightsMidround
-      - id: DarkLordMidround # spawns chosen one after it's picked by a player
-      - id: MimeAssassinMidround
-      - id: DarkPriestMidround
-      - id: VoxRaidersMidround
-
 ## Sleeper agents ninja threat, the ninja does the announcement
 
 - type: entity
