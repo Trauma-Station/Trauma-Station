@@ -13,7 +13,7 @@
         nameGenerator: !type:NanotrasenNameGenerator
           prefixCreator: 'TG'
       - type: StationEmergencyShuttle
-        emergencyShuttlePath: /Maps/Shuttles/emergency.yml
+        emergencyShuttlePath: /Maps/_Trauma/Shuttles/emergency_meta.yml
       - type: StationJobs
         availableJobs:
           # Command
