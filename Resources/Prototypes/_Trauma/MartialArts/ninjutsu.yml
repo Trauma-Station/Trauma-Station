@@ -16,7 +16,7 @@
     time: 5
   - !type:GenericStatusEffect
     key: Muted
-    comp: Muted
+    component: Muted
     time: 10
   levelRequired: 50
 
