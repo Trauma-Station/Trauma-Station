@@ -541,7 +541,8 @@ public partial class TraumaSystem
                 BoneSeverity.Normal => 0.3f, // decreases delimb change by 70%
                 BoneSeverity.Damaged => 0.6f, // 40%
                 BoneSeverity.Cracked => 1f, // 0%,
-                BoneSeverity.Broken => 1.2f // increases by 20%
+                BoneSeverity.Broken => 1.2f, // increases by 20%
+                _ => 1f
             };
         }
 
