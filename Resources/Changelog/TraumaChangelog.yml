@@ -6857,7 +6857,7 @@ Entries:
   - type: Tweak
     message: >-
       Completely reworked judo to be much closer to how it is on Paradise
-      station. 
+      station.
   id: 793
   time: '2026-04-13T12:52:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2003
