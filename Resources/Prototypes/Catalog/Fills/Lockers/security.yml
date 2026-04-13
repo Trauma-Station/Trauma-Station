@@ -114,15 +114,14 @@
   id: FillLockerBrigmedic # heavily goob edited
   table: !type:AllSelector
     children:
+    - id: ClothingEyesGlassesSecurity
     # <Trauma>
-    #- id: ClothingEyesGlassesSecurity
     #- id: WeaponDisabler
     #- id: TrackingImplanter
     #  amount: 2
     #- id: ClothingOuterHardsuitBrigmedic
     #- id: OxygenTankFilled
     #- id: NitrogenTankFilled
-    - id: ClothingEyesHudMedSec
     - id: MaterialBones # Remains of a longrotten brigmedic. Idfk Armok asked for it.
       amount: 5
     # </Trauma>
