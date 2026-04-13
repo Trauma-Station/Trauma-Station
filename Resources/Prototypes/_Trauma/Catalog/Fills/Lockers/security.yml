@@ -38,7 +38,6 @@
   table: !type:AllSelector
     children:
     - id: ClothingHeadsetAltSecurityRegular
-    - id: PanicButton
     - id: PepperSpray
     - id: WeaponLaserSidearm
     - id: ClothingHandsGlovesSecurity
