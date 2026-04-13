@@ -338,6 +338,7 @@
     selectionTime: IntraPlayerSpawn # Goobstation
     definitions:
     - prefRoles: [ HeadRev ]
+      fallbackRoles: [ Traitor ] # Trauma - make headrev-less rev rounds much rarer
       max: 3
       playerRatio: 15
       blacklist:
