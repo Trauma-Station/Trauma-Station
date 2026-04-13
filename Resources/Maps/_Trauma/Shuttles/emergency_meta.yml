@@ -8,9 +8,9 @@ meta:
   entityCount: 1054
 maps: []
 grids:
-- 2
+- 1
 orphans:
-- 2
+- 1
 nullspace: []
 tilemap:
   0: Space
