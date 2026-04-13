@@ -61,7 +61,7 @@ public partial class MartialArtsSystem
         {
             var proto = _proto.Index(queued);
             var level = _knowledge.GetLevel(ent.Owner);
-            OverrideCombo(user, args.Target, proto, ent, level);
+            PerformCombo(user, args.Target, proto, ent, level);
             comboActions.QueuedPrototype = null;
             return;
         }
@@ -99,12 +99,12 @@ public partial class MartialArtsSystem
                 !_conditions.TryConditions(target, proto.Conditions))
                 continue;
 
-            OverrideCombo(performer, target, proto, ent, level);
+            PerformCombo(performer, target, proto, ent, level);
             break; // found the combo
         }
     }
 
-    public void OverrideCombo(EntityUid performer, EntityUid target, ComboPrototype proto, Entity<CanPerformComboComponent> ent, int level)
+    public void PerformCombo(EntityUid performer, EntityUid target, ComboPrototype proto, Entity<CanPerformComboComponent> ent, int level)
     {
         ent.Comp.Momentum += 1;
 
