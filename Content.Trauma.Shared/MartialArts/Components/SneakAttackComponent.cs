@@ -2,7 +2,7 @@
 
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Trauma.Common.MartialArts;
+namespace Content.Trauma.Shared.MartialArts.Components;
 
 /// <summary>
 /// Sneak attack component for ninja stuff.
