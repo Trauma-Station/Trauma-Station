@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.MisandryBox;
+using Content.Goobstation.Common.Emoting;
 using Content.Trauma.Common.Language.Systems;
 // </Trauma>
 using System.Collections.Frozen;
@@ -168,12 +168,12 @@ public abstract partial class SharedChatSystem
         // optional override params > general params for all sounds in set > individual sound params
         var param = audioParams ?? proto.GeneralParams ?? sound.Params;
 
-        // Goobstation/MisandryBox - Emote spam countermeasures
+        // <Trauma> - Emote spam countermeasures
         var ev = new EmoteSoundPitchShiftEvent();
         RaiseLocalEvent(uid, ref ev);
 
         param.Pitch += ev.Pitch;
-        // Goobstation/MisandryBox
+        // </Trauma>
 
         _audio.PlayPvs(sound, uid, param);
         return true;
