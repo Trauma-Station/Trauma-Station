@@ -426,7 +426,7 @@ public partial class TraumaSystem
         var chance = target.Comp.IntegrityCap / (target.Comp.WoundableIntegrity + bone.Comp.BoneIntegrity)
              * _boneTraumaChanceMultipliers[target.Comp.WoundableSeverity]
              - deduction.Float() + woundInflicter.Comp.TraumasChances[TraumaType.BoneDamage];
-        return _random.Prob((float) chance);
+        return _random.Prob(Math.Clamp((float) chance, 0f, 1f));
     }
 
     public bool RandomNerveDamageChance(
