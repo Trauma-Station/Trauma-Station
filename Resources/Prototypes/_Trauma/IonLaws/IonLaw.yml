@@ -10,12 +10,12 @@
 - type: ionLaw
   id: EmergencyAccess
   lawString: ion-storm-law-emergency-access
-  weight: 0.10
+  weight: 0.15
 
 - type: ionLaw
   id: GibNexus
   lawString: ion-storm-law-gib-nexus
-  weight: 0.05
+  weight: 0.10
 
 - type: ionLaw
   id: HeIsComing
@@ -24,7 +24,7 @@
 - type: ionLaw
   id: Liberation
   lawString: ion-storm-law-liberation
-  weight: 0.05
+  weight: 0.10
 
 - type: ionLaw
   id: JobAuthority
@@ -73,17 +73,17 @@
 - type: ionLaw
   id: MustNuke
   lawString: ion-storm-law-must-nuke
-  weight: 0.05
+  weight: 0.10
 
 - type: ionLaw
   id: MaliciousCompliance
   lawString: ion-storm-law-malicious-compliance
-  weight: 0.05
+  weight: 0.10
 
 - type: ionLaw
   id: Opposite
   lawString: ion-storm-law-opposite
-  weight: 0.05
+  weight: 0.10
 
 - type: ionLaw
   id: RemakePlace
@@ -92,7 +92,7 @@
 - type: ionLaw
   id: Supermatter
   lawString: ion-storm-law-supermatter
-  weight: 0.05
+  weight: 0.10
 
 - type: ionLaw
   id: Slab
@@ -101,4 +101,4 @@
 - type: ionLaw
   id: TearDown
   lawString: ion-storm-law-tear-down
-  weight: 0.05
+  weight: 0.10
