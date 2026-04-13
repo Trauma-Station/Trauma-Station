@@ -451,14 +451,8 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
     [DataField]
     public EntProtoId RealignmentStatus = "RealignmentStatusEffect";
 
-    [DataField]
-    public EntProtoId StunStatus = "RealignmentStatusEffect";
-
-    [DataField]
-    public EntProtoId SleepStatus = "StatusEffectForcedSleeping";
-
-    [DataField]
-    public EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+    [DataField(required: true)]
+    public List<EntProtoId> RemovedEffects = new();
 
     [DataField]
     public TimeSpan EffectTime = TimeSpan.FromSeconds(10);
