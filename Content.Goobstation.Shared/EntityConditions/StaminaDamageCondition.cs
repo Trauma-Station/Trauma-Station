@@ -3,7 +3,6 @@
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.EntityConditions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityConditions;
 

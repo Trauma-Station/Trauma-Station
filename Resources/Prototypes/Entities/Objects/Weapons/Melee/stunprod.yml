@@ -1,6 +1,6 @@
 - type: entity
   name: stun prod
-  parent: [BaseItem, BaseMinorContraband]
+  parent: [BaseItem, BaseMinorContraband, BracingDurabilityWeak]
   id: Stunprod
   description: A stun prod for illegal incapacitation.
   components:
@@ -78,3 +78,11 @@
   - type: Construction
     graph: makeshiftstunprod
     node: msstunprod
+# <Trauma>
+  - type: Tag
+    tags:
+    - Trash
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+# </Trauma>

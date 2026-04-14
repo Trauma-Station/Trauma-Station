@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, WoodDurabilityWeak]
   name: broomstick
   id: Broomstick
   description: To stay healthy, you need to sweep at least 8 hours a day!

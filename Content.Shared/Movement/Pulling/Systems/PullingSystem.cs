@@ -1,6 +1,6 @@
 // <Trauma>
+using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Weapons.Melee;
 // </Trauma>
 using Content.Shared.ActionBlocker;
@@ -241,7 +241,7 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
 
     private void OnStopBeingPulledAlert(Entity<PullableComponent> ent, ref StopBeingPulledAlertEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !_blocker.CanInteract(ent, null)) // Trauma - check action blockers
             return;
 
         args.Handled = TryStopPull(ent, ent, ent);

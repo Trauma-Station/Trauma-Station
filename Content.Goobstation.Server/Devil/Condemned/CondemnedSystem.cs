@@ -15,7 +15,6 @@ using Content.Shared.Popups;
 using Content.Shared.Trigger.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
 namespace Content.Goobstation.Server.Devil.Condemned;

@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.SlaughterDemon.Objectives;
 using Content.Goobstation.Shared.SlaughterDemon.Other;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
@@ -11,6 +10,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
@@ -27,6 +27,7 @@ public sealed class SlaughterDevourSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
 
     private EntityQuery<PullerComponent> _pullerQuery;
     private EntityQuery<HumanoidProfileComponent> _humanoid;
@@ -126,7 +127,7 @@ public sealed class SlaughterDevourSystem : EntitySystem
         var popup = "slaughter-devour-other";
         var amount = component.ToHealAnythingElse;
         // I dont know how to refactor this into events so im leaving it like this
-        if (HasComp<BorgChassisComponent>(target) || HasComp<SiliconComponent>(target))
+        if (HasComp<BorgChassisComponent>(target) || _silicon.IsSilicon(target))
         {
             popup = "slaughter-devour-robot";
             amount = component.ToHealNonCrew;

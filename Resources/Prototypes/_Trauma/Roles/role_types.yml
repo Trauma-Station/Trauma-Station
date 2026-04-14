@@ -1,0 +1,5 @@
+- type: roleType
+  id: Animal
+  name: role-type-animal-name
+  color: "#51dd26"
+  symbol: "☯"

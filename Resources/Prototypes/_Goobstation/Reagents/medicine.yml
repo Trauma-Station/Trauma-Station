@@ -651,15 +651,6 @@
     Bloodstream:
       metabolismRate: 0.15
       effects:
-      - !type:SuppressPain
-        amount: 10
-        time: 30
-      - !type:AdjustPainFeels
-        conditions:
-        - !type:ReagentCondition
-          reagent: Ibuprofen
-          min: 15
-        amount: 0.04
       - !type:EvenHealthChange
         damage:
           Brute: -1
@@ -681,16 +672,6 @@
         - !type:ReagentCondition
           reagent: Ibuprofen
           min: 20
-      - !type:AdjustConsciousness
-        conditions:
-        - !type:ReagentCondition
-          reagent: Ibuprofen
-          min: 10
-        allowNewModifiers: true
-        modifierType: Pain
-        identifier: Suffocation
-        amount: -2.4
-        time: 12
 
 # Externally applied meds
 
@@ -1114,9 +1095,6 @@
     Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:SuppressPain
-        amount: 25
-        time: 30
       - !type:GenericStatusEffect
         key: Adrenaline
         component: IgnoreSlowOnDamage
@@ -1129,12 +1107,6 @@
         - !type:ReagentCondition
           reagent: Tramadol
           min: 15.5
-      - !type:AdjustConsciousness
-        allowNewModifiers: true
-        modifierType: Pain
-        identifier: Suffocation
-        amount: -10.5
-        time: 12
 
 - type: reagent
   id: Oxycodone
@@ -1148,9 +1120,6 @@
     Bloodstream:
       metabolismRate: 0.1
       effects:
-      - !type:SuppressPain
-        amount: 400
-        time: 30
       - !type:GenericStatusEffect
         key: Adrenaline
         component: IgnoreSlowOnDamage
@@ -1163,12 +1132,6 @@
         - !type:ReagentCondition
           reagent: Oxycodone
           min: 10.5
-      - !type:AdjustConsciousness
-        allowNewModifiers: true
-        modifierType: Pain
-        identifier: Suffocation
-        amount: -50
-        time: 12
 
 # Wraith
 - type: reagent
@@ -1247,9 +1210,6 @@
       - !type:TakeStaminaDamage
         amount: -10
         immediate: true
-      - !type:SuppressPain
-        amount: 1.2
-        time: 30
 
 # <Viro>
 

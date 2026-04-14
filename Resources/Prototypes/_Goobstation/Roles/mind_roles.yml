@@ -36,7 +36,7 @@
   - type: MindRole
     antagPrototype: Ghoul
     exclusiveAntag: false
-    roleType: Familiar
+    roleType: TeamAntagonist
     subtype: role-subtype-ghoul
   - type: GhoulRole
 

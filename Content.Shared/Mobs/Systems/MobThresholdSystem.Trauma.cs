@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -45,10 +46,14 @@ public sealed partial class MobThresholdSystem
         if (!_bodyQuery.TryComp(target1, out var oldBody))
             return null;
 
-        if (!TryGetThresholdForState(target1, MobState.Dead, out var ent1DeadThreshold))
+        if (!TryGetThresholdForState(target1, MobState.SoftCrit, out var ent1DeadThreshold) &&
+            !TryGetThresholdForState(target1, MobState.Critical, out ent1DeadThreshold) &&
+            !TryGetThresholdForState(target1, MobState.Dead, out ent1DeadThreshold))
             ent1DeadThreshold = 0;
 
-        if (!TryGetThresholdForState(target2, MobState.Dead, out var ent2DeadThreshold))
+        if (!TryGetThresholdForState(target2, MobState.SoftCrit, out var ent2DeadThreshold) &&
+            !TryGetThresholdForState(target2, MobState.Critical, out ent2DeadThreshold) &&
+            !TryGetThresholdForState(target2, MobState.Dead, out ent2DeadThreshold))
             ent2DeadThreshold = 0;
 
         Dictionary<ProtoId<OrganCategoryPrototype>, DamageSpecifier> organDamages = new();

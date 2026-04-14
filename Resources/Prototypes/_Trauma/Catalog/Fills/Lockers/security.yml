@@ -30,13 +30,14 @@
     - id: ContrabandDetectorFlatpack
     - id: SecurityMegaphone
     - id: WeaponEnergyShotgun
+    - id: GunpowderBottlePartFull
+    - id: ReinforcementCallerHos
 
 - type: entityTable
   id: FillLockerSecurityTrauma
   table: !type:AllSelector
     children:
     - id: ClothingHeadsetAltSecurityRegular
-    - id: PanicButton
     - id: PepperSpray
     - id: WeaponLaserSidearm
     - id: ClothingHandsGlovesSecurity
@@ -50,6 +51,10 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeLaserT1
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
@@ -143,7 +148,11 @@
   table: !type:AllSelector
     children:
     - id: WeaponLaserCarbine
-      amount: 6
+      amount: 3
+    - id: WeaponLaserGunCarbine
+      amount: 2
+    - id: WeaponLaserGunAssault
+      amount: 1
 
 - type: entityTable
   id: FillGunSafeShotgunsT1

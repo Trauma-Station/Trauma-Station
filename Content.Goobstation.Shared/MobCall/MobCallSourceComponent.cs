@@ -2,7 +2,6 @@
 
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.MobCall;
 

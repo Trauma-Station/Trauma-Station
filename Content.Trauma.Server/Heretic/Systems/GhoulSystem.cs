@@ -1,17 +1,31 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
+using Content.Medical.Shared.Body;
+using Content.Medical.Shared.Wounds;
 using Content.Server.Antag;
 using Content.Server.Ghost.Roles.Components;
-using Content.Shared.Hands.Components;
 using Content.Server.Hands.Systems;
+using Content.Server.Jittering;
+using Content.Server.NPC;
+using Content.Server.NPC.HTN;
+using Content.Server.NPC.Systems;
+using Content.Server.Polymorph.Systems;
+using Content.Server.Roles;
+using Content.Server.Speech.EntitySystems;
 using Content.Server.Storage.EntitySystems;
-using Content.Shared._Shitcode.Roles;
 using Content.Shared.Administration.Systems;
+using Content.Shared.Body;
 using Content.Shared.CombatMode;
+using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Ghost.Roles.Components;
-using Content.Shared.Heretic;
+using Content.Shared.Gibbing;
+using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
@@ -20,41 +34,26 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.NPC.Systems;
-using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Shared.Religion;
-using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Wounds;
-using Content.Server.Heretic.Abilities;
-using Content.Server.Heretic.EntitySystems;
-using Content.Server.Jittering;
-using Content.Server.NPC;
-using Content.Server.NPC.HTN;
-using Content.Server.NPC.Systems;
-using Content.Server.Roles;
-using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared._Starlight.CollectiveMind;
-using Content.Shared.Body;
-using Content.Shared.Coordinates;
-using Content.Shared.Roles;
-using Content.Shared.Species.Components;
-using Content.Shared.Hands;
-using Content.Shared.Polymorph;
-using Content.Server.Polymorph.Systems;
-using Content.Server.Speech.EntitySystems;
-using Content.Shared._Shitcode.Heretic.Rituals;
-using Content.Shared.Gibbing;
 using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
+using Content.Shared.Polymorph;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
+using Content.Shared.Species.Components;
+using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Server.Chaplain;
+using Content.Trauma.Server.Heretic.Abilities;
 using Content.Trauma.Shared.Chaplain.Components;
+using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
+using Content.Trauma.Shared.Heretic.Components.Side;
+using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Content.Trauma.Shared.Heretic.Systems;
+using Content.Trauma.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -65,6 +64,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
     private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnGhoulify =
         "ComponentsToRemoveOnGhoulify";
+
     private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnUnGhoulify =
         "ComponentsToRemoveOnUnGhoulify";
 
@@ -184,14 +184,10 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
     private void ProcessVoicelessDeadBody(EntityUid uid, bool makeRemovable)
     {
-        var woundableQuery = GetEntityQuery<WoundableComponent>();
-        foreach (var organ in _body.GetOrgans(uid))
+        foreach (var organ in _body.GetOrgans<ChildOrganComponent>(uid))
         {
-            if (woundableQuery.TryComp(organ, out var woundable) && woundable.RootWoundable == organ.Owner)
-                continue;
-
             if (makeRemovable)
-                RemCompDeferred<UnremoveableOrganComponent>(organ);
+                RemComp<UnremoveableOrganComponent>(organ);
             else
                 EnsureComp<UnremoveableOrganComponent>(organ);
         }
@@ -332,9 +328,9 @@ public sealed class GhoulSystem : SharedGhoulSystem
             return;
         }
 
-        if (ent.Comp.OldEyeColor is {} eyeColor)
+        if (ent.Comp.OldEyeColor is { } eyeColor)
             _humanoid.SetEyeColor(ent, eyeColor);
-        if (ent.Comp.OldSkinColor is {} skinColor)
+        if (ent.Comp.OldSkinColor is { } skinColor)
             _humanoid.SetSkinColor(ent, skinColor);
 
         var species = _proto.Index(humanoid.Species);
@@ -371,7 +367,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
             }
 
             if (Exists(minion.CreationRitual) &&
-                TryComp(minion.CreationRitual.Value, out HereticRitualComponent? ritual))
+                TryComp(minion.CreationRitual.Value, out Shared.Heretic.Rituals.HereticRitualComponent? ritual))
             {
                 ritual.LimitedOutput.Remove(ent);
                 Dirty(minion.CreationRitual.Value, ritual);

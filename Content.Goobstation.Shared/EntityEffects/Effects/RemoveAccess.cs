@@ -3,7 +3,6 @@
 using Content.Shared.Access;
 using Content.Shared.Access.Systems;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 

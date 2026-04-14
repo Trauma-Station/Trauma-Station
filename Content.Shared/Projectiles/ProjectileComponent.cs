@@ -43,6 +43,7 @@ public sealed partial class ProjectileComponent : Component
     ///     The amount of damage the projectile will do.
     /// </summary>
     [DataField(required: true)] [ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField] // Trauma
     public DamageSpecifier Damage = new();
 
     /// <summary>

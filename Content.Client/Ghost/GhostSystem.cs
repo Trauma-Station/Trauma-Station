@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Client._Shitcode.Wizard.Systems;
+using Content.Trauma.Common.Wizard;
 // </Trauma>
 using Content.Client.Movement.Systems;
 using Content.Shared.Actions;
@@ -13,13 +13,15 @@ namespace Content.Client.Ghost
 {
     public sealed class GhostSystem : SharedGhostSystem
     {
+        // <Trauma>
+        [Dependency] private readonly CommonGhostVisibilitySystem _ghostVisSystem = default!;
+        // </Trauma>
         [Dependency] private readonly IClientConsoleHost _console = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
         [Dependency] private readonly ContentEyeSystem _contentEye = default!;
         [Dependency] private readonly SpriteSystem _sprite = default!;
-        [Dependency] private readonly GhostVisibilitySystem _ghostVisSystem = default!; // Goobstation
 
         public int AvailableGhostRoleCount { get; private set; }
 

@@ -5,10 +5,9 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weather;
 using Content.Shared.Whitelist;
-using Robust.Shared.Network;
+using Content.Trauma.Shared.Areas;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Weather;
@@ -18,6 +17,7 @@ namespace Content.Trauma.Shared.Weather;
 /// </summary>
 public sealed partial class WeatherDamageSystem : EntitySystem
 {
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -87,12 +87,24 @@ public sealed partial class WeatherDamageSystem : EntitySystem
             _whitelist.IsWhitelistPass(weather.Blacklist, uid))
             return;
 
-        // if not in space, check for being indoors
-        if (xform.GridUid is {} gridUid && _gridQuery.TryComp(gridUid, out var grid))
+        if (xform.GridUid is {} gridUid)
         {
-            var tile = _map.GetTileRef((gridUid, grid), xform.Coordinates);
-            if (!_weather.CanWeatherAffect((gridUid, grid, null), tile))
+            // if any safe areas are defined, check them against the mob's area
+            if (weather.SafeAreas.Count > 0 &&
+                _area.GetArea(gridUid, xform.Coordinates) is {} area &&
+                Prototype(area)?.ID is {} areaId &&
+                weather.SafeAreas.Contains(areaId))
+            {
                 return;
+            }
+
+            // if not in space, check for being indoors
+            if (weather.SafeIndoors && _gridQuery.TryComp(gridUid, out var grid))
+            {
+                var tile = _map.GetTileRef((gridUid, grid), xform.Coordinates);
+                if (!_weather.CanWeatherAffect((gridUid, grid, null), tile))
+                    return;
+            }
         }
 
         _damageable.ChangeDamage(uid, weather.Damage, interruptsDoAfters: false);

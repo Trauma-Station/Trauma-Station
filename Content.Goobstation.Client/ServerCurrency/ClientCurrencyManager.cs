@@ -3,7 +3,6 @@
 using Content.Goobstation.Common.ServerCurrency;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Client.ServerCurrency;

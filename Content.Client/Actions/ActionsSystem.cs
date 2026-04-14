@@ -1,6 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard.SpellCards;
-using Content.Client._Shitcode.Wizard.Systems;
+using Content.Trauma.Common.Wizard;
 using Content.Goobstation.Common.Actions;
 // </Trauma>
 using System.IO;
@@ -33,7 +32,6 @@ namespace Content.Client.Actions
     {
         public delegate void OnActionReplaced(EntityUid actionId);
 
-        [Dependency] private readonly ActionTargetMarkSystem _mark = default!; // Goob
         [Dependency] private readonly SharedChargesSystem _sharedCharges = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IPrototypeManager _proto = default!;
@@ -377,8 +375,9 @@ namespace Content.Client.Actions
             }
 
             // <Goob>
-            if (HasComp<LockOnMarkActionComponent>(uid) && Exists(_mark.Target))
-                targetEnt = _mark.Target.Value;
+            // STINKS
+            if (TryComp<LockOnMarkActionComponent>(uid, out var lockOn) && Exists(lockOn.Target))
+                targetEnt = lockOn.Target.Value;
             // </Goob>
 
             if (action.ClientExclusive)
@@ -409,8 +408,9 @@ namespace Content.Client.Actions
                 return;
 
             // <Goob>
-            if (HasComp<LockOnMarkActionComponent>(ent) && Exists(_mark.Target))
-                entity = _mark.Target.Value;
+            // STINKS
+            if (TryComp<LockOnMarkActionComponent>(ent, out var lockOn) && Exists(lockOn.Target))
+                entity = lockOn.Target.Value;
             // </Goob>
 
             // let world target component handle it

@@ -1,7 +1,6 @@
 // <Trauma>
-using Content.Goobstation.Common.MisandryBox;
-using Content.Shared._EinsteinEngines.Language.Systems;
-using Content.Shared.Chat;
+using Content.Goobstation.Common.Emoting;
+using Content.Trauma.Common.Language.Systems;
 // </Trauma>
 using System.Collections.Frozen;
 using Content.Shared.Chat.Prototypes;
@@ -13,7 +12,7 @@ namespace Content.Shared.Chat;
 
 public abstract partial class SharedChatSystem
 {
-    [Dependency] private readonly SharedLanguageSystem _language = default!; // Trauma
+    [Dependency] private readonly CommonLanguageSystem _language = default!; // Trauma
 
     private FrozenDictionary<string, EmotePrototype> _wordEmoteDict = FrozenDictionary<string, EmotePrototype>.Empty;
 
@@ -169,12 +168,12 @@ public abstract partial class SharedChatSystem
         // optional override params > general params for all sounds in set > individual sound params
         var param = audioParams ?? proto.GeneralParams ?? sound.Params;
 
-        // Goobstation/MisandryBox - Emote spam countermeasures
+        // <Trauma> - Emote spam countermeasures
         var ev = new EmoteSoundPitchShiftEvent();
         RaiseLocalEvent(uid, ref ev);
 
         param.Pitch += ev.Pitch;
-        // Goobstation/MisandryBox
+        // </Trauma>
 
         _audio.PlayPvs(sound, uid, param);
         return true;

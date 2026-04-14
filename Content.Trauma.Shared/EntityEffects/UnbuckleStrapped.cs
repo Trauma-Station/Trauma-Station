@@ -3,7 +3,6 @@
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects.Effects;
 

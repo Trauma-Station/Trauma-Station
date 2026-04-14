@@ -1,6 +1,6 @@
 - type: entity
   name: stun baton
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem, BaseSecurityContraband, BracingDurability] # Trauma - Durability
   id: Stunbaton
   description: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
@@ -120,7 +120,7 @@
 
 - type: entity
   name: truncheon
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem, BaseSecurityContraband, BracingDurability] # Trauma - Durability
   id: Truncheon
   description: A rigid, steel-studded baton, meant to harm.
   components:

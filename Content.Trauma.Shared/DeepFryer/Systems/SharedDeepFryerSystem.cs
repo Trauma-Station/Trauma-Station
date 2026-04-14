@@ -16,7 +16,6 @@ using Content.Shared.Storage.Components;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.DeepFryer.Systems;

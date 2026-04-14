@@ -1,7 +1,15 @@
-# SPDX-FileCopyrightText: 2023 brainfood1183 <113240905+brainfood1183@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
+- type: entityTable
+  id: RandomCrystalTable
+  table: !type:GroupSelector
+    children:
+    - id: CrystalGreen
+    - id: CrystalPink
+    - id: CrystalOrange
+    - id: CrystalBlue
+    - id: CrystalCyan
+    - id: CrystalYellow
+    - id: CrystalBlack
+    - id: CrystalGrey
 
 - type: entity
   name: Crystal Spawner
@@ -9,19 +17,12 @@
   id: CrystalSpawner
   parent: MarkerBase
   components:
-    - type: Sprite
-      layers:
-        - state: red
-        - sprite: Structures/Decoration/crystal.rsi
-          state: crystal_grey
-    - type: RandomSpawner
-      prototypes:
-        - CrystalGreen
-        - CrystalPink
-        - CrystalOrange
-        - CrystalBlue
-        - CrystalCyan
-        - CrystalYellow
-        - CrystalBlack
-        - CrystalGrey
-      chance: 0.7
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Structures/Decoration/crystal.rsi
+      state: crystal_grey
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomCrystalTable
+      prob: 0.7

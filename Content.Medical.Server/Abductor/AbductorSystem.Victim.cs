@@ -12,7 +12,6 @@ using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Server.Abductor;
 

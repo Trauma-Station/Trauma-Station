@@ -81,7 +81,7 @@ public sealed partial class IngestionSystem
             return false;
         }
 
-        var attempt = new IngestionAttemptEvent(flags);
+        var attempt = new IngestionAttemptEvent(flags, user); // Trauma - pass user
         RaiseLocalEvent(target, ref attempt);
 
         if (!attempt.Cancelled)

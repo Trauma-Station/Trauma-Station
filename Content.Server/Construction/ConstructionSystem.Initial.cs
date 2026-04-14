@@ -51,10 +51,6 @@ namespace Content.Server.Construction
             SubscribeNetworkEvent<TryStartItemConstructionMessage>(HandleStartItemConstruction);
         }
 
-        // Goobstation - conflict landmine; should ideally not be in the system or be a cvar but whatever
-        // replaces wizcode magic constants
-        public const float ConstructGrabRange = 2f;
-
         // LEGACY CODE. See warning at the top of the file!
         private IEnumerable<EntityUid> EnumerateNearby(EntityUid user)
         {
@@ -97,12 +93,11 @@ namespace Content.Server.Construction
 
             var pos = _transformSystem.GetMapCoordinates(user);
 
-            // Goobstation - conflict landmine: replace magic constant with ConstructGrabRange
-            foreach (var near in _lookupSystem.GetEntitiesInRange(pos, ConstructGrabRange, LookupFlags.Contained | LookupFlags.Dynamic | LookupFlags.Sundries | LookupFlags.Approximate))
+            foreach (var near in _lookupSystem.GetEntitiesInRange(pos, 2f, LookupFlags.Contained | LookupFlags.Dynamic | LookupFlags.Sundries | LookupFlags.Approximate))
             {
                 if (near == user)
                     continue;
-                if (_interactionSystem.InRangeUnobstructed(pos, near, ConstructGrabRange) && _container.IsInSameOrParentContainer(user, near))
+                if (_interactionSystem.InRangeUnobstructed(pos, near, 2f) && _container.IsInSameOrParentContainer(user, near))
                     yield return near;
             }
         }
@@ -438,8 +433,7 @@ namespace Content.Server.Construction
                     GetCoordinates(ev.Location),
                     ev.Angle,
                     ev.Ack,
-                    args.SenderSession,
-                    ev.With);
+                    args.SenderSession);
         }
 
         /// <summary>
@@ -451,8 +445,7 @@ namespace Content.Server.Construction
             EntityCoordinates location,
             Angle angle,
             int ack = 0,
-            ICommonSession? senderSession = null,
-            NetEntity? with = null)
+            ICommonSession? senderSession = null)
         {
             // </Goobstation>
             if (!PrototypeManager.TryIndex(prototypeName, out ConstructionPrototype? constructionPrototype))
@@ -532,25 +525,6 @@ namespace Content.Server.Construction
                     _beingBuilt[session].Remove(ack);
             }
 
-            // Goobstation
-            EntityUid? entWith = with == null ? null : GetEntity(with);
-            if (with != null && entWith != null)
-            {
-                // sus client can't use steel half the station away to build
-                var userPos = _transformSystem.GetMapCoordinates(user);
-                var withPos = _transformSystem.GetMapCoordinates(entWith.Value);
-                if (!_container.IsInSameOrParentContainer(user, entWith.Value)
-                    || !_interactionSystem.InRangeUnobstructed(userPos, withPos, ConstructGrabRange))
-                {
-                    Cleanup();
-                    return false;
-                }
-            }
-            else if (hands != null)
-            {
-                entWith = _handsSystem.GetActiveItem((user, hands));
-            }
-
             if (!_actionBlocker.CanInteract(user, null))
             {
                 Cleanup();
@@ -574,41 +548,46 @@ namespace Content.Server.Construction
             if(edge == null)
                 throw new InvalidDataException($"Can't find edge from starting node to the next node in pathfinding! Recipe: {prototypeName}");
 
-            if (_handsSystem.GetActiveItem((user, hands)) is {} holding
-                && senderSession != null) // Goobstation - don't check this for constructor machine
+            var valid = false;
+            if (_handsSystem.GetActiveItem((user, hands)) is not {Valid: true} holding // Trauma - renamed holding to holdingUid
+                && senderSession != null) // Trauma - don't check this for constructor machine
             {
-                var valid = false;
-
-                if (entWith == null) // Goobstation - don't check for constructor machine
-                {
-                    Cleanup();
-                    return false;
-                }
-
-                // No support for conditions here!
-
-                foreach (var step in edge.Steps)
-                {
-                    switch (step)
-                    {
-                        case EntityInsertConstructionGraphStep entityInsert:
-                            if (entityInsert.EntityValid(holding, EntityManager, Factory))
-                                valid = true;
-                            break;
-                        case ToolConstructionGraphStep _:
-                            throw new InvalidDataException("Invalid first step for item recipe!");
-                    }
-
-                    if (valid)
-                        break;
-                }
-
-                if (!valid)
-                {
-                    Cleanup();
-                    return false;
-                }
+                Cleanup();
+                return false;
             }
+            // <Trauma> - constructor doesn't use it
+            else
+            {
+                holding = EntityUid.Invalid;
+            }
+
+            if (holding.IsValid())
+            {
+            // </Trauma>
+            // No support for conditions here!
+
+            foreach (var step in edge.Steps)
+            {
+                switch (step)
+                {
+                    case EntityInsertConstructionGraphStep entityInsert:
+                        if (entityInsert.EntityValid(holding, EntityManager, Factory))
+                            valid = true;
+                        break;
+                    case ToolConstructionGraphStep _:
+                        throw new InvalidDataException("Invalid first step for item recipe!");
+                }
+
+                if (valid)
+                    break;
+            }
+
+            if (!valid)
+            {
+                Cleanup();
+                return false;
+            }
+            } // Trauma - close IsValid condition above
 
             if (await Construct(user,
                     (ack + constructionPrototype.GetHashCode()).ToString(),

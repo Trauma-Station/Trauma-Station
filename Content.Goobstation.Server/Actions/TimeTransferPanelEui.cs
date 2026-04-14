@@ -8,7 +8,6 @@ using Content.Server.Database;
 using Content.Server.EUI;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Server.Actions;
 

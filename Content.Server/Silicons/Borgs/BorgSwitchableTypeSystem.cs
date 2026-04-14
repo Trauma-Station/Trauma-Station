@@ -1,4 +1,6 @@
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components; // Goob
+// <Trauma>
+using Content.Trauma.Common.Silicons.Borgs;
+// </Trauma>
 using Content.Server.Inventory;
 using Content.Shared.Inventory;
 using Content.Shared.Radio.Components;
@@ -32,20 +34,8 @@ public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeS
             activeRadio.Channels = [.. radioChannels];
 
         // Corvax-Next-AiRemoteControl-Start
-        if (TryComp(ent, out AiRemoteControllerComponent? aiRemoteComp))
-        {
-            if (TryComp(aiRemoteComp.AiHolder, out IntrinsicRadioTransmitterComponent? stationAiTransmitter) && transmitter != null)
-            {
-                aiRemoteComp.PreviouslyTransmitterChannels = [.. radioChannels];
-                transmitter.Channels = [.. stationAiTransmitter.Channels];
-            }
-
-            if (TryComp(aiRemoteComp.AiHolder, out ActiveRadioComponent? stationAiActiveRadio) && activeRadio != null)
-            {
-                aiRemoteComp.PreviouslyActiveRadioChannels = [.. radioChannels];
-                activeRadio.Channels = [.. stationAiActiveRadio.Channels];
-            }
-        }
+        var ev = new BorgTypeChangedEvent();
+        RaiseLocalEvent(ent, ref ev);
         // Corvax-Next-AiRemoteControl-End
 
         // Borg transponder for the robotics console

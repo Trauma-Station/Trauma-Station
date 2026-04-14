@@ -5,7 +5,6 @@ using Content.Client.UserInterface.Systems.Alerts.Controls;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Changeling;
 

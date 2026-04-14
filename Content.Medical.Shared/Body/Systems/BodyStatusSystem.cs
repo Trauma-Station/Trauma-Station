@@ -3,8 +3,6 @@
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Mobs;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Body;
 
@@ -48,7 +46,7 @@ public sealed class BodyStatusSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        ent.Comp.BodyStatus = _wound.GetWoundableStatesOnBodyPainFeels(ent.Owner);
+        ent.Comp.BodyStatus = _wound.GetWoundableStatesOnBody(ent.Owner);
         Dirty(ent, ent.Comp);
 
         var ev = new TargetIntegrityChangedMessage();

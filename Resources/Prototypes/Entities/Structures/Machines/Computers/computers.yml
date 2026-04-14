@@ -670,6 +670,9 @@
   name: communications computer
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
+  # <Trauma>
+  - type: StationReportTarget # not given to aghost
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["computerLayerBody"]

@@ -5,7 +5,6 @@ using Content.Lavaland.Shared.Megafauna.Events;
 using Content.Lavaland.Shared.Movement;
 using Content.Shared.Actions.Components;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 
 namespace Content.Lavaland.Shared.Megafauna.Systems;
 

@@ -11,14 +11,11 @@ public sealed class NeedsTongueSystem : EntitySystem
 {
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-
-    private EntityQuery<EnabledOrganComponent> _enabledQuery;
+    [Dependency] private readonly EntityQuery<EnabledOrganComponent> _enabledQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _enabledQuery = GetEntityQuery<EnabledOrganComponent>();
 
         SubscribeLocalEvent<NeedsTongueComponent, SpeakAttemptEvent>(OnSpeakAttempt);
     }
@@ -29,7 +26,7 @@ public sealed class NeedsTongueSystem : EntitySystem
             return;
 
         // TODO: change to PopupClient if chat gets predicted
-        _popup.PopupEntity(Loc.GetString("speech-muted"), ent, ent);
+        _popup.PopupEntity("You have no tongue!", ent, ent);
         args.Cancel();
     }
 }

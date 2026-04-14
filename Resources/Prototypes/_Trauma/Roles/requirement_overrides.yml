@@ -56,6 +56,8 @@
       department: Security
       time: 3h
       inverted: true
+    - !type:OverallPlaytimeRequirement
+      time: 2h
     TechnicalAssistant:
     - !type:DepartmentTimeRequirement
       department: Engineering
@@ -125,13 +127,6 @@
     Detective:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 1h
-    Brigmedic:
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 1h
-    - !type:DepartmentTimeRequirement
-      department: Medical
       time: 1h
     Warden:
     - !type:DepartmentTimeRequirement

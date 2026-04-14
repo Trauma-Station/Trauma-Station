@@ -1,6 +1,6 @@
 - type: entity
   id: KitchenMicrowave
-  parent: [ BaseMachinePowered, SmallConstructibleMachine ]
+  parent: [ BaseMachinePowered, SmallConstructibleMachine, MetalToolDurabilityStrong ] # Trauma - Durability
   name: microwave
   description: It's magic.
   components:
@@ -198,7 +198,7 @@
     attackRate: 0.75
     damage:
       types:
-        Blunt: 30
+        Blunt: 20 # Trauma - Was 30
         Shock: 5
   - type: DamageOtherOnHit
     damage:

@@ -15,7 +15,6 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Content.Shared.Labels.Components;
 using Content.Server.Power.Components;
 using Robust.Shared.Player;

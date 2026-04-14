@@ -114,23 +114,21 @@
   id: FillLockerBrigmedic # heavily goob edited
   table: !type:AllSelector
     children:
-    # <Goob>
-    - id: BoxAutoinjectorCartidges
-    - id: ClothingBackpackDuffelSurgeryFilled
-    - id: ClothingHandsGlovesLatex
-    #- id: ClothingEyesGlassesSecurity
+    - id: ClothingEyesGlassesSecurity
+    # <Trauma>
     #- id: WeaponDisabler
     #- id: TrackingImplanter
     #  amount: 2
-    # </Goob>
-    - id: ClothingOuterHardsuitBrigmedic
-    - id: OxygenTankFilled
-    - id: NitrogenTankFilled
+    #- id: ClothingOuterHardsuitBrigmedic
+    #- id: OxygenTankFilled
+    #- id: NitrogenTankFilled
+    - id: MaterialBones # Remains of a longrotten brigmedic. Idfk Armok asked for it.
+      amount: 5
+    # </Trauma>
     - id: ClothingUniformJumpskirtOfLife
       prob: 0.1
     - id: MedkitOxygenFilled
     - id: MedkitAdvancedFilled
-    - id: BoxBodyBag # Goob Station
 
 - type: entity
   id: LockerDetectiveFilled

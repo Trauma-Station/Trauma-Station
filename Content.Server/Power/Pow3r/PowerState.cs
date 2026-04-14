@@ -1,18 +1,3 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -98,22 +83,17 @@ namespace Content.Server.Power.Pow3r
         public sealed class GenIdStorage<T>
         {
             // This is an implementation of "generational index" storage.
-            //
             // The advantage of this storage method is extremely fast, O(1) lookup (way faster than Dictionary).
             // Resolving a value in the storage is a single array load and generation compare. Extremely fast.
             // Indices can also be cached into temporary
             // Disadvantages are that storage cannot be shrunk, and sparse storage is inefficient space wise.
             // Also this implementation does not have optimizations necessary to make sparse iteration efficient.
-            //
             // The idea here is that the index type (NodeId in this case) has both an index and a generation.
             // The index is an integer index into the storage array, the generation is used to avoid use-after-free.
-            //
             // Empty slots in the array form a linked list of free slots.
             // When we allocate a new slot, we pop one link off this linked list and hand out its index + generation.
-            //
             // When we free a node, we bump the generation of the slot and make it the head of the linked list.
             // The generation being bumped means that any IDs to this slot will fail to resolve (generation mismatch).
-            //
 
             // Index of the next free slot to use when allocating a new one.
             // If this is int.MaxValue,

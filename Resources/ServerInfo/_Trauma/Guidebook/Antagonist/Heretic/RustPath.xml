@@ -1,0 +1,78 @@
+<Document>
+
+  # Rusted Path
+
+  Difficulty: [color=orange]Medium[/color]
+
+  The Path of Rust revolves around durability, corruption and brute forcing your way through obstacles.
+  Pick this path if you enjoy a standing your ground and letting the fight come to you.
+
+  ## Pros
+
+  - Standing on rusted tiles makes you highly durable; regenerating wounds and removing stuns.
+  - You are able to destroy walls, objects, mechs, structures and airlocks using your grasp with ease.
+  - You can instantly obliterate silicons or synthetic crew members with your Mansus Grasp.
+  - You have a high amount of disruption abilities to make it easier to fight in your territory.
+
+  ## Cons
+
+  - Extremely overt; throws stealth completely out as an option.
+  - If you are not on rusted tiles, you become significantly more vulnerable.
+  - Being locked to a territorial conflict makes it much easier to use destructive tools (like bombs) against you.
+  - Your high amount of defensive power is at the cost of offensive power.
+
+  ## Knowledge
+
+  <Table Columns="3">
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Knowledge Name</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Ingredients/Type</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Description</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Blacksmith's Tale</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Knife, Trash</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a rusty blade.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Grasp of Rust</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp can destroy most things non-living. It can also rust tiles under it to provide you regeneration, chem resistance, and stun resistance.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mark of Rust</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the rust mark, making victims vomit uncontrollably.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Aggressive Spread</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Spreads rust in a large area around you.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Rust Construction</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Raises a wall of rust out of any rusted tile, knocking heathens away.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Entropic Plume</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Sends out a wave of rust, blinding, poisoning, and forcing anyone caught in it to attack nearby non-heretics. Also spreads rust.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Toxic Blade</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your blade now deals toxic damage and rots corpses it hits. Additionally; your rust healing is stronger, and your grasp can now break reinforced walls.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Rust Charge</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Charges from a rusted tile, rusting any tile you come across, destroying walls, and hurting people.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Rustbringer's Oath</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Three rotten or silicon corpses</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Rust spread from your ritual rune. Your rust healing is even stronger.</Box></ColorBox>
+  </Table>
+
+  ## Tips
+
+  - Your Mansus Grasp will instantly destroy mechs, silicons and androids. Hitting a marked target with your blade will cause heavy disgust and make them vomit, knocking them down briefly.
+  - Your Mansus Grasp and your spells are capable of rusting walls and floors, making them beneficial to you. Spread rust as much as possible.
+  - Rusted turfs will heal you, regulate your blood temperature, make you resistant to batons knockdown, regenerate your stamina and blood and heal your wound and limbs once you ascend.
+  - Always fight on your turf. Your opponent entering your turf are at a significant disadvantage.
+  - Your ability to destroy objects and walls improves as you progress; eventually you will be able to melt through airlocks and reinforced walls.
+  - Spreading rust can be fairly slow, especially early on. Consider summoning a few rust walkers to help you expand your domain.
+  - Rust Construction allows you to produce barriers for cover or escape, or even block off someone else's escape in a pinch. Make the most of it to manipulate the environment to your needs.
+
+</Document>

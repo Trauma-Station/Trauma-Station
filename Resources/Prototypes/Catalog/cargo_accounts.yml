@@ -5,7 +5,7 @@
   color: "#b48b57"
   radioChannel: Supply
   acquisitionSlip: PaperAcquisitionSlipCargo
-  approveAccess: Quartermaster # Trauma
+  approveAccess: Cargo # Trauma
 
 - type: cargoAccount
   id: Engineering

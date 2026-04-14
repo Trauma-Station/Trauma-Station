@@ -14,40 +14,6 @@ As a chaplain, you would ideally proselytize whatever crazy religion you've made
 ## Religions:
 You are free to propagate any present day religions you know of, or even invent one of your own! Just make sure it doesn't go against NanoTrasen and its values, or you may well end up in the brig.
 
-If you don't already have one, build an altar and find an offering to place on-top:
-
-  <Box>
-    <GuideEntityEmbed Entity="AltarBananium"/>
-    <GuideEntityEmbed Entity="AltarChaos"/>
-    <GuideEntityEmbed Entity="AltarDruid"/>
-    <GuideEntityEmbed Entity="AltarClock"/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="AltarFangs"/>
-    <GuideEntityEmbed Entity="AltarHeaven"/>
-    <GuideEntityEmbed Entity="AltarConvertMaint"/>
-    <GuideEntityEmbed Entity="AltarNanotrasen"/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="AltarSpaceChristian"/>
-    <GuideEntityEmbed Entity="AltarTechnology"/>
-    <GuideEntityEmbed Entity="AltarToolbox"/>
-  </Box>
-
-These altars can be constructed by placing the following offerings atop your base convert altar:
-
-- Bananium Altar: 1 x Bananium
-- Chaos Altar: 1 x Plasma
-- Druid Altar: 1 x Wooden Plank
-- Fanged Altar: 1 x Raw Meat
-- Heaven Altar: 1 x Templar Helmet
-- Maints Altar: 1 x Budget Insulated Gloves
-- Nanotrasen Altar: 1 x Plasteel
-- Space-Christian Altar: 1 x Nun Hood
-- Technology Altar: 1 x Capacitor
-- Toolbox Altar: 1 x Toolbox
-- Clockwork Altar: 1 x Small Power Cell
-
 ## Holy Artefacts
 
 ### Armaments Beacon

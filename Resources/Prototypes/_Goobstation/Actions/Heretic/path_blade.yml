@@ -17,7 +17,7 @@
   components:
   - type: Action
     checkCanInteract: false
-    useDelay: 50
+    useDelay: 30
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/abilities_heretic.rsi

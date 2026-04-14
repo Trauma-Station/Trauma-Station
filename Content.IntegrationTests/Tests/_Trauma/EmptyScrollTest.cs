@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.IntegrationTests.Fixtures;
 using Content.Trauma.Shared.EmptyScroll;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
@@ -11,14 +12,14 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// For the test to exit cleanly prayers also can't affect anything outside the current map.
 /// </summary>
 [TestFixture]
-public sealed class EmptyScrollTest
+public sealed class EmptyScrollTest : GameTest
 {
     public static readonly EntProtoId Human = "MobHuman";
 
     [Test]
     public async Task PrayersTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.EntMan;
@@ -39,7 +40,5 @@ public sealed class EmptyScrollTest
                 }
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 }

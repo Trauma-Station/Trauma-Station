@@ -58,6 +58,10 @@
   id: MobHumanSyndicateAgentNukeops # Reinforcement exclusive to nukeops uplink
   suffix: Human, NukeOps
   components:
+  # <Trauma>
+  - type: AutoTraitor
+    profile: TraitorReinforcementNukeOps
+  # </Trauma>
   - type: NukeOperative
   - type: RandomMetadata
     nameSegments:
@@ -73,6 +77,15 @@
   parent: MobHuman
   id: MobHumanNukeOp
   components:
+  # <Trauma>
+  - type: TriggerOnSpawn
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:NestedEffect
+      proto: InstallHypoportNukie
+    - !type:NestedEffect
+      proto: InstallSkillChipNukie
+  # </Trauma>
   - type: NukeOperative
   - type: RandomHumanoidAppearance
 

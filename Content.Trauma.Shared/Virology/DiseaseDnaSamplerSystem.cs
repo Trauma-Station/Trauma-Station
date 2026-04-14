@@ -10,8 +10,6 @@ using Content.Shared.Popups;
 using Content.Trauma.Shared.Disease;
 using Content.Trauma.Shared.Mobs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Virology;

@@ -23,9 +23,6 @@
         effectProto: StatusEffectDrowsiness
         time: 2.5
         type: Add
-      - !type:SuppressPain
-        amount: 50
-        time: 30
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -34,13 +31,3 @@
         damage:
           types:
             Asphyxiation: 2
-      - !type:AdjustConsciousness
-        conditions:
-        - !type:ReagentCondition
-          reagent: Morphine
-          min: 16
-        allowNewModifiers: true
-        modifierType: Pain
-        identifier: Suffocation
-        amount: -2
-        time: 12

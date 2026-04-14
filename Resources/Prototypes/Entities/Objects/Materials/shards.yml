@@ -51,7 +51,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [BaseItem, NonweaponDurability] # Trauma - Durability
   id: ShardBase
   description: It's a shard of some unknown material.
   components:

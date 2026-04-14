@@ -1,0 +1,207 @@
+- type: entity
+  abstract: true
+  parent: SimpleMobBase
+  id: MobMorphBase
+  name: morph
+  description: A revolting, pulsating pile of flesh.
+  components:
+  - type: Hunger
+    baseDecayRate: 0
+  - type: Thirst
+    baseDecayRate: 0
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/morph.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: morph
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobState
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: morph
+      Dead:
+        Base: morph_dead
+  - type: Deathgasp
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritFakeDeath
+      - ActionCritLastWords
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 4
+  - type: Respirator
+    saturation: 25
+    maxSaturation: 25
+    gaspEmoteCooldown: 300
+    damage:
+      types:
+        Asphyxiation: 0.1
+    damageRecovery:
+      types:
+        Asphyxiation: -0.25
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.1
+  - type: CombatMode
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+      path: /Audio/Effects/metal_thud2.ogg
+    angle: 0
+    animation: WeaponArcPunch
+    wideAnimation: WeaponArcPunch
+    damage:
+      types:
+        Blunt: 20
+        Structural: 30
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 50
+  - type: Devourer
+    devourAction: ActionMorphDevour
+    soundStructureDevour: /Audio/Effects/sizzle.ogg
+    structureDevourTime: 1.5
+    healRate: 7.5
+    whitelist:
+      components:
+      - MobState
+      - Item
+    stomachStorageWhitelist:
+      components:
+      - MobState
+      - Item
+    foodPreferenceWhitelist:
+      components:
+      - HumanoidProfile
+  - type: Morph
+    actions:
+    - ActionMorphReplicate
+    - ActionMorph
+    - ActionUnMorph
+    biomassWhitelist:
+      components:
+      - Edible # give biomass if food
+      - MobState # give biomass if it can live
+    biomassBlacklist:
+      components:
+      - BorgChassis
+      - Silicon
+      tags:
+      - Bot # no biomass if its a bot
+      - SiliconMob # no biomass if its borg or ipc
+      - ClothMade # some clothes or cloth have food comp. morph cant use cloth for biomass
+  - type: ChameleonProjector
+    whitelist:
+      components:
+      - Anchorable
+      - Item
+      - Supermatter # needs to be here.
+      tags:
+      - VimPilot # used to morph into animals
+    blacklist:
+      components:
+      - Morph # cant copy another morph
+      - ChameleonProjector
+      - NukeDisk
+      - SubFloorHide # no hiding under the floor
+      # below are all invisible
+      - Pda
+      - Door
+      tags:
+      - Catwalk
+      - Wall
+      - Window
+    disguiseProto: ChameleonDisguiseMorph
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatDragon
+      amount: 2
+  - type: TypingIndicator
+    proto: slime
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 3
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Speech
+    speechVerb: Slime
+    speechSounds: Morph
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Morph
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: VentCrawler
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+
+- type: entity
+  parent: MobMorphBase
+  id: MobMorph
+  suffix: Ghost role
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: GhostRole
+    allowMovement: true
+    name: ghost-role-information-morph-name
+    description: ghost-role-information-morph-description
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  parent: MobMorphBase
+  id: MobMorphWizard
+  suffix: wizard pet
+  # TODO: paritymaxxing
+
+# disguise entity
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: ChameleonDisguise
+  id: ChameleonDisguiseMorph
+  components:
+  - type: MorphDisguise
+  - type: RotationVisuals
+    defaultRotation: 0
+    horizontalRotation: 0
+
+# guidebook dummy
+
+- type: entity
+  id: ClownDummy
+  categories: [ HideSpawnMenu ]
+  name: Yummy Clown
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: clown
