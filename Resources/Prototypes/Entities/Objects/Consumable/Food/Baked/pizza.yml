@@ -150,6 +150,8 @@
   parent: FoodInjectableBase
   id: FoodPizzaBase
   components:
+  - type: Perishable # Trauma - Brings whole pizza rot time in-line with pizza slices
+    rotAfter: 900
   - type: FlavorProfile
     flavors:
       - oily
