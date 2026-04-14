@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Medical.Common.Body;
-using Content.Medical.Common.CCVar;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
