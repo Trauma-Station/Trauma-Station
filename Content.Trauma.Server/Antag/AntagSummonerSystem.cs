@@ -29,7 +29,7 @@ public sealed class AntagSummonerSystem : SharedAntagSummonerSystem
         // TODO: % alive check too if people are extra chuddy
         if (_player.PlayerCount < _minPlayers)
         {
-            Popup.PopupEntity("Security grants are temporarily unavailable, please try again later.", ent, user, PopupType.SmallCaution)
+            Popup.PopupEntity("Security grants are temporarily unavailable, please try again later.", ent, user, PopupType.SmallCaution);
             return false;
         }
 
