@@ -287,7 +287,7 @@
   description: A light fixture.
   components:
   - type: LightBulb
-    color: "#FFBE7E" # Trauma - was 5000K, now 3300
+    color: "#FFBE7E" # Trauma - was 5000K, now 3300K
     lightEnergy: 0.8
     lightRadius: 10
     lightSoftness: 1
