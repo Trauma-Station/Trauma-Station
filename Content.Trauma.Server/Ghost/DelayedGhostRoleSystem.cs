@@ -80,6 +80,7 @@ public sealed class DelayedGhostRoleSystem : EntitySystem
             return;
 
         var role = EnsureComp<GhostRoleComponent>(uid);
+        EnsureComp<GhostTakeoverAvailableComponent>(uid);
         // resolving a system and updating every eui 3 times in a row award
         role.RoleName = comp.Name;
         role.RoleDescription = comp.Description;
