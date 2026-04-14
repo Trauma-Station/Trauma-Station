@@ -184,8 +184,12 @@
   id: FoodPizzaSliceBase
   abstract: true
   components:
-  - type: RotInto # Trauma - pizza rots into moldy pizza
+  # <Trauma>
+  - type: Perishable
+    rotAfter: 600
+  - type: RotInto # pizza rots into moldy pizza
     entity: FoodPizzaMoldySlice
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - oily
