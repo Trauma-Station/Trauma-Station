@@ -11,4 +11,14 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Components;
 /// Requires <see cref="AreaComponent"/> to function.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class PowerVeinComponent : Component;
+public sealed partial class PowerVeinComponent : Component
+{
+    /// <summary>
+    /// Reduces the recharge time of <see cref="ClockworkPowerSourceComponent"/> by a given amount.
+    ///
+    /// Neutral veins should stay at 0, while weak veins should increase the recharge time,
+    /// and strong veins should decrease it.
+    /// </summary>
+    [DataField]
+    public TimeSpan ReducedRechargeTime;
+};

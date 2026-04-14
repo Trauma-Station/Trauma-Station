@@ -20,8 +20,7 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 ///
 /// TODO for finishing prototype:
 /// 1. Add support for checking for distance and possibly check if obstructed (e.g. can't connect a power source to a structure if its too far away)
-/// 2. Add support for vein variants (strong veins, weak veins)
-/// 3. Add support for ClockworkStructures to add/rem components when they are above X charges and are anchored!
+/// Test stuff i added
 ///
 /// </summary>
 public sealed class ClockworkPowerSystem : EntitySystem
@@ -38,6 +37,7 @@ public sealed class ClockworkPowerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ClockworkPowerSourceComponent, AnchorStateChangedEvent>(OnAnchored);
+        SubscribeLocalEvent<ClockworkStructureComponent, AnchorStateChangedEvent>(OnStructureAnchored);
 
         SubscribeLocalEvent<ClockworkStructureComponent, ClockwinderInteractEvent>(OnClockwinder);
         SubscribeLocalEvent<ClockworkStructureComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
@@ -69,7 +69,7 @@ public sealed class ClockworkPowerSystem : EntitySystem
 
         // A clockwork power source must always sit on top of a vein to activate
         var xform = Transform(ent.Owner);
-        if (_area.GetArea(xform.Coordinates) is not { } area || !_powerVeinQuery.HasComp(area))
+        if (_area.GetArea(xform.Coordinates) is not { } area || !_powerVeinQuery.TryComp(area, out var vein))
         {
             Log.Debug("Not standing on vein");
             return;
@@ -82,7 +82,7 @@ public sealed class ClockworkPowerSystem : EntitySystem
                 return;
 
             var comp = EnsureComp<AutoRechargeComponent>(ent.Owner);
-            comp.RechargeDuration = ent.Comp.RechargeTime;
+            comp.RechargeDuration = ent.Comp.RechargeTime + vein.ReducedRechargeTime;
 
             ent.Comp.Active = true;
 
@@ -91,6 +91,35 @@ public sealed class ClockworkPowerSystem : EntitySystem
             Dirty(ent.Owner, comp);
             Dirty(ent);
         }
+    }
+
+    private void OnStructureAnchored(Entity<ClockworkStructureComponent> ent, ref AnchorStateChangedEvent args)
+    {
+        if (!args.Anchored && ent.Comp.Active)
+        {
+            ent.Comp.Active = false;
+            Dirty(ent);
+        } else if (args.Anchored && !ent.Comp.Active)
+        {
+            ent.Comp.Active = true;
+            Dirty(ent);
+        }
+
+        if (ent.Comp.ComponentsOnActivation is not { } components)
+            return;
+
+        if (_timing.ApplyingState)
+            return;
+
+        // Add components once we get activated
+        if (ent.Comp.Active)
+        {
+            EntityManager.AddComponents(ent.Owner, components);
+            return;
+        }
+
+        // Remove them once we get de-activated
+        EntityManager.RemoveComponents(ent.Owner, components);
     }
 
     private void OnClockwinder(Entity<ClockworkStructureComponent> ent, ref ClockwinderInteractEvent args)

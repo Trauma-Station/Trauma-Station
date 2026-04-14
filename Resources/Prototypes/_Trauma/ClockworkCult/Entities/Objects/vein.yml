@@ -1,7 +1,25 @@
 - type: entity
   id: PowerVeinArea
-  name: Power Vein
+  name: Neutral Power Vein
   description: A vein
   parent: BaseArea
   components:
   - type: PowerVein
+
+- type: entity
+  id: PowerVeinArea
+  name: Weak Power Vein
+  description: A vein
+  parent: BaseArea
+  components:
+  - type: PowerVein
+    reducedRechargeTime: 5 # Adds 5 extra seconds to the recharge time
+
+- type: entity
+  id: PowerVeinArea
+  name: Strong Power Vein
+  description: A vein
+  parent: BaseArea
+  components:
+  - type: PowerVein
+    reducedRechargeTime: -5 # Makes it run 5 seconds faster
