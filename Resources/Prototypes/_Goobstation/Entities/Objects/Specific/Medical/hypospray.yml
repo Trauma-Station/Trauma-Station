@@ -14,7 +14,7 @@
     insertedItemSlotID: item # thank you shitcoder that added this
     maxFillLevels: 1
     fillBaseName: cartridge
-    solution: cartridge
+    solutionName: cartridge
   - type: Appearance
   - type: SolutionContainerManager
     solutions:
