@@ -5,7 +5,6 @@ using Content.Medical.Common.Healing;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Armor;
 using Content.Shared.Body;
@@ -298,11 +297,6 @@ public partial class TraumaSystem
         if (!Resolve(target, ref woundable, false))
             return traumaList;
 
-
-        if (severity > 5 && woundInflicter.Comp.AllowedTraumas.Contains(TraumaType.NerveDamage) &&
-            RandomNerveDamageChance((target, woundable), woundInflicter))
-            traumaList.Add(TraumaType.NerveDamage);
-
         if (severity > 10 && woundInflicter.Comp.AllowedTraumas.Contains(TraumaType.BoneDamage) &&
             RandomBoneTraumaChance((target, woundable), woundInflicter))
             traumaList.Add(TraumaType.BoneDamage);
@@ -429,48 +423,13 @@ public partial class TraumaSystem
         return _random.Prob(Math.Clamp((float) chance, 0f, 1f));
     }
 
-    public bool RandomNerveDamageChance(
-        Entity<WoundableComponent> target,
-        Entity<TraumaInflicterComponent> woundInflicter)
-    {
-        if (_body.GetBody(target.Owner) is not {} body ||
-            _part.GetPartType(target) is not {} partType)
-            return false; // No entity to apply pain to
-
-        if (!TryComp<NerveComponent>(target, out var nerve))
-            return false;
-
-        if (nerve.PainFeels < 0.2)
-            return false;
-
-        var deduction = GetTraumaChanceDeduction(
-            woundInflicter,
-            body,
-            target,
-            Comp<WoundComponent>(woundInflicter).WoundSeverityPoint,
-            TraumaType.NerveDamage,
-            partType);
-
-        if (deduction == 1)
-            return false;
-        // literally dismemberment chance, but lower by default
-        var chance =
-            FixedPoint2.Clamp(
-                target.Comp.WoundableIntegrity / target.Comp.IntegrityCap / 20
-                - deduction + woundInflicter.Comp.TraumasChances[TraumaType.NerveDamage],
-                0,
-                1);
-
-        return _random.Prob((float) chance);
-    }
-
     public bool RandomOrganTraumaChance(
         Entity<WoundableComponent> target,
         Entity<TraumaInflicterComponent> woundInflicter)
     {
         if (_body.GetBody(target.Owner) is not {} body ||
             _part.GetPartType(target) is not {} partType)
-            return false; // No entity to apply pain to
+            return false; // No entity to apply traumas to
 
         var totalIntegrity = FixedPoint2.Zero;
         foreach (var organ in _part.GetPartOrgans(target.Owner).Values)
@@ -652,8 +611,6 @@ public partial class TraumaSystem
         if (!TryComp<BodyPartComponent>(target, out var part) || _body.GetBody(target.Owner) is not {} body)
             return;
 
-        _consciousness.TryGetNerveSystem(body, out var nerveSys);
-
         foreach (var trauma in traumas)
         {
             EntityUid? targetChosen = null;
@@ -680,10 +637,6 @@ public partial class TraumaSystem
                 case TraumaType.Dismemberment:
                     targetChosen = target.Comp.ParentWoundable;
                     break;
-
-                case TraumaType.NerveDamage:
-                    targetChosen = target;
-                    break;
             }
 
             if (targetChosen == null)
@@ -697,20 +650,6 @@ public partial class TraumaSystem
 
             switch (trauma)
             {
-                case TraumaType.BoneDamage:
-                    if (ApplyBoneTrauma(targetChosen.Value, target, inflicter, severity) && nerveSys is {} brain2)
-                    {
-                        _pain.TryAddPainModifier(
-                            brain2,
-                            target.Owner,
-                            "BoneDamage",
-                            severity / 1.4f,
-                            PainDamageTypes.TraumaticPain,
-                            brain2.Comp);
-                    }
-
-                    break;
-
                 case TraumaType.OrganDamage:
                     var traumaEnt = AddTrauma(targetChosen.Value, target, inflicter, TraumaType.OrganDamage, severity);
 
@@ -718,38 +657,6 @@ public partial class TraumaSystem
                         && !TryChangeOrganDamageModifier(targetChosen.Value, severity, traumaEnt, "WoundableDamage"))
                     {
                         TryCreateOrganDamageModifier(targetChosen.Value, severity, traumaEnt, "WoundableDamage");
-                    }
-
-                    break;
-
-                case TraumaType.NerveDamage:
-                    if (nerveSys is not {} brain)
-                        break;
-
-                    var time = TimeSpan.FromSeconds((float) severity * 2.4);
-
-                    // Fooling people into thinking they have no pain.
-                    // 10 (raw pain) * 1.4 (multiplier) = 14 (actual pain)
-                    // 1 - 0.28 = 0.72 (the fraction of pain the person feels)
-                    // 14 * 0.72 = 10.08 (the pain the player can actually see) ... Barely noticeable :3
-                    _pain.TryAddPainMultiplier(brain,
-                        "NerveDamage",
-                        1.4f,
-                        time: time);
-
-                    _pain.TryAddPainFeelsModifier(brain,
-                        "NerveDamage",
-                        target,
-                        -0.28f,
-                        time: time);
-                    foreach (var child in _wound.GetAllWoundableChildren(target))
-                    {
-                        // Funner! Very unlucky of you if your torso gets hit. Rest in pieces
-                        _pain.TryAddPainFeelsModifier(brain,
-                            "NerveDamage",
-                            child,
-                            -0.7f,
-                            time: time);
                     }
 
                     break;

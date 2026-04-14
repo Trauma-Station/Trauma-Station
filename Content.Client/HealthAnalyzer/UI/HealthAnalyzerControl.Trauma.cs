@@ -219,24 +219,6 @@ public sealed partial class HealthAnalyzerControl
                 });
             }
         }
-
-        /*foreach (var (woundablePain, pain) in body.NervePainFeels)
-        {
-            if (pain == 1.0
-                || !TryGetEntityName(woundablePain, out var woundableName)
-                || isPart
-                && woundablePain != state.Part)
-                continue;
-
-            var painString = pain > 1.0 ? "increased" : "decreased";
-            var locString = Loc.GetString($"condition-body-pain-{painString}", ("woundable", woundableName));
-
-            ConditionsListContainer.AddChild(new RichTextLabel
-            {
-                Text = locString,
-                Margin = new Thickness(0, 4),
-            });
-        }*/
     }
 
     public void PopulateOrgans(HealthAnalyzerOrgansState state)

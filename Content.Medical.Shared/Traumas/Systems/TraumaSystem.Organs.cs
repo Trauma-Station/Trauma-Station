@@ -4,7 +4,6 @@ using System.Linq;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.CCVar;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.StatusEffectNew;
@@ -19,15 +18,12 @@ public partial class TraumaSystem
 {
     [Dependency] private readonly StatusEffectsSystem _status = default!;
 
-    private const string OrganDamagePainIdentifier = "OrganDamage";
-
     private float _organSlowdownMul;
 
     public static readonly EntProtoId OrganSlowdownStatusEffect = "OrganSlowdownStatusEffect";
 
     private void InitOrgans()
     {
-        SubscribeLocalEvent<WoundableComponent, OrganIntegrityChangedEventOnWoundable>(OnOrganIntegrityOnWoundableChanged);
         SubscribeLocalEvent<InternalOrganComponent, OrganIntegrityChangedEvent>(OnOrganIntegrityChanged);
         SubscribeLocalEvent<WoundableComponent, OrganDamageSeverityChangedOnWoundable>(OnOrganSeverityChanged);
 
@@ -35,31 +31,6 @@ public partial class TraumaSystem
     }
 
     #region Event handling
-
-    private void OnOrganIntegrityOnWoundableChanged(Entity<WoundableComponent> bodyPart, ref OrganIntegrityChangedEventOnWoundable args)
-    {
-        if (_body.GetBody(bodyPart.Owner) is not {} body)
-            return;
-
-        if (!_consciousness.TryGetNerveSystem(body, out var nerveSys))
-            return;
-
-        var organs = _body.GetOrgans<InternalOrganComponent>(body);
-        var totalIntegrity = FixedPoint2.Zero;
-        var totalIntegrityCap = FixedPoint2.Zero;
-        foreach (var organ in organs)
-        {
-            totalIntegrity += organ.Comp.OrganIntegrity;
-            totalIntegrityCap += organ.Comp.IntegrityCap;
-        }
-
-        // Getting your organ turned into a blood mush inside you applies a LOT of internal pain, that can get you dead.
-        _pain.ChangePainModifier(
-            nerveSys.Value.AsNullable(),
-            bodyPart.Owner,
-            OrganDamagePainIdentifier,
-            (totalIntegrityCap - totalIntegrity) / 2);
-    }
 
     private void OnOrganIntegrityChanged(Entity<InternalOrganComponent> organ, ref OrganIntegrityChangedEvent args)
     {
@@ -89,25 +60,6 @@ public partial class TraumaSystem
 
         if (args.NewSeverity != OrganSeverity.Destroyed)
             return;
-
-        if (_consciousness.TryGetNerveSystem(body, out var nerveSys)
-            && !_mobState.IsDead(body))
-        {
-            var sex = Sex.Unsexed;
-            if (TryComp<HumanoidProfileComponent>(body, out var humanoid))
-                sex = humanoid.Sex;
-
-            var brain = nerveSys.Value;
-            _pain.PlayPainSoundWithCleanup(
-                body,
-                brain.Comp,
-                brain.Comp.OrganDestructionReflexSounds[sex],
-                AudioParams.Default.WithVolume(6f));
-
-            _stun.TryUpdateParalyzeDuration(body, brain.Comp.OrganDamageStunTime);
-            var slowdown = brain.Comp.OrganDamageStunTime * _organSlowdownMul;
-            _status.TryUpdateStatusEffectDuration(body, OrganSlowdownStatusEffect, slowdown);
-        }
 
         if (TryGetWoundableTrauma(bodyPart, out var traumas, TraumaType.OrganDamage, bodyPart))
         {

@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Shared.Consciousness;
-using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Alert;
 using Content.Shared.Body;
@@ -30,15 +28,14 @@ public sealed partial class TraumaSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
-    [Dependency] private readonly PainSystem _pain = default!;
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly AlertsSystem _alert = default!;
 
-    private string _brokenBonesAlertId = "BrokenBones";
+    private static readonly ProtoId<AlertPrototype> _brokenBonesAlertId = "BrokenBones";
+
     public override void Initialize()
     {
         base.Initialize();

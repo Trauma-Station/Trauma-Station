@@ -299,7 +299,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.65
@@ -336,7 +335,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.65
@@ -407,7 +405,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.45
@@ -444,7 +441,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.9 #Goob - Modsuit Rebalance start
@@ -584,7 +580,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -654,7 +649,6 @@
       OrganDamage: 0.5
       BoneDamage: 0.5
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.3 # Trauma, was 0.5
@@ -710,7 +704,6 @@
       OrganDamage: 0.5
       BoneDamage: 0.5
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.3 # Trauma, was 0.6
@@ -754,7 +747,6 @@
       OrganDamage: 0.6
       BoneDamage: 0.6
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.4
@@ -792,7 +784,6 @@
       OrganDamage: 1
       BoneDamage: 1
       VeinsDamage: 1
-      NerveDamage: 1
     modifiers:
       coefficients:
         Blunt: 0.2
@@ -836,7 +827,6 @@
       OrganDamage: 1
       BoneDamage: 1
       VeinsDamage: 1
-      NerveDamage: 1
     modifiers:
       coefficients:
         Blunt: 0.4
@@ -1124,7 +1114,6 @@
       OrganDamage: 1
       BoneDamage: 1
       VeinsDamage: 1
-      NerveDamage: 1
     modifiers:
       coefficients:
         Blunt: 0.15 # Best armor in the game - Yeah no shit.
@@ -1178,7 +1167,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -1204,7 +1192,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.9

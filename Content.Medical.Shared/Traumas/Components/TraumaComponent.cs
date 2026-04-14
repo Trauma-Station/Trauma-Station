@@ -17,10 +17,8 @@ public sealed partial class TraumaComponent : Component
     public EntityUid? HoldingWoundable;
 
     /// <summary>
-    /// Self-explanatory
     /// For OrganDamage - the organ
     /// For BoneDamage - the bone
-    /// For VeinsDamage and NerveDamage - the woundable
     /// For Dismemberment - the parent woundable, of the woundable that got delimbed
     /// </summary>
     [DataField]

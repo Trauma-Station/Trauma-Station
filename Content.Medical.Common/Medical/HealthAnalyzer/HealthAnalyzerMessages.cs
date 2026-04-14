@@ -18,14 +18,11 @@ public abstract class HealthAnalyzerScanState
 public sealed class HealthAnalyzerBodyState : HealthAnalyzerScanState
 {
     public readonly Dictionary<NetEntity, List<WoundableTraumaData>> Traumas;
-    public readonly Dictionary<NetEntity, FixedPoint2> NervePainFeels;
 
     public HealthAnalyzerBodyState(
-        Dictionary<NetEntity, List<WoundableTraumaData>> traumas,
-        Dictionary<NetEntity, FixedPoint2> nervePainFeels)
+        Dictionary<NetEntity, List<WoundableTraumaData>> traumas)
     {
         Traumas = traumas;
-        NervePainFeels = nervePainFeels;
     }
 }
 

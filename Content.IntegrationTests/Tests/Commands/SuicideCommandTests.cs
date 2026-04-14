@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Medical.Shared.Consciousness;
-// </Trauma>
 using System.Linq;
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Damage;
