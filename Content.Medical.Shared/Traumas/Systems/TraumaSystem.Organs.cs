@@ -6,7 +6,6 @@ using Content.Medical.Common.CCVar;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Popups;
@@ -16,18 +15,10 @@ namespace Content.Medical.Shared.Traumas;
 
 public partial class TraumaSystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-
-    private float _organSlowdownMul;
-
-    public static readonly EntProtoId OrganSlowdownStatusEffect = "OrganSlowdownStatusEffect";
-
     private void InitOrgans()
     {
         SubscribeLocalEvent<InternalOrganComponent, OrganIntegrityChangedEvent>(OnOrganIntegrityChanged);
         SubscribeLocalEvent<WoundableComponent, OrganDamageSeverityChangedOnWoundable>(OnOrganSeverityChanged);
-
-        Subs.CVar(_cfg, SurgeryCVars.OrganTraumaSlowdownTimeMultiplier, x => _organSlowdownMul = x, true);
     }
 
     #region Event handling

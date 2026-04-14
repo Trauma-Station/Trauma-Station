@@ -3,13 +3,11 @@
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Alert;
 using Content.Shared.Body;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
-using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -24,13 +22,11 @@ public sealed partial class TraumaSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly AlertsSystem _alert = default!;
 
