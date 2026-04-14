@@ -35,6 +35,4 @@
       whitelist: # TODO fix shuttles FTLing on planets and remove this whitelist
         components:
         - MiningShuttle
-  - !type:ModifyStatusEffect
-    effectProto: WeatherSchedulerAshStorm # Regular ash storms
-    time: null # permanent
+  # FIXME: engine is fucked

@@ -179,7 +179,7 @@
 - type: stationTrait
   id: RadiationStormfront
   group: Negative
-  chance: 0.4
+  chance: 0 # FIXME: engine is fucked
   name: "Radiation Stormfront"
   report: "A radioactive stormfront is passing through your station's system. Expect an increased likelihood of radiation storms passing over your station."
   effects:
