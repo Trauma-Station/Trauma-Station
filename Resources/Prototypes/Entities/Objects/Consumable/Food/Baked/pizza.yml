@@ -182,6 +182,8 @@
   id: FoodPizzaSliceBase
   abstract: true
   components:
+  - type: RotInto # Trauma - pizza rots into moldy pizza
+    entity: FoodPizzaMoldySlice
   - type: FlavorProfile
     flavors:
       - oily
@@ -682,6 +684,12 @@
   id: FoodPizzaMoldySlice
   description: Once a perfectly good slice of pizza pie, but now it lies here, rancid and bursting with spores.
   components:
+  # <Trauma>
+  - type: Perishable # pizza shouldn't take 20 minutes to turn into rot
+    rotAfter: 300
+  - type: RotInto # make sure moldy pizza doesn't rot into moldy pizza :godo:
+    entity: FoodRot
+  # </Trauma>
   - type: FlavorProfile
     flavors:
       - bitter
