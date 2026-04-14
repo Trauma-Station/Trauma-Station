@@ -143,21 +143,3 @@
   components:
   - type: Sprite
     state: qm_office
-
-# AI
-
-- type: entity
-  parent: BaseAreaCommand
-  id: AreaAi
-  name: AI
-  components:
-  - type: Sprite
-    state: ai
-
-- type: entity
-  parent: BaseAreaCommand
-  id: AreaAiUpload
-  name: AI upload
-  components:
-  - type: Sprite
-    state: ai_upload

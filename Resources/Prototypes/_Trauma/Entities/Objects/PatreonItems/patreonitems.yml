@@ -71,6 +71,9 @@
     wideAnimationRotation: 180
     soundHit:
       path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+  - type: GibThisGuy
+    ocNames:
+    - Weax
 
 - type: entity
   parent: ClothingUniformBase

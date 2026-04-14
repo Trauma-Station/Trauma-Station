@@ -156,6 +156,10 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/boxingpunch3.ogg
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectAttackSpeed
+    type: Add
+    time: 2
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 8
@@ -176,6 +180,10 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/boxingpunch3.ogg
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectAttackSpeed
+    type: Add
+    time: 3
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 15
@@ -196,6 +204,10 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/boxingpunch3.ogg
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectAttackSpeed
+    type: Add
+    time: 4
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 17
@@ -260,7 +272,7 @@
   levelRequired: 80
 
 - type: combo
-  id: ArmstrongHorseStanceSimple
+  id: ArmstrongHorseStanceSimple # TODO: make horse stance self targetted
   attacks:
   - Disarm
   - Disarm
@@ -304,7 +316,7 @@
   - Harm
   - Disarm
   - Grab
-  userEffects: # TODO: make headbutt flash your screen
+  userEffects: # TODO: make headbutt flash your screen or disorient you in one way or another
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
   - !type:HealthChange

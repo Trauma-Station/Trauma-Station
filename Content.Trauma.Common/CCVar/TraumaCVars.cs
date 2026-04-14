@@ -15,6 +15,12 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<bool> DisablePathfinding =
         CVarDef.Create("trauma.disable_pathfinding", false, CVar.SERVER);
 
+    /// <summary>
+    /// Disables DogVision which sandevistan uses.
+    /// </summary>
+    public static readonly CVarDef<bool> NoVisionFilters =
+        CVarDef.Create("accessibility.no_vision_filters", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     #endregion
 
     #region AudioMuffle
@@ -95,6 +101,13 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<float> ChatHighlightVolume =
         CVarDef.Create("chat.highlight_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
+    /// <summary>
+    /// You get instantly banned if you say something matching this regex in any chat channel.
+    /// The regex is case insensitive.
+    /// </summary>
+    public static readonly CVarDef<string> GamerWordsRegex =
+        CVarDef.Create("chat.gamer_words_regex", string.Empty, CVar.SERVER);
+
     #endregion
 
     #region Webhooks
@@ -140,6 +153,34 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<int> DecalDespawnLimit =
         CVarDef.Create("trauma.decal_despawn_limit", 128, CVar.SERVER | CVar.REPLICATED);
+
+    #endregion
+
+    #region Station Traits
+
+    /// <summary>
+    /// Whether to enable station traits.
+    /// Used to prevent tests failing for spawned gamerules.
+    /// </summary>
+    public static readonly CVarDef<bool> StationTraitsEnabled =
+        CVarDef.Create("trauma.station_traits_enabled", true, CVar.SERVER);
+
+    /// <summary>
+    /// The offset for in-game date (the date will be server date + this amount of years).
+    /// Displayed in the station report and PDAs.
+    /// </summary>
+    public static readonly CVarDef<int> YearOffset =
+        CVarDef.Create("game.current_year_offset", 739, CVar.SERVERONLY);
+
+    #endregion
+
+    #region Antag Summoner
+
+    /// <summary>
+    /// Minimum number of players for antag summoner to work, to prevent farming money when nobody is even going to take the ghost roles.
+    /// </summary>
+    public static readonly CVarDef<int> AntagSummonerMinPlayers =
+        CVarDef.Create("trauma.antag_summoner_min_players", 30, CVar.SERVER);
 
     #endregion
 }

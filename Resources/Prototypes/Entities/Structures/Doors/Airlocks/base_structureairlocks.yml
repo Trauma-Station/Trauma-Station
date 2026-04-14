@@ -159,6 +159,23 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalSlam
+    # <Trauma>
+    - trigger: !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:ChangeConstructionNodeBehavior
+        node: assembly
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    # </Trauma>
   - type: Construction
     graph: Airlock
     node: airlock

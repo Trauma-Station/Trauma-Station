@@ -396,13 +396,15 @@ public sealed partial class EventHereticCleave : WorldTargetActionEvent
     {
         DamageDict =
         {
-            {"Heat", 20f},
-            {"Bloodloss", 10f},
+            {"Blunt", 4f},
+            {"Slash", 4f},
+            {"Piercing", 4f},
+            {"Bloodloss", 3f},
         },
     };
 
     [DataField]
-    public FixedPoint2 BloodModifyAmount = -50f;
+    public FixedPoint2 BloodModifyAmount = 50f;
 
     [DataField]
     public EntProtoId Effect = "EffectCleave";
@@ -449,14 +451,8 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
     [DataField]
     public EntProtoId RealignmentStatus = "RealignmentStatusEffect";
 
-    [DataField]
-    public EntProtoId StunStatus = "RealignmentStatusEffect";
-
-    [DataField]
-    public EntProtoId SleepStatus = "StatusEffectForcedSleeping";
-
-    [DataField]
-    public EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+    [DataField(required: true)]
+    public List<EntProtoId> RemovedEffects = new();
 
     [DataField]
     public TimeSpan EffectTime = TimeSpan.FromSeconds(10);

@@ -60,6 +60,7 @@ namespace Content.IntegrationTests.Tests
                 .Where(p => !p.Components.ContainsKey("GameRule")) // are you stupid why would you do this
                 .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // randomly spawns things...
                 .Where(p => !p.Components.ContainsKey("Area"))
+                .Where(p => !p.Components.ContainsKey("StatusEffect")) // nonsense to just spawn it 4 no raisin, use an actual test
                 // </Trauma>
                 .Select(p => p.ID)
                 .ToList();
@@ -183,6 +184,7 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("Mutation")) // waste of time, mutation test exists
                     .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // spawns things
                     .Where(p => !p.Components.ContainsKey("Area")) // deletes itself if spawned in space
+                    .Where(p => !p.Components.ContainsKey("StatusEffect")) // doesn't make sense to spawn not attached to anything
                     // </Trauma>
                     .Select(p => p.ID)
                     .ToList();
@@ -382,6 +384,7 @@ namespace Content.IntegrationTests.Tests
                 "Anomaly", // they can spawn spark effects
                 "LabyrinthPortal", // it randomly spawns things
                 "Area", // map tests spawn ~every area anyway, this fails from trying to spawn an area in space
+                "StatusEffect", // doesnt make sense to spawn unattached, fails test with weather schedulers
                 // </Trauma>
             };
 

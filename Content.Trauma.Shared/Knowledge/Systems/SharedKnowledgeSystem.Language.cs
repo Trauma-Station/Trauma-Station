@@ -146,6 +146,8 @@ public abstract partial class SharedKnowledgeSystem
         if (GetContainer(ent.Owner) is not { } brain)
             return;
 
+        args.Handled = true;
+
         // We add the intrinsically known languages first so other systems can manipulate them easily
         var lang = args.Language;
         EnsureKnowledge(brain, LanguageUnit(args.Language), 26);
@@ -159,6 +161,8 @@ public abstract partial class SharedKnowledgeSystem
         if (GetContainer(ent.Owner) is not { } brain ||
             GetKnowledge(brain, id) is not { } unit)
             return;
+
+        args.Handled = true;
 
         var langComp = _langQuery.Comp(unit);
         if (args.RemoveSpoken && args.RemoveUnderstood)

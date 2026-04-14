@@ -7,6 +7,7 @@ namespace Content.Trauma.Shared.Timing;
 /// <summary>
 /// A ringbuffer that stores items in order of a popping timespan.
 /// Trying to add more items than the buffer supports will pop the oldest one.
+/// If used in an entity system it should be <c>Reset</c> when the round restarts to avoid problems.
 /// </summary>
 public sealed class TimedRingBuffer<T>
 {
@@ -126,10 +127,18 @@ public sealed class TimedRingBuffer<T>
     /// </summary>
     public void Reset(int capacity)
     {
-        _offset = 0;
-        Count = 0;
+        Reset();
         if (capacity != Capacity)
             _items = new (TimeSpan, T)[capacity];
+    }
+
+    /// <summary>
+    /// Clear all items without changing the backing array's capacity.
+    /// </summary>
+    public void Reset()
+    {
+        _offset = 0;
+        Count = 0;
     }
 
     // index of the oldest item

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.Cargo;
 using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client.Cargo.UI;
@@ -51,5 +52,15 @@ public sealed partial class CargoConsoleMenu
 
         NoDestinations.Visible = dests.Count == 0;
         Destinations.Visible = dests.Count > 0;
+    }
+
+    public int ModifyCost(int cost)
+    {
+        if (_station is not {} station)
+            return cost;
+
+        var ev = new ModifyCargoPriceEvent(cost);
+        _entityManager.EventBus.RaiseLocalEvent(station, ref ev);
+        return ev.Price;
     }
 }

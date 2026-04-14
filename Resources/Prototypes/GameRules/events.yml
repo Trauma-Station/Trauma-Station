@@ -579,7 +579,6 @@
       playerRatio: 10
       blacklist:
         components:
-        - BibleUser
         - ZombieImmune
         - AntagImmune
       briefing:

@@ -16,7 +16,7 @@ public abstract class SharedAntagSummonerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedCargoSystem _cargo = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private readonly SharedStationSystem _station = default!;
 
     public override void Initialize()
@@ -41,7 +41,7 @@ public abstract class SharedAntagSummonerSystem : EntitySystem
         var user = args.Actor;
         if (!_access.IsAllowed(user, ent.Owner))
         {
-            _popup.PopupClient("Access denied!", ent, user);
+            Popup.PopupClient("Access denied!", ent, user);
             return;
         }
 
@@ -49,28 +49,30 @@ public abstract class SharedAntagSummonerSystem : EntitySystem
         if (now < ent.Comp.NextSummon)
         {
             var minutes = (int) Math.Ceiling((ent.Comp.NextSummon - now).TotalMinutes);
-            _popup.PopupClient($"Next security grant available in {minutes} minutes!", ent, user, PopupType.SmallCaution);
+            Popup.PopupClient($"Next security grant available in {minutes} minutes!", ent, user, PopupType.SmallCaution);
             return;
         }
 
         if (_station.GetOwningStation(ent.Owner) is not {} station)
         {
-            _popup.PopupClient("You need to use it on a station!", ent, user, PopupType.SmallCaution);
+            Popup.PopupClient("You need to use it on a station!", ent, user, PopupType.SmallCaution);
             return;
         }
+
+        if (!TrySummonAntag(ent, user))
+            return;
 
         ent.Comp.NextSummon = now + ent.Comp.Cooldown;
         Dirty(ent);
 
         _adminLog.Add(LogType.InteractHand, LogImpact.High, $"{ToPrettyString(user):user} summoned an antag with {ToPrettyString(ent):used}!");
-        _popup.PopupClient("You pressed the red button...", ent, user, PopupType.LargeCaution);
-
-        SummonAntag(ent);
+        Popup.PopupEntity("You pressed the red button...", ent, user, PopupType.LargeCaution);
         _cargo.TryAdjustBankAccount(station, ent.Comp.Account, ent.Comp.Reward);
     }
 
-    protected virtual void SummonAntag(Entity<AntagSummonerComponent> ent)
+    protected virtual bool TrySummonAntag(Entity<AntagSummonerComponent> ent, EntityUid user)
     {
         // not predicted lol
+        return false;
     }
 }

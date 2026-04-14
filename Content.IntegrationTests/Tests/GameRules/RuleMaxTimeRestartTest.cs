@@ -44,9 +44,10 @@ namespace Content.IntegrationTests.Tests.GameRules
                 sGameTicker.StartRound();
             });
 
-            // MisandryBox/JobObjectiveRule - either this or fucking every preset.yml.
-            Assert.That(server.EntMan.Count<GameRuleComponent>(), Is.EqualTo(2));
-            Assert.That(server.EntMan.Count<ActiveGameRuleComponent>(), Is.EqualTo(2));
+            // <Trauma> - greater than, not equal since some systems start extra gamerules
+            Assert.That(server.EntMan.Count<GameRuleComponent>(), Is.GreaterThan(1));
+            Assert.That(server.EntMan.Count<ActiveGameRuleComponent>(), Is.GreaterThan(1));
+            // </Trauma>
 
             await server.WaitAssertion(() =>
             {
