@@ -36,7 +36,7 @@ public sealed class DecalDespawnSystem : EntitySystem
         Subs.CVar(_cfg, TraumaCVars.DecalDespawnLimit, x => _limit = x, true);
         Subs.CVar(_cfg, TraumaCVars.DecalDespawnTime, UpdateDespawnTime, true);
 
-        _buffer = new(_limit!, _despawnTime, _timing);
+        _buffer = new(_limit, _despawnTime, _timing);
     }
 
     public override void Update(float frameTime)
