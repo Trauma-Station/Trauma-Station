@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Medical.Common.Body;
+using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Goobstation.Common.Body.Components;
 using Content.Trauma.Common.MartialArts;
@@ -370,7 +371,7 @@ public sealed class RespiratorSystem : EntitySystem
             _adminLogger.Add(LogType.Asphyxiation, $"{ToPrettyString(ent):entity} stopped suffocating");
 
         _damageableSys.ChangeDamage(ent.Owner, ent.Comp.DamageRecovery,
-            splitDamage: SplitEnsureAllDamagedAndOrganic, targetPart: TargetBodyPart.All, ignoreBlockers: true); // Trauma
+            splitDamage: SplitDamageBehavior.SplitEnsureAllDamagedAndOrganic, targetPart: TargetBodyPart.All, ignoreBlockers: true); // Trauma
 
         var ev = new StopSuffocatingEvent();
         RaiseLocalEvent(ent, ref ev);
