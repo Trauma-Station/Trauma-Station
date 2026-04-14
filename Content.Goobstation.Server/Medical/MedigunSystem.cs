@@ -33,7 +33,6 @@ public sealed class MedigunSystem : SharedMedigunSystem
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly AlertsSystem _alert = default!;
     [Dependency] private readonly BatterySystem _battery = default!;
     [Dependency] private readonly SharedBloodstreamSystem _bloodstreamSystem = default!;
