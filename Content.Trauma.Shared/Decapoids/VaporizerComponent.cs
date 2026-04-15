@@ -1,11 +1,9 @@
 using Content.Shared.Atmos;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-
-namespace Content.Server._Impstation.Decapoids.Components;
+namespace Content.Trauma.Shared.Decapoids;
 
 [RegisterComponent]
 [AutoGenerateComponentPause]
@@ -21,17 +19,17 @@ public sealed partial class VaporizerComponent : Component
     public Gas OutputGas = Gas.WaterVapor;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 MaxPressure = Atmospherics.OneAtmosphere * 10;
+    public float MaxPressure = Atmospherics.OneAtmosphere * 10;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float ReagentToMoles = 0.07f;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 ReagentPerSecond = 0.09;
+    public float ReagentPerSecond = 0.09f;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan ProcessDelay = TimeSpan.FromMilliseconds(200);
+    public TimeSpan ProcessDelay = TimeSpan.FromSeconds(1);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)),AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextProcess = new();
 }

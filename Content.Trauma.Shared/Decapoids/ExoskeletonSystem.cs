@@ -9,7 +9,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Standing;
 using Robust.Shared.Prototypes;
 
-namespace Content.Trauma.Shared.Medical.Exoskeleton;
+namespace Content.Trauma.Shared.Decapoids;
 
 /// <summary>
 /// Prevents the entity from being injected with syringes altogether.

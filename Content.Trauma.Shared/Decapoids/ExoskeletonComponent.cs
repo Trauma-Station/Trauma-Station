@@ -2,7 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Trauma.Shared.Medical.Exoskeleton;
+namespace Content.Trauma.Shared.Decapoids;
 
 /// <summary>
 /// Prevents the entity from being injected with syringes altogether.

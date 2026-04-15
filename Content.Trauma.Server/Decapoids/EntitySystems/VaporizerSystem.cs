@@ -5,7 +5,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Timing;
 
-namespace Content.Server._Impstation.Decapoids.EntitySystems;
+namespace Content.Trauma.Server.Decapoids.EntitySystems;
 
 public sealed partial class VaporizerSystem : EntitySystem
 {
