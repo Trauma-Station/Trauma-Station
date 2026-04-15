@@ -269,7 +269,7 @@
 
 - type: entity
   id: BulletBlueLaserMedium
-  parent: BaseLaserLongarmBullet
+  parent: RevolverLaser
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

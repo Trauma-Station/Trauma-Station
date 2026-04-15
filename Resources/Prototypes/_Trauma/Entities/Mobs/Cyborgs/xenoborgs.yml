@@ -1,3 +1,51 @@
+# T1 Chassis Types
+- type: entity
+  parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
+  id: XenoborgChameleon
+  name: chameleon xenoborg
+  suffix: with brain
+  description: A man-machine hybrid that aims to replicate itself. They love extracting brains to insert into fresh Xenoborg chassis to grow their army. This one has a holographic projector on the top of its head.
+  components:
+  - type: BorgTransponder
+    name: chameleon xenoborg
+    sprite:
+      sprite: _Trauma/Mobs/Silicon/Xenoborgs/chameleon.rsi
+      state: chameleon
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/Xenoborgs/chameleon.rsi
+    layers:
+      - state: chameleon
+      - state: chameleon_e
+        map: ["enum.BorgVisualLayers.Light"]
+        shader: unshaded
+        visible: false
+      - state: chameleon_l
+        shader: unshaded
+        map: ["light"]
+        visible: false
+  - type: MovementAlwaysTouching # it flies in space with sheer will.
+  - type: BorgChassis
+    maxModules: 4
+    hasMindState: chameleon_e
+    noMindState: chameleon_e_r
+    moduleWhitelist:
+      tags:
+      - XenoborgModuleGeneric
+      - XenoborgModuleRocketeer
+  - type: ContainerFill
+    containers:
+      borg_brain:
+      - MMIFilled
+      borg_module:
+      - XenoborgModuleBasic
+      - XenoborgModuleTool
+      - XenoborgModuleRocketeer
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+
 # T2 Chassis types
 
 - type: entity
