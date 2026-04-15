@@ -3,7 +3,6 @@
 using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using Content.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Body;

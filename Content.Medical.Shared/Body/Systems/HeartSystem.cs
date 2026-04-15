@@ -3,7 +3,6 @@
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.DelayedDeath;
 using Content.Shared.Body;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Body;

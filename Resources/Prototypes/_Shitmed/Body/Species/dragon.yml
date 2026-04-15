@@ -43,6 +43,7 @@
     markingData:
       group: None
   - type: Woundable
+    boneEntity: null # cant exactly get bone surgery as a dragon
     integrity: 500
     integrityCap: 500
     thresholds:

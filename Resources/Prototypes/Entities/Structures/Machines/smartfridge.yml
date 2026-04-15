@@ -58,6 +58,8 @@
       - Bottle
       - Syringe
       - ChemDispensable
+      - CigPack # Goob
+      - Cigarette # Goob
   - type: ActivatableUI
     key: enum.SmartFridgeUiKey.Key
   - type: ActivatableUIRequiresPower

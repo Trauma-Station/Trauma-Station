@@ -1,8 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons;
-using Content.Goobstation.Common.Weapons.MeleeDash;
-using Content.Shared._White.Blink;
-using Content.Shared.Wieldable.Components;
+using Content.Trauma.Common.Weapons;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -156,25 +154,11 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
                 return;
             }
 
-            // Goobstation start; TODO: put this more in-line with new structure
-            // Blink, WD edit
-            if (TryComp(weaponUid, out BlinkComponent? blink) && blink.IsActive)
-            {
-                var direction = GetDirection();
-                if (direction != Vector2.Zero)
-                    RaisePredictiveEvent(new BlinkEvent(GetNetEntity(weaponUid), direction));
+            // <Trauma>
+            var ev = new PreHeavyAttackEvent(GetDirection());
+            RaiseLocalEvent(weaponUid, ev);
+            if (ev.Handled)
                 return;
-            }
-            // WD edit end
-
-            // Dash
-            if (TryComp(weaponUid, out MeleeDashComponent? dash))
-            {
-                var direction = GetDirection();
-                if (direction != Vector2.Zero)
-                    RaisePredictiveEvent(new MeleeDashEvent(GetNetEntity(weaponUid), direction));
-                return;
-            }
 
             // Helper func
             Vector2 GetDirection()
@@ -190,7 +174,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
                 var userPos = TransformSystem.GetWorldPosition(userXform);
                 return targetMap.Position - userPos;
             }
-            // Goobstation end
+            // </Trauma>
 
             ClientHeavyAttack(entity, coordinates, weaponUid, weapon);
             return;

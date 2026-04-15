@@ -12,7 +12,6 @@ using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 

@@ -78,7 +78,7 @@
 #Longswords
 - type: entity
   name: captain's sabre
-  parent: [ BaseSword, BaseCommandContraband ]
+  parent: [ KnifeDurabilityStrong, BaseSword, BaseCommandContraband ] # Trauma - durability
   id: CaptainSabre
   description: A ceremonial weapon belonging to the captain of the station.
   components:
@@ -97,8 +97,6 @@
     damage:
       types:
         Slash: 19 #cmon, it has to be at least BETTER than the rest. # Goob edit
-      woundSeverityMultipliers:
-        Slash: 3
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -240,7 +238,7 @@
 #Other/Weird
 - type: entity
   name: throngler
-  parent: [ BaseSword, BaseMajorContraband, UnbeakableDurability ]
+  parent: [ UnbreakableDurability, BaseSword, BaseMajorContraband ] # Trauma - durability
   id: Throngler
   description: If Security dares take it from you, just remind them that they are indeed mortal.
   components:

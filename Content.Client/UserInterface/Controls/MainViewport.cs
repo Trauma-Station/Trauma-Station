@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 deathride58 <deathride58@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Content.Client.Viewport;
 using Content.Shared.CCVar;
@@ -129,7 +118,6 @@ namespace Content.Client.UserInterface.Controls
             // Calculate if the viewport, when rendered at an integer scale,
             // is close enough to the control size to enable "snapping" to NN,
             // potentially cutting a tiny bit off/leaving a margin.
-            //
             // Idea here is that if you maximize the window at 1080p or 1440p
             // we are close enough to an integer scale (2x and 3x resp) that we should "snap" to it.
 

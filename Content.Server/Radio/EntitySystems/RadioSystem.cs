@@ -2,8 +2,8 @@
 using Content.Goobstation.Shared.Communications;
 using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Goobstation.Shared.Radio;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.Language.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.StatusIcon;
@@ -36,7 +36,7 @@ public sealed partial class RadioSystem : EntitySystem // Trauma - made partial
 {
     // <Trauma>
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private readonly CommonLanguageSystem _language = default!;
     [Dependency] private readonly RadioJobIconSystem _radioIcon = default!;
     // </Trauma>
     [Dependency] private readonly INetManager _netMan = default!;

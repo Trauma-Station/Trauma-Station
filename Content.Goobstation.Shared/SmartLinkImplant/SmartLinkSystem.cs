@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
-using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Body;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Timing;

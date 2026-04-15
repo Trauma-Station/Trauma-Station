@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityTable.EntitySelectors;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Server.Mobs;
 

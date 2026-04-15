@@ -13,7 +13,6 @@
 - type: npcFaction
   id: Balloon
   # Balloons can't attack
-  # <Trauma>
   hostile:
   - Insurgent
 

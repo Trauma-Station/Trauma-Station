@@ -1,9 +1,8 @@
 // <Trauma>
 using Content.Goobstation.Common.Atmos;
 using Content.Medical.Common.Targeting;
-using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._Goobstation.Wizard.Spellblade;
 using Content.Shared.Atmos.Components;
+using Content.Trauma.Common.Wizard;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
@@ -22,12 +21,14 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed class BarotraumaSystem : EntitySystem
     {
+        // <Trauma>
+        [Dependency] private readonly CommonSpellbladeSystem _spellblade = default!; // Goobstation
+        // </Trauma>
         [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private readonly DamageableSystem _damageableSystem = default!;
         [Dependency] private readonly AlertsSystem _alertsSystem = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger= default!;
         [Dependency] private readonly InventorySystem _inventorySystem = default!;
-        [Dependency] private readonly SpellbladeSystem _spellblade = default!; // Goobstation
         private const float UpdateTimer = 1f;
         private float _timer;
 
@@ -286,7 +287,7 @@ namespace Content.Server.Atmos.EntitySystems
 
                     _alertsSystem.ShowAlert(uid, barotrauma.LowPressureAlert, 2);
                 }
-                else if (pressure >= Atmospherics.HazardHighPressure && !_spellblade.IsHoldingItemWithComponent<FireSpellbladeEnchantmentComponent>(uid)) // Goob edit
+                else if (pressure >= Atmospherics.HazardHighPressure && !_spellblade.IsHoldingItemWithFireSpellbladeEnchantmentComponent(uid)) // Goob edit
                 {
                     var damageScale = MathF.Min(((pressure / Atmospherics.HazardHighPressure) - 1) * Atmospherics.PressureDamageCoefficient, Atmospherics.MaxHighPressureDamage);
 

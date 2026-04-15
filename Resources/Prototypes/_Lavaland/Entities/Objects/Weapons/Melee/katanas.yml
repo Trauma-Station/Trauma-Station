@@ -6,7 +6,7 @@
 
 - type: entity
   name: base katana
-  parent: [BaseSword, KnifeDurabilityStrong]
+  parent: [KnifeDurabilityStrong, BaseSword]
   id: LavalandBaseKatana
   abstract: true
   components:

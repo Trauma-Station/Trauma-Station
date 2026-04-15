@@ -12,10 +12,7 @@ using Content.Shared.Power.EntitySystems;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Trauma.Shared.Genetics.Tools;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Text;
 
@@ -38,18 +35,13 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly EntityQuery<MaterialStorageComponent> _materialQuery = default!;
 
     private StringBuilder _builder = new();
-
-    private EntityQuery<GeneticsConsoleComponent> _query;
-    private EntityQuery<MaterialStorageComponent> _materialQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<GeneticsConsoleComponent>();
-        _materialQuery = GetEntityQuery<MaterialStorageComponent>();
 
         SubscribeLocalEvent<GeneticsConsoleComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<GeneticsConsoleComponent, GetMaterialWhitelistEvent>(OnGetMaterialWhitelist);

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
-using Content.Client._RMC14.LinkAccount;
+using Content.Client.LinkAccount;
 using Content.Shared.GameTicking;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.CCVar;
@@ -11,7 +11,6 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.RoundEndCredits;

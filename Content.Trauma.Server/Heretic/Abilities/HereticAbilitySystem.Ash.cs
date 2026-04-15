@@ -17,6 +17,7 @@ public sealed partial class HereticAbilitySystem
 {
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly TransformSystem _xform = default!;
+    [Dependency] private readonly EntityQuery<FlammableComponent> _flamQuery = default!;
 
     protected override void SubscribeAsh()
     {
@@ -74,13 +75,12 @@ public sealed partial class HereticAbilitySystem
         var lookup = GetNearbyPeople(args.Performer, args.Range, heretic?.CurrentPath ?? HereticPath.Ash);
         var toHeal = 0f;
 
-        var flamQuery = GetEntityQuery<FlammableComponent>();
         foreach (var (look, mobstate) in lookup)
         {
             if (mobstate.CurrentState == MobState.Dead)
                 continue;
 
-            if (!flamQuery.TryComp(look, out var flam) || !flam.OnFire)
+            if (!_flamQuery.TryComp(look, out var flam) || !flam.OnFire)
                 continue;
 
             if (mobstate.CurrentState == MobState.Critical)

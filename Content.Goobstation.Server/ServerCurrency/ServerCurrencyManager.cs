@@ -5,7 +5,6 @@ using Content.Goobstation.Common.ServerCurrency;
 using Content.Server.Database;
 using Robust.Server.Player;
 using Robust.Shared.Asynchronous;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Server.ServerCurrency;
 

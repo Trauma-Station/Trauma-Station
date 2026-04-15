@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Medical.Common.Targeting;
-using Content.Shared._Goobstation.Wizard.SanguineStrike;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -13,7 +12,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
-using Robust.Shared.Network;
+using Content.Trauma.Shared.Wizard.SanguineStrike;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Crucible.Systems;

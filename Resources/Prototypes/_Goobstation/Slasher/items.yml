@@ -1,6 +1,6 @@
 - type: entity
   name: machete
-  parent: [ BaseSword, BaseMajorContraband, KnifeDurabilitySharpenOnly]
+  parent: [KnifeDurabilitySharpenOnly, BaseSword, BaseMajorContraband]
   id: SlasherMachete
   description: A large, vicious looking blade.
   components:

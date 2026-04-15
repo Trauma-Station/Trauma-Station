@@ -6,7 +6,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.SetSelector;
 

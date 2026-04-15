@@ -1,21 +1,26 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Shared.Wounds;
 using Content.Server.Polymorph.Components;
 using Content.Shared.Actions;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
+using Content.Shared.Damage.Components;
 using Content.Shared.Ghost;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
+    [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+
+    private readonly List<EntityUid> _bloodStealTargets = new();
+    private readonly HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();
+
     protected override void SubscribeSide()
     {
         base.SubscribeSide();
@@ -51,9 +56,9 @@ public sealed partial class HereticAbilitySystem
     private void OnMirrorJaunt(EventMirrorJaunt args)
     {
         var uid = args.Performer;
-
-        if (Lookup.GetEntitiesInRange<ReflectiveSurfaceComponent>(Transform(uid).Coordinates, args.LookupRange).Count ==
-            0)
+        var coords = Transform(uid).Coordinates;
+        Lookup.GetEntitiesInRange(coords, args.LookupRange, _mirrors);
+        if (_mirrors.Count == 0)
         {
             Popup.PopupEntity(Loc.GetString("heretic-ability-fail-mirror-jaunt-no-mirrors"), uid, uid);
             return;
@@ -110,28 +115,39 @@ public sealed partial class HereticAbilitySystem
 
         Spawn(args.Effect, args.Target);
 
-        var bloodQuery = GetEntityQuery<BloodstreamComponent>();
-
         var hasTargets = false;
 
-        var targets = Lookup.GetEntitiesInRange<MobStateComponent>(args.Target, args.Range, LookupFlags.Dynamic);
-        foreach (var (target, _) in targets)
+        TryComp(args.Performer, out DamageableComponent? damageable);
+
+        _bloodStealTargets.Clear();
+        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, args.Target))
         {
             if (target == args.Performer)
                 continue;
 
             hasTargets = true;
 
-            _dmg.TryChangeDamage(target, args.Damage, true, origin: args.Performer);
+            var dmg = _dmg.ChangeDamage(target, args.Damage, true, origin: args.Performer);
+            if (damageable != null)
+                _lifesteal.LifeSteal((args.Performer, damageable), dmg.GetTotal());
 
-            if (!bloodQuery.TryComp(target, out var blood))
+            if (!_bloodQuery.TryComp(target, out var blood))
                 continue;
 
-            _blood.TryModifyBloodLevel((target, blood), args.BloodModifyAmount);
             _blood.TryModifyBleedAmount((target, blood), blood.MaxBleedAmount);
+            _bloodStealTargets.Add(target);
         }
 
-        if (hasTargets)
-            _aud.PlayPvs(args.Sound, args.Target);
+        _lifesteal.BloodSteal(args.Performer, _bloodStealTargets, args.BloodModifyAmount, null);
+
+        if (!hasTargets)
+            return;
+
+        foreach (var (_, woundable) in _body.GetOrgans<WoundableComponent>(args.Performer))
+        {
+            _container.EmptyContainer(woundable.Wounds);
+        }
+
+        _aud.PlayPvs(args.Sound, args.Target);
     }
 }

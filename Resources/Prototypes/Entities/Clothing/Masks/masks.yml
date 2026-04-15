@@ -417,6 +417,7 @@
     - HamsterWearable
     - WhitelistChameleon
     - IPCMaskWearable # EE - IPCs
+    - MimeMask # Trauma
   - type: HideLayerClothing
     slots:
     - Snout

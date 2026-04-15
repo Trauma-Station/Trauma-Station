@@ -5,9 +5,8 @@ using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Fluids;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
-namespace Content.Server._Goobstation.Heretic.Effects;
+namespace Content.Goobstation.Shared.Heretic.Effects;
 
 /// <summary>
 /// Spills an amount of the target's blood onto the floor in a puddle.

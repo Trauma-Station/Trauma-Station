@@ -14,7 +14,7 @@ ghost-role-information-reinforcement-chemist-name = Station Reinforcement (Chemi
 ghost-role-information-reinforcement-cargo-name = Station Reinforcement (Cargo)
 ghost-role-information-reinforcement-salv-name = Station Reinforcement (Salvage)
 
-ghost-role-information-reinforcement-description = You're a reinforcement sent to the nanotrasen station, transit to the station takes three minutes.
+ghost-role-information-reinforcement-description = You're a reinforcement sent to a nanotrasen station.
 ghost-role-information-DClass-description = The science team wants to use you for its experiments, comply or risk death.
 
 ghost-role-information-facehugger-name = facehugger
@@ -35,3 +35,10 @@ ghost-role-information-animal-rules = You are an [color={role-type-animal-color}
                                          You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
                                          You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
                                          You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
+
+
+ghost-role-information-dwingle-name = Dwingle
+ghost-role-information-dwingle-description = Dwingle all over the place.
+
+ghost-role-information-disgustingbackpack-name = Evil backpack
+ghost-role-information-disgustingbackpack-description = Drive your owner completely insane and make him hurt people.

@@ -1,0 +1,26 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Title="security funding booster"
+        SetSize="550 400">
+    <BoxContainer Orientation="Vertical" Align="Center">
+        <BoxContainer VerticalExpand="True"/>
+
+        <BoxContainer Margin="20">
+            <RichTextLabel Text="NanoTrasen's trusted partners in the defense sector are offering grants to security. Should all threats to a station be eliminated, you may use this to receive an immediate cash reward!"/>
+        </BoxContainer>
+        <Label Name="RewardLabel" Align="Center"/>
+
+        <controls:StripeBack MaxWidth="200">
+            <controls:ConfirmButton Name="SummonButton" Text="Receive Grant!" Margin="4 8" MaxWidth="150"/>
+        </controls:StripeBack>
+
+        <BoxContainer VerticalExpand="True"/>
+
+        <Label Text="Note: NanoTrasen and trusted third parties are not responsible" Align="Center"/>
+        <Label Text="for any entities that may try to steal this funding." Align="Center"/>
+    </BoxContainer>
+</controls:FancyWindow>

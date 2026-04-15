@@ -15,7 +15,6 @@ using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Numerics;
 
@@ -159,7 +158,7 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
             }
         };
 
-        if (_player.LocalEntity is not {} player)
+        if (_player.LocalEntity is not { } player)
             return martialArts;
 
         var arts = _knowledge.GetMartialArtsForClientDoohickey(player);

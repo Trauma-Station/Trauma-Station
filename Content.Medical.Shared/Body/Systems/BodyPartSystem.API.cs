@@ -4,7 +4,6 @@ using Content.Medical.Common.Body;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Body;

@@ -10,10 +10,7 @@ using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Events;
 
@@ -210,13 +207,13 @@ public sealed partial class HereticVoidPullEvent : InstantActionEvent
     };
 
     [DataField]
-    public TimeSpan StunTime = TimeSpan.FromSeconds(0.5);
+    public bool DropItems;
 
     [DataField]
-    public TimeSpan KnockDownTime = TimeSpan.FromSeconds(3);
+    public TimeSpan KnockDownTime = TimeSpan.FromSeconds(4);
 
     [DataField]
-    public float Radius = 3f;
+    public float Radius = 2f;
 
     [DataField]
     public EntProtoId InEffect = "EffectVoidBlinkIn";
@@ -399,13 +396,15 @@ public sealed partial class EventHereticCleave : WorldTargetActionEvent
     {
         DamageDict =
         {
-            {"Heat", 20f},
-            {"Bloodloss", 10f},
+            {"Blunt", 4f},
+            {"Slash", 4f},
+            {"Piercing", 4f},
+            {"Bloodloss", 3f},
         },
     };
 
     [DataField]
-    public FixedPoint2 BloodModifyAmount = -50f;
+    public FixedPoint2 BloodModifyAmount = 50f;
 
     [DataField]
     public EntProtoId Effect = "EffectCleave";
@@ -452,14 +451,8 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
     [DataField]
     public EntProtoId RealignmentStatus = "RealignmentStatusEffect";
 
-    [DataField]
-    public EntProtoId StunStatus = "RealignmentStatusEffect";
-
-    [DataField]
-    public EntProtoId SleepStatus = "StatusEffectForcedSleeping";
-
-    [DataField]
-    public EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+    [DataField(required: true)]
+    public List<EntProtoId> RemovedEffects = new();
 
     [DataField]
     public TimeSpan EffectTime = TimeSpan.FromSeconds(10);
@@ -467,6 +460,7 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
 
 // ascensions
 public sealed partial class HereticAscensionCosmosEvent : HereticKnowledgeEvent;
+public sealed partial class HereticAscensionLockEvent : HereticKnowledgeEvent;
 #endregion
 
 public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent;

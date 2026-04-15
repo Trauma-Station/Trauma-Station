@@ -156,6 +156,10 @@
     spawned:
     - id: FoodMeatBingle
       amount: 3
+  - type: PointLight
+    radius: 1.2
+    energy: 2
+    color: "#df2b2b"
 
 - type: entity
   id: MobBinglePrime

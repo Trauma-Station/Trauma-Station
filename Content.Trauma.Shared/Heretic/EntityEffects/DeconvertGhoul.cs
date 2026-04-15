@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.EntityEffects;
 

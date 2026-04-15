@@ -2,19 +2,18 @@
 
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Shared._Goobstation.Weapons.AmmoSelector;
-using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
+using Content.Trauma.Common.Weapons.AmmoSelector;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;
 
 public abstract partial class SharedChangelingSystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SelectableAmmoSystem _selectableAmmo = default!;
+    [Dependency] private readonly CommonSelectableAmmoSystem _selectableAmmo = default!;
     [Dependency] protected readonly SharedMindSystem Mind = default!;
     [Dependency] protected readonly SharedHandsSystem Hands = default!;
 

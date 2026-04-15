@@ -4,6 +4,7 @@
   requiredAreas:
   - AreaKitchen # for chef CQC
   - AreaMaints # for ambience and maints spawn rules
+  - AreaHallway # for carp migration
   maps:
   #- Atlas
   #- Amber

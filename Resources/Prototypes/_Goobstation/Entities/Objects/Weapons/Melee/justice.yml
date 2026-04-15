@@ -126,8 +126,8 @@
         - type: Parry
           maxReflects: 2
         - type: StaminaDamageOnHit
-          damage: 20
-          overtime: 15
+          damage: 25
+          overtime: 10
         soundStateActivate:
           collection: sparks
           params:

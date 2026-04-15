@@ -26,9 +26,6 @@
   - type: BloodSplatterer
   - type: CanEscapeInventory
   - type: CanBeShadowCocoon
-  - type: Consciousness
-    cap: 190
-    threshold: 95
   - type: Penetratable
     penetrateDamage: 50
     damagePenalty: 0.2

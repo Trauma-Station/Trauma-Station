@@ -20,9 +20,6 @@ using Robust.Shared.CPUJob.JobQueues;
 using Robust.Shared.CPUJob.JobQueues.Queues;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -120,7 +117,7 @@ public sealed partial class WoundSystem : EntitySystem
 
         _nextUpdate = now + TimeSpan.FromSeconds(1f / _medicalHealingTickrate);
 
-        // If this still causes lag, we go with the nuclear option of also checking for ConsciousnessComponent :niceportrait:
+        // TODO: make a marker component for alive mobs with a body
         var query = EntityQueryEnumerator<BodyComponent, DamageableComponent>();
         while (query.MoveNext(out var ent, out var body, out var damageable))
         {

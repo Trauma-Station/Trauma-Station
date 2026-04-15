@@ -5,9 +5,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Materials;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Genetics.Console;

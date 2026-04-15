@@ -9,7 +9,6 @@ using Content.Server.Station.Systems;
 using Content.Shared.Preferences;
 using Content.Trauma.Shared.Ghost;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Server.Ghost;
 

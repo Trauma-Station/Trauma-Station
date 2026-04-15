@@ -78,3 +78,11 @@
   - type: Construction
     graph: makeshiftstunprod
     node: msstunprod
+# <Trauma>
+  - type: Tag
+    tags:
+    - Trash
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+# </Trauma>

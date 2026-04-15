@@ -86,7 +86,6 @@
 - type: construction
   id: AirlockUranium
   graph: AirlockUranium
-  startNode: start
   targetNode: airlock
   category: construction-category-structures
   objectType: Structure
@@ -102,7 +101,6 @@
 - type: construction
   id: AirlockUraniumGlass
   graph: AirlockUranium
-  startNode: start
   targetNode: glassAirlock
   category: construction-category-structures
   objectType: Structure

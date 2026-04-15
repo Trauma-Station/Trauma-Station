@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chemistry.Components;
-using Content.Shared._Goobstation.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Weapons.Ranged;
 
 namespace Content.Goobstation.Server.Weapons.Ranged;
 

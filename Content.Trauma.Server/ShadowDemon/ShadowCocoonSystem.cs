@@ -19,22 +19,11 @@ public sealed class ShadowCocoonSystem : SharedShadowCocoonSystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PoweredLightSystem _poweredLight = default!;
+    [Dependency] private readonly EntityQuery<ExpendableLightComponent> _expendableLightQuery = default!;
+    [Dependency] private readonly EntityQuery<PoweredLightComponent> _poweredLightQuery = default!;
+    [Dependency] private readonly EntityQuery<WelderComponent> _welderQuery = default!;
 
-    private EntityQuery<ExpendableLightComponent> _expendableLightQuery;
-    private EntityQuery<WelderComponent> _welderQuery;
-    private EntityQuery<PoweredLightComponent> _poweredLightQuery;
-
-    private readonly HashSet<Entity<PointLightComponent>> _pointLights = new();
-
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _expendableLightQuery = GetEntityQuery<ExpendableLightComponent>();
-        _welderQuery = GetEntityQuery<WelderComponent>();
-        _poweredLightQuery = GetEntityQuery<PoweredLightComponent>();
-    }
+    private readonly HashSet<Entity<PointLightComponent>> _lights = new();
 
     public override void Update(float frameTime)
     {
@@ -48,41 +37,42 @@ public sealed class ShadowCocoonSystem : SharedShadowCocoonSystem
             if (now < cocoon.NextUpdate)
                 return;
 
-            _pointLights.Clear();
-            _lookup.GetEntitiesInRange(Transform(uid).Coordinates, cocoon.Radius, _pointLights);
-            foreach (var entity in _pointLights)
+            cocoon.NextUpdate = now + cocoon.UpdateDelay;
+
+            var coords = Transform(uid).Coordinates;
+            _lights.Clear();
+            _lookup.GetEntitiesInRange(coords, cocoon.Radius, _lights);
+            foreach (var light in _lights)
             {
-                if (!entity.Comp.Enabled)
+                if (!light.Comp.Enabled)
                     continue;
 
-                var owner = entity.Owner;
-
-                if (_poweredLightQuery.TryComp(entity, out var poweredLight) && poweredLight.On)
+                var owner = light.Owner;
+                if (_poweredLightQuery.TryComp(light, out var powered) && powered.On)
                 {
                     // Destroy nearby light bulbs
-                    _poweredLight.TryDestroyBulb(entity, poweredLight);
+                    _poweredLight.TryDestroyBulb(light, powered);
                     continue;
                 }
 
-                if (_welderQuery.TryComp(entity, out var welder) && welder.Enabled)
+                if (_welderQuery.TryComp(light, out var welder) && welder.Enabled)
                 {
                     // Remove all fuel from the welder
                     if (!_solutionContainer.TryGetSolution(owner, welder.FuelSolutionName, out var solution))
-                        return;
-                    var fuel = _tool.GetWelderFuelAndCapacity(entity, welder);
+                        continue;
 
+                    var fuel = _tool.GetWelderFuelAndCapacity(light, welder);
                     _solutionContainer.RemoveReagent(solution.Value, welder.FuelReagent, fuel.fuel);
-
-                    _tool.TurnOff((entity, welder), uid);
+                    _tool.TurnOff((light, welder), uid);
                     continue;
                 }
 
-                if (_expendableLightQuery.TryComp(entity, out var expandable))
+                if (_expendableLightQuery.TryComp(light, out var expandable))
                 {
                     // Kill flare stuff
                     expandable.CurrentState = ExpendableLightState.Fading;
                     expandable.StateExpiryTime = 0;
-                    Dirty(entity, expandable);
+                    Dirty(light, expandable);
                 }
             }
         }

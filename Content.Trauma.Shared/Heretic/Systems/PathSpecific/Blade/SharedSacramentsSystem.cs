@@ -6,7 +6,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 

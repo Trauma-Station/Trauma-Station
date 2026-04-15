@@ -15,8 +15,6 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Trigger.Systems;
 using Content.Trauma.Common.Genetics.Mutations;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Text;

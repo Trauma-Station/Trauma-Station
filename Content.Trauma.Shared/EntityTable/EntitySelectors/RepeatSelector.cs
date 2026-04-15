@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityTable;
 using Content.Shared.EntityTable.EntitySelectors;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Trauma.Shared.EntityTable.EntitySelectors;

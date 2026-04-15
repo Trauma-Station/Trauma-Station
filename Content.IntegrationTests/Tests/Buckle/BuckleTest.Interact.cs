@@ -17,7 +17,7 @@ public sealed partial class BuckleTest
     [Test]
     public async Task BuckleInteractUnbuckleOther()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.ResolveDependency<IServerEntityManager>();
@@ -60,14 +60,12 @@ public sealed partial class BuckleTest
                 Assert.That(strap.BuckledEntities, Does.Not.Contain(victim));
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 
     [Test]
     public async Task BuckleInteractBuckleUnbuckleSelf()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.ResolveDependency<IServerEntityManager>();
@@ -107,7 +105,5 @@ public sealed partial class BuckleTest
                 Assert.That(strap.BuckledEntities, Does.Not.Contain(user));
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 }

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Power.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -17,7 +18,7 @@ using System.Collections.Generic;
 namespace Content.IntegrationTests.Tests._Trauma;
 
 [TestFixture]
-public sealed class DeepFryerTest
+public sealed class DeepFryerTest : GameTest
 {
     public static readonly EntProtoId DeepFryer = "KitchenDeepFryer";
     public static readonly EntProtoId Potato = "FoodPotato";
@@ -30,7 +31,7 @@ public sealed class DeepFryerTest
     [Test]
     public async Task DeepFryerRecipeWorks()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.EntMan;
@@ -97,7 +98,5 @@ public sealed class DeepFryerTest
             entMan.DeleteEntity(uid);
             entMan.DeleteEntity(fries);
         });
-
-        await pair.CleanReturnAsync();
     }
 }

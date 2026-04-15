@@ -3,7 +3,6 @@
 using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityEffects;
 

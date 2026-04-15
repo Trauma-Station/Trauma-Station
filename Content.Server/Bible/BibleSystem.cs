@@ -118,7 +118,7 @@ namespace Content.Server.Bible
 
             if (!HasComp<BibleUserComponent>(args.User))
             {
-                _popupSystem.PopupEntity(Loc.GetString("bible-sizzle"), args.User, args.User);
+                _popupSystem.PopupEntity(Loc.GetString("bible-sizzle", ("bible", uid)), args.User, args.User); // Trauma - pass bible to loc
 
                 _audio.PlayPvs(component.SizzleSoundPath, args.User);
                 _damageableSystem.TryChangeDamage(args.User, component.DamageOnUntrainedUse, true, origin: uid,

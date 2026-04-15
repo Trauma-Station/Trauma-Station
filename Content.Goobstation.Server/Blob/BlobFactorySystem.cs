@@ -11,7 +11,6 @@ using Content.Shared.Trigger.Components.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Melee;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Blob;
 

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard.Projectiles;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.Audio;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
@@ -138,7 +138,10 @@ public sealed class ReflectSystem : EntitySystem
         var newRot = rotation.RotateVec(locRot.ToVec());
         _transform.SetLocalRotation(projectile, newRot.ToAngle());
 
-        RemCompDeferred<HomingProjectileComponent>(projectile); // Goob
+        // <Trauma>
+        var ev = new ProjectileReflectedEvent(reflector, user);
+        RaiseLocalEvent(projectile, ref ev);
+        // </Trauma>
 
         PlayAudioAndPopup(reflector.Comp, user);
 

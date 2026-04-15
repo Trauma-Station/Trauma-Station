@@ -9,8 +9,6 @@ using Content.Goobstation.Shared.Wraith.WraithPoints;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;

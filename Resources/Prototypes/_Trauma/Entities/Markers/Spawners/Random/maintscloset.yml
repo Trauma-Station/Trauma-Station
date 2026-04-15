@@ -4,9 +4,18 @@
   name: maintenance closet
   suffix: Random Filled/Mimic
   components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Storage/closet.rsi
+        state: generic
+      - sprite: Structures/Storage/closet.rsi
+        state: generic_door
   - type: RandomSpawner
+    offset: 0
     prototypes:
     - ClosetMaintenanceFilledRandom
     rarePrototypes:
     - LockerMimic
     rareChance: 0.005
+  - type: MaintsClosetSpawner

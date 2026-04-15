@@ -15,7 +15,6 @@ using Content.Shared.Mindshield.Components;
 using Content.Shared.Roles.Components;
 using Content.Shared.Popups;
 using Robust.Server.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Mindcontrol;
 

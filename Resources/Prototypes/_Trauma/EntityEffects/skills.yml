@@ -1,0 +1,71 @@
+- type: entityEffect
+  id: TraitorSkills
+  effects:
+  - !type:GrantSkills
+    skills:
+      MeleeKnowledge: 51
+      ShootingKnowledge: 51
+      StrengthKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
+      ThrowingKnowledge: 26
+      FirstAidKnowledge: 26
+
+- type: entityEffect
+  id: HereticSkills
+  effects:
+  - !type:GrantSkills
+    skills:
+      MeleeKnowledge: 51
+      StrengthKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
+      ThrowingKnowledge: 26
+      FirstAidKnowledge: 26
+      SurgeryKnowledge: 26
+      MagicalLiteracyKnowledge: 88
+
+- type: entityEffect
+  id: ChangelingSkills
+  effects:
+  - !type:GrantSkills
+    skills:
+      MeleeKnowledge: 51
+      StrengthKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
+      ThrowingKnowledge: 26
+      FirstAidKnowledge: 26
+
+- type: entityEffect
+  id: WizardSkills
+  effects:
+  - !type:GrantSkills
+    skills:
+      MeleeKnowledge: 88
+      ShootingKnowledge: 88
+      StrengthKnowledge: 88
+      ToughnessKnowledge: 88
+      AthleticsKnowledge: 88
+      WeaponsKnowledge: 88
+      ThrowingKnowledge: 88
+      FirstAidKnowledge: 88
+      LiteracyKnowledge: 88
+      MagicalLiteracyKnowledge: 88
+
+- type: entityEffect
+  id: InsurgentSkills
+  effects:
+  - !type:GrantSkills
+    skills:
+      MeleeKnowledge: 26
+      ShootingKnowledge: 26
+      StrengthKnowledge: 26
+      ToughnessKnowledge: 26
+      AthleticsKnowledge: 26
+      WeaponsKnowledge: 26
+      ThrowingKnowledge: 26
+      FirstAidKnowledge: 26

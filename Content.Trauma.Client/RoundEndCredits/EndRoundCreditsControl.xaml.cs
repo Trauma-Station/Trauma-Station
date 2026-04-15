@@ -10,7 +10,6 @@ using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.RoundEndCredits;
@@ -108,7 +107,7 @@ public sealed partial class EndRoundCreditsControl : ScrollContainer
         foreach (var antag in antags)
         {
             var antagBox = MakeAntagBox(message.AllPlayersEndInfo, playerNameFont, headerFont, antag, cache);
-            if (antagBox is {})
+            if (antagBox is { })
                 MainCreditVBox.AddChild(antagBox);
         }
 

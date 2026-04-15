@@ -7,8 +7,6 @@ using Content.Shared.Popups;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Components;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
@@ -96,6 +94,13 @@ public sealed class KnowledgeGrantSystem : EntitySystem
             foreach (var (id, level) in ent.Comp.Skills)
             {
                 _knowledge.EnsureKnowledge(brain, id, level);
+            }
+            if (ent.Comp.GrantEverything)
+            {
+                foreach (var id in _knowledge.AllKnowledges.Keys)
+                {
+                    _knowledge.EnsureKnowledge(brain, id, 100);
+                }
             }
             PredictedQueueDel(ent);
             PredictedSpawnNextToOrDrop(ent.Comp.Ash, user);

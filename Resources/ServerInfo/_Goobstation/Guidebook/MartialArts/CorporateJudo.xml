@@ -24,7 +24,6 @@
   ### Discombobulate
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
   </Box>
@@ -35,7 +34,6 @@
 
   <Box>
     <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
   </Box>
 
@@ -56,7 +54,7 @@
 
   <Box>
     <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
+    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
     <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
   </Box>
 

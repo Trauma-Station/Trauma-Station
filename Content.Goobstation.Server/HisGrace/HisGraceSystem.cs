@@ -36,21 +36,23 @@ namespace Content.Goobstation.Server.HisGrace;
 
 public sealed class HisGraceSystem : SharedHisGraceSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = null!;
-    [Dependency] private readonly PopupSystem _popup = null!;
-    [Dependency] private readonly IGameTiming _timing = null!;
-    [Dependency] private readonly MobStateSystem _state = null!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = null!;
-    [Dependency] private readonly EntityLookupSystem _lookup = null!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = null!;
-    [Dependency] private readonly TransformSystem _transform = null!;
-    [Dependency] private readonly AudioSystem _audio = null!;
-    [Dependency] private readonly MindSystem _mind = null!;
-    [Dependency] private readonly StunSystem _stun = null!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = null!;
-    [Dependency] private readonly ChatSystem _chat = null!;
-    [Dependency] private readonly MobThresholdSystem _threshold = null!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = null!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly MobStateSystem _state = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+
+    private HashSet<Entity<MobStateComponent>> _targets = new();
 
     public override void Initialize()
     {
@@ -345,13 +347,17 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
             && hisGrace.Comp.Holder == hisGrace.Comp.User)
             return;
 
-        var nearbyEnts = _lookup.GetEntitiesInRange(hisGrace, 1f);
+        var coords = Transform(hisGrace).Coordinates;
+        var flags = LookupFlags.Uncontained; // skip mobs that are already devoured, aka in a container
+        _targets.Clear();
+        _lookup.GetEntitiesInRange(coords, 1f, _targets, flags);
 
-        // dont attack if the entity is the user, and dont if the entity is in a container (e.g, already devoured)
-        foreach (var entity in nearbyEnts.Where(entity => HasComp<MobStateComponent>(entity)
-            && entity != hisGrace.Comp.User
-            && !_containerSystem.IsEntityOrParentInContainer(entity)))
+        foreach (var entity in _targets)
         {
+            // dont attack if the entity is the user
+            if (entity == hisGrace.Comp.User)
+                continue;
+
             // Log ground attack
             _adminLog.Add(LogType.AdminMessage, LogImpact.Medium,
                 $"HIS GRACE GROUND ATTACK: {ToPrettyString(hisGrace):tool} attacked {ToPrettyString(entity):target} at {Transform(hisGrace).Coordinates}");
@@ -361,7 +367,7 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
             var angle = _transform.GetRelativePosition(xform, entity, GetEntityQuery<TransformComponent>()).ToAngle();
 
             // do damage and animation
-            _damageable.TryChangeDamage(entity, melee.Damage, targetPart: TargetBodyPart.Chest, origin: hisGrace);
+            _damageable.TryChangeDamage(entity.Owner, melee.Damage, targetPart: TargetBodyPart.Chest, origin: hisGrace);
             _melee.DoLunge(hisGrace, hisGrace, angle, coordinates.Position, null, angle, false, false);
 
             _audio.PlayPvs(melee.HitSound, hisGrace);

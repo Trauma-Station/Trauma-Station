@@ -3,8 +3,6 @@
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 

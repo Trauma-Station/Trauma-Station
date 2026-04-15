@@ -5,7 +5,6 @@ using Content.Shared.Database;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Wraith.Banishment;
 

@@ -16,7 +16,6 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Messages;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
@@ -34,6 +33,7 @@ public sealed class FeastOfOwlsSystem : EntitySystem
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly HereticRitualSystem _ritual = default!;
+    [Dependency] private readonly EntityQuery<VocalComponent> _vocalQuery = default!;
 
     private readonly ProtoId<TagPrototype> _feastOfOwlsTag = "RitualFeastOfOwls";
     private readonly ProtoId<TagPrototype> _ascensionTag = "RitualAscension";
@@ -88,7 +88,6 @@ public sealed class FeastOfOwlsSystem : EntitySystem
 
         var now = _timing.CurTime;
 
-        var vocalQuery = GetEntityQuery<VocalComponent>();
         var query = EntityQueryEnumerator<FeastOfOwlsComponent, StatusEffectsComponent, MindContainerComponent>();
         while (query.MoveNext(out var uid, out var comp, out var status, out var mindContainer))
         {
@@ -113,7 +112,7 @@ public sealed class FeastOfOwlsSystem : EntitySystem
             _jitter.DoJitter(uid, comp.JitterStutterTime, true, 10f, 10f, true, status);
             _stutter.DoStutter(uid, comp.JitterStutterTime, refresh: true);
 
-            if (vocalQuery.TryGetComponent(uid, out var vocal))
+            if (_vocalQuery.TryComp(uid, out var vocal))
                 _chat.TryEmoteWithChat(uid, vocal.ScreamId);
 
             _audio.PlayPvs(comp.KnowledgeGainSound, uid);

@@ -1421,10 +1421,6 @@
       Female: MonkeyMode
       Unsexed: MonkeyMode
     wilhelmProbability: 0.001
-  - type: Consciousness
-    hasPainScreams: false
-    threshold: 70
-    cap: 140
   - type: DiseaseCarrier
   - type: UserInterface
     interfaces:
@@ -1802,8 +1798,64 @@
   id: MobMouse
   description: Squeak!
   components:
-  - type: VentCrawler # goobstation - Ventcrawl
+  # <Trauma>
+  - type: VentCrawler
     enterDelay: 0.5
+  - type: AnimatedEmotes
+    tweakState: mouse-tweaking-0
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+  - type: EggLayer
+    eggSpawn:
+    - id: SpawnMobMouse
+    hungerUsage: 20
+    eggLayAction: MouseMultiply
+    hungerRequired: true
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: MouseBites
+        Quantity: 1
+  - type: MeleeChemicalInjector
+    transferAmount: 1
+    solution: melee
+  - type: Stamina
+    baseCritThreshold: 20
+    animationThreshold: 10
+  - type: Crawler
+  - type: NPCRetaliation
+    attackMemoryLength: 5 # stop caring fast if you don't keep hitting
+  - type: GroupRetaliation
+    range: 5 # slightly lower for mice
+  - type: CollectiveMind
+    defaultChannel: Mousemind
+    channels:
+    - Mousemind
+  - type: FaxSlip
+    slipChance: 0.3
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+  - type: ActionGrant
+    actions:
+    - ActionMouseCall
+  - type: MobCallSource
+    whitelist:
+      tags:
+      - Mouse
+  - type: MobCallable
+  - type: XenoCompatible # to let egg sack surgeries work nicely...
+  - type: MobSpam # no 500 dead mice lagging the server
+  # </Trauma>
   - type: GhostRole
     prob: 0.3 # Trauma - add % chance to mouse ghostrole
     makeSentient: true
@@ -1985,65 +2037,6 @@
       Taco: RatTaco
       Burger: RatBurger
       Skewer: RatSkewer
-  # <Goobstation>
-  - type: AnimatedEmotes
-    tweakState: mouse-tweaking-0
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
-  - type: EggLayer
-    eggSpawn:
-    - id: SpawnMobMouse
-    hungerUsage: 20
-    eggLayAction: MouseMultiply
-    hungerRequired: true
-  - type: SolutionRegeneration
-    solution: melee
-    generated:
-      reagents:
-      - ReagentId: MouseBites
-        Quantity: 1
-  - type: MeleeChemicalInjector
-    transferAmount: 1
-    solution: melee
-  - type: Stamina
-    baseCritThreshold: 20
-    animationThreshold: 10
-  - type: Crawler
-  - type: NPCRetaliation
-    attackMemoryLength: 5 # stop caring fast if you don't keep hitting
-  - type: GroupRetaliation
-    range: 5 # slightly lower for mice
-  - type: CollectiveMind
-    defaultChannel: Mousemind
-    channels:
-    - Mousemind
-  - type: FaxSlip
-    slipChance: 0.3
-  - type: DiseaseCarrier
-    effectImmune: true
-  - type: ShowDiseaseIcons # they sense it
-  - type: Destructible # Shitmed Change
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 100
-      behaviors:
-      - !type:GibBehavior
-        deleteGibs: true # Trauma
-        recursive: false
-  - type: ActionGrant
-    actions:
-    - ActionMouseCall
-  - type: MobCallSource
-    whitelist:
-      tags:
-      - Mouse
-  - type: MobCallable
-  - type: XenoCompatible # to let egg sack surgeries work nicely...
-  # </Goobstation>
 
 - type: entity
   parent: MobMouse

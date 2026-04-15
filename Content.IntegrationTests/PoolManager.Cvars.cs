@@ -18,6 +18,7 @@ public static partial class PoolManager
         // <Trauma>
         (LavalandCVars.LavalandEnabled.Name, "false"),
         (TraumaCVars.DisablePathfinding.Name, "true"), // 5GB memory usage spike in some tests and potential deadlocking
+        (TraumaCVars.StationTraitsEnabled.Name, "false"), // spawns game rules and tests dont like it
         // </Trauma>
         (CCVars.DatabaseSynchronous.Name,     "true"),
         (CCVars.DatabaseSqliteDelay.Name,     "0"),

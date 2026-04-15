@@ -221,7 +221,6 @@
 - type: construction
   id: MedicalPatchMakeshift
   graph: MedicalPatchMakeshift
-  startNode: start
   targetNode: medicalPatchMakeshift
   category: construction-category-tools
   objectType: Item
@@ -248,7 +247,6 @@
 - type: construction
   id: SilkPatchMakeshift
   graph: SilkPatchMakeshift
-  startNode: start
   targetNode: silkPatchMakeshift
   category: construction-category-tools
   objectType: Item

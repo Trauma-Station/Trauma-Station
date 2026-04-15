@@ -9,7 +9,6 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Popups;
-using Content.Medical.Shared.Consciousness;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Cloning;
@@ -34,7 +33,6 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 
@@ -66,7 +64,6 @@ public sealed class IllusionSystem : EntitySystem
         typeof(ReproductiveComponent),
         typeof(ReproductivePartnerComponent),
         typeof(TemperatureComponent),
-        typeof(ConsciousnessComponent),
         typeof(PacifiedComponent),
         typeof(BloodstreamComponent),
     ];

@@ -2,7 +2,6 @@
 
 using Content.Shared.FixedPoint;
 using Robust.Shared.Map;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Common.Heretic;
 
@@ -39,9 +38,6 @@ public record struct ValidateInstantWorldTargetActionEvent(EntityUid User, Entit
 
 [ByRefEvent]
 public readonly record struct TryPerformInstantWorldTargetActionEvent;
-
-[ByRefEvent]
-public record struct ImmuneToPoisonDamageEvent(bool Immune = false);
 
 [ByRefEvent]
 public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Volume);

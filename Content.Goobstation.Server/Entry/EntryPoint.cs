@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.IoC;
-using Content.Goobstation.Server.Voice;
 using Content.Goobstation.Common.JoinQueue;
 using Content.Goobstation.Common.ServerCurrency;
 using Robust.Shared.ContentPack;
@@ -12,7 +11,6 @@ namespace Content.Goobstation.Server.Entry;
 public sealed class EntryPoint : GameServer
 {
     [Dependency] private readonly ICommonCurrencyManager _curr = default!;
-    [Dependency] private readonly IVoiceChatServerManager _voiceManager = default!;
     [Dependency] private readonly IJoinQueueManager _joinQueue = default!;
 
     public override void PreInit()
@@ -32,24 +30,10 @@ public sealed class EntryPoint : GameServer
         _curr.Initialize();
     }
 
-    public override void Update(ModUpdateLevel level, FrameEventArgs frameEventArgs)
-    {
-        base.Update(level, frameEventArgs);
-
-        switch (level)
-        {
-            case ModUpdateLevel.PreEngine:
-                _voiceManager.Update();
-                break;
-
-        }
-    }
-
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
 
         _curr.Shutdown();
-        _voiceManager.Shutdown();
     }
 }

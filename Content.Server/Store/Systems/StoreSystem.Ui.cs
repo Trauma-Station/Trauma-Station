@@ -2,8 +2,7 @@
 using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.NTR;
 using Content.Goobstation.Shared.NTR.Events;
-using Content.Server._Goobstation.Wizard.Store;
-using Content.Shared._Goobstation.Wizard.Refund;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.GameTicking;
 // </Trauma>
 using System.Linq;
@@ -53,10 +52,6 @@ public sealed partial class StoreSystem
         SubscribeLocalEvent<StoreComponent, StoreRequestRefundMessage>(OnRequestRefund);
         SubscribeLocalEvent<StoreComponent, RefundEntityDeletedEvent>(OnRefundEntityDeleted);
 
-        // Goobstation start
-        SubscribeLocalEvent<StoreComponent, StoreRefundAllListingsMessage>(OnRefundAll);
-        SubscribeLocalEvent<StoreComponent, StoreRefundListingMessage>(OnRefundListing);
-        // Goobstation end
     }
 
     private void OnRefundEntityDeleted(Entity<StoreComponent> ent, ref RefundEntityDeletedEvent args)
@@ -370,7 +365,7 @@ public sealed partial class StoreSystem
     /// This would need to be done should a currency with decimal values need to use it.
     /// not quite sure how to handle that
     /// </remarks>
-    private void OnRequestWithdraw(EntityUid uid, StoreComponent component, StoreRequestWithdrawMessage msg)
+    public void OnRequestWithdraw(EntityUid uid, StoreComponent component, StoreRequestWithdrawMessage msg)
     {
         if (msg.Amount <= 0)
             return;
@@ -407,7 +402,7 @@ public sealed partial class StoreSystem
         UpdateUserInterface(buyer, uid, component);
     }
 
-    private void OnRequestRefund(EntityUid uid, StoreComponent component, StoreRequestRefundMessage args)
+    public void OnRequestRefund(EntityUid uid, StoreComponent component, StoreRequestRefundMessage args)
     {
         // TODO: Remove guardian/holopara
 
@@ -472,7 +467,7 @@ public sealed partial class StoreSystem
     }
 
     // Goobstation start
-    private void UpdateRefundUserInterface(EntityUid uid, StoreComponent component)
+    public void UpdateRefundUserInterface(EntityUid uid, StoreComponent component)
     {
         if (!IsOnStartingMap(uid, component))
             _ui.SetUiState(uid, RefundUiKey.Key, new StoreRefundState(new(), true));
@@ -493,7 +488,7 @@ public sealed partial class StoreSystem
         }
     }
 
-    private bool RefundListing(EntityUid uid, StoreComponent component, EntityUid boughtEntity, EntityUid buyer, bool log)
+    public bool RefundListing(EntityUid uid, StoreComponent component, EntityUid boughtEntity, EntityUid buyer, bool log)
     {
         if (!IsOnStartingMap(uid, component) || !Exists(boughtEntity) ||
             !TryComp(boughtEntity, out StoreRefundComponent? refundComp) || refundComp.Data == null ||
@@ -537,47 +532,6 @@ public sealed partial class StoreSystem
         return true;
     }
 
-    private void OnRefundListing(Entity<StoreComponent> ent, ref StoreRefundListingMessage args)
-    {
-        if (args.Actor is not { Valid: true } buyer)
-            return;
-
-        var (uid, component) = ent;
-
-        var listing = GetEntity(args.ListingEntity);
-
-        if (RefundListing(uid, component, listing, buyer, true))
-            UpdateUserInterface(buyer, uid, component);
-
-        UpdateRefundUserInterface(uid, component);
-    }
-
-    private void OnRefundAll(Entity<StoreComponent> ent, ref StoreRefundAllListingsMessage args)
-    {
-        if (args.Actor is not { Valid: true } buyer)
-            return;
-
-        var (uid, component) = ent;
-
-        if (!IsOnStartingMap(uid, component) || !component.RefundAllowed || component.BoughtEntities.Count == 0)
-        {
-            UpdateRefundUserInterface(uid, component);
-            return;
-        }
-
-        _admin.Add(LogType.StoreRefund, LogImpact.Low, $"{ToPrettyString(buyer):player} has refunded their purchases from {ToPrettyString(uid):store}");
-
-        for (var i = component.BoughtEntities.Count - 1; i >= 0; i--)
-        {
-            var purchase = component.BoughtEntities[i];
-
-            RefundListing(uid, component, purchase, buyer, false);
-        }
-
-        UpdateUserInterface(buyer, uid, component);
-        UpdateRefundUserInterface(uid, component);
-    }
-
     public static void DisableListingRefund(ListingData? data)
     {
         if (data != null)
@@ -614,7 +568,7 @@ public sealed partial class StoreSystem
         refundComp.BoughtTime = _timing.CurTime;
     }
 
-    private bool IsOnStartingMap(EntityUid store, StoreComponent component)
+    public bool IsOnStartingMap(EntityUid store, StoreComponent component)
     {
         var xform = Transform(store);
         return component.StartingMap == xform.MapUid;

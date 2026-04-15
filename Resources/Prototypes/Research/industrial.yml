@@ -92,17 +92,16 @@
   #- ProtolatheHyperConvectionMachineCircuitboard
   #- CircuitImprinterHyperConvectionMachineCircuitboard
   # End DeltaV Removals
-  # Begin DeltaV Additions
+  # <Trauma>
   - LatheUpgradeKitHyper
   - LatheUpgradeKitCryo
-  # End DeltaV Additions
-  # Begin Goobstation Additions
   - UpgradeKitAutomation
   - RoboticArmCircuitboard
   - ConstructorCircuitboard
   - StorageBinCircuitboard
   - InteractorCircuitboard
-  # End Goobstation Additions
+  - UpgradeKitTubeSpeed
+  # </Trauma>
   - SheetifierMachineCircuitboard
   # Goobstation R&D Console rework start
   position: 1,-2

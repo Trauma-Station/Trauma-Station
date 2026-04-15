@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Maps;
 using Content.Shared.Maps;
 using Robust.Shared.EntitySerialization;
@@ -20,12 +21,12 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// </summary>
 [TestFixture]
 [Category("MapTests")]
-public sealed class MapPoolTest
+public sealed class MapPoolTest : GameTest
 {
     [Test]
     public async Task RequiredAreasMappedTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.EntMan;
@@ -103,7 +104,5 @@ public sealed class MapPoolTest
                 }
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 }

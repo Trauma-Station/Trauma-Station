@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.StatusEffect;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Changeling.Actions;
 
