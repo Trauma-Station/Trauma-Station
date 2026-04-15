@@ -2,30 +2,32 @@
 
 using Robust.Shared.Timing;
 
-namespace Content.Trauma.Shared.Timing;
+namespace Content.Trauma.Shared.Utility;
 
 /// <summary>
 /// A ringbuffer that stores items in order of a popping timespan.
 /// Trying to add more items than the buffer supports will pop the oldest one.
-/// If used in an entity system it should be <c>Reset</c> when the round restarts to avoid problems.
+/// If used with entity-specific data it should be <c>Reset</c> when the round restarts to avoid problems.
 /// </summary>
 public sealed class TimedRingBuffer<T>
 {
     private IGameTiming _timing;
-
-    private (TimeSpan, T)[] _items;
-
-    private int _offset;
+    private RingBuffer<(TimeSpan, T)> _buffer; // not using inheritance since some semantics change
 
     /// <summary>
     /// How many items are stored
     /// </summary>
-    public int Count { get; private set; } = 0;
+    public int Count => _buffer.Count;
 
     /// <summary>
     /// How many items can be stored.
     /// </summary>
-    public int Capacity => _items.Length;
+    public int Capacity => _buffer.Capacity;
+
+    /// <summary>
+    /// True if no items are stored.
+    /// </summary>
+    public bool IsEmpty => _buffer.IsEmpty;
 
     private TimeSpan _popDelay;
     /// <summary>
@@ -41,19 +43,17 @@ public sealed class TimedRingBuffer<T>
 
             var diff = value - _popDelay;
             _popDelay = value;
-            for (int i = 0; i < Count; i++)
-            {
-                _items[Index(i)].Item1 += diff;
-            }
+            // update old times so they're as if they were using this delay all along. preserves order when pushing new items
+            _buffer.VisitItems((ref pair) => pair.Item1 += diff);
         }
     }
 
     /// <summary>
-    /// Create a ring buffer with a given capacity.
+    /// Create a timed ring buffer with a given capacity and pop delay.
     /// </summary>
     public TimedRingBuffer(int capacity, TimeSpan popDelay, IGameTiming timing)
     {
-        _items = new (TimeSpan, T)[capacity];
+        _buffer = new(capacity);
         _popDelay = popDelay;
         _timing = timing;
     }
@@ -66,14 +66,12 @@ public sealed class TimedRingBuffer<T>
     public bool Push(T item, out T old)
     {
         var popTime = _timing.CurTime + _popDelay;
-        var popped = false;
         old = default!;
-        if (Count == Capacity)
-            popped = PopImmediate(out old);
+        if (!_buffer.Push((popTime, item), out var oldPair))
+            return false;
 
-        _items[NewIndex] = (popTime, item);
-        Count++;
-        return popped;
+        old = oldPair.Item2;
+        return true;
     }
 
     /// <summary>
@@ -82,13 +80,10 @@ public sealed class TimedRingBuffer<T>
     public bool PopImmediate(out T item)
     {
         item = default!;
-        if (Count == 0)
+        if (!_buffer.Pop(out var pair))
             return false;
 
-        item = _items[OldIndex].Item2;
-        Count--;
-        _offset++;
-        _offset %= Capacity; // prevent it wrapping if it gets spammed
+        item = pair.Item2;
         return true;
     }
 
@@ -113,13 +108,9 @@ public sealed class TimedRingBuffer<T>
     /// </summary>
     public bool Peek(out TimeSpan popTime, out T item)
     {
-        popTime = TimeSpan.Zero;
-        item = default!;
-        if (Count == 0)
-            return false;
-
-        (popTime, item) = _items[OldIndex];
-        return true;
+        var valid = _buffer.Peek(out var pair);
+        (popTime, item) = pair;
+        return valid;
     }
 
     /// <summary>
@@ -127,9 +118,7 @@ public sealed class TimedRingBuffer<T>
     /// </summary>
     public void Reset(int capacity)
     {
-        Reset();
-        if (capacity != Capacity)
-            _items = new (TimeSpan, T)[capacity];
+        _buffer.Reset(capacity);
     }
 
     /// <summary>
@@ -137,15 +126,6 @@ public sealed class TimedRingBuffer<T>
     /// </summary>
     public void Reset()
     {
-        _offset = 0;
-        Count = 0;
+        _buffer.Reset();
     }
-
-    // index of the oldest item
-    private int OldIndex => Index(0);
-    // index of where to insert a new item
-    private int NewIndex => Index(Count);
-    // index to the array for a given item number
-    private int Index(int i)
-        => (_offset + i) % Capacity;
 }
