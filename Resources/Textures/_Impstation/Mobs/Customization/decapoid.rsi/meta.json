@@ -74,6 +74,66 @@
 	{
 	  "name": "eyes-6",
 	  "directions": 4
+	},
+	{
+	  "name": "baby-claw",
+	  "directions": 4
+	},
+	{
+	  "name": "big-claw",
+	  "directions": 4
+	},
+	{
+	  "name": "eyes-Gungeoneer",
+	  "directions": 4
+	},
+	{
+	  "name": "eyes-angry",
+	  "directions": 4
+	},
+	{
+	  "name": "eyes-composite",
+	  "directions": 4
+	},
+	{
+	  "name": "eyes-mono",
+	  "directions": 4
+	},
+	{
+	  "name": "eyes-stalks",
+	  "directions": 4
+	},
+	{
+	  "name": "eyes-tired",
+	  "directions": 4
+	},
+	{
+	  "name": "eyes-wide",
+	  "directions": 4
+	},
+	{
+	  "name": "headabnormal",
+	  "directions": 4
+	},
+	{
+	  "name": "headanvil",
+	  "directions": 4
+	},
+	{
+	  "name": "headspike",
+	  "directions": 4
+	},
+	{
+	  "name": "shoulder-plate-small",
+	  "directions": 4
+	},
+	{
+	  "name": "shoulder-plate",
+	  "directions": 4
+	},
+	{
+	  "name": "softbody",
+	  "directions": 4
 	}
   ]
 }
