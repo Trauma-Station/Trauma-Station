@@ -59,12 +59,11 @@ knowledge-path-blade-s5-desc =
     Prevents you from shooting or attacking during the effect duration.
     Takes about 1 second to activate.
 
-knowledge-path-blade-s6-name = Stance of the Torn Champion
+knowledge-path-blade-s6-name = Furious Steel
 knowledge-path-blade-s6-desc =
-    In time, it was he who stood alone among the bodies of his former comrades, awash in blood, none of it his own. He was without rival, equal, or purpose.
+    Without thinking, I took the knife of a fallen soldier and threw with all my might. My aim was true! The Torn Champion smiled at their first taste of agony, and with a nod, their blades became my own.
 
-    Grants immunity to having your limbs dismembered, as well as resistance to bloodloss and damage slowdown.
-    Additionally, when damaged below 50% of your maximum health, you gain increased resistance to gaining wounds and resistance to batons.
+    Grants you Furious Steel, a targeted spell. Using it will summon three orbiting blades around you. These blades will protect you from all attacks, but are consumed on use.
 
 knowledge-path-blade-s7-name = Empowered Blades
 knowledge-path-blade-s7-desc =
@@ -74,11 +73,21 @@ knowledge-path-blade-s7-desc =
     The second blow will be slightly weaker.
     You are able to infuse your mansus grasp directly into your blades, and your blades are more effective against structures.
 
-knowledge-path-blade-s8-name = Furious Steel
-knowledge-path-blade-s8-desc =
-    Without thinking, I took the knife of a fallen soldier and threw with all my might. My aim was true! The Torn Champion smiled at their first taste of agony, and with a nod, their blades became my own.
+    Grants immunity to having your limbs dismembered, as well as resistance to bloodloss and damage slowdown.
+    Additionally, when damaged below 50% of your maximum health, you gain increased resistance to gaining wounds and resistance to batons.
 
-    Grants you Furious Steel, a targeted spell. Using it will summon three orbiting blades around you. These blades will protect you from all attacks, but are consumed on use.
+knowledge-path-blade-s8-name = Wolves Among Sheep
+knowledge-path-blade-s8-desc =
+    Shadows crawl across the room, casting every chair,
+    table and console into the looming shape of another traitorous hand.
+    I have made an enemy of all, and peace will never be known to me again.
+    I have shattered bonds and severed all alliances. In this truth,
+    I know now the fragility of comradery. My enemies will be all, divided.
+
+    Alters the fabric of reality, conjuring a magical arena unpassable to outsiders,
+    all participants are trapped and immune to any form of crowd control or enviromental hazards;
+    trapped participants are granted a Blade and are unable to leave or jaunt until they score a critical hit.
+    Critical hits partially restore the Heretic's health.
 
 knowledge-path-blade-s9-name = Maelstrom of Silver
 knowledge-path-blade-s9-desc =

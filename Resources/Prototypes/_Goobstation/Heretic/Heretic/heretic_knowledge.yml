@@ -158,24 +158,26 @@
   - ActionHereticSacraments
 
 - type: hereticKnowledge
-  id: TornChampionStance
+  id: FuriousSteel
   path: Blade
   stage: 6
-  event: !type:HereticChampionStanceEvent
-    addedComponents:
-    - type: ChampionStance
+  actionPrototypes:
+  - ActionHereticFuriousSteel
 
 - type: hereticKnowledge
   id: EmpoweredBlades
   path: Blade
   stage: 7
+  event: !type:HereticChampionStanceEvent
+    addedComponents:
+    - type: ChampionStance
 
 - type: hereticKnowledge
-  id: FuriousSteel
+  id: WolvesAmongSheep
   path: Blade
   stage: 8
   actionPrototypes:
-  - ActionHereticFuriousSteel
+  - ActionHereticDomainExpansion
 
 - type: hereticKnowledge
   id: AscensionBlade

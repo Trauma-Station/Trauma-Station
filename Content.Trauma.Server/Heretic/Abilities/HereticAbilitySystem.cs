@@ -17,6 +17,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
 using Content.Shared.Localizations;
+using Content.Shared.Maps;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -68,6 +69,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedSanguineStrikeSystem _lifesteal = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly TileSystem _tile = default!;
 
     #endregion
 
