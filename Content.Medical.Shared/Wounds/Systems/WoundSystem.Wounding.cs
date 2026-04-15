@@ -12,7 +12,6 @@ using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
@@ -55,7 +54,6 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundComponent, EntGotInsertedIntoContainerMessage>(OnWoundInserted);
         SubscribeLocalEvent<WoundComponent, EntGotRemovedFromContainerMessage>(OnWoundRemoved);
         SubscribeLocalEvent<WoundComponent, WoundSeverityChangedEvent>(OnWoundSeverityChanged);
-        SubscribeLocalEvent<WoundableComponent, BeforeDamageChangedEvent>(DudeItsJustLikeMatrix);
         SubscribeLocalEvent<WoundableComponent, WoundHealAttemptOnWoundableEvent>(HealWoundsOnWoundableAttempt);
         SubscribeLocalEvent<WoundableComponent, CheckPartBleedingEvent>(OnCheckPartBleeding);
         SubscribeLocalEvent<WoundableComponent, CheckPartWoundedEvent>(OnCheckPartWounded);
@@ -150,56 +148,6 @@ public sealed partial class WoundSystem
 
         if (_body.GetBody(parent.Owner) is {} body)
             _trauma.UpdateBodyBoneAlert(body);
-    }
-
-    private void DudeItsJustLikeMatrix(EntityUid uid, WoundableComponent comp, ref BeforeDamageChangedEvent args)
-    {
-        return;
-        /* The world is not ready for you yet...
-
-        if (!args.CanBeCancelled
-            || args.Damage.GetTotal() <= 0)
-            return;
-
-        var chance = comp.DodgeChance;
-
-        var bodyPart = Comp<BodyPartComponent>(uid);
-        if (args.Origin != null)
-        {
-            if (bodyPart.Body != null)
-            {
-                var bodyTransform = _transform.GetWorldPosition(bodyPart.Body.Value);
-                var originTransform = _transform.GetWorldPosition(args.Origin.Value);
-
-                var distance = (originTransform - bodyTransform).Length();
-                if (distance < _cfg.GetCVar(SurgeryCVars.DodgeDistanceChance) * 2)
-                {
-                    chance = 0;
-                }
-                else
-                {
-                    var additionalChance =
-                        distance
-                        / _cfg.GetCVar(SurgeryCVars.DodgeDistanceChance)
-                        * _cfg.GetCVar(SurgeryCVars.DodgeDistanceChange);
-                    chance += additionalChance;
-                }
-            }
-        }
-
-        if (!_random.Prob(Math.Clamp((float) chance, 0, 1)))
-            return;
-
-        if (bodyPart.Body.HasValue)
-        {
-            // Critted or dead people of course can't dodge for shit.
-            if (!_mobState.IsAlive(bodyPart.Body.Value))
-                return;
-
-            _popup.PopupEntity(Loc.GetString("woundable-dodged", ("entity", bodyPart.Body.Value)), bodyPart.Body.Value, PopupType.Medium);
-        }
-
-        args.Cancelled = true;*/
     }
 
     private void HealWoundsOnWoundableAttempt(Entity<WoundableComponent> woundable, ref WoundHealAttemptOnWoundableEvent args)
@@ -815,7 +763,7 @@ public sealed partial class WoundSystem
     }
 
     /// <summary>
-    /// Does whatever AmputateWoundable does, but does it without pain and the other mess.
+    /// Does whatever AmputateWoundable does, but does it without other mess.
     /// </summary>
     /// <param name="parentWoundableEntity">Parent of the woundable entity. Yes.</param>
     /// <param name="woundableEntity">The entity containing the vulnerable body part</param>
@@ -1298,46 +1246,6 @@ public sealed partial class WoundSystem
                 }
 
                 if (damage > part.Comp.IntegrityCap - threshold)
-                    continue;
-
-                nearestSeverity = severity;
-                break;
-            }
-
-            result[category] = nearestSeverity;
-        }
-
-        return result;
-    }
-
-    public Dictionary<ProtoId<OrganCategoryPrototype>, WoundableSeverity> GetWoundableStatesOnBodyPainFeels(EntityUid body)
-    {
-        var result = SeveredStates();
-
-        foreach (var part in _body.GetOrgans<WoundableComponent>(body))
-        {
-            if (_body.GetCategory(part.Owner) is not {} category ||
-                !TryComp<NerveComponent>(part, out var nerve))
-                continue;
-
-            var damageFeeling = part.Comp.WoundableIntegrity * nerve.PainFeels;
-
-            var nearestSeverity = part.Comp.WoundableSeverity;
-            foreach (var (severity, value) in part.Comp.Thresholds.OrderByDescending(kv => kv.Value))
-            {
-                if (damageFeeling <= 0)
-                {
-                    nearestSeverity = WoundableSeverity.Mangled;
-                    break;
-                }
-
-                if (damageFeeling >= part.Comp.IntegrityCap)
-                {
-                    nearestSeverity = WoundableSeverity.Healthy;
-                    break;
-                }
-
-                if (damageFeeling < value)
                     continue;
 
                 nearestSeverity = severity;

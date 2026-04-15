@@ -4,7 +4,7 @@ using Content.Server.Decals;
 using Content.Shared.GameTicking;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Decals;
-using Content.Trauma.Shared.Timing;
+using Content.Trauma.Shared.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Utility;
@@ -36,7 +36,7 @@ public sealed class DecalDespawnSystem : EntitySystem
         Subs.CVar(_cfg, TraumaCVars.DecalDespawnLimit, x => _limit = x, true);
         Subs.CVar(_cfg, TraumaCVars.DecalDespawnTime, UpdateDespawnTime, true);
 
-        _buffer = new(_limit!, _despawnTime, _timing);
+        _buffer = new(_limit, _despawnTime, _timing);
     }
 
     public override void Update(float frameTime)

@@ -14,7 +14,7 @@ ghost-role-information-reinforcement-chemist-name = Station Reinforcement (Chemi
 ghost-role-information-reinforcement-cargo-name = Station Reinforcement (Cargo)
 ghost-role-information-reinforcement-salv-name = Station Reinforcement (Salvage)
 
-ghost-role-information-reinforcement-description = You're a reinforcement sent to the nanotrasen station, transit to the station takes three minutes.
+ghost-role-information-reinforcement-description = You're a reinforcement sent to a nanotrasen station.
 ghost-role-information-DClass-description = The science team wants to use you for its experiments, comply or risk death.
 
 ghost-role-information-facehugger-name = facehugger
