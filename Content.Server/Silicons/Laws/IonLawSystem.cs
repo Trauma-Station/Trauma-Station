@@ -114,7 +114,9 @@ public sealed class IonLawSystem : EntitySystem
 
         // <Trauma>
         AddSelector("ION-CORPORATION", DatasetFill("IonStormCorporations"));
+
         AddSelector("ION-DEPARTMENT", DatasetFill("IonStormDepartments"));
+
         AddSelector("ION-FACTION", DatasetFill("IonStormFactions"));
         // </Trauma>
     }
