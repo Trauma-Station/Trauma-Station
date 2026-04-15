@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Doors;
 using Content.Shared.Doors.Components;
 using Content.Trauma.Common.Airlocks;
