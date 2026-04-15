@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Airlocks;
+// </Trauma>
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.SprayPainter.Prototypes;
@@ -153,6 +156,13 @@ public sealed class DoorSystem : SharedDoorSystem
 
         if (!target.TryGetComponent(out SpriteComponent? targetSprite, _componentFactory))
             return;
+
+        // <Trauma>
+        var ev = new UpdateDoorSpritesEvent(target);
+        RaiseLocalEvent(sprite, ref ev);
+        if (ev.Handled)
+            return;
+        // </Trauma>
 
         _sprite.SetBaseRsi(sprite.AsNullable(), targetSprite.BaseRSI);
     }

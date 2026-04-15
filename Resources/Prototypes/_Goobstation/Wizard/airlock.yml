@@ -13,8 +13,12 @@
   id: AirlockUranium
   suffix: Uranium
   components:
-  - type: Sprite
-    sprite: _Goobstation/Wizard/Structures/Airlocks/Standard/uranium.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#0E2C03"
+  # - type: Sprite
+  #   sprite: _Goobstation/Wizard/Structures/Airlocks/Standard/uranium.rsi
+  # </Trauma>
   - type: Construction
     graph: AirlockUranium
     node: airlock
@@ -28,8 +32,12 @@
   id: AirlockUraniumGlass
   suffix: Uranium, Glass
   components:
-  - type: Sprite
-    sprite: _Goobstation/Wizard/Structures/Airlocks/Glass/uranium.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#0E2C03"
+  # - type: Sprite
+  #   sprite: _Goobstation/Wizard/Structures/Airlocks/Glass/uranium.rsi
+  # </Trauma>
   - type: Construction
     graph: AirlockUranium
     node: glassAirlock
@@ -64,9 +72,11 @@
   suffix: Uranium
   parent: AirlockAssembly
   components:
-  - type: Sprite
-    sprite: _Goobstation/Wizard/Structures/Airlocks/Standard/uranium.rsi
-    state: "assembly"
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: _Goobstation/Wizard/Structures/Airlocks/Standard/uranium.rsi
+  #   state: "assembly"
+  # </Trauma>
   - type: Construction
     graph: AirlockUranium
     node: assembly
@@ -78,9 +88,11 @@
   id: AirlockUraniumAssemblyGlass
   suffix: Uranium, Glass
   components:
-  - type: Sprite
-    sprite: _Goobstation/Wizard/Structures/Airlocks/Glass/uranium.rsi
-    state: "assembly"
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: _Goobstation/Wizard/Structures/Airlocks/Glass/uranium.rsi
+  #   state: "assembly"
+  # </Trauma>
 
 # Recipes
 - type: construction

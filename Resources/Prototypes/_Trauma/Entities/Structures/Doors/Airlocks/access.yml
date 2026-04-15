@@ -23,8 +23,12 @@
   parent: AirlockGeneticsLocked
   id: AirlockMaintGeneticsLocked
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#626262"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # </Trauma>
 
 # Robotics
 
@@ -50,8 +54,12 @@
   parent: AirlockRoboticsLocked
   id: AirlockMaintRoboticsLocked
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#626262"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # </Trauma>
 
 # Library
 
@@ -77,5 +85,9 @@
   parent: AirlockLibraryLocked
   id: AirlockMaintLibraryLocked
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#626262"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # </Trauma>

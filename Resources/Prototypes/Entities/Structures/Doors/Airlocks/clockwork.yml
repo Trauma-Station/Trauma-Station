@@ -9,8 +9,12 @@
   id: PinionAirlock
   suffix: Pinion, Clockwork
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#5D3D00"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi
+  # </Trauma>
   - type: Construction
     graph: PinionAirlock
     node: airlock
@@ -24,8 +28,12 @@
   id: PinionAirlockGlass
   suffix: Pinion, Clockwork
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/clockwork_pinion.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#5D3D00"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/clockwork_pinion.rsi
+  # </Trauma>
   - type: Construction
     graph: PinionAirlock
     node: glassAirlock

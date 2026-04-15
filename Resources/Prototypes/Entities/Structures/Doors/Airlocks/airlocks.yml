@@ -3,8 +3,12 @@
   id: AirlockFreezer
   suffix: Freezer
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/freezer.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: white
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/freezer.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockService
 
@@ -13,8 +17,12 @@
   id: AirlockEngineering
   suffix: Engineering
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/engineering.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#A28226"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/engineering.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockEngineering
 
@@ -23,16 +31,24 @@
   id: AirlockAtmospherics
   suffix: Atmospherics
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/atmospherics.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#469085"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/atmospherics.rsi
+  # </Trauma>
 
 - type: entity
   parent: Airlock
   id: AirlockCargo
   suffix: Cargo
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/cargo.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#5F350B"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/cargo.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockCargo
 
@@ -41,8 +57,12 @@
   id: AirlockSalvage
   suffix: Salvage
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/salvage.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#76417B"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/salvage.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockCargo
 
@@ -51,8 +71,12 @@
   id: AirlockHydroponics
   suffix: Hydroponics
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/hydroponics.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#4EB332"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/hydroponics.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockService
 
@@ -61,8 +85,12 @@
   id: AirlockMedical
   suffix: Medical
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/medical.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#5995BA"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/medical.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockMedical
 
@@ -70,25 +98,33 @@
   parent: AirlockMedical
   id: AirlockVirology
   suffix: Virology
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/virology.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/virology.rsi
+  # </Trauma>
 
 - type: entity
   parent: AirlockMedical
   id: AirlockChemistry
   suffix: Chemistry
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/chemistry.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/chemistry.rsi
+  # </Trauma>
 
 - type: entity
   parent: Airlock
   id: AirlockScience
   suffix: Science
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/science.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#563758"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/science.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockScience
 
@@ -97,8 +133,12 @@
   id: AirlockCommand
   suffix: Command
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/command.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#334E6D"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/command.rsi
+  # </Trauma>
   - type: WiresPanelSecurity
     securityLevel: medSecurity
   - type: Wires
@@ -109,8 +149,12 @@
   id: AirlockSecurity
   suffix: Security
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/security.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#9F2828"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/security.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockSecurity
 
@@ -118,67 +162,89 @@
   parent: Airlock
   id: AirlockMaint
   name: maintenance access
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # </Trauma>
 
 - type: entity
   parent: AirlockSecurity # if you get syndie door somehow it counts as sec
   id: AirlockSyndicate
   suffix: Syndicate
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/syndicate.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/syndicate.rsi
+  # </Trauma>
 
 - type: entity
   parent: AirlockCargo
   id: AirlockMining
   suffix: Mining(Salvage)
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/mining.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#444444"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/mining.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockCargo
-  - type: Paintable
-    group: null
+  # <Trauma>
+  # - type: Paintable
+  #   group: null
+  # </Trauma>
 
 - type: entity
   parent: AirlockCommand # if you get centcom door somehow it counts as command, also inherit panel
   id: AirlockCentralCommand
   suffix: Central Command
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/centcomm.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/centcomm.rsi
+  # </Trauma>
 
 - type: entity
   parent: Airlock
   id: AirlockHatch
   name: airtight hatch
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/hatch.rsi
-  - type: Paintable
-    group: null
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#111117"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/hatch.rsi
+  # - type: Paintable
+  #   group: null
+  # </Trauma>
 
 - type: entity
   parent: Airlock
   id: AirlockXenoborg
   name: xenoborg airlock
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/xenoborg.rsi
-  - type: Paintable
-    group: null
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#232127"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/xenoborg.rsi
+  # - type: Paintable
+  #   group: null
+  # </Trauma>
 
 - type: entity
   parent: Airlock
   id: AirlockHatchMaintenance
   name: maintenance hatch
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/hatch_maint.rsi
-  - type: Paintable
-    group: null
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/hatch_maint.rsi
+  # - type: Paintable
+  #   group: null
+  # </Trauma>
 
 - type: entity
   parent: Airlock
@@ -186,8 +252,12 @@
   name: airtight hatch
   suffix: Syndicate
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/hatch_syndicate.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#82120A"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/hatch_syndicate.rsi
+  # </Trauma>
 
 # Glass
 - type: entity
@@ -195,8 +265,10 @@
   id: AirlockEngineeringGlass
   suffix: Engineering
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/engineering.rsi
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/engineering.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockEngineering
 
@@ -204,25 +276,31 @@
   parent: AirlockGlass
   id: AirlockMaintGlass
   suffix: Maintenance
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/maint.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/maint.rsi
+  # </Trauma>
 
 - type: entity
   parent: AirlockEngineeringGlass
   id: AirlockAtmosphericsGlass
   suffix: Atmospherics
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/atmospherics.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/atmospherics.rsi
+  # </Trauma>
 
 - type: entity
   parent: AirlockGlass
   id: AirlockCargoGlass
   suffix: Cargo
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/cargo.rsi
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/cargo.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockCargo
 
@@ -231,8 +309,10 @@
   id: AirlockSalvageGlass
   suffix: Salvage
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/salvage.rsi
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/salvage.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockCargo
 
@@ -241,8 +321,10 @@
   id: AirlockHydroponicsGlass
   suffix: Hydroponics
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/hydroponics.rsi
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/hydroponics.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockService
 
@@ -251,8 +333,10 @@
   id: AirlockMedicalGlass
   suffix: Medical
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/medical.rsi
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/medical.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockMedical
 
@@ -260,25 +344,31 @@
   parent: AirlockMedicalGlass
   id: AirlockChemistryGlass
   suffix: Chemistry
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/chemistry.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/chemistry.rsi
+  # </Trauma>
 
 - type: entity
   parent: AirlockMedicalGlass
   id: AirlockVirologyGlass
   suffix: Virology
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/virology.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/virology.rsi
+  # </Trauma>
 
 - type: entity
   parent: AirlockGlass
   id: AirlockScienceGlass
   suffix: Science
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/science.rsi
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/science.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockScience
 
@@ -287,8 +377,10 @@
   id: AirlockCommandGlass
   suffix: Command
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/command.rsi
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/command.rsi
+  # </Trauma>
   - type: WiresPanelSecurity
     securityLevel: medSecurity
   - type: Wires
@@ -299,8 +391,10 @@
   id: AirlockSecurityGlass
   suffix: Security
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/security.rsi
+  # <Trauma>
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/security.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockSecurity
 
@@ -308,32 +402,40 @@
   parent: AirlockSecurityGlass # see standard
   id: AirlockSyndicateGlass
   suffix: Syndicate
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/syndicate.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/syndicate.rsi
+  # </Trauma>
 
 - type: entity
   parent: AirlockCargoGlass
   id: AirlockMiningGlass
   suffix: Mining(Salvage)
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/mining.rsi
-  - type: Paintable
-    group: null
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/mining.rsi
+  # - type: Paintable
+  #   group: null
+  # </Trauma>
 
 - type: entity
   parent: AirlockCommandGlass # see standard
   id: AirlockCentralCommandGlass
   suffix: Central Command
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/centcomm.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/centcomm.rsi
+  # </Trauma>
 
 - type: entity
   parent: AirlockGlass
   id: AirlockStandardGlass
   suffix: Service
-  components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/basic.rsi
+  # <Trauma>
+  # components:
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/basic.rsi
+  # </Trauma>

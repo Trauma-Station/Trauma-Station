@@ -7,7 +7,7 @@
   - type: Clickable
   - type: InteractionOutline
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/basic.rsi
+    sprite: _Trauma/Structures/Doors/airlock.rsi # Trauma
     state: "assembly"
   - type: Physics
   - type: Fixtures

@@ -11,8 +11,12 @@
   id: AirlockJanitor
   suffix: Janitor
   components:
-  - type: Sprite
-    sprite: _Goobstation/Structures/Doors/Airlocks/Standard/janitor.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#F6E962"
+  # - type: Sprite
+  #   sprite: _Goobstation/Structures/Doors/Airlocks/Standard/janitor.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockService
 
@@ -21,8 +25,12 @@
   id: AirlockJanitorGlass
   suffix: Janitor
   components:
-  - type: Sprite
-    sprite: _Goobstation/Structures/Doors/Airlocks/Glass/janitor.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#F6E962"
+  # - type: Sprite
+  #   sprite: _Goobstation/Structures/Doors/Airlocks/Glass/janitor.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockService
 

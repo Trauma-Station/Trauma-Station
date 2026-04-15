@@ -4,6 +4,10 @@
   name: airlock
   description: It opens, it closes, and maybe crushes you.
   components:
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#626262"
+  # </Trauma>
   - type: Anchorable
     flags:
     - Anchorable
@@ -16,9 +20,13 @@
           "/Audio/Weapons/smash.ogg"
   - type: InteractionOutline
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/basic.rsi
+    sprite: _Trauma/Structures/Doors/airlock.rsi # Trauma
     snapCardinals: true
     layers:
+    # <Trauma>
+    - state: closed_stripe
+      map: ["enum.AirlockStripesLayers.Stripes"]
+    # </Trauma>
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
     - state: closed_unlit
@@ -234,7 +242,7 @@
   - type: Occluder
     enabled: false
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/glass.rsi
+    sprite: _Trauma/Structures/Doors/airlock.rsi # Trauma
   - type: AnimationPlayer
   - type: Fixtures
     fixtures:

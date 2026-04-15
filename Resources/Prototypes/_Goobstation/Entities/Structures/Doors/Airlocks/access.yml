@@ -113,5 +113,9 @@
   parent: AirlockJournalismLocked
   id: AirlockMaintJournalismLocked
   components:
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#626262"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/maint.rsi
+  # </Trauma>

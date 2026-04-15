@@ -34,8 +34,12 @@
       path: /Audio/Machines/airlock_ext_close.ogg
     denySound:
       path: /Audio/Machines/airlock_deny.ogg
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/external.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#9F2828"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Standard/external.rsi
+  # </Trauma>
   - type: Wires
     layoutId: AirlockExternal
   - type: Paintable
@@ -50,8 +54,12 @@
     occludes: false
   - type: Occluder
     enabled: false
-  - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/external.rsi
+  # <Trauma>
+  - type: AirlockStripes
+    color: "#9F2828"
+  # - type: Sprite
+  #   sprite: Structures/Doors/Airlocks/Glass/external.rsi
+  # </Trauma>
   - type: Fixtures
     fixtures:
       fix1:

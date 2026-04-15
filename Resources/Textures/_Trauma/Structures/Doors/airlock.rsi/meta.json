@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Trauma Station",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "assembly"
+    },
+    {
+      "name": "bolted_unlit"
+    },
+    {
+      "name": "closed"
+    },
+    {
+      "name": "closed_stripe"
+    },
+    {
+      "name": "closed_unlit"
+    },
+    {
+      "name": "closing",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "closing_stripe",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "closing_unlit",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "name": "deny_unlit",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "name": "open",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "name": "opening",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "opening_unlit",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "name": "open_stripe",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "panel_closing",
+      "delays": [
+        [
+          0.045,
+          0.04,
+          0.04,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "panel_open",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "name": "panel_opening",
+      "delays": [
+        [
+          0.045,
+          0.04,
+          0.04,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "sparks",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "welded"
+    },
+    {
+      "name": "emergency_unlit",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    }
+  ]
+}
