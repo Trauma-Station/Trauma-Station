@@ -87,8 +87,8 @@
   parent: AirlockUraniumAssembly
   id: AirlockUraniumAssemblyGlass
   suffix: Uranium, Glass
-  components:
   # <Trauma>
+  # components:
   # - type: Sprite
   #   sprite: _Goobstation/Wizard/Structures/Airlocks/Glass/uranium.rsi
   #   state: "assembly"
