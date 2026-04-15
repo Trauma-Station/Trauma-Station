@@ -243,7 +243,7 @@ public sealed partial class EventHereticSacraments : InstantActionEvent
     public EntProtoId Status = "SacramentsOfPowerStatusEffect";
 }
 
-public sealed partial class HereticChampionStanceEvent : HereticKnowledgeEvent;
+public sealed partial class EventHereticToggleChampionHook : InstantActionEvent;
 
 public sealed partial class EventHereticFuriousSteel : InstantActionEvent
 {

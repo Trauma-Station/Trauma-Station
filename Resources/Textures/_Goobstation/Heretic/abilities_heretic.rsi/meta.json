@@ -8,6 +8,12 @@
     },
     "states": [
         {
+            "name": "hook_on"
+        },
+        {
+            "name": "hook"
+        },
+        {
             "name": "among_sheep"
         },
         {

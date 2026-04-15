@@ -122,6 +122,11 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
         if (TryComp(args.PullerUid, out PullerComponent? pullerComp) && !pullerComp.NeedsHands)
             return;
 
+        // <Trauma>
+        if (!ShouldSpawnVirtualItems(uid, args.PulledUid))
+            return;
+        // </Trauma>
+
         if (!_virtual.TrySpawnVirtualItemInHand(args.PulledUid, uid))
         {
             DebugTools.Assert("Unable to find available hand when starting pulling??");
@@ -132,6 +137,8 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
     {
         if (args.PullerUid != uid)
             return;
+
+        _modifierSystem.RefreshMovementSpeedModifiers(uid); // Trauma
 
         // Try find hand that is doing this pull.
         // and clear it.
@@ -316,13 +323,17 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
     private void OnRefreshMovespeed(EntityUid uid, PullerComponent component, RefreshMovementSpeedModifiersEvent args)
     {
         // <Trauma>
-        args.ModifySpeed(component.GrabStage switch
+        var speed = component.GrabStage switch
         {
             GrabStage.Soft => component.SoftGrabSpeedModifier,
             GrabStage.Hard => component.HardGrabSpeedModifier,
             GrabStage.Suffocate => component.ChokeGrabSpeedModifier,
             _ => 1f
-        });
+        };
+
+        var ev = new GetGrabMovespeedEvent(speed);
+        RaiseLocalEvent(uid, ref ev);
+        args.ModifySpeed(ev.Speed);
         // </Trauma>
 
         if (TryComp<HeldSpeedModifierComponent>(component.Pulling, out var heldMoveSpeed) && component.Pulling.HasValue)
@@ -494,7 +505,10 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
             && !_handsSystem.TryGetEmptyHand(puller, out _)
             && pullerComp.Pulling == null)
         {
-            return false;
+            // <Trauma>
+            if (ShouldSpawnVirtualItems(puller, pullableUid))
+                return false;
+            // </Trauma>
         }
 
         if (!_blocker.CanInteract(puller, pullableUid))

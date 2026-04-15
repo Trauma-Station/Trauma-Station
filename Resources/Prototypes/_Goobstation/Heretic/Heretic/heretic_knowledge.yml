@@ -134,6 +134,11 @@
   id: GraspOfBlade
   path: Blade
   stage: 2
+  event: !type:HereticKnowledgeEvent
+    addedComponents:
+    - type: Ripostee
+      data:
+        HereticBlade: !type:RiposteData
 
 - type: hereticKnowledge
   id: MarkOfBlade
@@ -141,14 +146,14 @@
   stage: 3
 
 - type: hereticKnowledge
-  id: DanceOfTheBrand
+  id: ChampionHook
   path: Blade
   stage: 4
+  actionPrototypes:
+  - ActionHereticChampionHook
   event: !type:HereticKnowledgeEvent
     addedComponents:
-    - type: Ripostee
-      data:
-        HereticBlade: !type:RiposteData
+    - type: ChampionHook
 
 - type: hereticKnowledge
   id: SacramentsOfPower
@@ -168,7 +173,7 @@
   id: EmpoweredBlades
   path: Blade
   stage: 7
-  event: !type:HereticChampionStanceEvent
+  event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: ChampionStance
 

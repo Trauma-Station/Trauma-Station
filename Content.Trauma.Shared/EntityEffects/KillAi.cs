@@ -1,6 +1,7 @@
+using Content.Shared.EntityEffects;
 using Content.Shared.Silicons.StationAi;
 
-namespace Content.Shared.EntityEffects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 public sealed partial class KillAi : EntityEffectBase<KillAi>;
 

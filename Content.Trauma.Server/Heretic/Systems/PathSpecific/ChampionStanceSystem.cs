@@ -19,6 +19,8 @@ public sealed class ChampionStanceSystem : EntitySystem
 {
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+
 
     public override void Initialize()
     {
@@ -56,12 +58,26 @@ public sealed class ChampionStanceSystem : EntitySystem
 
     private void OnChampionShutdown(Entity<ChampionStanceComponent> ent, ref ComponentShutdown args)
     {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        MakeOrgansRemovable(ent, true);
         _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent);
     }
 
     private void OnChampionStartup(Entity<ChampionStanceComponent> ent, ref ComponentStartup args)
     {
+        MakeOrgansRemovable(ent, false);
         _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void MakeOrgansRemovable(EntityUid uid, bool removable)
+    {
+        foreach (var part in _body.GetOrgans<WoundableComponent>(uid))
+        {
+            part.Comp.CanRemove = removable;
+            Dirty(part);
+        }
     }
 
     private void OnGetBloodlossMultiplier(Entity<ChampionStanceComponent> ent,

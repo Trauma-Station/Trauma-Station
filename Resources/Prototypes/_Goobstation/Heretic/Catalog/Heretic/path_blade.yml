@@ -73,11 +73,11 @@
   id: HereticBladePath4
   name: knowledge-path-blade-s4-name
   description: knowledge-path-blade-s4-desc
-  icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon-on }
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: hook_on }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - DanceOfTheBrand
+    - ChampionHook
   cost:
     KnowledgePoint: 2
   categories:

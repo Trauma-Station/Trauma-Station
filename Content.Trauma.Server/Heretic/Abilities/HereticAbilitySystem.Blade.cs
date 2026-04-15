@@ -16,7 +16,6 @@ public sealed partial class HereticAbilitySystem
     {
         base.SubscribeBlade();
 
-        SubscribeLocalEvent<HereticChampionStanceEvent>(OnChampionStance);
         SubscribeLocalEvent<EventHereticFuriousSteel>(OnFuriousSteel);
         SubscribeLocalEvent<EventHereticDomainExpansion>(OnDomainExpansion);
     }
@@ -120,15 +119,6 @@ public sealed partial class HereticAbilitySystem
         void FailPopup()
         {
             Popup.PopupEntity(Loc.GetString("heretic-ability-fail-not-enough-space"), uid, uid);
-        }
-    }
-
-    private void OnChampionStance(HereticChampionStanceEvent args)
-    {
-        foreach (var part in _body.GetOrgans<WoundableComponent>(args.Heretic))
-        {
-            part.Comp.CanRemove = args.Negative;
-            Dirty(part);
         }
     }
 

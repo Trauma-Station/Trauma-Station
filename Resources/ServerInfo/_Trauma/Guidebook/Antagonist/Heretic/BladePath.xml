@@ -41,17 +41,17 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the blade mark, creating flying blades that protect you from attacks when active, throw with an empty hand to use then as a ranged attack.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Dance of the Brand</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Being attacked while holding a heretic blade triggers a riposte, knocking down your attacker. Triggers once per 20 seconds.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Champion Hook</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Makes your next blade light attack deal extra damage, knockdown and hook victim.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Sacraments of Power</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Grants a spell that gives you total damage immunity and some damage reflect for 5 seconds, takes 1 second to start up. Cannot attack while active.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Stance of the Torn Champion</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You are now immune to delimbing, as well as resistant to bloodloss and slowdown. Grows stronger when under 50% health.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Wolves Among Sheep</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons giant arena, forcing everyone trapped inside to fight each other in order to escape.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Empowered Blades</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>

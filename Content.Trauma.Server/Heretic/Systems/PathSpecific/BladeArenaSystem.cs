@@ -80,25 +80,33 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
         SubscribeLocalEvent<HereticArenaParticipantComponent, ComponentStartup>(OnParticipantStartup);
         SubscribeLocalEvent<HereticArenaParticipantComponent, ComponentShutdown>(OnParticipantShutdown);
         SubscribeLocalEvent<HereticArenaParticipantComponent, MobStateChangedEvent>(OnMobStateChanged);
+
+        SubscribeLocalEvent<HereticArenaParticipantRoleComponent, GetBriefingEvent>(OnGetBriefing);
+    }
+
+    private void OnGetBriefing(Entity<HereticArenaParticipantRoleComponent> ent, ref GetBriefingEvent args)
+    {
+        args.Append(Loc.GetString("roles-antag-arena-participant-description"));
     }
 
     private void OnEndCollide(Entity<BladeArenaComponent> ent, ref EndCollideEvent args)
     {
-        if (!TryComp(args.OtherEntity, out HereticArenaParticipantComponent? participant) || !participant.IsInsideArena)
+        var uid = args.OtherEntity;
+
+        if (!TryComp(uid, out HereticArenaParticipantComponent? participant) || !participant.IsInsideArena)
             return;
 
-        if (!ent.Comp.WasBreathingImmune)
-            RemCompDeferred<SpecialBreathingImmunityComponent>(ent);
+        if (!participant.WasBreathingImmune)
+            RemCompDeferred<SpecialBreathingImmunityComponent>(uid);
 
-        if (!ent.Comp.WasPressureImmune)
-            RemCompDeferred<SpecialPressureImmunityComponent>(ent);
+        if (!participant.WasPressureImmune)
+            RemCompDeferred<SpecialPressureImmunityComponent>(uid);
 
-        if (!ent.Comp.WasIgnoringGravity)
-            RemCompDeferred<MovementIgnoreGravityComponent>(ent);
-
+        if (!participant.WasIgnoringGravity)
+            RemCompDeferred<MovementIgnoreGravityComponent>(uid);
 
         participant.IsInsideArena = false;
-        Dirty(args.OtherEntity, participant);
+        Dirty(uid, participant);
     }
 
     private void OnMobStateChanged(Entity<HereticArenaParticipantComponent> ent, ref MobStateChangedEvent args)
@@ -221,9 +229,9 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
         if (participant.IsInsideArena)
             return;
 
-        ent.Comp.WasBreathingImmune = EnsureComp<SpecialBreathingImmunityComponent>(ent, out _);
-        ent.Comp.WasPressureImmune = EnsureComp<SpecialPressureImmunityComponent>(ent, out _);
-        ent.Comp.WasIgnoringGravity = EnsureComp<MovementIgnoreGravityComponent>(ent, out _);
+        participant.WasBreathingImmune = EnsureComp<SpecialBreathingImmunityComponent>(uid, out _);
+        participant.WasPressureImmune = EnsureComp<SpecialPressureImmunityComponent>(uid, out _);
+        participant.WasIgnoringGravity = EnsureComp<MovementIgnoreGravityComponent>(uid, out _);
 
         participant.IsInsideArena = true;
         Dirty(uid, participant);
