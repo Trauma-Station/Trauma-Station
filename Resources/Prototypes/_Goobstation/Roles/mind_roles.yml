@@ -39,7 +39,7 @@
 - type: entity
   parent: BaseMindRoleAntag
   id: MindRoleArenaParticipant
-  name: Heretic Role
+  name: Arena Participant
   components:
   - type: MindRole
     antagPrototype: ArenaParticipant
