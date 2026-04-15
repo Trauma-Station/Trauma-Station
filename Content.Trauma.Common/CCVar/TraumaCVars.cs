@@ -126,6 +126,14 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<float> ErrorWebhookDelay =
         CVarDef.Create("trauma.error_webhook_delay", 0.3f, CVar.SERVER);
 
+    /// <summary>
+    /// How many messages can be queued at once.
+    /// If this limit is exceeded the oldest messages get dropped.
+    /// Changing this ingame drops all currently queued messages.
+    /// </summary>
+    public static readonly CVarDef<int> ErrorWebhookLimit =
+        CVarDef.Create("trauma.error_webhook_limit", 64, CVar.SERVER);
+
     #endregion
 
     #region EndCredits
