@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server._Impstation.Decapoids.Components;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
