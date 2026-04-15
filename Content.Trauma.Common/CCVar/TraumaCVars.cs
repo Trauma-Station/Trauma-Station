@@ -180,7 +180,7 @@ public sealed partial class TraumaCVars
     /// Minimum number of players for antag summoner to work, to prevent farming money when nobody is even going to take the ghost roles.
     /// </summary>
     public static readonly CVarDef<int> AntagSummonerMinPlayers =
-        CVarDef.Create("trauma.antag_summoner_min_players", 30, CVar.SERVER);
+        CVarDef.Create("trauma.antag_summoner_min_players", 10, CVar.SERVER);
 
     #endregion
 }
