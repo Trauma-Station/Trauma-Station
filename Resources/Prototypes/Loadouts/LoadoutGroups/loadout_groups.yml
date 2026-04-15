@@ -1309,7 +1309,6 @@
   - SergeantUniform # Trauma
   - SergeantSkirt # Trauma
 
-
 - type: loadoutGroup
   id: SecurityBackpack
   name: loadout-group-security-backpack
