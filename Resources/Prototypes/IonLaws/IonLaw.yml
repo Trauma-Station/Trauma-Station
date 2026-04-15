@@ -201,4 +201,4 @@
 - type: ionLaw
   id: WhoDAGD
   lawString: ion-storm-law-who-dagd
-  weight: 0.10 # Trauma - More dangerous Ion Laws
+  weight: 0.10 # Trauma - was 0.05

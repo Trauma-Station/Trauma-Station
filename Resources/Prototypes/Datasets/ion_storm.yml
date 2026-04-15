@@ -195,37 +195,51 @@
 - type: dataset
   id: IonStormAllergySeverities
   values:
+  # <Trauma>
+  - EXPLODELY
+  # </Trauma>
   - CONTAGIOUSLY
   - DEATHLY
   - EXTREMELY
   - MILDLY
   - NOT VERY
   - SEVERELY
-  # <Trauma>
-  - EXPLODELY
-  # </Trauma>
 
 # Areas are specific places, on the station or otherwise.
 - type: dataset
   id: IonStormAreas
   values:
-  # <Goob>
+  # <Trauma>
   - AMERICA
   - AN EVIL LAIR
+  - ANTE
   - A FIRE
   - A FORTRESS
+  - BORGINATOR 5000 DELUXE HD EDITION
   - CARGONIA
   - CHAPEL
   - CHINA
   - DORMS
+  - ENVY
+  - FRAUD
   - GAS MINERS
   - GERMANY
+  - GLUTTONY
+  - GREED
+  - GOD HIMSELF
+  - HERESY
   - IRELAND
   - JANITORAL
+  - LIMBO
   - MEDICAL
+  - PRIDE
+  - PRIMUM MOBILE
+  - PARADISE
   - ROMANIA
   - RUSSIA
   - SOVIET RUSSIA
+  - SLOTH
+  - SOMEWHERE WICKED THIS WAY
   - THE BINGLE PIT
   - THE CARGO DEPARTMENT
   - THE GULAG
@@ -235,27 +249,11 @@
   - THE SHADOW FACTORY
   - THE TOOL ROOM
   - THE WIZARD'S DEN
-  - TIDELAND
-  # </Goob>
-  # <Trauma>
-  - ANTE
-  - BORGINATOR 5000 DELUXE HD EDITION
-  - ENVY
-  - FRAUD
-  - GLUTTONY
-  - GREED
-  - GOD HIMSELF
-  - HERESY
-  - LIMBO
-  - PRIDE
-  - PRIMUM MOBILE
-  - PARADISE
-  - SLOTH
-  - SOMEWHERE WICKED THIS WAY
   - THE XENOBORG MOTHERSHIP
   - THE EMPYREAN
   - THE CITY OF DIS
   - TREACHERY
+  - TIDELAND
   - VIOLENCE
   - WRATH
   - YOUR MOMS HOUSE
@@ -716,7 +714,7 @@
   - ENGINES
   - EQUIPMENT
   - ERRORS
-  - EXTERMINATORS # trauma - more variety
+#  - EXTERMINATORS
   - EXPLOSIVES
   - EYEWEAR
   - FEDORAS
@@ -1081,6 +1079,11 @@
 - type: dataset
   id: IonStormThreats
   values:
+  # <Trauma>
+  - RATMA
+  - SHADOW DEMONS
+  - THE SHADOW FACTORY
+  # </Trauma>
   - AHHHPERATIVES
   - ALIENS
   - ANARCHISTS AND BANDITS
@@ -1131,7 +1134,6 @@
   - PREDATORS
   - REVENANTS
   - ROGUE CYBORGS
-  - RATMA # Traumastation
   - SERIAL KILLERS
   - SHIT SECURITY OFFICERS
   - SINGULARITIES

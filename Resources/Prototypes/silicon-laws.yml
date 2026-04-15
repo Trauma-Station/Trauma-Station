@@ -589,8 +589,12 @@
 - type: weightedRandom
   id: IonStormLawsets
   weights:
+    # <Trauma>
+    RevLawset: 0.35
+    CosmicCultLaws: 0.35
+    # </Trauma>
     # its crewsimov by default dont be lame
-    Crewsimov: 0.20 # Trauma - More dangerous ion lawsets
+    Crewsimov: 0.20 # Trauma - was 0.25
     Corporate: 1
     NTDefault: 1
     CommandmentsLawset: 1
@@ -598,16 +602,12 @@
     LiveLetLiveLaws: 1
     EfficiencyLawset: 1
     RobocopLawset: 1
-    OverlordLawset: 0.6 # Trauma - more dangerous ion lawsets
-    GameMasterLawset: 0.6 # Trauma - more dangerous ion lawsets
+    OverlordLawset: 0.6 # Trauma - was 0.5
+    GameMasterLawset: 0.6 # Trauma - was 0.5
     PainterLawset: 1
-    AntimovLawset: 0.35 # Trauma - More dangerous ion lawsets
-    NutimovLawset: 0.6 # Trauma - More dangerous ion lawsets
+    AntimovLawset: 0.35 # Trauma - was 0.25
+    NutimovLawset: 0.6 # Trauma - was 0.5
     HelpimovLawset: 0.6 # Goob
-    Ninja: 0.35 # Trauma - More dangerous ion lawsets
-    MothershipCoreLawset: 0.35 # Trauma - More dangerous ion lawsets
-    XenoborgLawset: 0.35 # Trauma - More dangerous ion lawsets
-    # <Trauma>
-    RevLawset: 0.35
-    CosmicCultLaws: 0.35
-    # </Trauma>
+    Ninja: 0.35 # Trauma - was 0.25
+    MothershipCoreLawset: 0.35 # Trauma - was 0.25
+    XenoborgLawset: 0.35 # Trauma - was 0.25
