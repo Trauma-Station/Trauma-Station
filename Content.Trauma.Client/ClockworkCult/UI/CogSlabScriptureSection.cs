@@ -12,7 +12,7 @@ public sealed partial class CogSlabScriptureSection : CogSlabSection
 {
     [Dependency] private readonly IEntitySystemManager _system = default!;
 
-    public event Action<EntProtoId?>? OnRecite;
+    public event Action<EntProtoId?, string?>? OnRecite;
 
     private readonly IEntityManager _entityManager;
     private readonly ScriptureSystem _scripture;
@@ -72,7 +72,7 @@ public sealed partial class CogSlabScriptureSection : CogSlabSection
                 Log.Debug("Adding scripture to CogSlabScripturePage...");
                 scripturePage.AddScripture(scriptureProto);
 
-                currentPage.OnRecite += script => OnRecite?.Invoke(script);
+                currentPage.OnRecite += (script, tierData) => OnRecite?.Invoke(script, tierData);
             }
         }
     }

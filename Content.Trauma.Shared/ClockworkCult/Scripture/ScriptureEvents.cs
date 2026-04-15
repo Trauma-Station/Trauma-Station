@@ -9,12 +9,17 @@ namespace Content.Trauma.Shared.ClockworkCult.Scripture;
 /// Raised when the user presses the Recite button in the UI of the Clockwork Slab
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class ScriptureReciteMessage(EntProtoId scripture) : BoundUserInterfaceMessage
+public sealed class ScriptureReciteMessage(EntProtoId scripture, string? tierData) : BoundUserInterfaceMessage
 {
     /// <summary>
     ///  The scripture we want to recite.
     /// </summary>
     public EntProtoId Scripture = scripture;
+
+    /// <summary>
+    /// Current selected tier, if it exists.
+    /// </summary>
+    public string? TierData = tierData;
 }
 
 /// <summary>

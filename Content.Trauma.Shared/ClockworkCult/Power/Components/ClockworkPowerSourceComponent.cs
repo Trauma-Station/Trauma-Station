@@ -10,12 +10,8 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Components;
 /// Requires <see cref="AnchorableComponent"/> and <see cref="LimitedChargesComponent"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
 public sealed partial class ClockworkPowerSourceComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public bool Active;
-
     /// <summary>
     /// How often to recharge the charges.
     /// </summary>

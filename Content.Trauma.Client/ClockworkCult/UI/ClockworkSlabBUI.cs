@@ -26,11 +26,11 @@ public sealed class ClockworkSlabBUI : BoundUserInterface
         _window.OnRecite += WindowOnOnRecite;
     }
 
-    private void WindowOnOnRecite(EntProtoId? scriptureProto)
+    private void WindowOnOnRecite(EntProtoId? scriptureProto, string? tierData)
     {
         if (scriptureProto is not { } scripture)
             return;
 
-        SendPredictedMessage(new ScriptureReciteMessage(scripture));
+        SendPredictedMessage(new ScriptureReciteMessage(scripture, tierData));
     }
 }

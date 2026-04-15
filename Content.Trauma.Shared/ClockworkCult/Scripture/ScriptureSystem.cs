@@ -22,6 +22,7 @@ public sealed partial class ScriptureSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
     [Dependency] private readonly EntityQuery<ScriptureComponent> _scriptureQuery = default!;
+    [Dependency] private readonly EntityQuery<ScriptureTierComponent> _scriptureTierQuery = default!;
 
     /// <summary>
     /// All entity prototypes with <see cref="ScriptureComponent"/>.
@@ -92,7 +93,28 @@ public sealed partial class ScriptureSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
-        _entityEffects.ApplyEffects(user, scriptureComponent.RecitalEffects);
+        // Apply tier effects instead, and return early.
+        if (args.TierData is { } tierId
+            && scripture.TryGetComponent<ScriptureTierComponent>(out var scriptureTier))
+        {
+            foreach (var tier in scriptureTier.Tiers)
+            {
+                if (tier.Id != tierId)
+                    continue;
+
+                // Check if it's unlocked before doing anything
+                if (tier.Locked)
+                    return;
+
+                _entityEffects.ApplyEffects(user, tier.RecitalEffects);
+                return;
+            }
+        }
+
+        // We don't have tiers, just add the normal recital effects of the scripture
+        if (scriptureComponent.RecitalEffects is {} recitalEffects)
+            _entityEffects.ApplyEffects(user, recitalEffects);
+
         Log.Debug("The scripture got recited");
     }
 
@@ -176,6 +198,27 @@ public sealed partial class ScriptureSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    /// <summary>
+    /// Unlcoks a specific tier in an entity with <see cref="ScriptureTierComponent"/>.
+    /// </summary>
+    public void UnlockTier(Entity<ScriptureTierComponent?> ent, ScriptureTierData tier)
+    {
+        if (!_scriptureTierQuery.Resolve(ent.Owner, ref ent.Comp))
+            return;
+
+        for (int i = 0; i < ent.Comp.Tiers.Count; i++)
+        {
+            var currentTier = ent.Comp.Tiers[i];
+            if (currentTier.Id != tier.Id)
+                continue;
+
+            currentTier.Locked = false;
+            ent.Comp.Tiers[i] = currentTier;
+            Dirty(ent);
+            return;
+        }
     }
     #endregion
 }

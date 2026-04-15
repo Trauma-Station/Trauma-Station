@@ -14,8 +14,22 @@
 # and the scripture will produce that entity when recited.
 #
 # You can find example scriptures by looking at the Scriptures folder
+
+# A basic scripture
 - type: entity
   id: BaseScripture
   abstract: true
   components:
   - type: Scripture
+
+# A basic scripture that supports tiers
+#
+# The tiers are ordered by the order of definition. So put easiest tiers first, and hardest tiers last.
+# Don't define RecitalEffects in ScriptureTier if you are gonna use ScriptureTier
+- type: entity
+  id: BaseTierScripture
+  parent: BaseScripture
+  abstract: true
+  components:
+  - type: Scripture
+  - type: ScriptureTier

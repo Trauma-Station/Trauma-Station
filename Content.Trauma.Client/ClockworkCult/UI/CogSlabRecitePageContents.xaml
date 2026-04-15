@@ -29,6 +29,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     VerticalExpand="True"
                     VerticalAlignment="Bottom"
                     MinSize="100 40"></Button>
+
+            <BoxContainer Name="TierContainer" Align="Center">
+            </BoxContainer>
         </BoxContainer>
     </PanelContainer>
 </BoxContainer>

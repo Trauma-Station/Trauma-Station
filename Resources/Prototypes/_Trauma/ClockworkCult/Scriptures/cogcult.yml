@@ -13,3 +13,27 @@
     - !type:AddActions
       actions:
       - ActionBlink
+
+- type: entity
+  id: DummyScripture2
+  parent: BaseTierScripture
+  name: Dummy Scripture 2
+  description: This is a tier dummy.
+  components:
+  - type: Scripture
+    powerCost: 0
+  - type: ScriptureTier
+    tiers:
+    - id: T1
+      description: Gives you the ability to blink
+      recitalEffects:
+      - !type:AddActions
+        actions:
+        - ActionBlink
+    - id: T2
+      description: Gives you the ability to whisper
+      recitalEffects:
+      - !type:AddActions
+        actions:
+        - DemonicWhisperAction
+      locked: true

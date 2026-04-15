@@ -36,74 +36,31 @@ public sealed class ClockworkPowerSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ClockworkPowerSourceComponent, AnchorStateChangedEvent>(OnAnchored);
-        SubscribeLocalEvent<ClockworkStructureComponent, AnchorStateChangedEvent>(OnStructureAnchored);
+        SubscribeLocalEvent<ClockworkActivatableComponent, AnchorStateChangedEvent>(OnAnchored);
+
+        SubscribeLocalEvent<ClockworkPowerSourceComponent, ClockworkStructureStateChangedEvent>(OnActiveChanged);
 
         SubscribeLocalEvent<ClockworkStructureComponent, ClockwinderInteractEvent>(OnClockwinder);
         SubscribeLocalEvent<ClockworkStructureComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
     }
 
-    /// <summary>
-    /// Handles activating the clockwork power source entity, or de-activating it, based on if its anchored or not.
-    /// </summary>
-    private void OnAnchored(Entity<ClockworkPowerSourceComponent> ent, ref AnchorStateChangedEvent args)
-    {
-        // We are un-anchoring it while its active, so remove the Self Recharging component
-        if (!args.Anchored && ent.Comp.Active)
-        {
-            if (_timing.ApplyingState)
-                return;
-
-            // TODO:
-            // Make it so you can lock anchor them in place,
-            // since removing this comp will result in losing all charges
-            // (not intended, but this can't act as storage so its good lol)
-            RemCompDeferred<AutoRechargeComponent>(ent.Owner);
-            ent.Comp.Active = false;
-
-            Dirty(ent);
-
-            Log.Debug("De-activated power source");
-            return;
-        }
-
-        // A clockwork power source must always sit on top of a vein to activate
-        var xform = Transform(ent.Owner);
-        if (_area.GetArea(xform.Coordinates) is not { } area || !_powerVeinQuery.TryComp(area, out var vein))
-        {
-            Log.Debug("Not standing on vein");
-            return;
-        }
-
-        // Using battery self recharger since it's better than writing a system that does the same thing lol
-        if (args.Anchored && !ent.Comp.Active)
-        {
-            if (_timing.ApplyingState)
-                return;
-
-            var comp = EnsureComp<AutoRechargeComponent>(ent.Owner);
-            comp.RechargeDuration = ent.Comp.RechargeTime + vein.ReducedRechargeTime;
-
-            ent.Comp.Active = true;
-
-            Log.Debug("Activated power source");
-
-            Dirty(ent.Owner, comp);
-            Dirty(ent);
-        }
-    }
-
-    private void OnStructureAnchored(Entity<ClockworkStructureComponent> ent, ref AnchorStateChangedEvent args)
+    private void OnAnchored(Entity<ClockworkActivatableComponent> ent, ref AnchorStateChangedEvent args)
     {
         if (!args.Anchored && ent.Comp.Active)
         {
             ent.Comp.Active = false;
             Dirty(ent);
-        } else if (args.Anchored && !ent.Comp.Active)
+        }
+        else if (args.Anchored && !ent.Comp.Active)
         {
             ent.Comp.Active = true;
             Dirty(ent);
         }
+
+        var ev = new ClockworkStructureStateChangedEvent(ent.Comp.Active);
+        RaiseLocalEvent(ent.Comp.Owner, ref ev);
+
+        Log.Debug($"Structure has been activated: {ent.Comp.Active}");
 
         if (ent.Comp.ComponentsOnActivation is not { } components)
             return;
@@ -120,6 +77,39 @@ public sealed class ClockworkPowerSystem : EntitySystem
 
         // Remove them once we get de-activated
         EntityManager.RemoveComponents(ent.Owner, components);
+    }
+
+    /// <summary>
+    /// Handles the activation of clockwork power sources.
+    /// </summary>
+    private void OnActiveChanged(Entity<ClockworkPowerSourceComponent> ent,
+        ref ClockworkStructureStateChangedEvent args)
+    {
+        if (args.Active)
+        {
+            if (_timing.ApplyingState)
+                return;
+
+            // TODO:
+            // Make it so you can lock anchor them in place,
+            // since removing this comp will result in losing all charges
+            // (not intended, but this can't act as storage so its good lol)
+            RemCompDeferred<AutoRechargeComponent>(ent.Owner);
+            return;
+        }
+
+        // In order to activate the power source, we must be standing on a power vein
+        var xform = Transform(ent.Owner);
+        if (_area.GetArea(xform.Coordinates) is not { } area || !_powerVeinQuery.TryComp(area, out var vein))
+            return;
+
+        if (_timing.ApplyingState)
+            return;
+
+        var comp = EnsureComp<AutoRechargeComponent>(ent.Owner);
+        comp.RechargeDuration = ent.Comp.RechargeTime + vein.ReducedRechargeTime;
+
+        Dirty(ent.Owner, comp);
     }
 
     private void OnClockwinder(Entity<ClockworkStructureComponent> ent, ref ClockwinderInteractEvent args)
@@ -153,3 +143,10 @@ public sealed class ClockworkPowerSystem : EntitySystem
         });
     }
 }
+
+
+/// <summary>
+/// Raised on self when a clockwork structure gets its Active state changed.
+/// </summary>
+[ByRefEvent]
+public record struct ClockworkStructureStateChangedEvent(bool Active);

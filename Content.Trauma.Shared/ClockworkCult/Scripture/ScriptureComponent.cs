@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.ClockworkCult.Scripture;
 /// Attach this to anything that you want to appear in the Clockwork Slab
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(ScriptureSystem))]
+[Access(typeof(ScriptureSystem)), AutoGenerateComponentState]
 public sealed partial class ScriptureComponent : Component
 {
     /// <summary>
@@ -23,6 +23,6 @@ public sealed partial class ScriptureComponent : Component
     /// Effects to run on recital.
     /// E.g. giving an action to the user, or spawning a structure
     /// </summary>
-    [DataField]
-    public EntityEffect[] RecitalEffects;
+    [DataField, AutoNetworkedField]
+    public EntityEffect[]? RecitalEffects;
 };
