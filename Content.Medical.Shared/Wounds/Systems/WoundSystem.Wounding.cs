@@ -17,6 +17,7 @@ using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -79,12 +80,11 @@ public sealed partial class WoundSystem
 
     private void OnWoundableMapInit(EntityUid uid, WoundableComponent comp, MapInitEvent args)
     {
-        if (HasComp<BonelessComponent>(uid))
+        if (comp.BoneEntity is not {} id)
             return;
 
-        var bone = Spawn(comp.BoneEntity);
+        var bone = Spawn(id, uid.ToCoordinates());
         var boneComp = Comp<BoneComponent>(bone);
-        _transform.SetParent(bone, uid);
         _container.Insert(bone, comp.Bone);
         boneComp.BoneWoundable = uid;
         Dirty(bone, boneComp);

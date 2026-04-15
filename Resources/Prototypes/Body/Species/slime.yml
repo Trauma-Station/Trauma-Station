@@ -227,6 +227,10 @@
   id: OrganSlimePersonExternal
   abstract: true
   components:
+  # <Trauma>
+  - type: Woundable
+    boneEntity: null
+  # </Trauma>
   - type: Sprite
     sprite: Mobs/Species/Slime/parts.rsi
   - type: VisualOrgan

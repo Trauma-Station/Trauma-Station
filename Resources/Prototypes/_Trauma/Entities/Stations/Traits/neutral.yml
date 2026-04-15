@@ -41,6 +41,7 @@
     areaComp: ExtraAiCoreTarget
     min: 2
     max: 2
+    checkBlocked: false # don't get cucked by windoors
     effects:
     - !type:SpawnEntity
       entity: PlayerStationAi

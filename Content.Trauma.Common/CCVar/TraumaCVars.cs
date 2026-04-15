@@ -101,6 +101,13 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<float> ChatHighlightVolume =
         CVarDef.Create("chat.highlight_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
+    /// <summary>
+    /// You get instantly banned if you say something matching this regex in any chat channel.
+    /// The regex is case insensitive.
+    /// </summary>
+    public static readonly CVarDef<string> GamerWordsRegex =
+        CVarDef.Create("chat.gamer_words_regex", string.Empty, CVar.SERVER);
+
     #endregion
 
     #region Webhooks

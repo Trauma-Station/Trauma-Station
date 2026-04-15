@@ -423,14 +423,10 @@ public partial class TraumaSystem
         // We combine multiple parameters and do some math, to get the chance.
         // Even if we get 0.1 damage there's still a chance for injury to be applied, but with the extremely low chance.
         // The more damage, the bigger is the chance.
-        var chance = FixedPoint2.Clamp(
-            target.Comp.IntegrityCap / (target.Comp.WoundableIntegrity + bone.Comp.BoneIntegrity)
+        var chance = target.Comp.IntegrityCap / (target.Comp.WoundableIntegrity + bone.Comp.BoneIntegrity)
              * _boneTraumaChanceMultipliers[target.Comp.WoundableSeverity]
-             - deduction + woundInflicter.Comp.TraumasChances[TraumaType.BoneDamage],
-            0,
-            1);
-
-        return _random.Prob((float) chance);
+             - deduction.Float() + woundInflicter.Comp.TraumasChances[TraumaType.BoneDamage];
+        return _random.Prob(Math.Clamp((float) chance, 0f, 1f));
     }
 
     public bool RandomNerveDamageChance(
@@ -536,44 +532,26 @@ public partial class TraumaSystem
         if (deduction == 1)
             return false;
 
-        var bonePenalty = FixedPoint2.New(1); // higher means less chance to delimb
-        if (TryComp<BonelessComponent>(target.Owner, out var bonelessComp))
-            bonePenalty = bonelessComp.BonePenalty;
-
         // Healthy bones decrease the chance of your limb getting delimbed
         var multiplier = 1f;
         if (GetBone(target.AsNullable()) is {} bone)
         {
-            switch (bone.Comp.BoneSeverity)
+            multiplier = bone.Comp.BoneSeverity switch
             {
-                case BoneSeverity.Normal:
-                    multiplier *= 0.3f; // decreases delimb chance by 70%
-                    break;
-                case BoneSeverity.Damaged:
-                    multiplier *= 0.6f; // 40%
-                    break;
-                case BoneSeverity.Cracked:
-                    multiplier *= 1f; // 0%
-                    break;
-                case BoneSeverity.Broken:
-                    multiplier *= 1.2f; // increases by 20%
-                    break;
-                default:
-                    break;
-            }
+                BoneSeverity.Normal => 0.3f, // decreases delimb change by 70%
+                BoneSeverity.Damaged => 0.6f, // 40%
+                BoneSeverity.Cracked => 1f, // 0%,
+                BoneSeverity.Broken => 1.2f, // increases by 20%
+                _ => 1f
+            };
         }
 
-        // TODO SHITMED: this doesnt fucking work. also why is it using fixedpoint when 90% of it is floats fucking moron
-        var chance =
-            FixedPoint2.Clamp(
-                (1f - (MathF.Pow(target.Comp.WoundableIntegrity.Float(), 1.3f) / target.Comp.IntegrityCap - 1f) * bonePenalty) * multiplier
-                - deduction + woundInflicter.Comp.TraumasChances[TraumaType.Dismemberment],
-                0,
-                1);
+        // TODO SHITMED: this doesnt fucking work?
+        float chance = (1f - (MathF.Pow(target.Comp.WoundableIntegrity.Float(), 1.3f) / target.Comp.IntegrityCap.Float() - 1f)) * multiplier
+            - deduction.Float() + woundInflicter.Comp.TraumasChances[TraumaType.Dismemberment].Float();
 
         // TODO SHITMED: if above is fixed, predicted random
-        var result = _random.Prob((float) chance);
-        return result;
+        return _random.Prob(Math.Clamp(chance, 0f, 1f));
     }
 
     public EntityUid AddTrauma(
