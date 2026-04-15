@@ -18,7 +18,6 @@ public sealed class StationReportSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly StationTraitsSystem _traits = default!;
 
     private StringBuilder _sb = new();
@@ -52,11 +51,6 @@ public sealed class StationReportSystem : EntitySystem
             {
                 SpawnReport(uid, proto, text);
             }
-
-            // TODO: custom greenshift/threat level announcement
-            _chat.DispatchStationAnnouncement(station,
-                "A summary of the station's situation has been copied and printed to all communications consoles.",
-                "Station Report");
         }
     }
 
