@@ -4,11 +4,12 @@
     enum.HumanoidVisualLayers.Eyes:
       limit: 1
       required: false
-    enum.HumanoidVisualLayers.Hair:
-      limit: 0
+      onlyGroupWhitelisted: true
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.Chest:
-      limit: 2
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.LArm:
       limit: 1
