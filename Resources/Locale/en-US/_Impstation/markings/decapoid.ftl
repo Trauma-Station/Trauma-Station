@@ -55,3 +55,18 @@ marking-DecapoidClawGradient-clawgradient = Major Claw Gradient
 
 marking-DecapoidRHandGradient = Minor Claw Gradient
 marking-DecapoidRHandGradient-righthandgradient = Minor Claw Gradient
+
+marking-DecapoidBabyClaw = Minor Claw
+marking-DecapoidBigClaw = Major Claw
+marking-DecapoidShoulderPlate = Shoulder Plate
+marking-DecapoidShoulderPlateSmall = Shoulder Plate
+marking-DecapoidHeadSpike = Spiky Head
+marking-DecapoidHeadAnvil = Anvil Head
+marking-DecapoidHeadAbnormal = Abnormal Head
+marking-DecapoidEyesWide = Wide Eyes
+marking-DecapoidEyesTired = Tired Eyes
+marking-DecapoidEyesMono = Mono Eye
+marking-DecapoidEyesGungeoneer = Tripple Eyes
+marking-DecapoidEyescomposite = Composite Eyes
+marking-DecapoidEyesAngry = Angry Eyes
+marking-DecapoidSoftBody = Soft Body

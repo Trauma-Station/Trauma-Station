@@ -11,31 +11,11 @@
       "name": "icon"
     },
     {
-      "name": "fill-1"
-    },
-    {
-      "name": "fill-2"
-    },
-    {
-      "name": "fill-3"
-    },
-    {
-      "name": "fill-4"
-    },
-    {
       "name": "equipped-BACKPACK",
       "directions": 4
     },
     {
       "name": "equipped-SUITSTORAGE",
-      "directions": 4
-    },
-    {
-      "name": "equipped-BACKPACK-unshaded",
-      "directions": 4
-    },
-    {
-      "name": "equipped-SUITSTORAGE-unshaded",
       "directions": 4
     },
     {

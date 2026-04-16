@@ -7,52 +7,12 @@
     state: gills
 
 - type: marking
-  id: DecapoidFlatHead
-  bodyPart: Hair
-  groupWhitelist: [ Decapoid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
-    state: flathead
-
-- type: marking
   id: DecapoidPauldronSpike
   bodyPart: LArm
   groupWhitelist: [ Decapoid ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
     state: pauldronspike
-
-- type: marking
-  id: DecapoidClawGradient
-  bodyPart: LHand
-  groupWhitelist: [ Decapoid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
-    state: clawgradient
-
-- type: marking
-  id: DecapoidAbPlate
-  bodyPart: Chest
-  groupWhitelist: [ Decapoid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
-    state: abdominalplate
-
-- type: marking
-  id: DecapoidPecPlate
-  bodyPart: Chest
-  groupWhitelist: [ Decapoid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
-    state: pectoralplate
-
-- type: marking
-  id: DecapoidLowerPlate
-  bodyPart: Chest
-  groupWhitelist: [ Decapoid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
-    state: lowerplate
 
 - type: marking
   id: DecapoidPauldronLeft
@@ -69,30 +29,6 @@
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
     state: pauldronright
-
-- type: marking
-  id: DecapoidRHandGradient
-  bodyPart: RHand
-  groupWhitelist: [ Decapoid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
-    state: righthandgradient
-
-- type: marking
-  id: DecapoidRHandPlate
-  bodyPart: RHand
-  groupWhitelist: [ Decapoid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
-    state: righthandplate
-
-- type: marking
-  id: DecapoidClawPlate
-  bodyPart: LHand
-  groupWhitelist: [ Decapoid ]
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
-    state: clawplate
 
 - type: marking
   id: DecapoidEyesDefault
@@ -248,7 +184,7 @@
 
 - type: marking
   id: DecapoidHeadAbnormal
-  bodyPart: Hair
+  bodyPart: Head
   groupWhitelist: [ Decapoid ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
@@ -257,7 +193,7 @@
 
 - type: marking
   id: DecapoidHeadAnvil
-  bodyPart: Hair
+  bodyPart: Head
   groupWhitelist: [ Decapoid ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
@@ -266,7 +202,7 @@
 
 - type: marking
   id: DecapoidHeadSpike
-  bodyPart: Hair
+  bodyPart: Head
   groupWhitelist: [ Decapoid ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
@@ -274,7 +210,7 @@
 
 - type: marking
   id: DecapoidShoulderPlateSmall
-  bodyPart: LArm
+  bodyPart: RArm
   groupWhitelist: [ Decapoid ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
@@ -290,7 +226,7 @@
 
 - type: marking
   id: DecapoidBigClaw
-  bodyPart: RHand
+  bodyPart: LHand
   groupWhitelist: [ Decapoid ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi

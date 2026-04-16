@@ -17,7 +17,7 @@
 
 # the claw and tank but as StartingGear
 - type: startingGear
-  id: StartingGearDecapoidClaw
+  id: StartingGearDecapoidClawAndTank
   inhand:
     - DecapoidVaporTank
     - DecapoidClawItem

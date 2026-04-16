@@ -5,7 +5,7 @@
       limit: 1
       required: false
     enum.HumanoidVisualLayers.Hair:
-      limit: 1
+      limit: 0
       required: false
     enum.HumanoidVisualLayers.Chest:
       limit: 2
@@ -102,7 +102,7 @@
   components:
   - type: Loadout
     prototypes:
-    - StartingGearDecapoidClaw
+    - StartingGearDecapoidClawAndTank
   - type: SpeechRequiresEquipment
     equipment:
       mask:

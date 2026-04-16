@@ -10,13 +10,17 @@
     {
       "name": "icon"
     },
-	{
-	  "name": "EQUIPPED-neck",
-	  "directions": 4
-	},
-	{
-	  "name": "EQUIPPED-neckUnshaded",
-	  "directions": 4
-	}
+    {
+      "name": "EQUIPPED-neck",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    }
   ]
 }

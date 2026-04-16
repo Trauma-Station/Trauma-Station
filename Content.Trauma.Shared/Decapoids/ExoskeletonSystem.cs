@@ -12,8 +12,7 @@ namespace Content.Trauma.Shared.Decapoids;
 public sealed class ExoskeletonSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-
-    [Dependency] private readonly EntityQuery<InjectorComponent> _injectorQuery;
+    [Dependency] private readonly EntityQuery<InjectorComponent> _injectorQuery = default!;
 
     public override void Initialize()
     {

@@ -5,6 +5,6 @@ public sealed partial class PullerComponent : Component
     /// <summary>
     /// Whether or not to apply speed modifiers to the puller
     /// </summary>
-	[AutoNetworkedField, DataField]
+    [AutoNetworkedField, DataField]
     public bool ApplySpeedModifier = true;
 }
