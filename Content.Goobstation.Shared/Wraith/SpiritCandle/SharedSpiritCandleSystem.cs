@@ -120,6 +120,9 @@ public sealed partial class SharedSpiritCandleSystem : EntitySystem
         if (ent.Comp.AreaUid is {} areaUid)
             QueueDel(areaUid);
 
+        if (TerminatingOrDeleted(args.Entity))
+            return;
+
         var spawn = SpawnAttachedTo(ent.Comp.SpiritArea, Transform(args.Entity).Coordinates);
         _transform.SetParent(spawn, args.Entity);
         ent.Comp.AreaUid = spawn;

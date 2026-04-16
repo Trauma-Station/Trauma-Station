@@ -5,6 +5,7 @@ using Content.Shared.Atmos;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.EntityEffects;
+using Content.Trauma.Shared.Teleportation;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 
@@ -15,7 +16,7 @@ public sealed class TeleportRandomAreaSystem : EntityEffectSystem<TransformCompo
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly TeleportSystem _teleport = default!;
 
     public const int Oxygen = (int) Gas.Oxygen;
 
@@ -34,8 +35,8 @@ public sealed class TeleportRandomAreaSystem : EntityEffectSystem<TransformCompo
             return;
 
         var area = _random.PickAndTake(_areas);
-        // TODO: backport TeleportationSystem and use it with poof effects
-        _transform.SetCoordinates(ent.Owner, area.Comp.Coordinates);
+        // TODO: add poof effects
+        _teleport.Teleport(ent.Owner, area.Comp.Coordinates);
     }
 
     private bool IsTileUnsafe(Entity<TransformComponent> area)

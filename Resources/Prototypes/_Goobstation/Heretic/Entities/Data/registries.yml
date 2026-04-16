@@ -13,8 +13,6 @@
     partnerWhitelist: !type:EntityWhitelist
   - type: ReproductivePartner
   - type: Temperature
-  - type: Consciousness
-    threshold: 95
   - type: Pacified
   - type: Xenomorph
     caste: Drone
