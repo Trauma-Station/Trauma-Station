@@ -30,7 +30,7 @@
   parent: BaseActionKravMaga
   id: ActionNeckChop
   name: Neck Chop
-  description: A hard swing with the side of your hand deals some damage and disables the target's ability to speak for twenty seconds
+  description: A hard swing with the side of your hand deals some damage and disables the target's ability to speak for twenty seconds.
   components:
   - type: Action
     icon:
@@ -68,8 +68,6 @@
     messages:
     - cqc-slam
   opponentEffects:
-  - !type:TakeStaminaDamage
-    amount: 25
   - !type:LegSweep
     time: 4
   levelRequired: 26
@@ -84,12 +82,10 @@
     messages:
     - cqc-kick
   opponentEffects:
-  - !type:TakeStaminaDamage
-    amount: 25
   - !type:GenericStatusEffect
     key: Stutter
     time: 20
-    type: Add
+    type: Update
   levelRequired: 26
 
 - type: combo
@@ -105,11 +101,7 @@
   - !type:GenericStatusEffect
     key: Stutter
     time: 30
-    type: Add
-  - !type:ModifyKnockdown
-    time: 1
-    drop: true
-    type: Add
+    type: Update
   - !type:BlockedBreathing
     time: 10
   levelRequired: 26
