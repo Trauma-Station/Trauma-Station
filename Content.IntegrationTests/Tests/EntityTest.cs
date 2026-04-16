@@ -446,7 +446,7 @@ namespace Content.IntegrationTests.Tests
                     // </Trauma>
                     EntityUid uid = default;
                     await server.WaitPost(() => uid = server.EntMan.SpawnEntity(protoId, coords));
-                    //await pair.RunTicksSync(3); // Trauma - don't run 500000 ticks it takes way too much time
+                    await pair.RunTicksSync(1); // Trauma - was 3, don't run 500000 ticks it takes way too much time
 
                     // If the entity deleted itself, check that it didn't spawn other entities
                     if (!server.EntMan.EntityExists(uid))
