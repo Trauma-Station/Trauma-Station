@@ -1,4 +1,4 @@
-dnames-decapoid-first-dataset-1 = Otepa't
+names-decapoid-first-dataset-1 = Otepa't
 names-decapoid-first-dataset-2 = Ku'tukat
 names-decapoid-first-dataset-3 = Aku'ka
 names-decapoid-first-dataset-4 = Szyth
