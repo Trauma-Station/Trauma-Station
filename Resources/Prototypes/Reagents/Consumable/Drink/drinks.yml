@@ -499,7 +499,7 @@
           type: [ Decapoid ]
         ratios:
           Ammonia: 1.0
-          WaterVapor: -1.0 # end imp special.
+          WaterVapor: -1.0
       # </Imp>
 
 - type: reagent

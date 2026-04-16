@@ -117,13 +117,8 @@
     outputPressure: 21.3
     air:
       volume: 5
-      moles: # TODO: Figure out why deltanedas hates this
-        - 0 # oxygen
-        - 0 # nitrogen
-        - 0 # CO2
-        - 0 # plasma
-        - 0 # tritium
-        - 2.051379050 # water vapor
+      moles:
+        WaterVapor: 2.051379050
       temperature: 293.15
   - type: SolutionContainerManager
     solutions:
