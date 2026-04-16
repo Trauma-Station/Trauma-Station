@@ -15,7 +15,6 @@ using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffect;
 using Content.Trauma.Common.Heretic;
@@ -48,7 +47,6 @@ public sealed class CarvingKnifeSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly TeleportSystem _teleport = default!;
 

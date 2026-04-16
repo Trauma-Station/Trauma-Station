@@ -26,5 +26,5 @@ public sealed partial class ExperimentalTeleporterComponent : Component
     public EntProtoId TeleportOutEffect = "ExperimentalTeleporterOutEffect";
 
     [DataField]
-    public SoundSpecifier TeleportSound = new SoundPathSpecifier("/Audio/_White/Object/Devices/experimentalsyndicateteleport.ogg");
+    public SoundSpecifier? TeleportSound = new SoundPathSpecifier("/Audio/_White/Object/Devices/experimentalsyndicateteleport.ogg");
 }

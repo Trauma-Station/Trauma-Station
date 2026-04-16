@@ -73,13 +73,13 @@ public sealed class TeleportSystem : EntitySystem
     /// <summary>
     /// Teleport an entity, playing the same predicted sound at both where it was and where it teleported to.
     /// </summary>
-    public bool Teleport(EntityUid uid, EntityCoordinates coords, SoundSpecifier sound, EntityUid? user = null, bool predicted = true)
+    public bool Teleport(EntityUid uid, EntityCoordinates coords, SoundSpecifier? sound, EntityUid? user = null, bool predicted = true)
         => Teleport(uid, coords, sound, sound, user, predicted);
 
     /// <summary>
     /// Teleport an entity, playing distinct predicted sounds where it was and where it teleported to.
     /// </summary>
-    public bool Teleport(EntityUid uid, EntityCoordinates coords, SoundSpecifier soundIn, SoundSpecifier soundOut, EntityUid? user = null, bool predicted = true)
+    public bool Teleport(EntityUid uid, EntityCoordinates coords, SoundSpecifier? soundIn, SoundSpecifier? soundOut, EntityUid? user = null, bool predicted = true)
     {
         var oldCoords = Transform(uid).Coordinates;
         if (predicted)
