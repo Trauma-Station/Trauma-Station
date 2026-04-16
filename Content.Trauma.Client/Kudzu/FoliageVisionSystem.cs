@@ -20,8 +20,10 @@ public sealed class FoliageVisionSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<FoliageIgnoringVisionComponent, LocalPlayerAttachedEvent>((_, _, args) => OnLocalPlayerAttached(args));
         SubscribeLocalEvent<FoliageIgnoringVisionComponent, LocalPlayerDetachedEvent>((_, _, args) => OnLocalPlayerDetached(args));
-        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentStartup>((_, _, args) => OnComponentStartup(args));
-        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentShutdown>((_, _, args) => OnComponentShutdown(args));
+        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentStartup>((_, _, args) => OnPlayerComponentStartup(args));
+        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentShutdown>((_, _, args) => OnPlayerComponentShutdown(args));
+        SubscribeLocalEvent<IsFoliageComponent, ComponentStartup>((uid, _, args) => OnKudzuComponentStartup(uid, args));
+        SubscribeLocalEvent<IsFoliageComponent, ComponentShutdown>((uid, _, args) => OnKudzuComponentShutdown(uid, args));
         SubscribeLocalEvent<IsFoliageComponent, AppearanceChangeEvent>(OnAppearanceChanged);
     }
 
@@ -33,6 +35,7 @@ public sealed class FoliageVisionSystem : EntitySystem
         UpdateFoliageDrawDepth(ent, args.Sprite);
     }
 
+    // Attaches detaches
     private void OnLocalPlayerAttached(LocalPlayerAttachedEvent args)
     {
         UpdatePlayerFoliageIgnoringVision();
@@ -43,14 +46,26 @@ public sealed class FoliageVisionSystem : EntitySystem
         UpdatePlayerFoliageIgnoringVision();
     }
 
-    private void OnComponentStartup(ComponentStartup args)
+    // Player Startup/Shutdown
+    private void OnPlayerComponentStartup(ComponentStartup args)
     {
         UpdatePlayerFoliageIgnoringVision();
     }
 
-    private void OnComponentShutdown(ComponentShutdown args)
+    private void OnPlayerComponentShutdown(ComponentShutdown args)
     {
         UpdatePlayerFoliageIgnoringVision();
+    }
+
+    // Kudzu Startup/Shutdown
+    private void OnKudzuComponentStartup(EntityUid uid, ComponentStartup args)
+    {
+        UpdateFoliageDrawDepth(uid);
+    }
+
+    private void OnKudzuComponentShutdown(EntityUid uid, ComponentShutdown args)
+    {
+        UpdateFoliageDrawDepth(uid);
     }
 
     private void RefreshEveryPieceOfFoliage()
