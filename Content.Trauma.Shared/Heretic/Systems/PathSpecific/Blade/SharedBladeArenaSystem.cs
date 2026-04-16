@@ -23,6 +23,9 @@ public abstract class SharedBladeArenaSystem : EntitySystem
 
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
+    [Dependency] private readonly EntityQuery<InsideArenaComponent> _insideQuery = default!;
+    [Dependency] protected readonly EntityQuery<HereticArenaParticipantComponent> ParticipantQuery = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -36,29 +39,29 @@ public abstract class SharedBladeArenaSystem : EntitySystem
         SubscribeLocalEvent<HereticArenaParticipantComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
         SubscribeLocalEvent<HereticArenaParticipantComponent, ElectrocutionAttemptEvent>(OnElectrocuteAttempt);
 
-        SubscribeLocalEvent<BladeArenaOuterWallComponent, PreventCollideEvent>(OnPreventCollide);
+        SubscribeLocalEvent<HereticArenaOuterWallComponent, PreventCollideEvent>(OnPreventCollide);
     }
 
     private void OnElectrocuteAttempt(Entity<HereticArenaParticipantComponent> ent, ref ElectrocutionAttemptEvent args)
     {
-        if (ent.Comp.IsInsideArena)
+        if (IsInsideArena(ent))
             args.Cancel();
     }
 
     private void OnBeforeStatusEffect(Entity<HereticArenaParticipantComponent> ent, ref BeforeStatusEffectAddedEvent args)
     {
         if (args.Effect == StatusEffectStunned)
-            args.Cancelled |= ent.Comp.IsInsideArena;
+            args.Cancelled |= IsInsideArena(ent);
     }
 
     private void OnBeforeStaminaDamage(Entity<HereticArenaParticipantComponent> ent, ref BeforeStaminaDamageEvent args)
     {
-        args.Cancelled |= ent.Comp.IsInsideArena;
+        args.Cancelled |= IsInsideArena(ent);
     }
 
     private void OnGetExplosionResists(Entity<HereticArenaParticipantComponent> ent, ref GetExplosionResistanceEvent args)
     {
-        if (!ent.Comp.IsInsideArena)
+        if (!IsInsideArena(ent))
             return;
 
         args.DamageCoefficient = 0f;
@@ -66,7 +69,7 @@ public abstract class SharedBladeArenaSystem : EntitySystem
 
     private void OnDamageModify(Entity<HereticArenaParticipantComponent> ent, ref DamageModifyEvent args)
     {
-        if (!ent.Comp.IsInsideArena)
+        if (!IsInsideArena(ent))
             return;
 
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, ent.Comp.ModifierSet);
@@ -74,21 +77,21 @@ public abstract class SharedBladeArenaSystem : EntitySystem
 
     private void OnSlipAttempt(Entity<HereticArenaParticipantComponent> ent, ref SlipAttemptEvent args)
     {
-        args.NoSlip |= ent.Comp.IsInsideArena;
+        args.NoSlip |= IsInsideArena(ent);
     }
 
     private void OnTempImmunity(Entity<HereticArenaParticipantComponent> ent, ref TemperatureImmunityEvent args)
     {
-        if (!ent.Comp.IsInsideArena)
+        if (!IsInsideArena(ent))
             return;
 
         args.CurrentTemperature = Atmospherics.T37C;
     }
 
-    private void OnPreventCollide(Entity<BladeArenaOuterWallComponent> ent, ref PreventCollideEvent args)
+    private void OnPreventCollide(Entity<HereticArenaOuterWallComponent> ent, ref PreventCollideEvent args)
     {
         var other = args.OtherEntity;
-        args.Cancelled = TryComp(other, out HereticArenaParticipantComponent? participant) && participant.IsVictor ||
+        args.Cancelled = ParticipantQuery.TryComp(other, out var participant) && participant.IsVictor ||
                          HasComp<GhoulComponent>(other);
     }
 
@@ -107,5 +110,10 @@ public abstract class SharedBladeArenaSystem : EntitySystem
             _popup.PopupClient(msg, ent, ent);
         else
             _popup.PopupEntity(msg, ent, ent);
+    }
+
+    protected bool IsInsideArena(EntityUid uid)
+    {
+        return _insideQuery.HasComp(uid);
     }
 }

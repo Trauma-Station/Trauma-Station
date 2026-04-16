@@ -257,9 +257,10 @@ public sealed class TileSystem : EntitySystem
         var tileDef = (ContentTileDefinition)_tileDefinitionManager[tileRef.Tile.TypeId];
 
         //Can't deconstruct anything that doesn't have a base turf.
-        // Trauma - commented out
-        // if (tileDef.BaseTurf == null)
-        //    return false;
+        /* Trauma
+         if (tileDef.BaseTurf == null)
+            return false;
+        */
 
         var gridUid = tileRef.GridUid;
         var mapGrid = Comp<MapGridComponent>(gridUid);

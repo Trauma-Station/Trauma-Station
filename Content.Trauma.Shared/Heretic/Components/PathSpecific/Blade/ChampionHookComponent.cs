@@ -32,7 +32,7 @@ public sealed partial class ChampionHookComponent : Component
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/blood3.ogg");
 
     [DataField]
-    public float OffhandAttackSpeedBuff = 0.65f;
+    public float OffhandAttackSpeedBuff = 0.35f;
 
     [DataField]
     public float MovespeedBuff = 0.5f;

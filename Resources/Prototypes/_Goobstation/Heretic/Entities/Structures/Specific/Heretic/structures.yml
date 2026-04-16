@@ -68,6 +68,7 @@
     sprite: _Goobstation/Heretic/Structures/eldritch_forcewall.rsi
     state: eldritch_forcewall
   - type: BladeArenaOuterWall
+  - type: HereticArenaOuterWall
   - type: Fixtures
     fixtures:
       fix1:
@@ -122,6 +123,14 @@
   - type: TimedDespawn
     lifetime: 60
   - type: BladeArena
+    componentsToAdd:
+    - type: HereticArenaParticipant
+    participantWhitelist:
+      components:
+      - HumanoidProfile
+    participantBlacklist:
+      components:
+      - Ghoul
   - type: Tag
     tags:
     - HideContextMenu

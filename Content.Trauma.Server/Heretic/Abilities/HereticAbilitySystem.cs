@@ -27,6 +27,7 @@ using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Weather;
 using Content.Trauma.Common.CollectiveMind;
+using Content.Trauma.Server.Heretic.Systems.PathSpecific;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Content.Trauma.Shared.Wizard.SanguineStrike;
@@ -70,6 +71,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly SharedSanguineStrikeSystem _lifesteal = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly TileSystem _tile = default!;
+    [Dependency] private readonly BladeArenaSystem _arena = default!;
 
     #endregion
 

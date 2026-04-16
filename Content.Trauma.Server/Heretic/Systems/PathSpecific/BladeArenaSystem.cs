@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
-using Content.Goobstation.Common.Atmos;
-using Content.Goobstation.Common.Body.Components;
 using Content.Goobstation.Server.Wizard.Systems;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Antag;
+using Content.Server.Atmos.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.Hands.Systems;
 using Content.Server.Roles;
@@ -16,16 +15,13 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Hands.Components;
-using Content.Shared.Humanoid;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Movement.Components;
 using Content.Shared.Tag;
+using Content.Shared.Whitelist;
 using Content.Trauma.Server.Heretic.Components.PathSpecific;
 using Content.Trauma.Shared.Heretic.Components;
-using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
@@ -40,6 +36,9 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
+
+[ByRefEvent]
+public readonly record struct ArenaParticipantStatusChangedEvent(EntityUid Arena, bool Entered);
 
 public sealed class BladeArenaSystem : SharedBladeArenaSystem
 {
@@ -63,8 +62,10 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
-    private readonly HashSet<EntityUid> _intersecting = new();
+    private readonly List<TileRef> _tilesToConvert = new();
+    private readonly HashSet<Entity<AirtightComponent>> _intersecting = new();
 
     [Dependency] private readonly EntityQuery<AirlockComponent> _airlockQuery = default!;
     [Dependency] private readonly EntityQuery<BladeArenaDetachedComponent> _detachedQuery = default!;
@@ -82,8 +83,37 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
         SubscribeLocalEvent<HereticArenaParticipantComponent, ComponentStartup>(OnParticipantStartup);
         SubscribeLocalEvent<HereticArenaParticipantComponent, ComponentShutdown>(OnParticipantShutdown);
         SubscribeLocalEvent<HereticArenaParticipantComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<HereticArenaParticipantComponent, ArenaParticipantStatusChangedEvent>(OnStatusChanged);
 
         SubscribeLocalEvent<HereticArenaParticipantRoleComponent, GetBriefingEvent>(OnGetBriefing);
+    }
+
+    private void OnStatusChanged(Entity<HereticArenaParticipantComponent> ent, ref ArenaParticipantStatusChangedEvent args)
+    {
+        if (args.Entered)
+        {
+            foreach (var name in ent.Comp.GrantedComponentDictionary.Keys)
+            {
+                var type = Factory.GetRegistration(name).Type;
+                if (HasComp(ent, type))
+                {
+                    ent.Comp.GrantedComponentDictionary[name] = true;
+                    continue;
+                }
+
+                var comp = Factory.GetComponent(type);
+                AddComp(ent, comp);
+                ent.Comp.GrantedComponentDictionary[name] = false;
+            }
+
+            return;
+        }
+
+        foreach (var (name, shouldKeep) in ent.Comp.GrantedComponentDictionary)
+        {
+            if (!shouldKeep)
+                RemCompDeferred(ent, Factory.GetRegistration(name).Type);
+        }
     }
 
     private void OnGetBriefing(Entity<HereticArenaParticipantRoleComponent> ent, ref GetBriefingEvent args)
@@ -94,29 +124,17 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
     private void OnEndCollide(Entity<BladeArenaComponent> ent, ref EndCollideEvent args)
     {
         var uid = args.OtherEntity;
-
-        if (!TryComp(uid, out HereticArenaParticipantComponent? participant) || !participant.IsInsideArena)
-            return;
-
-        if (!participant.WasBreathingImmune)
-            RemCompDeferred<SpecialBreathingImmunityComponent>(uid);
-
-        if (!participant.WasPressureImmune)
-            RemCompDeferred<SpecialPressureImmunityComponent>(uid);
-
-        if (!participant.WasIgnoringGravity)
-            RemCompDeferred<MovementIgnoreGravityComponent>(uid);
-
-        participant.IsInsideArena = false;
-        Dirty(uid, participant);
+        RemComp<InsideArenaComponent>(uid);
+        var ev = new ArenaParticipantStatusChangedEvent(ent, false);
+        RaiseLocalEvent(uid, ref ev);
     }
 
     private void OnMobStateChanged(Entity<HereticArenaParticipantComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.OldMobState != MobState.Alive || args.NewMobState <= args.OldMobState ||
             args.Origin is not { } origin || origin == ent.Owner ||
-            !TryComp(origin, out HereticArenaParticipantComponent? victor) ||
-            !ent.Comp.IsInsideArena || !victor.IsInsideArena)
+            !ParticipantQuery.TryComp(origin, out var victor) ||
+            !IsInsideArena(ent) || !IsInsideArena(origin))
             return;
 
         _heretic.TryGetHereticComponent(origin, out var heretic, out var mind);
@@ -163,8 +181,7 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        if (Exists(ent.Comp.Mind) && TryComp(ent.Comp.Mind.Value, out MindComponent? mind) &&
-            _role.MindHasRole<HereticArenaParticipantRoleComponent>(ent.Comp.Mind.Value))
+        if (Exists(ent.Comp.Mind) && TryComp(ent.Comp.Mind.Value, out MindComponent? mind))
             _role.MindRemoveRole<HereticArenaParticipantRoleComponent>((ent.Comp.Mind.Value, mind));
     }
 
@@ -219,24 +236,18 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
     {
         var uid = args.OtherEntity;
 
-        if (!HasComp<MobStateActionsComponent>(uid) ||
-            !HasComp<HumanoidProfileComponent>(uid) ||
-            HasComp<GhoulComponent>(uid))
+        if (!_whitelist.CheckBoth(uid, ent.Comp.ParticipantBlacklist, ent.Comp.ParticipantWhitelist))
+            return;
+
+        if (EnsureComp<InsideArenaComponent>(uid, out _))
             return;
 
         ent.Comp.Participants.Add(uid);
 
-        var participant = EnsureComp<HereticArenaParticipantComponent>(uid);
+        EntityManager.AddComponents(uid, ent.Comp.ComponentsToAdd, false);
 
-        if (participant.IsInsideArena)
-            return;
-
-        participant.WasBreathingImmune = EnsureComp<SpecialBreathingImmunityComponent>(uid, out _);
-        participant.WasPressureImmune = EnsureComp<SpecialPressureImmunityComponent>(uid, out _);
-        participant.WasIgnoringGravity = EnsureComp<MovementIgnoreGravityComponent>(uid, out _);
-
-        participant.IsInsideArena = true;
-        Dirty(uid, participant);
+        var ev = new ArenaParticipantStatusChangedEvent(ent, true);
+        RaiseLocalEvent(uid, ref ev);
     }
 
     private void OnShutdown(Entity<BladeArenaComponent> ent, ref ComponentShutdown args)
@@ -246,7 +257,7 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
             if (TerminatingOrDeleted(participant))
                 continue;
 
-            RemCompDeferred<HereticArenaParticipantComponent>(participant);
+            EntityManager.RemoveComponents(participant, ent.Comp.ComponentsToAdd);
         }
 
         if (TerminatingOrDeleted(ent.Comp.Grid) || !TryComp(ent.Comp.Grid, out MapGridComponent? grid))
@@ -308,7 +319,7 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
         var bounds = _lookup.GetWorldBounds(centerTile);
         bounds.Box = bounds.Box.Enlarged(ent.Comp.Radius).Scale(1f - 0.2f / ent.Comp.Radius);
         _intersecting.Clear();
-        _lookup.GetEntitiesIntersecting(grid, bounds, _intersecting, LookupFlags.Static);
+        _lookup.GetEntitiesIntersecting(coords.MapId, bounds, _intersecting, LookupFlags.Static);
         foreach (var uid in _intersecting)
         {
             if (_tag.HasTag(uid, ent.Comp.WallTag))
@@ -331,6 +342,7 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
 
         for (var i = -ent.Comp.Radius; i < ent.Comp.Radius; i++)
         {
+            // Same logic as in GetGreatestDistAndTiles below
             var a = originIndices + new Vector2i(i, ent.Comp.Radius);
             var c = originIndices + new Vector2i(ent.Comp.Radius, -i);
             var b = originIndices + new Vector2i(-i, -ent.Comp.Radius);
@@ -396,5 +408,84 @@ public sealed class BladeArenaSystem : SharedBladeArenaSystem
         var spawned = Spawn(proto, coords);
         _transform.AnchorEntity((spawned, Transform(spawned)), grid);
         arena.SpawnedEntities.Add(spawned);
+    }
+
+    public EntityUid? TrySpawnArena(EntityCoordinates coords,
+        EntProtoId<BladeArenaComponent> proto,
+        ProtoId<ContentTileDefinition> tileReplacement,
+        int minRadius,
+        int tileRadius)
+    {
+        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coords), out var grid, out var gridComp))
+            return null;
+
+        var center = _map.TileIndicesFor(grid, gridComp, coords);
+        if (!_map.TryGetTileRef(grid, gridComp, center, out var centerTile))
+            return null;
+
+        _tilesToConvert.Clear();
+        _tilesToConvert.Add(centerTile);
+
+        var max = GetGreatestDistAndTiles();
+
+        if (max < minRadius)
+            return null;
+
+        var replacement = _proto.Index(tileReplacement);
+
+        var arena = EntityManager.CreateEntityUninitialized(proto, coords);
+        var comp = EnsureComp<BladeArenaComponent>(arena);
+        comp.Radius = max;
+        comp.Grid = grid;
+        EntityManager.InitializeAndStartEntity(arena);
+
+
+        comp.TilesToRestore.Clear();
+        foreach (var tile in _tilesToConvert)
+        {
+            comp.TilesToRestore.Add(tile.GridIndices);
+            _tile.ReplaceTile(tile, replacement, grid, gridComp, ignoreLimit: true);
+        }
+
+        return arena;
+
+        int GetGreatestDistAndTiles()
+        {
+            var greatestDist = 0;
+
+            // Iterate through hollow squares (i*2+1)x(i*2+1).
+            // If there is a tile that doesn't belong to grid,
+            // stop iterating and return greatest distance that arena can occupy
+            for (var i = 1; i <= tileRadius; i++)
+            {
+                for (var j = -i; j < i; j++)
+                {
+                    /*
+                     * Example: i = 2
+                     * x - center
+                     * j: [-2, 2)
+                     * -2 -1  0  1 -2
+                     *  1          -1
+                     *  0     x     0
+                     * -1           1
+                     * -2  1  0 -1 -2
+                     */
+                    if (!_map.TryGetTileRef(grid, gridComp, center + new Vector2i(j, i), out var tile1) ||
+                        !_map.TryGetTileRef(grid, gridComp, center + new Vector2i(i, -j), out var tile2) ||
+                        !_map.TryGetTileRef(grid, gridComp, center + new Vector2i(-j, -i), out var tile3) ||
+                        !_map.TryGetTileRef(grid, gridComp, center + new Vector2i(-i, j), out var tile4))
+                        return greatestDist;
+
+                    _tilesToConvert.Add(tile1);
+                    _tilesToConvert.Add(tile2);
+                    _tilesToConvert.Add(tile3);
+                    _tilesToConvert.Add(tile4);
+                }
+
+                greatestDist++;
+            }
+
+            return greatestDist;
+        }
     }
 }

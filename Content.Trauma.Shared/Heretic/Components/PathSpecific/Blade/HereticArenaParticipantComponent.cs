@@ -13,9 +13,6 @@ public sealed partial class HereticArenaParticipantComponent : BaseSpriteOverlay
     [DataField]
     public EntityUid? Weapon;
 
-    [DataField, AutoNetworkedField]
-    public bool IsInsideArena;
-
     [DataField]
     public EntityUid? Mind;
 
@@ -50,14 +47,14 @@ public sealed partial class HereticArenaParticipantComponent : BaseSpriteOverlay
         IgnoreArmorPierceFlags = (int) PartialArmorPierceFlags.All,
     };
 
+    // Component name -> whether entity had this component before
     [DataField]
-    public bool WasPressureImmune;
-
-    [DataField]
-    public bool WasBreathingImmune;
-
-    [DataField]
-    public bool WasIgnoringGravity;
+    public Dictionary<string, bool> GrantedComponentDictionary = new()
+    {
+        {"SpecialPressureImmunity", false},
+        {"SpecialBreathingImmunity", false},
+        {"MovementIgnoreGravity", false},
+    };
 
     [DataField]
     public string FighterState = "arena_fighter";

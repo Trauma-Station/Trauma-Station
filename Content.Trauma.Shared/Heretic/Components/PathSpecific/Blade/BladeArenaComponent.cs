@@ -3,6 +3,7 @@
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
+using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 
@@ -55,4 +56,13 @@ public sealed partial class BladeArenaComponent : Component
     [DataField]
     public int Layer = (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable |
                                        CollisionGroup.MidImpassable | CollisionGroup.LowImpassable);
+
+    [DataField]
+    public ComponentRegistry ComponentsToAdd = new();
+
+    [DataField]
+    public EntityWhitelist? ParticipantWhitelist;
+
+    [DataField]
+    public EntityWhitelist? ParticipantBlacklist;
 }
