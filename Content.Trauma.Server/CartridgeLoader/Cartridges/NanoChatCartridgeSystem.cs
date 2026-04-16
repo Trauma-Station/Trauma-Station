@@ -13,7 +13,8 @@ using Content.Shared.Database;
 using Content.Shared.PDA;
 using Content.Shared.Radio.Components;
 using Content.Trauma.Common.CartridgeLoader.Cartridges;
-using Content.Trauma.Common.NanoChat; // Goob
+using Content.Trauma.Common.Chat;
+using Content.Trauma.Common.NanoChat;
 using Content.Trauma.Shared.CartridgeLoader.Cartridges;
 using Content.Trauma.Shared.NanoChat;
 using Robust.Shared.Configuration;
@@ -276,10 +277,15 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
         var content = msg.Content;
         if (!string.IsNullOrWhiteSpace(content))
         {
-            content = FormattedMessage.EscapeText(content.Trim()); // Goob Sanitize Text
+            content = FormattedMessage.EscapeText(content.Trim());
             if (content.Length > NanoChatMessage.MaxContentLength)
                 content = content[..NanoChatMessage.MaxContentLength];
         }
+
+        var attemptEv = new UserMessageAttemptEvent(msg.Actor, content);
+        RaiseLocalEvent(ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
 
         // Create and store message for sender
         var message = new NanoChatMessage(

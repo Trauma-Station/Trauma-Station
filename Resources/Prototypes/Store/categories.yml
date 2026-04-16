@@ -33,24 +33,6 @@
   name: store-caregory-spellbook-events
   priority: 4
 
-# Goobstation
-- type: storeCategory
-  id: SpellbookSummons
-  name: store-caregory-spellbook-summons
-  priority: 5
-
-# Goobstation
-- type: storeCategory
-  id: SpellbookSpecial
-  name: store-caregory-spellbook-special
-  priority: 6
-
-# Goobstation
-- type: storeCategory
-  id: SpellbookBundles
-  name: store-caregory-spellbook-bundles
-  priority: 7
-
 #uplink categoires
 - type: storeCategory
   id: UplinkWeaponry
@@ -108,9 +90,9 @@
   priority: 10
 
 - type: storeCategory
-  id: DiscountedItems
-  name: store-discounted-items
-  priority: 200
+  id: UplinkObjective
+  name: store-category-objective
+  priority: 11
 
 #nukie delivery
 

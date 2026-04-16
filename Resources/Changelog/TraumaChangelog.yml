@@ -6797,3 +6797,179 @@ Entries:
   id: 785
   time: '2026-04-12T22:28:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1992
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed heretic realignment not removing stuns.
+  id: 786
+  time: '2026-04-13T07:14:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1997
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed slimepeople having bones...
+  id: 787
+  time: '2026-04-13T07:38:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1998
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: >-
+      Brigmedic never existed. Any rumors to the contrary are spread by the
+      Syndicate.
+  - type: Tweak
+    message: Warden now gets minor medical skills.
+  id: 788
+  time: '2026-04-13T10:12:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1984
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to resist grabs while stunned, etc.
+  id: 789
+  time: '2026-04-13T10:34:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1999
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed explosive cord not chain exploding.
+  id: 790
+  time: '2026-04-13T10:48:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2000
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed AI triumvirate being broken on some maps that had windoors covering
+      the extra core spawns.
+  id: 791
+  time: '2026-04-13T11:13:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2001
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed ninjutsu stunlock and being bad.
+  id: 792
+  time: '2026-04-13T12:18:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2002
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Completely reworked judo to be much closer to how it is on Paradise
+      station.
+  id: 793
+  time: '2026-04-13T12:52:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2003
+- author: Ministry of Truth
+  changes:
+  - type: Remove
+    message: Removed wrongthink. Rule C9 is now automatically enforced.
+  id: 794
+  time: '2026-04-13T16:36:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2005
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed rev rounds having no headrevs if nobody opted into headrev, it will
+      also look for traitor now as a fallback.
+  id: 795
+  time: '2026-04-13T17:20:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2006
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed sec distress signaller for being useless slop at best and chud
+      anti-fun at worst.
+  id: 796
+  time: '2026-04-13T19:53:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2011
+- author: Aviu, Durk
+  changes:
+  - type: Add
+    message: >-
+      Double-bladed energy sword flipping effect now makes you dodge bullets and
+      move at higher speed but only triggered when left-click attacking any mob.
+  - type: Tweak
+    message: Desword wounding reduced 7 -> 4.
+  id: 797
+  time: '2026-04-14T06:26:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1916
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed ash storms because they were causing game resets.
+  id: 798
+  time: '2026-04-14T07:46:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2020
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lathe duplication glitch.
+  id: 799
+  time: '2026-04-14T08:05:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2021
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mice and xenobio slimes now despawn after 5 minutes if they die.
+  - type: Tweak
+    message: Bloodloss and asphyxiation no longer damage limbs.
+  id: 800
+  time: '2026-04-14T10:32:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2022
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: CBURN now gets skillchips.
+  id: 801
+  time: '2026-04-14T10:39:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2023
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed raider ddos, back to baseball bats.
+  id: 802
+  time: '2026-04-14T14:37:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2025
+- author: ImWeax
+  changes:
+  - type: Tweak
+    message: >-
+      Pizza and Bread slices now rot into their moldy variants before turning to
+      slop
+  id: 803
+  time: '2026-04-14T18:13:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2031
+- author: ImWeax
+  changes:
+  - type: Tweak
+    message: Changed station lights to be a lower color temperature
+  id: 804
+  time: '2026-04-14T18:29:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2029
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Weather is back on lavaland, hopefully no more bug
+  id: 805
+  time: '2026-04-14T19:52:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2034
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed crew reinforcement beacons to only open the ghost role after a
+      timer, and have no raffle.
+  id: 806
+  time: '2026-04-14T20:58:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2036
+- author: Wizard25671
+  changes:
+  - type: Remove
+    message: Removed Captains Sabre's Extra Limb Damage
+  id: 807
+  time: '2026-04-15T06:19:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2041

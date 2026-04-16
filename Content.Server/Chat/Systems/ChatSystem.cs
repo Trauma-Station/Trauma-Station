@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Chat;
 using Content.Goobstation.Common.Traits;
 using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Shared.Speech;
+using Content.Trauma.Common.Chat;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Systems;
 using Content.Trauma.Common.Wizard;
@@ -979,6 +980,13 @@ public sealed partial class ChatSystem : SharedChatSystem
             shell?.WriteError("You don't have an entity!");
             return false;
         }
+
+        // <Trauma>
+        var attemptEv = new PlayerMessageAttemptEvent(player, message);
+        RaiseLocalEvent(ref attemptEv);
+        if (attemptEv.Cancelled)
+            return false;
+        // </Trauma>
 
         return !_chatManager.MessageCharacterLimit(player, message);
     }
