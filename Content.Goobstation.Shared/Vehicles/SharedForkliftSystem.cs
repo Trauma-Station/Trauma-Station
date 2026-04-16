@@ -6,6 +6,7 @@ using Content.Goobstation.Shared.Training;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Destructible;
 using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -38,6 +39,7 @@ public sealed class ForkliftSystem : EntitySystem
         SubscribeLocalEvent<ForkliftComponent, VehicleMountedEvent>(OnMounted);
         SubscribeLocalEvent<ForkliftActionEvent>(OnLiftForks);
         SubscribeLocalEvent<ForkliftComponent, UnforkliftActionEvent>(OnUnliftForks);
+        SubscribeLocalEvent<ForkliftComponent, DestructionEventArgs>(OnDestruction);
     }
 
     public override void Update(float frameTime)
@@ -69,6 +71,12 @@ public sealed class ForkliftSystem : EntitySystem
         if (!_container.Remove(crateToUnload, container, destination: targetCoords))
             return;
         args.Handled = true;
+    }
+
+    private void OnDestruction(Entity<ForkliftComponent> ent, ref DestructionEventArgs args)
+    {
+        if (_container.TryGetContainer(ent.Owner, CrateContainerId, out var container))
+            _container.EmptyContainer(container);
     }
 
     private void OnLiftForks(ForkliftActionEvent args)
