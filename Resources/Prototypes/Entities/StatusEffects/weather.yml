@@ -50,7 +50,6 @@
   parent: WeatherBase
   id: WeatherAshfallLight
   components:
-  - type: WeatherDebug # Trauma
   - type: WeatherStatusEffect
     sprite:
       sprite: /Textures/Effects/weather.rsi
