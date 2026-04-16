@@ -70,7 +70,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedSanguineStrikeSystem _lifesteal = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
     [Dependency] private readonly BladeArenaSystem _arena = default!;
 
     #endregion
