@@ -50,7 +50,7 @@
     speed: 0.5
   - type: Retractor
     speed: 0.5
-  - type: Hemostat 
+  - type: Hemostat
     speed: 0.7
   - type: SurgeryTool
     startSound: /Audio/_Impstation/Items/Decapoid/switch.ogg
