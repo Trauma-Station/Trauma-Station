@@ -14,7 +14,9 @@ public sealed class WeatherDebugSystem : EntitySystem
 
     private void OnMove(Entity<WeatherDebugComponent> ent, ref MoveEvent args)
     {
+#if !DEBUG
         Log.Error($"Weather {ToPrettyString(ent)} moved from {args.OldPosition} to {args.NewPosition}!\nParent: {ToPrettyString(args.Entity.Comp1.ParentUid)}, parent changed: {args.ParentChanged}\nStack trace: {Environment.StackTrace}");
+#endif
     }
 }
 
