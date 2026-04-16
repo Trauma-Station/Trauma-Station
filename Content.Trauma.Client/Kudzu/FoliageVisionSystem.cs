@@ -3,16 +3,10 @@
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Player;
+using Content.Trauma.Shared.Kudzu;
 
 namespace Content.Trauma.Client.Kudzu;
 
-public sealed partial class IsFoliage : Component
-{
-};
-
-public sealed partial class FoliageIgnoringVision : Component
-{
-};
 
 public sealed class FoliageVisionSystem : EntitySystem
 {
@@ -25,10 +19,10 @@ public sealed class FoliageVisionSystem : EntitySystem
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnLocalPlayerAttached);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnLocalPlayerDetached);
 
-        SubscribeLocalEvent<IsFoliage, AppearanceChangeEvent>(OnAppearanceChanged);
+        SubscribeLocalEvent<IsFoliageComponent, AppearanceChangeEvent>(OnAppearanceChanged);
     }
 
-    private void OnAppearanceChanged(Entity<IsFoliage> ent, ref AppearanceChangeEvent args)
+    private void OnAppearanceChanged(Entity<IsFoliageComponent> ent, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
             return;
@@ -46,7 +40,7 @@ public sealed class FoliageVisionSystem : EntitySystem
         UpdatePlayerFoliageIgnoringVision();
     }
 
-    private void UpdateFoliageDrawDepth(Entity<IsFoliage> ent, SpriteComponent? sprite = null)
+    private void UpdateFoliageDrawDepth(Entity<IsFoliageComponent> ent, SpriteComponent? sprite = null)
     {
         if (!Resolve(ent.Owner, ref sprite, false))
             return;
@@ -60,7 +54,7 @@ public sealed class FoliageVisionSystem : EntitySystem
     private void UpdatePlayerFoliageIgnoringVision()
     {
         var attached = _playerManager.LocalEntity;
-        var shouldHaveFoliageIgnoringVision = attached != null && HasComp<FoliageIgnoringVision>(attached.Value);
+        var shouldHaveFoliageIgnoringVision = attached != null && HasComp<FoliageIgnoringVisionComponent>(attached.Value);
         _playerHasFoliageIgnoringVision = shouldHaveFoliageIgnoringVision;
     }
 }
