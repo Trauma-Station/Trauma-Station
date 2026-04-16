@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Deathsquad
 
@@ -13,12 +8,12 @@
   - type: StationEvent
     startAnnouncement: station-event-deathsquad-enroute
     startAudio:
-      path: /Audio/StationEvents/rescue_imminent.ogg
+      path: /Audio/_Goobstation/StationEvents/rescue_imminent.ogg
     reoccurrenceDelay: 30
     duration: null
     maxOccurrences: 1
   - type: LoadMapRule
-    preloadedGrid: ConsulShuttle
+    gridPath: /Maps/_Goobstation/Shuttles/consul.yml
 
 # CBURN
 
@@ -33,7 +28,7 @@
     duration: 1
     maxOccurrences: 1
   - type: LoadMapRule
-    preloadedGrid: RetortShuttleCBURN
+    gridPath: /Maps/_Goobstation/Shuttles/retort_cburn.yml
 
 # ERT
 
@@ -48,7 +43,7 @@
     duration: 1
     maxOccurrences: 1
   - type: LoadMapRule
-    preloadedGrid: RetortShuttleAssault
+    gridPath: /Maps/_Goobstation/Shuttles/retort_assault.yml
 
 - type: entity
   parent: BaseUnknownShuttleRule
@@ -61,7 +56,7 @@
     duration: 1
     maxOccurrences: 1
   - type: LoadMapRule
-    preloadedGrid: RetortShuttleMedical
+    gridPath: /Maps/_Goobstation/Shuttles/retort_medical.yml
 
 - type: entity
   parent: BaseUnknownShuttleRule
@@ -74,7 +69,7 @@
     duration: 1
     maxOccurrences: 1
   - type: LoadMapRule
-    preloadedGrid: RetortShuttleEngineering
+    gridPath: /Maps/_Goobstation/Shuttles/retort_engineering.yml
 
 - type: entity
   parent: BaseUnknownShuttleRule
@@ -87,7 +82,7 @@
     duration: 1
     maxOccurrences: 1
   - type: LoadMapRule
-    preloadedGrid: RetortShuttleJanitorial
+    gridPath: /Maps/_Goobstation/Shuttles/retort_janitorial.yml
 
 - type: entity
   parent: BaseUnknownShuttleRule
@@ -100,7 +95,7 @@
     duration: 1
     maxOccurrences: 1
   - type: LoadMapRule
-    preloadedGrid: RetortShuttleChaplain
+    gridPath: /Maps/_Goobstation/Shuttles/retort_chaplain.yml
 
 #Contractor
 - type: entity
