@@ -6973,3 +6973,10 @@ Entries:
   id: 807
   time: '2026-04-15T06:19:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2041
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed the Slasher's mask blinding them.
+  id: 808
+  time: '2026-04-16T06:52:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2059
