@@ -7,8 +7,7 @@
   icon: "JobIconLibrarian"
   supervisors: job-supervisors-hop
   access:
-  - Library # Trauma - TODO, remove service after mapping is done
-  - Service
+  - Library # Trauma - replaced Service
   - Maintenance
 - type: startingGear
   id: LibrarianGear

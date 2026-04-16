@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Shared.Sprite;
@@ -41,15 +28,14 @@ public sealed class SpriteFadeSystem : EntitySystem
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
+    [Dependency] private readonly EntityQuery<SpriteFadeComponent> _fadeQuery = default!;
+    [Dependency] private readonly EntityQuery<FadingSpriteComponent> _fadingQuery = default!;
+    [Dependency] private readonly EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     private List<(MapCoordinates Point, bool ExcludeBoundingBox)> _points = new();
 
     private readonly HashSet<FadingSpriteComponent> _comps = new();
-
-    private EntityQuery<SpriteComponent> _spriteQuery;
-    private EntityQuery<SpriteFadeComponent> _fadeQuery;
-    private EntityQuery<FadingSpriteComponent> _fadingQuery;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
 
     private const float TargetAlpha = 0.4f;
     private const float ChangeRate = 1f;
@@ -57,11 +43,6 @@ public sealed class SpriteFadeSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _spriteQuery = GetEntityQuery<SpriteComponent>();
-        _fadeQuery = GetEntityQuery<SpriteFadeComponent>();
-        _fadingQuery = GetEntityQuery<FadingSpriteComponent>();
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeLocalEvent<FadingSpriteComponent, ComponentShutdown>(OnFadingShutdown);
     }

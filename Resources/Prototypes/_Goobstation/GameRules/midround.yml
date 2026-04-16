@@ -72,7 +72,6 @@
         components:
         - CommandStaff
         - AntagImmune
-        - BibleUser
       lateJoinAdditional: true
       mindRoles:
       - MindRoleChangelingmidround
@@ -105,10 +104,8 @@
         components:
         - CommandStaff
         - AntagImmune
-        - BibleUser
       startingGear: Heretictmidround
       lateJoinAdditional: true
-      jobBlacklist: [ Chaplain ] # GOOBSTATION
       mindRoles:
       - MindRoleHeretic
 
@@ -224,35 +221,6 @@
 
 - type: entity
   parent: BaseGameRule
-  id: GreyTideAntagMidround
-  components:
-  - type: StationEvent
-    weight: 1
-    duration: null
-    earliestStart: 20
-    minimumPlayers: 40
-  - type: AntagSpawner
-    prototype: MobHumanGreyTide
-  - type: AntagSelection
-    agentName: ghost-role-information-grey-tide-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostGreyTide
-      min: 1
-      max: 1
-      pickPlayer: false
-      mindRoles:
-      - MindRoleGhostRoleSoloAntagonist
-      briefing:
-        text: grey-tide-role-greeting
-        color: Red
-        sound: /Audio/_Goobstation/Music/the_gray_tide_song.ogg
-  - type: AntagRandomSpawn # TODO replace with MaintsSpawnRuleComponent once mapped
-  - type: AntagObjectives
-    objectives:
-    - GrayTideKillEveryoneObjective
-
-- type: entity
-  parent: BaseGameRule
   id: TunnelClownMidround
   components:
   - type: StationEvent
@@ -275,7 +243,7 @@
         text: tunnel-clown-role-greeting
         color: Pink
         sound: /Audio/_Goobstation/Misc/clownalwayswinsshort.ogg
-  - type: AntagRandomSpawn # TODO replace with MaintsSpawnRuleComponent once mapped
+  - type: MaintsSpawnRule
   - type: AntagObjectives
     objectives:
     - TunnelClownProtectMaintenanceObjective

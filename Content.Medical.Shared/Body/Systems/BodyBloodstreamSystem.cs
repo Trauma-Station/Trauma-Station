@@ -2,7 +2,6 @@
 
 using Content.Medical.Common.Body;
 using Content.Medical.Common.CCVar;
-using Content.Medical.Shared.Consciousness;
 using Content.Medical.Shared.Wounds;
 using Content.Medical.Shared.Traumas;
 using Content.Shared.Alert;
@@ -23,7 +22,6 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -43,7 +41,6 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
         SubscribeLocalEvent<BleedInflicterComponent, WoundAddedEvent>(OnWoundAdded);
 
         SubscribeLocalEvent<BodyComponent, BloodstreamUpdateEvent>(OnBodyUpdate);
-        SubscribeLocalEvent<ConsciousnessComponent, BloodstreamUpdateEvent>(OnConsciousnessUpdate);
 
         Subs.CVar(_cfg, SurgeryCVars.BleedingSeverityTrade, x => _bleedingSeverity = x, true);
     }
@@ -404,30 +401,5 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
             var severity = (short) Math.Clamp(Math.Round(blood.BleedAmount, MidpointRounding.ToZero), 0, 10);
             _alerts.ShowAlert(ent.Owner, blood.BleedingAlert, severity);
         }
-    }
-
-    // TODO SHITMED: this should be removed if consciousness is tied to blood oxygenation
-    private void OnConsciousnessUpdate(Entity<ConsciousnessComponent> ent, ref BloodstreamUpdateEvent args)
-    {
-        if (!_consciousness.TryGetNerveSystem(ent, out var brain))
-            return;
-
-        var level = _bloodstream.GetBloodLevel(ent.Owner);
-        if (level >= 1f)
-        {
-            _consciousness.RemoveConsciousnessModifier(ent, brain.Value, "Bleeding", ent.Comp);
-            return;
-        }
-
-        // 0% blood -> -75 consciouness modifier
-        var multiplier = FixedPoint2.New(75) * (1f - level);
-        _consciousness.SetConsciousnessModifier(
-            ent.Owner,
-            brain.Value,
-            multiplier,
-            "Bleeding",
-            ConsciousnessModType.Pain, // TODO SHITMED: no it fucking isnt, your brain is losing access to oxygen. that's not pain katsap
-            null,
-            ent.Comp);
     }
 }

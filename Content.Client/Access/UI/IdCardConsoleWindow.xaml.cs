@@ -1,26 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Moony <moony@hellomouse.net>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 c4llv07e <38111072+c4llv07e@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Access;
 using Content.Shared.Access.Systems;
@@ -46,10 +23,6 @@ namespace Content.Client.Access.UI
 
         private readonly IdCardConsoleBoundUserInterface _owner;
 
-        // CCVar.
-        private int _maxNameLength;
-        private int _maxIdJobLength;
-
         private AccessLevelControl _accessButtons = new();
         private readonly List<string> _jobPrototypeIds = new();
 
@@ -69,11 +42,8 @@ namespace Content.Client.Access.UI
 
             _owner = owner;
 
-            _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
-            _maxIdJobLength = _cfgManager.GetCVar(CCVars.MaxIdJobLength);
-
             FullNameLineEdit.OnTextEntered += _ => SubmitData();
-            FullNameLineEdit.IsValid = s => s.Length <= _maxNameLength;
+            FullNameLineEdit.IsValid = s => s.Length <= _cfgManager.GetCVar(CCVars.MaxNameLength);
             FullNameLineEdit.OnTextChanged += _ =>
             {
                 FullNameSaveButton.Disabled = FullNameSaveButton.Text == _lastFullName;
@@ -81,7 +51,7 @@ namespace Content.Client.Access.UI
             FullNameSaveButton.OnPressed += _ => SubmitData();
 
             JobTitleLineEdit.OnTextEntered += _ => SubmitData();
-            JobTitleLineEdit.IsValid = s => s.Length <= _maxIdJobLength;
+            JobTitleLineEdit.IsValid = s => s.Length <= _cfgManager.GetCVar(CCVars.MaxIdJobLength);
             JobTitleLineEdit.OnTextChanged += _ =>
             {
                 JobTitleSaveButton.Disabled = JobTitleLineEdit.Text == _lastJobTitle;
@@ -265,7 +235,7 @@ namespace Content.Client.Access.UI
                 JobTitleLineEdit.Text,
                 // Iterate over the buttons dictionary, filter by `Pressed`, only get key from the key/value pair
                 _accessButtons.ButtonsList.Where(x => x.Value.Pressed).Select(x => x.Key).ToList(),
-                jobProtoDirty ? _jobPrototypeIds[JobPresetOptionButton.SelectedId] : string.Empty);
+                jobProtoDirty ? _jobPrototypeIds[JobPresetOptionButton.SelectedId] : null);
         }
     }
 }

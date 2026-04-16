@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
@@ -174,6 +176,24 @@ public sealed partial class BodySystem
         return vital == 0
             ? 0f // no dividing by zero incase a body somehow has no parts?!
             : (float) total / vital;
+    }
+
+    /// <summary>
+    /// Get the number of vital parts for an entity, falls back to 1 for non-mobs.
+    /// </summary>
+    public int GetVitalParts(Entity<BodyComponent?> body)
+    {
+        if (!_bodyQuery.Resolve(body, ref body.Comp, false) || body.Comp.Organs?.ContainedEntities is not {} organs)
+            return 1;
+
+        int vital = 0;
+        foreach (var organ in organs)
+        {
+            if (GetCategory(organ) is {} category && VitalParts.Contains(category))
+                vital++;
+        }
+
+        return vital;
     }
 
     /// <summary>

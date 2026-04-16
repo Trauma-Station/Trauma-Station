@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Religion.Nullrod.Systems;
-using Content.Shared._Shitcode.Heretic.Rituals;
 using Content.Medical.Common.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 using Content.Shared.Hands;
 using Content.Shared.Inventory;
@@ -30,9 +26,6 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
 
         SubscribeLocalEvent<ShouldTakeHolyComponent, UnholyStatusChangedEvent>(OnUnholyStatus);
 
-        SubscribeLocalEvent<HereticRitualRuneComponent, StartCollideEvent>(OnCollide);
-        SubscribeLocalEvent<HereticRitualRuneComponent, EndCollideEvent>(OnCollideEnd);
-
         SubscribeLocalEvent<WeakToHolyComponent, ComponentShutdown>(OnWeakShutdown);
         SubscribeLocalEvent<WeakToHolyComponent, UnholyStatusChangedEvent>(OnWeakStatus);
 
@@ -40,18 +33,36 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         SubscribeLocalEvent<UnholyItemComponent, GotUnequippedEvent>(OnUnquip);
         SubscribeLocalEvent<UnholyItemComponent, GotEquippedHandEvent>(OnHandEquip);
         SubscribeLocalEvent<UnholyItemComponent, GotUnequippedHandEvent>(OnHandUnequip);
+        SubscribeLocalEvent<UnholyItemComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<UnholyItemComponent, ComponentShutdown>(OnShutdown);
+    }
+
+    private void OnShutdown(Entity<UnholyItemComponent> ent, ref ComponentShutdown args)
+    {
+        var parent = Transform(ent).ParentUid;
+        if (TerminatingOrDeleted(parent) || !HasComp<WeakToHolyComponent>(parent))
+            return;
+
+        ChangeUnholyStatus(ent, parent, false);
+    }
+
+    private void OnStartup(Entity<UnholyItemComponent> ent, ref ComponentStartup args)
+    {
+        var parent = Transform(ent).ParentUid;
+        if (TerminatingOrDeleted(parent) || !HasComp<WeakToHolyComponent>(parent))
+            return;
+
+        ChangeUnholyStatus(ent, parent, true);
     }
 
     private void OnHandUnequip(Entity<UnholyItemComponent> ent, ref GotUnequippedHandEvent args)
     {
-        var ev = new UnholyStatusChangedEvent(args.User, ent, false);
-        RaiseLocalEvent(args.User, ref ev);
+        ChangeUnholyStatus(ent, args.User, false);
     }
 
     private void OnHandEquip(Entity<UnholyItemComponent> ent, ref GotEquippedHandEvent args)
     {
-        var ev = new UnholyStatusChangedEvent(args.User, ent, true);
-        RaiseLocalEvent(args.User, ref ev);
+        ChangeUnholyStatus(ent, args.User, true);
     }
 
     private void OnUnquip(Entity<UnholyItemComponent> ent, ref GotUnequippedEvent args)
@@ -59,8 +70,7 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 
-        var ev = new UnholyStatusChangedEvent(args.Equipee, ent, false);
-        RaiseLocalEvent(args.Equipee, ref ev);
+        ChangeUnholyStatus(ent, args.Equipee, false);
     }
 
     private void OnEquip(Entity<UnholyItemComponent> ent, ref GotEquippedEvent args)
@@ -68,8 +78,13 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 
-        var ev = new UnholyStatusChangedEvent(args.Equipee, ent, true);
-        RaiseLocalEvent(args.Equipee, ref ev);
+        ChangeUnholyStatus(ent, args.Equipee, true);
+    }
+
+    private void ChangeUnholyStatus(EntityUid source, EntityUid user, bool status)
+    {
+        var ev = new UnholyStatusChangedEvent(user, source, status);
+        RaiseLocalEvent(user, ref ev);
     }
 
     private void OnUnholyStatus(Entity<ShouldTakeHolyComponent> ent, ref UnholyStatusChangedEvent args)
@@ -120,25 +135,6 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         RemCompDeferred<AlwaysTakeHolyComponent>(ent);
     }
 
-    #region Holy Healing
-
-    // Passively heal on runes
-    private void OnCollide(Entity<HereticRitualRuneComponent> ent, ref StartCollideEvent args)
-    {
-        if (!TryComp<WeakToHolyComponent>(args.OtherEntity, out var weak))
-            return;
-
-        weak.IsColliding = true;
-    }
-
-    private void OnCollideEnd(Entity<HereticRitualRuneComponent> ent, ref EndCollideEvent args)
-    {
-        if (!TryComp<WeakToHolyComponent>(args.OtherEntity, out var weak))
-            return;
-
-        weak.IsColliding = false;
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -171,6 +167,4 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
 
         _toUpdate.Clear();
     }
-
-    #endregion
 }

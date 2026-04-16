@@ -37,12 +37,15 @@
       max: 3
       playerRatio: 15
       lateJoinAdditional: true
-      jobBlacklist: [ Chaplain, ] # GOOBSTATION
       blacklist:
         components:
         - CommandStaff
       mindRoles:
       - MindRoleHeretic
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity
   parent: BaseGameRule
@@ -64,9 +67,12 @@
       max: 2
       playerRatio: 20
       lateJoinAdditional: true
-      jobBlacklist: [ Chaplain ] # GOOBSTATION
       blacklist:
         components:
         - CommandStaff
       mindRoles:
       - MindRoleHeretic
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills

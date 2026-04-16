@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Prototypes;
 using Content.Shared.Humanoid;
-using Robust.Shared.GameStates;
 
 namespace Content.Medical.Shared.Surgery.Steps;
 

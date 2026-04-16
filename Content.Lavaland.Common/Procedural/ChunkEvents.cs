@@ -3,13 +3,6 @@
 namespace Content.Lavaland.Common.Procedural;
 
 /// <summary>
-/// Raised on a grid entity when biome chunk is about to unload.
-/// Cancel to prevent unloading it.
-/// </summary>
-[ByRefEvent]
-public record struct ChunkUnloadAttemptEvent(Vector2i Chunk, bool Cancelled = false);
-
-/// <summary>
 /// Raised on a grid entity when biome chunk is about to load.
 /// Cancel to prevent loading it.
 /// </summary>

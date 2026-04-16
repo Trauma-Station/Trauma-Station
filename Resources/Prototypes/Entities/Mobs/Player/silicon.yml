@@ -4,6 +4,19 @@
   description: Components added / removed from an entity that gets inserted into an AI core.
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+    damageContainers:
+    - Silicon
+    - SiliconRadiation
+  - type: ContentEye
+    maxZoom: 1.44,1.44
+  # </Trauma>
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
@@ -27,11 +40,6 @@
     - Security
     - Service
     - Supply
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: IgnoreUIRange
   - type: StationAiHeld
   - type: StationAiOverlay
@@ -39,9 +47,7 @@
   - type: ActionGrant
     actions:
     - ActionJumpToCore
-    - ActionSurvCameraLights
     - ActionAIViewLaws
-    - ActionOpenRemoteDevicesMenu # Corvax-Next-AiRemoteControl
     - ActionOpenCameraWarpMenu # Goobstation-Ai-Camera-Jumping
   - type: UserInterface
     interfaces:
@@ -55,8 +61,6 @@
         type: SiliconLawBoundUserInterface
       enum.CommunicationsConsoleUiKey.Key:
         type: CommunicationsConsoleBoundUserInterface
-      enum.RemoteDeviceUiKey.Key: # Corvax-Next-AiRemoteControl
-        type: RemoteDevicesBoundUserInterface
       enum.CamWarpUiKey.Key: # Goobstation-Ai-Camera-Jumping
         type: AiCameraWarpBoundUserInterface
   - type: IntrinsicUI
@@ -83,13 +87,6 @@
     color: "#5ed7aa"
   - type: ShowJobIcons
   - type: ShowCrewIcons
-  - type: ShowHealthIcons #Goobstation
-  - type: ShowHealthBars #Goobstation
-    damageContainers:
-    - Silicon
-    - SiliconRadiation
-  - type: ContentEye  #Goobstation
-    maxZoom: 1.44,1.44
   - type: DamagedSiliconAccent
     startPowerCorruptionAtCharIdx: 4
     maxPowerCorruptionAtCharIdx: 20
@@ -99,6 +96,13 @@
   description: Components added / removed from an entity that gets inserted into an Intellicard.
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+    canUseInCrit: true
+  # </Trauma>
   - type: IntrinsicRadioReceiver
   #- type: IntrinsicRadioTransmitter
   #  channels:
@@ -107,12 +111,6 @@
     channels:
     # - Binary # Goobstation - replaced with collective mind
     - Common
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
-    canUseInCrit: true # Goobstation
   - type: ActionGrant
     actions:
     - ActionAIViewLaws
@@ -304,6 +302,16 @@
         enum.StationAiVisualLayers.Base:
           False: { state: ai_empty }
           True: { state: ai_error }
+  - type: CreamPied
+    sprite:
+      sprite: Effects/creampie.rsi
+      state: creampie_ai
+  - type: Reactive
+    reactions:
+    - reagents: [Water, SpaceCleaner]
+      methods: [Touch]
+      effects:
+      - !type:WashCreamPie
   - type: InteractionPopup
     interactSuccessString: petting-success-station-ai
     interactFailureString: petting-failure-station-ai
@@ -431,12 +439,16 @@
   parent: PositronicBrain
   categories: [ HideSpawnMenu, DoNotMap ]
   components:
+  # <Trauma>
+  - type: IonStormTarget # AI can be ion stormed
+  - type: SpeechSynthesis
+    voice: Borg
+  # </Trauma>
   - type: Sprite
     # Once it's in a core it's pretty much an abstract entity at that point.
     visible: false
   - type: SiliconLawProvider
     laws: NTDefault # Goobstation - AI/borg law changes - set AI to NTDefault
-  - type: IonStormTarget # Goobstation - AI/borg law changes - ion stormable AI
   - type: SiliconLawBound
   - type: ActionGrant
     actions:
@@ -488,8 +500,6 @@
     mindRoles:
     - MindRoleGhostRoleSilicon
     job: StationAi
-  - type: SpeechSynthesis # Corvax-Frontier-Barks
-    voice: Borg
 
 # Hologram projection that the AI's eye tracks.
 - type: entity
@@ -501,9 +511,22 @@
   description: The AI's viewer.
   categories: [ HideSpawnMenu, DoNotMap ]
   components:
-  - type: MovementSpeedModifier # Goobstation
+  # <Trauma>
+  - type: MovementSpeedModifier
     baseSprintSpeed: 14
     baseWalkSpeed: 28
+  - type: AiEye
+  # </Trauma>
+  - type: Fixtures
+    fixtures:
+      lightTrigger:
+        shape:
+          !type:PhysShapeCircle
+          radius: 8
+        density: 80
+        hard: false
+        layer:
+        - GhostImpassable
   - type: NoFTL
   - type: WarpPoint
     follow: true
@@ -517,7 +540,7 @@
     - state: ai_camera
       shader: unshaded
       map: ["base"]
-  - type: AiEye # Trauma
+  - type: CameraActiveOnCollideCollider
 
 # The holographic representation of the AI that is projected from a holopad.
 - type: entity

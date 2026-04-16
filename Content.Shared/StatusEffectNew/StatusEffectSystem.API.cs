@@ -192,6 +192,13 @@ public sealed partial class StatusEffectsSystem
 
         foreach (var e in container.ActiveStatusEffects?.ContainedEntities ?? [])
         {
+            // <Trauma>
+            if (!Exists(e))
+            {
+                Log.Error($"Found deleted entity {e} inside effects container for {ToPrettyString(target)} while looking for {effectProto}!");
+                continue;
+            }
+            // </Trauma>
             var meta = MetaData(e);
             if (meta.EntityPrototype is not null && meta.EntityPrototype == effectProto)
             {

@@ -330,34 +330,15 @@
   - type: WorldTargetAction
     event: !type:ActionGunShootEvent
 
-# Goobstation start: dragon rework
 - type: entity
-  parent: BaseAction
-  id: ActionRiseFish
-  name: Summon Carp Horde
-  description: Summons 3 carps on the spot to protect you from danger!
+  parent: Smoke
+  id: BloodSmoke
+  name: smoke
+  categories: [ HideSpawnMenu ]
   components:
-  - type: Action
-    icon:
-      sprite: _Goobstation/Actions/dragon.rsi
-      state: carp_horde
-    useDelay: 90
-    priority: 4
-  - type: InstantAction
-    event: !type:DragonSpawnCarpHordeActionEvent
-
-- type: entity
-  parent: BaseAction
-  id: ActionDragonRoar
-  name: Wing flap
-  description: Flap your wings to stun all enemies around you!
-  components:
-  - type: Action
-    icon:
-      sprite: _Goobstation/Actions/dragon.rsi
-      state: wing_flap
-    useDelay: 45
-    priority: 5
-  - type: InstantAction
-    event: !type:DragonRoarActionEvent
-# Goobstation end
+  - type: Smoke
+    spreadAmount: 3
+    duration: 2
+  - type: Sprite
+    sprite: Effects/chemsmoke.rsi
+    state: chemsmoke_white

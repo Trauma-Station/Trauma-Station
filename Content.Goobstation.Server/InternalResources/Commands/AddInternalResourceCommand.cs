@@ -7,7 +7,6 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Administration;
 using Content.Shared.Prototypes;
 using Robust.Shared.Console;
-using Robust.Shared.Prototypes;
 using System;
 using System.Linq;
 

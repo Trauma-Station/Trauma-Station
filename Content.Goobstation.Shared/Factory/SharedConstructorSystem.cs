@@ -5,7 +5,6 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Factory;
 

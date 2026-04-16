@@ -4,7 +4,6 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 

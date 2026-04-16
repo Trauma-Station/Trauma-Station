@@ -5,7 +5,6 @@ namespace Content.Shared.Input
     [KeyFunctions]
     public static class ContentKeyFunctions
     {
-        public static readonly BoundKeyFunction Sprint = "Sprint"; // Goobstation
         public static readonly BoundKeyFunction ToggleKnockdown = "ToggleKnockdown";
         public static readonly BoundKeyFunction UseItemInHand = "ActivateItemInHand";
         public static readonly BoundKeyFunction AltUseItemInHand = "AltActivateItemInHand";
@@ -22,7 +21,6 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction FocusOOC = "FocusOOCWindow";
         public static readonly BoundKeyFunction FocusAdminChat = "FocusAdminChatWindow";
         public static readonly BoundKeyFunction FocusDeadChat = "FocusDeadChatWindow";
-        public static readonly BoundKeyFunction FocusCollectiveMindChat = "FocusCollectiveMindChatWindow"; // Goobstation - Starlight collective mind port
         public static readonly BoundKeyFunction FocusConsoleChat = "FocusConsoleChatWindow";
         public static readonly BoundKeyFunction CycleChatChannelForward = "CycleChatChannelForward";
         public static readonly BoundKeyFunction CycleChatChannelBackward = "CycleChatChannelBackward";
@@ -30,7 +28,6 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction OpenCharacterMenu = "OpenCharacterMenu";
         public static readonly BoundKeyFunction OpenEmotesMenu = "OpenEmotesMenu";
         public static readonly BoundKeyFunction OpenCraftingMenu = "OpenCraftingMenu";
-        public static readonly BoundKeyFunction OpenLanguageMenu = "OpenLanguageMenu"; // Einstein Engines - Language
         public static readonly BoundKeyFunction OpenGuidebook = "OpenGuidebook";
         public static readonly BoundKeyFunction OpenInventoryMenu = "OpenInventoryMenu";
         public static readonly BoundKeyFunction SmartEquipBackpack = "SmartEquipBackpack";
@@ -67,7 +64,6 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction ZoomOut = "ZoomOut";
         public static readonly BoundKeyFunction ZoomIn = "ZoomIn";
         public static readonly BoundKeyFunction ResetZoom = "ResetZoom";
-        public static readonly BoundKeyFunction ResistGrab = "ResistGrab"; // Goobstation - Grab Intent
 
         // Shitmed Change Start
         public static readonly BoundKeyFunction TargetHead = "TargetHead";

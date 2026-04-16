@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.CollectiveMind;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -11,8 +10,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind;
 
@@ -31,6 +30,7 @@ public sealed class ShadowlingSonicScreechSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
 
     public override void Initialize()
     {
@@ -75,7 +75,7 @@ public sealed class ShadowlingSonicScreechSystem : EntitySystem
                 HasComp<ShadowlingComponent>(entity))
                 continue;
 
-            if (HasComp<SiliconComponent>(entity))
+            if (_silicon.IsSilicon(entity))
             {
                 _stun.TryAddParalyzeDuration(entity, component.SiliconStunTime);
                 continue;

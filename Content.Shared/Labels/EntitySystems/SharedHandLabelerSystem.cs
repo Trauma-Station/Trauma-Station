@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.Chat;
 using Robust.Shared.Audio.Systems;
 // </Trauma>
 using Content.Shared.Administration.Logs;
@@ -72,6 +73,13 @@ public abstract class SharedHandLabelerSystem : EntitySystem
             RemoveLabelFrom(ent, user, target);
             return;
         }
+
+        // <Trauma>
+        var ev = new UserMessageAttemptEvent(user, ent.Comp.AssignedLabel);
+        RaiseLocalEvent(ent, ref ev, true);
+        if (ev.Cancelled)
+            return;
+        // </Trauma>
 
         if (_netManager.IsServer)
             _labelSystem.Label(target, ent.Comp.AssignedLabel);

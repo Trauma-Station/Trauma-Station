@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Movement.Components;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
@@ -80,8 +74,7 @@ public sealed partial class ReplaySpectatorSystem
         if ((Direction & DirectionFlag.East) != 0)
             effectiveDir &= ~DirectionFlag.West;
 
-        var query = GetEntityQuery<TransformComponent>();
-        var xform = query.GetComponent(player);
+        var xform = Transform(player);
         var pos = _transform.GetWorldPosition(xform);
 
         if (!xform.ParentUid.IsValid())

@@ -11,7 +11,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Content.Shared.Humanoid;
 

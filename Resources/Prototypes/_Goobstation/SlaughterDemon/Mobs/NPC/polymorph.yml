@@ -1,13 +1,12 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# no demonic whisper on this one
 - type: entity
-  id: PolymorphBloodCrawlJaunt
+  abstract: true
+  parent: [ Incorporeal, BaseMob ]
+  id: BasePolymorphBloodCrawlJaunt
   name: Unknown
   description: You can't figure out what that is.
-  parent: [ Incorporeal, BaseMob ]
   components:
   - type: Sprite
     sprite: Structures/Specific/Anomalies/Cores/flesh_core.rsi
@@ -25,7 +24,6 @@
     - AmmoniaBlood
     - InsectBlood
     - CopperBlood
-  - type: DemonicWhisper
   - type: Visibility
     layer: 2
   - type: Spectral
@@ -36,9 +34,15 @@
     - Ghost
   - type: MindContainer
   - type: MindExaminable
+  - type: Muted
+  - type: IsDeadIC
+    dead: false
+
+- type: entity
+  parent: BasePolymorphBloodCrawlJaunt
+  id: PolymorphBloodCrawlJaunt
+  components:
+  - type: DemonicWhisper
   - type: ActionGrant
     actions:
     - DemonicWhisperAction
-  - type: Muted # 古布空间站 - ARMOK 1984
-  - type: IsDeadIC
-    dead: false

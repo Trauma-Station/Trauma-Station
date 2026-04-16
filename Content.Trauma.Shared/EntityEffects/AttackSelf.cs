@@ -4,7 +4,6 @@ using Content.Shared.CombatMode;
 using Content.Shared.EntityEffects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Weapons.Melee;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -28,15 +27,7 @@ public sealed class AttackSelfEntityEvent : EntityEffectSystem<CombatModeCompone
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-
-    private EntityQuery<MeleeWeaponComponent> _query;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _query = GetEntityQuery<MeleeWeaponComponent>();
-    }
+    [Dependency] private readonly EntityQuery<MeleeWeaponComponent> _query = default!;
 
     protected override void Effect(Entity<CombatModeComponent> ent, ref EntityEffectEvent<AttackSelf> args)
     {

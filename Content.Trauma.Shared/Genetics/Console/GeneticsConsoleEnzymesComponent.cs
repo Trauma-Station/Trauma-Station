@@ -2,8 +2,6 @@
 
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Genetics.Console;

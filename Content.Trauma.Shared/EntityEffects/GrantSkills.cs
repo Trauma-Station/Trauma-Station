@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

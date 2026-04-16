@@ -1,8 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ignaz "Ian" Kraft <ignaz.k@live.de>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Contraband;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
@@ -10,12 +6,12 @@ using Robust.Shared.Prototypes;
 namespace Content.IntegrationTests.Tests;
 
 [TestFixture]
-public sealed class ContrabandTest
+public sealed class ContrabandTest : GameTest
 {
     [Test]
     public async Task EntityShowDepartmentsAndJobs()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var client = pair.Client;
         var protoMan = client.ResolveDependency<IPrototypeManager>();
         var componentFactory = client.ResolveDependency<IComponentFactory>();
@@ -46,7 +42,5 @@ public sealed class ContrabandTest
                 }
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 }

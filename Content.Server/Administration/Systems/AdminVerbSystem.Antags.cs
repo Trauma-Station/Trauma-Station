@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server._Goobstation.Wizard.Components;
+using Content.Trauma.Common.Wizard.Components;
 // </Trauma>
 using Content.Server.Antag;
 using Content.Server.GameTicking;
@@ -214,7 +214,7 @@ public sealed partial class AdminVerbSystem
             args.Verbs.Add(paradox);
 
         // <Trauma>
-        var ev = new GetAntagVerbsEvent(args.Target, player, args);
+        var ev = new GetAntagVerbsEvent(args.Target, targetPlayer, args);
         RaiseLocalEvent(ref ev);
         // </Trauma>
     }

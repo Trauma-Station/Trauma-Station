@@ -1,0 +1,12 @@
+- type: entity
+  parent: MarkerBase
+  id: SpawnPointExtraAiCore
+  name: extra AI core spawnpoint
+  description: Needed by the Triple AI station trait
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Silicon/station_ai.rsi
+      state: ai
+  - type: ExtraAiCoreTarget

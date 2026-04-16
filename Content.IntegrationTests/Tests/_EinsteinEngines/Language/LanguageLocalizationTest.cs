@@ -1,14 +1,11 @@
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Sapphire <98045970+sapphirescript@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Prototypes;
-using Robust.Shared.Localization;
-using Content.Shared._EinsteinEngines.Language;
-using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using System.Collections.Generic;
+using System.Linq;
+using Content.Trauma.Common.Language;
+using Robust.Shared.Localization;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.Traits;
 
@@ -17,12 +14,12 @@ namespace Content.IntegrationTests.Tests.Traits;
 /// </summary>
 [TestFixture]
 [TestOf(typeof(LanguagePrototype))]
-public sealed class LanguageLocalizationTest
+public sealed class LanguageLocalizationTest : GameTest
 {
     [Test]
     public async Task TestLanguageLocalization()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var locale = server.ResolveDependency<ILocalizationManager>();
@@ -39,7 +36,5 @@ public sealed class LanguageLocalizationTest
 
             Assert.That(!missingStrings.Any(), Is.True, $"The following languages are missing localization strings:\n  {string.Join("\n  ", missingStrings)}");
         });
-
-        await pair.CleanReturnAsync();
     }
 }

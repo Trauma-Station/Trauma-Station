@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.Heretic;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Hands;

@@ -12,7 +12,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Revenant.Components;
 using Content.Shared.StatusEffect;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 //Partially ported from Impstation

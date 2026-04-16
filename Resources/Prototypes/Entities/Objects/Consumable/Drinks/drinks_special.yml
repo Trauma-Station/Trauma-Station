@@ -67,6 +67,7 @@
   components:
   - type: Sprite
     sprite: Objects/Misc/6pack.rsi
+    state: closed
     layers:
     - state: plastic-thingy
     - state: 6pack1

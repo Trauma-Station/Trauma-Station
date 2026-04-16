@@ -1,0 +1,194 @@
+- type: entityEffect
+  id: HereticBladeGraspEffect
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - MobState
+  - !type:BackstabCondition
+  effects:
+  - !type:ModifyParalysis
+    time: 1.5
+  - !type:HealthChange
+    damage:
+      types:
+        Slash: 10
+    targetPart: Chest
+
+- type: entityEffect
+  id: HereticRustGraspCatwalkEffect
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      tags:
+      - Catwalk
+  effects:
+  - !type:Delete
+  - !type:EffectsRitualEffect
+    applyOn: Grasp
+    effects:
+    - !type:ResetRustGraspDelayEffect
+      multiplier: 0.15
+    - !type:SetBlackboardValuesRitualEffect
+      values:
+        InvokeGrasp: false
+        ApplyGraspDefaultEffects: false
+        ApplyGraspMark: false
+
+- type: entityEffect
+  id: HereticRustGraspWallEffect
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      tags:
+      - Wall
+  - !type:TryMakeRustWallCondition
+  effects:
+  - !type:EffectsRitualEffect
+    applyOn: Grasp
+    effects:
+    - !type:ResetRustGraspDelayEffect
+    - !type:SetBlackboardValuesRitualEffect
+      values:
+        InvokeGrasp: false
+        ApplyGraspDefaultEffects: false
+        ApplyGraspMark: false
+
+- type: entityEffect
+  id: HereticFleshGraspEffect
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - MobState
+    blacklist:
+      components:
+      - Ghoul
+      - BorgChassis
+  - !type:MobStateCondition
+    mobstate: Alive
+    inverted: true
+  effects:
+  - !type:GhoulifyEffect
+    health: 50
+  - !type:SetBlackboardValuesRitualEffect
+    values:
+      ApplyGraspDefaultEffects: false
+      ApplyGraspMark: false
+
+- type: entityEffect
+  id: HereticLockGraspUnlockEffect
+  effects:
+  - !type:PlaySoundEffect
+    sound:
+      path: /Audio/_Goobstation/Heretic/hereticknock.ogg
+  - !type:EffectsRitualEffect
+    applyOn: Performer
+    effects:
+    - !type:PopupMessage
+      messages:
+      - heretic-lock-unlocked
+  - !type:SetBlackboardValuesRitualEffect
+    conditions:
+    - !type:HereticMinStageCondition
+      minStage: 7
+    values:
+      InvokeGrasp: false
+      ApplyGraspDefaultEffects: false
+      ApplyGraspMark: false
+
+- type: entityEffect
+  id: HereticLockGraspMechEffect
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - Mech
+  effects:
+  - !type:EjectMechPilot
+    paralyzeDuration: 5
+  - !type:NestedRitualEffect
+    proto: HereticLockGraspUnlockEffect
+
+- type: entityEffect
+  id: HereticLockGraspDoorEffect
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - Door
+    blacklist:
+      components:
+      - Mech
+  effects:
+  - !type:SetBoltsDown
+  - !type:OpenDoor
+  - !type:NestedRitualEffect
+    proto: HereticLockGraspUnlockEffect
+
+- type: entityEffect
+  id: HereticLockGraspAccessReaderEffect
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - AccessReader
+    blacklist:
+      components:
+      - MobState
+      - Door
+      - Mech
+  effects:
+  - !type:ClearAccesses
+  - !type:NestedRitualEffect
+    proto: HereticLockGraspUnlockEffect
+
+- type: entityEffect
+  id: HereticMarkAsh
+  effects:
+  - !type:TakeStaminaDamage
+    amount: 6
+    immediate: true
+  - !type:HealthChange
+    damage:
+      types:
+        Heat: 3
+    targetPart: Vital
+
+- type: entityEffect
+  id: HereticMarkBlade
+  effects:
+  - !type:AddUserProtectiveBlade
+
+- type: entityEffect
+  id: HereticMarkFlesh
+  effects:
+  - !type:CreateFleshMimic
+
+- type: entityEffect
+  id: HereticMarkLock
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: LockMarkedStatusEffect
+    time: 20
+
+- type: entityEffect
+  id: HereticMarkRust
+  effects:
+  - !type:Vomit
+  - !type:ModifyKnockdown
+    time: 20
+
+- type: entityEffect
+  id: HereticMarkVoid
+  effects:
+  - !type:VoidCurse
+    stacks: 3
+
+- type: entityEffect
+  id: HereticMarkCosmos
+  effects:
+  - !type:StarMark
+  - !type:TriggerCosmicMark
+  - !type:ModifyParalysis
+    time: 2

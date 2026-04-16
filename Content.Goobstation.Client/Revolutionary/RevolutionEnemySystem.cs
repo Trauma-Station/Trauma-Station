@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Revolutionary;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Revolutionary;
 

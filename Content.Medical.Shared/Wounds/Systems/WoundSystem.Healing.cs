@@ -2,8 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Medical.Shared.Consciousness;
-using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
@@ -16,14 +14,10 @@ namespace Content.Medical.Shared.Wounds;
 
 /// <summary>
 /// This class is responsible for managing wound healing in the shared game code.
-/// It contains methods for updating the pain state after wounds are healed,
-/// and for halting all bleeding on a given entity.
+/// It contains methods for halting all bleeding on a given entity.
 /// </summary>
 public partial class WoundSystem
 {
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!;
-    [Dependency] private readonly PainSystem _pain = default!;
-
     private void InitializeHealing()
     {
         SubscribeLocalEvent<WoundableComponent, RejuvenateEvent>(OnRejuvenate);
@@ -32,25 +26,6 @@ public partial class WoundSystem
     private void OnRejuvenate(Entity<WoundableComponent> ent, ref RejuvenateEvent args)
     {
         _container.EmptyContainer(ent.Comp.Wounds); // no more wounds
-    }
-
-    // Updates pain state after wounds are healed and starts pain decay
-    /// <param name="woundable">The entity on which to update the pain state</param>
-    private void UpdatePainAfterHealing(EntityUid woundable)
-    {
-        // Check if the body has a brain feeling pain
-        if (_body.GetBody(woundable) is not {} body ||
-            // phantom pain award
-            !_consciousness.TryGetNerveSystem(body, out var brain) ||
-            brain.Value.Comp.Pain <= FixedPoint2.Zero)
-            return;
-
-        // Calculate decay duration based on current pain level - 12 seconds per pain point
-        // 50 pain * 12 seconds per pain point = 600 seconds = 10 minutes
-        var decayDuration = TimeSpan.FromSeconds(brain.Value.Comp.Pain.Float() * 12);
-
-        // Start the pain decay process
-        _pain.StartPainDecay(body, brain.Value.Comp.Pain, decayDuration, brain.Value.Comp);
     }
 
     #region Public API
@@ -193,12 +168,6 @@ public partial class WoundSystem
 
         UpdateWoundableIntegrity(woundable, component);
         CheckWoundableSeverityThresholds(woundable, component);
-
-        // Update pain state after healing wounds if any wounds were healed
-        if (woundsToHeal.Count > 0)
-        {
-            UpdatePainAfterHealing(woundable);
-        }
     }
 
     public bool TryHealWoundsOnWoundable(EntityUid woundable,

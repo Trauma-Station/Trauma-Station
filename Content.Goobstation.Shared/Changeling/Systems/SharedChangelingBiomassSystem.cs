@@ -17,8 +17,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Stunnable;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;

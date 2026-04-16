@@ -1,8 +1,8 @@
 // <Trauma>
 using Content.Goobstation.Common.Interaction;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;

@@ -54,6 +54,12 @@ namespace Content.Goobstation.Shared.Bible // Death to serverside components. Gl
         public string LocPrefix = "bible";
 
         /// <summary>
+        /// A short light effect to display when successfully healing someone
+        /// </summary>
+        [DataField]
+        public EntProtoId? HealingLightEffect = "HolyLightEffect";
+
+        /// <summary>
         /// How much damage to deal to the entity being smitten - Goob
         /// </summary>
         [DataField]
@@ -64,6 +70,5 @@ namespace Content.Goobstation.Shared.Bible // Death to serverside components. Gl
         /// </summary>
         [DataField]
         public TimeSpan SmiteStunDuration = TimeSpan.FromSeconds(8);
-
     }
 }

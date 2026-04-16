@@ -3,7 +3,6 @@
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -22,10 +21,10 @@ public sealed class RandomOrganEffectsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RandomOrganEffectsComponent, MapInitEvent>(OnInit);
+        SubscribeLocalEvent<RandomOrganEffectsComponent, OrganGotInsertedEvent>(OnInserted);
     }
 
-    private void OnInit(Entity<RandomOrganEffectsComponent> ent, ref MapInitEvent args)
+    private void OnInserted(Entity<RandomOrganEffectsComponent> ent, ref OrganGotInsertedEvent args)
     {
         SetNextUpdate(ent);
     }

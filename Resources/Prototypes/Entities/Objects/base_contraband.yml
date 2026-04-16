@@ -113,7 +113,6 @@
   components:
   - type: Contraband
     allowedDepartments: [ Medical ]
-    allowedJobs: [ Brigmedic ] # Goob
 
 - type: entity
   id: BaseCivilianContraband

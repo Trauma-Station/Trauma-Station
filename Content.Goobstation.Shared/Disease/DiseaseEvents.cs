@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.Inventory;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Disease;
 

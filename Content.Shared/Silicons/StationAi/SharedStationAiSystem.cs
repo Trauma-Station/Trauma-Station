@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Silicons.Borgs; // Cortex-Next
+// </Trauma>
 using Content.Shared.Access.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -33,7 +36,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared._CorvaxNext.Silicons.Borgs; // Cortex-Next
 
 namespace Content.Shared.Silicons.StationAi;
 
@@ -65,8 +67,6 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     [Dependency] private readonly StationAiVisionSystem _vision = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-
-    [Dependency] private readonly SharedAiRemoteControlSystem _remoteSystem = default!; // Corvax-Next-AiRemoteControl
 
     // StationAiHeld is added to anything inside of an AI core.
     // StationAiHolder indicates it can hold an AI positronic brain (e.g. holocard / core).
@@ -210,16 +210,15 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     {
         args.Handled = true;
 
-        // Shitmed - Starlight Abductors Change Start
+        // <Trauma> - allow changing the target for abductor eye
         var target = args.Target;
         if (ent.Comp.AllowCrossGrid && TryComp(ent, out RelayInputMoverComponent? relay))
             target = relay.RelayEntity;
-        // Shitmed Change End
-
         var targetXform = Transform(target);
+        // </Trauma>
 
         // No cross-grid
-        if (targetXform.GridUid != Transform(args.User).GridUid && !ent.Comp.AllowCrossGrid) // Shitmed Change
+        if (targetXform.GridUid != Transform(args.User).GridUid && !ent.Comp.AllowCrossGrid) // Trauma - check AllowCrossGrid
         {
             return;
         }
@@ -251,12 +250,13 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         // Try to insert our thing into them
         if (_slots.CanEject(ent.Owner, args.User, ent.Comp.Slot))
         {
-            // Corvax-Next-AiRemoteControl-Start
-            if (ent.Comp.Slot.Item != null
-                && TryComp<StationAiHeldComponent>(ent.Comp.Slot.Item, out var stationAiHeldComp))
-                if (stationAiHeldComp.CurrentConnectedEntity != null)
-                    _remoteSystem.ReturnMindIntoAi(stationAiHeldComp.CurrentConnectedEntity.Value);
-            // Corvax-Next-AiRemoteControl-End
+            // <Trauma> - Corvax-Next-AiRemoteControl-Start
+            if (ent.Comp.Slot.Item is { } item)
+            {
+                var ev = new OnIntellicardInsertEvent();
+                RaiseLocalEvent(item, ref ev);
+            }
+            // </Trauma>
 
             if (!_slots.TryInsert(args.Args.Target.Value, targetHolder.Slot, ent.Comp.Slot.Item!.Value, args.User, excludeUserAudio: true))
             {
@@ -640,6 +640,29 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         }
 
         return _blocker.CanComplexInteract(entity.Owner);
+    }
+
+    /// <summary>
+    /// Gets all alive AI minds and adds them to the inputted hashset, excluding one optional mind
+    /// </summary>
+    /// <param name="aliveAis">Hashset of alive AI minds</param>
+    /// <param name="exclude">Optional mind to exclude</param>
+    public void AddAliveAis(HashSet<Entity<MindComponent>> aliveAis, EntityUid? exclude = null)
+    {
+        var query = EntityQueryEnumerator<StationAiCoreComponent, StationAiHolderComponent>();
+
+        while (query.MoveNext(out var uid, out _, out var aiHolder))
+        {
+            // the player needs to have a mind and not be the excluded one +
+            // the player has to be alive
+            if (!TryGetHeld((uid, aiHolder), out var held) || _mobState.IsDead(held.Value))
+                continue;
+
+            if (!_mind.TryGetMind(held.Value, out var mind, out var mindComp) || mind == exclude)
+                continue;
+
+            aliveAis.Add((mind, mindComp));
+        }
     }
 }
 

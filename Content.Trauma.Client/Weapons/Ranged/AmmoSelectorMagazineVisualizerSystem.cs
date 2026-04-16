@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Weapons.Ranged.Components;
-using Content.Shared._Goobstation.Weapons.AmmoSelector;
+using Content.Trauma.Shared.Weapons.AmmoSelector;
 using Content.Shared.Rounding;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.GameObjects;
@@ -20,10 +20,7 @@ public sealed class AmmoSelectorMagazineVisualizerSystem : VisualizerSystem<Ammo
         var step = ContentHelpers.RoundToLevels((int)count, (int)capacity, component.MagSteps);
 
         if (!args.AppearanceData.TryGetValue(AmmoSelectorVisuals.Selected, out var selection))
-        {
-            Log.Warning($"{ToPrettyString(uid)} does not have AmmoSelectorVisuals.Selected appearance data set. Does it have the AmmoSelectorComponent?");
             return;
-        }
 
         if (!component.MagStates.TryGetValue((string) selection, out var state))
         {

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Polymorph;
 using Content.Shared.Store;
@@ -24,7 +26,7 @@ public sealed partial class StoreSystem
 
     private void OnPurchase(ListingData listing)
     {
-        if (!_proto.TryIndex<ListingPrototype>(listing.ID, out var prototype))
+        if (!Proto.TryIndex<ListingPrototype>(listing.ID, out var prototype))
             return;
 
         // updating restocktime

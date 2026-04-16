@@ -309,19 +309,16 @@
     damage:
       types:
         Cold: 3
+    impactEffect: BulletImpactEffectBlueDisabler
   - type: Reflective # Trauma
     reflective:
     - None
-  - type: PointLight
-    radius: 2
-    color: blue
-    energy: 1
   - type: ChangeTemperatureOnCollide
     heat: -50000 # -35000 > -50000 Trauma
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
-    - state: omnilaser
+    - state: ice
       shader: unshaded
 
 - type: entity
@@ -335,15 +332,17 @@
     damage:
       types:
         Heat: 3
+    impactEffect: BulletImpactEffectRedDisabler
   - type: Reflective # Trauma
     reflective:
     - None
-  - type: PointLight
-    radius: 2
-    color: red
-    energy: 1
   - type: ChangeTemperatureOnCollide # This will probably be tweaked.
     heat: 50000 # 35000 > 50000 Trauma
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: hellfire
+      shader: unshaded
 
 - type: entity
   name: disabler bolt
@@ -486,7 +485,7 @@
     damage:
       types:
         Piercing: 3
-        Holy: 6
+        Holy: 4
 
 - type: entity
   name : stun bolt

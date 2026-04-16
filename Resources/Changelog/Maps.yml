@@ -203,3 +203,78 @@ Entries:
   id: 21
   time: '2026-03-22T15:15:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1528
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: 'All maps: Standardised tool room to always have an autolathe.'
+  - type: Tweak
+    message: >-
+      All maps: Changed EVA rooms to use external access instead of command or
+      HoP.
+  - type: Tweak
+    message: 'Reach: Added all areas, the whole ship is 100% covered'
+  id: 22
+  time: '2026-03-24T20:42:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1561
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed some maps missing job slots when they had spawnpoints mapped.
+  id: 23
+  time: '2026-03-26T16:38:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1598
+- author: deltanedas
+  changes:
+  - type: Add
+    message: 'Loop: Added a Virologist job slot.'
+  id: 24
+  time: '2026-03-26T19:48:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1600
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed all mapped disposal blockers, fun is infact legal.
+  id: 25
+  time: '2026-03-29T00:03:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1654
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Derotated Serpentcrest until someone updates its armory.
+  id: 26
+  time: '2026-03-29T12:46:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1672
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: 'Bagel: Fixed library, eva room and brig toilet using the wrong door types.'
+  id: 27
+  time: '2026-04-03T13:04:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1820
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Kettle: Added more bookshelves to the library and locked it for the
+      librarian.
+  - type: Fix
+    message: 'Kettle: Botany now has a biogenerator instead of biocube fabricator.'
+  id: 28
+  time: '2026-04-03T14:19:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1824
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed some substation lockers that had regular walls to use reinforced
+      walls.
+  id: 29
+  time: '2026-04-06T10:19:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1883
+- author: Kirikii
+  changes:
+  - type: Tweak
+    message: 'Nume: Minor changes.'
+  id: 30
+  time: '2026-04-09T10:01:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1884

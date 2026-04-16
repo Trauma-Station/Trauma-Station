@@ -1,10 +1,10 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Parry;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
-using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Physics.Components;
@@ -275,13 +275,18 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
         var ev = new GetMeleeDamageEvent(uid, new(component.Damage * Damageable.UniversalMeleeDamageModifier), new(), user, component.ResistanceBypass);
         RaiseLocalEvent(uid, ref ev);
-        // <Goobstation> - raise an event on the user too for strength augments
-        var userEv = new GetUserMeleeDamageEvent(uid, ev.Damage, ev.Modifiers);
-        RaiseLocalEvent(user, ref userEv);
-        // this currently does nothing since they are classes, but it's futureproofing for struct DamageSpecifier.
-        ev.Damage = userEv.Damage;
-        ev.Modifiers = userEv.Modifiers;
-        // </Goobstation>
+        // <Trauma> - raise an event on the user too for strength augments, knowledge, etc
+        // only consider if the user is punching or holding a weapon
+        // non-held weapons are stuff like mechs which don't take physical effort to use, so don't apply strength etc
+        if (uid == user || _hands.IsHolding(user, uid))
+        {
+            var userEv = new GetUserMeleeDamageEvent(uid, ev.Damage, ev.Modifiers);
+            RaiseLocalEvent(user, ref userEv);
+            // this currently does nothing since they are classes, but it's futureproofing for struct DamageSpecifier.
+            ev.Damage = userEv.Damage;
+            ev.Modifiers = userEv.Modifiers;
+        }
+        // </Trauma>
 
         return DamageSpecifier.ApplyModifierSets(ev.Damage, ev.Modifiers);
     }
@@ -682,7 +687,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
         _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
 
-        if (damageResult.GetTotal() > FixedPoint2.Zero)
+        if (damageResult.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(target.Value))
         {
             DoDamageEffect(targets, user, targetXform);
         }
@@ -741,17 +746,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // Validate client
         for (var i = entities.Count - 1; i >= 0; i--)
         {
-            // Goob Fix Start
             var entity = entities[i];
 
-            if (!entity.IsValid() || TerminatingOrDeleted(entity))
+            if (TerminatingOrDeleted(entity))
             {
                 entities.RemoveAt(i);
                 continue;
             }
-            // Goob Fix End
 
-            if (ArcRaySuccessful(entity,
+            if (!ArcRaySuccessful(entity,
                     userPos,
                     direction.ToWorldAngle(),
                     component.Angle,
@@ -760,11 +763,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                     user,
                     session))
             {
-                continue;
+                // Bad input
+                entities.RemoveAt(i);
             }
-
-            // Bad input
-            entities.RemoveAt(i);
         }
 
         var targets = new List<EntityUid>();
@@ -874,6 +875,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                         $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):subject} using {ToPrettyString(meleeUid):tool} and dealt {damageResult.GetTotal():damage} damage");
                 }
             }
+
+            if (TerminatingOrDeleted(entity))
+                targets.RemoveAt(i);
         }
 
         if (entities.Count != 0)
@@ -882,7 +886,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             _meleeSound.PlayHitSound(target, user, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride, component);
         }
 
-        if (appliedDamage.GetTotal() > FixedPoint2.Zero)
+        if (appliedDamage.GetTotal() > FixedPoint2.Zero && targets.Count > 0)
         {
             DoDamageEffect(targets, user, Transform(targets[0]));
         }

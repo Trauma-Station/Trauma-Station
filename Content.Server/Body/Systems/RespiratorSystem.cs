@@ -1,12 +1,11 @@
 // <Trauma>
 using Content.Medical.Common.Body;
+using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Goobstation.Common.Body.Components;
 using Content.Trauma.Common.MartialArts;
-using Content.Goobstation.Shared.Body;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared.Movement.Pulling.Components;
 using Content.Trauma.Common.Body;
+using Content.Shared.Movement.Pulling.Components;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
@@ -130,13 +129,10 @@ public sealed class RespiratorSystem : EntitySystem
 
             if (!CanBreathe(uid, respirator)) // Goobstation edit
             {
-                // DeltaV: Cosmic Cult - One line change but a refactor would be better. this is kinda cringe.
-                // Makes cultists gasp and respirate but not asphyxiate in space.
-                if (TryComp<CosmicNonRespiratingComponent>(uid, out var cultComponent)
-                    && cultComponent.Enabled
-                    && (cultComponent.EnableWhenCritical && _mobState.IsIncapacitated(uid)
-                    || cultComponent.EnableWhenAlive && _mobState.IsAlive(uid)))
-                    return;
+                var ev = new SuffocationBeforeEvent();
+                RaiseLocalEvent(uid, ref ev);
+                if (ev.Cancelled)
+                    continue;
 
                 if (_gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)
                 {
@@ -360,7 +356,7 @@ public sealed class RespiratorSystem : EntitySystem
             _adminLogger.Add(LogType.Asphyxiation, $"{ToPrettyString(ent):entity} started suffocating");
 
         _damageableSys.ChangeDamage(ent.Owner, HasComp<DebrainedComponent>(ent) ? ent.Comp.Damage * 4.5f : ent.Comp.Damage,
-            targetPart: TargetBodyPart.All, interruptsDoAfters: false, ignoreResistances: true); // Shitmed
+            targetPart: TargetBodyPart.Vital, interruptsDoAfters: false, ignoreResistances: true); // Trauma
 
         if (ent.Comp.SuffocationCycles < ent.Comp.SuffocationCycleThreshold)
             return;
@@ -375,7 +371,7 @@ public sealed class RespiratorSystem : EntitySystem
             _adminLogger.Add(LogType.Asphyxiation, $"{ToPrettyString(ent):entity} stopped suffocating");
 
         _damageableSys.ChangeDamage(ent.Owner, ent.Comp.DamageRecovery,
-            targetPart: TargetBodyPart.All, ignoreBlockers: true); // Shitmed
+            splitDamage: SplitDamageBehavior.SplitEnsureAllDamagedAndOrganic, targetPart: TargetBodyPart.All, ignoreBlockers: true); // Trauma
 
         var ev = new StopSuffocatingEvent();
         RaiseLocalEvent(ent, ref ev);

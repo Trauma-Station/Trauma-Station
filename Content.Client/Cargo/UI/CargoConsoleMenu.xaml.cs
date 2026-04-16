@@ -55,6 +55,7 @@ namespace Content.Client.Cargo.UI
 
             _orderConsoleQuery = _entityManager.GetEntityQuery<CargoOrderConsoleComponent>();
             _bankQuery = _entityManager.GetEntityQuery<StationBankAccountComponent>();
+            InitializeTrauma(); // Trauma
 
             Title = entMan.GetComponent<MetaDataComponent>(owner).EntityName;
 
@@ -160,7 +161,7 @@ namespace Content.Client.Cargo.UI
                         Product = prototype,
                         ProductName = { Text = prototype.Name },
                         MainButton = { ToolTip = prototype.Description },
-                        PointCost = { Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", prototype.Cost.ToString())) },
+                        PointCost = { Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", ModifyCost(prototype.Cost).ToString())) }, // Trauma - use ModifyCost
                         Icon = { Texture = _spriteSystem.Frame0(prototype.Icon) },
                     };
                     button.MainButton.OnPressed += args =>
@@ -211,11 +212,11 @@ namespace Content.Client.Cargo.UI
 
             foreach (var order in orders)
             {
-                if (order.Approved)
+                if (order.Approved || !_protoManager.Resolve(order.Product, out var productProto))
                     continue;
 
-                var product = _protoManager.Index<EntityPrototype>(order.ProductId);
-                var productName = product.Name;
+                var product = _protoManager.Index<EntityPrototype>(productProto.Product);
+                var productName = productProto.Name;
                 var requester = !string.IsNullOrEmpty(order.Requester) ?
                     order.Requester : Loc.GetString("cargo-console-menu-order-row-alerts-requester-unknown");
                 var account = _protoManager.Index(order.Account);
@@ -230,7 +231,7 @@ namespace Content.Client.Cargo.UI
                             "cargo-console-menu-order-row-title",
                             ("productName", productName),
                             ("orderAmount", order.OrderQuantity),
-                            ("orderPrice", order.Price)),
+                            ("orderPrice", ModifyCost(productProto.Cost))), // Trauma - use ModifyCost
                     },
 
                     Stride =
@@ -312,6 +313,7 @@ namespace Content.Client.Cargo.UI
             {
                 return;
             }
+            UpdateDestination(orderConsole.Destination); // Trauma
 
             var balance = _cargoSystem.GetBalanceFromAccount((_station.Value, bankAccount), orderConsole.Account);
             PointsLabel.Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", balance));

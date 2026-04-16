@@ -18,7 +18,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Rejuvenate;
-using Content.Shared._Starlight.CollectiveMind;
+using Content.Trauma.Common.CollectiveMind;
 using Robust.Server.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;

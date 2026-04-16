@@ -5,7 +5,6 @@ using Content.Server.Administration;
 using Content.Lavaland.Shared.Procedural.Prototypes;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Server.Commands;
 

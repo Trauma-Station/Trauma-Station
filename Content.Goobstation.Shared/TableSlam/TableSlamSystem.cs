@@ -1,21 +1,20 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Trauma.Common.MartialArts;
-using Content.Shared._EinsteinEngines.Contests;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Actions.Events;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
-using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Contests;
+using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -27,15 +26,15 @@ namespace Content.Goobstation.Shared.TableSlam;
 /// </summary>
 public sealed class TableSlamSystem : EntitySystem
 {
-    [Dependency] private readonly PullingSystem _pullingSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedStaminaSystem _staminaSystem = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
+    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly ContestsSystem _contestsSystem = default!;
+    [Dependency] private readonly CommonContestsSystem _contests = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     /// <inheritdoc/>
     public override void Initialize()
@@ -50,7 +49,7 @@ public sealed class TableSlamSystem : EntitySystem
         if(!_random.Prob(ent.Comp.ParalyzeChance))
             return;
 
-        _stunSystem.TryAddParalyzeDuration(ent, TimeSpan.FromSeconds(3));
+        _stun.TryAddParalyzeDuration(ent, TimeSpan.FromSeconds(3));
         RemComp<PostTabledComponent>(ent);
     }
 
@@ -83,7 +82,7 @@ public sealed class TableSlamSystem : EntitySystem
         if (!HasComp<BonkableComponent>(target)) // checks if its a table.
             return;
 
-        var massContest = _contestsSystem.MassContest(ent, ent.Comp.Pulling.Value);
+        var massContest = _contests.MassContest(ent, ent.Comp.Pulling.Value);
         var attemptChance = Math.Clamp(0.5f * massContest, 0f, 1f);
         var attemptRoundedToNearestQuarter = Math.Round(attemptChance * 4, MidpointRounding.ToEven) / 4;
         if(_random.Prob((float) attemptRoundedToNearestQuarter)) // base chance to table slam someone is 1 if your mass ratio is less than 1 then your going to have a harder time slamming somebody.
@@ -92,13 +91,13 @@ public sealed class TableSlamSystem : EntitySystem
 
     public void TryTableSlam(Entity<PullableComponent> ent, Entity<PullerComponent> pullerEnt, EntityUid tableUid)
     {
-        if(!_transformSystem.InRange(ent.Owner.ToCoordinates(), tableUid.ToCoordinates(), 2f ))
+        if(!_transform.InRange(ent.Owner.ToCoordinates(), tableUid.ToCoordinates(), 2f ))
             return;
 
         _standing.Down(ent);
 
-        _pullingSystem.TryStopPull(ent, ent.Comp, pullerEnt, ignoreGrab: true);
-        _throwingSystem.TryThrow(ent, tableUid.ToCoordinates() , ent.Comp.BasedTabledForceSpeed, animated: false, doSpin: false);
+        _pulling.TryStopPull(ent, ent.Comp, pullerEnt, ignoreGrab: true);
+        _throwing.TryThrow(ent, tableUid.ToCoordinates() , ent.Comp.BasedTabledForceSpeed, animated: false, doSpin: false);
         pullerEnt.Comp.NextStageChange = _gameTiming.CurTime.Add(TimeSpan.FromSeconds(3)); // prevent table slamming spam
         ent.Comp.BeingTabled = true;
     }
@@ -114,31 +113,31 @@ public sealed class TableSlamSystem : EntitySystem
         var modifierOnGlassBreak = 1;
         if (TryComp<GlassTableComponent>(args.OtherEntity, out var glassTableComponent))
         {
-            _damageableSystem.TryChangeDamage(args.OtherEntity, glassTableComponent.TableDamage, origin: ent, targetPart: TargetBodyPart.Chest);
-            _damageableSystem.TryChangeDamage(args.OtherEntity, glassTableComponent.ClimberDamage, origin: ent);
+            _damageable.TryChangeDamage(args.OtherEntity, glassTableComponent.TableDamage, origin: ent, targetPart: TargetBodyPart.Chest);
+            _damageable.TryChangeDamage(args.OtherEntity, glassTableComponent.ClimberDamage, origin: ent);
             modifierOnGlassBreak = 2;
         }
         else
         {
-            _damageableSystem.TryChangeDamage(ent.Owner,
+            _damageable.TryChangeDamage(ent.Owner,
                 new DamageSpecifier()
                 {
                     DamageDict = new() { { "Blunt", ent.Comp.TabledDamage } },
                 },
                 targetPart: TargetBodyPart.Chest);
-            _damageableSystem.TryChangeDamage(ent.Owner,
+            _damageable.TryChangeDamage(ent.Owner,
                 new DamageSpecifier()
                 {
                     DamageDict = new() { { "Blunt", ent.Comp.TabledDamage } },
                 });
         }
 
-        _staminaSystem.TakeStaminaDamage(ent, ent.Comp.TabledStaminaDamage);
-        _stunSystem.TryKnockdown(ent.Owner, TimeSpan.FromSeconds(3 * modifierOnGlassBreak), false);
+        _stamina.TakeStaminaDamage(ent, ent.Comp.TabledStaminaDamage);
+        _stun.TryKnockdown(ent.Owner, TimeSpan.FromSeconds(3 * modifierOnGlassBreak), false);
         var postTabledComponent = EnsureComp<PostTabledComponent>(ent);
         postTabledComponent.PostTabledShovableTime = _gameTiming.CurTime.Add(TimeSpan.FromSeconds(3));
         ent.Comp.BeingTabled = false;
 
-        //_audioSystem.PlayPvs("/Audio/Effects/thudswoosh.ogg", uid);
+        //_audio.PlayPvs("/Audio/Effects/thudswoosh.ogg", uid);
     }
 }

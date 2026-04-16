@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Materials;
@@ -21,7 +14,7 @@ namespace Content.Shared.Chemistry.Components;
 /// <para>Once reagents and materials have been merged this component should be depricated in favor of using a combination of <see cref="PhysicalCompositionComponent"/> and <see cref="Content.Server.Temperature.Components.TemperatureComponent"/>. May require minor reworks to both.</para>
 /// </remarks>
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(SharedSolutionContainerSystem))]
+// [Access(typeof(SharedSolutionContainerSystem))] // Trauma
 public sealed partial class SolutionComponent : Component
 {
     /// <summary>

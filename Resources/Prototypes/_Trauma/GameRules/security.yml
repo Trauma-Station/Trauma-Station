@@ -1,0 +1,31 @@
+# Random antags sec can summon if they killed all the roundstart ones
+- type: entity
+  parent: BaseGameRule
+  id: SecurityRandomAntagRule
+  components:
+  - type: NestedRule
+    rules: !type:GroupSelector
+      children:
+      - id: SleeperAgents
+        weight: 0.2 # rarely get a warning
+      - id: SleeperAgentsQuiet
+        weight: 0.8
+      - id: LoneAbductorSpawn
+        weight: 0.5 # Basically same as DuoAbductors anyway
+      - id: DuoAbductorSpawn
+        weight: 0.5
+      - id: MorphRule
+      - id: WraithMidround
+      - id: ColossusSpawn
+      - id: DragonSpawn
+      - id: NinjaSpawn
+        weight: 0.5 # even more antags!
+      - id: LoneOpsSpawn
+        weight: 0.2
+      - id: BlobSpawn
+        weight: 0.2
+      - !type:AllSelector
+        weight: 0.3
+        children: # double whammy
+        - id: RatmaSpawn # this one has an announcement
+        - id: WailingHorseQuiet

@@ -64,9 +64,9 @@
           radius: 0.2
         density: 15
         mask:
-        - SmallMobMask
+        - MobMask
         layer:
-        - SmallMobLayer
+        - MobLayer
   - type: Tag # Removes DoorBumpOpener
     tags:
       []

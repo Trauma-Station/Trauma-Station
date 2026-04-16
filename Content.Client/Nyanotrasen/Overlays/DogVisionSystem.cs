@@ -1,14 +1,5 @@
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Trauma.Common.CCVar;
 using Content.Shared.Abilities;
-using Content.Shared._DV.CCVars;
 using Robust.Client.Graphics;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -22,6 +13,7 @@ public sealed partial class DogVisionSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _playerMan = default!;
 
     private DogVisionOverlay _overlay = default!;
+    private bool _enabled = true;
 
     public override void Initialize()
     {
@@ -32,14 +24,14 @@ public sealed partial class DogVisionSystem : EntitySystem
         SubscribeLocalEvent<DogVisionComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<DogVisionComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
 
-        Subs.CVar(_cfg, DCCVars.NoVisionFilters, OnNoVisionFiltersChanged);
+        Subs.CVar(_cfg, TraumaCVars.NoVisionFilters, OnNoVisionFiltersChanged);
 
         _overlay = new();
     }
 
     private void OnDogVisionInit(EntityUid uid, DogVisionComponent component, ComponentInit args)
     {
-        if (uid == _playerMan.LocalEntity && !_cfg.GetCVar(DCCVars.NoVisionFilters))
+        if (uid == _playerMan.LocalEntity && _enabled)
             _overlayMan.AddOverlay(_overlay);
     }
 
@@ -51,7 +43,7 @@ public sealed partial class DogVisionSystem : EntitySystem
 
     private void OnPlayerAttached(EntityUid uid, DogVisionComponent component, LocalPlayerAttachedEvent args)
     {
-        if (!_cfg.GetCVar(DCCVars.NoVisionFilters))
+        if (_enabled)
             _overlayMan.AddOverlay(_overlay);
     }
 
@@ -62,6 +54,7 @@ public sealed partial class DogVisionSystem : EntitySystem
 
     private void OnNoVisionFiltersChanged(bool enabled)
     {
+        _enabled = enabled;
         if (enabled)
             _overlayMan.RemoveOverlay(_overlay);
         else

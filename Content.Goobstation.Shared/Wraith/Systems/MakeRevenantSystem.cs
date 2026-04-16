@@ -8,7 +8,6 @@ using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Revenant.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 public sealed class MakeRevenentSystem : EntitySystem

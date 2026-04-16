@@ -18,7 +18,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Prototypes;
 using Content.Medical.Shared.Wounds;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Weapons.Melee.Events;
 using System.Linq;
@@ -97,7 +96,8 @@ public sealed class SurgerySystem : SharedSurgerySystem
             true,
             origin: user,
             partMultiplier: partMultiplier,
-            targetPart: affectAll ? TargetBodyPart.All : _part.GetTargetBodyPart(part));
+            targetPart: affectAll ? TargetBodyPart.All : _part.GetTargetBodyPart(part),
+            ignoreBlockers: true);
     }
 
     private void OnSurgeryStepDamage(Entity<SurgeryTargetComponent> ent, ref SurgeryStepDamageEvent args) =>

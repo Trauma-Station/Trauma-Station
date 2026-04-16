@@ -20,9 +20,6 @@ using Robust.Shared.CPUJob.JobQueues;
 using Robust.Shared.CPUJob.JobQueues.Queues;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -33,8 +30,8 @@ namespace Content.Medical.Shared.Wounds;
 
 public sealed partial class WoundSystem : EntitySystem
 {
-    private EntityQuery<WoundComponent> _query = default!;
-    private EntityQuery<WoundableComponent> _woundableQuery = default!;
+    [Dependency] private readonly EntityQuery<WoundComponent> _query = default!;
+    [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
 
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -95,9 +92,6 @@ public sealed partial class WoundSystem : EntitySystem
     {
         base.Initialize();
 
-        _query = GetEntityQuery<WoundComponent>();
-        _woundableQuery = GetEntityQuery<WoundableComponent>();
-
         SubscribeLocalEvent<WoundComponent, ComponentGetState>(OnWoundComponentGet);
         SubscribeLocalEvent<WoundComponent, ComponentHandleState>(OnWoundComponentHandleState);
         SubscribeLocalEvent<WoundableComponent, ComponentGetState>(OnWoundableComponentGet);
@@ -123,7 +117,7 @@ public sealed partial class WoundSystem : EntitySystem
 
         _nextUpdate = now + TimeSpan.FromSeconds(1f / _medicalHealingTickrate);
 
-        // If this still causes lag, we go with the nuclear option of also checking for ConsciousnessComponent :niceportrait:
+        // TODO: make a marker component for alive mobs with a body
         var query = EntityQueryEnumerator<BodyComponent, DamageableComponent>();
         while (query.MoveNext(out var ent, out var body, out var damageable))
         {

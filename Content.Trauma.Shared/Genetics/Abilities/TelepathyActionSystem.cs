@@ -6,7 +6,6 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
@@ -20,14 +19,11 @@ public sealed class TelepathyActionSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-
-    private EntityQuery<ActorComponent> _actorQuery;
+    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _actorQuery = GetEntityQuery<ActorComponent>();
 
         SubscribeLocalEvent<TelepathyActionComponent, TelepathyActionEvent>(OnTelepathyPrompt);
 

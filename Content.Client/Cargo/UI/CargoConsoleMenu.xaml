@@ -191,6 +191,19 @@
                   <Button Name="AccountLimitToggleButton" Text="{ Loc 'cargo-console-menu-toggle-account-lock-button'}" MinHeight="45" MinWidth="120"/>
               </BoxContainer>
           </BoxContainer>
+            <!-- <Trauma> - destination tab. also indentation award ^^^	 -->
+            <BoxContainer Orientation="Vertical" Margin="15" HorizontalExpand="True" Align="Center">
+                <BoxContainer Name="NoDestinations" Orientation="Vertical">
+                    <controls:StripeBack>
+                        <Label Text="{Loc 'cargo-console-menu-no-destinations'}" Align="Center" SetWidth="200"/>
+                    </controls:StripeBack>
+                 </BoxContainer>
+                <BoxContainer Name="Destinations" Orientation="Vertical" Visible="False" SetWidth="500">
+                    <Label Text="{Loc 'cargo-console-menu-set-destination'}" Align="Center"/>
+                    <!-- RadioOptions gets added in constructor -->
+                </BoxContainer>
+            </BoxContainer>
+            <!-- </Trauma> -->
         </TabContainer>
 
         <!-- Footer -->

@@ -5,7 +5,6 @@ using Content.Server.Lathe;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;
 using Content.Shared.Popups;
-using Robust.Shared.Prototypes;
 
 public sealed class GoobLatheSystem : EntitySystem
 {

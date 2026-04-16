@@ -9,6 +9,7 @@ using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
+using Content.Trauma.Common.Blocking;
 
 namespace Content.Trauma.Shared.Blocking;
 
@@ -28,7 +29,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
         SubscribeLocalEvent<RechargeableBlockingComponent, ChargeChangedEvent>(CheckCharge);
         SubscribeLocalEvent<RechargeableBlockingComponent, PowerCellChangedEvent>(CheckCharge);
         SubscribeLocalEvent<RechargeableBlockingComponent, EmpPulseEvent>(OnEmpPulse,
-            after: [ typeof(SharedBatterySystem) ]); // need to override its value
+            after: [typeof(SharedBatterySystem)]); // need to override its value
     }
 
     private void OnExamined(Entity<RechargeableBlockingComponent> ent, ref ExaminedEvent args)
@@ -42,7 +43,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
 
     private int GetRemainingTime(EntityUid uid)
     {
-        if (_battery.GetBattery(uid) is not {} battery || battery.Comp.ChargeRate == 0)
+        if (_battery.GetBattery(uid) is not { } battery || battery.Comp.ChargeRate == 0)
             return 0;
 
         var remaining = battery.Comp.MaxCharge - _battery.GetCharge(battery.AsNullable());
@@ -51,9 +52,9 @@ public sealed class RechargeableBlockingSystem : EntitySystem
 
     private void OnDamageChanged(Entity<RechargeableBlockingComponent> ent, ref DamageChangedEvent args)
     {
-        if (_battery.GetBattery(ent.Owner) is not {} battery ||
+        if (_battery.GetBattery(ent.Owner) is not { } battery ||
             !_toggle.IsActivated(ent.Owner) ||
-            args.DamageDelta is not {} delta)
+            args.DamageDelta is not { } delta)
             return;
 
         var batteryUse = delta.GetTotal().Float();
@@ -82,7 +83,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
 
     private void CheckCharge(Entity<RechargeableBlockingComponent> ent, EntityUid? user = null)
     {
-        if (_battery.GetBattery(ent.Owner) is not {} battery)
+        if (_battery.GetBattery(ent.Owner) is not { } battery)
         {
             SetDischarged(ent, user);
             return;
