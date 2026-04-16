@@ -35,7 +35,6 @@
     blacklist:
       components:
       - WeatherImmune
-  - type: WeatherDebug
   # </Trauma>
   - type: WeatherStatusEffect
     sprite:
