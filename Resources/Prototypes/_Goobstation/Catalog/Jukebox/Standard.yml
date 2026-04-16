@@ -70,13 +70,13 @@
   id: blatantly_nuclear
   name: mrjajkes - Blatantly Nuclear
   path:
-    path: /Audio/_Goobstation/StationEvents/blatantly_nuclear.ogg
+    path: /Audio/StationEvents/blatantly_nuclear.ogg
 
 - type: jukebox
   id: countdown
   name: Qwertyqwerty - Countdown
   path:
-    path: /Audio/_Goobstation/StationEvents/countdown.ogg
+    path: /Audio/StationEvents/countdown.ogg
 
 - type: jukebox
   id: last_call
@@ -88,13 +88,13 @@
   id: running_out
   name: Bolgarich - Running Out
   path:
-    path: /Audio/_Goobstation/StationEvents/running_out.ogg
+    path: /Audio/StationEvents/running_out.ogg
 
 - type: jukebox
   id: sound_station_14
   name: Donchan - Sound Station 14
   path:
-    path: /Audio/_Goobstation/StationEvents/sound_station_14.ogg
+    path: /Audio/StationEvents/sound_station_14.ogg
 
 - type: jukebox
   id: tansume
