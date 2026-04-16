@@ -24,6 +24,7 @@
   parent: BaseKudzu
   description: A rapidly growing, dangerous plant. WHY ARE YOU STOPPING TO LOOK AT IT?!
   components:
+    - type: HideableFoliage # Trauma - For Diona Kudzu Vision
     - type: MeleeSound
       soundGroups:
         Brute:
