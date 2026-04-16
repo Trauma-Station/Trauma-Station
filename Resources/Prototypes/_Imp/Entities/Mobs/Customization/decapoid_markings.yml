@@ -184,7 +184,7 @@
 
 - type: marking
   id: DecapoidHeadAbnormal
-  bodyPart: Head
+  bodyPart: HeadTop
   groupWhitelist: [ Decapoid ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
@@ -193,7 +193,7 @@
 
 - type: marking
   id: DecapoidHeadAnvil
-  bodyPart: Head
+  bodyPart: HeadTop
   groupWhitelist: [ Decapoid ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
@@ -202,7 +202,7 @@
 
 - type: marking
   id: DecapoidHeadSpike
-  bodyPart: Head
+  bodyPart: HeadTop
   groupWhitelist: [ Decapoid ]
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
