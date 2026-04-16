@@ -258,8 +258,8 @@ public sealed class TileSystem : EntitySystem
 
         //Can't deconstruct anything that doesn't have a base turf.
         /* Trauma
-         if (tileDef.BaseTurf == null)
-            return false;
+        if (tileDef.BaseTurf == null)
+           return false;
         */
 
         var gridUid = tileRef.GridUid;
