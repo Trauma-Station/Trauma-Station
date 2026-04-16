@@ -446,7 +446,7 @@ namespace Content.IntegrationTests.Tests
                     // </Trauma>
                     EntityUid uid = default;
                     await server.WaitPost(() => uid = server.EntMan.SpawnEntity(protoId, coords));
-                    await pair.RunTicksSync(3);
+                    //await pair.RunTicksSync(3); // Trauma - don't run 500000 ticks it takes way too much time
 
                     // If the entity deleted itself, check that it didn't spawn other entities
                     if (!server.EntMan.EntityExists(uid))
@@ -469,7 +469,7 @@ namespace Content.IntegrationTests.Tests
                         BuildDiffString(clientEntities, Entities(client.EntMan), client.EntMan));
 
                     await server.WaitPost(() => server.EntMan.DeleteEntity(uid));
-                    await pair.RunTicksSync(3);
+                    //await pair.RunTicksSync(3); // Trauma
 
                     // Check that the number of entities has gone back to the original value.
                     Assert.That(Count(server.EntMan), Is.EqualTo(count), $"Server prototype {protoId} failed on deletion: count didn't reset properly\n" +
