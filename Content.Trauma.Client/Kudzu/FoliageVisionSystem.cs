@@ -48,19 +48,19 @@ public sealed class FoliageVisionSystem : EntitySystem
 
         while (query.MoveNext(out var entityUid, out _, out var sprite))
         {
-            UpdateFoliageDrawDepth(ent: entityUid!, sprite); // I dont like the ! I dont like the ! I dont like the ! ._.
+            UpdateFoliageDrawDepth(entityUid, sprite);
         }
     }
 
-    private void UpdateFoliageDrawDepth(Entity<IsFoliageComponent> ent, SpriteComponent? sprite = null)
+    private void UpdateFoliageDrawDepth(EntityUid uid, SpriteComponent? sprite = null)
     {
-        if (!Resolve(ent.Owner, ref sprite, false))
+        if (!Resolve(uid, ref sprite, false))
             return;
 
         var drawDepth = _enabled
             ? DrawDepth.Default -5
             : DrawDepth.Default +10;
-        _sprite.SetDrawDepth((ent.Owner, sprite), drawDepth);
+        _sprite.SetDrawDepth((uid, sprite), drawDepth);
     }
 
     private void UpdatePlayerFoliageIgnoringVision()
