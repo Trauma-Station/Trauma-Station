@@ -1687,7 +1687,7 @@
   - !type:StoreWhitelistCondition
     blacklist:
       tags:
-      - NukeOpsUplink #Trauma; Much too powerful for warops against lasersec.
+      - NukeOpsUplink #Trauma - Removed from nukies uplink for being too op with e-sword.
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
   name: uplink-clothing-outer-hardsuit-juggernaut-name
