@@ -11,6 +11,8 @@ namespace Content.Trauma.Client.Kudzu;
 
 public sealed class FoliageVisionSystem : EntitySystem
 {
+    private const int HighDrawDepth = 10;
+    private const int LowDrawDepth = -5;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
     private bool _enabled;
@@ -20,19 +22,10 @@ public sealed class FoliageVisionSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<FoliageIgnoringVisionComponent, LocalPlayerAttachedEvent>((_, _, args) => OnLocalPlayerAttached(args));
         SubscribeLocalEvent<FoliageIgnoringVisionComponent, LocalPlayerDetachedEvent>((_, _, args) => OnLocalPlayerDetached(args));
-        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentStartup>((_, _, args) => OnPlayerComponentStartup(args));
-        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentShutdown>((_, _, args) => OnPlayerComponentShutdown(args));
-        SubscribeLocalEvent<IsFoliageComponent, ComponentStartup>((uid, _, args) => OnKudzuComponentStartup(uid, args));
-        SubscribeLocalEvent<IsFoliageComponent, ComponentShutdown>((uid, _, args) => OnKudzuComponentShutdown(uid, args));
-        SubscribeLocalEvent<IsFoliageComponent, AppearanceChangeEvent>(OnAppearanceChanged);
-    }
-
-    private void OnAppearanceChanged(Entity<IsFoliageComponent> ent, ref AppearanceChangeEvent args)
-    {
-        if (args.Sprite == null)
-            return;
-
-        UpdateFoliageDrawDepth(ent, args.Sprite);
+        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentStartup>((uid, _, args) => OnPlayerComponentStartup(uid, args));
+        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentShutdown>((uid, _, args) => OnPlayerComponentShutdown(uid, args));
+        SubscribeLocalEvent<HideableFoliageComponent, ComponentStartup>((uid, _, args) => OnKudzuComponentStartup(uid, args));
+        SubscribeLocalEvent<HideableFoliageComponent, ComponentShutdown>((uid, _, args) => OnKudzuComponentShutdown(uid, args));
     }
 
     // Attaches detaches
@@ -47,14 +40,16 @@ public sealed class FoliageVisionSystem : EntitySystem
     }
 
     // Player Startup/Shutdown
-    private void OnPlayerComponentStartup(ComponentStartup args)
+    private void OnPlayerComponentStartup(EntityUid uid, ComponentStartup args)
     {
-        UpdatePlayerFoliageIgnoringVision();
+        if (uid == _player.LocalEntity)
+            UpdatePlayerFoliageIgnoringVision();
     }
 
-    private void OnPlayerComponentShutdown(ComponentShutdown args)
+    private void OnPlayerComponentShutdown(EntityUid uid, ComponentShutdown args)
     {
-        UpdatePlayerFoliageIgnoringVision();
+        if (uid == _player.LocalEntity)
+            UpdatePlayerFoliageIgnoringVision();
     }
 
     // Kudzu Startup/Shutdown
@@ -70,11 +65,11 @@ public sealed class FoliageVisionSystem : EntitySystem
 
     private void RefreshEveryPieceOfFoliage()
     {
-        var query = EntityQueryEnumerator<IsFoliageComponent, SpriteComponent>();
+        var query = EntityQueryEnumerator<HideableFoliageComponent, SpriteComponent>();
 
-        while (query.MoveNext(out var entityUid, out _, out var sprite))
+        while (query.MoveNext(out var uid, out _, out var sprite))
         {
-            UpdateFoliageDrawDepth(entityUid, sprite);
+            UpdateFoliageDrawDepth(uid, sprite);
         }
     }
 
@@ -84,8 +79,8 @@ public sealed class FoliageVisionSystem : EntitySystem
             return;
 
         var drawDepth = _enabled
-            ? DrawDepth.Default -5
-            : DrawDepth.Default +10;
+            ? DrawDepth.Default + LowDrawDepth
+            : DrawDepth.Default + HighDrawDepth;
         _sprite.SetDrawDepth((uid, sprite), drawDepth);
     }
 
