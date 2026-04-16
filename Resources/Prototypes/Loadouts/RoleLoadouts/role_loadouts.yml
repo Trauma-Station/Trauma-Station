@@ -18,7 +18,6 @@
   - CaptainEnvirogloves
   - CaptainGloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -40,7 +39,6 @@
   - HoPEnvirogloves
   - HoPGloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 # Silicons
 - type: roleLoadout
@@ -75,7 +73,7 @@
   - AssistantEnvirosuit
   - AssistantEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
+
 
 - type: roleLoadout
   id: JobBartender
@@ -95,7 +93,6 @@
   - BartenderEnvirosuit
   - BartenderEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobServiceWorker
@@ -113,7 +110,6 @@
   - ServiceWorkerEnvirosuit
   - ServiceWorkerEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobChef
@@ -134,7 +130,6 @@
   - ChefEnvirosuit
   - ChefEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobLibrarian
@@ -152,7 +147,6 @@
   - LibrarianEnvirosuit
   - LibrarianEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobLawyer
@@ -171,7 +165,6 @@
   - LawyerEnvirosuit
   - LawyerEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobChaplain
@@ -194,7 +187,6 @@
   - ChaplainEnvirosuit
   - ChaplainEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobJanitor
@@ -215,7 +207,6 @@
   - JanitorEnvirosuit
   - JanitorEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobBotanist
@@ -235,7 +226,6 @@
   - BotanistEnvirosuit
   - BotanistEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobClown
@@ -256,7 +246,6 @@
   - ClownEnvirosuit
   - ClownEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoidInventory # Impstation
 
 - type: roleLoadout
   id: JobMime
@@ -279,7 +268,6 @@
   - MimeEnvirogloves
   - MimeGloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoidInventory # Impstation
 
 - type: roleLoadout
   id: JobMusician
@@ -300,7 +288,6 @@
   - MusicianEnvirosuit
   - MusicianEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 # Cargo
 - type: roleLoadout
@@ -323,7 +310,6 @@
   - QuartermasterEnvirosuit
   - QuartermasterEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobCargoTechnician
@@ -345,7 +331,6 @@
   - CargoTechnicianEnvirosuit
   - CargoTechnicianEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobSalvageSpecialist
@@ -365,7 +350,6 @@
   - SalvageEnvirosuit
   - SalvageEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 # Engineering
 - type: roleLoadout
@@ -387,7 +371,6 @@
   - ChiefEngineerEnvirosuit
   - ChiefEngineerEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -404,7 +387,6 @@
   - TechnicalAssistantEnvirosuit
   - TechnicalAssistantEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobStationEngineer
@@ -425,7 +407,6 @@
   - StationEngineerEnvirosuit
   - StationEngineerEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
@@ -445,7 +426,6 @@
   - AtmosEnvirosuit
   - AtmosEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 # Science
 - type: roleLoadout
@@ -469,7 +449,6 @@
   - ResearchDirectorEnvirohelm
   - ResearchDirectorEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobScientist
@@ -493,7 +472,6 @@
   - ScientistEnvirosuit
   - ScientistEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobResearchAssistant
@@ -511,7 +489,6 @@
   - ResearchAssistantEnvirosuit
   - ResearchAssistantEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 # Security
 - type: roleLoadout
@@ -535,7 +512,6 @@
   - HeadofSecurityEnvirogloves
   - HeadofSecurityGloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobWarden
@@ -557,7 +533,6 @@
   - WardenEnvirosuit
   - WardenEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobSecurityOfficer
@@ -580,7 +555,6 @@
   - SecurityOfficerEnvirosuit
   - SecurityOfficerEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobDetective
@@ -601,7 +575,6 @@
   - DetectiveEnvirogloves
   - DetectiveGloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -620,7 +593,6 @@
   - SecurityCadetEnvirosuit
   - SecurityCadetEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 # Wildcards
 - type: roleLoadout
@@ -641,7 +613,6 @@
   - ReporterEnvirosuit
   - ReporterEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: JobPsychologist
@@ -659,7 +630,6 @@
   - PsychologistEnvirosuit
   - PsychologistEnvirogloves
   - ExclusiveItems # Trauma
-  - GroupBreathToolDecapoid # Impstation
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit
@@ -671,7 +641,6 @@
   groups:
   - GroupSpeciesBreathTool
   - GroupTankHarness
-  - GroupBreathToolDecapoid # Impstation
 
 # gives vox a nitrogen breathing tank
 # other species get nothing
@@ -686,14 +655,12 @@
   - Survival
   - GroupSpeciesBreathTool
   - GroupTankHarness
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: RoleSurvivalClown
   groups:
   - SurvivalClown
   - GroupTankHarness
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: RoleSurvivalExtended
@@ -701,7 +668,6 @@
   - SurvivalExtended
   - GroupSpeciesBreathTool
   - GroupTankHarness
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: RoleSurvivalMedical
@@ -709,7 +675,6 @@
   - SurvivalMedical
   - GroupSpeciesBreathToolMedical
   - GroupTankHarness
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: RoleSurvivalSecurity
@@ -717,7 +682,6 @@
   - SurvivalSecurity
   - GroupSpeciesBreathToolSecurity
   - GroupTankHarness
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: RoleSurvivalSyndicate
@@ -725,7 +689,6 @@
   - SurvivalSyndicate
   - GroupSpeciesBreathTool
   - GroupTankHarness
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: RoleSurvivalMilitaryDouble
@@ -738,14 +701,12 @@
   - SurvivalSyndicate
   - GroupSpeciesBreathTool
   - GroupPocketTankDouble
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: RoleSurvivalEVA
   groups:
   - GroupEVATank
   - SurvivalExtended
-  - GroupBreathToolDecapoid # Impstation
 
 - type: roleLoadout
   id: RoleSurvivalSpaceNinja

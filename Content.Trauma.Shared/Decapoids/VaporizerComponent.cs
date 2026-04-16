@@ -2,7 +2,6 @@
 
 using Content.Shared.Atmos;
 using Content.Shared.Chemistry.Reagent;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Decapoids;
@@ -11,25 +10,25 @@ namespace Content.Trauma.Shared.Decapoids;
 [AutoGenerateComponentPause]
 public sealed partial class VaporizerComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public string LiquidTank = "waterTank";
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public ProtoId<ReagentPrototype> ExpectedReagent = "Water";
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public Gas OutputGas = Gas.WaterVapor;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float MaxPressure = Atmospherics.OneAtmosphere * 10;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float ReagentToMoles = 0.07f;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float ReagentPerSecond = 0.09f;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public TimeSpan ProcessDelay = TimeSpan.FromSeconds(1);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]

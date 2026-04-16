@@ -41,7 +41,7 @@
   name: Decapoid appearance
   components:
   - type: Inventory
-    templateId: decapoid
+    templateId: diona # Human but no shoes
     displacements:
       jumpsuit:
         sizeMaps:
@@ -57,7 +57,7 @@
         sizeMaps:
           32:
             sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
-            state: jumpsuit # todo: custom? (accomodate gills?) - edit: no
+            state: jumpsuit
       gloves:
         sizeMaps:
           32:
@@ -81,15 +81,15 @@
       FootRight: RightFootDecapoid
       FootLeft: LeftFootDecapoid
       Lungs: OrganDecapoidLungs
-      Brain: OrganHumanBrain # Rest are human parts. Because.
-      Eyes: OrganHumanEyes
-      Tongue: OrganHumanTongue
-      Appendix: OrganHumanAppendix
-      Ears: OrganHumanEars
-      Heart: OrganHumanHeart
-      Stomach: OrganHumanStomach
-      Liver: OrganHumanLiver
-      Kidneys: OrganHumanKidneys
+      Stomach: OrganDecapoidStomach
+      Brain: OrganDecapoidBrain
+      Eyes: OrganDecapoidEyes
+      Tongue: OrganDecapoidTongue
+      Appendix: OrganDecapoidAppendix
+      Ears: OrganDecapoidEars
+      Heart: OrganDecapoidHeart
+      Liver: OrganDecapoidLiver
+      Kidneys: OrganDecapoidKidneys
   - type: HumanoidProfile
     species: Decapoid
 
@@ -100,17 +100,14 @@
   id: MobDecapoid
   name: Urist McCrab
   components:
-  - type: Icon
-    sprite: _Impstation/Mobs/Species/Decapoid/parts.rsi
-    state: full
   - type: Loadout
     prototypes:
-      - StartingGearDecapoidClaw
+    - StartingGearDecapoidClaw
   - type: SpeechRequiresEquipment
     equipment:
       mask:
         tags:
-          - Vaporizer
+        - Vaporizer
     failMessage: decapoid-cant-speak
   - type: Respirator
     damage:
@@ -170,7 +167,7 @@
       260: 1.0
   - type: Clumsy
     clumsySound:
-      path: /Audio/_Impstation/Effects/Clumsy/crab_snap.ogg # the game gets really touchy about having that initial forward slash.
+      path: /Audio/_Impstation/Effects/Clumsy/crab_snap.ogg
     clumsyHypo: false
     clumsyVaulting: false
     clumsyDefib: false
@@ -186,24 +183,14 @@
   - type: Speech
     speechSounds: Decapoid
   - type: TypingIndicator
-    proto: robot # todo: custom
+    proto: robot
   - type: Exoskeleton # Prevents injections with syringes. Ideally it'd be on their body parts instead but eh.
 
-- type: entity # have to do this because otherwise decapoids would not display as having their vaporizer in the customization menu.
-  save: false
-  id: MobDecapoidDoll
-  parent: MobDecapoid
-  suffix: SpawnsWithInternals
-  components:
-  - type: Loadout
-    prototypes:
-      - StartingGearDecapoidVaporizer
-
-
 - type: entity
-  id: BaseDecapoidOrgan
-  parent: OrganBaseFleshy
   abstract: true
+  parent: OrganBaseFleshy
+  id: BaseDecapoidOrgan
+  suffix: "decapoid"
   components:
   - type: Sprite
     sprite: _Impstation/Mobs/Species/Decapoid/parts.rsi
@@ -211,9 +198,9 @@
     damageModifierSet: Decapoid
 
 - type: entity
-  id: BaseDecapoidOrganExternal
-  parent: BaseDecapoidOrgan
   abstract: true
+  parent: BaseDecapoidOrgan
+  id: BaseDecapoidOrganExternal
   components:
   - type: VisualOrgan
     data:
@@ -226,115 +213,96 @@
   id: TorsoDecapoid
   name: "decapoid torso"
   parent: [OrganBaseTorso, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "torso"
 
 - type: entity
   id: HeadDecapoid
   name: "decapoid head"
   parent: [OrganBaseHead, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "head"
 
 - type: entity
   id: LeftArmDecapoid
   name: "left decapoid arm"
   parent: [OrganBaseArmLeft, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "l_arm"
 
 - type: entity
   id: RightArmDecapoid
   name: "right decapoid arm"
   parent: [OrganBaseArmRight, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "r_arm"
 
 - type: entity
   id: LeftHandDecapoid
   name: "decapoid claw"
   parent: [OrganBaseHandLeft, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "l_hand"
 
 - type: entity
   id: RightHandDecapoid
   name: "right decapoid hand"
   parent: [OrganBaseHandRight, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "r_hand"
 
 - type: entity
   id: LeftLegDecapoid # these are the front legs
   name: "front decapoid legs"
   parent: [OrganBaseLegLeft, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "front_leg"
 
 - type: entity
   id: RightLegDecapoid # these are the back legs
   name: "back decapoid legs"
   parent: [OrganBaseLegRight, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "back_leg"
-  - type: BodyPart
-    partType: Leg
-    symmetry: Right
 
 - type: entity
-  id: LeftFootDecapoid # these are the front feet TODO: custom front feet sprites
+  id: LeftFootDecapoid # these are the front feet
   name: "front decapoid feet"
   parent: [OrganBaseFootLeft, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "front_feet"
-  - type: BodyPart
-    partType: Foot
-    symmetry: Left
 
 - type: entity
-  id: RightFootDecapoid # these are the back feet TODO: custom back feet sprites
+  id: RightFootDecapoid # these are the back feet
   name: "back decapoid feet"
   parent: [OrganBaseFootRight, BaseDecapoidOrganExternal]
-  components:
-  - type: Sprite
-    state: "back_feet"
-  - type: BodyPart
-    partType: Foot
-    symmetry: Right
 
 - type: entity
   id: OrganDecapoidLungs
-  parent: [OrganHumanLungs, OrganHumanStomach, BaseDecapoidOrgan]
+  parent: [OrganHumanLungs, BaseDecapoidOrgan]
   name: decapoid respiratory system
   description: "Extracts dissolved oxygen from water, and utilizes it for cell maintenance."
-  suffix: "decapoid"
   components:
-  - type: SolutionContainerManager
-    solutions:
-      stomach:
-        maxVol: 50
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
-  - type: Stomach
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
-    maxReagents: 3
-    stages: [ Digestion, Bloodstream, Metabolites, Respiration ]
-  - type: Lung
-  - type: Sprite # There's no sprite for those so human lungs it is
-    sprite: Mobs/Species/Human/organs.rsi
-    layers:
-    - state: lung-l
-    - state: lung-r
+
+- type: entity
+  id: OrganDecapoidStomach
+  parent: [OrganHumanStomach, BaseDecapoidOrgan]
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [ Decapoid ]
+
+- type: entity
+  id: OrganDecapoidBrain
+  parent: [OrganHumanBrain, BaseDecapoidOrgan]
+
+- type: entity
+  id: OrganDecapoidEyes
+  parent: [OrganHumanEyes, BaseDecapoidOrgan]
+
+- type: entity
+  id: OrganDecapoidTongue
+  parent: [OrganHumanTongue, BaseDecapoidOrgan]
+
+- type: entity
+  id: OrganDecapoidAppendix
+  parent: [OrganHumanAppendix, BaseDecapoidOrgan]
+
+- type: entity
+  id: OrganDecapoidEars
+  parent: [OrganHumanEars, BaseDecapoidOrgan]
+
+- type: entity
+  id: OrganDecapoidHeart
+  parent: [OrganHumanHeart, BaseDecapoidOrgan]
+
+- type: entity
+  id: OrganDecapoidLiver
+  parent: [OrganHumanLiver, BaseDecapoidOrgan]
+
+- type: entity
+  id: OrganDecapoidKidneys
+  parent: [OrganHumanKidneys, BaseDecapoidOrgan]

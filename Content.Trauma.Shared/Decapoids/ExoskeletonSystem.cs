@@ -1,13 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Access.Systems;
-using Content.Shared.Body;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Events;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Standing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Decapoids;
 
@@ -18,13 +13,11 @@ public sealed class ExoskeletonSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
-    private EntityQuery<InjectorComponent> _injectorQuery;
+    [Dependency] private readonly EntityQuery<InjectorComponent> _injectorQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _injectorQuery = GetEntityQuery<InjectorComponent>();
 
         SubscribeLocalEvent<ExoskeletonComponent, TargetBeforeInjectEvent>(OnBeforeInject);
     }

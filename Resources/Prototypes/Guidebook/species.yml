@@ -15,6 +15,7 @@
   #- Vulpkanin
   - IPC
   - Plasmaman
+  - Decapoid
   # </Trauma>
 
 - type: guideEntry
@@ -62,8 +63,3 @@
 #  id: Vulpkanin
 #  name: species-name-vulpkanin
 #  text: "/ServerInfo/Guidebook/Mobs/Vulpkanin.xml"
-
-- type: guideEntry
-  id: Decapoid
-  name: species-name-decapoid
-  text: "/ServerInfo/_Impstation/Guidebook/Mobs/Decapoid.xml"

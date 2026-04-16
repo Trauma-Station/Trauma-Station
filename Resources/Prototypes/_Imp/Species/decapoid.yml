@@ -4,7 +4,7 @@
   roundStart: true
   prototype: MobDecapoid
   defaultSkinTone: "#385878"
-  dollPrototype: MobDecapoidDoll # This one has a vaporizer on
+  dollPrototype: AppearanceDecapoid
   skinColoration: Hues
   maleFirstNames: names_decapoid_first
   femaleFirstNames: names_decapoid_first

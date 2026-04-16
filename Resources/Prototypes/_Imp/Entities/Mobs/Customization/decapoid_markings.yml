@@ -131,18 +131,6 @@
     state: eyes-3
 
 - type: marking
-  id: DecapoidEyesStalks
-  bodyPart: Eyes
-  groupWhitelist: [ Decapoid ]
-  coloring:
-    default:
-      type:
-        !type:EyeColoring
-  sprites:
-  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
-    state: eyes-4
-
-- type: marking
   id: DecapoidEyesWideFar
   bodyPart: Eyes
   groupWhitelist: [ Decapoid ]
@@ -165,3 +153,153 @@
   sprites:
   - sprite: _Impstation/Mobs/Customization/decapoid.rsi
     state: eyes-6
+
+- type: marking
+  id: DecapoidSoftBody
+  bodyPart: Chest
+  groupWhitelist: [ Decapoid ]
+  sprites:
+    - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+      state: softbody
+
+- type: marking
+  id: DecapoidEyesAngry
+  bodyPart: Eyes
+  groupWhitelist: [ Decapoid ]
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: eyes-angry
+
+- type: marking
+  id: DecapoidEyescomposite
+  bodyPart: Eyes
+  groupWhitelist: [ Decapoid ]
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: eyes-composite
+
+- type: marking
+  id: DecapoidEyesGungeoneer
+  bodyPart: Eyes
+  groupWhitelist: [ Decapoid ]
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: eyes-Gungeoneer
+
+- type: marking
+  id: DecapoidEyesMono
+  bodyPart: Eyes
+  groupWhitelist: [ Decapoid ]
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: eyes-mono
+
+- type: marking
+  id: DecapoidEyesStalks
+  bodyPart: Eyes
+  groupWhitelist: [ Decapoid ]
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: eyes-stalks
+
+- type: marking
+  id: DecapoidEyesTired
+  bodyPart: Eyes
+  groupWhitelist: [ Decapoid ]
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: eyes-tired
+
+- type: marking
+  id: DecapoidEyesWide
+  bodyPart: Eyes
+  groupWhitelist: [ Decapoid ]
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: eyes-wide
+
+- type: marking
+  id: DecapoidHeadAbnormal
+  bodyPart: Hair
+  groupWhitelist: [ Decapoid ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: headabnormal
+
+
+- type: marking
+  id: DecapoidHeadAnvil
+  bodyPart: Hair
+  groupWhitelist: [ Decapoid ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: headanvil
+
+
+- type: marking
+  id: DecapoidHeadSpike
+  bodyPart: Hair
+  groupWhitelist: [ Decapoid ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: headspike
+
+- type: marking
+  id: DecapoidShoulderPlateSmall
+  bodyPart: LArm
+  groupWhitelist: [ Decapoid ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: shoulder-plate-small
+
+- type: marking
+  id: DecapoidShoulderPlate
+  bodyPart: LArm
+  groupWhitelist: [ Decapoid ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: shoulder-plate
+
+- type: marking
+  id: DecapoidBigClaw
+  bodyPart: RHand
+  groupWhitelist: [ Decapoid ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: big-claw
+
+- type: marking
+  id: DecapoidBabyClaw
+  bodyPart: RHand
+  groupWhitelist: [ Decapoid ]
+  sprites:
+  - sprite: _Impstation/Mobs/Customization/decapoid.rsi
+    state: baby-claw

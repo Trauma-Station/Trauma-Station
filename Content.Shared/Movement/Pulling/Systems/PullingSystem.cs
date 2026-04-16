@@ -317,8 +317,9 @@ public sealed partial class PullingSystem : EntitySystem // Trauma - made partia
     {
         // <Trauma>
 		// skip this if ApplySpeedModifier is false
-		if (!component.ApplySpeedModifier)
-			return;
+        if (!component.ApplySpeedModifier)
+            return;
+
         args.ModifySpeed(component.GrabStage switch
         {
             GrabStage.Soft => component.SoftGrabSpeedModifier,
