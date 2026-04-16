@@ -20,7 +20,8 @@ public sealed class FoliageVisionSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<FoliageIgnoringVisionComponent, LocalPlayerAttachedEvent>((_, _, args) => OnLocalPlayerAttached(args));
         SubscribeLocalEvent<FoliageIgnoringVisionComponent, LocalPlayerDetachedEvent>((_, _, args) => OnLocalPlayerDetached(args));
-
+        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentStartup>((_, _, args) => OnComponentStartup(args));
+        SubscribeLocalEvent<FoliageIgnoringVisionComponent, ComponentShutdown>((_, _, args) => OnComponentShutdown(args));
         SubscribeLocalEvent<IsFoliageComponent, AppearanceChangeEvent>(OnAppearanceChanged);
     }
 
@@ -38,6 +39,16 @@ public sealed class FoliageVisionSystem : EntitySystem
     }
 
     private void OnLocalPlayerDetached(LocalPlayerDetachedEvent args)
+    {
+        UpdatePlayerFoliageIgnoringVision();
+    }
+
+    private void OnComponentStartup(ComponentStartup args)
+    {
+        UpdatePlayerFoliageIgnoringVision();
+    }
+
+    private void OnComponentShutdown(ComponentShutdown args)
     {
         UpdatePlayerFoliageIgnoringVision();
     }
