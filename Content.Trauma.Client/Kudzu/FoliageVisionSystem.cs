@@ -19,6 +19,7 @@ public sealed class FoliageVisionSystem : EntitySystem
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnLocalPlayerAttached);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnLocalPlayerDetached);
 
+
         SubscribeLocalEvent<IsFoliageComponent, AppearanceChangeEvent>(OnAppearanceChanged);
     }
 
@@ -40,13 +41,23 @@ public sealed class FoliageVisionSystem : EntitySystem
         UpdatePlayerFoliageIgnoringVision();
     }
 
+    private void RefreshEveryPieceOfFoliage()
+    {
+        var query = EntityQueryEnumerator<IsFoliageComponent, SpriteComponent>();
+
+        while (query.MoveNext(out var entityUid, out _, out var sprite))
+        {
+            UpdateFoliageDrawDepth(ent: entityUid!, sprite); // I dont like the ! I dont like the ! I dont like the ! ._.
+        }
+    }
+
     private void UpdateFoliageDrawDepth(Entity<IsFoliageComponent> ent, SpriteComponent? sprite = null)
     {
         if (!Resolve(ent.Owner, ref sprite, false))
             return;
 
         var drawDepth = _playerHasFoliageIgnoringVision
-            ? Content.Shared.DrawDepth.DrawDepth.FloorObjects.CompareTo(DrawDepth.Default) // Help! This probably shouldn't be hardcoded!
+            ? DrawDepth.Default -5
             : sprite.DrawDepth;
         _spriteSystem.SetDrawDepth((ent.Owner, sprite), drawDepth);
     }
@@ -56,5 +67,6 @@ public sealed class FoliageVisionSystem : EntitySystem
         var attached = _playerManager.LocalEntity;
         var shouldHaveFoliageIgnoringVision = attached != null && HasComp<FoliageIgnoringVisionComponent>(attached.Value);
         _playerHasFoliageIgnoringVision = shouldHaveFoliageIgnoringVision;
+        RefreshEveryPieceOfFoliage();
     }
 }
