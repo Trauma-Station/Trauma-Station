@@ -4,6 +4,4 @@ namespace Content.Trauma.Shared.Kudzu;
 /// Makes "Foliage" with the IsFoliage Component render lower for the entity with this Component.
 /// </summary>
 [RegisterComponent]
-public sealed partial class FoliageIgnoringVisionComponent : Component
-{
-};
+public sealed partial class FoliageIgnoringVisionComponent : Component;

@@ -10,15 +10,15 @@ namespace Content.Trauma.Client.Kudzu;
 
 public sealed class FoliageVisionSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
-    [DataField] private bool _playerHasFoliageIgnoringVision;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+    private bool _enabled;
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnLocalPlayerAttached);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnLocalPlayerDetached);
-
 
         SubscribeLocalEvent<IsFoliageComponent, AppearanceChangeEvent>(OnAppearanceChanged);
     }
@@ -56,17 +56,19 @@ public sealed class FoliageVisionSystem : EntitySystem
         if (!Resolve(ent.Owner, ref sprite, false))
             return;
 
-        var drawDepth = _playerHasFoliageIgnoringVision
+        var drawDepth = _enabled
             ? DrawDepth.Default -5
             : DrawDepth.Default +10;
-        _spriteSystem.SetDrawDepth((ent.Owner, sprite), drawDepth);
+        _sprite.SetDrawDepth((ent.Owner, sprite), drawDepth);
     }
 
     private void UpdatePlayerFoliageIgnoringVision()
     {
-        var attached = _playerManager.LocalEntity;
+        var previousEnabled = _enabled;
+        var attached = _player.LocalEntity;
         var shouldHaveFoliageIgnoringVision = attached != null && HasComp<FoliageIgnoringVisionComponent>(attached.Value);
-        _playerHasFoliageIgnoringVision = shouldHaveFoliageIgnoringVision;
-        RefreshEveryPieceOfFoliage();
+        _enabled = shouldHaveFoliageIgnoringVision;
+        if (previousEnabled != _enabled)
+            RefreshEveryPieceOfFoliage();
     }
 }
