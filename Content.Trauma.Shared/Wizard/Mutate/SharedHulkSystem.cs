@@ -13,7 +13,6 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Cuffs;
 using Content.Trauma.Common.Knockdown;
 using Content.Trauma.Common.Wizard;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Wizard.Mutate;
 

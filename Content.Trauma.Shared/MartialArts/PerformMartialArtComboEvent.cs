@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Content.Shared.Actions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.MartialArts;
 

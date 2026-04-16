@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Cargo.Prototypes;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Antag;
@@ -40,12 +37,6 @@ public sealed partial class AntagSummonerComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField, AutoNetworkedField]
     public TimeSpan NextSummon;
-
-    /// <summary>
-    /// The initial delay for summoning item after this item is spawned.
-    /// </summary>
-    [DataField]
-    public TimeSpan InitialCooldown = TimeSpan.FromMinutes(10);
 
     /// <summary>
     /// How long you have to wait to summon another antag.

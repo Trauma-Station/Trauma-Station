@@ -3,7 +3,6 @@
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Content.Goobstation.Common.CCVar;
-using Robust.Shared.Prototypes;
 using Content.Shared.Dataset;
 using Robust.Shared.Random;
 using Content.Shared.Random.Helpers;

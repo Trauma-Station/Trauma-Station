@@ -13,7 +13,6 @@ using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.State;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Weapons.LaserPointer;
 

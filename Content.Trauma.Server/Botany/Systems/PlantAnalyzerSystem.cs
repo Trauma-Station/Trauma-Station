@@ -13,7 +13,6 @@ using Content.Trauma.Shared.Botany.Components;
 using Content.Trauma.Shared.Botany.PlantAnalyzer;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Botany.Systems;
 

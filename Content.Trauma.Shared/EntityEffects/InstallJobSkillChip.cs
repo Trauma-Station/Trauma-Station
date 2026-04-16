@@ -6,7 +6,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

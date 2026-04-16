@@ -13,7 +13,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Body;
 

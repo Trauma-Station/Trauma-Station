@@ -9,7 +9,6 @@ using Content.Shared.Power.EntitySystems;
 using Content.Shared.UserInterface;
 using Content.Shared.VendingMachines;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.VendingMachines;

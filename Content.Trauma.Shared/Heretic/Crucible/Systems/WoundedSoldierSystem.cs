@@ -13,7 +13,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Wizard.SanguineStrike;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Crucible.Systems;

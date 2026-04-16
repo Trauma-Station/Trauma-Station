@@ -6,7 +6,6 @@ using Content.Shared.Item;
 using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Goobstation.Shared.Enchanting.Systems;

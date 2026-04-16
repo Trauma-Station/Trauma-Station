@@ -2,9 +2,6 @@
 
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Factory;
 

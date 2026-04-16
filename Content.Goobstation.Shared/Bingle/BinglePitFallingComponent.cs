@@ -5,7 +5,6 @@ using System.Numerics;
 using Content.Goobstation.Common.Bingle;
 using Robust.Shared.Analyzers;
 using Robust.Shared.GameObjects;
-using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.Manager.Attributes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 

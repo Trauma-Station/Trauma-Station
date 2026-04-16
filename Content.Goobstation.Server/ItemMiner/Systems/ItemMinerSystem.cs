@@ -9,7 +9,6 @@ using Content.Server.Stack;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.ItemMiner;
 

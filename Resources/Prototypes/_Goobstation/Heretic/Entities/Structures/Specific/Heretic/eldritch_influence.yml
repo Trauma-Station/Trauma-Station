@@ -72,6 +72,36 @@
   - type: Clickable
   - type: Visibility
     layer: 64 # keep in sync with VisibilityFlags.EldritchInfluence for upstream merges
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.1
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 5
+        layer:
+          - WallLayer
+        mask:
+          - Impassable
+          - HighImpassable
+          - MidImpassable
+          - LowImpassable
+        hard: false
+  - type: TileEntityEffect
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectInfluenceXray
+      time: 10
+      conditions:
+      - !type:WhitelistCondition
+        checkMind: true
+        whitelist:
+          components:
+          - Heretic
 
 - type: entity
   id: EldritchInfluenceIntermediate
@@ -133,3 +163,5 @@
     layer: 1
   - type: EldritchInfluence
     spent: true
+  - type: TileEntityEffect
+    effects: []

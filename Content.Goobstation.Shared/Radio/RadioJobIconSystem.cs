@@ -7,7 +7,6 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Goobstation.Shared.Radio;

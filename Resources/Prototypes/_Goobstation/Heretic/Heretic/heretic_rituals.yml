@@ -1617,7 +1617,6 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: fire_shark_icon
   - type: HereticRitual
-    limit: 15
     effects:
     - !type:LookupRitualEffect
       applyOn: Platform

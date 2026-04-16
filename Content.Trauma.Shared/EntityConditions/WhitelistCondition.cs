@@ -3,7 +3,6 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.Mind;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 

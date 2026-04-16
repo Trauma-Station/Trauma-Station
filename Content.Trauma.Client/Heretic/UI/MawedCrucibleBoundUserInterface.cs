@@ -5,7 +5,6 @@ using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Messages;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Heretic.UI;
 

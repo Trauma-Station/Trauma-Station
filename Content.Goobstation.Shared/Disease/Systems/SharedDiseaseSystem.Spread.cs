@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Shared.Disease.Systems;

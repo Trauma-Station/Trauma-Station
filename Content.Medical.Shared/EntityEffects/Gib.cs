@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.Gibbing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityEffects;
 

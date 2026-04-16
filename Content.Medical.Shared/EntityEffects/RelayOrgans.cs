@@ -3,7 +3,6 @@
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.EntityEffects;

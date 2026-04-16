@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Trauma.Server.Heretic.Components.PathSpecific;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;

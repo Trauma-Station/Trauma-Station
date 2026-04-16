@@ -9,7 +9,6 @@ using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
 using Content.Trauma.Shared.Language.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
@@ -85,9 +84,11 @@ public abstract partial class SharedKnowledgeSystem
 
     public void UpdateEntityLanguages(Entity<LanguageSpeakerComponent> ent)
     {
+        if (GetContainer(ent.Owner) is not { } brain)
+            return;
+
         var ev = new DetermineEntityLanguagesEvent();
-        if (GetContainer(ent.Owner) is { } brain &&
-            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is { } known)
+        if (GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is { } known)
         {
             foreach (var language in known)
             {
@@ -147,6 +148,8 @@ public abstract partial class SharedKnowledgeSystem
         if (GetContainer(ent.Owner) is not { } brain)
             return;
 
+        args.Handled = true;
+
         // We add the intrinsically known languages first so other systems can manipulate them easily
         var lang = args.Language;
         EnsureKnowledge(brain, LanguageUnit(args.Language), 26);
@@ -160,6 +163,8 @@ public abstract partial class SharedKnowledgeSystem
         if (GetContainer(ent.Owner) is not { } brain ||
             GetKnowledge(brain, id) is not { } unit)
             return;
+
+        args.Handled = true;
 
         var langComp = _langQuery.Comp(unit);
         if (args.RemoveSpoken && args.RemoveUnderstood)
@@ -185,8 +190,7 @@ public abstract partial class SharedKnowledgeSystem
     {
         if (GetContainer(ent.Owner) is not { } brain)
         {
-            // use mob yml languages
-            UpdateEntityLanguages(ent);
+            // just use mob yml languages
             return;
         }
 

@@ -12,8 +12,10 @@
       - sprite: Structures/Storage/closet.rsi
         state: generic_door
   - type: RandomSpawner
+    offset: 0
     prototypes:
     - ClosetMaintenanceFilledRandom
     rarePrototypes:
     - LockerMimic
     rareChance: 0.005
+  - type: MaintsClosetSpawner

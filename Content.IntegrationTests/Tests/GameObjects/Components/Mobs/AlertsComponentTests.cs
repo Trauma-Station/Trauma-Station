@@ -28,6 +28,7 @@
 using System.Linq;
 using Content.Client.UserInterface.Systems.Alerts.Controls;
 using Content.Client.UserInterface.Systems.Alerts.Widgets;
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Alert;
 using Robust.Client.UserInterface;
 using Robust.Server.Player;
@@ -37,16 +38,18 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.Mobs
 {
     [TestFixture]
     [TestOf(typeof(AlertsComponent))]
-    public sealed class AlertsComponentTests
+    public sealed class AlertsComponentTests : GameTest
     {
+        public override PoolSettings PoolSettings => new()
+        {
+            Connected = true,
+            DummyTicker = false
+        };
+
         [Test]
         public async Task AlertsTest()
         {
-            await using var pair = await PoolManager.GetServerClient(new PoolSettings
-            {
-                Connected = true,
-                DummyTicker = false
-            });
+            var pair = Pair;
             var server = pair.Server;
             var client = pair.Client;
 
@@ -142,8 +145,6 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.Mobs
                 Assert.That(alertIDs, Is.SupersetOf(expectedDebugIDs));
                 Assert.That(alertIDs, Has.Some.Matches<string>(item => expectedHealthIDs.Contains(item)));
             });
-
-            await pair.CleanReturnAsync();
         }
     }
 }

@@ -18,24 +18,6 @@
   - Insurgency
 
 - type: gamePreset
-  id: Abductors
-  alias:
-  - ayylmao
-  name: abductors-title
-  description: abductors-description
-  showInVote: false
-  minPlayers: 20
-  rules:
-  - BasicRoundstartVariation
-  - BasicStationEventScheduler
-  - BasicAntagEventScheduler
-  - ModerateAntagEventScheduler
-  - MeteorSwarmScheduler
-  - SpaceTrafficControlEventScheduler
-  - SubGamemodesRule
-  - DuoAbductorRoundstart
-
-- type: gamePreset
   id: Heretics
   alias:
   - heretic

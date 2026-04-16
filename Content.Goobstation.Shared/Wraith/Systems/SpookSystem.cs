@@ -6,7 +6,6 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Prototypes;
 using Content.Shared.UserInterface;
 using Content.Trauma.Common.RadialSelector;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;

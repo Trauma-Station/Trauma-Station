@@ -2,7 +2,6 @@
 
 using Content.Trauma.Common.Language;
 using Content.Trauma.Shared.Language.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Traits.Assorted;
 

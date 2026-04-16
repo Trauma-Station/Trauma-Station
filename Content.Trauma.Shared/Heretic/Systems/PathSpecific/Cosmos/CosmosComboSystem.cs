@@ -7,7 +7,6 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 

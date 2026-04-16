@@ -5,7 +5,6 @@ using Content.Medical.Shared.Wounds;
 using Content.Medical.Shared.Traumas;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Medical.Shared.EntityEffects;

@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.JoinQueue;
 using Robust.Client.State;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Client.JoinQueue;
 

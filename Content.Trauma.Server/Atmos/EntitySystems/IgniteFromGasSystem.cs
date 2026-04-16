@@ -11,7 +11,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Atmos.EntitySystems;
 

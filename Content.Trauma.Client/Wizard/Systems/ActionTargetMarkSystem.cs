@@ -2,7 +2,6 @@
 
 using Content.Shared.GameTicking;
 using Robust.Client.GameObjects;
-using Robust.Shared.Prototypes;
 using Content.Trauma.Common.Wizard;
 
 namespace Content.Trauma.Client.Wizard.Systems;

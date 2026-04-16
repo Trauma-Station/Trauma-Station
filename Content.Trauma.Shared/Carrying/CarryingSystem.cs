@@ -29,7 +29,6 @@ using Content.Trauma.Common.Carrying;
 using Content.Trauma.Common.Polymorph;
 using Content.Trauma.Shared.Contests;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Carrying;
 

@@ -178,7 +178,7 @@ namespace Content.Server.Lathe
                 return false;
             quantity = int.Min(quantity, MaxItemsPerRequest);
 
-            if (!CanProduce(uid, recipe, quantity, component, GetAlertLevel(uid))) //  Trauma - get alertLevel for the recipe
+            if (!CanProduce(uid, recipe, quantity, component, GetAlertLevel(uid))) // Trauma - get alertLevel for the recipe
                 return false;
 
             foreach (var (mat, amount) in GetAdjustedAmount(component, recipe))
@@ -469,8 +469,12 @@ namespace Content.Server.Lathe
                         batch.ItemsPrinted--;
                     }
                 }
-
-                RefundCurrentRecipe(uid, component);
+                // <Trauma> - only refund if the queue is empty
+                else
+                {
+                    RefundCurrentRecipe(uid, component);
+                }
+                // </Trauma>
                 component.CurrentRecipe = null;
             }
             RemCompDeferred<LatheProducingComponent>(uid);

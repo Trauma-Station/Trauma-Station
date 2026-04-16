@@ -72,7 +72,6 @@
         components:
         - CommandStaff
         - AntagImmune
-        - BibleUser
       lateJoinAdditional: true
       mindRoles:
       - MindRoleChangelingmidround
@@ -105,10 +104,8 @@
         components:
         - CommandStaff
         - AntagImmune
-        - BibleUser
       startingGear: Heretictmidround
       lateJoinAdditional: true
-      jobBlacklist: [ Chaplain ] # GOOBSTATION
       mindRoles:
       - MindRoleHeretic
 

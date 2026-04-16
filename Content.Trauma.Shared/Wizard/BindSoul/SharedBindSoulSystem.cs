@@ -19,9 +19,7 @@ using Content.Shared.Tag;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Shared.Wizard.Projectiles;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
 namespace Content.Trauma.Shared.Wizard.BindSoul;

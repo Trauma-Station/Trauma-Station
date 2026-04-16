@@ -4,7 +4,6 @@ using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityTable;
 using Content.Shared.EntityTable.EntitySelectors;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityTable.EntitySelectors;
 

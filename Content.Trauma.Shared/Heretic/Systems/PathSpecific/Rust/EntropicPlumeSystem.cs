@@ -17,7 +17,6 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Content.Trauma.Shared.Wizard.TimeStop;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Random;

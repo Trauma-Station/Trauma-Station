@@ -5,7 +5,6 @@ using Content.Shared.Dataset;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Speech;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.EntityEffects;

@@ -4,8 +4,6 @@ using Content.Shared.FixedPoint;
 using Content.Trauma.Shared.Xenomorphs.Caste;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Xenomorphs;
 
@@ -61,20 +59,11 @@ public sealed partial class TailLashActionEvent : WorldTargetActionEvent;
 
 public sealed partial class AcidActionEvent : EntityTargetActionEvent;
 
-public sealed class AfterXenomorphEvolutionEvent(EntityUid evolvedInto, EntityUid mindUid, ProtoId<XenomorphCastePrototype> caste) : EntityEventArgs
-{
-    public EntityUid EvolvedInto = evolvedInto;
-    public EntityUid MindUid = mindUid;
-    public ProtoId<XenomorphCastePrototype> Caste = caste;
-}
+[ByRefEvent]
+public record struct AfterXenomorphEvolutionEvent(EntityUid EvolvedInto, EntityUid MindUid, ProtoId<XenomorphCastePrototype> Caste);
 
-public sealed class BeforeXenomorphEvolutionEvent(ProtoId<XenomorphCastePrototype> caste, bool checkNeedCasteDeath = true) : CancellableEntityEventArgs
-{
-    public ProtoId<XenomorphCastePrototype> Caste = caste;
-    public bool CheckNeedCasteDeath = checkNeedCasteDeath;
-}
+[ByRefEvent]
+public record struct BeforeXenomorphEvolutionEvent(ProtoId<XenomorphCastePrototype> Caste, bool CheckNeedCasteDeath = true, bool Cancelled = false);
 
-public sealed class PlasmaAmountChangeEvent(FixedPoint2 amount) : EntityEventArgs
-{
-    public FixedPoint2 Amount = amount;
-}
+[ByRefEvent]
+public record struct PlasmaAmountChangeEvent(FixedPoint2 Amount);

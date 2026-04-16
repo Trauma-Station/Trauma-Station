@@ -53,7 +53,8 @@ public sealed class AdminNotesEui : BaseEui
             Notes,
             _notesMan.CanCreate(Player), // Trauma - removed HasConnectedBefore check it doesn't work in debug?
             _notesMan.CanDelete(Player),
-            _notesMan.CanEdit(Player)
+            _notesMan.CanEdit(Player),
+            _notesMan.CanWatchlist(Player) // Trauma
         );
     }
 

@@ -6,7 +6,6 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Paper;
 using Robust.Server.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Text;
 using Content.Goobstation.Shared.Disease.Components;

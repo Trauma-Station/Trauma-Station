@@ -9,8 +9,6 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;
 

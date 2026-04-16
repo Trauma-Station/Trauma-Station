@@ -25,7 +25,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Blob;
 

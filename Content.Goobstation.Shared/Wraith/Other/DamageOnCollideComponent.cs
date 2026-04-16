@@ -2,7 +2,6 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Wraith.Other;
 

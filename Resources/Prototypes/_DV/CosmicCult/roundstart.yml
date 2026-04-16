@@ -6,7 +6,7 @@
   - type: LoadMapRule
     mapPath: /Maps/_DV/Nonstations/cosmicvoid.yml
   - type: GameRule
-    minPlayers: 15 # Ultra lowpop cult is now possible. Would it be good? Idk we'd have to test that.
+    minPlayers: 20
   - type: AntagObjectives
     objectives:
     - CosmicFinalityObjective
@@ -15,9 +15,9 @@
   - type: AntagSelection
     definitions:
     - prefRoles: [ CosmicAntagCultist ]
-      min: 2
-      max: 6
-      playerRatio: 10
+      min: 3
+      max: 8
+      playerRatio: 7
       jobBlacklist: [ Chaplain ] # GOOBSTATION
       blacklist:
         components:

@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.Shared.Wraith.Components.Mobs;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Minions.Plaguebringer;
 

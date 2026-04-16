@@ -6,7 +6,6 @@ using Content.Shared.Humanoid;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Shared.Heretic.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 

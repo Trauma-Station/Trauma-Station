@@ -96,3 +96,41 @@
       children:
       - id: ClothingOuterArmorVenerator
       - id: ClothingHeadHatHelmetVenerator
+
+- type: entity
+  parent: SpawnSupplyEmpty
+  id: SpawnSupplyLuckyWinner
+  name: bar snacks
+  components:
+  - type: SpawnTableOnDespawn
+    table: !type:AllSelector
+      children:
+      - !type:NestedSelector
+        tableId: RandomPizza
+      - id: DrinkBeerBottleFull
+        amount: 6
+
+# mfw nobody made a pizza table
+- type: entityTable
+  id: RandomPizza
+  table: !type:GroupSelector
+    children:
+    - id: FoodPizzaArnold
+      weight: 1.5
+    - id: FoodPizzaSassysage
+      weight: 1.5
+    - id: FoodPizzaMargherita
+      weight: 1.5
+    - id: FoodPizzaMeat
+      weight: 1.5
+    - id: FoodPizzaMushroom
+      weight: 1.5
+    - id: FoodPizzaPineapple
+      weight: 1.5
+    - id: FoodPizzaVegetable
+      weight: 1.5
+    - id: FoodPizzaDank
+    - id: FoodPizzaDonkpocket
+    - id: FoodPizzaCotton
+    - id: FoodPizzaWorldpeas
+      weight: 0.5

@@ -5,7 +5,6 @@ using Content.Goobstation.Shared.Disease.Components;
 using Content.Goobstation.Shared.Disease.Systems;
 using Content.Shared.Chat;
 using Content.Trauma.Common.Language;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Disease;
 

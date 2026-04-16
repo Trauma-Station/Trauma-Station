@@ -31,119 +31,133 @@
       params:
         volume: 5
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
-    - state: heavybolt
+    - state: heavylaser
       shader: unshaded
-      color: "#2684ff"
   - type: Projectile
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 2
+        Heat: 0
+  - type: BlurOnCollide
+    blurTime: 3
 
 - type: entity
-  id: SidearmDisable
+  id: LaserSidearmBullet
   parent: SidearmBulletBase
   categories: [ HideSpawnMenu ]
   components:
-  - type: StaminaDamageOnCollide
-    damage: 33
-
-- type: entity
-  id: SidearmLethal
-  parent: SidearmBulletBase
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    layers:
-    - state: heavybolt
-      shader: unshaded
-      color: "#fc5d52"
   - type: Projectile
     damage:
       types:
-        Heat: 10
-  - type: BlurOnCollide
-    blurTime: 3
+        Heat: 10 # This is a super shitty ranged weapon it should not be good DPS wise.
 
 # Longarms
 
 - type: entity
-  id: BaseLaserLongarmBullet
+  parent: SidearmBulletBase
+  id: LaserGunBulletPractice
   name: laser
-  parent: BaseBullet
-  abstract: true
+  categories: [ HideSpawnMenu ]
   components:
-  - type: Fixtures
-    fixtures:
-      projectile: *projectile
-      fly-by: *flybyfixture
-  - type: Reflective
-    reflective:
-    - Energy
-  - type: FlyBySound
-    sound:
-      collection: EnergyMiss
-      params:
-        volume: 5
-  - type: BlurOnCollide
-    blurTime: 3
+  - type: Projectile
+    damage:
+      types:
+        Heat: 0
+
+- type: entity
+  parent: SidearmBulletBase
+  id: LaserGunBullet
+  name: laser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 10
+
+- type: entity
+  parent: SidearmBulletBase
+  id: LaserCarbineBullet
+  name: laser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 6
+
+- type: entity
+  id: PulseGunBullet
+  parent: SidearmBulletBase
+  categories: [ HideSpawnMenu ]
+  components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
-    - state: heavybolt
+    - state: u_laser
       shader: unshaded
-      color: "#fc5d52"
   - type: Projectile
+    impactEffect: BulletImpactEffectBlueDisabler
     damage:
       types:
-        Heat: 13
+        Heat: 30
+        Blunt: 5
+        Structural: 40
 
 - type: entity
-  id: LaserCarbineBullet
-  parent: BaseLaserLongarmBullet
+  parent: PulseGunBullet
+  id: PulseGunBulletLight
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
-    layers:
-    - state: heavybolt
-      shader: unshaded
-      color: "#fc5d52"
   - type: Projectile
-    impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 13
+        Heat: 20
+        Blunt: 10
+        Structural: 20
+
+- type: entity
+  parent: PulseGunBullet
+  id: PulseGunBulletHeavy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 35
+        Blunt: 10
+        Structural: 80
 
 - type: entity
   id: XrayCannonBullet
-  parent: BaseLaserLongarmBullet
+  parent: SidearmBulletBase
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
-    - state: heavybolt
+    - state: xray
       shader: unshaded
-      color: "#61ff22"
   - type: Projectile
     penetrate: true
     noPenetrateMask:
     - BlobImpassable
     damage:
       types:
-        Heat: 13
+        Heat: 16
 
 - type: entity
   id: LaserCannonBullet
-  parent: BaseLaserLongarmBullet
+  parent: SidearmBulletBase
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
-    - state: heavybolt
+    - state: laser_repeater
       shader: unshaded
-      color: "#ff6122"
   - type: Projectile
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
@@ -194,12 +208,12 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 10
+        Heat: 16
   - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
-    - state: lightbolt
+    - state: heavylaser
       shader: unshaded
-      color: "#fc5d52"
 
 - type: entity
   id: RevolverLaserIon
@@ -209,7 +223,8 @@
   - type: Projectile
     damage:
       types:
-        Ion: 10
+        Ion: 16
+        Heat: 4
   - type: Sprite
     layers:
     - state: lightbolt
@@ -227,8 +242,7 @@
     - BlobImpassable
     damage:
       types:
-        Heat: 5
-        Radiation: 5
+        Heat: 12
   - type: Sprite
     layers:
     - state: lightbolt
@@ -245,7 +259,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 8
+        Heat: 12
   - type: Sprite
     layers:
     - state: lightbolt
@@ -264,11 +278,12 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 5
+        Heat: 7
   - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
-    - state: lightbolt
-      color: "#fc5d52"
+    - state: heavylaser
+      shader: unshaded
 
 - type: entity
   id: SMGLaserIon
@@ -278,7 +293,8 @@
   - type: Projectile
     damage:
       types:
-        Ion: 5
+        Ion: 7
+        Heat: 2
   - type: Sprite
     layers:
     - state: lightbolt
@@ -310,7 +326,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 4
+        Heat: 5
   - type: Sprite
     layers:
     - state: lightbolt
@@ -345,6 +361,7 @@
     damage:
       types:
         Ion: 65
+        Heat: 13
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
@@ -362,7 +379,7 @@
     - BlobImpassable
     damage:
       types:
-        Heat: 65
+        Heat: 52
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
     layers:
@@ -398,8 +415,9 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 4
+        Heat: 5
   - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
-    - state: lightbolt
-      color: "#fc5d52"
+    - state: heavylaser
+      shader: unshaded

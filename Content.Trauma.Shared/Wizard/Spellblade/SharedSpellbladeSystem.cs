@@ -14,7 +14,6 @@ using Content.Shared.Weapons.Melee;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Shared.Blink;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Wizard.Spellblade;
 

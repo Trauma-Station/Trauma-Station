@@ -9,7 +9,6 @@ using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 

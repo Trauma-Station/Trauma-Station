@@ -5,7 +5,6 @@ using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Shared.Language.Events;
 using Content.Trauma.Shared.Language.Systems;
 using Robust.Client.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Language.Systems;
 

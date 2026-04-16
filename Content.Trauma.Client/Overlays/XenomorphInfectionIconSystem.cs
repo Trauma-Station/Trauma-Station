@@ -3,7 +3,6 @@
 using Content.Trauma.Shared.Xenomorphs.Infection;
 using Content.Trauma.Shared.Xenomorphs.Larva;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Overlays;
 

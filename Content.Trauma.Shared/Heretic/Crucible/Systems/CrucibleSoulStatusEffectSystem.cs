@@ -1,17 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Teleportation;
 
 namespace Content.Trauma.Shared.Heretic.Crucible.Systems;
 
 public sealed class CrucibleSoulStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly PullingSystem _pull = default!;
+    [Dependency] private readonly TeleportSystem _teleport = default!;
 
     public override void Initialize()
     {
@@ -30,12 +29,10 @@ public sealed class CrucibleSoulStatusEffectSystem : EntitySystem
 
     private void OnRemove(Entity<CrucibleSoulStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
-        if (ent.Comp.Coords == null || TerminatingOrDeleted(args.Target))
+        if (ent.Comp.Coords is not { } coords || TerminatingOrDeleted(args.Target))
             return;
 
-        _pull.StopAllPulls(args.Target);
-        _transform.SetCoordinates(args.Target, ent.Comp.Coords.Value);
-        _transform.AttachToGridOrMap(args.Target);
+        _teleport.Teleport(args.Target, coords);
     }
 
     private void OnApply(Entity<CrucibleSoulStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)

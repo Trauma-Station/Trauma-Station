@@ -26,7 +26,6 @@ using Content.Trauma.Common.Stack;
 using Content.Trauma.Shared.Damage;
 using Content.Trauma.Shared.Durability.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Quality;

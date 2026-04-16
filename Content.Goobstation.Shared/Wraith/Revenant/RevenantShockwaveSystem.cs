@@ -9,7 +9,6 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;

@@ -4,7 +4,6 @@ using Content.Shared.Item;
 using Content.Trauma.Shared.Forging;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Forging;
 

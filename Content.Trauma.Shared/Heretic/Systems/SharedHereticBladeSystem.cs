@@ -25,7 +25,6 @@ using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Wizard.SanguineStrike;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;

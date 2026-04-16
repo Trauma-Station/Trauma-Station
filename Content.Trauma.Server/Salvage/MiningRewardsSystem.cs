@@ -2,7 +2,6 @@
 
 using Content.Trauma.Common.Salvage;
 using Content.Shared.GameTicking;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Salvage;

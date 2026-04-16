@@ -25,7 +25,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
-using Content.Shared.Radiation.Components;
+using Content.Shared.Radiation.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Robust.Server.GameObjects;
@@ -53,6 +53,7 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
     [Dependency] private readonly AlertLevelSystem _alert = default!;
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedRadiationSystem _radiation = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
@@ -223,11 +224,8 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
         sm.Power = Math.Max(absorbedGas.Temperature * tempFactor / Atmospherics.T0C * powerRatio + sm.Power, 0);
 
         //Radiate stuff
-        if (TryComp<RadiationSourceComponent>(uid, out var rad))
-        {
-            var transmittedpower = sm.Power * Math.Max(0, 1f + transmissionBonus / 10f);
-            rad.Intensity = transmittedpower * sm.RadiationOutputFactor;
-        }
+        var transmittedpower = sm.Power * Math.Max(0, 1f + transmissionBonus / 10f);
+        _radiation.SetIntensity(uid, transmittedpower * sm.RadiationOutputFactor);
 
         //Power * 0.55 * a value between 1 and 0.8
         var energy = sm.Power * sm.ReactionPowerModifier;

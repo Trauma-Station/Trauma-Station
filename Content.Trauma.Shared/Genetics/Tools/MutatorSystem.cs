@@ -9,8 +9,6 @@ using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Genetics.Console;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Genetics.Tools;

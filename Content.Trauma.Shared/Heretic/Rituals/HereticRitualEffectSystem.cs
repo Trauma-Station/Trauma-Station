@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 

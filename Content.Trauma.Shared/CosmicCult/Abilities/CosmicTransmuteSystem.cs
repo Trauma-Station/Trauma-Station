@@ -7,8 +7,6 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;

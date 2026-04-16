@@ -6,7 +6,6 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Goobstation.Server.Wraith.Systems;

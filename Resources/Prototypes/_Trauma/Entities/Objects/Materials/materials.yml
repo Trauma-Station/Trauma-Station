@@ -100,3 +100,11 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity
+  parent: MaterialBananium
+  id: MaterialBananium5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5

@@ -9,7 +9,6 @@ using Content.Shared.Verbs;
 using Content.Trauma.Common.Paper;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Paper;
 

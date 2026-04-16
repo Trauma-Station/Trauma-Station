@@ -6,7 +6,6 @@ using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind;
 

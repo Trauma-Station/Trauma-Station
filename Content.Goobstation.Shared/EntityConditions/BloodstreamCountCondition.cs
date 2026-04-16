@@ -3,7 +3,6 @@
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.EntityConditions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityConditions;
 

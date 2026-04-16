@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Content.Goobstation.Shared.Polls;
 using Content.Server.Database;
 using Robust.Server.Player;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Server.Polls;
 
