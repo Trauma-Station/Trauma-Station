@@ -26,14 +26,12 @@ public sealed class ExoskeletonSystem : EntitySystem
 
         _injectorQuery = GetEntityQuery<InjectorComponent>();
 
-        SubscribeLocalEvent<BodyComponent, TargetBeforeInjectEvent>(OnBeforeInject);
+        SubscribeLocalEvent<ExoskeletonComponent, TargetBeforeInjectEvent>(OnBeforeInject);
     }
 
-    private void OnBeforeInject(Entity<BodyComponent> ent, ref TargetBeforeInjectEvent args)
+    private void OnBeforeInject(Entity<ExoskeletonComponent> ent, ref TargetBeforeInjectEvent args)
     {
-        if (args.Cancelled
-        || IsHypospray(args.UsedInjector) // Hyposprays use hypoport system instead
-        || !HasComp<ExoskeletonComponent>(args.TargetGettingInjected))
+        if (args.Cancelled || IsHypospray(args.UsedInjector)) // Hyposprays use hypoport system instead
             return;
 
         args.OverrideMessage = Loc.GetString("exoskeleton-inject-fail", ("target", Identity.Entity(args.TargetGettingInjected, EntityManager)));

@@ -142,11 +142,6 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Decapoid
-  - type: DamageVisuals
-    damageOverlayGroups:
-      Brute:
-        sprite: _Impstation/Mobs/Effects/decapoid_brute_damage.rsi # todo: make this cover the legs.
-        color: "#162581"
   - type: Vocal
     sounds:
       Male: UnisexDecapoid
