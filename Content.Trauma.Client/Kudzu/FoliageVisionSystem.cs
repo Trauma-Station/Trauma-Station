@@ -58,7 +58,7 @@ public sealed class FoliageVisionSystem : EntitySystem
 
         var drawDepth = _playerHasFoliageIgnoringVision
             ? DrawDepth.Default -5
-            : sprite.DrawDepth;
+            : DrawDepth.Default +10;
         _spriteSystem.SetDrawDepth((ent.Owner, sprite), drawDepth);
     }
 
