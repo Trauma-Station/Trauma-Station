@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Buckle.Components;
 using Robust.Shared.GameObjects;
 using Content.Shared._White.ResinNest;
