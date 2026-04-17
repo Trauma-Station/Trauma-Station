@@ -200,6 +200,8 @@
   id: BaseDecapoidOrgan
   suffix: "decapoid"
   components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
   - type: Damageable
     damageModifierSet: Decapoid
 
