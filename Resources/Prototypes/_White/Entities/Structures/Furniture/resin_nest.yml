@@ -14,6 +14,8 @@
   - type: IconSmooth
     key: full
     base: resin_nest
+  - type: ResinNest
+    overlayEntity: ResinNestOverlay
   - type: Fixtures
     fixtures:
       fix1:
@@ -62,12 +64,12 @@
         Caustic: -0.05
         Cold: -0.03
         Asphyxiation: -0.8
-        Bloodloss: -1.8 #Need to keep someone alive without blood
+        Bloodloss: -1.8
   - type: SpaceImmunityOnBuckle
   - type: BlockHandsOnBuckle
   - type: Strap
-    position: Down
-    rotation: -90
+    position: Stand
+    rotation: 0
     selfUnBuckleDelay: 120
   - type: Transform
     anchored: true

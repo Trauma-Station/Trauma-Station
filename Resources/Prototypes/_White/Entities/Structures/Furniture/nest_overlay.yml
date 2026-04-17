@@ -1,0 +1,11 @@
+- type: entity
+  id: ResinNestOverlay
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    state: nest_overlay
+    drawdepth: OverMobs
+    noRot: false
+  - type: Transform
+    noRot: false
