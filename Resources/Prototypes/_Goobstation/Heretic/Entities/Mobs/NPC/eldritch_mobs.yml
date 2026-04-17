@@ -4,7 +4,8 @@
   components:
   - type: BodyPart
     slots: []
-  - type: Boneless
+  - type: Woundable
+    boneEntity: null
 
 - type: entity
   parent:

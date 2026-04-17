@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.AlertLevel;
+using Content.Trauma.Common.Chat;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.AlertLevel;
@@ -245,6 +246,12 @@ namespace Content.Server.Communications
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(message.Message, maxLength);
             var author = Loc.GetString("comms-console-announcement-unknown-sender");
+            // <Trauma>
+            var attemptEv = new UserMessageAttemptEvent(message.Actor, msg);
+            RaiseLocalEvent(ref attemptEv);
+            if (attemptEv.Cancelled)
+                return;
+            // </Trauma>
             if (message.Actor is { Valid: true } mob)
             {
                 if (!CanAnnounce(comp))

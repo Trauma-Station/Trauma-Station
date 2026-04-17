@@ -21,16 +21,6 @@
   - !type:AddComponentSpecial
     components:
     - type: DeathSquadMember
-    - type: KnowledgeGrant
-      skills:
-        ThrowingKnowledge: 88
-        StrengthKnowledge: 88
-        ToughnessKnowledge: 88
-        AthleticsKnowledge: 88
-        MeleeKnowledge: 88
-        ShootingKnowledge: 88
-        SurgeryKnowledge: 88
-        FirstAidKnowledge: 88
   # </Trauma>
 
   # Goobstation Start - I basically re-did all of deathsquads stuff so. - Sol

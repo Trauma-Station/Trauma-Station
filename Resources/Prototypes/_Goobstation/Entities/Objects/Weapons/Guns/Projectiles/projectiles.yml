@@ -485,7 +485,7 @@
     damage:
       types:
         Piercing: 3
-        Holy: 6
+        Holy: 4
 
 - type: entity
   name : stun bolt

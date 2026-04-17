@@ -116,9 +116,7 @@
   components:
   - type: StatusEffectAlert
     alert: DuskAndDawn
-  - type: GrantComponentsStatusEffect
-    components:
-    - type: XRayVision
+  - type: XRayVisionStatusEffect
 
 - type: entity
   parent: MobStatusEffectBase
@@ -302,3 +300,10 @@
     interval: 7.5
     maxBlades: 5
     refreshBlades: true
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectInfluenceXray
+  name: influence xray
+  components:
+  - type: XRayVisionStatusEffect
