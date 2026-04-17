@@ -1244,8 +1244,12 @@
   loadouts:
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
-  - HeadofSecurityGreatCoat # Goobstation
+  - HeadofSecurityExperimentalCoat # Trauma
   - HeadofSecurityVestWeb # Goobstation
+  - HeadofSecurityGreatCoat # Trauma
+  - HeadofSecurityOverCoat # Trauma
+  - HeadofSecurityWinterTrenchCoat # Trauma
+  - HeadofSecurityJacket # Trauma
 
 - type: loadoutGroup
   id: HeadofSecurityJobTrinkets

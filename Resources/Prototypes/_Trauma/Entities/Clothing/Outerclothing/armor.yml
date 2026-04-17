@@ -173,3 +173,14 @@
     sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
+
+- type: entity
+  parent: [BaseSecurityCommandContraband, ClothingOuterArmorHoS]
+  id: ClothingOuterHoSJacket
+  name: head of security's parade jacket
+  description: A sharply tailored ceremonial jacket reserved exclusively for the Head of Security. Reinforced with discreet armor panels beneath its elegant Nanotrasen-red fabric and gold-trimmed epaulets, it turns every formal inspection into a statement of absolute authority.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Armor/hos_jacket.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Armor/hos_jacket.rsi

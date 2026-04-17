@@ -1,0 +1,32 @@
+  - type: entity
+    parent: [BaseSecurityCommandContraband, ClothingOuterArmorHoS]
+    id: ClothingOuterCoatHoSGreat
+    name: head of security's armored greatcoat
+    description: A greatcoat enhanced with a special alloy for some extra protection and style for those with a commanding presence.
+    components:
+    - type: Sprite
+      sprite: _Trauma/Clothing/OuterClothing/Coats/hos_greatcoat.rsi
+    - type: Clothing
+      sprite: _Trauma/Clothing/OuterClothing/Coats/hos_greatcoat.rsi
+
+  - type: entity
+    parent: [BaseSecurityCommandContraband, ClothingOuterArmorHoS]
+    id: ClothingOuterCoatHoSTrenchWinter
+    name: head of security's winter trenchcoat
+    description: A trenchcoat enhanced with a special lightweight kevlar, padded with wool on the collar and inside. You feel strangely lonely wearing this coat.
+    components:
+    - type: Sprite
+      sprite: _Trauma/Clothing/OuterClothing/Coats/hos_wintertrenchcoat.rsi
+    - type: Clothing
+      sprite: _Trauma/Clothing/OuterClothing/Coats/hos_wintertrenchcoat.rsi
+
+  - type: entity
+    parent: [BaseSecurityCommandContraband, ClothingOuterArmorHoS]
+    id: ClothingOuterCoatHoSOver
+    name: head of security's overcoat
+    description: Lightly armored leather overcoat meant as casual wear for high-ranking officers. Bears the crest of Nanotrasen Security.
+    components:
+    - type: Sprite
+      sprite: _Trauma/Clothing/OuterClothing/Coats/hos_overcoat.rsi
+    - type: Clothing
+      sprite: _Trauma/Clothing/OuterClothing/Coats/hos_overcoat.rsi
