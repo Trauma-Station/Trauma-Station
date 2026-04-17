@@ -37,7 +37,7 @@
       max: 3
       playerRatio: 15
       lateJoinAdditional: true
-      jobBlacklist: [ Chaplain, ]
+      jobBlacklist: [ Chaplain ]
       blacklist:
         components:
         - CommandStaff
