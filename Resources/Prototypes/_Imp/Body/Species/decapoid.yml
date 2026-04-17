@@ -43,6 +43,7 @@
       required: false
 
 - type: entity
+  categories: [ HideSpawnMenu ]
   parent: BaseSpeciesAppearance
   id: AppearanceDecapoid
   name: Decapoid appearance
@@ -268,7 +269,7 @@
 
 - type: entity # These are a bit evil
   id: OrganDecapoidEyes
-  parent: [BaseDecapoidOrgan, OrganHumanEyes]
+  parent: [BaseDecapoidOrgan, OrganBaseEyes]
   components:
   - type: VisualOrgan
     data:
@@ -279,7 +280,7 @@
 
 - type: entity
   id: OrganDecapoidLungs
-  parent: [BaseDecapoidOrgan, OrganHumanLungs]
+  parent: [BaseDecapoidOrgan, OrganBaseLungs]
   name: decapoid respiratory system
   description: "Extracts dissolved oxygen from water, and utilizes it for cell maintenance."
   components:
@@ -288,36 +289,36 @@
 
 - type: entity
   id: OrganDecapoidStomach
-  parent: [BaseDecapoidOrgan, OrganHumanStomach]
+  parent: [BaseDecapoidOrgan, OrganBaseStomach]
   components:
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
 
 - type: entity
   id: OrganDecapoidBrain
-  parent: [BaseDecapoidOrgan, OrganHumanBrain]
+  parent: [BaseDecapoidOrgan, OrganBaseBrain]
 
 
 - type: entity
   id: OrganDecapoidTongue
-  parent: [BaseDecapoidOrgan, OrganHumanTongue]
+  parent: [BaseDecapoidOrgan, OrganBaseTongue]
 
 - type: entity
   id: OrganDecapoidAppendix
-  parent: [BaseDecapoidOrgan, OrganHumanAppendix]
+  parent: [BaseDecapoidOrgan, OrganBaseAppendix]
 
 - type: entity
   id: OrganDecapoidEars
-  parent: [BaseDecapoidOrgan, OrganHumanEars]
+  parent: [BaseDecapoidOrgan, OrganBaseEars]
 
 - type: entity
   id: OrganDecapoidHeart
-  parent: [BaseDecapoidOrgan, OrganHumanHeart]
+  parent: [BaseDecapoidOrgan, OrganBaseHeart]
 
 - type: entity
   id: OrganDecapoidLiver
-  parent: [BaseDecapoidOrgan, OrganHumanLiver]
+  parent: [BaseDecapoidOrgan, OrganBaseLiver]
 
 - type: entity
   id: OrganDecapoidKidneys
-  parent: [BaseDecapoidOrgan, OrganHumanKidneys]
+  parent: [BaseDecapoidOrgan, OrganBaseKidneys]

@@ -7,12 +7,12 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Trauma.Shared.Decapoids;
 using Robust.Shared.Timing;
 
-namespace Content.Trauma.Server.Decapoids.EntitySystems;
+namespace Content.Trauma.Server.Decapoids;
 
 public sealed partial class VaporizerSystem : EntitySystem
 {
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private void ProcessVaporizerTank(EntityUid uid, VaporizerComponent vaporizer, GasTankComponent gasTank, SolutionContainerManagerComponent solutionManager)
     {
@@ -41,10 +41,10 @@ public sealed partial class VaporizerSystem : EntitySystem
 
         while (enumerator.MoveNext(out var uid, out var vaporizer, out var gasTank, out var solutionManager))
         {
-            if (_gameTiming.CurTime >= vaporizer.NextProcess)
+            if (_timing.CurTime >= vaporizer.NextProcess)
             {
                 ProcessVaporizerTank(uid, vaporizer, gasTank, solutionManager);
-                vaporizer.NextProcess = _gameTiming.CurTime + vaporizer.ProcessDelay;
+                vaporizer.NextProcess = _timing.CurTime + vaporizer.ProcessDelay;
             }
         }
     }

@@ -9,7 +9,7 @@
   "states": [
     {
       "name": "full",
-	  "directions": 4
+      "directions": 4
     },
     {
       "name": "eyes",

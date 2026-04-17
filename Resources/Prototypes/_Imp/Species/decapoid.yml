@@ -6,9 +6,9 @@
   defaultSkinTone: "#385878"
   dollPrototype: AppearanceDecapoid
   skinColoration: Hues
-  maleFirstNames: names_decapoid_first
-  femaleFirstNames: names_decapoid_first
-  lastNames: names_decapoid_last
+  maleFirstNames: NamesDecapoidFirst
+  femaleFirstNames: NamesDecapoidFirst
+  lastNames: NamesDecapoidLast
   sexes:
   - Unsexed
-  knowledge: Arachnid # Idk make a custom one if you really want to
+  knowledge: Human # Idk make a custom one if you really want to

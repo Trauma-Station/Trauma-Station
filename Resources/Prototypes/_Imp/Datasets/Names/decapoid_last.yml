@@ -1,5 +1,5 @@
 - type: localizedDataset
-  id: names_decapoid_last
+  id: NamesDecapoidLast
   values:
     prefix: names-decapoid-last-dataset-
     count: 30

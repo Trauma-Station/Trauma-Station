@@ -1,8 +1,8 @@
 - type: entity
-  name: decapoid claw
-  suffix: Unremoveable
   parent: BaseItem
   id: DecapoidClawItem
+  name: decapoid claw
+  suffix: Unremoveable
   description: 'A large claw. Not very good for fine manipulation, but very strong and very sharp.'
   components:
   - type: Sprite
@@ -46,12 +46,12 @@
           state: icon
         useSound: /Audio/_Impstation/Items/Decapoid/claw_cutting.ogg
         changeSound: /Audio/_Impstation/Items/Decapoid/switch.ogg
-  - type: Tweezers # More or less same as wirecutters + crowbar, which the claw is
-    speed: 0.5
+  - type: Tweezers # More or less same as wirecutters + crowbar (which the claw is), but even worse, because the claw is unwieldy
+    speed: 0.4
   - type: Retractor
-    speed: 0.5
+    speed: 0.3
   - type: Hemostat
-    speed: 0.7
+    speed: 0.3
   - type: SurgeryTool
     startSound: /Audio/_Impstation/Items/Decapoid/switch.ogg
     endSound: /Audio/_Impstation/Items/Decapoid/claw_prying.ogg
@@ -87,10 +87,10 @@
 
 
 - type: entity
-  name: vapor tank
-  suffix: Filled
   parent: GasTankRoundBase
   id: DecapoidVaporTank
+  name: vapor tank
+  suffix: Filled
   description: 'An alien contraption consisting of two tanks. The smaller tank takes in water and converts it into vapor, which is stored in the larger tank. It can hold 5 L of gas, and 30u of fluid.'
   components:
   - type: Sprite
