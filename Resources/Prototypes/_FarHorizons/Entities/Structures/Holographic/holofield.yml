@@ -95,14 +95,16 @@
     netsync: false
     maxCharge: 50000
     startingCharge: 0
+  - type: ApcPowerReceiver
+  - type: ApcPowerReceiverBattery
+    batteryRechargeRate: 2000
+    idleLoad: 200
   - type: Electrified
     onHandInteract: false
     onInteractUsing: false
     onBump: false
     requirePower: true
     mediumVoltageNode: input
-  - type: PowerNetworkBattery
-    maxChargeRate: 2000
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
@@ -179,16 +181,23 @@
 
 - type: entity
   parent: HolographicFieldGenerator
-  id: HolographicFieldGeneratorPrefab
-  suffix: Mapping, Enabled
+  id: HolographicFieldGeneratorCharged
+  suffix: Charged, Locked
   components:
   - type: GenericFieldGenerator
-    enabled: true
     charged: true
   - type: Battery
     startingCharge: 50000
   - type: Lock
     locked: true
+
+- type: entity
+  parent: HolographicFieldGeneratorCharged
+  id: HolographicFieldGeneratorEnabled
+  suffix: Enabled, Locked
+  components:
+  - type: GenericFieldGenerator
+    enabled: true
 
 #region Holographic Barrier
 
@@ -220,16 +229,23 @@
 
 - type: entity
   parent: HolographicBarrierGenerator
-  id: HolographicBarrierGeneratorPrefab
-  suffix: Mapping, Enabled
+  id: HolographicBarrierGeneratorCharged
+  suffix: Charged, Locked
   components:
   - type: GenericFieldGenerator
-    enabled: true
     charged: true
   - type: Battery
     startingCharge: 50000
   - type: Lock
     locked: true
+
+- type: entity
+  parent: HolographicBarrierGeneratorCharged
+  id: HolographicBarrierGeneratorEnabled
+  suffix: Enabled, Locked
+  components:
+  - type: GenericFieldGenerator
+    enabled: true
 
 #region Fields
 
