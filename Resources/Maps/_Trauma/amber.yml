@@ -78359,12 +78359,6 @@ entities:
     - type: Transform
       pos: 32.5,-47.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 23639
-      - 41
 - proto: Fireplace
   entities:
   - uid: 11245

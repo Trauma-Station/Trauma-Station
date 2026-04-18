@@ -17551,11 +17551,6 @@ entities:
     - type: Transform
       pos: 72.5,-52.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 108
 - proto: AltarConvertRed
   entities:
   - uid: 934
@@ -97365,22 +97360,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 75.5,-50.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 108
   - uid: 15723
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 75.5,-54.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 108
 - proto: Fireplace
   entities:
   - uid: 15724
@@ -134054,11 +134039,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 71.5,-52.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 108
     - type: AtmosPipeColor
       color: '#FF0000FF'
   - uid: 20551
@@ -134067,11 +134047,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 73.5,-52.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 108
     - type: AtmosPipeColor
       color: '#0000FFFF'
 - proto: GasVolumePump

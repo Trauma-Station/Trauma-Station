@@ -15140,11 +15140,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 5.5,-54.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 101
   - uid: 24048
     components:
     - type: Transform
@@ -93179,33 +93174,18 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,-53.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 101
   - uid: 10665
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,-51.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 101
   - uid: 10666
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 9.5,-50.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 101
   - uid: 10667
     components:
     - type: Transform
@@ -124093,11 +124073,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 12.5,-52.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 101
     - type: AtmosPipeColor
       color: '#0000FFFF'
   - uid: 14440
@@ -124106,11 +124081,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 6.5,-52.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 101
     - type: AtmosPipeColor
       color: '#0000FFFF'
   - uid: 28703
@@ -125882,11 +125852,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 12.5,-53.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 101
     - type: AtmosPipeColor
       color: '#FF0000FF'
   - uid: 14619
@@ -125895,11 +125860,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 6.5,-54.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 101
     - type: AtmosPipeColor
       color: '#FF0000FF'
   - uid: 28714

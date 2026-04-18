@@ -14258,22 +14258,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: -10.5,51.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 8
   - uid: 732
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 33.5,-54.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 121
 - proto: AltarConvertMaint
   entities:
   - uid: 733
@@ -75965,22 +75955,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 34.5,-51.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 121
   - uid: 12290
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 30.5,-55.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 121
 - proto: FirelockEdge
   entities:
   - uid: 12291
@@ -76242,12 +76222,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -5.5,54.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 8
-      - 7
   - uid: 12331
     components:
     - type: Transform
@@ -110834,12 +110808,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,53.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 7
-      - 8
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 16935
@@ -110901,11 +110869,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 32.5,-54.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 121
 - proto: GasVentScrubber
   entities:
   - uid: 16941
@@ -112342,12 +112305,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,55.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 7
-      - 8
     - type: AtmosPipeColor
       color: '#990000FF'
   - uid: 17122
@@ -112366,11 +112323,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 32.5,-55.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 121
 - proto: GasVolumePump
   entities:
   - uid: 17124

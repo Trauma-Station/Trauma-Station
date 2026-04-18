@@ -20172,11 +20172,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -45.5,-74.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 35888
 - proto: AirSensorVox
   entities:
   - uid: 659
@@ -116486,11 +116481,6 @@ entities:
     - type: Transform
       pos: -49.5,-74.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 35888
 - proto: FirelockEdge
   entities:
   - uid: 18791
@@ -146891,11 +146881,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -46.5,-75.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 35888
     - type: AtmosPipeColor
       color: '#0000FFFF'
 - proto: GasVentPumpVox
@@ -148392,11 +148377,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -46.5,-74.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 35888
     - type: AtmosPipeColor
       color: '#FF0000FF'
 - proto: GasVentScrubberVox
