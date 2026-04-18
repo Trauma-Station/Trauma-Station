@@ -1680,7 +1680,7 @@
   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
   cost:
-    Telecrystal: 75 # goob
+    Telecrystal: 80 # Trauma - was 12, 5x and it's much stronger with lasersec
   categories:
   - UplinkWearables
   #conditions: # Goobstation - no fuck you
