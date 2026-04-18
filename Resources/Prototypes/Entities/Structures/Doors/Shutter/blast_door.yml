@@ -4,6 +4,18 @@
   name: blast door
   description: This one says 'BLAST DONGER'.
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - AirlockLayer
+        - LowImpassable
   - type: AccessReader
     containerAccessProvider: board
   - type: Sprite
@@ -23,7 +35,7 @@
     canPry: false
     crushDamage:
       types:
-        Blunt: 25 # yowch
+        Blunt: 25
     openSound:
       path: /Audio/Machines/blastdoor.ogg
     closeSound:
@@ -50,10 +62,10 @@
     messagePerceivedByOthers: comp-window-knock
     interactSuccessSound:
       path: /Audio/Effects/glass_knock.ogg
-  - type: Penetratable # Goobstation - Better snipers
+  - type: Penetratable
     penetrateDamage: 200
     damagePenalty: 0.4
-  - type: SoundBlocker # Trauma
+  - type: SoundBlocker
     soundBlockPercent: 0.8
 
 - type: entity

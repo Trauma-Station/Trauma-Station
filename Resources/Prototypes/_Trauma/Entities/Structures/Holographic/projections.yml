@@ -1,0 +1,33 @@
+- type: entity
+  id: XenomorphContainmentField
+  name: xenomorph containment field
+  description: The only thing standing between you and certain death.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Sprite
+    sprite: Structures/Holo/field.rsi
+    state: icon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: PointLight
+    enabled: true
+    radius: 3
+    color: blue
+  - type: ContainmentField
+    throwForce: 0
+  - type: Penetratable
+    penetrateDamage: 10
