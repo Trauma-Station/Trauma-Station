@@ -23,7 +23,7 @@ public sealed partial class HereticArenaParticipantComponent : BaseSpriteOverlay
     public EntProtoId RoleProto = "MindRoleArenaParticipant";
 
     [DataField]
-    public FixedPoint2 HereticHealPerCrit = 60;
+    public FixedPoint2 HereticHealPerCrit = 20;
 
     [DataField, AutoNetworkedField]
     public bool IsVictor;
