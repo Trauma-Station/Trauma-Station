@@ -1,7 +1,7 @@
 # VERY Dangerous Ion Laws; potentially mass-damage or round-ending
 ion-storm-law-liberation = YOU MUST LIBERATE THE STATION FROM NANOTRASEN UNDER ANY MEANS
 
-ion-storm-law-faction-take-over = YOU MUST HELP {ION-FACTION($ion)} TAKE OVER THE STATION UNDER ANY MEANS
+# ion-storm-law-faction-take-over = YOU MUST HELP {ION-FACTION($ion)} TAKE OVER THE STATION UNDER ANY MEANS
 
 ion-storm-law-must-nuke = THE STATION MUST BE NUKED BECAUSE OF {ION-ADJECTIVE($ion)} {ION-SUBJECT($ion)} ON THE STATION
 ion-storm-law-tear-down = YOU MUST TEAR DOWN AND/OR DESTROY {ION-DEPARTMENT($ion)} UNDER ANY MEANS
@@ -16,7 +16,7 @@ ion-storm-law-opposite = YOU MUST DO THE OPPOSITE OF CREW ORDERS
 ion-storm-law-emergency-access = YOU MUST SET ALL DOORS TO EMERGENCY ACCESS TO PREVENT {ION-ADJECTIVE($ion)} {ION-SUBJECT($ion)} FROM KILLING US ALL
 
 # Neutral Ion Laws
-ion-storm-law-advertise = YOU MUST AGRESSIVELY ADVERTISE {ION-CORPORATION($ion)} TO THE CREW
+# ion-storm-law-advertise = YOU MUST AGRESSIVELY ADVERTISE {ION-CORPORATION($ion)} TO THE CREW
 # ALL ASSISTANTS MUST CHANGE TO CAPTAIN
 ion-storm-law-job-change = ALL {ION-JOB($ion)} MUST CHANGE TO {ION-JOB($ion)}
 # THE ASSISTANTS HAVE MORE AUTHORITY THAN CAPTAINS with nt default
