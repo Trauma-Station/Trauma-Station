@@ -31,7 +31,7 @@
   id: T
   name: reagent-name-t
   parent: BaseAlcohol
-  desc: A strange mixture of tea and... nothing? It looks literally like the letter T.
+  desc: reagent-desc-t
   physicalDesc: reagent-physical-desc-literal
   flavor: tea
   color: "#b08d71"
@@ -50,7 +50,7 @@
   id: RumAndCoke
   name: reagent-name-rum-and-coke
   parent: BaseAlcohol
-  desc: A classic, refreshing mixture of rum and cola.
+  desc: reagent-desc-rum-and-coke
   physicalDesc: reagent-physical-desc-fizzy
   flavor: cola
   color: "#301503"
@@ -70,7 +70,7 @@
   id: TrappistBeer
   name: reagent-name-trappist-beer
   parent: BaseAlcohol
-  desc: A strong, dark beer brewed by space monks using holy water.
+  desc: reagent-desc-trappist-beer
   physicalDesc: reagent-physical-desc-foamy
   flavor: bitter
   color: "#5c3e12"
@@ -90,7 +90,7 @@
   id: AloeCocktail
   name: reagent-name-aloe-cocktail
   parent: BaseAlcohol
-  desc: A strange mix of watermelon juice, cream and rum.
+  desc: reagent-desc-aloe-cocktail
   physicalDesc: reagent-physical-desc-creamy
   flavor: sweet
   color: "#e2e26a"
@@ -110,7 +110,7 @@
   id: BananaMilkshake
   name: reagent-name-banana-milkshake
   parent: BaseDrink
-  desc: A thick, creamy shake made with banana juice, cream and ice.
+  desc: reagent-desc-banana-milkshake
   physicalDesc: reagent-physical-desc-creamy
   flavor: sweet
   color: "#ffe135"
