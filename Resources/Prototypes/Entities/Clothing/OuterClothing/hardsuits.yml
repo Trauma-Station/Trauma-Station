@@ -699,7 +699,7 @@
   parent: [ClothingOuterHardsuitBase, BaseSyndicateContraband]
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit # Goob edit
-  description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders. # Goob edit
+  description: An elite version of the blood-red hardsuit, with improved mobility, fireproofing and heat-resistant armor. Property of Gorlex Marauders. # Trauma - align desc with resistances
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
@@ -725,16 +725,16 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.6 # Trauma, was .55
-        Slash: 0.6 # Trauma, was .55
-        Piercing: 0.6 # Trauma, was .55
+        Blunt: 0.8 # Trauma - was .55
+        Slash: 0.8 # Trauma - was .55
+        Piercing: 0.8 # Trauma - was .55
         Heat: 0.2
         Radiation: 0.01
   - type: Item
     size: Huge
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 1 # Trauma - was 0.9
+    sprintModifier: 1 # Trauma - was 0.9
   - type: HeldSpeedModifier
   - type: Tag
     tags:
