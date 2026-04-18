@@ -7014,3 +7014,44 @@ Entries:
   id: 812
   time: '2026-04-16T13:47:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2066
+- author: Vanadiom
+  changes:
+  - type: Add
+    message: Diona can now see far better through the dense foliage of kudzu!
+  id: 813
+  time: '2026-04-16T18:00:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2056
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed QM and cargo techs not being able to make crates.
+  id: 814
+  time: '2026-04-16T20:43:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2082
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed issues with ash storms when using the mining shuttle.
+  id: 815
+  time: '2026-04-16T20:47:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2081
+- author: TurboTrackerss14
+  changes:
+  - type: Remove
+    message: Krav Maga LegSweep no longer does stamina damage.
+  - type: Remove
+    message: Krav Maga NeckChop no longer does stamina damage nor knockdown.
+  - type: Remove
+    message: Krav Maga LungPunch nolonger knockdowns.
+  - type: Fix
+    message: Krav Maga effects no longer stack infinitely.
+  id: 816
+  time: '2026-04-16T21:00:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2083
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed dislipper from the uplink.
+  id: 817
+  time: '2026-04-16T21:32:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2085

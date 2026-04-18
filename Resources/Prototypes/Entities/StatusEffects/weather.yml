@@ -35,7 +35,6 @@
     blacklist:
       components:
       - WeatherImmune
-  - type: WeatherDebug
   # </Trauma>
   - type: WeatherStatusEffect
     sprite:
@@ -51,7 +50,6 @@
   parent: WeatherBase
   id: WeatherAshfallLight
   components:
-  - type: WeatherDebug # Trauma
   - type: WeatherStatusEffect
     sprite:
       sprite: /Textures/Effects/weather.rsi

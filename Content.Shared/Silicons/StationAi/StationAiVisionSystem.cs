@@ -84,7 +84,7 @@ public sealed class StationAiVisionSystem : EntitySystem
             if (!seed.Comp.Enabled)
                 continue;
 
-            if (seed.Comp.NeedsPower && !_power.IsPowered(seed.Owner))
+            if (seed.Comp.NeedsPower && !Paused(seed.Owner) && !_power.IsPowered(seed.Owner)) // Trauma - ignore power check if paused
                 continue;
 
             if (seed.Comp.NeedsAnchoring && !Transform(seed.Owner).Anchored)
@@ -171,7 +171,7 @@ public sealed class StationAiVisionSystem : EntitySystem
             if (!seed.Comp.Enabled)
                 continue;
 
-            if (seed.Comp.NeedsPower && !_power.IsPowered(seed.Owner))
+            if (seed.Comp.NeedsPower && !Paused(seed.Owner) && !_power.IsPowered(seed.Owner)) // Trauma - ignore power check if paused
                 continue;
 
             if (seed.Comp.NeedsAnchoring && !Transform(seed.Owner).Anchored)
