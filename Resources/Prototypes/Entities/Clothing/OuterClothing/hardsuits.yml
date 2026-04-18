@@ -725,16 +725,16 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.6 # Trauma, was .55
-        Slash: 0.6 # Trauma, was .55
-        Piercing: 0.6 # Trauma, was .55
+        Blunt: 0.7 # Trauma - was .55
+        Slash: 0.7 # Trauma - was .55
+        Piercing: 0.7 # Trauma - was .55
         Heat: 0.2
         Radiation: 0.01
   - type: Item
     size: Huge
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 1 # Trauma - was 0.9
+    sprintModifier: 1 # Trauma - was 0.9
   - type: HeldSpeedModifier
   - type: Tag
     tags:

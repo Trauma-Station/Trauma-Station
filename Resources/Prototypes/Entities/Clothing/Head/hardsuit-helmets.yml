@@ -706,9 +706,9 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.3 # Trauma, was 0.6
-        Slash: 0.3 # Trauma, was 0.6
-        Piercing: 0.3 # Trauma, was 0.6
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
         Heat: 0.3 # Trauma, was 0.6
         Radiation: 0.01
         # Caustic: 0.4 # Trauma
