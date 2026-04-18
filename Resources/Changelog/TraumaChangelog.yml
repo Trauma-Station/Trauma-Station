@@ -7055,3 +7055,10 @@ Entries:
   id: 817
   time: '2026-04-16T21:32:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2085
+- author: assripper.
+  changes:
+  - type: Add
+    message: new security officer drip when you reach 100 hours in sec overall
+  id: 818
+  time: '2026-04-18T06:47:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2039

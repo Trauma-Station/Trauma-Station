@@ -1,0 +1,32 @@
+- type: loadoutEffectGroup
+  id: VeteranOfficer
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Security
+      time: 360000 # 100 hrs
+
+- type: loadout
+  id: SergeantUniform
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranOfficer
+  equipment:
+    innerClothing: ClothingUniformSergeantUniform
+
+- type: loadout
+  id: SergeantSkirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranOfficer
+  equipment:
+    innerClothing: ClothingUniformSergeantSkirt
+
+- type: loadout
+  id: SergeantBeret
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: VeteranOfficer
+  equipment:
+    innerClothing: ClothingHeadHatBeretSergeant
