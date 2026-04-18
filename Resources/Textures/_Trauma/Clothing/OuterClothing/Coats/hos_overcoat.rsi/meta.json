@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/blob/46a5e578e43524c7daa79bd1bf1f928906a03f65/icons/mob/suit.dmi and https://github.com/tgstation/tgstation/blob/46a5e578e43524c7daa79bd1bf1f928906a03f65/icons/obj/clothing/suits.dmi, inhands by FarDownUp (Github)",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/46a5e578e43524c7daa79bd1bf1f928906a03f65/icons/mob/suit.dmi and https://github.com/tgstation/tgstation/blob/46a5e578e43524c7daa79bd1bf1f928906a03f65/icons/obj/clothing/suits.dmi, inhands by FarDownUp (Github)",
     "size": {
       "x": 32,
       "y": 32
