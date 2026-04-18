@@ -32,5 +32,5 @@ public sealed partial class VaporizerComponent : Component
     public TimeSpan ProcessDelay = TimeSpan.FromSeconds(1);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan NextProcess = new();
+    public TimeSpan NextProcess;
 }

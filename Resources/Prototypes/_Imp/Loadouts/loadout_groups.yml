@@ -15,19 +15,6 @@
   loadouts:
   - LoadoutDecapoidClaw
 
-# the claw and tank but as StartingGear
-- type: startingGear
-  id: StartingGearDecapoidClawAndTank
-  inhand:
-    - DecapoidVaporTank
-    - DecapoidClawItem
-
-# the vaporizer but as StartingGear
-- type: startingGear
-  id: StartingGearDecapoidVaporizer
-  equipment:
-    mask: DecapoidBreathingApparatus
-
 # The usual loadouts of the decapoid harness that spawn in your chest slot for jobs that don't have outerwear in their loadout
 - type: loadoutGroup
   id: GroupTankHarnessAquatic
