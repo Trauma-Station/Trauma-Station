@@ -678,7 +678,7 @@
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitSyndieElite
   name: syndicate elite hardsuit helmet # Goob edit
-  description: An elite version of the blood-red hardsuit's helmet, with improved armor and fireproofing. Property of Gorlex Marauders. # Goob edit
+  description: An elite version of the blood-red hardsuit's helmet, with heat-resistant armor and fireproofing. Property of Gorlex Marauders. # Trauma - align desc with resistances
   components:
   # <Trauma>
   - type: ExplosionResistance
@@ -706,9 +706,9 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.3 # Trauma, was 0.6
-        Slash: 0.3 # Trauma, was 0.6
-        Piercing: 0.3 # Trauma, was 0.6
+        Blunt: 0.8 # Trauma, was 0.6
+        Slash: 0.8 # Trauma, was 0.6
+        Piercing: 0.8 # Trauma, was 0.6
         Heat: 0.3 # Trauma, was 0.6
         Radiation: 0.01
         # Caustic: 0.4 # Trauma

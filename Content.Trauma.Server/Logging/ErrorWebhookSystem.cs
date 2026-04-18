@@ -107,9 +107,13 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
     public const string StackTracePrefix = "/home/runner/work/Trauma-Station/Trauma-Station/";
 
     /// <summary>
-    /// Ignore errors that contain this string.
+    /// Ignore errors that contain these strings.
     /// </summary>
-    public const string NetEntitySlop = "Can't resolve \"Robust.Shared.GameObjects.MetaDataComponent\" on entity";
+    public static readonly string[] IgnoredStrings = new[]
+    {
+        // upstream issue nobody cares about with prometheus
+        "Unable to write data to the transport connection: Broken Pipe"
+    };
 
     public RingBuffer<string> Buffer = default!; // set in Initialize
 
@@ -120,8 +124,11 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
 
         var text = message.RenderMessage()
             .Replace(StackTracePrefix, string.Empty);
-        if (text.Contains(NetEntitySlop))
-            return; // ignore state error spam for deleted entities referenced in a component, engine "maintainer" is a chud and won't do anything about it
+        foreach (var ignored in IgnoredStrings)
+        {
+            if (text.Contains(ignored))
+                return;
+        }
 
         var name = LogMessage.LogLevelToName(message.Level.ToRobust());
         var content = $"{DateTime.Now:o} [{name}] {sawmillName}: {text}";
