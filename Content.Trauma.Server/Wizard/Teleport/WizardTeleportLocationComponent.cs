@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Goobstation.Server.Wizard.Teleport;
+namespace Content.Trauma.Server.Wizard.Teleport;
 
 [RegisterComponent]
 public sealed partial class WizardTeleportLocationComponent : Component

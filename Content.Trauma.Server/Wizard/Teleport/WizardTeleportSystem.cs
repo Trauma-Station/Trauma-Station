@@ -2,38 +2,33 @@
 
 using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Server._Goobstation.Wizard.Teleport;
-using Content.Server.Actions;
 using Content.Server.Pinpointer;
-using Content.Server.Popups;
+using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Shared.Warps;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Server.Wizard.Systems;
+using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Content.Trauma.Shared.Wizard.Teleport;
-using Robust.Server.Audio;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Physics;
 
-namespace Content.Goobstation.Server.Wizard.Teleport;
+namespace Content.Trauma.Server.Wizard.Teleport;
 
 public sealed class WizardTeleportSystem : SharedWizardTeleportSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly PullingSystem _pullingSystem = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly WizardRuleSystem _wizard = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SpellsSystem _spells = default!;
+    [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private readonly WizardRuleSystem _wizard = default!;
 
     private static readonly EntProtoId SmokeProto = "AdminInstantEffectSmoke10";
 
@@ -105,7 +100,7 @@ public sealed class WizardTeleportSystem : SharedWizardTeleportSystem
         if (ent.Comp.UsesLeft <= 0)
         {
             _popup.PopupEntity(Loc.GetString("teleport-scroll-no-charges"), user, user, PopupType.Medium);
-            _uiSystem.CloseUis(ent.Owner);
+            _ui.CloseUis(ent.Owner);
 
             // Don't Queuedel right away so that client doesn't throw debug assert exception
             var fading = EnsureComp<FadingTimedDespawnComponent>(ent.Owner);
@@ -119,44 +114,35 @@ public sealed class WizardTeleportSystem : SharedWizardTeleportSystem
 
     private bool Teleport(EntityUid user, EntityUid location)
     {
-        var ev = new TeleportAttemptEvent(false);
-        RaiseLocalEvent(user, ref ev);
-        if (ev.Cancelled)
+        var oldCoords = Transform(user).Coordinates;
+        var coords = Transform(location).Coordinates;
+        var soundOut = TeleportSound;
+        var soundIn = PostTeleportSound;
+        if (!_teleport.Teleport(user, coords, soundIn, soundOut, user: user, predicted: false))
             return false;
 
-        _pullingSystem.StopAllPulls(user);
-
-        var userXform = Transform(user);
-
-        Spawn(SmokeProto, _transform.GetMapCoordinates(user, userXform));
-        _audio.PlayPvs(TeleportSound, userXform.Coordinates);
-
-        var coords = _transform.GetMapCoordinates(location);
-        _transform.SetMapCoordinates(user, coords);
-
+        Spawn(SmokeProto, oldCoords);
         Spawn(SmokeProto, coords);
-        _audio.PlayPvs(PostTeleportSound, userXform.Coordinates);
-
         return true;
     }
 
     public override void OnTeleportSpell(EntityUid performer, EntityUid action)
     {
         var key = WizardTeleportUiKey.Key;
-        if (!_uiSystem.TryToggleUi(action, key, performer))
+        if (!_ui.TryToggleUi(action, key, performer))
             return;
 
         var state = new WizardTeleportState(GetWizardTeleportLocations().ToList(), GetNetEntity(action));
-        _uiSystem.SetUiState(action, key, state);
+        _ui.SetUiState(action, key, state);
     }
 
     private void OnAfterUIOpen(Entity<TeleportScrollComponent> ent, ref AfterActivatableUIOpenEvent args)
     {
-        if (!_uiSystem.HasUi(ent, WizardTeleportUiKey.Key))
+        if (!_ui.HasUi(ent, WizardTeleportUiKey.Key))
             return;
 
         var state = new WizardTeleportState(GetWizardTeleportLocations().ToList(), null);
-        _uiSystem.SetUiState(ent.Owner, WizardTeleportUiKey.Key, state);
+        _ui.SetUiState(ent.Owner, WizardTeleportUiKey.Key, state);
     }
 
     private void OnTeleportWarpMapInit(Entity<WizardTeleportWarpPointComponent> ent, ref MapInitEvent args)

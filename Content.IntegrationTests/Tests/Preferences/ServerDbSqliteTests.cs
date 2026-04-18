@@ -79,7 +79,7 @@ namespace Content.IntegrationTests.Tests.Preferences
         [Test]
         public async Task TestAppearanceValidationAndSave()
         {
-            var pair = await PoolManager.GetServerClient();
+            var pair = Pair; // Trauma - use existing pair...
             var db = GetDb(pair.Server);
             var username = new NetUserId(new Guid("640bd619-fc8d-4fe2-bf3c-4a5fb17d6ddd"));
 
@@ -106,7 +106,7 @@ namespace Content.IntegrationTests.Tests.Preferences
             var fetchedProfile = preferences.ConvertProfiles(prefs!.Profiles.Find(p => p.Slot == 0));
             Assert.That(fetchedProfile.MemberwiseEquals(profile));
 
-            await pair.CleanReturnAsync();
+            //await pair.CleanReturnAsync(); // Trauma
         }
 
         [Test]
