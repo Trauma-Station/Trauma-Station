@@ -8,7 +8,7 @@
     "license": "CC-BY-SA-3.0",
     "copyright": "https://github.com/naelstrof/-tg-station/blob/a8dd7060d669d13bdf608328c5ab723fcf8dc0c8/icons/obj/drinks.dmi",
     "states":
-    [
+   [
         {
             "name": "icon"
         },
@@ -20,7 +20,15 @@
         },
         {
             "name": "fill-2"
+        },
+        {
+            "name": "fill-3"
+        },
+        {
+            "name": "fill-4"
+        },
+        {
+            "name": "fill-5"
         }
-
     ]
 }
