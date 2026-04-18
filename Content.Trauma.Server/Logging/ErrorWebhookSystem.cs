@@ -109,10 +109,8 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
     /// <summary>
     /// Ignore errors that contain these strings.
     /// </summary>
-    public const string[] IgnoredStrings = new[]
+    public static readonly string[] IgnoredStrings = new[]
     {
-        // ignore state error spam for deleted entities referenced in a component, engine "maintainer" is a chud and won't do anything about it
-        "Can't resolve \"Robust.Shared.GameObjects.MetaDataComponent\" on entity",
         // upstream issue nobody cares about with prometheus
         "Unable to write data to the transport connection: Broken Pipe"
     };
