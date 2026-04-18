@@ -42,7 +42,6 @@ public sealed partial class TraumaInflicterComponent : Component
         { TraumaType.Dismemberment, "Dismemberment" },
         { TraumaType.OrganDamage, "OrganDamage" },
         { TraumaType.BoneDamage, "BoneDamage" },
-        { TraumaType.NerveDamage, "NerveDamage" },
         { TraumaType.VeinsDamage, "VeinsDamage" },
     };
 
@@ -55,7 +54,6 @@ public sealed partial class TraumaInflicterComponent : Component
         { TraumaType.Dismemberment, 0 },
         { TraumaType.OrganDamage, 0 },
         { TraumaType.BoneDamage, 0 },
-        { TraumaType.NerveDamage, 0 },
         { TraumaType.VeinsDamage, 0 },
     };
 

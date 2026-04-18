@@ -102,7 +102,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
                     // </Goob>
 
                     _damageableSystem.TryChangeDamage(uid, amt, ignoreResistances: false, interruptsDoAfters: false,
-                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.All); // Goob
+                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.Vital); // Trauma
 
                     // Apply dizziness as a symptom of bloodloss.
                     // The effect is applied in a way that it will never be cleared without being healthy.
@@ -117,7 +117,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
                         bloodstream.BloodlossHealDamage * bloodPercentage * _bloodlossMultiplier,
                         ignoreResistances: true,
                         interruptsDoAfters: false,
-                        splitDamage: SplitDamageBehavior.SplitEnsureAll); // Goob
+                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.Vital); // Trauma
 
                     _status.TryRemoveStatusEffect(uid, Bloodloss);
                 }

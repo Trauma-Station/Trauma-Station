@@ -67,9 +67,9 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
             var locId = _targetResolvers.Keys.FirstOrDefault(id => Loc.GetString(id).Equals(targetKey, StringComparison.OrdinalIgnoreCase));
             var resolver = _targetResolvers[locId];
 
-            if (resolver(contract.Comp) == null)
+            if (resolver(contract.Comp) is not { } target || TerminatingOrDeleted(target))
             {
-                Log.Warning($"Unknown resolver: {resolver(contract.Comp)}");
+                Log.Warning($"Bad target entity for {locId}!");
                 continue;
             }
 
@@ -86,10 +86,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
                 continue;
             }
 
-            if (resolver(contract.Comp) is {} target)
-                ApplyEffectToTarget(target, clause, contract);
-            else
-                Log.Warning($"Invalid target entity from resolver for clause {clauseKey} in contract {ToPrettyString(contract)}");
+            ApplyEffectToTarget(target, clause, contract);
         }
     }
 

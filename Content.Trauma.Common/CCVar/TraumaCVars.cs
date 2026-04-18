@@ -126,6 +126,14 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<float> ErrorWebhookDelay =
         CVarDef.Create("trauma.error_webhook_delay", 0.3f, CVar.SERVER);
 
+    /// <summary>
+    /// How many messages can be queued at once.
+    /// If this limit is exceeded the oldest messages get dropped.
+    /// Changing this ingame drops all currently queued messages.
+    /// </summary>
+    public static readonly CVarDef<int> ErrorWebhookLimit =
+        CVarDef.Create("trauma.error_webhook_limit", 64, CVar.SERVER);
+
     #endregion
 
     #region EndCredits
@@ -171,6 +179,16 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<int> YearOffset =
         CVarDef.Create("game.current_year_offset", 739, CVar.SERVERONLY);
+
+    #endregion
+
+    #region Antag Summoner
+
+    /// <summary>
+    /// Minimum number of players for antag summoner to work, to prevent farming money when nobody is even going to take the ghost roles.
+    /// </summary>
+    public static readonly CVarDef<int> AntagSummonerMinPlayers =
+        CVarDef.Create("trauma.antag_summoner_min_players", 30, CVar.SERVER);
 
     #endregion
 }

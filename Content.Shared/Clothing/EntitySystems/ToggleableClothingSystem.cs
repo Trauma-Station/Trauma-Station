@@ -444,8 +444,8 @@ public sealed class ToggleableClothingSystem : EntitySystem
         // Handle re-equipping contained items
         UnequipClothing(args.Equipee, (comp.AttachedUid, toggleableComp), attached.Owner, slot);
 
-        if (toggleableComp.Container != null)
-            _containerSystem.Insert(attached.Owner, toggleableComp.Container);
+        if (toggleableComp.Container is {} container && !TerminatingOrDeleted(container.Owner))
+            _containerSystem.Insert(attached.Owner, container);
     }
 
     /// <summary>
