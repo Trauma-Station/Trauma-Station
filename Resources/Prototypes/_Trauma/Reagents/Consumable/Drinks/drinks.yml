@@ -27,6 +27,7 @@
         intensityPerUnit: 0.1
         intensitySlope: 1
         maxTotalIntensity: 0.1
+
 - type: reagent
   id: T
   name: reagent-name-t

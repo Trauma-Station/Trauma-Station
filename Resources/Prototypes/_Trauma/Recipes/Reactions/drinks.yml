@@ -11,6 +11,7 @@
       amount: 1
   products:
     LemonadeLemonade: 3
+
 - type: reaction
   id: T
   reactants:
