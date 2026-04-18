@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.DoAfter;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -27,3 +28,34 @@ public sealed class ScriptureReciteMessage(EntProtoId scripture, string? tierDat
 /// </summary>
 [ByRefEvent]
 public record struct ReciteAttemptEvent(int ScriptureCost, bool Cancelled = false);
+
+/// <summary>
+/// Raised on the scripture entity, before reciting, to add extra behaviour (e.g. scripture tier effects)
+/// </summary>
+[ByRefEvent]
+public record struct BeforeScriptureReciteEvent(
+    EntityUid User,
+    string? TierId,
+    bool Handled = false);
+
+/// <summary>
+/// Used for scriptures that require a Do After before getting recited.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class ScriptureReciteDoAfterEvent: DoAfterEvent
+{
+    [DataField]
+    public string? TierId;
+
+    public ScriptureReciteDoAfterEvent()
+    {
+    }
+
+    public ScriptureReciteDoAfterEvent(string? tierId)
+    {
+        TierId = tierId;
+    }
+
+    public override DoAfterEvent Clone()
+        => new ScriptureReciteDoAfterEvent(TierId);
+};

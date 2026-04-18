@@ -1,0 +1,165 @@
+# Abstract
+- type: entity
+  abstract: true
+  parent: BaseAction
+  id: BaseCogcultAction
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    raiseOnAction: true
+  - type: DoAfterArgs
+
+- type: entity
+  abstract: true
+  parent: BaseCogcultAction
+  id: BaseKindleAction
+  components:
+  - type: TargetAction
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - StatusEffects
+    blacklist:
+      components:
+      - ClockworkCultist
+    event: !type:EffectTargetActionEvent
+
+# Kindle with all Tiers
+#
+# T1: Works the same as SS13
+# T2: Bypasses mindshields, freezes target, less stun time
+# T3: Bypasses mindshields, burns target, less stun time
+#
+# TODO: Effects, Sounds, Action Sprites
+#
+# For Part 2: Check if we are loaded on our map, for some effects
+- type: entity
+  parent: BaseKindleAction
+  id: KindleActionT1
+  name: Kindle
+  description: Stuns and mutes a target. Mindshielded people only get silenced.
+  components:
+  - type: Action
+    useDelay: 30
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi # todo: change
+      state: zap
+  - type: EffectAction
+    effects:
+    - !type:ModifyParalysis
+      time: 5
+      conditions:
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - MindShield
+          - BibleUser
+    - !type:GenericStatusEffect
+      key: Muted
+      component: Muted
+      type: Add
+      time: 8
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectStutter
+      time: 30
+    - !type:Jitter
+      time: 30
+    - !type:Emp
+      duration: 10
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Silicon
+          - BorgChassis
+  - type: SpeakOnAction
+    sentence: Let the light cast you away!
+
+- type: entity
+  parent: BaseKindleAction
+  id: KindleActionT2
+  name: Kindle of the Mai'den
+  description: Stuns and mutes a target, whilst freezing them.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    raiseOnAction: true
+    useDelay: 30
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi # todo: change
+      state: zap
+  - type: TargetAction
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - StatusEffects
+      - Temperature # required for freezing
+  - type: EffectAction
+    effects:
+    - !type:ModifyParalysis
+      time: 3
+    - !type:GenericStatusEffect
+      key: Muted
+      component: Muted
+      type: Add
+      time: 8
+    - !type:AdjustTemperature
+      amount: -300
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectStutter
+      time: 30
+    - !type:Jitter
+      time: 30
+    - !type:Emp
+      duration: 10
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Silicon
+          - BorgChassis
+  - type: SpeakOnAction
+    sentence: Let the frost put you to sleep!
+
+- type: entity
+  parent: BaseKindleAction
+  id: KindleActionT3
+  name: Kindle of the Mar'tyr
+  description: Stuns and mutes a target, while invoking flames on them.
+  components:
+  - type: Action
+    useDelay: 30
+    icon:
+      sprite: _Trauma/Actions/mutations.rsi # todo: change
+      state: zap
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - StatusEffects
+      - Flammable # required for flames
+  - type: EffectAction
+    effects:
+    - !type:ModifyParalysis
+      time: 3
+    - !type:GenericStatusEffect
+      key: Muted
+      component: Muted
+      type: Add
+      time: 10
+    - !type:Flammable
+      multiplier: 5
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectStutter
+      time: 30
+    - !type:Jitter
+      time: 30
+    - !type:Emp
+      duration: 5
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Silicon
+          - BorgChassis
+  - type: SpeakOnAction
+    sentence: Let the flames embrace you!

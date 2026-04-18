@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Prototypes;
@@ -21,6 +22,7 @@ public sealed partial class ScriptureSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityQuery<ScriptureComponent> _scriptureQuery = default!;
     [Dependency] private readonly EntityQuery<ScriptureTierComponent> _scriptureTierQuery = default!;
 
@@ -42,7 +44,16 @@ public sealed partial class ScriptureSystem : EntitySystem
         SubscribeLocalEvent<ScriptureContainerComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<ScriptureContainerComponent, ComponentShutdown>(OnShutdown);
 
-        SubscribeLocalEvent<ScriptureContainerComponent, ScriptureReciteMessage>(OnRecite);
+        Subs.BuiEvents<ScriptureContainerComponent>(ClockworkSlabUiKey.Key, subs =>
+        {
+            subs.Event<ScriptureReciteMessage>(OnRecite);
+        });
+
+        SubscribeLocalEvent<ScriptureTierComponent, BeforeScriptureReciteEvent>(OnBeforeReciteTier);
+        SubscribeLocalEvent<DoAfterArgsComponent, BeforeScriptureReciteEvent>(OnBeforeReciteDoAfter);
+
+        SubscribeLocalEvent<ScriptureComponent, ScriptureReciteDoAfterEvent>(OnDoAfterScripture);
+        SubscribeLocalEvent<ScriptureTierComponent, ScriptureReciteDoAfterEvent>(OnDoAfterScriptureTier);
 
         LoadPrototypes();
     }
@@ -93,29 +104,86 @@ public sealed partial class ScriptureSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
-        // Apply tier effects instead, and return early.
-        if (args.TierData is { } tierId
-            && scripture.TryGetComponent<ScriptureTierComponent>(out var scriptureTier))
+        // If scripture does not exist in our container, then we don't continue further
+        var scriptureEntity = TryGetScripture(ent.AsNullable(), scripture);
+        if (scriptureEntity is not {} scriptureEnt)
+            return;
+
+        // Check for other components that may override our behaviour like DoAfterArgs
+        var beforeEv = new BeforeScriptureReciteEvent(user, args.TierData);
+        RaiseLocalEvent(scriptureEnt, ref beforeEv);
+        if (beforeEv.Handled)
+            return;
+
+        // We don't have tiers or anything else, just add the normal recital effects of the scripture
+        // Note: if you're yamlmaxxing, make sure to not have recital effects on this component, if you have tiers too
+        if (scriptureComponent.RecitalEffects is not { } recitalEffects)
+            return;
+
+        _entityEffects.ApplyEffects(user, recitalEffects);
+    }
+
+    private void OnBeforeReciteTier(Entity<ScriptureTierComponent> ent, ref BeforeScriptureReciteEvent args)
+    {
+        // Can be handled by doafter
+        if (args.Handled)
+            return;
+
+        // This part handles scripture tier logic.
+        // Iterates over all tiers and checks the data passed in the event,
+        // if the tier is valid and is found, then we apply the effects
+        if (args.TierId is not { } tierId)
+            return;
+
+        CastTierScripture(ent, args.User, tierId);
+    }
+
+    private void OnBeforeReciteDoAfter(Entity<DoAfterArgsComponent> ent, ref BeforeScriptureReciteEvent args)
+    {
+        args.Handled = true;
+
+        var doAfterArgs = new DoAfterArgs(
+            EntityManager,
+            user: args.User,
+            delay: ent.Comp.Delay,
+            @event: new ScriptureReciteDoAfterEvent(args.TierId),
+            eventTarget: ent.Owner)
         {
-            foreach (var tier in scriptureTier.Tiers)
-            {
-                if (tier.Id != tierId)
-                    continue;
+            BlockDuplicate = true,
+            BreakOnDamage = ent.Comp.BreakOnDamage,
+            BreakOnMove = ent.Comp.BreakOnMove,
+            BreakOnDropItem = ent.Comp.BreakOnDropItem,
+            BreakOnHandChange = ent.Comp.BreakOnHandChange,
+            Hidden = ent.Comp.Hidden
+        };
 
-                // Check if it's unlocked before doing anything
-                if (tier.Locked)
-                    return;
+        _doAfter.TryStartDoAfter(doAfterArgs);
+    }
 
-                _entityEffects.ApplyEffects(user, tier.RecitalEffects);
-                return;
-            }
-        }
+    private void OnDoAfterScripture(Entity<ScriptureComponent> ent, ref ScriptureReciteDoAfterEvent args)
+    {
+        // In case this gets handled by scripture tiers
+        if (args.Handled || args.Cancelled)
+            return;
 
-        // We don't have tiers, just add the normal recital effects of the scripture
-        if (scriptureComponent.RecitalEffects is {} recitalEffects)
-            _entityEffects.ApplyEffects(user, recitalEffects);
+        if (ent.Comp.RecitalEffects is not { } recitalEffects)
+            return;
 
-        Log.Debug("The scripture got recited");
+        _entityEffects.ApplyEffects(args.User, recitalEffects);
+    }
+
+    private void OnDoAfterScriptureTier(Entity<ScriptureTierComponent> ent, ref ScriptureReciteDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        Log.Debug("Is this even getting run? 2");
+
+        if (args.TierId is not { } tierId)
+            return;
+
+        CastTierScripture(ent, args.User, tierId);
+        args.Handled = true;
     }
 
     private void LoadPrototypes()
@@ -167,9 +235,9 @@ public sealed partial class ScriptureSystem : EntitySystem
     /// <summary>
     /// Gets a scripture <see cref="EntityUid"/> via its <see cref="EntityPrototype"/>, returns null if not found.
     /// </summary>
-    public EntityUid? TryGetScripture(EntityUid uid, EntProtoId scripture, ScriptureContainerComponent? component = null)
+    public EntityUid? TryGetScripture(Entity<ScriptureContainerComponent?> ent, EntProtoId scripture)
     {
-        if (!Resolve(uid, ref component) || component.Scriptures is not {} scriptures)
+        if (!Resolve(ent.Owner, ref ent.Comp) || ent.Comp.Scriptures is not {} scriptures)
             return null;
 
         foreach (var scriptEnt in scriptures.ContainedEntities)
@@ -217,6 +285,27 @@ public sealed partial class ScriptureSystem : EntitySystem
             currentTier.Locked = false;
             ent.Comp.Tiers[i] = currentTier;
             Dirty(ent);
+            return;
+        }
+    }
+    #endregion
+
+    #region Helpers
+
+    /// <summary>
+    ///  Casts a scripture that has tiers
+    /// </summary>
+    private void CastTierScripture(Entity<ScriptureTierComponent> ent, EntityUid user, string tierId)
+    {
+        foreach (var tier in ent.Comp.Tiers)
+        {
+            if (tier.Id != tierId)
+                continue;
+
+            if (tier.Locked)
+                continue;
+
+            _entityEffects.ApplyEffects(user, tier.RecitalEffects);
             return;
         }
     }

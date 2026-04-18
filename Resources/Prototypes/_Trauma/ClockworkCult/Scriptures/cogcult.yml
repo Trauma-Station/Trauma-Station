@@ -13,6 +13,8 @@
     - !type:AddActions
       actions:
       - ActionBlink
+  - type: DoAfterArgs
+    delay: 7
 
 - type: entity
   id: DummyScripture2
@@ -37,3 +39,5 @@
         actions:
         - DemonicWhisperAction
       locked: true
+  - type: DoAfterArgs
+    delay: 5

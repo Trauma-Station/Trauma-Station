@@ -59,6 +59,7 @@ public sealed partial class CogSlabScriptureSection : CogSlabSection
             if (i % ScripturesPerPage == 0)
             {
                 var page = new CogSlabScripturePage(this);
+                page.OnRecite += (script, tierData) => OnRecite?.Invoke(script, tierData);
 
                 currentPage = page;
                 AddChild(page);
@@ -71,8 +72,6 @@ public sealed partial class CogSlabScriptureSection : CogSlabSection
             {
                 Log.Debug("Adding scripture to CogSlabScripturePage...");
                 scripturePage.AddScripture(scriptureProto);
-
-                currentPage.OnRecite += (script, tierData) => OnRecite?.Invoke(script, tierData);
             }
         }
     }
