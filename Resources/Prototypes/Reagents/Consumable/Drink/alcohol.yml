@@ -2326,4 +2326,3 @@
         - !type:MetabolizerTypeCondition
           type: [ Dwarf, Cybernetic ]
           inverted: true
-
