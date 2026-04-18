@@ -104,8 +104,10 @@
         components:
         - CommandStaff
         - AntagImmune
+        - BibleUser
       startingGear: Heretictmidround
       lateJoinAdditional: true
+      jobBlacklist: [ Chaplain ]
       mindRoles:
       - MindRoleHeretic
 
