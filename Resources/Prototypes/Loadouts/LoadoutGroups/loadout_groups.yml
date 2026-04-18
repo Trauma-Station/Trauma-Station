@@ -1294,6 +1294,7 @@
   - SecurityBeret
   - SecurityHat
   - TrooperHat
+  - SergeantBeret # Trauma
 
 - type: loadoutGroup
   id: SecurityJumpsuit
@@ -1306,6 +1307,8 @@
   - SeniorOfficerJumpsuit
   - SeniorOfficerJumpskirt
   - TrooperUniform
+  - SergeantUniform # Trauma
+  - SergeantSkirt # Trauma
 
 - type: loadoutGroup
   id: SecurityBackpack

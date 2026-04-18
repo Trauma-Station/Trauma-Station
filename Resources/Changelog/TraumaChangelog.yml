@@ -7021,3 +7021,85 @@ Entries:
   id: 813
   time: '2026-04-16T18:00:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2056
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed QM and cargo techs not being able to make crates.
+  id: 814
+  time: '2026-04-16T20:43:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2082
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed issues with ash storms when using the mining shuttle.
+  id: 815
+  time: '2026-04-16T20:47:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2081
+- author: TurboTrackerss14
+  changes:
+  - type: Remove
+    message: Krav Maga LegSweep no longer does stamina damage.
+  - type: Remove
+    message: Krav Maga NeckChop no longer does stamina damage nor knockdown.
+  - type: Remove
+    message: Krav Maga LungPunch nolonger knockdowns.
+  - type: Fix
+    message: Krav Maga effects no longer stack infinitely.
+  id: 816
+  time: '2026-04-16T21:00:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2083
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed dislipper from the uplink.
+  id: 817
+  time: '2026-04-16T21:32:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2085
+- author: assripper.
+  changes:
+  - type: Add
+    message: new security officer drip when you reach 100 hours in sec overall
+  id: 818
+  time: '2026-04-18T06:47:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2039
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Full-fat oil now requires stirring to make, so you can now make bluespace
+      soap again.
+  id: 819
+  time: '2026-04-18T12:14:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2107
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed paradox clone items not having paint copied over.
+  id: 820
+  time: '2026-04-18T12:57:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2108
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: 'Syndicate Elite hardsuit brute resistances lowered to 20% from 40%. '
+  - type: Remove
+    message: Syndicate Elite hardsuit no longer has slowdown.
+  - type: Tweak
+    message: Sydnciate Elite hardsuit price increased to 80tc from 75tc.
+  id: 821
+  time: '2026-04-18T15:09:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2110
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed sergeant loadouts being in wrong slot.
+  id: 822
+  time: '2026-04-18T20:56:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2113
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed energy chem infinite energy shitcode...
+  id: 823
+  time: '2026-04-18T21:31:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2116

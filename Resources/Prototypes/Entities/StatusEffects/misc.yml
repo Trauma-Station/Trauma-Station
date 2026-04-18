@@ -2,6 +2,10 @@
   id: StatusEffectBase
   abstract: true
   components:
+  # <Trauma>
+  - type: Transform
+    gridTraversal: false # War has changed. ID-tagged soldiers carry ID-tagged weapons, use ID-tagged gear. Nanomachines inside their bodies enhance and regulate their abilities. Genetic control. Information control. Emotion control. Battlefield control. Everything is monitored and kept under control.
+  # </Trauma>
   - type: StatusEffect
   - type: Sprite
     drawdepth: Effects
