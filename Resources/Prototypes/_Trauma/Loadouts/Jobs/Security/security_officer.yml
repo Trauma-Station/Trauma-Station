@@ -13,7 +13,7 @@
   - !type:GroupLoadoutEffect
     proto: VeteranOfficer
   equipment:
-    innerClothing: ClothingUniformSergeantUniform
+    jumpsuit: ClothingUniformSergeantUniform
 
 - type: loadout
   id: SergeantSkirt
@@ -21,7 +21,7 @@
   - !type:GroupLoadoutEffect
     proto: VeteranOfficer
   equipment:
-    innerClothing: ClothingUniformSergeantSkirt
+    jumpsuit: ClothingUniformSergeantSkirt
 
 - type: loadout
   id: SergeantBeret
@@ -29,4 +29,4 @@
   - !type:GroupLoadoutEffect
     proto: VeteranOfficer
   equipment:
-    innerClothing: ClothingHeadHatBeretSergeant
+    jumpsuit: ClothingHeadHatBeretSergeant
