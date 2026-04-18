@@ -11,7 +11,7 @@ namespace Content.Client._Starfall.Particles;
 /// </summary>
 public sealed class FlammableParticleSystem : EntitySystem
 {
-    [Dependency] private readonly ClientParticleSystem _particles = default!;
+    [Dependency] private readonly ParticleSystem _particles = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 

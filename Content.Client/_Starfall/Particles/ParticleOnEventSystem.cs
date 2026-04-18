@@ -15,7 +15,7 @@ namespace Content.Client._Starfall.Particles;
 /// </summary>
 public sealed class ParticleOnEventSystem : EntitySystem
 {
-    [Dependency] private readonly ClientParticleSystem _particles = default!;
+    [Dependency] private readonly ParticleSystem _particles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
@@ -42,7 +42,7 @@ public sealed class ParticleOnEventSystem : EntitySystem
     {
         // Clean up any tracked thrown emitter when the component is removed
         if (_thrownEmitters.Remove(ent.Owner, out var thrownEmitter))
-            ClientParticleSystem.StopEffect(thrownEmitter);
+            ParticleSystem.StopEffect(thrownEmitter);
     }
 
     private void OnUseInHand(Entity<ParticleOnEventComponent> ent, ref UseInHandEvent args)
@@ -95,7 +95,7 @@ public sealed class ParticleOnEventSystem : EntitySystem
     {
         // Stop the throw trail emitter when landing
         if (_thrownEmitters.Remove(ent.Owner, out var thrownEmitter))
-            ClientParticleSystem.StopEffect(thrownEmitter);
+            ParticleSystem.StopEffect(thrownEmitter);
 
         // Spawn landing impact particles if configured
         if (ent.Comp.OnLanded)

@@ -9,7 +9,7 @@ namespace Content.Client._Starfall.Particles;
 /// </summary>
 public sealed class ParticleEmitterSystem : EntitySystem
 {
-    [Dependency] private readonly ClientParticleSystem _particles = default!;
+    [Dependency] private readonly ParticleSystem _particles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()

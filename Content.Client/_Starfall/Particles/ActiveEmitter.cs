@@ -7,7 +7,7 @@ namespace Content.Client._Starfall.Particles;
 
 /// <summary>
 /// A running particle emitter and its live particle pool.
-/// Created in <see cref="ClientParticleSystem"/>.
+/// Created in <see cref="ParticleSystem"/>.
 /// </summary>
 public sealed class ActiveEmitter
 {

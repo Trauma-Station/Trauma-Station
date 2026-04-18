@@ -17,7 +17,7 @@ namespace Content.Client._Starfall.Particles;
 /// <summary>
 /// Manages active particle emitters on the client, including their simulation and rendering via <see cref="ParticleOverlay"/>.
 /// </summary>
-public sealed class ClientParticleSystem : EntitySystem
+public sealed class ParticleSystem : EntitySystem
 {
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
@@ -252,11 +252,12 @@ public sealed class ClientParticleSystem : EntitySystem
 
     public override void FrameUpdate(float frameTime)
     {
-        // Early exit if particles are disabled
+        // If particles are fully disabled, drop all emitters except those flagged to ignore quality settings.
         if (_quality == 0)
         {
-            _emitters.Clear();
-            return;
+            _emitters.RemoveAll(e => !e.Proto.IgnoreQualitySettings);
+            if (_emitters.Count == 0)
+                return;
         }
 
         var eye = _eye.CurrentEye;

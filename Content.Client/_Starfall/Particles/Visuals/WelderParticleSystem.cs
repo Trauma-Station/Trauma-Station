@@ -7,7 +7,7 @@ namespace Content.Client._Starfall.Particles;
 
 public sealed class WelderParticleSystem : EntitySystem
 {
-    [Dependency] private readonly ClientParticleSystem _particles = default!;
+    [Dependency] private readonly ParticleSystem _particles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<ParticleEffectPrototype> SparksEffect = "SfWeldingSparks";

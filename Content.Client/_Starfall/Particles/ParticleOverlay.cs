@@ -12,13 +12,13 @@ public sealed class ParticleOverlay : Overlay
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
-    private readonly ClientParticleSystem _system;
+    private readonly ParticleSystem _system;
     private readonly Dictionary<string, ShaderInstance> _shaderCache = new();
 
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
-    public ParticleOverlay(ClientParticleSystem system)
+    public ParticleOverlay(ParticleSystem system)
     {
         IoCManager.InjectDependencies(this);
         _system = system;
@@ -83,7 +83,7 @@ public sealed class ParticleOverlay : Overlay
                 // Color: use ColorOverLifetime gradient if available, otherwise lerp StartColor to EndColor
                 Color color;
                 if (proto.ColorOverLifetime.Count > 0)
-                    color = ClientParticleSystem.SampleColorCurve(proto.ColorOverLifetime, t);
+                    color = ParticleSystem.SampleColorCurve(proto.ColorOverLifetime, t);
                 else
                 {
                     var startColor = ovr?.StartColor ?? proto.StartColor;
@@ -99,14 +99,14 @@ public sealed class ParticleOverlay : Overlay
                 // AlphaOverLifetime: multiplied on top of color alpha
                 if (proto.AlphaOverLifetime.Count > 0)
                 {
-                    var alpha = ClientParticleSystem.SampleCurve(proto.AlphaOverLifetime, t);
+                    var alpha = ParticleSystem.SampleCurve(proto.AlphaOverLifetime, t);
                     color = color.WithAlpha(color.A * alpha);
                 }
 
                 // Size: base * intensity * SizeMultiplier * SizeOverLifetime curve
                 var halfSize = baseHalfSize * particle.SpawnIntensity * particle.SizeMultiplier;
                 if (proto.SizeOverLifetime.Count > 0)
-                    halfSize *= ClientParticleSystem.SampleCurve(proto.SizeOverLifetime, t);
+                    halfSize *= ParticleSystem.SampleCurve(proto.SizeOverLifetime, t);
 
                 // Convert screen-space LocalOffset to world offset
                 var local = particle.LocalOffset;
