@@ -168,7 +168,7 @@
 
 - type: reaction
   id: Smoke
-  priority: -10
+  priority: 10
   impact: High
   conserveEnergy: false
   reactants:
@@ -187,7 +187,7 @@
 
 - type: reaction
   id: Foam
-  priority: -10
+  priority: 10
   impact: High
   conserveEnergy: false
   reactants:
@@ -205,7 +205,7 @@
 - type: reaction
   id: IronMetalFoam
   impact: High
-  priority: -10
+  priority: 10
   conserveEnergy: false
   reactants:
     Iron:
@@ -224,7 +224,7 @@
 - type: reaction
   id: AluminiumMetalFoam
   impact: High
-  priority: -10
+  priority: 10
   conserveEnergy: false
   reactants:
     Aluminium:
