@@ -26,146 +26,110 @@ public sealed class ParticleOnEventSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ParticleOnEventComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<ParticleOnEventComponent, AfterInteractEvent>(OnUseInWorld);
-        SubscribeLocalEvent<ParticleOnEventComponent, MeleeHitEvent>(OnMeleeAttack);
-        SubscribeLocalEvent<ParticleOnEventComponent, AttackedEvent>(OnMeleeHit);
-        SubscribeLocalEvent<ParticleOnEventComponent, ThrownEvent>(OnThrown);
-        SubscribeLocalEvent<ParticleOnEventComponent, LandEvent>(OnLanded);
-        SubscribeLocalEvent<ParticleOnEventComponent, ActiveTimerTriggerEvent>(OnPrimed);
-        SubscribeLocalEvent<ParticleOnEventComponent, AmmoShotEvent>(OnGunShot);
-        SubscribeLocalEvent<ParticleOnEventComponent, ProjectileHitEvent>(OnProjectileHit);
-        SubscribeLocalEvent<ParticleOnEventComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<ParticleOnUseComponent, UseInHandEvent>(OnUse);
+        SubscribeLocalEvent<ParticleOnUseInWorldComponent, AfterInteractEvent>(OnUseInWorld);
+        SubscribeLocalEvent<ParticleOnMeleeAttackComponent, MeleeHitEvent>(OnMeleeAttack);
+        SubscribeLocalEvent<ParticleOnMeleeAttackOtherComponent, MeleeHitEvent>(OnMeleeAttackOther);
+        SubscribeLocalEvent<ParticleOnMeleeHitComponent, AttackedEvent>(OnMeleeHit);
+        SubscribeLocalEvent<ParticleOnThrownComponent, ThrownEvent>(OnThrown);
+        SubscribeLocalEvent<ParticleOnThrownComponent, LandEvent>(OnThrownLanded);
+        SubscribeLocalEvent<ParticleOnThrownComponent, ComponentShutdown>(OnThrownShutdown);
+        SubscribeLocalEvent<ParticleOnLandedComponent, LandEvent>(OnLanded);
+        SubscribeLocalEvent<ParticleOnPrimedComponent, ActiveTimerTriggerEvent>(OnPrimed);
+        SubscribeLocalEvent<ParticleOnGunShotComponent, AmmoShotEvent>(OnGunShot);
+        SubscribeLocalEvent<ParticleOnGunShotProjectileComponent, AmmoShotEvent>(OnGunShotProjectile);
+        SubscribeLocalEvent<ParticleOnProjectileHitComponent, ProjectileHitEvent>(OnProjectileHit);
+        SubscribeLocalEvent<ParticleOnProjectileHitOtherComponent, ProjectileHitEvent>(OnProjectileHitOther);
+
     }
 
-    private void OnShutdown(Entity<ParticleOnEventComponent> ent, ref ComponentShutdown args)
+    private void OnUse(Entity<ParticleOnUseComponent> ent, ref UseInHandEvent args)
     {
-        // Clean up any tracked thrown emitter when the component is removed
-        if (_thrownEmitters.Remove(ent.Owner, out var thrownEmitter))
-            ParticleSystem.StopEffect(thrownEmitter);
+        if (!args.Handled)
+            Spawn(ent.Comp, ent.Owner);
     }
 
-    private void OnUseInHand(Entity<ParticleOnEventComponent> ent, ref UseInHandEvent args)
+    private void OnUseInWorld(Entity<ParticleOnUseInWorldComponent> ent, ref AfterInteractEvent args)
     {
-        if (!ent.Comp.OnUse || args.Handled)
-            return;
-        SpawnParticles(ent);
+        if (args.CanReach)
+            Spawn(ent.Comp, ent.Owner);
     }
 
-    private void OnUseInWorld(Entity<ParticleOnEventComponent> ent, ref AfterInteractEvent args)
-    {
-        if (!ent.Comp.OnUseInWorld || !args.CanReach)
-            return;
-        SpawnParticles(ent);
-    }
+    private void OnMeleeAttack(Entity<ParticleOnMeleeAttackComponent> ent, ref MeleeHitEvent args)
+        => Spawn(ent.Comp, ent.Owner);
 
-    private void OnMeleeAttack(Entity<ParticleOnEventComponent> ent, ref MeleeHitEvent args)
+    private void OnMeleeAttackOther(Entity<ParticleOnMeleeAttackOtherComponent> ent, ref MeleeHitEvent args)
     {
-        if (ent.Comp.OnMeleeAttack)
-            SpawnParticles(ent);
-
-        // Spawn particles on each entity that was hit
-        if (ent.Comp.OnMeleeAttackOther)
+        foreach (var victim in args.HitEntities)
         {
-            foreach (var victim in args.HitEntities)
-            {
-                SpawnParticlesAt(ent.Comp, victim);
-            }
+            Spawn(ent.Comp, victim);
         }
     }
 
-    private void OnMeleeHit(Entity<ParticleOnEventComponent> ent, ref AttackedEvent args)
-    {
-        if (!ent.Comp.OnMeleeHit)
-            return;
-        SpawnParticles(ent);
-    }
+    private void OnMeleeHit(Entity<ParticleOnMeleeHitComponent> ent, ref AttackedEvent args)
+        => Spawn(ent.Comp, ent.Owner);
 
-    private void OnThrown(Entity<ParticleOnEventComponent> ent, ref ThrownEvent args)
+    private void OnThrown(Entity<ParticleOnThrownComponent> ent, ref ThrownEvent args)
     {
-        if (!ent.Comp.OnThrown)
-            return;
-
-        var emitter = SpawnParticlesAtReturningEmitter(ent.Comp, ent.Owner);
+        // Allow infinite-duration effects the emitter is stopped when the entity lands.
+        var emitter = _particles.CreateParticle(ent.Comp.Effect, ent.Owner, ent.Comp.ColorOverride);
         if (emitter != null)
             _thrownEmitters[ent.Owner] = emitter;
     }
 
-    private void OnLanded(Entity<ParticleOnEventComponent> ent, ref LandEvent args)
+    private void OnThrownLanded(Entity<ParticleOnThrownComponent> ent, ref LandEvent args)
     {
-        // Stop the throw trail emitter when landing
-        if (_thrownEmitters.Remove(ent.Owner, out var thrownEmitter))
-            ParticleSystem.StopEffect(thrownEmitter);
-
-        // Spawn landing impact particles if configured
-        if (ent.Comp.OnLanded)
-            SpawnParticles(ent);
+        if (_thrownEmitters.Remove(ent.Owner, out var emitter))
+            _particles.RemoveParticle(emitter);
     }
 
-    private void OnPrimed(Entity<ParticleOnEventComponent> ent, ref ActiveTimerTriggerEvent args)
+    private void OnThrownShutdown(Entity<ParticleOnThrownComponent> ent, ref ComponentShutdown args)
     {
-        if (!ent.Comp.OnPrimed)
-            return;
-        SpawnParticles(ent);
+        if (_thrownEmitters.Remove(ent.Owner, out var emitter))
+            _particles.RemoveParticle(emitter);
     }
 
-    private void OnGunShot(Entity<ParticleOnEventComponent> ent, ref AmmoShotEvent args)
-    {
-        if (ent.Comp.OnGunShot)
-            SpawnParticles(ent);
+    private void OnLanded(Entity<ParticleOnLandedComponent> ent, ref LandEvent args)
+        => Spawn(ent.Comp, ent.Owner);
 
-        // Spawn particles on each projectile fired
-        // Exception: projectile trails are allowed to be infinite duration because they get
-        // destroyed when the projectile despawns, preventing the infinite-emitter issue.
-        if (ent.Comp.OnGunShotProjectile)
+    private void OnPrimed(Entity<ParticleOnPrimedComponent> ent, ref ActiveTimerTriggerEvent args)
+        => Spawn(ent.Comp, ent.Owner);
+
+    private void OnGunShot(Entity<ParticleOnGunShotComponent> ent, ref AmmoShotEvent args)
+        => Spawn(ent.Comp, ent.Owner);
+
+    private void OnGunShotProjectile(Entity<ParticleOnGunShotProjectileComponent> ent, ref AmmoShotEvent args)
+    {
+        // Infinite-duration allowed: the emitter is cleaned up when the projectile is destroyed.
+        foreach (var projectile in args.FiredProjectiles)
         {
-            foreach (var projectile in args.FiredProjectiles)
-            {
-                SpawnParticlesAt(ent.Comp, projectile, allowInfiniteDuration: true);
-            }
+            _particles.CreateParticle(ent.Comp.Effect, projectile, ent.Comp.ColorOverride);
         }
     }
 
-    private void OnProjectileHit(Entity<ParticleOnEventComponent> ent, ref ProjectileHitEvent args)
-    {
-        if (ent.Comp.OnProjectileHit)
-            SpawnParticles(ent);
+    private void OnProjectileHit(Entity<ParticleOnProjectileHitComponent> ent, ref ProjectileHitEvent args)
+        => Spawn(ent.Comp, ent.Owner);
 
-        // Spawn particles on the entity that got hit
-        if (ent.Comp.OnProjectileHitOther)
-            SpawnParticlesAt(ent.Comp, args.Target);
-    }
+    private void OnProjectileHitOther(Entity<ParticleOnProjectileHitOtherComponent> ent, ref ProjectileHitEvent args)
+        => Spawn(ent.Comp, args.Target);
 
-    private void SpawnParticles(Entity<ParticleOnEventComponent> ent)
+    private void Spawn(ParticleOnEventBase comp, EntityUid target)
     {
-        SpawnParticlesAt(ent.Comp, ent.Owner);
-    }
-
-    private ActiveEmitter? SpawnParticlesAtReturningEmitter(ParticleOnEventComponent comp, EntityUid target, bool allowInfiniteDuration = false)
-    {
-        // Failsafe: refuse to spawn infinite-duration effects (duration == 0) on event triggers,
-        // EXCEPT for projectile trails which auto-cleanup when the projectile is destroyed.
         if (!_proto.TryIndex(comp.Effect, out var proto))
         {
             Log.Error($"ParticleOnEvent references unknown effect '{comp.Effect}'");
-            return null;
+            return;
         }
 
-        if (!allowInfiniteDuration && proto.Duration == TimeSpan.Zero)
+        if (proto.Duration == TimeSpan.Zero)
         {
             Log.Warning($"ParticleOnEvent tried to spawn infinite-duration effect '{comp.Effect}'. " +
-                        "Infinite effects cannot be used with ParticleOnEvent, they never stop emitting and will destroy performance. " +
-                        "Set a duration on the particle or use a different particle.");
-            return null;
+                        "Infinite effects cannot be used with ParticleOnEvent, they never stop emitting.");
+            return;
         }
 
-        var coords = _transform.GetMapCoordinates(target);
-        return _particles.SpawnEffect(comp.Effect, coords, target, comp.ColorOverride);
+        _particles.CreateParticle(comp.Effect, target, comp.ColorOverride);
     }
 
-    private void SpawnParticlesAt(ParticleOnEventComponent comp, EntityUid target, bool allowInfiniteDuration = false)
-    {
-        SpawnParticlesAtReturningEmitter(comp, target, allowInfiniteDuration);
-    }
 }
 

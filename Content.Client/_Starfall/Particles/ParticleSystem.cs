@@ -17,7 +17,7 @@ namespace Content.Client._Starfall.Particles;
 /// <summary>
 /// Manages active particle emitters on the client, including their simulation and rendering via <see cref="ParticleOverlay"/>.
 /// </summary>
-public sealed class ParticleSystem : EntitySystem
+public sealed partial class ParticleSystem : EntitySystem
 {
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
