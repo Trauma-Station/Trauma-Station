@@ -4,7 +4,7 @@
   id: BaseActionKravMaga
   components:
   - type: Action
-    useDelay: 2.5
+    useDelay: 0.5
     raiseOnAction: true
   - type: InstantAction
   - type: Sprite # For guidebook
@@ -60,7 +60,10 @@
 
 - type: combo
   id: KravLegSweep
-  attacks: []
+  attacks:
+  - Harm
+  conditions:
+  - !type:StandingCondition
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
@@ -68,13 +71,22 @@
     messages:
     - cqc-slam
   opponentEffects:
-  - !type:LegSweep
+  - !type:HealthChange
+    scaling: false
+    damage:
+      types:
+        Blunt: 5
+    targetPart: Legs
+  - !type:ModifyKnockdown
+    scaling: false
     time: 4
+    type: Update
   levelRequired: 26
 
 - type: combo
   id: KravNeckChop
-  attacks: []
+  attacks:
+  - Harm
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
@@ -82,26 +94,40 @@
     messages:
     - cqc-kick
   opponentEffects:
+  - !type:HealthChange
+    scaling: false
+    damage:
+      types:
+        Blunt: 5
+    targetPart: Head
   - !type:GenericStatusEffect
-    key: Stutter
+    scaling: false
+    key: Muted
+    component: Muted
     time: 20
     type: Update
   levelRequired: 26
 
 - type: combo
   id: KravLungPunch
-  attacks: []
+  attacks:
+  - Harm
   userEffects:
   - !type:PopupMessage
     messages:
     - cqc-restrain
   opponentEffects:
   - !type:TakeStaminaDamage
+    scaling: false
     amount: 30
   - !type:GenericStatusEffect
+    scaling: false
     key: Stutter
-    time: 30
+    component: StutteringAccent
+    time: 10
     type: Update
+  # TODO: status effect
   - !type:BlockedBreathing
+    scaling: false
     time: 10
   levelRequired: 26

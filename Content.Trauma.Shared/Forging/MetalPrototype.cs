@@ -57,11 +57,17 @@ public sealed partial class MetalPrototype : IPrototype
     [DataField(required: true)]
     public float WorkingRange;
 
+    /// <summary>
+    /// Modifier for added <see cref="WorkingRange"/> when turning too brittle, to make it more forgiving.
+    /// </summary>
+    [DataField]
+    public float MaxTempModifier = 3f;
+
     [ViewVariables]
     public float MinTemp => WorkingTemp - WorkingRange;
 
     [ViewVariables]
-    public float MaxTemp => WorkingTemp + WorkingRange;
+    public float MaxTemp => WorkingTemp + WorkingRange * MaxTempModifier;
 
     /// <summary>
     /// Modifier for how much damage a <c>Workable</c> piece takes to be wrought into shape.

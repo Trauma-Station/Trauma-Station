@@ -1,6 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.EntityEffects;
 using Content.Shared.Silicons.StationAi;
 
-namespace Content.Shared.EntityEffects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 public sealed partial class KillAi : EntityEffectBase<KillAi>;
 
