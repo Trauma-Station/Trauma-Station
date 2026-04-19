@@ -113,11 +113,7 @@ public sealed class IonLawSystem : EntitySystem
         AddSelector("ION-VERB", DatasetFill("IonStormVerbs"));
 
         // <Trauma>
-        AddSelector("ION-CORPORATION", DatasetFill("IonStormCorporations"));
-
         AddSelector("ION-DEPARTMENT", DatasetFill("IonStormDepartments"));
-
-        AddSelector("ION-FACTION", DatasetFill("IonStormFactions"));
         // </Trauma>
     }
 
