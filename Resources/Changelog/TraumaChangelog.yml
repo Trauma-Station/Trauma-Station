@@ -7089,3 +7089,26 @@ Entries:
   id: 821
   time: '2026-04-18T15:09:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2110
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed sergeant loadouts being in wrong slot.
+  id: 822
+  time: '2026-04-18T20:56:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2113
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed energy chem infinite energy shitcode...
+  id: 823
+  time: '2026-04-18T21:31:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2116
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Forging max temperature is more lenient before turning your piece into
+      slag.
+  id: 824
+  time: '2026-04-18T21:49:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2117
