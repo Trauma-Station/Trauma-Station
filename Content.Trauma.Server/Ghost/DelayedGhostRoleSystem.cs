@@ -4,7 +4,7 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Shared.GameTicking;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Ghost;
-using Content.Trauma.Shared.Timing;
+using Content.Trauma.Shared.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 

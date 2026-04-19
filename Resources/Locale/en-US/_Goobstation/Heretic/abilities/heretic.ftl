@@ -20,6 +20,8 @@ heretic-ability-fail-target-ghoul = Target is ghoul already!
 heretic-ability-fail-target-no-mind = Target has no soul!
 heretic-ability-fail-space-phase-not-space = You must stand in space, or an outdoor area with low pressure!
 heretic-ability-fail-mirror-jaunt-no-mirrors = There are no reflective surfaces nearby!
+heretic-ability-fail-not-enough-space = Not enough space to cast this spell!
+heretic-ability-fail-arena-nearby = Other arena nearby!
 
 heretic-ability-lose-focus-shadow-cloak = As you lose your focus, you are pulled out of the shadows!
 heretic-ability-lose-focus-pale-cloak = As you lose your focus, you are pulled out of the light!
@@ -85,6 +87,7 @@ heretic-speech-ash-cascade = C'SC'DE!!
 
 heretic-speech-blade-furioussteel = F'LSH'NG S'LV'R!
 heretic-speech-blade-sacraments = 'DG' 'F IMM'RT'L'T'!
+heretic-speech-blade-domain-expansion = D'M'N XP'NS'N!
 
 heretic-speech-flesh-surgery = CL'M M'N!
 heretic-speech-flesh-worm = REALITY UNCOIL!!

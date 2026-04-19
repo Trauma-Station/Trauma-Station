@@ -32,7 +32,7 @@ public sealed partial class MeleeWeaponSystem
         if (localPos == Vector2.Zero || animation == null)
             return;
 
-        if (!_xformQuery.TryGetComponent(user, out var userXform) || userXform.MapID == MapId.Nullspace)
+        if (!TryComp(user, out TransformComponent? userXform) || userXform.MapID == MapId.Nullspace)
             return;
 
         var animationUid = Spawn(animation, userXform.Coordinates);
@@ -56,7 +56,7 @@ public sealed partial class MeleeWeaponSystem
         _sprite.SetRotation((animationUid, sprite), localPos.ToWorldAngle());
         var distance = Math.Clamp(localPos.Length() / 2f, 0.2f, 1f);
 
-        var xform = _xformQuery.GetComponent(animationUid);
+        var xform = Transform(animationUid);
         TrackUserComponent track;
 
         switch (arcComponent.Animation)

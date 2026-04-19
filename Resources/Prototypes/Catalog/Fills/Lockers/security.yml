@@ -122,7 +122,7 @@
     #- id: ClothingOuterHardsuitBrigmedic
     #- id: OxygenTankFilled
     #- id: NitrogenTankFilled
-    - id: MaterialBones # Remains of a longrotten brigmedic. Idfk Armok asked for it.
+    - id: MaterialBones1 # Remains of a longrotten brigmedic. Idfk Armok asked for it.
       amount: 5
     # </Trauma>
     - id: ClothingUniformJumpskirtOfLife

@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Goobstation.Common.Traitor;
-using Robust.Shared.Prototypes;
-// </Trauma>
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Npgsql;
@@ -16,8 +12,6 @@ public sealed class AddUplinkCommand : LocalizedEntityCommands
 {
     [Dependency] private readonly UplinkSystem _uplinkSystem = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-
-    private static readonly ProtoId<UplinkPreferencePrototype> PdaPreference = "UplinkPda"; // Trauma
 
     public override string Command => "adduplink";
 
@@ -80,7 +74,13 @@ public sealed class AddUplinkCommand : LocalizedEntityCommands
         }
 
         // Finally add uplink
-        if (!_uplinkSystem.AddUplink(user, 100, PdaPreference, out _, out _, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted)) // Goob
+        var result = _uplinkSystem.AddUplink(user, 100, out var code, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted); // Trauma - 20 -> 100
+
+        if (code != null && result == AddUplinkResult.Pda)
+            shell.WriteLine(Loc.GetString("add-uplink-command-success-pda", ("code", string.Join("-", code).Replace("sharp", "#"))));
+        else if (result == AddUplinkResult.Implant)
+            shell.WriteLine(Loc.GetString("add-uplink-command-success-implant"));
+        else if (result == AddUplinkResult.Failure)
             shell.WriteLine(Loc.GetString("add-uplink-command-error-2"));
     }
 

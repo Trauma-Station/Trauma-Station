@@ -125,7 +125,7 @@ public abstract partial class SharedHereticAbilitySystem
             return false;
 
         var tileRef = _map.GetTileRef(gridUid, mapGrid, coords);
-        var tileDef = (ContentTileDefinition) _tileDefinitionManager[tileRef.Tile.TypeId];
+        var tileDef = (ContentTileDefinition) Tile[tileRef.Tile.TypeId];
 
         tileCoords = tileRef.GridIndices;
         return tileDef.ID == RustTile;
@@ -180,7 +180,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         foreach (var (coords, tileRef, gridUid, mapGrid) in tiles)
         {
-            if (CanRustTile((ContentTileDefinition) _tileDefinitionManager[tileRef.Tile.TypeId]))
+            if (CanRustTile((ContentTileDefinition) Tile[tileRef.Tile.TypeId]))
                 MakeRustTile(gridUid, mapGrid, tileRef, tileRune);
 
             foreach (var toRust in Lookup.GetEntitiesInRange(coords, lookupRange, LookupFlags.Static))
@@ -228,7 +228,7 @@ public abstract partial class SharedHereticAbilitySystem
             if (Random.Prob(chanceOfNotRusting))
                 continue;
 
-            if (CanRustTile((ContentTileDefinition) _tileDefinitionManager[tileRef.Tile.TypeId]))
+            if (CanRustTile((ContentTileDefinition) Tile[tileRef.Tile.TypeId]))
                 MakeRustTile(gridUid, mapGrid, tileRef, args.TileRune);
 
             foreach (var toRust in Lookup.GetEntitiesInRange(coords, args.LookupRange, LookupFlags.Static))
@@ -265,7 +265,7 @@ public abstract partial class SharedHereticAbilitySystem
 
     public void MakeRustTile(EntityUid gridUid, MapGridComponent mapGrid, TileRef tileRef, EntProtoId tileRune)
     {
-        var plating = _tileDefinitionManager[RustTile];
+        var plating = Tile[RustTile];
         _map.SetTile(gridUid, mapGrid, tileRef.GridIndices, new Tile(plating.TileId));
 
         // Serverside spawn because it gets randomized sprite offset clientside and predict would break it

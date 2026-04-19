@@ -57,12 +57,15 @@ public sealed class MetabolizerSystem : EntitySystem
         Dirty(ent);
     }
 
+    private List<Entity<MetabolizerComponent>> _updating = new(); // Trauma
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<MetabolizerComponent>();
 
+        // <Trauma> - split querying and actually updating them to prevent errors
+        _updating.Clear();
         while (query.MoveNext(out var uid, out var comp))
         {
             // Only update as frequently as it should
@@ -70,9 +73,15 @@ public sealed class MetabolizerSystem : EntitySystem
                 continue;
 
             comp.NextUpdate += comp.AdjustedUpdateInterval;
-            TryMetabolize((uid, comp));
             Dirty(uid, comp);
+            _updating.Add((uid, comp));
         }
+
+        foreach (var ent in _updating)
+        {
+            TryMetabolize(ent);
+        }
+        // </Trauma>
     }
 
     /// <summary>

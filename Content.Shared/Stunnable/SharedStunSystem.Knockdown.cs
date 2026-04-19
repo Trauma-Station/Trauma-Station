@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Heretic;
+// </Trauma>
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
 using Content.Shared.CCVar;
@@ -302,7 +305,8 @@ public abstract partial class SharedStunSystem
 
         var doAfterArgs = new DoAfterArgs(EntityManager, entity, ev.DoAfterTime, new TryStandDoAfterEvent(), entity, entity)
         {
-            BreakOnDamage = true,
+            MultiplyDelay = false, // Trauma
+            BreakOnDamage = false, // Trauma - was true
             DamageThreshold = 5,
             CancelDuplicate = true,
             RequireCanInteract = false,
@@ -322,6 +326,13 @@ public abstract partial class SharedStunSystem
     {
         if (entity.Comp.NextUpdate > GameTiming.CurTime)
             return false;
+
+        // <Trauma>
+        var ev = new CanStandWhileImmobileEvent();
+        RaiseLocalEvent(entity, ref ev);
+        if (ev.CanStand)
+            return true;
+        // </Trauma>
 
         return Blocker.CanMove(entity);
     }

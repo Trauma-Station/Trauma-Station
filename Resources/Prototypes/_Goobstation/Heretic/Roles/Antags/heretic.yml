@@ -21,6 +21,15 @@
   guides: [ Heretics ]
   dontShowInCredits: True # Trauma
 
+- type: antag
+  id: ArenaParticipant
+  name: roles-antag-arena-participant-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-arena-participant-description
+  guides: [ Heretics ]
+  dontShowInCredits: True # Trauma
+
 - type: startingGear
   id: Heretictmidround
   storage:

@@ -13,6 +13,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Radiation.Components;
+using Content.Shared.Radiation.Systems;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Hitscan.Components;
@@ -40,6 +41,7 @@ public sealed partial class PTLSystem : EntitySystem
     [Dependency] private readonly AudioSystem _aud = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private readonly SharedRadiationSystem _radiation = default!;
 
     private static readonly EntProtoId _credits = "SpaceCash";
     private static readonly ProtoId<TagPrototype> _tagScrewdriver = "Screwdriver";
@@ -90,7 +92,7 @@ public sealed partial class PTLSystem : EntitySystem
     {
         if (TryComp<RadiationSourceComponent>(ent, out var rad)
             && rad.Intensity > 0)
-            rad.Intensity = MathF.Max(0, rad.Intensity - (rad.Intensity * 0.2f + 0.1f)); // Making sure the radition value doesn't go below
+            _radiation.SetIntensity((ent, rad), MathF.Max(0, rad.Intensity - (rad.Intensity * 0.2f + 0.1f))); // Making sure the radition value doesn't go below
     }
 
     private void Tick(Entity<PTLComponent> ent)
@@ -150,9 +152,7 @@ public sealed partial class PTLSystem : EntitySystem
 
         // EVIL behavior based on energy actually used.
         var evil = (float) (usedMJ * ent.Comp1.EvilMultiplier);
-
-        if (TryComp<RadiationSourceComponent>(ent, out var rad))
-            rad.Intensity = evil;
+        _radiation.SetIntensity(ent.Owner, evil);
 
         _flash.FlashArea(ent.Owner, ent, evil/2, TimeSpan.FromSeconds(evil / 2));
 
