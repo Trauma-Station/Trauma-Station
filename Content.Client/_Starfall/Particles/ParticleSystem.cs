@@ -66,6 +66,12 @@ public sealed partial class ParticleSystem : EntitySystem
     /// </summary>
     private const int HardMaxParticles = 8000;
 
+    /// <summary>
+    /// Maximum particles per emitter for <see cref="ParticleEffectPrototype.IgnoreQualitySettings"/> effects
+    /// when quality is below High. At High quality they respect the full <see cref="HardMaxParticles"/> ceiling.
+    /// </summary>
+    private const int IgnoreQualityMaxParticles = 64;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -115,6 +121,19 @@ public sealed partial class ParticleSystem : EntitySystem
         // Skip quality check if this is a gameplay-critical particle
         if (_quality == 0 && !proto.IgnoreQualitySettings)
             return null;
+
+        // Even IgnoreQualitySettings effects are capped at 8 simultaneous emitters when quality is Off.
+        if (_quality == 0 && proto.IgnoreQualitySettings)
+        {
+            var ignoreQualityEmitterCount = 0;
+            foreach (var e in _emitters)
+            {
+                if (e.Proto.IgnoreQualitySettings)
+                    ignoreQualityEmitterCount++;
+            }
+            if (ignoreQualityEmitterCount >= 8)
+                return null;
+        }
 
         var emitter = CreateEmitter(proto, coords, attachedEntity);
         emitter.ColorOverride = colorOverride;
@@ -512,7 +531,11 @@ public sealed partial class ParticleSystem : EntitySystem
         {
             // Bypass quality settings for gameplay-critical particles
             var qualityMult = proto.IgnoreQualitySettings ? 1f : QualityMultipliers[Math.Clamp(_quality, 0, QualityMultipliers.Length - 1)];
-            var scaledMax = (int)Math.Ceiling(Math.Min(maxCount, HardMaxParticles) * qualityMult * emitter.Intensity);
+            // IgnoreQualitySettings emitters are capped at IgnoreQualityMaxParticles unless quality is High.
+            var effectiveMax = proto.IgnoreQualitySettings && _quality < 3
+                ? Math.Min(maxCount, IgnoreQualityMaxParticles)
+                : maxCount;
+            var scaledMax = (int)Math.Ceiling(Math.Min(effectiveMax, HardMaxParticles) * qualityMult * emitter.Intensity);
             var canEmit = Math.Min(scaledMax - liveCount, remainingBudget);
             if (canEmit > 0)
             {
@@ -545,10 +568,15 @@ public sealed partial class ParticleSystem : EntitySystem
 
     private void BurstEmit(ActiveEmitter emitter)
     {
+        var proto = emitter.Proto;
         var eyeAngle = (float)_eye.CurrentEye.Rotation;
         // Bypass quality settings for gameplay-critical particles
-        var qualityMult = emitter.Proto.IgnoreQualitySettings ? 1f : QualityMultipliers[Math.Clamp(_quality, 0, QualityMultipliers.Length - 1)];
-        var count = (int)Math.Ceiling(Math.Min(emitter.Proto.MaxCount, HardMaxParticles) * qualityMult);
+        var qualityMult = proto.IgnoreQualitySettings ? 1f : QualityMultipliers[Math.Clamp(_quality, 0, QualityMultipliers.Length - 1)];
+        // IgnoreQualitySettings emitters are capped at IgnoreQualityMaxParticles to prevent performance issues or otherwise abuse.
+        var effectiveMax = proto.IgnoreQualitySettings && _quality < 3
+            ? Math.Min(proto.MaxCount, IgnoreQualityMaxParticles)
+            : proto.MaxCount;
+        var count = (int)Math.Ceiling(Math.Min(effectiveMax, HardMaxParticles) * qualityMult);
         for (int i = 0; i < count; i++)
             EmitParticle(emitter, eyeAngle);
     }
