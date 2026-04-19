@@ -28,7 +28,7 @@ public partial class WoundSystem
         _container.EmptyContainer(ent.Comp.Wounds); // no more wounds
         // fix the bone if it has one
         if (_trauma.GetBone(ent.AsNullable()) is {} bone)
-            _trauma.SetBoneIntegrity(bone, bone.Comp.MaxIntegrity, bone.Comp);
+            _trauma.SetBoneIntegrity(bone, bone.Comp.IntegrityCap, bone.Comp);
     }
 
     #region Public API
