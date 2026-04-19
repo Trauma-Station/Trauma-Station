@@ -376,13 +376,14 @@
 - type: reaction
   id: CubaLibre
   reactants:
-  # Trauma - changed due to a new drink, made to be more accurate
+  #<Trauma>
     RumAndCoke:
     #was coke
       amount: 2
     #was rum
     JuiceLime:
       amount: 1
+  #</Trauma>
   products:
     CubaLibre: 3
 
