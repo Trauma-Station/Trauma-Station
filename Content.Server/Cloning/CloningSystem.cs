@@ -11,19 +11,18 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Utility;
 // </Trauma>
-using Content.Server.Humanoid;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body;
 using Content.Shared.Cloning;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.StatusEffect;
-using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Whitelist;
@@ -55,9 +54,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
     [Dependency] private SharedSubdermalImplantSystem _subdermalImplant = default!;
     [Dependency] private SharedVisualBodySystem _visualBody = default!;
     [Dependency] private NameModifierSystem _nameMod = default!;
-    [Dependency] private Shared.StatusEffectNew.StatusEffectsSystem _statusEffects = default!; //TODO: This system has to support both the old and new status effect systems, until the old is able to be fully removed.
-
-    [Dependency] private EntityQuery<CloneableStatusEffectComponent> _cloneableEffectQuery = default!;
+    [Dependency] private IdentitySystem _identity = default!;
 
     public override bool TryCloning(
         EntityUid original,
@@ -82,16 +79,13 @@ public sealed partial class CloningSystem : SharedCloningSystem
             return false;
         // Goobstation end
 
-        if (HasComp<HolographicCloneComponent>(original) && !settings.ForceCloning) // Goobstation - This has to be separate because I don't want to touch the other check.
-            return false;
-
-        if (HasComp<UncloneableComponent>(original) && !settings.ForceCloning) // Goob: enable forcecloning bypass for antagctrl admemes on vox/ipc.
-            return false; // Goobstation: Don't clone IPCs and voxes. It could be argued it should be in the CloningPodSystem instead
-
-        var attemptEv = new CloningAttemptEvent(settings);
-        RaiseLocalEvent(original, ref attemptEv);
-        if (attemptEv.Cancelled && !settings.ForceCloning)
-            return false; // cannot clone, for example due to the unrevivable trait
+        if (!settings.ForceCloning)
+        {
+            var attemptEv = new CloningAttemptEvent(settings);
+            RaiseLocalEvent(original, ref attemptEv);
+            if (attemptEv.Cancelled)
+                return false; // cannot clone, for example due to the unrevivable trait
+        }
 
         clone = coords == null ? Spawn(proto) : Spawn(proto, coords.Value); // Goob - use proto from above
         _visualBody.CopyAppearanceFrom(original, clone.Value);
@@ -118,7 +112,8 @@ public sealed partial class CloningSystem : SharedCloningSystem
         var originalName = _nameMod.GetBaseName(original);
 
         // Set the clone's name. The raised events will also adjust their PDA and ID card names.
-        _metaData.SetEntityName(clone.Value, originalName);
+        _metaData.SetEntityName(clone.Value, originalName, raiseEvents: settings.RaiseEntityRenamedEvent);
+        _identity.QueueIdentityUpdate(clone.Value); // We have to manually refresh the identity in case we did not raise events.
 
         _adminLogger.Add(LogType.Chat, LogImpact.Medium, $"The body of {original:player} was cloned as {clone.Value:player}");
         return true;
@@ -135,7 +130,10 @@ public sealed partial class CloningSystem : SharedCloningSystem
         CloneComponents(original, clone, proto);
     }
 
-    public override void CloneComponents(EntityUid original, EntityUid clone, CloningSettingsPrototype settings)
+    public override void CloneComponents(
+        EntityUid original,
+        EntityUid clone,
+        CloningSettingsPrototype settings)
     {
         var componentsToCopy = settings.Components;
         var componentsToEvent = settings.EventComponents;
@@ -217,13 +215,21 @@ public sealed partial class CloningSystem : SharedCloningSystem
         RaiseLocalEvent(original, ref cloningEv); // used for datafields that cannot be directly copied using CopyComp
     }
 
+<<<<<<< HEAD
     public void CopyEquipment(
+=======
+    public override void CopyEquipment(
+>>>>>>> f6b458f7613 (Add changeling flesh clothing transformation (#43590))
         Entity<InventoryComponent?> original,
         Entity<InventoryComponent?> clone,
         SlotFlags slotFlags,
         EntityWhitelist? whitelist = null,
+<<<<<<< HEAD
         EntityWhitelist? blacklist = null,
         bool makeUnremoveable = false, bool copyStorage = true, bool internalContentsUnremoveable = false) // Trauma
+=======
+        EntityWhitelist? blacklist = null)
+>>>>>>> f6b458f7613 (Add changeling flesh clothing transformation (#43590))
     {
         if (!Resolve(original, ref original.Comp) || !Resolve(clone, ref clone.Comp))
             return;
@@ -311,6 +317,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
         }
     }
 
+<<<<<<< HEAD
     /// <summary>
     ///     Copies an item and its storage recursively, placing all items at the same position in grid storage.
     ///     This uses the original prototype of the items, so any changes to components that are done after spawning are lost!
@@ -320,6 +327,13 @@ public sealed partial class CloningSystem : SharedCloningSystem
     ///     Some components have their own additional spawn logic on map init, so we cannot just copy all containers.
     /// </remarks>
     public EntityUid? CopyItem(EntityUid original, EntityCoordinates coords, EntityWhitelist? whitelist = null, EntityWhitelist? blacklist = null, bool copyStorage = true) // Goob edit
+=======
+    public override EntityUid? CopyItem(
+        EntityUid original,
+        EntityCoordinates coords,
+        EntityWhitelist? whitelist = null,
+        EntityWhitelist? blacklist = null)
+>>>>>>> f6b458f7613 (Add changeling flesh clothing transformation (#43590))
     {
         // we use a whitelist and blacklist to be sure to exclude any problematic entities
         if (!_whitelist.CheckBoth(original, blacklist, whitelist))
@@ -358,12 +372,11 @@ public sealed partial class CloningSystem : SharedCloningSystem
         return spawned;
     }
 
-    /// <summary>
-    ///     Copies an item's storage recursively to another storage.
-    ///     The storage grids should have the same shape or it will drop on the floor.
-    ///     Basically the same as CopyItem, but we don't copy the outermost container.
-    /// </summary>
-    public void CopyStorage(Entity<StorageComponent?> original, Entity<StorageComponent?> target, EntityWhitelist? whitelist = null, EntityWhitelist? blacklist = null)
+    public override void CopyStorage(
+        Entity<StorageComponent?> original,
+        Entity<StorageComponent?> target,
+        EntityWhitelist? whitelist = null,
+        EntityWhitelist? blacklist = null)
     {
         if (!Resolve(original, ref original.Comp, false) || !Resolve(target, ref target.Comp, false))
             return;
@@ -382,17 +395,12 @@ public sealed partial class CloningSystem : SharedCloningSystem
         }
     }
 
-    /// <summary>
-    ///     Copies all implants from one mob to another.
-    ///     Might result in duplicates if the target already has them.
-    ///     Can copy the storage inside a storage implant according to a whitelist and blacklist.
-    /// </summary>
-    /// <param name="original">Entity to copy implants from.</param>
-    /// <param name="target">Entity to copy implants to.</param>
-    /// <param name="copyStorage">If true will copy storage of the implants (E.g storage implant)</param>
-    /// <param name="whitelist">Whitelist for the storage copy (If copyStorage is true)</param>
-    /// <param name="blacklist">Blacklist for the storage copy (If copyStorage is true)</param>
-    public void CopyImplants(Entity<ImplantedComponent?> original, EntityUid target, bool copyStorage = false, EntityWhitelist? whitelist = null, EntityWhitelist? blacklist = null)
+    public override void CopyImplants(
+        Entity<ImplantedComponent?> original,
+        EntityUid target,
+        bool copyStorage = false,
+        EntityWhitelist? whitelist = null,
+        EntityWhitelist? blacklist = null)
     {
         if (!Resolve(original, ref original.Comp, false))
             return; // they don't have any implants to copy!
@@ -418,27 +426,6 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
             if (copyStorage)
                 CopyStorage(originalImplant, targetImplant.Value, whitelist, blacklist); // only needed for storage implants
-        }
-
-    }
-
-    /// <summary>
-    ///    Scans all permanent status effects applied to the original entity and transfers them to the clone.
-    /// </summary>
-    public void CopyStatusEffects(Entity<StatusEffectContainerComponent?> original, Entity<StatusEffectContainerComponent?> target)
-    {
-        foreach (var effect in _statusEffects.EnumerateStatusEffects(original, _cloneableEffectQuery))
-        {
-            //We are not interested in temporary effects, only permanent ones.
-            if (effect.Comp1.EndEffectTime is not null)
-                continue;
-
-            var effectProto = Prototype(effect);
-
-            if (effectProto is null)
-                continue;
-
-            _statusEffects.TrySetStatusEffectDuration(target, effectProto);
         }
     }
 }
