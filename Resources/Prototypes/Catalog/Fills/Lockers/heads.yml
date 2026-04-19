@@ -122,7 +122,7 @@
     - !type:NestedSelector # Trauma
       tableId: LockerFillHeadOfPersonnelTrauma
     - id: AccessConfigurator
-    - id: BoxEncryptionKeyPassenger
+#    - id: BoxEncryptionKeyPassenger # Trauma
     - id: BoxEncryptionKeyService
     - id: BoxHeadset
     - id: BoxHoPCircuitboards
