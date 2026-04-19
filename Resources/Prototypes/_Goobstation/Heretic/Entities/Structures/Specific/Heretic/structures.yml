@@ -1,8 +1,8 @@
 - type: entity
-  parent: BaseStructureWall
-  id: WallHereticArenaBase
-  suffix: indestructible
   abstract: true
+  parent: BaseStructureWall
+  id: BaseWallHereticArena
+  suffix: indestructible
   components:
   - type: Occluder
   - type: RustRequiresPathStage
@@ -28,10 +28,9 @@
         density: 4000
 
 - type: entity
-  parent: WallHereticArenaBase
+  parent: BaseWallHereticArena
   id: WallHereticArena
   name: rose stone wall
-  suffix: indestructible
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Structures/rose_stone_wall.rsi
@@ -55,11 +54,10 @@
     state: rose_stone_1
 
 - type: entity
-  parent: WallHereticArenaBase
+  parent: BaseWallHereticArena
   id: WallHereticArenaOuter
   name: eldritch wall
   description: A wall penning in the sheep amongst the wolves. It glows with malevolent energy - prodding it is likely unwise.
-  suffix: indestructible
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Structures/eldritch_forcewall.rsi
@@ -114,11 +112,14 @@
   id: HereticArena
   name: arena
   categories: [ HideSpawnMenu ]
-  save: false
   components:
   - type: Transform
     anchored: true
   - type: Physics
+    # Required for UnitializedSaveTest to pass.
+    # CanCollide is set to false because arena has no fixtures.
+    # Fixture is added on map init and CanCollide is set to true manually.
+    canCollide: false
     bodyType: Static
   - type: TimedDespawn
     lifetime: 60
