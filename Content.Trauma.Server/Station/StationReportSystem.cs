@@ -22,7 +22,7 @@ public sealed class StationReportSystem : EntitySystem
     [Dependency] private readonly StationTraitsSystem _traits = default!;
 
     private StringBuilder _sb = new();
-    private int _year;
+    private int _years;
 
     public override void Initialize()
     {
@@ -30,7 +30,7 @@ public sealed class StationReportSystem : EntitySystem
 
         SubscribeLocalEvent<StationReportComponent, MapInitEvent>(OnMapInit);
 
-        Subs.CVar(_cfg, TraumaCVars.InGameYear, y => _year = y, true);
+        Subs.CVar(_cfg, TraumaCVars.YearOffset, y => _years = y, true);
     }
 
     public override void Update(float frameTime)
@@ -71,8 +71,8 @@ public sealed class StationReportSystem : EntitySystem
     public string CreateReport(EntityUid station)
     {
         _sb.Clear();
-        var date = DateTime.UtcNow.ToString("ddd, MMM dd");
-        _sb.AppendLine($"[bolditalic]Nanotrasen Department of Intelligence Threat Advisory, Sol Sector, TCD {date}, {_year}:[/bolditalic]\n");
+        var date = DateTime.UtcNow.AddYears(_years).ToString("ddd, MMM dd, YYYY");
+        _sb.AppendLine($"[bolditalic]Nanotrasen Department of Intelligence Threat Advisory, Sol Sector, TCD {date}:[/bolditalic]\n");
 
         // TODO: actual dynamic gamemode reports lol
         _sb.AppendLine("Advisory Level: [bold]Yellow Star[/bold]");

@@ -122,3 +122,12 @@ Entries:
   id: 16
   time: '2026-04-11T18:54:13.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1980
+- author: Ministry of Truth
+  changes:
+  - type: Add
+    message: >-
+      Saying slurs configured in the server cvar now automatically admin alerts,
+      smites and permabans you.
+  id: 17
+  time: '2026-04-13T16:36:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2005

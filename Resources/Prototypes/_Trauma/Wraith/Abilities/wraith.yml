@@ -28,6 +28,13 @@
       - ChemDispensable
     searchRange: 7
     stunDuration: 1
+  - type: Defile
+    reagents:
+      BuzzochloricBees: 10
+      Bleach: 10
+      Ash: 10
+      Vomit: 10
+      Toxin: 10
   - type: ActionGrant
     actions:
     - ActionPossessObject
@@ -41,3 +48,4 @@
     - ActionSpook
     - ActionToggleGhosts
     - ActionToggleLighting
+    - ActionDefile

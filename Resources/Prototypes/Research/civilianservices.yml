@@ -129,6 +129,7 @@
   - FauxTileAstroIce
   - FauxTileAstroSnow
   - FauxTileAstroAsteroidSand
+  - FauxTileAstroAsteroidSandBorderless
   - FauxTileDesertAstroSand
   # Goobstation R&D Console rework start
   position: 1,5

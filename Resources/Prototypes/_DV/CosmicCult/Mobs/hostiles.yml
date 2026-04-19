@@ -55,6 +55,7 @@
   - type: Tag
     tags:
     - DoorBumpOpener
+    - Bot # Rust grasp target (its a robot?)
   - type: MobState
     allowedStates:
     - Alive

@@ -235,8 +235,8 @@ public sealed partial class CloneProjectorSystem : SharedCloneProjectorSystem
             _container.TryRemoveFromContainer(oldClone);
             CleanClone(oldClone, true);
 
-            if (_mind.TryGetMind(oldClone, out var id, out _) && !removeMind)
-                _mind.TransferTo(id, clone);
+            if (!removeMind && _mind.TryGetMind(oldClone, out var mindId, out var mind))
+                _mind.TransferTo(mindId, clone, mind: mind);
 
             Del(oldClone);
         }

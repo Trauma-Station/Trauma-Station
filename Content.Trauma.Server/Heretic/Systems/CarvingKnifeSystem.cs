@@ -15,13 +15,13 @@ using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffect;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
+using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.Traps;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -47,8 +47,8 @@ public sealed class CarvingKnifeSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly HereticSystem _heretic = default!;
+    [Dependency] private readonly TeleportSystem _teleport = default!;
 
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
@@ -83,7 +83,8 @@ public sealed class CarvingKnifeSystem : EntitySystem
         if (!TryGetEntity(ev.User, out var ent))
             return;
 
-        if (!_statusNew.TryEffectsWithComp<CarvingAlertedStatusEffectComponent>(ent.Value, out var effects) ||
+        var user = ent.Value;
+        if (!_statusNew.TryEffectsWithComp<CarvingAlertedStatusEffectComponent>(user, out var effects) ||
             effects.Count == 0)
             return;
 
@@ -93,10 +94,9 @@ public sealed class CarvingKnifeSystem : EntitySystem
             return;
 
         var coords = GetCoordinates(ev.Coords);
-        _pulling.StopAllPulls(ent.Value);
-        _transform.SetCoordinates(ent.Value, coords);
-        _audio.PlayPvs(effect.Comp1.TeleportSound, coords);
-        _statusNew.TryRemoveStatusEffect(ent.Value, AlertEffect);
+        var sound = effect.Comp1.TeleportSound;
+        _teleport.Teleport(user, coords, sound, user);
+        _statusNew.TryRemoveStatusEffect(user, AlertEffect);
         QueueDel(carving);
     }
 

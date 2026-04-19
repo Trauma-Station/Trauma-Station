@@ -27,7 +27,6 @@
       Brute: _Shitmed/Mobs/Effects/brute_damage.rsi
       Burn: _Shitmed/Mobs/Effects/burn_damage.rsi
   - type: Appearance
-  - type: Nerve
   - type: ContainerContainer
     containers:
       Wounds: !type:Container

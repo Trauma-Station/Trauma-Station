@@ -33,6 +33,8 @@
       prob: 0.02
     - id: Shadowling
       prob: 0.02
+    - id: SubDuoAbductor
+      prob: 0.05
     # </Trauma>
 
 - type: entity
@@ -52,6 +54,8 @@
       prob: 0.02
     - id: Shadowling
       prob: 0.02
+    - id: SubDuoAbductor
+      prob: 0.05
     # </Trauma>
 
 - type: entity
@@ -71,6 +75,8 @@
       prob: 0.02
     - id: Shadowling
       prob: 0.02
+    - id: SubDuoAbductor
+      prob: 0.05
     # </Trauma>
 
 - type: entity
@@ -332,6 +338,7 @@
     selectionTime: IntraPlayerSpawn # Goobstation
     definitions:
     - prefRoles: [ HeadRev ]
+      fallbackRoles: [ Traitor ] # Trauma - make headrev-less rev rounds much rarer
       max: 3
       playerRatio: 15
       blacklist:

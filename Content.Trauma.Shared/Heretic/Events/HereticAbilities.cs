@@ -5,9 +5,11 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
+using Content.Shared.Maps;
 using Content.Shared.Polymorph;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
@@ -231,7 +233,7 @@ public sealed partial class HereticVoidConduitEvent : InstantActionEvent
     public EntProtoId VoidConduit = "VoidConduit";
 }
 
-// blade (+ upgrades)
+// blade
 public sealed partial class EventHereticSacraments : InstantActionEvent
 {
     [DataField]
@@ -241,7 +243,7 @@ public sealed partial class EventHereticSacraments : InstantActionEvent
     public EntProtoId Status = "SacramentsOfPowerStatusEffect";
 }
 
-public sealed partial class HereticChampionStanceEvent : HereticKnowledgeEvent;
+public sealed partial class EventHereticToggleChampionHook : InstantActionEvent;
 
 public sealed partial class EventHereticFuriousSteel : InstantActionEvent
 {
@@ -250,6 +252,21 @@ public sealed partial class EventHereticFuriousSteel : InstantActionEvent
 
     [DataField]
     public TimeSpan StatusDuration = TimeSpan.FromSeconds(2);
+}
+
+public sealed partial class EventHereticDomainExpansion : InstantActionEvent
+{
+    [DataField]
+    public int TileRadius = 9;
+
+    [DataField]
+    public int MinRadius = 3;
+
+    [DataField]
+    public ProtoId<ContentTileDefinition> TileReplacement = "PlatingRoseStone";
+
+    [DataField]
+    public EntProtoId<BladeArenaComponent> Arena = "HereticArena";
 }
 
 // lock
@@ -451,14 +468,8 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
     [DataField]
     public EntProtoId RealignmentStatus = "RealignmentStatusEffect";
 
-    [DataField]
-    public EntProtoId StunStatus = "RealignmentStatusEffect";
-
-    [DataField]
-    public EntProtoId SleepStatus = "StatusEffectForcedSleeping";
-
-    [DataField]
-    public EntProtoId DrowsinessStatus = "StatusEffectDrowsiness";
+    [DataField(required: true)]
+    public List<EntProtoId> RemovedEffects = new();
 
     [DataField]
     public TimeSpan EffectTime = TimeSpan.FromSeconds(10);

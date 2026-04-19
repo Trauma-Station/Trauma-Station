@@ -15,7 +15,7 @@
   - BRASS
   - BURNING
   - CHEESE-EATING
-#  - CHRISTMAS-STEALING # todo: bring back Dec 1st
+  - CHRISTMAS-STEALING # Trauma - the grinch is always here, i feel jolly today
   - CLOWN-POWERED
   - CLOWN
   - COLORFUL
@@ -195,6 +195,9 @@
 - type: dataset
   id: IonStormAllergySeverities
   values:
+  # <Trauma>
+  - EXPLODELY
+  # </Trauma>
   - CONTAGIOUSLY
   - DEATHLY
   - EXTREMELY
@@ -206,23 +209,37 @@
 - type: dataset
   id: IonStormAreas
   values:
-  # <Goob>
+  # <Trauma>
   - AMERICA
   - AN EVIL LAIR
+  - ANTE
   - A FIRE
   - A FORTRESS
+  - BORGINATOR 5000 DELUXE HD EDITION
   - CARGONIA
   - CHAPEL
   - CHINA
   - DORMS
+  - ENVY
+  - FRAUD
   - GAS MINERS
   - GERMANY
+  - GLUTTONY
+  - GREED
+  - GOD HIMSELF
+  - HERESY
   - IRELAND
   - JANITORAL
+  - LIMBO
   - MEDICAL
+  - PRIDE
+  - PRIMUM MOBILE
+  - PARADISE
   - ROMANIA
   - RUSSIA
   - SOVIET RUSSIA
+  - SLOTH
+  - SOMEWHERE WICKED THIS WAY
   - THE BINGLE PIT
   - THE CARGO DEPARTMENT
   - THE GULAG
@@ -232,8 +249,15 @@
   - THE SHADOW FACTORY
   - THE TOOL ROOM
   - THE WIZARD'S DEN
+  - THE XENOBORG MOTHERSHIP
+  - THE EMPYREAN
+  - THE CITY OF DIS
+  - TREACHERY
   - TIDELAND
-  # </Goob>
+  - VIOLENCE
+  - WRATH
+  - YOUR MOMS HOUSE
+  # </Trauma>
   - ALPHA COMPLEX
   - A HAUNTED PIZZERIA # fnaf
   - A RESEARCH LABORATORY NEAR THE SOUTH POLE
@@ -246,7 +270,7 @@
   - CENTCOMM
   - CHEMICAL LAB
   - CLOWN PLANET
-  - EARTH
+  - TERRA # Trauma - proper name for the earth (our planet) is terra. i know im a nerd
   - ENGINEERING
   - HELL
   - IMPERIUM
@@ -296,7 +320,6 @@
   - ART
   - BADNESS
   - BALDNESS
-  - BRAINROT # Goobstation
   - BRAVERY
   - CAPITALISM
   - CHAOS
@@ -372,7 +395,7 @@
   - CREW-MEMBERS
   - CYBORGS
   - DETECTIVES
-  # - GENETICISTS
+  - GENETICISTS # Trauma - Geneticists are real now
   - HEADS OF PERSONNEL
   - HEADS OF SECURITY
   - HEADS OF STAFF
@@ -509,7 +532,7 @@
   - BE ANNOYING
   - BE DISTRACTED
   - BE EFFICIENT
-  # - BE A REAL SCRUNGLE, JUST A CUTE LIL' GUY # Not this playerbase mate
+  - BE A REAL SCRUNGLE, JUST A CUTE LIL' GUY # Trauma - joy and whimsy are important
   - BE HAPPY
   - BE POLITE
   - BE QUIET
@@ -929,10 +952,9 @@
   - TRASH
   - VEGETABLES
   # Goobstation - THE ROT CONSUMES
-  - JOB
   - EMPLOYMENT
   - FIVE HUNDRED CIGARETTES
-  - CHUDS
+  - JOB
 
 # Specific actions that either harm humans or must be done to not
 # harm humans. Make sure they're plural and "not" can be tacked
@@ -1057,6 +1079,11 @@
 - type: dataset
   id: IonStormThreats
   values:
+  # <Trauma>
+  - RATMA
+  - SHADOW DEMONS
+  - THE SHADOW FACTORY
+  # </Trauma>
   - AHHHPERATIVES
   - ALIENS
   - ANARCHISTS AND BANDITS
