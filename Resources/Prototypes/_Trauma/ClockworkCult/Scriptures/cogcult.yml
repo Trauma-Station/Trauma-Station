@@ -1,6 +1,5 @@
 # TODO: For actions, check how many of the same type we can have! (new entity effect conditions)
 # TODO: Add support for local playsoundeffect
-# TODO: If we want to support Tier'd scriptures, we must add per tier effects
 - type: entity
   id: DummyScripture
   parent: BaseScripture
@@ -12,7 +11,9 @@
     recitalEffects:
     - !type:AddActions
       actions:
-      - ActionBlink
+      - KindleActionT1
+    - !type:Chat
+      message: Divinity, show them your light!
   - type: DoAfterArgs
     delay: 7
 

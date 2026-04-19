@@ -8,6 +8,8 @@
     itemIconStyle: BigAction
     raiseOnAction: true
   - type: DoAfterArgs
+    delay: 1.5
+  - type: RemoveActionOnPerform
 
 - type: entity
   abstract: true
@@ -15,6 +17,7 @@
   id: BaseKindleAction
   components:
   - type: TargetAction
+    range: 2 # Melee-range
   - type: EntityTargetAction
     whitelist:
       components:
@@ -23,6 +26,8 @@
       components:
       - ClockworkCultist
     event: !type:EffectTargetActionEvent
+  - type: TimedDespawn # Strong, but lasts only some seconds
+    lifetime: 10
 
 # Kindle with all Tiers
 #
@@ -40,7 +45,6 @@
   description: Stuns and mutes a target. Mindshielded people only get silenced.
   components:
   - type: Action
-    useDelay: 30
     icon:
       sprite: _Trauma/Actions/mutations.rsi # todo: change
       state: zap
@@ -82,9 +86,6 @@
   description: Stuns and mutes a target, whilst freezing them.
   components:
   - type: Action
-    itemIconStyle: BigAction
-    raiseOnAction: true
-    useDelay: 30
     icon:
       sprite: _Trauma/Actions/mutations.rsi # todo: change
       state: zap
@@ -104,7 +105,7 @@
       type: Add
       time: 8
     - !type:AdjustTemperature
-      amount: -300
+      amount: -3000000
     - !type:ModifyStatusEffect
       effectProto: StatusEffectStutter
       time: 30
@@ -128,7 +129,6 @@
   description: Stuns and mutes a target, while invoking flames on them.
   components:
   - type: Action
-    useDelay: 30
     icon:
       sprite: _Trauma/Actions/mutations.rsi # todo: change
       state: zap
@@ -147,7 +147,8 @@
       type: Add
       time: 10
     - !type:Flammable
-      multiplier: 5
+      multiplier: 3.5
+    - !type:Ignite
     - !type:ModifyStatusEffect
       effectProto: StatusEffectStutter
       time: 30

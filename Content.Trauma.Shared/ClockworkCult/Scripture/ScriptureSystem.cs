@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects;
-using Content.Shared.Power.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Trauma.Shared.ClockworkCult.Slab;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ClockworkCult.Scripture;
 
@@ -23,6 +23,8 @@ public sealed partial class ScriptureSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityQuery<ScriptureComponent> _scriptureQuery = default!;
     [Dependency] private readonly EntityQuery<ScriptureTierComponent> _scriptureTierQuery = default!;
 
@@ -93,20 +95,30 @@ public sealed partial class ScriptureSystem : EntitySystem
     private void OnRecite(Entity<ScriptureContainerComponent> ent, ref ScriptureReciteMessage args)
     {
         // TODO: Must marked as a clockwork cultist to recite!!
-        if (!_proto.TryIndex(args.Scripture, out var scripture)
-            || !scripture.TryGetComponent<ScriptureComponent>(out var scriptureComponent))
+        if (!_proto.TryIndex(args.Scripture, out var scripture))
             return;
 
-        // Raised on user to check if we have enough power to cast
         var user = args.Actor;
-        var attemptEv = new ReciteAttemptEvent(scriptureComponent.PowerCost);
-        RaiseLocalEvent(user, ref attemptEv);
-        if (attemptEv.Cancelled)
-            return;
 
         // If scripture does not exist in our container, then we don't continue further
         var scriptureEntity = TryGetScripture(ent.AsNullable(), scripture);
-        if (scriptureEntity is not {} scriptureEnt)
+        if (scriptureEntity is not {} scriptureEnt || !_scriptureQuery.TryComp(scriptureEnt, out var scriptureComponent) )
+            return;
+
+        // Making sure the user doesn't spam the logic
+        var nextAttempt = scriptureComponent.LastTry + scriptureComponent.Delay;
+        if (_timing.CurTime < nextAttempt)
+        {
+            _popup.PopupClient($"Wait {(nextAttempt - _timing.CurTime).Seconds} seconds before trying again.", user, PopupType.MediumCaution);
+            return;
+        }
+        scriptureComponent.LastTry = _timing.CurTime;
+        Dirty(scriptureEnt, scriptureComponent);
+
+        // Raised on user to check if we have enough power to cast
+        var attemptEv = new ReciteAttemptEvent(scriptureComponent.PowerCost);
+        RaiseLocalEvent(user, ref attemptEv);
+        if (attemptEv.Cancelled)
             return;
 
         // Check for other components that may override our behaviour like DoAfterArgs

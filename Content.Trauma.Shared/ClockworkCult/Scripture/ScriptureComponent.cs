@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityEffects;
-using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.ClockworkCult.Scripture;
@@ -23,6 +22,19 @@ public sealed partial class ScriptureComponent : Component
     /// Effects to run on recital.
     /// E.g. giving an action to the user, or spawning a structure
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityEffect[]? RecitalEffects;
+
+    /// <summary>
+    /// How many seconds the user has to wait before reciting this scripture again.
+    /// Used to prevent spam.
+    /// </summary>
+    [DataField]
+    public TimeSpan Delay = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// The last recital attempt that was commited. Used along <see cref="Delay"/>.
+    /// </summary>
+    [AutoNetworkedField]
+    public TimeSpan LastTry;
 };
