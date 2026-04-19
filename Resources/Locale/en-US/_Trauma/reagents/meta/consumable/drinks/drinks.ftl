@@ -15,7 +15,7 @@ reagent-physical-desc-foamy = foamy
 
 reagent-name-aloe-cocktail = Aloe cocktail
 reagent-desc-aloe-cocktail = A strange mix of watermelon juice, cream and rum.
-reagent-physical-desc-creamy = fruity
+reagent-physical-desc-creamy = tropical
 
 reagent-name-banana-milkshake = Banana milkshake
 reagent-desc-banana-milkshake = A thick, creamy shake made with banana juice, cream and ice.
