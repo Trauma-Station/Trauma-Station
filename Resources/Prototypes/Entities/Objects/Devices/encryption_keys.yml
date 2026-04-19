@@ -162,7 +162,7 @@
   components:
   - type: EncryptionKey
     channels:
-    - Common
+#    - Common # Trauma
     - Command
     - Engineering
     - Medical
