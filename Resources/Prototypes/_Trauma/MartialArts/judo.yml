@@ -1,7 +1,6 @@
 - type: combo
   id: JudoDiscombobulate
   attacks:
-  - Grab
   - Disarm
   - Grab
   userEffects:
@@ -9,6 +8,12 @@
     messages:
     - judo-discombobulate
   opponentEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  - !type:ModifyStatusEffect
+    effectProto: JudoDiscombobulateStatusEffect # slowdown is roughly confusion
+    time: 5
+    type: Add # paradise parity...
   - !type:TakeStaminaDamage
     amount: 10
   levelRequired: 0
@@ -18,19 +23,27 @@
   attacks:
   - Disarm
   - Harm
-  - Harm
   userEffects:
   - !type:PopupMessage
     messages:
     - judo-eyepoke # isnt this more of a krav thing? judo is all grappling
   opponentEffects:
-  - !type:TakeStaminaDamage
-    amount: 25
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  - !type:GenericStatusEffect
+    key: TemporaryBlindness
+    component: TemporaryBlindness
+    time: 2
+  - !type:GenericStatusEffect
+    key: BlurryVision
+    component: BlurryVision
+    time: 5
   - !type:HealthChange
+    targetPart: Head
     damage:
       types:
-        Blunt: 5
-  levelRequired: 0
+        Blunt: 10
+  levelRequired: 20
 
 - type: combo
   id: JudoThrow
@@ -43,31 +56,45 @@
     messages:
     - judo-throw
   opponentEffects:
-  - !type:ModifyParalysis
-    time: 4
-  - !type:HealthChange
-    damage:
-      types:
-        Blunt: 5
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  - !type:ModifyKnockdown
+    time: 7
   - !type:TakeStaminaDamage
-    amount: 5
+    amount: 25
+  - !type:StopPull
+  userConditions:
+  - !type:StandingCondition
   levelRequired: 0
 
 - type: combo
   id: JudoArmbar
   attacks:
   - Disarm
-  - Harm
+  - Disarm
   - Grab
   userEffects:
   - !type:PopupMessage
     messages:
     - judo-armbar
   opponentEffects:
-  - !type:ModifyParalysis
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  - !type:ModifyKnockdown
     time: 5
   - !type:TakeStaminaDamage
-    amount: 10
+    amount: 45
+  - !type:SetGrabStage
+    stage: Suffocate # equivalent to a choke grab
+  - !type:Armbar # allows wheel throw and tracks it so it goes away when they separate
+  # TODO: disarm if the user is standing
+  conditions:
+  - !type:StandingCondition
+    inverted: true # has to be downed
+  - !type:WhitelistCondition
+    blacklist:
+      components:
+      - Armbarred # don't do it if already armbarred
   levelRequired: 0
 
 - type: combo
@@ -80,7 +107,29 @@
   - !type:PopupMessage
     messages:
     - judo-wheelthrow
+  - !type:RemoveComponents
+    components:
+    - type: KnockedDown
+  - !type:SetStanding
   opponentEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
   - !type:TakeStaminaDamage
     amount: 120
+  - !type:ModifyKnockdown
+    time: 15
+  - !type:ModifyStatusEffect
+    effectProto: JudoDiscombobulateStatusEffect # slowdown is roughly confusion
+    time: 10
+  - !type:StopPull
+  - !type:GrabThrow
+    speed: 5
+  - !type:RemoveComponents
+    components:
+    - type: Armbarred
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - Armbarred # needs to be armbarred
   levelRequired: 0

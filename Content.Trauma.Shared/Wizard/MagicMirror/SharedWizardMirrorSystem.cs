@@ -5,7 +5,6 @@ using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Preferences;
 using Content.Shared.UserInterface;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.MagicMirror;

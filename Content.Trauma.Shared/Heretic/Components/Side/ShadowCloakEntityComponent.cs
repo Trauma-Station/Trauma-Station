@@ -3,8 +3,6 @@
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Speech;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components.Side;
 

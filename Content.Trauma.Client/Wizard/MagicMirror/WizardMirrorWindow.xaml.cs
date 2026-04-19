@@ -18,7 +18,6 @@ using Robust.Client.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Log;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Wizard.MagicMirror;
 

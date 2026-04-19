@@ -6,7 +6,6 @@ using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Polymorph;
 using Robust.Server.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.SlaughterDemon;
 

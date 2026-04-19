@@ -3,7 +3,6 @@
 using Content.Shared.Physics;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.PhaseShift;

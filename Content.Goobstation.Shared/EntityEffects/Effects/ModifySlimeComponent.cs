@@ -3,7 +3,6 @@
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.Xenobiology.Components;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 

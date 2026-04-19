@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Jump;
 

@@ -5,7 +5,6 @@ using Content.Shared.Database;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Forging;
 

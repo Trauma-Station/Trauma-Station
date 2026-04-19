@@ -1,6 +1,4 @@
-// <Trauma>
-using Content.Trauma.Common.CCVars;
-// </Trauma>
+using Content.Trauma.Common.CCVar;
 using Content.Shared.Abilities;
 using Robust.Client.Graphics;
 using Robust.Shared.Configuration;
@@ -15,6 +13,7 @@ public sealed partial class DogVisionSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _playerMan = default!;
 
     private DogVisionOverlay _overlay = default!;
+    private bool _enabled = true;
 
     public override void Initialize()
     {
@@ -25,14 +24,14 @@ public sealed partial class DogVisionSystem : EntitySystem
         SubscribeLocalEvent<DogVisionComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<DogVisionComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
 
-        Subs.CVar(_cfg, DCCVars.NoVisionFilters, OnNoVisionFiltersChanged);
+        Subs.CVar(_cfg, TraumaCVars.NoVisionFilters, OnNoVisionFiltersChanged);
 
         _overlay = new();
     }
 
     private void OnDogVisionInit(EntityUid uid, DogVisionComponent component, ComponentInit args)
     {
-        if (uid == _playerMan.LocalEntity && !_cfg.GetCVar(DCCVars.NoVisionFilters))
+        if (uid == _playerMan.LocalEntity && _enabled)
             _overlayMan.AddOverlay(_overlay);
     }
 
@@ -44,7 +43,7 @@ public sealed partial class DogVisionSystem : EntitySystem
 
     private void OnPlayerAttached(EntityUid uid, DogVisionComponent component, LocalPlayerAttachedEvent args)
     {
-        if (!_cfg.GetCVar(DCCVars.NoVisionFilters))
+        if (_enabled)
             _overlayMan.AddOverlay(_overlay);
     }
 
@@ -55,6 +54,7 @@ public sealed partial class DogVisionSystem : EntitySystem
 
     private void OnNoVisionFiltersChanged(bool enabled)
     {
+        _enabled = enabled;
         if (enabled)
             _overlayMan.RemoveOverlay(_overlay);
         else

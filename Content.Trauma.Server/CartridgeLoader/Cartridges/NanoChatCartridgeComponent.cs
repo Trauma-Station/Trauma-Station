@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Radio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.CartridgeLoader.Cartridges;
 

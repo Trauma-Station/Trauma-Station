@@ -25,3 +25,11 @@
     Steel: 500
     Glass: 300
     Silver: 150
+
+- type: latheRecipe
+  id: MedicalCigCarton
+  result: CigCartonMedical
+  completetime: 16
+  materials:
+    Plastic: 2500
+    Cloth: 2500

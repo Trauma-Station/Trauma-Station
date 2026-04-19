@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.Timing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

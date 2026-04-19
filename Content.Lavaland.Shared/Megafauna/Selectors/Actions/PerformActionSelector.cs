@@ -3,7 +3,6 @@
 using Content.Lavaland.Shared.Megafauna.Components;
 using Content.Lavaland.Shared.Megafauna.Systems;
 using Content.Shared.Actions;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Lavaland.Shared.Megafauna.Selectors;

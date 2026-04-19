@@ -10,7 +10,6 @@ using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wraith;
 

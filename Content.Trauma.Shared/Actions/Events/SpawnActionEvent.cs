@@ -6,8 +6,6 @@ using Content.Shared.Maps;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Dynamics;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Content.Shared.FixedPoint; // Goobstation
 

@@ -7,7 +7,6 @@ using Content.Shared.Fluids.Components;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.SlaughterDemon.Systems;
 

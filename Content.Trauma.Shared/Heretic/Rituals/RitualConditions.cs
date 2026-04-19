@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Shared.EntityConditions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 

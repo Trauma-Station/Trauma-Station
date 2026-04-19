@@ -5,7 +5,6 @@ using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
 using Robust.Client.UserInterface;
 using Robust.Client.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
 

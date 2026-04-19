@@ -8,7 +8,6 @@ using Content.Shared.Chat;
 using Content.Shared.Paper;
 using Content.Shared.Speech;
 using Content.Goobstation.Shared.TapeRecorder;
-using Robust.Shared.Prototypes;
 using System.Text;
 
 namespace Content.Goobstation.Server.TapeRecorder;

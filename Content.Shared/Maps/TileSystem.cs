@@ -191,7 +191,7 @@ public sealed class TileSystem : EntitySystem
         return ReplaceTile(tileref, replacementTile, tileref.GridUid, grid);
     }
 
-    public bool ReplaceTile(TileRef tileref, ContentTileDefinition replacementTile, EntityUid grid, MapGridComponent? component = null, byte? variant = null)
+    public bool ReplaceTile(TileRef tileref, ContentTileDefinition replacementTile, EntityUid grid, MapGridComponent? component = null, byte? variant = null, bool ignoreLimit = false) // Trauma - added ignoreLimit
     {
         DebugTools.Assert(tileref.GridUid == grid);
 
@@ -227,7 +227,7 @@ public sealed class TileSystem : EntitySystem
             }
 
             //Prevent the doomstack
-            if (stack.Count >= _tileStackLimit && _tileStackLimit != 0)
+            if (stack.Count >= _tileStackLimit && _tileStackLimit != 0 && !ignoreLimit) // Trauma - ignoreLimit
                 return false;
 
             //Push current tile to the stack, if not empty
@@ -257,8 +257,10 @@ public sealed class TileSystem : EntitySystem
         var tileDef = (ContentTileDefinition)_tileDefinitionManager[tileRef.Tile.TypeId];
 
         //Can't deconstruct anything that doesn't have a base turf.
+        /* Trauma
         if (tileDef.BaseTurf == null)
-            return false;
+           return false;
+        */
 
         var gridUid = tileRef.GridUid;
         var mapGrid = Comp<MapGridComponent>(gridUid);
@@ -301,7 +303,7 @@ public sealed class TileSystem : EntitySystem
         else
         {
             //No stack? Assume BaseTurf was the layer below
-            previousTileId = tileDef.BaseTurf.Value;
+            previousTileId = tileDef.BaseTurf ?? "Space"; // Trauma - was tileDef.BaseTurf.Value
         }
 
         if (spawnItem)

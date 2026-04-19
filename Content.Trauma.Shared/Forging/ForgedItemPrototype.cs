@@ -5,7 +5,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Quality;
 using Robust.Shared.Utility;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Trauma.Shared.Forging;

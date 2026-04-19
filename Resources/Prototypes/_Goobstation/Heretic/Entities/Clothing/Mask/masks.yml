@@ -19,12 +19,6 @@
     sprite: _Goobstation/Heretic/mad_mask.rsi
   - type: BreathMask
   - type: IdentityBlocker
-  - type: Armor
-    coverage:
-    - Head
-    modifiers:
-      coefficients:
-        Holy: 1.25
   - type: Tag
     tags:
     - Mask

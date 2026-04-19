@@ -27,7 +27,6 @@ using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
 

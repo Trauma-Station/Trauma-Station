@@ -5,7 +5,6 @@ using Content.Shared.Administration.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 

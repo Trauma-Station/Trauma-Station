@@ -5,7 +5,6 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

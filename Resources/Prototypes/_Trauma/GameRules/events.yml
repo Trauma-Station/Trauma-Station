@@ -8,12 +8,13 @@
     - id: MalignRiftSpawn
     - id: FloorGoblinMidRound
     - id: ClownGoblinMigration
-    - id: PlagueMiceSpawn
+    - id: RadiationStormRule
 
 - type: entityTable
   id: BasicAntagEventsTrauma
   table: !type:AllSelector
     children:
+    - id: CarpMigrationRule
     # TOOD: remove these if they fucking suck lmao
     - id: SingulothKnightsMidround
     - id: MimeAssassinMidround
@@ -21,13 +22,13 @@
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
+    - id: MorphRule
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
     - id: BlobSpawn
-    - id: MorphRule
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation
@@ -35,20 +36,32 @@
     - id: ColossusSpawn
 
 - type: entity
-  parent: BaseStationEventShortDelay
-  id: PlagueMiceSpawn
+  parent: BaseGameRule
+  id: CarpMigrationRule
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
-    earliestStart: 20
-    minimumPlayers: 15
-    weight: 4 # annoying
-    reoccurrenceDelay: 60 # no spamming them
-    duration: 5
-  - type: VentHordeRule
-    table:
-      id: MobMousePlague
-      amount: 1, 3
+    duration: 1
+    weight: 1
+  - type: CarpMigrationRule
+  - type: SpaceSpawnRule
+
+- type: entity
+  parent: BaseGameRule
+  id: RadiationStormRule
+  components:
+  - type: StationEvent
+    weight: 0.5
+    startAnnouncement: station-event-radiation-storm-announcement
+    minimumPlayers: 25
+    reoccurrenceDelay: 20
+    maxOccurrences: 3
+    duration: 1
+  - type: RadiationStormRule
+  - type: MapEffectsRule
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: WeatherSchedulerRadiationStorm
+      time: null # it removes itself when done
 
 - type: entity
   id: RatmaSpawn

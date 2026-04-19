@@ -44,13 +44,13 @@
           ResearchDirector: [ 1, 1 ]
           Scientist: [ 4, 6 ]
           ResearchAssistant: [ 8, 8 ]
+          Geneticist: [ 2, 2 ]
           # Security
           HeadOfSecurity: [ 1, 1 ]
           Warden: [ 1, 1 ]
           Detective: [ 1, 1 ]
           SecurityOfficer: [ 4, 6 ]
           SecurityCadet: [ 8, 8 ]
-          Brigmedic: [ 1, 1 ]
           # Cargo
           Quartermaster: [ 1, 1 ]
           SalvageSpecialist: [ 3, 3 ]

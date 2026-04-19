@@ -40,8 +40,15 @@ public readonly partial record struct CargoBountyHistoryData
     [DataField(required: true)]
     public ProtoId<CargoBountyPrototype> Bounty { get; init; } = string.Empty;
 
+    /// <summary>
+    /// Trauma - The reward for this bounty when it was created.
+    /// </summary>
+    [DataField]
+    public int Reward { get; init; }
+
     public CargoBountyHistoryData(CargoBountyData bounty, BountyResult result, TimeSpan timestamp, string? actorName)
     {
+        Reward = bounty.Reward; // Trauma
         Bounty = bounty.Bounty;
         Result = result;
         Id = bounty.Id;

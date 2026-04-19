@@ -14,7 +14,6 @@ using Content.Trauma.Server.Decals;
 using Content.Trauma.Shared.Footprints;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Configuration;
 using System.Numerics;
 

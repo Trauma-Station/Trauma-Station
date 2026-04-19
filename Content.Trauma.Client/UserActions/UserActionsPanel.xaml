@@ -5,7 +5,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <controls:UserActionsPanel
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Trauma.Client.UserActions"
-    xmlns:tabs="clr-namespace:Content.Trauma.Client.UserActions.Tabs">
+    xmlns:tabs="clr-namespace:Content.Trauma.Client.UserActions.Tabs"
+    VerticalExpand="True">
 
     <PanelContainer StyleClasses="BackgroundDark" Name="MainPanel" MinWidth="300" MinHeight="190" VerticalExpand="True" HorizontalExpand="True">
 

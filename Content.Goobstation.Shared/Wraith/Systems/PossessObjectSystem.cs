@@ -6,7 +6,6 @@ using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Revenant.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 

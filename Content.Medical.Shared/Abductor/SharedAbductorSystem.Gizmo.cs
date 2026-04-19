@@ -9,9 +9,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Abductor;

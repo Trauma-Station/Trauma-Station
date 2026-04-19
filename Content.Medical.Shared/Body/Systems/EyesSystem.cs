@@ -7,7 +7,6 @@ using Content.Shared.Body;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.Body;
 

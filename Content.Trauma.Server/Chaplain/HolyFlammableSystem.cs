@@ -289,6 +289,9 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     public void OnRemove(Entity<ShouldTakeHolyComponent> ent, ref ComponentRemove args)
     {
+        if (TerminatingOrDeleted(ent))
+            return;
+
         HolyExtinguish(ent);
         RemComp<HolyFlammableComponent>(ent);
         RemComp<HolyIgniteOnCollideComponent>(ent);

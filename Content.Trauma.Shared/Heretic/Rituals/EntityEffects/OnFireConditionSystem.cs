@@ -2,7 +2,6 @@
 
 using Content.Shared.Atmos.Components;
 using Content.Shared.EntityConditions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Rituals.EntityEffects;
 

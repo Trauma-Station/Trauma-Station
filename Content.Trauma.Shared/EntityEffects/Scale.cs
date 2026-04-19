@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.Sprite;
-using Robust.Shared.Prototypes;
 using System.Numerics;
 
 namespace Content.Trauma.Shared.EntityEffects;

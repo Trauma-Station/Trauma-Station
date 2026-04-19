@@ -3,7 +3,6 @@
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
 using Content.Trauma.Common.Wizard;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Wizard.EventSpells;
 

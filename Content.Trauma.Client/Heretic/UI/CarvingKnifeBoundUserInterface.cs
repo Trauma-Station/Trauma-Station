@@ -5,7 +5,6 @@ using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Heretic.UI;
 

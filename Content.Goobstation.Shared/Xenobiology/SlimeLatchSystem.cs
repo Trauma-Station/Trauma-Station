@@ -25,7 +25,7 @@ namespace Content.Goobstation.Shared.Xenobiology;
 // This handles any actions that slime mobs may have.
 public sealed partial class SlimeLatchSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -34,6 +34,12 @@ public sealed partial class SlimeLatchSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private readonly EntityQuery<HungerComponent> _hungerQuery = default!;
+    [Dependency] private readonly EntityQuery<SlimeComponent> _slimeQuery = default!;
+    [Dependency] private readonly EntityQuery<XenoVacuumTankComponent> _tankQuery = default!;
+
+    private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
+    private TimeSpan _nextUpdate;
 
     public override void Initialize()
     {
@@ -55,35 +61,40 @@ public sealed partial class SlimeLatchSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var sodQuery = EntityQueryEnumerator<SlimeDamageOvertimeComponent>();
-        while (sodQuery.MoveNext(out var uid, out var dotComp))
-            UpdateHunger((uid, dotComp));
+        var now = _timing.CurTime;
+        if (now < _nextUpdate)
+            return;
+
+        _nextUpdate = now + _updateDelay;
+
+        var query = EntityQueryEnumerator<SlimeDamageOvertimeComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (_mobState.IsDead(uid))
+                continue;
+
+            UpdateHunger((uid, comp));
+        }
     }
 
     private void UpdateHunger(Entity<SlimeDamageOvertimeComponent> ent)
     {
-        if (_gameTiming.CurTime < ent.Comp.NextTickTime || _mobState.IsDead(ent))
-            return;
-
         var addedHunger = (float) ent.Comp.Damage.GetTotal();
-        ent.Comp.NextTickTime = _gameTiming.CurTime + ent.Comp.Interval;
         _damageable.ChangeDamage(ent.Owner, ent.Comp.Damage, ignoreResistances: true, targetPart: TargetBodyPart.All);
 
-        if (ent.Comp.SourceEntityUid is { } source && TryComp<HungerComponent>(ent.Comp.SourceEntityUid, out var hunger))
+        if (ent.Comp.SourceEntityUid is { } source && _hungerQuery.TryComp(ent.Comp.SourceEntityUid, out var hunger))
         {
             _hunger.ModifyHunger(source, addedHunger, hunger);
-            Dirty(source, hunger);
         }
     }
 
     private void OnMobStateChangedSOD(Entity<SlimeDamageOvertimeComponent> ent, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState != MobState.Dead)
+        if (args.NewMobState != MobState.Dead || ent.Comp.SourceEntityUid is not {} source)
             return;
 
-        var source = ent.Comp.SourceEntityUid;
-        if (source.HasValue && TryComp<SlimeComponent>(source, out var slime))
-            Unlatch((source.Value, slime));
+        if (_slimeQuery.TryComp(source, out var slime))
+            Unlatch((source, slime));
     }
 
     private void OnMobStateChangedSlime(Entity<SlimeComponent> ent, ref MobStateChangedEvent args)
@@ -118,7 +129,7 @@ public sealed partial class SlimeLatchSystem : EntitySystem
     private void OnRemovedFromContainer(Entity<SlimeComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         // this check is probably useless but jic
-        if (!HasComp<XenoVacuumTankComponent>(args.Container.Owner))
+        if (!_tankQuery.HasComp(args.Container.Owner))
             return;
 
         Unlatch(ent);
@@ -126,7 +137,7 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
     private void OnInsertedIntoContainer(Entity<SlimeComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        if (!HasComp<XenoVacuumTankComponent>(args.Container.Owner))
+        if (!_tankQuery.HasComp(args.Container.Owner))
             return;
 
         Unlatch(ent);
@@ -134,12 +145,14 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
     private void OnLatchAttempt(SlimeLatchEvent args)
     {
+        // TODO: just subscribe for SlimeComponent bruh
+        var user = args.Performer;
         if (TerminatingOrDeleted(args.Target)
-        || TerminatingOrDeleted(args.Performer)
-        || !TryComp<SlimeComponent>(args.Performer, out var slime))
+        || TerminatingOrDeleted(user)
+        || !_slimeQuery.TryComp(user, out var slime))
             return;
 
-        var ent = new Entity<SlimeComponent>(args.Performer, slime);
+        var ent = new Entity<SlimeComponent>(user, slime);
 
         if (IsLatched(ent))
         {
@@ -147,9 +160,9 @@ public sealed partial class SlimeLatchSystem : EntitySystem
             return;
         }
 
-        if (CanLatch((args.Performer, slime), args.Target))
+        if (CanLatch(ent, args.Target))
         {
-            StartSlimeLatchDoAfter((args.Performer, slime), args.Target);
+            StartSlimeLatchDoAfter(ent, args.Target);
             return;
         }
 

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Mobs.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;

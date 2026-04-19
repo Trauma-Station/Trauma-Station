@@ -24,11 +24,6 @@
   rule: ShadowlingMidround
 
 - type: ninjaHackingThreat
-  id: MinorAntags
-  announcement: terror-minor-antags
-  rule: MidroundMinorAntagsRule
-
-- type: ninjaHackingThreat
   id: WailingHorse
   announcement: terror-shadows
   rule: WailingHorseQuiet

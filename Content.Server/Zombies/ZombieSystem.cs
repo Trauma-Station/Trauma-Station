@@ -143,7 +143,7 @@ namespace Content.Server.Zombies
                     : 1f;
 
                 _damageable.ChangeDamage((uid, damage), comp.Damage * multiplier, true, false,
-                    targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed
+                    targetPart: TargetBodyPart.Vital, splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed
             }
 
             // Heal the zombified

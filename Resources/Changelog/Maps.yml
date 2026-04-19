@@ -262,3 +262,19 @@ Entries:
   id: 28
   time: '2026-04-03T14:19:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1824
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed some substation lockers that had regular walls to use reinforced
+      walls.
+  id: 29
+  time: '2026-04-06T10:19:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1883
+- author: Kirikii
+  changes:
+  - type: Tweak
+    message: 'Nume: Minor changes.'
+  id: 30
+  time: '2026-04-09T10:01:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1884

@@ -15,7 +15,6 @@ using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.EventSpells;
 using Robust.Server.Audio;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wizard.Systems;
 

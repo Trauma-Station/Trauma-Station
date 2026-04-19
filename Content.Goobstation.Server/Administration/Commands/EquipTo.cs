@@ -8,7 +8,6 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Robust.Shared.Console;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Administration.Commands;
 

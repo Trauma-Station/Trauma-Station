@@ -8,8 +8,6 @@ using Content.Shared.Movement.Systems;
 using Content.Trauma.Common.Body;
 using Content.Trauma.Common.Silicon;
 using Content.Trauma.Shared.Silicon.Components;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Silicon.Systems;
 

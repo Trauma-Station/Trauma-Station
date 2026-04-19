@@ -9,7 +9,6 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 
@@ -83,6 +82,7 @@ public abstract class SharedBlinkSystem : EntitySystem
             targetPos = coords + (msg.Direction.Length() > blink.Distance ? dir * blink.Distance : msg.Direction);
 
         _useDelay.TryResetDelay((weapon, delay), id: blink.BlinkDelay);
+        // not using teleport system to you can still pull mobs while using it for skill expression ig
         _transform.SetWorldPosition(user, targetPos);
         _audio.PlayPredicted(blink.BlinkSound, user, user);
         if (_net.IsServer) // Prediction issues

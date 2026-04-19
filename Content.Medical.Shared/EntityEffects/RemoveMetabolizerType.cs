@@ -3,7 +3,6 @@
 using Content.Medical.Shared.EntityEffects;
 using Content.Shared.EntityEffects;
 using Content.Shared.Metabolism;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Server.EntityEffects;
 

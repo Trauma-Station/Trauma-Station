@@ -7,7 +7,6 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 

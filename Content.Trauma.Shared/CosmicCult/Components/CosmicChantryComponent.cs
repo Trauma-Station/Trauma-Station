@@ -2,9 +2,6 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.CosmicCult.Components;
@@ -22,7 +19,7 @@ public sealed partial class CosmicChantryComponent : Component
     [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan CountdownTimer = default!;
 
-    [DataField] public TimeSpan SpawningTime = TimeSpan.FromSeconds(2.4);
+    [DataField] public TimeSpan SpawningTime = TimeSpan.FromSeconds(0.9);
 
     [DataField] public TimeSpan EventTime = TimeSpan.FromSeconds(150);
 

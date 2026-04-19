@@ -39,7 +39,6 @@ using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Content.Shared.Actions.Components;
 using Content.Goobstation.Shared.Devour.Events;
 using Content.Server.Actions;

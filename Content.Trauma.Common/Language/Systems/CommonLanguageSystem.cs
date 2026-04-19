@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Prototypes;
 using Content.Trauma.Common.Language.Components;
 
 namespace Content.Trauma.Common.Language.Systems;
@@ -58,7 +57,7 @@ public abstract class CommonLanguageSystem : EntitySystem
     /// <summary>
     ///     Adds a new language to the respective lists of intrinsically known languages of the given entity.
     /// </summary>
-    public abstract void AddLanguage(EntityUid uid, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true);
+    public abstract void AddLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true);
 
     /// <summary>
     ///     Removes a language from the respective lists of intrinsically known languages of the given entity.

@@ -2,7 +2,6 @@
 
 using System.Numerics;
 using Content.Shared.DoAfter;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Durability.Events;
 

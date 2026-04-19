@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;

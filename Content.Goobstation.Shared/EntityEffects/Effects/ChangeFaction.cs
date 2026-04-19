@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.NPC;
 using Content.Shared.EntityEffects;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 

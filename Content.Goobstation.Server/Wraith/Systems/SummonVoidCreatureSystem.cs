@@ -8,7 +8,6 @@ using Content.Server.Mind;
 using Content.Shared.Prototypes;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wraith.Systems;
 

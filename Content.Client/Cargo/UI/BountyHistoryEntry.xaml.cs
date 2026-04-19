@@ -31,7 +31,7 @@ public sealed partial class BountyHistoryEntry : BoxContainer
         }
 
         ManifestLabel.SetMarkup(Loc.GetString("bounty-console-manifest-label", ("item", string.Join(", ", items))));
-        RewardLabel.SetMarkup(Loc.GetString("bounty-console-reward-label", ("reward", bountyPrototype.Reward)));
+        RewardLabel.SetMarkup(Loc.GetString("bounty-console-reward-label", ("reward", bounty.Reward))); // Trauma - use reward on the history data instead of the prototype
         IdLabel.SetMarkup(Loc.GetString("bounty-console-id-label", ("id", bounty.Id)));
 
         TimestampLabel.SetMarkup(bounty.Timestamp.ToString(@"hh\:mm\:ss"));

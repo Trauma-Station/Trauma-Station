@@ -21,10 +21,6 @@
     state: icon
   - type: Clothing
     sprite: _Goobstation/Heretic/amber_focus.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Holy: 1.25
 
 - type: entity
   parent: ClothingNeckAmberFocus

@@ -9,11 +9,13 @@ public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
 {
     protected override void PlayAnimation(EntityUid user)
     {
-        var filter = Filter.Pvs(user, entityManager: EntityManager);
+        RaiseNetworkEvent(new FlipOnHitEvent(GetNetEntity(user)),
+            Filter.PvsExcept(user, entityManager: EntityManager));
+    }
 
-        if (TryComp<ActorComponent>(user, out var actor))
-            filter.RemovePlayer(actor.PlayerSession);
-
-        RaiseNetworkEvent(new FlipOnHitEvent(GetNetEntity(user)), filter);
+    protected override void StopAnimation(EntityUid user)
+    {
+        RaiseNetworkEvent(new FlipOnHitStopEvent(GetNetEntity(user)),
+            Filter.PvsExcept(user, entityManager: EntityManager));
     }
 }

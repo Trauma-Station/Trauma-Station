@@ -45,6 +45,7 @@ using Content.Shared.Roles.Components;
 using Content.Shared.Speech.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Wizard;
+using Content.Trauma.Server.Knowledge;
 using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.BindSoul;
@@ -84,6 +85,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly KnowledgeSystem _knowledge = default!;
 
     public override event Action? StopTargeting;
 
@@ -330,6 +332,8 @@ public sealed class SpellsSystem : SharedSpellsSystem
         _identity.QueueIdentityUpdate(newEntity);
 
         Mind.TransferTo(mind, newEntity, mind: mindComponent);
+
+        _knowledge.TransferKnowledge(oldEnt, newEntity);
 
         Faction.ClearFactions(newEntity, false);
         Faction.AddFaction(newEntity, WizardRuleSystem.Faction);

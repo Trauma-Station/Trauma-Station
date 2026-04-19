@@ -5,7 +5,6 @@ using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
-using Robust.Shared.Prototypes;
 
 
 namespace Content.Goobstation.Shared.CustomLawboard;

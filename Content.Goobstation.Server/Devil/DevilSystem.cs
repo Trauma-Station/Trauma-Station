@@ -48,7 +48,6 @@ using Content.Trauma.Common.Silicon;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 

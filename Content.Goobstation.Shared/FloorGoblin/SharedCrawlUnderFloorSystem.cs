@@ -17,7 +17,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
