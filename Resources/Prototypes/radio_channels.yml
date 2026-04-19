@@ -50,13 +50,12 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Trauma - Remove common in favor of phones
-# - type: radioChannel
-#  id: Common
-#  name: chat-radio-common
-#  keycode: ";"
-#  frequency: 1459
-#  color: "#2cdb2c"
+- type: radioChannel
+  id: Common
+  name: chat-radio-common
+  keycode: ";"
+  frequency: 1459
+  color: "#2cdb2c"
 
 - type: radioChannel
   id: CentCom
