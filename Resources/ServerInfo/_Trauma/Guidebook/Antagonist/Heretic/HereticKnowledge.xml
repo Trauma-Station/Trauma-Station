@@ -166,11 +166,11 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Corpse, Latex gloves, Armor</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a shattered risen, a creature that has high health and regeneration, has two strong melee weapons, but cannot use items or clothes.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Blood Cleave</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Crimson Cleave</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">2</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Side</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Causes heavy bleeding to targets in a moderate area.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Causes heavy bleeding to targets in a moderate area, heals you for every target.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Forest Abomination</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">2</Box></ColorBox>

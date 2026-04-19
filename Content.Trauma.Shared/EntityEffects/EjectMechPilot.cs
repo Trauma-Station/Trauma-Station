@@ -1,8 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.EntityEffects;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Stunnable;
 
-namespace Content.Shared.EntityEffects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 public sealed partial class EjectMechPilot : EntityEffectBase<EjectMechPilot>
 {

@@ -207,6 +207,7 @@
     arc: 360 # interact despite grilles
   - type: Tag
     tags:
+      - Directional # Trauma
       - Window
   - type: MeleeSound
     soundGroups:
