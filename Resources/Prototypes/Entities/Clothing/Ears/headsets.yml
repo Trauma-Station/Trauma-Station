@@ -53,7 +53,7 @@
     containers:
       key_slots:
       - EncryptionKeyCargo
-#      - EncryptionKeyCommon Trauma
+#      - EncryptionKeyCommon # Trauma
   - type: Sprite
     sprite: Clothing/Ears/Headsets/cargo.rsi
   - type: Clothing
@@ -81,7 +81,7 @@
       key_slots:
       - EncryptionKeyCargo
       - EncryptionKeyCommand
-#      - EncryptionKeyCommon Trauma
+#      - EncryptionKeyCommon # Trauma
 
 - type: entity
   parent: [ ClothingHeadset, BaseCentcommContraband ]
