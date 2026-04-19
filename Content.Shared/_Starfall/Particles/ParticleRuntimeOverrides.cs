@@ -9,7 +9,7 @@ namespace Content.Shared._Starfall.Particles;
 public sealed class ParticleRuntimeOverrides
 {
     // =^..^= Visuals =^..^=
-
+    
     public Color? StartColor; // self-explanatory lerps to EndColor over the particle's lifetime linearly.
     public Color? EndColor; // self-explanatory
 
@@ -44,10 +44,10 @@ public sealed class ParticleRuntimeOverrides
 
     // =^..^= Rotation =^..^=
 
-    public float? StartRotation; // Initial rotation of each particle at spawn, in radians. 0 = facing right, positive = clockwise.
-    public float? StartRotationVariance; // Random variance added to each particle's initial rotation at spawn, in radians, in the range [-StartRotationVariance, StartRotationVariance].
-    public float? RotationSpeed; // Spin rate of each particle in radians per second. Positive values spin clockwise, negative values spin counterclockwise.
-    public float? RotationSpeedVariance; // Random variance added to each particle's rotation speed at spawn, in radians per second, in the range [-RotationSpeedVariance, RotationSpeedVariance].
+    public Angle? StartRotation; // Initial rotation of each particle at spawn, in radians. 0 = facing right, positive = clockwise.
+    public Angle? StartRotationVariance; // Random variance added to each particle's initial rotation at spawn, in radians, in the range [-StartRotationVariance, StartRotationVariance].
+    public Angle? RotationSpeed; // Spin rate of each particle in radians per second. Positive values spin clockwise, negative values spin counterclockwise.
+    public Angle? RotationSpeedVariance; // Random variance added to each particle's rotation speed at spawn, in radians per second, in the range [-RotationSpeedVariance, RotationSpeedVariance].
 
     // =^..^= Emission =^..^=
 
@@ -56,6 +56,6 @@ public sealed class ParticleRuntimeOverrides
                           // Increasing MaxCount after spawn causes new allocations beyond the original pool size.
                           // Decreasing it is safe but the extra slots stay allocated until the emitter is destroyed.
     public TimeSpan? Duration; // How long the emitter produces new particles before stopping. Existing particles live out their lifetimes. Null means infinite duration.
-    public float? SpreadAngle; // Random variance added to each particle's initial movement angle at spawn, in radians, in the range [-SpreadAngle/2, SpreadAngle/2]. 0 means all particles move in the same direction.
-    public float? EmitAngle; // Base movement angle of each particle at spawn, in radians. 0 = facing right, positive = clockwise. SpreadAngle is added on top of this base angle as a random variance.
+    public Angle? SpreadAngle; // Random variance added to each particle's initial movement angle at spawn, in radians, in the range [-SpreadAngle/2, SpreadAngle/2]. 0 means all particles move in the same direction.
+    public Angle? EmitAngle; // Base movement angle of each particle at spawn, in radians. 0 = facing right, positive = clockwise. SpreadAngle is added on top of this base angle as a random variance.
 }

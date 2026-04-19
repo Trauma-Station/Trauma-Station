@@ -187,16 +187,16 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     // =^..^= Rotation =^..^=
 
     /// <summary>Starting rotation in degrees.</summary>
-    [DataField] public float StartRotation { get; private set; }
+    [DataField] public Angle StartRotation { get; private set; }
 
     /// <summary>Per-particle starting rotation variance in degrees. 180 = fully random.</summary>
-    [DataField] public float StartRotationVariance { get; private set; }
+    [DataField] public Angle StartRotationVariance { get; private set; }
 
     /// <summary>Spin speed in degrees per second.</summary>
-    [DataField] public float RotationSpeed { get; private set; }
+    [DataField] public Angle RotationSpeed { get; private set; }
 
     /// <summary>Per-particle spin speed variance in degrees per second.</summary>
-    [DataField] public float RotationSpeedVariance { get; private set; }
+    [DataField] public Angle RotationSpeedVariance { get; private set; }
 
     // =^..^= Emission =^..^=
 
@@ -242,10 +242,10 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     // =^..^= Angle =^..^=
 
     /// <summary>Emission cone spread in degrees. 360 = omnidirectional.</summary>
-    [DataField] public float SpreadAngle { get; private set; } = 360f;
+    [DataField] public Angle SpreadAngle { get; private set; } = Angle.FromDegrees(360);
 
     /// <summary>Emission direction bias in degrees. 0 = screen-up.</summary>
-    [DataField] public float EmitAngle { get; private set; }
+    [DataField] public Angle EmitAngle { get; private set; }
 
     // =^..^= Sub-emitters =^..^=
 

@@ -215,7 +215,7 @@ public sealed partial class ParticleSystem : EntitySystem
         {
             dst.EmitAngle = src.EmitAngle;
             if (emitter.TargetEntity == null && emitter.TargetPosition == null)
-                emitter.EffectiveEmitAngle = src.EmitAngle.Value * MathF.PI / 180f;
+                emitter.EffectiveEmitAngle = (float)src.EmitAngle.Value.Theta;
         }
     }
 
@@ -319,7 +319,7 @@ public sealed partial class ParticleSystem : EntitySystem
         };
         ResolveFrames(emitter);
 
-        emitter.EffectiveEmitAngle = emitter.Proto.EmitAngle * MathF.PI / 180f;
+        emitter.EffectiveEmitAngle = (float)emitter.Proto.EmitAngle.Theta;
 
         foreach (var _ in proto.Bursts)
             emitter.FiredBursts.Add(false);
@@ -423,8 +423,8 @@ public sealed partial class ParticleSystem : EntitySystem
         else
         {
             // No target, keep in sync with the overridden emit angle if set, otherwise prototype default
-            var baseAngleDeg = emitter.Overrides?.EmitAngle ?? emitter.Proto.EmitAngle;
-            emitter.EffectiveEmitAngle = baseAngleDeg * MathF.PI / 180f;
+            var baseAngle = emitter.Overrides?.EmitAngle ?? emitter.Proto.EmitAngle;
+            emitter.EffectiveEmitAngle = (float)baseAngle.Theta;
         }
 
         // Resolve overridable scalars once per tick
@@ -577,21 +577,21 @@ public sealed partial class ParticleSystem : EntitySystem
         var ovr = emitter.Overrides;
         var lifetime        = (float)(ovr?.Lifetime         ?? proto.Lifetime).TotalSeconds;
         var lifetimeVar     = (float)(ovr?.LifetimeVariance  ?? proto.LifetimeVariance).TotalSeconds;
-        var spreadAngle     = ovr?.SpreadAngle       ?? proto.SpreadAngle;
+        var spreadAngle     = (float)(ovr?.SpreadAngle?.Theta     ?? proto.SpreadAngle.Theta);
         var speed0          = ovr?.Speed             ?? proto.Speed;
         var speedVar        = ovr?.SpeedVariance     ?? proto.SpeedVariance;
         var sizeVar         = ovr?.SizeVariance      ?? proto.SizeVariance;
         var inheritVel      = ovr?.InheritVelocity   ?? proto.InheritVelocity;
-        var startRot        = ovr?.StartRotation     ?? proto.StartRotation;
-        var startRotVar     = ovr?.StartRotationVariance ?? proto.StartRotationVariance;
-        var rotSpeed        = ovr?.RotationSpeed     ?? proto.RotationSpeed;
-        var rotSpeedVar     = ovr?.RotationSpeedVariance ?? proto.RotationSpeedVariance;
+        var startRot        = (float)(ovr?.StartRotation?.Theta         ?? proto.StartRotation.Theta);
+        var startRotVar     = (float)(ovr?.StartRotationVariance?.Theta ?? proto.StartRotationVariance.Theta);
+        var rotSpeed        = (float)(ovr?.RotationSpeed?.Theta         ?? proto.RotationSpeed.Theta);
+        var rotSpeedVar     = (float)(ovr?.RotationSpeedVariance?.Theta ?? proto.RotationSpeedVariance.Theta);
 
         p.Lifetime = TimeSpan.FromSeconds(lifetime + _random.NextFloat(-lifetimeVar, lifetimeVar));
         if (p.Lifetime < TimeSpan.FromSeconds(0.05))
             p.Lifetime = TimeSpan.FromSeconds(0.05);
 
-        var spreadHalf = spreadAngle * 0.5f * MathF.PI / 180f;
+        var spreadHalf = spreadAngle * 0.5f;
         var angle = emitter.EffectiveEmitAngle + _random.NextFloat(-spreadHalf, spreadHalf);
 
         var speed = speed0 + _random.NextFloat(-speedVar, speedVar);
@@ -622,9 +622,8 @@ public sealed partial class ParticleSystem : EntitySystem
         else
             p.SizeMultiplier = 1f;
 
-        const float deg2Rad = MathF.PI / 180f;
-        p.Rotation = (startRot + _random.NextFloat(-startRotVar, startRotVar)) * deg2Rad;
-        p.RotationSpeed = (rotSpeed + _random.NextFloat(-rotSpeedVar, rotSpeedVar)) * deg2Rad;
+        p.Rotation = startRot + _random.NextFloat(-startRotVar, startRotVar);
+        p.RotationSpeed = rotSpeed + _random.NextFloat(-rotSpeedVar, rotSpeedVar);
 
         // Unique noise offset so each particle gets different turbulence
         p.NoiseOffset = new Vector2(_random.NextFloat(-100f, 100f), _random.NextFloat(-100f, 100f));
