@@ -4,7 +4,7 @@ This is a fork of [SS14](https://github.com/space-wizards/space-station-14) call
 
 ## Links
 
-[Trauma Station Discord](https://discord.gg/7ZKs7HadK5) | [Devbus Discord Server](https://discord.gg/f3rJaCuK)
+[Trauma Station Discord](https://discord.gg/7ZKs7HadK5) | [Trauma Station Wiki](https://wiki.traumastation.com/wiki/Main_Page) | [Devbus Discord Server](https://discord.gg/f3rJaCuK) 
 
 ## Documentation/Wiki
 
