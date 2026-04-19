@@ -72,6 +72,7 @@ public sealed partial class ParticleSystem : EntitySystem
     /// </summary>
     private const int IgnoreQualityMaxParticles = 64;
 
+    #region =^..^= Particle System API =^..^=
     public override void Initialize()
     {
         base.Initialize();
@@ -324,7 +325,9 @@ public sealed partial class ParticleSystem : EntitySystem
             SpawnEffect(id, coords);
     }
 
-    // =^..^= Everything Else ig =^..^=
+    #endregion
+
+    #region =^..^= Emitter Internals =^..^=
 
     // <summary>Creates a new ActiveEmitter from a prototype and initial state.</summary>
     private ActiveEmitter CreateEmitter(ParticleEffectPrototype proto, MapCoordinates coords, EntityUid? attached)
@@ -459,12 +462,12 @@ public sealed partial class ParticleSystem : EntitySystem
         var emissionRate = ovr?.EmissionRate  ?? proto.EmissionRate;
         var maxCount     = ovr?.MaxCount      ?? proto.MaxCount;
 
-        // =^..^= Advance age and check duration =^..^=
+        // Advance age and check duration
         emitter.Age += TimeSpan.FromSeconds(dt);
         if (!emitter.Exhausted && duration > 0f && emitter.Age.TotalSeconds >= duration)
             emitter.Exhausted = true;
 
-        // =^..^= RSI animation =^..^=
+        // RSI animation
         if (emitter.Delays.Length > 0)
         {
             emitter.AnimTimer += dt;
@@ -475,7 +478,7 @@ public sealed partial class ParticleSystem : EntitySystem
             }
         }
 
-        // =^..^= Simulate live particles =^..^=
+        // Simulate live particles
         int liveCount = 0;
         foreach (var p in emitter.Particles)
         {
@@ -503,7 +506,7 @@ public sealed partial class ParticleSystem : EntitySystem
             SimulateParticle(p, dt, drag, constForce, termSpeed, gravity, noiseStr, noiseFreq, proto);
         }
 
-        // =^..^= Timed bursts =^..^=
+        // Timed bursts
         if (!emitter.Exhausted)
         {
             for (int b = 0; b < proto.Bursts.Count; b++)
@@ -526,7 +529,7 @@ public sealed partial class ParticleSystem : EntitySystem
             }
         }
 
-        // =^..^= Continuous emission =^..^=
+        // Continuous emission
         if (!emitter.Exhausted && !proto.Burst)
         {
             // Bypass quality settings for gameplay-critical particles
@@ -668,7 +671,9 @@ public sealed partial class ParticleSystem : EntitySystem
         }
     }
 
-    // =^..^= Helpers =^..^=
+    #endregion
+
+    #region =^..^= Helpers =^..^=
 
     /// <summary>
     /// Advances a single live particle's simulation by one step.
@@ -811,7 +816,10 @@ public sealed partial class ParticleSystem : EntitySystem
         }
     }
 
-    // =^..^= Curve samplers (public so the overlay can use them) =^..^=
+    #endregion
+
+    #region =^..^= Curve Samplers =^..^=
+
     // ᓚᘏᗢ <( math scares me
     public static float SampleCurve(List<ParticleCurveKey> curve, float t)
     {
@@ -900,7 +908,9 @@ public sealed partial class ParticleSystem : EntitySystem
         return Vector2.Lerp(prev.Value, next.Value, (t - prev.Time) / span);
     }
 
-    // =^..^= Value noise =^..^=
+    #endregion
+
+    #region =^..^= Value Noise =^..^=
 
     /// <summary>
     /// A simple 2D value noise function for particle turbulence. Not Perlin or Simplex, just a grid of random values with smooth interpolation.
@@ -932,4 +942,6 @@ public sealed partial class ParticleSystem : EntitySystem
         n = (n << 13) ^ n;
         return 1f - ((n * (n * n * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824f;
     }
+
+    #endregion
 }

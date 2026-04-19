@@ -8,8 +8,8 @@ namespace Content.Shared._Starfall.Particles;
 /// </summary>
 public sealed class ParticleRuntimeOverrides
 {
-    // =^..^= Visuals =^..^=
-    
+    #region =^..^= Visuals =^..^=
+
     public Color? StartColor; // self-explanatory lerps to EndColor over the particle's lifetime linearly.
     public Color? EndColor; // self-explanatory
 
@@ -18,19 +18,21 @@ public sealed class ParticleRuntimeOverrides
 
     public string? Shader; // The shader to use for this emitter's particles. Falls back to the prototype's shader if null.
     public int? RenderLayer; // The render layer to draw these particles on. Falls back to the prototype's layer if null.
-
-    // =^..^= Size =^..^=
+    #endregion
+    #region =^..^= Size =^..^=
 
     public float? ParticleSize; // The base size of each particle.
     public float? SizeVariance; // Random variance added to each particle's size at spawn, in the range [-SizeVariance, SizeVariance].
     public float? StretchFactor; // Multiplies the particle's length along its velocity vector, creating a stretched streak effect. 1.0 = normal.
 
-    // =^..^= Lifetime =^..^=
+    #endregion
+    #region  =^..^= Lifetime =^..^=
 
     public TimeSpan? Lifetime; // How long each particle lives before disappearing.
     public TimeSpan? LifetimeVariance; // Random variance added to each particle's lifetime at spawn, in the range [-LifetimeVariance, LifetimeVariance].
 
-    // =^..^= Movement =^..^=
+    #endregion
+    #region =^..^= Movement =^..^=
 
     public float? Speed; // Initial speed of each particle at spawn.
     public float? SpeedVariance; // Random variance added to each particle's initial speed at spawn, in the range [-SpeedVariance, SpeedVariance].
@@ -42,14 +44,16 @@ public sealed class ParticleRuntimeOverrides
     public float? NoiseFrequency; // Frequency of the procedural noise turbulence. Higher values create smaller, more chaotic swirls, while lower values create larger, smoother waves.
     public float? InheritVelocity; // Multiplier for how much of the emitter's current velocity is inherited by each particle at spawn. 0.0 = no inheritance, 1.0 = particles spawn with the same velocity as the emitter.
 
-    // =^..^= Rotation =^..^=
+    #endregion
+    #region =^..^= Rotation =^..^=
 
     public Angle? StartRotation; // Initial rotation of each particle at spawn, in radians. 0 = facing right, positive = clockwise.
     public Angle? StartRotationVariance; // Random variance added to each particle's initial rotation at spawn, in radians, in the range [-StartRotationVariance, StartRotationVariance].
     public Angle? RotationSpeed; // Spin rate of each particle in radians per second. Positive values spin clockwise, negative values spin counterclockwise.
     public Angle? RotationSpeedVariance; // Random variance added to each particle's rotation speed at spawn, in radians per second, in the range [-RotationSpeedVariance, RotationSpeedVariance].
 
-    // =^..^= Emission =^..^=
+    #endregion
+    #region =^..^= Emission =^..^=
 
     public float? EmissionRate; // Number of particles emitted per second while the emitter is active.
     public int? MaxCount; // Max live particles at once. Be careful raising this at runtime, the pool only grows, never shrinks.
@@ -58,4 +62,6 @@ public sealed class ParticleRuntimeOverrides
     public TimeSpan? Duration; // How long the emitter produces new particles before stopping. Existing particles live out their lifetimes. Null means infinite duration.
     public Angle? SpreadAngle; // Random variance added to each particle's initial movement angle at spawn, in radians, in the range [-SpreadAngle/2, SpreadAngle/2]. 0 means all particles move in the same direction.
     public Angle? EmitAngle; // Base movement angle of each particle at spawn, in radians. 0 = facing right, positive = clockwise. SpreadAngle is added on top of this base angle as a random variance.
+
+    #endregion
 }

@@ -62,7 +62,7 @@ public sealed partial class ParticleEffectPrototype : IPrototype
 {
     [IdDataField] public string ID { get; private set; } = default!;
 
-    // =^..^= Visuals =^..^=
+    #region =^..^= Visuals =^..^=
 
     /// <summary>Texture drawn for each particle. Supports RSI states and plain texture paths.</summary>
     [DataField(required: true)] public SpriteSpecifier Sprite { get; private set; } = default!;
@@ -99,7 +99,8 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     /// </summary>
     [DataField] public bool IgnoreQualitySettings { get; private set; }
 
-    // =^..^= Size =^..^=
+    #endregion
+    #region =^..^= Size =^..^=
 
     /// <summary>Base particle size in world units.</summary>
     [DataField] public float ParticleSize { get; private set; } = 0.2f;
@@ -118,7 +119,8 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     /// </summary>
     [DataField] public float StretchFactor { get; private set; }
 
-    // =^..^= Lifetime =^..^=
+    #endregion
+    #region =^..^= Lifetime =^..^=
 
     /// <summary>How long each particle lives.</summary>
     [DataField] public TimeSpan Lifetime { get; private set; } = TimeSpan.FromSeconds(1);
@@ -126,7 +128,8 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     /// <summary>Per-particle lifetime variance.</summary>
     [DataField] public TimeSpan LifetimeVariance { get; private set; } = TimeSpan.FromSeconds(0.2);
 
-    // =^..^= Movement =^..^=
+    #endregion
+    #region =^..^= Movement =^..^=
 
     /// <summary>Base spawn speed in world units per second.</summary>
     [DataField] public float Speed { get; private set; } = 1f;
@@ -184,7 +187,8 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     /// </summary>
     [DataField] public float InheritVelocity { get; private set; }
 
-    // =^..^= Rotation =^..^=
+    #endregion
+    #region =^..^= Rotation =^..^=
 
     /// <summary>Starting rotation in degrees.</summary>
     [DataField] public Angle StartRotation { get; private set; }
@@ -198,7 +202,8 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     /// <summary>Per-particle spin speed variance in degrees per second.</summary>
     [DataField] public Angle RotationSpeedVariance { get; private set; }
 
-    // =^..^= Emission =^..^=
+    #endregion
+    #region =^..^= Emission =^..^=
 
     /// <summary>Particles emitted per second. Ignored when <see cref="Burst"/> is true or <see cref="Bursts"/> is non-empty.</summary>
     [DataField] public float EmissionRate { get; private set; } = 20f;
@@ -227,7 +232,8 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     /// <summary>How long the emitter runs. 0 = forever.</summary>
     [DataField] public TimeSpan Duration { get; private set; }
 
-    // =^..^= Space =^..^=
+    #endregion
+    #region =^..^= Space =^..^=
 
     /// <summary>
     /// When true (default), particles simulate in world space and trail behind moving emitters.
@@ -235,11 +241,13 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     /// </summary>
     [DataField] public bool WorldSpace { get; private set; } = true;
 
-    // =^..^= Shape =^..^=
+    #endregion
+    #region =^..^= Shape =^..^=
 
     [DataField] public EmissionShapeData Shape { get; private set; } = new();
 
-    // =^..^= Angle =^..^=
+    #endregion
+    #region =^..^= Angle =^..^=
 
     /// <summary>Emission cone spread in degrees. 360 = omnidirectional.</summary>
     [DataField] public Angle SpreadAngle { get; private set; } = Angle.FromDegrees(360);
@@ -247,11 +255,13 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     /// <summary>Emission direction bias in degrees. 0 = screen-up.</summary>
     [DataField] public Angle EmitAngle { get; private set; }
 
-    // =^..^= Sub-emitters =^..^=
+    #endregion
+    #region =^..^= Sub-emitters =^..^=
 
     /// <summary>Spawns this effect at each particle's position when it dies.</summary>
     [DataField] public ProtoId<ParticleEffectPrototype>? SubEmitterOnDeath { get; private set; }
 
     /// <summary>Spawns this effect at each particle's position when it spawns.</summary>
     [DataField] public ProtoId<ParticleEffectPrototype>? SubEmitterOnSpawn { get; private set; }
+    #endregion
 }
