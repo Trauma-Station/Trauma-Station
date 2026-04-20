@@ -14,9 +14,6 @@
         - MachineMask
         layer:
         - WallLayer
-  - type: InteractionOutline
-  - type: Anchorable
-  - type: Rotatable
   - type: SyncSprite
   - type: Sprite
     sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_field_generator.rsi
@@ -80,8 +77,6 @@
     tags:
     - Wall
   - type: ExaminableBattery
-  - type: BatteryCharger
-    voltage: Medium
   - type: WiresPanel
   - type: Lock
     locked: false
@@ -90,6 +85,7 @@
     maxCharge: 5000
     startingCharge: 0
   - type: ApcPowerReceiver
+    powerLoad: 200
   - type: ApcPowerReceiverBattery
     batteryRechargeRate: 200
     idleLoad: 200
@@ -190,6 +186,7 @@
   components:
   - type: GenericFieldGenerator
     enabled: true
+  - type: ActiveFieldGenerator
 
 #region Holographic Barrier
 
@@ -230,6 +227,7 @@
   components:
   - type: GenericFieldGenerator
     enabled: true
+  - type: ActiveFieldGenerator
 
 #region Fields
 

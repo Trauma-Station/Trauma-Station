@@ -3,11 +3,6 @@
 using Content.Shared.DeviceLinking;
 using Content.Shared.Physics;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Trauma.Shared.HolographicProjector;
 
@@ -20,18 +15,6 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     /// </summary>
     [DataField]
     public float MaxLength = 12f;
-
-    /// <summary>
-    /// How much energy the generator draws while active?
-    /// </summary>
-    [DataField]
-    public float ActiveLoad = 2000f;
-
-    /// <summary>
-    /// How much energy the generator draws while not active?
-    /// </summary>
-    [DataField]
-    public float PassiveLoad = 200f;
 
     /// <summary>
     /// Is the generator toggled on?
@@ -69,24 +52,15 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     /// A list of fields created by this generator.
     /// Stores a list of fields connected between generators in this direction.
     /// </summary>
-    [ViewVariables]
-    public List<EntityUid> ConnectedFields = [];
-
-    /// <summary>
-    /// If a generator is charged and enabled, how often should it try to form a connection?
-    /// </summary>
     [DataField]
-    public TimeSpan ReconnectTime = TimeSpan.FromSeconds(1);
-
-    [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    public TimeSpan ReconnectTimer;
+    public List<EntityUid> ConnectedFields = [];
 
     /// <summary>
     /// What fields should this spawn?
     /// </summary>
-    [DataField("createdField", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField]
     [AutoNetworkedField]
-    public string CreatedField = "ContainmentField";
+    public EntProtoId CreatedField = "ContainmentField";
 
     //Ports
     [DataField]

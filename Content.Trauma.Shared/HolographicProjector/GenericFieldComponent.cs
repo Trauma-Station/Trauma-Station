@@ -17,7 +17,7 @@ public sealed partial class GenericFieldComponent : Component
     /// <summary>
     /// how much damage to heal per second
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public float RegenRate = -5f;
 
     /// <summary>

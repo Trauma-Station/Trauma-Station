@@ -21,11 +21,12 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _signalSystem = default!;
+    [Dependency] private readonly SharedDeviceLinkSystem _signal = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly EntityQuery<GenericFieldGeneratorComponent> _genQuery = default!;
 
     public override void Initialize()
     {
@@ -34,7 +35,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, AnchorStateChangedEvent>(OnAnchorChanged);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ReAnchorEvent>(OnReanchorEvent);
-        SubscribeLocalEvent<GenericFieldGeneratorComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
+        SubscribeLocalEvent<ActiveFieldGeneratorComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ComponentRemove>(OnComponentRemoved);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<GenericFieldGeneratorComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
@@ -46,17 +47,17 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<GenericFieldGeneratorComponent>();
+        var query = EntityQueryEnumerator<ActiveFieldGeneratorComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (_timing.CurTime < comp.ReconnectTimer
-            || !comp.Enabled
-            || !comp.Charged
-            || comp.IsConnected)
+            if (_timing.CurTime < comp.ReconnectTimer)
                 continue;
 
             comp.ReconnectTimer = _timing.CurTime + comp.ReconnectTime;
-            TryGenerateFieldConnection((uid, comp));
+            if (!_genQuery.TryComp(uid, out var generatorComp)
+            || generatorComp.IsConnected)
+                continue;
+            TryGenerateFieldConnection((uid, generatorComp));
         }
     }
 
@@ -64,8 +65,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
     private void OnStartup(Entity<GenericFieldGeneratorComponent> ent, ref ComponentStartup args)
     {
-        _signalSystem.EnsureSinkPorts(ent, ent.Comp.TogglePort, ent.Comp.OnPort, ent.Comp.OffPort);
-        _signalSystem.EnsureSourcePorts(ent, ent.Comp.ConnectionStatusPort, ent.Comp.FieldConnectedPort, ent.Comp.FieldDisconnectedPort);
+        _signal.EnsureSinkPorts(ent, ent.Comp.TogglePort, ent.Comp.OnPort, ent.Comp.OffPort);
+        _signal.EnsureSourcePorts(ent, ent.Comp.ConnectionStatusPort, ent.Comp.FieldConnectedPort, ent.Comp.FieldDisconnectedPort);
         ChangePowerVisualizer(ent);
         ChangeOnLightVisualizer(ent);
         UpdateConnectionLights(ent);
@@ -79,14 +80,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         || !transformComp.Anchored)
             return;
 
-        if (ent.Comp.Enabled)
-        {
-            TurnOff(ent, args.User);
-        }
-        else
-        {
-            TurnOn(ent, args.User);
-        }
+        ToggleGenerator(ent, args.User);
 
         args.Handled = true;
         Dirty(ent, ent.Comp);
@@ -108,10 +102,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         RemoveConnections(ent);
     }
 
-    private void OnUnanchorAttempt(EntityUid uid, GenericFieldGeneratorComponent component, UnanchorAttemptEvent args)
+    private void OnUnanchorAttempt(Entity<ActiveFieldGeneratorComponent> ent, ref UnanchorAttemptEvent args)
     {
-        if (!component.Enabled || !component.IsConnected) return;
-
         _popup.PopupPredicted(Loc.GetString("comp-genericfield-anchor-warning"), args.User, args.User, PopupType.LargeCaution);
         args.Cancel();
     }
@@ -123,6 +115,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
         _popup.PopupPredicted(Loc.GetString("comp-genericfield-turned-on"), ent, user);
         ent.Comp.Enabled = true;
+        EnsureComp<ActiveFieldGeneratorComponent>(ent);
         TryGenerateFieldConnection(ent, user);
         ChangeOnLightVisualizer(ent);
         Dirty(ent, ent.Comp);
@@ -132,9 +125,22 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     {
         _popup.PopupPredicted(Loc.GetString("comp-genericfield-turned-off"), ent, user);
         ent.Comp.Enabled = false;
+        RemComp<ActiveFieldGeneratorComponent>(ent);
         RemoveConnections(ent, user);
         ChangeOnLightVisualizer(ent);
         Dirty(ent, ent.Comp);
+    }
+
+    private void ToggleGenerator(Entity<GenericFieldGeneratorComponent> ent, EntityUid? user = null)
+    {
+        if (ent.Comp.Enabled)
+        {
+            TurnOff(ent, user);
+        }
+        else
+        {
+            TurnOn(ent, user);
+        }
     }
 
     /// <summary>
@@ -159,14 +165,14 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
         if (HasComp<DeviceLinkSourceComponent>(ent))
         {
-            _signalSystem.SendSignal(ent, ent.Comp.ConnectionStatusPort, false);
-            _signalSystem.InvokePort(ent, ent.Comp.FieldDisconnectedPort);
+            _signal.SendSignal(ent, ent.Comp.ConnectionStatusPort, false);
+            _signal.InvokePort(ent, ent.Comp.FieldDisconnectedPort);
         }
 
         if (HasComp<DeviceLinkSourceComponent>(pair))
         {
-            _signalSystem.SendSignal(pair, pair.Comp.ConnectionStatusPort, false);
-            _signalSystem.InvokePort(pair, pair.Comp.FieldDisconnectedPort);
+            _signal.SendSignal(pair, pair.Comp.ConnectionStatusPort, false);
+            _signal.InvokePort(pair, pair.Comp.FieldDisconnectedPort);
         }
 
         _popup.PopupPredicted(Loc.GetString("comp-genericfield-disconnected"), ent, user, PopupType.LargeCaution);
@@ -204,28 +210,20 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
     private void OnSignalReceived(Entity<GenericFieldGeneratorComponent> ent, ref SignalReceivedEvent args) //basic signal compatability
     {
-        if (!TryComp(ent, out TransformComponent? transformComp)
-        || !transformComp.Anchored)
+        if (!Transform(ent).Anchored)
             return;
 
         if (args.Port == ent.Comp.OnPort) // This is kinda evil but eh
         {
             TurnOn(ent);
         }
-        if (args.Port == ent.Comp.OffPort)
+        else if (args.Port == ent.Comp.OffPort)
         {
             TurnOff(ent);
         }
-        if (args.Port == ent.Comp.TogglePort)
+        else if (args.Port == ent.Comp.TogglePort)
         {
-            if (!ent.Comp.Enabled)
-            {
-                TurnOn(ent);
-            }
-            else
-            {
-                TurnOff(ent);
-            }
+            ToggleGenerator(ent);
         }
         ChangeOnLightVisualizer(ent);
         Dirty(ent, ent.Comp);
@@ -268,18 +266,17 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         || ent.Comp.IsConnected)
             return;
 
-        var (worldPosition, worldRotation) = _transformSystem.GetWorldPositionRotation(Transform(ent));
+        var (worldPosition, worldRotation) = _xform.GetWorldPositionRotation(Transform(ent));
         var dirRad = worldRotation - Angle.FromDegrees(90);
 
         var ray = new CollisionRay(worldPosition, dirRad.ToVec(), ent.Comp.CollisionMask);
         var rayCastResults = _physics.IntersectRay(Transform(ent).MapID, ray, ent.Comp.MaxLength, ent, false);
-        var genQuery = GetEntityQuery<GenericFieldGeneratorComponent>();
 
         RayCastResults? closestResult = null;
 
         foreach (var result in rayCastResults)
         {
-            if (genQuery.HasComponent(result.HitEntity))
+            if (_genQuery.HasComponent(result.HitEntity))
                 closestResult = result;
 
             break;
@@ -289,7 +286,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
         var pair = closestResult.Value.HitEntity;
 
-        if (!TryComp<GenericFieldGeneratorComponent>(pair, out var pairComp)
+        if (!_genQuery.TryComp(pair, out var pairComp)
         || !pairComp.Enabled
         || !pairComp.Charged
         || !Transform(pair).Anchored // Is the target anchored?
@@ -335,14 +332,14 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     {
         if (HasComp<DeviceLinkSourceComponent>(firstGen))
         {
-            _signalSystem.SendSignal(firstGen, firstGen.Comp.ConnectionStatusPort, true);
-            _signalSystem.InvokePort(firstGen, firstGen.Comp.FieldConnectedPort);
+            _signal.SendSignal(firstGen, firstGen.Comp.ConnectionStatusPort, true);
+            _signal.InvokePort(firstGen, firstGen.Comp.FieldConnectedPort);
         }
 
         if (HasComp<DeviceLinkSourceComponent>(secondGen))
         {
-            _signalSystem.SendSignal(secondGen, secondGen.Comp.ConnectionStatusPort, true);
-            _signalSystem.InvokePort(secondGen, secondGen.Comp.FieldConnectedPort);
+            _signal.SendSignal(secondGen, secondGen.Comp.ConnectionStatusPort, true);
+            _signal.InvokePort(secondGen, secondGen.Comp.FieldConnectedPort);
         }
 
         var fieldList = new List<EntityUid>();
@@ -360,7 +357,7 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             var newField = PredictedSpawnAtPosition(firstGen.Comp.CreatedField, currentCoords);
 
             var xform = Transform(newField);
-            _transformSystem.SetParent(newField, xform, firstGen);
+            _xform.SetParent(newField, xform, firstGen);
             _physics.TrySetBodyType(newField, BodyType.Static, xform: xform); // Changing parent sets it to dynamic for some reason. Using this and not anchoring because this also works off-grid.
             xform.LocalRotation = 0; // Same rotation as parent
             fieldList.Add(newField);
@@ -387,13 +384,13 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// </summary>
     public void GridCheck(Entity<GenericFieldGeneratorComponent> ent)
     {
-        if (ent.Comp.ConnectedGenerator == null)
+        if (ent.Comp.ConnectedGenerator is not { } pair)
             return;
 
         var xFormQuery = GetEntityQuery<TransformComponent>();
 
         var gen1ParentGrid = xFormQuery.GetComponent(ent).GridUid;
-        var gent2ParentGrid = xFormQuery.GetComponent(ent.Comp.ConnectedGenerator.Value).GridUid;
+        var gent2ParentGrid = xFormQuery.GetComponent(pair).GridUid;
 
         if (gen1ParentGrid != gent2ParentGrid)
             RemoveConnections(ent);

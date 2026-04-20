@@ -9,14 +9,15 @@ namespace Content.Trauma.Shared.HolographicProjector;
 
 public sealed class GenericFieldSystem : EntitySystem
 {
-    [Dependency] private readonly GenericFieldGeneratorSystem _genericgen = default!;
+    [Dependency] private readonly GenericFieldGeneratorSystem _generator = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GenericFieldComponent, DestructionEventArgs>(OnDestructionEvent);
+        SubscribeLocalEvent<GenericFieldComponent, ComponentShutdown>(OnShutdown);
     }
 
     public override void Update(float frameTime)
@@ -33,11 +34,11 @@ public sealed class GenericFieldSystem : EntitySystem
         }
     }
 
-    private void OnDestructionEvent(Entity<GenericFieldComponent> field, ref DestructionEventArgs args)
+    private void OnShutdown(Entity<GenericFieldComponent> field, ref ComponentShutdown args)
     {
         if (field.Comp.SourceGen == null)
             return;
 
-        _genericgen.FieldDestroyed(field.Comp.SourceGen.Value);
+        _generator.FieldDestroyed(field.Comp.SourceGen.Value);
     }
 }
