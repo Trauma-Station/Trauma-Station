@@ -38,7 +38,7 @@ public sealed class LoadoutOrphanTest : GameTest
             foreach (var loadout in proto.EnumeratePrototypes<LoadoutPrototype>())
             {
                 // and make sure it has a group
-                var id = loadout.ID:
+                var id = loadout.ID;
                 if (!grouped.Contains(id))
                     orphans.Add(id);
             }
