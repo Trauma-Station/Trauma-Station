@@ -5,11 +5,11 @@
     food: 0.5
     RandomManifestFill: 0.15
 
-- type: ionLaw
-  id: CallShuttle
-  lawString: ion-storm-law-call-shuttle
-  selectorWeightAdjust:
-    RandomManifestFill: 0.15
+# - type: ionLaw # Trauma, shitty ion law
+#   id: CallShuttle
+#   lawString: ion-storm-law-call-shuttle
+#   selectorWeightAdjust:
+#     RandomManifestFill: 0.15
 
 - type: ionLaw
   id: CrewAre
