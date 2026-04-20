@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Religion;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
@@ -82,6 +83,7 @@ public abstract class SharedVoidCloakSystem : EntitySystem
             return;
 
         EnsureComp<StripMenuInvisibleComponent>(cloak);
+        RemCompDeferred<UnholyItemComponent>(cloak);
         UpdatePressureProtection(cloak, false);
     }
 
@@ -95,6 +97,7 @@ public abstract class SharedVoidCloakSystem : EntitySystem
             return;
 
         RemCompDeferred<StripMenuInvisibleComponent>(cloak);
+        EnsureComp<UnholyItemComponent>(cloak);
         UpdatePressureProtection(cloak, true);
     }
 

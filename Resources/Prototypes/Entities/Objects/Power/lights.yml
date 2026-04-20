@@ -177,7 +177,7 @@
   components:
   - type: LightBulb
     bulb: Bulb
-    color: "#FFD1A3" # 4000K color temp
+    color: "#FFAD5E" # Trauma - was 4000K, now 2800K color temp
     lightEnergy: 1.0
     lightRadius: 6
     lightSoftness: 1.1
@@ -287,7 +287,7 @@
   description: A light fixture.
   components:
   - type: LightBulb
-    color: "#FFE4CE" # 5000K color temp
+    color: "#FFBE7E" # Trauma - was 5000K, now 3300K color temp
     lightEnergy: 0.8
     lightRadius: 10
     lightSoftness: 1

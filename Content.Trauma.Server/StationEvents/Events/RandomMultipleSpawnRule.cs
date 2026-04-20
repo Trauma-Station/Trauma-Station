@@ -11,13 +11,11 @@ namespace Content.Trauma.Server.StationEvents.Events;
 
 public sealed class RandomMultipleSpawnRule : StationEventSystem<RandomMultipleSpawnRuleComponent>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-
     protected override void Started(EntityUid uid, RandomMultipleSpawnRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, comp, gameRule, args);
 
-        var amount = _random.Next(comp.MinAmount, comp.MaxAmount);
+        var amount = RobustRandom.Next(comp.MinAmount, comp.MaxAmount);
         for (int i = 0; i < amount; i++)
         {
             if (TryFindRandomTile(out _, out _, out _, out var coords))

@@ -8,11 +8,13 @@
     - id: MalignRiftSpawn
     - id: FloorGoblinMidRound
     - id: ClownGoblinMigration
+    - id: RadiationStormRule
 
 - type: entityTable
   id: BasicAntagEventsTrauma
   table: !type:AllSelector
     children:
+    - id: CarpMigrationRule
     # TOOD: remove these if they fucking suck lmao
     - id: SingulothKnightsMidround
     - id: MimeAssassinMidround
@@ -32,6 +34,34 @@
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
+
+- type: entity
+  parent: BaseGameRule
+  id: CarpMigrationRule
+  components:
+  - type: StationEvent
+    duration: 1
+    weight: 1
+  - type: CarpMigrationRule
+  - type: SpaceSpawnRule
+
+- type: entity
+  parent: BaseGameRule
+  id: RadiationStormRule
+  components:
+  - type: StationEvent
+    weight: 0.5
+    startAnnouncement: station-event-radiation-storm-announcement
+    minimumPlayers: 25
+    reoccurrenceDelay: 20
+    maxOccurrences: 3
+    duration: 1
+  - type: RadiationStormRule
+  - type: MapEffectsRule
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: WeatherSchedulerRadiationStorm
+      time: null # it removes itself when done
 
 - type: entity
   id: RatmaSpawn

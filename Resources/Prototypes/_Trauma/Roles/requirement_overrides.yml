@@ -128,13 +128,6 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 1h
-    Brigmedic:
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 1h
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 1h
     Warden:
     - !type:DepartmentTimeRequirement
       department: Security

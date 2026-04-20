@@ -1,0 +1,75 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Content.Goobstation.Shared.Appender;
+using Content.Shared.Mobs.Components;
+using Robust.Shared.GameObjects;
+using Robust.Shared.IoC;
+using Robust.Shared.Player;
+
+namespace Content.Goobstation.Server.Appender;
+
+public sealed class AccountAppenderSystem : EntitySystem
+{
+    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+
+    FrozenDictionary<string, AccountAppendPrototype> _protoIds = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<MobStateComponent, PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<MobStateComponent, PlayerDetachedEvent>(OnPlayerDetached);
+
+        _protoIds = _protoMan.GetInstances<AccountAppendPrototype>();
+    }
+
+    private void OnPlayerAttached(Entity<MobStateComponent> ent, ref PlayerAttachedEvent args)
+    {
+        var sesh = args.Player;
+        if (GetComps(sesh) is not {} comps)
+            return;
+
+        EntityManager.AddComponents(ent, comps);
+    }
+
+    private void OnPlayerDetached(Entity<MobStateComponent> ent, ref PlayerDetachedEvent args)
+    {
+        var sesh = args.Player;
+        if (GetComps(sesh) is not {} comps)
+            return;
+
+        EntityManager.RemoveComponents(ent, comps);
+    }
+
+    private ComponentRegistry? GetComps(ICommonSession sesh)
+    {
+        if (!_protoIds.TryGetValue(sesh.Name.ToLowerInvariant(), out var proto))
+        {
+            if (!TryGuidFallback(sesh, out proto))
+                return null;
+        }
+
+        return proto.Components;
+    }
+
+    private bool TryGuidFallback(ICommonSession sesh,
+        [NotNullWhen(true)] out AccountAppendPrototype? prototype)
+    {
+        prototype = null;
+        var userid = sesh.UserId;
+
+        foreach (var proto in _protoIds.Values)
+        {
+            if (proto.Userid == Guid.Empty || proto.Userid != userid)
+                continue;
+
+            prototype = proto;
+            return true;
+        }
+
+        return false;
+    }
+}

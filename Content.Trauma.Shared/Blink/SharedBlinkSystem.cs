@@ -82,6 +82,7 @@ public abstract class SharedBlinkSystem : EntitySystem
             targetPos = coords + (msg.Direction.Length() > blink.Distance ? dir * blink.Distance : msg.Direction);
 
         _useDelay.TryResetDelay((weapon, delay), id: blink.BlinkDelay);
+        // not using teleport system to you can still pull mobs while using it for skill expression ig
         _transform.SetWorldPosition(user, targetPos);
         _audio.PlayPredicted(blink.BlinkSound, user, user);
         if (_net.IsServer) // Prediction issues

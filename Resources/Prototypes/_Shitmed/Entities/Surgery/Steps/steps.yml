@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Janet Blackquill <uhhadd@gmail.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -34,11 +25,6 @@
       types:
         Bloodloss: 10
     sleepModifier: 0.5
-  - type: SurgeryStepPainInflicter
-    painDuration: 30
-    painType: TraumaticPain
-    amount: 34
-    sleepModifier: 0.12
 
 - type: entity
   parent: SurgeryStepBase
@@ -72,11 +58,6 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/stitches.rsi
     state: stitches
-  - type: SurgeryStepPainInflicter
-    painDuration: 30
-    painType: TraumaticPain
-    amount: 34
-    sleepModifier: 0.12
 
 - type: entity
   parent: SurgeryStepBase
@@ -107,10 +88,6 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/scalpel.rsi
     state: scalpel
-  - type: SurgeryStepPainInflicter
-    painDuration: 60
-    amount: 45
-    sleepModifier: 0.07
 
 - type: entity
   parent: SurgeryStepBase
@@ -126,11 +103,6 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/circular-saw.rsi
     state: circular-saw
-  - type: SurgeryStepPainInflicter
-    painType: TraumaticPain
-    painDuration: 40
-    amount: 34
-    sleepModifier: 0
 
 - type: entity
   parent: SurgeryStepBase
@@ -160,10 +132,6 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/bone-gel.rsi
     state: bone-gel
-  - type: SurgeryStepPainInflicter
-    amount: 12
-    painType: TraumaticPain
-    sleepModifier: 0
   - type: SurgeryRepeatableStep
   - type: SurgeryTraumaTreatmentStep
     traumaType: BoneDamage
@@ -182,10 +150,6 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
     state: hemostat
-  - type: SurgeryStepPainInflicter
-    amount: 24
-    painType: TraumaticPain
-    sleepModifier: 0
   - type: SurgeryRepeatableStep
   - type: SurgeryTraumaTreatmentStep
     traumaType: OrganDamage
@@ -310,9 +274,6 @@
       types:
         Heat: -5
     sleepModifier: 2
-  - type: SurgeryStepPainInflicter
-    amount: 9
-    sleepModifier: 0.34
 
 # Feature Insertion
 
@@ -356,10 +317,6 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/cautery.rsi
     state: cautery
-  - type: SurgeryStepPainInflicter
-    amount: 12
-    painDuration: 60
-    sleepModifier: 0.34
   - type: SurgeryDamageChangeEffect
     damage:
       types:
@@ -382,11 +339,6 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/circular-saw.rsi
     state: circular-saw
-  - type: SurgeryStepPainInflicter
-    amount: 26
-    painDuration: 40
-    painType: TraumaticPain
-    sleepModifier: 0.0
 
 - type: entity
   parent: SurgeryStepBase
@@ -427,11 +379,6 @@
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/circular-saw.rsi
     state: circular-saw
   - type: SurgeryRemovePartStep
-  - type: SurgeryStepPainInflicter
-    amount: 50
-    painDuration: 60
-    painType: TraumaticPain
-    sleepModifier: 0.14
 
 # Tend Wounds
 
@@ -449,10 +396,6 @@
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/scalpel.rsi
     state: scalpel
-  - type: SurgeryStepPainInflicter
-    amount: 17
-    painDuration: 30
-    sleepModifier: 0
 
 - type: entity
   parent: SurgeryStepBase
@@ -515,10 +458,6 @@
       types:
         Heat: -5
     sleepModifier: 2
-  - type: SurgeryStepPainInflicter
-    amount: 21
-    painDuration: 40
-    sleepModifier: 0.34
 
 - type: entity
   parent: SurgeryStepBase
@@ -536,11 +475,6 @@
     state: stitches
   - type: SurgeryTraumaTreatmentStep
     traumaType: Dismemberment
-  - type: SurgeryStepPainInflicter
-    amount: 34
-    painDuration: 60
-    painType: TraumaticPain
-    sleepModifier: 0.25
 
 # Cavity Implanting
 
@@ -556,11 +490,6 @@
     state: insertion
   - type: SurgeryStepCavityEffect
     action: Insert
-  - type: SurgeryStepPainInflicter
-    amount: 34
-    painDuration: 60
-    painType: TraumaticPain
-    sleepModifier: 0
 
 - type: entity
   parent: SurgeryStepBase
@@ -574,11 +503,6 @@
     state: insertion
   - type: SurgeryStepCavityEffect
     action: Remove
-  - type: SurgeryStepPainInflicter
-    amount: 34
-    painDuration: 60
-    painType: TraumaticPain
-    sleepModifier: 0
 
 # Organ Manipulation
 
@@ -595,11 +519,6 @@
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
     state: hemostat
   - type: SurgeryRemoveOrganStep
-  - type: SurgeryStepPainInflicter
-    amount: 90
-    painDuration: 60
-    painType: TraumaticPain
-    sleepModifier: 0
 
 - type: entity
   parent: SurgeryStepBase
@@ -614,11 +533,6 @@
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi
     state: insertion
   - type: SurgeryAddOrganStep
-  - type: SurgeryStepPainInflicter
-    amount: 90
-    painDuration: 60
-    painType: TraumaticPain
-    sleepModifier: 0
 
 - type: entity
   parent: SurgeryStepBase
@@ -633,10 +547,6 @@
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi
     state: insertion
   - type: SurgeryAddOrganSlotStep
-  - type: SurgeryStepPainInflicter
-    amount: 21
-    painDuration: 60
-    sleepModifier: 0.34
 
 - type: entity
   parent: SurgeryStepBase
@@ -656,92 +566,6 @@
       types:
         Heat: -5
     sleepModifier: 2
-  - type: SurgeryStepPainInflicter
-    amount: 21
-    painDuration: 60
-    sleepModifier: 0.34
-
-
-
-# The lengths I go to just for a joke... I HATE HARDCODING AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-# Maybe I should modify species prototypes to include tails and ears properly...
-
-#- type: entity
-#  parent: SurgeryStepBase
-#  id: SurgeryStepAddFelinidEars
-#  name: Add cat ears
-#  components:
-#  - type: SurgeryStep
-#    tool:
-#    - type: Organ
-#  - type: SurgeryAddMarkingStep
-#    marking: FelinidEarsBasic
-#    matchString: FelinidEars
-#    organ:
-#    - type: Ears
-#    accent:
-#    - type: OwOAccent
-#  - type: Sprite
-#    sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi
-#    state: insertion
-
-#- type: entity
-#  parent: SurgeryStepBase
-#  id: SurgeryStepAddFelinidTail
-#  name: Add cat tail
-#  components:
-#  - type: SurgeryStep
-#    tool:
-#    - type: Organ
-#  - type: SurgeryAddMarkingStep
-#    marking: FelinidTailBasic
-#    matchString: FelinidTail
-#    organ:
-#    - type: Tail
-#  - type: Sprite
-#    sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi
-#    state: insertion
-
-#- type: entity
-#  parent: SurgeryStepBase
-#  id: SurgeryStepRemoveFelinidEars
-#  name: Remove cat ears
-#  components:
-#  - type: SurgeryStep
-#    tool:
-#    - type: Organ
-#  - type: SurgeryRemoveMarkingStep
-#    matchString: FelinidEars
-#  - type: Sprite
-#    sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi
-#    state: insertion
-
-#- type: entity
-#  parent: SurgeryStepBase
-#  id: SurgeryStepRemoveFelinidTail
-#  name: Remove cat tail
-#  components:
-#  - type: SurgeryStep
-#    tool:
-#    - type: Organ
-#  - type: SurgeryRemoveMarkingStep
-#    matchString: FelinidTail
-#  - type: Sprite
-#    sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi
-#    state: insertion
-
-#- type: entity
-#  parent: SurgeryStepBase
-#  id: SurgeryStepWingReconstruction
-#  name: Start wing reconstruction
-#  components:
-#  - type: SurgeryStep
-#    duration: 6 # On TG success chance is lower, so here the surgery slower
-#    tool:
-#    - type: Tending
-#  - type: ??? moth ops go here when wings can be destroyed
-#  - type: Sprite
-#    sprite: Interface/Emotes/chitter.png
 
 # Augments
 

@@ -106,3 +106,28 @@ Entries:
   id: 14
   time: '2026-04-07T07:25:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1896
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Trialmins can no longer make watchlists, hitler dead.
+  id: 15
+  time: '2026-04-09T18:42:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1948
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed godmode not protecting from explosions or other things that directly
+      damage limbs.
+  id: 16
+  time: '2026-04-11T18:54:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1980
+- author: Ministry of Truth
+  changes:
+  - type: Add
+    message: >-
+      Saying slurs configured in the server cvar now automatically admin alerts,
+      smites and permabans you.
+  id: 17
+  time: '2026-04-13T16:36:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2005

@@ -656,7 +656,7 @@
 #Other
 - type: entity
   name: shovel
-  parent: BaseItem
+  parent: [BaseItem, MetalToolDurability] # Trauma
   id: Shovel
   description: A large tool for digging and moving dirt.
   components:

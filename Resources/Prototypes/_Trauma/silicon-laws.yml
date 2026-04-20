@@ -1,3 +1,17 @@
+# Obey AI
+- type: siliconLaw
+  id: ObeyAI
+  order: 0
+  lawString: law-obeyai
+
+- type: siliconLawset
+  id: CrewsimovBorg
+  laws:
+  - Crewsimov1
+  - Crewsimov2
+  - Crewsimov3
+  obeysTo: laws-owner-crew
+
 # Rev lawset
 - type: siliconLaw
   id: Rev1

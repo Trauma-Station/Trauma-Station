@@ -11,3 +11,8 @@
   - type: MovementSpeedModifier
     baseSprintSpeed: 0
     baseWalkSpeed: 0
+
+- type: entity
+  parent: BasePolymorphBloodCrawlJaunt
+  id: PolymorphBloodCrawlJauntPrayer
+  suffix: Prayer

@@ -27,7 +27,6 @@
       allowNonHumans: true
       multiAntagSetting: NotExclusive
       startingGear: ThiefGear
-      jobBlacklist: [ Chaplain ] # Goob
       components:
       - type: Pacified
       - type: Thieving

@@ -301,6 +301,16 @@ public sealed partial class DamageableSystem
 
         if (!_damageableQuery.Resolve(ent, ref ent.Comp, false) || amount >= 0)
             return damageChange;
+        // <Trauma> - apply healing to each individual part
+        if (_bodyQuery.TryComp(ent, out var body))
+        {
+            foreach (var organ in _body.GetExternalOrgans((ent, body)))
+            {
+                damageChange += HealEvenly(organ.Owner, amount, group, origin);
+            }
+            return damageChange;
+        }
+        // </Trauma>
 
         // Get our total damage, or heal if we're below a certain amount.
         if (!TryGetDamageGreaterThan((ent, ent.Comp), -amount, out var damage, group))
@@ -372,6 +382,16 @@ public sealed partial class DamageableSystem
 
         if (!_damageableQuery.Resolve(ent, ref ent.Comp, false) || amount >= 0)
             return damageChange;
+        // <Trauma> - apply healing to each individual part
+        if (_bodyQuery.TryComp(ent, out var body))
+        {
+            foreach (var organ in _body.GetExternalOrgans((ent, body)))
+            {
+                damageChange += HealDistributed(organ.Owner, amount, group, origin);
+            }
+            return damageChange;
+        }
+        // </Trauma>
 
         // Get our total damage, or heal if we're below a certain amount.
         if (!TryGetDamageGreaterThan((ent, ent.Comp), -amount, out var damage, group))

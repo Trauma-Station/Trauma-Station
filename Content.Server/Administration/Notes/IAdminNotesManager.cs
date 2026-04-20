@@ -17,6 +17,7 @@ public interface IAdminNotesManager
     bool CanDelete(ICommonSession admin);
     bool CanEdit(ICommonSession admin);
     bool CanView(ICommonSession admin);
+    bool CanWatchlist(ICommonSession admin); // Trauma - fuck the trialmins
     Task OpenEui(ICommonSession admin, NetUserId notedPlayer);
     Task OpenUserNotesEui(ICommonSession player);
     Task AddAdminRemark(ICommonSession createdBy, Guid player, NoteType type, string message, NoteSeverity? severity, bool secret, DateTime? expiryTime);

@@ -6,3 +6,6 @@ lobbyduration = 90
 fallbackpreset = "Traitor"
 [chat]
 max_announcement_length = 512
+
+[shuttle]
+cooldown = 5

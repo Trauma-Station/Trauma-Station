@@ -225,8 +225,6 @@
     fillBaseName: icon
     inHandsFillBaseName: -fill-
     inHandsMaxFillLevels: 1
-    equippedFillBaseName: -fill-
-    equippedMaxFillLevels: 1
   - type: Construction
     graph: RevKnife
 

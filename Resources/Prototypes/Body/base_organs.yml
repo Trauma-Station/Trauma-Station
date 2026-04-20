@@ -385,10 +385,6 @@
       Destroyed: 0
   - type: ChildOrgan
     parents: [ Head ]
-  - type: NerveSystem
-  - type: ConsciousnessRequired
-    identifier: "nerveSystem"
-    causesDeath: true
   # </Shitmed>
   - type: GibbableOrgan
   - type: Organ
