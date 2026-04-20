@@ -13,12 +13,6 @@ public sealed partial class GenericFieldComponent : Component
     public Entity<GenericFieldGeneratorComponent>? SourceGen;
 
     /// <summary>
-    /// was a temporary tile made with this entity?
-    /// </summary>
-    [ViewVariables]
-    public bool TempTile = false;
-
-    /// <summary>
     /// how much damage to heal per second
     /// </summary>
     [ViewVariables]

@@ -87,12 +87,13 @@
     locked: false
   - type: Battery
     netsync: false
-    maxCharge: 50000
+    maxCharge: 5000
     startingCharge: 0
   - type: ApcPowerReceiver
   - type: ApcPowerReceiverBattery
-    batteryRechargeRate: 2000
+    batteryRechargeRate: 200
     idleLoad: 200
+  - type: StationAiWhitelist
   - type: ExtensionCableReceiver
   - type: PowerState
     idlePowerDraw: 200
@@ -115,6 +116,13 @@
     - FieldDisconnected
     lastSignals:
       ConnectionStatus: false
+  - type: LockVisuals
+  - type: LockedAnchorable
+  - type: LockedWiresPanel
+  - type: AccessReader
+    access: [["Engineering"]]
+  - type: StaticPrice
+    price: 150
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -155,21 +163,13 @@
 - type: entity
   parent: GenericFieldGeneratorBase
   id: HolographicFieldGenerator
-  name: Holographic Field Generator
-  description: A machine that generates a Holographic Field when powered; Keeps the air where it belongs.
+  name: holographic field generator
+  description: A machine that generates a holographic field when powered; Keeps the air where it belongs.
   components:
   - type: GenericFieldGenerator
     createdField: HolographicField
-    maxLength: 16
   - type: Machine
     board: HolographicFieldGeneratorCircuitboard
-  - type: LockVisuals
-  - type: LockedAnchorable
-  - type: LockedWiresPanel
-  - type: AccessReader
-    access: [["Engineering"]]
-  - type: StaticPrice
-    price: 150
 
 - type: entity
   parent: HolographicFieldGenerator
@@ -196,21 +196,13 @@
 - type: entity
   parent: GenericFieldGeneratorBase
   id: HolographicBarrierGenerator
-  name: Holographic Barrier Generator
-  description: A machine that generates a Holographic Barrier when powered; Keeps the crew where they belong.
+  name: holographic barrier generator
+  description: A machine that generates a holographic barrier when powered; Keeps the crew where they belong.
   components:
   - type: GenericFieldGenerator
     createdField: HolographicFieldBarrier
-    maxLength: 100
   - type: Machine
     board: HolographicBarrierGeneratorCircuitboard
-  - type: LockVisuals
-  - type: LockedAnchorable
-  - type: LockedWiresPanel
-  - type: AccessReader
-    access: [["Engineering"]]
-  - type: StaticPrice
-    price: 150
   - type: PointLight
     color: red
   - type: Icon
@@ -243,8 +235,8 @@
 
 - type: entity
   id: HolographicField
-  name: Holographic Field
-  description: A Holographic Field that blocks airflow.
+  name: holographic field
+  description: A holographic field that blocks airflow.
   placement:
     mode: SnapgridCenter
   components:
@@ -297,8 +289,8 @@
 
 - type: entity
   id: HolographicFieldBarrier
-  name: Holographic Barrier
-  description: A Holographic Barrier that blocks projectiles and crew.
+  name: holographic barrier
+  description: A holographic barrier that blocks projectiles and crew.
   placement:
     mode: SnapgridCenter
   components:

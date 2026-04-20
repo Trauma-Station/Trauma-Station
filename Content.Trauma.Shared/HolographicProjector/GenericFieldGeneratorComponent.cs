@@ -17,7 +17,19 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     /// How many tiles should this field check before giving up?
     /// </summary>
     [DataField]
-    public float MaxLength = 12F;
+    public float MaxLength = 12f;
+
+    /// <summary>
+    /// How much energy the generator draws while active?
+    /// </summary>
+    [DataField]
+    public float ActiveLoad = 2000f;
+
+    /// <summary>
+    /// How much energy the generator draws while not active?
+    /// </summary>
+    [DataField]
+    public float PassiveLoad = 200f;
 
     /// <summary>
     /// Is the generator toggled on?

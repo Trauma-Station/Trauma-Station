@@ -21,7 +21,6 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly GenericFieldSystem _genericfield = default!;
     [Dependency] private readonly SharedDeviceLinkSystem _signalSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -50,11 +49,12 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         {
             if (_timing.CurTime < comp.ReconnectTimer
             || !comp.Enabled
-            || !comp.Charged)
+            || !comp.Charged
+            || comp.IsConnected)
                 continue;
 
             comp.ReconnectTimer = _timing.CurTime + comp.ReconnectTime;
-            TryGenerateFieldConnection((ent, comp));
+            TryGenerateFieldConnection((uid, comp));
         }
     }
 
@@ -68,8 +68,6 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         ChangeOnLightVisualizer(ent);
         UpdateConnectionLights(ent);
         ChangeConnectionLightVisualizer(ent);
-        if (!ent.Comp.Enabled) return;
-        TryGenerateFieldConnection(ent);
     }
 
     private void OnActivate(Entity<GenericFieldGeneratorComponent> ent, ref ActivateInWorldEvent args)
@@ -124,12 +122,6 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         _popup.PopupPredicted(Loc.GetString("comp-genericfield-turned-on"), ent, user);
         ent.Comp.Enabled = true;
         TryGenerateFieldConnection(ent, user);
-        if (ent.Comp.ConnectedGenerator is { } pair)
-        {
-            pair.Comp.Enabled = true;
-            ChangeOnLightVisualizer(pair);
-            Dirty(pair, pair.Comp);
-        }
         ChangeOnLightVisualizer(ent);
         Dirty(ent, ent.Comp);
     }
@@ -138,15 +130,9 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     {
         _popup.PopupPredicted(Loc.GetString("comp-genericfield-turned-off"), ent, user);
         ent.Comp.Enabled = false;
-        if (ent.Comp.ConnectedGenerator is { } pair)
-        {
-            pair.Comp.Enabled = false;
-            ChangeOnLightVisualizer(pair);
-            Dirty(pair, pair.Comp);
-        }
+        RemoveConnections(ent, user);
         ChangeOnLightVisualizer(ent);
         Dirty(ent, ent.Comp);
-        RemoveConnections(ent, user);
     }
 
     /// <summary>
@@ -161,11 +147,11 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         pair.Comp.ConnectedGenerator = null;
         ent.Comp.IsConnected = false;
         pair.Comp.IsConnected = false;
+        if (TryComp<PowerStateComponent>(ent, out var stateComp)) stateComp.IsWorking = false;
+        if (TryComp<PowerStateComponent>(pair, out var pairState)) pairState.IsWorking = false;
 
         foreach (var field in ent.Comp.ConnectedFields)
         {
-            if (TryComp<GenericFieldComponent>(field, out var fieldComp) && fieldComp.TempTile)
-                _genericfield.TempTileCleanup((field, fieldComp));
             QueueDel(field);
         }
 
@@ -276,7 +262,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     {
         if (!ent.Comp.Enabled
         || !ent.Comp.Charged
-        || !Transform(ent).Anchored)
+        || !Transform(ent).Anchored
+        || ent.Comp.IsConnected)
             return;
 
         var (worldPosition, worldRotation) = _transformSystem.GetWorldPositionRotation(Transform(ent));
@@ -298,47 +285,42 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         if (closestResult == null)
             return;
 
-        var target = closestResult.Value.HitEntity;
+        var pair = closestResult.Value.HitEntity;
 
-        if (!TryComp<GenericFieldGeneratorComponent>(target, out var otherFieldGeneratorComponent)
-        || !Transform(target).Anchored // Is the target anchored?
-        || Transform(ent).GridUid != Transform(target).GridUid // Are the generators on the same grid?
-        || otherFieldGeneratorComponent.CreatedField != ent.Comp.CreatedField // Are the generators creating the same type of field?
-        || Transform(ent).LocalRotation.GetCardinalDir() != Transform(target).LocalRotation.GetCardinalDir().GetOpposite()) // Are the generators facing eachother?
+        if (!TryComp<GenericFieldGeneratorComponent>(pair, out var pairComp)
+        || !pairComp.Enabled
+        || !pairComp.Charged
+        || !Transform(pair).Anchored // Is the target anchored?
+        || Transform(ent).GridUid != Transform(pair).GridUid // Are the generators on the same grid?
+        || pairComp.CreatedField != ent.Comp.CreatedField // Are the generators creating the same type of field?
+        || Transform(ent).LocalRotation.GetCardinalDir() != Transform(pair).LocalRotation.GetCardinalDir().GetOpposite()) // Are the generators facing eachother?
         {
             return;
         }
 
-        var otherFieldGenerator = (target, otherFieldGeneratorComponent);
-        ent.Comp.ConnectedGenerator = otherFieldGenerator;
-        otherFieldGeneratorComponent.ConnectedGenerator = otherFieldGenerator;
+        ent.Comp.ConnectedGenerator = (pair, pairComp);
+        pairComp.ConnectedGenerator = ent;
 
-        var fields = GenerateFieldConnection(ent, otherFieldGenerator);
+        var fields = GenerateFieldConnection(ent, (pair, pairComp));
 
         ent.Comp.ConnectedFields = fields;
-        otherFieldGeneratorComponent.ConnectedFields = fields;
+        pairComp.ConnectedFields = fields;
 
-        if (!ent.Comp.IsConnected)
-        {
-            ent.Comp.Enabled = true;
-            ent.Comp.IsConnected = true;
-            ChangeConnectionLightVisualizer(ent);
-            UpdateConnectionLights(ent);
-        }
-
-        if (!otherFieldGeneratorComponent.IsConnected)
-        {
-            otherFieldGeneratorComponent.IsConnected = true;
-            ChangeConnectionLightVisualizer(otherFieldGenerator);
-            UpdateConnectionLights(otherFieldGenerator);
-        }
+        if (TryComp<PowerStateComponent>(ent, out var stateComp)) stateComp.IsWorking = true;
+        if (TryComp<PowerStateComponent>(pair, out var pairState)) pairState.IsWorking = true;
+        ent.Comp.IsConnected = true;
+        pairComp.IsConnected = true;
+        ChangeConnectionLightVisualizer(ent);
+        ChangeConnectionLightVisualizer((pair, pairComp));
+        UpdateConnectionLights(ent);
+        UpdateConnectionLights((pair, pairComp));
 
         _popup.PopupPredicted(Loc.GetString("comp-genericfield-connected"), ent, user);
-        _popup.PopupPredicted(Loc.GetString("comp-genericfield-connected"), target, user);
+        _popup.PopupPredicted(Loc.GetString("comp-genericfield-connected"), pair, user);
         _audio.PlayPredicted(ent.Comp.ActivationSound, ent, user);
-        _audio.PlayPredicted(ent.Comp.ActivationSound, target, user);
+        _audio.PlayPredicted(ent.Comp.ActivationSound, pair, user);
         Dirty(ent, ent.Comp);
-        Dirty(target, otherFieldGeneratorComponent);
+        Dirty(pair, pairComp);
         return;
     }
 
@@ -377,14 +359,14 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
 
             var xform = Transform(newField);
             _transformSystem.SetParent(newField, xform, firstGen);
-            xform.LocalRotation = dirVec.ToAngle() + Math.PI / 2;
+            _physics.TrySetBodyType(newField, BodyType.Static, xform: xform); // Changing parent sets it to dynamic for some reason. Using this and not anchoring because this also works off-grid.
+            xform.LocalRotation = 0; // Same rotation as parent
             fieldList.Add(newField);
             currentOffset += dirVec;
-            if (TryComp<GenericFieldComponent>(newField, out var fieldComp))
-            {
-                fieldComp.SourceGen = firstGen;
-                Dirty(newField, fieldComp);
-            }
+
+            if (!TryComp<GenericFieldComponent>(newField, out var fieldComp)) continue;
+            fieldComp.SourceGen = firstGen;
+            Dirty(newField, fieldComp);
         }
         return fieldList;
     }
@@ -428,16 +410,29 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         if (!TryComp<BatteryComponent>(ent, out var comp))
             return;
         var charge = comp.LastCharge;
-        _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, charge switch //I dont like hardcoding these values, but I also dont feel like having a giant pile of if statments
-        {
-            <= 50 => PowerLevelVisuals.NoPower,
-            >= 49500 => PowerLevelVisuals.FullPower,
-            >= 40000 => PowerLevelVisuals.VeryHighPower,
-            >= 30000 => PowerLevelVisuals.HighPower,
-            >= 20000 => PowerLevelVisuals.MediumPower,
-            >= 10000 => PowerLevelVisuals.LowPower,
-            _ => PowerLevelVisuals.MinimalPower
-        });
+        var maxCharge = comp.MaxCharge;
+
+        // Nothing is nice with visuals in this engine.
+        if (charge >= maxCharge - 50)
+            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.FullPower);
+
+        else if (charge >= maxCharge / 5 * 4)
+            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.VeryHighPower);
+
+        else if (charge >= maxCharge / 5 * 3)
+            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.HighPower);
+
+        else if (charge >= maxCharge / 5 * 2)
+            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.MediumPower);
+
+        else if (charge >= maxCharge / 5)
+            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.LowPower);
+
+        else if (charge > 50)
+            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.MinimalPower);
+
+        else
+            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.NoPower);
     }
 
     private void ChangeConnectionLightVisualizer(Entity<GenericFieldGeneratorComponent> ent)
