@@ -27,21 +27,3 @@
       stackRequirements:
         PlasmaGlass: 5
         Cable: 10
-
-- type: entity
-  parent: BaseFlatpack
-  id: HolographicFieldGeneratorFlatpack
-  name: holographic field generator flatpack
-  description: A flatpack used for constructing a holographic field generator.
-  components:
-  - type: Flatpack
-    entity: HolographicFieldGenerator
-
-- type: entity
-  parent: BaseFlatpack
-  id: HolographicBarrierGeneratorFlatpack
-  name: holographic barrier generator flatpack
-  description: A flatpack used for constructing a holographic barrier generator.
-  components:
-  - type: Flatpack
-    entity: HolographicBarrierGenerator
