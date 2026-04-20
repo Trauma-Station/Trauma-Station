@@ -52,6 +52,7 @@
       - CableCoil
       - RawMaterial
       - PartBase
+      - MetalRod # Trauma - Borgs should be able to carry rods.
   - type: Dumpable
   - type: ItemToggle
     soundActivate:
