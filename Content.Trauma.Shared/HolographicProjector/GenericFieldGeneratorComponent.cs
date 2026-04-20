@@ -7,7 +7,7 @@ using Robust.Shared.Audio;
 namespace Content.Trauma.Shared.HolographicProjector;
 
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentPause, AutoGenerateComponentState]
+[AutoGenerateComponentState]
 public sealed partial class GenericFieldGeneratorComponent : Component
 {
     /// <summary>
