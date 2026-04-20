@@ -41,7 +41,7 @@
   reactants:
     JuiceWatermelon: { amount: 3 }
     Cream: { amount: 1 }
-    Rum: { amount: 2 }
+    Mead: { amount: 2 }
   products:
     AloeCocktail: 6
 
