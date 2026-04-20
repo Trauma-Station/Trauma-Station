@@ -12,7 +12,6 @@ using Content.Trauma.Common.Construction;
 using Content.Trauma.Shared.BurnableFood;
 using Content.Trauma.Shared.Durability;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Forging;
 

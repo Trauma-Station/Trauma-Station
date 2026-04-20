@@ -2,7 +2,6 @@
 
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Multihit;
 

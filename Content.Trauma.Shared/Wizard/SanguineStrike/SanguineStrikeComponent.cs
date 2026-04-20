@@ -2,8 +2,6 @@
 
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Wizard.SanguineStrike;
 

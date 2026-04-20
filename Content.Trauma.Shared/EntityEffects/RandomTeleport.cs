@@ -3,7 +3,6 @@
 using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects.Effects;
 

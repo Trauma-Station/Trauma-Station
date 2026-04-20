@@ -6,7 +6,6 @@ using Content.Shared.Actions;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;
 

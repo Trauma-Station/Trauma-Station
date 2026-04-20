@@ -31,7 +31,6 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weather;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;

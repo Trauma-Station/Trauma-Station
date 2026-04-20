@@ -12,7 +12,6 @@ using Content.Shared.Damage.Systems;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Server.Language;
 using Content.Trauma.Shared.Xenomorphs.Xenomorph;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;

@@ -5,7 +5,6 @@ using Content.Client.UserInterface.Controls;
 using Content.Goobstation.Shared.ListViewSelector;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 
 // ReSharper disable InconsistentNaming
 

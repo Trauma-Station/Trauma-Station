@@ -11,7 +11,6 @@ using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 

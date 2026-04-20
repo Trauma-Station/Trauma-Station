@@ -2,7 +2,6 @@
 
 using Content.Shared.Humanoid;
 using Robust.Shared.Enums;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Wizard.BindSoul;
 

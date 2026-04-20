@@ -2,9 +2,7 @@
 
 using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 

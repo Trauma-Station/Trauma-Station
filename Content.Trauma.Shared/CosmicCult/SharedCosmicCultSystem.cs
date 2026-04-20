@@ -23,10 +23,7 @@ using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
 using Content.Trauma.Shared.Roles;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameStates;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 

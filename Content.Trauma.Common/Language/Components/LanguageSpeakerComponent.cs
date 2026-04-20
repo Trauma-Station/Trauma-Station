@@ -2,8 +2,6 @@
 
 using Content.Trauma.Common.Language.Systems;
 using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Common.Language.Components;
 

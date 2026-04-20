@@ -13,11 +13,9 @@ using Content.Shared.Popups;
 using Content.Shared.Speech;
 using Content.Shared.Standing;
 using Content.Shared.Throwing;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.Traps;

@@ -15,7 +15,6 @@ using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.Silicons;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 

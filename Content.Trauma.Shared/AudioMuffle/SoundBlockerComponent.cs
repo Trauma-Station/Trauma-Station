@@ -2,7 +2,6 @@
 
 using System.Numerics;
 using Robust.Shared.Audio.Components;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.AudioMuffle;
 

@@ -4,8 +4,6 @@ using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
 using Content.Shared.Body;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Common.Medical.HealthAnalyzer;
 
@@ -20,14 +18,11 @@ public abstract class HealthAnalyzerScanState
 public sealed class HealthAnalyzerBodyState : HealthAnalyzerScanState
 {
     public readonly Dictionary<NetEntity, List<WoundableTraumaData>> Traumas;
-    public readonly Dictionary<NetEntity, FixedPoint2> NervePainFeels;
 
     public HealthAnalyzerBodyState(
-        Dictionary<NetEntity, List<WoundableTraumaData>> traumas,
-        Dictionary<NetEntity, FixedPoint2> nervePainFeels)
+        Dictionary<NetEntity, List<WoundableTraumaData>> traumas)
     {
         Traumas = traumas;
-        NervePainFeels = nervePainFeels;
     }
 }
 

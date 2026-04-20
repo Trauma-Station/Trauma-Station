@@ -9,7 +9,6 @@ using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Animations;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Emoting;

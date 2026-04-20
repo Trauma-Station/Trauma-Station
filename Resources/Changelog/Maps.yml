@@ -271,3 +271,10 @@ Entries:
   id: 29
   time: '2026-04-06T10:19:28.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1883
+- author: Kirikii
+  changes:
+  - type: Tweak
+    message: 'Nume: Minor changes.'
+  id: 30
+  time: '2026-04-09T10:01:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1884

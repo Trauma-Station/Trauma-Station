@@ -4,7 +4,6 @@ using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.EntityEffects;

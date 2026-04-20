@@ -3,7 +3,6 @@
 using Content.Goobstation.Common.ServerCurrency;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Client.ServerCurrency;
@@ -58,6 +57,7 @@ public sealed class ClientCurrencyManager : ICommonCurrencyManager, IEntityEvent
     public void Shutdown()
     {
         _playMan.PlayerStatusChanged -= OnStatusChanged;
+        _ent.EventBus.UnsubscribeEvents(this);
     }
 
     public bool CanAfford(NetUserId? userId, int amount, out int balance)

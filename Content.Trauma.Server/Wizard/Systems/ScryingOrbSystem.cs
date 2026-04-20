@@ -9,7 +9,6 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Mind;
 using Content.Shared.Verbs;
 using Robust.Server.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wizard.Systems;
 

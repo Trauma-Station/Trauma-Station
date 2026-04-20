@@ -11,7 +11,6 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.RoundEndCredits;

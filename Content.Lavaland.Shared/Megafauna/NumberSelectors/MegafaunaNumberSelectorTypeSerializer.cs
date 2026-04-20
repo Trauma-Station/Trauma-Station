@@ -2,7 +2,6 @@
 
 using System.Globalization;
 using System.Numerics;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown.Validation;
 using Robust.Shared.Serialization.Markdown.Value;

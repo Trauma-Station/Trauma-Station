@@ -17,7 +17,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Factory;

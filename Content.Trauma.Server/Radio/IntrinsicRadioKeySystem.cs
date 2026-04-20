@@ -2,7 +2,6 @@
 
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Radio;
 

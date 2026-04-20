@@ -8,7 +8,6 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Chemistry.TileReactions
 {

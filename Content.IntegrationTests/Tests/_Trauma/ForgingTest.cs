@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.IntegrationTests.Fixtures;
 using Content.Trauma.Shared.Forging;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
@@ -7,7 +9,7 @@ using System.Collections.Generic;
 namespace Content.IntegrationTests.Tests._Trauma;
 
 [TestFixture]
-public sealed class ForgingTest
+public sealed class ForgingTest : GameTest
 {
     /// <summary>
     /// Checks that all forged item prototypes are sane and that there are no empty categories.
@@ -15,7 +17,7 @@ public sealed class ForgingTest
     [Test]
     public async Task AllForgedItemsValid()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.EntMan;
@@ -59,8 +61,6 @@ public sealed class ForgingTest
                 }
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 
     // TODO: test to spawn every material + item combination and simulate working them so theres no errors and check all sprites are valid

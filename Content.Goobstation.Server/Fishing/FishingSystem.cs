@@ -13,7 +13,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Fishing;

@@ -2,8 +2,6 @@
 
 using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 

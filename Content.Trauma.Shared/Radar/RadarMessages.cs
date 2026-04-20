@@ -3,7 +3,6 @@
 using System.Linq;
 using System.Numerics;
 using Content.Trauma.Common.Radar;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Radar;
 

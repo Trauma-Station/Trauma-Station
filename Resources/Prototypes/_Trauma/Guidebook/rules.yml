@@ -116,6 +116,7 @@
   priority: 9
   text: "/ServerInfo/_Trauma/Guidebook/ServerRules/Core/RuleC8Age.xml"
 
+# if you change this rule number update GamerWordsSystem as well
 - type: guideEntry
   id: RuleC9
   name: guide-entry-rules-c9

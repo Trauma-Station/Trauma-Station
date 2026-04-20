@@ -10,7 +10,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Magic.Components;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.Wizard;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 

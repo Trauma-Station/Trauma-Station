@@ -4,7 +4,6 @@ using Content.Server.Silicons.Laws;
 using Content.Trauma.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
-using Robust.Shared.Prototypes;
 using Content.Trauma.Common.Silicon;
 
 namespace Content.Trauma.Server.Silicons.Laws;

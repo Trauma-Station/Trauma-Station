@@ -18,7 +18,6 @@ using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Roles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 

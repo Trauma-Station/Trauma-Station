@@ -9,7 +9,6 @@ using Content.Shared.Rejuvenate;
 using Content.Shared.Speech;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Body;

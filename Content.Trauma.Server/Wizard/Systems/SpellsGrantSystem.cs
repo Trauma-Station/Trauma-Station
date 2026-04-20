@@ -18,7 +18,6 @@ using Content.Trauma.Common.Wizard;
 using Content.Trauma.Shared.Objectives;
 using Content.Trauma.Shared.Wizard;
 using Robust.Server.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Wizard.Systems;

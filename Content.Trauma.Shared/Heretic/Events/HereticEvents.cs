@@ -7,8 +7,6 @@ using Content.Shared.Store;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Events;
 

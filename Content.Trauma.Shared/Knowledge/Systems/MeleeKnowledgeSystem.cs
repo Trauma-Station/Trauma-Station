@@ -10,7 +10,6 @@ using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Components;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;

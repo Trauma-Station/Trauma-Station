@@ -35,7 +35,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.5 # Trauma, was 0.7
@@ -101,7 +100,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.35
@@ -349,7 +347,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Slash: 0.95
@@ -395,7 +392,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Slash: 0.9
@@ -420,7 +416,6 @@
       OrganDamage: 0.4
       BoneDamage: 0.4
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.5
@@ -526,7 +521,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.35

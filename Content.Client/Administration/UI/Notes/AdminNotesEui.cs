@@ -41,7 +41,8 @@ public sealed class AdminNotesEui : BaseEui
         NoteControl.SetPlayerName(s.NotedPlayerName);
         NoteControl.SetNotes(s.Notes);
         Logger.Debug($"Create {s.CanCreate} Delete {s.CanDelete} Edit {s.CanEdit}");
-        NoteControl.SetPermissions(s.CanCreate, s.CanDelete, s.CanEdit);
+        NoteControl.SetPermissions(s.CanCreate, s.CanDelete, s.CanEdit,
+            s.CanWatchlist); // Trauma
     }
 
     public override void Opened()

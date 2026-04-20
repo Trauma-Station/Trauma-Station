@@ -20,10 +20,7 @@ public sealed class AmmoSelectorMagazineVisualizerSystem : VisualizerSystem<Ammo
         var step = ContentHelpers.RoundToLevels((int)count, (int)capacity, component.MagSteps);
 
         if (!args.AppearanceData.TryGetValue(AmmoSelectorVisuals.Selected, out var selection))
-        {
-            Log.Warning($"{ToPrettyString(uid)} does not have AmmoSelectorVisuals.Selected appearance data set. Does it have the AmmoSelectorComponent?");
             return;
-        }
 
         if (!component.MagStates.TryGetValue((string) selection, out var state))
         {

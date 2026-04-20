@@ -12,7 +12,6 @@ using Content.Trauma.Common.CartridgeLoader.Cartridges;
 using Content.Trauma.Common.NanoChat;
 using Content.Trauma.Shared.NanoChat;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.NanoChat;

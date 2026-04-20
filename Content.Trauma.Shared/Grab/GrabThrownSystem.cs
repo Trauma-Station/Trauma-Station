@@ -8,7 +8,6 @@ using Content.Shared.Effects;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Grab;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -23,6 +22,8 @@ public sealed class GrabThrownSystem : CommonGrabThrownSystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+
+    public const float MinMass = 30f;
 
     public override void Initialize()
     {
@@ -61,6 +62,9 @@ public sealed class GrabThrownSystem : CommonGrabThrownSystem
 
         var velocitySquared = args.OurBody.LinearVelocity.LengthSquared();
         var mass = physicsComponent.Mass;
+        if (mass < MinMass)
+            return; // don't care about mice and stuff
+
         var kineticEnergy = 0.5f * mass * velocitySquared;
         var kineticEnergyDamage = new DamageSpecifier();
         kineticEnergyDamage.DamageDict.Add("Blunt", 1);

@@ -15,7 +15,6 @@ using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Blob;
 

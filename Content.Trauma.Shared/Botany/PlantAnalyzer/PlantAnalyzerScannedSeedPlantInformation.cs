@@ -4,8 +4,6 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Random;
 using Content.Trauma.Common.Botany;
 using Content.Trauma.Shared.Botany.Components;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Botany.PlantAnalyzer;
 

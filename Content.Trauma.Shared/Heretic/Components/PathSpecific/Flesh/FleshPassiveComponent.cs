@@ -2,8 +2,6 @@
 
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 

@@ -18,7 +18,6 @@ using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.CollectiveMind;
 

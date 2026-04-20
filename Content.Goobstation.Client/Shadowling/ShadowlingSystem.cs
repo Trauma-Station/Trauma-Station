@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Systems;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Shadowling;
 

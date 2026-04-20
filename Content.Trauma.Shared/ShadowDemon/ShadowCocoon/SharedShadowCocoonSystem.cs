@@ -7,7 +7,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ShadowDemon.ShadowCocoon;

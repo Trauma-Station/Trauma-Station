@@ -1,19 +1,17 @@
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Content.IntegrationTests.Tests._Shitmed.Body;
 
 [TestFixture]
-public sealed class SpeciesBUiTest
+public sealed class SpeciesBUiTest : GameTest
 {
     private const string BaseMobSpeciesTest = "BaseMobSpeciesTest";
 
@@ -33,12 +31,7 @@ public sealed class SpeciesBUiTest
     [Test]
     public async Task AllSpeciesHaveBaseBUiTest()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Dirty = true,
-            Connected = false
-        });
-
+        var pair = Pair;
         var server = pair.Server;
         var proto = server.ResolveDependency<IPrototypeManager>();
         var factoryComp = server.ResolveDependency<IComponentFactory>();
@@ -68,6 +61,5 @@ public sealed class SpeciesBUiTest
                 }
             });
         });
-        await pair.CleanReturnAsync();
     }
 }

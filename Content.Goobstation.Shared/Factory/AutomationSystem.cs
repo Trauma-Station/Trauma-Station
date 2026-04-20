@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.Factory.Slots;
 using Content.Shared.Prototypes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Factory;
 

@@ -6,7 +6,6 @@ using Content.Shared.Tag;
 using Content.Trauma.Common.Xenomorphs;
 using Content.Trauma.Shared.Xenomorphs.Infection;
 using Content.Trauma.Shared.Xenomorphs.Larva;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Xenomorphs.Xenomorph;
 

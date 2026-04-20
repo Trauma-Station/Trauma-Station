@@ -15,9 +15,7 @@ using Content.Shared.Verbs;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;

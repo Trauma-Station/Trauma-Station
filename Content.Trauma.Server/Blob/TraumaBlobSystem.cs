@@ -6,7 +6,6 @@ using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Server.Language;
 using Content.Trauma.Shared.Language.Events;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Blob;
 

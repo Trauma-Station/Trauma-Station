@@ -9,7 +9,6 @@ using Content.Shared.Body;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Medical.Client.Surgery;

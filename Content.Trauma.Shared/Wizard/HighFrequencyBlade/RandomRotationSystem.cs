@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Wizard.HighFrequencyBlade;

@@ -8,7 +8,6 @@ using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Quality;
 using Content.Trauma.Shared.Forging;
 using Content.Trauma.Shared.Knowledge.Quality;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 

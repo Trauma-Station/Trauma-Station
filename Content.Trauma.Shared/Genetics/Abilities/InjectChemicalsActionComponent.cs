@@ -3,8 +3,6 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.Reagent;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;

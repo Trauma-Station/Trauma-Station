@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Maps;
+using Content.Shared.Physics;
 using Content.Shared.Roles;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using System.Numerics;
 
 namespace Content.Trauma.Shared.Areas;
@@ -15,6 +16,7 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MapAreaSystem _mapArea = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly EntityQuery<DepartmentAreaComponent> _deptQuery = default!;
 
     /// <summary>
@@ -95,13 +97,18 @@ public sealed class AreaSystem : EntitySystem
         => GetArea(Transform(target).Coordinates);
 
     /// <summary>
-    /// Get the area at a given position.
+    /// Get the area at a given position by finding its grid first.
     /// </summary>
     public EntityUid? GetArea(EntityCoordinates coords)
-    {
-        if (_transform.GetGrid(coords) is not {} grid)
-            return null;
+        => _transform.GetGrid(coords) is {} grid
+            ? GetArea(grid, coords)
+            : null;
 
+    /// <summary>
+    /// Get the area at a given position on a grid.
+    /// </summary>
+    public EntityUid? GetArea(EntityUid grid, EntityCoordinates coords)
+    {
         var pos = coords.Position;
         if (coords.EntityId != grid)
         {
@@ -126,6 +133,38 @@ public sealed class AreaSystem : EntitySystem
     public EntProtoId? GetAreaPrototype(EntityUid area)
     {
         return Prototype(area)?.ID;
+    }
+
+    /// <summary>
+    /// Add any areas not blocked by anything on a given map to a list, matching a predicate.
+    /// </summary>
+    public void AddOpenAreas(MapId map, List<Entity<TransformComponent>> areas, Predicate<Entity<TransformComponent>> pred)
+    {
+        AddOpenAreas<AreaComponent>(map, areas, pred);
+    }
+
+    /// <summary>
+    /// Add areas not blocked by anything on a given map to a list, matching a predicate.
+    /// Uses a generic component type param to narrow down the query, use a marker component for it to be faster.
+    /// </summary>
+    public void AddOpenAreas<T>(MapId map, List<Entity<TransformComponent>> areas, Predicate<Entity<TransformComponent>> pred) where T: IComponent
+    {
+        // TODO: open areas cache...
+        var query = EntityQueryEnumerator<T, TransformComponent>();
+        var mask = CollisionGroup.MobMask;
+        while (query.MoveNext(out var uid, out _, out var xform))
+        {
+            if (xform.MapID != map)
+                continue;
+
+            var coords = xform.Coordinates;
+            if (_turf.GetTileRef(coords) is not {} tile || _turf.IsTileBlocked(tile, mask))
+                continue;
+
+            var ent = new Entity<TransformComponent>(uid, xform);
+            if (pred(ent))
+                areas.Add(ent);
+        }
     }
 
     /// <summary>

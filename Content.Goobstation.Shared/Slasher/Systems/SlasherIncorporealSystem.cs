@@ -36,9 +36,7 @@ using Content.Shared.Standing;
 using Content.Shared.Body;
 using Content.Shared.Pointing;
 using Content.Trauma.Common.Footprints;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;

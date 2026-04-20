@@ -81,7 +81,7 @@
   parent: BaseRedAlert # Trauma
   id: ArmoryLaser
   icon:
-    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser.rsi # Trauma
     state: icon
   product: CrateArmoryLaser
   cost: 4800

@@ -5,8 +5,6 @@ using Content.Shared.Destructible.Thresholds.Behaviors;
 using Content.Shared.FixedPoint;
 using Content.Shared.Materials;
 using Content.Shared.Tools;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Durability.Components;
 

@@ -344,7 +344,7 @@
   id: HereticSidePath8Cleave
   name: knowledge-path-side-s8-cleave-name
   description: knowledge-path-side-s8-cleave-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: cleave }
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: blood_siphon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
