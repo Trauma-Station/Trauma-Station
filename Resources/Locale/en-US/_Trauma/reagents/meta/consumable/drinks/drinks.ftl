@@ -14,7 +14,7 @@ reagent-desc-trappist-beer = A strong, dark beer brewed by space monks using hol
 reagent-physical-desc-foamy = foamy
 
 reagent-name-aloe-cocktail = Aloe cocktail
-reagent-desc-aloe-cocktail = A strange mix of watermelon juice, cream and rum.
+reagent-desc-aloe-cocktail = A strange mix of watermelon juice, cream and mead.
 reagent-physical-desc-tropical = tropical
 
 reagent-name-banana-milkshake = Banana milkshake
