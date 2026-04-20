@@ -32,7 +32,8 @@ public sealed partial class AreaReactionEntityEffectsSystem : EntityEffectSystem
         var xform = Transform(entity);
         var mapCoords = _xform.GetMapCoordinates(entity);
         var spreadAmount = (int) Math.Max(0, Math.Ceiling(args.Scale / args.Effect.OverflowThreshold));
-        var duration = (int) Math.Max(args.Effect.Duration, Math.Ceiling(Math.Sqrt(spreadAmount * 2) / 2 * 1.5)); // Trauma - Either use the duration from the code, or calculate duration based off of minimum possible "steps" * 1.5, whichever's larger
+        var minSteps = (int) Math.Ceiling(Math.Sqrt(spreadAmount * 2) / 2); // Trauma - Minimumn number of steps possible with the spreadAmount, assuming a perfect diamond spread
+        var duration = (int) Math.Max(args.Effect.Duration, minSteps * 2); // Trauma - Either use the duration from the code, or minSteps*2 to let it spread completely, whichever's larger
         var effect = args.Effect;
 
         if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
