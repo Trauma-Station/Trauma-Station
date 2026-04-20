@@ -39,7 +39,8 @@
   metamorphicSprite:
     sprite: _Trauma/Objects/Consumable/Drinks/t_drink.rsi
     state: icon
-  metamorphicMaxFillLevels: 1
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
     Digestion:
@@ -58,7 +59,7 @@
   metamorphicSprite:
     sprite: _Trauma/Objects/Consumable/Drinks/rum_coke.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 6
+  metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
@@ -78,7 +79,7 @@
   metamorphicSprite:
     sprite: _Trauma/Objects/Consumable/Drinks/trappist.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 6
+  metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
@@ -98,7 +99,7 @@
   metamorphicSprite:
     sprite: _Trauma/Objects/Consumable/Drinks/aloe_cocktail.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 6
+  metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
@@ -118,7 +119,7 @@
   metamorphicSprite:
     sprite:  _Trauma/Objects/Consumable/Drinks/banana_milkshake.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 6
+  metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
