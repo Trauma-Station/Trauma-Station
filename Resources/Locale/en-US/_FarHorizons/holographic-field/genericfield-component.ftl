@@ -1,4 +1,4 @@
-﻿comp-genericfield-turned-on = The Holographic Generator boots up.
+comp-genericfield-turned-on = The Holographic Generator boots up.
 comp-genericfield-turned-off = The Holographic Generator shuts down.
 
 comp-genericfield-on = It's switched [color=green]on[/color].

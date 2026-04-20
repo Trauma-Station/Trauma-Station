@@ -24,7 +24,7 @@
     noRot: false
     layers:
       - state: machine
-      - state: p6 
+      - state: p6
         map: ["powerLight"]
         shader: unshaded
       - state: connected
