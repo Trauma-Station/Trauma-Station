@@ -178,6 +178,7 @@ BenchSteelWhiteMiddle: null
 BenchSteelWhiteRight: null
 BoardGameSpawner: null
 BoxColoredLighttube: BoxLighttube
+# BoxEncryptionKeyPrisoner: BoxEncryptionKeyPassenger # Trauma - remove common radio
 BoxMaintenanceLightbulb: BoxLightMixed
 BoxPDAPrisoner: BoxPDA
 ClothingBeltMartialBlack: null
