@@ -15,16 +15,24 @@ public sealed class ActiveEmitter
 {
     public ParticleEffectPrototype Proto = default!;
 
-    /// <summary>Current world-space origin of the emitter.</summary>
+    /// <summary>
+    /// Current world-space origin of the emitter.
+    /// </summary>
     public MapCoordinates MapCoords;
 
-    /// <summary>Entity this emitter follows (if any).</summary>
+    /// <summary>
+    /// Entity this emitter follows (if any).
+    /// </summary>
     public EntityUid? AttachedEntity;
 
-    /// <summary>Time elapsed since this emitter was created.</summary>
+    /// <summary>
+    /// Time elapsed since this emitter was created.
+    /// </summary>
     public TimeSpan Age;
 
-    /// <summary>Eemission accumulator for sub-tick emission rates.</summary>
+    /// <summary>
+    /// Eemission accumulator for sub-tick emission rates.
+    /// </summary>
     public float EmitAccum;
 
     /// <summary>True once the emitter stops producing new particles. Existing particles live out their lifetimes.</summary>
@@ -36,10 +44,14 @@ public sealed class ActiveEmitter
     /// </summary>
     public uint Handle;
 
-    /// <summary>Color tint multiplied on top of every particle's computed color.</summary>
+    /// <summary>
+    /// Color tint multiplied on top of every particle's computed color.
+    /// </summary>
     public Color? ColorOverride;
 
-    /// <summary>Intensity multiplier for emission rate and particle size. 1.0 = normal.</summary>
+    /// <summary>
+    /// Intensity multiplier for emission rate and particle size. 1.0 = normal.
+    /// </summary>
     public float Intensity = 1f;
 
     /// <summary>
@@ -48,13 +60,15 @@ public sealed class ActiveEmitter
     /// </summary>
     public ParticleRuntimeOverrides? Overrides;
 
-    // =^..^= Velocity tracking =^..^=
+    #region Velocity tracking
 
     public Vector2 PreviousPosition;
     public Vector2 EmitterVelocity;
     public bool VelocityInitialized;
 
-    // =^..^= Aim-at targeting =^..^=
+    #endregion
+
+    #region Aim-at targeting
 
     /// <summary>
     /// When set, each tick the emit angle is recomputed to point toward this entity.
@@ -68,27 +82,41 @@ public sealed class ActiveEmitter
     /// </summary>
     public Vector2? TargetPosition;
 
-    /// <summary>Resolved emit angle in radians, recomputed each tick from the target if one is set.</summary>
+    /// <summary>
+    /// Resolved emit angle in radians, recomputed each tick from the target if one is set.
+    /// </summary>
     public float EffectiveEmitAngle;
 
-    // =^..^= Timed bursts =^..^=
+    #endregion
 
-    /// <summary>Tracks which <see cref="ParticleEffectPrototype.Bursts"/> entries have already fired.</summary>
+    #region Timed bursts
+
+    /// <summary>
+    /// Tracks which <see cref="ParticleEffectPrototype.Bursts"/> entries have already fired.
+    /// </summary>
     public readonly List<bool> FiredBursts = new();
 
-    // =^..^= Animation =^..^=
+    #endregion
 
-    /// <summary>Resolved RSI frames. Populated on creation.
-    /// Single-frame sprites have one entry and empty Delays.</summary>
+    #region Animation
+
+    /// <summary>
+    /// Resolved RSI frames. Populated on creation.
+    /// Single-frame sprites have one entry and empty Delays.
+    /// </summary>
     public Texture[] Frames = Array.Empty<Texture>();
 
-    /// <summary>frame delays when an RSI defines animation.</summary>
+    /// <summary>
+    /// Frame delays when an RSI defines animation.
+    /// </summary>
     public float[] Delays = Array.Empty<float>();
 
     public int AnimFrame;
     public float AnimTimer;
 
-    // =^..^= Particles =^..^=
+    #endregion
+
+    #region Particles
 
     // ParticleData objects are never removed from Particles once added.
     // When a particle dies it's marked Alive = false and pushed onto FreePool.
@@ -97,10 +125,14 @@ public sealed class ActiveEmitter
     // The simulation loop still iterates the full Particles list each frame, so a very large
     // list with mostly dead slots can waste time, <b>emitters should keep MaxCount reasonable.</b>
 
-    /// <summary>All particle slots, including dead ones held for pooling.</summary>
+    /// <summary>
+    /// All particle slots, including dead ones held for pooling.
+    /// </summary>
     public readonly List<ParticleData> Particles = new();
 
-    /// <summary>Dead particles available for reuse.</summary>
+    /// <summary>
+    /// Dead particles available for reuse.
+    /// </summary>
     public readonly Queue<ParticleData> FreePool = new();
 
     public bool HasLiveParticles()
@@ -112,4 +144,6 @@ public sealed class ActiveEmitter
         }
         return false;
     }
+
+    #endregion
 }

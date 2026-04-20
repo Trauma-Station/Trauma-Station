@@ -33,6 +33,7 @@ public sealed class FlammableParticleSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<FlammableComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<FlammableComponent, ComponentShutdown>(OnShutdown);
     }

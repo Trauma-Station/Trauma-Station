@@ -36,15 +36,21 @@ public sealed partial class ParticleSystem : EntitySystem
     private int _quality;
     private int _globalBudget;
 
-    // Incrementing handle counter. Old values are abandoned when emitters die, handles are never reused.
-    // uint gives ~4 billion spawns before wrapping, if this causes problems, you scare me.
+    /// <summary>
+    /// Incrementing handle counter. Old values are abandoned when emitters die, handles are never reused.
+    /// uint gives ~4 billion spawns before wrapping, if this causes problems, you scare me.
+    /// </summary>
     private uint _nextHandle = 1;
 
-    // Emission/count multipliers per quality level: Off, Low, Medium, High.
-    // So when quality is set to Low, only 25% of the particles spawn, at Medium it's 50%, and at High it's 100%.
+    /// <summary>
+    /// Emission/count multipliers per quality level: Off, Low, Medium, High.
+    /// So when quality is set to Low, only 25% of the particles spawn, at Medium it's 50%, and at High it's 100%.
+    /// </summary>
     private static readonly float[] QualityMultipliers = { 0f, 0.25f, 0.5f, 1f };
 
-    // Default global particle budgets per quality level.
+    /// <summary>
+    /// Default global particle budgets per quality level.
+    /// </summary>
     private static readonly int[] QualityBudgets = { 0, 2250, 5500, 8000 };
 
     /// <summary>
@@ -114,7 +120,9 @@ public sealed partial class ParticleSystem : EntitySystem
         return count;
     }
 
-    /// <summary>Spawns a particle effect at a given map coordinate.</summary>
+    /// <summary>
+    /// Spawns a particle effect at a given map coordinate.
+    /// </summary>
     public ActiveEmitter? SpawnEffect(ProtoId<ParticleEffectPrototype> effectId, MapCoordinates coords, EntityUid? attachedEntity = null, Color? colorOverride = null)
     {
         if (!_protoManager.TryIndex(effectId, out var proto))

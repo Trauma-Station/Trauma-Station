@@ -24,6 +24,7 @@ public sealed class WelderParticleSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<WeldableComponent, ComponentShutdown>(OnShutdown);
     }
 

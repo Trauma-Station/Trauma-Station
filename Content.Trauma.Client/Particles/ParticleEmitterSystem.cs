@@ -16,6 +16,7 @@ public sealed class ParticleEmitterSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<ParticleEmitterComponent, MapInitEvent>(OnMapInit);
     }
 

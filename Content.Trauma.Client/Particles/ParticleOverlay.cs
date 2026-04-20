@@ -7,7 +7,9 @@ using Robust.Shared.Enums;
 
 namespace Content.Trauma.Client.Particles;
 
-/// <summary>Draws all live particles for every active emitter each frame.</summary>
+/// <summary>
+/// Draws all live particles for every active emitter each frame.
+/// </summary>
 public sealed class ParticleOverlay : Overlay
 {
     [Dependency] private readonly IEyeManager _eye = default!;

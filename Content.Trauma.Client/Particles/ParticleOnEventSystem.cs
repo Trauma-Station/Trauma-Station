@@ -19,7 +19,9 @@ public sealed class ParticleOnEventSystem : EntitySystem
     [Dependency] private readonly ParticleSystem _particles = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
-    // Track emitters spawned by OnThrown so we can stop them when the entity lands
+    /// <summary>
+    /// Track emitters spawned by OnThrown so we can stop them when the entity lands
+    /// </summary>
     private readonly Dictionary<EntityUid, ActiveEmitter> _thrownEmitters = new();
 
     public override void Initialize()

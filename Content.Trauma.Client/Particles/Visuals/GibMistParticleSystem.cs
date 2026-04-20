@@ -18,6 +18,7 @@ public sealed class GibMistParticleSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeNetworkEvent<GibMistParticleEvent>(OnGibMist);
     }
 

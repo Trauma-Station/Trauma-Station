@@ -23,19 +23,54 @@ public sealed class ParticleData
     /// </summary>
     public Vector2 SpawnOrigin;
 
-    public Vector2 Velocity;        // current movement vector in screen-space units/sec
-    public TimeSpan Age;            // how long this particle has been alive
-    public TimeSpan Lifetime;       // total lifespan before the particle dies
-    public float SpawnSpeed;        // speed magnitude at spawn, used by SpeedOverLifetime
-    public float SpawnIntensity;    // emitter intensity captured at spawn, used to scale rendered size
-    public float Rotation;          // current rotation in radians
-    public float RotationSpeed;     // spin rate in radians per second
-    public bool Alive;              // false = dead and available for pooling
+    /// <summary>
+    /// Current movement vector in screen-space units/sec
+    /// </summary>
+    public Vector2 Velocity;
 
-    /// <summary>Size multiplier baked in at spawn from SizeVariance.</summary>
+    /// <summary>
+    /// How long this particle has been alive
+    /// </summary>
+    public TimeSpan Age;
+
+    /// <summary>
+    /// Total lifespan before the particle dies
+    /// </summary>
+    public TimeSpan Lifetime;
+
+    /// <summary>
+    /// Speed magnitude at spawn, used by SpeedOverLifetime
+    /// </summary>
+    public float SpawnSpeed;
+
+    /// <summary>
+    /// Emitter intensity captured at spawn, used to scale rendered size
+    /// </summary>
+    public float SpawnIntensity;
+
+    /// <summary>
+    /// Current rotation in radians
+    /// </summary>
+    public float Rotation;
+
+    /// <summary>
+    /// Spin rate in radians per second
+    /// </summary>
+    public float RotationSpeed;
+
+    /// <summary>
+    ///  False = dead and available for pooling
+    /// </summary>
+    public bool Alive;
+
+    /// <summary>
+    /// Size multiplier baked in at spawn from SizeVariance.
+    /// </summary>
     public float SizeMultiplier = 1f;
 
-    /// <summary>Noise seed so each particle gets different turbulence.</summary>
+    /// <summary>
+    /// Noise seed so each particle gets different turbulence.
+    /// </summary>
     public Vector2 NoiseOffset;
 
     public float AgeRatio => Lifetime > TimeSpan.Zero ? Math.Clamp((float)(Age.TotalSeconds / Lifetime.TotalSeconds), 0f, 1f) : 1f;
