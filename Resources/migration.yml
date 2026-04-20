@@ -8,14 +8,11 @@
 # WallSolid: Window
 # Table: null
 
-# <Trauma> - remove common radio
-# 2026-04-20
-BoxEncryptionKeyPrisoner: null
-BoxEncryptionKeyPassenger: null
-
 # <Trauma> - too lazy to port debugoks multi migration thing
 # 2026-3-2026
 ClosetMaintenanceFilledRandom: RandomMaintsCloset
+BoxEncryptionKeyPrisoner: null
+BoxEncryptionKeyPassenger: null
 
 # 2026-01-07
 GunSafeDisabler: GunSafePhaser
