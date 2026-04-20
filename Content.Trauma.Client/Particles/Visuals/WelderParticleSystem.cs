@@ -1,9 +1,10 @@
-using Content.Shared._Starfall.Particles;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.DoAfter;
 using Content.Shared.Tools.Components;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Shared.Particles;
 
-namespace Content.Client._Starfall.Particles;
+namespace Content.Trauma.Client.Particles.Visuals;
 
 public sealed class WelderParticleSystem : EntitySystem
 {
@@ -87,4 +88,3 @@ public sealed class WelderParticleSystem : EntitySystem
         }
     }
 }
-

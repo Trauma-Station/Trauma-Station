@@ -1,18 +1,19 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
-using Content.Shared._Starfall.Particles;
-using Content.Shared.CCVar;
+using Content.Trauma.Common.CCVar;
+using Content.Trauma.Shared.Particles;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Configuration;
 using Robust.Shared.Graphics.RSI;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
 
-namespace Content.Client._Starfall.Particles;
+namespace Content.Trauma.Client.Particles;
 
 /// <summary>
 /// Manages active particle emitters on the client, including their simulation and rendering via <see cref="ParticleOverlay"/>.
@@ -80,14 +81,14 @@ public sealed partial class ParticleSystem : EntitySystem
         _overlay = new ParticleOverlay(this);
         _overlayManager.AddOverlay(_overlay);
 
-        _cfg.OnValueChanged(CCVars.ParticleQuality, OnQualityChanged, invokeImmediately: true);
-        _cfg.OnValueChanged(CCVars.ParticleGlobalBudget, v => _globalBudget = v, invokeImmediately: true);
+        _cfg.OnValueChanged(TraumaCVars.ParticleQuality, OnQualityChanged, invokeImmediately: true);
+        _cfg.OnValueChanged(TraumaCVars.ParticleGlobalBudget, v => _globalBudget = v, invokeImmediately: true);
     }
 
     public override void Shutdown()
     {
         base.Shutdown();
-        _cfg.UnsubValueChanged(CCVars.ParticleQuality, OnQualityChanged);
+        _cfg.UnsubValueChanged(TraumaCVars.ParticleQuality, OnQualityChanged);
         _overlayManager.RemoveOverlay(_overlay);
         _emitters.Clear();
     }

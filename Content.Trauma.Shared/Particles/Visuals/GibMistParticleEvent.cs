@@ -1,7 +1,8 @@
-using Robust.Shared.Map;
-using Robust.Shared.Serialization;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._Starfall.Particles;
+using Robust.Shared.Map;
+
+namespace Content.Trauma.Shared.Particles.Visuals;
 
 /// <summary>
 /// Sent from the server to nearby clients when an entity is gibbed,
@@ -19,4 +20,3 @@ public sealed class GibMistParticleEvent : EntityEventArgs
         BloodColor = bloodColor;
     }
 }
-

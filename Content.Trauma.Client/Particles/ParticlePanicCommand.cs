@@ -1,7 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 
-namespace Content.Client._Starfall.Particles;
+namespace Content.Trauma.Client.Particles;
 
 /// <summary>
 /// Immediately kills all active particle emitters and their live particles.
@@ -21,4 +23,3 @@ public sealed class ParticlePanicCommand : IConsoleCommand
         shell.WriteLine($"Cleared {count} emitter(s)/particle(s).");
     }
 }
-

@@ -1,6 +1,9 @@
-using System.Numerics;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Client._Starfall.Particles;
+using System.Numerics;
+using Content.Trauma.Shared.Particles;
+
+namespace Content.Trauma.Client.Particles;
 
 /// <summary>
 /// A single live particle. Class so it can be pooled in place.
@@ -9,7 +12,7 @@ public sealed class ParticleData
 {
     /// <summary>
     /// Screen-space offset from the emitter origin, X = right, Y = up.
-    /// All simulation runs in this space regardless of <see cref="Content.Shared._Starfall.Particles.ParticleEffectPrototype.WorldSpace"/>.
+    /// All simulation runs in this space regardless of <see cref="ParticleEffectPrototype.WorldSpace"/>.
     /// </summary>
     public Vector2 LocalOffset;
 

@@ -1,9 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
-using Content.Shared._Starfall.Particles;
+using Content.Trauma.Shared.Particles;
 using Robust.Client.Graphics;
 using Robust.Shared.Map;
 
-namespace Content.Client._Starfall.Particles;
+namespace Content.Trauma.Client.Particles;
 
 /// <summary>
 /// A running particle emitter and its live particle pool.

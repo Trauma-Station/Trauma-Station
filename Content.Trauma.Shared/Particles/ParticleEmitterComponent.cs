@@ -1,6 +1,6 @@
-using Robust.Shared.Prototypes;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._Starfall.Particles;
+namespace Content.Trauma.Shared.Particles;
 
 /// <summary>
 /// Spawns a particle effect on this entity when it initializes.
@@ -8,7 +8,9 @@ namespace Content.Shared._Starfall.Particles;
 [RegisterComponent]
 public sealed partial class ParticleEmitterComponent : Component
 {
-    /// <summary>The particle effect to emit.</summary>
+    /// <summary>
+    /// The particle effect to emit.
+    /// </summary>
     [DataField(required: true)]
     public ProtoId<ParticleEffectPrototype> Effect;
 

@@ -1,7 +1,9 @@
-using Content.Shared._Starfall.Particles;
-using Robust.Shared.Prototypes;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Client._Starfall.Particles;
+using Content.Trauma.Shared.Particles;
+using Content.Trauma.Shared.Particles.Visuals;
+
+namespace Content.Trauma.Client.Particles.Visuals;
 
 /// <summary>
 /// Receives <see cref="GibMistParticleEvent"/> from the server and spawns
@@ -28,4 +30,3 @@ public sealed class GibMistParticleSystem : EntitySystem
         emitter.ColorOverride = ev.BloodColor;
     }
 }
-

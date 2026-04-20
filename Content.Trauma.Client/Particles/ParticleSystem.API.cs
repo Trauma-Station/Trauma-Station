@@ -1,11 +1,12 @@
-using Content.Shared._Starfall.Particles;
-using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Client._Starfall.Particles;
+using Content.Trauma.Shared.Particles;
+using Robust.Shared.Map;
+
+namespace Content.Trauma.Client.Particles;
 
 /// <summary>
-/// API for <see cref="ParticleSystem"/>.
+/// API for <see cref="Trauma.Client.Particles.ParticleSystem"/>.
 /// Use these methods to create and remove particle effects from other systems.
 /// </summary>
 public sealed partial class ParticleSystem
@@ -61,4 +62,3 @@ public sealed partial class ParticleSystem
         StopEffect(handle);
     }
 }
-

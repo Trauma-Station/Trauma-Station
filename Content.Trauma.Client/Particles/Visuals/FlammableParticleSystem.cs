@@ -1,10 +1,11 @@
-using Content.Shared._Starfall.Particles;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Trauma.Shared.Particles;
 using Robust.Client.GameObjects;
-using Robust.Shared.Prototypes;
 
-namespace Content.Client._Starfall.Particles;
+namespace Content.Trauma.Client.Particles.Visuals;
 
 /// <summary>
 /// Particles when entities are on fire.
@@ -99,4 +100,3 @@ public sealed class FlammableParticleSystem : EntitySystem
         }
     }
 }
-

@@ -1,7 +1,8 @@
-using Content.Shared._Starfall.Particles;
-using Robust.Shared.Map;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Client._Starfall.Particles;
+using Content.Trauma.Shared.Particles;
+
+namespace Content.Trauma.Client.Particles;
 
 /// <summary>
 /// Spawns a particle effect on this client when an entity with
@@ -29,4 +30,3 @@ public sealed class ParticleEmitterSystem : EntitySystem
             emitter.Intensity = ent.Comp.Intensity;
     }
 }
-

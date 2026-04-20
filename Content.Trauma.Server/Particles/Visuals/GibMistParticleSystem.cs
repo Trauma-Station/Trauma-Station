@@ -1,11 +1,12 @@
-using Content.Shared._Starfall.Particles;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Gibbing;
+using Content.Trauma.Shared.Particles.Visuals;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
-namespace Content.Server._Starfall.Particles;
+namespace Content.Trauma.Server.Particles.Visuals;
 
 /// <summary>
 /// Reads the blood color of a gibbed entity and forwards it to nearby clients via
@@ -18,7 +19,6 @@ namespace Content.Server._Starfall.Particles;
 /// to move this client-side without accepting red blood for everything.
 /// If gibbing ever becomes predicted/shared, DELETE THIS IMMEDIATELY and move it to the client.
 /// </summary>
-/// TODO: KILL WHEN GIBBING IS PREDICTED/SHARED I BEG
 public sealed class GibMistParticleSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;

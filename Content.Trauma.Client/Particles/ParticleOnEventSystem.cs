@@ -1,4 +1,5 @@
-using Content.Shared._Starfall.Particles;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Projectiles;
@@ -6,9 +7,9 @@ using Content.Shared.Throwing;
 using Content.Shared.Trigger;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Shared.Particles;
 
-namespace Content.Client._Starfall.Particles;
+namespace Content.Trauma.Client.Particles;
 
 /// <summary>
 /// Client-side system that listens for events and spawns particles based on <see cref="ParticleOnEventComponent"/>
@@ -16,7 +17,6 @@ namespace Content.Client._Starfall.Particles;
 public sealed class ParticleOnEventSystem : EntitySystem
 {
     [Dependency] private readonly ParticleSystem _particles = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
     // Track emitters spawned by OnThrown so we can stop them when the entity lands
@@ -132,4 +132,3 @@ public sealed class ParticleOnEventSystem : EntitySystem
     }
 
 }
-
