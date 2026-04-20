@@ -19,5 +19,5 @@
   - type: EntityTableContainerFill
     containers:
       entity_storage:
-      - id: HolographicBarrierGeneratorFlatpack
+        id: HolographicBarrierGeneratorFlatpack
         amount: 2
