@@ -21,24 +21,31 @@
         density: 100
         hard: true
   - type: Sprite
-    sprite: _DV/CosmicCult/Tileset/cosmicconstructpylon.rsi
+    sprite: _DV/CosmicCult/Tileset/chantry.rsi
     layers:
-      - state: spawnin
+      - state: spawn
         map: ["base"]
-      - state: spawnin-overlay
+      - state: spawn-unshaded
         map: ["overlay"]
         shader: unshaded
+      - state: spawn-animated
+        map: ["animated"]
+        shader: unshaded
+        offset: 0,0.75
     offset: 0,0.4
     drawdepth: Mobs
   - type: GenericVisualizer
     visuals:
       enum.ChantryVisuals.Status:
         base:
-          Off: {state: spawnin}
+          Off: {state: spawn}
           On: {state: base}
         overlay:
-          Off: {state: spawnin-overlay}
-          On: {state: base-overlay}
+          Off: {state: spawn-unshaded}
+          On: {state: base-unshaded}
+        animated:
+          Off: {state: spawn-animated}
+          On: {state: base-animated}
   - type: Appearance
   - type: InteractionOutline
   - type: DoAfter

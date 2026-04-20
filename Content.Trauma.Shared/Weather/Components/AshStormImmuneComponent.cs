@@ -4,7 +4,7 @@
 namespace Content.Trauma.Shared.Weather.Components;
 
 /// <summary>
-/// Makes an entity not take damage from any weather.
+/// Makes an entity not take damage from ash storms.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class WeatherImmuneComponent : Component;

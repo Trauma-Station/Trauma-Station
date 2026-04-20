@@ -40,6 +40,25 @@
   id: MobSkeletonCloset
   name: closet skeleton
   components:
+  # <Trauma>
+  - type: KnowledgeGrant # Combat skills advanced, crafting skills master
+    skills:
+      ThrowingKnowledge: 51
+      StrengthKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      MeleeKnowledge: 51
+      ShootingKnowledge: 51
+      FirstAidKnowledge: 51
+      FabricationKnowledge: 88
+      WeaponsKnowledge: 88
+      ArmorKnowledge: 88
+      MetalworkingKnowledge: 88
+      CarvingKnowledge: 88
+      GunsmithingKnowledge: 88
+      MechanicsKnowledge: 88
+      TailoringKnowledge: 88
+  # </Trauma>
   - type: GhostRole
     name: ghost-role-information-closet-skeleton-name
     description: ghost-role-information-closet-skeleton-description

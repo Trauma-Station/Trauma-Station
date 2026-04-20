@@ -6,9 +6,9 @@
   components:
   - type: StationEvent
     earliestStart: 15
-    reoccurrenceDelay: 45
-    weight: 3
-    minimumPlayers: 10
+    reoccurrenceDelay: 70
+    weight: 1
+    minimumPlayers: 20 # They're nigh impossible to catch even with a full sec team
     duration: null
   - type: RuleGrids
   - type: LoadMapRule

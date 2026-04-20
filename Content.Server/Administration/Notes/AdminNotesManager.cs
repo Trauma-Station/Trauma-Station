@@ -15,7 +15,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Administration.Notes;
 
-public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
+public sealed partial class AdminNotesManager : IAdminNotesManager, IPostInjectInit // Trauma - made partial
 {
     [Dependency] private readonly IAdminManager _admins = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
@@ -77,6 +77,11 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
         // You can still ban them just fine, which is why we should allow admins to view their bans with the notes panel
         if (await _db.GetPlayerRecordByUserId((NetUserId) player) is null)
             return;
+
+        // <Trauma> - no watchlist for trialmins
+        if (type == NoteType.Watchlist && !CanWatchlist(createdBy))
+            return;
+        // </Trauma>
 
         var sb = new StringBuilder($"{createdBy.Name} added a");
 
@@ -179,6 +184,10 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
 
     public async Task DeleteAdminRemark(int noteId, NoteType type, ICommonSession deletedBy)
     {
+        // <Trauma> - trialmins dont get to change watchlists
+        if (type == NoteType.Watchlist && !CanWatchlist(deletedBy))
+            return;
+        // </Traum>
         var note = await GetAdminRemark(noteId, type);
         if (note == null)
         {
@@ -212,6 +221,10 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
 
     public async Task ModifyAdminRemark(int noteId, NoteType type, ICommonSession editedBy, string message, NoteSeverity? severity, bool secret, DateTime? expiryTime)
     {
+        // <Trauma> - trialmins dont get to change watchlists
+        if (type == NoteType.Watchlist && !CanWatchlist(editedBy))
+            return;
+        // </Traum>
         message = message.Trim();
 
         var note = await GetAdminRemark(noteId, type);

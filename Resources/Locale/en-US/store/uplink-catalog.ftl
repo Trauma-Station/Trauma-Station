@@ -376,7 +376,7 @@ uplink-syndie-raid-name = Syndicate Raid Suit
 uplink-syndie-raid-desc = A very durable and reasonably flexible suit of blood-red armor, reinforced against all common forms of damage but not capable of space walks. Comes with a sick helmet.
 
 uplink-hardsuit-syndieelite-name = Syndicate Elite Hardsuit
-uplink-hardsuit-syndieelite-desc = An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders.
+uplink-hardsuit-syndieelite-desc = An elite version of the blood-red hardsuit, with improved mobility, fireproofing and heat-resistant armor. Property of Gorlex Marauders.
 
 uplink-clothing-outer-hardsuit-juggernaut-name = Cybersun Juggernaut Suit
 uplink-clothing-outer-hardsuit-juggernaut-desc = Hyper resilient armor made of materials tested in the Tau chromosphere facility. The only thing that's going to be slowing you down is this suit... and tasers.
@@ -517,3 +517,7 @@ uplink-briefcase-gun-desc = An indistinct briefcase with a highly compact C-20K 
 
 uplink-energycrossbow-name = Mini Energy Crossbow
 uplink-energycrossbow-desc = The go-to sidearm of any operative who prefers their victims not to be moving. Fires regenerating toxic arrows that floors victims in an instant.
+
+#Objective items
+uplink-hijack-beacon-name = Hijack Beacon
+uplink-hijack-beacon-desc = A syndicate-brand hijack beacon designed to get around the firewalls of Nanotrasen-brand Automated Trade Stations. They take 200 seconds to work and Trade Stations will announce they are being hacked, so prepare accordingly.

@@ -1,17 +1,4 @@
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Javier Guardia Fernández <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2021 T-Stalker <43253663+DogZeroX@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Administration.Logs;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -21,14 +8,21 @@ namespace Content.IntegrationTests.Tests.Administration.Logs;
 
 [TestFixture]
 [TestOf(typeof(AdminLogSystem))]
-public sealed class FilterTests
+public sealed class FilterTests : GameTest
 {
+    public override PoolSettings PoolSettings => new()
+    {
+        AdminLogsEnabled = true,
+        DummyTicker = false,
+        Connected = true
+    };
+
     [Test]
     [TestCase(DateOrder.Ascending)]
     [TestCase(DateOrder.Descending)]
     public async Task Date(DateOrder order)
     {
-        await using var pair = await PoolManager.GetServerClient(AddTests.LogTestSettings);
+        var pair = Pair;
         var server = pair.Server;
 
         var sEntities = server.ResolveDependency<IEntityManager>();
@@ -110,6 +104,5 @@ public sealed class FilterTests
 
             return firstFound && secondFound;
         });
-        await pair.CleanReturnAsync();
     }
 }

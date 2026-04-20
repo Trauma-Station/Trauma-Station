@@ -1,0 +1,373 @@
+- type: combo
+  id: ArmstrongBusterPunchesSimple
+  attacks:
+  - Harm
+  - Harm
+  - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/boxingpunch2.ogg
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 7
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
+  levelRequired: 0
+  levelExceeded: 20
+
+- type: combo
+  id: ArmstrongBusterPunches
+  attacks:
+  - Harm
+  - Harm
+  - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/boxingpunch2.ogg
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 12
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 6
+  levelRequired: 20
+  levelExceeded: 40
+
+- type: combo
+  id: ArmstrongBusterPunchesAdvanced
+  attacks:
+  - Harm
+  - Harm
+  - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/boxingpunch2.ogg
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 18
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 12
+  levelRequired: 40
+
+- type: combo
+  id: ArmstrongDropkickSimple
+  attacks:
+  - Grab
+  - Harm
+  - Harm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  - !type:TakeStaminaDamage
+    amount: 7
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 6
+  - !type:ModifyKnockdown
+    time: 1.5
+    drop: false
+  opponentEffects:
+  - !type:ModifyParalysis
+    time: 2
+  - !type:TakeStaminaDamage
+    amount: 13
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 8
+  conditions:
+  - !type:StandingCondition
+  levelRequired: 6 # TODO: make it require target to be standing, make it do knockback
+  levelExceeded: 36
+
+- type: combo
+  id: ArmstrongDropkick
+  attacks:
+  - Grab
+  - Harm
+  - Harm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  - !type:TakeStaminaDamage
+    amount: 7
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
+  - !type:ModifyKnockdown
+    time: 1
+    drop: false
+  opponentEffects:
+  - !type:ModifyParalysis
+    time: 4
+  - !type:TakeStaminaDamage
+    amount: 20
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 18
+  conditions:
+  - !type:StandingCondition
+  levelRequired: 36
+  levelExceeded: 54
+
+- type: combo
+  id: ArmstrongDropkickAdvanced
+  attacks:
+  - Grab
+  - Harm
+  - Harm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
+  - !type:ModifyKnockdown
+    time: 0.5
+    drop: false
+  opponentEffects:
+  - !type:ModifyParalysis
+    time: 6
+  - !type:TakeStaminaDamage
+    amount: 25
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 20
+  conditions:
+  - !type:StandingCondition
+  levelRequired: 54
+
+- type: combo
+  id: ArmstrongMachineGunFistSimple
+  attacks:
+  - Harm
+  - Disarm
+  - Harm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/boxingpunch3.ogg
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectAttackSpeed
+    type: Add
+    time: 2
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 8
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 13
+  levelRequired: 7
+  levelExceeded: 14
+
+- type: combo
+  id: ArmstrongMachineGunFist
+  attacks:
+  - Harm
+  - Disarm
+  - Harm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/boxingpunch3.ogg
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectAttackSpeed
+    type: Add
+    time: 3
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 15
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 17
+  levelRequired: 28
+  levelExceeded: 51
+
+- type: combo
+  id: ArmstrongMachineGunFistAdvanced
+  attacks:
+  - Harm
+  - Disarm
+  - Harm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/boxingpunch3.ogg
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectAttackSpeed
+    type: Add
+    time: 4
+  opponentEffects:
+  - !type:TakeStaminaDamage
+    amount: 17
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 25
+  levelRequired: 51
+
+- type: combo
+  id: ArmstrongFireballSimple
+  attacks:
+  - Harm
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Magic/fireball.ogg
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Heat: 15
+  levelRequired: 5
+  levelExceeded: 26
+
+- type: combo
+  id: ArmstrongFireball
+  attacks:
+  - Harm
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Magic/fireball.ogg
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Heat: 17
+  levelRequired: 26
+  levelExceeded: 80
+
+- type: combo
+  id: ArmstrongFireballAdvanced
+  attacks:
+  - Harm
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Magic/fireball.ogg
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Heat: 20
+  - !type:Flammable
+    multiplier: 4
+    multiplierOnExisting: 0.2
+  - !type:Ignite
+  levelRequired: 80
+
+- type: combo
+  id: ArmstrongHorseStanceSimple # TODO: make horse stance self targetted
+  attacks:
+  - Disarm
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:TakeStaminaDamage
+    amount: -10
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 5
+  levelRequired: 8
+  levelExceeded: 32
+
+- type: combo
+  id: ArmstrongHorseStance
+  attacks:
+  - Disarm
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:TakeStaminaDamage
+    amount: -15
+  levelRequired: 32
+  levelExceeded: 64
+
+- type: combo
+  id: ArmstrongHorseStanceAdvanced
+  attacks:
+  - Disarm
+  - Disarm
+  - Disarm
+  userEffects:
+  - !type:TakeStaminaDamage
+    amount: -20
+  levelRequired: 64
+
+- type: combo
+  id: ArmstrongHeadbuttSimple
+  attacks:
+  - Harm
+  - Disarm
+  - Grab
+  userEffects: # TODO: make headbutt flash your screen or disorient you in one way or another
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 7
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 14
+  levelRequired: 15
+  levelExceeded: 30
+
+- type: combo
+  id: ArmstrongHeadbutt
+  attacks:
+  - Harm
+  - Disarm
+  - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 6
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 16
+  levelRequired: 30
+  levelExceeded: 60
+
+- type: combo
+  id: ArmstrongHeadbuttAdvanced
+  attacks:
+  - Harm
+  - Disarm
+  - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 4
+  opponentEffects:
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 18
+  levelRequired: 60

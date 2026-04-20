@@ -3,6 +3,8 @@
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Events;
+using Robust.Shared.Profiling;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Numerics;
 
@@ -19,10 +21,12 @@ public sealed class MapAreaSystem : EntitySystem
 {
     [Dependency] private readonly EntityQuery<AreaGridComponent> _query = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly ProfManager _prof = default!;
 
     private List<Vector2i> _empty = new();
     private List<byte> _badIds = new();
     private Dictionary<EntProtoId, byte> _mapping = new();
+    private Stopwatch _stopwatch = new();
 
     public override void Initialize()
     {
@@ -94,6 +98,10 @@ public sealed class MapAreaSystem : EntitySystem
 
     private void OnGridStartup(Entity<AreaGridComponent> ent, ref ComponentStartup args)
     {
+        var chunks = ent.Comp.Chunks.Count;
+        if (chunks == 0)
+            return; // empty...
+
         var size = ent.Comp.ChunkSize;
         // verify that none of the areas used got removed, skip any that were
         foreach (var (mapped, id) in ent.Comp.AreaMap)
@@ -112,19 +120,26 @@ public sealed class MapAreaSystem : EntitySystem
 
         // now spawn all the areas it used
         Log.Debug($"Loading {ent.Comp.AreaMap.Count} unique areas for {ToPrettyString(ent)}");
-        foreach (var (indices, chunk) in ent.Comp.Chunks) // copy since it may modify chunks by spawning areas...
+        _stopwatch.Restart();
+        using (_prof.Group("Areas"))
         {
-            // centered so floating point errors can only occur at absurdly large map sizes
-            var offset = new Vector2(indices.X * size + 0.5f, indices.Y * size + 0.5f);
-            try
+            foreach (var (indices, chunk) in ent.Comp.Chunks) // copy since it may modify chunks by spawning areas...
             {
-                LoadChunk(ent, size, offset, chunk);
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Caught exception while loading areas for grid {ToPrettyString(ent)} @ {indices}: {e}");
+                // centered so floating point errors can only occur at absurdly large map sizes
+                var offset = new Vector2(indices.X * size + 0.5f, indices.Y * size + 0.5f);
+                try
+                {
+                    LoadChunk(ent, size, offset, chunk);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"Caught exception while loading areas for grid {ToPrettyString(ent)} @ {indices}: {e}");
+                }
             }
         }
+
+        var time = _stopwatch.Elapsed;
+        Log.Debug($"Loaded areas for {ToPrettyString(ent)} in {time} ({chunks} x {time / chunks})");
     }
 
     private void LoadChunk(Entity<AreaGridComponent> ent, int size, Vector2 offset, AreaChunk chunk)

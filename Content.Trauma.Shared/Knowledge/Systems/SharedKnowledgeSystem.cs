@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Cloning;
 using Content.Trauma.Shared.Language.Systems;
 using Content.Shared.Body;
 using Content.Shared.Mind.Components;
+using Content.Shared.Polymorph;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
@@ -70,7 +72,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
         SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainInsertedEvent>(OnBorgBrainInserted);
         SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainRemovedEvent>(OnBorgBrainRemoved);
+        SubscribeLocalEvent<KnowledgeContainerComponent, TransferredToCloneEvent>(OnCloneTransfer);
 
+        SubscribeLocalEvent<KnowledgeHolderComponent, PolymorphedEvent>(OnPolymorphed);
         SubscribeLocalEvent<KnowledgeHolderComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -185,6 +189,17 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         UnlinkContainer(args.Chassis, ent);
     }
 
+    private void OnCloneTransfer(Entity<KnowledgeContainerComponent> ent, ref TransferredToCloneEvent args)
+    {
+        TransferKnowledge(ent, args.Cloned);
+    }
+
+    private void OnPolymorphed(Entity<KnowledgeHolderComponent> ent, ref PolymorphedEvent args)
+    {
+        if (ent.Owner == args.OldEntity)
+            TransferKnowledge(ent, args.NewEntity);
+    }
+
     private void OnMindAdded(Entity<KnowledgeHolderComponent> ent, ref MindAddedMessage args)
     {
         // all player-controlled mobs can use knowledge
@@ -210,6 +225,28 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
             AllKnowledges[proto.ID] = comp;
         }
+    }
+
+    /// <summary>
+    /// Attempts to transfer all knowledge from one entity (container or holder) to another (holder).
+    /// </summary>
+    public void TransferKnowledge(EntityUid ent, EntityUid otherHolder)
+    {
+        if (TryGetAllKnowledgeUnits(ent) is not { } found)
+            return;
+
+        var mobContainer = EnsureKnowledgeContainer(otherHolder);
+        if (mobContainer.Comp.Container is not { } container)
+            return;
+
+        foreach (var knowledgeEnt in found)
+        {
+            _container.Insert(knowledgeEnt.Owner, container);
+            var protoId = Prototype(knowledgeEnt)?.ID;
+            if (protoId is { } id)
+                mobContainer.Comp.KnowledgeDict[id] = knowledgeEnt.Owner;
+        }
+        ClearKnowledge(ent, false);
     }
 
     /// <summary>

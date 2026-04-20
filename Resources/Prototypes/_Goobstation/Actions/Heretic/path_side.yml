@@ -1,10 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -22,6 +15,10 @@
       state: realignment
   - type: InstantAction
     event: !type:EventHereticRealignment
+      removedEffects:
+      - StatusEffectStunned
+      - StatusEffectForcedSleeping
+      - StatusEffectDrowsiness
   - type: HereticAction
     requireMagicItem: false
   - type: SpeakOnAction
@@ -53,25 +50,25 @@
 - type: entity
   parent: BaseAction
   id: ActionHereticCleave
-  name: Cleave
-  description: Causes severe bleeding on a target and several targets around them.
+  name: Crimson Cleave
+  description: A targeted spell that heals you while damaging the enemies. It cleanses you of all wounds as well.
   components:
   - type: Action
-    useDelay: 45
+    useDelay: 30
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: cleave
+      state: blood_siphon
     checkCanInteract: false
   - type: TargetAction
     checkCanAccess: false
-    range: 4
+    range: 5
   - type: WorldTargetAction
     event: !type:EventHereticCleave
   - type: HereticAction
     requireMagicItem: true
   - type: SpeakOnAction
-    sentence: heretic-speech-cleave
+    sentence: heretic-speech-bloodsiphon
 
 - type: entity
   parent: BaseAction

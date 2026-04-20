@@ -139,7 +139,11 @@ public abstract class SharedWizardTrapsSystem : EntitySystem
 
     private void OnDamageTriggered(Entity<DamageTrapComponent> ent, ref TrapTriggeredEvent args)
     {
-        _damageable.TryChangeDamage(args.Victim, ent.Comp.Damage, true, targetPart: TargetBodyPart.Feet);
+        _damageable.TryChangeDamage(args.Victim,
+            ent.Comp.Damage,
+            true,
+            targetPart: ent.Comp.TargetPart,
+            splitDamage: ent.Comp.SplitDamageBehavior);
         if (_net.IsServer && ent.Comp.SpawnedEntity is { } toSpawn)
             Spawn(toSpawn, _transform.GetMapCoordinates(ent));
     }

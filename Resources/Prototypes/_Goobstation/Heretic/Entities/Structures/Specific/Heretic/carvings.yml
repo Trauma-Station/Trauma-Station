@@ -69,6 +69,9 @@
     damage:
       types:
         Blunt: 20
+      woundSeverityMultipliers:
+        Blunt: 2
+      partDamageVariation: 2
 
 - type: entity
   parent: BaseCarving

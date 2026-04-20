@@ -12,6 +12,7 @@ using Content.Shared.Teleportation.Components;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
+using Content.Trauma.Shared.Teleportation;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -25,11 +26,10 @@ public sealed class LockPortalSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private readonly TeleportSystem _teleport = default!;
 
     public const int LockPortalMask = (int) CollisionGroup.InteractImpassable;
 
@@ -142,12 +142,6 @@ public sealed class LockPortalSystem : EntitySystem
 
         var to = destination.Comp2.Coordinates;
 
-        if (_net.IsServer)
-        {
-            _audio.PlayPvs(portal.Comp.DepartureSound, coords);
-            _audio.PlayPvs(portal.Comp.ArrivalSound, to);
-        }
-
         EntityUid? pulling = null;
         var grabStage = GrabStage.No;
 
@@ -169,10 +163,9 @@ public sealed class LockPortalSystem : EntitySystem
             Dirty(uid, timeout);
         }
 
-        _pulling.StopAllPulls(uid);
-        _transform.SetCoordinates(uid, to);
-
-        if (pulling == null)
+        var soundIn = portal.Comp.ArrivalSound;
+        var soundOut = portal.Comp.DepartureSound;
+        if (!_teleport.Teleport(uid, to, soundIn, soundOut, uid) || pulling == null)
             return;
 
         if (addTimeout)
@@ -182,8 +175,8 @@ public sealed class LockPortalSystem : EntitySystem
             Dirty(pulling.Value, timeout2);
         }
 
-        _transform.SetCoordinates(pulling.Value, to);
-        _pulling.TryStartPull(uid, pulling.Value, puller, null, grabStage, force: true);
+        if (_teleport.Teleport(pulling.Value, to))
+            _pulling.TryStartPull(uid, pulling.Value, puller, null, grabStage, force: true);
     }
 
     private bool ShouldCollide(EntityUid uid)

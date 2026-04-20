@@ -35,7 +35,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseForgeItem
+  parent: [ BaseForgeItem, BaseMinorContraband ]
   id: BaseForgedReadyItem
   components:
   # these get color changed from the metal
