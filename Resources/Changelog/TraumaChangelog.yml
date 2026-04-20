@@ -7089,3 +7089,99 @@ Entries:
   id: 821
   time: '2026-04-18T15:09:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2110
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed sergeant loadouts being in wrong slot.
+  id: 822
+  time: '2026-04-18T20:56:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2113
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed energy chem infinite energy shitcode...
+  id: 823
+  time: '2026-04-18T21:31:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2116
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Forging max temperature is more lenient before turning your piece into
+      slag.
+  id: 824
+  time: '2026-04-18T21:49:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2117
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Krav maga actions only trigger on punches.
+  id: 825
+  time: '2026-04-19T09:18:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2122
+- author: RatherUncreativeName
+  changes:
+  - type: Fix
+    message: Fixed honklear operatives spawning with no minimum playercount.
+  id: 826
+  time: '2026-04-19T09:19:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2121
+- author: Aviu
+  changes:
+  - type: Add
+    message: Added 2 new abilities for heretic blade path.
+  - type: Tweak
+    message: Taking damage no longer breaks standing up do-after.
+  - type: Fix
+    message: Fix rust path being able to break reinforced walls before blade upgrade.
+  id: 827
+  time: '2026-04-19T10:45:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2045
+- author: Fat-Engineer-Gaming
+  changes:
+  - type: Add
+    message: Added several new Ion Lawsets!
+  - type: Remove
+    message: Removed Ion Law "THE SHUTTLE MUST BE CALLED BECAUSE..."
+  - type: Tweak
+    message: Ion storms are now more likely to roll "Dangerous" lawsets.
+  - type: Tweak
+    message: Ion storms can now roll Revolutionary and Cosmic Cultist lawsets.
+  id: 828
+  time: '2026-04-19T10:48:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2017
+- author: Aineias1
+  changes:
+  - type: Add
+    message: >-
+      Added Genetics to following maps:
+      Delta,Meta,Oasis,Origin,Kettle,Marathon,Leonid,Amber,Atlas,Packed.
+  - type: Add
+    message: Added Phones to most maps, excluding small, lowpop maps like Omega.
+  - type: Add
+    message: Added Radios and Radio Host to Saltern.
+  - type: Tweak
+    message: 'Following maps are back in rotation: Atlas, Amber, Cluster, Omega, Packed.'
+  - type: Tweak
+    message: Reworked Meta Genpop.
+  - type: Fix
+    message: >-
+      Fixed Origin Station cargo depending on ONE FUCKING APC THAT WAS OUTSIDE
+      CARGO.
+  id: 829
+  time: '2026-04-19T17:21:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2074
+- author: Speebro
+  changes:
+  - type: Tweak
+    message: Foam and Smoke reacts before most other chemical reactions
+  id: 830
+  time: '2026-04-20T07:15:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2128
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added an actual insurgents guidebook
+  id: 831
+  time: '2026-04-20T09:04:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2129

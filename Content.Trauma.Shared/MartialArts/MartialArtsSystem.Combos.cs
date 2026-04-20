@@ -57,15 +57,6 @@ public partial class MartialArtsSystem
         if (ent.Comp.CurrentTarget is { } target && args.Target != target)
             ent.Comp.LastAttacks.Clear();
 
-        if (TryComp<ComboActionsComponent>(ent, out var comboActions) && comboActions.QueuedPrototype is { } queued)
-        {
-            var proto = _proto.Index(queued);
-            var level = _knowledge.GetLevel(ent.Owner);
-            PerformCombo(user, args.Target, proto, ent, level);
-            comboActions.QueuedPrototype = null;
-            return;
-        }
-
         ent.Comp.CurrentTarget = args.Target;
         ent.Comp.ResetTime = _timing.CurTime + TimeSpan.FromSeconds(5);
         ent.Comp.LastAttacks.Add(args.Type);
@@ -75,10 +66,24 @@ public partial class MartialArtsSystem
             if (difference > 0)
                 ent.Comp.LastAttacks.RemoveRange(0, difference);
         }
-        CheckCombo(ent, ref args);
+
+        if (TryComp<ComboActionsComponent>(ent, out var comboActions) && comboActions.QueuedPrototype is { } queued)
+        {
+            var proto = _proto.Index(queued);
+            var level = _knowledge.GetLevel(ent.Owner);
+
+            if (!CheckCombo(ent, proto, level, user, args.Target))
+                return;
+
+            PerformCombo(user, args.Target, proto, ent, level);
+            comboActions.QueuedPrototype = null;
+            return;
+        }
+
+        TryPerformCombo(ent, ref args);
     }
 
-    private void CheckCombo(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
+    private void TryPerformCombo(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
     {
         var target = args.Target;
         var performer = args.Performer;
@@ -86,22 +91,34 @@ public partial class MartialArtsSystem
 
         foreach (var proto in ent.Comp.AllowedCombos)
         {
-            var sum = ent.Comp.LastAttacks.Count - proto.AttackTypes.Count;
-            if (proto.AttackTypes.Count <= 0 || sum < 0)
-                continue;
-
-            var list = ent.Comp.LastAttacks.GetRange(sum, proto.AttackTypes.Count).AsEnumerable();
-            var attackList = proto.AttackTypes.AsEnumerable();
-
-            if (level < proto.LevelRequired || (level > proto.LevelExceeded && proto.LevelExceeded > 0) ||
-                !list.SequenceEqual(attackList) ||
-                !_conditions.TryConditions(performer, proto.UserConditions) ||
-                !_conditions.TryConditions(target, proto.Conditions))
+            if (!CheckCombo(ent, proto, level, performer, target))
                 continue;
 
             PerformCombo(performer, target, proto, ent, level);
             break; // found the combo
         }
+    }
+
+    private bool CheckCombo(Entity<CanPerformComboComponent> ent,
+        ComboPrototype proto,
+        int level,
+        EntityUid performer,
+        EntityUid target)
+    {
+        var sum = ent.Comp.LastAttacks.Count - proto.AttackTypes.Count;
+        if (proto.AttackTypes.Count <= 0 || sum < 0)
+            return false;
+
+        var list = ent.Comp.LastAttacks.GetRange(sum, proto.AttackTypes.Count).AsEnumerable();
+        var attackList = proto.AttackTypes.AsEnumerable();
+
+        if (level < proto.LevelRequired || (level > proto.LevelExceeded && proto.LevelExceeded > 0) ||
+            !list.SequenceEqual(attackList) ||
+            !_conditions.TryConditions(performer, proto.UserConditions) ||
+            !_conditions.TryConditions(target, proto.Conditions))
+            return false;
+
+        return true;
     }
 
     public void PerformCombo(EntityUid performer, EntityUid target, ComboPrototype proto, Entity<CanPerformComboComponent> ent, int level)

@@ -1,14 +1,21 @@
-# SPDX-FileCopyrightText: 2024 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-# actions
+- type: entity
+  parent: BaseAction
+  id: ActionHereticChampionHook
+  name: Champpion Hook
+  description: Knockdown and hook your next heretic blade light attack target.
+  components:
+  - type: Action
+    checkCanInteract: false
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: hook
+    iconOn:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: hook_on
+  - type: InstantAction
+    event: !type:EventHereticToggleChampionHook
+
 - type: entity
   parent: BaseAction
   id: ActionHereticSacraments
@@ -51,3 +58,23 @@
   - type: ChangeUseDelayOnAscension
     newUseDelay: 30
     requiredPath: Blade
+
+- type: entity
+  parent: BaseAction
+  id: ActionHereticDomainExpansion
+  name: Wolves among Sheep
+  description: Alters the fabric of reality, conjuring a magical arena unpassable to outsiders, all participants are trapped and immune to any form of crowd control or enviromental hazards; trapped participants are granted a Blade and are unable to leave or jaunt until they score a critical hit.
+  components:
+  - type: Action
+    checkCanInteract: false
+    useDelay: 300
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: among_sheep
+  - type: InstantAction
+    event: !type:EventHereticDomainExpansion
+  - type: HereticAction
+    requireMagicItem: true
+  - type: SpeakOnAction
+    sentence: heretic-speech-blade-domain-expansion

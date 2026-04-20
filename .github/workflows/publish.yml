@@ -40,6 +40,18 @@ jobs:
     - name: Package server
       run: dotnet run --project Content.Packaging server --platform win-x64 --platform linux-x64
 
+    - name: Switch to client engine
+      # never compile our shared engine code, it may have changed ABI so client would break
+      # only networking has to stay identical
+      run: |
+        cd RobustToolbox
+        ENGINE_TAG=$(git describe --tags --abbrev=0)
+        cd ..
+        rm -rf RobustToolbox
+        git clone --recursive https://github.com/space-wizards/RobustToolbox
+        cd RobustToolbox
+        git checkout $ENGINE_TAG
+
     - name: Package client
       run: dotnet run --project Content.Packaging client --no-wipe-release
 

@@ -199,11 +199,10 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
             _audioSystem.PlayPvs(reagentDispenser.Comp.ClickSound, reagentDispenser, AudioParams.Default.WithVolume(-2f));
 
         private static float GetPowerCostForReagent(string reagentId, int amount, EnergyReagentDispenserComponent comp)
-        {
-            return comp.Reagents.TryGetValue(reagentId, out var cost)
+            => comp.Reagents.TryGetValue(reagentId, out var cost)
                 ? cost * amount
-                : float.MaxValue;
-        }
+                : 0f;
+
         private void OnMapInit(Entity<EnergyReagentDispenserComponent> entity, ref MapInitEvent args) =>
             _itemSlotsSystem.AddItemSlot(entity.Owner, SharedEnergyReagentDispenser.OutputSlotName, entity.Comp.EnergyBeakerSlot);
     }

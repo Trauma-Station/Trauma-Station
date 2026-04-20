@@ -1,0 +1,137 @@
+- type: entity
+  abstract: true
+  parent: BaseStructureWall
+  id: BaseWallHereticArena
+  suffix: indestructible
+  components:
+  - type: Occluder
+  - type: RustRequiresPathStage
+    pathStage: 11 # Can't rust
+  - type: Penetratable
+    penetrateDamage: 1000
+    damagePenalty: 0.8
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: RadiationBlocker
+    resistance: 10
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 4000
+
+- type: entity
+  parent: BaseWallHereticArena
+  id: WallHereticArena
+  name: rose stone wall
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Structures/rose_stone_wall.rsi
+    layers:
+    - state: rose_stone_1
+      map: [ "base" ]
+  - type: RandomSprite
+    available:
+    - base:
+        rose_stone_1: ""
+        rose_stone_2: ""
+        rose_stone_3: ""
+        rose_stone_4: ""
+        rose_stone_5: ""
+        rose_stone_6: ""
+        rose_stone_7: ""
+        rose_stone_8: ""
+  - type: Appearance
+  - type: Icon
+    sprite: _Goobstation/Heretic/Structures/rose_stone_wall.rsi
+    state: rose_stone_1
+
+- type: entity
+  parent: BaseWallHereticArena
+  id: WallHereticArenaOuter
+  name: eldritch wall
+  description: A wall penning in the sheep amongst the wolves. It glows with malevolent energy - prodding it is likely unwise.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Structures/eldritch_forcewall.rsi
+    state: eldritch_forcewall
+  - type: Icon
+    sprite: _Goobstation/Heretic/Structures/eldritch_forcewall.rsi
+    state: eldritch_forcewall
+  - type: BladeArenaOuterWall
+  - type: HereticArenaOuterWall
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        - GhostImpassable
+        layer:
+        - WallLayer
+        density: 4000
+
+- type: entity
+  parent: PlastitaniumWindowBase
+  id: WindowHereticArena
+  name: stone window
+  suffix: indestructible
+  components:
+  - type: Sprite
+    drawdepth: WallTops
+    sprite: _Goobstation/Heretic/Structures/stone_window_pane.rsi
+    state: stone_window_pane
+  - type: Icon
+    sprite: _Goobstation/Heretic/Structures/stone_window_pane.rsi
+    state: stone_window_pane
+  - type: Airtight
+  - type: ExaminableDamage
+    messages: null
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+        density: 4000
+
+- type: entity
+  id: HereticArena
+  name: arena
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    # Required for UnitializedSaveTest to pass.
+    # CanCollide is set to false because arena has no fixtures.
+    # Fixture is added on map init and CanCollide is set to true manually.
+    canCollide: false
+    bodyType: Static
+  - type: TimedDespawn
+    lifetime: 60
+  - type: BladeArena
+    componentsToAdd:
+    - type: HereticArenaParticipant
+    participantWhitelist:
+      components:
+      - HumanoidProfile
+    participantBlacklist:
+      components:
+      - Ghoul
+  - type: Tag
+    tags:
+    - HideContextMenu
