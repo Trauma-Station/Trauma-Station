@@ -61,6 +61,7 @@
           Janitor: [ 1, 1 ]
           Chaplain: [ 1, 1 ]
           Librarian: [ 1, 1 ]
+          RadioHost: [ 1, 1 ]
       - type: StationBlobConfig
         stageBegin: 25
         stageCritical: 350

@@ -44,6 +44,7 @@
           ResearchDirector: [ 1, 1 ]
           Scientist: [ 6, 6 ]
           ResearchAssistant: [ 4, 4 ]
+          Geneticist: [ 2, 2 ]
           # Security
           HeadOfSecurity: [ 1, 1 ]
           Warden: [ 1, 1 ]
