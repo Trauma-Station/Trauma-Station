@@ -1,12 +1,11 @@
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
-using Content.Trauma.Shared.HolographicProjector.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 
-namespace Content.Trauma.Shared.HolographicProjector.EntitySystems;
+namespace Content.Trauma.Shared.HolographicProjector;
 
 public sealed class GenericFieldSystem : EntitySystem
 {

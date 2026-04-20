@@ -6,13 +6,12 @@ using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
-using Content.Trauma.Shared.HolographicProjector.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
-namespace Content.Trauma.Shared.HolographicProjector.EntitySystems;
+namespace Content.Trauma.Shared.HolographicProjector;
 
 public sealed class GenericFieldGeneratorSystem : EntitySystem
 {
@@ -24,8 +23,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     [Dependency] private readonly SharedBatterySystem _battery = default!;
     [Dependency] private readonly GenericFieldSystem _genericfield = default!;
     [Dependency] private readonly SharedDeviceLinkSystem _signalSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -49,14 +48,13 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         var query = EntityQueryEnumerator<GenericFieldGeneratorComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (!HasComp<BatteryComponent>(uid)
-            || _timing.CurTime < comp.PowerTimer)
+            if (_timing.CurTime < comp.ReconnectTimer
+            || !comp.Enabled
+            || !comp.Charged)
                 continue;
 
-            comp.PowerTimer = _timing.CurTime + comp.PowerTime;
-
-            if (comp.IsConnected)
-                _battery.UseCharge(uid, comp.PowerDrain);
+            comp.ReconnectTimer = _timing.CurTime + comp.ReconnectTime;
+            TryGenerateFieldConnection((ent, comp));
         }
     }
 
@@ -202,11 +200,10 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             RemoveConnections(ent);
 
             if (ent.Comp.ConnectedGenerator is not { } pair
-            || !TryComp<BatteryComponent>(pair, out var pairBattery)
-            || pairBattery.LastCharge < pairBattery.MaxCharge / 50f) // Less than 2% charge?
+            || !TryComp<BatteryComponent>(pair, out var pairBattery))
                 return;
 
-            pair.Comp.Charged = false; // Set it as discharged too, because otherwise it would turn off before fully discharging.
+            _battery.UseCharge(pair.Owner, pairBattery.MaxCharge); // Fully discharge the other battery too
         }
         else if (args.OldState != BatteryState.Full && args.NewState == BatteryState.Full && !ent.Comp.Charged)
         {

@@ -7,23 +7,17 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-namespace Content.Trauma.Shared.HolographicProjector.Components;
+namespace Content.Trauma.Shared.HolographicProjector;
 
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class GenericFieldGeneratorComponent : Component
 {
     /// <summary>
-    /// How much power should this field generator consume every 1/5th of a second?
-    /// </summary>
-    [DataField]
-    public float PowerDrain = 400f;
-
-    /// <summary>
     /// How many tiles should this field check before giving up?
     /// </summary>
     [DataField]
-    public float MaxLength = 8F;
+    public float MaxLength = 12F;
 
     /// <summary>
     /// Is the generator toggled on?
@@ -65,20 +59,20 @@ public sealed partial class GenericFieldGeneratorComponent : Component
     public List<EntityUid> ConnectedFields = [];
 
     /// <summary>
+    /// If a generator is charged and enabled, how often should it try to form a connection?
+    /// </summary>
+    [DataField]
+    public TimeSpan ReconnectTime = TimeSpan.FromSeconds(1);
+
+    [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan ReconnectTimer;
+
+    /// <summary>
     /// What fields should this spawn?
     /// </summary>
     [DataField("createdField", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     [AutoNetworkedField]
     public string CreatedField = "ContainmentField";
-
-    /// <summary>
-    /// Used to check if it's received power recently.
-    /// </summary>
-    [AutoPausedField, DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    public TimeSpan PowerTimer;
-
-    [DataField]
-    public TimeSpan PowerTime = TimeSpan.FromSeconds(0.2);
 
     //Ports
     [DataField]

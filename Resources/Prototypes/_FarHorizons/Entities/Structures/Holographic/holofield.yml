@@ -79,12 +79,6 @@
   - type: Tag
     tags:
     - Wall
-  - type: NodeContainer
-    examinable: true
-    nodes:
-      input:
-        !type:CableDeviceNode
-        nodeGroupID: MVPower
   - type: ExaminableBattery
   - type: BatteryCharger
     voltage: Medium
@@ -99,12 +93,10 @@
   - type: ApcPowerReceiverBattery
     batteryRechargeRate: 2000
     idleLoad: 200
-  - type: Electrified
-    onHandInteract: false
-    onInteractUsing: false
-    onBump: false
-    requirePower: true
-    mediumVoltageNode: input
+  - type: ExtensionCableReceiver
+  - type: PowerState
+    idlePowerDraw: 200
+    workingPowerDraw: 2000
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice

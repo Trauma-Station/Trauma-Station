@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Trauma.Shared.HolographicProjector.Components;
+namespace Content.Trauma.Shared.HolographicProjector;
 
 [RegisterComponent]
 [AutoGenerateComponentPause]
