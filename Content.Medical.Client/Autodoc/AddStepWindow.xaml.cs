@@ -78,8 +78,8 @@ public sealed partial class AddStepWindow : FancyWindow
         };
 
         // no arguments so these are trivial
-        GrabOrganButton.OnPressed += _ => OnAddStep?.Invoke(new GrabAnyOrganAutodocStep());
-        GrabPartButton.OnPressed += _ => OnAddStep?.Invoke(new GrabAnyBodyPartAutodocStep());
+        //GrabOrganButton.OnPressed += _ => OnAddStep?.Invoke(new GrabAnyOrganAutodocStep());
+        //GrabPartButton.OnPressed += _ => OnAddStep?.Invoke(new GrabAnyBodyPartAutodocStep());
         StoreItemButton.OnPressed += _ => OnAddStep?.Invoke(new StoreItemAutodocStep());
 
         SetLabelButton.OnPressed += _ =>

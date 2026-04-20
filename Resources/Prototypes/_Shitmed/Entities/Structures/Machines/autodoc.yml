@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 JohnOakman <sremy2012@hotmail.fr>
-# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
 # Autodocs
 
 - type: entity
@@ -96,8 +88,6 @@
     openOnActivate: false # use the verb, UI is higher priority
     grid:
     - 0,0,3,3
-  - type: SurgerySpeedModifier
-    speedModifier: 1
   - type: GuideHelp
     guides: [ Autodoc ]
 
@@ -109,8 +99,6 @@
   components:
   - type: Machine
     board: AutodocSyndieCircuitboard
-  - type: SurgerySpeedModifier
-    speedModifier: 1.0 # as good as a surgeon using a multitool, nukies need it or something
 
 # Autodoc tools
 

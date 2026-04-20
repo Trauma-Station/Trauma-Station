@@ -92,8 +92,6 @@
       - type: AbductorScientist
       - type: SurgeryIgnoreClothing
       - type: Sanitized
-      - type: SurgerySpeedModifier
-        speedModifier: 1.5
       mindRoles:
       - MindRoleAbductorScientist
     - spawnerPrototype: AbductorAgentSpawner

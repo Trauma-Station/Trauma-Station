@@ -1,0 +1,15 @@
+<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    Orientation="Horizontal">
+    <TextureRect Name="TextRect" Margin="0, 8, 0, 0" />
+
+    <BoxContainer Name="HorizontalContainer" Orientation="Horizontal">
+        <BoxContainer Name="Box" Orientation="Vertical" MinSize="10 0">
+            <RichTextLabel Name="SkillText" SetWidth="325" HorizontalAlignment="Left" />
+            <RichTextLabel Name="MasteryText" SetWidth="325" HorizontalAlignment="Left" StyleClasses="LabelSubText" />
+        </BoxContainer>
+
+        <ProgressBar Name="ExpBar" MinSize="200 20" />
+    </BoxContainer>
+</BoxContainer>

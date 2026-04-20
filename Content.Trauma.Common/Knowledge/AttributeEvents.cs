@@ -68,15 +68,15 @@ public record struct GetPhysicalSavingThrowEvent(int Mod = 0);
 public record struct GetMoraleModifierEvent(int Mod = 0);
 
 /// <summary>
-/// Raised on an attribute holder to determine if a contest has suceeded. Default logic should go as if this has succeeded.
+/// Raised on an knowledge holder to determine if a contest has suceeded. Default logic should go as if this has succeeded.
 /// </summary>
 [ByRefEvent]
-public record struct OnAttributeSingleContest(int DiceUser = 20, int ModUser = 0, int Threshold = 10, bool Failed = false, bool CriticallyFailed = false, bool CriticallySucceeded = false);
+public record struct SingleContestEvent(int DiceUser = 20, int ModUser = 0, int Threshold = 10, bool IsSkill = false, bool Failed = false, bool CriticallyFailed = false, bool CriticallySucceeded = false);
 
 /// <summary>
-/// Raised on an attribute holder to determine if an opposed contest has suceeded. This call can go against items, whatever. Default logic should go as if this has succeeded.
+/// Raised on an knowledge holder to determine if an opposed contest has suceeded. This call can go against items, whatever. Default logic should go as if this has succeeded.
 /// </summary>
 [ByRefEvent]
-public record struct OnAttributeOpposedContest(EntityUid Opposer, int DiceUser = 20, int ModUser = 0, int DiceOpposed = 20, int ModOpposed = 0, bool Failed = false,
+public record struct OpposedContestEvent(EntityUid Opposer, int DiceUser = 20, int ModUser = 0, int DiceOpposed = 20, int ModOpposed = 0, bool Failed = false,
     bool CriticallyFailedUser = false, bool CriticallySucceededUser = false,
     bool CriticallyFailedOpposed = false, bool CriticallySucceededOpposed = false);

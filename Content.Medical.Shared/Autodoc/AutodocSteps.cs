@@ -66,19 +66,19 @@ public sealed partial class SurgeryAutodocStep : IAutodocStep
     /// The ID of the surgery to perform.
     /// </summary>
     [DataField(required: true)]
-    public EntProtoId<SurgeryComponent> Surgery;
+    public ProtoId<SurgeryPrototype> Surgery;
 
     string IAutodocStep.Title(IPrototypeManager protoMan)
     {
         var proto = protoMan.Index(Surgery);
         var part = Loc.GetString($"autodoc-body-part-{Part}");
-        return Loc.GetString("autodoc-program-step-surgery", ("part", part), ("name", proto.Name));
+        return Loc.GetString("autodoc-program-step-surgery", ("part", part), ("name", proto.ID));
     }
 
     bool IAutodocStep.Run(Entity<AutodocComponent, HandsComponent> ent, SharedAutodocSystem autodoc)
     {
         var patient = autodoc.GetPatientOrThrow((ent.Owner, ent.Comp1));
-        if (autodoc.FindPart(patient, Part, Symmetry) is not {} part)
+        if (autodoc.FindPart(patient, Part, Symmetry) is not { } part)
             throw new AutodocError("body-part");
 
         if (!autodoc.StartSurgeryOrThrow((ent.Owner, ent.Comp1), patient, part, Surgery))
@@ -89,7 +89,7 @@ public sealed partial class SurgeryAutodocStep : IAutodocStep
 
     bool IAutodocStep.Validate(Entity<AutodocComponent> ent, SharedAutodocSystem autodoc)
     {
-        return autodoc.IsSurgery(Surgery);
+        return true;
     }
 }
 
@@ -116,62 +116,11 @@ public sealed partial class GrabItemAutodocStep : IAutodocStep
 
     bool IAutodocStep.Run(Entity<AutodocComponent, HandsComponent> ent, SharedAutodocSystem autodoc)
     {
-        if (autodoc.FindItem(ent, Name) is not {} item)
+        if (autodoc.FindItem(ent, Name) is not { } item)
             throw new AutodocError("item-unavailable");
         autodoc.GrabItemOrThrow(ent, item);
         return true;
     }
-}
-
-/// <summary>
-/// Grab the first item that matches a whitelist, failing if none are found.
-/// </summary>
-[Serializable, NetSerializable]
-public abstract partial class GrabAnyItemAutodocStep : IAutodocStep
-{
-    /// <summary>
-    /// A whitelist that must be matched.
-    /// </summary>
-    public virtual EntityWhitelist Whitelist { get; }
-    private EntityWhitelist? _whitelist;
-
-    /// <summary>
-    /// Name that represents the whitelist.
-    /// </summary>
-    public virtual LocId Name { get; }
-
-    string IAutodocStep.Title(IPrototypeManager protoMan)
-        => Loc.GetString("autodoc-program-step-grab-any", ("name", Loc.GetString(Name)));
-
-    bool IAutodocStep.Run(Entity<AutodocComponent, HandsComponent> ent, SharedAutodocSystem autodoc)
-    {
-        if (autodoc.FindItem(ent, _whitelist ??= Whitelist) is not {} item)
-            throw new AutodocError("item-unavailable");
-        autodoc.GrabItemOrThrow(ent, item);
-        return true;
-    }
-}
-
-[Serializable, NetSerializable]
-public sealed partial class GrabAnyOrganAutodocStep : GrabAnyItemAutodocStep
-{
-    public override EntityWhitelist Whitelist => new EntityWhitelist()
-    {
-        Components = ["InternalOrgan"]
-    };
-
-    public override LocId Name => "autodoc-item-organ";
-}
-
-[Serializable, NetSerializable]
-public sealed partial class GrabAnyBodyPartAutodocStep : GrabAnyItemAutodocStep
-{
-    public override EntityWhitelist Whitelist => new EntityWhitelist()
-    {
-        Components = ["BodyPart"]
-    };
-
-    public override LocId Name => "autodoc-item-part";
 }
 
 /// <summary>

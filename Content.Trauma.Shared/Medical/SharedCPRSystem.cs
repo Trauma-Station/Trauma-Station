@@ -5,7 +5,6 @@ using Content.Medical.Common.Traumas;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body;
 using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
@@ -14,17 +13,17 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
-using Content.Shared.Random.Helpers;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.Body;
+using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Serialization;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Medical;
@@ -34,15 +33,15 @@ public abstract class SharedCPRSystem : EntitySystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly IngestionSystem _ingestion = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private readonly EntityQuery<ActiveCPRComponent> _activeQuery = default!;
-    [Dependency] private readonly EntityQuery<CPRTrainingComponent> _trainingQuery = default!;
+    [Dependency] private readonly EntityQuery<KnowledgeHolderComponent> _trainingQuery = default!;
     [Dependency] private readonly EntityQuery<DamageableComponent> _damageQuery = default!;
     [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
     [Dependency] private readonly EntityQuery<InternalOrganComponent> _organQuery = default!;
@@ -56,11 +55,20 @@ public abstract class SharedCPRSystem : EntitySystem
 
     public static readonly ProtoId<OrganCategoryPrototype> LungsCategory = "Lungs";
 
+    /// <summary>
+    /// Sound to play on chest compressions
+    /// </summary>
+    private SoundSpecifier _sound = new SoundPathSpecifier("/Audio/_EinsteinEngines/Effects/CPR.ogg");
+
+    private TimeSpan _cprTime = TimeSpan.FromSeconds(4);
+
+    private EntProtoId _firstAidKnowledge = "FirstAidKnowledge";
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CPRTrainingComponent, GetVerbsEvent<InnateVerb>>(OnGetVerbs);
+        SubscribeLocalEvent<KnowledgeHolderComponent, GetVerbsEvent<InnateVerb>>(OnGetVerbs);
 
         SubscribeLocalEvent<ActiveCPRComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<ActiveCPRComponent, CPRDoAfterEvent>(OnDoAfter);
@@ -73,7 +81,7 @@ public abstract class SharedCPRSystem : EntitySystem
     public bool IsCPRActive(EntityUid uid)
         => _activeQuery.HasComp(uid);
 
-    private void OnGetVerbs(Entity<CPRTrainingComponent> ent, ref GetVerbsEvent<InnateVerb> args)
+    private void OnGetVerbs(Entity<KnowledgeHolderComponent> ent, ref GetVerbsEvent<InnateVerb> args)
     {
         var target = args.Target;
         if (!args.CanInteract || !args.CanAccess || !_mobQuery.TryComp(target, out var mob) || mob.CurrentState == MobState.Alive)
@@ -88,7 +96,7 @@ public abstract class SharedCPRSystem : EntitySystem
         });
     }
 
-    private void StartCPR(Entity<CPRTrainingComponent> ent, EntityUid target)
+    private void StartCPR(Entity<KnowledgeHolderComponent> ent, EntityUid target)
     {
         var identity = Identity.Entity(target, EntityManager);
         if (!CanStartCPR(ent, target, identity))
@@ -101,7 +109,7 @@ public abstract class SharedCPRSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
             ent,
-            ent.Comp.Duration,
+            _cprTime,
             new CPRDoAfterEvent(),
             eventTarget: target,
             target: target)
@@ -117,14 +125,14 @@ public abstract class SharedCPRSystem : EntitySystem
 
         var active = EnsureComp<ActiveCPRComponent>(target);
         // PlayPredicted is shitcode and doesnt spawn the same entity for client, can't do it nicely
-        if (_net.IsClient || _audio.PlayPredicted(ent.Comp.Sound, ent, ent, ent.Comp.Sound.Params.WithLoop(true)) is not {} audio)
+        if (_net.IsClient || _audio.PlayPredicted(_sound, ent, ent, _sound.Params.WithLoop(true)) is not { } audio)
             return;
 
         active.Sound = audio.Entity;
         Dirty(target, active);
     }
 
-    private bool CanStartCPR(Entity<CPRTrainingComponent> ent, EntityUid target, EntityUid identity)
+    private bool CanStartCPR(Entity<KnowledgeHolderComponent> ent, EntityUid target, EntityUid identity)
     {
         if (_activeQuery.HasComp(target))
         {
@@ -135,7 +143,7 @@ public abstract class SharedCPRSystem : EntitySystem
         return CanPerformCPR(ent, target, identity);
     }
 
-    private bool CanPerformCPR(Entity<CPRTrainingComponent> ent, EntityUid target, EntityUid identity)
+    private bool CanPerformCPR(Entity<KnowledgeHolderComponent> ent, EntityUid target, EntityUid identity)
     {
         if (_rottingQuery.HasComp(target))
         {
@@ -191,12 +199,27 @@ public abstract class SharedCPRSystem : EntitySystem
             return;
         }
 
-        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
-        if (mob.CurrentState == MobState.Dead && rand.Prob(training.ReviveChance) && CanRevive(ent))
-            _mob.ChangeMobState(ent.Owner, MobState.Critical, origin: user);
+        if (_knowledge.GetContainer(user) is not { } brain || _knowledge.GetSkill(brain, _firstAidKnowledge) is not { } firstAid) // Gotta make sure you can actually do this lmao.
+            return;
 
-        if (rand.Prob(training.InhaleChance) && HasHealthyLungs(ent))
-            TryInhale(ent); // technically should be transferring with the performer's lungs but whatever
+        if (mob.CurrentState == MobState.Dead && CanRevive(ent))
+        {
+            var contestReviveEv = new SingleContestEvent(100, 40, firstAid.Comp.NetLevel, true); // Reviving someone should be much harder
+            RaiseLocalEvent(user, ref contestReviveEv);
+            if (!contestReviveEv.Failed)
+                _mob.ChangeMobState(ent.Owner, MobState.Critical, origin: user);
+
+            _knowledge.AddExperience(brain, _firstAidKnowledge, 10);
+        }
+
+        if (HasHealthyLungs(ent))
+        {
+            var contestInhaleEv = new SingleContestEvent(100, 15, firstAid.Comp.NetLevel); // Breath inhaltion is easier
+            RaiseLocalEvent(user, ref contestInhaleEv);
+            if (!contestInhaleEv.Failed)
+                TryInhale(ent); // technically should be transferring with the performer's lungs but whatever
+            _knowledge.AddExperience(brain, _firstAidKnowledge, 3);
+        }
 
         var isAlive = mob.CurrentState == MobState.Alive;
         args.Repeat = !isAlive;
@@ -211,7 +234,7 @@ public abstract class SharedCPRSystem : EntitySystem
 
     private bool HasHealthyLungs(EntityUid uid)
         // need healthy lungs for CPR to work, go tend organ damage first
-        => GetLungs(uid) is {} lungs &&
+        => GetLungs(uid) is { } lungs &&
             _organQuery.TryComp(lungs, out var organ) &&
             organ.OrganSeverity == OrganSeverity.Normal;
 

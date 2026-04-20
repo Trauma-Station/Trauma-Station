@@ -20,7 +20,7 @@ public sealed partial class MalusAttributeSystem : EntitySystem
         var strQuery = EntityQueryEnumerator<StrengthFeatTierdownComponent>();
         while (strQuery.MoveNext(out var ent, out var comp))
         {
-            comp.Mod -= frameTime;
+            comp.Mod -= frameTime / 1.5f;
             Dirty(ent, comp);
             if (comp.Mod < 0)
                 RemCompDeferred<StrengthFeatTierdownComponent>(ent);
@@ -29,7 +29,7 @@ public sealed partial class MalusAttributeSystem : EntitySystem
         var defQuery = EntityQueryEnumerator<DefenseTierdownComponent>();
         while (defQuery.MoveNext(out var ent, out var comp))
         {
-            comp.Mod -= frameTime;
+            comp.Mod -= frameTime / 1.5f;
             Dirty(ent, comp);
             if (comp.Mod < 0)
                 RemCompDeferred<DefenseTierdownComponent>(ent);

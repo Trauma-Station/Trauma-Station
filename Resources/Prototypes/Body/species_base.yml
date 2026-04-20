@@ -15,7 +15,6 @@
   - type: BodyStatus
   - type: Carriable
   - type: FootprintOwner
-  - type: CPRTraining # IPCs can try CPR i guess?? it won't work
   - type: StunVisuals
   - type: HasJobIcons
   - type: LanguageSpeaker # all mobs should speak TauCeti unless otherwise specified, to prevent universal.

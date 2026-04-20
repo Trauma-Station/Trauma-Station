@@ -32,7 +32,7 @@ public sealed class DexteritySystem : EntitySystem
 
         RaiseLocalEvent(ent.Owner, ref selfEv);
 
-        var ev = new OnAttributeSingleContest(20, selfEv.Mod, _slipThreshold);
+        var ev = new SingleContestEvent(20, selfEv.Mod, _slipThreshold);
 
         RaiseLocalEvent(ent, ref ev);
         var threshold = _slipThreshold - (ev.DiceUser + selfEv.Mod);

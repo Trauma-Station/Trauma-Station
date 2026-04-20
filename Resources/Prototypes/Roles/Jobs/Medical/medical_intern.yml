@@ -20,13 +20,6 @@
   access:
   - Medical
   - Maintenance
-  # <Trauma>
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: SurgerySpeedModifier
-      speedModifier: 1.25
-  # </Trauma>
 
 - type: startingGear
   id: MedicalInternGear

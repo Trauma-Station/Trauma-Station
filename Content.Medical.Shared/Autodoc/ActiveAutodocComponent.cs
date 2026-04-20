@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Shared.Autodoc;
+using Content.Medical.Shared.Surgery;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -23,28 +23,16 @@ public sealed partial class ActiveAutodocComponent : Component
     public int CurrentProgram;
 
     /// <summary>
-    /// Index of the current program's step it is trying to do.
-    /// </summary>
-    [DataField]
-    public int ProgramStep;
-
-    /// <summary>
     /// Whether a step is waiting on a doafter to complete.
     /// </summary>
     [DataField]
     public bool Waiting;
 
     /// <summary>
-    /// Set to true when doing the last step of the desired surgery.
-    /// </summary>
-    [DataField]
-    public bool Final;
-
-    /// <summary>
     /// The current body, part and surgery being done, if any.
     /// </summary>
     [DataField]
-    public (EntityUid, EntityUid, EntProtoId)? CurrentSurgery;
+    public (EntityUid, EntityUid, ProtoId<SurgeryPrototype>)? CurrentSurgery;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
