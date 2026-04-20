@@ -52,7 +52,7 @@
       - CableCoil
       - RawMaterial
       - PartBase
-      - RodMetal # Trauma - Constructionbags should be able to carry rods.
+      - RodMetal
   - type: Dumpable
   - type: ItemToggle
     soundActivate:
