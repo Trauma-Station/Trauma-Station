@@ -19,7 +19,7 @@
         mask:
         - MachineMask
         layer:
-        - GlassAirlockLayer
+        - MachineLayer # Trauma, bullets shoot through these now
   - type: InteractionOutline
   - type: Construction
     graph: Girder
