@@ -111,6 +111,10 @@ public sealed class IonLawSystem : EntitySystem
         AddSelector("ION-HARM-PROTECT", RandomManifestFill("IonStormCrew"));
 
         AddSelector("ION-VERB", DatasetFill("IonStormVerbs"));
+
+        // <Trauma>
+        AddSelector("ION-DEPARTMENT", DatasetFill("IonStormDepartments"));
+        // </Trauma>
     }
 
     /// <summary>

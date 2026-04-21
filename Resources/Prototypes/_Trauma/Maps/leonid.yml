@@ -14,7 +14,7 @@
       - type: StationEmergencyShuttle
         emergencyShuttlePath: /Maps/Shuttles/emergency_delta.yml
       - type: StationCargoShuttle
-        path: /Maps/Shuttles/cargo_fland.yml
+        path: /Maps/_Trauma/Shuttles/cargo_fland.yml
       - type: StationJobs
         availableJobs:
           # Command
@@ -45,6 +45,7 @@
           ResearchDirector: [ 1, 1 ]
           Scientist: [ 6, 6 ]
           ResearchAssistant: [ 6, 6 ]
+          Geneticist: [ 2, 2 ]
           # Security
           HeadOfSecurity: [ 1, 1 ]
           Warden: [ 1, 1 ]

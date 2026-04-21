@@ -225,7 +225,7 @@
   parent: BlobRule
   components:
   - type: GameRule
-    minPlayers: 20
+    minPlayers: 50
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     definitions:
@@ -263,6 +263,8 @@
   parent: BaseNukeopsRule
   id: Honkops
   components:
+  - type: GameRule
+    minPlayers: 20
   - type: RandomMetadata # this generates the random operation name cuz it's cool.
     nameSegments:
     - OperationPrefixHonkops

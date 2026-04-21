@@ -1,7 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
+using Content.Shared.EntityEffects;
 
-namespace Content.Shared.EntityEffects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 public sealed partial class OpenDoor : EntityEffectBase<OpenDoor>
 {

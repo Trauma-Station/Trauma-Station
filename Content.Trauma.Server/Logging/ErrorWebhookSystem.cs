@@ -114,7 +114,7 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
         // ignore state error spam for deleted entities referenced in a component, engine "maintainer" is a chud and won't do anything about it
         "Can't resolve \"Robust.Shared.GameObjects.MetaDataComponent\" on entity",
         // upstream issue nobody cares about with prometheus
-        "Unable to write data to the transport connection: Broken pipe"
+        "Exception in metrics listener"
     };
 
     public RingBuffer<string> Buffer = default!; // set in Initialize
