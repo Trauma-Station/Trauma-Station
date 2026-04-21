@@ -35,7 +35,7 @@
     canPry: false
     crushDamage:
       types:
-        Blunt: 25 #yowch
+        Blunt: 25 # yowch
     openSound:
       path: /Audio/Machines/blastdoor.ogg
     closeSound:
