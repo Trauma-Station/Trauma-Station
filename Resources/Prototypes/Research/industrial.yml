@@ -11,6 +11,7 @@
   cost: 10000 # Goobstation
   recipeUnlocks:
   - MiningDrill
+  - DrillHead # Trauma
   - WeaponPlasmaCutter # Goobstation
   - MineralScannerEmpty
   - OreProcessorIndustrialMachineCircuitboard
