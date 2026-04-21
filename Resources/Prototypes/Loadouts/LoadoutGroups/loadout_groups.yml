@@ -1242,10 +1242,15 @@
   id: HeadofSecurityOuterClothing
   name: loadout-group-head-of-security-outerclothing
   loadouts:
+  # <Trauma>
+  - HeadofSecurityGreatCoat
+  - HeadofSecurityOverCoat
+  - HeadofSecurityWinterTrenchCoat
+  - HeadofSecurityJacket
+  - HeadofSecurityExperimentalCoat
+  # </Trauma>
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
-  - HeadofSecurityGreatCoat # Goobstation
-  - HeadofSecurityVestWeb # Goobstation
 
 - type: loadoutGroup
   id: HeadofSecurityJobTrinkets

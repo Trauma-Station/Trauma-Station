@@ -50,6 +50,8 @@
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Hands/Gloves/gorilla.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Hands/Gloves/gorilla.rsi
   - type: Insulated
   - type: Fiber
     fiberMaterial: fibers-insulative
@@ -73,6 +75,8 @@
   description: Superior quality combative gloves, good for performing tackle takedowns as well as absorbing electrical shocks.
   components:
   - type: Sprite
+    sprite: _Trauma/Clothing/Hands/Gloves/guerrilla.rsi
+  - type: Clothing
     sprite: _Trauma/Clothing/Hands/Gloves/guerrilla.rsi
   - type: TackleModifier
     grabOnSuccess: true

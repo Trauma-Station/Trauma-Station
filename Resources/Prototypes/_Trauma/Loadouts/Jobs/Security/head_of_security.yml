@@ -1,0 +1,22 @@
+- type: loadout
+  id: HeadofSecurityGreatCoat
+  equipment:
+    outerClothing: ClothingOuterCoatHoSGreat
+
+- type: loadout
+  id: HeadofSecurityOverCoat
+  equipment:
+    outerClothing: ClothingOuterCoatHoSOver
+
+- type: loadout
+  id: HeadofSecurityWinterTrenchCoat
+  equipment:
+    outerClothing: ClothingOuterCoatHoSTrenchWinter
+
+- type: loadout
+  id: HeadofSecurityJacket
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MasterHoS
+  equipment:
+    outerClothing: ClothingOuterHoSJacket

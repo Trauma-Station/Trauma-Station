@@ -17,7 +17,7 @@
     head: ClothingHeadHatBeretHeadOfSecurityAdvanced
 
 - type: loadout
-  id: HeadofSecurityGreatCoat
+  id: HeadofSecurityExperimentalCoat
   effects:
   - !type:GroupLoadoutEffect
     proto: MasterHoS
