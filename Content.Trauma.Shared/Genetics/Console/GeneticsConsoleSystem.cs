@@ -112,7 +112,9 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         ent.Comp.NextScramble = now + ent.Comp.ScrambleCooldown;
         DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextScramble));
 
-        _mutation.Scramble(mutatable, user: args.Actor, predicted: true);
+        // reset dormant but unactivated mutations and reroll them
+        _mutation.ClearUnusedDormant(mutatable);
+        _mutation.Scramble(mutatable);
         UpdateUI(ent.Owner);
     }
 
