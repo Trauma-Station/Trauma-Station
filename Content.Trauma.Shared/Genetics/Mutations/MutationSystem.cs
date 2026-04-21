@@ -119,6 +119,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
 
     private void OnDnaScrambled(Entity<MutatableComponent> ent, ref DnaScrambledEvent args)
     {
+        ClearMutations(ent.Owner, automatic: true, predicted: false); // currently it's only raised on server
         Scramble(ent);
     }
 
