@@ -168,7 +168,7 @@
 
 - type: reaction
   id: Smoke
-  priority: -10
+  priority: 10 # Trauma
   impact: High
   conserveEnergy: false
   reactants:
@@ -180,14 +180,14 @@
       amount: 1
   effects:
     - !type:AreaReactionEffect
-      duration: 10
+      duration: 10 # Trauma - Changed foam/smoke duration, check AreaReactionEntityEffectSystem.cs for more info, this still works, just not the same
       prototypeId: Smoke
       sound:
         path: /Audio/Effects/smoke.ogg
 
 - type: reaction
   id: Foam
-  priority: -10
+  priority: 10 # Trauma
   impact: High
   conserveEnergy: false
   reactants:
@@ -205,7 +205,7 @@
 - type: reaction
   id: IronMetalFoam
   impact: High
-  priority: -10
+  priority: 10 # Trauma
   conserveEnergy: false
   reactants:
     Iron:
@@ -224,7 +224,7 @@
 - type: reaction
   id: AluminiumMetalFoam
   impact: High
-  priority: -10
+  priority: 10 # Trauma
   conserveEnergy: false
   reactants:
     Aluminium:

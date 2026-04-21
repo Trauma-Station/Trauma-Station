@@ -120,10 +120,10 @@
     specificHeat: 42
   - type: TemperatureDamage
     heatDamageThreshold: 600
-    coldDamageThreshold: -150
+    coldDamageThreshold: 100 # Trauma, was -150
     coldDamage: #per second, scales with temperature & other constants
       types:
-        Cold: 0.1
+        Cold: 0.25 # Trauma, was 0.1
     heatDamage: #per second, scales with temperature & other constants
       types:
         Heat: 1.5

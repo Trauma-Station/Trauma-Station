@@ -726,18 +726,21 @@
         emptyLabel: borg-slot-construction-empty
         whitelist:
           tags:
+          - RodMetal # Trauma - borgs should be able to hold rods
           - ConstructionMaterial
     - hand:
         emptyRepresentative: BorgModuleConstructionMaterialPlaceholder
         emptyLabel: borg-slot-construction-empty
         whitelist:
           tags:
+          - RodMetal # Trauma
           - ConstructionMaterial
     - hand:
         emptyRepresentative: BorgModuleConstructionMaterialPlaceholder
         emptyLabel: borg-slot-construction-empty
         whitelist:
           tags:
+          - RodMetal # Trauma
           - ConstructionMaterial
     - hand:
         emptyRepresentative: DoorElectronics

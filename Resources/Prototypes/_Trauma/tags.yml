@@ -56,6 +56,12 @@
   id: DeliciousLookingApple
 
 - type: Tag
+  id: DrillHead
+
+- type: Tag
+  id: Directional
+
+- type: Tag
   id: Ed209Shell
 
 - type: Tag

@@ -17,8 +17,7 @@ public sealed class LoadoutOrphanTest : GameTest
     [Test]
     public async Task NoOrphanedLoadoutsTest()
     {
-        var pair = Pair;
-        var server = pair.Server;
+        var server = Pair.Server;
         var proto = server.ProtoMan;
 
         // go through each group
@@ -34,15 +33,17 @@ public sealed class LoadoutOrphanTest : GameTest
 
         await server.WaitAssertion(() =>
         {
-            Assert.Multiple(() =>
+            var orphans = new List<string>();
+            // then go through each loadout
+            foreach (var loadout in proto.EnumeratePrototypes<LoadoutPrototype>())
             {
-                // then go through each loadout
-                foreach (var loadout in proto.EnumeratePrototypes<LoadoutPrototype>())
-                {
-                    // and make sure it has a group
-                    Assert.That(grouped.Contains(loadout.ID), $"Loadout {loadout.ID} was not found in any LoadoutGroupPrototype, it cannot be used");
-                }
-            });
+                // and make sure it has a group
+                var id = loadout.ID;
+                if (!grouped.Contains(id))
+                    orphans.Add(id);
+            }
+
+            Assert.That(orphans, Is.Empty, $"Orphaned loadouts {string.Join(' ', orphans)} were not found in any LoadoutGroupPrototype, they cannot be used");
         });
     }
 }
