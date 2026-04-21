@@ -1,27 +1,3 @@
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Visne <vincefvanwijk@gmail.com>
-# SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 RemberBL <timmermanrembrandt@gmail.com>
-# SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 knowledge-path-rust-s1-name = Blacksmith's Tale
 knowledge-path-rust-s1-desc =
     "Let me tell you a story", said the Blacksmith, as he gazed deep into his rusty blade.
@@ -52,18 +28,20 @@ knowledge-path-rust-s4-desc =
 
     Grants you Aggressive Spread, a spell that spreads rust to nearby surfaces.
 
-# knowledge-path-rust-s3-name = Leeching Walk
-# knowledge-path-rust-s3-desc =
-#     The speed was unparalleled, the strength unnatural. The Blacksmith was smiling.
-#
-#     Grants you passive healing and resistance to batons while standing over rust.
-
 knowledge-path-rust-s5-name = Rust Construction
 knowledge-path-rust-s5-desc =
     Images of foreign and ominous structures began to dance in my mind. Covered head to toe in thick rust, they no longer looked man made. Or perhaps they never were in the first place.
 
     Grants you Rust Construction, a spell that allows you to raise a wall out of a rusted floor.
     Anyone overtop the wall will be thrown aside and sustain damage.
+
+knowledge-path-rust-armor-name = Salvaged Remains
+knowledge-path-rust-armor-desc =
+    The corrosion was unstoppable. The rust was unpleasable. The Blacksmith was gone, and you hold their blade. Champions of hope, the Rustbringer is nigh!
+
+    Allows you to transmute a table (or a suit), a mask and any trash item to create a Salvaged Remains.
+    Has extra armor, tackle resistance and syringe immunity while standing on rust.
+    Acts as a focus while hooded.
 
 knowledge-path-rust-s6-name = Entropic Plume
 knowledge-path-rust-s6-desc =

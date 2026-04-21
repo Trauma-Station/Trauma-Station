@@ -41,6 +41,16 @@
 
 - type: entity
   parent: ClothingHeadHatHoodHeretic
+  id: ClothingHeadHatHoodHereticRust
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/Head/rust_hood.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Goobstation/Heretic/Clothing/Head/rust_hood.rsi
+
+- type: entity
+  parent: ClothingHeadHatHoodHeretic
   id: ClothingHeadHatHoodHereticVoid
   components:
   - type: Sprite

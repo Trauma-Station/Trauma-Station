@@ -47,7 +47,7 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Fires a flaming beam to a nearby target, burning and setting them ablaze, if they do not extinguish themself, it will spread to others.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mask of Madness</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Mask, Ash, Lighter, Stun baton, Liver</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Mask, Stun baton, Liver, Flare</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates an abyssal mask; a mask that causes insanity in heathens, and protects you from fire and heat. Heathens cannot remove it without help.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Fiery Blade</Box></ColorBox>

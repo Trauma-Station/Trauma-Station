@@ -44,6 +44,16 @@ knowledge-path-lock-s5-desc =
     Allows you to transmute a crayon, a wooden plank, and a multitool to create a Labyrinth Handbook.
     It can materialize a barricade at range that noone can pass. Has 5 charges which regenerate over time.
 
+knowledge-path-lock-armor-name = Shifting Guise
+knowledge-path-lock-armor-desc =
+    While stewards are known to the Concierge,
+    they still consort between one another and with outsiders under shaded cloaks and drawn hoods.
+    Familiarity is treachery, even to oneself.
+
+    Allows you to transmute a table (or a suit), a mask and a crowbar to create a shifting guise.
+    It grants you camoflage from cameras, hides your identity, voice and muffles your footsteps.
+    Acts as a focus while hooded.
+
 knowledge-path-lock-s6-name = Burglar's Finesse
 knowledge-path-lock-s6-desc =
     Consorting with Burglar spirits is frowned upon, but a Steward will always want to learn about new doors.

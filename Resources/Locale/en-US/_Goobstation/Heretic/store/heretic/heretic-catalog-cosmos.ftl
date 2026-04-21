@@ -40,6 +40,15 @@ knowledge-path-cosmos-s5-desc =
     Tethered victims cannot teleport by any means.
     If the tether remains unbroken for 8 seconds, they will be put to sleep, star marked and teleported to you.
 
+knowledge-path-cosmos-armor-name = Starwoven Cloak
+knowledge-path-cosmos-armor-desc =
+    Like radiant cords, the stars shone in union across the silken shape of a billowing cloak, that at once does and does not drape my shoulders.
+    The eyes of the Beast rested upon me, and through me.
+
+    Allows you to transmute a table (or a suit), a mask and a sheet of plasma to create a Starwoven Cloak,
+    grants protection from the hazards of space while granting to the user the ability to levitate at will.
+    Acts as a focus while hooded.
+
 knowledge-path-cosmos-s6-name = Star Blast
 knowledge-path-cosmos-s6-desc =
     The Beast was behind me now at all times, with each sacrifice words of affirmation coursed through me.

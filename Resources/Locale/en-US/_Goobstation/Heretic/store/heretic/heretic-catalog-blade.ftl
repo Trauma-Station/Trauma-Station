@@ -32,6 +32,15 @@ knowledge-path-blade-s4-desc =
     You cannot attack with your blade that is actively hooking someone.
     Hook gets broken when victim stands up.
 
+knowledge-path-blade-armor-name = Shattered Panoply
+knowledge-path-blade-armor-desc =
+    The echoing, directionless cacophony of violence reverberates about me.
+    Even as the Champion's steel panoply was torn from their form, each piece craves purpose still, seeking to intercept unseen or imagined attackers.
+
+    Allows you to transmute a table (or a suit), a mask and a sheet of silver to create a Shattered Panoply.
+    Provides baton resistance and shock insulation while worn.
+    Acts as a focus while hooded.
+
 knowledge-path-blade-s5-name = Sacraments of Power
 knowledge-path-blade-s5-desc =
     His general wished to end the war, but the Champion knew there could be no life without death. He would slay the coward himself, and anyone who tried to run.

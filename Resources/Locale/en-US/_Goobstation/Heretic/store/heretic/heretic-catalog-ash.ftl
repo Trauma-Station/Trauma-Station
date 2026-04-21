@@ -1,28 +1,3 @@
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Visne <vincefvanwijk@gmail.com>
-# SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 RemberBL <timmermanrembrandt@gmail.com>
-# SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 knowledge-path-ash-s1-name = Nightwatcher's Secret
 knowledge-path-ash-s1-desc =
     The City Guard know their watch. If you ask them at night, they may tell you about the ashy lantern.
@@ -61,14 +36,23 @@ knowledge-path-ash-s5-desc =
     setting them on fire and burning them.
     If they do not extinguish themselves, the beam will continue to another target.
 
+knowledge-path-ash-armor-name = Scorched Mantle
+knowledge-path-ash-s6-desc =
+    The Watch remain as they fell, crumbling away from sight.
+    Yet the winds blowing through the city call them back to service, dust kicked into the air, a drifting silhouette of the fallen.
+
+    Allows you to transmute a table (or a suit), a mask and a match to create a Scorched Mantle.
+    It provides completes protection from fire, and is able to produce more flames passively.
+    When you have enough fire, you may cast empowered versions of your ashen spells.
+    Acts as a focus while hoode.
+
 knowledge-path-ash-s6-name = Mask of Madness
 knowledge-path-ash-s6-desc =
     The Nightwatcher was lost. That's what the Watch believed. Yet he walked the world, unnoticed by the masses.
 
-    Allows you to transmute any mask, a flare, a pool of ash, a lighter, a stun baton, and a liver to create a Mask of Madness.
+    Allows you to transmute any mask, a flare, a stun baton, and a liver to create a Mask of Madness.
     The mask instills fear into heathens who witness it, causing stamina damage, hallucinations, and insanity.
     It can also be forced onto a heathen, to make them unable to take it off...
-    Additionally, the mask grants you protection from fires and high temperature when worn.
 
 knowledge-path-ash-s7-name = Fiery Blade
 knowledge-path-ash-s7-desc =

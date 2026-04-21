@@ -80,6 +80,12 @@
   - ActionHereticVolcanoBlast
 
 - type: hereticKnowledge
+  id: ArmorAsh
+  stage: 6
+  ritualPrototypes:
+  - RitualArmorAsh
+
+- type: hereticKnowledge
   id: MaskOfMadness
   path: Ash
   sideKnowledge: true
@@ -163,6 +169,12 @@
   - ActionHereticSacraments
 
 - type: hereticKnowledge
+  id: ArmorBlade
+  stage: 6
+  ritualPrototypes:
+  - RitualArmorBlade
+
+- type: hereticKnowledge
   id: FuriousSteel
   path: Blade
   stage: 6
@@ -234,6 +246,12 @@
   stage: 5
   actionPrototypes:
   - ActionHereticFleshSurgery
+
+- type: hereticKnowledge
+  id: ArmorFlesh
+  stage: 6
+  ritualPrototypes:
+  - RitualArmorFlesh
 
 - type: hereticKnowledge
   id: RawRitual
@@ -308,6 +326,12 @@
   stage: 5
   actionPrototypes:
   - ActionHereticVoidPrison
+
+- type: hereticKnowledge
+  id: ArmorVoid
+  stage: 6
+  ritualPrototypes:
+  - RitualArmorVoid
 
 - type: hereticKnowledge
   id: VoidPull
@@ -400,6 +424,12 @@
   - ActionHereticRustConstruction
 
 - type: hereticKnowledge
+  id: ArmorRust
+  stage: 6
+  ritualPrototypes:
+  - RitualArmorRust
+
+- type: hereticKnowledge
   id: EntropicPlume
   path: Rust
   sideKnowledge: true
@@ -471,6 +501,12 @@
   stage: 5
   actionPrototypes:
   - ActionHereticStarTouch
+
+- type: hereticKnowledge
+  id: ArmorCosmos
+  stage: 6
+  ritualPrototypes:
+  - RitualArmorCosmos
 
 - type: hereticKnowledge
   id: StarBlast
@@ -556,6 +592,12 @@
   - RitualConcierge
 
 - type: hereticKnowledge
+  id: ArmorLock
+  stage: 6
+  ritualPrototypes:
+  - RitualArmorLock
+
+- type: hereticKnowledge
   id: BurglarsFinesse
   path: Lock
   sideKnowledge: true
@@ -600,22 +642,15 @@
   actionPrototypes:
   - ActionHereticShapeshiftLock
 
-### side paths
 - type: hereticKnowledge
   id: RitualOfKnowledge
+  stage: 6
   sideKnowledge: true
   ritualPrototypes:
   - RitualKnowledge
 
-## stage 4
-
-- type: hereticKnowledge
-  id: ArmorerRitual
-  sideKnowledge: true
-  stage: 4
-  ritualPrototypes:
-  - RitualArmorer
-
+### side knowledge
+## T1
 - type: hereticKnowledge
   id: AshenEyesRitual
   sideKnowledge: true
@@ -647,115 +682,115 @@
 - type: hereticKnowledge
   id: EtherOfTheNewborn
   sideKnowledge: true
-  stage: 3
+  stage: 4
   ritualPrototypes:
   - RitualEtherOfTheNewborn
 
 - type: hereticKnowledge
   id: Realignment
   sideKnowledge: true
-  stage: 3
+  stage: 4
   actionPrototypes:
   - ActionHereticRealignment
 
 - type: hereticKnowledge
   id: EnvyKnife
   sideKnowledge: true
-  stage: 3
+  stage: 4
   ritualPrototypes:
   - RitualEnvyKnife
 
-## stage 6
+## T2
 - type: hereticKnowledge
   id: RustedRitual
   sideKnowledge: true
-  stage: 6
+  stage: 5
   ritualPrototypes:
   - RitualRusted
 
 - type: hereticKnowledge
   id: CarvingKnife
   sideKnowledge: true
-  stage: 6
+  stage: 5
   ritualPrototypes:
   - RitualCarvingKnife
 
 - type: hereticKnowledge
   id: MysteriesOfCreation
   sideKnowledge: true
-  stage: 6
+  stage: 5
   actionPrototypes:
   - ActionHereticIceSpear
 
 - type: hereticKnowledge
   id: CodexMorbus
   sideKnowledge: true
-  stage: 6
+  stage: 5
   ritualPrototypes:
   - RitualCodexMorbus
 
 - type: hereticKnowledge
   id: GreavesOfTheProphet
   sideKnowledge: true
-  stage: 6
+  stage: 5
   ritualPrototypes:
   - RitualGreavesOfTheProphet
 
 - type: hereticKnowledge
   id: ShatteredRitual
   sideKnowledge: true
-  stage: 6
+  stage: 5
   ritualPrototypes:
   - RitualShattered
 
 - type: hereticKnowledge
   id: MawedCrucible
   sideKnowledge: true
-  stage: 6
+  stage: 5
   ritualPrototypes:
   - RitualMawedCrucible
 
 - type: hereticKnowledge
   id: ThroughTheBoundary
   sideKnowledge: true
-  stage: 6
+  stage: 5
   ritualPrototypes:
   - RitualThroughTheBoundary
 
+## T3
 - type: hereticKnowledge
   id: MindGrasp
   sideKnowledge: true
-  stage: 6
+  stage: 7
   mindEvent: !type:HereticGraspUpgradeEvent
     addedComponents:
     - type: AreaMansusGrasp
 
-## stage 8
 - type: hereticKnowledge
   id: Cleave
   sideKnowledge: true
-  stage: 8
+  stage: 7
   actionPrototypes:
   - ActionHereticCleave
 
 - type: hereticKnowledge
   id: SpacePhase
   sideKnowledge: true
-  stage: 8
+  stage: 7
   actionPrototypes:
   - ActionHereticSpacePhase
 
 - type: hereticKnowledge
   id: MaidInTheMirror
   sideKnowledge: true
-  stage: 8
+  stage: 7
   ritualPrototypes:
   - RitualMaidInTheMirror
 
 - type: hereticKnowledge
   id: ForestAdmonitions
   sideKnowledge: true
-  stage: 8
+  stage: 7
   actionPrototypes:
   - ActionHereticForestAdmonitions
   mindEvent: !type:HereticRemoveActionEvent

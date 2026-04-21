@@ -111,6 +111,27 @@
     - Cosmos
 
 - type: listing
+  id: HereticCosmosArmor
+  name: knowledge-path-cosmos-armor-name
+  description: knowledge-path-cosmos-armor-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/cosmos_armor.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ArmorCosmos
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+    whitelist:
+    - Cosmos
+
+- type: listing
   id: HereticCosmosPath6
   name: knowledge-path-cosmos-s6-name
   description: knowledge-path-cosmos-s6-desc

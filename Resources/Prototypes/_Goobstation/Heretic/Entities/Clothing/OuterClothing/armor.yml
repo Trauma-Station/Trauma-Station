@@ -28,13 +28,13 @@
         Heat: 0.5
         Caustic: 0.5
     traumaDeductions:
-      Dismemberment: 0.5
-      OrganDamage: 0.5
-      BoneDamage: 0.5
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
       VeinsDamage: 0.0
   - type: ExplosionResistance
     damageCoefficient: 0.25
-  - type: ToggleableClothing # Goobstation - Modsuits change
+  - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHeretic
   - type: ModifyDelayedKnockdown
@@ -50,6 +50,20 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.5
     coolingCoefficient: 0.5
+
+- type: entity
+  parent: ClothingOuterArmorHeretic
+  id: ClothingOuterArmorHereticRust
+  suffix: Rust
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/rust_armor.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/rust_armor.rsi
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHatHoodHereticRust
 
 - type: entity
   parent: ClothingOuterArmorHeretic

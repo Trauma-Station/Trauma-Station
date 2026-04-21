@@ -1,27 +1,3 @@
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Visne <vincefvanwijk@gmail.com>
-# SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 RemberBL <timmermanrembrandt@gmail.com>
-# SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 knowledge-path-flesh-s1-name = Principle of Hunger
 knowledge-path-flesh-s1-desc =
     Hundreds of us starved, but not me... I found strength in my greed.
@@ -68,6 +44,16 @@ knowledge-path-flesh-s5-desc =
     Grants you the spell Knit Flesh. This touch spell acts as a great surgery tool that bypasses surgery steps, clothing, doesn't cause pain and doesn't deal poison damage. Also acts as medical hud and health analyzer.
     This spell also allows you to heal your minions and summons.
 
+knowledge-path-flesh-armor-name = Writhing Embrace
+knowledge-path-flesh-armor-desc =
+    I tugged these wretched, slothing things about me, like one might a warm blanket.
+    With eyes-not-mine, they will witness. With teeth-not-mine, they will clench. With limbs-not-mine, they will break.
+
+    Allows you to transmute a table (or a suit), a mask and a pool of blood to create a writhing embrace.
+    It grants you the ability to detect the health condition of other living (and non-living).
+    Additionally, upon taking damage, it has a chance to spawn a loyal flesh mimic of yourself.
+    Acts as a focus while hooded.
+
 knowledge-path-flesh-s6-name = Raw Ritual
 knowledge-path-flesh-s6-desc =
     I could not continue alone. I was able to summon The Uncanny Man to help me see more.
@@ -96,8 +82,7 @@ knowledge-path-flesh-s8-desc =
 knowledge-path-flesh-s9-name = Priest’s Final Hymn
 knowledge-path-flesh-s9-desc =
     The ascension ritual of the Path of Flesh. Bring 4 corpses to a transmutation rune to complete the ritual.
-    When completed, you will become even stronger from consuming flesh.
-    Additionally, upon taking damage, your body will split into flesh mimic. They will be given a Bloody Blade.
-    You can only sustain 10 flesh mimics at once, taking even more damage will instead heal existing mimics.
+    When completed, you gain the ability to shed your human form and become the Lord of the Night, a supremely powerful creature.
+    Just the act of transforming causes nearby heathens great fear and trauma.
+    While in the Lord of the Night form, you can consume arms to heal and regain segments.
     Your Knit Flesh spell can now heal your minions in an area around you when using it in hand, at an increased cooldown.
-    You will also become immune to extreme temperatures and pressure.

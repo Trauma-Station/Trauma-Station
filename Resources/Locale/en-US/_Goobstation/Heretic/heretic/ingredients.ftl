@@ -21,6 +21,7 @@ heretic-ritual-ingredient-crowbar = crowbar
 heretic-ritual-ingredient-metal-rod = metal rod
 heretic-ritual-ingredient-door = door
 heretic-ritual-ingredient-table = table
+heretic-ritual-ingredient-table-suit = table (or a suit with sensors)
 heretic-ritual-ingredient-gas-mask = gas mask
 heretic-ritual-ingredient-water-tank = water tank
 heretic-ritual-ingredient-glass-shard = glass shard
