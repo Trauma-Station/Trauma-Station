@@ -179,7 +179,7 @@
   id: Nukeops
   components:
   - type: GameRule
-    minPlayers: 20
+    minPlayers: 50 # Trauma, was 20
   - type: LoadMapRule
     mapPath: /Maps/_Trauma/Nonstations/nukieplanet.yml # Trauma
   - type: AntagSelection
@@ -302,13 +302,13 @@
   id: Traitor
   components:
   - type: GameRule
-    minPlayers: 5
+    minPlayers: 1 # Trauma was 5
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn # Goobstation
     definitions:
     - prefRoles: [ Traitor ]
       max: 8
-      playerRatio: 10
+      playerRatio: 6 # Trauma, was 10
       blacklist:
         components:
         - CommandStaff # Goobstation

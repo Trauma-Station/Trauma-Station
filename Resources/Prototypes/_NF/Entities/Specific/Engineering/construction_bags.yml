@@ -52,6 +52,7 @@
       - CableCoil
       - RawMaterial
       - PartBase
+      - RodMetal
   - type: Dumpable
   - type: ItemToggle
     soundActivate:

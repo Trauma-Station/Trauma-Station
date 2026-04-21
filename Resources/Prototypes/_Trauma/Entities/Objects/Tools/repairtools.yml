@@ -73,3 +73,31 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity
+  parent: MaterialBase
+  id: DrillHead
+  name: drill head
+  description: A replacement drill head for hand drills.
+  suffix: full
+  components:
+  - type: Tag
+    tags:
+    - DrillHead
+  - type: Sprite
+    sprite: _Trauma/Objects/Tools/drillhead.rsi
+    state: icon
+  - type: Item
+    sprite: _Trauma/Objects/Tools/drillhead.rsi
+    storedOffset: 0,-1
+    storedRotation: 45
+    size: Small
+    shape:
+    - 0,0,1,0
+  - type: Stack
+    stackType: DrillHead
+    count: 1
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      DrillHead: 100

@@ -17,7 +17,7 @@
   id: Insurgency
   components:
   - type: GameRule
-    minPlayers: 10 # no insurgents on deadpop
+    minPlayers: 5 # no insurgents on deadpop
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
