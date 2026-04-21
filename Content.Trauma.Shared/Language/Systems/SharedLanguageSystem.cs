@@ -137,11 +137,22 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         Dirty(ent);
     }
 
-    public override void AddLanguage(EntityUid uid, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true)
+    public override void AddLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true)
     {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
         var ev = new AddLanguageEvent(language, addSpoken, addUnderstood);
-        RaiseLocalEvent(uid, ref ev);
-        return;
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Handled)
+            return;
+
+        // normal logic for case of no knowledge
+        if (addSpoken)
+            ent.Comp.Speaks.Add(language);
+        if (addUnderstood)
+            ent.Comp.Understands.Add(language);
+        Dirty(ent);
     }
 
     public override void RemoveLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool removeSpoken = true, bool removeUnderstood = true)
@@ -151,7 +162,15 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
 
         var ev = new RemoveLanguageEvent(language, removeSpoken, removeUnderstood);
         RaiseLocalEvent(ent, ref ev);
-        return;
+        if (ev.Handled)
+            return;
+
+        // normal logic for case of no knowledge
+        if (removeSpoken)
+            ent.Comp.Speaks.Remove(language);
+        if (removeUnderstood)
+            ent.Comp.Understands.Remove(language);
+        Dirty(ent);
     }
 
     /// <summary>
@@ -185,8 +204,8 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
 }
 
 [ByRefEvent]
-public record struct AddLanguageEvent(ProtoId<LanguagePrototype> Language, bool AddSpoken, bool AddUnderstood);
+public record struct AddLanguageEvent(ProtoId<LanguagePrototype> Language, bool AddSpoken, bool AddUnderstood, bool Handled = false);
 [ByRefEvent]
-public record struct RemoveLanguageEvent(ProtoId<LanguagePrototype> Language, bool RemoveSpoken, bool RemoveUnderstood);
+public record struct RemoveLanguageEvent(ProtoId<LanguagePrototype> Language, bool RemoveSpoken, bool RemoveUnderstood, bool Handled = false);
 [ByRefEvent]
 public record struct UpdateLanguageEvent();

@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Shared.Wounds;
 using Content.Server.Polymorph.Components;
 using Content.Shared.Actions;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
+using Content.Shared.Damage.Components;
 using Content.Shared.Ghost;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side;
@@ -17,8 +18,8 @@ public sealed partial class HereticAbilitySystem
 {
     [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
-    private HashSet<Entity<MobStateComponent>> _targets = new();
-    private HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();
+    private readonly List<EntityUid> _bloodStealTargets = new();
+    private readonly HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();
 
     protected override void SubscribeSide()
     {
@@ -116,25 +117,37 @@ public sealed partial class HereticAbilitySystem
 
         var hasTargets = false;
 
-        _targets.Clear();
-        Lookup.GetEntitiesInRange(args.Target, args.Range, _targets, LookupFlags.Dynamic);
-        foreach (var (target, _) in _targets)
+        TryComp(args.Performer, out DamageableComponent? damageable);
+
+        _bloodStealTargets.Clear();
+        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, args.Target))
         {
             if (target == args.Performer)
                 continue;
 
             hasTargets = true;
 
-            _dmg.TryChangeDamage(target, args.Damage, true, origin: args.Performer);
+            var dmg = _dmg.ChangeDamage(target, args.Damage, true, origin: args.Performer);
+            if (damageable != null)
+                _lifesteal.LifeSteal((args.Performer, damageable), dmg.GetTotal());
 
             if (!_bloodQuery.TryComp(target, out var blood))
                 continue;
 
-            _blood.TryModifyBloodLevel((target, blood), args.BloodModifyAmount);
             _blood.TryModifyBleedAmount((target, blood), blood.MaxBleedAmount);
+            _bloodStealTargets.Add(target);
         }
 
-        if (hasTargets)
-            _aud.PlayPvs(args.Sound, args.Target);
+        _lifesteal.BloodSteal(args.Performer, _bloodStealTargets, args.BloodModifyAmount, null);
+
+        if (!hasTargets)
+            return;
+
+        foreach (var (_, woundable) in _body.GetOrgans<WoundableComponent>(args.Performer))
+        {
+            _container.EmptyContainer(woundable.Wounds);
+        }
+
+        _aud.PlayPvs(args.Sound, args.Target);
     }
 }

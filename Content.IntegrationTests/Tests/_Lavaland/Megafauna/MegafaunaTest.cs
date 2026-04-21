@@ -1,8 +1,6 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.IntegrationTests.Fixtures;
 using Content.Lavaland.Shared.Megafauna.Components;
 using Content.Lavaland.Shared.Megafauna.Systems;
 using Robust.Shared.GameObjects;
@@ -12,15 +10,14 @@ namespace Content.IntegrationTests.Tests._Lavaland.Megafauna;
 [TestFixture]
 [TestOf(typeof(MegafaunaAiComponent))]
 [TestOf(typeof(MegafaunaSystem))]
-public sealed class MegafaunaTest
+public sealed class MegafaunaTest : GameTest
 {
     public const string TestBoss = "MobHierophant";
 
     [Test]
     public async Task LaunchAndShutdownMegafauna()
     {
-        await using var pair = await PoolManager.GetServerClient();
-
+        var pair = Pair;
         var server = pair.Server;
         var testMap = await pair.CreateTestMap();
         var entMan = server.ResolveDependency<IEntityManager>();
@@ -70,15 +67,12 @@ public sealed class MegafaunaTest
         // Should be clear again
         Assert.That(megafaunaAi.Active, Is.False);
         Assert.That(megafaunaAi.Schedule, Is.Empty);
-
-        await pair.CleanReturnAsync();
     }
 
     /*[Test]
     public async Task TestMegafaunaAi()
     {
-        await using var pair = await PoolManager.GetServerClient();
-
+        var pair = Pair;
         var server = pair.Server;
         var testMap = await pair.CreateTestMap();
         var entMan = server.ResolveDependency<IEntityManager>();
@@ -96,7 +90,5 @@ public sealed class MegafaunaTest
         });
 
         await server.WaitRunTicks(5);
-
-
     }*/
 }

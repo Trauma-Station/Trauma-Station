@@ -20,8 +20,6 @@
   - type: VisualOrgan
     data:
       sprite: _EinsteinEngines/Mobs/Species/Cybernetics/bishop/bishop_main.rsi
-  - type: Nerve
-    painMultiplier: 1.5
   - type: Woundable
     canBleed: false
   - type: WoundableVisuals

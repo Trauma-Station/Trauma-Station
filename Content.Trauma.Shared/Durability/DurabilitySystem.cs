@@ -336,6 +336,10 @@ public sealed class DurabilitySystem : EntitySystem
         if (args.Target != ent.Owner || args.Handled)
             return;
 
+        // don't care if it's not damaged and can't be over-repaired any further
+        if (ent.Comp.Damage <= -ent.Comp.MaxRepairBonus)
+            return;
+
         if (TryComp<ToolComponent>(args.Used, out var tool) && ent.Comp.RepairTool is not null)
         {
             if (_tool.HasQuality(args.Used, ent.Comp.RepairTool, tool))

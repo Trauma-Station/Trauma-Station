@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Medical.Shared.Abductor;
 using Content.Server.GameTicking;

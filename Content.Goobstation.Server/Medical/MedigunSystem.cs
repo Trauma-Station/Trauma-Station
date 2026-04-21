@@ -7,8 +7,6 @@ using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Power.EntitySystems;
-using Content.Medical.Shared.Consciousness;
-using Content.Medical.Shared.Pain;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Body;
@@ -35,16 +33,13 @@ public sealed class MedigunSystem : SharedMedigunSystem
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly AlertsSystem _alert = default!;
     [Dependency] private readonly BatterySystem _battery = default!;
     [Dependency] private readonly SharedBloodstreamSystem _bloodstreamSystem = default!;
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!; // Shitmed Change
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly PainSystem _pain = default!; // Shitmed Change
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private EntityQuery<BatteryComponent> _batteryQuery;
@@ -105,8 +100,6 @@ public sealed class MedigunSystem : SharedMedigunSystem
         }
     }
 
-    private const string PainModifierIdentifier = "PainSuppressant";
-
     /// <summary>
     /// Returns false if target had failed to be healed.
     /// </summary>
@@ -160,18 +153,6 @@ public sealed class MedigunSystem : SharedMedigunSystem
 
         if (comp.ParentEntity != null)
             UpdateAlert(comp.ParentEntity.Value, ent);
-
-        // PainSystem also adds pain modifiers to coders who are trying to use it. Literally 0 convenience APIs!!!
-        if (!_consciousness.TryGetNerveSystem(healed, out var nerveSys))
-            return true;
-
-        if (_body.GetOrgan(healed, HeadCategory) is not {} head)
-            return true;
-
-        if (!_pain.TryGetPainModifier(nerveSys.Value, head, PainModifierIdentifier, out var modifier))
-            _pain.TryAddPainModifier(nerveSys.Value, head, PainModifierIdentifier, ent.Comp.PainAmountModifier, time: TimeSpan.FromSeconds(1.5f));
-        else
-            _pain.TryChangePainModifier(nerveSys.Value, head, PainModifierIdentifier, modifier.Value.Change + ent.Comp.PainAmountModifier, time: TimeSpan.FromSeconds(1.5f));
 
         return true;
     }

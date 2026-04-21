@@ -17,7 +17,6 @@ using Content.Shared.Database;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Content.Trauma.Shared.Heretic.Components;
@@ -25,6 +24,7 @@ using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
+using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Server.Audio;
 using Robust.Server.GameStates;
@@ -46,7 +46,7 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly TeleportSystem _teleport = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
@@ -90,14 +90,13 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
         if (IsPaused(target))
             return false;
 
-        var xform = Transform(ent);
+        var oldCoords = Transform(ent).Coordinates;
+        var newCoords = Transform(target).Coordinates;
+        if (!_teleport.Teleport(ent.Owner, newCoords, ent.Comp.TeleportSound, user: ent, predicted: false))
+            return false;
 
-        _audio.PlayPvs(ent.Comp.TeleportSound, xform.Coordinates);
-        Spawn(ent.Comp.TeleportEffect, xform.Coordinates);
-        _pulling.StopAllPulls(ent);
-        Xform.SetMapCoordinates((ent.Owner, xform), Xform.GetMapCoordinates(target));
-        Spawn(ent.Comp.TeleportEffect, xform.Coordinates);
-        _audio.PlayPvs(ent.Comp.TeleportSound, xform.Coordinates);
+        Spawn(ent.Comp.TeleportEffect, oldCoords);
+        Spawn(ent.Comp.TeleportEffect, newCoords);
         return true;
     }
 

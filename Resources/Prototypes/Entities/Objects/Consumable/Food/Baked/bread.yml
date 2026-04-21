@@ -6,6 +6,8 @@
   parent: FoodInjectableBase
   id: FoodBreadBase
   components:
+  - type: Perishable # Trauma - Bread loaf should take as long to rot as slices do
+    rotAfter: 900
   - type: Item
     size: Normal
   - type: FlavorProfile
@@ -29,6 +31,12 @@
   id: FoodBreadSliceBase
   abstract: true
   components:
+  # <Trauma>
+  - type: Perishable
+    rotAfter: 600
+  - type: RotInto # rots into moldy bread
+    entity: FoodBreadMoldySlice
+  # </Trauma>
   - type: Item
     size: Tiny
   - type: FlavorProfile
@@ -895,6 +903,12 @@
   id: FoodBreadMoldySlice
   description: Entire stations have been ripped apart over arguing whether this is still good to eat.
   components:
+  # <Trauma>
+  - type: Perishable # shouldnt take 20 mins to rot
+    rotAfter: 300
+  - type: RotInto # mold should not rot into more mold
+    entity: FoodRot
+  # </Trauma>
   - type: Sprite
     layers:
     - state: moldy-slice

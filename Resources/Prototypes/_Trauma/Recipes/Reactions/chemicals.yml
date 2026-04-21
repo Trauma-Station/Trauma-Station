@@ -116,6 +116,7 @@
       amount: 1
   products:
     FullFatOils: 2
+  requiredMixerCategories: [ Stir ] # to not conflict with soap making
 
 - type: reaction
   id: CocainePowderReaction

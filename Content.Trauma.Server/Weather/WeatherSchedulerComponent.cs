@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Trauma.Server.Weather;
 
 /// <summary>
-/// Makes weather randomly happen every so often.
+/// Map status effect that makes weather randomly happen every so often.
 /// </summary>
 [RegisterComponent, Access(typeof(WeatherSchedulerSystem))]
 [AutoGenerateComponentPause]
@@ -23,6 +23,12 @@ public sealed partial class WeatherSchedulerComponent : Component
     /// </summary>
     [DataField]
     public int Stage;
+
+    /// <summary>
+    /// Temporary weather will end after the last stage instead of wrapping around.
+    /// </summary>
+    [DataField]
+    public bool Temporary;
 
     /// <summary>
     /// When to go to the next step of the schedule.

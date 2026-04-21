@@ -32,7 +32,7 @@
     angle: 225
 
 - type: entity
-  parent: WeldingMaskBase
+  parent: WeldingMaskBaseNoBlind
   id: ClothingHeadHatSlasherMask
   name: slasher mask
   description: A head-mounted face cover designed to protect the wearer completely from space-arc eye.

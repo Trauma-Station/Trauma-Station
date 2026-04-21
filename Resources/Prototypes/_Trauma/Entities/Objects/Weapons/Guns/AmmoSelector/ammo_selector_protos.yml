@@ -5,7 +5,7 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     state: heavylaser
   protoId: LaserSidearmBullet
-  fireCost: 62.5
+  fireCost: 30
   flags:
   - ChangeWeaponFireSound
   - ChangeWeaponFireCost
@@ -19,7 +19,7 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     state: omnilaser
   protoId: BulletDisabler
-  fireCost: 31.25
+  fireCost: 30
   flags:
   - ChangeWeaponFireSound
   - ChangeWeaponFireCost

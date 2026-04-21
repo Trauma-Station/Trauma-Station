@@ -41,7 +41,6 @@ knowledge-path-side-s4-shark-desc =
     Allows you to transmute 3 pools of ash, a liver, and 3 sheets of plasma into 3 Fire Sharks.
     Fire Sharks are fast and strong in groups, but die quickly. They are also highly resistant against fire attacks.
     Fire Sharks ignite their victims and drop plasma sheet once they die.
-    You can only create 15 at a time.
 
 knowledge-path-side-s4-ether-name = Ether Of The Newborn
 knowledge-path-side-s4-ether-desc =
@@ -162,11 +161,11 @@ knowledge-path-side-s8-grasp-desc =
     The longer you channel it - the higher the range will be. Channeling can be stopped early by activating grasp again.
     Area of effect grasp suffers increased cooldown, scaled by range and the number of victims.
 
-knowledge-path-side-s8-cleave-name = Blood Cleave
+knowledge-path-side-s8-cleave-name = Crimson Cleave
 knowledge-path-side-s8-cleave-desc =
     At first I didn't understand these instruments of war, but the Priest told me to use them regardless. Soon, he said, I would know them well.
 
-    Grants you Cleave, an area-of-effect targeted spell that causes heavy bleeding and blood loss to anyone afflicted.
+    Grants you Crimson Cleave, a targeted spell which siphons health in a small AOE. Cleanses all wounds upon casting
 
 knowledge-path-side-s8-space-phase-name = Space Phase
 knowledge-path-side-s8-space-phase-desc =

@@ -105,7 +105,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
             return;
 
         var ev = new BeforeXenomorphEvolutionEvent(args.Caste);
-        RaiseLocalEvent(uid, ev);
+        RaiseLocalEvent(uid, ref ev);
 
         if (ev.Cancelled)
             return;
@@ -120,7 +120,8 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
 
         var dropHandItemsEvent = new DropHandItemsEvent();
         RaiseLocalEvent(uid, ref dropHandItemsEvent);
-        RaiseLocalEvent(uid, new AfterXenomorphEvolutionEvent(newXeno, mindUid, args.Caste));
+        var afterEv = new AfterXenomorphEvolutionEvent(newXeno, mindUid, args.Caste);
+        RaiseLocalEvent(uid, ref afterEv);
 
         _adminLog.Add(LogType.Mind, $"{ToPrettyString(uid)} evolved into {ToPrettyString(newXeno)}");
 
@@ -166,7 +167,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
         }
 
         var ev = new BeforeXenomorphEvolutionEvent(xenomorph.Caste, checkNeedCasteDeath);
-        RaiseLocalEvent(uid, ev);
+        RaiseLocalEvent(uid, ref ev);
 
         if (ev.Cancelled)
             return false;

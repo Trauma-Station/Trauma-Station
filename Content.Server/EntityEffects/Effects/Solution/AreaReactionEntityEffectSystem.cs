@@ -32,6 +32,8 @@ public sealed partial class AreaReactionEntityEffectsSystem : EntityEffectSystem
         var xform = Transform(entity);
         var mapCoords = _xform.GetMapCoordinates(entity);
         var spreadAmount = (int) Math.Max(0, Math.Ceiling(args.Scale / args.Effect.OverflowThreshold));
+        var minSteps = (int) Math.Ceiling(Math.Sqrt(spreadAmount * 2) / 2); // Trauma - Minimumn number of steps possible with the spreadAmount, assuming a perfect diamond spread
+        var duration = (int) Math.Max(args.Effect.Duration, minSteps * 2); // Trauma - Either use the duration from the code, or minSteps*2 to let it spread completely, whichever's larger
         var effect = args.Effect;
 
         if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
@@ -44,7 +46,7 @@ public sealed partial class AreaReactionEntityEffectsSystem : EntityEffectSystem
         var coords = _map.MapToGrid(gridUid, mapCoords);
         var ent = Spawn(args.Effect.PrototypeId, coords.SnapToGrid());
 
-        _smoke.StartSmoke(ent, entity.Comp.Solution, args.Effect.Duration, spreadAmount);
+        _smoke.StartSmoke(ent, entity.Comp.Solution, duration, spreadAmount); // Trauma - Changed to use calculated duration
 
         _audio.PlayPvs(args.Effect.Sound, entity, AudioParams.Default.WithVariation(0.25f));
     }

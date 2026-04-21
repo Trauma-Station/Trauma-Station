@@ -9,3 +9,4 @@
     - state: green
     - sprite: Mobs/Silicon/station_ai.rsi
       state: ai
+  - type: ExtraAiCoreTarget

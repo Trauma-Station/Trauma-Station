@@ -23,6 +23,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 #nullable enable
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Cuffs;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Hands.Components;
@@ -35,7 +36,7 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
     [TestFixture]
     [TestOf(typeof(CuffableComponent))]
     [TestOf(typeof(HandcuffComponent))]
-    public sealed class HandCuffTest
+    public sealed class HandCuffTest : GameTest
     {
         [TestPrototypes]
         private const string Prototypes = @"
@@ -65,7 +66,7 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
         [Test]
         public async Task Test()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             EntityUid human;
@@ -125,8 +126,6 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components.ActionBlocking
                 cuffableSys.TryAddNewCuffs(human, human, secondCuffs, cuffed);
                 Assert.That(cuffed.CuffedHandCount, Is.EqualTo(4), "Player doesn't have correct amount of hands cuffed");
             });
-
-            await pair.CleanReturnAsync();
         }
     }
 }

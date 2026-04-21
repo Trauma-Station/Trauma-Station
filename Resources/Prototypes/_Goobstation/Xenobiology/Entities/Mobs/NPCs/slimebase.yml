@@ -147,6 +147,7 @@
   - type: GuideHelp
     guides:
     - Xenobiology
+  - type: MobSpam # you can easily make hundreds of them...
 
 # Begin Slimes
 

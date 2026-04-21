@@ -1,0 +1,142 @@
+# Neutral
+
+- type: entity
+  parent: BaseGameRule
+  id: BananiumShipmentRule
+  components:
+  - type: PlayerEffectsRule
+    jobs: [ Clown ]
+    effects:
+    - !type:SpawnInsideSlot
+      slot: back
+      entity: MaterialBananium5
+    - !type:SpawnInsideSlot
+      slot: back
+      entity: PillCanisterPotassiumIodide # yeah... gonna need that
+
+- type: entity
+  parent: BaseGameRule
+  id: UniqueAIRule
+  components:
+  - type: PlayerEffectsRule
+    jobs: [ StationAi ]
+    effects:
+    - !type:RandomizeLawset
+      lawsets:
+      # no crazy antag/malf laws, just interesting ones
+      - CommandmentsLawset
+      - PaladinLawset
+      - LiveLetLiveLaws
+      - EfficiencyLawset
+      - RobocopLawset
+      - GameMasterLawset
+      - PainterLawset
+      - NutimovLawset
+      - HelpimovLawset
+
+# Positive
+
+- type: entity
+  parent: BaseGameRule
+  id: FreeScarvesRule
+  components:
+  - type: PlayerEffectsRule
+    effects:
+    - !type:EquipEntityTable
+      slot: neck
+      table: !type:NestedSelector
+        tableId: RandomScarf
+      silent: true
+
+- type: entity
+  parent: BaseGameRule
+  id: LuckyWinnerRule
+  components:
+  - type: RandomEffectsRule
+    minTime: 6m
+    maxTime: 12m
+    effects:
+    - !type:StationAreaEffects
+      areaComp: LuckyWinnerTarget
+      effects:
+      - !type:SpawnEntity
+        entity: SpawnSupplyLuckyWinner
+
+# Negative
+
+# cant really modify weights etc so just have a dedicated scheduler for thse
+- type: entity
+  parent: BaseGameRule
+  id: AnomalyStormRule
+  components:
+  - type: RuleSchedulerLimit
+    limit: 6
+  - type: BasicStationEventScheduler
+    scheduledGameRules:
+      id: AnomalySpawn
+    # 5-10 minutes in
+    minimumTimeUntilFirstEvent: 300
+    maximumSpanUntilFirstEvent: 300
+    # every 10-25 minutes after that
+    minMaxEventTiming:
+      min: 600
+      max: 1500
+
+- type: entity
+  parent: BaseGameRule
+  id: CarpInfestationRule
+  components:
+  - type: RuleSchedulerLimit
+    limit: 8
+  - type: BasicStationEventScheduler
+    scheduledGameRules:
+      id: CarpMigrationRule
+    # 5-10 minutes in
+    minimumTimeUntilFirstEvent: 300
+    maximumSpanUntilFirstEvent: 300
+    # every 5-20 minutes after that
+    minMaxEventTiming:
+      min: 300
+      max: 1200
+
+- type: entity
+  parent: BaseGameRule
+  id: IonStormScheduler
+  components:
+  - type: RuleSchedulerLimit
+    limit: 3
+  - type: BasicStationEventScheduler
+    scheduledGameRules:
+      id: IonStorm
+    # 10-15 minutes in
+    minimumTimeUntilFirstEvent: 600
+    maximumSpanUntilFirstEvent: 300
+    # every 20-30 minutes after that
+    minMaxEventTiming:
+      min: 1200
+      max: 1800
+
+- type: entity
+  parent: BaseGameRule
+  id: RadiationStormfrontRule
+  components:
+  - type: RuleSchedulerLimit
+    limit: 2
+  - type: BasicStationEventScheduler
+    scheduledGameRules:
+      id: RadiationStormRule
+    # 10-15 minutes in
+    minimumTimeUntilFirstEvent: 600
+    maximumSpanUntilFirstEvent: 300
+    # every 40-60 minutes after that
+    minMaxEventTiming:
+      min: 2400
+      max: 3600
+
+- type: entity
+  parent: BaseGameRule
+  id: RevolutionaryFervorVariation
+  components:
+  - type: RoundstartStationVariationRule
+    rules:
+    - id: RevolutionaryDecalGraffitiVariationPass

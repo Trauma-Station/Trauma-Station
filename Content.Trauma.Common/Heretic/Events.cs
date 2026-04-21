@@ -41,3 +41,12 @@ public readonly record struct TryPerformInstantWorldTargetActionEvent;
 
 [ByRefEvent]
 public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Volume);
+
+[ByRefEvent]
+public record struct BeforeSpawnPullingVirtualItemsEvent(EntityUid Puller, EntityUid Pulled, bool Cancelled = false);
+
+[ByRefEvent]
+public record struct GetGrabMovespeedEvent(float Speed);
+
+[ByRefEvent]
+public record struct CanStandWhileImmobileEvent(bool CanStand = false);

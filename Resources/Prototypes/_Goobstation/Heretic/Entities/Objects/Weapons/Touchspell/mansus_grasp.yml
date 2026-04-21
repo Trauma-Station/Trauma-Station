@@ -142,6 +142,7 @@
           components:
           - Silicon
           - BorgChassis
+          - CosmicColossus
           tags:
           - Bot
       damage:
@@ -163,6 +164,8 @@
           components:
           - Edible
           - ShadowCloakEntity
+          tags:
+          - Wall # HereticRustGraspWallEffect handles walls
       damage:
         types:
           Blunt: 167

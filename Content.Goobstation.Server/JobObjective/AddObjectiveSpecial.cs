@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Roles;
+
+namespace Content.Goobstation.Server.JobObjective;
+
+public sealed partial class AddObjectiveSpecial : JobSpecial
+{
+    /// <summary>
+    /// List of objective prototypes to assign to this job
+    /// </summary>
+    [DataField(required: true)]
+    public List<EntProtoId> Objectives = new();
+
+    public override void AfterEquip(EntityUid mob)
+    {
+        var system = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<JobObjectiveSystem>();
+        system.QueueObjectives(mob, Objectives);
+    }
+}

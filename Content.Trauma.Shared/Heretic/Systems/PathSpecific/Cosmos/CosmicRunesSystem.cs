@@ -12,6 +12,7 @@ using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
+using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -30,6 +31,7 @@ public sealed class CosmicRunesSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
+    [Dependency] private readonly TeleportSystem _teleport = default!;
     [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
 
     private HashSet<Entity<StarMarkComponent>> _teleporting = new();
@@ -153,12 +155,11 @@ public sealed class CosmicRunesSystem : EntitySystem
         foreach (var entity in _teleporting)
         {
             var uid = entity.Owner;
-            _pulling.StopAllPulls(uid);
-            // TODO: replace with teleport system
-            _transform.SetCoordinates(uid, xform.Coordinates);
+            _teleport.Teleport(uid, xform.Coordinates, user);
             _starMark.TryApplyStarMark(uid);
         }
 
+        // re-pull if user is cosmos path, teleport breaks pulls
         if (pulling != null)
             _pulling.TryStartPull(user, pulling.Value, puller, null, grabStage, force: true);
 
