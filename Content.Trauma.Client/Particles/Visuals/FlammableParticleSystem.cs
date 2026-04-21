@@ -75,8 +75,10 @@ public sealed class FlammableParticleSystem : EntitySystem
         if (state.OnFire && state.FireEmitter != null)
         {
             var intensity = Math.Clamp(stacks / MaxStacks * 2f, 1f, 2f);
-            state.FireEmitter.Intensity   = intensity;
-            state.SmokeEmitter!.Intensity = intensity;
+            if (state.FireEmitter != null)
+                state.FireEmitter.Intensity = intensity;
+            if (state.SmokeEmitter != null)
+                state.SmokeEmitter.Intensity = intensity;
         }
     }
 

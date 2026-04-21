@@ -329,9 +329,17 @@ public sealed partial class ParticleSystem : EntitySystem
                 _emitters.RemoveAt(i);
         }
 
-        // Spawn any sub-emitters collected during this tick (after the loop to avoid modification during iteration)
-        foreach (var (id, coords) in _pendingSubEmitters)
+        // Spawn any sub-emitters collected during this tick.
+        // Use an index-based while loop instead of foreach because SpawnEffect can itself add
+        // new entries to _pendingSubEmitters (sub-emitters of sub-emitters (dont do that)), which would
+        // throw if we were iterating with an enumerator.
+        var subIdx = 0;
+        while (subIdx < _pendingSubEmitters.Count)
+        {
+            var (id, coords) = _pendingSubEmitters[subIdx];
+            subIdx++;
             SpawnEffect(id, coords);
+        }
     }
 
     #endregion
@@ -477,12 +485,15 @@ public sealed partial class ParticleSystem : EntitySystem
             emitter.Exhausted = true;
 
         // RSI animation
-        if (emitter.Delays.Length > 0)
+        if (emitter.Delays.Length > 0 && emitter.Frames.Length > 0)
         {
             emitter.AnimTimer += dt;
             while (emitter.AnimTimer >= emitter.Delays[emitter.AnimFrame])
             {
-                emitter.AnimTimer -= emitter.Delays[emitter.AnimFrame];
+                var delay = emitter.Delays[emitter.AnimFrame];
+                if (delay <= 0f)
+                    break;
+                emitter.AnimTimer -= delay;
                 emitter.AnimFrame = (emitter.AnimFrame + 1) % emitter.Frames.Length;
             }
         }
