@@ -20,6 +20,8 @@
         - MachineMask
         layer:
         - MachineLayer # Trauma, bullets shoot through these now
+  - type: Penetratable # Trauma
+    penetrateDamage: 1
   - type: InteractionOutline
   - type: Construction
     graph: Girder

@@ -7,7 +7,7 @@
   components:
   # <Trauma>
   - type: Penetratable
-    penetrateDamage: 15
+    penetrateDamage: 1
   # </Trauma>
   - type: Animateable
   - type: ResistLocker
