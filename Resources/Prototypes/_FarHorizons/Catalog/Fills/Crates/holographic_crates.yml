@@ -7,7 +7,7 @@
   - type: EntityTableContainerFill
     containers:
       entity_storage:
-      - id: HolographicFieldGeneratorFlatpack
+        id: HolographicFieldGeneratorFlatpack
         amount: 2
 
 - type: entity
