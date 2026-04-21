@@ -411,27 +411,16 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         var charge = comp.LastCharge;
         var maxCharge = comp.MaxCharge;
 
-        // Nothing is nice with visuals in this engine.
-        if (charge >= maxCharge - 50)
-            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.FullPower);
-
-        else if (charge >= maxCharge / 5 * 4)
-            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.VeryHighPower);
-
-        else if (charge >= maxCharge / 5 * 3)
-            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.HighPower);
-
-        else if (charge >= maxCharge / 5 * 2)
-            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.MediumPower);
-
-        else if (charge >= maxCharge / 5)
-            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.LowPower);
-
-        else if (charge > 50)
-            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.MinimalPower);
-
-        else
-            _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, PowerLevelVisuals.NoPower);
+        _appearance.SetData(ent, GenericFieldGeneratorVisuals.PowerLight, (charge / maxCharge) switch
+        {
+            >= 0.99f => PowerLevelVisuals.FullPower,
+            >= 0.80f => PowerLevelVisuals.VeryHighPower,
+            >= 0.60f => PowerLevelVisuals.HighPower,
+            >= 0.40f => PowerLevelVisuals.MediumPower,
+            >= 0.20f => PowerLevelVisuals.LowPower,
+            >= 0.01f => PowerLevelVisuals.MinimalPower,
+            _ => PowerLevelVisuals.NoPower
+        });
     }
 
     private void ChangeConnectionLightVisualizer(Entity<GenericFieldGeneratorComponent> ent)
