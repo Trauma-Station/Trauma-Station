@@ -5,6 +5,7 @@ using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction.Components;
@@ -594,6 +595,13 @@ public sealed partial class MutationSystem : CommonMutationSystem
 
         comp.DNA = builder.ToString();
         Dirty(uid, comp);
+
+        var ev = new GenerateDnaEvent()
+        {
+            Owner = uid,
+            DNA = comp.DNA
+        };
+        RaiseLocalEvent(uid, ref ev);
     }
 
     public string? GetDna(EntityUid uid)
