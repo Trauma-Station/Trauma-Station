@@ -31,11 +31,13 @@ public sealed class ActiveEmitter
     public TimeSpan Age;
 
     /// <summary>
-    /// Eemission accumulator for sub-tick emission rates.
+    /// Emission accumulator for sub-tick emission rates.
     /// </summary>
     public float EmitAccum;
 
-    /// <summary>True once the emitter stops producing new particles. Existing particles live out their lifetimes.</summary>
+    /// <summary>
+    /// True once the emitter stops producing new particles. Existing particles live out their lifetimes.
+    /// </summary>
     public bool Exhausted;
 
     /// <summary>

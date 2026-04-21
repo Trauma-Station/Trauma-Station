@@ -8,8 +8,8 @@ namespace Content.Trauma.Shared.Particles;
 /// <summary>
 /// Keyframe for a float-over-lifetime curve. Time is normalised 0–1.
 /// </summary>
-[DataDefinition]
-public sealed partial class ParticleCurveKey
+[DataRecord]
+public partial record struct ParticleCurveKey
 {
     [DataField(required: true)]
     public float Time { get; private set; }
@@ -21,8 +21,8 @@ public sealed partial class ParticleCurveKey
 /// <summary>
 /// Keyframe for a color-over-lifetime gradient. Time is normalised 0–1.
 /// </summary>
-[DataDefinition]
-public sealed partial class ColorCurveKey
+[DataRecord]
+public partial record struct ColorCurveKey
 {
     /// <summary>
     /// Time along the particle's lifetime (0–1). 0 = birth, 1 = death.
@@ -40,8 +40,8 @@ public sealed partial class ColorCurveKey
 /// <summary>
 /// Keyframe for a Vector2-over-lifetime curve. Time is normalised 0–1.
 /// </summary>
-[DataDefinition]
-public sealed partial class Vector2CurveKey
+[DataRecord]
+public partial record struct Vector2CurveKey
 {
     /// <summary>
     /// Time along the particle's lifetime (0–1). 0 = birth, 1 = death.
@@ -59,8 +59,8 @@ public sealed partial class Vector2CurveKey
 /// <summary>
 /// Fires <see cref="Count"/> particles at <see cref="Time"/> after the emitter starts.
 /// </summary>
-[DataDefinition]
-public sealed partial class ParticleBurstData
+[DataRecord]
+public partial record struct ParticleBurstData()
 {
     [DataField]
     public TimeSpan Time { get; private set; }
@@ -77,8 +77,8 @@ public enum EmissionShapeType : byte
     Box,        // Particles spawn randomly within a rectangle.
 }
 
-[DataDefinition]
-public sealed partial class EmissionShapeData
+[DataRecord]
+public partial record struct EmissionShapeData()
 {
     /// <summary>
     /// Default to emitter's position.
@@ -163,7 +163,7 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     public bool IgnoreQualitySettings { get; private set; }
 
     #endregion
-    #region =^..^= Size =^..^=
+    #region Size
 
     /// <summary>
     /// Base particle size in world units.
@@ -191,7 +191,7 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     public float StretchFactor { get; private set; }
 
     #endregion
-    #region =^..^= Lifetime =^..^=
+    #region Lifetime
 
     /// <summary>
     /// How long each particle lives.
@@ -206,7 +206,7 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     public TimeSpan LifetimeVariance { get; private set; } = TimeSpan.FromSeconds(0.2);
 
     #endregion
-    #region =^..^= Movement =^..^=
+    #region Movement
 
     /// <summary>
     /// Base spawn speed in world units per second.
@@ -289,7 +289,7 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     public float InheritVelocity { get; private set; }
 
     #endregion
-    #region =^..^= Rotation =^..^=
+    #region Rotation
 
     /// <summary>
     /// Starting rotation in degrees.
@@ -316,7 +316,7 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     public Angle RotationSpeedVariance { get; private set; }
 
     #endregion
-    #region =^..^= Emission =^..^=
+    #region Emission
 
     /// <summary>
     /// Particles emitted per second. Ignored when <see cref="Burst"/> is true or <see cref="Bursts"/> is non-empty.
@@ -360,7 +360,7 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     public TimeSpan Duration { get; private set; }
 
     #endregion
-    #region =^..^= Space =^..^=
+    #region Space
 
     /// <summary>
     /// When true (default), particles simulate in world space and trail behind moving emitters.
@@ -370,13 +370,13 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     public bool WorldSpace { get; private set; } = true;
 
     #endregion
-    #region =^..^= Shape =^..^=
+    #region Shape
 
     [DataField]
     public EmissionShapeData Shape { get; private set; } = new();
 
     #endregion
-    #region =^..^= Angle =^..^=
+    #region Angle
 
     /// <summary>
     /// Emission cone spread in degrees. 360 = omnidirectional.
@@ -391,7 +391,7 @@ public sealed partial class ParticleEffectPrototype : IPrototype
     public Angle EmitAngle { get; private set; }
 
     #endregion
-    #region =^..^= Sub-emitters =^..^=
+    #region Sub-emitters
 
     /// <summary>
     /// Spawns this effect at each particle's position when it dies.

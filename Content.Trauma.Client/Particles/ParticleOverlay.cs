@@ -18,7 +18,6 @@ public sealed class ParticleOverlay : Overlay
     private readonly ParticleSystem _system;
     private readonly Dictionary<string, ShaderInstance> _shaderCache = new();
 
-
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     public ParticleOverlay(ParticleSystem system)
@@ -60,7 +59,7 @@ public sealed class ParticleOverlay : Overlay
                 {
                     if (!_shaderCache.TryGetValue(wantedShader, out var cached))
                     {
-                        if (_proto.TryIndex<ShaderPrototype>(wantedShader, out var shaderProto))
+                        if (_proto.Resolve<ShaderPrototype>(wantedShader, out var shaderProto))
                         {
                             cached = shaderProto.Instance();
                             _shaderCache[wantedShader] = cached;

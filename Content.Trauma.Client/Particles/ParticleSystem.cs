@@ -851,12 +851,12 @@ public sealed partial class ParticleSystem : EntitySystem
         if (prev == null)
             return curve[0].Value;
         if (next == null)
-            return prev.Value;
+            return prev.Value.Value;
 
-        var span = next.Time - prev.Time;
+        var span = next.Value.Time - prev.Value.Time;
         if (span <= 0f)
-            return prev.Value;
-        return prev.Value + (next.Value - prev.Value) * ((t - prev.Time) / span);
+            return prev.Value.Value;
+        return prev.Value.Value + (next.Value.Value - prev.Value.Value) * ((t - prev.Value.Time) / span);
     }
 
     public static Color SampleColorCurve(List<ColorCurveKey> curve, float t)
@@ -880,12 +880,12 @@ public sealed partial class ParticleSystem : EntitySystem
         if (prev == null)
             return curve[0].Color;
         if (next == null)
-            return prev.Color;
+            return prev.Value.Color;
 
-        var span = next.Time - prev.Time;
+        var span = next.Value.Time - prev.Value.Time;
         if (span <= 0f)
-            return prev.Color;
-        return Color.InterpolateBetween(prev.Color, next.Color, (t - prev.Time) / span);
+            return prev.Value.Color;
+        return Color.InterpolateBetween(prev.Value.Color, next.Value.Color, (t - prev.Value.Time) / span);
     }
 
     public static Vector2 SampleVector2Curve(List<Vector2CurveKey> curve, float t)
@@ -909,12 +909,12 @@ public sealed partial class ParticleSystem : EntitySystem
         if (prev == null)
             return curve[0].Value;
         if (next == null)
-            return prev.Value;
+            return prev.Value.Value;
 
-        var span = next.Time - prev.Time;
+        var span = next.Value.Time - prev.Value.Time;
         if (span <= 0f)
-            return prev.Value;
-        return Vector2.Lerp(prev.Value, next.Value, (t - prev.Time) / span);
+            return prev.Value.Value;
+        return Vector2.Lerp(prev.Value.Value, next.Value.Value, (t - prev.Value.Time) / span);
     }
 
     #endregion
