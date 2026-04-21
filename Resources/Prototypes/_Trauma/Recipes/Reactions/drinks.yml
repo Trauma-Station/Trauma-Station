@@ -23,33 +23,43 @@
 - type: reaction
   id: RumAndCoke
   reactants:
-    Rum: { amount: 1 }
-    Cola: { amount: 2 }
+    Rum:
+      amount: 1
+    Cola:
+      amount: 2
   products:
     RumAndCoke: 3
 
 - type: reaction
   id: TrappistBeer
   reactants:
-    Beer: { amount: 1 }
-    Holywater: { amount: 2 }
+    Beer:
+      amount: 1
+    Holywater:
+      amount: 2
   products:
     TrappistBeer: 3
 
 - type: reaction
   id: AloeCocktail
   reactants:
-    JuiceWatermelon: { amount: 3 }
-    Cream: { amount: 1 }
-    Mead: { amount: 2 }
+    JuiceWatermelon:
+      amount: 3
+    Cream:
+      amount: 1
+    Mead:
+      amount: 2
   products:
     AloeCocktail: 6
 
 - type: reaction
   id: BananaMilkshake
   reactants:
-    Ice: { amount: 1 }
-    Cream: { amount: 1 }
-    JuiceBanana: { amount: 1 }
+    Ice:
+      amount: 1
+    Cream:
+      amount: 1
+    JuiceBanana:
+      amount: 1
   products:
     BananaMilkshake: 3
