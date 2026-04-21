@@ -7222,3 +7222,10 @@ Entries:
   id: 834
   time: '2026-04-20T23:34:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2141
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Turrets no longer care that you're behind cover
+  id: 835
+  time: '2026-04-21T01:08:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2147
