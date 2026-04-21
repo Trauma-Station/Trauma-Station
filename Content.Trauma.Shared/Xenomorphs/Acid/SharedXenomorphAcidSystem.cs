@@ -45,6 +45,12 @@ public abstract class SharedXenomorphAcidSystem : EntitySystem
             return;
         }
 
+        if (HasComp<AcidImmuneComponent>(args.Target))
+        {
+            _popup.PopupClient(Loc.GetString("xenomorphs-acid-immune", ("target", target)), user, user, PopupType.SmallCaution);
+            return;
+        }
+
         args.Handled = true;
         _popup.PopupClient(Loc.GetString("xenomorphs-acid-apply", ("target", target)), user, user);
 
