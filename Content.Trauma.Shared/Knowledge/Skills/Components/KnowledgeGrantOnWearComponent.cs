@@ -29,16 +29,10 @@ public sealed partial class KnowledgeGrantOnWearComponent : Component
     public bool Applied;
 
     /// <summary>
-    /// Skills that will be added or boosted upon use.
+    /// Knowledge that will be added or boosted upon use.
     /// </summary>
     [DataField, AutoNetworkedField, AlwaysPushInheritance]
-    public Dictionary<EntProtoId, int> Skills = new();
-
-    /// <summary>
-    /// Experience that will be added per use.
-    /// </summary>
-    [DataField, AlwaysPushInheritance]
-    public Dictionary<EntProtoId, int> Experience = new();
+    public Dictionary<EntProtoId, int> Knowledge = new();
 
     /// <summary>
     /// Can use art with this item?

@@ -33,4 +33,11 @@ public sealed partial class ContrabandComponent : Component
     [DataField]
     [AutoNetworkedField]
     public HashSet<ProtoId<JobPrototype>> AllowedJobs = new();
+
+    /// <summary>
+    /// How much points this causes to Beepsky.
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public float CriminalPoints = 0f;
 }

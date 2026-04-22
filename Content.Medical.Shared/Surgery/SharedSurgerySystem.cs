@@ -88,7 +88,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
 
         var ev = new DrapeDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(4), ev, args.Target, args.Used)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(2), ev, args.Target, args.Used)
         {
             BreakOnMove = true,
             //BreakOnTargetMove = true, I fucking hate wizden dude.

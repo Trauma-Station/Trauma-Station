@@ -68,7 +68,7 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         // Handle Skills (Temporary Levels)
-        foreach (var (id, level) in ent.Comp.Skills)
+        foreach (var (id, level) in ent.Comp.Knowledge)
         {
             if (EnsureKnowledge<SkillComponent>(brain, id) is { } unit)
             {
@@ -109,7 +109,7 @@ public abstract partial class SharedKnowledgeSystem
         DirtyField(ent, ent.Comp, nameof(KnowledgeGrantOnWearComponent.Applied));
 
         // Remove Skills
-        foreach (var (id, level) in ent.Comp.Skills)
+        foreach (var (id, level) in ent.Comp.Knowledge)
         {
             if (GetSkill(brain, id) is not { } unit)
                 continue;
@@ -159,9 +159,9 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (id, level) in skills)
         {
-            ent.Comp.Skills[id] = ent.Comp.Skills.GetValueOrDefault(id) + level;
+            ent.Comp.Knowledge[id] = ent.Comp.Knowledge.GetValueOrDefault(id) + level;
         }
-        DirtyField(ent, ent.Comp, nameof(KnowledgeGrantOnWearComponent.Skills));
+        DirtyField(ent, ent.Comp, nameof(KnowledgeGrantOnWearComponent.Knowledge));
 
         // adjust immediately if it was applied already, if it wasn't applied it will be handled later
         if (!ent.Comp.Applied || GetContainer(user) is not { } brain)

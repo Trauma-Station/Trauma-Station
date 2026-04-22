@@ -10,6 +10,7 @@
   forbidden:
   - type: OpenIncision
   duration: 2
+  complexity: -15
 
 - type: surgery
   id: StopBloodFlow

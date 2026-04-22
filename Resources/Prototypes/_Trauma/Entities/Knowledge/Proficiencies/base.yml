@@ -1,0 +1,5 @@
+- type: entity
+  id: BaseProficiency
+  abstract: true
+  components:
+  - type: Proficiency
