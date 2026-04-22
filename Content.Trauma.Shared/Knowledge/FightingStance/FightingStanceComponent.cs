@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 namespace Content.Trauma.Shared.Knowledge.FightingStance;
 
 public sealed partial class FightingStanceComponent : Component

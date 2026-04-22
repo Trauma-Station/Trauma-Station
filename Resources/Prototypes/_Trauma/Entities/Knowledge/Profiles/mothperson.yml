@@ -5,7 +5,7 @@
   attributes:
     StrengthAttribute: -40
     IntelligenceAttribute: 20 # NT hires them for a reason
-    WisdomAttribute: 20 
+    WisdomAttribute: 20
     DexterityAttribute: -20 # Clumsy to a fault
     ConstitutionAttribute: -50 # Do not let them near a flyswatter
     LooksAttribute: -35 # Creepiest thing I've had the displeasure of seeing
