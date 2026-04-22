@@ -143,49 +143,6 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         }
     }
 
-    /// <summary>
-    /// Deletes the fields and removes the respective connections for the generators.
-    /// </summary>
-    private void RemoveConnections(Entity<GenericFieldGeneratorComponent> ent, EntityUid? user = null)
-    {
-        if (ent.Comp.ConnectedGenerator is not { } pair)
-            return;
-
-        ent.Comp.ConnectedGenerator = null;
-        pair.Comp.ConnectedGenerator = null;
-        ent.Comp.IsConnected = false;
-        pair.Comp.IsConnected = false;
-        if (TryComp<PowerStateComponent>(ent, out var stateComp)) stateComp.IsWorking = false;
-        if (TryComp<PowerStateComponent>(pair, out var pairState)) pairState.IsWorking = false;
-
-        foreach (var field in ent.Comp.ConnectedFields)
-        {
-            QueueDel(field);
-        }
-
-        if (HasComp<DeviceLinkSourceComponent>(ent))
-        {
-            _signal.SendSignal(ent, ent.Comp.ConnectionStatusPort, false);
-            _signal.InvokePort(ent, ent.Comp.FieldDisconnectedPort);
-        }
-
-        if (HasComp<DeviceLinkSourceComponent>(pair))
-        {
-            _signal.SendSignal(pair, pair.Comp.ConnectionStatusPort, false);
-            _signal.InvokePort(pair, pair.Comp.FieldDisconnectedPort);
-        }
-
-        _popup.PopupPredicted(Loc.GetString("comp-genericfield-disconnected"), ent, user, PopupType.LargeCaution);
-        _popup.PopupPredicted(Loc.GetString("comp-genericfield-disconnected"), pair, user, PopupType.LargeCaution);
-        _audio.PlayPredicted(ent.Comp.DeactivationSound, ent, user);
-        _audio.PlayPredicted(ent.Comp.DeactivationSound, pair, user);
-
-        ChangeConnectionLightVisualizer(pair);
-        ChangeConnectionLightVisualizer(ent);
-        UpdateConnectionLights(pair);
-        UpdateConnectionLights(ent);
-    }
-
     private void OnBatteryStateChanged(Entity<GenericFieldGeneratorComponent> ent, ref BatteryStateChangedEvent args)
     {
         if (args.OldState != BatteryState.Empty && args.NewState == BatteryState.Empty && ent.Comp.Charged)
@@ -305,21 +262,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
         ent.Comp.ConnectedFields = fields;
         pairComp.ConnectedFields = fields;
 
-        if (TryComp<PowerStateComponent>(ent, out var stateComp)) stateComp.IsWorking = true;
-        if (TryComp<PowerStateComponent>(pair, out var pairState)) pairState.IsWorking = true;
-        ent.Comp.IsConnected = true;
-        pairComp.IsConnected = true;
-        ChangeConnectionLightVisualizer(ent);
-        ChangeConnectionLightVisualizer((pair, pairComp));
-        UpdateConnectionLights(ent);
-        UpdateConnectionLights((pair, pairComp));
-
-        _popup.PopupPredicted(Loc.GetString("comp-genericfield-connected"), ent, user);
-        _popup.PopupPredicted(Loc.GetString("comp-genericfield-connected"), pair, user);
-        _audio.PlayPredicted(ent.Comp.ActivationSound, ent, user);
-        _audio.PlayPredicted(ent.Comp.ActivationSound, pair, user);
-        Dirty(ent, ent.Comp);
-        Dirty(pair, pairComp);
+        SetWorkingState(ent, true, user);
+        SetWorkingState((pair, pairComp), true, user);
         return;
     }
 
@@ -330,18 +274,6 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// <param name="secondGen">The second ent that the source is connected to</param>
     private List<EntityUid> GenerateFieldConnection(Entity<GenericFieldGeneratorComponent> firstGen, Entity<GenericFieldGeneratorComponent> secondGen)
     {
-        if (HasComp<DeviceLinkSourceComponent>(firstGen))
-        {
-            _signal.SendSignal(firstGen, firstGen.Comp.ConnectionStatusPort, true);
-            _signal.InvokePort(firstGen, firstGen.Comp.FieldConnectedPort);
-        }
-
-        if (HasComp<DeviceLinkSourceComponent>(secondGen))
-        {
-            _signal.SendSignal(secondGen, secondGen.Comp.ConnectionStatusPort, true);
-            _signal.InvokePort(secondGen, secondGen.Comp.FieldConnectedPort);
-        }
-
         var fieldList = new List<EntityUid>();
         var gen1Coords = Transform(firstGen).Coordinates;
         var gen2Coords = Transform(secondGen).Coordinates;
@@ -371,12 +303,43 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     }
 
     /// <summary>
-    /// Creates a light component for the spawned fields.
+    /// Deletes the fields and removes the respective connections for the generators.
     /// </summary>
-    public void UpdateConnectionLights(Entity<GenericFieldGeneratorComponent> ent)
+    private void RemoveConnections(Entity<GenericFieldGeneratorComponent> ent, EntityUid? user = null)
     {
-        if (_light.TryGetLight(ent, out var pointLightComponent))
-            _light.SetEnabled(ent, ent.Comp.IsConnected, pointLightComponent);
+        if (ent.Comp.ConnectedGenerator is not { } pair)
+            return;
+
+        ent.Comp.ConnectedGenerator = null;
+        pair.Comp.ConnectedGenerator = null;
+
+        foreach (var field in ent.Comp.ConnectedFields)
+        {
+            QueueDel(field);
+        }
+
+        SetWorkingState(ent, false, user);
+        SetWorkingState(pair, false, user);
+    }
+
+    /// <summary>
+    /// Updates a bunch of values when a field is created/destroyed.
+    /// </summary>
+    private void SetWorkingState(Entity<GenericFieldGeneratorComponent> ent, bool state, EntityUid? user = null)
+    {
+        if (TryComp<PowerStateComponent>(ent, out var stateComp)) stateComp.IsWorking = state;
+        ent.Comp.IsConnected = state;
+        ChangeConnectionLightVisualizer(ent);
+        UpdateConnectionLights(ent);
+
+        _popup.PopupPredicted(Loc.GetString(state ? "comp-genericfield-connected" : "comp-genericfield-disconnected"), ent, user);
+        _audio.PlayPredicted(state ? ent.Comp.ActivationSound : ent.Comp.DeactivationSound, ent, user);
+        if (HasComp<DeviceLinkSourceComponent>(ent))
+        {
+            _signal.SendSignal(ent, ent.Comp.ConnectionStatusPort, state);
+            _signal.InvokePort(ent, state ? ent.Comp.FieldConnectedPort : ent.Comp.FieldDisconnectedPort);
+        }
+        Dirty(ent, ent.Comp);
     }
 
     /// <summary>
@@ -399,7 +362,16 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     #endregion
 
     // Entered: coal mines
-    #region VisualizerHelpers
+    #region Visualizer Helpers
+
+    /// <summary>
+    /// Creates a light component for the spawned fields.
+    /// </summary>
+    public void UpdateConnectionLights(Entity<GenericFieldGeneratorComponent> ent)
+    {
+        if (_light.TryGetLight(ent, out var pointLightComponent))
+            _light.SetEnabled(ent, ent.Comp.IsConnected, pointLightComponent);
+    }
 
     /// <summary>
     /// Check if a fields power falls between certain ranges to update the field gen visual for power.
