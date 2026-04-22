@@ -1,14 +1,3 @@
-# TODO: bunch of different types of cooking
-- type: entity
-  parent: BaseRecipesKnowledge
-  id: CookingKnowledge
-  name: Cooking
-  components:
-  - type: Skill
-    experienceCost: 15
-  - type: ExperienceOnCooking # it just makes sense
-    scale: 100 # cook 100 meals to master it from unskilled
-
 - type: entity
   parent: BaseRecipesKnowledge
   id: MaterialsKnowledge

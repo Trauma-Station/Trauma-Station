@@ -1,22 +1,29 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
-
 namespace Content.Trauma.Shared.Knowledge.Proficiency.Components;
 
 /// <summary>
-///
+/// Stores the proficiency. You either got it, or you don't.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ProficiencyComponent : Component
 {
     /// <summary>
-    /// Proficiency Level. Determines the maluses of using something one is not proficient in.
+    /// Does proficiency apply to X with a certain component. Useful for things like items.
     /// </summary>
     [DataField]
-    public ProficiencySkillLevel Level = ProficiencySkillLevel.Minimal;
+    public ComponentRegistry? Registry;
+
+    /// <summary>
+    /// Determines the maluses of using something one is not proficient in.
+    /// </summary>
+    [DataField]
+    public ProficiencySkillLevel Type = ProficiencySkillLevel.Minimal;
 }
 
+/// <summary>
+/// Determines the maluses of not having the necessary proficiency. Not sure how to use this yet.
+/// </summary>
 public enum ProficiencySkillLevel : byte
 {
     Minimal = 0,

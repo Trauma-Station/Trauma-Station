@@ -3,3 +3,47 @@
   abstract: true
   components:
   - type: Proficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: UnarmedProficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: ImprovisedProficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: StaveProficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: SwordProficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: MaceProficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: AxeProficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: LightArmorProficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: MediumArmorProficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: HeavyProficiency
+
+- type: entity
+  parent: BaseProficiency
+  id: GroinStompProficiency # Beat them where it hurts.
+
+- type: entity
+  parent: BaseProficiency
+  id: MaintenanceProficiency # Know how to actually upkeep your items/weapons.

@@ -1,0 +1,42 @@
+- type: entity
+  id: BaseTalent
+  abstract: true
+  components:
+  - type: Talent
+
+- type: entity
+  parent: BaseTalent
+  id: AttackBonusTalent
+
+- type: entity
+  parent: BaseTalent
+  id: DefenseBonusTalent
+
+- type: entity
+  parent: BaseTalent
+  id: DamageBonusTalent
+
+- type: entity
+  parent: BaseTalent
+  id: DodgeTalent # Dodge things
+  # components:
+  # - type: DodgeBonus
+  #   mod: 1
+
+- type: entity
+  parent: BaseTalent
+  id: FastHealerTalent # Heal faster
+
+- type: entity
+  parent: BaseTalent
+  id: PoisonResistantTalent
+  repeat: true
+
+- type: entity
+  parent: BaseTalent
+  id: StoutTalent # Get knocked down less
+
+- type: entity
+  parent: BaseTalent
+  id: ToughHideTalent # Take one less point of damage
+  repeat: true
