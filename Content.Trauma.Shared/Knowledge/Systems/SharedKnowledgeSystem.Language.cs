@@ -2,15 +2,8 @@
 
 using System.Linq;
 using System.Text.RegularExpressions;
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Content.Shared.Chat;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Prototypes;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Speech;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
@@ -27,15 +20,15 @@ public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    // [Dependency] private readonly DamageableSystem _damageable = default!;
 
-    public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
-    private readonly DamageSpecifier _curseDamage = new();
-    private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die", "220" };
+    // public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
+    // private readonly DamageSpecifier _curseDamage = new();
+    // private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die", "220" };
 
     private void InitializeLanguage()
     {
-        _curseDamage.DamageDict[Blunt] = 10;
+        // _curseDamage.DamageDict[Blunt] = 10;
 
         SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
             after: [ typeof(InitialBodySystem) ]); // great engine
@@ -163,7 +156,10 @@ public abstract partial class SharedKnowledgeSystem
 
         // We add the intrinsically known languages first so other systems can manipulate them easily
         var lang = args.Language;
-        EnsureKnowledge<SkillComponent>(brain, LanguageUnit(args.Language), 26);
+        var level = 26;
+        if (GetSkill(brain, LanguageUnit(lang)) is { } existing)
+            level += existing.Comp.LearnedLevel;
+        EnsureKnowledge<SkillComponent>(brain, LanguageUnit(args.Language), level);
 
         UpdateEntityLanguages(ent);
     }
@@ -219,11 +215,12 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (lang, speaks) in allLanguages)
         {
+            var level = 26;
             if (GetSkill(brain, LanguageUnit(lang)) is { } existing)
-                continue; // Don't do shit if you already know this
+                level += existing.Comp.LearnedLevel;
 
             // Add if you don't know shit.
-            if (EnsureKnowledge<SkillComponent>(brain, LanguageUnit(lang), 26) is not { } unit)
+            if (EnsureKnowledge<SkillComponent>(brain, LanguageUnit(lang), level) is not { } unit)
             {
                 Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
                 continue;
@@ -269,11 +266,15 @@ public abstract partial class SharedKnowledgeSystem
 
         // Already Obfuscating.
 
+        if (GetContainer(ent.Owner) is not { } brain)
+            return;
+
+        AddExperience(brain, proto, Math.Min(args.Message.Length / 10, 8));
+
+        /*
         if (!TryComp<SkillComponent>(language, out var speakerSkill))
             return; // No skill, no curse.
 
-
-        // TODO: Delta, I need your help with this.
         // curse of 220
         if (GetMastery(speakerSkill) >= 5 && ContainsCursedWord(args.Message))
         {
@@ -283,11 +284,13 @@ public abstract partial class SharedKnowledgeSystem
             //_status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
             _popup.PopupEntity(Loc.GetString("language-curse-pain"), ent, ent, PopupType.SmallCaution);
         }
+        */
     }
 
     public EntityUid? GetActiveLanguage(EntityUid target)
         => GetContainer(target)?.Comp.ActiveLanguage;
 
+    /*
     private static readonly Regex CursedRegex = new(
         @"\b(" + string.Join("|", CursedWords.Select(Regex.Escape)) + @")\b",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -296,4 +299,5 @@ public abstract partial class SharedKnowledgeSystem
     {
         return CursedRegex.IsMatch(message);
     }
+    */
 }
