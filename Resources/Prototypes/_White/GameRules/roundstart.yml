@@ -8,7 +8,7 @@
     - XenomorphSurviveObjective
   - type: XenomorphsRule
     xenomorphInfestationSound:
-      collection: xeno_start
+      collection: XenoStart
   - type: MaintsSpawnRule
   - type: AntagSpawner
     prototype: MobXenomorphLarva

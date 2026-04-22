@@ -1,5 +1,5 @@
 - type: jukebox
-  id: mind_crawler
+  id: MindCrawler
   name: Merct - Mind Crawler
   path:
     path: /Audio/_Trauma/Music/mind_crawler.ogg
