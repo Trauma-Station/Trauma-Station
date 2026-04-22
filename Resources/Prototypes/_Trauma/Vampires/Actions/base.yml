@@ -1,0 +1,90 @@
+# All actions in here are the base actions of the vampire, when they start.
+#
+# Implement ConsumeCharges
+#
+# Therefore, this file does not include class-specific actions.
+- type: entity
+  parent: BaseAction
+  id: ActionVampRejuvenateI
+  name: Rejuvenate I
+  description: Heals you
+  components:
+  - type: Action
+    checkCanInteract: false
+    # useDelay: 20
+    raiseOnAction: true
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+    itemIconStyle: BigAction
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:NestedEffect
+      proto: VampireRejuvI
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampRejuvenateII
+  name: Rejuvenate II
+  components:
+  - type: Action
+    checkCanInteract: false
+    # useDelay: 20
+    raiseOnAction: true
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+    itemIconStyle: BigAction
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:NestedEffect
+      proto: VampireRejuvII
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireGlare
+  name: Glare
+  components:
+  - type: Action
+    # useDelay: 20
+    checkCanInteract: false
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+    itemIconStyle: BigAction
+  - type: LimitedCharges
+    maxCharges: 2
+  - type: InstantAction
+    event: !type:VampireGlareEvent
+      frontEffects:
+      - !type:TakeStaminaDamage
+        amount: 70
+      - !type:ModifyKnockdown
+        time: 12
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        time: 8
+        type: Add
+      - !type:Flash
+        slowTo: 1
+        maxRange: 0.5
+        duration: 1
+      sideEffects:
+      - !type:TakeStaminaDamage
+        amount: 40
+      - !type:ModifyKnockdown
+        time: 5
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectScrambled
+        time: 8
+      behindEffects:
+      - !type:TakeStaminaDamage
+        amount: 40
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectScrambled
+        time: 8

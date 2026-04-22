@@ -1,0 +1,79 @@
+- type: entityEffect
+  id: VampireRejuvI
+  effects:
+  - !type:TakeStaminaDamage
+    amount: -100
+  - !type:RemoveStatusEffects
+    statusEffects:
+    - StatusEffectForcedSleeping
+    - StatusEffectStunned
+  - !type:RemoveComponents
+    components:
+    - type: KnockedDown # ModifyKnockdown bugs out
+  - !type:SetStanding
+    force: true
+  - !type:ModifyParalysis
+    time: 0
+    type: Set
+  - !type:MovementSpeedModifier
+    time: 0
+    type: Set
+  - !type:PopupMessage
+    messages:
+    - You healed.
+    visualType: Medium
+
+# Same, but instead purges 10u of any harmful reagent. Heals 10 points each of brute, burn, toxic, and heals 50 of oxyloss
+- type: entityEffect
+  id: VampireRejuvII
+  effects:
+  - !type:TakeStaminaDamage
+    amount: -100
+  - !type:RemoveStatusEffects
+    statusEffects:
+    - StatusEffectForcedSleeping
+    - StatusEffectStunned
+  - !type:SetStanding
+    force: true
+  - !type:ModifyKnockdown
+    time: 0
+    type: Set
+  - !type:ModifyParalysis
+    time: 0
+    type: Set
+  - !type:MovementSpeedModifier
+    type: Set
+  - !type:EvenHealthChange
+    damage:
+      Brute: -10
+      Toxin: -10
+      Burn: -10
+      Airloss: -50
+  - !type:PopupMessage
+    messages:
+    - You healed.
+    visualType: Medium
+
+# Testing
+- type: entity
+  name: paralyse stick
+  parent: BaseItem
+  id: MeleeDebugParalyse
+  description: hit hard ye
+  suffix: DEBUG
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/debug.rsi
+    state: icon
+  - type: EffectsTool
+    verbText: paint-remover-verb
+    userPopup: paint-remover-popup-user
+    othersPopup: paint-remover-popup-others
+    effects:
+    - !type:ModifyParalysis
+      time: 10
+    - !type:TakeStaminaDamage
+      amount: 100
+  - type: Item
+    size: Tiny
+    sprite: Objects/Weapons/Melee/debug.rsi
