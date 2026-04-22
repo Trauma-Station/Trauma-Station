@@ -132,8 +132,8 @@ namespace Content.Server.Spawners.EntitySystems
             var xform = Transform(ent);
             var coords = xform.Coordinates;
             var ancestor = xform.GridUid ?? xform.MapUid;
-            if (ent.Comp.Absolute && ancestor is { })
-                coords = _transform.GetRelativePosition(xform, ancestor);
+            if (ent.Comp.Absolute && ancestor != null)
+                coords = _transform.GetRelativePosition(xform, ancestor.Value);
             // </Trauma>
             var offset = ent.Comp.Offset;
 
