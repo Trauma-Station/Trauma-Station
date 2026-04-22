@@ -2,5 +2,5 @@
 - type: language
   id: Codespeak
   speech:
-    color: "#5b0010"
+    color: "#ab4045"
   obfuscation: !type:CodespeakObfuscation
