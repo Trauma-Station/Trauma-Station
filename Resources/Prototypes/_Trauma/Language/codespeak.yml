@@ -1,0 +1,6 @@
+# Traitor uplink language
+- type: language
+  id: Codespeak
+  speech:
+    color: "#5b0010"
+  obfuscation: !type:CodespeakObfuscation

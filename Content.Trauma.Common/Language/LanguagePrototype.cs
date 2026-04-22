@@ -17,10 +17,10 @@ public sealed partial class LanguagePrototype : IPrototype
     public bool IsVisibleLanguage { get; set; }
 
     /// <summary>
-    ///     Obfuscation method used by this language. By default, uses <see cref="ObfuscationMethod.Default"/>.
+    /// Obfuscation method used by this language.
     /// </summary>
-    [DataField("obfuscation")]
-    public ObfuscationMethod Obfuscation = ObfuscationMethod.Default;
+    [DataField(required: true)]
+    public ObfuscationMethod Obfuscation = default!;
 
     /// <summary>
     ///     Speech overrides used for messages sent in this language.

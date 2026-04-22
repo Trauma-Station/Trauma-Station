@@ -88,7 +88,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
 
         args.Handled = true;
 
-        if (ent.Comp.SingleUse)
+        if (ent.Comp.Instant)
         {
             // no checking if you already had it, don't waste a cqc book if you already know it chud
             foreach (var (id, level) in ent.Comp.Skills)
@@ -102,8 +102,11 @@ public sealed class KnowledgeGrantSystem : EntitySystem
                     _knowledge.EnsureKnowledge(brain, id, 100);
                 }
             }
-            PredictedQueueDel(ent);
-            PredictedSpawnNextToOrDrop(ent.Comp.Ash, user);
+            if (ent.Comp.SingleUse)
+            {
+                PredictedQueueDel(ent);
+                PredictedSpawnNextToOrDrop(ent.Comp.Ash, user);
+            }
             return;
         }
 
