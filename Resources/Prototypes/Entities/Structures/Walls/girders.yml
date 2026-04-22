@@ -19,7 +19,10 @@
         mask:
         - MachineMask
         layer:
-        - GlassAirlockLayer
+        - MachineLayer # Trauma, bullets shoot through these now
+  - type: Penetratable # Trauma
+    penetrateDamage: 5
+    damagePenalty: 0.5
   - type: InteractionOutline
   - type: Construction
     graph: Girder
