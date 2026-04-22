@@ -16,7 +16,6 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Messages;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;

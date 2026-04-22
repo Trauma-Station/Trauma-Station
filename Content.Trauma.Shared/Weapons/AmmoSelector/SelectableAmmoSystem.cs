@@ -10,8 +10,6 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Weapons.AmmoSelector;
 using Content.Trauma.Shared.Wizard.UserInterface;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Weapons.AmmoSelector;
 

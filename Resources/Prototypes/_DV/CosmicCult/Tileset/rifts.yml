@@ -31,33 +31,6 @@
     corruptionReduction: 0.1
 
 - type: entity
-  id: CosmicGreaterMalignRift
-  parent: CosmicMalignRift
-  name: malign fracture
-  description: A bleeding wound upon reality itself.
-  components:
-  - type: Sprite
-    layers:
-      - state: fracture-unshaded
-        shader: unshaded
-  - type: PointLight
-    radius: 2
-    energy: 2
-  - type: CosmicCultExamine
-    othersText: cosmic-examine-text-fracture
-  - type: CosmicMalignRift # Harder to purge, easier to absorb, dangerous to stand nearby
-    bibleTime: 40
-    chaplainTime: 30
-    absorbTime: 15
-    dangerWait: 20
-    entropyGranted: 15
-  - type: CosmicCorrupting
-    corruptionMaxTicks: 7
-    corruptionSpeed: 6
-    corruptionChance: 1
-    corruptionReduction: 0.08
-
-- type: entity
   id: CosmicMalignRiftDebug
   parent: CosmicMalignRift
   suffix: Debug

@@ -12,6 +12,9 @@ namespace Content.Server.StationEvents.Events;
 /// </summary>
 public sealed class SpaceSpawnRule : StationEventSystem<SpaceSpawnRuleComponent>
 {
+    // <Trauma>
+    [Dependency] private readonly IMapManager _map = default!;
+    // </Trauma>
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -43,15 +46,25 @@ public sealed class SpaceSpawnRule : StationEventSystem<SpaceSpawnRuleComponent>
         // figure out its AABB size and use that as a guide to how far the spawner should be
         var size = grid.LocalAABB.Size.Length() / 2;
         var distance = size + comp.SpawnDistance;
-        var angle = RobustRandom.NextAngle();
-        // position relative to station center
-        var location = angle.ToVec() * distance;
-
-        // create the spawner!
+        // <Trauma> - tries20 this shit and check that it's actually in space
         var xform = Transform(gridUid.Value);
-        var position = _transform.GetWorldPosition(xform) + location;
-        comp.Coords = new MapCoordinates(position, xform.MapID);
-        Sawmill.Info($"Picked location {comp.Coords} for {ToPrettyString(uid):rule}");
+        var center = _transform.GetWorldPosition(xform); // don't need to recheck this for every try
+        for (int i = 0; i < 20; i++)
+        {
+            var angle = RobustRandom.NextAngle();
+            // position relative to station center
+            var location = angle.ToVec() * distance;
+
+            var position = center + location;
+            if (_map.TryFindGridAt(xform.MapUid!.Value, position, out _, out _))
+                continue; // it's not in space it's on a grid, pick again
+
+            // create the spawner!
+            comp.Coords = new MapCoordinates(position, xform.MapID);
+            Sawmill.Info($"Picked location {comp.Coords} for {ToPrettyString(uid):rule}");
+            break;
+        }
+        // <Trauma>
     }
 
     private void OnSelectLocation(Entity<SpaceSpawnRuleComponent> ent, ref AntagSelectLocationEvent args)

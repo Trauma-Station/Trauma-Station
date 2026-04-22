@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.IntegrationTests.Fixtures;
 using Content.Trauma.Shared.Genetics.Abilities;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Server.Polymorph.Systems;
@@ -11,7 +13,7 @@ namespace Content.IntegrationTests.Tests._Trauma;
 
 [TestFixture]
 [TestOf(typeof(MutationSystem))]
-public sealed class MutationTest
+public sealed class MutationTest : GameTest
 {
     private static readonly EntProtoId TestMob = "MobHuman";
     private static readonly EntProtoId TestMobPoly = "MobDwarf";
@@ -25,7 +27,7 @@ public sealed class MutationTest
     [Test]
     public async Task AddRemoveAllMutations()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
         var map = await pair.CreateTestMap();
 
@@ -66,8 +68,6 @@ public sealed class MutationTest
         });
 
         await server.WaitRunTicks(150); // 5 seconds
-
-        await pair.CleanReturnAsync();
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ public sealed class MutationTest
     [Test]
     public async Task MutationsPolymorphTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
         var entMan = server.EntMan;
         var mutation = entMan.System<MutationSystem>();
@@ -129,7 +129,5 @@ public sealed class MutationTest
 
             entMan.DeleteEntity(dorf);
         });
-
-        await pair.CleanReturnAsync();
     }
 }

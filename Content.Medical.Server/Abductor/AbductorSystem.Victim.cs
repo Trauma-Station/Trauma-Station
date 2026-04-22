@@ -14,7 +14,6 @@ using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Server.Abductor;
 

@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityConditions;
 using Content.Shared.Trigger.Components.Conditions;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Trigger.Conditions;
 

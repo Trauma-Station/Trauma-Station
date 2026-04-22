@@ -2,8 +2,6 @@
 
 using Content.Trauma.Shared.Salvage.Systems;
 using Content.Shared.Thief;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 namespace Content.Trauma.Shared.Salvage.Components;
 
 /// </summary>

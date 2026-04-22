@@ -71,6 +71,7 @@
   components:
   - type: Sprite
     state: hallway
+  - type: CarpMigrationTarget
 
 - type: entity
   parent: AreaHallway

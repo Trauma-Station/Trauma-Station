@@ -3,8 +3,6 @@
 using Content.Goobstation.Shared.Disease.Systems;
 using Content.Shared.Random;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Disease.Components;
 

@@ -9,7 +9,7 @@ namespace Content.Server.Chat.Commands
     [AnyCommand]
     internal sealed class SuicideCommand : IConsoleCommand
     {
-        [Dependency] private readonly IEntityManager _e = default!;
+        //[Dependency] private readonly IEntityManager _e = default!; // Trauma - unused
 
         public string Command => "suicide";
 
@@ -24,6 +24,11 @@ namespace Content.Server.Chat.Commands
                 shell.WriteError(Loc.GetString("shell-cannot-run-command-from-server"));
                 return;
             }
+
+            // <Trauma> - no
+            shell.WriteError("Never give up on life, life is gem!");
+            return;
+            /*
 
             if (player.Status != SessionStatus.InGame || player.AttachedEntity == null)
                 return;
@@ -53,6 +58,7 @@ namespace Content.Server.Chat.Commands
                 return;
 
             shell.WriteLine(Loc.GetString("ghost-command-denied"));
+            */ // </Trauma>
         }
     }
 }

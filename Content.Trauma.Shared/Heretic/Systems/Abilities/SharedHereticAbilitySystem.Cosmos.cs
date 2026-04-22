@@ -5,6 +5,7 @@ using Content.Shared.Projectiles;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Map;
@@ -13,10 +14,12 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
+    [Dependency] private readonly TeleportSystem _teleport = default!;
+
     protected virtual void SubscribeCosmos()
     {
         SubscribeLocalEvent<EventHereticCosmicRune>(OnCosmicRune);
-        SubscribeLocalEvent<EventHereticStarBlast>(OnStarBlast);
+        SubscribeLocalEvent<StarBlastActionComponent, EventHereticStarBlast>(OnStarBlast);
         SubscribeLocalEvent<EventHereticCosmicExpansion>(OnExpansion);
         SubscribeLocalEvent<HereticAscensionCosmosEvent>(OnAscensionCosmos);
 
@@ -53,44 +56,40 @@ public abstract partial class SharedHereticAbilitySystem
         }
     }
 
-    private void OnStarBlast(EventHereticStarBlast args)
+    private void OnStarBlast(Entity<StarBlastActionComponent> ent, ref EventHereticStarBlast args)
     {
-        if (!TryComp(args.Action, out StarBlastActionComponent? starBlast))
-            return;
-
         if (!TryUseAbility(args, false))
             return;
 
-        var ent = args.Performer;
+        var user = args.Performer;
 
-        Heretic.TryGetHereticComponent(ent, out var heretic, out _);
+        Heretic.TryGetHereticComponent(user, out var heretic, out _);
         var strength = heretic is { CurrentPath: HereticPath.Cosmos } ? heretic.PathStage : 10;
 
-        if (Exists(starBlast.Projectile))
+        if (Exists(ent.Comp.Projectile))
         {
-            _actions.SetIfBiggerCooldown(args.Action!, starBlast.Cooldown);
+            _actions.SetIfBiggerCooldown(args.Action.AsNullable(), ent.Comp.Cooldown);
+            if (!_teleport.CanTeleport(user)) // don't want to apply star mark if teleporting is prevented
+                return;
 
-            var newCoords = Transform(starBlast.Projectile).Coordinates;
-            var oldCoords = Transform(ent).Coordinates;
+            var newCoords = Transform(ent.Comp.Projectile).Coordinates;
+            var oldCoords = Transform(user).Coordinates;
 
-            PredictedSpawnAtPosition(starBlast.Effect, oldCoords);
-            _audio.PlayPredicted(starBlast.Sound, oldCoords, args.Performer);
-            PullVictims(ent, oldCoords, strength);
-            _pulling.StopAllPulls(ent);
-            _transform.SetCoordinates(ent, newCoords);
-            PredictedSpawnAtPosition(starBlast.Effect, newCoords);
-            _audio.PlayPredicted(starBlast.Sound, newCoords, args.Performer);
-            PullVictims(ent, newCoords, strength);
+            PredictedSpawnAtPosition(ent.Comp.Effect, oldCoords);
+            PullVictims(user, oldCoords, strength);
+            _teleport.Teleport(user, newCoords, ent.Comp.Sound, user);
+            PredictedSpawnAtPosition(ent.Comp.Effect, newCoords);
+            PullVictims(user, newCoords, strength);
 
-            PredictedQueueDel(starBlast.Projectile);
+            PredictedQueueDel(ent.Comp.Projectile);
 
-            starBlast.Projectile = EntityUid.Invalid;
-            Dirty(args.Action, starBlast);
+            ent.Comp.Projectile = EntityUid.Invalid;
+            Dirty(ent);
 
             // Don't do args.Handled = true because it resets cooldown
 
             if (_net.IsServer)
-                RaiseNetworkEvent(new StopTargetingEvent(), args.Performer);
+                RaiseNetworkEvent(new StopTargetingEvent(), user);
 
             return;
         }
@@ -100,16 +99,15 @@ public abstract partial class SharedHereticAbilitySystem
 
         args.Handled = true;
 
-        starBlast.Projectile = ShootProjectileSpell(args.Performer,
+        ent.Comp.Projectile = ShootProjectileSpell(args.Performer,
             args.Target,
             args.Projectile,
             args.ProjectileSpeed,
             args.Entity);
-        EnsureComp<CosmicTrailComponent>(starBlast.Projectile).Strength = strength;
-        EnsureComp<StarBlastComponent>(starBlast.Projectile).Action = args.Action;
-        Dirty(args.Action, starBlast);
+        EnsureComp<CosmicTrailComponent>(ent.Comp.Projectile).Strength = strength;
+        EnsureComp<StarBlastComponent>(ent.Comp.Projectile).Action = args.Action;
+        Dirty(ent);
     }
-
 
     private void OnEntityTerminating(Entity<StarBlastComponent> ent, ref EntityTerminatingEvent args)
     {

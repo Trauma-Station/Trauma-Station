@@ -3,8 +3,6 @@
 using Content.Shared.Damage;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Wizard.Projectiles;
 

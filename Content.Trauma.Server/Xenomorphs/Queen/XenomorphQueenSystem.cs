@@ -12,7 +12,6 @@ using Content.Trauma.Shared.Xenomorphs.Xenomorph;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Xenomorphs.Queen;
 

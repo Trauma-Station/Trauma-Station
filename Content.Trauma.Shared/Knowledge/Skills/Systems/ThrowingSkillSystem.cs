@@ -7,7 +7,6 @@ using Content.Trauma.Shared.Containers;
 using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Skills.Systems;
 

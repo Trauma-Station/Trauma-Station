@@ -17,9 +17,7 @@ using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 
 namespace Content.Trauma.Shared.Heretic.Systems;

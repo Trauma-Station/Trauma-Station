@@ -6,7 +6,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Forging;

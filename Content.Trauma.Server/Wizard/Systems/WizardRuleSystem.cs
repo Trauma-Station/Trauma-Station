@@ -32,7 +32,6 @@ using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.BindSoul;
 using Robust.Server.Audio;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Wizard.Systems;

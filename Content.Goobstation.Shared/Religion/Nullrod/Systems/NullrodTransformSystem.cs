@@ -6,7 +6,6 @@ using Content.Shared.Storage;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Religion.Nullrod;
 

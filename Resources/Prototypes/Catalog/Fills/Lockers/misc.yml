@@ -214,6 +214,8 @@
       prob: 0.25
     - id: WeaponBracing
       prob: 0.25
+    - id: EmptyScroll
+      prob: 0.001
     # </Trauma>
     # Tools
     - !type:NestedSelector
@@ -247,10 +249,6 @@
     # Recursive
     - id: ClosetMaintenanceFilledRandom
       prob: 0.01
-    # <Trauma>
-    - id: EmptyScroll
-      prob: 0.001
-    # </Trauma>
 
 - type: entityTable
   id: MaintenancePlushies

@@ -12,7 +12,6 @@ using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using System.Linq;
 using Content.Shared.Repairable;
 

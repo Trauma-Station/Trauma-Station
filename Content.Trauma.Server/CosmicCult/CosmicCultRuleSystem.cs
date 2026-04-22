@@ -49,7 +49,6 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -64,7 +63,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
     [Dependency] private readonly EuiManager _euiMan = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -88,14 +86,12 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_briefing.ogg");
     private readonly SoundSpecifier _deconvertSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_deconvert.ogg");
     private readonly SoundSpecifier _tier3Sound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier3.ogg");
-    private readonly SoundSpecifier _tier2Sound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier2.ogg");
     private readonly SoundSpecifier _tier1Sound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier1.ogg");
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GameRunLevelChangedEvent>(OnRunLevelChanged);
         SubscribeLocalEvent<CosmicCultAssociateRuleEvent>(OnAssociateRule);
         SubscribeLocalEvent<CosmicCultRuleComponent, AfterAntagEntitySelectedEvent>(OnAntagSelect);
         SubscribeLocalEvent<CosmicCultComponent, ComponentShutdown>(OnComponentShutdown);
@@ -111,8 +107,8 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     {
         if (component.ExtraRiftTimer is { } riftTimer && _timing.CurTime >= riftTimer && !component.RiftStop)
         {
-            component.ExtraRiftTimer = _timing.CurTime + _rand.Next(TimeSpan.FromSeconds(230), TimeSpan.FromSeconds(360)); //3min50 to 6min between new rifts. Seconds instead of minutes for granularity.
-            SpawnRift(component.FractureChance);
+            component.ExtraRiftTimer = _timing.CurTime + _rand.Next(TimeSpan.FromMinutes(3), TimeSpan.FromMinutes(6));
+            SpawnRift();
         }
         if (component.UpdateAllCultists)
         {
@@ -130,12 +126,11 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
     /// <summary>
     /// Spawns a malign rift in a random spot on the station.
     /// </summary>
-    /// <param name="fractureChance">The chance that a malign fracture will spawn instead.</param>
-    public void SpawnRift(float fractureChance = 0)
+    public void SpawnRift()
     {
         if (TryFindRandomTile(out var _, out var _, out var _, out var coords))
         {
-            Spawn(_rand.Prob(fractureChance) ? "CosmicGreaterMalignRift" : "CosmicMalignRift", coords);
+            Spawn("CosmicMalignRift", coords);
         }
     }
 
@@ -181,8 +176,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             => session.Status == SessionStatus.InGame
                 && HasComp<HumanoidProfileComponent>(session.AttachedEntity));
 
-        rule.Comp.PercentConverted = Math.Round((double) (100 * totalCult) / rule.Comp.TotalCrew);
-
         if (cultistsAtNextLevel >= rule.Comp.CultistsForNextTier && !rule.Comp.IncreasingTier)
             IncreaseCultTier(rule);
 
@@ -209,8 +202,8 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                     _tier1Sound,
                     Color.FromHex("#cae8e8"));
 
-                for (var i = 0; i <= component.TotalCrew / 6; i++)
-                    SpawnRift(component.FractureChance); // FractureChance should be 0 at this point but we'll pass it just in case
+                for (var i = 0; i <= component.TotalCrew / 4; i++)
+                    SpawnRift();
 
                 while (lights.MoveNext(out var light, out _))
                     if (_rand.Prob(0.30f))
@@ -219,21 +212,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                 break;
 
             case 2:
-                _chatSystem.DispatchGlobalAnnouncement(
-                    Loc.GetString("cosmiccult-announce-tier2-warning"),
-                    sender: null,
-                    true,
-                    _tier2Sound,
-                    Color.FromHex("#cae8e8"));
-
-                component.FractureChance = 0.5f;
-                for (var i = 0; i <= component.TotalCrew / 4; i++)
-                    SpawnRift(component.FractureChance);
-
-                while (lights.MoveNext(out var light, out _))
-                    if (_rand.Prob(0.60f))
-                        _ghost.DoGhostBooEvent(light);
-
                 break;
 
             case 3:
@@ -251,10 +229,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                     null,
                     Color.FromHex("#cae8e8"));
                 _audio.PlayGlobal(_tier3Sound, Filter.Broadcast(), false, AudioParams.Default);
-
-                component.FractureChance = 0.9f;
-                for (var i = 0; i <= component.TotalCrew / 3; i++) // Like, a lot of fractures
-                    SpawnRift(component.FractureChance);
 
                 while (lights.MoveNext(out var light, out _))
                     if (_rand.Prob(0.90f))
@@ -281,9 +255,9 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
         var query = QueryActiveRules();
         _sound.StopStationEventMusic(ent, StationEventMusicType.CosmicCult);
 
-        while (query.MoveNext(out var ruleUid, out _, out var cultRule, out _))
+        while (query.MoveNext(out _, out _, out var cultRule, out _))
         {
-            SetWinType((ruleUid, cultRule), WinType.CultMajor); //here's no coming back from this. Cult wins this round
+            cultRule.WinType = WinType.CultWin; // There's no coming back from this. Cult wins this round
             _roundEnd.EndRound(); //Woo game over yeaaaah
             foreach (var cultist in cultRule.Cultists)
             {
@@ -301,28 +275,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
 
             QueueDel(cultRule.MonumentInGame); // The monument doesn't need to stick around postround! Into the bin with you.
         }
-    }
-
-    private static void SetWinType(Entity<CosmicCultRuleComponent> ent, WinType type)
-    {
-        if (ent.Comp.WinLocked)
-            return;
-
-        ent.Comp.WinType = type;
-
-        if (type is WinType.CultMajor) //Let's lock in our WinType to prevent us from setting a worse win if a better win's been achieved.
-            ent.Comp.WinLocked = true;
-    }
-
-    private void OnRunLevelChanged(GameRunLevelChangedEvent ev)
-    {
-        if (ev.New is not GameRunLevel.PostRound) //Are we moving to post-round?
-            return;
-
-        var query = QueryActiveRules();
-
-        while (query.MoveNext(out var uid, out _, out var cultRule, out _))
-            ConfirmWinState((uid, cultRule)); //If so, let's consult our Winconditions and set an appropriate WinType.
     }
 
     private bool CultistsAlive()
@@ -352,9 +304,11 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
             return;
 
         var query = QueryActiveRules(); // Everyone is dead or captured, call evac
-        while (query.MoveNext(out var ruleUid, out _, out var ruleComp, out _))
+        while (query.MoveNext(out _, out _, out var ruleComp, out _))
         {
-            ConfirmWinState((ruleUid, ruleComp));
+            _sound.StopStationEventMusic(ent, StationEventMusicType.CosmicCult);
+
+            QueueDel(ruleComp.MonumentInGame);
 
             _roundEnd.DoRoundEndBehavior(ruleComp.RoundEndBehavior,
                 ruleComp.EvacShuttleTime,
@@ -377,46 +331,6 @@ public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponen
                 args.Cancelled = true;
             }
         }
-    }
-
-    private void ConfirmWinState(Entity<CosmicCultRuleComponent> ent)
-    {
-        _sound.StopStationEventMusic(ent, StationEventMusicType.CosmicCult);
-        if (ent.Comp.WinLocked) return;
-
-        var arrestedCultists = 0; // Cultists that are cuffed and at centcomm
-        var deadCultists = 0; // Cultists that are dead (or crit) and NOT at centcomm
-        var freeCultists = 0; // Cultists that are alive and unrestrained
-        var halfCult = (int) Math.Ceiling(ent.Comp.InitialCult / 2f); // Half of the initial cult, rounded up
-        var totalCult = ent.Comp.InitialCult;
-        var centcomm = _emergency.GetCentcommMaps();
-        var wrapup = AllEntityQuery<CosmicCultComponent, TransformComponent>();
-        while (wrapup.MoveNext(out var cultist, out _, out var cultistLocation))
-        {
-            if (cultistLocation.MapUid == null) continue;
-            if (centcomm.Contains(cultistLocation.MapUid.Value)
-            && TryComp<CuffableComponent>(ent, out var cuffComp)
-            && _cuffable.IsCuffed((ent, cuffComp)))
-            {
-                arrestedCultists++;
-            }
-            else if (_mobState.IsIncapacitated(cultist))
-            {
-                deadCultists++;
-            }
-            else
-            {
-                freeCultists++;
-            }
-        }
-        if (arrestedCultists >= totalCult)
-            SetWinType(ent, WinType.CrewMajor);
-        else if (arrestedCultists >= halfCult)
-            SetWinType(ent, WinType.CrewMinor);
-        else if (deadCultists + arrestedCultists >= halfCult)
-            SetWinType(ent, WinType.Neutral);
-        else
-            SetWinType(ent, WinType.CultMinor);
     }
 
     protected override void AppendRoundEndText(EntityUid uid,

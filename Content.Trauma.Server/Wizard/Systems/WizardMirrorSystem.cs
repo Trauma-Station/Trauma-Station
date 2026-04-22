@@ -12,7 +12,6 @@ using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Polymorph;
 using Content.Shared.Preferences;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wizard.Systems;
 

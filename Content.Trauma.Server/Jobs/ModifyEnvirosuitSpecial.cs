@@ -5,7 +5,6 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.SelfExtinguisher;
-using Robust.Shared.Prototypes;
 using JetBrains.Annotations;
 
 namespace Content.Trauma.Server.Jobs;

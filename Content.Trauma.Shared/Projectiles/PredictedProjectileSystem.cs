@@ -16,7 +16,6 @@ using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Bulletholes;
 using Content.Trauma.Shared.Executions;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;

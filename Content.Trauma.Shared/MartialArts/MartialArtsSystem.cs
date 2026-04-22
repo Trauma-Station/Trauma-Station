@@ -12,7 +12,6 @@ using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.MartialArts;
@@ -40,6 +39,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
         SubscribeLocalEvent<SneakAttackComponent, ComboAttackPerformedEvent>(OnSneakAttackPerformed);
         SubscribeLocalEvent<SneakAttackComponent, TookDamageEvent>(OnSneakTookDamage);
         SubscribeLocalEvent<SneakAttackComponent, ComboAttemptEvent>(OnSneakComboAttempt);
+        SubscribeLocalEvent<SneakAttackComponent, ComboPerformedEvent>(OnSneakComboPerformed);
         SubscribeLocalEvent<NoGunComponent, ProjectileReflectAttemptEvent>(OnProjectileHitMartialArt);
     }
 
@@ -123,6 +123,12 @@ public sealed partial class MartialArtsSystem : EntitySystem
     private void OnSneakComboAttempt(Entity<SneakAttackComponent> ent, ref ComboAttemptEvent args)
     {
         args.Cancelled |= ent.Comp.IsFound;
+    }
+
+    private void OnSneakComboPerformed(Entity<SneakAttackComponent> ent, ref ComboPerformedEvent args)
+    {
+        // you only get 1 combo before being revealed, make it count
+        SneakAttackSurprise(ent);
     }
 
     private void OnMoveSpeed(Entity<FastSpeedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)

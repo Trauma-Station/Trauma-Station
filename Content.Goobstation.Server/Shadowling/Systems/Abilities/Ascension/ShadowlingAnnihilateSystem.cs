@@ -9,7 +9,6 @@ using Content.Shared.Actions;
 using Content.Shared.Explosion;
 using Content.Shared.Gibbing;
 using Content.Shared.Mobs.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.Ascension;
 

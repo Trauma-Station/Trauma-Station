@@ -6,3 +6,23 @@
     requiredLevel: blue
     lockedLevel: red
     lockTime: 5m # if you change this update the alert levels guidebook too
+
+- type: entity
+  abstract: true
+  id: BaseStationReport
+  components:
+  - type: StationReport
+    reportProto: PaperStationReport
+
+- type: entity
+  abstract: true
+  id: BaseStationTraits
+  components:
+  - type: StationTraits
+    rolls: 3
+    groups: # TODO: these are 10% of what they should be since theres barely any of them right now
+      # 2.7% chance to roll 3 neutrals
+      Neutral: 0.3
+      # 6.4% chance each to roll 3 of them
+      Positive: 0.4
+      Negative: 0.4

@@ -9,6 +9,7 @@ using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
+using Content.Trauma.Shared.Knowledge.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;

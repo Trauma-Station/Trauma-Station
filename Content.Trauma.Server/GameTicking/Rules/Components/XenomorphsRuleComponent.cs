@@ -1,14 +1,22 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Audio; // Goobstation - Play music on announcement
+using Content.Trauma.Shared.Xenomorphs.Caste;
+using Robust.Shared.Audio;
 
 namespace Content.Trauma.Server.GameTicking.Rules.Components;
 
 [RegisterComponent]
 public sealed partial class XenomorphsRuleComponent : Component
 {
-    [ViewVariables]
-    public List<EntityUid> Xenomorphs = new ();
+    [DataField]
+    public List<EntityUid> Xenomorphs = new();
+
+    /// <summary>
+    /// Total number of each caste this rule has ever had.
+    /// Does not get decreased if they die or whatever.
+    /// <summary>
+    [DataField]
+    public Dictionary<ProtoId<XenomorphCastePrototype>, int> TotalCastes = new();
 
     #region Check
 
@@ -25,21 +33,21 @@ public sealed partial class XenomorphsRuleComponent : Component
     [DataField]
     public string? Announcement = "xenomorphs-announcement";
 
-    [DataField] // Goobstation - play music on announcement
+    [DataField]
     public SoundSpecifier XenomorphInfestationSound =
-            new SoundPathSpecifier("/Audio/_Goobstation/Music/Black_Swarm_Short.ogg")
-            {
-                Params = AudioParams.Default
-                    .WithVolume(-8f)
-            };
+        new SoundPathSpecifier("/Audio/_Goobstation/Music/Black_Swarm_Short.ogg")
+        {
+            Params = AudioParams.Default
+                .WithVolume(-8f)
+        };
 
-    [DataField] // Goobstation - play music on announcement
+    [DataField]
     public SoundSpecifier XenomorphTakeoverSound =
-            new SoundPathSpecifier("/Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg")
-            {
-                Params = AudioParams.Default
-                    .WithVolume(-8f)
-            };
+        new SoundPathSpecifier("/Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg")
+        {
+            Params = AudioParams.Default
+                .WithVolume(-8f)
+        };
 
     [DataField]
     public Color AnnouncementColor = Color.Red;

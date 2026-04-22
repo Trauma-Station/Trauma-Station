@@ -10,7 +10,6 @@ using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using System.Linq;
 

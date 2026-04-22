@@ -8,6 +8,7 @@ using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Skills.Systems;
+
 public sealed class ShootingSkillSystem : EntitySystem
 {
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;

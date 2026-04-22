@@ -3,7 +3,6 @@
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Shared.Actions;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.CosmicCult;
 

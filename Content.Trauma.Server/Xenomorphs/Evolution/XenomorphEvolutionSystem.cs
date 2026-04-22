@@ -19,7 +19,6 @@ using Content.Trauma.Shared.Xenomorphs.Xenomorph;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Xenomorphs.Evolution;
@@ -106,7 +105,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
             return;
 
         var ev = new BeforeXenomorphEvolutionEvent(args.Caste);
-        RaiseLocalEvent(uid, ev);
+        RaiseLocalEvent(uid, ref ev);
 
         if (ev.Cancelled)
             return;
@@ -121,7 +120,8 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
 
         var dropHandItemsEvent = new DropHandItemsEvent();
         RaiseLocalEvent(uid, ref dropHandItemsEvent);
-        RaiseLocalEvent(uid, new AfterXenomorphEvolutionEvent(newXeno, mindUid, args.Caste));
+        var afterEv = new AfterXenomorphEvolutionEvent(newXeno, mindUid, args.Caste);
+        RaiseLocalEvent(uid, ref afterEv);
 
         _adminLog.Add(LogType.Mind, $"{ToPrettyString(uid)} evolved into {ToPrettyString(newXeno)}");
 
@@ -167,7 +167,7 @@ public sealed class XenomorphEvolutionSystem : EntitySystem
         }
 
         var ev = new BeforeXenomorphEvolutionEvent(xenomorph.Caste, checkNeedCasteDeath);
-        RaiseLocalEvent(uid, ev);
+        RaiseLocalEvent(uid, ref ev);
 
         if (ev.Cancelled)
             return false;

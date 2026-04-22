@@ -3,7 +3,6 @@
 using Content.Shared.Actions.Components;
 using Content.Shared.FixedPoint;
 using Content.Trauma.Common.RadialSelector;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Xenomorphs.Evolution;
 

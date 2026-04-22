@@ -9,7 +9,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Misc;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Interaction;
 

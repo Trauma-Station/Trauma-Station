@@ -6,7 +6,6 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 public sealed partial class SummonRotHulkSystem : EntitySystem

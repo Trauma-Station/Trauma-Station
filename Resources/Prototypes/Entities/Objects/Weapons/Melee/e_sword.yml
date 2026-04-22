@@ -377,8 +377,8 @@
           Heat: 15    #Goob Station rebalance, was originally 12
           Structural: 40 # Goob edit
         woundSeverityMultipliers: #Goob, Should be at least some reason to use this over eshield/base esword
-          Slash: 7
-          Heat: 7
+          Slash: 4
+          Heat: 4
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg
@@ -418,6 +418,11 @@
     maxParries: 3
     reflectSpread: 30
   - type: FlipOnHit # WD EDIT
+    lightAttackOnly: true
+    statusEffect: StatusEffectFlipDesword
+    hitWhitelist:
+      components:
+      - MobState
   - type: ThrowableBlocker # Goobstation
     blockSound:
       path: /Audio/Weapons/eblade1.ogg

@@ -2,7 +2,6 @@
 
 using Content.Shared.Roles;
 using Content.Trauma.Common.CollectiveMind;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.StationEvents;
 

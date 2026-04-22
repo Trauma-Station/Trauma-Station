@@ -4,7 +4,6 @@ using System.Linq;
 using Content.Shared.Chat;
 using Content.Shared.EntityEffects;
 using Content.Shared.Standing;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.EntityEffects;

@@ -3,8 +3,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Physics;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.OfficeChair;
 

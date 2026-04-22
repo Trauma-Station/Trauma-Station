@@ -198,7 +198,12 @@ public sealed class EventManagerSystem : EntitySystem
                 continue;
 
             if (!eventproto.TryGetComponent<StationEventComponent>(out var stationEvent, EntityManager.ComponentFactory))
+            // <Trauma> - this is a programmer error, log it
+            {
+                Log.Error($"Event prototype {eventid} was missing StationEventComponent!");
                 continue;
+            }
+            // </Trauma>
 
             if (!CanRun(eventproto, stationEvent, playerCount.Value, currentTime.Value))
                 continue;

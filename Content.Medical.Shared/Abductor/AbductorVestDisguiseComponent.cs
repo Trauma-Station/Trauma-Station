@@ -4,7 +4,6 @@ using Content.Shared.Actions;
 using Content.Shared.Body;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
-using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Abductor;
 

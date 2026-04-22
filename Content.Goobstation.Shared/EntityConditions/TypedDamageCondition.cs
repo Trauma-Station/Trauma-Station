@@ -7,7 +7,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.EntityConditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Localizations;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityConditions;
 

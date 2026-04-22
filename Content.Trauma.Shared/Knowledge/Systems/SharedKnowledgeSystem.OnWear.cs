@@ -8,6 +8,8 @@ using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Silicons.Borgs;
 using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Robust.Shared.Prototypes;
+using Content.Trauma.Shared.Knowledge.Components;
+using Content.Trauma.Shared.MartialArts.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 

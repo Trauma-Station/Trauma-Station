@@ -1,0 +1,23 @@
+- type: entity
+  parent: BaseAreaStation
+  id: AreaAi
+  name: AI
+  components:
+  - type: DepartmentArea
+    department: Silicon
+  - type: Sprite
+    state: ai
+
+- type: entity
+  parent: AreaAi
+  id: AreaAiCore
+  name: AI core
+  # TODO: unique sprite
+
+- type: entity
+  parent: AreaAi
+  id: AreaAiUpload
+  name: AI upload
+  components:
+  - type: Sprite
+    state: ai_upload

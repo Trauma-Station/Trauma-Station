@@ -8,7 +8,6 @@ using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.Graphics;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 //using Content.Shared.Flesh;
 
 namespace Content.Goobstation.Client.Blob;

@@ -23,19 +23,27 @@ public sealed class WeatherSchedulerSystem : EntitySystem
 
         var now = _timing.CurTime;
         var query = EntityQueryEnumerator<WeatherSchedulerComponent>();
-        while (query.MoveNext(out var map, out var comp))
+        while (query.MoveNext(out var uid, out var comp))
         {
             if (now < comp.NextUpdate)
                 continue;
 
             if (comp.Stage >= comp.Stages.Count)
+            {
+                if (comp.Temporary)
+                {
+                    // remove the status effect instead of wrapping
+                    QueueDel(uid);
+                    continue;
+                }
                 comp.Stage = 0;
+            }
 
             var stage = comp.Stages[comp.Stage++];
             var duration = TimeSpan.FromSeconds(stage.Duration.Next(_random));
             comp.NextUpdate = now + duration;
 
-            var mapId = Comp<MapComponent>(map).MapId;
+            var mapId = Transform(uid).MapID;
             if (stage.Weather is { } weather)
             {
                 // crossfade weather smoothly so as one ends the next starts
@@ -43,7 +51,7 @@ public sealed class WeatherSchedulerSystem : EntitySystem
                     duration += SharedWeatherSystem.StartupTime;
                 if (HasWeather(comp, comp.Stage + 1))
                     duration += SharedWeatherSystem.ShutdownTime;
-                _weather.TryAddWeather(map, weather, out _, duration);
+                _weather.TryAddWeather(mapId, weather, out _, duration);
             }
 
             if (stage.Message is { } message)
@@ -54,7 +62,7 @@ public sealed class WeatherSchedulerSystem : EntitySystem
                     ChatChannel.Radio,
                     msg,
                     msg,
-                    map,
+                    uid,
                     false,
                     true,
                     null);

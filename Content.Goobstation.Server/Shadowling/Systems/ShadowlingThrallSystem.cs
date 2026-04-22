@@ -10,7 +10,6 @@ using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
-using Robust.Shared.Prototypes;
 using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Goobstation.Server.Shadowling.Systems;

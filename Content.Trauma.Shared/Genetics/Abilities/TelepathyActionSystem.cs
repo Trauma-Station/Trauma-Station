@@ -6,7 +6,6 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 

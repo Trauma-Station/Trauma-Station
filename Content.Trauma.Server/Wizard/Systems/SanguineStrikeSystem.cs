@@ -13,7 +13,6 @@ using Content.Trauma.Shared.Wizard.SanguineStrike;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wizard.Systems;
 

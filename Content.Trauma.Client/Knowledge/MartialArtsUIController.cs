@@ -15,7 +15,6 @@ using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Numerics;
 

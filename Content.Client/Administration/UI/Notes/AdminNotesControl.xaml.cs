@@ -55,7 +55,8 @@ public sealed partial class AdminNotesControl : Control
 
     private void OnNewNoteButtonPressed(BaseButton.ButtonEventArgs obj)
     {
-        var noteEdit = new NoteEdit(null, PlayerName, CanCreate, CanEdit);
+        var noteEdit = new NoteEdit(null, PlayerName, CanCreate, CanEdit,
+            CanWatchlist); // Trauma
         noteEdit.SubmitPressed += OnNoteSubmitted;
         noteEdit.OpenCentered();
     }
@@ -81,7 +82,8 @@ public sealed partial class AdminNotesControl : Control
                 return;
             }
 
-            var noteEdit = new NoteEdit(input.Note, PlayerName, CanCreate, CanEdit);
+            var noteEdit = new NoteEdit(input.Note, PlayerName, CanCreate, CanEdit,
+                CanWatchlist); // Trauma
             noteEdit.SubmitPressed += OnNoteSubmitted;
             noteEdit.OpenCentered();
         };
@@ -199,11 +201,13 @@ public sealed partial class AdminNotesControl : Control
         ShowMoreButton.Visible = false;
     }
 
-    public void SetPermissions(bool create, bool delete, bool edit)
+    public void SetPermissions(bool create, bool delete, bool edit,
+        bool watchlist) // Trauma
     {
         CanCreate = create;
         CanDelete = delete;
         CanEdit = edit;
+        CanWatchlist = watchlist; // Trauma
         NewNoteButton.Visible = create;
         NewNoteButton.Disabled = !create;
     }

@@ -19,6 +19,16 @@
   access:
   - CentralCommand
   - NanotrasenRepresentative
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: KnowledgeGrant
+      skills:
+        MeleeKnowledge: 50
+        ShootingKnowledge: 50
+        StrengthKnowledge: 50
+        ToughnessKnowledge: 50
+        AthleticsKnowledge: 50
 
 - type: startingGear
   id: HECUOperativeGear

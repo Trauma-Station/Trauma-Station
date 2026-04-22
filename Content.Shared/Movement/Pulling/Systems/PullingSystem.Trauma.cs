@@ -22,6 +22,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Contests;
 using Content.Trauma.Common.Grab;
+using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -336,6 +337,9 @@ public sealed partial class PullingSystem
 
     private bool TryUpdateGrabVirtualItems(Entity<PullerComponent> puller, Entity<PullableComponent> pullable)
     {
+        if (!ShouldSpawnVirtualItems(puller, pullable))
+            return true;
+
         // Updating virtual items
         var virtualItemsCount = puller.Comp.GrabVirtualItems.Count;
 
@@ -466,5 +470,12 @@ public sealed partial class PullingSystem
         var newStage = puller.Comp.GrabStage - 1;
         TrySetGrabStages((puller.Owner, puller.Comp), (pullable.Owner, pullable.Comp), newStage);
         return true;
+    }
+
+    private bool ShouldSpawnVirtualItems(EntityUid uid, EntityUid pulled)
+    {
+        var ev = new BeforeSpawnPullingVirtualItemsEvent(uid, pulled);
+        RaiseLocalEvent(uid, ref ev);
+        return !ev.Cancelled;
     }
 }

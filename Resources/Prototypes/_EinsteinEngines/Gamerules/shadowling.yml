@@ -19,7 +19,6 @@
     - prefRoles: [ Shadowling ]
       max: 1
       playerRatio: 30
-      jobBlacklist: [ Chaplain ] # GOOBSTATION
       blacklist:
         components:
         - CommandStaff

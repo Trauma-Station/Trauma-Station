@@ -5,7 +5,6 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Goobstation.Client.Weapons.LaserPointer;

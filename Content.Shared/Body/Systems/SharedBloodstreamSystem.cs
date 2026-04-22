@@ -102,7 +102,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
                     // </Goob>
 
                     _damageableSystem.TryChangeDamage(uid, amt, ignoreResistances: false, interruptsDoAfters: false,
-                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.All); // Goob
+                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.Vital); // Trauma
 
                     // Apply dizziness as a symptom of bloodloss.
                     // The effect is applied in a way that it will never be cleared without being healthy.
@@ -117,7 +117,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
                         bloodstream.BloodlossHealDamage * bloodPercentage * _bloodlossMultiplier,
                         ignoreResistances: true,
                         interruptsDoAfters: false,
-                        splitDamage: SplitDamageBehavior.SplitEnsureAll); // Goob
+                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.Vital); // Trauma
 
                     _status.TryRemoveStatusEffect(uid, Bloodloss);
                 }
@@ -314,7 +314,8 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
         if (SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution))
         {
             SolutionContainer.RemoveAllSolution(ent.Comp.BloodSolution.Value);
-            TryModifyBloodLevel(ent.AsNullable(), ent.Comp.BloodReferenceSolution.Volume);
+            // TODO: Use Solutions API for this when it exists
+            TryRegulateBloodLevel(ent.AsNullable(), ent.Comp.BloodReferenceSolution.Volume);
         }
     }
 
@@ -440,11 +441,12 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
             return false;
 
         referenceFactor = Math.Clamp(referenceFactor, 0f, ent.Comp.MaxVolumeModifier);
+        var ratio = amount / ent.Comp.BloodReferenceSolution.Volume;
 
         foreach (var (referenceReagent, referenceQuantity) in ent.Comp.BloodReferenceSolution)
         {
             var error = referenceQuantity * referenceFactor - bloodSolution.GetTotalPrototypeQuantity(referenceReagent.Prototype);
-            var adjustedAmount = amount * referenceQuantity / ent.Comp.BloodReferenceSolution.Volume;
+            var adjustedAmount = referenceQuantity * ratio;
 
             if (error > 0)
             {

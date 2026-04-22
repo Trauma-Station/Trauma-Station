@@ -16,7 +16,6 @@ using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.Revolutionary;
 using Content.Trauma.Shared.Language.Systems;
 using Content.Trauma.Shared.Revolutionary.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Revolutionary;

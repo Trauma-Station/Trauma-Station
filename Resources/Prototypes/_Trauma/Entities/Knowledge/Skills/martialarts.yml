@@ -206,3 +206,32 @@
     - InstantStun
     - InstantDeath
     - InstantRejuvenate
+
+- type: entity
+  parent: BaseMartialArtsKnowledge
+  id: MartialArtArmstrongKarate
+  name: Armstrong style Karate
+  components:
+  - type: Sprite
+    sprite: _Trauma/Interface/Misc/armstrongkarate.rsi
+    state: icon
+  - type: CanPerformCombo
+    roundstartCombos:
+    - ArmstrongBusterPunchesSimple
+    - ArmstrongBusterPunches
+    - ArmstrongBusterPunchesAdvanced
+    - ArmstrongDropkickSimple
+    - ArmstrongDropkick
+    - ArmstrongDropkickAdvanced
+    - ArmstrongMachineGunFistSimple
+    - ArmstrongMachineGunFist
+    - ArmstrongMachineGunFistAdvanced
+    - ArmstrongFireballSimple
+    - ArmstrongFireball
+    - ArmstrongFireballAdvanced
+    - ArmstrongHorseStanceSimple
+    - ArmstrongHorseStance
+    - ArmstrongHorseStanceAdvanced
+    - ArmstrongHeadbuttSimple
+    - ArmstrongHeadbutt
+    - ArmstrongHeadbuttAdvanced

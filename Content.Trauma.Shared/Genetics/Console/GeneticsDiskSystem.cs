@@ -3,7 +3,6 @@
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Kitchen;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 

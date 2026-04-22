@@ -250,7 +250,7 @@
       75: Damaged
       85: Broken
       100: Destroyed
-    damageProbability: .75
+    damageProbability: .50
     damagePopups:
       Worn:
       - durability-blade-0
@@ -291,7 +291,7 @@
       75: Damaged
       85: Broken
       100: Destroyed
-    damageProbability: .50
+    damageProbability: .25
     damagePopups:
       Worn:
       - durability-blade-0
@@ -332,7 +332,7 @@
       75: Damaged
       85: Broken
       100: Destroyed
-    damageProbability: .25
+    damageProbability: .12
     damagePopups:
       Worn:
       - durability-blade-0
@@ -439,7 +439,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .75
+    damageProbability: .50
     damagePopups:
       Worn:
       - durability-metal-0
@@ -531,7 +531,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .75
+    damageProbability: .25
     damagePopups:
       Worn:
       - durability-wood-0
@@ -577,7 +577,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .5
+    damageProbability: .50
     damagePopups:
       Worn:
       - durability-wood-0
@@ -623,7 +623,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .50
+    damageProbability: .12
     damagePopups:
       Worn:
       - durability-blade-1
@@ -663,7 +663,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .50
+    damageProbability: .25
     damagePopups:
       Worn:
       - durability-blade-1
@@ -703,7 +703,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .75
+    damageProbability: .50
     damagePopups:
       Worn:
       - durability-blade-1
@@ -781,3 +781,32 @@
     maxDamageRoll: 999
     maxRepairBonus: 0
     repairable: false
+
+- type: entity
+  id: DrillDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .1
+    damagePopups:
+      Worn:
+      - durability-drill-0
+      Damaged:
+      - durability-drill-1
+      Broken:
+      - durability-drill-2
+      Destroyed:
+      - durability-drill-3
+    minDamageRoll: 1
+    maxDamageRoll: 2
+    repairDoAfter: 5
+    repairMaterials:
+      DrillHead: 100, 100
+    maxRepairBonus: 0
+    deleteOnDestroyed: false

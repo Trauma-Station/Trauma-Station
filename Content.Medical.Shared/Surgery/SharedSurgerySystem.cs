@@ -30,9 +30,12 @@ namespace Content.Medical.Shared.Surgery;
 
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -73,7 +76,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SurgeryTargetComponent, InteractEvent>(OnInteract);
 
         SubscribeLocalEvent<HandsComponent, SurgerySanitizationEvent>(_hands.RefRelayEvent);
-        SubscribeLocalEvent<HandsComponent, SurgeryPainEvent>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, SurgeryIgnorePreviousStepsEvent>(_hands.RefRelayEvent);
 
         SubscribeLocalEvent<SurgeryTargetComponent, SurgeryDoAfterEvent>(OnTargetDoAfter);

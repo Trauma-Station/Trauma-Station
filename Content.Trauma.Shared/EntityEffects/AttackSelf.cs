@@ -4,7 +4,6 @@ using Content.Shared.CombatMode;
 using Content.Shared.EntityEffects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Weapons.Melee;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

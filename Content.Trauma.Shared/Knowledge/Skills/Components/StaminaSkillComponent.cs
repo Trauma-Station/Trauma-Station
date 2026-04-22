@@ -2,6 +2,7 @@
 
 using Content.Trauma.Shared.Knowledge.Skills.Systems;
 using Robust.Shared.GameStates;
+using Content.Trauma.Shared.Knowledge.Systems;
 
 namespace Content.Trauma.Shared.Knowledge.Skills.Components;
 

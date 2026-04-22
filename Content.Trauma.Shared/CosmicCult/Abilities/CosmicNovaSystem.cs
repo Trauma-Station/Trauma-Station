@@ -13,7 +13,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 

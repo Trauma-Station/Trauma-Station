@@ -43,7 +43,7 @@
 
 - type: entity
   name: mining drill
-  parent: [BaseItem, MetalToolDurabilityStrong] # Trauma - Durability
+  parent: [BaseItem, DrillDurability] # Trauma - Durability
   id: MiningDrill
   description: Powerful tool used to quickly drill through rocks.
   components:
@@ -75,7 +75,7 @@
 
 - type: entity
   name: diamond tipped mining drill
-  parent: MiningDrill
+  parent: [UnbreakableDurability, MiningDrill] # Trauma - Durability
   id: MiningDrillDiamond
   description: A significantly more efficient mining drill tipped with diamond.
   components:

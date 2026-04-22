@@ -3,7 +3,6 @@
 using System.Linq;
 using System.Numerics;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;
 
