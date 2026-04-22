@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Map;
+// </Trauma>
 using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
