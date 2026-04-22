@@ -1116,7 +1116,7 @@
   theory:
     InfrastructureKnowledge: 0
     ElectronicsKnowledge: 0
-  theory:
+  practical:
     MetalworkingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
