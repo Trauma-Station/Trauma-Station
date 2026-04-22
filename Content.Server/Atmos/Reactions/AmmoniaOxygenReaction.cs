@@ -29,6 +29,14 @@ public sealed partial class AmmoniaOxygenReaction : IGasReactionEffect
         mixture.AdjustMoles(Gas.NitrousOxide, deltaMoles / 2);
         mixture.AdjustMoles(Gas.WaterVapor, deltaMoles * 1.5f);
 
+        // <Trauma>
+        var location = holder as TileAtmosphere;
+        var energy = 193000 * deltaMoles;
+        atmosphereSystem.AddHeat(mixture, energy);
+        if (location is { } && energy > 0)
+            atmosphereSystem.HotspotExpose(location, mixture.Temperature, mixture.Volume);
+        // </Trauma>
+
         return ReactionResult.Reacting;
     }
 }
