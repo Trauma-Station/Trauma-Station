@@ -8,8 +8,6 @@
     minimumPlayers: 50
     earliestStart: 30
     maxOccurrences: 1
-    xenomorphInfestationSound:
-      collection: xeno_start
   - type: AntagSelection
     definitions:
     - spawnerPrototype: SpawnPointGhostXenomorph
