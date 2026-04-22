@@ -3,7 +3,6 @@
 using Content.Shared.GameTicking;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
-using Content.Trauma.Shared.Mobs;
 using Content.Trauma.Shared.Utility;
 using Robust.Shared.Timing;
 

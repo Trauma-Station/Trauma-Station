@@ -11,8 +11,6 @@ using Content.Medical.Common.Healing;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Pain;
-using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
 using Content.Shared.Body;
 using Content.Shared.Coordinates;

@@ -17,13 +17,14 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Whitelist;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Surgery;
@@ -31,11 +32,9 @@ namespace Content.Medical.Shared.Surgery;
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
     [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -45,7 +44,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] protected readonly StatusEffectsSystem Status = default!;
-    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] protected readonly BodyPartSystem _part = default!;
     [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;

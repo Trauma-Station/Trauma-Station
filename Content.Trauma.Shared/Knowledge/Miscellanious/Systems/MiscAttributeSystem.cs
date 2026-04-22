@@ -15,14 +15,14 @@ using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 using Content.Trauma.Shared.Knowledge.FightingStance;
 using Content.Trauma.Shared.Knowledge.Miscellanious.Components;
 using Content.Trauma.Shared.Knowledge.Quality;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.Parry;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Trauma.Shared.Knowledge.Attribute.Systems;
+namespace Content.Trauma.Shared.Knowledge.Miscellanious.Systems;
 
 public sealed partial class MiscAttributeSystem : EntitySystem
 {
@@ -33,6 +33,7 @@ public sealed partial class MiscAttributeSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
 
     private SoundSpecifier _parrySound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/parry.ogg", AudioParams.Default.WithVariation(0.05f));
 
@@ -120,14 +121,33 @@ public sealed partial class MiscAttributeSystem : EntitySystem
 
     private void FigureOutFightingStyle(Entity<KnowledgeHolderComponent> ent)
     {
-        int weaponCount = 0;
-        int wieldCount = 0;
-        int shieldCount = 0;
-        int qualityAdjustment = 0;
+        var weaponCount = 0;
+        var wieldCount = 0;
+        var shieldCount = 0;
+        var qualityAdjustment = 0;
+
+        if (_knowledge.GetContainer(ent) is not { } brain)
+            return;
+
+        EnsureComp<FightingStanceComponent>(ent, out var fighting);
+        fighting.AttackMod = 0;
+        fighting.DamageMod = 0;
+        fighting.DefenseMod = 0;
+        fighting.SpeedMod = 0;
+        fighting.DefenseDice = 12; // Without a fighting stance, your defense is shit.
+
         foreach (var hand in _hands.EnumerateHands(ent.Owner))
         {
             if (!_hands.TryGetHeldItem(ent.Owner, hand, out var item))
                 continue;
+
+            if (Prototype(item.Value) is { } proto && brain.Comp.WeaponSpecializations.TryGetValue(proto, out var spec))
+            {
+                fighting.AttackMod += spec.Attack;
+                fighting.DamageMod += spec.Damage;
+                fighting.DefenseMod += spec.Defense;
+                fighting.SpeedMod += spec.Speed;
+            }
 
             if (HasComp<MeleeWeaponComponent>(item))
                 weaponCount++;
@@ -141,8 +161,6 @@ public sealed partial class MiscAttributeSystem : EntitySystem
             if (TryComp<QualityComponent>(item, out var comp))
                 qualityAdjustment += comp.Quality;
         }
-
-        EnsureComp<FightingStanceComponent>(ent, out var fighting);
 
         foreach (var stance in _proto.EnumeratePrototypes<FightingStancePrototype>())
         {

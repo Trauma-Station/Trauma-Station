@@ -23,21 +23,6 @@
   - AdvancedEntertainment
   position: -1,4
 
-- type: technology
-  id: Autodoc
-  name: research-technology-autodoc
-  icon:
-    sprite: _Shitmed/Structures/Machines/autodoc.rsi
-    state: idle
-  discipline: CivilianServices
-  tier: 2
-  cost: 10000
-  recipeUnlocks:
-  - AutodocCircuitboard
-  position: -1,5
-  technologyPrerequisites:
-  - AdvancedTreatment
-
 # Tier 3
 
 - type: technology
@@ -51,8 +36,5 @@
   cost: 10000
   recipeUnlocks:
   - ClothingHandsGlovesSurgical
-  - AutodocUpgradeKitBluespace
   - OmnimedTool
-  technologyPrerequisites:
-  - Autodoc
   position: -1,6

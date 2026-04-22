@@ -24,11 +24,6 @@
 ## Dynamic
 
 - type: latheRecipePack
-  id: MedicalBoardsGoob
-  recipes:
-  - AutodocCircuitboard
-
-- type: latheRecipePack
   id: EngineeringBoardsGoob
   recipes:
   - RoboticArmCircuitboard

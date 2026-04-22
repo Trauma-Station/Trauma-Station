@@ -55,4 +55,5 @@ public partial struct SpecializationStats
     [DataField] public int Attack;
     [DataField] public int Defense;
     [DataField] public int Speed;
+    [DataField] public int Damage;
 }

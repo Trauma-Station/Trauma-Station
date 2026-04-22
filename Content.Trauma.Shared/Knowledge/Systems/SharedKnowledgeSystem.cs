@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Cloning;
-using Content.Trauma.Shared.Language.Systems;
 using Content.Shared.Body;
 using Content.Shared.Mind.Components;
 using Content.Shared.Polymorph;

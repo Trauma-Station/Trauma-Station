@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Text;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Shared.EntityEffects;
@@ -7,8 +8,8 @@ using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using System.Text;
 
 namespace Content.Trauma.Server.Station;
 
@@ -71,7 +72,7 @@ public sealed class StationTraitsSystem : EntitySystem
             Log.Info($"Added station trait {id}");
             try
             {
-                if (trait.Effects is {} effects)
+                if (trait.Effects is { } effects)
                     _effects.ApplyEffects(ent, effects);
             }
             catch (Exception e)
@@ -124,7 +125,7 @@ public sealed class StationTraitsSystem : EntitySystem
         foreach (var id in ent.Comp.Picked)
         {
             var trait = _proto.Index(id);
-            if (getEffects(trait) is not {} effects)
+            if (getEffects(trait) is not { } effects)
                 continue;
 
             try
@@ -194,7 +195,7 @@ public sealed class StationTraitsSystem : EntitySystem
         foreach (var id in traits.Reported)
         {
             var trait = _proto.Index(id);
-            if (trait.Report is {} report) // should always be true...
+            if (trait.Report is { } report) // should always be true...
                 sb.AppendLine($"[italic]{trait.Name}[/italic] - {report}");
         }
     }
