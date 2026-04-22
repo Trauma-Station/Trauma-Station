@@ -117,7 +117,7 @@ public sealed partial class WoundSystem : EntitySystem
 
         _nextUpdate = now + TimeSpan.FromSeconds(1f / _medicalHealingTickrate);
 
-        // If this still causes lag, we go with the nuclear option of also checking for ConsciousnessComponent :niceportrait:
+        // TODO: make a marker component for alive mobs with a body
         var query = EntityQueryEnumerator<BodyComponent, DamageableComponent>();
         while (query.MoveNext(out var ent, out var body, out var damageable))
         {

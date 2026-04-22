@@ -1,4 +1,3 @@
-using Content.Medical.Shared.Consciousness; // Shitmed Change
 using System.Numerics;
 using Content.Client.StatusIcon;
 using Content.Client.UserInterface.Systems;

@@ -40,13 +40,11 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-  - type: GhostRole
+  - type: DelayedGhostRole
     description: ghost-role-information-reinforcement-description
     rules: ghost-role-information-nonantagonist-rules
     mindRoles:
     - MindRoleGhostRoleNeutral
-    raffle:
-      settings: reinforcement # TODO: make raffle normal but delay the ghost role opening by a few minutes
   - type: GhostCharacterSpawner
     components:
     - type: IdBind
@@ -62,7 +60,7 @@
   id: ReinforcementBeaconSecurityOfficer
   suffix: Security
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: SecurityOfficer
     name: ghost-role-information-reinforcement-sec-name
   - type: GhostCharacterSpawner
@@ -80,17 +78,16 @@
   id: ReinforcementBeaconSecurityOfficerFast
   suffix: Security, Fast
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
+    fast: true
     name: ghost-role-information-reinforcement-fast-sec-name
-    raffle:
-      settings: short
 
 - type: entity
   parent: ReinforcementBeaconSecurityOfficer
   id: ReinforcementBeaconSpecialistOfficerLaser
   suffix: Security, Laser
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     name: ghost-role-information-reinforcement-specialist-sec-name
   - type: GhostCharacterSpawner
     components:
@@ -104,7 +101,7 @@
   id: ReinforcementBeaconBartender
   suffix: Bartender
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: Bartender
     name: ghost-role-information-reinforcement-bartender-name
   - type: GhostCharacterSpawner
@@ -117,7 +114,7 @@
   id: ReinforcementBeaconChef
   suffix: Chef
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: Chef
     name: ghost-role-information-reinforcement-chef-name
   - type: GhostCharacterSpawner
@@ -130,7 +127,7 @@
   id: ReinforcementBeaconBotanist
   suffix: Botanist
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: Botanist
     name: ghost-role-information-reinforcement-botanist-name
   - type: GhostCharacterSpawner
@@ -145,7 +142,7 @@
   id: ReinforcementBeaconEngi
   suffix: Engineer
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: StationEngineer
     name: ghost-role-information-reinforcement-engi-name
   - type: GhostCharacterSpawner
@@ -159,7 +156,7 @@
   id: ReinforcementBeaconAtmos
   suffix: Atmos
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: AtmosphericTechnician
     name: ghost-role-information-reinforcement-atmos-name
   - type: GhostCharacterSpawner
@@ -174,7 +171,7 @@
   id: ReinforcementBeaconSci
   suffix: Scientist
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: Scientist
     name: ghost-role-information-reinforcement-sci-name
   - type: GhostCharacterSpawner
@@ -189,7 +186,7 @@
   id: ReinforcementBeaconAssistant
   suffix: Assistant
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: Passenger
     name: ghost-role-information-reinforcement-assistant-name
   - type: GhostCharacterSpawner
@@ -202,7 +199,7 @@
   id: ReinforcementBeaconDClass
   suffix: D-Class
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     name: ghost-role-information-reinforcement-DClass-name
     description: ghost-role-information-DClass-description
     rules: ghost-role-information-freeagent-rules
@@ -220,7 +217,7 @@
   id: ReinforcementBeaconDoctor
   suffix: Medical Doctor
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: MedicalDoctor
     name: ghost-role-information-reinforcement-doctor-name
   - type: GhostCharacterSpawner
@@ -234,7 +231,7 @@
   id: ReinforcementBeaconChemist
   suffix: Chemist
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: Chemist
     name: ghost-role-information-reinforcement-chemist-name
   - type: GhostCharacterSpawner
@@ -249,7 +246,7 @@
   id: ReinforcementBeaconCargo
   suffix: Cargo Tech
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: CargoTechnician
     name: ghost-role-information-reinforcement-cargo-name
   - type: GhostCharacterSpawner
@@ -262,7 +259,7 @@
   id: ReinforcementBeaconSalv
   suffix: Salvage
   components:
-  - type: GhostRole
+  - type: DelayedGhostRole
     job: SalvageSpecialist
     name: ghost-role-information-reinforcement-salv-name
   - type: GhostCharacterSpawner

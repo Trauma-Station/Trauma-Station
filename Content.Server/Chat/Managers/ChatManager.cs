@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server.LinkAccount; // RMC - Patreon
+using Content.Server.LinkAccount;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace Content.Server.Chat.Managers;
 internal sealed partial class ChatManager : IChatManager
 {
     // <Trauma>
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
+    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
     // </Trauma>
     private static readonly Dictionary<string, string> PatronOocColors = new()
     {

@@ -6,13 +6,13 @@ using Content.Goobstation.Common.Physics;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Teleportation;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
@@ -24,9 +24,9 @@ public sealed class SharedStarTouchSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedStarGazerSystem _starGazer = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private readonly TeleportSystem _teleport = default!;
     [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
 
     public static readonly EntProtoId StarTouchStatusEffect = "StatusEffectStarTouched";
@@ -46,19 +46,19 @@ public sealed class SharedStarTouchSystem : EntitySystem
 
     private void OnUseInHand(Entity<StarTouchComponent> ent, ref UseInHandEvent args)
     {
-        var starGazer = _starGazer.ResolveStarGazer(args.User, out var spawned);
-        if (starGazer == null)
+        var user = args.User;
+        if (_starGazer.ResolveStarGazer(user, out var spawned) is not { } starGazer)
             return;
 
         args.Handled = true;
 
-        _touchSpell.InvokeTouchSpell(ent.Owner, args.User);
+        _touchSpell.InvokeTouchSpell(ent.Owner, user);
 
-        if (spawned)
+        if (spawned || TerminatingOrDeleted(starGazer))
             return;
 
-        _pulling.StopAllPulls(args.User);
-        _transform.SetMapCoordinates(args.User, _transform.GetMapCoordinates(starGazer.Value.Owner));
+        var coords = Transform(starGazer).Coordinates;
+        _teleport.Teleport(user, coords, user: user);
     }
 
     private void OnRemove(Entity<StarTouchedStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
@@ -109,14 +109,13 @@ public sealed class SharedStarTouchSystem : EntitySystem
             status.EndEffectTime > _timing.CurTime)
             return;
 
-        _pulling.StopAllPulls(target);
-
         var targetXform = Transform(target);
         var newCoords = Transform(heretic.Value).Coordinates;
         PredictedSpawnAtPosition(ent.Comp.CosmicCloud, targetXform.Coordinates);
-        _transform.SetCoordinates((target, targetXform, MetaData(target)), newCoords);
+        _teleport.Teleport(target, newCoords);
         PredictedSpawnAtPosition(ent.Comp.CosmicCloud, newCoords);
 
+        // TODO: kill
         // Applying status effects next tick, otherwise status effects system shits itself
         Timer.Spawn(0,
             () =>

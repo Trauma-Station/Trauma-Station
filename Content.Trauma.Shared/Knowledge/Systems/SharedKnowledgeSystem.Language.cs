@@ -84,9 +84,11 @@ public abstract partial class SharedKnowledgeSystem
 
     public void UpdateEntityLanguages(Entity<LanguageSpeakerComponent> ent)
     {
+        if (GetContainer(ent.Owner) is not { } brain)
+            return;
+
         var ev = new DetermineEntityLanguagesEvent();
-        if (GetContainer(ent.Owner) is { } brain &&
-            GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is { } known)
+        if (GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is { } known)
         {
             foreach (var language in known)
             {
@@ -188,8 +190,7 @@ public abstract partial class SharedKnowledgeSystem
     {
         if (GetContainer(ent.Owner) is not { } brain)
         {
-            // use mob yml languages
-            UpdateEntityLanguages(ent);
+            // just use mob yml languages
             return;
         }
 

@@ -100,13 +100,6 @@
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 30
-        - id: DuoAbductorRoundstart
-          prob: 0.15
-          conditions:
-          - !type:HasBudgetCondition
-          - !type:MaxRuleOccurenceCondition
-          - !type:PlayerCountCondition
-            min: 20
         - id: CorporateAgent
           prob: 0.075
           conditions:

@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Medical.Components;
@@ -86,11 +85,9 @@ public sealed partial class HealthAnalyzerSystem
 
     private void FetchBodyData(EntityUid target,
         out Dictionary<NetEntity, List<WoundableTraumaData>> traumas,
-        out Dictionary<NetEntity, FixedPoint2> pain,
         out HashSet<ProtoId<OrganCategoryPrototype>> bleeding)
     {
         traumas = new();
-        pain = new();
         bleeding = new();
 
         // TODO SHITMED: all of this shit should just be networked
@@ -98,7 +95,6 @@ public sealed partial class HealthAnalyzerSystem
         {
             var ent = GetNetEntity(part);
             traumas.Add(ent, FetchTraumaData(part, part.Comp));
-            pain.Add(ent, FetchPainData(part));
             if (part.Comp.Bleeds > 0 && _body.GetCategory(part.Owner) is {} category)
                 bleeding.Add(category);
         }
@@ -140,9 +136,6 @@ public sealed partial class HealthAnalyzerSystem
 
         return traumasList;
     }
-
-    private FixedPoint2 FetchPainData(EntityUid target)
-        => CompOrNull<NerveComponent>(target)?.PainFeels ?? FixedPoint2.Zero;
 
     private Dictionary<NetEntity, OrganTraumaData> FetchOrganData(EntityUid target)
     {

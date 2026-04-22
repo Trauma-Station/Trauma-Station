@@ -3,11 +3,11 @@
 using Content.Goobstation.Common.JoinQueue;
 using Content.Goobstation.Common.ServerCurrency;
 using Content.Goobstation.Server.JoinQueue;
-using Content.Goobstation.Server.MisandryBox.JumpScare;
+using Content.Goobstation.Server.JumpScare;
 using Content.Goobstation.Server.Polls;
 using Content.Goobstation.Server.Redial;
 using Content.Goobstation.Server.ServerCurrency;
-using Content.Goobstation.Shared.MisandryBox.JumpScare;
+using Content.Goobstation.Shared.JumpScare;
 
 namespace Content.Goobstation.Server.IoC;
 

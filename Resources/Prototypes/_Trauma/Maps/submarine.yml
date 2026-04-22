@@ -46,7 +46,6 @@
           SecurityOfficer: [ 4, 8 ]
           SecurityCadet: [ 1, 4 ]
           Warden: [ 1, 1 ]
-          Brigmedic: [ 1, 1 ]
           # Science
           Chaplain: [ 1, 1 ]
           ResearchAssistant: [ 1, 2 ]
