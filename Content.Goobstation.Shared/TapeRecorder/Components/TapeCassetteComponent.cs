@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.Language;
 using Content.Shared.Whitelist;
 
 namespace Content.Goobstation.Shared.TapeRecorder;
@@ -50,4 +51,10 @@ public sealed partial class TapeCassetteComponent : Component
     /// </summary>
     [DataField(required: true)]
     public EntityWhitelist RepairWhitelist = new();
+
+    /// <summary>
+    /// Default language to use when it's null in a message.
+    /// </summary>
+    [DataField]
+    public ProtoId<LanguagePrototype> DefaultLanguage = "TauCetiBasic";
 }
