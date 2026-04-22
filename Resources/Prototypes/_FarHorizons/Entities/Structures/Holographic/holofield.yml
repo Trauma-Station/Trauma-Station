@@ -15,6 +15,7 @@
         layer:
         - WallLayer
   - type: InteractionOutline
+  - type: Anchorable
   - type: SyncSprite
   - type: Sprite
     sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_field_generator.rsi
