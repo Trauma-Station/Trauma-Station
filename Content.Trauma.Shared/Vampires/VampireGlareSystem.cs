@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Shared.Charges.Systems;
 using Content.Shared.EntityEffects;
+using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
-using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Vampires;
 
@@ -21,6 +23,7 @@ public sealed class VampireGlareSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private EntityQuery<StunnedComponent> _stunnedQuery = default!;
 
     private HashSet<Entity<StatusEffectsComponent>> _statusEffects = new();
@@ -34,9 +37,17 @@ public sealed class VampireGlareSystem : EntitySystem
 
     private void OnGlare(VampireGlareEvent args)
     {
-        // TODO: Check if we are blindfolded
-
         var performer = args.Performer;
+
+        // Check if we are blindfolded
+        var ev = new CanSeeAttemptEvent();
+        RaiseLocalEvent(performer, ev);
+        if (ev.Blind)
+        {
+            _popup.PopupClient("You can't use glare while blinded!", performer, PopupType.LargeCaution);
+            return;
+        }
+
         var xform = Transform(performer);
         var mapCoords = _transform.GetMapCoordinates(performer);
         var isStunned = _stunnedQuery.HasComponent(performer);
@@ -106,12 +117,12 @@ public sealed class VampireGlareSystem : EntitySystem
 }
 
 /// <summary>
+/// Deviation just means the amount of which a measurement is different from another amount.
+///
 /// In short;
 /// - None means our target is ahead of us.
 /// - Partial means our target is on our sides.
 /// - Full means our target is behind us.
-///
-/// Deviation just means the amount of which a measurement is different from another amount.
 /// </summary>
 public enum Deviation : byte
 {

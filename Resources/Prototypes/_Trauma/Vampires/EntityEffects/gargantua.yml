@@ -1,0 +1,6 @@
+- type: entityEffect
+  id: GargantuaStomp # TODO: Look at times in paradise + make shader for stomp + play cool ass sound + do camera kick
+  effects:
+  - !type:ModifyKnockdown
+    time: 6
+  - !type:ThrowRandomly # TODO: Make throw opposite

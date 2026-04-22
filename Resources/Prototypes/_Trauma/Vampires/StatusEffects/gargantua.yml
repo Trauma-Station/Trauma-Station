@@ -1,0 +1,8 @@
+- type: entity
+  parent: StatusEffectSpeed
+  id: StatusEffectBloodRush
+  name: blood rush
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 2.0
+    walkSpeedModifier: 2.0

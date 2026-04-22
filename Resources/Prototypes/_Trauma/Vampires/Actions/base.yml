@@ -50,7 +50,7 @@
   name: Glare
   components:
   - type: Action
-    # useDelay: 20
+    useDelay: 2
     checkCanInteract: false
     icon:
       sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
@@ -58,6 +58,8 @@
     itemIconStyle: BigAction
   - type: LimitedCharges
     maxCharges: 2
+  - type: AutoRecharge
+    rechargeDuration: 30
   - type: InstantAction
     event: !type:VampireGlareEvent
       frontEffects:
