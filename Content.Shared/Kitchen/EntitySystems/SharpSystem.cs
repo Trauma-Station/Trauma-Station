@@ -1,5 +1,7 @@
 // <Trauma>
 using Content.Trauma.Common.Kitchen;
+using Content.Shared.Random.Helpers;
+using Robust.Shared.Timing;
 // </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -17,23 +19,25 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
-using Robust.Server.Containers;
-using Robust.Server.GameObjects;
+using Robust.Shared.Containers;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
-namespace Content.Server.Kitchen.EntitySystems;
+namespace Content.Shared.Kitchen.EntitySystems; // Trauma - moved to shared and using shared systems now
 
 public sealed class SharpSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly IGameTiming _timing = default!;
+    // </Trauma>
     [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedDestructibleSystem _destructibleSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly ContainerSystem _containerSystem = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    //[Dependency] private readonly IRobustRandom _robustRandom = default!; // Trauma - no longer used
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
@@ -68,12 +72,13 @@ public sealed class SharpSystem : EntitySystem
 
         if (butcher.Type != ButcheringType.Knife && target != user)
         {
-            _popupSystem.PopupEntity(Loc.GetString("butcherable-different-tool", ("target", target)), knife, user);
+            _popupSystem.PopupClient(Loc.GetString("butcherable-different-tool", ("target", target)), knife, user); // Trauma - use PopupClient
             return false;
         }
 
         if (!sharp.Butchering.Add(target))
             return false;
+        Dirty(knife, sharp); // Trauma
 
         // if the user isn't the entity with the sharp component,
         // they will need to be holding something with their hands, so we set needHand to true
@@ -96,6 +101,7 @@ public sealed class SharpSystem : EntitySystem
         if (args.Handled || !TryComp<ButcherableComponent>(args.Args.Target, out var butcher))
             return;
 
+        Dirty(uid, component); // Trauma - for Butchering below
         if (args.Cancelled)
         {
             component.Butchering.Remove(args.Args.Target.Value);
@@ -110,12 +116,16 @@ public sealed class SharpSystem : EntitySystem
         RaiseLocalEvent(target, ref attemptEv);
         if (attemptEv.CancelPopup is {} loc)
         {
-            _popupSystem.PopupEntity(Loc.GetString(loc, ("victim", Identity.Entity(target, EntityManager))), target, args.User);
+            _popupSystem.PopupClient(Loc.GetString(loc, ("victim", Identity.Entity(target, EntityManager))), target, args.User);
             return;
         }
-        // </Trauma>
 
-        var spawnEntities = EntitySpawnCollection.GetSpawns(butcher.SpawnedEntities, _robustRandom);
+        // use predicted random
+        var rand = (IRobustRandom) new RobustRandom();
+        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
+        rand.SetSeed(seed);
+        var spawnEntities = EntitySpawnCollection.GetSpawns(butcher.SpawnedEntities, rand);
+        // </Trauma>
         var coords = _transform.GetMapCoordinates(args.Args.Target.Value);
         EntityUid popupEnt = default!;
 
@@ -124,7 +134,7 @@ public sealed class SharpSystem : EntitySystem
             foreach (var proto in spawnEntities)
             {
                 // distribute the spawned items randomly in a small radius around the origin
-                popupEnt = SpawnInContainerOrDrop(proto, container.Owner, container.ID);
+                popupEnt = PredictedSpawnInContainerOrDrop(proto, container.Owner, container.ID); // Trauma - predicted
             }
         }
         else
@@ -132,7 +142,7 @@ public sealed class SharpSystem : EntitySystem
             foreach (var proto in spawnEntities)
             {
                 // distribute the spawned items randomly in a small radius around the origin
-                popupEnt = Spawn(proto, coords.Offset(_robustRandom.NextVector2(0.25f)));
+                popupEnt = EntityManager.PredictedSpawn(proto, coords.Offset(rand.NextVector2(0.25f))); // Trauma - predicted
             }
         }
 
@@ -142,7 +152,7 @@ public sealed class SharpSystem : EntitySystem
             ? PopupType.LargeCaution
             : PopupType.Small;
 
-        _popupSystem.PopupEntity(Loc.GetString("butcherable-knife-butchered-success", ("target", args.Args.Target.Value), ("knife", Identity.Entity(uid, EntityManager))),
+        _popupSystem.PopupClient(Loc.GetString("butcherable-knife-butchered-success", ("target", args.Args.Target.Value), ("knife", Identity.Entity(uid, EntityManager))), // Trauma - use PopupClient
             popupEnt,
             args.Args.User,
             popupType);
