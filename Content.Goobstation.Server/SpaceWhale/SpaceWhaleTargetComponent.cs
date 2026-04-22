@@ -10,6 +10,9 @@ namespace Content.Goobstation.Server.SpaceWhale;
 [RegisterComponent]
 public sealed partial class SpaceWhaleTargetComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite)]
-    public Entity<MobCallerComponent>? MobCaller;
+    [DataField]
+    public EntityUid? MobCaller;
+
+    [DataField]
+    public EntProtoId<MobCallerComponent> MobCallerProto = "SpaceLeviathanMobCaller";
 }

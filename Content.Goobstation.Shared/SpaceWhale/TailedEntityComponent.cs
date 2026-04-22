@@ -27,18 +27,11 @@ public sealed partial class TailedEntityComponent : Component
     public float Spacing = 1f;
 
     /// <summary>
-    /// Client-only visual smoothing factor. Larger values make tails visually follow faster (interpolate per-frame).
-    /// This is purely visual and does not change server authoritative positions.
-    /// </summary>
-    [DataField]
-    public float Smoothing = 10f;
-
-    /// <summary>
     /// List of tail segments
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public List<NetEntity> TailSegments = new();
+    [DataField, AutoNetworkedField]
+    public List<EntityUid> TailSegments = new();
 
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public Vector2 LastPos = Vector2.Zero;
 }

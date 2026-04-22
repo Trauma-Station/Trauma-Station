@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Goobstation.Common.CCVar;
 using Content.Server.Popups;
 using Content.Server.Station.Components;
 using Content.Goobstation.Server.MobCaller;
+using Content.Shared.Coordinates;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -15,9 +17,13 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Spawners;
 using Content.Shared.Movement.Systems;
+using Robust.Shared.Map;
 
 namespace Content.Goobstation.Server.SpaceWhale.StationProximity;
 
+/// <summary>
+/// Hardcoded to space whale spawn
+/// </summary>
 public sealed class StationProximitySystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -27,19 +33,23 @@ public sealed class StationProximitySystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _moveSpeed = default!;
 
-    private const float CheckInterval = 60;
+    private bool _spaceWhaleEnabled;
+    private float _spaceWhaleSpawnDistance = 2000f;
+
+    private static readonly TimeSpan CheckDelay = TimeSpan.FromSeconds(60);
     private TimeSpan _nextCheck = TimeSpan.Zero;
 
-    private EntityUid? _mobCaller;
-    private bool _spawned = false;
+    private readonly Dictionary<MapId, HashSet<Entity<MapGridComponent, TransformComponent>>> _stations = new();
 
     public override void Initialize()
     {
         base.Initialize();
-        _nextCheck = _timing.CurTime + TimeSpan.FromSeconds(CheckInterval);
 
         SubscribeLocalEvent<SpaceWhaleTargetComponent, MobStateChangedEvent>(OnTargetDeath);
         SubscribeLocalEvent<SpaceWhaleTargetComponent, ComponentShutdown>(OnTargetShutdown);
+
+        Subs.CVar(_cfg, GoobCVars.SpaceWhaleSpawn, x => _spaceWhaleEnabled = x, true);
+        Subs.CVar(_cfg, GoobCVars.SpaceWhaleSpawnDistance, x => _spaceWhaleSpawnDistance = x, true);
     }
 
     private void OnTargetDeath(Entity<SpaceWhaleTargetComponent> ent, ref MobStateChangedEvent args)
@@ -71,145 +81,102 @@ public sealed class StationProximitySystem : EntitySystem
         }
 
         QueueDel(ent.Comp.MobCaller);
-        _spawned = false;
+        ent.Comp.MobCaller = null;
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<SpaceWhaleTargetComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (!comp.MobCaller.HasValue)
-            {
-                RemCompDeferred(uid, comp);
-                continue;
-            }
-
-            var caller = comp.MobCaller.Value.Comp;
-            if (caller.SpawnedEntities.Count > 0)
-            {
-                _spawned = true;
-                break;
-            }
-        }
-
-        if (_timing.CurTime < _nextCheck)
+        if (_timing.CurTime > _nextCheck)
             return;
 
-        _nextCheck = _timing.CurTime + TimeSpan.FromSeconds(CheckInterval);
+        _nextCheck = _timing.CurTime + CheckDelay;
         CheckStationProximity();
     }
 
     private void CheckStationProximity()
     {
-        if (!_cfg.GetCVar(GoobCVars.SpaceWhaleSpawn))
+        if (!_spaceWhaleEnabled)
             return;
 
-        var stationQuery = EntityQueryEnumerator<BecomesStationComponent, MapGridComponent>();
-        var stations = new Dictionary<EntityUid, (MapGridComponent Grid, TransformComponent Xform)>();
+        var stationQuery = EntityQueryEnumerator<BecomesStationComponent, MapGridComponent, TransformComponent>();
+        _stations.Clear();
 
-        while (stationQuery.MoveNext(out var uid, out _, out var grid))
+        while (stationQuery.MoveNext(out var uid, out _, out var grid, out var xform))
         {
-            var xform = Transform(uid);
-            stations.Add(uid, (grid, xform));
+            if (_stations.TryGetValue(xform.MapID, out var stations))
+                stations.Add((uid, grid, xform));
+            else
+                _stations[xform.MapID] = [(uid, grid, xform)];
         }
 
-        if (stations.Count == 0)
+        if (_stations.Count == 0)
             return;
 
         var humanoidQuery = EntityQueryEnumerator<HumanoidProfileComponent, MobStateComponent, TransformComponent>();
-        while (humanoidQuery.MoveNext(out var uid, out _, out var mobState, out var humanoidXform))
+        while (humanoidQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
         {
             if (mobState.CurrentState != MobState.Alive)
                 continue;
 
-            var sameMap = false;
-            foreach (var (_, (_, stationXform)) in stations)
-            {
-                if (stationXform.MapUid != humanoidXform.MapUid)
-                    continue;
-
-                sameMap = true;
-                break;
-            }
-
-            if (!sameMap)
-                continue;
-
-            CheckHumanoidProximity(uid, stations, humanoidXform);
+            CheckHumanoidProximity((uid, xform));
         }
     }
 
-    private void CheckHumanoidProximity(EntityUid humanoid,
-        Dictionary<EntityUid, (MapGridComponent Grid, TransformComponent Xform)> stations,
-        TransformComponent humanoidTransform)
+    private void CheckHumanoidProximity(Entity<TransformComponent> ent)
     {
-        if (humanoidTransform.GridUid.HasValue && stations.TryGetValue(humanoidTransform.GridUid.Value, out _))
+        if (!_stations.TryGetValue(ent.Comp.MapID, out var stations))
+            return;
+
+        if (ent.Comp.GridUid is { } gridUid && stations.Any(x => x.Owner == gridUid))
         {
-            RemComp<SpaceWhaleTargetComponent>(humanoid);
+            RemCompDeferred<SpaceWhaleTargetComponent>(ent);
             return;
         }
 
-        var humanoidWorldPos = _transform.GetWorldPosition(humanoidTransform);
+        var humanoidWorldPos = _transform.GetWorldPosition(ent.Comp);
         var closestDistance = float.MaxValue;
 
-        foreach (var (stationUid, (grid, stationXform)) in stations)
+        foreach (var (_, grid, xform) in stations)
         {
-            if (stationXform.MapUid != humanoidTransform.MapUid)
-                continue;
-
-            var stationWorldPos = _transform.GetWorldPosition(stationXform);
+            var stationWorldPos = _transform.GetWorldPosition(xform);
             var distance = (humanoidWorldPos - stationWorldPos).Length();
 
             if (grid.LocalAABB.Size.Length() > 0)
             {
-                var gridRadius = grid.LocalAABB.Size.Length() / 2f; // it needs to be halved to get correct mesurements
+                // it needs to be halved to get correct measurements
+                var gridRadius = grid.LocalAABB.Size.Length() / 2f;
                 distance = Math.Max(0, distance - gridRadius);
             }
 
             closestDistance = Math.Min(closestDistance, distance);
         }
 
-        if (closestDistance <= _cfg.GetCVar(GoobCVars.SpaceWhaleSpawnDistance))
-            RemCompDeferred<SpaceWhaleTargetComponent>(humanoid);
+        if (closestDistance <= _spaceWhaleSpawnDistance)
+            RemCompDeferred<SpaceWhaleTargetComponent>(ent);
         else
-            HandleFarFromStation(humanoid);
+            HandleFarFromStation(ent);
     }
 
-    private void HandleFarFromStation(EntityUid entity) // basically handles space whale spawnings
+    private void HandleFarFromStation(EntityUid ent)
     {
-        if (_spawned)
+        var targetComp = EnsureComp<SpaceWhaleTargetComponent>(ent);
+
+        if (Exists(targetComp.MobCaller))
             return;
 
         _popup.PopupEntity(
             Loc.GetString("station-proximity-far-from-station"),
-            entity,
-            entity,
+            ent,
+            ent,
             PopupType.LargeCaution);
 
         _audio.PlayEntity(new SoundPathSpecifier("/Audio/_Goobstation/Ambience/SpaceWhale/leviathan-appear.ogg"),
-            entity,
-            entity,
+            ent,
+            ent,
             AudioParams.Default.WithVolume(1f));
 
-        // Spawn a dummy entity at the player's location and lock it onto the player
-        _mobCaller = Spawn(null, Transform(entity).Coordinates);
-        _transform.SetParent(_mobCaller.Value, entity);
-        var mobCaller = new MobCallerComponent()
-        {
-            SpawnProto = "ADTSpaceLeviathan",
-            MaxAlive = 1,
-            NeedAnchored = false,
-            NeedPower = false,
-            MinDistance = 100f,
-            SpawnSpacing = TimeSpan.FromSeconds(30),
-        };
-
-        AddComp(_mobCaller.Value, mobCaller);
-
-        var targetComp = EnsureComp<SpaceWhaleTargetComponent>(entity);// track the dummy on the player
-        targetComp.MobCaller = (_mobCaller.Value, mobCaller);
+        targetComp.MobCaller = SpawnAttachedTo(targetComp.MobCallerProto, ent.ToCoordinates());
     }
 }

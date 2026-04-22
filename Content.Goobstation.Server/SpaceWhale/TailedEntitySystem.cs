@@ -3,13 +3,10 @@
 using Content.Goobstation.Shared.SpaceWhale;
 using Robust.Shared.Map;
 
-namespace Content.Goobstation.Server.SpaceWhale; // predictions? how bout you predict my ass, but seriously this is THE problem with ts cuz i have no fucking idea how to predict it
-// edit ok nvm it looks sorta fine with mobs but please do not put this on something that is predicted otherwise it will look like shit
+namespace Content.Goobstation.Server.SpaceWhale;
 
 public sealed class TailedEntitySystem : SharedTailedEntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -26,9 +23,10 @@ public sealed class TailedEntitySystem : SharedTailedEntitySystem
     private void OnComponentShutdown(Entity<TailedEntityComponent> ent, ref ComponentShutdown args)
     {
         foreach (var segment in ent.Comp.TailSegments)
-            QueueDel(GetEntity(segment));
-
-        ent.Comp.TailSegments.Clear();
+        {
+            if (!TerminatingOrDeleted(segment))
+                QueueDel(segment);
+        }
     }
 
     private void InitializeTailSegments(Entity<TailedEntityComponent> ent, TransformComponent? xform = null)
@@ -40,8 +38,7 @@ public sealed class TailedEntitySystem : SharedTailedEntitySystem
         if (mapUid == null)
             return;
 
-        var headPos = _transformSystem.GetWorldPosition(xform);
-        var headRot = _transformSystem.GetWorldRotation(xform);
+        var (headPos, headRot) = TransformSystem.GetWorldPositionRotation(xform);
 
         for (var i = 0; i < ent.Comp.Amount; i++)
         {
@@ -49,20 +46,9 @@ public sealed class TailedEntitySystem : SharedTailedEntitySystem
             var spawnPos = headPos - offset;
 
             var segment = Spawn(ent.Comp.Prototype, new EntityCoordinates(mapUid.Value, spawnPos));
-            ent.Comp.TailSegments.Add(GetNetEntity(segment));
+            ent.Comp.TailSegments.Add(segment);
         }
 
         Dirty(ent);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<TailedEntityComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var xform))
-        {
-            UpdateTailPositions((uid, comp, xform), frameTime);
-        }
     }
 }
