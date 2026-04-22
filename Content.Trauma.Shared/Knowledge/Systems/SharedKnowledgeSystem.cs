@@ -37,6 +37,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private readonly EntityQuery<AwakeMobComponent> _awakeQuery = default!;
     [Dependency] private readonly EntityQuery<SkillComponent> _skillQuery = default!;
     [Dependency] private readonly EntityQuery<AttributeComponent> _attributeQuery = default!;
+    [Dependency] private readonly EntityQuery<ProficiencyComponent> _proficiencyQuery = default!;
+    [Dependency] private readonly EntityQuery<TalentComponent> _talentQuery = default!;
     [Dependency] private readonly EntityQuery<KnowledgeContainerComponent> _containerQuery = default!;
     [Dependency] private readonly EntityQuery<KnowledgeHolderComponent> _holderQuery = default!;
 
@@ -269,10 +271,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         foreach (var knowledgeEnt in found)
         {
-            _container.Insert(knowledgeEnt.Owner, container);
+            _container.Insert(knowledgeEnt, container);
             var protoId = Prototype(knowledgeEnt)?.ID;
             if (protoId is { } id)
-                mobContainer.Comp.KnowledgeDict[id] = knowledgeEnt.Owner;
+                mobContainer.Comp.KnowledgeDict[id] = knowledgeEnt;
         }
         ClearKnowledge(ent, false);
     }
@@ -441,6 +443,20 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             }
             return attribute.Owner;
         }
+        else if (GetProficiency(ent, id) is { } proficiency)
+        {
+            return proficiency.Owner;
+        }
+
+        else if (GetTalent(ent, id) is { } talent)
+        {
+            if (talent.Comp.Level < level)
+            {
+                talent.Comp.Level = level;
+                Dirty(talent, talent.Comp);
+            }
+            return talent.Owner;
+        }
         // Checkslop
 
         PredictedTrySpawnInContainer(id, ent.Owner, KnowledgeContainerComponent.ContainerId, out var spawned);
@@ -460,6 +476,15 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             attribute.Inherent = level;
             Dirty(unit, attribute);
+        }
+        else if (_proficiencyQuery.TryComp(unit, out var proficiency))
+        {
+
+        }
+        else if (_talentQuery.TryComp(unit, out var talent))
+        {
+            talent.Level = level;
+            Dirty(unit, talent);
         }
 
         ent.Comp.KnowledgeDict[id] = unit;
@@ -584,6 +609,38 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             : null;
 
     /// <summary>
+    /// Gets a proficiency unit based on its entity prototype ID.
+    /// </summary>
+    /// <returns>
+    /// Null if the target is not a knowledge container, or if an attribute unit wasn't found.
+    /// </returns>
+    public override Entity<ProficiencyComponent>? GetProficiency(EntityUid target, [ForbidLiteral] EntProtoId id)
+        => GetContainer(target) is { } ent
+            ? GetProficiency(ent, id)
+            : null;
+
+    public Entity<ProficiencyComponent>? GetProficiency(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id)
+        => ent.Comp.KnowledgeDict.TryGetValue(id, out var unit) && _proficiencyQuery.TryComp(unit, out var comp)
+            ? (unit, comp)
+            : null;
+
+    /// <summary>
+    /// Gets a proficiency unit based on its entity prototype ID.
+    /// </summary>
+    /// <returns>
+    /// Null if the target is not a knowledge container, or if an attribute unit wasn't found.
+    /// </returns>
+    public override Entity<TalentComponent>? GetTalent(EntityUid target, [ForbidLiteral] EntProtoId id)
+        => GetContainer(target) is { } ent
+            ? GetTalent(ent, id)
+            : null;
+
+    public Entity<TalentComponent>? GetTalent(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id)
+        => ent.Comp.KnowledgeDict.TryGetValue(id, out var unit) && _talentQuery.TryComp(unit, out var comp)
+            ? (unit, comp)
+            : null;
+
+    /// <summary>
     /// Returns all skill units inside the container component.
     /// </summary>
     public List<Entity<SkillComponent>>? TryGetAllSkillUnits(EntityUid target)
@@ -613,6 +670,42 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         foreach (var unit in ent.Comp.KnowledgeDict.Values)
         {
             if (_attributeQuery.TryComp(unit, out var comp))
+                found.Add((unit, comp));
+        }
+
+        return found;
+    }
+
+    /// <summary>
+    /// Returns all proficiency units inside the container component.
+    /// </summary>
+    public List<Entity<ProficiencyComponent>>? TryGetAllProficiencyUnits(EntityUid target)
+    {
+        if (GetContainer(target) is not { } ent)
+            return null;
+
+        var found = new List<Entity<ProficiencyComponent>>();
+        foreach (var unit in ent.Comp.KnowledgeDict.Values)
+        {
+            if (_proficiencyQuery.TryComp(unit, out var comp))
+                found.Add((unit, comp));
+        }
+
+        return found;
+    }
+
+    /// <summary>
+    /// Returns all talent units inside the container component.
+    /// </summary>
+    public List<Entity<TalentComponent>>? TryGetAllTalentUnits(EntityUid target)
+    {
+        if (GetContainer(target) is not { } ent)
+            return null;
+
+        var found = new List<Entity<TalentComponent>>();
+        foreach (var unit in ent.Comp.KnowledgeDict.Values)
+        {
+            if (_talentQuery.TryComp(unit, out var comp))
                 found.Add((unit, comp));
         }
 

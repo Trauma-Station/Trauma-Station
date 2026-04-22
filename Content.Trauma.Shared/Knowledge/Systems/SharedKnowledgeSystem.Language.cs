@@ -1,8 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
+using System.Text.RegularExpressions;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Content.Shared.Chat;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Popups;
+using Content.Shared.Speech;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
@@ -16,18 +25,18 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    //[Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
-    //[Dependency] private readonly SharedTransformSystem _transform = default!;
-
     [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
-    //private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die" };
-    //private HashSet<Entity<LanguageSpeakerComponent>> _hearers = new();
+    private readonly DamageSpecifier _curseDamage = new();
+    private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die", "220" };
 
     private void InitializeLanguage()
     {
+        _curseDamage.DamageDict[Blunt] = 10;
+
         SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
             after: [ typeof(InitialBodySystem) ]); // great engine
         SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);
@@ -40,7 +49,8 @@ public abstract partial class SharedKnowledgeSystem
             after: [ typeof(InitialBodySystem) ]);
 
         // Experience methods
-        SubscribeLocalEvent<LanguageSpeakerComponent, EntitySpokeEvent>(OnLanguageSpoke);
+        SubscribeLocalEvent<KnowledgeHolderComponent, EntitySpokeEvent>(OnLanguageSpoke);
+        SubscribeLocalEvent<KnowledgeHolderComponent, ListenEvent>(OnLanguageHeard);
     }
 
     private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
@@ -89,7 +99,7 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         var ev = new DetermineEntityLanguagesEvent();
-        if (GetKnowledgeWith<LanguageKnowledgeComponent>(brain) is { } known)
+        if (GetSkillWith<LanguageKnowledgeComponent>(brain) is { } known)
         {
             foreach (var language in known)
             {
@@ -209,6 +219,10 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (lang, speaks) in allLanguages)
         {
+            if (GetSkill(brain, LanguageUnit(lang)) is { } existing)
+                continue; // Don't do shit if you already know this
+
+            // Add if you don't know shit.
             if (EnsureKnowledge<SkillComponent>(brain, LanguageUnit(lang), 26) is not { } unit)
             {
                 Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
@@ -224,7 +238,7 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageSpoke(Entity<LanguageSpeakerComponent> ent, ref EntitySpokeEvent args)
+    public void OnLanguageSpoke(Entity<KnowledgeHolderComponent> ent, ref EntitySpokeEvent args)
     {
         if (GetContainer(ent.Owner) is not { } brain)
             return;
@@ -242,62 +256,44 @@ public abstract partial class SharedKnowledgeSystem
         if (now < comp.LastSpoken)
             return; // on cooldown for xp and curse effects
 
-        AddExperience(unit.AsNullable(), ent, (int) Math.Clamp((now - comp.LastSpoken).TotalSeconds, 0, 4));
+        AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn.
 
         comp.LastSpoken = now + TimeSpan.FromSeconds(5);
         Dirty(unit, comp);
+    }
 
-        /*var modifier = 0f;
-        DamageSpecifier damage = default!;
+    private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ListenEvent args)
+    {
+        if (args.Source == ent.Owner || GetActiveLanguage(args.Source) is not { } language || Prototype(language) is not { } proto)
+            return; // Same person, no need. Also, if no language proto, the code won't work.
 
-        var isCurse = GetMastery(unit.Comp) >= 5 && ContainsCursedWord(args.Message);
+        // Already Obfuscating.
 
-        // need to master it to curse people
-        if (isCurse)
-        {
-            // 0-1s, 0-20 damage
-            modifier = Math.Max(((float) unit.Comp.Level - 80f) / 20f, 0f);
-            damage = new DamageSpecifier();
-            damage.DamageDict.Add(Blunt, 20 * modifier);
-        }*/
+        if (!TryComp<SkillComponent>(language, out var speakerSkill))
+            return; // No skill, no curse.
 
+
+        // TODO: Delta, I need your help with this.
         // curse of 220
-        /* TODO: re-enable this once language learning isnt fucked and just makes you understand everything
-        // this also doesnt make you able to speak it
-        _hearers.Clear();
-        _lookup.GetEntitiesInRange<LanguageSpeakerComponent>(_transform.GetMoverCoordinates(ent), 7f, _hearers, LookupFlags.All);
-        foreach (var hearer in _hearers)
+        if (GetMastery(speakerSkill) >= 5 && ContainsCursedWord(args.Message))
         {
-            if (hearer.Owner == ent.Owner)
-                continue; // Don't curse yourself or double dip on XP
-
-            if (GetContainer(hearer) is { } hearerBrain)
-                AddExperience(hearerBrain, id, 1, 10);
-
-            // too op, needs a traitor item or something + a cooldown
-            if (!isCurse || !_language.CanUnderstand(hearer.Owner, args.Language))
-                continue;
-
-            _damageable.TryChangeDamage(hearer.Owner, damage, ignoreResistances: false, interruptsDoAfters: false,
+            _damageable.TryChangeDamage(ent.Owner, _curseDamage, ignoreResistances: false, interruptsDoAfters: false,
                 ignoreBlockers: true, targetPart: TargetBodyPart.Head, splitDamage: SplitDamageBehavior.SplitEnsureAll);
             // FIXME: this doesnt exist...
             //_status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
-
-            _popup.PopupEntity(Loc.GetString("language-curse-pain"), hearer, hearer, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("language-curse-pain"), ent, ent, PopupType.SmallCaution);
         }
-        */
     }
 
-    /*private bool ContainsCursedWord(string message)
+    public EntityUid? GetActiveLanguage(EntityUid target)
+        => GetContainer(target)?.Comp.ActiveLanguage;
+
+    private static readonly Regex CursedRegex = new(
+        @"\b(" + string.Join("|", CursedWords.Select(Regex.Escape)) + @")\b",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+    private bool ContainsCursedWord(string message)
     {
-        // Split message into individual words to avoid catching "it" in "shit"
-        // TODO: rewrite to be a regex fuck sake
-        var words = message.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        foreach (var word in words)
-        {
-            if (CursedWords.Contains(word))
-                return true;
-        }
-        return false;
-    }*/
+        return CursedRegex.IsMatch(message);
+    }
 }

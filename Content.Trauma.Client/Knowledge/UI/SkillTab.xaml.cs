@@ -7,6 +7,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
+using System.Linq;
 
 namespace Content.Trauma.Client.Knowledge.UI;
 
@@ -86,11 +87,11 @@ public sealed partial class SkillTab : Control
         }
 
         // Cleanup empty tabs.
-        children = SkillBox.Children;
-        foreach (Control? child in children)
+        var childrenCache = SkillBox.Children.ToArray();
+        foreach (Control? child in childrenCache)
         {
             if (child is Collapsible collapse && collapse.Body?.GetChild(0)?.ChildCount == 0)
-                RemoveChild(child);
+                SkillBox.RemoveChild(child);
         }
     }
 }

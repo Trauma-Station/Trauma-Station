@@ -21,6 +21,16 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
     public abstract Entity<AttributeComponent>? GetAttribute(EntityUid target, [ForbidLiteral] EntProtoId knowledgeUnit);
 
     /// <summary>
+    /// Gets a proficiency unit based on its entity prototype ID.
+    /// </summary>
+    public abstract Entity<ProficiencyComponent>? GetProficiency(EntityUid target, [ForbidLiteral] EntProtoId knowledgeUnit);
+
+    /// <summary>
+    /// Gets a talent unit based on its entity prototype ID.
+    /// </summary>
+    public abstract Entity<TalentComponent>? GetTalent(EntityUid target, [ForbidLiteral] EntProtoId knowledgeUnit);
+
+    /// <summary>
     /// Clears a knowledge from the target entity.
     /// </summary>
     public abstract void ClearKnowledge(EntityUid target, bool deleteAll);

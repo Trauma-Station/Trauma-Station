@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Security.Cryptography.X509Certificates;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;

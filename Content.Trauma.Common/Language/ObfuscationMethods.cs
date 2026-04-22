@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
+using System.Threading.Channels;
 using Content.Trauma.Common.Language.Systems;
 
 namespace Content.Trauma.Common.Language;
@@ -20,7 +21,7 @@ public abstract partial class ObfuscationMethod
     ///     Obfuscates the provided message and writes the result into the provided StringBuilder.
     ///     Implementations should use the context's pseudo-random number generator and provide stable obfuscations.
     /// </summary>
-    public abstract void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context);
+    public abstract void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context, float ratio = 1.0f);
 
     /// <summary>
     ///     Obfuscates the provided message. This method should only be used for debugging purposes.
@@ -29,7 +30,7 @@ public abstract partial class ObfuscationMethod
     public string Obfuscate(string message)
     {
         var builder = new StringBuilder();
-        Obfuscate(builder, message, IoCManager.Resolve<EntitySystemManager>().GetEntitySystem<CommonLanguageSystem>());
+        Obfuscate(builder, message, IoCManager.Resolve<EntitySystemManager>().GetEntitySystem<CommonLanguageSystem>(), 1.0f);
         return builder.ToString();
     }
 }
@@ -47,7 +48,7 @@ public partial class ReplacementObfuscation : ObfuscationMethod
     [DataField(required: true)]
     public List<string> Replacement = [];
 
-    public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context)
+    public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context, float ratio = 1.0f)
     {
         var idx = context.PseudoRandomNumber(message.GetHashCode(), 0, Replacement.Count - 1);
         builder.Append(Replacement[idx]);
@@ -70,7 +71,7 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
     [DataField]
     public int MaxSyllables = 4;
 
-    public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context)
+    public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context, float ratio = 1.0f)
     {
         const char eof = (char) 0; // Special character to mark the end of the message in the code below.
 
@@ -89,17 +90,24 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
             // If a word ends before this character, construct a new word and append it to the new message.
             if (isWordEnd)
             {
-                var wordLength = i - wordBeginIndex;
-                if (wordLength > 0)
-                {
-                    var newWordLength = context.PseudoRandomNumber(hashCode, MinSyllables, MaxSyllables);
+                var roll = context.PseudoRandomNumber(hashCode + 1337, 0, 1000);
 
-                    for (var j = 0; j < newWordLength; j++)
+                if (roll < (ratio * 1000))
+                {
+                    var wordLength = i - wordBeginIndex;
+                    if (wordLength > 0)
                     {
-                        var index = context.PseudoRandomNumber(hashCode + j, 0, Replacement.Count - 1);
-                        builder.Append(Replacement[index]);
+                        var newWordLength = context.PseudoRandomNumber(hashCode, MinSyllables, MaxSyllables);
+
+                        for (var j = 0; j < newWordLength; j++)
+                        {
+                            var index = context.PseudoRandomNumber(hashCode + j, 0, Replacement.Count - 1);
+                            builder.Append(Replacement[index]);
+                        }
                     }
                 }
+                else
+                    builder.Append(message.Substring(wordBeginIndex, i - wordBeginIndex));
 
                 hashCode = 0;
                 wordBeginIndex = i + 1;
@@ -146,7 +154,7 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
     [DataField]
     public float Proportion = 1f / 3;
 
-    public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context)
+    public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context, float ratio = 1.0f)
     {
         var sentenceBeginIndex = 0;
         var hashCode = 0;
@@ -163,14 +171,23 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
             var length = i - sentenceBeginIndex;
             if (length >= 0)
             {
-                var newLength = (int) Math.Clamp(Math.Pow(length, Proportion) - 1, MinPhrases, MaxPhrases);
+                var roll = context.PseudoRandomNumber(hashCode + 1337, 0, 1000);
 
-                for (var j = 0; j < newLength; j++)
+                if (roll < (ratio * 1000))
                 {
-                    var phraseIdx = context.PseudoRandomNumber(hashCode + j, 0, Replacement.Count - 1);
-                    var phrase = Replacement[phraseIdx];
-                    builder.Append(phrase);
-                    builder.Append(Separator);
+                    var newLength = (int) Math.Clamp(Math.Pow(length, Proportion) - 1, MinPhrases, MaxPhrases);
+
+                    for (var j = 0; j < newLength; j++)
+                    {
+                        var phraseIdx = context.PseudoRandomNumber(hashCode + j, 0, Replacement.Count - 1);
+                        var phrase = Replacement[phraseIdx];
+                        builder.Append(phrase);
+                        builder.Append(Separator);
+                    }
+                }
+                else
+                {
+                    builder.Append(message.Substring(sentenceBeginIndex, length));
                 }
             }
             sentenceBeginIndex = i + 1;

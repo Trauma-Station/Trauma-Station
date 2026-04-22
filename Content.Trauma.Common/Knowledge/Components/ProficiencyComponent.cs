@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Trauma.Shared.Knowledge.Proficiency.Components;
+namespace Content.Trauma.Common.Knowledge.Components;
 
 /// <summary>
 /// Stores the proficiency. You either got it, or you don't.

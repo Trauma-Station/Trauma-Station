@@ -141,8 +141,11 @@ public sealed partial class MiscAttributeSystem : EntitySystem
             if (!_hands.TryGetHeldItem(ent.Owner, hand, out var item))
                 continue;
 
-            // Check proficiency. Can't use weapon if you don't have the proficiency.
+            // Check proficiency. Can't use a fighting style if you don't have the proficiency.
 
+
+            /*
+            
             if (Prototype(item.Value) is { } proto && brain.Comp.WeaponSpecializations.TryGetValue(proto, out var spec))
             {
                 fighting.AttackMod += spec.Attack;
@@ -150,6 +153,8 @@ public sealed partial class MiscAttributeSystem : EntitySystem
                 fighting.DefenseMod += spec.Defense;
                 fighting.SpeedMod += spec.Speed;
             }
+
+            */
 
             if (HasComp<MeleeWeaponComponent>(item))
                 weaponCount++;
