@@ -206,6 +206,9 @@
   id: SteelScraps
 
 - type: Tag
+  id: SteelWheat
+
+- type: Tag
   id: TechfabMachineBoard
 
 - type: Tag

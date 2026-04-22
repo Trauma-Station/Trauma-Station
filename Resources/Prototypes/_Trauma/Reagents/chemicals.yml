@@ -108,8 +108,6 @@
         - generic-reagent-effect-burning-insides
         - generic-reagent-effect-tearing-up
       - !type:Jitter
-      - !type:Vomit
-        probability: 0.2
       - !type:Emote
         emote: Scream
         probability: 0.1
