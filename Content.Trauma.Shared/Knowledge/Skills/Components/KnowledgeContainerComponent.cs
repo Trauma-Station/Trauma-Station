@@ -44,4 +44,15 @@ public sealed partial class KnowledgeContainerComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? ActiveMartialArt;
+
+    [DataField]
+    public Dictionary<EntProtoId, SpecializationStats> WeaponSpecializations = new();
+}
+
+[DataDefinition]
+public partial struct SpecializationStats
+{
+    [DataField] public int Attack;
+    [DataField] public int Defense;
+    [DataField] public int Speed;
 }

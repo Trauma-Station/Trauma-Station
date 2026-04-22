@@ -3,33 +3,17 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Specialization.Components;
 
-/// <summary>
-/// Stores specialization shit
-/// </summary>
+[DataDefinition]
+public partial struct SpecializationStats
+{
+    [DataField] public int Attack;
+    [DataField] public int Defense;
+    [DataField] public int Speed;
+}
+
 [RegisterComponent, NetworkedComponent]
 public sealed partial class SpecializationComponent : Component
 {
-    /// <summary>
-    /// Entity type specialized in.
-    /// </summary>
     [DataField]
-    public EntProtoId Target;
-
-    /// <summary>
-    /// Attack Bonus
-    /// </summary>
-    [DataField]
-    public int Attack;
-
-    /// <summary>
-    /// Defense Bonus
-    /// </summary>
-    [DataField]
-    public int Defense;
-
-    /// <summary>
-    /// Speed Bonus
-    /// </summary>
-    [DataField]
-    public int Speed;
+    public Dictionary<EntProtoId, SpecializationStats> WeaponSpecializations = new();
 }
