@@ -58,7 +58,7 @@ public sealed class CodespeakSystem : EntitySystem
         foreach (var job in _proto.EnumeratePrototypes<JobPrototype>())
         {
             // no deathsquad or borg?
-            if (job.SetPreference && job.ApplyTraits)
+            if (!job.SetPreference || !job.ApplyTraits)
                 continue;
 
             _jobs.Add(job.LocalizedName.ToLower());
