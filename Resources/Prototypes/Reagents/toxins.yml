@@ -117,7 +117,7 @@
       effects:
       # <Trauma> - mold is a disease
       - !type:InfectDisease
-        probability: 0.05
+        probability: 0.1
         scaleProbability: true # more moles more disease
         conditions:
         - !type:MetabolizerTypeCondition
