@@ -142,6 +142,7 @@ public sealed class CodespeakSystem : EntitySystem
 
             builder.Append(words == 1 ? "." : ", ");
         }
+        builder.Append(" ");
     }
 
     /// <summary>
