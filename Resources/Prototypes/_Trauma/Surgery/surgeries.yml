@@ -1,6 +1,6 @@
 - type: surgery
   id: OpenIncision
-  tool: 
+  tool:
   - type: Scalpel
   surgeryEffects:
   - !type:AddComponents
@@ -14,7 +14,7 @@
 
 - type: surgery
   id: StopBloodFlow
-  tool: 
+  tool:
   - type: Hemostat
   surgeryEffects:
   - !type:RemoveComponents
@@ -40,7 +40,7 @@
 
 - type: surgery
   id: CloseIncision
-  tool: 
+  tool:
   - type: Cautery
   surgeryEffects:
   - !type:RemoveComponents

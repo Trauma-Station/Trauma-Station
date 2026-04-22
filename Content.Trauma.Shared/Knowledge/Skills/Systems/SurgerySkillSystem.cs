@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Shared.Surgery;
 using Content.Shared.DoAfter;
 using Content.Trauma.Common.Knowledge;
