@@ -133,7 +133,7 @@ namespace Content.Server.Spawners.EntitySystems
             var coords = xform.Coordinates;
             var ancestor = xform.GridUid ?? xform.MapUid;
             if (ent.Comp.Absolute && ancestor != null)
-                coords = _transform.GetRelativePosition(xform, ancestor.Value);
+                coords = new EntityCoordinates(ancestor.Value, _transform.GetRelativePosition(xform, ancestor.Value));
             // </Trauma>
             var offset = ent.Comp.Offset;
 
