@@ -5,6 +5,10 @@
   description: A specialized specimen designed to hit targets at a distance. Particularly dangerous in narrow corridors and confined spaces.
   abstract: true
   components:
+  - type: TailedEntity
+    amount: 65
+    spacing: 1
+    prototype: MobXenomorphTailSegmentBase
   - type: Sprite
     sprite: _White/Mobs/Aliens/Xenomorphs/sentinel.rsi
     layers:

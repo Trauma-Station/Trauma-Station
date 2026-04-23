@@ -29,6 +29,10 @@
   parent: BaseMobXenomorphDrone
   id: MobXenomorphDrone
   components:
+  - type: TailedEntity
+    amount: 30
+    spacing: 0.170
+    prototype: MobXenomorphTailSegmentBase
   - type: XenomorphEvolution
     evolutionActionId: ActionEvolutionPraetorian
     evolvesTo:
