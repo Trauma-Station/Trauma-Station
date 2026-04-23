@@ -18,3 +18,13 @@
     seedId: CocaPlant
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
+
+- type: entity
+  parent: SeedBase
+  id: CoconutSeeds
+  name: packet of coconut seeds
+  components:
+  - type: Seed
+    seedId: CoconutPlant
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/coconut.rsi

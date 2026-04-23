@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "created by asardonicsailor, seed sprite by MayasMischief, Dead/Stage sprites by Chaoticaa (GitHub) because I stole them from bananas, harvest sprite being an edit of that by MayasMischief",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "produce"
+    },
+    {
+      "name": "half"
+    },
+    {
+      "name": "cup"
+    },
+    {
+      "name": "seed"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "harvest"
+    },
+    {
+      "name": "stage-1"
+    },
+    {
+      "name": "stage-2"
+    },
+    {
+      "name": "stage-3"
+    },
+    {
+      "name": "stage-4"
+    },
+    {
+      "name": "stage-5"
+    },
+    {
+      "name": "stage-6"
+    }
+  ]
+}

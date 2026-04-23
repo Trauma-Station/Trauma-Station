@@ -96,3 +96,20 @@
     table:
       id: MobWailingHorse
       amount: 1, 1
+
+- type: entity
+  id: CoconutCrabSpawn
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 15
+    weight: 10
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table:
+      id: MobCoconutCrab
+      amount: 1, 4
