@@ -10,6 +10,14 @@ namespace Content.Trauma.Shared.Heretic.Components.Ghoul;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class LordOfTheNightComponent : Component
 {
+
+    /// <summary>
+    /// Set to true when flesh heretic mind gets added.
+    /// Used to apply FleshHereticMindComponent SustainedDamage to the worm
+    /// </summary>
+    [DataField]
+    public bool HereticInitialized;
+
     [DataField]
     public EntityWhitelist ArmWhitelist = new()
     {

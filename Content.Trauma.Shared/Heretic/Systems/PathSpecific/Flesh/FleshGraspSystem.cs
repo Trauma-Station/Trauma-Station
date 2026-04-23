@@ -49,50 +49,61 @@ public sealed class FleshGraspSystem : EntitySystem
 
     private void OnRecall(Entity<HereticRitualRuneComponent> ent, ref HereticGhoulRecallMessage args)
     {
-        if (!_heretic.TryGetHereticComponent(args.Actor, out var heretic, out var mind) ||
+        var user = args.Actor;
+
+        if (!_heretic.TryGetHereticComponent(user, out var heretic, out var mind) ||
             !HasComp<FleshHereticMindComponent>(mind))
             return;
 
         if (!TryGetEntity(args.Ghoul, out var ghoul) || !heretic.Minions.Contains(ghoul.Value))
         {
-            OpenUi(ent, (mind, heretic), args.Actor);
+            RefreshUi();
             return;
         }
 
         if (_touchSpell.FindTouchSpell(args.Actor, GraspWhitelist) is not { } touchSpell)
         {
-            OpenUi(ent, (mind, heretic), args.Actor);
+            RefreshUi();
             return;
         }
 
         if (!_delay.TryResetDelay(touchSpell, true))
         {
-            OpenUi(ent, (mind, heretic), args.Actor);
+            RefreshUi();
             return;
         }
 
         if (!_actions.TryGetActionById(mind, MansusGraspAction, out var action))
         {
-            OpenUi(ent, (mind, heretic), args.Actor);
+            RefreshUi();
             return;
         }
 
         _actions.SetIfBiggerCooldown(action.Value.AsNullable(), TimeSpan.FromSeconds(1.5));
 
-        if (_net.IsServer)
-        {
-            _ritual.RitualSuccess(ent, args.Actor, false);
-            _touchSpell.InvokeTouchSpell(touchSpell, args.Actor, TimeSpan.Zero, false);
-        }
-
         _pulling.StopAllPulls(ghoul.Value);
         _transform.SetMapCoordinates(ghoul.Value, _transform.GetMapCoordinates(ent));
 
-        OpenUi(ent, (mind, heretic), args.Actor);
+        if (_net.IsServer)
+        {
+            _ritual.RitualSuccess(ent, user, false);
+            _touchSpell.InvokeTouchSpell(touchSpell, user, TimeSpan.Zero, false);
+            RefreshUi();
+        }
+
+        return;
+
+        void RefreshUi()
+        {
+            OpenUi(ent, (mind, heretic), user, true);
+        }
     }
 
-    public void OpenUi(EntityUid rune, Entity<HereticComponent> heretic, EntityUid user)
+    public void OpenUi(EntityUid rune, Entity<HereticComponent> heretic, EntityUid user, bool refresh = false)
     {
+        if (refresh && _net.IsClient)
+            return;
+
         var coords = _transform.GetMapCoordinates(rune);
         var list = heretic.Comp.Minions
             .Where(x => Exists(x) && !Paused(x) && !_mimicQuery.HasComp(x) && _ghoulQuery.HasComp(x))

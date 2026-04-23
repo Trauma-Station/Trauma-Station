@@ -42,6 +42,7 @@ public sealed class LordOfTheNightSystem : EntitySystem
     [Dependency] private readonly SharedEntityEffectsSystem _effect = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
 
@@ -120,12 +121,13 @@ public sealed class LordOfTheNightSystem : EntitySystem
 
     private void OnMindAdded(Entity<LordOfTheNightComponent> ent, ref MindAddedMessage args)
     {
-        if (_dmg.GetTotalDamage(ent.Owner) > FixedPoint2.Zero)
+        if (ent.Comp.HereticInitialized)
             return;
 
         if (!TryComp(args.Mind, out FleshHereticMindComponent? fleshMind))
             return;
 
+        ent.Comp.HereticInitialized = true;
         _dmg.ChangeDamage(ent.Owner, fleshMind.WormSustainedDamage, true, false);
     }
 
@@ -173,7 +175,8 @@ public sealed class LordOfTheNightSystem : EntitySystem
 
         foreach (var hit in args.HitEntities)
         {
-            if (!SharedRandomExtensions.PredictedProb(_timing, ent.Comp.ArmDelimbChance, netEnt, GetNetEntity(hit)))
+            if (_mobState.IsAlive(hit) &&
+                !SharedRandomExtensions.PredictedProb(_timing, ent.Comp.ArmDelimbChance, netEnt, GetNetEntity(hit)))
                 continue;
 
             var arm = _body.GetOrgan(hit, ent.Comp.ArmLeft) ?? _body.GetOrgan(hit, ent.Comp.ArmRight);

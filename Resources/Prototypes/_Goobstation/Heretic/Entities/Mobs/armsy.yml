@@ -29,7 +29,8 @@
         layer:
         - Opaque
         - BulletImpassable
-        - Impassable
+        - LowImpassable
+        - MidImpassable
   - type: DamageOnCollide
     inverted: true
     damage:
@@ -165,6 +166,13 @@
   - type: Perishable
     molsPerSecondPerUnitMass: 0
     rotAfter: 99999
+  - type: MeleeDash
+    emoteOnDash: null
+    length: 8
+    dashSound:
+      path: /Audio/Animals/space_dragon_roar.ogg
+  - type: UseDelay
+    delay: 5
 
 - type: entity
   parent: MobHereticFleshAscendSegmentBase

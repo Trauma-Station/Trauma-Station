@@ -647,7 +647,6 @@
     totalHealth: 250
     changeHumanoidProfile: false
     deathBehavior: GibOrgans
-    canDeconvert: false
   - type: RandomMetadata
     nameSegments:
     - NamesFirst
