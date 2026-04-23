@@ -24,6 +24,7 @@
   - C7: Assault Any assault on a member of the crew.
   - C8: Grand Theft: Stealing any high value or importance item.
   - C9: Destruction of Property. This includes killing any of the station-wide "pets" without a good reason.
+  - C10: Grand Assault: Any assault on a member of security, the captain, or the corporate liaison, whether the intent is to murder or not.
 
   ## D-Class Criminal Violations:
 
@@ -31,10 +32,9 @@
 
   - C10 Murder: Purposefully killing someone with no intent to revive.
   - C11 Treason: Knowingly allying with or being a member of any organization or cult opposed to Nanotrasen.
-  - C12 Grand Assault: Any assault on a member of security, the captain, or the corporate liaison, whether the intent is to murder or not.
-  - C13 Prevention of Revival: Hiding bodies or using deception to prevent the revival of someone on the station who has not been given a do not revive order.
-  - C14 Breach of Custody: Removal of anyone who has been arrested from a secure area with the intent to free them, or preventing a security officer from making an arrest.
-  - C15 Embezzlement: Stealing funding from Nanotrasen for the purpose of self-enrichment.
+  - C11 Prevention of Revival: Hiding bodies or using deception to prevent the revival of someone on the station who has not been given a do not revive order.
+  - C12 Breach of Custody: Removal of anyone who has been arrested from a secure area with the intent to free them, or preventing a security officer from making an arrest.
+  - C13 Embezzlement: Stealing funding from Nanotrasen for the purpose of self-enrichment.
 
   # II. Taboo Violations (Law Code TX)
 
