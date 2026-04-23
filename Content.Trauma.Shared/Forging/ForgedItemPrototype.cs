@@ -109,4 +109,16 @@ public sealed partial class ForgedItemPrototype : IPrototype, IInheritingPrototy
     {
         { "MetalworkingKnowledge", 1 }
     };
+
+    /// <summary>
+    /// If non-null, only these metals can be used to forge this item.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<MetalPrototype>>? Whitelist;
+
+    /// <summary>
+    /// If non-null, these metals cannot be used to forge this item.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<MetalPrototype>>? Blacklist;
 }

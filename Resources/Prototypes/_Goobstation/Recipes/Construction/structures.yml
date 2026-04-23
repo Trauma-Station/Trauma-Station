@@ -8,7 +8,7 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
 
@@ -20,7 +20,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
 
 # Barricades
 

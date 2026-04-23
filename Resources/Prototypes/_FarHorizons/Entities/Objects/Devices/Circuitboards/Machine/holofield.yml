@@ -1,0 +1,47 @@
+- type: entity
+  id: HolographicFieldGeneratorCircuitboard
+  parent: BaseMachineCircuitboard
+  name: holographic field generator board
+  description: A machine printed circuit board for a holographic field generator.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: engineering
+    - type: MachineBoard
+      prototype: HolographicFieldGenerator
+      stackRequirements:
+        Glass: 5
+        Cable: 10
+
+- type: entity
+  id: HolographicBarrierGeneratorCircuitboard
+  parent: BaseMachineCircuitboard
+  name: holographic barrier generator board
+  description: A machine printed circuit board for a holographic barrier generator.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/module.rsi
+      state: security
+    - type: MachineBoard
+      prototype: HolographicBarrierGenerator
+      stackRequirements:
+        PlasmaGlass: 5
+        Cable: 10
+
+- type: entity
+  parent: BaseFlatpack
+  id: HolographicFieldGeneratorFlatpack
+  name: holographic field generator flatpack
+  description: A flatpack used for constructing a holographic field generator.
+  components:
+  - type: Flatpack
+    entity: HolographicFieldGenerator
+
+- type: entity
+  parent: BaseFlatpack
+  id: HolographicBarrierGeneratorFlatpack
+  name: holographic barrier generator flatpack
+  description: A flatpack used for constructing a holographic barrier generator.
+  components:
+  - type: Flatpack
+    entity: HolographicBarrierGenerator

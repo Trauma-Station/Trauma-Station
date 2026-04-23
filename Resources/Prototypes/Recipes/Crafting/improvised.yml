@@ -23,7 +23,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
   practical:
     TailoringKnowledge: 1
   useQuality: false
@@ -67,7 +67,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 3
+    FabricationKnowledge: 0
   practical:
     TailoringKnowledge: 1
   useQuality: false
@@ -129,8 +129,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  theory:
-    FabricationKnowledge: 1
+  theory: {}
   useQuality: false
   # </Trauma>
 

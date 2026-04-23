@@ -5,6 +5,6 @@
   category: construction-category-misc
   objectType: Item
   theory:
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2

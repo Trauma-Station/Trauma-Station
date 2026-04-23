@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Mobs;
@@ -44,6 +45,7 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
         SubscribeLocalEvent<SoftCritMobComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
         SubscribeLocalEvent<SoftCritMobComponent, StandUpAttemptEvent>(OnStandUpAttempt);
         SubscribeLocalEvent<SoftCritMobComponent, ModifyInhaledVolumeEvent>(OnModifyInhaledVolume);
+        SubscribeLocalEvent<SoftCritMobComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
 
         Subs.CVar(_cfg, TraumaCVars.SoftCritMoveSpeed, x => SoftCritSpeed = x, true);
         Subs.CVar(_cfg, TraumaCVars.SoftCritInhaleModifier, x => InhaleVolumeModifier = x, true);
@@ -84,5 +86,11 @@ public abstract partial class SharedSoftCritSystem : EntitySystem
         // ideally there would be code in respirator to check if it's forced to breathe vs lungs working alone
         if (!_cpr.IsCPRActive(ent))
             args.Volume *= InhaleVolumeModifier;
+    }
+
+    private void OnUnbuckleAttempt(Entity<SoftCritMobComponent> ent, ref UnbuckleAttemptEvent args)
+    {
+        // can't unbuckle yourself if you are in softcrit
+        args.Cancelled |= args.Buckle.Owner == args.User;
     }
 }

@@ -1,26 +1,30 @@
 - type: entity
   name: book
-  parent: [BaseItem, BookDurability] # Trauma - Durability
+  parent: [BaseItem, BookDurability, BaseBookSounds] # Trauma - Durability, sounds
   id: BookBase
   description: A hardcover book.
   components:
-   # Goobstation edit start
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_Goobstation/Items/handling/book_pickup.ogg
-      params:
-        volume: -4
-  - type: EmitSoundOnDrop
-    sound:
-      path: /Audio/_Goobstation/Items/handling/book_drop.ogg
-      params:
-        volume: -4
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/_Goobstation/Items/handling/book_drop.ogg
-      params:
-        volume: -4
-  # Goobstation edit end
+  # <Trauma>
+  - type: Edible
+    requiresSpecialDigestion: true
+    delay: 15
+    forceFeedDelay: 15
+  - type: BadFood
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: FlavorProfile
+    flavors:
+    - paper
+    ignoreReagents:
+    - Fiber
+  - type: CosmicTransmutable
+    transmuteTo: BookCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Misc/books.rsi
     layers:
@@ -62,30 +66,9 @@
     damage:
       types:
         Blunt: 1
-  # Goobstation Edit Start - Moth food
-  - type: Edible
-    requiresSpecialDigestion: true
-    delay: 15
-    forceFeedDelay: 15
-  - type: BadFood
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 10
-  - type: FlavorProfile
-    flavors:
-    - paper
-    ignoreReagents:
-    - Fiber
-  # Goobstation Edit End
-  - type: CosmicTransmutable # Trauma
-    transmuteTo: BookCosmicCult
 
 - type: entity
-  parent: [BaseItem, BookDurability] # Trauma - Durability
+  parent: [BaseItem, BookDurability, BaseBookSounds] # Trauma - Durability, sounds
   id: BaseGuidebook
   abstract: true
   suffix: guidebook

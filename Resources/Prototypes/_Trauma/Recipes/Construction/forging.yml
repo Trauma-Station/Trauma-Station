@@ -9,7 +9,7 @@
   conditions:
   - !type:TileNotBlocked
   theory:
-    FabricationKnowledge: 2
+    FabricationKnowledge: 0
   useQuality: false
 
 - type: construction

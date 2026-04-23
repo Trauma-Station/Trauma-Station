@@ -4,6 +4,11 @@
   name: girder
   description: A large structural assembly made out of metal; It requires a layer of metal before it can be considered a wall.
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 5
+    damagePenalty: 0.5
+  # </Trauma>
   - type: Transform
     anchored: true
     noRot: false
@@ -20,9 +25,12 @@
         - MachineMask
         layer:
         - MachineLayer # Trauma, bullets shoot through these now
+<<<<<<< coilgun-+-rev-fix-+-patreon
   - type: Penetratable # Trauma
     penetrateDamage: 5
     damagePenalty: 0.5
+=======
+>>>>>>> master
   - type: InteractionOutline
   - type: Construction
     graph: Girder

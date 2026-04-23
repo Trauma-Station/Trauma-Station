@@ -181,11 +181,16 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             ClientLightAttack(entity, mousePos, coordinates, weaponUid, weapon);
     }
 
-    public override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session) // Goob edit
+    public override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session, out EntityUid source) // Trauma - made public, added source
     {
         var xform = Transform(target);
         var targetCoordinates = xform.Coordinates;
         var targetLocalAngle = xform.LocalRotation;
+
+        // <Trauma>
+        if (RaiseInRangeEvent(user, target, range, targetCoordinates, targetLocalAngle, out var inRange, out source))
+            return inRange;
+        // </Trauma>
 
         return Interaction.InRangeUnobstructed(user, target, targetCoordinates, targetLocalAngle, range, overlapCheck: false);
     }
