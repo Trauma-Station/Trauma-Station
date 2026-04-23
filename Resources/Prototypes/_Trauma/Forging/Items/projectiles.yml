@@ -28,7 +28,7 @@
   id: CoilgunDisk
   name: coilgun disk ammunition
   category: Projectiles
-  result: CartridgeDisk
+  result: CartridgeDisc
   work: 50
   amount: 30
   skills:

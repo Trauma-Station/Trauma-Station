@@ -30,8 +30,8 @@
 
 - type: latheRecipe
   parent: [ BaseAmmoRecipe, BaseBlueAlert ]
-  id: MagazineBoxGaussgunDisk
-  result: MagazineBoxGaussgunDisk
+  id: MagazineBoxGaussgunDisc
+  result: MagazineBoxGaussgunDisc
   materials:
     Steel: 500
 

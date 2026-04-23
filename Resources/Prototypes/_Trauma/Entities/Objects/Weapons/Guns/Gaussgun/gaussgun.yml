@@ -158,6 +158,7 @@
   id: CraftingGaussRifle
   name: incomplete gauss rifle
   description: An unfinished gauss rifle.
+  abstract: true
   components:
   - type: Sprite
     sprite: _Trauma/Crafting/gaussrifle.rsi
@@ -302,6 +303,7 @@
   id: CraftingGaussPistol
   name: incomplete gauss pistol
   description: An unfinished gauss pistol.
+  abstract: true
   components:
   - type: Sprite
     sprite: _Trauma/Crafting/gausspistol.rsi

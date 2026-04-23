@@ -19,7 +19,7 @@
   parent: BaseCartridgeGaussgun
   id: CartridgeBallBearing
   name: ball bearing
-  description: A small projectile suitable for Gaussguns.
+  description: A small projectile suitable for gauss guns.
   components:
   - type: CartridgeAmmo
     proto: GaussgunBearing
@@ -31,9 +31,9 @@
 
 - type: entity
   parent: BaseCartridgeGaussgun
-  id: CartridgeDisk
-  name: razor disk
-  description: A small projectile suitable for Gaussguns. This one slightly pierces armor and causes bleeding.
+  id: CartridgeDisc
+  name: razor disc
+  description: A small projectile suitable for gauss guns. This one slightly pierces armor and causes bleeding.
   components:
   - type: CartridgeAmmo
     proto: GaussgunDisk
@@ -44,7 +44,7 @@
   parent: BaseCartridgeGaussgun
   id: CartridgeShard
   name: shardshot
-  description: A small projectile suitable for Gaussguns. This one splits into shards when shot, nearly useless against armored targets. Illegal in most civilized zones.
+  description: A small projectile suitable for gauss guns. This one splits into shards when shot, nearly useless against armored targets. Illegal in most civilized zones.
   components:
   - type: CartridgeAmmo
     proto: GaussgunShardSpread
@@ -71,7 +71,7 @@
   - type: Clickable
   - type: Physics
     bodyType: Dynamic
-    bodyStatus: InAir # Goob
+    bodyStatus: InAir
     linearDamping: 0
     angularDamping: 0
   - type: TileFrictionModifier
@@ -84,7 +84,6 @@
           bounds: "-0.1,-0.10,0.1,0.30"
         hard: false
         mask:
-        #- Opaque # Goob
         - Impassable
         - BulletImpassable
       fly-by: &flybyfixture
@@ -208,11 +207,11 @@
 
 - type: entity
   parent: MagazineBoxGaussgunBase
-  id: MagazineBoxGaussgunDisk
-  name: ammunition box (disks)
+  id: MagazineBoxGaussgunDisc
+  name: ammunition box (discs)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeDisk
+    proto: CartridgeDisc
 
 - type: entity
   parent: MagazineBoxGaussgunBase

@@ -754,6 +754,8 @@
       price: 15
     - type: Tag # Trauma
       tags:
+      - DroneUsable
+      - AugmentStationBoard
       - RechargingBoard
 
 - type: entity
@@ -777,6 +779,8 @@
       Gold: 25
   - type: Tag # Trauma
     tags:
+    - DroneUsable
+    - AugmentStationBoard
     - RechargingBoard
 
 - type: entity
