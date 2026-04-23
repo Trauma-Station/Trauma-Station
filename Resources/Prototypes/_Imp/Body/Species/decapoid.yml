@@ -107,7 +107,6 @@
   - BaseSpeciesMobOrganic
   id: MobDecapoid
   name: Urist McCrab
-  save: false
   components:
   - type: SpeechRequiresEquipment
     equipment:
