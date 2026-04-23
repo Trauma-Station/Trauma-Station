@@ -131,8 +131,11 @@ public abstract class SharedTailedEntitySystem : EntitySystem
     {
         base.FrameUpdate(frameTime);
 
-        var query2 = EntityQueryEnumerator<TailedEntitySegmentComponent>();
-        while (query2.MoveNext(out var uid, out var segment))
+        if (_timing.ApplyingState)
+            return;
+
+        var query = EntityQueryEnumerator<TailedEntitySegmentComponent>();
+        while (query.MoveNext(out var uid, out var segment))
         {
             ResetSegmentPosition((uid, segment));
         }
@@ -234,9 +237,6 @@ public abstract class SharedTailedEntitySystem : EntitySystem
 
     protected void ResetSegmentPosition(Entity<TailedEntitySegmentComponent> segment)
     {
-        if (_timing.ApplyingState)
-            return;
-
         if (segment.Comp.Coords is { } coords)
             TransformSystem.SetMapCoordinates(segment, coords);
         TransformSystem.SetWorldRotation(segment, segment.Comp.WorldRotation);
