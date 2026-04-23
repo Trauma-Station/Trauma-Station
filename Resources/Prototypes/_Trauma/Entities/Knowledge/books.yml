@@ -59,6 +59,7 @@
     price: 20
   - type: KnowledgeGrantOnUse
     singleUse: false # crew books are for sharing
+    instant: false
   - type: Tag
     tags:
     - Book

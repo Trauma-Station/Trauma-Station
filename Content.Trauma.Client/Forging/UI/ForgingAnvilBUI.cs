@@ -61,6 +61,9 @@ public sealed class ForgingAnvilBUI : BoundUserInterface
         foreach (var (category, items) in _forging.AllItems)
         {
             var nested = GetItemsButtons(items);
+            if (nested.Count == 0)
+                continue; // don't add a category if none of its items can be made
+
             buttons.Add(new RadialMenuNestedLayerOption(nested)
             {
                 ToolTip = category.Name,
@@ -76,6 +79,9 @@ public sealed class ForgingAnvilBUI : BoundUserInterface
         var buttons = new List<RadialMenuOptionBase>(items.Count);
         foreach (var item in items)
         {
+            if (!_forging.CanMakeFrom(item, _chosenMetal))
+                continue; // dont show illegal recipes, server wont allow it anyway
+
             buttons.Add(new RadialMenuActionOption<ForgedItemPrototype>(OnItemSelected, item)
             {
                 ToolTip = item.Name,

@@ -7258,3 +7258,95 @@ Entries:
   id: 838
   time: '2026-04-22T05:49:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2162
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mold can now rarely make you sick.
+  id: 839
+  time: '2026-04-22T06:57:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2166
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed artifacts spawning things attached to you when held.
+  id: 840
+  time: '2026-04-22T07:22:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2167
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Butchering is now fully predicted, welcome to the future.
+  id: 841
+  time: '2026-04-22T09:05:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2171
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      Added an extra xeno announcement music from beestation: Mind Crawler by
+      Merct.
+  id: 842
+  time: '2026-04-22T10:03:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2172
+- author: NoElka, KarusKardin
+  changes:
+  - type: Add
+    message: >-
+      Ported holographic generators from Far Horizons. See guidebook for more
+      information.
+  id: 843
+  time: '2026-04-22T11:20:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2132
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added the codespeak manual from tgstation to the uplink for 15 TC!
+  id: 844
+  time: '2026-04-22T11:58:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2174
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Tape recorders now actually use languages.
+  id: 845
+  time: '2026-04-22T12:47:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2175
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Removed popup spam about epiphany and shit from skills, nobody cares about
+      getting 1 xp in tau ceti basic.
+  id: 846
+  time: '2026-04-22T20:59:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2180
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Most non-weapon crafting recipes no longer require levels in any skills to
+      make.
+  id: 847
+  time: '2026-04-22T21:26:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2182
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dwarves are now required to have facial hair.
+  id: 848
+  time: '2026-04-23T15:31:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2193
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed janitor keyring working telepathically.
+  id: 849
+  time: '2026-04-23T19:32:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2198
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to craft bananium swords.
+  id: 850
+  time: '2026-04-23T19:46:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2199
