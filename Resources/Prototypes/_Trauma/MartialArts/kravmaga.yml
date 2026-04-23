@@ -71,7 +71,7 @@
     messages:
     - cqc-slam
   opponentEffects:
-  - !type:HealthChange
+  - !type:TargetedDamage
     scaling: false
     damage:
       types:
@@ -94,7 +94,7 @@
     messages:
     - cqc-kick
   opponentEffects:
-  - !type:HealthChange
+  - !type:TargetedDamage
     scaling: false
     damage:
       types:

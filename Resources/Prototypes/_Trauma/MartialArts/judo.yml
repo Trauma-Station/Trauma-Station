@@ -38,7 +38,7 @@
     key: BlurryVision
     component: BlurryVision
     time: 5
-  - !type:HealthChange
+  - !type:TargetedDamage
     targetPart: Head
     damage:
       types:

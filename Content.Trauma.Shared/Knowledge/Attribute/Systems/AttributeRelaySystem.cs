@@ -8,44 +8,23 @@ using Content.Trauma.Shared.Knowledge.Systems;
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 
 /// <summary>
-/// This class handles all the relay events
+/// This class handles all the relay events for attributes
 /// </summary>
 public sealed partial class AttributeRelaySystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetAttackModifierEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<AttackAttributeComponent, GetAttackModifierEvent>(OnCalculateAttack);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetDefenseModifierEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<DefenseAttributeComponent, GetDefenseModifierEvent>(OnCalculateDefense);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetDamageModifierEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<DamageAttributeComponent, GetDamageModifierEvent>(OnCalculateDamage);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetStrengthFeatEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<StrengthFeatComponent, GetStrengthFeatEvent>(OnStrengthFeat);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetAgilityFeatEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<AgilityFeatComponent, GetAgilityFeatEvent>(OnCalculateAgility);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetDodgeSavingThrowEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<DodgeAttributeComponent, GetDodgeSavingThrowEvent>(OnCalculateDodge);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetPhysicalSavingThrowEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<PhysicalAttributeComponent, GetPhysicalSavingThrowEvent>(OnCalculatePhysical);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetMentalSavingThrowEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<MentalAttributeComponent, GetMentalSavingThrowEvent>(OnCalculateMental);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetCarryLimitsEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<StrengthFeatComponent, GetCarryLimitsEvent>(OnCarry);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetMoraleModifierEvent>(_knowledge.RelayEvent);
         SubscribeLocalEvent<MoraleAttributeComponent, GetMoraleModifierEvent>(OnCalculateMorale);
     }
 

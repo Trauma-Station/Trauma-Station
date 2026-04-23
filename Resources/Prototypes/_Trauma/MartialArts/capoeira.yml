@@ -10,7 +10,7 @@
   opponentEffects:
   - !type:ModifyParalysis
     time: 1
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 5
@@ -26,7 +26,7 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
   opponentEffects:
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 15
@@ -42,7 +42,7 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
   opponentEffects:
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 10
@@ -63,7 +63,7 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
   opponentEffects:
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 25

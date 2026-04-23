@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Trauma.Shared.Knowledge.Miscellanious.Components;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class QueuedParryComponent : Component
+public sealed partial class QueuedStrikeComponent : Component
 {
     /// <summary>
     /// Entity to strike.
@@ -18,4 +18,10 @@ public sealed partial class QueuedParryComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan TimeToHit;
+
+    /// <summary>
+    /// Use first offhand if possible
+    /// </summary>
+    [DataField]
+    public bool Offhand = false;
 }

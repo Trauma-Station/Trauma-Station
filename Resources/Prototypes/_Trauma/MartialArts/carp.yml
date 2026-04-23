@@ -23,7 +23,7 @@
     - carp-saying-time
     - carp-saying-cowabunga
   opponentEffects:
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 20
@@ -39,7 +39,7 @@
     amount: 60
   - !type:ModifyParalysis
     time: 6
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 10

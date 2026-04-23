@@ -31,7 +31,7 @@
   opponentEffects:
   - !type:ModifyParalysis
     time: 9
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 10
@@ -48,7 +48,7 @@
   opponentEffects:
   - !type:ModifyParalysis
     time: 7
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 20

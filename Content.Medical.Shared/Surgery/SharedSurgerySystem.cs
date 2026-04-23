@@ -54,7 +54,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     private EntityQuery<SurgeryIgnoreClothingComponent> _ignoreQuery;
     private EntityQuery<SurgeryToolComponent> _toolQuery;
 
-    private EntProtoId _surgeryKnowledge = "SurgeryKnowledge";
+    private static readonly EntProtoId SurgeryKnowledge = "SurgeryKnowledge";
 
     public override void Initialize()
     {
@@ -365,7 +365,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (user == target)
             speed /= 2.0f;
 
-        if (_knowledge.GetSkill(user, _surgeryKnowledge) is { } skill && _knowledge.GetMastery(skill.Comp.NetLevel) >= 5) // Masters are pretty good at this.
+        if (_knowledge.GetSkill(user, SurgeryKnowledge) is { } skill && _knowledge.GetMastery(skill.Comp.NetLevel) >= 5) // Masters are pretty good at this.
             speed *= 3f;
 
         return proto.Duration / speed;

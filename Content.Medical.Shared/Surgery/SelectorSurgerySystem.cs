@@ -73,7 +73,6 @@ public sealed partial class SelectorSurgerySystem : EntitySystem
             return;
 
         CycleToolMode(ent, args.User);
-        args.Cancelled = true;
     }
 
     /*

@@ -2,14 +2,13 @@
 
 using Content.Shared.CombatMode;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Content.Trauma.Shared.Knowledge.Miscellanious.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Miscellanious.Systems;
 
-public sealed partial class QueuedParrySystem : EntitySystem
+public sealed partial class QueuedStrikeSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
@@ -21,7 +20,7 @@ public sealed partial class QueuedParrySystem : EntitySystem
         base.Update(frameTime);
 
         var curTime = _timing.CurTime;
-        var query = EntityQueryEnumerator<QueuedParryComponent>();
+        var query = EntityQueryEnumerator<QueuedStrikeComponent>();
         while (query.MoveNext(out var ent, out var comp))
         {
             if (curTime < comp.TimeToHit)
@@ -30,7 +29,7 @@ public sealed partial class QueuedParrySystem : EntitySystem
             var weapon = _hands.GetActiveItemOrSelf(ent);
             if (!TryComp<MeleeWeaponComponent>(weapon, out var meleeWeapon))
             {
-                RemComp<QueuedParryComponent>(ent);
+                RemComp<QueuedStrikeComponent>(ent);
                 continue;
             }
             var cachedTime = meleeWeapon.NextAttack;
@@ -40,7 +39,7 @@ public sealed partial class QueuedParrySystem : EntitySystem
             _melee.AttemptLightAttack(ent, weapon, meleeWeapon, comp.Target);
             meleeWeapon.NextAttack = cachedTime;
             _combat.SetInCombatMode(ent, combat);
-            RemComp<QueuedParryComponent>(ent);
+            RemComp<QueuedStrikeComponent>(ent);
         }
     }
 }

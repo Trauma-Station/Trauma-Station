@@ -7,36 +7,57 @@
 - type: entity
   parent: BaseTalent
   id: AttackBonusTalent
+  name: Attack Talent
+  components:
+  - type: AttackTalent
 
 - type: entity
   parent: BaseTalent
   id: DefenseBonusTalent
+  name: Defense Talent
+  components:
+  - type: DefenseTalent
 
 - type: entity
   parent: BaseTalent
   id: DamageBonusTalent
+  name: Damage Talent
+  components:
+  - type: DamageTalent
 
 - type: entity
   parent: BaseTalent
   id: DodgeTalent # Dodge things
-  # components:
-  # - type: DodgeBonus
-  #   mod: 1
+  name: Dodge Talent
+  components:
+  - type: Dodge
 
 - type: entity
   parent: BaseTalent
   id: FastHealerTalent # Heal faster
+  name: Fast Healer
+  components:
+  - type: FastHealer
 
 - type: entity
   parent: BaseTalent
   id: PoisonResistantTalent
+  name: Poison Resistance
   repeat: true
+  components:
+  - type: PoisonResistant
 
 - type: entity
   parent: BaseTalent
   id: StoutTalent # Get knocked down less
+  name: Stout
+  components:
+  - type: Stout
 
 - type: entity
   parent: BaseTalent
   id: ToughHideTalent # Take one less point of damage
+  name: Tough Hide
   repeat: true
+  components:
+  - type: ToughHide

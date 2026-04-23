@@ -2,6 +2,7 @@
 
 namespace Content.Trauma.Shared.Knowledge.FightingStance;
 
+[RegisterComponent, NetworkedComponent]
 public sealed partial class FightingStanceComponent : Component
 {
     [DataField]

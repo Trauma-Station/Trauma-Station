@@ -1,0 +1,15 @@
+- type: fumble
+  id: StandardFumble
+  entries:
+  - minThreshold: 10
+    effects:
+    - !type:TargetedDamage
+      damage:
+        types:
+          Slash: 20
+  - minThreshold: 25
+    effects:
+    - !type:TargetedDamage
+      damage:
+        types:
+          Slash: 20

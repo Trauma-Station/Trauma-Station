@@ -10,7 +10,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 7
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 5
@@ -29,7 +29,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 12
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 6
@@ -48,7 +48,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 18
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 12
@@ -66,7 +66,7 @@
     sound: /Audio/Weapons/genhit3.ogg
   - !type:TakeStaminaDamage
     amount: 7
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 6
@@ -78,7 +78,7 @@
     time: 2
   - !type:TakeStaminaDamage
     amount: 13
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 8
@@ -99,7 +99,7 @@
     sound: /Audio/Weapons/genhit3.ogg
   - !type:TakeStaminaDamage
     amount: 7
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 5
@@ -111,7 +111,7 @@
     time: 4
   - !type:TakeStaminaDamage
     amount: 20
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 18
@@ -138,7 +138,7 @@
     time: 6
   - !type:TakeStaminaDamage
     amount: 25
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 20
@@ -163,7 +163,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 8
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 13
@@ -187,7 +187,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 15
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 17
@@ -211,7 +211,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 17
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 25

@@ -46,7 +46,6 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(RelayMartialArt);
         SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(RelayMartialArt);
         SubscribeLocalEvent<KnowledgeHolderComponent, GetMeleeAttackRateEvent>(RelayActiveEvent);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(RelayMartialArt);
         SubscribeLocalEvent<MetaDataComponent, PerformMartialArtComboEvent>(OnComboActionClicked);
 
         SubscribeAllEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);

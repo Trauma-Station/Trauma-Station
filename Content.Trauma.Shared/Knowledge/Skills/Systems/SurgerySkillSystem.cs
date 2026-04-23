@@ -17,7 +17,7 @@ public sealed partial class SurgerySkillSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
 
-    private EntProtoId _surgeryKnowledge = "SurgeryKnowledge";
+    private static readonly EntProtoId SurgeryKnowledge = "SurgeryKnowledge";
 
     public override void Initialize()
     {
@@ -39,7 +39,7 @@ public sealed partial class SurgerySkillSystem : EntitySystem
         }
 
         // Time to skill roll
-        if (_surgery.GetSingleton(args.Event.Surgery) is not { } surgery || _knowledge.GetContainer(args.Event.User) is not { } brain || _knowledge.GetSkill(brain, _surgeryKnowledge) is not { } skill)
+        if (_surgery.GetSingleton(args.Event.Surgery) is not { } surgery || _knowledge.GetContainer(args.Event.User) is not { } brain || _knowledge.GetSkill(brain, SurgeryKnowledge) is not { } skill)
             return;
 
         var complexity = surgery.Complexity;
@@ -58,13 +58,13 @@ public sealed partial class SurgerySkillSystem : EntitySystem
         if (ev.Failed)
         {
             args.Cancel();
-            _knowledge.AddExperience(brain, _surgeryKnowledge, Math.Max(complexity / 5, 5)); // Give experience to a failed surgery based on the complexity of the thing. At least you tried.
+            _knowledge.AddExperience(brain, SurgeryKnowledge, Math.Max(complexity / 5, 5)); // Give experience to a failed surgery based on the complexity of the thing. At least you tried.
         }
 
         // Give experience to the surgeon based upon how hard the surgery was.
         if (mastery >= 3)
-            _knowledge.AddExperience(brain, _surgeryKnowledge, Math.Max(complexity, 0)); // You're gonna need to challenge yourself if you want to improve. Try surgery on yourself, standing up.
+            _knowledge.AddExperience(brain, SurgeryKnowledge, Math.Max(complexity, 0)); // You're gonna need to challenge yourself if you want to improve. Try surgery on yourself, standing up.
         else
-            _knowledge.AddExperience(brain, _surgeryKnowledge, Math.Max(complexity + (mastery - 2) * 3, (mastery - 2) * 3)); // Nothing beats practice to learn something.
+            _knowledge.AddExperience(brain, SurgeryKnowledge, Math.Max(complexity + (mastery - 2) * 3, (mastery - 2) * 3)); // Nothing beats practice to learn something.
     }
 }

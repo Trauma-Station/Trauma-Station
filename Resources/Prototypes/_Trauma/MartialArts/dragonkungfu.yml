@@ -23,7 +23,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 25
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 15
@@ -41,7 +41,7 @@
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit1.ogg
   opponentEffects:
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Blunt: 40

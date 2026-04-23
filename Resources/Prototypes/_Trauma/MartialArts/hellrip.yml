@@ -8,7 +8,7 @@
     amount: 80
   - !type:ModifyParalysis
     time: 6
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 10
@@ -22,7 +22,7 @@
   - Harm
   - Grab
   opponentEffects:
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 100
@@ -37,7 +37,7 @@
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 50
-  - !type:HealthChange
+  - !type:TargetedDamage
     damage:
       types:
         Slash: 60

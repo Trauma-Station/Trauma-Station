@@ -64,7 +64,7 @@ public abstract class SharedCPRSystem : EntitySystem
 
     private TimeSpan _cprTime = TimeSpan.FromSeconds(4);
 
-    private EntProtoId _firstAidKnowledge = "FirstAidKnowledge";
+    private static readonly EntProtoId FirstAidKnowledge = "FirstAidKnowledge";
 
     public override void Initialize()
     {
@@ -201,7 +201,7 @@ public abstract class SharedCPRSystem : EntitySystem
             return;
         }
 
-        if (_knowledge.GetContainer(user) is not { } brain || _knowledge.GetSkill(brain, _firstAidKnowledge) is not { } firstAid) // Gotta make sure you can actually do this lmao.
+        if (_knowledge.GetContainer(user) is not { } brain || _knowledge.GetSkill(brain, FirstAidKnowledge) is not { } firstAid) // Gotta make sure you can actually do this lmao.
             return;
 
         if (mob.CurrentState == MobState.Dead && CanRevive(ent))
@@ -211,7 +211,7 @@ public abstract class SharedCPRSystem : EntitySystem
             if (!contestReviveEv.Failed)
                 _mob.ChangeMobState(ent.Owner, MobState.Critical, origin: user);
 
-            _knowledge.AddExperience(brain, _firstAidKnowledge, 10);
+            _knowledge.AddExperience(brain, FirstAidKnowledge, 10);
         }
 
         if (HasHealthyLungs(ent))
@@ -220,7 +220,7 @@ public abstract class SharedCPRSystem : EntitySystem
             RaiseLocalEvent(user, ref contestInhaleEv);
             if (!contestInhaleEv.Failed)
                 TryInhale(ent); // technically should be transferring with the performer's lungs but whatever
-            _knowledge.AddExperience(brain, _firstAidKnowledge, 3);
+            _knowledge.AddExperience(brain, FirstAidKnowledge, 3);
         }
 
         var isAlive = mob.CurrentState == MobState.Alive;

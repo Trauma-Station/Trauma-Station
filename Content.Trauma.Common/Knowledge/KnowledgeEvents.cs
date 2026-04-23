@@ -45,9 +45,20 @@ public record struct ActiveMeleeResolveEvent(EntityUid Defender, EntityUid Weapo
 [ByRefEvent]
 public record struct ActiveProjectileResolveEvent(EntityUid Defender, EntityUid Weapon, bool Cancelled = false);
 
-
 /// <summary>
 /// Raised on the defender. Get Possible Defense Dice.
 /// </summary>
 [ByRefEvent]
 public record struct GetDefenseDice(int Dice = 8);
+
+/// <summary>
+/// Raised on entity getting hit by a critical hit.
+/// </summary>
+[ByRefEvent]
+public record struct CriticalHitEvent(EntityUid Attacker, DamageSpecifier Damage);
+
+/// <summary>
+/// Raised on entity whenever they fumble.
+/// </summary>
+[ByRefEvent]
+public record struct OnFumbleEvent(int FumbleDifference);

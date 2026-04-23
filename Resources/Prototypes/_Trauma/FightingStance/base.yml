@@ -1,0 +1,5 @@
+- type: fightingStance
+  id: SwordAndShield
+  defenseMod: 10
+  weaponCount: 1
+  shieldCount: 1
