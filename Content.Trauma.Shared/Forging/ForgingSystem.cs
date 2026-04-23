@@ -262,6 +262,6 @@ public sealed class ForgingSystem : EntitySystem
     /// Returns true if a forged item prototype can be made from a given metal.
     /// </summary>
     public bool CanMakeFrom(ForgedItemPrototype item, [ForbidLiteral] ProtoId<MetalPrototype> metal)
-        => item.Whitelist?.Contains(id) != false &&
-            item.Blacklist?.Contains(id) != true;
+        => item.Whitelist?.Contains(metal) != false &&
+            item.Blacklist?.Contains(metal) != true;
 }
