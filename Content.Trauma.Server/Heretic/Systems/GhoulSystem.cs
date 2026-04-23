@@ -53,6 +53,7 @@ using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Content.Trauma.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Serialization.Manager;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -67,6 +68,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnUnGhoulify =
         "ComponentsToRemoveOnUnGhoulify";
 
+    [Dependency] private readonly ISerializationManager _seriMan = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
@@ -272,9 +274,15 @@ public sealed class GhoulSystem : SharedGhoulSystem
             .ToDictionary();
 
         EntityManager.AddComponents(ent, new ComponentRegistry(comps));
-        if (prototype.Components.TryGetComponent(Factory.GetComponentName<MobThresholdsComponent>(),
-                out var thresholds))
-            AddComp(ent, thresholds, true);
+
+        var name = Factory.GetComponentName<MobThresholdsComponent>();
+        if (prototype.Components.TryGetComponent(name, out var thresholds))
+        {
+            var component = (Component) Factory.GetComponent(name);
+            var temp = (object) component;
+            _seriMan.CopyTo(thresholds, ref temp);
+            AddComp(ent, (Component) temp!, true);
+        }
 
         if (TryComp(ent, out CollectiveMindComponent? collective))
             collective.Channels.Remove(SharedHereticAbilitySystem.MansusLinkMind);
@@ -325,9 +333,6 @@ public sealed class GhoulSystem : SharedGhoulSystem
         var ev = new UnholyStatusChangedEvent(ent, ent, true);
         RaiseLocalEvent(ent, ref ev);
 
-        if (ent.Comp.DeathBehavior == GhoulDeathBehavior.Deconvert)
-            MakeOrgansFragile(ent);
-
         EnsureComp<CombatModeComponent>(ent);
 
         EnsureComp<CollectiveMindComponent>(ent).Channels.Add(SharedHereticAbilitySystem.MansusLinkMind);
@@ -360,6 +365,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
                 SetBoundHeretic((ent.Owner, minion), heretic, null, false);
         }
 
+        _rejuvenate.PerformRejuvenate(ent);
+
         if (ent.Comp.ChangeHumanoidProfile && HasComp<HumanoidProfileComponent>(ent))
         {
             var organs = _humanoid.GetOrgansData(ent);
@@ -371,7 +378,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
             _humanoid.SetSkinColor(ent, grey, grey);
         }
 
-        _rejuvenate.PerformRejuvenate(ent);
+        if (ent.Comp.DeathBehavior == GhoulDeathBehavior.Deconvert)
+            MakeOrgansFragile(ent);
 
         if (TryComp<MobThresholdsComponent>(ent, out var th))
         {
