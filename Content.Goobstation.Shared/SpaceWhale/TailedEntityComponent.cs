@@ -29,15 +29,16 @@ public sealed partial class TailedEntityComponent : Component
     public float Spacing = 1f;
 
     /// <summary>
-    /// If true, head will collide with its segments.
+    /// Set to true if head should collide with segments
     /// This controls <see cref="PreventSegmentCollide"/>.
-    /// To make head not being able to collide with segments, use PreventCollide component or adjust Fixtures
+    /// To make head being able to collide/not collide with segments, use PreventCollide component or adjust Fixtures
     /// </summary>
     [DataField]
     public bool ShouldCollideWithSegments;
 
     /// <summary>
     /// If above 0, head won't collide with specified amount of segments, starting from the head
+    /// Used to prevent contacting segments from pushing head
     /// </summary>
     [DataField]
     public int PreventFirstSegmentsCollideAmount;
@@ -50,19 +51,20 @@ public sealed partial class TailedEntityComponent : Component
 
     /// <summary>
     /// If true, head rotation will be automatically updated to match its segments
+    /// Additionally, NoRotateOnMove will be added/removed from entity depending on segment count
     /// </summary>
     [DataField]
     public bool HeadFollowSegmentRotation = true;
 
     /// <summary>
     /// Used in entity lookup to check if head is touching any of its segments
+    /// Uses lookup instead of physics checks because it also uses PreventCollideEvent
     /// </summary>
     [DataField]
     public float HeadRadius = 0.4f;
 
     /// <summary>
-    /// If <see cref="ShouldCollideWithSegments"/> is true, this will prevent collision temporarily on map init and on
-    /// forced contract
+    /// If <see cref="ShouldCollideWithSegments"/> is true, this will prevent collision temporarily on map init and on forced contract
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
     public bool PreventSegmentCollide = true;
