@@ -11,7 +11,7 @@
   - type: CartridgeAmmo
     deleteOnSpawn: true
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/Gaussgun.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
   - type: StaticPrice
     price: 10
 
@@ -60,7 +60,7 @@
   - type: Item
     size: Small
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/Gaussgun.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
   - type: Ammo
     muzzleFlash: null
   - type: Tag
