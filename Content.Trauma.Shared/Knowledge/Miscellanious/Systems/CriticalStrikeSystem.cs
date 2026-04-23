@@ -47,7 +47,7 @@ public sealed partial class CriticalStrikeSystem : EntitySystem
     {
         var table = _proto.Index<FumblePrototype>(StandardFumble);
 
-        var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 10000);
+        var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 1000) + args.FumbleDifference * 10;
 
         var fumble = table.Entries
             .OrderBy(e => e.MinThreshold)
