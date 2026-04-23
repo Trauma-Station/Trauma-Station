@@ -12,7 +12,7 @@ public sealed partial class SpawnParticles : EntityEffectBase<SpawnParticles>
     /// <summary>
     /// The particles to spawn
     /// </summary>
-    [DataField]
+    [DataField(required: true)]
     public ProtoId<ParticleEffectPrototype> ParticleProto;
 
     /// <summary>

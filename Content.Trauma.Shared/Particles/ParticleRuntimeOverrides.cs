@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.Particles;
 /// </summary>
 public sealed class ParticleRuntimeOverrides
 {
-    #region =^..^= Visuals =^..^=
+    #region Visuals
 
     /// <summary>
     /// Self-explanatory lerps to EndColor over the particle's lifetime linearly.
@@ -34,7 +34,7 @@ public sealed class ParticleRuntimeOverrides
     /// </summary>
     public int? RenderLayer;
     #endregion
-    #region =^..^= Size =^..^=
+    #region Size
 
     /// <summary>
     /// The base size of each particle.
@@ -52,7 +52,7 @@ public sealed class ParticleRuntimeOverrides
     public float? StretchFactor;
 
     #endregion
-    #region  =^..^= Lifetime =^..^=
+    #region Lifetime
 
     /// <summary>
     /// How long each particle lives before disappearing.
@@ -65,7 +65,7 @@ public sealed class ParticleRuntimeOverrides
     public TimeSpan? LifetimeVariance;
 
     #endregion
-    #region =^..^= Movement =^..^=
+    #region Movement
 
     /// <summary>
     /// Initial speed of each particle at spawn.
@@ -114,7 +114,7 @@ public sealed class ParticleRuntimeOverrides
     public float? InheritVelocity;
 
     #endregion
-    #region =^..^= Rotation =^..^=
+    #region Rotation
 
     /// <summary>
     /// Initial rotation of each particle at spawn, in radians. 0 = facing right, positive = clockwise.
@@ -137,7 +137,7 @@ public sealed class ParticleRuntimeOverrides
     public Angle? RotationSpeedVariance;
 
     #endregion
-    #region =^..^= Emission =^..^=
+    #region Emission
 
     /// <summary>
     ///  Number of particles emitted per second while the emitter is active.
