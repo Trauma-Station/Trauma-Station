@@ -7329,3 +7329,31 @@ Entries:
   id: 847
   time: '2026-04-22T21:26:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2182
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dwarves are now required to have facial hair.
+  id: 848
+  time: '2026-04-23T15:31:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2193
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed janitor keyring working telepathically.
+  id: 849
+  time: '2026-04-23T19:32:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2198
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to craft bananium swords.
+  id: 850
+  time: '2026-04-23T19:46:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2199
+- author: Armok
+  changes:
+  - type: Fix
+    message: Fix more turret AI cheese
+  id: 851
+  time: '2026-04-23T23:24:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2186
