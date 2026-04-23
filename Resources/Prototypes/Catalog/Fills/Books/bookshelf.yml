@@ -18,6 +18,10 @@
       rolls: !type:RangeNumberSelector
         range: 0, 1
       tableId: RandomEmptyScroll
+    - !type:NestedSelector
+      rolls: !type:RangeNumberSelector
+        range: 0, 3
+      tableId: RandomSkillbook
     # </Trauma>
     # Randomly generated books
     - id: BookRandomStory
@@ -33,11 +37,6 @@
       rolls: !type:RangeNumberSelector
         range: 0, 3
       tableId: RandomHandwrittenBookTable
-    # Trauma - Skillbooks
-    - !type:NestedSelector
-      rolls: !type:RangeNumberSelector
-        range: 0, 3
-      tableId: RandomSkillbook
 
 - type: entityTable
   id: RandomHandwrittenBookTable
