@@ -168,7 +168,7 @@
       amount: 2
     - id: MagazineBoxGaussgunBullet
       amount: 2
-      
+
 - type: entityTable
   id: FillGunSafeLaserT2
   table: !type:AllSelector
