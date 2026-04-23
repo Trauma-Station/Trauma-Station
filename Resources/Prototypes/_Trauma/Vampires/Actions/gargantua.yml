@@ -1,37 +1,44 @@
 - type: entity
-  parent: BaseAction
+  parent: BaseVampireAction
   id: ActionBloodSwell
   name: Blood Swell
   description: For 30 seconds, reduces incoming brute by 60%, stamina and burn damage by 50%, and halves all stun times. Guns are unusable for the duration.
   components:
   - type: Action
-    # useDelay: 20
-    raiseOnAction: true
     icon:
       sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
       state: icon
-    itemIconStyle: BigAction
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
     effects:
-    - !type:NestedEffect # TODO: Implement
-      proto: VampireRejuvI
+    - !type:ModifyStatusEffect
+      effectProto: BloodSwellStatusEffect
+      time: 30
 
 - type: entity
-  parent: BaseAction
+  parent: ActionBloodSwell
+  id: ActionBloodSwellII
+  name: Blood Swell II
+  description: For 30 seconds, identical resistance buffs to Blood Swell I, user's melee damage is increased by 10. Guns are unusable for the duration.
+  components:
+  - type: EffectAction
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: BloodSwellStatusEffectII
+      time: 30
+
+- type: entity
+  parent: BaseVampireAction
   id: ActionBloodRush
   name: Blood Rush
   description: For 10 seconds, doubles movement speed. Instantly stands you up, removes any legcuffs and clears knockdowns.
   components:
   - type: Action
-    # useDelay: 20
-    raiseOnAction: true
     checkCanInteract: false
     icon:
       sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
       state: icon
-    itemIconStyle: BigAction
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -48,19 +55,16 @@
     - !type:Uncuff
 
 - type: entity
-  parent: BaseAction
+  parent: BaseVampireAction
   id: ActionGargStomp
   name: Stomp
   description: You stomp the ground, sending out a shockwave that knocks people back.
   components:
   - type: Action
-    # useDelay: 20
-    raiseOnAction: true
     checkCanInteract: false
     icon:
       sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
       state: icon
-    itemIconStyle: BigAction
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction

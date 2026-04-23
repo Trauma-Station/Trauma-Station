@@ -1,0 +1,7 @@
+# A simple status effect that makes you unable to shoot any type of gun.
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectUnableToShoot
+  name: unable to shoot
+  components:
+  - type: UnableToShootStatusEffect
