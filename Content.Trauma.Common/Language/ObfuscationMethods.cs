@@ -9,14 +9,6 @@ namespace Content.Trauma.Common.Language;
 public abstract partial class ObfuscationMethod
 {
     /// <summary>
-    ///     The fallback obfuscation method, replaces the message with the string "&lt;?&gt;".
-    /// </summary>
-    public static readonly ObfuscationMethod Default = new ReplacementObfuscation
-    {
-        Replacement = new List<string> { "<?>" }
-    };
-
-    /// <summary>
     ///     Obfuscates the provided message and writes the result into the provided StringBuilder.
     ///     Implementations should use the context's pseudo-random number generator and provide stable obfuscations.
     /// </summary>

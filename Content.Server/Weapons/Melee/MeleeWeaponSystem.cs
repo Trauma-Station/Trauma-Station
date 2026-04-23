@@ -54,7 +54,7 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         return true;
     }
 
-    public override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session) // Goob edit
+    public override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session, out EntityUid source) // Trauma - made public, added source
     {
         EntityCoordinates targetCoordinates;
         Angle targetLocalAngle;
@@ -62,8 +62,17 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         if (session is { } pSession)
         {
             (targetCoordinates, targetLocalAngle) = _lag.GetCoordinatesAngle(target, pSession);
+            // <Trauma>
+            if (RaiseInRangeEvent(user, target, range, targetCoordinates, targetLocalAngle, out var inRange, out source))
+                return inRange;
+            // </Trauma>
             return Interaction.InRangeUnobstructed(user, target, targetCoordinates, targetLocalAngle, range, overlapCheck: false);
         }
+
+        // <Trauma>
+        if (RaiseInRangeEvent(user, target, range, null, null, out var result, out source))
+            return result;
+        // </Trauma>
 
         return Interaction.InRangeUnobstructed(user, target, range);
     }
@@ -74,20 +83,20 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         _color.RaiseEffect(Color.Red, targets, filter);
     }
 
-    public override void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, Angle spriteRotation, bool flipAnimation, bool predicted = true)
+    public override void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, Angle spriteRotation, bool flipAnimation, bool predicted = true, EntityUid? source = null) // Trauma - added source
     {
         Filter filter;
 
         if (predicted)
         {
-            filter = Filter.PvsExcept(user, entityManager: EntityManager);
+            filter = Filter.Pvs(source ?? user, entityManager: EntityManager).RemovePlayerByAttachedEntity(user); // Trauma - source
         }
         else
         {
-            filter = Filter.Pvs(user, entityManager: EntityManager);
+            filter = Filter.Pvs(source ?? user, entityManager: EntityManager); // Trauma - source
         }
 
-        RaiseNetworkEvent(new MeleeLungeEvent(GetNetEntity(user), GetNetEntity(weapon), angle, localPos, animation, spriteRotation, flipAnimation), filter);
+        RaiseNetworkEvent(new MeleeLungeEvent(GetNetEntity(source ?? user), GetNetEntity(weapon), angle, localPos, animation, spriteRotation, flipAnimation), filter); // Trauma - source
     }
 
     private void OnSpeechHit(EntityUid owner, MeleeSpeechComponent comp, MeleeHitEvent args)

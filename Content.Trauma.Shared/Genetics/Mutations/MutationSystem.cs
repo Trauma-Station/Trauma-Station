@@ -5,6 +5,7 @@ using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction.Components;
@@ -89,8 +90,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         if (_net.IsClient) // no rolling stuff
             return;
 
-        // clear is false, don't clear forced mutations in the yml or from previous polymorph body
-        Scramble(ent, clear: false, automatic: true);
+        AddRandomDormant(ent); // give random dormant mutations
 
         if (ent.Comp.Mutations.Count == 0)
         {
@@ -119,7 +119,8 @@ public sealed partial class MutationSystem : CommonMutationSystem
 
     private void OnDnaScrambled(Entity<MutatableComponent> ent, ref DnaScrambledEvent args)
     {
-        Scramble(ent, predicted: false); // currently it's only raised on server
+        ClearMutations(ent.Owner, automatic: true, predicted: false); // currently it's only raised on server
+        Scramble(ent);
     }
 
     private void MutationAdded(Entity<MutatableComponent> ent, Entity<MutationComponent> mutation, EntityUid? user, bool automatic, bool predicted)
@@ -252,7 +253,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         {
             comp.Dormant.Add(dormant.ToString());
         }
-        Dirty(mob, comp);
+        DirtyField(mob, comp, nameof(MutatableComponent.Dormant));
         foreach (var id in data.Mutations)
         {
             AddMutation(ent, id.ToString(), automatic: true, predicted: false);
@@ -381,7 +382,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         var uid = mutEnt.Value;
         Log.Debug($"Added mutation {ToPrettyString(uid)} to {ToPrettyString(ent)}");
         ent.Comp.Mutations[id] = uid;
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(MutatableComponent.Mutations));
         MutationAdded((ent, ent.Comp), (uid, _query.Comp(uid)), user, automatic, predicted);
         MutateDna(ent, mutation.Difficulty / 4);
         return true;
@@ -468,7 +469,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
 
         // this is done before the events are raised so monkified is removed from the original body properly
         ent.Comp.Mutations.Remove(id);
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(MutatableComponent.Mutations));
 
         Log.Debug($"Removed mutation {ToPrettyString(mutation)} from {ToPrettyString(ent)}");
         MutationRemoved((ent, ent.Comp), mutation, user, automatic, predicted);
@@ -512,24 +513,42 @@ public sealed partial class MutationSystem : CommonMutationSystem
             PredictedQueueDel(mutation);
         }
         ent.Comp.Mutations.Clear();
+        DirtyField(ent, ent.Comp, nameof(MutatableComponent.Mutations));
 
-        ent.Comp.Dormant.Clear();
-        Dirty(ent);
+        ClearDormant(ent);
     }
 
     /// <summary>
-    /// Add random dormant mutations.
-    /// Optionally removes all active and mutations and dormant mutations beforehand.
-    /// Predicted only applies to clearing, the RNG is not predicted here
-    /// as mispredicts from tick timing or something might be disastrous.
+    /// Removes all dormant mutations from a mob.
     /// </summary>
-    public void Scramble(Entity<MutatableComponent> ent, bool clear = true, EntityUid? user = null, bool automatic = false, bool predicted = false)
+    public void ClearDormant(Entity<MutatableComponent?> ent)
     {
-        if (clear)
-            ClearMutations(ent.AsNullable(), user, automatic, predicted);
+        if (!_mutatableQuery.Resolve(ent, ref ent.Comp) || ent.Comp.Dormant.Count == 0)
+            return;
 
-        // don't scramble existing mutations
-        if (ent.Comp.Mutations.Count > 0)
+        ent.Comp.Dormant.Clear();
+        DirtyField(ent, ent.Comp, nameof(MutatableComponent.Dormant));
+    }
+
+    /// <summary>
+    /// Removes all dormant mutations from a mob which are not activated.
+    /// </summary>
+    public void ClearUnusedDormant(Entity<MutatableComponent> ent)
+    {
+        if (ent.Comp.Dormant.Count == 0)
+            return;
+
+        ent.Comp.Dormant.RemoveAll(id => !ent.Comp.Mutations.ContainsKey(id));
+        DirtyField(ent, ent.Comp, nameof(MutatableComponent.Dormant));
+    }
+
+    /// <summary>
+    /// Add random dormant mutations until there are enough of them.
+    /// Not predicted as mispredicts might be disastrous.
+    /// </summary>
+    public void AddRandomDormant(Entity<MutatableComponent> ent)
+    {
+        if (_net.IsClient)
             return;
 
         // add enough random dormant mutations so there will be enough sequences.
@@ -542,8 +561,15 @@ public sealed partial class MutationSystem : CommonMutationSystem
 
         // don't have dormant mutation as first item
         _random.Shuffle(ent.Comp.Dormant);
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(MutatableComponent.Dormant));
+    }
 
+    /// <summary>
+    /// DNA scrambling logic for scrambler implant and console scramble button.
+    /// </summary>
+    public void Scramble(Entity<MutatableComponent> ent)
+    {
+        AddRandomDormant(ent);
         MutateDna(ent, rolls: 16);
         RemComp<ScannedGenomeComponent>(ent); // have to rescan it now chud
     }
@@ -558,7 +584,8 @@ public sealed partial class MutationSystem : CommonMutationSystem
         {
             target.Comp.Dormant.Add(dormant);
         }
-        ent.Comp.Dormant.Clear();
+        DirtyField(target, target.Comp, nameof(MutatableComponent.Dormant));
+        ClearDormant(ent.AsNullable());
 
         // transfer the mutation entities
         Log.Debug($"Transferring {ent.Comp.Mutations.Count} mutations from {ToPrettyString(ent)} to {ToPrettyString(target)}");
@@ -572,8 +599,8 @@ public sealed partial class MutationSystem : CommonMutationSystem
         }
         ent.Comp.Mutations.Clear();
 
-        Dirty(ent);
-        Dirty(target);
+        DirtyField(ent, ent.Comp, nameof(MutatableComponent.Mutations));
+        DirtyField(target, target.Comp, nameof(MutatableComponent.Mutations));
     }
 
     /// <summary>
@@ -592,20 +619,26 @@ public sealed partial class MutationSystem : CommonMutationSystem
             builder[n] = _random.Pick(MutationData.ATGC);
         }
 
-        comp.DNA = builder.ToString();
-        Dirty(uid, comp);
+        SetDna((uid, comp), builder.ToString());
     }
 
     public string? GetDna(EntityUid uid)
         => _dnaQuery.CompOrNull(uid)?.DNA;
 
-    public void SetDna(EntityUid uid, string dna)
+    public void SetDna(Entity<DnaComponent?> ent, string dna)
     {
-        if (!_dnaQuery.TryComp(uid, out var comp))
+        if (!_dnaQuery.Resolve(ent, ref ent.Comp, false) || ent.Comp.DNA == dna)
             return;
 
-        comp.DNA = dna;
-        Dirty(uid, comp);
+        ent.Comp.DNA = dna;
+        Dirty(ent, ent.Comp);
+
+        var ev = new GenerateDnaEvent()
+        {
+            Owner = ent.Owner,
+            DNA = ent.Comp.DNA
+        };
+        RaiseLocalEvent(ent, ref ev);
     }
 
     /// <summary>
@@ -646,15 +679,17 @@ public sealed partial class MutationSystem : CommonMutationSystem
             }
         }
 
+        if (_removing.Count == 0)
+            return false;
+
         foreach (var id in _removing)
         {
             PredictedQueueDel(ent.Comp.Mutations[id]);
             ent.Comp.Mutations.Remove(id);
         }
 
-        if (_removing.Count > 0)
-            Dirty(ent);
-        return _removing.Count > 0;
+        DirtyField(ent, ent.Comp, nameof(MutatableComponent.Mutations));
+        return true;
     }
 
     /// <summary>
@@ -667,7 +702,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
             return;
 
         ent.Comp.TotalInstability += instability;
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(MutatableComponent.TotalInstability));
 
         if (!automatic && InstabilityPopup(ent.Comp.TotalInstability) is {} key)
         {

@@ -155,6 +155,9 @@
   id: RitualKnowledge
 
 - type: Tag
+  id: SpaceWhaleSegment
+
+- type: Tag
   id: SpellIgnoreForestAdmonitions
 
 - type: Tag

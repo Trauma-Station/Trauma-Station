@@ -1,0 +1,367 @@
+- type: entity
+  parent: [BaseStructure, ConstructibleMachine]
+  id: GenericFieldGeneratorBase
+  abstract: true
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: InteractionOutline
+  - type: Anchorable
+  - type: SyncSprite
+  - type: Sprite
+    sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_field_generator.rsi
+    state: machine
+    noRot: false
+    layers:
+      - state: machine
+      - state: p6
+        map: ["powerLight"]
+        shader: unshaded
+      - state: connected
+        map: ["connectedLight"]
+        shader: unshaded
+      - state: on
+        map: ["onLight"]
+        shader: unshaded
+      - state: charger
+        map: ["chargerLight"]
+        shader: unshaded
+      - state: lock
+        map: ["enum.LockVisualLayers.Lock"]
+        visible: false
+  - type: Icon
+    sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_field_generator.rsi
+    state: icon
+  - type: GenericFieldGenerator
+    createdField: HolographicField
+  - type: PointLight
+    enabled: false
+    color: "#66ffea"
+    radius: 2
+    energy: 2.0
+    softness: 32.0
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.GenericFieldGeneratorVisuals.PowerLight:
+        powerLight:
+          NoPower: {visible: false}
+          MinimalPower: {visible: true, state: p1}
+          LowPower: {visible: true, state: p2}
+          MediumPower: {visible: true, state: p3}
+          HighPower: {visible: true, state: p4}
+          VeryHighPower: {visible: true, state: p5}
+          FullPower: {visible: true, state: p6}
+      enum.GenericFieldGeneratorVisuals.ConnectionLight:
+        connectedLight:
+          True: { visible: true }
+          False: { visible: false }
+      enum.GenericFieldGeneratorVisuals.OnLight:
+        onLight:
+          True: { visible: true }
+          False: { visible: false }
+      enum.GenericFieldGeneratorVisuals.ChargeLight:
+        chargerLight:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Airtight
+    noAirWhenFullyAirBlocked: true
+  - type: Tag
+    tags:
+    - Wall
+  - type: ExaminableBattery
+  - type: WiresPanel
+  - type: Lock
+    locked: false
+  - type: Battery
+    netsync: false
+    maxCharge: 5000
+    startingCharge: 0
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ApcPowerReceiverBattery
+    batteryRechargeRate: 200
+    idleLoad: 200
+  - type: StationAiWhitelist
+  - type: ExtensionCableReceiver
+  - type: PowerState
+    idlePowerDraw: 200
+    workingPowerDraw: 2000
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200 #needs long range for various remote controls
+  - type: DeviceLinkSink
+    ports:
+    - Toggle
+    - On
+    - Off
+  - type: DeviceLinkSource
+    range: 200
+    ports:
+    - ConnectionStatus
+    - FieldConnected
+    - FieldDisconnected
+    lastSignals:
+      ConnectionStatus: false
+  - type: LockVisuals
+  - type: LockedAnchorable
+  - type: LockedWiresPanel
+  - type: AccessReader
+    access: [["Engineering"]]
+  - type: StaticPrice
+    price: 150
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection:
+          MetalBulletImpact
+    soundTypes:
+      Heat:
+        collection:
+          MetalLaserImpact
+  - type: GuideHelp
+    guides:
+    - HolographicGenerator
+
+#region Holographic Field
+
+- type: entity
+  parent: GenericFieldGeneratorBase
+  id: HolographicFieldGenerator
+  name: holographic field generator
+  description: A machine that generates a holographic field when powered; Keeps the air where it belongs.
+  components:
+  - type: GenericFieldGenerator
+    createdField: HolographicField
+  - type: Machine
+    board: HolographicFieldGeneratorCircuitboard
+
+- type: entity
+  parent: HolographicFieldGenerator
+  id: HolographicFieldGeneratorCharged
+  suffix: Charged, Locked
+  components:
+  - type: GenericFieldGenerator
+    charged: true
+  - type: Battery
+    startingCharge: 50000
+  - type: Lock
+    locked: true
+
+- type: entity
+  parent: HolographicFieldGeneratorCharged
+  id: HolographicFieldGeneratorEnabled
+  suffix: Enabled, Locked
+  components:
+  - type: GenericFieldGenerator
+    enabled: true
+  - type: ActiveFieldGenerator
+
+#region Holographic Barrier
+
+- type: entity
+  parent: GenericFieldGeneratorBase
+  id: HolographicBarrierGenerator
+  name: holographic barrier generator
+  description: A machine that generates a holographic barrier when powered; Keeps the crew where they belong.
+  components:
+  - type: GenericFieldGenerator
+    createdField: HolographicFieldBarrier
+  - type: Machine
+    board: HolographicBarrierGeneratorCircuitboard
+  - type: PointLight
+    color: red
+  - type: Icon
+    sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_barrier_generator.rsi
+    state: icon
+  - type: Sprite
+    sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_barrier_generator.rsi
+
+- type: entity
+  parent: HolographicBarrierGenerator
+  id: HolographicBarrierGeneratorCharged
+  suffix: Charged, Locked
+  components:
+  - type: GenericFieldGenerator
+    charged: true
+  - type: Battery
+    startingCharge: 50000
+  - type: Lock
+    locked: true
+
+- type: entity
+  parent: HolographicBarrierGeneratorCharged
+  id: HolographicBarrierGeneratorEnabled
+  suffix: Enabled, Locked
+  components:
+  - type: GenericFieldGenerator
+    enabled: true
+  - type: ActiveFieldGenerator
+
+#region Fields
+
+- type: entity
+  id: HolographicField
+  name: holographic field
+  description: A holographic field that blocks airflow.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: SpriteFade
+  - type: Sprite
+    sprite: _FarHorizons/Structures/Holo/holographic_field.rsi
+    noRot: false
+    drawdepth: Overdoors
+    layers:
+    - state: field
+      shader: unshaded
+  - type: Icon
+    sprite: _FarHorizons/Structures/Holo/holographic_field.rsi
+    state: field
+  - type: SyncSprite
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+  - type: RadiationBlocker
+    resistance: 15
+  - type: Transform
+    anchored: true
+  - type: BlockWeather
+  - type: Tag
+    tags:
+    - Wall
+  - type: PointLight
+    enabled: true
+    radius: 3
+    color: "#66ffea"
+  - type: GenericField
+  - type: AmbientSound
+    range: 8
+    sound:
+      path: /Audio/Machines/scan_loop.ogg
+
+- type: entity
+  id: HolographicFieldBarrier
+  name: holographic barrier
+  description: A holographic barrier that blocks projectiles and crew.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: _FarHorizons/Structures/Holo/holographic_barrier.rsi
+    state: field
+    noRot: false
+    drawdepth: Overdoors
+    layers:
+    - state: field
+      shader: unshaded
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [20, 60, 150]
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _FarHorizons/Structures/Holo/holographic_damage.rsi
+  - type: Icon
+    sprite: _FarHorizons/Structures/Holo/holographic_barrier.rsi
+    state: field
+  - type: SyncSprite
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+  - type: Transform
+    anchored: true
+  - type: BlockWeather
+  - type: Tag
+    tags:
+    - Wall
+  - type: PointLight
+    enabled: true
+    radius: 3
+    color: red
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection:
+          BulletMiss
+    soundTypes:
+      Heat:
+        collection:
+          EnergyMiss
+  - type: Damageable
+    damageContainer: Shield
+    damageModifierSet: Metallic
+  - type: ExaminableDamage
+    messages: FieldMessages
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: GenericField
+  - type: AmbientSound
+    range: 8
+    sound:
+      path: /Audio/Machines/scan_loop.ogg

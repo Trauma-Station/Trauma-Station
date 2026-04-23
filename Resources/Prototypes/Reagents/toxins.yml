@@ -115,6 +115,21 @@
   metabolisms:
     Bloodstream:
       effects:
+      # <Trauma> - mold is a disease
+      - !type:InfectDisease
+        probability: 0.1
+        scaleProbability: true # more moles more disease
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Vox ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Mold
+          min: 0.5
+        disease: DiseaseBaseMouse # mostly guaranteed cough transmission, mold spores..?
+        mutate: true
+        mutationRate: 0.1
+      # </Trauma>
       - !type:HealthChange
         damage:
           types:

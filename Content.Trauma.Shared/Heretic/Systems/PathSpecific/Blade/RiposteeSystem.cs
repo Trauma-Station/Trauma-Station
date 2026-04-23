@@ -193,7 +193,11 @@ public sealed class RiposteeSystem : EntitySystem
             _combatMode.SetInCombatMode(user, true);
 
         if (_melee.AttemptLightAttack(user, weapon.Owner, weapon.Comp, target) && _net.IsServer &&
-            _melee.InRange(user, target, weapon.Comp.Range, CompOrNull<ActorComponent>(user)?.PlayerSession))
+            _melee.InRange(user,
+                target,
+                weapon.Comp.Range,
+                CompOrNull<ActorComponent>(user)?.PlayerSession,
+                out _))
         {
             if (data.StunTime > TimeSpan.Zero)
                 _stun.TryUpdateParalyzeDuration(target, data.StunTime);

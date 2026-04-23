@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Map;
+// </Trauma>
 using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
@@ -11,6 +14,9 @@ namespace Content.Server.Spawners.EntitySystems
     [UsedImplicitly]
     public sealed class ConditionalSpawnerSystem : EntitySystem
     {
+        // <Trauma>
+        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        // </Trauma>
         [Dependency] private readonly IRobustRandom _robustRandom = default!;
         [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly EntityTableSystem _entityTable = default!;
@@ -125,7 +131,13 @@ namespace Content.Server.Spawners.EntitySystems
             if (TerminatingOrDeleted(ent) || !Exists(ent))
                 return;
 
-            var coords = Transform(ent).Coordinates;
+            // <Trauma> - make it relative to the grid for artifact spawning effects, instead of attached to the artifact
+            var xform = Transform(ent);
+            var coords = xform.Coordinates;
+            var ancestor = xform.GridUid ?? xform.MapUid;
+            if (ent.Comp.Absolute && ancestor != null)
+                coords = new EntityCoordinates(ancestor.Value, _transform.GetRelativePosition(xform, ancestor.Value));
+            // </Trauma>
             var offset = ent.Comp.Offset;
 
             var spawns = _entityTable.GetSpawns(ent.Comp.Table);
