@@ -28,7 +28,7 @@
   - type: Construction
     graph: GaussImprovAmmoGraph
     node: finish
-    
+
 - type: entity
   parent: BaseCartridgeGaussgun
   id: CartridgeDisk
@@ -236,4 +236,3 @@
   - type: Construction
     graph: GaussImprovAmmoGraph
     node: 1
-
