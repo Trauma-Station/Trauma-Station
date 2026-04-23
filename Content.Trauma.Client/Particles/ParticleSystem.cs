@@ -456,9 +456,8 @@ public sealed partial class ParticleSystem : EntitySystem
             else
                 emitter.TargetEntity = null; // entity GONE, fall to TargetPosition
         }
-        if (targetWorldPos == null)
-            targetWorldPos = emitter.TargetPosition;
 
+        targetWorldPos ??= emitter.TargetPosition;
         if (targetWorldPos.HasValue)
         {
             var worldDir = targetWorldPos.Value - emitter.MapCoords.Position;
@@ -480,7 +479,6 @@ public sealed partial class ParticleSystem : EntitySystem
         }
 
         // Resolve overridable scalars once per tick
-        // ᓚᘏᗢ <( look how pretty the formatting is :)
         var ovr          = emitter.Overrides;
         var drag         = ovr?.Drag          ?? proto.Drag;
         var constForce   = ovr?.ConstantForce ?? proto.ConstantForce;
@@ -803,9 +801,9 @@ public sealed partial class ParticleSystem : EntitySystem
                         : SpriteSpecifierSerializer.TextureRoot / rsi.RsiPath;
                     resource = _resource.GetResource<RSIResource>(path).RSI;
                 }
-                catch
+                catch (Exception e)
                 {
-                    Log.Error("Could not resolve RSI resource for active emitter.");
+                    Log.Error($"Could not resolve RSI resource '{rsi.RsiPath}' for particle prototype {emitter.Proto.ID}: {e}");
                     break;
                 }
 
@@ -819,9 +817,9 @@ public sealed partial class ParticleSystem : EntitySystem
             case SpriteSpecifier.Texture tex:
             {
                 try { emitter.Frames = new[] { _sprite.Frame0(tex) }; }
-                catch
+                catch (Exception e)
                 {
-                   Log.Error("Could not resolve sprite texture for active emitter.");
+                    Log.Error($"Could not resolve sprite texture '{tex.TexturePath}' for particle prototype {emitter.Proto.ID}: {e}");
                 }
                 break;
             }
