@@ -2,6 +2,9 @@
   id: AdvancedMagboots
 
 - type: Tag
+  id: AmmoGaussgun
+
+- type: Tag
   id: AnvilBottom
 
 - type: Tag
@@ -18,6 +21,12 @@
 
 - type: Tag
   id: Butt
+
+- type: Tag
+  id: PartCapacitor
+
+- type: Tag
+  id: CartridgeGaussgun
 
 - type: Tag
   id: CartridgeRPG2
@@ -104,7 +113,13 @@
   id: IngotWorkableSteel
 
 - type: Tag
+  id: MagazineGaussgun
+
+- type: Tag
   id: MagazineTurret
+
+- type: Tag
+  id: MetalContainer
 
 - type: Tag
   id: OverrideKeyComponents
@@ -123,6 +138,9 @@
 
 - type: Tag
   id: RCD
+
+- type: Tag
+  id: RechargingBoard
 
 - type: Tag
   id: RevArmorPlate

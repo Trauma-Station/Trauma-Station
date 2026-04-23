@@ -159,7 +159,7 @@
   practical:
     GunsmithingKnowledge: 4
     WeaponsKnowledge: 3
-  qualityPrototype: ShitCraft
+  qualityPrototype: BaseQuality
   # </Trauma>
 
 - type: construction

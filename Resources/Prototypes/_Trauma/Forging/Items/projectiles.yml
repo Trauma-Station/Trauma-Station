@@ -10,3 +10,42 @@
   skills:
     MetalworkingKnowledge: 1
     WeaponsKnowledge: 1
+
+- type: forgedItem
+  id: CoilgunBearings
+  name: coilgun bearing ammunition
+  category: Projectiles
+  result: CartridgeBallBearing
+  work: 50
+  amount: 30
+  skills:
+    MetalworkingKnowledge: 1
+    GunsmithingKnowledge: 1
+  whitelist:
+  - Steel
+
+- type: forgedItem
+  id: CoilgunDisk
+  name: coilgun disk ammunition
+  category: Projectiles
+  result: CartridgeDisk
+  work: 50
+  amount: 30
+  skills:
+    MetalworkingKnowledge: 1
+    GunsmithingKnowledge: 1
+  whitelist:
+  - Steel
+
+- type: forgedItem
+  id: CoilgunShard
+  name: coilgun shard ammunition
+  category: Projectiles
+  result: CartridgeShard
+  work: 100
+  amount: 30
+  skills:
+    MetalworkingKnowledge: 1
+    GunsmithingKnowledge: 1
+  whitelist:
+  - Steel

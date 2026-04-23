@@ -26,7 +26,7 @@
   parent: [BaseRevForgedWeapon, BracingDurability]
   id: RevMace
   name: forged mace
-  description: A robust mace, stuns enemies. Not great against modern armor, or for killing.
+  description: A robust mace, stuns enemies. Knocks the air out of targets and makes them struggle to speak.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Revs/mace.rsi
@@ -48,6 +48,19 @@
   - type: MeleeThrowOnHit
     distance: 0.3
     speed: 1
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 1
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: MuteToxin
+        Quantity: 1
+  - type: MeleeChemicalInjector
+    transferAmount: 0.1
+    solution: melee
 
 - type: entity
   parent: [BaseRevForgedWeapon, KnifeDurability]
