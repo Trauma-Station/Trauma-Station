@@ -1,15 +1,15 @@
-- type: construction
-  id: GaussRiflePrefab
-  graph: GaussRiflePrefabGraph
-  startNode: start
-  targetNode: finish
-  category: construction-category-weapons
-  objectType: Item
-  theory:
-    FabricationKnowledge: 3
-    ElectronicsKnowledge: 1
-  qualityPrototype: BaseQuality
-  useQuality: false
+# - type: construction
+#   id: GaussRiflePrefab
+#   graph: GaussRiflePrefabGraph
+#   startNode: start
+#   targetNode: finish
+#   category: construction-category-weapons
+#   objectType: Item
+#   theory:
+#     FabricationKnowledge: 3
+#     ElectronicsKnowledge: 1
+#   qualityPrototype: BaseQuality
+#   useQuality: false
 
 - type: construction
   id: GaussRifle

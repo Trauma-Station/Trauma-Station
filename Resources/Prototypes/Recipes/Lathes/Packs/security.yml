@@ -52,10 +52,12 @@
   - MagazineRifleEmpty
   - SpeedLoaderMagnum
   - SpeedLoaderMagnumEmpty
+  # <Trauma>
   - MagazineBoxGaussgunBullet
   - MagazineBoxGaussgunDisk
   - MagazineBoxGaussgunShard
   - MagazineGaussgun
+  # </Trauma>
 
 - type: latheRecipePack
   id: SecurityWeaponsStatic
