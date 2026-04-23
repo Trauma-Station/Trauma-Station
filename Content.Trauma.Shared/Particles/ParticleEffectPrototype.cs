@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Particles;
@@ -103,11 +104,18 @@ public partial record struct EmissionShapeData()
 /// Defines a reusable particle effect prototype.
 /// </summary>
 [Prototype]
-public sealed partial class ParticleEffectPrototype : IPrototype
+public sealed partial class ParticleEffectPrototype : IPrototype, IInheritingPrototype
 {
     [IdDataField] public string ID { get; private set; } = default!;
 
-    #region =^..^= Visuals =^..^=
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<ParticleEffectPrototype>))]
+    public string[]? Parents { get; private set; }
+
+    [NeverPushInheritance]
+    [AbstractDataField]
+    public bool Abstract { get; private set; }
+
+    #region Visuals
 
     /// <summary>
     /// Texture drawn for each particle. Supports RSI states and plain texture paths.
