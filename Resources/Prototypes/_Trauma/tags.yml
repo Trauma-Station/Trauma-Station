@@ -80,6 +80,9 @@
   id: FlamethrowerTank
 
 - type: Tag
+  id: FleshWormSegment
+
+- type: Tag
   id: ForceHereticMinion
 
 - type: Tag
@@ -150,6 +153,9 @@
 
 - type: Tag
   id: RitualFeastOfOwls
+
+- type: Tag
+  id: RitualImperfect
 
 - type: Tag
   id: RitualKnowledge

@@ -31,6 +31,12 @@ public sealed partial class HereticAbilitySystem
 
         SubscribeLocalEvent<HereticComponent, HereticGraspUpgradeEvent>(OnGraspUpgrade);
         SubscribeLocalEvent<HereticComponent, HereticRemoveActionEvent>(OnRemoveAction);
+        SubscribeLocalEvent<HereticComponent, HereticAddMindComponentsEvent>(OnAddMindComponents);
+    }
+
+    private void OnAddMindComponents(Entity<HereticComponent> ent, ref HereticAddMindComponentsEvent args)
+    {
+        EntityManager.AddComponents(ent, args.AddedComponents);
     }
 
     private void OnRemoveAction(Entity<HereticComponent> ent, ref HereticRemoveActionEvent args)

@@ -40,7 +40,6 @@
     whitelist:
       tags:
       - SpaceWhaleSegment
-  - type: ForcePvsOverride
 
 - type: entity
   id: SpaceLeviathan
@@ -162,6 +161,7 @@
     - SpaceWhaleSegment
   - type: Physics
     bodyType: Dynamic
+  - type: TailedEntitySegment
 
 - type: entity
   id: SpaceLeviathanDespawn

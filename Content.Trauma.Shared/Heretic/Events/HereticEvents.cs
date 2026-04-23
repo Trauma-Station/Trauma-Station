@@ -4,6 +4,7 @@ using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Audio;
@@ -56,6 +57,27 @@ public sealed partial class HereticGraspUpgradeEvent : EntityEventArgs
 
     [DataField(required: true)]
     public ComponentRegistry AddedComponents = new();
+}
+
+[DataDefinition]
+public sealed partial class HereticAddMindComponentsEvent
+{
+    [DataField(required: true)]
+    public ComponentRegistry AddedComponents = new();
+}
+
+
+[DataDefinition]
+public sealed partial class IncreaseFleshGhoulLimitEvent
+{
+    [DataField(required: true)]
+    public int GhoulLimitIncrease;
+
+    [DataField(required: true)]
+    public int VoicelessDeadLimitIncrease;
+
+    [DataField]
+    public ProtoId<TagPrototype> ImperfectRitual = "RitualImperfect";
 }
 
 [DataDefinition]
