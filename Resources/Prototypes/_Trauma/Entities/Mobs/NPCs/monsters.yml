@@ -361,10 +361,10 @@
     drawdepth: Mobs
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
-      - state: coconutcrab
+      - state: coconutcrabnoshell
   - type: HTN
     rootTask:
-      task: XenomorphCompound
+      task: XenomorphCompound # i could replace with a custom htn but it'll be fiiiiiiiine
     blackboard:
       NavClimb: !type:Bool
         true
