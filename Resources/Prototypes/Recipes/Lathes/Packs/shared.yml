@@ -13,6 +13,7 @@
   - ModularReceiver
   - MicroManipulatorStockPart
   - ConveyorBeltAssembly
+  - PartCapacitor # Trauma
 
 - type: latheRecipePack
   id: LightsStatic
