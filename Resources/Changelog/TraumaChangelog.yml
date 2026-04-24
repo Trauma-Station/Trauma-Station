@@ -7364,3 +7364,10 @@ Entries:
   id: 852
   time: '2026-04-23T23:45:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2208
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Insurgents require overall time rather than tider time
+  id: 853
+  time: '2026-04-24T00:35:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2209
