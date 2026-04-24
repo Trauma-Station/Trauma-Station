@@ -3,10 +3,8 @@
   id: DnaMeltingStatusEffect
   name: DNA melting
   components:
-  - type: TriggerOnStatusEffectRemoved
-  - type: EntityEffectOnTrigger
-    targetUser: true
-    effects:
+  - type: StatusEffectEffectsApply
+    effectsOnRemoval:
     - !type:NestedEffect
       conditions: # don't do a bad thing if instability is fixed in time
       - !type:DnaUnstableCondition
@@ -24,10 +22,8 @@
   parent: StatusEffectBase
   id: LookingUpStatusEffect
   components:
-  - type: TriggerOnStatusEffectRemoved
-  - type: EntityEffectOnTrigger
-    targetUser: true
-    effects:
+  - type: StatusEffectEffectsApply
+    effectsOnRemoval:
     - !type:PopupMessage
       type: Pvs
       messages:

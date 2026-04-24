@@ -12,6 +12,10 @@
   - type: Action
     raiseOnAction: true
     itemIconStyle: BigAction
+  - type: ActionConditionsBefore
+    conditions:
+    - !type:HasCharges # TODO: Adjust for each ability after testing
+      amount: 30
 
 - type: entity
   parent: BaseVampireAction

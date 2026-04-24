@@ -23,7 +23,8 @@ public sealed class UnableToShootStatusEffectSystem : EntitySystem
 
     private void OnAttemptShoot(Entity<UnableToShootStatusEffectComponent> ent, ref StatusEffectRelayedEvent<ShotAttemptedEvent> args)
     {
-        _popup.PopupClient("Your fingers slip!", ent.Owner, ent.Owner);
+        var user = args.Args.User;
+        _popup.PopupClient("Your fingers slip!", user, user);
 
         var ev = args.Args;
         ev.Cancel();
