@@ -11,6 +11,12 @@
     solutions:
       stomach:
         maxVol: 1984
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 12
+        - ReagentId: Fat
+          Quantity: 3
 
 - type: entity
   abstract: true
@@ -51,6 +57,10 @@
     layers:
     - map: ["enum.TailedEntitySegmentLayer.Base"]
       state: armsy_mid
+  - type: ContainerContainer
+    containers:
+      body_organs: !type:Container
+  - type: BodyCache
   - type: Body
   - type: InitialBody
     organs:
