@@ -5,7 +5,7 @@ using Content.Shared.EntityEffects;
 namespace Content.Trauma.Shared.StatusEffects;
 
 /// <summary>
-/// Status effect that applies status effects on removal and on apply.
+/// Status effect that applies entity effects on removal and on apply.
 /// The name sucks, but I can't think of a better one.
 /// </summary>
 [RegisterComponent, NetworkedComponent]

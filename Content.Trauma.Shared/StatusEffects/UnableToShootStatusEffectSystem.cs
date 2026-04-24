@@ -16,7 +16,7 @@ public sealed class UnableToShootStatusEffectSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StatusEffectContainerComponent, ShotAttemptedEvent>(_statusEffects.RefRelayStatusEffectEvent);
+        SubscribeLocalEvent<StatusEffectContainerComponent, ShotAttemptedEvent>(_statusEffects.RelayEvent);
 
         SubscribeLocalEvent<UnableToShootStatusEffectComponent, StatusEffectRelayedEvent<ShotAttemptedEvent>>(OnAttemptShoot);
     }

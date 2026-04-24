@@ -37,7 +37,7 @@ public sealed partial class StatusEffectsSystem
         SubscribeLocalEvent<StatusEffectContainerComponent, BleedModifierEvent>(RefRelayStatusEffectEvent);
     }
 
-    public void RefRelayStatusEffectEvent<T>(EntityUid uid, StatusEffectContainerComponent component, ref T args) where T : struct // Trauma - made public
+    private void RefRelayStatusEffectEvent<T>(EntityUid uid, StatusEffectContainerComponent component, ref T args) where T : struct
     {
         RelayEvent((uid, component), ref args);
     }
