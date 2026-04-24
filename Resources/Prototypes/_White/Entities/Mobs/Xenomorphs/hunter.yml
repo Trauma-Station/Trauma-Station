@@ -6,7 +6,7 @@
   abstract: true
   components:
   - type: TailedEntity
-    amount: 15
+    amount: 17
     spacing: 0.170
     prototype: MobXenomorphTailSegmentBase
   - type: Sprite
