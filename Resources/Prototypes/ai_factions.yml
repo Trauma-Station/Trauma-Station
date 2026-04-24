@@ -171,8 +171,11 @@
 
 - type: npcFaction
   id: Zombie
+  # <Trauma>
+  friendly:
+  - InitialInfected
   hostile:
-  # <Goob>
+  - Insurgent
   - Changeling
   - Heretic
   - Blob
@@ -180,7 +183,7 @@
   - PirateFaction
   - Wraith
   - Lavafauna
-  # </Goob>
+  # </Trauma>
   - NanoTrasen
   - SimpleNeutral
   - SimpleHostile
@@ -192,9 +195,6 @@
   - Wizard
   - Dragon
   - Xenoborg
-  # <Trauma>
-  - Insurgent
-  # </Trauma>
 
 - type: npcFaction
   id: Revolutionary
