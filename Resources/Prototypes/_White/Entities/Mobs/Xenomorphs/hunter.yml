@@ -45,7 +45,7 @@
     lastVisibility: 0.2
   - type: Jump
     jumpAction: ActionJumpXenomorph
-  # - type: VentCrawler
+  - type: VentCrawler
   - type: Cuffable
   - type: MovementSpeedModifier
     baseWalkSpeed: 3

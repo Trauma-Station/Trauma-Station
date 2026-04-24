@@ -23,7 +23,7 @@
       visible: false
   - type: Xenomorph
     caste: Sentinel
-  # - type: VentCrawler
+  - type: VentCrawler
   - type: Cuffable
   - type: MobThresholds
     thresholds:
