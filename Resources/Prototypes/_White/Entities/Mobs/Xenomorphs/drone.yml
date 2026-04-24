@@ -30,7 +30,7 @@
   id: MobXenomorphDrone
   components:
   - type: TailedEntity
-    amount: 30
+    amount: 17
     spacing: 0.170
     prototype: MobXenomorphTailSegmentBase
   - type: XenomorphEvolution

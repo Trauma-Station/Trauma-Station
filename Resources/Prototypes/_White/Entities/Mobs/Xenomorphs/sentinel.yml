@@ -6,8 +6,8 @@
   abstract: true
   components:
   - type: TailedEntity
-    amount: 65
-    spacing: 1
+    amount: 15
+    spacing: 0.170
     prototype: MobXenomorphTailSegmentBase
   - type: Sprite
     sprite: _White/Mobs/Aliens/Xenomorphs/sentinel.rsi
