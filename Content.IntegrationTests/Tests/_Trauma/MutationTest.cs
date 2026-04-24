@@ -11,7 +11,6 @@ using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
-[TestFixture]
 [TestOf(typeof(MutationSystem))]
 public sealed class MutationTest : GameTest
 {
