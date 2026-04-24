@@ -7311,3 +7311,84 @@ Entries:
   id: 845
   time: '2026-04-22T12:47:40.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2175
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Removed popup spam about epiphany and shit from skills, nobody cares about
+      getting 1 xp in tau ceti basic.
+  id: 846
+  time: '2026-04-22T20:59:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2180
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Most non-weapon crafting recipes no longer require levels in any skills to
+      make.
+  id: 847
+  time: '2026-04-22T21:26:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2182
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dwarves are now required to have facial hair.
+  id: 848
+  time: '2026-04-23T15:31:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2193
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed janitor keyring working telepathically.
+  id: 849
+  time: '2026-04-23T19:32:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2198
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to craft bananium swords.
+  id: 850
+  time: '2026-04-23T19:46:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2199
+- author: Armok
+  changes:
+  - type: Fix
+    message: Fix more turret AI cheese
+  id: 851
+  time: '2026-04-23T23:24:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2186
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Grand Assault moved to a 5 minute timer crime
+  id: 852
+  time: '2026-04-23T23:45:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2208
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Insurgents require overall time rather than tider time
+  id: 853
+  time: '2026-04-24T00:35:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2209
+- author: TrixxedHeart, Luminal
+  changes:
+  - type: Add
+    message: Particles. Currently, only flammables have particles.
+  id: 854
+  time: '2026-04-24T08:21:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2136
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed simplemobs metagaming initial infected.
+  id: 855
+  time: '2026-04-24T09:13:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2214
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: Ported Decapoids, a new playable species, from impstation.
+  id: 856
+  time: '2026-04-24T10:20:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1351

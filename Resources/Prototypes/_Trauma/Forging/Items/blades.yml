@@ -45,6 +45,7 @@
 - type: forgedItem
   parent: BaseKnife
   id: SurvivalKnife
+  construction: null # it's all metal
   result: ForgedSurvivalKnife
 
 - type: forgedItem

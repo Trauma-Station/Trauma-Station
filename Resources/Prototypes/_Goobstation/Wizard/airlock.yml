@@ -93,10 +93,8 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # <Trauma>
   theory:
-    AirlocksKnowledge: 1
-  # </Trauma>
+    AirlocksKnowledge: 0
 
 - type: construction
   id: AirlockUraniumGlass
@@ -108,10 +106,8 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # <Trauma>
   theory:
-    AirlocksKnowledge: 1
-  # </Trauma>
+    AirlocksKnowledge: 0
 
 # Construction
 - type: constructionGraph

@@ -9,7 +9,7 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   practical:
     ElectronicsKnowledge: 2
   # </Trauma>
@@ -25,7 +25,7 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -42,7 +42,7 @@
   - !type:WallmountCondition {}
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -89,7 +89,7 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -103,7 +103,7 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -117,7 +117,7 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   practical:
     ElectronicsKnowledge: 3 # 6 kW!!
   # </Trauma>
@@ -134,7 +134,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -150,7 +150,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -180,8 +180,8 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
-    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 0
+    InfrastructureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -196,8 +196,8 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
-    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 0
+    InfrastructureKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
     MetalworkingKnowledge: 1
@@ -229,7 +229,7 @@
   mirror: DisposalRouterFlipped
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -246,7 +246,7 @@
   mirror: DisposalRouter
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -262,8 +262,8 @@
   mirror: DisposalSignalRouterFlipped
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
-    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 0
+    InfrastructureKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
     MetalworkingKnowledge: 1
@@ -281,8 +281,8 @@
   mirror: DisposalSignalRouter
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
-    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 0
+    InfrastructureKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
     MetalworkingKnowledge: 1
@@ -299,12 +299,13 @@
   mirror: DisposalJunctionFlipped
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    MetalworkingKnowledge: 0
   # </Trauma>
 
 - type: construction
+  parent: DisposalJunction # Trauma
   hide: true
   id: DisposalJunctionFlipped
   graph: DisposalPipe
@@ -314,12 +315,6 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   mirror: DisposalJunction
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: DisposalYJunction
@@ -331,7 +326,7 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -346,7 +341,7 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -381,8 +376,8 @@
   - !type:WallmountCondition {}
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
-    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 0
+    InfrastructureKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -399,7 +394,7 @@
   - !type:WallmountCondition {}
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
     InfrastructureKnowledge: 0 # fire alarms are pretty obvious
   # </Trauma>
 
@@ -414,8 +409,8 @@
   canRotate: true
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
-    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 0
+    InfrastructureKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -433,11 +428,12 @@
   - GasPipeSensorAlt2
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
-    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 0
+    InfrastructureKnowledge: 0
   # </Trauma>
 
 - type: construction
+  parent: GasPipeSensor # Trauma
   id: GasPipeSensorAlt1
   hide: true
   graph: GasPipeSensor
@@ -451,13 +447,9 @@
   - GasPipeSensor
   - GasPipeSensorAlt1
   - GasPipeSensorAlt2
-  # <Trauma>
-  theory:
-    ElectronicsKnowledge: 1
-    InfrastructureKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasPipeSensor # Trauma
   id: GasPipeSensorAlt2
   hide: true
   graph: GasPipeSensor
@@ -471,11 +463,6 @@
   - GasPipeSensor
   - GasPipeSensorAlt1
   - GasPipeSensorAlt2
-  # <Trauma>
-  theory:
-    ElectronicsKnowledge: 1
-    InfrastructureKnowledge: 1
-  # </Trauma>
 
 # ATMOS PIPES
 - type: construction
@@ -493,12 +480,13 @@
   - GasPipeHalfAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: GasPipeHalf # Trauma
   id: GasPipeHalfAlt1
   hide: true
   graph: GasPipe
@@ -511,14 +499,9 @@
   - GasPipeHalf
   - GasPipeHalfAlt1
   - GasPipeHalfAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasPipeHalf # Trauma
   id: GasPipeHalfAlt2
   hide: true
   graph: GasPipe
@@ -531,12 +514,6 @@
   - GasPipeHalf
   - GasPipeHalfAlt1
   - GasPipeHalfAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasPipeStraight
@@ -558,6 +535,7 @@
   # </Trauma>
 
 - type: construction
+  parent: GasPipeStraight # Trauma
   id: GasPipeStraightAlt1
   hide: true
   graph: GasPipe
@@ -570,14 +548,9 @@
   - GasPipeStraight
   - GasPipeStraightAlt1
   - GasPipeStraightAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 0 # it's a pipe
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasPipeStraight # Trauma
   id: GasPipeStraightAlt2
   hide: true
   graph: GasPipe
@@ -590,12 +563,6 @@
   - GasPipeStraight
   - GasPipeStraightAlt1
   - GasPipeStraightAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 0 # it's a pipe
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasPipeBend
@@ -618,6 +585,7 @@
   # </Trauma>
 
 - type: construction
+  parent: GasPipeBend # Trauma
   id: GasPipeBendAlt1
   hide: true
   graph: GasPipe
@@ -630,14 +598,9 @@
   - GasPipeBend
   - GasPipeBendAlt1
   - GasPipeBendAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 0 # it's a bent pipe
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasPipeBend # Trauma
   id: GasPipeBendAlt2
   hide: true
   graph: GasPipe
@@ -650,12 +613,6 @@
   - GasPipeBend
   - GasPipeBendAlt1
   - GasPipeBendAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 0 # it's a bent pipe
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasPipeTJunction
@@ -678,6 +635,7 @@
   # </Trauma>
 
 - type: construction
+  parent: GasPipeTJunction # Trauma
   id: GasPipeTJunctionAlt1
   hide: true
   graph: GasPipe
@@ -690,14 +648,9 @@
   - GasPipeTJunction
   - GasPipeTJunctionAlt1
   - GasPipeTJunctionAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasPipeTJunction # Trauma
   id: GasPipeTJunctionAlt2
   hide: true
   graph: GasPipe
@@ -710,12 +663,6 @@
   - GasPipeTJunction
   - GasPipeTJunctionAlt1
   - GasPipeTJunctionAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasPipeFourway
@@ -732,12 +679,13 @@
   - GasPipeFourwayAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: GasPipeFourway # Trauma
   id: GasPipeFourwayAlt1
   hide: true
   graph: GasPipe
@@ -750,14 +698,9 @@
   - GasPipeFourway
   - GasPipeFourwayAlt1
   - GasPipeFourwayAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasPipeFourway # Trauma
   id: GasPipeFourwayAlt2
   hide: true
   graph: GasPipe
@@ -770,12 +713,6 @@
   - GasPipeFourway
   - GasPipeFourwayAlt1
   - GasPipeFourwayAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  practical:
-    MetalworkingKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasPipeManifold
@@ -787,9 +724,9 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    MetalworkingKnowledge: 2
   # </Trauma>
 
 # ATMOS UNARY
@@ -805,7 +742,7 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -822,7 +759,7 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -839,7 +776,10 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -855,6 +795,9 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   theory:
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -876,6 +819,9 @@
   - GasPressurePumpAlt2
   # <Trauma>
   theory:
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -897,6 +843,9 @@
   - GasPressurePumpAlt2
   # <Trauma>
   theory:
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -918,6 +867,9 @@
   - GasPressurePumpAlt2
   # <Trauma>
   theory:
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -938,11 +890,15 @@
   - GasVolumePumpAlt2
   # <Trauma>
   theory:
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: GasVolumePump # Trauma
   id: GasVolumePumpAlt1
   hide: true
   graph: GasBinary
@@ -957,13 +913,9 @@
   - GasVolumePump
   - GasVolumePumpAlt1
   - GasVolumePumpAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasVolumePump # Trauma
   id: GasVolumePumpAlt2
   hide: true
   graph: GasBinary
@@ -978,11 +930,6 @@
   - GasVolumePump
   - GasVolumePumpAlt1
   - GasVolumePumpAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasPassiveGate
@@ -1000,10 +947,13 @@
   - GasPassiveGateAlt2
   # <Trauma>
   theory:
+    InfrastructureKnowledge: 0
+  practical:
     InfrastructureKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: GasPassiveGate # Trauma
   id: GasPassiveGateAlt1
   hide: true
   graph: GasBinary
@@ -1018,12 +968,9 @@
   - GasPassiveGate
   - GasPassiveGateAlt1
   - GasPassiveGateAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasPassiveGate # Trauma
   id: GasPassiveGateAlt2
   hide: true
   graph: GasBinary
@@ -1038,10 +985,6 @@
   - GasPassiveGate
   - GasPassiveGateAlt1
   - GasPassiveGateAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasPressureRegulator
@@ -1059,11 +1002,15 @@
   - GasPressureRegulatorAlt2
   # <Trauma>
   theory:
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: GasPressureRegulator # Trauma
   id: GasPressureRegulatorAlt1
   hide: true
   graph: GasBinary
@@ -1078,13 +1025,9 @@
   - GasPressureRegulator
   - GasPressureRegulatorAlt1
   - GasPressureRegulatorAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasPressureRegulator # Trauma
   id: GasPressureRegulatorAlt2
   hide: true
   graph: GasBinary
@@ -1099,11 +1042,6 @@
   - GasPressureRegulator
   - GasPressureRegulatorAlt1
   - GasPressureRegulatorAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasValve
@@ -1121,10 +1059,13 @@
   - GasValveAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: GasValve # Trauma
   id: GasValveAlt1
   hide: true
   graph: GasBinary
@@ -1139,12 +1080,9 @@
   - GasValve
   - GasValveAlt1
   - GasValveAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: GasValve # Trauma
   id: GasValveAlt2
   hide: true
   graph: GasBinary
@@ -1159,10 +1097,6 @@
   - GasValve
   - GasValveAlt1
   - GasValveAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: SignalControlledValve
@@ -1180,11 +1114,15 @@
   - SignalControlledValveAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: SignalControlledValve # Trauma
   id: SignalControlledValveAlt1
   graph: GasBinary
   startNode: start
@@ -1198,13 +1136,9 @@
   - SignalControlledValve
   - SignalControlledValveAlt1
   - SignalControlledValveAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: SignalControlledValve # Trauma
   id: SignalControlledValveAlt2
   graph: GasBinary
   startNode: start
@@ -1218,11 +1152,6 @@
   - SignalControlledValve
   - SignalControlledValveAlt1
   - SignalControlledValveAlt2
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasPort
@@ -1236,7 +1165,9 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1249,7 +1180,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1262,7 +1195,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1276,7 +1211,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
   # </Trauma>
 
 # ATMOS TRINARY
@@ -1293,11 +1230,15 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: GasFilter # Trauma
   id: GasFilterFlipped
   hide: true
   graph: GasTrinary
@@ -1309,11 +1250,6 @@
   mirror: GasFilter
   conditions:
     - !type:NoUnstackableInTile
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GasMixer
@@ -1328,11 +1264,15 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
+  parent: GasMixer # Trauma
   id: GasMixerFlipped
   hide: true
   graph: GasTrinary
@@ -1344,11 +1284,6 @@
   mirror: GasMixer
   conditions:
     - !type:NoUnstackableInTile
-  # <Trauma>
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: PressureControlledValve
@@ -1362,7 +1297,10 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -1381,7 +1319,7 @@
   - !type:WallmountCondition {}
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   # </Trauma>
 
 # TIMERS
@@ -1398,7 +1336,7 @@
   - !type:WallmountCondition
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -1415,7 +1353,7 @@
   - !type:WallmountCondition
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
     InfrastructureKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
@@ -1435,7 +1373,7 @@
   - !type:WallmountCondition
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
     InfrastructureKnowledge: 0
   practical:
     ElectronicsKnowledge: 1

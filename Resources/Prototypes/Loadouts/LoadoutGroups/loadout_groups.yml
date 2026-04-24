@@ -1497,6 +1497,7 @@
   hidden: true
   loadouts:
   - LoadoutSpeciesBreathTool
+  - LoadoutDecapoidBreathTool # Trauma
 
 - type: loadoutGroup
   id: GroupSpeciesBreathToolMedical
@@ -1506,6 +1507,7 @@
   hidden: true
   loadouts:
   - LoadoutSpeciesBreathToolMedical
+  - LoadoutDecapoidBreathTool # Trauma
 
 - type: loadoutGroup
   id: GroupSpeciesBreathToolSecurity
@@ -1515,3 +1517,4 @@
   hidden: true
   loadouts:
   - LoadoutSpeciesBreathToolSecurity
+  - LoadoutDecapoidBreathTool # Trauma
