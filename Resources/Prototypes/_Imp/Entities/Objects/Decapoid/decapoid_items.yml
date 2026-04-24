@@ -3,7 +3,6 @@
   id: DecapoidClawItem
   name: decapoid claw
   suffix: Unremoveable
-  save: false
   description: 'A large claw. Not very good for fine manipulation, but very strong and very sharp.'
   components:
   - type: Sprite
@@ -61,7 +60,6 @@
   name: vaporizer
   parent: ClothingMaskGas
   id: DecapoidBreathingApparatus
-  save: false
   description: 'A neck-mounted breathing apparatus for Decapoids. Moistens your gills, if you have them. Also functions as a brain-to-voice translator.'
   components:
   - type: Sprite
