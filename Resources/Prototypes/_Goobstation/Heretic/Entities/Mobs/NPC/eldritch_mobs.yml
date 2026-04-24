@@ -6,6 +6,8 @@
     slots: []
   - type: Woundable
     boneEntity: null
+  - type: Destructible
+    thresholds: []
 
 - type: entity
   parent:
@@ -434,7 +436,7 @@
   components:
   - type: Ghoul
     spawnOnDeathPrototype: SheetPlasma1
-    totalHealth: 15
+    totalHealth: 25
     ghostRoleName: ghostrole-fire-shark-name
     ghostRoleDesc: ghostrole-fire-shark-desc
   - type: GhostRole
@@ -645,7 +647,6 @@
     totalHealth: 250
     changeHumanoidProfile: false
     deathBehavior: GibOrgans
-    canDeconvert: false
   - type: RandomMetadata
     nameSegments:
     - NamesFirst

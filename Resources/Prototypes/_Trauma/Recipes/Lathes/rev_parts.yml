@@ -27,3 +27,10 @@
   result: RevArmorPlate
   materials:
     Steel: 500
+
+- type: latheRecipe
+  parent: BaseRevComponent
+  id: RevCuffs
+  result: RevHandcuffs
+  materials:
+    Steel: 200

@@ -7392,3 +7392,43 @@ Entries:
   id: 856
   time: '2026-04-24T10:20:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1351
+- author: Armok
+  changes:
+  - type: Add
+    message: Gauss rifle, an early game security ballistic
+  - type: Add
+    message: Gauss rifle and pistol crafting recipes
+  - type: Add
+    message: Three types of gauss rifle ammo
+  - type: Add
+    message: Sounds for saws and circular saws tool use
+  - type: Fix
+    message: rev mace now mutes targets
+  - type: Add
+    message: Forge and improv crafting recipes for gauss gun magazines and ammunition.
+  - type: Add
+    message: 'Update forge sprites '
+  id: 857
+  time: '2026-04-24T16:17:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2205
+- author: Aviu
+  changes:
+  - type: Add
+    message: >-
+      Flesh heretic ghouls, as well as fire sharks and rust walkers are now
+      limited.
+  - type: Add
+    message: >-
+      Flesh heretic can recall ghouls on the rune by alt-clicking it with mansus
+      grasp.
+  - type: Tweak
+    message: Voiceless dead have 100hp again.
+  - type: Tweak
+    message: 'Fire shark hp: 15 -> 25.'
+  - type: Tweak
+    message: Risen ghouls deconvert on death, holy water deconversion removed.
+  - type: Add
+    message: Flesh ascension now lets you shapeshift into a giant worm, scary.
+  id: 858
+  time: '2026-04-24T16:23:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2192

@@ -600,61 +600,14 @@
       applyOn: Result
       effects:
       - !type:GhoulifyEffect
+        health: 100
       - !type:AddComponents
         components:
         - type: Muted
         - type: HereticBladeUserBonusDamage
-        - type: VoicelessDead
-    limitReachedEffects:
-    - !type:LookupRitualEffect
-      applyOn: Platform
-      result: Look
-    - !type:SaveResultRitualEffect
-      applyOn: Look
-      result: Ghouls
-      individualConditions:
-      - !type:IsLimitedOutputCondition
-    - !type:IfElseRitualEffect
-      saveResultKey: SuccessOverride
-      ifConditions:
-      - !type:InputCountCondition
-        applyOn: Ghouls
-        result: ToHeal
-        min: 1
-      effectsA:
-      - !type:EffectsRitualEffect
-        applyOn: ToHeal
-        effects:
-        - !type:Rejuvenate
-        conditions:
-        - !type:ProcessIngredientsCondition
-          applyOn: Look
-          deleteEntitiesKey: Delete
-          splitEntitiesKey: Split
-          ingredients:
-          - whitelist:
-              tags:
-              - Muzzle
-            name: heretic-ritual-ingredient-muzzle
-      - !type:SplitIngredientsRitualEffect
-        applyOn: Split
-      - !type:EffectsRitualEffect
-        applyOn: Delete
-        effects:
-        - !type:Delete
-      effectsB:
-      - !type:FindLostLimitedOutputEffect
-        applyOn: Platform
-        result: Lost
-        minRange: 1.5
-      - !type:TeleportToRuneEffect
-        applyOn: Result
-        conditions:
-        - !type:InputCountCondition
-          applyOn: Lost
-          result: Result
-          min: 1
-          max: 1
+  - type: Tag
+    tags:
+    - RitualImperfect
 
 - type: entity
   id: RitualRaw
@@ -1617,6 +1570,7 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: fire_shark_icon
   - type: HereticRitual
+    limit: 6
     effects:
     - !type:LookupRitualEffect
       applyOn: Platform
@@ -1811,6 +1765,7 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: rust_walker
   - type: HereticRitual
+    limit: 4
     effects:
     - !type:LookupRitualEffect
       applyOn: Platform
@@ -2086,7 +2041,6 @@
         health: 250
         changeAppearance: false
         deathBehavior: GibOrgans
-        canDeconvert: false
 
 - type: entity
   id: RitualMawedCrucible

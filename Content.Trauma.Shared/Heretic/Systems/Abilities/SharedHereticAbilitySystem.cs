@@ -94,6 +94,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
     [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
     [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
+
     [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
     public static readonly DamageSpecifier AllDamage = new()
@@ -142,7 +143,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     private void OnBeforeTouchSpell(Entity<MindContainerComponent> ent, ref BeforeTouchSpellAbilityUsedEvent args)
     {
         if (!TryUseAbility(args.Args, false))
+        {
+            args.Cancelled = true;
             return;
+        }
 
         if (!Proto.Index(args.Args.TouchSpell).HasComponent<MansusGraspComponent>())
             return;

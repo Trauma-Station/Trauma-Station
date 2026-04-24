@@ -1205,20 +1205,6 @@
   metabolisms:
     Digestion:
       effects:
-      # <Trauma>
-      - !type:DeconvertGhoul
-        conditions:
-        - !type:ReagentCondition
-          reagent: Holywater
-          min: 20
-      - !type:HolyIgnite
-        stacks: 3
-        conditions:
-        - !type:WhitelistCondition
-          blacklist:
-            components:
-            - GhoulDeconvert
-      # </Trauma>
       - !type:SatiateThirst
         factor: 3
       - !type:HealthChange
@@ -1242,10 +1228,6 @@
       - !type:HolyIgnite
         stacks: 3
         conditions:
-        - !type:WhitelistCondition
-          blacklist:
-            components:
-            - GhoulDeconvert
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:

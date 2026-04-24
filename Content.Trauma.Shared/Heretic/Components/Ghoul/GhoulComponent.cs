@@ -15,12 +15,6 @@ public sealed partial class GhoulComponent : Component
     [DataField]
     public FixedPoint2 TotalHealth = 50;
 
-    /// <summary>
-    /// Whether this ghoul can be unghoulified
-    /// </summary>
-    [DataField]
-    public bool CanDeconvert;
-
     [DataField]
     public GhoulDeathBehavior DeathBehavior = GhoulDeathBehavior.GibOrgans;
 
@@ -72,4 +66,5 @@ public enum GhoulDeathBehavior : byte
     GibOrgans, // Gibs into organs
     Gib, // Gibs without organs
     NoGib, // Doesn't gib
+    Deconvert, // Doesn't gib, deconverts automatically
 }
