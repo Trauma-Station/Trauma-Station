@@ -56,6 +56,7 @@
 - type: entity
   parent: [ BaseForgedReadyItem, CartridgeBallBearing]
   id: CartridgeBallBearingForged
+  name: ball bearing
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
@@ -68,6 +69,7 @@
 - type: entity
   parent: [ BaseForgedReadyItem, CartridgeDisc ]
   id: CartridgeDiscForged
+  name: razor disc
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
@@ -80,6 +82,7 @@
 - type: entity
   parent: [ BaseForgedReadyItem, CartridgeShard ]
   id: CartridgeShardForged
+  name: shardshot
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
