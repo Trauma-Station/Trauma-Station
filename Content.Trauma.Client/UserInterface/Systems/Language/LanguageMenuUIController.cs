@@ -51,7 +51,7 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
 
     public void UnloadButton()
     {
-        if (_button is not { })
+        if (_button?.OnPressed is not { })
             return;
 
         _button.OnPressed -= LanguageButtonPressed;
