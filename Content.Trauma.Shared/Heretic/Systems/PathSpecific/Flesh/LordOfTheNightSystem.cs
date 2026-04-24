@@ -69,12 +69,12 @@ public sealed class LordOfTheNightSystem : EntitySystem
     {
         // Change it to dynamic to allow the worm to push structures around
         if (args.New == BodyType.KinematicController)
-            _physics.SetBodyType(ent.Owner, BodyType.Dynamic, body: args.Component);
+            _physics.SetBodyType(ent.Owner, BodyType.Kinematic, body: args.Component);
     }
 
     private void OnMapInit(Entity<LordOfTheNightComponent> ent, ref MapInitEvent args)
     {
-        _physics.SetBodyType(ent.Owner, BodyType.Dynamic);
+        _physics.SetBodyType(ent.Owner, BodyType.Kinematic);
 
         _lookMobs.Clear();
         _look.GetEntitiesInRange(Transform(ent).Coordinates, ent.Comp.MadnessRange, _lookMobs);
