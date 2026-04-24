@@ -63,8 +63,6 @@
     layers:
     - state: bullet
       shader: Emissive
-  - type: Item
-    state: bullet
 
 - type: entity
   parent: [ BaseForgedReadyItem, CartridgeDisc ]
@@ -76,8 +74,6 @@
     layers:
     - state: disk
       shader: Emissive
-  - type: Item
-    state: disk
 
 - type: entity
   parent: [ BaseForgedReadyItem, CartridgeShard ]
@@ -89,8 +85,6 @@
     layers:
     - state: shard
       shader: Emissive
-  - type: Item
-    state: shard
 
 # Bullets
 
