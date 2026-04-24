@@ -288,6 +288,26 @@
   components:
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
+  - type: SolutionContainerManager # Test fail without this for some reason
+    solutions:
+      food:
+        temperature: 293.15
+        canReact: True
+        maxVol: 15
+        name: null
+        reagents:
+        - data: []
+          ReagentId: UncookedAnimalProteins
+          Quantity: 12
+        - data: []
+          ReagentId: Fat
+          Quantity: 3
+      Lung:
+        temperature: 293.15
+        canReact: False
+        maxVol: 100
+        name: Lung
+        reagents: []
 
 - type: entity
   id: OrganDecapoidStomach
