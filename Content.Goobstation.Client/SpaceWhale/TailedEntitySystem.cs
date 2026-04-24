@@ -8,13 +8,14 @@ namespace Content.Goobstation.Client.SpaceWhale;
 public sealed class TailedEntitySystem : SharedTailedEntitySystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        TransformSystem.OnGlobalMoveEvent += OnMove;
+        _transform.OnGlobalMoveEvent += OnMove;
 
         SubscribeLocalEvent<TailedEntityComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
         SubscribeLocalEvent<TailedEntitySegmentComponent, AfterAutoHandleStateEvent>(OnSegmentAfterAutoHandleState);
