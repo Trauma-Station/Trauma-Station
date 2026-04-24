@@ -12,7 +12,6 @@
       stomach:
         maxVol: 1984
 
-# heretic ascend flesh form
 - type: entity
   abstract: true
   id: MobHereticFleshAscendSegmentBase
@@ -23,7 +22,7 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.4,-0.4,0.4,0.4"
-        density: 9999
+        density: 1984
         mask:
         - MobMask
         layer:
@@ -173,6 +172,10 @@
       path: /Audio/Animals/space_dragon_roar.ogg
   - type: UseDelay
     delay: 5
+  - type: Puller
+    needsHands: false
+  - type: Pullable
+    canBeGrabbed: false
 
 - type: entity
   parent: MobHereticFleshAscendSegmentBase

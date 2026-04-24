@@ -181,6 +181,7 @@ public sealed partial class PullingSystem
     {
         if (!Resolve(pullable.Owner, ref pullable.Comp)
             || !Resolve(puller.Owner, ref puller.Comp)
+            || !pullable.Comp.CanBeGrabbed
             || HasComp<PacifiedComponent>(puller)
             || !HasComp<MobStateComponent>(pullable)
             || pullable.Comp.Puller != puller
