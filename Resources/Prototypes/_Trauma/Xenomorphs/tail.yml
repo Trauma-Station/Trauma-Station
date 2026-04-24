@@ -2,30 +2,9 @@
   parent: MobSpaceLeviathanSegmentBase
   id: MobXenomorphTailSegmentBase
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 1
-        density: 137992
-        mask:
-        - MobMask
-        layer:
-        - Opaque
-        - BulletImpassable
-        - Impassable
   - type: Sprite
     sprite: _Trauma/Mobs/Xenos/xenotail.rsi
     noRot: false
     layers:
     - state: XenoTailSegmentBase
     drawdepth: BelowMobs
-  - type: Tag
-    tags:
-    - SpaceWhaleSegment
-    - StunImmune
-  - type: PreventCollide
-    whitelist:
-      tags:
-      - SpaceWhaleSegment
