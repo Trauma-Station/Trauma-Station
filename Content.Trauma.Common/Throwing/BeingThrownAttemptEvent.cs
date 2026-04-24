@@ -7,3 +7,9 @@ namespace Content.Trauma.Common.Throwing;
 /// </summary>
 [ByRefEvent]
 public record struct BeingThrownAttemptEvent(bool Cancelled = false);
+
+/// <summary>
+/// Raised on an entity before it being thrown
+/// </summary>
+[ByRefEvent]
+public readonly record struct BeforeBeingThrownEvent;

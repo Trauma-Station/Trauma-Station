@@ -177,9 +177,6 @@ public sealed partial class ThrowingSystem : EntitySystem
             (anchorableComponent.Flags & AnchorableFlags.Unanchorable) != 0)
             _transform.Unanchor(uid);
 
-        if ((physics.BodyType & (BodyType.Dynamic | BodyType.KinematicController)) == 0x0)
-            return;
-
         // Allow throwing if this projectile only acts as a projectile when shot, otherwise disallow
         if (projectileQuery.TryGetComponent(uid, out var proj) && !proj.OnlyCollideWhenShot)
             return;
@@ -188,6 +185,14 @@ public sealed partial class ThrowingSystem : EntitySystem
         var attemptEv = new BeingThrownAttemptEvent();
         RaiseLocalEvent(uid, ref attemptEv);
         if (attemptEv.Cancelled)
+            return;
+
+        var beforeEv = new BeforeBeingThrownEvent();
+        RaiseLocalEvent(uid, ref beforeEv);
+        // </Trauma>
+
+        // <Trauma> - moved this check below
+        if ((physics.BodyType & (BodyType.Dynamic | BodyType.KinematicController)) == 0x0)
             return;
         // </Trauma>
 

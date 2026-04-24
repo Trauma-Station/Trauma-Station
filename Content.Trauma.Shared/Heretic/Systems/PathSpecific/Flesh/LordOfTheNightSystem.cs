@@ -14,8 +14,10 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Throwing;
 using Content.Trauma.Common.Nutrition;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Wizard.SanguineStrike;
@@ -61,13 +63,16 @@ public sealed class LordOfTheNightSystem : EntitySystem
         SubscribeLocalEvent<LordOfTheNightComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<LordOfTheNightComponent, GetTailedEntitySegmentCountEvent>(OnGetSegmentCount);
         SubscribeLocalEvent<LordOfTheNightComponent, StartCollideEvent>(OnCollide);
+        SubscribeLocalEvent<LordOfTheNightComponent, BeforeBeingThrownEvent>(OnBeforeThrow);
+        SubscribeLocalEvent<LordOfTheNightComponent, LandEvent>(OnLand);
+        SubscribeLocalEvent<LordOfTheNightComponent, StopThrowEvent>(OnStopThrow);
 
         SubscribeLocalEvent<TailedEntitySegmentComponent, DamageChangedEvent>(OnSegmentDamageChanged);
     }
 
     private void OnTypeChanged(Entity<LordOfTheNightComponent> ent, ref PhysicsBodyTypeChangedEvent args)
     {
-        // Change it to dynamic to allow the worm to push structures around
+        // Change it to kinematic to allow the worm to push structures around
         if (args.New == BodyType.KinematicController)
             _physics.SetBodyType(ent.Owner, BodyType.Kinematic, body: args.Component);
     }
@@ -91,6 +96,22 @@ public sealed class LordOfTheNightSystem : EntitySystem
 
             _effect.ApplyEffects(uid, ent.Comp.MadnessEffects, 1f, ent);
         }
+    }
+
+    private void OnBeforeThrow(Entity<LordOfTheNightComponent> ent, ref BeforeBeingThrownEvent args)
+    {
+        // Kinematic bodies cannot be thrown
+        _physics.SetBodyType(ent.Owner, BodyType.Dynamic);
+    }
+
+    private void OnStopThrow(Entity<LordOfTheNightComponent> ent, ref StopThrowEvent args)
+    {
+        _physics.SetBodyType(ent.Owner, BodyType.Kinematic);
+    }
+
+    private void OnLand(Entity<LordOfTheNightComponent> ent, ref LandEvent args)
+    {
+        _physics.SetBodyType(ent.Owner, BodyType.Kinematic);
     }
 
     private void OnCollide(Entity<LordOfTheNightComponent> ent, ref StartCollideEvent args)
