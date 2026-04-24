@@ -32,6 +32,12 @@ public sealed partial class LordOfTheNightComponent : Component
     };
 
     [DataField]
+    public EntityWhitelist PushBlacklist = new()
+    {
+        Tags = new() { "FleshWormSegment" },
+    };
+
+    [DataField]
     public FixedPoint2 HealPerArm = 80;
 
     [DataField]
@@ -54,4 +60,7 @@ public sealed partial class LordOfTheNightComponent : Component
 
     [DataField]
     public EntProtoId TransformAction = "ActionHereticFleshTransform";
+
+    [DataField]
+    public float ForceMultiplier = 0.1f;
 }

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Numerics;
 using Content.Goobstation.Shared.SpaceWhale;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Actions;
@@ -19,7 +20,6 @@ using Content.Shared.Whitelist;
 using Content.Trauma.Common.Nutrition;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Wizard.SanguineStrike;
-using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -37,12 +37,12 @@ public sealed class LordOfTheNightSystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
     [Dependency] private readonly DamageableSystem _dmg = default!;
     [Dependency] private readonly SharedTransformSystem _transfrm = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly EntityLookupSystem _look = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effect = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
     [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
 
@@ -53,7 +53,6 @@ public sealed class LordOfTheNightSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<LordOfTheNightComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<LordOfTheNightComponent, PhysicsBodyTypeChangedEvent>(OnTypeChanged);
         SubscribeLocalEvent<LordOfTheNightComponent, MeleeHitEvent>(OnHit);
         SubscribeLocalEvent<LordOfTheNightComponent, FullyAteEvent>(OnFullyAte);
         SubscribeLocalEvent<LordOfTheNightComponent, DamageChangedEvent>(OnDamageChanged);
@@ -65,17 +64,8 @@ public sealed class LordOfTheNightSystem : EntitySystem
         SubscribeLocalEvent<TailedEntitySegmentComponent, DamageChangedEvent>(OnSegmentDamageChanged);
     }
 
-    private void OnTypeChanged(Entity<LordOfTheNightComponent> ent, ref PhysicsBodyTypeChangedEvent args)
-    {
-        // Change it to dynamic to allow the worm to push structures around
-        if (args.New == BodyType.KinematicController)
-            _physics.SetBodyType(ent.Owner, BodyType.Dynamic, body: args.Component);
-    }
-
     private void OnMapInit(Entity<LordOfTheNightComponent> ent, ref MapInitEvent args)
     {
-        _physics.SetBodyType(ent.Owner, BodyType.Dynamic);
-
         _lookMobs.Clear();
         _look.GetEntitiesInRange(Transform(ent).Coordinates, ent.Comp.MadnessRange, _lookMobs);
         foreach (var (uid, mob) in _lookMobs)
@@ -95,11 +85,28 @@ public sealed class LordOfTheNightSystem : EntitySystem
 
     private void OnCollide(Entity<LordOfTheNightComponent> ent, ref StartCollideEvent args)
     {
-        var other = args.OtherEntity;
-        if (!_whitelist.IsValid(ent.Comp.UnanchorWhitelist, other))
+        if (_timing.ApplyingState)
             return;
 
-        _transfrm.Unanchor(other);
+        var other = args.OtherEntity;
+        var xform = Transform(other);
+
+        if (xform.Anchored)
+        {
+            if (!_whitelist.IsValid(ent.Comp.UnanchorWhitelist, other))
+                return;
+
+            _transfrm.Unanchor(other);
+        }
+
+        if (!args.OtherFixture.Hard || args.OurBody.LinearVelocity == Vector2.Zero ||
+            _whitelist.IsValid(ent.Comp.PushBlacklist, other))
+            return;
+
+        var force = args.OurBody.LinearVelocity * args.OurBody.Mass * args.OtherBody.Mass *
+                    ent.Comp.ForceMultiplier;
+
+        _physics.ApplyForce(other, force, body: args.OtherBody);
     }
 
     private void OnGetSegmentCount(Entity<LordOfTheNightComponent> ent, ref GetTailedEntitySegmentCountEvent args)
