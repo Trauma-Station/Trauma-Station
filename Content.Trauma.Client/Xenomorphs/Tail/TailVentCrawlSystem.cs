@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.SpaceWhale;
 using Content.Trauma.Shared.VentCrawling.Components;
 using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.Xenomorphs.Tail;
 
