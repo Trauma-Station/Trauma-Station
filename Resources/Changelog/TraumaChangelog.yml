@@ -7357,3 +7357,10 @@ Entries:
   id: 851
   time: '2026-04-23T23:24:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2186
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Grand Assault moved to a 5 minute timer crime
+  id: 852
+  time: '2026-04-23T23:45:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2208
