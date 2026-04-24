@@ -26,3 +26,8 @@
   id: InsurgentDestroyer9000
   hostile:
   - Insurgent
+
+- type: npcFaction
+  id: InitialInfected
+  friendly:
+  - Zombie
