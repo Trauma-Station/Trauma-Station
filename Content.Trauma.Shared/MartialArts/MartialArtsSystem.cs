@@ -24,7 +24,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
+    //[Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     /// <summary>
