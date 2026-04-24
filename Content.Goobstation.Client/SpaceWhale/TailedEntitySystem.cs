@@ -45,6 +45,7 @@ public sealed class TailedEntitySystem : SharedTailedEntitySystem
     private void OnMove(ref MoveEvent args)
     {
         if (args.OldPosition == args.NewPosition && args.OldRotation == args.NewRotation ||
+            TerminatingOrDeleted(args.Entity) ||
             !TryComp(args.Entity, out TailedEntityComponent? tailed) || tailed.TailSegments.Count == 0)
             return;
 
