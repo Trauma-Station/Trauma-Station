@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Goobstation.Shared.SpaceWhale;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Actions;
@@ -47,6 +48,7 @@ public sealed class LordOfTheNightSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
     [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
+    [Dependency] private readonly EntityQuery<TailedEntitySegmentComponent> _segmentQuery = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _lookMobs = new();
 
@@ -63,6 +65,7 @@ public sealed class LordOfTheNightSystem : EntitySystem
         SubscribeLocalEvent<LordOfTheNightComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<LordOfTheNightComponent, GetTailedEntitySegmentCountEvent>(OnGetSegmentCount);
         SubscribeLocalEvent<LordOfTheNightComponent, StartCollideEvent>(OnCollide);
+        SubscribeLocalEvent<LordOfTheNightComponent, EndCollideEvent>(OnEndCollide);
         SubscribeLocalEvent<LordOfTheNightComponent, BeforeBeingThrownEvent>(OnBeforeThrow);
         SubscribeLocalEvent<LordOfTheNightComponent, LandEvent>(OnLand);
         SubscribeLocalEvent<LordOfTheNightComponent, StopThrowEvent>(OnStopThrow);
@@ -116,11 +119,34 @@ public sealed class LordOfTheNightSystem : EntitySystem
 
     private void OnCollide(Entity<LordOfTheNightComponent> ent, ref StartCollideEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         var other = args.OtherEntity;
+
+        if (_segmentQuery.TryComp(other, out var segment) && segment.Head == ent.Owner)
+        {
+            // Required so that worm can collide with its own segments
+            _physics.SetBodyType(ent.Owner, BodyType.Dynamic, body: args.OurBody);
+            return;
+        }
+
         if (!_whitelist.IsValid(ent.Comp.UnanchorWhitelist, other))
             return;
 
         _transfrm.Unanchor(other);
+    }
+
+    private void OnEndCollide(Entity<LordOfTheNightComponent> ent, ref EndCollideEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (_physics.GetContactingEntities(ent.Owner, args.OurBody)
+            .Any(e => _segmentQuery.TryComp(e, out var s) && s.Head == ent.Owner))
+            _physics.SetBodyType(ent.Owner, BodyType.Dynamic, body: args.OurBody);
+        else
+            _physics.SetBodyType(ent.Owner, BodyType.Kinematic, body: args.OurBody);
     }
 
     private void OnGetSegmentCount(Entity<LordOfTheNightComponent> ent, ref GetTailedEntitySegmentCountEvent args)

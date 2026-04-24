@@ -75,6 +75,7 @@
     - Heretic
   - type: Physics
     bodyType: Dynamic
+  - type: Appearance
 
 - type: entity
   parent: [MobHereticFleshAscendSegmentBase, BaseMob, MobCombat]
@@ -86,7 +87,7 @@
     organs:
       Torso: OrganTorsoGhoul
       Stomach: OrganHereticFleshAscendStomach
-  - type: MovementAlwaysTouching
+  - type: MovementIgnoreGravity
   - type: MovementSpeedModifier
     baseWalkSpeed: 4.5
     baseSprintSpeed: 4.5
