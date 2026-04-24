@@ -93,6 +93,8 @@
   - type: Sprite
     layers:
     - state: armsy_start
+  - type: Physics
+    bodyType: KinematicController
   - type: MobState
     allowedStates:
     - Alive
@@ -184,10 +186,6 @@
     needsHands: false
   - type: Pullable
     canBeGrabbed: false
-  - type: Physics
-    # Required for worm to be able to push structures around
-    # This has side effects, like worm having infinite mass
-    bodyType: Kinematic
 
 - type: entity
   parent: MobHereticFleshAscendSegmentBase
