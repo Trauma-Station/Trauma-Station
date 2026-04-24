@@ -14,6 +14,8 @@
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
   - type: StaticPrice
     price: 10
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
 
 - type: entity
   parent: BaseCartridgeGaussgun
@@ -49,6 +51,42 @@
   - type: CartridgeAmmo
     proto: GaussgunShardSpread
   - type: Sprite
+    state: shard
+
+- type: entity
+  parent: [ BaseForgedReadyItem, CartridgeBallBearing]
+  id: CartridgeBallBearingForged
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
+    layers:
+    - state: bullet
+      shader: Emissive
+  - type: Item
+    state: bullet
+
+- type: entity
+  parent: [ BaseForgedReadyItem, CartridgeDisc ]
+  id: CartridgeDiscForged
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
+    layers:
+    - state: disk
+      shader: Emissive
+  - type: Item
+    state: disk
+
+- type: entity
+  parent: [ BaseForgedReadyItem, CartridgeShard ]
+  id: CartridgeShardForged
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
+    layers:
+    - state: shard
+      shader: Emissive
+  - type: Item
     state: shard
 
 # Bullets

@@ -68,6 +68,7 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+      power_cell: !type:ContainerSlot
   - type: Appearance
 
 - type: entity

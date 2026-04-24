@@ -15,6 +15,13 @@
     },
     {
       "name": "disk"
+    },
+    {
+      "name": "inhand-left"
+    },
+    {
+      "name": "inhand-right"
     }
+
   ]
 }

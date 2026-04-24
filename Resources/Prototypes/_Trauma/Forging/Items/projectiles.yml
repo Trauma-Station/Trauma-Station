@@ -15,7 +15,7 @@
   id: CoilgunBearings
   name: coilgun bearing ammunition
   category: Projectiles
-  result: CartridgeBallBearing
+  result: CartridgeBallBearingForged
   work: 50
   amount: 30
   skills:
@@ -28,7 +28,7 @@
   id: CoilgunDisk
   name: coilgun disk ammunition
   category: Projectiles
-  result: CartridgeDisc
+  result: CartridgeDiscForged
   work: 50
   amount: 30
   skills:
@@ -41,7 +41,7 @@
   id: CoilgunShard
   name: coilgun shard ammunition
   category: Projectiles
-  result: CartridgeShard
+  result: CartridgeShardForged
   work: 100
   amount: 30
   skills:
