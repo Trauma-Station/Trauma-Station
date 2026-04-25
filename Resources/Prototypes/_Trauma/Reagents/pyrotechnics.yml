@@ -121,6 +121,7 @@
   parent: BasePyrotechnic
   desc: reagent-desc-hypersurfactant
   physicalDesc: reagent-physical-desc-fizzy
+  contrabandSeverity: Major
   flavor: bitter
   color: "#9e4738"
   boilingPoint: 190.0 # copied from fluorosurfactant go figure
