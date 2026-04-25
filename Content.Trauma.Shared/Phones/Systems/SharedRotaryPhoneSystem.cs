@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Shared.Body;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.DeviceLinking;
@@ -56,10 +57,17 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
         SubscribeLocalEvent<RotaryPhoneComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<RotaryPhoneComponent, InteractUsingEvent>(OnInteract);
         SubscribeLocalEvent<RotaryPhoneComponent, DestructionEventArgs>(OnPhoneDestroy);
+        SubscribeLocalEvent<RotaryPhoneComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttemptContainer);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, ExaminedEvent>(OnExamineHolder);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, EntRemovedFromContainerMessage>(OnPhoneRemoveHolder);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, DestructionEventArgs>(OnDestruction);
+    }
+
+    private void OnInsertAttemptContainer(Entity<RotaryPhoneComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
+    {
+        if (!HasComp<BodyComponent>(args.Container.Owner) && !HasComp<RotaryPhoneHolderComponent>(args.Container.Owner))
+            args.Cancel();
     }
 
     private void OnPhoneRemoveHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntRemovedFromContainerMessage args)
