@@ -272,7 +272,7 @@ public sealed partial class ClimbSystem : VirtualController
             return;
 
         // <Trauma> - only raise it if you're dragging yourself, rather than being forced onto a table/biomasser
-        if (uid != user)
+        if (uid == user)
         {
             var selfEvent = new SelfBeforeClimbEvent(uid, user, (climbable, comp));
             RaiseLocalEvent(uid, selfEvent);
