@@ -5,7 +5,7 @@
   description: A specialized specimen designed to hit targets at a distance. Particularly dangerous in narrow corridors and confined spaces.
   abstract: true
   components:
-  - type: TailedEntity # Trauma
+  - type: TailedEntity
     amount: 17
     spacing: 0.170
     prototype: MobXenomorphTailSegmentBase
