@@ -114,3 +114,14 @@
         visualType: MediumCaution
         probability: 0.3
         type: Local
+
+- type: reagent
+  id: Hypersurfactant
+  name: reagent-name-hypersurfactant
+  parent: BasePyrotechnic
+  desc: reagent-desc-hypersurfactant
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: bitter
+  color: "#9e4738"
+  boilingPoint: 190.0 # copied from fluorosurfactant go figure
+  meltingPoint: 45.0

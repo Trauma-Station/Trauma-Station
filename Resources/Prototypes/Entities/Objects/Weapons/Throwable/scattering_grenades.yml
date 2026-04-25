@@ -166,6 +166,14 @@
     positional: true
   - type: StaticPrice
     price: 1000
+  - type: SolutionContainerManager # Trauma - In theory, made grindable to obtain hypersurfactant easier
+    solutions:
+      soap:
+        reagents:
+        - ReagentId: SoapReagent
+          Quantity: 50
+        - ReagentId: Hypersurfactant
+          Quantity: 15
 
 - type: entity
   parent: [FragileGrenadeBase, ScatteringGrenadeBase, TimerGrenadeBase]

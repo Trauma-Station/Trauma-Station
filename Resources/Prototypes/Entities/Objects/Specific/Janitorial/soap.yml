@@ -163,10 +163,12 @@
   - type: SolutionContainerManager
     solutions:
       soap:
-        maxVol: 1.5 # 50 / 30 = 1.666
+        maxVol: 2 # 50 / 30 = 1.666 # Trauma - Altered to contain hypersurfactant
         reagents:
         - ReagentId: SoapReagent
           Quantity: 1.5
+        - ReagentId: Hypersurfactant # Trauma
+          Quantity: 0.5
   - type: SolutionContainerVisuals
     maxFillLevels: 0
   - type: Sprite

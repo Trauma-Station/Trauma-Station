@@ -15,7 +15,7 @@ public sealed partial class AreaReactionEffect : EntityEffectBase<AreaReactionEf
     /// <summary>
     /// How big of a reaction scale we need for 1 smoke entity.
     /// </summary>
-    [DataField] public float OverflowThreshold = 2.5f;
+    [DataField("overflowThreshold")] public float OverflowThreshold = 2.5f; // Trauma - Made yaml-able :godo:
 
     /// <summary>
     /// The entity prototype that is being spread over an area.

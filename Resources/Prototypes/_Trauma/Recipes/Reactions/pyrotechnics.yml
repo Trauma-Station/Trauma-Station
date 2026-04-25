@@ -64,3 +64,21 @@
       amount: 1
   products:
     Burnite: 1
+
+- type: reaction
+  id: Hyperfoam
+  priority: 10
+  impact: High
+  conserveEnergy: false
+  reactants:
+    Hypersurfactant:
+      amount: 1
+    Water:
+      amount: 1
+  effects:
+    - !type:AreaReactionEffect
+      duration: 10
+      overflowThreshold: 0.5 # in theory, 5x stronger than fluorosurfactant
+      prototypeId: Foam
+      sound:
+        path: /Audio/Effects/extinguish.ogg

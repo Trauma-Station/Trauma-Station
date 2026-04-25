@@ -19,9 +19,6 @@ reagent-desc-methanol = A colorless, odorless, and flammable liquid similar to e
 reagent-name-hexamine = hexamine
 reagent-desc-hexamine = A white crystalline solid that smells fishy. Used in making explosives.
 
-reagent-name-cyclonite = cyclonite
-reagent-desc-cyclonite = A yellowish crystal that is used in plastic explosives. Also known as RDX. This reaction is exothermic. Explodes at 576K.
-
 reagent-name-ammonium-nitrate = ammonium nitrate
 reagent-desc-ammonium-nitrate = A white, crystalline solid that is highly soluble in water. It is a potent fertilizer.
 
@@ -30,12 +27,6 @@ reagent-desc-ethenone = A colorless, flammable gas with a penetrating odor. Also
 
 reagent-name-acetic-anhydride = acetic anhydride
 reagent-desc-acetic-anhydride = A colorless liquid that smells like vinegar. Used in manufacturing explosives.
-
-reagent-name-ammonium-nitrate-fuel-oil = ammonium nitrate fuel oil
-reagent-desc-ammonium-nitrate-fuel-oil = An off white, crystalline solid mixed with fuel often used as a blasting agent. Explodes at 576K.
-
-reagent-name-octogen = octogen
-reagent-desc-octogen = A white, opaque powder that has detonation velocity similar to re-entry speeds. Also known as HMX. Explodes at 553K.
 
 reagent-name-nanomachines = nanomachines
 reagent-desc-nanomachines = A black, dark fluid that seems to move on it's own. Converts people into cyborgs.
@@ -51,6 +42,3 @@ reagent-desc-calcium-oxide = Also known as quicklime, used in cement, reacts wit
 
 reagent-name-calcium-hydroxide = calcium hydroxide
 reagent-desc-calcium-hydroxide = The result of calcium oxide reacting with water.
-
-reagent-name-burnite = burnite
-reagent-desc-burnite = Basically just chemical flame, it can create fires even in space! Well, as long as it's on a tile that is.
