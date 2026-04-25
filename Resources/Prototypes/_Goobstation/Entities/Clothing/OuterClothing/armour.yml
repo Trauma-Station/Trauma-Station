@@ -429,3 +429,14 @@
     sprite: _ShitChap/Clothing/OuterClothing/Misc/bishop.rsi
   - type: Clothing
     sprite: _ShitChap/Clothing/OuterClothing/Misc/bishop.rsi
+
+- type: entity
+  parent: ClothingOuterArmorTemplar
+  id: ClothingOuterArmorMamluk
+  name: Mamluk's heritage
+  description: Those who were once slaves, became rulers under the mighty Allah.
+  components:
+  - type: Sprite
+    sprite: _ShitChap/Clothing/OuterClothing/Misc/mamluk.rsi
+  - type: Clothing
+    sprite: _ShitChap/Clothing/OuterClothing/Misc/mamluk.rsi
