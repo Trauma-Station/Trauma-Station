@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Medical.Common.Body;
 using Content.Shared.Localizations;
+using Content.Trauma.Common.Armor;
 using System.Linq;
 // </Trauma>
 using Content.Shared.Clothing.Components;
@@ -53,14 +54,18 @@ public abstract class SharedArmorSystem : EntitySystem
         if (TryComp<MaskComponent>(uid, out var mask) && mask.IsToggled)
             return;
 
-        // <Goob>
-        if (args.Args.TargetPart is not {} partType)
+        // <Trauma>
+        if (args.Args.TargetPart is not {} partType || !component.ArmorCoverage.Contains(partType))
             return;
 
-        if (component.ArmorCoverage.Contains(partType))
-            args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
-            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration));
-        // </Goob>
+        var ev = new ArmorProtectAttemptEvent(args.Args.Origin);
+        RaiseLocalEvent(uid, ref ev);
+        if (ev.Cancelled)
+            return;
+
+        args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
+            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration)); // apply penetration to base modifiers
+        // </Trauma>
     }
 
     private void OnBorgDamageModify(EntityUid uid, ArmorComponent component,

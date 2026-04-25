@@ -17,7 +17,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
 using Content.Shared.Localizations;
-using Content.Shared.Maps;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;

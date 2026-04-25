@@ -47,6 +47,11 @@
     - TauCetiBasic
     understands:
     - TauCetiBasic
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 5
+    damagePenalty: .5
+  # </Trauma>
 
 - type: entity
   abstract: true

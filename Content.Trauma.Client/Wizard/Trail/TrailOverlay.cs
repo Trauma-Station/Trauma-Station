@@ -23,7 +23,7 @@ public sealed class TrailOverlay : Overlay
 
     public TrailOverlay(IEntityManager entManager, IPrototypeManager protoMan, IGameTiming timing)
     {
-        ZIndex = (int) DrawDepth.Effects;
+        ZIndex = (int) DrawDepth.Overdoors;
 
         _entManager = entManager;
         _protoMan = protoMan;

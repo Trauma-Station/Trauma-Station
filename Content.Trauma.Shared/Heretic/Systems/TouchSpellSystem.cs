@@ -140,12 +140,19 @@ public sealed class TouchSpellSystem : EntitySystem
 
     public void InvokeTouchSpell(Entity<TouchSpellComponent?> ent,
         EntityUid user,
-        TimeSpan? cooldownOverride = null)
+        TimeSpan? cooldownOverride = null,
+        bool predicted = true)
     {
         if (!Resolve(ent, ref ent.Comp))
             return;
 
-        InvokeTouchSpell(user, ent.Comp.Action, ent.Comp.Sound, ent.Comp.Speech, cooldownOverride ?? ent.Comp.Cooldown);
+        InvokeTouchSpell(user,
+            ent.Comp.Action,
+            ent.Comp.Sound,
+            ent.Comp.Speech,
+            cooldownOverride ?? ent.Comp.Cooldown,
+            predicted);
+
         if (cooldownOverride != TimeSpan.Zero)
             PredictedQueueDel(ent);
     }
@@ -154,9 +161,10 @@ public sealed class TouchSpellSystem : EntitySystem
         EntityUid? action,
         SoundSpecifier? sound,
         LocId? speech,
-        TimeSpan cooldown)
+        TimeSpan cooldown,
+        bool predicted = true)
     {
-        _audio.PlayPredicted(sound, user, user);
+        _audio.PlayPredicted(sound, user, predicted ? user : null);
 
         if (speech != null)
             _chat.TrySendInGameICMessage(user, Loc.GetString(speech), InGameICChatType.Speak, false);

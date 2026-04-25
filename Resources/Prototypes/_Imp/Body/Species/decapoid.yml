@@ -1,12 +1,6 @@
 - type: markingsGroup
   id: Decapoid
   limits:
-    enum.HumanoidVisualLayers.Hair:
-      limit: 0
-      required: false
-    enum.HumanoidVisualLayers.FacialHair:
-      limit: 0
-      required: false
     enum.HumanoidVisualLayers.Eyes:
       limit: 1
       required: true
@@ -219,59 +213,59 @@
 - type: entity
   id: TorsoDecapoid
   name: "decapoid torso"
-  parent: [BaseDecapoidOrganExternal, OrganBaseTorso]
+  parent: [OrganBaseTorso, BaseDecapoidOrganExternal]
 
 - type: entity
   id: HeadDecapoid
   name: "decapoid head"
-  parent: [BaseDecapoidOrganExternal, OrganBaseHead]
+  parent: [OrganBaseHead, BaseDecapoidOrganExternal]
 
 - type: entity
   id: LeftArmDecapoid
   name: "left decapoid arm"
-  parent: [BaseDecapoidOrganExternal, OrganBaseArmLeft]
+  parent: [OrganBaseArmLeft, BaseDecapoidOrganExternal]
 
 - type: entity
   id: RightArmDecapoid
   name: "right decapoid arm"
-  parent: [BaseDecapoidOrganExternal, OrganBaseArmRight]
+  parent: [OrganBaseArmRight, BaseDecapoidOrganExternal]
 
 - type: entity
   id: LeftHandDecapoid
-  name: "decapoid claw"
-  parent: [BaseDecapoidOrganExternal, OrganBaseHandLeft]
+  name: "decapoid major claw"
+  parent: [OrganBaseHandLeft, BaseDecapoidOrganExternal]
   components:
   - type: HandOrgan
     startingItem: DecapoidClawItem
 
 - type: entity
   id: RightHandDecapoid
-  name: "right decapoid hand"
-  parent: [BaseDecapoidOrganExternal, OrganBaseHandRight]
+  name: "right minor claw"
+  parent: [OrganBaseHandRight, BaseDecapoidOrganExternal]
 
 - type: entity
   id: LeftLegDecapoid # these are the front legs
   name: "front decapoid legs"
-  parent: [BaseDecapoidOrganExternal, OrganBaseLegLeft]
+  parent: [OrganBaseLegLeft, BaseDecapoidOrganExternal]
 
 - type: entity
   id: RightLegDecapoid # these are the back legs
   name: "back decapoid legs"
-  parent: [BaseDecapoidOrganExternal, OrganBaseLegRight]
+  parent: [OrganBaseLegRight, BaseDecapoidOrganExternal]
 
 - type: entity
   id: LeftFootDecapoid # these are the front feet
   name: "front decapoid feet"
-  parent: [BaseDecapoidOrganExternal, OrganBaseFootLeft]
+  parent: [OrganBaseFootLeft, BaseDecapoidOrganExternal]
 
 - type: entity
   id: RightFootDecapoid # these are the back feet
   name: "back decapoid feet"
-  parent: [BaseDecapoidOrganExternal, OrganBaseFootRight]
+  parent: [OrganBaseFootRight, BaseDecapoidOrganExternal]
 
 - type: entity # These are a bit evil
   id: OrganDecapoidEyes
-  parent: [BaseDecapoidOrgan, OrganBaseEyes]
+  parent: [OrganBaseEyes, BaseDecapoidOrgan]
   components:
   - type: VisualOrgan
     data:
@@ -282,65 +276,45 @@
 
 - type: entity
   id: OrganDecapoidLungs
-  parent: [BaseDecapoidOrgan, OrganBaseLungs]
+  parent: [OrganBaseLungs, BaseDecapoidOrgan]
   name: decapoid respiratory system
   description: "Extracts dissolved oxygen from water, and utilizes it for cell maintenance."
   components:
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
-  - type: SolutionContainerManager # Test fail without this for some reason
-    solutions:
-      food:
-        temperature: 293.15
-        canReact: True
-        maxVol: 15
-        name: null
-        reagents:
-        - data: []
-          ReagentId: UncookedAnimalProteins
-          Quantity: 12
-        - data: []
-          ReagentId: Fat
-          Quantity: 3
-      Lung:
-        temperature: 293.15
-        canReact: False
-        maxVol: 100
-        name: Lung
-        reagents: []
 
 - type: entity
   id: OrganDecapoidStomach
-  parent: [BaseDecapoidOrgan, OrganBaseStomach]
+  parent: [OrganBaseStomach, BaseDecapoidOrgan]
   components:
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
 
 - type: entity
   id: OrganDecapoidBrain
-  parent: [BaseDecapoidOrgan, OrganBaseBrain]
+  parent: [OrganBaseBrain, BaseDecapoidOrgan]
 
 
 - type: entity
   id: OrganDecapoidTongue
-  parent: [BaseDecapoidOrgan, OrganBaseTongue]
+  parent: [OrganBaseTongue, BaseDecapoidOrgan]
 
 - type: entity
   id: OrganDecapoidAppendix
-  parent: [BaseDecapoidOrgan, OrganBaseAppendix]
+  parent: [OrganBaseAppendix, BaseDecapoidOrgan]
 
 - type: entity
   id: OrganDecapoidEars
-  parent: [BaseDecapoidOrgan, OrganBaseEars]
+  parent: [OrganBaseEars, BaseDecapoidOrgan]
 
 - type: entity
   id: OrganDecapoidHeart
-  parent: [BaseDecapoidOrgan, OrganBaseHeart]
+  parent: [OrganBaseHeart, BaseDecapoidOrgan]
 
 - type: entity
   id: OrganDecapoidLiver
-  parent: [BaseDecapoidOrgan, OrganBaseLiver]
+  parent: [OrganBaseLiver, BaseDecapoidOrgan]
 
 - type: entity
   id: OrganDecapoidKidneys
-  parent: [BaseDecapoidOrgan, OrganBaseKidneys]
+  parent: [OrganBaseKidneys, BaseDecapoidOrgan]

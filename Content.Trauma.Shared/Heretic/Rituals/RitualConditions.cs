@@ -176,3 +176,12 @@ public sealed partial class TryMakeRustWallCondition : EntityConditionBase<TryMa
         return string.Empty;
     }
 }
+
+public sealed partial class FleshGhoulLimitCondition : EntityConditionBase<FleshGhoulLimitCondition>,
+    IHereticRitualEntry
+{
+    public override string EntityConditionGuidebookText(IPrototypeManager prototype)
+    {
+        return string.Empty;
+    }
+}
