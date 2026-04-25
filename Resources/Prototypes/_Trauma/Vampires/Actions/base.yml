@@ -12,9 +12,9 @@
   - type: Action
     raiseOnAction: true
     itemIconStyle: BigAction
-  - type: ActionConditionsBefore
+  - type: ActionConditions
     conditions:
-    - !type:HasCharges # TODO: Adjust for each ability after testing
+    - !type:HasVampireBlood
       amount: 30
 
 - type: entity

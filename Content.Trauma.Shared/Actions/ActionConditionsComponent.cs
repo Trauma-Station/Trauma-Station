@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Actions;
 /// and cancels the action if the conditions do not pass the requirements.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class ActionConditionsBeforeComponent : Component
+public sealed partial class ActionConditionsComponent : Component
 {
     /// <summary>
     /// The conditions to test against.

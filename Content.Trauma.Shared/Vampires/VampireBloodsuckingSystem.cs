@@ -5,16 +5,15 @@ using Content.Medical.Common.Targeting;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.CombatMode;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
-using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
-using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.Vampires;
 
@@ -25,15 +24,17 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly VampireSystem _vampire = default!;
     [Dependency] private readonly EntityQuery<TargetingComponent> _targetingQuery = default!;
     [Dependency] private readonly EntityQuery<VampireDrainableComponent> _drainableQuery = default!;
     [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
 
+    private static readonly EntProtoId BiteEffect = "WeaponArcBite";                                   // TODO: This sprite is ass, change it to custom one
+    private static readonly SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg"); // TODO: This sound is ass, change it to custom one
+
     private static TimeSpan _bloodsuckingDelay = TimeSpan.FromSeconds(5); // TODO: Should be a cvar
-    // TODO: Implement a delay before attempts so it doesn't get spammed
 
     public override void Initialize()
     {
@@ -50,53 +51,56 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
 
         var target = args.HitEntities.First();
 
-        // Target must be alive and be drainable, plus we must meet the requirements
+        // Target must be alive and be drainable,
+        // plus we must meet the requirements
         if (!_mobState.IsAlive(target) || !_drainableQuery.HasComp(target) || !CanBloodSuck(ent.Owner))
             return;
 
         BloodSuck(ent, target);
+
+        // Cancel the normal hit interaction,
+        // we don't want to continue the behavior.
+        args.Handled = true;
     }
 
     private void OnBloodSuckDoAfter(Entity<VampireBloodsuckingComponent> ent, ref BloodSuckDoAfterEvent args)
     {
-        if (args.Cancelled
-            || args.Target is not { } target
-            || !_drainableQuery.TryComp(target, out var drainable)
-            || !_bloodstreamQuery.TryComp(target, out var bloodstream))
-        {
+        if (args.Cancelled || args.Target is not { } target || !_drainableQuery.TryComp(target, out var drainable))
             return;
-        }
 
         var user = ent.Owner;
-        var blood = (target, bloodstream);
+        _hunger.ModifyHunger(user, ent.Comp.HungerRestoration);
 
         // If we have already reached our limit on this target,
         // then just satiate our hunger and stop
         if (drainable.BloodGathered >= drainable.MaxBlood)
         {
-            _hunger.ModifyHunger(user, 100f); // TODO: Store in comp
             _popup.PopupClient("You have drained most of their life force, you will get no more usable blood from them", user, user, PopupType.MediumCaution);
             return;
         }
 
-
-        // <Todo> Something is bugged with this
-        if (!_solution.ResolveSolution(target, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var sol)
-            || sol.AvailableVolume <= 0)
+        if (!_bloodstreamQuery.TryComp(target, out var bloodstream))
             return;
-        Log.Debug($"Blood Volume: {sol.AvailableVolume}");
 
-        var bloodToRemove = (int) FixedPoint2.Min(25f, sol.Volume);
-        _bloodstream.TryBleedOut(blood, bloodToRemove);
-        // </Todo>
+        var bloodEnt = (target, bloodstream);
+        if (!_solution.ResolveSolution(target, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var sol) || sol.Volume <= 0)
+            return;
 
-        drainable.BloodGathered += bloodToRemove;
+        var bloodToRemove = FixedPoint2.Min(ent.Comp.BloodToRemove, sol.Volume);
+        var bloodInt = (int) bloodToRemove;
+
+        _bloodstream.TryModifyBloodLevel(bloodEnt, bloodToRemove);
+        _bloodstream.TryModifyBleedAmount(bloodEnt, bloodEnt.bloodstream.MaxBleedAmount * 0.6f); // TODO: Adjust this somewhere where it feels good
+
+        drainable.BloodGathered += bloodInt;
         Dirty(target, drainable);
 
-        // Transfer the blood to the vampire's usable blood and total blood.
-        _vampire.AdjustBlood(user, bloodToRemove); // TODO: Event here not method
+        // Notify anyone, for example Vampires to update their blood pools
+        var ev = new BloodsuckingSuccessEvent(bloodInt);
+        RaiseLocalEvent(user, ref ev);
 
-        Log.Debug($"Vampire has received: {bloodToRemove}");
+        _popup.PopupClient("You drain the life force out of them...", user, user, PopupType.MediumCaution);
+        _popup.PopupEntity("You feel like your life force has been drained...", target, target, PopupType.MediumCaution);
     }
 
     #region  Helper
@@ -105,6 +109,11 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
     /// </summary>
     private void BloodSuck(Entity<VampireBloodsuckingComponent> ent, EntityUid target)
     {
+        PredictedSpawnAtPosition(BiteEffect, Transform(target).Coordinates);
+        _audio.PlayPredicted(BiteSound, target, ent.Owner);
+
+        _popup.PopupClient("You start draining them...", ent.Owner, ent.Owner, PopupType.Medium);
+
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
             user: ent.Owner,
@@ -137,6 +146,7 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
             return false;
 
         // We must be targeting our target's head first.
+        // Note: This will disallow a normal head targeting interaction, but it's fine if your active hand is not empty.
         if (!_targetingQuery.TryComp(user, out var targeting) || targeting.Target != TargetBodyPart.Head)
             return false;
 

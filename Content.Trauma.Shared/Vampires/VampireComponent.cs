@@ -19,8 +19,8 @@ public sealed partial class VampireComponent : Component
 
     /// <summary>
     ///  The total blood we have reached.
-    ///  When using an action, we may lose <see cref="UsableBlood"/>,
-    ///  but this variable still stays at our highest amount of blood we have reached so far.
+    ///  When using an action, we may lose <see cref="UsableBlood"/>, we don't lose our total blood.
+    ///  This variable should not ever get decreased.
     ///
     ///  This is the variable that unlocks abilities.
     /// </summary>

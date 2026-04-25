@@ -7,14 +7,32 @@ namespace Content.Trauma.Shared.Vampires;
 /// <summary>
 /// Component that allows user to drain blood from a valid entity by attacking them in combat mode,
 /// whilst the head of the target is targeted.
-///
-/// Convert blood into charges, if draining was successful.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class VampireBloodsuckingComponent : Component;
+public sealed partial class VampireBloodsuckingComponent : Component
+{
+    /// <summary>
+    ///  In all cases, this is how much hunger we restore, in case a <see cref="BloodSuckDoAfterEvent"/> succeeds.
+    /// </summary>
+    [DataField]
+    public float HungerRestoration = 100f;
+
+    /// <summary>
+    ///  How much blood will we remove from the target?
+    /// </summary>
+    [DataField]
+    public int BloodToRemove = 25;
+}
 
 /// <summary>
 /// Raised on the <see cref="VampireBloodsuckingComponent"/> entity, after the bloodsucking process starts.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class BloodSuckDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// Raised on the entity that does the bloodsucking sequence, and it passes.
+/// </summary>
+/// <param name="BloodRemoved"></param>The blood that was removed from the target during the bloodsucking sequence.
+[ByRefEvent]
+public record struct BloodsuckingSuccessEvent(int BloodRemoved);

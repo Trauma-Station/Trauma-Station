@@ -6,7 +6,7 @@ using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.Actions;
 
-public sealed class ActionConditionsBeforeSystem : EntitySystem
+public sealed class ActionConditionsSystem : EntitySystem
 {
     [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -15,10 +15,10 @@ public sealed class ActionConditionsBeforeSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ActionConditionsBeforeComponent, ActionAttemptEvent>(OnAttempt);
+        SubscribeLocalEvent<ActionConditionsComponent, ActionAttemptEvent>(OnAttempt);
     }
 
-    private void OnAttempt(Entity<ActionConditionsBeforeComponent> ent, ref ActionAttemptEvent args)
+    private void OnAttempt(Entity<ActionConditionsComponent> ent, ref ActionAttemptEvent args)
     {
         if (ent.Comp.Any)
         {
