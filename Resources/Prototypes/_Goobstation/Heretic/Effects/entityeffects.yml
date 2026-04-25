@@ -57,6 +57,7 @@
 - type: entityEffect
   id: HereticFleshGraspEffect
   conditions:
+  - !type:FleshGhoulLimitCondition
   - !type:WhitelistCondition
     whitelist:
       components:
@@ -71,6 +72,7 @@
   effects:
   - !type:GhoulifyEffect
     health: 50
+  - !type:AddToFleshGhoulLimit
   - !type:SetBlackboardValuesRitualEffect
     values:
       ApplyGraspDefaultEffects: false

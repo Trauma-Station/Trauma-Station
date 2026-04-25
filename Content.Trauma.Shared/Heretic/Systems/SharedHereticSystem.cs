@@ -13,6 +13,7 @@ using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Configuration;
@@ -205,7 +206,8 @@ public abstract class SharedHereticSystem : EntitySystem
     public void UpdateHereticAura(EntityUid uid)
     {
         if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura ||
-            Status.HasEffectComp<Trauma.Shared.Heretic.Components.StatusEffects.HideHereticAuraStatusEffectComponent>(uid))
+            HasComp<HideHereticAuraComponent>(uid) ||
+            Status.HasEffectComp<HideHereticAuraStatusEffectComponent>(uid))
         {
             RemCompDeferred<HereticAuraComponent>(uid);
             return;

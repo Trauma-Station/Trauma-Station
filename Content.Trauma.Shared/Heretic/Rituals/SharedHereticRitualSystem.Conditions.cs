@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Content.Shared.Stacks;
 using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.Side;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
@@ -30,9 +31,26 @@ public abstract partial class SharedHereticRitualSystem
         SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<HereticMinStageCondition>>(OnMinStage);
         SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<BackstabCondition>>(OnBackstab);
         SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<TryMakeRustWallCondition>>(OnRustWall);
+        SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<FleshGhoulLimitCondition>>(
+            OnFleshGhoulLimitCheck);
     }
 
-    private void OnRustWall(Entity<TransformComponent> ent, ref HereticRitualConditionEvent<TryMakeRustWallCondition> args)
+    private void OnFleshGhoulLimitCheck(Entity<TransformComponent> ent,
+        ref HereticRitualConditionEvent<FleshGhoulLimitCondition> args)
+    {
+        if (!TryGetValue(args.Ritual, Performer, out EntityUid user) ||
+            !TryGetValue(args.Ritual, Mind, out EntityUid mind) ||
+            !TryComp(mind, out FleshHereticMindComponent? fleshMind))
+            return;
+
+        fleshMind.Ghouls = fleshMind.Ghouls.Where(Exists).ToList();
+        args.Result = fleshMind.Ghouls.Count < fleshMind.GhoulLimit;
+        if (!args.Result)
+            _popup.PopupClient(Loc.GetString("heretic-ritual-fail-ghoul-limit"), user, user);
+    }
+
+    private void OnRustWall(Entity<TransformComponent> ent,
+        ref HereticRitualConditionEvent<TryMakeRustWallCondition> args)
     {
         if (!TryGetValue(args.Ritual, Performer, out EntityUid user) ||
             !TryGetValue(args.Ritual, Mind, out EntityUid mind) || !TryComp(mind, out HereticComponent? heretic))
@@ -54,7 +72,8 @@ public abstract partial class SharedHereticRitualSystem
             args.Condition.AlwaysBackstabLaying);
     }
 
-    private void OnMinStage(Entity<TransformComponent> ent, ref HereticRitualConditionEvent<HereticMinStageCondition> args)
+    private void OnMinStage(Entity<TransformComponent> ent,
+        ref HereticRitualConditionEvent<HereticMinStageCondition> args)
     {
         if (!TryGetValue(args.Ritual, Mind, out EntityUid mind) || !TryComp(mind, out HereticComponent? heretic))
             return;

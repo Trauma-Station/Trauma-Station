@@ -211,6 +211,10 @@
   id: ShadowCloakStatusEffect
   name: shadow cloak
   components:
+  - type: StatusEffect
+    blacklist:
+      components:
+      - LordOfTheNight
   - type: StatusEffectAlert
     alert: ShadowCloak
   - type: MovementModStatusEffect
@@ -227,6 +231,10 @@
   id: ShadowCloakPaleStatusEffect
   name: forest admonitions
   components:
+  - type: StatusEffect
+    blacklist:
+      components:
+      - LordOfTheNight
   - type: StatusEffectAlert
     alert: ForestAdmonitions
   - type: MovementModStatusEffect
@@ -278,6 +286,10 @@
   id: LastRefugeStatusEffect
   name: caretaker's last refuge
   components:
+  - type: StatusEffect
+    blacklist:
+      components:
+      - LordOfTheNight
   - type: HereticCloakedStatusEffect
     loseFocusMessage: heretic-ability-lose-focus-last-refuge
   - type: GrantComponentsStatusEffect

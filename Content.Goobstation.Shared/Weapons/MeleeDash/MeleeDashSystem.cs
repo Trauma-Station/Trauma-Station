@@ -40,6 +40,7 @@ public sealed class MeleeDashSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<DashingComponent, LandEvent>(OnLand);
+        SubscribeLocalEvent<DashingComponent, StopThrowEvent>(OnStopThrow);
         SubscribeLocalEvent<DashingComponent, StartCollideEvent>(OnCollide);
         SubscribeAllEvent<MeleeDashEvent>(OnDash);
     }
@@ -60,7 +61,7 @@ public sealed class MeleeDashSystem : EntitySystem
         if (!HasComp<MobStateComponent>(args.OtherEntity))
             return;
 
-        if (!_hands.IsHolding(ent.Owner, ent.Comp.Weapon))
+        if (!_hands.IsHolding(ent.Owner, ent.Comp.Weapon) && ent.Owner != ent.Comp.Weapon)
             return;
 
         comp.HitEntities.Add(args.OtherEntity);
@@ -72,7 +73,17 @@ public sealed class MeleeDashSystem : EntitySystem
         _melee.DoLightAttack(uid, ev, comp.Weapon.Value, melee, actor.PlayerSession);
     }
 
+    private void OnStopThrow(Entity<DashingComponent> ent, ref StopThrowEvent args)
+    {
+        StopDash(ent);
+    }
+
     private void OnLand(Entity<DashingComponent> ent, ref LandEvent args)
+    {
+        StopDash(ent);
+    }
+
+    private void StopDash(Entity<DashingComponent> ent)
     {
         var (uid, comp) = ent;
 
@@ -104,7 +115,7 @@ public sealed class MeleeDashSystem : EntitySystem
         var weapon = GetEntity(msg.Weapon);
 
         if (TerminatingOrDeleted(weapon) ||
-            !_hands.IsHolding(user, weapon) ||
+            !_hands.IsHolding(user, weapon) && user != weapon ||
             !TryComp(weapon, out MeleeDashComponent? dash) ||
             !TryComp(weapon, out UseDelayComponent? delay) || _useDelay.IsDelayed((weapon, delay)))
             return;

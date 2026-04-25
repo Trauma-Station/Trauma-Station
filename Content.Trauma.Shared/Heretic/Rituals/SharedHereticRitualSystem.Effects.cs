@@ -33,6 +33,17 @@ public abstract partial class SharedHereticRitualSystem
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SpawnCosmicField>>(OnCosmicField);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SetBlackboardValuesRitualEffect>>(OnBlackboard);
         SubscribeLocalEvent<RustGraspComponent, HereticRitualEffectEvent<ResetRustGraspDelayEffect>>(OnRustDelay);
+        SubscribeLocalEvent<GhoulComponent, HereticRitualEffectEvent<AddToFleshGhoulLimit>>(OnAddToFleshLimit);
+    }
+
+    private void OnAddToFleshLimit(Entity<GhoulComponent> ent, ref HereticRitualEffectEvent<AddToFleshGhoulLimit> args)
+    {
+        if (!TryGetValue(args.Ritual, Mind, out EntityUid mind) ||
+            !TryComp(mind, out FleshHereticMindComponent? fleshMind))
+            return;
+
+        fleshMind.Ghouls.Add(ent);
+        Dirty(mind, fleshMind);
     }
 
     private void OnBlackboard(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<SetBlackboardValuesRitualEffect> args)
@@ -145,7 +156,6 @@ public abstract partial class SharedHereticRitualSystem
         ghoul.TotalHealth = args.Effect.Health;
         ghoul.GiveBlade = args.Effect.GiveBlade;
         ghoul.ChangeHumanoidProfile = args.Effect.ChangeAppearance;
-        ghoul.CanDeconvert = args.Effect.CanDeconvert;
         ghoul.DeathBehavior = args.Effect.DeathBehavior;
         AddComp(ent, ghoul, true);
 

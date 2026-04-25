@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Shared.Blocking;
 // </Trauma>
 using Content.Shared.NPC.Prototypes;
 using Content.Server.Actions;
@@ -95,7 +94,7 @@ namespace Content.Server.Zombies
         private void OnPendingMapInit(EntityUid uid, IncurableZombieComponent component, MapInitEvent args)
         {
             _actions.AddAction(uid, ref component.Action, component.ZombifySelfActionPrototype);
-            _faction.AddFaction(uid, Faction);
+            _faction.AddFaction(uid, HasComp<InitialInfectedComponent>(uid) ? IIFaction : Faction); // Trauma - separate faction for II
 
             if (HasComp<ZombieComponent>(uid) || HasComp<ZombieImmuneComponent>(uid))
                 return;
@@ -217,11 +216,6 @@ namespace Content.Server.Zombies
             }
         }
 
-        private bool IsUserBlocking(BlockingUserComponent? component) // Goobstation
-        {
-            return (TryComp<BlockingComponent>(component?.BlockingItem, out var blockComp) && blockComp.IsBlocking);
-        }
-
         private float GetZombieInfectionChance(EntityUid uid, ZombieComponent zombieComponent)
         {
             var chance = zombieComponent.BaseZombieInfectionChance;
@@ -262,8 +256,10 @@ namespace Content.Server.Zombies
                 if (!TryComp<MobStateComponent>(uid, out var mobState))
                     continue;
 
-                if (TryComp<BlockingUserComponent>(entity, out var blockingUser) && IsUserBlocking(blockingUser)) // Goobstation edit - prevents infection if user is actively blocking
-                    return;
+                // <Trauma> - prevents infection if user is actively blocking
+                if (IsUserBlocking(uid))
+                    continue;
+                // </Trauma>
 
                 if (HasComp<ZombieComponent>(uid) || HasComp<IncurableZombieComponent>(uid))
                 {
@@ -277,7 +273,7 @@ namespace Content.Server.Zombies
                     _damageable.TryChangeDamage(args.User, entity.Comp.HealingOnBite, true, false);
 
                     // If we cannot infect the living target, the zed will just heal itself.
-                    if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread || _random.Prob(GetZombieInfectionChance(uid, entity.Comp)))
+                    if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread || !_random.Prob(GetZombieInfectionChance(uid, entity.Comp)))
                         continue;
 
                     EnsureComp<PendingZombieComponent>(uid);
@@ -333,7 +329,7 @@ namespace Content.Server.Zombies
         // Remove the role when getting cloned, getting gibbed and borged, or leaving the body via any other method.
         private void OnMindRemoved(Entity<ZombieComponent> ent, ref MindRemovedMessage args)
         {
-            _role.MindRemoveRole<ZombieRoleComponent>((args.Mind.Owner, args.Mind.Comp));
+            _role.MindRemoveRole<ZombieRoleComponent>((args.Mind.Owner,  args.Mind.Comp));
         }
     }
 }
