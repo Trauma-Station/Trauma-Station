@@ -89,15 +89,3 @@
       children:
       - id: ClothingOuterArmorBishop
       - id: ClothingHeadHatHelmetBishop
-
-- type: entity
-  id: SpawnArmamentsMamluk
-  categories: [ HideSpawnMenu ]
-  name: mamluk's armour
-  parent: SpawnSupplyEmpty
-  components:
-  - type: SpawnTableOnDespawn
-    table: !type:AllSelector
-      children:
-      - id: ClothingOuterArmorMamluk
-      - id: ClothingHeadHatHelmetMamluk

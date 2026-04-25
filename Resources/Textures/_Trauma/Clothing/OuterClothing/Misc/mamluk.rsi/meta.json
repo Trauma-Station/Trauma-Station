@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "AGPLv3",
-  "copyright": "Taken from Civilization 13 https://github.com/civ13/civ13",
+  "license": "Custom",
+  "copyright": "Taken from Civilization 13: https://github.com/Civ13/Civ13/blob/master/icons/obj/clothing/suits.dmi under the AGPLv3 lisence. tweaked by Papiditel",
   "size": {
     "x": 32,
     "y": 32
