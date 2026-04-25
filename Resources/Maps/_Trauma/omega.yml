@@ -70002,7 +70002,6 @@ entities:
       parent: 2
     - type: Blocking
       blockingToggleActionEntity: 10754
-      user: invalid
     - type: ActionsContainer
     - type: ContainerContainer
       containers:
@@ -70044,7 +70043,6 @@ entities:
       parent: 2
     - type: Blocking
       blockingToggleActionEntity: 10760
-      user: invalid
     - type: ActionsContainer
     - type: ContainerContainer
       containers:
@@ -70060,7 +70058,6 @@ entities:
       parent: 2
     - type: Blocking
       blockingToggleActionEntity: 10762
-      user: invalid
     - type: ActionsContainer
     - type: ContainerContainer
       containers:
