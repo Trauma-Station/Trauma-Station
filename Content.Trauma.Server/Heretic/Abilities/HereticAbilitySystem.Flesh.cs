@@ -11,7 +11,6 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Cloning;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction.Components;
@@ -43,13 +42,15 @@ public sealed partial class HereticAbilitySystem
     {
         base.SubscribeFlesh();
 
-        SubscribeLocalEvent<FleshPassiveComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<FleshPassiveComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<FleshPassiveComponent, ConsumingFoodEvent>(OnConsumingFood);
     }
 
     private void OnConsumingFood(Entity<FleshPassiveComponent> ent, ref ConsumingFoodEvent args)
     {
+        if (HasComp<LordOfTheNightComponent>(ent))
+            return;
+
         if (args.Volume <= FixedPoint2.Zero)
             return;
 
@@ -96,6 +97,9 @@ public sealed partial class HereticAbilitySystem
 
     private EntityUid? ResolveStomach(Entity<FleshPassiveComponent> ent)
     {
+        if (HasComp<LordOfTheNightComponent>(ent))
+            return null;
+
         if (ent.Comp.Stomach is { } stomach)
             return stomach;
 
@@ -115,63 +119,13 @@ public sealed partial class HereticAbilitySystem
         {
             metabolizer.UpdateInterval = TimeSpan.FromSeconds(0.1);
             metabolizer.MaxReagentsProcessable = 10;
+            metabolizer.MetabolizerTypes = [ent.Comp.FleshMetabolizer];
             Dirty(uid, metabolizer);
         }
 
         EnsureComp<UnremoveableOrganComponent>(uid); // no gamer stomach for chuddies that try to steal it
 
         return ent.Comp.Stomach = uid;
-    }
-
-    private void OnDamageChanged(Entity<FleshPassiveComponent> ent, ref DamageChangedEvent args)
-    {
-        if (!args.DamageIncreased || args.DamageDelta == null)
-            return;
-
-        if (_mobstate.IsDead(ent))
-            return;
-
-        var damage = args.DamageDelta.GetTotal();
-
-        if (damage <= 0)
-            return;
-
-        if (!Heretic.TryGetHereticComponent(ent.Owner, out var heretic, out var mind) || !heretic.Ascended)
-            return;
-
-        ent.Comp.TrackedDamage += damage;
-
-        if (ent.Comp.TrackedDamage < ent.Comp.MimicDamage)
-            return;
-
-        ent.Comp.FleshMimics.RemoveAll(x => !Exists(x));
-
-        if (ent.Comp.MaxMimics <= ent.Comp.FleshMimics.Count)
-        {
-            var toHeal = -ent.Comp.TrackedDamage / ent.Comp.FleshMimics.Count * ent.Comp.MimicHealMultiplier;
-            ent.Comp.TrackedDamage = FixedPoint2.Zero;
-            foreach (var mimic in ent.Comp.FleshMimics)
-            {
-                IHateWoundMed(mimic, AllDamage * toHeal, null, null);
-            }
-
-            return;
-        }
-
-        var maxToSpawn = ent.Comp.MaxMimics - ent.Comp.FleshMimics.Count;
-        var toSpawn = (int) (ent.Comp.TrackedDamage / ent.Comp.MimicDamage);
-        toSpawn = Math.Clamp(toSpawn, 0, maxToSpawn);
-
-        if (toSpawn == 0)
-            return;
-
-        for (var i = 0; i < toSpawn; i++)
-        {
-            if (CreateFleshMimic(ent, ent, mind, true, true, 50, args.Origin) is { } clone)
-                ent.Comp.FleshMimics.Add(clone);
-        }
-
-        ent.Comp.TrackedDamage -= toSpawn * ent.Comp.MimicDamage;
     }
 
     public override EntityUid? CreateFleshMimic(EntityUid uid,

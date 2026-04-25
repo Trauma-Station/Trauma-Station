@@ -1,0 +1,272 @@
+# Cartridges
+
+- type: entity
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: BaseCartridgeGaussgun
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - CartridgeGaussgun
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
+  - type: StaticPrice
+    price: 10
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
+
+- type: entity
+  parent: BaseCartridgeGaussgun
+  id: CartridgeBallBearing
+  name: ball bearing
+  description: A small projectile suitable for gauss guns.
+  components:
+  - type: CartridgeAmmo
+    proto: GaussgunBearing
+  - type: Sprite
+    state: bullet
+  - type: Construction
+    graph: GaussImprovAmmoGraph
+    node: finish
+
+- type: entity
+  parent: BaseCartridgeGaussgun
+  id: CartridgeDisc
+  name: razor disc
+  description: A small projectile suitable for gauss guns. This one slightly pierces armor and causes bleeding.
+  components:
+  - type: CartridgeAmmo
+    proto: GaussgunDisk
+  - type: Sprite
+    state: disk
+
+- type: entity
+  parent: BaseCartridgeGaussgun
+  id: CartridgeShard
+  name: shardshot
+  description: A small projectile suitable for gauss guns. This one splits into shards when shot, nearly useless against armored targets. Illegal in most civilized zones.
+  components:
+  - type: CartridgeAmmo
+    proto: GaussgunShardSpread
+  - type: Sprite
+    state: shard
+
+- type: entity
+  parent: [ BaseForgedReadyItem, CartridgeBallBearing]
+  id: CartridgeBallBearingForged
+  name: ball bearing
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
+    layers:
+    - state: bullet
+      shader: Emissive
+
+- type: entity
+  parent: [ BaseForgedReadyItem, CartridgeDisc ]
+  id: CartridgeDiscForged
+  name: razor disc
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
+    layers:
+    - state: disk
+      shader: Emissive
+
+- type: entity
+  parent: [ BaseForgedReadyItem, CartridgeShard ]
+  id: CartridgeShardForged
+  name: shardshot
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
+    layers:
+    - state: shard
+      shader: Emissive
+
+# Bullets
+
+- type: entity
+  id: BaseGaussgunAmmo
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
+  - type: Ammo
+    muzzleFlash: null
+  - type: Tag
+    tags:
+    - AmmoGaussgun
+  - type: Reflective
+  - type: FlyBySound
+  - type: Clickable
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
+    linearDamping: 0
+    angularDamping: 0
+  - type: TileFrictionModifier
+    modifier: 0
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.10,0.1,0.30"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: False
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+    deleteOnCollide: true
+    onlyCollideWhenShot: true
+  - type: TimedDespawn
+    lifetime: 10
+
+- type: entity
+  parent: BaseGaussgunAmmo
+  id: GaussgunBearing
+  name: ball bearing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+  - type: Sprite
+    state: bullet
+
+- type: entity
+  parent: PelletShotgun
+  id: GaussgunShardSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: GaussgunShard
+    count: 10
+    spread: 25
+
+- type: entity
+  parent: BaseGaussgunAmmo
+  id: GaussgunShard
+  name: shard
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 4
+      armorPenetration: -10
+  - type: Sprite
+    state: shard
+
+- type: entity
+  parent: BaseGaussgunAmmo
+  id: GaussgunDisk
+  name: sharp disk
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+        Slash: 5
+      armorPenetration: 0.1
+  - type: Sprite
+    state: disk
+
+# Ammo box
+
+- type: entity
+  parent: BaseItem
+  id: MagazineBoxGaussgunBase
+  abstract: true
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeGaussgun
+    proto: CartridgeGaussgun
+    capacity: 30
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Boxes/gaussgun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: false
+  - type: Appearance
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_drop.ogg
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+
+- type: entity
+  parent: MagazineBoxGaussgunBase
+  id: MagazineBoxGaussgunBullet
+  name: ammunition box (bearings)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeBallBearing
+
+- type: entity
+  parent: MagazineBoxGaussgunBase
+  id: MagazineBoxGaussgunDisc
+  name: ammunition box (discs)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeDisc
+
+- type: entity
+  parent: MagazineBoxGaussgunBase
+  id: MagazineBoxGaussgunShard
+  name: ammunition box (shardshot)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeShard
+
+# Crafting
+
+- type: entity
+  parent: [BaseItem]
+  id: CraftingGaussAmmoImprov
+  name: unfinished ball bearings
+  description: Some unfinished gauss ammo.
+  components:
+  - type: Sprite
+    sprite: Objects/Materials/parts.rsi
+    state: rods
+  - type: Construction
+    graph: GaussImprovAmmoGraph
+    node: 1

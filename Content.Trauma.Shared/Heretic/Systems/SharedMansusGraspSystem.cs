@@ -169,7 +169,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             return;
 
         _stun.KnockdownOrStun(target, ent.Comp.KnockdownTime);
-        _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage);
+        _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage, source: args.User, ignoreResist: true);
         _language.DoRatvarian(target, ent.Comp.SpeechTime, true, status);
         Status.TryUpdateStatusEffectDuration(target, GraspAffectedStatus, out _, ent.Comp.AffectedTime);
     }

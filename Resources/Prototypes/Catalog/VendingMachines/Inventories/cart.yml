@@ -28,6 +28,37 @@
   startingInventory:
     PassengerPDA: 5
     ClearPDA: 5
+    # <Trauma>
+    MedicalPDA: 5
+    EngineerPDA: 5
+    ServiceWorkerPDA: 5
+    CargoPDA: 5
+    SecurityPDA: 5
+    AtmosPDA: 5
+    BartenderPDA: 3
+    BotanistPDA: 3
+    ChaplainPDA: 1
+    ChefPDA: 2
+    ChemistryPDA: 3
+    ClownPDA: 1
+    DetectivePDA: 2
+    JanitorPDA: 3
+    LawyerPDA: 2
+    LibrarianPDA: 2
+    MimePDA: 1
+    SalvagePDA: 3
+    MusicianPDA: 2
+    ParamedicPDA: 4
+    PsychologistPDA: 2
+    ReporterPDA: 2
+    RadioHostPDA: 2
+    VirologistPDA: 4
+    SciencePDA: 5
+    TechnicalAssistantPDA: 4
+    MedicalInternPDA: 4
+    SecurityCadetPDA: 4
+    ResearchAssistantPDA: 4
+    # </Trauma>
     PassengerIDCard: 5
     ClothingHeadsetGrey: 5
     RubberStampApproved: 1
@@ -42,8 +73,17 @@
     EncryptionKeyScience: 2
     EncryptionKeySecurity: 1
     EncryptionKeyService: 3
+    # <Trauma>
+    ClothingHeadsetScience: 2
+    ClothingHeadsetSecurity: 2
+    ClothingHeadsetEngineering: 2
+    ClothingHeadsetService: 2
+    ClothingHeadsetCargo: 2
+    ClothingHeadsetMedical: 2
+    # </Trauma>
   contrabandInventory:
     BalloonNT: 2
     LuxuryPen: 1
   emaggedInventory: # Goobstation
     AgentIDCard: 1
+    SyndiPDANukie: 1 # Trauma

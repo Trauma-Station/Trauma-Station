@@ -287,6 +287,8 @@
   - type: Tool
     qualities:
       - Sawing
+    useSound: # Trauma
+      path: /Audio/_Shitmed/Medical/Surgery/bone_saw.ogg
   # Shitmed Change
   - type: BoneSaw
   - type: SurgeryTool
@@ -336,6 +338,8 @@
       path: /Audio/Items/drill_hit.ogg
   - type: Tool
     speedModifier: 1.5
+    useSound: # Trauma
+      path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
   - type: BoneSaw # Shitmed
     speed: 1.5
   - type: SurgeryTool

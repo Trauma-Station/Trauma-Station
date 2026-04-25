@@ -12,6 +12,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Shared.Heretic.Crucible.Components;
 using Content.Trauma.Shared.Wizard.SanguineStrike;
 using Robust.Shared.Timing;
 
@@ -35,19 +36,19 @@ public sealed class WoundedSoldierSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<Components.WoundedSoldierComponent, MeleeAttackEvent>(OnAttack);
-        SubscribeLocalEvent<Components.WoundedSoldierComponent, DamageModifyEvent>(OnDamageModify);
-        SubscribeLocalEvent<Components.WoundedSoldierComponent, ExaminedEvent>(OnExamine);
+        SubscribeLocalEvent<WoundedSoldierComponent, MeleeAttackEvent>(OnAttack);
+        SubscribeLocalEvent<WoundedSoldierComponent, DamageModifyEvent>(OnDamageModify);
+        SubscribeLocalEvent<WoundedSoldierComponent, ExaminedEvent>(OnExamine);
 
         SubscribeLocalEvent<MeleeHitEvent>(OnHit);
     }
 
-    private void OnExamine(Entity<Components.WoundedSoldierComponent> ent, ref ExaminedEvent args)
+    private void OnExamine(Entity<WoundedSoldierComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineLoc, ("ent", Identity.Entity(ent, EntityManager))));
     }
 
-    private void OnDamageModify(Entity<Components.WoundedSoldierComponent> ent, ref DamageModifyEvent args)
+    private void OnDamageModify(Entity<WoundedSoldierComponent> ent, ref DamageModifyEvent args)
     {
         if (!args.Damage.AnyPositive())
             return;
@@ -66,7 +67,7 @@ public sealed class WoundedSoldierSystem : EntitySystem
     {
         var user = args.User;
 
-        if (!TryComp(user, out Components.WoundedSoldierComponent? soldier))
+        if (!TryComp(user, out WoundedSoldierComponent? soldier))
             return;
 
         var hitCount = args.HitEntities.Count(x => x != user && !_mobState.IsDead(x));
@@ -80,7 +81,7 @@ public sealed class WoundedSoldierSystem : EntitySystem
         _stamina.TryTakeStamina(user, -total.Float() * soldier.StaminaHealMultiplier);
     }
 
-    private void OnAttack(Entity<Components.WoundedSoldierComponent> ent, ref MeleeAttackEvent args)
+    private void OnAttack(Entity<WoundedSoldierComponent> ent, ref MeleeAttackEvent args)
     {
         if (!TryComp<MeleeWeaponComponent>(args.Weapon, out var weapon) || !TryComp(ent, out DamageableComponent? dmg))
             return;
@@ -88,7 +89,7 @@ public sealed class WoundedSoldierSystem : EntitySystem
         var ratio = GetCritThresholdDamageRatio((ent, dmg, null));
 
         var rate = weapon.NextAttack - _timing.CurTime;
-        weapon.NextAttack -= rate * MathF.Pow(ratio * 0.8f, 0.5f);
+        weapon.NextAttack -= rate * MathF.Pow(ratio * 0.65f, 0.5f);
         Dirty(args.Weapon, weapon);
     }
 
@@ -106,9 +107,8 @@ public sealed class WoundedSoldierSystem : EntitySystem
 
         _nextDamage = now + _damageInterval;
 
-        var query =
-            EntityQueryEnumerator<Components.WoundedSoldierComponent, MobStateComponent, MobThresholdsComponent,
-                DamageableComponent>();
+        var query = EntityQueryEnumerator<WoundedSoldierComponent, MobStateComponent, MobThresholdsComponent,
+            DamageableComponent>();
         while (query.MoveNext(out var uid, out var soldier, out var state, out var threshold, out var dmg))
         {
             if (state.CurrentState != MobState.Alive)
@@ -144,7 +144,7 @@ public sealed class WoundedSoldierSystem : EntitySystem
 
     private DamageModifierSet GetResistances(float damageRatio)
     {
-        var coef = 1f - 0.65f * damageRatio;
+        var coef = 1f - 0.5f * damageRatio;
         return new()
         {
             Coefficients =

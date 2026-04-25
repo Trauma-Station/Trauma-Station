@@ -7392,3 +7392,103 @@ Entries:
   id: 856
   time: '2026-04-24T10:20:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1351
+- author: Armok
+  changes:
+  - type: Add
+    message: Gauss rifle, an early game security ballistic
+  - type: Add
+    message: Gauss rifle and pistol crafting recipes
+  - type: Add
+    message: Three types of gauss rifle ammo
+  - type: Add
+    message: Sounds for saws and circular saws tool use
+  - type: Fix
+    message: rev mace now mutes targets
+  - type: Add
+    message: Forge and improv crafting recipes for gauss gun magazines and ammunition.
+  - type: Add
+    message: 'Update forge sprites '
+  id: 857
+  time: '2026-04-24T16:17:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2205
+- author: Aviu
+  changes:
+  - type: Add
+    message: >-
+      Flesh heretic ghouls, as well as fire sharks and rust walkers are now
+      limited.
+  - type: Add
+    message: >-
+      Flesh heretic can recall ghouls on the rune by alt-clicking it with mansus
+      grasp.
+  - type: Tweak
+    message: Voiceless dead have 100hp again.
+  - type: Tweak
+    message: 'Fire shark hp: 15 -> 25.'
+  - type: Tweak
+    message: Risen ghouls deconvert on death, holy water deconversion removed.
+  - type: Add
+    message: Flesh ascension now lets you shapeshift into a giant worm, scary.
+  id: 858
+  time: '2026-04-24T16:23:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2192
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Some helmets no longer protect at very short range shown in its examine,
+      you can now actually shoot secoffs in the face to kill them instead of
+      shooting them in the helmet over and over 4 no raisin..?
+  id: 859
+  time: '2026-04-24T17:55:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2223
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Every martial art except capoeira no longer scales its effects with your
+      level, so you can no longer stun someone for minutes on end with a single
+      move...
+  id: 860
+  time: '2026-04-24T23:16:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2234
+- author: Fan0jar
+  changes:
+  - type: Add
+    message: Added more PDAs and headsets to PTech!
+  id: 861
+  time: '2026-04-25T09:16:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2238
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed closet skeletons not having skills.
+  - type: Fix
+    message: Fixed lonely ritual spawning prophets instead of stalkers.
+  - type: Fix
+    message: Fixed newborn ether removing some immunities from you when it ends.
+  - type: Fix
+    message: Fixed mansus grasp and ash mark not ignoring stamina resists.
+  - type: Tweak
+    message: Wounded soldier brew nerfed slightly.
+  id: 862
+  time: '2026-04-25T09:18:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2235
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Decapoids now have a unique skillset.
+  - type: Fix
+    message: Fixed decapoids being unable to eat or drink.
+  - type: Fix
+    message: Fixed decapoids spawning without a survival box.
+  id: 863
+  time: '2026-04-25T09:50:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2244
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to rotate holographic field generators...
+  id: 864
+  time: '2026-04-25T10:07:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2246
