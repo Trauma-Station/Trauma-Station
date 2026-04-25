@@ -53,6 +53,9 @@ public sealed class MultiShaderSpriteOverlay : Overlay
                 continue;
 
             var spriteBB = _sprite.CalculateBounds((uid, sprite), pos, rot, eye.Rotation);
+            var difference = pos + sprite.Offset - spriteBB.Box.Center;
+            var differenceMatrix = Matrix3Helpers.CreateTranslation(difference);
+            spriteBB = new Box2Rotated(differenceMatrix.TransformBox(spriteBB.Box), spriteBB.Rotation, spriteBB.Origin);
             var screenBB = localMatrix.TransformBox(spriteBB.Box);
             var screenSpriteSize = (Vector2i) screenBB.Size.Rounded();
 
@@ -90,8 +93,6 @@ public sealed class MultiShaderSpriteOverlay : Overlay
             postHandle.RenderInRenderTarget(target,
                 () =>
                 {
-                    var position = target.LocalToWorld(eye, (Vector2) screenSpriteSize * 0.5f, viewport.RenderScale);
-
                     var angle = rot + eye.Rotation;
                     angle = angle.Reduced().FlipPositive();
 
@@ -100,7 +101,7 @@ public sealed class MultiShaderSpriteOverlay : Overlay
                     if (sprite is {NoRotation: false, SnapCardinals: true})
                         cardinal = angle.RoundToCardinalAngle();
 
-                    var entityMatrix = Matrix3Helpers.CreateTransform(position, sprite.NoRotation ? -eye.Rotation : rot - cardinal);
+                    var entityMatrix = Matrix3Helpers.CreateTransform(pos, sprite.NoRotation ? -eye.Rotation : rot - cardinal);
                     Matrix3x2.Invert(entityMatrix, out var invEntityMatrix);
 
                     var invMatrix = target.GetWorldToLocalMatrix(eye, viewport.RenderScale);
@@ -117,7 +118,7 @@ public sealed class MultiShaderSpriteOverlay : Overlay
 
                     postHandle.InvMatrix = invEntityMatrix * invSpriteMatrix * scaleMatrix * entityMatrix * invMatrix;
 
-                    _sprite.RenderSprite((uid, sprite), postHandle, eye.Rotation, rot, position);
+                    _sprite.RenderSprite((uid, sprite), postHandle, eye.Rotation, rot, pos);
                     postHandle.InvMatrix = Matrix3x2.Identity;
 
                     postHandle.SetTransform(Matrix3x2.Identity);
