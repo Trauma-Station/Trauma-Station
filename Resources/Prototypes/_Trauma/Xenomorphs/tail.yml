@@ -1,0 +1,11 @@
+- type: entity
+  parent: MobSpaceLeviathanSegmentBase
+  id: MobXenomorphTailSegmentBase
+  components:
+  - type: TailedEntitySegment
+  - type: Sprite
+    sprite: _Trauma/Mobs/Xenos/xenotail.rsi
+    noRot: false
+    layers:
+    - state: XenoTailSegmentBase
+    drawdepth: BelowMobs
