@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Hands.Systems;
 using Content.Trauma.Shared.Multihit;
 using Robust.Client.Graphics;
