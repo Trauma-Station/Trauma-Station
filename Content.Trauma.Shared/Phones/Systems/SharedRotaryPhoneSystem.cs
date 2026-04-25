@@ -66,7 +66,7 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
 
     private void OnInsertAttemptContainer(Entity<RotaryPhoneComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
     {
-        if (!HasComp<BodyComponent>(args.Container.Owner) && !HasComp<RotaryPhoneHolderComponent>(args.Container.Owner))
+        if (args.Container.ID != "right" && args.Container.ID != "left" && !HasComp<RotaryPhoneHolderComponent>(args.Container.Owner))
             args.Cancel();
     }
 
