@@ -95,20 +95,24 @@
       - !type:HealthChange
         damage:
           types:
-            Heat: 1
-            Poison: 1
+            Heat: 4
+            Poison: 0.5
+            Caustic: 1
+      - !type:Flammable
+        multiplier: 0.5
+      - !type:Ignite
       - !type:AdjustTemperature
         amount: 6000
-      - !type:Flammable
-        multiplier: 0.4
-      - !type:Ignite
   reactiveEffects:
     Flammable:
       methods: [ Touch ]
       effects:
       - !type:Flammable
-        multiplier: 0.3
+        multiplier: 0.5
       - !type:Ignite
+      - !type:Emote
+        emote: Scream
+        probability: 0.2
       - !type:PopupMessage
         messages: [ "clf3-it-burns", "clf3-get-away" ] # just copy and pasted from clf3 why not
         visualType: MediumCaution

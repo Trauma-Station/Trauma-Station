@@ -27,11 +27,7 @@
       PotencyDivisor: 25
     ChlorineTrifluoride:
       Min: 1
-      Max: 1
-      PotencyDivisor: 100
-    Burnite: # People kept asking for it, you get it in the powercreep update
-      Min: 1
-      Max: 1
+      Max: 2
       PotencyDivisor: 100
 
 - type: seed
@@ -90,3 +86,29 @@
       Min: 1
       Max: 10
       PotencyDivisor: 5
+
+- type: seed
+  id: cherry
+  name: seeds-cherrybomb-name
+  noun: seeds-noun-seeds
+  displayName: seeds-cherrybomb-display-name
+  plantRsi: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
+  packetPrototype: CherryBombSeeds
+  productPrototypes:
+    - FoodCherryBomb
+  harvestRepeat: Repeat
+  lifespan: 55
+  maturation: 3
+  production: 3
+  yield: 6
+  potency: 10
+  idealLight: 6
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 3
+      PotencyDivisor: 30
+    Vitamin:
+      Min: 1
+      Max: 3
+      PotencyDivisor: 40
