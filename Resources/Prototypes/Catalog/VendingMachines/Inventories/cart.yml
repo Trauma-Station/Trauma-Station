@@ -58,6 +58,7 @@
     MedicalInternPDA: 4
     SecurityCadetPDA: 4
     ResearchAssistantPDA: 4
+    # </Trauma>
     PassengerIDCard: 5
     ClothingHeadsetGrey: 5
     RubberStampApproved: 1
@@ -72,6 +73,7 @@
     EncryptionKeyScience: 2
     EncryptionKeySecurity: 1
     EncryptionKeyService: 3
+    # <Trauma>
     ClothingHeadsetScience: 2
     ClothingHeadsetSecurity: 2
     ClothingHeadsetEngineering: 2
