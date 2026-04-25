@@ -5,11 +5,11 @@
   suffix: Bomb
   components:
   - type: Sprite
+    sprite: _Goobstation/Objects/Weapons/Bombs/pizzabomb.rsi
     layers:
     - state: box
       map: ["enum.StorageVisualLayers.Base"]
     - state: box-open
-      sprite: _Goobstation/Objects/Weapons/Bombs/pizzabomb.rsi
       map: ["enum.StorageVisualLayers.Door"]
   - type: TimerTrigger
     delay: 0.5
