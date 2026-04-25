@@ -7,8 +7,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
-    ElectronicsKnowledge: 1
+    FabricationKnowledge: 0
+    ElectronicsKnowledge: 0
   practical:
     MetalworkingKnowledge: 3
     MechanicsKnowledge: 3
@@ -23,8 +23,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
-    ElectronicsKnowledge: 1
+    FabricationKnowledge: 0
+    ElectronicsKnowledge: 0
   practical:
     MetalworkingKnowledge: 3
     MechanicsKnowledge: 3

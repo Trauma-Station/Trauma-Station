@@ -97,7 +97,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BananiumKnowledge: 2
+    BananiumKnowledge: 0
   practical:
     TailoringKnowledge: 1
   # </Trauma>
@@ -111,7 +111,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BananiumKnowledge: 2
+    BananiumKnowledge: 0
   practical:
     TailoringKnowledge: 1
   # </Trauma>
@@ -125,7 +125,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BananiumKnowledge: 2
+    BananiumKnowledge: 0
   practical:
     TailoringKnowledge: 1
   # </Trauma>
@@ -139,8 +139,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
-    ElectronicsKnowledge: 2
+    FabricationKnowledge: 0
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -178,8 +178,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
-    ElectronicsKnowledge: 2
+    FabricationKnowledge: 0
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction

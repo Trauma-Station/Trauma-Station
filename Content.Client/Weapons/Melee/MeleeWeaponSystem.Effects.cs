@@ -18,10 +18,18 @@ public sealed partial class MeleeWeaponSystem
     /// <summary>
     /// Does all of the melee effects for a player that are predicted, i.e. character lunge and weapon animation.
     /// </summary>
-    public override void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, Angle spriteRotation, bool flippedAnimation, bool predicted = true)
+    public override void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, Angle spriteRotation, bool flippedAnimation, bool predicted = true, EntityUid? source = null) // Trauma - source
     {
         if (!Timing.IsFirstTimePredicted)
             return;
+
+        // <Trauma>
+        if (source != null && source != user)
+        {
+            user = source.Value;
+            weapon = user;
+        }
+        // </Trauma>
 
         var lunge = GetLungeAnimation(localPos);
 

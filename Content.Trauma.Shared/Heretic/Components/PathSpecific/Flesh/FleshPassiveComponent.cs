@@ -2,6 +2,7 @@
 
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
+using Content.Shared.Metabolism;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 
@@ -9,15 +10,6 @@ namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 public sealed partial class FleshPassiveComponent : Component
 {
     public override bool SessionSpecific => true;
-
-    [DataField, NonSerialized]
-    public List<EntityUid> FleshMimics = new();
-
-    [DataField]
-    public int MaxMimics = 10;
-
-    [DataField]
-    public float MimicHealMultiplier = 5f;
 
     [DataField]
     public EntityUid? Stomach;
@@ -46,9 +38,7 @@ public sealed partial class FleshPassiveComponent : Component
     [DataField]
     public float AscensionMultiplier = 2f;
 
+    // Prevents heretics from vomiting when consuming flesh and other stuff
     [DataField]
-    public FixedPoint2 TrackedDamage;
-
-    [DataField]
-    public FixedPoint2 MimicDamage = 10;
+    public ProtoId<MetabolizerTypePrototype> FleshMetabolizer = "Vox";
 }

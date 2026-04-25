@@ -35,7 +35,9 @@ public sealed class AnvilSystem : EntitySystem
 
     private void OnStartItem(Entity<ForgingAnvilComponent> ent, ref AnvilStartItemMessage args)
     {
-        if (!_proto.TryIndex(args.Metal, out var metal) || !_proto.TryIndex(args.Item, out var item))
+        if (!_proto.TryIndex(args.Metal, out var metal) ||
+            !_proto.TryIndex(args.Item, out var item) ||
+            !_forging.CanMakeFrom(item, args.Metal))
             return;
 
         var user = args.Actor;

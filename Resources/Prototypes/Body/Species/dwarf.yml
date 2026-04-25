@@ -14,7 +14,7 @@
   - type: InitialBody
     organs:
       Torso: OrganHumanTorso
-      Head: OrganHumanHead
+      Head: OrganDwarfHead # Trauma - Human -> Dwarf
       ArmLeft: OrganHumanArmLeft
       ArmRight: OrganHumanArmRight
       HandRight: OrganHumanHandRight

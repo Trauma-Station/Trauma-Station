@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Common.Weapons;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Item;
@@ -82,5 +83,20 @@ public abstract partial class SharedMeleeWeaponSystem
         {
             staminaDamage *= 1 - _knowledge.SharpCurve(melee);
         }
+    }
+
+    protected bool RaiseInRangeEvent(EntityUid ent,
+        EntityUid target,
+        float range,
+        EntityCoordinates? targetCoordinates,
+        Angle? targetAngle,
+        out bool inRange,
+        out EntityUid source)
+    {
+        var ev = new MeleeInRangeEvent(ent, target, range, targetCoordinates, targetAngle);
+        RaiseLocalEvent(ent, ref ev);
+        inRange = ev.InRange;
+        source = ev.User;
+        return ev.Handled;
     }
 }

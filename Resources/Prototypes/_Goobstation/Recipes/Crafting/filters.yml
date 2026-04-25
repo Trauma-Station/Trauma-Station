@@ -5,7 +5,7 @@
   category: construction-category-misc
   objectType: Item
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   useQuality: false
 
 - type: construction

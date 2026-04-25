@@ -1,0 +1,70 @@
+# - type: construction
+#   id: GaussRiflePrefab
+#   graph: GaussRiflePrefabGraph
+#   startNode: start
+#   targetNode: finish
+#   category: construction-category-weapons
+#   objectType: Item
+#   theory:
+#     FabricationKnowledge: 3
+#     ElectronicsKnowledge: 1
+#   qualityPrototype: BaseQuality
+#   useQuality: false
+
+- type: construction
+  id: GaussRifle
+  graph: GaussRifleGraph
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  theory:
+    FabricationKnowledge: 3
+    ElectronicsKnowledge: 2
+  practical:
+    GunsmithingKnowledge: 3
+    WeaponsKnowledge: 2
+    MechanicsKnowledge: 2
+  qualityPrototype: BaseQuality
+
+- type: construction
+  id: GaussPistol
+  graph: GaussPistolGraph
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  theory:
+    FabricationKnowledge: 2
+    ElectronicsKnowledge: 2
+  practical:
+    GunsmithingKnowledge: 3
+    WeaponsKnowledge: 2
+    MechanicsKnowledge: 2
+  qualityPrototype: BaseQuality
+
+- type: construction
+  id: GaussImprovMagazine
+  graph: GaussImprovMagazineGraph
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    MetalworkingKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: GaussImprovAmmo
+  graph: GaussImprovAmmoGraph
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  theory:
+    FabricationKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 1
+  useQuality: false

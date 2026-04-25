@@ -49,3 +49,8 @@ construction-graph-tag-smallhandle = short handle
 construction-graph-tag-mediumhandle = medium handle
 construction-graph-tag-largehandle = wooden pole
 construction-graph-tag-arrow-shaft = an arrow shaft
+
+# Crafting
+construction-graph-tag-recharging-board = any recharger circuit board
+construction-graph-tag-part-capacitor = a capacitor
+construction-graph-tag-part-metal-container = any metal container
