@@ -25,3 +25,12 @@
   storage:
     back:
     - DecapoidBreathingApparatus
+
+- type: loadout
+  id: EmergencyVapor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Aquatic
+  storage:
+    back:
+    - BoxSurvivalSlotsVapor

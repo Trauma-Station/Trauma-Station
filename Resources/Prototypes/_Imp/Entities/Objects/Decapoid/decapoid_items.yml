@@ -142,3 +142,50 @@
   - type: DrawableSolution
     solution: waterTank
   - type: Vaporizer
+
+- type: entity
+  parent: EmergencyOxygenTank
+  id: EmergencyVaporTank
+  name: emergency water vapor tank
+  description: An easily portable tank for emergencies. Contains very little water vapor, rated for survival use only. It can hold 0.66 L of gas.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/emergency_vapor.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Misc/emergency_vapor.rsi
+    storedSprite:
+      state: storage
+      sprite: _Trauma/Objects/Misc/emergency_vapor.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Misc/emergency_vapor.rsi
+  - type: GasTank
+    air:
+      volume: 0.66
+      temperature: 293.15
+      moles:
+        WaterVapor: 0.27 # Idc close enough
+  - type: Tag
+    tags:
+    - EmergencyOxygenTank # Why are those even different, goob? They all go in the gas tank hole
+
+- type: entity
+  parent: BoxSurvivalSlots
+  id: BoxSurvivalSlotsVapor
+  suffix: Vapor
+  components:
+  - type: ContainerFill
+    containers:
+      water:
+      - DrinkWaterBottleFull
+      flare:
+      - Flare
+      tank:
+      - EmergencyVaporTank # In case you ever lose your vaporizer, somehow
+      mask:
+      - ClothingMaskBreath
+      emergencypen:
+      - EmergencyMedipen
+      spacepen:
+      - SpaceMedipen
+  - type: Label
+    currentLabel: reagent-name-water
