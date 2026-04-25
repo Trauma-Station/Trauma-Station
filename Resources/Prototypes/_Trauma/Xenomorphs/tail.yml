@@ -2,6 +2,8 @@
   parent: MobSpaceLeviathanSegmentBase
   id: MobXenomorphTailSegmentBase
   components:
+  - type: TailedEntitySegment # Trauma
+    prototype: MobXenomorphTailSegmentBase
   - type: Sprite
     sprite: _Trauma/Mobs/Xenos/xenotail.rsi
     noRot: false
