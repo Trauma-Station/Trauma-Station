@@ -26,6 +26,8 @@
       max: 1
       pickPlayer: false
       startingGear: LoneAbductorGear
+      prefRoles:
+        - LoneAbductorAntag
       briefing:
         text: abductor-role-greeting
         color: Green
@@ -99,6 +101,8 @@
       max: 1
       pickPlayer: false
       startingGear: AbductorScientistGear
+      prefRoles:
+        - AbductorScientistAntag
       briefing:
         text: abductor-role-greeting
         color: Green
@@ -144,6 +148,8 @@
       max: 1
       pickPlayer: false
       startingGear: AbductorAgentGear
+      prefRoles:
+        - AbductorAgentAntag
       briefing:
         text: abductor-role-greeting
         color: Green
