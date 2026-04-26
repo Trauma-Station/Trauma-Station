@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Body;
-using Content.Medical.Shared.Wounds;
 using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
+using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
-using System.Linq;
 
 namespace Content.Medical.Shared.EntityEffects;
 

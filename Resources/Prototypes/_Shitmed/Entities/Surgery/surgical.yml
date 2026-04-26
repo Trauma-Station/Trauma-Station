@@ -1,0 +1,69 @@
+- type: entity
+  id: OpenIncision
+  name: open incision
+  parent: WoundBase
+  description: there is an incision
+  components:
+  - type: Wound
+    damageType: Slash
+    woundType: External
+    woundVisibility: Always
+    scarWound: SurgeryScar
+    selfHealMultiplier: 0.5
+    canBeHealed: false
+    alwaysShowInInspects: true
+  - type: BleedInflicter
+    severityThreshold: 2
+    scalingSpeed: 1.0
+    isBleeding: true
+  - type: TraumaInflicter
+    severityThreshold: 15 
+    allowedTraumas:
+    - OrganDamage
+    traumasChances:
+      OrganDamage: 0.05
+
+- type: entity
+  id: ClampVeins
+  name: clamp veins
+  parent: WoundBase
+  description: there are clamped veins
+  components:
+  - type: Wound
+    damageType: Blunt
+    woundType: Internal
+    woundVisibility: Always
+    canBeHealed: false
+    alwaysShowInInspects: true
+  - type: BleedRemover
+    bleedingRemovalMultiplier: 0.95
+
+- type: entity
+  id: SawedBones
+  parent: WoundBase
+  description: there are sawed bones
+  components:
+  - type: Wound
+    damageType: Blunt
+    woundType: Internal
+    woundVisibility: Always
+    canBeHealed: false
+    alwaysShowInInspects: true
+  - type: TraumaInflicter
+    severityThreshold: 10
+    allowedTraumas: [ BoneDamage ]
+    traumasChances:
+      BoneDamage: 1.0
+
+- type: entity
+  id: RetractedSkin
+  parent: WoundBase
+  description: there is skin retracted
+  components:
+  - type: Wound
+    damageType: Blunt
+    woundType: External
+    woundVisibility: Always
+    canBeHealed: false
+    alwaysShowInInspects: true
+  # Peeled skin sprites?

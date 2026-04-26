@@ -44,13 +44,6 @@
   id: VisitorCMO
   parent: VisitorHead
   components:
-    # <Trauma>
-    - type: SurgerySpeedModifier # TODO: move ts to skillchip
-      speedModifier: 2
-    - type: CPRTraining
-      reviveChance: 0.9 # excellent training and experience
-      inhaleChance: 1 # great kisser too
-    # </Trauma>
     - type: GhostRole
       job: ChiefMedicalOfficer # Trauma
       name: job-name-cmo

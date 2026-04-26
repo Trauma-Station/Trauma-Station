@@ -3,7 +3,7 @@
 using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Surgery.Steps.Parts;
+using Content.Medical.Shared.Surgery.Components;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
@@ -67,10 +67,7 @@ public sealed class LockBladeEffectSystem : EntityEffectSystem<BodyComponent, Lo
 
         // Open ribcage for easier ascension if chest is mangled
         if (TryComp(targetPart, out WoundableComponent? woundable) && woundable.RootWoundable == targetPart &&
-            woundable.WoundableSeverity >= WoundableSeverity.Mangled &&
-            (!EnsureComp<SkinRetractedComponent>(targetPart, out _) |
-             !EnsureComp<IncisionOpenComponent>(targetPart, out _) |
-             !EnsureComp<BonesSawedComponent>(targetPart, out _) | !EnsureComp<BonesOpenComponent>(targetPart, out _)))
+            woundable.WoundableSeverity >= WoundableSeverity.Mangled)
         {
             _audio.PlayPvs(args.Effect.OpeningSound, target);
             effectAmount = 2;

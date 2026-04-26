@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Common.Body;
-using Content.Medical.Common.Traumas;
 using Content.Medical.Shared.Traumas;
 using Content.Shared.Body;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
-using Robust.Shared.Containers;
 
 namespace Content.Medical.Shared.Body;
 

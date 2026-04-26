@@ -8,13 +8,10 @@ using Content.Medical.Common.CCVar;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.DoAfter;
 using Content.Medical.Common.Healing;
-using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
-using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -23,14 +20,10 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Gibbing;
-using Content.Shared.Humanoid;
-using Content.Shared.Inventory;
-using Content.Shared.Standing;
-using Content.Shared.Popups;
-using Robust.Shared.Audio;
+using Content.Shared.Prototypes;
+using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Wounds;
 
@@ -78,7 +71,7 @@ public sealed partial class WoundSystem
 
     private void OnWoundableMapInit(EntityUid uid, WoundableComponent comp, MapInitEvent args)
     {
-        if (comp.BoneEntity is not {} id)
+        if (comp.BoneEntity is not { } id)
             return;
 
         var bone = Spawn(id, uid.ToCoordinates());
@@ -102,7 +95,7 @@ public sealed partial class WoundSystem
         RaiseLocalEvent(uid, ref ev);
         RaiseLocalEvent(comp.HoldingWoundable, ref ev);
 
-        if (_body.GetBody(comp.HoldingWoundable) is {} body)
+        if (_body.GetBody(comp.HoldingWoundable) is { } body)
         {
             var bodyEv = new WoundAddedOnBodyEvent((uid, comp), parentWoundable, woundableRoot);
             RaiseLocalEvent(body, ref bodyEv);
@@ -134,7 +127,7 @@ public sealed partial class WoundSystem
 
         InternalAddWoundableToParent(parent, args.Organ, parent.Comp, child);
 
-        if (_body.GetBody(parent.Owner) is {} body)
+        if (_body.GetBody(parent.Owner) is { } body)
             _trauma.UpdateBodyBoneAlert(body);
     }
 
@@ -146,7 +139,7 @@ public sealed partial class WoundSystem
 
         InternalRemoveWoundableFromParent(parent, args.Organ, parent.Comp, child);
 
-        if (_body.GetBody(parent.Owner) is {} body)
+        if (_body.GetBody(parent.Owner) is { } body)
             _trauma.UpdateBodyBoneAlert(body);
     }
 
@@ -219,8 +212,11 @@ public sealed partial class WoundSystem
                 if (!IsWoundPrototypeValid(damageType))
                     continue;
 
+                if (GetWoundIdFromDamage(damageType, damageValue * args.UncappedDamage.WoundSeverityMultipliers.GetValueOrDefault(damageType, 1)) is not { } woundId)
+                    continue;
+
                 TryInduceWound(uid,
-                    damageType,
+                    woundId,
                     damageValue *
                     args.UncappedDamage.WoundSeverityMultipliers.GetValueOrDefault(damageType, 1),
                     out _,
@@ -245,7 +241,10 @@ public sealed partial class WoundSystem
         foreach (var type in damage.DamageDict.Keys)
         {
             var mul = damage.WoundSeverityMultipliers.GetValueOrDefault(type, 1);
-            TryInduceWound(ent, type, value * mul, out _, ent.Comp);
+            if (GetWoundIdFromDamage(type, value * mul) is not { } woundId)
+                continue;
+
+            TryInduceWound(ent, woundId, value * mul, out _, ent.Comp);
         }
     }
 
@@ -253,7 +252,7 @@ public sealed partial class WoundSystem
     {
         // TODO SHITMED: because of how the shitcode works, missing a hand is faster than having a broken one
         // make a thing like LegsComponent that makes doafters longer with missing hands
-        if (_trauma.GetBone(ent.Owner) is {} bone)
+        if (_trauma.GetBone(ent.Owner) is { } bone)
             RaiseLocalEvent(bone, args.Args);
     }
 
@@ -268,6 +267,7 @@ public sealed partial class WoundSystem
                 select @group).FirstOrDefault();
     }
 
+    /*
     public bool TryInduceWounds(
         EntityUid uid,
         DamageSpecifier damage,
@@ -289,10 +289,11 @@ public sealed partial class WoundSystem
 
         return true;
     }
+    */
 
     public bool TryInduceWound(
         EntityUid uid,
-        string woundId,
+        EntProtoId woundId,
         FixedPoint2 severity,
         [NotNullWhen(true)] out Entity<WoundComponent>? woundInduced,
         WoundableComponent? woundable = null,
@@ -305,17 +306,21 @@ public sealed partial class WoundSystem
         if (TryContinueWound(uid, woundId, severity, out woundInduced, woundable))
             return true;
 
-        var protoId = damageGroup?.Id ??
-            (from @group in _prototype.EnumeratePrototypes<DamageGroupPrototype>()
-                where @group.DamageTypes.Contains(woundId)
-                select @group).FirstOrDefault()?.ID;
+        if (damageGroup is not { })
+        {
+            var proto = _prototype.Index<EntityPrototype>(woundId);
+            if (!proto.Components.TryGetComponent(Factory, out WoundComponent? comp) || _prototype.EnumeratePrototypes<DamageGroupPrototype>().FirstOrDefault(g => g.DamageTypes.Contains(comp.DamageType)) is not { } damageProto)
+                return false;
 
-        var wound = protoId != null && TryCreateWound(
+            damageGroup = damageProto;
+        }
+
+        var wound = TryCreateWound(
                 uid,
                 woundId,
                 severity,
                 out woundInduced,
-                protoId,
+                damageGroup,
                 woundable);
         return wound;
     }
@@ -1256,6 +1261,20 @@ public sealed partial class WoundSystem
         }
 
         return result;
+    }
+
+    private EntProtoId? GetWoundIdFromDamage(ProtoId<DamageTypePrototype> type, FixedPoint2 amount)
+    {
+        foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (!proto.Components.TryGetComponent(Factory, out WoundComponent? comp))
+                continue;
+
+            if (comp.DamageType == type && amount >= comp.MinSeverity && amount < comp.MaxSeverity)
+                return proto.ID;
+        }
+
+        return null;
     }
 
     private static Dictionary<ProtoId<OrganCategoryPrototype>, WoundableSeverity> SeveredStates()

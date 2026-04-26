@@ -163,8 +163,6 @@
       - type: NpcFactionMember
         factions:
         - Syndicate
-      - type: SurgerySpeedModifier # shitmed
-        speedModifier: 2
       mindRoles:
       - MindRoleNukeopsMedic
     - prefRoles: [ Nukeops ]
@@ -318,8 +316,6 @@
       - type: NpcFactionMember
         factions:
         - Syndicate
-      - type: SurgerySpeedModifier # shitmed
-        speedModifier: 2
       mindRoles:
       - MindRoleNukeopsMedic
     - prefRoles: [ Nukeops ]

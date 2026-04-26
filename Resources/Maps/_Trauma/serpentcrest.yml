@@ -17117,13 +17117,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 8.5,-6.5
       parent: 2
-- proto: Autodoc
-  entities:
-  - uid: 1003
-    components:
-    - type: Transform
-      pos: -5.5,-44.5
-      parent: 2
 - proto: Autolathe
   entities:
   - uid: 1004

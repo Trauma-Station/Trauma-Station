@@ -1,0 +1,267 @@
+# Brute
+
+- type: entity
+  id: JointDislocation
+  name: joint dislocation
+  parent: WoundBase
+  components:
+  - type: Wound
+    damageType: Blunt
+    woundType: Internal
+    woundVisibility: AdvancedScanner
+    canBeHealed: false
+    textString: join-dislocation
+    alwaysShowInInspects: true
+    minSeverity: 0.5
+    maxSeverity: 25
+  - type: TraumaInflicter
+    severityThreshold: 10
+    allowedTraumas:
+    - BoneDamage
+    traumasChances:
+      BoneDamage: 0.5
+      VeinsDamage: 0.2
+
+- type: entity
+  id: HairlineFracture
+  name: hairline fracture
+  parent: WoundBase
+  components:
+  - type: Wound
+    damageType: Blunt
+    woundType: Internal
+    woundVisibility: AdvancedScanner
+    minSeverity: 25
+    maxSeverity: 30
+  - type: TraumaInflicter
+    severityThreshold: 20
+    allowedTraumas:
+    - BoneDamage
+    traumasChances:
+      BoneDamage: 1.0
+
+- type: entity
+  id: CompoundFracture
+  name: compound fracture
+  parent: WoundBase
+  components:
+  - type: Wound
+    damageType: Blunt
+    woundType: External
+    woundVisibility: Always
+    scarWound: BoneScar
+    canBeHealed: false
+    textString: compound-fracture
+    alwaysShowInInspects: true
+    minSeverity: 30
+    maxSeverity: 250
+  - type: TraumaInflicter
+    severityThreshold: 5
+    allowedTraumas:
+    - BoneDamage
+    - VeinsDamage
+    traumasChances:
+      BoneDamage: 1.0
+      VeinsDamage: 0.3
+  - type: BleedInflicter
+    severityThreshold: 2
+    scalingSpeed: 2.0
+
+# Burn
+
+- type: entity
+  id: SecondDegree
+  parent: WoundBase
+  name: second degree burn
+  components:
+  - type: Wound
+    damageType: Heat
+    woundType: External
+    canBeHealed: false
+    textString: second-degree-burns
+    alwaysShowInInspects: true
+  - type: TraumaInflicter
+    severityThreshold: 20
+    allowedTraumas:
+    - OrganDamage
+
+- type: entity
+  id: ThirdDegree
+  parent: WoundBase
+  name: third degree burn
+  components:
+  - type: Wound
+    damageType: Heat
+    woundType: External
+    scarWound: BurnScar
+    canBeHealed: false
+    textString: third-degree-burns
+    alwaysShowInInspects: true
+  - type: TraumaInflicter
+    severityThreshold: 10
+    allowedTraumas:
+    - OrganDamage
+    - BoneDamage
+    traumasChances:
+      OrganDamage: 0.2
+
+- type: entity
+  id: CatastrophicBurns
+  parent: WoundBase
+  name: catastrophic burns
+  components:
+  - type: Wound
+    damageType: Heat
+    woundType: External
+    scarWound: BurnScar
+    canBeHealed: false
+    textString: catastrophic-burns
+    alwaysShowInInspects: true
+  - type: TraumaInflicter
+    severityThreshold: 5
+    allowedTraumas:
+    - OrganDamage
+    - BoneDamage
+    - VeinsDamage
+    traumasChances:
+      OrganDamage: 0.6
+      VeinsDamage: 0.4
+
+# Slash
+
+- type: entity
+  id: MinorBreakage
+  parent: WoundBase
+  name: minor slash
+  components:
+  - type: Wound
+    damageType: Slash
+    woundType: External
+    canBeHealed: false
+    textString: minor-breakage
+    alwaysShowInInspects: true
+    minSeverity: 0.1
+    maxSeverity: 25
+  - type: BleedInflicter
+    severityThreshold: 5
+    scalingSpeed: 0.5
+
+- type: entity
+  id: OpenLaceration
+  parent: WoundBase
+  name: open laceration
+  components:
+  - type: Wound
+    damageType: Slash
+    woundType: External
+    scarWound: SlashScar
+    canBeHealed: false
+    textString: open-laceration
+    alwaysShowInInspects: true
+  - type: BleedInflicter
+    severityThreshold: 2
+    scalingSpeed: 1.5
+
+- type: entity
+  id: WeepingAvulsion
+  parent: WoundBase
+  name: weeping avulsion
+  components:
+  - type: Wound
+    damageType: Slash
+    woundType: External
+    woundVisibility: Always
+    scarWound: SlashScar
+    selfHealMultiplier: 0
+    mangleSeverity: Severe
+    canBeHealed: false # Only heals via tend wounds surgery
+    textString: weeping-avulsion
+    alwaysShowInInspects: true
+    minSeverity: 1
+    maxSeverity: 500
+  - type: TraumaInflicter
+    severityThreshold: 5
+    allowArmourDeduction:
+    - Dismemberment
+    - OrganDamage
+    - BoneDamage
+    - VeinsDamage
+    allowedTraumas:
+    - Dismemberment
+    - OrganDamage
+    - BoneDamage
+    - VeinsDamage
+    traumasChances:
+      Dismemberment: 0.5
+      OrganDamage: 0.5
+      BoneDamage: 0.5
+      VeinsDamage: 0.5
+  - type: BleedInflicter
+    scalingSpeed: 4
+  - type: SpillOrgans
+
+# Pierce
+
+- type: entity
+  id: MinorBreakage
+  parent: WoundBase
+  name: surface puncture
+  components:
+  - type: Wound
+    damageType: Piercing
+    woundType: External
+    canBeHealed: false
+    textString: open-laceration
+    alwaysShowInInspects: true
+  - type: BleedInflicter
+    severityThreshold: 5
+    scalingSpeed: 0.2
+
+- type: entity
+  id: OpenPuncture
+  parent: WoundBase
+  name: open puncture
+  components:
+  - type: Wound
+    damageType: Piercing
+    woundType: External
+    scarWound: PiercingScar
+    canBeHealed: false
+    textString: open-laceration
+    alwaysShowInInspects: true
+  - type: BleedInflicter
+    severityThreshold: 3
+    scalingSpeed: 1.0
+  - type: TraumaInflicter
+    severityThreshold: 15
+    allowedTraumas:
+    - OrganDamage
+    traumasChances:
+      OrganDamage: 0.1
+
+- type: entity
+  id: RupturedCavity
+  parent: WoundBase
+  name: ruptured cavity
+  components:
+  - type: Wound
+    damageType: Piercing
+    woundType: Internal
+    scarWound: PiercingScar
+    canBeHealed: false
+    textString: open-laceration
+    alwaysShowInInspects: true
+    minSeverity: 5
+    maxSeverity: 500
+  - type: TraumaInflicter
+    severityThreshold: 8
+    allowedTraumas:
+    - OrganDamage
+    - VeinsDamage
+    traumasChances:
+      OrganDamage: 0.5
+      VeinsDamage: 0.5
+  - type: BleedInflicter
+    severityThreshold: 2
+    scalingSpeed: 2.5
+  - type: SpillOrgans

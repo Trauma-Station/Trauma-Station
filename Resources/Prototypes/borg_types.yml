@@ -252,8 +252,6 @@
       SurgeryKnowledge: 80 # robots are unsurprisingly good at making cuts
   - type: Sanitized # Shitmed
   - type: SurgeryIgnoreClothing
-  - type: SurgerySpeedModifier
-    speedModifier: 1.5
   # </Trauma>
 
   # Visual

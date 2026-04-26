@@ -98,6 +98,18 @@ public sealed partial class WoundComponent : Component
     /// </summary>
     [DataField]
     public float SelfHealMultiplier = 1.0f;
+
+    /// <summary>
+    /// Minimum damage threshold for this appearing.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 MinSeverity = 0;
+
+    /// <summary>
+    /// Maximum damage threshold for this appearing.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 MaxSeverity = 0;
 }
 
 

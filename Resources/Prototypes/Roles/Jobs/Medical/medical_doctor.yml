@@ -23,15 +23,6 @@
   - !type:GiveItemOnHolidaySpecial
     holiday: DoctorDay
     prototype: WehMedipen
-  # <Trauma>
-  - !type:AddComponentSpecial
-    components:
-    - type: SurgerySpeedModifier
-      speedModifier: 1.5
-    - type: CPRTraining
-      reviveChance: 0.45 # a bit better at chest compressions
-      inhaleChance: 0.75 # decent at mouth to mouth res.
-  # </Trauma>
 
 - type: startingGear
   id: DoctorGear

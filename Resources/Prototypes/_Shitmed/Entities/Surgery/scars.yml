@@ -54,3 +54,14 @@
     woundVisibility: Always
     canBeHealed: false
     isScar: true
+
+- type: entity
+  id: SurgeryScar
+  parent: WoundBase
+  component:
+  - type: Wound
+    damageType: Slash
+    woundType: External
+    woundVisibility: Always
+    canBeHealed: false
+    isScar: true

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Traumas;
@@ -16,7 +15,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Tourniquet;
 
@@ -121,7 +119,7 @@ public sealed class TourniquetSystem : EntitySystem
     {
         if (args.Handled
             || !args.CanReach
-            || args.Target is not {} target)
+            || args.Target is not { } target)
             return;
 
         if (TryTourniquet(target, args.User, ent, ent))
@@ -130,8 +128,8 @@ public sealed class TourniquetSystem : EntitySystem
 
     private void OnBodyDoAfter(EntityUid ent, BodyComponent comp, ref TourniquetDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled || args.Target is not {} target ||
-            args.Used is not {} used || !TryComp<TourniquetComponent>(used, out var tourniquet) ||
+        if (args.Handled || args.Cancelled || args.Target is not { } target ||
+            args.Used is not { } used || !TryComp<TourniquetComponent>(used, out var tourniquet) ||
             !TryComp<TargetingComponent>(args.User, out var targeting))
             return;
 
@@ -145,7 +143,7 @@ public sealed class TourniquetSystem : EntitySystem
         var (partType, symmetry) = _body.ConvertTargetBodyPart(targeting.Target);
 
         // if the target part exists put the tourniquet on it
-        if (_part.FindBodyPart((ent, comp), partType, symmetry) is {} targetPart)
+        if (_part.FindBodyPart((ent, comp), partType, symmetry) is { } targetPart)
         {
             if (!_container.Insert(used, container))
             {
@@ -215,7 +213,7 @@ public sealed class TourniquetSystem : EntitySystem
 
     private void OnTourniquetTakenOff(Entity<BodyComponent> ent, ref RemoveTourniquetDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled || args.Used is not {} used)
+        if (args.Handled || args.Cancelled || args.Used is not { } used)
             return;
 
         if (!TryComp<TourniquetComponent>(used, out var tourniquet))
