@@ -5,6 +5,12 @@
   description: A shield!
   abstract: true
   components:
+    # <Trauma>
+    - type: DisarmMalus
+      malus: 1
+    - type: CosmicTransmutable
+      transmuteTo: ShieldCosmicCult
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Weapons/Melee/shields.rsi
       state: riot-icon
@@ -61,10 +67,6 @@
                   max: 2
     - type: StaticPrice
       price: 100
-    - type: DisarmMalus # Goobstation
-      malus: 1
-    - type: CosmicTransmutable # Trauma
-      transmuteTo: ShieldCosmicCult
 
 - type: entity
   name: base repairable shield
@@ -92,6 +94,17 @@
   id: RiotShield
   description: A large tower shield. Good for controlling crowds.
   components:
+    # <Trauma>
+    - type: Parry
+      maxParries: 5
+      maxReflects: 0
+      parryMinSkill: 30
+      soundOnParry:
+        path: /Audio/Weapons/block_metal1.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    # </Trauma>
     - type: StaticPrice
       price: 90
     - type: Blocking
@@ -106,17 +119,6 @@
         flatReductions:
           Blunt: 1
           Slash: 1
-    # <Trauma>
-    - type: Parry
-      maxParries: 5
-      maxReflects: 0
-      parryMinSkill: 30
-      soundOnParry:
-        path: /Audio/Weapons/block_metal1.ogg
-        params:
-          variation: 0.2
-          volume: -11
-    # </Trauma>
 
 - type: entity
   name: laser shield
@@ -124,19 +126,6 @@
   id: RiotLaserShield
   description: A shield built for withstanding lasers, but not much else.
   components:
-    - type: Sprite
-      state: riot_laser-icon
-    - type: Item
-      heldPrefix: riot_laser
-    - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Heat: 0.7
-      activeBlockModifier:
-        coefficients:
-          Heat: 0.5
-        flatReductions:
-          Heat: 1
     # <Trauma>
     - type: Parry
       maxParries: 0
@@ -151,6 +140,19 @@
       reflects:
       - Energy
     # </Trauma>
+    - type: Sprite
+      state: riot_laser-icon
+    - type: Item
+      heldPrefix: riot_laser
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Heat: 0.7
+      activeBlockModifier:
+        coefficients:
+          Heat: 0.5
+        flatReductions:
+          Heat: 1
 
 - type: entity
   name: ballistic shield
@@ -158,20 +160,6 @@
   id: RiotBulletShield
   description: A shield built for protecting against ballistics, but not much else.
   components:
-    - type: Sprite
-      sprite: _Goobstation/Objects/Shields/riotbulletshield.rsi # Goobstation
-      state: ballistic-icon
-    - type: Item
-      heldPrefix: ballistic
-    - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Piercing: 0.7
-      activeBlockModifier:
-        coefficients:
-          Piercing: 0.5
-        flatReductions:
-          Piercing: 1
     # <Trauma>
     - type: Parry
       maxParries: 0
@@ -186,6 +174,21 @@
       reflects:
       - NonEnergy
     # </Trauma>
+    - type: Sprite
+      sprite: _Goobstation/Objects/Shields/riotbulletshield.rsi # Trauma
+      state: ballistic-icon
+    - type: Item
+      sprite: _Goobstation/Objects/Shields/riotbulletshield.rsi # Trauma
+      heldPrefix: ballistic
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Piercing: 0.7
+      activeBlockModifier:
+        coefficients:
+          Piercing: 0.5
+        flatReductions:
+          Piercing: 1
 
 #Craftable shields
 
@@ -250,6 +253,23 @@
   id: CardShield
   description: A shield made of cardboard. Won't protect you from much.
   components:
+    # <Trauma>
+    - type: Parry
+      maxParries: 1
+      maxReflects: 0
+      parryMinSkill: 0
+      soundOnParry:
+        path: /Audio/Items/Toys/card_tube_bonk.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    - type: PhysicalComposition
+      materialComposition:
+        Cardboard: 300
+    - type: Tag
+      tags:
+      - Trash
+    # </Trauma>
     - type: Sprite
       state: cardshield-icon
     - type: Item
@@ -302,23 +322,6 @@
               max: 4
     - type: StaticPrice
       price: 20
-    # <Trauma>
-    - type: Parry
-      maxParries: 1
-      maxReflects: 0
-      parryMinSkill: 0
-      soundOnParry:
-        path: /Audio/Items/Toys/card_tube_bonk.ogg
-        params:
-          variation: 0.2
-          volume: -11
-    - type: PhysicalComposition
-      materialComposition:
-        Cardboard: 300
-    - type: Tag
-      tags:
-      - Trash
-    # </Trauma>
 
 - type: entity
   name: makeshift shield
