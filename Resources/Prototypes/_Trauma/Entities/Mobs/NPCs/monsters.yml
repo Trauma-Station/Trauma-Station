@@ -442,21 +442,21 @@
         Quantity: 50
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 100
-        behaviors:
-          - !type:GibBehavior
-            deleteGibs: true
-            recursive: false
-          - !type:SpawnEntitiesBehavior
-            spawn:
-              FoodCoconutHalf:
-                min: 1
-                max: 2
-              MobCoconutCrabShellless:
-                min: 1
-                max: 1
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodCoconutHalf:
+            min: 1
+            max: 2
+          MobCoconutCrabShellless:
+            min: 1
+            max: 1
   - type: MovementSpeedModifier
     baseWalkSpeed: 1
     baseSprintSpeed: 1
