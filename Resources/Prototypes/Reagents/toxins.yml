@@ -71,7 +71,7 @@
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 4
-        type: Add
+        type: Add # Trauma - was Update, it was completely useless
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -310,12 +310,14 @@
   metabolisms:
     Bloodstream:
       effects:
+      # <Trauma>
+      - !type:MutateDiseases
+        mutationRate: 0.08 # 5u equivalent to one normal disease hop
+      # </Trauma>
       - !type:HealthChange
         damage:
           types:
             Radiation: 3
-      - !type:MutateDiseases
-        mutationRate: 0.08 # 5u equivalent to one normal disease hop
 
 - type: reagent
   id: HeartbreakerToxin
@@ -528,8 +530,8 @@
           type: [ Animal, Vox, Plant ]
           inverted: true
     Bloodstream:
-      effects:
     # </Trauma>
+      effects:
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
@@ -757,7 +759,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Arachnid ]
+          type: [Arachnid]
           inverted: true
         damage:
           types:
@@ -768,7 +770,7 @@
           reagent: Mechanotoxin
           min: 2
         - !type:MetabolizerTypeCondition
-          type: [ Arachnid ]
+          type: [Arachnid]
           inverted: true
         walkSpeedModifier: 0.8
         sprintSpeedModifier: 0.8
@@ -778,7 +780,7 @@
           reagent: Mechanotoxin
           min: 4
         - !type:MetabolizerTypeCondition
-          type: [ Arachnid ]
+          type: [Arachnid]
           inverted: true
         walkSpeedModifier: 0.4
         sprintSpeedModifier: 0.4
