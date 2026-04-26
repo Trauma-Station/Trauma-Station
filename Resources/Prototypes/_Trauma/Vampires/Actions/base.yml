@@ -12,10 +12,6 @@
   - type: Action
     raiseOnAction: true
     itemIconStyle: BigAction
-  - type: ActionConditions
-    conditions:
-    - !type:HasVampireBlood
-      amount: 30
 
 - type: entity
   parent: BaseVampireAction

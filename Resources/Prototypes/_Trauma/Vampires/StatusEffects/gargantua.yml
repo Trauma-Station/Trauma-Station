@@ -47,3 +47,12 @@
   - type: MovementModStatusEffect
     sprintSpeedModifier: 2.0
     walkSpeedModifier: 2.0
+
+# Overwhelming Force
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectOverwhelmingForce
+  name: overwhelming force
+  components:
+  - type: PreventPullingStatusEffect
+  - type: PreventPushStatusEffect

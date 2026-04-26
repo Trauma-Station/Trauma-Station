@@ -16,6 +16,8 @@ public sealed class EffectActionSystem : EntitySystem
         SubscribeLocalEvent<EffectActionComponent, ActionPerformedEvent>(OnActionPerformed);
         SubscribeLocalEvent<EffectActionComponent, EffectInstantActionEvent>(OnInstantAction);
         SubscribeLocalEvent<EffectActionComponent, EffectTargetActionEvent>(OnTargetAction);
+
+        SubscribeLocalEvent<ToggleEffectActionComponent, EffectToggleActionEvent>(OnToggle);
     }
 
     private void OnActionPerformed(Entity<EffectActionComponent> ent, ref ActionPerformedEvent args)
@@ -33,6 +35,26 @@ public sealed class EffectActionSystem : EntitySystem
     private void OnTargetAction(Entity<EffectActionComponent> ent, ref EffectTargetActionEvent args)
     {
         _effects.ApplyEffects(args.Target, ent.Comp.Effects);
+        args.Handled = true;
+    }
+
+    private void OnToggle(Entity<ToggleEffectActionComponent> ent, ref EffectToggleActionEvent args)
+    {
+        ent.Comp.Toggled = !ent.Comp.Toggled;
+        args.Toggle = ent.Comp.Toggled;
+        Dirty(ent);
+
+        if (ent.Comp.Toggled && ent.Comp.OnToggle is { } onToggleEffects)
+        {
+            _effects.ApplyEffects(args.Performer, onToggleEffects);
+            args.Handled = true;
+            return;
+        }
+
+        if (ent.Comp.OffToggle is not { } offToggleEffects)
+            return;
+
+        _effects.ApplyEffects(args.Performer, offToggleEffects);
         args.Handled = true;
     }
 }
