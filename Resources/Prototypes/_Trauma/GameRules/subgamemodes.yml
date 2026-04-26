@@ -45,8 +45,6 @@
     selectionTime: PrePlayerSpawn
     definitions:
     - spawnerPrototype: AbductorScientistSpawner
-      prefRoles: [ AbductorScientistAntag ]
-      fallbackRoles: [ AbductorAgentAntag ]
       min: 1
       max: 1
       pickPlayer: true
@@ -86,8 +84,6 @@
       mindRoles:
       - MindRoleAbductorScientist
     - spawnerPrototype: AbductorAgentSpawner
-      prefRoles: [ AbductorAgentAntag ]
-      fallbackRoles: [ AbductorScientistAntag ]
       min: 1
       max: 1
       pickPlayer: true
