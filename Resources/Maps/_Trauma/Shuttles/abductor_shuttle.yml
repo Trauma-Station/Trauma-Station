@@ -4,8 +4,8 @@ meta:
   engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 04/26/2026 06:55:09
-  entityCount: 454
+  time: 04/26/2026 08:49:09
+  entityCount: 463
 maps: []
 grids:
 - 1
@@ -1818,6 +1818,57 @@ entities:
     components:
     - type: Transform
       pos: -1.5,-4.5
+      parent: 1
+- proto: OrganCyberneticEyes
+  entities:
+  - uid: 21
+    components:
+    - type: Transform
+      pos: -0.02345562,-1.546875
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: -0.02345562,-1.546875
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: -0.02345562,-1.546875
+      parent: 1
+- proto: OrganCyberneticEyesMedical
+  entities:
+  - uid: 35
+    components:
+    - type: Transform
+      pos: -0.054728508,-1.53125
+      parent: 1
+  - uid: 148
+    components:
+    - type: Transform
+      pos: -0.054728508,-1.53125
+      parent: 1
+  - uid: 149
+    components:
+    - type: Transform
+      pos: -0.054728508,-1.53125
+      parent: 1
+- proto: OrganCyberneticEyesSecurity
+  entities:
+  - uid: 163
+    components:
+    - type: Transform
+      pos: -0.02345562,-1.578125
+      parent: 1
+  - uid: 165
+    components:
+    - type: Transform
+      pos: -0.02345562,-1.578125
+      parent: 1
+  - uid: 257
+    components:
+    - type: Transform
+      pos: -0.02345562,-1.578125
       parent: 1
 - proto: OxygenCanister
   entities:
