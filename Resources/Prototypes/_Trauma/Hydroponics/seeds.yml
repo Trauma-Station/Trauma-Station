@@ -88,7 +88,7 @@
       PotencyDivisor: 5
 
 - type: seed
-  id: cherry
+  id: cherrybomb
   name: seeds-cherrybomb-name
   noun: seeds-noun-seeds
   displayName: seeds-cherrybomb-display-name
