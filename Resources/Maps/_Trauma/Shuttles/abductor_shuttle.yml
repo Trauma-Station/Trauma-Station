@@ -4,8 +4,8 @@ meta:
   engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 04/26/2026 08:49:09
-  entityCount: 463
+  time: 04/26/2026 15:31:39
+  entityCount: 475
 maps: []
 grids:
 - 1
@@ -1022,6 +1022,43 @@ entities:
     - type: Transform
       pos: -3.5,-2.5
       parent: 1
+- proto: CandyBowl
+  entities:
+  - uid: 258
+    components:
+    - type: Transform
+      pos: 1.464078,5.5552835
+      parent: 1
+    - type: Bin
+      items:
+      - 259
+      - 260
+      - 261
+      - 262
+      - 277
+      - 278
+      - 282
+      - 287
+      - 304
+      - 415
+      - 456
+    - type: ContainerContainer
+      containers:
+        bin-container: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 259
+          - 260
+          - 261
+          - 262
+          - 277
+          - 278
+          - 282
+          - 287
+          - 304
+          - 415
+          - 456
 - proto: ClockworkGrille
   entities:
   - uid: 150
@@ -1218,6 +1255,74 @@ entities:
     - type: Transform
       pos: 3.5,-8.5
       parent: 1
+- proto: FoodSnackLollypopWrapped
+  entities:
+  - uid: 259
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 260
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 261
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 262
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 277
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 278
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 282
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 287
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 304
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 415
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
+  - uid: 456
+    components:
+    - type: Transform
+      parent: 258
+    - type: Physics
+      canCollide: False
 - proto: GasMinerNitrogen
   entities:
   - uid: 169
@@ -2000,7 +2105,7 @@ entities:
   - uid: 280
     components:
     - type: Transform
-      pos: 1.5050886,5.538394
+      pos: 1.614056,5.4424415
       parent: 1
 - proto: TableAbductor
   entities:
