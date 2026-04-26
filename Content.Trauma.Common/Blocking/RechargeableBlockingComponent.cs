@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
 namespace Content.Trauma.Common.Blocking;
 
 [RegisterComponent, NetworkedComponent]
@@ -19,5 +18,5 @@ public sealed partial class RechargeableBlockingComponent : Component
     public float RechargePercentage = 0.1f;
 
     [DataField]
-    public bool Discharged = false;
+    public bool Discharged = true;
 }
