@@ -52,6 +52,8 @@
       pickPlayer: true
       unequipOldGear: true
       startingGear: AbductorScientistGear
+      prefRoles:
+        - AbductorScientistAntag
       briefing:
         text: abductor-role-greeting
         color: Green
@@ -91,6 +93,8 @@
       pickPlayer: true
       unequipOldGear: true
       startingGear: AbductorAgentGear
+      prefRoles:
+        - AbductorAgentAntag
       briefing:
         text: abductor-role-greeting
         color: Green
