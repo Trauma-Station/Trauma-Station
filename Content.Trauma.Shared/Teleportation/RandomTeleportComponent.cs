@@ -3,7 +3,7 @@
 using Content.Shared.Destructible.Thresholds;
 using Robust.Shared.Audio;
 
-namespace Content.Shared.Teleportation;
+namespace Content.Trauma.Shared.Teleportation;
 
 /// <summary>
 ///     Component to store parameters for entities that teleport randomly.

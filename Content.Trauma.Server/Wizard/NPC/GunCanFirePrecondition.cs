@@ -7,7 +7,7 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 
-namespace Content.Goobstation.Server.Wizard.NPC;
+namespace Content.Trauma.Server.Wizard.NPC;
 
 /// <summary>
 /// Whether gun either has no ammo (other precondition handles that case) and it's not bolted/has no spent cartridges

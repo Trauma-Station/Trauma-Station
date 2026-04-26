@@ -2,7 +2,7 @@
 
 using Robust.Shared.Containers;
 
-namespace Content.Shared.VentCrawler.Tube.Components;
+namespace Content.Trauma.Shared.VentCrawling.Components;
 
 /// <summary>
 /// A component representing a vent that you can crawl through
@@ -11,13 +11,13 @@ namespace Content.Shared.VentCrawler.Tube.Components;
 public sealed partial class VentCrawlerTubeComponent : Component
 {
     [DataField]
-    public string ContainerId { get; set; } = "VentCrawlerTube";
+    public string ContainerId = "VentCrawlerTube";
 
     [DataField]
     public bool Connected = true;
 
     [ViewVariables]
-    public Container Contents { get; set; } = null!;
+    public Container Contents = default!;
 }
 
 [ByRefEvent]

@@ -15,7 +15,7 @@ using Content.Shared.Physics;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee.Events;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class SpellbladeSystem : SharedSpellbladeSystem
 {
