@@ -42,6 +42,3 @@ ghost-role-information-dwingle-description = Dwingle all over the place.
 
 ghost-role-information-disgustingbackpack-name = Evil backpack
 ghost-role-information-disgustingbackpack-description = Drive your owner completely insane and make him hurt people.
-
-ghost-role-information-coconutcrab-name = Coconut Crab
-ghost-role-information-coconutcrab-desc = Be a Crab. Be a Coconut. Be forced to eat downed pilots.

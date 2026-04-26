@@ -380,15 +380,6 @@
   - type: NpcFactionMember
     factions:
     - SimpleHostile
-  - type: GhostRole
-    prob: 0.5
-    makeSentient: true
-    name: ghost-role-information-coconutcrab-name
-    description: ghost-role-information-coconutcrab-description
-    rules: ghost-role-information-freeagent-rules
-    mindRoles:
-    - MindRoleGhostRoleFreeAgent
-  - type: GhostTakeoverAvailable
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
