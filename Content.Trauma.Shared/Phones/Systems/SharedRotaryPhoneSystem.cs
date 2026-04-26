@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using System.Numerics;
 using Content.Shared.Body;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -44,6 +47,7 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly SharedJointSystem _joint = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -66,7 +70,9 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
 
     private void OnInsertAttemptContainer(Entity<RotaryPhoneComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
     {
-        if (args.Container.ID != "right" && args.Container.ID != "left" && !HasComp<RotaryPhoneHolderComponent>(args.Container.Owner))
+        if (!HasComp<HandsComponent>(args.Container.Owner) && !HasComp<RotaryPhoneHolderComponent>(args.Container.Owner))
+            args.Cancel();
+        else if (!_hands.TryGetHand(args.Container.Owner, args.Container.ID, out _) && !HasComp<RotaryPhoneHolderComponent>(args.Container.Owner))
             args.Cancel();
     }
 
