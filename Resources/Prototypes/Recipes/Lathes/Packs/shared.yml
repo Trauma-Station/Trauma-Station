@@ -7,13 +7,14 @@
  # - MaterialDurathread # Trauma - remove durathread lathe print
 
 - type: latheRecipePack
+  parent:
+  - TraumaPartsStatic # Trauma
   id: PartsStatic
   recipes:
   - Igniter
   - ModularReceiver
   - MicroManipulatorStockPart
   - ConveyorBeltAssembly
-  - PartCapacitor # Trauma
 
 - type: latheRecipePack
   id: LightsStatic
