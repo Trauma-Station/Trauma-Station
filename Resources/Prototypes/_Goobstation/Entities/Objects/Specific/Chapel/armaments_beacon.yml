@@ -55,11 +55,9 @@
       icon:
         sprite: _Trauma/Clothing/OuterClothing/Misc/venerator.rsi
         state: icon
-# <Trauma>
     - prototype: SpawnArmamentsMamluk
       icon:
         sprite: _Trauma/Clothing/OuterClothing/Misc/mamluk.rsi
         state: icon
-# </Trauma>
   - type: StaticPrice
     price: 500
