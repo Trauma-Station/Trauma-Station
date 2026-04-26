@@ -65,6 +65,7 @@ using Content.Trauma.Common.Carrying;
 using Content.Trauma.Common.Silicon;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Common.Wizard.Projectile;
+using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Trauma.Shared.Wizard.BindSoul;
 using Content.Trauma.Shared.Wizard.Chuuni;
 using Content.Trauma.Shared.Wizard.Components;
@@ -97,6 +98,7 @@ public abstract class SharedSpellsSystem : CommonSpellsSystem
     [Dependency] protected readonly IPrototypeManager ProtoMan = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] protected readonly EntityLookupSystem Lookup = default!;
+    [Dependency] private readonly RandomTeleportSystem _randomTeleport = default!;
     [Dependency] protected readonly SharedMapSystem Map = default!;
     [Dependency] protected readonly SharedStunSystem Stun = default!;
     [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
@@ -1461,8 +1463,15 @@ public abstract class SharedSpellsSystem : CommonSpellsSystem
         return true;
     }
 
-    protected virtual void Blink(BlinkSpellEvent ev) { }
+    protected void Blink(BlinkSpellEvent ev)
+    {
+        if (ev.Handled)
+            return;
 
+        ev.Handled = true;
+        var user = ev.Performer;
+        _randomTeleport.RandomTeleport(user, ev.Radius, user: user);
+    }
     #endregion
 }
 

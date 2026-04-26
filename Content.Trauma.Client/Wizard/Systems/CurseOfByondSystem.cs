@@ -5,7 +5,7 @@ using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 
-namespace Content.Goobstation.Client.Wizard.Systems;
+namespace Content.Trauma.Client.Wizard.Systems;
 
 public sealed class CurseOfByondSystem : EntitySystem
 {

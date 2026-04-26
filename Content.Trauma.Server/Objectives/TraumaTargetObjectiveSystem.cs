@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Mind;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles.Jobs;
+using Content.Trauma.Server.Wizard.Components;
 
-namespace Content.Trauma.Shared.Objectives;
+namespace Content.Trauma.Server.Objectives;
 
-public sealed partial class TraumaTargetObjectiveSystem : EntitySystem
+public sealed class TraumaTargetObjectiveSystem : EntitySystem
 {
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MindSystem _mind = default!;
@@ -19,8 +19,8 @@ public sealed partial class TraumaTargetObjectiveSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DynamicObjectiveTargetMindComponent, MindGotAddedEvent>(OnMindAdded); // Goobstation
-        SubscribeLocalEvent<EntityRenamedEvent>(OnRenamed); // Goobstation
+        SubscribeLocalEvent<DynamicObjectiveTargetMindComponent, MindGotAddedEvent>(OnMindAdded);
+        SubscribeLocalEvent<EntityRenamedEvent>(OnRenamed);
     }
 
     private void OnMindAdded(Entity<DynamicObjectiveTargetMindComponent> ent, ref MindGotAddedEvent args)
