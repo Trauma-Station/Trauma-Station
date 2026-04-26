@@ -210,7 +210,7 @@
   physicalDesc: reagent-physical-desc-strong-smelling
   contrabandSeverity: Minor
   flavor: acid
-  color: "#00ff5f"
+  color: "#00ff5f" # Trauma
   boilingPoint: 165
   meltingPoint: -87
   reactiveEffects:
