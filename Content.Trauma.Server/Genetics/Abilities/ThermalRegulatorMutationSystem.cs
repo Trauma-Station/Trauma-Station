@@ -4,7 +4,7 @@ using Content.Server.Body.Components;
 using Content.Trauma.Shared.Genetics.Abilities;
 using Content.Trauma.Shared.Genetics.Mutations;
 
-namespace Content.Trauma.Shared.Genetics.Abilities;
+namespace Content.Trauma.Server.Genetics.Abilities;
 
 public sealed class ThermalRegulatorMutationSystem : EntitySystem
 {

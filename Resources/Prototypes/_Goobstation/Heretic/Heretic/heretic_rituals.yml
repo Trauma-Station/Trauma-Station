@@ -728,7 +728,7 @@
     - !type:SpawnRitualEffect
       applyOn: Platform
       output:
-        MobGhoulProphet: 1
+        MobGhoulStalker: 1
 
 - type: entity
   id: RitualAscensionFlesh

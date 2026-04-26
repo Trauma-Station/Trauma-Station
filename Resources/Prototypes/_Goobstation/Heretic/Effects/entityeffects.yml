@@ -151,6 +151,7 @@
   - !type:TakeStaminaDamage
     amount: 6
     immediate: true
+    ignoreResist: true
   - !type:HealthChange
     damage:
       types:

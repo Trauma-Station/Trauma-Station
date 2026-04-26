@@ -7432,3 +7432,153 @@ Entries:
   id: 858
   time: '2026-04-24T16:23:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2192
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Some helmets no longer protect at very short range shown in its examine,
+      you can now actually shoot secoffs in the face to kill them instead of
+      shooting them in the helmet over and over 4 no raisin..?
+  id: 859
+  time: '2026-04-24T17:55:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2223
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Every martial art except capoeira no longer scales its effects with your
+      level, so you can no longer stun someone for minutes on end with a single
+      move...
+  id: 860
+  time: '2026-04-24T23:16:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2234
+- author: Fan0jar
+  changes:
+  - type: Add
+    message: Added more PDAs and headsets to PTech!
+  id: 861
+  time: '2026-04-25T09:16:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2238
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed closet skeletons not having skills.
+  - type: Fix
+    message: Fixed lonely ritual spawning prophets instead of stalkers.
+  - type: Fix
+    message: Fixed newborn ether removing some immunities from you when it ends.
+  - type: Fix
+    message: Fixed mansus grasp and ash mark not ignoring stamina resists.
+  - type: Tweak
+    message: Wounded soldier brew nerfed slightly.
+  id: 862
+  time: '2026-04-25T09:18:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2235
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Decapoids now have a unique skillset.
+  - type: Fix
+    message: Fixed decapoids being unable to eat or drink.
+  - type: Fix
+    message: Fixed decapoids spawning without a survival box.
+  id: 863
+  time: '2026-04-25T09:50:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2244
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to rotate holographic field generators...
+  id: 864
+  time: '2026-04-25T10:07:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2246
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed not being able to biomass monkeys, and monkeys/clowns always being
+      able to climb tables and stuff.
+  id: 865
+  time: '2026-04-25T18:52:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2253
+- author: Aineias1
+  changes:
+  - type: Tweak
+    message: all maps updated to have proper armories.
+  id: 866
+  time: '2026-04-25T20:01:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2252
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed syndicate pizza bombs not working at all.
+  id: 867
+  time: '2026-04-25T20:11:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2258
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Lobby time increased from 1.5 to 3 minutes.
+  id: 868
+  time: '2026-04-26T14:14:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2266
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Bluespace crystal and heretic blade random teleporting is now predicted.
+  id: 869
+  time: '2026-04-26T17:36:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2275
+- author: assripper.
+  changes:
+  - type: Add
+    message: Abductors now have a much bigger shuttle, which includes a cell.
+  id: 870
+  time: '2026-04-26T17:39:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2256
+- author: Papiditel
+  changes:
+  - type: Add
+    message: New armor for chaplain.
+  id: 871
+  time: '2026-04-26T19:03:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2254
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: fluorosulfuric acid is now lime green instead of blue
+  id: 872
+  time: '2026-04-26T19:13:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2277
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Experimental syndicate teleporter now has a popup for being saved by
+      emergency teleport.
+  id: 873
+  time: '2026-04-26T19:17:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2280
+- author: assripper.
+  changes:
+  - type: Fix
+    message: abductor time requirements actually work now
+  id: 874
+  time: '2026-04-26T19:57:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2278
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed some issues with chameleon projector sprites for powered objects,
+      guns, lights and painted objects.
+  id: 875
+  time: '2026-04-26T20:26:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2283
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed eshield real
+  id: 876
+  time: '2026-04-26T20:29:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2282

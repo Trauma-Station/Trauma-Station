@@ -2,11 +2,10 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Throwing;
-using Content.Trauma.Shared.Xenomorphs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
-namespace Content.Shared._White.Xenomorphs.FaceHugger;
+namespace Content.Trauma.Shared.Xenomorphs.FaceHugger;
 
 /// <summary>
 /// Handles the leap action for sentient facehuggers

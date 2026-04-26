@@ -14,7 +14,7 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class SanguineStrikeSystem : SharedSanguineStrikeSystem
 {

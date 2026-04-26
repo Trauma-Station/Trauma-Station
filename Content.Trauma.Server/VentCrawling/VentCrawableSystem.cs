@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared.VentCrawler.Tube.Components;
-using Content.Trauma.Shared.VentCrawling.Components;
 using Content.Trauma.Shared.VentCrawling;
+using Content.Trauma.Shared.VentCrawling.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Containers;

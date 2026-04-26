@@ -104,6 +104,7 @@ namespace Content.Server.Forensics
 
             foreach (var part in args.Giblets)
             {
+                if (TerminatingOrDeleted(part)) continue; // Trauma
                 var partComp = EnsureComp<ForensicsComponent>(part);
                 partComp.DNAs.Add((dna, TimeSpan.Zero)); // Goobstation
                 partComp.CanDnaBeCleaned = false;

@@ -2,8 +2,9 @@
 
 using Content.Trauma.Shared.Wizard.Mutate;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
 
-namespace Content.Shared.Weapons.Ranged.Systems;
+namespace Content.Trauma.Shared.Wizard.Mutate;
 
 public abstract partial class BasicHitscanSharedGunSystem : EntitySystem
 {
