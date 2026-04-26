@@ -463,3 +463,5 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: CoconutCrab
+  - type: MobPrice
+    price: 200 # The fact that a test requires me to add this is fucking stupid
