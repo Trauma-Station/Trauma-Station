@@ -182,7 +182,7 @@ public sealed class NtrTaskSystem : EntitySystem
     {
         if (!TryComp<NtrTaskDatabaseComponent>(station, out var db)
             || !TryComp<NtrBankAccountComponent>(station, out var account)
-            || !_proto.TryIndex(taskData.Task, out NtrTaskPrototype? taskProto))
+            || !_proto.Resolve(taskData.Task, out NtrTaskPrototype? taskProto))
             return;
 
         var amount = success ? taskProto.Reward : -taskProto.Penalty;
