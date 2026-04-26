@@ -17,7 +17,7 @@
     scalingSpeed: 1.0
     isBleeding: true
   - type: TraumaInflicter
-    severityThreshold: 15 
+    severityThreshold: 15
     allowedTraumas:
     - OrganDamage
     traumasChances:
