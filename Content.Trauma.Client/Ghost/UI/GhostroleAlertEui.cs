@@ -1,8 +1,7 @@
 using Content.Client.Eui;
 
-namespace Content.Client.Ghost.UI;
+namespace Content.Trauma.Client.Ghost.UI;
 
-// <Trauma>
 public sealed class GhostroleAlertEui : BaseEui
 {
     private readonly GhostroleAlertMenu _menu;
@@ -23,4 +22,3 @@ public sealed class GhostroleAlertEui : BaseEui
         _menu.Close();
     }
 }
-// <Trauma>

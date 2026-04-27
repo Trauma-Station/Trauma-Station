@@ -1,12 +1,12 @@
 using Content.Server.EUI;
-using Content.Server.Ghost;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
+using Content.Trauma.Client.Ghost;
+using Content.Trauma.Shared.Ghost;
 using Robust.Server.Player;
 
-namespace Content.Server.GameTicking.Rules;
+namespace Content.Trauma.Server.GameTicking.Rules;
 
-// <Trauma>
 public sealed class GhostroleAlertSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -28,4 +28,3 @@ public sealed class GhostroleAlertSystem : EntitySystem
         }
     }
 }
-// <Trauma>

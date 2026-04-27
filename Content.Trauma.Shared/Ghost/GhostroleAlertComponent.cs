@@ -1,6 +1,4 @@
-namespace Content.Shared.Ghost;
+namespace Content.Trauma.Shared.Ghost;
 
-// <Trauma>
 [RegisterComponent]
 public sealed partial class GhostroleAlertComponent : Component;
-// <Trauma>
