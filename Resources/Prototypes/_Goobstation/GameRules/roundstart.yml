@@ -225,7 +225,7 @@
   parent: BlobRule
   components:
   - type: GameRule
-    minPlayers: 20
+    minPlayers: 50
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     definitions:

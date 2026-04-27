@@ -1,0 +1,415 @@
+- type: entity
+  parent: BaseItem
+  id: BaseWeaponGaussgun
+  abstract: true
+  components:
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,8,1
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: StaticPrice
+    price: 1500
+  - type: EmitSoundOnPickup
+    sound:
+      collection: SnipersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: SnipersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: SnipersDrop
+  - type: AmmoCounter
+  - type: Gun
+    minAngle: 30
+    maxAngle: 40
+    fireRate: 1
+    angleIncrease: 3
+    angleDecay: 16
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_Trauma/Weapons/Guns/railgun/railgunshot.ogg
+    defaultDirection: 1, 0
+  - type: MagazineAmmoProvider
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineGaussgun
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      power_cell:
+        ejectOnInteract: false
+        name: power-cell-slot-component-slot-name-default
+        whitelist:
+          tags:
+          - PowerCell
+          - PowerCellSmall
+        blacklist:
+          tags:
+          - PotatoBattery
+        whitelistFailPopup: gun-magazine-whitelist-fail
+  - type: PowerCellSlot
+    cellSlotId: power_cell
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      power_cell: !type:ContainerSlot
+  - type: Appearance
+
+- type: entity
+  parent: [ BaseWeaponGaussgun, BaseSecurityContraband ]
+  id: WeaponGaussgun
+  name: gauss rifle
+  description: Requires both a battery and ammunition to operate, a cheaper alternative to ballistic firearms.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gaussgun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Large
+    sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gaussgun_inhands_64x.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gaussgun_back.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    fireRate: 1
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -30
+
+- type: entity
+  parent: [ WeaponGaussgun, BaseMajorContraband ]
+  id: WeaponGaussgunImprov
+  name: gauss rifle
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/improv_gaussgun.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/improv_gaussgun_inhands_64x.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/improv_gaussgun_back.rsi
+  - type: Gun
+    minAngle: 40
+    maxAngle: 50
+    fireRate: 1
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -30
+  - type: Construction
+    graph: GaussRifleGraph
+    node: finish
+
+- type: entity
+  parent: [ WeaponGaussgun, BaseMajorContraband ]
+  id: WeaponGaussgunPistol
+  name: gauss pistol
+  description: A much ligher alternative to the Gaussgun, but far more innacurate and only semiautomatic.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gausspistol.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gausspistol.rsi
+    size: Small
+    shape:
+    - 0,0,0,0
+    - 0,1,1,1
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gausspistol.rsi
+  - type: Gun
+    minAngle: 10
+    maxAngle: 20
+    fireRate: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+  - type: Construction
+    graph: GaussPistolGraph
+    node: finish
+
+# crafting
+
+- type: entity
+  parent: [BaseItem, BaseMajorContraband]
+  id: CraftingGaussRifle
+  name: incomplete gauss rifle
+  description: An unfinished gauss rifle.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Crafting/gaussrifle.rsi
+    state: 1
+  - type: Construction
+    graph: GaussRifleGraph
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle1
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 1
+  - type: Construction
+    node: 1
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle2
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 2
+  - type: Construction
+    node: 2
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle3
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 3
+  - type: Construction
+    node: 3
+  - type: Item
+    size: Large
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle4
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 4
+  - type: Construction
+    node: 4
+  - type: Item
+    size: Huge
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle5
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 5
+  - type: Construction
+    node: 5
+  - type: Item
+    size: Huge
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle6
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 6
+  - type: Construction
+    node: 6
+  - type: Item
+    size: Huge
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle7
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 7
+  - type: Construction
+    node: 7
+  - type: Item
+    size: Huge
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle8
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 8
+  - type: Construction
+    node: 8
+  - type: Item
+    size: Huge
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle9
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 9
+  - type: Construction
+    node: 9
+  - type: Item
+    size: Huge
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle10
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 10
+  - type: Construction
+    node: 10
+  - type: Item
+    size: Huge
+
+- type: entity
+  parent: CraftingGaussRifle
+  id: CraftingGaussRifle11
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 11
+  - type: Construction
+    node: 11
+  - type: Item
+    size: Huge
+
+# Pistol
+
+- type: entity
+  parent: [BaseItem, BaseMajorContraband]
+  id: CraftingGaussPistol
+  name: incomplete gauss pistol
+  description: An unfinished gauss pistol.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Crafting/gausspistol.rsi
+    state: 1
+  - type: Construction
+    graph: GaussPistolGraph
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol1
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 1
+  - type: Construction
+    node: 1
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol2
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 2
+  - type: Construction
+    node: 2
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol3
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 3
+  - type: Construction
+    node: 3
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol4
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 4
+  - type: Construction
+    node: 4
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol5
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 5
+  - type: Construction
+    node: 5
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol6
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 6
+  - type: Construction
+    node: 6
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol7
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 7
+  - type: Construction
+    node: 7
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol8
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 8
+  - type: Construction
+    node: 8
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol9
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 9
+  - type: Construction
+    node: 9
+
+- type: entity
+  parent: CraftingGaussPistol
+  id: CraftingGaussPistol10
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: 10
+  - type: Construction
+    node: 10

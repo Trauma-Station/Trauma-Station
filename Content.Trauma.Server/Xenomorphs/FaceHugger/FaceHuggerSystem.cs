@@ -5,7 +5,6 @@ using Content.Medical.Common.Body;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
-using Content.Shared._White.Xenomorphs.FaceHugger;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;

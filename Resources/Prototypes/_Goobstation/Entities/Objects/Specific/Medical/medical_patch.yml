@@ -225,7 +225,7 @@
   category: construction-category-tools
   objectType: Item
   theory:
-    FirstAidKnowledge: 1
+    FirstAidKnowledge: 0
     FabricationKnowledge: 1
   practical:
     TailoringKnowledge: 1
@@ -252,7 +252,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SpiderCraftKnowledge: 1
+    SpiderCraftKnowledge: 0
   practical:
     TailoringKnowledge: 1
   useQuality: false

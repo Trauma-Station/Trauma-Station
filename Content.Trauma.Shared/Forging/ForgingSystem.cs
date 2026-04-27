@@ -257,4 +257,11 @@ public sealed class ForgingSystem : EntitySystem
         var ev = new ConstructionChangedEvent(uid);
         RaiseLocalEvent(part, ref ev);
     }
+
+    /// <summary>
+    /// Returns true if a forged item prototype can be made from a given metal.
+    /// </summary>
+    public bool CanMakeFrom(ForgedItemPrototype item, [ForbidLiteral] ProtoId<MetalPrototype> metal)
+        => item.Whitelist?.Contains(metal) != false &&
+            item.Blacklist?.Contains(metal) != true;
 }

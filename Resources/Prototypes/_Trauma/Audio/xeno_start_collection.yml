@@ -1,0 +1,5 @@
+- type: soundCollection
+  id: XenoStart
+  files:
+  - /Audio/_Trauma/Music/mind_crawler_short.ogg
+  - /Audio/_Goobstation/Music/Black_Swarm_Short.ogg

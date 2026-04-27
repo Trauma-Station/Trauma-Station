@@ -1,136 +1,135 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.SpaceWhale;
+using Content.Shared.Movement.Components;
 using Robust.Shared.Map;
 
-namespace Content.Goobstation.Server.SpaceWhale; // predictions? how bout you predict my ass, but seriously this is THE problem with ts cuz i have no fucking idea how to predict it
-// edit ok nvm it looks sorta fine with mobs but please do not put this on something that is predicted otherwise it will look like shit
+namespace Content.Goobstation.Server.SpaceWhale;
 
-public sealed class TailedEntitySystem : EntitySystem
+public sealed class TailedEntitySystem : SharedTailedEntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-
-
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<TailedEntityComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<TailedEntityComponent, ComponentShutdown>(OnComponentShutdown);
+        SubscribeLocalEvent<TailedEntityComponent, UpdateTailedEntitySegmentCountEvent>(OnUpdate);
+
+        SubscribeLocalEvent<TailedEntitySegmentComponent, ComponentShutdown>(OnSegmentShutdown);
     }
 
-
-    private void OnComponentShutdown(EntityUid uid, TailedEntityComponent component, ComponentShutdown args)
+    private void OnUpdate(Entity<TailedEntityComponent> ent, ref UpdateTailedEntitySegmentCountEvent args)
     {
-        foreach (var segment in component.TailSegments)
-            QueueDel(segment);
-
-        component.TailSegments.Clear();
-    }
-
-    public override void Update(float frameTime)
-    {
-        var eqe = EntityQueryEnumerator<TailedEntityComponent, TransformComponent>();
-        while (eqe.MoveNext(out var uid, out var comp, out var xform))
+        var difference = args.Amount - ent.Comp.TailSegments.Count;
+        switch (difference)
         {
-
-            if (comp.TailSegments.Count == 0)
-            {
-                InitializeTailSegments(uid, comp, xform);
-                continue; // its needed because it fucking crashes lmao
-            }
-
-            UpdateTailPositions((uid, comp, xform), frameTime);
+            case > 0:
+                AddSegments(ent, difference);
+                break;
+            case < 0:
+                RemoveSegments(ent, -difference);
+                break;
         }
     }
 
-    private void InitializeTailSegments(EntityUid uid, TailedEntityComponent comp, TransformComponent xform)
+    private void OnSegmentShutdown(Entity<TailedEntitySegmentComponent> ent, ref ComponentShutdown args)
     {
-        var mapUid = xform.MapUid;
-        if (mapUid == null)
+        if (TerminatingOrDeleted(ent.Comp.Head) || !TryComp(ent.Comp.Head, out TailedEntityComponent? comp))
             return;
 
-        var headPos = _transformSystem.GetWorldPosition(xform);
-        var headRot = _transformSystem.GetWorldRotation(xform);
+        var head = ent.Comp.Head.Value;
+        var netEnt = GetNetEntity(ent);
 
-        for (var i = 0; i < comp.Amount; i++)
+        var index = comp.TailSegments.FindIndex(x => x.Segment == netEnt);
+        if (index < 0)
+            return;
+
+        for (var i = index + 1; i < comp.TailSegments.Count; i++)
         {
-            var offset = headRot.ToWorldVec() * comp.Spacing * (i + 1);
-            var spawnPos = headPos - offset;
+            var data = comp.TailSegments[i];
+            var segment = GetEntity(data.Segment);
+            if (!SegmentQuery.TryComp(segment, out var otherComp))
+                continue;
 
-            var segment = Spawn(comp.Prototype, new EntityCoordinates(mapUid.Value, spawnPos));
-            comp.TailSegments.Add(segment);
+            otherComp.Order = i - 1;
+            otherComp.SegmentCount = comp.TailSegments.Count - 1;
+        }
+
+        comp.TailSegments.RemoveAt(index);
+        Dirty(head, comp);
+
+        UpdateNoRotateOnMove((head, comp));
+        UpdateTailPositions((head, comp, Transform(head)));
+    }
+
+    private void OnMapInit(Entity<TailedEntityComponent> ent, ref MapInitEvent args)
+    {
+        var ev = new GetTailedEntitySegmentCountEvent(ent.Comp.Amount);
+        RaiseLocalEvent(ent, ref ev);
+        var count = ev.Amount;
+
+        ent.Comp.PreventSegmentCollide = true;
+        AddSegments(ent, count);
+        UpdateNoRotateOnMove(ent);
+    }
+
+    private void OnComponentShutdown(Entity<TailedEntityComponent> ent, ref ComponentShutdown args)
+    {
+        foreach (var data in ent.Comp.TailSegments)
+        {
+            if (TryGetEntity(data.Segment, out var segment) && !TerminatingOrDeleted(segment))
+                QueueDel(segment);
         }
     }
 
-    private void UpdateTailPositions(Entity<TailedEntityComponent, TransformComponent> ent, float frameTime)
+    private void RemoveSegments(Entity<TailedEntityComponent> ent, int count)
     {
-        var (uid, comp, xform) = ent;
+        if (count < 1)
+            return;
 
-        var headPos = _transformSystem.GetWorldPosition(xform);
-        var headRot = _transformSystem.GetWorldRotation(xform);
-
-        for (var i = 0; i < comp.TailSegments.Count; i++) // This is total goida, foreach is cleaner but i is needed in the loop
+        var min = Math.Min(count, ent.Comp.TailSegments.Count);
+        for (var i = 0; i < min; i++)
         {
-            var segment = comp.TailSegments[i];
-            if (!Exists(segment)
-                || !TryComp(segment, out TransformComponent? segmentXform))
-                continue;
+            var segment = ent.Comp.TailSegments[^(i + 1)];
+            QueueDel(GetEntity(segment.Segment));
+        }
+    }
 
-            var offset = headRot.ToWorldVec() * comp.Spacing * (i + 1);
-            var targetPos = headPos - offset;
+    private void UpdateNoRotateOnMove(Entity<TailedEntityComponent> ent)
+    {
+        if (!ent.Comp.HeadFollowSegmentRotation)
+            return;
 
-            var currentPos = _transformSystem.GetWorldPosition(segmentXform);
+        if (ent.Comp.TailSegments.Count == 0)
+            RemCompDeferred<NoRotateOnMoveComponent>(ent);
+        else
+            EnsureComp<NoRotateOnMoveComponent>(ent);
+    }
 
-            var diff = targetPos - currentPos;
-            var distance = diff.Length();
+    private void AddSegments(Entity<TailedEntityComponent> ent, int count)
+    {
+        if (count < 1)
+            return;
 
-            // ff close enough snap to position
-            if (distance < comp.Spacing * 0.1f)
-                _transformSystem.SetWorldPosition(segment, targetPos);
-            else // Move toward target
-            {
-                var direction = diff.Normalized();
-                var moveAmount = comp.Speed * frameTime;
-                var moveDistance = MathF.Min(moveAmount, distance);
-                var newPos = currentPos + direction * moveDistance;
-                _transformSystem.SetWorldPosition(segment, newPos);
-            }
+        var xform = Transform(ent);
+
+        var (headPos, headRot) = TransformSystem.GetWorldPositionRotation(xform);
+        var coords = new MapCoordinates(headPos, xform.MapID);
+
+        for (var i = 0; i < count; i++)
+        {
+            var segment = Spawn(ent.Comp.Prototype, coords);
+            var segmentComp = EnsureComp<TailedEntitySegmentComponent>(segment);
+            segmentComp.Coords = coords;
+            segmentComp.WorldRotation = headRot;
+            segmentComp.Order = i + ent.Comp.Amount;
+            segmentComp.SegmentCount = count;
+            segmentComp.Head = ent;
+            Dirty(segment, segmentComp);
+            ent.Comp.TailSegments.Add(new (GetNetEntity(segment), headPos));
         }
 
-        //rotation shit
-        for (var i = 0; i < comp.TailSegments.Count; i++)
-        {
-            var segment = comp.TailSegments[i];
-            if (!Exists(segment)
-                || !TryComp(segment, out TransformComponent? segmentXform))
-                continue;
-
-            var targetAngle = new Angle();
-
-            if (i == 0)
-            {// first segment should look at the head because there isnt a segment to look for
-                var segmentPos = _transformSystem.GetWorldPosition(segmentXform);
-                var direction = headPos - segmentPos;
-                targetAngle = direction.ToWorldAngle();
-            }
-            else
-            {// while other segments should look towards other segments
-                var prevSegment = comp.TailSegments[i - 1];
-                if (TryComp(prevSegment, out TransformComponent? prevXform))
-                {
-                    var segmentPos = _transformSystem.GetWorldPosition(segmentXform);
-                    var prevPos = _transformSystem.GetWorldPosition(prevXform);
-                    var direction = prevPos - segmentPos;
-                    targetAngle = direction.ToWorldAngle();
-                }
-                else
-                {
-                    targetAngle = _transformSystem.GetWorldRotation(segmentXform);
-                }
-            }
-
-            var curRot = _transformSystem.GetWorldRotation(segmentXform);
-            var newRot = Angle.Lerp(curRot, targetAngle, comp.Speed * frameTime * 2f);
-            _transformSystem.SetWorldRotation(segment, newRot);
-        }
+        Dirty(ent);
     }
 }

@@ -218,6 +218,9 @@
   stage: 1
   ritualPrototypes:
   - RitualBladeFlesh
+  mindEvent: !type:HereticAddMindComponentsEvent
+    addedComponents:
+    - type: FleshHereticMind
 
 - type: hereticKnowledge
   id: GraspOfFlesh
@@ -265,6 +268,9 @@
   id: BleedingSteel
   path: Flesh
   stage: 7
+  mindEvent: !type:IncreaseFleshGhoulLimitEvent
+    ghoulLimitIncrease: 2
+    voicelessDeadLimitIncrease: 1
 
 - type: hereticKnowledge
   id: LonelyRitual
@@ -285,11 +291,11 @@
   id: PriestFinalHymn
   path: Flesh
   stage: 10
-  event: !type:HereticKnowledgeEvent
-    addedComponents:
-    - type: SpecialLowTempImmunity
-    - type: SpecialHighTempImmunity
-    - type: SpecialPressureImmunity
+  actionPrototypes:
+  - ActionHereticFleshTransform
+  mindEvent: !type:IncreaseFleshGhoulLimitEvent
+    ghoulLimitIncrease: 6
+    voicelessDeadLimitIncrease: 4
 
 ### void path
 - type: hereticKnowledge

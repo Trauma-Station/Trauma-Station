@@ -17,7 +17,7 @@ public sealed partial class RadiationSystem : SharedRadiationSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
-    //[Dependency] private readonly SharedMapSystem _maps = default!; // Trauma - no longer used
+    [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly IParallelManager _parallel = default!;
 
     [Dependency] private readonly EntityQuery<RadiationReceiverComponent> _receiverQuery = default!;

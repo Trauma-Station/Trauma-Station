@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Storage;
+// </Trauma>
 using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -367,6 +370,10 @@ public abstract class SharedStorageSystem : EntitySystem
 
     public void OpenStorageUI(EntityUid uid, EntityUid actor, StorageComponent? storageComp = null, bool silent = true)
     {
+        // <Trauma>
+        var ev = new StorageOpenedEvent(actor);
+        RaiseLocalEvent(uid, ref ev);
+        // </Trauma>
         // Handle recursively opening nested storages.
         if (ContainerSystem.TryGetContainingContainer(uid, out var container) &&
             UI.IsUiOpen(container.Owner, StorageComponent.StorageUiKey.Key, actor))

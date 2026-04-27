@@ -4,7 +4,7 @@ meta:
   engineVersion: 275.2.0
   forkId: ""
   forkVersion: ""
-  time: 04/19/2026 08:15:15
+  time: 04/24/2026 19:50:05
   entityCount: 27160
 maps:
 - 1
@@ -116203,17 +116203,19 @@ entities:
     - type: Transform
       pos: 49.5,-11.5
       parent: 2
-- proto: GunSafeLaserCarbineOutdated
+- proto: GunSafeLaserCarbine
   entities:
   - uid: 17888
     components:
     - type: Transform
-      pos: 48.5,-18.5
+      pos: 48.5,-19.5
       parent: 2
-  - uid: 17889
+- proto: GunSafeLaserCarbineOutdated
+  entities:
+  - uid: 17894
     components:
     - type: Transform
-      pos: 48.5,-19.5
+      pos: 52.5,-20.5
       parent: 2
 - proto: GunSafeLaserSpec
   entities:
@@ -116243,12 +116245,12 @@ entities:
     - type: Transform
       pos: 48.5,-11.5
       parent: 2
-- proto: GunSafeSubMachineGunDrozd
+- proto: GunSafeShotguns
   entities:
-  - uid: 17894
+  - uid: 17889
     components:
     - type: Transform
-      pos: 52.5,-20.5
+      pos: 48.5,-18.5
       parent: 2
 - proto: GyroscopeMachineCircuitboard
   entities:

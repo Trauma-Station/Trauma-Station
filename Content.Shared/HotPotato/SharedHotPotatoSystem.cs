@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.CombatMode;
+// </Trauma>
 using Content.Shared.Audio;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
@@ -54,6 +57,11 @@ public abstract class SharedHotPotatoSystem : EntitySystem
         {
             if (!TryComp<HandsComponent>(hitEntity, out var hands))
                 continue;
+
+            // <Trauma> - you can't pass it on if you dont have combat mode (drones, autodoc, interactor, etc)
+            if (!HasComp<CombatModeComponent>(hitEntity))
+                continue;
+            // </Trauma>
 
             if (!_hands.IsHolding((hitEntity, hands), ent.Owner, out _) && _hands.TryForcePickupAnyHand(hitEntity, ent.Owner, handsComp: hands))
             {

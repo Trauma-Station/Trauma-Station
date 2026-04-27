@@ -20,3 +20,31 @@
   materials:
     Steel: 190
     Plasteel: 100
+
+- type: latheRecipe
+  parent: [ BaseAmmoRecipe, BaseBlueAlert ]
+  id: MagazineBoxGaussgunBullet
+  result: MagazineBoxGaussgunBullet
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: [ BaseAmmoRecipe, BaseBlueAlert ]
+  id: MagazineBoxGaussgunDisc
+  result: MagazineBoxGaussgunDisc
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: [ BaseAmmoRecipe, BaseBlueAlert ]
+  id: MagazineBoxGaussgunShard
+  result: MagazineBoxGaussgunShard
+  materials:
+    Steel: 500
+
+- type: latheRecipe
+  parent: [ BaseAmmoRecipe, BaseBlueAlert ]
+  id: MagazineGaussgun
+  result: MagazineGaussgun
+  materials:
+    Steel: 100

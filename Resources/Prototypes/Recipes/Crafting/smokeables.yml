@@ -7,7 +7,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SmokeablesKnowledge: 1
+    SmokeablesKnowledge: 0
   practical:
     SmokeablesKnowledge: 1
   # </Trauma>
@@ -22,7 +22,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SmokeablesKnowledge: 2
+    SmokeablesKnowledge: 0
   practical:
     SmokeablesKnowledge: 2
   # </Trauma>
@@ -36,7 +36,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SmokeablesKnowledge: 1
+    SmokeablesKnowledge: 0
   practical:
     SmokeablesKnowledge: 1
   # </Trauma>
@@ -51,7 +51,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SmokeablesKnowledge: 2
+    SmokeablesKnowledge: 0
   practical:
     SmokeablesKnowledge: 2
   # </Trauma>
@@ -65,7 +65,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SmokeablesKnowledge: 1
+    SmokeablesKnowledge: 0
   practical:
     SmokeablesKnowledge: 1
   # </Trauma>
@@ -82,7 +82,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SmokeablesKnowledge: 1
+    SmokeablesKnowledge: 0
   practical:
     SmokeablesKnowledge: 1
   # </Trauma>
@@ -96,7 +96,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SmokeablesKnowledge: 2
+    SmokeablesKnowledge: 0
   practical:
     SmokeablesKnowledge: 2
   # </Trauma>
@@ -111,7 +111,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SmokeablesKnowledge: 1
+    SmokeablesKnowledge: 0
   practical:
     SmokeablesKnowledge: 1
   # </Trauma>

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Server.Atmos.EntitySystems;
@@ -27,6 +26,7 @@ using Content.Shared.Parallax;
 using Content.Shared.Roles.Components;
 using Content.Shared.Station.Components;
 using Content.Trauma.Common.Wizard.Components;
+using Content.Trauma.Server.Wizard.Components;
 using Content.Trauma.Shared.Roles;
 using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.BindSoul;

@@ -27,7 +27,7 @@
       PotencyDivisor: 25
     ChlorineTrifluoride:
       Min: 1
-      Max: 1
+      Max: 2
       PotencyDivisor: 100
 
 - type: seed
@@ -54,3 +54,61 @@
       Min: 1
       Max: 10
       PotencyDivisor: 10
+
+- type: seed
+  id: CoconutPlant
+  name: seeds-coconut-name
+  noun: seeds-noun-seeds
+  displayName: seeds-coconut-display-name
+  plantRsi: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
+  packetPrototype: CoconutSeeds
+  productPrototypes:
+  - FoodCoconut
+  harvestRepeat: SelfHarvest # bear in mind, this is the equivalent of space bear pelt for botany
+  lifespan: 80
+  maturation: 12 # takes a while
+  production: 1 # lol
+  yield: 8 # higher than cocoa because rare
+  potency: 25
+  waterConsumption: 1 # they need a lotta wata
+  nutrientConsumption: 1
+  idealLight: 8
+  chemicals:
+    CoconutWater:
+      Min: 1
+      Max: 20
+      PotencyDivisor: 5
+    Vitamin:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 5
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 5
+
+- type: seed
+  id: CherryBomb
+  name: seeds-cherrybomb-name
+  noun: seeds-noun-seeds
+  displayName: seeds-cherrybomb-display-name
+  plantRsi: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
+  packetPrototype: CherryBombSeeds
+  productPrototypes:
+    - FoodCherryBomb
+  harvestRepeat: Repeat
+  lifespan: 55
+  maturation: 3
+  production: 3
+  yield: 6
+  potency: 10
+  idealLight: 6
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 3
+      PotencyDivisor: 30
+    Vitamin:
+      Min: 1
+      Max: 3
+      PotencyDivisor: 40

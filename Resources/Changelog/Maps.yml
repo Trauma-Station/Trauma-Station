@@ -278,3 +278,12 @@ Entries:
   id: 30
   time: '2026-04-09T10:01:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1884
+- author: Vanadiom
+  changes:
+  - type: Fix
+    message: >-
+      Removed an errant sensor on Amber Station, the Cargo PTL air alarm no
+      longer thinks it's spaced all the time!
+  id: 31
+  time: '2026-04-22T19:15:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2173

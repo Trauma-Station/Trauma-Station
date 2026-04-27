@@ -3,7 +3,7 @@
 using Content.Trauma.Shared.Wizard.Components;
 using Content.Shared.Alert;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class CurseOfByondSystem : EntitySystem
 {
