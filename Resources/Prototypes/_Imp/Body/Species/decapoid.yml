@@ -70,6 +70,16 @@
           32:
             sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
             state: neck
+      suitstorage:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: back
+      back:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: back
   - type: InitialBody
     organs:
       Torso: TorsoDecapoid

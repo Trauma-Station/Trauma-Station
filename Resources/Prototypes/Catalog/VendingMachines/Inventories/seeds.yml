@@ -77,5 +77,10 @@
     TobaccoSeeds: 2
     FoodSnackSemki: 2
     FlyAmanitaSeeds: 1
-  emaggedInventory: # goob
+  # <Trauma>
+    MeatwheatSeeds: 2
+    NettleSeeds: 2
+  emaggedInventory:
     RealCapfruitSeeds: 1
+    RainbowCannabisSeeds: 2
+  # </Trauma>

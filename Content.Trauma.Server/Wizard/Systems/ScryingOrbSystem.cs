@@ -10,7 +10,7 @@ using Content.Shared.Mind;
 using Content.Shared.Verbs;
 using Robust.Server.Player;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class ScryingOrbSystem : SharedScryingOrbSystem
 {

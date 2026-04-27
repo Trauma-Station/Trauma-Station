@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Effects;
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Electrocution;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Common.Wizard.Projectile;
-using Content.Trauma.Server.Wizard.Systems;
+using Content.Trauma.Server.Wizard.Components;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class ThrownLightningSystem : EntitySystem
 {

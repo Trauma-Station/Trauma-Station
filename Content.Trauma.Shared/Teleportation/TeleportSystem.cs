@@ -3,6 +3,7 @@
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -53,9 +54,37 @@ public sealed class TeleportSystem : EntitySystem
 
     /// <summary>
     /// Teleport an entity somewhere, allowing for other systems to clean up e.g. joints.
+    /// Will break pulls unless you have <c>pulled</c> set, in which case it will teleport the pulled entity as well.
     /// Returns true if teleporting succeeded.
     /// </summary>
-    public bool Teleport(EntityUid uid, EntityCoordinates coords, EntityUid? user = null, bool predicted = true)
+    public bool Teleport(EntityUid uid, EntityCoordinates coords, EntityUid? user = null, bool predicted = true, bool pulled = false)
+    {
+        EntityUid? pullableEntity = null;
+        var stage = GrabStage.No;
+        // ignores pull restoring logic unless pulled is set.
+        if (pulled && TryComp<PullerComponent>(uid, out var puller))
+        {
+            stage = puller.GrabStage;
+            pullableEntity = puller.Pulling;
+        }
+
+        if (!TeleportSingle(uid, coords, user, predicted))
+            return false;
+
+        // re-pull if teleporting pulled entity succeeds
+        if (pullableEntity is {} pulling &&
+            TeleportSingle(pulling, coords, user, predicted))
+        {
+            _pulling.TryStartPull(uid, pulling, grabStageOverride: stage, force: true);
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Teleports a single entity without the pulled-teleporting logic.
+    /// </summary>
+    public bool TeleportSingle(EntityUid uid, EntityCoordinates coords, EntityUid? user = null, bool predicted = true)
     {
         // let other systems prevent teleporting
         if (!CanTeleport(uid, predicted))
@@ -73,20 +102,20 @@ public sealed class TeleportSystem : EntitySystem
     /// <summary>
     /// Teleport an entity, playing the same predicted sound at both where it was and where it teleported to.
     /// </summary>
-    public bool Teleport(EntityUid uid, EntityCoordinates coords, SoundSpecifier? sound, EntityUid? user = null, bool predicted = true)
-        => Teleport(uid, coords, sound, sound, user, predicted);
+    public bool Teleport(EntityUid uid, EntityCoordinates coords, SoundSpecifier? sound, EntityUid? user = null, bool predicted = true, bool pulled = false)
+        => Teleport(uid, coords, sound, sound, user, predicted, pulled);
 
     /// <summary>
     /// Teleport an entity, playing distinct predicted sounds where it was and where it teleported to.
     /// </summary>
-    public bool Teleport(EntityUid uid, EntityCoordinates coords, SoundSpecifier? soundIn, SoundSpecifier? soundOut, EntityUid? user = null, bool predicted = true)
+    public bool Teleport(EntityUid uid, EntityCoordinates coords, SoundSpecifier? soundIn, SoundSpecifier? soundOut, EntityUid? user = null, bool predicted = true, bool pulled = false)
     {
         var oldCoords = Transform(uid).Coordinates;
         if (predicted)
             _audio.PlayPredicted(soundOut, oldCoords, user);
         else
             _audio.PlayPvs(soundOut, oldCoords);
-        var succ = Teleport(uid, coords, user, predicted);
+        var succ = Teleport(uid, coords, user, predicted, pulled);
         if (predicted)
             _audio.PlayPredicted(soundIn, coords, user);
         else

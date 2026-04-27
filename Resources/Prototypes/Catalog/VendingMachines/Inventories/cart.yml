@@ -86,4 +86,7 @@
     LuxuryPen: 1
   emaggedInventory: # Goobstation
     AgentIDCard: 1
-    SyndiPDANukie: 1 # Trauma
+    # <Trauma>
+    SyndiPDANukie: 1
+    CyberPen: 1
+    # </Trauma>

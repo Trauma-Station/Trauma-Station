@@ -6,6 +6,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Gibbing;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
+using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Standing;
@@ -24,6 +25,7 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
     [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly TelefragSystem _telefrag = default!;
     [Dependency] private readonly TeleportSystem _teleport = default!;
@@ -31,10 +33,23 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
 
     public static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
+    private List<EntityUid> _gibQueue = new();
+
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<ExperimentalTeleporterComponent, UseInHandEvent>(OnUse);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Initialize();
+
+        foreach (var uid in _gibQueue)
+        {
+            _gibbing.Gib(uid);
+        }
+        _gibQueue.Clear();
     }
 
     private void OnUse(Entity<ExperimentalTeleporterComponent> ent, ref UseInHandEvent args)
@@ -46,7 +61,7 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
             return;
 
         var xform = Transform(user);
-        var oldCoords = xform.Coordinates;
+        var oldCoords = xform.Coordinates.SnapToGrid(EntityManager);
         var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var range = rand.Next(ent.Comp.MinTeleportRange, ent.Comp.MaxTeleportRange);
         var offset = xform.LocalRotation.ToWorldVec().Normalized();
@@ -58,18 +73,21 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
         Teleport(user, ent, coords, oldCoords);
 
         if (!TryCheckWall(coords)
-            || EmergencyTeleportation((user, xform), ent, oldCoords, newOffset))
+            || EmergencyTeleportation((user, xform), ent, rand, oldCoords, newOffset))
             return;
 
-        _gibbing.Gib(user);
+        // has to be defered because of interaction system's expectations that the user isn't being deleted
+        _popup.PopupClient("Teleporter malfunction", ent, user, PopupType.LargeCaution);
+        _gibQueue.Add(user);
     }
 
-    private bool EmergencyTeleportation(Entity<TransformComponent> user, Entity<ExperimentalTeleporterComponent> ent, EntityCoordinates oldCoords, Vector2 offset)
+    private bool EmergencyTeleportation(Entity<TransformComponent> user, Entity<ExperimentalTeleporterComponent> ent, System.Random rand, EntityCoordinates oldCoords, Vector2 offset)
     {
         if (_charges.IsEmpty(ent.Owner))
             return false;
 
-        var newOffset = offset + RandomEmergencyOffset(ent, offset);
+        _popup.PopupClient("Emergency teleport saved your life!", ent, user, PopupType.LargeCaution);
+        var newOffset = offset + RandomEmergencyOffset(ent, rand, offset);
         var coords = user.Comp.Coordinates.Offset(newOffset).SnapToGrid(EntityManager);
 
         Teleport(user, ent, coords, oldCoords);
@@ -110,13 +128,12 @@ public sealed class ExperimentalTeleporterSystem : EntitySystem
         return false;
     }
 
-    private Vector2 RandomEmergencyOffset(Entity<ExperimentalTeleporterComponent> ent, Vector2 offset)
+    private Vector2 RandomEmergencyOffset(Entity<ExperimentalTeleporterComponent> ent, System.Random rand, Vector2 offset)
     {
         if (ent.Comp.RandomRotations.Count == 0)
             return Vector2.Zero;
 
         var length = ent.Comp.EmergencyLength;
-        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var rotation = rand.Pick(ent.Comp.RandomRotations);
         return rotation.RotateVec(offset.Normalized() * length);
     }

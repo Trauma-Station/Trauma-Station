@@ -168,7 +168,7 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
     public bool CanAddStatusEffect(EntityUid uid, EntProtoId effectProto)
     {
-        if (!_proto.Resolve(effectProto, out var effectProtoData))
+        if (!_proto.Resolve(effectProto, out var effectProtoData) || TerminatingOrDeleted(uid)) // Trauma - skip deleting entities
             return false;
 
         if (!effectProtoData.TryGetComponent<StatusEffectComponent>(out var effectProtoComp, Factory))

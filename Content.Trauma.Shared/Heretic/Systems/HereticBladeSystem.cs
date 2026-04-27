@@ -16,13 +16,14 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.Teleportation;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
+using Content.Trauma.Shared.Teleportation;
+using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Trauma.Shared.Wizard.SanguineStrike;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
@@ -32,20 +33,21 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public abstract class SharedHereticBladeSystem : EntitySystem
+public sealed class HereticBladeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedHereticCombatMarkSystem _combatMark = default!;
-    [Dependency] private readonly SharedSanguineStrikeSystem _sanguine = default!;
     [Dependency] private readonly CosmosComboSystem _combo = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly RandomTeleportSystem _teleport = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private readonly SharedHereticCombatMarkSystem _combatMark = default!;
+    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedSanguineStrikeSystem _sanguine = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
 
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -282,7 +284,8 @@ public abstract class SharedHereticBladeSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        RandomTeleport(args.User, ent, rtp);
+        _teleport.RandomTeleport(args.User, rtp, sound: false, user: args.User);
+        PredictedQueueDel(ent);
         _audio.PlayPredicted(ent.Comp.ShatterSound, args.User, args.User);
         _popup.PopupClient(Loc.GetString("heretic-blade-use"), args.User, args.User);
         args.Handled = true;
@@ -341,6 +344,4 @@ public abstract class SharedHereticBladeSystem : EntitySystem
                 ApplySpecialEffect(args.User, hit, ent);
         }
     }
-
-    protected virtual void RandomTeleport(EntityUid user, EntityUid blade, RandomTeleportComponent comp) { }
 }

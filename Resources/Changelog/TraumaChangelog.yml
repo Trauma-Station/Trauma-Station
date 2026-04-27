@@ -7515,3 +7515,134 @@ Entries:
   id: 867
   time: '2026-04-25T20:11:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2258
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Lobby time increased from 1.5 to 3 minutes.
+  id: 868
+  time: '2026-04-26T14:14:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2266
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Bluespace crystal and heretic blade random teleporting is now predicted.
+  id: 869
+  time: '2026-04-26T17:36:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2275
+- author: assripper.
+  changes:
+  - type: Add
+    message: Abductors now have a much bigger shuttle, which includes a cell.
+  id: 870
+  time: '2026-04-26T17:39:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2256
+- author: Papiditel
+  changes:
+  - type: Add
+    message: New armor for chaplain.
+  id: 871
+  time: '2026-04-26T19:03:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2254
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: fluorosulfuric acid is now lime green instead of blue
+  id: 872
+  time: '2026-04-26T19:13:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2277
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Experimental syndicate teleporter now has a popup for being saved by
+      emergency teleport.
+  id: 873
+  time: '2026-04-26T19:17:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2280
+- author: assripper.
+  changes:
+  - type: Fix
+    message: abductor time requirements actually work now
+  id: 874
+  time: '2026-04-26T19:57:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2278
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed some issues with chameleon projector sprites for powered objects,
+      guns, lights and painted objects.
+  id: 875
+  time: '2026-04-26T20:26:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2283
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed eshield real
+  id: 876
+  time: '2026-04-26T20:29:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2282
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed changeling fleshmend not actually doing anything.
+  - type: Fix
+    message: Fixed ballistic shields not having inhand sprites.
+  - type: Tweak
+    message: >-
+      Pipe bomb crafting intermediates now have unique names you can use in
+      filters.
+  id: 877
+  time: '2026-04-26T21:13:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2285
+- author: Armok
+  changes:
+  - type: Add
+    message: Added a recipe for capacitors to the autolathe, for making coilguns.
+  id: 878
+  time: '2026-04-26T21:25:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2225
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: Added Coconut Crabs, sprited by asardonicsailor!
+  - type: Add
+    message: Added Coconut Plants, sprited by asardonicsailor and Moxie M. Mockery!
+  - type: Add
+    message: >-
+      Added Cherry Bombs, a cherry mutation which is a bomb. Looks the same
+      because lol
+  - type: Tweak
+    message: CLF3 now sets fire to tiles, and no longer pries tiles up.
+  - type: Tweak
+    message: Lemonades give more CLF3
+  - type: Remove
+    message: Burnite removed pending me coming up with an idea for it
+  id: 879
+  time: '2026-04-26T21:55:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2202
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: >-
+      Law C10: Grand Assault is now limited to Command, no longer covering
+      security.
+  id: 880
+  time: '2026-04-26T22:06:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2289
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Revamped most normal inventories, contraband inventories and emag
+      inventories of vending machines
+  id: 881
+  time: '2026-04-26T22:55:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2262
+- author: John SAPHE
+  changes:
+  - type: Remove
+    message: 9.5mm SAPHE executed in cold blood, whos idea was this?
+  id: 882
+  time: '2026-04-27T08:36:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2299

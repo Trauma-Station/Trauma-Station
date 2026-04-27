@@ -2043,7 +2043,7 @@
   name: mouse
   description: Squeak!
   components:
-  - type: Damageable
+  - type: DefaultBodyDamage # Trauma - damage the parts on mapinit
     damage:
       types:
         Bloodloss: 6

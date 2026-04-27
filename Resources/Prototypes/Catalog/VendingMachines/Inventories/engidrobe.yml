@@ -39,3 +39,8 @@
   contrabandInventory:
     ToyFigurineEngineer: 1
     ToyFigurineChiefEngineer: 1
+  # <Trauma>
+  emaggedInventory:
+    ClothingUniformJumpsuitChiefEngineerSyndie: 1
+    ClothingUniformJumpsuitRepairmanSyndie: 1
+  # </Trauma>

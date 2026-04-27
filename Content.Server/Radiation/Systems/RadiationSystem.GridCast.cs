@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared.Singularity.Components; // Goobstation - Radiation Overhaul
+using Content.Shared.Singularity.Components;
 // </Trauma>
 using System.Buffers;
 using System.Collections.Concurrent;

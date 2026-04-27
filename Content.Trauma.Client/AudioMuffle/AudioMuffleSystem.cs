@@ -551,7 +551,11 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         EntityUid? ignoredEnt)
     {
         var rayLength = MathF.Min(distance, _maxRayLength);
-        var ray = new CollisionRay(listener.Position, delta / distance, _audio.OcclusionCollisionMask);
+        if (delta == Vector2.Zero || distance == 0f)
+            return 0f; // you are inside the source?
+
+        var dir = (delta / distance).Normalized();
+        var ray = new CollisionRay(listener.Position, dir, _audio.OcclusionCollisionMask);
 
         var results = _physics.IntersectRayWithPredicate(listener.MapId,
             ray,

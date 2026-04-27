@@ -38,7 +38,7 @@ public sealed class InfusedItemSystem : EntitySystem
         SubscribeLocalEvent<MansusInfusedComponent, ExaminedEvent>(OnInfusedExamine);
         SubscribeLocalEvent<MansusInfusedComponent, InteractHandEvent>(OnInfusedInteract);
         SubscribeLocalEvent<MansusInfusedComponent, MeleeHitEvent>(OnInfusedMeleeHit,
-            after: new[] { typeof(SharedHereticBladeSystem) });
+            after: new[] { typeof(HereticBladeSystem) });
         SubscribeLocalEvent<MansusInfusedComponent, ComponentStartup>(OnInfusedStartup);
         SubscribeLocalEvent<MansusInfusedComponent, ComponentShutdown>(OnInfusedShutdown);
     }
