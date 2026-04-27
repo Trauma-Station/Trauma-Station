@@ -1,3 +1,6 @@
+// <Trauma>
+using System.Linq;
+// </Trauma>
 using System.Numerics;
 using Content.Client.IoC;
 using Content.Client.Items;

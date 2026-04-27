@@ -163,6 +163,11 @@ public abstract class SharedMultiMagazineGunSystem : EntitySystem
 
     private void OnMagazineTakeAmmo(Entity<MultiMagazineAmmoProviderComponent> ent, ref TakeAmmoEvent args)
     {
+        var ev = new GetAmmoCountEvent();
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Count < 1)
+            return;
+
         foreach (var (slot, magEnt) in GetMagazineEntities(ent))
         {
             if (magEnt is not { } uid)
@@ -175,12 +180,12 @@ public abstract class SharedMultiMagazineGunSystem : EntitySystem
                 continue;
             }
 
-            var ev = new TakeAmmoEvent(args.Shots, new(), args.Coordinates, args.User)
+            var ammoEv = new TakeAmmoEvent(args.Shots, new(), args.Coordinates, args.User)
             {
                 FireCostMultiplier = multiplier,
                 SpawnProjectiles = false,
             };
-            RaiseLocalEvent(uid, ev);
+            RaiseLocalEvent(uid, ammoEv);
         }
     }
 
