@@ -2,9 +2,9 @@ namespace Content.Shared.Weapons.Ranged.Components;
 
 public sealed partial class BatteryAmmoProviderComponent
 {
-    [DataField]
+    [ViewVariables, AutoNetworkedField]
     public float ShotsFloat;
 
-    [DataField]
+    [ViewVariables, AutoNetworkedField]
     public float CapacityFloat;
 }
