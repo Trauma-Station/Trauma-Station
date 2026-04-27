@@ -15,8 +15,6 @@
     noRot: true
   - type: Item
     size: Huge
-  - type: ItemToggle
-    onUse: false
   - type: InteractionOutline
   - type: DoAfter
   - type: Physics
