@@ -162,6 +162,7 @@
   parent: BaseGameRule
   id: BlobMidround
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     weight: 1
     earliestStart: 45
@@ -459,6 +460,7 @@
   parent: BaseGameRule
   id: SlasherSpawn
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     weight: 3
     duration: null

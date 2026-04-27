@@ -4,6 +4,7 @@
   parent: BaseGameRule
   id: LoneAbductorSpawn
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 15
     reoccurrenceDelay: 70
@@ -92,6 +93,7 @@
   parent: LoneAbductorSpawn
   id: DuoAbductorSpawn
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     minimumPlayers: 20
   - type: AntagSelection
