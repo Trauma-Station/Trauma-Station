@@ -15,22 +15,34 @@
 - type: startingGear
   id: TunnelClownAntagGear
   equipment:
+    head: ClothingHeadBandSkull
+    eyes: ClothingEyesGlassesMeson
     mask: ClothingMaskClownUnremoveable
     jumpsuit: ClothingUniformJumpsuitClown
     outerClothing: ClothingOuterCoatJacketBiker
     shoes: ClothingShoesClownUnremoveable
     id: ClownPDA
+    pocket1: BikeHorn
     ears: ClothingHeadsetService
     gloves: ClothingHandsGlovesCombat
     back: ClothingBackpackClown
   inhand:
   - FireAxe
-  - Stunprod
+  - Stunbaton
   storage:
     back:
     - ClownRecorder
     - FoodMeatClown
     - TunnelClownBusinessCard
+    - Handcuffs
+    - Handcuffs
+    - VialCocaine
+    - VialGreen
+    - MedkitCombatFilled
+    - SprayPaintFunny
+    - SprayPaintFunnyYellow
+    - TrashBananaPeelExplosive
+    - TrashBananaPeelExplosive
 
 - type: startingGear
   id: SingulothKnightsAntagGear
@@ -39,13 +51,17 @@
     outerClothing: ClothingSingulothArmor
     shoes: ClothingShoesLeather
     gloves: ClothingHandsGlovesColorYellow
+    suitstorage: WeaponLauncherSingularityBuster # potentially remove if an ability is made so the knights can kill tesla
     back: ClothingBackpackSatchelLeather
-    belt: ClothingBeltUtilityFilled
+    belt: ClothingBeltUtilityEngineering
+    pocket1: ScrollTeleportApprentice # intended to teleport to engineering/tesla
   inhand:
   - SingulothsHammer
   storage:
     back:
     - MedkitCombatFilled
+    - OxygenTankFilled
+    - Bible
 
 - type: startingGear
   id: DarkLordAntagGear
@@ -53,7 +69,7 @@
     head: ClothingHeadHatHoodCloakSith
     jumpsuit: ClothingUniformJumpsuitMonasticRobeDark
     outerClothing: ClothingOuterWizardBlackReal
-    shoes: ClothingShoesColorBlack
+    shoes: ClothingShoesBootsJack
     gloves: ClothingHandsGlovesCombat
     back: ClothingBackpackSatchelLeather
     id: SyndiPDA
@@ -62,6 +78,7 @@
   storage:
     back:
     - BoxSurvivalSlotsSyndicate
+    - MedkitCombatFilled
 
 - type: startingGear
   id: ChosenOneProtagGear
@@ -69,6 +86,7 @@
     jumpsuit: ClothingUniformJumpsuitColorWhite
     outerClothing: WhiteRobes
     shoes: ClothingShoesBootsJack
+    gloves: ClothingHandsGlovesCombat
     belt: ClothingBeltAssaultFilled
     id: CentcomPDA
   inhand:
@@ -81,6 +99,7 @@
     shoes: ClothingShoesColorWhite
     id: MimePDA
     pocket1: CrayonMime
+    pocket2: KukriKnife
     ears: ClothingHeadsetService
     jumpsuit: ClothingUniformJumpsuitMime
     mask: ClothingMaskMime
@@ -95,15 +114,19 @@
     - ChameleonProjector
     - MagazinePistolCaselessRifle
     - MagazinePistolCaselessRifle
+    - MagazinePistolCaselessRifleSAPHE # for more armored targets
     - ChemistryBottleNocturine
+    - Syringe
     - Syringe
     - DeathAcidifierImplanter
     - FreedomImplanter
+    - BodyBagFolded
 
 - type: startingGear
   id: DarkPriestAntagGear
   equipment:
     head: ClothingHeadHatHoodVoidCloak
+    eyes: ClothingEyesGlassesHiddenSecurity
     ears: ClothingHeadsetService
     jumpsuit: ClothingUniformJumpsuitChaplain
     shoes: ClothingShoesColorBlack
@@ -115,9 +138,10 @@
   - BlessingOfTheReaper
   storage:
     back:
-    - ClothingNeckStoleChaplain
-    - ClothingHeadHatHoodVoidCloak
-    - ClothingOuterHoodieChaplain
+    - Bible
+    - ArmamentsBeacon
+    - ArmamentsBeacon # For Apprentice
+    - Nullrod # For Apprentice
     - BoxSurvivalSlots
 
 - type: startingGear
@@ -125,13 +149,13 @@
   equipment:
     ears: ClothingHeadsetAltSyndicate
     jumpsuit: ClothingUniformJumpsuitTacticool
-    shoes: ClothingShoesColorBlack
-    id: SyndicateIDCard
+    shoes: ClothingShoesChameleonNoSlips
+    id: SyndiPDA
     mask: ClothingMaskGasSyndicate
     gloves: ClothingHandsChameleonThief
     outerClothing: ClothingOuterHardsuitVoxRaiderStealth
     suitstorage: ExtendedEmergencyNitrogenTankFilled
-    back: ClothingBackpack
+    back: ClothingBackpackSyndicate
   storage:
     back:
     - BoxSurvivalSlotsNitrogen
@@ -141,3 +165,5 @@
     - ChemistryBottleNocturine
     - ChemistryBottleNocturine
     - AgentIDCard
+    - ThiefBeacon
+    - SatchelThief
