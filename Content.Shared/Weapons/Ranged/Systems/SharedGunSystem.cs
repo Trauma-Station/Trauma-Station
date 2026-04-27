@@ -87,7 +87,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
     private const float EjectOffset = 0.4f;
-    protected const string AmmoExamineColor = "yellow";
+    public const string AmmoExamineColor = "yellow"; // Trauma - made public
     protected const string FireRateExamineColor = "yellow";
     public const string ModeExamineColor = "cyan";
 
@@ -720,7 +720,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// <summary>
     /// Call this whenever the ammo count for a gun changes.
     /// </summary>
-    protected virtual void UpdateAmmoCount(EntityUid uid, bool prediction = true) {}
+    public virtual void UpdateAmmoCount(EntityUid uid, bool prediction = true) {} // Trauma - made public
 
     protected void SetCartridgeSpent(EntityUid uid, CartridgeAmmoComponent cartridge, bool spent)
     {
