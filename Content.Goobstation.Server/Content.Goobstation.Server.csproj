@@ -24,7 +24,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <Import Project="..\RobustToolbox\Imports\Shared.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Content.Goobstation.Maths\Content.Goobstation.Maths.csproj" />
+    <ProjectReference Include="..\Content.Common\Content.Common.csproj" />
     <ProjectReference Include="..\Content.Goobstation.Shared\Content.Goobstation.Shared.csproj" />
     <ProjectReference Include="../Content.Lavaland.Shared/Content.Lavaland.Shared.csproj" />
     <ProjectReference Include="..\Content.Server\Content.Server.csproj" />

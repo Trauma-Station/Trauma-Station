@@ -3,7 +3,6 @@
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Stealth;
 

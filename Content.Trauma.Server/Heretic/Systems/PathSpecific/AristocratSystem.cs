@@ -27,7 +27,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -68,7 +67,7 @@ public sealed class AristocratSystem : EntitySystem
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
     private static readonly ProtoId<TagPrototype> Window = "Window";
 
-    private static readonly TimeSpan ConduitDelay = TimeSpan.FromSeconds(1);
+    private static readonly TimeSpan ConduitDelay = TimeSpan.FromSeconds(2);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
 
     private readonly HashSet<Entity<FreezableWallComponent>> _walls = new();

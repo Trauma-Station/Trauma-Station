@@ -142,6 +142,7 @@
           components:
           - Silicon
           - BorgChassis
+          - CosmicColossus
           tags:
           - Bot
       damage:
@@ -163,6 +164,8 @@
           components:
           - Edible
           - ShadowCloakEntity
+          tags:
+          - Wall # HereticRustGraspWallEffect handles walls
       damage:
         types:
           Blunt: 167
@@ -176,6 +179,9 @@
   parent: TouchSpellMansus
   categories: [ HideSpawnMenu ]
   components:
+  - type: FleshGrasp # Used for summoning ghouls on the rune
+  - type: UseDelay
+    delay: 1.5
   - type: MansusGrasp
     effects:
     - !type:NestedRitualEffect

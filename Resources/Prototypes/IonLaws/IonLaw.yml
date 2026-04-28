@@ -5,11 +5,11 @@
     food: 0.5
     RandomManifestFill: 0.15
 
-- type: ionLaw
-  id: CallShuttle
-  lawString: ion-storm-law-call-shuttle
-  selectorWeightAdjust:
-    RandomManifestFill: 0.15
+#- type: ionLaw # Trauma - This forces the round to end, and can just lead to people being annoyed, especially if the AI gets it. Best if this law isn't in the game.
+#  id: CallShuttle
+#  lawString: ion-storm-law-call-shuttle
+#  selectorWeightAdjust:
+#    RandomManifestFill: 0.15
 
 - type: ionLaw
   id: CrewAre
@@ -201,4 +201,4 @@
 - type: ionLaw
   id: WhoDAGD
   lawString: ion-storm-law-who-dagd
-  weight: 0.05
+  weight: 0.10 # Trauma - was 0.05

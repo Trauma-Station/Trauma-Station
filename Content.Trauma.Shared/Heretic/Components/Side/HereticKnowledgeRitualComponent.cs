@@ -2,8 +2,6 @@
 
 using Content.Shared.Dataset;
 using Content.Shared.Tag;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components.Side;
 

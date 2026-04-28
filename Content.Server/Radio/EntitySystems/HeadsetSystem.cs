@@ -1,5 +1,6 @@
 // <Trauma>
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared.Whitelist;
+using Content.Trauma.Common.Language.Systems;
 // </Trauma>
 using Content.Shared.Chat;
 using Content.Shared.Inventory.Events;
@@ -8,14 +9,13 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Content.Shared.Whitelist;
 
 namespace Content.Server.Radio.EntitySystems;
 
 public sealed class HeadsetSystem : SharedHeadsetSystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private readonly CommonLanguageSystem _language = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     // </Trauma>
     [Dependency] private readonly INetManager _netMan = default!;

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Heretic.Crucible.Components;
 
@@ -12,7 +11,7 @@ public sealed partial class WoundedSoldierComponent : Component
     public float LifeStealMultiplier = 0.3f;
 
     [DataField]
-    public float StaminaHealMultiplier = 0.3f;
+    public float StaminaHealMultiplier = 0.5f;
 
     [DataField]
     public float OvertimeDamageThresholdRatio = 0.1f;

@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Pirates;
+using Content.Trauma.Common.Cargo;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -228,6 +229,11 @@ namespace Content.Server.Cargo.Systems
 
             var cost = product.Cost * order.OrderQuantity;
             var accountBalance = GetBalanceFromAccount((station.Value, bank), order.Account);
+            // <Trauma>
+            var modifyEv = new ModifyCargoPriceEvent(cost);
+            RaiseLocalEvent(station.Value, ref modifyEv);
+            cost = modifyEv.Price;
+            // </Trauma>
 
             // Not enough balance
             if (cost > accountBalance)

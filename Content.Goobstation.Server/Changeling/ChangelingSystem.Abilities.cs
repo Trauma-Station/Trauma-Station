@@ -10,7 +10,6 @@ using Content.Goobstation.Server.Changeling.Objectives.Components;
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Shared.Light.Components;
-using Content.Shared._Starlight.CollectiveMind;
 using Content.Medical.Common.Targeting; // Shitmed Change
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
@@ -40,11 +39,11 @@ using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Content.Shared.Actions.Components;
 using Content.Goobstation.Shared.Devour.Events;
 using Content.Server.Actions;
 using Content.Shared.Mindshield.Components;
+using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Goobstation.Server.Changeling;
 

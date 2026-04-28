@@ -1,8 +1,8 @@
 // <Trauma>
 using Content.Medical.Common.Targeting;
-using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Shared._White.Xenomorphs.Infection;
+using Content.Trauma.Common.Body;
+using Content.Trauma.Common.Wizard;
+using Content.Trauma.Common.Xenomorphs;
 using Content.Shared.Body;
 using Robust.Shared.Utility;
 // </Trauma>
@@ -20,7 +20,6 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
-using Content.Shared.Examine;
 using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Follower;
@@ -46,20 +45,19 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Server.Ghost
 {
     public sealed class GhostSystem : SharedGhostSystem
     {
         // <Trauma>
-        [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
+        [Dependency] private readonly CommonGhostVisibilitySystem _ghostVisibility = default!;
+        [Dependency] private readonly CommonXenomorphSystem _xeno = default!;
         // </Trauma>
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly IAdminLogManager _adminLog = default!;
         [Dependency] private readonly SharedEyeSystem _eye = default!;
         [Dependency] private readonly FollowerSystem _followerSystem = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly JobSystem _jobs = default!;
         [Dependency] private readonly EntityLookupSystem _lookup = default!;
         [Dependency] private readonly MindSystem _minds = default!;
@@ -87,7 +85,6 @@ namespace Content.Server.Ghost
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
-        private static readonly ProtoId<DamageTypePrototype> IonDamageType = "Ion"; // Trauma
 
         public override void Initialize()
         {
@@ -99,8 +96,6 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, ComponentStartup>(OnGhostStartup);
             SubscribeLocalEvent<GhostComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<GhostComponent, ComponentShutdown>(OnGhostShutdown);
-
-            SubscribeLocalEvent<GhostComponent, ExaminedEvent>(OnGhostExamine);
 
             SubscribeLocalEvent<GhostComponent, MindRemovedMessage>(OnMindRemovedMessage);
             SubscribeLocalEvent<GhostComponent, MindUnvisitedMessage>(OnMindUnvisitedMessage);
@@ -213,7 +208,7 @@ namespace Content.Server.Ghost
             var visibility = EnsureComp<VisibilityComponent>(uid);
 
             if (_gameTicker.RunLevel != GameRunLevel.PostRound
-                && !_ghostVisibility.IsVisible(component)) // Goob
+                && !_ghostVisibility.IsVisible(uid)) // Goob
             {
                 _visibilitySystem.AddLayer((uid, visibility), (int) VisibilityFlags.Ghost, false);
                 _visibilitySystem.RemoveLayer((uid, visibility), (int) VisibilityFlags.Normal, false);
@@ -221,8 +216,10 @@ namespace Content.Server.Ghost
             }
 
             _eye.RefreshVisibilityMask(uid);
-            var time = _gameTiming.CurTime;
+            var time = _gameTiming.RealTime;
             component.TimeOfDeath = time;
+
+            Dirty(uid, component);
         }
 
         private void OnGhostShutdown(EntityUid uid, GhostComponent component, ComponentShutdown args)
@@ -251,16 +248,6 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleLightingActionEntity, component.ToggleLightingAction);
             _actions.AddAction(uid, ref component.ToggleFoVActionEntity, component.ToggleFoVAction);
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
-        }
-
-        private void OnGhostExamine(EntityUid uid, GhostComponent component, ExaminedEvent args)
-        {
-            var timeSinceDeath = _gameTiming.RealTime.Subtract(component.TimeOfDeath);
-            var deathTimeInfo = timeSinceDeath.Minutes > 0
-                ? Loc.GetString("comp-ghost-examine-time-minutes", ("minutes", timeSinceDeath.Minutes))
-                : Loc.GetString("comp-ghost-examine-time-seconds", ("seconds", timeSinceDeath.Seconds));
-
-            args.PushMarkup(deathTimeInfo);
         }
 
         #region Ghost Deletion
@@ -598,7 +585,7 @@ namespace Content.Server.Ghost
                     canReturn = true;
 
                     // <Goob> - added this check
-                    if (!HasComp<XenomorphPreventSuicideComponent>(playerEntity.Value))
+                    if (!_xeno.IsSlimed(playerEntity.Value))
                     {
                         FixedPoint2 dealtDamage = 200;
 
@@ -611,11 +598,9 @@ namespace Content.Server.Ghost
                         }
 
                         // <Trauma>
-                        // TODO SHITMED: make this an event jesus christ
-                        var damageType = HasComp<SiliconComponent>(playerEntity)
-                            ? IonDamageType
-                            : AsphyxiationDamageType;
-                        DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(damageType), dealtDamage);
+                        var ev = new SuicideDamageEvent(AsphyxiationDamageType);
+                        RaiseLocalEvent(playerEntity.Value, ref ev);
+                        DamageSpecifier damage = new(_prototypeManager.Index<DamageTypePrototype>(ev.DamageType), dealtDamage);
 
                         TargetBodyPart? targetPart = HasComp<BodyComponent>(playerEntity) ? TargetBodyPart.Chest : null;
                         _damageable.ChangeDamage(playerEntity.Value, damage, true, targetPart: targetPart);

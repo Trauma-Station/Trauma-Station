@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Robust.Client.UserInterface.Controls;
 
@@ -13,7 +8,6 @@ namespace Content.Client.UserInterface.Controls;
 // Grid layout is a complicated problem and I don't want to commit another half-baked thing into the engine.
 // It's probably sufficient for its use case (RichTextLabel tables for rules/guidebook).
 // Despite that, it's still better comment the shit half of you write on a regular basis.
-//
 // EMO: thank you PJB i was going to kill myself.
 
 /// <summary>
@@ -99,7 +93,6 @@ public class TableContainer : Container
             // Just set assigned width to be however much they asked for.
             // We could probably skip the second measure pass in this scenario,
             // but that's just an optimization, so I don't care right now.
-            //
             // There's probably a very clever way to make this behavior work with the else block of logic,
             // just by fiddling with the math.
             // I'm dumb, it's 4:30 AM. Yeah, I *started* at 2 AM.
@@ -114,7 +107,6 @@ public class TableContainer : Container
         {
             // We don't have enough horizontal space,
             // at least without causing *some* sort of word wrapping (assuming text contents).
-            //
             // Assign horizontal space proportional to the wanted maximum size of the columns.
             var assignableWidth =  Math.Max(0, availableSize.X - totalMinWidth);
             for (var c = 0; c < _columns; c++)

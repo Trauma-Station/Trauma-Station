@@ -2,6 +2,9 @@
   id: AdvancedMagboots
 
 - type: Tag
+  id: AmmoGaussgun
+
+- type: Tag
   id: AnvilBottom
 
 - type: Tag
@@ -20,6 +23,12 @@
   id: Butt
 
 - type: Tag
+  id: PartCapacitor
+
+- type: Tag
+  id: CartridgeGaussgun
+
+- type: Tag
   id: CartridgeRPG2
 
 - type: Tag
@@ -36,6 +45,12 @@
 
 - type: Tag
   id: DataChip
+
+- type: Tag
+  id: DrillHead
+
+- type: Tag
+  id: Directional
 
 - type: Tag
   id: Ed209Shell
@@ -74,6 +89,9 @@
   id: FlamethrowerTank
 
 - type: Tag
+  id: FleshWormSegment
+
+- type: Tag
   id: ForceHereticMinion
 
 - type: Tag
@@ -92,25 +110,19 @@
   id: HandTeleporter
 
 - type: Tag
-  id: HandleSmall
-
-- type: Tag
-  id: HandleMedium
-
-- type: Tag
-  id: HandleLarge
-
-- type: Tag
   id: Iradomini
-
-- type: Tag
-  id: IngotWorkable
 
 - type: Tag
   id: IngotWorkableSteel
 
 - type: Tag
+  id: MagazineGaussgun
+
+- type: Tag
   id: MagazineTurret
+
+- type: Tag
+  id: MetalContainer
 
 - type: Tag
   id: OverrideKeyComponents
@@ -129,6 +141,9 @@
 
 - type: Tag
   id: RCD
+
+- type: Tag
+  id: RechargingBoard
 
 - type: Tag
   id: RevArmorPlate
@@ -158,7 +173,13 @@
   id: RitualFeastOfOwls
 
 - type: Tag
+  id: RitualImperfect
+
+- type: Tag
   id: RitualKnowledge
+
+- type: Tag
+  id: SpaceWhaleSegment
 
 - type: Tag
   id: SpellIgnoreForestAdmonitions
@@ -201,121 +222,3 @@
 
 - type: Tag
   id: Whetstone
-
-# Forge Knife
-
-- type: Tag
-  id: KnifeBladeBrass
-
-- type: Tag
-  id: KnifeBladeSteel
-
-- type: Tag
-  id: KnifeBladePlasteel
-
-- type: Tag
-  id: CombatKnifeBladeBrass
-
-- type: Tag
-  id: CombatKnifeBladeSteel
-
-- type: Tag
-  id: CombatKnifeBladePlasteel
-
-- type: Tag
-  id: CleaverBladeBrass
-
-- type: Tag
-  id: CleaverBladeSteel
-
-- type: Tag
-  id: CleaverBladePlasteel
-
-- type: Tag
-  id: KukriBladeBrass
-
-- type: Tag
-  id: KukriBladeSteel
-
-- type: Tag
-  id: KukriBladePlasteel
-
-# Forge Tool
-
-- type: Tag
-  id: HammerHeadBrass
-
-- type: Tag
-  id: HammerHeadSteel
-
-- type: Tag
-  id: HammerHeadPlasteel
-
-- type: Tag
-  id: ScrewdriverShankBrass
-
-- type: Tag
-  id: ScrewdriverShankSteel
-
-- type: Tag
-  id: ScrewdriverShankPlasteel
-
-# Arrows
-
-- type: Tag
-  id: ArrowHeadBrass
-
-- type: Tag
-  id: ArrowHeadSteel
-
-- type: Tag
-  id: ArrowHeadPlasteel
-
-# Swords
-
-- type: Tag
-  id: SwordBladeBrass
-
-- type: Tag
-  id: SwordBladeSteel
-
-- type: Tag
-  id: SwordBladePlasteel
-
-- type: Tag
-  id: LongswordBladeBrass
-
-- type: Tag
-  id: LongswordBladeSteel
-
-- type: Tag
-  id: LongswordBladePlasteel
-
-- type: Tag
-  id: KatanaBladeBrass
-
-- type: Tag
-  id: KatanaBladeSteel
-
-- type: Tag
-  id: KatanaBladePlasteel
-
-# Blugeons
-
-- type: Tag
-  id: WarhammerHeadBrass
-
-- type: Tag
-  id: WarhammerHeadSteel
-
-- type: Tag
-  id: WarhammerHeadPlasteel
-
-- type: Tag
-  id: MorningstarHeadBrass
-
-- type: Tag
-  id: MorningstarHeadSteel
-
-- type: Tag
-  id: MorningstarHeadPlasteel

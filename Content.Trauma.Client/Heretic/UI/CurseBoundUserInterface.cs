@@ -4,7 +4,6 @@ using Content.Trauma.Shared.Heretic.Curses;
 using Content.Trauma.Shared.Heretic.Curses.Components;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Heretic.UI;
 

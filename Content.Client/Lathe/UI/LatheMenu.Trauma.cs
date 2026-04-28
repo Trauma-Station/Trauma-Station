@@ -1,8 +1,6 @@
-using Content.Shared._DV.Salvage.Components;
-using Content.Shared._DV.Salvage.Systems;
-using Content.Client._Shitcode.Silo;
+using Content.Goobstation.Common.Silo;
+using Content.Trauma.Common.Salvage;
 using Robust.Client.Player;
-using Robust.Shared.Physics;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -11,8 +9,8 @@ namespace Content.Client.Lathe.UI;
 public sealed partial class LatheMenu
 {
     [Dependency] private readonly IPlayerManager _player = default!;
-    private MiningPointsSystem _miningPoints = default!;
-    private SiloSystem _silo = default!;
+    private CommonMiningPointsSystem _miningPoints = default!;
+    private CommonSiloSystem _silo = default!;
 
     public event Action? OnResetQueueList;
     public event Action? OnClaimMiningPoints;
@@ -22,8 +20,8 @@ public sealed partial class LatheMenu
 
     private void InitializeTrauma()
     {
-        _miningPoints = _entityManager.System<MiningPointsSystem>();
-        _silo = _entityManager.System<SiloSystem>();
+        _miningPoints = _entityManager.System<CommonMiningPointsSystem>();
+        _silo = _entityManager.System<CommonSiloSystem>();
 
         ResetQueueList.OnPressed += _ => OnResetQueueList?.Invoke();
     }

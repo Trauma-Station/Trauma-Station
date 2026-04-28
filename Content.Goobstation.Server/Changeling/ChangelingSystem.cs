@@ -74,7 +74,6 @@ using Content.Trauma.Common.MartialArts;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -161,6 +160,9 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
     private void OnMindswapAttempt(Entity<ChangelingComponent> ent, ref BeforeMindSwappedEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         args.Message = ent.Comp.MindswapText;
         args.Cancelled = true;
     }

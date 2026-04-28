@@ -1,15 +1,6 @@
-// SPDX-FileCopyrightText: 2022 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 T-Stalker <43253663+DogZeroX@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 T-Stalker <le0nel_1van@hotmail.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using System.Linq;
+// </Trauma>
 using System.Numerics;
 using Content.Client.IoC;
 using Content.Client.Items;
@@ -53,6 +44,26 @@ public sealed partial class GunSystem
         // Fallback to default if none specified
         ev.Control ??= new DefaultStatusControl();
 
+        // <Trauma>
+        if (ev.Controls.Count > 1)
+        {
+            var container = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                HorizontalExpand = true,
+                VerticalExpand = true,
+            };
+            foreach (var control in ev.Controls)
+            {
+                container.AddChild(control);
+            }
+
+            component.Control = container;
+            UpdateAmmoCount(uid, component);
+            return;
+        }
+        // </Trauma>
+
         component.Control = ev.Control;
         UpdateAmmoCount(uid, component);
     }
@@ -62,6 +73,21 @@ public sealed partial class GunSystem
         if (component.Control == null)
             return;
 
+        // <Trauma>
+        if (component.Control is BoxContainer container)
+        {
+            foreach (var child in container.Children)
+            {
+                var childEv = new UpdateAmmoCounterEvent()
+                {
+                    Control = child
+                };
+
+                RaiseLocalEvent(uid, childEv);
+            }
+        }
+        // </Trauma>
+
         var ev = new UpdateAmmoCounterEvent()
         {
             Control = component.Control
@@ -70,7 +96,7 @@ public sealed partial class GunSystem
         RaiseLocalEvent(uid, ev, false);
     }
 
-    protected override void UpdateAmmoCount(EntityUid uid, bool prediction = true)
+    public override void UpdateAmmoCount(EntityUid uid, bool prediction = true) // Trauma - made public
     {
         // Don't use resolves because the method is shared and there's no compref and I'm trying to
         // share as much code as possible
@@ -88,7 +114,28 @@ public sealed partial class GunSystem
     /// </summary>
     public sealed class AmmoCounterControlEvent : EntityEventArgs
     {
-        public Control? Control;
+        public Control? Control
+        // <Trauma>
+        {
+            get => Controls.FirstOrDefault();
+            set
+            {
+                if (value is not { } control)
+                    return;
+
+                var type = control.GetType();
+
+                var index = Controls.FindIndex(x => x.GetType() == type);
+
+                if (index < 0)
+                    Controls.Add(control);
+                else
+                    Controls[index] = control;
+            }
+        }
+
+        public List<Control> Controls = new();
+        // </Trauma>
     }
 
     /// <summary>
@@ -96,13 +143,18 @@ public sealed partial class GunSystem
     /// </summary>
     public sealed class UpdateAmmoCounterEvent : HandledEntityEventArgs
     {
+        // <Trauma>
+        // Only used for BatteryAmmoProvider currently
+        public float FireCostMultiplier = 1f;
+        // </Trauma>
         public Control Control = default!;
     }
 
     #region Controls
 
-    private sealed class DefaultStatusControl : Control
+    public sealed class DefaultStatusControl : Control // Trauma - made public
     {
+        private readonly Label _ammoCount; // Trauma
         private readonly BulletRender _bulletRender;
 
         public DefaultStatusControl()
@@ -110,15 +162,36 @@ public sealed partial class GunSystem
             MinHeight = 15;
             HorizontalExpand = true;
             VerticalAlignment = VAlignment.Center;
-            AddChild(_bulletRender = new BulletRender
+            // <Trauma> - wrap BulletRender in BoxContainer, add _ammoCount
+            AddChild(new BoxContainer
             {
-                HorizontalAlignment = HAlignment.Right,
-                VerticalAlignment = VAlignment.Bottom
+                HorizontalExpand = true,
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                Children =
+                {
+                    (_bulletRender = new BulletRender
+                    {
+                        Margin = new Thickness(0, 0, 5, 0),
+                        HorizontalExpand = true
+                    }),
+                    (_ammoCount = new Label
+                    {
+                        StyleClasses = { StyleClass.ItemStatus },
+                        HorizontalAlignment = HAlignment.Right,
+                        VerticalAlignment = VAlignment.Bottom
+                    }),
+                }
             });
+            // <Trauma>
         }
 
         public void Update(int count, int capacity)
         {
+            // <Trauma>
+            _ammoCount.Visible = true;
+            _ammoCount.Text = $"x{count:00}";
+            // </Trauma>
+
             _bulletRender.Count = count;
             _bulletRender.Capacity = capacity;
 
@@ -144,6 +217,7 @@ public sealed partial class GunSystem
 
             AddChild(new BoxContainer
             {
+                HorizontalExpand = true, // Trauma
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
                 Children =
                 {
@@ -200,7 +274,11 @@ public sealed partial class GunSystem
                         {
                             (_bulletRender = new BulletRender
                             {
+                                // <Trauma>
+                                HorizontalExpand = true,
+                                /*
                                 HorizontalAlignment = HAlignment.Right,
+                                </Trauma> */
                                 VerticalAlignment = VAlignment.Bottom
                             }),
                             (_noMagazineLabel = new Label

@@ -8,6 +8,18 @@
     },
     "states": [
         {
+            "name": "worm_contract"
+        },
+        {
+            "name": "hook_on"
+        },
+        {
+            "name": "hook"
+        },
+        {
+            "name": "among_sheep"
+        },
+        {
             "name": "palecloak"
         },
         {

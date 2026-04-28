@@ -1,0 +1,29 @@
+<Document>
+# Holographic Generators
+	<Box>
+		<GuideEntityEmbed Entity="HolographicFieldGenerator" Caption="" Rotation="90" Margin="0"/>
+		<GuideEntityEmbed Entity="HolographicField" Caption="" Rotation="90" Margin="0"/>
+		<GuideEntityEmbed Entity="HolographicField" Caption="" Rotation="90" Margin="0"/>
+		<GuideEntityEmbed Entity="HolographicField" Caption="" Rotation="90" Margin="0"/>
+		<GuideEntityEmbed Entity="HolographicFieldGenerator" Caption="" Rotation="270" Margin="0"/>
+	</Box>
+	Holographic Generators are machines that can be used to create permanent holograms for as long as the Generator is powered.
+
+	When a pair of Generators of the same type are placed facing eachother and connected to power, a field is formed between the 2 generators.
+	Holographic Generators will only form connections when at full power and if the space between the 2 Generators isn't obstructed. The Holographic Generator will remain active until their internal batteries are fully drained.
+	Both generators need to be powered to form a field.
+	<Box>
+		<GuideEntityEmbed Entity="HolographicFieldGenerator" Rotation="90"/>
+		<GuideEntityEmbed Entity="HolographicField" Rotation="90"/>
+	</Box>
+	Holographic Fields block atmospheric flow and can be used in the creation of airtight spaces that can be freely passed through.
+	Additionally, they are resistant to radiation and heat.
+	<Box>
+		<GuideEntityEmbed Entity="HolographicBarrierGenerator" Rotation="90"/>
+		<GuideEntityEmbed Entity="HolographicFieldBarrier" Rotation="90"/>
+	</Box>
+	Holographic Barriers are self regenerating impassable fields that can block crew, bullets... anything, really.
+
+	Holographic Barriers can be used in the creation of secure docks or as shields on a shuttle.
+	However, the Generator itself is much weaker than the barriers they form and must be protected well.
+</Document>

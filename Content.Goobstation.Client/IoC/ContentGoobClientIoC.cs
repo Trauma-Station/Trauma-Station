@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Client.JoinQueue;
-using Content.Goobstation.Client.MisandryBox;
+using Content.Goobstation.Client.JumpScare;
 using Content.Goobstation.Client.Polls;
 using Content.Goobstation.Client.Redial;
 using Content.Goobstation.Client.ServerCurrency;
 using Content.Goobstation.Common.ServerCurrency;
-using Content.Goobstation.Shared.MisandryBox.JumpScare;
+using Content.Goobstation.Shared.JumpScare;
 using Robust.Shared.IoC;
 
 namespace Content.Goobstation.Client.IoC;

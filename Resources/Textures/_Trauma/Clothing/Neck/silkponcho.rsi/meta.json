@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "inhand sprites based on https://github.com/DeltaV-Station/Delta-v/tree/7443161ab8f4144655f290e24879afe2ca3c7f71/Resources/Textures/_DV/Clothing/Neck/Misc/cwparctic.rsi, sprites by @bogus_0451 on discord, equipped and icon sprites are taken from tgstation at commit https://github.com/tgstation/tgstation/commit/4f6190e2895e09116663ef282d3ce1d8b35c032e edited by GoidaYAMLWarrior (github)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "equipped-NECK",
+            "directions": 4
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        }
+    ]
+}

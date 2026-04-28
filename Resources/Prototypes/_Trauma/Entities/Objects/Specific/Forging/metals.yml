@@ -37,6 +37,7 @@
   id: BaseMetallicBrass
   components:
   - type: Metallic
+    metal: Brass
     minTemp: 794
     idealTemp: 850
 
@@ -46,6 +47,7 @@
   id: BaseMetallicSteel
   components:
   - type: Metallic
+    metal: Steel
     minTemp: 1218
     idealTemp: 1260
 
@@ -55,6 +57,7 @@
   id: BaseMetallicPlasteel
   components:
   - type: Metallic
+    metal: Plasteel
     minTemp: 1456
     idealTemp: 1483
 
@@ -68,7 +71,7 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 950
+    currentTemperature: 900
 
 - type: entity
   abstract: true
@@ -88,4 +91,4 @@
   - type: Metallic
     workable: true
   - type: Temperature
-    currentTemperature: 1500
+    currentTemperature: 1499

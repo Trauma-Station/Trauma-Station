@@ -1,8 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Weapons;
-using Content.Goobstation.Common.Weapons.MeleeDash;
-using Content.Shared._White.Blink;
-using Content.Shared.Wieldable.Components;
+using Content.Trauma.Common.Weapons;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -45,14 +43,12 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-    private EntityQuery<TransformComponent> _xformQuery;
-
     private const string MeleeLungeKey = "melee-lunge";
 
     public override void Initialize()
     {
         base.Initialize();
-        _xformQuery = GetEntityQuery<TransformComponent>();
+
         SubscribeNetworkEvent<MeleeLungeEvent>(OnMeleeLunge);
         UpdatesOutsidePrediction = true;
     }
@@ -156,32 +152,16 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
                 return;
             }
 
-            // Goobstation start; TODO: put this more in-line with new structure
-            // Blink, WD edit
-            if (TryComp(weaponUid, out BlinkComponent? blink) && blink.IsActive)
-            {
-                var direction = GetDirection();
-                if (direction != Vector2.Zero)
-                    RaisePredictiveEvent(new BlinkEvent(GetNetEntity(weaponUid), direction));
+            // <Trauma>
+            var ev = new PreHeavyAttackEvent(GetDirection());
+            RaiseLocalEvent(weaponUid, ev);
+            if (ev.Handled)
                 return;
-            }
-            // WD edit end
-
-            // Dash
-            if (TryComp(weaponUid, out MeleeDashComponent? dash))
-            {
-                var direction = GetDirection();
-                if (direction != Vector2.Zero)
-                    RaisePredictiveEvent(new MeleeDashEvent(GetNetEntity(weaponUid), direction));
-                return;
-            }
 
             // Helper func
             Vector2 GetDirection()
             {
-                if (!_xformQuery.TryGetComponent(entity, out var userXform))
-                    return Vector2.Zero;
-
+                var userXform = Transform(entity);
                 var targetMap = _transform.ToMapCoordinates(coordinates);
 
                 if (targetMap.MapId != userXform.MapID)
@@ -190,7 +170,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
                 var userPos = TransformSystem.GetWorldPosition(userXform);
                 return targetMap.Position - userPos;
             }
-            // Goobstation end
+            // </Trauma>
 
             ClientHeavyAttack(entity, coordinates, weaponUid, weapon);
             return;
@@ -201,11 +181,16 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             ClientLightAttack(entity, mousePos, coordinates, weaponUid, weapon);
     }
 
-    public override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session) // Goob edit
+    public override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session, out EntityUid source) // Trauma - made public, added source
     {
         var xform = Transform(target);
         var targetCoordinates = xform.Coordinates;
         var targetLocalAngle = xform.LocalRotation;
+
+        // <Trauma>
+        if (RaiseInRangeEvent(user, target, range, targetCoordinates, targetLocalAngle, out var inRange, out source))
+            return inRange;
+        // </Trauma>
 
         return Interaction.InRangeUnobstructed(user, target, targetCoordinates, targetLocalAngle, range, overlapCheck: false);
     }
@@ -223,7 +208,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     private void ClientHeavyAttack(EntityUid user, EntityCoordinates coordinates, EntityUid meleeUid, MeleeWeaponComponent component)
     {
         // Only run on first prediction to avoid the potential raycast entities changing.
-        if (!_xformQuery.TryGetComponent(user, out var userXform) ||
+        if (!TryComp(user, out TransformComponent? userXform) ||
             !Timing.IsFirstTimePredicted)
         {
             return;

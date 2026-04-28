@@ -4,8 +4,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Polymorph;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.SlaughterDemon;
 
@@ -46,7 +44,7 @@ public sealed partial class BloodCrawlComponent : Component
     /// <summary>
     /// The reagents to look out for when searching for puddles
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public List<ProtoId<ReagentPrototype>> Blood = new();
 
     /// <summary>

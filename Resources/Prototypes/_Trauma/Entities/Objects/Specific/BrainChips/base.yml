@@ -22,6 +22,7 @@
     examine: brainchip-detail-examine
   - type: RenamingOrgan
     name: brainchip-rename # they get anonymized once installed so health analyzer etc can't out you
+  - type: InstallableOrgan # sterile!
   - type: Cybernetics
     disableChance: 0.1 # should be a rare funny thing rather than common huge annoyance
     empDamage:

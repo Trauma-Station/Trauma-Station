@@ -74,6 +74,15 @@
     wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
     soundHit:
       collection: MetalThud # Goobstation ^
+  - type: EmitSoundOnPickup
+    sound:
+      collection: LasersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: LasersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: LasersDrop
 
 - type: entity
   id: BaseWeaponCustomCellSmall
@@ -137,7 +146,7 @@
   - type: MagazineVisuals
     magState: mag
     steps: 5
-    zeroVisible: false
+    zeroVisible: true
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
       Steel: 100

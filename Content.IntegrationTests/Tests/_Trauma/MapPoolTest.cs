@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Maps;
 using Content.Shared.Maps;
 using Robust.Shared.EntitySerialization;
@@ -18,14 +19,13 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// Checks that every map in a pool has the required areas in the map prototype.
 /// This means it was mapped at least once, maybe it was removed but that seems rare for important areas.
 /// </summary>
-[TestFixture]
 [Category("MapTests")]
-public sealed class MapPoolTest
+public sealed class MapPoolTest : GameTest
 {
     [Test]
     public async Task RequiredAreasMappedTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.EntMan;
@@ -103,7 +103,5 @@ public sealed class MapPoolTest
                 }
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 }

@@ -2,7 +2,6 @@
 
 using Content.Shared.FixedPoint;
 using Robust.Shared.Map;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Common.Heretic;
 
@@ -41,7 +40,13 @@ public record struct ValidateInstantWorldTargetActionEvent(EntityUid User, Entit
 public readonly record struct TryPerformInstantWorldTargetActionEvent;
 
 [ByRefEvent]
-public record struct ImmuneToPoisonDamageEvent(bool Immune = false);
+public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Volume);
 
 [ByRefEvent]
-public readonly record struct ConsumingFoodEvent(EntityUid Food, FixedPoint2 Volume);
+public record struct BeforeSpawnPullingVirtualItemsEvent(EntityUid Puller, EntityUid Pulled, bool Cancelled = false);
+
+[ByRefEvent]
+public record struct GetGrabMovespeedEvent(float Speed);
+
+[ByRefEvent]
+public record struct CanStandWhileImmobileEvent(bool CanStand = false);

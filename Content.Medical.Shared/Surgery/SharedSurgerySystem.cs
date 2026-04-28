@@ -4,8 +4,6 @@ using System.Linq;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Surgery;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Consciousness;
-using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Surgery.Conditions;
 using Content.Medical.Shared.Surgery.Steps;
 using Content.Medical.Shared.Surgery.Steps.Parts;
@@ -30,8 +28,6 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Surgery;
@@ -39,14 +35,12 @@ namespace Content.Medical.Shared.Surgery;
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
     [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ConsciousnessSystem _consciousness = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PainSystem _pain = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -108,7 +102,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SanitizedComponent, HeldRelayedEvent<SurgerySanitizationEvent>>(OnHeldSanitization);
 
         SubscribeLocalEvent<HandsComponent, SurgerySanitizationEvent>(_hands.RefRelayEvent);
-        SubscribeLocalEvent<HandsComponent, SurgeryPainEvent>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, SurgeryIgnorePreviousStepsEvent>(_hands.RefRelayEvent);
 
         InitializeSteps();

@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Tag;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Forging;
 
@@ -10,17 +8,18 @@ namespace Content.Trauma.Shared.Forging;
 /// Adds/removes tags to the entity based on its workability.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedMetalSystem))]
+[AutoGenerateComponentState]
 public sealed partial class MetallicTagsComponent : Component
 {
     /// <summary>
     /// Tags to add while workable.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<ProtoId<TagPrototype>> Workable = new();
 
     /// <summary>
     /// Tags to remove while unworkable.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<ProtoId<TagPrototype>> Unworkable = new();
 }

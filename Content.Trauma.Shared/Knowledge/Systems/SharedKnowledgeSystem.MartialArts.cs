@@ -16,7 +16,6 @@ using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
@@ -46,7 +45,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(RelayMartialArt);
         SubscribeLocalEvent<KnowledgeHolderComponent, GetMeleeAttackRateEvent>(RelayActiveEvent);
         SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(RelayMartialArt);
-        SubscribeLocalEvent<PerformMartialArtComboEvent>(OnComboActionClicked);
+        SubscribeLocalEvent<MetaDataComponent, PerformMartialArtComboEvent>(OnComboActionClicked);
 
         SubscribeAllEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
     }
@@ -169,7 +168,7 @@ public abstract partial class SharedKnowledgeSystem
     public EntityUid? GetActiveMartialArt(EntityUid target)
         => GetContainer(target)?.Comp.ActiveMartialArt;
 
-    private void OnComboActionClicked(PerformMartialArtComboEvent args)
+    private void OnComboActionClicked(Entity<MetaDataComponent> ent, ref PerformMartialArtComboEvent args)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
@@ -190,7 +189,7 @@ public abstract partial class SharedKnowledgeSystem
         Dirty(martialArt, comboActions);
 
         // Provide feedback
-        _popup.PopupClient(Loc.GetString("martial-arts-queued", ("combo", args.Combo)), uid, uid);
+        _popup.PopupClient($"You prepare to do a {Name(ent, ent.Comp).ToLower()}...", uid, uid);
 
         args.Handled = true; // This starts the cooldown in the UI
     }

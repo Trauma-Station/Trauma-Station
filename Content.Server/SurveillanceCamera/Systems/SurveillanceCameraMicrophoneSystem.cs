@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM <AJCM@tutanota.com>
-// SPDX-FileCopyrightText: 2024 MilenVolf <63782763+MilenVolf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Chat.Systems;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
@@ -40,7 +30,7 @@ public sealed class SurveillanceCameraMicrophoneSystem : EntitySystem
         // This function ensures that chat popups appear on camera views that have connected microphones.
         foreach (var (_, __, camera, xform) in EntityQuery<SurveillanceCameraMicrophoneComponent, ActiveListenerComponent, SurveillanceCameraComponent, TransformComponent>())
         {
-            if (camera.ActiveViewers.Count == 0)
+            if (camera.ActivePvsViewers.Count == 0)
                 continue;
 
             // get range to camera. This way wispers will still appear as obfuscated if they are too far from the camera's microphone
@@ -51,7 +41,7 @@ public sealed class SurveillanceCameraMicrophoneSystem : EntitySystem
             if (range < 0 || range > ev.VoiceRange)
                 continue;
 
-            foreach (var viewer in camera.ActiveViewers)
+            foreach (var viewer in camera.ActivePvsViewers)
             {
                 // if the player has not already received the chat message, send it to them but don't log it to the chat
                 // window. This is simply so that it appears in camera.

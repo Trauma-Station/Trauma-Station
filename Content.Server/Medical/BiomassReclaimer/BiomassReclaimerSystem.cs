@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Shared.Storage;
-using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Numerics;
 using Content.Server.Botany.Components;
@@ -34,8 +33,8 @@ using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.DragDrop;
 
 namespace Content.Server.Medical.BiomassReclaimer
 {
@@ -112,7 +111,6 @@ namespace Content.Server.Medical.BiomassReclaimer
             SubscribeLocalEvent<BiomassReclaimerComponent, ClimbedOnEvent>(OnClimbedOn);
             SubscribeLocalEvent<BiomassReclaimerComponent, PowerChangedEvent>(OnPowerChanged);
             SubscribeLocalEvent<BiomassReclaimerComponent, SuicideByEnvironmentEvent>(OnSuicideByEnvironment);
-            SubscribeLocalEvent<BiomassReclaimerComponent, DragDropTargetEvent>(OnDragDropTarget); // #GoobStation
             SubscribeLocalEvent<BiomassReclaimerComponent, ReclaimerDoAfterEvent>(OnDoAfter);
         }
 
@@ -192,29 +190,6 @@ namespace Content.Server.Medical.BiomassReclaimer
                 BreakOnMove = true,
             });
         }
-
-        // Goob
-        // TODO: move this shit out of here
-        private void OnDragDropTarget(Entity<BiomassReclaimerComponent> reclaimer, ref DragDropTargetEvent args)
-        {   // Safety Checks, If the machine is on safety & if the target is vaild to avoid crashes.
-            if (!CanGib(reclaimer, args.Dragged) || !TryComp<PhysicsComponent>(args.Dragged, out var physics))
-                return;
-            var delay = reclaimer.Comp.BaseInsertionDelay * physics.FixturesMass;
-
-            _doAfterSystem.TryStartDoAfter(new DoAfterArgs(
-                EntityManager,
-                args.User,
-                delay,
-                new ReclaimerDoAfterEvent(),
-                reclaimer,
-                target: reclaimer,
-                used: args.Dragged)
-            {
-                NeedHand = false,
-                BreakOnMove = true,
-            });
-        }
-
         private void OnClimbedOn(Entity<BiomassReclaimerComponent> reclaimer, ref ClimbedOnEvent args)
         {
             if (!CanGib(reclaimer, args.Climber))

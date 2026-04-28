@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Paint;
 using Content.Trauma.Shared.Tools;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 

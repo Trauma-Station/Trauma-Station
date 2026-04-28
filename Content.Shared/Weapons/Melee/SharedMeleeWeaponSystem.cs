@@ -564,7 +564,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         return true;
     }
 
-    public abstract bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session); // Goob edit
+    public abstract bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session, out EntityUid source); // Trauma - made public, added source
 
     // Goob edit
     public virtual void DoLightAttack(EntityUid user, LightAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session) // Goobstation - Edit
@@ -576,13 +576,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         var target = GetEntity(ev.Target);
         var resistanceBypass = GetResistanceBypass(meleeUid, user, component);
 
-        // Goobstation start
+        // <Trauma> - added GetLightAttackRangeEvent and changed InRange
         var rangeEv = new GetLightAttackRangeEvent(target, user, component.Range);
         RaiseLocalEvent(meleeUid, ref rangeEv);
+        var range = rangeEv.Cancel ? component.Range : rangeEv.Range;
+        var source = user;
         // Not in LOS.
-        if (target != null && !InRange(user, target.Value, rangeEv.Cancel ? component.Range : rangeEv.Range, session))
+        if (target != null && !InRange(user, target.Value, range, session, out source))
             return;
-        // Goobstation end
+        // </Trauma>
 
         // For consistency with wide attacks stuff needs damageable.
         if (Deleted(target) ||
@@ -608,7 +610,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), user, meleeUid, damage, null, GetCoordinates(ev.Coordinates)); // Goob edit
             RaiseLocalEvent(meleeUid, missEvent, true); // Goob station - broadcast
             _meleeSound.PlaySwingSound(user, meleeUid, component);
-            DoLungeAnimation(user, weapon, component.Angle, TransformSystem.ToMapCoordinates(ev.Coordinates), rangeEv.Range, component.MissAnimation, component.AnimationRotation, component.FlipAnimation); // Goobstation - Edit
+            DoLungeAnimation(user, weapon, component.Angle, TransformSystem.ToMapCoordinates(ev.Coordinates), range, component.MissAnimation, component.AnimationRotation, component.FlipAnimation, source); // Goobstation - Edit
             return;
         }
 
@@ -633,7 +635,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             target.Value
         };
 
-        DoLungeAnimation(user, weapon, component.Angle, TransformSystem.ToMapCoordinates(target.Value.ToCoordinates()), rangeEv.Range, component.Animation, component.AnimationRotation, component.FlipAnimation); // Goobstation - Edit
+        DoLungeAnimation(user, weapon, component.Angle, TransformSystem.ToMapCoordinates(target.Value.ToCoordinates()), rangeEv.Range, component.Animation, component.AnimationRotation, component.FlipAnimation, source); // Goobstation - Edit
         // We skip weapon -> target interaction, as forensics system applies DNA on hit
         Interaction.DoContactInteraction(user, weapon);
 
@@ -687,7 +689,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
         _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
 
-        if (damageResult.GetTotal() > FixedPoint2.Zero)
+        if (damageResult.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(target.Value))
         {
             DoDamageEffect(targets, user, targetXform);
         }
@@ -746,17 +748,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // Validate client
         for (var i = entities.Count - 1; i >= 0; i--)
         {
-            // Goob Fix Start
             var entity = entities[i];
 
-            if (!entity.IsValid() || TerminatingOrDeleted(entity))
+            if (TerminatingOrDeleted(entity))
             {
                 entities.RemoveAt(i);
                 continue;
             }
-            // Goob Fix End
 
-            if (ArcRaySuccessful(entity,
+            if (!ArcRaySuccessful(entity,
                     userPos,
                     direction.ToWorldAngle(),
                     component.Angle,
@@ -765,11 +765,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                     user,
                     session))
             {
-                continue;
+                // Bad input
+                entities.RemoveAt(i);
             }
-
-            // Bad input
-            entities.RemoveAt(i);
         }
 
         var targets = new List<EntityUid>();
@@ -879,6 +877,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                         $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):subject} using {ToPrettyString(meleeUid):tool} and dealt {damageResult.GetTotal():damage} damage");
                 }
             }
+
+            if (TerminatingOrDeleted(entity))
+                targets.RemoveAt(i);
         }
 
         if (entities.Count != 0)
@@ -887,7 +888,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             _meleeSound.PlayHitSound(target, user, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride, component);
         }
 
-        if (appliedDamage.GetTotal() > FixedPoint2.Zero)
+        if (appliedDamage.GetTotal() > FixedPoint2.Zero && targets.Count > 0)
         {
             DoDamageEffect(targets, user, Transform(targets[0]));
         }
@@ -1034,7 +1035,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (!TryComp<CombatModeComponent>(user, out var combatMode))
             return false;
 
-        if (!InRange(user, target, component.Range, session))
+        if (!InRange(user, target, component.Range, session, out _)) // Trauma - out _
             return false;
 
         // Goobstation start
@@ -1065,7 +1066,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             }
         }
 
-        if (!InRange(user, target, component.Range, session))
+        if (!InRange(user, target, component.Range, session, out _)) // Trauma - out _
         {
             return false;
         }
@@ -1135,10 +1136,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
     }
 
-    private void DoLungeAnimation(EntityUid user, EntityUid weapon, Angle angle, MapCoordinates coordinates, float length, string? animation, Angle spriteRotation, bool flipAnimation)
+    private void DoLungeAnimation(EntityUid user, EntityUid weapon, Angle angle, MapCoordinates coordinates, float length, string? animation, Angle spriteRotation, bool flipAnimation, EntityUid? source = null) // Trauma - added source
     {
         // TODO: Assert that offset eyes are still okay.
-        if (!TryComp(user, out TransformComponent? userXform))
+        if (!TryComp(source ?? user, out TransformComponent? userXform)) // Trauma - source
             return;
 
         var invMatrix = TransformSystem.GetInvWorldMatrix(userXform);
@@ -1156,10 +1157,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (localPos.Length() > visualLength)
             localPos = localPos.Normalized() * visualLength;
 
-        DoLunge(user, weapon, angle, localPos, animation, spriteRotation, flipAnimation);
+        DoLunge(user, weapon, angle, localPos, animation, spriteRotation, flipAnimation, source: source);
     }
 
-    public abstract void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, Angle spriteRotation, bool flipAnimation, bool predicted = true);
+    public abstract void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, Angle spriteRotation, bool flipAnimation, bool predicted = true, EntityUid? source = null); // Trauma - added source
 
     /// <summary>
     /// Used to update the MeleeWeapon component on item toggle.

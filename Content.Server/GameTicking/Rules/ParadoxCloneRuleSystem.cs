@@ -1,9 +1,6 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-// SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared.Whitelist;
+// </Trauma>
 using System.Linq;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
@@ -15,19 +12,23 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Gibbing.Components;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Mind;
-using Content.Shared.Whitelist;
+using Content.Shared.Objectives.Systems;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
 
 namespace Content.Server.GameTicking.Rules;
 
 public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComponent>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    // <Trauma>
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    // </Trauma>
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly CloningSystem _cloning = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SuitSensorSystem _sensor = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Goobstation
+    [Dependency] private readonly TargetSystem _target = default!;
 
     public override void Initialize()
     {
@@ -42,7 +43,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
         base.Started(uid, component, gameRule, args);
 
         // check if we got enough potential cloning targets, otherwise cancel the gamerule so that the ghost role does not show up
-        var allHumans = _mind.GetAliveHumans();
+        var allHumans = _target.GetAliveHumans();
         allHumans.RemoveWhere(human => _whitelist.IsWhitelistPass(component.TargetBlacklist, human)); // Goobstation
 
         if (allHumans.Count == 0)
@@ -70,7 +71,7 @@ public sealed class ParadoxCloneRuleSystem : GameRuleSystem<ParadoxCloneRuleComp
         else
         {
             // get possible targets
-            var allAliveHumanoids = _mind.GetAliveHumans();
+            var allAliveHumanoids = _target.GetAliveHumans();
             allAliveHumanoids.RemoveWhere(human => _whitelist.IsWhitelistPass(ent.Comp.TargetBlacklist, human)); // Goobstation
 
             // we already checked when starting the gamerule, but someone might have died since then.

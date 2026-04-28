@@ -7,7 +7,6 @@ using Content.Shared.Chemistry.Events;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Standing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Medical.Hypoport;
 

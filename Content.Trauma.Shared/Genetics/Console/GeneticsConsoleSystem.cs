@@ -12,10 +12,7 @@ using Content.Shared.Power.EntitySystems;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Trauma.Shared.Genetics.Tools;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Text;
 
@@ -115,7 +112,9 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         ent.Comp.NextScramble = now + ent.Comp.ScrambleCooldown;
         DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextScramble));
 
-        _mutation.Scramble(mutatable, user: args.Actor, predicted: true);
+        // reset dormant but unactivated mutations and reroll them
+        _mutation.ClearUnusedDormant(mutatable);
+        _mutation.Scramble(mutatable);
         UpdateUI(ent.Owner);
     }
 

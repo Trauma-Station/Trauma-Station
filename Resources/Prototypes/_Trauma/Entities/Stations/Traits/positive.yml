@@ -1,0 +1,74 @@
+- type: stationTrait
+  id: BountifulBounties
+  group: Positive
+  name: "Bountiful bounties"
+  report: "It seems collectors in this system are extra keen to on bounties, and will pay more to see their completion."
+  effects:
+  - !type:AddComponents
+    components:
+    - type: BountyModifier
+      modifier: 1.2
+
+- type: stationTrait
+  id: FilledMaint
+  group: Positive
+  name: "Filled up maintenance"
+  report: "Our workers accidentally forgot more of their personal belongings in the maintenace areas."
+  conflicts: [ EmptyMaint ]
+  startEffects: # has to run before the map inits so it can change the spawners
+  - !type:StationQueryEffects
+    compName: MaintsClosetSpawner
+    includePaused: true
+    effects:
+    - !type:AddComponents
+      probability: 0.5 # 50% chance of doubling the loot -> 1.5x loot
+      components:
+      - type: RandomSpawner
+        offset: 0
+        prototypes:
+        - ClosetMaintenanceFilledMore # just overriding this
+        rarePrototypes:
+        - LockerMimic
+        rareChance: 0.005
+
+- type: stationTrait
+  id: FreeScarves
+  group: Positive
+  name: "Free scarves"
+  report: "The station is definitely not under attack by neck grappling aliens masquerading as wool. Definitely not."
+  effects:
+  - !type:StartGameRule
+    rule: FreeScarvesRule
+
+- type: stationTrait
+  id: GalacticGrant
+  group: Positive
+  name: "Galactic grant"
+  report: "Your station has been selected for a special grant. Some extra funds has been made available to your cargo department."
+  effects:
+  - !type:StationModifyBank
+    account: Cargo
+    min: 2000
+    max: 5000
+
+- type: stationTrait
+  id: LuckyWinner
+  group: Positive
+  chance: 0.2
+  name: "Lucky winner"
+  report: "Your station has won the grand prize of the annual station charity event. Free snacks will be delivered to the bar every now and then."
+  effects:
+  - !type:StartGameRule
+    rule: LuckyWinnerRule
+
+- type: stationTrait
+  id: StrongSupplyLines
+  group: Positive
+  name: "Strong supply lines"
+  report: "Prices are low in this system, BUY BUY BUY!"
+  conflicts: [ DistantSupplyLines ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: CargoPriceModifier
+      modifier: 0.8

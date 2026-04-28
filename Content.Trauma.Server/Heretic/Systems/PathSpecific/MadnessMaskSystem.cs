@@ -11,7 +11,6 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Jittering;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Temperature;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 

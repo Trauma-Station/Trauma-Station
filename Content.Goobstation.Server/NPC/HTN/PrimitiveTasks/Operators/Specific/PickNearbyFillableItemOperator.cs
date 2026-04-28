@@ -14,7 +14,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Materials;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 

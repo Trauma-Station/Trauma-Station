@@ -41,12 +41,14 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 9
+        maxVol: 10
         reagents:
         - ReagentId: Napalm
           Quantity: 5
         - ReagentId: Vitamin
           Quantity: 4
+        - ReagentId: ChlorineTrifluoride
+          Quantity: 1
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/lemonade.rsi
   - type: Item
@@ -68,3 +70,205 @@
     butcheringType: Knife
     spawned:
     - id: LemonGrenade
+
+- type: entity
+  parent: FoodProduceBase
+  id: FoodCoconut
+  name: coconut
+  description: Should probably split it before eating...
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 20 # PVZ parity
+  - type: StaminaDamageOnCollide
+    damage: 15 # PLANTS VERSUS ZOMBIES PARITY
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
+  - type: Item
+    size: Normal
+    heldPrefix: produce
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 25
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:SpillBehavior
+        solution: food
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+            spawn:
+              FoodCoconutHalf:
+                min: 1
+                max: 2
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40 # More than watermelon bcs rare as fuck
+        reagents:
+        - ReagentId: CoconutWater
+          Quantity: 20
+        - ReagentId: Vitamin
+          Quantity: 10
+        - ReagentId: Nutriment
+          Quantity: 10
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: CoconutWater
+        Quantity: 30
+  - type: CartridgeAmmo
+    proto: BulletCoconut # lol
+    deleteOnSpawn: true
+  - type: Produce
+    seedId: CoconutPlant
+  - type: Tag
+    tags:
+    - Fruit
+    - CannonBall # lmao
+  - type: SliceableFood
+    count: 2
+    slice: FoodCoconutHalf
+  - type: Edible
+    trash:
+    - TrashCoconutShell
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: TrashCoconutShell
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 100 # lol
+
+- type: entity
+  parent: ProduceSliceBase
+  id: FoodCoconutHalf
+  name: coconut half
+  description: The perfect defense... if you're an octopus.
+  components:
+  - type: Item
+    size: Small
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: CoconutWater
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 5
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: CoconutWater
+        Quantity: 15
+  - type: Produce
+    seedId: CoconutPlant
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
+    state: half
+  - type: Edible
+    trash:
+    - TrashCoconutShell
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: TrashCoconutShell
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 50 # lol
+  - type: Tag
+    tags:
+    - Fruit
+    - Slice
+
+- type: entity
+  parent: DrinkBaseCup
+  id: TrashCoconutShell
+  name: coconut shell
+  description: The shell of a coconut, kinda useless.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
+    state: cup
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 50 # lol
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 15 # because i cant get the fill sprites to work
+
+- type: entity
+  parent: FoodProduceBase
+  id: FoodCherryBomb
+  name: cherry
+  description: Juicy red cherry with a bomb inside.
+  suffix: bomb
+  components:
+  - type: FlavorProfile
+    flavors:
+      - cherry
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Vitamin
+          Quantity: 3
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
+  - type: Produce
+    seedId: CherryBomb
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceCherry
+        Quantity: 5
+  - type: Tag
+    tags:
+    - Fruit
+  - type: FoodSequenceElement
+    entries:
+      Taco: Cherry
+      Burger: Cherry
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpillBehavior
+        solution: food
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/snap.ogg
+      - !type:ExplodeBehavior
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 3
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 0.01
+    intensitySlope: 1
+    totalIntensity: 0.01

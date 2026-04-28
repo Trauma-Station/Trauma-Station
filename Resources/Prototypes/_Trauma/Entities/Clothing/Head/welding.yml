@@ -1,0 +1,6 @@
+- type: entity
+  abstract: true
+  parent: WeldingMaskBaseNoBlind
+  id: WeldingMaskBase
+  components:
+  - type: Blindfold # TODO: replace with proper vision masks stuff

@@ -60,22 +60,6 @@ public sealed class SurgeryCVars : CVars
 
     #endregion
 
-    #region Trauma CVars
-
-    /// <summary>
-    /// The multiplier applied to the base paralyze time upon an infliction of organ trauma.
-    /// </summary>
-    public static readonly CVarDef<float> OrganTraumaSlowdownTimeMultiplier =
-        CVarDef.Create("traumas.organ_slowdown_time", 2f, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    /// How much damage needs to happen in a single attack to destroy a part?
-    /// </summary>
-    public static readonly CVarDef<float> DestroySeverityMultiplier =
-        CVarDef.Create("traumas.destroy_severity_multiplier", 4f, CVar.SERVER | CVar.REPLICATED);
-
-    #endregion
-
     #region Bleeding CVars
 
     /// <summary>
@@ -89,16 +73,6 @@ public sealed class SurgeryCVars : CVars
     /// </summary>
     public static readonly CVarDef<float> BleedsScalingTime =
         CVarDef.Create("bleeds.bleeding_scaling_time", 60f, CVar.SERVER | CVar.REPLICATED);
-
-    #endregion
-
-    #region Pain CVars
-
-    public static readonly CVarDef<bool> PainScreams =
-        CVarDef.Create("pain.screams", true, CVar.SERVER | CVar.REPLICATED);
-
-    public static readonly CVarDef<float> PainScreamChance =
-        CVarDef.Create("pain.scream_chance", 0.20f, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
 }

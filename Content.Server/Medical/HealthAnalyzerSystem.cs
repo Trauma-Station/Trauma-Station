@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Content.Shared.FixedPoint;
 // </Trauma>
 using Content.Server.Medical.Components;
@@ -293,8 +293,8 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem // Trauma - made
         switch (mode)
         {
             case HealthAnalyzerMode.Body:
-                FetchBodyData(entity, out var traumas, out var pain, out state.Bleeding);
-                state.ScanState = new HealthAnalyzerBodyState(traumas, pain);
+                FetchBodyData(entity, out var traumas, out state.Bleeding);
+                state.ScanState = new HealthAnalyzerBodyState(traumas);
                 break;
             case HealthAnalyzerMode.Organs:
                 state.Bleeding = FetchBleedData(entity);

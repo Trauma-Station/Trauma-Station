@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Wizard.Projectiles;
+using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
@@ -21,7 +21,6 @@ using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 

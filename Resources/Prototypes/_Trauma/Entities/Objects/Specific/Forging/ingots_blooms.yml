@@ -42,20 +42,14 @@
 
 - type: entity
   abstract: true
-  parent: [ BaseForgeItem, MaterialBase ]
+  parent: BaseForgeItem
   id: BaseMetalIngot
   suffix: Hot
   components:
-  - type: Material
-  - type: Stack
-    count: 1
-  - type: Tag
-    tags: [ IngotWorkable ]
-  - type: MetallicTags
-    workable: [ IngotWorkable ] # added while in the ideal temperature range
   - type: MetallicPopups
     heatedPopup: ingot-heated-popup-text
     cooledPopup: ingot-cooled-popup-text
+  - type: MetalIngot
 
 # Brass - 850K +- 56K range of error
 
@@ -135,9 +129,7 @@
       shader: Emissive
   - type: PhysicalComposition
     materialComposition:
-      BrassIngot: 100
-  - type: Stack
-    stackType: BrassIngot
+      Brass: 250
 
 # Steel - 1260K +- 42K range of error
 
@@ -219,13 +211,11 @@
       shader: Emissive
   - type: PhysicalComposition
     materialComposition:
-      SteelIngot: 100
-  - type: Stack
-    stackType: SteelIngot
+      Steel: 250
   - type: MetallicTags
-    workable: [ IngotWorkable, IngotWorkableSteel ]
+    workable: [ IngotWorkableSteel ] # needed to craft an anvil
   - type: Tag
-    tags: [ IngotWorkable, IngotWorkableSteel ]
+    tags: [ IngotWorkableSteel ]
 
 # Plasteel - 1483K +- 27K
 
@@ -309,6 +299,4 @@
       shader: Emissive
   - type: PhysicalComposition
     materialComposition:
-      PlasteelIngot: 100
-  - type: Stack
-    stackType: PlasteelIngot
+      Plasteel: 250

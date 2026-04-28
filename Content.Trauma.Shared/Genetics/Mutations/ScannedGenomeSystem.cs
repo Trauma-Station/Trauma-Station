@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Polymorph;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Text;
@@ -43,7 +42,9 @@ public sealed class ScannedGenomeSystem : EntitySystem
         if (ent.Owner != args.Target.Owner || args.Automatic)
             return;
 
-        RemoveSequence(ent, args.Id);
+        // don't remove dormant mutations
+        if (_mutation.IsForeign(args.Target.Comp, args.Id))
+            RemoveSequence(ent, args.Id);
     }
 
     #region Public API

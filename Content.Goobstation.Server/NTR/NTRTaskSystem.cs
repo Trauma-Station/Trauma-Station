@@ -20,7 +20,6 @@ using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -183,7 +182,7 @@ public sealed class NtrTaskSystem : EntitySystem
     {
         if (!TryComp<NtrTaskDatabaseComponent>(station, out var db)
             || !TryComp<NtrBankAccountComponent>(station, out var account)
-            || !_proto.TryIndex(taskData.Task, out NtrTaskPrototype? taskProto))
+            || !_proto.Resolve(taskData.Task, out NtrTaskPrototype? taskProto))
             return;
 
         var amount = success ? taskProto.Reward : -taskProto.Penalty;

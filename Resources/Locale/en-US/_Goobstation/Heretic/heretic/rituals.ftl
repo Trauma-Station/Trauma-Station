@@ -68,6 +68,7 @@ heretic-ritual-fail-cannot-ascend = You cannot ascend.
 heretic-ritual-fail-cannot-ascend-objectives = You must complete your objectives in order to ascend.
 heretic-ritual-fail-lookup-empty = There's nothing on the rune.
 heretic-ritual-fail-ghoulify = There is no corpse to ghoulify.
+heretic-ritual-fail-ghoul-limit = At ghoul limit!
 heretic-ritual-fail-no-id-card = Ritual requires ID card.
 
 ## side quests

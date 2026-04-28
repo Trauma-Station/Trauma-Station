@@ -301,7 +301,7 @@
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 20 # Goob edit
+    damage: 22 # Trauma - was 33
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -1193,7 +1193,7 @@
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 12 # Goob edit
+    damage: 13 # Trauma - was 15
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -1253,6 +1253,8 @@
     damage:
       types:
         Heat: 20 #goob, 28 > 20
+  - type: BlurOnCollide # Trauma
+    blurTime: 3
 
 - type: entity
   name : disabler bolt
@@ -1343,8 +1345,9 @@
         hard: false
         mask:
         - Opaque
-        - Impassable
-        - BulletImpassable
+        # Trauma
+        # - Impassable
+        # - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
   - type: Projectile
@@ -1352,6 +1355,8 @@
     damage:
       types:
         Heat: 9 # Trauma
+  - type: BlurOnCollide # Trauma
+    blurTime: 3
 
 - type: entity
   name: wide laser barrage

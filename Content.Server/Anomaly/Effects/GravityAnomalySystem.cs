@@ -1,15 +1,9 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Physics.Components;
+using Content.Server.Radiation.Systems;
 using Content.Server.Singularity.Components;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Anomaly.Effects;
 using Content.Shared.Anomaly.Effects.Components;
-using Content.Shared.Radiation.Components;
 
 namespace Content.Server.Anomaly.Effects;
 
@@ -18,6 +12,8 @@ namespace Content.Server.Anomaly.Effects;
 /// </summary>
 public sealed class GravityAnomalySystem : SharedGravityAnomalySystem
 {
+    [Dependency] private readonly RadiationSystem _radiation = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -28,8 +24,7 @@ public sealed class GravityAnomalySystem : SharedGravityAnomalySystem
 
     private void OnSeverityChanged(Entity<GravityAnomalyComponent> anomaly, ref AnomalySeverityChangedEvent args)
     {
-        if (TryComp<RadiationSourceComponent>(anomaly, out var radSource))
-            radSource.Intensity = anomaly.Comp.MaxRadiationIntensity * args.Severity;
+        _radiation.SetIntensity(anomaly.Owner, anomaly.Comp.MaxRadiationIntensity * args.Severity);
 
         if (TryComp<GravityWellComponent>(anomaly, out var gravityWell))
         {

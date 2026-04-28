@@ -2,7 +2,6 @@
 
 using Content.Shared.Roles;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Antag;

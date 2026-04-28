@@ -16,3 +16,23 @@
     - state: passenger
     - sprite: Clothing/Mask/gas.rsi
       state: icon
+
+- type: entity
+  parent: BaseAntagSpawner
+  id: GhostRoleSpawnerMorph
+  name: morph ghost role spawner
+  components:
+  - type: GhostRole
+    name: ghost-role-information-morph-name
+    description: ghost-role-information-morph-description
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleMorph
+    raffle:
+      settings: default
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _Trauma/Mobs/morph.rsi
+      state: morph

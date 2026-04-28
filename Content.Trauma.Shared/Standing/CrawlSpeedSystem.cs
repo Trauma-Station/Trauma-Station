@@ -4,7 +4,6 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Item;
 using Content.Shared.Stunnable;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Standing;
 

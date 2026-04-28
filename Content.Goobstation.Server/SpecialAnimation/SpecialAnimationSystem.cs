@@ -5,7 +5,6 @@ using Content.Shared.Interaction.Events;
 using JetBrains.Annotations;
 using Robust.Server.GameStates;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.SpecialAnimation;

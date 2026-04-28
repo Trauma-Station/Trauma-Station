@@ -72,7 +72,7 @@
   - type: ItemTogglePointLight
   - type: PointLight
     enabled: false
-    radius: 3
+    radius: 5 # Trauma - was 3
     energy: 1
     mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
@@ -199,7 +199,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
   - type: GroupExamine
   - type: IngestionBlocker
   - type: Tag

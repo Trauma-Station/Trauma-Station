@@ -13,8 +13,6 @@
     partnerWhitelist: !type:EntityWhitelist
   - type: ReproductivePartner
   - type: Temperature
-  - type: Consciousness
-    threshold: 95
   - type: Pacified
   - type: Xenomorph
     caste: Drone
@@ -31,8 +29,6 @@
   - type: HereticMinion
   - type: WeakToHoly
   - type: GhostTakeoverAvailable
-  - type: VoicelessDead
   - type: HereticBladeUserBonusDamage
-  - type: GhoulDeconvert
   - type: HolyIgniteOnCollide
   - type: HolyFlammable

@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Shared.StationAi;
 using Content.Trauma.Common.Silicons.Borgs;
 // </Trauma>
 using Content.Shared.Access.Systems;
@@ -275,6 +276,16 @@ public abstract partial class SharedBorgSystem : EntitySystem
                 $"{args.User} installed module {used} into borg {chassis.Owner}");
             args.Handled = true;
         }
+
+        // <Trauma> - Corvax-Next-AiRemoteControl-Start
+        var ev = new BorgChassisInteractAfterEvent(chassis.Owner, args.User);
+        RaiseLocalEvent(used, ref ev);
+        if (ev.Handled)
+        {
+            args.Handled = true;
+            return;
+        }
+        // </Trauma> - Corvax-Next-AiRemoteControl-End
     }
 
     // Make the borg slower without power.

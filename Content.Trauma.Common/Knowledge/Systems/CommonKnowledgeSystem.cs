@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.MartialArts;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Common.Knowledge.Systems;
 

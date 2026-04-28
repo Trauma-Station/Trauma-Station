@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Shared.EntityConditions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
@@ -172,6 +171,15 @@ public sealed partial class TryMakeRustWallCondition : EntityConditionBase<TryMa
     [DataField]
     public int? RustStrengthOverride;
 
+    public override string EntityConditionGuidebookText(IPrototypeManager prototype)
+    {
+        return string.Empty;
+    }
+}
+
+public sealed partial class FleshGhoulLimitCondition : EntityConditionBase<FleshGhoulLimitCondition>,
+    IHereticRitualEntry
+{
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
     {
         return string.Empty;

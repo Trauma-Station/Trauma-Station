@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._White.Xenomorphs;
 using Content.Shared.Body;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Trauma.Shared.Xenomorphs;
 
 namespace Content.Trauma.Shared.Xenomorph;
 

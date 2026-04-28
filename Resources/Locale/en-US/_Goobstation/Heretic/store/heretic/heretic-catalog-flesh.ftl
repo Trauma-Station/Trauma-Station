@@ -1,27 +1,3 @@
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Visne <vincefvanwijk@gmail.com>
-# SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 RemberBL <timmermanrembrandt@gmail.com>
-# SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 knowledge-path-flesh-s1-name = Principle of Hunger
 knowledge-path-flesh-s1-desc =
     Hundreds of us starved, but not me... I found strength in my greed.
@@ -39,6 +15,9 @@ knowledge-path-flesh-s2-desc =
     All ghouls get their own Bloody Blade that cannot be shattered and disappears on ghoul death.
     You are now able to consume raw flesh. Eating meat, organs and body parts will empower and heal you temporarily, the effect scales with your path stage.
     You also become immune to damage from poisons.
+    You can only create three at a time.
+    Risen ghouls become normal on death but cann be risen again using your grasp.
+    You can recall any creature summoned by you by alt-clicking ritual rune using your mansus grasp.
 
 knowledge-path-flesh-s3-name = Mark of Flesh
 knowledge-path-flesh-s3-desc =
@@ -53,12 +32,9 @@ knowledge-path-flesh-s4-desc =
     I found notes of a dark ritual, unfinished... yet still, I pushed forward.
 
     Allows you to transmute a corpse and a muzzle to create a Voiceless Dead.
-    Voiceless Dead are mute ghouls, which have 150 health and a Bloody Blade.
+    Voiceless Dead are mute ghouls, which have 100 health and a Bloody Blade.
     Voiceless Dead are better than regular ones at using Bloody Blades.
-    Voiceless Dead body parts cannot be severed and its organs cannot be removed.
     You can only create two at a time.
-    Attempting to perform a ritual again after performing it twice will teleport already existing voiceless dead on the rune.
-    Voiceless Dead can be brought back to life by performing this ritual on it and supplying the muzzle.
 
 knowledge-path-flesh-s5-name = Knitting of Flesh
 knowledge-path-flesh-s5-desc =
@@ -84,6 +60,7 @@ knowledge-path-flesh-s7-desc =
     I finally began to understand. And then, blood rained from the heavens.
 
     Your Bloody Blade now causes enemies to bleed heavily on attack.
+    Additionally, you can summon two more Ghouls and one more Voiceless Dead.
 
 knowledge-path-flesh-s8-name = Lonely Ritual
 knowledge-path-flesh-s8-desc =
@@ -96,8 +73,7 @@ knowledge-path-flesh-s8-desc =
 knowledge-path-flesh-s9-name = Priest’s Final Hymn
 knowledge-path-flesh-s9-desc =
     The ascension ritual of the Path of Flesh. Bring 4 corpses to a transmutation rune to complete the ritual.
-    When completed, you will become even stronger from consuming flesh.
-    Additionally, upon taking damage, your body will split into flesh mimic. They will be given a Bloody Blade.
-    You can only sustain 10 flesh mimics at once, taking even more damage will instead heal existing mimics.
-    Your Knit Flesh spell can now heal your minions in an area around you when using it in hand, at an increased cooldown.
-    You will also become immune to extreme temperatures and pressure.
+    When completed, you gain the ability to shed your human form and become the Lord of the Night, a supremely powerful creature.
+    Just the act of transforming causes nearby heathens great fear and trauma.
+    While in the Lord of the Night form, you can consume arms to heal and regain segments.
+    Additionally, you can summon six more Ghouls and four more Voiceless Dead.

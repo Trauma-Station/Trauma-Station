@@ -2,9 +2,8 @@
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Flammability;
 using Content.Medical.Common.Targeting;
-using Content.Server._Goobstation.Wizard.Systems;
-using Content.Shared._Goobstation.Wizard.Spellblade;
 using Content.Shared.Body;
+using Content.Trauma.Common.Wizard;
 using Robust.Shared.Configuration;
 // </Trauma>
 using Content.Server.Administration.Logs;
@@ -45,7 +44,7 @@ namespace Content.Server.Atmos.EntitySystems
     {
         // <Trauma>
         [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly SpellbladeSystem _spellblade = default!;
+        [Dependency] private readonly CommonSpellbladeSystem _spellblade = default!;
         [Dependency] private readonly BodySystem _body = default!;
         // </Trauma>
         [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
@@ -524,7 +523,7 @@ namespace Content.Server.Atmos.EntitySystems
                     multiplier = Math.Clamp(ev.Multiplier + flammable.FireProtectionPenetration, 0f, 1f); // Goob
                     multiplier *= _body.GetVitalBodyPartRatio(uid); // Goob
 
-                    if (multiplier > 0f && !_spellblade.IsHoldingItemWithComponent<FireSpellbladeEnchantmentComponent>(uid)) // Goob edit
+                    if (multiplier > 0f && !_spellblade.IsHoldingItemWithFireSpellbladeEnchantmentComponent(uid)) // Goob edit
                         _damageableSystem.TryChangeDamage(uid, flammable.Damage * flammable.FireStacks * multiplier, interruptsDoAfters: false, targetPart: TargetBodyPart.All, partMultiplier: 2f); // Lavaland: Nerf fire delimbing
 
                     AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 15f : 1f), flammable, flammable.OnFire);

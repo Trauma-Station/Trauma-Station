@@ -1,11 +1,6 @@
 // <Trauma>
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Server._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Events;
-using Content.Shared.Blocking;
 // </Trauma>
 using Content.Shared.NPC.Prototypes;
 using Content.Server.Actions;
@@ -52,7 +47,6 @@ namespace Content.Server.Zombies
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedRoleSystem _role = default!;
-        [Dependency] private readonly LanguageSystem _language = default!; // Goob
 
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
 
@@ -88,10 +82,6 @@ namespace Content.Server.Zombies
             SubscribeLocalEvent<IncurableZombieComponent, MapInitEvent>(OnPendingMapInit);
 
             SubscribeLocalEvent<ZombifyOnDeathComponent, MobStateChangedEvent>(OnDamageChanged);
-
-            // Goob Edit - Prevent Zombies Speaking/Understanding Languages
-            SubscribeLocalEvent<ZombieComponent, DetermineEntityLanguagesEvent>(OnLanguageApply);
-            SubscribeLocalEvent<ZombieComponent, ComponentShutdown>(OnShutdown);
         }
 
         private void OnBeforeRemoveAnomalyOnDeath(Entity<PendingZombieComponent> ent, ref BeforeRemoveAnomalyOnDeathEvent args)
@@ -104,7 +94,7 @@ namespace Content.Server.Zombies
         private void OnPendingMapInit(EntityUid uid, IncurableZombieComponent component, MapInitEvent args)
         {
             _actions.AddAction(uid, ref component.Action, component.ZombifySelfActionPrototype);
-            _faction.AddFaction(uid, Faction);
+            _faction.AddFaction(uid, HasComp<InitialInfectedComponent>(uid) ? IIFaction : Faction); // Trauma - separate faction for II
 
             if (HasComp<ZombieComponent>(uid) || HasComp<ZombieImmuneComponent>(uid))
                 return;
@@ -152,7 +142,7 @@ namespace Content.Server.Zombies
                     : 1f;
 
                 _damageable.ChangeDamage((uid, damage), comp.Damage * multiplier, true, false,
-                    targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed
+                    targetPart: TargetBodyPart.Vital, splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed
             }
 
             // Heal the zombified
@@ -193,28 +183,6 @@ namespace Content.Server.Zombies
             args.Unrevivable = true;
         }
 
-        private void OnStartup(EntityUid uid, ZombieComponent component, ComponentStartup args)
-        {
-            if (component.EmoteSoundsId == null
-                || TerminatingOrDeleted(uid)) // Goob Change
-                return;
-
-            // <Goob>
-            var comp = EnsureComp<LanguageSpeakerComponent>(uid); // Ensure they can speak language before adding language.
-            var spoken = comp.Understands;
-            var understood = comp.Understands;
-            spoken.Clear();
-            understood.Clear();
-            if (!string.IsNullOrEmpty(component.ForcedLanguage)) // Should never be false, but security either way.
-            {
-                spoken.Add(component.ForcedLanguage);
-                understood.Add(component.ForcedLanguage);
-            }
-            _language.EnsureValidLanguage((uid, comp));
-            _language.UpdateEntityLanguages((uid, comp));
-            // </Goob>
-        }
-
         private void OnEmote(EntityUid uid, ZombieComponent component, ref EmoteEvent args)
         {
             // always play zombie emote sounds and ignore others
@@ -246,11 +214,6 @@ namespace Content.Server.Zombies
                 // Stop random groaning
                 _autoEmote.RemoveEmote(uid, "ZombieGroan");
             }
-        }
-
-        private bool IsUserBlocking(BlockingUserComponent? component) // Goobstation
-        {
-            return (TryComp<BlockingComponent>(component?.BlockingItem, out var blockComp) && blockComp.IsBlocking);
         }
 
         private float GetZombieInfectionChance(EntityUid uid, ZombieComponent zombieComponent)
@@ -293,8 +256,10 @@ namespace Content.Server.Zombies
                 if (!TryComp<MobStateComponent>(uid, out var mobState))
                     continue;
 
-                if (TryComp<BlockingUserComponent>(entity, out var blockingUser) && IsUserBlocking(blockingUser)) // Goobstation edit - prevents infection if user is actively blocking
-                    return;
+                // <Trauma> - prevents infection if user is actively blocking
+                if (IsUserBlocking(uid))
+                    continue;
+                // </Trauma>
 
                 if (HasComp<ZombieComponent>(uid) || HasComp<IncurableZombieComponent>(uid))
                 {
@@ -308,7 +273,7 @@ namespace Content.Server.Zombies
                     _damageable.TryChangeDamage(args.User, entity.Comp.HealingOnBite, true, false);
 
                     // If we cannot infect the living target, the zed will just heal itself.
-                    if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread || _random.Prob(GetZombieInfectionChance(uid, entity.Comp)))
+                    if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread || !_random.Prob(GetZombieInfectionChance(uid, entity.Comp)))
                         continue;
 
                     EnsureComp<PendingZombieComponent>(uid);
@@ -364,37 +329,7 @@ namespace Content.Server.Zombies
         // Remove the role when getting cloned, getting gibbed and borged, or leaving the body via any other method.
         private void OnMindRemoved(Entity<ZombieComponent> ent, ref MindRemovedMessage args)
         {
-            _role.MindRemoveRole<ZombieRoleComponent>((args.Mind.Owner, args.Mind.Comp));
+            _role.MindRemoveRole<ZombieRoleComponent>((args.Mind.Owner,  args.Mind.Comp));
         }
-
-        #region Goob Language Changes
-
-        /// <summary>
-        ///     This forces the languages to reset and apply only the current language for the entity based on Zombie Component.
-        /// </summary>
-        private void OnLanguageApply(Entity<ZombieComponent> ent, ref DetermineEntityLanguagesEvent args)
-        {
-            if (ent.Comp.LifeStage is ComponentLifeStage.Removing
-                or ComponentLifeStage.Stopping
-                or ComponentLifeStage.Stopped)
-                return;
-
-            // Clear the languages and then apply the forced language.
-            args.SpokenLanguages.Clear();
-            args.UnderstoodLanguages.Clear();
-            args.SpokenLanguages.Add(ent.Comp.ForcedLanguage);
-            args.UnderstoodLanguages.Add(ent.Comp.ForcedLanguage);
-        }
-
-        // When comp is removed, reset languages.
-        private void OnShutdown(Entity<ZombieComponent> ent, ref ComponentShutdown args)
-        {
-            if (TerminatingOrDeleted(ent))
-                return;
-
-            _language.UpdateEntityLanguages(ent.Owner); // This uses ent.Owner because UpdateEntityLanguages checks for <LanguageSpeakerComponent>.
-        }
-
-        #endregion
     }
 }

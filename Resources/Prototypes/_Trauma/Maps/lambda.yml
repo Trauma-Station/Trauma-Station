@@ -17,7 +17,7 @@
       - type: StationEmergencyShuttle
         emergencyShuttlePath: /Maps/Shuttles/emergency_raven.yml
       - type: StationCargoShuttle
-        path: /Maps/Shuttles/cargo_fland.yml
+        path: /Maps/_Trauma/Shuttles/cargo_fland.yml
       - type: StationJobs
         availableJobs:
           # Command

@@ -54,3 +54,10 @@
     ClothingNeckScarfStripedCentcom: 3 # Goobstation
     ClothingOuterCoatSpaceAsshole: 1 # Goobstation
     ClothingOuterWinterCosmic: 1 # Goobstation
+  # <Trauma>
+  emaggedInventory:
+    ClothingOuterCoatJacketBiker: 1
+    ClothingOuterCoatJensenFilled: 1
+    ClothingOuterCoatSyndieCapArmored: 1
+    ClothingOuterWinterSyndieCapArmored: 1
+  # </Trauma>

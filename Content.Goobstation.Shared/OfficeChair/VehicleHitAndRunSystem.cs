@@ -4,7 +4,6 @@ using System.Numerics;
 using Content.Shared.Body;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 

@@ -26,13 +26,13 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
-using Content.Shared.Preferences;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Server.Abductor;
+using Content.Trauma.Server.Objectives.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
@@ -42,7 +42,6 @@ using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -298,7 +297,7 @@ public sealed class HereticSystem : SharedHereticSystem
         _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "KnowledgePoint", amount } }, mindId, store);
         _store.UpdateUserInterface(uid, mindId, store);
 
-        if (_mind.TryGetObjectiveComp<Objectives.HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
+        if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             objective.Researched += amount;
 
         UpdateObjectiveProgress((ent, ent.Comp1, ent.Comp3));

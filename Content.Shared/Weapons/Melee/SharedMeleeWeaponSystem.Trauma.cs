@@ -1,13 +1,14 @@
-using System.Linq;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.CCVar;
-using Content.Shared._EinsteinEngines.Contests;
+using Content.Goobstation.Common.Weapons;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Item;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Trauma.Common.Knowledge;
+using Content.Trauma.Common.Contests;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -20,7 +21,7 @@ namespace Content.Shared.Weapons.Melee;
 /// </summary>
 public abstract partial class SharedMeleeWeaponSystem
 {
-    [Dependency] private readonly ContestsSystem _contests = default!;
+    [Dependency] private readonly CommonContestsSystem _contests = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
@@ -82,5 +83,20 @@ public abstract partial class SharedMeleeWeaponSystem
         {
             staminaDamage *= 1 - _knowledge.SharpCurve(melee);
         }
+    }
+
+    protected bool RaiseInRangeEvent(EntityUid ent,
+        EntityUid target,
+        float range,
+        EntityCoordinates? targetCoordinates,
+        Angle? targetAngle,
+        out bool inRange,
+        out EntityUid source)
+    {
+        var ev = new MeleeInRangeEvent(ent, target, range, targetCoordinates, targetAngle);
+        RaiseLocalEvent(ent, ref ev);
+        inRange = ev.InRange;
+        source = ev.User;
+        return ev.Handled;
     }
 }

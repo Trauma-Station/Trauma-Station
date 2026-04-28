@@ -1,15 +1,15 @@
 // <Trauma>
-using Content.Shared._DV.CosmicCult.Components;
+using Content.Trauma.Common.Mindshield;
+using Content.Shared.Revolutionary; // GoobStation
+using Content.Server.Revolutionary.Components; // GoobStation
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Mind;
 using Content.Server.Popups;
-using Content.Server.Revolutionary.Components; // GoobStation
 using Content.Server.Roles;
 using Content.Shared.Database;
 using Content.Shared.Implants;
 using Content.Shared.Mindshield.Components;
-using Content.Shared.Revolutionary; // GoobStation
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
 using Robust.Shared.Containers;
@@ -25,7 +25,7 @@ public sealed class MindShieldSystem : EntitySystem
     [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
     [Dependency] private readonly RoleSystem _roleSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    //[Dependency] private readonly PopupSystem _popupSystem = default!; // Trauma - unused now
     [Dependency] private readonly SharedRevolutionarySystem _revolutionary = default!; // Goobstation
 
     public override void Initialize()
@@ -51,13 +51,12 @@ public sealed class MindShieldSystem : EntitySystem
     /// </summary>
     private void MindShieldRemovalCheck(EntityUid implanted, EntityUid implant)
     {
-        if (TryComp<HeadRevolutionaryComponent>(implanted, out var headRevComp)) // GoobStation - headRevComp
-        {
-            _popupSystem.PopupEntity(Loc.GetString("head-rev-break-mindshield"), implanted);
-            _revolutionary.SetConvertAbility((implanted, headRevComp), false); // GoobStation - turn off headrev ability to convert
-            //QueueDel(implant); - Goobstation - Headrevs should remove implant before turning on ability
+        // <Trauma>
+        var ev = new RemoveMindShieldEvent();
+        RaiseLocalEvent(implanted, ref ev);
+        if (ev.Cancelled)
             return;
-        }
+        // </Trauma>
 
         if (_mindSystem.TryGetMind(implanted, out var mindId, out _) &&
             _roleSystem.MindRemoveRole<RevolutionaryRoleComponent>(mindId))
@@ -66,16 +65,6 @@ public sealed class MindShieldSystem : EntitySystem
         }
         if (HasComp<Goobstation.Shared.Mindcontrol.MindcontrolledComponent>(implanted))   //Goobstation - Mindcontrol Implant
             RemComp<Goobstation.Shared.Mindcontrol.MindcontrolledComponent>(implanted);
-
-        // <Trauma>
-        RemComp<CosmicLesserCultistComponent>(implanted);
-        if (HasComp<CosmicCultComponent>(implanted) && TryComp<MindShieldComponent>(implanted, out var shieldComp))
-        {
-            _popupSystem.PopupEntity(Loc.GetString("cosmiccult-mindshield-popup"), implanted);
-            shieldComp.Broken = true;
-            Dirty(implanted, shieldComp);
-        }
-        // </Trauma>
     }
 
     private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)

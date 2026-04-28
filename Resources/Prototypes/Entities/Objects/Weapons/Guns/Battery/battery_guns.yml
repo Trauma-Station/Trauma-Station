@@ -258,8 +258,8 @@
   - type: Item
     storedOffset: 0,-5
   - type: BatteryAmmoProvider
-    proto: RedMediumLaser
-    fireCost: 62.5
+    proto: LaserGunBullet # Trauma
+    fireCost: 62.5 # Trauma, was 25
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -294,7 +294,7 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/makeshift.rsi
   - type: BatteryAmmoProvider
-    proto: RedLaser
+    proto: LaserSidearmBullet # Trauma
     fireCost: 62.5
   - type: Battery
     maxCharge: 500
@@ -338,7 +338,7 @@
   - type: Appearance
 
 - type: entity
-  name: laser carbine
+  name: laser gun
   parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband] # Trauma - BaseWeaponLaser > BaseWeaponBattery
   id: WeaponLaserCarbine
   description: Favoured by Nanotrasen Security for being cheap and easy to use.
@@ -347,20 +347,16 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    fireRate: 1.5 # Trauma, was 2
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/_Trauma/Weapons/Guns/Gunshots/laser2.ogg # Trauma
   - type: BatteryAmmoProvider
-    proto: LaserCarbineBullet
-    fireCost: 20 # Trauma was 25
+    proto: LaserGunBullet # Trauma
+    fireCost: 20 # Trauma, was 25, 50 shots
   - type: Item
     size: Large
-  # <Trauma>
-    shape:
-    - 0,0,3,0
-    - 1,1,2,1
-    storedOffset: 0,-5
-  # </Trauma>
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_gun.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser.rsi # Trauma
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -370,33 +366,25 @@
   - type: MagazineVisuals
     magState: mag
     steps: 5
-    zeroVisible: false
-  - type: Appearance # /Trauma
+    zeroVisible: true # Trauma
+  - type: Appearance # Trauma
   - type: Clothing
-    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_gun.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser.rsi # Trauma
   - type: StaticPrice
     price: 420
 
 - type: entity
-  name: practice laser carbine
-  parent: [BaseLaserRifle, BaseGunWieldable]
+  name: practice laser gun # Trauma
+  parent: WeaponLaserCarbine # Trauma - [BaseLaserRifle, BaseGunWieldable] > WeaponLaserCarbine
   id: WeaponLaserCarbinePractice
   description: This modified laser carbine fires nearly harmless beams in the 40-watt range, for target practice.
   components:
   - type: StaticPrice
     price: 300
   - type: BatteryAmmoProvider
-    proto: RedLaserPractice
-    fireCost: 62.5
+    proto: LaserGunBulletPractice # Trauma
   - type: PacifismAllowedGun
-  # <Trauma>
-  - type: Item
-    size: Large
-    shape:
-    - 0,0,3,0
-    - 1,1,2,1
-    storedOffset: 0,-5
-  # </Trauma>
+
 - type: entity
   name: pulse pistol
   parent: [BaseWeaponBatterySmall, BaseCentcommContraband]
@@ -427,7 +415,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
-    proto: LightPulse # Goob - was Pulse
+    proto: PulseGunBulletLight # Trauma - was Pulse
     fireCost: 200
   - type: Battery
     maxCharge: 2000
@@ -466,12 +454,11 @@
     selectedMode: SemiAuto
     fireRate: 3
     availableModes:
-      - SemiAuto
-      - FullAuto
+    - SemiAuto # Trauma - removed FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
-    proto: Pulse
+    proto: PulseGunBullet # Trauma - was Pulse
     fireCost: 200
   - type: Battery
     maxCharge: 5000
@@ -525,7 +512,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
-    proto: HeavyPulse # Goob - was Pulse
+    proto: PulseGunBulletHeavy # Trauma - was Pulse
     fireCost: 100
   - type: Battery
     maxCharge: 40000
@@ -576,12 +563,12 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
   - type: Gun
-    fireRate: 1 # Trauma, was 1.5
+    fireRate: 1.5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
     proto: LaserCannonBullet # Trauma
-    fireCost: 40 # Trauma, was 100
+    fireCost: 62.5 # Trauma, was 100
   - type: Tag
     tags:
     - TurretCompatibleWeapon
@@ -647,12 +634,12 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/xray.rsi
   - type: Gun
-    fireRate: 1.5 # Trauma, was 2
+    fireRate: 2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
     proto: XrayCannonBullet # Trauma
-    fireCost: 40 # Trauma, Was 100
+    fireCost: 62.5 # Trauma, Was 100
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -859,7 +846,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
-    proto: RedMediumLaser
+    proto: LaserSidearmBullet # Trauma
     fireCost: 100
   - type: BatterySelfRecharger
     autoRechargeRate: 40
@@ -908,7 +895,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
-    proto: RedMediumLaser
+    proto: LaserSidearmBullet # Trauma
     fireCost: 100
   - type: BatterySelfRecharger
     autoRechargeRate: 30

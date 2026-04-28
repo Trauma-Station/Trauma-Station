@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Xenobiology.XenobiologyBountyConsole;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.Prototypes;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Server.Xenobiology.XenobiologyBountyConsole;

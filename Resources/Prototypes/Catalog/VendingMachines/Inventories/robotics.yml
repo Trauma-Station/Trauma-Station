@@ -51,5 +51,7 @@
     Crowbar: 2
   contrabandInventory:
     FoodBurgerRobot: 1
+    Drone: 1 # Trauma
   emaggedInventory: # goob
     JawsOfLife: 1
+    BorgModuleSyndicateWeapon: 1 # Trauma

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Religion;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
@@ -7,7 +8,6 @@ using Content.Shared.Temperature;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
@@ -83,6 +83,7 @@ public abstract class SharedVoidCloakSystem : EntitySystem
             return;
 
         EnsureComp<StripMenuInvisibleComponent>(cloak);
+        RemCompDeferred<UnholyItemComponent>(cloak);
         UpdatePressureProtection(cloak, false);
     }
 
@@ -96,6 +97,7 @@ public abstract class SharedVoidCloakSystem : EntitySystem
             return;
 
         RemCompDeferred<StripMenuInvisibleComponent>(cloak);
+        EnsureComp<UnholyItemComponent>(cloak);
         UpdatePressureProtection(cloak, true);
     }
 

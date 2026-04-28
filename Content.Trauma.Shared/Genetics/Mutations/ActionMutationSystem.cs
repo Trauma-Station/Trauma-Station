@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 

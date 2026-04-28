@@ -7,7 +7,6 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Trauma.Shared.Actions;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 

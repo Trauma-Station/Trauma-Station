@@ -3,7 +3,6 @@
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
@@ -21,6 +20,12 @@ public sealed partial class TakeStaminaDamage : EntityEffectBase<TakeStaminaDama
     [DataField]
     public bool Immediate;
 
+    /// <summary>
+    /// Should this ignore stam resistances
+    /// </summary>
+    [DataField]
+    public bool IgnoreResist;
+
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("reagent-effect-guidebook-deal-stamina-damage",
             ("immediate", Immediate),
@@ -37,6 +42,12 @@ public sealed class TakeStaminaDamageSystem : EntityEffectSystem<StaminaComponen
     {
         var amount = args.Effect.Amount * args.Scale;
         var immediate = args.Effect.Immediate;
-        _stamina.TakeStaminaDamage(ent, amount, ent.Comp, visual: false, immediate: immediate);
+        var ignoreResist = args.Effect.IgnoreResist;
+        _stamina.TakeStaminaDamage(ent,
+            amount,
+            ent.Comp,
+            visual: false,
+            ignoreResist: ignoreResist,
+            immediate: immediate);
     }
 }

@@ -5,7 +5,6 @@ using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Polymorph;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.EntityEffects.Effects;
 

@@ -14,7 +14,6 @@ using Content.Trauma.Common.Paper;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Utility;
-using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Text.RegularExpressions;
 

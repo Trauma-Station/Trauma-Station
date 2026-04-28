@@ -2,8 +2,6 @@
 
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Forging;
 
@@ -13,7 +11,7 @@ namespace Content.Trauma.Shared.Forging;
 /// Requires <see cref="MetallicComponent"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(WorkableSystem))]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class WorkableComponent : Component
 {
     /// <summary>
@@ -32,13 +30,13 @@ public sealed partial class WorkableComponent : Component
     /// <summary>
     /// The item to spawn and transfer heat to when <see cref="Remaining"/> reaches 0.
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public EntProtoId Result;
 
     /// <summary>
     /// How many items to spawn.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int Amount = 1;
 }
 
@@ -46,4 +44,4 @@ public sealed partial class WorkableComponent : Component
 /// Raised on the original metal to transfer stats to the new result before being deleted.
 /// </summary>
 [ByRefEvent]
-public record struct MetalWroughtEvent(EntityUid Result);
+public record struct MetalWroughtEvent(EntityUid Result, EntityUid? User);

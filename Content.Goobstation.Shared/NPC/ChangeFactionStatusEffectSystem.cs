@@ -4,7 +4,6 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.NPC;
 

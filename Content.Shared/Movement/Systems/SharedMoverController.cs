@@ -1,7 +1,7 @@
 // <Trauma>
-using Content.Shared._DV.StepTrigger.Components;
+using Content.Trauma.Common.StepTrigger;
+using Content.Trauma.Common.TileMovement;
 using Content.Shared.Physics;
-using Content.Shared._vg.TileMovement;
 using Content.Shared.Standing;
 using Content.Trauma.Common.Movement;
 // </Trauma>
@@ -667,7 +667,7 @@ public abstract partial class SharedMoverController : VirtualController
 
         // If the coordinates have a FootstepModifier component
         // i.e. component that emit sound on footsteps emit that sound
-        var anchored = grid.GetAnchoredEntitiesEnumerator(position);
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, position);
 
         while (anchored.MoveNext(out var maybeFootstep))
         {

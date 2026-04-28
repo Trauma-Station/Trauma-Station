@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Charges.Systems;
+using Content.Shared.Cloning.Events;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Sprite;
 using Content.Shared.Stacks;
+using Content.Trauma.Common.Polymorph;
 using Content.Trauma.Shared.Tools;
 
 namespace Content.Trauma.Shared.Paint;
@@ -27,6 +29,8 @@ public sealed class PaintSystem : EntitySystem
 
         SubscribeLocalEvent<PaintVisualsComponent, StackSplitEvent>(OnStackSplit);
         SubscribeLocalEvent<PaintVisualsComponent, PaintAttemptEvent>(OnRepaintAttempt);
+        SubscribeLocalEvent<PaintVisualsComponent, CloningItemEvent>(OnClonePaint);
+        SubscribeLocalEvent<PaintVisualsComponent, ChameleonDisguisedEvent>(OnPaintDisguised);
         SubscribeLocalEvent<RandomSpriteComponent, PaintAttemptEvent>(OnRandomSpritePaintAttempt);
     }
 
@@ -52,14 +56,24 @@ public sealed class PaintSystem : EntitySystem
         if (ent.Comp.Color != args.Color)
             return;
 
-        _popup.PopupClient(Loc.GetString("spray-paint-same"), ent, args.User);
+        _popup.PopupClient("It's already painted that color.", ent, args.User);
         args.Cancelled = true;
+    }
+
+    private void OnClonePaint(Entity<PaintVisualsComponent> ent, ref CloningItemEvent args)
+    {
+        Paint(args.CloneUid, ent.Comp.Color);
+    }
+
+    private void OnPaintDisguised(Entity<PaintVisualsComponent> ent, ref ChameleonDisguisedEvent args)
+    {
+        Paint(args.Disguise, ent.Comp.Color);
     }
 
     private void OnRandomSpritePaintAttempt(Entity<RandomSpriteComponent> ent, ref PaintAttemptEvent args)
     {
         // no painting fish or whatever?
-        _popup.PopupClient(Loc.GetString("spray-paint-fish"), ent, args.User);
+        _popup.PopupClient("It's already colorful enough.", ent, args.User);
         args.Cancelled = true;
     }
 

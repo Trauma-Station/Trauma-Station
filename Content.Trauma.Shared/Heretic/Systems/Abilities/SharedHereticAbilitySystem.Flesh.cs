@@ -6,7 +6,7 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Damage;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
@@ -20,7 +20,9 @@ public abstract partial class SharedHereticAbilitySystem
 
     protected virtual void SubscribeFlesh()
     {
-        SubscribeLocalEvent<FleshPassiveComponent, ImmuneToPoisonDamageEvent>(OnPoisonImmune);
+        SubscribeLocalEvent<HereticComponent, IncreaseFleshGhoulLimitEvent>(OnIncreaseFleshGhoulLimit);
+
+        SubscribeLocalEvent<FleshPassiveComponent, OnHealthChangeEvent>(OnPoisonImmune);
 
         SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryPainEvent>>(OnPain);
         SubscribeLocalEvent<FleshSurgeryComponent, HeldRelayedEvent<SurgeryIgnorePreviousStepsEvent>>(OnIgnore);
@@ -28,9 +30,24 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<FleshSurgeryComponent, UseInHandEvent>(OnFleshSurgeryUse);
     }
 
-    private void OnPoisonImmune(Entity<FleshPassiveComponent> ent, ref ImmuneToPoisonDamageEvent args)
+    private void OnIncreaseFleshGhoulLimit(Entity<HereticComponent> ent, ref IncreaseFleshGhoulLimitEvent args)
     {
-        args.Immune = true;
+        if (Heretic.TryGetRitual(ent.Owner, args.ImperfectRitual, out var ritual))
+        {
+            ritual.Value.Comp.Limit += args.VoicelessDeadLimitIncrease;
+            Dirty(ritual.Value);
+        }
+
+        if (!TryComp(ent, out FleshHereticMindComponent? fleshMind))
+            return;
+
+        fleshMind.GhoulLimit += args.GhoulLimitIncrease;
+        Dirty(ent, fleshMind);
+    }
+
+    private void OnPoisonImmune(Entity<FleshPassiveComponent> ent, ref OnHealthChangeEvent args)
+    {
+        args.Damage.ClampMax(0);
     }
 
     private void OnTouchSpellUsed(Entity<FleshSurgeryComponent> ent, ref TouchSpellUsedEvent args)
@@ -58,7 +75,6 @@ public abstract partial class SharedHereticAbilitySystem
             _mobState.ChangeMobState(target, MobState.Alive, mob, user);
         if (_mind.TryGetMind(target, out var mindId, out var mind))
             _mind.UnVisit(mindId, mind);
-        RemComp<GhoulDeconvertComponent>(target);
     }
 
     private void OnFleshSurgeryUse(Entity<FleshSurgeryComponent> ent, ref UseInHandEvent args)

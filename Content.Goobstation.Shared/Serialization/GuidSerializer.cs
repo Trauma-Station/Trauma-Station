@@ -3,7 +3,6 @@
 using System;
 using System.Globalization;
 using Robust.Shared.IoC;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Serialization.Markdown.Validation;

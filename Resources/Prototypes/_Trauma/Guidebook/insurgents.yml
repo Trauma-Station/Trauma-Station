@@ -1,0 +1,4 @@
+- type: guideEntry
+  id: Insurgents
+  name: guide-entry-insurgents
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Insurgents.xml"

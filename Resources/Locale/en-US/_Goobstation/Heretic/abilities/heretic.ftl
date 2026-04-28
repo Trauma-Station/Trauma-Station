@@ -1,13 +1,3 @@
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 yglop <95057024+yglop@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 heretic-ability-fail = Failed to cast
 heretic-ability-fail-magicitem = You cannot cast it without a focus!
 heretic-ability-fail-notarget = Couldn't find a valid target!
@@ -20,10 +10,13 @@ heretic-ability-fail-target-ghoul = Target is ghoul already!
 heretic-ability-fail-target-no-mind = Target has no soul!
 heretic-ability-fail-space-phase-not-space = You must stand in space, or an outdoor area with low pressure!
 heretic-ability-fail-mirror-jaunt-no-mirrors = There are no reflective surfaces nearby!
+heretic-ability-fail-not-enough-space = Not enough space to cast this spell!
+heretic-ability-fail-arena-nearby = Other arena nearby!
 
 heretic-ability-lose-focus-shadow-cloak = As you lose your focus, you are pulled out of the shadows!
 heretic-ability-lose-focus-pale-cloak = As you lose your focus, you are pulled out of the light!
 heretic-ability-lose-focus-last-refuge = Without a focus, your refuge weakens and dissipates!
+heretic-ability-fail-other-minds-nearby = Other minds nearby!
 
 heretic-cosmic-rune-fail-star-mark = Blocked by star mark!
 heretic-cosmic-rune-fail-unlinked = No linked rune!
@@ -84,6 +77,7 @@ heretic-speech-ash-cascade = C'SC'DE!!
 
 heretic-speech-blade-furioussteel = F'LSH'NG S'LV'R!
 heretic-speech-blade-sacraments = 'DG' 'F IMM'RT'L'T'!
+heretic-speech-blade-domain-expansion = D'M'N XP'NS'N!
 
 heretic-speech-flesh-surgery = CL'M M'N!
 heretic-speech-flesh-worm = REALITY UNCOIL!!

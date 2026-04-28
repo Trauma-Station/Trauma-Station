@@ -1,0 +1,15 @@
+# Holographic Generator
+- type: sourcePort
+  id: ConnectionStatus
+  name: signal-port-name-holographic-generator-connection-status
+  description: signal-port-description-holographic-generator-connection-status
+
+- type: sourcePort
+  id: FieldConnected
+  name: signal-port-name-holographic-generator-field-connected
+  description: signal-port-description-holographic-generator-field-connected
+
+- type: sourcePort
+  id: FieldDisconnected
+  name: signal-port-name-holographic-generator-field-disconnected
+  description: signal-port-description-holographic-generator-field-disconnected
