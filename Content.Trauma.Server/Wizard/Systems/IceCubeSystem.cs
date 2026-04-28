@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage.Events;
@@ -11,6 +10,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Whitelist;
+using Content.Trauma.Server.Wizard.Components;
 using Content.Trauma.Shared.Wizard.Traps;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;

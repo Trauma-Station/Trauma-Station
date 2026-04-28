@@ -75,7 +75,7 @@ public sealed class FleshmendSystem : EntitySystem
         var now = _timing.CurTime;
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.UpdateTimer > now)
+            if (comp.UpdateTimer < now)
                 continue;
 
             comp.UpdateTimer = now + comp.UpdateDelay;

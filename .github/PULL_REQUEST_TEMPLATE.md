@@ -6,9 +6,6 @@
 ## Why / Balance
 <!-- Discuss how this would affect game balance or explain why it was changed. Link any relevant discussions or issues. -->
 
-## Technical details
-<!-- Summary of code changes for easier review. -->
-
 ## Media
 <!-- Attach media if the PR makes in-game changes (clothing, items, features, etc).
 Small fixes/refactors are exempt. -->
@@ -18,12 +15,6 @@ Small fixes/refactors are exempt. -->
 - [ ] I have read and am following the [Contributing Guidelines](https://github.com/Trauma-Station/Trauma-Station/blob/master/CONTRIBUTING.md).
 - [ ] I have added media to this PR or it does not require an in-game showcase.
 <!-- You should understand that not following the above may get your PR closed at a maintainer's discretion -->
-
-## Breaking changes
-<!--
-List any breaking changes, including namespaces, public class/method/field changes, prototype renames; and provide instructions for fixing them.
-You only need to consider this if there are other PRs open or in the works that would be massively broken by this.
--->
 
 **Changelog**
 <!-- Add a Changelog entry to make players aware of new features or changes that could affect gameplay.

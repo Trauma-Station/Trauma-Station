@@ -349,3 +349,119 @@
         Blunt: 10
     altDisarm: false
     canWideSwing: true
+
+- type: entity
+  parent: [ SimpleMobBase, MobCombat]
+  categories: [ HideSpawnMenu ] # You don't need to spawn shellless coconut crabs via the menu
+  id: MobCoconutCrabShellless
+  name: coconut crab
+  description: The largest non-sentient species of Space Hermit Crab. Not actually capable of surviving in space.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
+    layers:
+      - state: coconutcrabnoshell
+  - type: HTN
+    rootTask:
+      task: XenomorphCompound # i could replace with a custom htn but it'll be fiiiiiiiine
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+  - type: Prying
+    pryPowered: true
+  - type: ComplexInteraction
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CopperBlood
+        Quantity: 100
+    bloodlossDamage:
+      types:
+        Bloodloss:
+          0.5
+    bloodlossHealDamage:
+      types:
+        Bloodloss:
+          -0.25
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 3
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    range: 0.9 # Make kitable but barely
+    attackRate: 0.6
+    damage:
+      types:
+        Blunt: 15
+        Structural: 5
+  - type: MeleeThrowOnHit
+    distance: 5
+    speed: 10
+  - type: StaminaDamageOnHit
+    damage: 10
+    overtime: 10
+  - type: LanguageSpeaker
+    speaks:
+    - Crab
+    understands:
+    - Crab
+    - TauCetiBasic
+  - type: Speech
+    speechVerb: Arachnid
+    speechSounds: Arachnid
+    allowedEmotes: ['Click', 'Chitter']
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatCrab
+      amount: 5
+
+- type: entity
+  parent: MobCoconutCrabShellless
+  id: MobCoconutCrab
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
+    layers:
+      - state: coconutcrab
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CoconutWater
+        Quantity: 50
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodCoconutHalf:
+            min: 1
+            max: 2
+          MobCoconutCrabShellless:
+            min: 1
+            max: 1
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: CoconutCrab
+  - type: MobPrice
+    price: 200 # The fact that a test requires me to add this is fucking stupid

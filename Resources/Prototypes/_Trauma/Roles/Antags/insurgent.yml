@@ -5,9 +5,8 @@
   antagonist: true
   setPreference: true
   requirements:
-  - !type:RoleTimeRequirement
-    role: JobPassenger
-    time: 5h # become one with maints
+  - !type:OverallPlaytimeRequirement
+    time: 5h
   guides: [ Insurgents ]
 
 - type: startingGear

@@ -9,16 +9,15 @@ using Content.Medical.Shared.Wounds;
 using Content.Server.Antag;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Hands.Systems;
-using Content.Server.Jittering;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Roles;
-using Content.Server.Speech.EntitySystems;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Body;
+using Content.Shared.Body.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
@@ -37,23 +36,24 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Polymorph;
-using Content.Shared.Rejuvenate;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Species.Components;
 using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Server.Chaplain;
-using Content.Trauma.Server.Heretic.Abilities;
 using Content.Trauma.Shared.Chaplain.Components;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
 using Content.Trauma.Shared.Heretic.Systems;
+using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Content.Trauma.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Serialization.Manager;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -68,16 +68,14 @@ public sealed class GhoulSystem : SharedGhoulSystem
     private static readonly ProtoId<ComponentRegistryPrototype> ComponentsToRemoveOnUnGhoulify =
         "ComponentsToRemoveOnUnGhoulify";
 
+    [Dependency] private readonly ISerializationManager _seriMan = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly JitteringSystem _jitter = default!;
-    [Dependency] private readonly StutteringSystem _stutter = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly StorageSystem _storage = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
@@ -89,6 +87,10 @@ public sealed class GhoulSystem : SharedGhoulSystem
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly HolyFlammableSystem _holyFlam = default!;
     [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+
+    [Dependency] private readonly EntityQuery<BrainComponent> _brainQuery = default!;
+    [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
 
     public override void Initialize()
     {
@@ -102,40 +104,15 @@ public sealed class GhoulSystem : SharedGhoulSystem
         SubscribeLocalEvent<GhoulComponent, SetGhoulBoundHereticEvent>(OnBound);
         SubscribeLocalEvent<GhoulComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly);
 
-        SubscribeLocalEvent<GhoulDeconvertComponent, ComponentStartup>(OnDeconvertStartup);
-        SubscribeLocalEvent<GhoulDeconvertComponent, RejuvenateEvent>(OnRejuvenate);
-        SubscribeLocalEvent<GhoulDeconvertComponent, DamageUnholyEvent>(OnDamageUnholy,
-            after: [typeof(WeakToHolySystem)]);
-
         SubscribeLocalEvent<GhoulRoleComponent, GetBriefingEvent>(OnGetBriefing);
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
-
-        SubscribeLocalEvent<VoicelessDeadComponent, MapInitEvent>(OnVoicelessDeadInit,
-            after: [typeof(InitialBodySystem)]);
-        SubscribeLocalEvent<VoicelessDeadComponent, ComponentShutdown>(OnVoicelessDeadShutdown);
 
         SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
 
         SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit, after: [typeof(InitialBodySystem)]);
         SubscribeLocalEvent<ShatteredRisenComponent, HandCountChangedEvent>(OnHandCountChanged);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<GhoulDeconvertComponent, GhoulComponent>();
-        while (query.MoveNext(out var uid, out var deconvert, out var ghoul))
-        {
-            deconvert.Delay -= frameTime;
-
-            if (deconvert.Delay > 0f)
-                continue;
-
-            UnGhoulifyEntity((uid, ghoul));
-        }
     }
 
     private void OnShouldTakeHoly(Entity<GhoulComponent> ent, ref UserShouldTakeHolyEvent args)
@@ -147,50 +124,9 @@ public sealed class GhoulSystem : SharedGhoulSystem
         args.ShouldTakeHoly = true;
     }
 
-    private void OnDamageUnholy(Entity<GhoulDeconvertComponent> ent, ref DamageUnholyEvent args)
-    {
-        args.ShouldTakeHoly = false;
-    }
-
-    private void OnRejuvenate(Entity<GhoulDeconvertComponent> ent, ref RejuvenateEvent args)
-    {
-        RemCompDeferred(ent, ent.Comp);
-    }
-
-    private void OnDeconvertStartup(Entity<GhoulDeconvertComponent> ent, ref ComponentStartup args)
-    {
-        var time = TimeSpan.FromSeconds(ent.Comp.Delay);
-        _jitter.DoJitter(ent, time, true);
-        _stutter.DoStutter(ent, time, true);
-    }
-
-    private void OnVoicelessDeadShutdown(Entity<VoicelessDeadComponent> ent, ref ComponentShutdown args)
-    {
-        if (TerminatingOrDeleted(ent))
-            return;
-
-        ProcessVoicelessDeadBody(ent, true);
-    }
-
-    private void OnVoicelessDeadInit(Entity<VoicelessDeadComponent> ent, ref MapInitEvent args)
-    {
-        ProcessVoicelessDeadBody(ent, false);
-    }
-
     private void OnBound(Entity<GhoulComponent> ent, ref SetGhoulBoundHereticEvent args)
     {
         SetBoundHeretic(ent.Owner, args.Heretic, args.Ritual);
-    }
-
-    private void ProcessVoicelessDeadBody(EntityUid uid, bool makeRemovable)
-    {
-        foreach (var organ in _body.GetOrgans<ChildOrganComponent>(uid))
-        {
-            if (makeRemovable)
-                RemComp<UnremoveableOrganComponent>(organ);
-            else
-                EnsureComp<UnremoveableOrganComponent>(organ);
-        }
     }
 
     private void OnHandCountChanged(Entity<ShatteredRisenComponent> ent, ref HandCountChangedEvent args)
@@ -304,9 +240,6 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
     public void UnGhoulifyEntity(Entity<GhoulComponent> ent)
     {
-        if (!ent.Comp.CanDeconvert)
-            return;
-
         if (!TryComp(ent, out HumanoidProfileComponent? humanoid))
         {
             if (Prototype(ent) is not { } proto)
@@ -341,12 +274,18 @@ public sealed class GhoulSystem : SharedGhoulSystem
             .ToDictionary();
 
         EntityManager.AddComponents(ent, new ComponentRegistry(comps));
-        if (prototype.Components.TryGetComponent(Factory.GetComponentName<MobThresholdsComponent>(),
-                out var thresholds))
-            AddComp(ent, thresholds, true);
+
+        var name = Factory.GetComponentName<MobThresholdsComponent>();
+        if (prototype.Components.TryGetComponent(name, out var thresholds))
+        {
+            var component = (Component) Factory.GetComponent(name);
+            var temp = (object) component;
+            _seriMan.CopyTo(thresholds, ref temp);
+            AddComp(ent, (Component) temp!, true);
+        }
 
         if (TryComp(ent, out CollectiveMindComponent? collective))
-            collective.Channels.Remove(HereticAbilitySystem.MansusLinkMind);
+            collective.Channels.Remove(SharedHereticAbilitySystem.MansusLinkMind);
 
         if (TryComp(ent, out NpcFactionMemberComponent? fact))
         {
@@ -363,7 +302,13 @@ public sealed class GhoulSystem : SharedGhoulSystem
                 _heretic.TryGetHereticComponent(minion.BoundHeretic.Value, out var heretic, out var masterMind))
             {
                 heretic.Minions.Remove(ent);
-                Dirty(masterMind, heretic);
+                if (TryComp(masterMind, out FleshHereticMindComponent? fleshMind))
+                {
+                    fleshMind.Ghouls.Remove(ent);
+                    Dirty<HereticComponent, FleshHereticMindComponent>((masterMind, heretic, fleshMind));
+                }
+                else
+                    Dirty(masterMind, heretic);
             }
 
             if (Exists(minion.CreationRitual) &&
@@ -390,7 +335,7 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         EnsureComp<CombatModeComponent>(ent);
 
-        EnsureComp<CollectiveMindComponent>(ent).Channels.Add(HereticAbilitySystem.MansusLinkMind);
+        EnsureComp<CollectiveMindComponent>(ent).Channels.Add(SharedHereticAbilitySystem.MansusLinkMind);
 
         if (TryComp(ent.Owner, out NpcFactionMemberComponent? fact))
         {
@@ -420,6 +365,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
                 SetBoundHeretic((ent.Owner, minion), heretic, null, false);
         }
 
+        _rejuvenate.PerformRejuvenate(ent);
+
         if (ent.Comp.ChangeHumanoidProfile && HasComp<HumanoidProfileComponent>(ent))
         {
             var organs = _humanoid.GetOrgansData(ent);
@@ -431,7 +378,8 @@ public sealed class GhoulSystem : SharedGhoulSystem
             _humanoid.SetSkinColor(ent, grey, grey);
         }
 
-        _rejuvenate.PerformRejuvenate(ent);
+        if (ent.Comp.DeathBehavior == GhoulDeathBehavior.Deconvert)
+            MakeOrgansFragile(ent);
 
         if (TryComp<MobThresholdsComponent>(ent, out var th))
         {
@@ -467,6 +415,22 @@ public sealed class GhoulSystem : SharedGhoulSystem
         }
 
         GiveGhoulWeapon(ent);
+    }
+
+    /// <summary>
+    /// Required to prevent heretic from farming organs from ghouls
+    /// </summary>
+    private void MakeOrgansFragile(EntityUid uid)
+    {
+        foreach (var organ in _body.GetOrgans(uid))
+        {
+            // Don't curse brain and torso
+            if (_brainQuery.HasComp(organ) || _woundableQuery.TryComp(organ, out var woundable) &&
+                woundable.RootWoundable == organ.Owner)
+                continue;
+
+            EnsureComp<FragileOrganComponent>(organ);
+        }
     }
 
     private void SendBriefing(Entity<HereticMinionComponent?> ent)
@@ -558,8 +522,14 @@ public sealed class GhoulSystem : SharedGhoulSystem
 
         DestroyGhoulWeapon(ent);
 
-        if (ent.Comp.DeathBehavior == GhoulDeathBehavior.NoGib)
-            return;
+        switch (ent.Comp.DeathBehavior)
+        {
+            case GhoulDeathBehavior.NoGib:
+                return;
+            case GhoulDeathBehavior.Deconvert:
+                UnGhoulifyEntity(ent);
+                return;
+        }
 
         if (ent.Comp.SpawnOnDeathPrototype != null)
             Spawn(ent.Comp.SpawnOnDeathPrototype.Value, Transform(ent).Coordinates);

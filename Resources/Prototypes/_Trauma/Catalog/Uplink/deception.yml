@@ -7,3 +7,13 @@
     Telecrystal: 5 # literal maints gear, its more useful to just have a backup light option
   categories:
   - UplinkDeception
+
+- type: listing
+  id: UplinkCodespeakManual
+  name: uplink-codespeak-manual-name
+  description: uplink-codespeak-manual-desc
+  productEntity: DeluxeCodespeakManual
+  cost:
+    Telecrystal: 15 # 3 TC on tg
+  categories:
+  - UplinkDeception

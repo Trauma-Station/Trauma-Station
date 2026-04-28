@@ -179,6 +179,9 @@
   parent: TouchSpellMansus
   categories: [ HideSpawnMenu ]
   components:
+  - type: FleshGrasp # Used for summoning ghouls on the rune
+  - type: UseDelay
+    delay: 1.5
   - type: MansusGrasp
     effects:
     - !type:NestedRitualEffect

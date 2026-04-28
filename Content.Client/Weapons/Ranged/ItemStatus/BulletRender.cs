@@ -115,7 +115,7 @@ public abstract class BaseBulletRenderer : Control
 
     private int RowWidth(int count)
     {
-        return (count - 1) * _params.ItemSeparation + _params.ItemWidth;
+        return Math.Min((count - 1) * _params.ItemSeparation + _params.ItemWidth, (int) Width); // Trauma - Math.Min
     }
 
     protected struct LayoutParameters

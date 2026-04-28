@@ -6,7 +6,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Trauma.Shared.Utility;
 using Robust.Shared.Timing;
 
-namespace Content.Trauma.Shared.Mobs;
+namespace Content.Trauma.Server.Mobs;
 
 /// <summary>
 /// Makes entities with <see cref="MobSpamSystem"/> despawn 5 minutes after dying.

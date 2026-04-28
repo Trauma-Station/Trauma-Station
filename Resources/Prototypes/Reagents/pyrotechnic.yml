@@ -134,7 +134,15 @@
   flavor: bitter
   color: "#FFC8C8"
   tileReactions:
-  - !type:PryTileReaction
+  #- !type:PryTileReaction # Trauma, removed so it can actually spread
+  # <Trauma>
+  - !type:CreateEntityTileReaction
+    entity: MolotovFire
+    maxOnTileWhitelist:
+      tags: [ TraumaFire ]
+  - !type:FlammableTileReaction
+    temperatureMultiplier: 5
+  # </Trauma>
   metabolisms:
     Bloodstream:
       effects:

@@ -19,6 +19,7 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MetaDataSystem _meta = default!;
+
     [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
     // [Dependency] private readonly DamageableSystem _damageable = default!;
 
@@ -251,7 +252,7 @@ public abstract partial class SharedKnowledgeSystem
 
         var now = _timing.CurTime;
         if (now < comp.LastSpoken)
-            return; // on cooldown for xp and curse effects
+            return; // on cooldown for xp
 
         AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn.
 

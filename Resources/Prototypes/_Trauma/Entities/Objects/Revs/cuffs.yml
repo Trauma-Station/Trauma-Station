@@ -1,0 +1,11 @@
+- type: entity
+  parent: [ Handcuffs, BaseRevMajorContraband ]
+  id: RevHandcuffs
+  name: shackles
+  components:
+  - type: Handcuff
+    cuffedRSI: _Trauma/Objects/Misc/revcuffs.rsi
+    bodyIconState: body-overlay
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/revcuffs.rsi
+    state: handcuff

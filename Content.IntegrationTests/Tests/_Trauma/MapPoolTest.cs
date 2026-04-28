@@ -19,7 +19,6 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// Checks that every map in a pool has the required areas in the map prototype.
 /// This means it was mapped at least once, maybe it was removed but that seems rare for important areas.
 /// </summary>
-[TestFixture]
 [Category("MapTests")]
 public sealed class MapPoolTest : GameTest
 {

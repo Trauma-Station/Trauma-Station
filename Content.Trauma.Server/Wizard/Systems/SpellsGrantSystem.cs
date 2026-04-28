@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Antag;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
@@ -15,12 +14,13 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Random;
 using Content.Trauma.Common.Wizard;
-using Content.Trauma.Shared.Objectives;
+using Content.Trauma.Server.Wizard.Components;
+using Content.Trauma.Server.Objectives;
 using Content.Trauma.Shared.Wizard;
 using Robust.Server.Player;
 using Robust.Shared.Random;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class SpellsGrantSystem : EntitySystem
 {

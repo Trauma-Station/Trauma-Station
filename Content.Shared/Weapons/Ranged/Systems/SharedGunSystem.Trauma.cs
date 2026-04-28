@@ -2,6 +2,7 @@
 
 using System.Numerics;
 using Content.Goobstation.Common.Weapons.Ranged;
+using Content.Shared.Power;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Ranged.Components;
@@ -116,5 +117,15 @@ public abstract partial class SharedGunSystem
 
         // TODO: Replace with prof/spec system.
         return 1;
+    }
+
+    public (float, float) GetBatteryShotsFloat(Entity<BatteryAmmoProviderComponent> ent)
+    {
+        var ev = new GetChargeEvent();
+        RaiseLocalEvent(ent, ref ev);
+        var currentShots = ev.CurrentCharge / ent.Comp.FireCost;
+        var maxShots = ev.MaxCharge / ent.Comp.FireCost;
+
+        return (currentShots, maxShots);
     }
 }

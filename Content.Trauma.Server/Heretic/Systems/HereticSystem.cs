@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Religion;
-using Content.Goobstation.Server.Objectives.Components;
 using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
@@ -33,6 +32,7 @@ using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Server.Abductor;
+using Content.Trauma.Server.Objectives.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;

@@ -77,6 +77,8 @@
       weight: 9
     - id: MobShark
       weight: 1 # Oh crikey its a whooper!
+    - id: MobCoconutCrab
+      weight: 1 # this is crabtually insane
 # </Trauma>
 
 # Items from Water

@@ -18,3 +18,25 @@
     seedId: CocaPlant
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
+
+- type: entity
+  parent: SeedBase
+  id: CoconutSeeds
+  name: packet of coconut seeds
+  components:
+  - type: Seed
+    seedId: CoconutPlant
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of cherry seeds
+  description: Except they're actually bombs because you're evil.
+  suffix: bomb
+  id: CherryBombSeeds
+  components:
+    - type: Seed
+      seedId: CherryBomb
+    - type: Sprite
+      sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi # doesnt need to look special

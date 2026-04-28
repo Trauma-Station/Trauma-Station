@@ -298,3 +298,10 @@
   components:
   - type: LanguageKnowledge
     languageId: XenoHivemind
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: LanguageCodespeak
+  components:
+  - type: LanguageKnowledge
+    languageId: Codespeak

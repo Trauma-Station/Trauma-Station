@@ -179,6 +179,13 @@
   name: foamblade
   description: It says "Sternside Changs number 1 fan" on it.
   components:
+  # <Trauma>
+  - type: UseDelay
+    delay: 1.5
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Effects/gib1.ogg
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Fun/Foam/foam_blade.rsi
     state: icon
@@ -189,13 +196,6 @@
     wideAnimationRotation: 90
     soundHit: # Goob
       path: /Audio/Weapons/bladeslice.ogg
-  # <Goob>
-  - type: UseDelay
-    delay: 1.5
-  - type: EmitSoundOnUse
-    sound:
-      path: /Audio/Effects/gib1.ogg
-  # </Goob>
   - type: Item
     size: Small
     sprite: Objects/Fun/Foam/foam_blade.rsi
@@ -227,6 +227,11 @@
   name: toy sword
   description: New Sandy-Cat plastic sword! Comes with realistic sound and full color! Looks almost like the real thing!
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - ToySword
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_sword.rsi
     layers:
