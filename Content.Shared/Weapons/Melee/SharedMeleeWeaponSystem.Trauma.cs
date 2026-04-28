@@ -71,7 +71,7 @@ public abstract partial class SharedMeleeWeaponSystem
 
         _throwing.TryThrow(target, pushVector, force * _shoveSpeed, animated: animated);
     }
-    
+
     protected bool RaiseInRangeEvent(EntityUid ent,
         EntityUid target,
         float range,

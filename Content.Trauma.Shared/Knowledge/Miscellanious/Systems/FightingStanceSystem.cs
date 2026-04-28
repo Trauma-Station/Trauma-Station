@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Blocking;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
@@ -58,7 +60,7 @@ public sealed partial class FightingStanceSystem : EntitySystem
 
 
             /*
-            
+
             if (Prototype(item.Value) is { } proto && brain.Comp.WeaponSpecializations.TryGetValue(proto, out var spec))
             {
                 fighting.AttackMod += spec.Attack;
