@@ -7,6 +7,9 @@ ascension_requires_objectives = false
 
 [infolinks]
 github = "https://github.com/Trauma-Station/Trauma-Station"
+
+[trauma]
+station_traits_enabled = false
 # </Trauma>
 
 [game]
@@ -29,7 +32,7 @@ quick_lottery = true
 generator_enabled = false
 
 [movement]
-mob_pushing = true
+mob_pushing = false # Trauma - true -> false
 
 [physics]
 # Makes mapping annoying
