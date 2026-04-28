@@ -5,13 +5,12 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
 using Content.Trauma.Server.Ghost;
 using Content.Trauma.Shared.Ghost;
-using Robust.Server.Player;
+using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
 public sealed class GhostroleAlertSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly EuiManager _euiMan = default!;
 
     public override void Initialize()
@@ -22,11 +21,10 @@ public sealed class GhostroleAlertSystem : EntitySystem
 
     private void OnRuleAdded(Entity<GhostroleAlertComponent> ent, ref GameRuleAddedEvent args)
     {
-        var query = EntityQueryEnumerator<GhostComponent>();
-        while (query.MoveNext(out var ghostUid, out _))
+        var query = EntityQueryEnumerator<GhostComponent, ActorComponent>();
+        while (query.MoveNext(out _, out _, out var actor))
         {
-            _player.TryGetSessionByEntity(ghostUid, out var session);
-            _euiMan.OpenEui(new GhostroleAlertEui(), session!);
+            _euiMan.OpenEui(new GhostroleAlertEui(), actor.PlayerSession);
         }
     }
 }
