@@ -1,10 +1,5 @@
 using Content.Server.EUI;
 
-namespace Content.Trauma.Client.Ghost;
+namespace Content.Trauma.Server.Ghost;
 
-public sealed class GhostroleAlertEui : BaseEui
-{
-    public override void Opened()
-    {
-    }
-}
+public sealed class GhostroleAlertEui : BaseEui;

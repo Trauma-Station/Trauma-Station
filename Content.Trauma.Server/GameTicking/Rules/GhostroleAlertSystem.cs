@@ -1,7 +1,7 @@
 using Content.Server.EUI;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
-using Content.Trauma.Client.Ghost;
+using Content.Trauma.Server.Ghost;
 using Content.Trauma.Shared.Ghost;
 using Robust.Server.Player;
 
@@ -18,7 +18,7 @@ public sealed class GhostroleAlertSystem : EntitySystem
         SubscribeLocalEvent<GhostroleAlertComponent, GameRuleAddedEvent>(OnRuleAdded);
     }
 
-    private void OnRuleAdded(EntityUid uid, GhostroleAlertComponent comp, ref GameRuleAddedEvent args)
+    private void OnRuleAdded(Entity<GhostroleAlertComponent> ent, ref GameRuleAddedEvent args)
     {
         var query = EntityQueryEnumerator<GhostComponent>();
         while (query.MoveNext(out var ghostUid, out _))

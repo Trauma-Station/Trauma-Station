@@ -206,7 +206,8 @@
   parent: BaseGameRule
   id: DragonSpawn
   components:
-  - type: GhostroleAlert # Trauma
+  # <Trauma>
+  - type: GhostroleAlert
   - type: StationEvent
     weight: 1 # Trauma - Was 3
     earliestStart: 30
@@ -239,7 +240,8 @@
   parent: BaseGameRule
   id: NinjaSpawn
   components:
-  - type: GhostroleAlert # Trauma
+  # <Trauma>
+  - type: GhostroleAlert
   # <Trauma>
   - type: AntagPlayerEffects
     effects:
@@ -604,7 +606,8 @@
   parent: BaseNukeopsRule
   id: LoneOpsSpawn
   components:
-  - type: GhostroleAlert # Trauma
+  # <Trauma>
+  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 35
     weight: 1 # Trauma - was 5.5
