@@ -74,7 +74,7 @@ public sealed class WizardMirrorSystem : SharedWizardMirrorSystem
                 Inventory = PolymorphInventoryChange.Transfer,
                 RevertOnCrit = false,
                 RevertOnDeath = false,
-                ComponentsToTransfer = new()
+                ComponentsToTransfer = new() // TODO: Fix this slop
                 {
                     new("LanguageKnowledge"),
                     new("LanguageSpeaker"),
@@ -85,7 +85,7 @@ public sealed class WizardMirrorSystem : SharedWizardMirrorSystem
                     new("TowerOfBabel", mirror: true),
                     new("CanEnchant", mirror: true),
                     new("CanPerformCombo"),
-                    new("MartialArtsKnowledge"),
+                    new("MartialArtsSkill"),
                     new("NinjutsuSneakAttack"),
                     new("NpcFactionMember"),
                 },

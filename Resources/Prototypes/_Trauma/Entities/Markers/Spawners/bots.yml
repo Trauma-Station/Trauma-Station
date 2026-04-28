@@ -1,13 +1,27 @@
 - type: entity
+  name: securitron spawner
+  id : SpawnMobSecuritron
   parent: MarkerBase
-  id: SpawnMobBeepsky
-  name: officer beepsky
   components:
   - type: Sprite
     layers:
     - state: green
-    - sprite: _Trauma/Mobs/Silicon/Bots/officerbeepsky.rsi
-      state: cleanbot
+    - sprite: _Trauma/Mobs/Bots/beepsky.rsi
+      state: secbot
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSecuritron
+
+- type: entity
+  name: beepsky spawner
+  id : SpawnMobBeepsky
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Trauma/Mobs/Bots/beepsky.rsi
+      state: secbot
   - type: ConditionalSpawner
     prototypes:
     - MobBeepsky
