@@ -183,7 +183,7 @@ public sealed partial class RadioSystem : EntitySystem // Trauma - made partial
         var msg = new ChatMessage(ChatChannel.Radio, content, wrappedMessage, GetNetEntity(messageSource), null);
 
         // Einstein Engines - Language begin
-        var obfuscated = _language.ObfuscateSpeech(content, language);
+        var obfuscated = _language.ObfuscateSpeech(content, language, messageSource);
         // Goobstation - Chat Pings
         // Added GetNetEntity(messageSource), to source
         var obfuscatedWrapped = WrapRadioMessage(messageSource, channel, name, obfuscated, language, speech, jobIcon, jobName);

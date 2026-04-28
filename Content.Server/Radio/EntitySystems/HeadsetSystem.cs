@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared.Whitelist;
 using Content.Trauma.Common.Language.Systems;
 // </Trauma>
 using Content.Shared.Chat;
@@ -9,6 +8,7 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Shared.Whitelist;
 
 namespace Content.Server.Radio.EntitySystems;
 
