@@ -1,14 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Body;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Forensics;
-using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
+using System.Linq;
 
 namespace Content.Goobstation.Shared.Autosurgeon;
 
@@ -21,25 +23,47 @@ public sealed class AutoSurgeonSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AutoSurgeonComponent, ItemToggleActivateAttemptEvent>(OnActivated);
+        SubscribeLocalEvent<AutoSurgeonComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<AutoSurgeonComponent, AutoSurgeonDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<AutoSurgeonComponent, ExaminedEvent>(OnExamined);
     }
 
-    // TODO: why are you using an attempt event...
-    private void OnActivated(Entity<AutoSurgeonComponent> ent, ref ItemToggleActivateAttemptEvent args)
+    private void OnActivate(Entity<AutoSurgeonComponent> ent, ref ActivateInWorldEvent args)
     {
-        _audio.Stop(ent.Comp.ActiveSound);
-        ent.Comp.ActiveSound = null;
-        args.Cancelled = true;
-
-        if (ent.Comp.Used || args.User == null)
+        if (args.Handled)
             return;
+
+        args.Handled = true;
+
+        ent.Comp.ActiveSound = _audio.Stop(ent.Comp.ActiveSound);
+
+        var user = args.User;
+        var name = Name(ent);
+        if (ent.Comp.Used)
+        {
+            _popup.PopupClient($"The {name} has already been used!", ent, user, PopupType.SmallCaution);
+            return;
+        }
+
+        var buckled = Comp<StrapComponent>(ent).BuckledEntities;
+        if (buckled.Count == 0)
+        {
+            _popup.PopupClient($"Nothing is strapped to the {name}!", ent, user, PopupType.SmallCaution);
+            return;
+        }
+
+        var target = buckled.First();
+        if (!HasComp<BodyComponent>(target))
+        {
+            _popup.PopupClient($"{Name(target)} can't be operated on!", ent, user, PopupType.SmallCaution);
+            return;
+        }
 
         if (!_doAfter.TryStartDoAfter(new DoAfterArgs(
                 EntityManager,
@@ -47,8 +71,8 @@ public sealed class AutoSurgeonSystem : EntitySystem
                 ent.Comp.DoAfterTime,
                 new AutoSurgeonDoAfterEvent(),
                 ent.Owner,
-                args.User,
-                ent.Owner)
+                target: target,
+                used: ent.Owner)
             {
                 BreakOnMove = true,
                 DistanceThreshold = 0.1f,
@@ -56,8 +80,10 @@ public sealed class AutoSurgeonSystem : EntitySystem
             }))
             return;
 
-        var ev = new TransferDnaEvent { Donor = args.User.Value, Recipient = ent };
-        RaiseLocalEvent(args.User.Value, ref ev);
+        _popup.PopupClient("You start up the {name}...", ent, user, PopupType.Medium);
+
+        var ev = new TransferDnaEvent { Donor = user, Recipient = ent };
+        RaiseLocalEvent(user, ref ev);
 
         if (_net.IsClient) // Fuck sound networking
             return;
