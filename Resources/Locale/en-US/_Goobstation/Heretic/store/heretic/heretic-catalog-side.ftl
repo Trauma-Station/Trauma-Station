@@ -1,8 +1,12 @@
+knowledge-passive-upgrade-name-2 = Upgrade passive ability (Tier 2)
+knowledge-passive-upgrade-name-3 = Upgrade passive ability (Tier 3)
+
 knowledge-path-side-knowledge-name = Ritual of Knowledge
 knowledge-path-side-knowledge-desc =
     Everything can be a key to unlocking the secrets behind the Gates. I must be wary and wise.
 
-    You learn a special, one-time-only ritual that requires 4 different items. Performing this ritual instantly grants you 4 knowledge points.
+    You learn a special, one-time-only ritual that requires 3 different items. Performing this ritual instantly grants you 4 knowledge points.
+    Unlocks tier 3 passive ability upgrade when performed.
 
 ## T1
 knowledge-path-side-t1-armor-name = Armorer’s Ritual

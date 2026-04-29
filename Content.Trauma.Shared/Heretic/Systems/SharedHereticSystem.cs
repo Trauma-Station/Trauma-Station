@@ -183,33 +183,47 @@ public abstract class SharedHereticSystem : EntitySystem
         }
 
         if (data.RitualPrototypes is { Count: > 0 })
-            SpawnRituals(ent.Comp2, data.RitualPrototypes, PlayerMan.GetSessionById(userId));
+            SpawnRituals((ent, ent.Comp2), data.RitualPrototypes, PlayerMan.GetSessionById(userId));
 
-        // set path if out heretic doesn't have it, or if it's different from whatever he has atm
-        if (ent.Comp2.CurrentPath == null)
+        if (data.Path is { } path)
         {
-            if (!data.SideKnowledge && ent.Comp2.CurrentPath != data.Path)
-                ent.Comp2.CurrentPath = data.Path;
+            ent.Comp2.CurrentPath ??= path;
+
+            // make sure we only progress when buying current path knowledge
+            if (data.Stage > ent.Comp2.PathStage && path == ent.Comp2.CurrentPath)
+            {
+                ent.Comp2.PathStage = data.Stage;
+                UpdateHereticCostModifiers((ent, ent.Comp2));
+            }
         }
 
-        // make sure we only progress when buying current path knowledge
-        if (data.Stage > ent.Comp2.PathStage && data.Path == ent.Comp2.CurrentPath)
-        {
-            ent.Comp2.PathStage = data.Stage;
-            UpdateHereticCostModifiers((ent, ent.Comp2));
-        }
+        ent.Comp2.PassiveLevel = Math.Max(ent.Comp2.PassiveLevel, data.PassiveLevel);
 
         Dirty(ent, ent.Comp2);
         return true;
     }
 
+    public void RemoveAura(EntityUid uid)
+    {
+        RemCompDeferred<HereticAuraComponent>(uid);
+    }
+
     public void UpdateHereticAura(EntityUid uid)
     {
-        if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura ||
-            HasComp<HideHereticAuraComponent>(uid) ||
-            Status.HasEffectComp<HideHereticAuraStatusEffectComponent>(uid))
+        if (TerminatingOrDeleted(uid))
+            return;
+
+        if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura)
         {
-            RemCompDeferred<HereticAuraComponent>(uid);
+            RemoveAura(uid);
+            return;
+        }
+
+        var ev = new ShouldHideHereticAuraEvent();
+        RaiseLocalEvent(uid, ref ev);
+        if (ev.Hide)
+        {
+            RemoveAura(uid);
             return;
         }
 
@@ -226,7 +240,7 @@ public abstract class SharedHereticSystem : EntitySystem
 
     public virtual void RaiseKnowledgeEvent(EntityUid uid, HereticKnowledgeEvent ev, bool negative) { }
 
-    protected virtual void SpawnRituals(HereticComponent heretic,
+    protected virtual void SpawnRituals(Entity<HereticComponent> heretic,
         List<EntProtoId<Rituals.HereticRitualComponent>> rituals,
         ICommonSession session)
     {

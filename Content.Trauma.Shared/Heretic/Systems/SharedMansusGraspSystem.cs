@@ -328,10 +328,10 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         }
 
         if (heretic.Comp.PathStage >= 3)
-            ApplyMark(target, path, heretic.Comp.PathStage);
+            ApplyMark(target, path, heretic.Comp.PassiveLevel);
     }
 
-    public void ApplyMark(EntityUid target, HereticPath path, int pathStage = 3)
+    public void ApplyMark(EntityUid target, HereticPath path, int passiveLevel = 1)
     {
         if (!HasComp<MobStateComponent>(target))
             return;
@@ -350,7 +350,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
         var cosmosMark = EnsureComp<HereticCosmicMarkComponent>(target);
         cosmosMark.CosmicDiamondUid = Spawn(cosmosMark.CosmicDiamond, Transform(target).Coordinates);
-        cosmosMark.PathStage = pathStage;
+        cosmosMark.PassiveLevel = passiveLevel;
         _transform.AttachToGridOrMap(cosmosMark.CosmicDiamondUid.Value);
         Dirty(target, cosmosMark);
     }

@@ -1,3 +1,6 @@
+knowledge-path-rust-passive-desc-2 = Rust now heals your bones. Healing rate increased.
+knowledge-path-rust-passive-desc-3 = Rust now regenerates lost body parts. Healing rate increased.
+
 knowledge-path-rust-s1-name = Blacksmith's Tale
 knowledge-path-rust-s1-desc =
     "Let me tell you a story", said the Blacksmith, as he gazed deep into his rusty blade.
@@ -14,6 +17,7 @@ knowledge-path-rust-s2-desc =
     Already rusted surfaces are destroyed.
     Standing on Rusted tiles heals, purges chems off your body and grants you resistance to batons.
     Allows you to rust basic iron walls and floors.
+    You also become immune to diseases.
 
 knowledge-path-rust-s3-name = Mark of Rust
 knowledge-path-rust-s3-desc =
@@ -37,11 +41,13 @@ knowledge-path-rust-s5-desc =
 
 knowledge-path-rust-armor-name = Salvaged Remains
 knowledge-path-rust-armor-desc =
-    The corrosion was unstoppable. The rust was unpleasable. The Blacksmith was gone, and you hold their blade. Champions of hope, the Rustbringer is nigh!
+    From beneath warped scrap, the Blacksmith pulls forth an ancient fabric.
+    "Whatever this once stood for is lost. So now, we give it new purpose."
 
     Allows you to transmute a table (or a suit), a mask and any trash item to create a Salvaged Remains.
     Has extra armor, tackle resistance and syringe immunity while standing on rust.
     Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
 
 knowledge-path-rust-s6-name = Entropic Plume
 knowledge-path-rust-s6-desc =
@@ -54,7 +60,6 @@ knowledge-path-rust-s7-desc =
     The Blacksmith hands you their blade. "The Blade will guide you through the flesh, should you let it." The heavy rust weights it down. You stare deeply into it. The Rusted Hills call for you, now.
 
     Your Rusty Blade now causes toxic damage to those you attack and also increases rot level of corpses.
-    Standing on Rusted tiles closes up your wounds and heals your pain, healing effect increased.
     Allows you to rust reinforced and mining walls.
 
 knowledge-path-rust-s8-rust-charge-name = Rust Charge
@@ -68,5 +73,5 @@ knowledge-path-rust-s9-desc =
     The ascension ritual of the Path of Rust.
     Bring 3 rotting or silicon corpses to a transmutation rune to complete the ritual.
     When completed, the ritual site will endlessly spread rust onto any surface, stopping for nothing.
-    Additionally, you will become extremely resilient on rust, healing at much higher rate, regenerating lost limbs and becoming immune to many effects and dangers.
+    Additionally, you will become extremely resilient on rust, healing at much higher rate and becoming immune to many effects and dangers.
     You will be able to rust almost anything upon ascending.

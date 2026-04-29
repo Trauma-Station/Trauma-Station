@@ -201,8 +201,8 @@ public abstract partial class SharedHereticAbilitySystem
         var uid = args.Performer;
 
         Heretic.TryGetHereticComponent(uid, out var heretic, out _);
-        var effectiveStage = MathF.Max(heretic?.PathStage ?? 9f - 4f, 1f);
-        var multiplier = heretic?.CurrentPath is null or HereticPath.Rust ? MathF.Sqrt(effectiveStage) : 1f;
+        var effectiveStrength = MathF.Max(heretic?.PassiveLevel ?? 2, 1);
+        var multiplier = heretic?.CurrentPath is null or HereticPath.Rust ? effectiveStrength : 1f;
 
         var aoeRadius = MathF.Max(args.AoeRadius, args.AoeRadius * multiplier);
         var range = MathF.Max(args.Range, args.Range * multiplier);
@@ -245,7 +245,7 @@ public abstract partial class SharedHereticAbilitySystem
         if (!TryComp(target, out RustRequiresPathStageComponent? requiresPathStage))
             return true;
 
-        var stage = heretic == null ? 10 : heretic.PathStage;
+        var stage = heretic?.PathStage ?? 10;
         surfaceStrength = requiresPathStage.PathStage;
 
         if (surfaceStrength <= stage)

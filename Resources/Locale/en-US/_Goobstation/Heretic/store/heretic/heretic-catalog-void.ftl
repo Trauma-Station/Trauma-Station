@@ -1,3 +1,6 @@
+knowledge-path-void-passive-desc-2 = You no longer need to breathe.
+knowledge-path-void-passive-desc-3 = Grants you partial resistance to all slowdowns.
+
 knowledge-path-void-s1-name = Glimmer of Winter
 knowledge-path-void-s1-desc =
     I feel a shimmer in the air, the air around me gets colder.
@@ -47,8 +50,9 @@ knowledge-path-void-armor-desc =
     Even as I hear the crunch of snow as I plant my foot to the ground, I feel nothing.
 
     Allows you to transmute a table (or a suit) and a mask in sub-zero temperatures to create a Hollow Weave,
-    this armor grants protection from the hazards of space and will periodically nullify attacks and grant you a short stealth camoflage to reposition yourself.
+    this armor grants protection from the hazards of space and will periodically nullify attacks and grant you a short stealth camouflage to reposition yourself.
     Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
 
 knowledge-path-void-s6-name = Void Pull
 knowledge-path-void-s6-desc =
@@ -62,7 +66,6 @@ knowledge-path-void-s7-desc =
     Fleeting memories, fleeting feet. I mark my way with frozen blood upon the snow. Covered and forgotten.
 
     Your blade now freezes enemies. Additionally, you can now attack distant targets with your Void Blade, teleporting directly next to them.
-    You no longer need to breathe
 
 knowledge-path-void-s8-name = Void Conduit
 knowledge-path-void-s8-desc =

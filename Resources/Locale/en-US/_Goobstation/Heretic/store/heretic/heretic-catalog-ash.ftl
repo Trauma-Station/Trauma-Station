@@ -1,3 +1,6 @@
+knowledge-path-ash-passive-desc-2 = Grants you immunity to ash storms.
+knowledge-path-ash-passive-desc-3 = Grants you immunity temporary blindness and vision blur.
+
 knowledge-path-ash-s1-name = Nightwatcher's Secret
 knowledge-path-ash-s1-desc =
     The City Guard know their watch. If you ask them at night, they may tell you about the ashy lantern.
@@ -11,6 +14,8 @@ knowledge-path-ash-s2-desc =
     The Nightwatcher was the first of them, his treason started it all. Their lantern, expired to ash - their watch, absent.
 
     Your Mansus Grasp will burn the eyes of the victim, damaging them and blurring their vision.
+    You become immune to high temperatures.
+    Upon reaching 4 fire stacks on your body, your spells will become empowered.
 
 knowledge-path-ash-s3-name = Mark of Ash
 knowledge-path-ash-s3-desc =
@@ -19,14 +24,15 @@ knowledge-path-ash-s3-desc =
     He shone brightly in the darkness, until the blaze begin to die.
 
     Your Mansus Grasp now applies the Mark of Ash. The mark is triggered from an attack with your Ashen Blade.
-    When triggered, the victim takes additional stamina and burn damage, and the mark is transferred to a nearby heathen.
+    When triggered, all your spells have their cooldown slightly reduced, the victim takes additional burn damage, and the mark is transferred to a nearby heathen.
     Damage dealt is decreased with each transfer.
 
-knowledge-path-ash-s4-name = Ashen Shift
+knowledge-path-ash-s4-name = Ashen Passsage
 knowledge-path-ash-s4-desc =
     He knew how to walk between the planes.
 
-    Grants you Ashen Passage, a spell that lets you phase out of reality and traverse a very short distance, passing though any walls.
+    Grants you Ashen Passage, a spell that lets you phase out of reality, allowing you to traverse a short distance, passing though any walls.
+    When empowered, it will break you out of any stuns and restraints, and will have a longer range.
 
 knowledge-path-ash-s5-name = Volcano Blast
 knowledge-path-ash-s5-desc =
@@ -35,16 +41,17 @@ knowledge-path-ash-s5-desc =
     Grants you Volcano Blast, a spell that - after a short charge - fires off a beam of energy at a nearby enemy,
     setting them on fire and burning them.
     If they do not extinguish themselves, the beam will continue to another target.
+    When empowered, lasts enemies with more flames.
 
 knowledge-path-ash-armor-name = Scorched Mantle
-knowledge-path-ash-s6-desc =
+knowledge-path-ash-armor-desc =
     The Watch remain as they fell, crumbling away from sight.
     Yet the winds blowing through the city call them back to service, dust kicked into the air, a drifting silhouette of the fallen.
 
     Allows you to transmute a table (or a suit), a mask and a match to create a Scorched Mantle.
     It provides completes protection from fire, and is able to produce more flames passively.
-    When you have enough fire, you may cast empowered versions of your ashen spells.
-    Acts as a focus while hoode.
+    Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
 
 knowledge-path-ash-s6-name = Mask of Madness
 knowledge-path-ash-s6-desc =
@@ -67,6 +74,7 @@ knowledge-path-ash-s8-desc =
 
     Grants you Nightwatcher's Rebirth, a spell that extinguishes you and burns all nearby heathens who are currently on fire, healing you for every victim afflicted.
     If any victims afflicted are in critical condition, they will also instantly die.
+    The effect scales with the amount of fire stacks on you when casted.
 
 knowledge-path-ash-s9-name = Ashlord's Rite
 knowledge-path-ash-s9-desc =

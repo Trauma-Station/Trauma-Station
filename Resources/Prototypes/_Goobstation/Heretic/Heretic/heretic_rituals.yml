@@ -287,6 +287,7 @@
         - whitelist:
             tags:
             - Mask
+            - BreathMask
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
@@ -300,6 +301,8 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticAsh: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualMaskOfMadness
@@ -325,6 +328,7 @@
         - whitelist:
             components:
             - Mask
+            - BreathMask
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
@@ -490,6 +494,7 @@
         - whitelist:
             tags:
             - Mask
+            - BreathMask
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
@@ -503,6 +508,8 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticBlade: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualAscensionBlade
@@ -677,6 +684,7 @@
         - whitelist:
             tags:
             - Mask
+            - BreathMask
           name: heretic-ritual-ingredient-mask
     - !type:EffectsRitualEffect
       applyOn: Delete
@@ -690,6 +698,8 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticFlesh: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualImperfect
@@ -1024,6 +1034,7 @@
         - whitelist:
             tags:
             - Mask
+            - BreathMask
           name: heretic-ritual-ingredient-mask
     - !type:EffectsRitualEffect
       applyOn: Delete
@@ -1033,6 +1044,8 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticVoid: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualAscensionVoid
@@ -1181,6 +1194,7 @@
         - whitelist:
             tags:
             - Mask
+            - BreathMask
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
@@ -1194,6 +1208,8 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticRust: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualAscensionRust
@@ -1346,6 +1362,7 @@
         - whitelist:
             tags:
             - Mask
+            - BreathMask
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
@@ -1359,6 +1376,8 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticCosmos: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualAscensionCosmos
@@ -1505,6 +1524,7 @@
         - whitelist:
             tags:
             - Mask
+            - BreathMask
           name: heretic-ritual-ingredient-mask
         - whitelist:
             tags:
@@ -1518,6 +1538,8 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticLock: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualEldritchId
@@ -1696,14 +1718,17 @@
     - !type:LookupRitualEffect
       applyOn: Platform
       result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
       - !type:Delete
-      conditions:
-      - !type:FilterKnowledgeTagsCondition
-        applyOn: Look
-        result: Delete
     - !type:RemoveRitualsEffect
       applyOn: Mind
       ritualTags:
@@ -1711,7 +1736,14 @@
     - !type:UpdateKnowledgeEffect
       applyOn: Mind
       amount: 4
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
+      level: 3
   - type: HereticKnowledgeRitual
+    datasets:
+      KnowledgeRitualOrgans: 1
+      KnowledgeRitualEasy: 1
+      KnowledgeRitualHard: 1
   - type: Tag
     tags:
     - RitualKnowledge

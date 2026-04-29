@@ -26,7 +26,7 @@ public abstract class SharedHereticCombatMarkSystem : EntitySystem
     {
         var protoId = $"HereticMark{mark.Path.ToString()}";
         if (_proto.HasIndex<EntityEffectPrototype>(protoId))
-            _effects.TryApplyEffect(target, protoId, mark.Repetitions, user);
+            _effects.TryApplyEffect(target, protoId, 1f, user);
 
         _audio.PlayPredicted(mark.TriggerSound, target, user);
         RemCompDeferred(target, mark);

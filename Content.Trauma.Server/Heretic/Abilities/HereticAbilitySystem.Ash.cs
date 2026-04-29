@@ -53,8 +53,8 @@ public sealed partial class HereticAbilitySystem
         if (!TryUseAbility(args))
             return;
 
-        Spawn("PolymorphAshJauntAnimation", Transform(args.Performer).Coordinates);
-        _poly.PolymorphEntity(args.Performer, args.Jaunt);
+        if (_poly.PolymorphEntity(args.Performer, args.Jaunt) is { } uid)
+            Spawn(args.Effect, Transform(uid).Coordinates);
     }
 
     private void OnNWRebirth(EventHereticNightwatcherRebirth args)
@@ -109,7 +109,7 @@ public sealed partial class HereticAbilitySystem
             return;
 
         _stam.TryTakeStamina(args.Performer, toHeal);
-        IHateWoundMed(args.Performer, AllDamage * toHeal, 0, 0);
+        IHateWoundMed(args.Performer, AllDamage * toHeal, 0, 0, 0);
     }
 
     private void OnFlames(EventHereticFlames args)

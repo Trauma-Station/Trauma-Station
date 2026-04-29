@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Metabolism;
 
@@ -12,13 +13,20 @@ public sealed partial class FleshPassiveComponent : Component
     public override bool SessionSpecific => true;
 
     [DataField]
+    public List<ProtoId<DamageTypePrototype>> HealthChangeImmuneDamageTypes = new()
+        { "Poison", "Radiation", "Asphyxiation", "Bloodloss", "Cellular", "Caustic" };
+
+    [DataField]
     public EntityUid? Stomach;
 
     [DataField]
-    public ProtoId<ReagentPrototype> ReagentId = "RawFlesh";
+    public float HealMultiplier = 2f;
 
     [DataField]
-    public float ReagentMultiplier = 0.1f;
+    public float BloodHealMultiplier = 3f;
+
+    [DataField]
+    public float BleedHealMultiplier = 0.5f;
 
     [DataField]
     public float OrganMultiplier = 2f;

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
 
@@ -27,7 +28,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         args.Handled = true;
 
-        var fireBlasted = EnsureComp<Components.PathSpecific.Ash.FireBlastedComponent>(ent);
+        var fireBlasted = EnsureComp<FireBlastedComponent>(ent);
         fireBlasted.Damage = -2f;
 
         if (!Heretic.TryGetHereticComponent(ent, out var heretic, out _) ||

@@ -9,6 +9,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
+using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
@@ -48,11 +49,13 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedHereticCurseSystem _curse = default!;
     [Dependency] private readonly FleshGraspSystem _fleshGrasp = default!;
+    [Dependency] private readonly SharedStoreSystem _store = default!;
+
     [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
     [Dependency] private readonly EntityQuery<StackComponent> _stackQuery = default!;
-    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
 
-    public static SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
+    public static SoundSpecifier RitualSuccessSound =
+        new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
 
     public const string Performer = "Performer";
     public const string Mind = "Mind";
@@ -75,6 +78,18 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     }
 
     #region Helpers
+
+    public void SetOwner(Entity<HereticRitualComponent?> ent, EntityUid owner)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        ent.Comp.RitualOwner = owner;
+        Dirty(ent);
+
+        var ev = new HereticRitualOwnerSetEvent(owner);
+        RaiseLocalEvent(ent, ref ev);
+    }
 
     protected virtual (bool isCommand, bool isSec) IsCommandOrSec(EntityUid uid)
     {

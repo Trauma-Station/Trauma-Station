@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.Bloodstream;
-using Content.Goobstation.Shared.Clothing;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
-using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -18,42 +15,18 @@ namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 public sealed class ChampionStanceSystem : EntitySystem
 {
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
     [Dependency] private readonly BodySystem _body = default!;
-
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ChampionStanceComponent, DamageModifyEvent>(OnDamageModify);
-        SubscribeLocalEvent<ChampionStanceComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
-        SubscribeLocalEvent<ChampionStanceComponent, GetBloodlossDamageMultiplierEvent>(OnGetBloodlossMultiplier);
         SubscribeLocalEvent<ChampionStanceComponent, ComponentStartup>(OnChampionStartup);
         SubscribeLocalEvent<ChampionStanceComponent, ComponentShutdown>(OnChampionShutdown);
-        SubscribeLocalEvent<ChampionStanceComponent, ModifySlowOnDamageSpeedEvent>(OnChampionModifySpeed);
         SubscribeLocalEvent<ChampionStanceComponent, OrganInsertedIntoEvent>(OnOrganInsertedInto);
         SubscribeLocalEvent<ChampionStanceComponent, OrganRemovedFromEvent>(OnOrganRemovedFrom);
-        SubscribeLocalEvent<ChampionStanceComponent, DelayedKnockdownAttemptEvent>(OnDelayedKnockdownAttempt);
-    }
-
-    private void OnDelayedKnockdownAttempt(Entity<ChampionStanceComponent> ent,
-        ref DelayedKnockdownAttemptEvent args)
-    {
-        if (!Condition(ent))
-            return;
-
-        args.Cancel();
-    }
-
-    private void OnChampionModifySpeed(Entity<ChampionStanceComponent> ent, ref ModifySlowOnDamageSpeedEvent args)
-    {
-        var dif = 1f - args.Speed;
-        if (dif <= 0f)
-            return;
-
-        // reduces the slowness modifier by the given coefficient
-        args.Speed += dif * 0.5f;
     }
 
     private void OnChampionShutdown(Entity<ChampionStanceComponent> ent, ref ComponentShutdown args)
@@ -62,13 +35,13 @@ public sealed class ChampionStanceSystem : EntitySystem
             return;
 
         MakeOrgansRemovable(ent, true);
-        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent);
     }
 
     private void OnChampionStartup(Entity<ChampionStanceComponent> ent, ref ComponentStartup args)
     {
         MakeOrgansRemovable(ent, false);
-        _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent);
     }
 
     private void MakeOrgansRemovable(EntityUid uid, bool removable)
@@ -78,12 +51,6 @@ public sealed class ChampionStanceSystem : EntitySystem
             part.Comp.CanRemove = removable;
             Dirty(part);
         }
-    }
-
-    private void OnGetBloodlossMultiplier(Entity<ChampionStanceComponent> ent,
-        ref GetBloodlossDamageMultiplierEvent args)
-    {
-        args.Multiplier *= 0.5f;
     }
 
     public bool Condition(Entity<ChampionStanceComponent> ent)
@@ -114,14 +81,6 @@ public sealed class ChampionStanceSystem : EntitySystem
         }
 
         args.Damage.WoundSeverityMultipliers = dict;
-    }
-
-    private void OnBeforeStaminaDamage(Entity<ChampionStanceComponent> ent, ref BeforeStaminaDamageEvent args)
-    {
-        if (!Condition(ent))
-            return;
-
-        args.Value *= 0.5f;
     }
 
     private void OnOrganInsertedInto(Entity<ChampionStanceComponent> ent, ref OrganInsertedIntoEvent args)

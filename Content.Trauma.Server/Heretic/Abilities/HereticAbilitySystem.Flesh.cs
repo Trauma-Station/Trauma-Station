@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Clothing.Components;
+using Content.Goobstation.Shared.Disease.Components;
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
-using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Cloning;
 using Content.Shared.Damage;
@@ -54,14 +54,19 @@ public sealed partial class HereticAbilitySystem
         if (args.Volume <= FixedPoint2.Zero)
             return;
 
-        if (!Heretic.TryGetHereticComponent(ent.Owner, out var heretic, out _) || heretic.PathStage <= 0)
+        if (!Heretic.TryGetHereticComponent(ent.Owner, out var heretic, out _))
             return;
 
         var multiplier = GetMultiplier((ent.Owner, ent.Comp), heretic, ref args, out var multipliersApplied);
         if (!multipliersApplied)
             return;
 
-        _blood.TryAddToBloodstream(ent.Owner, new Solution(ent.Comp.ReagentId, multiplier));
+        _lifesteal.LifeSteal(ent.Owner, multiplier * ent.Comp.HealMultiplier);
+        if (!TryComp(ent, out BloodstreamComponent? bloodstream))
+            return;
+
+        _blood.TryModifyBloodLevel((ent, bloodstream), multiplier * ent.Comp.BloodHealMultiplier);
+        _blood.TryModifyBleedAmount((ent, bloodstream), -multiplier * ent.Comp.BleedHealMultiplier);
     }
 
     private float GetMultiplier(Entity<FleshPassiveComponent> ent,
@@ -69,8 +74,7 @@ public sealed partial class HereticAbilitySystem
         ref ConsumingFoodEvent args,
         out bool multipliersApplied)
     {
-        var stage = MathF.Pow(heretic.PathStage, 0.3f);
-        var multiplier = args.Volume.Float() * stage;
+        var multiplier = args.Volume.Float();
         var oldMult = multiplier;
 
         if (HasComp<MobStateComponent>(args.Food))
@@ -83,15 +87,18 @@ public sealed partial class HereticAbilitySystem
             multiplier *= ent.Comp.BodyPartMultiplier;
         if (HasComp<Shared.Heretic.Components.HumanOrganComponent>(args.Food))
             multiplier *= ent.Comp.HumanMultiplier;
+
+        multipliersApplied = oldMult < multiplier;
+
         if (heretic.Ascended)
             multiplier *= ent.Comp.AscensionMultiplier;
 
-        multipliersApplied = oldMult < multiplier;
-        return multiplier * ent.Comp.ReagentMultiplier;
+        return multiplier;
     }
 
     private void OnMapInit(Entity<FleshPassiveComponent> ent, ref MapInitEvent args)
     {
+        RemCompDeferred<DiseaseCarrierComponent>(ent);
         ResolveStomach(ent);
     }
 

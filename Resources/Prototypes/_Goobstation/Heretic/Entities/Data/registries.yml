@@ -21,6 +21,7 @@
     hungerPerArmyUse: 25
   - type: Dragon
     carpRiftHealing: !type:DamageSpecifier
+  - type: DiseaseCarrier
 
 - type: componentRegistry
   id: ComponentsToRemoveOnUnGhoulify

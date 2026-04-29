@@ -21,15 +21,9 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<EventHereticCosmicRune>(OnCosmicRune);
         SubscribeLocalEvent<StarBlastActionComponent, EventHereticStarBlast>(OnStarBlast);
         SubscribeLocalEvent<EventHereticCosmicExpansion>(OnExpansion);
-        SubscribeLocalEvent<HereticAscensionCosmosEvent>(OnAscensionCosmos);
 
         SubscribeLocalEvent<StarBlastComponent, ProjectileHitEvent>(OnHit);
         SubscribeLocalEvent<StarBlastComponent, EntityTerminatingEvent>(OnEntityTerminating);
-    }
-
-    private void OnAscensionCosmos(HereticAscensionCosmosEvent args)
-    {
-        _eye.SetDrawFov(args.Heretic, args.Negative);
     }
 
     private void OnExpansion(EventHereticCosmicExpansion args)
@@ -42,10 +36,10 @@ public abstract partial class SharedHereticAbilitySystem
         var coords = Transform(ent).Coordinates;
 
         Heretic.TryGetHereticComponent(ent, out var heretic, out _);
-        var strength = heretic is { CurrentPath: HereticPath.Cosmos } ? heretic.PathStage : 10;
+        var strength = heretic is { CurrentPath: HereticPath.Cosmos } ? heretic.PassiveLevel : 3;
 
         _starMark.ApplyStarMarkInRange(coords, ent, args.Range);
-        _starMark.SpawnCosmicFields(coords, 2, strength);
+        _starMark.SpawnCosmicFields(coords, 2, strength, true);
 
         PredictedSpawnAtPosition(args.Effect, coords);
 
@@ -64,7 +58,7 @@ public abstract partial class SharedHereticAbilitySystem
         var user = args.Performer;
 
         Heretic.TryGetHereticComponent(user, out var heretic, out _);
-        var strength = heretic is { CurrentPath: HereticPath.Cosmos } ? heretic.PathStage : 10;
+        var strength = heretic is { CurrentPath: HereticPath.Cosmos } ? heretic.PassiveLevel : 3;
 
         if (Exists(ent.Comp.Projectile))
         {

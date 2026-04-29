@@ -1,4 +1,24 @@
 - type: listing
+  id: HereticSidePathKnowledge
+  name: knowledge-path-side-knowledge-name
+  description: knowledge-path-side-knowledge-desc
+  icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - RitualOfKnowledge
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+    minPassiveLevel: 2
+
+- type: listing
   id: HereticSideT1Flask
   name: knowledge-path-side-t1-flask-name
   description: knowledge-path-side-t1-flask-desc

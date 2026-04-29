@@ -65,8 +65,7 @@ public sealed class TouchSpellSystem : EntitySystem
         if (args is not { Handled: false, CanReach: true, Target: { } target })
             return;
 
-        TryUseTouchSpell(ent, args.User, target);
-        args.Handled = true;
+        args.Handled = TryUseTouchSpell(ent, args.User, target);
     }
 
     public bool TryUseTouchSpell(Entity<TouchSpellComponent> ent, EntityUid user, EntityUid target)

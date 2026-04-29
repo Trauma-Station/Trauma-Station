@@ -50,3 +50,6 @@ public record struct GetGrabMovespeedEvent(float Speed);
 
 [ByRefEvent]
 public record struct CanStandWhileImmobileEvent(bool CanStand = false);
+
+[ByRefEvent]
+public record struct BeforeMovespeedModifierAppliedEvent(float WalkModifier, float SprintModifier);

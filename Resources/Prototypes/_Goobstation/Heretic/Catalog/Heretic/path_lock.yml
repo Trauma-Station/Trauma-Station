@@ -132,25 +132,51 @@
     - Lock
 
 - type: listing
-  id: HereticLockKnowledge
-  name: knowledge-path-side-knowledge-name
-  description: knowledge-path-side-knowledge-desc-lock
-  icon: { sprite: _Goobstation/Heretic/book.rsi, state: icon }
+  id: HereticLockPassiveT2
+  name: knowledge-passive-upgrade-name-2
+  description: knowledge-path-lock-passive-desc-2
+  icon: { sprite: _Goobstation/Heretic/Blades/blade_lock.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - RitualOfKnowledge
+    - LockPassiveT2
   cost:
-    KnowledgePoint: 1
+    KnowledgePoint: 0
   categories:
   - HereticPathSpecial
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
+    minPassiveLevel: 2
     stage: 5
     whitelist:
     - Lock
+
+- type: listing
+  id: HereticLockPassiveT3
+  name: knowledge-passive-upgrade-name-3
+  description: knowledge-path-lock-passive-desc-3
+  icon: { sprite: _Goobstation/Heretic/Blades/blade_lock.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - LockPassiveT3
+  cost:
+    KnowledgePoint: 0
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    minPassiveLevel: 3
+    stage: 5
+    whitelist:
+    - Lock
+  - !type:BuyBeforeCondition
+    whitelist:
+    - HereticLockPassiveT2
 
 - type: listing
   id: HereticLockPath6

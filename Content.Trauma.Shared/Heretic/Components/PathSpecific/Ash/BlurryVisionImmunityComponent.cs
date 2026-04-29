@@ -1,0 +1,8 @@
+namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class BlurryVisionImmunityComponent : Component
+{
+    [DataField]
+    public string Key = "BlurryVision";
+}

@@ -324,6 +324,12 @@
   parent: [Saw, MetalToolDurabilityStrong]
   description: For heavy duty cutting.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - CircularSaw
+  # </Trauma>
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/circular-saw.rsi
     state: circular-saw

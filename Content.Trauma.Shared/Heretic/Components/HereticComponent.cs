@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Dataset;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -78,26 +79,7 @@ public sealed partial class HereticComponent : Component
     public int InfluenceGainTextFontSize = 22;
 
     [DataField]
-    public List<LocId> InfluenceGainMessages = new()
-    {
-        "influence-gain-message-1",
-        "influence-gain-message-2",
-        "influence-gain-message-3",
-        "influence-gain-message-4",
-        "influence-gain-message-5",
-        "influence-gain-message-6",
-        "influence-gain-message-7",
-        "influence-gain-message-7",
-        "influence-gain-message-8",
-        "influence-gain-message-9",
-        "influence-gain-message-10",
-        "influence-gain-message-11",
-        "influence-gain-message-12",
-        "influence-gain-message-13",
-        "influence-gain-message-14",
-        "influence-gain-message-15",
-        "influence-gain-message-16",
-    };
+    public ProtoId<LocalizedDatasetPrototype> InfluenceGainMessages = "InfluenceGainMessages";
 
     [DataField]
     public List<EntProtoId<ObjectiveComponent>> AllObjectives = new()
@@ -150,7 +132,8 @@ public sealed partial class HereticComponent : Component
     public bool CanBreakBlade => !Ascended && KnowledgeTracker < LockBladeBreakKnowledgeAmount;
 
     [ViewVariables]
-    public bool ShouldShowAura => CurrentPath != HereticPath.Lock && (Ascended || CanAscend && !CanBreakBlade);
+    public bool ShouldShowAura =>
+        CurrentPath != HereticPath.Lock && (AvailablePassiveLevel > 1 || Ascended || CanAscend && !CanBreakBlade);
 
     [DataField]
     public LocId BreakBladeAbilityLostMessage = "heretic-blade-break-ability-lost-message";
@@ -183,6 +166,18 @@ public sealed partial class HereticComponent : Component
     /// </summary>
     [DataField]
     public bool IsActive = true;
+
+    /// <summary>
+    /// Determines whether heretic can get t2 and t3 passives from the store
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int AvailablePassiveLevel = 1;
+
+    /// <summary>
+    /// Current heretic passive ability level
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int PassiveLevel;
 }
 
 [DataDefinition, Serializable, NetSerializable]

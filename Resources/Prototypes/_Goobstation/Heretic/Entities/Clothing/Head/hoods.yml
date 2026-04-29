@@ -24,20 +24,22 @@
     coverage:
     - Head
     modifiers:
+      # Resists are so high because regular helmets have insanely high resists
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-        Caustic: 0.5
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.1
+        Heat: 0.3
+        Caustic: 0.3
     traumaDeductions:
       Dismemberment: 0.5
       OrganDamage: 0.5
       BoneDamage: 0.5
-      VeinsDamage: 0.0
-  - type: FireProtection
-    reduction: 0.1
+      VeinsDamage: 0
   - type: FaceHuggerBlocker
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+    lowPressureMultiplier: 1000
 
 - type: entity
   parent: ClothingHeadHatHoodHeretic
@@ -121,7 +123,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/Head/void_cloak_hood.rsi
   - type: Tag
-    tags: [ ]
+    tags: []
   - type: StripMenuInvisible
   - type: VoidCloakHood
   - type: Armor
@@ -129,11 +131,11 @@
     - Head
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.7
-        Caustic: 0.7
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.4
+        Heat: 0.5
+        Caustic: 0.5
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3

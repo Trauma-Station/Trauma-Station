@@ -93,15 +93,16 @@ public sealed class MultiShaderSpriteOverlay : Overlay
             postHandle.RenderInRenderTarget(target,
                 () =>
                 {
+                    var position = target.LocalToWorld(eye, (Vector2) screenSpriteSize * 0.5f, viewport.RenderScale);
                     var angle = rot + eye.Rotation;
                     angle = angle.Reduced().FlipPositive();
 
                     var cardinal = Angle.Zero;
 
-                    if (sprite is {NoRotation: false, SnapCardinals: true})
+                    if (sprite is { NoRotation: false, SnapCardinals: true })
                         cardinal = angle.RoundToCardinalAngle();
 
-                    var entityMatrix = Matrix3Helpers.CreateTransform(pos, sprite.NoRotation ? -eye.Rotation : rot - cardinal);
+                    var entityMatrix = Matrix3Helpers.CreateTransform(position, sprite.NoRotation ? -eye.Rotation : rot - cardinal);
                     Matrix3x2.Invert(entityMatrix, out var invEntityMatrix);
 
                     var invMatrix = target.GetWorldToLocalMatrix(eye, viewport.RenderScale);
@@ -118,7 +119,7 @@ public sealed class MultiShaderSpriteOverlay : Overlay
 
                     postHandle.InvMatrix = invEntityMatrix * invSpriteMatrix * scaleMatrix * entityMatrix * invMatrix;
 
-                    _sprite.RenderSprite((uid, sprite), postHandle, eye.Rotation, rot, pos);
+                    _sprite.RenderSprite((uid, sprite), postHandle, eye.Rotation, rot, position);
                     postHandle.InvMatrix = Matrix3x2.Identity;
 
                     postHandle.SetTransform(Matrix3x2.Identity);
