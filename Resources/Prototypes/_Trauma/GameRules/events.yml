@@ -28,7 +28,7 @@
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
-    - id: BlobSpawnMidround
+    - id: BlobSpawn
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation
