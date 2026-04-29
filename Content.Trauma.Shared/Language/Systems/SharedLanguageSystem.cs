@@ -2,14 +2,14 @@
 
 using System.Linq;
 using System.Text;
+using Content.Shared.GameTicking;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.Language.Systems;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
-using Content.Shared.GameTicking;
-using Content.Trauma.Shared.Knowledge.Systems;
-using Content.Trauma.Common.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Language.Systems;
 

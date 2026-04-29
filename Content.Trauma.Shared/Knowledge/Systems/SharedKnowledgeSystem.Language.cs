@@ -17,16 +17,9 @@ public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
-    // [Dependency] private readonly DamageableSystem _damageable = default!;
-
-    // public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
-    // private readonly DamageSpecifier _curseDamage = new();
-    // private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die", "220" };
 
     private void InitializeLanguage()
     {
-        // _curseDamage.DamageDict[Blunt] = 10;
-
         SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
             after: [ typeof(InitialBodySystem) ]); // great engine
         SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);
@@ -153,10 +146,13 @@ public abstract partial class SharedKnowledgeSystem
 
         // We add the intrinsically known languages first so other systems can manipulate them easily
         var lang = args.Language;
-        var level = 26;
         if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
-            level += existing.Comp.LearnedLevel;
-        EnsureKnowledge(brain, LanguageUnit(args.Language), level);
+        {
+            UpdateEntityLanguages(ent);
+            return;
+        }
+
+        EnsureKnowledge(brain, LanguageUnit(args.Language), 26);
 
         UpdateEntityLanguages(ent);
     }
@@ -212,12 +208,11 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (lang, speaks) in allLanguages)
         {
-            var level = 26;
             if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
-                level += existing.Comp.LearnedLevel;
+                continue;
 
             // Add if you don't know shit.
-            if (EnsureKnowledge(brain, LanguageUnit(lang), level) is not { } unit)
+            if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not { } unit)
             {
                 Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
                 continue;
@@ -247,12 +242,9 @@ public abstract partial class SharedKnowledgeSystem
         var comp = _langQuery.Comp(unit);
 
         var now = _timing.CurTime;
-        if (now < comp.LastSpoken)
-            return; // on cooldown for xp and curse effects
 
-        AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn.
+        AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn. Doesn't award anything for small sentences. Already does auto xp shit.
 
-        comp.LastSpoken = now + TimeSpan.FromSeconds(5);
         Dirty(unit, comp);
     }
 
@@ -267,34 +259,8 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         AddExperience(brain, proto, Math.Min(args.Message.Length / 10, 8));
-
-        /*
-        if (!TryComp<SkillComponent>(language, out var speakerSkill))
-            return; // No skill, no curse.
-
-        // curse of 220
-        if (GetMastery(speakerSkill) >= 5 && ContainsCursedWord(args.Message))
-        {
-            _damageable.TryChangeDamage(ent.Owner, _curseDamage, ignoreResistances: false, interruptsDoAfters: false,
-                ignoreBlockers: true, targetPart: TargetBodyPart.Head, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-            // FIXME: this doesnt exist...
-            //_status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
-            _popup.PopupEntity(Loc.GetString("language-curse-pain"), ent, ent, PopupType.SmallCaution);
-        }
-        */
     }
 
     public EntityUid? GetActiveLanguage(EntityUid target)
         => GetContainer(target)?.Comp.ActiveLanguage;
-
-    /*
-    private static readonly Regex CursedRegex = new(
-        @"\b(" + string.Join("|", CursedWords.Select(Regex.Escape)) + @")\b",
-        RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-    private bool ContainsCursedWord(string message)
-    {
-        return CursedRegex.IsMatch(message);
-    }
-    */
 }
