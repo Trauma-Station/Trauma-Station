@@ -127,6 +127,7 @@
     - MobPurpleSnake
     - MobSmallPurpleSnake
     - MobBingle
+    - MobCoconutCrab # be afraid
     offset: 0.0
 
 - type: entity

@@ -1,9 +1,9 @@
-// <Goob>
+// <Trauma>
 using Content.Shared.Examine;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
-// </Goob>
+// </Trauma>
 using Content.Shared.Inventory;
 using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
@@ -17,24 +17,25 @@ namespace Content.Shared.Storage.EntitySystems;
 /// </summary>
 public sealed class MagnetPickupSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
+    // </Trauma>
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!; // Goob
-    [Dependency] private readonly SharedItemSystem _item = default!; // White Dream
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private static readonly TimeSpan ScanDelay = TimeSpan.FromSeconds(1);
 
-    private EntityQuery<PhysicsComponent> _physicsQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
         SubscribeLocalEvent<MagnetPickupComponent, ItemToggledEvent>(OnItemToggled); // White Dream
         SubscribeLocalEvent<MagnetPickupComponent, ExaminedEvent>(OnExamined); // WD EDIT
         SubscribeLocalEvent<MagnetPickupComponent, MapInitEvent>(OnMagnetMapInit);
@@ -42,6 +43,7 @@ public sealed class MagnetPickupSystem : EntitySystem
     //WD EDIT start
     private void OnExamined(Entity<MagnetPickupComponent> entity, ref ExaminedEvent args)
     {
+        // TODO: theres already a component for this
         var onMsg = _toggle.IsActivated(entity.Owner)
             ? Loc.GetString("comp-magnet-pickup-examined-on")
             : Loc.GetString("comp-magnet-pickup-examined-off");
@@ -50,6 +52,7 @@ public sealed class MagnetPickupSystem : EntitySystem
 
     private void OnItemToggled(Entity<MagnetPickupComponent> entity, ref ItemToggledEvent args)
     {
+        // TODO: bruh this has no reason to be here
         _item.SetHeldPrefix(entity.Owner, args.Activated ? "on" : "off");
     }
     //WD EDIT end
@@ -81,7 +84,7 @@ public sealed class MagnetPickupSystem : EntitySystem
             comp.NextScan += ScanDelay;
             Dirty(uid, comp);
 
-                        // WD EDIT START. Added ForcePickup.
+            // WD EDIT START. Added ForcePickup.
             if (!comp.ForcePickup && !_inventory.TryGetContainingSlot((uid, xform, meta), out _))
                 continue;
 

@@ -173,32 +173,34 @@ public sealed partial class GunSystem : SharedGunSystem
 
         var entity = entityNull.Value;
 
-        if (TryComp<MechPilotComponent>(entity, out var mechPilot)) // Goobstation
+        // <Trauma>
+        if (TryComp<MechPilotComponent>(entity, out var mechPilot))
             entity = mechPilot.Mech;
+        // </Trauma>
 
-        if (!TryGetGun(entity, out var gunUid, out var gun))
+        if (!TryGetGun(entity, out var gun))
         {
             return;
         }
 
-        var useKey = gun.UseKey ? EngineKeyFunctions.Use : EngineKeyFunctions.UseSecondary;
+        var useKey = gun.Comp.UseKey ? EngineKeyFunctions.Use : EngineKeyFunctions.UseSecondary;
 
-        if (_inputSystem.CmdStates.GetState(useKey) != BoundKeyState.Down && !gun.BurstActivated)
+        if (_inputSystem.CmdStates.GetState(useKey) != BoundKeyState.Down && !gun.Comp.BurstActivated)
         {
-            if (gun.ShotCounter != 0)
-                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
+            if (gun.Comp.ShotCounter != 0)
+                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gun) });
             return;
         }
 
-        if (gun.NextFire > Timing.CurTime)
+        if (gun.Comp.NextFire > Timing.CurTime)
             return;
 
         var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition);
 
         if (mousePos.MapId == MapId.Nullspace)
         {
-            if (gun.ShotCounter != 0)
-                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
+            if (gun.Comp.ShotCounter != 0)
+                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gun) });
 
             return;
         }
@@ -217,7 +219,7 @@ public sealed partial class GunSystem : SharedGunSystem
         {
             Target = target,
             Coordinates = GetNetCoordinates(coordinates),
-            Gun = GetNetEntity(gunUid),
+            Gun = GetNetEntity(gun),
             Continuous = _cfg.GetCVar(CCVars.ControlHoldToAttackRanged),
         });
     }

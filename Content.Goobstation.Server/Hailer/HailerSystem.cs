@@ -32,14 +32,14 @@ public sealed class HailerSystem : EntitySystem
     {
         if (args.SlotFlags == SlotFlags.MASK)
         {
-            _actionsSystem.AddAction(args.Equipee, ref component.HailActionEntity, component.HailerAction, args.Equipee);
+            _actionsSystem.AddAction(args.EquipTarget, ref component.HailActionEntity, component.HailerAction, args.EquipTarget);
         }
     }
     private void OnGotUnequipped(EntityUid uid, HailerComponent component, GotUnequippedEvent args)
     {
         if (args.SlotFlags == SlotFlags.MASK)
         {
-            _actionsSystem.RemoveAction(args.Equipee, component.HailActionEntity);
+            _actionsSystem.RemoveAction(args.EquipTarget, component.HailActionEntity);
         }
     }
     string[] _sounds = [

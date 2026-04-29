@@ -22,7 +22,6 @@
     - TemporaryBlindness
     - Pacified
     - Flashed
-    - RadiationProtection
     - Adrenaline
   - type: Buckle
   - type: StandingState
@@ -97,7 +96,6 @@
     - TemporaryBlindness
     - Pacified
     - Flashed
-    - RadiationProtection
     - Adrenaline
   - type: Bloodstream
     bloodReferenceSolution:

@@ -77,6 +77,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private   readonly DamageExamineSystem _damageExamine = default!;
 
+    [Dependency] private readonly EntityQuery<DamageableComponent> _damageQuery = default!;
+
     public const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque); // WD EDIT: private -> public
 
     /// <summary>
@@ -771,12 +773,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         var targets = new List<EntityUid>();
-        var damageQuery = GetEntityQuery<DamageableComponent>();
-
         foreach (var entity in entities)
         {
             if (entity == user ||
-                !damageQuery.HasComponent(entity))
+                !_damageQuery.HasComponent(entity))
                 continue;
 
             // Goobstation start

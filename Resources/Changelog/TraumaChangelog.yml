@@ -7678,3 +7678,12 @@ Entries:
   id: 886
   time: '2026-04-28T18:10:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2320
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Flora Anomaly Bulbs can now spawn Coconut Crabs.
+  - type: Tweak
+    message: Xenobio can now spawn Coconut Crabs.
+  id: 887
+  time: '2026-04-28T21:28:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2319
