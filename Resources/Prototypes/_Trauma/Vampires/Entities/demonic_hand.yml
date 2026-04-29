@@ -1,0 +1,28 @@
+- type: entity
+  id: ProjectileDemonicHand
+  name: demonic hand
+  parent: BaseBullet
+  components:
+  - type: DemonicHand
+  - type: PointLight
+    color: "#DC143C"
+    radius: 2.0
+    energy: 5.0
+  - type: Projectile
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball # TODO: Change
+      shader: unshaded
+  - type: Reflective
+    reflective: Magic
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - BulletImpassable

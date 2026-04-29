@@ -1,3 +1,4 @@
+# Blood Swell I and II
 - type: entity
   parent: BaseVampireAction
   id: ActionBloodSwell
@@ -28,6 +29,7 @@
       effectProto: BloodSwellStatusEffectII
       time: 30
 
+# Blood Rush
 - type: entity
   parent: BaseVampireAction
   id: ActionBloodRush
@@ -54,6 +56,7 @@
       - type: KnockedDown # ModifyKnockdown bugs out
     - !type:Uncuff
 
+# Gargantuan Stomp
 - type: entity
   parent: BaseVampireAction
   id: ActionGargStomp
@@ -75,6 +78,7 @@
       effect: !type:NestedEffect
         proto: GargantuaStomp
 
+# Overwhelming Force
 - type: entity
   parent: BaseVampireAction
   id: ActionOverwhelmingForce
@@ -110,3 +114,48 @@
       effectProto: StatusEffectOverwhelmingForce
       time: null # TODO: I forgor to test this. Next time
       type: Remove
+
+# Demonic Hand
+- type: entity
+  parent: BaseVampireAction
+  id: ActionDemonicHand
+  name: Demonic Hand
+  description: Send out a Demonic Hand that grabs and pulls/pushes a target depending on your intent. Harm mode pulls, otherwise it pushes.
+  components:
+  - type: Action
+    # useDelay: 2
+    raiseOnAction: false
+    raiseOnUser: true
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileDemonicHand
+
+# Charge
+- type: entity
+  parent: BaseVampireAction
+  id: ActionGargCharge
+  name: Charge
+  description: Click to charge. Stuns, damages, and knocks back mobs on impact. Completely destroys walls. Also deals 200 damage to mechs and knocks them back.
+  components:
+  - type: Action
+    # useDelay: 2
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:AddComponents
+      components:
+      - type: GargantuaCharging
+        impactEffects:
+        - !type:ModifyKnockdown # TODO: Expand
+          time: 6
+    - !type:ThrowAtFacingDirection
