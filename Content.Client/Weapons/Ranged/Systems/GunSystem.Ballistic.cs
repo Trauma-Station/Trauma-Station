@@ -12,11 +12,11 @@ public sealed partial class GunSystem
         SubscribeLocalEvent<BallisticAmmoProviderComponent, UpdateAmmoCounterEvent>(OnBallisticAmmoCount);
     }
 
-    private void OnBallisticAmmoCount(EntityUid uid, BallisticAmmoProviderComponent component, UpdateAmmoCounterEvent args)
+    private void OnBallisticAmmoCount(Entity<BallisticAmmoProviderComponent> ent, ref UpdateAmmoCounterEvent args)
     {
         if (args.Control is DefaultStatusControl control)
         {
-            control.Update(GetBallisticShots(component), component.Capacity);
+            control.Update(GetBallisticShots(ent.Comp), ent.Comp.Capacity);
         }
     }
 

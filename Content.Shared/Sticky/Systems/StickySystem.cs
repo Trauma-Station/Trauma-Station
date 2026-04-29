@@ -112,7 +112,7 @@ public sealed class StickySystem : EntitySystem
 
     private void OnStickyDoAfter(Entity<StickyComponent> ent, ref StickyDoAfterEvent args)
     {
-        // target is the sticky item when unsticking and the surface when sticking, it will never be null
+        // target is the surface when sticking/unsticking, it will never be null
         if (args.Handled || args.Cancelled || args.Args.Target is not {} target)
             return;
 
@@ -158,7 +158,7 @@ public sealed class StickySystem : EntitySystem
         }
 
         // start unsticking object
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, unstickDelay, new StickyDoAfterEvent(), uid, target: uid) // Goob edit
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, unstickDelay, new StickyDoAfterEvent(), uid, target: stuckTo) // Trauma - use unstickDelay from above
         {
             BreakOnMove = !IsUser || comp.SelfUnstickBreakOnMove, // Goob edit
             NeedHand = true,

@@ -17,12 +17,12 @@ namespace Content.Client.Weapons.Ranged.Systems;
 
 public sealed partial class GunSystem
 {
-    private void OnAmmoCounterCollect(EntityUid uid, AmmoCounterComponent component, ItemStatusCollectMessage args)
+    private void OnAmmoCounterCollect(Entity<AmmoCounterComponent> ent, ref ItemStatusCollectMessage args)
     {
-        RefreshControl(uid, component);
+        RefreshControl(ent);
 
-        if (component.Control != null)
-            args.Controls.Add(component.Control);
+        if (ent.Comp.Control != null)
+            args.Controls.Add(ent.Comp.Control);
     }
 
     /// <summary>
@@ -30,16 +30,13 @@ public sealed partial class GunSystem
     /// </summary>
     /// <param name="uid"></param>
     /// <param name="component"></param>
-    private void RefreshControl(EntityUid uid, AmmoCounterComponent? component = null)
+    private void RefreshControl(Entity<AmmoCounterComponent> ent)
     {
-        if (!Resolve(uid, ref component, false))
-            return;
-
-        component.Control?.Dispose();
-        component.Control = null;
+        ent.Comp.Control?.Dispose();
+        ent.Comp.Control = null;
 
         var ev = new AmmoCounterControlEvent();
-        RaiseLocalEvent(uid, ev, false);
+        RaiseLocalEvent(ent, ev, false);
 
         // Fallback to default if none specified
         ev.Control ??= new DefaultStatusControl();
@@ -58,23 +55,23 @@ public sealed partial class GunSystem
                 container.AddChild(control);
             }
 
-            component.Control = container;
-            UpdateAmmoCount(uid, component);
+            ent.Comp.Control = container;
+            UpdateAmmoCount(ent);
             return;
         }
         // </Trauma>
 
-        component.Control = ev.Control;
-        UpdateAmmoCount(uid, component);
+        ent.Comp.Control = ev.Control;
+        UpdateAmmoCount(ent);
     }
 
-    private void UpdateAmmoCount(EntityUid uid, AmmoCounterComponent component)
+    private void UpdateAmmoCount(Entity<AmmoCounterComponent> ent)
     {
-        if (component.Control == null)
+        if (ent.Comp.Control == null)
             return;
 
         // <Trauma>
-        if (component.Control is BoxContainer container)
+        if (ent.Comp.Control is BoxContainer container)
         {
             foreach (var child in container.Children)
             {
@@ -83,17 +80,17 @@ public sealed partial class GunSystem
                     Control = child
                 };
 
-                RaiseLocalEvent(uid, childEv);
+                RaiseLocalEvent(ent, childEv);
             }
         }
         // </Trauma>
 
         var ev = new UpdateAmmoCounterEvent()
         {
-            Control = component.Control
+            Control = ent.Comp.Control
         };
 
-        RaiseLocalEvent(uid, ev, false);
+        RaiseLocalEvent(ent, ev, false);
     }
 
     public override void UpdateAmmoCount(EntityUid uid, bool prediction = true) // Trauma - made public
@@ -106,7 +103,7 @@ public sealed partial class GunSystem
             return;
         }
 
-        UpdateAmmoCount(uid, clientComp);
+        UpdateAmmoCount((uid, clientComp));
     }
 
     /// <summary>

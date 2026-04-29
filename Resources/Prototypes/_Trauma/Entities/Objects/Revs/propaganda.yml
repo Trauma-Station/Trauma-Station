@@ -66,7 +66,7 @@
       path: /Audio/_Goobstation/Items/handling/paper_throw.ogg
       params:
         volume: -6
-  - type: RevolutionaryConverter
+  - type: RevPropaganda
     conversionDuration: 5
     consumesCharges: 1
     applyFlashEffect: false
@@ -84,7 +84,6 @@
   name: advanced propaganda pamphlet
   description: This propaganda pamphlet is full of the most potent class consciousness you can come up with. It will convert instantly.
   components:
-  - type: RevolutionaryConverter
+  - type: RevPropaganda
     conversionDuration: 0.1
     consumesCharges: 1
-    applyFlashEffect: false

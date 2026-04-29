@@ -25,12 +25,12 @@ public sealed class HideClothingLayerClothingSystem : EntitySystem
 
     private void OnUnequip(Entity<HideClothingLayerClothingComponent> ent, ref GotUnequippedEvent args)
     {
-        ResetInventory(args.Equipee, ent.Comp);
+        ResetInventory(args.EquipTarget, ent.Comp);
     }
 
     private void OnEquip(Entity<HideClothingLayerClothingComponent> ent, ref GotEquippedEvent args)
     {
-        ResetInventory(args.Equipee, ent.Comp);
+        ResetInventory(args.EquipTarget, ent.Comp);
     }
 
     private void ResetInventory(EntityUid equipee, HideClothingLayerClothingComponent component)

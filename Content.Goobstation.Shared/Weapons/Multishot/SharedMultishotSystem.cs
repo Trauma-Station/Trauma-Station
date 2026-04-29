@@ -37,27 +37,24 @@ public sealed class SharedMultishotSystem : EntitySystem
 
     private void OnRequestShoot(RequestShootEvent msg, EntitySessionEventArgs args)
     {
-        var user = args.SenderSession.AttachedEntity;
-
-        if (user == null ||
+        if (args.SenderSession.AttachedEntity is not { } user ||
             !_combatMode.IsInCombatMode(user))
             return;
 
-        var gunsEnumerator = GetMultishotGuns(user.Value);
+        var gunsEnumerator = GetMultishotGuns(user);
         var shootCoords = GetCoordinates(msg.Coordinates);
         var target = GetEntity(msg.Target);
 
-        foreach(var gun in gunsEnumerator)
+        foreach (var gun in gunsEnumerator)
         {
-            var (gunEnt, gunComp, _) = gun;
-
-            if (!HasComp<MultishotComponent>(GetEntity(msg.Gun)) && gunEnt != GetEntity(msg.Gun))
+            if (!HasComp<MultishotComponent>(GetEntity(msg.Gun)) && gun.Owner != GetEntity(msg.Gun))
                 continue;
 
-            if (gunComp.Target == null || !gunComp.BurstActivated || !gunComp.LockOnTargetBurst)
-                gunComp.Target = target;
+            var comp = gun.Comp1;
+            if (comp.Target == null || !comp.BurstActivated || !comp.LockOnTargetBurst)
+                comp.Target = target;
 
-            _gun.AttemptShoot(user.Value, gunEnt, gunComp, shootCoords, gunComp.Target);
+            _gun.AttemptShoot(user, (gun.Owner, comp), shootCoords, comp.Target);
         }
     }
 
@@ -87,9 +84,9 @@ public sealed class SharedMultishotSystem : EntitySystem
 
         foreach (var gun in gunsEnumerator)
         {
-            gun.Item3.MultishotAffected = true;
-            Dirty(gun.Item1, gun.Item3);
-            _gun.RefreshModifiers(gun.Item1);
+            gun.Comp2.MultishotAffected = true;
+            Dirty(gun, gun.Comp2);
+            _gun.RefreshModifiers((gun.Owner, gun.Comp1));
         }
     }
 
@@ -106,9 +103,9 @@ public sealed class SharedMultishotSystem : EntitySystem
 
         foreach (var gun in gunsEnumerator)
         {
-            gun.Item3.MultishotAffected = false;
-            Dirty(gun.Item1, gun.Item3);
-            _gun.RefreshModifiers(gun.Item1);
+            gun.Comp2.MultishotAffected = false;
+            Dirty(gun, gun.Comp2);
+            _gun.RefreshModifiers((gun.Owner, gun.Comp1));
         }
     }
 
@@ -123,10 +120,10 @@ public sealed class SharedMultishotSystem : EntitySystem
     /// <summary>
     /// Return list of guns in hands
     /// </summary>
-    private List<(EntityUid, GunComponent, MultishotComponent)> GetMultishotGuns(EntityUid entity)
+    private List<Entity<GunComponent, MultishotComponent>> GetMultishotGuns(EntityUid entity)
     {
         var handsItems = _hands.EnumerateHeld(entity);
-        var itemList = new List<(EntityUid, GunComponent, MultishotComponent)>();
+        var itemList = new List<Entity<GunComponent, MultishotComponent>>();
 
         if (!handsItems.Any())
             return itemList;

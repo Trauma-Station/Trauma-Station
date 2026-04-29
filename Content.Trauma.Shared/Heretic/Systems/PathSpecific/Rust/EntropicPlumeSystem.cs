@@ -129,18 +129,18 @@ public abstract class EntropicPlumeSystem : EntitySystem
                     HasComp<AdminFrozenComponent>(uid) || HasComp<Wizard.Traps.IceCubeComponent>(uid))
                     return;
 
-                _gun.TryGetGun(uid, out var gun, out var gunComp);
+                var hasGun = _gun.TryGetGun(uid, out var gun);
                 _weapon.TryGetWeapon(uid, out var weapon, out var meleeComp);
 
                 float range;
                 float attackRate;
 
-                if (gunComp != null)
+                if (hasGun)
                 {
-                    if (gunComp.NextFire > curTime)
+                    if (gun.Comp.NextFire > curTime)
                         return;
 
-                    attackRate = gunComp.FireRate;
+                    attackRate = gun.Comp.FireRate;
                     range = 3f;
                 }
                 else if (meleeComp != null)
@@ -169,8 +169,8 @@ public abstract class EntropicPlumeSystem : EntitySystem
                 var target = rand.Pick(targets);
                 var coords = Transform(target).Coordinates;
 
-                if (gunComp != null)
-                    _gun.AttemptShoot(uid, gun, gunComp, coords, target);
+                if (hasGun)
+                    _gun.AttemptShoot(uid, gun, coords, target);
                 else if (meleeComp != null)
                     _weapon.AttemptLightAttack(uid, weapon, meleeComp, target);
             }

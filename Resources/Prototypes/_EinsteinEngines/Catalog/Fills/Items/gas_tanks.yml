@@ -20,7 +20,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 5.325
+    releasePressure: 5.325
     air:
       # 16 minutes with Plasmaman lungs
       volume: 0.66
@@ -50,7 +50,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 5.325
+    releasePressure: 5.325
     air:
       # 36 minutes with Plasmaman lungs
       volume: 1.5
@@ -80,7 +80,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 5.325
+    releasePressure: 5.325
     air:
       # 60 minutes with Plasmaman lungs
       volume: 1.5
@@ -96,7 +96,7 @@
   components:
   - type: GasTank
     # 120 minutes with Plasmaman lungs
-    outputPressure: 5.325
+    releasePressure: 5.325
     air:
       # 125.2 minutes with plasmaman lungs
       volume: 5

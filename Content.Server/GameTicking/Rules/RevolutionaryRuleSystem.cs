@@ -205,7 +205,8 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             !alwaysConvertible ||
             !_mobState.IsAlive(ev.Target) ||
             HasComp<ZombieComponent>(ev.Target) ||
-            HasComp<AntagImmuneComponent>(ev.Target)) // Antag immune MEANS antag immune.
+            HasComp<AntagImmuneComponent>(ev.Target) || // Trauma - Antag immune MEANS antag immune.
+            !HasComp<RevolutionaryConverterComponent>(ev.Used))
         {
             if (ev.User != null)
                 _popup.PopupEntity("The conversion failed!", ev.User.Value, ev.User.Value);
