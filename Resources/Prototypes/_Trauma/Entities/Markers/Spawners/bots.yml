@@ -6,7 +6,7 @@
   - type: Sprite
     layers:
     - state: green
-    - sprite: _Trauma/Mobs/Bots/beepsky.rsi
+    - sprite: _Trauma/Mobs/Silicon/Bots/beepsky.rsi
       state: secbot
   - type: ConditionalSpawner
     prototypes:
@@ -20,7 +20,7 @@
   - type: Sprite
     layers:
     - state: green
-    - sprite: _Trauma/Mobs/Bots/beepsky.rsi
+    - sprite: _Trauma/Mobs/Silicon/Bots/beepsky.rsi
       state: secbot
   - type: ConditionalSpawner
     prototypes:

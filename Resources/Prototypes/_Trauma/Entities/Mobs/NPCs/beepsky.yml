@@ -8,7 +8,7 @@
   description: Tiders hate this one simple trick!
   components:
   - type: Sprite
-    sprite: _Trauma/Mobs/Bots/beepsky.rsi
+    sprite: _Trauma/Mobs/Silicon/Bots/beepsky.rsi
     state: secbot
   - type: Fixtures
     fixtures:

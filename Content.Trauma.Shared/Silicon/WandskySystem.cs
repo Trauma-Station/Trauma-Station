@@ -1,0 +1,108 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Interaction;
+using Content.Shared.Popups;
+using Content.Trauma.Common.Silicon;
+using Content.Trauma.Shared.Silicon.Components;
+using Robust.Shared.Audio.Systems;
+
+namespace Content.Trauma.Shared.Silicon;
+public sealed class WandskySystem : EntitySystem
+{
+
+    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<SlaveComponent, InteractUsingEvent>(OnGetSlave);
+
+        SubscribeLocalEvent<CommanderComponent, TogglePatrolActionEvent>(OnTogglePatrol);
+        SubscribeLocalEvent<CommanderComponent, WaypointActionEvent>(OnWaypointAction);
+        SubscribeLocalEvent<CommanderComponent, ClearWaypointsActionEvent>(OnClearWaypoints);
+    }
+
+    #region CommanderEvents
+
+    public void OnGetSlave(Entity<SlaveComponent> ent, ref InteractUsingEvent args)
+    {
+        if (!TryComp<CommanderComponent>(args.Used, out var commander))
+            return;
+
+        if (ent.Comp.MasterEntity is { } || commander.SlaveEntity is { })
+        {
+            _popupSystem.PopupClient("A bond has already been formed.", ent.Owner, args.User, PopupType.Medium);
+            return;
+        }
+
+        var slaveEntity = ent.Owner;
+
+        commander.SlaveEntity = slaveEntity;
+        ent.Comp.MasterEntity = ent.Owner;
+
+        Dirty(ent);
+        Dirty(args.Used, commander);
+
+        _audio.PlayPvs(commander.EnslaveSound, ent);
+    }
+
+    public void OnTogglePatrol(Entity<CommanderComponent> ent, ref TogglePatrolActionEvent args)
+    {
+        if (ent.Comp.SlaveEntity is { } || !TryComp<SlaveComponent>(ent.Comp.SlaveEntity, out var slave))
+        {
+            _popupSystem.PopupClient("You have not synced to a Securitron", ent.Owner, args.Performer, PopupType.Medium);
+            return;
+        }
+
+        slave.IsPatrolling = !slave.IsPatrolling;
+
+        var message = slave.IsPatrolling ? "PATROL ENABLED!" : "PATROL DISABLED!";
+
+        Dirty(ent);
+        _popupSystem.PopupClient(message, ent.Owner, args.Performer, PopupType.Medium);
+    }
+
+    public void OnWaypointAction(Entity<CommanderComponent> ent, ref WaypointActionEvent args)
+    {
+        if (args.Entity is { } targetEntity && HasComp<WaypointComponent>(targetEntity))
+        {
+            _popupSystem.PopupClient("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
+            ent.Comp.Waypoints.Remove(targetEntity);
+            QueueDel(targetEntity);
+        }
+        else
+        {
+            var waypointEntity = Spawn(ent.Comp.WaypointEntityUid, args.Target);
+            ent.Comp.Waypoints.Add(waypointEntity);
+            _popupSystem.PopupClient("Waypoint added!", args.Performer, args.Performer, PopupType.Medium);
+        }
+
+        Dirty(ent);
+    }
+
+    public void OnClearWaypoints(Entity<CommanderComponent> ent, ref ClearWaypointsActionEvent args)
+    {
+        var waypoints = ent.Comp.Waypoints;
+        var count = waypoints.Count;
+
+        if (count == 0)
+        {
+            _popupSystem.PopupEntity("No waypoints to clear!", ent.Owner, args.Performer, PopupType.Medium);
+            return;
+        }
+
+        waypoints.RemoveWhere(waypoint =>
+        {
+            if (!Exists(waypoint))
+                return false;
+            QueueDel(waypoint);
+            return true;
+        });
+
+        Dirty(ent);
+        _popupSystem.PopupEntity($"Cleared {count} waypoints!", ent.Owner, args.Performer, PopupType.Medium);
+    }
+    #endregion
+}

@@ -15,9 +15,11 @@
     - tasks:
         - !type:HTNPrimitiveTask
           operator: !type:PickNearbyWantedOperator
-            targetKey: StunTarget
+            targetKey: Target
             targetMoveKey: TargetCoordinates
-            targetFoundSoundKey: TargetFoundSound
+            criminalStatus: SecurityIconHostile
+            targetFoundSound: !type:SoundCollectionSpecifier
+            collection: Ed209TargetFound
 
         - !type:HTNPrimitiveTask
           operator: !type:MoveToOperator

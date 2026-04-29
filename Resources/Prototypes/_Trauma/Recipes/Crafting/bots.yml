@@ -8,5 +8,9 @@
   objectType: Item
   description: Tiders hate this one simple trick!
   icon:
-    sprite: _Trauma/Mobs/Bots/beepsky.rsi
+    sprite: _Trauma/Mobs/Silicon/Bots/beepsky.rsi
     state: secbot
+  theory:
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1
