@@ -400,10 +400,13 @@ public abstract class SharedMagicSystem : EntitySystem
     #region Projectile Spells
     public void OnProjectileSpell(ProjectileSpellEvent ev) // Goob edit - made public
     {
-        if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer)) // Goob edit
+        if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
 
         ev.Handled = true;
+
+        if (!_net.IsServer)
+            return; // client returns handled for predicted audio
 
         var xform = Transform(ev.Performer);
         var fromCoords = xform.Coordinates;
@@ -581,7 +584,7 @@ public abstract class SharedMagicSystem : EntitySystem
             if (TryComp<DoorComponent>(target, out var doorComp) && doorComp.State is not DoorState.Open)
                 _door.StartOpening(target);
 
-            if (TryComp<LockComponent>(target, out var lockComp) && lockComp.Locked)
+            if (TryComp<LockComponent>(target, out var lockComp) && lockComp.Locked && lockComp.BreakOnAccessBreaker)
                 _lock.Unlock(target, performer, lockComp);
         }
     }
@@ -609,7 +612,7 @@ public abstract class SharedMagicSystem : EntitySystem
             return;
 
         if (TryComp<BasicEntityAmmoProviderComponent>(wand, out var basicAmmoComp) && basicAmmoComp.Count != null)
-            _gunSystem.UpdateBasicEntityAmmoCount(wand.Value, basicAmmoComp.Count.Value + ev.Charge, basicAmmoComp);
+            _gunSystem.UpdateBasicEntityAmmoCount((wand.Value, basicAmmoComp), basicAmmoComp.Count.Value + ev.Charge);
         else if (TryComp<LimitedChargesComponent>(wand, out var charges))
             _charges.AddCharges((wand.Value, charges), ev.Charge);
     }

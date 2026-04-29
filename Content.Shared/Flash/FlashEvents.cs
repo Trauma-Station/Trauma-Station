@@ -13,7 +13,7 @@ public record struct FlashAttemptEvent(EntityUid Target, EntityUid? User, Entity
 }
 
 /// <summary>
-/// Called when a player is successfully flashed.
+/// Called when a player is successfully flashed, once for each flashed player.
 /// Raised on the target hit by the flash, the user of the flash and the flash used.
 /// The Melee parameter is used to check for rev conversion.
 /// </summary>
@@ -21,7 +21,7 @@ public record struct FlashAttemptEvent(EntityUid Target, EntityUid? User, Entity
 public record struct AfterFlashedEvent(EntityUid Target, EntityUid? User, EntityUid? Used, bool Melee);
 
 /// <summary>
-/// Goob edit
+/// Goob edit TODO move this shit out of here
 /// </summary>
 public sealed class FlashDurationMultiplierEvent : EntityEventArgs, IInventoryRelayEvent
 {
@@ -41,3 +41,9 @@ public sealed class AreaFlashEvent(float range, float distance, EntityUid target
 
     public EntityUid Target = target;
 }
+
+/// <summary>
+/// Raised once on the flash entity when it was used, regardless of the flashed status being applied or not.
+/// </summary>
+[ByRefEvent]
+public record struct AfterFlashActivatedEvent(EntityUid? Target, EntityUid? User);

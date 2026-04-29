@@ -18,7 +18,9 @@ public sealed class HereticClothingSystem : EntitySystem
 
     private void OnEquipAttempt(Entity<Components.HereticClothingComponent> ent, ref BeingEquippedAttemptEvent args)
     {
-        if (IsTargetValid(args.EquipTarget) && (args.EquipTarget == args.Equipee || IsTargetValid(args.Equipee)))
+        var target = args.EquipTarget;
+        var user = args.User;
+        if (IsTargetValid(target) && (target == user || IsTargetValid(user)))
             return;
 
         args.Cancel();

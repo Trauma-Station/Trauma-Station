@@ -20,7 +20,7 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Revolutionary;
 
-public sealed class RevolutionaryConverterSystem : EntitySystem
+public sealed class RevPropagandaSystem : EntitySystem
 {
     private static readonly ProtoId<LocalizedDatasetPrototype> RevConvertSpeechProto = "RevolutionaryConverterSpeech";
 
@@ -38,14 +38,14 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RevolutionaryConverterComponent, RevolutionaryConverterDoAfterEvent>(OnConvertDoAfter);
-        SubscribeLocalEvent<RevolutionaryConverterComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<RevolutionaryConverterComponent, AfterInteractEvent>(OnConverterAfterInteract);
+        SubscribeLocalEvent<RevPropagandaComponent, RevPropagandaDoAfterEvent>(OnConvertDoAfter);
+        SubscribeLocalEvent<RevPropagandaComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<RevPropagandaComponent, AfterInteractEvent>(OnConverterAfterInteract);
 
         _speechLocalization = _proto.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
     }
 
-    private void OnUseInHand(Entity<RevolutionaryConverterComponent> ent, ref UseInHandEvent args)
+    private void OnUseInHand(Entity<RevPropagandaComponent> ent, ref UseInHandEvent args)
     {
         if (!SpeakPropaganda(ent, args.User))
             return;
@@ -53,7 +53,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
         args.Handled = true;
     }
 
-    private bool SpeakPropaganda(Entity<RevolutionaryConverterComponent> conversionToolEntity, EntityUid user)
+    private bool SpeakPropaganda(Entity<RevPropagandaComponent> conversionToolEntity, EntityUid user)
     {
         if (_speechLocalization == null
             || _speechLocalization.Values.Count == 0
@@ -65,7 +65,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
         return true;
     }
 
-    public void OnConvertDoAfter(Entity<RevolutionaryConverterComponent> entity, ref RevolutionaryConverterDoAfterEvent args)
+    public void OnConvertDoAfter(Entity<RevPropagandaComponent> entity, ref RevPropagandaDoAfterEvent args)
     {
         if (args.Target == null
             || args.Cancelled
@@ -84,7 +84,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
         RaiseLocalEvent(used, ref ev);
     }
 
-    public void OnConverterAfterInteract(Entity<RevolutionaryConverterComponent> entity, ref AfterInteractEvent args)
+    public void OnConverterAfterInteract(Entity<RevPropagandaComponent> entity, ref AfterInteractEvent args)
     {
         if (args.Handled
             || !args.Target.HasValue
@@ -107,7 +107,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void ConvertDoAfter(Entity<RevolutionaryConverterComponent> converter, EntityUid target, EntityUid user)
+    private void ConvertDoAfter(Entity<RevPropagandaComponent> converter, EntityUid target, EntityUid user)
     {
         if (user == target)
             return;
@@ -126,7 +126,7 @@ public sealed class RevolutionaryConverterSystem : EntitySystem
             _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
                 user,
                 converter.Comp.ConversionDuration,
-                new RevolutionaryConverterDoAfterEvent(),
+                new RevPropagandaDoAfterEvent(),
                 converter.Owner,
                 target: target,
                 used: converter.Owner,

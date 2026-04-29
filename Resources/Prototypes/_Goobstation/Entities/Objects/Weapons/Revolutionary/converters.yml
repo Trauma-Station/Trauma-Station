@@ -3,9 +3,9 @@
   id: RevFlash
   parent: [BaseItem, BaseSecurityScienceCommandContraband]
   description: An ultrabright flashbulb with a trigger, which causes the victim to be dazed and lose their eyesight for a moment. Useless when burnt out. This one seems to have been tampered with.
-  suffix: Revolutionary, DO NOT MAP # Trauma edit
+  suffix: Revolutionary, DO NOT MAP
   components:
-    - type: RevolutionaryConverter
+    - type: RevPropaganda
       conversionDuration: 0
       silent: true
       consumesCharges: 1
