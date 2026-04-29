@@ -5,3 +5,52 @@
   - !type:ModifyKnockdown
     time: 6
   - !type:ThrowRandomly # TODO: Make throw opposite
+
+# Charge
+- type: entityEffect
+  id: ChargeMob
+  effects:
+  - !type:ModifyKnockdown
+    time: 12
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 60
+
+# Rejuv Garg
+- type: entityEffect
+  id: VampireRejuvGarg
+  effects:
+  - !type:TakeStaminaDamage
+    amount: -100
+  - !type:RemoveStatusEffects
+    statusEffects:
+    - StatusEffectForcedSleeping
+    - StatusEffectStunned
+  - !type:SetStanding
+    force: true
+  - !type:ModifyKnockdown
+    time: 0
+    type: Set
+  - !type:ModifyParalysis
+    time: 0
+    type: Set
+  - !type:MovementSpeedModifier
+    type: Set
+  - !type:HealthChangeBasedOnDamage
+    maximumDamage: -50
+    damage:
+      types:
+        Blunt: -10
+        Piercing: -10
+        Slash: -10
+        Heat: -10
+        Bloodloss: -10
+        Asphyxiation: -10
+        Shock: -10
+        Cold: -10
+        Caustic: -10
+  - !type:PopupMessage
+    messages:
+    - You healed.
+    visualType: Medium

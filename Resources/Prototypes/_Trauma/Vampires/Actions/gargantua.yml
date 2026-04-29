@@ -1,3 +1,15 @@
+# Rejuv Garg
+- type: entity
+  parent: BaseRejuvAction
+  id: ActionVampGargRejuv
+  name: Rejuvenate
+  description: Heals you
+  components:
+  - type: EffectAction
+    effects:
+    - !type:NestedEffect
+      proto: VampireRejuvGarg
+
 # Blood Swell I and II
 - type: entity
   parent: BaseVampireAction
@@ -156,6 +168,61 @@
       components:
       - type: GargantuaCharging
         impactEffects:
-        - !type:ModifyKnockdown # TODO: Expand
-          time: 6
+        # Wall Logic
+        - !type:HealthChange
+          conditions:
+          - !type:WhitelistCondition
+            whitelist:
+              tags:
+              - Wall
+          damage:
+            types:
+              Structural: 500
+        # Body Logic
+        - !type:NestedEffect
+          conditions:
+          - !type:WhitelistCondition
+            whitelist:
+              components:
+              - Body
+          proto: ChargeMob
+        # Mech Logic
+        - !type:HealthChange
+          conditions:
+          - !type:WhitelistCondition
+            whitelist:
+              components:
+              - Mech
+          damage:
+            types:
+              Blunt: 200
+        # Generic Logic
+        - !type:ThrowRandomly
     - !type:ThrowAtFacingDirection
+
+- type: entity
+  parent: BaseVampireAction
+  id: ActionDesecratedDuel
+  name: Desecrated Duel
+  description: Duel.
+  components:
+  - type: Action
+    # useDelay: 2
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 10
+  - type: EntityTargetAction
+    event: !type:ArenaTargetActionEvent
+  - type: ActionDesecratedDuel # Throws us at the target and clears the arena based on conditions.
+  - type: ActionArena # Makes the arena. Can be re-used for other actions
+    delay: 0.5 # So we have time to get thrown there
+    wallProto: WallHierophantArena # TODO: Change it to the vamp walls from paradise
+  - type: EffectAction
+    onPerformed: true
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectVampireGladiator
+      time: null # Will be removed manually by code when the arena stops existing
+      type: Add

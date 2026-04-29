@@ -56,3 +56,18 @@
   components:
   - type: PreventPullingStatusEffect
   - type: PreventPushStatusEffect
+
+# Duel
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectVampireGladiator
+  name: vampire gladiator
+  components: # TODO: Add bleed and wound immune?
+  - type: StatusEffectEffects
+    effects:
+    - !type:EvenHealthChange
+      damage:
+        Burn: -5
+        Brute: -5
+    - !type:TakeStaminaDamage
+      amount: -20
