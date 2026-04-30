@@ -7,6 +7,11 @@ namespace Content.Shared.Weapons.Ranged.Events;
 /// </summary>
 public sealed class TakeAmmoEvent : EntityEventArgs
 {
+    // <Trauma>
+    // These are currently only used for BatteryAmmoProvider
+    public float FireCostMultiplier = 1f;
+    public bool SpawnProjectiles = true;
+    // </Trauma>
     public readonly EntityUid? User;
     public readonly int Shots;
     public List<(EntityUid? Entity, IShootable Shootable)> Ammo;

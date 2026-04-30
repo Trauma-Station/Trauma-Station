@@ -61,6 +61,7 @@ namespace Content.IntegrationTests.Tests
                 .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // randomly spawns things...
                 .Where(p => !p.Components.ContainsKey("Area"))
                 .Where(p => !p.Components.ContainsKey("StatusEffect")) // nonsense to just spawn it 4 no raisin, use an actual test
+                .Where(p => !p.Components.ContainsKey("GasTank")) // maxcaps blow up duh
                 // </Trauma>
                 .Select(p => p.ID)
                 .ToList();
@@ -185,6 +186,7 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // spawns things
                     .Where(p => !p.Components.ContainsKey("Area")) // deletes itself if spawned in space
                     .Where(p => !p.Components.ContainsKey("StatusEffect")) // doesn't make sense to spawn not attached to anything
+                    .Where(p => !p.Components.ContainsKey("GasTank")) // maxcaps blow up duh
                     // </Trauma>
                     .Select(p => p.ID)
                     .ToList();
@@ -385,6 +387,7 @@ namespace Content.IntegrationTests.Tests
                 "LabyrinthPortal", // it randomly spawns things
                 "Area", // map tests spawn ~every area anyway, this fails from trying to spawn an area in space
                 "StatusEffect", // doesnt make sense to spawn unattached, fails test with weather schedulers
+                "GasTank", // maxcaps blow up duh
                 // </Trauma>
             };
 

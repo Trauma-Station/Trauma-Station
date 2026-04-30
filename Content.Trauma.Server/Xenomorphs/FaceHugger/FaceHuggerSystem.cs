@@ -129,27 +129,27 @@ public sealed class FaceHuggerSystem : EntitySystem
 
     private void OnGotEquipped(EntityUid uid, FaceHuggerComponent component, GotEquippedEvent args)
     {
+        var target = args.EquipTarget;
         if (args.Slot != component.Slot
             || _mobState.IsDead(uid)
-            || _entityWhitelist.IsWhitelistPass(component.Blacklist, args.Equipee))
+            || _entityWhitelist.IsWhitelistPass(component.Blacklist, target))
             return;
-        _popup.PopupEntity(Loc.GetString("xenomorphs-face-hugger-equip", ("equipment", uid)), uid, args.Equipee);
+
+        _popup.PopupEntity(Loc.GetString("xenomorphs-face-hugger-equip", ("equipment", uid)), uid, target);
         _popup.PopupEntity(
             Loc.GetString("xenomorphs-face-hugger-equip-other",
                 ("equipment", uid),
-                ("target", Identity.Entity(args.Equipee, EntityManager))),
+                ("target", Identity.Entity(target, EntityManager))),
             uid,
-            Filter.PvsExcept(args.Equipee),
+            Filter.PvsExcept(target),
             true);
 
-        _stun.TryKnockdown(args.Equipee, component.KnockdownTime, true);
+        _stun.TryKnockdown(target, component.KnockdownTime, true);
 
-        if (component.InfectionPrototype.HasValue)
-            EnsureComp<XenomorphPreventSuicideComponent>(args.Equipee); //Prevent suicide for infected
-
-        if (!component.InfectionPrototype.HasValue)
+        if (component.InfectionPrototype == null)
             return;
 
+        EnsureComp<XenomorphPreventSuicideComponent>(target); //Prevent suicide for infected
         component.InfectIn = _timing.CurTime + _random.Next(component.MinInfectTime, component.MaxInfectTime);
     }
 
@@ -157,14 +157,17 @@ public sealed class FaceHuggerSystem : EntitySystem
         FaceHuggerComponent component,
         BeingUnequippedAttemptEvent args)
     {
-        if (component.Slot != args.Slot || args.Unequipee != args.UnEquipTarget ||
+        // TODO: move this shit to shared bruh
+        var target = args.UnEquipTarget;
+        var user = args.User;
+        if (component.Slot != args.Slot || user != target ||
             component.InfectionPrototype == null || _mobState.IsDead(uid))
             return;
 
         _popup.PopupEntity(
             Loc.GetString("xenomorphs-face-hugger-unequip", ("equipment", Identity.Entity(uid, EntityManager))),
             uid,
-            args.Unequipee);
+            user);
         args.Cancel();
     }
 

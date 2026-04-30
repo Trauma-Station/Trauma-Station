@@ -33,15 +33,15 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
         if (!clothing.Slots.HasFlag(args.SlotFlags)) return;
 
-        var user = args.Equipee;
+        var target = args.EquipTarget;
         component.Active.Clear();
         foreach (var name in component.Components.Keys)
         {
             var type = Factory.GetRegistration(name).Type;
-            if (!HasComp(user, type))
+            if (!HasComp(target, type))
                 component.Active.Add(name);
         }
-        EntityManager.AddComponents(user, component.Components);
+        EntityManager.AddComponents(target, component.Components);
     }
 
     private void OnCompUnequip(EntityUid uid, ClothingGrantComponentComponent component, GotUnequippedEvent args)
@@ -50,10 +50,11 @@ public sealed class ClothingGrantingSystem : EntitySystem
             return;
 
         var user = args.Equipee;
+        var target = args.EquipTarget;
         foreach (var name in component.Active)
         {
             var type = Factory.GetRegistration(name).Type;
-            RemComp(user, type);
+            RemComp(target, type);
         }
         component.Active.Clear();
     }
@@ -70,12 +71,12 @@ public sealed class ClothingGrantingSystem : EntitySystem
         if (!clothing.Slots.HasFlag(args.SlotFlags))
             return;
 
-        var user = args.Equipee;
-        var tags = EnsureComp<TagComponent>(user);
+        var target = args.EquipTarget;
+        var tags = EnsureComp<TagComponent>(target);
         var tag = component.Tag;
         component.IsActive = !_tag.HasTag(tags, tag);
         if (component.IsActive)
-            _tag.AddTag((user, tags), tag);
+            _tag.AddTag((target, tags), tag);
     }
 
     private void OnTagUnequip(EntityUid uid, ClothingGrantTagComponent component, GotUnequippedEvent args)
@@ -86,7 +87,7 @@ public sealed class ClothingGrantingSystem : EntitySystem
         if (!component.IsActive)
             return;
 
-        _tag.RemoveTag(args.Equipee, component.Tag);
+        _tag.RemoveTag(args.EquipTarget, component.Tag);
         component.IsActive = false;
     }
 }

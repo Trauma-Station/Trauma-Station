@@ -26,8 +26,8 @@
       Max: 4
       PotencyDivisor: 25
     ChlorineTrifluoride:
-      Min: 1
-      Max: 2
+      Min: 2
+      Max: 3
       PotencyDivisor: 100
 
 - type: seed
