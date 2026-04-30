@@ -31,6 +31,52 @@
     range: 10
   - type: WorldTargetAction
     event: !type:WorldTargetSpawnActionEvent
+  # Spawns an entity prototype in a specific pattern.
+  # Size is the pattern (in-game it will be 3x3 for size 2,2).
+  # Can also specify offset. Only works for world target actions.
   - type: ActionWorldTargetSpawn
     spawnPrototype: BloodTendrilPre
     size: 2,2
+
+# Blood Barrier
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodBarrier
+  name: Blood Barrier
+  description: Blood Barrier
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 5
+  - type: EntityTargetAction
+    canTargetSelf: false
+  - type: WorldTargetAction
+    event: !type:BloodBarrierActionEvent
+    # Makes two points and creates a barrier between them.
+  - type: ActionBloodBarrier
+    distance: 3
+    barrierProto: Chair # TODO: this should be a wall
+    pointProto: ChairWeb # TODO: make sure ts gets snapped
+
+# Blood Pool
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodPool
+  name: Blood Pool
+  description: Blood pool
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:Polymorph # Sins of the father
+      prototype: BloodPuddlePolymorph
