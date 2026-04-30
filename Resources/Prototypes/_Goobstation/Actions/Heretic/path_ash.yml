@@ -8,7 +8,7 @@
   components:
   - type: Action
     checkCanInteract: false
-    useDelay: 20
+    useDelay: 25
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
@@ -116,3 +116,22 @@
     requireMagicItem: true
   - type: SpeakOnAction
     sentence: heretic-speech-ash-cascade
+
+- type: entity
+  parent: BaseToggleAction
+  id: ActionHereticScorchedMantleToggleFlames
+  name: Toggle Flames
+  description: Toggles passive fire stack generation.
+  components:
+  - type: Action
+    checkCanInteract: false
+    checkConsciousness: false
+    raiseOnAction: true
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: flames
+    iconOn:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: flames_on
+  - type: ToggleAction

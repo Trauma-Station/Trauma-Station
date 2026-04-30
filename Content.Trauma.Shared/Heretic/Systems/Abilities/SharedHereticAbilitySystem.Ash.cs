@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Atmos.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 using Content.Trauma.Shared.Heretic.Events;
@@ -32,10 +33,24 @@ public abstract partial class SharedHereticAbilitySystem
         fireBlasted.Damage = -2f;
 
         if (!Heretic.TryGetHereticComponent(ent, out var heretic, out _) ||
-            heretic is not { Ascended: true, CurrentPath: HereticPath.Ash })
+            heretic.CurrentPath != HereticPath.Ash)
             return;
 
-        fireBlasted.MaxBounces *= 2;
-        fireBlasted.BeamTime *= 0.66f;
+        if (IsAshSpellEmpowered(ent))
+        {
+            fireBlasted.MaxBounces += 2;
+            fireBlasted.BeamTime *= 0.8;
+        }
+
+        if (!heretic.Ascended)
+            return;
+
+        fireBlasted.MaxBounces += 3;
+        fireBlasted.BeamTime *= 0.7;
+    }
+
+    protected bool IsAshSpellEmpowered(EntityUid uid)
+    {
+        return CompOrNull<FlammableComponent>(uid)?.FireStacks >= 3f;
     }
 }

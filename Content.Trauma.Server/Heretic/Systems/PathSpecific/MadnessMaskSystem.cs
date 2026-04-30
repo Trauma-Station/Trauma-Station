@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Flammability;
 using Content.Goobstation.Shared.Clothing.Components;
-using Content.Shared.Atmos;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -10,7 +8,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Jittering;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.Temperature;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -36,9 +33,6 @@ public sealed class MadnessMaskSystem : EntitySystem
 
         SubscribeLocalEvent<MadnessMaskComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MadnessMaskComponent, BeingUnequippedAttemptEvent>(OnUnequip);
-        SubscribeLocalEvent<MadnessMaskComponent, InventoryRelayedEvent<GetFireProtectionEvent>>(OnGetProtection);
-        SubscribeLocalEvent<MadnessMaskComponent, InventoryRelayedEvent<ModifyChangedTemperatureEvent>>(
-            OnTemperatureChangeAttempt);
     }
 
     private void OnMapInit(Entity<MadnessMaskComponent> ent, ref MapInitEvent args)
@@ -55,24 +49,6 @@ public sealed class MadnessMaskSystem : EntitySystem
             return;
 
         args.Cancel();
-    }
-
-    private void OnTemperatureChangeAttempt(Entity<MadnessMaskComponent> ent,
-        ref InventoryRelayedEvent<ModifyChangedTemperatureEvent> args)
-    {
-        if (!_heretic.IsHereticOrGhoul(args.Args.Target))
-            return;
-
-        if (args.Args.TemperatureDelta > 0)
-            args.Args.TemperatureDelta = 0;
-    }
-
-    private void OnGetProtection(Entity<MadnessMaskComponent> ent, ref InventoryRelayedEvent<GetFireProtectionEvent> args)
-    {
-        if (!_heretic.IsHereticOrGhoul(args.Args.Target) || HasComp<VeryFlammableComponent>(args.Args.Target))
-            return;
-
-        args.Args.Multiplier = -10f; // Basically ignore fire AP
     }
 
     public override void Update(float frameTime)

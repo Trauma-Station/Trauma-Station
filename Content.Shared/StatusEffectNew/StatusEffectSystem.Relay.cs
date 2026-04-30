@@ -37,12 +37,12 @@ public sealed partial class StatusEffectsSystem
         SubscribeLocalEvent<StatusEffectContainerComponent, BleedModifierEvent>(RefRelayStatusEffectEvent);
     }
 
-    public void RefRelayStatusEffectEvent<T>(EntityUid uid, StatusEffectContainerComponent component, ref T args) where T : struct // Trauma - made public
+    private void RefRelayStatusEffectEvent<T>(EntityUid uid, StatusEffectContainerComponent component, ref T args) where T : struct
     {
         RelayEvent((uid, component), ref args);
     }
 
-    public void RelayStatusEffectEvent<T>(EntityUid uid, StatusEffectContainerComponent component, T args) where T : class // Trauma - made public
+    private void RelayStatusEffectEvent<T>(EntityUid uid, StatusEffectContainerComponent component, T args) where T : class
     {
         RelayEvent((uid, component), args);
     }
@@ -50,7 +50,7 @@ public sealed partial class StatusEffectsSystem
     public void RelayEvent<T>(Entity<StatusEffectContainerComponent> statusEffect, ref T args) where T : struct
     {
         // this copies the by-ref event if it is a struct
-        var ev = new StatusEffectRelayedEvent<T>(args);
+        var ev = new StatusEffectRelayedEvent<T>(args, statusEffect); // Trauma - added container
         foreach (var activeEffect in statusEffect.Comp.ActiveStatusEffects?.ContainedEntities ?? [])
         {
             RaiseLocalEvent(activeEffect, ref ev);
@@ -62,7 +62,7 @@ public sealed partial class StatusEffectsSystem
     public void RelayEvent<T>(Entity<StatusEffectContainerComponent> statusEffect, T args) where T : class
     {
         // this copies the by-ref event if it is a struct
-        var ev = new StatusEffectRelayedEvent<T>(args);
+        var ev = new StatusEffectRelayedEvent<T>(args, statusEffect); // Trauma - added container
         foreach (var activeEffect in statusEffect.Comp.ActiveStatusEffects?.ContainedEntities ?? [])
         {
             RaiseLocalEvent(activeEffect, ref ev);
@@ -74,4 +74,4 @@ public sealed partial class StatusEffectsSystem
 /// Event wrapper for relayed events.
 /// </summary>
 [ByRefEvent]
-public record struct StatusEffectRelayedEvent<TEvent>(TEvent Args);
+public record struct StatusEffectRelayedEvent<TEvent>(TEvent Args, Entity<StatusEffectContainerComponent> Container); // Trauma - added Container

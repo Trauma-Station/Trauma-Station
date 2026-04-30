@@ -42,14 +42,26 @@ public abstract partial class SharedHereticRitualSystem
     private void OnSetPassiveLevel(Entity<HereticComponent> ent,
         ref HereticRitualEffectEvent<SetHereticAvailablePassiveLevelEffect> args)
     {
+        var couldBreak = ent.Comp.CanBreakBlade;
+        var hadAura = ent.Comp.ShouldShowAura;
         ent.Comp.AvailablePassiveLevel = Math.Max(ent.Comp.AvailablePassiveLevel, args.Effect.Level);
         Dirty(ent);
+        var canBreak = ent.Comp.CanBreakBlade;
+        var showAura = ent.Comp.ShouldShowAura;
 
         if (!TryGetValue(args.Ritual, Performer, out EntityUid uid))
             return;
 
-        _heretic.UpdateHereticAura(uid);
         _store.UpdateUserInterface(uid, ent.Owner);
+
+        if (!_player.TryGetSessionById(CompOrNull<MindComponent>(ent)?.UserId, out var session))
+            return;
+
+        if (!canBreak && couldBreak)
+            _heretic.SendNoBreakBladeMessage(ent.Comp, session);
+
+        if (!hadAura && showAura)
+            _heretic.ShowAura(ent.Comp, uid, session, true);
     }
 
     private void OnAddToFleshLimit(Entity<GhoulComponent> ent, ref HereticRitualEffectEvent<AddToFleshGhoulLimit> args)

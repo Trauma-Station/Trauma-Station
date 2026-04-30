@@ -76,6 +76,71 @@
     damageCoefficient: 0.50
   - type: FireProtection
     reduction: 0.3
+  - type: SalvagedRemains
+  - type: Appearance
+  - type: ItemToggle
+    onActivate: false
+    onUse: false
+    wieldToggle: false
+  - type: ToggleAnimation
+    toggleOnTime: 2.3
+    toggleOffTime: 1.4
+  - type: ClothingToggleAnimationVisuals
+    state:
+    - TogglingOn
+    - On
+    - TogglingOff
+  - type: ComponentToggler
+    components:
+    - type: Armor
+      coverage:
+      - Torso
+      - Arm
+      - Hand
+      - Leg
+      - Foot
+      - Tail
+      modifiers:
+        coefficients:
+          Blunt: 0.4
+          Slash: 0.4
+          Piercing: 0.4
+          Heat: 0.4
+          Caustic: 0.4
+      traumaDeductions:
+        Dismemberment: 0.4
+        OrganDamage: 0.4
+        BoneDamage: 0.4
+        VeinsDamage: 0.0
+    - type: ExplosionResistance
+      damageCoefficient: 0
+    - type: FireProtection
+      reduction: 0.6
+    deactivateComponents:
+    - type: Armor
+      coverage:
+      - Torso
+      - Arm
+      - Hand
+      - Leg
+      - Foot
+      - Tail
+      modifiers:
+        coefficients:
+          Blunt: 0.7
+          Slash: 0.7
+          Piercing: 0.7
+          Heat: 0.7
+          Caustic: 0.7
+      traumaDeductions:
+        Dismemberment: 0.2
+        OrganDamage: 0.2
+        BoneDamage: 0.2
+        VeinsDamage: 0.0
+    - type: ExplosionResistance
+      damageCoefficient: 0.50
+    - type: FireProtection
+      reduction: 0.3
 
 - type: entity
   parent: ClothingOuterArmorHeretic
@@ -111,6 +176,9 @@
     reduction: 0.4
   - type: PressureProtection
     lowPressureMultiplier: 1000
+  - type: HollowWeave
+  - type: TemperatureProtection
+    coolingCoefficient: 0.01
 
 - type: entity
   parent: ClothingOuterArmorHeretic
@@ -141,6 +209,8 @@
     damageCoefficient: 0
   - type: PressureProtection
     highPressureMultiplier: 0.1
+  - type: TemperatureProtection
+    heatingCoefficient: 0.01
   - type: ScorchedMantle
 
 - type: entity
@@ -178,18 +248,13 @@
   - type: EmitSoundOnPickup
     sound:
       collection: OrganInteraction
-      params:
-        volume: -9
   - type: EmitSoundOnDrop
     sound:
       collection: OrganInteraction
-      params:
-        volume: -9
   - type: EmitSoundOnLand
     sound:
       collection: OrganInteraction
-      params:
-        volume: -9
+  - type: SpawnMimicsOnDamage
 
 - type: entity
   parent: ClothingOuterArmorHeretic
@@ -254,6 +319,9 @@
         Caustic: 0.8
   - type: PressureProtection
     lowPressureMultiplier: 1000
+  - type: MovementIgnoreGravityClothing
+  - type: TemperatureProtection
+    coolingCoefficient: 0.01
 
 - type: entity
   parent: ClothingOuterArmorHeretic
@@ -269,10 +337,11 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticLock
+  - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
+        Blunt: 0.5
+        Slash: 0.5
         Piercing: 0.6
         Heat: 0.6
         Caustic: 0.6
@@ -281,6 +350,7 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0.0
+  - type: DigitalCamouflage
   - type: ClothingGrantComponent
     component:
     # This thing is hardcoded to either shoes or entity itself in mover controller
@@ -293,6 +363,7 @@
   name: void cloak
   description: Black like tar, reflecting no light. Runic symbols line the outside. With each flash you lose comprehension of what you are seeing.
   components:
+  - type: ArmorPointBlank
   - type: UnholyItem
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi

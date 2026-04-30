@@ -61,12 +61,11 @@ public sealed partial class HereticAbilitySystem
         if (!multipliersApplied)
             return;
 
-        _lifesteal.LifeSteal(ent.Owner, multiplier * ent.Comp.HealMultiplier);
-        if (!TryComp(ent, out BloodstreamComponent? bloodstream))
-            return;
-
-        _blood.TryModifyBloodLevel((ent, bloodstream), multiplier * ent.Comp.BloodHealMultiplier);
-        _blood.TryModifyBleedAmount((ent, bloodstream), -multiplier * ent.Comp.BleedHealMultiplier);
+        IHateWoundMed(ent.Owner,
+            AllDamage * multiplier * ent.Comp.Heal,
+            multiplier * ent.Comp.BloodHeal,
+            multiplier * ent.Comp.BleedHeal,
+            0);
     }
 
     private float GetMultiplier(Entity<FleshPassiveComponent> ent,
@@ -137,13 +136,14 @@ public sealed partial class HereticAbilitySystem
 
     public override EntityUid? CreateFleshMimic(EntityUid uid,
         EntityUid user,
-        EntityUid userMind,
+        int minionId,
         bool giveBlade,
         bool makeGhostRole,
         FixedPoint2 hp,
-        EntityUid? hostile)
+        EntityUid? hostile,
+        bool hostileToSource)
     {
-        if (_mobstate.IsDead(uid) || HasComp<GhoulComponent>(uid) || HasComp<BorgChassisComponent>(uid))
+        if (_mobstate.IsDead(uid) || HasComp<BorgChassisComponent>(uid))
             return null;
 
         var xform = Transform(uid);
@@ -170,7 +170,7 @@ public sealed partial class HereticAbilitySystem
 
         var minion = EnsureComp<HereticMinionComponent>(clone.Value);
         minion.BoundHeretic = user;
-        minion.MinionId = GetNetEntity(userMind).Id;
+        minion.MinionId = minionId;
         Dirty(clone.Value, minion);
 
         var ghoul = Factory.GetComponent<GhoulComponent>();
@@ -231,13 +231,15 @@ public sealed partial class HereticAbilitySystem
 
         var exception = EnsureComp<FactionExceptionComponent>(clone.Value);
         _npcFaction.IgnoreEntity((clone.Value, exception), user);
-        if (user != uid)
+        if (hostileToSource &&
+            (!TryComp(uid, out HereticMinionComponent? minionComp) || minionComp.MinionId != minionId))
         {
             _npcFaction.AggroEntity((clone.Value, exception), uid);
             EnsureComp<FleshMimickedComponent>(uid).FleshMimics.Add(clone.Value);
         }
 
-        if (hostile != null && hostile.Value != user)
+        if (hostile != null && hostile.Value != user && hostile.Value != uid &&
+            (!TryComp(hostile.Value, out minionComp) || minionComp.MinionId != minionId))
         {
             _npcFaction.AggroEntity((clone.Value, exception), hostile.Value);
             EnsureComp<FleshMimickedComponent>(hostile.Value).FleshMimics.Add(clone.Value);

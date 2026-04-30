@@ -37,6 +37,7 @@ heretic-cant-shoot = I can't use { THE($entity) } because of my sacred pledge to
 
 ## aura
 heretic-aura-message = You can no longer hide what you truly are. After 1 minute you will get an aura that reveals you as heretic.
+heretic-aura-message-immediate = You can no longer hide what you truly are. You now have aura that reveals you as heretic.
 
 ## paths exclusive
 heretic-rust-mark-itembreak = {$name} shatters into dust!

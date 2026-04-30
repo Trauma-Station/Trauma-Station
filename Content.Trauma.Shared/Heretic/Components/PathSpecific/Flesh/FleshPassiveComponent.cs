@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.FixedPoint;
 using Content.Shared.Metabolism;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
@@ -20,13 +18,13 @@ public sealed partial class FleshPassiveComponent : Component
     public EntityUid? Stomach;
 
     [DataField]
-    public float HealMultiplier = 2f;
+    public float Heal = -4;
 
     [DataField]
-    public float BloodHealMultiplier = 3f;
+    public float BloodHeal = 3f;
 
     [DataField]
-    public float BleedHealMultiplier = 0.5f;
+    public float BleedHeal = -0.5f;
 
     [DataField]
     public float OrganMultiplier = 2f;

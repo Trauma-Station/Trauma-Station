@@ -2,7 +2,6 @@
 
 using Content.Shared.Alert;
 using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Store;
 using Content.Shared.Tag;
@@ -151,7 +150,7 @@ public partial class HereticBladeBonusDamageEvent : HereticBladeBonusEvent
 public sealed partial class HereticBladeBonusWoundingEvent : HereticBladeBonusEvent
 {
     /// <summary>
-    /// Path stage -? bonus
+    /// Path stage -> bonus
     /// </summary>
     [DataField(required: true)]
     public Dictionary<int, float> WoundingBonus = default!;

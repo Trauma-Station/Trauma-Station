@@ -15,11 +15,11 @@
       "directions": 4
     },
     {
-      "name": "overlay-equipped-HELMET",
+      "name": "On-HELMET",
       "directions": 4
     },
     {
-      "name": "on-overlay-equipped-HELMET",
+      "name": "TogglingOn-HELMET",
       "directions": 4,
       "delays": [
         [
@@ -129,7 +129,7 @@
       ]
     },
     {
-      "name": "off-overlay-equipped-HELMET",
+      "name": "TogglingOff-HELMET",
       "directions": 4,
       "delays": [
         [

@@ -278,6 +278,16 @@
 
 - type: entity
   parent: MobStatusEffectBase
+  id: VoidCamouflageStatusEffect
+  name: void camouflage
+  components:
+  - type: ForcedStealthStatusEffect
+    visibility: 0.1
+  - type: BlockHereticActionsStatusEffect
+  - type: RemoveOnAttackStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
   id: LockMarkedStatusEffect
   name: lock marked
   components:

@@ -15,6 +15,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Events;
@@ -131,7 +132,7 @@ public sealed class ChampionHookSystem : EntitySystem
     private void OnBeforeHarmfulAction(Entity<ChampionHookedComponent> ent, ref BeforeHarmfulActionEvent args)
     {
         if (args.Type == HarmfulActionType.Grab)
-            args.Cancel();
+            args.Cancelled = true;
     }
 
     private void OnPullAttempt(Entity<ChampionHookedComponent> ent, ref BeingPulledAttemptEvent args)

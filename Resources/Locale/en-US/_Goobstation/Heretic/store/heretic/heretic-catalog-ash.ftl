@@ -49,7 +49,7 @@ knowledge-path-ash-armor-desc =
     Yet the winds blowing through the city call them back to service, dust kicked into the air, a drifting silhouette of the fallen.
 
     Allows you to transmute a table (or a suit), a mask and a match to create a Scorched Mantle.
-    It provides completes protection from fire, and is able to produce more flames passively.
+    It provides completes protection from fire, and is able to produce more flames passively if you are already on fire.
     Acts as a focus while hooded.
     Unlocks tier 2 passive ability upgrade when transmuted.
 
@@ -74,7 +74,7 @@ knowledge-path-ash-s8-desc =
 
     Grants you Nightwatcher's Rebirth, a spell that extinguishes you and burns all nearby heathens who are currently on fire, healing you for every victim afflicted.
     If any victims afflicted are in critical condition, they will also instantly die.
-    The effect scales with the amount of fire stacks on you when casted.
+    When empowered, damage and heal is increased.
 
 knowledge-path-ash-s9-name = Ashlord's Rite
 knowledge-path-ash-s9-desc =

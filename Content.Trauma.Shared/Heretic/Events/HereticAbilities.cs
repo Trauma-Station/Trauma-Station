@@ -135,6 +135,9 @@ public sealed partial class EventHereticAshenShift : InstantActionEvent
     public ProtoId<PolymorphPrototype> Jaunt = "AshJaunt";
 
     [DataField]
+    public ProtoId<PolymorphPrototype> JauntEmpowered = "AshJauntLong";
+
+    [DataField]
     public EntProtoId Effect = "PolymorphAshJauntAnimation";
 }
 
@@ -166,6 +169,9 @@ public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
 
     [DataField]
     public EntProtoId Effect = "NightwatcherEffect";
+
+    [DataField]
+    public float EmpoweredMultiplier = 1.5f;
 }
 
 public sealed partial class EventHereticFlames : InstantActionEvent;

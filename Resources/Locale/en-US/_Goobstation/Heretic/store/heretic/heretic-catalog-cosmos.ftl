@@ -34,7 +34,6 @@ knowledge-path-cosmos-s4-desc =
     However, people with a star mark will get transported along with another person using the rune.
     Heathens, who try to teleport using the runes, will be star marked on arrival.
 
-
 knowledge-path-cosmos-s5-name = Star Blast
 knowledge-path-cosmos-s5-desc =
     The Beast was behind me now at all times, with each sacrifice words of affirmation coursed through me.
@@ -48,7 +47,7 @@ knowledge-path-cosmos-armor-desc =
     The eyes of the Beast rested upon me, and through me.
 
     Allows you to transmute a table (or a suit), a mask and a sheet of plasma to create a Starwoven Cloak,
-    grants protection from the hazards of space while granting to the user the ability to levitate at will.
+    grants protection from the hazards of space while granting to the user the ability to move freely in no gravity.
     Acts as a focus while hooded.
     Unlocks tier 2 passive ability upgrade when transmuted.
 
@@ -86,4 +85,4 @@ knowledge-path-cosmos-s9-desc =
     The Star Gazer has an aura that will heal you.
     Star Touch can now teleport you to the Star Gazer when activated in your hand.
     Your cosmic expansion spell and your blades also become greatly empowered.
-    You gain x-ray vision as well as immunity to extreme pressure and temperature.
+    You gain x-ray vision as well as immunity to hazards of space.

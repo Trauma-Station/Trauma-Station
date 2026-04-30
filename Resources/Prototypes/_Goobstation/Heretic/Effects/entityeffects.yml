@@ -166,6 +166,11 @@
 
 - type: entityEffect
   id: HereticMarkFlesh
+  conditions:
+  - !type:WhitelistCondition
+    blacklist:
+      components:
+      - Ghoul
   effects:
   - !type:CreateFleshMimic
 

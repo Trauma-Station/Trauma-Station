@@ -123,23 +123,33 @@ public sealed partial class HereticComponent : Component
     /// After this amount of knowledge heretic loses their blade break ability
     /// </summary>
     [DataField]
-    public float LockBladeBreakKnowledgeAmount = 8f;
+    public float LockBladeBreakKnowledgeAmount = 10f;
 
     [DataField, AutoNetworkedField]
     public float KnowledgeTracker;
 
+    /// <summary>
+    /// Can't break blade after purchasing blade upgrade or reaching t2 passive or ascending
+    /// or reaching <see cref="LockBladeBreakKnowledgeAmount"/> knowledge points
+    /// </summary>
     [ViewVariables]
-    public bool CanBreakBlade => !Ascended && KnowledgeTracker < LockBladeBreakKnowledgeAmount;
+    public bool CanBreakBlade => PathStage < 7 && AvailablePassiveLevel < 2 && !Ascended &&
+                                 KnowledgeTracker < LockBladeBreakKnowledgeAmount;
 
+    /// <summary>
+    /// Show aura if path is not lock and either ascended or did not do feast of owls and cannot break blade
+    /// </summary>
     [ViewVariables]
-    public bool ShouldShowAura =>
-        CurrentPath != HereticPath.Lock && (AvailablePassiveLevel > 1 || Ascended || CanAscend && !CanBreakBlade);
+    public bool ShouldShowAura => CurrentPath != HereticPath.Lock && (Ascended || CanAscend && !CanBreakBlade);
 
     [DataField]
     public LocId BreakBladeAbilityLostMessage = "heretic-blade-break-ability-lost-message";
 
     [DataField]
     public LocId AuraVisibleMessage = "heretic-aura-message";
+
+    [DataField]
+    public LocId AuraVisibleMessageImmediate = "heretic-aura-message-immediate";
 
     [DataField]
     public TimeSpan AuraDelayTime = TimeSpan.FromMinutes(1);

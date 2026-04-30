@@ -31,6 +31,8 @@ namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public abstract partial class SharedHereticRitualSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -189,7 +191,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
             !HasComp<FleshHereticMindComponent>(mind))
             return null;
 
-        if (!TryComp(item, out FleshGraspComponent? fleshGrasp))
+        if (!HasComp<FleshGraspComponent>(item))
             return null;
 
         AlternativeVerb verb = new()
@@ -261,7 +263,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
             return;
 
-        if (!HasComp<Components.MansusGraspComponent>(args.Used))
+        if (!HasComp<MansusGraspComponent>(args.Used))
             return;
 
         if (!TryComp(heretic.ChosenRitual, out HereticRitualComponent? ritual))

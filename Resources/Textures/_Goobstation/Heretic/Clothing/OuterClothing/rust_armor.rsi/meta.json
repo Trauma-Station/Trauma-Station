@@ -121,11 +121,11 @@
       ]
     },
     {
-      "name": "overlay-equipped-OUTERCLOTHING",
+      "name": "On-OUTERCLOTHING",
       "directions": 4
     },
     {
-      "name": "on-overlay-equipped-OUTERCLOTHING",
+      "name": "TogglingOn-OUTERCLOTHING",
       "directions": 4,
       "delays": [
         [
@@ -235,7 +235,7 @@
       ]
     },
     {
-      "name": "off-overlay-equipped-OUTERCLOTHING",
+      "name": "TogglingOff-OUTERCLOTHING",
       "directions": 4,
       "delays": [
         [

@@ -297,7 +297,11 @@ public sealed class HereticSystem : SharedHereticSystem
             return;
 
         if (!PlayerMan.TryGetSessionById(mind.UserId, out var session))
+        {
+            heretic.KnowledgeTracker += amount;
+            Dirty(mindId, heretic);
             return;
+        }
 
         if (showText)
         {
@@ -321,37 +325,57 @@ public sealed class HereticSystem : SharedHereticSystem
         var couldBreak = heretic.CanBreakBlade;
         var hadAura = heretic.ShouldShowAura;
         heretic.KnowledgeTracker += amount;
+        Dirty(mindId, heretic);
         var canBreak = heretic.CanBreakBlade;
         var showAura = heretic.ShouldShowAura;
 
         if (!canBreak && couldBreak)
-        {
-            var msg = Loc.GetString(heretic.BreakBladeAbilityLostMessage);
-            _chatMan.ChatMessageToOne(ChatChannel.Server,
-                msg,
-                msg,
-                default,
-                false,
-                session.Channel,
-                Color.Red);
-        }
+            SendNoBreakBladeMessage(heretic, session);
 
         if (!hadAura && showAura)
-        {
-            if (uid != null)
-                Status.TryUpdateStatusEffectDuration(uid.Value, heretic.HideAuraStatusEffect, heretic.AuraDelayTime);
+            ShowAura(heretic, uid, session, false);
+    }
 
-            var msg = Loc.GetString(heretic.AuraVisibleMessage);
-            _chatMan.ChatMessageToOne(ChatChannel.Server,
-                msg,
-                msg,
-                default,
-                false,
-                session.Channel,
-                Color.Red);
+    public override void SendNoBreakBladeMessage(HereticComponent heretic, ICommonSession session)
+    {
+        base.SendNoBreakBladeMessage(heretic, session);
+
+        if (heretic.CanBreakBlade)
+            return;
+
+        var msg = Loc.GetString(heretic.BreakBladeAbilityLostMessage);
+        _chatMan.ChatMessageToOne(ChatChannel.Server,
+            msg,
+            msg,
+            default,
+            false,
+            session.Channel,
+            Color.Red);
+    }
+
+    public override void ShowAura(HereticComponent heretic, EntityUid? body, ICommonSession session, bool immediate)
+    {
+        base.ShowAura(heretic, body, session, immediate);
+
+        if (!heretic.ShouldShowAura)
+            return;
+
+        if (body is { } uid)
+        {
+            if (immediate)
+                UpdateHereticAura(uid);
+            else
+                Status.TryUpdateStatusEffectDuration(uid, heretic.HideAuraStatusEffect, heretic.AuraDelayTime);
         }
 
-        Dirty(mindId, heretic);
+        var msg = Loc.GetString(immediate ? heretic.AuraVisibleMessageImmediate : heretic.AuraVisibleMessage);
+        _chatMan.ChatMessageToOne(ChatChannel.Server,
+            msg,
+            msg,
+            default,
+            false,
+            session.Channel,
+            Color.Red);
     }
 
     private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)

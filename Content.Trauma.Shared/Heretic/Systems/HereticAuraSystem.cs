@@ -12,6 +12,8 @@ public sealed class HereticAuraSystem : EntitySystem
 {
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+
 
     public override void Initialize()
     {
@@ -26,19 +28,29 @@ public sealed class HereticAuraSystem : EntitySystem
 
         Subs.SubscribeWithRelay<HideHereticAuraComponent, ShouldHideHereticAuraEvent>(OnHide, held: false);
 
-        SubscribeLocalEvent<StatusEffectContainerComponent, ShouldHideHereticAuraEvent>(_status
-            .RefRelayStatusEffectEvent);
+        SubscribeLocalEvent<InventoryComponent, ShouldHideHereticAuraEvent>(_inventory.RelayEvent);
 
-        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, ShouldHideHereticAuraEvent>(OnHide);
+        SubscribeLocalEvent<StatusEffectContainerComponent, ShouldHideHereticAuraEvent>(_status.RelayEvent);
+
+        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRelayedEvent<ShouldHideHereticAuraEvent>>(
+            OnStatusHide);
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectAppliedEvent>((_, _, ev) =>
             _heretic.RemoveAura(ev.Target));
         SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRemovedEvent>((_, _, ev) =>
             _heretic.UpdateHereticAura(ev.Target));
     }
 
-    private void OnHide(EntityUid uid, Component comp, ref ShouldHideHereticAuraEvent args)
+    private void OnStatusHide(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectRelayedEvent<ShouldHideHereticAuraEvent> args)
     {
-        if (comp.LifeStage > ComponentLifeStage.Running)
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+
+        args.Args = args.Args with { Hide = true };
+    }
+
+    private void OnHide(Entity<HideHereticAuraComponent> ent, ref ShouldHideHereticAuraEvent args)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
             return;
 
         args.Hide = true;

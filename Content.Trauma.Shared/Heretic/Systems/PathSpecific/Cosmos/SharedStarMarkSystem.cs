@@ -211,7 +211,7 @@ public abstract class SharedStarMarkSystem : EntitySystem
         {
             for (var x = -range; x <= range; x++)
             {
-                if (hollow && (Math.Abs(x) != range || Math.Abs(y) != range))
+                if (hollow && Math.Abs(x) != range && Math.Abs(y) != range)
                     continue;
 
                 SpawnCosmicField(coords.Offset(new Vector2i(x, y)), strength, lifetime, predicted);

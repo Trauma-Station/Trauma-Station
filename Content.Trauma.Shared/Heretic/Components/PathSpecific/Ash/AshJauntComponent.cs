@@ -1,3 +1,5 @@
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
@@ -9,7 +11,7 @@ public sealed partial class AshJauntComponent : Component
     [DataField]
     public TimeSpan EffectDuration = TimeSpan.FromSeconds(1);
 
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan EndTime;
 
     [DataField]

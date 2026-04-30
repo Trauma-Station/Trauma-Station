@@ -20,6 +20,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
@@ -29,6 +30,7 @@ public abstract class SharedHereticSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     [Dependency] protected readonly ISharedPlayerManager PlayerMan = default!;
     [Dependency] protected readonly StatusEffectsSystem Status = default!;
@@ -192,7 +194,21 @@ public abstract class SharedHereticSystem : EntitySystem
             // make sure we only progress when buying current path knowledge
             if (data.Stage > ent.Comp2.PathStage && path == ent.Comp2.CurrentPath)
             {
+                var couldBreak = ent.Comp2.CanBreakBlade;
+                var hadAura = ent.Comp2.ShouldShowAura;
                 ent.Comp2.PathStage = data.Stage;
+                var canBreak = ent.Comp2.CanBreakBlade;
+                var showAura = ent.Comp2.ShouldShowAura;
+
+                if (PlayerMan.TryGetSessionById(ent.Comp1.UserId, out var session))
+                {
+                    if (!canBreak && couldBreak)
+                        SendNoBreakBladeMessage(ent.Comp2, session);
+
+                    if (!hadAura && showAura)
+                        ShowAura(ent.Comp2, body, session, false);
+                }
+
                 UpdateHereticCostModifiers((ent, ent.Comp2));
             }
         }
@@ -210,7 +226,7 @@ public abstract class SharedHereticSystem : EntitySystem
 
     public void UpdateHereticAura(EntityUid uid)
     {
-        if (TerminatingOrDeleted(uid))
+        if (_timing.ApplyingState || TerminatingOrDeleted(uid))
             return;
 
         if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura)
@@ -279,4 +295,8 @@ public abstract class SharedHereticSystem : EntitySystem
         ent.Comp1.ObjectivesCompleted = result;
         Dirty(ent.Owner, ent.Comp1);
     }
+
+    public virtual void SendNoBreakBladeMessage(HereticComponent heretic, ICommonSession session) { }
+
+    public virtual void ShowAura(HereticComponent heretic, EntityUid? body, ICommonSession session, bool immediate) { }
 }

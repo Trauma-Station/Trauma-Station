@@ -28,7 +28,7 @@ public sealed class ClientClothingSystem : ClothingSystem
     /// For some context, im currently refactoring inventory. Part of that is slots not being indexed by a massive enum anymore, but by strings.
     /// Problem here: Every rsi-state is using the old enum-names in their state. I already used the new inventoryslots ALOT. tldr: its this or another week of renaming files.
     /// </summary>
-    private static readonly Dictionary<string, string> TemporarySlotMap = new()
+    public static readonly Dictionary<string, string> TemporarySlotMap = new() // Trauma - made public
     {
         {"head", "HELMET"},
         {"eyes", "EYES"},
@@ -341,8 +341,12 @@ public sealed class ClientClothingSystem : ClothingSystem
 
             _sprite.LayerSetData((equipee, sprite), index, layerData);
             _sprite.LayerSetOffset(layer, layer.Offset + slotDef.Offset);
-            if (!hiddenEv.Visible) // Goobstation
+            // <Trauma>
+            if (!hiddenEv.Visible)
                 _sprite.LayerSetVisible(layer, false);
+            if (ev.LayersAnimationTime.TryGetValue(key, out var time))
+                _sprite.LayerSetAnimationTime(layer, time);
+            // </Trauma>
 
             if (displacementData is not null)
             {
