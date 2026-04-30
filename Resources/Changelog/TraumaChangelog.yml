@@ -7687,3 +7687,24 @@ Entries:
   id: 887
   time: '2026-04-28T21:28:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2319
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: ambient music should now be louder
+  id: 888
+  time: '2026-04-29T21:23:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2338
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: 40mm riot launchers now use their access locked varient.
+  id: 889
+  time: '2026-04-29T21:48:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2337
+- author: Vanadiom
+  changes:
+  - type: Fix
+    message: It is now possible to use homemade organic chocolate in microwave recipes!
+  id: 890
+  time: '2026-04-29T21:50:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2339
