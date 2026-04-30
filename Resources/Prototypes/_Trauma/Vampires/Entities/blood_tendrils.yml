@@ -1,0 +1,41 @@
+- type: entity
+  id: BloodTendrilPre
+  components:
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: SpawnOnDespawn
+    prototype: BloodTendril
+
+- type: entity
+  id: BloodTendril
+  name: Blood Tendril
+  description: A weird tentacle.
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi # TODO: Change
+    state: bar
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      bloodtendril:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - Opaque
+        layer:
+        - Impassable
+  - type: TriggerOnCollide
+    fixtureID: bloodtendril
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: BloodTendrilSlowdown
+      time: 5
+      type: Set
+  - type: TimedDespawn
+    lifetime: 0.5

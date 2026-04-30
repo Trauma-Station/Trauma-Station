@@ -14,3 +14,23 @@
     event: !type:OnRetractableItemActionEvent
   - type: RetractableItemAction
     spawnedPrototype: VampiricClaws
+
+# Blood Tendrils
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodTendrils
+  name: Blood Tendrils
+  description: Blood Tendrils
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 10
+  - type: WorldTargetAction
+    event: !type:WorldTargetSpawnActionEvent
+  - type: ActionWorldTargetSpawn
+    spawnPrototype: BloodTendrilPre
+    size: 2,2
