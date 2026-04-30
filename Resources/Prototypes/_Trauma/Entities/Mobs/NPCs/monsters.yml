@@ -362,6 +362,29 @@
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
       - state: coconutcrabnoshell
+  - type: NoSlip
+  - type: FlashImmunity # Does nothing because not ghostrole p sure but just incase
+  - type: Puller # Ditto
+    needsHands: false
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepThud
+  - type: Prying
+    speedModifier: 2
+    pryPowered: true
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      75: 0.95
+      50: 0.85
+      25: 0.7
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
   - type: HTN
     rootTask:
       task: XenomorphCompound # i could replace with a custom htn but it'll be fiiiiiiiine
@@ -403,8 +426,8 @@
     attackRate: 0.6
     damage:
       types:
-        Blunt: 15
-        Structural: 5
+        Blunt: 10
+        Structural: 15
   - type: MeleeThrowOnHit
     distance: 5
     speed: 10
@@ -421,6 +444,10 @@
     speechVerb: Arachnid
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter']
+  - type: Damageable
+    damageContainer: Biologicalthats
+    damageModifierSet: CoconutCrabUnshelled
+  - type: WeakToHoly
   - type: Butcherable
     spawned:
     - id: FoodMeatCrab
@@ -444,11 +471,14 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 75
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
         recursive: false
+      - !type:PlaySoundBehavior
+            sound:
+              collection: WoodDestroy
       - !type:SpawnEntitiesBehavior
         spawn:
           FoodCoconutHalf:
@@ -458,10 +488,10 @@
             min: 1
             max: 1
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 1
+    baseWalkSpeed: 1.5
+    baseSprintSpeed: 1.5
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: CoconutCrab
   - type: MobPrice
-    price: 200 # The fact that a test requires me to add this is fucking stupid
+    price: 500 # The fact that a test requires me to add this is fucking stupid
