@@ -235,6 +235,7 @@
   id: LotteryNotUsefulEntityTable
   table: !type:GroupSelector
     children:
+    - id: MobCoconutCrab # Trauma, jumpscare
     - id: LidSalami
     - id: MobHamsterHamlet
     - id: MobLaserRaptor

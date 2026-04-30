@@ -206,6 +206,8 @@
       prob: 0.01
     - id: ReagentContainerCement
       prob: 0.05
+    - id: MobCoconutCrab
+      prob: 0.05
     - id: SheetPlasteel10
       prob: 0.05
     - id: SheetBrass10

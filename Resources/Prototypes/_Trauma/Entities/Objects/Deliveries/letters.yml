@@ -87,6 +87,8 @@
       - id: MobButterfly
       - id: MobMothmaggot
         weight: 0.1
+      - id: MobCoconutCrab
+        weight: 0.05
     - !type:GroupSelector
       weight: 1
       children:
