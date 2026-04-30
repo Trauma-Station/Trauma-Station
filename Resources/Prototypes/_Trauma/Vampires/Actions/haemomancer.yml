@@ -1,0 +1,16 @@
+# Vampiric Claws
+- type: entity
+  parent: BaseVampireAction
+  id: ActionVampiricClaws
+  name: Vampiric Claws
+  description: Create undroppable claws of blood. Claws remove bonus blood from the target on hit, a fraction of this is added to your blood total. Use in hand to dispel.
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:OnRetractableItemActionEvent
+  - type: RetractableItemAction
+    spawnedPrototype: VampiricClaws

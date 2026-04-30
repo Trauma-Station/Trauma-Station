@@ -1,0 +1,39 @@
+- type: entity
+  parent: BaseItem
+  id: VampiricClaws
+  name: Claws of Blood
+  description: Remove bonus blood from the target on hit.
+  components:
+  - type: Execution
+    doAfterDuration: 4.0
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/armblade.rsi # TODO: Change to claws
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: 90
+    attackRate: 1.7
+    damage:
+      types:
+        Slash: 6
+  - type: DisarmMalus
+    malus: 0
+  - type: Item
+    size: Normal
+    sprite: Objects/Weapons/Melee/armblade.rsi
+  - type: EffectsOnMeleeHit
+    userEffects:
+    - !type:AdjustVampireBlood
+      amount: 5
+    targetEffects:
+    - !type:ModifyBloodLevel
+      amount: -20
+  - type: Durability
+    damageProbability: 1.0
+    minDamageRoll: 1
+    maxDamageRoll: 1
+    repairable: false
+    durabilityThresholds:
+      0: Pristine
+      15: Destroyed
+  - type: TriggerOnUse
+  - type: DeleteOnTrigger
