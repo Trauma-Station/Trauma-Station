@@ -100,8 +100,9 @@ selectable-set-syndicate-fluclear-description =
 selectable-set-syndicate-friendship-name = Friendship Bundle
 selectable-set-syndicate-friendship-description =
     Friendship is magic! Go find yourself some friends with this bundle!
-    Contains: a contractor baton and handcuffs for you, 4 mindcontrol implanters
-    and Mosin rifles for your friends, and 5 syndicate encryption keys for you all.
+    Contains: a contractor baton and handcuffs for you, AKM, two magazines,
+    ammunition box, 4 mindcontrol implanters, 4 Mosin rifles for your friends,
+    and 5 syndicate encryption keys for you all.
 
 selectable-set-syndicate-carp-name = Carp Bundle
 selectable-set-syndicate-carp-description =

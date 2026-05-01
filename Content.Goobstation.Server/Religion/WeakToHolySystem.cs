@@ -70,7 +70,7 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 
-        ChangeUnholyStatus(ent, args.Equipee, false);
+        ChangeUnholyStatus(ent, args.EquipTarget, false);
     }
 
     private void OnEquip(Entity<UnholyItemComponent> ent, ref GotEquippedEvent args)
@@ -78,7 +78,7 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 
-        ChangeUnholyStatus(ent, args.Equipee, true);
+        ChangeUnholyStatus(ent, args.EquipTarget, true);
     }
 
     private void ChangeUnholyStatus(EntityUid source, EntityUid user, bool status)

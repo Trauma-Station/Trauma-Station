@@ -1605,7 +1605,7 @@
 
 - type: entity
   id: FloorTileItemAstroGrass
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   name: astro-grass
   description: Fake grass that covers up wires and even comes with realistic NanoTrimmings!
   components:
@@ -1619,13 +1619,10 @@
     - FloorAstroGrass
   - type: Stack
     stackType: FloorTileAstroGrass
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Plastic: 25
 
 - type: entity
   id: FloorTileItemMowedAstroGrass
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   name: mowed astro-grass
   description: Fake grass that covers up wires and even comes with realistic NanoTrimmings!
   components:
@@ -1638,14 +1635,11 @@
     - Plating
     - FloorMowedAstroGrass
   - type: Stack
-    stackType: FloorTileAstroGrass
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Plastic: 25
+    stackType: FloorTileMowedAstroGrass
 
 - type: entity
   id: FloorTileItemJungleAstroGrass
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   name: jungle astro-grass
   description: Fake grass that covers up wires and even comes with realistic NanoTrimmings!
   components:
@@ -1658,13 +1652,10 @@
     - Plating
     - FloorJungleAstroGrass
   - type: Stack
-    stackType: FloorTileAstroGrass
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Plastic: 25
+    stackType: FloorTileJungleAstroGrass
 
 - type: entity
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   id: FloorTileItemDarkAstroGrass
   name: dark astro-grass
   description: Fake grass that covers up wires and even comes with realistic NanoTrimmings!
@@ -1681,7 +1672,7 @@
     stackType: FloorTileDarkAstroGrass
 
 - type: entity
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   id: FloorTileItemLightAstroGrass
   name: light astro-grass
   description: Fake grass that covers up wires and even comes with realistic NanoTrimmings!
@@ -1699,7 +1690,7 @@
 
 - type: entity
   id: FloorTileItemAstroIce
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   name: astro-ice
   description: Fake ice that's as slippery as the real thing, while being easily removable!
   components:
@@ -1713,13 +1704,10 @@
     - FloorAstroIce
   - type: Stack
     stackType: FloorTileAstroIce
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Plastic: 25
 
 - type: entity
   id: FloorTileItemAstroSnow
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   name: astro-snow
   description: Fake snow that's as fluffy as the real thing, while being easily removable!
   components:
@@ -1733,13 +1721,10 @@
     - FloorAstroSnow
   - type: Stack
     stackType: FloorTileAstroSnow
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Plastic: 25
 
 - type: entity
   id: FloorTileItemAstroAsteroidSand
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   name: asteroid astro-sand
   description: Fake sand. Luckily, it's not as coarse as the real thing.
   components:
@@ -1756,7 +1741,7 @@
 
 - type: entity
   id: FloorTileItemAstroAsteroidSandBorderless
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   name: borderless asteroid astro-sand
   description: Fake sand. Luckily, it's not as coarse as the real thing.
   components:
@@ -1772,7 +1757,7 @@
     stackType: FloorTileAstroAsteroidSand
 
 - type: entity
-  parent: FloorTileItemBase
+  parent: BaseFloorTileAstro # Trauma - astro parent
   id: FloorTileItemDesertAstroSand
   name: desert astro-sand
   description: Fake sand, designed to be fine.

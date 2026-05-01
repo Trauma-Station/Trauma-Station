@@ -1072,7 +1072,7 @@ public abstract class SharedSpellsSystem : CommonSpellsSystem
                     basicAmmoComp is { Count: not null, Capacity: not null } &&
                     basicAmmoComp.Count < basicAmmoComp.Capacity)
                 {
-                    _gun.UpdateBasicEntityAmmoCount(item, basicAmmoComp.Capacity.Value, basicAmmoComp);
+                    _gun.UpdateBasicEntityAmmoCount((item, basicAmmoComp), basicAmmoComp.Capacity.Value);
                     PopupCharged(item, ev.Performer);
                     break;
                 }

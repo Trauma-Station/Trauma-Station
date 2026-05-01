@@ -616,7 +616,7 @@ public abstract class SharedSealableClothingSystem : EntitySystem
         // Cancel if the control unit is sealed.
         if (TryComp<SealableClothingControlComponent>(toggleableEnt, out var controlSeal) && controlSeal.IsCurrentlySealed || controlSeal!.IsInProcess)
         {
-            _popup.PopupClient(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.Unequipee);
+            _popup.PopupClient(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.User);
             args.Cancel();
             return;
         }
@@ -629,7 +629,7 @@ public abstract class SharedSealableClothingSystem : EntitySystem
         {
             if (!TryComp<SealableClothingComponent>(partUid, out var partSeal) || !partSeal.IsSealed)
                 continue;
-            _popup.PopupClient(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.Unequipee);
+            _popup.PopupClient(Loc.GetString("sealable-clothing-sealed-toggle-fail"), toggleableEnt, args.User);
             args.Cancel();
             return;
         }

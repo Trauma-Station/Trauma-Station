@@ -33,15 +33,13 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private float _crawlHitzoneSquared; // Trauma
-    private EntityQuery<HitscanBasicVisualsComponent> _visualsQuery;
+    [Dependency] private readonly EntityQuery<HitscanBasicVisualsComponent> _visualsQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _cfg.OnValueChanged(GoobCVars.CrawlHitzoneSize, x => _crawlHitzoneSquared = x * x, true); // Trauma - cvar is squared as micro-optimisation for later checking
-        _visualsQuery = GetEntityQuery<HitscanBasicVisualsComponent>();
-
         SubscribeLocalEvent<HitscanBasicRaycastComponent, HitscanTraceEvent>(OnHitscanFired);
     }
 

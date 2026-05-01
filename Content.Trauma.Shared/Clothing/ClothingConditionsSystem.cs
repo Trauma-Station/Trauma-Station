@@ -27,7 +27,7 @@ public sealed class ClothingConditionsSystem : EntitySystem
             return;
 
         var identity = Identity.Entity(target, EntityManager);
-        var user = args.Equipee;
+        var user = args.User;
         args.Reason = Loc.GetString(ent.Comp.Reason, ("target", identity), ("self", target == user));
         args.Cancel();
     }

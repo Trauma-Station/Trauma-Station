@@ -1473,13 +1473,14 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange #Goobstation
+      # <Trauma>
+      - !type:HealthChange
         damage:
           types:
-            Radiation: -0.25 #Goobend
-      - !type:GenericStatusEffect
-        key: RadiationProtection
-        component: RadiationProtection
+            Radiation: -0.25
+      # </Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectRadiationProtection
         time: 2
         type: Add
       - !type:HealthChange

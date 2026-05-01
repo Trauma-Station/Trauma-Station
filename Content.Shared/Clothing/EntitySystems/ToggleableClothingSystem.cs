@@ -232,7 +232,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (GetAttachedToggleStatus(args.UnEquipTarget, toggleable, true) == ToggleableClothingAttachedStatus.NoneToggled)
             return;
 
-        _popupSystem.PopupClient(Loc.GetString("toggleable-clothing-remove-all-attached-first"), args.Unequipee, args.Unequipee);
+        _popupSystem.PopupClient(Loc.GetString("toggleable-clothing-remove-all-attached-first"), args.UnEquipTarget, args.User);
 
         args.Cancel();
     }
@@ -262,18 +262,18 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (TerminatingOrDeleted(toggleable))
         {
             // only restore if the mob wearing it isn't being deleted too
-            var restore = !TerminatingOrDeleted(args.Equipee);
+            var restore = !TerminatingOrDeleted(args.EquipTarget);
             foreach (var (partUid, slot) in parts)
             {
                 // it's being deleted not taken off, no contact here
-                _inventorySystem.TryUnequip(args.Equipee, slot, force: true, triggerHandContact: false);
+                _inventorySystem.TryUnequip(args.EquipTarget, slot, force: true, triggerHandContact: false);
                 PredictedQueueDel(partUid);
                 if (restore &&
                     CompOrNull<AttachedClothingComponent>(partUid)?.ClothingContainer?.ContainedEntity is {} stored &&
                     !Deleted(stored))
                 {
                     _containerSystem.TryRemoveFromContainer(stored);
-                    _inventorySystem.TryEquip(args.Equipee, stored, slot,
+                    _inventorySystem.TryEquip(args.EquipTarget, stored, slot,
                         force: true, triggerHandContact: false);
                 }
             }
@@ -291,7 +291,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
             {
                 if (comp.Container.Contains(partUid))
                     continue;
-                _inventorySystem.TryUnequip(args.Equipee, slot, force: true, triggerHandContact: true);
+                _inventorySystem.TryUnequip(args.EquipTarget, slot, force: true, triggerHandContact: true);
                 // unnecessary for gibbing behaviour fix
                 // but this makes it so that if you unequip and there's items stored
                 // it doesn't just eat the items
@@ -300,7 +300,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
                 !Deleted(stored))
                 {
                     _containerSystem.TryRemoveFromContainer(stored);             // pop it out
-                    _inventorySystem.TryEquip(args.Equipee, stored, slot,    // put it on
+                    _inventorySystem.TryEquip(args.EquipTarget, stored, slot,    // put it on
                         force: true, triggerHandContact: true);
                 }
                 _containerSystem.Insert(partUid, comp.Container); // instant insert we dont wait for OnAttachedUnequip
@@ -308,7 +308,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
             }
             if (affectedParts.Count > 0)
             {
-                var ev = new ToggledBackClothingFullUnequipAndInsertedEvent(toggleable.Owner, args.Equipee, affectedParts);
+                var ev = new ToggledBackClothingFullUnequipAndInsertedEvent(toggleable.Owner, args.EquipTarget, affectedParts);
                 RaiseLocalEvent(toggleable.Owner, ref ev);
             }
             return;
@@ -319,7 +319,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
             if (comp.Container.Contains(partUid) || string.IsNullOrEmpty(slot))
                 continue;
 
-            _inventorySystem.TryUnequip(args.Equipee, slot, force: true, triggerHandContact: true);
+            _inventorySystem.TryUnequip(args.EquipTarget, slot, force: true, triggerHandContact: true);
         }
         // </Trauma>
     }
@@ -365,13 +365,13 @@ public sealed class ToggleableClothingSystem : EntitySystem
             return;
 
         var attachedEnt = new Entity<AttachedClothingComponent>(args.Equipment, attachedComp);
-        if (args.UnEquipTarget != args.Unequipee)
+        if (args.UnEquipTarget != args.User)
         {
-            StartAttachedDoAfter(args.Unequipee, attachedEnt, args.UnEquipTarget);
+            StartAttachedDoAfter(args.User, attachedEnt, args.UnEquipTarget);
             args.Cancel(); // Cancel original unequip, DoAfter will handle it
         }
         else
-            UnequipClothing(args.Unequipee, new Entity<ToggleableClothingComponent>(toggleable, toggleableComp), args.UnEquipTarget, args.Slot);
+            UnequipClothing(args.User, new Entity<ToggleableClothingComponent>(toggleable, toggleableComp), args.UnEquipTarget, args.Slot);
     }
 
     private void OnRemoveAttached(Entity<AttachedClothingComponent> attached, ref ComponentRemove args)
@@ -433,7 +433,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (TryComp<ClothingComponent>(comp.AttachedUid, out var clothingComp) &&
         (clothingComp.Slots & SlotFlags.BACK) != 0)
         {
-            var ev = new OnToggleableUnequipAttemptEvent(comp.AttachedUid, attached.Owner, args.Equipee, false);
+            var ev = new OnToggleableUnequipAttemptEvent(comp.AttachedUid, attached.Owner, args.EquipTarget, false);
             RaiseLocalEvent(comp.AttachedUid, ev);
             // I fucking hate these naming schemes but im not changing them at this point
             // AttachedUid = Toggleable Part
@@ -442,7 +442,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         }
 
         // Handle re-equipping contained items
-        UnequipClothing(args.Equipee, (comp.AttachedUid, toggleableComp), attached.Owner, slot);
+        UnequipClothing(args.EquipTarget, (comp.AttachedUid, toggleableComp), attached.Owner, slot);
 
         if (toggleableComp.Container is {} container && !TerminatingOrDeleted(container.Owner))
             _containerSystem.Insert(attached.Owner, container);
