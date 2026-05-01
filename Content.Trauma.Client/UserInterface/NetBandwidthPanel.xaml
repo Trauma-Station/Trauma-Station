@@ -9,5 +9,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <Label Name="DiffLabel" Margin="4"/>
         <Label Text="Total bandwidth used"/>
         <Label Name="TotalLabel" Margin="4"/>
+        <Button Name="ResetButton" Text="Reset total bandwidth"/>
     </BoxContainer>
 </PanelContainer>

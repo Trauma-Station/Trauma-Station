@@ -28,6 +28,8 @@ public sealed partial class NetBandwidthPanel : PanelContainer
         _net = net;
 
         _lastUsage = _net.MessageBandwidthUsage.ToDictionary();
+
+        ResetButton.OnPressed += _ => _net.ResetBandwidthMetrics();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
