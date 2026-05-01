@@ -14,6 +14,10 @@
   parent: BaseAction
   description: Creates a waypoint at the target location, clicking an existing waypoint will remove it instead.
   components:
+  - type: Action
+    icon: Interface/AdminNotes/none_button.png
+  - type: TargetAction
+    range: 200
   - type: WorldTargetAction
     useDelay: 3
     range: 5

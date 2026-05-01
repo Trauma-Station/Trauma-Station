@@ -21,7 +21,7 @@
         - MobMask
         layer:
         - MobLayer
-  - type: TileMovement
+  # - type: TileMovement
   - type: HTN
     rootTask:
       task: SecbotCompound
@@ -73,6 +73,7 @@
     - DoorBumpOpener
     - Bot
     - Unimplantable
+  - type: CuffSpawner
 
 - type: entity
   parent: MobSecuritron

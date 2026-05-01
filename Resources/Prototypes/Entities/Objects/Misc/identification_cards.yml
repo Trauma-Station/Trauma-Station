@@ -606,6 +606,10 @@
   id: CentcomIDCardDeathsquad
   name: death squad ID card
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 3 # Weapons? On my station?
+  # </Trauma>
   - type: Sprite
     layers:
     - state: centcom
@@ -658,6 +662,10 @@
   id: NukieAgentIDCard
   suffix: Nukie
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 7 # Holy nukie
+  # </Trauma>
   - type: Access
     tags:
     - Maintenance
@@ -681,6 +689,10 @@
   id: SyndicateIDCard
   name: syndicate ID card
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 4
+  # </Trauma>
   - type: Sprite
     layers:
     - state: syndie # Trauma
@@ -698,6 +710,10 @@
   id: SyndiOperativeIDCard
   name: syndicate operative ID card
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 6
+  # </Trauma>
   - type: Sprite
     layers:
     - state: syndie # Trauma
@@ -710,6 +726,10 @@
   id: SyndiCorpsmanIDCard
   name: syndicate corpsman ID card
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 10 # Priority
+  # </Trauma>
   - type: Sprite
     layers:
     - state: syndie # Trauma
@@ -721,6 +741,10 @@
   id: SyndiCommanderIDCard
   name: syndicate commander ID card
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 9 # Second Priority
+  # </Trauma>
   - type: Sprite
     layers:
     - state: syndie # Trauma
@@ -733,6 +757,10 @@
   name: ninja ID card
   suffix: Ninja
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 4
+  # </Trauma>
   - type: Sprite # Trauma - not using wizden id card sprites system yet
     layers:
     - state: default
@@ -758,6 +786,10 @@
   id: PirateIDCard
   name: pirate ID card
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 3
+  # </Trauma>
   - type: Sprite
     layers:
     - state: pirate
@@ -775,6 +807,10 @@
   id: PsychologistIDCard
   name: psychologist ID card
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 3 # Very much deserved
+  # </Trauma>
   - type: Sprite
     layers:
     - state: default
@@ -851,6 +887,10 @@
     - Recyclable
   - type: StaticPrice # these are infinitely producible.
     price: 0
+  # <Trauma>
+  - type: AntagCard
+    threat: 2 # Shouldn't be outside of jail.
+  # </Trauma>
 
 #ERT/Centcomm
 

@@ -1,7 +1,7 @@
 - type: entity
   parent: [BaseItem, BaseSecurityContraband]
   id: Wandsky
-  name: commander wandsky
+  name: commander beepsky
   description: A technological marvel used for directing securitrons.
   components:
   - type: Sprite
@@ -55,6 +55,4 @@
     intensity: 2
     scrollRate: 0.125
   - type: Waypoint
-  - type: Tag
-    tags:
-    - HideContextMenu
+  - type: Clickable

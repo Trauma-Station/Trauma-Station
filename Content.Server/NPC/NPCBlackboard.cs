@@ -311,6 +311,7 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
     public const string MedibotInjectRange = "MedibotInjectRange";
     public const string SecuritronArrestRange = "SecuritronArrestRange"; // Trauma - Beepsky
     public const string SecuritronPatrolRange = "SecuritronPatrolRange"; // Trauma - Beepsky
+    public const string TargetList = "TargetList"; // Trauma - Beepsky
     public const string WeldbotWeldRange = "WeldbotWeldRange"; // Einstein Engines
     public const string FillbotPickupRange = "FillbotPickupRange"; // Einstein Engines
     public const string PlantbotServiceRange = "PlantbotServiceRange"; // Einstein Engines

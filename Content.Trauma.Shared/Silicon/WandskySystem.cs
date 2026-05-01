@@ -5,6 +5,7 @@ using Content.Shared.Popups;
 using Content.Trauma.Common.Silicon;
 using Content.Trauma.Shared.Silicon.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Silicon;
 public sealed class WandskySystem : EntitySystem
@@ -12,6 +13,7 @@ public sealed class WandskySystem : EntitySystem
 
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -31,14 +33,25 @@ public sealed class WandskySystem : EntitySystem
         if (!TryComp<CommanderComponent>(args.Used, out var commander))
             return;
 
-        if (ent.Comp.MasterEntity is { } || commander.SlaveEntity is { })
+        if (ent.Comp.MasterEntity is { } && commander.SlaveEntity == ent.Owner)
         {
-            _popupSystem.PopupClient("A bond has already been formed.", ent.Owner, args.User, PopupType.Medium);
+            _popupSystem.PopupClient("A bond has already been formed with this one.", ent.Owner, args.User, PopupType.Medium);
             return;
         }
 
+        _popupSystem.PopupClient("Bond formed.", ent.Owner, args.User, PopupType.Medium);
+
         var slaveEntity = ent.Owner;
 
+        // Clear old one
+        if (TryComp<SlaveComponent>(commander.SlaveEntity, out var slave))
+        {
+            if (TryComp<CommanderComponent>(slave.MasterEntity, out var master))
+                master.SlaveEntity = null;
+            slave.MasterEntity = null;
+        }
+
+        // Set new one
         commander.SlaveEntity = slaveEntity;
         ent.Comp.MasterEntity = ent.Owner;
 
@@ -50,7 +63,7 @@ public sealed class WandskySystem : EntitySystem
 
     public void OnTogglePatrol(Entity<CommanderComponent> ent, ref TogglePatrolActionEvent args)
     {
-        if (ent.Comp.SlaveEntity is { } || !TryComp<SlaveComponent>(ent.Comp.SlaveEntity, out var slave))
+        if (ent.Comp.SlaveEntity is not { } || !TryComp<SlaveComponent>(ent.Comp.SlaveEntity, out var slave))
         {
             _popupSystem.PopupClient("You have not synced to a Securitron", ent.Owner, args.Performer, PopupType.Medium);
             return;
@@ -66,9 +79,16 @@ public sealed class WandskySystem : EntitySystem
 
     public void OnWaypointAction(Entity<CommanderComponent> ent, ref WaypointActionEvent args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         if (args.Entity is { } targetEntity && HasComp<WaypointComponent>(targetEntity))
         {
             _popupSystem.PopupClient("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
+
+            if (!ent.Comp.Waypoints.Contains(targetEntity))
+                return;
+
             ent.Comp.Waypoints.Remove(targetEntity);
             QueueDel(targetEntity);
         }
@@ -89,7 +109,7 @@ public sealed class WandskySystem : EntitySystem
 
         if (count == 0)
         {
-            _popupSystem.PopupEntity("No waypoints to clear!", ent.Owner, args.Performer, PopupType.Medium);
+            _popupSystem.PopupClient("No waypoints to clear!", ent.Owner, args.Performer, PopupType.Medium);
             return;
         }
 
@@ -102,7 +122,7 @@ public sealed class WandskySystem : EntitySystem
         });
 
         Dirty(ent);
-        _popupSystem.PopupEntity($"Cleared {count} waypoints!", ent.Owner, args.Performer, PopupType.Medium);
+        _popupSystem.PopupClient($"Cleared {count} waypoints!", ent.Owner, args.Performer, PopupType.Medium);
     }
     #endregion
 }

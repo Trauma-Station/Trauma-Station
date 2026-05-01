@@ -2,12 +2,10 @@
 
 using Content.Shared.Actions;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Silicon.Components;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class CommanderComponent : Component
 {
     /// <summary>
@@ -19,13 +17,13 @@ public sealed partial class CommanderComponent : Component
     /// <summary>
     /// A list of waypoints placed.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Waypoints { get; set; } = new();
 
     /// <summary>
     /// The enslaved robot.
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, AutoNetworkedField]
     public EntityUid? SlaveEntity { get; set; }
 
     /// <summary>
