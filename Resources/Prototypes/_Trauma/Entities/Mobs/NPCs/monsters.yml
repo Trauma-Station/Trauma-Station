@@ -386,7 +386,7 @@
   - type: HTN
     rootTask:
       task: XenomorphCompound # i could replace with a custom htn but it'll be fiiiiiiiine
-    blackboard: 
+    blackboard:
       NavClimb: !type:Bool
         true
       NavSmash: !type:Bool
