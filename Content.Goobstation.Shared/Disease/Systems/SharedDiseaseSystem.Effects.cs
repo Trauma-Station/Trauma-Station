@@ -9,11 +9,9 @@ using Content.Shared.Damage.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid;
 using Content.Shared.Maps;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.StatusIcon.Components;
-using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -24,14 +22,12 @@ namespace Content.Goobstation.Shared.Disease.Systems;
 public partial class SharedDiseaseSystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MovementModStatusSystem _movementMod = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly TileSystem _tile = default!;
 
