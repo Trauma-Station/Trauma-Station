@@ -1,0 +1,18 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls1:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+    HorizontalExpand= "True"
+    VerticalExpand= "True"
+    MinWidth = "350"
+    MinHeight= "400"
+    Title="Entity Menu">
+    <ScrollContainer HorizontalExpand = "True" VerticalExpand = "True">
+        <BoxContainer Name="EntityContainer" Orientation="Vertical">
+        </BoxContainer>
+    </ScrollContainer>
+
+</controls1:FancyWindow>

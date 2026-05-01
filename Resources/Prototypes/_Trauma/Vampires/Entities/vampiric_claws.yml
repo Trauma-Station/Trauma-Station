@@ -21,6 +21,11 @@
     size: Normal
     sprite: Objects/Weapons/Melee/armblade.rsi
   - type: EffectsOnMeleeHit
+    targetConditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - Bloodstream
     userEffects:
     - !type:AdjustVampireBlood
       amount: 5

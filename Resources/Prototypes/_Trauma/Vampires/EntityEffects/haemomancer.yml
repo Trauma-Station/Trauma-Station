@@ -1,0 +1,9 @@
+# Blood Eruption
+- type: entityEffect
+  id: BloodEruption
+  effects:
+  - !type:SpawnEntity
+    conditions:
+    - !type:ReagentsCondition
+      min: 10
+    entity: BloodTendrilPre   # TODO: Spawn spike instead

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Weapons.Melee;
@@ -28,4 +29,11 @@ public sealed partial class EffectsOnMeleeHitComponent : Component
     /// </summary>
     [DataField]
     public bool EffectForEveryHit;
+
+    /// <summary>
+    /// Conditions that run on the target, before the entity effects.
+    /// Useful if you want to run <see cref="UserEffects"/> based on target conditions.
+    /// </summary>
+    [DataField]
+    public EntityCondition[]? TargetConditions;
 }

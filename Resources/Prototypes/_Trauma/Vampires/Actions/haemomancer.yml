@@ -80,3 +80,45 @@
     effects:
     - !type:Polymorph # Sins of the father
       prototype: BloodPuddlePolymorph
+
+# Predator Senses
+- type: entity
+  parent: BaseVampireAction
+  id: ActionPredatorSenses
+  name: Predator Senses
+  description: Predator Senses
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:PredatorSensesActionEvent
+  - type: UserInterface
+    interfaces:
+      enum.ListEntitySelectorUiKey.Key:
+        type: ListEntitySelectorBui
+  - type: ActionPredatorSenses
+
+# Blood Eruption
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodEruption
+  name: Blood Eruption
+  description: Blood Eruption
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:RelayNearby
+      compName: Puddle
+      range: 4
+      effect: !type:NestedEffect
+        proto: BloodEruption
