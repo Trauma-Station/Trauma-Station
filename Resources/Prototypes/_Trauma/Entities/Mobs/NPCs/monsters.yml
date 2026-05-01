@@ -492,7 +492,7 @@
     price: 500 # The fact that a test requires me to add this is fucking stupid
 
 - type: entity
-  parent: SimpleMobBase
+  parent: MobSpaceBasic
   id: MobCrabTiny
   name: red crab
   description: This is crabtually insane.

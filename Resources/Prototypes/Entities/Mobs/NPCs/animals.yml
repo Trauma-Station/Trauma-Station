@@ -1059,6 +1059,7 @@
   - type: Tag
     tags:
     - VimPilot
+    - Crab # Trauma
   - type: HTN
     rootTask:
       task: RuminantCompound

@@ -88,6 +88,38 @@
       PotencyDivisor: 5
 
 - type: seed
+  id: CoconutPlantCrab # you will never know!
+  name: seeds-coconut-name
+  noun: seeds-noun-seeds
+  displayName: seeds-coconut-display-name
+  plantRsi: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
+  packetPrototype: CoconutCrabSeeds
+  productPrototypes:
+  - FoodCoconut
+  harvestRepeat: SelfHarvest # bear in mind, this is the equivalent of space bear pelt for botany
+  lifespan: 80
+  maturation: 12 # takes a while
+  production: 1 # lol
+  yield: 8 # higher than cocoa because rare
+  potency: 25
+  waterConsumption: 1 # they need a lotta wata
+  nutrientConsumption: 1
+  idealLight: 8
+  chemicals:
+    CoconutWater:
+      Min: 1
+      Max: 20
+      PotencyDivisor: 5
+    Vitamin:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 5
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 5
+
+- type: seed
   id: CherryBomb
   name: seeds-cherrybomb-name
   noun: seeds-noun-seeds

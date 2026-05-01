@@ -32,3 +32,7 @@
             Blunt: 1
             Slash: 1
             Piercing: 1
+        conditions:
+        - !type:TagCondition
+          inverted: true
+          tag: Crab
