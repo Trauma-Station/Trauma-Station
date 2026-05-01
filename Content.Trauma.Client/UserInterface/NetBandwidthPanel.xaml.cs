@@ -61,7 +61,9 @@ public sealed partial class NetBandwidthPanel : PanelContainer
         var total = current
             .OrderByDescending(p => p.Value)
             .Select(p => $"{TypeAbbreviation.Abbreviate(p.Key)}: {p.Value / kibibyte} KiB total");
-        TotalLabel.Text = string.Join('\n', total);
+        TotalLabel.Text = total.Count == 0
+            ? "RobustToolbox removes bandwidth information on release, you must compile the game yourself to see it!"
+            : string.Join('\n', total);
     }
 
     public void Toggle()
