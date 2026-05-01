@@ -16,3 +16,5 @@ reagent-desc-aloe-cocktail = A strange mix of watermelon juice, cream and mead.
 
 reagent-name-banana-milkshake = Banana milkshake
 reagent-desc-banana-milkshake = A thick, creamy shake made with banana juice, cream and ice.
+
+reagent-physical-desc-crabby = crabby

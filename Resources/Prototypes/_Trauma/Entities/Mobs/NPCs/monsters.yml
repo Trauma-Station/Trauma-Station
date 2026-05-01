@@ -370,12 +370,10 @@
     tags:
     - DoorBumpOpener
     - FootstepSound
+    - Crab
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepThud
-  - type: Prying
-    speedModifier: 2
-    pryPowered: true
   - type: SlowOnDamage
     speedModifierThresholds:
       75: 0.95
@@ -388,7 +386,7 @@
   - type: HTN
     rootTask:
       task: XenomorphCompound # i could replace with a custom htn but it'll be fiiiiiiiine
-    blackboard:
+    blackboard: 
       NavClimb: !type:Bool
         true
       NavSmash: !type:Bool
@@ -398,6 +396,7 @@
       NavPry: !type:Bool
         true
   - type: Prying
+    speedModifier: 2
     pryPowered: true
   - type: ComplexInteraction
   - type: NpcFactionMember
@@ -422,7 +421,6 @@
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
-    range: 0.9 # Make kitable but barely
     attackRate: 0.6
     damage:
       types:
@@ -431,9 +429,6 @@
   - type: MeleeThrowOnHit
     distance: 5
     speed: 10
-  - type: StaminaDamageOnHit
-    damage: 10
-    overtime: 10
   - type: LanguageSpeaker
     speaks:
     - Crab
@@ -495,3 +490,77 @@
     damageModifierSet: CoconutCrab
   - type: MobPrice
     price: 500 # The fact that a test requires me to add this is fucking stupid
+
+- type: entity
+  parent: SimpleMobBase
+  id: MobCrabTiny
+  name: red crab
+  description: This is crabtually insane.
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 1.5
+    baseSprintSpeed : 2.5
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
+    layers:
+      - state: tinycrab
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 5
+        mask:
+          - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: Tag
+    tags:
+    - Crab
+    - Trash
+  - type: Item
+    size: Tiny
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CopperBlood
+        Quantity: 10
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+    - AllHostile # THY END IS NOW
+  - type: ZombieImmune
+  - type: MobPrice
+    price: 10
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    damage:
+      types:
+        Blunt: 2.5
+        Piercing: 2.5
+  - type: Edible
+  - type: FlavorProfile
+    flavors:
+    - crabby
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 11
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+  - type: Extractable
+    grindableSolutionName: food
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: GroundCrab # lol
+          Quantity: 1

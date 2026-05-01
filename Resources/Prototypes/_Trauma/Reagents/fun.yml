@@ -1,0 +1,34 @@
+- type: reagent
+  id: GroundCrab
+  name: reagent-name-ground-crab
+  desc: reagent-desc-ground-crab
+  physicalDesc: reagent-physical-desc-crabby
+  flavor: crabby
+  color: "#94363a"
+
+- type: reagent
+  id: Crabon
+  name: reagent-name-crabon
+  group: Botanical
+  desc: reagent-desc-crabon
+  physicalDesc: reagent-physical-desc-crabby
+  contrabandSeverity: Major
+  flavor: crabby
+  color: "#94363a"
+  tileReactions:
+  - !type:CreateEntityTileReaction
+    entity: MobCrabTiny
+    usage: 2
+    maxOnTile: 2
+    randomOffsetMax: 0.3
+    maxOnTileWhitelist:
+      tags: [ Crab ]
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Blunt: 1
+            Slash: 1
+            Piercing: 1
