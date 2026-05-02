@@ -30,6 +30,14 @@
     sprite: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
 
 - type: entity
+  parent: CoconutSeeds
+  id: CoconutCrabSeeds
+  suffix: crab
+  components:
+  - type: Seed
+    seedId: CoconutCrabPlant # intentionally no sprite change you will never know
+
+- type: entity
   parent: SeedBase
   name: packet of cherry seeds
   description: Except they're actually bombs because you're evil.

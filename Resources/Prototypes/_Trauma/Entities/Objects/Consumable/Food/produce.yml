@@ -117,11 +117,11 @@
       food:
         maxVol: 40 # More than watermelon bcs rare as fuck
         reagents:
-        - ReagentId: CoconutWater
+        - ReagentId: CoconutFlesh
           Quantity: 20
         - ReagentId: Vitamin
           Quantity: 10
-        - ReagentId: Nutriment
+        - ReagentId: CoconutWater
           Quantity: 10
   - type: Extractable
     juiceSolution:
@@ -164,11 +164,11 @@
       food:
         maxVol: 20
         reagents:
-        - ReagentId: CoconutWater
+        - ReagentId: CoconutFlesh
           Quantity: 10
         - ReagentId: Vitamin
           Quantity: 5
-        - ReagentId: Nutriment
+        - ReagentId: CoconutWater
           Quantity: 5
   - type: Extractable
     juiceSolution:

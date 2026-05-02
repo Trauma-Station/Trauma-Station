@@ -376,9 +376,7 @@
       collection: FootstepThud
   - type: SlowOnDamage
     speedModifierThresholds:
-      75: 0.95
-      50: 0.85
-      25: 0.7
+      50: 0.9
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -485,6 +483,10 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.5
     baseSprintSpeed: 1.5
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      999: 1
+      0: 1
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: CoconutCrab
@@ -492,10 +494,9 @@
     price: 500 # The fact that a test requires me to add this is fucking stupid
 
 - type: entity
-  parent: MobSpaceBasic
-  id: MobCrabTiny
-  name: red crab
-  description: This is crabtually insane.
+  parent: [ SimpleMobBase, MobCombat]
+  id: MobCrabTinyBase
+  abstract: true
   components:
   - type: MovementSpeedModifier
     baseWalkSpeed : 1.5
@@ -519,15 +520,12 @@
   - type: Tag
     tags:
     - Crab
-    - Trash
-  - type: Item
-    size: Tiny
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
       - ReagentId: CopperBlood
         Quantity: 10
-  - type: HTN
+  - type: HTNE
     rootTask:
       task: SimpleHostileCompound
   - type: NpcFactionMember
@@ -541,8 +539,7 @@
     angle: 0
     damage:
       types:
-        Blunt: 2.5
-        Piercing: 2.5
+        Blunt: 1
   - type: Edible
   - type: FlavorProfile
     flavors:
@@ -556,11 +553,54 @@
       - !type:GibBehavior
         deleteGibs: true
         recursive: false
-  - type: Extractable
-    grindableSolutionName: food
+
+- type: entity
+  parent: MobCrabTinyBase
+  id: MobBotanyCoconutCrab
+  name: coconut crab
+  suffix: botany
+  components:
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 40
         reagents:
-        - ReagentId: GroundCrab # lol
-          Quantity: 1
+        - ReagentId: CoconutFlesh
+          Quantity: 20
+        - ReagentId: GroundCrab
+          Quantity: 10
+        - ReagentId: CoconutWater
+          Quantity: 10
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 11
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+      - !type:SpillBehavior
+        solution: food
+
+- type: entity
+  parent: MobCrabTinyBase
+  id: MobCrabTiny
+  name: red crab
+  components:
+  - type: Temperature
+  - type: TemperatureDamage
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
+  - type: MovementAlwaysTouching
+  - type: PressureImmunity
+  - type: ProtectedFromStepTriggers
+  - type: Respirator
+    minSaturation: 5.0
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    damage:
+      types:
+        Blunt: 2.5
+        Piercing: 2.5

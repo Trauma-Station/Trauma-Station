@@ -63,3 +63,13 @@
         messages: [ "reagent-popup-full-fat-oils" ]
         probability: 0.01
   pricePerUnit: 0.1
+
+- type: reagent
+  id: CoconutFlesh
+  parent: Nutriment
+  name: reagent-name-coconut-flesh
+  desc: reagent-desc-coconut-flesh
+  flavor: nutty
+  color: "#f4eadb"
+  slipData:
+    requiredSlipSpeed: 3.5

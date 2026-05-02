@@ -74,50 +74,49 @@
   nutrientConsumption: 1
   idealLight: 8
   chemicals:
-    CoconutWater:
+    CoconutFlesh:
       Min: 1
       Max: 20
-      PotencyDivisor: 5
+      PotencyDivisor: 2
     Vitamin:
       Min: 1
       Max: 10
-      PotencyDivisor: 5
-    Nutriment:
+      PotencyDivisor: 2
+    CoconutWater:
       Min: 1
       Max: 10
-      PotencyDivisor: 5
+      PotencyDivisor: 2
 
 - type: seed
-  id: CoconutPlantCrab # you will never know!
+  id: CoconutCrabPlant
   name: seeds-coconut-name
   noun: seeds-noun-seeds
   displayName: seeds-coconut-display-name
   plantRsi: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
   packetPrototype: CoconutCrabSeeds
   productPrototypes:
-  - FoodCoconut
-  harvestRepeat: SelfHarvest # bear in mind, this is the equivalent of space bear pelt for botany
+  - MobBotanyCoconutCrab
+  harvestRepeat: SelfHarvest
   lifespan: 80
-  maturation: 12 # takes a while
-  production: 1 # lol
-  yield: 8 # higher than cocoa because rare
+  maturation: 1 # DO NOT MERGE WITH THIS VALUE HOLY SHIT
+  production: 1
+  yield: 8
   potency: 25
-  waterConsumption: 1 # they need a lotta wata
+  waterConsumption: 1
   nutrientConsumption: 1
-  idealLight: 8
   chemicals:
-    CoconutWater:
+    CoconutFlesh:
       Min: 1
       Max: 20
-      PotencyDivisor: 5
-    Vitamin:
+      PotencyDivisor: 2
+    GroundCrab:
       Min: 1
       Max: 10
-      PotencyDivisor: 5
-    Nutriment:
+      PotencyDivisor: 2
+    CoconutWater:
       Min: 1
       Max: 10
-      PotencyDivisor: 5
+      PotencyDivisor: 2
 
 - type: seed
   id: CherryBomb
