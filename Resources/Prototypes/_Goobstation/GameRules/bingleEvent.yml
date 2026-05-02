@@ -15,6 +15,7 @@
   id: BingleSpawn
   parent: BaseStationEventShortDelay
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 50
     weight: 1
