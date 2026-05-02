@@ -1,0 +1,50 @@
+# Cloak of Darkness
+- type: entity
+  parent: BaseVampireAction
+  id: ActionCloakDarkness
+  name: Cloak of Darkness
+  description: Cloak of Darkness
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:EffectToggleActionEvent
+  - type: ToggleEffectAction
+    onToggleConditions:
+    - !type:OnFireCondition # We must not be on fire for this ability to activate
+      inverted: true
+    onToggle:
+    - !type:PopupMessage
+      type: Local
+      messages:
+      - You start getting consumed!
+    - !type:ModifyStatusEffect
+      effectProto: CloakOfDarknessStatsuEffect
+      time: null
+      type: Add
+    offToggle:
+    - !type:PopupMessage
+      type: Local
+      messages:
+      - You stop getting consumed!
+    - !type:ModifyStatusEffect
+      effectProto: CloakOfDarknessStatsuEffect
+      time: null
+      type: Remove
+
+# Dark Passage
+- type: entity
+  parent: [BaseVampireAction, ActionBlink]
+  id: ActionDarkPassage
+  name: Blood Eruption
+  description: Blood Eruption
+  components:
+  - type: Action
+    useDelay: 1
+    raiseOnAction: false
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon

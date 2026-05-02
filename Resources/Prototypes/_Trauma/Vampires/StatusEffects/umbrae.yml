@@ -1,0 +1,31 @@
+- type: entity
+  parent: MobStatusEffectBase
+  id: CloakOfDarknessStatsuEffect # Could run this with entity effects, but since it's a toggle, this is more optimized
+  name: cloak of darkness
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 1.5
+    walkSpeedModifier: 1.5
+  - type: DarknessStealthStatusEffect
+    triggerAt: 0.9
+    visibility: 0.5
+  - type: DamageModifyStatusEffect
+    modifiers:
+      coefficients:
+        Heat: 1.1
+        Shock: 1.1
+  - type: RemoveOnIgniteStatusEffect
+    effectProto: CloakOfDarknessStatsuEffect
+  - type: StatusEffectEffectsApply
+    effectsOnApply:
+    - !type:AddComponents
+      components:
+      - type: LightDetection
+      - type: Stealth
+    effectsOnRemoval:
+    - !type:RemoveComponents
+      components:
+      - type: LightDetection
+      - type: Stealth
+    - !type:ChangeEffectToggleAction # ensures we don't start in offToggle state
+      action: ActionCloakDarkness

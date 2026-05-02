@@ -123,7 +123,7 @@
       effect: !type:NestedEffect
         proto: BloodEruption
 
-# Blood Eruption
+# Blood Bringer Rite
 - type: entity
   parent: BaseVampireAction
   id: ActionBloodBringersRite
@@ -142,7 +142,7 @@
     - !type:HasVampireBlood
       amount: 10
     onToggle:
-    - !type:PopupMessage
+    - !type:PopupMessage # TODO: Play music
       type: Local
       messages:
       - The rite begins!

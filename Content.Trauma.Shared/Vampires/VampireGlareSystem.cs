@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Shared.Charges.Components;
+using Content.Shared.Charges.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Popups;
@@ -24,6 +26,7 @@ public sealed class VampireGlareSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private EntityQuery<StunnedComponent> _stunnedQuery = default!;
+    [Dependency] private EntityQuery<LimitedChargesComponent> _chargesQuery = default!;
 
     private HashSet<Entity<StatusEffectsComponent>> _statusEffects = new();
 
@@ -47,6 +50,11 @@ public sealed class VampireGlareSystem : EntitySystem
             return;
         }
 
+        if (!_chargesQuery.TryComp(args.Action, out var limitedCharges))
+            return;
+
+        // In our case, full stun should take place when spamming 2 charges together, therefore we must scale all the effects at 0.5 (if we have 2 max charges)
+        var scale = limitedCharges.MaxCharges / 4f;
         var xform = Transform(performer);
         var mapCoords = _transform.GetMapCoordinates(performer);
         var isStunned = _stunnedQuery.HasComponent(performer);
@@ -60,7 +68,7 @@ public sealed class VampireGlareSystem : EntitySystem
 
             if (isStunned)
             {
-                _entityEffects.ApplyEffects(target, args.SideEffects);
+                _entityEffects.ApplyEffects(target, args.SideEffects, scale);
                 continue;
             }
 
@@ -69,17 +77,17 @@ public sealed class VampireGlareSystem : EntitySystem
             {
                 case Deviation.Full:
                 {
-                    _entityEffects.ApplyEffects(target, args.BehindEffects);
+                    _entityEffects.ApplyEffects(target, args.BehindEffects, scale);
                     break;
                 }
                 case Deviation.Partial:
                 {
-                    _entityEffects.ApplyEffects(target, args.SideEffects);
+                    _entityEffects.ApplyEffects(target, args.SideEffects, scale);
                     break;
                 }
                 case Deviation.None:
                 {
-                    _entityEffects.ApplyEffects(target, args.FrontEffects);
+                    _entityEffects.ApplyEffects(target, args.FrontEffects, scale);
                     break;
                 }
             }
