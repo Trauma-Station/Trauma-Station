@@ -30,9 +30,9 @@ public sealed partial class AbductorTaskWindow : FancyWindow
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-
+        // <Trauma>
         Ayylmao.FontOverride = _cache.NotoStack2ElectricBoogaloo("/Fonts/_Trauma/ScienceGothicDisplay-Bold.ttf", 40);
-
+        // </Trauma>
         ScanButton.OnPressed += _ => OnScan?.Invoke();
     }
 

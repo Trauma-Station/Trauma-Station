@@ -16,5 +16,5 @@
     text: "WAR DECLARATION"
     textPosition: -200,150
     textOverrideColor: Red
-    textFontPath: "/Fonts/_Trauma/ScienceGothic-Bold.ttf"
+    textFontPath: "/Fonts/_Trauma/ScienceGothic-Bold.ttf" # <Trauma>
     textFontSize: 28

@@ -80,8 +80,9 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         var cache = IoCManager.Resolve<IResourceCache>();
 
         _physicsQuery = EntManager.GetEntityQuery<PhysicsComponent>();
-
+        // <Trauma>
         _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 10);
+        // </Trauma>
     }
 
     public void SetMap(MapId mapId, Vector2 offset, bool recentering = false)
