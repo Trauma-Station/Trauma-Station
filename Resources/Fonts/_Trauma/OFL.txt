@@ -19,7 +19,7 @@ with others.
 The OFL allows the licensed fonts to be used, studied, modified and
 redistributed freely as long as they are not sold by themselves. The
 <<<<<<< HEAD
-fonts, including any derivative works, can be bundled, embedded, 
+fonts, including any derivative works, can be bundled, embedded,
 =======
 fonts, including any derivative works, can be bundled, embedded,
 >>>>>>> 4e30a825b657fe2e7af5b185861bd93bfc097244
