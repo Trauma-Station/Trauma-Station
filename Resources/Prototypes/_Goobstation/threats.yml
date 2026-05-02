@@ -28,7 +28,7 @@
 - type: ninjaHackingThreat
   id: Blob
   announcement: terror-blob
-  rule: BlobMidround
+  rule: BlobSpawn
 
 - type: ninjaHackingThreat
   id: VoxRaiders

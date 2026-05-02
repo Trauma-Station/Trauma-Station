@@ -38,7 +38,6 @@
   parent: BaseGameRule
   id: MorphRule
   components:
-  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 20
     weight: 3
@@ -77,7 +76,6 @@
   parent: BaseShadowDemonRule
   id: ShadowDemonSummon
   components:
-  - type: GhostroleAlert
   - type: AntagSelection
     agentName: shadow-demon-round-end-agent-name
     definitions:
@@ -106,7 +104,6 @@
   parent: BaseShadowlingRule
   id: ShadowlingMidround
   components:
-  - type: GhostroleAlert
   - type: AntagSpawner
     prototype: MobShadowling
   - type: MaintsSpawnRule

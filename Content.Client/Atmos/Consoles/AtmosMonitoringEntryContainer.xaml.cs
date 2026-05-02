@@ -55,14 +55,8 @@ public sealed partial class AtmosMonitoringEntryContainer : BoxContainer
     public void UpdateEntry(AtmosMonitoringConsoleEntry updatedData, bool isFocus)
     {
         // Load fonts
-<<<<<<< HEAD
         var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothicDispaly-Regular.ttf"), 11);
 
-=======
-        // <Trauma>
-        var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothicDispaly-Regular.ttf"), 11);
-        // </Trauma>
->>>>>>> 4e30a825b657fe2e7af5b185861bd93bfc097244
         // Update name and values
         if (!string.IsNullOrEmpty(updatedData.Address))
             NetworkNameLabel.Text = Loc.GetString("atmos-alerts-window-alarm-label", ("name", updatedData.EntityName), ("address", updatedData.Address));

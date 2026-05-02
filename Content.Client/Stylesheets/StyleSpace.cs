@@ -41,7 +41,7 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/_Trauma/ScienceGothic-Bold.ttf",
+                    "/Fonts/NotoSans/NotoSans-Bold.ttf",
                     "/Fonts/NotoSans/NotoSansSymbols-Regular.ttf",
                     "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf"
                 },

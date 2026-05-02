@@ -7,8 +7,6 @@ using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
 
 namespace Content.Trauma.Shared.Teleportation;
 
@@ -21,7 +19,6 @@ public sealed class TeleportSystem : EntitySystem
 {
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedJointSystem _joint = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -30,7 +27,6 @@ public sealed class TeleportSystem : EntitySystem
 
         SubscribeLocalEvent<PullerComponent, TeleportingEvent>(OnPullerTeleporting);
         SubscribeLocalEvent<PullableComponent, TeleportingEvent>(OnPullableTeleporting);
-        SubscribeLocalEvent<JointComponent, TeleportingEvent>(OnJointTeleporting);
     }
 
     private void OnPullerTeleporting(Entity<PullerComponent> ent, ref TeleportingEvent args)
@@ -42,11 +38,6 @@ public sealed class TeleportSystem : EntitySystem
     private void OnPullableTeleporting(Entity<PullableComponent> ent, ref TeleportingEvent args)
     {
         _pulling.TryStopPull(ent, ent.Comp, user: args.User, ignoreGrab: true);
-    }
-
-    private void OnJointTeleporting(Entity<JointComponent> ent, ref TeleportingEvent args)
-    {
-        _joint.ClearJoints(ent, ent.Comp);
     }
 
     #region Public API
