@@ -49,7 +49,7 @@ namespace Content.Client.Stylesheets
                 size
             );
         }
-        public static Font NotoStack2ElectricBoogaloo(this IResourceCache resCache, string path = "/Fonts/NotoSans/NotoSans-Regular.ttf", int size = 10)
+        public static Font NotoStack2ElectricBoogaloo(this IResourceCache resCache, string path = "/Fonts/_Trauma/ScienceGothic-Regular.ttf", int size = 10)
         {
             return resCache.GetFont
             (
