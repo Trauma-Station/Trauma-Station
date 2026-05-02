@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Shared.Vampires.Haemomancer;
+
 namespace Content.Trauma.Shared.Vampires;
 
 public sealed class VampireSystem : EntitySystem
@@ -9,12 +11,21 @@ public sealed class VampireSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<VampireComponent, BloodsuckingSuccessEvent>(OnBloodsucking);
+        SubscribeLocalEvent<VampireComponent, BloodLeecherAttemptEvent>(OnBloodLeechingAttempt);
     }
 
     private void OnBloodsucking(Entity<VampireComponent> ent, ref BloodsuckingSuccessEvent args)
     {
         // When bloodsucking succeeds, the vampire gets its usable and total blood increased.
         AdjustBlood(ent.AsNullable(), args.BloodRemoved);
+    }
+
+    private void OnBloodLeechingAttempt(Entity<VampireComponent> ent, ref BloodLeecherAttemptEvent args)
+    {
+        if (HasUsableBlood(ent.AsNullable(), args.BloodRequired))
+            return;
+
+        args.Cancelled = true;
     }
 
     #region Public Api

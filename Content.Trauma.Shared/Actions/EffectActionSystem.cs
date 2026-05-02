@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Actions;
@@ -8,6 +10,7 @@ namespace Content.Trauma.Shared.Actions;
 public sealed class EffectActionSystem : EntitySystem
 {
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
 
     public override void Initialize()
     {
@@ -46,6 +49,15 @@ public sealed class EffectActionSystem : EntitySystem
 
         if (ent.Comp.Toggled && ent.Comp.OnToggle is { } onToggleEffects)
         {
+            if (!_conditions.TryConditions(args.Performer, ent.Comp.OnToggleConditions))
+            {
+                // Reset here sicne we didn't pass the on toggle conditions
+                ent.Comp.Toggled = !ent.Comp.Toggled;
+                args.Toggle = ent.Comp.Toggled;
+                Dirty(ent);
+                return;
+            }
+
             _effects.ApplyEffects(args.Performer, onToggleEffects);
             args.Handled = true;
             return;

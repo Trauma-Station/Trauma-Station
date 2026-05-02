@@ -6,3 +6,19 @@
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.2
     walkSpeedModifier: 0.2
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: BloodBringerRiteStatusEffect
+  name: blood bringer rite
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 2
+    effects:
+    - !type:AdjustVampireBlood
+      amount: -10
+    - !type:TakeStaminaDamage
+      amount: -15
+    - !type:ModifyKnockdown
+      time: 2
+      type: Remove

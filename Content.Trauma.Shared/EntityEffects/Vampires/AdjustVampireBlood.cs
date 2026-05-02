@@ -20,6 +20,7 @@ public sealed class AdjustVampireBloodEffectSystem : EntityEffectSystem<VampireC
 
     protected override void Effect(Entity<VampireComponent> entity, ref EntityEffectEvent<AdjustVampireBlood> args)
     {
-        _vampire.AdjustBlood(entity.AsNullable(), args.Effect.Amount);
+        var scale = (int) args.Scale;
+        _vampire.AdjustBlood(entity.AsNullable(), args.Effect.Amount * scale);
     }
 }

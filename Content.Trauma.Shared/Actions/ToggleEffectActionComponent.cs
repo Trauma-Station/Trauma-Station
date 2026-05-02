@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Actions;
@@ -19,10 +20,16 @@ public sealed partial class ToggleEffectActionComponent : Component
     public EntityEffect[]? OnToggle;
 
     /// <summary>
+    /// Conditions to run before toggling.
+    /// </summary>
+    [DataField]
+    public EntityCondition[]? OnToggleConditions;
+
+    /// <summary>
     /// Effects to run when this action gets un-toggled
     /// </summary>
     [DataField(required: true)]
-    public EntityEffect[]? OffToggle;
+    public EntityEffect[] OffToggle = default!;
 
     /// <summary>
     /// Defines whether we are in off/on state.

@@ -100,8 +100,8 @@
   - type: Action
     useDelay: 2
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _EinsteinEngines/Shadowling/shadowling_abilities.rsi
+      state: enthrall
   - type: InstantAction
     event: !type:EffectToggleActionEvent
   - type: ToggleEffectAction
