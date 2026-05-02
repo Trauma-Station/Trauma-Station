@@ -45,10 +45,11 @@ public partial class BaseShuttleControl : MapGridControl
 
     public BaseShuttleControl(float minRange, float maxRange, float range) : base(minRange, maxRange, range)
     {
+        // <Trauma>
         RobustXamlLoader.Load(this);
         Maps = EntManager.System<SharedMapSystem>();
         Font = new VectorFont(IoCManager.Resolve<IResourceCache>().GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 12);
-
+        // </Trauma>
         _drawJob = new GridDrawJob()
         {
             ScaledVertices = _allVertices,

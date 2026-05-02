@@ -23,7 +23,9 @@ public sealed class NotoFontFamilyStack(IResourceCache resCache, string variant 
     ///     0 is the font kind.
     ///     1 is the font kind with BoldItalic replaced with Bold when it occurs.
     /// </remarks>
+    /// <Trauma> Changed the font to ScienceGothic
     private string _fontPrimary = $"/Fonts/_Trauma/ScienceGothic{variant}-{{0}}.ttf";
+    // </Trauma>
 
     /// <summary>
     ///     The symbols font path, with string substitution markers.
