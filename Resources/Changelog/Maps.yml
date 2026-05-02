@@ -292,7 +292,7 @@ Entries:
   - type: Fix
     message: >-
       Cog: All areas are mapped, maints now actually protects you from radstorms
-      here. 
+      here.
   id: 32
   time: '2026-05-02T03:03:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2365
