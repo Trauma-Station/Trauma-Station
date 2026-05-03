@@ -45,7 +45,7 @@ public sealed partial class XenoArtifactGraphControl : BoxContainer
 
         var fontResource = IoCManager.Resolve<IResourceCache>()
 
-                                     .GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"); // <Trauma>
+                                     .GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"); // Trauma
 
         _font = new VectorFont(fontResource, 16);
     }
