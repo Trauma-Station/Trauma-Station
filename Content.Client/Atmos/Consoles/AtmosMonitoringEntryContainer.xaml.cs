@@ -55,8 +55,9 @@ public sealed partial class AtmosMonitoringEntryContainer : BoxContainer
     public void UpdateEntry(AtmosMonitoringConsoleEntry updatedData, bool isFocus)
     {
         // Load fonts
+        // <Trauma>
         var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothicDispaly-Regular.ttf"), 11);
-
+        // </Trauma>
         // Update name and values
         if (!string.IsNullOrEmpty(updatedData.Address))
             NetworkNameLabel.Text = Loc.GetString("atmos-alerts-window-alarm-label", ("name", updatedData.EntityName), ("address", updatedData.Address));
