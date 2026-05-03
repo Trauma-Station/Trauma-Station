@@ -1,5 +1,17 @@
 version: 1 # Not used right now, whatever.
 binds:
+# <Trauma>
+- function: NetBandwidth
+  type: State
+  key: F4
+- function: ResistGrab
+  type: State
+  key: B
+- function: Tackle
+  type: State
+  key: Q
+  mod1: Alt
+# </Trauma>
 - function: UIClick
   type: State
   key: MouseLeft
@@ -44,16 +56,6 @@ binds:
 - function: Walk
   type: State
   key: Shift
-- function: Sprint # Goob
-  type: State
-  key: C
-- function: ResistGrab # Goob
-  type: State
-  key: B
-- function: Tackle # Trauma
-  type: State
-  key: Q
-  mod1: Alt
 # Shuttle
 - function: ShuttleStrafeUp
   type: State

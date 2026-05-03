@@ -83,7 +83,7 @@
     releasePressure: 5.325
     air:
       # 60 minutes with Plasmaman lungs
-      volume: 1.5
+      volume: 3
       moles:
         Plasma: 1.025689525
       temperature: 293.15
