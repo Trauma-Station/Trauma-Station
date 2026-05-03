@@ -72,9 +72,7 @@ public sealed partial class AtmosAlarmEntryContainer : BoxContainer
         Coordinates = _entManager.GetCoordinates(entry.Coordinates);
 
         // Load fonts
-        // <Trauma>
-        var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothicDisplay-Regular.ttf"), 11);
-        // </Trauma>
+        var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothicDisplay-Regular.ttf"), 11); // <Trauma>
         // Update alarm state
         if (!_alarmStrings.TryGetValue(entry.AlarmState, out var alarmString))
             alarmString = "atmos-alerts-window-invalid-state";
