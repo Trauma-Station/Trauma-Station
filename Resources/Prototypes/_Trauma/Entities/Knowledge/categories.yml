@@ -81,6 +81,14 @@
 
 - type: entity
   parent: BaseKnowledge
+  id: BaseLanguageKnowledgeAntag
+  abstract: true
+  components:
+  - type: Knowledge
+    complex: true
+
+- type: entity
+  parent: BaseKnowledge
   id: BaseMartialArtsKnowledge
   abstract: true
   components:

@@ -286,22 +286,23 @@
     languageId: Cheval
 
 - type: entity
-  parent: BaseLanguageKnowledge
+  parent: BaseLanguageKnowledgeAntag
   id: LanguageBingle
   components:
   - type: LanguageKnowledge
     languageId: Bingle
 
 - type: entity
-  parent: BaseLanguageKnowledge
+  parent: BaseLanguageKnowledgeAntag
   id: LanguageXenoHivemind
   components:
   - type: LanguageKnowledge
     languageId: XenoHivemind
 
 - type: entity
-  parent: BaseLanguageKnowledge
+  parent: BaseLanguageKnowledgeAntag
   id: LanguageCodespeak
   components:
   - type: LanguageKnowledge
     languageId: Codespeak
+  - type: Knowledge
