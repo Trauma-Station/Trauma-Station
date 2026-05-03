@@ -62,14 +62,15 @@ public abstract class SharedBlobPodSystem : EntitySystem
 
     private void OnUnequipAttempt(Entity<BlobPodComponent> ent, ref BeingUnequippedAttemptEvent args)
     {
-        if (args.Unequipee == args.UnEquipTarget)
+        if (args.User == args.UnEquipTarget)
         {
             args.Cancel();
             return;
         }
+
         if (!TryComp<MobStateComponent>(args.UnEquipTarget, out var mobStateComponent))
             return;
-        if (_mobs.IsDead(args.UnEquipTarget,mobStateComponent) || _mobs.IsCritical(args.UnEquipTarget,mobStateComponent))
+        if (_mobs.IsDead(args.UnEquipTarget,mobStateComponent) || _mobs.IsCritical(args.UnEquipTarget, mobStateComponent))
             return;
         if (!HasComp<ZombieBlobComponent>(args.UnEquipTarget))
             return;

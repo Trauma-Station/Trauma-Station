@@ -613,9 +613,6 @@
   id: Flash
 
 - type: Tag
-  id: RevFlash
-
-- type: Tag
   id: WeaponPistolDualetta
 
 - type: Tag

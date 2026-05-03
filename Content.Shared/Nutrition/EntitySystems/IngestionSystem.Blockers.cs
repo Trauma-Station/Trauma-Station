@@ -2,7 +2,6 @@ using System.Linq;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Clothing;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Examine; // Goob
 using Content.Shared.Fluids.Components;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
@@ -22,7 +21,6 @@ public sealed partial class IngestionSystem
         SubscribeLocalEvent<IngestionBlockerComponent, ItemMaskToggledEvent>(OnBlockerMaskToggled);
         SubscribeLocalEvent<IngestionBlockerComponent, IngestionAttemptEvent>(OnIngestionBlockerAttempt);
         SubscribeLocalEvent<IngestionBlockerComponent, InventoryRelayedEvent<IngestionAttemptEvent>>(OnIngestionBlockerAttempt);
-        SubscribeLocalEvent<IngestionBlockerComponent, ExaminedEvent>(OnExamined); // Goobstation
 
         // Edible Event
         SubscribeLocalEvent<EdibleComponent, EdibleEvent>(OnEdible);
@@ -45,22 +43,16 @@ public sealed partial class IngestionSystem
         args.Cancelled = true;
     }
 
-    private void OnBlockerMaskToggled(Entity<IngestionBlockerComponent> ent, ref ItemMaskToggledEvent args)
+    private void OnBlockerMaskToggled(Entity<IngestionBlockerComponent> entity, ref ItemMaskToggledEvent args)
     {
-        ent.Comp.Enabled = !args.Mask.Comp.IsToggled;
-        Dirty(ent); // Trauma
+        entity.Comp.Enabled = !args.Mask.Comp.IsToggled;
+        Dirty(entity);
     }
 
     private void OnIngestionBlockerAttempt(Entity<IngestionBlockerComponent> entity, ref IngestionAttemptEvent args)
     {
         if (!args.Cancelled && entity.Comp.Enabled)
             args.Cancelled = true;
-    }
-
-    private void OnExamined(Entity<IngestionBlockerComponent> ent, ref ExaminedEvent args) // Goobstation
-    {
-        if (ent.Comp.BlockSmokeIngestion)
-            args.PushMarkup(Loc.GetString("ingestion-blocker-block-smoke-examine"));
     }
 
     /// <summary>
