@@ -1,0 +1,202 @@
+## Base
+
+- type: entity
+  abstract: true
+  parent: SurgeryBase
+  id: BaseSurgeryInsertOrgan
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps: # change them if theres unique behaviour for inserting
+    - SurgeryStepSawBones
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganCondition
+    inverse: true
+    reattaching: true
+    # add organ
+  # add SurgeryOrganSlotCondition.organCategory
+
+- type: entity
+  abstract: true
+  parent: BaseSurgeryInsertOrgan
+  id: BaseSurgeryInsertOrganChest
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+
+- type: entity
+  abstract: true
+  parent: SurgeryBase
+  id: BaseSurgeryRemoveOrgan
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision # change to ribcage if ribs would protect the organ (heart etc)
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepClampBleeders
+    - SurgeryStepRemoveOrgan
+  # add SurgeryOrganCondition.organ
+
+- type: entity
+  abstract: true
+  parent: BaseSurgeryRemoveOrgan
+  id: BaseSurgeryRemoveOrganChest
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+
+## Inserting
+
+# Head
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertBrain
+  name: Insert Brain
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Brain
+  - type: SurgeryOrganCondition
+    organ: Brain
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertEyes
+  name: Insert Eyes
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Eyes
+  - type: SurgeryOrganCondition
+    organ: Eyes
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertEars
+  name: Insert Ear Organs
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Ears
+  - type: SurgeryOrganCondition
+    organ: Ears
+
+# Chest
+
+- type: entity
+  parent: BaseSurgeryInsertOrganChest
+  id: SurgeryInsertHeart
+  name: Insert Heart
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Heart
+  - type: SurgeryOrganCondition
+    organ: Heart
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertLungs
+  name: Insert Lungs
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Lungs
+  - type: SurgeryOrganCondition
+    organ: Lungs
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertLiver
+  name: Insert Liver
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Liver
+  - type: SurgeryOrganCondition
+    organ: Liver
+
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertStomach
+  name: Insert Stomach
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Stomach
+  - type: SurgeryOrganCondition
+    organ: Stomach
+
+# Abdomen
+
+# TODO SHITMED: implement kidneys, appendix
+
+## Removing
+
+# Head
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveBrain
+  name: Remove Brain
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepSawBones # a bit slower because it's free RR
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryOrganCondition
+    organ: Brain
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveEyes
+  name: Remove Eyes
+  components:
+  - type: SurgeryOrganCondition
+    organ: Eyes
+
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveEars
+  name: Remove Ear Organs
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryOrganCondition
+    organ: Ears
+
+# Chest
+
+- type: entity
+  parent: BaseSurgeryRemoveOrganChest
+  id: SurgeryRemoveHeart
+  name: Remove Heart
+  components:
+  - type: SurgeryOrganCondition
+    organ: Heart
+
+- type: entity
+  parent: BaseSurgeryRemoveOrganChest
+  id: SurgeryRemoveLungs
+  name: Remove Lungs
+  components:
+  - type: SurgeryOrganCondition
+    organ: Lungs
+
+- type: entity
+  parent: BaseSurgeryRemoveOrganChest
+  id: SurgeryRemoveLiver
+  name: Remove Liver
+  components:
+  - type: SurgeryOrganCondition
+    organ: Liver
+
+- type: entity
+  parent: BaseSurgeryRemoveOrganChest
+  id: SurgeryRemoveStomach
+  name: Remove Stomach
+  components:
+  - type: SurgeryOrganCondition
+    organ: Stomach
+
+# Abdomen
+
+# TODO SHITMED: kidneys, appendix

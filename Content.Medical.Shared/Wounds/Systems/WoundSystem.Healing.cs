@@ -3,6 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;

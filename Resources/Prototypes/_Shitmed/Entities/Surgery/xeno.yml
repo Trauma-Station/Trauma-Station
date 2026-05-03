@@ -1,0 +1,373 @@
+# Generic
+
+- type: entity
+  abstract: true
+  parent: SurgeryBase
+  id: BaseSurgeryXeno
+  components:
+  - type: SurgeryPartComponentCondition
+    inverse: false # xeno surgeries can only be done on xenos
+
+- type: entity
+  abstract: true
+  parent: BaseSurgeryXeno
+  id: BaseSurgeryXenoCommon
+  components:
+  - type: SurgeryPartPresentCondition
+
+- type: entity
+  parent: BaseSurgeryXenoCommon
+  id: SurgeryXenoInciseExoskeleton
+  name: Incise Exoskeleton
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoCutExoskeleton
+    - SurgeryStepXenoSawExoskeleton
+    - SurgeryStepXenoClampBleeders
+    - SurgeryStepXenoRetractExoskeleton
+
+- type: entity
+  parent: BaseSurgeryXenoCommon
+  id: SurgeryXenoResealExoskeleton
+  name: Reseal Exoskeleton
+  components:
+  - type: Surgery
+    requirement: SurgeryXenoResealEndoskeleton
+    steps:
+    - SurgeryStepXenoCloseExoskeleton
+    - SurgeryStepXenoMendExoskeleton
+
+- type: entity
+  parent: BaseSurgeryXenoCommon
+  id: SurgeryXenoExposeEndoskeleton
+  name: Expose Endoskeleton
+  components:
+  - type: Surgery
+    requirement: SurgeryXenoInciseExoskeleton
+    steps:
+    - SurgeryStepXenoSawEndoskeleton
+    - SurgeryStepXenoRetractEndoskeleton
+
+- type: entity
+  parent: BaseSurgeryXenoCommon
+  id: SurgeryXenoResealEndoskeleton
+  name: Repair Endoskeleton
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoCloseEndoskeleton
+    - SurgeryStepXenoMendEndoskeleton
+
+- type: entity
+  parent: [ BaseSurgeryXeno, SurgeryRemovePart ]
+  id: SurgeryXenoRemovePart
+  name: Amputate Xeno Limb
+  components:
+  - type: Surgery
+    requirement: SurgeryXenoInciseExoskeleton
+    steps:
+    - SurgeryStepXenoSawEndoskeleton
+    - SurgeryStepXenoClampBleeders
+    - SurgeryStepXenoRemoveFeature
+
+# Insert organs
+
+- type: entity
+  abstract: true
+  parent: BaseSurgeryXeno
+  id: BaseSurgeryXenoInsertOrgan
+  components:
+  - type: Surgery
+    requirement: SurgeryXenoExposeEndoskeleton
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepInsertOrgan
+    - SurgeryStepXenoSealOrganWound
+  - type: SurgeryPartCondition
+    parts: [ Head ]
+  - type: SurgeryOrganCondition
+    inverse: true
+    reattaching: true
+
+## Basic Organs (Intentionally missing brain)
+
+- type: entity
+  parent: BaseSurgeryXenoInsertOrgan
+  id: SurgeryXenoInsertEyes
+  name: Insert Xeno Eyes
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Eyes
+  - type: SurgeryOrganCondition
+    organ: Eyes
+
+- type: entity
+  parent: BaseSurgeryXenoInsertOrgan
+  id: SurgeryXenoInsertLiver
+  name: Insert Xeno Liver
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Liver
+  - type: SurgeryOrganCondition
+    organ: Liver
+
+- type: entity
+  parent: BaseSurgeryXenoInsertOrgan
+  id: SurgeryXenoInsertStomach
+  name: Insert Xeno Stomach
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Stomach
+  - type: SurgeryOrganCondition
+    organ: Stomach
+
+## Xeno Organs
+
+- type: entity
+  parent: BaseSurgeryXenoInsertOrgan
+  id: SurgeryXenoInsertHiveNode
+  name: Insert Hive Node
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepInsertHiveNode
+    - SurgeryStepXenoSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: HiveNode
+  - type: SurgeryOrganCondition
+    organ: HiveNode
+
+- type: entity
+  parent: BaseSurgeryXenoInsertOrgan
+  id: SurgeryXenoInsertResinSpinner
+  name: Insert Resin Spinner
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepInsertResinSpinner
+    - SurgeryStepXenoSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: ResinSpinner
+  - type: SurgeryOrganCondition
+    organ: ResinSpinner
+
+- type: entity
+  parent: BaseSurgeryXenoInsertOrgan
+  id: SurgeryXenoInsertNeurotoxinGland
+  name: Insert Neurotoxin Gland
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepInsertNeurotoxinGland
+    - SurgeryStepXenoSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: NeurotoxinGland
+  - type: SurgeryOrganCondition
+    organ: NeurotoxinGland
+
+- type: entity
+  parent: BaseSurgeryXenoInsertOrgan
+  id: SurgeryXenoInsertAcidGland
+  name: Insert Acid Gland
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepInsertAcidGland
+    - SurgeryStepXenoSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: AcidGland
+  - type: SurgeryOrganCondition
+    organ: AcidGland
+
+- type: entity
+  parent: BaseSurgeryXenoInsertOrgan
+  id: SurgeryXenoInsertPlasmaVessel
+  name: Insert Plasma Vessel
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepInsertPlasmaVessel
+    - SurgeryStepXenoSealOrganWound
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: PlasmaVessel
+  - type: SurgeryOrganCondition
+    organ: PlasmaVessel
+
+- type: entity
+  parent: BaseSurgeryXenoInsertOrgan
+  id: SurgeryXenoInsertEggSack
+  name: Insert Egg Sack
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepInsertEggSack
+    - SurgeryStepXenoSealOrganWound
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: EggSack
+  - type: SurgeryOrganCondition
+    organ: EggSack
+
+# Remove organs
+
+- type: entity
+  abstract: true
+  parent: BaseSurgeryXeno
+  id: BaseSurgeryXenoRemoveOrgan
+  components:
+  - type: Surgery
+    requirement: SurgeryXenoExposeEndoskeleton
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepXenoRemoveOrgan
+  - type: SurgeryPartCondition
+    parts: [ Head ]
+
+## Basic Organs
+
+- type: entity
+  parent: BaseSurgeryXenoRemoveOrgan
+  id: SurgeryXenoRemoveEyes
+  name: Remove Xeno Eyes
+  components:
+  - type: SurgeryOrganCondition
+    organ: Eyes
+
+- type: entity
+  parent: BaseSurgeryXenoRemoveOrgan
+  id: SurgeryXenoRemoveLiver
+  name: Remove Xeno Liver
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganCondition
+    organ: Liver
+
+- type: entity
+  parent: BaseSurgeryXenoRemoveOrgan
+  id: SurgeryXenoRemoveStomach
+  name: Remove Xeno Stomach
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganCondition
+    organ: Stomach
+
+## Xeno Organs
+
+- type: entity
+  parent: BaseSurgeryXenoRemoveOrgan
+  id: SurgeryXenoRemoveHiveNode
+  name: Remove Hive Node
+  components:
+  - type: SurgeryOrganCondition
+    organ: HiveNode
+
+- type: entity
+  parent: BaseSurgeryXenoRemoveOrgan
+  id: SurgeryXenoRemoveResinSpinner
+  name: Remove Resin Spinner
+  components:
+  - type: SurgeryOrganCondition
+    organ: ResinSpinner
+
+- type: entity
+  parent: BaseSurgeryXenoRemoveOrgan
+  id: SurgeryXenoRemoveNeurotoxinGland
+  name: Remove Neurotoxin Gland
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepXenoRemoveOrgan
+  - type: SurgeryOrganCondition
+    organ: NeurotoxinGland
+
+- type: entity
+  parent: BaseSurgeryXenoRemoveOrgan
+  id: SurgeryXenoRemoveAcidGland
+  name: Remove Acid Gland
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepXenoRemoveOrgan
+  - type: SurgeryOrganCondition
+    organ: AcidGland
+
+- type: entity
+  parent: BaseSurgeryXenoRemoveOrgan
+  id: SurgeryXenoRemovePlasmaVessel
+  name: Remove Plasma Vessel
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoSeverPlasma
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepXenoRemoveOrgan
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganCondition
+    organ: PlasmaVessel
+
+- type: entity
+  parent: BaseSurgeryXenoRemoveOrgan
+  id: SurgeryXenoRemoveEggSack
+  name: Remove Egg Sack
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepXenoSeverPlasma
+    - SurgeryStepXenoRemoveOrgan
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganCondition
+    organ: EggSack
+
+# Shitty xenobio
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryXenoTakeSample
+  name: Take tissue sample
+  components:
+  - type: Surgery
+    requirement: SurgeryXenoExposeEndoskeleton
+    steps:
+    - SurgeryStepXenoOpenIncision
+    - SurgeryStepXenoNeutralizeAcid
+    - SurgeryStepXenoTakeSample
+  - type: SurgeryBodyComponentCondition # can't take samples from a person
+    whitelist:
+      components:
+      - Xenomorph
+  - type: SurgeryPartComponentCondition
+    inverse: false
+    components:
+    - type: HasTissueSample

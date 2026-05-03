@@ -1,5 +1,10 @@
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
+  id: AutodocCircuitboard
+  result: AutodocCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
   id: OperatingTableCircuitboard
   result: OperatingTableCircuitboard
 

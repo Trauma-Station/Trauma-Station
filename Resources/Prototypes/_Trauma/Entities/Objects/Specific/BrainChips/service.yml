@@ -14,8 +14,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      # MeleeKnowledge 26
-      # ShootingKnowledge: 26
+      MeleeKnowledge: 26
+      ShootingKnowledge: 26
 
 - type: entity
   parent: BaseSkillChip
@@ -35,7 +35,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       MartialArtCQCChef: 1 # work your way up chuddy
-      # MeleeKnowledge 10
+      MeleeKnowledge: 10
       CookingKnowledge: 26
       LanguageSpaceItalian: 100 # born and raised
 

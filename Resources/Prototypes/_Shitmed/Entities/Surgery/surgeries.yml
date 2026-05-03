@@ -1,0 +1,374 @@
+# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
+# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
+# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Base
+
+- type: entity
+  abstract: true
+  id: SurgeryBase
+  components:
+  # TODO SHITMED: replace with surgery categories system and tie it into autodoc
+  - type: SurgeryPartComponentCondition
+    inverse: true # regular surgeries can't be done on xenos (xeno surgeries are more complex, damage the user and have unique flavour text)
+    components:
+    - type: XenoBodyPart
+  - type: Surgery
+
+- type: entity
+  abstract: true
+  parent: SurgeryBase
+  id: BasePartSurgery
+  components:
+  - type: SurgeryPartPresentCondition
+
+- type: entity
+  abstract: true
+  parent: SurgeryBase
+  id: SurgeryAttachBase
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepInsertFeature
+    - SurgeryStepSealWounds
+  - type: SurgeryTraumaPresentCondition
+    inverted: true
+    trauma: Dismemberment
+
+# Common
+
+- type: entity
+  parent: BasePartSurgery
+  id: SurgeryOpenIncision
+  name: Open Incision
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepRetractSkin
+
+- type: entity
+  parent: BasePartSurgery
+  id: SurgeryStopBloodOutput
+  name: Stop Constant Blood Output
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepClampBleeders
+    - SurgeryStepCloseBloodOutputs
+  - type: SurgeryBleedsPresentCondition
+
+- type: entity
+  parent: BasePartSurgery
+  id: SurgeryFixDismemberment
+  name: Fix Dismemberment Leftovers
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepRemoveSeveredSkin
+    - SurgeryStepRemoveLeftoverBones
+    - SurgeryStepSealDismembermentWound
+  - type: SurgeryBleedsPresentCondition
+    inverted: true
+  - type: SurgeryTraumaPresentCondition
+    trauma: Dismemberment
+
+- type: entity
+  parent: BasePartSurgery
+  id: SurgeryCloseIncision
+  name: Close Incision
+  components:
+  - type: Surgery
+    priority: 1
+    steps:
+    - SurgeryStepCloseBones
+    - SurgeryStepSealBones
+    - SurgeryStepClosePanel
+    - SurgeryStepCloseIncision
+  - type: SurgeryPartCondition
+    parts:  # Everything but the head and torso
+    - Head
+    - Torso
+    inverse: true
+
+- type: entity
+  parent: SurgeryCloseIncision
+  id: SurgeryCloseIncisionHead
+  components:
+  - type: Surgery
+    priority: 1
+    steps:
+    - SurgeryStepCloseBones
+    - SurgeryStepSealSkull
+    - SurgeryStepCloseIncision
+  - type: SurgeryPartCondition
+    parts: [ Head ]
+    inverse: false
+
+- type: entity
+  parent: SurgeryCloseIncision
+  id: SurgeryCloseIncisionTorso
+  components:
+  - type: Surgery
+    priority: 1
+    steps:
+    - SurgeryStepCloseBones
+    - SurgeryStepSealRibcage
+    - SurgeryStepCloseIncision
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+    inverse: false
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryOpenRibcage
+  name: Open Ribcage
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepPriseOpenBones
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryRemovePart
+  name: Amputate
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawFeature
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepRemoveFeature
+  - type: SurgeryHasBodyCondition
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+    inverse: true
+
+- type: entity
+  parent: BasePartSurgery
+  id: SurgeryMendBones
+  name: Mend Bones
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepMendBones
+  - type: SurgeryBleedsPresentCondition
+    inverted: true
+  - type: SurgeryTraumaPresentCondition
+    trauma: BoneDamage
+
+- type: entity
+  parent: BasePartSurgery
+  id: SurgeryHealOrgans
+  name: Heal Organs
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepClampInternalBleeders
+    - SurgeryStepHealOrgans
+  - type: SurgeryBleedsPresentCondition
+    inverted: true
+  - type: SurgeryTraumaPresentCondition
+    trauma: OrganDamage
+
+# I fucking hate hardcoding all of this shit to accomodate for surgery BUI.
+# If anyone can give me pointers on how to make it better I'd be incredibly grateful.
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachHead
+  name: Attach Head
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: Head
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachLeftArm
+  name: Attach Left Arm
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: ArmLeft
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachRightArm
+  name: Attach Right Arm
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: ArmRight
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachLeftLeg
+  name: Attach Left Leg
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: LegLeft
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachRightLeg
+  name: Attach Right Leg
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: LegRight
+
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachLeftHand
+  name: Attach Left Hand
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Arm ]
+    symmetry: Left
+  - type: SurgeryPartRemovedCondition
+    category: HandLeft
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachRightHand
+  name: Attach Right Hand
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Arm ]
+    symmetry: Right
+  - type: SurgeryPartRemovedCondition
+    category: HandRight
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachLeftFoot
+  name: Attach Left Foot
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Leg ]
+    symmetry: Left
+  - type: SurgeryPartRemovedCondition
+    category: FootLeft
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachRightFoot
+  name: Attach Right Foot
+  components:
+  - type: SurgeryPartCondition
+    parts: [ Leg ]
+    symmetry: Right
+  - type: SurgeryPartRemovedCondition
+    category: FootRight
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachTail
+  name: Attach Tail
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: Tail
+
+## Tending
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryTendWoundsBrute
+  name: Tend Bruise Wounds
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepCarefulIncisionScalpel
+    - SurgeryStepRepairBruteTissue
+    - SurgeryStepSealTendWound
+  - type: SurgeryWoundedCondition
+    damageGroup: Brute
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryTendWoundsBurn
+  name: Tend Burn Wounds
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepCarefulIncisionScalpel
+    - SurgeryStepRepairBurnTissue
+    - SurgeryStepSealTendWound
+  - type: SurgeryWoundedCondition
+    damageGroup: Burn
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryInsertItem
+  name: Cavity Implant
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - SurgeryStepInsertItem
+    - SurgeryStepRemoveItem
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+
+# Lobotomy
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryLobotomize
+  name: Lobotomize
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepLobotomize
+    - SurgeryStepCloseIncision
+  - type: SurgeryOrganCondition
+    organ: Brain
+  - type: SurgeryOrganOnAddCondition
+    components:
+      Brain:
+      - type: OhioAccent
+      - type: RatvarianLanguage
+      - type: Clumsy
+    inverse: true
+  - type: SurgeryPartCondition
+    parts: [ Head ]
+
+- type: entity
+  parent: SurgeryBase
+  id: SurgeryMendBrainTissue
+  name: Mend brain tissue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepMendBrainTissue
+    - SurgeryStepCloseIncision
+  - type: SurgeryOrganCondition
+    organ: Brain
+  - type: SurgeryOrganOnAddCondition
+    components:
+      Brain:
+      - type: OhioAccent
+      - type: RatvarianLanguage
+      - type: Clumsy
+  - type: SurgeryPartCondition
+    parts: [ Head ]

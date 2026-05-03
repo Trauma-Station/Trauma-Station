@@ -24,14 +24,6 @@ public sealed partial class N2ODecompositionReaction : IGasReactionEffect
         mixture.AdjustMoles(Gas.Nitrogen, burnedFuel);
         mixture.AdjustMoles(Gas.Oxygen, burnedFuel / 2);
 
-        // <Trauma>
-        var location = holder as TileAtmosphere;
-        var energy = 219960 * burnedFuel;
-        atmosphereSystem.AddHeat(mixture, energy);
-        if (location is { } && energy > 0)
-            atmosphereSystem.HotspotExpose(location, mixture.Temperature, mixture.Volume);
-        // </Trauma>
-
         return ReactionResult.Reacting;
     }
 }

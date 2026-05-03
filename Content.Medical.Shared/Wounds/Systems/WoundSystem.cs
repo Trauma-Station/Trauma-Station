@@ -1,28 +1,30 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Content.Medical.Common.CCVar;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.FixedPoint;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Configuration;
-using Robust.Shared.Containers;
 using Robust.Shared.CPUJob.JobQueues;
 using Robust.Shared.CPUJob.JobQueues.Queues;
-using Robust.Shared.GameStates;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Content.Medical.Shared.Wounds;
 

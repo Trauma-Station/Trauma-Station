@@ -1,195 +1,165 @@
-- type: surgery
-  id: OpenIncision
-  tool:
-  - type: Scalpel
-  surgeryEffects:
-  - !type:AddComponents
-    components:
-    - type: OpenIncision
-    - type: BleedingWound
-  forbidden:
-  - type: OpenIncision
-  duration: 2
-  complexity: -15
+# Hypoport
 
-- type: surgery
-  id: StopBloodFlow
-  tool:
-  - type: Hemostat
-  surgeryEffects:
-  - !type:RemoveComponents
-    components:
-    - type: BleedingWound
-  required:
-  - type: BleedingWound
-  duration: 4
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenCavityHypoport
+  name: Open hypoport cavity
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepRearrangeTissue
+    - SurgeryStepStitchVessels
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    parts: [ Head ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Hypoport
 
-- type: surgery
-  id: RetractSkin
-  tool:
-  - type: Retractor
-  surgeryEffects:
-  - !type:AddComponents
-    components:
-    - type: RetractedSkin
-  required:
-  - type: OpenIncision
-  forbidden:
-  - type: RetractedSkin
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertHypoport
+  name: Install Hypoport
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepClampBleeders
+    - SurgeryStepInsertHypoport
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: Hypoport
+  - type: SurgeryOrganCondition
+    organ: Hypoport
 
-- type: surgery
-  id: CloseIncision
-  tool:
-  - type: Cautery
-  surgeryEffects:
-  - !type:RemoveComponents
-    components:
-    - type: OpenIncision
-    - type: BleedingWound
-    - type: RetractedSkin
-  required:
-  - type: OpenIncision
-  duration: 3
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveHypoport
+  name: Extract Hypoport
+  components:
+  - type: SurgeryOrganCondition
+    organ: Hypoport
 
-- type: surgery
-  id: Amputate
-  tool:
-  - type: BoneSaw
-  surgeryEffects:
-  - !type:DetachOrgan
-  required:
-  - type: OpenIncision
-  - type: BreakBone
-  - type: RetractedSkin
-  duration: 6
+# Brain Chip
 
-- type: surgery
-  id: AddPart
-  tool:
-  - type: Organ
-  surgeryEffects:
-  - !type:AddBodyPart
-  required:
-  - type: OpenIncision
-  - type: BreakBone
-  - type: RetractedSkin
-  duration: 6
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertBrainChip
+  name: Install Brain Chip
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepClampBleeders
+    - SurgeryStepOpenPanel
+    - SurgeryStepInsertBrainChip
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: BrainChip
+  - type: SurgeryOrganCondition
+    organ: BrainChip
 
-- type: surgery
-  id: RemovePart
-  tool:
-  - type: Scalpel
-  surgeryEffects:
-  - !type:RemoveBodyPart
-  required:
-  - type: OpenIncision
-  - type: BreakBone
-  - type: RetractedSkin
-  duration: 6
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveBrainChip
+  name: Extract Brain Chip
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepOpenIncisionScalpel
+    - SurgeryStepClampBleeders
+    - SurgeryStepOpenPanel
+    - SurgeryStepRemoveOrgan
+  - type: SurgeryOrganCondition
+    organ: BrainChip
 
-- type: surgery
-  id: HealBrute
-  tool:
-  - type: Stitches
-  surgeryEffects:
-  - !type:HealBodyPart
-  required:
-  - type: OpenIncision
-  duration: 3
+# Tail
 
-- type: surgery
-  id: HealBurn
-  tool:
-  - type: Tending
-  surgeryEffects:
-  - !type:HealBodyPart
-    damageGroup: Burn
-  required:
-  - type: OpenIncision
-  duration: 3
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenTailSlot
+  name: Create Tail Joint
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepCreateJoint
+    - SurgeryStepStitchJoint
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Tail
 
-- type: surgery
-  id: SawBones
-  tool:
-  - type: BoneSaw
-  surgeryEffects:
-  - !type:AddComponents
-    components:
-    - type: BreakBone
-  required:
-  - type: OpenIncision
-  forbidden:
-  - type: BreakBone
-  duration: 10
+# Tongue
 
-- type: surgery
-  id: MendBones
-  tool:
-  - type: BoneGel
-  surgeryEffects:
-  - !type:RemoveComponents
-    components:
-    - type: BreakBone
-  required:
-  - type: OpenIncision
-  - type: BreakBone
-  duration: 10
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveTongue
+  name: Remove Tongue
+  components:
+  - type: SurgeryOrganCondition
+    organ: Tongue
 
-- type: surgery
-  id: Lobotomy
-  tool:
-  - type: Drill
-  surgeryEffects:
-  - !type:AddComponents
-    components:
-    - type: OhioAccent
-    - type: RatvarianLanguage
-    - type: Clumsy
-  required:
-  - type: OpenIncision
-  - type: BreakBone
-  - type: Brain
-  duration: 10
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertTongue
+  name: Insert Tongue
+  components:
+  - type: Surgery
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepInsertOrgan
+    - SurgeryStepSealOrganWound
+  - type: SurgeryOrganSlotCondition
+    organSlot: Tongue
+  - type: SurgeryOrganCondition
+    organ: Tongue
 
-- type: surgery
-  id: FixLobotomy
-  tool:
-  - type: Hemostat
-  surgeryEffects:
-  - !type:RemoveComponents
-    components:
-    - type: OhioAccent
-    - type: RatvarianLanguage
-    - type: Clumsy
-  required:
-  - type: OpenIncision
-  - type: BreakBone
-  - type: Brain
-  duration: 10
+# Kidneys
 
-- type: surgery
-  id: UnscrewPanel
-  tool:
-  - type: Screwdriver
-  surgeryEffects:
-  - !type:AddComponents
-    components:
-    - type: PanelOpen
-  required:
-  - type: Cybernetics
-  forbidden:
-  - type: PanelOpen
-  - type: Brain
+- type: entity
+  parent: BaseSurgeryRemoveOrgan
+  id: SurgeryRemoveKidneys
+  name: Remove Kidneys
+  components:
+  - type: SurgeryOrganCondition
+    organ: Kidneys
 
-- type: surgery
-  id: ScrewPanel
-  tool:
-  - type: Screwdriver
-  surgeryEffects:
-  - !type:RemoveComponents
-    components:
-    - type: PanelOpen
-  required:
-  - type: Cybernetics
-  - type: PanelOpen
-  - type: Brain
+- type: entity
+  parent: BaseSurgeryInsertOrgan
+  id: SurgeryInsertKidneys
+  name: Insert Kidneys
+  components:
+  - type: SurgeryOrganSlotCondition
+    organSlot: Kidneys
+  - type: SurgeryOrganCondition
+    organ: Kidneys
+
+# Wings
+
+- type: entity
+  parent: SurgeryOpenCavityBase
+  id: SurgeryOpenWingsSlot
+  name: Create Wing Joints
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - SurgeryStepCreateJoint
+    - SurgeryStepStitchJoint
+    - SurgeryStepOpenOrganSlot
+  - type: SurgeryPartCondition
+    parts: [ Torso ]
+  - type: SurgeryOrganSlotCondition
+    organSlot: Wings
+
+- type: entity
+  parent: SurgeryAttachBase
+  id: SurgeryAttachWings
+  name: Attach Wings
+  components:
+  - type: SurgeryPartRemovedCondition
+    category: Wings

@@ -1,18 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Medical.Server.GameTicking.Rules.Components;
-using Content.Medical.Server.Surgery;
 using Content.Medical.Shared.Abductor;
 using Content.Medical.Shared.Roles;
 using Content.Medical.Shared.Surgery;
+using Content.Medical.Shared.Surgery.Steps;
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
-using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Player;
 
 namespace Content.Medical.Server.Abductor;
@@ -23,7 +21,6 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
     [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly SurgerySystem _surgery = default!;
 
     private static readonly EntProtoId DefaultAbductorVictimRule = "AbductorVictim";
     private static readonly EntProtoId MindRole = "MindRoleAbductorVictim";
@@ -35,8 +32,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnSurgeryStepComplete(EntityUid uid, AbductorComponent comp, ref SurgeryStepEvent args)
     {
-        if (_surgery.GetSingleton(args.SurgeryId) is not { } surgery
-            || surgery.SurgeryEffects?.Any(e => e is AddBodyPart) != true
+        if (!HasComp<SurgeryAddOrganStepComponent>(args.Step)
             || !args.Complete
             || HasComp<AbductorComponent>(args.Body) // no experimenting on yourself/your buddy
             || !TryComp<AbductorVictimComponent>(args.Body, out var victimComp) // you get nothing if you didn't gizmo

@@ -8,10 +8,13 @@ using Content.Medical.Common.CCVar;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.DoAfter;
 using Content.Medical.Common.Healing;
+using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
+using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -20,8 +23,14 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Gibbing;
+using Content.Shared.Humanoid;
+using Content.Shared.Inventory;
+using Content.Shared.Standing;
+using Content.Shared.Popups;
+using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Wounds;
 

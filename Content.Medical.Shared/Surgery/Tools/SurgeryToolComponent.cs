@@ -20,12 +20,6 @@ public sealed partial class SurgeryToolComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? EndSound;
-
-    [DataField, AutoNetworkedField]
-    public int ActiveIndex = -1;
-
-    [DataField]
-    public ISurgeryToolComponent? ActiveSurgicalComp;
 }
 
 /// <summary>
