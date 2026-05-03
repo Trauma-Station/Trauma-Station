@@ -80,7 +80,7 @@
   - type: LanguageKnowledge
 
 - type: entity
-  parent: BaseKnowledge
+  parent: BaseLanguageKnowledge
   id: BaseLanguageKnowledgeAntag
   abstract: true
   components:
